@@ -403,5 +403,42 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-b1bb324c2 (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, unit/chapter route, every proof step and cited DAG statement, the exact master blueprint, Stacks Tags 08JJ/08JI/08JB/08J7/06YU/06YS/0G7E, and Bhatt–Scholze pp. 22–24. Checked edge cases, coefficient stages, completed-tensor base change, rational/common-stage categories, citations, searches, duplicates, and route consistency. No repairs needed; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HomFiniteProjective",
+  "declaration": "WeilConjectures.hom_finiteProjective",
+  "file": "lean/Sheaf/Paper/HomFiniteProjective.lean",
+  "statement": "theorem hom_finiteProjective (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorDatum D C E n hn) (X : SixFunctorSpace D) [IsSeparated X.obj.hom] : FiniteProjectiveCoefficientHomFormula (S.finiteClosed X).closed (S.finiteClosed X).symmetric (fun P ↦ IsFiniteProjectiveCoefficientDegreeZero.{u+1, u, u+1, u+2} _ P.obj.obj) ∧ FiniteProjectiveOrdinaryDual.Formula _ (S.finiteModel X) ((S.toSixFunctorOperationDatum.finiteTorDomain X).ι ⋙ (Scheme.intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι) ∧ FiniteProjectiveCoefficientHomFormula (S.integralClosed X).closed (S.integralClosed X).symmetric (fun P ↦ IsFiniteProjectiveCoefficientDegreeZero.{u+1, u, u+1, u+2} _ P.obj.obj) ∧ FiniteProjectiveOrdinaryDual.Formula _ (S.integralModel X) ((S.toSixFunctorOperationDatum.integralFiniteTorDomain X).ι ⋙ (sfIntegralConstructible C.l E X.obj.left).ι) ∧ FiniteProjectiveCoefficientHomFormula (S.rationalClosed X).closed (S.rationalClosed X).symmetric (fun P ↦ IsRationalFiniteProjectiveCoefficient C.l E X.obj.left P.obj) ∧ FiniteProjectiveCoefficientHomFormula (S.commonClosed X).closed (S.commonClosed X).symmetric (fun P ↦ IsCommonStageFiniteProjectiveCoefficient C.l C.Qbar X.obj.left P.obj)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.IsLocallyFiniteProjectiveCoefficientSheaf",
+   "WeilConjectures.IsFiniteProjectiveCoefficientDegreeZero",
+   "WeilConjectures.IsRationalFiniteProjectiveCoefficient",
+   "WeilConjectures.IsCommonStageFiniteProjectiveCoefficient",
+   "WeilConjectures.FiniteProjectiveCoefficientHomFormula",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.Modules",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.dual",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.single",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.bidual_existsUnique",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.bidual",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.zeroProjection",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.singleHomMap_existsUnique",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.singleHomMap",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.comparison",
+   "WeilConjectures.FiniteProjectiveOrdinaryDual.Formula",
+   "WeilConjectures.hom_finiteProjective"
+  ],
+  "note": "Repair of immutable head 8dadf10680b6, H3/H4: finite and integral clauses now include ordinary homObj biduality and the canonical degree-zero ordinary-to-derived dual comparison. Helpers in the owning module are uniquely determined by slice evaluation and the Hom-complex (0,0) projection; comparison is their derived image followed by the fixed K-injective augmentation and specified presentation/unit transports. The independent site universes are retained. No natural-language statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03f570cd1",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 8dadf106 (H3/H4, ordinary dual missing). Diff only adds material: FiniteProjectiveOrdinaryDual.Formula conjuncts at the finite and integral stages assert IsIso of the ordinary homObj bidual (pinned by an ∃! slice-evaluation formula) and IsIso of the comparison Q(homObj(P,1)[0]) -> RHom(K,1) = Q.map singleHomMap (∃!-pinned (0,0) insertion) ≫ ringedSiteOrdinaryHomComparison (fixed K-injective augmentation) ≫ RHom.map(e.hom.op, unitIso.inv). Uses the datum's finiteModel/integralModel, which finiteModelComparison/integralModelComparison tie to finiteClosed/integralClosed. def-pur-sheaf-hom (homObj) now used. Local bidual justified: upstream SheafOfModules.bidual needs Category.{u} on Type u; ProEt is u+1/u. Other conjuncts, predicates and hypotheses unchanged from the earlier review. Statement verbatim, 16 declarations, docstrings and lines ok, only sorry proofs. nt_compile 17.9 s clean (first try timed out at load 170; lcompile 560 s run 22.3 s clean). Advisory only: homComplex_projections choice fixed up to convention, IsIso unaffected."
  }
 }
