@@ -9,6 +9,11 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Data.ZMod.Basic
 
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.Algebra.Module.ZMod
+
 /-! # The canonical constant Z/N module structure of a torsion sheaf
 
 Source: Stacks Project, Lemma 18.11.1, Tag 03CY
@@ -24,12 +29,12 @@ open CategoryTheory
 namespace CategoryTheory
 
 variable {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
-  [HasSheafify J RingCat.{w}]
+  [HasSheafify J RingCat.{max vC uC}]
 
 /-- The constant sheaf of rings with value `Z/N`, lifted to the coefficient universe.
 Source: Stacks Project, Tag 03CY (blueprint: lem-pur-torsion-sheaf-constant-module). -/
-noncomputable abbrev constantZModRingSheaf (N : ℕ) : Sheaf J RingCat.{w} :=
-  (constantSheaf J RingCat.{w}).obj (RingCat.of (ULift.{w} (ZMod N)))
+noncomputable abbrev constantZModRingSheaf (N : ℕ) : Sheaf J RingCat.{max vC uC} :=
+  (constantSheaf J RingCat.{max vC uC}).obj (RingCat.of (ULift.{max vC uC} (ZMod N)))
 
 /-- A module structure on the fixed underlying groups, normalized on constant sections,
 with semilinear restrictions. The normalization uses every integer representative.
@@ -38,13 +43,14 @@ def IsConstantZModSheafModuleStructure (N : ℕ) (F : Sheaf J AddCommGrpCat.{w})
     (M : ∀ U : Cᵒᵖ, Module ((constantZModRingSheaf J N).obj.obj U) (F.obj.obj U)) : Prop :=
   (∀ (U : Cᵒᵖ) (z : ℤ) (x : F.obj.obj U),
     @SMul.smul _ _ (M U).toSMul
-      ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{w} (ZMod N))))).app U
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{max vC uC} (ZMod N))))).app U
         (ULift.up (z : ZMod N))) x = z • x) ∧
   ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (a : (constantZModRingSheaf J N).obj.obj U)
       (x : F.obj.obj U),
     F.obj.map f (@SMul.smul _ _ (M U).toSMul a x) =
       @SMul.smul _ _ (M V).toSMul ((constantZModRingSheaf J N).obj.map f a) (F.obj.map f x)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A sheaf killed by `N` has exactly one normalized constant `Z/N` module structure.
 Source: Stacks Project, Tag 03CY (blueprint: lem-pur-torsion-sheaf-constant-module).
 Proof: the annihilation hypothesis makes each group a `ZMod N`-module, with integer
@@ -57,7 +63,67 @@ theorem existsUnique_constantZModSheafModuleStructure (N : ℕ) (hN : 0 < N)
     (F : Sheaf J AddCommGrpCat.{w}) (hF : ∀ (U : Cᵒᵖ) (x : F.obj.obj U), N • x = 0) :
     ∃! M : ∀ U : Cᵒᵖ, Module ((constantZModRingSheaf J N).obj.obj U) (F.obj.obj U),
       IsConstantZModSheafModuleStructure J N F M := by
-  sorry
+  have _hN := hN
+  let α := toSheafify J
+    ((Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{max vC uC} (ZMod N))))
+  have : Limits.PreservesFilteredColimitsOfSize.{max vC uC, max vC uC}
+      (forget RingCat.{max vC uC}) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{max vC uC, max vC uC,
+      max vC uC, max vC uC} _
+  have hi : Presheaf.IsLocallyInjective J α := by dsimp [α]; infer_instance
+  have hs : Presheaf.IsLocallySurjective J α := by dsimp [α]; infer_instance
+  let : ∀ U : Cᵒᵖ, Module (ZMod N) (F.obj.obj U) :=
+    fun U ↦ AddCommGroup.zmodModule (hF U)
+  let R₀ := (Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{max vC uC} (ZMod N)))
+  let : ∀ U : Cᵒᵖ, Module (R₀.obj U) (F.obj.obj U) :=
+    fun _ ↦ ULift.module
+  let P : PresheafOfModules R₀ :=
+    PresheafOfModules.ofPresheaf F.obj (fun {_ _} f r x ↦
+      ZMod.map_smul (F.obj.map f).hom r.down x)
+  let φ : P.presheaf ⟶ F.obj := 𝟙 F.obj
+  have : Presheaf.IsLocallyInjective J φ := by
+    apply Presheaf.isLocallyInjective_of_injective
+    intro U
+    exact Function.injective_id
+  have : Presheaf.IsLocallySurjective J φ := by
+    apply Presheaf.isLocallySurjective_of_surjective
+    intro U
+    exact Function.surjective_id
+  let M := PresheafOfModules.Sheafify.module (M₀ := P) (A := F) α φ
+  have hM : IsConstantZModSheafModuleStructure J N F M := by
+    constructor
+    · intro U z x
+      change PresheafOfModules.Sheafify.smul α φ (α.app U (ULift.up (z : ZMod N))) x = _
+      have h := PresheafOfModules.Sheafify.map_smul_eq α φ
+        (α.app U (ULift.up (z : ZMod N))) x (𝟙 U)
+        (ULift.up (z : ZMod N)) (by simp) x (by
+          change x = F.obj.map (𝟙 U) x
+          rw [Functor.map_id]
+          rfl)
+      rw [Functor.map_id] at h
+      change PresheafOfModules.Sheafify.smul α φ _ x = (z : ZMod N) • x at h
+      exact h.trans (Int.cast_smul_eq_zsmul (ZMod N) z x)
+    · intro U V f a x
+      exact PresheafOfModules.Sheafify.map_smul α φ U f a x
+  refine ⟨M, hM, ?_⟩
+  intro M' hM'
+  funext U
+  apply Module.ext'
+  intro a x
+  let c : PresheafOfModules.Sheafify.SMulCandidate α φ a x :=
+    { x := @SMul.smul _ _ (M' U).toSMul a x
+      h := by
+        intro V f r hr y hy
+        let y' : F.obj.obj V := y
+        change y' = F.obj.map f x at hy
+        change (α.app V) r = (constantZModRingSheaf J N).obj.map f a at hr
+        change F.obj.map f (@SMul.smul _ _ (M' U).toSMul a x) = r.down • y'
+        rw [hM'.2 f, ← hr, ← hy]
+        obtain ⟨r⟩ := r
+        obtain ⟨z, rfl⟩ := ZMod.intCast_surjective r
+        exact (hM'.1 V z y').trans (Int.cast_smul_eq_zsmul (ZMod N) z y').symm }
+  exact congrArg (fun t ↦ t.x)
+    (Subsingleton.elim c (PresheafOfModules.Sheafify.smulCandidate α φ a x))
 
 /-- The unique normalized scalar action; choice is from an existence-and-uniqueness theorem.
 Source: Stacks Project, Tag 03CY (blueprint: lem-pur-torsion-sheaf-constant-module). -/
@@ -95,14 +161,14 @@ theorem constantZModModuleSheaf_nsmul (N : ℕ) (hN : 0 < N)
     (U : Cᵒᵖ) (x : F.val.obj U) : N • x = 0 := by
   have _hN := hN
   let α := toSheafify J
-    ((Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{w} (ZMod N))))
-  have hz : (N : ULift.{w} (ZMod N)) = 0 := by
+    ((Functor.const Cᵒᵖ).obj (RingCat.of (ULift.{max vC uC} (ZMod N))))
+  have hz : (N : ULift.{max vC uC} (ZMod N)) = 0 := by
     apply ULift.ext
     exact ZMod.natCast_self N
   have he : (N : (constantZModRingSheaf J N).obj.obj U) = 0 := by
     calc
       (N : (constantZModRingSheaf J N).obj.obj U) =
-          (α.app U).hom (N : ULift.{w} (ZMod N)) := (map_natCast _ _).symm
+          (α.app U).hom (N : ULift.{max vC uC} (ZMod N)) := (map_natCast _ _).symm
       _ = 0 := by rw [hz, map_zero]
   rw [← Nat.cast_smul_eq_nsmul ((constantZModRingSheaf J N).obj.obj U), he, zero_smul]
 
@@ -225,7 +291,8 @@ theorem torsionSheaf_hom_linear (N : ℕ) (hN : 0 < N)
     · intro U z x
       change @SMul.smul _ _ (MH U).toSMul
         (((toSheafify J ((Functor.const Cᵒᵖ).obj
-          (RingCat.of (ULift.{w} (ZMod N))))).app U).hom (z : ULift.{w} (ZMod N))) x = z • x
+          (RingCat.of (ULift.{max vC uC} (ZMod N))))).app U).hom
+            (z : ULift.{max vC uC} (ZMod N))) x = z • x
       rw [map_intCast]
       exact @Int.cast_smul_eq_zsmul _ _ _ _ (MH U) z x
     · intro U W f a x

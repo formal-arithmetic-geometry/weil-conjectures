@@ -17174,3 +17174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/E1/Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage (stage 3; reviewer PASS; first push; landing 20261019T093339-L-2298449 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E3/Sheaf.Paper.PurityDncFamilyIntrinsic (stage 3; reviewer PASS; first push; landing 20261019T093341-L-2299311 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/E4/Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261019T093342-L-2299814 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/E4/Sheaf.CategoryTheory.TorsionSheafConstantModule (stage 3; reviewer PASS; first push; landing 20261019T093343-L-2300206 (interface); batch 20261019T093237; modules 2; new nodes 0; change records: coord/changes/torsion-constant-ring-universe.md)

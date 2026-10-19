@@ -126,7 +126,7 @@ theorem proEtaleRootsOfUnity_nsmul (S : Scheme.{u}) (N : ℕ)
 Source: Stacks Project, Tags 03PK and 03CY (blueprint: def-pur-roots-of-unity-sheaf). -/
 noncomputable abbrev proEtaleRootsOfUnityCoefficientRing (S : Scheme.{u}) (N : ℕ) :
     Sheaf (ProEt.topology S) RingCat.{u + 1} :=
-  constantZModRingSheaf.{u + 1} (ProEt.topology S) N
+  constantZModRingSheaf (ProEt.topology S) N
 
 /-- The canonical module sheaf over the constant ring sheaf `Z/N` for positive `N`.
 Source: Stacks Project, Tags 03PK and 03CY (blueprint: def-pur-roots-of-unity-sheaf). -/

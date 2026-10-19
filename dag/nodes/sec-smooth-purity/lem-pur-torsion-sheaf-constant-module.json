@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Apply [lem-pc-sites-module-sheafification-interface] with $\\mathcal O=P$, $\\mathcal O^\\#=R$, $\\mathcal P=\\mathcal F$ with its action from step 2, and abelian sheafification $\\mathcal F\\xrightarrow{\\mathrm{id}}\\mathcal F$ from step 1. It gives a unique compatible action $R\\times\\mathcal F\\to\\mathcal F$ making $\\mathcal F$ a sheaf of $R$-modules. Compatibility reads $\\eta_U(\\bar a)\\cdot x=ax$, exactly the normalization in clause (1). Every action required in clause (1) satisfies this compatibility, so the uniqueness assertion of the cited node proves uniqueness on the fixed underlying abelian sheaf, not merely uniqueness up to isomorphism.",
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] with $\\mathcal O=P$, $\\mathcal O^\\#=R$, $\\mathcal P=\\mathcal F$ with its action from step 2, and abelian sheafification $\\mathcal F\\xrightarrow{\\mathrm{id}}\\mathcal F$ from step 1. It gives a unique compatible action $R\\times\\mathcal F\\to\\mathcal F$ making $\\mathcal F$ a sheaf of $R$-modules. Compatibility reads $\\eta_U(\\bar a)\\cdot x=ax$, exactly the normalization in clause (1). Every action required in clause (1) satisfies this compatibility, so the uniqueness assertion of the cited node proves uniqueness on the fixed underlying abelian sheaf, not merely uniqueness up to isomorphism. In Lean, use PresheafOfModules.Sheafify.module with the identity on the underlying abelian presheaf, and use map_smul_eq and map_smul for normalization and restrictions. Given another normalized action, each of its scalar products is an SMulCandidate: restrict it, lift the scalar locally, and choose an integer representative of the lifted ZMod element. Subsingleton SMulCandidate makes both scalar products equal, and Module.ext' gives equality of module structures. The constant ring is placed in the site universe max(uC,vC), so the standard ring sheafification unit is locally bijective; the abelian-group universe remains independent.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface"
    ],
@@ -91,10 +91,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "R9",
+  "group": "E4",
   "date": "2026-10-19",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03CY (lemma-sheafification-presheaf-modules). Steps 1-4 retain the existing construction plan; existence and uniqueness remain open in Lean. Step 5 is a proved elementary consequence of uniqueness using transport by automorphisms and the square-zero shear on a direct sum. The specification and converse annihilation are proved directly."
+  "place": "Tag 03CY (lemma-sheafification-presheaf-modules), using the recorded Mathlib sheafification interface. All steps are now implemented: ZMod module structures sectionwise, the unique SMulCandidate construction for existence and uniqueness, and the existing annihilation and shear proofs for morphisms. No new intermediate holes."
  },
  "mathlib_searches": [
   {
@@ -188,7 +188,7 @@
   "by": "Q16",
   "date": "2026-10-15",
   "existing": false,
-  "note": "No Lean declaration or Mathlib match was recorded. This module states both uniqueness of the normalized constant Z/N action on the fixed abelian groups and linearity of all additive sheaf morphisms, and constructs the module sheaf using that uniquely determined action."
+  "note": "The existence-and-uniqueness theorem is proved using Mathlib module sheafification. The ring universe is max vC uC; the independent group universe w remains arbitrary. The remaining declarations retain their statements and proofs with this constant-ring universe specialization. See coord/changes/torsion-constant-ring-universe.md."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -217,11 +217,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R9",
+  "reviewer": "C-3b92b",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261019T005417-L-2765783",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261019T093343-L-2300206",
+  "kind": "interface",
+  "note": "independent cc review: delivered TorsionSheafConstantModule + adapted ProEtaleRootsOfUnitySheaf vs clones/live and node lem-pur-torsion-sheaf-constant-module; change record vs computed users; all 14 direct importers compiled; original adapted module fails against new item; axioms clean"
  }
 }
