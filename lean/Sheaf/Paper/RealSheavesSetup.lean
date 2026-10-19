@@ -16,6 +16,8 @@ public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.PointCount
 public import WeilConjectures.AlgebraicGeometry.Curve
 
+import Mathlib.AlgebraicGeometry.Noetherian
+
 /-!
 # Fields, curves and Frobenius for real sheaves
 
@@ -140,7 +142,11 @@ Proof: FiniteField.card writes the cardinality as a positive power of the prime
 ringChar k_0. Compare with card_eq = p^a; both exponents are positive. Unique prime
 factorization forces ringChar k_0 = p. -/
 theorem Setup.ringChar_eq (D : Setup.{u, v}) : ringChar D.k₀ = D.p := by
-  sorry
+  obtain ⟨n, hn, hcard⟩ := FiniteField.card D.k₀ (ringChar D.k₀)
+  apply (Nat.prime_dvd_prime_iff_eq hn D.p_prime).mp
+  apply hn.dvd_of_dvd_pow
+  rw [← D.card_eq, hcard]
+  exact dvd_pow_self _ n.ne_zero
 
 /-- The existing Weil-sheaf API's coefficient-prime instance, derived from the datum's
 l != p and its characteristic equality, with no extra mathematical assumption.
@@ -164,6 +170,59 @@ theorem Setup.openIsCurve (D : Setup.{u, v}) (C₀ : Scheme.{u})
     [C₀.Over (Spec (.of D.k₀))] (hC : D.IsCurve C₀)
     (U₀ : C₀.Opens) (hU : Nonempty U₀) :
     AlgebraicGeometry.IsCurve (U₀.toScheme ↘ Spec (.of D.k₀)) := by
-  sorry
+  obtain ⟨_⟩ := hU
+  have : IsSeparated (C₀ ↘ Spec (.of D.k₀)) := hC.2.1
+  have : LocallyOfFiniteType (C₀ ↘ Spec (.of D.k₀)) := hC.2.2.2.1
+  have : QuasiCompact (C₀ ↘ Spec (.of D.k₀)) := hC.2.2.2.2.1
+  have : IsLocallyNoetherian C₀ :=
+    LocallyOfFiniteType.isLocallyNoetherian (C₀ ↘ Spec (.of D.k₀))
+  have : CompactSpace C₀ :=
+    QuasiCompact.compactSpace_of_compactSpace (C₀ ↘ Spec (.of D.k₀))
+  have : IsNoetherian C₀ := {}
+  have hdim : topologicalKrullDim C₀ ≤ 1 := by
+    unfold topologicalKrullDim Order.krullDim
+    refine iSup_le fun c ↦ ?_
+    obtain ⟨Z, hZ, hcZ⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible
+      (c.last : Set C₀) c.last.isIrreducible
+    have hsub (i : Fin (c.length + 1)) : (c i : Set C₀) ⊆ Z :=
+      Set.Subset.trans (c.monotone (Fin.le_last i)) hcZ
+    let f (i : Fin (c.length + 1)) : TopologicalSpace.IrreducibleCloseds Z :=
+      { carrier := Subtype.val ⁻¹' (c i : Set C₀)
+        isClosed' := (c i).isClosed.preimage continuous_subtype_val
+        isIrreducible' := by
+          have hi := (c i).isIrreducible
+          let g : ↥(c i : Set C₀) → Z := fun x ↦ ⟨x.1, hsub i x.2⟩
+          have hg : Continuous g := continuous_subtype_val.subtype_mk _
+          have heq : g '' Set.univ = Subtype.val ⁻¹' (c i : Set C₀) := by
+            ext x
+            constructor
+            · rintro ⟨y, _, rfl⟩
+              exact y.2
+            · intro hx
+              exact ⟨⟨x.1, hx⟩, trivial, Subtype.ext rfl⟩
+          rw [← heq]
+          have := Subtype.irreducibleSpace hi
+          exact (IrreducibleSpace.isIrreducible_univ _).image g hg.continuousOn }
+    have hf : StrictMono f := by
+      intro i j hij
+      refine lt_of_le_of_ne (fun x hx ↦ (c.strictMono hij).le hx) ?_
+      intro heq
+      apply (c.strictMono hij).ne
+      apply SetLike.coe_injective
+      ext x
+      constructor
+      · intro hx
+        exact (c.strictMono hij).le hx
+      · intro hx
+        have hx' : (⟨x, hsub j hx⟩ : Z) ∈ f j := hx
+        rw [← heq] at hx'
+        exact hx'
+    let cZ : LTSeries (TopologicalSpace.IrreducibleCloseds Z) :=
+      ⟨c.length, f, fun i ↦ hf i.castSucc_lt_succ⟩
+    exact (Order.LTSeries.length_le_krullDim cZ).trans
+      (le_of_eq (hC.2.2.2.2.2.1 Z hZ))
+  change AlgebraicGeometry.IsCurve (U₀.ι ≫ (C₀ ↘ Spec (.of D.k₀)))
+  exact { krullDim_le_one :=
+    U₀.ι.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans hdim }
 
 end RealSheaves
