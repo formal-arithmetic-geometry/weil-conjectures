@@ -65,7 +65,9 @@ namespace WeilConjectures.PurityFiniteSetting
 Source: blueprint finite coefficient setting (blueprint: def-weil-exceptional-inverse-image).
 Proof: use finiteness of O_E/(varpi^n) and transport along ULift. -/
 theorem finiteCoefficient (P : PurityFiniteSetting.{u}) : Finite P.Coefficient := by
-  sorry
+  have : Finite P.Ring :=
+    Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
+  exact inferInstanceAs (Finite (ULift P.Ring))
 
 attribute [instance] finiteCoefficient
 
@@ -79,7 +81,7 @@ The adjunction and t-structure orthogonality then bound the right adjoint below.
 theorem exceptionalBoundedBelow (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     [IsNoetherian Y] : Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
-  sorry
+  infer_instance
 
 /-- A finite-type scheme over a field is Noetherian.
 Source: blueprint def-weil-exceptional-inverse-image, initial setting
@@ -89,7 +91,9 @@ cover of the scheme by these affine spectra gives a Noetherian scheme. -/
 theorem noetherian (P : PurityFiniteSetting.{u}) {T : Scheme.{u}}
     (a : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType a] [QuasiCompact a] :
     IsNoetherian T := by
-  sorry
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian a
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace a
+  exact ⟨⟩
 
 /-- The coefficient tensor unit is concentrated in degree zero and hence bounded below.
 Source: blueprint def-weil-exceptional-inverse-image, constant coefficient object
@@ -100,7 +104,12 @@ theorem unitPlus (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     _root_.DerivedCategory.TStructure.t.plus
       (𝟙_ (_root_.DerivedCategory
         (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)))) := by
-  sorry
+  refine ⟨0, ?_⟩
+  change _root_.DerivedCategory.TStructure.t.IsGE
+    (_root_.DerivedCategory.Q.obj
+      ((CochainComplex.singleFunctor
+        (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)) 0).obj (𝟙_ _))) 0
+  infer_instance
 
 /-- The actual finite-level constructible exceptional functor, with its required
 bounded-below interface supplied from the finite-type field setting.
@@ -167,7 +176,9 @@ theorem finiteTypeHasBoundedBelowUpperShriek
     (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] :
     Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
-  sorry
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  infer_instance
 
 /-- The actual transported finite-level exceptional functor, with its bounded-below
 interface supplied by the finite-type theorem rather than assumed as an ambient datum.

@@ -17412,3 +17412,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:26 L: merged deliver/Y6/Sheaf.Paper.PurityAffineLineDatum (stage 3; reviewer PASS; first push; landing 20261019T112625-L-3962823 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:26 L: merged deliver/Y7/Sheaf.Paper.CompactSupportComparisonPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261019T112626-L-3963152 (interface); batch 20261019T112432; modules 1; new nodes 0; change records: coord/changes/Y7-cbc-comparison-pullback-coherence-sharing.md)
 - 11:26 L: merged deliver/Y9/Sheaf.AlgebraicGeometry.DirectImageFinitenessInputHolds (stage 3; reviewer PASS; first push; landing 20261019T112626-L-3963417 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:26 L: merged deliver/Z5/Sheaf.Paper.FiniteTypeExceptionalInverseImage (stage 3; reviewer PASS; first push; landing 20261019T112627-L-3963740 (proof); batch 20261019T112432; modules 1; new nodes 0)
