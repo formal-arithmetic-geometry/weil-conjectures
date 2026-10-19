@@ -12,18 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.SfHomTriangulated
-import Sheaf.SixFunctors.EtaleHomComplexPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Étale pullback comparison for internal Hom triangles
@@ -41,6 +29,7 @@ canonical shift instance. The comparison itself is the evaluation transpose.
 
 set_option autoImplicit false
 
+
 universe u' u
 
 open CategoryTheory CategoryTheory.Pretriangulated CategoryTheory.Limits
@@ -51,12 +40,129 @@ open AlgebraicGeometry AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+private lemma rightAdjointUniq_ofNatIsoLeft_hom
+    {C D : Type*} [Category* C] [Category* D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (e : L₂ ≅ L₁) :
+    (a₁.rightAdjointUniq (a₂.ofNatIsoLeft e)).hom =
+      conjugateEquiv a₁ a₂ e.hom := by
+  ext X
+  simp [Adjunction.rightAdjointUniq, conjugateEquiv_apply_app,
+    Adjunction.ofNatIsoLeft]
+
+private lemma conjugate_square
+    {C D : Type*} [Category* C] [Category* D]
+    {L₁ L₂ M₁ M₂ : C ⥤ D} {R₁ R₂ S₁ S₂ : D ⥤ C}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : M₁ ⊣ S₁) (b₂ : M₂ ⊣ S₂)
+    (e₁ : M₁ ⟶ L₁) (e₂ : M₂ ⟶ L₂) (f : L₂ ⟶ L₁) (g : M₂ ⟶ M₁)
+    (h : g ≫ e₁ = e₂ ≫ f) :
+    conjugateEquiv a₁ a₂ f ≫ conjugateEquiv a₂ b₂ e₂ =
+      conjugateEquiv a₁ b₁ e₁ ≫ conjugateEquiv b₁ b₂ g := by
+  rw [conjugateEquiv_comp, conjugateEquiv_comp, h]
+
+private theorem parametrized_conjugate
+    {P C D : Type*} [Category* P] [Category* C] [Category* D]
+    {T : P ⥤ C ⥤ D} {H : Pᵒᵖ ⥤ D ⥤ C} (a : T ⊣₂ H)
+    {K K' : P} (f : K ⟶ K') :
+    conjugateEquiv (a.adj K') (a.adj K) (T.map f) = H.map f.op := by
+  ext M
+  simp only [conjugateEquiv_apply_app]
+  have h := NatTrans.congr_app (a.whiskerLeft_map_counit f) M
+  dsimp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app] at h
+  rw [← Functor.map_comp, h]
+  simp only [Functor.map_comp, Adjunction.unit_naturality_assoc,
+    Adjunction.right_triangle_components, Category.comp_id]
+
+
+private lemma generic_sourceShift_naturality
+    {P C D : Type*} [Category* P] [Category* C] [Category* D]
+    [HasShift P ℤ] [HasShift C ℤ] [HasShift D ℤ]
+    {T : P ⥤ C ⥤ D} {H : Pᵒᵖ ⥤ D ⥤ C} (a : T ⊣₂ H)
+    [∀ K, (H.obj K).CommShift ℤ]
+    (hn : ∀ {K K' : P} (f : K ⟶ K'), NatTrans.CommShift (H.map f.op) ℤ)
+    (n : ℤ) (e : ∀ K, T.obj (K⟦n⟧) ≅ T.obj K ⋙ shiftFunctor D n)
+    (he : ∀ {K K' : P} (f : K ⟶ K'),
+      Functor.whiskerRight (T.map f) (shiftFunctor D n) ≫ (e K').inv =
+        (e K).inv ≫ T.map (f⟦n⟧'))
+    {K K' : P} (f : K ⟶ K') :
+    H.map (f⟦n⟧').op ≫
+      ((a.adj (K⟦n⟧)).rightAdjointUniq
+        (((a.adj K).comp (shiftEquiv D n).toAdjunction).ofNatIsoLeft (e K).symm)).hom ≫
+        ((H.obj (op K)).commShiftIso (-n)).hom =
+      ((a.adj (K'⟦n⟧)).rightAdjointUniq
+        (((a.adj K').comp (shiftEquiv D n).toAdjunction).ofNatIsoLeft (e K').symm)).hom ≫
+        ((H.obj (op K')).commShiftIso (-n)).hom ≫
+          Functor.whiskerRight (H.map f.op) (shiftFunctor C (-n)) := by
+  have hc := conjugate_square (a.adj (K'⟦n⟧)) (a.adj (K⟦n⟧))
+    ((a.adj K').comp (shiftEquiv D n).toAdjunction)
+    ((a.adj K).comp (shiftEquiv D n).toAdjunction)
+    (e K').inv (e K).inv (T.map (f⟦n⟧'))
+    (Functor.whiskerRight (T.map f) (shiftFunctor D n)) (he f)
+  have hw := conjugateEquiv_whiskerRight (a.adj K') (a.adj K)
+    (shiftEquiv D n).toAdjunction (T.map f)
+  erw [hw, parametrized_conjugate a (f⟦n⟧'), parametrized_conjugate a f] at hc
+  have := hn f
+  ext M
+  simp only [NatTrans.comp_app, rightAdjointUniq_ofNatIsoLeft_hom, Iso.symm_hom]
+  have hcm := NatTrans.congr_app hc M
+  dsimp only [NatTrans.comp_app, whiskerLeft_app] at hcm
+  rw [← Category.assoc, hcm, Category.assoc]
+  dsimp only [whiskerRight_app]
+  rw [NatTrans.shift_app_comm]
+  rfl
+
+private lemma generic_opShift_naturality
+    {P C : Type*} [Category* P] [Category* C] [HasShift P ℤ] [HasShift C ℤ]
+    (H : Pᵒᵖ ⥤ C) (n : ℤ)
+    (e : ∀ K : P, H.obj (op (K⟦-n⟧)) ≅ (H.obj (op K))⟦-(-n)⟧)
+    (he : ∀ {K K' : P} (g : K ⟶ K'),
+      H.map (g⟦-n⟧').op ≫ (e K).hom = (e K').hom ≫ (H.map g.op)⟦-(-n)⟧')
+    {K K' : Pᵒᵖ} (f : K ⟶ K') :
+    H.map ((shiftFunctor Pᵒᵖ n).map f) ≫
+        (H.map ((shiftFunctorOpIso P n (-n) (add_neg_cancel n)).hom.app K') ≫
+          (e K'.unop).hom) ≫
+        eqToHom (congrArg (fun a ↦ (H.obj K')⟦a⟧) (neg_neg n)) =
+      (H.map ((shiftFunctorOpIso P n (-n) (add_neg_cancel n)).hom.app K) ≫
+          (e K.unop).hom) ≫
+        eqToHom (congrArg (fun a ↦ (H.obj K)⟦a⟧) (neg_neg n)) ≫ (H.map f)⟦n⟧' := by
+  have ho := (shiftFunctorOpIso P n (-n) (add_neg_cancel n)).hom.naturality f
+  simp only [Category.assoc]
+  rw [← H.map_comp_assoc, ho, H.map_comp, Category.assoc]
+  dsimp only [Functor.op_map]
+  rw [reassoc_of% (he f.unop)]
+  simp only [Quiver.Hom.op_unop]
+  rw [eqToHom_naturality (fun a : ℤ ↦ (H.map f)⟦a⟧') (neg_neg n)]
+
+set_option backward.defeqAttrib.useBackward true in
+private lemma generic_signed_opShift_naturality
+    {P C : Type*} [Category* P] [Category* C] [HasShift P ℤ] [HasShift C ℤ]
+    [Preadditive C]
+    (H : Pᵒᵖ ⥤ C) (n : ℤ)
+    (e : ∀ K : P, H.obj (op (K⟦-n⟧)) ≅ (H.obj (op K))⟦-(-n)⟧)
+    (he : ∀ {K K' : P} (g : K ⟶ K'),
+      H.map (g⟦-n⟧').op ≫ (e K).hom = (e K').hom ≫ (H.map g.op)⟦-(-n)⟧')
+    (z : ℤˣ) {K K' : Pᵒᵖ} (f : K ⟶ K') :
+    (shiftFunctor Pᵒᵖ n ⋙ H).map f ≫
+        (z • ((H.mapIso ((shiftFunctorOpIso P n (-n) (add_neg_cancel n)).app K') ≪≫
+          e K'.unop) ≪≫
+          eqToIso (congrArg (fun a ↦ (H.obj K')⟦a⟧) (neg_neg n)))).hom =
+      (z • ((H.mapIso ((shiftFunctorOpIso P n (-n) (add_neg_cancel n)).app K) ≪≫
+          e K.unop) ≪≫
+          eqToIso (congrArg (fun a ↦ (H.obj K)⟦a⟧) (neg_neg n)))).hom ≫
+        (H ⋙ shiftFunctor C n).map f := by
+  simp only [Preadditive.smul_iso_hom, Units.smul_def,
+    Preadditive.comp_zsmul, Preadditive.zsmul_comp]
+  congr 1
+  simpa only [Iso.trans_hom, Functor.mapIso_hom, eqToIso.hom, Functor.comp_map,
+    Iso.app_hom, Category.assoc] using generic_opShift_naturality H n e he f
+
 section CanonicalShift
 
 variable (B : Type u') [Category.{u + 1} B] [Abelian B]
   [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X : Scheme.{u}}
+attribute [local instance] Sheaf.monoidalCategory in
 /-- Naturality of the canonical first-factor tensor shift.
 Source: Stacks Tag 08JC; the signed tensor shift in the comparison proof
 (blueprint: lem-sf-etale-generic-hom-triangle).
@@ -70,7 +176,10 @@ theorem etaleInternalHomTensorShift_naturality
         (((derivedTensor B X).flip.obj N').commShiftIso n).hom.app K =
       (((derivedTensor B X).flip.obj N).commShiftIso n).hom.app K ≫
         (shiftFunctor _ n).map (((derivedTensor B X).obj K).map f) := by
-  sorry
+  have : NatTrans.CommShift ((derivedTensor B X).flip.map f) ℤ :=
+    Functor.CommShift₂.commShift_flip_map (h := .int)
+      (G := curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology B))) f
+  exact (NatTrans.shift_app_comm ((derivedTensor B X).flip.map f) n K).symm
 /-- The canonical first-factor tensor shift, naturally in the other factor.
 Source: Stacks Tag 08JC; signed cochain tensor shifts
 (blueprint: lem-sf-etale-generic-hom-triangle).
@@ -98,6 +207,39 @@ noncomputable def etaleInternalHomSourceShiftIso
     (((derivedTensorHomAdjunction B K).comp (shiftEquiv _ n).toAdjunction).ofNatIsoLeft
       (etaleInternalHomTensorShiftIso B K n).symm) ≪≫
     (((RHom(X)[B]).obj (op K)).commShiftIso (-n))
+attribute [local instance] Sheaf.monoidalCategory in
+private lemma sourceShift_naturality
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology B)} (f : K ⟶ K') (n : ℤ) :
+    (RHom(X)[B]).map (f⟦n⟧').op ≫ (etaleInternalHomSourceShiftIso B K n).hom =
+      (etaleInternalHomSourceShiftIso B K' n).hom ≫
+        Functor.whiskerRight ((RHom(X)[B]).map f.op) (shiftFunctor _ (-n)) := by
+  have h : Functor.whiskerRight ((derivedTensor B X).map f) (shiftFunctor _ n) ≫
+      (etaleInternalHomTensorShiftIso B K' n).inv =
+        (etaleInternalHomTensorShiftIso B K n).inv ≫
+          (derivedTensor B X).map (f⟦n⟧') := by
+    ext N
+    exact (((derivedTensor B X).flip.obj N).commShiftIso n).inv.naturality f
+  have : NatTrans.CommShift ((derivedTensor B X).map f) ℤ :=
+    Functor.CommShift₂.commShift_map (h := .int)
+      (G := curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology B))) f
+  have hn : ∀ {L L' : DerivedCategory (Sheaf X.smallEtaleTopology B)} (g : L ⟶ L'),
+      NatTrans.CommShift ((RHom(X)[B]).map g.op) ℤ := by
+    intro L L' g
+    have : NatTrans.CommShift ((derivedTensor B X).map g) ℤ :=
+      Functor.CommShift₂.commShift_map (h := .int)
+        (G := curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology B))) g
+    rw [← parametrized_conjugate (derivedTensorHomAdjunction₂ B X) g]
+    exact NatTrans.CommShift.conjugateEquiv
+      (derivedTensorHomAdjunction B L') (derivedTensorHomAdjunction B L)
+      ((derivedTensor B X).map g)
+  simpa only [etaleInternalHomSourceShiftIso, derivedTensorHomAdjunction, Iso.trans_hom,
+      Category.assoc] using
+    generic_sourceShift_naturality (derivedTensorHomAdjunction₂ B X) hn n
+    (fun L ↦ etaleInternalHomTensorShiftIso B L n)
+    (fun g ↦ by
+      ext N
+      exact (((derivedTensor B X).flip.obj N).commShiftIso n).inv.naturality g) f
+
 /-- Unnormalized signed shift component for contravariant derived internal Hom.
 Source: Stacks Tags 08J7 and 08JC; the signed source-shift formula of def-pur-hom-complex
 (blueprint: lem-sf-etale-generic-hom-triangle).
@@ -109,11 +251,10 @@ noncomputable def etaleInternalHomFlipRawShiftComponent
     (K : (DerivedCategory (Sheaf X.smallEtaleTopology B))ᵒᵖ) :
     ((shiftFunctor _ n ⋙ (RHom(X)[B]).flip.obj M).obj K) ≅
       (((RHom(X)[B]).flip.obj M ⋙ shiftFunctor _ n).obj K) :=
-  by
-    simpa only [neg_neg, op_unop, Functor.comp_obj, Functor.flip_obj_obj] using
-      (((RHom(X)[B]).flip.obj M).mapIso
-        ((shiftFunctorOpIso _ n (-n) (add_neg_cancel n)).app K) ≪≫
-          (etaleInternalHomSourceShiftIso B K.unop (-n)).app M)
+  (((RHom(X)[B]).flip.obj M).mapIso
+    ((shiftFunctorOpIso _ n (-n) (add_neg_cancel n)).app K) ≪≫
+      (etaleInternalHomSourceShiftIso B K.unop (-n)).app M) ≪≫
+    eqToIso (congrArg (fun a ↦ (((RHom(X)[B]).obj K).obj M)⟦a⟧) (neg_neg n))
 
 /-- Coherent extension of the canonical degree-one contravariant Hom shift.
 Source: Stacks Tags 08J7 and 08JC, with the cochain signs of def-pur-hom-complex
@@ -143,7 +284,11 @@ theorem etaleInternalHomFlipShiftComponent_naturality
         (etaleInternalHomFlipShiftComponent B M n K').hom =
       (etaleInternalHomFlipShiftComponent B M n K).hom ≫
         ((RHom(X)[B]).flip.obj M ⋙ shiftFunctor _ n).map f := by
-  sorry
+  apply generic_signed_opShift_naturality
+    ((RHom(X)[B]).flip.obj M) n
+    (fun K ↦ (etaleInternalHomSourceShiftIso B K (-n)).app M)
+    (fun g ↦ NatTrans.congr_app (sourceShift_naturality B g (-n)) M)
+    (n * (n - 1) / 2).negOnePow f
 
 /-- Canonical signed commutation with shifts, assembled from its explicit components.
 Source: Stacks Tags 08J7 and 08JC (blueprint: lem-sf-etale-generic-hom-triangle). -/
