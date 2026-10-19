@@ -17287,3 +17287,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:35 L: merged deliver/ND/det-sp-tower-classes (stage 2; reviewer PASS; parallel immutable checks)
 - 10:35 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 420f30cb747d: H3: sfRationalLisseProperty ignores its chart _U, so lisse means glo)
 - 10:35 L: returned deliver/NP/lem-pur-flag-local-comparison (reviewer RETURN: L: independent stage-2 immutable head 98d05cfc7b71: H3/H7: first conjunct flagCoordinateTheta = flagCoordinateCup (posit)
+- 10:40 L: merged deliver/NL/lem-coef-completed-tensor-hom-transpose (stage 2; reviewer PASS; parallel immutable checks)

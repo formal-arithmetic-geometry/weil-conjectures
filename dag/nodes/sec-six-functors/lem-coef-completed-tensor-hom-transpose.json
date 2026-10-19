@@ -11,7 +11,9 @@
   "def-fix-six-functor-datum",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-rationalization-karoubi"
+  "def-weil-rationalization-karoubi",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pur-derived-pullback-tensor-iso"
  ],
  "proof": [
   {
@@ -154,5 +156,28 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-ba79f7a32 (reviewer sub-agent of L); spot-checked: Read the item, dependency statements, route, and cited sources in full. Corrected inaccurate source locations and made completion/evaluation and signed-symmetry calculations explicit. Statement unchanged; no new nodes. Bhatt–Scholze Lemma 3.4.11 and Stacks adjunction/completion passages support the proof. Small cases and immediate dependency checks pass; review.md records the inherited global-DAG limitation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedTensorHomTranspose",
+  "declaration": "WeilConjectures.completedTensorHomTranspose",
+  "declarations": [
+   "WeilConjectures.CoefficientTransposeLaws",
+   "WeilConjectures.completedTensorHomTranspose"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedTensorHomTranspose.lean",
+  "statement": "theorem completedTensorHomTranspose (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : (∃ tau : ∀ (L : sfIntegralConstructibleCategory C.l E X) (P : (constructibleIntegralHomPairs C.l E X).FullSubcategory), (L ⟶ (constructibleIntegralHom C.l E X).obj P) ≃ₗ[ Padic.coefficientExtensionIntegers C.l E] ((@constructibleIntegralTensor C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)).obj (P.obj.1.unop, L) ⟶ P.obj.2), CoefficientTransposeLaws (@podIntegralClosed C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)) (@pullbackTensorIntegralBraiding C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)) (fun L P phi ↦ tau L P phi)) ∧ (∃ tau : ∀ (L : sfRationalConstructibleCategory C.l E X) (P : (constructibleRationalHomPairs C.l E X).FullSubcategory), (L ⟶ (rationalDerivedInternalHom C.l E X).obj P) ≃+ ((@rationalDerivedTensor C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)).obj (P.obj.1.unop, L) ⟶ P.obj.2), CoefficientTransposeLaws (@podRationalClosed C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)) (@pullbackTensorRationalBraiding C.l _ E _ _ _ X (fun x ↦ (by simpa using (finiteFieldDatumPrimeUnit D C.l C.different).map ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) : IsUnit (C.l : X.residueField x)).invertible)) (fun L P phi ↦ tau L P phi) ∧ ∀ L P (phi : L ⟶ (rationalDerivedInternalHom C.l E X).obj P) (c : E), tau L P ((sfRationalCoefficientEquiv C.l E).symm c • phi) = (sfRationalCoefficientEquiv C.l E).symm c • tau L P phi)",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the published uniquely completion-unit-normalized partial closed data, its raw scalar localization, and the canonical signed braidings. The two additional landed statement dependencies supply precisely these normalized interfaces. Residue-field inverses are supplied inline by mapping finiteFieldDatumPrimeUnit along the structure morphism, without a Verdier-duality dependency or added hypothesis. Rational E-linearity is explicit scalar preservation through sfRationalCoefficientEquiv, on every actual rationalized Hom arrow."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f537a0877",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery of e14dc47d (RETURN H2: thm-coef-rational-verdier cited only for plain def RationalVerdier.units). Snapshot diff: stmt_dep and import removed, all six units uses replaced by the verbatim inline finiteFieldDatumPrimeUnit→IsUnit.invertible term, no Invertible hypothesis added, lean.statement verbatim, nothing else changed. Remaining theorem stmt_deps supply constructed objects: podIntegralClosed/podRationalClosed and pullbackTensor{Integral,Rational}Braiding are .exists.choose of their nodes' existsUnique theorems → PASS on the mechanical finding. Clause, edge-case, H4/H5/H8/H9 checks carried over from the e14dc47d review unchanged. nt_compile --json: 60 s timeouts at load ~350 (e14dc47d control timed out too), then clean rc=0 in 8.9 s at load ~150. Advisory: finiteFieldDatumPrimeUnit used only as a Prop proof (Q69 c42114b precedent); proof-dep imports unused by the statement."
  }
 }
