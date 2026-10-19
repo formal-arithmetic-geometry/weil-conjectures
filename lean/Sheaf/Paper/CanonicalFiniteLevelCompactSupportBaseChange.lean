@@ -8,23 +8,7 @@ module
 public import Sheaf.Paper.GlobalFiniteLevelCompactSupportBaseChange
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
 public import Sheaf.SecSmoothPurity.CanonicalShriekExchange
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.Compactification.BaseChange
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 
 /-!
 # Compact-support base change in fixed module coordinates
@@ -70,6 +54,20 @@ theorem isIso_csAuxiliaryExchange
     (_W : Scheme.FixedEtaleOriginWitness X
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) M) :
     IsIso ((canonicalFiniteCoefficientCompactSupportExchange l E n hn sq c).app M.obj) := by
-  sorry
+  let Λ := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)
+  have : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n hn
+  have : Finite Λ :=
+    Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n hn)
+  let hsq : IsPullback g' f' f g :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  have hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X M.obj := by
+    refine ⟨_W.complex.obj, _W.complex.property, ⟨_W.iso⟩⟩
+  have : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (c.isPullback_g_ofIsPullback hsq).flip.toCommSq).app
+        (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj M.obj)) :=
+    isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification
+      Λ hsq c M.obj hM
+  apply NatTrans.isIso_app_comp_whiskerLeft_comp
 
 end AlgebraicGeometry.ProEtale

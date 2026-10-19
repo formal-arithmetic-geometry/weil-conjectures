@@ -128,6 +128,20 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
     "place": "Compactification independence: transport the finite-torsion comparison square"
    }
+  },
+  {
+   "text": "For the fixed-module auxiliary clause isIso_csAuxiliaryExchange, retain W.complex and W.iso to obtain plusEtaleOrigin for M.obj. The existing source lemma plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek applies the termwise open site comparison to show that extension by zero retains this property. Apply the existing fixed-module proper theorem isIso_derivedBaseChangeMap_app_of_isProper to the proper compactification square, via isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification. The actual canonicalFiniteCoefficientCompactSupportExchange is its proper component preceded by an associator and followed by the specified open base-change isomorphism. NatTrans.isIso_app_comp_whiskerLeft_comp therefore proves invertibility directly, without identifying the full global transported exchange or choosing an inverse. This proves the auxiliary clause; steps 1--8 remain the proof plan of the reexported global interface.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "thm-weil-pbc-finite-level-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
+    "place": "Proper/open factorization, steps 3--5; existing fixed-module implementation in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange"
+   }
   }
  ],
  "proof_deps": [
@@ -149,12 +163,13 @@
   "prop-weil-pbc-site-comparison-finite-level",
   "thm-cbc-finite-torsion",
   "thm-nagata-compactification",
+  "thm-weil-pbc-finite-level-proetale",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md",
-  "place": "Global compactification, proper/open site comparison, and witness independence, with the explicit human-authorized qcqs-or-compactification restatement in coord/repair-notes/thm-cbc-finite-level-proetale.json (2026-10-18); compactification-independence square transported by explicit cancellation."
+  "place": "Global compactification, proper/open site comparison, and witness independence, with the explicit human-authorized qcqs-or-compactification restatement in coord/repair-notes/thm-cbc-finite-level-proetale.json (2026-10-18); compactification-independence square transported by explicit cancellation. Fixed-module auxiliary clause: existing proper-factor invertibility on extension by zero of the retained etale-origin complex, followed by the actual canonical open isomorphism (F7, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -432,5 +447,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Section 1(B): reexports the full globalFiniteLevelCompactSupportBaseChange interface unchanged, including witness and compactification independence. Its ringed coefficient endpoints and transported cbcGlobalExchange do not directly accept the raw fixed-module compact-support exchange used by pur9-cs-def-bc. The added clause gives invertibility of that same normalized proper-mate/open-extension composite at the retained FixedEtaleOriginWitness. Its docstring gives the precise proper-mate and open-adjunction identification, with canonical coefficient and exact-pullback transports. No arbitrary isomorphism or ambient compactification comparison is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-313ba",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261019T002547-L-2153520",
+  "kind": "proof",
+  "note": "independent cc review: delivered isIso_csAuxiliaryExchange proof (axioms: propext/choice/Quot.sound) against node thm-cbc-finite-level-proetale (new step + proof_dep thm-weil-pbc-finite-level-proetale, no cycle), unit sk-prop-sf-cbc (realized empty), and 13 direct importers compiled against the delivered module"
  }
 }
