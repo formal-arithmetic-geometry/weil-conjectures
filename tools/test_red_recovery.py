@@ -381,8 +381,10 @@ class MergeQueue(SelectiveRecovery):
             self.put('lean/Sheaf/C.lean', 'module\n')
             r = build.record_unrecorded()
             self.assertEqual(r['group'], 'U')
-            self.assertEqual(sorted(f['path'] for f in r['files']), ['Sheaf/A.lean', 'Sheaf/C.lean'])
-            self.assertEqual((builds / 'backup' / r['id'] / 'Sheaf/A.lean').read_text(), 'module\n\npublic theorem A : True := by sorry\n')
+            recs = sorted(ld.records(ld.REQUESTS), key=ld.order_key)     # one landing per writer commit, oldest first
+            self.assertEqual([[f['path'] for f in x['files']] for x in recs], [['Sheaf/A.lean'], ['Sheaf/C.lean']])
+            self.assertIn('land delivery', recs[0]['note'])
+            self.assertEqual((builds / 'backup' / recs[0]['id'] / 'Sheaf/A.lean').read_text(), 'module\n\npublic theorem A : True := by sorry\n')
             self.assertIsNone(build.record_unrecorded())          # nothing new since
             self.put('lean/Sheaf/C.lean', 'module\n-- later\n')   # a later unrecorded edit on top of that landing
             r2 = build.record_unrecorded()

@@ -158,9 +158,19 @@ def record_unrecorded() -> dict | None:
         files[rel] = before
     if not files:
         return None
-    who = run(["git", "log", "-1", "--format=%h %s", "--", *[f"{lean_rel}/{r}" for r in list(files)[:20]]], cwd=repo).stdout.strip()
-    rec = ld.new_record("U", files, "unrecorded change of the tree since the verified main; last commit: " + who)
-    print(f"{ld.now()} merge queue: recorded {len(files)} unrecorded file change(s) as landing {rec['id']} ({who[:80]})", flush=True)
+    # one landing per writer commit (the last commit touching the file; uncommitted changes together), oldest first, so
+    # that a red build drops only the change at fault (2026-10-19: a probe and a stage-2 batch shared one landing)
+    groups = {}
+    for rel in files:
+        dirty = run(["git", "status", "--porcelain", "--", f"{lean_rel}/{rel}"], cwd=repo).stdout.strip()
+        c = "" if dirty else run(["git", "log", "-1", "--format=%ct %h %s", "--", f"{lean_rel}/{rel}"], cwd=repo).stdout.strip()
+        groups.setdefault(c, []).append(rel)
+    rec = None
+    for c in sorted(groups, key=lambda c: (c == "", c)):
+        who = c.split(" ", 1)[1] if c else "uncommitted change in the working tree"
+        rec = ld.new_record("U", {rel: files[rel] for rel in groups[c]},
+                            "unrecorded change of the tree since the verified main; commit: " + who)
+        print(f"{ld.now()} merge queue: recorded {len(groups[c])} unrecorded file change(s) as landing {rec['id']} ({who[:80]})", flush=True)
     return rec
 
 

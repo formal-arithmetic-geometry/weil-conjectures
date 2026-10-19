@@ -1454,7 +1454,7 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
     log(f"batch {b['id']}: conflict fallback done in {time.time() - t0:.1f} s; the next build verifies")
 
 
-def drop_other_writers(b: dict, last: dict, failures: list, log) -> bool:
+def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool = True) -> bool:
     """Merge queue: a failure no delivery of the batch explains, while landings of other writers (U, PI, PR, the
     maintainer, stage 2) that the build names as possible causes were in it: drop those from the candidate (hard
     restore, one commit) and let the next build verify. True when something was dropped."""
@@ -1487,9 +1487,29 @@ def drop_other_writers(b: dict, last: dict, failures: list, log) -> bool:
         MQ_LOG('drop: ' + x)
     MQ_LOG(f"red build {last.get('time')}: {len(dropped)} landing(s) of other writers dropped, {len(restore_to)} file(s) restored, "
            f"{time.time() - t0:.1f} s")
-    b['await_recovery'] = True
-    write_json(OPEN, b)
+    if persist:
+        b['await_recovery'] = True
+        write_json(OPEN, b)
     return True
+
+
+def red_without_batch(log) -> bool:
+    """Merge queue: a red build with no batch open (only other writers' landings in it) is handled here: the landings
+    the build names are dropped from the candidate. Each red result is handled once (local/batch/mq-red.json)."""
+    last = ld.read_json(ld.B / 'last.json') or {}
+    if last.get('result') != 'red':
+        return False
+    seen_p = BD / 'mq-red.json'
+    seen = read_json(seen_p) or []
+    if last.get('time') in seen or (last.get('source_fingerprint') and last['source_fingerprint'] in seen):
+        return False
+    seen = (seen + [last.get('time'), last.get('source_fingerprint')])[-200:]
+    write_json(seen_p, seen)
+    log(f"RED build {last.get('time')} with no batch open; failing {' '.join((last.get('failing') or [])[:8])}")
+    if drop_other_writers({'id': '-', 'entries': []}, last, list(last.get('failing') or []), log, persist=False):
+        return True
+    alert(None, ' '.join(last.get('failing') or []), 'red build with no batch open and no droppable landing', 'maintainer diagnosis')
+    return False
 
 
 def closure_fallback(b, last, log, imports=None):
@@ -1533,6 +1553,8 @@ def step(cache: dict, log) -> str:
         log('REPAIR statistics', json.dumps(stats, sort_keys=True))
         cache['_repair_stats'] = stats
     b = read_json(OPEN)
+    if not b and ld.merge_queue() and red_without_batch(log):
+        return "returned"
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
     for e in b["entries"]:
