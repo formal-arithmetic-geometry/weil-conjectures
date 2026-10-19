@@ -46,8 +46,17 @@ theorem finite_separable_closure
     (hfg : (⊤ : IntermediateField k K).FG) :
     GeometricallyIrreducible
         (Spec.map (CommRingCat.ofHom (algebraMap (separableClosure k K) K))) ∧
-      FiniteDimensional k (separableClosure k K) :=
-  by
-  sorry
+      FiniteDimensional k (separableClosure k K) := by
+  constructor
+  · apply (geometricallyIrreducible_iff_separableElements_mem
+      (separableClosure k K) K).2
+    intro α hα
+    exact IntermediateField.mem_bot.mp
+      ((separableClosure.separableClosure_eq_bot k K) ▸
+        (mem_separableClosure_iff.mpr hα))
+  · let := algebraicClosure.finite_of_fg k K hfg
+    let f : separableClosure k K →ₐ[k] algebraicClosure k K :=
+      IntermediateField.inclusion (le_algebraicClosure k K (separableClosure k K))
+    exact FiniteDimensional.of_injective f.toLinearMap f.injective
 
 end
