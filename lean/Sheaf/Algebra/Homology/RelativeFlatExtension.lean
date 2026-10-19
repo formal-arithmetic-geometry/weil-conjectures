@@ -5,13 +5,13 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!

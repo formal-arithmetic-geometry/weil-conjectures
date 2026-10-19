@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
 import Sheaf.Algebra.Homology.PerfectRingHomTensorDualIso
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.Monoidal
 
 /-! # K-flatness of a Hom complex with bounded finite-projective source

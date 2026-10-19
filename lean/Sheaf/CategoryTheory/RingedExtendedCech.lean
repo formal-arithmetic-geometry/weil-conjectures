@@ -6,7 +6,7 @@ Authors: SHEAF group NE
 module
 
 public import Sheaf.CategoryTheory.RingedSectionLocalization
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
 
 /-!

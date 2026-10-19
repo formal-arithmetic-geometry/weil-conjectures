@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 import Sheaf.Algebra.Homology.OpenRestrictionKFlat

@@ -5,9 +5,9 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-!

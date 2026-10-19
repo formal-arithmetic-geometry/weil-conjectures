@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Data.ZMod.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
 import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

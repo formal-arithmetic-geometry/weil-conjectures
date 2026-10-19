@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 

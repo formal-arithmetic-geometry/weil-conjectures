@@ -21,7 +21,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -36,7 +35,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
@@ -45,7 +44,7 @@ import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import Sheaf.AlgebraicGeometry.SmoothBaseChangeLimit
 import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.RhomGlobalSections
@@ -83,7 +82,6 @@ import Sheaf.Paper.StratumAmbientHom
 import Sheaf.SixFunctors.EtaleGenericHomTriangle
 import Sheaf.SixFunctors.EtaleGenericPerfectHom
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-! # Ordinary etale exchange at a geometric generic point
 

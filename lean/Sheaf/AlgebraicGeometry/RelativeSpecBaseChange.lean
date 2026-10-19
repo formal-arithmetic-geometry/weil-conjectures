@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Sheaf.AlgebraicGeometry.StructureAlgebraPullbackTransport

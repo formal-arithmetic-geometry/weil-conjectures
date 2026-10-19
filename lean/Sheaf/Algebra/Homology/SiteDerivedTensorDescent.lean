@@ -6,7 +6,7 @@ Authors: SHEAF groups NF and J3
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Localization.Construction
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
@@ -19,7 +19,7 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.CategoryTheory.Localization.Prod
 import Mathlib.Algebra.Homology.BifunctorFlip
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorHomotopy
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 

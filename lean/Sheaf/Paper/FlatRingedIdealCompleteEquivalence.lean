@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.Paper.RingedSiteIdeal
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit

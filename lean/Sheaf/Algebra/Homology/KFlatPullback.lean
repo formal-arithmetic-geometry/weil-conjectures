@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Topology.InverseImageModule
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.TensorPullbackStalkComplex

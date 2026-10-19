@@ -6,11 +6,11 @@ Authors: SHEAF group J9
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.CategoryTheory.ContinuousRingedToposModuleDirectImage
 import Sheaf.CategoryTheory.RingedToposKFlatPullback
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Flatness for the canonical coefficient-model comparison pullback
 Source: Stacks Project, Tag 05VD.

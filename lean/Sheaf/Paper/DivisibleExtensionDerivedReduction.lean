@@ -19,7 +19,7 @@ public import Mathlib.Data.ZMod.Basic
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses

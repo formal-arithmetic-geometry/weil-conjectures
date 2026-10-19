@@ -18,7 +18,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.AdicLisseModule
 import Sheaf.Paper.RefinementCoefficientRealization
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
@@ -46,7 +46,6 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!

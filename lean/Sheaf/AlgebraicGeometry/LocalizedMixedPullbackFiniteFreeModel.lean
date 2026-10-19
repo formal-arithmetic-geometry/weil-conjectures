@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.LocalizedMixedDerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
 import Mathlib.CategoryTheory.Adjunction.Additive

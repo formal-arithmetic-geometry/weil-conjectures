@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.Paper.RingedTopoiInverseImagePairing
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import all Sheaf.CategoryTheory.GeometricModuleTransport
 import all Sheaf.CategoryTheory.GeometricModuleConstruction
 import all Sheaf.CategoryTheory.RingedToposKFlatPullback

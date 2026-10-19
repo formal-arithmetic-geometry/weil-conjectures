@@ -6,7 +6,7 @@ Authors: SHEAF group Q1, SHEAF group T3
 module
 
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Differential compatibility for normalized Hom degree maps

@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.DerivedInternalHom

@@ -35,7 +35,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
@@ -64,7 +64,6 @@ import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.SixFunctors.Etale.Derived.Hom
 import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons

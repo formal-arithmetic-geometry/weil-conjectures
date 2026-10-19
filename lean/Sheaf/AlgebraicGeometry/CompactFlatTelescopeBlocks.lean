@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import Mathlib.Data.Fintype.Order
 import Mathlib.Data.Int.Interval
 

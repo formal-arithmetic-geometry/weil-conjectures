@@ -5,9 +5,9 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory

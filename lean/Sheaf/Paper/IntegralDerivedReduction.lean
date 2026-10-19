@@ -11,7 +11,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Integral derived reduction
 

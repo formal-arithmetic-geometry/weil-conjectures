@@ -12,7 +12,7 @@ public import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 public import Sheaf.Paper.WeilTensorProduct
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Map
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf

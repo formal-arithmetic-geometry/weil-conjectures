@@ -6,8 +6,8 @@ Authors: SHEAF group J9
 module
 
 public import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.FlatCoverFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

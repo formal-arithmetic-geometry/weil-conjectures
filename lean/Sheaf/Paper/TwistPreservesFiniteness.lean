@@ -13,7 +13,7 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients

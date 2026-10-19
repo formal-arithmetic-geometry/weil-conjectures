@@ -6,7 +6,7 @@ import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 @[expose] public section

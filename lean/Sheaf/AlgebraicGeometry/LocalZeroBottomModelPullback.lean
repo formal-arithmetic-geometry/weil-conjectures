@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.LocalZeroBottomTruncation
 import Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal
 import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Bottom cohomology of local zero-differential models
 Source: Stacks Project, Tag 0BDL, pullback clause; Tags 06YD and 06YJ.

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.SplitFlatFilteredSheafModels
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.FlatCoverFunctor
 import Sheaf.CategoryTheory.RightFractionDenseSubcategory
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

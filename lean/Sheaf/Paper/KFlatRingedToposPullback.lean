@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Homology.HomologicalComplex

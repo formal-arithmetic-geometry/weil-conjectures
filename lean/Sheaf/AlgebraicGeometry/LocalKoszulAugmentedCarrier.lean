@@ -18,7 +18,7 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.RingTheory.KoszulBaseChangeIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # A locally augmented Koszul carrier

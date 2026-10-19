@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CompactFlatBarIndex
 import Sheaf.AlgebraicGeometry.PreorderBarTotalSplit
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 
 /-! # The explicit enlarged bar tower
 

@@ -10,7 +10,7 @@ public import Sheaf.Paper.PurIntegralTwistLineInverseImage
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted

@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.FieldTheory.Finite.GaloisField
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Mathlib.CategoryTheory.Sites.PreservesSheafification

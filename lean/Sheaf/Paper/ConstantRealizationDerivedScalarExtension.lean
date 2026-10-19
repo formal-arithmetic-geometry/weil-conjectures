@@ -22,7 +22,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 import Sheaf.RingTheory.DerivedModuleScalarAdjunction
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel

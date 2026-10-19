@@ -19,7 +19,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology
 import Sheaf.Paper.EtaleFlatKFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap

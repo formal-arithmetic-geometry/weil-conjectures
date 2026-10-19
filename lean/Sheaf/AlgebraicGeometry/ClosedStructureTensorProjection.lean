@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.AlgebraicGeometry.ClosedStructureTensorProjectionStalk
 
 /-! # The ordinary projection formula for a closed structure sheaf

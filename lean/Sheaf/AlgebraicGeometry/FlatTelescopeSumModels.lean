@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Sheaf.AlgebraicGeometry.BoundedFlatShiftRepresentative
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 
 /-! # Literal telescope models for a countable coproduct
 

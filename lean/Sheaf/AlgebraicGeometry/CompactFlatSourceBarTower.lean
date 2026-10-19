@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CompactFlatFiniteSubcomplexDiagrams
 public import Sheaf.AlgebraicGeometry.PreorderBarTotal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 
 /-! # The explicit source bar tower
 

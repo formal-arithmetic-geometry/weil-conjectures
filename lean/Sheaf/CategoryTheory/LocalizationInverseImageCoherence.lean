@@ -13,7 +13,7 @@ public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.GeometricModuleTransport

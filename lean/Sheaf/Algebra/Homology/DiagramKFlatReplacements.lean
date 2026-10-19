@@ -6,7 +6,7 @@ Authors: SHEAF groups NE and P2
 module
 
 public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedToposKFlatPullback
