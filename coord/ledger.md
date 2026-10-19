@@ -17535,3 +17535,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:26 L: returned deliver/J3/Sheaf.SixFunctors.EtaleHomComplexPullback (reviewer RETURN: (the landing tools, head 40d70a3c4) the delivery did not land: lean/Sheaf/SixFunctors/EtaleHomComplexPullback.lean chang)
 - 19:26 L: returned deliver/K7/Sheaf.Paper.PbcQbarCompletedPullback (reviewer RETURN: (the landing tools, head 5c5e96af2) the delivery did not land: lean/Sheaf/Paper/CompletedPullbackTriangles.lean: <unattr)
 - 19:26 L: returned deliver/U1/Sheaf.Paper.DerivedNakayamaResolution (reviewer RETURN: (the landing tools, head 5e59773be) the delivery did not land: (d) user Sheaf.SixFunctors.FiniteAdjunctionTransition (me)
+- 19:26 L: returned deliver/V6/Sheaf.Paper.IntegralStratifiedPerfectCharacterization (reviewer RETURN: (the landing tools, head 07efe764d) the delivery did not land: lean/Sheaf/Paper/IntegralStratifiedPerfectCharacterizatio)
