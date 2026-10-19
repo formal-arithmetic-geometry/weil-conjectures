@@ -11,7 +11,8 @@
  },
  "stmt_deps": [
   "def-trf-valuation-ring",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-trf-restricted-series-presentation"
  ],
  "proof": [
   {
@@ -169,5 +170,23 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-b1d194ce3 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and the three new nodes in full. Steps: (1) is elementary and correct: localizing V<T>->D gives a surjective q_0:K<T>->C with q_0(V<T>)=D, continuous because the unit ball is open. (2) uses the full conclusion q(V<U>)=C° of distinguished-presentation (BGR 6.4.3/1), and all its hypotheses hold. (3) gets integrality over the correct ring D=q_0(V<T>). (4) is monic reduction to the finite set E. (5) is correct: pi-adic Cauchy sums because a_nu->0 in V, completeness of D=V<T>/ker, continuity of D->C because pi^N D=q_0(pi^N V<T>). New nodes are statement-only, self-contained and true. I tested them on: C=K and C=KxK (distinguished presentation exists); K[e]/e^2 (shows the reducedness hypothesis is needed; nilpotents are integral); J=0, (pi), (1-piT) and the r=0 case. I also checked completeness of restricted quotients for arbitrary J myself, via the saturation and bounded torsion. Each new node carries 5 searches. Blueprint from/via are correct. No duplicates: the DAG grep finds only finite-extension bounded-powers, Weierstrass division, polynomial closed-point comparison and the rank-one formal comparison, none of which states these results; the blueprint has no affinoid nodes. The cited analytic sources (Temkin, BGR, Bosch notes, Rodriguez Vazquez) are not in literature/, so the sources could not be read at the cited places locally. They are WANTED in the report, and the proof is marked agent-written, which the brief allows; I checked the statements against the standard results. All deps are in the same unit; no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GrauertRemmertPowerbounded",
+  "declaration": "RestrictedSeries.grauert_remmert_powerbounded",
+  "file": "lean/Sheaf/RingTheory/GrauertRemmertPowerbounded.lean",
+  "statement": "theorem grauert_remmert_powerbounded (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (V : ValuationSubring K) (hV : ∀ x : K, x ∈ V ↔ ‖x‖ ≤ 1) (C : Type v) [NormedCommRing C] [CompleteSpace C] [IsReduced C] [Algebra K C] [Algebra V C] [IsScalarTower V K C] (haff : ∃ (n : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin n ↦ (1 : ℝ))) →+* C), Function.Surjective q ∧ q.comp (constants K n) = algebraMap K C ∧ ∀ U : Set C, IsOpen U ↔ ∀ s, q s ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin n ↦ 1) (t.val - s.val) < ε → q t ∈ U) (D : Subalgebra V C) (hbounded : ∀ d : D, ∃ M : ℝ, ∀ m : ℕ, ‖(d.val : C) ^ m‖ ≤ M) (hmodel : ∃ (r : ℕ) (q : (MvPowerSeries.IsRestricted.subring (R := V) (fun _ : Fin r ↦ (1 : ℝ))) →+* D), Function.Surjective q ∧ q.comp (constants V r) = algebraMap V D ∧ ∀ U : Set D, IsOpen U ↔ ∀ s, q s ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ t, MvPowerSeries.gaussNorm (norm : V → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < ε → q t ∈ U) (hgeneric : ∃ e : (D ⊗[V] K) ≃+* C, ∀ (d : D) (k : K), e (d ⊗ₜ[V] k) = d.val * algebraMap K C k) : ∃ P : Submodule D C, (∀ c : C, c ∈ P ↔ ∃ M : ℝ, ∀ m : ℕ, ‖c ^ m‖ ≤ M) ∧ Module.Finite D P",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41617e017",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Statement verbatim; node diff vs live is only lean plus the used stmt_dep def-trf-restricted-series-presentation (constants). Every clause checked: K complete, ultrametric, nontrivially normed, alg. closed; V pinned by hV; C reduced with a surjective Tate presentation and exactly the Gauss quotient topology; D ⊆ C° as Subalgebra V C with the induced topology (probe: instTopologicalSpaceSubtype, rfl) and a V<T> quotient with no FG-kernel requirement (correct); hgeneric pins the natural map on pure tensors; conclusion is P with carrier exactly the norm-power-bounded elements (intrinsic for submultiplicative norms because scalars are units) and Module.Finite D P, D acting by multiplication (probe rfl). Edge cases C=0, n=r=0, universes u/v independent. No defs, proof only sorry, source and blueprint docstrings with all 5 steps. nt_compile --json clean (3.4 s). Advisories: CompleteSpace C redundant; inline topology instead of IsAffinoidQuotient (more general); source PDFs WANTED."
  }
 }

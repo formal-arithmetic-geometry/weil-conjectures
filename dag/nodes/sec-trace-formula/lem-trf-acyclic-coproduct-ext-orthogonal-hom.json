@@ -259,5 +259,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-014d6f408 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement, Stacks 07AA (sites-cohomology.tex l.8172) and the 07AC direct-sum Ext application (l.9380-9410) agree. I checked all 8 steps: (1) the product-of-Hom identity and cohomology commuting with products in Ab; (2) D^{p,q}=Hom(K^{b-p},J^q) with the right d_I direction and commuting differentials; (3) columns: Ext vanishing and degree-0 identification Hom(K,F); (4) rows exact by injectivity, including the p=0 endpoint where d^b=0; (5) the second spectral sequence's E_1=0 gives Tot acyclic; (6) the first collapses to C, using the edge isomorphism in degree 0 too; (7) the sign twist a_p gives the isomorphism to the stated Hom differential; (8) small cases: K=0, E->E identity, and Z->Z->Z/2 showing the hypothesis is needed. Cited statements match their uses, and the blueprint_update of def-sp-double-complex-total is consistent. No duplicate in the DAG. Both tool_uses (pbc Grothendieck structure, row-collapse) are generic and accepted. The item is reachable from sk-i-curve-zero through the inherited local-term-locality/Temkin chain (a base binding, not this delivery's fault) and is not on the route-pivot drop list. All cited nodes are non-trf, so the delivery adds no batch-5 flags. FIX: step 1 fixed its own nonnegative resolution J without saying that the Ext hypothesis, stated for 'an' injective resolution, holds for this J. I added [lem-sp-derived-well-defined] for Hom_R(E_i,-) and Hom_R(M,-) to that step's uses and to proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AcyclicCoproductExtOrthogonalHom",
+  "declaration": "CategoryTheory.acyclic_hom_of_coproduct_ext_orthogonal",
+  "file": "lean/Sheaf/CategoryTheory/AcyclicCoproductExtOrthogonalHom.lean",
+  "statement": "theorem acyclic_hom_of_coproduct_ext_orthogonal {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (F : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) {I : Type w} (E : I → ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (P : InjectiveResolution F) (hExt : ∀ (i : I) (p : ℕ), 0 < p → IsZero ((((preadditiveCoyoneda.obj (op (E i))).mapHomologicalComplex (ComplexShape.up ℕ)).obj P.cocomplex).homology p)) (K : CochainComplex (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (hbounded : ∃ b : ℤ, ∀ n : ℤ, b < n → IsZero (K.X n)) (hacyclic : K.Acyclic) (hterms : ∀ n : ℤ, ∃ (A : Type u) (i : A → I), Nonempty (K.X n ≅ ∐ (fun a : A ↦ E (i a)))) : (CochainComplex.HomComplex K ((CochainComplex.singleFunctor _ 0).obj F)).Acyclic",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06e1dc3d0",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: the Ext hypothesis is H^p of Hom(E_i,-) on a given InjectiveResolution P for p>0; bounded above, K.Acyclic, and small coproducts through an arbitrary i : A → I with A : Type u, so repetitions and empty sums are allowed. The conclusion is HomComplex K (F[0]) acyclic, and toSingleEquiv/δ_toSingleMk give degree n = Hom(K^{-n},F) with differential (n+1).negOnePow • (d_K^{-n-1} ≫ h), exactly the node's convention. A pp.universes probe shows every level is u and only the index universe is free, so there is no hidden restriction. Empty family, K=0, F=0 and the empty site are covered. Searches found no duplicate. The lean.statement field matches the file verbatim, the docstrings give source, blueprint and all 8 steps, the proof is sorry only, and the report has both sections. nt_compile --json is clean in 3.3 s. Advisory only: placeholder Mathlib proof-dep imports and an unused public SiteCoveringAxioms import; def-pc-acyclic-complex-modules has no lean record (HomologicalComplex.Acyclic is its match)."
  }
 }
