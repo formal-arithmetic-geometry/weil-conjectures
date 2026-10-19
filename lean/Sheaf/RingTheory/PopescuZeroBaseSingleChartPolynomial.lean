@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
 import Sheaf.RingTheory.PopescuZeroBaseSingleChartPresentation
-import Sheaf.RingTheory.PolynomialLinearElimination
+import WeilConjectures.RingTheory.PolynomialLinearElimination
 
 /-! # Eliminating auxiliary variables in a single chart
 

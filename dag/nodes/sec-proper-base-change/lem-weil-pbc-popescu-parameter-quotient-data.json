@@ -81,13 +81,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.PopescuParameterQuotientData",
-  "file": "lean/Sheaf/RingTheory/PopescuParameterQuotientData.lean",
+  "module": "WeilConjectures.RingTheory.PopescuParameterQuotientData",
+  "file": "lean/WeilConjectures/RingTheory/PopescuParameterQuotientData.lean",
   "declaration": "Algebra.parameter_quotient_data",
   "statement": "theorem parameter_quotient_data\n    {k : Type u} {C : Type v} {Λ : Type w}\n    [Field k] [CommRing C] [CommRing Λ] [Algebra k Λ]\n    (d c : ℕ) (hc : 1 ≤ c) (φ : MvPolynomial (Fin d) k →ₐ[k] Λ)\n    [Algebra (MvPolynomial (Fin d) k) C]\n    [FinitePresentation (MvPolynomial (Fin d) k) C]\n    (γ : letI := φ.toRingHom.toAlgebra; C →ₐ[MvPolynomial (Fin d) k] Λ)\n    (q : PrimeSpectrum Λ)\n    (hgen : Ideal.span (Set.range (fun i : Fin d ↦\n      algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i)))) =\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) :\n    letI := φ.toRingHom.toAlgebra\n    let J : Ideal (MvPolynomial (Fin d) k) :=\n      Ideal.span (Set.range (fun i : Fin d ↦ (MvPolynomial.X i ^ c) ^ 8))\n    let J_C := Ideal.map (algebraMap (MvPolynomial (Fin d) k) C) J\n    let J_Λ := Ideal.map (algebraMap (MvPolynomial (Fin d) k) Λ) J\n    ∃ (_ : FinitePresentation (MvPolynomial (Fin d) k ⧸ J) (C ⧸ J_C))\n      (γ₀ : (C ⧸ J_C) →ₐ[MvPolynomial (Fin d) k ⧸ J] (Λ ⧸ J_Λ))\n      (q₀ : PrimeSpectrum (Λ ⧸ J_Λ)),\n      γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) =\n        (Ideal.Quotient.mk J_Λ).comp γ.toRingHom ∧\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q",
   "branch": "sheaf-dag",
   "by": "E1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.PopescuParameterQuotientData; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

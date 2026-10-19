@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.GroupTheory.PGroup
 
 import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationData
-import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceMaps
+import WeilConjectures.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceMaps
 
 /-!
 # A primary generic filtration and its sheaf-level trace retraction

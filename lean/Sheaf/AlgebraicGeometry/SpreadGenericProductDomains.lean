@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Spec
 
 import Sheaf.AlgebraicGeometry.SpreadGenericProductEmbedding
-import Sheaf.RingTheory.FiniteProductFieldImageFactors
+import WeilConjectures.RingTheory.FiniteProductFieldImageFactors
 
 /-!
 # Spreading the generic product idempotents

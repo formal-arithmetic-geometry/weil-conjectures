@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkModelDescent
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDescent
 
 /-!
 # Spreading a finite etale stalk model and its comparison

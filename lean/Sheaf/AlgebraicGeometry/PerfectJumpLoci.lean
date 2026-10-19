@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Semicontinuity.Basic
-import Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
+import WeilConjectures.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
 import Sheaf.AlgebraicGeometry.PseudoCoherentFiberFiniteFreeModel
 import Sheaf.AlgebraicGeometry.DerivedFiberCohomologyBaseChange
 import Mathlib.LinearAlgebra.Dimension.Constructions

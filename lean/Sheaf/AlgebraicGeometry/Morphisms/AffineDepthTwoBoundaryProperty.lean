@@ -12,7 +12,7 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.RingTheory.DualDepthTwo
-import Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualStalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDoubleDualStalk
 @[expose] public section
 universe u v w
 open CategoryTheory Opposite TopCat.Presheaf

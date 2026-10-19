@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 
 import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 import Sheaf.RingTheory.MvPowerSeriesQuotientKernel
-import Sheaf.AlgebraicGeometry.Morphisms.FlatBaseChangeClosedFiberGeneralizations
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatBaseChangeClosedFiberGeneralizations
 
 /-!
 # Generic image of the extended maximal ideal under a flat power-series chart

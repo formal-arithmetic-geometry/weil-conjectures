@@ -20,7 +20,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedRestriction
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSplitAssembly
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedSectionFullyFaithful
 

@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.RingHom.Finite
-import Sheaf.FieldTheory.PowerInBaseAfterLocalization
+import WeilConjectures.FieldTheory.PowerInBaseAfterLocalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-!

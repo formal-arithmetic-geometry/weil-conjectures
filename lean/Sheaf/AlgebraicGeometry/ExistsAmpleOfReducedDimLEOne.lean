@@ -11,7 +11,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GluedComponentAffineSection
 import Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection
-import Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite
+import WeilConjectures.AlgebraicGeometry.ComponentIntersectionsFinite
 import Sheaf.AlgebraicGeometry.IntegralDimOneAmple
 import Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme

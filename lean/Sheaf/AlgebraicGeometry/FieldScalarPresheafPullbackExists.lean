@@ -5,7 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FieldScalarPresheafRingMap
+public import WeilConjectures.AlgebraicGeometry.FieldScalarPresheafRingMap
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
 
 /-! # Existence of presheaf scalar extension in larger universes

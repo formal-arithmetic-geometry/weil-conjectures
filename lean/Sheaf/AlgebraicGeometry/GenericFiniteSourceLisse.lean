@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.FiniteGenericFiberStratumInteriors
+import WeilConjectures.AlgebraicGeometry.FiniteGenericFiberStratumInteriors
 import Sheaf.AlgebraicGeometry.LisseStratumInteriors
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 

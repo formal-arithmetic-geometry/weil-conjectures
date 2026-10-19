@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.EquationCountFibreDimensionFlat
 import Sheaf.RingTheory.PopescuPartialChartPolynomial
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
+import WeilConjectures.RingTheory.KaehlerDifferentialsPolynomialExtension
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import all WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 

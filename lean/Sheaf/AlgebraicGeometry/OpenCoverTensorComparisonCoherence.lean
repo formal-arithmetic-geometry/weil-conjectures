@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenCoverRefinementComparisons
 import Sheaf.AlgebraicGeometry.OpenCoverTensorRecoveryNormalization
-import Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence
 
 /-! # Coherence of tensor pullback comparisons on refined charts
 

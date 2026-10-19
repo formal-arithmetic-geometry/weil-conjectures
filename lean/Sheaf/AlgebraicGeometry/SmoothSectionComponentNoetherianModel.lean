@@ -6,7 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelData
-import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelComponents
+import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentNoetherianModelComponents
 
 /-!
 # Local noetherian models for a smooth section component

@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.CategoryTheory.InjectiveSheafCechAcyclic
-import Sheaf.AlgebraicGeometry.FiniteEtaleCechFilteredColimit
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleCechFilteredColimit
 
 /-!
 # Acyclicity of filtered colimits of injective étale sheaves

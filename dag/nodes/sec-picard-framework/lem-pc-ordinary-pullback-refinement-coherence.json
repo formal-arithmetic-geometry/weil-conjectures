@@ -94,13 +94,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryPullbackRefinementCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OrdinaryPullbackRefinementCoherence.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.ordinary_pullback_refinement_coherence",
   "statement": "theorem ordinary_pullback_refinement_coherence\n    {X A B C K L W : Scheme.{u}}\n    (f : A ⟶ X) (sK : B ⟶ A) (sL : C ⟶ A)\n    (pK : K ⟶ B) (pL : L ⟶ C) (rK : K ⟶ W) (rL : L ⟶ W) (h : W ⟶ X)\n    (d : C ⟶ B) (z : L ⟶ K)\n    (Hd : d ≫ sK = sL) (Hz : z ≫ pK = pL ≫ d) (H0 : z ≫ rK = rL)\n    (HK : (pK ≫ sK) ≫ f = rK ≫ h) (HL : (pL ≫ sL) ≫ f = rL ≫ h)\n    (M : X.Modules) :\n    let S := pullback f\n    let QK := pullback sK\n    let QL := pullback sL\n    let PK := pullback pK\n    let PL := pullback pL\n    let RK := pullback rK\n    let RL := pullback rL\n    let D := pullback d\n    let Zf := pullback z\n    let rhoK0 : pullback h ⋙ RK ≅ (S ⋙ QK) ⋙ PK :=\n      pullbackComp rK h ≪≫ (pullbackCongr HK).symm ≪≫\n      (pullbackComp (pK ≫ sK) f).symm ≪≫\n      Functor.isoWhiskerLeft S (pullbackComp pK sK).symm ≪≫\n      (Functor.associator S QK PK).symm\n    let rhoL0 : pullback h ⋙ RL ≅ (S ⋙ QL) ⋙ PL :=\n      pullbackComp rL h ≪≫ (pullbackCongr HL).symm ≪≫\n      (pullbackComp (pL ≫ sL) f).symm ≪≫\n      Functor.isoWhiskerLeft S (pullbackComp pL sL).symm ≪≫\n      (Functor.associator S QL PL).symm\n    let gamma0 : S ⋙ QL ≅ (S ⋙ QK) ⋙ D := Functor.isoWhiskerLeft S\n      ((pullbackCongr Hd).symm ≪≫ (pullbackComp d sK).symm) ≪≫\n      (Functor.associator S QK D).symm\n    let beta0 : RK ⋙ Zf ≅ RL := pullbackComp z rK ≪≫ pullbackCongr H0\n    let delta0 : PK ⋙ Zf ≅ D ⋙ PL :=\n      pullbackComp z pK ≪≫ pullbackCongr Hz ≪≫ (pullbackComp pL d).symm\n    ∀ (rhoK : pullback h ⋙ RK ≅ (S ⋙ QK) ⋙ PK) (_ : rhoK = rhoK0)\n      (rhoL : pullback h ⋙ RL ≅ (S ⋙ QL) ⋙ PL) (_ : rhoL = rhoL0)\n      (gamma : S ⋙ QL ≅ (S ⋙ QK) ⋙ D) (_ : gamma = gamma0)\n      (beta : RK ⋙ Zf ≅ RL) (_ : beta = beta0)\n      (delta : PK ⋙ Zf ≅ D ⋙ PL) (_ : delta = delta0),\n    Zf.map (rhoK.hom.app M) ≫ delta.hom.app ((S ⋙ QK).obj M) ≫\n      PL.map (gamma.inv.app M) = beta.hom.app ((pullback h).obj M) ≫\n        rhoL.hom.app M",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OrdinaryPullbackRefinementCoherence; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.Defs
 
-import Sheaf.RingTheory.Smooth.AugmentationFirstOrderCoordinates
+import WeilConjectures.RingTheory.Smooth.AugmentationFirstOrderCoordinates
 import Sheaf.RingTheory.Smooth.AugmentationPolynomialTruncations
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 

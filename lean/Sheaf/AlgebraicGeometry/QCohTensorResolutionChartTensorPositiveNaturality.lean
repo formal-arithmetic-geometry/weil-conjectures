@@ -7,7 +7,7 @@ public import Sheaf.AlgebraicGeometry.QCohTensorResolutionRestrictionTensorCompo
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalSummandNaturality
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorTransport
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTotalSummandPrecomp
-public import Sheaf.AlgebraicGeometry.QCohTensorResolutionThreeSquares
+public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionThreeSquares
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartSummandNaturality
 
 @[expose] public section

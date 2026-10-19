@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 import Sheaf.AlgebraicGeometry.Modules.ConstantRankMapKernelImage
-import Sheaf.AlgebraicGeometry.Modules.LocallySplitShortComplexHomology
+import WeilConjectures.AlgebraicGeometry.Modules.LocallySplitShortComplexHomology
 
 /-! # Homology of a complex with constant differential ranks over a reduced scheme
 

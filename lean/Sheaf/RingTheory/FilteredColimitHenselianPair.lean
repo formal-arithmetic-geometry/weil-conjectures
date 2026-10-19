@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RingTheory.HenselianFactorizationCriterion
-import Sheaf.RingTheory.FilteredColimitFactorizationDescent
+import WeilConjectures.RingTheory.FilteredColimitFactorizationDescent
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 

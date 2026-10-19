@@ -4,7 +4,7 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Sheaves.Functors
 import Mathlib.Topology.Sheaves.Stalks
 import Mathlib.Topology.Sheaves.Sheafify
-import Sheaf.Topology.SpectralClosedRestrictionSurjective
+import WeilConjectures.Topology.SpectralClosedRestrictionSurjective
 
 @[expose] public section
 

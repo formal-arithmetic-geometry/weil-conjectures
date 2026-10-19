@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.AlgebraicGeometry.Spec
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.SplitReductionFactorThickenings
+import WeilConjectures.AlgebraicGeometry.SplitReductionFactorThickenings
 import Sheaf.AlgebraicGeometry.ThickeningIntegral
 
 /-!

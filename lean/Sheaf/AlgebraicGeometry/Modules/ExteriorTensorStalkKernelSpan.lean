@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotientKernel
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorQuotientKernel
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.ShortComplex.Ab

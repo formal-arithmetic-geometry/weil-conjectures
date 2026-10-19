@@ -7,7 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
-import Sheaf.AlgebraicGeometry.PointedClopenIntegralModel
+import WeilConjectures.AlgebraicGeometry.PointedClopenIntegralModel
 import Sheaf.AlgebraicGeometry.GenericGeometricallyConnectedSpread
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 

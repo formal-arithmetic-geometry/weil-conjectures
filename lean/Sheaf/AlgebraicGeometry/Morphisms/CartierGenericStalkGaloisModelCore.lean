@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.NumberTheory.RamificationInertia.Galois
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct
-import Sheaf.AlgebraicGeometry.Morphisms.StalkProductResidueComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.StalkProductResidueComparison
 
 /-! # Geometric factor and residue square at a Cartier DVR stalk
 

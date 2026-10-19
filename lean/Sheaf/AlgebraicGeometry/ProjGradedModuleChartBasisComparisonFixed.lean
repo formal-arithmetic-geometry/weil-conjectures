@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedMaps
-import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedGenerators
+import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixedGenerators
 
 /-!
 # Principal-open section comparison for a graded-module chart

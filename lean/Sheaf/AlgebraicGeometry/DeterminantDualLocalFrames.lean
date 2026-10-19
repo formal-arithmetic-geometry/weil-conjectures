@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-import Sheaf.AlgebraicGeometry.Modules.DualLocalEvaluation
+import WeilConjectures.AlgebraicGeometry.Modules.DualLocalEvaluation
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafLocalFreeComparison
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.LinearAlgebra.ExteriorPower.Basis

@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Dimension
+import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.Dimension
 import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart
 
 /-! # Quasi-finite polynomial charts at a fibre point

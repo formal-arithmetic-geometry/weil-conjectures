@@ -5,7 +5,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryStalkIso
+import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryStalkIso
 
 /-!
 # Geometry of a nonempty smooth geometrically connected family

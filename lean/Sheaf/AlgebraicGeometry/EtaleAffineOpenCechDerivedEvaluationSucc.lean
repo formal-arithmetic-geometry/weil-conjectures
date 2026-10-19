@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import Sheaf.CategoryTheory.SpectralSequenceNatRowZero
+import WeilConjectures.CategoryTheory.SpectralSequenceNatRowZero
 import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns
 import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal
 

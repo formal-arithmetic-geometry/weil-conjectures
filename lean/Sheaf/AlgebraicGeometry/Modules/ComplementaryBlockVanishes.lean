@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 
 import Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockResidueVanishes
-import Sheaf.AlgebraicGeometry.Modules.FreeMapResidueDetection
+import WeilConjectures.AlgebraicGeometry.Modules.FreeMapResidueDetection
 
 /-! # Vanishing of the complementary block on a reduced scheme
 

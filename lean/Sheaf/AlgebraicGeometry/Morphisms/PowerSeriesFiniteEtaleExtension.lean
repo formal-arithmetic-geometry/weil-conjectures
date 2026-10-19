@@ -15,7 +15,7 @@ import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint
 
 /-!
 # Extending finite etale covers of a power-series open
