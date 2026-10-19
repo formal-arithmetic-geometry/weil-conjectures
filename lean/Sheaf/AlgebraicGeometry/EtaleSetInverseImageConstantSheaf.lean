@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafExists
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafUnique
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
 
 /-! # Inverse image of a set-valued constant étale sheaf is constant

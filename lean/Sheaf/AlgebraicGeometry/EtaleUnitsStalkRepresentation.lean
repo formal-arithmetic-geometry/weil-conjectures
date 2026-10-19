@@ -7,8 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
-import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
+import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.CategoryTheory.Sites.Torsor

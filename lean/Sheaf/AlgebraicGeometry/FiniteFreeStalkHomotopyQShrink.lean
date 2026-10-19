@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.AlgebraicGeometry.Stalk

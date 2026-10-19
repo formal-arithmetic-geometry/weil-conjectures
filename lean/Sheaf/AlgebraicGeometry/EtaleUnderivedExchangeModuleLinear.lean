@@ -6,7 +6,7 @@ Authors: SHEAF groups U1 and E2
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Linearity of the underived exchange morphism

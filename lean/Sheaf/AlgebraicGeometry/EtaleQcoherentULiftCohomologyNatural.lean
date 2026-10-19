@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift
-import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNaturalSucc
+import WeilConjectures.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNaturalSucc
 
 /-! # Naturality of the finite-cover coefficient comparison
 

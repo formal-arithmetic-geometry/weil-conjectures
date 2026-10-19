@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.FinitePresentation
 import Sheaf.AlgebraicGeometry.FiniteEtaleCompletionLift
-import Sheaf.AlgebraicGeometry.FiniteEtaleAlgebraStage
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleAlgebraStage
 import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!

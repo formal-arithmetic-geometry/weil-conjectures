@@ -14,7 +14,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!

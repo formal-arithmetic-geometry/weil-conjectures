@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
-import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality
+import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Finitely many equations of maps between finite free sheaves
 

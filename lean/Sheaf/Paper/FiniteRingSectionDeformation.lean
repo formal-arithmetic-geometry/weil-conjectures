@@ -27,7 +27,7 @@ import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
 import WeilConjectures.Compactification.NagataCompactification
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
 import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
@@ -37,7 +37,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Normalized section deformation for arbitrary finite rings
 

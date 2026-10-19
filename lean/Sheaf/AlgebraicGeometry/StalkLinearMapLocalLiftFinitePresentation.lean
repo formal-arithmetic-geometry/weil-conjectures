@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.FiniteFreeLocalStalkMapLift
-import Sheaf.AlgebraicGeometry.FiniteFreeLocalHomZero
+import WeilConjectures.AlgebraicGeometry.FiniteFreeLocalStalkMapLift
+import WeilConjectures.AlgebraicGeometry.FiniteFreeLocalHomZero
 import Sheaf.AlgebraicGeometry.LocalStalkFactorizationGermComparison
 
 /-! # Spreading one linear map of stalks from a finitely presented source

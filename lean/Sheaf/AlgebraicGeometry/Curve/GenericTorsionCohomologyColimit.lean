@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 
 /-!

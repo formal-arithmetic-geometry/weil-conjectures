@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
-import Sheaf.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
 
 
 /-!

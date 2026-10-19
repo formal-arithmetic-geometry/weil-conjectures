@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonProductRing
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv
-import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizationEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorNormalizationEvaluation
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction

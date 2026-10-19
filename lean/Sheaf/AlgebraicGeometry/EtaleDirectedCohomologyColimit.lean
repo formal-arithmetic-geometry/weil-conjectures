@@ -6,8 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleInjectiveColimitAcyclic
 import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 import Mathlib.CategoryTheory.Sites.Adjunction
 

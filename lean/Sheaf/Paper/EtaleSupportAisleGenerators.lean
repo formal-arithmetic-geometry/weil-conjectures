@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit

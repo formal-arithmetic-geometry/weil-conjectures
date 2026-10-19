@@ -35,7 +35,7 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
 import Sheaf.CategoryTheory.FunctorPreservesSequentialHomotopyColimit
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
@@ -43,7 +43,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.Topology.Defs.Filter
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -63,7 +63,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.CategoryTheory.Triangulated.GeneratingClassDetermination
 import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Constant coefficient tensor calculus for the exceptional adjoint
 

@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -42,7 +42,6 @@ import Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants
 import Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction
 import Sheaf.AlgebraicGeometry.GeometricPointProjectionComparison
 import Sheaf.AlgebraicGeometry.IntegralDerivedTensorBoundedTorsion
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # The integral proper projection formula

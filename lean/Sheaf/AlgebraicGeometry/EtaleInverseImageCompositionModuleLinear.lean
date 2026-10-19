@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinearCore
 
 /-!

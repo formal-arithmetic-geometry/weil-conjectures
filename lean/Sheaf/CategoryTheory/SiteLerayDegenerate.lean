@@ -5,7 +5,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
+import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves

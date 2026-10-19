@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
-import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -20,7 +20,6 @@ import Sheaf.Paper.ExchangeIdentityPasting
 import Sheaf.AlgebraicGeometry.FieldExtensionExchange
 import Sheaf.AlgebraicGeometry.SeparableClosureConservative
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Reduction of open-immersion exchange to a separable closure

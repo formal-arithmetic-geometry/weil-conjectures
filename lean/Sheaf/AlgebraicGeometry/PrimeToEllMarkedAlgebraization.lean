@@ -26,7 +26,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
 import Sheaf.RingTheory.CompletionDimension
-import Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
+import WeilConjectures.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import Sheaf.RingTheory.GRingCompletionRegular

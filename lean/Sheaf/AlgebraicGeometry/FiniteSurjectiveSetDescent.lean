@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+public import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentEqualizer
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives
-import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionEventualEquality
+import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionEventualEquality
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 

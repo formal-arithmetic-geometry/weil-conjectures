@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!

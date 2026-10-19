@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.CategoryTheory.Galois.AutProfinite
 import Sheaf.CategoryTheory.Galois.GaloisTransitive
-import Sheaf.FieldTheory.EtaleFieldGaloisClassification
+import WeilConjectures.FieldTheory.EtaleFieldGaloisClassification
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected

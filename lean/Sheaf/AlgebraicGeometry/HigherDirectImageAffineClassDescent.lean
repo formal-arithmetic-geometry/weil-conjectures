@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi
 import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing
-import Sheaf.AlgebraicGeometry.EtaleSectionColimitRepresentative
+import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitRepresentative
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of affine higher-image sections

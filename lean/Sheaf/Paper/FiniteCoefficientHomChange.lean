@@ -19,7 +19,6 @@ import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.FiniteFieldFiber
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.Derived.Hom
@@ -62,7 +61,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Defs.Filter
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.Paper.InternalAdjunctionPairingChange
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
+import WeilConjectures.AlgebraicGeometry.FieldPullbackRankOneTrivial
 
 /-! # Triviality of descended Picard coefficients on the source fibre -/
 

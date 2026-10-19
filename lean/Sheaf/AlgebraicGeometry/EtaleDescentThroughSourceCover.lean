@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.FlatCompositeFibreDimensionAtPoint
-import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
+import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 import Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!

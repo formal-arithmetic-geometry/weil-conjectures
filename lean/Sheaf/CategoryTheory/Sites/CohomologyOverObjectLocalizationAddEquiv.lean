@@ -4,7 +4,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 import Mathlib.CategoryTheory.Sites.Pullback
 import Sheaf.CategoryTheory.Sites.OverPullbackPreservesInjectives
-import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
+import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 
 @[expose] public section
 

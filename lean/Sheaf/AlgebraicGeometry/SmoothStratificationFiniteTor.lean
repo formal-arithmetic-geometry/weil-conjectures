@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -60,7 +60,6 @@ import Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange
 import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.SixFunctors.EtaleStratifiedStalkIdentification
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Smooth stratification of bounded constructible etale complexes of finite Tor amplitude

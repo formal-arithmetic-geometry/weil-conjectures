@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.FiniteType
-import all Sheaf.AlgebraicGeometry.FiniteEtaleAlgebraStage
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleAlgebraStage
 import Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation
 
 /-!

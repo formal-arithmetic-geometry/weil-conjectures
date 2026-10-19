@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.FixedAbelianDescendedSectionLift
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 
 /-! # Scalar continuity for descended qcqs étale objects
 

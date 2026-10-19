@@ -22,7 +22,7 @@ import Sheaf.EtaleCohomology.SepClosedFieldVanishing
 import Mathlib.Algebra.Homology.Additive
 import Sheaf.AlgebraicGeometry.PullbackConstantModule
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -52,13 +52,12 @@ import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.FieldDiscreteModules
 import Sheaf.AlgebraicGeometry.KunnethGlobalSections
 import Sheaf.AlgebraicGeometry.RGammaUnboundedBounded
 import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

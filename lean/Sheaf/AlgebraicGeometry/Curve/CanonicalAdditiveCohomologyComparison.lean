@@ -12,7 +12,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechInverseImage
 import Sheaf.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
+import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 
 /-! # Canonical additive comparison and its inverse-image square
 

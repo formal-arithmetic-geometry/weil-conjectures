@@ -25,7 +25,7 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Free
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
@@ -37,7 +37,6 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection

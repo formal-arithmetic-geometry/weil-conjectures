@@ -8,8 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
 import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit

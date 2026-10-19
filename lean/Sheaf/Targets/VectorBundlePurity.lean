@@ -21,7 +21,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.Defs.Filter
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import Sheaf.Paper.FiniteTateSiteDescent
@@ -31,7 +30,6 @@ import Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint
 import Sheaf.AlgebraicGeometry.CompactSupportProjectionOpenRestriction

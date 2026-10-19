@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison
 import Mathlib.Algebra.BigOperators.Pi
-import Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface
+import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorCechNormalizedCoface
 
 @[expose] public section
 

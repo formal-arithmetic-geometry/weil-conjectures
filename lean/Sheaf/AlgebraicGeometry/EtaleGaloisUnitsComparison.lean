@@ -6,7 +6,7 @@ Authors: SHEAF worker P2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Sheaf.FieldTheory.GaloisUnitsHomogeneousComparison
 import Sheaf.AlgebraicGeometry.EtaleUnitsTwoCocycleComparison
 

@@ -15,7 +15,7 @@ public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.RingTheory.DimensionAtPointComponents
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import WeilConjectures.RingTheory.QuasiFiniteFourRings
 import WeilConjectures.Mathlib.Topology.KrullDimension

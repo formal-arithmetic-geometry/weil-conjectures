@@ -33,7 +33,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -81,7 +81,6 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.StratumAmbientHom
 import Sheaf.SixFunctors.EtaleGenericHomTriangle
 import Sheaf.SixFunctors.EtaleGenericPerfectHom
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Ordinary etale exchange at a geometric generic point
 

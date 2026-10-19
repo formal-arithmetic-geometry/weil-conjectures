@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit
 import WeilConjectures.AlgebraicGeometry.AffineSectionsColimit
 import Mathlib.CategoryTheory.Filtered.Final
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Affine stage lifting of étale inverse-image sections
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, using Sites Tag 09YN. -/

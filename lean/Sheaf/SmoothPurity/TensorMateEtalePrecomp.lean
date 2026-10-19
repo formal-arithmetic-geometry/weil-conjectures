@@ -33,10 +33,9 @@ import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
 import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 

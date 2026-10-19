@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 
-import Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift
 import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackCompatible
 import WeilConjectures.AlgebraicGeometry.EtaleTorsorUnitActionUnique
 

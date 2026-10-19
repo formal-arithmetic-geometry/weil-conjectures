@@ -24,7 +24,7 @@ import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 import Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility
 import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.SixFunctors.OpenClosed.Stalk

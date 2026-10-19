@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechCoefficientMap
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
+import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleAffineOpenCechResolutionColumns

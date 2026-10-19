@@ -5,13 +5,12 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!

@@ -12,7 +12,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.CategoryTheory.Sites.Adjunction
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
-import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion

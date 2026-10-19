@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import all Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality
+import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Shrinking equality of morphisms with finite locally free source
 

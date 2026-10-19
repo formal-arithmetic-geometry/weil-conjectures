@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Mathlib.CategoryTheory.Preadditive.Injective.Basic

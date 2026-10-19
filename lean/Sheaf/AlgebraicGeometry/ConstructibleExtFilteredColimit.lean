@@ -19,7 +19,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
 import Mathlib.CategoryTheory.Abelian.Injective.Ext

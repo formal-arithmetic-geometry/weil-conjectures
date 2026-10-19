@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.AlgebraicGeometry.RGammaUnboundedWellDefined
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact

@@ -19,7 +19,7 @@ public import Sheaf.Paper.RingedTopoiDerivedTensorPullback
 public import Sheaf.AlgebraicGeometry.SupportCohomology
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import Sheaf.CategoryTheory.FirstQuadrantLowestRowEdge
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence

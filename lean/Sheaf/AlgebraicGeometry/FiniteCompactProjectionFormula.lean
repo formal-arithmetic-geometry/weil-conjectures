@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField

@@ -19,7 +19,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 import WeilConjectures.RingTheory.DimensionAtPointComponents
 import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import WeilConjectures.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 
 /-!
 # Dimension lower bound for components of a finite-type fibre

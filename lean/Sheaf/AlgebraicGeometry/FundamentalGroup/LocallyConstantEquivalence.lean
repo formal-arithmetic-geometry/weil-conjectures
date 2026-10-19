@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 
 /-!

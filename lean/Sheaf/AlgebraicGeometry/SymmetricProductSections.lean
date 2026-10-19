@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import WeilConjectures.AlgebraicGeometry.PositiveTensorFamily
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-!

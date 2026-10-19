@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
+import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitSectionsNatural
 import Sheaf.AlgebraicGeometry.EtaleQcoherentSourceComparisonNatural
 
 /-! # Scalar-compatible comparison for additive first cohomology -/

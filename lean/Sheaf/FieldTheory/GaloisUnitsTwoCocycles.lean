@@ -5,7 +5,7 @@ Authors: SHEAF worker N3
 -/
 module
 
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Mathlib.Tactic.Abel
 
 /-!

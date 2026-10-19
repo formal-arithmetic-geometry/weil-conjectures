@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
 import Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition
-import Sheaf.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit
+import WeilConjectures.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Canonical single-complex transport of a derived scalar counit

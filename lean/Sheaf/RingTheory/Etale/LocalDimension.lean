@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Unramified.LocalStructure
-import Sheaf.RingTheory.QuasiFiniteLocalDimension
+import WeilConjectures.RingTheory.QuasiFiniteLocalDimension
 import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 
 /-!

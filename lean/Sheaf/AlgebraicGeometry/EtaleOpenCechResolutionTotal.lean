@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleOpenCechResolutionDoubleCom
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
-import Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
+import WeilConjectures.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # Total homology of the étale open Čech resolution

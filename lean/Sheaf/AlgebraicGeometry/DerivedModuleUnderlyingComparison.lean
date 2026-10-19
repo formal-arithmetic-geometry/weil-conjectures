@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackTransport
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-public import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 public import Sheaf.CategoryTheory.DerivedExactSquare
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 

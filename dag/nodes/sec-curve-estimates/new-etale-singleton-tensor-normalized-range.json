@@ -77,13 +77,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingletonTensorNormalizedRange.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleSingletonTensorNormalizedRange.lean",
   "declaration": "AlgebraicGeometry.Scheme.singletonTensorDegreeComparisonHom_normalized_range",
   "statement": "theorem singletonTensorDegreeComparisonHom_normalized_range\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (n : ℕ)\n    (f : (singletonTensorAmitsur X F U W g).X n ⟶\n      (singletonTensorCech X F U W g).X n)\n    (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :\n    let P := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)\n    let N := Γ((Modules.tensorPullback P.left.hom).obj F, ⊤)\n    let D : (Fin (n + 1) → Fin 1) → AddCommGrpCat.{u + 1} :=\n      fun _ ↦ AddCommGrpCat.of (ULift.{u + 1} N)\n    let q : (singletonTensorCech X F U W g).X n →+ N :=\n      (AddEquiv.ulift : ULift.{u + 1} N ≃+ N).toAddMonoidHom.comp\n        (Pi.π D (fun _ ↦ 0)).hom\n    Set.range (fun p : Γ((Modules.tensorPullback U.hom).obj F, ⊤) ×\n      (Fin (n + 1) → Γ(W.left, ⊤)) ↦\n        (∏ k : Fin (n + 1),\n          (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop (p.2 k)) •\n            Modules.etaleTensorSectionsRestriction F P.hom p.1) ⊆\n      (q.comp f.hom).range",
   "branch": "sheaf-dag",
   "by": "J2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

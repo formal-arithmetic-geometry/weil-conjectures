@@ -5,7 +5,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSheafComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative

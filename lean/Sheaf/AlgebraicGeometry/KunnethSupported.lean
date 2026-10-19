@@ -50,7 +50,7 @@ import Mathlib.Topology.Constructible
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -60,7 +60,6 @@ import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
 import Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing
 import Sheaf.AlgebraicGeometry.SupportSiteComparison
 import Sheaf.AlgebraicGeometry.SupportedProductLocalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Kunneth for cohomology with closed support

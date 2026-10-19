@@ -5,12 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Inverse image of a free etale module sheaf

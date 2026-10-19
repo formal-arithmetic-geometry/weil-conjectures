@@ -6,7 +6,7 @@ Authors: SHEAF worker P2
 module
 
 public import Mathlib.Algebra.BrauerGroup.Defs
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import WeilConjectures.Algebra.Central.ReducedNorm
 import Sheaf.FieldTheory.BrauerScalarDefectExists
 import Sheaf.FieldTheory.BrauerScalarDefectFaithful

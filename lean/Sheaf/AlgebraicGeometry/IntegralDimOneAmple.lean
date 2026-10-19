@@ -10,9 +10,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve
-import Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
+import WeilConjectures.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
 import Sheaf.AlgebraicGeometry.FindGloballyGenerated
-import Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
 
 /-! # Ample invertible modules on integral curves
 

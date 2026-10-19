@@ -21,7 +21,7 @@ public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
 import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
-import Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives
+import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.FiveLemma
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive

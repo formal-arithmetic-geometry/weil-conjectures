@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Mathlib.CategoryTheory.Presentable.Limits
 import Mathlib.CategoryTheory.Presentable.Finite
 

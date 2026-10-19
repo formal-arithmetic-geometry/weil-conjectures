@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -33,7 +33,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

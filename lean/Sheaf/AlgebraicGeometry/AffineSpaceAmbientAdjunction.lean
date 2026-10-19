@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -40,7 +40,6 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 import Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Affine-space ambient adjunction

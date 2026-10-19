@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Multiplicity
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
-import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 import Mathlib.Algebra.CharP.CharAndCard
 import Mathlib.Algebra.CharP.Algebra
 

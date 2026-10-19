@@ -5,11 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluation
-import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective
+import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationBijective
 
 /-!
 # The geometric stalk of units and its Galois action

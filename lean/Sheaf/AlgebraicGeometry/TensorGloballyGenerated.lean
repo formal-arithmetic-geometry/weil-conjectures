@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import WeilConjectures.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.AlgebraicGeometry.FiniteGlobalGeneratingFamily

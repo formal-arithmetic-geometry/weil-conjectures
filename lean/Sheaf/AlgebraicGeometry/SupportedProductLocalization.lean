@@ -43,7 +43,7 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -58,7 +58,6 @@ import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
 import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
 import Sheaf.Paper.ExternalRHomConePairing
 import Sheaf.SixFunctors.OpenClosedFlatness
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Supported exterior products and localization triangles

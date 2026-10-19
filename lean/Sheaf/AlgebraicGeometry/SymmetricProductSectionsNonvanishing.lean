@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardChartsNonvanishing
 import Sheaf.AlgebraicGeometry.SymmetricProductSectionsPermutation
-import Sheaf.AlgebraicGeometry.TensorSectionAffineOpen
+import WeilConjectures.AlgebraicGeometry.TensorSectionAffineOpen
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!

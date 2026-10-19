@@ -10,7 +10,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBa
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Sites.Adjunction
-import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 
 /-!
 # Module cohomology and underlying abelian cohomology

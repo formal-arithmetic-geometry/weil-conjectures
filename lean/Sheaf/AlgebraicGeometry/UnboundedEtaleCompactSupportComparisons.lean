@@ -39,7 +39,7 @@ import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -47,7 +47,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Paper.UnboundedProperOpenInterchange
 import Sheaf.Paper.CompactSupportStaircaseExpansion
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat

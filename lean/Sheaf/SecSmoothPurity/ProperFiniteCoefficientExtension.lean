@@ -8,7 +8,7 @@ public import Sheaf.Paper.PurEtaleScalarMateProjection
 public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 public import Mathlib.Topology.Defs.Filter
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -21,7 +21,6 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.SixFunctors.TensorProjectionAdjunct
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 

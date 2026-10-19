@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.BrauerGroup.Defs
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.Topology.LocallyConstant.Basic
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 
 /-!
 # The scalar-defect relation for a central simple algebra

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.ExtEvaluation
+import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Sheaf.AlgebraicGeometry.HomComplexSingle
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

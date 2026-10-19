@@ -4,7 +4,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.Separable
-import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
+import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 import Sheaf.TraceFormula.SmoothSeparableHypersurfaceSlice
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType

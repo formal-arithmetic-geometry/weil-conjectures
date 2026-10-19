@@ -72,13 +72,12 @@ import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.RingTheory.SimpleFiltration
 /-!
 # Weighted trace for a quasi-finite flat morphism

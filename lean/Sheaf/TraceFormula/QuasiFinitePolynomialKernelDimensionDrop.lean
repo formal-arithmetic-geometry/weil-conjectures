@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import WeilConjectures.RingTheory.QuasiFiniteFourRings
-import Sheaf.RingTheory.QuasiFiniteLocalDimension
+import WeilConjectures.RingTheory.QuasiFiniteLocalDimension
 
 /-!
 # A nonzero polynomial relation lowers the dimension of a quasi-finite polynomial algebra

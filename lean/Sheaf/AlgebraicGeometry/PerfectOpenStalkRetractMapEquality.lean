@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
-import all Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality
+import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
 
 /-! # Shrinking stalk equality for a finite retract sheaf
 

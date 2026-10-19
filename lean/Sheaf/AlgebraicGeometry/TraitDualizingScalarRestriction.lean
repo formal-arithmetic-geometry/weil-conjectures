@@ -32,7 +32,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective

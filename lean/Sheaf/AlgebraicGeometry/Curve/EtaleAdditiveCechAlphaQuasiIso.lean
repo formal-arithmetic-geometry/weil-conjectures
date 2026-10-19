@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
-import Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
+import WeilConjectures.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCore
 

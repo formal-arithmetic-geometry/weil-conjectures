@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import Sheaf.FieldTheory.GaloisUnitsCohomology
+public import WeilConjectures.FieldTheory.GaloisUnitsCohomology
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.AlgebraicGeometry.EtaleFieldSectionsInvariants
 import Sheaf.AlgebraicGeometry.EtaleUnitsStalkRepresentation

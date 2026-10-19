@@ -20,7 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -28,11 +28,9 @@ import Sheaf.CategoryTheory.SiteInverseImageTensor
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 @[expose] public section
 universe u

@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation
+import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation
 import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
 import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
 import Mathlib.Algebra.Category.Grp.Kernels

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.FieldScalarRestrictionInjectives
+import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.Homology.ConcreteCategory
 import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 

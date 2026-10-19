@@ -19,7 +19,7 @@ import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.DirectImageFinitenessInputHolds
 import Sheaf.AlgebraicGeometry.DirectImageFinitenessInput
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.DerivedCategories

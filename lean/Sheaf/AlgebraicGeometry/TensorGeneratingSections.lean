@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import WeilConjectures.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct

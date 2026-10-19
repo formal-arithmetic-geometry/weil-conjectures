@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
-import Sheaf.AlgebraicGeometry.ExtEvaluation
+import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import Sheaf.CategoryTheory.RightDerivedExactComposite
 import Sheaf.CategoryTheory.RightDerivedExactCompositeNatural
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

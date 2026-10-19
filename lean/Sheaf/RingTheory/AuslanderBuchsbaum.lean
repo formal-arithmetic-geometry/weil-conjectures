@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors
+import WeilConjectures.AlgebraicGeometry.ExactFreeComplexLastMinors
 import Sheaf.RingTheory.DepthInSES
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Mathlib.RingTheory.Regular.ProjectiveDimension

@@ -19,7 +19,7 @@ public import Sheaf.AlgebraicGeometry.CompactifiableOverField
 public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 public import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 public import Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures

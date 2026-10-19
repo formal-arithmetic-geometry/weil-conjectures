@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift
-import Sheaf.AlgebraicGeometry.FiniteFreeChainMapStalkEquality
+import WeilConjectures.AlgebraicGeometry.FiniteFreeChainMapStalkEquality
 
 /-! # Spreading a homotopy of a bounded finite free complex
 

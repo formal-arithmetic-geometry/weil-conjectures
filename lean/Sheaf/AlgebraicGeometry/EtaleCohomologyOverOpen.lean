@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
-public import Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility
 
 /-! # Étale cohomology over an open object

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
-import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
+import WeilConjectures.AlgebraicGeometry.FieldPullbackRankOneTrivial
 
 /-! # A free generator on the descended marked fibre
 Source: Stacks Project, Tag 0BF2, fibre triviality before the perfect-complex argument.

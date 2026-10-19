@@ -54,7 +54,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.FieldDiscreteModules
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.FieldTheory.EtaleFieldGaloisClassification
+import WeilConjectures.FieldTheory.EtaleFieldGaloisClassification
 
 /-!
 # Constructible devissage and the need for lisse coefficients

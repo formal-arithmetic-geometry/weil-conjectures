@@ -51,13 +51,12 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!

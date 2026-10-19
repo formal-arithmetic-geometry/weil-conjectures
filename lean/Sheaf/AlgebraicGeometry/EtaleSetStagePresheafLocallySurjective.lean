@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives
-import Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageMatching
+import WeilConjectures.AlgebraicGeometry.EtaleSetEventualLocalStageMatching
 
 /-! # Local surjective comparison with the stage presheaf colimit
 

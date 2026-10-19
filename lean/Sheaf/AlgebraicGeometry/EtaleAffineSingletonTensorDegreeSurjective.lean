@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorSectionsSpan
-import Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange
+import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange
 import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction

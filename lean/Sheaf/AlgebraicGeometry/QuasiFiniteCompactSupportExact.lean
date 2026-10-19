@@ -42,14 +42,13 @@ import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 import Sheaf.AlgebraicGeometry.EtaleGeometricFibreCompactSections
 import Sheaf.Paper.ProperOpenTowerDerivedUnit
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Quasi-finite compact support is exact

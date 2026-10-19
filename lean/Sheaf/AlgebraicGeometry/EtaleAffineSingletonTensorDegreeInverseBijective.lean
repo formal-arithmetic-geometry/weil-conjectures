@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
+public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeKernel
 import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective
 

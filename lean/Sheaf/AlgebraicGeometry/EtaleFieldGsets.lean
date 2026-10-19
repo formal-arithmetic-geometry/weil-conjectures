@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj
+import WeilConjectures.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!

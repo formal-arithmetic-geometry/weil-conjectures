@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Defs.Filter
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!

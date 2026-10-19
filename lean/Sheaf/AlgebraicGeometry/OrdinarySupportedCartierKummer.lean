@@ -31,7 +31,7 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
@@ -43,7 +43,6 @@ import Sheaf.AlgebraicGeometry.SupportedKummerCartierPullback
 import Sheaf.AlgebraicGeometry.SupportedKummerScalarSource
 import Sheaf.AlgebraicGeometry.SupportedKummerSupportHomNaturality
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 /-!

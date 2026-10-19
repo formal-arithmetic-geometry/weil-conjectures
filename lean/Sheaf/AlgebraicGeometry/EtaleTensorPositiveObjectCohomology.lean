@@ -7,8 +7,8 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
-import Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification
+import WeilConjectures.AlgebraicGeometry.EtaleULiftInjectiveResolution
+import WeilConjectures.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification
 
 @[expose] public section
 

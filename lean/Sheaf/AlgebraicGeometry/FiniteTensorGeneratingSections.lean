@@ -5,7 +5,7 @@ Authors: SHEAF group M2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+public import WeilConjectures.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Sheaf.AlgebraicGeometry.TensorGeneratingSections
 

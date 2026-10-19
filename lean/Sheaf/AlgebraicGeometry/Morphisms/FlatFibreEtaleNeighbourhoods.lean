@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
+import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 
 /-!
 # Etale fibres of a flat morphism of finite presentation

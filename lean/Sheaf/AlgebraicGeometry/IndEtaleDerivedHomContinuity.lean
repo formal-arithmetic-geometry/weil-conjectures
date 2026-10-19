@@ -20,7 +20,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution

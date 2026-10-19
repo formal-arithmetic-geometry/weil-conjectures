@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 
 /-!
 # Enough injectives for constant-coefficient etale module sheaves

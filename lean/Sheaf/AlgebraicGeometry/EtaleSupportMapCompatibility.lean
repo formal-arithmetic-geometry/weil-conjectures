@@ -23,7 +23,7 @@ public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
@@ -56,7 +56,6 @@ import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
 import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
 import Sheaf.Paper.EtaleSumTensorTotalization
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!

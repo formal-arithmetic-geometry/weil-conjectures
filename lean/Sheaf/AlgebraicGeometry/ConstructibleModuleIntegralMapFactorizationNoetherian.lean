@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Mathlib.CategoryTheory.Presentable.Limits
 import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
-import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimit
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 

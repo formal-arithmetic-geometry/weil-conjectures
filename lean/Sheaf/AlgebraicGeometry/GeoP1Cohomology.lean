@@ -50,7 +50,7 @@ import Sheaf.Paper.PurEtaleScalarMateProjection
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.Topology.Defs.Filter
 import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.Paper.ComparisonPullbackExact

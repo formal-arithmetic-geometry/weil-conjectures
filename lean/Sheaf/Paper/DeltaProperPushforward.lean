@@ -26,7 +26,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Algebra.Homology.RhomGlobalSections

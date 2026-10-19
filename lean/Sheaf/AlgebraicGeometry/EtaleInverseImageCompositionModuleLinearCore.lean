@@ -5,7 +5,7 @@ Authors: SHEAF groups C1, R3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!

@@ -16,7 +16,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import WeilConjectures.AlgebraicGeometry.InjectiveEtaleConstantRingModule
 import WeilConjectures.CategoryTheory.SiteCechMathlibComparison
-import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 

@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

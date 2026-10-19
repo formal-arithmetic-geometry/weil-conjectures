@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.AlgebraicGeometry.SpecFieldPointResidueField
 import WeilConjectures.ConstructibleSheaf.Defs

@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GeneratingSectionsStalkSpan
-import Sheaf.AlgebraicGeometry.InvertibleStalkLinearEquiv
+import WeilConjectures.AlgebraicGeometry.InvertibleStalkLinearEquiv
 import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!

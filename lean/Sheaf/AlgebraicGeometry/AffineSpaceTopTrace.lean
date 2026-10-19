@@ -32,7 +32,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ope
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.CompactifiableOverField
@@ -66,7 +65,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.ProperProjectionFormula
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
