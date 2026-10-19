@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Flat.CategoryTheory
-import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
+import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.AdicCoefficientDatum
 public import Sheaf.Paper.IntegralUniformCoefficient
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Triangulated.Basic
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel

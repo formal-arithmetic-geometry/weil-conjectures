@@ -91,13 +91,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalInvertibleMinorBlock.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/LocalInvertibleMinorBlock.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_invertible_minor_block",
   "statement": "theorem exists_local_invertible_minor_block\n    {Y Z : Scheme.{u}} {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ) (z : Z)\n    (rows : Fin a → ULift.{u} (Fin n)) (cols : Fin a → ULift.{u} (Fin m))\n    (hminor : j.base z ∈\n      Y.basicOpen ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).submatrix rows cols).det) :\n    ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (m - a))))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        IsIso (biprod.inl ≫ eS.inv ≫\n          (restrictFunctor U.ι).map ((Modules.pullback j).map φ) ≫\n          eT.hom ≫ biprod.fst)",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

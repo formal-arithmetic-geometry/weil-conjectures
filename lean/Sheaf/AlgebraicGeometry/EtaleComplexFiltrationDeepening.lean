@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
+public import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
 import Sheaf.AlgebraicGeometry.EtaleComplexFirstPageContinuity
 import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
 import Mathlib.CategoryTheory.Presentable.Directed

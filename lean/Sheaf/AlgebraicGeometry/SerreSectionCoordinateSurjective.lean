@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 import Sheaf.AlgebraicGeometry.ProjLineSerreVanishing
-import Sheaf.AlgebraicGeometry.ProjLineCoordinateShortExact
+import WeilConjectures.AlgebraicGeometry.ProjLineCoordinateShortExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 

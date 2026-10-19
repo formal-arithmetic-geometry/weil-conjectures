@@ -7,8 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Category.ModuleCat.Free
-import Sheaf.RingTheory.FiniteConeFreeExtension
-import Sheaf.RingTheory.StabilizingConeTower
+import WeilConjectures.RingTheory.FiniteConeFreeExtension
+import WeilConjectures.RingTheory.StabilizingConeTower
 
 /-!
 # Finite obstruction groups give a finite free model

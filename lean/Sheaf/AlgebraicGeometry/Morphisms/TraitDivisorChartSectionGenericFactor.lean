@@ -17,8 +17,8 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 public import Mathlib.RingTheory.AdjoinRoot
 
-import Sheaf.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift
-import Sheaf.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFactor
+import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFactor
 import Sheaf.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSectionComparison
 
 /-! Generic section factors of a supplied trait-divisor chart. 

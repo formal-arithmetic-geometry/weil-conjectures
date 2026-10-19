@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.CartanEilenbergComparisonCycleStage
-import Sheaf.CategoryTheory.CartanEilenbergComparisonObjectStage
+import WeilConjectures.CategoryTheory.CartanEilenbergComparisonObjectStage
 
 /-! # One column step in Cartan–Eilenberg comparison
 

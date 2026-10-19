@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
 
 /-! # The cycle stage of a Cartan–Eilenberg comparison
 

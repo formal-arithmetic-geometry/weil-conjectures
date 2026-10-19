@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.FiniteConstantAbelianRefinement
+import WeilConjectures.AlgebraicGeometry.FiniteConstantAbelianRefinement
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison

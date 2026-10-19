@@ -2,7 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
-import Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock
+import WeilConjectures.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock
 import Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockVanishes
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 

@@ -112,13 +112,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.CompatibleModuleModelDescent",
-  "file": "lean/Sheaf/RingTheory/CompatibleModuleModelDescent.lean",
+  "module": "WeilConjectures.RingTheory.CompatibleModuleModelDescent",
+  "file": "lean/WeilConjectures/RingTheory/CompatibleModuleModelDescent.lean",
   "declaration": "AlgebraicGeometry.exists_eventually_compatible_module_equiv",
   "statement": "theorem exists_eventually_compatible_module_equiv\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {B M : Type w} [CommRing B] [AddCommMonoid M]\n    [Algebra (F.obj i : Type v) B] [Module B M] [Module.FinitePresentation B M]\n    (Q L : Type x) [CommRing Q] [AddCommMonoid L] [Module Q L]\n    [Module.FinitePresentation Q L]\n    (qC : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Q →+* (c.pt : Type v) ⊗[F.obj i] B)\n    (eM : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI : Algebra Q ((c.pt : Type v) ⊗[F.obj i] B) := qC.toAlgebra\n      letI : Algebra B ((c.pt : Type v) ⊗[F.obj i] B) :=\n        Algebra.TensorProduct.rightAlgebra\n      Nonempty (((c.pt : Type v) ⊗[F.obj i] B) ⊗[Q] L ≃ₗ[\n        (c.pt : Type v) ⊗[F.obj i] B] ((c.pt : Type v) ⊗[F.obj i] B) ⊗[B] M))\n    (k : I) (hik : i ≤ k)\n    (q : ∀ (j : I) (hkj : k ≤ j),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      Q →+* (F.obj j : Type v) ⊗[F.obj i] B)\n    (hqC : ∀ (j : I) (hkj : k ≤ j),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      let t : F.obj j →ₐ[F.obj i] c.pt :=\n        { (c.ι.app j).hom with\n          commutes' := fun s ↦ ConcreteCategory.congr_hom\n            (c.w (homOfLE (hik.trans hkj))) s }\n      (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n        (q j hkj) = qC)\n    (hq : ∀ (j l : I) (hkj : k ≤ j) (hkl : k ≤ l) (hjl : j ≤ l),\n      letI := (F.map (homOfLE (hik.trans hkj))).hom.toAlgebra\n      letI := (F.map (homOfLE (hik.trans hkl))).hom.toAlgebra\n      let t : F.obj j →ₐ[F.obj i] F.obj l :=\n        { (F.map (homOfLE hjl)).hom with\n          commutes' := fun s ↦ (ConcreteCategory.congr_hom\n            (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }\n      (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp\n        (q j hkj) = q l hkl) :\n    ∃ (j₀ : I) (hkj₀ : k ≤ j₀), ∀ (j : I) (h₀ : k ≤ j₀) (h₁ : j₀ ≤ j),\n      letI := (F.map (homOfLE (hik.trans (h₀.trans h₁)))).hom.toAlgebra\n      let E := (F.obj j : Type v) ⊗[F.obj i] B\n      letI : Algebra Q E := (q j (h₀.trans h₁)).toAlgebra\n      letI : Algebra B E := Algebra.TensorProduct.rightAlgebra\n      Nonempty (E ⊗[Q] L ≃ₗ[E] E ⊗[B] M)",
   "branch": "sheaf-dag",
   "by": "P4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.CompatibleModuleModelDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

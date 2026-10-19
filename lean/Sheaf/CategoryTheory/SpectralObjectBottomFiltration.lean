@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.SpectralObjectBottomPageCompatibility
+import WeilConjectures.CategoryTheory.SpectralObjectBottomPageCompatibility
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Bottom edge factorization for a first-quadrant spectral object

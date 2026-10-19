@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.ExistsLiftOfFieldCharP
-import Sheaf.RingTheory.FiniteRankCoefficientCorrection
+import WeilConjectures.RingTheory.FiniteRankCoefficientCorrection
 
 /-!
 # Lifting a finite coefficient model through a square-zero terminal layer

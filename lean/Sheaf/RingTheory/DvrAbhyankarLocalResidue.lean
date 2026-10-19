@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
 import Mathlib.FieldTheory.SeparableDegree
-import Sheaf.RingTheory.DvrEtaleUnitRootDiagram
+import WeilConjectures.RingTheory.DvrEtaleUnitRootDiagram
 import Sheaf.RingTheory.DvrUniformizerRootCompositumResidue
 
 /-! # The local residue conclusion of Abhyankar's lemma

@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives
+import WeilConjectures.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives
 /-! # Open inverse image preserves injectives
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.

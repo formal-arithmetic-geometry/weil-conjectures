@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
-import Sheaf.RingTheory.BaseChangeIdealKernelGenerators
-import Sheaf.RingTheory.LocalizationIdealKernelGenerators
+import WeilConjectures.RingTheory.BaseChangeIdealKernelGenerators
+import WeilConjectures.RingTheory.LocalizationIdealKernelGenerators
 import WeilConjectures.Algebra.TorOneSurjectiveChangeRings
 import Sheaf.RingTheory.TorIdealKernelNaturality
 import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle

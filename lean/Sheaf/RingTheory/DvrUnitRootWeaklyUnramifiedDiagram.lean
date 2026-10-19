@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Sheaf.RingTheory.DvrUnitRootAtPrime
+import WeilConjectures.RingTheory.DvrUnitRootAtPrime
 import Mathlib.RingTheory.Etale.StandardEtale
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.Ideal.GoingUp

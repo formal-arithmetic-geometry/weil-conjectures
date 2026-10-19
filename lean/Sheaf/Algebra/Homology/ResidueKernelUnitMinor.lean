@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 
 import Sheaf.Algebra.Homology.ResidueKernelUnitMinorKernel
-import Sheaf.Algebra.Homology.ResidueKernelUnitMinorQuotient
-import Sheaf.Algebra.Homology.ResidueKernelLocalizedCokernel
+import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorQuotient
+import WeilConjectures.Algebra.Homology.ResidueKernelLocalizedCokernel
 
 /-! # Unit-minor reduction for a residue rank-one kernel
 

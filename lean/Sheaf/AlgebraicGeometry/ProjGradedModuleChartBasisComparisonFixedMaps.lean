@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-import Sheaf.AlgebraicGeometry.ProjGradedModuleChartPrincipalLocalization
-import Sheaf.AlgebraicGeometry.TildePrincipalLocalizationTransport
+import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartPrincipalLocalization
+import WeilConjectures.AlgebraicGeometry.TildePrincipalLocalizationTransport
 
 /-!
 # Principal-open section comparison for a graded-module chart

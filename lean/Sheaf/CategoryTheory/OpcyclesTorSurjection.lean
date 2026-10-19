@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.CategoryTheory.OpcyclesTorKernelIso
-import Sheaf.CategoryTheory.TensorHomologyImageKernelEpi
+import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
 
 /-!
 # Tor of an opcycle cokernel

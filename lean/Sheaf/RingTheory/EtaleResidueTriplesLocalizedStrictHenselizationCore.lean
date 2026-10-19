@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
+import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
 import Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization
 import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComparison
 

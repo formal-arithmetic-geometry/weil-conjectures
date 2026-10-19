@@ -6,7 +6,7 @@ Authors: SHEAF group P4
 module
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Stalk
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
 
 /-! # Normalization of a finite field coproduct over a stalk
 Source: Stacks Project, Tags 0307 and 035I. -/
