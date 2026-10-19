@@ -1,6 +1,6 @@
 # Work queue
 
-1004 items; claim with `tools/claim.py next <group> [--stage N]`.
+1003 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (6)
 
@@ -49,7 +49,7 @@
 
 Not open yet: 295 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (969)
+## Stage 3: modules to prove (968)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -660,7 +660,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.DerivedCategory.TraceFormalLaws` | - | 6 | proof | 3 |
 | `Sheaf.CategoryTheory.ScalarLocalizationUnderlyingTelescope` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompactSupportPerfectness` | - | 1 | proof | 3 |
-| `Sheaf.Paper.CompactSupportUniformTorBound` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompletedPullbackUnitTower` | - | 3 | proof | 3 |
 | `Sheaf.Paper.CompletedStalkFrobeniusReduction` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompositeIntegrationCounit` | - | 6 | proof | 3 |
