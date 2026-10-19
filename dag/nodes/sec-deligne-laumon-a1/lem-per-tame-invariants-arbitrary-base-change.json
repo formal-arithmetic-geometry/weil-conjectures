@@ -2,7 +2,7 @@
  "id": "lem-per-tame-invariants-arbitrary-base-change",
  "kind": "statement",
  "title": "Tame invariants commute with arbitrary base change",
- "statement": "Let $A$ be a commutative ring, $G$ a finite group of order $d$ with $d\\in A^\\times$, and $M$ an $A$-module with an $A$-linear $G$-action. Write $M^G=\\{m:g(m)=m\\text{ for every }g\\in G\\}$. The $A$-linear operator $e_M=d^{-1}\\sum_{g\\in G}g$ is idempotent, has image $M^G$, and restricts to the identity on $M^G$. For every commutative $A$-algebra $B$, the natural map\n$$B\\otimes_A M^G\\longrightarrow(B\\otimes_A M)^G$$\nis an isomorphism of $B$-modules, with $G$ acting trivially on $B$. It is natural in equivariant module maps and in $B$. If $M=C$ is a commutative $A$-algebra on which $G$ acts by $A$-algebra automorphisms, this comparison is an isomorphism of $B$-algebras\n$$B\\otimes_A C^G\\simeq(B\\otimes_A C)^G.$$\nNeither $B$ nor $C$ is required to be flat over $A$. Tensor products are those of [def-weil-pbc-module-tensor-product].",
+ "statement": "Let $A$ be a commutative ring, $G$ a finite group of order $d$ with $d\\in A^\\times$, and $M$ an $A$-module with an $A$-linear $G$-action. Write $M^G=\\{m:g(m)=m\\text{ for every }g\\in G\\}$. The $A$-linear operator $e_M=d^{-1}\\sum_{g\\in G}g$ is idempotent, has image $M^G$, and restricts to the identity on $M^G$. For every commutative $A$-algebra $B$, let $G$ act on $B\\otimes_A M$ through the second factor and write $(B\\otimes_A M)^G$ for its fixed $B$-submodule. The canonical map induced by $b\\otimes m\\mapsto b\\otimes m$ and corestricted to this fixed submodule\n$$B\\otimes_A M^G\\longrightarrow(B\\otimes_A M)^G$$\nis an isomorphism of $B$-modules. It is natural in equivariant module maps and in $B$, meaning the squares formed by these canonical maps and the induced tensor maps commute. If $M=C$ is a commutative $A$-algebra on which $G$ acts by $A$-algebra automorphisms, let $(B\\otimes_A C)^G$ denote the fixed $B$-subalgebra for the action through the second factor. The canonical map induced by $b\\otimes c\\mapsto b\\otimes c$ and corestricted to that fixed subalgebra is an isomorphism of $B$-algebras\n$$B\\otimes_A C^G\\simeq(B\\otimes_A C)^G.$$\\nNeither $B$ nor $C$ is required to be flat over $A$. Tensor products are those of [def-weil-pbc-module-tensor-product].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0H36, remark-when-iso; compare Tag 0BRH, lemma-base-change-invariants. The invertible-order extension to arbitrary scalar rings is the Reynolds idempotent argument."
@@ -192,5 +192,49 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-3503a9cfe (reviewer sub-agent of L); spot-checked: PASS, no fixes: I read the item and its five steps in full; there are no new nodes. The shape is correct: one commit containing the item node and its report. Sources: I checked tags 0H36, 0BRH, 00CV and 00CX against their labels in tags/tags, and read more-algebra.tex 32628-32675. 0H36 covers only R^G/J and 0BRH only the flat case, so marking the proof as written by an agent (Reynolds argument) is correct. Steps: Step 1 (the averaging operator is idempotent with image M^G) is elementary and correct. Step 2 uses the module scalar-extension universal property within its hypotheses. Step 3 checks RJ=id and JR=e_T on pure tensors, which gives the isomorphism without flatness. Step 4 checks naturality in f and in B on generators. Step 5 uses the algebra scalar-extension universal property for the action by B-algebra automorphisms and for beta=alpha. Minor terseness: Step 2 does not say why the G-action on B⊗M is well defined, but the cited tensor-product definition (its f⊗id clause) or the cited universal property gives it. Small cases I tested: G trivial; B=0; Z[1/2]→F_3 (not flat) with the sign action on A/9 and with the swap action on a product of two copies of A/3. Without the invertibility hypothesis the statement fails (Z with sign action, base changed to F_2), so the hypothesis is needed. The parent lem-per-gabber-abelian-stage-toric-chart uses this lemma in Steps 3 and 10 (A=Λ[Q] with trivial action, N invertible), which the statement covers. I found no duplicate among the tensor-field Galois-invariants, tame-inertia trace, groupoid-integral and quotient nodes. The route only cites three tensor-product nodes that are Mathlib leaves, so no tool_uses are needed, and there is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.TameInvariantsArbitraryBaseChange",
+  "declaration": "AlgebraicGeometry.tame_invariants_arbitrary_base_change",
+  "file": "lean/Sheaf/DeligneLaumon/TameInvariantsArbitraryBaseChange.lean",
+  "statement": "theorem tame_invariants_arbitrary_base_change {A : Type u} [CommRing A] {G : Type v} [Group G] [Fintype G] {M : Type w} [AddCommGroup M] [Module A M] (ρ : Representation A G M) (d : ℕ) (hd : Fintype.card G = d) (hunit : IsUnit (d : A)) : ( (((↑(hunit.unit⁻¹) : A) • (∑ g : G, ρ g)).comp ((↑(hunit.unit⁻¹) : A) • (∑ g : G, ρ g))) = ((↑(hunit.unit⁻¹) : A) • (∑ g : G, ρ g)) ∧ Set.range ((↑(hunit.unit⁻¹) : A) • (∑ g : G, ρ g)) = (ρ.invariants : Set M) ∧ (∀ x : ρ.invariants, ((↑(hunit.unit⁻¹) : A) • (∑ g : G, ρ g)) x = x) ) ∧ (∀ (B : Type uB) [CommRing B] [Algebra A B], Function.Bijective (tameInvariantsBaseChangeMap ρ B)) ∧ (∀ (B : Type uB) [CommRing B] [Algebra A B] (B' : Type uB') [CommRing B'] [Algebra A B'] (vB : B →ₐ[A] B') (x : B ⊗[A] ρ.invariants), TensorProduct.map vB.toLinearMap (LinearMap.id (R := A) (M := M)) (tameInvariantsBaseChangeMap ρ B x : B ⊗[A] M) = (tameInvariantsBaseChangeMap ρ B' (TensorProduct.map vB.toLinearMap (LinearMap.id (R := A) (M := ρ.invariants)) x) : B' ⊗[A] M)) ∧ (∀ (N : Type wN) [AddCommGroup N] [Module A N] (σ : Representation A G N) (f : M →ₗ[A] N) (hcomm : ∀ g : G, f.comp (ρ g) = (σ g).comp f) (B : Type uB) [CommRing B] [Algebra A B] (x : B ⊗[A] ρ.invariants), (tameInvariantsBaseChangeMap σ B (TensorProduct.AlgebraTensorModule.map (LinearMap.id (R := B) (M := B)) (invariantLinearMap ρ σ f hcomm) x) : B ⊗[A] N) = TensorProduct.AlgebraTensorModule.map (LinearMap.id (R := B) (M := B)) f (tameInvariantsBaseChangeMap ρ B x : B ⊗[A] M)) ∧ (∀ (B : Type uB) [CommRing B] [Algebra A B] (C : Type uC) [CommRing C] [Algebra A C] [MulSemiringAction G C] [SMulCommClass G A C], Function.Bijective (tameInvariantsAlgebraBaseChangeMap (A := A) (G := G) B C))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.invariantLinearMap",
+   "AlgebraicGeometry.tameBaseChangeFixedSubmodule",
+   "AlgebraicGeometry.tameInvariantsBaseChangeMap",
+   "AlgebraicGeometry.tameBaseChangeFixedSubalgebra",
+   "AlgebraicGeometry.tameInvariantsAlgebraBaseChangeMap",
+   "AlgebraicGeometry.tame_invariants_arbitrary_base_change"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-488b886fe",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Re-delivery fixes all five points of the 75afc05c RETURN: named canonical maps corestricted to the fixed submodule/subalgebra (real codRestrict data), Bijective, naturality squares in vB and in equivariant f via the real invariantLinearMap, independent universes. Clause check vs node and source OK, citer toric-chart Steps 3/10 hold, no Mathlib duplicate, module compiles clean (3.9 s), pinned-universe citer probe compiles. Notes: literal '\\n' before 'Neither' in the corrected statement; statement_change.what describes the old Lean, not the old node text.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "Q44 stage 2",
+  "old_statement": "Let $A$ be a commutative ring, $G$ a finite group of order $d$ with $d\\in A^\\times$, and $M$ an $A$-module with an $A$-linear $G$-action. Write $M^G=\\{m:g(m)=m\\text{ for every }g\\in G\\}$. The $A$-linear operator $e_M=d^{-1}\\sum_{g\\in G}g$ is idempotent, has image $M^G$, and restricts to the identity on $M^G$. For every commutative $A$-algebra $B$, the natural map\n$$B\\otimes_A M^G\\longrightarrow(B\\otimes_A M)^G$$\nis an isomorphism of $B$-modules, with $G$ acting trivially on $B$. It is natural in equivariant module maps and in $B$. If $M=C$ is a commutative $A$-algebra on which $G$ acts by $A$-algebra automorphisms, this comparison is an isomorphism of $B$-algebras\n$$B\\otimes_A C^G\\simeq(B\\otimes_A C)^G.$$\nNeither $B$ nor $C$ is required to be flat over $A$. Tensor products are those of [def-weil-pbc-module-tensor-product].",
+  "what": "The previous statement made the canonical linear map have codomain all of B tensor M and made the algebra map surject onto all of B tensor C. With a nontrivial sign action of Z/2 on Q, either assertion would force every tensor to be fixed. The naturality clauses also referred to arbitrary maps satisfying the pure-tensor formula, making them tautological. The corrected statement corestricts the canonical maps to the explicitly defined fixed B-submodule and fixed B-subalgebra and states naturality for those named maps; independent Lean universes are used for B, B-prime, C, and N.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Tag 0H36 remark-when-iso and the Reynolds idempotent argument; compare Tag 0BRH lemma-base-change-invariants."
+  },
+  "citers": [
+   {
+    "id": "lem-per-gabber-abelian-stage-toric-chart",
+    "holds": true,
+    "note": "Its proof uses the projection and invariant-subalgebra consequences; the corrected fixed-subalgebra formulation supplies exactly those consequences."
+   }
+  ]
  }
 }

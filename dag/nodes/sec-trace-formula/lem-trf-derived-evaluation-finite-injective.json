@@ -263,5 +263,27 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-8db79d261 (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra 0A60 (l.18164), 0A67 (l.18732), 0A68 (2) (l.28562), 0A69 (l.28617), 0654 (l.16906) and the injective-dimension definition (l.17509). The item statement is unchanged from base and matches 0A69 hypothesis by hypothesis. Step 1: the triangle-compatible canonical map is taken from that node's statement. Step 2: bounded injective complexes are K-injective by dplus-injective-representative (2); the truncation triangle comes from heart (1); the D^{>=n+1} representative comes from the standard t-structure def. Step 3: the pseudo-coherent node's three hypotheses all hold. Step 4: the flat model in [a,b] from 0654 is bounded flat, hence K-flat, so Tot(P⊗B_n)=0 below n+1+a. Step 5: the Hom-complex degree count s<=u-n-1, t>=n+1+v-u is correct, and c=max(-a,u-v) does not depend on n. Step 6: with n>=d+c the tails vanish in H^{d-1} and H^d, so the long exact sequences, the ladder and the all-degrees criterion give the isomorphism. I checked this. New node canonical-map (0A67/0A60 with exactness) is true and asserts no invertibility; it is not a duplicate of lem-sfb-ringed-site-duality-maps (two-object, target O), per-relative-bidual-triangles or the coef unit bidual. New node pseudocoherent is exactly 0A68 (2) and strictly smaller than the item; tested at K=R[0] (identity) and at L=0 or M=0. Edge cases checked: zero objects, zero ring, field with L=M=R[0], non-Noetherian R. I accept the declared tool_uses: heart truncation, the 0654 flat model and the bounded-flat K-flatness, all generic algebra. No SGA. FIX (B3): pseudocoherent's 'L bounded below' cited no definition node. I added the meaning H^i(L)=0 for i<<0 and def-weil-pbc-bounded-derived-subcategories to the statement and stmt_deps, in fixes/dag/nodes/sec-trace-formula/lem-trf-derived-evaluation-pseudocoherent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedEvaluationFiniteInjective",
+  "declaration": "DerivedCategory.isIso_finiteInjectiveEvaluation",
+  "declarations": [
+   "DerivedCategory.finiteInjectiveEvaluation",
+   "DerivedCategory.isIso_finiteInjectiveEvaluation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedEvaluationFiniteInjective.lean",
+  "statement": "theorem isIso_finiteInjectiveEvaluation (R : Type u) [CommRing R] [HasDerivedCategory.{u} (RingSiteModules R)] [HasDerivedCategory.{u} (ModuleCat.{u} R)] (K L M : DerivedCategory (RingSiteModules R)) (hL : ∃ J : CochainComplex (RingSiteModules R) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (J.X i)) ∧ (∀ i : ℤ, Injective (J.X i)) ∧ Nonempty (Q.obj J ≅ L)) (hM : ∃ I : CochainComplex (RingSiteModules R) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (I.X i)) ∧ (∀ i : ℤ, Injective (I.X i)) ∧ Nonempty (Q.obj I ≅ M)) (hTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (N : RingSiteModules R) (j : ℤ), j < a ∨ b < j → IsZero ((homologyFunctor (RingSiteModules R) j).obj ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) L).obj M ⊗ (singleFunctor (RingSiteModules R) 0).obj N))) (hK : ∀ (P : CochainComplex (RingSiteModules R) ℤ), Nonempty (Q.obj P ≅ K) → ∀ n : ℤ, IsPseudoCoherent (A := R) (Q.obj (((SheafOfModules.forget ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)) ⋙ PresheafOfModules.evaluation ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)).obj (op ⟨PUnit.unit⟩)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (P.truncLE n)))) : IsIso (finiteInjectiveEvaluation R K L M) ∧ (∀ (K' L' M' : DerivedCategory (RingSiteModules R)) (f : K ⟶ K') (l : L' ⟶ L) (m : M ⟶ M'), ((SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (l.op, m) ⊗ₘ f) ≫ finiteInjectiveEvaluation R K' L' M' = finiteInjectiveEvaluation R K L M ≫ (SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (X := (op ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K).obj L), M)) (Y := (op ((SignedRingedHom.hom ⊥ (CochainComplex.onePointRingSheaf R) K').obj L'), M')) (((SignedRingedHom.homFunctor ⊥ (CochainComplex.onePointRingSheaf R)).map (f.op, l)).op, m))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ba1064f4",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0A69: hL/hM bounded injective models; hTor uses one interval for all N; hK uses Mathlib good truncation truncLE over every representative, which is equivalent. finiteInjectiveEvaluation is the actual 0A67 evaluation-composition map, transposed through the unique evaluation-normalized SignedRingedHom.adjunction. Naturality square has correct variance and is provable from CoefficientClosedStructure.evaluation_naturality. No extra assumptions; universes u throughout. Edge cases (zero ring, zero objects, unbounded K, field) are fine. lean.statement is verbatim in the file; dependency nodes are unchanged; no live write; no duplicate or name clash; no stage-2 delivery of canonical-map or pseudocoherent siblings. nt_compile --json: clean, 16.0 s. Advisory: the future canonical-map node should reuse finiteInjectiveEvaluation."
  }
 }
