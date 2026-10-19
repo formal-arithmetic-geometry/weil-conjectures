@@ -179,6 +179,7 @@ for n, t in TG.items():
         m = dq.module_of(d)
         if m and m in counted: continue
         if m and live_file(m).is_file() and not (dq.is_def(d) and not dq.has_decl(d)): held.add(m)
+        elif g.stated(i): continue   # 2026-10-20: stated outside live (a Mathlib match, a convention, upstream): no work
         else: s2more.add(i)
     s2 |= s2more - q12["2"]
     hs = 0
