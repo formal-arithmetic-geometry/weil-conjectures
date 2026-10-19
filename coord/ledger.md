@@ -17090,3 +17090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:32 L: returned deliver/NA/lem-per-finite-compact-support-fibre-support-bound (reviewer RETURN: L: independent stage-2 immutable head 7f05558f81b2: H13/H4: the delivery rebinds the landed N5 lean record of def-weil-d)
 - 05:33 L: returned deliver/G7/Sheaf.Paper.ComparisonTorAmplitude (reviewer RETURN: (reviewer C-f9008, head f9008d6b3) H9: lean/Sheaf/Paper/ComparisonTorAmplitude.lean line 19: delete `public import Sheaf)
 - 05:36 L: returned deliver/U4/Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic (reviewer RETURN: (reviewer C-7f34a, head 7f34aa450) C1/D4 (point 6) dag/nodes/sec-smooth-purity/lem-weil-integral-scalar-extension-constr)
+- 05:39 L: returned deliver/Q49/lem-per-finite-coefficient-dual-constructible (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-finite-coefficient-dual-constructible: review_)
