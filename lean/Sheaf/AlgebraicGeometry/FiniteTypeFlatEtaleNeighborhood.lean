@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 import Mathlib.RingTheory.Nakayama
-import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
+import WeilConjectures.Topology.FiniteTypeSurjectiveNearStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.FiniteStability
-import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.TraceFormula.LocalGenericBasisUniversalInjective
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
@@ -36,6 +36,7 @@ import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Mathlib.RingTheory.Unramified.LocalRing
 import Sheaf.TraceFormula.ElementaryDevissageFlatness
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-!
 # Finite-type flatness gives a finitely presented étale neighbourhood

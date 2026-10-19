@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionMap
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import all WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
-import all Sheaf.AlgebraicGeometry.FractionZeroTensorPower
+import all WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 
 /-! # Compatibility of Veronese numerators with tensor-power transitions

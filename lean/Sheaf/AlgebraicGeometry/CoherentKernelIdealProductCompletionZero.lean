@@ -2,10 +2,10 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import all Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
+import all WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalCompletionAffineSections
 import Mathlib.RingTheory.AdicCompletion.Exactness
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf

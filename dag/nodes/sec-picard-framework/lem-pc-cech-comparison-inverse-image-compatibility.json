@@ -114,13 +114,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility",
-  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonInverseImageCompatibility.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/CechComparisonInverseImageCompatibility.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparison_inverseImage_compatibility",
   "statement": "theorem cechComparison_inverseImage_compatibility\n    {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u}\n    (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S))\n    (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)\n    (hcover' : iSup V = ⊤) (M : X.Modules) (N : Y.Modules)\n    (φ : M ⟶ (pushforward g).obj N)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (c : CechComparisonSystem U hcover) (c' : CechComparisonSystem V hcover') :\n    ∀ (q : ℕ) (z : (cechOver f U M).cycles q) (z' : (cechOver f' V N).cycles q),\n      (∀ y : Fin (q + 1) → ι,\n        cechCoordinate f' V N q y ((cechOver f' V N).iCycles q z') =\n          N.presheaf.map (homOfLE (hinter q y)).op\n            (φ.val.app (op (⨅ l, U (y l)))\n              (cechCoordinate f U M q y ((cechOver f U M).iCycles q z)))) →\n      c'.overMap f' N q ((cechOver f' V N).homologyπ q z') =\n        Sheaf.H.map (coeff g φ) q\n          (Sheaf.H.mapFunctor (invImage g) (constIso g).symm\n            ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q\n              (c.overMap f M q ((cechOver f U M).homologyπ q z)))",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility retired; now WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility."
  },
  "reviewed": {
   "date": "2026-10-12",

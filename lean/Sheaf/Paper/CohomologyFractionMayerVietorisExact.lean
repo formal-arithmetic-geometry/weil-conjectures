@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.AlgebraicGeometry.CohomologyFractionEventuallyZero
+import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
 
 /-! # Exact Mayer--Vietoris row of fractions
 

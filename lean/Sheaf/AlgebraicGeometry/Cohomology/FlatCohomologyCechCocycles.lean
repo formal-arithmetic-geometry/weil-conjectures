@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

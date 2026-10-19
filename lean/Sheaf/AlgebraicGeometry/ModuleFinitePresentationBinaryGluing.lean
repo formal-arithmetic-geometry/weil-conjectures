@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Coherent
 
-import Sheaf.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
+import WeilConjectures.AlgebraicGeometry.ModuleSubmoduleBinaryGluingProperties
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Gluing a finite presentation and its map across two opens

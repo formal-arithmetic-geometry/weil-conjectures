@@ -5,7 +5,7 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
+public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful

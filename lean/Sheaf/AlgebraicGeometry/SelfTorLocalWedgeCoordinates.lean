@@ -13,7 +13,7 @@ public import Sheaf.RingTheory.SelfTorConormalComparison
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 import Sheaf.AlgebraicGeometry.SelfTorIdealWedgeCoordinates
-import Sheaf.AlgebraicGeometry.ConormalWedgeLocalSpan
+import WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan
 
 /-! # Local Koszul agreement on wedges in affine self-Tor coordinates
 

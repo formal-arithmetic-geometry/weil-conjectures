@@ -13,7 +13,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationRepresentatives
 import Sheaf.AlgebraicGeometry.FinitePresentationBiprod
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
-import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
+import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
 import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 

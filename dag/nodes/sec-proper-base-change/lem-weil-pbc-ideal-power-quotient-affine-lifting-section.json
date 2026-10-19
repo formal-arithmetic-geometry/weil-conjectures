@@ -144,13 +144,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerQuotientAffineLiftingSection.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowerQuotientAffineLiftingSection.lean",
   "declaration": "AlgebraicGeometry.Scheme.ideal_power_quotient_affine_lifting_section",
   "statement": "theorem ideal_power_quotient_affine_lifting_section\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U))\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (hone : ∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U)))\n    (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F)\n    (hmono : ∀ n : ℕ, Mono (a n))\n    (hqc : ∀ n : ℕ, (A n).IsQuasicoherent)\n    (hann : ∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)),\n      s ∈ Set.range ((a n).app W) ↔\n        ∀ (W' : X.Opens) (h : W' ≤ W)\n          (b : Γ((idealSheafPower ι n).1, W')),\n          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom\n            (F.presheaf.map (homOfLE h).op s) = 0)\n    (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →\n      Function.Bijective ((cokernel.π (a n)).app W))\n    (V : X.affineOpens) :\n    ∀ s : Γ(F, U), ∃ (n : ℕ)\n      (φ : ((idealSheafPower ι n).1).over V.1 ⟶ (cokernel (a n)).over V.1),\n      ∀ (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V.1),\n        (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s) =\n          φ.val.app (op (Over.mk (homOfLE hWV)))\n            (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n))",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection retired; now WeilConjectures.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection."
  },
  "reviewed": {
   "date": "2026-10-13",

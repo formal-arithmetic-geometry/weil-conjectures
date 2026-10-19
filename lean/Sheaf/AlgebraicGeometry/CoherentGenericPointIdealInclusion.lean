@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentGenericPointClosedDescent
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMap
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
+import WeilConjectures.AlgebraicGeometry.CoherentLocalIsomorphism
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 

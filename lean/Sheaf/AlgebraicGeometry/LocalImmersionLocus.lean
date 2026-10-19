@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Gluing
-import Sheaf.AlgebraicGeometry.CompatibleImmersionGluing
+import WeilConjectures.AlgebraicGeometry.CompatibleImmersionGluing
 
 /-! # Gluing local immersion loci
 

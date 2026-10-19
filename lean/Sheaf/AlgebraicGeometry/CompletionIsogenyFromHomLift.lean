@@ -13,13 +13,14 @@ import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffine
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting compatible maps between coherent isogenies under a fixed module
 

@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.ProperSupportHigherDirectImageBound
 import Mathlib.Data.Int.Interval

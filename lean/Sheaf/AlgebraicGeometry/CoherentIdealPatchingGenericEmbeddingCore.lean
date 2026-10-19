@@ -8,7 +8,7 @@ public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor
 import Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Topology.Sheaves.Abelian
 

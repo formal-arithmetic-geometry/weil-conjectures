@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
+import WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison
 
 @[expose] public section
 universe u

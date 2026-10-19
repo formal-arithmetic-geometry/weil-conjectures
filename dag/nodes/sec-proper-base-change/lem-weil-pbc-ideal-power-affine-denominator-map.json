@@ -122,13 +122,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap",
-  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerAffineDenominatorMap.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.IdealPowerAffineDenominatorMap",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IdealPowerAffineDenominatorMap.lean",
   "declaration": "AlgebraicGeometry.Scheme.ideal_power_affine_denominator_map",
   "statement": "theorem ideal_power_affine_denominator_map\n    {X : Scheme.{u}} {I : X.Modules}\n    (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]\n    [I.IsQuasicoherent] [I.IsFiniteType]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Opens)\n    (hU : ∀ x : X, x ∈ U ↔ Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom)\n    (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F)\n    (hmono : ∀ n : ℕ, Mono (a n))\n    (hqc : ∀ n : ℕ, (A n).IsQuasicoherent)\n    (hann : ∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)),\n      s ∈ Set.range ((a n).app W) ↔\n        ∀ (W' : X.Opens) (h : W' ≤ W)\n          (b : Γ((idealSheafPower ι n).1, W')),\n          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom\n            (F.presheaf.map (homOfLE h).op s) = 0)\n    (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →\n      Function.Bijective ((cokernel.π (a n)).app W))\n    (V : X.affineOpens) (s : Γ(F, U)) :\n    ∃ (n : ℕ) (K : Submodule Γ(X, V.1) Γ(F, V.1)),\n      ((idealSheafPower ι n).1).IsQuasicoherent ∧\n      K ≤ LinearMap.range ((a n).val.app (op V.1)).hom ∧\n      ∃ f : Γ((idealSheafPower ι n).1, V.1) →ₗ[Γ(X, V.1)] (Γ(F, V.1) ⧸ K),\n        ∀ (W : X.Opens) (hWU : W ≤ U) (hWV : W ≤ V.1)\n          (b : Γ((idealSheafPower ι n).1, V.1)) (x : Γ(F, V.1)),\n          f b = K.mkQ x →\n          (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWV).op x) =\n            ((cokernel (a n)).smul (U := W) ((idealSheafPower ι n).2.val.app (op W)\n              (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).hom\n              ((cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s))",
   "branch": "sheaf-dag",
   "by": "J1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.IdealPowerAffineDenominatorMap retired; now WeilConjectures.AlgebraicGeometry.IdealPowerAffineDenominatorMap."
  },
  "reviewed": {
   "date": "2026-10-13",

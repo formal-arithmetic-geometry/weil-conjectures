@@ -11,7 +11,7 @@ public import WeilConjectures.Topology.OpenModuleCohomology
 
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.Topology.ModuleCohomologyTopComparison
+import WeilConjectures.Topology.ModuleCohomologyTopComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.Topology.RestrictInjectiveResolution

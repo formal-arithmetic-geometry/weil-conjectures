@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 import Sheaf.AlgebraicGeometry.PseudoCoherentQCohDegree
 
 /-! # Quasi-coherent cohomology of pseudo-coherent complexes

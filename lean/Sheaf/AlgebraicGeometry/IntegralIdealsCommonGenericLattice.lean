@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.CoherentPushforwardIdeal
-import Sheaf.AlgebraicGeometry.CommonGenericLatticeMaps
+import WeilConjectures.AlgebraicGeometry.CoherentPushforwardIdeal
+import WeilConjectures.AlgebraicGeometry.CommonGenericLatticeMaps
 
 /-! # Generic common lattices for two integral ideal sheaves
 

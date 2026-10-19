@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Local cohomology calculation for a strictly perfect tensor

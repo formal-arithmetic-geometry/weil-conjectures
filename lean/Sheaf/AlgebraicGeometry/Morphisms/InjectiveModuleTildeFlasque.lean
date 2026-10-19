@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Topology.Sheaves.Flasque
-import Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
+import WeilConjectures.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
 
 /-! # Flasqueness of the sheaf associated to an injective module
 

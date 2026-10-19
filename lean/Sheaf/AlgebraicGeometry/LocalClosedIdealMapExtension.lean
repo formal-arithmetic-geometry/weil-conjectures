@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.ClosedStructureAmbientIdealExtension
+import WeilConjectures.AlgebraicGeometry.ClosedStructureAmbientIdealExtension
 import WeilConjectures.AlgebraicGeometry.ClosedStructureIdealProductIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 

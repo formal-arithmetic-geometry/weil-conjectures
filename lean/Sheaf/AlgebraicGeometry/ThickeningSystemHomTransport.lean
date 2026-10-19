@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
+public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore

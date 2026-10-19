@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
-public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver

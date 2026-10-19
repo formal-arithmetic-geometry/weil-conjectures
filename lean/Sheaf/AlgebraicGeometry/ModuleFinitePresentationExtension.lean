@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationAffineReplacement
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationBinaryGluing
-import Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Extension of finitely presented modules and their morphisms

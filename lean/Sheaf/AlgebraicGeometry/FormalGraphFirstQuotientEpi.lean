@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 import Sheaf.AlgebraicGeometry.FormalCompletionExact
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FormalGraphDiscrepancyZero
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks
