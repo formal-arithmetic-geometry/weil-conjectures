@@ -17281,3 +17281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:55 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head c10ec6b38b68: Compiles clean (nt_compile --json, 13.9 s). H3: sfRationalLissePrope)
 - 09:58 L: returned deliver/NG/lem-pur-finite-universal-smooth-trace (reviewer RETURN: L: independent stage-2 immutable head bdf3c9ea9367: file-only compilation failed: private overlay Sheaf.Paper.FiniteFree)
 - 10:00 L: returned deliver/NL/lem-coef-completed-tensor-hom-transpose (reviewer RETURN: L: independent stage-2 immutable head e14dc47dccd7: H2/theorem-stmt_dep rule: thm-coef-rational-verdier is cited only fo)
+- 10:03 L: returned deliver/NA/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and Steps 1-7), all 4 new nodes, the citers resolution-invariant-calculus (Steps 2/3/5/6/7) a)
