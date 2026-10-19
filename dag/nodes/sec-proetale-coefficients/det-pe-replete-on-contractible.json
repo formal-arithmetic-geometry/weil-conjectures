@@ -20,9 +20,10 @@
  ],
  "proof": [
   {
-   "text": "For every $n\\geq0$, apply condition 3 of [det-pe-weak-contractible-equivalences] to the epimorphism $t_n:F_{n+1}\\to F_n$ and the given weakly contractible object $W$. It gives that $t_n(W):F_{n+1}(W)\\to F_n(W)$ is surjective, proving the first assertion.",
+   "text": "By [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], each epimorphic transition is locally surjective. Apply the definition [sk-def-pe-weak-contractible] at W to obtain surjectivity of each transition on sections, in the stated universe. No projective-representable equivalence is needed because hW is already this evaluation property.",
    "uses": [
-    "det-pe-weak-contractible-equivalences"
+    "sk-def-pe-weak-contractible",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
    ],
    "elementary": false,
    "source": {
@@ -31,7 +32,7 @@
    }
   },
   {
-   "text": "Fix $m\\geq0$ and a prescribed $a\\in F_m(W)$. For each $n$ and $z\\in F_n(W)$, use classical choice on the nonempty fibre of $t_n(W)$ over $z$ to choose $s_n(z)\\in F_{n+1}(W)$ with $t_n(W)(s_n(z))=z$. Define $b_0=a$ and $b_{r+1}=s_{m+r}(b_r)$ by recursion on $r\\in\\mathbf N$. Inductively $b_r\\in F_{m+r}(W)$, and the displayed choice equation gives $t_{m+r}(W)(b_{r+1})=b_r$ for every $r$. Thus all stages from $m$ upwards have compatible chosen values. This is only set-theoretic choice and natural-number recursion; no sheaf morphisms $s_n$ or choices compatible with restrictions are asserted.",
+   "text": "Fix m and a section a at stage m. Write G for the set-valued diagram obtained by evaluation at W. Define x_0 = G(0 <= m)(a). Recursively define x_(n+1) as G(n+1 <= m)(a) when n+1 <= m, and otherwise as a chosen preimage of x_n under the surjective adjacent transition. This is natural-number recursion on sets, using classical choice only for preimages, not choices of sheaf morphisms.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -40,7 +41,7 @@
    }
   },
   {
-   "text": "Set $x_{m+r}=b_r$ for $r\\geq0$, and define the finitely many earlier values by $x_n=t_n(W)(x_{n+1})$ in descending order for $n=m-1,\\ldots,0$. For $n<m$ the identity $t_n(W)(x_{n+1})=x_n$ holds by this definition; for $n=m+r\\geq m$ it is the identity proved in step 2. Hence $(x_n)$ is compatible at every adjacent pair and $x_m=b_0=a$. If $m=0$, there are no earlier values to define.",
+   "text": "For n <= m, the recursion gives x_n = G(n <= m)(a), so x_m = a. For n+1 <= m, adjacent compatibility is functoriality of G; otherwise it is the chosen-preimage equation. Induction on k <= n then gives compatibility for every transition n to k. Thus the x_n define a section of the diagram G. This also handles m = 0 and does not assume any section set is inhabited independently of a.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -49,7 +50,7 @@
    }
   },
   {
-   "text": "The formula in [det-pe-replete-definition] identifies $(\\varprojlim_n F_n)(W)$ with the tuples $(x_n)\\in\\prod_n F_n(W)$ satisfying $t_n(W)(x_{n+1})=x_n$ for all $n$, and identifies its $m$-th projection with $(x_n)\\mapsto x_m$. The tuple constructed in steps 2 and 3 therefore defines an element of this section set whose $m$-th projection is the prescribed $a$. Since $a$ and $m$ were arbitrary, every displayed projection is surjective.",
+   "text": "Use the sectionwise limit formula [det-pe-replete-definition]: evaluation at W preserves the limiting cone of F. Mathlib Types.isLimitEquivSections identifies its cone point with compatible tuples of G, and Types.isLimitEquivSections_symm_apply identifies its projections with tuple evaluation. Apply the inverse equivalence to the tuple from steps 2-3; its m-th projection is x_m = a.",
    "uses": [
     "det-pe-replete-definition"
    ],
@@ -61,13 +62,14 @@
   }
  ],
  "proof_deps": [
-  "det-pe-weak-contractible-equivalences",
+  "sk-def-pe-weak-contractible",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
   "det-pe-replete-definition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-replete/det-pe-replete-on-contractible.proof.md",
-  "place": "Entire proof, expanded into transition surjectivity, explicit recursive lifts, finite backward extension, and the sectionwise limit formula"
+  "place": "Entire proof; direct weak-contractibility evaluation and the existing epi/local surjectivity criterion, explicit natural-number recursion with prescribed earlier coordinates, induction on transition length, and the sectionwise limit equivalence. Formalized by G2, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -229,5 +231,15 @@
   "by": "N8",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T132228-L-1204541",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
