@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-proper-intrinsic-finite-coefficient-extension",
+ "kind": "statement",
+ "title": "Proper finite coefficient extension in intrinsic coordinates",
+ "statement": "For a proper map of Noetherian schemes and finite commutative coefficient rings A to B, the canonical intrinsic direct-image scalar mate is invertible on an ordinary etale origin J whenever J and its actual coefficient extension are bounded below. The functors are the specified canonical ones of [def-sp-reduction-direct-image-comparison], [lem-exc-etale-origin-proper-open-interchange] and [det-sp-scalar-extension-functor].\n\ntheorem properIntrinsicFiniteCoefficientExtension\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [IsProper f]\n    (J : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X)\n    (_hJ : ∃ n : ℤ, J.IsGE n)\n    (_hBJ : ∃ n : ℤ,\n      ((Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj J).IsGE n) :\n    IsIso ((directImageScalarComparison φ f).app\n      ((etaleOriginOpenComparison A X).obj J))",
+ "stmt_deps": [
+  "def-sp-reduction-direct-image-comparison",
+  "lem-exc-etale-origin-proper-open-interchange",
+  "det-sp-scalar-extension-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, proper case; site comparison Tag 09A6"
+ },
+ "proof": [
+  {
+   "text": "Form the normalized intrinsic site/direct-image comparison as the ambient canonical site mate followed by the inverse direct-image presentation. Its components at J and its actual scalar extension are isomorphisms by the two lower bounds and bounded-below qcqs comparison. Proper maps are qcqs.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-mate",
+    "def-sp-et-proet-coefficient-transport",
+    "lem-sp-intrinsic-coefficient-site-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing properFiniteCoefficientExtension to the lifted finite coefficient map and J. The etale coefficient mate is invertible. Rewrite the intrinsic coefficient/site square by intrinsicCoefficientSiteMate; every factor on the etale side is invertible. Cancel the invertible scalar image of the A-site mate and the invertible direct image of the scalar presentation to conclude that the intrinsic coefficient mate is invertible.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-sp-intrinsic-coefficient-site-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-proetale-scalar-mate",
+  "def-sp-et-proet-coefficient-transport",
+  "lem-sp-intrinsic-coefficient-site-mate",
+  "lem-asd-proper-finite-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 proper case, proved from its existing etale theorem and the separately recorded normalized intrinsic coefficient/site mate equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image of bounded below etale origin complexes commutes with derived finite ring coefficient extension in intrinsic pro etale module categories",
+   "results": "8 hits concerning ordinary etale ring maps and their compositions, none about derived coefficient comparisons.",
+   "date": "2026-10-19",
+   "verdict": "No matching intrinsic derived coefficient comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Generic mate equivalences and their unit/counit identities; no intrinsic proper coefficient theorem.",
+   "date": "2026-10-19",
+   "verdict": "No matching intrinsic derived coefficient comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Cc]oefficient|[Cc]oefficient.*proper",
+   "results": "No Mathlib declaration in this specialized sheaf derived setting.",
+   "date": "2026-10-19",
+   "verdict": "No matching intrinsic derived coefficient comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward commutes with extension of finite coefficients for etale origin complexes",
+   "results": "8 hits about ordinary module pushforward, its components and composition; no derived finite coefficient comparison.",
+   "date": "2026-10-19",
+   "verdict": "No matching intrinsic derived coefficient comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "F1",
+  "item": "Sheaf.SecSmoothPurity.ReductionDirectImage",
+  "date": "2026-10-19",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Expanded det-sp-reduction-direct-image, proper case in Steps 6–8",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ProperIntrinsicFiniteCoefficientExtension",
+  "file": "lean/Sheaf/SecSmoothPurity/ProperIntrinsicFiniteCoefficientExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.properIntrinsicFiniteCoefficientExtension",
+  "statement": "theorem properIntrinsicFiniteCoefficientExtension\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (f : X ⟶ Y) [IsProper f]\n    (J : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X)\n    (_hJ : ∃ n : ℤ, J.IsGE n)\n    (_hBJ : ∃ n : ℤ,\n      ((Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) X).obj J).IsGE n) :\n    IsIso ((directImageScalarComparison φ f).app\n      ((etaleOriginOpenComparison A X).obj J))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T192718-L-1858129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T192718-L-1858129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
