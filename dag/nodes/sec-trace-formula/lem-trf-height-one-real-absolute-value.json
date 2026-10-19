@@ -11,9 +11,100 @@
  "stmt_deps": [
   "def-trf-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\Gamma=F^\\times/V^\\times$, write its multiplication additively, and put $v(x)=[x]$. Define $v(x)\\le v(y)$ iff $y/x\\in V$. Multiplying $x,y$ by units does not change this condition; transitivity follows from multiplication in $V$, antisymmetry from $y/x$ and its inverse both lying in $V$. The alternative in [def-trf-valuation-ring] gives totality, and replacing $x,y$ by $xz,yz$ gives translation invariance. Thus $\\Gamma$ is a totally ordered abelian group and $v(xy)=v(x)+v(y)$. Moreover $v(x)\\ge0$ iff $x\\in V$, and $v(x)=0$ iff $x\\in V^\\times$, for $x\\ne0$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "By [lem-trf-valuation-prime-convex-correspondence], prime ideals of $V$ are order anti-isomorphic to convex subgroups of this same ordered quotient $\\Gamma$. Our hypothesis gives exactly two primes, since $V$ is not a field and hence its maximal ideal is nonzero. Consequently $\\Gamma$ has exactly two convex subgroups, namely $\\{0\\}$ and $\\Gamma$, and no proper nonzero convex subgroup.",
+   "uses": [
+    "lem-trf-valuation-prime-convex-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "Fix $\\delta>0$ and form $H=\\{g\\in\\Gamma:-n\\delta\\le g\\le n\\delta\\text{ for some }n\\in\\mathbf N\\}$. This is a subgroup: $0$ has bound $0$, negation preserves a bound, and bounds $n,m$ add to a bound $n+m$. It is convex, since an element between two bounded elements has a bound given by the larger of their bounds. It contains $\\delta\\ne0$, so Step 2 forces $H=\\Gamma$. Thus every $a\\in\\Gamma$ satisfies $a\\le n\\delta$ for some $n\\in\\mathbf N$, exactly the Archimedean condition. This is the elementary bounded-subgroup argument, not an additional valuation-ring lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-archimedean-group-real-embedding] to $\\Gamma$, which has the ordered additive group structure of Step 1 and the Archimedean property of Step 3. Obtain an injective monotone additive map $e:\\Gamma\\to\\mathbf R$. It reflects order: if $a>b$, monotonicity gives $e(a)\\ge e(b)$ and injectivity excludes equality, so $e(a)>e(b)$.",
+   "uses": [
+    "lem-trf-archimedean-group-real-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Data/Real/Embedding.lean",
+    "place": "Archimedean.exists_orderAddMonoidHom_real_injective, lines 234–243."
+   }
+  },
+  {
+   "text": "Define $|0|=0$ and $|x|=\\exp(-e(v(x)))$ for $x\\ne0$. These are nonnegative real numbers. The elementary real exponential identities $\\exp(0)=1$, $\\exp(s+t)=\\exp(s)\\exp(t)$ and $\\exp(t)>0$ give $|1|=1$, $|x|>0$ for $x\\ne0$, and $|xy|=|x||y|$ when $x,y\\ne0$, using $v(xy)=v(x)+v(y)$ and additivity of $e$. If a factor is zero, the same multiplicative equality is $0=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "For the strong triangle inequality, zero summands and $x+y=0$ are immediate from nonnegativity. Otherwise interchange $x,y$ if needed so that $v(x)\\le v(y)$. Then $y/x\\in V$, whence $1+y/x\\in V$ and $v(x+y)-v(x)=v(1+y/x)\\ge0$. Monotonicity of $e$ and the exponential gives $|x+y|\\le |x|$, while $v(x)\\le v(y)$ gives $|y|\\le |x|$. Thus $|x+y|\\le\\max(|x|,|y|)$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "For nonzero $x$, strict monotonicity of the real exponential and order reflection of $e$ give $|x|\\le1\\iff v(x)\\ge0\\iff x\\in V$ and $|x|<1\\iff v(x)>0$. Put $P=\\{0\\}\\cup\\{x\\in F^\\times:v(x)>0\\}$. This is a proper ideal of $V$: sums remain positive by the valuation inequality proved in Step 6 (unless zero), negatives have the same value since $-1$ is a unit, and multiplying by an element of $V$ adds a nonnegative value. Every nonzero element of $V\\setminus P$ has value zero and is a unit by Step 1. Thus $\\mathfrak m\\subseteq P$, since a proper ideal contains no unit; maximality and properness of $P$ give $\\mathfrak m=P$. At $x=0$, both ball identifications hold since $0\\in\\mathfrak m\\subset V$ and $|0|=0<1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  },
+  {
+   "text": "To see nontriviality explicitly, choose $z\\in F\\setminus V$; it is nonzero, and [def-trf-valuation-ring] gives $\\pi=z^{-1}\\in V$. This $\\pi$ is nonzero and not a unit of $V$, since its inverse $z$ is outside $V$. Hence $v(\\pi)>0$ and $0<|\\pi|<1$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, printed p. 7, value-group convention and prime/convex-subgroup correspondence; read online at https://arxiv.org/pdf/0707.3953. The additive construction is written by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "lem-trf-valuation-prime-convex-correspondence",
+  "lem-trf-archimedean-group-real-embedding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§2.1, printed p. 7, read online at https://arxiv.org/pdf/0707.3953; supplies valuation conventions and the correspondence. The worker writes out the bounded convex subgroup argument and exponential construction, using the Mathlib embedding theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +154,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.intAdicAbv\", \"IsDedekindDomain.HeightOneSpectrum.adicAbv\", \"NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv\", \"NumberField.RingOfIntegers.HeightOneSpectrum.adicAbv_def\", \"NumberField.instRankOneWithZeroMultiplicativeIntValuationRingOfIntegers\", \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"ValuationRing.instValuationRingInteger\", \"Valued\"], \"sub\": \"\", \"digest\": \"383f89b2705e1b80\"}",
    "date": "2026-10-18",
    "verdict": "no match: discrete/Dedekind results impose extra hypotheses. Valuation.nonempty_rankOne_iff_mulArchimedean (Mathlib/RingTheory/Valuation/RankOne.lean:61) assumes an archimedean value group; it does not derive that hypothesis from the two-prime spectrum of the valuation ring. The converse normed-field instance does not supply this bridge."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "height one valuation ring admits nontrivial real nonarchimedean absolute value unit ball",
+   "results": "8 hits including Valued.toNormedField.setOf_mem_integer_eq_closedBall and discrete/Dedekind absolute-value declarations; none handles an arbitrary height-one valuation ring.",
+   "date": "2026-10-19",
+   "verdict": "no match: available hits impose discrete, Dedekind, or local-field hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Archimedean.embedReal, ValuativeRel.isRankLeOne_iff_mulArchimedean",
+   "results": "0 hits; the service returned no note.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_orderAddMonoidHom_real_injective|isRankLeOne_iff_mulArchimedean",
+   "results": "Logged grep in RingTheory/Valuation found Mathlib/RingTheory/Valuation/RankOne.lean and ValuativeRel/Basic.lean only; the real embedding was separately read in Mathlib/Data/Real/Embedding.lean:234.",
+   "date": "2026-10-19",
+   "verdict": "no match: these results assume archimedeanness and do not derive it from the two-prime hypothesis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "height one valuation ring admits a real valued absolute value",
+   "results": "8 hits including IsDedekindDomain.HeightOneSpectrum.adicAbv and NumberField finite-place constructions; no arbitrary valuation-ring theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match: hits require Dedekind or number-field hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-rank-one-formal-comparison",
@@ -100,5 +219,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-height-one-real-absolute-value",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and historical blueprint ancestry. Reused the existing prime/convex-subgroup correspondence, wrote out the bounded-subgroup Archimedean argument directly, and used one new Mathlib leaf for the ordered real embedding. Checked the reversed additive/multiplicative sign, zero cases, maximal ideal, and nontriviality; repaired inaccurate inherited search descriptions against the actual log.",
+  "blueprint": "Realizes the historical Section 2.1 height-one/real-valued bridge used in the normalization chain recorded under lem-trf-local-term-locality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-f54ffb294",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-f54ffb294 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and the new Mathlib leaf in full; the statement is unchanged and there are no fixes. Step 1: the value group F^x/V^x carries the same order convention as lem-trf-valuation-prime-convex-correspondence, and totality comes from the x-or-x^-1 clause of def-trf-valuation-ring. Step 2: the correspondence node's hypotheses all hold; since V is not a field, m is nonzero, so the anti-isomorphism gives exactly two convex subgroups. Step 3: the subgroup of elements bounded by multiples of delta is a convex subgroup containing delta, so it is all of Gamma; this is the Archimedean condition, which is genuinely elementary, so folding the undelivered helper into this step is correct (D1). Step 4: the new leaf matches Archimedean.exists_orderAddMonoidHom_real_injective (Mathlib/Data/Real/Embedding.lean:232-243, with the group/order variables at line 29 and the One instance omitted at line 232); Mathlib's Archimedean is the node's inline definition, and the zero group is covered. Order reflection is written out. Steps 5-6: exp(-e(v)) gives positivity, |1|=1, multiplicativity and the ultrametric inequality, with zero cases handled. Step 7: P = {v>0} plus 0 is a proper ideal whose complement in V consists of units, so m = P by maximality. Step 8: z outside V exists because V is not a field, so pi = 1/z has 0<|pi|<1. Tested cases: a DVR, a value group Q, a rank-2 lexicographic group (where the two-prime hypothesis correctly fails), and the excluded field case. My rg searches of the snapshot DAG and the blueprint found no duplicate of the item or the leaf. The leaf's blueprint ancestor matches the item's, and the citer lem-trf-valuation-rank-one-formal-comparison uses only clauses that are present. The Temkin PDF is absent locally (the report records it as wanted); its content enters only through the existing correspondence node, whose statement I checked. No SGA source, no other unit's tools, no tool_uses."
  }
 }
