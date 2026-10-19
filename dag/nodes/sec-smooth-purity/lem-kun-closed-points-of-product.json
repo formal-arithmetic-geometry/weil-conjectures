@@ -20,87 +20,20 @@
  ],
  "proof": [
   {
-   "text": "Put $P=X\\times_KY$. By the definition of finite type, choose finite affine open covers $X=\\bigcup_i\\operatorname{Spec}A_i$ and $Y=\\bigcup_j\\operatorname{Spec}B_j$, with each $A_i,B_j$ a finitely generated $K$-algebra. By [lem-weil-pbc-open-fibre-product] their products are open subschemes of $P$, with images $p_1^{-1}(\\operatorname{Spec}A_i)\\cap p_2^{-1}(\\operatorname{Spec}B_j)$, and these cover $P$: every point has an image in some member of each cover. By [lem-weil-pbc-fibre-product-affine-spectra] each is $\\operatorname{Spec}(A_i\\otimes_KB_j)$. If $a_1,\\ldots,a_r$ generate $A_i$ and $b_1,\\ldots,b_t$ generate $B_j$, then $a_\\nu\\otimes1$ and $1\\otimes b_\\mu$ generate the tensor algebra: every pure tensor of polynomials is the product of the two corresponding polynomials in these generators, and every tensor is a finite sum of pure tensors. Thus this is a finite affine cover by finitely generated $K$-algebras, so $P$ is of finite type over $K$ by [def-weil-finite-type-morphism].",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JR (lemma-open-fibre-product) and 01JQ (lemma-fibre-product-affines); explicit finite-generator argument for finite type"
-   }
-  },
-  {
-   "text": "If $z$ is closed in $P$, [lem-kun-closed-point-field](a), applicable by step 1, makes $\\kappa(z)$ finite-dimensional over $K$. The projections induce $K$-compatible field homomorphisms $\\kappa(x)\\to\\kappa(z)$ and $\\kappa(y)\\to\\kappa(z)$ by [def-weil-residue-field]. Each is injective: its kernel is an ideal in a field and cannot contain $1$. Their images are $K$-vector subspaces of $\\kappa(z)$, so have finite dimension. Consequently $\\kappa(x)$ and $\\kappa(y)$ are finite extensions of $K$, and [lem-kun-closed-point-field](a), now applied to the given finite-type schemes $X,Y$, makes both $x,y$ closed.",
-   "uses": [
-    "lem-kun-closed-point-field",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-    "place": "Proof, first sentence: closed z implies finite residue fields and closed images"
-   }
-  },
-  {
-   "text": "Conversely suppose $x,y$ closed. By [lem-kun-closed-point-field](a), $L=\\kappa(x)$ and $M=\\kappa(y)$ are finite extensions of $K$. Choose finite $K$-bases $e_1,\\ldots,e_r$ of $L$ and $f_1,\\ldots,f_t$ of $M$. The $rt$ elements $e_i\\otimes f_j$ span $A=L\\otimes_KM$: expand both factors of a pure tensor in these bases and distribute, then use that pure tensors span. Thus $A$ is a finite-dimensional commutative $K$-algebra.",
-   "uses": [
-    "lem-kun-closed-point-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-    "place": "Proof, converse: tensor product of the two finite residue fields is finite-dimensional"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-fibre-product-point-residue-field], applied to $X\\to\\operatorname{Spec}K$ and $Y\\to\\operatorname{Spec}K$, the kernel $\\mathfrak p$ of $A\\to\\kappa(z)$ is prime, and $\\kappa(z)$ is isomorphic to the fraction field of $D=A/\\mathfrak p$, compatibly with the two residue-field maps and hence with $K$. Here the base residue field is $K$ by [def-weil-affine-spectrum].",
-   "uses": [
-    "lem-weil-pbc-fibre-product-point-residue-field",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JT (lemma-points-fibre-product), last sentence of the statement"
-   }
-  },
-  {
-   "text": "The quotient $D$ is spanned over $K$ by the images of the finite spanning set of $A$ from step 3, and is a nonzero integral domain because $\\mathfrak p$ is prime. For $0\\ne a\\in D$, multiplication by $a$ is an injective $K$-linear endomorphism of this finite-dimensional vector space, so it is surjective; there is $b\\in D$ with $ab=1$. Thus $D$ is a field. Its fraction field is therefore $D$ itself, and the isomorphism of step 4 shows that $\\kappa(z)$ is finite over $K$.",
+   "text": "Use Mathlib Jacobson-space, finite-morphism, pullback, and discrete-fibre lemmas. The forward implication follows from closePoints_subset_preimage_closedPoints. For the converse, pull back the closed-point immersion of the first projection point. Its composite with the structure morphism is finite by the Jacobson finite-type criterion, hence the induced map q to Y is finite and has discrete fibres. The chosen product point is in the image of the second projection j of this pullback. The fibre over the closed second projection point is discrete, and its singleton is closed because that point is closed. The closed immersion j maps this singleton to the original point, proving it is closed.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-    "place": "Proof, converse: residue field of the finite algebra is finite; elementary quotient and multiplication argument replacing the unnecessary Artinian decomposition"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-closed-point-field](a) to the finite-type $K$-scheme $P$ from step 1. The finiteness of $\\kappa(z)/K$ proved in step 5 gives that $z$ is closed in $P$, completing the reverse implication.",
-   "uses": [
-    "lem-kun-closed-point-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-    "place": "Proof, final clause: finite residue field implies closed z"
+    "document": "Mathlib.AlgebraicGeometry.Morphisms.Finite and Mathlib.AlgebraicGeometry.PullbackCarrier",
+    "place": "closePoints_subset_preimage_closedPoints, isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, finite pullback stability, and discrete preimage lemmas"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-kun-closed-point-field",
-  "def-weil-residue-field",
-  "lem-weil-pbc-fibre-product-point-residue-field",
-  "def-weil-affine-spectrum"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-closed-points-of-product.md",
-  "place": "Proof: expanded with Stacks Tags 01JR, 01JQ and 01JT and elementary finite-dimensional linear algebra"
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.Finite, QuasiFinite, PullbackCarrier",
+  "place": "Short geometric proof using finite pullback and discrete fibre lemmas"
  },
  "mathlib_searches": [
   {
@@ -196,9 +129,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-fibre-product-point-residue-field"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -224,5 +155,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Wrote review.md. Verified the immutable statement, source, dependency interfaces, docstrings, edge cases, universes, and verbatim signature. Per-file scompile.py reproduction passed cleanly. No corrections needed; branch and project clones unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261019T231241-L-566056",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

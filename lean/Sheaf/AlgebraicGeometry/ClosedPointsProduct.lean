@@ -9,9 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Topology.JacobsonSpace
-import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
-import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Closed points of a product
@@ -56,6 +55,37 @@ theorem closedPoint_iff_of_finiteType_product
     z ∈ closedPoints (↑(pullback f g)) ↔
       pullback.fst f g z ∈ closedPoints X ∧
         pullback.snd f g z ∈ closedPoints Y := by
-  sorry
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have : JacobsonSpace Y := LocallyOfFiniteType.jacobsonSpace g
+  constructor
+  · intro hz
+    exact ⟨(pullback.fst f g).closePoints_subset_preimage_closedPoints hz,
+      (pullback.snd f g).closePoints_subset_preimage_closedPoints hz⟩
+  · rintro ⟨hx, hy⟩
+    let i := X.fromSpecResidueField (pullback.fst f g z)
+    have : IsClosedImmersion i := isClosed_singleton_iff_isClosedImmersion.mp hx
+    have : IsFinite (i ≫ f) :=
+      isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.mpr inferInstance
+    let a := pullback.fst i (pullback.fst f g)
+    let j := pullback.snd i (pullback.fst f g)
+    let q := j ≫ pullback.snd f g
+    have hcart : IsPullback a q (i ≫ f) g :=
+      (IsPullback.of_hasPullback i (pullback.fst f g)).paste_vert
+        (IsPullback.of_hasPullback f g)
+    have : IsFinite q := MorphismProperty.of_isPullback hcart inferInstance
+    have hz : z ∈ Set.range j := by
+      rw [Scheme.Pullback.range_snd]
+      simp [i]
+    obtain ⟨w, hw⟩ := hz
+    have hqw : q w = pullback.snd f g z := by
+      simp [q, hw]
+    have hwclosed : IsClosed ({w} : Set ↑(pullback i (pullback.fst f g))) :=
+      isClosed_of_subset_discrete_closed
+        (by simpa only [Set.singleton_subset_iff, Set.mem_preimage, Set.mem_singleton_iff]
+              using hqw)
+        (q.isDiscrete_preimage_singleton (pullback.snd f g z))
+        (hy.preimage q.continuous)
+    apply mem_closedPoints_iff.mpr
+    simpa only [Set.image_singleton, hw] using j.isClosedEmbedding.isClosedMap _ hwclosed
 
 end AlgebraicGeometry
