@@ -16675,3 +16675,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/E9/Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison (stage 3; reviewer PASS; first push; landing 20261019T002538-L-2150901 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/E9/Sheaf.Paper.IndHeartIIVanishing (stage 3; reviewer PASS; first push; landing 20261019T002538-L-2151038 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized (stage 3; reviewer PASS; first push; landing 20261019T002539-L-2151146 (proof); batch 20261019T002449; modules 1; new nodes 1)
+- 00:25 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Etale.OpenExtensionZeroEtaleAdjunctionAgreement (stage 3; reviewer PASS; first push; landing 20261019T002539-L-2151261 (proof); batch 20261019T002449; modules 1; new nodes 0)

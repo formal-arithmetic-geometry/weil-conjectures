@@ -32,91 +32,39 @@
  ],
  "proof": [
   {
-   "text": "Write $P_F=j_{p!}F$ and $Q_F(V)=\\bigoplus_{s\\in\\Hom_X(V,U)}F(V,s)$. The objects-over-$U$ clause of [def-weil-pbc-extension-by-zero] says that this index set is empty or a singleton, and any lift $s$ makes $(V,s)$ an object of $U_{\\Et}$. If it is a singleton, define $\\rho_{F,V}:Q_F(V)\\to P_F(V)$ by sending the unique summand identically to $F(V,s)$; if it is empty, both modules are zero and use their unique map. Then $\\rho_{F,V}\\iota_{F,V}=1$ and $\\iota_{F,V}\\rho_{F,V}=1$, by evaluation on the unique summand, or on zero. For $a:V'\\to V$, when $V$ has a lift, the summand restriction of [def-weil-pbc-etale-sum-extension] sends it to the unique lift $sa$ and applies $F(a)$, exactly as $P_F$ does. When $V$ has no lift, both restrictions have zero source, even if $V'$ has a lift. Thus $\\iota_F$ and $\\rho_F$ are inverse presheaf maps. A morphism $F\\to F'$ acts by its component on each summand, so these maps also commute with every such morphism.",
+   "text": "In the recorded Lean constructions, both extensions are sheafToPresheaf followed by the same localization left Kan extension and presheafToSheaf [def-weil-pbc-extension-by-zero, def-weil-pbc-etale-sum-extension, def-weil-pbc-sheafification]. The specified comparison is the right whiskering of the identity natural transformation by sheafification. Functor.whiskerRight_id therefore identifies it with the identity of openImmersionLowerShriek, so it is invertible.",
    "uses": [
     "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-etale-sum-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
-   }
-  },
-  {
-   "text": "Let $q^P_F:P_F\\to j_!F$ and $q^Q_F:Q_F\\to j^{\\mathrm{et}}_!F$ be the sheafification maps. By [def-weil-pbc-sheafification], $q^Q_F\\iota_F$ induces the unique map $\\kappa_F:j_!F\\to j^{\\mathrm{et}}_!F$ with $\\kappa_Fq^P_F=q^Q_F\\iota_F$. Likewise $q^P_F\\rho_F$ induces $\\lambda_F:j^{\\mathrm{et}}_!F\\to j_!F$. Precomposing $\\lambda_F\\kappa_F$ with $q^P_F$ gives $q^P_F\\rho_F\\iota_F=q^P_F$, so uniqueness in sheafification gives $\\lambda_F\\kappa_F=1$. The other identity follows after precomposition with $q^Q_F$. Naturality in $F$ follows by precomposing its required square with $q^P_F$, using Step 1 and uniqueness. Hence the specified sheafification $\\kappa$ is a natural isomorphism.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-etale-sum-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
-   }
-  },
-  {
-   "text": "We compute the sum construction's Hom bijection, rather than infer its value from the existence of a left adjoint. For a presheaf map $t:Q_F\\to G$, restrict $t_V$ to the summand indexed by $s:V\\to U$ to obtain $\\alpha_{(V,s)}:F(V,s)\\to G(V)$. Here $G(V)=j^{-1}G(V,s)$, the restriction identification stated in [lem-weil-pbc-extension-by-zero-adjunction]. Naturality of $t$ and the summand restriction formula of [def-weil-pbc-etale-sum-extension] give $G(a)\\alpha_{(V,s)}=\\alpha_{(V',sa)}F(a)$ for every $a:(V',sa)\\to(V,s)$; thus these components define $\\alpha:F\\to j^{-1}G$. Conversely such an $\\alpha$ defines $t_{\\alpha,V}$ by $t_{\\alpha,V}(\\operatorname{in}_s x)=\\alpha_{(V,s)}(x)$, extended $\\Lambda$-linearly; for an empty index set it is the zero map. The same displayed equality proves naturality. The two constructions are inverse since they agree on each summand; they commute with precomposition in $F$ and postcomposition in $G$ component by component.",
-   "uses": [
     "def-weil-pbc-etale-sum-extension",
-    "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
-   }
-  },
-  {
-   "text": "Sheafification [def-weil-pbc-sheafification] identifies maps $j^{\\mathrm{et}}_!F\\to G$ with presheaf maps $Q_F\\to G$ by precomposition with $q^Q_F$. Compose this bijection with Step 3. It is natural in $F,G$, hence is an adjunction Hom bijection by [lem-weil-pbc-adjunction-of-natural-bijection]. This is precisely the canonical adjunction $j^{\\mathrm{et}}_!\\dashv j^{-1}$ of [lem-weil-pbc-etale-restriction-injectives]: we have written out the direct-sum/sheafification construction of Stacks 03DI that defines that adjunction, including its inverse check. In particular the transpose $T_{\\mathrm{et}}(\\alpha)$ is characterized by $T_{\\mathrm{et}}(\\alpha)q^Q_F=t_\\alpha$. This calculation uses the cited injective-restriction node for its adjunction assertion only; it does not assume its statement contains the transpose formula.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-weil-pbc-etale-restriction-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
-   }
-  },
-  {
-   "text": "For $\\alpha:F\\to j^{-1}G$, [lem-weil-pbc-extension-by-zero-adjunction] says its open-extension transpose $T_{\\mathrm{op}}(\\alpha)$ is induced by $p_{\\alpha,V}:P_F(V)\\to G(V)$, equal to $\\alpha_{(V,s)}$ if a lift exists and the zero map otherwise. At each $V$, Step 3 gives $t_{\\alpha,V}\\iota_{F,V}=p_{\\alpha,V}$ on the unique summand, or on the zero source. Therefore $T_{\\mathrm{et}}(\\alpha)\\kappa_Fq^P_F=T_{\\mathrm{et}}(\\alpha)q^Q_F\\iota_F=t_\\alpha\\iota_F=p_\\alpha=T_{\\mathrm{op}}(\\alpha)q^P_F$. Uniqueness in [def-weil-pbc-sheafification] gives $T_{\\mathrm{op}}(\\alpha)=T_{\\mathrm{et}}(\\alpha)\\kappa_F$, proving the required equality of transposes for every $F,G,\\alpha$.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
-   }
+   "elementary": true
   },
   {
-   "text": "For completeness let $\\Phi_{\\mathrm{op}},\\Phi_{\\mathrm{et}}$ denote the forward Hom bijections. Step 5 gives $\\Phi_{\\mathrm{op}}(b\\kappa_F)=\\Phi_{\\mathrm{et}}(b)$ for every $b:j^{\\mathrm{et}}_!F\\to G$. Take $G=j^{\\mathrm{et}}_!F$ and $b=1$. The formula $\\Phi(a)=j^{-1}(a)\\eta_F$ and $\\Phi(1)=\\eta_F$ in [lem-weil-pbc-adjunction-of-natural-bijection] yield $j^{-1}(\\kappa_F)\\eta_{j,F}=\\eta^{\\mathrm{et}}_{j,F}$. Next take $F=j^{-1}G$ and $\\alpha=1$ in Step 5. Since the transpose of $1_{j^{-1}G}$ is the counit by the same cited node, $\\varepsilon_{j,G}=\\varepsilon^{\\mathrm{et}}_{j,G}\\kappa_{j^{-1}G}$. These are the asserted unit and counit identities.",
+   "text": "Unfolding the two recorded adjunction definitions [lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-etale-restriction-injectives] gives the same sheafAdjunctionContinuous, transported by the same upperStarIsoLocalizationRestriction. Their equality is reflexivity in Lean; no uniqueness-of-adjoints argument or new Hom bijection is needed.",
    "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-etale-restriction-injectives"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037 (categories-definition-adjoint), following paragraph defining the unit and counit and equivalence of (1), (2), (3)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Rewrite by the adjunction equality of Step 2 and the identity comparison of Step 1. The transpose equality is composition with an identity, proved by reflexivity. For the unit equality, the pullback functor maps the identity to the identity, and composition with the identity fixes the unit. The counit equality likewise reduces to left composition by the identity. These are the remaining three conjuncts, for arbitrary F, G and alpha.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sum-extension",
   "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-etale-sum-extension",
   "def-weil-pbc-sheafification",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-extension-by-zero-adjunction"
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-etale-restriction-injectives"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf and the construction alpha -> alpha′ in its proof; etale-cohomology.tex Tag 03S3 (etale-cohomology-definition-extension-zero), following paragraph and equation-j-p-shriek"
+  "place": "Tag 03DI and etale-cohomology.tex Tag 03S3; direct implementation in the common left Kan extension model of the recorded definitions, checked by Lean (F1, 2026-10-19)."
  },
  "mathlib_searches": [
   {
@@ -234,5 +182,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The specified comparison is the sheafification of the identity on the common presheaf left Kan extension used by BOTH recorded extensions; in its empty/singleton-lift descriptions this is exactly the single-summand inclusion. The theorem states invertibility, the transpose equality and both unit/counit identities for the recorded canonical adjunctions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002539-L-2151261",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

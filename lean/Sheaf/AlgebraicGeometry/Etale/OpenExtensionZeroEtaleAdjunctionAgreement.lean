@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Agreement of open and étale extension by zero and their adjunctions
@@ -105,6 +103,22 @@ theorem openImmersionToEtaleLowerShriek_adjunction_agreement
             ((upperStar (ModuleCat.{u + 1} Λ) j).obj G) ≫
           (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j inferInstance).counit.app
             G) := by
-  sorry
+  have hadj : openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j =
+      etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j inferInstance := rfl
+  rw [← hadj]
+  have hκ : openImmersionToEtaleLowerShriek Λ j =
+      𝟙 (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) := by
+    exact Functor.whiskerRight_id _
+  have hIso : IsIso (openImmersionToEtaleLowerShriek Λ j) := by
+    rw [hκ]
+    infer_instance
+  refine ⟨hIso, ?_, ?_, ?_⟩
+  · intro F G α
+    rw [hκ]
+    rfl
+  · intro F
+    simp [hκ]
+  · intro G
+    simp [hκ]
 
 end AlgebraicGeometry.Etale
