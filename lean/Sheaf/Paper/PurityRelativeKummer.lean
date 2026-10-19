@@ -5,7 +5,7 @@ Authors: SHEAF group Q39
 -/
 module
 
-public import Sheaf.Paper.PurityAffineLineDatum
+public import Sheaf.Paper.PurityRelativeKummerMaps
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
@@ -20,90 +20,11 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
-import Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
-import Sheaf.AlgebraicGeometry.StrictlyHenselianConstantCohomology
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
-import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Paper.KunBcMapOnCohomology
-import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ComparisonDirectImageCanonicalMate
-import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomology
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
-import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
-import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange
-import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Paper.FiniteDirectImageComposition
-import Sheaf.Paper.PurityFiniteKummerLevel
-import Sheaf.Paper.PurityFiniteSetting
-import Sheaf.Paper.SiteComparisonEdgeSection
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
+import Sheaf.Paper.PurityRelativeLineCohomology
+import Sheaf.Paper.PurityRelativePuncturedCohomology
+import Sheaf.Paper.PurityRelativeKummerExchange
+import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Relative affine-line acyclicity and the actual Kummer generator
 
@@ -118,6 +39,8 @@ The generator is homology of the adjoint of the coordinate's actual Kummer bound
 @[expose] public section
 
 set_option autoImplicit false
+set_option maxRecDepth 2048
+set_option Elab.async false
 
 universe u
 
@@ -125,134 +48,145 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Canonical pullback on constants, with comparison inverse images included.
-Source: blueprint sk-def-purity-conv (blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def constantPullback (P : PurityFiniteSetting.{u})
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj (P.constant Y) ⟶
-      P.constant X :=
-  (ProEtale.comparisonUpperStarCompUpperStarIso
-    (ModuleCat.{u + 1} P.Coefficient) f).hom.app (P.constantEtale Y) ≫
-      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map
-        ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} P.Coefficient) f).hom.app
-          (ModuleCat.of P.Coefficient P.Coefficient))
+attribute [local irreducible] ProEtale.upperStar ProEtale.lowerStar
+  Functor.leftDerivedFunctor Functor.rightDerivedFunctor
+  ProEtale.derivedUpperStarLowerStarAdjunction ProEtale.derivedBaseChangeMap
+  ProEtale.leftDerivedUpperStarSquareIso
+  ProEtale.comparisonUpperStar Etale.upperStar
+  Functor.mapDerivedCategory Functor.mapDerivedCategoryPlus
+  Adjunction.derivedAdjunction Adjunction.derivedPlus
 
-/-- Canonical pullback on the finite twist, with comparison inverse images included.
-Source: blueprint sk-def-purity-conv (blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def twistPullback (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj (P.twist h Y) ⟶
-      P.twist h X :=
-  (ProEtale.comparisonUpperStarCompUpperStarIso
-    (ModuleCat.{u + 1} P.Coefficient) f).hom.app (P.twistEtale h Y) ≫
-      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map
-        (P.twistEtalePullback h f)
+section
+variable {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {G : C ⥤ C'} {H : D ⥤ D'}
 
-/-- Pullback of a coefficient object in the derived category. This is the standard
-single-complex comparison followed by the canonical map on the actual sheaves.
-Source: blueprint sk-def-purity-conv (blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def derivedCoefficientPullback (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y) (twisted : Bool) :
-    ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor).obj
-      (P.derivedSheaf h Y twisted) ⟶ P.derivedSheaf h X twisted :=
-  (ProEtale.singleFunctorCompLeftDerivedUpperStarIso
-    (ModuleCat.{u + 1} P.Coefficient) f).hom.app (P.coefficientSheaf h Y twisted) ≫
-      (DerivedCategory.singleFunctor
-        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)) 0).map
-          (match twisted with
-            | true => P.twistPullback h f
-            | false => P.constantPullback f)
+private theorem isIso_mate_of_units (adj : L ⊣ R) (adj' : L' ⊣ R')
+    (alpha : TwoSquare G L L' H) (X : C)
+    [IsIso (adj.unit.app X)] [IsIso (adj'.unit.app (G.obj X))]
+    [IsIso (alpha.natTrans.app X)] :
+    IsIso ((mateEquiv adj adj' alpha).natTrans.app (L.obj X)) := by
+  have hu := unit_mateEquiv adj adj' alpha X
+  change G.map (adj.unit.app X) ≫
+      (mateEquiv adj adj' alpha).natTrans.app (L.obj X) =
+    adj'.unit.app (G.obj X) ≫ R'.map (alpha.natTrans.app X) at hu
+  have : IsIso (G.map (adj.unit.app X) ≫
+      (mateEquiv adj adj' alpha).natTrans.app (L.obj X)) := by
+    rw [hu]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (G.map (adj.unit.app X)) _
+end
 
-/-- The canonical unit with coefficients identified by their canonical pullback map.
-Source: blueprint sk-prop-a1-kummer, clauses (1) and (2)
-(blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def relativeUnit (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y) (twisted : Bool) :
-    P.derivedSheaf h Y twisted ⟶
-      (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) f).rightDerivedFunctor.obj
-        (P.derivedSheaf h X twisted) :=
-  (ProEtale.derivedUpperStarLowerStarAdjunction
-    (ModuleCat.{u + 1} P.Coefficient) f).unit.app (P.derivedSheaf h Y twisted) ≫
-      (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) f).rightDerivedFunctor.map
-        (P.derivedCoefficientPullback h f twisted)
+private theorem baseChange_at_pullback_isIso (P : PurityFiniteSetting.{u})
+    {X' X Y' Y : Scheme.{u}} {v : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq v f' f g)
+    (K : DerivedCategory
+      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)))
+    (hf : IsIso ((ProEtale.derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) f).unit.app K))
+    (hf' : IsIso ((ProEtale.derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) f').unit.app
+        ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.obj K))) :
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient) sq).app
+      ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.obj K)) := by
+  have := hf
+  have := hf'
+  unfold ProEtale.derivedBaseChangeMap
+  exact isIso_mate_of_units
+    (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) f)
+    (ProEtale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} P.Coefficient) f')
+    (ProEtale.leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} P.Coefficient) sq).hom K
 
-/-- The edge-section map, obtained by transposing the actual coordinate class and
-taking H0, followed by the standard H0(K[1])=H1(K) comparison. It is the A-linear map
-whose value on 1 is the Leray edge image of kappa(t).
-Source: blueprint sk-prop-a1-kummer, clause (2)
-(blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def kummerGenerator (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
-    (a : Y ⟶ Spec (CommRingCat.of P.field.k)) :
-    P.constant Y ⟶ (DerivedCategory.homologyFunctor
-      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 1).obj
-        ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
-          (puncturedProjection Y)).rightDerivedFunctor.obj
-            (P.derivedSheaf h (Punctured Y) true)) :=
-  (DerivedCategory.singleFunctorCompHomologyFunctorIso
-    (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 0).inv.app
-      (P.constant Y) ≫
-    (DerivedCategory.homologyFunctor
-      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 0).map
-      (((ProEtale.derivedUpperStarLowerStarAdjunction
-        (ModuleCat.{u + 1} P.Coefficient) (puncturedProjection Y)).homEquiv _ _
-          (P.derivedCoefficientPullback h (puncturedProjection Y) false ≫
-            (P.coordinateKummer h Y a).hom)) ≫
-        ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
-          (puncturedProjection Y)).rightDerivedFunctor.commShiftIso (1 : ℤ)).hom.app
-            (P.derivedSheaf h (Punctured Y) true)) ≫
-    ((DerivedCategory.homologyFunctor
-      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 0).shiftIso
-        (1 : ℤ) 0 1 (add_zero 1)).hom.app
-      ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
-        (puncturedProjection Y)).rightDerivedFunctor.obj (P.derivedSheaf h (Punctured Y) true))
+private theorem coefficient_pullback_isIso (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hr : IsUnit (P.exponent : Γ(Y, ⊤))) (twisted : Bool) :
+    IsIso (P.derivedCoefficientPullback h f twisted) := by
+  have hc : IsIso (P.constantPullback f) := by
+    unfold constantPullback
+    infer_instance
+  have ht : IsIso (P.twistPullback h f) := by
+    have := P.isIso_twistEtalePullback h f hr
+    unfold twistPullback
+    infer_instance
+  cases twisted <;>
+    dsimp only [derivedCoefficientPullback, Functor.mapWithComparison] <;> infer_instance
 
-/-- The assertions in clauses (1)-(3), with the actual specified maps. No finite-type
-condition is built into this predicate, so it also applies to geometric fibres.
-Source: blueprint sk-prop-a1-kummer, clauses (1)-(3)
-(blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def RelativeKummerConclusions (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
-    (a : Y ⟶ Spec (CommRingCat.of P.field.k)) : Prop :=
-  IsIso (P.relativeUnit h (lineProjection Y) false) ∧
-  IsIso (P.relativeUnit h (lineProjection Y) true) ∧
-  (∀ (m : ℕ), 0 < m → IsZero
-    ((DerivedCategory.homologyFunctor
-      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) (m : ℤ)).obj
-        ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
-          (lineProjection Y)).rightDerivedFunctor.obj (P.derivedSheaf h (Line Y) true)))) ∧
-  IsIso ((DerivedCategory.homologyFunctor
-    (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 0).map
-      (P.relativeUnit h (puncturedProjection Y) true)) ∧
-  IsIso (P.kummerGenerator h Y a) ∧
-  ∀ (m : ℕ), 2 ≤ m → IsZero
-    ((DerivedCategory.homologyFunctor
-      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) (m : ℤ)).obj
-        ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
-          (puncturedProjection Y)).rightDerivedFunctor.obj
-            (P.derivedSheaf h (Punctured Y) true)))
+private theorem unit_isIso_of_relativeUnit (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hr : IsUnit (P.exponent : Γ(Y, ⊤))) (twisted : Bool)
+    [IsIso (P.relativeUnit h f twisted)] :
+    IsIso ((ProEtale.derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) f).unit.app (P.derivedSheaf h Y twisted)) := by
+  have := coefficient_pullback_isIso P h f hr twisted
+  have hi : IsIso ((ProEtale.derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) f).unit.app (P.derivedSheaf h Y twisted) ≫
+        (ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) f).rightDerivedFunctor.map
+          (P.derivedCoefficientPullback h f twisted)) := by
+    exact ‹IsIso (P.relativeUnit h f twisted)›
+  exact IsIso.of_isIso_comp_right _
+    ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient) f).rightDerivedFunctor.map
+      (P.derivedCoefficientPullback h f twisted))
 
-/-- Clause (4): naturality of the actual coordinate class and invertibility of the
-canonical exchange mates. Their targets use the canonical coefficient pullback
-identifications; invertibility is equivalently tested before those identifications.
-Source: blueprint sk-prop-a1-kummer, clause (4)
-(blueprint: prop-pur-gm-relative-kummer). -/
-noncomputable def KummerBaseChangeConclusions (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) {Y' Y : Scheme.{u}} (g : Y' ⟶ Y)
-    (a : Y ⟶ Spec (CommRingCat.of P.field.k)) : Prop :=
-  (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)
-      (puncturedMap g)).leftDerivedFunctor.map (P.coordinateKummer h Y a).hom ≫
-    ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)
-      (puncturedMap g)).leftDerivedFunctor.commShiftIso (1 : ℤ)).hom.app
-        (P.derivedSheaf h (Punctured Y) true) ≫
-    (P.derivedCoefficientPullback h (puncturedMap g) true)⟦(1 : ℤ)⟧' =
-      P.derivedCoefficientPullback h (puncturedMap g) false ≫
-        (P.coordinateKummer h Y' (g ≫ a)).hom ∧
-  IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient)
-    (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
-      (P.derivedSheaf h (Line Y) true)) ∧
-  IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient)
-    (puncturedSquare g)).app (P.derivedSheaf h (Punctured Y) true))
+private theorem line_exchange_isIso (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level)
+    {Y' Y : Scheme.{u}} (g : Y' ⟶ Y) (a : Y ⟶ Spec (.of P.field.k))
+    (hY : P.RelativeKummerConclusions h Y a)
+    (hY' : P.RelativeKummerConclusions h Y' (g ≫ a)) :
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient)
+      (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq).app
+        (P.derivedSheaf h (Line Y) true)) := by
+  have hy : IsIso (P.relativeUnit h (lineProjection Y) true) := by
+    exact hY.2.1
+  have hy' : IsIso (P.relativeUnit h (lineProjection Y') true) := by
+    exact hY'.2.1
+  have hu := unit_isIso_of_relativeUnit P h (lineProjection Y) (P.exponent_isUnit Y a) true
+  have hu' := unit_isIso_of_relativeUnit P h (lineProjection Y')
+    (P.exponent_isUnit Y' (g ≫ a)) true
+  have hco := coefficient_pullback_isIso P h g (P.exponent_isUnit Y a) true
+  have hco' := coefficient_pullback_isIso P h (lineProjection Y)
+    (P.exponent_isUnit Y a) true
+  have hgu : IsIso ((ProEtale.derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} P.Coefficient) (lineProjection Y')).unit.app
+        ((ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.obj
+          (P.derivedSheaf h Y true))) :=
+    (NatTrans.isIso_app_iff_of_iso _ (asIso (P.derivedCoefficientPullback h g true))).2 hu'
+  have hx' := baseChange_at_pullback_isIso P
+    (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).toCommSq
+    (P.derivedSheaf h Y true) hu hgu
+  exact (NatTrans.isIso_app_iff_of_iso _
+    (asIso (P.derivedCoefficientPullback h (lineProjection Y) true))).1 hx'
+
+
+attribute [local irreducible] constantPullback twistPullback derivedCoefficientPullback
+  relativeUnit kummerGenerator derivedSheaf coefficientSheaf constant twist
+  constantEtale twistEtale coordinateKummer
+
+private theorem relative_conclusions (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) (B : Scheme.{u}) (a : B ⟶ Spec (CommRingCat.of P.field.k)) :
+    P.RelativeKummerConclusions h B a := by
+  have line (twisted : Bool) : IsIso (P.relativeUnit h (lineProjection B) twisted) := by
+    exact relative_line_cohomology P h B a twisted
+  have ht := line true
+  have hle : (P.derivedSheaf h B true).IsLE 0 :=
+    DerivedCategory.TStructure.t.isLE_of_iso
+      (eqToIso (P.derivedSheaf_true_eq h B)).symm 0
+  have hle' : ((ProEtale.lowerStar (ModuleCat.{u + 1} P.Coefficient)
+      (lineProjection B)).rightDerivedFunctor.obj (P.derivedSheaf h (Line B) true)).IsLE 0 :=
+    DerivedCategory.TStructure.t.isLE_of_iso
+      (asIso (P.relativeUnit h (lineProjection B) true)) 0
+  refine ⟨line false, ht, ?_, relative_punctured_cohomology P h B a⟩
+  intro m hm
+  exact DerivedCategory.isZero_of_isLE _ 0 _ (by exact_mod_cast hm)
+
+private theorem relative_baseChange (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) {B' B : Scheme.{u}} (g : B' ⟶ B)
+    (a : B ⟶ Spec (CommRingCat.of P.field.k)) :
+    P.KummerBaseChangeConclusions h g a := by
+  have hB := relative_conclusions P h B a
+  have hB' := relative_conclusions P h B' (g ≫ a)
+  have he := relative_kummer_exchange P h g a hB hB'
+  refine ⟨he.1, line_exchange_isIso P h g a hB hB', ?_⟩
+  exact he.2
 
 /-- The affine line and punctured line over a separated finite-type k-scheme, with
 canonical units, the actual Kummer generator, higher vanishing and both kinds of
@@ -323,6 +257,11 @@ theorem relative_kummer (P : PurityFiniteSetting.{u})
       P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k)) ∧
       P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω))
         (g ≫ Y ↘ Spec (CommRingCat.of P.field.k)) := by
-  sorry
+  refine ⟨relative_conclusions P h Y (Y ↘ Spec (CommRingCat.of P.field.k)), ?_, ?_⟩
+  · intro Y' _ _ _ _ g _
+    exact relative_baseChange P h g (Y ↘ Spec (CommRingCat.of P.field.k))
+  · intro Ω _ _ g
+    exact ⟨relative_baseChange P h g (Y ↘ Spec (CommRingCat.of P.field.k)),
+      relative_conclusions P h (Spec (CommRingCat.of Ω)) (g ≫ Y ↘ Spec (CommRingCat.of P.field.k))⟩
 
 end WeilConjectures.PurityFiniteSetting

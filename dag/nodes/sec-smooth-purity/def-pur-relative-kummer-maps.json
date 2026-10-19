@@ -1,0 +1,114 @@
+{
+ "id": "def-pur-relative-kummer-maps",
+ "kind": "definition",
+ "title": "Canonical relative coefficient maps, units and Kummer edge maps",
+ "statement": "The existing canonical constant and root-line pullbacks, their derived comparisons, the coefficient-identified adjunction unit, the actual Kummer edge map, and the two conjunction predicates are defined in the setting of [def-pur-conventions] and [def-pur-affine-line-datum]. The named degree-zero coefficient complexes are identified with their single complexes by reflexivity. Explicit equality maps at these identifications prevent normalization of localization morphisms during type checking. coordinateClass is exactly the published coordinateKummer morphism with those identity maps inserted. mapWithComparison is the composite of the specified single-complex comparison and the image of the underived coefficient map. CoordinateKummerNaturality names the exact coordinate-naturality equation, without changing it; the base-change conjunction and exchange theorem share this irreducible predicate to avoid rechecking expanded localization morphism types. The original seven signatures remain unchanged; these explicit transports and the functor identity laws preserve their actual maps and predicates.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "node prop-pur-gm-relative-kummer, order 1935"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "Canonical maps and coefficient identifications in clauses (1), (2), and (4); the equality identifications are reflexive definition lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative etale cohomology of the affine line and multiplicative group with the canonical Kummer generator and arbitrary base change",
+   "results": "8 hits: groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Kummer class of the coordinate generates the first higher direct image of roots of unity on the punctured affine line over an algebraically closed field",
+   "results": "8 hits: modularCyclotomicCharacter.spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter', modularCyclotomicCharacter'.unique', AdjoinRootXPowSubCEquivToRootsOfUnity, autAdjoinRootXPowSubC_root, cyclotomicCharacter.spec, autEquivRootsOfUnity_smul",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*[Nn]atur|[Nn]atur.*[Kk]ummer",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRelativeKummer",
+  "date": "2026-10-19",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Canonical relative coefficient maps, units and Kummer edge maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityRelativeKummerMaps",
+  "file": "lean/Sheaf/Paper/PurityRelativeKummerMaps.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RelativeKummerConclusions",
+  "statement": "def RelativeKummerConclusions (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.Functor.mapWithComparison",
+   "WeilConjectures.PurityFiniteSetting.derivedSheaf_eq_single",
+   "WeilConjectures.PurityFiniteSetting.derivedSheaf_false_eq",
+   "WeilConjectures.PurityFiniteSetting.derivedSheaf_true_eq",
+   "WeilConjectures.PurityFiniteSetting.coordinateClass",
+   "WeilConjectures.PurityFiniteSetting.constantPullback",
+   "WeilConjectures.PurityFiniteSetting.twistPullback",
+   "WeilConjectures.PurityFiniteSetting.derivedCoefficientPullback",
+   "WeilConjectures.PurityFiniteSetting.relativeUnit",
+   "WeilConjectures.PurityFiniteSetting.kummerGenerator",
+   "WeilConjectures.PurityFiniteSetting.RelativeKummerConclusions",
+   "WeilConjectures.PurityFiniteSetting.CoordinateKummerNaturality",
+   "WeilConjectures.PurityFiniteSetting.KummerBaseChangeConclusions"
+  ]
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-edcd4",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192725-L-1860074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-edcd4",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192725-L-1860074",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules + 2 direct importers compiled (Maps 37.8 s at 60 s limit after a load-289 timeout); relative_kummer statement byte-identical to clone; 7 moved signatures vs change-record Old; derivedCoefficientPullback new body = old body proved (both Bool cases); #print axioms: definitions sorry-free, proved theorems sorryAx only via the 2 new sorry nodes and affineLineOrdinaryInvariance; unit sk-prop-a1-kummer realized empty"
+ }
+}

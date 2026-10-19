@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-relative-line-cohomology",
+ "kind": "statement",
+ "title": "Affine-line unit for the actual finite root line",
+ "statement": "For a purity finite setting P, h : ramificationIndex divides level, any scheme Y with a morphism a to Spec k, and either Boolean coefficient choice, the specified affine-line relativeUnit of [def-pur-relative-kummer-maps] is an isomorphism in the unbounded derived category. No finite-type hypothesis is required. This is the affine-line part of the relative Kummer calculation.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "node prop-pur-gm-relative-kummer, order 1935"
+ },
+ "stmt_deps": [
+  "def-pur-relative-kummer-maps",
+  "def-pur-conventions",
+  "def-pur-affine-line-datum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-affine-line-ordinary-invariance] with twist zero. The exact inverse-image single-complex comparisons and the constant-sheaf pullback isomorphism identify the given bounded-below object with constant coefficients. Compatibility of the derived adjunctions and their units then gives invertibility of the unbounded unit.",
+   "uses": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "def-pur-relative-kummer-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+    "place": "node prop-pur-gm-relative-kummer, order 1935"
+   }
+  },
+  {
+   "text": "By [lem-sc-primitive-root], choose a primitive root of the invertible exponent. Its roots-of-unity sheaf trivialization, after scalar extension, identifies the actual twist with constants. Scalar extension from ZMod equals extension of the underlying abelian group: use the canonical Hom-equivalence making every additive map ZMod-linear, then uniqueness of left adjoints. Naturality transports unit invertibility across this isomorphism. The canonical coefficient pullback maps are composites of isomorphisms; their direct images are isomorphisms, so the specified relativeUnit is invertible.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "def-pur-conventions",
+    "def-pur-affine-line-datum",
+    "def-pur-relative-kummer-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+    "place": "node prop-pur-gm-relative-kummer, order 1935"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-pur-relative-kummer-maps",
+  "lem-pur-affine-line-ordinary-invariance",
+  "lem-sc-primitive-root"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.md",
+  "place": "The indicated clauses of the relative Kummer proof, with its affine-line input reused from ordinary invariance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative etale cohomology of the affine line and multiplicative group with the canonical Kummer generator and arbitrary base change",
+   "results": "8 hits: groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Kummer class of the coordinate generates the first higher direct image of roots of unity on the punctured affine line over an algebraically closed field",
+   "results": "8 hits: modularCyclotomicCharacter.spec, modularCyclotomicCharacter'.spec', modularCyclotomicCharacter', modularCyclotomicCharacter'.unique', AdjoinRootXPowSubCEquivToRootsOfUnity, autAdjoinRootXPowSubC_root, cyclotomicCharacter.spec, autEquivRootsOfUnity_smul",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*[Nn]atur|[Nn]atur.*[Kk]ummer",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No declaration proves the stated arbitrary-base calculation with these actual coefficient maps and coordinate boundary."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRelativeKummer",
+  "date": "2026-10-19",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Affine-line unit for the actual finite root line",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityRelativeLineCohomology",
+  "file": "lean/Sheaf/Paper/PurityRelativeLineCohomology.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.relative_line_cohomology",
+  "statement": "theorem relative_line_cohomology (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) (twisted : Bool) : IsIso (P.relativeUnit h (lineProjection Y) twisted)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-19",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.relative_line_cohomology"
+  ]
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-edcd4",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192725-L-1860074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-edcd4",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T192725-L-1860074",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules + 2 direct importers compiled (Maps 37.8 s at 60 s limit after a load-289 timeout); relative_kummer statement byte-identical to clone; 7 moved signatures vs change-record Old; derivedCoefficientPullback new body = old body proved (both Bool cases); #print axioms: definitions sorry-free, proved theorems sorryAx only via the 2 new sorry nodes and affineLineOrdinaryInvariance; unit sk-prop-a1-kummer realized empty"
+ }
+}
