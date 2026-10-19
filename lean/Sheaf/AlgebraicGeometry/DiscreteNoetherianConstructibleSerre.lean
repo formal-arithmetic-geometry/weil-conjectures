@@ -8,20 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleNoetherianEtaleModules
 public import Sheaf.AlgebraicGeometry.AffineLocallyConstructibleProEtaleModules
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Paper.ProEtaleConstantModulePullbackComposition
+import Sheaf.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsSerre
+import Sheaf.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsPullback
 import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.OpenClosed
-import Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Constructible sheaves over discrete Noetherian rings form weak Serre subcategories
@@ -55,6 +47,26 @@ namespace AlgebraicGeometry
 namespace Scheme
 
 open Opposite
+
+-- Cache sheafification on the concrete sites before elaborating the local models.
+-- This avoids reconstructing the same large instance terms at every constant sheaf.
+private instance etaleModuleWeakSheafify (Y : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :
+    HasWeakSheafify Y.smallEtaleTopology (ModuleCat.{u + 1} R) := inferInstance
+
+private instance etaleModuleOverWeakSheafify (Y : Scheme.{u}) (R : Type (u + 1))
+    [CommRing R] (U : Y.Etale) :
+    HasWeakSheafify (Y.smallEtaleTopology.over U) (ModuleCat.{u + 1} R) := inferInstance
+
+private instance etaleRingWeakSheafify (Y : Scheme.{u}) :
+    HasWeakSheafify Y.smallEtaleTopology RingCat.{u + 1} := inferInstance
+
+private instance etaleModuleLocallyBijective (Y : Scheme.{u}) (R : Type (u + 1))
+    [CommRing R] : Y.smallEtaleTopology.WEqualsLocallyBijective (ModuleCat.{u + 1} R) :=
+  inferInstance
+
+private noncomputable instance etaleModuleAbelian (Y : Scheme.{u}) (R : Type (u + 1))
+    [CommRing R] : Abelian (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
+  inferInstance
 
 private instance : JointlySurjective etalePrecoverage.{u} :=
   inferInstanceAs (JointlySurjective (precoverage @Etale))
@@ -461,6 +473,89 @@ private theorem etaleAffine_extension {X : Scheme.{u}} {R : Type (u + 1)}
   have : IsFiniteLocallyConstantSheaf (S.map L).X₃ := (hT a).2
   exact noetherian_flc_of_shortExact (hS.map_of_exact L)
 
+
+private abbrev proFiniteModels {X : Scheme.{u}} (R : Type u) [CommRing R]
+    (F : proEtaleRingModules X (proEtaleConstantRing X R)) : Prop :=
+  IsFinitelyPresentedLocallyConstantProEtaleModule F
+
+private theorem proFiniteModels_of_isZero {X : Scheme.{u}} {R : Type u} [CommRing R]
+    {F : proEtaleRingModules X (proEtaleConstantRing X R)} (hF : IsZero F) :
+    proFiniteModels R F := by
+  exact IsFinitelyPresentedLocallyConstantProEtaleModule_of_isZero hF
+
+private theorem proFiniteModels_of_iso {X : Scheme.{u}} {R : Type u} [CommRing R]
+    {F G : proEtaleRingModules X (proEtaleConstantRing X R)} (e : F ≅ G)
+    (hF : proFiniteModels R F) : proFiniteModels R G := by
+  exact IsFinitelyPresentedLocallyConstantProEtaleModule_of_iso e hF
+
+private theorem proFiniteModels_pullback_comp {X Y Z : Scheme.{u}} {R : Type u}
+    [CommRing R] [IsNoetherianRing R] (f : X ⟶ Y) (g : Y ⟶ Z)
+    (F : proEtaleRingModules Z (proEtaleConstantRing Z R))
+    (h : proFiniteModels R (proEtaleConstantModulePullback g R F)) :
+    proFiniteModels R (proEtaleConstantModulePullback (f ≫ g) R F) := by
+  obtain ⟨e⟩ := proEtaleConstantModulePullback_comp g f R
+  exact proFiniteModels_of_iso (e.app F).symm
+    (proEtale_fp_localModels_pullback f R _ h)
+
+private theorem common_pro_strata {X : Scheme.{u}} {R : Type u}
+    [CommRing R] [IsNoetherianRing R]
+    {F G : proEtaleRingModules X (proEtaleConstantRing X R)}
+    (hF : IsAffineLocallyConstructibleProEtaleModuleSheaf X R F)
+    (hG : IsAffineLocallyConstructibleProEtaleModuleSheaf X R G)
+    (U : X.Opens) (hU : IsAffineOpen U) :
+    ∃ S : Stratification U.toScheme, ∀ a : Fin S.n,
+      proFiniteModels R (proEtaleConstantModulePullback (S.immersion a ≫ U.ι) R F) ∧
+      proFiniteModels R (proEtaleConstantModulePullback (S.immersion a ≫ U.ι) R G) := by
+  obtain ⟨S, _, hS⟩ := hF U hU
+  obtain ⟨T, _, hT⟩ := hG U hU
+  refine ⟨S.inter T, fun a ↦ ?_⟩
+  let i := (finProdFinEquiv.symm a).1
+  let j := (finProdFinEquiv.symm a).2
+  constructor
+  · change proFiniteModels R
+      (proEtaleConstantModulePullback
+        ((pullback.fst (S.immersion i) (T.immersion j) ≫ S.immersion i) ≫ U.ι) R F)
+    rw [Category.assoc]
+    exact proFiniteModels_pullback_comp _ _ F (hS i)
+  · change proFiniteModels R
+      (proEtaleConstantModulePullback
+        ((pullback.fst (S.immersion i) (T.immersion j) ≫ S.immersion i) ≫ U.ι) R G)
+    rw [pullback.condition, Category.assoc]
+    exact proFiniteModels_pullback_comp _ _ G (hT j)
+
+private theorem proAffine_kernel_cokernel {X : Scheme.{u}} {R : Type u}
+    [CommRing R] [IsNoetherianRing R]
+    {F G : proEtaleRingModules X (proEtaleConstantRing X R)} (f : F ⟶ G)
+    (hF : IsAffineLocallyConstructibleProEtaleModuleSheaf X R F)
+    (hG : IsAffineLocallyConstructibleProEtaleModuleSheaf X R G) :
+    IsAffineLocallyConstructibleProEtaleModuleSheaf X R (kernel f) ∧
+      IsAffineLocallyConstructibleProEtaleModuleSheaf X R (cokernel f) := by
+  constructor
+  all_goals
+    intro U hU
+    obtain ⟨S, hS⟩ := common_pro_strata hF hG U hU
+    refine ⟨S, S.isConstructible_stratum, fun a ↦ ?_⟩
+    let L := proEtaleConstantModulePullbackFunctor (S.immersion a ≫ U.ι) R
+    obtain ⟨hK, hC⟩ := (proEtale_fp_localModels_serre (S.domain a) R).1
+      _ _ (L.map f) (hS a).1 (hS a).2
+    first
+    | exact proFiniteModels_of_iso (PreservesKernel.iso L f).symm hK
+    | exact proFiniteModels_of_iso (PreservesCokernel.iso L f).symm hC
+
+private theorem proAffine_extension {X : Scheme.{u}} {R : Type u}
+    [CommRing R] [IsNoetherianRing R]
+    (S : ShortComplex (proEtaleRingModules X (proEtaleConstantRing X R)))
+    (hS : S.ShortExact)
+    (h₁ : IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₁)
+    (h₃ : IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₃) :
+    IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₂ := by
+  intro U hU
+  obtain ⟨T, hT⟩ := common_pro_strata h₁ h₃ U hU
+  refine ⟨T, T.isConstructible_stratum, fun a ↦ ?_⟩
+  let L := proEtaleConstantModulePullbackFunctor (T.immersion a ≫ U.ι) R
+  exact (proEtale_fp_localModels_serre (T.domain a) R).2
+    (S.map L) (hS.map_of_exact L) (hT a).1 (hT a).2
+
 end Scheme
 
 /-- Constructible etale module sheaves contain zero and are closed under kernels, cokernels
@@ -586,6 +681,14 @@ theorem proEtale_discreteNoetherian_constructible_serre
       S.ShortExact → Scheme.IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₁ →
         Scheme.IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₃ →
           Scheme.IsAffineLocallyConstructibleProEtaleModuleSheaf X R S.X₂) := by
-  sorry
+  refine ⟨?_, ?_, fun S hS h₁ h₃ ↦ Scheme.proAffine_extension S hS h₁ h₃⟩
+  · intro U _
+    refine ⟨Scheme.Stratification.trivial U.toScheme, fun a ↦
+      (Scheme.Stratification.trivial U.toScheme).isConstructible_stratum a, fun a ↦ ?_⟩
+    exact Scheme.proFiniteModels_of_isZero
+      ((Scheme.proEtaleConstantModulePullbackFunctor (_ ≫ U.ι) R).map_isZero
+        (isZero_zero _))
+  · intro F G f hF hG
+    exact Scheme.proAffine_kernel_cokernel f hF hG
 
 end AlgebraicGeometry
