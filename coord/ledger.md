@@ -16897,3 +16897,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/H5/Sheaf.Paper.FiniteLevelProEtaleBaseChange (stage 3; reviewer PASS; first push; landing 20261019T034301-L-417270 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/K5/Sheaf.Paper.ProperHeartBound (stage 3; reviewer PASS; first push; landing 20261019T034302-L-417394 (interface); batch 20261019T034248; modules 2; new nodes 1)
 - 03:43 L: merged deliver/M2/Sheaf.AlgebraicGeometry.RootsOfUnityInverseImageIso (stage 3; reviewer PASS; first push; landing 20261019T034303-L-417517 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/M3/Sheaf.Compactification.NagataSketchClosure (stage 3; reviewer PASS; first push; landing 20261019T034303-L-417701 (proof); batch 20261019T034248; modules 1; new nodes 0)

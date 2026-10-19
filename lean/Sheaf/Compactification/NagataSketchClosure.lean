@@ -14,6 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
@@ -39,6 +40,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+-- The nested density hypothesis is used in the proof, but not in the forall conclusion.
+set_option linter.unusedVariables false in
 /-- Schematic closure of a quasi-compact immersion and uniqueness over a separated base.
 
 Source: blueprint main-20261015, sec-nagata-compactification,
@@ -79,6 +82,25 @@ theorem nagata_sketch_closure :
       (hj : ∀ V : T.Opens, Function.Injective (j.app V))
       (s : Y ⟶ S) [IsSeparated s] {a b : T ⟶ Y},
       a ≫ s = b ≫ s → j ≫ a = j ≫ b → a = b) := by
-  sorry
+  constructor
+  · intro U T i _ _ _
+    refine ⟨inferInstance, inferInstance, i.toImage.app_injective, ?_⟩
+    intro Z k hk f hf
+    have H : k.ker ≤ i.imageι.ker := by
+      rw [← hf]
+      exact Scheme.Hom.ker_le_ker_imageι_comp f k
+    refine ⟨IsClosedImmersion.lift k i.imageι H, ?_, ?_⟩
+    · exact ⟨Scheme.Hom.toImage_lift f k hf H, IsClosedImmersion.lift_fac _ _ _⟩
+    · intro l hl
+      exact IsClosedImmersion.eq_lift k i.imageι H l hl.2
+  · intro U T S Y j _ hj s _ a b hab hjab
+    have : IsSchemeTheoreticallyDominant j := by
+      constructor
+      apply Scheme.IdealSheafData.ext
+      funext V
+      apply le_antisymm ?_ bot_le
+      exact (j.ideal_ker_le V).trans_eq
+        ((RingHom.injective_iff_ker_eq_bot _).mp (hj V))
+    exact ext_of_isSchemeTheoreticallyDominant_of_isSeparated s hab j hjab
 
 end AlgebraicGeometry
