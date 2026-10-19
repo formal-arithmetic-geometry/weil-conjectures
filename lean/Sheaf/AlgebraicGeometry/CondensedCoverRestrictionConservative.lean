@@ -7,8 +7,16 @@ module
 
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+public import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Mathlib.CategoryTheory.Sites.LocalProperties
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # Conservativity of covering restrictions with condensed coefficients
 
@@ -32,7 +40,7 @@ set_option autoImplicit false
 universe v u
 
 open CategoryTheory CategoryTheory.Limits
-open scoped CategoryTheory.Obj ZeroObject
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -41,13 +49,33 @@ and zero objects for arbitrary commutative condensed coefficients.
 Source: HRS Section 3 and Lemma 4.5, proof, conservativity of restriction
 (blueprint: lem-zl-condensed-cover-restriction-conservative).
 
-Proof: identify scalar extension along `condensedPullbackHom` with restriction of
-scalars along its inverse, so forgetting the module action recovers abelian-sheaf
-inverse image. For weakly etale maps the latter is naturally localization restriction.
-The library's covering-family conservativity theorem therefore detects module-sheaf
-isomorphisms, since the forgetful functor reflects isomorphisms. Apply this result
-to every cohomology map, using the natural exact-functor cohomology comparison and
-`DerivedCategory.isIso_iff`. Finally apply the morphism criterion to `K ⟶ 0`.
+Proof plan:
+1. By lem-weil-proetale-weakly-etale-localization the site of each cover member is
+   the slice site. Clause 1 of lem-sfb-proetale-object-inverse-image-restriction
+   identifies inverse image of arbitrary ring and abelian sheaves with restriction.
+   Compose the coefficient comparison with alpha_u = condensedPullbackHom.
+   Scalar extension along this isomorphism just transports the action: the tensor
+   comparison sends m tensor r to alpha_u.inv(r)m, with inverse m to m tensor 1.
+   Thus the exact inverse image of def-weil-pbc-proetale-operations is restriction,
+   and its derived functor is exact termwise restriction. No constant-ring clause is used.
+2. For each site object V, det-pe-topos-functoriality-site gives the covering by
+   V times_X U_i. Every member maps to U_i. The sieve of objects admitting a map
+   to some U_i is therefore covering, the CoversTop hypothesis of
+   lem-sfb-sheaf-cover-local-isomorphism.
+3. Apply that criterion to the underlying abelian-sheaf map of a module map whose
+   restrictions are invertible. Its inverse is linear: applying the original map
+   to b(ry) and r b(y) gives ry in both cases, and injectivity cancels the map.
+   This is an inverse in the module category of def-weil-sheaf-of-modules-category.
+4. The natural cohomology comparison of lem-weil-pbc-exact-functor-complex-cohomology
+   descends through the localization of def-weil-abstract-derived-category:
+   naturality for chain maps also holds for inverses of quasi-isomorphisms, hence
+   for all derived morphisms. Thus H^n(u_i^* f) is the restriction of H^n(f).
+5. If all u_i^* f are invertible, step 4 and step 3 make every H^n(f) invertible.
+   Apply lem-weil-pbc-unbounded-derived-iso-cohomology to conclude IsIso f.
+   Conversely each restriction is a functor and preserves isomorphisms.
+6. If all restrictions of K are zero, apply step 5 to K to 0: additive exact
+   restriction preserves zero objects. This proves K is zero. The empty covering
+   of the empty scheme is included, since its sheaf condition forces zero modules.
 No boundedness, quasi-compactness, nonemptiness or finiteness condition is used. -/
 theorem condensed_cover_restriction_conservative
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})
@@ -62,47 +90,6 @@ theorem condensed_cover_restriction_conservative
       (∀ i : 𝒰.I₀,
         IsZero ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.obj K)) →
       IsZero K) := by
-  have hw : ∀ i : 𝒰.I₀, WeaklyEtale (𝒰.f i) := fun i ↦
-    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ ⟨i⟩
-  have hmod (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ.X X)) (a : M ⟶ N)
-      (ha : ∀ i : 𝒰.I₀, IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).map a)) :
-      IsIso a := by
-    have haHom : IsIso a.hom := by
-      refine ProEtale.isIso_of_isIso_localizationRestriction _ a.hom 𝒰.f 𝒰.mem₀ ?_
-      intro i
-      have : IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).map a) := ha i
-      let e := Functor.isoWhiskerLeft
-        ((𝒰.f i)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ.X X))
-        (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ.X (𝒰.f i)))
-      have hi := (NatIso.isIso_map_iff e a).1 (ha i)
-      have hu : IsIso ((𝒰.f i)^*[Ab.{u + 1}].map a.hom) :=
-        inferInstanceAs (IsIso ((Mod.forget _).map
-          (((𝒰.f i)^*[Ab.{u + 1}].mapMod _ ⋙
-            Mod.comap (asIso (condensedPullbackHom Λ.X (𝒰.f i))).inv).map a)))
-      exact (NatIso.isIso_map_iff (ProEtale.upperStarIsoLocalizationRestriction
-        Ab.{u + 1} (𝒰.f i) inferInstance) a.hom).1 hu
-    have : IsIso ((Mod.forget _).map a) := haHom
-    exact isIso_of_reflects_iso a (Mod.forget _)
-  have hderived (K L : DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)))
-      (f : K ⟶ L)
-      (hf : ∀ i : 𝒰.I₀,
-        IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map f)) :
-      IsIso f := by
-    rw [DerivedCategory.isIso_iff]
-    intro n
-    refine hmod _ _ _ fun i ↦ ?_
-    have := hf i
-    exact (NatIso.isIso_map_iff
-      ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategoryHomologyFunctorIso n) f).2
-      (inferInstanceAs (IsIso ((DerivedCategory.homologyFunctor _ n).map
-        ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map f))))
-  refine ⟨fun K L f ↦ ⟨fun _ i ↦ inferInstance, hderived K L f⟩, ?_⟩
-  intro K hK
-  have : IsIso (0 : K ⟶ 0) := hderived K 0 0 fun i ↦
-    (hK i).isIso
-      ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map_isZero (isZero_zero _)) _
-  exact (isZero_zero _).of_iso (asIso (0 : K ⟶ 0))
+  sorry
 
 end AlgebraicGeometry.ProEtale

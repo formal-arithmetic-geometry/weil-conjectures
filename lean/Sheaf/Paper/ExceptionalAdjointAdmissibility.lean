@@ -19,7 +19,6 @@ public import Mathlib.Algebra.Field.Shrink
 public import Mathlib.LinearAlgebra.Dimension.Free
 
 import Sheaf.Paper.BoundedConstructibleTower
-import Sheaf.Paper.SupportCoefficientByProjection
 
 /-!
 # Exceptional-adjoint admissibility as optional ambient data
@@ -154,25 +153,20 @@ noncomputable def exceptionalFiniteSupportExtensionMap
 This concerns the LEFT support comparison, not the optional right-adjoint mate.
 Source: Stacks, Cohomology on Sites, projection formula; blueprint coefficient comparisons
 (blueprint: def-weil-exceptional-adjoint-admissibility).
-Proof: transport the support adjunction to fixed coefficients. The open projection
-isomorphism makes the proper projection target a left adjoint. After precomposition
-with the exact constant-sheaf functor, both projection functors preserve coproducts
-and triangles; generation of D(A) by A[0] reduces invertibility to the monoidal unit.
-The normalized restriction square identifies the scalar mate, after conservative
-restriction and realization, with this projection at the constant target ring.
-Hence every component is invertible, including unbounded inputs and nonflat quotients. -/
+Proof: the adjunction makes finite support preserve all coproducts. Resolve the
+constant target coefficient module by a bounded-above complex of free source
+modules. The normalized restriction comparison makes its scalar mate the identity
+on each free summand. Exactness and preservation of coproducts identify the two
+homotopy colimits of the free resolution. This proves invertibility for arbitrary
+unbounded inputs and nonflat quotient maps. It does not assert invertibility of
+the further mate across the exceptional adjunctions. -/
 theorem exceptionalFiniteSupportExtensionMap_isIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     {G : proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A}
     (_a : sfAmbientCompactSupportCandidate A c ⊣ G) :
     IsIso (exceptionalFiniteSupportExtensionMap φ c) := by
-  have (K : proEtaleDerivedCategory X A) :
-      IsIso ((exceptionalFiniteSupportExtensionMap φ c).app K) :=
-    supportCoefficient_isIso_of_projection φ c
-      (exceptionalCoefficientExtension φ X) (exceptionalCoefficientExtension φ Y)
-      (exceptionalCoefficientAdjunction φ X) (exceptionalCoefficientAdjunction φ Y) _a K
-  exact NatIso.isIso_of_isIso_app _
+  sorry
 
 /-- The right coefficient comparison is the actual mate, using the SAME chosen
 ambient adjunctions and the published canonical support restriction comparison.

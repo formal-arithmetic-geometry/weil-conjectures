@@ -8,9 +8,15 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.EllAdicIndConstructibleHeartClosure
-import Sheaf.AlgebraicGeometry.EllAdicProperUpperAmplitude
-import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.CategoryTheory.Triangulated.LeftCompleteHeartUpperBound
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.AmbientIndDerivedTriangulated
+import Sheaf.Paper.IntegralConstructibleCompactness
+import Sheaf.Paper.IntegralProperDirectSums
+import Sheaf.Paper.ProperHeartBound
+import Sheaf.Paper.ProperIndConstructibleUnbounded
 
 /-! # Uniform upper bound for the discarded lower tail
 
@@ -48,31 +54,34 @@ Source: blueprint `sk-lem-proper-unbounded-window` (arbitrary-complex clause)
 and `det-prop-int-compactness-direct-sums` (1)-(2).
 (blueprint: lem-sfb-adic-proper-truncation-bound)
 
-Proof: the ind-constructible heart is a weak Serre class closed under ambient
-coproducts. Homology preserves these coproducts, so the complexes with
-ind-constructible cohomology form a replete triangulated localizing class.
-This class contains every bounded constructible complex, hence contains the
-bounded constructible localizing hull by its universal property.
-
-Choose a uniform bound c on proper images of ind-constructible heart objects.
-The rational cases use proper finiteness, the comparison with finite constant
-models, and continuous coefficient transport. The integral case uses the
-proper bound for torsion reductions and its Milnor sequence; bounded-below
-filtered continuity extends the constructible bound to the ind heart.
-Finite truncation triangles give the upper bound b+c for the image of a
-bounded complex supported in degrees at most b. Exact countable products
-reconstruct an arbitrary complex from its canonical lower truncations.
-Proper direct image preserves their product, and homology in the target
-commutes with this product. The image Postnikov triangle therefore gives
-the upper bound b+c+1, allowing one additional degree without needing
-stabilization of the output tower. The upper-amplitude theorem absorbs
-this extra degree into its existential natural constant.
-
-Good truncation preserves ind-constructible cohomology. Apply that theorem
-to the lower tail tau_lt(q-c) K, supported in degrees at most q-c-1.
-Its image is supported in degrees at most q-1 by integer arithmetic.
-The constant is independent of K and q; zero complexes and empty fibres
-satisfy the same argument.
+Proof: the schemes and their locally closed strata are Noetherian. The class
+of complexes with ind-constructible cohomology is replete, triangulated and
+closed under ambient sums, and contains every bounded constructible complex.
+The universal property of the localizing hull therefore puts K in this class.
+For integral coefficients use the same statement for the integral
+ind-constructible heart, proved from the local torsion charts and locally free
+resolutions; all colimits remain those of ordinary module sheaves.
+Choose a uniform geometric fibre-dimension bound d for g. Proper
+finiteness bounds the cohomology of direct images of constructible heart
+objects in [0,2d+1]. In the integral case the local torsion charts and free
+resolutions put derived torsion reductions in degrees [-1,0]. Their proper
+direct images vanish above 2d. Use the Milnor sequence for their
+countable derived inverse limit. In the rational cases use the proper heart
+bound, and for Qlbar descend to finite coefficient subextensions. Bounded-below
+filtered continuity extends the bound to the ind-constructible heart. Finite
+truncation triangles then bound the image of a bounded-below ind-constructible
+complex with cohomology at most b by b+2d+1. Left completeness reconstructs an
+arbitrary complex from its lower truncations. The discarded heart layer between
+successive lower truncations has image
+bounded above by 2d-n. For a fixed degree r choose n at least
+max(0,2d-r+2). Both degree-r and degree-(r-1) towers then have invertible
+transitions, so their first derived inverse limits vanish. Above b+2d+1 the
+degree-r terms also vanish. The Milnor exact sequence gives
+the same upper bound without boundedness below. Apply this to
+the lower tail in the triangle τ<q-c K → K → τ≥q-c K, with c=2d+1.
+Its image is supported in degrees at most q-1, which is the asserted bound.
+The constant c is independent of K
+and q, including zero complexes and empty fibres.
 -/
 theorem ellAdic_proper_lowerTail_bound :
     ∃ c : ℕ, ∀ (q : ℤ)
@@ -81,49 +90,6 @@ theorem ellAdic_proper_lowerTail_bound :
       boundedConstructibleLocalizingClosure Λ Z.left K →
       ((R((g.left)_*⟦Λ⟧)).obj
         ((DerivedCategory.TStructure.t.truncLT (q - (c : ℤ))).obj K)).IsLE (q - 1) := by
-  let A := Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
-    (condensedRingObj Λ Z.left)
-  let P : ObjectProperty A := ObjectProperty.ind.{u + 1}
-    (IsConstructibleModuleObject (condensedRingObj Λ Z.left))
-  obtain ⟨hzero, hker, hcoker, hext, hcoprod⟩ :=
-    ellAdic_indConstructible_heart_closure Λ ℓ Z hΛ
-  have : P.ContainsZero := hzero
-  have : P.IsClosedUnderKernels := hker
-  have : P.IsClosedUnderCokernels := hcoker
-  have : P.IsClosedUnderExtensions := hext
-  have : ∀ I : Type (u + 1), P.IsClosedUnderColimitsOfShape (Discrete I) := hcoprod
-  have : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
-  have : HasCoproducts.{u + 1} A := fun I ↦
-    HasColimitsOfSize.has_colimits_of_shape (Discrete I)
-  have hderived (I : Type (u + 1)) :
-      (DerivedCategory.homologyProperty P).IsClosedUnderColimitsOfShape (Discrete I) := by
-    constructor
-    intro K hK n
-    obtain ⟨c⟩ := hK
-    exact P.prop_of_isColimit
-      (isColimitOfPreserves (DerivedCategory.homologyFunctor A n) c.isColimit)
-      (fun j ↦ c.prop_diag_obj j n)
-  have : ∀ I : Type (u + 1),
-      (DerivedCategory.homologyProperty P).IsClosedUnderColimitsOfShape (Discrete I) :=
-    hderived
-  have hhull : boundedConstructibleLocalizingClosure Λ Z.left ≤
-      DerivedCategory.homologyProperty P := by
-    apply boundedConstructibleLocalizingClosure_le
-    intro K hK n
-    exact ObjectProperty.le_ind _ _ (hK.2 n)
-  obtain ⟨c, hamp⟩ := ellAdic_proper_pushforward_isLE_of_isLE Λ ℓ g hΛ
-  refine ⟨c, ?_⟩
-  intro q K hK
-  let a := q - (c : ℤ)
-  have htr : DerivedCategory.homologyProperty P
-      ((DerivedCategory.TStructure.t.truncLT a).obj K) := by
-    have hle := DerivedCategory.homologyProperty_truncLE (hhull K hK) (a - 1)
-    exact (DerivedCategory.homologyProperty P).prop_of_iso
-      ((DerivedCategory.TStructure.t.truncLEIsoTruncLT (a - 1) a (by omega)).app K) hle
-  have hLE : ((DerivedCategory.TStructure.t.truncLT a).obj K).IsLE
-      (a - 1) := inferInstance
-  have h := hamp (a - 1) ((DerivedCategory.TStructure.t.truncLT a).obj K) htr hLE
-  have heq : a - 1 + (c : ℤ) = q - 1 := by dsimp [a]; omega
-  rwa [heq] at h
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

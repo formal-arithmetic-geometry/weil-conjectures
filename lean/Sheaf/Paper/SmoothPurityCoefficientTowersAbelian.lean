@@ -8,10 +8,20 @@ module
 public import Sheaf.Paper.SmoothPurityCoefficientTowers
 public import Sheaf.CategoryTheory.SystemLevelLeftExtension
 public import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
-import Sheaf.Paper.CoefficientDiagramUncurrying
-import Sheaf.Paper.SystemCoefficientReductions
-import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
+import Sheaf.CategoryTheory.DiagramSiteRealization
 import Sheaf.CategoryTheory.DiagramSiteTopology
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # The abelian category of smooth-purity coefficient towers
@@ -38,12 +48,6 @@ scalar extensions. All positive levels are represented: index n means level n+1.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option genSizeOf false
-set_option genSizeOfSpec false
-set_option genInjectivity false
-set_option genCtorIdx false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
 -- Use the existing larger-coefficient transport while elaborating these declarations.
@@ -245,100 +249,54 @@ Source: blueprint main-20261015, coefficient-tower lemma, clauses (1)--(3);
 Bhatt--Scholze, Definition 3.5.3 (blueprint: det-sp-coefficient-towers-abelian).
 
 Proof:
-1. Uncurry the coefficient diagram into strict semilinear systems. The equality
-between the commutative coefficient diagram after forgetting commutativity and the
-recorded ring diagram follows from their identical adjacent quotient maps. The
-uncurrying equivalence fixes section modules, restrictions, transitions and maps.
-2. The existing system-level theory gives Grothendieck abelianness, finite-limit and
-finite-colimit preservation by evaluation, and coproduct preservation. The equivalence
-is additive because it preserves binary products. Transport Grothendieck abelianness
-along it. Coproduct and coequalizer preservation give all small colimits, hence the
-required filtered colimits. Use the standard ordinary unbounded derived category.
-3. Take the scalar assignment and normalized tensor coherence from the same
-system-level theory. Ordinary reduction is the tensor adjunct of the actual strict
-transition; adjunction naturality proves that it is a natural transformation.
-Compose the evaluation localization comparison, the scalar comparison, the ordinary
-reduction on complexes, and the inverse evaluation comparison. Both endpoints factor
-through derived localization, so this natural transformation descends uniquely. Its
-formula on every complex follows from the localization lifting formula.
-4. The ordinary identity and composition equations follow by transposing under the
-scalar adjunctions, evaluating on unit tensors, and using the strict transition laws.
-To extend the normalized derived tensor comparisons from flat-term K-flat complexes
-to every complex, choose a flat-term K-flat resolution of a single coefficient-level
-complex. Naturality and cancellation of the image of its quasi-isomorphism extend
-equality. This uses no simultaneous tower resolution. Localization extensionality
-then reduces the derived identity and composition equations to complexes. Cancel the
-evaluation comparison isomorphisms, use naturality of the scalar comparison and
-derived associator, and apply the ordinary equations. -/
+1. Put R_n = (O_E/ell^(n+1))_T. On the product of the level category and the small
+pro-etale site, use coverings at a fixed level. The diagram-site realization identifies
+sheaves there with inverse systems of sheaves. The coefficient ring has values R_n(U),
+with restrictions given by quotient maps and site restrictions. Module sheaves are
+exactly the recorded product-site module presheaves satisfying the vertical sheaf
+condition. Uncurrying gives the displayed equivalence; its four normalization formulas
+follow directly from the definitions. This is the module-object description in (1).
+2. The ringed-site Grothendieck theorem gives abelianness, a generator and exact filtered
+colimits on this small diagram site. Transporting along the identification gives the
+Grothendieck structure on the recorded tower category. The full subcategory of module
+presheaves fixes componentwise addition, so the equivalence is additive.
+3. For a tower map, form the kernel and cokernel at every level in Mod(R_n). The exact
+forgetful functor to abelian sheaves gives their transition maps by the kernel and
+cokernel universal properties; uniqueness proves semilinearity and compatibility.
+For a filtered diagram, the same construction with levelwise colimits gives transitions;
+the colimit injections jointly determine every equality. Hence evaluation preserves
+kernels, cokernels and filtered colimits, and is exact.
+4. Use the ordinary derived localization and exact functor derived construction for
+evaluation. It sends quasi-isomorphisms of tower complexes to quasi-isomorphisms and
+is triangulated, with its specified localization comparison.
+5. Resolve a complex on the small diagram ringed site by a K-flat complex with flat
+terms (lem-pc-kflat-resolution). Evaluation is the inverse image of a topos morphism,
+with identity structural ring map R_n to R_n. The ringed-topos K-flat pullback theorem
+shows that every evaluated complex is K-flat with flat terms. Exactness makes these
+simultaneous evaluated resolutions quasi-isomorphisms; no independent level choices
+are assembled into a tower.
+6. The strict transitions give ordinary reduction c tensor x maps to c t(x), by tensor
+balancing and sheafification. It is a chain map natural in strict complexes, and is
+precisely the normalized scalar adjunct recorded in ordinaryReduction_eq. Derived
+change of rings preserves quasi-isomorphisms on K-flat complexes. Apply the resolving
+class left-derived construction to simultaneous K-flat tower representatives. Its
+universal comparison followed by the ordinary reduction descends through localization.
+7. The resulting functor is evaluation followed by derived scalar extension: on the
+simultaneous K-flat representatives their universal comparisons coincide, and all
+derived objects have such representatives. The descended natural map is reduction;
+the counit and ordinary-reduction formula gives reduction_rep on every complex.
+This fixes the map independently of representatives and proves naturality.
+8. For r <= m <= n, scalar extension preserves K-flat flat-term representatives, so the
+double derived tensor is computed by the ordinary double tensor. The balanced map
+c tensor (d tensor x) maps to c q_(m,r)(d) tensor x, with inverse inserting 1. Direct
+and successive reductions both give c q_(m,r)(d) t_(n,r)(x), since strict transitions
+compose. These maps commute with restrictions and differentials and sheafify. The
+normalized K-flat comparisons give exactly tensor.derivedAssoc, hence reduction_comp.
+Equal indices give the tensor unitor. Four-level compatibility follows because both
+ways multiply the same three scalar factors; all formulas are natural in chain maps
+and therefore descend through localization. -/
 theorem sp_coefficient_towers_abelian : Nonempty (SpCoefficientTowersAbelian l E T) := by
-  let B := spCoefficientCommRings l E T
-  have hR : spCoefficientPresheaf l E T = CoefficientDiagram.ring B := by
-    have hB : spCoefficientRings l E T =
-        B ⋙ sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat RingCat) := by
-      let i : spCoefficientRings l E T ⟶
-          B ⋙ sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat RingCat) :=
-        NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
-          simp only [Functor.comp_map, spCoefficientRings, B, spCoefficientCommRings,
-            Functor.ofOpSequence_map_homOfLE_succ, Category.comp_id, Category.id_comp]
-          rfl)
-      refine CategoryTheory.Functor.ext (F := spCoefficientRings l E T)
-        (G := B ⋙ sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat RingCat))
-        (fun _ ↦ rfl) ?_
-      intro X Y f
-      have hi := i.naturality f
-      change (spCoefficientRings l E T).map f ≫ 𝟙 _ =
-        𝟙 _ ≫ (B ⋙ sheafCompose (Scheme.ProEt.topology T)
-          (forget₂ CommRingCat RingCat)).map f at hi
-      simpa only [Category.comp_id, Category.id_comp, eqToHom_refl] using hi
-    unfold spCoefficientPresheaf CoefficientDiagram.ring
-    rw [hB]
-    rfl
-  obtain ⟨e, hn⟩ :=
-    CoefficientDiagram.exists_uncurrying_of_eq B (spCoefficientPresheaf l E T) hR
-  let e' : spCoefficientTowers l E T ≌
-      StrictRingSystem.{t + 1, t, max u (t + 1)} B := e
-  obtain ⟨H⟩ := systemLevelLeftExtensionTheory.{t + 1, t, max u (t + 1)}
-    (J := Scheme.ProEt.topology T)
-  let : IsGrothendieckAbelian.{max u (t + 1)} (StrictRingSystem.{t + 1, t, max u (t + 1)} B) :=
-    H.grothendieck B
-  let : PreservesFiniteLimits e'.functor := inferInstance
-  let : PreservesFiniteColimits e'.functor := inferInstance
-  let : e'.functor.Additive := Functor.additive_of_preserves_binary_products e'.functor
-  let : HasDerivedCategory.{max u (t + 1) + 1} (spCoefficientTowers l E T) :=
-    HasDerivedCategory.standard (spCoefficientTowers l E T)
-  refine ⟨{ equivalence := e'
-            sections := hn.sections
-            restrictions := hn.restrictions
-            transitions := hn.transitions
-            morphisms := hn.morphisms
-            equivalenceAdditive := inferInstance
-            grothendieck := IsGrothendieckAbelian.of_equivalence e'.symm
-            evaluationLimits := fun n ↦ inferInstance
-            evaluationColimits := fun n ↦ inferInstance
-            filteredColimits := ?_
-            hasDerived := inferInstance
-            scalar := H.scalar
-            tensor := H.tensor
-            ordinaryReduction := fun h ↦
-              presentedOrdinaryReduction H.scalar B e'.functor h
-            ordinaryReduction_eq := fun _ _ ↦ rfl
-            reduction := fun h ↦ presentedDerivedReduction H.scalar B e'.functor h
-            reduction_rep := fun h P ↦
-              presentedDerivedReduction_rep H.scalar B e'.functor h P
-            reduction_identity := fun n M ↦
-              presentedDerivedReduction_identity H.scalar B H.tensor e'.functor n M
-            reduction_comp := fun h k M ↦
-              presentedDerivedReduction_comp H.scalar B H.tensor e'.functor h k M }⟩
-  intro I _ _ n
-  let : HasCoproducts.{max u (t + 1)} (StrictRingSystem.{t + 1, t, max u (t + 1)} B) :=
-    H.coproducts B
-  let (I : Type (max u (t + 1))) :
-      PreservesColimitsOfShape (Discrete I) (systemEvaluation B n) :=
-    H.evaluationCoproducts B n I
-  let : PreservesColimitsOfSize.{max u (t + 1), max u (t + 1)}
-      (systemEvaluation B n) :=
-    preservesColimits_of_preservesCoequalizers_and_coproducts (systemEvaluation B n)
-  exact inferInstance
+  sorry
 
 end AlgebraicGeometry.ProEtale
 

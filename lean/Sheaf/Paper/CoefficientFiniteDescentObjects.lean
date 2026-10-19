@@ -10,8 +10,16 @@ public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Mathlib.AlgebraicGeometry.Noetherian
-import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
-import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.CoefficientFiniteDescentHom
+import Sheaf.Paper.CoefficientFiniteDescentLisse
+import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Paper.CoefficientHeartTriangulated
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import Sheaf.SixFunctors.ScalarSixPullback
 
 /-!
 # Finite coefficient descent of bounded constructible objects
@@ -32,80 +40,10 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
-
-open MonoidalCategory MonObj Functor.LaxMonoidal Functor.OplaxMonoidal in
-private lemma free_hasConstantModel
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {Y : Scheme.{u}}
-    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
-    (hM : ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i,
-      Mod.IsFree (condensedRingObj Λ (U.X i))
-        ((CondensedRing.upperStar Λ (U.f i)).obj M)) :
-    HasFiniteConstantLocalModel Λ Y M := by
-  obtain ⟨U, hU⟩ := hM
-  refine ⟨U, fun i ↦ ?_⟩
-  obtain ⟨n, ⟨e⟩⟩ := hU i
-  have : PreservesFiniteColimits (upperStarFromPoint (U.X i)) := by
-    let : pointUpperStar.{u}.IsLeftAdjoint := pointUpperStarLowerStarAdjunction.isLeftAdjoint
-    unfold upperStarFromPoint
-    infer_instance
-  let F := (upperStarFromPoint (U.X i)).mapMod Λ
-  have : PreservesFiniteColimits F := inferInstance
-  have : PreservesBinaryBiproducts F :=
-    preservesBinaryBiproducts_of_preservesBinaryCoproducts F
-  have : F.Additive := Functor.additive_of_preservesBinaryBiproducts F
-  have : PreservesFiniteBiproducts F := inferInstance
-  let en : F.obj (Mod.finiteFree Λ n) ≅ Mod.finiteFree (condensedRingObj Λ (U.X i)) n :=
-    F.mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ) ≪≫
-      biproduct.mapIso (fun _ ↦ Mod.isoMk (Iso.refl _) (by simp [Mod.act]))
-  refine ⟨Mod.finiteFree Λ n, ⟨n, n, 0, ⟨cokernelZeroIsoTarget.symm⟩⟩, ⟨e ≪≫ en.symm⟩⟩
-
-open MonoidalCategory MonObj in
-private lemma constantModel_eq_of_localFree
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (hLF : ∀ (Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace Y]
-      (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)),
-      IsLocallyFinitelyPresented (condensedRingObj Λ Y) M →
-      ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage Y, ∀ i,
-        Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj (condensedRingObj Λ Y))
-          (((upperStar Ab.{u + 1} (U.f i)).mapMod (condensedRingObj Λ Y)).obj M))
-    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    [TopologicalSpace.NoetherianSpace X] :
-    constantModelBoundedConstructible Λ X = boundedConstructible (condensedRingObj Λ X) := by
-  have hmod (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) :
-      IsConstantModelConstructible Λ X M ↔
-        IsConstructibleModuleObject (condensedRingObj Λ X) M := by
-    rw [show IsConstantModelConstructible Λ X M = IsFiniteConstantStratified Λ X M from
-      if_pos ⟨inferInstance, inferInstance⟩]
-    constructor
-    · rintro ⟨S, hS⟩
-      refine ⟨S, fun a ↦ ?_⟩
-      let φ := condensedPullbackHom Λ (S.immersion a)
-      have h := (hS a).isLocallyFinitelyPresented _
-      exact lfp_of_comap (inv φ)
-        (lfp_of_iso h ((Mod.extendScalarsIsoComapInv φ).app _))
-    · rintro ⟨S, hS⟩
-      refine ⟨S, fun a ↦ ?_⟩
-      have : TopologicalSpace.NoetherianSpace (S.domain a) :=
-        (S.immersion a).isEmbedding.isInducing.noetherianSpace
-      let φ := condensedPullbackHom Λ (S.immersion a)
-      have h := lfp_of_iso (lfp_comap (inv φ) (hS a))
-        ((Mod.extendScalarsIsoComapInv φ).app _).symm
-      obtain ⟨U, hU⟩ := hLF _ _ h
-      apply free_hasConstantModel Λ _
-      refine ⟨U, fun i ↦ ?_⟩
-      let ψ := condensedPullbackHom Λ (U.f i)
-      exact free_of_iso (free_comap (inv ψ) (hU i))
-        ((Mod.extendScalarsIsoComapInv ψ).app _).symm
-  funext K
-  apply propext
-  exact and_congr_right fun _ ↦ forall_congr' fun n ↦ hmod _
-
 
 /-- Every bounded constructible algebraic-closure coefficient complex has a finite-field
 model, and every such model remains a model after any finite enlargement of the field.
@@ -163,30 +101,7 @@ theorem coefficient_finite_descent_objects
         constantModelBoundedConstructible (Profinite.continuousMapRingObj F) X
           ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ∧
         Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj
-          ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj)) := by
-  let : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  let : IsNoetherian X := {}
-  have hE (E : PadicAlgCl.FiniteIntermediateField ℓ) :
-      constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
-        boundedConstructible (padicSubfieldRingObj X ℓ E) :=
-    constantModel_eq_of_localFree _ (finite_lf ℓ E) X
-  have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
-      boundedConstructible (padicAlgClRingObj X ℓ) :=
-    constantModel_eq_of_localFree _ (algcl_lf ℓ) X
-  constructor
-  · intro K
-    let K' : PadicAlgClConstructible X ℓ := ⟨K.obj, (congrFun hΩ K.obj).mp K.property⟩
-    obtain ⟨E, L, ⟨e⟩⟩ := constructibleCocone_essSurjObj X ℓ K'
-    exact ⟨E, ⟨L.obj, (congrFun (hE E) L.obj).mpr L.property⟩,
-      ⟨(boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e⟩⟩
-  · intro K E K_E hK F h
-    constructor
-    · exact (congrFun (hE F) _).mpr
-        (boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K_E.obj
-          ((congrFun (hE E) K_E.obj).mp K_E.property))
-    · obtain ⟨e⟩ := hK
-      exact ⟨(derivedExtendScalarsCompIso X ℓ h).app K_E.obj ≪≫ e⟩
+          ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj)) :=
+  sorry
 
 end AlgebraicGeometry.ProEtale

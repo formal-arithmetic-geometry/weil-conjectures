@@ -41,7 +41,6 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 import Sheaf.AlgebraicGeometry.EtaleSumStalks
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
@@ -55,9 +54,6 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.UnboundedLocalizingPullback
 import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
-import WeilConjectures.CategoryTheory.Sites.ReductionFlat
-import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 
 
 /-!
@@ -295,72 +291,6 @@ def reductionSiteCompactSupportIso (A : Type u) [CommRing A] [Finite A]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem tateScalarIso_exists
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0) :
-    ∃ e : (etaleSheafExtendScalars φ T).obj (finiteEtaleTateLine T N A hA) ≅
-        finiteEtaleTateLine T N B hB,
-      ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W),
-        ((etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _ e.hom).hom.app W
-            (finiteEtaleTateOneGenerator A N T hA W a z) =
-          finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
-  let J := T.smallEtaleTopology
-  let P := finiteEtaleMuModulePresheaf T N
-  let r := finiteEtaleTwistScalar N A hA
-  let s := finiteEtaleTwistScalar N B hB
-  have hs : s = φ.comp r := Subsingleton.elim _ _
-  let aA := (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} r).whiskerRight
-    T.Etaleᵒᵖ |>.comp (sheafificationAdjunction J (ModuleCat.{u + 1} A))
-  let aB := (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} s).whiskerRight
-    T.Etaleᵒᵖ |>.comp (sheafificationAdjunction J (ModuleCat.{u + 1} B))
-  let aφ := etaleSheafExtendScalarsAdjunction φ T
-  let β : sheafToPresheaf J (ModuleCat.{u + 1} B) ⋙
-      (Functor.whiskeringRight T.Etaleᵒᵖ _ _).obj (ModuleCat.restrictScalars s) ≅
-      Sheaf.restrictScalars J φ ⋙ sheafToPresheaf J (ModuleCat.{u + 1} A) ⋙
-        (Functor.whiskeringRight T.Etaleᵒᵖ _ _).obj (ModuleCat.restrictScalars r) :=
-    NatIso.ofComponents (fun M ↦
-      Functor.isoWhiskerLeft M.obj (ModuleCat.restrictScalarsComp' r φ s hs) ≪≫
-        Functor.associator M.obj (ModuleCat.restrictScalars φ)
-          (ModuleCat.restrictScalars r)) (by
-        intro M K f
-        ext W x
-        rfl)
-  let ab := aB.ofNatIsoRight β
-  let e := (aA.comp aφ).leftAdjointUniq ab
-  have he : (aA.comp aφ).homEquiv P _ (e.hom.app P) =
-      ab.unit.app P := by
-    exact Adjunction.homEquiv_leftAdjointUniq_hom_app _ _ _
-  let τ : finiteEtaleTateLine T N A hA ⟶
-      (Sheaf.restrictScalars J φ).obj (finiteEtaleTateLine T N B hB) :=
-    aφ.homEquiv _ _ (e.hom.app P)
-  refine ⟨e.app P, ?_⟩
-  intro W a z
-  have hh := congrArg (fun f ↦ f.app W z) he
-  change τ.hom.app W
-    (finiteEtaleTateOneGenerator A N T hA W 1 z) =
-    finiteEtaleTateOneGenerator B N T hB W 1 z at hh
-  let := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N W)
-  have ha : finiteEtaleTateOneGenerator A N T hA W a z =
-      a • finiteEtaleTateOneGenerator A N T hA W 1 z := by
-    unfold finiteEtaleTateOneGenerator
-    have hx := ModuleCat.ExtendScalars.smul_tmul r a 1 (show P.obj W from z)
-    simp only [mul_one] at hx
-    have hh := congrArg (fun x ↦
-      ((toSheafify J (P ⋙ ModuleCat.extendScalars r)).app W) x) hx
-    exact hh.symm.trans (map_smul _ _ _)
-  rw [ha, map_smul]
-  erw [hh]
-  change φ a • finiteEtaleTateOneGenerator B N T hB W 1 z = _
-  unfold finiteEtaleTateOneGenerator
-  have hx := ModuleCat.ExtendScalars.smul_tmul s (φ a) 1 (show P.obj W from z)
-  simp only [mul_one] at hx
-  have hh := congrArg (fun x ↦
-    ((toSheafify J (P ⋙ ModuleCat.extendScalars s)).app W) x) hx
-  exact (map_smul _ _ _).symm.trans hh
-
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 /-- The scalar map on the actual ordinary Tate line, fixed on every root generator.
 Source: blueprint Step 6 (blueprint: det-sp-reduction-exceptional).
 Proof: the balanced tensor presentation sends a tensor z to phi(a) tensor z. Balancing
@@ -374,18 +304,83 @@ theorem reductionEtaleTateMap_existsUnique
       ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W),
         τ.hom.app W (finiteEtaleTateOneGenerator A N T hA W a z) =
           finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
-  obtain ⟨e, he⟩ := tateScalarIso_exists φ T N hA hB
-  let τ := (etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _ e.hom
-  refine ⟨τ, he, ?_⟩
+  let J := T.smallEtaleTopology
+  let P := finiteEtaleMuModulePresheaf T N
+  let r := finiteEtaleTwistScalar N A hA
+  let L := (Sheaf.restrictScalars J φ).obj (finiteEtaleTateLine T N B hB)
+  let adj := ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} r
+  let g (W : T.Etaleᵒᵖ) : P.obj W ⟶ (ModuleCat.restrictScalars r).obj (L.obj.obj W) :=
+    letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N W)
+    ModuleCat.ofHom (X := P.obj W)
+      (Y := (ModuleCat.restrictScalars r).obj (L.obj.obj W))
+      (({ toFun := Etale.ordinaryFiniteRootGenerator B N hB T W
+          map_zero' := (Etale.ordinaryFiniteRootGenerator B N hB T W).map_zero
+          map_add' := (Etale.ordinaryFiniteRootGenerator B N hB T W).map_add } :
+        P.obj W →+ ((ModuleCat.restrictScalars r).obj (L.obj.obj W))).toZModLinearMap N)
+  let q (W : T.Etaleᵒᵖ) : (ModuleCat.extendScalars r).obj (P.obj W) ⟶ L.obj.obj W :=
+    (adj.homEquiv _ _).symm (g W)
+  have hq (W : T.Etaleᵒᵖ) (z : (T.rootsOfUnitySheaf N).obj.obj W) :
+      q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z) =
+        Etale.ordinaryFiniteRootGenerator B N hB T W z := by
+    have hh := congrArg (fun f ↦ f z) ((adj.homEquiv _ _).apply_symm_apply (g W))
+    change q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _
+      (Module.compHom _ r) _ (1 : A) z) = (g W) z at hh
+    exact hh
+  have hqa (W : T.Etaleᵒᵖ) (a : A)
+      (z : (T.rootsOfUnitySheaf N).obj.obj W) :
+      q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z) =
+        finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
+    let _ := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N W)
+    have hx : (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z) =
+        a • (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z :
+          (ModuleCat.extendScalars r).obj (P.obj W)) := by
+      simpa only [mul_one] using
+        (ModuleCat.ExtendScalars.smul_tmul r a 1 (show P.obj W from z)).symm
+    rw [hx, map_smul, hq]
+    change φ a • (show (finiteEtaleTateLine T N B hB).obj.obj W from
+      Etale.ordinaryFiniteRootGenerator B N hB T W z) = _
+    change φ a • ((toSheafify J (P ⋙ ModuleCat.extendScalars
+      (finiteEtaleTwistScalar N B hB))).app W
+        ((@TensorProduct.tmul (ZMod N) _ _ _ _ _
+          (Module.compHom _ (finiteEtaleTwistScalar N B hB)) _ (1 : B) z))) =
+      (toSheafify J (P ⋙ ModuleCat.extendScalars
+        (finiteEtaleTwistScalar N B hB))).app W
+          ((@TensorProduct.tmul (ZMod N) _ _ _ _ _
+            (Module.compHom _ (finiteEtaleTwistScalar N B hB)) _ (φ a) z))
+    rw [← map_smul]
+    congr 1
+    simpa only [mul_one] using
+      (ModuleCat.ExtendScalars.smul_tmul (finiteEtaleTwistScalar N B hB)
+        (φ a) 1 (show P.obj W from z))
+  let η : P ⋙ ModuleCat.extendScalars r ⟶ L.obj :=
+    { app := q
+      naturality := by
+        intro W V f
+        change (ModuleCat.extendScalars r).map (P.map f) ≫ q V = q W ≫ L.obj.map f
+        apply (adj.homEquiv _ _).injective
+        rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+        simp only [q, Equiv.apply_symm_apply]
+        ext z
+        exact congrArg (fun k ↦ k z)
+          (Etale.ordinaryFiniteRootGenerator_naturality B N hB T f) }
+  let τ : finiteEtaleTateLine T N A hA ⟶ L :=
+    ⟨sheafifyLift J η L.property⟩
+  have hτ : ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W),
+      τ.hom.app W (finiteEtaleTateOneGenerator A N T hA W a z) =
+        finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
+    intro W a z
+    have hh := congrArg (fun f ↦ f.app W
+      (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z))
+      (toSheafify_sheafifyLift J η L.property)
+    exact hh.trans (hqa W a z)
+  refine ⟨τ, hτ, ?_⟩
   intro τ' hτ'
   apply Sheaf.hom_ext
-  apply sheafify_hom_ext _ _ _
-    ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj
-      (finiteEtaleTateLine T N B hB)).property
+  apply sheafify_hom_ext _ _ _ L.property
   ext W x
   induction x using TensorProduct.induction_on with
   | zero => simp
-  | tmul a z => exact (hτ' W a z).trans (he W a z).symm
+  | tmul a z => exact (hτ' W a z).trans (hτ W a z).symm
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
 /-- The canonical generator-normalized ordinary Tate scalar map.
@@ -396,21 +391,6 @@ def reductionEtaleTateMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (Sheaf.restrictScalars T.smallEtaleTopology φ).obj (finiteEtaleTateLine T N B hB) :=
   (reductionEtaleTateMap_existsUnique φ T N hA hB).exists.choose
 
-/-- Transpose a degree-zero map through an adjunction to an exact derived functor.
-Source: blueprint Step 6, derived scalar adjunction
-(blueprint: det-sp-reduction-exceptional). -/
-def reductionSingleAdjointTranspose
-    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
-    {D : Type*} [Category* D] [Abelian D] [HasDerivedCategory D]
-    (U : D ⥤ C) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-    (L : DerivedCategory C ⥤ DerivedCategory D) (a : L ⊣ U.mapDerivedCategory)
-    {M : C} {Q : D} (g : M ⟶ U.obj Q) :
-    L.obj ((DerivedCategory.singleFunctor C 0).obj M) ⟶
-      (DerivedCategory.singleFunctor D 0).obj Q :=
-  (a.homEquiv _ _).symm
-    ((DerivedCategory.singleFunctor C 0).map g ≫
-      (U.mapDerivedCategorySingleFunctor 0).inv.app Q)
-
 /-- The actual derived Tate scalar map: transpose the root-normalized map under
 scalar extension/restriction. Source: blueprint Step 6
 (blueprint: det-sp-reduction-exceptional). -/
@@ -419,406 +399,11 @@ def reductionEtaleTateExtensionMap
     (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0) :
     (Etale.scalarExtension φ T).obj (Etale.ordinaryFiniteLine A N hA T) ⟶
       Etale.ordinaryFiniteLine B N hB T :=
-  show (Etale.scalarExtension φ T).obj
-      ((DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateLine T N A hA)) ⟶
-    (DerivedCategory.singleFunctor _ 0).obj (finiteEtaleTateLine T N B hB) from
-  reductionSingleAdjointTranspose (Sheaf.restrictScalars T.smallEtaleTopology φ)
-    (Etale.scalarExtension φ T)
-    (Adjunction.ofIsRightAdjoint
-      (Sheaf.derivedRestrictScalars.{u} T.smallEtaleTopology φ))
-    (reductionEtaleTateMap φ T N hA hB)
-
-set_option backward.isDefEq.respectTransparency false
-set_option backward.defeqAttrib.useBackward true
-
-section SingleTranspose
-
-universe v₁ v₂ u₁ u₂ w₁ w₂
-variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w₁} C]
-  {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
-  (E : C ⥤ D) (U : D ⥤ C) [E.Additive] [U.Additive]
-  [PreservesFiniteLimits U] [PreservesFiniteColimits U] (a : E ⊣ U)
-omit [HasDerivedCategory C] [HasDerivedCategory D]
-  [PreservesFiniteLimits U] [PreservesFiniteColimits U] in
-private theorem singleUnit (M : C) :
-    (a.mapHomologicalComplex (.up ℤ)).unit.app
-        ((CochainComplex.singleFunctor C 0).obj M) ≫
-      (U.mapHomologicalComplex (.up ℤ)).map
-        ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app M) ≫
-      (HomologicalComplex.singleMapHomologicalComplex U (.up ℤ) 0).hom.app (E.obj M) =
-    (CochainComplex.singleFunctor C 0).map (a.unit.app M) := by
-  ext i
-  by_cases hi : i = 0
-  · subst i
-    simp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
-      HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-      Adjunction.mapHomologicalComplex_unit_app_f,
-      HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      HomologicalComplex.single_map_f_self, Functor.map_comp, Category.assoc]
-    rw [← U.map_comp_assoc
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (E.obj M)).inv
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (E.obj M)).hom,
-      Iso.inv_hom_id, U.map_id, Category.id_comp]
-    exact (a.unit.naturality_assoc
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 M).hom _).symm
-  · apply (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 M i hi).eq_of_src
-
-private theorem singleTranspose
-    (L : DerivedCategory C ⥤ DerivedCategory D) (ad : L ⊣ U.mapDerivedCategory)
-    (M : C) (Q : D) (g : M ⟶ U.obj Q)
-    (r : L.obj ((DerivedCategory.singleFunctor C 0).obj M) ⟶
-      DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj
-        ((CochainComplex.singleFunctor C 0).obj M)))
-    (hr : ad.homEquiv _ _ r =
-      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app
-        ((CochainComplex.singleFunctor C 0).obj M)) ≫
-      U.mapDerivedCategoryFactors.inv.app _)
-    [IsIso r] [IsIso ((a.homEquiv M Q).symm g)] :
-    IsIso ((ad.homEquiv _ _).symm
-      ((DerivedCategory.singleFunctor _ 0).map g ≫
-        (U.mapDerivedCategorySingleFunctor 0).inv.app Q)) := by
-  let f := (a.homEquiv M Q).symm g
-  let d : L.obj ((DerivedCategory.singleFunctor C 0).obj M) ⟶
-      (DerivedCategory.singleFunctor D 0).obj Q :=
-    r ≫ DerivedCategory.Q.map
-      ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app M) ≫
-        (DerivedCategory.singleFunctor D 0).map f
-  have hd : ad.homEquiv _ _ d =
-      (DerivedCategory.singleFunctor C 0).map g ≫
-        (U.mapDerivedCategorySingleFunctor 0).inv.app Q := by
-    dsimp only [d]
-    rw [ad.homEquiv_naturality_right, hr, Functor.map_comp]
-    simp only [Category.assoc]
-    have hu : (DerivedCategory.singleFunctor C 0).map g =
-        (DerivedCategory.singleFunctor C 0).map (a.unit.app M) ≫
-          (DerivedCategory.singleFunctor C 0).map (U.map f) := by
-      rw [← Functor.map_comp]
-      congr 1
-      exact ((a.homEquiv M Q).apply_symm_apply g).symm
-    rw [hu]
-    have hn := (U.mapDerivedCategorySingleFunctor 0).inv.naturality f
-    dsimp only [Functor.comp_map] at hn
-    rw [Category.assoc, hn]
-    simp only [← Category.assoc]
-    apply congrArg (· ≫ U.mapDerivedCategory.map ((DerivedCategory.singleFunctor D 0).map f))
-    apply (cancel_mono ((U.mapDerivedCategorySingleFunctor 0).hom.app (E.obj M))).mp
-    simp only [Category.assoc, Iso.inv_hom_id_app]
-    erw [← U.mapDerivedCategoryFactors.inv.naturality_assoc]
-    erw [U.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app]
-    erw [Category.comp_id, ← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
-    exact congrArg DerivedCategory.Q.map (singleUnit E U a M)
-  have hh : (ad.homEquiv _ _).symm
-      ((DerivedCategory.singleFunctor C 0).map g ≫
-        (U.mapDerivedCategorySingleFunctor 0).inv.app Q) = d :=
-    (ad.homEquiv _ _).symm_apply_eq.mpr hd.symm
-  rw [hh]
-  dsimp only [d]
-  infer_instance
-
-end SingleTranspose
-
-universe v₁ v₂ u₁ u₂
-
-private theorem flatRepresentative_isIso
-    {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{v₁} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    [HasDerivedCategory.{v₁} C] [Abelian.HasFunctorialFlatResolution C]
-    {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{v₂} D]
-    [Abelian.HasKInjectiveResolutions D]
-    (E : C ⥤ D) (U : D ⥤ C) [E.Additive] [U.Additive]
-    [PreservesFiniteLimits U] [PreservesFiniteColimits U] [E.PreservesKFlatQuasiIso]
-    (a : E ⊣ U) (L : DerivedCategory C ⥤ DerivedCategory D)
-    (ac : L ⊣ U.mapDerivedCategory) (P : CochainComplex C ℤ)
-    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
-    IsIso ((ac.homEquiv _ _).symm
-      (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        U.mapDerivedCategoryFactors.inv.app _)) := by
-  let ad := a.derivedAdjunction.ofNatIsoRight U.rightDerivedFunctorIsoMapDerivedCategory
-  let e := ac.leftAdjointUniq ad
-  let HP := (HomotopyCategory.quotient _ (.up ℤ)).obj P
-  let q₀ := (DerivedCategory.quotientCompQhIso C).app P
-  let q₁ := (DerivedCategory.quotientCompQhIso D).app
-    ((E.mapHomologicalComplex (.up ℤ)).obj P)
-  let q₂ := (DerivedCategory.quotientCompQhIso C).app
-    ((U.mapHomologicalComplex (.up ℤ)).obj ((E.mapHomologicalComplex (.up ℤ)).obj P))
-  let ε := E.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  have : IsIso ε := E.isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
-  let d : E.leftDerivedFunctor.obj (DerivedCategory.Q.obj P) ≅
-      DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P) :=
-    E.leftDerivedFunctor.mapIso q₀.symm ≪≫ asIso ε ≪≫ q₁
-  have hfac := (a.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    E.leftDerivedFunctorCounit U.rightDerivedFunctorUnit
-    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)
-  have ht : ad.unit.app
-        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      U.mapDerivedCategory.map (E.leftDerivedFunctorCounit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-      U.mapDerivedCategoryFactorsh.hom.app
-        ((E.mapHomotopyCategory (.up ℤ)).obj
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
-    simp only [ad, Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
-      Functor.whiskerLeft_app, Category.assoc]
-    erw [← U.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality_assoc]
-    erw [← Category.assoc, hfac]
-    have hβ := NatTrans.congr_app
-      U.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
-      ((E.mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
-    dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hβ
-    rw [Category.assoc]
-    erw [reassoc_of% hβ]
-    simp only [Iso.inv_hom_id_app]
-    erw [Category.comp_id]
-  have hu := U.mapDerivedCategoryFactorsh_hom_app
-    ((E.mapHomologicalComplex (.up ℤ)).obj P)
-  have hquot : DerivedCategory.Qh.map
-      ((U.mapHomotopyCategoryFactors (.up ℤ)).inv.app
-        ((E.mapHomologicalComplex (.up ℤ)).obj P)) = 𝟙 _ := by
-    change DerivedCategory.Qh.map (𝟙 _) = 𝟙 _
-    exact DerivedCategory.Qh.map_id _
-  rw [hquot] at hu
-  erw [Category.comp_id] at hu
-  have hu' : U.mapDerivedCategory.map q₁.hom ≫
-      U.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) =
-      U.mapDerivedCategoryFactorsh.hom.app
-        ((E.mapHomotopyCategory (.up ℤ)).obj
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ q₂.hom := by
-    have h := congrArg (fun z ↦ z ≫ q₂.hom) hu
-    change U.mapDerivedCategoryFactorsh.hom.app
-      ((E.mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ q₂.hom =
-      (U.mapDerivedCategory.map q₁.hom ≫
-        U.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
-          q₂.inv) ≫ q₂.hom at h
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at h
-    exact h.symm
-  have hstd : ad.unit.app (DerivedCategory.Q.obj P) ≫ U.mapDerivedCategory.map d.hom =
-      DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj P) := by
-    apply (cancel_mono (U.mapDerivedCategoryFactors.hom.app
-      ((E.mapHomologicalComplex (.up ℤ)).obj P))).mp
-    apply (cancel_epi q₀.hom).mp
-    have hn := ad.unit.naturality q₀.hom
-    change q₀.hom ≫ ad.unit.app (DerivedCategory.Q.obj P) =
-      ad.unit.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-        U.mapDerivedCategory.map (E.leftDerivedFunctor.map q₀.hom) at hn
-    have hq := DerivedCategory.quotientCompQhIso_hom_naturality
-      ((a.mapHomologicalComplex (.up ℤ)).unit.app P)
-    have hd : E.leftDerivedFunctor.map q₀.hom ≫ d.hom = ε ≫ q₁.hom := by
-      change (E.leftDerivedFunctor.mapIso q₀).hom ≫
-        ((E.leftDerivedFunctor.mapIso q₀).inv ≫ ε ≫ q₁.hom) = _
-      exact Iso.hom_inv_id_assoc _ _
-    have hdnat : q₀.hom ≫ ad.unit.app (DerivedCategory.Q.obj P) ≫
-        U.mapDerivedCategory.map d.hom =
-      ad.unit.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-        U.mapDerivedCategory.map ε ≫ U.mapDerivedCategory.map q₁.hom := by
-      calc
-        _ = ad.unit.app
-            (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-          U.mapDerivedCategory.map (E.leftDerivedFunctor.map q₀.hom) ≫
-            U.mapDerivedCategory.map d.hom := by
-          simpa only [Category.assoc] using congrArg
-            (fun z ↦ z ≫ U.mapDerivedCategory.map d.hom) hn
-        _ = _ := by
-          rw [← U.mapDerivedCategory.map_comp, hd, Functor.map_comp]
-    calc
-      _ = ad.unit.app
-          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-          U.mapDerivedCategory.map ε ≫ U.mapDerivedCategory.map q₁.hom ≫
-            U.mapDerivedCategoryFactors.hom.app
-              ((E.mapHomologicalComplex (.up ℤ)).obj P) := by
-        simpa only [Category.assoc] using congrArg (fun z ↦ z ≫
-          U.mapDerivedCategoryFactors.hom.app
-            ((E.mapHomologicalComplex (.up ℤ)).obj P)) hdnat
-      _ = ad.unit.app
-          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-          U.mapDerivedCategory.map ε ≫
-          U.mapDerivedCategoryFactorsh.hom.app
-            ((E.mapHomotopyCategory (.up ℤ)).obj
-              ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ q₂.hom := by
-        exact congrArg (fun z ↦ ad.unit.app
-          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-          U.mapDerivedCategory.map ε ≫ z) hu'
-      _ = DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ q₂.hom := by
-        simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ q₂.hom) ht
-      _ = q₀.hom ≫ DerivedCategory.Q.map
-          ((a.mapHomologicalComplex (.up ℤ)).unit.app P) := by
-        erw [Adjunction.mapHomotopyCategory_unit_app_quotient]
-        exact hq
-      _ = _ := by
-        simp only [Category.assoc, Iso.inv_hom_id_app]
-        erw [Category.comp_id]
-  let t := e.hom.app (DerivedCategory.Q.obj P) ≫ d.hom
-  have ht : (ac.homEquiv _ _).symm
-      (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-        U.mapDerivedCategoryFactors.inv.app _) = t := by
-    apply (ac.homEquiv _ _).injective
-    rw [show t = e.hom.app _ ≫ d.hom from rfl, ac.homEquiv_naturality_right]
-    erw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
-    rw [Equiv.apply_symm_apply]
-    exact hstd.symm
-  rw [ht]
-  dsimp only [t]
-  infer_instance
-
-section ScalarFlat
-
-private theorem scalarAdditive
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {R S : Type (u + 1)}
-    [CommRing R] [CommRing S] (φ : R →+* S) :
-    (Sheaf.composeAndSheafify J
-      (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)).Additive :=
-  (Sheaf.adjunction J
-    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)).left_adjoint_additive
-
-attribute [local instance] scalarAdditive
-
-private def scalarTensorComparison
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {R S : Type (u + 1)}
-    [CommRing R] [CommRing S] (φ : R →+* S) :
-    Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ) ⋙
-        Sheaf.restrictScalars J φ ≅ MonoidalCategory.tensorRight
-          ((presheafToSheaf J (ModuleCat.{u + 1} R)).obj
-            ((Functor.const Cᵒᵖ).obj
-              ((ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj
-                (ModuleCat.of S S)))) := by
-  let E : Sheaf J (ModuleCat.{u + 1} R) ⥤ Sheaf J (ModuleCat.{u + 1} S) :=
-    Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-  let U := Sheaf.restrictScalars J φ
-  let adj : E ⊣ U :=
-    Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  have : E.Additive := adj.left_adjoint_additive
-  let B := (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of S S)
-  let X := (Functor.const Cᵒᵖ).obj B
-  let a := presheafToSheaf J (ModuleCat.{u + 1} R)
-  let a' := presheafToSheaf J (ModuleCat.{u + 1} S)
-  let F := sheafToPresheaf J (ModuleCat.{u + 1} R)
-  let W := (Functor.whiskeringRight Cᵒᵖ _ _).obj
-    (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-  have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ) :=
-    Sheaf.preservesSheafification_of_adjunction J
-      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  exact (show E ⋙ U ≅ MonoidalCategory.tensorRight (a.obj X) from
-    Functor.associator F (W ⋙ a') U ≪≫
-      Functor.isoWhiskerLeft F (Functor.associator W a' U) ≪≫
-      Functor.isoWhiskerLeft F (Functor.isoWhiskerLeft W
-        (sheafComposeNatIso J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ)
-          (sheafificationAdjunction J (ModuleCat.{u + 1} S))
-          (sheafificationAdjunction J (ModuleCat.{u + 1} R))).symm) ≪≫
-      Functor.isoWhiskerLeft F (Functor.associator W _ a).symm ≪≫
-      Functor.isoWhiskerLeft F (Functor.isoWhiskerRight
-        (Functor.whiskeringRightObjCompIso _ _ ≪≫
-          (Functor.whiskeringRight _ _ _).mapIso
-            (ModuleCat.extendScalarsCompRestrictScalarsIso.{u + 1} φ) ≪≫
-          whiskeringRightTensorRightIso _) a) ≪≫
-      Functor.isoWhiskerLeft F (Sheaf.presheafToSheafCompTensorRightIso X).symm ≪≫
-      (Functor.associator F a (MonoidalCategory.tensorRight (a.obj X))).symm ≪≫
-      Functor.isoWhiskerRight
-        (asIso (sheafificationAdjunction J (ModuleCat.{u + 1} R)).counit)
-        (MonoidalCategory.tensorRight (a.obj X)) ≪≫ Functor.leftUnitor _)
-
-private theorem scalarPreservesKFlat
-    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {R S : Type (u + 1)}
-    [CommRing R] [CommRing S] (φ : R →+* S) :
-    (Sheaf.composeAndSheafify J
-      (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)).PreservesKFlatQuasiIso := by
-  classical
-  let E : Sheaf J (ModuleCat.{u + 1} R) ⥤ Sheaf J (ModuleCat.{u + 1} S) :=
-    Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-  let U := Sheaf.restrictScalars J φ
-  let adj : E ⊣ U :=
-    Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  have : E.Additive := adj.left_adjoint_additive
-  let B := (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of S S)
-  let X := (Functor.const Cᵒᵖ).obj B
-  let a := presheafToSheaf J (ModuleCat.{u + 1} R)
-  let a' := presheafToSheaf J (ModuleCat.{u + 1} S)
-  let F := sheafToPresheaf J (ModuleCat.{u + 1} R)
-  let W := (Functor.whiskeringRight Cᵒᵖ _ _).obj
-    (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
-  have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ) :=
-    Sheaf.preservesSheafification_of_adjunction J
-      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
-  let e := scalarTensorComparison J φ
-  have hU : U.Faithful := inferInstance
-  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    IsGrothendieckAbelian.hasColimits _
-  have : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
-    hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
-  have : HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} R)) :=
-    ⟨fun K _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete K)⟩
-  change E.PreservesKFlatQuasiIso
-  apply CategoryTheory.Functor.PreservesKFlatQuasiIso.mk'
-  intro K hK hKa
-  have ht := CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa (a.obj X)
-  have hEU := ht.of_iso
-    ((NatIso.mapHomologicalComplex e (.up ℤ)).app K).symm
-  have hUK : ((U.mapHomologicalComplex (.up ℤ)).obj
-      ((E.mapHomologicalComplex (.up ℤ)).obj K)).Acyclic :=
-    hEU.of_iso ((CategoryTheory.Functor.mapHomologicalComplexCompIso
-      (Iso.refl (E ⋙ U)) (.up ℤ)).app K)
-  intro n
-  exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
-
-private theorem singleFlatTranspose_isIso
-    {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{v₁} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    [HasDerivedCategory.{v₁} C] [Abelian.HasFunctorialFlatResolution C]
-    {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{v₂} D]
-    [Abelian.HasKInjectiveResolutions D]
-    (E : C ⥤ D) (U : D ⥤ C) [E.Additive] [U.Additive]
-    [PreservesFiniteLimits U] [PreservesFiniteColimits U] [E.PreservesKFlatQuasiIso]
-    (a : E ⊣ U) (L : DerivedCategory C ⥤ DerivedCategory D)
-    (ac : L ⊣ U.mapDerivedCategory) (M : C) (Q : D)
-    (g : M ⟶ U.obj Q) (hM : ObjectProperty.flat M)
-    [IsIso ((a.homEquiv M Q).symm g)] :
-    IsIso (reductionSingleAdjointTranspose U L ac g) := by
-  let P := (CochainComplex.singleFunctor C 0).obj M
-  have hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P :=
-    (CochainComplex.kFlat_single_obj_iff_flat M 0).2 hM
-  let r := (ac.homEquiv _ _).symm
-    (DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
-      U.mapDerivedCategoryFactors.inv.app _)
-  have : IsIso r := flatRepresentative_isIso E U a L ac P hP
-  apply singleTranspose E U a L ac M Q g r
-  exact Equiv.apply_symm_apply _ _
-
-private theorem reductionOrdinaryTateExtension_isIso
-    {A B : Type (u + 1)} [CommRing A] [CommRing B]
-    (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0) :
-    IsIso ((etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _ |>.symm
-      (reductionEtaleTateMap φ T N hA hB)) := by
-  obtain ⟨e, he⟩ := tateScalarIso_exists φ T N hA hB
-  have hτ := (reductionEtaleTateMap_existsUnique φ T N hA hB).unique he
-    (reductionEtaleTateMap_existsUnique φ T N hA hB).exists.choose_spec
-  have hh : (etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _ e.hom =
-      reductionEtaleTateMap φ T N hA hB := hτ
-  rw [← hh, Equiv.symm_apply_apply]
-  infer_instance
-
-private theorem reductionTateLine_flat
-    (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
-    (N : ℕ) (hA : (N : A) = 0) (hT : IsUnit (N : Γ(T, ⊤))) :
-    ObjectProperty.flat (finiteEtaleTateLine T N A hA) := by
-  classical
-  by_cases hN : 0 < N
-  · obtain ⟨r, c, p, _⟩ := etaleFiniteTwistPullback A N hN hA
-    apply ObjectProperty.flat_of_tensorIso
-      (Y := finiteEtaleTateSheaf A N T hA (-1))
-    exact p T hT 1 (-1)
-  · have hz : N = 0 := Nat.eq_zero_of_not_pos hN
-    have : IsEmpty T := ⟨fun t ↦ by
-      have ht := hT.map (T.Γevaluation t).hom
-      simp only [hz, Nat.cast_zero, map_zero] at ht
-      exact not_isUnit_zero ht⟩
-    exact ObjectProperty.flat_of_isZero (Etale.isZero_sheaf_of_isEmpty _)
+  ((Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars.{u} T.smallEtaleTopology φ)).homEquiv _ _).symm
+    ((DerivedCategory.singleFunctor _ 0).map (reductionEtaleTateMap φ T N hA hB) ≫
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor
+        0).inv.app (finiteEtaleTateLine T N B hB))
 
 /-- The generator-normalized derived Tate scalar map is invertible.
 Source: blueprint Step 6 (blueprint: det-sp-reduction-exceptional).
@@ -832,19 +417,7 @@ theorem reductionEtaleTateExtensionMap_isIso
     (φ : A →+* B) (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) (hB : (N : B) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) :
     IsIso (reductionEtaleTateExtensionMap φ T N hA hB) := by
-  let E := etaleSheafExtendScalars φ T
-  let U := Sheaf.restrictScalars T.smallEtaleTopology φ
-  let a : E ⊣ U := etaleSheafExtendScalarsAdjunction φ T
-  have : E.Additive := a.left_adjoint_additive
-  have : E.PreservesKFlatQuasiIso := scalarPreservesKFlat T.smallEtaleTopology φ
-  have : IsIso ((a.homEquiv _ _).symm (reductionEtaleTateMap φ T N hA hB)) :=
-    reductionOrdinaryTateExtension_isIso φ T N hA hB
-  exact singleFlatTranspose_isIso E U a (Etale.scalarExtension φ T)
-    (Adjunction.ofIsRightAdjoint
-      (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
-    _ _ (reductionEtaleTateMap φ T N hA hB) (reductionTateLine_flat A T N hA hT)
-
-end ScalarFlat
+  sorry
 
 /-- The root-normalized derived Tate scalar isomorphism, with the actual scalar mate
 as its forward map. Source: blueprint Step 6 (blueprint: det-sp-reduction-exceptional). -/

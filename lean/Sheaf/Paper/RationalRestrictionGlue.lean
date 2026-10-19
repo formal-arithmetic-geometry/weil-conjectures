@@ -9,14 +9,18 @@ public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import Sheaf.Paper.LocalizingClosureCtfEqualsBc
-import Mathlib.CategoryTheory.Adjunction.Restrict
-import Sheaf.SixFunctors.IntegralRestrictionBoundedDescent
-import Sheaf.SixFunctors.IntegralRestrictionCohomologyDescent
+import Sheaf.Paper.CoefficientHeart
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartCommonStratification
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.CompactificationLocalizing
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.Paper.RestrictionLocal
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.RestrictionLocal
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Gluing rational constructibility and restricting the exceptional adjunction
@@ -83,29 +87,33 @@ is assumed. The coefficient identification is an isomorphism of condensed ring o
 Source: blueprint sk-thm-restriction-glue, clauses (1)--(2)
 (blueprint: det-thm-restriction-glue).
 
-Proof, following the unit's local-factorization and gluing route:
-1. Finite type and quasi-compactness over the field make X and Y Noetherian.
-   The rational cases of localizingClosure_ctf_equals_bc identify Dctf with Dbc,
-   so Dbc lies in the localizing closure. The admissible-coefficient predicate
-   includes the finite-subextension-valued algebraic-closure coefficient.
-2. Transport open restrictions through leftDerivedUpperStarIsoMapDerivedCategory.
-   Apply bounded_finiteOpenDescent and cohomology_finiteOpenDescent: these proved,
-   coefficient-independent lemmas glue the cohomological bounds and the finite
-   scheme stratifications. They include empty schemes and empty index types.
-3. Apply compactification_localizing to the actual boundary compactification.
-   Convert Dbc to Dctf using step 1 and retain the Dbc component of its image.
-4. Apply restrictionLocal to the supplied G and adjunction. Its finite affine
-   cover has closed factorizations through affine spaces over affine target charts.
-   Replace source charts by their open ranges and transport the factorizations.
-   Establish their finite-type, separatedness and quasi-compactness instances.
-   For each projection and closed immersion, compactificationOverField and
-   exists_localizingExceptionalAdjoint supply the auxiliary adjunctions required
-   by restrictionLocal. Its local preservation clause applies to K in Dbc.
-   Glue these restrictions by step 2, indexed by Fin n in its own universe.
-5. Apply Adjunction.restrictFullyFaithful to the two concrete restriction lifts.
-   Their commuting comparisons are identity isomorphisms. Unfold the Hom
-   equivalence and full inclusions to obtain exactly the original homEquiv,
-   with its inherited naturality.
+Proof plan, following the six steps of the DAG:
+1. The standing finite-type schemes are Noetherian by pqf-lem-locnoeth-lft and
+   lem-weil-pbc-qcqs-over-affine. The rational assertion sk-lem-coefficient-heart
+   identifies Dctf with Dbc, hence puts Dbc inside sk-def-localizing-closure.
+   For Qbar use the finite-subextension-valued sk-def-sfb-qlbar-condensed ring.
+2. By sk-prop-sfb-cartesian-coefficients open restriction is exact and commutes
+   with cohomology. For a nonempty scheme take the minimum and maximum of the
+   finitely many local cohomological bounds. Cohomology outside this interval
+   vanishes by the sheaf axiom on the induced covers of pro-etale test objects.
+   If X is empty, the empty-cover sheaf axiom makes every module zero; this
+   also treats an empty indexing type and covers consisting of empty opens.
+3. Use sk-lem-coefficient-heart to stratify the finitely many local cohomology
+   sheaves. Compose their immersions into X (lem-weil-pbc-proper-fp-permanence),
+   and add reduced closed complements (lem-weil-pbc-reduced-induced-closed-subscheme).
+   Apply det-lem-coefficient-heart-common-stratification to these finitely many
+   stratifications. Every nonempty refined stratum lies in a cover member;
+   its lisse restriction is supplied by that node's second clause, applied to
+   the already constructible local sheaf. The heart criterion and step 2 give Dbc.
+4. For K in Dbc, det-thm-restriction-local gives a finite affine cover where
+   f^!K is bounded constructible. Apply clause (1) just established.
+5. The boundary compactification has quasi-compact open part and proper second
+   part (sk-def-nagata-sketch-data). Apply det-sf-comp-coherence-single to
+   Rp_* D(j_!). Step 1 identifies its Dctf preservation with Dbc preservation.
+6. The inclusions of Dbc and the localizing closures are full. Thus the same
+   Hom equivalence of sk-prop-sf-existence is the claimed restricted equivalence;
+   its naturality equations are unchanged. Equivalently apply
+   CategoryTheory.Adjunction.restrictFullyFaithful to the two concrete lifts.
 -/
 theorem rationalRestrictionGlue
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -151,189 +159,6 @@ theorem rationalRestrictionGlue
           (adjbc.homEquiv A K t).hom =
             (adj.homEquiv ⟨A.obj, hX A.obj A.property⟩
               ⟨K.obj, hY K.obj K.property⟩ (ObjectProperty.homMk t.hom)).hom := by
-  classical
-  let : Fact (ringChar k).Prime := ⟨by rw [ringChar.eq k p]; exact Fact.out⟩
-  let : Fact (ringChar k ≠ ℓ) := ⟨by rw [ringChar.eq k p]; exact hpℓ⟩
-  let : IsLocallyNoetherian X :=
-    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  let : IsLocallyNoetherian Y :=
-    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
-  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
-  have : IsNoetherian X := ⟨⟩
-  have : IsNoetherian Y := ⟨⟩
-  have hcoeff : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
-    rcases hΛ with hE | hbar
-    · exact Or.inl ⟨⟨E, inferInstance⟩, hE⟩
-    · exact Or.inr hbar
-  have htor (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] :
-      (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) =
-        constantModelBoundedConstructible Λ T := by
-    apply (localizingClosure_ctf_equals_bc ℓ T Λ ?_).1.2.2.1
-    rcases hcoeff with ⟨E, hE⟩ | hbar
-    · exact Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩))
-    · exact Or.inr (Or.inr (Or.inr hbar))
-  have hinc (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] :
-      constantModelBoundedConstructible Λ T ≤ localizingClosureProEtale Λ T := by
-    intro K hK P hP hSP
-    apply hSP K
-    rw [htor T]
-    exact hK
-  have hadm : IsLocalizingAdmissibleCoefficient ℓ Λ := by
-    rcases hcoeff with hE | hbar
-    · exact Or.inr (Or.inr (Or.inr (Or.inl hE)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr hbar)))))
-  have hF : ∀ A, constantModelBoundedConstructible Λ X A →
-      constantModelBoundedConstructible Λ Y
-        ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A) := by
-    intro A hA
-    exact ((compactification_localizing Λ ℓ k f c hadm).2.2.2 A
-      ((congrFun (htor X) A).mpr hA)).1
-  have hglue : ∀ (I : Type w) [Finite I] (U : I → X.Opens), iSup U = ⊤ →
-      ∀ M : DerivedCategory
-        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
-        (∀ i : I, constantModelBoundedConstructible Λ (U i).toScheme
-          (((upperStar Λ (U i).ι).mapDerivedCategory).obj M)) →
-            constantModelBoundedConstructible Λ X M := by
-    intro I _ U hU M hM
-    let isoClosed (T : Scheme.{u}) :=
-      (constantModelConstructibleFiniteTor_wellDefined Λ T).2.1
-    let e i := (leftDerivedUpperStarIsoMapDerivedCategory Λ (U i).ι).app M
-    have hM' i : constantModelBoundedConstructible Λ (U i).toScheme
-        ((upperStar Λ (U i).ι).leftDerivedFunctor.obj M) :=
-      @ObjectProperty.prop_of_iso _ _ _ (isoClosed (U i).toScheme) _ _
-        (e i).symm (hM i)
-    exact ⟨IntegralCompactSupport.IntegralRestriction.bounded_finiteOpenDescent
-        Λ X I U hU M (fun i ↦ (hM' i).1),
-      IntegralCompactSupport.IntegralRestriction.cohomology_finiteOpenDescent
-        Λ X I U hU M hM'⟩
-  have brown {S T : Scheme.{u}} [S.Over (Spec (.of k))] [T.Over (Spec (.of k))]
-      [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]
-      [IsSeparated (S ↘ Spec (.of k))]
-      [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
-      [IsSeparated (T ↘ Spec (.of k))]
-      (g : S ⟶ T) [g.IsOver (Spec (.of k))]
-      [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g]
-      (cg : Compactification.BoundaryCompactification g) :
-      ∃ (hg : ∀ A, localizingClosureProEtale Λ S A → localizingClosureProEtale Λ T
-          ((rightDerivedLowerShriekOfCompactification Λ cg.obj.obj).obj A))
-        (J : (localizingClosureProEtale Λ T).FullSubcategory ⥤
-          (localizingClosureProEtale Λ S).FullSubcategory),
-        Nonempty (localizingLowerShriek Λ cg.obj.obj hg ⊣ J) := by
-    obtain ⟨hg, hS, hT, hb⟩ := exists_localizingExceptionalAdjoint Λ ℓ k g cg hadm
-    let := hS
-    let := hT
-    obtain ⟨_, _, _, _, J, s, hs⟩ := hb
-    let := s
-    obtain ⟨_, _, a, _⟩ := hs
-    exact ⟨hg, J, ⟨a⟩⟩
-  have hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
-      constantModelBoundedConstructible Λ Y K.obj →
-        constantModelBoundedConstructible Λ X (G.obj K).obj := by
-    intro K hK
-    obtain ⟨hloc, n, A, u, hA, hcov, hfac⟩ :=
-      restrictionLocal Λ ℓ k hcoeff f c h G adj
-    have hu : ∀ a, IsOpenImmersion (u a) := fun a ↦ (hA a).2
-    let O : Fin n → X.Opens := fun a ↦ (u a).opensRange
-    have hO : iSup O = ⊤ := by
-      apply top_unique
-      intro x _
-      obtain ⟨a, y, hy⟩ := hcov x
-      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨a, y, hy⟩
-    have hlocal (a : Fin n) : constantModelBoundedConstructible Λ (O a).toScheme
-        (((upperStar Λ (O a).ι).mapDerivedCategory).obj (G.obj K).obj) := by
-      have : IsAffine (A a) := (hA a).1
-      obtain ⟨V, v, hV, hv, d, i, hi, q, hqi, hq⟩ := hfac a
-      have : IsAffine V := hV
-      have : IsOpenImmersion v := hv
-      have : IsClosedImmersion i := hi
-      let e := (u a).isoOpensRange
-      have : IsAffine (O a).toScheme := IsAffine.of_isIso e.inv
-      let i' := e.inv ≫ i
-      let q' := e.inv ≫ q
-      have hi' : IsClosedImmersion i' := inferInstance
-      have hqi' : i' ≫ (AffineSpace.over (ULift.{u} (Fin d)) V).hom = q' := by
-        dsimp [i', q']
-        rw [Category.assoc, hqi]
-      have heq : e.inv ≫ u a = (O a).ι :=
-        (Iso.inv_comp_eq e).mpr (Scheme.Hom.isoOpensRange_hom_ι (u a)).symm
-      have hq' : q' ≫ v = (O a).ι ≫ f := by
-        dsimp [q']
-        rw [Category.assoc, hq, ← Category.assoc, heq]
-      let : V.Over (Spec (.of k)) := ⟨v ≫ (Y ↘ Spec (.of k))⟩
-      have : v.IsOver (Spec (.of k)) := ⟨rfl⟩
-      have : LocallyOfFiniteType (V ↘ Spec (.of k)) :=
-        (show LocallyOfFiniteType (v ≫ (Y ↘ Spec (.of k))) from inferInstance)
-      have : IsSeparated (V ↘ Spec (.of k)) :=
-        (show IsSeparated (v ≫ (Y ↘ Spec (.of k))) from inferInstance)
-      have : IsLocallyNoetherian V :=
-        LocallyOfFiniteType.isLocallyNoetherian (V ↘ Spec (.of k))
-      have : IsNoetherian V := ⟨⟩
-      have : QuasiCompact (V ↘ Spec (.of k)) := by
-        have : QuasiCompact v := ⟨fun W _hW _hc ↦
-          TopologicalSpace.NoetherianSpace.isCompact _⟩
-        exact (show QuasiCompact (v ≫ (Y ↘ Spec (.of k))) from inferInstance)
-      have : LocallyOfFiniteType ((O a).toScheme ↘ Spec (.of k)) :=
-        (show LocallyOfFiniteType ((O a).ι ≫ (X ↘ Spec (.of k))) from inferInstance)
-      have : IsSeparated ((O a).toScheme ↘ Spec (.of k)) :=
-        (show IsSeparated ((O a).ι ≫ (X ↘ Spec (.of k))) from inferInstance)
-      have : IsLocallyNoetherian (O a).toScheme :=
-        LocallyOfFiniteType.isLocallyNoetherian ((O a).toScheme ↘ Spec (.of k))
-      have : IsNoetherian (O a).toScheme := ⟨⟩
-      have : QuasiCompact ((O a).toScheme ↘ Spec (.of k)) := by
-        have : QuasiCompact (O a).ι := ⟨fun W _hW _hc ↦
-          TopologicalSpace.NoetherianSpace.isCompact _⟩
-        exact (show QuasiCompact ((O a).ι ≫ (X ↘ Spec (.of k))) from inferInstance)
-      let P := AffineSpace (ULift.{u} (Fin d)) V
-      let pr : P ⟶ V := (AffineSpace.over (ULift.{u} (Fin d)) V).hom
-      have : LocallyOfFinitePresentation pr :=
-        inferInstanceAs (LocallyOfFinitePresentation (AffineSpace (ULift.{u} (Fin d)) V ↘ V))
-      have : LocallyOfFiniteType pr := inferInstance
-      have : LocallyOfFiniteType (P ↘ Spec (.of k)) :=
-        (show LocallyOfFiniteType (pr ≫ (V ↘ Spec (.of k))) from inferInstance)
-      have : IsSeparated (P ↘ Spec (.of k)) :=
-        (show IsSeparated (pr ≫ (V ↘ Spec (.of k))) from inferInstance)
-      have : QuasiCompact (P ↘ Spec (.of k)) :=
-        (show QuasiCompact (pr ≫ (V ↘ Spec (.of k))) from inferInstance)
-      have : pr.IsOver (Spec (.of k)) := ⟨rfl⟩
-      have : i'.IsOver (Spec (.of k)) := ⟨by
-        change i' ≫ (pr ≫ (v ≫ (Y ↘ Spec (.of k)))) =
-          (O a).ι ≫ (X ↘ Spec (.of k))
-        rw [← Category.assoc i' pr, hqi', ← Category.assoc, hq', Category.assoc,
-          comp_over]⟩
-      let cp := AlgebraicGeometry.compactificationOverField k pr
-      let ci := AlgebraicGeometry.compactificationOverField k i'
-      obtain ⟨hp, Fp, ⟨ap⟩⟩ := brown pr cp
-      obtain ⟨hi, Fi, ⟨ai⟩⟩ := brown i' ci
-      obtain ⟨huStar, _, _, hpres⟩ := hloc v (O a).ι hV inferInstance hv inferInstance
-        d i' hi' q' hqi' hq' cp hp Fp ap ci hi Fi ai
-      obtain ⟨hK', hbc⟩ := hpres K.obj hK
-      let := (constantModelConstructibleFiniteTor_wellDefined Λ (O a).toScheme).2.1
-      exact ObjectProperty.prop_of_iso _
-        ((leftDerivedUpperStarIsoMapDerivedCategory Λ (O a).ι).app (G.obj K).obj) hbc
-    exact ⟨IntegralCompactSupport.IntegralRestriction.bounded_finiteOpenDescent
-        Λ X (Fin n) O hO (G.obj K).obj (fun a ↦ by
-          let := (constantModelConstructibleFiniteTor_wellDefined Λ (O a).toScheme).2.1
-          exact (ObjectProperty.prop_of_iso _
-            ((leftDerivedUpperStarIsoMapDerivedCategory Λ (O a).ι).app
-              (G.obj K).obj).symm (hlocal a)).1),
-      IntegralCompactSupport.IntegralRestriction.cohomology_finiteOpenDescent
-        Λ X (Fin n) O hO (G.obj K).obj (fun a ↦ by
-          let := (constantModelConstructibleFiniteTor_wellDefined Λ (O a).toScheme).2.1
-          exact ObjectProperty.prop_of_iso _
-            ((leftDerivedUpperStarIsoMapDerivedCategory Λ (O a).ι).app
-              (G.obj K).obj).symm (hlocal a))⟩
-  refine ⟨hglue, hinc X, hinc Y, hF, hG, ?_⟩
-  let adjbc := adj.restrictFullyFaithful
-    (ObjectProperty.fullyFaithfulιOfLE (hinc X))
-    (ObjectProperty.fullyFaithfulιOfLE (hinc Y))
-    (L := restrictionGlueLowerShriek Λ c.obj.obj hF)
-    (R := restrictionGlueUpperShriek Λ G (hinc Y) hG) (Iso.refl _) (Iso.refl _)
-  refine ⟨adjbc, ?_⟩
-  intro A K t
-  simp [adjbc, Adjunction.restrictFullyFaithful, ObjectProperty.fullyFaithfulιOfLE,
-    ObjectProperty.ιOfLE, Functor.FullyFaithful.homEquiv]
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

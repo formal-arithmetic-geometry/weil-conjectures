@@ -14,16 +14,31 @@ public import Sheaf.SixFunctors.IntrinsicDerivedTensor
 public import Sheaf.Paper.TateInverseLimitBaseChange
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage
 public import Mathlib.Analysis.SpecialFunctions.Log.Base
-import Mathlib.RingTheory.Ideal.Norm.AbsNorm
-import Mathlib.Algebra.Module.ZMod
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.PurTwistSheafLocallyFree
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Paper.ConstantTwoTermResolution
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Paper.KFlatConeComparison
+import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Mathlib.AlgebraicGeometry.Gluing
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Mathlib.CategoryTheory.Yoneda
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Finite Kummer level of the Tate twist
 
@@ -192,337 +207,49 @@ def KummerBaseChangeCompatible (P : PurityFiniteSetting.{u}) (n N : ℕ)
           (Scheme.tatePullback f (P.kummerCoefficient n)).map (α T hT).hom ≫ δ.hom =
             β.hom ≫ (α T' hT').hom
 
-private theorem kummerBasisMod (p : ℕ) [Fact p.Prime] (O : Type u) [CommRing O]
-    (φ : ℤ_[p] →+* O) (d N : ℕ)
-    (b : @Module.Basis (Fin d) ℤ_[p] O _ _ (Module.compHom O φ)) :
-    Nonempty ((O ⧸ Ideal.span {(p : O) ^ N}) ≃+ (Fin d → ZMod (p ^ N))) := by
-  let := φ.toAlgebra
-  have hsmul (x : O) : ((p : ℤ_[p]) ^ N) • x = (p : O) ^ N * x := by
-    change φ ((p : ℤ_[p]) ^ N) * x = _
-    rw [map_pow, map_natCast]
-  let q : O →+ (Fin d → ZMod (p ^ N)) :=
-    { toFun := fun x i ↦ PadicInt.toZModPow N (b.equivFun x i)
-      map_zero' := by ext i; simp
-      map_add' := by intro x y; ext i; simp }
-  have hsurj : Function.Surjective q := by
-    intro x
-    choose y hy using fun i ↦ ZMod.ringHom_surjective (PadicInt.toZModPow N) (x i)
-    refine ⟨b.equivFun.symm y, ?_⟩
-    ext i
-    exact (congrArg (fun z ↦ PadicInt.toZModPow N (z i))
-      (b.equivFun.apply_symm_apply y)).trans (hy i)
-  have hker : q.ker = (Ideal.span {(p : O) ^ N}).toAddSubgroup := by
-    ext x
-    change q x = 0 ↔ x ∈ Ideal.span {(p : O) ^ N}
-    simp only [Ideal.mem_span_singleton]
-    constructor
-    · intro hx
-      have hx' : ∀ i, (p : ℤ_[p]) ^ N ∣ b.equivFun x i := by
-        intro i
-        have hh : b.equivFun x i ∈ RingHom.ker (PadicInt.toZModPow N) :=
-          congrFun hx i
-        rwa [PadicInt.ker_toZModPow, Ideal.mem_span_singleton] at hh
-      choose y hy using hx'
-      refine ⟨b.equivFun.symm y, ?_⟩
-      symm
-      apply b.equivFun.injective
-      rw [← hsmul]
-      change b.equivFun (((p : ℤ_[p]) ^ N) • b.equivFun.symm y) = b.equivFun x
-      rw [map_smul, b.equivFun.apply_symm_apply]
-      ext i
-      exact (hy i).symm
-    · rintro ⟨y, rfl⟩
-      rw [← hsmul]
-      ext i
-      change PadicInt.toZModPow N (b.equivFun (((p : ℤ_[p]) ^ N) • y) i) = 0
-      rw [map_smul]
-      change PadicInt.toZModPow N ((p : ℤ_[p]) ^ N * b.equivFun y i) = 0
-      rw [map_mul, map_pow, map_natCast]
-      simp [← Nat.cast_pow]
-  exact ⟨(QuotientAddGroup.quotientAddEquivOfEq hker.symm).trans
-    (QuotientAddGroup.quotientKerEquivOfSurjective q hsurj)⟩
+/-- Finite Kummer level, with arithmetic, explicit roots tensor, and both compatibilities.
+Source: the current blueprint finite Kummer level statement and Stacks Tag 03PK
+(blueprint: lem-pur-finite-kummer-level).
 
-private theorem kummerDvrData (P : PurityFiniteSetting.{u}) :
-    0 < P.ramificationIndex ∧
-    Prime (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension) ∧
-    Associated (P.coefficients.l : Padic.coefficientExtensionIntegers
-      P.coefficients.l P.extension)
-      (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension ^
-        P.ramificationIndex) ∧
-    Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension
-      (P.coefficients.l : P.extension) = (P.coefficients.l : ℝ)⁻¹ ∧
-    (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension
-      (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension).val) ^
-      P.ramificationIndex = (P.coefficients.l : ℝ)⁻¹ := by
-  let l := P.coefficients.l
-  let E := P.extension
-  let O := Padic.coefficientExtensionIntegers l E
-  let π := Padic.coefficientExtensionUniformizer l E
-  have hs := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hgen : Ideal.span {π} = Padic.coefficientExtensionMaximalIdeal l E :=
-    hs.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  have : IsLocalRing O := hs.2.2.2.1
-  have : IsDiscreteValuationRing O := hs.2.2.2.2.2.2.2.1
-  have : IsPrincipalIdealRing O := hs.2.2.2.2.2.2.2.2.1
-  have hmax : Padic.coefficientExtensionMaximalIdeal l E = IsLocalRing.maximalIdeal O :=
-    IsLocalRing.eq_maximalIdeal hs.2.2.2.2.1
-  have hirr : Irreducible π :=
-    (IsDiscreteValuationRing.irreducible_iff_uniformizer π).mpr (hmax ▸ hgen).symm
-  have hl : (l : O) ≠ 0 := by
-    intro hh
-    have hh' : (l : E) = 0 := congrArg Subtype.val hh
-    exact (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero) hh'
-  obtain ⟨k, v, hv⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hl hirr
-  have he : P.ramificationIndex = k := by
-    unfold ramificationIndex
-    change (emultiplicity π (l : O)).toNat = k
-    rw [hv, emultiplicity_eq_of_associated_right
-      (Associated.symm ⟨v, mul_comm _ _⟩),
-      emultiplicity_pow_self hirr.ne_zero hirr.not_isUnit]
-    simp
-  have ha : Padic.coefficientExtensionAbsoluteValue l E (l : E) = (l : ℝ)⁻¹ := by
-    change spectralNorm ℚ_[l] E (l : E) = _
-    rw [← map_natCast (algebraMap ℚ_[l] E) l, spectralNorm_extends, Padic.norm_p]
-  have hvab : Padic.coefficientExtensionAbsoluteValue l E ((v : O) : E) = 1 :=
-    (hs.2.2.1 (v : O)).mp v.isUnit
-  have hpow : (Padic.coefficientExtensionAbsoluteValue l E (π : E)) ^ k =
-      (l : ℝ)⁻¹ := by
-    have hh := congrArg (fun x : O ↦
-      Padic.coefficientExtensionAbsoluteValue l E (x : E)) hv
-    simpa only [Subring.coe_natCast, Subring.coe_mul, Subring.coe_pow, map_mul,
-      map_pow, hvab, one_mul, ha] using hh.symm
-  have hk : 0 < k := by
-    by_contra hn
-    have hk0 : k = 0 := by omega
-    have hh : (l : ℝ)⁻¹ = 1 := by simpa [hk0] using hpow.symm
-    have hl1 : (1 : ℝ) < l := by exact_mod_cast (Fact.out : l.Prime).one_lt
-    have := inv_lt_one_of_one_lt₀ hl1
-    linarith
-  refine ⟨he ▸ hk, hirr.prime, ?_, ha, ?_⟩
-  · rw [he]
-    exact (Associated.symm ⟨v, by simpa [mul_comm] using hv.symm⟩)
-  · simpa only [he] using hpow
+Proof: (1) the DVR order writes ell as a unit times varpi^e; since e divides n,
+N=n/e is positive and the two power ideals coincide. The normalized logarithmic
+valuation is -log(abs(x))/log(ell). A smaller power has smaller uniformizer order,
+so cannot annihilate A. (2) O_E is finite free over Z_ell. If its rank is d, its
+reduction modulo ell has ell^d elements. Its uniformizer filtration has e quotients,
+each of cardinal ell^f, so d=ef. Reduce that basis modulo ell^N to obtain the
+displayed linear additive equivalence. (3) The root-limit projection has kernel
+ell^N times the limit: when x_N=1, shifting coordinates by N gives its ell^N-th
+root in the limit. Thus the induced reduction map is mono. Both its source and
+target are locally free rank-one Z/ell^N-lines by the Tate-line lemma. Locally the
+map is multiplication by a constant scalar; a nonunit kills the nonzero element
+ell^(N-1), contradicting monicity on a nonempty cover member. On empty members both
+sheaves are zero. Thus the reduction map is invertible. Tensor with the finite
+free Z/ell^N-module A. The associator identifies the iterated integral tensor with
+this tensor, and the displayed local formula gives uniqueness. (4) The constant
+Z_ell two-term resolution of Z/ell^N, injectivity of ell^N on the root limit, and
+the K-flat cone comparison identify derived and ordinary reduction. Tensoring a
+K-flat representative with the same comparison gives the displayed quasi-isomorphism.
+(5) Pull roots along each fibre-product projection. The root-limit universal property
+gives c; tensor with the constant coefficient maps gives beta and delta. Root base
+change is invertible by the representable etale root cover. Their tensor reductions
+are therefore invertible. Both square composites project x to the same N-th root
+and pull back the two scalars, so local tensor generation proves the square. This
+includes identity maps and the empty scheme.
 
-private theorem kummerResidueRank (P : PurityFiniteSetting.{u}) :
-    ∃ f d : ℕ,
-      Nat.card (Padic.coefficientExtensionResidueField P.coefficients.l P.extension) =
-        P.coefficients.l ^ f ∧
-      d = P.ramificationIndex * f ∧
-      Nonempty (@Module.Basis (Fin d) ℤ_[P.coefficients.l]
-        (Padic.coefficientExtensionIntegers P.coefficients.l P.extension) _ _
-        (Module.compHom _ (Scheme.purTwistIntegersMap P.coefficients.l P.extension))) := by
-  classical
-  let l := P.coefficients.l
-  let E := P.extension
-  let O := Padic.coefficientExtensionIntegers l E
-  let m := Padic.coefficientExtensionMaximalIdeal l E
-  let π := Padic.coefficientExtensionUniformizer l E
-  have hs := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have : IsLocalRing O := hs.2.2.2.1
-  have : IsDiscreteValuationRing O := hs.2.2.2.2.2.2.2.1
-  have : IsPrincipalIdealRing O := hs.2.2.2.2.2.2.2.2.1
-  have : m.IsMaximal := hs.2.2.2.2.1
-  have : Finite (O ⧸ m) := hs.2.2.2.2.2.2.2.2.2.2.2.1
-  have hm0 : m ≠ ⊥ := hs.2.2.2.2.2.2.2.2.2.1
-  have hgen : Ideal.span {π} = m := hs.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-  obtain ⟨he, hπ, hassoc, _⟩ := kummerDvrData P
-  have hlm : (l : O) ∈ m := by
-    apply (hs.2.1 _).2
-    change spectralNorm ℚ_[l] E (l : E) < 1
-    rw [← map_natCast (algebraMap ℚ_[l] E), spectralNorm_extends]
-    exact Padic.norm_p_lt_one
-  let k := O ⧸ m
-  let hkField : Field k := Ideal.Quotient.field m
-  have hkChar : CharP k l := (CharP.charP_iff_prime_eq_zero (Fact.out : l.Prime)).2 (by
-    change Ideal.Quotient.mk m (l : O) = 0
-    exact Ideal.Quotient.eq_zero_iff_mem.mpr hlm)
-  let hkFintype : Fintype k := Fintype.ofFinite k
-  obtain ⟨f, _hf, hcard⟩ := FiniteField.card k l
-  have hcard' : Nat.card k = l ^ (f : ℕ) := by
-    simpa only [Nat.card_eq_fintype_card] using hcard
-  have hEmpty : ∀ x : Scheme.empty.{u}, Invertible (l : Scheme.empty.residueField x) :=
-    fun x ↦ PEmpty.elim x
-  obtain ⟨d, ⟨b⟩⟩ :=
-    (Scheme.pur_twist_sheaf_locally_free.{u, 0} Scheme.empty l E).2.2.1.1
-  obtain ⟨e⟩ := kummerBasisMod l O (Scheme.purTwistIntegersMap l E) d 1 b
-  have hcardO : Nat.card (O ⧸ Ideal.span {(l : O) ^ 1}) = l ^ d := by
-    rw [Nat.card_congr e.toEquiv, Nat.card_fun]
-    simp [Nat.card_eq_fintype_card, ZMod.card]
-  have hI : Ideal.span {(l : O) ^ 1} = m ^ P.ramificationIndex := by
-    rw [pow_one, ← hgen, Ideal.span_singleton_pow]
-    exact Ideal.span_singleton_eq_span_singleton.mpr hassoc
-  have hcardpow : Nat.card (O ⧸ m ^ P.ramificationIndex) =
-      Nat.card k ^ P.ramificationIndex :=
-    cardQuot_pow_of_prime hm0
-  have hd : d = P.ramificationIndex * (f : ℕ) := by
-    have hp : l ^ d = l ^ ((f : ℕ) * P.ramificationIndex) := by
-      rw [← hcardO, hI, hcardpow, hcard', pow_mul]
-    have := (Nat.pow_right_injective (Fact.out : l.Prime).one_lt) hp
-    simpa only [Nat.mul_comm] using this
-  exact ⟨f, d, hcard', hd, ⟨b⟩⟩
-
-private theorem kummerArithmetic (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) :
-    1 ≤ P.kummerLevel ∧
-    P.level = P.ramificationIndex * P.kummerLevel ∧
-    (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension
-      (P.coefficients.l : P.extension)) / Real.log P.coefficients.l = 1) ∧
-    (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension
-      (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension).val) /
-        Real.log P.coefficients.l = (P.ramificationIndex : ℝ)⁻¹) ∧
-    (P.level : ℝ) *
-      (-Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension
-        (Padic.coefficientExtensionUniformizer P.coefficients.l P.extension).val) /
-          Real.log P.coefficients.l) = P.kummerLevel ∧
-    Padic.coefficientExtensionIdeal P.coefficients.l P.extension P.level =
-      Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers
-        P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers
-          P.coefficients.l P.extension)) ∧
-    (∃ r : P.Ring ≃+* (Padic.coefficientExtensionIntegers P.coefficients.l P.extension ⧸
-        Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers
-          P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers
-            P.coefficients.l P.extension))),
-      ∀ x : Padic.coefficientExtensionIntegers P.coefficients.l P.extension,
-        r (Ideal.Quotient.mk
-          (Padic.coefficientExtensionIdeal P.coefficients.l P.extension P.level) x) =
-        Ideal.Quotient.mk (Ideal.span ({(P.exponent : Padic.coefficientExtensionIntegers
-          P.coefficients.l P.extension)} : Set (Padic.coefficientExtensionIntegers
-            P.coefficients.l P.extension))) x) ∧
-    (P.exponent : P.Ring) = 0 ∧
-    (∀ j : ℕ, ((P.coefficients.l ^ j : ℕ) : P.Ring) = 0 → P.kummerLevel ≤ j) := by
-  obtain ⟨he, hπ, hassoc, hlab, hπab⟩ := kummerDvrData P
-  have hn : P.level = P.ramificationIndex * P.kummerLevel :=
-    (Nat.mul_div_cancel' h).symm
-  have hN : 1 ≤ P.kummerLevel := by
-    have := P.level_pos
-    by_contra hh
-    have hz : P.kummerLevel = 0 := by omega
-    simp [hz] at hn
-    omega
-  have hl1 : (1 : ℝ) < P.coefficients.l := by
-    exact_mod_cast (Fact.out : P.coefficients.l.Prime).one_lt
-  have hlog : Real.log (P.coefficients.l : ℝ) ≠ 0 :=
-    ne_of_gt (Real.log_pos hl1)
-  have hv : -Real.log (Padic.coefficientExtensionAbsoluteValue P.coefficients.l
-      P.extension (Padic.coefficientExtensionUniformizer
-        P.coefficients.l P.extension).val) / Real.log P.coefficients.l =
-      (P.ramificationIndex : ℝ)⁻¹ := by
-    have hh := congrArg Real.log hπab
-    rw [Real.log_pow, Real.log_inv] at hh
-    have he' : (P.ramificationIndex : ℝ) ≠ 0 := by exact_mod_cast (Nat.ne_of_gt he)
-    field_simp
-    nlinarith [hh]
-  have hI : Padic.coefficientExtensionIdeal P.coefficients.l P.extension P.level =
-      Ideal.span {(P.exponent : Padic.coefficientExtensionIntegers
-        P.coefficients.l P.extension)} := by
-    rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow]
-    apply Ideal.span_singleton_eq_span_singleton.mpr
-    have hh := hassoc.pow_pow (n := P.kummerLevel)
-    simpa only [← pow_mul, ← hn, exponent, Nat.cast_pow] using hh.symm
-  have hz : (P.exponent : P.Ring) = 0 := by
-    change Ideal.Quotient.mk _ (P.exponent : Padic.coefficientExtensionIntegers
-      P.coefficients.l P.extension) = 0
-    exact Ideal.Quotient.eq_zero_iff_mem.mpr (hI ▸ Ideal.mem_span_singleton_self _)
-  refine ⟨hN, hn, ?_, hv, ?_, hI, ?_, hz, ?_⟩
-  · rw [hlab, Real.log_inv]
-    field_simp
-  · rw [hv, hn, Nat.cast_mul]
-    have he' : (P.ramificationIndex : ℝ) ≠ 0 := by exact_mod_cast (Nat.ne_of_gt he)
-    field_simp
-  · exact ⟨Ideal.quotEquivOfEq hI, fun x ↦ Ideal.quotEquivOfEq_mk hI x⟩
-  · intro j hj
-    change Ideal.Quotient.mk _ ((P.coefficients.l ^ j : ℕ) :
-      Padic.coefficientExtensionIntegers P.coefficients.l P.extension) = 0 at hj
-    have hdvd := Ideal.Quotient.eq_zero_iff_mem.mp hj
-    rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
-      Ideal.mem_span_singleton, Nat.cast_pow] at hdvd
-    have hh := le_emultiplicity_of_pow_dvd hdvd
-    rw [emultiplicity_pow hπ,
-      emultiplicity_eq_of_associated_right hassoc,
-      emultiplicity_pow_self hπ.ne_zero hπ.not_isUnit] at hh
-    have hh' : P.level ≤ j * P.ramificationIndex := by exact_mod_cast hh
-    rw [hn] at hh'
-    nlinarith
-
-private theorem kummerCoefficientBasis (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (n N : ℕ)
-    (hn : P.level = n + 1) (hN : P.kummerLevel = N + 1) :
-    ∃ a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n,
-      ∃ f : ℕ,
-        Nat.card (Padic.coefficientExtensionResidueField P.coefficients.l P.extension) =
-          P.coefficients.l ^ f ∧
-        (∃ b : P.kummerCoefficient n ≃+
-            (Fin (P.ramificationIndex * f) → ZMod (P.coefficients.l ^ (N + 1))),
-          ∀ (z : ZMod (P.coefficients.l ^ (N + 1))) (x : P.kummerCoefficient n),
-            b (a z * x) = z • b x) := by
-  classical
-  obtain ⟨f, d, hf, hd, ⟨b⟩⟩ := kummerResidueRank P
-  obtain ⟨hpos, hlev, hvell, hvpi, hvn, hI, hr, hz, hmin⟩ := kummerArithmetic P h
-  have hI' : Padic.coefficientExtensionIdeal P.coefficients.l P.extension (n + 1) =
-      Ideal.span {(P.coefficients.l : Padic.coefficientExtensionIntegers
-        P.coefficients.l P.extension) ^ (N + 1)} := by
-    simpa only [hn, exponent, hN, Nat.cast_pow] using hI
-  have hz' : ((P.coefficients.l ^ (N + 1) : ℕ) : P.kummerCoefficient n) = 0 := by
-    change Ideal.Quotient.mk _ ((P.coefficients.l ^ (N + 1) : ℕ) :
-      Padic.coefficientExtensionIntegers P.coefficients.l P.extension) = 0
-    apply Ideal.Quotient.eq_zero_iff_mem.mpr
-    rw [hI', Nat.cast_pow]
-    exact Ideal.mem_span_singleton_self _
-  let a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n :=
-    ZMod.castHom (ringChar.dvd hz') _
-  obtain ⟨e⟩ := kummerBasisMod P.coefficients.l _
-    (Scheme.purTwistIntegersMap P.coefficients.l P.extension) d (N + 1) b
-  let e' : P.kummerCoefficient n ≃+ (Fin d → ZMod (P.coefficients.l ^ (N + 1))) :=
-    (Ideal.quotEquivOfEq hI').toAddEquiv.trans e
-  subst d
-  refine ⟨a, f, hf, e', ?_⟩
-  intro z x
-  obtain ⟨j, rfl⟩ := ZMod.intCast_surjective z
-  rw [map_intCast, ← zsmul_eq_mul, map_zsmul, Int.cast_smul_eq_zsmul]
-
-
-/-- The geometric finite-level comparison and its compatibilities, after the arithmetic and
-coefficient-basis clauses have been established. This is the separate sheaf-theoretic part
-of the finite Kummer level argument.
-
-Proof: construct the root-limit map by the inverse-limit universal property from the
-coordinatewise root direct-image maps. Use the representable root scheme and its etale
-base-change isomorphism to obtain the finite root comparisons. Tensor the normalized
-projection with the finite coefficient map; local pure tensors determine the morphism and
-prove uniqueness. The tensor map induced by an isomorphism is an isomorphism on every
-K-flat complex. The constant two-term resolution and the finite free coefficient basis
-identify ordinary and derived reduction. Pulling the root map and scalar maps through
-base change gives the two vertical isomorphisms, and equality on local pure tensors proves
-the commuting square. These are exactly blueprint steps (3)--(5).
-Source: finite Kummer level blueprint, steps (3)--(5)
-(blueprint: lem-pur-finite-kummer-level-geometric). -/
-theorem finiteKummerLevel_geometric (P : PurityFiniteSetting.{u})
-    (h : P.ramificationIndex ∣ P.level) (n : ℕ) (hn : P.level = n + 1)
-    (N : ℕ) (hN : P.kummerLevel = N + 1)
-    (a : ZMod (P.coefficients.l ^ (N + 1)) →+* P.kummerCoefficient n)
-    (f : ℕ)
-    (hf : Nat.card (Padic.coefficientExtensionResidueField P.coefficients.l P.extension) =
-      P.coefficients.l ^ f)
-    (b : P.kummerCoefficient n ≃+
-      (Fin (P.ramificationIndex * f) → ZMod (P.coefficients.l ^ (N + 1)))) :
-    (∀ (z : ZMod (P.coefficients.l ^ (N + 1))) (x : P.kummerCoefficient n),
-      b (a z * x) = z • b x) →
-    ∃ α : ∀ (T : Scheme.{u})
-        (_hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)),
-        P.kummerLine n T ≅ P.kummerRootsTensor n N a T,
-      (∀ (T : Scheme.{u})
-        (hT : ∀ x : T, IsUnit (P.coefficients.l : T.presheaf.stalk x)),
-        P.IsKummerComparison n N a T (α T hT) ∧
-        (∀ γ : P.kummerLine n T ≅ P.kummerRootsTensor n N a T,
-          P.IsKummerComparison n N a T γ → γ = α T hT) ∧
-        P.KummerDerivedCompatible n N a T (α T hT)) ∧
-      P.KummerBaseChangeCompatible n N a α := by
-  sorry
-
+The detailed proof dependencies are: lem-weil-l-adic-extension-integers-dvr for (1),
+lem-pur-twist-sheaf-locally-free for the finite free scalar module and the finite
+root lines in (2)--(3), lem-pur-constant-two-term-resolution together with
+lem-pc-kflat-bounded-flat-replacement, lem-pc-bounded-above-flat-kflat-site and
+lem-pur-kflat-cone-comparison for (4). In (5), construct the affine root scheme with
+lem-sbc-root-split-away-cover-etale and glue it by scheme-morphism-gluing; its
+represented sheaf is subcanonical. The inverse-image adjunction, yoneda-hom-bijection
+and coyoneda-iso-of-natural-hom-bijection identify the normalized root map with the
+representable base-change isomorphism. Then lem-pur-tate-inverse-limit-base-change
+and lem-pe-constant-left-module-inverse-image give the scalar-linear limit map and
+tensor square. Finally proetale-constant-exact and
+lem-weil-pbc-ringed-topoi-derived-tensor-pullback transport that same square to
+derived tensor, naturally in every complex.
+-/
 theorem finiteKummerLevel (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) :
     1 ≤ P.kummerLevel ∧
@@ -572,12 +299,6 @@ theorem finiteKummerLevel (P : PurityFiniteSetting.{u})
                   P.IsKummerComparison n N a T γ → γ = α T hT) ∧
                 P.KummerDerivedCompatible n N a T (α T hT)) ∧
               P.KummerBaseChangeCompatible n N a α := by
-  obtain ⟨hpos, hlev, hvell, hvpi, hvn, hI, hr, hz, hmin⟩ := kummerArithmetic P h
-  refine ⟨hpos, hlev, hvell, hvpi, hvn, hI, hr, hz, hmin, ?_⟩
-  intro n hn
-  obtain ⟨N, hN⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : P.kummerLevel ≠ 0)
-  obtain ⟨a, f, hf, b, hb⟩ := kummerCoefficientBasis P h n N hn hN
-  refine ⟨N, hN, a, f, hf, ⟨b, hb⟩, ?_⟩
-  exact finiteKummerLevel_geometric P h n hn N hN a f hf b hb
+  sorry
 
 end WeilConjectures.PurityFiniteSetting
