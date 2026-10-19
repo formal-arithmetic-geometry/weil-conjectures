@@ -12,9 +12,142 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_{\\mathfrak p}$ and $\\mathfrak r=\\mathfrak pR$. By localization-Noetherianity, $R$ is Noetherian. Apply the minimal-prime localization radical lemma with $I=0$: $\\sqrt{0R}=\\mathfrak r$. In particular $\\mathfrak r$ is finitely generated, and the finitely-generated-ideal radical-power lemma with $I=\\mathfrak r$, $J=0$ gives $n\\ge1$ with $\\mathfrak r^n=0$. Since extension of ideals respects products (expand products of their generators), $\\mathfrak p^nR=0$. Also $R\\ne0$: the equation $1/1=0$ would give $s=0$ for some $s\\notin\\mathfrak p$, contrary to $0\\in\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-minimal-prime-localization-radical",
+    "lem-weil-pbc-fg-ideal-radical-power",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "Set $B=A/\\mathfrak p^n$ and $\\overline{\\mathfrak p}=\\mathfrak p/\\mathfrak p^n$. The ring $B$ is nonzero local, with maximal ideal $\\mathfrak m/\\mathfrak p^n$: an element outside this ideal lifts to a unit of $A$. It is Noetherian because each ideal is the image of its finitely generated inverse image in $A$. The quotient-localization isomorphism gives $B_{\\overline{\\mathfrak p}}\\cong R/\\mathfrak p^nR=R$. A prime ideal contains $\\mathfrak p^n$ exactly when it contains $\\mathfrak p$: for $x\\in\\mathfrak p$, $x^n\\in\\mathfrak p^n$, and primality gives $x\\in\\mathfrak q$. Taking inverse images under quotient maps therefore identifies, preserving strict inclusions, prime chains in $B$ and in $A/\\mathfrak p$. Consequently $\\dim B=e$, every prime of $B$ contains $\\overline{\\mathfrak p}$, and $B/\\overline{\\mathfrak p}\\cong A/\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "By the quotient lemma, $\\omega_B=R\\operatorname{Hom}_A(B,\\omega)$ is a normalized algebraic dualizing complex over $B$. The defining bounded injective representative of $\\omega$ shows that its cohomology is bounded, and its cohomology modules are finite. The Noetherian pseudo-coherence criterion therefore makes $\\omega$ pseudo-coherent; it also makes $B[0]$ pseudo-coherent, since $B$ is cyclic over $A$. In particular $\\omega\\in D^+(A)$. Localization is flat, so the hypotheses of flat derived-Hom base change hold both for first argument $B[0]$ and for first argument $\\omega$.",
+   "uses": [
+    "lem-per-algebraic-dualizing-quotient",
+    "def-per-algebraic-normalized-dualizing",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "Write $W=\\omega\\otimes_A^{\\mathbf L}R$. Exactness of tensoring with a flat module implies, by applying it to cycles, boundaries, and their quotient, $H^i(C\\otimes_A R)=H^i(C)\\otimes_A R$ for every complex $C$. The same observation shows that ordinary tensor with $R$ preserves quasi-isomorphisms (it preserves acyclicity of cones); applied to a K-flat resolution $P\\to C$, the K-flat model of derived change of rings then shows that $C\\otimes_AR$ computes $C\\otimes_A^{\\mathbf L}R$. In particular $B\\otimes_A^{\\mathbf L}R=R$ by Step 1. Flat derived-Hom base change now gives $\\omega_B\\otimes_A^{\\mathbf L}R\\cong R\\operatorname{Hom}_R(R,W)\\cong W$. For the last isomorphism, choose a K-injective representative $J$ of $W$; evaluation at $1$ identifies $\\operatorname{Hom}_R^\\bullet(R[0],J)$ with $J$, including the differentials. Thus $H^i(\\omega_B)_{\\overline{\\mathfrak p}}\\cong H^i(\\omega)_{\\mathfrak p}$: localization over $B$ is tensor with $B_{\\overline{\\mathfrak p}}=R$, and agrees with tensor over $A$ by the same fraction map.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "lem-pur-derived-change-of-rings",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "Apply the Ext bounds to the finite $B$-module $M=B$, whose support is all of $\\operatorname{Spec}B$ and has dimension $e$. Indeed $B_{\\mathfrak q}\\ne0$ for every prime $\\mathfrak q$ by the same fraction argument as Step 1. Evaluation at $1$ on the Hom complex, as in Step 4, identifies $R\\operatorname{Hom}_B(B,\\omega_B)$ with $\\omega_B$. Thus for $N_i=H^i(\\omega_B)$ we have $N_i=0$ unless $-e\\le i\\le0$, and $\\dim\\operatorname{Supp}_B(N_i)\\le-i$. Each $N_i$ is finite because $\\omega_B$ is a dualizing complex.",
+   "uses": [
+    "lem-per-algebraic-dualizing-ext-bounds",
+    "def-per-algebraic-normalized-dualizing",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "If $(N_i)_{\\overline{\\mathfrak p}}\\ne0$, the finite-module support criterion gives $\\operatorname{Ann}_B(N_i)\\subseteq\\overline{\\mathfrak p}$. Every prime of $B$ contains $\\overline{\\mathfrak p}$ by Step 2, so the same criterion gives $\\operatorname{Supp}_B(N_i)=\\operatorname{Spec}B$. Its dimension is $e$. The bounds in Step 5 give $e\\le-i$ and $i\\ge-e$, hence $i=-e$. By Step 4 this proves that $H^i(\\omega)_{\\mathfrak p}=0$ for every $i\\ne-e$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "The defining homothety isomorphism $A[0]\\cong R\\operatorname{Hom}_A(\\omega,\\omega)$ remains an isomorphism after applying the derived change-of-rings functor $-\\otimes_A^{\\mathbf L}R$, and $A[0]\\otimes_A^{\\mathbf L}R=R[0]$ by Step 4. Apply flat derived-Hom base change with first argument $\\omega$ (its pseudo-coherence and boundedness were checked in Step 3). It gives $R[0]\\cong R\\operatorname{Hom}_R(W,W)$. If $W=0$, the right side is zero, as the derived-Hom complex of zero objects is zero. But $H^0(R[0])=R\\ne0$ by Step 1. Thus $W\\ne0$. This expands precisely the nonzero part of the source's final appeal to localization of dualizing complexes, without requiring normalization to be preserved by localization.",
+   "uses": [
+    "def-per-algebraic-normalized-dualizing",
+    "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "def-pur-derived-internal-hom",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  },
+  {
+   "text": "By Step 4, $H^i(W)=H^i(\\omega)_{\\mathfrak p}$. Step 6 makes every cohomology module except possibly $H^{-e}(W)$ zero. If this last module were also zero, the map from any representative complex of $W$ to the zero complex would be a quasi-isomorphism, so $W$ would be zero in the derived category. This contradicts Step 7. Hence $H^{-e}(\\omega)_{\\mathfrak p}\\ne0$. Combined with Step 6, this is the required equivalence for every integer $i$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7V (lemma-nonvanishing-generically-local), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-minimal-prime-localization-radical",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-per-algebraic-dualizing-quotient",
+  "def-per-algebraic-normalized-dualizing",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-per-algebraic-dualizing-ext-bounds",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7V (lemma-nonvanishing-generically-local); the localization nonvanishing argument of Tag 0A7G is expanded using the existing flat RHom base-change node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +183,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"(p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type*) [CommSemiring S] [Algebra R S]\\n  [IsLocalization.AtPrime S p (hp := hp.1.1)] : Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"Algebra.tensorH1CotangentOfIsLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(M : Submonoid S) [IsLocalization M T] : T ⊗[S] H1Cotangent R S ≃ₗ[T] H1Cotangent R T\", \"doc\": \"Let $R \\\\to S \\\\to T$ be homomorphisms of commutative rings, where $T$ is the localization of $S$ at a multiplicative submonoid $M \\\\subseteq S$. Then the first cotangent cohomology module commutes with \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : Type u\", \"doc\": \"For a prime ideal $ P $ in the prime spectrum of a commutative ring $ R $, the localization of $ R $ at the submonoid of elements not in $ P $, resulting in a ring where all elements outside $ P $ bec\"}\n  {\"name\": \"IsLocalization.minimalPrimes_map\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"[IsLocalization S A] (J : Ideal R) :\\n  (J.map (algebraMap R A)).minimalPrimes = Ideal.comap (algebraMap R A) ⁻¹' J.minimalPrimes\", \"doc\": \"Let $ R $ be a commutative semiring, $ S \\\\subseteq R $ a submonoid, and $ A $ the localization of $ R $ at $ S $. For any ideal $ J \\\\subseteq R $, the minimal prime ideals of the extended ideal $ J^e \"}\n  {\"name\": \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"{R : Type*} [CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type*) [CommSemiring S] [Algebra R S]\\n  [IsLocalization.AtPrime S p (hp := hp.1.1)] : Subsingleton (PrimeSpectrum S)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the prime spectrum of $ S $ contains at most one element. In other words,\"}\n  {\"name\": \"IsLocalization.minimalPrimes_comap\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Localization\", \"type\": \"[IsLocalization S A] (J : Ideal A) :\\n  (J.comap (algebraMap R A)).minimalPrimes = Ideal.comap (algebraMap R A) '' J.minimalPrimes\", \"doc\": \"Given a localization $ S $ of a commutative semiring $ R $ at a submonoid, and an ideal $ J \\\\subseteq S $, the minimal prime ideals of the preimage $ (J \\\\cap R) $ under the canonical localization map \"}\n  {\"name\": \"LocalizedModule.AtPrime\", \"module\": \"Mathlib.Algebra.Module.LocalizedModule.AtPrime\", \"type\": \"{R : Type*} [CommSemiring R] (P : Ideal R) [P.IsPrime] (M : Type*) [AddCommMonoid M] [Module R M]\", \"doc\": \"Given a commutative semiring $ R $, a prime ideal $ P $, and an $ R $-module $ M $, this constructs the localization of $ M $ with respect to the multiplicative set $ P^c $ (the complement of $ P $) u\"}\n  {\"name\": \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"module\": \"Mathlib.RingTheory.DedekindDomain.PID\", \"type\": \"[IsDomain S] {P : Ideal Sₚ} (hP : IsPrime P) (hP0 : P ≠ ⊥) : P ∈ normalizedFactors (Ideal.map (algebraMap R Sₚ) p)\", \"doc\": \"If $ P $ is a nonzero prime ideal in the localized ring $ S_P $, then $ P $ is a normalized prime factor of the ideal generated by $ p $ in $ S_P $, where $ p $ is the image of the algebra map from $ \"}\n",
    "date": "2026-10-19",
    "verdict": "No match: the returned definitions of Ext, shifts, ordinary duals, cotangent spaces, localization, and Krull dimension do not state this assertion about algebraic normalized dualizing complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|nonvanishing.*generically",
+   "results": "10 hits; top=['Mathlib/Tactic/Translate/ToDual.lean', 'Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean', 'Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean', 'Mathlib/CategoryTheory/Category/Cat/Op.lean', 'Mathlib/Analysis/InnerProductSpace/Dual.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean']; note=; digest=b43829c8efb7e83a",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic degree of a normalized dualizing complex over a Noetherian local ring",
+   "results": "8 hits; top=['Polynomial.degree_normalize', 'instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing', 'Polynomial.degree_integralNormalization', 'IsLocalRing.finrank_CotangentSpace_eq_one_iff', 'Polynomial.integralNormalization_degree', 'IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim', 'IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing', 'Polynomial.natDegree_integralNormalization']; note=; digest=d090a5633f7801f1",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Localization",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a normalized algebraic dualizing complex at a minimal prime is nonzero exactly in degree minus the dimension of the quotient ring",
+   "results": "8 hits; top=['Module.supportDim_quotient_eq_ringKrullDim', 'Ring.KrullDimLE.of_isLocalization', 'Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal', 'Module.supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes', 'Module.supportDim_self_eq_ringKrullDim', 'support_of_supportDim_eq_zero', 'Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson', 'Module.supportDim_add_length_eq_supportDim_of_isRegular']; note=; digest=5463877db70eebbe",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic nonvanishing in the bottom degree of a normalized dualizing complex",
+   "results": "8 hits; top=['DerivedCategory.isGE_iff', 'DerivedCategory.isLE_iff', 'DerivedCategory.isZero_of_isGE', 'DerivedCategory.isZero_of_isLE', 'DerivedCategory.isGE_Q_obj_iff', 'DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.isStrictlyGE_iff']; note=; digest=7947e9542c7cb6d3",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-top-nonvanishing",
@@ -81,5 +249,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-algebraic-dualizing-generic-degree",
+  "worker": "stage1",
+  "summary": "Preserved the statement of Stacks 0A7V. Followed its prime-power quotient proof, reusing existing radical-power, localization, flatness, pseudo-coherence, RHom base-change and support nodes. Created only normalized quotient duality and general Ext degree/support bounds as statement-only nodes. Expanded the localization nonvanishing through the defining homothety. Checked all cited statements, hypotheses, small cases, blueprint and Lean searches.",
+  "blueprint": "The existing from.place locates the generic nonvanishing input in the local-cohomology top-nonvanishing branch below Step 1 of lem-per-artin-gabber-affine-curve. Steps 1-4 realize the prime-power quotient and localized RHom comparison of 0A7V; Steps 5-6 realize its invocation of 0A7U(1),(2); Steps 7-8 realize its final localized-dualizing nonvanishing.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-pseudocoherent-rhom-flat-base-change",
+    "why": "Generic algebraic flat derived-Hom base change, exactly the 0A6A input of 0A7V; no node of the curve-perverse unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian pseudo-coherence criterion verifies the hypotheses of that base-change tool for B and omega; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-pseudocoherent-rhom-flat-base-change",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-bdca89594",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-bdca89594 (reviewer sub-agent of L); spot-checked: Read Stacks 0A7V and its full proof, 0A7N (via lemma-normalized-finite), 0A7U (1)-(3) with its induction, 0A7G and more-algebra 0A6A case (3); tag->label mapping checked in tags/tags. Item statement unchanged and equal to 0A7V. Steps 1-8 checked against the cited statements. Step 1: radical lemma with I=0 at the minimal prime, finite generation by Noetherianity, radical power gives p^nR=0. Step 2: B=A/p^n, B_pbar=R by the quotient-localization node, chain correspondence gives dim B=e, n>1 kept. Step 3: Noetherian pseudo-coherence criterion for omega and B[0], omega in D^+, localization flat, exactly the hypotheses of 0A6A(3). Steps 5-6: ext-bounds at M=B over B; support criterion gives Supp=Spec B, so i=-e. Step 7: homothety tensored to R gives R[0]=RHom(W,W), so W!=0. This expands the use of 0A7G correctly. New nodes are true, statement-only, self-contained and not duplicates. quotient-normalization (0A7N) adds normalization to lem-trf-finite-map-dualizing-transfer (0AX0). ext-bounds (0A7U(1),(2)) tested on M=0, regular A, kappa and a field. No existing node carries 0A7N or 0A7U, and neither restates the item. Batch-5 flag on lem-trf-pseudocoherent-rhom-flat-base-change: it is pure commutative algebra (0A6A(3)), and its 523-node closure has no thm-trf, no trace-transport and no target. Its only pod node is the generic lem-pod-projective-hom-evaluation-model. Neither assumption gives it, so the flag is accepted, and the tool_uses are accepted (the pseudo-coherence criterion is already in route). No cycle, no SGA. FIX (C3/C4): Steps 4 and 7 used that ordinary tensor with flat R computes the derived change of rings without a node. Added lem-pur-derived-change-of-rings (in route via sk-def-sf-operations) to their uses and to proof_deps, with the K-flat argument written out. Corrected item at fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-algebraic-dualizing-generic-degree.json; review.md written.; 1 file(s) fixed by the reviewer"
  }
 }
