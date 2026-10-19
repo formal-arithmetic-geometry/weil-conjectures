@@ -15,11 +15,133 @@
   "def-pc-fibre-product",
   "def-weil-irreducible-components",
   "def-pc-reduced-scheme",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-pc-field-extension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-dominant-part-coreflection] to the finite-type $S$-scheme $T$. Since $S$ is integral it has just the generic point $\\eta$ among its component generic points, and the reduced dominant closure in that node is exactly the $T^{\\mathrm{dom}}$ of the statement. Its components are precisely the selected components of $T$, so their generic points map to $\\eta$. The inclusion $i:T^{\\mathrm{dom}}\\hookrightarrow T$ is a closed immersion. It is of finite type by [lem-weil-pbc-closed-immersion-proper], and composition with $T\\to S$ is of finite type by [lem-sfb-finite-type-composition-base-change]. This proves the finite-type assertion, including the empty dominant part.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5, printed p.25; Expose III Proposition 3.1(i),(iii), printed pp.37-38; closed-immersion and composition tools are Stacks 01W5 and 01T3"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-over-field-affine-finite-dim], write $T_\\eta=\\operatorname{Spec}B$ with $B$ a finite-dimensional $K$-algebra through the given structure map. For every prime $\\mathfrak p\\subset B$, the quotient $B/\\mathfrak p$ is a domain spanned over $K$ by the images of any finite spanning set of $B$. Thus [lem-weil-pbc-finite-dimensional-domain-is-field] makes $B/\\mathfrak p$ a field. Consequently $\\mathfrak p$ is maximal and its residue field is $B/\\mathfrak p$, finite over $K$ [def-weil-residue-field, def-weil-affine-spectrum]. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], all irreducible closed subsets of $T_\\eta$ are these singleton points, so its topological dimension is at most zero [def-kun-topological-krull-dimension]. By [lem-sfb-finite-type-composition-base-change], $T_\\eta$ is finite type over $K$. Therefore [lem-weil-pbc-finite-type-dim-zero-artinian] says that $|T_\\eta|$ is discrete (and finite). If $B=0$, its spectrum is empty and the same conclusions hold without choosing a prime.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-kun-topological-krull-dimension",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II proof of 1.2.6, printed p.25 (finite generic fibre); finite algebra calculation as in Stacks 01WH, 00ES (lemma-irreducible), and 00KH (lemma-Noetherian-dimension-0)"
+   }
+  },
+  {
+   "text": "Let $\\xi$ be a component generic point of $T^{\\mathrm{dom}}$ and $t=i(\\xi)$. Step 1 gives $t\\mapsto\\eta$. By [lem-weil-pbc-fibre-product-points] there is a point $w$ of $T_\\eta$ above $t$: the relevant tensor ring is $\\kappa(t)\\otimes_K K\\simeq\\kappa(t)$ with prime zero. By [lem-weil-pbc-fibre-product-point-residue-field], $\\kappa(w)\\simeq\\kappa(t)$ compatibly with $K$. Step 2 therefore makes $\\kappa(t)/K$ finite. The closed immersion $i$ induces an isomorphism $\\kappa(t)\\simeq\\kappa(\\xi)$: locally it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ [def-weil-closed-immersion], and at a corresponding prime $\\mathfrak q\\supset I$ both residues are $\\operatorname{Frac}(R/\\mathfrak q)$ [def-weil-residue-field]. Thus $\\kappa(\\xi)/K$ is finite through the actual structure map. If $T^{\\mathrm{dom}}$ is empty there are no such $\\xi$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III Proposition 3.1(i),(iii), printed pp.37-38 (membership in alt/S); Stacks 01JT (lemma-points-fibre-product) and 01QO (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "Fix $j$ and put $W=(V_j)_\\eta$. It is finite type over $K$ by [lem-sfb-finite-type-composition-base-change], using the assumed finite type of $V_j\\to S$. Associativity of fibre products [def-pc-fibre-product] identifies the induced map $a:W\\to T_\\eta$ with the base change of $v_j$. It is etale by [lem-weil-pbc-etale-scheme-base-change], hence unramified and locally of finite type by [def-weil-etale-morphism, def-weil-unramified-morphism]. For $w\\in W$ with image $t\\in T_\\eta$, [lem-weil-pbc-unramified-fibre-point-isolated] says $w$ is isolated in $a^{-1}(t)$, using the fibre/subspace identification of [def-pc-scheme-fibre]. Step 2 makes $\\{t\\}$ open in $T_\\eta$, so $a^{-1}(t)$ is open in $W$. A singleton open in that open subspace is open in $W$. This holds for every $w$, hence $W$ is discrete. No separation assumption on $V_j$ or $v_j$ is used.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-fibre-point-isolated",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose III proof of Proposition 3.1(iii), printed p.38, the Nisnevich leg; Stacks 01T4 (lemma-base-change-finite-type), 02GO (lemma-base-change-etale), 02G7 (lemma-unramified-over-field), topological part"
+   }
+  },
+  {
+   "text": "In a discrete space any subset containing two distinct points is the union of two proper closed subsets (a singleton and its complement within the subset), so every nonempty irreducible closed subset is a singleton. Thus Step 4 gives $\\dim W\\le0$ [def-kun-topological-krull-dimension]. The equality in [lem-pc-scheme-dimension-local-rings] identifies this topological dimension with the local-ring dimension used in [lem-pc-algebraic-dim-zero-affine-finite]. Apply that lemma to the finite-type $K$-scheme $W$: its structure morphism is finite. By [lem-weil-pbc-finite-over-field-affine-finite-dim] this also means it is affine with finite-dimensional coordinate $K$-algebra, as required by the statement's meaning of finite generic fibre. For empty $W$ the affine coordinate ring is the zero ring, of dimension zero as a $K$-vector space; the structural map is finite directly from [def-weil-finite-integral-morphism]. This argument applies separately to every $j$; finiteness of the index set is not needed here.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0); Properties Tag 04MU (lemma-dimension); Morphisms Tag 01WH (definition-integral)"
+   }
+  },
+  {
+   "text": "Assume the family is completely decomposed. Fix $t'\\in T^{\\mathrm{dom}}$, put $t=i(t')$, and choose $j,z$ over $t$ for which $\\alpha:\\kappa(t)\\to\\kappa(z)$ is an isomorphism. Write $\\beta:\\kappa(t)\\to\\kappa(t')$ for the map induced by $i$. The tensor ring $\\kappa(z)\\otimes_{\\kappa(t)}\\kappa(t')$ is isomorphic to $\\kappa(t')$ by $a\\otimes b\\mapsto\\beta(\\alpha^{-1}(a))b$, with inverse $b\\mapsto1\\otimes b$. Its zero prime gives a point $z'$ in $V_j\\times_T T^{\\mathrm{dom}}$ above $(z,t')$ by [lem-weil-pbc-fibre-product-points]. By [lem-weil-pbc-fibre-product-point-residue-field] the induced map $\\kappa(t')\\to\\kappa(z')$ is the displayed isomorphism, since the tensor ring is already a field. This proves the required completely decomposed property at every $t'$. These maps remain etale by [lem-weil-pbc-etale-scheme-base-change]. If $T$ is empty then $T^{\\mathrm{dom}}$ is empty and the assertion is vacuous, even for the empty family.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 2.1.1, printed p.26 (base-change stability); Expose III proof of Proposition 3.1(iii), printed p.38; Stacks 01JT (lemma-points-fibre-product), 02GO (lemma-base-change-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field",
+  "def-weil-unramified-morphism",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-per-dominant-part-coreflection",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-unramified-fibre-point-isolated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.2.5--1.2.6, 2.1.1 and Expose III Proposition 3.1(i),(iii), printed pp.25--26,37--38; expanded with Stacks 00ES, 00KH, 01JT, 02G7, 06LH."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +177,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.functorOfLocallyDirected\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \": 𝒰.I₀ ⥤ Scheme.{u}\", \"doc\": \"The functor associated to a locally directed cover $\\\\mathcal{U}$ maps the category $\\\\mathcal{U}_0$ (the zeroth component) to the category of schemes. It sends each object $i \\\\in \\\\mathcal{U}_0$ to the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forget_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X) [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor\", \"module\": \"Mathlib.AlgebraicGeometry.RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 → CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme\", \"doc\": \"Given a scheme $S$ with an open cover $\\\\mathcal{U}$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this functor maps the catego\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsReduced X → Sort u} →\\n    (t : AlgebraicGeometry.IsReduced X) →\\n      ((component_reduced : ∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U))) → motive ⋯) → motive t\", \"doc\": \"Given a scheme $X$ and a type family $P$ over the predicate that $X$ is reduced, if every open subset $U \\\\subseteq X$ has a reduced ring of sections $\\\\mathcal{O}_X(U)$, then this recursor constructs a\"}",
    "date": "2026-10-19",
    "verdict": "no match: normalization, dominance, generic points and ordinary etale base change do not identify the reduced union of dominant components or give its functoriality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme with finite generic fibre has a finite type reduced union of dominant components with finite residue fields at generic points, and etale finite type sources have finite generic fibre",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsFinite; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.LocallyOfFiniteType; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsFinite.finite_preimage_singleton; AlgebraicGeometry.IsFinite.instDescScheme",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations give general finite/quasi-finite or etale facts, not all the dominant-component, generic-residue-field, and completely decomposed-family clauses of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsFinite\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations give general finite/quasi-finite or etale facts, not all the dominant-component, generic-residue-field, and completely decomposed-family clauses of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "dominant.{0,40}component|component.{0,40}dominat|IsEtale.*[Ff]inite",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations give general finite/quasi-finite or etale facts, not all the dominant-component, generic-residue-field, and completely decomposed-family clauses of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced union of components dominating an integral base has finite generic residue fields when the generic fibre is finite",
+   "results": "[leansearch] OK 8 hit(s): IsLocalRing.ResidueField.finite_of_finite; IsLocalRing.finite_residueField_of_compactSpace; Algebra.QuasiFinite.instFiniteResidueField; instIsAlgebraicResidueFieldOfIsIntegral; Valued.integer.totallyBounded_iff_finite_residueField; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; Algebra.instFiniteResidueFieldOfQuasiFiniteAt; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations give general finite/quasi-finite or etale facts, not all the dominant-component, generic-residue-field, and completely decomposed-family clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism from a quasi compact scheme to a finite scheme over a field has source finite over the field",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsFinite; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; Algebra.Etale.finitePresentation; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations give general finite/quasi-finite or etale facts, not all the dominant-component, generic-residue-field, and completely decomposed-family clauses of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-approximation",
@@ -86,5 +243,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-generic-dominant-parts",
+  "worker": "stage1",
+  "summary": "Wrote six proof steps from ILO II 1.2.5--1.2.6 and III 3.1, using the existing dominant-part coreflection, finite-dimensional algebra and zero-dimensional finite-type scheme tools, and the explicit residue-field tensor calculation for completely decomposed base change. No new nodes and no statement correction. Added missing statement dependencies for generic points, fibres, finite field extensions and the reduced induced structure. No exact project attachment or Mathlib match was found.",
+  "blueprint": "Ancestor Step 3 finiteness/duality branch, through III Proposition 6.2 and its III Proposition 3.1 approximation input: Expose III proof of Proposition 3.1(iii), printed p.38: functoriality of X to X_r on schemes with finite generic fibre and the Nisnevich base-change step; Expose II 1.2.5--1.2.8, printed pp.25--26, for dominant reduced products. The etale identification spells out the operation implicit in that step.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: An algebraic zero-dimensional scheme over a field is affine and finite. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Dimension of a scheme is the supremum of the dimensions of its local rings. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Finite-type morphisms are stable under composition and base change. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Closed immersions are proper. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Base change of an etale morphism of schemes is etale (Stacks 02GO). No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Residue field of a point of a fibre product. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-points",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Points of a fibre product of schemes. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: A finite-dimensional domain over a field is a field. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: A scheme finite over a field is affine, the spectrum of a finite-dimensional algebra. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: A zero-dimensional scheme of finite type over a field is finite and discrete. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: Closures of points and irreducible closed subsets of the spectrum of a ring. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-fibre-point-isolated",
+    "why": "Generic scheme/algebra/topology tool for the finite-generic-fibre and Nisnevich-base-change argument in ILO III 3.1: A point unramified in a locally finite type morphism is isolated in its fibre. No statement of this unit replaces this tool; the alteration-cover route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-unramified-fibre-point-isolated"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-ba3c5dc3f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-ba3c5dc3f (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps, every cited node statement, and ILO II 1.2.5-1.2.6 (p.25) and III 3.1(i),(iii) with its proof (pp.37-38). The statement is byte-identical to the live base. The 4 added stmt_deps (generic point, scheme fibre, field extension, reduced induced subscheme) are all used in the statement, and no stmt_dep was dropped. The delivery has no new nodes and no SGA, and the dependency closure (130 nodes) contains no cycle. Step 1: the coreflection X_md equals T^dom for integral S; finite type via closed-immersion-proper (a) and composition. Step 2: B/p is a field (finite-dimensional domain), every prime is maximal, dim<=0 via 00ES, and 00KH-node discreteness applies with finite type. Step 3: 01JT gives the point plus the residue-field iso through the tensor field kappa(t)(x)_K K, and a closed immersion preserves residue fields. Step 4: (V_j)_eta is finite type from the V_j->S hypothesis; the base change is etale (02GO); 02G7 makes w isolated in the fibre, which is open because {t} is open, so W is discrete with no separatedness used. Step 5: the 04MU bridge from topological to local-ring dimension feeds 06LH (non-proper); the empty case is handled. Step 6: the tensor kappa(z)(x)_{kappa(t)}kappa(t') is isomorphic to kappa(t') via beta∘alpha^{-1}, so the zero prime gives a residue-preserving lift and the family stays completely decomposed. Tested cases: T empty; Spec k[e]/e^2 over k; Spec Z ⊔ Spec F_p over Z; etale V over Spec Z. No duplicates: generic-fibre-finiteness-criterion is the converse, and alteration-cover-calculus and etale-covering-base-change lack the residue clause. Accepted the 12 generic Stacks tool_uses. Advisory only: generic point and field extension are not bracketed inline in the statement, but stmt_deps carry them."
  }
 }
