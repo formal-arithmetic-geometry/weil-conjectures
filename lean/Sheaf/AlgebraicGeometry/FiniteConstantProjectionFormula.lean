@@ -14,22 +14,15 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.ConstructibleSheaf.Defs
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.Paper.ProjectionMateExact
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.RingTheory.Noetherian.Basic
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.Paper.BoundedFlatReplacement
-import Sheaf.Paper.EtaleKFlatCriteria
-import Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.FiniteFreeConstantProjection
+import Sheaf.RingTheory.FiniteFreeApproximationTriangle
+import Sheaf.CategoryTheory.ProjectionApproximation
+import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-!
 # The projection formula with a finitely presented constant module
@@ -43,11 +36,22 @@ with `Rf_*(K ⊗^L M_X)`. No properness or torsion hypothesis is imposed.
 
 @[expose] public section
 
-universe u
+universe u u'
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.Etale
+
+attribute [local instance] Sheaf.monoidalCategory in
+private theorem isLE_derivedTensor_obj
+    (B : Type u') [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+    [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B] (Z : Scheme.{u})
+    (U V : DerivedCategory (Sheaf Z.smallEtaleTopology B)) (b c : ℤ)
+    [U.IsLE b] [V.IsLE c] :
+    (((derivedTensor B Z).obj U).obj V).IsLE (b + c) :=
+  _root_.DerivedCategory.isLE_tensor U V b c
+
 
 /-- The canonical projection map for a constant module, as a natural transformation in
 that module. Its source is `Rf_*K ⊗^L M_Y` and its target is `Rf_*(K ⊗^L M_X)`.
@@ -144,6 +148,78 @@ theorem isIso_finiteConstantProjectionMap
       IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj K))
     (M : ModuleCat.{u + 1} A) [Module.FinitePresentation A M] :
     IsIso ((finiteConstantProjectionMap A f K).app M) := by
-  sorry
+  classical
+  let C := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)
+  let R := (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor
+  let L := (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+  let F := (derivedTensor (ModuleCat.{u + 1} A) Y).obj (R.obj K)
+  let G := L ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj K ⋙ R
+  let α : F ⟶ G := (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app K
+  let hFs : F.CommShift ℤ := commShiftDerivedTensorObj _ (R.obj K)
+  let hLs : L.CommShift ℤ := commShiftLeftDerivedUpperStar _ f
+  let hRs : R.CommShift ℤ := commShiftRightDerivedLowerStar _ f
+  let hGs : G.CommShift ℤ :=
+    Functor.CommShift.comp (A := ℤ) L ((derivedTensor (ModuleCat.{u + 1} A) X).obj K ⋙ R)
+  have hFtri : F.IsTriangulated := isTriangulated_derivedTensor_obj _ _
+  have hLtri : L.IsTriangulated := isTriangulated_leftDerivedUpperStar _ f
+  have hRtri : R.IsTriangulated := isTriangulated_rightDerivedLowerStar _ f
+  have hTX : ((derivedTensor (ModuleCat.{u + 1} A) X).obj K).IsTriangulated :=
+    isTriangulated_derivedTensor_obj _ K
+  have hGtri : G.IsTriangulated :=
+    (inferInstance : (L ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj K ⋙ R).IsTriangulated)
+  let τ := Functor.whiskerLeft C.mapDerivedCategory α
+  obtain ⟨b, hb⟩ := hK
+  have hKb : K.IsLE b := (_root_.DerivedCategory.isLE_iff K b).2 hb
+  have hdim (E : DerivedCategoryModule A X) (c : ℤ) (hE : E.IsLE c) :
+      (R.obj E).IsLE (c + N) :=
+    (lowerStar (ModuleCat.{u + 1} A) f).isLE_rightDerivedFunctor_obj_of_dimension N
+      (fun V q hq ↦ Functor.isZero_rightDerived_of_isZero_homology
+        (lowerStar (ModuleCat.{u + 1} A) f) V q (hcd V q hq)) E c hE
+  have hRK : (R.obj K).IsLE (b + N) := hdim K b hKb
+  have hFB (E : _root_.DerivedCategory (ModuleCat.{u + 1} A)) (c : ℤ)
+      (hE : E.IsLE c) : ((C.mapDerivedCategory ⋙ F).obj E).IsLE (c + (b + N)) := by
+    have hCE := C.isLE_mapDerivedCategory_obj E c
+    have h := isLE_derivedTensor_obj (ModuleCat.{u + 1} A) Y (R.obj K)
+      (C.mapDerivedCategory.obj E) (b + N) c
+    rw [Int.add_comm c (b + (N : ℤ))]
+    exact h
+  have hGB (E : _root_.DerivedCategory (ModuleCat.{u + 1} A)) (c : ℤ)
+      (hE : E.IsLE c) : ((C.mapDerivedCategory ⋙ G).obj E).IsLE (c + (b + N)) := by
+    have hCE := C.isLE_mapDerivedCategory_obj E c
+    have hU := Functor.isLE_mapDerivedCategory_obj
+      (upperStar (ModuleCat.{u + 1} A) f) (C.mapDerivedCategory.obj E) c
+    have hLE : (L.obj (C.mapDerivedCategory.obj E)).IsLE c :=
+      _root_.DerivedCategory.TStructure.t.isLE_of_iso
+        ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).symm.app
+          (C.mapDerivedCategory.obj E)) c
+    have ht := isLE_derivedTensor_obj (ModuleCat.{u + 1} A) X K
+      (L.obj (C.mapDerivedCategory.obj E)) b c
+    have h := hdim (((derivedTensor (ModuleCat.{u + 1} A) X).obj K).obj
+      (L.obj (C.mapDerivedCategory.obj E))) (b + c) ht
+    have heq : c + (b + (N : ℤ)) = b + c + N := by omega
+    rw [heq]
+    exact h
+  have hτ : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj M)) := by
+    apply _root_.DerivedCategory.isIso_app_of_approximations
+      (C.mapDerivedCategory ⋙ F) (C.mapDerivedCategory ⋙ G) τ _ (b + N) hFB hGB
+    intro c
+    obtain ⟨P, a, z, T, ha, hz, hfree, hT, h₁, h₂, hcone⟩ :=
+      _root_.DerivedCategory.exists_finiteFree_approximation_triangle A M c
+    refine ⟨T, hT, h₂, hcone, ?_⟩
+    rw [h₁]
+    have := ha
+    have := hz
+    dsimp only [τ, Functor.whiskerLeft_app]
+    have hf := isIso_projectionMap_bounded_finiteFree_constant A f K P a z hfree
+    exact hf
+  have hα : IsIso (α.app ((_root_.DerivedCategory.singleFunctor _ 0).obj (C.obj M))) := by
+    let e := (C.mapDerivedCategorySingleFunctor 0).app M
+    exact (NatTrans.isIso_app_iff_of_iso (F := F) (G := G) α e).1 hτ
+  dsimp only [α, C] at hα
+  dsimp only [finiteConstantProjectionMap, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  refine IsIso.comp_isIso' ?_ ?_
+  · exact hα
+  · infer_instance
 
 end AlgebraicGeometry.Etale

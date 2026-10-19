@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-finite-free-approximation-triangle",
+ "kind": "statement",
+ "title": "Finite free approximation triangles for finite modules",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and let $M$ be a finitely presented $R$-module [def-sc-finitely-presented-module]. Work in the unbounded derived category $D(R)$ of $R$-modules [def-weil-pbc-derived-categories]. For every integer $c$, there are a cochain complex $P$ of $R$-modules, integers $a,b$, and a distinguished triangle\n$$P\\longrightarrow M[0]\\longrightarrow C\\longrightarrow P[1]$$\nin $D(R)$, such that $P^i=0$ when $i<a$ or $i>b$, each $P^i$ is isomorphic to $R^{n_i}$ for some finite $n_i\\in\\mathbf N$, and $H^i(C)=0$ for every $i>c$. Here the object denoted $P$ in the triangle is the image of the displayed cochain complex under localization at quasi-isomorphisms.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-finitely-presented-module"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 3; Stacks Project Tag 0944"
+ },
+ "proof": [
+  {
+   "text": "the module in degree zero is pseudo-coherent by the Noetherian cohomology\ncriterion. Its m-pseudo-coherent approximation is bounded finite free and induces\nisomorphisms in all degrees above m. Complete its map to a distinguished triangle.\nFor i above m, exactness and the two adjacent isomorphisms force degree i cohomology\nof its cone to vanish. Choosing m equal to the prescribed cone bound suffices.\nIdentify each finite free term with a finite power of the ring using a finite basis.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 3, formalized using existing source-library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of triangulated functors of bounded upper amplitude is an isomorphism at finite modules if it is an isomorphism on bounded finite free complexes",
+   "results": "Eight hits on general homological functors, exact derived functors and bounded representatives; no matching approximation or constant projection theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; use existing library triangulated generation and pseudo-coherence APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.HomologySequence: cohomological detection of isomorphisms.",
+   "date": "2026-10-18",
+   "verdict": "used for degreewise comparison, does not give the approximation or finite free projection statements"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app.*approx|finiteFree.*approx|projection.*finiteFree",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a Noetherian ring admits bounded finite free complex approximations with arbitrarily low cohomology error cone",
+   "results": "8 hits: Module.FinitePresentation.mk, instFinitePresentationForall, Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite, Module.finitePresentation_of_projective_of_exact, instFiniteOfFinitePresentation, FGModuleRepr.ofFinite, Module.finitePresentation_of_free_of_surjective.",
+   "date": "2026-10-19",
+   "verdict": "no direct match: these results do not state the finite-free approximation, bounded constant projection, or degreewise approximation comparison theorem; use the source-library APIs recorded in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-projection-finite-constant",
+   "place": "proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteFreeApproximationTriangle",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeApproximationTriangle.lean",
+  "declaration": "DerivedCategory.exists_finiteFree_approximation_triangle",
+  "statement": "theorem exists_finiteFree_approximation_triangle\n    (R : Type u) [CommRing R] [IsNoetherianRing R]\n    [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    (M : ModuleCat.{u} R) [Module.FinitePresentation R M] (c : ℤ) :\n    ∃ (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ)\n      (T : Triangle (DerivedCategory (ModuleCat.{u} R))),\n      P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n      (∀ i : ℤ, ∃ n : ℕ, Nonempty (P.X i ≅ ModuleCat.of R (Fin n → R))) ∧\n      T ∈ distTriang _ ∧ T.obj₁ = Q.obj P ∧\n      T.obj₂ = (singleFunctor _ 0).obj M ∧ T.obj₃.IsLE c",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

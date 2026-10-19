@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-projection-bounded-finite-free-constant",
+ "kind": "statement",
+ "title": "Bounded finite free constant projection formula",
+ "statement": "Let $A$ be a commutative ring, let $f:X\\to Y$ be a morphism of schemes, and work in the unbounded derived categories of module sheaves on their small etale sites [def-weil-pbc-derived-categories]. Let $K\\in D(X_{\\mathrm{et}},A)$ be arbitrary. Let $P$ be a cochain complex of $A$-modules and let $a,b\\in\\mathbf Z$ such that $P^i=0$ for $i<a$ and for $i>b$. Assume that for every $i$ there is $n_i\\in\\mathbf N$ and an isomorphism $P^i\\cong A^{n_i}$. Write $P_Y$ for the derived image of $P$ under the exact constant-sheaf functor. Then the canonical projection morphism [def-kun-projection-formula-map]\n$$Rf_*K\\otimes_A^L P_Y\\longrightarrow Rf_*(K\\otimes_A^L Lf^*P_Y)$$\nis an isomorphism. No boundedness assumption on $K$ and no cohomological-dimension assumption on $f$ are required.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 2; Stacks Project Tag 0944"
+ },
+ "proof": [
+  {
+   "text": "Each finite free term becomes a dualizable constant sheaf: transport the proved isDualizableSheaf_constantSheaf_pi along its finite-basis isomorphism. Apply the source-library theorem DerivedCategory.isDualizableEtale_Q_obj to the bounded termwise constant complex. Transport dualizability through the exact constant functor comparison mapDerivedCategoryFactors. The proved source-library theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable makes the canonical projection map invertible at this derived constant complex. These source-library results are proved, so no finite-free projection assumption or new hole is used.",
+   "uses": [
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 2, via proved source-library finite-power dualizability, bounded-complex dualizability, and projection formula at a dualizable coefficient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of triangulated functors of bounded upper amplitude is an isomorphism at finite modules if it is an isomorphism on bounded finite free complexes",
+   "results": "Eight hits on general homological functors, exact derived functors and bounded representatives; no matching approximation or constant projection theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; use existing library triangulated generation and pseudo-coherence APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.HomologySequence: cohomological detection of isomorphisms.",
+   "date": "2026-10-18",
+   "verdict": "used for degreewise comparison, does not give the approximation or finite free projection statements"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app.*approx|finiteFree.*approx|projection.*finiteFree",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image projection formula is an isomorphism when the tensor coefficient is a bounded finite free constant complex",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Submodule.FG.rTensor.directLimit_apply', SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, SheafOfModules.pullbackObjFreeIso.",
+   "date": "2026-10-19",
+   "verdict": "no direct match: these results do not state the finite-free approximation, bounded constant projection, or degreewise approximation comparison theorem; use the source-library APIs recorded in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-projection-finite-constant",
+   "place": "proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeConstantProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeConstantProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_projectionMap_bounded_finiteFree_constant",
+  "statement": "theorem isIso_projectionMap_bounded_finiteFree_constant\n    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (a b : ℤ)\n    [P.IsStrictlyGE a] [P.IsStrictlyLE b]\n    (hP : ∀ i : ℤ, ∃ n : ℕ,\n      Nonempty (P.X i ≅ ModuleCat.of A (Fin n → A))) :\n    IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app K).app\n      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj P)))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

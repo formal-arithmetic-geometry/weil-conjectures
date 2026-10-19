@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-projection-approximation-comparison",
+ "kind": "statement",
+ "title": "Detection by upper-bounded approximations",
+ "statement": "Let $R$ be a commutative ring and let $B$ be an abelian category with an unbounded derived category [def-weil-pbc-derived-categories]. Let $F,G:D(R)\\to D(B)$ be triangulated functors with their shift compatibilities, and let $\\tau:F\\Rightarrow G$ be a natural transformation. Fix $M\\in D(R)$ and $d\\in\\mathbf Z$. Assume that for every $c\\in\\mathbf Z$ and $E\\in D(R)$ with $H^i(E)=0$ for $i>c$, both $F(E)$ and $G(E)$ have zero cohomology in degrees greater than $c+d$. Suppose also that for every integer $c$ there is a distinguished triangle\n$$P\\longrightarrow M\\longrightarrow C\\longrightarrow P[1]$$\nsuch that $H^i(C)=0$ for $i>c$ and $\\tau_P$ is an isomorphism. Then $\\tau_M$ is an isomorphism. Compatibility of $\\tau$ itself with shifts is not assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 6; Stacks Project Tag 0944"
+ },
+ "proof": [
+  {
+   "text": "in degree r choose an approximation with cone bound r-d-2. After either functor,\nthe cone vanishes in degrees r-1 and r. The long exact sequences make both approximation\nmaps invertible in degree r. Naturality and the isomorphism at the approximation make\nthe desired map invertible in degree r. Cohomological detection finishes the proof.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-projection-finite-constant.md",
+  "place": "Proof step 6, formalized using existing source-library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of triangulated functors of bounded upper amplitude is an isomorphism at finite modules if it is an isomorphism on bounded finite free complexes",
+   "results": "Eight hits on general homological functors, exact derived functors and bounded representatives; no matching approximation or constant projection theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; use existing library triangulated generation and pseudo-coherence APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.HomologySequence: cohomological detection of isomorphisms.",
+   "date": "2026-10-18",
+   "verdict": "used for degreewise comparison, does not give the approximation or finite free projection statements"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app.*approx|finiteFree.*approx|projection.*finiteFree",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of triangulated functors with common upper cohomological amplitude is invertible at finite modules if invertible at bounded finite free approximations",
+   "results": "8 hits: CategoryTheory.Functor.op_isTriangulated_iff, CategoryTheory.Pretriangulated.Triangle.functorHomMk, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Pretriangulated.Triangle.functorIsoMk_inv, CategoryTheory.Functor.isTriangulated_iff_of_iso, CategoryTheory.Functor.mapTriangleIso_inv_app_hom₂, CategoryTheory.Triangulated.TStructure.truncGEδLT.",
+   "date": "2026-10-19",
+   "verdict": "no direct match: these results do not state the finite-free approximation, bounded constant projection, or degreewise approximation comparison theorem; use the source-library APIs recorded in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-projection-finite-constant",
+   "place": "proof step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ProjectionApproximation",
+  "file": "lean/Sheaf/CategoryTheory/ProjectionApproximation.lean",
+  "declaration": "DerivedCategory.isIso_app_of_approximations",
+  "statement": "theorem isIso_app_of_approximations\n    {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]\n    {B : Type v} [Category B] [Abelian B] [HasDerivedCategory B]\n    (F G : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory B)\n    [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated]\n    (τ : F ⟶ G) (M : DerivedCategory (ModuleCat.{u} R)) (d : ℤ)\n    (hF : ∀ (E : DerivedCategory (ModuleCat.{u} R)) (c : ℤ), E.IsLE c →\n      (F.obj E).IsLE (c + d))\n    (hG : ∀ (E : DerivedCategory (ModuleCat.{u} R)) (c : ℤ), E.IsLE c →\n      (G.obj E).IsLE (c + d))\n    (happrox : ∀ c : ℤ, ∃ T : Triangle (DerivedCategory (ModuleCat.{u} R)),\n      T ∈ distTriang _ ∧ T.obj₂ = M ∧ T.obj₃.IsLE c ∧ IsIso (τ.app T.obj₁)) :\n    IsIso (τ.app M)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261019T112522-L-3949709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
