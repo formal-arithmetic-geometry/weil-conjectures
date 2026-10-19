@@ -29,102 +29,38 @@
  ],
  "proof": [
   {
-   "text": "Write $P_M(W)=\\bigoplus_{s:W\\to V/T}M(W,s)$, $Q=M\\otimes_Ae^*N$, and $H=e_{\\Sigma!}Q$. These are the defining sum presheaves and sheaf tensor product. For each lift $s$, put $u_s(n)=\\Gamma_s^*\\eta_e(W)(n)$, where $\\Gamma_s=(s,\\mathrm{id}_W)$. The constant-coefficient inverse-image adjunction is an adjunction of module sheaves, so $u_s$ is $A$-linear. The rule $b_W(\\sum_s\\iota_sm_s,n)=\\sum_s\\eta_{P_Q,W}(\\iota_s(m_s\\otimes u_s(n)))$ is therefore $A$-bilinear. All sums are finite; the formula respects addition in every summand and $b_W(a\\iota_sm,n)=b_W(\\iota_sm,an)$. For a test morphism $h:W'\\to W$, the graph identity $(\\mathrm{id}_V\\times h)\\Gamma_{sh}=\\Gamma_sh$, naturality of the unit, and the restriction maps in the defining sum and tensor presheaves give $u_s(n)|_{(W',sh)}=u_{sh}(n|_{W'})$. Thus restricting $b_W(\\iota_sm,n)$ gives exactly $b_{W'}(\\iota_{sh}(m|_{W'}),n|_{W'})$, including when several lifts restrict to the same lift (their entries add). This constructs a bilinear morphism of presheaves $P_M\\times N\\to H$.",
+   "text": "Choose the inverse of the already defined etaleLowerShriekTensorIso. Rewrite naturality of inverses by Iso.comp_inv_eq and Iso.eq_inv_comp, then apply etaleLowerShriekTensorIso_hom_naturality. This constructs the witness isomorphisms and proves their joint naturality in Lean.",
    "uses": [
-    "def-weil-pbc-etale-sum-extension",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sheafification"
+    "lem-pur-etale-projection-kan-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), pure-tensor construction and restriction check; lift-indexed model as in etale-cohomology.tex Tag 03S5 (proposition-describe-jshriek)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the bilinear sheafification-extension theorem with ring presheaf the constant presheaf $A$, its sheafification $A_T$, presheaves $\\mathcal F=P_M$ and $\\mathcal G=N$, and target $\\mathcal H=H$. The theorem extends $b$ uniquely to an $A_T$-bilinear morphism $(P_M)^\\#\\times N\\to H$; here $N^\\#=N$ canonically by the sheafification universal property because $N$ is already a sheaf. The sheaf tensor universal property then gives a unique module morphism $p^0_{M,N}:(P_M)^\\#\\otimes_{A_T}N\\to H$. The defining sum extension identifies $(P_M)^\\#=e_{\\Sigma!}M$, and its unit equation reads $p^0(\\eta_{P_M}(\\iota_sm)\\otimes n)=\\eta_{P_Q}(\\iota_s(m\\otimes u_s(n)))$. This is precisely the formula asserted in the statement. Notice that the extension theorem supplies a bilinear map, and the separate tensor universal property supplies the linear map out of the sheaf tensor.",
+   "text": "The section normalization theorem supplies the stated summand-section formula for exactly this chosen inverse isomorphism.",
    "uses": [
-    "lem-pc-sites-module-sheafification-bilinear-extension",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-etale-sum-extension"
+    "lem-pur-etale-projection-section-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW (lemma-sheafification-tensor), bilinear extension and the Hom–Bilin display immediately following it in Section 03EK"
-   }
+   "elementary": false
   },
   {
-   "text": "For module morphisms $a:M\\to M'$ and $c:N\\to N'$, both naturality composites send $(\\iota_sm)\\otimes n$ to $\\iota_s(a(m)\\otimes u_s(c(n)))$: naturality of the unit gives $e^*c(u_s(n))=u_s(c(n))$. The uniqueness in bilinear extension, followed by injectivity of the Hom–Bilin bijection, identifies the two sheaf morphisms. Restriction compatibility and balancing were verified for $b$ in Step 1 and are preserved by its bilinear extension and tensor factorization. Thus the constructed map is canonical and natural in both variables.",
+   "text": "Apply the generic stalk-normalization theorem to the chosen map and its section formula. This proves the last conjunct with the unchanged canonical vertical comparisons and direct-sum tensor isomorphism.",
    "uses": [
-    "lem-pc-sites-module-sheafification-bilinear-extension",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-pur-etale-projection-stalk-normalization",
+    "lem-pur-etale-projection-section-normalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), compatibility with restrictions and naturality of the pure-tensor construction"
-   }
-  },
-  {
-   "text": "Fix $\\bar t:\\operatorname{Spec}\\Omega\\to T$. The sum-stalk formula identifies the germ of $\\iota_sm$, represented on a pointed neighbourhood $(W,\\bar w)$, with $m_{\\bar v}$ in the summand $\\bar v=s\\bar w$. The tensor-stalk formula identifies its tensor with $n_{\\bar t}$ with the germ of $\\eta_{P_M}(\\iota_sm)\\otimes n$. By Step 2 its image is the germ of $\\iota_s(m\\otimes u_s(n))$, which the target sum-stalk and tensor-stalk formulas send to $m_{\\bar v}\\otimes(u_s(n))_{\\bar v}$. The graph $\\Gamma_s$ maps the pointed neighbourhood $(W,\\bar w)$ of $\\bar v$ into $(V\\times_TW,(\\bar v,\\bar w))$, so restricting the unit image along this pointed morphism does not change its germ. The inverse-image stalk-germ theorem therefore sends $(u_s(n))_{\\bar v}$ to $n_{\\bar t}$. This identification is $A$-linear: its naturality for multiplication-by-$a$ endomorphisms of $N$ gives scalar compatibility for each $a\\in A$. Consequently the actual map $(p^0_{M,N})_{\\bar t}$ becomes $D:(\\bigoplus_{\\bar v\\mapsto\\bar t}M_{\\bar v})\\otimes_AN_{\\bar t}\\to\\bigoplus_{\\bar v\\mapsto\\bar t}(M_{\\bar v}\\otimes_AN_{\\bar t})$, $D(\\iota_{\\bar v}m\\otimes n)=\\iota_{\\bar v}(m\\otimes n)$. These generators determine the map because the stalk and tensor identifications are isomorphisms and ordinary tensors are generated by pure tensors.",
-   "uses": [
-    "lem-amb-etale-sum-stalks",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), geometric-stalk square; etale-cohomology.tex Tags 03S5 and 03Q1 (lemma-stalk-pullback), including the germ formula"
-   }
-  },
-  {
-   "text": "For each $\\bar v$, the bilinear map $(m,n)\\mapsto\\iota_{\\bar v}m\\otimes n$ induces a linear map $M_{\\bar v}\\otimes_AN_{\\bar t}\\to(\\bigoplus M_{\\bar v})\\otimes_AN_{\\bar t}$ by the module tensor universal property. Adding these maps on finite-support tuples defines $E$ on $\\bigoplus(M_{\\bar v}\\otimes_AN_{\\bar t})$. Then $DE$ fixes every $\\iota_{\\bar v}(m\\otimes n)$ and $ED$ fixes every $\\iota_{\\bar v}m\\otimes n$. These generate their respective modules, so both composites are identities. Hence the stalk map $D$ is invertible, with no finiteness or flatness assumption on the modules.",
-   "uses": [
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), elementary verification that the lower horizontal direct-sum tensor map is an isomorphism; algebra.tex Tag 00CX (lemma-tensor-product)"
-   }
-  },
-  {
-   "text": "Every geometric stalk of $p^0_{M,N}$ is an isomorphism by Steps 4–5. The conservativity theorem for geometric stalks makes the underlying morphism of abelian sheaves an isomorphism. Its inverse is $A$-linear since the original bijective morphism is $A$-linear, so it is an isomorphism of $A$-module sheaves. Together with Step 3 and the calculation of Step 4 this proves every clause, including the specified map on geometric stalks.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PU (theorem-exactness-stalks)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sum-extension",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sheafification",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-amb-etale-sum-stalks",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-module-tensor-product",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-pur-etale-projection-kan-comparison",
+  "lem-pur-etale-projection-section-normalization",
+  "lem-pur-etale-projection-stalk-normalization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "Q4",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKF (lemma-f-shriek-projection), pure-tensor construction and stalk square; its elementary sum-model calculation uses etale-cohomology.tex Tag 03S5, sites-modules.tex Tag 0GMW and the following Hom–Bilin display, and etale-cohomology.tex Tags 03Q1 and 03PU"
+  "place": "Tag 0GKF. Reuse the source-library Kan projection isomorphism and joint naturality; retain section normalization and its geometric-stalk calculation as separate strictly smaller obligations."
  },
  "mathlib_searches": [
   {
@@ -267,12 +203,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
   "lem-amb-etale-sum-stalks",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-pod-etale-stalk-tensor-scalar"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -294,17 +226,6 @@
   "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap",
   "declaration": "AlgebraicGeometry.Etale.etaleLowerShriekProjectionMap",
   "declarations": [
-   "AlgebraicGeometry.Etale.etaleSheafTensor",
-   "AlgebraicGeometry.Etale.etaleSheafTensorMap",
-   "AlgebraicGeometry.Etale.etaleSheafTensorSection",
-   "AlgebraicGeometry.Etale.etaleSumSection",
-   "AlgebraicGeometry.Etale.etaleLiftSection",
-   "AlgebraicGeometry.Etale.etaleProjectionSumStalkIso",
-   "AlgebraicGeometry.Etale.etaleProjectionTensorStalkIso",
-   "AlgebraicGeometry.Etale.etaleProjectionLiftStalkIso",
-   "AlgebraicGeometry.Etale.etaleProjectionSourceStalkIso",
-   "AlgebraicGeometry.Etale.etaleProjectionTargetStalkIso",
-   "AlgebraicGeometry.Etale.etaleProjectionDirectSumTensorIso",
    "AlgebraicGeometry.Etale.etaleLowerShriekProjectionMap"
   ],
   "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleSheafProjectionMap.lean",
@@ -313,7 +234,17 @@
   "by": "NC",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Returned-head repair F1–F3: tensor helpers are local to the item module; the general tensor dependency record is unchanged and the landed sfb tensor structure/tensor nodes are cited. The source stalk retains tensor N_t; the section equation uses lanUnit, toSheafify, the inverse-image unit and graph restriction; the stalk square uses fixed canonical comparisons and contains p.hom. The ModuleCat inverse-image repair module was removed; upperStarCompSheafFiberIso is imported from the recorded upstream module. Independent maintainer review: list the three tensor specialization helpers and assign their docstrings to this owning item; correct the obsolete inverseImage_module_stalk_germ documentation reference. Mathematical signatures unchanged.",
+  "note": "Canonical helper definitions relocated verbatim to EtaleSheafProjectionData and publicly re-exported. The statement is unchanged. The proof chooses the existing Kan projection inverse and proves naturality, with its two normalization obligations separated.",
   "fixed_by": "NT-stage2-Codex-5acdcff6a"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "independent cc review: Relocated 11 helper defs in EtaleSheafProjectionData byte-identical to live item module; theorem signature byte-identical; proof = inverse of existing etaleLowerShriekTensorIso + its naturality + two proved normalization theorems; all 4 modules + importer Sheaf.Paper.EtaleSumTensorTotalization compile clean; sorryAx only via pre-existing etaleSumSection (same in published build)"
  }
 }

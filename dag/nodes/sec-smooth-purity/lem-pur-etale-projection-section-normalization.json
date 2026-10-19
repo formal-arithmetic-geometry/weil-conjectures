@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-etale-projection-section-normalization",
+ "kind": "statement",
+ "title": "Section normalization of the canonical Kan projection isomorphism",
+ "statement": "Let A be a commutative ring, e:V -> T an etale morphism, M an A-module sheaf on V_et and N an A-module sheaf on T_et. On each W -> V and sections m in M(W), n in N(W -> T), the inverse canonical etaleLowerShriekTensorIso sends the tensor of etaleSumSection(m) and n to etaleSumSection of the tensor of m and etaleLiftSection(n). All section maps are the fixed maps of [def-pur-etale-projection-data]; this identifies the already existing comparison, not an unspecified new isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF, pure-tensor construction; parent proof Steps 1-3, normalization against the existing Kan projection map."
+ },
+ "stmt_deps": [
+  "def-pur-etale-projection-data",
+  "lem-pur-etale-projection-kan-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the forward canonical comparison, which is invertible. Its sheafification tensor comparison sends the tensor of units to the unit of the presheaf tensor, and its sum/sheafification comparison is fixed by the adjunction unit equation. Move these through the Kan-extension unit by naturality. The equation lanUnit_app_comp_lanProjectionMap_app now computes the image as the unit on M tensored with n. The sheafification counit on N cancels its unit.",
+   "uses": [
+    "lem-pur-etale-projection-kan-comparison",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse restriction comparison equals inverse-image unit followed by graph restriction. Apply its forward comparison and use Adjunction.unit_leftAdjointUniq_hom_app; naturality moves the graph restriction through it. The site adjunction left triangle identity cancels the resulting unit/counit composite. Substitute this identity in the previous calculation and cancel the forward projection comparison.",
+   "uses": [
+    "def-pur-etale-projection-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-projection-kan-comparison",
+  "def-weil-pbc-sheafification",
+  "def-pur-etale-projection-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Expansion of Tag 0GKF in the already formalized Kan-extension model; no new mathematical route above the unit level."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale extension by zero projection formula tensor sheaves natural isomorphism",
+   "results": "8 results, headed by KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale and other ring-theoretic etale tensor statements; none is a sheaf projection normalization.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; the source library does supply etaleLowerShriekTensorIso and its joint naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lanProjectionMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "The required Kan projection API is in the source library, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek.*Tensor|etaleLowerShriekTensor",
+   "results": "msearch grep: 0 Mathlib hits. Local rg found WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection with the abstract isomorphism and its naturality, but no section/stalk normalization.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing isomorphism; the two normalization clauses have no existing declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of the etale lower shriek tensor projection formula on sections and geometric stalks",
+   "results": "8 hits about scheme normalization, formally etale rings and Zariski restriction-stalk isomorphisms; no etale lower-shriek section or geometric-stalk formula.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap",
+  "date": "2026-10-18",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-co-smooth-etale-locality",
+   "place": "Tag 0GKF, pure-tensor construction; parent proof Steps 1-3, normalization against the existing Kan projection map.",
+   "via": [
+    "lem-pur-etale-sheaf-projection-map",
+    "lem-pur-etale-support-map-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleProjectionSectionNormalization",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleProjectionSectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleProjection_section_normalization",
+  "statement": "theorem etaleProjection_section_normalization (A : Type (u + 1)) [CommRing A]\n    {V T : Scheme.{u}} (e : V ⟶ T) [Etale e]\n    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : V.Etale)\n    (m : M.obj.obj (op W))\n    (n : N.obj.obj\n      (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))) :\n    (etaleLowerShriekTensorIso (ModuleCat.{u + 1} A)\n        (inferInstance : Etale e) M N).inv.hom.app\n        (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))\n        (etaleSheafTensorSection A _ N\n          ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)\n          (etaleSumSection A e M W m) n) =\n      etaleSumSection A e _ W\n        (etaleSheafTensorSection A M _ W m (etaleLiftSection A e N W n))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "independent cc review: Relocated 11 helper defs in EtaleSheafProjectionData byte-identical to live item module; theorem signature byte-identical; proof = inverse of existing etaleLowerShriekTensorIso + its naturality + two proved normalization theorems; all 4 modules + importer Sheaf.Paper.EtaleSumTensorTotalization compile clean; sorryAx only via pre-existing etaleSumSection (same in published build)"
+ }
+}

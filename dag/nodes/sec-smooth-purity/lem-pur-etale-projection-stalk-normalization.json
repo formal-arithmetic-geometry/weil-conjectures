@@ -1,0 +1,155 @@
+{
+ "id": "lem-pur-etale-projection-stalk-normalization",
+ "kind": "statement",
+ "title": "Section formula implies the normalized geometric-stalk square",
+ "statement": "Let A be a commutative ring, e:V -> T etale, M and N constant-A module sheaves on V_et and T_et, respectively, and let p:e_!M tensor N -> e_!(M tensor e^*N) be any sheaf morphism. Assume p sends each tensor of a summand section m and a target section n to the summand section of m tensor etaleLiftSection(n). Then for every geometric point t:Spec Omega -> T, stalk(p) followed by the target comparison equals the source comparison followed by TensorProduct.directSumLeft. The comparisons are exactly those fixed in [def-pur-etale-projection-data]. No invertibility or naturality of p is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF geometric-stalk square; parent proof Step 4; Tags 03S5 and 03Q1 for its fixed comparisons."
+ },
+ "stmt_deps": [
+  "def-pur-etale-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the source stalk comparison and TensorProduct.directSumLeft. Direct-sum linear-map extensionality reduces to one lift summand. Precompose with the tensor of the identity and the canonical inverse-image stalk isomorphism. The invertible oplax tensorator of the filtered presheaf-fibre functor and its colimit universal property reduce to pure tensors of two section germs on the same source neighbourhood. For etale e, upperStarIsoLocalizationRestriction expresses each inverse-image section as etaleLiftSection of a target section on the composed neighbourhood. The sum-stalk and tensor-stalk unit equations then identify the source tensor with the germ of the corresponding tensor section.",
+   "uses": [
+    "lem-amb-etale-sum-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of germs and the assumed section formula yield the germ of the sum section of m tensor etaleLiftSection(n). The sum-stalk germ equation followed by the tensor-stalk unit equation computes its target image. Prove directly from the canonical sheaf pullback comparison that the inverse-image unit has the original target germ, with module coefficients; graph restriction preserves that germ by the pointed restriction equation and the map/pullback adjunction triangle. Transport along the lift triangle to obtain exactly the fixed etaleProjectionLiftStalkIso. Therefore the image is the same lift summand containing the tensor of the two original germs.",
+   "uses": [
+    "lem-amb-etale-sum-stalks",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "def-pur-etale-projection-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lower map TensorProduct.directSumLeft has exactly this formula on generators. Additivity, tensor induction, finite support and the stalk colimit universal property prove the equality, including the empty lift fibre.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-sum-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "def-weil-pbc-geometric-stalks",
+  "def-pur-etale-projection-data",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF stalk square, proved using the declared sum/tensor germ formulas and a direct module-valued proof of the canonical unit-germ equation. The etale localization comparison avoids a separate common-refinement construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale extension by zero projection formula tensor sheaves natural isomorphism",
+   "results": "8 results, headed by KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale and other ring-theoretic etale tensor statements; none is a sheaf projection normalization.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; the source library does supply etaleLowerShriekTensorIso and its joint naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lanProjectionMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "The required Kan projection API is in the source library, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek.*Tensor|etaleLowerShriekTensor",
+   "results": "msearch grep: 0 Mathlib hits. Local rg found WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection with the abstract isomorphism and its naturality, but no section/stalk normalization.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing isomorphism; the two normalization clauses have no existing declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of the etale lower shriek tensor projection formula on sections and geometric stalks",
+   "results": "8 hits about scheme normalization, formally etale rings and Zariski restriction-stalk isomorphisms; no etale lower-shriek section or geometric-stalk formula.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf projection formula on geometric stalks sends a summand tensor germ to the same summand of tensor germs",
+   "results": "8 ringed-space and Zariski stalk results, none for the etale sum projection.",
+   "date": "2026-10-19",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.directSumLeft",
+   "results": "Found directSumLeft_symm_lof_tmul and directSumLeft_tmul_lof in Mathlib.LinearAlgebra.DirectSum.TensorProduct.",
+   "date": "2026-10-19",
+   "verdict": "Use the inverse generator formula in the stalk reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*stalk|stalk.*projection",
+   "results": "No Mathlib match; local library search found the existing canonical sheaf projection and naturality but no normalization theorem.",
+   "date": "2026-10-19",
+   "verdict": "Prove normalization from the germ equations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap",
+  "date": "2026-10-18",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-co-smooth-etale-locality",
+   "place": "Tag 0GKF geometric-stalk square; parent proof Step 4; Tags 03S5 and 03Q1 for its fixed comparisons.",
+   "via": [
+    "lem-pur-etale-sheaf-projection-map",
+    "lem-pur-etale-support-map-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleProjectionStalkNormalization",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleProjectionStalkNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleProjection_stalk_normalization",
+  "statement": "theorem etaleProjection_stalk_normalization (A : Type (u + 1)) [CommRing A]\n    {V T : Scheme.{u}} (e : V ⟶ T) [Etale e]\n    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (p : etaleSheafTensor A T\n        ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj M) N ⟶\n      (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj\n        (etaleSheafTensor A V M ((upperStar (ModuleCat.{u + 1} A) e).obj N)))\n    (hp : ∀ (W : V.Etale) (m : M.obj.obj (op W))\n      (n : N.obj.obj\n        (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))),\n      p.hom.app (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))\n          (etaleSheafTensorSection A _ N\n            ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)\n            (etaleSumSection A e M W m) n) =\n        etaleSumSection A e _ W\n          (etaleSheafTensorSection A M _ W m (etaleLiftSection A e N W n)))\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :\n    ((Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).map p ≫\n        (etaleProjectionTargetStalkIso A e t M N).hom =\n      (etaleProjectionSourceStalkIso A e t M N).hom ≫\n        (etaleProjectionDirectSumTensorIso A e t M N).hom",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "independent cc review: Relocated 11 helper defs in EtaleSheafProjectionData byte-identical to live item module; theorem signature byte-identical; proof = inverse of existing etaleLowerShriekTensorIso + its naturality + two proved normalization theorems; all 4 modules + importer Sheaf.Paper.EtaleSumTensorTotalization compile clean; sorryAx only via pre-existing etaleSumSection (same in published build)"
+ }
+}

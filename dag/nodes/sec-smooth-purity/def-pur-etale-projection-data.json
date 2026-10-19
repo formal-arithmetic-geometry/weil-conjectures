@@ -1,0 +1,132 @@
+{
+ "id": "def-pur-etale-projection-data",
+ "kind": "definition",
+ "title": "Canonical section and stalk comparisons for etale sum projection",
+ "statement": "For a commutative ring A and an etale morphism e:V -> T of schemes, use the actual constant-A sheaf tensor, its tensor-on-sections map, the Kan-extension and sheafification units defining sum sections, and the inverse-image adjunction unit followed by graph restriction defining lifted sections. At each geometric point define the sum comparison by the germ-normalized exists_etaleSumStalksIso, the tensor comparison by the canonical monoidal stalk tensorator transported along the point universe-lift isomorphism, and the lift comparison by upperStarCompSheafFiberIso followed by its triangle-equation transport. Compose these to form the two vertical comparisons of the sum projection square. Its lower comparison is the actual TensorProduct.directSumLeft. These are precisely the unchanged definitions previously housed in the parent module.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKF, canonical section and geometric-stalk comparisons; parent statement helper definitions."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "lem-amb-etale-sum-stalks",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-etale-site",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "det-def-sfb-sheaf-tensor-structure",
+  "sk-def-sfb-sheaf-tensor",
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Expansion of Tag 0GKF in the already formalized Kan-extension model; no new mathematical route above the unit level."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale extension by zero projection formula tensor sheaves natural isomorphism",
+   "results": "8 results, headed by KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale and other ring-theoretic etale tensor statements; none is a sheaf projection normalization.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; the source library does supply etaleLowerShriekTensorIso and its joint naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lanProjectionMap\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "The required Kan projection API is in the source library, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek.*Tensor|etaleLowerShriekTensor",
+   "results": "msearch grep: 0 Mathlib hits. Local rg found WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection with the abstract isomorphism and its naturality, but no section/stalk normalization.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing isomorphism; the two normalization clauses have no existing declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalization of the etale lower shriek tensor projection formula on sections and geometric stalks",
+   "results": "8 hits about scheme normalization, formally etale rings and Zariski restriction-stalk isomorphisms; no etale lower-shriek section or geometric-stalk formula.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap",
+  "date": "2026-10-18",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-co-smooth-etale-locality",
+   "place": "Tag 0GKF, canonical section and geometric-stalk comparisons; parent statement helper definitions.",
+   "via": [
+    "lem-pur-etale-sheaf-projection-map",
+    "lem-pur-etale-support-map-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionData",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleSheafProjectionData.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSheafTensor",
+  "statement": "def etaleSheafTensor (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) (M N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSheafTensor",
+   "AlgebraicGeometry.Etale.etaleSheafTensorMap",
+   "AlgebraicGeometry.Etale.etaleSheafTensorSection",
+   "AlgebraicGeometry.Etale.etaleSumSection",
+   "AlgebraicGeometry.Etale.etaleLiftSection",
+   "AlgebraicGeometry.Etale.etaleProjectionSumStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionTensorStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionLiftStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionSourceStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionTargetStalkIso",
+   "AlgebraicGeometry.Etale.etaleProjectionDirectSumTensorIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-af247",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261019T005403-L-2762538",
+  "kind": "interface",
+  "note": "independent cc review: Relocated 11 helper defs in EtaleSheafProjectionData byte-identical to live item module; theorem signature byte-identical; proof = inverse of existing etaleLowerShriekTensorIso + its naturality + two proved normalization theorems; all 4 modules + importer Sheaf.Paper.EtaleSumTensorTotalization compile clean; sorryAx only via pre-existing etaleSumSection (same in published build)"
+ }
+}
