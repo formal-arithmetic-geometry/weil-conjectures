@@ -29,6 +29,7 @@ public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.PurityConventions
+import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Normalized ordinary etale specialization along a smooth section
 
@@ -363,8 +364,13 @@ private theorem isIso_sectionMap
     (f' : X' ⟶ Y') [HasCompactification f'] [QuasiCompact f']
     (b : Y' ⟶ Y) (v : X' ⟶ X) (sq : IsPullback v f' f b)
     (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ v = b ≫ s) :
-    IsIso (sectionMap A f f' b v sq s s' hs) :=
-  sorry
+    IsIso (sectionMap A f f' b v sq s s' hs) := by
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general A f d sq
+  have : IsIso (dualizingComplexBaseChangeMap A sq) := by
+    rw [isIso_dualizingComplexBaseChangeMap_iff]
+    infer_instance
+  unfold sectionMap
+  infer_instance
 
 /-- The two shifted complexes are actual locally constant free rank-one module sheaves;
 the canonical exceptional fibre maps are isomorphisms.

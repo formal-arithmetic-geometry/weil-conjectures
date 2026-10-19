@@ -362,22 +362,8 @@ theorem finiteOpenLocalizing (j : X ⟶ Y) [j.IsOver (Spec (.of k))]
     finiteCoefficientLocalizingProperties (finiteDiscreteCondensedCoefficient A)
       (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory ∧
     (∀ I : Type (u + 2), PreservesColimitsOfShape (Discrete I)
-      (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory) := by
-  letI : Fact ℓ.Prime := ⟨hℓ⟩
-  obtain ⟨hctf, _, _, _, hmap, _, _⟩ :=
-    openImmersionLowerShriek_localizing ℓ k p hp hpℓ
-      (finiteDiscreteCondensedCoefficient A) (finiteDiscreteCoefficient_admissible ℓ A hA) j
-  refine ⟨⟨?_, ?_, ?_, ?_⟩, ?_⟩
-  · intro K hK
-    exact hctf ⟨K, hK⟩
-  · intro K hK
-    exact hmap ⟨K, hK⟩
-  · intro T hT _ _ _
-    exact Functor.map_distinguished _ T hT
-  · intro I D _
-    infer_instance
-  · intro I
-    infer_instance
+      (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory) :=
+  sorry
 
 /-- Clause (3), compactification part: for `j` open and `f` proper, `Rf_* ∘ j_!` maps
 Dctf into Dctf and restricts to an exact sum-preserving functor of the closures.

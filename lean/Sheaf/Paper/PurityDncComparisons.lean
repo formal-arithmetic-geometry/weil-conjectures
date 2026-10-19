@@ -16,6 +16,7 @@ import Sheaf.Paper.PurityDncFamilyIntrinsic
 import Sheaf.Paper.PurityNormalCone
 import Sheaf.Paper.PuritySectionInvariantIntrinsic
 import Sheaf.Paper.VectorBundlePurity
+import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Canonical fibre comparisons for the deformation of a smooth section
 
@@ -58,7 +59,7 @@ noncomputable def sectionBaseChange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ
     (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ a = b ≫ s) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) b).leftDerivedFunctor.obj
         (Etale.sectionInvariant Λ f s) ≅ Etale.sectionInvariant Λ f' s' :=
-  letI := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+  letI := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension_general
     Λ f d sq
   letI := (Etale.isIso_dualizingComplexBaseChangeMap_iff Λ sq).2
     (inferInstanceAs (IsIso ((Etale.rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _))))

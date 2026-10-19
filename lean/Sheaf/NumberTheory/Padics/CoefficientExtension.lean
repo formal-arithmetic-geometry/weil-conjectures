@@ -111,23 +111,6 @@ noncomputable def coefficientExtensionRing (l : ℕ) [Fact l.Prime] (E : Type u)
     Type u :=
   coefficientExtensionIntegers l E ⧸ coefficientExtensionIdeal l E n
 
-/-- The coefficient ring carries the quotient commutative-ring structure. Naming this
-instance keeps specialization from selecting distinct quotient instances at each level
-of the ring hierarchy. (blueprint: def-weil-l-adic-coefficient-extension). -/
-noncomputable instance coefficientExtensionRingCommRing (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    CommRing (coefficientExtensionRing l E n) :=
-  inferInstanceAs (CommRing (coefficientExtensionIntegers l E ⧸ coefficientExtensionIdeal l E n))
-
-/-- The quotient algebra over the integer ring, also supplying its scalar module structure.
-(blueprint: def-weil-l-adic-coefficient-extension). -/
-noncomputable instance coefficientExtensionRingAlgebra (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    Algebra (coefficientExtensionIntegers l E) (coefficientExtensionRing l E n) :=
-  inferInstanceAs
-    (Algebra (coefficientExtensionIntegers l E)
-      (coefficientExtensionIntegers l E ⧸ coefficientExtensionIdeal l E n))
-
 /-- The transition homomorphism `A_{E,n+1} → A_{E,n}`, induced by the identity on `𝒪_E`.
 It is the quotient factor map for the inclusion of successive powers, hence surjective
 by `Ideal.Quotient.factor_surjective`.
