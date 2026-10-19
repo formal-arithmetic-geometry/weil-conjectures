@@ -16912,3 +16912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/U6/Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation (stage 3; reviewer PASS; first push; landing 20261019T034314-L-419391 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/U6/Sheaf.Paper.ConstantTowerDirectImageNormalization (stage 3; reviewer PASS; first push; landing 20261019T034314-L-419582 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/U6/Sheaf.Paper.SectionDerivedTensorData (stage 3; reviewer PASS; first push; landing 20261019T034315-L-419687 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/U7/Sheaf.Paper.ConstructibleCompactness (stage 3; reviewer PASS; first push; landing 20261019T034316-L-419788 (proof); batch 20261019T034248; modules 1; new nodes 0)

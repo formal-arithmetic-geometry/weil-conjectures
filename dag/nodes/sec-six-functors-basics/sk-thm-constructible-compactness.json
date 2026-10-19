@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "Fix a constructible sheaf $C$. Choose $d_C\\geq0$ from [sk-lem-uniform-constructible-ext] and put $T_C=\\tau_{\\geq-d_C}\\tau_{\\leq0}$. For every small family $(K_\\lambda)$ in $\\mathcal T$, its sum and each $T_CK_\\lambda$ belong to $\\mathcal T$ by [det-ambient-ind-derived-sums]. There is a canonical comparison $\\bigoplus_\\lambda T_CK_\\lambda\\to T_C(\\bigoplus_\\lambda K_\\lambda)$, obtained by applying $T_C$ to each coprojection. The good-truncation formulas of [def-kun-truncations], together with $H^r(\\bigoplus K_\\lambda)=\\bigoplus H^r(K_\\lambda)$ from [det-ambient-ind-derived-sums](1), show that this map induces the identity of $\\bigoplus_\\lambda H^r(K_\\lambda)$ for $-d_C\\leq r\\leq0$, and is the map between zero objects outside that interval. To apply the localization definition [def-weil-abstract-derived-category] directly, choose complex representatives of the $K_\\lambda$. Ambient sums are computed termwise by [det-def-localizing-closure-existence](1), and the good truncations are constructions on complexes by [def-kun-truncations]. Thus the comparison above is represented by the actual morphism of complexes induced from the truncated coprojections. The cohomology calculation shows that this morphism is a quasi-isomorphism, so localization inverts it. Its construction is natural in all coprojections and in the two truncation maps.",
+   "text": "Fix a constructible sheaf $C$. Obtain a nonnegative uniform Ext bound $d_C$ from [sk-lem-uniform-constructible-ext], transporting the Ext universe by the injective canonical change-of-universe equivalence. Put $T_C=\\tau_{\\geq-d_C}\\tau_{\\leq0}$, using the ordinary derived t-structure truncations of [def-kun-truncations]. By [det-ambient-ind-derived-sums], these truncations and ambient sums preserve $\\mathcal T$. For the truncation comparison, use the existing proved instance DerivedCategory.preservesColimitsOfShape_homologyFunctor in WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts: the coefficient module heart is Grothendieck abelian and has K-injective resolutions and exact coproducts. The coproduct of objects in degrees at least $a$ is again in degrees at least $a$, by preservation of homology. The universal property of truncGE therefore constructs an inverse to its coproduct comparison, with both inverse equations checked on coprojections. For truncLE, write the coproduct of its canonical inclusions as the composite of its coproduct comparison with the canonical inclusion on the sum. In degrees $n\\leq a$, the homology maps of the inclusions are isomorphisms, and preservation of coproducts makes the homology of their sum an isomorphism; cancel the inclusion on the sum. In degrees $n>a$, both sides have zero homology. DerivedCategory.isIso_iff, the cohomology criterion in the ordinary localization [def-weil-abstract-derived-category], proves that this comparison is invertible. Thus both truncations, and hence $T_C$, preserve the required coproducts, compatibly with their coprojections. The good-truncation bounds place every $T_CK_\\lambda$ in the common interval $[-d_C,0]$.",
    "uses": [
     "sk-lem-uniform-constructible-ext",
     "det-ambient-ind-derived-sums",
@@ -76,11 +76,10 @@
    }
   },
   {
-   "text": "The compact objects of $\\mathcal T$ are closed under integer shifts and distinguished triangles by [lem-sc-compact-objects-thick] (Stacks, Tag 09QH), since Step 1 supplied a triangulated category with the required small coproducts. Let $C\\in\\Dbc(X,\\Lambda)$ and choose $a\\leq b$ with $H^r(C)=0$ outside $[a,b]$; each $H^r(C)$ is constructible by [sk-def-sfb-constructible]. By [lem-weil-pbc-truncation-triangle] there are distinguished triangles $\\tau_{\\leq n-1}C\\to\\tau_{\\leq n}C\\to H^n(C)[-n]\\to(\\tau_{\\leq n-1}C)[1]$. All their terms lie in $\\mathcal T$ by Step 1. The truncation cohomology formulas [def-kun-truncations] give $\\tau_{\\leq a-1}C\\cong0$ and $\\tau_{\\leq b}C\\cong C$. Starting with the compact zero object and applying triangle closure successively for $n=a,\\ldots,b$, Step 3 and shift closure show that every $\\tau_{\\leq n}C$, hence $C$, is compact in $\\mathcal T$. This proves the displayed comparison for every bounded constructible $C$.",
+   "text": "Compact objects of the full triangulated subcategory $\\mathcal T$ form a triangulated, isomorphism-closed class by [lem-sc-compact-objects-thick], since Step 1 supplies its coproducts. Map this class to the ambient derived category along the full inclusion. The existing proved lemma DerivedCategory.prop_of_bounded in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure applies to this image and the isomorphism-closed constructible heart property of [sk-def-sfb-constructible]. Its degree-zero hypothesis is exactly Step 3. Its boundedness and homology hypotheses are exactly the definition of $\\Dbc$. The lemma performs finite Postnikov induction using the canonical t-structure truncation triangles: the lower tail is zero, the successive layers are shifts of cohomology, and triangulated closure supplies the induction step. This retains the unit's finite-extension argument while reusing the already proved library induction instead of the separate complex-representative theorem lem-weil-pbc-truncation-triangle. It gives an object of $\\mathcal T$ isomorphic to $C$, compact there. Fullness lifts the ambient isomorphism to $\\mathcal T$, and isomorphism closure transports compactness to $C$. Step 1 now identifies it with the displayed ambient comparison for every bounded constructible $C$.",
    "uses": [
     "lem-sc-compact-objects-thick",
     "sk-def-sfb-constructible",
-    "lem-weil-pbc-truncation-triangle",
     "def-kun-truncations"
    ],
    "elementary": false,
@@ -114,13 +113,12 @@
   "sk-lem-finite-window",
   "det-constructible-compactness-bounded",
   "lem-sc-compact-objects-thick",
-  "sk-def-sfb-constructible",
-  "lem-weil-pbc-truncation-triangle"
+  "sk-def-sfb-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-constructible-compactness/sk-thm-constructible-compactness.proof.md",
-  "place": "All four paragraphs; expand the naturality square and finite Postnikov induction, using Stacks 09QH and 08J5"
+  "place": "All four paragraphs, implemented by U7 using the existing homology-coproduct API and DerivedCategory.prop_of_bounded for the same finite Postnikov induction; Stacks 09QH and 08J5."
  },
  "mathlib_searches": [
   {
@@ -229,7 +227,6 @@
  },
  "tool_uses": [
   "lem-sc-compact-objects-thick",
-  "lem-weil-pbc-truncation-triangle",
   "def-kun-truncations",
   "sk-lem-finite-window",
   "sk-lem-uniform-constructible-ext"
@@ -277,5 +274,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Both rational coefficients are conjuncts, using the canonical finite-subextension and algebraic-closure ring objects. HasConstructibleCompactness expands both assertions: IsCompactObject inside the full localizingClosure of the actual finite-constant-model Dbc class, and the canonical ambient Hom comparison for every small family whose cohomology lies in ObjectProperty.ind of the same constructibility predicate. The comparison is real data given by DirectSum.toAddMonoid of postcomposition with coprojections. No common bound, finite Tor amplitude or derived completeness is assumed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261019T034316-L-419788",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
