@@ -131,9 +131,9 @@
    }
   },
   {
-   "text": "Suppose a refinement u connects c_1=(j_1,r_1) to c_2=(j_2,r_2), with r_1=r_2u. The canonical comparison F^{c_2}\\to F^{c_1} is Rr_{2,*}(alpha_u) followed by the inverse direct-image compositor, and its inverse is the comparison in the other direction [lem-amb-etale-compact-comparisons]. Apply the refinement instance of Step 6 and the proper-composition equation of Step 5. They give q^{c_1}T(phi_A^{c_1,c_2})=phi_B^{c_1,c_2}q^{c_2}; multiplying by the two phi inverses gives the equation in the statement in either orientation. If a comparison is defined through a common refinement d, write it as phi^{c',d}(phi^{c,d})^{-1}; substitute the two already proved squares and cancel phi^{c,d}. The coherent independence and cocycle in [lem-amb-etale-compact-comparisons] show that this works for the canonical comparison, regardless of d. The site version of Step 6 and proper pasting in Step 5 give the identical refinement square with c_{h,R}.",
+   "text": "Use the normalized scalar-coherence refinement clause of [lem-pur-etale-compact-scalar-coherence], which proves the proper-composition and common-refinement calculation described here. Its open normalization identifies the inverse of ExceptionalCoefficients.openIso with properOpenCoefficientOpenInverse. Equality of inverse isomorphisms therefore identifies its compactScalarMap with the specified etaleCoefficientMap. The schemes are Noetherian because they are finite type over a field. The lower bound for the actual scalar extension is supplied by Step 4. Apply the refinement clause to obtain the etale equation. For the pro-etale equation, apply Step 4 to c and d, map the etale refinement equation by exact site comparison, and use naturality of delta on the canonical etale compactification comparison. Precompose with the scalar extension of the inverse c-site comparison. Substitute the two site/coefficient squares and cancel the inverse/hom pairs. The remaining maps are definitionally the two siteRefinement maps. This proves the specified canonical comparison, including the common-refinement independence already contained in the normalized etale refinement clause.",
    "uses": [
-    "lem-amb-etale-compact-comparisons"
+    "lem-pur-etale-compact-scalar-coherence"
    ],
    "elementary": false,
    "source": {
@@ -182,7 +182,7 @@
    }
   },
   {
-   "text": "Finally the counit-transport implication is a substitution, valid whenever an etale adjunction counit is transported by the stated formula. This does not require invoking an admissibility theorem for arbitrary finite rings. Write C_R=c_{h,R}, and let a:T_U H_A \\to H_B T_V be a right-functor comparison with etale identity epsilon_B^et F_B^et(a)=T_V(epsilon_A^et)(beta_h(H_A-))^{-1}. The transported counit is nu_V^*(epsilon_R^et)C_R^{-1}, by the formula specified in the statement. Solve Step 4's square for b_h^{-1}: T_V(C_A)^{-1} b_h^{-1}=delta_V^{-1}nu_V^*(beta_h^{-1})C_B^{-1}F_{h,B}(delta_U), at the indicated H_A input. Substitute this into T_V(nu_V^*epsilon_A^et C_A^{-1})b_h^{-1}. Naturality of delta moves T_V(nu^*epsilon_A^et)delta^{-1} to delta^{-1}nu^*(T_V epsilon_A^et); the etale identity then replaces T_V epsilon_A^et beta_h^{-1} by epsilon_B^et F_B^et(a). Naturality of C_B moves nu^*F_B^et(a) across C_B^{-1}. The result is the transported B-counit followed by F_{h,B} of the transported comparison a, which is exactly the coefficient-counit identity with b_h. Every comparison used above is natural, either by its cited statement or as an adjunct of a natural map, so all equations are natural in L. The coefficient change A\\to B was arbitrary throughout; all uses of derived tensor were on K-flat models or by its canonical pullback comparison.",
+   "text": "Finally the counit-transport implication is a substitution, valid whenever an etale adjunction counit is transported by the stated formula. This does not require invoking an admissibility theorem for arbitrary finite rings. Write C_R=c_{h,R}, and let a:T_U H_A \\to H_B T_V be a right-functor comparison with etale identity epsilon_B^et F_B^et(a)=T_V(epsilon_A^et)(beta_h(H_A-))^{-1}. The transported counit is nu_V^*(epsilon_R^et)C_R^{-1}, by the formula specified in the statement. Solve Step 4's square for b_h^{-1}: T_V(C_A)^{-1} b_h^{-1}=delta_V^{-1}nu_V^*(beta_h^{-1})C_B^{-1}F_{h,B}(delta_U), at the indicated H_A input. Substitute this into T_V(nu_V^*epsilon_A^et C_A^{-1})b_h^{-1}. Naturality of delta moves T_V(nu^*epsilon_A^et)delta^{-1} to delta^{-1}nu^*(T_V epsilon_A^et); the etale identity then replaces T_V epsilon_A^et beta_h^{-1} by epsilon_B^et F_B^et(a). Naturality of C_B moves nu^*F_B^et(a) across C_B^{-1}. The result is the transported B-counit followed by F_{h,B} of the transported comparison a, which is exactly the coefficient-counit identity with b_h. Every comparison used above is natural, either by its cited statement or as an adjunct of a natural map, so all equations are natural in L. The coefficient change A\\to B was arbitrary throughout; all uses of derived tensor were on K-flat models or by its canonical pullback comparison. The Lean counit proof isolates the categorical transport calculation: apply the site/coefficient square at HA(N), naturality of the B compact-support site comparison on a (viewed in D+), site pullback of the assumed etale counit identity, and naturality of delta at the A-counit; cancel the scalar image of the inverse A-site comparison and the hom/inv pairs. Naturality of the coefficient map is proved directly: transpose the open inverse under the B-open adjunction, use naturality of the A-open unit and scalar/pullback inverse, pass to inverse isomorphisms, and compose with naturality of scalarMate.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -203,6 +203,7 @@
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-cbc-proper-open-interchange-coherence",
+  "lem-pur-etale-compact-scalar-coherence",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-etale-flat-constructible",
   "lem-sp-acyclic-flat-proper-coefficient-model",
@@ -223,7 +224,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts and Locality; expanded counit-mate, proper/open, compatible-tower and component calculations, following Stacks Tags 0F7I, 0F7J and 0GL6"
+  "place": "Charts and Locality; expanded counit-mate, proper/open, compatible-tower and component calculations, following Stacks Tags 0F7I, 0F7J and 0GL6; Y8 stage 3: normalized scalar refinement and explicit categorical cancellation for refinement/counit, direct open-unit transpose for naturality"
  },
  "mathlib_searches": [
   {
@@ -624,5 +625,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair R1/R2/R3/R4: proEtaleCoefficientMap is now definitionally the genuine transport of reductionDirectImageComparison via normalized scalar/support realization comparisons. Every pro-etale statement uses it. Finite rings are small and their fixed-module presentations use ULift into u+1, leaving site objects u+1 and morphisms u distinct. The unused aliases and independent fixed composite are removed. No mathematical clause changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261019T034406-L-428261",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

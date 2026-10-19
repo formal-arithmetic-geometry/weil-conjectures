@@ -36,36 +36,10 @@ public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.Paper.WitnessCompatibility
 public import Sheaf.Paper.PurEtaleScalarMateProjection
 public import Sheaf.Paper.ProperOpenCoefficientRefinement
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import Sheaf.Paper.EtaleCompactScalarCoherence
 import Sheaf.AlgebraicGeometry.EtaleSumStalks
-import Mathlib.Algebra.DirectSum.Module
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
-import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.Paper.AcyclicFlatProperCoefficientModel
-import Sheaf.Paper.ProperOpenCoefficientMate
 import Sheaf.Paper.RefinementCoefficientMate
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.Paper.EtaleProEtaleCoefficientTransport
 
 /-! # Etale/pro-etale coefficient compatibility
@@ -261,6 +235,35 @@ theorem etaleProEtaleCoefficientCompatibility
           ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩ := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem etaleCoefficientMap_eq_compactScalarMap
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (L : Etale.DerivedCategoryModule A X) :
+    etaleCoefficientMap φ c L = (Etale.compactScalarMap φ c).app L := by
+  have hi : ((Etale.ExceptionalCoefficients.openIso φ c.i).app L).inv =
+      (Etale.properOpenCoefficientOpenIso φ c.i L).inv :=
+    Etale.compactScalarOpen_normalization φ c.i L
+  have he := Iso.ext_inv hi
+  unfold etaleCoefficientMap Etale.compactScalarMap Etale.ExceptionalCoefficients.compactSupportMap
+  rw [← he]
+  rfl
+
+private theorem coefficientRefinementTransport
+    {C : Type*} [Category C] {Uc Vc Ud Vd Wc Wd Pc Pd Qc Qd : C}
+    (ec : Uc ≅ Vc) (ed : Ud ≅ Vd) (cc : Wc ≅ Qc) (cd : Wd ≅ Qd)
+    {rc : Vc ⟶ Wc} {rd : Vd ⟶ Wd} {δc : Uc ⟶ Pc} {δd : Ud ⟶ Pd}
+    {βc : Pc ⟶ Qc} {βd : Pd ⟶ Qd} {t : Uc ⟶ Ud} {t' : Pc ⟶ Pd} {s : Qc ⟶ Qd}
+    (hc : ec.hom ≫ rc = δc ≫ βc ≫ cc.inv)
+    (hd : ed.hom ≫ rd = δd ≫ βd ≫ cd.inv)
+    (hn : t ≫ δd = δc ≫ t') (hb : t' ≫ βd = βc ≫ s) :
+    (ec.inv ≫ t ≫ ed.hom) ≫ rd = rc ≫ cc.hom ≫ s ≫ cd.inv := by
+  apply (cancel_epi ec.hom).mp
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [hd, reassoc_of% hc, reassoc_of% hn, reassoc_of% hb]
+  simp only [Iso.inv_hom_id_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Coefficients commute with the canonical compactification change, including a change
 through any common refinement, on both sites. The final delta factors express the
 pro-etale identity at the retained etale origin of the actual scalar-extended object.
@@ -316,8 +319,44 @@ theorem etaleProEtaleCoefficientCompatibility_refinement
         (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map
           ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) ≫
         (siteRefinement (ULift.{u + 1, u} B) c d ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj
-          L.obj, hLB⟩).hom) := by
-  sorry
+          L.obj, hLB⟩).hom)  := by
+  obtain ⟨hLB, _, _, hc⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f c L _hL
+  obtain ⟨_, _, _, hd⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f d L _hL
+  let LB : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :=
+    ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of k))
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian
+    (Y ↘ Spec (.of k))
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  let : IsNoetherian X := ⟨⟩
+  let : IsNoetherian Y := ⟨⟩
+  have he := (Etale.etaleCompactScalarCoherence (uliftRingHom φ) f c).2.2 d L
+    ⟨LB, rfl⟩
+  simp only [← etaleCoefficientMap_eq_compactScalarMap] at he
+  refine ⟨hLB, he, ?_⟩
+  have hn := (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.naturality
+    ((Etale.rightDerivedLowerShriekOfCompactificationIso (ULift.{u + 1, u} A) c d).hom.app
+      L.obj)
+  dsimp only [Functor.comp_map] at hn
+  have hb := congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map) he
+  simp only [Functor.map_comp] at hb
+  have ht := coefficientRefinementTransport
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).app L).symm)
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) d).app L).symm)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app LB)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) d).app LB) hc hd hn hb
+  dsimp only [siteRefinement, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  simp only [Functor.map_comp, Category.assoc] at ht ⊢
+  convert ht using 1 <;> rfl
+
 
 /-- The same coefficient maps respect geometric composition, on each site and for any
 three compactifications. Scalar restriction need not be faithful in the derived category.
@@ -456,6 +495,22 @@ theorem etaleProEtaleCoefficientCompatibility_sum
         (sumCoefficientIso φ f).hom.app L := by
   sorry
 
+private theorem coefficientCounitTransport
+    {C : Type*} [Category C] {U V W D E P Q R S F : C}
+    (e : U ≅ V) (c₀ : D ≅ Q) (c₁ : E ≅ R) (z : F ≅ S)
+    {b : V ⟶ W} {d : W ⟶ D} {a : D ⟶ E} {δ : U ⟶ P}
+    {β : P ⟶ Q} {a' : Q ⟶ R} {ε : R ⟶ S} {r : P ⟶ S} {t : U ⟶ F}
+    (hs : e.hom ≫ b ≫ d = δ ≫ β ≫ c₀.inv)
+    (hn : a ≫ c₁.hom = c₀.hom ≫ a')
+    (hc : β ≫ a' ≫ ε = r) (hd : t ≫ z.hom = δ ≫ r) :
+    b ≫ d ≫ a ≫ c₁.hom ≫ ε ≫ z.inv = e.inv ≫ t := by
+  apply (cancel_epi e.hom).mp
+  rw [reassoc_of% hs, reassoc_of% hn]
+  simp only [Iso.inv_hom_id_assoc]
+  rw [reassoc_of% hc, ← reassoc_of% hd]
+  simp
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Transport of an actual etale adjunction counit carries its coefficient identity to
 the identity for the named pro-etale coefficient map. The two c-inverses in the paper
 are `compactSupportSiteComparison.hom` with the existing library's opposite orientation.
@@ -524,9 +579,81 @@ theorem etaleProEtaleCoefficientCompatibility_counit
       ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).hom.app
           ((AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} A) X).obj ⟨HA.obj N, hHA⟩) ≫
         (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y).mapDerivedCategory.map
-          (adjA.counit.app N)) := by
-  sorry
+          (adjA.counit.app N))  := by
+  let LA := (AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} A) X).obj ⟨HA.obj N, hHA⟩
+  let MB := (AdjunctionTransfer.etaleToPlus (ULift.{u + 1, u} B) X).obj
+    ⟨HB.obj ((Etale.scalarExtension (uliftRingHom φ) Y).obj N), hHB⟩
+  obtain ⟨hLB, _, _, hs⟩ := etaleProEtaleCoefficientCompatibility
+    ell p _hp _hEll k _hA _hB φ f c LA hHA
+  let LB : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :=
+    ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj (HA.obj N), hLB⟩
+  have hn := (compactSupportSiteComparison (ULift.{u + 1, u} B) c).hom.naturality
+    (ObjectProperty.homMk a : LB ⟶ MB)
+  dsimp only [Functor.comp_map] at hn
+  have hc := congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map)
+    _hCounit
+  simp only [Functor.map_comp] at hc
+  have hd := (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.naturality
+    (adjA.counit.app N)
+  dsimp only [Functor.comp_map] at hd
+  have ht := coefficientCounitTransport
+    ((liftedScalarExtension φ Y).mapIso
+      ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).app LA).symm)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app LB)
+    ((compactSupportSiteComparison (ULift.{u + 1, u} B) c).app MB)
+    ((pbcComparisonReduction.{u} Y (uliftRingHom φ)).app N) hs hn hc hd
+  simp only [Functor.map_comp, Category.assoc]
+  convert ht using 1 <;> rfl
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem openCoefficientInverse_naturality
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j]
+    {L M : Etale.DerivedCategoryModule A X} (a : L ⟶ M) :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+        ((Etale.scalarExtension φ X).map a) ≫ Etale.properOpenCoefficientOpenInverse φ j M =
+      Etale.properOpenCoefficientOpenInverse φ j L ≫ (Etale.scalarExtension φ T).map
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map a) := by
+  unfold Etale.properOpenCoefficientOpenInverse
+  apply Adjunction.homEquiv_naturality_right_square
+  have hu := (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} A) j).unit.naturality a
+  dsimp only [Functor.id_map, Functor.comp_map] at hu
+  rw [← Category.assoc, ← Functor.map_comp, hu, Functor.map_comp, Category.assoc]
+  rw [Category.assoc]
+  exact congrArg ((Etale.scalarExtension φ X).map
+    ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} A) j).unit.app L) ≫ ·)
+    ((Etale.properOpenCoefficientPullbackIso φ j).inv.naturality
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map a))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem openCoefficientHom_naturality
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j]
+    {L M : Etale.DerivedCategoryModule A X} (a : L ⟶ M) :
+    (Etale.scalarExtension φ T).map
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map a) ≫
+        (Etale.properOpenCoefficientOpenIso φ j M).hom =
+      (Etale.properOpenCoefficientOpenIso φ j L).hom ≫
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+          ((Etale.scalarExtension φ X).map a) := by
+  have h :
+      (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+          ((Etale.scalarExtension φ X).map a) ≫
+          (Etale.properOpenCoefficientOpenIso φ j M).inv =
+        (Etale.properOpenCoefficientOpenIso φ j L).inv ≫
+          (Etale.scalarExtension φ T).map
+            ((Etale.openImmersionLowerShriek
+              (ModuleCat.{u + 1} A) j).mapDerivedCategory.map a) :=
+    openCoefficientInverse_naturality φ j a
+  apply (cancel_mono (Etale.properOpenCoefficientOpenIso φ j M).inv).mp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [h, Iso.hom_inv_id_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of the objectwise proper/open etale coefficient map on the stated input
 class. All other constituent maps are already natural transformations or composites of
 them; the site formulas are their conjugates on the full bounded-below subcategory.
@@ -561,6 +688,25 @@ theorem etaleProEtaleCoefficientCompatibility_naturality
     etaleCoefficientMap φ c L ≫
       (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).map
         ((Etale.scalarExtension φ X).map a) := by
-  sorry
+  unfold etaleCoefficientMap
+  have h := (Etale.scalarMate φ c.g).naturality
+    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.map a)
+  dsimp only [Functor.comp_map] at h
+  change (Etale.scalarExtension φ Y).map
+      ((Etale.lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.map a)) ≫
+      (Etale.scalarMate φ c.g).app
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj M) ≫
+      (Etale.lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor.map
+        (Etale.properOpenCoefficientOpenIso φ c.i M).hom =
+    ((Etale.scalarMate φ c.g).app
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj L) ≫
+      (Etale.lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor.map
+        (Etale.properOpenCoefficientOpenIso φ c.i L).hom) ≫
+      (Etale.lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor.map
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) c.i).mapDerivedCategory.map
+          ((Etale.scalarExtension φ X).map a))
+  rw [← Category.assoc, h, Category.assoc, ← Functor.map_comp,
+    openCoefficientHom_naturality φ c.i a, Functor.map_comp, Category.assoc]
 
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility
