@@ -348,5 +348,33 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-973288c49 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, against ILO IX 2.1 (printed pp.133-134, pdf pp.139-140) and Stacks 0BRM (DVR Abhyankar) / 0BMB (purity). The item statement is unchanged, and none of the item, the new nodes or the report cites SGA. Steps 1-10 check out against each cited statement. For R into D (Step 2), D[1/f] is a clopen piece of the flat P_R and is nonzero because O_{Z,z} injects into D. In Step 4 a projection of L tensor_K E onto E gives the embedding. In Step 6, D is the integral closure of R in L, which is B~ intersected with E^H, i.e. B~^H. In Step 8 the invariant-monomial basis comes from the unit differences 1-zeta^a. In Step 9 the descent uses the ind-etale map A_1 to R, and the point comes from A to R, not from the descent node. In Step 10, W is clopen in Z x_Y U. The case r=0 holds. New lem-per-snc-root-algebra-structure is true: the closed fibre is k[x]/(x^n), so B is local and strictly henselian; m_B has d generators, so B is regular; the n^r rotations are distinct, so E/K is Galois; the discriminant shows B[1/f] is finite etale over R[1/f]. New lem-per-snc-root-punctured-torsor-splitting is true. Inertia of order dividing an invertible n is tame. 0BRM at each (x_i) and then 0BMB purity over the regular B make the normalization etale, and the cover splits over the strictly henselian B. I checked r=0, a disconnected P, and y^2=ut. Neither new node restates a clause of the item. Both are multi-parameter generalizations of the single-divisor sbc nodes, not duplicates. There is no cycle. Batch-5 flag (chart node reaching def-trf-strict-normal-crossings-boundary): accepted. Its trace-formula-chapter closure is only definitions plus generic algebra (UFD 0AG0, Pic, K0/determinant), with no thm-trf, sk-thm or batch-4 node, and the parent already cites the chart node. I accept the generic algebra tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.SncParameterRootQuotient",
+  "declaration": "AlgebraicGeometry.exists_snc_parameter_root_quotient",
+  "declarations": [
+   "AlgebraicGeometry.sncParameterRootRing",
+   "AlgebraicGeometry.IsSncParameterEquations",
+   "AlgebraicGeometry.IsSncParameterGerms",
+   "AlgebraicGeometry.IsSncParameterRootQuotientAt",
+   "AlgebraicGeometry.sncTorsorNormalization",
+   "AlgebraicGeometry.sncTorsorNormalizationMap",
+   "AlgebraicGeometry.exists_snc_parameter_root_quotient"
+  ],
+  "file": "lean/Sheaf/DeligneLaumon/SncParameterRootQuotient.lean",
+  "statement": "theorem exists_snc_parameter_root_quotient (Y : Scheme.{u}) [IsIntegral Y] [IsNoetherian Y] (_hYregular : IsRegularScheme Y) (T : Y.IdealSheafData) (_hT : IsStrictNormalCrossingsBoundary T) {G : Type v} [Group G] [Finite G] (_hn : IsUnit (Nat.card G : Γ(Y, ⊤))) (cover : Scheme.GaloisCoverAction G (Scheme.Opens.toScheme T.support.compl)) [ConnectedSpace cover.Z] [_hfinite : IsFinite (sncTorsorNormalizationMap T cover)] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (ybar : Spec (.of Ω) ⟶ Y) (zbar : Spec (.of Ω) ⟶ sncTorsorNormalization T cover) (_hzbar : zbar ≫ (sncTorsorNormalizationMap T cover) = ybar) : (∃ (A : CommRingCat.{u}) (_ : IsNoetherianRing A) (uA : Spec A ⟶ Y) (uΩ : Spec (.of Ω) ⟶ Spec A) (r : ℕ) (t : Fin r → A), IsSncParameterRootQuotientAt T (sncTorsorNormalizationMap T cover) ybar zbar (Nat.card G) r A uA uΩ t) ∧ (∀ (U₀ : Scheme.{u}) (u₀ : U₀ ⟶ Y) [Etale u₀] (u₀Ω : Spec (.of Ω) ⟶ U₀), u₀Ω ≫ u₀ = ybar → ∀ (r : ℕ) (t₀ : Fin r → Γ(U₀, ⊤)), @IsSncParameterGerms U₀ (LocallyOfFiniteType.isLocallyNoetherian u₀) (u₀ ⁻¹' (T.support : Set Y)) (Scheme.SpecToEquivOfField Ω U₀ u₀Ω).1 r t₀ → ∃ (A : CommRingCat.{u}) (_ : IsNoetherianRing A) (uA : Spec A ⟶ Y) (uΩ : Spec (.of Ω) ⟶ Spec A) (q : Spec A ⟶ U₀) (t : Fin r → A), Etale q ∧ q ≫ u₀ = uA ∧ uΩ ≫ q = u₀Ω ∧ (∀ i, (Scheme.ΓSpecIso A).inv (t i) = q.appTop (t₀ i)) ∧ IsSncParameterRootQuotientAt T (sncTorsorNormalizationMap T cover) ybar zbar (Nat.card G) r A uA uΩ t)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The auxiliary definitions only spell out this node’s displayed root algebra, parameter-equation clauses, canonical relative normalization, and quotient conclusion. Invariants are Mathlib algebra equalizers. Relative normalization of the connected normal etale torsor is the normalization in its function field; no arbitrary field extension or identification of the torsor with its normalization is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caab65cf7",
+  "group": "N4",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records (locnoeth, GaloisCoverAction and normalizationIn read from clones/side), the parent KummerCharts module, the module and the report. All hypotheses and conclusion clauses match: regular SNC parameter equations (integral distinct components covering the boundary, germs in m, extend to a regular system of parameters), V_U=D(prod t), zeta conditions, H-action pinned by the rotation formula, B^H as exact fixed subalgebra, pointed étale Noetherian W iso Spec B^H over U, and a prescribed-neighbourhood refinement with pulled-back t in the right quantifier order. Edge cases r=0 (forced), n=1, nonempty V and universes are fine. No hollow defs, sorry only, docstrings and blueprint tags present, statement verbatim, only the item lean field changed versus live. nt_compile --json clean (2.3 s); an injected-error control fails, so the compile is genuine. Advisory: uses the relative normalization of V'->Y instead of the recorded normalizationIn k(V') that the parent uses; same object, but stage 3 needs a bridge. Unused proof-dep imports. Second reading is the writer's own pass."
  }
 }
