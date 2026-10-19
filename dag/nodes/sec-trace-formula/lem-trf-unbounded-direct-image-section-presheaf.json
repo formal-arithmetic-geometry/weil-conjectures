@@ -274,5 +274,40 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d9f0e0b74 (reviewer sub-agent of L); spot-checked: I read Stacks cohomology.tex 0D5X/0D5W/08FE/0BKJ (lines 7880-7960). The item's statement, stmt_deps, source and blueprint fields are byte-identical to the live unsplit node, and the old mathlib_searches are kept as a prefix. The statement matches 0D5X: arbitrary ringed spaces, unbounded D, all integers q. Steps: S1 builds one sheaf map r: f_*I_X(C) -> I_Y(f_*I_X(C)) from functorial K-injective resolutions; Gamma(f^-1V, I) = Gamma(V, f_*I) holds by the def-pc direct-image section formula. S2 uses the restriction-K-injective and exactness-of-restriction statements, and B|_V = (f_V)_*(I|_U) is elementary (08FE). S3 follows the 0D5W singleton-space route: lem-pc-ringed-space-direct-image-kinjective-acyclic (any ringed-space maps, unbounded I, no flatness) gives eta at B|_V invertible, and the written naturality square, with eta invertible on the K-injective J|_V, shows Gamma(V,r) is a quasi-isomorphism. S4 gives restriction and derived naturality through the K-injective homotopy-equivalence consequence and the localization universal property. S5 uses lem-pc-ringed-space-sheafification-cohomology with K=QB; its presheaf is exactly V -> H^q(Gamma(V, I_Y(B))). Edge cases checked: V empty (zero ring point), f=id, negative q, non-flat maps; the proof never claims f_*I is K-injective. Duplicate check: the 0D5X/0D5W hits in the DAG are scheme, qcqs/QCoh or pro-etale bounded-below variants only. There are no new nodes and no cycle. I accept the five declared generic ringed-space tool_uses; no SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf",
+  "declaration": "AlgebraicGeometry.RingedSpace.unboundedDirectImage_sectionPresheaf",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.localAbelianSections",
+   "AlgebraicGeometry.RingedSpace.localAbelianPresheaves_hasDerivedCategory",
+   "AlgebraicGeometry.RingedSpace.localSectionsEnoughKInjectives",
+   "AlgebraicGeometry.RingedSpace.derivedLocalAbelianSections",
+   "AlgebraicGeometry.RingedSpace.localHypercohomologyPresheaf",
+   "AlgebraicGeometry.RingedSpace.sectionDerivedDirectImage",
+   "AlgebraicGeometry.RingedSpace.inverseOpenHypercohomologyPresheaf",
+   "AlgebraicGeometry.RingedSpace.localLerayCompositeUnit",
+   "AlgebraicGeometry.RingedSpace.localLerayComparison",
+   "AlgebraicGeometry.RingedSpace.localHypercohomologyComparison",
+   "AlgebraicGeometry.RingedSpace.localSectionComplexSheafificationIso",
+   "AlgebraicGeometry.RingedSpace.localHypercohomologySheafificationModel",
+   "AlgebraicGeometry.RingedSpace.localHypercohomologySheafificationAt",
+   "AlgebraicGeometry.RingedSpace.unboundedDirectImage_sectionPresheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDirectImageSectionPresheaf.lean",
+  "statement": "theorem unboundedDirectImage_sectionPresheaf (f : X ⟶ Y) (q : ℤ) : ∃ e : inverseOpenHypercohomologyPresheaf f q ≅ sectionDerivedDirectImage f ⋙ localHypercohomologyPresheaf Y q, e.hom = localHypercohomologyComparison f q ∧ ∃ s : (sectionDerivedDirectImage f ⋙ localHypercohomologyPresheaf Y q) ⋙ presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} ≅ sectionDerivedDirectImage f ⋙ (DerivedCategory.homologyFunctor (ringedSiteModules.{u} (moduleRings Y)) q ⋙ SheafOfModules.toSheaf (moduleRings Y)), (∀ E : DerivedCategory (ringedSiteModules.{u} (moduleRings X)), s.app E = localHypercohomologySheafificationAt q ((sectionDerivedDirectImage f).obj E)) ∧ ∃ t : inverseOpenHypercohomologyPresheaf f q ⋙ presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} ≅ sectionDerivedDirectImage f ⋙ (DerivedCategory.homologyFunctor (ringedSiteModules.{u} (moduleRings Y)) q ⋙ SheafOfModules.toSheaf (moduleRings Y)), t = Functor.isoWhiskerRight e (presheafToSheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}) ≪≫ s",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The presheaf comparison is the unique transformation preserving total-right-derived units. Both sheafification isomorphisms are specified by the canonical exact-sheafification comparison on K-injective representatives. All comparisons are natural transformations on the unbounded derived category, with no finiteness or locality assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98be7edaf",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Statement matches Stacks 0D5W/0D5X and the node: arbitrary RingedSpace f, unbounded D(O_X) of ringedSiteModules.{u}, q : ℤ. Rf_* = def-sfb rightDerivedFunctorOfQuasiIsoResolutions on the published moduleDirectImage with real K-injective resolutions. e.hom is pinned to the canonical Leray comparison (unique preimage under the universal bijection), s is pinned componentwise to the canonical K-injective sheafification model, t = sheafified e ≫ s. Everything is a natural iso of functors, so naturality in E and restriction compatibility hold; no bound, scheme or locality hypothesis. Item differs from live only in lean. The §1(B) existing:true record for def-weil-locally-ringed-space-morphism replaces live lean:null and is verbatim with Mathlib LocallyRingedSpace.lean:79-80. lean.statement is verbatim, declarations = the 14 defined names, one sorry, docstrings carry source and blueprint, lines ≤100. No duplicate notion (SupportLongExact sectionHypercohomologyFunctor is bounded-below on abelian sheaves). nt_compile --json clean, 34.2 s at load 97. Advisories: the ∃ t clause holds by definition; left presheaf is derived f_* then sections (bridge needed to the X-side form); Rf_* is def-sfb, not def-pc derivedModuleDirectImage; SiteCoveringAxioms import unused."
  }
 }

@@ -269,5 +269,49 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7edd8dd45 (reviewer sub-agent of L); spot-checked: Read the item, all 19 proof deps and 14 stmt deps (statements and blueprint_update texts), the source prop-arithmetic-roots.md and .proof.md in main-20261015 (the clause has no proof there, so the agent origin is right), unit sk-thm-rh and the chapter. Step 1: constant-weil clause 5, the common-stage clause of derived-direct-image and Fib_s clause 4 give RGamma(X,(Qlb)_X)=(Ql,C); proper means separated finite type and l!=p. Step 2: the coefficient-cohomology-modules display makes xi_i the identity at stage Ql, and the lemma's tower clause gives independence of stage. Step 3: the Qlb paragraphs of point-transport and square-exchange, Fib_s on morphisms and functoriality of J_L in point-fd-qlbar-category give F_Qlb=J_Ql(F_l), in the right category D^b_fd(Qlb). Step 4: the naturality, quasi-isomorphism and localization algebra is correct. Step 5: family definition, finiteness (E=Ql, constant Weil sheaf) and extended basis give the same matrix. Step 6: same char/reverse polynomial, root multiplicity, the permutation formula under Ql->Qlb, and n=0. Tested d=0, i outside [0,2d] and a Jordan block. No new nodes; rg found no duplicate statement; proof_deps equals the union of uses; no cycle; no SGA. Both tool_uses accepted; both units are in sk-thm-rh's transitive route. Caveat, not a fault of this delivery: def-weil-global-geometric-frobenius is stated only for finite E; the item reads F_Qlb as the same composite at Qlb, which Step 3 shows equals the stage image of F_l. Maintainer may extend that definition to Qlb. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilCohomologyScalarExtensionQlbar",
+  "declaration": "WeilConjectures.ordinaryCohomology_scalarExtension_qlbar",
+  "declarations": [
+   "WeilConjectures.ordinaryCoefficientLiftIso",
+   "WeilConjectures.ordinaryCoefficientHomologyIso",
+   "WeilConjectures.rationalFamilyCoefficient",
+   "WeilConjectures.rationalFamilyEmbedding",
+   "WeilConjectures.rationalFamilyStageSpace",
+   "WeilConjectures.rationalFamilyStageMap",
+   "WeilConjectures.rationalFamilySpace",
+   "WeilConjectures.rationalFamilyMap",
+   "WeilConjectures.rationalFamilySpaceFinite",
+   "WeilConjectures.rationalFamilyPolynomial",
+   "WeilConjectures.baseStageScalarComparison",
+   "WeilConjectures.ordinaryConstantQbarSpace",
+   "WeilConjectures.ordinaryConstantQbarMap",
+   "WeilConjectures.ordinaryConstantQbarComparison",
+   "WeilConjectures.ordinaryConstantTensorSpace",
+   "WeilConjectures.ordinaryConstantTensorMap",
+   "WeilConjectures.ordinaryConstantScalarExtension",
+   "WeilConjectures.ordinaryConstantQbarFinite",
+   "WeilConjectures.ordinaryConstantTensorFinite",
+   "WeilConjectures.ordinaryConstantQbarCharpoly",
+   "WeilConjectures.ordinaryConstantTensorCharpoly",
+   "WeilConjectures.ordinaryConstantQbarPolynomial",
+   "WeilConjectures.ordinaryCohomology_scalarExtension_qlbar"
+  ],
+  "file": "lean/Sheaf/Paper/WeilCohomologyScalarExtensionQlbar.lean",
+  "statement": "theorem ordinaryCohomology_scalarExtension_qlbar (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X₀ : Over (Spec (.of D.k₀))) (c₀ : Compactification X₀.hom) [IsProper X₀.hom] [GeometricallyConnected X₀.hom] (d : ℕ) (hsmooth : D.IsSmoothOfPureDimension X₀ d) : (∀ i : ℤ, Function.Bijective (ordinaryConstantScalarExtension D l hl Ω X₀ c₀ i) ∧ ordinaryConstantTensorMap D l hl Ω X₀ c₀ i ≫ ordinaryConstantScalarExtension D l hl Ω X₀ c₀ i = ordinaryConstantScalarExtension D l hl Ω X₀ c₀ i ≫ ordinaryConstantQbarMap D l hl Ω X₀ c₀ i) ∧ ∀ (i : ℤ), 0 ≤ i → i ≤ 2 * (d : ℤ) → (∃ e : ordinaryConstantTensorSpace D l hl Ω X₀ c₀ i ≅ ordinaryConstantQbarSpace D l hl Ω X₀ c₀ i, e.hom = ordinaryConstantScalarExtension D l hl Ω X₀ c₀ i ∧ e.inv ≫ ordinaryConstantTensorMap D l hl Ω X₀ c₀ i ≫ e.hom = ordinaryConstantQbarMap D l hl Ω X₀ c₀ i) ∧ (∀ α : Ω, (Module.End.HasEigenvalue (ordinaryConstantTensorMap D l hl Ω X₀ c₀ i).hom α ↔ Module.End.HasEigenvalue (ordinaryConstantQbarMap D l hl Ω X₀ c₀ i).hom α) ∧ (ordinaryConstantTensorCharpoly D l hl Ω X₀ c₀ i).rootMultiplicity α = (ordinaryConstantQbarCharpoly D l hl Ω X₀ c₀ i).rootMultiplicity α) ∧ (rationalFamilyPolynomial D l hl Ω X₀ c₀ i).map (algebraMap ℚ_[l] Ω) = ordinaryConstantQbarPolynomial D l hl Ω X₀ c₀ i",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Repair of bf8ec2fc4edd: uses the live globalGeometricFrobeniusQbarCohomology/OnCohomology of constantWeilAlgebraicallyClosedComplex, compact=false. The canonical comparison composes the balanced baseStageScalarComparison with the normalized exact-functor homology comparison, ULift tensor identification, and Qbar-functor object clause. Rational helpers belong to this item; neither recorded dependency is rebound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a06ed54e",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Identical re-push of PASSed 71a985cd3e88 (superseded before landing): Lean module sha256 8a89bb5e… byte-identical, node and report identical, only base moved. Only the item's lean field differs from live; no dependency records/modules, so earlier H13 faults stay repaired. Target = live globalGeometricFrobeniusQbarCohomology/OnCohomology on constantWeilAlgebraicallyClosedComplex, compact=false; canonical comparison baseStageScalarComparison ≫ inverse(H^i eqToIso QbarSourceEq ≪≫ exact-functor homology iso ≪≫ ULift tensor iso), no arbitrary choice. All clauses checked (∀ i bijective+Frobenius square; 0≤i≤2d conjugacy with e.hom=ξ, HasEigenvalue ↔, rootMultiplicity, charpolyRev mapped). Edge cases i<0, d=0, zero space, Jordan block, independent u/v OK. Statement verbatim, decl list = file, one sorry, no long lines, docstrings OK, report sections present. No name clash or duplicate notion in live/side-live. nt_compile --json 20.9 s rc 0 clean. Advisory: redundant plain imports; rational P_{i,l} unbridged to upstream frobeniusCharpolyRev (stage-3 note)."
  }
 }

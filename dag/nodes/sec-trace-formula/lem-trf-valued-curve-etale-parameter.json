@@ -318,5 +318,23 @@
   "group": "Q30",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-2b3eaa0bd (reviewer sub-agent of L); spot-checked: I read the item (14 steps) and all eight new nodes in full, plus every cited statement and the parent's step 2 use (lem-trf-valuation-strict-semistable-local-uniformization, reviewed by Q60). The item statement is byte-identical to the Q60 base, and the item is not in route-pivot-dropped. Stacks places read: 0BY1 (curves.tex l.159), 0BY3 (l.249), 054L (morphisms.tex l.8543), 0B8Y (varieties.tex l.9356). The Temkin PDF is absent, so the item is agent-origin with a WANTED line. I checked the Temkin-sourced nodes independently: separating parameters via ker d = KL^p; height/coarsening via the rank inequality and the minimal prime meeting R; composed étale as Ferrand/Milnor pinching with B⊗k=l=D⊗k; decompletion, where separability is needed (an inseparable s^{1/p} lying in F^ is a counterexample without it); completion of a separably closed field is algebraically closed; analytic residue clause via the Gauss norm, stability and e=1, tested on Artin–Schreier x=y^p+y; centred DVR with an étale coordinate (the source error is confirmed: the uniformizer T^p−a is purely inseparable); proper curve model over algebraically closed k. All steps check, including the Step 2 finite-spectrum localization, the Step 7 density, the Step 10 Gauss residue and the [E:k(ȳ)] bound, the Step 11 induction hypotheses and separability, and the Steps 9/12/13 composition data. No duplicates. lem-trf-valuation-rank-one-formal-comparison overlaps one clause of lem-trf-sepclosed-rank-one-completion; this is advisory only. I accept the four generic étale tool_uses. FIX (B3): lem-trf-curve-centred-valuation-dvr said 'finite separable' without citing def-weil-pbc-separable-algebraic-extension; the citation is added to its statement and stmt_deps. Maintainer: please record the Temkin p.12 uniformizer source error in HUMAN.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ValuedCurveEtaleParameter",
+  "declaration": "ValuationSubring.exists_etale_parameter_of_smooth_centre",
+  "file": "lean/Sheaf/FieldTheory/ValuedCurveEtaleParameter.lean",
+  "statement": "theorem exists_etale_parameter_of_smooth_centre (K L : Type u) [Field K] [Field L] [Algebra K L] [IsSepClosed K] (R : ValuationSubring K) [Finite (PrimeSpectrum R)] (W : ValuationSubring L) (hrestrict : W.comap (algebraMap K L) = R) (hfg : (⊤ : IntermediateField K L).FG) (htrdeg : Algebra.trdeg K L = 1) (C : Scheme.{u}) [IsIntegral C] [C.Over (Spec (.of K))] [Smooth (C ↘ Spec (.of K))] [LocallyOfFiniteType (C ↘ Spec (.of K))] [QuasiCompact (C ↘ Spec (.of K))] (hdim : topologicalKrullDim C = 1) (e : C.functionField ≃+* L) (centre : Spec (.of (Algebra.adjoin K (W : Set L))) ⟶ C) (hcentre : centre ≫ (C ↘ Spec (.of K)) = Spec.map (CommRingCat.ofHom (algebraMap K (Algebra.adjoin K (W : Set L))))) (hgeneric : Spec.map (CommRingCat.ofHom (Algebra.adjoin K (W : Set L)).val.toRingHom) ≫ centre = Spec.map (CommRingCat.ofHom e.toRingHom) ≫ C.fromSpecStalk (genericPoint C)) : ∃ t : L, t ∈ W ∧ Transcendental K t ∧ Module.Finite (IntermediateField.adjoin K {t}) L ∧ Etale (Spec.map (CommRingCat.ofHom (W.comapInclusion (algebraMap (IntermediateField.adjoin K {t}) L))))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77f47b108",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Single module ValuedCurveEtaleParameter.lean, one sorry theorem, node copy changes only lean. Clause-by-clause check: IsSepClosed K; R, W ValuationSubrings with W.comap = R; Finite PrimeSpectrum R = finite chain; FG field extension + trdeg 1; KW = Algebra.adjoin K W equals (R∖0)⁻¹W in L; C IsIntegral, Smooth, LOFT+QC (finite type per dep record), topologicalKrullDim 1; e : functionField ≃+* L; centre with hcentre (over K) and hgeneric (generic identification, forces K-linearity of e); conclusion t ∈ W, Transcendental, Module.Finite K⟮t⟯ L, AlgebraicGeometry.Etale of Spec.map of the comapInclusion W∩K(t) → W. pp.fullNames confirms the scheme classes. No extra hypotheses; edge cases height 0, KW≠L, char p covered; common universe u harmless (C and KW must live in K's universe, L ≅ k(C)). Statement verbatim; docstrings with source and 14 steps; no duplicates. nt_compile --json clean (2.7 s / 3.6 s). Advisory: comapInclusion owned by theorem node lem-trf-abhyankar-inequality (not a stmt_dep); maintainer may record it in def-trf-valuation-comap-residue."
  }
 }

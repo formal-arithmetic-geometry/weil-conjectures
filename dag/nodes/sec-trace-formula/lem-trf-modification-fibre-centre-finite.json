@@ -23,7 +23,10 @@
   "def-pc-reduced-scheme",
   "pqf-def-quasifinite",
   "def-weil-residue-field",
-  "def-kun-transcendence-degree"
+  "def-kun-transcendence-degree",
+  "def-trf-horizontal-valuation-curve-data",
+  "def-trf-modification",
+  "def-trf-modification-fibre-valuation-sets"
  ],
  "proof": [
   {
@@ -382,5 +385,23 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-7509f5859 (reviewer sub-agent of L); spot-checked: Reviewed the item, all three new nodes, every cited statement, Temkin §§3.5, 4.1–4.2, and Stacks Tags 02UP, 00QK, and 0AB1. Checked all 11 proof steps, hypotheses, edge cases, duplicates, route constraints, and search metadata. No mathematical or structural repair is required; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModificationFibreCentreFinite",
+  "declaration": "AlgebraicGeometry.RiemannZariski.modification_fibre_centre_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModificationFibreCentreFinite.lean",
+  "statement": "theorem modification_fibre_centre_finite (B : HorizontalValuationBase.{u}) {C Y : Scheme.{u}} (c : C ⟶ B.T) (hcurve : RelativeCurve c) (hnormal : ∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) (hsmooth : Smooth (pullback.snd c B.genericMap)) (hcomponents : (irreducibleComponents C).Finite) (q : Y ⟶ C) (hq : SchemeModification q) (hY : IsReduced Y) : (modificationGammaZero c q).Finite ∧ (∀ ν ∈ modificationGamma c q, @Algebra.trdeg (B.T.residueField ((ν.2.centre ≫ c) (IsLocalRing.closedPoint ν.2.V))) ((Spec (.of ν.2.V)).residueField (IsLocalRing.closedPoint ν.2.V)) _ _ ((ν.2.centre ≫ c).residueFieldMap (IsLocalRing.closedPoint ν.2.V)).hom.toAlgebra = 1) ∧ modificationGamma c q = {ν | ∃ μ ∈ modificationGammaZero c q, μ ∈ @closure (ComponentValuationSpace C) (componentValuationTopology C) {ν}} ∪ modificationGamma c (𝟙 C) ∧ (∀ ν ∈ modificationGamma c q, ∀ μ : ComponentValuationSpace C, ν ∈ @closure (ComponentValuationSpace C) (componentValuationTopology C) {μ} → μ ∈ modificationGamma c q) ∧ (∀ (s : B.T) (z : (q ≫ c).fiber s), z ∈ genericPoints ((q ≫ c).fiber s) → ∃ (ν : ComponentValuationSpace C) (l : Spec (.of ν.2.V) ⟶ Y), l ≫ q = ν.2.centre ∧ (q ≫ c).fiberι s z = l (IsLocalRing.closedPoint ν.2.V)) ∧ ((∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) → ∀ (s : B.T) (z : (q ≫ c).fiber s), z ∈ genericPoints ((q ≫ c).fiber s) → ∃! ν : ComponentValuationSpace C, ∃ l : Spec (.of ν.2.V) ⟶ Y, l ≫ q = ν.2.centre ∧ (q ≫ c).fiberι s z = l (IsLocalRing.closedPoint ν.2.V)) ∧ Scheme.Hom.IsQuasiFinite ((modificationLocusIdeal q).subschemeι ≫ c)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6007bc3b",
+  "group": "Q61",
+  "result": "fix",
+  "note": "c6007bc3 is byte-identical to 31c0cc1a, whose FIX never landed (svc.log: LAND superseded). Item statement matches the node and Temkin 4.2.1(ii)/4.2.2: HorizontalValuationBase, RelativeCurve (pure dim 1 fibres, empty allowed), normal stalks, smooth generic fibre, finitely many components, SchemeModification, IsReduced Y. All 7 clauses correct (Gamma0 finite; trdeg 1 over kappa(t)=kappa(O∩K); Gamma = gen(Gamma0) ∪ Gamma(C) with correct closure direction; generalization-closed; centre surjectivity; ∃! when Y is normal; quasi-finite reduced locus). Statement verbatim, 11-step docstring, not on the dropped list. F1 H4/H12: modificationIsoOpen in def-trf-modification-fibre-valuation-sets duplicates Scheme.Hom.maximalIsomorphismOpen (def-nagata-maximal-isomorphism-open); equality proved in a scratch compile. FIX: fixes/ModificationFibreValuationSets.lean uses q.maximalIsomorphismOpen; fixes/def-trf-modification-fibre-valuation-sets.json updates declarations, statement and stmt_deps. nt_compile --json clean: delivered 4.6/6.3 s, fixed 3.8/3.7 s. Maintainer notes: Q140 ComponentCenteredValuation is a parallel notion in a theorem module; the group should not re-push after this FIX."
  }
 }

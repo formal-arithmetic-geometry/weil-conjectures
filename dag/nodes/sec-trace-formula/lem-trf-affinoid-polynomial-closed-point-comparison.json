@@ -12,7 +12,8 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-adic-completion"
+  "def-weil-pbc-adic-completion",
+  "def-trf-restricted-series-presentation"
  ],
  "proof": [
   {
@@ -269,5 +270,28 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-4b0e914bc (reviewer sub-agent of L); spot-checked: I read the item's 12 steps, both new nodes, every cited statement and the parent's uses of the item (steps 6-7 of lem-trf-valuation-rank-one-formal-comparison). The statement is unchanged and true. Step 2: the coordinate change T_i->T_i+T_n^{N_i} is an isometry, and after normalizing by a_d the series meets the division node's hypotheses (a_d=1, |a_i|<=1 below d, sup above d <=rho<1). Steps 3-5: the bounded-generation double induction is stated explicitly (D4 OK), and the remainder module is an A-submodule with the max norm. Step 6: closedness by telescoping, Noetherian quotient. Step 7: the quotient norm is complete via infimum lifts, and the zero ring is handled. Step 8: D_n/N is finite over F (D_n/(w) is A-free of rank d, D is a field by the inverse-integrality argument, using the leaf Algebra.IsIntegral.of_finite exactly as stated). Step 9: the quotient norm is F-homogeneous and ultrametric, so the bounded-powers node applies. Step 10: the remainder operators commute and ker R_k = Q_kD_n, so P/Q_k = D_n/Q_kD_n. Steps 11-12: ideal correspondence, then R/a^k = R_a/(aR_a)^k, giving compatible isomorphisms and the induced completion map. New nodes: the Tate Weierstrass division/preparation node is BGR 5.2.1/5.2.2; the bounds on u and u^{-1} come from multiplicativity of the Gauss norm; d=0 checked. The bounded-powers node follows from equivalence of norms over a complete F plus the unique extension of the absolute value; a=0 and inseparable a checked. Both are true, statement-only, strictly smaller than the item and not clauses of it. They are not duplicates of lem-per-weierstrass-preparation-complete-local, lem-per-weierstrass-henselian-cylinder, lem-trf-valuation-grauert-remmert-powerbounded or lem-sfb-padic-integers-integral-closure (my own DAG-wide scan). Temkin and BGR are absent from literature/, recorded WANTED, and the proof is marked agent. No SGA, no tool_uses needed, proof_deps equal the union of uses. The route is inherited: the item is reached from nt-target-zeta-rational only through the reviewed old Temkin normalization chain under lem-trf-local-term-locality, while main-20261015 sk-i-curve-zero follows Varshavsky. That is not a fault of this delivery; maintainer note. Advisory: the new nodes lack lean_audit (lean_status fills it). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidPolynomialClosedPointComparison",
+  "declaration": "RestrictedSeries.affinoid_polynomial_closed_point_comparison",
+  "declarations": [
+   "RestrictedSeries.polynomialInclusion",
+   "RestrictedSeries.polynomialQuotientMap",
+   "RestrictedSeries.affinoid_polynomial_closed_point_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/AffinoidPolynomialClosedPointComparison.lean",
+  "statement": "theorem affinoid_polynomial_closed_point_comparison (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] (hF : ∃ a : F, a ≠ 0 ∧ ‖a‖ ≠ 1) (n : ℕ) (J : Ideal (MvPolynomial (Fin n) F)) : (∃ N : NormedCommRing ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))), N.toCommRing = (inferInstance : CommRing ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ)))) ∧ (∀ s, @norm _ N.toNorm s = MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) s.val) ∧ @IsClosed _ N.toUniformSpace.toTopologicalSpace (J.map (polynomialInclusion F n) : Set _) ∧ ∃ Q : NormedCommRing (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))) ⧸ J.map (polynomialInclusion F n)), Q.toCommRing = (inferInstance : CommRing (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))) ⧸ J.map (polynomialInclusion F n))) ∧ @CompleteSpace _ Q.toUniformSpace ∧ (∀ c, @norm _ Q.toNorm c = sInf {r : ℝ | ∃ s, Ideal.Quotient.mk (J.map (polynomialInclusion F n)) s = c ∧ r = MvPowerSeries.gaussNorm (norm : F → ℝ) (fun _ : Fin n ↦ 1) s.val}) ∧ ∃ A : @NormedAlgebra F _ inferInstance Q.toSeminormedRing, ∀ a : F, A.toAlgebra.algebraMap a = Ideal.Quotient.mk (J.map (polynomialInclusion F n)) (constants F n a)) ∧ IsNoetherianRing (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))) ⧸ J.map (polynomialInclusion F n)) ∧ ∀ (m : Ideal (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin n ↦ (1 : ℝ))) ⧸ J.map (polynomialInclusion F n))) [m.IsMaximal], (m.comap (polynomialQuotientMap F n J)).IsMaximal ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime (m.comap (polynomialQuotientMap F n J)))) (Localization.AtPrime (m.comap (polynomialQuotientMap F n J))) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime m)) (Localization.AtPrime m), ∀ (k : ℕ) (x : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime (m.comap (polynomialQuotientMap F n J)))) (Localization.AtPrime (m.comap (polynomialQuotientMap F n J)))) (a : Localization.AtPrime (m.comap (polynomialQuotientMap F n J))), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime (m.comap (polynomialQuotientMap F n J)))) k x = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime (m.comap (polynomialQuotientMap F n J))) ^ k) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime m)) k (e x) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime m) ^ k) (Localization.localRingHom (m.comap (polynomialQuotientMap F n J)) m (polynomialQuotientMap F n J) rfl a)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a872cbac5",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Every node clause matches the Lean, with nothing stronger: complete nontrivial ultrametric NormedField; Mathlib IsRestricted.subring at radius 1; Gauss and quotient norms asserted on the original ring structures; ideal closed in the Gauss topology; C complete and Noetherian with a normed F-algebra whose algebraMap is fixed; preimage of each maximal ideal is maximal; completion iso tied at every level k to Localization.localRingHom. Edge cases n=0, J=0, C=0 checked; one universe. Node diff vs live: only lean and stmt_deps (adds the landed def node def-trf-restricted-series-presentation). No duplicate in Mathlib or the project; helper maps are real canonical maps. Docstrings carry the source place, blueprint id and 12-step proof; only the theorem proof is sorry; statement verbatim; item not dropped. nt_compile --json clean in 16.4 s. Advisory: possibly redundant public imports."
  }
 }

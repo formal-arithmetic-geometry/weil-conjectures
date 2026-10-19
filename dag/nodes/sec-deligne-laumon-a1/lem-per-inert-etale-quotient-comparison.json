@@ -2,7 +2,7 @@
  "id": "lem-per-inert-etale-quotient-comparison",
  "kind": "statement",
  "title": "Inert etale comparisons descend to etale quotient comparisons",
- "statement": "Let $G$ be a finite group acting on separated [def-weil-proper-morphism] locally Noetherian schemes $U,V$ [pqf-def-locnoeth], each covered by invariant affine opens, and let $h:V\\to U$ be a $G$-equivariant etale morphism [def-weil-etale-morphism]. For a geometric point $v$ [def-weil-geometric-point] put $G_v=\\{g:g\\circ v=v\\}$. The locus on which $G_v=G_{h(v)}$ is an invariant open subset of $V$. Restrict to this locus (so $h$ is called inert). Suppose $q_U:U\\to U/G$ and $q_V:V\\to V/G$ are finite [def-weil-finite-integral-morphism] surjective scheme quotients with orbit geometric fibres and invariant structure sheaves. Then $\\bar h:V/G\\to U/G$ is etale, and\n$$V\\simeq U\\times_{U/G}(V/G)$$\nwith fibre product as in [def-pc-fibre-product], compatibly with the quotient maps and $G$-actions. These assertions hold locally on the quotients, so apply to pointed etale neighborhoods and are compatible with composition.\n\nIn addition suppose $M_U,M_V$ are fs log structures [def-trf-fs-log-blowup], $h$ is strict, both actions are very tame, and their quotient log structures are $N_U=(q_{U*}M_U)^G$ and $N_V=(q_{V*}M_V)^G$. Here strict means that the source log structure is pulled back from the target; very tame means that geometric stabilizers have invertible order and act trivially on the characteristic monoid and the strict local log stratum (the quotient of the strict local ring by the images of nonunit log sections). Then $\\bar h$ is strict for $N_V,N_U$.",
+ "statement": "Let $G$ be a finite group acting on separated [def-weil-proper-morphism] locally Noetherian schemes $U,V$ [pqf-def-locnoeth], each covered by invariant affine opens, and let $h:V\\to U$ be a $G$-equivariant etale morphism [def-weil-etale-morphism]. For a geometric point $v$ [def-weil-geometric-point] put $G_v=\\{g:g\\circ v=v\\}$. The locus on which $G_v=G_{h(v)}$ is an invariant open subset of $V$. Restrict to this locus (so $h$ is called inert). Suppose $q_U:U\\to U/G$ and $q_V:V\\to V/G$ are finite [def-weil-finite-integral-morphism] surjective scheme quotients (the invariant quotient notion of [def-per-admissible-finite-scheme-quotient]) with orbit geometric fibres and invariant structure sheaves. Then $\\bar h:V/G\\to U/G$ is etale, and\n$$V\\simeq U\\times_{U/G}(V/G)$$\nwith fibre product as in [def-pc-fibre-product], compatibly with the quotient maps and $G$-actions. These assertions hold locally on the quotients, so apply to pointed etale neighborhoods and are compatible with composition.\n\nIn addition suppose $M_U,M_V$ are fs log structures [def-trf-fs-log-blowup], $h$ is strict [def-trf-log-ideal-chart-presentation] and equivariant as a log morphism for the log actions [def-per-fs-log-group-action], both actions are very tame [def-per-very-tame-fs-log-action], and their quotient log structures are $N_U=(q_{U*}M_U)^G$ and $N_V=(q_{V*}M_V)^G$. Here strict means that the source log structure is pulled back from the target; very tame means that geometric stabilizers have invertible order and act trivially on the characteristic monoid and the strict local log stratum (the quotient of the strict local ring by the images of nonunit log sections). Then the induced log morphism [def-trf-fine-log-scheme-morphisms] $\\bar h$ is strict for $N_V,N_U$.",
  "source": {
   "document": "literature/stacks-project/groupoids.tex",
   "place": "Tag 0DT9, lemma-etale, specialized to finite constant action groupoids; log strictness is ILO VIII Proposition 5.4.2, pp.126--127; inert localization as in VIII 5.3.6--5.3.7."
@@ -14,7 +14,12 @@
   "pqf-def-locnoeth",
   "def-weil-geometric-point",
   "def-weil-finite-integral-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-per-admissible-finite-scheme-quotient",
+  "def-per-fs-log-group-action",
+  "def-per-very-tame-fs-log-action",
+  "def-trf-log-ideal-chart-presentation",
+  "def-trf-fine-log-scheme-morphisms"
  ],
  "proof": [
   {
@@ -438,5 +443,58 @@
   "group": "Q147",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-16fd40d87 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 14 steps and all 27 cited statements. Sources read: Stacks 0DT9 (lemma-etale) with its proof and 03BK (invariants base change), and ILO VIII 5.3.6–5.3.7, 5.4.1 and Prop. 5.4.2 (pp.124–127). Shape: one commit, item and report only, no new nodes, steps 690–1290 characters, proof_deps equal to the union of uses. Statement: compared with the live base, the only edits add definition references (separated via def-weil-proper-morphism, locally Noetherian, geometric point, finite morphism, fibre product), with matching stmt_deps; nothing is weakened. The statement is a faithful specialization of 0DT9 to finite constant groups: for an equivariant h the s- and t-squares are automatically cartesian, and the stabilizer square is cartesian exactly when h is inert. G_v for a geometric point is ILO's inertia group, and the log clause is the étale, equal-group case of 5.4.2 with the fs and very-tame hypotheses kept. Step checks: S1 open inert locus from Δ_h being open (unramified) and closed (pulled back from Δ_V of separated V); S2 01TQ on affine quotient charts with C=A^G, D=B^G; S3 the flat kernel argument of 03BK; S4 H flat over C, and the evaluation surjects onto the separable closure, giving a lift to the closed point; S5 04GH product decomposition, unique embedding, G transitive on components, and K equal to G_ū (stabilizers in Spec H×U agree with those in U); S6 the étale lift plus the unique 04GG retraction and a clopen section; S7 inertness gives k v̄=v̄, uniqueness makes the section K-invariant, and the disjoint translates give W≅Spec A_H; S8 invariant idempotent with eD_H≅H; S9–S10 finitely many equations descended with the elementwise filtered-colimit node, both composites checked; S11 036W gives h̄ étale and 02L4 descends the canonical comparison over finite affine étale covers; S12 étale inverse image of monoid sheaves is restriction (graph object terminal); S13 N_V(T) and h̄^{-1}N_U(T) are identified through V×_{V/G}T≅U×_{U/G}T and strictness of h; S14 locality and composition from the universal property. Edge cases: empty, trivial G, free action, K=G, nonreduced A_H. The non-inert example Z/2×A¹ → A¹ with x↦−x gives the quotient map x↦x², ramified at 0, so the inert hypothesis is needed. No duplicate found: rg for 0DT9/03BK/036W, and the lem-a1 groupoid quotient and torsor-subquotient nodes state other things. The 19 tool_uses are generic pbc/sbc/exc tools and I accept all of them. Batch-5 flag: lem-trf-etale-descent-through-source-cover is generic Stacks 036W (if p is étale surjective and h∘p is étale, then h is étale). It is neither assumed statement nor a step of their proofs, and its 219-node closure contains no other trace-formula/Poincaré/sk-thm-trace-transport/nt node. Every other new citation's closure is clean; def-trf-fs-log-blowup is a pre-existing definition stmt_dep. Flag accepted, no RETURN. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InertEtaleQuotientComparison",
+  "declaration": "AlgebraicGeometry.inert_etale_quotient_comparison",
+  "declarations": [
+   "AlgebraicGeometry.inertEtaleLocus",
+   "AlgebraicGeometry.isOpen_inertEtaleLocus",
+   "AlgebraicGeometry.inert_etale_quotient_comparison",
+   "AlgebraicGeometry.inert_etale_log_quotient_strict",
+   "AlgebraicGeometry.inert_etale_comparison_baseChange",
+   "AlgebraicGeometry.inert_etale_comparison_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InertEtaleQuotientComparison.lean",
+  "statement": "theorem inert_etale_quotient_comparison {G : Type v} [Group G] [Finite G] {V U VQ UQ : Scheme.{u}} [V.IsSeparated] [U.IsSeparated] [IsLocallyNoetherian V] [IsLocallyNoetherian U] (aV : G →* Aut V) (aU : G →* Aut U) (h : V ⟶ U) [Etale h] (hequiv : ∀ g : G, (aV g).hom ≫ h = h ≫ (aU g).hom) (haV : ∀ x : V, ∃ W : V.affineOpens, x ∈ W.1 ∧ ∀ (g : G) (y : V), (aV g).hom y ∈ W.1 ↔ y ∈ W.1) (haU : ∀ x : U, ∃ W : U.affineOpens, x ∈ W.1 ∧ ∀ (g : G) (y : U), (aU g).hom y ∈ W.1 ↔ y ∈ W.1) (hinert : ∀ x : V, x ∈ inertEtaleLocus aV aU h) (qV : V ⟶ VQ) (qU : U ⟶ UQ) (hqV : IsAdmissibleFiniteSchemeQuotient aV qV) (hqU : IsAdmissibleFiniteSchemeQuotient aU qU) (horbitV : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s t : Spec (.of Ω) ⟶ V), s ≫ qV = t ≫ qV ↔ ∃ g : G, s ≫ (aV g).hom = t) (horbitU : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s t : Spec (.of Ω) ⟶ U), s ≫ qU = t ≫ qU ↔ ∃ g : G, s ≫ (aU g).hom = t) : ∃ hb : VQ ⟶ UQ, ∃ hc : h ≫ qU = qV ≫ hb, Etale hb ∧ IsIso (pullback.lift h qV hc) ∧ (∀ g : G, (aV g).hom ≫ pullback.lift h qV hc = pullback.lift h qV hc ≫ pullback.lift (pullback.fst qU hb ≫ (aU g).hom) (pullback.snd qU hb) (by rw [Category.assoc, hqU.2.2.1 g]; exact pullback.condition)) ∧ ∀ hb' : VQ ⟶ UQ, qV ≫ hb' = h ≫ qU → hb' = hb",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d7f96bbc",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Byte-identical re-push of the PASSed, unlanded 43a8a421 (item node, report and Lean sha 6c438dd8 identical; 12 dep records = live side). Fully re-read. Scheme theorem: separated, locally Noetherian, invariant affine covers, Etale h, equivariance, real stabilizer-equality inertEtaleLocus (open and invariant), IsAdmissibleFiniteSchemeQuotient plus geometric orbit fibres; conclusion: Etale hb, IsIso of the canonical pullback.lift, G-equivariance, unique hb. Log theorem uses the cited def-trf-log-ideal-chart-presentation IsStrictEtale (not the LogFanChartBlowup H4 case), IsEquivariant, IsVeryTame, InvariantDirectImage; strict HomAlong pinned by section pullback; taking hb/hc/hcart as inputs is more general but true. §1(C) log-equivariance correction justified (ILO VIII 5.4.2, valid counterexample); the one citer holds. nt_compile --json clean 3.1 s, broken control errors. Advisory: in-thread second reading; dangling 'validation below' line; base-change/composition lemmas are universal-property identities, as in Step 14.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "Q29 stage 2",
+  "old_statement": "Let $G$ be a finite group acting on separated [def-weil-proper-morphism] locally Noetherian schemes $U,V$ [pqf-def-locnoeth], each covered by invariant affine opens, and let $h:V\\to U$ be a $G$-equivariant etale morphism [def-weil-etale-morphism]. For a geometric point $v$ [def-weil-geometric-point] put $G_v=\\{g:g\\circ v=v\\}$. The locus on which $G_v=G_{h(v)}$ is an invariant open subset of $V$. Restrict to this locus (so $h$ is called inert). Suppose $q_U:U\\to U/G$ and $q_V:V\\to V/G$ are finite [def-weil-finite-integral-morphism] surjective scheme quotients with orbit geometric fibres and invariant structure sheaves. Then $\\bar h:V/G\\to U/G$ is etale, and\n$$V\\simeq U\\times_{U/G}(V/G)$$\nwith fibre product as in [def-pc-fibre-product], compatibly with the quotient maps and $G$-actions. These assertions hold locally on the quotients, so apply to pointed etale neighborhoods and are compatible with composition.\n\nIn addition suppose $M_U,M_V$ are fs log structures [def-trf-fs-log-blowup], $h$ is strict, both actions are very tame, and their quotient log structures are $N_U=(q_{U*}M_U)^G$ and $N_V=(q_{V*}M_V)^G$. Here strict means that the source log structure is pulled back from the target; very tame means that geometric stabilizers have invertible order and act trivially on the characteristic monoid and the strict local log stratum (the quotient of the strict local ring by the images of nonunit log sections). Then $\\bar h$ is strict for $N_V,N_U$.",
+  "what": "The log clause specified equivariance only of the underlying scheme morphism and did not specify that the given strict log morphism is equivariant for the log actions. Without this the given pullback need not preserve invariant log sections, so the induced quotient log morphism is not defined. Explicitly require log equivariance, as ILO VIII Proposition 5.4.2 does. Added references to already landed definitions for the existing notions; the scheme assertion is unchanged.",
+  "source": {
+   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+   "place": "VIII Proposition 5.4.2, printed pp.126--127: strict inert lambda-equivariant morphism of fs log schemes."
+  },
+  "citers": [
+   {
+    "id": "lem-per-gabber-abelian-stage-toric-chart",
+    "holds": true,
+    "note": "Its comparison is already a strict equivariant morphism of log pairs from equivariant charts; the invariant boundary and its strict pullback supply log equivariance, including on the enlarged pair."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-etale-morphism",
+   "def-trf-fs-log-blowup",
+   "def-weil-proper-morphism",
+   "pqf-def-locnoeth",
+   "def-weil-geometric-point",
+   "def-weil-finite-integral-morphism",
+   "def-pc-fibre-product"
+  ]
  }
 }

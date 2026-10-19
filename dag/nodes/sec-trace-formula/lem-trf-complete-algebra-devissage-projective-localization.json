@@ -338,5 +338,23 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-025ea8c2e (reviewer sub-agent of L); spot-checked: I read Stacks 05HX, 05HY, 05IA (statement and the full (1)⇒(2) proof), 05IB and 05FT in flat.tex, and every cited node statement. The item matches the projectivity half of 05IB exactly; no hypothesis was added and none was weakened. All nine steps check. Step 3: I verified the fp transfer B1→A1 by hand (B1[x]/(F, y−P(x)) = R[x]/(F, G(P(x))) = R[x]/(F)), and 0564 is applied twice with both hypotheses (finite and fp). Step 4: every hypothesis of the new node holds; rB1 is prime by the definition, and it contracts to r because the fibre is nonempty. Steps 5–7: localization, the universally exact sequence, the 058P cokernel flatness, the cokernel presentation with r1 appended columns, and the tail dévissage over B1→A2 are all correct. Step 8: 05FT applies with geometrically integral fibres. Step 9: the splitting is correct, and the localization identification f=f1·a holds with the explicit fraction map m/(f1^i h^j) ↦ f1^{kj} m/(f1^i a^j). The new node lem-trf-generic-basis-base-open-universal-injectivity is 05IA (1)⇒(2), first half, with q=p=rB. It is true, has a statement only, and is self-contained; its stated hypothesis that p is prime over r is implied by flatness and is harmless. It is not a duplicate of the 05I3 local node, of free-subtraction-flatness (which needs the hypothesis at all primes), or of the 05CL/05CM nodes, and it does not restate a clause of the item. I accept the declared tool uses as generic black boxes; no SGA source is cited. FIX (D4/E5): Step 1 stated the inductive claim without quantifying the base ring and prime, although Step 5 replaces R by R_{f1} before Step 7 applies the induction hypothesis. I rewrote Step 1's first sentence to quantify over every ring R, prime r, fp algebra S and module N; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompleteDevissageProjectiveLocalization",
+  "declaration": "AlgebraicGeometry.exists_projective_localization_of_completeDevissage",
+  "file": "lean/Sheaf/TraceFormula/CompleteDevissageProjectiveLocalization.lean",
+  "statement": "theorem exists_projective_localization_of_completeDevissage (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] (N : Type v) [AddCommGroup N] [Module S N] [Module R N] [IsScalarTower R S N] [Module.FinitePresentation S N] [Module.Flat R N] (r : Ideal R) [r.IsPrime] (hdev : Nonempty (CompleteAlgebraDevissage R S r N)) : ∃ f : R, f ∉ r ∧ Module.Projective (Localization.Away f) (LocalizedModule (Submonoid.powers f) N)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b757298aa",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Lean matches the node and Stacks 05IB clause by clause: fp algebra R→S, fp S-module N flat over R via IsScalarTower, prime r, Nonempty CompleteAlgebraDevissage (FiniteType/Module.Finite instances derived), conclusion ∃ f ∉ r with LocalizedModule (powers f) N projective over Localization.Away f. No extra hypotheses, no R-finiteness assumed. Shared universe u for R,S inherited from the landed dévissage structure; N in its own universe v. Edge cases N=0/length 0, r_i=0, f=1 covered. Imports are statement modules plus the stated proof-dep modules (brief-stage2 l.104); lines ≤100; docstrings carry 05IB, the blueprint id and the 9-step plan; proof is sorry only. Node differs from side-live only in lean. nt_compile --json rc=0, 4.3 s, clean. Advisory: LocalizedModule is the record of def-weil-pbc-module-localization, which is not in stmt_deps (def-weil-pbc-module-tensor-product, with no lean record, is listed instead); the node explicitly identifies N_f with the fraction module, so this is a maintainer note only."
  }
 }
