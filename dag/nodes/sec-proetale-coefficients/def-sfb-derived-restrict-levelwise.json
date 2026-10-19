@@ -226,5 +226,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-59eaab5f6 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement. The statement matches main-20261015 def-sfb-derived-restrict-levelwise.md (order 1628) exactly, and no new nodes are added. Step 1: hypotheses come from the lem-sfb-extend-scalars-kflat setting. lem-sfb-modobj-grothendieck (exact hypothesis match) is applied to R and S, and lem-sfb-grothendieck-k-injective to Mod_S; its K-injective notion is the same as def-sfb-right-derived-functor's. Step 2: closed plus Mathlib leaf 0038 means X⊗- preserves colimits, symmetry moves this to -⊗X, and abelian C has (co)equalizers. That covers the hypotheses of clauses 2 and 3 of sk-def-sfb-change-of-scalars, and clause 4 then states exactness of Res_φ outright. Step 3: Mathlib leaf lem-sfb-preserving-colimits-additive (010N) gives additivity, so the def-sfb-right-derived-functor input holds. Step 4 cites only the statement of def-sfb-right-derived-exact (canonical RF≅D(F), termwise), and clause 1 identifies termwise F with restriction. Route: all cited nodes are in the unit closure (via sk-def-sfb-derived-categories, change-of-scalars and sk-prop-sfb-module-category); the off-unit node is a Mathlib leaf, so no tool_uses entry is needed. Graph walk finds no cycle. No SGA. Added stmt_deps are the R/D notions. The slopmaster2 decl is rests_on_sorry, so the split is appropriate. Edge cases checked: φ=id, S=0, Z→Z/2 (no flatness needed), unbounded complexes. No fixes written."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+  "declaration": "CategoryTheory.Mod.rightDerivedComapIsoMapDerivedCategory",
+  "statement": "noncomputable def rightDerivedComapIsoMapDerivedCategory :\n    (comap φ : Mod C S ⥤ Mod C R).rightDerivedFunctor ≅ (comap φ).mapDerivedCategory",
+  "branch": "slopmaster2",
+  "by": "NW",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Exact existing blueprint-named comparison in the live upstream module, read locally and with scompile.py --source. It specializes in one line under every hypothesis of lem-sfb-extend-scalars-kflat and compares unbounded right-derived restriction with termwise Mod.comap. Its normalization is rightDerivedFunctorIsoMapDerivedCategory_hom_fac. The right-derived-functor dependency records an alternative universal pair allowing arbitrary quasi-isomorphism resolutions; the ambient Grothendieck hypothesis already supplies monomorphic resolutions, and both pairs are canonically unit-compatibly isomorphic. A clean server probe imports the recorded general comparison, constructs the comparison between both choices, and verifies the upstream unit normalization. No new definition or changed dependency is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38caa34b4",
+  "group": "NW",
+  "result": "pass",
+  "note": "existing:true record on upstream Mod.rightDerivedComapIsoMapDerivedCategory, which is also the blueprint_lean name. Statement verbatim against side-live DerivedExtendScalars.lean. Node clause, direction and objects match: Mod.comap = Res_φ, mapDerivedCategory = termwise on unbounded complexes. Body is the canonical rightDerivedFunctorIsoMapDerivedCategory. Binders are a subset of the lem-sfb-extend-scalars-kflat context, with no extra universe equation. nt_compile --json probe elaborates the statement under the full context in 19 s; axioms are only propext/choice/Quot.sound. Snapshot vs live node differs only in lean. Advisory: def-sfb-right-derived-functor is realized by both the upstream rightDerivedFunctor and the Sheaf QuasiIsoResolutions version; they are canonically isomorphic and this is the established practice of landed citers. No fixes."
  }
 }
