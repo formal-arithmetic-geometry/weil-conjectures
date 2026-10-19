@@ -110,7 +110,9 @@ as the same transition. -/
 theorem strictRingSystem_id_comm (M : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) :
     𝟙 (M.level n) ≫ M.transition h =
       M.transition h ≫ (systemRestriction B h).map (𝟙 (M.level m)) := by
-  sorry
+  let _ := ‹J.WEqualsLocallyBijective AddCommGrpCat.{w}›
+  let _ := ‹HasSheafify J AddCommGrpCat.{w}›
+  simp
 
 /-- Compatible families compose componentwise.
 Source: Zheng, Construction 4.1 (blueprint: lem-pur-system-level-left-extension).
@@ -120,7 +122,10 @@ theorem strictRingSystem_comp_comm {M N P : StrictRingSystem B}
     (f : M.Hom N) (g : N.Hom P) {m n : ℕ} (h : m ≤ n) :
     (f.app n ≫ g.app n) ≫ P.transition h =
       M.transition h ≫ (systemRestriction B h).map (f.app m ≫ g.app m) := by
-  sorry
+  let _ := ‹J.WEqualsLocallyBijective AddCommGrpCat.{w}›
+  let _ := ‹HasSheafify J AddCommGrpCat.{w}›
+  rw [Functor.map_comp, Category.assoc, g.comm h, ← Category.assoc, f.comm h,
+    Category.assoc]
 
 /-- Identity system map. Source: Zheng, Construction 4.1
 (blueprint: lem-pur-system-level-left-extension). -/
@@ -142,7 +147,24 @@ theorem strictRingSystem_category_laws :
       M.id.comp f = f ∧ f.comp N.id = f) ∧
     (∀ (M N P Q : StrictRingSystem B) (f : M.Hom N) (g : N.Hom P) (h : P.Hom Q),
       (f.comp g).comp h = f.comp (g.comp h)) := by
-  sorry
+  have ext {M N : StrictRingSystem B} (f g : M.Hom N) (h : f.app = g.app) : f = g := by
+    cases f
+    cases g
+    cases h
+    rfl
+  constructor
+  · intro M N f
+    constructor
+    · apply ext
+      funext n
+      exact Category.id_comp _
+    · apply ext
+      funext n
+      exact Category.comp_id _
+  · intro M N P Q f g h
+    apply ext
+    funext n
+    exact Category.assoc _ _ _
 
 /-- The category of the displayed strict systems. Source: Zheng, Construction 4.1
 (blueprint: lem-pur-system-level-left-extension). -/
@@ -186,6 +208,307 @@ Source: Stacks 03DA (blueprint: lem-pur-system-level-left-extension). -/
 instance strictRingSystemAbelian : Abelian (StrictRingSystem B) :=
   (strictRingSystem_abelian_exists B).exists.choose
 
+/-- Exactness of scalar restriction, with no flatness of the ring map.
+Source: Stacks 03DA and 03DB (blueprint: lem-pur-system-level-left-extension).
+Proof: the underlying abelian sheaf and all its maps are unchanged. Kernels and
+sheafified cokernels therefore coincide with those before restriction. -/
+theorem systemScalarRestriction_exact {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
+    PreservesFiniteLimits (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) ∧
+    PreservesFiniteColimits (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) := by
+  let R' := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R
+  let S' := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj S
+  let F := restrictScalars.{w}
+    ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)
+  have : PreservesFiniteColimits (toSheaf.{w} R') :=
+    (moduleSheaves_colimits_forgetful R').2.2.1
+  have : PreservesFiniteColimits (toSheaf.{w} S') :=
+    (moduleSheaves_colimits_forgetful S').2.2.1
+  have h : F ⋙ toSheaf R' = toSheaf S' := rfl
+  have : PreservesFiniteLimits (F ⋙ toSheaf R') := by
+    rw [h]
+    infer_instance
+  have : PreservesFiniteColimits (F ⋙ toSheaf R') := by
+    rw [h]
+    infer_instance
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves F (toSheaf R'),
+    preservesFiniteColimits_of_reflects_of_preserves F (toSheaf R')⟩
+
+/-- Exact restriction preserves finite limits. Source: Stacks 03DA
+(blueprint: lem-pur-system-level-left-extension). -/
+instance systemScalarRestrictionLimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
+    PreservesFiniteLimits (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
+  (systemScalarRestriction_exact φ).1
+/-- Exact restriction preserves finite colimits. Source: Stacks 03DA
+(blueprint: lem-pur-system-level-left-extension). -/
+instance systemScalarRestrictionColimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
+    PreservesFiniteColimits (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
+  (systemScalarRestriction_exact φ).2
+
+
+variable {B}
+
+private theorem system_hom_ext {M N : StrictRingSystem B} (f g : M ⟶ N)
+    (h : ∀ n, f.app n = g.app n) : f = g := by
+  cases f
+  cases g
+  congr 1
+  funext n
+  exact h n
+
+private def system_isColimit {K : Type} [SmallCategory K]
+    {F : K ⥤ StrictRingSystem B} (c : Cocone F)
+    (hc : ∀ n, IsColimit ((systemEvaluation B n).mapCocone c)) : IsColimit c where
+  desc s :=
+    { app := fun n ↦ (hc n).desc ((systemEvaluation B n).mapCocone s)
+      comm := by
+        intro m n h
+        apply (hc n).hom_ext
+        intro j
+        change (c.ι.app j).app n ≫ _ = (c.ι.app j).app n ≫ _
+        erw [← Category.assoc, (hc n).fac ((systemEvaluation B n).mapCocone s) j]
+        erw [← Category.assoc, (c.ι.app j).comm h, Category.assoc, ← Functor.map_comp,
+          (hc m).fac ((systemEvaluation B m).mapCocone s) j]
+        exact (s.ι.app j).comm h }
+  fac s j := system_hom_ext _ _ (fun n ↦ (hc n).fac _ j)
+  uniq s f hf := by
+    apply system_hom_ext
+    intro n
+    apply (hc n).uniq ((systemEvaluation B n).mapCocone s) (f.app n)
+    intro j
+    exact congrArg (fun g : F.obj j ⟶ s.pt ↦ g.app n) (hf j)
+
+private def system_isLimit {K : Type} [SmallCategory K] [FinCategory K]
+    {F : K ⥤ StrictRingSystem B} (c : Cone F)
+    (hc : ∀ n, IsLimit ((systemEvaluation B n).mapCone c)) : IsLimit c where
+  lift s :=
+    { app := fun n ↦ (hc n).lift ((systemEvaluation B n).mapCone s)
+      comm := by
+        intro m n h
+        apply (isLimitOfPreserves (systemRestriction B h) (hc m)).hom_ext
+        intro j
+        change _ ≫ (systemRestriction B h).map ((c.π.app j).app m) =
+          _ ≫ (systemRestriction B h).map ((c.π.app j).app m)
+        erw [Category.assoc, ← (c.π.app j).comm h, ← Category.assoc,
+          (hc n).fac ((systemEvaluation B n).mapCone s) j]
+        erw [Category.assoc, ← Functor.map_comp,
+          (hc m).fac ((systemEvaluation B m).mapCone s) j]
+        exact (s.π.app j).comm h }
+  fac s j := system_hom_ext _ _ (fun n ↦ (hc n).fac _ j)
+  uniq s f hf := by
+    apply system_hom_ext
+    intro n
+    apply (hc n).uniq ((systemEvaluation B n).mapCone s) (f.app n)
+    intro j
+    exact congrArg (fun g : s.pt ⟶ F.obj j ↦ g.app n) (hf j)
+
+private abbrev system_underlying (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ) :=
+  toSheaf.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op n)))
+
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}] in
+private theorem system_underlying_restrict {m n : ℕ} (h : m ≤ n)
+    {X Y : systemLevel B m} (f : X ⟶ Y) :
+    (system_underlying B n).map ((systemRestriction B h).map f) =
+      (system_underlying B m).map f := rfl
+
+private def system_colimit_transition {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) :
+    colimit (F ⋙ systemEvaluation B n) ⟶
+      (systemRestriction B h).obj (colimit (F ⋙ systemEvaluation B m)) :=
+  colimit.desc (F ⋙ systemEvaluation B n)
+    { pt := (systemRestriction B h).obj (colimit (F ⋙ systemEvaluation B m))
+      ι :=
+        { app := fun j ↦ (F.obj j).transition h ≫
+            (systemRestriction B h).map (colimit.ι (F ⋙ systemEvaluation B m) j)
+          naturality := by
+            intro j k f
+            change (F.map f).app n ≫ ((F.obj k).transition h ≫ _) = _ ≫ 𝟙 _
+            rw [Category.comp_id, ← Category.assoc, (F.map f).comm h,
+              Category.assoc, ← Functor.map_comp]
+            exact congrArg (fun g ↦ (F.obj j).transition h ≫ (systemRestriction B h).map g)
+              (colimit.w (F ⋙ systemEvaluation B m) f) } }
+
+private theorem system_colimit_transition_fac {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (j : K) :
+    colimit.ι (F ⋙ systemEvaluation B n) j ≫ system_colimit_transition F h =
+      (F.obj j).transition h ≫
+        (systemRestriction B h).map (colimit.ι (F ⋙ systemEvaluation B m) j) := by
+  apply colimit.ι_desc
+
+private theorem system_colimit_transition_forget {K : Type} [SmallCategory K]
+    [FinCategory K] (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (j : K) :
+    (system_underlying B n).map (colimit.ι (F ⋙ systemEvaluation B n) j) ≫
+        (system_underlying B n).map (system_colimit_transition F h) =
+      (system_underlying B n).map ((F.obj j).transition h) ≫
+        (system_underlying B m).map (colimit.ι (F ⋙ systemEvaluation B m) j) := by
+  simpa only [Functor.map_comp, system_underlying_restrict] using
+    congrArg (system_underlying B n).map (system_colimit_transition_fac F h j)
+
+private def system_colimit_object {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) : StrictRingSystem B where
+  level n := colimit (F ⋙ systemEvaluation B n)
+  transition h := system_colimit_transition F h
+  identity n U x := by
+    let R := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op n))
+    have : PreservesFiniteColimits (toSheaf.{w} R) :=
+      (moduleSheaves_colimits_forgetful R).2.2.1
+    have he : (toSheaf R).map (system_colimit_transition F (Nat.le_refl n)) =
+        𝟙 ((toSheaf R).obj (colimit (F ⋙ systemEvaluation B n))) := by
+      apply (isColimitOfPreserves (toSheaf R)
+        (colimit.isColimit (F ⋙ systemEvaluation B n))).hom_ext
+      intro j
+      change (toSheaf R).map (colimit.ι (F ⋙ systemEvaluation B n) j) ≫ _ =
+        (toSheaf R).map (colimit.ι (F ⋙ systemEvaluation B n) j) ≫ _
+      rw [← Functor.map_comp, system_colimit_transition_fac]
+      ext V y
+      change (colimit.ι (F ⋙ systemEvaluation B n) j).val.app V
+          (((F.obj j).transition (Nat.le_refl n)).val.app V y) =
+        (colimit.ι (F ⋙ systemEvaluation B n) j).val.app V y
+      rw [(F.obj j).identity]
+    exact congrArg (fun f : (toSheaf R).obj (colimit (F ⋙ systemEvaluation B n)) ⟶
+      (toSheaf R).obj (colimit (F ⋙ systemEvaluation B n)) ↦ f.hom.app U x) he
+  compose {l m n} h k U x := by
+    let R (i : ℕ) :=
+      (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op i))
+    have : PreservesFiniteColimits (toSheaf.{w} (R n)) :=
+      (moduleSheaves_colimits_forgetful (R n)).2.2.1
+    have he : (toSheaf (R n)).map (system_colimit_transition F (h.trans k)) =
+        (toSheaf (R n)).map (system_colimit_transition F k) ≫
+          (toSheaf (R m)).map (system_colimit_transition F h) := by
+      apply (isColimitOfPreserves (toSheaf (R n))
+        (colimit.isColimit (F ⋙ systemEvaluation B n))).hom_ext
+      intro j
+      change (toSheaf (R n)).map (colimit.ι (F ⋙ systemEvaluation B n) j) ≫ _ =
+        (toSheaf (R n)).map (colimit.ι (F ⋙ systemEvaluation B n) j) ≫ _
+      rw [system_colimit_transition_forget, ← Category.assoc,
+        system_colimit_transition_forget, Category.assoc, system_colimit_transition_forget]
+      ext V y
+      change (colimit.ι (F ⋙ systemEvaluation B l) j).val.app V
+          (((F.obj j).transition (h.trans k)).val.app V y) =
+        (colimit.ι (F ⋙ systemEvaluation B l) j).val.app V
+          (((F.obj j).transition h).val.app V (((F.obj j).transition k).val.app V y))
+      rw [(F.obj j).compose]
+    exact congrArg (fun f : (toSheaf (R n)).obj (colimit (F ⋙ systemEvaluation B n)) ⟶
+      (toSheaf (R l)).obj (colimit (F ⋙ systemEvaluation B l)) ↦ f.hom.app U x) he
+
+private def system_colimit_cocone {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) : Cocone F where
+  pt := system_colimit_object F
+  ι :=
+    { app := fun j ↦
+        { app := fun n ↦ colimit.ι (F ⋙ systemEvaluation B n) j
+          comm := fun h ↦ system_colimit_transition_fac F h j }
+      naturality := by
+        intro j k f
+        apply system_hom_ext
+        intro n
+        change (F.map f).app n ≫ colimit.ι (F ⋙ systemEvaluation B n) k =
+          colimit.ι (F ⋙ systemEvaluation B n) j ≫ 𝟙 _
+        have hh := colimit.w (F ⋙ systemEvaluation B n) f
+        change (F.map f).app n ≫ colimit.ι (F ⋙ systemEvaluation B n) k = _ at hh
+        simpa only [Category.comp_id] using hh }
+
+private def system_limit_transition {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) :
+    limit (F ⋙ systemEvaluation B n) ⟶
+      (systemRestriction B h).obj (limit (F ⋙ systemEvaluation B m)) :=
+  (isLimitOfPreserves (systemRestriction B h)
+    (limit.isLimit (F ⋙ systemEvaluation B m))).lift
+    { pt := limit (F ⋙ systemEvaluation B n)
+      π :=
+        { app := fun j ↦ limit.π (F ⋙ systemEvaluation B n) j ≫ (F.obj j).transition h
+          naturality := by
+            intro j k f
+            change 𝟙 _ ≫ (limit.π (F ⋙ systemEvaluation B n) k ≫ _) =
+              (limit.π (F ⋙ systemEvaluation B n) j ≫ (F.obj j).transition h) ≫
+                (systemRestriction B h).map ((F.map f).app m)
+            rw [Category.id_comp, Category.assoc, ← (F.map f).comm h, ← Category.assoc]
+            exact congrArg (fun g ↦ g ≫ (F.obj k).transition h)
+              (limit.w (F ⋙ systemEvaluation B n) f).symm } }
+
+private theorem system_limit_transition_fac {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (j : K) :
+    system_limit_transition F h ≫
+        (systemRestriction B h).map (limit.π (F ⋙ systemEvaluation B m) j) =
+      limit.π (F ⋙ systemEvaluation B n) j ≫ (F.obj j).transition h := by
+  apply IsLimit.fac
+
+private theorem system_limit_transition_forget {K : Type} [SmallCategory K]
+    [FinCategory K] (F : K ⥤ StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (j : K) :
+    (system_underlying B n).map (system_limit_transition F h) ≫
+        (system_underlying B m).map (limit.π (F ⋙ systemEvaluation B m) j) =
+      (system_underlying B n).map (limit.π (F ⋙ systemEvaluation B n) j) ≫
+        (system_underlying B n).map ((F.obj j).transition h) := by
+  simpa only [Functor.map_comp, system_underlying_restrict] using
+    congrArg (system_underlying B n).map (system_limit_transition_fac F h j)
+
+private def system_limit_object {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) : StrictRingSystem B where
+  level n := limit (F ⋙ systemEvaluation B n)
+  transition h := system_limit_transition F h
+  identity n U x := by
+    let R := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op n))
+    have he : (toSheaf R).map (system_limit_transition F (Nat.le_refl n)) =
+        𝟙 ((toSheaf R).obj (limit (F ⋙ systemEvaluation B n))) := by
+      apply (isLimitOfPreserves (toSheaf R)
+        (limit.isLimit (F ⋙ systemEvaluation B n))).hom_ext
+      intro j
+      change _ ≫ (toSheaf R).map (limit.π (F ⋙ systemEvaluation B n) j) =
+        _ ≫ (toSheaf R).map (limit.π (F ⋙ systemEvaluation B n) j)
+      rw [system_limit_transition_forget]
+      ext V y
+      change ((F.obj j).transition (Nat.le_refl n)).val.app V
+          ((limit.π (F ⋙ systemEvaluation B n) j).val.app V y) =
+        (limit.π (F ⋙ systemEvaluation B n) j).val.app V y
+      rw [(F.obj j).identity]
+    exact congrArg (fun f : (toSheaf R).obj (limit (F ⋙ systemEvaluation B n)) ⟶
+      (toSheaf R).obj (limit (F ⋙ systemEvaluation B n)) ↦ f.hom.app U x) he
+  compose {l m n} h k U x := by
+    let R (i : ℕ) :=
+      (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (B.obj (op i))
+    have he : (toSheaf (R n)).map (system_limit_transition F (h.trans k)) =
+        (toSheaf (R n)).map (system_limit_transition F k) ≫
+          (toSheaf (R m)).map (system_limit_transition F h) := by
+      apply (isLimitOfPreserves (toSheaf (R l))
+        (limit.isLimit (F ⋙ systemEvaluation B l))).hom_ext
+      intro j
+      change _ ≫ (toSheaf (R l)).map (limit.π (F ⋙ systemEvaluation B l) j) =
+        _ ≫ (toSheaf (R l)).map (limit.π (F ⋙ systemEvaluation B l) j)
+      rw [system_limit_transition_forget, Category.assoc, system_limit_transition_forget,
+        ← Category.assoc, system_limit_transition_forget]
+      ext V y
+      change ((F.obj j).transition (h.trans k)).val.app V
+          ((limit.π (F ⋙ systemEvaluation B n) j).val.app V y) =
+        ((F.obj j).transition h).val.app V
+          (((F.obj j).transition k).val.app V
+            ((limit.π (F ⋙ systemEvaluation B n) j).val.app V y))
+      rw [(F.obj j).compose]
+    exact congrArg (fun f : (toSheaf (R n)).obj (limit (F ⋙ systemEvaluation B n)) ⟶
+      (toSheaf (R l)).obj (limit (F ⋙ systemEvaluation B l)) ↦ f.hom.app U x) he
+
+private def system_limit_cone {K : Type} [SmallCategory K] [FinCategory K]
+    (F : K ⥤ StrictRingSystem B) : Cone F where
+  pt := system_limit_object F
+  π :=
+    { app := fun j ↦
+        { app := fun n ↦ limit.π (F ⋙ systemEvaluation B n) j
+          comm := fun h ↦ (system_limit_transition_fac F h j).symm }
+      naturality := by
+        intro j k f
+        apply system_hom_ext
+        intro n
+        change 𝟙 _ ≫ limit.π (F ⋙ systemEvaluation B n) k =
+          limit.π (F ⋙ systemEvaluation B n) j ≫ (F.map f).app n
+        have hh := (limit.w (F ⋙ systemEvaluation B n) f).symm
+        change limit.π (F ⋙ systemEvaluation B n) k =
+          limit.π (F ⋙ systemEvaluation B n) j ≫ (F.map f).app n at hh
+        simpa only [Category.id_comp] using hh }
+
+variable (B)
+
 /-- Evaluation is additive and exact.
 Source: Stacks 03DA and 03DB (blueprint: lem-pur-system-level-left-extension).
 Proof: use componentwise addition, kernels, finite biproducts and sheafified cokernels
@@ -193,7 +516,23 @@ from the preceding construction. Coverings do not change the level. -/
 theorem systemEvaluation_exact (n : ℕ) :
     (systemEvaluation B n).Additive ∧ PreservesFiniteLimits (systemEvaluation B n) ∧
       PreservesFiniteColimits (systemEvaluation B n) := by
-  sorry
+  have hadd : (systemEvaluation B n).Additive :=
+    (strictRingSystem_abelian_exists B).exists.choose_spec n
+  refine ⟨hadd, ⟨?_⟩, ⟨?_⟩⟩
+  · intro K _ _
+    constructor
+    intro F
+    let c := system_limit_cone F
+    have hc (i : ℕ) : IsLimit ((systemEvaluation B i).mapCone c) :=
+      limit.isLimit (F ⋙ systemEvaluation B i)
+    exact preservesLimit_of_preserves_limit_cone (system_isLimit c hc) (hc n)
+  · intro K _ _
+    constructor
+    intro F
+    let c := system_colimit_cocone F
+    have hc (i : ℕ) : IsColimit ((systemEvaluation B i).mapCocone c) :=
+      colimit.isColimit (F ⋙ systemEvaluation B i)
+    exact preservesColimit_of_preserves_colimit_cocone (system_isColimit c hc) (hc n)
 
 /-- Additivity witness. Source: Stacks 03DA
 (blueprint: lem-pur-system-level-left-extension). -/
@@ -247,7 +586,31 @@ at those components. -/
 theorem systemSubsequence_exact (r : ℕ ↪o ℕ) :
     (systemSubsequence B r).Additive ∧ PreservesFiniteLimits (systemSubsequence B r) ∧
       PreservesFiniteColimits (systemSubsequence B r) := by
-  sorry
+  have hadd : (systemSubsequence B r).Additive := by
+    constructor
+    intro M N f g
+    apply system_hom_ext
+    intro n
+    change (systemEvaluation B (r n)).map (f + g) =
+      (systemEvaluation (selectedSystemRings B r) n).map
+        ((systemSubsequence B r).map f + (systemSubsequence B r).map g)
+    rw [Functor.map_add, Functor.map_add]
+    rfl
+  refine ⟨hadd, ⟨?_⟩, ⟨?_⟩⟩
+  · intro K _ _
+    constructor
+    intro F
+    apply preservesLimit_of_preserves_limit_cone (limit.isLimit F)
+    apply system_isLimit
+    intro n
+    exact isLimitOfPreserves (systemEvaluation B (r n)) (limit.isLimit F)
+  · intro K _ _
+    constructor
+    intro F
+    apply preservesColimit_of_preserves_colimit_cocone (colimit.isColimit F)
+    apply system_isColimit
+    intro n
+    exact isColimitOfPreserves (systemEvaluation B (r n)) (colimit.isColimit F)
 
 /-- Additivity of restriction. Source: Stacks 03DA
 (blueprint: lem-pur-system-level-left-extension). -/
@@ -280,7 +643,9 @@ Proof: apply the specification and minimality of Nat.find to m ≤ r m. -/
 theorem systemNextSelected_spec (r : ℕ ↪o ℕ) (m : ℕ) :
     m ≤ r (systemNextSelected r m) ∧
       ∀ i : ℕ, m ≤ r i → systemNextSelected r m ≤ i := by
-  sorry
+  dsimp only [systemNextSelected]
+  exact ⟨Nat.find_spec (⟨m, r.strictMono.id_le m⟩ : ∃ i, m ≤ r i),
+    fun i hi ↦ Nat.find_min' (⟨m, r.strictMono.id_le m⟩ : ∃ i, m ≤ r i) hi⟩
 
 /-- The first selected index is monotone, including its constant intervals.
 Source: the subsequence extension of Zheng 4.1
@@ -288,7 +653,8 @@ Source: the subsequence extension of Zheng 4.1
 Proof: r(t(m+1)) ≥ m+1 ≥ m, so the minimality of t(m) gives the result. -/
 theorem systemNextSelected_mono (r : ℕ ↪o ℕ) (m : ℕ) :
     systemNextSelected r m ≤ systemNextSelected r (m + 1) := by
-  sorry
+  exact (systemNextSelected_spec r m).2 _
+    ((Nat.le_succ m).trans (systemNextSelected_spec r (m + 1)).1)
 
 /-- The first selected index of a composite selection is computed in two steps:
 `t_{r∘s}(m) = t_s(t_r(m))`. Source: the subsequence extension of Zheng 4.1
@@ -298,7 +664,13 @@ minimality of `t_r(m)`. Hence `m ≤ r (s i)` iff `t_r(m) ≤ s i` iff `t_s(t_r(
 sides are the least such `i`. -/
 theorem systemNextSelected_trans (r s : ℕ ↪o ℕ) (m : ℕ) :
     systemNextSelected (s.trans r) m = systemNextSelected s (systemNextSelected r m) := by
-  sorry
+  apply Nat.le_antisymm
+  · exact (systemNextSelected_spec (s.trans r) m).2 _
+      ((systemNextSelected_spec r m).1.trans
+        (r.monotone (systemNextSelected_spec s (systemNextSelected r m)).1))
+  · apply (systemNextSelected_spec s (systemNextSelected r m)).2
+    exact (systemNextSelected_spec r m).2 _
+      (systemNextSelected_spec (s.trans r) m).1
 
 /-- The actual iterated transition, as a natural transformation of evaluations.
 Source: Zheng, Construction 4.1 (blueprint: lem-pur-system-level-left-extension). -/
@@ -309,29 +681,6 @@ def strictSystemTransition {m n : ℕ} (h : m ≤ n) :
 
 variable {B}
 
-/-- Exactness of scalar restriction, with no flatness of the ring map.
-Source: Stacks 03DA and 03DB (blueprint: lem-pur-system-level-left-extension).
-Proof: the underlying abelian sheaf and all its maps are unchanged. Kernels and
-sheafified cokernels therefore coincide with those before restriction. -/
-theorem systemScalarRestriction_exact {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
-    PreservesFiniteLimits (restrictScalars.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) ∧
-    PreservesFiniteColimits (restrictScalars.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) := by
-  sorry
-
-/-- Exact restriction preserves finite limits. Source: Stacks 03DA
-(blueprint: lem-pur-system-level-left-extension). -/
-instance systemScalarRestrictionLimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
-    PreservesFiniteLimits (restrictScalars.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
-  (systemScalarRestriction_exact φ).1
-/-- Exact restriction preserves finite colimits. Source: Stacks 03DA
-(blueprint: lem-pur-system-level-left-extension). -/
-instance systemScalarRestrictionColimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
-    PreservesFiniteColimits (restrictScalars.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
-  (systemScalarRestriction_exact φ).2
 
 section GeneralDerivedExtension
 universe a av b bv dA dB
@@ -502,7 +851,17 @@ theorem systemSelectedTensor_trans (S : SystemScalarAssignment (J := J))
           (r.monotone (systemNextSelected_spec s (systemNextSelected r m)).1))).obj
         ((derivedSystemEvaluation (selectedSystemRings B (s.trans r))
           (systemNextSelected s (systemNextSelected r m))).obj P) := by
-  sorry
+  let F (i : ℕ) (hi : m ≤ r (s i)) : DerivedCategory (systemLevel B m) :=
+    (systemDerivedTensor S B hi).obj
+      ((derivedSystemEvaluation (selectedSystemRings B (s.trans r)) i).obj P)
+  change F _ _ = F _ _
+  have h : (⟨systemNextSelected (s.trans r) m,
+      (systemNextSelected_spec (s.trans r) m).1⟩ : {i : ℕ // m ≤ r (s i)}) =
+      ⟨systemNextSelected s (systemNextSelected r m),
+        (systemNextSelected_spec r m).1.trans
+          (r.monotone (systemNextSelected_spec s (systemNextSelected r m)).1)⟩ :=
+    Subtype.ext (systemNextSelected_trans r s m)
+  exact congrArg (fun i : {i : ℕ // m ≤ r (s i)} ↦ F i.val i.property) h
 
 /-- All ordinary and derived left extensions of strict semilinear systems, including
 componentwise coproducts and cohomology, exact evaluation, the normalized transition
