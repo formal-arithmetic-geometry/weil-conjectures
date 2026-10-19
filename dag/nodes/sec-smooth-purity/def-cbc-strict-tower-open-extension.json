@@ -14,9 +14,42 @@
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change), open-immersion cases; derived strict-tower and pro-etale refinement of these statements, with the mate construction of sites-cohomology.tex Tag 07A7 (remark-base-change) and proetale.tex Tag 09AE (definition-extension-zero). The source states the etale result; the tower realization, finite-evaluation normalization and pro-etale extension are additional assertions to be proved, not quotations from the source.; strict-tower proof steps introducing these operations."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Import the existing generic pro-etale open-extension construction [def-weil-pbc-projection-compactification]. Specializing its ring sheaves to the constant coefficient sheaves `coefficients B X` and `coefficients B U`, and its comparison isomorphism to `constantRingIso B j`, identifies its module pullback with `modulePullback B j` by unfolding the definitions.",
+   "uses": [
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specialized generic open-restriction theorem `proEtaleOpenRestriction_isRightAdjoint` therefore gives `(modulePullback B j).IsRightAdjoint`, proving `openPullback_isRightAdjoint` and making `moduleJ` its chosen left adjoint.",
+   "uses": [
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specialized exactness theorem `proEtaleRingOpenExtension_exact` gives additivity and finite limit/colimit preservation for the generic left adjoint. The adjunction `moduleJAdj` and the generic adjunction have the same right side, so `Adjunction.leftAdjointUniq` supplies a natural isomorphism from the generic extension to `moduleJ`; transport additivity and finite preservation across this isomorphism.",
+   "uses": [
+    "def-weil-pbc-projection-compactification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the resulting module exactness to the existing pointwise whiskering construction. The tower exactness, derived functor, normalized adjunctions, equality transport and evaluation comparison are all definitional or inherited from the strict tower operations, so the remaining declarations compile without additional assumptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/ProjectionCompactification.lean",
+  "place": "Specialization of proEtaleOpenRestriction_isRightAdjoint and proEtaleRingOpenExtension_exact to constant coefficient sheaves."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -291,5 +324,15 @@
   "group": "N4",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T005307-L-2749379",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
