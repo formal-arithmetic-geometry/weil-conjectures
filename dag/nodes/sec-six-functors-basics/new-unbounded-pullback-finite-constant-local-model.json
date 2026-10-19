@@ -1,0 +1,111 @@
+{
+ "id": "new-unbounded-pullback-finite-constant-local-model",
+ "kind": "statement",
+ "title": "Pullback preserves finite constant local models",
+ "statement": "For a commutative condensed ring Λ, any scheme morphism g:X→Y and internal module M over Λ_Y, HasFiniteConstantLocalModel Λ Y M implies HasFiniteConstantLocalModel Λ X (g* M), with the convention of [sk-def-sfb-constructible]. The proof retains each finitely presented condensed model on the base change of its witnessing cover.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "Constructible complexes, finite A"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Base change the witnessing cover, spelling out its domains and projections so their module-category instances share the same domain expression. For each member let q be the first projection typed from that cover member. Compare the two composite inverse images by upperStarComp and pullback.condition. Pull back the original model along q. The mapModCompIso comparison for upperStarFromPointComp, followed by extension/comap cancellation along the invertible condensedPullbackHom, identifies it with the same finite condensed model on the new member. The original finite-presentation witness is retained. The proof applies unchanged to empty schemes, empty covering families, and the zero ring.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-coefficient-morphisms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+  "place": "Constructible complexes, finite A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of modules over a condensed ring preserves finite constant local models on a base changed pro etale covering",
+   "date": "2026-10-19",
+   "results": "{\"t\": \"2026-10-18T18:43:11Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of modules over a condensed ring preserves finite constant local models on a base changed pro etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.functor\", \"Condensed.profiniteSolid\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CondensedMod.ofSheafCompHaus\", \"Condensed.finFree\"], \"digest\": \"81df777ad484a65f\"}",
+   "verdict": "No exact Mathlib match; the local library provides the composition and scalar-change APIs used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperStarFromPointComp\"",
+   "date": "2026-10-19",
+   "results": "{\"t\": \"2026-10-18T18:43:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperStarFromPointComp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact Mathlib match; the local library provides the composition and scalar-change APIs used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteConstantLocalModel|mapModCompIso",
+   "date": "2026-10-19",
+   "results": "{\"t\": \"2026-10-18T18:43:50Z\", \"tool\": \"grep\", \"query\": \"HasFiniteConstantLocalModel|mapModCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No exact Mathlib match; the local library provides the composition and scalar-change APIs used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image preserves finite constant local models of sheaves of modules",
+   "date": "2026-10-19",
+   "results": "{\"t\": \"2026-10-18T18:57:45Z\", \"tool\": \"leansearch\", \"query\": \"inverse image preserves finite constant local models of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.fullyFaithfulSheafToPresheaf_preimage_val\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.fullyFaithfulForget_preimage_val\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"PresheafOfModules.isoMk_inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\"], \"digest\": \"829404ce92899b7a\"}",
+   "verdict": "Finite-limit and free-module pullback results only; no finite constant model preservation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.UnboundedLocalizingPullback",
+  "date": "2026-10-19",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "det-proper-base-change-unbounded-pullback"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-proper-base-change-unbounded",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullbackFiniteConstantLocalModel",
+  "file": "lean/Sheaf/Paper/PullbackFiniteConstantLocalModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pullback_finiteConstantLocalModel",
+  "statement": "theorem pullback_finiteConstantLocalModel\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))\n    (hM : HasFiniteConstantLocalModel Λ Y M) :\n    HasFiniteConstantLocalModel Λ X ((CondensedRing.upperStar Λ g).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

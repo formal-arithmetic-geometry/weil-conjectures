@@ -11,30 +11,16 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.ConstantModelTorAmplitude
+import Sheaf.Paper.PullbackFiniteConstantLocalModel
+import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.Paper.InverseImageModuleFlat
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible
-import Sheaf.CategoryTheory.Triangulated.LocalizingFunctor
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.LocalizingAdmissibleCoefficients
-import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.LocalizingClosureExistence
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Inverse image on localizing categories
 
@@ -109,6 +95,246 @@ structure UnboundedLocalizingPullback
       ((localizingClosureProEtale Λ Y).ι ⋙ (CondensedRing.upperStar Λ g).leftDerivedFunctor)
       localizing)
 
+
+private theorem coproduct_small_support.{w, v, u₂, v₂}
+    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [LocallySmall.{w} D]
+    {I : Type v} (K : I → D) (t : Cofan K) (ht : IsColimit t) :
+    Small.{w} {i // ¬ IsZero (K i)} := by
+  classical
+  let p (i : I) : t.pt ⟶ K i := ht.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
+  have hp (i j : I) : t.inj j ≫ p i = Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
+    ht.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
+  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ t.inj i.val)
+  intro i j hij
+  apply Subtype.ext
+  by_contra hne
+  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
+  have hi : t.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
+  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
+  have hid : 𝟙 (K i.val) = 0 := by
+    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
+  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
+
+/-- Shrinking nonzero support extends preservation to every indexing universe. -/
+private theorem preservesCoproducts_of_small.{w, v, u₁, u₂, v₁, v₂}
+    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [LocallySmall.{w} D]
+    {C : Type u₁} [Category.{v₁} C] [Preadditive C]
+    (c : D ⥤ C) [c.PreservesZeroMorphisms]
+    (hsmall : ∀ J : Type w, PreservesColimitsOfShape (Discrete J) c)
+    (I : Type v) : PreservesColimitsOfShape (Discrete I) c := by
+  classical
+  have hpres (K : I → D) : PreservesColimit (Discrete.functor K) c := by
+    refine ⟨fun {t} ht ↦ ⟨?_⟩⟩
+    let t₀ : Cofan K := t
+    have hsupport : Small.{w} {i // ¬ IsZero (K i)} := coproduct_small_support K t₀ ht
+    let J := {i // ¬ IsZero (K i)}
+    have : PreservesColimitsOfShape (Discrete (Shrink.{w} J)) c := hsmall _
+    have : PreservesColimitsOfShape (Discrete J) c :=
+      preservesColimitsOfShape_of_equiv (Discrete.equivalence (equivShrink J)).symm c
+    let U : J → D := fun i ↦ K i.val
+    let r : Cofan U := Cofan.mk t.pt (fun i ↦ t₀.inj i.val)
+    have hr : IsColimit r := by
+      refine Cofan.IsColimit.mk r (fun s ↦ ht.desc (Cofan.mk s.pt
+        (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
+      · intro s i
+        obtain ⟨i, hi⟩ := i
+        change t.ι.app (Discrete.mk i) ≫ _ = _
+        rw [ht.fac]
+        simp only [Cofan.mk_ι_app, dif_pos hi]
+      · intro s m hm
+        apply ht.hom_ext
+        intro ⟨i⟩
+        rw [ht.fac]
+        by_cases hi : ¬ IsZero (K i)
+        · simpa only [r, cofan_mk_inj, t₀, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+            using hm ⟨i, hi⟩
+        · exact (not_not.mp hi).eq_of_src _ _
+    let q : Cofan (fun i ↦ c.obj (U i)) :=
+      Cofan.mk (c.obj t.pt) (fun i ↦ c.map (t₀.inj i.val))
+    have hq : IsColimit q := isColimitCofanMkObjOfIsColimit c U _ hr
+    refine { desc := fun s ↦ hq.desc (Cofan.mk s.pt
+        (fun i ↦ s.ι.app (Discrete.mk i.val))), fac := ?_, uniq := ?_ }
+    · intro s ⟨i⟩
+      by_cases hi : ¬ IsZero (K i)
+      · exact hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
+          (Discrete.mk ⟨i, hi⟩)
+      · exact (c.map_isZero (not_not.mp hi)).eq_of_src _ _
+    · intro s m hm
+      apply Cofan.IsColimit.hom_ext hq
+      intro i
+      exact (hm (Discrete.mk i.val)).trans
+        (hq.fac (Cofan.mk s.pt (fun i ↦ s.ι.app (Discrete.mk i.val)))
+          (Discrete.mk i)).symm
+  exact preservesColimitsOfShape_of_discrete c
+
+private theorem pullback_exact
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y) :
+    (CondensedRing.upperStar Λ g).leftDerivedFunctor.IsTriangulated := by
+  let : (CondensedRing.upperStar Λ g).leftDerivedFunctor.CommShift ℤ :=
+    unboundedLocalizingPullbackCommShift Λ g
+  let e := (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g).symm
+  let : NatTrans.CommShift e.hom ℤ := Functor.CommShift.ofIso_compatibility e ℤ
+  exact Functor.isTriangulated_of_iso e
+
+private theorem pullback_flat
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (CondensedRing.upperStar Λ f).PreservesFlat := by
+  let G := ProEtale.upperStar Ab.{u + 1} f
+  let R := condensedRingObj Λ Y
+  let ρ := (asIso (condensedPullbackHom Λ f)).inv
+  have h := inverseImageModule_preservesFlat f R (condensedRingObj Λ X) ρ
+  let e : CondensedRing.upperStar Λ f ≅ Mod.mapModComap ρ :=
+    Functor.isoWhiskerLeft (G.mapMod R)
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
+  exact ⟨fun hM ↦ ObjectProperty.prop_of_iso ObjectProperty.flat
+    (e.symm.app _) (h.flat_obj hM)⟩
+
+private theorem pullback_tor
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))
+    (hK : DerivedCategory.finiteTorAmplitude _ K) :
+    DerivedCategory.finiteTorAmplitude _
+      ((CondensedRing.upperStar Λ g).leftDerivedFunctor.obj K) := by
+  let F := CondensedRing.upperStar Λ g
+  obtain ⟨a, b, hK⟩ := hK
+  obtain ⟨P, hPa, hPb, hP, ⟨e⟩⟩ :=
+    DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn hK
+  let P' : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1}) (condensedRingObj Λ Y')) ℤ :=
+    (F.mapHomologicalComplex (.up ℤ)).obj P
+  have : P'.IsStrictlyGE a := inferInstance
+  have : P'.IsStrictlyLE b := inferInstance
+  have hflat := pullback_flat Λ g
+  have hP' : ∀ n, ObjectProperty.flat (P'.X n) :=
+    fun n ↦ hflat.flat_obj (hP n)
+  refine ⟨a, b, (DerivedCategory.torAmplitudeIn _ a b).prop_of_iso ?_
+    (DerivedCategory.torAmplitudeIn_Q_obj_of_flat P' a b hP')⟩
+  exact (F.mapDerivedCategoryFactors.app P).symm ≪≫ F.mapDerivedCategory.mapIso e ≪≫
+    (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g).symm.app K
+
+private theorem pullback_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
+    (g : X ⟶ Y)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (hM : IsConstantModelConstructible Λ Y M) :
+    IsConstantModelConstructible Λ X ((CondensedRing.upperStar Λ g).obj M) := by
+  classical
+  have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
+  have hY : CompactSpace Y ∧ QuasiSeparatedSpace Y := ⟨inferInstance, inferInstance⟩
+  simp only [IsConstantModelConstructible, if_pos hX, if_pos hY] at hM ⊢
+  obtain ⟨S, hS⟩ := hM
+  let T := S.pullback g
+  refine ⟨T, fun i ↦ ?_⟩
+  let q : T.domain i ⟶ S.domain i := pullback.fst (S.immersion i) g
+  have comm : q ≫ S.immersion i = T.immersion i ≫ g := pullback.condition
+  have h := pullback_finiteConstantLocalModel Λ q _ (hS i)
+  let e := ((CondensedRing.upperStarComp Λ (T.immersion i) g).app M).symm ≪≫
+    eqToIso (congrArg (fun f ↦ (CondensedRing.upperStar Λ f).obj M)
+      comm.symm) ≪≫
+    (CondensedRing.upperStarComp Λ q (S.immersion i)).app M
+  obtain ⟨U, hU⟩ := h
+  exact ⟨U, fun j ↦ by
+    obtain ⟨P, hP, ⟨eP⟩⟩ := hU j
+    exact ⟨P, hP, ⟨(CondensedRing.upperStar Λ (U.f j)).mapIso e ≪≫ eP⟩⟩⟩
+
+private theorem pullback_bounded_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y)
+    (h : ∀ M, IsConstantModelConstructible Λ Y M →
+      IsConstantModelConstructible Λ Y' ((CondensedRing.upperStar Λ g).obj M))
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))
+    (hK : constantModelBoundedConstructible Λ Y K) :
+    constantModelBoundedConstructible Λ Y'
+      ((CondensedRing.upperStar Λ g).leftDerivedFunctor.obj K) := by
+  let F := CondensedRing.upperStar Λ g
+  let e := CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g
+  have hi := (constantModelConstructibleFiniteTor_wellDefined Λ Y').1
+  refine ⟨?_, fun n ↦ ?_⟩
+  · exact DerivedCategory.TStructure.t.bounded.prop_of_iso (e.symm.app K)
+      (F.bounded_mapDerivedCategory_obj hK.1)
+  · exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ Y')
+      ((F.mapDerivedCategoryHomologyFunctorIso n).app K ≪≫
+        (DerivedCategory.homologyFunctor _ n).mapIso (e.symm.app K)) (h _ (hK.2 n))
+
+set_option maxHeartbeats 200000 in
+-- The full-subcategory and universe transports require explicit structural comparisons.
+private theorem pullback_of_constructible
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {Y' Y : Scheme.{u}} (g : Y' ⟶ Y)
+    (h : ∀ M, IsConstantModelConstructible Λ Y M →
+      IsConstantModelConstructible Λ Y' ((CondensedRing.upperStar Λ g).obj M)) :
+    Nonempty (UnboundedLocalizingPullback Λ g) := by
+  let F := (CondensedRing.upperStar Λ g).leftDerivedFunctor
+  let G : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :=
+    constantModelBoundedConstructible Λ Y ⊓ DerivedCategory.finiteTorAmplitude _
+  let G' : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1}) (condensedRingObj Λ Y'))) :=
+    constantModelBoundedConstructible Λ Y' ⊓ DerivedCategory.finiteTorAmplitude _
+  obtain ⟨hsums, _, _, hs, _, _, _, _⟩ := localizingClosure_exists Λ Y G
+  obtain ⟨hsums', _, _, ht, hgen, _, _, _⟩ := localizingClosure_exists Λ Y' G'
+  let : HasCoproducts.{u + 1} (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) := hsums
+  let : HasCoproducts.{u + 1} (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y') Ab.{u + 1}) (condensedRingObj Λ Y'))) := hsums'
+  let : F.IsTriangulated := pullback_exact Λ g
+  let : ∀ I : Type (u + 2), PreservesColimitsOfShape (Discrete I) F := fun I ↦
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  let : (localizingClosureProEtale Λ Y).IsTriangulated := hs.1
+  let : (localizingClosureProEtale Λ Y').IsTriangulated := ht.1
+  let : (localizingClosureProEtale Λ Y').IsClosedUnderIsomorphisms := ht.2.1
+  have hc : ∀ K, G K → G' (F.obj K) := fun K hK ↦
+    ⟨pullback_bounded_constructible Λ g h K hK.1, pullback_tor Λ g K hK.2⟩
+  have hm : ∀ K, localizingClosureProEtale Λ Y K →
+      localizingClosureProEtale Λ Y' (F.obj K) := by
+    intro K hK
+    apply hK ((localizingClosureProEtale Λ Y').inverseImage F)
+    · refine ⟨inferInstance, inferInstance, ?_⟩
+      intro I D hD hmem
+      let := hD
+      apply ObjectProperty.prop_of_iso (localizingClosureProEtale Λ Y')
+        (preservesColimitIso F D).symm
+      exact ht.2.2 (D ⋙ F) inferInstance hmem
+    · exact fun L hL ↦ hgen _ (hc L hL)
+  let hm' := fun K : (localizingClosureProEtale Λ Y).FullSubcategory ↦ hm K.obj K.property
+  let R := (localizingClosureProEtale Λ Y').lift
+    ((localizingClosureProEtale Λ Y).ι ⋙ F) hm'
+  have hrsmall (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I) R := by
+    let : (localizingClosureProEtale Λ Y).IsClosedUnderIsomorphisms := hs.2.1
+    let : (localizingClosureProEtale Λ Y).IsClosedUnderColimitsOfShape
+        (Discrete (ULift.{u + 2} I)) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.mk' (by
+        rintro _ ⟨D, hD⟩
+        exact hs.2.2 D inferInstance (fun i ↦ hD (Discrete.mk i)))
+    let : (localizingClosureProEtale Λ Y).IsClosedUnderColimitsOfShape (Discrete I) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+        (Discrete.equivalence Equiv.ulift)
+    have : PreservesColimitsOfShape (Discrete I) F :=
+      (CondensedRing.derivedUpperStarLowerStarAdjunction Λ g).leftAdjoint_preservesColimits
+        |>.preservesColimitsOfShape
+    have : PreservesColimitsOfShape (Discrete I)
+        (R ⋙ (localizingClosureProEtale Λ Y').ι) :=
+      preservesColimitsOfShape_of_natIso
+        ((localizingClosureProEtale Λ Y').liftCompιIso _ hm').symm
+    exact preservesColimitsOfShape_of_reflects_of_preserves R
+      (localizingClosureProEtale Λ Y').ι
+  refine ⟨{ exact := inferInstance
+            sums := fun I ↦ inferInstance
+            constructible := hc
+            localizing := hm'
+            restrictionExact := ?_
+            restrictionSums := ?_ }⟩
+  · infer_instance
+  · exact fun I ↦ preservesCoproducts_of_small R hrsmall I
+
 set_option maxHeartbeats 800000 in
 -- Elaborating all six coefficient instances needs the same heartbeat budget.
 /-- Exact inverse image preserves small sums, bounded constructible finite-Tor objects,
@@ -116,77 +342,35 @@ and their localizing closure, for each of the six admissible coefficient types.
 Source: blueprint main-20261015, inverse image on the localizing categories
 (blueprint: det-proper-base-change-unbounded-pullback).
 
-Proof (the five steps of the node):
+Proof (the four steps of the node):
 
-1. *Exactness and sums.* By [sk-prop-sfb-cartesian-coefficients], the coefficient map
-   $g^{-1}\Lambda_Y\to\Lambda_{Y'}$ is invertible and the module inverse image is exact. Apply
-   [lem-weil-pbc-exact-functor-derived-factorization] to this exact functor: its termwise
-   functor descends to a triangulated functor on the unbounded derived categories. For any
-   K-flat resolution $P\to K$, exactness makes the termwise map $g^*P\to g^*K$ a quasi-
-   isomorphism. The resolution computation in [sk-def-sfb-derived-categories] therefore
-   identifies this descended functor with the total derived pullback $Lg^*$ of [sk-def-sfb-
-   module-derived-pushpull]. The latter node supplies $Lg^*\dashv Rg_*$, so [lem-weil-pbc-left-
-   adjoint-preserves-colimits] gives preservation of every existing small coproduct. Such
-   coproducts exist here: module objects over the commutative coefficient ring are ordinary
-   sheaves of modules, hence form a Grothendieck abelian category by [lem-pur-ringed-site-
-   grothendieck-abelian]; [lem-kun-grothendieck-derived-coproducts] supplies the small derived
-   coproducts, including the empty one. The small sites are taken in the fixed universe of [sk-
-   def-localizing-closure].
+1. Transport exactness of the termwise derived inverse image along
+   `leftDerivedUpperStarIsoMapDerivedCategory`, using the canonical shift structure
+   above. The derived adjunction gives preservation of every existing coproduct.
 
-2. *Bounded constructibility, every admissible $\Lambda$.* Both schemes are quasi-compact and
-   quasi-separated: finite type of their structure maps means that they are quasi-compact [def-
-   weil-finite-type-morphism], since the base $\operatorname{Spec}k$ is affine; quasi-
-   separatedness follows from separatedness because the diagonal is a closed immersion, hence
-   proper and quasi-compact [def-weil-proper-morphism; lem-weil-pbc-proper-fp-permanence]. Let
-   $K\in\Dctf(Y,\Lambda)$, so $K$ is bounded with cohomology in some $[c,d]$ and every $H^i(K)$
-   is constructible in the sense of [sk-def-sfb-constructible] (finite constant local models on
-   the strata of a finite constructible stratification). By step 1, $Lg^*K$ is represented by
-   the termwise inverse image $g^*K$, and since the module inverse image is exact [sk-prop-sfb-
-   cartesian-coefficients], $H^i(g^*K)\cong g^*H^i(K)$ for every $i$. Hence $H^i(Lg^*K)=0$
-   outside $[c,d]$, and each $g^*H^i(K)$ is constructible by [lem-sfb-pullback-constant-model-
-   constructible], applied to the qcqs schemes $Y,Y'$. Thus $Lg^*K$ is bounded with
-   constructible cohomology in the sense of [sk-def-sfb-constructible].
+2. The structure maps make both schemes quasi-compact and quasi-separated. Pull
+   back a finite constructible stratification, and apply
+   `pullback_finiteConstantLocalModel` to its strata. Composition isomorphisms
+   identify the resulting inverse images. The exact-derived homology comparison
+   and boundedness API then preserve bounded constructible complexes.
 
-3. *Finite coefficients: Tor amplitude.* Let $A$ be finite and killed by a power of $\ell$, and
-   $K\in\Dctf(Y,A)$. By step 2, $Lg^*K$ is bounded with constructible cohomology. Choose $a\le
-   b$ bounding the Tor amplitude of $K$ [sk-def-sfb-constructible]. We realize the source's
-   flat-model argument by the general bounded-flat-model construction, valid over the stated
-   field $k$. On the ringed site $(Y_{\mathrm{pro\acute et}},A_Y)$, [lem-pur-ringed-site-
-   grothendieck-abelian] and [lem-pc-sheaf-modules-tensor-closed] give an additive symmetric
-   closed monoidal Grothendieck category of modules. The functorial bounded-above flat
-   replacements of [lem-pc-kflat-bounded-flat-replacement], applied to $M[0]$ with upper bound
-   zero, give a functor $F$ with flat values and a natural epimorphism $F(M)\to M$. Set $M_0=M$
-   and $M_{r+1}=\ker(F(M_r)\to M_r)$ for $r\ge0$. The differential $F(M_{r+1})\to F(M_r)$ is the
-   composite through $M_{r+1}\hookrightarrow F(M_r)$; the resulting augmented complex is exact,
-   and naturality and functoriality of kernels give functorial flat resolutions. Thus all
-   hypotheses of [lem-sc-source-tor-amplitude-flat-model] hold, and it gives $K\cong Q(P)$ with
-   flat $P^i$ and $P^i=0$ outside $[a,b]$. By [lem-pc-bounded-above-flat-kflat-site], $P$ is
-   K-flat. The morphism of pro-étale topoi [def-weil-proetale-inverse-image], together with the
-   coefficient isomorphism of [sk-prop-sfb-cartesian-coefficients], is a morphism of ringed
-   topoi, so [lem-weil-pbc-ringed-topos-kflat-pullback] says that $g^*P$ is K-flat with flat
-   terms. Exactness from step 1 makes $Q(g^*P)$ represent $Lg^*K$, and its terms still vanish
-   outside $[a,b]$. The reverse implication of the flat-model criterion [lem-sc-source-tor-
-   amplitude-flat-model] is not needed: directly, K-flat derived tensor is computed by tensoring
-   a K-flat argument [sk-def-sfb-derived-tensor-hom]. For any $A_{Y'}$-module sheaf $N$,
-   $Lg^*K\otimes^{\mathbf L}N[0]$ is represented by the ordinary complex with terms
-   $g^*P^i\otimes N$. These terms vanish outside $[a,b]$, so its cohomology vanishes there. This
-   tests every sheaf $N$ on $Y'$, and proves finite Tor amplitude. Together with step 2 it
-   proves $Lg^*K\in\Dctf(Y',A)$.
+3. For every commutative condensed coefficient ring, represent a finite-Tor object
+   by a bounded complex of flat modules using
+   `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`. The coefficient
+   comparison is invertible, so `inverseImageModule_preservesFlat` preserves its
+   flat terms. The termwise inverse image retains the strict degree bounds.
+   `DerivedCategory.torAmplitudeIn_Q_obj_of_flat` and the derived comparison
+   therefore preserve Tor amplitude, uniformly for all six coefficient types.
 
-4. *Integral and field coefficients.* For $\Lambda=\mathbf Z_\ell,\mathcal O_E,\mathbf
-   Q_\ell,E,\overline{\mathbf Q}_\ell$, [det-def-localizing-closure-ctf-equals-bc] identifies
-   $\Dctf(T,\Lambda)$ with $\Dbc(T,\Lambda)$ for the qcqs schemes $T=Y,Y'$ of step 2, both in
-   the constant-local-model sense of [sk-def-sfb-constructible]. For
-   $K\in\Dctf(Y,\Lambda)=\Dbc(Y,\Lambda)$, step 2 gives
-   $Lg^*K\in\Dbc(Y',\Lambda)=\Dctf(Y',\Lambda)$. Pullback here is the ambient, uncompleted
-   inverse image of step 1.
-
-5. *Localizing closures.* Apply [det-proper-image-localizing-principle] with $\mathcal
-   T=D(Y_{\mathrm{pro\acute et}},\Lambda)$, $\mathcal T'=D(Y'_{\mathrm{pro\acute et}},\Lambda)$,
-   $F=Lg^*$, $\mathcal G=\Dctf(Y,\Lambda)$ and $\mathcal G'=\Dctf(Y',\Lambda)$. Step 1 supplies
-   exactness, small sums in both ambient categories, and their preservation; steps 2–4 supply
-   $F(\mathcal G)\subseteq\mathcal G'\subseteq\Loc(\mathcal G')$. The cited statement therefore
-   gives the asserted image of $\Loc(\mathcal G)$ and the exact, sum-preserving restriction.
+4. The inverse image of the target localizing closure is localizing and contains
+   the source generators. The defining intersection gives the object inclusion,
+   and the full-subcategory lift inherits exactness. Closure under coproducts
+   makes the source inclusion preserve them; the target inclusion reflects them.
+   To cover the larger indexing universe, embed the nonzero support of any
+   existing coproduct into its endomorphisms using coordinate idempotents. This
+   support is small in the Hom universe. Shrink it and omit the zero summands to
+   reduce preservation to the smaller coproducts. `localizingClosure_exists`
+   supplies the ambient coproducts and the closure's triangulated structure.
 -/
 theorem unboundedLocalizingPullback
     (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hpl : p ≠ l)
@@ -205,6 +389,18 @@ theorem unboundedLocalizingPullback
       Nonempty (UnboundedLocalizingPullback (Profinite.padicIntegersRingObj l E) g) ∧
       Nonempty (UnboundedLocalizingPullback (Profinite.continuousMapRingObj E) g)) ∧
     Nonempty (UnboundedLocalizingPullback (Profinite.padicAlgClRingObj l) g) := by
-  sorry
+  have _ := hpl
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  have : CompactSpace Y' := QuasiCompact.compactSpace_of_compactSpace
+    (Y' ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Y :=
+    (quasiSeparated_iff_quasiSeparatedSpace (Y ↘ Spec (.of k))).mp inferInstance
+  have : QuasiSeparatedSpace Y' :=
+    (quasiSeparated_iff_quasiSeparatedSpace (Y' ↘ Spec (.of k))).mp inferInstance
+  have H (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+      [MonObj Λ] [IsCommMonObj Λ] : Nonempty (UnboundedLocalizingPullback Λ g) :=
+    pullback_of_constructible Λ g (pullback_constructible Λ g)
+  exact ⟨fun _ _ _ _ _ _ ↦ H _, H _, H _, fun _ ↦ ⟨H _, H _⟩, H _⟩
 
 end AlgebraicGeometry.ProEtale

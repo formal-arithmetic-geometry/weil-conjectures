@@ -16969,3 +16969,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Y7/Sheaf.AlgebraicGeometry.EllCohomologicalDimensionComparison (stage 3; reviewer PASS; first push; landing 20261019T034400-L-427381 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Y7/Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus (stage 3; reviewer PASS; first push; landing 20261019T034401-L-427518 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Y7/Sheaf.Paper.DerivedCompleteKoszulReconstruction (stage 3; reviewer PASS; first push; landing 20261019T034402-L-427636 (interface); batch 20261019T034248; modules 2; new nodes 1)
+- 03:44 L: merged deliver/Y7/Sheaf.Paper.UnboundedLocalizingPullback (stage 3; reviewer PASS; first push; landing 20261019T034402-L-427746 (interface); batch 20261019T034248; modules 2; new nodes 1)

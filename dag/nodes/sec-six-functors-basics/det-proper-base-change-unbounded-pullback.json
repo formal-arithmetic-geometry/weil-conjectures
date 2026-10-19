@@ -22,111 +22,63 @@
  ],
  "proof": [
   {
-   "text": "*Exactness and sums.* By [sk-prop-sfb-cartesian-coefficients], the coefficient map $g^{-1}\\Lambda_Y\\to\\Lambda_{Y'}$ is invertible and the module inverse image is exact. Apply [lem-weil-pbc-exact-functor-derived-factorization] to this exact functor: its termwise functor descends to a triangulated functor on the unbounded derived categories. For any K-flat resolution $P\\to K$, exactness makes the termwise map $g^*P\\to g^*K$ a quasi-isomorphism. The resolution computation in [sk-def-sfb-derived-categories] therefore identifies this descended functor with the total derived pullback $Lg^*$ of [sk-def-sfb-module-derived-pushpull]. The latter node supplies $Lg^*\\dashv Rg_*$, so [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of every existing small coproduct. Such coproducts exist here: module objects over the commutative coefficient ring are ordinary sheaves of modules, hence form a Grothendieck abelian category by [lem-pur-ringed-site-grothendieck-abelian]; [lem-kun-grothendieck-derived-coproducts] supplies the small derived coproducts, including the empty one. The small sites are taken in the fixed universe of [sk-def-localizing-closure].",
+   "text": "Transport the triangulated structure of the exact termwise derived functor along leftDerivedUpperStarIsoMapDerivedCategory, using precisely the canonical CommShift of the public statement. The derived adjunction supplies preservation of all existing coproducts, including empty coproducts.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "sk-def-sfb-derived-categories",
     "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-kun-grothendieck-derived-coproducts",
-    "sk-def-localizing-closure"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Exactness and sums"
-   }
+   "elementary": false
   },
   {
-   "text": "*Bounded constructibility, every admissible $\\Lambda$.* Both schemes are quasi-compact and quasi-separated: finite type of their structure maps means that they are quasi-compact [def-weil-finite-type-morphism], since the base $\\operatorname{Spec}k$ is affine; quasi-separatedness follows from separatedness because the diagonal is a closed immersion, hence proper and quasi-compact [def-weil-proper-morphism; lem-weil-pbc-proper-fp-permanence]. Let $K\\in\\Dctf(Y,\\Lambda)$, so $K$ is bounded with cohomology in some $[c,d]$ and every $H^i(K)$ is constructible in the sense of [sk-def-sfb-constructible] (finite constant local models on the strata of a finite constructible stratification). By step 1, $Lg^*K$ is represented by the termwise inverse image $g^*K$, and since the module inverse image is exact [sk-prop-sfb-cartesian-coefficients], $H^i(g^*K)\\cong g^*H^i(K)$ for every $i$. Hence $H^i(Lg^*K)=0$ outside $[c,d]$, and each $g^*H^i(K)$ is constructible by [lem-sfb-pullback-constant-model-constructible], applied to the qcqs schemes $Y,Y'$. Thus $Lg^*K$ is bounded with constructible cohomology in the sense of [sk-def-sfb-constructible].",
+   "text": "The schemes are qcqs by the finite-type and separated structure maps. Pull back their finite constructible stratifications using Scheme.Stratification.pullback, then apply new-unbounded-pullback-finite-constant-local-model on each stratum. Transport along the square composition isomorphism to obtain constructibility. Exactness gives the cohomology comparison and boundedness; use constructibility invariance under isomorphism.",
    "uses": [
     "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
     "lem-weil-pbc-proper-fp-permanence",
+    "new-unbounded-pullback-finite-constant-local-model",
     "sk-def-sfb-constructible",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-pullback-constant-model-constructible"
+    "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Constructible complexes, finite A"
-   }
+   "elementary": false
   },
   {
-   "text": "*Finite coefficients: Tor amplitude.* Let $A$ be finite and killed by a power of $\\ell$, and $K\\in\\Dctf(Y,A)$. By step 2, $Lg^*K$ is bounded with constructible cohomology. Choose $a\\le b$ bounding the Tor amplitude of $K$ [sk-def-sfb-constructible]. We realize the source's flat-model argument by the general bounded-flat-model construction, valid over the stated field $k$. On the ringed site $(Y_{\\mathrm{pro\\acute et}},A_Y)$, [lem-pur-ringed-site-grothendieck-abelian] and [lem-pc-sheaf-modules-tensor-closed] give an additive symmetric closed monoidal Grothendieck category of modules. The functorial bounded-above flat replacements of [lem-pc-kflat-bounded-flat-replacement], applied to $M[0]$ with upper bound zero, give a functor $F$ with flat values and a natural epimorphism $F(M)\\to M$. Set $M_0=M$ and $M_{r+1}=\\ker(F(M_r)\\to M_r)$ for $r\\ge0$. The differential $F(M_{r+1})\\to F(M_r)$ is the composite through $M_{r+1}\\hookrightarrow F(M_r)$; the resulting augmented complex is exact, and naturality and functoriality of kernels give functorial flat resolutions. Thus all hypotheses of [lem-sc-source-tor-amplitude-flat-model] hold, and it gives $K\\cong Q(P)$ with flat $P^i$ and $P^i=0$ outside $[a,b]$. By [lem-pc-bounded-above-flat-kflat-site], $P$ is K-flat. The morphism of pro-étale topoi [def-weil-proetale-inverse-image], together with the coefficient isomorphism of [sk-prop-sfb-cartesian-coefficients], is a morphism of ringed topoi, so [lem-weil-pbc-ringed-topos-kflat-pullback] says that $g^*P$ is K-flat with flat terms. Exactness from step 1 makes $Q(g^*P)$ represent $Lg^*K$, and its terms still vanish outside $[a,b]$. The reverse implication of the flat-model criterion [lem-sc-source-tor-amplitude-flat-model] is not needed: directly, K-flat derived tensor is computed by tensoring a K-flat argument [sk-def-sfb-derived-tensor-hom]. For any $A_{Y'}$-module sheaf $N$, $Lg^*K\\otimes^{\\mathbf L}N[0]$ is represented by the ordinary complex with terms $g^*P^i\\otimes N$. These terms vanish outside $[a,b]$, so its cohomology vanishes there. This tests every sheaf $N$ on $Y'$, and proves finite Tor amplitude. Together with step 2 it proves $Lg^*K\\in\\Dctf(Y',A)$.",
+   "text": "For every commutative condensed coefficient, choose a bounded flat representative using exists_iso_Q_obj_flat_of_torAmplitudeIn. Inverse image preserves flat terms via inverseImageModule_preservesFlat and the invertible coefficient comparison. Its termwise image retains both strict degree bounds. Apply torAmplitudeIn_Q_obj_of_flat and transport through the exact-derived comparison. This handles all six coefficients uniformly and avoids the separate ctf=bc theorem.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-kflat-bounded-flat-replacement",
     "lem-sc-source-tor-amplitude-flat-model",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-weil-proetale-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "sk-def-sfb-derived-tensor-hom"
+    "new-proetale-inverse-image-module-flat",
+    "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Constructible complexes, finite A"
-   }
+   "elementary": false
   },
   {
-   "text": "*Integral and field coefficients.* For $\\Lambda=\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf(T,\\Lambda)$ with $\\Dbc(T,\\Lambda)$ for the qcqs schemes $T=Y,Y'$ of step 2, both in the constant-local-model sense of [sk-def-sfb-constructible]. For $K\\in\\Dctf(Y,\\Lambda)=\\Dbc(Y,\\Lambda)$, step 2 gives $Lg^*K\\in\\Dbc(Y',\\Lambda)=\\Dctf(Y',\\Lambda)$. Pullback here is the ambient, uncompleted inverse image of step 1.",
+   "text": "Use localizingClosure_exists to obtain the triangulated and replete localizing closures. The inverse image of the target closure under Lg* is localizing and contains the generators, so the defining intersection yields the object inclusion. The inherited full-subcategory lift is triangulated. Its inclusion preserves small coproducts by closure, and the target inclusion reflects them. Extend preservation from the Hom universe to all existing larger coproducts: distinct nonzero summands give distinct coordinate idempotents in the endomorphisms of the coproduct; shrink that support and use that omitted summands are zero.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
-    "sk-def-sfb-constructible"
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Constructible complexes, $\\mathcal O_E$, $E$, and $\\Qlb$"
-   }
-  },
-  {
-   "text": "*Localizing closures.* Apply [det-proper-image-localizing-principle] with $\\mathcal T=D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$, $\\mathcal T'=D(Y'_{\\mathrm{pro\\acute et}},\\Lambda)$, $F=Lg^*$, $\\mathcal G=\\Dctf(Y,\\Lambda)$ and $\\mathcal G'=\\Dctf(Y',\\Lambda)$. Step 1 supplies exactness, small sums in both ambient categories, and their preservation; steps 2–4 supply $F(\\mathcal G)\\subseteq\\mathcal G'\\subseteq\\Loc(\\mathcal G')$. The cited statement therefore gives the asserted image of $\\Loc(\\mathcal G)$ and the exact, sum-preserving restriction.",
-   "uses": [
-    "det-proper-image-localizing-principle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-    "place": "Localizing closures"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-finite-type-morphism",
-  "def-weil-proetale-inverse-image",
-  "def-weil-proper-morphism",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-proper-image-localizing-principle",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "det-def-localizing-closure-existence",
+  "det-def-sfb-constructible-tor-amplitude",
   "lem-sc-source-tor-amplitude-flat-model",
-  "lem-sfb-pullback-constant-model-constructible",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "new-proetale-inverse-image-module-flat",
+  "new-unbounded-pullback-finite-constant-local-model",
   "sk-def-localizing-closure",
   "sk-def-sfb-constructible",
-  "sk-def-sfb-derived-categories",
-  "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-module-derived-pushpull",
   "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-  "place": "## Proof; all three paragraphs expanded"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.md",
+  "place": "Y7 Lean proof, 2026-10-19: exact derived comparison, bounded flat representatives uniformly, and direct localizing intersection argument"
  },
  "mathlib_searches": [
   {
@@ -291,13 +243,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-sc-source-tor-amplitude-flat-model",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topos-kflat-pullback"
+  "lem-sc-source-tor-amplitude-flat-model"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -342,5 +288,15 @@
   "group": "Q87",
   "result": "fix",
   "note": "Read node, blueprint source, unit, all 6 stmt deps and their Lean (LocalizingClosure, CondensedConstantConstructibility, TorAmplitude, UpperLowerStar), the module, report. Hypotheses (distinct primes, char-p field k, separated finite-type Y,Y' over k, k-morphism g) and all six admissible coefficients (finite l-primary A in Type, Z_l, Q_l, O_E and E per finite subextension, padicAlgClRingObj) match; sums indexed by Type (u+2) = object universe (empty sum included); constructible clause uses constantModelBoundedConstructible ∧ finiteTorAmplitude both sides; single universe u checked with pp.universes; only sorry; docstrings and 5-step proof present. Fault F1: the structure took [commShift] on Lg^* and [restrictionCommShift] as existential data fields (no library instance exists, checked by failed inferInstance), so 'exact' was only 'triangulated for some shift', weaker than def-weil-triangulated-category and than what the unit needs. FIX: new def unboundedLocalizingPullbackCommShift = CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory Λ g).symm (canonical mapDerivedCategory shift), local instance; structure now a Prop with exact/sums/constructible/localizing/source+targetTriangulated, and restrictionExact/restrictionSums stated for Mathlib ObjectProperty.lift (ι ⋙ Lg^*) localizing with inherited shift. Theorem signature byte-identical (lean.statement unchanged); record adds the new declaration; report gains a maintainer-fix section. nt_compile --json: delivered clean 28.6 s, fixed clean 26.7 s, canonical-shift use verified by example."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
