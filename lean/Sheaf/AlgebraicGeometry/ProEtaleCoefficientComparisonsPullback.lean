@@ -11,16 +11,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.PadicIntegersInvertEll
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
-import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.AlgebraicGeometry.ProEtalePointPullback
-import Sheaf.Topology.ProfiniteCondensedRing
-import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of the three coefficient comparisons
@@ -44,6 +34,69 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private lemma scalar_legs_ext {C : Type*} [Category C] [Preadditive C]
+    {A B : C} (l : ℕ) (t : End B) (ht : (l • 𝟙 B) ≫ t = 𝟙 B)
+    (a b : ℕ → (A ⟶ B))
+    (ha : ∀ n, l • a (n + 1) = a n) (hb : ∀ n, l • b (n + 1) = b n)
+    (h0 : a 0 = b 0) (n : ℕ) : a n = b n := by
+  induction n with
+  | zero => exact h0
+  | succ n ih =>
+    have h : a (n + 1) ≫ (l • 𝟙 B) = b (n + 1) ≫ (l • 𝟙 B) := by
+      simpa only [Preadditive.comp_nsmul, Category.comp_id, ha, hb] using ih
+    have := congrArg (fun k ↦ k ≫ t) h
+    simpa only [Category.assoc, ht, Category.comp_id] using this
+
+private lemma scalar_cocone_recurrence {C : Type*} [Category C] [Preadditive C]
+    (l : ℕ) (A : C) (c : Cocone (Functor.ofSequence (fun _ ↦ l • 𝟙 A))) (n : ℕ) :
+    l • c.ι.app (n + 1) = c.ι.app n := by
+  have h := c.w (homOfLE (Nat.le_succ n))
+  rw [Functor.ofSequence_map_homOfLE_succ] at h
+  change (l • 𝟙 A) ≫ c.ι.app (n + 1) = c.ι.app n at h
+  simpa only [Preadditive.nsmul_comp, Category.id_comp] using h
+
+private lemma scalar_pullback_legs {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
+    {A B : C} {A' B' : D} (l : ℕ) (t : End B') (ht : (l • 𝟙 B') ≫ t = 𝟙 B')
+    (a : ℕ → (A ⟶ B)) (b : ℕ → (A' ⟶ B'))
+    (d : F.obj B ⟶ B') (s : F.obj A ⟶ A')
+    (ha : ∀ n, l • a (n + 1) = a n) (hb : ∀ n, l • b (n + 1) = b n)
+    (h0 : F.map (a 0) ≫ d = s ≫ b 0) (n : ℕ) :
+    F.map (a n) ≫ d = s ≫ b n := by
+  apply scalar_legs_ext l t ht _ _ ?_ ?_ h0 n
+  · intro n
+    rw [← Preadditive.nsmul_comp, ← F.map_nsmul, ha]
+  · intro n
+    rw [← Preadditive.comp_nsmul, hb]
+
+private theorem ringComparisonNaturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+    (e : F ⋙ G ≅ H) [NatTrans.IsMonoidal e.hom] (A B : Mon C) (a : A.X ⟶ B.X) :
+    G.map (F.map a) ≫
+        (((Functor.mapMonCompIso (F := F) (G := G)).symm.app B ≪≫
+          (Functor.mapMonNatIso e).app B).hom).hom =
+      (e.app A.X).hom ≫ H.map a := by
+  simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Mon.comp_hom',
+    Functor.mapMonCompIso_inv_app_hom, Functor.mapMonNatIso_hom_app_hom]
+  change G.map (F.map a) ≫ (𝟙 _ ≫ e.hom.app B.X) = _
+  rw [Category.id_comp]
+  exact e.hom.naturality a
+
+
+private theorem ringIsoComposite
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) [F.LaxMonoidal] {A B : Mon C} {A' B' : Mon D}
+    (e : A ≅ B) (d : F.mapMon.obj B ≅ B') (e' : A' ≅ B') :
+    (F.mapMon.mapIso e ≪≫ d ≪≫ e'.symm).hom.hom ≫ e'.hom.hom =
+      F.map e.hom.hom ≫ d.hom.hom := by
+  change (F.map e.hom.hom ≫ d.hom.hom ≫ e'.inv.hom) ≫ e'.hom.hom = _
+  rw [Category.assoc, Category.assoc, ← Mon.comp_hom', e'.inv_hom_id]
+  rw [Mon.id_hom', Category.comp_id]
 
 /-- The canonical comparison between a constant commutative ring sheaf, regarded as
 an abelian sheaf, and the constant abelian sheaf of its additive group.
@@ -196,7 +249,55 @@ theorem sfb_localization_comparison_pullback (l : ℕ) [Fact l.Prime]
         (f)^*[Ab.{u + 1}].map (cY.ι.app m).hom ≫ c.hom.hom =
           ((upperStarFromPointComp f).app (Profinite.padicIntegersRingObj l E.1)).hom ≫
             (cX.ι.app m).hom := by
-  sorry
+  obtain ⟨jY, hjY, tY, htY, htY', αY, hαY, hcY, heY, _⟩ :=
+    padicIntegers_invertEll Y l E
+  obtain ⟨jX, hjX, tX, htX, htX', αX, hαX, hcX, heX, _⟩ :=
+    padicIntegers_invertEll X l E
+  obtain ⟨eY, heY⟩ := heY cY hY rY
+  obtain ⟨eX, heX⟩ := heX cX hX rX
+  let d := coefficientPullbackIso f (Mon.mk (Profinite.continuousMapRingObj E.1))
+  let c := (f)^*[Ab.{u + 1}].mapMon.mapIso eY ≪≫ d ≪≫ eX.symm
+  refine ⟨eY, eX, c, ?_, ?_, ?_, ?_⟩
+  · simpa only [heY, hαY, pow_zero, End.one_def, Category.comp_id] using hjY
+  · simpa only [heX, hαX, pow_zero, End.one_def, Category.comp_id] using hjX
+  · simp only [c, d, Iso.trans_assoc, Iso.symm_self_id, Iso.trans_refl]
+  · intro m
+    have heY0 : (cY.ι.app 0).hom ≫ eY.hom.hom =
+        padicIntegersToPadicSubfield Y l E := by
+      simpa only [heY, hαY, pow_zero, End.one_def, Category.comp_id] using hjY
+    have heX0 : (cX.ι.app 0).hom ≫ eX.hom.hom =
+        padicIntegersToPadicSubfield X l E := by
+      simpa only [heX, hαX, pow_zero, End.one_def, Category.comp_id] using hjX
+    have ht := congrArg (fun k ↦ k.hom) htX
+    simp only [Mod.comp_hom', Mod.nsmul_hom, Mod.id_hom'] at ht
+    have hn : (f)^*[Ab.{u + 1}].map (padicIntegersToPadicSubfield Y l E) ≫
+        d.hom.hom =
+          ((upperStarFromPointComp f).app (Profinite.padicIntegersRingObj l E.1)).hom ≫
+            padicIntegersToPadicSubfield X l E := by
+      exact ringComparisonNaturality (upperStarFromPoint Y) (f)^*[Ab.{u + 1}]
+        (upperStarFromPoint X) (upperStarFromPointComp f)
+        (Mon.mk (Profinite.padicIntegersRingObj l E.1))
+        (Mon.mk (Profinite.continuousMapRingObj E.1))
+        (padicIntegersRingObjToContinuousMapRingObj l E)
+    have hlegs := scalar_pullback_legs (f)^*[Ab.{u + 1}] l tX.hom ht
+      (fun n ↦ (cY.ι.app n).hom ≫ eY.hom.hom)
+      (fun n ↦ (cX.ι.app n).hom ≫ eX.hom.hom)
+      d.hom.hom
+      ((upperStarFromPointComp f).app (Profinite.padicIntegersRingObj l E.1)).hom
+      (fun n ↦ ?_) (fun n ↦ ?_) ?_ m
+    · apply (cancel_mono ((Mon.forget _).map eX.hom)).1
+      change _ ≫ eX.hom.hom = _ ≫ eX.hom.hom
+      rw [Category.assoc, ringIsoComposite]
+      simpa only [Functor.map_comp, Category.assoc] using hlegs
+    · have h := congrArg (fun k ↦ k.hom)
+        (scalar_cocone_recurrence l (padicIntegersRegularModule Y l E) cY n)
+      rw [Mod.nsmul_hom] at h
+      simpa only [Preadditive.nsmul_comp] using congrArg (fun k ↦ k ≫ eY.hom.hom) h
+    · have h := congrArg (fun k ↦ k.hom)
+        (scalar_cocone_recurrence l (padicIntegersRegularModule X l E) cX n)
+      rw [Mod.nsmul_hom] at h
+      simpa only [Preadditive.nsmul_comp] using congrArg (fun k ↦ k ≫ eX.hom.hom) h
+    · simpa only [heY0, heX0] using hn
 
 /-- The finite-subextension colimit is preserved, and its canonical ring comparison is
 alpha: the equation on every inclusion leg identifies the two colimit comparisons.
@@ -222,6 +323,14 @@ theorem sfb_qlbar_comparison_pullback (l : ℕ) [Fact l.Prime]
             (coefficientPullbackIso f (Mon.mk (Profinite.padicAlgClRingObj l))).hom.hom =
           ((upperStarFromPointComp f).app (Profinite.continuousMapRingObj E.1)).hom ≫
             padicSubfieldRingObjToPadicAlgCl X l E := by
-  sorry
+  constructor
+  · exact ⟨isColimitOfPreserves (f)^*[Ab.{u + 1}]
+      (isColimitPadicAlgClRingObjCocone Y l)⟩
+  · intro E
+    exact ringComparisonNaturality (upperStarFromPoint Y) (f)^*[Ab.{u + 1}]
+      (upperStarFromPoint X) (upperStarFromPointComp f)
+      (Mon.mk (Profinite.continuousMapRingObj E.1))
+      (Mon.mk (Profinite.padicAlgClRingObj l))
+      (Profinite.padicSubfieldRingObjToPadicAlgCl l E)
 
 end AlgebraicGeometry.ProEtale

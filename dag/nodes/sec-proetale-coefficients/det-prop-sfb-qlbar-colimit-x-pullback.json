@@ -67,44 +67,27 @@
    }
   },
   {
-   "text": "For (2), use the actual localization cocone. Write $\\varphi_Z:\\cO_{E,Z}\\to E_Z$ for [def-sfb-integers-to-subfield]. The isomorphism of [det-prop-sfb-qlbar-colimit-x-invert-ell] has legs $\\ell^{-m}\\varphi_Z$. Naturality of [sk-def-sfb-pullback-from-point-comp] gives $\\alpha_{f,E}\\circ f^{-1}\\varphi_Y=\\varphi_X\\circ\\alpha_{f,\\cO_E}$. These additive maps commute with multiplication by $\\ell$, and with its inverse on $E_Z$; consequently the same equality holds with $\\varphi$ replaced by $\\ell^{-m}\\varphi$, for every $m$. Use the module colimit in the localization statement in its stated category. For $\\Lambda=\\underline{\\cO_E}$, [def-sfb-module-upper-star] gives module pullback as $B\\otimes_A f^{-1}M$, where $A=f^{-1}\\cO_{E,Y}$ and $B=\\cO_{E,X}$. Since $\\alpha_{f,\\cO_E}:A\\cong B$, the balanced maps $b\\otimes m\\mapsto\\alpha_{f,\\cO_E}^{-1}(b)m$ and $m\\mapsto1\\otimes m$ are inverse; hence its underlying abelian sheaf is $f^{-1}M$, with the scalar action specified through $\\alpha$. The adjunction of [def-sfb-module-upper-lower-adjunction] preserves the localization colimit: for any $B$-module $N$, maps from its pulled-back vertex to $N$ correspond to maps from the original vertex to $f_*N$, and therefore to compatible maps from each original term to $f_*N$, and then to compatible maps from each pulled-back term to $N$. Thus the identified cocone is a colimit in $B$-modules. The two maps from its colimit to $E_X$ agree on each leg, hence agree by uniqueness of a map from a colimit. Their inverses give exactly the orientation in (2); monoidality of the cited composition isomorphism identifies the ring structures.",
+   "text": "For (2), apply padicIntegers_invertEll on X and Y to the two given module-colimit representatives. It supplies ring isomorphisms eX and eY identifying every leg with the fraction cocone. At m=0 this gives the two required integral inclusions. Define the comparison c by conjugating coefficientPullbackIso for E with eY and the inverse of eX. Associativity and inverse cancellation give the required isomorphism square. Naturality of upperStarFromPointComp for the integral inclusion proves the leg equation at m=0. Every cocone over the multiplication-by-ell sequence satisfies ell times leg(m+1) = leg(m). The underlying abelian inverse image is additive, so both sides of the desired leg equation satisfy this recurrence after composition with eX. Multiplication by ell on E_X has the inverse t supplied by padicIntegers_invertEll; consequently equality at m implies equality at m+1 by composing with t. Induction proves equality for every m. Finally cancel the underlying isomorphism eX. All ring comparisons are composites of the supplied ring isomorphisms; no module-pullback construction or extra preservation theorem is required.",
    "uses": [
     "def-sfb-integers-to-subfield",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "sk-def-sfb-pullback-from-point-comp",
-    "def-sfb-module-upper-star",
-    "def-sfb-module-upper-lower-adjunction"
+    "sk-def-sfb-pullback-from-point-comp"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
     "place": "first paragraph: localization presentation and compatibility of every structure map"
    }
   },
   {
-   "text": "Record directly the point-colimit universal property used in (3). Let $Q=\\underline{\\Qlb}$ with the finite-subextension definition of [sk-def-sfb-qlbar-condensed]. For a cocone of additive sheaf maps $t_E:\\underline E\\to H$, define $t_S(a)=(t_E)_S(a)$ whenever $a(S)\\subseteq E$. Such an $E$ exists by the definition of $Q(S)$, and corestriction to $E$ is continuous because $E$ has the subspace topology specified in [sk-def-sfb-condensed-ring]. If two fields work, their finite compositum works and the cocone equalities identify the two values. The same common-field argument proves additivity, and precomposition proves naturality in $S$. Thus $t:Q\\to H$ is the unique additive sheaf map extending all $t_E$. This is the colimit universal property in abelian sheaves. The diagram and its legs are precisely [def-sfb-qlbar-subextension-map] and [def-sfb-qlbar-subextension-to-qlbar]. The index is a set: its objects are subfields of the fixed set $\\Qlb$, so no large-category colimit is being assumed.",
+   "text": "Apply the published isColimitPadicAlgClRingObjCocone and preservation of colimits by the left adjoint abelian inverse image. For each inclusion leg, use naturality of upperStarFromPointComp. The generic ringComparisonNaturality helper computes the underlying map of the monoidal ring comparison before specializing to sheaves. This proves both conjuncts of the algebraic-closure clause.",
    "uses": [
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-condensed-ring",
-    "def-sfb-qlbar-subextension-map",
+    "def-sfb-qlbar-x-cocone",
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "sk-def-sfb-pullback-from-point-comp",
     "def-sfb-qlbar-subextension-to-qlbar"
    ],
    "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-point/sk-prop-sfb-qlbar-colimit-point.proof.md",
-    "place": "point-colimit proof: union of finite-subextension-valued sections"
-   }
-  },
-  {
-   "text": "For (3), first apply the adjunction in [sk-def-sfb-pullback-from-point](4) to Step 5. Maps $p_Z^*Q\\to H$ correspond to maps $Q\\to p_{Z*}H$, hence to compatible maps $\\underline E\\to p_{Z*}H$, hence to compatible maps $E_Z\\to H$. Thus [def-sfb-qlbar-x-cocone] is a colimit cocone. Under [sk-def-sfb-pullback-from-point-comp], naturality for each inclusion $\\underline E\\to\\underline F$ identifies the diagrams after $f^{-1}$, and naturality for every $j_E:\\underline E\\to Q$ identifies their legs:\n$$\\alpha_{f,Q}\\circ f^{-1}(p_Y^*j_E)=p_X^*j_E\\circ\\alpha_{f,E}.$$\nTo check colimit preservation in abelian sheaves, use [def-sfb-finite-upper-lower-star-adjunction] with $\\mathcal A=\\Ab$: maps from $f^{-1}$ of the vertex to an abelian sheaf $H$ correspond to maps from the vertex to $f_*H$, hence to compatible maps from all $E_Y$ to $f_*H$, hence to compatible maps from all $f^{-1}E_Y$ to $H$. This proves the pulled-back cocone is a colimit in the required category. The displayed leg equalities identify it with the colimit cocone over $X$. Equality on its legs proves equality of the comparison isomorphisms, giving (3). To check that the colimits here are colimits of rings as asserted, use [sk-def-sfb-sheaf-tensor](2): tensor product preserves colimits in both arguments. Thus maps out of the tensor square of either colimit are determined by their composites with every pair of legs $E_Z\\otimes F_Z$. Choose a finite compositum $K$ containing $E$ and $F$. On this pair the multiplication is the composite through $K_Z\\otimes K_Z\\to K_Z$, followed by its leg. Any ring cocone therefore induces an additive map from the colimit which respects multiplication: both proposed multiplication maps agree on each such pair by this formula. It preserves the unit because every leg preserves the unit, so it is the unique ring map extending the cocone. For the pulled-back diagram, monoidality of $\\alpha$ identifies this same formula with the one over $X$. The equality of comparison maps already proved on individual legs is consequently an equality of the canonical ring comparison maps.",
-   "uses": [
-    "sk-def-sfb-pullback-from-point",
-    "def-sfb-qlbar-x-cocone",
-    "sk-def-sfb-pullback-from-point-comp",
-    "def-sfb-finite-upper-lower-star-adjunction",
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
     "place": "first paragraph: finite-subextension colimit and compatibility of all structure maps"
@@ -123,19 +106,15 @@
   "sk-def-sfb-condensed-ring",
   "def-sfb-integers-to-subfield",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "def-sfb-module-upper-star",
-  "def-sfb-module-upper-lower-adjunction",
-  "sk-def-sfb-qlbar-condensed",
-  "def-sfb-qlbar-subextension-map",
-  "def-sfb-qlbar-subextension-to-qlbar",
   "def-sfb-qlbar-x-cocone",
   "def-sfb-finite-upper-lower-star-adjunction",
-  "sk-def-sfb-sheaf-tensor"
+  "def-sfb-qlbar-subextension-to-qlbar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-  "place": "both proof paragraphs; expanded by adjunction, Yoneda, and cone/cocone universal properties"
+  "place": "both proof paragraphs: localization by scalar recurrence; algebraic-closure colimit by published preservation and naturality; integral plan retained",
+  "note": "E6: localization and algebraic-closure clauses proved. The original integral comparison hole and its planned route remain. No new holes, statements, definitions or nodes."
  },
  "mathlib_searches": [
   {
@@ -307,5 +286,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T002535-L-2150105",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
