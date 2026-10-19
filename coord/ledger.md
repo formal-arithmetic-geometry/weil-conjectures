@@ -17606,3 +17606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:39 L: merged deliver/NZ/lem-sf-constructible-exceptional-coefficient-coherence (reviewer PASS; after a return; new nodes: 0)
 - 21:51 L: returned deliver/Q05/lem-pur-weil-semilinear-exchange-reindexing (reviewer RETURN: L: independent stage-2 immutable head 4634cad76653: H3/H5/H4. The Lean does not render the node. (1) The finite conjunct)
 - 21:58 L: returned deliver/NP/lem-pur-finite-adjoint-mate-compatibility (reviewer RETURN: L: independent stage-2 immutable head e8543b91e711: H2/theorem-stmt_dep rule: the item's Lean uses only the plain def Pr)
+- 22:02 L: returned deliver/NC/lem-coef-finite-adjunction-diagram-realization (reviewer RETURN: L: independent stage-2 immutable head a7fdec736324: H3 RETURN. (1) Duality.iso is pinned only by a pairing with structur)
