@@ -18,25 +18,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 /-!
@@ -442,7 +423,8 @@ Proof plan:
 theorem nonempty_finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) :
     Nonempty (FiniteEtaleTwistPullbackData A m hA) := by
-  sorry
+  obtain ⟨r, c, p, laws⟩ := etaleFiniteTwistPullback A m hm hA
+  exact ⟨⟨r, c, p, laws⟩⟩
 
 /-- Select the normalized comparisons. Constants and pure root tensors determine c, and
 unitors, positive recursion, associativity and evaluation determine p; r is determined by
