@@ -1,0 +1,91 @@
+{
+ "id": "lem-per-inseparable-differential-trace",
+ "kind": "statement",
+ "title": "Reflexive differential trace for a degree-p purely inseparable cover",
+ "statement": "Let $p$ be prime, let $T$ be a scheme of characteristic $p$, and let $q:V\\to U$ be a finite morphism of Noetherian normal integral $T$-schemes whose function-field extension is purely inseparable of degree $p$ [def-pc-scheme], [def-weil-finite-integral-morphism], [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], [def-pc-integral-scheme], [def-sc-function-field], [def-weil-pbc-finite-purely-inseparable-extension]. Suppose that $\\Omega_{U/T}$ is coherent [def-sc-relative-differential-sheaf], [pqf-def-coherent]. For every integer $i\\geq1$ there is a canonical $\\mathcal O_U$-linear map $\\operatorname{Tr}_q:q_*\\Omega^i_{V/T}\\to(\\Omega^i_{U/T})^{**}$. Here $\\Omega^i=\\bigwedge^i\\Omega$ is the quotient of the $i$th tensor power by the alternating relations, and $M^{**}=\\mathcal Hom(\\mathcal Hom(M,\\mathcal O_U),\\mathcal O_U)$. Its generic restriction is independent of the generator and is characterized as follows. Write $F=k(U)$, $E=k(V)=F(g)$, $g^p=f\\in F$, and work over an affine open $\\operatorname{Spec}\\Lambda\\subset T$. For $\\eta_j\\in\\Omega_{F/\\Lambda}$ and $0\\leq a<p$, it sends $\\eta_1\\wedge\\cdots\\wedge\\eta_{i-1}\\wedge g^a\\mathrm dg$ to $0$ for $a<p-1$ and to $\\eta_1\\wedge\\cdots\\wedge\\eta_{i-1}\\wedge\\mathrm df$ for $a=p-1$. It annihilates the image of $E\\otimes_F\\Omega^i_{F/\\Lambda}$. These maps restrict to open subsets and agree generically for any two such models of $E/F$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0AX5 (resolve-lemma-trace-higher) and 0AX6 (resolve-lemma-trace-extends), with generator independence from resolve-lemma-trace-well-defined."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-sc-relative-differential-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite purely inseparable degree p morphism between normal integral Noetherian schemes has a canonical trace on exterior powers of Kahler differentials into the reflexive hull",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.intTraceAux\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (K : Type u_2) →\\n    (L : Type u_3) →\\n      (B : Type u_6) →\\n        [inst : CommRing A] →\\n          [inst_1 : CommRing B] →\\n            [inst_2 : Algebra A B] →\\n              [inst_3 : Field K] →\\n                [inst_4 : Field L] →\\n                  [inst_5 : Algebra A K] →\\n    \", \"doc\": \"The linear map from $ B $ to $ A $ constructed by composing the trace function on the field extension $ L/K $ with scalar restriction to $ A $, codomain restriction to the integral closure of $ A $ in\"}\n  {\"name\": \"Algebra.intTrace\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"(A : Type u_1) →\\n  (B : Type u_6) →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          [IsDomain A] →\\n            [IsIntegrallyClosed A] →\\n              [IsDomain B] → [IsIntegrallyClosed B] → [Module.Finite A B] → [Module.IsTorsionFree A B] → B →ₗ[A] \", \"doc\": \"The linear map from $ B $ to $ A $ over $ A $, constructed using the trace function on the field extension $ L/K $, scalar restriction to $ A $, and the integral closure properties. This map sends eac\"}\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field F] → [inst_1 : Field K] → [inst_2 : Algebra F K] → [CharZero F] → [Algebra.IsIntegral F K] → K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"Algebra.normalizedTrace_def\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] (a : K),\\n  (Algebra.normalizedTrace F K) a =\\n    (↑(Module.finrank F ↥F⟮a⟯))⁻¹ • (Algebra.trace F ↥F⟮a⟯) (IntermediateField.AdjoinSimple.gen F a)\", \"doc\": \"The normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is defined for each element $a \\\\in K$ as $\\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_3) (E : Type u_4) (K : Type u_5) [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra E K] [inst_5 : Algebra F K] [inst_6 : IsScalarTower F E K]\\n  [inst_7 : Algebra.IsIntegral F E] [inst_8 : Algebra.IsIntegral F K] [inst_9 : CharZero F],\\n  A\", \"doc\": \"For field extensions $F \\\\subseteq E \\\\subseteq K$, the composition of the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}}: K \\\\to F$ with the canonical $F$-linear inclusion map $E \\\\to K$ equals th\"}\n  {\"name\": \"Algebra.trace_quotient_eq_of_isDedekindDomain\", \"module\": \"Mathlib/RingTheory/Trace/Quotient\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsMaximal] (x : S) [inst_4 : IsDedekindDomain R] [inst_5 : IsDomain S] [inst_6 : Module.IsTorsionFree R S]\\n  [inst_7 : Module.Finite R S] [inst_8 : IsIntegrallyClosed S],\\n  (Algebra.tr\", \"doc\": \"For a Dedekind domain $ R $, an integral domain $ S $ that is a torsion-free and finitely generated $ R $-module, and an integrally closed $ S $, the trace of the image of $ x $ in the quotient ring $\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap_eq_id\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K], Algebra.normalizedTrace F K ∘ₗ Algebra.linearMap F K = LinearMap.id\", \"doc\": \"The composition of the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ and the canonical algebra map $F \\\\to K$ is equal to the identity map on $F$.\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_fininteDimensional_apply\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) {K : Type u_2} [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] [FiniteDimensional F K] (a : K),\\n  (Algebra.normalizedTrace F K) a = (↑(Module.finrank F K))⁻¹ • (Algebra.trace F K) a\", \"doc\": \"For a finite-dimensional field extension $ K/F $ with characteristic zero, the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ satisfies $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: algebra traces and separable trace duality are not the trace on exterior differential forms for a purely inseparable cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace on differential forms for a purely inseparable extension sends g to the p minus one dg to df and extends on normal schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.trace_eq_zero_of_not_isSeparable\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \"(H : ¬Algebra.IsSeparable K L) : trace K L = 0\", \"doc\": \"If $ K $ is a non-separable algebra over $ L $, then the trace map from $ K $ to $ L $ is identically zero.\"}\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"separableClosure.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra.IsAlgebraic F E] : IsPurelyInseparable (separableClosure F E) E\", \"doc\": \"If $ E $ is an algebraic extension of $ F $, then the field extension from the separable closure of $ F $ in $ E $ to $ E $ is purely inseparable. Every element in $ E $ not in the separable closure h\"}\n  {\"name\": \"Algebra.trace_ne_zero\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \"[FiniteDimensional K L] [Algebra.IsSeparable K L] : Algebra.trace K L ≠ 0\", \"doc\": \"If $ L $ is a finite-dimensional separable algebra over a field $ K $, then the trace map from $ L $ to $ K $ is non-zero.\"}\n  {\"name\": \"Algebra.normalizedTrace_def\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"(a : K) : normalizedTrace F K a = (Module.finrank F F⟮a⟯ : F)⁻¹ • trace F F⟮a⟯ (AdjoinSimple.gen F a)\", \"doc\": \"The normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is defined for each element $a \\\\in K$ as $\\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(\"}\n  {\"name\": \"IsPurelyInseparable.iterateFrobenius\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"{n : ℕ} (hn : exponent K L ≤ n) : L →+* K\", \"doc\": \"Given a purely inseparable field extension $ L/K $ with exponential characteristic $ p $ and exponent $ \\\\leq n $, this function defines the ring homomorphism $ L \\\\to K $ obtained by raising elements t\"}\n  {\"name\": \"Algebra.normalizedTrace_eq_of_finiteDimensional\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"[FiniteDimensional F K] : normalizedTrace F K = (Module.finrank F K : F)⁻¹ • trace F K\", \"doc\": \"If $ K $ is a finite-dimensional field extension of $ F $, then the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ satisfies $ \\\\operatorname{Tr}_{\\\\text{norm}} = \\\\frac{1}{[K : F]} \\\\\"}\n  {\"name\": \"traceForm_nondegenerate\", \"module\": \"Mathlib.RingTheory.Trace.Basic\", \"type\": \"[FiniteDimensional K L] [Algebra.IsSeparable K L] : (traceForm K L).Nondegenerate\", \"doc\": \"The trace form associated with a finite-dimensional separable algebra $ L $ over a field $ K $ is non-degenerate.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: algebra traces and separable trace duality are not the trace on exterior differential forms for a purely inseparable cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"trace\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: algebra traces and separable trace duality are not the trace on exterior differential forms for a purely inseparable cover"
+  },
+  {
+   "tool": "grep",
+   "query": "trace|reflexive",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: algebra traces and separable trace duality are not the trace on exterior differential forms for a purely inseparable cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inseparable differential trace extends across codimension one points with values in double dual differential forms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"traceForm_dualSubmodule_adjoin\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) {L : Type u} [inst : CommRing A] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra A K] [inst_4 : Algebra K L] [inst_5 : Algebra A L] [inst_6 : IsScalarTower A K L] [IsDomain A]\\n  [IsFractionRing A K] [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsIntegr\", \"doc\": \"Let $ L/K $ be a field extension with $ x \\\\in L $ such that $ K(x) = L $ and $ x $ is integral over a ring $ A \\\\subseteq K $. Then the dual submodule of the trace form $ (\\\\cdot, \\\\cdot) $ on the $ A $-\"}\n  {\"name\": \"Differential.differentialFiniteDimensional\", \"module\": \"Mathlib/FieldTheory/Differential/Basic\", \"type\": \"(F : Type u_2) →\\n  [inst : Field F] →\\n    [Differential F] →\\n      [CharZero F] →\\n        (K : Type u_3) → [inst_3 : Field K] → [inst_4 : Algebra F K] → [FiniteDimensional F K] → Differential K\", \"doc\": \"For a field extension $ K/F $ of finite degree where $ F $ has characteristic zero, the differential structure on $ K $ is constructed by selecting a primitive element $ \\\\alpha \\\\in K $, using its moni\"}\n  {\"name\": \"trace_quotient_eq_trace_localization_quotient\", \"module\": \"Mathlib/RingTheory/Trace/Quotient\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsMaximal] (Rₚ : Type u_3) (Sₚ : Type u_4) [inst_4 : CommRing Rₚ] [inst_5 : CommRing Sₚ]\\n  [inst_6 : Algebra R Rₚ] [inst_7 : IsLocalization.AtPrime Rₚ p] [inst_8 : IsLocalRing\", \"doc\": \"For a commutative ring $ R $ with a prime ideal $ \\\\mathfrak{p} $, an $ R $-algebra $ S $, and an element $ x \\\\in S $, the trace of $ x $ in the quotient ring $ S/\\\\mathfrak{p}S $ over $ R/\\\\mathfrak{p} \"}\n  {\"name\": \"coeSubmodule_differentIdeal_fractionRing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ (A : Type u_1) (B : Type u_3) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [inst_3 : IsDomain A]\\n  [IsIntegrallyClosed A] [inst_5 : IsDedekindDomain B] [inst_6 : Module.IsTorsionFree A B] [Algebra.IsIntegral A B]\\n  [Algebra.IsSeparable (FractionRing A) (FractionRing B)] [Finite\", \"doc\": \"For an integral extension $ B $ of a Dedekind domain $ A $, with separable fraction field extensions and finite-dimensional fraction rings, the image of the different ideal $\\\\mathfrak{D}_{B/A}$ in $\\\\m\"}\n  {\"name\": \"aeval_derivative_mem_differentIdeal\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u) {B : Type u_3} [inst : CommRing A] [inst_1 : Field K] [inst_2 : CommRing B]\\n  [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : Algebra A B] [inst_7 : Algebra K L]\\n  [inst_8 : Algebra A L] [IsScalarTower A K L] [IsScalarTower A B \", \"doc\": \"If an element $ x $ generates the algebra $ L $ over $ K $, then the evaluation of the derivative of the minimal polynomial of $ x $ over $ A $ at $ x $ is contained in the different ideal of $ A $ in\"}\n  {\"name\": \"differentialIdeal_le_iff\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} {L : Type u} {B : Type u_3} [inst : CommRing A] [inst_1 : Field K] [inst_2 : CommRing B]\\n  [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : Algebra A B] [inst_7 : Algebra K L]\\n  [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [inst_10 :\", \"doc\": \"For a nonzero ideal $I$ in a Dedekind domain $B$ over $A$, the different ideal $\\\\mathfrak{D}_{B/A}$ satisfies $\\\\mathfrak{D}_{B/A} \\\\subseteq I$ if and only if the image of the $B$-fractional ideal $I^{\"}\n  {\"name\": \"Algebra.trace_eq_zero_of_not_isSeparable\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L],\\n  ¬Algebra.IsSeparable K L → Algebra.trace K L = 0\", \"doc\": \"If $ K $ is a non-separable algebra over $ L $, then the trace map from $ K $ to $ L $ is identically zero.\"}\n  {\"name\": \"Differential.algHom_deriv\", \"module\": \"Mathlib/RingTheory/Derivation/MapCoeffs\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : Differential A] {R : Type u_2} [inst_2 : CommRing R]\\n  [inst_3 : Differential R] [inst_4 : Algebra A R] [DifferentialAlgebra A R] {R' : Type u_3} [inst_6 : CommRing R']\\n  [inst_7 : Differential R'] [inst_8 : Algebra A R'] [DifferentialAlgebra A R'] [IsD\", \"doc\": \"Let $ f : R \\\\to R' $ be an injective $ A $-algebra homomorphism between commutative rings, and let $ x \\\\in R $ be an element separable over $ A $. Then the derivation of $ x $ satisfies $ f(D(x)) = D(\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: algebra traces and separable trace duality are not the trace on exterior differential forms for a purely inseparable cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-degree-p-rational-reduction",
+  "date": "2026-10-19",
+  "group": "Q18"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Technical surface-resolution input to lem-per-artin-gabber-affine-curve, proof Step 1, via the potential-dualizing construction and ILO XVII 3.4.1; Tags 0AX5 (resolve-lemma-trace-higher) and 0AX6 (resolve-lemma-trace-extends), with generator independence from resolve-lemma-trace-well-defined.",
+   "via": [
+    "lem-per-degree-p-rational-reduction",
+    "lem-per-complete-normal-surface-resolution",
+    "lem-per-excellent-surface-desingularization",
+    "lem-per-surface-resolution-supported-presentation",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
