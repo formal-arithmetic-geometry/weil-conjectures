@@ -21,9 +21,9 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import Mathlib.LinearAlgebra.Pi
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Internal Hom and automorphisms of finite constant pro-etale modules
 
@@ -173,22 +173,355 @@ def finiteConstantModuleComposition
         ((σ (ModuleCat.of Λ (P →ₗ[Λ] Q))).hom.hom.app U f)
         ((σ (ModuleCat.of Λ (Q →ₗ[Λ] T))).hom.hom.app U g)))
 
+private theorem finiteConstantHom_unit_smul
+    (M : ModuleCat.{u + 1} Λ) (U : X.ProEtᵒᵖ) (r : Λ) (x : M) :
+    (constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (r • x) =
+      finiteConstantHomScalar X Λ U r •
+        (show ((finiteConstantHomFunctor X Λ).obj M).val.obj U from
+          (constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U x) := by
+  let J := Scheme.ProEt.topology X
+  let α := toSheafify J ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of Λ))
+  let η := (PresheafOfModules.sheafificationAdjunction α).unit.app
+    ((siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M)
+  let : J.PreservesSheafification (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
+    GrothendieckTopology.instPreservesSheafification J
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+      (FD := fun A B : CommRingCat.{u + 1} ↦ A →+* B)
+      (CD := fun A : CommRingCat.{u + 1} ↦ A)
+      (FE := fun A B : RingCat.{u + 1} ↦ A →+* B)
+      (CE := fun A : RingCat.{u + 1} ↦ A)
+  have hr : ((constantModuleHomRingIso J Λ).inv.hom.app U)
+      (finiteConstantHomScalar X Λ U r) = (α.app U) r := by
+    exact ConcreteCategory.congr_hom (congr_app
+      (sheafComposeIso_inv_fac J (forget₂ CommRingCat RingCat)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Λ))) U) r
+  change (η.app U) (r • x) =
+    ((constantModuleHomRingIso J Λ).inv.hom.app U)
+      (finiteConstantHomScalar X Λ U r) •
+        (show ((siteConstantModuleFunctorGeneral J Λ).obj M).val.obj U from (η.app U) x)
+  rw [hr]
+  exact (η.app U).hom.map_smul r x
+
+private def finiteConstantHom_scalarNat :
+    (Functor.const X.ProEtᵒᵖ).obj (RingCat.of Λ) ⟶
+      (finiteConstantHomRing X Λ).obj ⋙ forget₂ CommRingCat RingCat :=
+  Functor.whiskerRight (toSheafify (Scheme.ProEt.topology X)
+    ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Λ))) (forget₂ CommRingCat RingCat)
+
+private def finiteConstantHom_unitNat (M : ModuleCat.{u + 1} Λ) :
+    (siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M ⟶
+      (PresheafOfModules.restrictScalars (finiteConstantHom_scalarNat X Λ)).obj
+        ((finiteConstantHomFunctor X Λ).obj M).val where
+  app U := ModuleCat.ofHom
+    (Y := ((PresheafOfModules.restrictScalars (finiteConstantHom_scalarNat X Λ)).obj
+      ((finiteConstantHomFunctor X Λ).obj M).val).obj U)
+    { toFun := (constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U
+      map_add' x y := map_add _ x y
+      map_smul' r x := finiteConstantHom_unit_smul X Λ M U r x }
+  naturality f := by
+    ext x
+    exact NatTrans.naturality_apply
+      (constantModuleHomUnit (Scheme.ProEt.topology X) Λ M) f x
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem finiteConstantHom_extend
+    (M : ModuleCat.{u + 1} Λ) (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ)
+    (l : M → N.val.obj U) (hadd : ∀ x y, l (x + y) = l x + l y)
+    (hsmul : ∀ r x, l (r • x) = finiteConstantHomScalar X Λ U r • l x) :
+    ∃ φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+        ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U,
+      ∀ x : M, φ.app (op (Over.mk (𝟙 U.unop)))
+        ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U x) = l x := by
+  let J := Scheme.ProEt.topology X
+  let R := finiteConstantHomRing X Λ
+  let α := finiteConstantHom_scalarNat X Λ
+  let αU := Functor.whiskerLeft (Over.forget U.unop).op α
+  let η := finiteConstantHom_unitNat X Λ M
+  let ηU := (PresheafOfModules.pushforward₀ (Over.forget U.unop) _).map η
+  have hN : Presheaf.IsSheaf (J.over U.unop)
+      ((PresheafOfModules.restrictOver R.obj U.unop).obj N.val).presheaf :=
+    (N.over U.unop).isSheaf
+  have : Presheaf.IsLocallySurjective J α := by
+    apply (Presheaf.isLocallySurjective_iff_whisker_forget J α).2
+    change Presheaf.IsLocallySurjective J
+      (Functor.whiskerRight (toSheafify J
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Λ))) (forget CommRingCat))
+    infer_instance
+  have : Presheaf.IsLocallySurjective (J.over U.unop) αU :=
+    Presheaf.isLocallySurjective_whisker (J.over U.unop) J (Over.forget U.unop) α
+  have hi : PresheafOfModules.IsLocallyInjective J η := by
+    change Presheaf.IsLocallyInjective J
+      (toSheafify J ((siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M).presheaf)
+    infer_instance
+  have hs : PresheafOfModules.IsLocallySurjective J η := by
+    change Presheaf.IsLocallySurjective J
+      (toSheafify J ((siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M).presheaf)
+    infer_instance
+  have : PresheafOfModules.IsLocallyInjective (J.over U.unop) ηU :=
+    Presheaf.isLocallyInjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map η)
+  have : PresheafOfModules.IsLocallySurjective (J.over U.unop) ηU :=
+    Presheaf.isLocallySurjective_whisker (J.over U.unop) J (Over.forget U.unop)
+      ((PresheafOfModules.toPresheaf _).map η)
+  let k : (PresheafOfModules.pushforward₀ (Over.forget U.unop) _).obj
+        ((siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M) ⟶
+      (PresheafOfModules.restrictScalars αU).obj
+        ((PresheafOfModules.restrictOver R.obj U.unop).obj N.val) :=
+    { app W := ModuleCat.ofHom
+        (Y := ((PresheafOfModules.restrictScalars αU).obj
+          ((PresheafOfModules.restrictOver R.obj U.unop).obj N.val)).obj W)
+        { toFun x := N.val.map W.unop.hom.op (l x)
+          map_add' x y := by rw [hadd, map_add]
+          map_smul' r x := by
+            change N.val.map W.unop.hom.op (l (r • x)) =
+              finiteConstantHomScalar X Λ (op W.unop.left) r •
+                N.val.map W.unop.hom.op (l x)
+            rw [hsmul, N.val.map_smul]
+            have h := NatTrans.naturality_apply α W.unop.hom.op r
+            change finiteConstantHomScalar X Λ (op W.unop.left) r =
+              R.obj.map W.unop.hom.op (finiteConstantHomScalar X Λ U r) at h
+            exact congrArg (fun t : R.obj.obj (op W.unop.left) ↦
+              t • N.val.map W.unop.hom.op (l x)) h.symm }
+      naturality {W W'} f := by
+        ext x
+        change N.val.map W'.unop.hom.op (l x) =
+          N.val.map f.unop.left.op (N.val.map W.unop.hom.op (l x))
+        rw [← N.val.map_comp_apply, ← op_comp, Over.w] }
+  let e₁ := PresheafOfModules.restrictHomEquivOfIsLocallySurjective αU
+    (M₁ := (PresheafOfModules.restrictOver R.obj U.unop).obj
+      ((finiteConstantHomFunctor X Λ).obj M).val) hN
+  let e₂ := PresheafOfModules.homEquivOfIsLocallyBijective (f := ηU)
+    (N := (PresheafOfModules.restrictScalars αU).obj
+      ((PresheafOfModules.restrictOver R.obj U.unop).obj N.val)) hN
+  let φ := e₁.symm (e₂.symm k)
+  refine ⟨φ, ?_⟩
+  intro x
+  have he : ηU ≫ (PresheafOfModules.restrictScalars αU).map φ = k :=
+    e₂.apply_symm_apply k
+  have hh := ConcreteCategory.congr_hom
+    (congrArg (fun t ↦ t.app (op (Over.mk (𝟙 U.unop)))) he) x
+  change φ.app (op (Over.mk (𝟙 U.unop)))
+    ((constantModuleHomUnit J Λ M).app U x) = N.val.map (𝟙 U) (l x) at hh
+  simpa using hh
+
+private def finiteConstantHom_basisMap {n : ℕ}
+    (M : ModuleCat.{u + 1} Λ) (b : (Fin n → Λ) →ₗ[Λ] M)
+    (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ) :
+    (SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+      ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U →ₗ[
+        (finiteConstantHomRing X Λ).obj.obj U] (Fin n → N.val.obj U) where
+  toFun φ i := (φ.app (op (Over.mk (𝟙 U.unop))))
+    ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1)))
+  map_add' φ ψ := by ext i; rfl
+  map_smul' r φ := by
+    ext i
+    change (r • φ).app (op (Over.mk (𝟙 U.unop)))
+      ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1))) =
+        r • φ.app (op (Over.mk (𝟙 U.unop)))
+          ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1)))
+    rw [PresheafOfModules.smul_app]
+    let v : N.val.obj U := φ.app (op (Over.mk (𝟙 U.unop)))
+      ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1)))
+    change (finiteConstantHomRing X Λ).obj.map (𝟙 U) r • v = r • v
+    exact congrArg (fun t : (finiteConstantHomRing X Λ).obj.obj U ↦ t • v)
+      (ConcreteCategory.congr_hom ((finiteConstantHomRing X Λ).obj.map_id U) r)
+
+private theorem finiteConstantHom_basis_relations {m n : ℕ}
+    (M : ModuleCat.{u + 1} Λ)
+    (a : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) (b : (Fin n → Λ) →ₗ[Λ] M)
+    (hexact : Function.Exact a b)
+    (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ)
+    (φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+      ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U) :
+    finiteConstantHomTranspose X Λ a N U (finiteConstantHom_basisMap X Λ M b N U φ) = 0 := by
+  classical
+  ext k
+  simp only [finiteConstantHomTranspose, LinearMap.pi_apply, LinearMap.sum_apply,
+    LinearMap.smul_apply, LinearMap.proj_apply, Pi.zero_apply]
+  let η : M →+ ((finiteConstantHomFunctor X Λ).obj M).val.obj U :=
+    ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U).hom
+  let ψ := (φ.app (op (Over.mk (𝟙 U.unop))))
+  change (∑ i : Fin n, finiteConstantHomScalar X Λ U (a (Pi.single k 1) i) •
+    ψ (η (b (Pi.single i 1)))) = 0
+  have hsum : b (a (Pi.single k 1)) =
+      ∑ i : Fin n, a (Pi.single k 1) i • b (Pi.single i 1) := by
+    conv_lhs => rw [pi_eq_sum_univ (a (Pi.single k 1)), map_sum]
+    congr 1
+    funext i
+    rw [map_smul]
+    congr 2
+    funext j
+    simp [Pi.single_apply, eq_comm]
+  have hz : b (a (Pi.single k 1)) = 0 := hexact.apply_apply_eq_zero _
+  have he : (∑ i : Fin n, finiteConstantHomScalar X Λ U (a (Pi.single k 1) i) •
+      η (b (Pi.single i 1))) = η (b (a (Pi.single k 1))) := by
+    rw [hsum, map_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    exact (finiteConstantHom_unit_smul X Λ M U _ _).symm
+  calc
+    _ = ψ (∑ i : Fin n, finiteConstantHomScalar X Λ U (a (Pi.single k 1) i) •
+        η (b (Pi.single i 1))) := by simp only [map_sum, map_smul]
+    _ = 0 := by rw [he, hz, map_zero, map_zero]
+
+private theorem finiteConstantHom_unit_ext
+    (M : ModuleCat.{u + 1} Λ) (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ)
+    (a b : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+      ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U)
+    (h : ∀ x : M,
+      a.app (op (Over.mk (𝟙 U.unop)))
+          ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U x) =
+      b.app (op (Over.mk (𝟙 U.unop)))
+          ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U x)) : a = b := by
+  let J := Scheme.ProEt.topology X
+  let FM := (finiteConstantHomFunctor X Λ).obj M
+  let η := constantModuleHomUnit J Λ M
+  have hlocal (V : Over U.unop) (x : M) :
+      a.app (op V) (η.app (op V.left) x) = b.app (op V) (η.app (op V.left) x) := by
+    have ha := PresheafOfModules.naturality_apply a
+      (Over.homMk V.hom : V ⟶ Over.mk (𝟙 U.unop)).op (η.app U x)
+    have hb := PresheafOfModules.naturality_apply b
+      (Over.homMk V.hom : V ⟶ Over.mk (𝟙 U.unop)).op (η.app U x)
+    have hn := NatTrans.naturality_apply η V.hom.op x
+    change η.app (op V.left) x = FM.val.map V.hom.op (η.app U x) at hn
+    change a.app (op V) (FM.val.map V.hom.op (η.app U x)) =
+      N.val.map V.hom.op (a.app (op (Over.mk (𝟙 U.unop))) (η.app U x)) at ha
+    change b.app (op V) (FM.val.map V.hom.op (η.app U x)) =
+      N.val.map V.hom.op (b.app (op (Over.mk (𝟙 U.unop))) (η.app U x)) at hb
+    rw [hn, ha, hb, h x]
+  have : Presheaf.IsLocallySurjective J η :=
+    inferInstanceAs (Presheaf.IsLocallySurjective J
+      (toSheafify J ((siteConstantModulePresheafGeneral (C := X.ProEt) Λ).obj M).presheaf))
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro s
+  apply N.isSheaf.isSeparated _ _ (Presheaf.imageSieve_mem J η s)
+  intro W f hf
+  obtain ⟨x, hx⟩ := hf
+  let V' : Over U.unop := Over.mk (f ≫ V.unop.hom)
+  have ha := PresheafOfModules.naturality_apply a
+    (Over.homMk f : V' ⟶ V.unop).op s
+  have hb := PresheafOfModules.naturality_apply b
+    (Over.homMk f : V' ⟶ V.unop).op s
+  change a.app (op V') (FM.val.map f.op s) = N.val.map f.op (a.app V s) at ha
+  change b.app (op V') (FM.val.map f.op s) = N.val.map f.op (b.app V s) at hb
+  change η.app (op W) x = FM.val.map f.op s at hx
+  change N.val.map f.op (a.app V s) = N.val.map f.op (b.app V s)
+  rw [← ha, ← hb, ← hx]
+  exact hlocal V' x
+
+private theorem finiteConstantHom_basis_injective {n : ℕ}
+    (M : ModuleCat.{u + 1} Λ) (b : (Fin n → Λ) →ₗ[Λ] M)
+    (hb : Function.Surjective b) (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ) :
+    Function.Injective (finiteConstantHom_basisMap X Λ M b N U) := by
+  classical
+  intro φ ψ h
+  apply finiteConstantHom_unit_ext X Λ M N U φ ψ
+  intro y
+  obtain ⟨x, rfl⟩ := hb y
+  have hx : b x = ∑ i : Fin n, x i • b (Pi.single i 1) := by
+    conv_lhs => rw [pi_eq_sum_univ x, map_sum]
+    congr 1
+    funext i
+    rw [map_smul]
+    congr 2
+    funext j
+    simp [Pi.single_apply, eq_comm]
+  rw [hx, map_sum, map_sum, map_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [finiteConstantHom_unit_smul, map_smul, map_smul]
+  exact congrArg (finiteConstantHomScalar X Λ U (x i) • ·) (congrFun h i)
+
+private theorem finiteConstantHom_basis_surjective {m n : ℕ}
+    (M : ModuleCat.{u + 1} Λ)
+    (a : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) (b : (Fin n → Λ) →ₗ[Λ] M)
+    (hexact : Function.Exact a b) (hb : Function.Surjective b)
+    (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ)
+    (y : Fin n → N.val.obj U) (hy : finiteConstantHomTranspose X Λ a N U y = 0) :
+    ∃ φ, finiteConstantHom_basisMap X Λ M b N U φ = y := by
+  classical
+  let : Module Λ (N.val.obj U) :=
+    Module.compHom (N.val.obj U) (finiteConstantHomScalar X Λ U)
+  let f : (Fin n → Λ) →ₗ[Λ] N.val.obj U :=
+    { toFun x := ∑ i : Fin n, x i • y i
+      map_add' x x' := by simp only [Pi.add_apply, add_smul, Finset.sum_add_distrib]
+      map_smul' r x := by
+        simp only [Pi.smul_apply, smul_eq_mul, mul_smul, Finset.smul_sum, RingHom.id_apply] }
+  have hf (k : Fin m) : f (a (Pi.single k 1)) = 0 := by
+    change (∑ i : Fin n, finiteConstantHomScalar X Λ U (a (Pi.single k 1) i) • y i) = 0
+    simpa only [finiteConstantHomTranspose, LinearMap.pi_apply, LinearMap.sum_apply,
+      LinearMap.smul_apply, LinearMap.proj_apply, Pi.zero_apply] using congrFun hy k
+  have hfa (z : Fin m → Λ) : f (a z) = 0 := by
+    rw [a.pi_apply_eq_sum_univ z, map_sum]
+    apply Finset.sum_eq_zero
+    intro k _
+    rw [map_smul]
+    have hk : (fun j ↦ if k = j then (1 : Λ) else 0) = Pi.single k 1 := by
+      funext j
+      simp [Pi.single_apply, eq_comm]
+    rw [hk, hf, smul_zero]
+  have hker : LinearMap.range a ≤ LinearMap.ker f := by
+    rintro _ ⟨z, rfl⟩
+    exact hfa z
+  let q := (LinearMap.range a).liftQ f hker
+  let e := hexact.linearEquivOfSurjective hb
+  let l := q.comp e.symm.toLinearMap
+  obtain ⟨φ, hφ⟩ := finiteConstantHom_extend X Λ M N U l
+    (fun x y ↦ l.map_add x y) (fun r x ↦ l.map_smul r x)
+  refine ⟨φ, funext fun i ↦ ?_⟩
+  change φ.app (op (Over.mk (𝟙 U.unop)))
+    ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U (b (Pi.single i 1))) = y i
+  rw [hφ]
+  change q (e.symm (b (Pi.single i 1))) = y i
+  rw [Function.Exact.linearEquivOfSurjective_symm_apply]
+  change f (Pi.single i 1) = y i
+  simp [f, Pi.single_apply]
+
+private theorem finiteConstantHom_basis_restrict
+    (M : ModuleCat.{u + 1} Λ) (N : FiniteConstantHomModules X Λ)
+    (U V : X.ProEtᵒᵖ) (f : U ⟶ V)
+    (φ : (SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+      ((finiteConstantHomFunctor X Λ).obj M) N).val.obj U) (x : M) :
+    (((SheafOfModules.homObj (R := finiteConstantHomRing X Λ)
+      ((finiteConstantHomFunctor X Λ).obj M) N).val.map f φ).app
+        (op (Over.mk (𝟙 V.unop))))
+          ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app V x) =
+      N.val.map f ((φ.app (op (Over.mk (𝟙 U.unop))))
+        ((constantModuleHomUnit (Scheme.ProEt.topology X) Λ M).app U x)) := by
+  let η := constantModuleHomUnit (Scheme.ProEt.topology X) Λ M
+  have hn := NatTrans.naturality_apply η f x
+  have hφ := PresheafOfModules.naturality_apply φ
+    (Over.homMk f.unop : Over.mk f.unop ⟶ Over.mk (𝟙 U.unop)).op (η.app U x)
+  change η.app V x = ((finiteConstantHomFunctor X Λ).obj M).val.map f
+    (η.app U x) at hn
+  change φ.app (op (Over.mk (𝟙 V.unop ≫ f.unop))) (η.app V x) = _
+  rw [PresheafOfModules.restrictOver_hom_app_congr φ (Category.id_comp f.unop)]
+  rw [hn]
+  exact hφ
+
 /-- A finite presentation gives the natural sectionwise kernel description of internal Hom.
 The displayed basis-value formula specifies the canonical isomorphism. The following two
 identities are its naturality for restriction and for every map of target sheaves.
 Source: current blueprint, finite-local-systems Hom detail, clause (1)
 (blueprint: det-pe-finite-local-systems-hom).
-Proof, following steps 1--3 of the node:
-1. Constant abelian sheafification is exact and preserves finite limits, by
-   lem-pc-sites-module-sheafification-interface and lem-weil-pbc-sheafification-exact.
-   The exact comparison inverse image of det-pe-classical-sheaves-modules gives the
-   same constant module on the pro-etale site. Its free modules have the constant bases.
-2. Restrict the presentation to each slice, using lem-weil-pbc-site-restriction-exact
-   and lem-weil-pbc-module-sheaves-colimits-forgetful. A map from a finite free module
-   is uniquely its tuple of basis values, also in rank zero.
-3. The quotient is a cokernel by lem-weil-pbc-abelian-exact-epi-cokernel. A tuple factors
-   through it exactly when every sum a_ik x_i vanishes. Cokernel uniqueness proves both
-   naturality identities. This argument does not assume exactness of sections. -/
+Proof, following the finite-presentation argument of clause (1):
+1. The commutative-ring and ring sheafification units agree through the canonical
+   coefficient transport. Thus the constant module unit is linear over constant scalars.
+2. Evaluate a slice morphism on the images of the standard basis. Linearity and
+   exactness of the ordinary module presentation put its tuple in the transpose kernel.
+3. Constant sections locally generate the source. Two morphisms with the same basis
+   values agree on all constant sections, then on every section by separatedness.
+4. A tuple in the kernel defines a linear map from the ordinary free module. It kills
+   the image of a, so factors through M. On the slice, extend its restricted values
+   across the locally bijective module unit, then recover linearity over the sheafified
+   ring from local surjectivity of its scalar unit. These are Mathlib's sheafification
+   Hom equivalences. No exactness assertion about the sections of N is used.
+5. The resulting bijective linear map is the required linear equivalence. Naturality
+   of the unit and of slice morphisms proves restriction compatibility; postcomposition
+   proves naturality in N. The same formulas include rank zero. -/
 theorem finiteConstantHom_presentation {m n : ℕ}
     (M : ModuleCat.{u + 1} Λ)
     (a : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)) (b : (Fin n → Λ) →ₗ[Λ] M)
@@ -216,7 +549,27 @@ theorem finiteConstantHom_presentation {m n : ℕ}
         (e N' U ((SheafOfModules.homObjMap (R := finiteConstantHomRing X Λ)
           (𝟙 ((finiteConstantHomFunctor X Λ).obj M)) g).val.app U φ)).1 i =
             g.val.app U ((e N U φ).1 i)) := by
-  sorry
+  let d (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ) :=
+    (finiteConstantHom_basisMap X Λ M b N U).codRestrict
+      (LinearMap.ker (finiteConstantHomTranspose X Λ a N U))
+      (fun φ ↦ finiteConstantHom_basis_relations X Λ M a b hexact N U φ)
+  have hd (N : FiniteConstantHomModules X Λ) (U : X.ProEtᵒᵖ) :
+      Function.Bijective (d N U) := by
+    constructor
+    · intro φ ψ h
+      exact finiteConstantHom_basis_injective X Λ M b hsurjective N U
+        (congrArg Subtype.val h)
+    · intro y
+      obtain ⟨φ, hφ⟩ := finiteConstantHom_basis_surjective X Λ M a b hexact
+        hsurjective N U y.val y.property
+      exact ⟨φ, Subtype.ext hφ⟩
+  refine ⟨fun N U ↦ LinearEquiv.ofBijective (d N U) (hd N U), ?_, ?_, ?_⟩
+  · intro N U φ i
+    rfl
+  · intro N U V f φ i
+    exact finiteConstantHom_basis_restrict X Λ M N U V f φ (b (Pi.single i 1))
+  · intro N N' g U φ i
+    rfl
 
 /-- The canonical constant Hom comparison is invertible for two finitely presented
 modules, and preserves composition on all sections and identity. The set comparisons
