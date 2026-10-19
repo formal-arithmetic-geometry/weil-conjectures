@@ -16,7 +16,7 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.Algebra.Algebra.Pi
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteProductPrincipalOpen
 import Mathlib.RingTheory.AdjoinRoot
 import Mathlib.RingTheory.Etale.StandardEtale
 import Mathlib.AlgebraicGeometry.Morphisms.Etale

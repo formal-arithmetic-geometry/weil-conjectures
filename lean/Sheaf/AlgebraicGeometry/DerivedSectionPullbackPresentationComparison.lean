@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport
+public import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackTransport
 public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
 
 /-! # Derived section pullback and the presentation map -/

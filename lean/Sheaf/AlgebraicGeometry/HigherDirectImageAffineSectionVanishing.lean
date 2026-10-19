@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageLocalSectionVanishing
 

@@ -6,8 +6,8 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyPresentationData
-public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
-import Sheaf.AlgebraicGeometry.RestrictedOverSingleCoherence
+public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleCoherence
 
 /-! # Geometric complex data for restricted abelian cohomology
 

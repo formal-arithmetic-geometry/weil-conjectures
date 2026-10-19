@@ -5,9 +5,9 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionIdentity
-import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitionComposition
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Functoriality of higher-image transitions

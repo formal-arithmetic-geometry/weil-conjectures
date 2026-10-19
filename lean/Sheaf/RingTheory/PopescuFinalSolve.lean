@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 import Mathlib.RingTheory.Smooth.Locus
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Sheaf.RingTheory.LinearEquationLocalizationPolynomial
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # Factoring through a smooth algebra when the extended singular ideal is the unit ideal

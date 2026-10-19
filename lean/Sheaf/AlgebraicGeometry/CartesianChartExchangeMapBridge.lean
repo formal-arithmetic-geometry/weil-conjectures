@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
-import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 
 @[expose] public section
 

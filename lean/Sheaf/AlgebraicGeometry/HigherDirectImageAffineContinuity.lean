@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassDescent
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits

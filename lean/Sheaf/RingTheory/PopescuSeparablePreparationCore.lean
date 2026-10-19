@@ -1,10 +1,10 @@
 module
 
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
 import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.PopescuPolynomialQuotientSmooth
+import WeilConjectures.RingTheory.PopescuPolynomialQuotientSmooth
 import Mathlib.RingTheory.FiniteType
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Sheaf.RingTheory.CommonStrictlyStandardPower

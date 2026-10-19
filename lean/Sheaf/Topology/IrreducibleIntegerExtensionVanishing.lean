@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.Topology.AbelianOpenExtensionByZero
+public import WeilConjectures.Topology.AbelianOpenExtensionByZero
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.KrullDimension
 
-import Sheaf.Topology.ConstantIntegerOpenExtensionComparison
-import Sheaf.Topology.IrreducibleOpenComplementDimension
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import WeilConjectures.Topology.ConstantIntegerOpenExtensionComparison
+import WeilConjectures.Topology.IrreducibleOpenComplementDimension
+import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.NoetherianOpenClosedCohomologySequence
 import Sheaf.Topology.IrreducibleNoetherianConstantAcyclic
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences

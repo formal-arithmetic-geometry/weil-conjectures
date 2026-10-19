@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 import Sheaf.RingTheory.SmoothStableConormalBasisAux
-import Sheaf.RingTheory.PresentationLocalizedConormalSplit
+import WeilConjectures.RingTheory.PresentationLocalizedConormalSplit
 
 /-!
 # A polynomial presentation with a basis of its localized conormal module

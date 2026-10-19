@@ -102,13 +102,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws",
-  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedAffineSingleTransitionLaws.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictedAffineSingleTransitionLaws.lean",
   "declaration": "AlgebraicGeometry.Etale.restrictedAffineSingleTransition_laws",
   "statement": "theorem restrictedAffineSingleTransition_laws {S : Scheme.{v}} {I : Type v} [Preorder I] (D : Iᵒᵖ ⥤ Over S) (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (U : S.Etale) : let D' := restrictedAffineDiagram D U let K := restrictedAffineK D F U let ψ := fun {i j : Iᵒᵖ} (f : j ⟶ i) ↦ restrictedAffineSingleTransition D F φ U f ( ∀ i : Iᵒᵖ, ψ (𝟙 i) = (NatIso.mapHomologicalComplex (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i))) (ComplexShape.up ℤ)).hom.app (K i) ≫ (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i)) (ComplexShape.up ℤ)).hom.app (K i)) ∧ ( ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j), ψ (g ≫ f) = (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f) (D'.map (g ≫ f)) (D'.map_comp g f)) (ComplexShape.up ℤ)).hom.app (K i) ≫ ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)",
   "branch": "sheaf-dag",
   "by": "T4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.RestrictedAffineSingleTransitionLaws; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

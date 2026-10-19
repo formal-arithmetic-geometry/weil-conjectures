@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
 public import Sheaf.AlgebraicGeometry.CartesianHigherImageSingleRawClassVanishing
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Eventual vanishing of finitely many raw cartesian derived classes
 

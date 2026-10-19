@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import Sheaf.AlgebraicGeometry.CartesianRawClassChartData
 import Sheaf.AlgebraicGeometry.CartesianRawClassChartNaturality
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeNaturality
-import all Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
+import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Finite-stage chart representatives of raw cartesian classes
 

@@ -5,8 +5,8 @@ Authors: SHEAF group V1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AbelianFreeRepresentablePullback
-public import Sheaf.AlgebraicGeometry.CartesianHigherImageTransitions
+public import WeilConjectures.AlgebraicGeometry.AbelianFreeRepresentablePullback
+public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonIsIso
 
 /-! # Geometric transport of chart classes

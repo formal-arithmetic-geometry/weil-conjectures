@@ -5,10 +5,10 @@ Authors: SHEAF group K2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
+public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.HigherDirectImageRawLocalClassVanishing
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp
+import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp
 
 /-! # Affine computation for eventual vanishing of higher direct images
 

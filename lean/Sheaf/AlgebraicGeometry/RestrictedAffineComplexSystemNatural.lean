@@ -5,10 +5,10 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
-import Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem
-import Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
+import WeilConjectures.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem
+import WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 
 /-! # Geometric complex system for restricted cohomology
 

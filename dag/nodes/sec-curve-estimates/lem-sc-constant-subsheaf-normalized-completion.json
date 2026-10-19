@@ -100,13 +100,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.ConstantSubsheafNormalizedCore",
-  "file": "lean/Sheaf/Topology/ConstantSubsheafNormalizedCore.lean",
+  "module": "WeilConjectures.Topology.ConstantSubsheafNormalizedCore",
+  "file": "lean/WeilConjectures/Topology/ConstantSubsheafNormalizedCore.lean",
   "declaration": "TopCat.Sheaf.constantSubsheaf_normalized_completion",
   "statement": "theorem constantSubsheaf_normalized_completion\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ)))\n    (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →\n      IsCompact ((U ⊓ V : Opens X) : Set X))\n    (hgen : ∃ (n : ℕ) (U : Fin n → Opens X)\n      (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)),\n      ∃ g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g)\n    (e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ))\n    (b : ℕ)\n    (hb : ∀ x : X, ∃ a : ℕ, a ≤ b + 1 ∧\n      Set.range (fun t : ToType (TopCat.Presheaf.stalk K.obj x) ↦\n        (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) =\n      Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) \n    (d : NormalizedPresentationData X K C ι isoC b):\n    ∃ (n : ℕ) (A : Fin n → Opens X) (_ : ∀ i, IsCompact (A i : Set X))\n      (c : Fin n → ℕ), (∀ i, 0 < c i ∧ c i ≤ b + 1) ∧\n      ∃ (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K), Epi g ∧\n        ∃ s : ∀ i, K.obj.obj (op (A i)),\n          ( ∀ i,\n      (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app\n        (op (A i))\n        (abelianOpenExtensionSection (A i)\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl\n          ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj\n              (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n            (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i) ∧\n          ( ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) =\n      (toSheafify (Opens.grothendieckTopology X)\n        ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n          (op (A i)) (ULift.up (c i : ℤ))) ∧\n          (∀ x : X, x ∈ iSup A →\n            ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j)",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.ConstantSubsheafNormalizedCore; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

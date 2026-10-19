@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic

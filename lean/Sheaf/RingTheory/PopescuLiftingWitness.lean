@@ -1,9 +1,9 @@
 module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 import Sheaf.RingTheory.PopescuLifting
-import Sheaf.RingTheory.PopescuLiftingWitnessControl
+import WeilConjectures.RingTheory.PopescuLiftingWitnessControl
 
 @[expose] public section
 universe u v w z

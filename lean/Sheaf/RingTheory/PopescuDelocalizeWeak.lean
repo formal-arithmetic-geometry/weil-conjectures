@@ -13,10 +13,10 @@ public import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth
 import Sheaf.RingTheory.PopescuFinalSolve
 import Sheaf.RingTheory.PopescuWeakClearPresentation
-import Sheaf.RingTheory.SingularIdealMapEquiv
-import Sheaf.RingTheory.PopescuWeakHomogenize
-import Sheaf.RingTheory.SmoothStandardSmoothRetract
-import Sheaf.RingTheory.StandardSmoothIncludeGenerators
+import WeilConjectures.RingTheory.SingularIdealMapEquiv
+import WeilConjectures.RingTheory.PopescuWeakHomogenize
+import WeilConjectures.RingTheory.SmoothStandardSmoothRetract
+import WeilConjectures.RingTheory.StandardSmoothIncludeGenerators
 
 /-!
 # Weak delocalization of a Popescu resolution

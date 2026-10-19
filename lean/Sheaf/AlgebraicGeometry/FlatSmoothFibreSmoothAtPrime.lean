@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
 import Sheaf.RingTheory.SmoothLocalCompleteIntersection
 import Sheaf.RingTheory.SmoothFibreLocalizedPresentationJacobian

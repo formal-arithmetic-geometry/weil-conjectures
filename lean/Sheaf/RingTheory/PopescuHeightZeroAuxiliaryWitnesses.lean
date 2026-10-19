@@ -9,7 +9,7 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Sheaf.RingTheory.PopescuAuxiliaryQuotientSmooth
 import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # Singular elements in the height-zero auxiliary algebra

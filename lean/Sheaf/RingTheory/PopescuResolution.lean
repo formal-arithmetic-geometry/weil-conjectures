@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.FinitePresentation
 
 /-!

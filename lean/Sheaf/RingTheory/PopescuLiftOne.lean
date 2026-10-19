@@ -8,12 +8,12 @@ module
 public import Sheaf.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.PopescuDesingularizeLiftingApply
 import Sheaf.RingTheory.PopescuIdealCompEquiv
-import Sheaf.RingTheory.SingularIdealMapEquiv
+import WeilConjectures.RingTheory.SingularIdealMapEquiv
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Localization.BaseChange
 import Sheaf.RingTheory.PopescuResolution
-import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.StrictlyStandardElement
+import WeilConjectures.RingTheory.SingularIdeal
+import WeilConjectures.RingTheory.StrictlyStandardElement
 
 /-!
 # Lifting a Popescu resolution for one element

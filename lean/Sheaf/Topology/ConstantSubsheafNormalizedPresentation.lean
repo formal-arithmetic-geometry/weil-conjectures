@@ -7,11 +7,11 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
-public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.ConstantSheafLocallyConstantComparison
+public import WeilConjectures.Topology.AbelianOpenExtensionByZero
+import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
+import WeilConjectures.Topology.ConstantSheafLocallyConstantComparison
 import Sheaf.Topology.PresheafModuleStalkFunctor
-import Sheaf.Topology.ConstantSubsheafNormalizedCore
+import WeilConjectures.Topology.ConstantSubsheafNormalizedCore
 
 /-! # ConstantSubsheafNormalizedPresentation
 

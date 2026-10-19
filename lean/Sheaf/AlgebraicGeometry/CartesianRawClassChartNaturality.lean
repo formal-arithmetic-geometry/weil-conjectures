@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import Sheaf.AlgebraicGeometry.CartesianChartLiftNaturality
-import all Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
+import all WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAssembly
 
 /-! # Naturality of a finite-stage raw cartesian chart representative
 

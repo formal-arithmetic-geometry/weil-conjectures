@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.RingTheory.PopescuResolution
-public import Sheaf.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.StrictlyStandardElement
 import Sheaf.RingTheory.PopescuLiftInduction
 import Sheaf.RingTheory.PopescuLiftOne
 import Sheaf.RingTheory.PopescuLiftSuccessor

@@ -5,7 +5,7 @@ Authors: SHEAF group C3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison

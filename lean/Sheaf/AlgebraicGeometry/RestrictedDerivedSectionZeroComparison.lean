@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 import Sheaf.AlgebraicGeometry.DerivedSectionPullbackZero
 import Sheaf.AlgebraicGeometry.DerivedRestrictionZeroTransport
-import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.GenericGeometricallyReducedPreparation
 import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Topology.IrreducibleOpenComplementDimension
+import WeilConjectures.Topology.IrreducibleOpenComplementDimension
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 

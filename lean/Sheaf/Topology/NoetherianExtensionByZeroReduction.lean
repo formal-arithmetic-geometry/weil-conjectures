@@ -4,10 +4,10 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+public import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 import Sheaf.Topology.ConstantSubsheafFiniteFiltration
-import Sheaf.Topology.CohomologyReductionConstantSubsheaves
+import WeilConjectures.Topology.CohomologyReductionConstantSubsheaves
 
 @[expose] public section
 

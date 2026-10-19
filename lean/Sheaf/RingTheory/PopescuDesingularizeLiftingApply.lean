@@ -4,11 +4,11 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import Sheaf.RingTheory.StrictlyStandardElement
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.StrictlyStandardElement
+public import WeilConjectures.RingTheory.SingularIdeal
 import Sheaf.RingTheory.DesingularizeStrictlyStandard
 import Sheaf.RingTheory.PopescuLiftingWitness
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # Lifting a factorization modulo pi^8 (Popescu)

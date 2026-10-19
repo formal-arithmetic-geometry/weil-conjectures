@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
-public import Sheaf.RingTheory.SingularIdeal
+public import WeilConjectures.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.RingTheory.Localization.BaseChange

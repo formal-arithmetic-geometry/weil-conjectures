@@ -6,9 +6,9 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.RestrictedOverAbelianComplexData
-import all Sheaf.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
-import all Sheaf.AlgebraicGeometry.RestrictedOverSingleUnit
-import Sheaf.AlgebraicGeometry.RestrictedOverSingleComposition
+import all WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
+import all WeilConjectures.AlgebraicGeometry.RestrictedOverSingleUnit
+import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleComposition
 
 /-! # Canonical restricted abelian cohomology diagrams
 
