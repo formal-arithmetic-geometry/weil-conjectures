@@ -79,7 +79,18 @@ theorem transport_laws :
       transportHom R p F K M (composition R C p K L M g f) =
         composition R D p (F.obj K) (F.obj L) (F.obj M)
           (transportHom R p F L M g) (transportHom R p F K L f)) := by
-  sorry
+  constructor
+  · intro K
+    simp [transportHom]
+  · intro K L M f g
+    induction g using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b g =>
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f => simp [transportHom, composition_tmul]
+      | add f f' hf hf' => simp [map_add, hf, hf']
+    | add g g' hg hg' => simp [map_add, hg, hg']
 
 /-- The extension agrees on objects and sends a ⊗ f to a ⊗ F(f).
 Source: blueprint order 1306, proof steps 1--2
@@ -114,7 +125,40 @@ theorem transport_unique (H : ScalarLocalization R C p ⥤ ScalarLocalization R 
         ScalarLocalization.mk (R := R) (p := p) K ⟶ ⟨L⟩))
         ((1 : Localization.Away p) ⊗ₜ[R] F.map f)) :
     H = transport R p F := by
-  sorry
+  refine Functor.ext (fun K ↦ hobj K.obj) ?_
+  intro K L f
+  change H.map f = eqToHom (hobj K.obj) ≫
+    (transportHom R p F K.obj L.obj) f ≫ eqToHom (hobj L.obj).symm
+  have hi (g : K.obj ⟶ L.obj) :
+      H.map ((1 : Localization.Away p) ⊗ₜ[R] g : K ⟶ L) =
+        eqToHom (hobj K.obj) ≫
+          ((1 : Localization.Away p) ⊗ₜ[R] F.map g) ≫ eqToHom (hobj L.obj).symm := by
+    exact (conj_eqToHom_iff_heq _ _ (hobj K.obj) (hobj L.obj)).mpr
+      (hmap K.obj L.obj g)
+  induction f using TensorProduct.induction_on with
+  | zero =>
+    change H.map (0 : K ⟶ L) = _
+    simp only [Functor.map_zero, map_zero, Limits.zero_comp, Limits.comp_zero]
+  | tmul a f =>
+    calc
+      H.map (a ⊗ₜ[R] f : K ⟶ L) =
+          H.map (a • ((1 : Localization.Away p) ⊗ₜ[R] f) : K ⟶ L) := by
+            congr 1
+            simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      _ = a • H.map ((1 : Localization.Away p) ⊗ₜ[R] f : K ⟶ L) := H.map_smul a _
+      _ = _ := by
+        rw [hi, ← Linear.comp_smul, ← Linear.smul_comp]
+        dsimp only [transportHom]
+        rw [LinearMap.baseChange_tmul]
+        congr 2
+        change a • ((1 : Localization.Away p) ⊗ₜ[R] F.map f) = a ⊗ₜ[R] F.map f
+        simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+  | add f g hf hg =>
+    change H.map (f + g : K ⟶ L) = _
+    rw [H.map_add, map_add]
+    erw [Preadditive.add_comp, Preadditive.comp_add]
+    exact congrArg₂ (· + ·) hf hg
+
 
 variable {F} {G : C ⥤ D} [G.Additive] [G.Linear R]
 
@@ -127,7 +171,15 @@ theorem transportNat_naturality (η : F ⟶ G) (K L : ScalarLocalization R C p)
     (f : K ⟶ L) :
     (transport R p F).map f ≫ ((1 : Localization.Away p) ⊗ₜ[R] η.app L.obj) =
       ((1 : Localization.Away p) ⊗ₜ[R] η.app K.obj) ≫ (transport R p G).map f := by
-  sorry
+  change composition R D p _ _ _ ((1 : Localization.Away p) ⊗ₜ[R] η.app L.obj)
+      (transportHom R p F _ _ f) =
+    composition R D p _ _ _ (transportHom R p G _ _ f)
+      ((1 : Localization.Away p) ⊗ₜ[R] η.app K.obj)
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a f => simp [transportHom, composition_tmul, η.naturality]
+  | add f g hf hg => simp [map_add, hf, hg]
+
 
 /-- The unique extension of a natural transformation, with its integral components.
 Source: blueprint order 1306, proof step 3
@@ -144,7 +196,12 @@ components therefore gives equality of natural transformations by extensionality
 theorem transportNat_unique (η : F ⟶ G) :
     ∃! e : transport R p F ⟶ transport R p G,
       ∀ K : C, e.app ⟨K⟩ = (1 : Localization.Away p) ⊗ₜ[R] η.app K := by
-  sorry
+  refine ⟨transportNat R p η, fun K ↦ rfl, ?_⟩
+  intro e he
+  apply NatTrans.ext
+  funext K
+  exact he K.obj
+
 
 /-- Exactness for the induced shift and isomorphic-image triangulation, with the
 specified integral shift comparison tensored with one. The structures are the witnesses
