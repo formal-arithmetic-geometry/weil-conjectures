@@ -13,6 +13,8 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 public import Mathlib.Algebra.Homology.HomologicalComplex
@@ -63,6 +65,43 @@ universe c v r c₂ v₂ k
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.MonoidalCategory
 open scoped ChangeOfRings
+
+private theorem modulePushforward_exact
+    {D : Type c} [Category.{v} D] {E : Type c₂} [Category.{v₂} E]
+    {K : GrothendieckTopology D} {L : GrothendieckTopology E}
+    [HasSheafify K AddCommGrpCat.{max c v c₂ v₂ r}]
+    [K.WEqualsLocallyBijective AddCommGrpCat.{max c v c₂ v₂ r}]
+    [HasSheafify L AddCommGrpCat.{max c v c₂ v₂ r}]
+    [L.WEqualsLocallyBijective AddCommGrpCat.{max c v c₂ v₂ r}]
+    {F : D ⥤ E} [F.IsContinuous K L] [F.IsCocontinuous K L]
+    {S : Sheaf K RingCat.{max c v c₂ v₂ r}} {R : Sheaf L RingCat.{max c v c₂ v₂ r}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{max c v c₂ v₂ r} K L).obj R) :
+    (SheafOfModules.pushforward.{max c v c₂ v₂ r} φ).Additive ∧
+      PreservesFiniteLimits (SheafOfModules.pushforward.{max c v c₂ v₂ r} φ) ∧
+      PreservesFiniteColimits (SheafOfModules.pushforward.{max c v c₂ v₂ r} φ) := by
+  refine ⟨?_, ?_, ?_⟩
+  · constructor
+    intro X Y f g
+    ext V x
+    rfl
+  · let T := SheafOfModules.forget.{max c v c₂ v₂ r} S ⋙ PresheafOfModules.toPresheaf S.obj
+    have : PreservesFiniteLimits (SheafOfModules.pushforward.{max c v c₂ v₂ r} φ ⋙ T) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{max c v c₂ v₂ r} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (CategoryTheory.Functor.whiskeringLeft _ _ _).obj F.op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ T
+  · let H := F.sheafPushforwardContinuous AddCommGrpCat.{max c v c₂ v₂ r} K L
+    have : PreservesColimitsOfSize.{max c v c₂ v₂ r, max c v c₂ v₂ r} H :=
+      (F.sheafAdjunctionCocontinuous AddCommGrpCat.{max c v c₂ v₂ r}
+        K L).leftAdjoint_preservesColimits
+    let T := SheafOfModules.toSheaf.{max c v c₂ v₂ r} S
+    have : PreservesFiniteColimits (SheafOfModules.pushforward.{max c v c₂ v₂ r} φ ⋙ T) := by
+      change PreservesFiniteColimits (SheafOfModules.toSheaf.{max c v c₂ v₂ r} R ⋙ H)
+      infer_instance
+    have : ReflectsFiniteColimits T :=
+      { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+    exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
 namespace WeilConjectures.SemilinearSections
 
@@ -340,7 +379,28 @@ Every generating covering is vertical, so this verifies the full sheaf condition
 theorem openSite_continuous :
     (openSite U).IsContinuous (coefficientSequenceTopology (J.over U))
       (coefficientSequenceTopology J) := by
-  sorry
+  apply Functor.isContinuous_of_coverPreserving
+  · constructor
+    intro ℱ Z T x hx Y₁ Y₂ W f₁ f₂ g₁ g₂ hg₁ hg₂ h
+    let W' : ℕ × Over U := (W.1, Over.mk (f₁.2 ≫ Y₁.2.hom))
+    let f₁' : W' ⟶ Y₁ := Prod.mkHom f₁.1 (Over.homMk f₁.2)
+    let f₂' : W' ⟶ Y₂ := Prod.mkHom f₂.1 (Over.homMk f₂.2 (by
+      have hh := congrArg (fun f ↦ f.2) h
+      simpa [openSite, Category.assoc, Over.w] using hh.symm =≫ Z.2.hom))
+    exact hx f₁' f₂' hg₁ hg₂ (by
+      apply Prod.hom_ext
+      · exact congrArg (fun f ↦ f.1) h
+      · apply Over.OverMorphism.ext
+        exact congrArg (fun f ↦ f.2) h)
+  · constructor
+    intro X S hS
+    change Sieve.overEquiv X.2
+      (S.functorPullback (Prod.sectR X.1 (Over U))) ∈ J X.2.left at hS
+    apply J.superset_covering _ hS
+    intro V f hf
+    rcases hf with ⟨W, g, k, hg, rfl⟩
+    exact ⟨(X.1, W), Prod.mkHom (𝟙 _) g, Prod.mkHom (𝟙 _) k,
+      hg, rfl⟩
 
 attribute [instance] openSite_continuous
 
@@ -356,7 +416,30 @@ theorem openRing :
       ring.{max c v, v, max c v r} (coefficientSequenceTopology (J.over U))
         (systemRing.{max c v, v, max c v r} (J.over U)
           (openRings.{c, v, r} J B U) (openTransitions.{c, v, r} J B τ U)) := by
-  sorry
+  let cmp : rings.{c, v, max c v r} J B τ ⋙
+      J.overPullback CommRingCat.{max c v r} U ⟶
+      rings.{max c v, v, max c v r} (J.over U)
+        (openRings.{c, v, r} J B U) (openTransitions.{c, v, r} J B τ U) :=
+    NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+      intro n
+      simp only [CategoryTheory.Functor.comp_map, rings,
+        CategoryTheory.Functor.ofOpSequence_map_homOfLE_succ,
+        Category.id_comp, Category.comp_id]
+      rfl)
+  apply ObjectProperty.FullSubcategory.ext
+  refine CategoryTheory.Functor.hext (fun _ ↦ rfl) ?_
+  intro X Y f
+  have hh := cmp.naturality (f.unop.1).op
+  dsimp only [cmp] at hh
+  simp only [NatTrans.ofOpSequence_app, Category.id_comp, Category.comp_id] at hh
+  dsimp [openSite, ring, systemRing, ringPresheaf,
+    CategoryTheory.Functor.sheafPushforwardContinuous]
+  apply heq_of_eq
+  change (forget₂ CommRingCat RingCat).map _ = (forget₂ CommRingCat RingCat).map _
+  congr 1
+  dsimp [CategoryTheory.Functor.uncurry]
+  congr 1
+  exact congrArg (fun α ↦ α.hom.app (op X.unop.2)) hh
 
 /-- Actual j-star is restriction of the system presheaf along openSite.
 Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
@@ -374,7 +457,30 @@ theorem openRestriction_exact :
     (openRestriction.{c, v, r} J B τ U).Additive ∧
     PreservesFiniteLimits (openRestriction.{c, v, r} J B τ U) ∧
     PreservesFiniteColimits (openRestriction.{c, v, r} J B τ U) := by
-  sorry
+  have hco : (openSite U).IsCocontinuous
+      (coefficientSequenceTopology (J.over U)) (coefficientSequenceTopology J) := by
+    constructor
+    intro X S hS
+    change S.functorPullback (Prod.sectR X.1 C) ∈ J X.2.left at hS
+    change Sieve.overEquiv X.2
+      ((S.functorPullback (openSite U)).functorPullback
+        (Prod.sectR X.1 (Over U))) ∈ J X.2.left
+    have he : Sieve.overEquiv X.2
+        ((S.functorPullback (openSite U)).functorPullback
+          (Prod.sectR X.1 (Over U))) = S.functorPullback (Prod.sectR X.1 C) := by
+      apply Sieve.ext
+      intro V f
+      rw [Sieve.overEquiv_iff]
+      rfl
+    rw [he]
+    exact hS
+  have : HasSheafify (coefficientSequenceTopology J) AddCommGrpCat.{max c v r} :=
+    abelianSheafify.{c, v, max c v r} (coefficientSequenceTopology J)
+  have : HasSheafify (coefficientSequenceTopology (J.over U))
+      AddCommGrpCat.{max c v r} :=
+    abelianSheafify.{max c v, v, max c v r} (coefficientSequenceTopology (J.over U))
+  exact modulePushforward_exact.{max c v, v, r, c, v}
+    (eqToHom (openRing.{c, v, r} J B τ U).symm)
 
 /-- Additivity of actual system restriction.
 Source: Stacks 03DJ (blueprint: def-coef-semilinear-derived-calculus). -/
