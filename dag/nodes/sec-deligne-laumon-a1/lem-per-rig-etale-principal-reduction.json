@@ -13,11 +13,106 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-completed-polynomial-conormal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $m$, the stipulated isomorphism $\\widehat{C_m}_{K_m}\\cong E/a^mE$ makes $E_m=E/a^mE$ complete: apply [lem-weil-pbc-module-completion-complete] to the $A_m$-module $C_m$. The ideal $K_m$ is finitely generated, being the image of the finitely generated ideal $K$ in the Noetherian ring $A$. Apply [lem-per-rig-etale-compatible-model-tower] to replace these independently chosen models by models, still denoted $C_m$, with maps $v_m:C_m\\to E_m$ and transition isomorphisms $C_m/a^{m-1}C_m\\cong C_{m-1}$. The $v_m$ commute with reduction to $E_{m-1}$. This is the compatibility construction, not a consequence of two completions being isomorphic.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-noetherian-ring",
+    "lem-per-rig-etale-compatible-model-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, compatible-model construction; algebra.tex Tag 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-rig-etale-principal-tower-limit] to this tower and put $F=\\varprojlim_m C_m$. It is $(a)$-adically complete and Noetherian, its projections identify $F/a^mF$ with $C_m$, and it has an $A$-algebra presentation $F\\cong\\widehat{A[z_1,\\ldots,z_q]}_{(a)}/Q$ with $q$ finite. We retain these projection-induced identifications throughout.",
+   "uses": [
+    "lem-per-rig-etale-principal-tower-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, paragraph beginning “By construction”; Tags 0AJP and 0AJQ."
+   }
+  },
+  {
+   "text": "We construct the required map and completion comparison using finite quotients. Fix $n\\geq1$. In $A_n=A/(a^n)$ put $T_n=IA_n=K_n+(\\bar a)$. Since $\\bar a^n=0$, $K_n^j\\subseteq T_n^j$ and $T_n^{j+n-1}\\subseteq K_n^j$ for every $j\\geq1$: in each monomial either at least $j$ factors lie in $K_n$, or at least $n$ factors are $\\bar a$. Thus $K_n$ and $T_n$ define cofinal filtrations on $C_n$. Restriction to cofinal quotients identifies their inverse limits, by sending a compatible sequence to the same residue classes in each quotient. Hence $v_n$ identifies $\\widehat{C_n}_{T_n}$ with $E_n$. By [lem-weil-pbc-module-completion-complete] for the finitely generated ideal $T_n$, this gives $C_n/T_n^nC_n\\cong E_n/T_n^nE_n$. Since $a^n\\in I^n$, the projection of Step 2 identifies the left side with $F/I^nF$ and the right side is $E/I^nE$. The resulting isomorphism is induced by $F\\to C_n\\xrightarrow{v_n}E_n\\to E/I^nE$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, completion comparison following the inverse-limit construction; algebra.tex Tag 05GG."
+   }
+  },
+  {
+   "text": "The isomorphisms $\\theta_n:F/I^nF\\to E/I^nE$ of Step 3 commute with all reductions: for $m\\geq n$, the square follows from $C_m\\to C_n$ commuting with $v_m,v_n$ and $E_m\\to E_n$ in Step 1. Thus their inverse limit $\\widehat F_I\\to\\varprojlim_n E/I^nE=E$ is an $A$-algebra isomorphism, with inverse given by the sequence of the $\\theta_n^{-1}$. Define $u:F\\to E$ as the completion map followed by this isomorphism. The map induced by $u$ on the $n$th quotient is exactly $\\theta_n$, so its induced completion map is exactly the isomorphism just constructed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, assertion that the I-adic completion of B-prime is B, expanded on quotient maps."
+   }
+  },
+  {
+   "text": "The original $E$ has finite type special fibre over $A/I$. Indeed [lem-weil-pbc-module-completion-complete] identifies $P/IP$ with $(A/I)[x_1,\\ldots,x_r]$; its surjection onto $E/IE$ exhibits that ring as a quotient of this polynomial ring. We may therefore apply condition (i) implies (ii) of [lem-per-rig-etale-principal-tower-conormal-transfer] to $B=E$ and $H=I$, using the assumed annihilation of the original differential. There is a single integer $d$ such that, for every $m$, $I^d$ annihilates the two cohomology modules of $N_{K_m}(E_m/A_m)$. Here take $L=(a^m)$ and $H_0=K_m$. Their required vanishing loci agree because $a$ is nilpotent in $A_m$: every prime contains its image, so it contains $IA_m=K_m+(\\bar a)$ exactly when it contains $K_m$. The exponent $d$ is chosen before $m$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "lem-per-rig-etale-principal-tower-conormal-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, uniform cohomology bound; Tags 0AJU and 0AK2."
+   }
+  },
+  {
+   "text": "For each $m$ choose a finite polynomial presentation $\\alpha_m:A_m[y_1,\\ldots,y_{s_m}]\\twoheadrightarrow C_m$ with kernel $T_m$, and put $M_{1,m}=\\ker d_{\\alpha_m}$, $M_{0,m}=\\operatorname{coker}d_{\\alpha_m}$. The base $A_m$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], since it is a quotient of $A$. Apply [lem-per-etale-supported-cotangent-completion]: both $M_{i,m}$ are finite and killed by some power $K_m^{b_m}$. Thus $M_{i,m}\\to\\widehat M_{i,m}$ is an isomorphism: its quotient sequence is constant from $b_m$ onward. Now [lem-per-completed-jacobian-homology-comparison], applied to $\\alpha_m$ and any completed presentation of $E_m=\\widehat{C_m}_{K_m}$, gives $E_m$-linear isomorphisms from these completed modules onto the two completed conormal cohomology modules of $E_m/A_m$. Step 5 therefore gives $I^dM_{i,m}=0$, and in particular $a^dM_{i,m}=0$, for every $m$. The possibly varying exponents $b_m$ are used only for the individual completion isomorphisms; the common exponent $d$ comes from Step 5.",
+   "uses": [
+    "lem-per-etale-supported-cotangent-completion",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-per-completed-jacobian-homology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, last paragraph; Tag 0GAF (lemma-NL-is-completion)."
+   }
+  },
+  {
+   "text": "Apply condition (iii) implies (i) of [lem-per-rig-etale-principal-tower-conormal-transfer] to $B=F$ and $H=(a)$. Step 2 supplies completeness, finite type special fibre, and the chosen finite completed polynomial presentation. Its quotients are $F/a^mF=C_m$ over $A/(a^m)=A_m$. The polynomial presentations and common exponent $d$ of Step 6 give exactly condition (iii), including its independence of $m$. Thus some $a^e$ annihilates the kernel and cokernel of $Q/Q^2\\to F^{\\oplus q}$ for the presentation of Step 2. With $F$ and $u$ from Steps 2 and 4, this proves every assertion.",
+   "uses": [
+    "lem-per-rig-etale-principal-tower-conormal-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA, conclusion that B-prime is rig etale over (A,(a)); Tag 0AJU, conditions (3),(4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-rig-etale-compatible-model-tower",
+  "lem-per-rig-etale-principal-tower-limit",
+  "lem-per-rig-etale-principal-tower-conormal-transfer",
+  "lem-per-etale-supported-cotangent-completion",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-per-completed-jacobian-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0AKA (lemma-approximate), compatible-model through principal-complete intermediate construction; completion comparison expanded at quotient level."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +141,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.Ring\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → StandardEtalePair R → Type u_1\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, this is the quotient ring $ R[X, Y] $ modulo the ideal generated by $ f $ and $ Yg - 1 $, which constructs the standard ét\"}\n  {\"name\": \"StandardEtalePair.instAlgebraRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → Algebra R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the quotient ring $ P.\\\\text{Ring} $ inherits a canonical $ R $-algebra structure from the polynomial ring $ R[X,Y] $, induced b\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_3} →\\n  {S : Type u_4} →\\n    {A : Type u_5} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            (I : Ideal S) →\\n              [IsAdicComplete I S] →\\n                [inst_4 : CommRing A] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Assemble rig etale quotient algebraizations to a principal adically complete rig etale algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.Ring\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → StandardEtalePair R → Type u_1\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, this is the quotient ring $ R[X, Y] $ modulo the ideal generated by $ f $ and $ Yg - 1 $, which constructs the standard ét\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.instAlgebraRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → Algebra R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the quotient ring $ P.\\\\text{Ring} $ inherits a canonical $ R $-algebra structure from the polynomial ring $ R[X,Y] $, induced b\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n  {\"name\": \"Algebra.instIsStandardEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.IsStandardEtale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ is a standard étale algebra over $ R $. This means it is isomorphic to a localiz\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: standard etale algebras, etale loci and completion constructions do not state the conditional principal-reduction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.FiniteType, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: standard etale algebras, etale loci and completion constructions do not state the conditional principal-reduction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "topologically.finite.type|rig.etale|compatible.*algebra.*tower",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: standard etale algebras, etale loci and completion constructions do not state the conditional principal-reduction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of algebraization of rig etale complete algebras to the principal ideal case",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(q : Ideal A) [q.IsPrime] : Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib.RingTheory.Etale.QuasiFinite\", \"type\": \"[Module.Finite R S] (p : Ideal R) [p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p] :\\n  ∃ (R' : Type u) (_ : CommRing R') (_ : Algebra R R') (_ : Algebra.Etale R R') (P : Ideal R') (_ : P.IsPrime) (_ :\\n    P.LiesOver p) (e : R' ⊗[R] S) (_ : IsIdempotentElem e) (P' : Ideal (R' ⊗[R] S)) (_ : P'.IsP\", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{p : PrimeSpectrum A} : p ∈ etaleLocus R A ↔ IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: standard etale algebras, etale loci and completion constructions do not state the conditional principal-reduction theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-rig-etale-jacobian-algebraization",
@@ -74,5 +197,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rig-etale-principal-reduction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Repaired the earlier helper drafts: actual quotient isomorphisms in the compatible tower, a general finite-type adic-tower limit lemma, and a self-contained uniform conormal criterion. Added a supported cotangent completion comparison. The item explicitly constructs u and its I-completion isomorphism and tracks a single annihilator through all m. After refreshing the DAG, reused lem-per-completed-jacobian-homology-comparison and narrowed the fourth helper to ordinary conormal finiteness/power torsion; Step 6 explicitly completes the eventually constant module quotient systems.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative algebra tool used for completion quotient projections or Noetherianity; the Fourier-perverse unit has no statement supplying this algebraic fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative algebra tool used for completion quotient projections or Noetherianity; the Fourier-perverse unit has no statement supplying this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-8cffa4211",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-8cffa4211 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement, and restricted.tex 0AKA l.2091-2205, 0AJU (2)-(4), 0AK2, 0GB2, remark-take-bar and lift-approximation. I made no fixes. The item statement is identical to Q69's. Step 1 uses 05GG to show E_m is K_m-complete, then the compatible-tower node, which is the 0AKA claim paragraph (fully-faithful, then étale invariance, then lift-approximation with nilpotent (a^{m-1})); that node is true and has no F or conormal content. Step 2 is the tower limit (0AJP+0AJQ); I checked it for a=0 and a a unit. Step 3: the cofinality T^{j+n-1}⊆K^j is elementary, then 05GG(2) and a^n∈I^n give F/I^n≅E/I^n. Step 4 is the commuting limit. Step 5 uses transfer (i)⇒(ii) with L=(a^m), H_0=K_m; V agree because ā is nilpotent. (ii) is true because 0AJU(3)⇒(2) gives one c with I^c zero in D(B), and 0AK2 with remark-take-bar carries it to every quotient; this is a uniform strengthening of jacobian-torsion-closed-base-change, not a duplicate. Step 6: the supported-cotangent node (true: finite modules supported on V(HC)) gives M=\\hat M, then homology-comparison with I:=K_m gives a^d M=0 for all m. Step 7 is transfer (iii)⇒(i), i.e. 0AJU(4)⇒(3), with H=(a). There is no cycle and no SGA. The DAG grep for 0AJP/0AJU/0AK2/0AKA-related nodes and tower limits found no duplicates. I accept the worker-written tool_uses for 05GG/00FN as generic algebra. Cosmetic: the transfer node defines NL_{S/R} and never uses it."
  }
 }
