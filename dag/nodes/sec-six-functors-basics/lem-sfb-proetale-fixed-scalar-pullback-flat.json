@@ -1,0 +1,103 @@
+{
+ "kind": "statement",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flatness of module sheaves is detected on geometric stalks and preserved by inverse image; complementary open closed restrictions detect zero pro etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.Flat.iff_flat_stalkMap, Module.Flat.of_isLocalizedModule, Module.flat_of_isLocalized_span, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.restrict_obj, ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.Flat.of_stalkMap",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing proved source-library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness of module sheaves is detected on geometric stalks and preserved by inverse image; complementary open closed restrictions detect zero pro etale sheaves",
+   "results": "8 hits: AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing proved source-library declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff_forall_flat_sheafFiber_obj|upperStarPreservesFlat_moduleCat|isZero_of_isZero_upperStar_of_isCompl",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib match; reuse the existing proved source-library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenClosedFlatness",
+  "date": "2026-10-19",
+  "group": "B3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-flat-model",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-flat-model-generation",
+   "place": "Proof clause (2), flatness of open and closed extensions; source-library tools for detection and pullback",
+   "via": [
+    "lem-sfb-open-closed-flatness"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sfb-proetale-fixed-scalar-pullback-flat",
+ "title": "Pro-etale inverse image preserves fixed-scalar flatness",
+ "statement": "Let $A$ be a Noetherian commutative ring, $X,Y$ schemes [def-pc-scheme], and $g:Y\\to X$ any morphism. On their small pro-etale sites [def-weil-pbc-proetale-site], fixed-scalar inverse image $g^*$ sends every flat sheaf of $A$-modules to a flat sheaf of $A$-modules [def-weil-sheaf-of-modules-category, def-pc-flat-sheaf-modules]. Flatness is exactness of the ordinary sheaf tensor product. The coefficient and module universes are $u+1$ when the schemes have universe $u$. No etale-origin assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, lemma-pullback-flat (Tag 05VD); existing source instance upperStarPreservesFlat_moduleCat and its site-pullback proof"
+ },
+ "proof": [
+  {
+   "text": "Base change along g is representably flat and preserves pro-etale coverings. The site pullback flatness theorem applies to this base-change functor and the Noetherian coefficient ring, giving flat_sheafPullback_obj for every flat input. These functors are exactly the fixed-scalar upperStar functors. The existing source instance upperStarPreservesFlat_moduleCat implements this specialization, so this attachment creates no new proof obligation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/FlatModuleCat.lean",
+  "place": "AlgebraicGeometry.ProEtale.upperStarPreservesFlat_moduleCat; already proved source declaration"
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat",
+  "declaration": "AlgebraicGeometry.ProEtale.upperStarPreservesFlat_moduleCat",
+  "statement": "instance upperStarPreservesFlat_moduleCat : ProEtale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-19",
+  "note": "Attach the existing source declaration without duplicating or changing any Lean declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T002505-L-2141220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T002505-L-2141220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
