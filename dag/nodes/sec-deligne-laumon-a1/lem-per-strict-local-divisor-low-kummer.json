@@ -16,9 +16,128 @@
   "def-asd-finite-etale-tate-twist",
   "lem-amb-kummer-any-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-regular-local-domain] to both regular local rings $R$ and $R/(t)$. Thus $R$ is a domain and $(t)$ is a proper prime ideal. The nonzerodivisor $t$ is nonzero, and it is not a unit because $t\\in\\mathfrak m$. Write $B=R[1/t]$. From the fraction description of localization [def-weil-ring-localization-away], $R\\to B$ is injective and $B$ is a nonzero domain: a fraction is zero only when some power of $t$ annihilates its numerator. The prime $(0)$ is a point of $\\operatorname{Spec}B$ in every nonempty basic open. Hence any two nonempty opens meet, so $V$ is nonempty and connected.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NP, lemma-regular-domain; elementary fraction and prime-spectrum consequences"
+   }
+  },
+  {
+   "text": "Every $v\\in B^\\times$ has a unique expression $v=ut^m$ with $u\\in R^\\times$ and $m\\in\\mathbf Z$. Indeed write $v=x/t^a$ and $v^{-1}=y/t^b$ with $a,b\\geq0$. Injectivity of $R\\to B$ gives $xy=t^{a+b}$ in $R$. Prove by induction on $N$ that $xy=t^N$ implies $x=u t^c$ for a unit $u$ and $0\\leq c\\leq N$. For $N=0$, $xy=1$. For $N>0$, primality of $(t)$ implies $x=tx'$ or $y=ty'$; cancel the nonzero $t$ and apply induction to $x'y=t^{N-1}$ or $xy'=t^{N-1}$. This gives the required expression with $m=c-a$. For uniqueness, $ut^m=u't^{m'}$ with $m>m'$ would imply $u'=ut^{m-m'}\\in(t)$, contradicting that $u'$ is a unit; reverse the roles if $m'<m$ is replaced by $m'>m$. Equality of exponents then gives $u=u'$. Conversely every $ut^m$ is invertible. Multiplication adds exponents, so $B^\\times\\cong R^\\times\\times\\mathbf Z$ by $(u,m)\\mapsto ut^m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Elementary prime-divisor calculation underlying Tag 0AG0, lemma-regular-local-UFD; only primality from Step 1 is needed"
+   }
+  },
+  {
+   "text": "The group $R^\\times$ is $\\ell$-divisible. For $u\\in R^\\times$, reduce $f(X)=X^\\ell-u$ modulo $\\mathfrak m$. Its derivative is $\\ell X^{\\ell-1}$, which is nonzero at any root, since $\\ell$ and $u$ remain nonzero in the residue field $k$. Thus $\\overline f$ is separable. As $k$ is separably closed, an irreducible factor of this separable polynomial is linear, giving a nonzero root $a_0\\in k$. Apply [lem-weil-pbc-henselian-local-root-lifting] to this monic $f$ and its simple root $a_0$. The lift $a\\in R$ has $a^\\ell=u$ and is a unit (its inverse is $a^{\\ell-1}u^{-1}$).",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GF, definition-henselian, and 04GG, lemma-characterize-henselian; application to X^ell-u"
+   }
+  },
+  {
+   "text": "By [lem-sbc-strict-local-roots-of-unity], $\\mu_\\ell(R)$ is cyclic of order $\\ell$; choose a generator $\\zeta$. Its powers $\\zeta^a$ ($0\\leq a<\\ell$) have pairwise unit differences, since $\\zeta^a-\\zeta^b=\\zeta^b(\\zeta^{a-b}-1)$. Successive division by the monic linear factors gives $X^\\ell-1=\\prod_{a=0}^{\\ell-1}(X-\\zeta^a)$: after dividing out any factors, evaluation at the next root and cancellation of the preceding unit differences gives remainder zero; degrees and leading coefficients finish. For any etale $U\\to S$ and $y\\in\\mu_\\ell(U)$ as in [def-asd-etale-roots-of-unity], the opens $U_a$ on which all $y-\\zeta^b$ for $b\\neq a$ are units cover $U$. At a point the residue field makes the displayed product zero, and pairwise unit differences allow exactly one vanishing factor. On $U_a$ the product identity forces $y=\\zeta^a$. These opens are disjoint. Thus $y$ is uniquely a locally constant choice of $a\\in\\mathbf F_\\ell$. Conversely such choices glue to a root. By [lem-weil-pbc-constant-sheaf-sections-locally-constant] this proves $A_S\\xrightarrow{\\sim}\\mu_{\\ell,S}$, $a\\mapsto\\zeta^a$, on every test object. Multiplication of roots is addition of exponents, so it is an isomorphism of $A$-modules. The same construction on test schemes over $V$ gives its restriction there.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "def-asd-etale-roots-of-unity",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps; Section 03PK, section-kummer; elementary factorization with the roots supplied by the cited node"
+   }
+  },
+  {
+   "text": "Since $V$ is nonempty and connected (Step 1), any locally constant map $V\\to A$ is constant: the inverse image of a value is both open and closed. By [lem-weil-pbc-constant-sheaf-sections-locally-constant] and the degree-zero definition in [def-weil-pbc-etale-cohomology], the restriction $A\\to H^0(V_{\\mathrm{et}},A)$ is an isomorphism. The isomorphism of Step 4 identifies $\\mu_\\ell(R)$ with $A$ and $H^0(V_{\\mathrm{et}},\\mu_\\ell)$ with $H^0(V_{\\mathrm{et}},A)$, with restriction sending $\\zeta^a$ to the constant section $\\zeta^a$. This proves the second claimed restriction isomorphism as well.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps; degree zero of cohomology"
+   }
+  },
+  {
+   "text": "We next prove that every invertible $\\mathcal O_V$-module $\\mathcal L$ is trivial. Such a module is quasi-coherent and locally free of rank one [def-sc-invertible-module]. Set $P=\\Gamma(V,\\mathcal L)$; by [lem-weil-pbc-affine-tilde-gamma-adjunction], $\\widetilde P\\cong\\mathcal L$. Refine its local trivializations to basic opens $D(f_i)$. A finite subcover exists by [lem-weil-pbc-affine-scheme-qcqs]; its $f_i$ generate the unit ideal, because otherwise a maximal ideal containing all of them would give an uncovered point. By [lem-weil-pbc-spec-module-tilde-sections], $P_{f_i}=\\mathcal L(D(f_i))\\cong B_{f_i}$. The criterion [lem-sc-affine-standard-cover-finite-projective] therefore makes $P$ finite projective. At each prime of $B$, one of these $f_i$ is invertible, so further localization gives $P_{\\mathfrak q}\\cong B_{\\mathfrak q}$ of rank one. Now [lem-trf-regular-local-pic-zero], with $A=R$ and $f=t$, gives $P\\cong B$. Applying tilde and [lem-weil-pbc-spec-tilde-free-module] (rank one) yields $\\mathcal L\\cong\\mathcal O_V$. This verifies the scheme-theoretic Picard vanishing from the algebraic statement, without assuming that $B$ is local or semilocal.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-affine-standard-cover-finite-projective",
+    "lem-trf-regular-local-pic-zero",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AFZ, lemma-regular-local-Pic-zero; Schemes Tags 01HV and 01IA; Algebra Tags 00NX and 00E8 for the affine dictionary"
+   }
+  },
+  {
+   "text": "Apply the scheme version [thm-sc-hilbert-90] to $V$: Step 6 makes its group of invertible modules zero, so $H^1(V_{\\mathrm{et}},\\mathbf G_m)=0$. Since $\\ell$ is invertible in $B$, [lem-amb-kummer-any-base] gives the short exact sequence $1\\to\\mu_\\ell\\to\\mathbf G_m\\xrightarrow{(-)^\\ell}\\mathbf G_m\\to1$ on $V_{\\mathrm{et}}$. Apply clause 2 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder], taking its scheme map to be $\\mathrm{id}_V$. The resulting exact segment is $B^\\times\\xrightarrow{(-)^\\ell} B^\\times\\xrightarrow{\\delta} H^1(V_{\\mathrm{et}},\\mu_\\ell)\\to0$. Hence $\\delta$ induces an isomorphism $B^\\times/(B^\\times)^\\ell\\xrightarrow{\\sim}H^1(V_{\\mathrm{et}},\\mu_\\ell)$, and by definition $\\delta(t)=\\kappa(t)$.",
+   "uses": [
+    "thm-sc-hilbert-90",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P8, theorem-picard-group; Tag 03PL, lemma-kummer-sequence and the displayed long exact sequence immediately following it"
+   }
+  },
+  {
+   "text": "Under the decomposition of Step 2, the $\\ell$-power map sends $(u,m)$ to $(u^\\ell,\\ell m)$. Step 3 makes its image precisely $R^\\times\\times\\ell\\mathbf Z$. Therefore the exponent modulo $\\ell$ induces an isomorphism $B^\\times/(B^\\times)^\\ell\\cong\\mathbf Z/\\ell\\mathbf Z=A$ whose inverse sends $\\overline m$ to $[t^m]$. Composing this inverse with Step 7 gives $\\overline m\\mapsto\\delta(t^m)=m\\delta(t)=m\\kappa(t)$. An additive homomorphism between groups killed by $\\ell$ commutes with multiplication by integers modulo $\\ell$, so this is an $A$-linear isomorphism. It is exactly the map in the statement, with the generator and sign fixed by the Kummer connecting morphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Elementary quotient calculation in the long exact sequence after Tag 03PL; ILO XVI Proposition 3.4.2 low-degree input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-regular-local-domain",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-sbc-strict-local-roots-of-unity",
+  "def-asd-etale-roots-of-unity",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-trf-regular-local-pic-zero",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "thm-sc-hilbert-90",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Low-degree calculation after Tag 03PL, combined with Tags 0AFZ, 00NP and 04GG; reconstructed argument for ILO XVI Proposition 3.4.2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +173,45 @@
    "results": "{\"t\": \"2026-10-18T22:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a strictly henselian regular local ring R and a nonzero nonunit t with R/(t) regular, the Kummer class of t generates H1 of Spec R[1/t] with roots of unity coefficients, and H0 is constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"IsDedekindDomain.selmerGroup\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"Ideal.rootsOfUnityMapQuot_apply\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"cyclotomicCharacter.spec\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"IsDedekindDomain.selmerGroup.fromUnit\"], \"digest\": \"6c7990e8f6e46ed6\"}",
    "date": "2026-10-19",
    "verdict": "no match: henselian root lifting, Selmer groups or etale algebra loci; none states the requested etale cohomology or purity result"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|etaleCohomology|regularDivisor",
+   "results": "{\"t\": \"2026-10-18T23:05:38Z\", \"tool\": \"grep\", \"query\": \"kummer|etaleCohomology|regularDivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"ff95791e0e1d4d72\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Kummer number theory and Kummer extensions, not small-etale cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-18T23:05:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Kummer-Dedekind and Kummer extensions, not the divisor-complement calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First etale cohomology of the complement of a prime divisor in a strictly henselian regular local scheme is generated by its Kummer class",
+   "results": "{\"t\": \"2026-10-18T23:05:39Z\", \"tool\": \"leanfinder\", \"query\": \"First etale cohomology of the complement of a prime divisor in a strictly henselian regular local scheme is generated by its Kummer class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"IsDedekindDomain.selmerGroup\", \"Algebra.Extension.instAddCommGroupH1Cotangent\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.H1Cotangent\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\"], \"digest\": \"b0bd8f27b124690e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: cotangent H1 and Dedekind Selmer groups do not give the claimed etale H0 and H1"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale Kummer cohomology of a strictly henselian regular local divisor complement",
+   "results": "{\"t\": \"2026-10-18T23:07:26Z\", \"tool\": \"leansearch\", \"query\": \"Etale Kummer cohomology of a strictly henselian regular local divisor complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.etaleLocus_eq_compl_support\", \"RingHom.Etale\"], \"digest\": \"3c63d40ea342473a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: etale ring maps and cotangent cohomology, not small-etale cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kummer exact sequence identifies H1 of Spec R[1/t] with units modulo ell-th powers when R is strictly henselian regular local and t defines a regular divisor",
+   "results": "{\"t\": \"2026-10-18T23:07:27Z\", \"tool\": \"leanfinder\", \"query\": \"The Kummer exact sequence identifies H1 of Spec R[1/t] with units modulo ell-th powers when R is strictly henselian regular local and t defines a regular divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.selmerGroup.fromUnitLift\", \"IsDedekindDomain.selmerGroup\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"IsDedekindDomain.selmerGroup.fromUnit\", \"IsDedekindDomain.selmerGroup.fromUnitLift_injective\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"IsDedekindDomain.selmerGroup.valuation\", \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\"], \"digest\": \"364b3fe511206288\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: cotangent H1 and Dedekind Selmer groups do not give the claimed etale H0 and H1"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-divisor-purity-strict-local-criterion",
@@ -85,5 +239,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-strict-local-divisor-low-kummer",
+  "worker": "stage1",
+  "summary": "Kept the complete statement and all inherited searches. Reconstructed the low-degree Kummer computation in eight steps using existing DAG nodes only. Proved the localized-unit normal form directly from the prime ideal (t), avoiding unnecessary factoriality, proved the roots-of-unity sheaf trivialization on test schemes, and supplied the affine-module/Picard comparison and exact-sequence argument. No new nodes, no Lean edits or builds.",
+  "blueprint": "The item supplies the low-degree input of ILO XVI Proposition 3.4.2 for the historical regular-divisor-purity step of lem-per-artin-gabber-affine-curve, through the recorded divisor-purity criterion ancestry. Steps 1-5 realize the degree-zero and coefficient trivialization input, Steps 6-8 the Kummer generator in degree one; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Simple-root lifting proves divisibility of units; no perverse-unit lemma supplies this henselian algebra tool."
+   },
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "The cyclic group and unit-difference statements supply a primitive root and its sheaf trivialization; used solely as local algebra."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "The ordinary constant-sheaf section formula identifies the root sheaf and degree-zero restriction; no perverse-unit lemma gives this general site tool."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "The finite basic-open freeness criterion makes the sections of a line bundle finite projective, needed to apply the existing Picard lemma."
+   },
+   {
+    "node": "lem-trf-regular-local-pic-zero",
+    "why": "This generic algebra theorem trivializes rank-one modules over R[1/t]; no trace-formula proof route is imported."
+   },
+   {
+    "node": "thm-sc-hilbert-90",
+    "why": "The general-scheme Picard/H1 identification applies to V of arbitrary dimension; the curve-only h1-gm-pic node does not."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "The Kummer short exact sequence on any scheme applies to V; it does not use any purity route."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Clause 2, specialized to id_V, supplies the ordinary etale cohomology long exact sequence; no base-change result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-trf-regular-local-pic-zero",
+  "thm-sc-hilbert-90",
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NG-ba8890eca",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-ba8890eca (reviewer sub-agent of L); spot-checked: I read the item's 8 steps and the statement of every cited node in full. No new nodes and no fixes. Source: ILO XVI Prop 3.4.2 (printed p.245, PDF p.251) only says the criterion follows from the q in {0,1} calculation and defers that calculation to SGA 4½ Cycle 2.1.4. The delivery rebuilds it without SGA from Stacks 00NP, 04GG, 03P5, 03P8, 03PL and 0AFZ; I checked each tag exists in literature/stacks-project, and proof_origin is marked agent. Step 1: R/(t) regular local gives a domain, so (t) is prime, R injects into B = R[1/t], B is a domain and V is connected. Step 2: I checked the induction on xy = t^N and the uniqueness argument, which give B^× = R^× × t^Z. Step 3: X^ℓ − u is separable over the separably closed residue field and lifts by henselian root lifting, so R^× is ℓ-divisible. Step 4: roots of unity form a cyclic group with unit differences; the open sets U_a are disjoint and cover, which gives A_S ≅ μ_ℓ through constant-sheaf sections. Step 5: H^0 equals global sections and V is connected. Step 6: L ≅ P~, a finite basic-open cover with 00NX makes P finite projective of rank 1, then 0AFZ with A = R, f = t gives P ≅ B; every hypothesis is checked. Step 7: Hilbert 90 (any scheme) gives H^1(G_m) = 0, and the Kummer sequence with clause 2 of the long exact ladder at id_V gives B^×/ℓ ≅ H^1(μ_ℓ). Step 8: B^×/ℓ ≅ Z/ℓ, and m maps to mκ(t), A-linear. Small cases: dim 0 is excluded since t ≠ 0; dim 1 gives the strictly henselian DVR, K^×/ℓ = Z/ℓ; t = xy shows the R/(t)-regular hypothesis is needed; ℓ = 2 is fine. Duplicate search over the DAG (Kummer, Pic, 0AFZ, strict-local nodes in sbc and per) found nothing that states this calculation. Batch-5 flag on lem-trf-regular-local-pic-zero: accepted. It is Stacks 0AFZ, pure commutative algebra that neither assumption gives, so it cannot be replaced by an assumption leaf. Its own closure reaches only generic K_0 and determinant trf nodes and no trace-formula or duality theorem; it sits in sec-trace-formula only because of the UFD boundary factorization there. The 8 tool_uses are accepted as generic tools."
  }
 }
