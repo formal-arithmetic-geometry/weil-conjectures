@@ -17418,3 +17418,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:22 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible (stage 3; reviewer PASS; first push; landing 20261019T132228-L-1204541 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/G3/Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction (stage 3; reviewer PASS; first push; landing 20261019T132229-L-1204953 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/G4/Sheaf.SixFunctors.EtaleFiniteProjectivePullbackHom (stage 3; reviewer PASS; first push; landing 20261019T132230-L-1205353 (proof); batch 20261019T132218; modules 1; new nodes 0)
+- 13:22 L: merged deliver/H1/Sheaf.Paper.AdicHeartIntrinsicFibres (stage 3; reviewer PASS; first push; landing 20261019T132231-L-1205560 (proof); batch 20261019T132218; modules 1; new nodes 0)
