@@ -17132,3 +17132,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:32 L: merged deliver/A5/Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality (stage 3; reviewer PASS; first push; landing 20261019T093241-L-2284933 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/A5/Sheaf.Paper.EvenTensorPositivity (stage 3; reviewer PASS; first push; landing 20261019T093243-L-2285459 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:32 L: merged deliver/A5/Sheaf.RingTheory.PuncturedCurveBranches (stage 3; reviewer PASS; first push; landing 20261019T093244-L-2285813 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:32 L: merged deliver/A8/Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra (stage 3; reviewer PASS; first push; landing 20261019T093246-L-2286145 (proof); batch 20261019T093237; modules 1; new nodes 0)

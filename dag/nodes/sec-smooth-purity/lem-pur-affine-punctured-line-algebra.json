@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "If nonzero $f,g\\in k[T]$ satisfy $fg=1$, the coefficient of degree $\\deg f+\\deg g$ is the product of their nonzero leading coefficients, and is nonzero because $k$ is a field. Hence $\\deg f+\\deg g=0$, so both degrees are zero. Conversely every nonzero constant has its inverse in $k$. This proves $k[T]^\\times=k^\\times$.",
+   "text": "Use Polynomial.isUnit_iff to identify each polynomial unit with a scalar unit. Polynomial.C_injective gives uniqueness. Compose this bijection with the canonical equivalence from coordinate-ring units to global etale unit sections.",
    "uses": [
     "def-weil-field",
     "def-weil-polynomial-ring"
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Use the finite Laurent expansions and uniqueness of coefficients of [def-weil-laurent-polynomial-ring]. Write a nonzero Laurent polynomial $u$ as $\\sum_{j=a}^b c_jt^j$ with $c_a,c_b\\ne0$, and another $v$ with extreme exponents $c,d$. The extreme coefficients of $uv$ are $c_a v_c\\ne0$ and $c_b v_d\\ne0$: there is just one contributing pair at each extreme. If $uv=1$, then $a+c=b+d=0$, so $(b-a)+(d-c)=0$. Both summands are nonnegative, so $a=b$ and $c=d$. Thus every unit is $\\alpha t^a$, $\\alpha\\in k^\\times$, $a\\in\\mathbf Z$, and its inverse is $\\alpha^{-1}t^{-a}$. Equality of Laurent coefficients shows that this representation is unique. Consequently $(\\alpha,a)\\mapsto\\alpha t^a$ is a group isomorphism $k^\\times\\times\\mathbf Z\\xrightarrow{\\sim}k[t,t^{-1}]^\\times$.",
+   "text": "For a Laurent unit u, LaurentPolynomial.exists_T_pow writes u*T^n as the image of a polynomial p. Its image is a unit. The localization unit criterion says p divides a power of X; primality of X implies p is associated to X^i. Polynomial.isUnit_iff identifies the associated unit with a scalar a, giving u=a*T^(i-n). Conversely every such monomial is a unit. Equality of Laurent degrees forces equality of the exponents, and multiplication by the inverse of T^n followed by comparison of coefficient zero forces equality of the scalars. This gives the multiplicative coordinate equivalence.",
    "uses": [
     "def-weil-field",
     "def-weil-laurent-polynomial-ring"
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "By [lem-pur-polynomial-field-pid], $k[T]$ is a principal ideal domain. Put $B=k[T,T^{-1}]$. For an ideal $J\\subseteq B$, its contraction $I=\\{f\\in k[T]:f/1\\in J\\}$ is an ideal of $k[T]$, so $I=(g)$. By [def-weil-laurent-polynomial-ring], every $x\\in B$ is $f/T^n$ with $n\\ge0$; if $x\\in J$ then $f=T^n x\\in J$, hence $f\\in I$ and $x\\in gB$. Conversely $g\\in J$ gives $gB\\subseteq J$. Thus $J=gB$, including $J=0$. Finally the extreme-coefficient calculation of step 3 shows that a product of two nonzero Laurent polynomials is nonzero. Therefore $B$ too is a principal ideal domain. This explicit ideal argument is why no separate localization or Laurent-PID node is needed.",
+   "text": "Infer the principal ideal domain structure on k[T] using lem-pur-polynomial-field-pid. For an ideal J of the Laurent ring, take the principal contracted ideal in k[T]. Mapping its generator gives a principal ideal, and IsLocalization.map_under identifies that mapped ideal with J. LaurentPolynomial already supplies the integral-domain instance.",
    "uses": [
     "lem-pur-polynomial-field-pid",
     "def-weil-laurent-polynomial-ring"
@@ -83,10 +83,10 @@
    }
   },
   {
-   "text": "By [def-sc-invertible-module], $\\mathcal L$ is quasi-coherent; the structure sheaf $\\mathcal O_X$ is the rank-one free sheaf and is quasi-coherent. We use [lem-weil-pbc-affine-tilde-gamma-adjunction] for the general affine scheme $X=\\operatorname{Spec}R$, so no algebraic-closedness condition from the curve convention is being added. Apply its functor and quasi-coherent counit isomorphisms to the isomorphism $\\Gamma(X,\\mathcal L)\\cong R=\\Gamma(X,\\mathcal O_X)$ from step 5 and [def-weil-affine-spectrum]. They give $\\mathcal L\\cong\\widetilde{\\Gamma(X,\\mathcal L)}\\cong\\widetilde{\\Gamma(X,\\mathcal O_X)}\\cong\\mathcal O_X$. In [def-sc-picard-group] the identity class is $\\mathcal O_X$, so every Picard class is the identity. This proves both Picard vanishings for any field $k$.",
+   "text": "Use the existing free-generator API in WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections: isFreeGenerator_of_bijective_smul turns the basis of global sections from step 5 into a sheaf free generator on the affine top open. Compare with the generator 1 of the unit sheaf using nonempty_iso_of_isFreeGenerator on the singleton cover by the top open. Equality of the two restricted scalar coefficients follows from injectivity for the generator, so the transition compatibility is immediate. Thus every invertible sheaf is isomorphic to the unit sheaf. Scheme.Pic.eq_iff_nonempty_iso then identifies any two Picard classes, proving both vanishings. This avoids an explicit tilde/Gamma counit in this proof.",
    "uses": [
+    "lem-sc-affine-invertible-sections",
     "def-sc-invertible-module",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "def-weil-affine-spectrum",
     "def-sc-picard-group"
    ],
@@ -124,13 +124,12 @@
   "lem-sc-affine-invertible-sections",
   "lem-pur-pid-invertible-module-trivial",
   "def-sc-invertible-module",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-sc-picard-group"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-affine-punctured-line-algebra.md",
-  "place": "Proof, following the polynomial/PID route and expanding the Laurent ideal, extreme exponent and quotient arguments; algebraic inputs from Stacks Tags 030A, 0BCH and 01IB"
+  "place": "Proof, formalized by A8 using polynomial localization for Laurent units and ideals, existing affine invertible-section/free-generator theorems for Picard vanishing, and the explicit coordinate homomorphism and its kernel for the cokernel. Mathlib supplies polynomial units, PID Picard triviality and the quotient first isomorphism theorem."
  },
  "mathlib_searches": [
   {
@@ -241,5 +240,15 @@
   "group": "Q44",
   "result": "pass",
   "note": "Statement, dependencies, definitions, source/docstrings, edge cases, report sections, and per-file compiler evidence all check out."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261019T093246-L-2286145",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
