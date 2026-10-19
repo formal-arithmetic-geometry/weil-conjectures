@@ -17,9 +17,25 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YY and 07A6: derived pullback and adjunction; more-algebra.tex Section 06Y5: derived change of rings; sites-modules.tex Tags 093J and 03DA: constant exactness and the abelian module category; sites.tex Tag 00WX: canonical sheaf inverse image; derived coefficient adaptation for compatible trivializations"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For normalizationCoefficientExactness, apply the existing finite-limit and finite-colimit preservation instances for constantSheaf. Restriction of scalars is both a left adjoint (to coextension) and a right adjoint (to extension). Lift restriction/coextension to sheaves with sheafComposeAdjunction. The standard adjoint preservation instances give exactness, sheafCompose_additive gives additivity, and the Sites.Adjunction instance gives preservation of sheafification. These are direct applications of the existing Mathlib and source-library APIs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For normalizationModuleRestrictExactness, use ModuleCat.restrictCoextendScalarsAdj and ModuleCat.extendRestrictScalarsAdj in the fixed coefficient universe. Additivity is the existing restriction-of-scalars instance, and both finite preservation assertions follow from these two adjunctions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For normalizationPullbackMate_isIso, restriction/coextension gives adjunctions adjJ and adjK on the two sheaf categories. Sectionwise direct image commutes definitionally with coextension, giving an identity square gamma between right adjoints. Its inverse mate along adjK and adjJ is the identity restriction/direct-image square: on every section this is precisely the left triangle identity for restriction/coextension. Mathlib iterated_mateEquiv_conjugateEquiv_symm identifies the specified inverse-image mate with the conjugate of gamma for the two composite adjunctions. Apply conjugateEquiv_symm_iso to the identity natural transformation. This is an application of the existing mates API, with the sectionwise triangle identity as the only component calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "Formalized by A9 on 2026-10-18 from the stated exactness and canonical-mate constructions, using the existing constant-sheaf, restriction/coextension and iterated-mates APIs; no new mathematical obligations.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -186,5 +202,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Wrote review.md. Checked all three modules, dependency interfaces, canonical constructions, statement clauses, universes, edge cases, docstrings, report sections, and verbatim signatures. Per-file scompile.py compilation reproduced cleanly. No defects found; no fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261019T002502-L-2140193",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

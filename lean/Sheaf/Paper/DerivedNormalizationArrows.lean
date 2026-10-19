@@ -14,6 +14,9 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
+import Mathlib.CategoryTheory.Sites.Adjunction
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Universal arrows for derived coefficient normalization
 
@@ -55,7 +58,18 @@ theorem normalizationCoefficientExactness (q : R →+* S) :
       PreservesFiniteColimits (sheafCompose J 
         (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q))) ∧
     J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) := by
-  sorry
+  have : (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q).isLeftAdjoint
+  have : (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).IsRightAdjoint :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} q).isRightAdjoint
+  have : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q).IsRightAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q).isRightAdjoint
+  have : (sheafCompose J
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)).IsLeftAdjoint :=
+    (sheafComposeAdjunction J
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q)).isLeftAdjoint
+  exact ⟨⟨inferInstance, inferInstance⟩,
+    ⟨inferInstance, inferInstance, inferInstance⟩, inferInstance⟩
 
 /-- Exactness of constants, from the coefficient exactness statement.
 Source: Stacks Tag 093J (blueprint: def-weil-pbc-derived-normalization-arrows). -/
@@ -118,7 +132,11 @@ theorem normalizationModuleRestrictExactness (q : R →+* S) :
     (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).Additive ∧
       PreservesFiniteLimits (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ∧
       PreservesFiniteColimits (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) := by
-  sorry
+  have : (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q).isLeftAdjoint
+  have : (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).IsRightAdjoint :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} q).isRightAdjoint
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity in the fixed coefficient universe.
 Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
@@ -190,6 +208,8 @@ noncomputable def normalizationPullbackMate (q : R →+* S) :
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F (ModuleCat.{u + 1} R) J K)).symm
       (TwoSquare.mk _ _ _ _ (𝟙 _))).natTrans
 
+-- Keep the existing essentially-small instance binders in the public signature.
+set_option linter.unusedSectionVars false in
 /-- The canonical mate is invertible: coefficient restriction commutes with inverse image.
 Source: Stacks Tags 00WX and 03DA
 (blueprint: def-weil-pbc-derived-normalization-arrows).
@@ -199,7 +219,35 @@ sheafification. The resulting comparison is the displayed mate, by the adjunctio
 identity on each presheaf section. The two colimit comparisons are isomorphisms. -/
 theorem normalizationPullbackMate_isIso (q : R →+* S) :
     IsIso (normalizationPullbackMate J F K q) := by
-  sorry
+  let adjU := ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q
+  have : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q).IsRightAdjoint :=
+    adjU.isRightAdjoint
+  let adjJ := sheafComposeAdjunction J adjU
+  let adjK := sheafComposeAdjunction K adjU
+  let adjS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F
+    (ModuleCat.{u + 1} S) J K
+  let adjR := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F
+    (ModuleCat.{u + 1} R) J K
+  let γ := TwoSquare.mk
+    (sheafCompose K (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q))
+    (F.sheafPushforwardContinuous (ModuleCat.{u + 1} R) J K)
+    (F.sheafPushforwardContinuous (ModuleCat.{u + 1} S) J K)
+    (sheafCompose J (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} q)) (𝟙 _)
+  have hγ : (mateEquiv adjK adjJ).symm γ = TwoSquare.mk _ _ _ _ (𝟙 _) := by
+    ext X : 2
+    simp only [Functor.comp_obj, mateEquiv_symm_apply, NatTrans.comp_app, Functor.id_obj,
+      Functor.leftUnitor_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+      Functor.associator_inv_app, Functor.associator_hom_app, Functor.map_id,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Category.comp_id,
+      Category.id_comp, ObjectProperty.FullSubcategory.comp_hom, sheafCompose_map_hom,
+      NatTrans.id_app, ObjectProperty.FullSubcategory.id_hom]
+    apply NatTrans.ext
+    funext Y
+    exact adjU.left_triangle_components (X.obj.obj (F.op.obj Y))
+  unfold normalizationPullbackMate
+  rw [← hγ]
+  rw [iterated_mateEquiv_conjugateEquiv_symm adjS adjR adjJ adjK]
+  exact conjugateEquiv_symm_iso (adjS.comp adjK) (adjJ.comp adjR) γ.natTrans
 
 /-- The canonical inverse-image comparison with coefficient restriction.
 Source: Stacks Tag 00WX (blueprint: def-weil-pbc-derived-normalization-arrows). -/
