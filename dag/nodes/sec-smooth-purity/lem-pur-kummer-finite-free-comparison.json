@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-kummer-finite-free-comparison",
+ "kind": "statement",
+ "title": "Normalized finite free Kummer cohomology comparison",
+ "statement": "Let $C$ be a scheme, $m\\in\\mathbf N$, $R=\\operatorname{ULift}(\\mathbf Z/m\\mathbf Z)$, and $A$ an $R$-module. Use the root sheaf $F=\\mu_m$, the sheafified tensor $F\\otimes_R A_C$, and its canonical insertion maps $i_a$ from [def-pur-kummer-module-coefficients], with cohomology from [def-weil-pbc-etale-cohomology]. If $A$ is finite free, then for every $q\\geq0$ there is an $R$-linear equivalence $\\beta^q:H^q(C,F)\\otimes_R A\\simeq H^q(C,F\\otimes_R A_C)$ with $\\beta^q(x\\otimes a)=H^q(i_a)(x)$. More generally, for a finite index set $I$, vectors $v_i\\in A$, and $R$-linear coordinates $c_j:A\\to R$ satisfying $c_j(v_i)=\\delta_{ij}$ and $\\sum_j c_j(a)v_j=a$, there is a sheaf isomorphism $\\theta:\\bigoplus_{j\\in I}F\\simeq F\\otimes_R A_C$ carrying the $j$-th inclusion to $i_{v_j}$. Empty index sets are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.proof.md",
+  "place": "Finite-direct-sum argument; integral-lift interpretation in the parent node. Stacks Tags 015B, 03EK and 03PL."
+ },
+ "stmt_deps": [
+  "def-pur-kummer-module-coefficients",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Build coordinate projections on the module presheaf tensor by z tensor a |-> c_j(a) z, then descend them by sheafifyLift to the root module sheaf. The insertion-projection composite is c_j(a) times the identity. The sum of projection-insertion composites is the identity by sheafify_hom_ext and the dual basis expansion on pure tensors. Forgetting to abelian sheaves and the biproduct universal property gives the normalized sheaf isomorphism.",
+   "uses": [
+    "def-pur-kummer-module-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a finite basis of A. Additivity of cohomology gives the two corresponding inverse formulas on cohomology. Every additive map between R-modules is R-linear since every element of R is an integer cast. Apply TensorProduct.lift to H(i_a)(x); the inverse is sum_j H(p_j)(y) tensor b_j. The two composites reduce to the basis expansion and the total projection-insertion identity. Thus the equivalence has the required pure-tensor normalization.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kummer-module-coefficients",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-kummer-coefficient-base-change.proof.md",
+  "place": "Finite-direct-sum argument; integral-lift interpretation in the parent node. Stacks Tags 015B, 03EK and 03PL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology tensor finite free module preserves finite direct sums Kummer coefficient",
+   "results": "Algebra.FormallyUnramified.finite_of_free_aux; Algebra.Extension.tensorH1Cotangent; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; LightCondensed.instMonoidalLightCondSetLightCondModFree; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.Generators.H1Cotangent.δ_eq; KaehlerDifferential.cotangentComplexBaseChange_tmul; Algebra.Extension.tensorCotangentInvFun_smul_mk",
+   "date": "2026-10-19",
+   "verdict": "Generic tensor/biproduct tools; no complete normalized Kummer comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biproduct\", \"shortExact\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "Generic tensor/biproduct tools; no complete normalized Kummer comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|δSucc_naturality",
+   "results": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "Generic tensor/biproduct tools; no complete normalized Kummer comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite basis tensor sheaf cohomology biproduct comparison",
+   "results": "CategoryTheory.Functor.biproductComparison'; CategoryTheory.Functor.biprodComparison; CategoryTheory.Functor.splitEpiBiprodComparison; CategoryTheory.Limits.biproduct.isoProduct; CategoryTheory.Limits.biproductIso; CategoryTheory.Functor.splitEpiBiproductComparison; CategoryTheory.Limits.biprodIso; CategoryTheory.Limits.biprod.isoProd",
+   "date": "2026-10-19",
+   "verdict": "Generic tensor/biproduct tools; no complete normalized Kummer comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange",
+  "date": "2026-10-19",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kummer-coefficient-base-change",
+   "place": "Finite-basis comparison and integral-lift compatibility in the proof",
+   "via": [
+    "lem-pur-kummer-coefficient-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KummerFiniteFreeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerFiniteFreeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.kummer_finite_free_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.kummer_dual_basis_sheaf_comparison",
+   "AlgebraicGeometry.Scheme.kummer_finite_free_comparison"
+  ],
+  "statement": "theorem kummer_finite_free_comparison (C : Scheme.{u}) (m : ℕ)\n    (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)))\n    [Module.Free (ULift.{u + 1} (ZMod m)) A]\n    [Module.Finite (ULift.{u + 1} (ZMod m)) A] :\n    ∃ beta : ∀ q : ℕ,\n      (Sheaf.H (C.rootsOfUnitySheaf m) q ⊗[ULift.{u + 1} (ZMod m)] A) ≃ₗ[\n        ULift.{u + 1} (ZMod m)] Sheaf.H ((kummerAbelianTwist C m).obj A) q,\n      ∀ (q : ℕ) (x : Sheaf.H (C.rootsOfUnitySheaf m) q) (a : A),\n        beta q (x ⊗ₜ a) = Sheaf.H.map (kummerCoefficientInsertion C m A a) q x",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261019T112515-L-3948727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261019T112515-L-3948727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

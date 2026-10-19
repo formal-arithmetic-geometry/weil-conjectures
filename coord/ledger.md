@@ -17339,3 +17339,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/Q3/Sheaf.Paper.LocalFrobeniusTrace (stage 3; reviewer PASS; first push; landing 20261019T112512-L-3948314 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/Q4/Sheaf.Paper.MixedWeightsStability (stage 3; reviewer PASS; first push; landing 20261019T112513-L-3948412 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/Q8/Sheaf.Paper.FiniteSystemPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261019T112514-L-3948613 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/R1/Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange (stage 3; reviewer PASS; first push; landing 20261019T112515-L-3948727 (interface); batch 20261019T112432; modules 4; new nodes 3; change records: coord/changes/R1-kummer-coefficient-proof-elaboration.md)
