@@ -104,7 +104,7 @@ theorem isIso_comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing �
     [Finite Λ] {U V : Scheme.{u}} (u : U ⟶ V)
     [QuasiCompact u] [QuasiSeparated u] :
     IsIso (comparisonDirectImageCanonicalMate Λ u) := by
-  sorry
+  exact isIso_comparisonDirectImagePlus Λ u
 
 /-- The defining unit-normalization formula for the derived mate.  It is
 exactly the universal-property factorization of the bounded-below right
@@ -123,6 +123,7 @@ proof of `prop-weil-pbc-comparison-direct-image`; Stacks Tag 0B65.
           (comparisonDirectImageCanonicalMate Λ u) =
       Functor.rightDerivedFunctorPlusBaseChangeAux
         (lowerStarComparisonUpperStarBaseChange u (ModuleCat.{u + 1} Λ)) := by
-  sorry
+  exact Functor.rightDerivedFunctorPlusBaseChange_fac
+    (lowerStarComparisonUpperStarBaseChange u (ModuleCat.{u + 1} Λ))
 
 end AlgebraicGeometry.ProEtale
