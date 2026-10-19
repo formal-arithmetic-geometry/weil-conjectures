@@ -1,372 +1,321 @@
 {
-  "id": "lem-sfb-surjective-closed-module-invariance",
-  "kind": "statement",
-  "title": "Surjective closed immersions: module equivalence and finite local models",
-  "statement": "Let $A$ be a finite commutative ring and $h:T\\hookrightarrow Y$ a surjective closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion, def-weil-surjective-morphism]. Work on either the small étale or the small pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], with compatible universes and ordinary module sheaves [def-weil-sheaf-of-modules-category] over the constant ring sheaves $A_Y,A_T$ [def-weil-pbc-constant-sheaf]. Inverse image $h^*=h^{-1}$ uses the canonical identification $h^{-1}A_Y\\cong A_T$, and $h_*$ has its induced $A_Y$-action [def-weil-pbc-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-proetale-operations]. The actual adjunction unit and counit are natural isomorphisms\n$$H\\xrightarrow{\\sim}h_*h^*H,\\qquad h^*h_*N\\xrightarrow{\\sim}N$$\nfor every module sheaf $H$ on $Y$ and $N$ on $T$. Thus $h^*$ and $h_*$ are quasi-inverse equivalences of module-sheaf categories. For every $A$-module $M$, $h^*\\underline M_Y\\cong\\underline M_T$. A module sheaf $H$ on $Y$ is finite locally constant if and only if $h^*H$ is: here this means that on a covering family of the indicated site it is isomorphic to constant module sheaves with finite $A$-module models [def-constructible-locally-constant, def-weil-proetale-locally-constant-sheaf]. The same equivalence holds with the additional requirement that every local model be a direct summand of a finite free $A$-module. No Noetherianity or uniform nilpotence bound is assumed.",
-  "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AB (lemma-thickening); lifting to constant-ring module objects and reflection of finite local models. Étale counterpart: etale-cohomology.tex Tag 04DZ (theorem-topological-invariance). The module and finite-model clauses are extracted obligations, not literal assertions of the set-topos theorem."
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-surjective-morphism",
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-constructible-locally-constant"
-  ],
-  "proof": [
-    {
-      "text": "Etale clause proved: a surjective closed immersion is a universal homeomorphism. Apply the existing isEquivalence_upperStar and isEquivalence_lowerStar directly with coefficient category ModuleCat A. The actual adjunction unit and counit are then isomorphisms. The pro-etale clause remains to formalize: apply pro-etale topological invariance to the actual set-sheaf adjunction, also after each base change. Neither clause uses Noetherianity or a uniform nilpotence bound.",
-      "uses": [
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "prop-weil-pbc-universal-homeomorphism-topos",
-        "lem-trf-proetale-topological-invariance"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 09AB (lemma-thickening); etale-cohomology.tex Tags 04DZ (theorem-topological-invariance), 03SI (proposition-topological-invariance)"
-      }
-    },
-    {
-      "text": "Remaining pro-etale argument: constant-coefficient inverse image identifies the module unit with the abelian unit, and finite-product adjunction lifting identifies that with the set unit. The pro-etale constant-ring map gives the canonical coefficient identification, and the ringed-topos module adjunction gives its actual direct-image action. The underlying unit is invertible by step 1; its inverse is linear by applying the inverse to the linearity identities. This applies after each base change. The etale proof uses the direct ModuleCat-valued equivalence instead.",
-      "uses": [
-        "lem-pe-constant-left-module-inverse-image",
-        "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-        "prop-weil-pbc-proetale-constant-ring-map",
-        "lem-weil-pbc-ringed-topoi-module-adjunction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi); sites-modules.tex Tags 03D3 (lemma-adjoint-push-pull-modules), 03D7 (lemma-adjoint-pullback-pushforward-modules)"
-      }
-    },
-    {
-      "text": "Remaining pro-etale argument: The module direct image reflects isomorphisms: its underlying set functor is the equivalence in step 1, and an underlying inverse to a linear map is linear by step 2. For $N$ on $T$, the adjunction triangle says $h_*\\varepsilon_N\\circ\\eta_{h_*N}=1$. Since $\\eta_{h_*N}$ is invertible, $h_*\\varepsilon_N$ is invertible. Reflection gives that the actual counit $\\varepsilon_N:h^*h_*N\\to N$ is invertible. The unit and counit are natural by their adjunction, so the stipulated functors, with these actual maps, are quasi-inverse equivalences. In particular $h^*$ is fully faithful, as is each $h_V^*$.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-module-adjunction"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), adjunction triangles and elementary inversion of linear maps"
-      }
-    },
-    {
-      "text": "Etale clause proved: apply upperStarConstantSheafIso objectwise. Remaining pro-etale argument: Apply the geometric inverse-image constant-module lemma with $R=A$ to the induced geometric morphism for any scheme morphism $f:U\\to V$ on either indicated site. The canonical coefficient identification and actual module inverse image agree with those used here by step 2 (applied to $f$). The cited statement supplies the canonical $A_U$-linear isomorphism $f^*\\underline M_V\\cong\\underline M_U$, natural in every $A$-linear map of models, for arbitrary $A$-modules $M$. In particular this proves the required comparison for $h$ and all morphisms between site objects and base changes used in steps 5–7; no finiteness of $M$ is needed.",
-      "uses": [
-        "lem-sfb-geometric-inverse-image-constant-module",
-        "lemma-constructible-pullback-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 0H7J (example-constant-sheaf) and Tag 00YV (proposition-functoriality-algebraic-structures-topoi), as in the cited existing geometric constant-module comparison lemma"
-      }
-    },
-    {
-      "text": "Etale clause proved: the localized etale-site equivalence and its constant-sheaf comparison identify a local isomorphism with model M with a scheme-site inverse-image isomorphism with the same M. Pull back the trivializing cover. Use upperStarComp and pullback.condition to compare the two iterated inverse images, then pull back its chosen isomorphism and compose with upperStarConstantSheafIso. Convert back to the localized site. Reuse each finiteness proof and every finite-free splitting. Remaining pro-etale argument: base change preserves weakly etale arrows and fpqc coverings, inverse image along a site object is localized restriction, and constant-coefficient inverse image commutes with composition and restriction; the constant-module comparison retains each model.",
-      "uses": [
-        "lem-pe-constant-left-module-inverse-image",
-        "lem-weil-pbc-weakly-etale-composition-base-change",
-        "lem-galois-fpqc-covering-base-change",
-        "def-constructible-locally-constant",
-        "def-weil-proetale-locally-constant-sheaf",
-        "lem-weil-pbc-etale-site-localization-open",
-        "lem-sfb-proetale-object-inverse-image-restriction",
-        "lemma-constructible-pullback-constant",
-        "lemma-constructible-pullback-locally-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "lemma-pullback-locally-constant; sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi), localized inverse images"
-      }
-    },
-    {
-      "text": "Etale reflection proved in Lean: lift each member of a trivializing cover on T through h.Etale.objPreimage and objObjPreimageIso. The lifted objects cover Y: lift a point y to T by surjectivity of h, lift it to an original cover member, apply the inverse site-object isomorphism, and project the resulting point of the fiber product to the lifted object over Y. Pull back its given model isomorphism along the site-object isomorphism. upperStarComp and the cartesian-square identity identify its source with the base-changed pullback of H. Identify its target by upperStarConstantSheafIso. The first projection is a base-changed universal homeomorphism, so its ModuleCat-valued inverse image is fully faithful; preimageIso descends the model isomorphism. Convert back to the localized-site presentation. All models and splitting maps remain exactly the same.",
-      "uses": [
-        "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-        "prop-weil-pbc-universal-homeomorphism-topos",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-        "lemma-constructible-pullback-constant",
-        "lem-weil-pbc-etale-site-localization-open",
-        "lemma-constructible-pullback-locally-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 04DZ (theorem-topological-invariance), Tag 03SI (proposition-topological-invariance); lifting module trivializations by full faithfulness"
-      }
-    },
-    {
-      "text": "Remaining pro-etale argument: For reflection on the pro-étale site, let $C=\\{U_a\\to T\\}$ trivialize $h^*H$ with models $M_a$. Apply the surjective-closed-cover-refinement theorem: it supplies a cover $B=\\{V_b\\to Y\\}$ and, for each $b$, an index $a$ and a cartesian square $W_b=T\\times_YV_b$, with maps $q_b:W_b\\to V_b$, $p_b:W_b\\to T$, and $r_b:W_b\\to U_a$ over $T$. Here $q_b$ is the base change of $h$, so step 1 applies to it. Both $W_b\\to T$ and $U_a\\to T$ are site objects, and the between-objects lemma makes $r_b$ weakly étale. Inverse image along a pro-étale site object is localized restriction by the object-restriction theorem. Pull back the chosen trivialization along $r_b$. Compatibility with composition and restriction identifies its left side with $q_b^*(H|_{V_b})$, because the two composites $W_b\\to Y$ agree in the square; step 4 identifies its right side with $\\underline{M_a}_{W_b}$. Also $q_b^*\\underline{M_a}_{V_b}\\cong\\underline{M_a}_{W_b}$. Lift this isomorphism and its inverse through the fully faithful $q_b^*$ of step 3. As in step 6 the lifted composites are identities, yielding $H|_{V_b}\\cong\\underline{M_a}_{V_b}$. Since $B$ is a cover this is the required pro-étale trivializing datum. It requires only refinement of $C$, not lifting every weakly étale object of $T$ to $Y$.",
-      "uses": [
-        "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-        "lem-trf-weakly-etale-between-objects",
-        "lem-weil-pbc-weakly-etale-composition-base-change",
-        "lem-sfb-proetale-object-inverse-image-restriction",
-        "lem-pe-constant-left-module-inverse-image",
-        "def-weil-proetale-locally-constant-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 09AB (lemma-thickening), 09BK (lemma-closed-immersion-affines); covering refinement as stated in the cited existing node; localized module restrictions"
-      }
-    },
-    {
-      "text": "Proved for the etale clause; the same argument is planned for the remaining pro-etale clause: In steps 5–7 the scalar model is always the very same $A$-module as before pullback or descent, merely reindexed by a refined cover. Thus if the models are finite, they remain finite, and if each is a direct summand of some $A^n$, the same splitting maps and the same $n$ certify that property after either direction. This proves both local-model equivalences. The empty schemes cause no exception: a surjective closed immersion has empty source exactly when its target is empty; an empty covering is allowed and the local conditions are vacuous. The zero ring and zero module are also included throughout; no cancellation, nonzero element, or positive rank was used.",
-      "uses": [
-        "def-constructible-locally-constant",
-        "def-weil-proetale-locally-constant-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-flat-model/det-sf-flat-model-generation.proof.md",
-        "place": "Clause (2): scheme structures on strata; finite projective local models retained under surjective closed restriction"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-constructible-locally-constant",
-    "def-weil-proetale-locally-constant-sheaf",
-    "lem-galois-fpqc-covering-base-change",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-trf-proetale-topological-invariance",
-    "lem-trf-weakly-etale-between-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
+ "id": "lem-sfb-surjective-closed-module-invariance",
+ "kind": "statement",
+ "title": "Surjective closed immersions: module equivalence and finite local models",
+ "statement": "Let $A$ be a finite commutative ring and $h:T\\hookrightarrow Y$ a surjective closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion, def-weil-surjective-morphism]. Work on either the small étale or the small pro-étale sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], with compatible universes and ordinary module sheaves [def-weil-sheaf-of-modules-category] over the constant ring sheaves $A_Y,A_T$ [def-weil-pbc-constant-sheaf]. Inverse image $h^*=h^{-1}$ uses the canonical identification $h^{-1}A_Y\\cong A_T$, and $h_*$ has its induced $A_Y$-action [def-weil-pbc-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-proetale-operations]. The actual adjunction unit and counit are natural isomorphisms\n$$H\\xrightarrow{\\sim}h_*h^*H,\\qquad h^*h_*N\\xrightarrow{\\sim}N$$\nfor every module sheaf $H$ on $Y$ and $N$ on $T$. Thus $h^*$ and $h_*$ are quasi-inverse equivalences of module-sheaf categories. For every $A$-module $M$, $h^*\\underline M_Y\\cong\\underline M_T$. A module sheaf $H$ on $Y$ is finite locally constant if and only if $h^*H$ is: here this means that on a covering family of the indicated site it is isomorphic to constant module sheaves with finite $A$-module models [def-constructible-locally-constant, def-weil-proetale-locally-constant-sheaf]. The same equivalence holds with the additional requirement that every local model be a direct summand of a finite free $A$-module. No Noetherianity or uniform nilpotence bound is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AB (lemma-thickening); lifting to constant-ring module objects and reflection of finite local models. Étale counterpart: etale-cohomology.tex Tag 04DZ (theorem-topological-invariance). The module and finite-model clauses are extracted obligations, not literal assertions of the set-topos theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-surjective-morphism",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-constructible-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Etale clause: use the ModuleCat-valued universal-homeomorphism equivalence and the existing cover argument. Both actual adjunction maps are isomorphisms. Pullback preserves constants; covers lift through the equivalence of etale sites, and full faithfulness after base change descends the same finite models and finite-free splitting maps.",
+   "uses": [
     "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
     "lemma-constructible-pullback-constant",
     "lemma-constructible-pullback-locally-constant",
-    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed-module sheaves on the pro-etale site, jointly surjective pullbacks detect zero morphisms. Applied to the singleton family h, this makes inverse image faithful. The closed-immersion counit is invertible. The triangle identity makes the pullback of each unit invertible. Faithfulness reflects monomorphisms and epimorphisms, so the unit is invertible in the abelian sheaf category. The specified adjunction is therefore an equivalence. No finiteness of the ring is needed.",
+   "uses": [
+    "lem-sfb-proetale-fixed-scalar-zero-detection",
+    "lem-exc-proetale-closed-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict intrinsic constant-ring modules to constant scalars. This is an equivalence. The direct-image comparison of the pullback-encoding module identifies intrinsic direct image with fixed-module direct image. Cancel restriction to conclude that intrinsic direct image is an equivalence. The specified intrinsic adjunction therefore gives equivalence of inverse image and invertible actual unit and counit.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-scalar comparison sends the module sheafification of a constant module presheaf to its fixed-module constant sheaf, globally and on each localized site. Its comparison map is locally bijective, hence invertible; restriction is fully faithful. Use these comparisons and the slice equivalence to translate finite local models into a pro-etale scheme cover with fixed-module inverse-image trivializations. This keeps each original module and splitting maps.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any scheme morphism, fixed-module inverse image preserves constants: compare the two left adjoints to sections at the base-changed terminal object using the constant-sheaf pullback comparison. Combining this with the encoding comparisons and the canonical module pullback comparison proves the global intrinsic constant-module clause.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Preservation of local models: pull back the cover, and compare the iterated inverse images using the cartesian-square identity and the composition comparison. Pull back each chosen model isomorphism and apply the constant comparison. The model predicate is arbitrary, so finiteness and finite-free retractions are reused unchanged.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reflection: shrink the index of the given pro-etale cover to the scheme universe using Mathlib Precoverage.Small for propQCPrecoverage. Apply the surjective-closed cover refinement theorem. On each refined member, pull its chosen old model back to the cartesian closed fibre. Composition comparisons identify this with inverse image of the ambient restricted sheaf. The base-changed surjective closed immersion has fully faithful fixed-module inverse image by step 2; preimageIso descends the model isomorphism. Raise the refined cover index using ULift. All models, finiteness witnesses, ranks and splitting maps are unchanged, including empty covers and zero modules.",
+   "uses": [
     "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-universal-homeomorphism-topos"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "K7, 2026-10-19: etale clause proved using Tags 04DZ/03SI, the existing ModuleCat-valued topological-invariance API, and the cover arguments of WeilConjectures.ConstructibleSheaf.Pullback and UniversalHomeomorphism with the same module models retained. Original pro-etale plan from proetale.tex 09AB and sites-modules.tex 03D3/03D7 remains unproved."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A surjective closed immersion induces inverse equivalences of categories of constant ring module sheaves on the etale and proetale sites and reflects finite locally constant sheaves",
-      "results": "8 hits: LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, LightCondMod.epi_iff_locallySurjective_on_lightProfinite, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.ofSheafForgetProfinite, CategoryTheory.coherentTopology.isLocallySurjective_iff, LightCondSet.epi_iff_locallySurjective_on_lightProfinite, LightCondMod.isDiscrete_tfae",
-      "date": "2026-10-17",
-      "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Topological invariance for module sheaves and preservation and reflection of locally constant finite module models along a thickening of schemes",
-      "results": "8 hits: SheafOfModules.IsFiniteType, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, ModuleCat.Tilde.exists_const, CondensedMod.ofSheafCompHaus, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType",
-      "date": "2026-10-17",
-      "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"SheafOfModules\", \"Equivalence\"",
-      "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
-      "date": "2026-10-17",
-      "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
-    },
-    {
-      "tool": "grep",
-      "query": "surjectiveClosed|[Tt]opological[Ii]nvariance|thickening.*[Ee]quivalence",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Pullback along a surjective closed immersion reflects locally constant sheaves of modules with finite models",
-      "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_reflectsPullback_of_left, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_reflectsPullback_of_right, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right",
-      "date": "2026-10-17",
-      "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
-    },
-    {
-      "tool": "grep",
-      "query": "pushforwardPushforwardEquivalence",
-      "results": "6 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388 states pushforwardPushforwardEquivalence. Read its variables at lines 372–386: it requires an equivalence C ≌ D and compatible ring maps.",
-      "date": "2026-10-17",
-      "verdict": "no match: site-category equivalence is an additional geometric theorem, not an instance supplied here, and finite-local-model reflection is not in this declaration."
-    },
-    {
-      "tool": "grep",
-      "query": "topologicalInvariance|surjectiveClosed|thickening.*equivalence",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules, Equivalence",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A surjective closed immersion induces an equivalence of ordinary module sheaves on etale and proetale sites and reflects finite locally constant module sheaves",
-      "results": "8 hits: CondensedMod.isDiscrete_tfae, LightCondMod.isDiscrete_tfae, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.instReflectsEpimorphismsLightCondSetForget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.epi_iff_locallySurjective_on_lightProfinite",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Pullback along a thickening reflects finite locally constant module sheaves",
-      "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Topological invariance under nilpotent thickenings for categories of sheaves of modules preserving and reflecting finite locally constant projective local models",
-      "results": "8 hits: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondensed, SheafOfModules.IsFinitePresentation",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    },
-    {
-      "tool": "grep",
-      "query": "constant.*[Pp]ullback|[Pp]ullback.*constant|constant.*[Ii]nverse|[Ii]nverse.*constant",
-      "results": "5 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean (CategoryTheory/Sites)",
-      "date": "2026-10-17",
-      "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "det-sf-flat-model-generation",
-    "date": "2026-10-17",
-    "group": "Q45"
-  },
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-sf-flat-model",
-  "blueprint": {
-    "from": {
-      "node": "det-sf-flat-model-generation",
-      "place": "Proof clause (2): restriction to a stratum with a possibly non-reduced scheme structure",
-      "via": []
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sfb-surjective-closed-module-invariance",
-    "worker": "stage1",
-    "summary": "No statement change. Eight steps: topological invariance, actual module unit/counit, constant modules, preservation, etale and proetale reflection on refined covers, and retention of finite projective models. Reuses existing DAG nodes only; no new nodes. No full weakly-etale site equivalence is assumed.",
-    "blueprint": "Realizes det-sf-flat-model-generation proof clause (2), restriction to a stratum with possibly non-reduced scheme structure, at the existing blueprint.from.place. The unit route and the ordered-strata argument are unchanged.",
-    "tool_uses": [
-      {
-        "node": "lem-pe-constant-left-module-inverse-image",
-        "why": "Generic Exact geometric inverse image with arbitrary constant left-module coefficients input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-sfb-proetale-object-inverse-image-restriction",
-        "why": "Generic Pro-étale inverse image along a site object is slice restriction input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-trf-proetale-topological-invariance",
-        "why": "Generic Universal homeomorphisms induce equivalences of small pro-etale topoi input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-        "why": "Generic An adjunction whose left adjoint preserves finite products lifts to abelian group and commutative ring objects input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-weil-pbc-etale-base-change-continuous",
-        "why": "Generic Base change between small etale sites is continuous; direct image preserves sheaves of sets input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-        "why": "Generic exists cover refinement surjective closed input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "prop-weil-pbc-proetale-constant-ring-map",
-        "why": "Generic Constant coefficients on the pro-etale site input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "thm-weil-pbc-universal-homeomorphism-invariance",
-        "why": "Generic Universal-homeomorphism invariance input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
-      },
-      {
-        "node": "lem-sfb-geometric-inverse-image-constant-module",
-        "why": "Generic constant-module pullback comparison for any geometric morphism, used for the identical local models in both sites; the flat-model unit does not supply this site-theoretic tool."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-trf-proetale-topological-invariance",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-sfb-geometric-inverse-image-constant-module"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q80-4227bccb2",
-    "group": "Q80",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-4227bccb2 (reviewer sub-agent of L); spot-checked: I read the item in full: all 8 steps and the statements of all 21 cited nodes. I read the unit sk-lem-sf-flat-model and how the parent det-sf-flat-model-generation uses the item in clause (2). Sources read: Stacks 09AB (proetale.tex l.4962) and 04DZ (etale-cohomology.tex l.6354). The statement is unchanged and true: a surjective closed immersion is integral, universally injective and surjective. I tested it on id, Spec k→Spec k[ε], a nil but not nilpotent ideal, the empty scheme, the zero ring and the zero module. Step checks: (1) universal homeomorphism and base change, with étale and pro-étale invariance for the actual unit and counit. (2) The module unit equals the abelian unit (lem-pe), which equals the set unit (adjunction-lifting lemma); the coefficient maps are canonical. (3) The counit follows from the triangle identity and reflection of isomorphisms. (4) lem-sfb-geometric-inverse-image-constant-module states exactly the constant-module comparison used. (5) The graph pair is initial, so the colimit is H(W); pro-étale restriction uses the object-restriction lemma; covers are preserved by base change (fpqc for pro-étale). (6) and (7) Reflection works by lifting covers, or by the Lean cover-refinement node with r_b weakly étale, plus full faithfulness of the base-changed pullback. (8) The models are literally unchanged. The declared tool_uses are acceptable; the other off-unit citations are Mathlib leaves or closed in slopmaster2. No cycle, no new nodes, no duplicate: lemma-constructible-universal-homeomorphism-invariance and the condensed nodes are narrower or about different coefficients. Batch-5 check on lem-trf-proetale-topological-invariance: it is Stacks 09AB, a general pro-étale topological-invariance result. Neither the trace formula nor Poincaré duality gives it. Its full closure (1146 nodes) contains no other sec-trace-formula or sec-poincare-duality node, no batch-4 target and no nt-assume leaf. The item's pro-étale clauses genuinely need it, so I accept the citation as outside the assumed statements. No fixes."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-2928568f7",
-    "group": "Q154",
-    "result": "pass",
-    "note": "Reviewed statement, dependencies, source tags, declarations, helpers, edge cases, report sections, and scompile evidence; no substantive or mechanical findings."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance",
-    "declaration": "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.sfbEtaleFiniteLocalModels",
-      "AlgebraicGeometry.Scheme.sfbProEtaleFiniteLocalModels",
-      "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
-      "AlgebraicGeometry.Scheme.sfbProEtale_surjectiveClosed_module_invariance"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/SurjectiveClosedModuleInvariance.lean",
-    "statement": "theorem sfbEtale_surjectiveClosed_module_invariance {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h] (A : Type (u + 1)) [CommRing A] [Finite A] : IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).unit ∧ IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).counit ∧ (Etale.upperStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (Etale.lowerStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (∀ M : ModuleCat.{u + 1} A, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) ≅ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)) ∧ (∀ (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (projective : Bool), sfbEtaleFiniteLocalModels A H projective ↔ sfbEtaleFiniteLocalModels A ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj H) projective)",
-    "branch": "newtargets-dag",
-    "by": "Q154",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "Two theorem statements cover the etale and pro-etale clauses. The etale version uses the published fixed ModuleCat-valued presentation; the pro-etale version uses the recorded ordinary constant-ring module operations, with their actual normalized adjunction. The two finite-local-model helpers expand the local-model clauses of this node using existing localized constant sheaves; the Bool selects whether explicit finite-free retractions are required. No stalk-based replacement, etale-origin condition, Noetherian assumption, or uniform nilpotence bound."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K7",
-    "result": "pass",
-    "landing": "20261019T005336-L-2754370",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+    "lem-sfb-proetale-fixed-scalar-zero-detection",
+    "lem-exc-proetale-closed-fully-faithful",
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sfb-proetale-fixed-scalar-zero-detection",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-constructible-pullback-constant",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "U4, 2026-10-20: Tag 09AB; sites-modules.tex Tags 03D3/03D7 and pullback-locally-constant. Existing fixed-module closed-immersion counit and jointly-surjective detection give the shorter equivalence argument; constant-scalar encoding, slice comparisons and cover refinement retain the actual models. The etale proof is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective closed immersion induces inverse equivalences of categories of constant ring module sheaves on the etale and proetale sites and reflects finite locally constant sheaves",
+   "results": "8 hits: LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, LightCondMod.epi_iff_locallySurjective_on_lightProfinite, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, Condensed.ofSheafForgetProfinite, CategoryTheory.coherentTopology.isLocallySurjective_iff, LightCondSet.epi_iff_locallySurjective_on_lightProfinite, LightCondMod.isDiscrete_tfae",
+   "date": "2026-10-17",
+   "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance for module sheaves and preservation and reflection of locally constant finite module models along a thickening of schemes",
+   "results": "8 hits: SheafOfModules.IsFiniteType, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor, ModuleCat.Tilde.exists_const, CondensedMod.ofSheafCompHaus, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-17",
+   "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
+  },
+  {
+   "tool": "grep",
+   "query": "surjectiveClosed|[Tt]opological[Ii]nvariance|thickening.*[Ee]quivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along a surjective closed immersion reflects locally constant sheaves of modules with finite models",
+   "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_reflectsPullback_of_left, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_reflectsPullback_of_right, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_right",
+   "date": "2026-10-17",
+   "verdict": "No match: generic site-category equivalences assume an equivalence of the underlying sites; other hits concern condensed discreteness, finite presentation or open restriction, not this module-topos equivalence and reflection of finite local models."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence",
+   "results": "6 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388 states pushforwardPushforwardEquivalence. Read its variables at lines 372–386: it requires an equivalence C ≌ D and compatible ring maps.",
+   "date": "2026-10-17",
+   "verdict": "no match: site-category equivalence is an additional geometric theorem, not an instance supplied here, and finite-local-model reflection is not in this declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalInvariance|surjectiveClosed|thickening.*equivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Equivalence",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective closed immersion induces an equivalence of ordinary module sheaves on etale and proetale sites and reflects finite locally constant module sheaves",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, LightCondMod.isDiscrete_tfae, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.instReflectsEpimorphismsLightCondSetForget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.epi_iff_locallySurjective_on_lightProfinite",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along a thickening reflects finite locally constant module sheaves",
+   "results": "8 hits: SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance under nilpotent thickenings for categories of sheaves of modules preserving and reflecting finite locally constant projective local models",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondensed, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Pp]ullback|[Pp]ullback.*constant|constant.*[Ii]nverse|[Ii]nverse.*constant",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean (CategoryTheory/Sites)",
+   "date": "2026-10-17",
+   "verdict": "no match: condensed discreteness, general module pullback adjunctions or dense-subsite constant-sheaf compatibility do not state surjective-closed invariance and reflection of the indicated finite local models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sf-flat-model-generation",
+  "date": "2026-10-17",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-flat-model",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-flat-model-generation",
+   "place": "Proof clause (2): restriction to a stratum with a possibly non-reduced scheme structure",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sfb-surjective-closed-module-invariance",
+  "worker": "stage1",
+  "summary": "No statement change. Eight steps: topological invariance, actual module unit/counit, constant modules, preservation, etale and proetale reflection on refined covers, and retention of finite projective models. Reuses existing DAG nodes only; no new nodes. No full weakly-etale site equivalence is assumed.",
+  "blueprint": "Realizes det-sf-flat-model-generation proof clause (2), restriction to a stratum with possibly non-reduced scheme structure, at the existing blueprint.from.place. The unit route and the ordered-strata argument are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic Exact geometric inverse image with arbitrary constant left-module coefficients input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic Pro-étale inverse image along a site object is slice restriction input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-trf-proetale-topological-invariance",
+    "why": "Generic Universal homeomorphisms induce equivalences of small pro-etale topoi input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "why": "Generic An adjunction whose left adjoint preserves finite products lifts to abelian group and commutative ring objects input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic Base change between small etale sites is continuous; direct image preserves sheaves of sets input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement",
+    "why": "Generic exists cover refinement surjective closed input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic Constant coefficients on the pro-etale site input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic Universal-homeomorphism invariance input used to transport module sheaves or a trivializing cover along the given surjective closed immersion; no theorem of the flat-model unit supplies this auxiliary site/module tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic constant-module pullback comparison for any geometric morphism, used for the identical local models in both sites; the flat-model unit does not supply this site-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "new-lem-weil-pbc-proetale-surjective-closed-cover-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-4227bccb2",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-4227bccb2 (reviewer sub-agent of L); spot-checked: I read the item in full: all 8 steps and the statements of all 21 cited nodes. I read the unit sk-lem-sf-flat-model and how the parent det-sf-flat-model-generation uses the item in clause (2). Sources read: Stacks 09AB (proetale.tex l.4962) and 04DZ (etale-cohomology.tex l.6354). The statement is unchanged and true: a surjective closed immersion is integral, universally injective and surjective. I tested it on id, Spec k→Spec k[ε], a nil but not nilpotent ideal, the empty scheme, the zero ring and the zero module. Step checks: (1) universal homeomorphism and base change, with étale and pro-étale invariance for the actual unit and counit. (2) The module unit equals the abelian unit (lem-pe), which equals the set unit (adjunction-lifting lemma); the coefficient maps are canonical. (3) The counit follows from the triangle identity and reflection of isomorphisms. (4) lem-sfb-geometric-inverse-image-constant-module states exactly the constant-module comparison used. (5) The graph pair is initial, so the colimit is H(W); pro-étale restriction uses the object-restriction lemma; covers are preserved by base change (fpqc for pro-étale). (6) and (7) Reflection works by lifting covers, or by the Lean cover-refinement node with r_b weakly étale, plus full faithfulness of the base-changed pullback. (8) The models are literally unchanged. The declared tool_uses are acceptable; the other off-unit citations are Mathlib leaves or closed in slopmaster2. No cycle, no new nodes, no duplicate: lemma-constructible-universal-homeomorphism-invariance and the condensed nodes are narrower or about different coefficients. Batch-5 check on lem-trf-proetale-topological-invariance: it is Stacks 09AB, a general pro-étale topological-invariance result. Neither the trace formula nor Poincaré duality gives it. Its full closure (1146 nodes) contains no other sec-trace-formula or sec-poincare-duality node, no batch-4 target and no nt-assume leaf. The item's pro-étale clauses genuinely need it, so I accept the citation as outside the assumed statements. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2928568f7",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Reviewed statement, dependencies, source tags, declarations, helpers, edge cases, report sections, and scompile evidence; no substantive or mechanical findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance",
+  "declaration": "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbEtaleFiniteLocalModels",
+   "AlgebraicGeometry.Scheme.sfbProEtaleFiniteLocalModels",
+   "AlgebraicGeometry.Scheme.sfbEtale_surjectiveClosed_module_invariance",
+   "AlgebraicGeometry.Scheme.sfbProEtale_surjectiveClosed_module_invariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SurjectiveClosedModuleInvariance.lean",
+  "statement": "theorem sfbEtale_surjectiveClosed_module_invariance {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h] (A : Type (u + 1)) [CommRing A] [Finite A] : IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).unit ∧ IsIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).counit ∧ (Etale.upperStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (Etale.lowerStar (ModuleCat.{u + 1} A) h).IsEquivalence ∧ (∀ M : ModuleCat.{u + 1} A, Nonempty ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M) ≅ (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)) ∧ (∀ (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) (projective : Bool), sfbEtaleFiniteLocalModels A H projective ↔ sfbEtaleFiniteLocalModels A ((Etale.upperStar (ModuleCat.{u + 1} A) h).obj H) projective)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Two theorem statements cover the etale and pro-etale clauses. The etale version uses the published fixed ModuleCat-valued presentation; the pro-etale version uses the recorded ordinary constant-ring module operations, with their actual normalized adjunction. The two finite-local-model helpers expand the local-model clauses of this node using existing localized constant sheaves; the Bool selects whether explicit finite-free retractions are required. No stalk-based replacement, etale-origin condition, Noetherian assumption, or uniform nilpotence bound."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261019T192842-L-1876245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

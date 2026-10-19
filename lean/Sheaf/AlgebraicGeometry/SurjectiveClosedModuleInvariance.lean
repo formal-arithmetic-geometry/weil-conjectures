@@ -9,17 +9,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.ProEtaleConstantModulePullbackEncoding
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.AlgebraicGeometry.ProEtaleSheafTopologicalInvariance
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
@@ -233,6 +231,251 @@ theorem sfbEtale_surjectiveClosed_module_invariance
       obtain ⟨M, _, ⟨iM⟩, _⟩ := hm i
       exact Sheaf.isConstant_of_iso _ iM
 
+private theorem sfbProEtale_fixed_equivalence
+    {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h]
+    (A : Type (u + 1)) [CommRing A] :
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) h).IsEquivalence := by
+  let L := ProEtale.upperStar (ModuleCat.{u + 1} A) h
+  let adj := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h
+  have : L.Faithful := by
+    constructor
+    intro F G f g he
+    apply sub_eq_zero.mp
+    apply ProEtale.eq_zero_of_forall_upperStar_map_eq_zero A
+      (fun _ : PUnit.{u + 1} ↦ h)
+      (fun y ↦ ⟨PUnit.unit, h.surjective y⟩)
+    intro _
+    change L.map (f - g) = 0
+    rw [L.map_sub, he, sub_self]
+  have (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) :
+      IsIso (adj.unit.app F) := by
+    have : IsIso (L.map (adj.unit.app F) ≫ adj.counit.app (L.obj F)) := by
+      have he : L.map (adj.unit.app F) ≫ adj.counit.app (L.obj F) = 𝟙 _ :=
+        adj.left_triangle_components F
+      rw [he]
+      infer_instance
+    have : IsIso (L.map (adj.unit.app F)) :=
+      IsIso.of_isIso_comp_right _ (adj.counit.app (L.obj F))
+    have : Mono (adj.unit.app F) := L.mono_of_mono_map (by infer_instance)
+    have : Epi (adj.unit.app F) := L.epi_of_epi_map (by infer_instance)
+    exact isIso_of_mono_of_epi _
+  exact adj.toEquivalence.isEquivalence_functor
+
+private theorem sfbProEtale_module_equivalence
+    {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h]
+    (A : Type u) [CommRing A] :
+    (proEtaleConstantRingPullback A h).IsEquivalence := by
+  have := sfbProEtale_fixed_equivalence h (ULift.{u + 1, u} A)
+  have := (ProEtale.upperStarLowerStarAdjunction
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) h).isEquivalence_right_of_isEquivalence_left
+  have := proEtaleModuleRestriction_isEquivalence T A
+  have := proEtaleModuleRestriction_isEquivalence Y A
+  have : (proEtaleConstantRingPushforward A h ⋙ proEtaleModuleRestriction Y A).IsEquivalence :=
+    Functor.isEquivalence_of_iso (directImageComparison h A).symm
+  have : (proEtaleConstantRingPushforward A h).IsEquivalence :=
+    Functor.isEquivalence_of_comp_right _ (proEtaleModuleRestriction Y A)
+  exact (proEtaleConstantRingAdjunction A h).isEquivalence_left_of_isEquivalence_right
+
+private theorem sfbProEtale_over_fixed_model_iff (Y : Scheme.{u})
+    (A : Type u) [CommRing A]
+    (H : proEtaleRingModules Y (proEtaleConstantRing Y A)) (U : Y.ProEt)
+    (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
+    Nonempty (H.over U ≅ proEtaleConstantModuleSheafOver Y A U M) ↔
+    Nonempty (((proEtaleModuleRestriction Y A).obj H).over U ≅
+      (constantSheaf ((ProEt.topology Y).over U)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj M) := by
+  let J := (ProEt.topology Y).over U
+  let R := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A)
+  let a := Functor.whiskerLeft (Over.forget U).op (proEtaleModuleScalarUnit Y A)
+  have : Presheaf.IsLocallyInjective J a :=
+    (proEtaleConstantRingUnit_over_locallyBijective Y A U).1
+  have : Presheaf.IsLocallySurjective J a :=
+    (proEtaleConstantRingUnit_over_locallyBijective Y A U).2
+  let E := ConstantScalarComparison.restriction J (ULift.{u + 1, u} A) (R.over U) a
+  have hc := ConstantScalarComparison.constantComparisonHom_isIso.{u}
+    J (ULift.{u + 1, u} A) (R.over U) a M
+  let c := asIso (ConstantScalarComparison.constantComparisonHom.{u}
+    J (ULift.{u + 1, u} A) (R.over U) a M)
+  constructor
+  · rintro ⟨e⟩
+    exact ⟨E.mapIso e ≪≫ c.symm⟩
+  · rintro ⟨e⟩
+    exact ⟨(ConstantScalarComparison.restrictionFullyFaithful
+      J (ULift.{u + 1, u} A) (R.over U) a).preimageIso (e ≪≫ c)⟩
+
+private theorem sfbProEtale_fixed_over_model_iff {Y : Scheme.{u}}
+    (A : Type (u + 1)) [CommRing A]
+    (H : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) (U : Y.ProEt)
+    (M : ModuleCat.{u + 1} A) :
+    Nonempty (H.over U ≅
+      (constantSheaf ((ProEt.topology Y).over U) (ModuleCat.{u + 1} A)).obj M) ↔
+    Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} A) U.hom).obj H ≅
+      (constantSheaf (ProEt.topology U.left) (ModuleCat.{u + 1} A)).obj M) := by
+  have := ProEt.sliceDense Y U
+  let E := (ProEt.sliceEquiv Y U).sheafCongr ((ProEt.topology Y).over U)
+    (ProEt.topology U.left) (ModuleCat.{u + 1} A)
+  let r : E.functor.obj (H.over U) ≅
+      (ProEtale.localizationRestriction (ModuleCat.{u + 1} A) U.hom U.prop).obj H :=
+    ObjectProperty.isoMk _ (NatIso.ofComponents (fun _ ↦ Iso.refl _))
+  let e := (ProEtale.upperStarIsoLocalizationRestriction
+    (ModuleCat.{u + 1} A) U.hom U.prop).app H
+  let c := ((ProEt.sliceEquiv Y U).constantSheafSheafCongrIso
+    ((ProEt.topology Y).over U) (ProEt.topology U.left) (ModuleCat.{u + 1} A)
+    (Over.mkIdTerminal (X := U))).app M
+  constructor
+  · rintro ⟨i⟩
+    exact ⟨e ≪≫ r.symm ≪≫ E.functor.mapIso i ≪≫ c⟩
+  · rintro ⟨i⟩
+    exact ⟨E.functor.preimageIso (r ≪≫ e.symm ≪≫ i ≪≫ c.symm)⟩
+
+private def sfbProEtale_fixedModels {Y : Scheme.{u}} (A : Type (u + 1)) [CommRing A]
+    (H : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A))
+    (P : ModuleCat.{u + 1} A → Prop) : Prop :=
+  ∃ C : Cover.{u + 1} proetalePrecoverage Y, ∀ j : C.I₀,
+    ∃ M : ModuleCat.{u + 1} A, P M ∧
+      Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} A) (C.f j)).obj H ≅
+        (constantSheaf (ProEt.topology (C.X j)) (ModuleCat.{u + 1} A)).obj M)
+
+private theorem sfbProEtale_local_models_iff (Y : Scheme.{u})
+    (A : Type u) [CommRing A]
+    (H : proEtaleRingModules Y (proEtaleConstantRing Y A)) (projective : Bool) :
+    sfbProEtaleFiniteLocalModels Y A H projective ↔
+      sfbProEtale_fixedModels (ULift.{u + 1, u} A) ((proEtaleModuleRestriction Y A).obj H)
+        (fun M ↦ Finite M ∧ (projective = true → ∃ (n : ℕ)
+          (i : M →ₗ[ULift.{u + 1, u} A] (Fin n → ULift.{u + 1, u} A))
+          (r : (Fin n → ULift.{u + 1, u} A) →ₗ[ULift.{u + 1, u} A] M),
+          r.comp i = LinearMap.id)) := by
+  constructor
+  · rintro ⟨I, U, f, hf, hm⟩
+    have hmem : Presieve.ofArrows (fun j ↦ (U j).left) (fun j ↦ (U j).hom) ∈
+        proetalePrecoverage Y := by
+      rw [ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hf
+      have he (j : I) : (f j).left = (U j).hom := by
+        exact (Category.comp_id (f j).left).symm.trans (MorphismProperty.Over.w (f j))
+      change Presieve.ofArrows (fun j ↦ (U j).left) (fun j ↦ (f j).left) ∈
+        proetalePrecoverage Y at hf
+      simpa only [he] using hf
+    let C : Cover.{u + 1} proetalePrecoverage Y := ⟨⟨I, fun j ↦ (U j).left,
+      fun j ↦ (U j).hom⟩, hmem⟩
+    refine ⟨C, fun j ↦ ?_⟩
+    obtain ⟨M, hM, e, hp⟩ := hm j
+    exact ⟨M, ⟨hM, hp⟩, (sfbProEtale_fixed_over_model_iff _ _ (U j) M).mp
+      ((sfbProEtale_over_fixed_model_iff Y A H (U j) M).mp e)⟩
+  · rintro ⟨C, hm⟩
+    have hw (j : C.I₀) : WeaklyEtale (C.f j) :=
+      proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ ⟨j⟩
+    let U (j : C.I₀) : Y.ProEt := @ProEt.mk Y (C.X j) (C.f j) (hw j)
+    let f (j : C.I₀) : U j ⟶ ProEt.mk (𝟙 Y) :=
+      MorphismProperty.Over.homMk (C.f j) (Category.comp_id _)
+    refine ⟨C.I₀, U, f, ?_, fun j ↦ ?_⟩
+    · rw [ProEt.mem_precoverage_iff, Presieve.map_ofArrows]
+      exact C.mem₀
+    · obtain ⟨M, ⟨hM, hp⟩, e⟩ := hm j
+      exact ⟨M, hM, (sfbProEtale_over_fixed_model_iff Y A H (U j) M).mpr
+        ((sfbProEtale_fixed_over_model_iff _ _ (U j) M).mpr e), hp⟩
+
+private noncomputable def sfbProEtale_fixed_constant_iso
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type (u + 1)) [CommRing A]
+    (M : ModuleCat.{u + 1} A) :
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) f).obj
+      ((constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)).obj M) ≅
+        (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} A)).obj M :=
+  (Functor.isoWhiskerLeft (constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} A))
+    (Functor.sheafPullbackConstruction.sheafPullbackIso (proEtaleBaseChange f)
+      (ModuleCat.{u + 1} A) (ProEt.topology Y) (ProEt.topology X)).symm).app M ≪≫
+    ((proEtaleBaseChange f).constantSheafsheafPullbackIso (ModuleCat.{u + 1} A)
+      (ProEt.topology Y) (ProEt.topology X) (ProEt.isTerminalMkId Y)
+      ((ProEt.isTerminalMkId Y).isTerminalObj (proEtaleBaseChange f) _)).app M
+
+private theorem sfbProEtale_fixedModels_of_iso {Y : Scheme.{u}}
+    (A : Type (u + 1)) [CommRing A]
+    {H G : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)} (e : H ≅ G)
+    (P : ModuleCat.{u + 1} A → Prop) (hH : sfbProEtale_fixedModels A H P) :
+    sfbProEtale_fixedModels A G P := by
+  obtain ⟨C, hm⟩ := hH
+  refine ⟨C, fun j ↦ ?_⟩
+  obtain ⟨M, hM, ⟨i⟩⟩ := hm j
+  exact ⟨M, hM, ⟨(ProEtale.upperStar (ModuleCat.{u + 1} A) (C.f j)).mapIso e.symm ≪≫ i⟩⟩
+
+private theorem sfbProEtale_fixedModels_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type (u + 1)) [CommRing A]
+    (H : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A))
+    (P : ModuleCat.{u + 1} A → Prop) (hH : sfbProEtale_fixedModels A H P) :
+    sfbProEtale_fixedModels A ((ProEtale.upperStar (ModuleCat.{u + 1} A) f).obj H) P := by
+  obtain ⟨C, hm⟩ := hH
+  refine ⟨C.pullback₂ f, fun j ↦ ?_⟩
+  obtain ⟨M, hM, ⟨i⟩⟩ := hm j
+  let D := ModuleCat.{u + 1} A
+  exact ⟨M, hM, ⟨((ProEtale.upperStarComp D (Limits.pullback.snd (C.f j) f) f).app H).symm
+    ≪≫ eqToIso (congrArg (fun g ↦ (ProEtale.upperStar D g).obj H)
+      Limits.pullback.condition.symm)
+    ≪≫ (ProEtale.upperStarComp D (Limits.pullback.fst (C.f j) f) (C.f j)).app H
+    ≪≫ (ProEtale.upperStar D (Limits.pullback.fst (C.f j) f)).mapIso i
+    ≪≫ sfbProEtale_fixed_constant_iso _ A M⟩⟩
+
+private theorem sfbProEtale_fixedModels_reflect
+    {T Y : Scheme.{u}} (h : T ⟶ Y) [IsClosedImmersion h] [Surjective h]
+    (A : Type (u + 1)) [CommRing A]
+    (H : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A))
+    (P : ModuleCat.{u + 1} A → Prop)
+    (hH : sfbProEtale_fixedModels A
+      ((ProEtale.upperStar (ModuleCat.{u + 1} A) h).obj H) P) :
+    sfbProEtale_fixedModels A H P := by
+  let : Precoverage.Small.{u} proetalePrecoverage :=
+    inferInstanceAs (Precoverage.Small.{u} (propQCPrecoverage @WeaklyEtale))
+  obtain ⟨C₀, hm⟩ := hH
+  let C : Cover.{u} proetalePrecoverage T := C₀.restrictIndexOfSmall.{u}
+  obtain ⟨B, hB⟩ := exists_cover_refinement_surjective_closed h C
+  let B' : Cover.{u + 1} proetalePrecoverage Y :=
+    ⟨B.toPreZeroHypercover.restrictIndex (((Equiv.ulift : ULift.{u + 1, u} B.I₀ ≃ B.I₀))), by
+      simpa only [PreZeroHypercover.presieve₀_restrictIndex_equiv] using B.mem₀⟩
+  refine ⟨B', fun j ↦ ?_⟩
+  obtain ⟨a, W, q, p, r, sq, hr⟩ := hB j.down
+  obtain ⟨M, hM, ⟨i⟩⟩ := hm (Precoverage.ZeroHypercover.Small.restrictFun.{u} C₀ a)
+  have : IsClosedImmersion q := MorphismProperty.of_isPullback sq.flip inferInstance
+  have : Surjective q := MorphismProperty.of_isPullback sq.flip inferInstance
+  have := sfbProEtale_fixed_equivalence q A
+  let D := ModuleCat.{u + 1} A
+  let e : (ProEtale.upperStar D q).obj ((ProEtale.upperStar D (B.f j.down)).obj H) ≅
+      (constantSheaf (ProEt.topology W) D).obj M :=
+    ((ProEtale.upperStarComp D q (B.f j.down)).app H).symm ≪≫
+      eqToIso (congrArg (fun g ↦ (ProEtale.upperStar D g).obj H) sq.w) ≪≫
+      (ProEtale.upperStarComp D p h).app H ≪≫
+      eqToIso (congrArg (fun g ↦ (ProEtale.upperStar D g).obj
+        ((ProEtale.upperStar D h).obj H)) hr.symm) ≪≫
+      (ProEtale.upperStarComp D r (C.f a)).app
+        ((ProEtale.upperStar D h).obj H) ≪≫
+      (ProEtale.upperStar D r).mapIso i ≪≫ sfbProEtale_fixed_constant_iso r A M
+  exact ⟨M, hM, ⟨(ProEtale.upperStar D q).preimageIso
+    (e ≪≫ (sfbProEtale_fixed_constant_iso q A M).symm)⟩⟩
+
+private noncomputable def sfbProEtale_constant_encoding_iso (Y : Scheme.{u})
+    (A : Type u) [CommRing A] (M : ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :
+    (proEtaleModuleRestriction Y A).obj (proEtaleConstantModuleSheaf Y A M) ≅
+      (constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).obj M := by
+  letI : LocallySmall.{u + 1} Y.ProEt := ProEt.locallySmall Y
+  letI := WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
+  letI := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
+  letI : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+  letI : (ProEt.topology Y).WEqualsLocallyBijective
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+      u + 1, u + 2, u + 1} _
+  let J : GrothendieckTopology Y.ProEt := ProEt.topology Y
+  let R : Sheaf J RingCat.{u + 1} :=
+    (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (proEtaleConstantRing Y A)
+  let a : (Functor.const Y.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} A)) ⟶ R.obj :=
+    proEtaleModuleScalarUnit Y A
+  have : Presheaf.IsLocallyInjective J a := (proEtaleConstantRingUnit_locallyBijective Y A).1
+  have : Presheaf.IsLocallySurjective J a := (proEtaleConstantRingUnit_locallyBijective Y A).2
+  have := ConstantScalarComparison.constantComparisonHom_isIso.{u}
+    J (ULift.{u + 1, u} A) R a M
+  let c := (asIso (ConstantScalarComparison.constantComparisonHom.{u}
+    J (ULift.{u + 1, u} A) R a M)).symm
+  exact c
+
 /-- Surjective closed restriction on the pro-etale site, for the published ordinary
 constant-ring module operations and their tensor-unit-normalized adjunction.
 Source: Stacks, Tag 09AB, Modules on Sites, lemma-adjoint-pullback-pushforward-modules
@@ -284,6 +527,27 @@ theorem sfbProEtale_surjectiveClosed_module_invariance
       sfbProEtaleFiniteLocalModels Y A H projective ↔
         sfbProEtaleFiniteLocalModels T A
           ((proEtaleConstantRingPullback A h).obj H) projective) := by
-  sorry
+  have := sfbProEtale_module_equivalence h A
+  have := (proEtaleConstantRingAdjunction A h).isEquivalence_right_of_isEquivalence_left
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, ?_, ?_⟩
+  · intro M
+    let E := proEtaleModuleEncoding T A
+    obtain ⟨e⟩ := proEtaleModuleRestriction_pullback_of_isIso h A
+      (proEtaleConstantModuleSheaf Y A M)
+    exact ⟨E.functor.preimageIso (e ≪≫
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) h).mapIso
+        (sfbProEtale_constant_encoding_iso Y A M) ≪≫
+      sfbProEtale_fixed_constant_iso h _ M ≪≫
+      (sfbProEtale_constant_encoding_iso T A M).symm)⟩
+  · intro H projective
+    rw [sfbProEtale_local_models_iff, sfbProEtale_local_models_iff]
+    obtain ⟨e⟩ := proEtaleModuleRestriction_pullback_of_isIso h A H
+    constructor
+    · intro hH
+      exact sfbProEtale_fixedModels_of_iso _ e.symm _
+        (sfbProEtale_fixedModels_pullback h _ _ _ hH)
+    · intro hH
+      exact sfbProEtale_fixedModels_reflect h _ _ _
+        (sfbProEtale_fixedModels_of_iso _ e _ hH)
 
 end AlgebraicGeometry.Scheme
