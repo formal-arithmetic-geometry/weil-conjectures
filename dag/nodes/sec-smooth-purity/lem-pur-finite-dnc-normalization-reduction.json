@@ -288,5 +288,35 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-738f905d2 (reviewer sub-agent of L); spot-checked: I read the whole split. The statement is unchanged against the side-project base and is not weakened; it matches the use in Step 4 of the parent thm-pur-finite-reduction-of-purity. The route is blueprint main-20261015 thm-pur-finite-reduction-of-purity.proof.md Step 3 (the local DNC normalizations reduce), with no SGA. Step 1 is correct: ell lies in (varpi_E), so Z/ell^n -> A_{E,n} -> A_{E,m}, including ramified E with n < e. Steps 5 and 6: I recomputed both cancellation chains and they are correct; the transport tool applies to the normal-bundle pair and the standard pair, and det-sp-reduction-compatibilities clause (2) holds for any ell-primary chain. Step 4: by the transport node's chart clause, delta_D is identity-normalized, and the uniqueness in thm-pur-dnc-invariance applies at A_{E,n} and A_{E,m}. Edge cases checked: m=n, d=0, empty S. No new nodes, no duplicate (only det-sp-field-extension-towers came up, and it is different), no cycle. Two repairable faults, fixed in the item file. (1) Step 2 silently identified two exceptional functors: Rg^! of def-weil-exceptional-inverse-image, used by the statement and thm-pur-dnc-invariance, and the right adjoint g^! of sk-prop-sf-existence/sk-prop-sf-rf-shriek-preservation, used by the transport tool and det-sp-reduction-exceptional. Both are right adjoints of the same R\\bar g_* j_! on the same D_ctf objects, so Yoneda identifies them compatibly with the counits; I added that sentence and its citations. (2) Steps 3 and 6 cited lem-fix-operation-reduction for the pullback/tensor coherence along Z/ell^n -> A_{E,r}, but that node covers only O_E -> A_{E,n}, finite reductions A_{E,n} -> A_{E,m} and common-stage extension. They now cite lem-weil-pbc-ringed-topoi-derived-tensor-pullback, the comparison the transport tool itself uses. proof_deps is recomputed; two tool_uses are added (sk-prop-sf-rf-shriek-preservation, lem-weil-pbc-ringed-topoi-derived-tensor-pullback); the nine declared tool uses are accepted as generic coefficient tools. Non-elementary step lengths are now at most 1687 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDncNormalizationReduction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.FiniteDnc.finiteDncNormalizationReduction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.atLevel",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.quotient",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.normalizedDnc",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.etaleDualizing",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.etaleSection",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.sectionCongr",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.coordinateIdentification",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.CoordinateSquares",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.Assertions",
+   "WeilConjectures.PurityFiniteSetting.FiniteDnc.finiteDncNormalizationReduction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDncNormalizationReduction.lean",
+  "statement": "theorem finiteDncNormalizationReduction (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] (aS : S ⟶ Spec (.of P.field.k)) [IsSeparated aS] [LocallyOfFiniteType aS] [QuasiCompact aS] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) : Assertions P m hm hmn d g aS s hs",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72d966989",
+  "group": "NU",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause. delta_A/delta_B are the .choose of Dnc.existsUnique_dncInvariance, moved through its own source/normal comparisons into the intrinsic category, formed independently at P and atLevel P m. q_{g,s}/q_N = DncCoefficientTransport.realizedSectionMap (counit-mate transpose; node Step 2 identifies it with lem-coef-finite-exceptional). Main square Q(dA)≫qN = qG≫dB. CoordinateSquares covers every etale localization and centred chart for the source and normal pairs, with canonical identifications (base-change mate plus counit-unique etale locality). Hypotheses match the DNC theorem; instance binders on chart data are automatic or include the node's open neighbourhoods. Edge cases d=0, m=n, empty S, ramified E, non-flat quotient covered. Record differs from live only in lean; statement verbatim; 10 declarations listed. Docstrings and proof steps present; lines ≤100. nt_compile --json clean in 24.8 s at load 155. Advisories: (1) etaleDualizing/etaleSection duplicate FiniteRingSectionDeformation.locality/etaleSectionMap, owned by trf theorem lem-trf-finite-ring-section-deformation with no def node; (2) declarations owned by nodes outside stmt_deps (DncCoefficientTransport q maps, reductionSite, scalarExtensionFunctor, NoetherianSectionSpecialization.sectionMap); (3) lem-coef-finite-exceptional and lem-fix-operation-reduction imported but not referenced in the statement; (4) the Second reading by NU is a thin same-worker pass."
  }
 }

@@ -17612,3 +17612,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:07 L: returned deliver/NG/det-sp-tower-p1-adjunction (reviewer RETURN: L: independent stage-2 immutable head 20e016916001: Compile clean (nt_compile --json 34.6 s, exit 0). Statement content )
 - 22:10 L: merged deliver/Q09/lem-coef-frobenius-exchange-equivalence (stage 2; reviewer PASS; parallel immutable checks)
 - 22:12 L: returned deliver/NV/lem-sf-hom-finite-projective (reviewer RETURN: L: independent stage-2 immutable head 8dadf10680b6: H3/H4: at the finite and integral stages the node fixes P^∨ = ordina)
+- 22:25 L: merged deliver/NU/lem-pur-finite-dnc-normalization-reduction (stage 2; reviewer PASS; parallel immutable checks)
