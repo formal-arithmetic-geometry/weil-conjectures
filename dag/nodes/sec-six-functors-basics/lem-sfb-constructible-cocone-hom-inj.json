@@ -228,5 +228,24 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-c07f3f015 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to main-20261015, and the item is neither in side-live route-pivot-dropped.txt nor already split live. There are no new nodes. All 10 cited ids exist, proof_deps equals the union of uses, and the 996-node closure has no cycle. The blueprint proof uses the proof of hom-surj (C3), because that node states only surjectivity. The same-unit node that states the bijection, det-lem-coefficient-finite-descent-hom, needs a standing scheme, and sk-lem-constructible-ext-continuity needs a Noetherian scheme; the item assumes only a topologically Noetherian space. The worker instead uses lem-weil-pbc-condensed-coefficient-derived-faithful (any scheme, finite E, faithful on the unbounded D). This matches the unit's own detail node det-lem-coefficient-finite-descent-hom step 4, so it is an accepted tool use and not a detour around the route. The tool is true: an H-linear retraction Qlb→H is continuous on each finite F, which gives a split unit. Step 1 coefficient checks: T_{E,Qlb} is the ambient L(Ext) restricted on arrows; the rings are p_X^*C(-,E) and p_X^* of the finite-subfield-valued Qlb; π_X^* (Lan+sheafify) agrees with π_T^{-1}. Step 2: def-sfb-dcons-subfield is full. Step 3: H'=H is allowed, since E≤F includes equality and Hom-inj asks for k'≥k. Edge cases checked: empty X, g=g', zero objects. FIX: step 1 misattributed the Qlb ring convention to def-weil-pbc-condensed-e-module-category (C4), which defines only finite-E coefficients. It now credits the faithfulness node's statement for the Qlb convention, adds that node to step 1's uses (it was already in proof_deps), and spells out the conventions in step 2. No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+  "statement": "theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj",
+  "branch": "slopmaster2",
+  "by": "NF",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Existing live upstream theorem, read locally and confirmed using scompile.py --source. CategoryCocone.HomInj expands to exactly the finite-stage equality in the node, for constructibleCocone and its recorded transition and vertex functors. The theorem lies in the TwoColimit section with variable [TopologicalSpace.NoetherianSpace X] and is declared under `set_option linter.unusedSectionVars false` (no `omit`), so its elaborated signature keeps that instance: ∀ (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] [NoetherianSpace X], (constructibleCocone X ℓ).HomInj. This is exactly the node's hypothesis (X with Noetherian underlying space, ℓ prime). No duplicate statement module is introduced. Reviewer FIX: corrected the delivered note, which claimed the instance is omitted and the theorem holds for arbitrary schemes; Lean 4 includes instance section variables whose arguments are included (checked by a Mathlib-only probe).",
+  "fixed_by": "NT-stage2-cc-2345356c6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2345356c6",
+  "group": "NF",
+  "result": "fix",
+  "note": "existing:true binding to AlgebraicGeometry.ProEtale.constructibleCocone_homInj (TwoColimit.lean:647, statement verbatim, same in side-live and live) is correct: CategoryCocone.HomInj = node's Hom-inj (universal H,K,L,g,g'; ∃ H' ≥ H, non-strict), constructibleCocone is the recorded dep with real data, ℓ prime, genuine pro-etale site. Fault: lean.note/report claim the NoetherianSpace section instance is omitted and the theorem holds for arbitrary schemes; false, since the theorem uses set_option linter.unusedSectionVars false (not omit) and a Mathlib-only lcompile probe confirms the instance is kept. The signature therefore matches the node's Noetherian hypothesis exactly. FIX: fixes/lem-sfb-constructible-cocone-hom-inj.lean-record.json replaces only the note. Maintainer note: TwoColimit cannot be imported on live or side (duplicate etaleModuleCohomology_isColimit_of_isFiltered), so #check/axioms could not run."
  }
 }

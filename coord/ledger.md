@@ -17512,3 +17512,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:13 L: returned deliver/Q17/lem-coef-finite-adjunction-transition (reviewer RETURN: L: independent stage-2 immutable head d9581f5f1a20: H3 (F2 of the 85d9672bde92/46c51e37df61 returns still open): finiteH)
 - 18:20 L: returned deliver/NJ/fix-lem-exchanges (reviewer RETURN: L: independent stage-2 immutable head fb9fc1286761: R1 fixed (3 unused stmt_deps removed). R3 fixed: exchangeFiniteModul)
 - 18:30 L: merged deliver/O1/det-prop-diagonal-tower-trace (stage 2; reviewer PASS; parallel immutable checks)
+- 18:33 L: merged deliver/NF/lem-sfb-constructible-cocone-hom-inj (stage 2; reviewer FIX; parallel immutable checks)
