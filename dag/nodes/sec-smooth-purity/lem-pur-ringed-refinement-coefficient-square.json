@@ -28,164 +28,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the geometric clause of [lem-cbc-strict-tower-proper-open-calculus] with its $V=S=X$, $W=T_1$, $T=T_2$, $k=j_1$, $i=j_2$, $p=u$, and $r=1_X$. The identity is proper, the two opens are quasi-compact, and $uj_1=j_2$, so that clause gives the clopen section $s=(j_1,1_X)$ of $q:T_1\\times_{T_2}X\\to X$. This assertion concerns schemes and does not restrict the sheaves of coefficients. In particular the two open components of $V$ exist without the refinement square being cartesian. Use the ordinary derived adjunctions of [lem-weil-pbc-ringed-projection-mate-exact] for each of the inverse-image coefficient sheaves. Their structural maps are identities, so the left adjoints here are the exact inverse images $L_D=u_D^{-1}$; put $G_D=Ru_{*,D}$.",
+   "text": "For ordinary mode, obtain the normalized operations from lem-pur-ringed-refinement-normalized-data. Apply lem-pur-ringed-refinement-coherences to get the pre-mate coherences and elementary shift data. Apply nonempty_shifts_of_elementary from formal assembly to construct the full shift data. The explicit constructions and mate proof of lem-pur-ringed-refinement-formal-assembly assemble these data into a Package.",
    "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-pur-ringed-refinement-normalized-data",
+    "lem-pur-ringed-refinement-coherences",
+    "lem-pur-ringed-refinement-formal-assembly"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: geometric specialization and the stipulated ordinary derived adjunctions."
-   }
+   "elementary": false
   },
   {
-   "text": "For any scheme map $f:T'\\to T$ in the construction write $c_f:f_B^{-1}S_T\\cong S_{T'}f_A^{-1}$ for the canonical comparison. It is the pullback-composition comparison for the square of ringed topoi consisting of $f$ and the identity geometric morphisms with structural coefficient map $A\\to B$. The composition and 2-isomorphism assertions of [lem-sfb-ringed-derived-monoidal-comparisons] apply because all coefficient sheaves on $T'$ are inverse images and the structural ring square commutes. They identify the two ways of composing these comparisons and their units, including $c_u:L_BS_{T_2}\\cong S_{T_1}L_A$. Scalar extension is computed by K-flat resolutions and is exact by [lem-pur-derived-change-of-rings]; this does not impose flatness on $A\\to B$.",
+   "text": "Perform the identical assembly on the vertical site in systems mode; all maps are transformations before any evaluation.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-ringed-refinement-normalized-data",
+    "lem-pur-ringed-refinement-coherences",
+    "lem-pur-ringed-refinement-formal-assembly"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: inverse-image/scalar and composition comparisons."
-   }
+   "elementary": true
   },
   {
-   "text": "The normalized open comparisons commute with $c_f$ and scalar extension. To verify this, use [lem-sf-open-tensor-normalization]: the inverse of its $\\beta$ is the open-adjunction transpose of the open unit, and the open scalar comparison $\\delta_j:S_Tj_{!,A}\\cong j_{!,B}S_U$ is its $\\beta$ for the identity geometric map carrying the coefficient map. Restrict the two composites in the proposed compatibility square to the open. Under these units each $\\beta$ and each $\\delta_j$ becomes the identity; the remaining pullback/scalar identifications agree by [lem-sfb-ringed-derived-monoidal-comparisons]. Both source and target are open extensions, so the fully faithful open extension in the normalization node makes this restricted equality an equality of the original maps. The same argument treats $b_!s_!\\cong j_{1!}$: both sides are left adjoint to the same composite restriction and their units on $X$ are the identity.",
+   "text": "For each finite coefficient ring apply lem-pur-ringed-refinement-finite-comparison to the assembled systems package. Pair its realization, comparison, and normalization witnesses with that package to obtain exactly the second conjunct.",
    "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-pur-ringed-refinement-finite-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: open-unit characterization of the two comparison squares."
-   }
-  },
-  {
-   "text": "Put $W=V\\setminus s(X)$ and write $t:W\\hookrightarrow V$. The clopen decomposition of Step 1 identifies a sheaf $N$ with the pair $(s^{-1}N,t^{-1}N)$, with inverse $(N_s,N_W)\\mapsto s_!N_s\\oplus t_!N_W$: the restrictions of this map are identities on the two disjoint opens, and the sheaf axiom glues them uniquely. The functors are exact by [lem-pur-site-restriction-module-adjunction-exact], so these mutually inverse identifications also hold for complexes and their derived categories. Under them $\\pi_s$ is the map $(N_s,N_W)\\mapsto(N_s,0)$, namely the matrix $(1,0)$. By the open scalar comparisons of Step 3, $S_V$ respects the two summands. Its additivity and preservation of identities send this matrix to $(1,0)$ again. Therefore, with $\\delta_s:S_Vs_{!,A}\\cong s_{!,B}S_X$ and $c_s:s_B^{-1}S_V\\cong S_Xs_A^{-1}$,\n$$s_{!,B}(c_s^{-1})\\,\\delta_s\\,S_V(\\pi_s^A)=\\pi_s^B S_V.$$\nThis is a calculation in a product of derived categories, not an inference from stalkwise detection of derived morphisms.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: component calculation for the clopen projection."
-   }
-  },
-  {
-   "text": "Set $J_i=j_{i!,A}$ and $J'_i=j_{i!,B}$, and abbreviate $S_i=S_{T_i}$. Combine the open-base-change compatibility of Step 3 with the clopen-projection equality of Step 4, and then the open-composition compatibility of Step 3. These are exactly the three successive arrows defining $h_D$. The comparison $s^{-1}q^{-1}\\cong1$ agrees in both coefficient categories because $qs=1_X$ and the pullback compositors of [lem-sfb-ringed-derived-monoidal-comparisons] are coherent. Thus, as maps $L_BS_2J_2M\\to J'_1S_XM$,\n$$\\delta_{1,M}\\,S_1(h_{A,M})\\,c_{u,J_2M}=h_{B,S_XM}\\,L_B(\\delta_{2,M}).\\tag{*}$$\nEvery factor is a natural transformation, so (*) is natural in $M$.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: pasting the three defining arrows of h."
-   }
-  },
-  {
-   "text": "Take $L_B\\dashv G_B$ transposes of the claimed equation, using the mate bijection of [def-weil-pbc-adjunction-mate]. The definition of $\\chi_u$ in [lem-pur-ringed-coefficient-projection-cocycle] says\n$$\\varepsilon_{B,S_1N}\\,L_B(\\chi_{u,N})=S_1(\\varepsilon_{A,N})\\,c_{u,G_AN}.$$\nNaturality of $\\varepsilon_B$, then this formula and naturality of $c_u$, give the transpose of the left side as\n$$\\begin{aligned}\n\\varepsilon_B L_B(G_B\\delta_1\\,\\chi_u\\,S_2r_A)\n&=\\delta_1\\,\\varepsilon_B\\,L_B\\chi_u\\,L_BS_2r_A\\\\\n&=\\delta_1\\,S_1\\varepsilon_A\\,c_u\\,L_BS_2r_A\\\\\n&=\\delta_1\\,S_1(\\varepsilon_A L_Ar_A)\\,c_u\n=\\delta_1\\,S_1h_A\\,c_u.\n\\end{aligned}$$\nHere $N=J_1M$; the last equality is the defining adjunct equation for $r_A$. The transpose of the right side is $h_B L_B\\delta_2$ by the adjunct equation for $r_B$. Equation (*) identifies these transposes, hence the bijection identifies the original arrows. Only the functoriality and counit equations were used; $\\chi_u$ was never inverted.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-pur-ringed-coefficient-projection-cocycle"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: explicit counit-transpose calculation proving the displayed equation."
-   }
-  },
-  {
-   "text": "The construction is natural in the coefficient homomorphism: every $c_f$ is the pullback/scalar comparison of Step 2 and every open comparison is fixed by its unit. For $A\\to B\\to C$, identify successive scalar extensions by [lem-sfb-successive-derived-quotient-normalization]. Its explicit associator $(x\\otimes b)\\otimes c\\mapsto x\\otimes b c$ and its unit assertion make the successive open-unit comparisons the direct ones; the clopen matrix $(1,0)$ is unchanged. The proper comparisons compose exactly by the identity for $\\chi$ in [lem-pur-ringed-coefficient-projection-cocycle]. Consequently pasting the two equations of Step 6 gives its equation for the composite coefficient map. Identity maps and commutative squares of coefficient maps follow from the identity and commutative-square clauses of that same node. All equations are in the target coefficient category.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pur-ringed-coefficient-projection-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: identity and successive coefficient changes."
-   }
-  },
-  {
-   "text": "For a further proper refinement $v:T_2\\to T_3$, with $vj_2=j_3$, work first in $T_1\\times_{T_3}X$. Pull back the clopen decomposition of $T_2\\times_{T_3}X$ whose distinguished component is $j_2(X)$. The resulting distinguished open component is $T_1\\times_{T_2}X$; its own distinguished clopen component is $j_1(X)$. Thus successive projection first to the former and then to the latter is precisely projection to $j_1(X)$: in the three-component decomposition the row is $(1,0,0)$ for both procedures. The normalized open base changes respect pullback and open composition by their unit characterization in Step 3. Applying this component calculation to their defining $h$ maps therefore gives\n$$h_{vu,D}=h_{u,D}\\,u_D^{-1}(h_{v,D})$$\nunder inverse-image composition. This uses only the geometric clopen clause of [lem-cbc-strict-tower-proper-open-calculus] and the normalized open comparisons [lem-sf-open-tensor-normalization]; the component argument does not depend on constant coefficients. By mate pasting [lem-weil-pbc-mate-pasting] and the composite-adjunction normalization of [lem-sfb-ringed-derived-monoidal-comparisons],\n$$r_{vu,D}=Rv_{*,D}(r_{u,D})\\,r_{v,D}.$$\nThe identity refinement selects the whole distinguished component, so its $h$ and $r$ are identities.",
-   "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: successive refinements: nested component projections and their mates."
-   }
-  },
-  {
-   "text": "The spatial composition law for the coefficient comparisons is obtained by applying [lem-weil-pbc-mate-pasting] to $c_u,c_v$. By [lem-sfb-ringed-derived-monoidal-comparisons] their pasted left comparison is $c_{vu}$ and the composite counit is $\\varepsilon_u\\,u^{-1}\\varepsilon_v$. Their transposes consequently give, under direct-image composition,\n$$\\chi_{vu}=(Rv_{*,B}\\chi_u)\\,(\\chi_v Ru_{*,A}).$$\nSubstitute this formula and Step 8's formula for $r_{vu}$ into the coefficient square. Naturality of $\\chi_v$ moves $S(r_u)$ through $\\chi_v$, and the equations of Step 6 for $v$ and $u$ turn the resulting composite into $r_{vu,B}\\delta_3$. This proves compatibility with successive proper refinements. The coherent compositors in the cited monoidal-comparison node and associativity of composition give the same result for three refinements and any parenthesization.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: pasting the spatial coefficient comparisons and the two refinement squares."
-   }
-  },
-  {
-   "text": "Open extension and restriction are exact and act termwise on complexes [lem-pur-site-restriction-module-adjunction-exact]; their units and the component matrix $(1,0)$ commute with cochain shifts. Derived scalar extension is exact with its canonical shift structure [lem-pur-derived-change-of-rings]. Pullback and scalar composition comparisons are computed on K-flat complexes [lem-sfb-ringed-derived-monoidal-comparisons], so shifting those complexes shifts the same maps. The units and counits for the derived proper adjunction commute with shifts by [lem-weil-pbc-derived-adjunction-shift]. Thus all arrows in (*) and all arrows of the transpose calculation commute with the canonical shifts. This proves the shift assertion for $r_D$, $\\chi_u$, and the displayed coefficient equation.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-derived-adjunction-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: canonical cochain shifts."
-   }
-  },
-  {
-   "text": "For compatible strict inverse coefficient systems, use the ringed diagram topos of [lem-weil-pbc-diagram-site-realization] with the possibly nonconstant ring objects $A_\\bullet,B_\\bullet$. Its module objects are exactly the semilinear systems and its ordinary derived inverse-image/direct-image adjunctions, scalar extension and open extension are those of [lem-coef-semilinear-derived-sections]. The normalized open comparisons hold on these ringed diagram topoi by [lem-sf-open-tensor-normalization], and the coefficient-transpose definition and cocycle hold there by [lem-pur-ringed-coefficient-projection-cocycle]. The two geometric opens give the same disjoint decomposition of the diagram site, so the product calculation of Step 4 takes place in the category of systems itself. Steps 2--10 now apply to these ringed topoi and prove the equation and all compatibilities there. No evaluation or total limit is used to infer equality. Finally for constant finite coefficients the three arrows of $h_D$ are precisely the normalized $\\alpha_Q$ for the refinement square in [lem-cbc-strict-tower-proper-open-calculus]. Their proper-adjunction mate is therefore its specified normalized refinement map; the left proper map is $1_X$, whose counit is the identity.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-coef-semilinear-derived-sections",
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-ringed-coefficient-projection-cocycle",
-    "lem-cbc-strict-tower-proper-open-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.7.6 and Lemma 6.7.7, compactification independence; agent coefficient supplement: intrinsic ringed-diagram-topos proof and finite constant normalization."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adjunction-mate",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-ringed-coefficient-projection-cocycle",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-open-tensor-normalization",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-pur-ringed-refinement-formal-assembly",
+  "lem-pur-ringed-refinement-normalized-data",
+  "lem-pur-ringed-refinement-coherences",
+  "lem-pur-ringed-refinement-finite-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.7.6 and Lemma 6.7.7 supply the compactification context only; the ordinary unbounded derived ring-sheaf supplement is proved here by open-unit normalization, clopen component matrices, and the explicit counit-transpose calculation."
+  "place": "Construction supplement, with geometric shapes, canonical refinement adjoints and the counit-transpose square proved in Lean; remaining construction, pre-mate coherence and finite comparison separated as named obligations."
  },
  "mathlib_searches": [
   {
@@ -365,20 +242,7 @@
    }
   ]
  },
- "tool_uses": [
-  "def-weil-pbc-adjunction-mate",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-open-tensor-normalization",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -399,57 +263,6 @@
   "module": "Sheaf.Paper.RingedRefinementCoefficientSquare",
   "declaration": "SheafOfModules.ringedRefinementCoefficientSquare",
   "declarations": [
-   "SheafOfModules.RingedRefinement.Rings",
-   "SheafOfModules.RingedRefinement.ringInverse",
-   "SheafOfModules.RingedRefinement.ringAdjunction",
-   "SheafOfModules.RingedRefinement.siteTriangle",
-   "SheafOfModules.RingedRefinement.Coefficients",
-   "SheafOfModules.RingedRefinement.Coefficients.rings",
-   "SheafOfModules.RingedRefinement.Coefficients.pull",
-   "SheafOfModules.RingedRefinement.Coefficients.structural",
-   "SheafOfModules.RingedRefinement.OpenModel",
-   "SheafOfModules.RingedRefinement.Calculus",
-   "SheafOfModules.RingedRefinement.category",
-   "SheafOfModules.RingedRefinement.Calculus.shriek",
-   "SheafOfModules.RingedRefinement.Calculus.shriekShift",
-   "SheafOfModules.RingedRefinement.Calculus.openAdjunction",
-   "SheafOfModules.RingedRefinement.siteComp",
-   "SheafOfModules.RingedRefinement.siteId",
-   "SheafOfModules.RingedRefinement.Spatial",
-   "SheafOfModules.RingedRefinement.Spatial.ordinaryComp",
-   "SheafOfModules.RingedRefinement.Spatial.pullComp",
-   "SheafOfModules.RingedRefinement.Spatial.pullId",
-   "SheafOfModules.RingedRefinement.Spatial.pushComp",
-   "SheafOfModules.RingedRefinement.Spatial.openComp",
-   "SheafOfModules.RingedRefinement.ScalarComparisons",
-   "SheafOfModules.RingedRefinement.ScalarComparisons.chi",
-   "SheafOfModules.RingedRefinement.Shape",
-   "SheafOfModules.RingedRefinement.Spatial.square",
-   "SheafOfModules.RingedRefinement.Spatial.openFactor",
-   "SheafOfModules.RingedRefinement.Spatial.sectionPull",
-   "SheafOfModules.RingedRefinement.OpenComparisons",
-   "SheafOfModules.RingedRefinement.OpenComparisons.h",
-   "SheafOfModules.RingedRefinement.Refinements",
-   "SheafOfModules.RingedRefinement.ScalarComposition",
-   "SheafOfModules.RingedRefinement.left",
-   "SheafOfModules.RingedRefinement.right",
-   "SheafOfModules.RingedRefinement.successive",
-   "SheafOfModules.RingedRefinement.Laws",
-   "SheafOfModules.RingedRefinement.Shifts",
-   "SheafOfModules.RingedRefinement.Package",
-   "SheafOfModules.RingedRefinement.additivePresheaf",
-   "SheafOfModules.RingedRefinement.towerPresheaf",
-   "SheafOfModules.RingedRefinement.finiteRing",
-   "SheafOfModules.RingedRefinement.finiteDirect",
-   "SheafOfModules.RingedRefinement.finiteInverse",
-   "SheafOfModules.RingedRefinement.finiteScalar",
-   "SheafOfModules.RingedRefinement.finiteSystemScalar",
-   "SheafOfModules.RingedRefinement.FiniteRealization",
-   "SheafOfModules.RingedRefinement.FiniteRealization.derived",
-   "SheafOfModules.RingedRefinement.finiteOrdinaryAdjunction",
-   "SheafOfModules.RingedRefinement.finitePullModel",
-   "SheafOfModules.RingedRefinement.FiniteComparison",
-   "SheafOfModules.RingedRefinement.FiniteNormalization",
    "SheafOfModules.ringedRefinementCoefficientSquare"
   ],
   "file": "lean/Sheaf/Paper/RingedRefinementCoefficientSquare.lean",
@@ -459,5 +272,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair of b1db180d12d1: actual ordinary/system pro-etale ringed module categories and canonical coefficient, geometric and open adjunctions; all comparison maps have section, cochain-representative or adjunction normalizations. Separate coherence equations and an actual normalized strict-tower comparison. Package existence is the conclusion, with no arbitrary-datum hypothesis. Repair of f535b5a8d4dc: operation definitions are cited through the new existing:true definition node def-pur-ringed-module-derived-operations; no use of the restriction theorem conclusion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cadce",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T112441-L-3941270",
+  "kind": "interface",
+  "note": "independent cc review: Models module vs live item module (verbatim move, diff clean); item theorem statement vs live node; assembly proof (laws from pre-mate coherences via mate_square, canonical shifts, package) vs node plan; three sorry nodes' lean.statement vs Lean (verbatim); #print axioms (sorryAx only via the three new statements); zero importers of the item module"
  }
 }

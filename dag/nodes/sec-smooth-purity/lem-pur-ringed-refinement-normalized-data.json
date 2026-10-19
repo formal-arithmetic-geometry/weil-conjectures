@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-ringed-refinement-normalized-data",
+ "kind": "statement",
+ "title": "RingedRefinementNormalizedData",
+ "statement": "For each scheme T and each mode m, using the canonical fibre-product ring compositors, there exist a normalized Calculus, Spatial compositors, ScalarComparisons, ScalarComposition, and OpenComparisons. These data comprise the canonical module and derived operations and their normalized comparison maps only; no coefficient or refinement coherence law is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pur-ringed-refinement-models",
+  "lem-pur-ringed-refinement-formal-assembly"
+ ],
+ "proof": [
+  {
+   "text": "use canonical sheaf inverse image for the rings. The adjoint of its\ncomposition isomorphism is the structural ring map in `canonicalCoefficients`.\nThe module Kan extension and sectionwise direct image give the module adjunction;\nexact inverse image and K-injective resolutions give `Calculus.operation`.\nFor an open immersion, transport localized exact extension along the canonical\nrestriction comparison; the ordinary open unit is invertible. Choose the scalar\nuniversal pairs from derived change of rings and normalize their ordinary units\nby `1 tensor x`. Sectionwise associativity of direct image gives `Spatial` and\nits conjugate pullback comparisons. The identity-on-sections scalar restriction\nsquare gives the ordinary scalar/pullback comparison by conjugation. On common\nflat-term K-flat resolutions, its termwise tensor comparison descends to `pull`\nwith the required representative equation. The balanced scalar associators and\nunits are those of successive derived quotient normalization. Construct beta and\ndelta by the open-unit transposes of open tensor normalization. Finally the exact\nproduct decomposition for the two clopen components gives pi as (identity, zero).\nAll constructions take place on the vertical site as well as the ordinary site;\nno evaluation is used to detect equality of derived maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The indicated construction steps of the ordinary-derived coefficient supplement to 6.7.6--6.7.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized ringed pullback and scalar extension operations with clopen projection coherences on small proetale sites",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, PresheafOfModules.pullback, pushforward, Scheme.smallEtaleTopology and open-immersion pullback facts. No normalized unbounded clopen coefficient refinement package.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing underived operations; derived and clopen normalization require the cited project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutativity of coefficient extension with the refinement maps for an open immersion followed by a proper morphism, defined as adjoints of clopen projections",
+   "results": "Eight hits about Scheme.Hom.appLE_appIso and open-immersion section maps; none states the derived refinement comparison.",
+   "date": "2026-10-19",
+   "verdict": "No direct match for the normalized ringed refinement assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|mateEquiv_counit|sheafPushforwardContinuousComp; clopen.*scalar|refinement.*coefficient",
+   "results": "Mathlib Adjunction.Basic homEquiv_naturality_left_symm and homEquiv_naturality_right_symm, Mates.mateEquiv_counit, Sites.Continuous.sheafPushforwardContinuousComp. Local searches found only the assigned statement and its dependencies.",
+   "date": "2026-10-19",
+   "verdict": "The generic mate argument and ring compositor are proved from these Mathlib lemmas in RingedRefinementAssembly; no duplicate normalized construction or finite comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-19",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3: compatibility of coefficient transport with the compactification used to realize compact support; isolates the clopen-refinement square before the item applies total limit and field transport.",
+   "via": [
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementNormalizedData",
+  "file": "lean/Sheaf/Paper/RingedRefinementNormalizedData.lean",
+  "declaration": "SheafOfModules.RingedRefinement.exists_normalizedRefinementData",
+  "declarations": [
+   "SheafOfModules.RingedRefinement.exists_normalizedRefinementData"
+  ],
+  "statement": "theorem exists_normalizedRefinementData (m : Mode) (T : Scheme.{u}) : ∃ (o : Calculus (canonicalCoefficients m T)) (p : Spatial o) (_sc : ScalarComparisons o) (_ac : ScalarComposition o), Nonempty (OpenComparisons p)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cadce",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T112441-L-3941270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cadce",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T112441-L-3941270",
+  "kind": "interface",
+  "note": "independent cc review: Models module vs live item module (verbatim move, diff clean); item theorem statement vs live node; assembly proof (laws from pre-mate coherences via mate_square, canonical shifts, package) vs node plan; three sorry nodes' lean.statement vs Lean (verbatim); #print axioms (sorryAx only via the three new statements); zero importers of the item module"
+ }
+}

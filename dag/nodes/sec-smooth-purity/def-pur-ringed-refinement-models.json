@@ -1,0 +1,170 @@
+{
+ "id": "def-pur-ringed-refinement-models",
+ "kind": "definition",
+ "title": "RingedRefinementModels",
+ "statement": "For a scheme T and mode m (the ordinary small pro-etale site or its vertical sequence site), define presentation records for ring sheaves, their inverse images, exact module inverse images and open extensions, derived scalar extension, spatial and scalar compositors, clopen pullback shapes, open comparisons, and their refinement mates. Package m T bundles these data with their coefficient, spatial, refinement and shift equations. For constant finite coefficient rings define the section-preserving realization and its finite comparison and normalization records. These are precisely the definitions formerly accompanying lem-pur-ringed-refinement-coefficient-square; no notion or signature is changed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, compactification independence; agent ordinary-derived ring-sheaf coefficient supplement to the clopen-section refinement construction, not a theorem literally asserted in the paper."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-pur-ringed-module-derived-operations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized ringed pullback and scalar extension operations with clopen projection coherences on small proetale sites",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, PresheafOfModules.pullback, pushforward, Scheme.smallEtaleTopology and open-immersion pullback facts. No normalized unbounded clopen coefficient refinement package.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing underived operations; derived and clopen normalization require the cited project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutativity of coefficient extension with the refinement maps for an open immersion followed by a proper morphism, defined as adjoints of clopen projections",
+   "results": "Eight hits about Scheme.Hom.appLE_appIso and open-immersion section maps; none states the derived refinement comparison.",
+   "date": "2026-10-19",
+   "verdict": "No direct match for the normalized ringed refinement assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|mateEquiv_counit|sheafPushforwardContinuousComp; clopen.*scalar|refinement.*coefficient",
+   "results": "Mathlib Adjunction.Basic homEquiv_naturality_left_symm and homEquiv_naturality_right_symm, Mates.mateEquiv_counit, Sites.Continuous.sheafPushforwardContinuousComp. Local searches found only the assigned statement and its dependencies.",
+   "date": "2026-10-19",
+   "verdict": "The generic mate argument and ring compositor are proved from these Mathlib lemmas in RingedRefinementAssembly; no duplicate normalized construction or finite comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedRefinementCoefficientSquare",
+  "date": "2026-10-19",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3: compatibility of coefficient transport with the compactification used to realize compact support; isolates the clopen-refinement square before the item applies total limit and field transport.",
+   "via": [
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedRefinementModels",
+  "file": "lean/Sheaf/Paper/RingedRefinementModels.lean",
+  "declaration": "SheafOfModules.RingedRefinement.Package",
+  "declarations": [
+   "SheafOfModules.RingedRefinement.Rings",
+   "SheafOfModules.RingedRefinement.ringInverse",
+   "SheafOfModules.RingedRefinement.ringAdjunction",
+   "SheafOfModules.RingedRefinement.siteTriangle",
+   "SheafOfModules.RingedRefinement.Coefficients",
+   "SheafOfModules.RingedRefinement.Coefficients.rings",
+   "SheafOfModules.RingedRefinement.Coefficients.pull",
+   "SheafOfModules.RingedRefinement.Coefficients.structural",
+   "SheafOfModules.RingedRefinement.OpenModel",
+   "SheafOfModules.RingedRefinement.Calculus",
+   "SheafOfModules.RingedRefinement.category",
+   "SheafOfModules.RingedRefinement.Calculus.shriek",
+   "SheafOfModules.RingedRefinement.Calculus.shriekShift",
+   "SheafOfModules.RingedRefinement.Calculus.openAdjunction",
+   "SheafOfModules.RingedRefinement.siteComp",
+   "SheafOfModules.RingedRefinement.siteId",
+   "SheafOfModules.RingedRefinement.Spatial",
+   "SheafOfModules.RingedRefinement.Spatial.ordinaryComp",
+   "SheafOfModules.RingedRefinement.Spatial.pullComp",
+   "SheafOfModules.RingedRefinement.Spatial.pullId",
+   "SheafOfModules.RingedRefinement.Spatial.pushComp",
+   "SheafOfModules.RingedRefinement.Spatial.openComp",
+   "SheafOfModules.RingedRefinement.ScalarComparisons",
+   "SheafOfModules.RingedRefinement.ScalarComparisons.chi",
+   "SheafOfModules.RingedRefinement.Shape",
+   "SheafOfModules.RingedRefinement.Spatial.square",
+   "SheafOfModules.RingedRefinement.Spatial.openFactor",
+   "SheafOfModules.RingedRefinement.Spatial.sectionPull",
+   "SheafOfModules.RingedRefinement.OpenComparisons",
+   "SheafOfModules.RingedRefinement.OpenComparisons.h",
+   "SheafOfModules.RingedRefinement.Refinements",
+   "SheafOfModules.RingedRefinement.ScalarComposition",
+   "SheafOfModules.RingedRefinement.left",
+   "SheafOfModules.RingedRefinement.right",
+   "SheafOfModules.RingedRefinement.successive",
+   "SheafOfModules.RingedRefinement.Laws",
+   "SheafOfModules.RingedRefinement.Shifts",
+   "SheafOfModules.RingedRefinement.Package",
+   "SheafOfModules.RingedRefinement.additivePresheaf",
+   "SheafOfModules.RingedRefinement.towerPresheaf",
+   "SheafOfModules.RingedRefinement.finiteRing",
+   "SheafOfModules.RingedRefinement.finiteDirect",
+   "SheafOfModules.RingedRefinement.finiteInverse",
+   "SheafOfModules.RingedRefinement.finiteScalar",
+   "SheafOfModules.RingedRefinement.finiteSystemScalar",
+   "SheafOfModules.RingedRefinement.FiniteRealization",
+   "SheafOfModules.RingedRefinement.FiniteRealization.derived",
+   "SheafOfModules.RingedRefinement.finiteOrdinaryAdjunction",
+   "SheafOfModules.RingedRefinement.finitePullModel",
+   "SheafOfModules.RingedRefinement.FiniteComparison",
+   "SheafOfModules.RingedRefinement.FiniteNormalization"
+  ],
+  "statement": "structure Package (m : Mode) (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cadce",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T112441-L-3941270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cadce",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T112441-L-3941270",
+  "kind": "interface",
+  "note": "independent cc review: Models module vs live item module (verbatim move, diff clean); item theorem statement vs live node; assembly proof (laws from pre-mate coherences via mate_square, canonical shifts, package) vs node plan; three sorry nodes' lean.statement vs Lean (verbatim); #print axioms (sorryAx only via the three new statements); zero importers of the item module"
+ }
+}
