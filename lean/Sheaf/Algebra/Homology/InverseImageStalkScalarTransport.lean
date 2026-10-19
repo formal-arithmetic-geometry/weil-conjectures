@@ -5,9 +5,9 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.Topology.InverseImageModule
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Topology.InverseImageModule
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Algebra.Homology.InverseImageStalkScalarTransportBeta
 import Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality

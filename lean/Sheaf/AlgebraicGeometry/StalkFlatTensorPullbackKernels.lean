@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.KFlatPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
 import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Descent

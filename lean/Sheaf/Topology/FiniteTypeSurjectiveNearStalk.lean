@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Sheaf.Topology.FiniteTypeLocalCoefficients
 

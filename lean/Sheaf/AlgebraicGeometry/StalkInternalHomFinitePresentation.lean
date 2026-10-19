@@ -9,7 +9,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.StalkInternalHomEvaluation
 import Sheaf.AlgebraicGeometry.FinitePresentationStalkKernel
 

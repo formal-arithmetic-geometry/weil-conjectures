@@ -6,7 +6,7 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.Paper.ModuleCupGodementModel
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Homology.Homotopy
 import Mathlib.Topology.Sheaves.Abelian
 

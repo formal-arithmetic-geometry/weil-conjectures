@@ -24,7 +24,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Algebra.Homology.RhomGlobalSections
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
@@ -42,7 +42,6 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.AlgebraicGeometry.ProEtaleClosedLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Integral constructible complexes and uniformly bounded below sums

@@ -6,10 +6,10 @@ Authors: SHEAF groups U1, S2
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Topology.RingedModuleSkyscraper
 

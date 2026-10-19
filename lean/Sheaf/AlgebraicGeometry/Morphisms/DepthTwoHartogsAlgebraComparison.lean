@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 
 /-! # Hartogs comparison with an actual algebra pushforward

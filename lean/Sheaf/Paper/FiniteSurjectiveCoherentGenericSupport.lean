@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Coherent sheaf with prescribed generic support

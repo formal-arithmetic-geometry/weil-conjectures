@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingPreservesColimit
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Colimits under the constant-coefficient module forgetful functor -/
 

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.Algebra.Homology.ComplexExtensionColimits
 import Mathlib.Algebra.Homology.HomologicalComplexLimits

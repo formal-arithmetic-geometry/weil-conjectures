@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
 import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
 import Sheaf.Algebra.Homology.StupidTailHomShortExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel

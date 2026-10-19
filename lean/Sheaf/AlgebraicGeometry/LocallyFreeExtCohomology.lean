@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

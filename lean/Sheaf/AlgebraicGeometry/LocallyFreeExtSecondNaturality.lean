@@ -6,7 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
@@ -16,7 +16,6 @@ import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
 import WeilConjectures.Topology.RingedSpaceModuleCohomology

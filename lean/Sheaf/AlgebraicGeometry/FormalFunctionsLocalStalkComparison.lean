@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
 import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Canonical comparison of the stalk with local-base-change cohomology

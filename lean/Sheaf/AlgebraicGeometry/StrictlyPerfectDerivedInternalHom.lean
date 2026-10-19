@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 

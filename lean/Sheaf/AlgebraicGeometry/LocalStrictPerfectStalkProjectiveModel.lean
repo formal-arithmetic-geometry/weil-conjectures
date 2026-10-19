@@ -6,7 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Module.Projective
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso

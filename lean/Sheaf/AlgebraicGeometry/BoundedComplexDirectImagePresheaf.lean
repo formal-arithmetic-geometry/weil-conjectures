@@ -16,7 +16,7 @@ public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
-public import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

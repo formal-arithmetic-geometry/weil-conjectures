@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.Topology.OpenModuleCohomology
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 

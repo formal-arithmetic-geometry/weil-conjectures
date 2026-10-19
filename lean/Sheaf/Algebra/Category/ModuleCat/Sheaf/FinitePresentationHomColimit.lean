@@ -11,10 +11,9 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Topology.ModuleColimitRestriction
 import Sheaf.Topology.SheafIsomorphismLocalOpenCover
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-!

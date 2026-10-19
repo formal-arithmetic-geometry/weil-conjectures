@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ChartOrdinaryMapRecovery
-import Sheaf.Algebra.FinitePresentationColimit
+import WeilConjectures.Algebra.FinitePresentationColimit
 import Sheaf.AlgebraicGeometry.AffineChartOrdinaryHomComparison
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Affine

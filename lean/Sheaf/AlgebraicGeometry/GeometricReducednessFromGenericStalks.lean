@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.RingTheory.TensorProduct.Basic
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace

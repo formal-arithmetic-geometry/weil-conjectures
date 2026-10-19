@@ -6,7 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatResolution

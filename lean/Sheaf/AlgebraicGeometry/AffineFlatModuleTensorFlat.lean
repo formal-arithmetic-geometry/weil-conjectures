@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.RingTheory.Flat.CategoryTheory

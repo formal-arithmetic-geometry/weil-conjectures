@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
 import Sheaf.AlgebraicGeometry.CompositeFibreLocalModels
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Pullbacks

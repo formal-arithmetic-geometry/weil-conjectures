@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Algebra.Homology.ModuleStalkExact

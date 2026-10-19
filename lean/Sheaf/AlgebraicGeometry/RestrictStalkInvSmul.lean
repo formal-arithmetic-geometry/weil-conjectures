@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Scalar compatibility of inverse open restriction on stalks

@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.StalkTensorComplexDegrees
 import Sheaf.Algebra.Homology.StalkTensorComplexDifferential
 import Mathlib.Topology.Sheaves.Abelian

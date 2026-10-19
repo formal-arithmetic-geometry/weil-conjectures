@@ -13,7 +13,7 @@ public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.RingTheory.Depth
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.RegularLocalRing.Polynomial

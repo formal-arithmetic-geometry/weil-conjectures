@@ -9,7 +9,7 @@ import Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor
 import Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Topology.Sheaves.Abelian
 
 @[expose] public section

@@ -11,9 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Data.List.TFAE
 import Sheaf.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.FunctionField
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Coherent
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-!

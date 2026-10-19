@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.StalkTensorComplexDegrees
 import Sheaf.Algebra.Homology.StalkTensorComplexDifferential
 import Mathlib.Topology.Sheaves.Abelian

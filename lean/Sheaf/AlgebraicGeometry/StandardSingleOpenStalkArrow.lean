@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.StandardSingleOpenDerivedArrow
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

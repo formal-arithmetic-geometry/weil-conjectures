@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 

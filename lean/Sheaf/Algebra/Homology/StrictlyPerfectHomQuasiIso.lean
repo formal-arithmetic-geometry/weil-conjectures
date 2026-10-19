@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 
 /-! # A bounded finite free Hom complex preserves quasi-isomorphisms
 

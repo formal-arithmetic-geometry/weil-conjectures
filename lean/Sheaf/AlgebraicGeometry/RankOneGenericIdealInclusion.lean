@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.GenericIdealStalkEmbeddingExtension
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.LinearAlgebra.Dimension.Finite

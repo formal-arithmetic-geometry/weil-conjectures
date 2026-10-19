@@ -6,7 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.StandardSingleBaseChangeMap
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 

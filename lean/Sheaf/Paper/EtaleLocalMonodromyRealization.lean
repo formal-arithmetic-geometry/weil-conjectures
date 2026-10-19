@@ -14,7 +14,7 @@ import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal
 import Sheaf.AlgebraicGeometry.FiniteTypeNoetherianSpectrum
 import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized
@@ -23,7 +23,6 @@ import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.Paper.GaloisLisseRepresentations
 import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!

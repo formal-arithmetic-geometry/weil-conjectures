@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.Algebra.Module.GradedModuleAwayRestriction
 import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties

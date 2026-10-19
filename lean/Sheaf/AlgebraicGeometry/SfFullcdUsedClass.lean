@@ -24,7 +24,7 @@ import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetCompariso
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
@@ -47,7 +47,6 @@ import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.SfFullcdEtaleOrigin
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 

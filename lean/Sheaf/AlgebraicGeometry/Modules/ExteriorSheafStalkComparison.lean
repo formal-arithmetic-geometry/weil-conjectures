@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
 import Mathlib.Topology.Sheaves.Sheafify
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Exterior powers commute with module stalks

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

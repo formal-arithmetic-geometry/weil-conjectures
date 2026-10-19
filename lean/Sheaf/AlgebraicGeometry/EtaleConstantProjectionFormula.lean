@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
@@ -39,7 +39,6 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.ProjectionMateExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!

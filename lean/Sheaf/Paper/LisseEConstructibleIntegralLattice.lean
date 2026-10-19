@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.CategoryTheory.ExtOneExtensionClassification
@@ -54,7 +54,6 @@ import Sheaf.Paper.AdicGlobalDerivedHom
 import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
 import Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # A lisse finite-extension sheaf has a constructible integral lattice

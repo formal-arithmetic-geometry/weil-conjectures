@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.HomComplexProjections
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 

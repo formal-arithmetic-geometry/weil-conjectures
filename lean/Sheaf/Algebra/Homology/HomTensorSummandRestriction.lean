@@ -2,7 +2,7 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
 
 /-!
 # Internal Hom restrictions to total tensor summands

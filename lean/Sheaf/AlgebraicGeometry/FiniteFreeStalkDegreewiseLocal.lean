@@ -2,7 +2,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import Sheaf.AlgebraicGeometry.FiniteFreeStalkMapLocal
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 @[expose] public section
 set_option autoImplicit false
 universe u

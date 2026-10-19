@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
 import Sheaf.Algebra.Homology.HomComplexProjections

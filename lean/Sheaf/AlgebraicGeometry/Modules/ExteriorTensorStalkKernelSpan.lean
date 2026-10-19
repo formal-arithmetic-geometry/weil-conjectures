@@ -11,11 +11,11 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafStalkComparison
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorQuotientKernel
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalk generators of an exterior tensor quotient kernel

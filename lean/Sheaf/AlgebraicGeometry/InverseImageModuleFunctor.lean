@@ -5,7 +5,7 @@ Authors: SHEAF group D3
 -/
 module
 
-public import Sheaf.Topology.InverseImageModule
+public import WeilConjectures.Topology.InverseImageModule
 import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # The canonical inverse-image functor on modules

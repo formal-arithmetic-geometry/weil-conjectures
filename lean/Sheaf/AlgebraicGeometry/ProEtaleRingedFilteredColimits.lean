@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 import Sheaf.AlgebraicGeometry.ProEtaleClosedAbelianFilteredColimits
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! Ringed pro-etale localization: a geometric step of the open-closed argument. -/
 

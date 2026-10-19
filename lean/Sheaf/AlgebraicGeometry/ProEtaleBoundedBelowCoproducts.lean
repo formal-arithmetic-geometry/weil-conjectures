@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
-public import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Limits.Shapes.Products

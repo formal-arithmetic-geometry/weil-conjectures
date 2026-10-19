@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.TensorPullback
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -17,7 +17,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

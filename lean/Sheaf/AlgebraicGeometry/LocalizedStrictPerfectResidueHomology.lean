@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocalizedResidueHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.KFlatStalkCriterion

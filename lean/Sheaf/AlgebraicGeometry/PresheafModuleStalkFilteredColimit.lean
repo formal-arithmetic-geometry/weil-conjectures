@@ -5,9 +5,8 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 public import Mathlib.CategoryTheory.Filtered.Basic
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks and filtered colimits of presheaves of modules

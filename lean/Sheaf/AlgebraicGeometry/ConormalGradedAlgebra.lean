@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 public import WeilConjectures.RingTheory.AssociatedGradedRing
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Geometry.RingedSpace.Basic
@@ -28,7 +28,7 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Topology.InverseImageModule
+import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
@@ -43,7 +43,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Mathlib.AlgebraicGeometry.StructureSheaf
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Sheaf.Topology.StalkDirectSums
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import Sheaf.RingTheory.SymmetricAlgebraBaseChange
@@ -62,7 +62,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-!
 # The conormal graded algebra of a closed immersion
 

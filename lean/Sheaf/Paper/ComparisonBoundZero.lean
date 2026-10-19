@@ -35,15 +35,13 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!

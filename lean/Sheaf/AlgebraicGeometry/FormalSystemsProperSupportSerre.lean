@@ -6,7 +6,7 @@ public import Mathlib.CategoryTheory.Abelian.SerreClass.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.IdealModuleProductExactCalculus
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties

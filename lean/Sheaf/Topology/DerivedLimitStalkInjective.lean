@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.Topology.OpenModuleDerivedSections
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products

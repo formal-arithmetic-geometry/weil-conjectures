@@ -87,13 +87,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffinePerfectChainMapEqualityDetection",
-  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectChainMapEqualityDetection.lean",
+  "module": "WeilConjectures.Algebra.Homology.AffinePerfectChainMapEqualityDetection",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffinePerfectChainMapEqualityDetection.lean",
   "declaration": "CochainComplex.affine_perfect_chainMap_equality_detection",
   "statement": "theorem affine_perfect_chainMap_equality_detection\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (E₀ K₀ : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E₀.X n))\n    (hEfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (E₀.X n))\n    (hKfp : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (K₀.X n))\n    (i : Set.Ici i₀)\n    (j : Set.Ici i₀)\n    (f : ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀ ⟶\n      ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀)\n    (g :\n      ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj E₀ ⟶\n          ((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex\n          (.up ℤ)).obj K₀)\n    (h : scalarExtensionHom (F.map (homOfLE i.property)).hom (colimit.ι F i.val).hom\n        (colimit.ι F i₀).hom\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE i.property)).symm)\n        E₀ K₀ f =\n      scalarExtensionHom (F.map (homOfLE j.property)).hom (colimit.ι F j.val).hom\n        (colimit.ι F i₀).hom\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE j.property)).symm)\n        E₀ K₀ g) :\n    ∃ (k : Set.Ici i₀) (hik : i ≤ k) (hjk : j ≤ k),\n      scalarExtensionHom (F.map (homOfLE i.property)).hom (F.map (homOfLE hik)).hom\n        (F.map (homOfLE k.property)).hom\n        (congrArg CommRingCat.Hom.hom (F.map_comp\n          (homOfLE i.property) (homOfLE hik))) E₀ K₀ f =\n      scalarExtensionHom (F.map (homOfLE j.property)).hom (F.map (homOfLE hjk)).hom\n        (F.map (homOfLE k.property)).hom\n        (congrArg CommRingCat.Hom.hom (F.map_comp\n          (homOfLE j.property) (homOfLE hjk))) E₀ K₀ g",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.AffinePerfectChainMapEqualityDetection; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

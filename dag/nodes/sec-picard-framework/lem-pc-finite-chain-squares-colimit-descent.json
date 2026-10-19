@@ -107,13 +107,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent",
-  "file": "lean/Sheaf/Algebra/Homology/FiniteChainSquaresColimitDescent.lean",
+  "module": "WeilConjectures.Algebra.Homology.FiniteChainSquaresColimitDescent",
+  "file": "lean/WeilConjectures/Algebra/Homology/FiniteChainSquaresColimitDescent.lean",
   "declaration": "CochainComplex.eventually_commuting_finite_chain_squares",
   "statement": "theorem eventually_commuting_finite_chain_squares\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (hP : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (P.X n))\n    (hQ : ∀ n : ℤ, Module.FinitePresentation (F.obj i₀) (Q.X n))\n    (i : Set.Ici i₀)\n    (v : ∀ n : ℤ,\n      (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n))\n    (a b : ℤ)\n    (hcomm : ∀ n : ℤ, a ≤ n → n ≤ b →\n      (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map\n          ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).map\n            (Q.d n (n + 1))) =\n      (ModuleCat.extendScalars (colimit.ι F i.val).hom).map\n          ((ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).map\n            (P.d n (n + 1))) ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v (n + 1))) :\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∃ (j : Set.Ici i₀), i.val ≤ j.val ∧\n      ∃ (w : ∀ n : ℤ,\n        (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).obj (P.X n) ⟶\n          (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).obj (Q.X n)),\n        (∀ n : ℤ, a ≤ n → n ≤ b →\n          w n ≫ (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).map\n            (Q.d n (n + 1)) =\n          (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).map\n            (P.d n (n + 1)) ≫ w (n + 1)) ∧\n        (∀ n : ℤ, (e j P).hom.f n ≫\n          (ModuleCat.extendScalars (colimit.ι F j.val).hom).map (w n) ≫\n            (e j Q).inv.f n =\n          (e i P).hom.f n ≫\n            (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n              (e i Q).inv.f n)",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

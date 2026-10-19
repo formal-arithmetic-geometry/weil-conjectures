@@ -35,7 +35,7 @@ import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
@@ -50,7 +50,6 @@ import Sheaf.AlgebraicGeometry.EtaleGeometricFibreCompactSections
 import Sheaf.Paper.ProperOpenTowerDerivedUnit
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Quasi-finite compact support is exact

@@ -11,7 +11,7 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import Sheaf.AlgebraicGeometry.PinnedStalkTensor
 import Sheaf.AlgebraicGeometry.ModulePinnedTensorStalkSquare
 import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Stalk compatibility of a specified tensor pullback chain map

@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat

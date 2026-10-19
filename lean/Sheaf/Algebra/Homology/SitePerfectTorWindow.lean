@@ -18,7 +18,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
@@ -26,7 +26,6 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatFinitePresentationRetract
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.SiteTorIntervalRestriction
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!

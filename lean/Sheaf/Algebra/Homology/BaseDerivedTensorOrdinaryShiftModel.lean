@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.BaseDerivedTensorCounitShiftSquare
 
 /-! # Transport of the ordinary derived tensor comparison

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Mathlib.Topology.Sheaves.Sheafify
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 

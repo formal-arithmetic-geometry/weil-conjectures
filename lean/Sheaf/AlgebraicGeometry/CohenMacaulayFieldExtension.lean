@@ -24,14 +24,13 @@ import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion
 import WeilConjectures.RingTheory.FlatLocalizedModuleBaseChange
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Cohen-Macaulay loci under extension of fields and base change
 

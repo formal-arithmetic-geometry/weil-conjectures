@@ -2,7 +2,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Stalks of a commuting square of open-restricted module morphisms
 

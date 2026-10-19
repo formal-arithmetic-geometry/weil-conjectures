@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Paper.ModuleCupGodementTensorCoordinates
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 
 @[expose] public section
 universe u

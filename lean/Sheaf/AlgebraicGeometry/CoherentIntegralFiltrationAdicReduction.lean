@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme

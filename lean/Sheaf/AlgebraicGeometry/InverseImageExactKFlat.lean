@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Topology.InverseImageModule
+public import WeilConjectures.Topology.InverseImageModule
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
 

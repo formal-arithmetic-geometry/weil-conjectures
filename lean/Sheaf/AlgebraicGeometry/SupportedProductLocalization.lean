@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.InverseImageModule
+import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.AlgebraicGeometry.Picard.Defs

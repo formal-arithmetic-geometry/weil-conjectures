@@ -21,7 +21,7 @@ import Sheaf.Paper.FiniteDiscreteCondensedRing
 import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.CoefficientRingedTensorHomModel

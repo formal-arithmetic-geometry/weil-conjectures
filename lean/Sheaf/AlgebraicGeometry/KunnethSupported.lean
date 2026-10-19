@@ -24,7 +24,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Topology.InverseImageModule
+public import WeilConjectures.Topology.InverseImageModule
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs

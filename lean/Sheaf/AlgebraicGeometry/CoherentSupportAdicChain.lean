@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 import Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence

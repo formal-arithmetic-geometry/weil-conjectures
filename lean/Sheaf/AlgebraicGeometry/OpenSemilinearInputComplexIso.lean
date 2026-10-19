@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Semilinear input stalk coordinates for an open subscheme

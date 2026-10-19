@@ -6,7 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 @[expose] public section
 

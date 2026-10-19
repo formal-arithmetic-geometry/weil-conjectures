@@ -16,7 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.TruncationTriangle
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
-public import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import Sheaf.AlgebraicGeometry.GeometricStalkColimits
 
 /-!

@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Module.FinitePresentation
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

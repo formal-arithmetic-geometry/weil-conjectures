@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Concrete tensor pullback on modules of a ringed space

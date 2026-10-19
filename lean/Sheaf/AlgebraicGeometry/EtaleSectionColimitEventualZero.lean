@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Eventual vanishing in filtered etale sheaf colimits

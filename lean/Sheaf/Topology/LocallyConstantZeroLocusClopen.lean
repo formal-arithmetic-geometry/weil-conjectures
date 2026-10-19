@@ -8,7 +8,6 @@ module
 public import Sheaf.Topology.AbelianOpenExtensionByZero
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Stalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!

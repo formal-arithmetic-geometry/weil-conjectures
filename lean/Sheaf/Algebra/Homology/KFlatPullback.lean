@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Topology.InverseImageModule
+public import WeilConjectures.Topology.InverseImageModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.Algebra.Homology.KFlatStalkCriterion

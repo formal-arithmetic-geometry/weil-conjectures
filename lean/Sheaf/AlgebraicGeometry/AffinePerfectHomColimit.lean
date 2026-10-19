@@ -15,8 +15,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Sheaf.Algebra.Homology.AffinePerfectChainMapDescent
-import Sheaf.Algebra.Homology.AffinePerfectHomotopyDescent
+import WeilConjectures.Algebra.Homology.AffinePerfectChainMapDescent
+import WeilConjectures.Algebra.Homology.AffinePerfectHomotopyDescent
 
 /-! # Affine full faithfulness for perfect complexes over a filtered colimit
 

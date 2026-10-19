@@ -5,9 +5,9 @@ Authors: SHEAF group K2
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.Topology.PresheafModuleStalkFunctor
-public import Sheaf.Topology.InverseImageModule
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Topology.Sheaves.Sheafify
 
 /-!

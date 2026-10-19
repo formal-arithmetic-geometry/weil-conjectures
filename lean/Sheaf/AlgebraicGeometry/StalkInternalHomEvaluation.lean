@@ -8,7 +8,7 @@ module
 public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-!
 # Evaluation of internal Hom on stalks

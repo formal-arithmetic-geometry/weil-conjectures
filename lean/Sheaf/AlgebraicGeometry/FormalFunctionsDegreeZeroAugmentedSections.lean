@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Canonical theta on augmented sections
 

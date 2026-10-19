@@ -33,7 +33,7 @@ import Sheaf.Paper.LisseTensorScalarExtension
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import WeilConjectures.Mathlib.Topology.NoetherianSpace

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor
 import Sheaf.AlgebraicGeometry.RelativeTensorPullbackComplexComparison
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # The relative tensor comparison on K-flat representatives
 

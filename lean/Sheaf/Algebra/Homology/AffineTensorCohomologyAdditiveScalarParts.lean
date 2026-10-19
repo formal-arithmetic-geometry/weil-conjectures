@@ -3,7 +3,7 @@ module
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
 /-! Intermediate additivity part of affine tensor cohomology. -/

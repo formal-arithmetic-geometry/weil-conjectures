@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

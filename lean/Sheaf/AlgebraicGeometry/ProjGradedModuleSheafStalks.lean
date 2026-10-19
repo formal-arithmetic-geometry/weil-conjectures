@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 import Mathlib.Topology.Sheaves.Stalks

@@ -8,7 +8,7 @@ module
 public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
 import Sheaf.AlgebraicGeometry.FinitePresentationStalkOfLocalPresentation

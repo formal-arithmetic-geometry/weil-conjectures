@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 
 /-! # The module tensor pullback square on stalks

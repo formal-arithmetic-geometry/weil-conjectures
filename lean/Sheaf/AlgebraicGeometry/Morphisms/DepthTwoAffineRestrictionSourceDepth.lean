@@ -20,7 +20,7 @@ import Mathlib.Algebra.Module.LocalizedModule.Exact
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Affine comparison for the restriction source
 

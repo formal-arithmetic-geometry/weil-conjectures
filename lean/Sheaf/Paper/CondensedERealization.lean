@@ -33,7 +33,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
@@ -82,7 +82,6 @@ import Sheaf.Paper.ContinuousIntegralLocalizationContinuity
 import Sheaf.Paper.ContinuousModuleEncodingScalarExtension
 import Sheaf.Paper.FiniteModelStratumFiltration
 import Sheaf.Paper.PbcQbarCompletedPullback
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import WeilConjectures.ConstructibleSheaf.Pullback
 

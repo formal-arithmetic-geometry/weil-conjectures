@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.AffineTensorCohomologyLifts
 import Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos
 

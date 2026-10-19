@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import Sheaf.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComparisons

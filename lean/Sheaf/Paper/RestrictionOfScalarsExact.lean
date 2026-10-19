@@ -9,7 +9,7 @@ public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Exactness of restriction from finite to completed integral coefficients

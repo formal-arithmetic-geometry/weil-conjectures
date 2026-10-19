@@ -14,7 +14,7 @@ import Sheaf.Algebra.Homology.HomComplexUnitEvaluationComm
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # The dual of the free coefficient telescope

@@ -10,7 +10,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import WeilConjectures.Topology.ConstantSheafLocallyConstantComparison
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.Topology.ConstantSubsheafNormalizedCore
 
 /-! # ConstantSubsheafNormalizedPresentation

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewiseEquation
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomTensorPair
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomCoproduct
 import Sheaf.Algebra.Homology.HomComplexProjections
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
-public import Sheaf.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Topology.BasisSheafCofinalCoverings
 import WeilConjectures.Topology.SheafOnBasisExtends

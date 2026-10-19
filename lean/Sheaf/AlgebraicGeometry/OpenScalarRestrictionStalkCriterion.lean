@@ -6,10 +6,10 @@ Authors: SHEAF group C3
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Sheaf.Algebra.Homology.OpenRestrictionTensorNatural

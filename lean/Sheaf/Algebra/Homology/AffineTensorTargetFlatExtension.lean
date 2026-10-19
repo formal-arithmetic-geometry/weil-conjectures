@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.TensorProduct.Basic
 
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 

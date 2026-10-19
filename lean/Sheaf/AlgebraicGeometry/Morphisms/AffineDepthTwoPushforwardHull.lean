@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison
 import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison

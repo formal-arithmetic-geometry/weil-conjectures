@@ -10,9 +10,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.RelativeFlatOpenScalarRestriction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedTensorRetractFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedTensorRetractFlat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Relative flatness of local tensor terms
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns

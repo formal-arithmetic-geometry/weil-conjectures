@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.SupportedOpenTensorDirectImageComparisons
 import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
-import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.Data.Int.Interval
 import Sheaf.AlgebraicGeometry.OpenDerivedCategorySmall

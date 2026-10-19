@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Homology.RingTensorCohomology
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelMap
-import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 import Sheaf.Algebra.Homology.FlatScalarExtensionHomologyAdjunct
 
 /-! # Realization of prescribed tensor cohomology on a K-flat resolution

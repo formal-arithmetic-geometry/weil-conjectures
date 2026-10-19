@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import Sheaf.Algebra.Homology.ModuleRestrictionStalkComponents
 import Sheaf.Algebra.Homology.ModuleRestrictionStalkNaturality

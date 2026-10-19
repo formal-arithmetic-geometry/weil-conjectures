@@ -19,12 +19,11 @@ import Sheaf.AlgebraicGeometry.SheafExtStalkLocalization
 import Sheaf.Paper.SupportDimensionCohomologyVanishing
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
 import Sheaf.RingTheory.RegularLocalExtVanishing
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Support-dimension vanishing for sheaf Ext

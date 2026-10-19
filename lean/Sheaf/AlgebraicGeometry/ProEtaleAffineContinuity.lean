@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison

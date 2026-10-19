@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounitIso
-public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Open restriction compatibility of the tensor pullback unit
 

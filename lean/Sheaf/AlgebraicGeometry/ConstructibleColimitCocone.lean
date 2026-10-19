@@ -7,7 +7,7 @@ import Mathlib.CategoryTheory.Generator.Basic
 import Sheaf.AlgebraicGeometry.ConstructibleSheafGeneration
 import Sheaf.AlgebraicGeometry.ConstructibleColimitFactorization
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 @[expose] public section
