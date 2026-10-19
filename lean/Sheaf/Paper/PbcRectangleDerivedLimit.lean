@@ -6,9 +6,7 @@ Authors: SHEAF group Q16
 module
 
 public import Sheaf.Paper.PbcRoosTriangle
-public import Sheaf.Paper.SequentialDerivedInverseLimitFunctor
-import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.Paper.CompletedTowerCompatibility
+public import Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # The proper base change rectangle after sequential derived inverse limit
@@ -99,6 +97,30 @@ theorem pbcRectangleDerivedLimit
             ((pbcDerivedEvaluation T d).map v).app (op n) ≫
             ((pbcDerivedEvaluation T d).map h').app (op n) =
           (F.map v ≫ F.map h') ≫ pbcRoosProjection T d F p D n) := by
-  sorry
+  have hprojection {M N : DerivedCategory (Scheme.CompletedAdicTowers T d)}
+      (f : M ⟶ N) (n : ℕ) :
+      F.map f ≫ pbcRoosProjection T d F p N n =
+        pbcRoosProjection T d F p M n ≫
+          ((pbcDerivedEvaluation T d).map f).app (op n) := by
+    simpa only [pbcRoosProjection, pbcTowerProduct, Category.assoc, Pi.map_π] using
+      congrArg (fun k ↦ k ≫
+        Pi.π (fun k : ℕ ↦ ((pbcDerivedEvaluation T d).obj N).obj (op k)) n)
+        (p.naturality f)
+  constructor
+  · simpa only [Functor.map_comp] using congrArg F.map hrectangle
+  · intro n
+    have heval :
+        ((pbcDerivedEvaluation T d).map h).app (op n) ≫
+            ((pbcDerivedEvaluation T d).map v').app (op n) =
+          ((pbcDerivedEvaluation T d).map v).app (op n) ≫
+            ((pbcDerivedEvaluation T d).map h').app (op n) := by
+      simpa only [Functor.map_comp, NatTrans.comp_app] using
+        congrArg (fun f ↦ ((pbcDerivedEvaluation T d).map f).app (op n)) hrectangle
+    refine ⟨?_, ?_, ?_⟩
+    · simpa only [Functor.map_comp, NatTrans.comp_app, Category.assoc] using
+        hprojection (h ≫ v') n
+    · exact congrArg (fun f ↦ pbcRoosProjection T d F p A n ≫ f) heval
+    · simpa only [Functor.map_comp, NatTrans.comp_app, Category.assoc] using
+        (hprojection (v ≫ h') n).symm
 
 end AlgebraicGeometry.ProEtale
