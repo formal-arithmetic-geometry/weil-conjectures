@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived
 
+import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
+
 /-!
 # Forgetting a two-step filtration
 
@@ -38,7 +40,7 @@ ordinary derived localization identifies its endpoint maps. -/
 theorem twoStepTotal_homotopy (K L : TwoStepModuleComplex R) (f g : K ⟶ L)
     (h : twoStepModuleHomotopyRel R f g) :
     (twoStepTotalComplex R).map f = (twoStepTotalComplex R).map g := by
-  sorry
+  exact DerivedCategory.Q_map_eq_of_homotopy (ModuleCat R) h.choose
 
 /-- Forgetting filtration descended through the filtered chain-homotopy quotient.
 Source: Stacks, Tag 03TB (blueprint: def-trf-two-step-filtered-total). -/
@@ -55,7 +57,28 @@ The five lemma makes its total cohomology maps invertible in every degree. Thus 
 image under ordinary derived localization is invertible; descend to homotopy classes. -/
 theorem twoStepTotal_inverts :
     (twoStepModuleQuasiIso R).IsInvertedBy (twoStepTotalHomotopy R) := by
-  sorry
+  intro K L q hq
+  obtain ⟨f, rfl, hf⟩ := hq
+  change IsIso (DerivedCategory.Q.map f.hom.right)
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
+  have hK : Mono K.as.obj.hom := K.as.property
+  have hL : Mono L.as.obj.hom := L.as.property
+  let S : ShortComplex (CochainComplex (ModuleCat R) ℤ) :=
+    ShortComplex.mk K.as.obj.hom (cokernel.π _) (cokernel.condition _)
+  let T : ShortComplex (CochainComplex (ModuleCat R) ℤ) :=
+    ShortComplex.mk L.as.obj.hom (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact :=
+    { exact := ShortComplex.exact_cokernel K.as.obj.hom }
+  have hT : T.ShortExact :=
+    { exact := ShortComplex.exact_cokernel L.as.obj.hom }
+  let φ : S ⟶ T :=
+    { τ₁ := f.hom.left
+      τ₂ := f.hom.right
+      τ₃ := (coker _).map f.hom
+      comm₁₂ := f.hom.w
+      comm₂₃ := (coker.π (C := CochainComplex (ModuleCat R) ℤ)).naturality f.hom }
+  exact HomologicalComplex.HomologySequence.quasiIso_τ₂ φ hS hT
+    (hf true) (hf false)
 
 /-- The canonical total-object functor on the two-step filtered derived category.
 It is the localization lift of forgetting the filtration, so its chain normalization
@@ -66,3 +89,4 @@ noncomputable def twoStepTotal :
   Localization.Construction.lift (twoStepTotalHomotopy R) (twoStepTotal_inverts R)
 
 end CochainComplex
+
