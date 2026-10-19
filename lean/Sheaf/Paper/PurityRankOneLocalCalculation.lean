@@ -4,29 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.PurityAffineLineDatum
-public import Sheaf.AlgebraicGeometry.SupportLongExact
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyConventions
-public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
-public import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedCocycleComparison
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
-public import Mathlib.Algebra.Homology.HomologySequence
+public import Sheaf.Paper.PurityRankOneSectionData
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
-
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
-import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.AlgebraicGeometry.KummerAffineLine
-import Sheaf.AlgebraicGeometry.SupportComparisonBoundary
-import Sheaf.AlgebraicGeometry.SupportSiteComparison
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Sheaf.Paper.PurityRankOneEtaleCalculation
+import Sheaf.Paper.PurityAcyclicPairSupportComparison
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # The finite rank-one Kummer residue
@@ -42,6 +24,7 @@ sections retain the coefficient action, so the normalization and its uniqueness 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency true
 
 universe u
 
@@ -49,144 +32,43 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting.RankOne
 
-/-- Evaluation on a site object, the section functor used in the support definition.
-Source: blueprint proof Step 4 (blueprint: thm-pur-rank-one-local-calculation). -/
-abbrev sections {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (A : Type (u + 1)) [CommRing A] (W : C) :=
-  sheafToPresheaf J (ModuleCat.{u + 1} A) ⋙ (evaluation _ _).obj (op W)
+private theorem normalized_iso_unique {A : Type (u + 1)} [CommRing A]
+    {H : ModuleCat.{u + 1} A} (e : H ≅ ModuleCat.of A A) (x : H)
+    (hx : e.hom x = 1) (r : H ≅ ModuleCat.of A A) (hr : r.hom x = 1) : r = e := by
+  apply Iso.ext
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro y
+  have hy : y = (e.hom y) • x := by
+    apply (ConcreteCategory.bijective_of_isIso e.hom).1
+    simp [hx]
+  rw [hy]
+  simp [hx, hr]
 
-/-- The recorded open immersion is the inclusion of its basic open.
-Source: blueprint affine-line datum (blueprint: thm-pur-rank-one-local-calculation). -/
-instance openImmersion_isOpenImmersion (Y : Scheme.{u}) :
-    IsOpenImmersion (openImmersion Y) :=
-  inferInstanceAs (IsOpenImmersion (((Line Y).basicOpen (coordinate Y)).ι))
+private theorem polynomial_value_one (Ω : Type u) [Field Ω]
+    (a : Polynomial Ω) (ha : a.eval 0 ≠ 0) :
+    (Polynomial.idealX Ω).intValuation a = 1 := by
+  apply IsDedekindDomain.HeightOneSpectrum.intValuation_eq_one_iff.mpr
+  change a ∉ Ideal.span {Polynomial.X}
+  simpa [Ideal.mem_span_singleton, Polynomial.X_dvd_iff,
+    Polynomial.coeff_zero_eq_eval_zero] using ha
 
-/-- The standard punctured-line object of the small etale site.
-Source: blueprint proof Step 1 (blueprint: thm-pur-rank-one-local-calculation). -/
-def openObject (Y : Scheme.{u}) : (Line Y).Etale :=
-  Scheme.Etale.mk (openImmersion Y)
+private theorem quotient_value_one (Ω : Type u) [Field Ω]
+    (a b : Polynomial Ω) (ha : a.eval 0 ≠ 0) (hb : b.eval 0 ≠ 0) :
+    (Polynomial.idealX Ω).valuation (RatFunc Ω) (RatFunc.mk a b) = 1 := by
+  have hb0 : b ≠ 0 := by intro h; simp [h] at hb
+  rw [Polynomial.valuation_of_mk (K := Ω) a hb0, polynomial_value_one Ω a ha,
+    polynomial_value_one Ω b hb, div_self one_ne_zero]
 
-/-- Restriction from the affine line to its punctured open, whose complement is the origin.
-Source: blueprint proof Step 4 (blueprint: thm-pur-rank-one-local-calculation). -/
-def restriction (Y : Scheme.{u}) : openObject Y ⟶ Scheme.Etale.mk (𝟙 (Line Y)) :=
-  MorphismProperty.Over.homMk (openImmersion Y)
-    (by change openImmersion Y ≫ 𝟙 (Line Y) = openImmersion Y; simp)
-
-/-- The genuine inverse-image coefficient sheaf on the pro-etale site.
-Source: blueprint proof Step 7 (blueprint: thm-pur-rank-one-local-calculation). -/
-abbrev proCoefficient (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
-  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).obj F
-
-/-- The three complexes in the support sequence, with the actual kernel inclusion and
-restriction. Source: Milne, Section 9, Theorem 9.4; blueprint proof Step 4
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def sectionComplex {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (A : Type (u + 1)) [CommRing A] {V W : C} (j : W ⟶ V)
-    (I : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℕ) :
-    ShortComplex (CochainComplex (ModuleCat.{u + 1} A) ℕ) :=
-  ShortComplex.mk
-    ((NatTrans.mapHomologicalComplex
-      (Sheaf.supportedSectionsInclusion J (ModuleCat.{u + 1} A) j) (.up ℕ)).app I)
-    ((NatTrans.mapHomologicalComplex
-      ((sheafSections J (ModuleCat.{u + 1} A)).map j.op) (.up ℕ)).app I)
-    (by ext n : 1; exact kernel.condition ((I.X n).obj.map j.op))
-
-/-- A support boundary is exactly the snake boundary on injective section complexes,
-transported by the canonical resolution comparisons. This characterization rules out
-both an arbitrary isomorphism and an arbitrary choice of sign.
-Source: Milne, Section 9, Theorem 9.4; blueprint proof Step 4
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def IsBoundary {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
-    (A : Type (u + 1)) [CommRing A] [HasSheafify J (ModuleCat.{u + 1} A)]
-    [EnoughInjectives (Sheaf J (ModuleCat.{u + 1} A))]
-    {V W : C} (j : W ⟶ V) (F : Sheaf J (ModuleCat.{u + 1} A))
-    (δ : ((sections J A W).rightDerived 1).obj F ⟶
-      ((Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j).rightDerived 2).obj F) :
-    Prop :=
-  ∀ I : InjectiveResolution F, ∃ hI : (sectionComplex J A j I.cocomplex).ShortExact,
-    δ = (I.isoRightDerivedObj (sections J A W) 1).hom ≫
-      hI.δ 1 2 rfl ≫
-      (I.isoRightDerivedObj
-        (Sheaf.supportedSectionsFunctor J (ModuleCat.{u + 1} A) j) 2).inv
-
-/-- Free abelian sheafification represents sections, with its canonical Yoneda map.
-Source: Stacks 03F3; blueprint proof Step 2
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def evaluationRepresented (X : Scheme.{u}) (W : X.Etale) :
-    preadditiveCoyoneda.obj (op ((presheafToSheaf X.smallEtaleTopology
-      AddCommGrpCat.{u + 1}).obj (uliftYoneda.{u + 1}.obj W ⋙ AddCommGrpCat.free))) ≅
-      sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
-        (evaluation _ _).obj (op W) :=
-  NatIso.ofComponents
-    (fun F ↦ (EtaleOpenComparison.sectionsEquiv X.smallEtaleTopology W F).toAddCommGrpIso)
-    (by
-      intro F G f
-      ext a
-      exact (EtaleOpenComparison.sectionsEquiv_naturality X.smallEtaleTopology W f a).symm)
-
-/-- The Ext/derived-evaluation comparison normalized on every injective cocycle.
-The theorem used here determines the comparison uniquely, since every Ext class has
-an injective cocycle representative. No coefficient object is chosen from mere existence.
-Source: Stacks 06XR; blueprint proof Step 2
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def evaluationExt (X : Scheme.{u}) (W : X.Etale) (q : ℕ) :=
-  Classical.choose (CategoryTheory.exists_ext_rightDerived_cocycle_comparison
-    ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-      (uliftYoneda.{u + 1}.obj W ⋙ AddCommGrpCat.free))
-    (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
-      (evaluation _ _).obj (op W)) (evaluationRepresented X W)) q
-
-/-- The actual Kummer class over an etale object: precompose the Kummer extension
-with the section represented by the unit, then apply the specified coefficient map.
-The final inverse is the canonical module/abelian evaluation comparison.
-Source: Kummer sequence; blueprint proof Steps 2 and 4
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def kummerClass (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) (W : X.Etale)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (m : ℕ)
-    (hm : IsUnit (m : Γ(X, ⊤)))
-    (f : X.rootsOfUnitySheaf m ⟶ (Etale.moduleAbelianForget A X).obj F)
-    (v : Γ(W.left, ⊤)ˣ) : ((sections X.smallEtaleTopology A W).rightDerived 1).obj F := by
-  letI := (Etale.module_cohomology_conventions A X).2.1 F W 1
-  exact (asIso ((Etale.moduleEvaluationForgetComparison A X W 1).app F)).inv
-    ((evaluationExt X W 1).inv.app ((Etale.moduleAbelianForget A X).obj F)
-      (((Abelian.Ext.mk₀
-        ((EtaleOpenComparison.sectionsEquiv X.smallEtaleTopology W X.gmSheaf).symm
-          (ULift.up (Additive.ofMul v)))).comp
-            (X.kummerSequence_shortExact m hm).extClass (zero_add 1)).comp
-              (Abelian.Ext.mk₀ f) (add_zero 1)))
-
-/-- The section comparison is the actual unit of etale/pro-etale inverse image,
-evaluated at the same etale object. Source: blueprint proof Step 7
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def comparisonSections (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) (W : X.Etale) :
-    sections X.smallEtaleTopology A W ⋙ 𝟭 (ModuleCat.{u + 1} A) ⟶
-      ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X ⋙
-        sections (Scheme.ProEt.topology X) A ((Scheme.toProEt X).obj W) where
-  app F := ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X).unit.app F).hom.app
-    (op W)
-  naturality F G f := by
-    exact congrArg (fun t ↦ t.hom.app (op W))
-      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X).unit.naturality f)
-
-/-- The canonical higher section comparison, derived from the adjunction unit.
-Source: Stacks 099W; blueprint proof Step 7
-(blueprint: thm-pur-rank-one-local-calculation). -/
-def comparisonCohomology (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
-    (W : X.Etale) (q : ℕ) :=
-  Functor.rightDerivedBaseChange
-    (G := sections X.smallEtaleTopology A W)
-    (G' := sections (Scheme.ProEt.topology X) A ((Scheme.toProEt X).obj W))
-    (β := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X)
-    (γ := 𝟭 (ModuleCat.{u + 1} A)) (comparisonSections A X W) q
-
-/-- Pullback of a constant unit to the punctured affine line.
-Source: blueprint proof Step 5 (blueprint: thm-pur-rank-one-local-calculation). -/
-def constantUnit (Ω : Type u) [Field Ω] (c : Ωˣ) :
-    Γ(Punctured (Spec (CommRingCat.of Ω)), ⊤)ˣ :=
-  Units.map
-    (((puncturedProjection (Spec (CommRingCat.of Ω))).appTop.hom).comp
-      (Scheme.ΓSpecIso (CommRingCat.of Ω)).inv.hom).toMonoidHom c
+private theorem monomial_value (Ω : Type u) [Field Ω] (c : Ωˣ) (r : ℤ) :
+    (Polynomial.idealX Ω).valuation (RatFunc Ω)
+      (RatFunc.C (c : Ω) * (RatFunc.X : RatFunc Ω) ^ r) = WithZero.exp (-r) := by
+  have hc : (Polynomial.idealX Ω).valuation (RatFunc Ω) (RatFunc.C (c : Ω)) = 1 := by
+    rw [← RatFunc.algebraMap_C,
+      IsDedekindDomain.HeightOneSpectrum.valuation_of_algebraMap]
+    exact polynomial_value_one Ω _ (by simp)
+  rw [map_mul, hc, one_mul, map_zpow₀, Polynomial.valuation_X_eq_neg_one]
+  simp
 
 /-- Finite rank-one local purity, including the coefficient-linear normalization,
 residues, all other support degrees, and the actual comparison to the pro-etale site.
@@ -380,6 +262,58 @@ theorem rankOne_local_calculation (P : PurityFiniteSetting.{u})
               N : ℕ)) (Line (Spec (CommRingCat.of Ω))) hA 1) ((P.coefficients.l ^ N : ℕ)) hm f)
               (constantUnit Ω c * coordinateUnit (Spec (CommRingCat.of Ω)) ^ r)))) =
               r • (1 : (P.Coefficient))) := by
-  sorry
+  have _ := hy
+  let S := Spec (CommRingCat.of Ω)
+  let X := Line S
+  let F := Scheme.finiteEtaleTateSheaf P.Coefficient (P.coefficients.l ^ N) X hA 1
+  obtain ⟨hm, f, hf, e, he, hX, hU, hres, hunits, hmon⟩ :=
+    rankOne_etale_calculation P N hN hA Ω
+  have : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  let : Finite P.Coefficient := inferInstanceAs (Finite (ULift.{u + 1} P.Ring))
+  have : Mono (restriction S) := by
+    constructor
+    intro T g h hgh
+    apply MorphismProperty.Over.Hom.ext
+    exact (cancel_mono (openImmersion S)).mp
+      (congrArg (fun a ↦ a.left) hgh)
+  obtain ⟨δ, δp, hδ, hδp, hδiso, hδpiso, hc, c, hsquare, hz⟩ :=
+    acyclic_pair_support_comparison P.Coefficient X (openObject S) (restriction S) F hX hU hres
+  let := hδiso
+  let := hδpiso
+  let := hc
+  let cU := (comparisonCohomology P.Coefficient X (openObject S) 1).app F
+  let ρ := (asIso δ).symm ≪≫ e
+  let ρp := c.symm ≪≫ ρ
+  let k := kummerClass P.Coefficient X (openObject S) F (P.coefficients.l ^ N) hm f
+  have hnorm : ρ.hom (δ (k (coordinateUnit S))) = 1 := by
+    change e.hom ((asIso δ).inv (δ (k (coordinateUnit S)))) = 1
+    simpa using he
+  have htransport : cU ≫ δp ≫ ρp.hom = δ ≫ ρ.hom := by
+    rw [← Category.assoc, ← hsquare]
+    simp [ρp]
+  have hnormp : ρp.hom (δp (cU (k (coordinateUnit S)))) = 1 := by
+    have h := congrArg (fun g ↦ g (k (coordinateUnit S))) htransport
+    exact h.trans hnorm
+  refine ⟨hm, f, hf, δ, δp, hδ, hδp, hδiso, hδpiso, hc, ρ, ρp, c,
+    hnorm, hnormp, ?_, ?_, hsquare, ?_, ?_, hunits,
+    quotient_value_one Ω, ?_⟩
+  · intro r hr
+    exact normalized_iso_unique ρ _ hnorm r hr
+  · intro r hr
+    exact normalized_iso_unique ρp _ hnormp r hr
+  · simp [ρp]
+  · intro q hq
+    exact hz q hq
+  · intro a r
+    have hk := hmon a r
+    have hres : ρ.hom (δ (k (constantUnit Ω a * coordinateUnit S ^ r))) =
+        r • (1 : P.Coefficient) := by
+      change ρ.hom (δ (kummerClass _ _ _ _ _ _ _ _)) = _
+      rw [hk]
+      simpa using congrArg (fun x ↦ r • x) hnorm
+    refine ⟨monomial_value Ω a r, hres, ?_⟩
+    have h := congrArg (fun g ↦ g (k (constantUnit Ω a * coordinateUnit S ^ r))) htransport
+    exact h.trans hres
 
 end WeilConjectures.PurityFiniteSetting.RankOne

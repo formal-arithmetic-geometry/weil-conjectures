@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-kummer-twist-right-exact",
+ "kind": "statement",
+ "title": "Finite-colimit preservation by the actual Kummer twist",
+ "statement": "For a scheme X and integer m, the actual coefficient functor kummerModuleTwist X m, formed by sectionwise tensoring mu_m with a constant ULift(Z/m)-module and sheafifying, preserves finite colimits. No flatness or freeness hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+  "place": "Coefficients; Stacks Project Tag 03EK, tensor product and sheafification."
+ },
+ "stmt_deps": [
+  "def-pur-kummer-module-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "For each site object U, evaluating tensorLeft of the root module presheaf is definitionally evaluation followed by tensorLeft of the root module at U. The latter preserves colimits because the module category is monoidal closed. The pointwise criterion preservesColimits_of_evaluation gives colimit preservation by tensorLeft of the presheaf. The actual kummerModuleTwist is the composite of the constant-presheaf functor, that tensorLeft, and sheafification. Each preserves colimits, so the composite preserves finite colimits.",
+   "uses": [
+    "def-pur-kummer-module-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kummer-module-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/_section.md",
+  "place": "Coefficients; Stacks Project Tag 03EK, tensor product and sheafification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensoring a presheaf of modules and sheafifying preserves finite colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [J.WEqualsLocallyBijective AddCommGrpCat] (K : Type w) [inst_3 : CategoryTheory.Category.{w', w} K]\\n  [Cat\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"PresheafOfModules.Finite.hasFiniteColimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat),\\n  CategoryTheory.Limits.HasFiniteColimits (PresheafOfModules R)\", \"doc\": \"For any presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, the category of presheaves of modules over $ R $ has all finite colimits. This means that every finite diagram in this category admits a \"}\n  {\"name\": \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [J.WEqualsLocallyBijective AddCommGrpCat]\\n  [CategoryTheory.Limits.HasColimitsOfSize.{w', w, max u' v, max\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The composition of the sheafification functor for presheaves of modules over a presheaf of rings and the forgetful functor from sheaves of modules to sheaves of abelian groups preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.isColimitFreeCofan\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given an index type $ I $, the cocone formed by the $ I $-indexed copies of the unit sheaf (assigning to each object $ X $ the free $ R(X) $-module over itself) has a colimit. This colimit is establis\"}\n  {\"name\": \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [inst_3 : J.W.IsMonoidal] →\\n           \", \"doc\": \"The sheafification functor from the opposite category of presheaves to sheaves on a site (a category equipped with a Grothendieck topology $J$) is a monoidal functor. This means it preserves the monoi\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"module\": \"Mathlib/CategoryTheory/Sites/Limits\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}\\n  [inst_1 : CategoryTheory.Category.{w', w} D] [CategoryTheory.HasWeakSheafify J D]\\n  [CategoryTheory.Limits.HasFiniteColimits D], CategoryTheory.Limits.HasFiniteColimits (CategoryTheory\", \"doc\": \"If $ \\\\mathcal{D} $ is a category with finite colimits, then the category of sheaves on a category equipped with a Grothendieck topology $ J $, taking values in $ \\\\mathcal{D} $, also has finite colimit\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Use the pointwise colimit criterion and the module monoidal closed structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "preservesColimits_of_evaluation",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'preservesColimits_of_evaluation'\n",
+   "date": "2026-10-20",
+   "verdict": "Use the pointwise colimit criterion and the module monoidal closed structure."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimits_const|PreservesColimits.*tensorLeft",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"238\", \"text\": \"    PreservesColimitsOfSize.{u, u} (tensorLeft F) where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean\", \"line\": \"245\", \"text\": \"  preservesColimits_of_natIso (tensorLeftIsoTensorRight F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"75\", \"text\": \"    PreservesColimitsOfShape (Discrete WalkingPair) (tensorLeft X) := by infer_instance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Distributive/Monoidal.lean\", \"line\": \"229\", \"text\": \"    preservesColimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight X)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"line\": \"35\", \"text\": \"variable [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"line\": \"197\", \"text\": \"variable [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"line\": \"323\", \"text\": \"variable [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"line\": \"351\", \"text\": \"variable [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Bimod.lean\", \"line\": \"441\", \"text\": \"variable [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean\", \"line\": \"466\", \"text\": \"instance preservesColimits_const : PreservesColimitsOfSize.{w', w} (const D : C ⥤ _) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean\", \"line\": \"123\", \"text\": \"    Limits.PreservesColimitsOfShape (CostructuredArrow (tensor C) d) (tensorLeft v)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\", \"line\": \"51\", \"text\": \"    haveI : ∀ X : Type v₁, PreservesColimits (tensorLeft X) := by infer_instance\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\", \"line\": \"52\", \"text\": \"    letI : PreservesColimits (tensorLeft F) := ⟨by infer_instance⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\", \"line\": \"53\", \"text\": \"    have := Presheaf.isLeftAdjoint_of_preservesColimits.{v₁} (tensorLeft F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"line\": \"137\", \"text\": \"instance : PreservesColimits (tensorLeft A) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean\", \"line\": \"104\", \"text\": \"    [Limits.PreservesColimitsOfShape (CostructuredArrow L d) (tensorLeft <| K.obj e)] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean\", \"line\": \"140\", \"text\": \"      Limits.PreservesColimitsOfShape (CostructuredArrow L d) (tensorLeft <| K.obj e)]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"line\": \"148\", \"text\": \"    [∀ X : C, PreservesColimitsOfShape K (tensorLeft X)] {F : J ⥤ C} :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"line\": \"149\", \"text\": \"    PreservesColimitsOfShape K (tensorLeft F) := by\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Use the pointwise colimit criterion and the module monoidal closed structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafifying the tensor of a roots of unity module presheaf with constant modules preserves finite colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.sheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": PresheafOfModules.{v} R₀ ⥤ SheafOfModules.{v} R\", \"doc\": \"The functor that maps each presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ to its sheafification as a sheaf of modules over \"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"[PreservesLimits (forget D)] [∀ X : C, Small.{t, max u v} (J.Cover X)ᵒᵖ] [HasFiniteLimits D] :\\n  PreservesFiniteLimits (plusPlusSheaf J D)\", \"doc\": \"The sheafification functor from presheaves to sheaves with respect to a Grothendieck topology preserves finite limits, provided the target category has finite limits and the cover categories are small\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (sheafifyCocone E)\", \"doc\": \"Let $F : \\\\mathcal{K} \\\\to \\\\text{Sh}(J, \\\\mathcal{D})$ be a functor representing a diagram of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{D}$. Let $E$ be a cocone for the dia\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"module\": \"Mathlib.CategoryTheory.Sites.LeftExact\", \"type\": \"[HasFiniteLimits D] [PreservesFiniteLimits (forget D)] [(forget D).ReflectsIsomorphisms] :\\n  PreservesFiniteLimits (J.sheafification D)\", \"doc\": \"Given a category $\\\\mathcal{D}$ with finite limits, a forgetful functor $\\\\mathcal{D} \\\\to \\\\text{Type}$ that preserves and reflects finite limits, and a Grothendieck topology $J$, the sheafification func\"}\n  {\"name\": \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": PreservesFiniteLimits (sheafification.{v} α)\", \"doc\": \"The sheafification functor for presheaves of modules over a presheaf of rings preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.isSheaf_pointwiseColimit\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits\", \"type\": \"[PreservesFiniteProducts (colim (J := J) (C := A))] (G : J ⥤ Sheaf (extensiveTopology C) A) :\\n  Presheaf.IsSheaf (extensiveTopology C) (pointwiseCocone (G ⋙ sheafToPresheaf _ A)).pt\", \"doc\": \"If the colimit functor for diagrams of shape $\\\\mathcal{J}$ in category $\\\\mathcal{A}$ preserves finite products, then the pointwise colimit of a diagram of sheaves on $\\\\mathcal{C}$ (with respect to the\"}\n",
+   "date": "2026-10-20",
+   "verdict": "General sheafification and colimit APIs found; prove the specific actual Kummer functor by composition."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityKummerTwistRightExact",
+  "file": "lean/Sheaf/Paper/PurityKummerTwistRightExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.kummerModuleTwist_preservesFiniteColimits",
+  "statement": "theorem kummerModuleTwist_preservesFiniteColimits (X : Scheme.{u}) (m : ℕ) :\n    PreservesFiniteColimits (kummerModuleTwist X m)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}

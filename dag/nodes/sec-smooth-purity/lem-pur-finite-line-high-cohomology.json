@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-finite-line-high-cohomology",
+ "kind": "statement",
+ "title": "Higher torsion cohomology on the affine and punctured lines",
+ "statement": "Let Ω be algebraically closed, A a commutative ring annihilated by a positive integer n, and F any A-module sheaf on X=A1_Ω. For q≥2, derived evaluation at X and at U=D(t) is zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+  "place": "Steps 1--3, higher-degree vanishing; Milne Section 15; affine-curve cohomological dimension (Stacks 03SC)."
+ },
+ "stmt_deps": [
+  "def-pur-rank-one-section-data"
+ ],
+ "proof": [
+  {
+   "text": "The affine-space dimension formula over Spec Ω shows that the line has dimension one. Its coordinate basic open is affine and has dimension at most one by the open embedding. Both structure maps are curves. Every section of the abelian sheaf underlying an A-module sheaf is killed by n, and restriction has the same property. Apply the proved general affine-curve version of lem-sc-affine-cohomological-dimension, IsCurve.subsingleton_sheafH_of_two_le_of_isAffine, on both curves. Transfer to module-valued derived evaluation using the module-forgetful comparison, evaluation/Ext comparison and open-site cohomology equivalence.",
+   "uses": [
+    "lem-sc-affine-cohomological-dimension",
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-sc-ext-right-derived-cocycle-comparison",
+    "det-pbc-conventions-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-cohomological-dimension",
+  "def-weil-pbc-etale-open-comparison-data",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "det-pbc-conventions-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+  "place": "Steps 1--3, higher-degree vanishing; Milne Section 15; affine-curve cohomological dimension (Stacks 03SC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology of an affine curve with torsion coefficients vanishes in degrees at least two",
+   "results": "Eight unrelated cotangent cohomology or singular homology results; no matching etale theorem.",
+   "date": "2026-10-20",
+   "verdict": "Use the proved upstream affine-curve cohomological-dimension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, IsOpenEmbedding",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'IsOpenEmbedding'\n",
+   "date": "2026-10-20",
+   "verdict": "Use the existing upstream affine-curve theorem and affine-space dimension formula."
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_sheafH_of_two_le_of_isAffine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "Use the existing upstream affine-curve theorem and affine-space dimension formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine curve over algebraically closed field has zero torsion sheaf cohomology in degrees at least two",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \"(n : ℕ) : Type w'\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[h : IsLocallyArtinian X] [IsAffine X] : IsArtinianRing Γ(X, ⊤)\", \"doc\": \"For any affine scheme $X$ that is locally Artinian, the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an Artinian ring.\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [_root_.IsReduced Γ(X, ⊤)] : IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsAffine Y] : f.ker = ofIdealTop (RingHom.ker f.appTop.hom)\", \"doc\": \"For schemes $X$ and $Y$ with $Y$ affine, and a morphism $f : X \\\\to Y$, the kernel sheaf $\\\\ker(f)$ equals the ideal sheaf constructed from the kernel of the ring homomorphism $f^\\\\sharp : \\\\Gamma(Y, \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ i, IsAffine (D.obj i)] (i : I) (s : Γ(D.obj i, ⊤)) (hs : (c.π.app i).appTop s = 0) :\\n  ∃ (j : I) (f : j ⟶ i), (D.map f).appTop s = 0\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) (i : X.affineCover.I₀) : IsAffine (X.affineCover.X i)\", \"doc\": \"For any scheme $X$ and any index $i$ in the zeroth component of its affine open cover, the corresponding open subscheme $X.\\\\text{affineCover}.X(i)$ is affine.\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No exact statement found; retain the stated source-library route and the proved helper argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityFiniteLineHighCohomology",
+  "file": "lean/Sheaf/Paper/PurityFiniteLineHighCohomology.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.finite_line_high_cohomology",
+  "statement": "theorem finite_line_high_cohomology (A : Type (u + 1)) [CommRing A]\n    (n : ℕ) (hn : 0 < n) (hA : (n : A) = 0)\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology\n      (ModuleCat.{u + 1} A)) (q : ℕ) (hq : 2 ≤ q) :\n    IsZero (((sections (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology A\n      (Scheme.Etale.mk (𝟙 (Line (Spec (CommRingCat.of Ω)))))).rightDerived q).obj F) ∧\n    IsZero (((sections (Line (Spec (CommRingCat.of Ω))).smallEtaleTopology A\n      (openObject (Spec (CommRingCat.of Ω)))).rightDerived q).obj F)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}

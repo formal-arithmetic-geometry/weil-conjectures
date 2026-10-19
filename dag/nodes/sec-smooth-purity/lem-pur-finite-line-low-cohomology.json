@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-finite-line-low-cohomology",
+ "kind": "statement",
+ "title": "Low-degree finite-module Kummer cohomology of the two geometric lines",
+ "statement": "Let Ω be algebraically closed, A a finite commutative ring, ell a prime invertible in Ω, N≥1 and ell^N A=0. On X=A1_Ω and U=D(t), let F=mu_(ell^N) tensor A with the canonical coefficient map. H1(U,F) is A-linearly isomorphic to A, carrying the actual Kummer class of t to 1. H1(X,F)=0. No freeness of A over Z/ell^N is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+  "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16."
+ },
+ "stmt_deps": [
+  "def-pur-rank-one-section-data",
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Transport the free rank-one R=ULift(Z/ell^N) computation on polynomial and Laurent spectra to the actual affine line and coordinate open, using the canonical scheme isomorphisms, open cohomology equivalence and normalized Ext/evaluation comparison. These preserve the Kummer extension and coefficient insertion. Thus H1 of the affine line with coefficient R is zero and tau_R:R→H1(U,R(1)), a↦a*kappa(t), is an isomorphism.",
+   "uses": [
+    "thm-pur-kummer-affine-line",
+    "lem-sc-primitive-root",
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-sc-ext-right-derived-cocycle-comparison",
+    "det-pbc-conventions-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For either line object let G(M)=H1(mu_(ell^N) tensor the constant R-module M). The proved kummerModuleTwist_preservesFiniteColimits applies directly to the actual coefficient twist. The proved rightDerived_preservesFiniteColimits_of_succ_isZero, with H2 vanishing for every coefficient sheaf from finite_line_high_cohomology, shows that H1 on R-module sheaves preserves finite colimits. Consequently G preserves finite colimits. The coefficient insertion tau_M(a) is additive and natural by its pure-tensor formula. The proved coefficient-generator theorem works directly with the natural transformation from underlying additive groups to G, so no extra linear structure on the cohomology functor is required for the finite-presentation step.",
+   "uses": [
+    "lem-pur-finite-line-high-cohomology",
+    "def-pur-kummer-module-coefficients",
+    "lem-pur-top-derived-right-exact",
+    "lem-pur-kummer-coefficient-generator",
+    "lem-pur-kummer-twist-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved kummer_coefficient_generator_bijective to the actual Kummer class on the punctured line, with the rank-one computation and finite-colimit preservation from steps 1 and 2. This includes the insertion maps, their additivity and naturality, and the finite free presentation argument. For affine-line H1, apply the finite-module criterion to the transformation from the zero functor, whose rank-one component is invertible by vanishing.",
+   "uses": [
+    "lem-pur-kummer-coefficient-generator",
+    "lem-pur-finite-module-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the underlying R-module of A. The explicit scalar-extension/tensor comparison identifies its twist with the abelian sheaf underlying the actual finite Tate line, and preserves the coefficient insertion x tensor a. Naturality of tau for multiplication by a in A proves A-linearity after the module/abelian derived-evaluation comparison. Its inverse sends the actual coordinate Kummer class to one. The affine-line computation gives its H1 vanishing.",
+   "uses": [
+    "det-pbc-conventions-module-cohomology",
+    "def-pur-rank-one-section-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kummer-module-coefficients",
+  "def-pur-rank-one-section-data",
+  "def-weil-pbc-etale-open-comparison-data",
+  "det-pbc-conventions-module-cohomology",
+  "lem-pur-finite-line-high-cohomology",
+  "lem-pur-finite-module-generator",
+  "lem-pur-kummer-coefficient-generator",
+  "lem-pur-kummer-twist-right-exact",
+  "lem-pur-top-derived-right-exact",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "lem-sc-primitive-root",
+  "thm-pur-kummer-affine-line"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient etale cohomology affine line punctured line Kummer generator arbitrary torsion module",
+   "results": "{\"t\": \"2026-10-19T15:19:13Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient etale cohomology affine line punctured line Kummer generator arbitrary torsion module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.instIsStandardEtale\", \"StandardEtalePair.Ring\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"5efca08798bd5785\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, IsZero",
+   "results": "{\"t\": \"2026-10-19T08:17:53Z\", \"tool\": \"loogle\", \"query\": \"ShortComplex.Exact, IsZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortComplex.Exact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_δ|homology_exact₁|mono_homologyMap",
+   "results": "{\"t\": \"2026-10-19T08:18:22Z\", \"tool\": \"grep\", \"query\": \"isIso_δ|homology_exact₁|mono_homologyMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\"], \"digest\": \"7a1f0c72bddc9903\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree one etale cohomology of multiplicative group with arbitrary finite torsion module coefficients is generated by the coordinate Kummer class",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90\", \"type\": \"(f : Gal(L/K) → Lˣ) (hf : IsMulCocycle₁ f) : IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"groupCohomology.H1\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, this defines the first group cohomology module $ H^1(G, A) $ as the homology of the inhomogeneous cochain complex asso\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90\", \"type\": \"(hg : ∀ x, x ∈ Subgroup.zpowers g) {η : B} (hη : Algebra.norm K (algebraMap B L η) = 1) :\\n  ∃ ε : B, ε ≠ 0 ∧ η * galRestrict A K L B g ε = ε\", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"groupCohomology.instFunLikeSubtypeForallCarrierVModuleCatMemSubmoduleCocycles₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": FunLike (cocycles₁ A) G A\", \"doc\": \"The 1-cocycles in group cohomology are equipped with a function-like structure, where each cocycle is identified with its underlying function from the group $ G $ to the module $ A $, and this identif\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsCocycle₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G → A} (hf : IsCocycle₁ f) : cocycles₁ (Rep.ofDistribMulAction k G A)\", \"doc\": \"Given a commutative ring $ k $, group $ G $, and $ k $-module $ A $ with a compatible $ G $-action, this function constructs the 1-cocycle corresponding to a function $ f : G \\\\to A $ satisfying $ f(gh\"}\n  {\"name\": \"groupCohomology.cochainsIso₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": (inhomogeneousCochains A).X 1 ≅ ModuleCat.of k (G → A)\", \"doc\": \"The first cochain group (degree 1) of the inhomogeneous cochain complex for group cohomology is isomorphic to the $ k $-module of functions from $ G $ to $ A $. This isomorphism identifies 1-cochains \"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90\", \"type\": \": Unique (H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"groupCohomology.coboundaries₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": Submodule k (G → A)\", \"doc\": \"The submodule of $ G $-equivariant functions $ G \\to A $ consisting of the image of the coboundary map $ d_{0,1} $, which is defined as the range of the linear map $ (d_{0,1} A).\\\\text{hom} $.\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No exact statement found; retain the stated source-library route and the proved helper argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityFiniteLineLowCohomology",
+  "file": "lean/Sheaf/Paper/PurityFiniteLineLowCohomology.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.finite_line_low_cohomology",
+  "statement": "theorem finite_line_low_cohomology (A : Type (u + 1)) [CommRing A] [Finite A]\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (ℓ N : ℕ) (hℓ : ℓ.Prime) (hℓΩ : IsUnit (ℓ : Ω)) (hN : 1 ≤ N)\n    (hA : ((ℓ ^ N : ℕ) : A) = 0)\n    (hm : IsUnit ((ℓ ^ N : ℕ) : Γ(Line (Spec (CommRingCat.of Ω)), ⊤))) :\n    let S := Spec (CommRingCat.of Ω)\n    let X := Line S\n    let F := Scheme.finiteEtaleTateSheaf A (ℓ ^ N) X hA 1\n    let H := ((sections X.smallEtaleTopology A (openObject S)).rightDerived 1).obj F\n    ∃ e : H ≅ ModuleCat.of A A,\n      e.hom (kummerClass A X (openObject S) F (ℓ ^ N) hm\n        (Etale.ordinaryFiniteRootMap A (ℓ ^ N) hA X) (coordinateUnit S)) = 1 ∧\n      IsZero (((sections X.smallEtaleTopology A\n        (Scheme.Etale.mk (𝟙 X))).rightDerived 1).obj F)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}

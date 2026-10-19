@@ -1,0 +1,106 @@
+{
+ "id": "lem-pur-top-derived-right-exact",
+ "kind": "statement",
+ "title": "Finite-colimit preservation in the top nonzero right derived degree",
+ "statement": "Let C,D be abelian categories, C have enough injectives, and F:C→D be additive and left exact. If R^(n+1)F(M)=0 for every object M, then R^n F preserves finite colimits.",
+ "source": {
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Section 1, long exact cohomology sequence; coefficient argument of blueprint sk-prop-a1-kummer."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For each short exact sequence, use exists_rightDerived_full_long_exact. It gives exactness at the middle degree-n term. The connecting map out of its last degree-n term has zero target by the hypothesis, so exactness there makes the preceding map an epimorphism. Apply the standard Mathlib criterion preservesFiniteColimits_iff_forall_exact_map_and_epi for additive functors between abelian categories.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Section 1, long exact cohomology sequence; coefficient argument of blueprint sk-prop-a1-kummer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "top nonzero right derived functor is right exact if its successor vanishes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n           \", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"If a localizer morphism $\\\\Phi$ satisfies the right derivability structure condition, then the two-square diagram formed by the localization functors $L_1$, $L_2$, the morphism $\\\\Phi$, and its localize\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure'\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] {W₁ : CategoryTheory.MorphismProperty C₁}\\n  {W₂ : CategoryTheory.MorphismProperty C₂} (Φ : CategoryTheory.LocalizerMorphism W₁ W₂) {D₁ : Type u_1} {D₂ : Type u_2}\\n  [inst_2 :\", \"doc\": \"For a morphism between localizers (functors preserving specified morphism properties), if it satisfies the conditions of a right derivability structure (compatibility with localization or derived func\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Functor.hasRightDerivedFunctor_of_hasPointwiseRightDerivedFunctor\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived\", \"type\": \"∀ {C : Type u₁} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₃, u₃} H]\\n  (F : CategoryTheory.Functor C H) (W : CategoryTheory.MorphismProperty C) [F.HasPointwiseRightDerivedFunctor W],\\n  F.HasRightDerivedFunctor W\", \"doc\": \"If a functor $ F : C \\\\to H $ admits a pointwise right derived functor at every object $ X \\\\in C $ relative to a morphism property $ W $, then $ F $ admits a right derived functor with respect to $ W $\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Combine the proved full long exact sequence with the Mathlib right-exactness criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "preservesFiniteColimits_iff_forall_exact_map_and_epi",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'preservesFiniteColimits_iff_forall_exact_map_and_epi'\n",
+   "date": "2026-10-20",
+   "verdict": "Combine the proved full long exact sequence with the Mathlib right-exactness criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*preservesFiniteColimits|preservesFiniteColimits.*rightDerived",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "Combine the proved full long exact sequence with the Mathlib right-exactness criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "if the successor right derived functor of an additive left exact functor vanishes then the preceding right derived functor preserves finite colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \":\\n  List.TFAE\\n    [∀ (S : ShortComplex C), S.ShortExact → (S.map F).Exact ∧ Epi (F.map S.g),\\n      ∀ (S : ShortComplex C), S.Exact ∧ Epi S.g → (S.map F).Exact ∧ Epi (F.map S.g),\\n      ∀ ⦃X Y : C⦄ (f : X ⟶ Y), PreservesColimit (parallelPair f 0) F, PreservesFiniteColimits F]\", \"doc\": \"The following are equivalent for a functor $ F : C \\to D $ between categories with zero morphisms: (1) For every short exact sequence $ S $ in $ C $, the image $ F(S) $ is exact and $ F(g) $ is an epim\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_iff_forall_exact_map_and_epi\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \": PreservesFiniteColimits F ↔ ∀ (S : ShortComplex C), S.ShortExact → (S.map F).Exact ∧ Epi (F.map S.g)\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories preserves finite colimits if and only if for every short exact sequence $ S $ in $ \\\\mathcal{C} $, the image $ F(S) $ is an exac\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \"[HasFiniteCoproducts C] [HasCokernels C] : PreservesFiniteColimits F\", \"doc\": \"If a category $\\\\mathcal{C}$ has finite coproducts and cokernels, then any functor $F$ that preserves homology also preserves finite colimits.\"}\n  {\"name\": \"CategoryTheory.rightExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"The property of a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ preserving all finite colimits, i.e., for any finite diagram in $ \\\\mathcal{C} $, the image of its colimit under $ F $ is the colimit of th\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (n : ℕ) : C ⥤ D\", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.rightExactFunctor_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) : rightExactFunctor C D F ↔ PreservesFiniteColimits F\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is right exact if and only if it preserves finite colimits, i.e., for any finite diagram in $ \\\\mathcal{C} $, the image of its colimit under $ F $ is the c\"}\n  {\"name\": \"CategoryTheory.RightExactFunctor.of\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) [PreservesFiniteColimits F] : C ⥤ᵣ D\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves all finite colimits, this constructs $ F $ as a right exact functor from $ \\\\mathcal{C} $ to $ \\\\mathcal{D} $.\"}\n  {\"name\": \"CategoryTheory.exactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves both finite limits and finite colimits, i.e., it preserves the limit of any finite diagram and the colimit of any finite diagram in $ \\\\math\"}\n",
+   "date": "2026-10-20",
+   "verdict": "General right-exactness criterion found and already used in the proof; no exact successor-vanishing specialization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityTopDerivedRightExact",
+  "file": "lean/Sheaf/Paper/PurityTopDerivedRightExact.lean",
+  "declaration": "CategoryTheory.Functor.rightDerived_preservesFiniteColimits_of_succ_isZero",
+  "statement": "theorem rightDerived_preservesFiniteColimits_of_succ_isZero\n    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]\n    [Abelian C] [EnoughInjectives C] [Abelian D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (n : ℕ)\n    (h : ∀ M : C, IsZero ((F.rightDerived (n + 1)).obj M)) :\n    PreservesFiniteColimits (F.rightDerived n)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}

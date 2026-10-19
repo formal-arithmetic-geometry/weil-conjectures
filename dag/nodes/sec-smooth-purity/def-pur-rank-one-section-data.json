@@ -1,0 +1,128 @@
+{
+ "id": "def-pur-rank-one-section-data",
+ "kind": "definition",
+ "title": "Canonical section data for rank-one purity",
+ "statement": "For a small site J and a coefficient ring A, sections is evaluation of the underlying module presheaf. For the affine-line datum [def-pur-affine-line-datum], openObject and restriction are its actual punctured open and inclusion. The kernel section complex and its snake boundary specify IsBoundary. The free abelian sheaf on a representable represents evaluation; its cocycle-normalized Ext comparison defines kummerClass by composing the represented unit, the Kummer extension and the coefficient map. comparisonSections is the evaluated etale/pro-etale adjunction unit, and comparisonCohomology its right-derived base change. constantUnit is pullback of a scalar unit to the punctured line.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-rank-one-local-calculation.proof.md",
+  "place": "Steps 2, 4 and 7: unchanged canonical constructions extracted from the original local-calculation module."
+ },
+ "stmt_deps": [
+  "def-pur-affine-line-datum",
+  "def-pur-support-cohomology",
+  "det-pbc-conventions-module-cohomology",
+  "lem-sc-ext-right-derived-cocycle-comparison",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct evaluation and the open restriction directly. Build the short complex from the actual kernel inclusion and restriction. Define IsBoundary by transport of the snake boundary on every injective resolution.",
+   "uses": [
+    "def-pur-affine-line-datum",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use free abelian Yoneda and its naturality for evaluationRepresented. Choose the uniquely cocycle-normalized Ext comparison and compose the Kummer extension with the represented unit and coefficient map. Derive the evaluated comparison unit to obtain comparisonCohomology.",
+   "uses": [
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-sc-ext-right-derived-cocycle-comparison",
+    "det-pbc-conventions-module-cohomology",
+    "def-sc-kummer-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-line-datum",
+  "def-pur-support-cohomology",
+  "def-sc-kummer-sequence",
+  "def-weil-pbc-etale-open-comparison-data",
+  "det-pbc-conventions-module-cohomology",
+  "lem-sc-ext-right-derived-cocycle-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Lectures on Etale Cohomology",
+  "place": "Steps 2, 4 and 7: unchanged canonical constructions extracted from the original local-calculation module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient etale cohomology affine line punctured line Kummer generator arbitrary torsion module",
+   "results": "{\"t\": \"2026-10-19T15:19:13Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient etale cohomology affine line punctured line Kummer generator arbitrary torsion module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.instIsStandardEtale\", \"StandardEtalePair.Ring\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"5efca08798bd5785\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, IsZero",
+   "results": "{\"t\": \"2026-10-19T08:17:53Z\", \"tool\": \"loogle\", \"query\": \"ShortComplex.Exact, IsZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ShortComplex.Exact'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_δ|homology_exact₁|mono_homologyMap",
+   "results": "{\"t\": \"2026-10-19T08:18:22Z\", \"tool\": \"grep\", \"query\": \"isIso_δ|homology_exact₁|mono_homologyMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\"], \"digest\": \"7a1f0c72bddc9903\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching rank-one Kummer/support theorem; use the named library declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison between right derived evaluation and Ext from free representable sheaves with Kummer cohomology classes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerivedDesc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"(G : D ⥤ H) (β : F ⟶ L ⋙ G) : RF ⟶ G\", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, and a natural transformation $ \\\\beta : F \\\\Rightarrow L \\\\circ G $, this con\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"{n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m) (hf : R.complex.d m n ≫ f = 0) :\\n  R.extEquivCohomologyClass (R.extMk f m hm hf) =\\n    (.mk\\n      (Cocycle.toSingleMk ((R.cochainComplexXIso (-n) n rfl).hom ≫ f) (by simp) (-m) (by lia)\\n        (by simpa [cochainComplex_d _ _ _ m n rfl rfl])))\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\mathrm{Ext}^n(X, Y)$ is naturally equivalent to the $n$-th cohomology class of the homomorphism complex between the cochai\"}\n  {\"name\": \"CategoryTheory.Functor.HasRightDerivedFunctor.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_5, u_2} H] {F : CategoryTheory.Functor C H}\\n  {W : CategoryTheory.MorphismProperty C}, W.Q.HasLeftKanExtension F → F.HasRightDerivedFunctor W\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{H}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, and a morphism property $W$ in $\\\\mathcal{C}$, if the left Kan extension of $F$ along the localization fun\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Ext\", \"type\": \": Ext X Y n ≃ CohomologyClass ((singleFunctor C 0).obj X) R.cochainComplex n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with an injective resolution $R$ of $Y$, there is a natural equivalence between the $n$-th Ext group $\\\\mathrm{Ext}^n(X,Y)$ and the $n$-th c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"{F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G) {X : C} (P : InjectiveResolution X) :\\n  (NatTrans.rightDerivedToHomotopyCategory α).app X =\\n    (P.isoRightDerivedToHomotopyCategoryObj F).hom ≫\\n      (HomotopyCategory.quotient _ _).map ((NatTrans.mapHomologicalComplex α _).app P.cocomplex) ≫\\n    \", \"doc\": \"For additive functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, a natural transformation $\\\\alpha : F \\\\Rightarrow G$, and an object $X \\\\in \\\\mathcal{C}$ with injective resolution $\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \": Ext X Y n ≃+ CohomologyClass R.cochainComplex ((singleFunctor C 0).obj Y) n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the inverse of the natural equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the $n$-th cohomology class of the homomorphism co\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightDerivedFunctor.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {H : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_2} D] [inst_2 : CategoryTheory.Category.{v_5, u_3} H]\\n  {RF : CategoryTheory.Functor D H} {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  {α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$ with category structures, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $RF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$\"}\n  {\"name\": \"CategoryTheory.evaluationIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : ((evaluation _ D).obj c).IsRightAdjoint\", \"doc\": \"For any object $ c $ in a category $ \\\\mathcal{C} $, the evaluation functor at $ c $ from the functor category $ [\\\\mathcal{C}, \\\\mathcal{D}] $ to $ \\\\mathcal{D} $ is a right adjoint. This means there exi\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No exact statement found; retain the stated source-library route and the proved helper argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 2, 4 and 7: unchanged canonical constructions extracted from the original local-calculation module.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityRankOneSectionData",
+  "file": "lean/Sheaf/Paper/PurityRankOneSectionData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.RankOne.kummerClass",
+  "statement": "def kummerClass (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) (W : X.Etale)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (m : ℕ)\n    (hm : IsUnit (m : Γ(X, ⊤)))\n    (f : X.rootsOfUnitySheaf m ⟶ (Etale.moduleAbelianForget A X).obj F)\n    (v : Γ(W.left, ⊤)ˣ) : ((sections X.smallEtaleTopology A W).rightDerived 1).obj F",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}

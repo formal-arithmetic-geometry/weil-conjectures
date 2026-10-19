@@ -1,0 +1,102 @@
+{
+ "id": "lem-pur-finite-module-generator",
+ "kind": "statement",
+ "title": "Detecting finite-module isomorphisms by the free rank-one module",
+ "statement": "Let R be a finite commutative ring, D a category, and F,G:ModuleCat R→D functors preserving finite colimits. If a natural transformation alpha:F→G is invertible at the free rank-one module R, it is invertible at every finite R-module M.",
+ "source": {
+  "document": "lean/WeilConjectures/Algebra/Category/ModuleCat/CocontinuousGenerator.lean",
+  "place": "isIso_app_of_rankOne, finite-presentation specialization for the Coefficients argument of blueprint sk-prop-a1-kummer."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For a finite index set I, the free module on I is a finite coproduct of copies of R. Preservation of this coproduct and naturality of alpha extend invertibility from R to that free module. For a finite M, let P be the free R-module on the elements of M and g:P→M its canonical surjection. Since R and M are finite, P and ker(g) are finite. The map from the free module on ker(g) to P followed by g presents M as a cokernel. Both functors preserve this finite colimit and alpha is invertible at its two free terms. Colimit comparison therefore makes its component at M invertible.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Algebra/Category/ModuleCat/CocontinuousGenerator.lean",
+  "place": "isIso_app_of_rankOne, finite-presentation specialization for the Coefficients argument of blueprint sk-prop-a1-kummer."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation of right exact functors on finite modules is an isomorphism if so on the free rank one module",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.exteriorPower.natIso₁\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ExteriorPower\", \"type\": \"(R : Type u) → [inst : CommRing R] → ModuleCat.exteriorPower.functor R 1 ≅ CategoryTheory.Functor.id (ModuleCat R)\", \"doc\": \"The natural isomorphism between the functor assigning to each $ R $-module its first exterior power $ \\\\Lambda^1_R(M) $ and the identity functor on the category of $ R $-modules, with components given \"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"CategoryTheory.Free.ext\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Adjunctions\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        {D : Type u} →\\n          [inst_2 : CategoryTheory.Category.{v, u} D] →\\n            [inst_3 : CategoryTheory.Preadditive D] →\\n              [inst_4 : CategoryTheory.Linear R D] →\\n  \", \"doc\": \"Given a commutative ring $ R $, a category $ \\\\mathcal{C} $, and an $ R $-linear preadditive category $ \\\\mathcal{D} $, if two additive $ R $-linear functors $ F, G : \\\\text{Free}_R(\\\\mathcal{C}) \\\\to \\\\mat\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"CondensedMod.IsSolid.isIso_solidification_map\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ {R : Type (u + 1)} {inst : Ring R} {A : CondensedMod R} [self : CondensedMod.IsSolid R A] (X : Profinite),\\n  CategoryTheory.IsIso ((CategoryTheory.yoneda.obj A).map ((Condensed.profiniteSolidification R).app X).op)\", \"doc\": \"For any profinite space $X$ and solid condensed $R$-module $A$, the morphism induced by the profinite solidification natural transformation at $X$, when mapped through the Yoneda embedding of $A$ (in \"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] → (M : ModuleCat R) → M ≅ ModuleCat.of R (LocallyConstant ↑(LightProfinite.of PUnit.{u + 1}).toTop ↑M)\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, there is a canonical isomorphism between $ M $ and the module of locally constant functions from the singleton topological space (equipped with the trivial t\"}\n  {\"name\": \"MatrixModCat.counitIso\", \"module\": \"Mathlib/RingTheory/Morita/Matrix\", \"type\": \"(R : Type u) →\\n  {ι : Type v} →\\n    [inst : Ring R] →\\n      [inst_1 : Fintype ι] →\\n        [inst_2 : DecidableEq ι] →\\n          (i : ι) →\\n            (MatrixModCat.toModuleCat R i).comp (ModuleCat.toMatrixModCat R ι) ≅\\n              CategoryTheory.Functor.id (ModuleCat (Matrix ι ι R))\", \"doc\": \"For a ring $ R $ and finite index type $ \\\\iota $, the composition of the functors $ \\\\text{MatrixModCat.toModuleCat} $ and $ \\\\text{ModuleCat.toMatrixModCat} $ is naturally isomorphic to the identity fu\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] → (M : ModuleCat R) → M ≅ ModuleCat.of R (LocallyConstant ↑(CompHaus.of PUnit.{u + 1}).toTop ↑M)\", \"doc\": \"For any ring $ R $ and left $ R $-module $ M $, there is an isomorphism between $ M $ and the module of locally constant functions from the one-point compact Hausdorff space $ \\\\{\\\\ast\\\\} $ to $ M $. Thi\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Adapt the existing upstream coproduct/cokernel proof to finite colimits using finiteness of R and M."
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso_app_coconePt_of_preservesColimit",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'isIso_app_coconePt_of_preservesColimit'\n",
+   "date": "2026-10-20",
+   "verdict": "Adapt the existing upstream coproduct/cokernel proof to finite colimits using finiteness of R and M."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_app_of_rankOne",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "Adapt the existing upstream coproduct/cokernel proof to finite colimits using finiteness of R and M."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural transformation between right exact functors on finite modules over a finite ring is an isomorphism if its component at the ring is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.isIso_iff_isIso_app\", \"module\": \"Mathlib.CategoryTheory.NatIso\", \"type\": \"{F G : C ⥤ D} (τ : F ⟶ G) : IsIso τ ↔ ∀ X, IsIso (τ.app X)\", \"doc\": \"A natural transformation $\\\\tau: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is an isomorphism in the functor category if and only if for every object $X$ in $\\\\mathcal{C}$, th\"}\n  {\"name\": \"CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom\", \"module\": \"Mathlib.CategoryTheory.Category.Cat\", \"type\": \"{X Y : Cat.{v, u}} {F G : X ⟶ Y} (e : F ≅ G) : IsIso e.hom.toNatTrans\", \"doc\": \"Given small categories $X$ and $Y$, and an isomorphism $e$ between functors $F$ and $G$ from $X$ to $Y$, the natural transformation corresponding to $e$ is an isomorphism in the category of functors f\"}\n  {\"name\": \"CategoryTheory.RightExactFunctor.ofExact_map_hom\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"{F G : C ⥤ₑ D} (α : F ⟶ G) : ((RightExactFunctor.ofExact C D).map α).hom = α.hom\", \"doc\": \"For any natural transformation $\\\\alpha : F \\\\to G$ between exact functors $F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the hom component of the natural transformation obtained by applying the inclusion functo\"}\n  {\"name\": \"CategoryTheory.RightExactFunctor.of\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) [PreservesFiniteColimits F] : C ⥤ᵣ D\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves all finite colimits, this constructs $ F $ as a right exact functor from $ \\\\mathcal{C} $ to $ \\\\mathcal{D} $.\"}\n  {\"name\": \"CategoryTheory.RightExactFunctor.ofExact_map\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F G : C ⥤ₑ D} (α : F ⟶ G), ((CategoryTheory.RightExactFunctor.ofExact C D).map α).hom = α.hom\", \"doc\": \"For any natural transformation $\\\\alpha: F \\\\to G$ between exact functors $F, G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the hom-component of the image of $\\\\alpha$ under the inclusion functor from exact functors \"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(X : C) : IsIso (F.toRightDerivedZero.app X)\", \"doc\": \"For every object $X$ in category $\\\\mathcal{C}$, the component of the natural transformation from an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ to its 0th right-derived functor $R^0F$ at $X$ is\"}\n  {\"name\": \"CategoryTheory.AdditiveFunctor.ofRightExact_map\", \"module\": \"Mathlib.CategoryTheory.Preadditive.AdditiveFunctor\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Preadditive D]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5 : CategoryTheory.Limits.HasZeroObject D\", \"doc\": \"For any natural transformation $\\\\alpha$ between right exact functors $F$ and $G$ from a preadditive category $\\\\mathcal{C}$ to a preadditive category $\\\\mathcal{D}$, the inclusion functor from the categ\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (X : C) [Injective X] : IsIso (F.toRightDerivedZero.app X)\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the component of the natural transformation from $ F $ to its 0th right-derived functor $\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No exact statement found; retain the stated source-library route and the proved helper argument."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityRankOneLocalCalculation",
+  "date": "2026-10-20",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Steps 1--3; unit proof paragraphs Coefficients and Degrees 0 and 1; Milne Sections 14 and 16.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityFiniteModuleGenerator",
+  "file": "lean/Sheaf/Paper/PurityFiniteModuleGenerator.lean",
+  "declaration": "ModuleCat.isIso_app_of_rankOne_of_finite",
+  "statement": "theorem isIso_app_of_rankOne_of_finite (α : F ⟶ G)\n    (h : IsIso (α.app (ModuleCat.of R R))) (M : ModuleCat.{u} R) [Finite M] :\n    IsIso (α.app M)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b70c0",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261019T231138-L-553771",
+  "kind": "interface",
+  "note": "independent cc review: 12 delivered modules + 4 direct importers compiled against the delivery; item proof vs node thm-pur-rank-one-local-calculation (only proof fields changed); moved defs vs change record F2-rank-one-section-data; sorry lemma finite_line_low_cohomology vs its node and kummer_affine_line (free case only); axioms checked"
+ }
+}
