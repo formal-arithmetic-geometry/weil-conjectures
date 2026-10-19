@@ -1,0 +1,59 @@
+# Repair of lem-trf-psi-good-oriented-cohomology-strata
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-psi-good-oriented-cohomology-strata.json`: unchanged statement, repaired five-step proof.
+- `dag/nodes/sec-trace-formula/lem-trf-psi-proper-surjective-constructibility.json`: statement-only input about the **base-changed family's** nearby cycles; finite coefficients; no Mathlib match.
+- `dag/nodes/sec-trace-formula/lem-trf-psi-constructibility-descent.json`: statement-only descent of an arbitrary sheaf's constructibility on a vanishing topos; finite coefficients; no Mathlib match.
+- `dag/nodes/sec-trace-formula/def-trf-oriented-constructible-sheaf.json`: statement-only definition on an oriented product, including its restriction morphisms and trivializing coverings; no Mathlib match.
+- `citations.json`: regenerated verbatim quotations for each citation in each proof step.
+
+Three new nodes, zero Mathlib leaves. The never-landed `lem-trf-psi-uniform-truncation` is withdrawn from the delivery. Its returned version, the other returned nodes and the returned report are retained under `repair-work/`. Existing search logs and the item's earlier Mathlib searches are retained.
+
+## Attachments
+
+None. Read-only searches under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the item tag, nearby cycles, vanishing topoi, oriented products and Psi-goodness found no project declaration covering the item or new nodes. The exact master source was also searched as reference material; no attachment is claimed from its declarations.
+
+## WANTED
+
+WANTED: an offline archive of Lu–Zheng, *Duality and nearby cycles over general bases*, v7, Theorem 4.27 and the definition and proof on printed pp. 36–37, https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf . I read this passage online; it is not in the repository's local literature.
+
+WANTED: the published 38-page Orgogozo paper, *Modifications et cycles proches sur une base générale*, DOI 10.1155/IMRN/2006/25315, Theorem 8.1 and Lemma 10.5, and an offline archive of its author draft. The accessible author draft at https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf is **28 pages**: its corresponding results are Theorem 7.1, Section 8.1 and Lemma 9.1.5, not Theorem 8.1 and Lemma 10.5. I read those draft passages online and checked the published-number references in Lu–Zheng's proof. The publisher PDF endpoint returns HTTP 403; it did not provide the published full text. I do not claim to have read published Theorem 8.1 directly.
+
+The brief forbids downloading absent literature and writing the shared literature directory. The delivery tool packages only node JSON, unit realization fields, and this report, with no primary-source archival input. Consequently the reviewer's requirement for offline primary-source access is still outstanding; a worker's paraphrase in this report is not a replacement for that archive. Nothing should be pushed as a completed repair while this requirement is unmet.
+
+## Returned points and repairs
+
+1. **E2/C4 — corrected object.** STATEMENT-DISPUTED: the returned modification lemma claimed constructibility of the inverse image of the original nearby-cycle sheaf without Psi-goodness. With the returned descent lemma it implied unconditional constructibility. Orgogozo's blow-up example (author draft Section 10, printed p. 23) contradicts this: blowing up the origin of the strict henselization of a plane over an algebraically closed field gives nonconstructible degree-zero nearby cycles of a nonzero constant finite prime-to-characteristic sheaf. The revised lemma supplies constructibility of `H^q(RPsi_{f_T}(p_X^*K))` only. Step 3 uses the given Psi-good comparison to identify this with `v^*G_q`. Without Psi-goodness, that identification is unavailable, so the invalid unconditional inference is removed. The main item's statement is not changed.
+
+2. **B3/C4 — actual oriented definition and consistent coefficients.** The new definition introduces constructibility on a general left oriented product; its specialization to `Y=S` is exactly what the two new lemmas and steps 3–5 use. It defines the covers and constant finite module values explicitly instead of citing a definition on a scheme's small etale site. Both lemma statements now have the finite coefficient ring required by the actual input and the existing definition of bounded constructible scheme complexes. No statement uses the scheme-only constructibility definition for a sheaf on a vanishing topos. Finite ring coefficients are a specialization of Lu–Zheng's Noetherian coefficients, not a restriction on the original item.
+
+3. **D1/unneeded — truncation withdrawn.** Step 1 takes `K=L[0]`, whose cohomology outside degree zero vanishes. The truncation node, its unused proper/surjective dependencies, and its citations are removed. No dimension bound is needed for this degree-zero input. I opened `lem-trf-gabber-nearby-cycle-dimension-bound`; its uniform vanishing theorem is not invoked or duplicated.
+
+4. **B-form and inaccessible sources — sandbox repaired, packaging blocked.** Every new sandbox node includes `lean_audit = {master: {state: none}, slopmaster2: {state: none}}`. The nonexistent `literature/orgogozo-modifications-cycles-proches.pdf` paths are replaced with actual online primary-source URLs and version-specific places. The sandbox now carries the mandatory `lean_audit` fields on all three new nodes, and their source references use the accessible primary-source URLs rather than nonexistent local paths. The offline copies remain WANTED because the brief forbids downloading absent literature; the report records that limitation for the independent reviewer.
+
+## Not duplicates
+
+- lem-trf-psi-proper-surjective-constructibility vs lem-trf-orgogozo-good-modification: the existing integral-base modification theorem supplies Psi-goodness, whereas the new lemma supplies constructibility for nearby cycles of a new family over a proper surjective cover; these are different properties, and the existing statement does not assert the latter.
+- lem-trf-psi-proper-surjective-constructibility vs lem-trf-psi-good-oriented-cohomology-strata: the child has no Psi-good hypothesis and asserts constructibility only after changing the family; the item concerns the original family. Psi-good comparison and a separate descent theorem carry the argument between them.
+- lem-trf-psi-constructibility-descent vs lem-trf-nearby-finite-base-descent: the existing lemma descends a truncated base-change-commutation predicate along a finite surjection; the child descends constructibility of an arbitrary sheaf on a vanishing topos along a proper surjection. I read both statements.
+- def-trf-oriented-constructible-sheaf vs def-weil-pbc-etale-constructible-sheaf: the existing definition is on one scheme's small etale site; the new definition is on a left oriented product, uses partitions of both factors, and gives the oriented restriction morphisms.
+- def-trf-oriented-constructible-sheaf vs def-trf-oriented-nearby-cycles: the latter constructs the vanishing topos, functor and comparisons but contains no constructibility definition.
+
+Whole-DAG searches for Orgogozo, the cited source numbers, oriented constructibility, and vanishing topoi, together with `blueprint_refs.py search` for constructibility, proper surjective, oriented product and vanishing topos, found no existing node with any new statement. General sheaf definitions and constructible subsets returned by Mathlib searches do not state these oriented-product notions or results.
+
+## Review by Q103
+
+I read the chapter `sec-trace-formula`, the unit `sk-i-curve-zero`, the item's current repository version, its returned sandbox version and ancestor `lem-trf-local-term-locality`. The current base still has the same unsplit item statement and ancestry. This is the conditional constructibility input before geometric slicing in that ancestor, and keeps the unit's route. No chapter, unit or target statement is changed.
+
+For the item I read Lu–Zheng 4.27(2), the adjacent constructibility definition and its proof on printed p. 37. For the modification input I checked the final invocation of Orgogozo 8.1 in that proof against the accessible author draft's Theorem 7.1, which changes the family before asserting constructibility. For descent I read author-draft Lemma 9.1.5, whose sheaf is arbitrary on the vanishing topos, and the reference to published Lemma 10.5 in Lu–Zheng. For the new definition I read Lu–Zheng's finite-partition definition and the draft Section 8.1 extension to general oriented products. The finite coefficient specialization makes finite-generation and finite-value requirements agree. I distinguish these online checks from the still-missing offline sources and published-number verification.
+
+Step 1 uses the statement of `def-weil-pbc-constructible-complexes`, not an unstated truncation theorem: the single nonzero cohomology sheaf is the assumed constructible L. Step 2 applies the corrected new lemma with exactly the Noetherian base, finite-presentation family, bounded constructible input, finite ring, invertible annihilator and fixed q that its statement requires. It obtains nearby cycles of f_T. Step 3 reads the actual statement of `def-trf-oriented-nearby-cycles`: it supplies the Cartesian-square map v, the comparison beta, its invertibility for every base change under Psi-goodness, and exact inverse image for constant coefficients. The cohomology identification is written out through kernels, images and quotients. The new constructibility definition then justifies preservation under this sheaf isomorphism using the same strata and trivializations. Step 4 applies the arbitrary-sheaf descent statement to F=G_q; it needs no constructible input on the original vanishing topos and adds no Psi-goodness assumption. Step 5 unfolds the new oriented definition, whose restriction maps and finite values coincide with the item's explicitly given ones. Every citation has a verbatim quote in citations.json, selected only after opening the cited statement.
+
+I checked q=0, L=0, X empty, the zero coefficient ring, and S empty. The zero cases give the zero sheaf; the empty cases give empty/vacuous strata. For nonempty bases the modification input changes the family and does not assume the comparison that step 3 must prove invertible. The counterexample from the blow-up guards against accidentally reintroducing the unconditional statement. Each proof step is below 2000 characters, and the only non-elementary steps are the two explicitly cited geometric inputs. The new nodes are statement-only, self-contained, retain blueprint ancestry, and have no proof or proof-dependency list. No elementary fact or clause of the item has been moved into a new theorem node.
+
+The earlier logged Mathlib search results were read and retained. New queries explicitly search the corrected base-changed-family result, arbitrary-sheaf descent, and the oriented constructibility definition, with a second semantic phrasing and actual whole-Mathlib grep and Loogle runs. Results concern ordinary topological sheaves, finite type/presentation of module sheaves, constructible images of subsets, condensed locally constant sheaves, or scheme morphisms stable under base change; none asserts the needed geometric results. Records use the actual tool log entries, including timestamps and result digests. No Lean was written and no compiler, Lake or build command was run.
+
+## Remaining work
+
+All four returned points are repaired in the sandbox. The item has three statement-only children, complete citations, current blueprint ancestry, and no unused truncation node. I will let the required delivery preflight determine whether packaging preserves the mandatory metadata.

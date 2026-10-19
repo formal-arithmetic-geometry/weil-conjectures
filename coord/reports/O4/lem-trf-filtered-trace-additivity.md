@@ -1,0 +1,58 @@
+# Worker report: lem-trf-filtered-trace-additivity
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-filtered-trace-additivity.json`: repaired five-step split; statement unchanged; Mathlib searches found no whole-item match.
+- `citations.json`: verbatim statement excerpts for every citation in all five steps.
+- `report.md`: this report.
+
+The two previously delivered supporting files were removed because the return identified them as duplicates of existing framework nodes. No Lean source was written and no compiler or build tool was run.
+
+## Attachments
+
+None. Searches of the read-only slopmaster2 source by the item id, filtered/graded/trace terms, and candidate declaration names found no sorry-free declaration stating this item. The upstream master source was used only as reference material.
+
+## WANTED
+
+None. The proof follows Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of Fujiwara*, §§5.1–5.2 and the complete proof of Lemma 5.3.2 (printed pages 39–43), with the correspondence legs interchanged to match the project convention.
+
+## What was wrong and what changed
+
+The maintainer's return identified two faults. `lem-trf-filtered-rhom-diagonal-graded` duplicated the existing `lem-trf-filtered-derived-hom-calculus`, and `lem-trf-filtered-duality-calculus` duplicated the existing `lem-trf-filtered-operations-hom`; both files are therefore deleted from this sandbox. The five proof steps now cite those existing statements directly. In particular, the existing operations/Hom node supplies filtered operations, tensor/Hom, duality, graded natural transformations, and the finite-coefficient étale/pro-étale comparison needed for transport. Because that node belongs to unit `sk-i-additivity`, the item's `split_report.tool_uses` declares it as the generic cross-unit framework tool. The ordinary constructible-origin node remains cited only for the ordinary comparison explicitly used by the item's statement.
+
+No statement was corrected. The item is the genuine filtered-morphism additivity assertion of Varshavsky Lemma 5.3.2; a commuting pair of triangle maps alone would not suffice.
+
+## Review by N4
+
+I read the complete item statement, the five source locations in Varshavsky's §§5.1–5.3, and the full statements of every cited node. Step 1 uses `lem-sf-proetale-constructible-origin` only for the ordinary bounded-constructible comparison, `prop-functor-package` for the finite-stage constructible operation domains, and `lem-trf-filtered-operations-hom` for the filtered étale/pro-étale categories and the compatibility of filtered operations with forgetful and graded functors. The latter is explicitly recorded as a tool use because it is in `sk-i-additivity`.
+
+Step 2 uses the complete external-duality trace-map construction in `lem-trf-trace-map-from-external-duality`, the filtered operation, adjunction, exchange, base-change, evaluation, and natural-transformation clauses of `lem-trf-filtered-operations-hom`, and the trace-class identification in `def-trf-trace-class`. The diagonal-adjunction unit is applied before fixed-square base change, and evaluation is applied only at the end, as in the source.
+
+Step 3 uses `lem-trf-filtered-derived-hom-calculus` for the degree-zero filtered RHom decomposition and its contravariant index convention, and `lem-trf-filtered-operations-hom` for the statement that the actual graded natural transformation is the direct sum of the ordinary pre-evaluation maps. Step 4 uses the same two statements: duality reverses filtration indices, while the derived-Hom projection sends the filtered identity to the identities on each graded dual, giving the ordinary evaluation on every grade and no extra filtration sign.
+
+Step 5 uses the filtered derived-Hom Hom-set identification and graded projection, together with the operations/Hom node's étale/pro-étale compatibility and `def-trf-trace-class`. Since the target has filtration concentrated in degree zero, the filtered map factors through `gr^0`; the projected class is exactly the tuple of graded morphisms, and finite additivity gives the displayed sum. I checked the hypotheses on the fixed scheme, exceptional adjoints, constructible finite-Tor domains, and finite filtration, and checked zero, empty-fixed-locus, one-grade, gaps, translated indices, and noninvertible coefficient-map cases. The repaired `citations.json` quotes the complete statement of each cited node verbatim for every step.
+
+The required Mathlib searches and second phrasings are retained in `searches.jsonl`; they found only ordinary derived-category, graded-object, and linear-trace declarations, with no filtered sheaf Verdier-trace theorem. No SGA 4 or SGA 4½ source was used.
+
+## What could not be finished
+
+The two existing framework nodes remain unsplit because this repair is only a one-level split of the item. The sandbox is ready for the independent second reader and delivery.
+
+
+## Second reading by N4
+
+Recovery check: the stage-1 item JSON exists and the named retained stage-2 directory does not. The maintenance recovery condition is false; this is an ordinary stage-1 second reading. No Lean file was written and no compiler, Lake or build tool was run. The read-only shared DAG, rather than upstream sorry declarations, supplies the cited interfaces.
+
+- Statement: read Varshavsky's conventions 0.2, §§5.1.1–5.2.2, §5.3.1 and the full proof of Lemma 5.3.2 directly from the retained PDF, printed pp. 5 and 39–43; PASS. Our finite ring A_{E,n}, n >= 1, is a finite ring killed by a power of ell, the schemes meet his separated finite-type convention, and his exceptional second leg is our first leg. The hypothesis is an actual filtered-derived morphism; neither invertibility nor a triangle-only substitute is assumed. The ordinary source trace, adjunction direction, fixed scheme and target agree with the current coefficient, correspondence, fixed-scheme and trace-class nodes. Read the main-20261015 unit and the DAG chapter/unit records: the argument supplies localization/additivity within the prescribed normal-cone route and changes no unit or chapter.
+- Step 1: compared the ordinary comparison with lem-sf-proetale-constructible-origin, the finite-Tor and exceptional operation domains with prop-functor-package, and the *filtered* comparison with the last paragraph of lem-trf-filtered-operations-hom; PASS after specifying that H and N are global complexes in DF(Ab), with filtered global sections defined by global Hom from the unit in filtration degree zero. A triangulated equivalence alone is not used to infer a filtered enhancement.
+- Step 2: compared every arrow with the full statement of lem-trf-trace-map-from-external-duality and Varshavsky Lemma 5.3.2, first two paragraphs; FIX. The old argument used an internal sheaf Hom source but later cited a global Hom lemma. The revised argument uses global filtered Hom throughout. For the two genuinely independent inputs, thm-trf-kunneth-verdier at (M,N)=(Q,P) and lem-trf-exceptional-internal-hom-exchange at (c,p_2^*P,p_1^!Q) give the required external-duality comparison. Their naturality supplies the bifunctor assertion. The ordinary diagonal-adjunction unit precedes fixed-square base change; signed symmetry precedes evaluation. The operations/Hom node supplies the compatible filtered adjunctions and transformations. Total c, the projections, d and the structure maps have the finite-Tor constructible domains of Step 1; no unrestricted ambient adjoint is used.
+- Step 3: compared with the *global* formula in lem-trf-filtered-derived-hom-calculus, the global/internal Hom and graded-transformation clauses of lem-trf-filtered-operations-hom, and Varshavsky Lemma 5.1.4(ii) as used on printed p. 43; PASS after the global-Hom correction. The contravariant index is -r, so total degree zero pairs exactly the same r on the two inputs, and the actual transformation, not merely its endpoints, is identified.
+- Step 4: read the evaluation convention in def-trf-dualizing-complex, then checked the identity projection against lem-trf-filtered-derived-hom-calculus and adjunction compatibility against lem-trf-filtered-operations-hom; PASS with an added explicit definition citation. The project's evaluation is the transpose of Id on the dual (the source writes the equivalent convention through biduality). The graded identity is Id on D(K_r), giving the ordinary evaluation. Filtration shifts have no cohomological Koszul sign; the existing ordinary tensor symmetry retains its signs.
+- Step 5: compared with the Hom-set and forgetful/projection clauses of lem-trf-filtered-derived-hom-calculus, Varshavsky §5.1.5 and the last two paragraphs of Lemma 5.3.2, and def-trf-trace-class; FIX. The class now lies in H^0(omega t^{>=0} H) for *global* H. Naturality of the canonical quotient from t^{>=0} H to t^{<=0}t^{>=0} H gives the required factorization, since N is concentrated in filtration degree zero. This replaces the unsupported assertion that a factorization on representatives automatically persists for roofs. The projection is precisely the tuple of graded maps and finite additivity gives the sum in the required trace-class group.
+- New nodes: none, hence no B1–B7 obligation is deferred to another new node. Confirmed that the two removed supporting nodes are absent; the current existing operations/Hom and global derived-Hom statements supply their usable content. The two-variable external-duality result already exists as thm-trf-kunneth-verdier, so no replacement node is created. All added proof citations have verbatim current-statement quotations in citations.json.
+
+Small cases checked independently: zero K gives the zero class on both sides; an empty fixed scheme gives a zero target; one graded piece in any integer filtration degree gives the original trace with no sign; filtration gaps contribute zero; translating all filtration indices reindexes the same finite sum; over a point with n=1 this agrees with additivity of ordinary finite-dimensional derived trace. The proof still applies at n>1 to finite-Tor complexes over the nonfield quotient ring. n=0 is excluded by the coefficient conventions, and no inference uses an inverse for the coefficient map. The all-zero filtration and zero morphism also give zero on both sides.
+
+Independent searches: ran msearch.py with the new LeanFinder wording “For a finite filtration of a complex of sheaves, the Lefschetz Verdier trace of a cohomological correspondence is additive on the associated graded complexes”; its eight hits concern additive Ext, homological functors and truncations, and do not state the item. The independent whole-Mathlib grep for Verdier/trace and filteredTrace returned tactic trace-registration hits; a further restricted Mathlib/Algebra grep returned no hits. Actual outputs remain in searches.jsonl and the node records their limited conclusions. Source searches in both read-only upstream checkouts found no filtered-trace declaration by the item id or filtered/trace phrases. No attachment is claimed.
+
+Changes: made global Hom consistent in all five steps, supplied the independent-input external-duality citations and their argument, cited the project's exact evaluation definition, replaced the roof argument with truncation naturality, and refreshed citations and actual search records. The item statement is unchanged; no new nodes or Mathlib leaves were introduced. The existing operations/Hom node remains the declared generic cross-unit tool in split_report.tool_uses. The other added theorem lies on the existing trace-class/six-functor route; the dualizing-complex citation is a definition. No SGA 4 or SGA 4½ source is used.

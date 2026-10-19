@@ -1,0 +1,63 @@
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-inert-projection-square-fibres.json`: statement node, now split in seven steps; no exact Mathlib match. The statement and statement dependencies are unchanged.
+- `citations.json`: 13 verbatim citations, one for each step/node pair.
+- No new nodes and no Mathlib leaves. `searches.jsonl` contains the searches actually run for Q131; the item's inherited search records were retained. The preparation script is sandbox support only.
+
+## Attachments
+
+None. Searched all `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact item id, its blueprint tag, operadic terminology and inert-projection terminology. There is no declaration for this relative coloured-operadic mapping-space theorem. No Lean was written or compiled, and master sorry declarations were not treated as proofs.
+
+## Sources and WANTED
+
+WANTED: Lurie, Higher Algebra, 2017, Definition 2.1.1.10(2), Remark 2.1.1.14, Remarks 4.2.2.18 and 4.2.2.21, for lem-coef-inert-projection-square-fibres; archive under literature/. Read the online PDF at https://people.math.harvard.edu/~lurie/papers/HA.pdf, printed pp. 174-175 and 518-519. The general relative fibre formula is an explicit agent argument from the Segal axiom, not a quotation of a theorem giving this exact formula. The proof_origin is accordingly agent.
+
+WANTED: Kerodon Theorem 8.3.7.1, Tag 06BZ, for lem-coef-inert-projection-square-fibres; archive under literature/. Read https://kerodon.net/tag/06BZ, including its Hom-functor pullback in the functor infinity category. This supports the already existing arrow-mapping lemma. These are Kerodon tags, not Stacks tags; Stacks has no tag for the coloured infinity-operadic assertion. No SGA source is used.
+
+Also read the current ancestor file `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.md`, the chapter and unit records, the section-model parent statement and the two proof steps that use the present item. The historical unit binding is preserved. This is a generic supporting calculation below the ancestor's coherent finite-coefficient comparison, not an alternative geometric route or a change of coefficient categories.
+
+## What needed repair
+
+The input was an unsplit statement with an empty proof. Its statement is correct under the relative operadic Segal conditions explicitly included in def-coef-left-module-operadic-encoding. No statement dispute or statement correction was needed. The proof must keep the homotopy between the two composites, rather than compare only components. It must not assume cocartesian lifts of f or other non-inert arrows, and the variance is postcomposition into the target inert projection. The new proof addresses these points explicitly.
+
+The inherited mapping-composition node supplies composition classes but does not by itself assert full coherent naturality. The proof therefore cites the existing stronger lem-coef-infinity-hom-bifunctor-functoriality. Likewise, the strictly commuting path-pullback invariance lemma is not used for a merely homotopy-commuting diagram: step 4 cites the existing coherent-cube variant instead. No hidden general lemma had to be created.
+
+## Searches and reuse
+
+Ran the required msearch command with leanfinder twice, with different semantic phrasings, loogle, grep, and leansearch. Read each result. The two leanfinder searches return strict Segal nerve/coskeletal identities. Read Mathlib/AlgebraicTopology/SimplicialSet/Coskeletal.lean:88-108 and 169-176, and StrictSegal.lean:353-359 and 525-537: these concern simplices of a strict Segal simplicial set, not mapping spaces over LM or operadic cocartesian output projections. The Loogle results are simplicial-set endofunctors and evaluation; Basic.lean:73-85 confirms their types. LeanSearch returns ordinary model-category fibrations and homotopies of complexes, with no coloured operadic hypothesis or conclusion. The inert/operadic grep has zero hits. Actual command queries and leading returned declarations are recorded in the item and the search log; no service was unavailable during these calls.
+
+Before deciding that no new nodes were necessary, searched the whole DAG for inert projection, discarded output, postcomposition/inert, Segal operation products, arrow mapping formulas, lift comparisons, and homotopy-pullback invariance. Ran blueprint_refs.py ancestor for the item and global blueprint searches for `inert` and `operad`. None gives the item's theorem as a blueprint duplicate. Existing operation-Segal products with varying sources and input arities are different assertions; no new copy of them is made. Reused six existing cited nodes in addition to the operadic definition. The only citation outside the unit's route is lem-cbc-simplicial-homotopy-equivalence-weak, a generic tool that converts the explicitly written contraction to a weak equivalence; it is declared in split_report.tool_uses.
+
+## Review by Q131
+
+I read the item, each cited node's statement, the source passages just listed, the stage-1 brief and delivery-errors B-E. There are no new node statements to check. The input hypothesis is a categorical fibration over the nerve of the ordinary LM operator category, with inert lifts and the relative mapping-space Segal axiom. These hypotheses are exactly what the proof uses; no presentability, algebra section, tensor representability, arbitrary transport or module-section equivalence is assumed.
+
+Step 1 uses the actual ordered-fibre definition of LM to see that an inert map selects a subset of outputs bijectively and preserves each selected colour. The equality of the colour-composite base arrows is checked as an equality of pointed maps with singleton orders. The statement of lem-coef-infinity-cocartesian-composition-initiality supplies both composition of the two specified cocartesian edges and the comparison equivalence between lifts with the same source and base arrow. Its hypotheses hold because r is an inner fibration of quasicategories and both colour projections and v are cocartesian. We do not infer that postcomposition by an arbitrary cocartesian arrow is an equivalence: only the fibre equivalences between its retained colour objects have that property.
+
+Step 2 uses exactly the mapping-space Segal sentence of def-coef-left-module-operadic-encoding, twice, for the arbitrary arrows f and theta f. It does not use just its object-fibre equivalence. The Hom-bifunctor statement supplies pre/postcomposition and their composition/unit homotopies, so the inverse of each colour-fibre equivalence gives an inverse on the correct relative mapping space. The discarded and retained products are regroupings of a finite product, hence elementary manipulations.
+
+Step 3 checks the coordinate equality by the actual triangle from step 1 and the two associations of q_l v b. The coherent Hom-bifunctor node says that these are transformations in the functor infinity category retaining higher simplices; relying on the homotopy-category composition node alone would have missed that clause. No comparison of higher coherent diagrams is inferred merely from an equality on components.
+
+Step 4 uses precisely the path-pullback comparison assertion of lem-coef-infinity-kan-homotopy-coherent-cube-invariance. Its three span maps are equivalences from step 2; the side homotopy comes from step 3. Both endpoint points agree by h_R=t(h). This is a comparison of the cospans defining homotopy fibres, and preserves the path coordinate. It does not use the weaker strict-square invariance node. All complexes concerned are Kan spaces under the cited conventions.
+
+Step 5 opens the path-fibre definition to identify the fibre of a product projection as the discarded product times the space of paths with endpoint h_R. The latter's contraction is written explicitly using the monotone maximum map on [1] x [1]. It fixes h_R at all parameters, and at the two ends is identity and the constant path. The existing simplicial-homotopy-equivalence lemma says exactly that the resulting homotopy inverse implies weak equivalence; it applies even when the discarded product is empty. This is a routine formula from definitions plus the cited theorem, not a new lemma node.
+
+Step 6 verifies naturality of the actual map (b,gamma) to the discarded coordinates. Coherent Hom functoriality and the supplied lift-comparison triangles give its parameter compatibility, and the degreewise path construction commutes with restriction of simplicial parameters. The inverse choices used to prove equivalence do not define the natural map. In particular the claimed naturality concerns full spaces and supplied cocartesian comparisons, and not just isomorphism classes of projection choices.
+
+Step 7 uses the endpoint-compatible, functor-natural statement of lem-coef-infinity-arrow-morphism-square. For u:X to Z_0 and v:Y to Z it gives exactly the maps b:X to Y, a:Z_0 to Z, and the path vb to au, with their higher simplices. Applying the same formula under r and fixing the specified ordinary base square fixes the relative arrow f. The nerve of an ordinary category has discrete right-pinched mapping spaces, as directly checked from the nerve definition: the initial face is constant and hence a simplex is determined by its single remaining arrow. Thus no unwanted base-square path survives. This is the claimed relative square space, with the stated orientation of a and b.
+
+I tested theta=id and inert permutations (J empty and a contractible homotopy fibre); target arity zero (the target relative mapping space is a point and all outputs are discarded); source arity zero with allowed nullary algebra operations; the colour m mapping to arity zero (one module factor remains); an empty discarded operation factor (both sides empty); and zero retained and discarded arities simultaneously. I also checked an ordinary coloured-operad nerve where every operation space is discrete: the formula becomes the ordinary fibre of a product projection. These tests do not require existence of an h when N is empty. The item correctly quantifies only over h in N.
+
+Checked B1-B10: no new unsplit nodes, no copied clause-nodes, no invented tag, no new duplicate, no false attachment and no unrun search record. Checked C1-C8: every non-elementary input is a cited existing statement, quotations are verbatim and refer to the facts taken in the corresponding steps, and the generic off-unit tool is declared. Dependency traversals from all proposed citations found no return path to this item. Checked D1-D5: the proof itself carries the argument rather than delegating any clause to a new node. Checked E1-E7: all object/base arrows, variances, fixed endpoints and empty cases are accounted for; no hypothesis was added. All seven steps are below 2000 characters; none hides a source-standard comparison behind a long inline step. Corrections made during self-review were to cite coherent Hom rather than composition classes for naturality, use coherent-cube rather than strict-square invariance, and tailor the step citations to the portions actually used.
+
+## Unfinished work
+
+None in the mathematical split. Archival literature copies remain WANTED as stated above. The server dry run passed as recorded below; the authorized push is the final delivery action.
+
+## Validation
+
+The required deliver.py --no-push invocation exited 0 and printed `OK (not pushed)` with `preflight passed`. It ran the server preflight, including check_dag and review_split. No local checker or compiler was invoked. A final dry run repeats the checks after this report-only completion before the push.
+
+## Resumed delivery check
+
+Continued the existing sandbox without replacing its proof or repeating the logged Mathlib searches. Compared every changed key with the current shared item: only proof/split/search fields differ; the statement, ancestry, chapter and unit remain the current repository values. Read the five saved Q131 search records and their recorded results, rechecked every cited node against the present shared DAG, and repeated the source-declaration search with no exact attachment. All 13 quotations remain verbatim, every step/node pair is covered, and proof_deps equals the union of uses. The preliminary resumed dry run exited 0 with `OK (not pushed)` at dfb2b71429. The current parent section-model proof now cites this item in steps 4 and 5; corrected that stale numbering in this report. Reopened Higher Algebra Definition 2.1.1.10, Remark 2.1.1.14, Remarks 4.2.2.18 and 4.2.2.21, and Kerodon 06BZ to confirm the relative expansion and coherent endpoint formula. No mathematical repair or new node is needed.

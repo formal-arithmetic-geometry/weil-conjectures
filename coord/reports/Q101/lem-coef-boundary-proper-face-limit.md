@@ -1,0 +1,62 @@
+# Worker report: lem-coef-boundary-proper-face-limit
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-boundary-proper-face-limit.json`: statement, now split in eight steps; no exact Mathlib match. The statement is unchanged.
+- `citations.json`: a verbatim statement quotation for every cited node in each numbered proof step.
+- `report.md`: this report.
+
+New nodes: 0. New Mathlib leaves: 0. The proof uses the existing Mathlib leaves `def-weil-pbc-simplicial-set`, `lem-weil-pbc-simplex-face-factorization`, and `lem-weil-pbc-simplex-face-face-identity`.
+
+## Attachments
+
+None. I searched the project declarations under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the exact id/docstring tag, proper-face terminology, simplicial boundary notation, and boundary/limit combinations. There is no declaration stating the item. Broader simplicial/simplex hits concern Cech constructions; ordinary boundary hits concern geometric open complements and weight estimates. I also checked the master reference without treating its declarations as completed proofs. No Lean was written or compiled.
+
+## Wanted literature
+
+WANTED: Joyal--Tierney, *Quasi-categories vs Segal spaces*, https://arxiv.org/html/math/0607820, Section 2 (division definitions, Theorem 2.6 and Proposition 2.10), for the inherited bibliographical source of lem-coef-boundary-proper-face-limit. No archive was present in the supplied literature paths. This delivery does not assume that paper as a black-box result: the proof is an agent expansion of the locally available Stacks argument described below. The inherited maintainer-owned source field is retained.
+
+## What changed and what was checked
+
+The prior attempt left only the unchanged unsplit item and searches.jsonl, without a report, citations, or proof. I retained both files and all inherited queries. There was no completed split/report for the required initial dry run. I compared the retained item to the current shared item before editing; they agreed.
+
+The new proof constructs the inverse explicitly using an omitted vertex of each nonsurjective simplex. Stacks `simplicial.tex`, Tag 0186 (`lemma-formula-limit`), supplies the construction and the overlap calculation. Its displayed statement concerns a truncated diagram; I do not claim it directly states the present item. I checked its proof line by line: factorization, independence of the chosen omitted vertex, and the naturality calculation use only nonsurjectivity, so they apply at every source degree r of a boundary simplex. I wrote out the inverse identities and target naturality that its last sentence leaves to the reader. I also read Tags 0166 (`lemma-face-degeneracy`), 0167 (`lemma-relations-face-degeneracy`), and the boundary paragraph of Tag 08NK (`section-trivial-kan`). The standard-simplex evaluation formula is proved in step 7 rather than quoted without a node (compare Tag 0177, `lemma-simplex-map`). Proof origin is marked agent because of these extensions and explicit edge-case arguments.
+
+The chapter and unit records, GOAL.md and coord/dag-sync.md were read. The inherited blueprint ancestor is `prop-coef-integral-exceptional-adjoint`; I read its current main-20261015 statement and separate proof in `sec-six-functors/sk-thm-sf-package/`, and the older master source used by the inherited ancestry. The relevant location is the finite mapping-complex adjunction of proof paragraph 2, through the recorded enrichment-change chain and `lem-coef-bisimplicial-reedy-division-calculus`. No unit or chapter route is changed. The item has no blueprint_update to apply. Its blueprint.from.place was already specific and is retained. Whole-blueprint searches using `tools/blueprint_refs.py search boundary` and `search proper-face` found no imported node stating this set-level boundary comparison; same_as remains empty.
+
+## Searches and existing nodes
+
+I read the prior sandbox search log. Its LeanSearch and LeanFinder queries found the boundary definition, simplex constructors, and pointed-simplex structures, with no matching comparison theorem. Its Loogle query contained the unknown identifier `compatible`, so it is recorded as an invalid query, not as absence evidence. Its grep subdirectory incorrectly repeated `Mathlib/`; I retained the log, marked that result as invalid evidence, and ran corrected queries below.
+
+Additional actual msearch.py calls searched the boundary API by `SSet.boundary`, searched semantically for natural transformations from the boundary and compatible simplex faces, and searched `AlgebraicTopology/SimplicialSet` and `AlgebraicTopology` with boundary, equivalence, limit, matchingObject, colimit, and gluing expressions. I read Boundary.lean in full and the general NonDegenerateSimplicesColimit.lean candidate. Boundary.lean defines exactly the nonsurjective-map boundary and proves hom_ext, which supplies uniqueness alone; it does not construct a compatible-family extension. `SSet.isColimitCoconeN` states a general colimit of monogenous subcomplexes. Applying it here requires identifying the indexing poset and identifying each face subcomplex and its maps with the corresponding representable before applying Yoneda. This is not a one-line specialization stating the item. It is a possible alternate proof route, not an exact leaf. No unavailable service has been recorded as a negative result; both invalid searches are expressly distinguished in the item.
+
+Before deciding whether any new lemma was necessary, I searched the whole DAG for proper-face, simplex-boundary, factorization, and surjection/injection terms and for Stacks Tags 0186, 0166, 0167. I opened the statements of `lem-weil-pbc-matching-object-proper-faces`, `lem-weil-pbc-simplicial-hom-object-standard-simplex`, `lem-weil-pbc-simplicial-set-glue-simplex`, and the ordinal-boundary node. The first compares proper-face families with matching tuples, but does not itself identify maps from the boundary. The standard-simplex Hom node concerns objects in SR(X), not arbitrary simplicial sets. The gluing node proves a different pushout. None is cited for the missing set-level boundary comparison. The two finite-ordinal lemmas actually needed already exist as Mathlib leaves, so no new lemma or definition is created.
+
+## Not duplicates
+
+There are no new nodes. All existing generic tools used by the argument are cited directly. The matching-family and SR(X) nodes above are not restated as new nodes.
+
+## Review by Q101
+
+I checked the item against the available Stacks source and the statements of all three actual dependencies, with the files open. This is the author's self-review, leaving the independent review to the maintainer.
+
+1. Step 1 uses `def-weil-pbc-simplicial-set` for operators, subfunctors and morphisms as natural transformations. Image containment proves boundary closure. Naturality gives precisely the injection-compatibility equation required of R(h). The zero-dimensional argument uses the actual nonempty ordinal convention, so it gives both a unique empty-domain map and the empty family, without excluding n=0 or assuming T has a simplex.
+2. Step 2 uses `lem-weil-pbc-simplex-face-factorization` for existence and uniqueness through a specified missing vertex. I checked its hypotheses: n>=1, r>=0, order preservation, and that the selected i is absent. Its source-degree k is arbitrary, not bounded by the target n. The target value has the correct degree r because T is contravariant. This is a provisional construction, not an assumption that the choices agree.
+3. Step 3 again uses that factorization lemma, now at target n-1, and `lem-weil-pbc-simplex-face-face-identity` at parameter n-1. Both are Mathlib leaves, so they can be used as generic tools across units. The proof explicitly establishes n>=2 before applying them. The value j-1 really is missing after factoring through delta_i since i<j. The second factor is uniquely identified, and gamma is a proper injective face already indexed by x. The two compatibility equations therefore follow from the item's actual hypothesis on x; no degeneracy compatibility is assumed. The displayed calculation proves independence, including the reversed-choice case. The cited face identity has exactly the indices used here.
+4. Step 4 applies the same factorization uniqueness to an arbitrary order-preserving theta. The same omitted vertex remains absent after precomposition. The three equalities are functoriality with the correct contravariant order. This checks degeneracies as well as injections, which was essential to obtaining a simplicial map rather than a semisimplicial map.
+5. Step 5 uses the factorization lemma's explicit final clause, that psi is injective when iota is injective. Thus the family hypothesis applies, proving the right-inverse equality for every proper face, not only the codimension-one faces.
+6. Step 6 uses the definition of simplicial morphism from the definition node: naturality at psi gives the displayed equality on every boundary simplex. This proves the left-inverse identity. No general Yoneda theorem is silently taken from a node that states only full faithfulness.
+7. Step 7 uses the same natural-transformation definition for target functoriality and gives both directions of the standard-simplex evaluation formula explicitly. In particular z is sent to the correct family T(iota)z. This works even when a boundary map does not extend to Delta^n; extension is asserted only for the specified input z.
+8. Step 8 writes the set-level cone universal property by coordinates, so it needs no uncited existence theorem for arbitrary-size limits. The category is finite: objects are injections from ordinals of size at most n into a fixed finite ordinal, and arrows are injections between these fixed finite domains satisfying the factorization equation. The arrow direction gives T_k to T_l, consistent with contravariance. The n=0 category is empty and its limit is the singleton already proved in step 1.
+
+B1--B10: no new nodes or proof sketches disguised as statements; all objects of the unchanged statement are introduced and its simplicial notion cites its actual definition. Every new proof source has a Stacks tag and .tex label. No Lean attachment candidate or false Mathlib leaf is asserted. I preserved JSON formatting, all provenance, and maintainer fields.
+
+C1--C8: the only non-elementary facts used are the two existing finite-ordinal lemmas, cited exactly where used. Their statements were read and copied verbatim into citations.json for each occurrence. Definition citations are used only for the definitions and functor/naturality laws they state. No step imports a construction from another node's proof. The leaves have no path back to this item, so no new cycle is introduced. No off-route non-leaf statement is used and no tool_uses declaration is needed.
+
+D1--D5: the proof argument remains in this item in eight steps, with no replacement node restating its conclusion. No induction, unstated cofinality theorem, Reedy theorem, Eilenberg--Zilber decomposition, or colimit-identification theorem is assumed. The steps that use finite-ordinal factorization are non-elementary; the remaining steps are direct substitutions in functor laws, family compatibility, or the definition of a set-level limit. No step exceeds 2000 characters; the longest is the single overlap calculation of step 3.
+
+E1--E7 and small cases: n=0 gives a singleton on both sides even for the empty simplicial set. For n=1 the two vertices give an arbitrary pair of elements of T_0, and every boundary simplex is constant at one of these vertices; two distinct omitted vertices cannot occur. For n=2 the three edges meet at vertices, and step 3 is precisely equality of the common vertex values. For empty T and n>=1, both sets are empty (there is at least one boundary vertex), so no erroneous universal existence assertion results. The proof covers arbitrarily high r, repeated values in alpha, noninjective theta, and the identity theta. The limit diagram uses the specified direction of face restriction. No extra hypothesis, dropped case, source-error correction, or change to the unit statement was necessary.
+
+## Unfinished work and validation
+
+No mathematical subclaim remains unfinished. Required server dry run and delivery results will be recorded below when available. No local preflight, check_dag, review_split, compiler or Lake command was run.

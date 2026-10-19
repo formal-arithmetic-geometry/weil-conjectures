@@ -1,0 +1,55 @@
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-algebraic-space-open-gluing.json`: statement item, split into seven steps; not a Mathlib leaf. No new nodes and no new Mathlib leaves.
+- `citations.json`: one entry for each of the 22 step/node citations, quoting the cited statement verbatim.
+- `searches.jsonl`: actual launcher search records; retained in the sandbox.
+
+## Attachments
+
+No attachment for this item. Searches of `WeilConjectures/` in slopmaster2 and upstream master by the full id, blueprint tag and open-subfunctor terminology found no declaration of this algebraic-space statement. The relative scheme representability theorem at slopmaster2 `WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Representability.lean:682` belongs to the already closed existing node `lem-pc-schemes-criterion`; it is used as that node, not mistaken for a proof of the item.
+
+## WANTED
+
+None. All sources used are present.
+
+## Audit and changes
+
+The original item had an empty proof. Its statement is true and agrees, hypothesis by hypothesis, with Stacks `spaces.tex`, Tag 02WR, label `lemma-glueing-algebraic-spaces` (lines 1082–1160). I retained the sheaf hypothesis, the set-indexed family, algebraicity of every member, representability and openness of each inclusion, sheaf surjectivity of the coproduct map, and the separate algebraicity/size hypothesis on the coproduct. The conclusion is unchanged. The only statement edits add definition-node citations for subfunctors and open immersions, with their two statement dependencies. There is no STATEMENT-DISPUTED and no mathematical correction to the source.
+
+The proof follows all three paragraphs of 02WR. It makes the sheaf-coproduct base-change identification explicit rather than treating a sheaf coproduct as a sectionwise coproduct. In the final paragraph it checks the composite atlas via the scheme tests of the coproduct map; this is the same atlas as in the source and avoids introducing an unnecessary separate decomposition lemma for that atlas.
+
+The chapter and `sk-i-curve-zero` unit were read, together with the current main-20261015 ancestor `lem-trf-local-term-locality`. This is an auxiliary representability lemma below the quotient-by-etale-relation branch, not the statement node of the curve-zero unit. The existing blueprint ancestry is retained, and no unit realization file is changed. Whole-blueprint searches for “algebraic space open gluing” and “open subfunctors” returned no matching statement. Searches for “disjoint union”, “etale coproduct”, “coproduct of etale”, “02GJ”, and “subcanonical” located tools or different statements, not a duplicate of this item.
+
+All Mathlib searches were run through msearch.py and the actual log was read. Two phrasings for algebraic-space gluing produced scheme GlueData/LocalRepresentability results, which do not state this item. Loogle's exact `Scheme.LocalRepresentability.isRepresentable` result is the scheme criterion already represented in the DAG. Searches for coproduct-etaleness found the more general `IsZariskiLocalAtSource.sigmaDesc` (read at Mathlib `Morphisms/Basic.lean:305`), but before creating a node I found `lem-weil-pbc-etale-local-on-source`; together with the existing scheme-coproduct node it proves precisely what is needed. The finite-only `lem-sc-etale-coproduct-etale` and field-only `lem-exc-etale-coproduct-etale` were not misapplied to an arbitrary family. Searches for subcanonicality located Mathlib's fppf and fpqc subcanonical instances (`Sites/Fpqc.lean:87–98`, read), but the existing stronger `lem-weil-pbc-fpqc-representable-descent` and `lem-pc-fppf-affine-refinement` suffice. No new subcanonicality node was created. Original imported search records were retained; the fresh queries and actual result names are appended, without treating rejected queries as evidence of absence.
+
+## Not duplicates
+
+No new nodes. The potential general coproduct-etaleness node was discarded in favor of the existing arbitrary-source locality theorem. The potential fppf-subcanonicality node was discarded in favor of the existing fpqc representable descent theorem and affine refinement.
+
+## Review by Q44
+
+I read 02WR in `spaces.tex`, 01JJ (`schemes.tex`, `lemma-glue-functors`, lines 2893ff.), 00WI and 00WK (`sites.tex`, `lemma-colimit-sheaves` and `lemma-sections-sheafification`, lines 2114ff. and 2156ff.), 023Q (`descent.tex`, `lemma-fpqc-universal-effective-epimorphisms`, lines 4130ff.), 021P (`topologies.tex`, `lemma-fppf-affine`, lines 1970ff.), and 02GI/02GJ and the adjacent composition/base-change statements in `morphisms.tex`. There are no new-node sources to review. The item has no missing hypotheses relative to 02WR; in particular the algebraicity of the coproduct is retained to supply a single admissible scheme atlas. I opened the statement of every cited node and copied each verbatim to citations.json.
+
+Step 1 uses the finite affine refinement actually supplied by `lem-pc-fppf-affine-refinement`, the definition's finite-affine-open criterion for an fpqc family, and the **family** form of representable descent in `lem-weil-pbc-fpqc-representable-descent`. Thus this is not an application of singleton descent to an arbitrary family. Uniqueness of descent into the scheme S ensures that the descended map is over S. This is a short consequence of the three existing statements, so it remains an elementary step rather than a new subcanonicality node.
+
+Step 2 uses only the universal property stated by `def-weil-pbc-sheafification` to identify the sheafification of the sectionwise coproduct with the sheaf coproduct. Actual local representatives and local equality are supplied by `lem-weil-pbc-site-sheafification-sections-local`, not by that definition. I checked its site/size convention: the big fppf site and all sets here are within the project's size convention, with the containing universe enlarged as in the existing algebraic-space definition. I checked that unequal coproduct indices cannot become equal on a nonempty test scheme; empty schemes are handled by the empty cover.
+
+Step 3 uses the scheme-test representability definition in `def-trf-algebraic-space`, the ordinary open-subscheme meaning in `def-weil-open-immersion`, and joint surjectivity in `def-pc-fppf-site`. It uses **sheaf** surjectivity only for local lifting, refines that lift with Step 2, and then uses the actual surjectivity of the covering schemes to conclude that the opens cover T. It does not assume sectionwise surjectivity of the original coproduct map.
+
+Step 4 uses the exact existence, open coprojections, disjointness, and covering clauses of `lem-weil-pbc-scheme-coproduct-family`. The cited Zariski-to-fppf lemma makes the disjoint open cover an allowed covering for E_T. The sheaf equalizer axiom in `def-weil-pbc-sites-and-cohomology` gives the componentwise fibre-product sheaf property and gluing. The comparison is described explicitly: glue the maps from inverse images of coproduct components, lift sections locally, check their agreement by local equality in the presheaf coproduct and the monomorphism F_i→F, then descend maps into the scheme using Step 1. Thus no unstated assertion that pullback commutes with a sheaf coproduct is being used as a black box.
+
+Step 5 uses only the **individual** representable diagonals of the F_i from `def-trf-algebraic-space` to represent V_i×_{F_i}V'_i. It does not assume the diagonal of F, whose representability is precisely being proved. Every scheme test of G_i→G is the open pullback of F_i→F; Step 3 proves these opens cover. Step 1 and the cited Zariski-to-fppf statement prove the Zariski sheaf hypothesis on G, so all three clauses and the sheaf hypothesis of `lem-pc-schemes-criterion` apply. I read the criterion's full statement: it genuinely gives representability from representable open subfunctors, rather than only defining the covering notion.
+
+Step 6 applies the open-immersion clause of `lem-weil-pbc-etale-composition-cancellation`, then uses `lem-weil-pbc-etale-local-on-source` on the arbitrary (possibly infinite) open cover of the coproduct given by the scheme-coproduct node. Neither finiteness nor quasi-compactness is inserted. Surjectivity was already proved on every scheme test in Step 3. This makes the coproduct map representable, etale and surjective without presuming F algebraic.
+
+Step 7 uses the atlas in the hypothesis that H is algebraic, exactly as the definition states. For each T→F, C_T is a scheme **before** applying the atlas's scheme-test property. Its pullback gives a surjective etale scheme map to C_T. Composition of etale maps is clause (2) of the cited composition node, and composition of surjective scheme maps is exactly `lem-trf-surjective-morphism-composition`. This proves a representable surjective etale U→F without a circular appeal to fibre products of algebraic spaces over the as-yet unproved space F. The diagonal and sheaf conditions already proved then complete the definition.
+
+I checked delivery-errors B–E point by point: no new definitions or unsplit child proofs, all statements self-contained via existing notions, no source-only theorem citations without DAG nodes, no C4 mismatch, no use of a cited node's proof, no duplicate child or restated-clause child, and no source hypothesis silently added. The generic off-unit tools are the fppf affine-refinement theorem and scheme representability criterion; their uses are declared in split_report.tool_uses because the trace-formula unit supplies neither theorem. Other off-unit theorem tools used are existing Mathlib leaves. No SGA source is used.
+
+Edge cases: if I is empty, sheaf surjectivity forces every map T→F to have empty T, the empty coproduct tests and empty atlas yield the empty algebraic space. If a member or test scheme is empty, the sheaf condition for its empty cover gives a singleton and the argument's local-uniqueness statements remain valid. Repeated identical F_i do not cause indices to be identified in H: H is the disjoint sheaf coproduct, while their overlap occurs over F, exactly as E_T=disjoint-union V_i records. For an infinite cover of a non-quasi-compact scheme, arbitrary scheme coproducts and source-local etaleness still apply; no finite cover is extracted except in the independent affine check of fpqc covering in Step 1. A nonseparated algebraic space is allowed: the proof only uses representability of its diagonal, never separatedness or affineness of open intersections.
+
+During self-review I replaced the planned new coproduct-etaleness lemma by the existing arbitrary-source locality node, made the fppf representable-sheaf justification explicit, and wrote out the coproduct comparison rather than citing a generic finite-extensivity result for an infinite family. Every step is shorter than 2000 characters; the two elementary comparison arguments are short consequences of the cited statements and sheaf axioms, with their maps and inverses specified.
+
+## Unfinished work
+
+None in this one-level split. The requested server dry run and direct delivery follow this report.

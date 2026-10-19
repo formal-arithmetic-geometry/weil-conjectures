@@ -1,0 +1,71 @@
+# Worker report
+
+Group Q56; item lem-trf-flat-algebra-etale-projective-neighborhood; 2026-10-19. Stage 1 only. Direct delivery with self-review as requested by the dispatcher brief; the maintainer supplies the independent reading.
+
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-flat-algebra-etale-projective-neighborhood.json: existing statement, now split; statement unchanged; no Mathlib match.
+- dag/nodes/sec-trace-formula/def-trf-complete-algebra-devissage.json: new definition, statement only, unsplit; no Mathlib match.
+- dag/nodes/sec-trace-formula/lem-trf-complete-algebra-devissage-etale-existence.json: new statement, unsplit; no Mathlib match.
+- dag/nodes/sec-trace-formula/lem-trf-complete-algebra-devissage-projective-localization.json: new statement, unsplit; no Mathlib match.
+- citations.json: verbatim statements supporting every use in the item's eight steps.
+- report.md: this report. searches.jsonl retains the actual msearch records. write_split.py is a sandbox-only construction script, not a delivery file.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 WeilConjectures tree for the item id, its blueprint tag, complete devissage and the etale/projective-neighborhood concept. No project declaration gives this statement. The upstream master source was not used as proof evidence. No Lean was written and no compiler, Lake or build command was run.
+
+## Wanted sources
+
+None. All source results used are in literature/stacks-project/flat.tex, algebra.tex, morphisms.tex and the local Mathlib source. No SGA source is used.
+
+## What was wrong or incomplete
+
+The existing item had a correct statement, with the 05IG fibre-ring typo already corrected in its source note, but no proof or proof dependencies. It is the structure-sheaf case of 05ID plus the fibre-map assertion. Merely citing a new general version of 05ID would move the whole result into a new node; this delivery instead exposes the two different ingredients 05I1 and 05IB, the common complete-devissage notion 05HX, and the intermediate algebra/scheme checks.
+
+The square furnished by elementary etale neighborhoods is not asserted cartesian. Step 2 constructs its map to the cartesian base change and uses etale cancellation. This supplies both the relative flatness argument in Step 4 and the fibre etaleness argument in Step 7. No false cartesian identification is used. The item requires finite presentation of S-prime as an algebra over R-prime, whereas 05ID's conclusion does not explicitly repeat it. Step 3 checks this from the etale graph map, affine finite presentation, and composition. The resulting module may have infinite rank over the base; the Mathlib flat-plus-finitely-presented-MODULE theorem is therefore not an attachment or a Mathlib leaf for this item.
+
+The current main-20261015 ancestor proof lem-trf-local-term-locality follows Varshavsky's contracting-correspondence route. The item's already recorded ancestry is the historical supporting semistable/weak-assassin algebra branch. I read that current ancestor proof and the chapter and sk-i-curve-zero unit; I have not changed their route or realized fields. The blueprint fields explicitly describe the historical branch instead of claiming that the current ancestor contains this algebra theorem. Searches for complete devissage and the Stacks tags found no blueprint node stating the new results.
+
+## Mathlib and duplicate searches
+
+All Mathlib searches were made with the mandated msearch.py command and read. The definition was searched by complete-devissage terminology and by its actual chain of finite algebra maps, smooth algebras, generic-fibre bases and cokernels. The existence lemma was searched by elementary etale localization and by Raynaud-Gruson complete devissage. Projectivity was searched both by localization after devissage and by the decomposition into smooth-algebra summands. Loogle queried devissage and the expected Etale, Smooth and Projective names. Greps searched devissage/dévissage/completeDevissage, etale-projective combinations and the candidate declaration names. Searches are recorded with their exact query strings and returned summaries in the JSON; services succeeded in this pass.
+
+I read Mathlib/RingTheory/Flat/EquationalCriterion.lean:287-289: Module.Flat.projective_of_finitePresentation needs Module.FinitePresentation over the base. I read Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq has QuasiFiniteAt and yields a finite idempotent factor, not devissage of an arbitrary module. The remote search index displays an older finite-module signature for this result; the local source still has a quasi-finiteness hypothesis absent from our existence lemma. I read Etale/Locus.lean:103-109: exists_etale_of_isEtaleAt assumes IsEtaleAt, also absent. The smooth-presentation/descent hits and complete-lattice/adic-completion hits provide no complete-devissage structure or either needed theorem.
+
+Before creating files, I searched the whole DAG for 05HX, 05I1, 05IB, the Stacks labels and complete-devissage terminology, used blueprint_refs.py searches for each tag and the concept, and searched the Lean source. No existing node states these results. Existing elementary-module-devissage and elementary-devissage-flatness nodes concern one step, not the terminal cokernel chain and its generic-fibre isomorphisms. The flat/etale/fibre-product/finite-presentation facts already had nodes and were reused.
+
+## Not duplicates
+
+- def-trf-complete-algebra-devissage vs lem-trf-elementary-module-devissage: the new node defines a complete algebraic chain of cokernels terminating in zero; the existing statement produces one geometric devissage step, with marked dimension and residue data.
+- lem-trf-complete-algebra-devissage-etale-existence vs lem-trf-elementary-module-devissage: the new statement supplies a complete chain for an arbitrary finite module, not just one elementary geometric step. It asserts no projectivity and assumes no flatness.
+- lem-trf-complete-algebra-devissage-projective-localization vs lem-trf-affine-geometrically-integral-projective: the new statement takes a supplied complete devissage of an arbitrary finitely presented S-module and gives projectivity after localization of the base; the existing statement concerns the algebra itself with every fibre geometrically integral, with no supplied chain.
+- lem-trf-complete-algebra-devissage-projective-localization vs lem-trf-flat-algebra-etale-projective-neighborhood: the new statement does not produce any etale neighborhood. Its essential extra input is a complete devissage, while the item must first construct that input and verify flatness and finite presentation. Thus it is not a relocated clause of the item.
+
+## Review by Q56
+
+I read flat.tex Tag 05ID (proposition-finite-presentation-flat-at-point), Tag 05I1 (lemma-existence-algebra), Tag 05HX (definition-complete-devissage-algebra), Tag 05IB (lemma-complete-devissage-flat-finitely-presented-module), and the proof and surrounding remarks, especially remark-same-notion and the first paragraph of 05IG. I also read 05B8's proof of etaleness to the base change. The item agrees with 05ID for the structure sheaf: it is quasi-coherent and finitely presented over itself, and the assumed R-flatness is stronger than the pointwise hypothesis. The new definition copies the algebra maps, their finiteness/presentation assumptions, smooth geometrically irreducible fibres, generic-fibre isomorphisms and terminal-cokernel condition of 05HX. It defines all data and scalar actions, including the zero-module convention. The 05I1 node forgets the additional pointing of the devissage at q-prime but retains the elementary etale localization and complete devissage over p-prime. The 05IB node retains all three essential inputs: algebra finite presentation, module finite presentation over S, and flatness over R, plus the supplied devissage. It does not assume finite generation over R.
+
+For Step 1 I opened the new existence node: it gives precisely the commutative pointed square, contraction and residue-field maps, and complete devissage of N tensor S_0. Taking N=S meets its finite-module assumption since 1 generates S. The tensor identification is explicitly written; it supplies S_0, not an unrelated module.
+
+For Step 2 I opened fibre-product-affine-spectra, etale-scheme-base-change, and etale-composition-cancellation. The first states the affine tensor/product comparison and projections; the second applies to arbitrary base change; clause (3) of the third states that if a morphism and its composite with a second are etale, the first is etale. Both maps to Spec S are etale here, so the graph map qualifies. I checked directions of all spectrum maps.
+
+For Step 3 the definition etale-morphism includes local finite presentation. I opened lfp-affine-opens-finite-presentation: it applies to any affine opens with the stated containment, here the whole affine schemes. The finite-presentation-base-change-composition node has both clauses used, first for R_0 to T and then for R_0 to S_0. No projectivity criterion for finitely presented base modules is substituted.
+
+For Step 4 I opened flat-ring-map-iff-flat-affine, flat-morphism-base-change, etale-algebra-flat and flat-ring-map-comp. Each gives the claimed implication for the actual ring maps or arbitrary scheme base change used here. In particular the map R_0 to T is a base change of the assumed flat map, and T to S_0 is the etale graph of Step 2. Their composite is the relevant R_0 action on S_0. This replaces the source's etale-base flatness change lemma by its explicit cartesian-base-change argument, using existing generic tools, without changing the devissage route.
+
+For Step 5 I checked every hypothesis against the new 05IB statement: Step 3 gives algebra finite presentation, S_0 has a length-one free presentation over itself, Step 4 gives R_0-flatness, and Step 1 gives complete devissage over the very same p_0. The element f is outside p_0 as needed. I opened localization-finite-presentation-ring-map: its localization submonoid can be the powers of f, so it gives the algebra finite presentation of (S_0)_f over (R_0)_f. The tensor/localization isomorphism is explicit.
+
+For Step 6 I also opened principal-localization-open-immersion and localization-prime-residue-field-iso: the first supplies exactly the open immersion and its image D(f), while clauses (1)--(3) of the second give the contraction, local-ring isomorphism and residue-field isomorphism for powers of f. These existing results are now explicitly cited, and the step is marked non-elementary. I rechecked clauses (1) and (2) of etale-composition-cancellation, which cover open immersions and compositions. The remaining work is elementary fractions: primes avoiding f extend and contract, the preimages of the two primes are the prescribed primes, and inverting f first does not change the local rings at those primes. The inverse maps on fractions are written, so the residue-field isomorphisms and compatibility are justified without an unstated residue extension claim.
+
+For Step 7 I again checked the precise statements of etale cancellation, etale base change and the affine fibre-product comparison. They apply to the final square exactly as in Step 2. The fibre map is formed over R-prime with its residue field, not with kappa(q-prime). The inverse residue-field isomorphism identifies the source with C, and the tensor reassociation maps are written. Thus the resulting etale map is the map of the statement.
+
+For Step 8 I opened fibre-ring-primes-bijection: it gives a unique fibre prime with each prescribed contraction, and the indicated inverse is a kernel of the residue evaluation. The equality of the two composites S to C-prime implies the required contraction; uniqueness gives the asserted prime, with no unproved assertion about images of points or schemes.
+
+Small cases checked: for R=k and S=k[t], the base module is infinite dimensional, so no finite-module hypothesis can be inserted; devissage and the conclusion allow infinite rank. For R=S and N=R in the new projectivity node, a one-step identity devissage works and f=1 is possible. For N=0, the empty devissage is allowed and the conclusion is zero projective, avoiding a fictitious mandatory S-to-R quotient. The ring k[t,t^-1] and primes at generic and closed points test preservation of points after a principal localization. The zero ring S has no prime q, so the item and the pointed existence result are vacuous there; the 05IB zero-module case still makes sense over a ring with a prime. Reducible fibres, e.g. k[x,y]/(xy), do not violate the existence statement: it assumes no geometric integrality of S and uses a multi-step devissage, unlike the existing geometrically-integral-algebra theorem.
+
+I checked B1--B10: new nodes have statement-only bodies, self-contained hypotheses, notion dependencies, single-escaped TeX, exact source tags and labels, actual searches, no unsupported Mathlib-leaf claim, and blueprint ancestry. I checked C1--C8 against the opened cited statements as above; generic off-unit tools are declared in split_report.tool_uses. The non-elementary steps are all shorter than 2000 characters or hides an additional standard lemma. D1--D5 are addressed by leaving the construction in the item and introducing only the independent complete-devissage inputs. E1--E7 were checked with the explicit ring maps, finiteness distinctions, noncartesian square, fibre-field typo, and the cases just listed. I corrected no statement. A final citation audit added the existing principal-localization open-immersion and prime/residue-field nodes to Step 6 rather than leaving their scheme identifications implicit. The concrete repairs during self-review were to make the affine finite-presentation check explicit, to prove flatness over the new base via the etale graph, and to spell out the localization and fibre-prime arguments.
+
+## Unfinished work
+
+The three new nodes are deliberately not split; this is a one-level stage-1 delivery. No other part of the assigned split is deferred. Required remote dry run and push follow this review.

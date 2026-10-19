@@ -1,0 +1,44 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-trace-formula/lem-trf-affine-geometrically-integral-projective.json: split; statement unchanged; three proof steps, using the already existing full theorem lem-trf-local-fibres-integral-projective. No new nodes and no new Mathlib leaves.
+- citations.json: verbatim statements for every citation in the three steps.
+- searches.jsonl: actual Q91 searches, including exploratory searches for dependencies that were not created. The item's six inherited Q35 search records were retained, not represented as Q91 searches. Five additional item searches are recorded exactly as run.
+
+Attachments: none. Searches by the item's id/blueprint tag, geometric-integrality terminology and projectivity in /home/ubuntu/weil-src-slopmaster2/WeilConjectures found no project declaration proving the item. The upstream master checkout was not treated as proof evidence.
+
+WANTED: none.
+
+The imported item was mathematically correct, but duplicated an existing same-unit node. The existing lem-trf-local-fibres-integral-projective, also sourced to Stacks 05FT, states exactly the theorem needed. Under the duplicate-reuse rule it should be cited, not copied into new Noetherian-projectivity or approximation nodes. This delivery retains the item's id because other nodes cite it, and forwards its proof to that existing interface after explicitly checking the scalar-extension hypothesis. The maintainer may consolidate the two ids separately. The existing node remains unsplit; this delivery does not claim to finish its proof or the transitive closure.
+
+Nothing remains unfinished in this one-level split. No Lean source was written, and no compiler, Lake, build, local preflight or local DAG-review check was run.
+
+## Sources and searches
+
+Read literature/stacks-project/flat.tex, Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian, lines 2247--2278. Its hypotheses are finite presentation and flatness, and geometric integrality of every residue-field fibre; its conclusion is module projectivity, not projectivity of a scheme morphism. Read its proof: descend flatness and geometric reducedness/irreducibility simultaneously (05FE, 05FG, 05FH, 05FL), apply the Noetherian theorem 05FS, then extend scalars (05A3(4)). Those are the dependencies to expose when the existing full-theorem node itself is split; duplicating their proof tree here would violate reuse. Read the statements/proofs of those tags in more-morphisms.tex, flat.tex and algebra.tex, to check that neither a finite-module nor a smoothness hypothesis was being smuggled in.
+
+Read algebra.tex, Tag 05DX, definition-geometrically-integral, lines 11660--11667: geometric integrality of a k-algebra means that its tensor with every field extension is a domain. Read algebra.tex, Tag 05CF, lemma-characterize-projective, and the full existing projective-definition node, including the split-free-module equivalence.
+
+DAG searches used both tag/label searches (05FT, 05FS, 05FE, 05FG, 05FH, 05FL, 05A3) and projectivity/Noetherian-approximation concepts across all dag/nodes. Opened lem-trf-local-fibres-integral-projective in full: its statement, not an unexposed part of its proof, supplies Step 2. Searched the entire imported blueprint with tools/blueprint_refs.py for 'geometrically integral', 'flat projective', 'Noetherian approximation', 'projective module', 'extension of scalars of a projective', 'finite type flat', 'fibres-irreducible-flat-projective', 'Noetherian-approximation-flat', 'tensorProduct', 'geometrically integral flat', and 'fibres integral projective'. None is a blueprint node stating this ring theorem. The duplicate is a worker-created node, so blueprint.same_as remains [].
+
+Read the trace-formula chapter, unit sk-i-curve-zero, current lem-trf-local-term-locality (including blueprint_update), and the immediate parent lem-trf-affine-generic-rank-blowup. The inherited descendant chain reaches the flattening input; the parent's Step 2 takes exactly the split embedding into a free R-module that this item supplies. No unit record is changed. The reused node has this same chapter and unit.
+
+Mathlib search hits were read. Module.Flat.projective_of_finitePresentation requires finite presentation as a MODULE; the item assumes finite presentation as an ALGEBRA, so it is not a match (R[x] already illustrates the difference). Module.free_of_flat_of_finrank_eq requires a finitely generated module and a semilocal base. Smooth.flat and Smooth.exists_subalgebra_finiteType assume smoothness, which is absent here. GeometricallyIntegral scheme definitions and the affine-space instance do not prove module projectivity. A second semantic phrasing produced the same mismatch. Module.Projective.tensorProduct, Mathlib/Algebra/Module/Projective.lean:242, was also read; it would give scalar-extension projectivity, but no leaf for it was needed after finding the existing full theorem. All searches used the required msearch.py command and remain in searches.jsonl.
+
+## Not duplicates
+
+lem-trf-affine-geometrically-integral-projective vs lem-trf-local-fibres-integral-projective: these existing nodes state the same Tag 05FT theorem. The delivery cites the latter, creates no duplicate node, and leaves its record untouched. In particular, a new Noetherian-case node was not created to hide the content of the item under another name.
+
+## Review by Q91
+
+I compared the unchanged item statement with Stacks 05FT hypothesis by hypothesis: R and B are arbitrary commutative rings, the ring map is flat and finitely presented as an algebra, every prime and every extension of its residue field are quantified, and the conclusion is projectivity without a finite-generation qualification. There is no hidden Noetherian or smoothness assumption. There are no new statements to review.
+
+For Step 1 I opened def-weil-pbc-module-tensor-product. Its statement provides the universal bilinear property and generation by pure tensors. The two displayed maps are balanced: multiplying a by an element of k on the left or moving that element to t gives the same product at; the R-balancing follows through R to k to K. Their compositions are the identity on pure tensors, and multiplication and units agree on generators. Thus (B tensor_R k) tensor_k K and B tensor_R K are isomorphic rings. Tag 05DX then identifies exactly the phrase 'geometrically integral fibre rings' in the reused theorem. This is an elementary verification, not an appeal to an uncited base-change theorem. The ring definition is written explicitly in the step, so no new definition node is needed.
+
+For Step 2 I read the entire statement of lem-trf-local-fibres-integral-projective, which says that a finitely presented flat homomorphism of commutative rings with geometrically integral fibre rings is projective as a base module. Its base is arbitrary, matching this item. Step 1 verifies its fibre condition; the two other hypotheses are given. The full conclusion is its statement, so no part of that node's missing proof is being used as an extra output. This is the sole non-elementary step and cites the existing theorem; the no-new-duplicates instruction is why the source's Noetherian proof was not separately re-created.
+
+For Step 3 I opened def-weil-pbc-projective-module. Its statement explicitly asserts the equivalence with maps i and s to and from a free direct sum such that s composed with i is the identity. The conclusion is therefore an instance of the cited equivalence. No tensor-preserves-projective assertion is used by this step.
+
+Small cases: for a zero base ring the only unital algebra is zero, the fibre condition is vacuous, and the zero module is projective; for a nonzero base the zero algebra fails the integral-domain condition, so no empty fibre is silently admitted. Polynomial algebras have geometrically integral fibres but usually infinite module rank, so the proof never substitutes the finite-module projectivity lemma. A localization deleting a prime has a zero fibre and is excluded. Nonreduced bases remain allowed, as 05FT and the reused node require. The tensor maps and split-free formulation include zero modules and arbitrary index sets.
+
+I checked delivery-errors B--E: no new nodes or unsupported definitions; self-contained unchanged statement with the existing tensor-definition dependency added; actual recorded searches; verbatim citation evidence for every use; no new clause moved to a node; no appeal to a cited proof rather than its statement; and no hypothesis strengthening. The reused node has empty proof dependencies and no path back to this item, so the forwarding edge introduces no cycle. All proof steps are shorter than 2000 characters. The concrete correction made during review was to reuse the already existing full theorem instead of introducing redundant Noetherian-case and approximation nodes. No statement dispute was found.

@@ -1,0 +1,31 @@
+## Worker report
+
+Files written: `dag/nodes/sec-purity-real-sheaves/lem-rp-exterior-reality.json` (statement, split; no Mathlib match), and `citations.json`. No new nodes and no Mathlib leaves. `searches.jsonl` retains the six actual msearch results. The sandbox initially held only handoff markers; there was no previous split or delivery to repeat.
+
+Attachments: none. `AlgebraicGeometry.WeilGroup.IsReal.exteriorPower_of_charpoly_eq` in `WeilConjectures/EtaleCohomology/Purity/RealSheaves/Operations.lean:311` has a closed-looking proof and specializes to the representation assertion by taking sigma equal to rho. It is formulated for the WeilGroup of a curve, rather than the general sheaf statement of this item. It is therefore supporting reference material, not an exact attachment. The exact blueprint-tag search and a concept search of WeilConjectures found no general sheaf theorem.
+
+WANTED: none. The proof follows the current blueprint, which is agent-written, so proof_origin remains agent. No Stacks theorem or SGA route is used.
+
+The imported statement is unchanged and agrees with the current main-20261015 statement. The missing statement dependency `def-wf-iota-real` is added. The old proof did not spell out the permutation of occurrences, the exterior stalk identification or the degree-zero case. These are now explicit. Its separate triangularization citation is redundant because the statement of `p-linear-spectra` already gives the full exterior spectrum without a diagonalizability hypothesis. No dependency is pruned by guessing about reachability.
+
+Nothing remains unfinished in this one-level split. Existing dependencies remain their owners' work; this delivery does not split them.
+
+## Sources and searches
+
+Read the chapter record sec-purity-real-sheaves and the unit sk-r-real-linear. The latter's exterior-reality consequence follows exactly its linear-spectrum route. Read the current `literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-rp-exterior-reality.md` and `.proof.md`, as well as the old combined source. Read the full statements of `def-real-weil-representation-operations`, `def-wf-iota-real`, `p-linear-spectra`, and `cor-galois-lisse-representations`. For the fibre tool also read its blueprint source in sec-poincare-duality/sk-lem-finite. Its current DAG statement explicitly corrects the finite-stalk/adic coefficient wording of the old source and supplies the required ell-adic exact tensor clause. Followed the current blueprint_update of p-linear-spectra; its exterior clause is unchanged.
+
+Whole-DAG and whole-blueprint searches included `blueprint_refs.py search 'exterior reality'`, `search 'exterior'`, ancestor lookup, and searches for p-linear-spectra, p-linear-triangular, and def-wf-iota-real. The item alone states this consequence. The generic existing spectral and fibre results suffice, so no statement duplicating a clause of the item was introduced.
+
+All six recorded Mathlib queries were run through msearch.py and their returned hits read. The second semantic phrasing returned symmetric/Hermitian spectral results; these require a symmetric operator and do not apply to an arbitrary real characteristic polynomial. The first returned isocrystals and arithmetic Frobenius. LeanSearch returned exterior functoriality and characteristic-polynomial definitions, not reality. Loogle returned zero hits. The second grep returned powersetCard mapping facts, not the theorem; read `Mathlib/Data/Multiset/Powerset.lean:304`. These elementary finite-combinatorial identities support the written subset argument but do not turn the sheaf item into a Mathlib leaf.
+
+## Not duplicates
+
+No new nodes, hence no new/existing node pairs to distinguish.
+
+## Review by Q26
+
+I checked the four steps against the cited statements with the source open. Step 1 uses the exterior-action formula in def-real-weil-representation-operations and the exact tensor equivalence, tensor unit, and diagonal action stated in clause (2) of cor-galois-lisse-representations. Exactness preserves the alternating quotient and the tensor constraint identifies its action; the quotient generators give the displayed wedge formula. This generic fibre theorem is declared as a tool use because its unit is outside the item's route. It does not replace the spectral argument. On each connected geometric component, finite type over a field ensures the Noetherian hypothesis, separatedness is inherited, and ell is invertible by the coefficient convention. No normality, smoothness, geometric semisimplicity, or diagonalizability is introduced.
+
+Step 2 takes exactly the exterior-eigenvalue multiset formula from p-linear-spectra. The stalk is finite dimensional over the algebraically closed coefficient field, and applying iota preserves the products. I did not use its inverse-dual clause or anything hidden in its proof. Step 3 takes the conjugation-stability equivalence stated in def-wf-iota-real. The occurrence-indexed permutation induces a bijection of r-element subsets; writing the product identity verifies preservation of multiplicities. Step 4 takes the product definition of the local factor and the reality criterion from the same definition. Conjugation simply reorders its factors, so the polynomial equality implies that every coefficient is real. These last two steps are elementary finite-permutation and polynomial arguments, written in full rather than delegated to new nodes.
+
+I tested r=0 (the unique empty product is 1 and the local factor is 1-T), r=s (the sole total product), rank zero (only r=0), repeated eigenvalues and a nonreal conjugate pair. For example eigenvalues i,-i give a real exterior-square eigenvalue 1. Non-diagonalizable Frobenius is covered by p-linear-spectra. Disconnected bases are treated componentwise and no choice of a global eigenvalue enumeration is made. Each proof step is below 2000 characters; none hides a standard comparison or long sublemma. Every step citation has a verbatim quote in citations.json. B1-B10 require no new-node decisions here; C1-C8, D1-D5 and E1-E7 were checked by the source and hypothesis comparisons above. There is no statement dispute, source-route departure, new definition, or circular new-node reduction.

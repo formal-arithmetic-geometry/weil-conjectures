@@ -1,0 +1,80 @@
+# Stage-1 worker report: det-cor-coefficient-heart-ii-generation
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/det-cor-coefficient-heart-ii-generation.json`: statement, split; original statement preserved; no Mathlib match for the full generation result.
+- `citations.json`: verbatim extracts from the statements of every node cited by each of the five proof steps.
+- `report.md`: this report. `write_split.py` is sandbox-only preparation code; `searches.jsonl` is the search command's authentic log.
+
+## New nodes
+
+None. There are 0 new nodes and 0 new Mathlib leaves. The existing general short-exact-sequence and truncation interfaces suffice; none of the item's clauses has been moved into a new node.
+
+## Attachments
+
+None for this item. Searches of all `WeilConjectures/` in `/home/ubuntu/weil-src-slopmaster2` by the exact blueprint tag and by finite-cone/generation terminology found no declaration giving the item. The narrower ProEtale search found only unrelated generation terminology. The upstream master search likewise found no candidate. No master sorry declaration was treated as a completed proof.
+
+`DerivedCategory.triangleOfSES_distinguished` is already attached to `lem-weil-pbc-complex-ses-triangle`; it is a Mathlib theorem, not an attachment of the present project item. Its source in `Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean`, lines 72–94, was read. Loogle and grep rediscovered it. We reuse that existing node.
+
+## WANTED
+
+None. The current blueprint statement and its separate `.proof.md`, the coefficient-heart and filtration statements and proofs, and the Stacks source were available locally. No download, compiler, Lake or build was used.
+
+## Corrections and scope
+
+The original statement is unchanged. The proof still follows the current unit's filtration and cohomological-truncation route. The current unit is `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/_section.md`; its two cited units are coefficient-heart and constructibility. The current chapter `_section.md` explicitly uses ordinary derived categories of modules over pulled-back condensed coefficient sheaves. The corresponding new chapter/unit JSON records are absent, and the imported item has neither `chapter` nor `unit` metadata; I read the current blueprint section records directly and left maintainer metadata untouched. No unit realization file is changed, since this item is a detail lemma rather than the whole triangulation-and-generation corollary.
+
+The imported proof left the derived-category inputs uncited, did not justify its initial zero object as a generator, and omitted how two finite construction lists are combined. These are now explicit. Inverse rotation naturally uses `-delta[-1]`; I wrote this sign in both sheaf and truncation constructions. This is a proof-detail correction, not a change to the proposition. Instead of an induction stated only by the count of nonzero cohomology sheaves, the proof runs from a lower to an upper cohomological bound and writes both endpoint quasi-isomorphisms. It also treats gaps in cohomology and the entirely acyclic case.
+
+No `STATEMENT-DISPUTED` issue was found. No SGA source is used. In particular, the coefficient ring sheaf is the pulled-back condensed coefficient object of the current blueprint; it is not silently replaced by the discrete constant field or by a completed integral category.
+
+## Mathlib and duplicate search
+
+All Mathlib searches were run through `/home/ubuntu/weil-launcher-nt/msearch.py Q11 det-cor-coefficient-heart-ii-generation`, using leanfinder twice with different phrasings, Loogle, LeanSearch, and two source grep queries. Exact queries and actual results are recorded in the item's `mathlib_searches` and the tool log. The first semantic search returned finite-presentation sheaf predicates and condensed constructions; the second returned general cohomological-boundedness and bounded-representative lemmas. Neither states this generation theorem. LeanSearch likewise found bounded representatives, the standard t-structure and unrelated condensed constructions. Loogle found the triangle of a short exact sequence, already covered by an existing DAG node. The CategoryTheory grep for constructible/lisse had no hits; the derived-category grep located the short-exact triangle theorem at line 92 of `ShortExact.lean` and its uses. These are useful general tools but not an exact or one-line match for the item.
+
+Whole-DAG title/statement searches and `tools/blueprint_refs.py search` were run for truncation, distinguished triangle, generation, generated/cones, and extension/zero/lisse. The finite-coefficient flat-model generation lemma and thick-generation results have different coefficients, hypotheses or direct-summand closures. The compactness-generation lemma is about localizing generation and arbitrary sums. None duplicates the present finite-cone assertion for arbitrary Noetherian schemes with the two field coefficient choices, so `blueprint.same_as` is empty. The imported `blueprint.from` remains null, as required for a blueprint node.
+
+## Not duplicates
+
+No new nodes are proposed. The search found and reused `lem-weil-pbc-complex-ses-triangle`, `lem-weil-pbc-truncation-triangle`, `def-kun-truncations`, and `lem-weil-pbc-proetale-ringed-open-closed`, instead of creating new versions.
+
+## Review by Q11
+
+I read the item's statement and its separate proof file in the main-20261015 snapshot, the current chapter route and unit statement, and the coefficient-heart introduction, filtration statement/proof, common-stratification statement, constructibility definition and triangulated-subcategory statement. For the general tools I read the actual node statements, not merely their titles or proof bodies. I checked the Stacks text `derived.tex`, Tag 0152 (`lemma-derived-canonical-delta-functor`) and Tag 08J5 (`remark-truncation-distinguished-triangle`), and `homology.tex`, Tag 0118 (`section-truncations`). For extension by zero I read `proetale.tex` at Tags 09AA, 09BM, 09BN, 09AG and 09AH and checked the tag-label table. The coefficient compatibility statement was also read in the current blueprint. There are no new nodes whose sources need a separate review.
+
+Step 1 takes the meaning and exact extension-by-zero convention from `sk-lem-coefficient-heart`, the explicit cone and localization convention from `def-weil-abstract-derived-category`, and the rotation/isomorphism axioms from `def-weil-triangulated-category`. The actual finite-list concatenation, zero module of rank zero, cone of `0 -> B`, and shift argument are written in the step and are elementary consequences of those definitions. Three rotations supply a cone triangle on the shifted objects with signed arrows; there is no extra generation theorem hidden here. I checked that an object merely isomorphic to a generator can also be appended as a cone, so the statement's literal finite-list formulation is respected.
+
+Step 2 uses the exact factorization `a_! = i_* u_!` actually stated in `sk-lem-coefficient-heart`. The ringed open-closed node explicitly states all four restriction identities and exactness; Cartesian coefficients identify the restricted ring sheaves with the intended coefficient sheaves. This is essential: an etale or finite-constant-coefficient analogue alone would not suffice. The resumed audit added `lem-weil-pbc-noetherian-open-subscheme-noetherian` and `def-weil-closed-immersion` to this step. Every open W of X is quasi-compact by the former. Every open V of Z equals Z intersect W for some open W of X and is closed in W by the latter. Extending an open cover of V by its open complement in W proves quasi-compactness directly. Applied to inverse images of affine opens this verifies the required quasi-compact morphisms on both X and Z, without an uncited assertion that Z is Noetherian. The three pieces S, Z minus S, and X minus Z are locally closed and constructible in X. The coefficient-heart criterion then gives constructibility, the constructibility definition gives degree-zero boundedness, and the triangulated sibling's statement gives closure under isomorphisms, shifts and cones. The statement of each cited node contains exactly the property used.
+
+Step 3 obtains an adapted finite stratification from the coefficient-heart criterion, then uses common-stratification clause (1) for ordering and clause (2) for preservation of lisseness under refinement. Only after that does it apply the filtration node, whose statement assumes precisely that ordered adapted stratification. Its quotient formula is copied in `citations.json`. This avoids silently taking the existence of the ordered stratification from the filtration node, which does not assert it unconditionally.
+
+Step 4 uses the general short-exact-complexes node, with all three sheaves placed in degree zero. The ambient category is the abelian module-sheaf category specified by constructibility, so its hypothesis holds. It supplies a distinguished triangle, and the rotation axiom supplies the cone with the signed connecting morphism. The finite induction starts from the zero generator, uses the lisse quotients from step 3, and appends only generators and cones of earlier objects. The filtration theorem is not cited for a short-exact-to-triangle fact it does not state.
+
+Step 5 uses `sk-def-sfb-constructible` for finite cohomological bounds and constructible cohomology, `def-kun-truncations` for the explicit good-truncation formulas and retained cohomology, and the general `lem-weil-pbc-truncation-triangle` for the successive distinguished triangle. That lemma starts with an arbitrary abelian category and complex, so its etale application paragraph does not restrict its use to etale sheaves. Its truncations are the same good truncations, and its shift convention agrees with the negative cohomological-degree shifts written here. The endpoint maps are quasi-isomorphisms by direct computation of cohomology, and the localization definition explicitly inverts them. The cone induction has its base, finite range and step written out. It invokes no rationalization, completion, finite-dimensional scheme hypothesis, or finite cohomological-dimension estimate.
+
+I checked small cases: X empty; S empty; the zero lisse module; F zero; a one-stratum lisse sheaf; one nonzero cohomology sheaf in any positive or negative degree; a bounded complex with gaps; and an acyclic representative with nonzero terms. All have finite witnesses by the written construction. The three-piece stratification and the closure argument work when some pieces are empty. No direct-summand or infinite-cone operation is introduced.
+
+The new dependencies were checked for a path back to the item; none was found. `proof_deps` is exactly the union of the step citations, and `citations.json` contains verbatim statement excerpts for every pair. The original `import_flags`, snapshot and other blueprint import fields are preserved; in particular the historical `in_cycle` flag is not silently deleted. The ringed open-closed identities, general truncation theorem and Noetherian-open theorem are declared as generic tool uses in `split_report`, without editing the maintainer-owned top-level tool-use field. No new elementary, duplicate, clause-restating or already-in-Mathlib node was created.
+
+## Unfinished work
+
+None in this one-level split. Existing dependencies remain their own items. The required dry run is the final validation; this worker does not push or deliver.
+
+## Resumed author audit by Q11
+
+The sandbox had a previous passing dry run and a prior second-reading paragraph. This resumption is an author audit under the present worker brief; a fresh reader still receives the result. I reread the current generation statement and proof, both enclosing blueprint section records, and every cited statement. I repeated LeanFinder, Loogle, LeanSearch and derived-category grep through msearch.py, with the same queries as the stored records; all services responded. The hits still supply only general tools, already represented by existing nodes. The authentic earlier second phrasing remains in searches.jsonl and mathlib_searches.
+
+I repaired two proof details. Step 1 now keeps the signed arrows obtained by three rotations, since cone construction permits any morphism between earlier objects; it no longer claims that all rotation signs can be removed. Step 2 now cites the existing Noetherian-open theorem and the closed-immersion definition, and writes the finite-cover proof that each open of Z is quasi-compact. The latter theorem's hypotheses require only the given Noetherian X. Its source was checked at Stacks Tags 01OW (properties-lemma-locally-Noetherian), 01OZ (properties-lemma-Noetherian-topology), 0052 (topology-lemma-Noetherian) and 04ZA (topology-lemma-Noetherian-quasi-compact). The definition's topological closed-embedding clause is precisely what the argument uses. These extra citations are quoted in citations.json, and the Noetherian-open theorem is declared as a generic tool. No new node or statement correction was needed.
+
+I checked that neither extra dependency has a path back to the item. Empty X or S, rank zero, a zero filtration, arbitrary positive or negative shifts, gaps in cohomology, and an acyclic complex remain covered by the finite constructions. There are no unsplit new nodes, duplicate nodes, clause replacements, unsupported source downloads, Lean edits, or compiles. The final dry run is recorded in dry-run.log; no push is authorized for this author pass.
+
+## Second reading by Q11
+
+- Step 1: checked against the imported item statement, the blueprint generation proof, and the statements of `sk-lem-coefficient-heart`, `def-weil-abstract-derived-category`, and `def-weil-triangulated-category`; verdict: the finite-witness bookkeeping, zero generator, isomorphism closure, signed rotations, and integer shifts are explicitly justified and no extra closure operation is used.
+- Step 2: checked against Stacks `proetale.tex` Tags 09AA, 09BM, 09BN, 09AH and 09AG, the ringed open-closed node, Cartesian coefficient node, constructibility definition, triangulated-subcategory statement, Noetherian-open node, and closed-immersion definition; verdict: the restriction formulas and exactness are cited by statement, and the quasi-compactness hypotheses on both `Z` and `X` are proved from the stated topological facts.
+- Step 3: checked against the coefficient-heart and common-stratification statements and the filtration statement, including their hypotheses on Noetherian `X`, finite stratifications, ordering, and lisseness; verdict: refinement and ordering precede the filtration application, and each short exact sequence is obtained from the quoted quotient formula.
+- Step 4: checked against Stacks `derived.tex` Tag 0152 and the statements of `lem-weil-pbc-complex-ses-triangle` and `def-weil-triangulated-category`; verdict: degree-zero short exact sequences yield the required distinguished triangles, inverse rotation has the correct negative connecting morphism, and the finite induction constructs each filtered sheaf.
+- Step 5: checked against Stacks `derived.tex` Tags 08J5 and 0118 and the statements of `sk-def-sfb-constructible`, `def-kun-truncations`, `def-weil-abstract-derived-category`, `lem-weil-pbc-truncation-triangle`, and `def-weil-triangulated-category`; verdict: bounded cohomological endpoints, good truncation cohomology, quasi-isomorphism identifications, gaps, and the acyclic case are all handled explicitly.
+- New nodes: none; I checked that every auxiliary fact is already supplied by an existing node or is elementary in the written steps, so no new node was needed.
+
+Changes made during this second reading: no statement or node files changed; the report now records the step-by-step source and dependency audit. The prior repaired proof and verbatim citations were retained. The dry run was rerun after this report update and passed preflight.

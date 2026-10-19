@@ -1,0 +1,68 @@
+# Q61 — lem-trf-formal-local-structure-nodal-family
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-formal-local-structure-nodal-family.json`: statement node, now split into 14 proof steps; no Mathlib match for the item.
+- `citations.json`: one entry for each proof-step/node citation, quoting that node's actual statement verbatim.
+- `report.md`: this report. `write_split.py` is a sandbox-only preparation script; it is not a DAG delivery file.
+
+## New nodes
+
+None. All 25 proof dependencies already exist. In particular the polynomial-model completion comparison is two short explicit calculations from the existing combined-ideal coefficient criterion and power-series completeness, rather than a new comparison lemma. No new Mathlib leaves.
+
+## Attachments
+
+None. Read-only searches of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact blueprint tag, formal local structure, split nodes and nodal terminology found no declaration that proves this statement. The nodal occurrences in Relative Kunneth, Derived Dualizing and ProjectionFormula are contextual docstrings, not this theorem. The upstream master reference similarly supplies no finished proof of this item.
+
+## WANTED
+
+None. All literature used is available in the shared literature tree; nothing was downloaded.
+
+## Changes and discrepancies
+
+The sandbox contained no earlier node, report or split, so I copied the current repository item and preserved its statement, original creation record, chapter/unit binding, blueprint ancestry and all five inherited Q28 Mathlib-search records. The statement is faithful to Stacks Tag 0CBX and the completed-model paragraph of Tag 0CBY; no hypothesis or conclusion changed and no statement dispute is needed.
+
+The imported item had no proof. I supplied the coordinate-correction argument and the missing algebra interfaces. In the source's displayed residue map the second assignment is printed with `x` again; the proof correctly uses `y` mapping to the second coordinate. This is a typographical correction in the argument, not a change to its mathematical statement.
+
+I made explicit that completeness of B for its OWN maximal ideal is sufficient for the induction: the base ideal powers lie inside those maximal-ideal powers. Reduction of the limiting lifts is justified by separatedness of the complete local quotient. I did not assume that B is complete for the extended base maximal ideal. The source's final appeal to surjectivity by completeness is implemented with the existing finite-after-completion theorem and Nakayama, followed by the stated flat-mod-injective criterion for injectivity. This is the same formal local construction; it does not use an etale chart or algebraization theorem to prove its own formal input.
+
+The chain is historically attached to lem-trf-local-term-locality. I read the current main-20261015 node and the sk-i-curve-zero unit: their current contraction/normal-cone route is not changed by this local algebra split. No unit realization or maintainer-owned binding was edited. Generic off-unit algebra tools are identified in `split_report.tool_uses` for the maintainer's decision; no `tool_uses` field was installed.
+
+## Mathlib and duplicate searches
+
+I ran the required msearch.py commands; searches.jsonl is the command's unedited log. New searches of the item used LeanFinder's flat-deformation phrasing, Loogle `MvPowerSeries, IsLocalRing`, grep `nodal|ordinary.double.point|0CBX`, and two LeanSearch phrasings. Further searches checked whether the polynomial-completion input required a new node: LeanFinder and LeanSearch for polynomial local completion over a complete base, Loogle `MvPowerSeries, AdicCompletion`, and grep for `toAdicCompletionAlgEquiv|idealOfVars|completion.*polynomial|polynomial.*completion` in RingTheory. I read the results. They give local-ring instances, one-variable Weierstrass quotients, Laurent series over a field and completion of polynomials along the variables ideal. The Mathlib source of MvPowerSeries.toAdicCompletionAlgEquiv uses idealOfVars, not the combined ideal of a non-field coefficient ring and the variables. It does not state the item or the needed general local comparison in one line. No service was unavailable in these calls.
+
+Before deciding on dependencies I searched all DAG statements/titles and source places for flat completion, quotient completion, power series, polynomial local completion, finite-after-completion, fibre stalks and Nakayama, and read the resulting node statements. I also ran blueprint_refs.py ancestor for the item and whole-blueprint searches for formal local, polynomial completion, completion quotient, power series, and completed polynomial. No blueprint node states the item or an additional polynomial-origin completion lemma; existing algebra nodes provide the inputs. The blueprint ancestry was retained with a precise place and same_as = [].
+
+## Not duplicates
+
+No new nodes, hence no new/existing same-tag pairs. The apparent new completion comparison and coefficient-reduction facts were absorbed into explicit proof steps using existing nodes, rather than duplicated.
+
+## Review by Q61
+
+I read curves.tex at lemma-formal-local-structure-nodal-family (Tag 0CBX), its full induction proof; lemma-split-node (0CBW); and the third paragraph of the first proof of lemma-etale-local-structure-nodal-family (0CBY). I checked the tags against tags/tags. For the algebra inputs I read the statements of every cited DAG node, and the local Stacks text for Noetherian permanence (00FN), Noetherian power series (0306), completion generalities (0315), finitely generated completion (05GG), radical/unit properties of completion (05GI), completion and finite modules (00MA), Noetherian completion (0316), finite-after-completion (0394), flat-mod-injective (00ME), complete local quotients (0325), the power-series complete-local remark (032C), and flat completion (0C4G). Some existing power-series interfaces are explicitly agent-formulated refinements of the remark; I use their actual statements, not assertions attributed to that remark alone. No new node needs its own source review.
+
+The citation-by-citation check is as follows; the exact statements used are also in citations.json.
+
+1. The flat-morphism definition gives flatness of the stalk map. The finite-type-morphism definition supplies the chosen affine finite-type chart. Affine-open-stalk-localization gives the localizations of both affine section rings. Finite-type-algebra-Noetherian and localization-Noetherian apply after localizing the base to A0. In particular I checked that the original S need not be Noetherian; only A0 is assumed so. The intervening tensor algebra has the same finite generators after coefficient localization.
+2. Local-completion-local-ring supplies precisely locality, the extended maximal ideals and the unchanged residue fields. Adic-completion-Noetherian applies because step 1 proved B0 Noetherian. Adic-completion-mod-ideal supplies completeness for finitely generated maximal ideals. Flat-completion applies to Noetherian LOCAL rings and the flat stalk map; it states the required direction explicitly.
+3. Scheme-fibre-stalk-quotient really states surjectivity and identifies its kernel; the definition of the fibre alone would not do so. Local-completion-quotient identifies the completed quotient and the extended kernel, giving B/mB. The node's hypothesis itself gives the split xy equation, so no separate split-node equivalence is needed as a proof dependency.
+4. This is elementary: taking constant terms in k[[x,y]]/(xy) and collecting all remaining monomials by a variable gives the claimed decomposition, and arbitrary quotient elements admit lifts. The initial product lies in mB and h1 = 0.
+5. I expanded the coordinate product, including its quadratic correction. The bound 2n >= n+1 holds because the induction starts at n=1. The correction to h is in m^n and preserves h in m. This is elementary ring arithmetic, not an unstated deformation lemma.
+6. Adically-complete-ring defines the inverse-limit existence and separatedness used in taking the stabilized coordinates. Complete-local-quotient applies to the proper ideal mB of the Noetherian complete local ring B; separatedness of that quotient proves closedness of mB and retention of the chosen fibre coordinates. Limits of products agree at each finite quotient. The initial h1=0 and increments in m retain h in m. No assertion about the induced m-adic topology on B was needed.
+7. Power-series-Noetherian, power-series-local-ring and power-series-complete-over-complete-base have the finite-variable and Noetherian complete-base hypotheses in force. Constant-term factorization identifies the maximal ideal with the combined ideal. Complete-local-quotient applies because xy-h lies in that maximal ideal and hence its ideal is proper. This yields the required properties of C, rather than assuming them.
+8. Power-series-adic-evaluation states the actual homomorphism into an adically complete target. Its two arguments are in n, as required. The product identity supplies factorization through C, and the displayed maximal-ideal generators prove locality. I used the continuous adic-evaluation node, rather than a definition of formal power series as if it were the evaluation theorem.
+9. The coefficient-reduction-kernel node states the kernel for a finitely generated coefficient ideal, exactly the case m. Surjectivity is coefficientwise lifting, written out. Complete-local-quotient ensures that finite-truncation agreement determines the map into B/mB. Thus the reduction is the FULL chosen fibre isomorphism, not merely its effect on polynomials.
+10. Flat-mod-injective allows N to be finite over S, while M need only be flat over the base. Substituting N=S=C, M=B avoids an unjustified finite-A hypothesis on C and avoids assuming flatness of C. Its modulo-m injectivity hypothesis is precisely step 9. This was the main hypothesis check in the last isomorphism argument.
+11. Power-series-local-ring over k and quotient-local-structure identify the fibre maximal ideal; its inverse image gives n=a_C B. Finite-after-completion requires both maximal ideals finitely generated and the closed fibre finite-dimensional, all checked here: the closed fibre is exactly k of dimension one. Both C and B are complete, so the statement yields a finite C-module B with the original action, not an unrelated completed action.
+12. Nakayama-local-generators explicitly states the lift-of-generators criterion for finite modules, and step 11 supplies finiteness. The class of 1 generates the residue, hence 1 generates B, proving surjectivity. This does not conceal a new surjectivity lemma.
+13. The combined-ideal coefficient criterion has no extra hypotheses and explicitly describes membership in each power a^r. Truncation is surjective; its stated coefficient test identifies the polynomial kernel term by term. The displayed finite geometric sum deals with denominators and is valid modulo q^r over a complete local coefficient ring, including mixed characteristic. The power-series-complete-over-complete-base node then identifies the inverse limit with R. The localization and completion definition nodes are used for their actual fraction and compatible-sequence definitions. These are short deductions from those cited statements, so no extra comparison node is warranted.
+14. Affine-open-stalk-localization gives the local ring of the affine model. I wrote the fraction identification and its kernel, then checked Noetherianity of D with the finite-type and localization permanence statements. Local-completion-quotient consequently applies and sends the polynomial equation to the SAME xy-h under step 13, which preserves coefficients and variables. Finally the quotient by (m,x,y) is k, giving the residue-field clause of the item as well.
+
+For B--E of delivery-errors I checked: there are no statement-only children to hide a clause or the whole item; every cited result above is its actual statement and satisfies the substituted hypotheses; none is used through a hidden proof construction; elementary steps contain their calculations; no child definitions, hollow data, unsupported tags or SGA sources were introduced. The exact statement and all original metadata were retained. The server's check_dag already reports no introduced finding or finding on the sandbox nodes, and review_split reports PASS with 0 new nodes. All 14 steps are shorter than 2000 characters; I nevertheless checked the induction, the action on completion and the polynomial comparison for hidden subclaims. Their arguments are given explicitly.
+
+Small cases: for A0=k and B0=k[x,y]_(x,y)/(xy), the induction can keep all corrections and h zero and gives the ordinary node. For A0=k[[t]] and xy=t, the initial error t is absorbed into h=t; no invertibility of t is assumed. The arithmetic works in characteristic 2 without dividing by 2. If the smoothing parameter is zero or nilpotent the equation and quotient arguments still hold; no domain or reducedness hypothesis is used. The polynomial-completion calculation over a field reduces to ordinary (x,y)-adic completion; over a complete mixed-characteristic base it includes the base maximal ideal throughout. A nonsplit node or a nontrivial residue-field extension does not satisfy the item hypothesis and was never substituted into the chosen k-algebra isomorphism.
+
+## Unfinished work
+
+None for this one-level stage-1 split. The algebra results cited are existing DAG interfaces, whose own later proof work remains their owners' task. No Lean was written or compiled, and no live source, project or launcher file was modified.

@@ -1,0 +1,23 @@
+1. Files written:
+   - `dag/nodes/sec-purity-real-sheaves/lem-a1-separated-lqf-fpqc-effective-descent.json` — statement, split, no Mathlib match.
+   - `dag/nodes/sec-purity-real-sheaves/lem-a1-ind-quasi-affine-fpqc-effective-descent.json` — statement-only child, no Mathlib match.
+   - `dag/nodes/sec-purity-real-sheaves/lem-a1-separated-lqf-ind-quasi-affine.json` — statement-only child, no Mathlib match.
+   - `citations.json` — verbatim citations for both item proof steps.
+2. Attachments: none. I searched the slopmaster2 project for the item tag and the relevant separated/quasi-finite/descent names; no sorry-free project declaration states the item exactly.
+3. WANTED: none.
+4. The source and blueprint supplied the correct statement. I preserved the singleton fpqc hypothesis and the absence of quasi-compactness, finite-presentation, and base separatedness assumptions. The existing fppf-family node `lem-trf-separated-lqf-fppf-effective-descent` is not an attachment because fppf requires finite presentation, whereas this item allows an arbitrary fpqc morphism. The existing `lem-trf-quasi-affine-fpqc-effective-descent` is also not an attachment: it assumes the whole morphism is quasi-affine, while this item only has the ind-quasi-affine condition obtained locally from separated locally quasi-finite geometry.
+5. Nothing remains unfinished. The server-side `check_dag` passed after adding the required chapter and unit metadata to both new nodes.
+
+## Not duplicates
+
+- `lem-a1-ind-quasi-affine-fpqc-effective-descent` vs `lem-a1-separated-lqf-fpqc-effective-descent`: the new child is the general 0APK theorem for the ind-quasi-affine condition, while the item adds the separated locally quasi-finite hypothesis and obtains that condition from 0AP9.
+- `lem-a1-separated-lqf-ind-quasi-affine` vs `lem-a1-separated-lqf-fpqc-effective-descent`: the new child is only the 0AP9 geometric implication to ind-quasi-affineness, while the item is the 0APK effectivity conclusion for a descent datum.
+- `lem-a1-ind-quasi-affine-fpqc-effective-descent` vs `lem-trf-quasi-affine-fpqc-effective-descent`: the new statement descends morphisms whose every quasi-compact open over an affine target is quasi-affine (the ind-quasi-affine condition), while the existing statement assumes the entire morphism is quasi-affine and follows the affine relative-spectrum proof.
+- `lem-a1-separated-lqf-ind-quasi-affine` vs `lemma-nagata-quasi-affine-morphism-of-quasi-finite`: the new statement has only separated and locally quasi-finite hypotheses and concludes quasi-affineness for each quasi-compact open restriction; the existing node additionally assumes global quasi-compactness and local finite presentation and concludes that the whole morphism is quasi-affine.
+- `lem-a1-separated-lqf-fpqc-effective-descent` vs `lem-trf-separated-lqf-fppf-effective-descent`: the item is for one arbitrary singleton fpqc cover and a non-quasi-compact object, while the existing node is for an fppf covering family and uses finite-presentation reduction.
+
+## Review by N3
+
+I read the item in `dag/nodes/sec-purity-real-sheaves/lem-a1-separated-lqf-fpqc-effective-descent.json`, the ancestor `lem-a1-affine-hc0`, the `sk-p-real-rankin` unit and the `sec-purity-real-sheaves` chapter. I read the exact Stacks sources `literature/stacks-project/more-groupoids.tex`, Tag 0APK (the ind-quasi-affine effective-descent lemma), and `literature/stacks-project/more-morphisms.tex`, Tag 0AP9 (separated locally quasi-finite morphisms are ind-quasi-affine). I also opened the existing quasi-affine fpqc descent and invariant-open gluing nodes and the fppf-family descent node to check that their hypotheses and conclusions do not already state either child.
+
+Step 1 cites `lem-a1-separated-lqf-ind-quasi-affine`; its statement explicitly says that a separated locally quasi-finite morphism has a quasi-affine induced map on every quasi-compact open over an affine target, exactly the property needed by the next theorem. Step 2 cites `lem-a1-ind-quasi-affine-fpqc-effective-descent`; its statement explicitly takes a singleton fpqc cover, that quasi-affine quasi-compact-open property, and the stated descent datum, and returns the descended scheme and compatible isomorphism. I checked the item hypotheses against both quoted statements, including the lack of quasi-compactness and finite-presentation assumptions. I checked the `citations.json` strings are verbatim portions of the child statements. The Mathlib searches for the item and both children returned only generic descent or quasi-finite/quasi-affine ingredients, so all three nodes record no exact Mathlib match. No statement correction, source error, attachment, or extra tool use was needed.

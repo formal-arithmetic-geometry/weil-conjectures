@@ -1,0 +1,52 @@
+## Files written
+
+- `lem-trf-finite-type-torsion-universal-star.json`: split statement with five proof steps.
+- `lem-trf-gabber-strict-local-torsion-bound.json`: new unsplit statement node; Mathlib searches found no match.
+- `citations.json`: verbatim citations for every step dependency, including elementary steps.
+
+## Attachments
+
+None. The slopmaster2 source has no declaration tagged `(blueprint: lem-trf-finite-type-torsion-universal-star)` and no declaration stating this universal strict-local assertion.
+
+## WANTED
+
+- `literature/Illusie-nearby-cycles28.pdf`, Theorem 1.14 and Corollary 1.15. The source is available at the URL recorded in the node, and the Zheng appendix explicitly cites the same result, but the local PDF is absent.
+
+## What was checked
+
+The item statement was compared with Zheng, *A Künneth formula for nearby cycles*, Definition A.1 and the sentence before Remark A.2 (p. 1): condition (*) is an open cover with a bound for every strict-local direct image, and “universally” quantifies over every base change. I also checked Illusie, *Around the Thom–Sebastiani theorem*, Theorem 1.14 and Corollary 1.15 through the published PDF: a locally finite-type map with fibre dimension bounded by $N$ and coefficients that are a $\mathbf Z/n\mathbf Z$-algebra has strict-local higher direct images zero above $2N$.
+
+Step 1 applies the existing Mathlib leaf `lem-weil-pbc-lft-base-change` to an arbitrary base change and the existing affine-pair characterization `lem-weil-pbc-lft-affine-pairs` to the restrictions. Step 2 verifies quasi-compactness of the affine chart map explicitly with distinguished opens and the affine quasi-compactness leaf, then applies `lem-fin-finite-type-fibre-dimension-bound` with its finite-type and quasi-compact-target hypotheses. Step 3 proves the open-neighbourhood strict-local identification by restricting pointed neighbourhoods and applying the existing Mathlib colimit-initial-full-subcategory leaf, and uses clause (4) of strict-henselization functoriality only for equality of the induced maps. Step 4 checks the coefficient algebra, applies Gabber to that fixed chart and uses the identifications of step 3. Step 5 chooses twice the fibre bound and closes the quantifiers of Definition A.1.
+The new node is strictly smaller than the item: it fixes one locally finite-type morphism with a global fibre-dimension bound and states the fixed-point strict-local vanishing. It is statement-only as required. I searched the DAG and blueprint for Gabber/cohomological-dimension/strict-local results before creating it; the existing finite-type fibre-dimension node is cited rather than duplicated. Mathlib searches were run with LeanFinder, Loogle, grep and LeanSearch and recorded in the node's `mathlib_searches`; none states the étale theorem. Small cases checked: $N=0$ gives vanishing above degree $0$; the identity morphism has $N=0$ and strict-local direct image is the identity; empty affine charts are harmless and may use $N=0$.
+
+## Review by Q33
+
+I read the item, the new node, the Zheng appendix, Illusie's Theorem 1.14/Corollary 1.15, the existing fibre-dimension node, and both strict-henselization definition/functoriality nodes. Every cited quote is copied verbatim from its node statement. The hypotheses used in each step are explicit: finite type and quasi-compact affine target for the dimension bound, $m\Lambda=0$ for the coefficient algebra, and arbitrary base change for universality. I corrected the inherited empty proof and added the missing strict-local Gabber node; no definition or Lean declaration was written.
+
+
+## Recovery of the interrupted attempt
+
+The first resumed dry run exited with `FAILED: no node files under .../dag/nodes/`. No delivery was running after that exit and nothing was pushed. The inherited report, searches and draft dependency were retained and used. The draft had invalid JSON escapes and an incorrect parenthetical equating sheaf vanishing with vanishing of its value on the strict-local base; the correctly placed dependency now asserts only sheaf vanishing. Its original misplaced JSON remains outside the delivery paths as recovery material. The previous citations contained ellipses and a sentence absent from the actual node; `citations.json` was regenerated from the exact statements, including the full colimit definition and the actual neighbourhood compatibility clause. The missing item file was reconstructed from the current repository, retaining its statement, creation metadata and inherited search records. No upstream statement was corrected, and there is no statement dispute.
+
+## Not duplicates
+
+- `lem-trf-gabber-strict-local-torsion-bound` vs `lem-trf-finite-type-torsion-universal-star`: the new node is the quantitative fixed-morphism theorem assuming a global bound on all fibre dimensions. It does not assert local bounds for arbitrary base changes. The item supplies that reduction in steps 1–3 and 5; it is not obtained by merely renaming the corollary.
+- `lem-trf-gabber-strict-local-torsion-bound` vs `thm-sc-finite-type-torsion-cd`: the latter bounds absolute cohomology of a finite-type scheme over a field of bounded torsion cohomological dimension. The new node is sheaf-valued strict-local relative vanishing over an arbitrary scheme, and assumes neither a field base nor invertibility of the coefficient exponent.
+- `lem-trf-gabber-strict-local-torsion-bound` vs `lem-kun-cd-stalk-criterion`: the latter is a criterion for vanishing via stalk colimits, not a bound on those colimits.
+- `lem-trf-gabber-strict-local-torsion-bound` vs `lem-trf-oriented-nearby-strict-local-description`: the latter identifies nearby cycles and strict-local images, but gives no numerical vanishing bound for arbitrary sheaves on a strict localization.
+
+The whole DAG was searched by `Gabber`, `1.15`, `Proposition 3.1`, strict-local/cohomological-dimension language, and locally-finite-type/base-change language. The whole imported blueprint was searched with `blueprint_refs.py search` for `strict local`, `Gabber`, `cohomological dimension`, `nearby cycles`, `1.15`, `finite type torsion`, and `bounded dimension`; its ancestor command confirms `lem-trf-local-term-locality`. The exact locally-finite-type base-change fact and affine-pair criterion already exist as Mathlib leaves, so neither was recreated. The new dependency's second semantic phrasing is the previous logged Milnor-tube query, now explicitly retained in `mathlib_searches`; no unrun query was added. The generic derived-category hits were checked against `Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean`: they are criteria for cohomology of an already bounded object, not geometric bounds.
+
+## Detailed review by Q33
+
+I read Zheng Definition A.1 and the following paragraph in the online published appendix, and Illusie Theorem 1.14 and Corollary 1.15 in the linked published PDF. Local source files are absent in this machine's literature mirror, so the WANTED entries above remain and the item's elementary expansion is marked agent-authored. The item is exactly Zheng's universal condition, with the torsion-ring hypothesis expressed by a single annihilating integer. The dependency matches all hypotheses of Illusie's corollary: locally finite type, global fibre bound, a Z/mZ-algebra, a geometric point, and an arbitrary module sheaf on the strict localization. In particular no prime-to-residue-characteristic assumption, constructibility, field base or Noetherian hypothesis has been introduced. No prohibited source route is used.
+
+For C4 I opened each cited statement: the base-change node actually concludes locally of finite type for unrestricted base changes; the affine-pair node is an if-and-only-if applying to every affine pair and hence to restrictions; the affine quasi-compactness node applies also to the distinguished inverse images in step 2; the fibre-bound node supplies one integer for all ordinary fibres of a finite-type map with quasi-compact target. The strict-local definition gives the cofiltered colimit diagram used in step 3; the Mathlib colimit-initial-full-subcategory leaf explicitly turns the displayed neighbourhood refinement into the colimit isomorphism, while clause (4) of functoriality gives equality of the neighbourhood maps, not an isomorphism of the underlying strict-local objects. That is why the isomorphism is proved separately by explicit neighbourhood restriction. Step 4 uses precisely the new node's sheaf-valued vanishing, and step 5 is the definition already expanded in the item's statement. For C1 the elementary parts are the finite union argument, the explicit neighbourhood restriction (with colimit reindexing cited to its own Mathlib leaf), factorization of the unit map modulo m, and substitution of N_U=2d_U; all geometric boundedness theorems are named citations. No proof step exceeds 2000 characters or hides a separate comparison theorem.
+
+For B and E I checked that the new node introduces all objects and includes definition links for geometric points, fibres, dimension, strict localization, module categories and higher direct images, carries no proof, and has its blueprint ancestry with the item at the front of `via`. I checked empty schemes/fibres, m=1 (the zero coefficient ring), identity morphisms, N=0, positive-characteristic coefficients with no invertibility, and non-quasi-compact base changes. The argument never asks for a single global bound on the full base-changed source; a bound is chosen per affine chart, exactly as Definition A.1 requires. I repaired the inherited escaping, missing item path, false parenthetical, incomplete blueprint via, and invalid quotes. These checks are the author's review, not a claim of independent review.
+
+## Unfinished
+
+Nothing remains in the one-level split. The new Gabber corollary is intentionally an unsplit statement for a later stage-1 worker; its Mathlib searches found no match.
+
+While the required dry run was still waiting for worktree admission, I made the colimit-reindexing theorem explicit in step 3 using `lem-weil-pbc-colimit-initial-full-subcategory` (part (1)) and marked that step non-elementary. This avoids treating invariance of a colimit under an initial subcategory as an uncited formal fact. This leaf states exactly the one-way-refinement criterion verified in that step. The dry run will read the completed files after its capacity wait.

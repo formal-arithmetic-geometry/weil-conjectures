@@ -1,0 +1,65 @@
+# Stage-1 report: lem-coef-infinity-intermediate-presheaf-kan
+
+Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-infinity-intermediate-presheaf-kan.json`: existing statement, split into four proof steps; no Mathlib match. This repair updates its applications to the current cited statements and restores current Lean-audit metadata.
+- `dag/nodes/sec-six-functors/lem-coef-infinity-presheaf-representable-slice-density.json`: one new statement-only supporting lemma, unsplit; no Mathlib match. Its source pagination is corrected.
+- `citations.json`: seven complete verbatim statement quotes, one per cited node per step, regenerated against the current DAG and the supporting sandbox node.
+
+Attachments: none. Searches by the item and child ids and by intermediate-presheaf, representable-slice and Kan-extension terminology in the two named read-only source checkouts found no project declaration stating either result. Ordinary category-theory declarations do not give the space-valued quasicategory assertion. No upstream sorry declaration is used as a finished proof.
+
+WANTED: Lurie, *Higher Topos Theory*, Lemmas 5.1.5.2–5.1.5.5, for the item and the canonical density input; read online at https://www.math.ias.edu/~lurie/papers/HTT.pdf, not archived under `literature/`. Kerodon 01JX and 030M were read online as well. Kerodon identifiers are not Stacks tags; no Stacks tag states these infinity-categorical assertions.
+
+The item statement is unchanged. No statement dispute or unfinished proof step remains. The retained split's original source attributions and size handling had already been repaired by its second reader: Corollary 4.3.2.16 is not an essential-image theorem, and the replete representable slice is essentially small, not asserted literally small. This repair preserves those corrections.
+
+## Returned delivery repair
+
+The return names reviewed head `9eb31b7981` and refuses landing because `lem-coef-infinity-full-essential-image` changed. I compared the retained reviewed quotes with every current cited statement. Two distinct cited nodes changed: `lem-coef-infinity-full-essential-image` (steps 1 and 4) and `lem-coef-infinity-yoneda-evaluation` (step 1). Both now fix nested universes explicitly and use `def-cbc-enhanced-diagrams-cones` directly instead of obtaining their universes through `def-coef-complete-algebroid`. Their substantive mapping-space and coherent-quasi-inverse conclusions remain exactly those used here. The other existing quoted statements are unchanged.
+
+Step 1 now fixes a larger containing universe W while keeping the item's U fixed, and instantiates both changed nodes with U-prime = W. In particular E may remain large relative to U: the current essential-image node only requires its categories to fit in W. Step 4 explicitly works in the same containing universe. These changes do not replace S_U by a larger category of spaces or demand larger colimits of H. Step 2 now also explains why its maps to the terminal category satisfy the cited inner-fibration hypothesis. All seven quotes are refreshed, including both essential-image occurrences. This is a proof-application repair, not an unchanged rebase. The authorized delivery tool builds the revised delivery on current `origin/newtargets-dag`; no manual git command is used.
+
+## Not duplicates
+
+lem-coef-infinity-presheaf-representable-slice-density vs lem-coef-space-yoneda-density: the existing node supplies some small presentation of F by representables; the new node identifies the canonical target-fixed slice and its appended-vertex colimit cocone and asserts essential smallness of that precise slice.
+
+lem-coef-infinity-presheaf-representable-slice-density vs lem-coef-infinity-presheaf-free-cocompletion: the existing node compares colimit-preserving functors out of the entire presheaf category; the new node supplies the canonical slice colimit needed to compare with an arbitrary G on an intermediate full subcategory.
+
+lem-coef-infinity-presheaf-representable-slice-density vs lem-coef-infinity-kan-mapping-restriction: the existing node assumes the canonical slice colimit condition; the new node supplies it specifically for presheaves and their Yoneda image.
+
+lem-coef-infinity-presheaf-representable-slice-density vs lem-coef-infinity-yoneda-presheaf-limits: the existing node gives objectwise (co)limits, fully faithful Yoneda and mapping-space characterizations, not the canonical representable slice cocone or its essential smallness.
+
+## Review by Q03
+
+I read delivery-errors B–E, the stage-1 contract, the three blueprint levels, GOAL.md and dag-sync.md. I read the six-functor chapter, the bound unit `sk-prop-sf-biduality-general`, and the ancestor `prop-coef-integral-exceptional-adjoint` in both blueprint snapshots. The historical ancestor's second proof paragraph is the finite-coefficient mapping-complex adjunction served by this supporting branch; the current snapshot retains the integral exceptional-adjoint statement. No chapter, unit or statement route is changed.
+
+For the item and new node I reopened HTT Lemma 5.1.5.2 (printed pp. 324–325), Lemma 5.1.5.3 and its proof (pp. 325–326), and the forward implication of Lemma 5.1.5.5(1) (pp. 326–327). The proof of 5.1.5.3 explicitly uses the canonical cocone over the full Yoneda image, and 5.1.5.5 invokes small slices. The replete-image formulation uses essential smallness and a small replacement before applying H. I checked Kerodon Theorem 4.8.4.1 (01JX) for the changed essential-image citation and Corollary 7.3.6.9 (030M) for the restriction theorem. No SGA source is used.
+
+Step 1 uses the current Yoneda-evaluation statement for Map(y(d),F) = F(d), naturally and coherently. Substitution F = y(d-prime) gives the actual fully faithful Yoneda mapping-space map; fullness of E retains it. The current essential-image statement then supplies exactly the coherent K, unit and counit used in step 4, with X = D and Y = E. I checked its newly explicit containing-universe assumption and wrote that instantiation into the step. It does not require E to be U-small.
+
+Step 2 uses the child statement for the precise canonical slice A_/F, its essential U-smallness and its colimit cocone. All vertices of every simplex of the presheaf slice lie in E; fullness therefore identifies it degree by degree with A times_E E_/c, respecting the canonical cocone. Clause (2) of `lem-coef-infinity-relative-cone-equivalence` says that a particular cone is colimiting if and only if its restriction along an indexing equivalence is. Its target maps to the terminal category are inner fibrations because their horn conditions are the quasicategory conditions. Choosing a U-small equivalent index R lets H preserve that colimit using exactly its hypothesis; the same cited clause returns to the full canonical slice in Z. No colimit closure of E or preservation by G is needed.
+
+Step 3 uses the full statement of `lem-coef-infinity-kan-mapping-restriction`, with C = E, A the full replete Yoneda image, target Z, F = H restricted to E and second functor G. Step 2 verifies its exact canonical-cocone hypothesis for every c. The conclusion is the actual restriction map on mapping spaces and includes coherent naturality; no inference is taken merely from that node's proof.
+
+Step 4 uses the current essential-image statement's two coherent inverse identities. Whiskering them gives the inverse identities for precomposition with J and K. The componentwise criterion and mapping-space clause of `lem-cbc-enhanced-functor-cone-calculus` make precomposition an equivalence and give the mapping-space equivalence required after step 3. I read both cited statements fully. The degreewise formula precomposing E times Delta^n to Z with y_E times identity verifies that the composite is restriction itself, compatibly with all further parameters and intermediate restrictions. Its homotopy fibers are contractible, giving the extension assertion. A sufficiently large containing universe makes the functor-category shapes small for this generic calculus without changing the original U-small colimit hypotheses.
+
+The sole child is self-contained: it introduces D, P(D), y, A, the slice simplices, projection and canonical cocone, and defines essential smallness inline. Its definition dependencies were read. It has an empty proof, empty proof_deps and null proof_origin. It is a generic canonical-density input independent of H, E, Z and G, not a moved clause of the item. Its title/id remain absent from the shared DAG. I repeated whole-DAG keyword and HTT-place searches and whole-blueprint searches for representable slices and Yoneda; the ancestor lookup still gives `prop-coef-integral-exceptional-adjoint`. The existing density and presheaf nodes above do not state the canonical-slice assertion. No duplicate, dependency cycle or elementary new node is introduced.
+
+The retained `mathlib_searches` are backed by the actual `searches.jsonl` records from the first and second readings. I inspected that log and reread Mathlib/CategoryTheory/Limits/Presheaf.lean lines 650–700: tautologicalCocone, isColimitTautologicalCocone and their primed versions concern ordinary categories and Type-valued functors. They cannot specialize in one line to the coherent space-valued quasicategory assertion. The previous second semantic query and quoted Loogle query are retained with their actual output; this repair invents no searches and creates no additional node.
+
+Small cases were rechecked. If D is empty, its representable image and slices are empty and the sole presheaf is initial; H sends it to an initial object, so the asserted mapping spaces are contractible, whether E is empty or contains that presheaf. For D a point, F empty gives the empty colimit, F a point gives a contractible slice, and F two discrete points gives their coproduct. For representable F, the slice has identity as terminal object. E equal to the representable image gives precomposition with D equivalent to A; E = P(D) gives the usual Kan mapping property. None requires extra hypotheses.
+
+Tool use: `lem-cbc-enhanced-functor-cone-calculus` belongs to another unit and supplies generic componentwise-equivalence and mapping-space calculus absent from this coefficient unit's statements. Its admission is requested through `split_report.tool_uses`, preserving the existing route. No maintainer-owned `tool_uses` field is set. All work is stage 1, confined to the sandbox, without Lean edits, compilers or build tools.
+
+## Earlier second reading (a previous round; superseded)
+
+The retained delivery was already repaired and approved by a second reader before the landing returned it for citation drift. This repair retains that reader's canonical-slice construction, small replacement, explicit precomposition argument and search evidence. The new proof-application changes and refreshed quotations are documented above for the next independent reader. Nothing is delivered by this worker; the required final action is the server dry run with `--no-push`.
+
+## Second reading by Q03
+
+- Step 1 was checked against the current statements of `lem-coef-infinity-yoneda-evaluation` and `lem-coef-infinity-full-essential-image`: evaluation gives full faithfulness of Yoneda, and the containing-universe instantiation supplies the replete image and coherent inverse without requiring E to be U-small; verdict correct.
+- Step 2 was checked against `lem-coef-infinity-presheaf-representable-slice-density` and clause (2) of `lem-coef-infinity-relative-cone-equivalence`: the canonical full-image slice is degreewise the E-slice, its small replacement preserves the cocone, both maps to the terminal quasicategory are inner fibrations, and H preserves the resulting U-small colimit; verdict correct.
+- Step 3 was checked against the full statement of `lem-coef-infinity-kan-mapping-restriction`: its hypotheses apply with source E, full subcategory A, first functor H|E and second functor G, yielding exactly the displayed restriction equivalence and coherent naturality; verdict correct.
+- Step 4 was checked against `lem-coef-infinity-full-essential-image` and `lem-cbc-enhanced-functor-cone-calculus`: whiskered unit and counit give inverse precomposition functors, whose componentwise equivalences induce the required mapping-space equivalence and contractible extension fibers; verdict correct.
+- The new node `lem-coef-infinity-presheaf-representable-slice-density` was checked against HTT Lemmas 5.1.5.2–5.1.5.3 and the forward direction of 5.1.5.5(1), including empty, terminal and discrete two-point presheaves; its canonical slice, essential U-smallness and higher cocone clauses agree, and its Mathlib searches found only ordinary Type-valued results; verdict correct.
+
+Changes made: revalidated all seven citation quotes against current node statements and added this second-reading record. The item and child node statements and proof steps required no mathematical correction; maintainer-owned creation metadata remains exactly as in the shared origin.

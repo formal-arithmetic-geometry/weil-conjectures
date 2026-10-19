@@ -1,0 +1,15 @@
+1. Files written: `dag/nodes/sec-smooth-purity/lem-cbc-base-change-mate-stalk.json` (statement, split proof; no new nodes). No Mathlib leaves.
+2. Attachments: none.
+3. WANTED: none.
+4. The item had no Lean declaration and no existing blueprint node stating the mate-on-stalks clause. I retained its hypotheses and dependencies. The proof follows Stacks tag 03S6 (label `lemma-shriek-base-change`) and separates the stalk-value calculation from the identification of the mate. No source statement was changed.
+5. Nothing remains unfinished.
+
+## Review by NO
+I read the item, its ancestor `lem-cbc-extension-zero-base-change`, and the source proof of Stacks Lemma 03S6 in `literature/stacks-project/etale-cohomology.tex`. Step 1 uses the existing extension-by-zero stalk node for the inside/outside formulas and `lem-kun-stalk-as-pullback` for inverse-image stalks; both cited statements explicitly provide those facts. Step 2 uses the chosen cartesian square to transport membership in the open and identify corresponding points, then uses the existing adjunction node's explicit presheaf description to see that the mate sends a section to the same section on an object factoring through the open and sends the zero presheaf part to zero otherwise. The extension-by-zero stalk node supplies the outside zero conclusion. I checked the edge cases of a point inside and outside (U'), including the unique (0\to0) map, and verified every citation quote against the node files. The mandated Mathlib searches were run for the item: LeanFinder found only topological/Zariski stalk analogues, Loogle returned no hit, grep found only generic adjunction/mate and topological stalk declarations, and LeanSearch was unavailable; none is an exact étale statement.
+
+## Second reading by NO
+I checked the item's statement hypothesis by hypothesis against Stacks Tag 03S6 (label `lemma-shriek-base-change`): the cartesian square, the open-immersion specialization, the sheaf and inverse-image constructions, the mate normalization, and both inside/outside stalk conclusions agree; the zero and outside cases give the unique $0\\to0$ map and the empty-open case is vacuous.
+Step 1 was checked against `lem-weil-pbc-extension-by-zero-stalks` and `lem-kun-stalk-as-pullback`; their quoted statements provide exactly the two stalk formulas and the inverse-image identification used.
+Step 2 was checked against `def-cbc-open-immersion-square`, `lem-weil-pbc-extension-by-zero-adjunction`, `lem-weil-pbc-extension-by-zero-stalks`, `lem-kun-stalk-as-pullback`, and `def-weil-pbc-extension-by-zero`; the cartesian membership equivalence, explicit adjunction section map, unit identification, and zero case are all stated by those citations, with no unmarked elementary inference.
+There are no new nodes in this split (the item node is an existing node in the delivery baseline), so B1--B7 and duplicate/search checks for new nodes are vacuous; the item's recorded Mathlib searches were rerun and remain accurate (no exact match, LeanSearch unavailable).
+I changed only this second-reading record; no statement, proof step, citation quote, or dependency required repair.

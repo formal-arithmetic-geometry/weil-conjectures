@@ -1,0 +1,31 @@
+1. Files written:
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-galois-localization-uniform-bounds.json`: split item, 12 proof steps.
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-directed-galois-finite-tensor-generators.json`: new unsplit statement-only node; Mathlib searches found no matching declaration.
+- `citations.json`: 52 verbatim citation records, one for every cited node in every proof step.
+
+2. Attachments: none.
+
+3. WANTED: none. The ILO XVII PDF is present and was read at §§7.3–7.6 (pp.301–314).
+
+4. The imported item had a complete statement but no proof. I retained its hypotheses, including arbitrary commutative Noetherian Λ-algebras, absence of an invertibility assumption on ℓ, absence of excellence, and the absence of finite-generation assumptions for \(\mathcal W\). The proof now follows ILO XVII Propositions 7.6.3, 7.6.5, Corollary 7.6.6 and Proposition 7.6.7. The only new dependency is the finite prime-field tensor-generator statement extracted from ILO XVII §§7.4.2–7.4.7; it is statement-only as required. Existing nodes supply Galois refinement, exactness and extensions, filtered-colimit continuity, internal-Hom localization, ordinary direct-image definitions, and the derived cohomology triangle.
+
+## Review by Q52
+
+I read the item node, `lem-per-ctf-hom-localization-devissage`, `lem-per-galois-partition-exact-refinement`, `lem-per-dualizing-locally-closed-inheritance`, and all source statements cited by each step. I also read the ILO PDF at pp.301–314 and the corresponding proof text for §§7.3–7.6. Step 1 verifies Noetherianity of opens and closed subschemes, directed refinement, and the coefficient-independent generator list. Step 2 checks exact inverse-image restriction, preservation of colimits and constant modules, and constructibility/bounds for restrictions. Step 3 checks the open restriction of the dualizing complex and the canonical evaluation-transpose map. Step 4 uses the existing internal-Hom localization triangle to derive \(Rj_*M\cong D_Xj_!D_UM\), with the first term zero by the open extension-by-zero stalk formula. Steps 5–8 check that the finite generator list yields one partition and one cohomological bound, that coefficient tensoring commutes with higher direct image via basis finite subsums and filtered-colimit continuity, and that finite extensions, retracts, and filtered colimits preserve the class and bound. Steps 9–12 check canonical truncation, the triangulated derived direct image, the closed localization triangle after applying exact \(i^*\), and the long-exact-sequence estimate \(d_i=d+1\). I verified each hypothesis where it is used: open immersions into Noetherian schemes are qcqs; the coefficient sheaves are ℓ-torsion; the generator list depends only on the partition; and all output partitions and bounds are chosen before the input complex. I wrote `citations.json` by copying the full statement of each cited node, so every quote is verbatim. The server-side `review_split` check passed.
+
+## Second reading by Q52
+
+I re-read the split independently against the item statement and ILO XVII §§7.4–7.6. I checked that no new node restates a clause of the item: the new node only supplies the finite coefficient-independent tensor-generator input used by Steps 1, 5, 7 and 8. I checked every step’s uses against the cited node statements, removed no required hypothesis, and verified that the closed-support argument uses the complementary open immersion and the existing localization triangle. I checked the two edge cases explicitly: empty strata give the empty generator list and zero sheaves, while identity immersions give bound zero; the stated nonnegative bounds remain valid. I also checked that all 12 proof steps are below the 2000-character long-step threshold. The earlier server-side check passed; the split declares its foundational off-unit citations in split_report.tool_uses.
+
+## Resumed review by Q52
+
+The first resumed dry run rejected the two internal-Hom localization quotations because that shared node had changed. I opened its current statement: it still gives the required triangle for any commutative coefficient ring, bounded first argument, and bounded-below second argument. Step 4 uses the bounded constructible first argument j!L and Q; Step 11 uses the bounded unit sheaf and the bounded input K. I refreshed precisely these two quotations. I also re-read ILO XVII 7.4.2–7.4.7 and 7.6.3–7.6.7 from the saved PDF text, and checked the current statements behind all proof citations. In Step 7 only clause (1) of the lisse/tensor node is used, which permits arbitrary rings and constant modules; its finite-ring lisse clauses are not applied to A. The underlying-abelian higher-image comparison allows arbitrary rings. The closed-subtopos node explicitly identifies the small etale topos of any closed immersion with the closed complement, and supplies exact i_* and its counit. I verified that the item statement is unchanged from the current repository and that the current Lean-source searches have no matching blueprint tag or Galois-partition declaration.
+
+## Not duplicates
+
+lem-per-directed-galois-finite-tensor-generators vs lem-per-prime-field-tensor-devissage: the existing node generates the entire constructible derived category with all prime-field constructible complexes, without a fixed partition or a finite generator list; the new node gives a finite list for one directed partition and the filtered-union assertion for arbitrary adapted sheaves.
+lem-per-directed-galois-finite-tensor-generators vs lem-per-finite-algebra-external-tensor-filtration: the existing node concerns modules over A tensor B; the new node concerns sheaves on a stratified scheme and additionally asserts generation by constructible subobjects.
+lem-per-directed-galois-finite-tensor-generators vs lem-per-constructible-finite-monodromy-filtration: the existing node chooses strata and covers depending on the input sheaf; the new node keeps one prescribed partition and one finite coefficient-independent list for all input sheaves.
+lem-per-directed-galois-finite-tensor-generators vs lem-per-galois-partition-exact-refinement: the existing node gives exactness and refinements, with no finite generators or filtered-union-by-constructible-subobjects assertion.
+
+5. Nothing remains unfinished.

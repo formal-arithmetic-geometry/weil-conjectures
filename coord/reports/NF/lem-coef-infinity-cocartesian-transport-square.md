@@ -1,0 +1,29 @@
+1. Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-infinity-cocartesian-transport-square.json`: statement node, five proof steps; no new nodes and no Mathlib leaves.
+- `citations.json`: verbatim statement excerpts for all eight step/node citations.
+- `report.md`: this report.
+
+2. Attachments: none. Searches of `WeilConjectures/` in the read-only slopmaster2 tree for the exact blueprint id and for cocartesian/quasicategory terminology found no project declaration. Upstream master sorry declarations are not counted as proofs.
+
+3. WANTED: archive HTT, Proposition 2.4.4.2 (mapping fibers), Proposition 2.4.4.3 (mapping criterion), Remark 2.4.1.9 (universal comparisons), Proposition 3.1.2.1 (pointwise transport), and Kerodon Subsection 4.6.8, Tag 01PF (mapping composition), for this item. The proof is agent-written; I read those places online. No Stacks tag states this quasicategorical comparison result.
+
+4. The repository item is still unsplit, with an empty proof. Its statement, source and dependencies agree with the retained sandbox. I retained its statement, inherited Mathlib searches, blueprint ancestry, and recorded sandbox searches. I checked the current chapter/unit records and the current blueprint ancestor's integral-adjunction proof: this item is a generic comparison-square tool below the middle mapping-complex adjunction, and does not replace a unit step. Whole-blueprint search for cocartesian transport found no imported node stating it. Mathlib hits concern ordinary categorical cocartesian factorization, not coherent quasicategorical mapping spaces; I read the definitions and factorization results in CategoryTheory/FiberedCategory/Cocartesian.lean, including the existing candidate search results. No new node is needed.
+
+The retained proof had two citation gaps, repaired on resumption: a mapping-space homotopy-pullback criterion alone did not state its identification with the mapping space of the strict fiber, whereas the existing pointwise-transport node explicitly gives that equivalence. Step 4 now cites this exact formula. Its weak-equivalence assertion was also not a literal path-lifting property: the proof now applies a homotopy inverse and its endpoint homotopies. Step 1 uses the chosen lift rather than silently replacing it, and cites the mapping criterion to check agreement of horn-cocartesian and mapping-space-cocartesian conventions. Step 5 explains retained higher data via the equivalence of spaces, rather than claiming the composition node alone provides every higher coherence. All steps are below 1000 characters.
+
+5. Nothing mathematical remains unfinished. The source archives remain wanted. Small cases: for an identity base edge the same fiber equivalence and lift initiality apply; empty fibers with no x or y give a vacuous implication; for the identity fibration the comparison is the supplied square. An ordinary category's nerve reduces the argument to uniqueness of cocartesian factorization. Nontrivial mapping-space homotopies are retained by working in the homotopy fiber over f, rather than forgetting the base-path data. No fiber-discreteness assumption is made.
+
+## Review by NF
+
+I read the complete current statements of the four cited lemma nodes and the two definition nodes, together with the item, the blueprint ancestor proof, and the chapter/unit records. For the item I read HTT Remark 2.4.1.9, Propositions 2.4.4.2--2.4.4.3 and 3.1.2.1 in their opposite-category forms and Kerodon Tag 01PF. There are no new nodes needing separate sources.
+
+Step 1 uses the supplied coherent lift, restricts its defining simplicial map to u times the interval, and obtains its naturality square. The pointwise-transport statement supplies its cocartesian components; the mapping criterion explicitly equates the horn and mapping-space conditions, so the former's hypotheses follow from the same cocartesian fibration p. This convention check is needed because the two cited nodes use different presentations of cocartesian edges.
+
+Step 2 cites exactly the initial-lift statement: both lambda_x and R lie over the same f and have the same source x, and similarly at y. Its statement expressly provides the equivalence of targets and comparison triangle with higher data, so there is no use of an unstated uniqueness result.
+
+Step 3 uses the composition node for associativity homotopies when concatenating the already supplied comparison triangles and squares. It writes out the three intermediate composites, checks their endpoints x and y-prime, and keeps the base square constant over f. The two final arrows before precomposition lie in E_1.
+
+Step 4 uses the pointwise-transport node's displayed mapping-fiber equivalence, specialized to the one-vertex indexing set, the chosen lambda_x and target y-prime. The hypotheses introduce exactly these objects. The coherent square over the constant base provides the path with its homotopy-fiber base data. Applying an inverse equivalence and its endpoint homotopies yields the required path in the fiber's mapping space; I removed the unjustified direct strict-fiber identification and literal path-lifting language from the earlier attempt.
+
+Step 5 uses initiality to make the spaces of comparisons contractible, the composition node only for its stated homotopies, and the pointwise-transport equivalence of spaces to transfer paths and their higher homotopies. Identity f is covered without assuming R and T themselves degenerate. I checked sections B--E of delivery-errors: no new or duplicate nodes, no replacement of an item clause by a new lemma, no cycles introduced by extra dependencies, no hidden size assumption (K is a point), no wrong fiber or added hypothesis, and a verbatim quote for every cited statement. No proof step exceeds the 2000-character review threshold.

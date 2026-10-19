@@ -1,0 +1,102 @@
+## Worker report
+
+This delivery records an existing upstream definition and adds no Lean module.  The
+node's notion is exactly
+`AlgebraicGeometry.AffineBlowup.BaseChangeChart` from
+`WeilConjectures.Blowup.Affine.StrictTransformChart`:
+
+```lean
+abbrev BaseChangeChart : Type u
+```
+
+The full source declaration is in namespace `AlgebraicGeometry.AffineBlowup`, under
+`universe u` and the binders
+`{A : Type u} (B : Type u) [CommRing A] [CommRing B] [Algebra A B]
+(I : Ideal A) (a : A)`, and its body is
+`B ⊗[A] chartRing I a`.  Thus `B` is the ring receiving the map from `A`,
+`I : Ideal A` is the ideal, and `a : A` is the chosen element.  The tensor
+product carries its canonical `A`-algebra structure, so the requested structural
+map `A → C_a(A,B,I)` is the standard tensor-product algebra map.  The dependency
+`def-nagata-blowup-chart-ring` is used through its recorded declaration
+`AlgebraicGeometry.AffineBlowup.chartRing` in
+`WeilConjectures.Blowup.Affine.ChartAlgebra`; this is precisely the subalgebra
+`A[I/a]`.
+
+The source declaration is deliberately defined for arbitrary `a`; the node's
+chart context supplies `a ∈ I` when this ring is used as the `a`-chart of the
+blow-up.  This generality does not alter the resulting object under the node's
+hypothesis and imposes no additional condition.  Every clause of the node is
+therefore rendered as follows:
+
+- “Let `A → B` be a ring map” is the pair of commutative-ring structures and
+  `[Algebra A B]` in the declaration's surrounding binders.
+- “Let `I ⊆ A`” is `(I : Ideal A)`.
+- “Let `a ∈ I`” is the contextual chart parameter and witness used by the
+  dependency/chart APIs; the existing ring definition itself remains valid for
+  arbitrary `a`.
+- `C_a(A,B,I)` is `B ⊗[A] chartRing I a`.
+- `A[I/a]` is `chartRing I a` from the dependency node.
+- The structural `A → C_a(A,B,I)` map is the canonical algebra map supplied by
+  `Algebra.TensorProduct`.
+
+No proof or theorem is added.
+
+Dependency declaration used:
+
+- `def-nagata-blowup-chart-ring` →
+  `AlgebraicGeometry.AffineBlowup.chartRing`, module
+  `WeilConjectures.Blowup.Affine.ChartAlgebra`.  Its definition is
+  `Algebra.adjoin A (Set.range fun x : I ↦ chartFraction a 1 (x : A))` in
+  `Subalgebra A (Localization.Away a)`, exactly the chart algebra in the
+  dependency statement.
+
+Edge cases checked against the source construction: `I = ⊥` and `I = ⊤`, the
+zero ring, `a = 0`, nilpotent and zero-divisor `a`, and `x = 0` all remain valid;
+no nonzero, regularity, Noetherian, finite-generation, characteristic, or domain
+hypothesis is present.  The tensor product and localization definitions do not
+cancel `a`, so zero divisors are allowed.  There is no index set or natural-number
+parameter requiring an additional empty-index or `n = 0` case.
+
+Searches made:
+
+- `msearch.py NE def-nagata-strict-transform-basechange-chart-ring leanfinder
+  "affine base-change chart ring B tensor product over A A[I/a]"`: eight hits,
+  all generic algebra base-change/tensor APIs; no exact declaration in the
+  search index.
+- `msearch.py NE def-nagata-strict-transform-basechange-chart-ring loogle
+  "AlgebraicGeometry.AffineBlowup.BaseChangeChart, Algebra.TensorProduct"`:
+  no hit (the upstream name is not in the Mathlib-only Loogle index).
+- `msearch.py NE def-nagata-strict-transform-basechange-chart-ring grep
+  "BaseChangeChart|chartRing" WeilConjectures/Blowup`: no hit in the older
+  slopmaster2 checkout.
+- Direct `rg` in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` and
+  `lean/Sheaf`: no local duplicate of `BaseChangeChart`; the older checkout
+  lacks the published strict-transform module.
+- `grep -rl '"def-nagata-strict-transform-basechange-chart-ring"' dag/nodes`:
+  the item and its downstream citers only.
+- `scompile.py --source WeilConjectures.Blowup.Affine.StrictTransformChart`:
+  retrieved the published module and its full declaration/docstring.  The
+  source docstring explicitly identifies this declaration with blueprint
+  `def-nagata-strict-transform-basechange-chart-ring` and states
+  `C_a(A,B,I) = B ⊗_A A[I/a]`.
+- `dag/lean_names_upstream.json` records
+  `AlgebraicGeometry.AffineBlowup.BaseChangeChart` for this blueprint id.
+
+The node copy changes only its `lean` field, recording this existing declaration.
+No statement fault or `STATEMENT-DISPUTED` issue was found.
+
+## Second reading by NE
+
+I independently re-read the node, its source place, the dependency node, and the
+published source module.  The node has one construction clause: for a ring map
+`A → B`, an ideal `I`, and `a ∈ I`, define `C_a(A,B,I)` as the tensor product of
+`B` with the affine blow-up chart algebra over `A`, with the canonical structural
+map from `A`.  The source declaration's binders provide exactly the two
+commutative rings, the `A`-algebra structure on `B`, the ideal, and `a`; its body
+is exactly `B ⊗[A] chartRing I a`.  The dependency's `chartRing` body is the
+`A`-subalgebra of `Localization.Away a` generated by all `x/a` for `x ∈ I`, so
+it renders `A[I/a]` without a private copy.  The existing declaration's harmless
+generalization to arbitrary `a` is recorded in the node note; when the chart
+hypothesis `a ∈ I` is supplied, the statement is exactly the node's object.
+I checked zero and nilpotent denominators, zero divisors, zero and unit ideals,
+and the zero ring.  No extra assumptions or omitted clauses were found.

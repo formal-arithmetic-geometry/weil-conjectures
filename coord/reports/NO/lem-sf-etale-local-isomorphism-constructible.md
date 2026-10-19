@@ -1,0 +1,37 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors/lem-sf-etale-local-isomorphism-constructible.json (statement, split; no Mathlib match). Added the four-step cover-refinement argument and verbatim citation evidence in citations.json. The statement, statement dependencies, source, chapter, unit and original ancestry are preserved. No new nodes; zero Mathlib leaves.
+
+Attachments: none. Searched WeilConjectures/ in the read-only slopmaster2 source by the item id and by local isomorphism, constructibility and local-constancy notions. Read ConstructibleSheaf/Defs.lean, Pullback.lean and GenericConstancy.lean. IsLocallyConstantSheaf.of_cover (GenericConstancy.lean:53) proves local constancy descent; Pullback.lean:158 proves finite local constancy invariant under a global isomorphism. Neither gives every clause of this item, in particular the fixed stratification and arbitrary local module isomorphisms, so this is not an attachment. Master source was not treated as evidence of completed proofs.
+
+WANTED: none.
+
+The imported item had no proof. Its statement is correct. No statement correction or STATEMENT-DISPUTED is needed. The source's module clause of 03RU defines local constancy but does not itself include a separate finite-module clause: the given finite models are explicitly supplied by the item's witness and the finite-ring module version in def-weil-pbc-etale-constructible-sheaf. The proof preserves these actual modules rather than inferring finiteness from local constancy alone.
+
+The chapter record currently names sec-six-functors while the assigned unit record has moved to sec-six-functors-basics. I did not alter maintainer-owned binding metadata. The inherited blueprint ancestry is cor-pur-smooth-admissibility, proof Step 1; the generic cover-refinement proof makes its local constructibility transfer explicit and does not replace the unit's purity route. Off-unit generic tools are declared only in split_report.tool_uses for maintainer review.
+
+Nothing mathematical remains unfinished at this one-level split. Existing cited nodes remain responsible for their own proofs.
+
+## Searches and reuse
+
+No searches.jsonl or item copy existed in this sandbox when resuming. No deliver.py process for this item was running. There was therefore no interrupted delivery mutation to repeat. Preserved the six inherited Mathlib-search records in the repository item. New searches were run only through msearch.py and their exact records were appended to the item. Two distinct LeanFinder statements, LeanSearch, Loogle and two grep searches were read. Generic constant-sheaf isomorphism invariance (Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:88,91) handles an elementary component but does not state this item. Condensed locally constant functions and finite-presentation module-sheaf predicates have different conclusions.
+
+Searched the whole DAG by tag 03RU and by cover base change, composition, constant pullback and inverse-image composition; used blueprint_refs.py ancestor and searches for locally constant, 03RU, constant sheaf, pullback locally constant and etale local isomorphism. This found existing covering-base-change, covering-composition, module-composition and constant-pullback statements. No new helper was necessary. A weaker qcqs constructibility descent statement was also read and deliberately not used: this item has no qcqs hypothesis and asks to retain the specified stratification.
+
+## Not duplicates
+
+No new node is created. Every needed non-elementary helper already has a node and is cited directly.
+
+## Review by NO
+
+I read Stacks etale-cohomology.tex, definition-finite-locally-constant (03RU), including the module clause, and the statement of the given constructibility definition (095E finite-stratification form). I also read topologies.tex, definition-etale-covering and lemma-etale (0217), parts (2) and (3); sites-modules.tex, lemma-push-pull-composition-modules (03D8); and the blueprint lemma-constructible-pullback-constant, whose statement is for arbitrary categories of values including modules. These are the sources used; there is no SGA citation. There are no new nodes whose statements require separate source review.
+
+Step 1 uses precisely clause (b) of def-weil-pbc-etale-constructible-sheaf: it supplies an etale cover and finite modules M_b, together with module trivializations. It merely names the witness already assumed, so is elementary. The ring in this definition is finite and commutative, exactly as in the item. No connectedness or Noetherian hypothesis is used.
+
+Step 2 cites lem-weil-pbc-etale-covering-base-change, whose statement explicitly permits an arbitrary jointly surjective family and an arbitrary scheme base morphism. Apply it to V_b -> Z -> X, not to the stratum considered merely as a subset. Then lem-weil-pbc-etale-covering-composition states exactly that the resulting two-level family is etale and jointly surjective on Z. I read both full statements and checked there is no finite-index or qcqs restriction. This is the only geometric refinement required.
+
+Step 3 cites prop-weil-pbc-inverse-image-modules-exact for the module inverse-image functor with the fixed constant coefficient ring; only functoriality is used, not an unmentioned exactness consequence. The module-linear-core statement supplies module-linear composition isomorphisms for arbitrary scheme maps. Apply those comparisons to i,h; u_j,r; and i,v_b,q; the fibre-product equation i h = u_j r identifies the two composite morphisms. The supplied phi_j is pulled back by r, and the chosen trivialization is pulled back by q. Finally lemma-constructible-pullback-constant states g^*(M_X) = M_Y for M in the category of values; here that category is Mod_A, so it retains the same finite module. I wrote the entire isomorphism chain to avoid hiding the comparison or losing linearity. No isomorphism of underlying sets is substituted for a module isomorphism. Preservation of isomorphisms by a functor follows by mapping both inverse equations.
+
+Step 4 uses the same definition as step 1: the constructed cover and models satisfy clause (b), while all subset/stratification data are the original witness and therefore still satisfy clause (a). This is a direct verification of the definition, so elementary. The definition requires existence on each cover member and no equation on overlaps; that explains why the phi_j need not agree. All quotes in citations.json are exact complete copies of the statements opened during this review.
+
+I checked empty X and empty strata (vacuous local witnesses), the zero sheaf and zero coefficient ring, a disconnected stratum with different finite models on different charts, an infinite covering with redundant or empty members, and a non-quasi-compact scheme. The refinement argument works in each case because it selects no finite subcover and makes no uniform-rank assertion. No schematic factorization is inferred solely from containment of images: W_bj is an actual scheme fibre product. No new node is elementary, duplicative, or a renamed clause, because none is created. The proof has four steps, each below 2000 characters; the comparison argument has been written explicitly and uses the cited comparison theorem. I checked B through E: sources have tags and labels, all objects are introduced, no new statement-only record contains a proof, no uncited non-elementary comparison or covering theorem is used, and no statement was weakened.

@@ -1,0 +1,49 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-proetale-coefficients/lem-sfb-eta-id.json`: statement, split into four steps; Mathlib searches found generic tools and statements on other module categories, but no exact match for this coefficient morphism.
+- `citations.json`: one verbatim statement quotation per step/node citation.
+- This `report.md`; `searches.jsonl` was written by the mandated search wrapper. `write_split.py` is sandbox-only preparation code, not a delivery file.
+
+New nodes: none. New Mathlib leaves: none. Two existing Mathlib leaves are reused: `def-weil-pbc-composite-adjunction` and `lem-weil-pbc-conjugate-iso-unit-equation`.
+
+Attachments: none for the item. Searches of slopmaster2 `WeilConjectures/` by item id, docstring tag, `condensedPushforwardHom_id`, `condensedPushforwardHom` and coefficient terminology did not find a declaration of this statement. Master `WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean:459` states it and calls `unitCompUpperStarComp_id`; master is reference material, not completion evidence. I read its definitions and the coherence file to check direction, not to claim an attachment.
+
+WANTED: none.
+
+What was wrong: the imported statement and proof cite the umbrella id `sk-def-sfb-finite-pushforward-pullback`, which has no node file in this shared DAG. The detailed definition nodes do exist. The delivered statement replaces that reference by `def-sfb-finite-lower-star` and spells out the canonical identity isomorphism on sections. This changes neither the hypotheses nor the morphism/equality being asserted. The proof previously had three unclassified steps and omitted the dependencies for the conjugate calculation and unit coherence. Those are now explicit. No mathematical statement dispute was found.
+
+Metadata observation for maintenance: the imported item has no `chapter` or `unit` fields, and the corresponding new chapter/unit records do not exist in `dag/chapters` or `dag/units`. I read the current blueprint chapter `_section.md`, the `sk-prop-sfb-cartesian-coefficients/_section.md` unit and its proof instead, and did not change maintainer-owned binding fields. The four steps keep precisely that unit's identity-compatibility route; there is no use of purity or an alternative source route.
+
+Nothing remains unfinished in the one-level split. No Lean was written and no compiler, Lake or build was run. The dry run is the final preparation check; delivery belongs to the fresh second reader.
+
+## Review by Q35
+
+I read the current main-20261015 statement and all four paragraphs of `lem-sfb-eta-id.proof.md`, as well as the Cartesian-coefficients unit statement/proof and its chapter text. The statement is for every condensed ring and arbitrary scheme, not only finite coefficients, and is an equality of morphisms of underlying abelian sheaves. I checked that no properness, characteristic, nonempty-scheme, commutativity or finite-generation hypothesis is used. The displayed identity map is the canonical pushforward comparison, not an arbitrarily chosen isomorphism. I checked its orientation against slopmaster2 `UpperLowerStar/Defs.lean:290–295`, where `lowerStarId` is the sheaf pushforward identity induced by base change, and against the master coefficient/coherence reference.
+
+Step 1 uses the statements of `def-sfb-upper-star-from-point`, `def-sfb-alpha`, `def-sfb-pullback-from-point-comp-iso`, and `def-sfb-eta`, all opened in the shared DAG. They state respectively the composite pi-pullback, the component defining alpha, the inverse composition comparison and the unit-then-pushforward formula defining eta. Substitution yields Lambda_X = LF and eta = B(d_F) after the unit. This is elementary substitution, not an implicit coherence theorem. The sheaf F lives on (Spec Z)_proet; L and R therefore have the domains needed in the next step.
+
+Step 2 uses the explicit adjunction node for the Hom bijection, the pushforward-composition node for c, and the pullback-composition node for conjugacy. The two generic tools are existing DAG Mathlib leaves: `def-weil-pbc-composite-adjunction` states the composite unit R(v) after u, and `lem-weil-pbc-conjugate-iso-unit-equation` states exactly the unit equation with an isomorphism delta of right adjoints. I read both statements and Mathlib `Adjunction/Basic.lean:567–585` and `Adjunction/Mates.lean:275–315`. Substitution is recorded explicitly: L1 = AL, R1 = RB, L2 = L, R2 = R, delta = c inverse. In particular the inverse direction is necessary and is correct. This step is marked non-elementary and cites both categorical tools; it does not borrow any construction hidden in another node's proof. The tool uses are declared in split_report, even though Mathlib leaves already qualify as tools.
+
+Step 3 cites only `def-sfb-finite-lower-star` (the restriction formula) and `def-sfb-finite-lower-star-comp` (the canonical pasting isomorphism). These statements really give the evaluations used. I supply the missing unit-law argument rather than cite the nonexistent umbrella: the inverse composition comparison and R of the inverse identity comparison are both G applied contravariantly to q. For W = V times_(Spec Z) X, the two maps to V and X are written, and the second equality is precisely the fibre-product relation. Equality of the two projections proves equality of the maps, hence of the section maps. This is a few-line elementary check from the two definitions. The canonical projection is an isomorphism even when X or V is empty; no inference merely from set-theoretic images is used.
+
+Step 4 substitutes the equality established in Step 3 into Step 2 and uses injectivity of the Hom bijection supplied by `def-sfb-finite-upper-lower-star-adjunction`. Both morphisms have source LF and target BLF, so their adjoints have the same source F and target RBLF. I checked the unit-after-functor formula against Mathlib's homEquiv definition and its homEquiv_unit alias in `Adjunction/Basic.lean:181`. This is the elementary final comparison, not a new lemma restating the conclusion.
+
+For the new-node checklist B, there are no new definitions or statements: no statement-only-node, source-tag, Mathlib-leaf, TeX or duplicate obligations are evaded by creating children. The item's six wrapper searches are recorded with their exact query texts in the node, including the second semantic phrasing; I read all returned hits. The module-sheaf hits use a different site/coefficient construction and do not identify the specified alpha, so the item is not a one-line Mathlib specialization. The generic conjugation/component hits are already represented by the two leaves cited above. Whole-DAG/blueprint searches for identity comparison, eta compatibility, conjugates and their expected Lean names found the existing nodes rather than requiring children; blueprint.same_as is empty because no other blueprint node states this exact identity clause independently.
+
+For C and D, every proof citation was checked against its statement and copied to citations.json, proof_deps is the union of uses, and no step cites this item or a result above it. Each step supplies an argument; none delegates the conclusion to a fresh restatement. The calculation follows all four blueprint proof paragraphs and expands its otherwise unstated unit calculation. For E, I tested empty X, the zero coefficient ring, and X = Spec Z: the fibre-product and unit equations remain valid in each case. The proof uses only ordinary categorical adjunctions and restriction on sections; it neither identifies a derived category with an underived category nor assumes any coefficient finiteness. The correction made during review was to replace stale umbrella references by the precise definitions and to bring in the already existing composite-unit and conjugate-unit statements for Step 2.
+
+## Not duplicates
+
+No new nodes were created. The generic adjunction facts were found in the existing DAG and cited directly.
+
+## Second reading by Q35
+
+- Statement: checked against `lem-sfb-eta-id.md` and its proof, including the unrestricted condensed ring and scheme hypotheses, the inverse orientation, and the sectionwise identity comparison; verdict faithful, with the condensed-ring definition dependency made explicit.
+- Step 1: checked each use against `def-sfb-upper-star-from-point`, `def-sfb-alpha`, `def-sfb-pullback-from-point-comp-iso`, and `def-sfb-eta`; the substitution and mate formula are elementary and all cited statements say what is used.
+- Step 2: checked the adjunction, pushforward composition, pullback composition, composite-unit, and conjugate-unit statements; the assignments (L_1=AL,R_1=RB,L_2=L,R_2=R,\delta=c^{-1}) have the required types, and the inverse-direction conjugation is now stated explicitly.
+- Step 3: checked the restriction formulas against `def-sfb-finite-lower-star` and `def-sfb-finite-lower-star-comp`; the two maps are restriction along the same first projection, whose two fibre-product projections agree, including for empty (X) or (V).
+- Step 4: checked the adjunction Hom bijection and its unit formula; injectivity applies to maps (LF\to BLF), and the conclusion has the required inverse orientation.
+- New nodes: none; the existing generic Mathlib leaves were searched and reused, so B1–B7 and duplicate-node checks introduce no child statements.
+- Edge cases: the zero condensed ring, (X=\varnothing), and (X=\operatorname{Spec}\mathbb Z) preserve the displayed fibre-product and unit equations; no finiteness, properness, characteristic, or nonemptiness hypothesis is used.
+- Changes made: added `[sk-def-sfb-condensed-ring]` to the statement and `stmt_deps` for self-contained domain terminology, and clarified in Step 2 that the inverse pullback comparison is the conjugate of (c^{-1}); no mathematical hypothesis or conclusion changed.

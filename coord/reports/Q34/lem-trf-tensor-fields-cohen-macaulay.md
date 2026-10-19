@@ -1,0 +1,25 @@
+# Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-tensor-fields-cohen-macaulay.json` — existing item split into nine proof steps; no new nodes and no Mathlib leaves.
+- `citations.json` — verbatim statement quotes for every citation in every step.
+- `searches.jsonl` — Mathlib searches made with `msearch.py`.
+
+Attachments: no sorry-free declaration in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` carries the item tag or the Tag 045M tensor-fields statement. The keyword search for tensor fields, Cohen–Macaulay, and Noetherian tensor rings found no declaration, so there is no attachment.
+
+WANTED: none.
+
+The imported item already has the exact Stacks Tag 045M statement. I left its hypotheses and conclusion unchanged, including the fact that either field extension may be finitely generated and that no separability, algebraicity, or perfectness is assumed. A DAG-wide search found the polynomial Cohen–Macaulay input `lem-trf-polynomial-algebra-cm`; the other required commutative-algebra inputs are existing Mathlib leaves or existing split nodes, so I created no duplicate nodes. The item’s original Mathlib searches were retained, and I ran fresh LeanFinder, LeanSearch, Loogle, and Mathlib-source grep searches; the hits concern finite type, localization, linear disjointness, or finite tensor modules and none states this Cohen–Macaulay theorem.
+
+No source error or statement dispute was found. The source’s phrase “finite extension of the purely transcendental extension” is expanded in steps 1–2 by a finite transcendence basis, a finite algebraic extension, the polynomial tensor identification, and localization. The local argument is expanded rather than asserting that a prime localization remains finite over the base localization: step 6 proves the global tensor algebra finite free, step 7 localizes flatness, step 8 uses integral incomparability to bound local dimension, and step 9 combines the flat-local depth formula with the depth upper bound. The nonzero edge case needed for the depth bound is stated explicitly in step 9.
+
+## Review by Q34
+
+I read the item against Stacks Project `literature/stacks-project/algebra.tex`, Tag 045M (`lemma-tensor-fields-CM`, lines 47266–47286), and read the surrounding source lemmas: Tag 045I (Noetherian field extension), Tag 00R5 (finite-flat Cohen–Macaulay), Tag 00ND (polynomial Cohen–Macaulay), Tag 00FN (Noetherian permanence), Tag 00HT (flat localization), Tag 00GT (integral incomparability), Tag 00E3 (prime localization), Tag 0337 (flat-local depth formula), and Tag 00LK (depth bounded by support dimension). I also opened every cited DAG node and copied its complete statement into `citations.json`, so each step takes only a fact that its cited node actually states.
+
+Step 1 uses the tensor swap, the existing tensor-product definition, the existing finite transcendence-basis Mathlib leaf, and the existing finite algebraic-extension Mathlib leaf. It checks the finite-basis reduction without introducing a separability hypothesis. Step 2 uses the polynomial-ring definition and the existing localization-over-base tensor lemma; it writes both directions of the polynomial tensor isomorphism and identifies the localization explicitly. Step 3 uses the existing polynomial Cohen–Macaulay node and the existing localization-Noetherian leaf; the field case is checked directly (zero prime, zero dimension, zero depth). Step 4 uses the existing prime-localization definition, prime-localization quotient lemma, and localization-Noetherian leaf; I checked the displayed fraction maps in both directions and verified the denominator condition.
+
+Step 5 is an elementary finite-basis calculation from the tensor-product definition, with the coordinate maps written explicitly. Step 6 uses the existing finite-algebra Noetherian leaf, finite-free flat leaf, and finite-algebra-integral leaf; it records that these are global properties before localizing. Step 7 uses the prime-localization definition, localization-Noetherian leaf, and flat-module local criterion. I checked that a prime of `A` contracts from `q` and that the induced map `A_p → T_q` is local. Step 8 uses the dimension-chain Mathlib leaf and the integral-incomparability Mathlib leaf; the contraction of every strict chain below `q` is strict and lies below `p`, giving the required dimension inequality. Step 9 uses the flat-local depth formula, the depth definition, and the depth/support-dimension bound. I checked that `S` is a nonzero finite `S`-module with full support; the report and proof now state why the localization is nonzero. The resulting chain of inequalities forces depth equal to dimension at every prime localization.
+
+I tested the edge cases in the written argument: `r=0` gives `A=L`; a finite (possibly inseparable) extension gives a finite free tensor algebra; `K=L=k` gives the field case; and the zero-length regular sequence is used for a field’s depth zero. No new node was needed, no duplicate pair was created, and no source or hypothesis correction was made.

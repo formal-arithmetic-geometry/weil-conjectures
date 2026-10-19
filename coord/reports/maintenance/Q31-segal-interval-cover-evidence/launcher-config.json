@@ -1,0 +1,98 @@
+{
+  "comment": "One dispatcher for every batch and stage (the human, 2026-10-15). Batches are served in this order; within a batch stage 1, then 2, then 3. total_slots is the only concurrency knob.",
+  "total_slots": 210,
+  "slots_per_group": 4,
+  "claims_per_group": 4,
+  "maxtry": 1000,
+  "model": "gpt-6.1-sol",
+  "timeout_min": {
+    "1": 45,
+    "2": 45,
+    "3": 120
+  },
+  "batches": [
+    {
+      "name": "batch1",
+      "label": "proper base change (first task)",
+      "project": "/home/ubuntu/weil-conjectures-sheaf",
+      "main": "sheaf-dag",
+      "clone_prefix": "weil-conjectures-sheaf",
+      "tools": "/home/ubuntu/weil-launcher",
+      "sandbox": {
+        "1": "/home/ubuntu/weil-sandbox",
+        "2": "/home/ubuntu/weil-sandbox",
+        "3": "/home/ubuntu/weil-sandbox"
+      },
+      "stage_env": {
+        "1": {},
+        "2": {},
+        "3": {}
+      },
+      "skip_closure": false,
+      "groups_file": "groups-batch1.txt",
+      "queue_refresh_min": 5,
+      "tags_file": "coord/queue-batches.tsv"
+    },
+    {
+      "name": "batch2",
+      "label": "new targets (batch 2: smooth and pro-etale base change; batch 3: smooth purity; batch 4: Poincare duality; batch 5: Weil conjectures; tagged)",
+      "project": "/home/ubuntu/weil-newtargets",
+      "main": "newtargets-dag",
+      "clone_prefix": "weil-newtargets",
+      "tools": "/home/ubuntu/weil-launcher-nt",
+      "sandbox": {
+        "1": "/home/ubuntu/weil-newtargets-sandbox",
+        "2": "/home/ubuntu/weil-newtargets-stage2-sandbox",
+        "3": "/home/ubuntu/weil-newtargets-stage3-sandbox"
+      },
+      "stage_env": {
+        "1": {
+          "SHEAF_DAG": "/home/ubuntu/weil-nt-live-dag/nodes"
+        },
+        "2": {
+          "WEIL_SANDBOX": "/home/ubuntu/weil-newtargets-stage2-sandbox",
+          "SHEAF_LEAD": "L-only",
+          "-SHEAF_DAG": ""
+        },
+        "3": {}
+      },
+      "skip_closure": false,
+      "groups_file": "groups-batch2.txt",
+      "tags_file": "coord/queue-batches.tsv",
+      "queue_refresh_min": 2
+    }
+  ],
+  "lanes": [
+    {
+      "batch": "batch2",
+      "tag": "batch2"
+    },
+    {
+      "batch": "batch1",
+      "tag": "batch2"
+    },
+    {
+      "batch": "batch2",
+      "tag": "batch3"
+    },
+    {
+      "batch": "batch1",
+      "tag": "batch3"
+    },
+    {
+      "batch": "batch2",
+      "tag": "batch4"
+    },
+    {
+      "batch": "batch1",
+      "tag": "batch4"
+    },
+    {
+      "batch": "batch2",
+      "tag": "batch5"
+    }
+  ],
+  "lanes_comment": "2026-10-16: batch 1 is complete; lanes: batch2 (side, stages 1-2), batch2 (live, stage 3), batch3 (side), batch3 (live). 2026-10-17: batch4 (Poincare duality, upstream master #1448) after batch3: side stages 1-2, then live stage 3. Items without a tag wait for the next tag refresh. 2026-10-17: batch5 (Weil conjectures of Comparator/Weil/Challenge.lean, assuming PD and the trace formula) after batch4: side lane only (stage 1 first); no live stage-3 lane yet.",
+  "provider_start_slots": 8,
+  "provider_cooldown_s": 60
+}

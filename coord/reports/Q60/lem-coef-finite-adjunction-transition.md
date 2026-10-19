@@ -1,0 +1,60 @@
+# Worker report: lem-coef-finite-adjunction-transition
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-finite-adjunction-transition.json`: statement item, now split into ten steps; the statement is unchanged. Mathlib verdict: no match for this finite coefficient tower comparison.
+- `citations.json`: one verbatim statement excerpt for every node used by every proof step.
+- No new DAG nodes and no new Mathlib leaves.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 `WeilConjectures/` tree for the exact item/tag and the finite adjunction, transition, coefficient/counit, dualizing and mapping-adjunction notions. Read the nearby derived projection and adjunction interfaces. They concern general coefficient categories or individual operations and do not state the integral-to-finite mapping-complex transition square with its specified quotient maps. No upstream master sorry declaration was treated as a proof.
+
+## WANTED
+
+None. All source material used is already available locally.
+
+## Corrections and interpretation
+
+The imported item was statement-only. Its trace clause is already literally a clause of `lem-coef-finite-dualizing`; I cited it instead of creating another node. The main square still needs its argument: the proof evaluates an arbitrary map from an arbitrary object P of D(R), reduces the associated evaluation map, applies projection/exchange coherence and the prescribed trace identity, and transposes back. This establishes equality of actual derived morphisms, without an inference from agreement on cohomology.
+
+The current blueprint has moved the parent to `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md`. Its paragraph 2 and the original parent paragraph 2 give the same finite-adjunction/counit route. I retained the historical blueprint ancestry and item statement. The chapter and unit records were read and not edited; this child is not their key statement.
+
+The potentially delicate domain is the arbitrary probe P. Neither P nor its finite scalar extensions need be bounded constructible or finite Tor. Accordingly the proof uses ambient projection *morphisms* and ambient coefficient *mates* there. It only inverts the finite comparisons at K_m and omega_m, where the hypotheses supply finite-Tor constructibility. I initially considered a new projection/coefficient coherence node, then found and read the existing general `lem-weil-pbc-ringed-exchange-tensor-coherence`, which already applies to the coefficient square of ringed topoi. No new node is justified.
+
+## Unfinished work
+
+None at stage 1. The dependencies retain their existing states; no Lean was written or compiled.
+
+## Review by Q60
+
+I read the item and its source parent, the current parent's separate proof file (paragraph 2, especially the final assertion about finite adjunction transition maps), and the current finite dualizing proof file. I also read the full statements of every cited DAG node. For the algebraic foundations I read `literature/stacks-project/sites-cohomology.tex`: Tag 07A6, `lemma-adjoint`; Tag 08J9, `lemma-internal-hom`; Tag 0B56, `equation-projection-formula-map`; and Tag 0E48, `remark-compatible-with-diagram`. The latter is explicitly a statement for any commutative diagram of ringed topoi, not only a Cartesian square of schemes. This is why coefficient ring changes on the identity underlying topoi meet its hypotheses. No purity theorem or new geometric adjoint is used.
+
+1. Step 1 uses the canonical-successive-reduction clause of `lem-coef-integral-compact-support`, the natural point-section reduction of `lem-pod-point-sections-derived-reduction`, the finite coefficient comparison at K_m and omega_m, and finite dualizing constructibility. The item already supplies the integral comparison maps; no missing dimension bound is silently introduced to reprove their existence. The uniform Tor interval ensures that each K_r lies in the finite comparison domain. The omega_r Tor assumption and finite dualizing construction put omega_m there as well.
+2. Step 2 uses the *statement* of `lem-sfb-dc-hom-scalar-adjunction`, which explicitly supplies evaluation normalization, naturality, compatibility with coefficient-ring maps, and absence of flatness assumptions. `lem-pur-sheaf-ring-derived-coefficient-adjunction` supplies the actual x tensor b formula. The tensor-Hom and derived pullback/projection nodes supply transposition and its parameter tensor identifications. This is applied on the small pro-etale site and the one-object coefficient site. The probe P is arbitrary. No finite-Tor-dimension assertion about A_m to A_n is used.
+3. Step 3 copies exactly the dualizing node's counit identity, with indices renamed. Its last clause supplies its finite pro-etale interpretation, so an etale statement is not being silently treated as an unrelated pro-etale statement. `lem-sf-compact-support-restriction-of-scalars` states the natural fixed-compactification restriction isomorphism that identifies the underlying arrows. This proves the trace clause itself and fixes the trace normalization for the calculation.
+4. Step 4 uses the two-composite equality in `lem-weil-pbc-ringed-exchange-tensor-coherence`, which has arbitrary E and Q and requires no Cartesian hypothesis. The coefficient square is explicitly a ringed square. `lem-sp-direct-image-change-ring-transpose` states that its normalized coefficient mate is the projection coefficient map without boundedness or flatness restrictions. The exact-sections statement applies since k is algebraically closed. The same ringed coherence applies to point sections, so there is no unsupported assertion that an arbitrary sections functor is strong monoidal.
+5. Step 5 uses the actual open tensor isomorphism of `lem-cbc-extension-zero-projection-formula`, the exact open adjunction of `lem-cbc-proetale-extension-zero`, K-flat flat-term resolutions and their tensor-pullback comparison. The elementary argument writes out why extension by zero preserves K-flatness, identifies the scalar maps as B-linear balanced tensor maps, checks the open square by the open adjunction, and pastes it with the proper square through the *definition* in `def-exchange-projection`. That definition states the actual compactification composite, rather than a theorem of coefficient coherence. The coherence theorem used is step 4, not a claim inferred from the definition.
+6. Step 6 uses the precise final normalization clause of `lem-coef-finite-mapping-adjunction`: its isomorphism is the transpose of projection, evaluation, and counit. The scalar-Hom node and the finite-point definition identify this with the displayed R-linear pairing. `def-exchange-projection` and `lem-weil-pbc-ringed-projection-mate-exact` give the ambient arrows, without asserting that they are invertible for P. The constant A_r sheaf has sections A_r at the coefficient point.
+7. Step 7 expands the core equality rather than saying that the comparisons “transport.” Coefficient change first passes the two projection arrows by steps 4 and 5, then the evaluation arrow by naturality of the actual mate, then the trace by the formula in step 3. The explicit equation has source P_n tensor_B (C_m tensor_A B) and target B on both sides. The finite coefficient node is only used for the isomorphisms at K_m and omega_m; its constructibility hypotheses are not applied to P_m tensor K_m. Ambient mates handle that possibly unbounded source.
+8. Step 8 uses the scalar unit/counit formula and the canonical successive reductions from step 1. The elementary substitution explains why the right transition is induced by A_m to A_n. On representatives the composite unit sends x to (x tensor 1) tensor 1, so no unstated normalization of a reduction isomorphism is inserted.
+9. Step 9 uses the tensor-Hom transposition of `lem-weil-pbc-ringed-internal-hom-exact-restriction` on the one-object R site and `lem-pur-rhom-global-sections` to identify its H0 with the derived Hom set. Taking P=H_m and h=identity is a direct substitution, proving equality in D(R) rather than merely equality of induced cohomology maps.
+10. Step 10 uses the stated naturality of finite mapping adjunction, scalar-Hom adjunction and the compact-support/point comparisons. The remaining calculation is elementary: precomposition in the first mapping variable commutes with fixed postcomposition in its second variable. The displayed precomposition formula checks the direction of contravariance.
+
+For delivery-errors B I checked that there is no new node needing a standalone statement or a search verdict, all existing fields and ancestry were retained, TeX escaping is ordinary JSON escaping, and the statement did not change. For C I checked each uses entry against its node's statement and wrote literal excerpts in citations.json; off-unit generic tools are explained in split_report.tool_uses. For D the main conclusion is proved by the evaluation/counit calculation, not renamed as a new lemma. For E the key hypotheses checked were the ordinary completed coefficient category, the fixed compactification, finite Tor only where a finite comparison is inverted, and arbitrary probes in the ambient categories. Small cases checked were m=n (the identity coefficient change and u=identity), K=0, X empty, n=1, and a nonflat quotient such as R/varpi^2 to R/varpi. The last case causes no problem because every tensor is derived; in particular B is never assumed perfect over A.
+
+All ten steps are below 2000 characters. The two substantive comparisons are already cited as existing nodes: scalar-Hom coefficient compatibility and ringed projection/exchange coherence. The elementary open calculation is a direct specialization and pasting of the cited open tensor and adjunction statements. No hidden lemma was moved into a long step. No statement dispute, source correction, new source request, or uncompleted attachment claim remains.
+
+## Not duplicates
+
+No new nodes. Existing ringed projection/exchange coherence and scalar-Hom adjunction were reused after full-DAG and blueprint searches. In particular no new node was made for the trace clause already in `lem-coef-finite-dualizing`.
+
+## Mathlib searches
+
+The original item's inherited searches were preserved. This session's actual queries and returned declarations are appended to its mathlib_searches and logged in searches.jsonl: LeanFinder (two descriptions of the item and one of projection/coefficient coherence), Loogle (Adjunction.homEquiv and MonoidalClosed), grep (dualizing/Verdier/exceptional adjunction and projection/scalar patterns in CategoryTheory), and LeanSearch (scalar-adjunction/trace compatibility and projection/base-change compatibility). The hits concern underived scalar extension, generic enriched categories, derived-category exact-functor comparisons, or sheaf pullback. None is an exact statement of this finite-coefficient derived mapping square or a one-line specialization of it. No service failure was recorded as mathematical absence.
+
+## Delivery validation repairs
+
+The first full dry run rejected the phrase “the item's” in step 1 as non-standalone wording. Replaced it with the explicit assumed finite Tor amplitude of omega_r, with no statement change. Step 5 is marked non-elementary because it combines the cited open projection and derived-resolution facts; the actual balanced tensor and pasting argument remains written out.
+
+Repair after the landing return: I re-read the current `lem-coef-finite-mapping-adjunction` statement, which now uses `omega_{X,n}=Ra_n^!A_n`, quantifies `M` in the finite constructible finite-Tor class, and states that `gamma_{n,M}` is canonical and natural. Step 6 now explicitly applies this current lemma to `M=K_m` and checks those hypotheses from the item; step 10 records the same naturality check for `K_r` and `K'_r`. The step-10 citation quote was changed to the exact current sentence “There is a canonical natural isomorphism in $D(A_n)$”. I also recorded the three searches run during this repair in the item's `mathlib_searches` and `searches.jsonl` log.

@@ -6,18 +6,18 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 
 - Maintenance repair handoff (2026-10-16): read `coord/repair-notes/<id>.json` when present, including before an `existing: true` match. A note with `stage: "2"` and `state: "released"` records an interface repair on this item even when the dispatcher calls the newly claimed task "new". Read its diagnostic and archived binding; repair every recorded defect and show the required consumer validation in the worker report. Second readers verify that repair before delivery. Rebinding the withdrawn declaration without fixing its recorded defect is not a repair. This does not authorize stating another DAG node.
 - The node `dag/nodes/<chapter>/<id>.json`: `statement`, `kind`, `source`, `stmt_deps`, `proof` (statement nodes), `mathlib_searches`.
-- Every node in `stmt_deps`, its statement and its `lean` record (`module`, `declaration`) or `mathlib_match`.
+- Every node in `stmt_deps`, its statement and its `lean` record (`module`, `declaration`) or `mathlib_match`. A dependency with no `lean` record whose `lean_audit.slopmaster2.state` is `closed` is already stated upstream: the `decls` of that audit record name its declarations (name, module, lines) in the slopmaster2 source, and the review packet lists them; cite those, do not state the node again (2026-10-18).
 - The source module of each recorded declaration: `~/weil-conjectures-slopmaster2/<module path>.lean` (module `A.B.C` is file `A/B/C.lean`; compiled, read-only). Read the declaration and its docstring, not only its name.
 - Mathlib: `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (read-only).
-- The source checkout is slopmaster2 at `2104a988e` since 2026-10-12 (before: `71d63dcf6`); its declarations are in `local/sorry_map_slopmaster2_2104a988.jsonl.gz`, and the declarations of ours that share a name with one of its declarations are judged in `coord/upstream-overlaps.md`. A notion it now defines is used, not defined again (e.g. `IsStrictlyHenselianLocalRing`, the class of `WeilConjectures.Mathlib.RingTheory.Henselian`).
+- The source checkout is slopmaster2 at `7d675a263` since 2026-10-12 (before: `71d63dcf6`); its declarations are in `local/sorry_map_slopmaster2_7d675a26.jsonl.gz`, and the declarations of ours that share a name with one of its declarations are judged in `coord/upstream-overlaps.md`. A notion it now defines is used, not defined again (e.g. `IsStrictlyHenselianLocalRing`, the class of `WeilConjectures.Mathlib.RingTheory.Henselian`).
 - The node's source place: for Stacks, `literature/stacks-project/` (`stacks-project/tags/tags` maps a tag to its label).
 - The example module `lean/Sheaf/CategoryTheory/CompactObject.lean` (node `def-pc-compact-object`, in git): header, docstrings, namespace as in §3.
 
 ## 1. Your item
 
-One DAG node that a target reaches, split in stage 1, with no Lean declaration yet, whose `stmt_deps` all have a recorded `lean` or are Mathlib leaves. You write its module `lean/Sheaf/<Topic>/<Name>.lean`: the definition (definition node) or the statement with `sorry` as its proof (statement node). Nothing else is proved in it.
+One DAG node that a target reaches, split in stage 1, with no Lean declaration yet, whose `stmt_deps` all have a recorded `lean`, are Mathlib leaves, or are finished upstream (`lean_audit.slopmaster2` closed, declarations in its `decls`). You write its module `lean/Sheaf/<Topic>/<Name>.lean`: the definition (definition node) or the statement with `sorry` as its proof (statement node). Nothing else is proved in it.
 
-**One definition per notion.** Before writing, search whether Mathlib or the source repository (`~/weil-conjectures-slopmaster2/WeilConjectures/`) already defines the notion or states the statement: three kinds of search as in stage 1 (`coord/brief-stage1.md` §5: LeanSearch; Loogle or LeanFinder; grep of Mathlib and of `WeilConjectures/`), and the source's names in `dag/lean_names_upstream.json` (`tools/lean_names_upstream.py show`; `grep -rn "<id>" ~/weil-conjectures-slopmaster2/WeilConjectures`). If one exists and says exactly what the node says, record it as the node's `lean` with `"existing": true` and write no file. Likewise, when another node of this project already states your node's statement or defines its notion, record that declaration with `existing: true`, `branch: "sheaf-dag"`, `module: Sheaf.<…>` (no file; the declaration is read from `lean/Sheaf` on the base, nothing is compiled).
+**One definition per notion.** Before writing, search whether Mathlib or the source repository (`~/weil-conjectures-slopmaster2/WeilConjectures/`) already defines the notion or states the statement: three kinds of search as in stage 1 (`coord/brief-stage1.md` §5: LeanSearch; Loogle or LeanFinder; grep of Mathlib and of `WeilConjectures/`), and the source's names in `dag/lean_names_upstream.json` (`tools/lean_names_upstream.py show`; `grep -rn "<id>" ~/weil-conjectures-slopmaster2/WeilConjectures`). If one exists and says exactly what the node says, record it as the node's `lean` with `"existing": true` and write no file. Likewise, when another node of this project already states your node's statement or defines its notion, record that declaration with `existing: true`, `branch: "newtargets-dag"`, `module: Sheaf.<…>` (no file; the declaration is read from `lean/Sheaf` on the base, nothing is compiled).
 
 Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 
@@ -27,6 +27,31 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - **(B) An unusable dependency** (a node in the item's `stmt_deps` whose recorded declaration or `mathlib_match` does not give the notion as the node states it, e.g. the general notion where the node means a specialization): write, in the same delivery, a module stating the dependency node's notion as the node says it, and set that dependency node's `lean` to its record with a `note` saying why the old record was unusable; nothing else of the dependency node changes (its `mathlib_match` stays).
 - **(B) with a statement correction** (2026-10-11, T-depcorr): a dependency module may also be delivered for a node your statement correction adds to the item's `stmt_deps` (e.g. a definition node of the base the corrected statement now cites); the rules of (B) are otherwise the same.
 - **(C) A wrong statement is CORRECTED, not abandoned (STAGE 2 STATEMENT CORRECTION, decision of the human, 2026-10-11; `coord/STATE.md`).** When the item's own statement is wrong or cannot be written (false, ill-typed, ambiguous, or leaving out what is needed to state it: an object not introduced, an action or a structure not specified, a hypothesis the source assumes throughout), correct the node in the delivery and write the Lean for the corrected statement. The correction makes the node say what the SOURCE says (the Stacks tag, the blueprint unit's intent), never something easier. The item may then change in `statement`, and only as far as the correction forces it in `stmt_deps`, `proof` and `proof_deps`; it gains `statement_change` (§5) and the report gets `## Statement corrected` (§6). Find the citers with `grep -rl '"<item>"' dag/nodes`: every node whose `stmt_deps` or `proof_deps` name the item; read each and write one line per citer (does its use of the item still hold?). A citer that breaks is named (`holds: false`), never edited. A correction that would change a UNIT's own statement is written up for `coord/HUMAN.md` and that item alone is still released: `tools/claim.py release <G> <item> "abandon: unit statement: <the precise reason>"`.
+
+### Missing helpers and genuine waits (stage-2 unblock, 2026-10-15)
+
+The authorization in (A)/(B) includes missing canonical maps, small-site transport,
+and comparison interfaces. A helper belonging to the same notion may be a declaration
+in its node's module, recorded in lean.declarations with source and blueprint docstrings;
+an absent independent notion needs the new definition node and module of (A). Definitions
+contain real data; every postponed theorem has a matching DAG statement and proof docstring.
+An exact existing Mathlib or published upstream declaration may repair a dependency record
+under (B), with lean.note and the appropriate existing: true module/branch record.
+Published dependency modules are resolved in the live library as well as the side library.
+
+A genuine existing DAG node without a declaration or Mathlib match is a prerequisite,
+not a new helper node. Report `WAITING <item>: <dependency ids> | <missing object>`.
+The dispatcher parks the consumer and queues/claims ready prerequisites first, including
+those omitted from the current statement-dependency list. It resumes when they land;
+the consumer then cites the landed nodes. An unusable recorded interface is repaired by
+(B), rather than treated as an unstated node. BLOCKED is reserved for actual tool failures.
+
+For universe mismatches, first supply a mathematically equivalent transport or generalized
+interface under (B). Never force site object and morphism universes equal when the site
+has different universes. If the item's statement needs a source-based size correction,
+use (C), statement_change and the complete citer audit; no silent restriction is allowed.
+The launcher supplies item-specific guidance for the pro-etale change-of-rings and
+etale cohomology-pullback cases.
 
 ## 2. The statement says exactly what the node says
 
@@ -51,7 +76,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - No `let` in statements: they elaborate as `have` and stage 3 cannot unfold them; write the terms out (21 lets removed in C1 14d642f46).
 - Never run `cat` (or any reader) without a file or heredoc: it waits on stdin and stalls the agent (F1 e681a69a6 reviewer, 16 min).
 - `IsZero` on a bare `Type` is unprovable; state vanishing as `Subsingleton` (J1 bd3f9a579).
-- Rebase on sheaf-dag before delivering: a stale-base re-record of a landed node is reverted (F1 394d93d01).
+- Rebase on newtargets-dag before delivering: a stale-base re-record of a landed node is reverted (F1 394d93d01).
 - A dead inflight landing record (merging process gone): `tools/landing.py abort <id>` (C1 2556ce25a).
 - ⨁ on sheaves of modules needs a local `HasFiniteBiproducts.of_hasFiniteProducts` instance (`Abelian.hasFiniteBiproducts` is a theorem, not an instance) (E1 45deb4957).
 - Support of a module is inline `{x | ¬ Subsingleton (F.presheaf.stalk x)}` (C1 14e331910; STATE line SUPPORT OF A MODULE); stalks as objects/maps `RingedSpace.moduleStalkFunctor` (STATE line MODULE STALKS).
@@ -104,19 +129,21 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 
 ## 4. Compiling
 
-You have no compiled Lean. Compile on the server:
-`ssh <server> 'cd ~/weil-conjectures-sheaf && tools/compile_remote.sh <G> <item>' < <file>.lean`
-(60 s limit; prints the errors; compiled against the last green global build plus your group's landed modules). Compile until the file is clean: no error, no warning (fix unused variables). A declaration you can read in `lean/` but that does not compile for you has landed since the last green build: wait, do not write it again. A timeout is a fault of a definition, not of the limit.
+Stage-2 parallel landing, human update 2026-10-15: use `python3 ~/weil-launcher-nt/scompile.py <G> <item> <file.lean> [...]`. It now runs `~/weil-launcher/lcompile.py` on the Codex machine with a local overlay exposing side-project modules; server `tools/nt_compile.py` confirms when needed. This supersedes the earlier server-only restriction. Local compilation through this wrapper is authorized and required where possible. Siblings compile separately in dependency order. Every file retains 60 seconds, two threads and nice 19. No combined source file, `lake build`, global build, or writes to live Lean/artifacts.
+
+Compile until clean; expected sorry warnings alone are permitted. A timeout is a fault of a definition, not a reason to raise the limit. Stage-2 modules land only under the side project's `lean/Sheaf/`, through the side `land.sh` called by `merge_delivery.py --stage 2`. These landings are verified per file and never submit a live global build request. Only the reviewed node field delta is promoted to the shared DAG by `nt_land2.py`.
+
+The 51-module pro-etale framework is validated in the side project (coord/pefw-upstream-framework.md). Side-only imports compile in the private overlay. Apply (A)/(B) for missing helpers and WAITING for genuine unstated DAG prerequisites; keep the canonical objects and the source statement.
 
 ## 5. The node records
 
-The delivery changes the item's node file ONLY in the field `lean` (and in `stmt_deps`, only by adding the new definition nodes of (A) or a node that already exists on sheaf-dag with a `lean` record, e.g. a notion another group landed meanwhile that a return asks you to cite: STMT_DEPS MAY GAIN LANDED NODES, `coord/STATE.md`):
+The delivery changes the item's node file ONLY in the field `lean` (and in `stmt_deps`, only by adding the new definition nodes of (A) or a node that already exists on newtargets-dag with a `lean` record, e.g. a notion another group landed meanwhile that a return asks you to cite: STMT_DEPS MAY GAIN LANDED NODES, `coord/STATE.md`):
 
 ```
 "lean": {"module": "Sheaf.<Topic>.<Name>", "declaration": "<full name>",
          "declarations": [...] (optional, when several), "file": "lean/Sheaf/<Topic>/<Name>.lean" (absent when existing),
          "statement": "<signature verbatim from the file, from the keyword to := or where>",
-         "branch": "sheaf-dag" | "mathlib" | "slopmaster2", "by": "<G>", "date": "<date -u>", "existing": true|false,
+         "branch": "newtargets-dag" | "mathlib" | "slopmaster2", "by": "<G>", "date": "<date -u>", "existing": true|false,
          "note": "<free text>" (optional)}
 ```
 
@@ -134,13 +161,13 @@ The delivery changes the item's node file ONLY in the field `lean` (and in `stmt
   "previous": {...}   <exactly when the node already had a statement_change: the old record, whole>}
 ```
 
-`citers` names exactly the nodes on `sheaf-dag` whose `stmt_deps` or `proof_deps` contain the item (`grep -rl '"<item>"' dag/nodes`, then keep those). The corrected statement cites every `[id]` it names in `stmt_deps`. Nothing else of the item changes (`status`, `source`, `kind` stay). The preflight checks every key (`tools/node_fields.py check_statement_change`).
+`citers` names exactly the nodes on `newtargets-dag` whose `stmt_deps` or `proof_deps` contain the item (`grep -rl '"<item>"' dag/nodes`, then keep those). The corrected statement cites every `[id]` it names in `stmt_deps`. Nothing else of the item changes (`status`, `source`, `kind` stay). The preflight checks every key (`tools/node_fields.py check_statement_change`).
 
 **A dependency node of (B)** changes ONLY in `lean`: the record above for its module (`existing: false`, `by` = your group), with `note` required (why the recorded declaration or `mathlib_match` was unusable, what the module states). Its `mathlib_match` and every other field stay.
 
 **A new definition node of (A)** is written whole, with exactly these fields (the preflight checks each):
 
-- `id` = file name, `def-<chapter prefix>-<short-name>`, not existing on `sheaf-dag`; the file in the item's chapter directory;
+- `id` = file name, `def-<chapter prefix>-<short-name>`, not existing on `newtargets-dag`; the file in the item's chapter directory;
 - `kind`: `"definition"`; `title`; `status`: `"split"`;
 - `statement`: self-contained TeX introducing its own objects and citing as `[id]` the definition node of every notion it is built from; `stmt_deps`: exactly the cited ids (existing nodes or other new nodes of the delivery);
 - `source`: `{document, place}` (the Stacks tag and label, or the document in `literature/`);
@@ -149,13 +176,13 @@ The delivery changes the item's node file ONLY in the field `lean` (and in `stmt
 - `created`: `{by: "worker", item: <the item>, date, group: <G>}`;
 - `blueprint`: `{is: null, from: {node: <python3 tools/blueprint_refs.py ancestor <item>>, place: <the place in that blueprint proof the notion serves>, via: <the item's via with the item in front>}, same_as: [...]}`;
 - `lean_audit`: `{"master": {"state": "none"}, "slopmaster2": {"state": "none"}}`; `chapter`, `unit`: the item's;
-- `lean`: the record above for its module (`existing: false`), or an existing declaration (`existing: true`, no module); a declaration already landed in `lean/Sheaf` by another node is recorded with `existing: true`, `branch: "sheaf-dag"`, `module: Sheaf.<…>` (§1), also for a dependency node of (B).
+- `lean`: the record above for its module (`existing: false`), or an existing declaration (`existing: true`, no module); a declaration already landed in `lean/Sheaf` by another node is recorded with `existing: true`, `branch: "newtargets-dag"`, `module: Sheaf.<…>` (§1), also for a dependency node of (B).
 
 No other field (`reviewed`, `reviewed_lean`, notes): the merge sets `reviewed` and `reviewed_lean`. The new node must be cited by the item (its `stmt_deps`), directly or through another new node.
 
 ## 6. Delivering
 
-One commit on top of `sheaf-dag` with: the item's module and node file; for each new definition node (A) its node file and its module (none when `existing: true`); for each dependency module (B) the dependency node file and the module; the report `coord/reports/<G>/<item>.md` (for an item with `existing: true` and nothing else, only the node and the report). Every module is the `lean.file` of exactly one of these nodes, and its declarations carry `(blueprint: <that node's id>)`. The report has:
+One commit on top of `newtargets-dag` with: the item's module and node file; for each new definition node (A) its node file and its module (none when `existing: true`); for each dependency module (B) the dependency node file and the module; the report `coord/reports/<G>/<item>.md` (for an item with `existing: true` and nothing else, only the node and the report). Every module is the `lean.file` of exactly one of these nodes, and its declarations carry `(blueprint: <that node's id>)`. The report has:
 
 - `## Worker report`: what the module defines or states; for each hypothesis and each clause of the node's statement, the Lean that renders it; the dependency declarations used (module, name); the edge cases checked; the searches for an existing definition (tool, query, result); `STATEMENT-DISPUTED:` or node faults, if any.
 - `## Second reading by <G>`: an independent reading by another worker of the group, with the node and the file open, answering above all: does the Lean say exactly what the node says? Name each mismatch found and what changed. It reads the new nodes and dependency modules too.
@@ -163,6 +190,20 @@ One commit on top of `sheaf-dag` with: the item's module and node file; for each
 - `## Dependency modules` (when there are dependency modules): one paragraph per dependency node, naming its id: why its record was unusable, what the module states.
 - `## Statement corrected` (when the item is corrected, (C)): the old statement, what was wrong, the source place the correction follows, and one line per citer naming its id (holds or not, why): the content of `statement_change`.
 
-Before pushing: `python3 tools/preflight_delivery.py <G> <item> --stage 2` (shape, records, the new nodes' fields, the `statement_change` of a corrected item, docstrings, line width, sorry-only proofs) until it passes; for a corrected item it prints `item corrected: <n> citers, <k> marked holds:false` (n must be the number of citers you found), and a clean compile on the server of each module. A module that imports another module of the same delivery cannot compile on the server before that one has landed (the preflight and the packet print `compile: deferred`; the merge lands the modules in dependency order): compile it as one temporary file, the sibling's body followed by the module's body without the sibling import, under a scratch name (`tools/compile_remote.sh <G> <item>-check`). Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `sheaf-dag`, never on another delivery). The lead's reviewer checks the statements against the nodes, reads each new node against its source, compiles and lands the modules with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).
+Before pushing: the dry run your prompt names, which runs the checks of `tools/preflight_delivery.py <G> <item> --stage 2` on the Weil server (shape, records, the new nodes' fields, the `statement_change` of a corrected item, docstrings, line width, sorry-only proofs), until it passes; for a corrected item it prints `item corrected: <n> citers, <k> marked holds:false` (n must be the number of citers you found), and a clean compile on the server of each module. A module that imports another module of the same delivery cannot compile on the server before that one has landed (the preflight and the packet print `compile: deferred`; the merge lands the modules in dependency order): compile every sibling separately in dependency order using tools/nt_compile.py --json; no combined files. Push to `deliver/<G>/<item>` as in stage 1 (`coord/delivery-errors.md` A1: one commit, based on `newtargets-dag`, never on another delivery). The lead's reviewer checks the statements against the nodes, reads each new node against its source, compiles and lands the modules with `tools/land.sh`; returns go to `coord/returns/<G>.md`, and are repaired point by point (section G of that file).
 
 merge_delivery.py, land.sh and landing.py take coord/.merge.lock themselves and are NEVER wrapped in `flock`; `flock coord/.merge.lock -c …` is only for a plain git add/commit.
+
+
+Dependency waits must be acyclic. Do not wait on a downstream theorem about the
+very canonical map your definition introduces. The dispatcher rejects a wait
+that closes a dependency cycle and gives the path in its next prompt. Repair the
+already recorded dependency interface under §1(B) instead. Specifically,
+def-weil-pbc-projection-formula-arrows must not wait for
+lem-weil-pbc-ringed-projection-mate-exact: repair the recorded
+lem-weil-pbc-ringed-topoi-derived-tensor-pullback in the same delivery, supplying
+the canonical comparison characterized on K-flat representatives (and its
+ordinary unit normalization), then define its counit mate and the specified
+finite-total inverse. A bare Nonempty natural isomorphism is insufficient, but
+an interface that forgets the representative characterization is an authorized
+§1(B) repair. The projection-mate theorem can subsequently use these arrows.

@@ -19,7 +19,7 @@ What exists is material, not a finished split: the proof and dependency lists we
 
 Read also the slopmaster2 blueprint text for the node when it differs (`literature/blueprint/slopmaster2/`); the node's `source.document` is the master copy.
 
-**Rule (decision of the human, 2026-10-10): A node that a sorry-free declaration of slopmaster2 (the done branch, now at 2104a988; before 2026-10-12 at 71d63dcf) states exactly is finished and is not split. A worker who finds such a declaration for its item, or for a node it is about to create, attaches it (reports `<declaration> belongs to <node id>`, and for a new node records it in `lean_audit.slopmaster2.decls` with state `closed` left to `tools/lean_status.py`) instead of writing a proof; check the Lean statement against the node statement before attaching, and check for `sorry` with the sorry map. Look for it by the node id (`grep -rn "<id>" ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator`, the checkout of slopmaster2; a plain grep, no git), by the names in the node and in `dag/lean_names_upstream.json`, and by a grep of `~/weil-conjectures-slopmaster2/WeilConjectures` for the key words.**
+**Rule (decision of the human, 2026-10-10): A node that a sorry-free declaration of slopmaster2 (the done branch, now at 7d675a26; before 2026-10-12 at 71d63dcf) states exactly is finished and is not split. A worker who finds such a declaration for its item, or for a node it is about to create, attaches it (reports `<declaration> belongs to <node id>`, and for a new node records it in `lean_audit.slopmaster2.decls` with state `closed` left to `tools/lean_status.py`) instead of writing a proof; check the Lean statement against the node statement before attaching, and check for `sorry` with the sorry map. Look for it by the node id (`grep -rn "<id>" ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator`, the checkout of slopmaster2; a plain grep, no git), by the names in the node and in `dag/lean_names_upstream.json`, and by a grep of `~/weil-conjectures-slopmaster2/WeilConjectures` for the key words.**
 
 ## 2. What to write into your item
 
@@ -46,7 +46,7 @@ mathlib_searches [ {tool, query, results, date, verdict} ... ]  (at least one se
 mathlib_match null | {"declaration": name, "file": path under Mathlib/, "how": "exact" | "specializes in one line: <how>"},
 status "unsplit" | "mathlib",
 merged_into null,
-created {"by": "worker", "item": <your item id>, "date": "2026-10-09"},
+created {"by": "worker", "item": <your item id>, "date": "YYYY-MM-DD", "group": <your group>},
 blueprint {"is": null, "from": {"node": <tools/blueprint_refs.py ancestor <your item>>, "place": <the step, clause or sentence of that blueprint node's proof this node serves>, "via": <its via list, see §7>}, "same_as": [<blueprint nodes stating the same in another form>] or []}  (key placed right after "id")
 lean_audit {"master": {"state": "none"}, "slopmaster2": {"state": "none"}}  (or sorry_here with decls, §1)
 ```
@@ -71,7 +71,7 @@ Search every new node by name and by concept with all three, and the item itself
 
 ## 6. Delivering
 
-Write your new nodes first and your item last, each file in one write, so that an interruption leaves no citation of a node that does not exist; then run `python3 tools/check_dag.py` and `python3 tools/review_split.py <your item>` from the project root and fix what they report about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). These two scripts only read (review_split.py reads the committed version with `git show`); apart from them, do not run `git`. Do not edit any file other than your item, the new nodes you created and, for a key node, the `realized` fields of your unit's record; never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
+Write your new nodes first and your item last, each file in one write, so that an interruption leaves no citation of a node that does not exist; then run the dry run your prompt names, which runs `tools/check_dag.py` and `tools/review_split.py <your item>` on the Weil server, and fix what they report about your files (every id you cite must exist and be unmerged; every step's `uses` must be in `proof_deps`). Do not run `git`. Do not edit any file other than your item, the new nodes you created and, for a key node, the `realized` fields of your unit's record; never `coord/`, `literature/`, `tools/`, or another worker's node. End with a report, in this order:
 
 1. files written (item, new nodes with one line each: id, kind, Mathlib verdict);
 2. attachments: `<Lean declaration> belongs to <existing node id>` lines;
@@ -92,3 +92,13 @@ Every node carries `"blueprint": {"is", "from", "same_as"}`: `is` = its own id f
 ## Tool uses (decision of the human, 2026-10-10 14:08 UTC)
 
 If a step uses the statement of a node of another unit as a generic tool (a black box that the unit's route does not replace; SETUP.md "Tool lemmas and the unit route"), declare it in the item's `split_report.tool_uses`: a list `[{"node": "<id>", "why": "<one line: what the step takes from its statement and why no node of your unit gives it>"}]`. `tools/review_split.py` and `tools/preflight_delivery.py` accept an off-unit citation declared there (the route line becomes "tool use declared"); the maintainer's reviewer judges it, and the merge copies the accepted ones into the node's `tool_uses`, which a delivery never sets itself. A declaration is not a licence to leave the unit's route: a step of the unit's proof is replaced only on an established error.
+
+
+## Isolated new-target run — human, 2026-10-14
+Only stage 1 is authorized. No Lean writing, no compiles, no Lake, no stage 2 or 3.
+The project is ~/weil-newtargets on newtargets-dag; NA..NJ run four workers each.
+Paths in inherited role documents referring to the live meeting point mean this isolated project instead.
+Read GOAL.md and coord/dag-sync.md. The four nt-target-* nodes bind the exact upstream declarations, archived under literature/upstream-master-20261014; master source is reference material, not evidence of a finished proof.
+Compare all hypotheses and the base-change morphism with the existing blueprint nodes; do not silently identify different coefficient categories. The seeded dependency lists are the starting route to audit, not an accepted split. Reuse all six named imported nodes and the existing DAG.
+The live DAG is synced before launch, before claiming, and at least every five minutes. Live finished/mathlib/merged/split-and-reviewed nodes win; never split one. Side-project owned splits survive only while live is unsplit. Deliveries superseded by live are discarded with a ledger entry.
+A worker self-checks, a fresh Codex second reader repairs and delivers, and a fresh Codex maintainer reader reviews every delivery in full before tools/merge_delivery.py --stage 1 merges it.

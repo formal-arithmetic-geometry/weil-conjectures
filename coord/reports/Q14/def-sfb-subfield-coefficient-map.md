@@ -1,0 +1,35 @@
+# Worker report: def-sfb-subfield-coefficient-map
+
+1. Files written: dag/nodes/sec-proetale-coefficients/def-sfb-subfield-coefficient-map.json (existing definition, split by its existing statement dependencies), citations.json (empty because the item is a definition with no proof steps), and this report. No new nodes and no Mathlib leaves were created.
+
+2. Attachments: none. I searched the completed slopmaster2 project under /home/ubuntu/weil-src-slopmaster2/WeilConjectures/ for the item id, the blueprint tag (blueprint: def-sfb-subfield-coefficient-map), padicSubfieldRingObjMap, and the coefficient-map terminology. No sorry-free project declaration states this item exactly. The matching declaration in the archived/upstream source is reference material only and is not an attachment.
+
+3. WANTED: none.
+
+4. Corrections and source checks: the imported statement cited [sk-prop-sfb-qlbar-colimit-point], but that blueprint proposition has no corresponding DAG node; the existing node [def-sfb-qlbar-subextension-map] states the precise morphism of condensed ring objects used here. I changed only that statement citation and added the existing node to stmt_deps; the mathematical statement remains the same inclusion for finite subextensions inside Qlb. I retained all imported blueprint_* fields and flags. The current blueprint source for the item is literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-subfield-coefficient-map.md. I also read the source definitions of def-sfb-coefficient-map, sk-def-sfb-pulled-back-coefficients, and def-sfb-qlbar-subextension-map. No new statement is needed: this definition directly composes those already-defined notions.
+
+## Not duplicates
+
+No new nodes were created. The analogous [def-sfb-subfield-to-qlbar-coefficient-map] has a different target coefficient ring, and [def-sfb-subfield-coefficient-ring] defines E_X without the morphism to F_X; neither duplicates this item.
+
+## Review by Q14
+
+I checked the item source and the three cited dependency statements line by line. def-sfb-coefficient-map defines the coefficient change as p_X^*a for a morphism of condensed ring objects and states that it is a morphism between the pulled-back coefficient rings. sk-def-sfb-pulled-back-coefficients defines Lambda_X = p_X^* Lambda and supplies its transported ring-object structure, including functoriality in the coefficient ring. def-sfb-qlbar-subextension-map states that for finite subextensions E ⊆ F of Qlb/Q_l, postcomposition with the inclusion gives the morphism underline E -> underline F of the underlying ring objects, with the correct source and target. Thus the item's E_X -> F_X is exactly the coefficient change induced by that inclusion, and every symbol in the statement is supported by a dependency whose statement says it.
+
+I verified the hypotheses against the current blueprint: E and F are finite extensions of Q_l embedded in Qlb, so they are the finite subextensions required by def-sfb-qlbar-subextension-map; X is an arbitrary scheme; and both coefficient objects are pulled back along the point map. I checked the small identity case E = F, where the cited inclusion is the identity and the coefficient change is p_X^*(id), and the empty or terminal scheme cases, where the same functorial construction remains defined. No finiteness, smoothness, or geometric hypothesis on X is being silently added.
+
+Against delivery-errors B-E, the definition introduces all its objects through the cited nodes, has no proof paragraph to hide as a new node, uses no unsupported Stacks or Mathlib claim, and contains no cycle-producing dependency. The dangling imported citation was repaired to an existing precise node. citations.json is empty because there are no proof steps to cite. No Lean, compiler, Lake, or build tool was run.
+
+
+## Second reading by Q14
+
+- Item statement: PASS against the complete definition sentence in `literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/def-sfb-subfield-coefficient-map.md`: the prime, finite subextensions inside the same algebraic closure, inclusion, arbitrary scheme, source and target, and coefficient-change construction all agree. The replacement citation changes no mathematical hypothesis or conclusion. This source has no Stacks tag or label to check.
+- Construction clause (there are no proof steps): PASS against the statement and blueprint source of `def-sfb-qlbar-subextension-map`: its restricted topologies give exactly the condensed-ring morphism $\iota_{E,F}:\underline E\to\underline F$ required here, including the equality case $E=F$.
+- Coefficient-change clause: PASS against the statement and blueprint source of `def-sfb-coefficient-map`: substituting $a=\iota_{E,F}$ gives $p_X^*\iota_{E,F}:p_X^*\underline E\to p_X^*\underline F$, with no additional hypothesis on $X$.
+- Source/target clause: PASS against the statement and blueprint source of `sk-def-sfb-pulled-back-coefficients`: its functor on ring objects supplies exactly the two pulled-back rings and the type of this map. No argument is borrowed from a dependency's proof.
+- New nodes: none; B1–B7, independent new-node Mathlib searches, and new-node deletion or leaf conversion are therefore inapplicable. The existing `def-sfb-subfield-coefficient-ring` defines an object, and `def-sfb-subfield-to-qlbar-coefficient-map` has the algebraic closure as target; reading both statements and their blueprint sources confirms that neither duplicates the map between two finite subextensions.
+- Edge cases: PASS for $E=F=\mathbf Q_\ell$ (degree one): postcomposition is the identity, and the coefficient map is $p_X^*(\mathrm{id})=\mathrm{id}_{E_X}$. For an empty scheme or $X=\operatorname{Spec}k$ for any field, the same inverse-image functor defines the map. No nonempty, finite-type, or smooth hypothesis is used. Zero fields and degree zero do not satisfy the input hypotheses; the zero sheaf on the empty scheme introduces no failure.
+- Attachments and graph: independent searches by id, `padicSubfield`, `coefficientMap`, and coefficient/subfield terminology in the read-only slopmaster2 source found no matching declaration to attach. The archived master `Compatibility.lean`, lines 90–96, confirms the intended abbreviation, and `FiniteSubextension.lean`, lines 75–92, confirms its input morphism; these are reference checks, not claims of finished proofs. Traversing all statement and proof dependencies of each of the three cited nodes finds no path back to this item.
+- Citations: PASS; `proof` and `proof_deps` are empty, so `citations.json = []` is exact. There are no missing proof-step quotes or hidden proof assertions to split off.
+
+Changes in this second reading: appended this independent source, dependency, edge-case and attachment audit. No mathematical repair was needed; retained the first worker's precise replacement of the dangling imported citation and all correct node contents. No new nodes, Mathlib leaves, Lean writes, compiler invocations, or direct git commands were needed.

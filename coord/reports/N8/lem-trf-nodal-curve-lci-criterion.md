@@ -1,0 +1,47 @@
+1. files written:
+- `dag/nodes/sec-trace-formula/lem-trf-nodal-curve-lci-criterion.json` (statement; split, no Mathlib match; repaired)
+- `dag/nodes/sec-trace-formula/lem-trf-nodal-point-local-criterion.json` (statement; unsplit, no Mathlib match; repaired)
+- `dag/nodes/sec-trace-formula/lem-trf-unramified-over-field-local-criterion.json` (statement; unsplit, no Mathlib match)
+- `dag/nodes/sec-trace-formula/lem-trf-geometric-equidim-field-extension.json` (statement; unsplit, no Mathlib match; new)
+
+2. attachments:
+- None.
+
+3. WANTED:
+- None; the Stacks sources `literature/stacks-project/curves.tex`, `divisors.tex`, `morphisms.tex`, `varieties.tex` and `algebra.tex` are present.
+
+4. what was wrong and what changed:
+- The returned step 1 incorrectly called every point of the singular subscheme closed. It now uses the existing Jacobson node `lem-sc-lft-over-field-jacobson-space` to specialize an arbitrary singular point to a closed singular point, and step 2 proves equality with that specialization from the field stalk. The step also explicitly checks flatness over a field, local finite presentation via `pqf-lem-lft-fp-locnoeth`, and geometric equidimensionality via the new `lem-trf-geometric-equidim-field-extension` node before applying `lem-trf-dth-fitting-smooth-locus`.
+- The pointwise node had stated that the local ring itself was a local complete intersection, although the cited field definition applies to finitely generated algebras. It now says that the closed point has an affine neighbourhood `Spec S` with `S` a finitely generated local-complete-intersection `k`-algebra. Its node condition is written explicitly as the completed local ring `kbar[[u,v]]/(uv)`, while retaining the required dependencies `def-pc-scheme`, `def-trf-nodal-geometric-fibres`, and `def-sc-relative-differential-sheaf`.
+- Step 2 now cites `lem-weil-pbc-smooth-over-field-local-complete-intersection` for the smooth-point local-complete-intersection neighbourhood. The stale `split_report.tool_uses` entry for `lem-weil-pbc-unramified-over-field-discrete` was removed because no step cites that node.
+- I read the full statements of every node cited by each proof step. The verbatim quotations are recorded in `citations.json`; every quote is copied from the cited statement. I checked the new equidimensional base-change statement on affine charts using Stacks Tag 00P3 and the affine base-change tags 01JQ/01JR, and searched the DAG and blueprint before creating it. Small cases checked include a smooth affine line, a nodal `xy=0` curve, a cusp, the empty curve, and a nonreduced zero-dimensional scheme (the last is excluded by the dimension-one hypothesis).
+
+## Not duplicates
+
+- `lem-trf-geometric-equidim-field-extension` vs `lem-kun-dimension-extension`: the new node handles a locally finite-type scheme known to be equidimensional and transfers the componentwise equidimensional conclusion to the algebraic closure; `lem-kun-dimension-extension` states dimension equality for a finite-type scheme and an open dense immersion, without the equidimensional component conclusion.
+- `lem-trf-nodal-point-local-criterion` vs `lem-trf-nodal-curve-lci-criterion`: the new node is a single closed-point equivalence with an affine neighbourhood, while the item is a global equivalence involving all closed points and an affine cover.
+- `lem-trf-unramified-over-field-local-criterion` vs `lem-weil-pbc-unramified-over-field-discrete`: the new node gives the scheme-level iff criterion including residue fields and local stalks; the existing node gives only discreteness of the underlying space.
+- `lem-trf-unramified-over-field-local-criterion` vs `lem-weil-pbc-unramified-algebra-over-field-product`: the new node is for arbitrary locally finite-type schemes over a field; the existing node is an affine algebra product decomposition.
+
+- `lem-trf-geometric-equidim-field-extension` vs `base-change-dimension`: the existing node assumes algebraically closed fields and states only total dimension equality for a curve; the new node starts with an arbitrary field and locally finite-type equidimensional scheme and concludes componentwise equidimensionality after algebraic closure.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-pc-dim-base-change`: the existing node is an affine finite-type algebra dimension equality (plus an integral curve specialization); the new node is a scheme-level locally finite-type equidimensional statement for arbitrary field extensions.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-weil-pbc-dimension-preserved-field-extension`: the existing node compares dimensions of two affine spectra; the new node adds the scheme-level equidimensional conclusion for all components of a locally finite-type curve.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-weil-pbc-geonormal-dim-one-smooth`: the existing node assumes geometric normality and proves smoothness/reducedness, using 00P3 only as an input; it does not state equidimensionality after base change.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-weil-pbc-relative-global-complete-intersection-base-change`: the existing node concerns base change of a relative global complete-intersection presentation; the new node concerns arbitrary equidimensional locally finite-type schemes.
+- `lem-trf-geometric-equidim-field-extension` vs `new-etale-affine-singleton-product-ring`: the existing node is an affine étale algebra decomposition; the new node is geometric dimension preservation.
+- `lem-trf-geometric-equidim-field-extension` vs `new-etale-affine-singleton-tensor-degree-kernel`: the existing node computes a kernel in a finite étale tensor construction; the new node is geometric dimension preservation.
+- `lem-trf-geometric-equidim-field-extension` vs `new-etale-affine-singleton-tensor-degree-surjective`: the existing node proves surjectivity in a finite étale tensor construction; the new node is geometric dimension preservation.
+- `lem-trf-geometric-equidim-field-extension` vs `new-etale-affine-singleton-tensor-sections-span`: the existing node concerns spanning sections in a finite étale algebra; the new node is geometric dimension preservation.
+- `lem-trf-geometric-equidim-field-extension` vs `new-etale-finite-affine-cech-basis`: the existing node constructs a Cech basis for a finite affine étale map; the new node is geometric dimension preservation.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-pc-dim-base-change-affine-covers`: the existing node constructs matching affine covers and imposes no dimension conclusion; the new node supplies the dimension and equidimensional conclusion.
+- `lem-trf-geometric-equidim-field-extension` vs `lem-weil-pbc-fibre-product-affine-spectra`: the existing node identifies fibre products of affine schemes; the new node applies that identification together with 00P3 to obtain equidimensionality.
+- `lem-trf-unramified-over-field-local-criterion` vs `lem-weil-pbc-unramified-fibre-point-isolated`: the existing node proves isolation of one point in one fibre from unramifiedness at that point; the new node is a global iff criterion over a field, including stalk and residue-field conditions.
+- `lem-trf-unramified-over-field-local-criterion` vs `lem-trf-geometric-fibre-unramified-criterion`: the existing node tests unramifiedness by all geometric fibres over an arbitrary base; the new node tests a field morphism pointwise by local rings and residue extensions.
+- `lem-trf-unramified-over-field-local-criterion` vs `lem-trf-unramified-field-fibre-decomposition`: the existing node gives an equivalent disjoint-union decomposition, while the new node gives the local pointwise characterization used by the nodal criterion; neither statement is a restatement of the other's displayed conclusion.
+
+5. what I could not finish:
+- Nothing remains; the repaired split is ready for the mandated dry run.
+
+## Review by N8
+
+I reread Curves Tag 0C4E and its pointwise Tags 0C4D and 0C4C, Divisors Tag 0C3K, Morphisms Tag 02G7 and Tag 01VD, Varieties Tag 0478, and Algebra Tag 00P3. For step 1 I checked each hypothesis of the Fitting smooth-locus node: flatness is automatic over the field, local finite presentation follows from locally finite type over the locally Noetherian field spectrum, and the geometric fibre remains equidimensional of dimension one by the new affine-chart base-change node. I then checked that the Jacobson statement only supplies a closed specialization; it does not assert the starting singular point is closed. For step 2 I verified that the pointwise node supplies the affine lci neighbourhood, separable residue field, and field stalk at the closed specialization, and that a field local ring forces the specializing point to coincide with it. I checked the separate smooth-point input against the existing smooth-over-a-field local-complete-intersection statement, then applied the exact unramified local criterion at every singular point. For step 3 I checked that unramifiedness supplies closed points, residue-field stalks, and finite separability, while the assumed affine lci cover supplies the neighbourhood required by the converse pointwise criterion; step 1 supplies smoothness off the singular subscheme. I removed the unused cross-unit tool declaration and verified that `proof_deps` is exactly the union of cited uses. `citations.json` contains a verbatim statement quote for every citation in every step.

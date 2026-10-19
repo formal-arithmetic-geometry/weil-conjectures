@@ -1,0 +1,51 @@
+## Worker report
+
+Item: def-wf-middle-extension. Group: Q122. Date: 2026-10-17.
+
+### Files written
+
+- dag/nodes/sec-purity-real-sheaves/def-wf-middle-extension.json: definition-only split, 11 existing statement dependencies, no auxiliary nodes, no Mathlib leaf.
+- citations.json: [] because this is a definition and has no proof steps.
+- report.md and the actual msearch.py search log searches.jsonl.
+
+No Lean was written and no compiler, Lake, local validation script, live-project edit, or agent delegation was used.
+
+### Sources and construction
+
+I read the chapter sec-purity-real-sheaves record, the complete sk-i-real-boundary unit record, its current main-20261015 _section.md, and the current definition def-wf-middle-extension.md. The complete definition is realized: the name denotes ordinary sheaf direct image; [1] is applied afterwards; Rj_* retains higher cohomology. This node is not the key statement of its unit, so its realized bindings are not modified.
+
+I opened every statement dependency. The existing def-pod-lisse-l-adic-sheaves supplies finite-extension adic lisse coefficients, def-weil-pbc-qbar-category supplies the stipulated pair category, def-weil-pbc-proetale-operations supplies ordinary module direct image with its coefficient action and its fixed-coefficient derived version, def-weil-pbc-direct-image supplies the finite etale analogue, and def-weil-abstract-derived-category plus def-weil-pbc-common-stage-cones supply the cohomological and pair-category shifts. No claim identifying discrete small-etale Qbar_l sheaves with adic coefficients is made. At finite level the elementary section formula is written; it is not asserted that the raw tower (j_*F_n)_n is normalized adic.
+
+I read Weil II (1.1.1) b), c), d), printed pp. 146–147 (PDF pp. 11–12), for adic systems, rationalization, and finite-extension Qbar_l coefficients. I also read Stacks 03D6, sites-modules.tex, definition-pushforward, clause (1), for the module action by restriction along the coefficient ring map, and 09BT, proetale.tex, definition-adic, for the distinction between finite-ring locally constant sheaves and adic lisse objects. These are supporting sources; I do not invoke any of the SGA references occurring in their bibliographic discussion. No purity route or theorem is used.
+
+### Attachments
+
+None for the complete item. AlgebraicGeometry.Etale.middleExtension at WeilConjectures/EtaleCohomology/Purity/RealSheaves/Boundary.lean:207 is a sorry-free abbreviation of Etale.lowerStar for Sheaf U.smallEtaleTopology A. I read its body and docstring at lines 201–211 and the corresponding full sorry-map record (s=false, ts=false). That is the generic underived small-etale construction, without the finite-extension adic coefficient construction stipulated by this item. Therefore it is a useful source comparison but not an exact attachment. The affine-line WeilSheaf.LisseOnDenseOpen.middleExtension in DeligneLaumon/AffineLine/Defs.lean:148 is restricted to the affine line, and its body is the already shifted object, not the present unshifted definition on an arbitrary smooth curve. Exact-tag and concept searches across WeilConjectures and the recorded upstream names yielded no exact declaration; upstream master remains reference material only.
+
+### Searches and duplicates
+
+I searched the whole DAG by middle extension, ordinary direct image, adic lisse, smooth curve, direct-image and shift notions, and used tools/blueprint_refs.py search for 'middle extension' and 'direct image'. The boundary and affine-line propositions use the notion but do not duplicate its definition. The existing lisse, coefficient, pushforward and shift nodes cover every notion needed here. blueprint.same_as is [], blueprint.is retains the item id, and blueprint.from remains null because the item is imported. No node was created, and consequently no new-node duplicate pairs need adjudication.
+
+Six actual Mathlib searches are recorded verbatim in the item's mathlib_searches and searches.jsonl: leanfinder twice with different phrasings, leansearch, loogle, and two source greps. All services responded. The first phrasing returned scheme-module restriction and ordinary site infrastructure; the second returned SheafOfModules.pushforward and condensed infrastructure. I read SheafOfModules.pushforward in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:45 and Scheme.Modules.pushforward in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166. The latter uses the structure sheaf; the former requires a supplied site and coefficient-ring map and does not itself construct the finite-stage adic coefficient category or define its middle extension. Scheme.ellAdicSheaf at Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:63 is the continuous Z_l coefficient sheaf, not a category or this direct image. Thus none is an exact match or a one-line specialization of the complete item. No search is fabricated or marked unavailable when it returned results.
+
+## STATEMENT-DISPUTED: imported lisse reference has the wrong coefficient domain
+
+The imported parenthesis sends lisse Qbar_l-sheaves to def-weil-pbc-constructible-complexes. I opened that node: its first hypothesis is 'Let $\Lambda$ be a finite commutative ring'. Its lisse predicate is consequently a predicate for finite-ring module sheaves and cannot be instantiated with Qbar_l, an infinite field. In particular, it cannot define the constant rank-one Qbar_l local system: that object's fibre is infinite, whereas its definition requires finite stalks. This is a domain error in the reference, not a reason to replace adic sheaves by discrete Qbar_l sheaves. I repaired it by using the existing def-pod-lisse-l-adic-sheaves, whose clauses (1), (2), and (4) give precisely integral systems, E-sheaves, and Qbar_l finite-extension pairs; the finite-ring convention is retained only for finite levels. The ordinary j_* definition is unchanged.
+
+I also spelled out the standing finite-field datum and ell != p, already fixed by the blueprint, the meaning of dense, smooth pure dimension one, the direct-image section/morphism formulas, and the shift dependencies. No connectedness, properness, affineness, finite-monodromy, or exactness hypothesis was added. No constructibility or boundary-invariants theorem was smuggled into this definition. The warning about derived formulas remains a notation warning, with no proposed duality isomorphism.
+
+### Wanted / unfinished
+
+WANTED: none. Nothing in this one-level definition split remains unfinished. There are no proof steps or sorry obligations to enumerate. There are no removed existing dependencies: the finite-ring lisse convention is still named in its correct finite-level role. New dependencies expose notions previously left implicit.
+
+## Review by Q122
+
+I checked this definition against the current main-20261015 source, rather than merely the master snapshot path in the imported source record. All three sentences survive in order: ordinary middle extension, subsequent [1], and derived direct-image distinction. The claim is a definition, so proof=[], proof_deps=[], and proof_origin=null are appropriate; adding proof steps or a theorem restating j_*F would have manufactured work. There is no non-elementary step, long or otherwise, and citations.json is therefore empty, not an omitted list of proof citations.
+
+For the first paragraph I opened def-weil-finite-field-fiber to verify k_0, p, ell and Qbar_l; def-weil-pbc-scheme-conventions to verify separated, finite type and open immersion; def-sbc-smooth-morphisms for smoothness; and def-weil-pure-dimension for pure dimension one. Density is defined inline and does not need a separate node. These hypotheses supply the noetherian separated scheme with ell invertible required by def-pod-lisse-l-adic-sheaves. I did not cite sk-d-real-setup because its geometric-connectedness and nonemptiness requirements would unnecessarily restrict the source's defining operation.
+
+For the second paragraph I read all clauses of def-pod-lisse-l-adic-sheaves and the finite-ring hypothesis of def-weil-pbc-constructible-complexes; this uncovered and repaired the disputed reference above. I read def-weil-pbc-qbar-category and retained its finite-stage interpretation instead of silently identifying it with a condensed category or a discrete small-etale coefficient category. I read the formula and coefficient-ring action in def-weil-pbc-proetale-operations and the entire ordinary-module section of def-weil-pbc-direct-image. They state exactly the ordinary pushforward used in the displayed section and morphism formula. The formula is restricted to a fixed sheaf coefficient stage; in particular it does not claim that reduction commutes with j_* or that finite-level invariant towers satisfy the adic quotient relation.
+
+For the third paragraph I read def-weil-abstract-derived-category: its shift has (K[1])^r=K^{r+1} with negative differential. A sheaf placed in degree zero is therefore in degree -1 after shifting, as intended. I read def-weil-pbc-common-stage-cones to check that the pair-category shift is (E,K)[1]=(E,K[1]). The derived constructions in def-weil-pbc-direct-image and def-weil-pbc-proetale-operations actually use injective resolutions and are not the ordinary image followed by [1]. Thus each cited definition says what the item takes from it (C3/C4), and no non-elementary assertion is attributed only to a tag (C1).
+
+I tested j=id (the ordinary section formula is the original sheaf), the zero sheaf, a disconnected smooth curve with a dense open on every component (the definition adds no connectedness assumption), and the cohomological shift of a sheaf concentrated in degree zero. I also tested the coefficient distinction with a rank-one lisse Qbar_l sheaf and checked the source unit's warning that the raw finite-level invariant tower need not be adic. This is why I did not add the false formula identifying normalized reductions of j_*F with j_*F_n. No exactness or higher-direct-image vanishing is asserted, even for open immersions. There is no need for a new lemma, duplicate node, or external SGA route. I compared every proposed dependency's closure against the item and found none returning to it. The remote delivery checks below are the authoritative mechanical validation.

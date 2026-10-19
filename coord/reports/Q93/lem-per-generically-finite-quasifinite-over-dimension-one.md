@@ -1,0 +1,56 @@
+# Stage-1 report: lem-per-generically-finite-quasifinite-over-dimension-one
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-generically-finite-quasifinite-over-dimension-one.json`: statement, now split in ten steps; no Mathlib match. No new node or Mathlib leaf.
+- `citations.json`: exact passages from the statement of every dependency used by each numbered step.
+- `report.md`: this report. Sandbox search outputs and `searches.jsonl` record the five new searches; inherited search records remain in the item.
+
+## Attachments
+
+None. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the exact blueprint id and for the generic-finite/quasi-finite/codimension notions, and read the relevant project quasi-finiteness helper declarations. The singleton-fibre helper and the Zariski-main-theorem material do not state the item. No Lean file was written or compiled.
+
+## WANTED
+
+None. Stacks `varieties.tex`, `algebra.tex`, `morphisms.tex`, and `schemes.tex` are present locally.
+
+## What was wrong or incomplete
+
+The item was an unsplit supporting lemma with an accurate statement and source, not a finished proof. Its statement is exactly condition (1) of Stacks Tag 0AB6, including the algebraic alternative, local Noetherian hypothesis, and absence of global Noetherianity. I changed no statement, target, or inherited provenance. The sandbox initially contained only dispatcher marker files, with no earlier split, report, or interrupted delivery to preserve. The repository's inherited Mathlib search records were retained and five actual Q93 searches were appended.
+
+The source's reductions need care: the components of the localized source inherit the generic hypothesis; an infinite locally finite type source need not have a finite entire fibre; and the vertical component over the closed base point must be included. The proof now works on an affine source neighbourhood, establishes the generic residue-field compatibility through actual localization statements, and handles vertical and horizontal components separately. It obtains finiteness only for that affine fibre. It makes no normality, properness, catenarity, integrality of the original source, or globally Noetherian assumption.
+
+## What could not be finished
+
+Nothing in the requested one-level split. All non-elementary inputs already have nodes, so there is no new statement-only child to create. The split does not assert those existing non-Mathlib nodes are already Lean-proved.
+
+## Not duplicates
+
+No new nodes. The existing `lem-trf-birational-curve-quasifinite` was read: it concerns integral curves of finite type over a field with a dominant map, and does not cover this arbitrary locally finite type morphism and a single Noetherian base local ring. The existing `lem-kun-dimension-formula` is a formula over a field, whereas `lem-trf-affine-dimension-inequality` supplies precisely the Noetherian-domain inequality needed here. The former is therefore not substituted for the latter.
+
+I searched all DAG titles/statements for dimension formulas, localization, quasi-finiteness, residue-field closedness, and finite fibres; opened the statements used; and searched the entire blueprint through `tools/blueprint_refs.py` for the item's generic-finiteness/codimension-one assertion and the dimension-formula terminology. No blueprint node states this general assertion. The inherited ancestor is `lem-per-artin-gabber-affine-curve`, through the potential-dualizing support-construction chain. I read its current blueprint proof, the item's chapter and unit, and the inherited precise `blueprint.from.place`. This split realizes the Tag 0AB6 input of the existing Tag 0AB7 input, without modifying the unit route.
+
+## Review by Q93
+
+I read the item source, Stacks Tag 0AB6 (`varieties.tex`, label `lemma-quasi-finite-in-codim-1`, statement and complete proof). I checked its cited dimension inequality in Algebra Tag 02IJ (`algebra.tex`, `lemma-dimension-formula`), its integral-scheme version in Morphisms Tag 02JU, and the quasi-finite point/finite-fibre criteria in Morphisms Tags 01TH and the following `lemma-finite-fibre`. I also read the local-spectrum description of Schemes Tag 01J7 and the current blueprint ancestor proof. There are no new nodes whose sources need review. Every proof dependency below was opened and read as a statement, not taken from its proof.
+
+1. The affine finite-type criterion `lem-weil-pbc-lft-affine-pairs` gives the actual ring map on the chosen source/target opens. The affine stalk statement `lem-weil-pbc-affine-open-stalk-localization` identifies the given Noetherian local ring with `R_p`; `def-weil-pbc-localization-at-prime` supplies its maximal ideal and residue field. Thus the local-dimension hypothesis is used at exactly the ring to which it applies.
+2. `lem-weil-pbc-fibre-product-affine-spectra` states the tensor-product ring of this affine base change, and `lem-weil-pbc-localization-base-change` says that this tensor product is localization at the image of the multiplicative set. Finite type of the tensor product follows by the displayed generator calculation from `def-weil-pbc-finite-type-algebra`. No finite-presentation or separatedness hypothesis is used.
+3. `lem-weil-pbc-spec-irreducible-components-minimal-primes` identifies affine component generics. The maximality argument, written in the step using `def-weil-irreducible-components` and `def-sc-generic-point`, shows that these are component generics in the original source as well. The affine-stalk isomorphism identifies residue fields on the opens. This step is elementary after those cited statements: closure, intersection with an open, and density prove the maximality directly. It does not assume that the original source has finitely many components.
+4. `lem-sc-irreducible-components-cover` together with the affine minimal-prime correspondence gives a minimal prime below a chosen prime of `A`. Clauses (1) and (3) of `lem-weil-pbc-localization-prime-residue-field-iso` respectively give prime correspondence and the compatible isomorphisms of residue fields. A smaller prime still avoids the multiplicative set; its extension must equal the chosen minimal prime of `C`. Applying the same statement to `R -> R_p` identifies the target fields too. This proves the inheritance of algebraicity instead of silently assuming it under arbitrary base change.
+5. The same component-cover and affine-prime statements give a minimal prime below the arbitrary closed-fibre prime. Taking the two quotient domains makes the map injective. The generators descend, and `lem-weil-pbc-finite-type-algebra-noetherian` applies to `B/q` as a zero-generator quotient, so the base domain really is Noetherian. `def-kun-transcendence-degree` identifies generic algebraicity with zero transcendence degree. `lem-weil-pbc-spec-quotient-homeomorphism-zero-locus` and `def-weil-pbc-krull-dimension-ring` give the chain bound on the quotient base. The residue fields in the dimension inequality are explicitly `Frac(C/P)` and `k`, not those of a different point.
+6. In the vertical case `q=m`, the base domain is a field. `lem-trf-affine-dimension-inequality` assumes only a Noetherian domain base, an injective finite type map of domains, and a prime pair lying over one another; Step 5 verifies each hypothesis. Its inequality and nonnegativity force residue transcendence degree zero. No assertion that the entire original source is a single field spectrum is used.
+7. In the horizontal case `q<m`, the quotient base has a strict length-one chain and no longer chain. The source prime is nonzero because its contraction is nonzero. The same node gives `1 <= height(r) <= 1 - t`, hence `t=0`. I use the inequality clause, which needs no universal catenarity, rather than the equality clause that would require an extra hypothesis.
+8. The quotient-spectrum statement gives all closed-fibre points, and the explicit quotient/tensor maps identify the actual fibre ring. The same finite list of algebra generators proves finite type over the residue field in `def-weil-finite-type-morphism`. Part (a) of `lem-kun-closed-point-field` applies to this finite type field-scheme and says exactly that transcendence degree zero is equivalent to closedness. It is not used to conclude isolation from the closedness of a single point.
+9. All points being closed means every prime of the fibre ring is maximal, so the definition of Krull dimension gives the required bound. `lem-weil-pbc-finite-type-dim-zero-artinian` then applies to a finite type scheme over a field and gives a finite discrete space, including the empty case.
+10. The tensor associativity maps in the text identify this fibre with the original affine fibre; `lem-weil-pbc-fibre-product-affine-spectra` and `def-pc-scheme-fibre` say precisely what fibre and point-subspace are being identified. `pqf-lem-locqf-fibre-discrete` requires a locally finite type map and a finite fibre; both were proved for `U -> V`. The affine finite-type criterion verifies local finite type of that restriction. Finally the existential affine-neighbourhood definition in `pqf-def-quasifinite` allows the same witness in the ambient schemes. Thus the final conclusion is pointwise quasi-finiteness in the item's convention.
+
+The four non-Mathlib statements from other units are recorded in `split_report.tool_uses`: compatible residue fields under localization, the affine dimension inequality, closed points over a field, and the finite-fibre criterion. These are generic geometric/algebraic tools in the item's Stacks route. No step is replaced by a different perverse-sheaf argument.
+
+I tested the small and boundary cases: zero-dimensional base local rings (only the vertical case); nonreduced base/source (quotient domains are used only componentwise, with residue fields unchanged); a finite vertical component; empty fibre; and an infinite disjoint union of algebraic points over a field, for which the entire fibre may be infinite but the selected affine fibre is finite. A constant affine line over a field fails the generic-algebraicity hypothesis, and the exceptional curve in the blow-up of an affine plane lies over a dimension-two local ring, outside the hypothesis. These tests confirm the two essential assumptions have not been dropped. Every step is under 2000 characters; none conceals a separate standard lemma. No SGA source is used.
+
+Mathlib searches were run by the required command using two semantic phrasings, Loogle, grep, and LeanSearch; all five completed successfully and their outputs were read. They return definitions, fibre criteria and consequences of already-known quasi-finiteness. The presentation-dimension-zero hit concerns the dimension of an algebra presentation, not Krull dimension of this fibre. I read the quasi-finite source definitions and fibre criteria, which do not establish the item from the generic hypothesis. The logged queries and verdicts in the item match the actual commands. No new node is marked as a Mathlib leaf.
+
+## Validation
+
+The first server preflight flagged the phrase “The item's hypothesis” in Step 3 under its self-contained-wording check (B2). I replaced it with “The assumed generic algebraicity”; the objects, mathematical argument and hypotheses are unchanged.

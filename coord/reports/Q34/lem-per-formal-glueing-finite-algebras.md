@@ -1,0 +1,163 @@
+## Worker report
+
+The module `Sheaf.RingTheory.FormalGlueingFiniteAlgebras` states
+`FormalGlueing.exists_finite_algebra_of_formalGlueing`, with `sorry` as its only proof.
+It states the algebra consequence of Stacks 05ER and the final two sentences of 05EU,
+with the finite-module assertion of 05EU. The item is unchanged outside `lean`.
+There are no new definitions, new nodes, dependency repairs or statement corrections.
+
+Hypotheses and clauses, in the order of the node:
+
+- Commutative rings R and S and their ring map φ are `{R : Type u} {S : Type v}`,
+  `[CommRing R] [CommRing S] [Algebra R S]`. The map φ is `algebraMap R S`.
+  Every specified commutative-ring map is represented by its `RingHom.toAlgebra`;
+  no injectivity, nontriviality or faithfulness is assumed.
+- Flatness is `hflat : (algebraMap R S).Flat`, the recorded `RingHom.Flat`.
+- The nonnegative integer t and the list f_1,...,f_t are `(t : ℕ) (f : Fin t → R)`.
+  The ideal K is `Ideal.span (Set.range f)`.
+- The induced quotient isomorphism is `hquot : Function.Bijective
+  (Ideal.quotientMap ((Ideal.span (Set.range f)).map (algebraMap R S))
+  (algebraMap R S) Ideal.le_comap_map)`. This asserts bijectivity of the specified
+  induced ring map, not existence of some unrelated quotient isomorphism.
+- The commutative S-algebra E' is `(E' : Type w) [CommRing E'] [Algebra S E']`.
+  `[Algebra R E'] [IsScalarTower R S E']` specifies its restriction through φ.
+  This restriction always exists and is unique; it adds no mathematical condition.
+- The commutative R_fi-algebras are `(E : Fin t → Type w)`, the pointwise
+  `CommRing` and `Algebra (Localization.Away (f i)) (E i)` instances. The pointwise
+  `Algebra R` and `IsScalarTower R (Localization.Away (f i)) (E i)` instances
+  specify their restrictions to R, again uniquely and without an extra hypothesis.
+- The prime-chart algebra equivalences are `alpha i :
+  LocalizedModule.Away (f i) E' ≃ₐ[R] (S ⊗[R] E i)`.
+  The ring structure on this localized module is Mathlib's actual fraction ring
+  structure `LocalizedModule.instCommRing`; it is not an unknown ring structure.
+  The order of tensor factors is Mathlib's S ⊗ E_i, equivalent by tensor symmetry
+  to the node's E_i ⊗ S, as in the recorded base-change dependency.
+- The chart-chart algebra equivalences are `alphaOverlap i j :
+  LocalizedModule.Away (f j) (E i) ≃ₐ[R] LocalizedModule.Away (f i) (E j)`.
+- The hypothesis that the underlying modules and maps form an object of Glue
+  is exactly `hdata : ∃ X : Data.{u, v, w} (algebraMap R S) f, ...`.
+  Its first two conjuncts identify X.M' and X.M i with the given underlying
+  bundled modules. Its last two conjuncts identify X.alpha and X.alpha_overlap
+  with the supplied algebra equivalences' linear maps, by HEq across those
+  equalities of bundled modules and compatible scalar structures. In particular
+  X.square and X.cocycle are precisely both compatibility conditions, and
+  X.alpha_smul requires the prime-chart maps to be S-linear. Thus alpha i is an
+  S_fi-algebra equivalence, as in the node. Each overlap map is automatically
+  R_{fi fj}-linear: an R-linear map commutes with inverses of the invertible
+  actions of f_i and f_j. These are consequences of the stated data, not missing
+  linearity hypotheses. Conversely the node's specified algebra datum gives
+  exactly this witness X.
+- Finiteness of E' and every E_i is `hfinitePrime : Module.Finite S E'` and
+  `hfiniteChart : ∀ i, Module.Finite (Localization.Away (f i)) (E i)`.
+  This is finite generation as a module, not finite type as an algebra and not
+  finiteness of the underlying set.
+- The resulting commutative R-algebra is the existential D with its `CommRing`
+  and `Algebra R` instances; `Module.Finite R D` is its required finiteness.
+  D lives in `Type (max u v w)`, which accommodates the matching-tuples
+  construction and its universe lift for arbitrary input universes.
+- The scalar-extension isomorphism is the existential
+  `a' : (S ⊗[R] D) ≃ₐ[S] E'`.
+- The chart isomorphisms are the existential
+  `a i : LocalizedModule.Away (f i) D ≃ₐ[R] E i`.
+  They are automatically R_fi-algebra equivalences because an R-algebra map
+  commutes with the inverse of f_i. No arbitrary localization structure is chosen.
+- The last two conjuncts express compatibility of these very isomorphisms with
+  every prescribed alpha_i and alpha_ij, hence the isomorphism of glueing data.
+  The first is, for every i and d,
+  `alpha i ((a' (1 ⊗ d))/1) = 1 ⊗ a i (d/1)`.
+  Both sides of the full prime-chart square are S-linear and commute with the
+  invertible f_i action. Every element of (S ⊗ D)_fi is a fraction of a finite
+  sum of pure tensors s ⊗ d, each s times 1 ⊗ d. Thus this equation is equivalent
+  to the full square. The second is, for every i,j,d,
+  `alphaOverlap i j ((a i (d/1))/1) = (a j (d/1))/1`.
+  Both paths in the chart-chart square are R-linear and commute with inversion
+  of f_i and f_j; their source is generated by the double fractions of d/1/1.
+  Hence this equation is equivalent to the full overlap square. The component
+  maps are algebra equivalences, so their inverses satisfy both squares too.
+  This is exactly an isomorphism from the canonical datum of D to the specified
+  datum, rather than mere unrelated component equivalences.
+
+Dependency declarations read and used:
+
+- `Mathlib.RingTheory.RingHom.Flat`: `RingHom.Flat`, defined by `Module.Flat`
+  for the given ring map's algebra structure.
+- `Sheaf.RingTheory.FormalGlueingData`: `FormalGlueing.Data`, with fields M', M,
+  alpha, alpha_smul, alpha_overlap, square and cocycle; also `restrict`, `piece`,
+  `localize`, `extend`, `compare`, `swap`, `Hom` and its compatibility fields.
+  The theorem uses this exact Data rather than restating its equations privately.
+- `Mathlib.RingTheory.Finiteness.Defs`: `Module.Finite`, meaning FG of top.
+- `Mathlib.LinearAlgebra.TensorProduct.Tower`: `TensorProduct`, tensor generation,
+  and `LinearMap.baseChange`, exposed through FormalGlueingData; the recorded
+  dependency explicitly permits Mathlib's reversed tensor-factor order.
+- `Mathlib.Algebra.Module.LocalizedModule.Basic`: `LocalizedModule.Away`,
+  `LocalizedModule.mk`, the existing commutative-ring structure on a localized
+  algebra, and `LocalizedModule.algebra'`. These are the recorded module
+  localization, with multiplication of fractions provided by Mathlib itself.
+- `Mathlib.GroupTheory.MonoidLocalization.Away`: `Localization.Away`, the recorded R_f.
+- The stated proof dependencies are imported without `public`:
+  `Sheaf.RingTheory.FormalGlueingEquivalence`
+  (`FormalGlueing.exists_canonical_equivalence`),
+  `Sheaf.RingTheory.FormalGlueingComplexExact`
+  (`RingTheory.formalGlueingComplexExact`),
+  `Sheaf.RingTheory.FiniteIffFormalGlueing`
+  (`Module.finite_iff_formalGlueing`), and
+  `Sheaf.RingTheory.FormalGlueingH0` (`FormalGlueing.h0`).
+  The other proof dependencies are already public imports through FormalGlueingData.
+
+Edge cases checked before writing:
+
+- t = 0: all chart and overlap clauses are empty; K = 0 and hquot forces
+  R → S to be an isomorphism. The remaining assertion is descent of E' along it.
+- A zero or nilpotent f_i: its localization is the zero ring. Its algebra E_i is
+  correspondingly the zero ring; no nontriviality or injectivity restriction is added.
+- Unit generators and K = R: quotient rings are zero, with no constraint on φ
+  beyond flatness. The principal charts give the required ordinary cover.
+- Zero rings, zero algebras and mixed zero/nonzero charts are allowed by all binders.
+- Repeated generators and i = j are included in the Data cocycle and compatibility;
+  no distinctness condition or unjustified identification of overlaps is imposed.
+- f_i may be a zero divisor; no cancellation or denominator nonvanishing is assumed.
+- The three universe variables are explicit. The inputs share the customary common
+  module universe w, while scalar extension and localization use their natural maxima;
+  no equality of ring or module universes is imposed.
+
+Searches made, all with the prescribed msearch.py wrapper where applicable:
+
+- LeanFinder: `Formal gluing of finite commutative algebras for a flat ring
+  homomorphism inducing an isomorphism modulo a finitely generated ideal`.
+  Eight hits, including Algebra.Smooth.exists_finiteType and smooth/étale
+  Noetherian descent, but no formal algebra-glueing theorem.
+- Loogle: `"Algebra", "Glue"`. Twelve hits about gluing ringed spaces and their
+  forgetful functors, not this formal module-and-algebra patching statement.
+- LeanSearch: `Finite commutative algebras glue along a flat ring map that is an
+  isomorphism modulo an ideal and principal localizations at its generators`.
+  Eight hits including Algebra.FiniteType.of_span_eq_top_source,
+  Localization.existsUnique_algebraMap_eq_of_span_eq_top, RingHom.Flat and its
+  locality properties. These assert open-cover gluing or flatness and do not
+  provide the required algebraization statement.
+- msearch grep of Mathlib/RingTheory:
+  `formalGlue|formal_glu|[Gg]lueing|patching`: zero hits.
+- rg of the upstream WeilConjectures tree with the same pattern: only unrelated
+  transition-unit gluing in AlgebraicGeometry/ProjectiveSpace/TransitionUnits.lean.
+  Exact grep for the item id in that tree: zero hits.
+- rg of lean/Sheaf for FormalGlueing/formalGlueing/formal_glue: the existing module
+  gluing framework, which this theorem uses, with no finite-commutative-algebra
+  gluing theorem. More specific search for finite-algebra/glueing names in the
+  pinned Mathlib, upstream declarations index, upstream tree and side library
+  found only the unrelated formal-GAGA finite-over-proper algebraization.
+- rg in Mathlib's localized-module source confirmed `LocalizedModule.instCommRing`,
+  `LocalizedModule.algebra'` and `LocalizedModule.numeratorRingHom`; thus no new
+  localization-algebra definition or copied construction is necessary.
+- The proposed full declaration name was searched in Mathlib, the upstream tree,
+  the side library and dag/lean_names_upstream.json: no clash.
+
+Source checked directly: literature/stacks-project/more-algebra.tex, the complete
+05EL data definition, hypotheses and statement of 05ER, and all of 05EU. The module
+docstring includes the node's six-step matching-subring proof, without proving any
+of it. No STATEMENT-DISPUTED flag or node fault was found.
+
+Validation: scompile.py compiled the sandbox and library views cleanly (2.0 s and
+1.9 s), with no unexpected warnings. The prescribed delivery dry run follows.
+
+## Second reading by Q34
+
+No second reading by a worker: since 2026-10-17 the worker delivers directly and the maintainer's independent review is the only review.

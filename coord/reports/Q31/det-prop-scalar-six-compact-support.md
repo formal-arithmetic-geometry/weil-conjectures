@@ -1,0 +1,79 @@
+1. Files written
+
+- `dag/nodes/sec-six-functors-basics/det-prop-scalar-six-compact-support.json`: completed statement split; three proof steps, no new nodes, no Mathlib match.
+- `citations.json`: one verbatim statement excerpt for each of the 20 step/node citation pairs.
+- `report.md`: this review and handover. The existing `searches.jsonl` retains the actual search log, including the searches repeated in this session.
+
+2. Attachments
+
+None. Read-only searches of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` by the exact blueprint id and compact-support/scalar/coefficient terminology found no declaration giving every clause with the item's hypotheses. `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_comp_iso` in `SixFunctors/ProEtale/TraceFormula/Adic.lean:137` assumes the open and proper comparisons and only constructs an isomorphism for a chosen compactification; its docstring explicitly says it is weaker. It does not establish independence or composition coherence and is not an attachment. Upstream master is reference material only.
+
+3. WANTED
+
+None. All sources used are present.
+
+4. Problems found and corrections
+
+The imported proof left finite-Tor preservation, common refinements, and the proper/open interchange implicit. The retained split cites existing statements for these facts and writes the coefficient/refinement, coefficient/interchange, and final compositor equations explicitly. Schematic-closure normalization handles the nondense compactifications allowed by the target. The clopen-section lemma plus density verifies the additional inverse-image hypothesis on dense refinements.
+
+This resumed reading found an additional C4/E1 error: Step 3 cited `sk-thm-sf-package` (4), but that package's `sk-def-sf-setting` fixes an algebraic closure of a finite field and coefficients A_(E,n), O_E, E, or Qlbar. This item allows a general standing field and arbitrary finite admissible coefficient rings. Removed that citation and proposed tool use. Step 3 now constructs the model compositor itself from the proper/open interchange isomorphism and the proper/open composition identifications already cited; its coefficient-compatibility equation is proved in the step. No general package theorem is applied outside its hypotheses.
+
+The item has no `chapter`, `unit`, or `lean_audit` fields in the shared import; corresponding new chapter/unit JSON records are absent. I read the current blueprint chapter and unit directly and did not invent maintainer-owned bindings. There is no statement dispute: the statement remains exactly the current blueprint's statement.
+
+5. Unfinished work
+
+No mathematical part remains unsplit at this level. No Lean was written or compiled and no push is authorized for this worker. The sandbox is for a fresh second reader after the required dry run.
+
+## Not duplicates
+
+No new nodes were created. `det-prop-scalar-six-compact-support` vs `det-sfb-coefficient-comparisons-compact-support`: the existing alternate blueprint formulation has the same comparison and conclusion; it is recorded in `blueprint.same_as` and is not cited to prove this item. The existing `lem-sf-compact-coefficient-composition` has only the finite-level A_m to A_n scope and does not replace this all-listed-coefficients item.
+
+## Review by Q31
+
+I read the current `main-20261015` chapter `sec-six-functors-basics/_section.md`, unit `sk-prop-scalar-six/_section.md`, the item's statement and its three proof paragraphs. The split follows their isomorphism, independence, and composition route. I compared every cited current DAG statement, including its hypotheses, with the actual use, and checked all citation excerpts verbatim. There are no new nodes requiring a separate source or edge-case audit.
+
+Step 1 uses `sk-def-sfb-dc-setting` for the finite-type separated setting and compactification objects. Applying `det-sf-comp-coherence-single` to the identity-proper compactification of the open immersion puts j_!K in Dctf, including finite Tor amplitude; bounded constructibility alone would not suffice. Clause (1) of `det-prop-scalar-six-direct-image` applies to that input and the proper factor. Clause (2) of `det-prop-scalar-six-pullback` supplies the extension-by-zero isomorphism. Clause (3) of `det-prop-scalar-six-ctf` and clause (2) of `sk-thm-existence` give the source and target Dctf membership. Their source statements are the current blueprint files named in their records. The statement also names the coefficient-change, standing-setting, and Dctf definitions explicitly as dependencies.
+
+Step 2 uses the actual uniqueness, isomorphism, and transitivity clauses of `det-sf-comp-coherence-refinement`. I checked its dense-open and h^(-1)(X)=X hypotheses rather than assuming them for arbitrary compactifications. `sk-lem-nagata-density-normalization` supplies the schematic-closure identification, with the Noetherian hypothesis from `lem-weil-pbc-finite-type-over-noetherian`. I read Stacks Tag 01T6, `morphisms.tex`, `lemma-finite-type-noetherian`; a field is Noetherian since its only ideals are zero and itself. `prop-compactification-refinement` applies to our separated finite-type morphisms over a field. I read its master blueprint statement and `lem-weil-pbc-proper-open-section` in the master blueprint: the latter makes X clopen in the inverse image, and density then makes that inverse image exactly X. The refinement equation follows by the j_! adjunction, restrictions of the explicit unit/pullback/counit formula in `det-prop-scalar-six-direct-image`, and the canonical pullback and extension comparisons. `def-sfb-derived-open-immersion-shriek-iso` gives the derived adjunction and the conjugate normalization; no flatness is imposed. Naturality and composition in the direct-image statement give the pushed-forward equation, and `det-sf-comp-coherence-cocycle` gives independence through common refinements. I also read Stacks Tag 09AH, `proetale.tex`, `lemma-ses-associated-to-open`, with its quasi-compact-open hypothesis, as the supporting geometric source of the cited refinement route.
+
+Step 3 uses clauses (1)--(3) of `det-sf-comp-composition-interchange`: the inverse-image equality, uniqueness of the map restricting to the identity, and its isomorphism on the localizing category. The input A=j_!K is Dctf by Step 1. Both sides of the displayed coefficient/interchange equation have source T(i_!Rp_*A) and target Rr_*j'_!T(A). Their restrictions are gamma_p,A; only after identifying the source with i_!Rp_*T(A) do they restrict to an identity, which is the uniqueness statement actually cited. The direct-image unit/pullback/counit formula and the open comparison's conjugate normalization justify these restrictions. Applying Rq_* and using the composition clauses of the direct-image and pullback nodes gives the written final compositor equation. The model compositor is constructed in the step for our actual field and coefficient categories; the narrower six-functor package is no longer used. This corrects C4 without replacing the unit's proof route.
+
+I checked B1--B10 and D1--D5 against this split: no new elementary, duplicate, clause-restating, or unsearched node exists; the argument stays in the item's steps. For C1--C8, every non-elementary input is cited by its statement, proposed off-unit generic tools are listed only in `split_report.tool_uses`, and a traversal of all dependencies found no path back to this item. For E1--E7, the equations have matching source and target, and the finite-type, separated, Noetherian, quasi-compact-open, properness, density, and Dctf hypotheses were checked at their applications. Zero K, empty X, j=id for proper f, identity coefficients, and identity f or g all fit the formulas. A nonflat map Z/ell^2 to F_ell remains allowed: the perfect input Z/ell^2 is included, whereas F_ell as a Z/ell^2-module is excluded by finite Tor amplitude. No coefficient restriction or source hypothesis was silently changed. No SGA source is used.
+
+I repeated the logged msearch queries with LeanFinder, valid Loogle, grep, and LeanSearch. The queries already appear exactly in the item's `mathlib_searches`. LeanFinder gives ordinary `ModuleCat.extendScalarsComp` and sheaf pushforward composition; Loogle gives generic mate identities; LeanSearch gives sheaf cohomology definitions and ordinary sheafification/pullback; grep gives no geometric compact-support comparison. I read `ChangeOfRings.lean:984`, `PushforwardContinuous.lean:139`, and `Mates.lean:84,170`; none states the derived pro-etale compact-support theorem or its geometric coherence. Earlier invalid Loogle queries remain explicitly labelled invalid, not evidence of absence. No Mathlib leaf was found.
+
+Validation: citation pairs and verbatim quotes checked; no cycle through the item. The required --no-push preflight is the final verification before handover; READY is reported only after it prints OK.
+
+## Earlier second reading (a previous round; superseded)
+
+- Item statement: checked against `det-prop-scalar-six-compact-support.md` in blueprint snapshot `main-20261015`, clause by clause; the standing-scheme, compactification, listed coefficient-map, Dctf, isomorphism, independence, and composition hypotheses/conclusions agree exactly. Tested the zero complex, identity/proper maps, identity coefficient map, empty scheme, and the cases `j = id` and `p = id`; no clause changes.
+- Step 1: checked `sk-def-sfb-dc-setting`, `det-sf-comp-coherence-single`, `det-prop-scalar-six-direct-image`, `det-prop-scalar-six-pullback`, `sk-thm-existence`, and `det-prop-scalar-six-ctf` statements against each use. The identity proper factor supplies the finite-Tor/Dctf input for `j_!K`; the direct-image and open-immersion comparisons give exactly the displayed arrows, and the cited existence/CTF clauses give both target memberships. Verdict: all hypotheses are present and the step proves the isomorphism clause.
+- Step 2: checked `det-sf-comp-coherence-refinement` (dense refinements and the `h^{-1}(X)=X` condition), `det-prop-scalar-six-direct-image` and `det-prop-scalar-six-pullback` (unit/counit and extension comparisons), `def-sfb-derived-open-immersion-shriek-iso` (adjunction-conjugate normalization), `sk-lem-nagata-density-normalization`, `lem-weil-pbc-finite-type-over-noetherian`, `prop-compactification-refinement`, `det-sf-comp-coherence-cocycle`, and `lem-weil-pbc-proper-open-section`. The displayed refinement square has matching source and target; schematic closure handles nondense models, and the proper-open-section plus density establishes the refinement hypothesis for common dense models. Verdict: independence and transitivity are explicitly justified under the cited hypotheses.
+- Step 3: checked `det-sf-comp-composition-interchange` clauses (1)--(3), `det-prop-scalar-six-direct-image` clauses (1)--(2), `det-prop-scalar-six-pullback` clause (2), `def-sfb-derived-open-immersion-shriek-iso`, and `sk-thm-existence` clause (2). The restriction of the coefficient square is the direct-image comparison for `p`; the model compositor is constructed from the cited interchange and proper/open composition isomorphisms, so it applies to the item's arbitrary listed coefficients and standing field. Verdict: the final compositor equation has matching source/target and proves composition compatibility.
+- New nodes: none. The existing item is the only node modified by this split; therefore B1--B7, duplicate/restatement, Mathlib-leaf, source, and edge-case checks introduce no additional node review. Existing DAG searches and the recorded LeanFinder, Loogle, grep, and LeanSearch logs were rechecked; no exact Mathlib declaration or duplicate dependency was found.
+
+Changes made in this second reading: appended this section only. The worker's removal of the inapplicable `sk-thm-sf-package` citation and its explicit model-compositor construction were retained after verification; no further mathematical or metadata repair was needed.
+
+Second-reading validation: all 20 step/citation pairs have verbatim quotes; dependency traversal found no cycle back to the item. The required `deliver.py Q31 det-prop-scalar-six-compact-support --no-push` printed `OK (not pushed)` at `917be82f7e`: preflight passed. The literal trailing `.` in the brief's command is rejected by the tool's argument parser, so the documented two-positional-argument invocation was used.
+
+Delivery blocked after the successful dry run: both authorized push attempts failed at `git checkout -q --ignore-other-worktrees -B deliver/Q31/det-prop-scalar-six-compact-support origin/newtargets-dag` with `could not lock config file /home/ubuntu/weil-newtargets-shared/.git/config: File exists` and `unable to write upstream branch configuration`. The second attempt reproduced the same tool failure. Logs are `delivery-second-reading.log` and `delivery-second-reading-retry.log` in this sandbox. No push occurred. The shared repository and launcher were not edited to work around the lock.
+
+## Post-validation repair
+
+After the live DAG refreshed, the statement of `det-sf-comp-coherence-single` gained
+its explicit standing-scheme and admissible-coefficient hypotheses. I replaced its
+single citation quote in `citations.json` with the exact current statement, then
+rechecked all 20 step/node citation pairs for verbatim containment; none is now
+missing or stale. The prior accepted dry run remains recorded in
+`dry-run-second-reading.log` (`OK (not pushed)`, preflight passed). A repeat attempt
+was queued behind concurrent Q31 delivery locks and was stopped without changing the
+sandbox after the citation check had been repaired.
+
+## Second reading by Q31
+
+- Item statement: compared every hypothesis and clause with `det-prop-scalar-six-compact-support.md` in `main-20261015`; standing schemes, compactification, listed coefficient map, Dctf input and output, compactification independence, and composition all agree. Tested zero input, empty scheme, identity/proper maps, identity coefficient map, and `j = id`/`p = id`; no correction.
+- Step 1: read the six cited statements. The standing setting supplies the required qcqs and quasi-compact open immersion; compactification coherence supplies Dctf (hence finite Tor amplitude); direct-image clause (1) supplies the isomorphism; pullback clause (2) supplies the extension comparison; existence and CTF clauses supply both Dctf targets. Verdict: hypotheses and arrows match.
+- Step 2: read each of the nine cited statements and the Stacks support (01T6 and 09AH). Refinement is applied only to dense compactifications with `h^{-1}(X)=X`; schematic closure handles arbitrary models, and proper-open-section plus density proves that inverse-image condition for common refinements. The displayed coefficient/refinement square has the same source and target on both sides. Verdict: independence and cocycle argument are justified.
+- Step 3: read the interchange clauses (1)--(3), direct-image clauses (1)--(2), pullback composition clause, open-immersion scalar comparison, and existence clause (2). After the stated source identification, both coefficient/interchange composites restrict to the same `gamma_{p,A}` and uniqueness applies; the proper/open compositor is constructed in the step for the item's general field and coefficients. Verdict: composition equation is typed and its hypotheses hold.
+- New nodes: none. Therefore B1--B7, duplicate checks, source tags, and Mathlib-leaf checks have no new-node work; existing-node searches and all 20 citation quotes were rechecked verbatim, with no cycle through the item and no Mathlib declaration matching the theorem.
+- Changes: no mathematical changes were needed after this reading; the worker's removal of the inapplicable package citation and explicit compositor construction were retained. I appended this independent review section and reran the required delivery dry run.

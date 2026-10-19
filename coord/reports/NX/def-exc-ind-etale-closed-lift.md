@@ -1,0 +1,60 @@
+# Worker report: def-exc-ind-etale-closed-lift
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/def-exc-ind-etale-closed-lift.json: definition, split; no complete Mathlib match. Added existing statement dependencies for finite presentation, etale morphisms, categorical colimits and small commutative-algebra colimit existence. Expanded the indexing category, size convention, cocone map and maps on input algebra morphisms.
+- citations.json: empty list, because a definition has no proof steps.
+- report.md: this report.
+
+New nodes: 0. New Mathlib leaves: 0. The existing colimit definition and colimit-existence leaf are reused, not delivered as new nodes.
+
+## Attachments
+
+No full attachment. Read WeilConjectures/RingTheory/ProEtale/ClosedLift.lean in /home/ubuntu/weil-src-slopmaster2, lines 57–138: Algebra.ClosedLift.Index, Algebra.ClosedLift.Index.Hom, Algebra.ClosedLift.diagram, Algebra.ClosedLift.coconeC, Algebra.ClosedLift and Algebra.ClosedLift.toAlgHom supply the small indexing model, diagram, colimit and retained map. The file contains no construction of the maps for a morphism of input algebras; a search of WeilConjectures for ClosedLift maps found no further implementation. Thus the existing declarations do not give every clause of this item. The later filteredness and reduction assertions have sorry, and neither is claimed as part of this definition or as a finished proof. The master reference checkout has no corresponding RingTheory/ProEtale/ClosedLift.lean; it is not used as completion evidence.
+
+## WANTED
+
+None. The blueprint source of the construction and Stacks sources of its underlying notions are locally available.
+
+## Corrections and scope
+
+The imported statement was mathematically sound but suppressed its smallness convention and the precise colimit maps. The revised text introduces the commutative ring, specifies the quotient-induced A-algebra structure, compatible maps, and the small presentation model. It retains all compatible maps, not merely maps of presentations. This is a faithful elaboration, not a statement dispute or weakening. No assertion of filteredness, ind-etaleness of the resulting algebra, reduction isomorphism, or adjunction has been absorbed into the definition; those are separate existing nodes.
+
+The categorical size issue is resolved directly from the existing finite-presentation definition: all finite lists of polynomials over the fixed ring A form a set; each quotient and each set of algebra maps to the fixed input ring is small. Every finitely presented B has one of these presentations by the cited definition. Transport q along its presentation isomorphism; that is an isomorphism in the factorization category, since its two structure maps commute. All compatible maps are retained, so the presentation model is full and represents every object. Equivalently, any compatible family on the presentation model extends to any B by choosing a presentation isomorphism; two choices give the same map because their composite is a morphism in the full model. Thus the definition computes exactly the original colimit, with no new restriction on the algebras.
+
+The item is an auxiliary definition in sk-prop-sf-open-closed-triangle, not its key proposition. The chapter and unit have been read; no realized fields or route are changed. All dependencies are notions, except the existing Mathlib leaf for general colimit existence. There are no off-route proof tools.
+
+## Mathlib and duplicate searches
+
+Ran the logged msearch commands, including two semantic phrasings, Loogle, two source grep searches, and LeanSearch. LeanSearch returned Internal Server Error and is recorded as unavailable. LeanFinder found Algebra.Etale.finitePresentation and etale descent/standard presentations, not the closed-lift construction. Loogle CommAlgCat, CategoryTheory.Limits.colimit returned no hits. The targeted grep found HasColimits (CommAlgCat R) at Mathlib/Algebra/Category/CommAlgCat/Basic.lean:213; read lines 200–218, and reused the already existing lem-weil-pbc-commutative-algebras-colimits-exist which states precisely small-diagram existence. The whole-Mathlib ClosedLift|closedLift|closed_lift grep returned no hits. No general colimit theorem alone states this entire construction.
+
+Searched the whole DAG and blueprint by closed-lift, N_A, lift along a closed, finitely-presented-algebra, commutative-algebras-colimits, and colimit. The closed-site lift is its geometric user; filteredness, reduction, adjunction and units are assertions about the construction, not duplicate definitions. No other blueprint definition states this construction; same_as is empty. Existing finite-presentation and colimit nodes were opened and reused, so no nodes need duplicate justifications.
+
+## Unfinished work
+
+None within stage 1 for this definition. No Lean was written, no compiler or Lake was run, and no push is requested. A fresh second reader will review and deliver the dry-run-accepted sandbox.
+
+## Review by NX
+
+I read the complete blueprint node def-exc-ind-etale-closed-lift (order 1838), the chapter and unit records, and the relevant Stacks text: algebra.tex Definition 00F3 (definition-finite-type), Definition 00U1 (definition-etale), and categories.tex Definition 002F (definition-colimit) with the small-index convention immediately following it, plus Lemma 002P (lemma-colimits-coproducts-coequalizers). The item follows its blueprint, which is the source of this particular definition; I do not attribute the entire construction to a Stacks tag that does not state it. No new node has a source to audit.
+
+I opened every statement dependency. def-weil-pbc-ind-etale-algebra supplies exactly the hypothesis on the input, not filteredness of this new indexing category. def-weil-etale-morphism supplies the scheme-level definition explicitly used for Spec B to Spec A. def-weil-pbc-finitely-presented-algebra supplies precisely the finite polynomial quotient used for the size convention. def-weil-pbc-category-colimit supplies a compatible family's unique induced map. lem-weil-pbc-commutative-algebras-colimits-exist supplies existence for every small category, so it applies without assuming the unproved filteredness node. Its Mathlib source at Basic.lean:213 agrees with this use; A and its finite polynomial quotients can be placed in the same universe.
+
+There are no proof steps to enumerate or citations to quote: this is a construction from the cited notions. I checked each defining operation nonetheless. Identity and composition of compatible maps stay compatible because q' f=q and q'' g=q' imply q'' g f=q. The maps q form a cocone by the same equation. For an A/I-algebra map phi, postcomposition preserves that equation, and the target colimit coprojections indexed by (B,phi q) are compatible, giving exactly the displayed defining equation for H_A(phi). Identity and composition laws follow by testing on each coprojection: both sides yield the coprojection indexed by the same postcomposed q. Likewise epsilon_C' H_A(phi) and phi epsilon_C give phi q on every coprojection. These are immediate applications of the cited uniqueness property, not additional unproved tool lemmas.
+
+I checked zero rings and I=A (the only quotient algebra is zero), I=0, and n=m=0. The zero algebra is allowed; q and all colimit maps still exist. A itself is an object via its structure map, so no empty-category restriction is needed. Non-Noetherian A is allowed: finite presentation is a hypothesis on each object, not on A. No surjectivity or nilpotence of I and no finite-presentation hypothesis on the input C are used. Maps of inputs are expressly A/I-algebra maps with A and I fixed, so the postcomposition construction has the right type. Nothing identifies coefficient categories or changes a target base-change morphism.
+
+Against delivery-errors B–E: the statement introduces its objects and uses single TeX escapes; no new unsplit nodes, fabricated searches, unrecorded Stacks facts, circular dependencies or clause-restatement nodes exist. I corrected the suppressed size convention and replaced the vague final sentence with the actual defining maps. I retained the imported metadata and proof=[]; splitting a definition means naming its building notions, not inventing a theorem-proof for it.
+
+## Second reading by NX
+
+- Item statement: compared all clauses with blueprint def-exc-ind-etale-closed-lift, order 1838, and read the unit and chapter sources; PASS. The polynomial presentation model represents every finitely presented algebra up to compatible isomorphism and retains every algebra morphism, so it does not change the colimit.
+- Proof steps: none (definition, proof=[]); citations.json=[] is correct. The following lines audit each defining operation instead of inventing proof steps.
+- Indexing objects and arrows: checked finite presentation against algebra.tex, 00F3 (definition-finite-type), part (2), and etale against morphisms.tex, 02GI (definition-etale), with the ring definition in algebra.tex, 00U1 (definition-etale); PASS. The five dependency statements were opened. Compatible maps compose since q'' g f=q' f=q, and identity maps satisfy q id=q.
+- Small presentation model: checked against def-weil-pbc-finitely-presented-algebra; PASS. Finite lists of polynomials and homomorphisms between their quotients form sets. For any presentation isomorphism h:P→B, use (P,q h); h is an isomorphism of factorizations. Two presentation choices give the same cocone component because the induced isomorphism between presentations is among the retained arrows.
+- Diagram, colimit and retained map: checked against def-weil-pbc-category-colimit and lem-weil-pbc-commutative-algebras-colimits-exist, categories.tex 002F (definition-colimit), remark-diagram-small, and 002P (lemma-colimits-coproducts-coequalizers); PASS. Read Mathlib/Algebra/Category/CommAlgCat/Basic.lean:200–218, especially the instance at 213. The compatible maps q form precisely the cocone needed for epsilon; no filteredness assumption is used for existence.
+- Maps of inputs: checked against the final blueprint sentence and the colimit universal property; PASS after explicitly introducing the target input as ind-etale. Postcomposition sends q' f=q to phi q' f=phi q. The target coprojections satisfy the same compatibility. Both identity maps induce the original coprojections, and both maps for a composite induce the coprojection indexed by (B,psi phi q); uniqueness proves the functor laws. Both epsilon compositions restrict to phi q, proving naturality.
+- New nodes: none; B1–B7 and per-new-node duplicate/Mathlib-leaf checks are vacuous. Independently searched DAG, blueprint, and both read-only source trees for closed-lift/ClosedLift/closedLift; the other nodes assert properties or use this construction. Read ClosedLift.lean:57–138: the concrete construction exists, but there are no input-morphism maps completing the item's final clause. No unfinished theorem is treated as a finished proof. Independent logged Mathlib grep `Etale.*[Cc]olimit|[Cc]olimit.*Etale|ClosedLift` returned zero hits.
+- Edge cases: PASS for A=0, C=0, I=A, I=0, a field base, and n=m=0. When C=0 the zero algebra is a terminal indexing object, hence the colimit is zero. For n=m=0 the quotient is A and its structure map gives an indexing object. No nonzero-ring, Noetherian, nilpotence, or finite-presentation hypothesis on C is needed.
+
+Changes: explicitly introduced the target ind-etale algebra C' in the input-map clause to make its hypothesis self-contained; explicitly specified that the chosen colimit is in commutative A-algebras to fix the ambient category. Retained all other statement content, dependencies, searches, the first worker's review, and the empty proof/citation records. No statement dispute, new nodes, or new Mathlib leaves. No Lean files, compiler, Lake, live project, or live launcher were changed. Delivery uses a separate writable clone through WEIL_CLONE_PREFIX, preserving the designated read-only repository.

@@ -1,0 +1,23 @@
+PASS: both transport classifiers recover HTTP 429 from all 11 actual failed worker/checker logs
+test_final_answer_even_with_error_exit_is_never_replayed (test_worker_transport.Transport.test_final_answer_even_with_error_exit_is_never_replayed) ... ok
+test_prompt_quotes_and_terminal_nontransport_errors_do_not_retry (test_worker_transport.Transport.test_prompt_quotes_and_terminal_nontransport_errors_do_not_retry) ... ok
+test_q53_gateway_diagnostic_is_retained (test_worker_transport.Transport.test_q53_gateway_diagnostic_is_retained) ... ok
+test_retry_delays_are_jittered_capped_and_budgeted (test_worker_transport.Transport.test_retry_delays_are_jittered_capped_and_budgeted) ... WORKER_TRANSPORT: ERROR: 429 Too Many Requests; retrying the same role in 10.0s
+WORKER_TRANSPORT: ERROR: 429 Too Many Requests; retrying the same role in 15.0s
+WORKER_TRANSPORT: ERROR: 429 Too Many Requests; retrying the same role in 25.0s
+WORKER_TRANSPORT: ERROR: 429 Too Many Requests; retrying the same role in 45.0s
+WORKER_TRANSPORT: ERROR: 429 Too Many Requests; retrying the same role in 55.0s
+ok
+test_transient_failure_reopens_the_same_reader_prompt (test_worker_transport.Transport.test_transient_failure_reopens_the_same_reader_prompt) ... WORKER_TRANSPORT: ERROR: exceeded retry limit, last status: 429 Too Many Requests; retrying the same role in 5.0s
+ok
+test_delivery_waits_remain_tool_failures (test_dispatch_failure_classification.Classification.test_delivery_waits_remain_tool_failures) ... ok
+test_lean_compile_limit (test_dispatch_failure_classification.Classification.test_lean_compile_limit) ... ok
+test_non_time_limits_are_not_compiler_timeouts (test_dispatch_failure_classification.Classification.test_non_time_limits_are_not_compiler_timeouts) ... ok
+test_q72_scope_failure_is_not_a_compile_timeout (test_dispatch_failure_classification.Classification.test_q72_scope_failure_is_not_a_compile_timeout) ... ok
+test_reap_uses_the_tested_classifier (test_dispatch_failure_classification.Classification.test_reap_uses_the_tested_classifier) ... ok
+test_stage1_never_runs_a_compiler (test_dispatch_failure_classification.Classification.test_stage1_never_runs_a_compiler) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 2.220s
+
+OK

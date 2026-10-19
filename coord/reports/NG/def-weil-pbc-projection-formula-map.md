@@ -1,0 +1,32 @@
+## Worker report
+
+Files written: dag/nodes/sec-proper-base-change/def-weil-pbc-projection-formula-map.json (definition, split; no exact Mathlib match). No new nodes and no Mathlib leaves.
+
+Attachments: none. The slopmaster2 blueprint tag search returned no declaration. Its étale derived projection-formula files concern a different site and mostly compactly supported direct image; the pro-etale trace package assumes an abstract projection-formula isomorphism. Neither states this completed-coefficient ordinary-direct-image definition. The master ModuleObject framework is reference material, not an attachment or an identification of coefficient categories.
+
+WANTED: none.
+
+The imported definition hid the derived pullback/tensor comparison. It now cites the existing arbitrary-ringed-topoi lemma, not the étale-only def-kun-projection-formula-map. I expanded the definition without changing the chosen morphism: alpha is c followed by epsilon tensor identity, and pi is eta followed by R(alpha). Coefficient subscripts and the coefficient identification already required by def-weil-pbc-proetale-operations are explicit. The unchanged source paragraph retains the source's comparison of generality. No source error or statement dispute was found; no theorem of invertibility is claimed. Nothing remains unfinished for this split.
+
+## Blueprint and existing-node searches
+
+Read the chapter sec-proper-base-change and unit sk-thm-properbasechange; this foundational definition does not replace any of the unit's three geometric proof steps. Searched all blueprint nodes with tools/blueprint_refs.py search for projection, projection-formula morphism, projection-formula map, and tensor pullback; searched DAG statements by derived tensor, pullback tensor and the Stacks pullback-tensor label. Found lem-weil-pbc-ringed-topoi-derived-tensor-pullback and lem-weil-pbc-site-derived-tensor-descent, both reused. The analogous def-kun-projection-formula-map is on the étale site with constant coefficients; it is not the same definition on these pro-etale completed coefficient categories. Therefore blueprint.same_as is empty and blueprint.from remains null for the imported blueprint node.
+
+## Review by NG
+
+I read the original blueprint definition and the local Stacks sites-cohomology.tex section-projection-formula (0943), equation-projection-formula-map (0B56), including its explicit adjoint description. They give precisely the map with ordinary unbounded derived tensor and no properness, perfectness, boundedness or invertibility assumption. I also read the lemma-pullback-tensor-product passage (07A4) and the full statements of the four dependencies. No new node needs a separate source or small-case review.
+
+This is a definition and has no proof steps; citations.json is consequently the empty list. Its construction has three operations to audit. First, lem-weil-pbc-ringed-topoi-derived-tensor-pullback states the canonical natural isomorphism L(F tensor G) to LF tensor LG for arbitrary unbounded complexes on small ringed sites. The pro-etale site size convention comes through the operations node, and the specified coefficient identification is a ring map as required by that lemma. Substituting F=Rf_*K and G=P has the right base category. Second, lem-weil-pbc-site-derived-tensor-descent states a bifunctor on the unbounded derived categories, so applying it to the counit and the identity gives the required morphism LRK tensor LP to K tensor LP. No assertion from a dependency's proof is used. Third, def-weil-pbc-proetale-operations explicitly supplies Lf^* dashv Rf_* and its natural Hom bijection. Its unit followed by R(alpha) is the definition of the adjunct; all sources and targets match M and N as displayed. The adic datum explicitly defines A_T as the limit coefficient sheaf and defines this notation for D(Mod(A_T)); it does not identify it with the constant coefficient category. I kept that distinction and made no comparison with master's condensed module objects.
+
+Against delivery-errors B–E: there are no unsplit new-node proof sketches, duplicates, new leaf claims or unrecorded searches. All actual searches are logged by msearch.py and copied into mathlib_searches with unavailable LeanSearch recorded as unavailable. I read the semantic hits (underived pullback adjunction, units and general monoidal adjunctions) and the local underived PullbackFree constructions; none gives the complete pro-etale derived construction. The second semantic phrasing found general lax-monoidal adjunction statements, not an exact match for these derived operations. The explicit formula avoids moving any clause into a new node or citing a definition for a theorem it does not state.
+
+Type and small-case checks: for the identity morphism with identity coefficient identification, the unit, counit and tensor comparison reduce the formula to the identity under the standard identifications. With K=0 or P=0 the formula gives the zero morphism between the resulting zero objects. Arbitrary unbounded K and P are allowed by both tensor statements. No properness or dualizability is smuggled into the construction, and no derived completeness of its tensor target is asserted. I corrected only hidden construction inputs and ambiguous coefficient subscripts; the original adjunct and its direction are preserved.
+
+## Second reading by NG
+
+- Item statement: checked against Stacks Tags 0B56 and 0943 and the imported blueprint node; the morphism, adjoint direction, coefficient categories, and absence of invertibility hypotheses agree clause by clause.
+- New node `def-weil-pbc-projection-formula-map`: checked as a definition against the same source tags and against all four cited dependency statements; its pullback/tensor comparison, counit composite, and unit-then-direct-image composite are well typed, self-contained, and introduce no extra hypotheses.
+- Proof steps: none (definition node has an empty proof as required).
+- Edge cases: identity morphism gives the canonical identity map, and zero inputs give the zero morphism; arbitrary unbounded complexes remain allowed.
+- Existing-node and Mathlib checks: searched DAG and blueprint for projection-formula and pullback/tensor formulations; recorded grep, LeanFinder, LeanSearch, and Loogle searches found no exact Mathlib match. No duplicate or new node was needed.
+- Changes made in second reading: no content changes were required; appended this review after verifying the worker's explicit coefficient subscripts and derived adjunction construction.

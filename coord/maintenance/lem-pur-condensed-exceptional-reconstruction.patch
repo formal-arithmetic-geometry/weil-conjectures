@@ -1,0 +1,40 @@
+--- a/lean/Sheaf/Paper/CondensedERealization.lean
++++ b/lean/Sheaf/Paper/CondensedERealization.lean
+@@ -538,7 +538,8 @@
+     [h.IsOver (Spec (.of k))] {rT : At l E T.scheme} {rU : At l E U.scheme}
+     (a : Along l E k T U h rT rU) (K : Integral l E T.scheme) :
+     (rU.realization.functor.obj (ScalarLocalization.mk (a.push.obj K))).obj ≅
+-      ((CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj
++      ((CondensedRing.lowerStar
++        (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj
+           ((rT.realization.functor.obj (ScalarLocalization.mk K)).obj) :=
+   (boundedConstructible (Coefficient E U.scheme)).ι.mapIso
+       (a.pushComparison.app (ScalarLocalization.mk K)) ≪≫
+@@ -549,9 +550,12 @@
+ Source: Stacks 015F (blueprint: lem-weil-pbc-condensed-e-realization). -/
+ def ambientImageIso {V W : Scheme.{u}} (h : V ⟶ W)
+     {A B : Ambient E V} (e : A ≅ B) :
+-    ((CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj A ≅
+-    ((CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj B :=
+-  ((CondensedRing.lowerStar (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).mapIso e
++    ((CondensedRing.lowerStar
++      (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj A ≅
++    ((CondensedRing.lowerStar
++      (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).obj B :=
++  ((CondensedRing.lowerStar
++    (Profinite.continuousCoefficientRingObj E) h).rightDerivedFunctor).mapIso e
+ 
+ end WeilConjectures.CondensedERealization
+ 
+--- a/lean/Sheaf/Paper/CondensedReconstructionSupport.lean
++++ b/lean/Sheaf/Paper/CondensedReconstructionSupport.lean
+@@ -92,7 +92,8 @@
+       (((J.atObject X).realization.functor.obj (ScalarLocalization.mk K)).obj)
+   let openComparison : A ≅ B :=
+     (reconstructionOpenRealization_exists ℓ J X Z c.i).choose.app (ScalarLocalization.mk K)
+-  let first := (J.along Z Y c.g).ambientPushComparison Q
++  let first := WeilConjectures.CondensedERealization.Along.ambientPushComparison
++    ℓ (ReconstructionField.{u} ℓ) k (J.along Z Y c.g) Q
+   let third := WeilConjectures.CondensedERealization.ambientImageIso
+     (ReconstructionField.{u} ℓ) c.g openComparison
+   first ≪≫ third

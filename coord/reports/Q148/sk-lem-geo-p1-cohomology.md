@@ -1,0 +1,37 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/sk-lem-geo-p1-cohomology.json` — existing item statement retained; proof re-split into nine steps; no new nodes.
+- `citations.json` — verbatim statements for all cited node uses.
+- `searches.jsonl` — retained historical searches and the additional 2026-10-17 searches for the repaired proof's projective-line/cohomology formulation.
+
+Attachments: none. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` by the blueprint id, projective-line/cohomology names, and the relevant base-change declarations. No sorry-free declaration states this item exactly. The projective-line source contains a different base-change theorem and supporting declarations, so it is not an attachment.
+
+WANTED: none.
+
+The return handoff for this item required re-splitting old steps 2 (4473 characters) and 5 (3012 characters), because each hid non-elementary comparison lemmas. I kept the statement, route, existing dependencies, blueprint metadata, and accepted tool uses. Old step 2 is now four short arguments: the ordinary-etale normalized map and its exchange equation, the cyclic geometric-fibre calculation, and finite coefficient extension via the existing scalar-mate projection lemma. Old step 5 is now the formal comparison of etale and pro-etale exchange, followed by a separate twist/exchange argument using the existing coefficient-exchange-mates and tensor/exchange-coherence statements. The item now has nine proof steps, all below 2000 characters. No new node was created: the hidden facts are already stated by `lem-pur-etale-scalar-mate-projection` and `lem-weil-pbc-coefficient-exchange-mates`.
+
+## Review by Q148
+
+I read the current item node, `dag/units/sk-lem-geo-p1-cohomology.json`, the chapter record, and both the main-20261015 unit statement and proof. I also read the Stacks material cited by the route: Tag 0GL5 for the proper projection formula, Tag 0GL6 for coefficient change and projection-formula compatibility, Tag 099V for etale/pro-etale comparison, and Tag 0E48 for compatibility of projection formula with exchange. The item statement remains exactly the unit statement, including the finite commutative coefficient algebra, the ordinary derived tensor, the pro-etale category, the Chern-class normalization, the base-change map, and the trace definition.
+
+Step 1 checks the proper and finite-type hypotheses, Noetherianity, the affine projective-line charts, the infinity Cartier divisor, and the sign of its associated line bundle. I opened every cited statement: the properness, finite-type, separated-to-quasi-separated, Noetherian-finite-type, affine-fibre-product, divisor-line-bundle, and projective-twist nodes each state precisely the property used. The local polynomial calculation is elementary once those statements are available and verifies the chart edge cases and all base changes.
+
+Step 2 constructs the ordinary etale map `b_{S,B}` and proves its base-change equation. Its unit component uses the exact adjunction and the three-factor exchange definition; its class component uses the Kummer sequence, the finite-twist pullback, the frame-torsor dictionary, and naturality of relative torsor connecting maps. I checked that each cited node supplies exactly those claims, including the empty-complement specialization. This is the repaired short replacement for the former long scalar/class construction.
+
+Step 3 handles the cyclic coefficient ring on geometric fibres. Proper base change gives the fibre cohomology, stalk conservativity detects the derived isomorphism, projective-line geometry supplies smooth proper connected genus zero, primitive roots supply the coefficient trivialization, and the proper-curve theorem supplies the degree-0/1/2 groups. The degree-coordinate node sends the Kummer boundary to the line-bundle degree, while the divisor-degree node gives degree one for the infinity point. I checked the stalk calculation at a geometric point and the edge cases `N=ell^r`, genus zero, and the vanishing degrees.
+
+Step 4 extends from the cyclic ring to an arbitrary finite algebra. The existing `lem-pur-etale-scalar-mate-projection` statement gives the canonical counit-transpose coefficient map and identifies its restriction with the projection formula; its bounded-below assumptions are supplied by the finite twist and the cyclic calculation. `lem-amb-proper-coproducts-projection` gives invertibility after restriction, and exact restriction reflects quasi-isomorphisms. This preserves the prescribed scalar-root map and does not assume flatness of the finite algebra. I checked that the node says this equality of specified maps, rather than merely an existence or an unspecified isomorphism.
+
+Step 5 is the untwisting argument from the existing proof and uses the proper projection formula, finite-twist pullback, and exchange/tensor coherence. Its tensor order and evaluation identify the source as the stated direct sum with the negative Tate twist and identify the second component with the same Chern/Kummer class.
+
+Step 6 applies exact comparison pullback and the bounded-below direct-image comparison. I checked the hypotheses from Step 1: the projective projection is quasi-compact and quasi-separated, and all complexes used are bounded below. The comparison's unit, counit, and composition compatibility identify the two components with the pro-etale unit and the Cartier Chern class from `sk-lem-geo-cartier`.
+
+Step 7 is the repaired replacement for the former long exchange calculation. It invokes `lem-weil-pbc-coefficient-exchange-mates`, whose statement is the general four-adjunction coefficient-exchange square with the exact hypotheses used here: invertible pull comparisons, natural horizontal comparisons, counit mate equations, and a commuting pull-comparison cube. The etale/pro-etale comparison node supplies the pull cube and push mate equations; the exchange definition supplies the exchange counit equations. Thus the displayed base-change equation for the normalized decomposition follows without assuming an unproved exchange isomorphism.
+
+Step 8 checks the twisted input. The tensor-pullback and exchange/tensor-coherence nodes identify the comparison image with the twist of the decomposition, including the projection map. The bounded-below comparison applies to `Lambda_P(1)[2]`, and Step 7 supplies its exchange equation. I checked that the ordered-sum comparison preserves the two summands.
+
+Step 9 is the elementary inversion-and-projection calculation from the source: invert the commutative square, project to the second ordered summand, and use that the ordered-sum comparison is the identity on that coefficient summand. This proves trace compatibility for every Noetherian base change.
+
+I checked all cited node statements directly and generated `citations.json` from their verbatim statement text. I searched the whole DAG and blueprint for projective-line decomposition, scalar-mate projection, and coefficient-exchange formulations; the two repaired hidden arguments already exist as DAG nodes, so no duplicate was created. The Mathlib searches were actually run and logged: two semantic searches, a Loogle query, and a Mathlib grep for the repaired projective-line/cohomology claim returned only generic sheaf, Proj-chart, algebraic-etale, and group-cohomology declarations, with no match for this etale/pro-etale decomposition or trace.

@@ -1,0 +1,71 @@
+--- a/lean/Sheaf/Paper/FiniteResidueDualizing.lean
++++ b/lean/Sheaf/Paper/FiniteResidueDualizing.lean
+@@ -100,6 +100,16 @@
+     DerivedCategoryModule A T ⥤ finiteResidueProDerivedCategory T A :=
+   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+ 
++/-- The fixed-coefficient presentation of intrinsic pro-etale constructibility used here.
++This transparent alias reuses the published finite-stratification predicate; the dependency
++node keeps its intrinsic constant-ring interface and all existing consumers.
++Source: blueprint def-weil-proetale-constructible-sheaf, second paragraph;
++Bhatt–Scholze, Section 6.3 (blueprint: lem-per-finite-residue-dualizing). -/
++abbrev finiteResidueProConstructibleSheaf
++    (T : Scheme.{u}) (A : Type (u + 1)) [Field A] [Finite A]
++    (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) : Prop :=
++  Scheme.IsConstructibleProEtaleFixedModuleSheaf T A F
++
+ /-- Intrinsic bounded constructibility: bounded cohomology and the finite-stratification
+ constructibility predicate on every cohomology sheaf, without assuming etale origin.
+ Source: Bhatt–Scholze, Section 6.3; blueprint def-weil-proetale-constructible-sheaf
+@@ -107,7 +117,7 @@
+ def finiteResidueProBoundedConstructible
+     (T : Scheme.{u}) (A : Type (u + 1)) [Field A] [Finite A]
+     (K : finiteResidueProDerivedCategory T A) : Prop :=
+-  (∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf T A
++  (∀ i : ℤ, finiteResidueProConstructibleSheaf T A
+     ((_root_.DerivedCategory.homologyFunctor
+       (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) i).obj K)) ∧
+   ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
+--- a/dag/nodes/sec-deligne-laumon-a1/lem-per-finite-residue-dualizing.json
++++ b/dag/nodes/sec-deligne-laumon-a1/lem-per-finite-residue-dualizing.json
+@@ -314,6 +314,7 @@
+    "AlgebraicGeometry.Etale.finiteResidueOmega",
+    "AlgebraicGeometry.Etale.finiteResidueProDerivedCategory",
+    "AlgebraicGeometry.Etale.finiteResidueProEtaleComparison",
++   "AlgebraicGeometry.Etale.finiteResidueProConstructibleSheaf",
+    "AlgebraicGeometry.Etale.finiteResidueProBoundedConstructible",
+    "AlgebraicGeometry.Etale.finiteResidueProOmega",
+    "AlgebraicGeometry.Etale.FiniteResidueDualizingAssertion",
+@@ -323,7 +324,7 @@
+   "statement": "theorem finite_residue_dualizing\n    {k : Type u} [Field k] {T : Scheme.{u}}\n    (a : T ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]\n    (ell : ℕ) (hℓ : Nat.Prime ell) (hℓk : IsUnit (ell : k))\n    (A : Type (u + 1)) [Field A] [Finite A] [CharP A ell] :\n    FiniteResidueDualizingAssertion a ell hℓ hℓk A",
+   "branch": "newtargets-dag",
+   "by": "NX",
+-  "date": "2026-10-18",
++  "date": "2026-10-19",
+   "existing": false
+  }
+ }
+--- a/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json
++++ b/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json
+@@ -162,17 +162,16 @@
+   "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
+  },
+  "lean": {
+-  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
++  "module": "Sheaf.Paper.ProEtaleConstructibleSheaf",
+   "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
+   "declarations": [
+-   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf",
+-   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf"
++   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleModuleSheaf"
+   ],
+   "statement": "def IsConstructibleProEtaleModuleSheaf\n    (Y : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]\n    (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) : Prop",
+   "branch": "newtargets-dag",
+-  "by": "NX",
++  "by": "N6",
+   "date": "2026-10-18",
+   "existing": true,
+-  "note": "Section 1(B): the recorded fixed-ModuleCat predicate cannot be applied directly to the ordinary intrinsic constant-ring modules used by scalarExtensionFunctor and the recorded extension by zero. Rebind to the already-published exact intrinsic formulation: the same positive finite constructible locally closed partition, local constancy and finite geometric stalks, with the canonical constant-section pullback. This is an existing definition of precisely this node, not a new constructibility condition or an etale-origin assumption; the fixed-module predicate remains available in its own module. Compatibility: the old declarations AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf remain available with their unchanged signatures in Sheaf.Paper.ProEtaleFixedModuleConstructible; neither that source module nor any existing consumer is edited or removed by this delivery. NX repair of return ca455f296d6d: retain the N6 primary declaration and statement verbatim and retain this N6 note. The record is a superset: ProEtaleFixedModuleConstructible publicly imports ProEtaleConstructibleSheaf, so both intrinsic constant-ring and fixed-ModuleCat predicates remain recorded and publicly available. The fixed-ModuleCat predicate is required for this item's Type (u+1) coefficients and ambient pro-etale evaluation comparison; it expresses the same positive finite constructible locally closed partition, local constancy, and finite geometric stalks. No source declaration or existing consumer is changed."
++  "note": "Section 1(B): the recorded fixed-ModuleCat predicate cannot be applied directly to the ordinary intrinsic constant-ring modules used by scalarExtensionFunctor and the recorded extension by zero. Rebind to the already-published exact intrinsic formulation: the same positive finite constructible locally closed partition, local constancy and finite geometric stalks, with the canonical constant-section pullback. This is an existing definition of precisely this node, not a new constructibility condition or an etale-origin assumption; the fixed-module predicate remains available in its own module. Compatibility: the old declarations AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf remain available with their unchanged signatures in Sheaf.Paper.ProEtaleFixedModuleConstructible; neither that source module nor any existing consumer is edited or removed by this delivery."
+  }
+ }

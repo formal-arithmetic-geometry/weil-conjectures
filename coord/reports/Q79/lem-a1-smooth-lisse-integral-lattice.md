@@ -1,0 +1,59 @@
+## Files written
+
+- `dag/nodes/sec-purity-real-sheaves/lem-a1-smooth-lisse-integral-lattice.json`: statement, split into seven proof steps; not in Mathlib.
+- `dag/nodes/sec-purity-real-sheaves/lem-a1-normal-proetale-monodromy.json`: one new statement-only, unsplit comparison lemma; not in Mathlib.
+- `citations.json`: all eleven step/node pairs, with the exact cited statements as verbatim quotations.
+
+There are no new Mathlib leaves. `searches.jsonl` records the actual tool searches, including the first rate-limited LeanSearch attempt. Its successful replacement was read. Searches from the item's original NS delivery are retained; Q79's new searches are appended. Search timestamps use the machine's UTC date (2026-10-17), while this report's project date is 2026-10-18.
+
+## Attachments
+
+None. I searched the exact blueprint tag and lattice/lisse terminology throughout `/home/ubuntu/weil-src-slopmaster2/WeilConjectures`. `AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`, `EtaleCohomology/Purity/RealSheaves/LocalSystems.lean:274`, is a representation theorem with a variable coefficient extension and a Weil-group restriction on curves. It does not state the fixed-E, arbitrary-dimensional, completed sheaf-submodule assertion here, so is not an attachment. Searches for pro-etale monodromy and for the new id found no project declaration giving the new comparison.
+
+## WANTED
+
+None. All sources used are available locally.
+
+## Corrections and scope
+
+The item's statement is unchanged. In particular K need not be algebraically closed or finite over K_0, T need not be connected or a curve, and no Frobenius-stable lattice is requested. There is no statement dispute. The completed ring B_T is not the discrete constant sheaf of the abstract ring A.
+
+The original source list had no proof. I supplied the geometric preparation and the entire construction rather than substituting a new node asserting lattice existence. The one new node concerns the sheaf–monodromy equivalence and its integral normalization; it asserts no existence of a stable lattice. Stable-lattice existence already has its own DAG node, which is reused. Proposition 6.8.4(6) alone gives only an etale-local lattice and would not prove this global assertion. Normality and Lemma 7.4.10 are what make the global compact-monodromy argument valid.
+
+I searched the whole DAG by Stacks tags 056T, 0BQ3, 033M; by 7.4.7 and 7.4.10; and by monodromy, fundamental group, normality, lisse and lattice terminology. I ran `tools/blueprint_refs.py ancestor` and whole-blueprint searches for lattice, unibranch, monodromy, geometrically normal, fundamental group, integral-monodromy, pro-etale and normal. The existing `cor-galois-lisse-representations` uses the classical adic-system definition: it cannot give arbitrary pro-etale lisse sheaves on a normal scheme without the comparison being added. The existing `lem-sfb-etale-local-monodromy-realization` gives global full faithfulness and only etale-local essential surjectivity; it does not contain the missing normal-base global conclusion. The Weil sheaf equivalence is restricted to curves and Weil data. Neither it nor any imported blueprint node is the new comparison. Blueprint ancestry remains lem-a1-affine-hc0, through the item and lem-a1-degree-zero-compact-support-sections; the exact master proof sentence is identified. The main-20261015 ancestor file has the same statement and no proof text. No chapter or unit route is changed.
+
+## Not duplicates
+
+lem-a1-normal-proetale-monodromy vs lem-a1-smooth-lisse-integral-lattice: both mention Stacks 0BQ3 in their source. The new node classifies lisse completed rational sheaves on a connected normal Noetherian scheme by continuous profinite representations, with normalization on an already supplied stable lattice. The item constructs an actual global integral submodule on a possibly disconnected smooth field base change. The comparison neither provides a stable lattice nor asserts the item's conclusion.
+
+lem-a1-normal-proetale-monodromy vs lem-sfb-etale-local-monodromy-realization: the existing realization is fully faithful on any connected topologically Noetherian qcqs base and gives representations only after etale covering; the new node supplies global essential surjectivity for normal bases, using Bhatt–Scholze 7.4.10. This is not a special case of that existing statement.
+
+lem-a1-normal-proetale-monodromy vs cor-galois-lisse-representations: the latter's rational objects are adic systems localized on morphisms, not arbitrary pro-etale locally free rational sheaves. The new node identifies the pro-etale category on normal bases with the monodromy category; its lattice normalization is the comparison between these categories, not another finite-coefficient classification.
+
+## Review by Q79
+
+I read Bhatt–Scholze Definition 6.8.3, Lemma 6.8.2, Proposition 6.8.4, the proof of Corollary 6.8.5, the standing hypotheses of Section 7.4, and Lemmas 7.4.7 and 7.4.10 in the supplied PDF (text extracted to the sandbox). I also read Stacks varieties.tex Tag 056T, label lemma-smooth-geometrically-normal; properties.tex Tag 0BQ3, label lemma-normal-geometrically-unibranch; morphisms.tex label lemma-finite-type-noetherian (01T6); and topology.tex label lemma-locally-Noetherian-locally-connected (04MF). I read the stable-lattice argument in Stanford lecture 19, Proposition 1.1.9, second bullet. These are the sources for the item and the new node. No SGA source is used.
+
+For the new node, Section 7.4 assumes connected locally topologically Noetherian X; a nonempty connected Noetherian separated normal X satisfies this. Normal schemes are geometrically unibranch by 0BQ3. Lemma 7.4.10 therefore identifies the pro-etale group with the profinite etale group, and Lemma 7.4.7 classifies E-local systems by its continuous finite-dimensional representations. The proof of 7.4.7 starts with the integral classification, since GL_n(A) is profinite; 6.8.4(1) identifies its realization with the normalized quotient tower and 6.8.4(4) identifies its rationalization. This gives the normalization clause for any supplied stable lattice. Inverting ell or the chosen uniformizer is the same localization since ell is a unit times a positive power of the uniformizer in A. The equivalence is E-linear. The joint-continuity formulation agrees with the matrix-entry topology in finite dimension. The new node is statement-only, has no proof steps or proof dependencies, introduces all objects and coefficient constructions, and cites definitions for its scheme, normality, coefficients, sites, modules, geometric point and fundamental group. It contains no proof sketch. I corrected my initial draft's TeX escaping before delivery.
+
+Step 1 uses the full statements of the separated finite-type base-change lemma, finite-type-over-Noetherian lemma, and smooth-geometrically-normal lemma. The last explicitly covers every field extension K/K_0, so using it requires neither a perfect field nor algebraically closed K. The field is Noetherian directly. These yield exactly the hypotheses needed later, not a stronger unproved geometric assertion.
+
+Step 2 uses the statement of lem-sfb-noetherian-connected-components-open, including finiteness and openness and its empty-space convention. Closedness of a component is elementary. Restriction of affine charts and local rings verifies Noetherianity, normality and separatedness on each component. The coefficient restrictions are the same constant sheaves, limits and localizations on the open slice. Empty T is handled before choosing any point.
+
+Step 3 applies exactly the new comparison statement to L restricted to a component; normality, Noetherianity, separation, nonemptiness and invertibility were supplied in steps 1–2. Its conclusion explicitly gives the representation and the profinite etale group, rather than assuming a locally free rational sheaf already has an adic model. This avoids a circular lattice construction.
+
+Step 4 uses the actual statement of lem-pod-profinite-stable-lattice: G is compact, V is finite-dimensional with its product topology, and the action is jointly continuous. The node supplies a stable free full-rank lattice and continuity for its adic topology. Finite quotients of that lattice are finite discrete continuous modules. Clause (1) of cor-galois-lisse-representations supplies the finite etale sheaves, full faithfulness, and coefficient-extension compatibility, so the tower transitions and normalization are genuinely supplied. The ell-adic clause (2) of that node is not used as a substitute for the new comparison.
+
+Step 5 uses precisely the reduction/completion equivalence statement of lem-per-lisse-completed-system-comparison, applied to this normalized finite locally free tower. It explicitly says the inverse is the limit of nu^*F_n and the result is lisse over B_X. This node requires X Noetherian separated and ell invertible; all hold. The new comparison's normalization clause gives Phi_X(N[1/varpi]) = V, and its full faithfulness therefore gives the required isomorphism with the original L. This is an actual identified realization, not an unsupported appeal to transport.
+
+Step 6 uses only the coefficient-ring isomorphisms stated by lem-sfb-integral-lisse-reduction-equivalence and the continuous-function construction stated by def-weil-pbc-lisse-lattice-coefficients. Functions into the domain A have no uniformizer torsion. This makes the localization map injective on free charts and hence on N. The rest is elementary: take the image under the chosen isomorphism, identify this image with N, and invert the uniformizer in the same map. Thus the conclusion is a submodule of the specified L and the inclusion induces the isomorphism, as requested.
+
+Step 7 has no non-elementary input. It writes the sheaf directly as the product of the component sheaves on the disjoint covering, with componentwise restrictions. The sheaf axiom on a disjoint open covering gives the formula and its submodule property. The local freeness and inclusion-induced rationalization isomorphism can be checked on that same cover. This also explains varying ranks rather than imposing a global constant rank.
+
+I tested rank 0 (V = Lambda = N = 0), the empty scheme (no point choice or components), disjoint smooth components of different ranks, X = Spec K (ordinary continuous Galois representations), arbitrary inseparable or infinite extensions K/K_0 (056T applies to every field extension), and nontrivial compact monodromy. Normality cannot be dropped: the nodal gluing in Bhatt–Scholze Example 7.4.9 produces noncompact rational monodromy. In rank one, identifying two branches using multiplication by varpi yields a loop that cannot preserve any full A-lattice. The added lemma retains normality and does not erroneously assert an equivalence for all Noetherian schemes.
+
+I inspected the complete statement of every cited node; citations.json copies those exact statements for every step/node pair. I checked the transitive statement/proof dependency closures of the existing geometric, representation and completion tools: none reaches this item, so adding them does not close a cycle. The generic off-unit tools are declared in split_report.tool_uses with the exact usage; no unit step is replaced. Each non-elementary proof step is shorter than 2000 characters, and none hides a new comparison beyond the one new statement-only node. B1–B10, C1–C8, D1–D5 and E1–E7 were checked against these statements and sources, rather than treating a mechanical pass as the review.
+
+## Unfinished work
+
+The newly stated normal-scheme monodromy comparison is unsplit and remains a future stage-1 item. This delivery splits the assigned item by one level as required. No Lean was written and no compiler, Lake or build tool was run.

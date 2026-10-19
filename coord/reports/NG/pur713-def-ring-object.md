@@ -1,0 +1,49 @@
+# Stage-1 worker report: pur713-def-ring-object
+
+1. Files written:
+   - `dag/nodes/sec-smooth-purity/pur713-def-ring-object.json`: definition; Mathlib leaf, with `CategoryTheory.CommMon`, `MonObj`, `IsCommMonObj`, and `IsMonHom`, and two existing statement dependencies. Zero new nodes; one Mathlib leaf (the item).
+   - `citations.json`: empty list, since this definition/Mathlib leaf has no proof steps.
+   - `report.md`: this report.
+2. Attachments: none. Searches under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the exact blueprint tag/id, ring-object terminology and expected names found no declaration stating the item. Ordinary `CommRing` uses are not this monoidal definition. No master sorry declaration was counted as a proof.
+3. WANTED: none. The current blueprint and pinned Mathlib definitions needed here are available.
+4. Problems corrected: the final sentence cited nonexistent `pur713-def-abelian-tensor`. Searched the whole DAG and current blueprint: that id occurs only as a dangling reference, and there is no definition file with that id. Replaced the reference by the existing `sk-def-sfb-sheaf-tensor`, whose final paragraph gives exactly the sheafified objectwise tensor over Z and constant integer unit. Added this and `det-def-sfb-ring-object-monoid` to the empty imported statement-dependency list. The latter is an existing reviewed Mathlib leaf defining precisely the multiplication/unit equations, morphisms and braided commutativity. No mathematical hypothesis or conclusion changed. The imported terminology calls a tensor commutative monoid a “commutative ring object”; I preserved that convention. Mathlib's `CommRingObj`, which assumes a cartesian monoidal category and independent additive-group operations, is not a match and was explicitly rejected after reading its source.
+5. Unfinished work: none within the assigned stage-1 definition. No Lean was written or compiled. The sandbox is for the required fresh second reader; no push was made.
+
+## Blueprint and existing-node search
+
+Read `dag/chapters/sec-smooth-purity.json`, `dag/units/sk-def-sp-coefficient-towers.json` and the current `pur713-def-ring-object.md` paragraph. The unit has no proof steps and this item is not its key node, so no unit realization fields require editing. This is a definition supporting the coefficient-module language; its statement dependency on the sheaf tensor is a notion rather than an alternative purity route.
+
+Ran `tools/blueprint_refs.py ancestor pur713-def-ring-object`, and searches for `commutative ring object`, `pur713-def-abelian-tensor`, `commutative ring object symmetric monoidal category`, and `symmetric monoidal`. Also searched the DAG for ring objects and tensor definitions. The broad searches include `sk-def-sfb-ring-object`, `det-def-sfb-ring-object-monoid` and `sk-def-sfb-sheaf-tensor`. The first is a broader construction of rings/presheaves/sheaves, the second covers monoid objects in any monoidal category plus braided commutativity, and the third constructs the sheaf tensor. They are reused rather than duplicated. None is an equivalent standalone blueprint statement with exactly this item's generic commutative-object definition plus its fixed pro-étale sheaf context, so `same_as` is empty. No new node was introduced.
+
+## Mathlib verification
+
+All Mathlib searches used the prescribed `msearch.py NG pur713-def-ring-object` command. All attempts, including invalid Loogle identifiers and zero-hit greps with a redundant `Mathlib/` directory prefix, are recorded as they occurred in `mathlib_searches`. The corrected grep uses `CategoryTheory/Monoidal`, relative to the Mathlib directory, and returns the declaration files and line numbers. The LeanSearch service worked. Search-service descriptions use some older `Mon_` names; actual pinned source files determine the match.
+
+Read `Mathlib/CategoryTheory/Monoidal/CommMon_.lean` lines 23–71 and `Mon.lean` lines 73–85, 213–215, 521–558 and 1213–1239. `CommMon` packages the object, `MonObj` and `IsCommMonObj`. These give exactly multiplication, unit, associativity, both unitality identities and braiding invariance. Its induced category uses `Mon.Hom`, which has an underlying morphism and the `IsMonHom` unit and multiplication equalities. Symmetric implies braided; there is no additional assumption on the object. The context specializes C to the tensor category of abelian sheaves supplied by the cited existing tensor node. Thus this is a one-line Mathlib specialization with a contextual statement dependency, not an unproved equivalence of tensor and cartesian ring notions.
+
+## Review by NG
+
+I read the current blueprint source for the item and checked the generic monoid terminology against the full statement of `det-def-sfb-ring-object-monoid`. Its clause 1 has exactly the associativity and two unit equations, clause 2 has exactly the morphism equations, and clause 3 has exactly the braided commutativity condition used here. I also opened `sk-def-sfb-sheaf-tensor` and read its statement: its final paragraph fixes Ab's tensor over Z, the sheafified objectwise tensor and the constant integer sheaf as unit, while clause 1 gives the symmetric monoidal structure. Its site hypotheses include the small pro-étale site of a scheme with the indicated universe/essential-smallness convention. These are statement dependencies, not proof citations; there are no proof steps and hence no C4 quote to supply in `citations.json`.
+
+Against delivery-errors B: there are no new unsplit statements or hidden proof sketches; the item introduces C, R, multiplication and unit itself. Every additional notion needed for its ambient tensor structure is supplied by the two existing nodes. TeX remains ordinary single-escaped decoded text. There is no new Stacks fact requiring a tag; the source is the current blueprint definition and the Mathlib match includes every declaration/file/line read. The Mathlib match is direct after unfolding, including morphisms, and the actual searches are recorded rather than inferred from recollection. The whole-blueprint search and absence of a project attachment were checked.
+
+Against C: no proof step hides a non-elementary fact or takes something from another node's proof. The cited statements themselves contain precisely the definitions just identified. Statement dependencies have no back edge to this item (the generic monoid node depends only on category/monoidal notions; the tensor node's dependencies are its generic sheaf and presheaf constructions). No off-unit proof route is used.
+
+Against D: I did not make new nodes restating clauses or move the whole item into a new lemma. This is the already-existing Mathlib definition, for which the contract calls for a leaf with no proof. The definition has no omitted construction theorem or induction to justify.
+
+Against E: checked object and arrow types explicitly: the unit is 1_C to R, multiplication is R tensor R to R, and both composites in the associativity and unit equations have the same source and target after including the standard associator/unitors. Lean's f ≫ g denotes g composed after f, so the read Mathlib equations have precisely the blueprint orientation. A symmetric category is braided, which is all the leaf requires; the tensor on abelian sheaves is over Z rather than the cartesian product. Small cases include C = Ab and R = Z, R = Z/nZ and the zero ring (whose unit map is zero); all are allowed, with no hidden nonzero or torsion-free condition. For a cartesian symmetric category such as sets the displayed data are commutative monoids, consistently with the source's declared terminology: no additive structure was silently added. Identity morphisms preserve both structure maps, and arbitrary source morphisms are required to satisfy both equations. The sole correction was the broken tensor-definition reference and its missing dependencies, with unchanged mathematical meaning. There is no statement dispute and no route through SGA.
+
+## Not duplicates
+
+No new nodes. The two broader existing definitions were reused as statement dependencies.
+
+## Second reading by NG
+
+- Item statement: checked against `pur713-def-ring-object.md` in the current blueprint, hypothesis by hypothesis; the symmetric monoidal data, multiplication and unit, associativity, both unit laws, braided commutativity, morphism compatibility, and the pro-étale abelian-sheaf tensor/unit context all agree. I removed the worker's delegation of the laws to a citation and wrote the tensor construction explicitly so the statement is self-contained.
+- Proof steps: there are no proof steps because this definition is a Mathlib leaf; consequently there are no step citations or elementary/non-elementary claims to audit.
+- New nodes: none. The item reuses the existing `det-def-sfb-ring-object-monoid` and `sk-def-sfb-sheaf-tensor` statement dependencies; no new-node B1–B7 or duplicate-node issue arises.
+- Mathlib leaf: rechecked `CategoryTheory.CommMon`, `MonObj`, `IsCommMonObj`, and `IsMonHom` against the pinned Mathlib source and the recorded searches; these cover the generic monoid laws, commutativity, and morphism equations, while the sheaf tensor dependency supplies the ambient category.
+- Edge cases: checked the zero and unit ring objects, $​\mathbb Z$, $\mathbb Z/n\mathbb Z$, and the empty-site/abelian-sheaf context; no nonzero, torsion-free, or nonempty hypothesis was introduced.
+- Delivery form: `citations.json` remains correctly empty for a proof-free leaf, the worker review remains above, and the item has no SGA or Lean/compiler work.
+
+Changes made: rewrote the item statement to spell out the source's tensor-product meaning and removed the non-self-contained “Use ... [det-def-sfb-ring-object-monoid]” delegation; retained both existing statement dependencies and the Mathlib leaf metadata.

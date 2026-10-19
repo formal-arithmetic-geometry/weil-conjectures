@@ -1,0 +1,53 @@
+## Files written
+
+- dag/nodes/sec-smooth-purity/lem-amb-finite-tate-site-descent.json: statement item, split in eight steps; no Mathlib match. The imported statement, source, pointers, creation ancestry and chapter/unit binding are retained.
+- citations.json: 29 entries, one per step/node citation, quoting the cited statement verbatim including its hypotheses.
+- report.md: this report. searches.jsonl is the actual msearch.py log.
+
+New nodes: 0. New Mathlib leaves: 0. No unit record changed: this coefficient lemma is not the statement of sk-prop-an.
+
+## Attachments
+
+None. Searched WeilConjectures/ of the read-only slopmaster2 source for the exact blueprint tag, finite Tate/twist comparisons, and root-of-unity terminology. The tag has no hit. The TateObject declarations in SixFunctors/Etale/Derived/Perfect/TateTwist.lean work with an assumed HasTateTwist datum and do not compare the concrete inverse limit of roots with the small pro-etale site. They do not give this item. The read-only upstream master is reference material, not evidence of a closed proof.
+
+## Wanted literature
+
+No additional literature is needed for this split. The item combines existing DAG statements whose proofs remain the work of their owners; it does not claim that a single Stacks lemma proves all its assertions.
+
+## Corrections and scope
+
+No statement dispute and no statement change. The item was unsplit and carried no proof. Replaced the empty proof with the finite coefficient argument; left all imported fields and historical searches intact and appended five searches actually executed for N7. The coefficient rings remain ordinary constant finite ring sheaves on both sites. This is not an identification with condensed module objects or an assertion about infinite-limit preservation by inverse image.
+
+The non-elementary work is already factored into smaller existing nodes: root-limit finite reduction, completed constant quotients, the pro-etale comparison section formula, finite etale root pullback, tensor comparison, the comparison square and the underived fully faithful unit. Steps 2 and 5 carry the elementary tensor and projection arguments explicitly. Creating another lemma for either of those arguments, or for the desired descent itself, would produce an elementary node or a duplicate/clause of the item.
+
+No remaining mathematical work within this item's one-level split. Dependencies are cited as their statements, regardless of whether their own proofs are finished. No Lean was written and no compiler or Lake tool was run.
+
+## Blueprint and searches
+
+Read the chapter sec-smooth-purity and the complete sk-prop-an unit, including the distinction between the zero-section and projection forms of purity. The current main-20261015 thm-amb-vector-bundle-purity.proof.md first paragraph defines the integration at finite coefficients. This child supplies that coefficient identification and does not replace any purity step. Its historical blueprint.from.node is thm-amb-vector-bundle-purity, verified by blueprint_refs.py ancestor; from.place already identifies the exact integration paragraph.
+
+Whole-DAG and blueprint searches used finite Tate, roots of unity, 099R, 0GLZ, 099T, comparison sections, tensor and completed coefficient terminology. blueprint_refs.py search 'finite Tate' returns affine-space/trace/coefficient conventions nodes, not this item. 'roots of unity' returns definitions and finite computations; none asserts this precise descent with transition, scheme pullback and uniqueness clauses. same_as is therefore empty. No new node was created, so there are no same-tag new/existing pairs needing a Not duplicates entry.
+
+Executed msearch.py searches (all services available): LeanFinder 'Finite coefficient Tate twist descends from the proetale site to the etale site compatibly with pullback'; Loogle 'AlgebraicGeometry.Scheme.Etale'; grep 'TateTwist|ellAdicSheaf|proetale' in AlgebraicGeometry; LeanSearch 'Reduction of the inverse limit of roots of unity modulo a prime power is the finite Tate twist'; and a second LeanFinder phrasing, 'The comparison inverse image from small etale sheaves to proetale sheaves identifies roots of unity tensor a finite ramified coefficient ring'. Read the hits and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean: ellAdicSheaf at line 63 is the sheaf of continuous maps into Z_l, not this finite Tate comparison. The cyclotomicCharacter hits describe roots and automorphisms of a ring, not these sheaves or comparison maps. The etale-category and condensed constructors similarly do not specialize in one line to the item. All new search entries have exactly the logged tool and query, with actual returned names.
+
+## Review by N7
+
+I read the item against Stacks proetale.tex Tags 099R (section-comparison), 0GLZ (lemma-describe-pullback-from-etale), 099T (lemma-fully-faithful); etale-cohomology.tex Tag 03PK (section-kummer); sites-modules.tex Tags 093M (lemma-completion-flat) and 03EL (lemma-tensor-product-pullback). I also read the actual statements of every node in citations.json, including the full finite reduction and pullback statements. The combined proof is marked agent-written, since Stacks does not state this full ramified-coefficient combination in one theorem. There are no new nodes whose statements require a separate source audit.
+
+Step 1 takes exactly the root limit, completed Z_l action and its finite reduction from clause (2) of lem-pur-twist-sheaf-locally-free. The completed coefficient quotient is a separate assertion of lem-weil-pbc-constant-completion-equivalence, not inferred from a definition of completion. Its input is the Noetherian DVR Z_l, with ideal (ell); def-weil-l-adic-numbers supplies the ring and quotient convention. The inverse limit definition supplies the root projection family. I checked that this step uses no finite type, separation or quasi-compactness hypothesis on T, and makes no integral or rational descent claim.
+
+Step 2 uses only the displayed two scalar-extension definitions and sheaf tensor definition. I wrote inverse maps for both reassociation and quotienting L by ell^rL. The lift-independence equation uses the hypothesis ell^rA=0 exactly where needed. In particular the coefficient ring A need not be flat over Z/ell^r, and no derived tensor over Z/ell^r is substituted for the ordinary scalar extension.
+
+Step 3 uses lem-cbc-comparison-pullback-sections, whose statement covers every weakly etale object, together with the actual root pullback clause of lem-asd-etale-finite-twist-pullback. It evaluates sections as units satisfying the root equation, using def-pur-roots-of-unity-sheaf. It then identifies scalar and power maps on those same units. The cited finite constant comparison gives the ring identification and module interpretation; it is not used as a theorem about Tate twists. This avoids applying the affine-only comparison-sections node to an arbitrary T.
+
+Step 4 cites the ordinary ringed-topos tensor theorem, integer monoidal inverse image, and the finite constant-ring comparison. These state the exact tensor and constant-ring facts used. I described the balancing coequalizer for mixed Z/ell^r and A coefficients, then defined beta as a specific composite with theta inverse. This is an actual construction of the comparison, not an application of a new node restating descent.
+
+Step 5 uses the tuple description of the inverse limit and the final transition clause of the etale finite twist lemma. The equation on x tensor a gives the pro-etale transition as theta_r theta_r' inverse. It also proves the comparison square and cocycle by the explicit power exponents. This step is elementary from steps 2-4, and the statement remains independent of the choice of annihilating power.
+
+Step 6 cites the comparison square, etale finite root pullback, pro-etale tower-map compatibility, inverse limit and inverse-image definitions, tensor pullback, and the general constant left-module inverse-image theorem. I verified carefully that lem-pur-roots-of-unity-inverse-image-iso only supplies general tower compatibility and semilinearity in its first two clauses: its clause (3) is only for an isomorphism of schemes and is not applied to an arbitrary v. Instead the general finite-level isomorphism is proved here by its r-th projection equation and the etale comparison square. The equation constructs and identifies the actual finite-level map coming from the root tower. There is no exchange of inverse image with an infinite inverse limit. Scheme pullback sends the root represented by a unit to that same pulled-back unit, so the normalization agrees with the section comparison used in step 3.
+
+Step 7 tensors beta inductively, with base a=0 the finite constant-ring identity. For derived tensor I cite the general ringed-topos derived tensor theorem, which covers unbounded categories and gives the exact displayed isomorphism. The finite coefficient comparison is exact by lem-sf-comparison-pullback-exact, so its termwise and derived inverse images agree. This does not assert flatness of A over a smaller ring; all derived tensor powers in this clause are over A itself.
+
+Step 8 uses the underived Grothendieck-valued comparison unit, not merely the definition of a site comparison. Its coefficient category hypothesis is checked using the separately cited module-category Grothendieck theorem. I lifted alpha inverse beta and its inverse, and used faithfulness for the two identity equations, proving uniqueness as well as existence of the comparison-preserving isomorphism. This establishes uniqueness among descents equipped with the comparison; it does not assert that a Tate line has no unnormalized automorphisms.
+
+I tested the item on T empty (unique maps of zero module sheaves), a=0, r'=r, identity scheme pullback, F=Q_l, and ramified F with n=1. In the last case any annihilating r works and the quotient-tensor argument is unchanged; this is precisely why neither an n/e exponent nor divisibility of n by e occurs. For nontrivial geometric monodromy, the construction uses root sheaves and their canonical projections, not a choice of primitive root or a global trivialization. Every step is shorter than 2000 characters; none hides a new comparison lemma. The off-unit statement citations are declared individually as generic tools in split_report.tool_uses, without editing any maintainer-owned tool_uses field. B1-B10, C1-C8, D1-D5 and E1-E7 were checked on the files and sources as described above; the substantive corrections were filling the proof, making the quotient argument explicit, and avoiding both affine-only section hypotheses and the isomorphism-only pro-etale root pullback clause.

@@ -1,0 +1,98 @@
+1. Files written:
+   - `dag/nodes/sec-six-functors/lem-coef-pointwise-lan-mapping-property.json`: item, repaired split; statement and statement dependencies unchanged.
+   - `dag/nodes/sec-six-functors/lem-coef-full-subcategory-kan-trivial-restriction.json`: statement-only structural theorem, unsplit; no Mathlib match.
+   - `dag/nodes/sec-six-functors/lem-coef-relative-join-left-kan-reduction.json`: statement-only realization/reduction lemma, unsplit; no Mathlib match.
+   - `dag/nodes/sec-six-functors/lem-coef-inner-anodyne-pointwise-lan-invariance.json`: statement-only change-of-index lemma, unsplit; no Mathlib match.
+   - `citations.json`: sixteen literal statement quotations for the seven repaired steps. Search outputs and the retained returned report/proof are also in the sandbox as research records.
+
+2. Attachments: none. The item tag has no project declaration. Searching the whole read-only `WeilConjectures/` source for quasicategories and relative joins gave none; the pointwise-left-Kan hits are ordinary category theory for sheaves and presheaves. They do not state the full coherent transformation-space assertion.
+
+3. WANTED: archival copies of Kerodon Proposition 7.3.6.1 (0309), Variant 7.3.1.5 (02YC), Proposition 7.3.1.14 (02YL), Proposition 7.3.2.11 (02YZ), Proposition 7.3.5.5 (0302), Proposition 7.3.6.7 (030F), Corollary 7.3.6.9 (030M), Construction 5.2.3.1 (0242), Proposition 5.2.3.15 (024J), and Lemma 6.2.5.1 (02FK), for the item and the three new structural nodes. These were read online; they are not archived under `literature/`. The proof remains marked agent-written. The identifiers are Kerodon tags, not similarly named Stacks tags. No SGA source is used.
+
+4. What was wrong: the returned four-step proof claimed that local components assemble coherently without a lemma, that higher simplices agree without a construction, and that componentwise agreement implies equality in a transformation space. Those were gaps, despite the previous successful mechanical dry run. The old review's assertions that the definitions supplied these results were incorrect. The full statement itself agrees with Kerodon and is retained, including arbitrary small simplicial K, the specific beta, and the absence of additional colimit hypotheses. The current shared item was unsplit; I rebased the sandbox repair onto its metadata and preserved all its earlier Mathlib-search entries. The returned report and proof are retained in `report.returned.md` and `item.returned.json` for comparison.
+
+5. What could not be finished: no part of this one-level split is left unhandled. The three new lemmas intentionally carry statements only and remain unsplit. Their future proofs must use the indicated structural extension/restriction route; they must not route back through this item. No Lean was written and no compiler, Lake, build, or local project DAG checker was run.
+
+## Repair of the return
+
+D3 and C1/C4: Steps 1–4 now cite statements that actually supply the non-elementary conclusions. Small inner-horn completion supplies simultaneous lifting of diagrams and beta; the new change-of-index lemma supplies the missing preservation of pointwise colimits; the new relative-join lemma supplies the realization and its left/right Kan properties; the new full-subcategory theorem supplies actual trivial Kan fibrations, including every prescribed boundary simplex. The definition node is no longer used as a theorem about coherent assembly.
+
+E5: Step 5 writes the square W and both monotone triangles, identifies all four sides and their shared diagonal, and proves its operator compatibility by the explicit equation for pullback of an n-simplex. It retains the full simplex parameter. Step 7 records the same product identity for an additional parameter of G, using the structural restriction theorem's coherent naturality.
+
+E3: Step 6 uses the equality of homotopy classes of entire maps of Kan complexes, obtained from the two triangle maps through the cited composition-space formula. Since both restriction maps are equivalences, the comparison is invertible in the homotopy category of spaces. There is no inference from equality of components to equality of transformations and no check limited to vertices.
+
+The cycle is avoided rather than hidden: neither the existing relative-right-Kan restriction nor the existing right-pinched Kan-mapping restriction is cited. Their current dependency paths reach the item through Kan–Quillen right properness and the localization/corepresentability chain. I traversed both statement and proof dependencies of every actual proof citation: none reaches the item. The new statement-only nodes have no proof dependencies. The full-subcategory theorem records the direct structural route of Kerodon 7.3.6.7 via 7.3.5.5, not this item's universal property.
+
+## Review by NF
+
+I read the stage-1 brief, all of delivery-errors B–E, the three blueprint levels, the chapter/unit records, and the current blueprint proof of `prop-coef-integral-exceptional-adjoint`. Its paragraph 2 uses a coherent derived coefficient adjunction; this foundational item supplies the mapping-space universal property below that route. I did not change the unit or chapter, target meaning, or coefficient categories. I read both citers, which require full coherent mapping-space comparisons rather than just maps between components.
+
+For the item I read Kerodon 0309 and 02YC. For the new full-subcategory node I read 030M and its proof through 030F and the local-extension criterion 0302: the hypothesis is on the source P being left extended OR target Q being right extended, not on all diagrams admitting extensions. This is why both restriction maps in Step 4 exist without assuming D complete. For the new relative-join node I read 02YZ, the reduction in 0309, 0242/024J, and the reflection criterion 02FK: the initial and final inclusions are full, the edge h has constant r-image, F-bar realizes beta's fixed-endpoint homotopy class, and G r is right extended because the reflection edges have identity image. For the new index-change node I read 02YL, clause (2), and the opening of 0309. Specializing categorical-equivalence invariance to inner-anodyne inclusions allows K to be an arbitrary simplicial set; no quasicategory hypothesis on K was silently added.
+
+Step 1 uses the full lifting assertion and smallness of `lem-coef-small-inner-horn-completion`, and the iff in the new index-change node. The endpoints of the lifted beta are fixed by a boundary lifting problem, so its restriction is the given beta exactly. The new index-change lemma is applied with L the original K and its K the completion. These are the stated hypotheses, not an application of cofinality for functors between quasicategories to a non-quasicategory.
+
+Step 2 uses the same completion statement to lift a monomorphism of arrow-space parameters with both endpoint faces fixed. Its section and vertical homotopy are obtained by the two displayed monomorphism lifting problems. `lem-coef-infinity-pinch-comparison` supplies Kan complexes and a natural equivalence between the arrow model and the project's right-pinched model; I read its actual map. `lem-coef-infinity-mapping-composition` supplies the composition class through triangle restriction, which identifies the comparison after restricting beta. This proves equivalence on every simplex, not just an extension of individual transformations.
+
+Step 3 uses the new relative-join node's full statement, not an argument buried in its proof. In particular its hypothesis is exactly the cocone condition of the item, with K now a quasicategory by Step 1. It gives F-bar left extended and G-bar right extended, with no extra colimits, plus the exact identity G-bar h = constant. The cited composition node explicitly says that composition with an edge depends only on its component class, so changing beta to its homotopic realization does not change the comparison class.
+
+Step 4 uses precisely the disjunctive hypothesis and trivial-fibration conclusion of the new full-subcategory theorem. The final inclusion uses G-bar's right Kan condition; the initial inclusion uses F-bar's left Kan condition. Both are full inclusions of quasicategories supplied in Step 3. The new node is stronger than the existing right-pinched equivalence node: it states strict lifts with arbitrary prescribed boundaries in the arrow model, independent of the cyclic proof chain.
+
+Step 5 uses the exact constant-h identity of the relative-join node and the defined triangle space V of the composition node. I checked both triangles: one has short edges beta-bar and q a; the other has short edges b and identity. They have the identical diagonal d, which need not equal b as a simplicial map. This distinction is essential in the arrow model. The square family is defined on Delta^n times the whole square times K, and the formula for pullback along nu proves its simplicial compatibility directly. Thus this repair does not replace the earlier unsupported coherence sentence by another such sentence.
+
+Step 6 uses the formula [ell][theta]^{-1} in the composition node and its unit law. It gives [d] = composition(q a, beta-bar) = [b] as classes of entire maps. Inverting [a] therefore gives the comparison class, and the natural pinch equivalences identify the result in the required right-pinched model. Step 7 uses the coherent naturality clause of the new restriction theorem, the natural pinch maps, and the triangle-space composition operation. The square and both triangles are fixed precomposition maps, so an additional simplex parameter is retained unchanged. I checked the product identity written in that step; no new assembly or uniqueness assertion is being inferred from values at objects.
+
+I tested the new statements at their small cases. For the full-subcategory theorem, A=C makes restriction the identity. If A is empty, the left condition says P(c) is initial and the right condition says Q(c) is terminal; neither applies to arbitrary functors without those hypotheses. For the join reduction, K empty gives E=C and the left condition is exactly the assumed initial-object condition; C empty forces K empty. When delta is identity, E is Delta^1 times C and the realizing edge is beta, with G-bar constant in the interval; a left extension then requires beta to be an equivalence. For inner-anodyne index change, identity inclusions are tautological and empty completion stays empty; the nontrivial inner-horn inclusion into Delta^2 tests that arbitrary simplicial indices, rather than only categories, are allowed. In the main mapping calculation an ordinary naturality square gives exactly the two triangles used, including the identity side. No false strict equality of the diagonal and b is claimed.
+
+I searched the entire DAG by tags and concepts, the whole imported blueprint with `blueprint_refs.py`, and the project Lean source before creating the nodes. There is no blueprint counterpart. All new nodes have complete objects and hypotheses, explicit notions or actual definition references, source places, inherited unit/chapter, blueprint ancestry and statement-only status. Mathlib searches were run only through `msearch.py`; their actual records and raw repair outputs are retained. Each new node has LeanFinder (two phrasings), Loogle, grep, and LeanSearch results. I read the returned ordinary Kan-extension, Guitart-exactness, strict-Segal, join and inner-anodyne declarations. They do not provide the quasicategorical structural statements. None is falsely declared a Mathlib leaf. The three new nodes are structural facts used in the proof, not restatements of the mapping-property conclusion. No proof step exceeds 2000 characters; the square/triangle calculation is a direct use of the existing composition-space statement, so it does not conceal another lemma. Every citation in citations.json is a literal passage of the current cited statement.
+
+## Not duplicates
+
+lem-coef-inner-anodyne-pointwise-lan-invariance vs lem-coef-right-fibration-constant-right-kan: the existing node constructs a space-valued right Kan extension along a right fibration using fiberwise maps into X; it neither changes an arbitrary indexing simplicial set nor realizes arbitrary beta on a relative join.
+
+lem-coef-inner-anodyne-pointwise-lan-invariance vs lem-coef-right-fibration-fiberwise-kan: the existing node constructs space-valued right Kan extensions along right fibrations from fiber limits; it asserts neither inner-anodyne invariance nor the relative-join reduction.
+
+lem-coef-inner-anodyne-pointwise-lan-invariance vs lem-coef-pointwise-lan-mapping-property: the item concludes a mapping-space equivalence; the new lemma only preserves the local colimit hypothesis under an inner-anodyne change of index.
+
+lem-coef-inner-anodyne-pointwise-lan-invariance vs lem-weil-pbc-normal-domain-ring-equivalence: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-inner-anodyne-pointwise-lan-invariance vs def-weil-pbc-normal-ring: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-relative-join-left-kan-reduction vs def-coef-infinity-relative-join: the existing node defines the relative-join simplicial set and structure maps only; the new node asserts realization of beta, fullness/quasicategory properties, and transfer of left/right Kan conditions.
+
+lem-coef-relative-join-left-kan-reduction vs lem-coef-right-fibration-constant-right-kan: the existing node constructs a space-valued right Kan extension along a right fibration using fiberwise maps into X; it neither changes an arbitrary indexing simplicial set nor realizes arbitrary beta on a relative join.
+
+lem-coef-relative-join-left-kan-reduction vs lem-coef-infinity-relative-join-cartesian-realization: the existing statement gives the cartesian correspondence Y star_Y X and its mixed mapping spaces; the new statement realizes an arbitrary beta on K star_C C and identifies its local Kan cocones and the right-extended target Gr.
+
+lem-coef-relative-join-left-kan-reduction vs lem-coef-right-fibration-fiberwise-kan: the existing node constructs space-valued right Kan extensions along right fibrations from fiber limits; it asserts neither inner-anodyne invariance nor the relative-join reduction.
+
+lem-coef-relative-join-left-kan-reduction vs lem-coef-pointwise-lan-mapping-property: the item concludes a mapping-space equivalence; the new lemma constructs a relative-join realization and its local Kan conditions, and concludes no universal property on transformation spaces.
+
+lem-coef-relative-join-left-kan-reduction vs lem-weil-pbc-normal-domain-ring-equivalence: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-relative-join-left-kan-reduction vs def-weil-pbc-normal-ring: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-arrow-prism-collage-inner-anodyne: the existing statement is an explicit combinatorial inner-anodyne inclusion of a prism collage; it states no Kan restriction theorem for transformation spaces.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-infinity-kan-mapping-restriction: the existing statement only asserts an equivalence in the right-pinched model; the new theorem asserts an actual trivial Kan fibration and strict boundary lifting in the fixed-endpoint arrow model. Its direct structural proof is needed here because the existing weaker theorem has a dependency path to this item.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-infinity-relative-kan-existence: the existing statement constructs extensions of objects from local relative cones; the new statement gives strict boundary lifts between the fixed transformation spaces for a given pair.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-infinity-arrow-join-geometry: the existing statement constructs the arrow-index category and comparison transformations; it states no equivalence or trivial fibration of transformation spaces.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-slice-cone-prism-simplicial: the existing statement specifies a simplicial prism map into an arrow relative join, with no Kan-extension or mapping-restriction conclusion.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-weil-pbc-normal-extension-purely-inseparable-then-galois: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-weil-pbc-normal-extension-fixed-field-separable-normal: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-weil-pbc-normal-extension-fixed-field-purely-inseparable: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-weil-pbc-finitely-generated-field-finite-transcendence-basis: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-exc-transcendence-basis-exists: the existing statement concerns ordinary commutative algebra or field extensions, whereas the new statement concerns quasicategorical Kan extensions. The matching four-character code is a Stacks/Kerodon identifier collision.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-relative-right-kan-restriction: the existing theorem restricts the category of all relative right Kan extensions and assumes existence for every boundary diagram; the new theorem concerns one pair of functors and a source-left OR target-right condition, with no such existence hypothesis.
+
+lem-coef-full-subcategory-kan-trivial-restriction vs lem-coef-relative-right-kan-universal-restriction: the existing theorem concerns the relative category of right Kan extensions over a base, not mapping spaces out of a single left Kan extended functor or into a single right Kan extended functor.
+
+lem-coef-relative-join-left-kan-reduction vs lem-coef-inner-anodyne-pointwise-lan-invariance: the first realizes a transformation on a relative-join correspondence after its index is a quasicategory; the second preserves only the local colimit condition on changing a simplicial index. Neither states the other or the item.

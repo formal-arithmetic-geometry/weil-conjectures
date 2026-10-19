@@ -1,0 +1,53 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors/lem-coef-infinity-product-colimit-fubini.json` (statement; split; no Mathlib match). The exact statement and its statement dependency are unchanged. `citations.json` records a verbatim statement excerpt for each proof-step citation. `searches.jsonl` contains the actual Mathlib command records; `write_split.py` is a sandbox-only generation script, not part of the delivery.
+
+## New nodes
+
+None. Zero new Mathlib leaves. The generic universal-arrow result already exists as `lem-coef-parametric-universal-arrows`; duplicating it as a colimit-functor or pointwise-colimit lemma would add unnecessary nodes. Currying is the elementary degreewise exponential identity written in step 1. No node was created for a clause of Fubini itself.
+
+## Attachments
+
+None. I searched the item tag and the Fubini/product-colimit/coherent-colimit notions in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` and `Comparator/`; no project declaration stating the item appeared. The upstream master is not proof evidence. Mathlib's ordinary-category Fubini declarations are not attachments.
+
+## Wanted literature
+
+WANTED: Chu--Haugseng, Free Algebras through Day Convolution, arXiv:2006.08269, Corollary 6.10, printed p.16, for lem-coef-infinity-product-colimit-fubini. Read the online PDF at https://arxiv.org/pdf/2006.08269: its product-comma calculation is the motivation, not a literal statement of this arbitrary-quasicategory formulation.
+
+WANTED: archived Kerodon Subsection 6.2.6, Proposition 6.2.6.1 (02FV), Proposition 6.2.1.17 (02F1), and Subsection 8.3.4 (03NQ), for the universal-arrow foundations used through lem-coef-parametric-universal-arrows. These online sources were read, but the partial parametric formula is explicitly the stronger statement of the existing DAG node; I do not infer it merely from a pointwise adjoint criterion.
+
+WANTED: archived Kerodon Subsection 4.6.8 (01PF), especially Corollary 4.6.8.5 and Construction 4.6.8.9, for coherent composition through lem-cbc-simplicial-composition-spine. These are Kerodon identifiers, not Stacks tags; no Stacks tag states the quasicategorical Fubini assertion. No SGA source was used. The proof is marked agent-written because its general Fubini argument is supplied here rather than copied from an archived document.
+
+## Findings and route
+
+The imported item has a correct statement but no proof. Its recorded Mathlib searches already recognize the ordinary-category/coherent-category distinction. I retained them and added the six actual Q137 searches: LeanFinder with two phrasings, Loogle, LeanSearch and two source greps. Their hits were read: Fubini.lean:450-536,638-669 gives ordinary diagrams and cocone legs; the second semantic query gives colimConstAdj, the ordinary colimit/constant adjunction. Neither specializes in one line to arbitrary quasicategories and mapping spaces. The focused Quasicategory grep returned zero relevant hits. Every recorded new query is from the command's log, with its actual result and availability.
+
+I read the chapter and unit records, the main-20261015 ancestor's statement/proof in `sec-six-functors/sk-thm-sf-package/`, and the old master ancestor for comparison. The ancestor's coherent mapping adjunction before the derived inverse limit is unchanged in substance. This item is a foundational tool under the recorded external-product Kan-extension ancestry, not the key node of its unit, so no unit realization file is changed. Its existing ancestry, chapter, unit, creation stamp and source are preserved. The two off-unit tools are declared only in split_report.tool_uses, for the independent maintainer to judge; no maintainer-owned tool_uses field was written.
+
+Searches for Fubini and universal arrows over the whole blueprint with tools/blueprint_refs.py gave no imported exact duplicate, and the whole-DAG statement search identified the existing parametric-universal-arrows node. Its statement suffices in both variance directions with arbitrary containing-universe parameters. Dependency traversal from each of the universal-arrow, cone-calculus, composition-spine tools reaches no path back to this item. Hence this reuse does not form a cycle.
+
+## Not duplicates
+
+There are no new nodes to compare. The existing ordinary pointwise Kan-extension node is not used: it assumes ordinary indexing categories and all small colimits, whereas this item needs arbitrary quasicategory shapes and only J/K colimits. The existing parametric-universal-arrows node is reused exactly for its dual parameter formula; no new pointwise-colimit node is created.
+
+## Review by Q137
+
+I read Chu--Haugseng Corollary 6.10 online, specifically the product of comma indices in its proof. The paper uses this calculation for presheaves of spaces and external products; our item states the independently valid coherent Fubini ingredient. I checked the full statement against that intent: independent small shapes, a target in a containing universe, both individual colimit hypotheses, every prescribed inner-colimit cocone, both orders, composite legs and whole coherent parameter dependence. No filteredness, nonemptiness, presentability, locally-small-in-the-original-universe, or product-colimit existence was added. I also read Scholze's archived Lecture II, pp.13-15, for the internal functor simplicial-set convention and functor-quasicategory closure. Each used DAG statement was opened in full, not its proof substituted for its statement.
+
+Step 1 uses the explicit Fun(K,C) definition and the cone-calculus closure statement. Its currying comparison is not a concealed comparison theorem: in every degree both sides are maps J x K x Delta^n -> C, and I write the inverse and the simplicial-operator check. The constant-diagram and inner-transformation identifications are the same factor rearrangement.
+
+Step 2 uses the dual of the cone-calculus mapping-space criterion, then the left-hand dual and coherent-diagram clause explicitly stated by parametric-universal-arrows. I checked the types: the functor to which that node is applied is Delta_T:C->Fun(T,C), not the diagram shape T; the target full subcategory is all of Fun(T,C). Objectwise colimits give the universal edges required by that node. Its parameter P need not have colimits in C, and no smallness of mapping spaces in the original universe is imposed. The result is a coherent Q_T with its actual universal cocone, not a functor chosen arbitrarily from objectwise witnesses.
+
+Step 3 uses these specified functors and units. Evaluating at j gives the exact inner colimit component from step 2. This is the existence clause, not a new lemma restating it.
+
+Step 4 is the necessary check for every L,tau. The dual parameter formula with parameter J has a preimage a for the actual curried tau. I checked its direction L_0->L and its cocone compatibility after evaluation. Initiality yields both directions and the two identity homotopies in the same cocone category; projection makes a_j an equivalence. The cone-calculus componentwise criterion gives a itself as an equivalence. The composition-spine node explicitly states inverse precomposition homotopies and coherent associativity. Thus the map induced by the actual tau is homotopic to the composite of an equivalence with Phi, and is an equivalence. It is not assumed that arbitrary pointwise universal arrows are automatically universal on diagram categories.
+
+Step 5 applies the cone-calculus criterion to the actual outer cocone. The second equivalence is precisely step 4 at G=Delta_J x, and the last is the exact simplicial currying identity proved in step 1. The displayed v-image computes the composite leg and shows that this is the specified composite cocone's universal map. I checked each source and target of the chain and the associativity used to identify it. Composition-spine supplies actual composites and homotopies; factor evaluation gives lambda_j after tau_(j,k).
+
+Step 6 uses existence of a J-colimit of the already constructed inner diagram, then uniqueness of initial objects and the explicitly stated contractibility of their core. This gives the cocone-compatible equivalence, not just equivalence of apices. Swapping the product factors is a simplicial isomorphism; all hypotheses are symmetric and no product-colimit existence is assumed before step 5 proves it.
+
+Step 7 makes the naturality clause concrete using a second application of the same parametric-universal-arrow node after product-colimit existence has been established. I checked parameter P=D=Fun(J x K,C), B=id_D and A=I in the dual formula: its preimage is a transformation Q_(J x K)->I, with the exact cocone compatibility. Both compared cocones are initial by step 5; every component is therefore an equivalence, and cone-calculus gives an equivalence of the full functor categories' objects. Whiskering the two existing units and composing them supplies s coherently; this keeps noninvertible transformations of diagrams, not only their cores.
+
+Step 8 uses the parameter restriction/evaluation clause of the universal-arrow node, the explicit degreewise factor rearrangements, and the stated coherent composition from composition-spine. I checked that e h restricts to e(hr) as the same map, so faces, degeneracies and every added simplicial parameter are retained. Empty J gives an initial outer/product colimit. Empty K gives an initial-valued J-diagram whose colimit is initial by the very same mapping-space chain; this avoids the false shortcut that any constant diagram has its constant value as colimit. I also checked singleton shapes, ordinary walking-arrow nerves, both shapes empty, and C empty when the assumptions can hold. No hidden inhabitedness occurs.
+
+B--E checks: the item remains self-contained through its single definition dependency; no new unsplit node carries proof text; no statement change or silent correction was needed; no tag is used as an uncited theorem; every non-elementary ingredient is one of the three cited existing generic tools; citations.json copies the exact statements used; all uses are in proof_deps; no new lemma restates the item. I checked the long-step rule: every non-elementary step is below 2000 characters. The only new identification, currying, is genuinely the elementary degreewise identity written in step 1. Replacing the prescribed tau by an unrelated chosen cocone would have missed a clause, so I supplied the explicit comparison and mapping-space argument in step 4. No work remains beyond the mandated remote dry run and delivery; their final results will be recorded below.

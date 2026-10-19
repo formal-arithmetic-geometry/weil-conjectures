@@ -1,0 +1,28 @@
+# Stage-1 worker report
+
+Files written: the item and two new unsplit statement nodes, `lem-weil-pbc-lft-limit-closed-fp` (09ZQ) and `lem-weil-pbc-eventually-finite` (09ZN). Neither is a Mathlib leaf. Attachments: none. WANTED: none. No statement dispute. No unfinished proof step remains in the item; the new general lemmas are deliberately statement-only.
+
+## Review by NO
+
+I read limits.tex at Tag 09YY (lemma-finite-in-finite-and-finite-presentation), Tag 09ZQ (lemma-finite-type-is-limit-finite-presentation), and Tag 09ZN (lemma-eventually-finite), with the tag mapping in tags/tags. The item exactly matches 09YY. The new 09ZQ node requires only S quasi-separated, X qcqs and local finite type; it supplies finite-presentation qcqs stages and closed transitions. The 09ZN node assumes finite transitions, local finite type at each stage, qcqs base and stages, and integral limit map; it does not assume the limit map finite. Neither node restates the finite approximation conclusion of the item.
+
+Step 1 uses the finite-iff-integral-lft statement to get both integrality and local finite type. The finite definition supplies affineness, affine permanence (3) supplies qcqs of p, and qcqs permanence (2) supplies qcqs of T. These facts verify all hypotheses of the new 09ZQ statement before applying it. Step 2 explicitly derives local finite type from the polynomial generators in a finite presentation; the closed-immersion permanence statement supplies finite transitions. The new 09ZN statement now applies with the original p as integral limit structure map. Step 3 is elementary: the written common-upper-bound cone extension proves tail cofinality directly. I removed the original colimit-only citation because it did not state inverse-limit cofinality.
+
+I checked the original node against the source and kept its statement. I corrected TeX escapes in the new statements, added all definition references, supplied the previously implicit qcqs hypotheses in step 1, and regenerated citations from the actual node statements. The nonempty index set accommodates an empty source or empty base; over an affine base the transition algebra maps are quotients, and a singleton system for an already finitely presented finite map satisfies every clause. Eventual finiteness does not need Noetherian or finite-presentation hypotheses.
+
+DAG and whole-blueprint searches used 09YY, 09ZQ, 09ZN and the source labels and concepts. The existing def-nagata-finite-type-fp-model-system defines a construction over qcqs bases rather than stating the general 09ZQ theorem over a merely quasi-separated base. The proper-closed-in-proper-fp node assumes properness and concludes proper stages, which does not provide the required general locally finite-type approximation. The integral-limit-of-finite node supplies affine rather than closed transitions. The existing descend-finite node concerns base changes of one fixed morphism, not arbitrary finite-transition systems.
+
+The Lean finite-limit declaration Scheme.exists_isFinite_of_isLimit in WeilConjectures/AlgebraicGeometry/Morphisms/Finite/Limit.lean:197 proves the closed-transition, finite-limit special case of 09ZN, so it does not attach the general new statement; the item also requires construction of the system. Mathlib search hits include finite iff integral and locally finite type (already cited via its existing leaf), affine-limit stage theorems, and local finite presentation implies local finite type; none constructs the closed finite-presentation system or proves general 09ZN. Two semantic phrasings were searched, and unavailable LeanSearch was recorded as unavailable. Every citation quote is copied from its node statement.
+
+## Second reading by NO
+
+- Item statement: checked hypothesis by hypothesis against limits.tex Tag 09YY, label `lemma-finite-in-finite-and-finite-presentation`; finite morphism, qcqs base, finite finitely presented stages, closed transitions, and inverse-limit conclusion all agree.
+- New node `lem-weil-pbc-lft-limit-closed-fp` (09ZQ): checked against Tag 09ZQ; locally finite type, qcqs source, quasi-separated base, finite-presentation qcqs stages, closed transitions, and closed projections agree. Definition references and TeX are self-contained.
+- New node `lem-weil-pbc-eventually-finite` (09ZN): checked against Tag 09ZN; qcqs base and stages, finite transitions, local finite type, integral limit map, and eventual finiteness agree. The affine consequence of finite transitions is explicitly defined.
+- Step 1: checked each cited statement against the node files; finite iff integral plus locally finite type, affine-to-qcqs permanence, qcqs permanence, and the 09ZQ hypotheses supply exactly the facts used.
+- Step 2: checked the finite-presentation-to-locally-finite-type argument and closed-immersion-to-finite implication against their cited nodes; 09ZN receives all required hypotheses, including integrality from step 1.
+- Step 3: checked the tail restriction directly from the inverse-limit universal property; the common-upper-bound construction is elementary and no uncited colimit claim remains.
+- New-node form: both nodes are statement-only, self-contained, source-tagged, TeX escaped, and carry recorded LeanFinder/Loogle/grep searches; no exact Mathlib declaration or duplicate DAG node was found.
+- Edge cases checked: empty source or base, a field base, singleton directed systems, and indices beginning at 0; all remain covered by the nonempty directed-set and qcqs hypotheses.
+
+Changes made: corrected the item node's `created.item` metadata to identify this delivery (it incorrectly named the neighboring quasifinite factorization item). No mathematical statements or proof steps required alteration.

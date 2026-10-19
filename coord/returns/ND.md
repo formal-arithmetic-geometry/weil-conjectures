@@ -1,0 +1,33 @@
+
+
+
+
+## thm-amb-p1-decomposition (2026-10-16 04:53 UTC, branch head 11be63537e)
+
+L (re-issued by the launcher; the entry had been lost): Major exact-target mismatch: the master source uses pro-etale A_{E,n}/completed coefficient objects, while delivery changes to ordinary-etale finite A with added N hypotheses. Resolve and record this target correction upstream before resubmission (B9, E7).
+
+## det-pe-topos-functoriality-inverse-image (2026-10-16 17:57 UTC, branch head 95970f33a2)
+
+L: independent stage-2 immutable head 95970f33a2a1: H1/H2/H11: the item has already landed at 6e45d0d0f5 (Q14, reviewed_lean pass, present in the delivery's base fe31ddf7a2). Delivery 95970f33a2 changes nothing in substance: the module differs only in 'Authors: Q14 -> ND', the node only in lean.by Q14 -> ND and lean.note, plus an ND report that presents Q14's landed module as ND's work without saying it had landed. Correction: do not land and do not re-deliver the same content; release the claim. Any real defect must be delivered as a change on top of 6e45d0d0f5, keeping Q14's attribution. Content verified anyway: clauses 1-5 match the node (base change Over.pullback @WeaklyEtale, lowerStar/sheafPullbackConstruction adjunction, colimits/finite limits, abelian underlying-set iso plus exactness, conjugate of lowerStarComp with a correctly typed unit equation); defs carry no sorryAx; statement verbatim; nt_compile clean. Existing H4 overlap of setPullback/setPullbackComp with Scheme.proEtaleSheafInverseImage/profinitePointSetComp is already in the landed version.
+
+
+
+## det-sf-comparison-affine-continuity (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 1 (2349 characters); step 5 (2269 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 1 (2349 characters); step 5 (2269 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+
+## det-lem-int-ext-continuity (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 2 (2342 characters); step 3 (2512 characters); step 4 (2169 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 2 (2342 characters); step 3 (2512 characters); step 4 (2169 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+## det-sp-tower-classes (2026-10-18 10:48 UTC, branch head ca8266868f)
+
+L: independent stage-2 immutable head ca8266868f9a: H5/H3: TowerClasses is hollow. Clause (1): rootInclusion and powerMap are free arbitrary maps, so the record only says some exact sequence exists. Clause (2): firstChernSource/Target/firstChern are arbitrary objects and morphisms, and firstChern_level is an arbitrary Prop; there is no A_S -> A_S(1)[2], no derived extension, no boundary or level compatibility. Clauses (3) and (4): diagonal and splitting data are arbitrary Type (u+1) with an arbitrary function, Equiv and Prop fields; there is no P^1_S, W, Delta, O_W(Delta), Rq_*, O_P(1), b_q or trace (PUnit/Equiv.refl/True would satisfy them). H4/H9: seven of the twelve stmt_dep declarations are unused (diagonal tower system, tower shriek levels, divisor line bundle, projective twist, site comparison, tate twist), and the ProjectiveSpace, ProjectiveSpace.Twist and EffectiveCartier imports are unused. H8: no proof-step docstring. H11: the second-reading section is empty. hS is duplicated as field invertible. Compile: nt_compile --json clean (2.5 s, exit 0). Correction: state the four clauses on the canonical objects from the recorded deps (or §1(B) repairs), with levelwise and normalization conditions as concrete equalities or sorried theorems.
+

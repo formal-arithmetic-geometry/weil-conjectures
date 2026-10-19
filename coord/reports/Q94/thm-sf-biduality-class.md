@@ -1,0 +1,51 @@
+# Stage-1 report: thm-sf-biduality-class
+
+## Files written
+
+- `dag/nodes/sec-six-functors/thm-sf-biduality-class.json`: the item, marked `split`; no new proof node.
+- `citations.json`: six verbatim statement quotes for the single proof step.
+- `searches.jsonl`: four searches run by `msearch.py` (LeanFinder, Loogle, grep, LeanSearch), all with no Mathlib match.
+
+## Attachments
+
+None. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the item id, blueprint tag, and the relevant duality names. `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` in `SixFunctors/Etale/Derived/Dualizing.lean` have the right finite-stage topic but their proofs are `sorry`, so they are not attachments. The package field `biduality` in `SixFunctors/Etale/Derived/Package.lean` is also sorry-backed.
+
+## WANTED
+
+WANTED: none. The current blueprint proof and all six cited DAG statements are present locally.
+
+## What was checked and changed
+
+The imported item came from the older master blueprint snapshot (order 2156). I read the current `main-20261015` statement and proof at `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-sf-biduality-class.{md,proof.md}`; the statement and one-paragraph route are unchanged, with the current order 2500. I retained the imported source provenance and added the current blueprint snapshot/update metadata. The item had no statement dependencies, so I added `def-sf-setting` for the coefficient stages and constructible categories, `def-weil-exceptional-inverse-image` for (Ra_X^!), and `def-pur-derived-internal-hom` for (R\mathcal Hom). No new node is needed: every proof ingredient is already a split node in this unit, and a whole-node/keyword search found no duplicate that should be introduced.
+
+## Review by Q94
+
+I read the chapter record `dag/chapters/sec-six-functors.json`, the unit record `dag/units/sk-prop-sf-biduality-general.json`, the current and imported blueprint files, and the source module `WeilConjectures/SixFunctors/Etale/Derived/Dualizing.lean`. The source confirms that the two finite-stage declarations are only sorry-backed and that the item therefore must be split. I also read the complete statements of each cited node before writing `citations.json`.
+
+The sole proof step follows the blueprint paragraph. `thm-fix-general-biduality` supplies the finite-stage exact contravariant anti-equivalence and the evaluation double-dual isomorphism. `lem-weil-verdier-preservation-strata` supplies preservation of the finite-Tor constructible class and the interval transformation ([a,b]\mapsto[-b-2d,-a]), with the same finite coefficient ring and separated finite-type hypotheses. `thm-coef-integral-verdier` supplies the integral anti-equivalence, reduction comparisons, reconstruction, and compatibility of the actual evaluation-defined map with finite biduality; `lem-coef-integral-residue-tor` verifies that every derived-complete integral constructible object lies in the uniform finite-Tor domain. `thm-coef-rational-verdier` supplies exact rational scalar localization, the rational anti-equivalence, and rationalized evaluation/biduality. `thm-coef-qbar-verdier` supplies the common finite-stage algebraically closed coefficient category, its anti-equivalence, and descended evaluation/biduality. Each of these six uses is represented by a verbatim quote in `citations.json`; all six ids occur in `proof_deps`.
+
+I checked the hypotheses at the coefficient boundaries: finite stages require (n\ge1) and the stated (\ell\ne p) finite-field datum; the integral result uses a single uniform interval for all reductions; rational objects are obtained by localization of an integral representative; and (\Qlb)-objects are represented at a finite coefficient field. The interval claim is read for a genuine Tor interval (so its endpoints satisfy (a\le b)); for (d=0) it reduces to ([-b,-a]), and the zero object satisfies every displayed bound. No boundary-duality or ambient pro-etale adjoint hypothesis was added. The Mathlib searches found only generic opposite-category/exactness infrastructure and no theorem matching this project-specific Verdier statement.
+
+## Statement or source issues
+
+None found. The older blueprint path/order differed from the current snapshot, but its mathematical statement and proof paragraph agree. No new node, cross-unit tool use, SGA citation, or statement correction was introduced.
+
+## Unfinished work
+
+None.
+
+## Second reading by Q94
+
+- Original step 1: checked all six cited statements, not their proofs, against the current `main-20261015` source files; the stage results are applicable, but the one paragraph omitted explicit identifications and the dualizing-unit calculation. Replaced it with the five steps below.
+- Step 1 (finite coefficients): checked `thm-fix-general-biduality`, `lem-weil-verdier-preservation-strata`, `lem-weil-finite-duality-site-comparison`, and `lem-sf-comparison-tor-amplitude` against their complete DAG statements and current blueprint statements. PASS: same separated finite-type finite-field setting, finite ring A_{E,n}, n >= 1, ell != p; the ambient etale bound applies to the stated dual through the cited dualizing-object/internal-Hom comparisons, which preserve evaluation and the Tor endpoints.
+- Step 2 (integral coefficients): checked `lem-coef-integral-residue-tor` and `thm-coef-integral-verdier` against their complete DAG statements and current blueprint statements. PASS: the bounded residue reduction gives one uniform interval, the domain is the whole derived-complete constructible category, and the theorem explicitly identifies the reduction of the actual evaluation-defined map and asserts its natural invertibility. No existence of an ambient pro-etale adjoint is inferred.
+- Step 3 (dualizing-object bounds): checked the unit in `def-sf-setting`, K-injective internal Hom in `def-pur-derived-internal-hom` against Stacks `sites-cohomology.tex`, section-internal-hom (08J7), and `prop-coef-integral-dualizing` against its DAG/current-blueprint statement. PASS: the finite calculation is written degree by degree; the integral tower is exactly the value-at-the-unit construction in `def-weil-exceptional-inverse-image`, and its reduction bound is stated by the proposition.
+- Step 4 (finite coefficient fields): checked `thm-coef-rational-verdier`, `lem-coef-rational-operations`, `def-weil-rationalization-karoubi`, and `def-weil-finite-tor-amplitude`. PASS: raw localization has integral representatives, the identification is with the displayed internal Hom and exceptional unit, evaluations agree, and field ctf equals c by definition. Representative independence follows by applying the functor to an isomorphism in that localization.
+- Step 5 (algebraically closed coefficients): checked `thm-coef-qbar-verdier`, `def-weil-algebraically-closed-coefficients`, and the field clause of `def-weil-finite-tor-amplitude`. PASS: objects and maps occur over common finite fields; the representing biduality map and its inverse compose to identities at that stage, and evaluation compatibility makes the map independent of enlargement.
+- New nodes: none. No elementary fact, duplicate, special case, or clause of the item was moved into a new node. Existing-node/keyword searches found the needed comparisons already present. The added comparisons and dualizing proposition have no dependency path back to this item; their units lie on its existing route.
+- Statement and edge cases: checked the delivered statement against current `thm-sf-biduality-class.md`, coefficient conventions against `def-sf-setting`, and dimension against `def-kun-topological-krull-dimension` and Stacks `topology.tex`, definition-Krull (0055). STATEMENT-DISPUTED: for the allowed empty scheme, dim X = -infinity, so the source endpoints -b-2 dim X and -2 dim X are not integers and do not define the specified finite Tor intervals. Repaired by stating the bounds for every integer d >= 0 with dim X <= d, exactly as the cited finite/integral bounds do. This excludes no scheme; d = 0 works for the empty scheme, whose categories have only the zero object, and d = dim X gives the source formula on nonempty finite-type schemes. The original blueprint text is retained verbatim in `blueprint_update` as source evidence.
+- Further small cases: the zero object satisfies all intervals; on Spec k with d = 0 and n = 1 the finite formula is ordinary bounded finite-dimensional duality [a,b] -> [-b,-a]; over R, R/(varpi) has reductions of Tor interval [-1,0] and derived dual of interval [0,1], in agreement with the displayed transformation. The coefficient definition excludes n = 0. No statement was corrected by dropping a scheme or an object.
+- Lean attachment audit: independently read the two finite-stage declarations in `SixFunctors/Etale/Derived/Dualizing.lean` (lines 105-124); both bodies are `sorry`. The package field is an interface, not a completed proof. No attachment is claimed and no Lean file or compiler was used.
+- Mathlib audit: independently ran LeanFinder with `derived internal Hom dualizing object duality equivalence constructible sheaves` (eight generic internal-Hom/sheaf results), grep with `Dualizing|dualizing|Verdier|Bidual` (25 reported matches, generic comments/Verdier localization), and Loogle with `"dual", "iso"` (12 order-dual results). None states this item. Actual results were appended by msearch.py to `searches.jsonl` and recorded in the item; no new Mathlib leaf.
+
+Changes: repaired the empty-scheme integer-endpoint defect without excluding the empty scheme; expanded the coefficient assembly into five checkable steps; explicitly cited the finite site/Tor comparisons, integral dualizing-unit identification, and rational internal-Hom identification; wrote the unit calculation and common-stage inverse maps; regenerated `citations.json` with one verbatim statement quote for every citation in every repaired step. The first worker's sections above are retained; their earlier 'None found' statement-issue verdict is superseded by this reading. No new nodes, no new Mathlib leaves, no SGA citation, no changes outside this sandbox.

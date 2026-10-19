@@ -1,0 +1,55 @@
+## Files written
+
+- dag/nodes/sec-six-functors/thm-pur-weil-equivariance-of-purity-and-trace.json: repaired split, 11 steps; statement and Lean record unchanged.
+- dag/nodes/sec-six-functors/lem-pur-tower-purity-ground-field-retagging.json: statement-only auxiliary comparison, unsplit; no Mathlib match.
+- citations.json: verbatim statement quotes for every node used by every step.
+
+## Attachments
+
+None. The slopmaster2 search for the exact blueprint tag found only PoincareDuality/Frobenius.lean and Frobenius/Equivariance.lean. The former explicitly says the orientation is arbitrary and equivariance of smooth trace is a hypothesis. It does not establish this item. Searches for retagging and tower purity in the specified source directories found no implementation of the new comparison. Upstream master is reference material only.
+
+## WANTED
+
+None. This repair follows the available current blueprint and the retained agent proof; no SGA source is used.
+
+## What was wrong and repair of the return
+
+The return identifies exactly the 2808-character, non-elementary Step 6. Its initial passage from retagged tower purity to the original tower purity contained a separate comparison argument, followed by an entire purity/counit/trace calculation. I retained the original theorem statement, Lean record, finite-coefficient Steps 1–5 and the realization/rationalization arguments. I replaced old Step 6 by Steps 6–9. The comparison is now the new statement-only lemma. The other previously hidden inputs already have nodes: det-sp-purity-bc-factors gives the tower purity/base-change identity; det-sp-tower-gamma gives naturality in a tower coefficient object; det-sp-tower-exceptional-bc gives the natural compact-support exchange and its counit-transpose exceptional exchange; lem-weil-pbc-adjunct-counit-identity gives the counit equation. They are cited where applied. The remaining substitutions are short elementary computations displayed in full. Old Steps 7–8 are now 10–11 with only their numerical cross-references updated. Every non-elementary step is below 2000 characters.
+
+The original repair had already clarified the semilinear typing of E in the statement (recorded in split_report.statement_disputed). That inherited statement is kept verbatim in this repair. No further statement dispute or weakening is introduced.
+
+## Not duplicates
+
+lem-pur-tower-purity-ground-field-retagging vs lem-pur-orientation-ground-field-retagging: the existing statement identifies only the diagonal orientation at the coefficient unit; the new statement identifies the full coefficient-dependent tower purity transformation, including the tensor-map adjoint transpose, for every constructible finite-Tor tower.
+
+lem-pur-tower-purity-ground-field-retagging vs det-sp-tower-gamma: the existing statement constructs the natural purity map for a fixed k-morphism; it does not compare that construction after changing the structural k-maps.
+
+lem-pur-tower-purity-ground-field-retagging vs det-sp-purity-bc-factors: the latter assumes a Cartesian square of k-morphisms and compares purity under pullback of sites; the new statement compares two structural k-tags on identical underlying schemes, including the chosen adjunction identifications. It is needed before applying the k-linear square theorem to the semilinear setting.
+
+Whole-DAG searches for retagging, structural field maps, tower purity and tensor maps, and blueprint_refs searches for retag, tower, tensor map and purity comparison were read. No blueprint node states this full retagging comparison. The existing orientation lemma was reused rather than recreated. The new node has no Stacks tag shared with another node. It is neither a Frobenius-equivariance clause nor a new version of the original theorem: it has no Weil datum, exchange square, or trace claim.
+
+## Mathlib searches
+
+searches.jsonl records the five searches actually made for lem-pur-tower-purity-ground-field-retagging, including the second semantic phrasing. The first LeanFinder returned scheme smoothness, relative dimension and base-change stability declarations; none concerns derived purity. The second returned ordinary sheaf pushforward/restriction counit formulas; none states structural-field retagging for tower purity. Loogle's purity string returned compiler LCNF purity declarations only. The Mathlib grep for purity|retag|towerGamma|smoothTrace returned no hits. LeanSearch returned an explicit rate-limit response and is recorded unavailable. No unavailable service is recorded as absence. Existing item searches are retained exactly as inherited.
+
+## Review by Q09
+
+I read the item proof in the main-20261015 blueprint, the sk-thm-sf-package unit and sec-six-functors chapter records, and the tower-geometric gamma and purity-base-change factors/tower texts. The blueprint item proves purity, counit and trace in that order. Its later scheme-Frobenius and broader compatibility clauses are separate DAG nodes; this split retains that separation and its existing coefficient transport. The new lemma makes explicit the retagging comparison used by the retained argument; it does not change the lecture-notes diagonal route.
+
+For Step 1 I checked the statement of def-pur-scheme-geometric-frobenius: it asserts Cartesianity only for the geometric-Galois isomorphism square. thm-cbc-finite-level-proetale accepts arbitrary base change and an etale-origin bounded-below input; lem-sf-proetale-constructible-origin supplies the bounded constructible witnesses. lem-weil-isomorphism-derived-pullback handles both finite and completed integral coefficients, and the roots-of-unity comparison in def-weil-frobenius-coefficient-twists fixes b's twist without an added scalar. The horizontal isomorphisms meet their hypotheses.
+
+For Step 2 I checked that det-sp-purity-bc-factors is explicitly k-linear, includes both finite coefficients and ordinary derived coefficient towers, defines e by the inverse compact-support exchange/counit transpose, and states the orientation and tensor-factor identities. The structural retag makes the semilinear horizontal maps k-linear, while the underlying compactification and sites are unchanged. lem-trf-adjoint-mate supplies the unique counit-preserving right-adjoint comparison. lem-pur-orientation-ground-field-retagging really gives the orientation equality, including a derived-tower equality; def-pur-smooth-purity-map specifies the tensor transpose. pur9-cs-def-bc defines precisely the finite transpose, not a different exceptional map. Cancellation uses the purity isomorphism already fixed in the statement.
+
+For Step 3, prop-pur-smooth-purity-naturality-cover provides coefficient-object naturality at the finite datum PK -> K. def-pur-tate-datum supplies the two composites used. Steps 4–5 are the written functor/naturality equations: lem-weil-pbc-adjunct-counit-identity applies to the actual transpose e, and def-pur-compact-support-transport is F(phi)B with this direction of B. def-pur-smooth-trace states the coefficient-valued composite epsilon F(gamma), so it covers arbitrary K rather than only the coefficient unit. These steps use no additional geometric lemma.
+
+For new Step 6 the tower gluing statement provides the actual adjunction in the derived tower category, tower gamma supplies H -> G and its naturality, and tower exceptional base change supplies the natural isomorphisms B and e with their transpose normalization and reduction compatibility. The factors statement covers towers without normalization of the input. The new retagging lemma supplies the full identification before that factors statement is applied. The source-retagged schemes remain separated finite-type k-schemes; f retains smoothness and relative dimension; ell is invertible. No equality of derived tower maps is detected merely by evaluating them. Step 7 substitutes coefficient naturality from tower gamma at phi, the normalized compatible datum required by def-pur-tate-datum. Step 8 uses the adjunct-counit identity with the very transpose in tower exceptional base change, then counit naturality and the transport formula; all domains are FGPK, FQGK and PK as appropriate. Step 9 uses naturality of B at gamma_K and Step 7, then postcomposes with the counit and substitutes Step 8. These last three short equations are elementary consequences of the cited statements, and each relevant cited statement is copied in citations.json.
+
+For Step 10, det-sp-normalized-equivalence states the derived-complete unit independently of its additionally Noetherian constructible-equivalence clause. det-sp-integral-adjunction-bijection identifies the realized purity, unit and counit; det-sp-integral-direct-image-tower identifies compact support with its realized tower. The two inverse-image lemmas give the exact reindexing equivalence and the completed ring comparison. The retained K-injective argument is valid for this equivalence: its inverse preserves acyclic complexes, so it preserves K-injectivity, and ordinary limits commute with it. This justifies applying total derived limit to actual equations. Step 11 applies functors to equations: the strict datum definition supplies the lattice/common finite field, thm-pur-rational-and-qbar-purity supplies the rationalized purity, and prop-pur-rational-purity-trace-coherence supplies trace/scalar compatibility on their specified domains. def-exchange-projection specifies the transported maps and their common-stage convention.
+
+I checked the new lemma's hypotheses against tower gamma and gluing: k is the fixed finite-field closure; ell differs from p; E is finite; X,Y are separated finite-type; f is smooth separated pure dimension d; and the input has common cohomological and Tor bounds. It intentionally does not require normalization, matching those statements. Its proof to be split later is a comparison of constructions: orientation retagging is the existing lemma, while the tensor factor is the transpose of the identical projection/counit map under the identified adjunctions. This is the independent comparison the return asked to expose. The new node contains only that precise statement, not a proof, and all its notions are introduced or cited. Small cases sigma = identity, f = identity with d = 0, the zero tower, an empty source, and a non-normalized bounded tower preserve the claimed equality. No inverse-limit faithfulness or finite-level equality argument is part of its assertion.
+
+I also checked proof_deps against the union of uses, quotes against statements, and all long steps. The other original steps are retained; no new non-elementary step exceeds 2000 characters. The return is repaired by a substantive new comparison interface and four short replacement steps, not by shortening prose or changing elementary flags on the old argument.
+
+## Unfinished work
+
+No stage-1 argument remains hidden in the returned step. The new auxiliary lemma is intentionally unsplit and enters the ordinary queue. Its formal statement and proof belong to later stages; this delivery writes no Lean and runs no compiler.

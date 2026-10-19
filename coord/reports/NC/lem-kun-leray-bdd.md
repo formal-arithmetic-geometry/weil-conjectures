@@ -1,0 +1,24 @@
+1. Files written: item `lem-kun-leray-bdd`; new node `lem-kun-bdd-derived-composition` (statement, closed project declaration); new node `def-kun-lowerstar-global-sections-iso` (definition, closed project declaration). Mathlib verdicts: no match for either (searches recorded).
+
+2. Attachments: `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'` belongs to `lem-kun-bdd-derived-composition`. `AlgebraicGeometry.Etale.lowerStarCompGlobalSectionsIso` belongs to `def-kun-lowerstar-global-sections-iso`.
+
+3. WANTED: none.
+
+4. The returned split omitted the coefficient-ring and abelian/Grothendieck/ enough-injectives hypotheses needed to apply the derived-composition and global-sections declarations, and Step 2 used derived-category comparisons without citing the relevant definitions. I repaired the two dependency statements, made the coefficient ring explicit in the proof route (specializing to ℤ in the item), and added citations for direct image, global sections, module sheaves, enough injectives, derived categories, and derived direct image. I also removed self-containing `blueprint.from.via` entries and corrected the certification language. Identity morphisms and zero objects reduce to identity isomorphisms.
+
+## Review by NC
+
+I read the archived master declarations and their docstrings: `rightDerivedFunctorPlusCompIso'` in `CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusComp.lean` (lines 238–241), and `lowerStarCompGlobalSectionsIso` in `SixFunctors/Etale/UpperLowerStar/GlobalSections.lean` (lines 42–46). The first requires three abelian categories with enough injectives, additive functors, and preservation of injectives; the second requires a category with abelian, Grothendieck-abelian, and sheafification structures. I reflected these hypotheses verbatim in the new node statements.
+
+Step 1 now cites the closed composition node, direct-image definition, global-sections definition, module-sheaf enough-injectives lemma, and direct-image-preserves-injectives lemma; each cited statement supplies exactly the functor, category, or preservation hypothesis used. Step 2 cites the underived global-sections/direct-image isomorphism, the bounded/unbounded comparison, the derived-category definition, and derived-direct-image definition; these state the identifications used in the conclusion. I checked the coefficient specialization Λ = ℤ against the displayed item and verified the identity and zero-object edge cases. The citation quotes were regenerated from the repaired node statements, and every created node's blueprint reference now has an empty `via` list because the item itself is the blueprint node.
+
+## Second reading by NC
+
+- Item statement: compared with imported blueprint statement; unchanged and valid for zero, empty scheme, degree-zero and degree-one inputs.
+- Step 1: checked against enough-injectives, Dplus injective representatives, preservation of injectives, and direct-image definition; all hypotheses hold, and the same lower bound is retained.
+- Step 2: checked against etale cohomology, sections/direct-image definitions and fibre-product universal property; both sides use K-injective complexes and the comparison is a chain isomorphism.
+- Step 3: checked against K-injective Hom/localization bijection, direct-image morphism computation and bounded/unbounded comparison; naturality, choice independence, identities and compositions are written explicitly.
+- Removed `lem-kun-bdd-derived-composition`: checked against PlusComp.lean lines 147--156 and 238--241; a valid general theorem, but unnecessary because existing injective-representative nodes give this item's proof directly.
+- Removed `def-kun-lowerstar-global-sections-iso`: checked against GlobalSections.lean lines 35--46; incorrectly described A-valued sheaves as A-modules, and the required abelian-sheaf specialization follows in three lines from direct image, sections and the fibre-product definition.
+
+Changes: removed both new nodes; replaced the abstract composition route with explicit common injective models, using existing nodes only. Removed the unsupported coefficient-category generalization. Expanded all transport and functoriality claims and regenerated verbatim citation quotes. Original Review by NC retained above as historical review; its attachment suggestions are superseded and no new declaration attachments are delivered. Independent searches for composition of derived additive functors and global-sections evaluation returned no composition match (Mathlib rightDerived_comp concerns natural transformations), with actual results recorded in searches.jsonl. New-node statement audits and form checks are vacuous after deletion. The existing generic enough-injectives, injective preservation/representative and K-injective Hom lemmas are tools: the unit has no replacements for these infrastructure statements, and this does not replace the unit's mathematical route.

@@ -1,0 +1,39 @@
+# Stage-1 report: lem-weil-pbc-ringed-projection-mate-exact
+
+## Files written
+
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-ringed-projection-mate-exact.json` — statement node, split; no new Mathlib leaf.
+- `citations.json` — ten verbatim step citations.
+
+## Attachments
+
+None. I searched both read-only source trees for the item id and the projection-mate terminology; no declaration states this exact generic ringed-topos result.
+
+## WANTED:
+
+None. The Stacks source `literature/stacks-project/sites-cohomology.tex` is present for Tags 06YU, 07A4, 07A6 and 0B56.
+
+## What was wrong or incomplete in the imported material
+
+The imported item had no proof steps, no proof dependencies, and no proof origin despite asserting the full K-flat/K-injective construction, exactness, shift compatibility, triangle compatibility, naturality, and the tensor-unit identity. I supplied four steps following the detailed blueprint proof. I found no statement error and did not alter any hypothesis or conclusion. No child node was introduced: the required ingredients are already stated by the cited resolution, derived-adjunction, tensor, triangulated, and right-derived-functor nodes.
+
+## What I could not finish
+
+Nothing remains for stage 1. No Lean source was written and no compiler, Lake, or build command was run.
+
+## Review by NE
+
+I read the item and its blueprint ancestor `literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md`, together with the Stacks sites-cohomology source at Tags 06YU, 07A4, 07A6 and 0B56. I checked the item against the generic module-sheaf, derived-category, K-flat, tensor-totalization, K-injective, and derived-adjunction nodes. Step 1 cites the K-flat resolution statement, the small-site Grothendieck/K-injective existence statement, and the derived-adjunction statement; those statements supply exactly the resolutions and adjunction used. Step 2 uses the tensor-complex definition and K-flat resolution statement for the signed total-complex shuffle, naturality, and shift comparison. Step 3 cites the everywhere-defined left-derived exactness and right-derived triangulatedness statements, plus the tensor-complex functoriality, to justify exactness and the shift structures of both functors. Step 4 cites the derived-adjunction Hom bijection, right-derived shift/triangle compatibility, and the triangulated localization statement; the mate calculation gives naturality, the shift equation, the connecting square, and the unit case. I verified the small-site hypothesis appears where K-injectives are invoked, and checked the unit specialization on the zero and tensor-unit cases. I also ran all required Mathlib search commands for the item (LeanFinder, Loogle, grep, and LeanSearch); the first returned only unrelated generic Tor/adjunction declarations, Loogle and grep returned no match, and LeanSearch was unavailable, all recorded in the item’s existing search log.
+
+## Second reading by NE
+
+- Item statement: compared every hypothesis and clause with sites-cohomology.tex, Tags 06YU (`definition-derived-tor`), 06YY (`lemma-derived-base-change`), 07A4 (`lemma-pullback-tensor-product`), 07A6 (`lemma-adjoint`), 0B56 (`equation-projection-formula-map`), and derived.tex Tag 0A8D (`lemma-adjoint-is-exact`); valid for arbitrary ring maps on small ringed topoi, with no flatness/properness/boundedness hypothesis. The shift/connecting-square clauses expand the source construction rather than quote an explicit Stacks assertion. Statement retained.
+- Step 1: opened all seven cited statements; the existing generic ringed-topos derived-pullback node supplies quasi-isomorphism preservation and exactness, the site tensor-descent node supplies the bifunctor, the module-adjunction node supplies the underived adjunction, and the other four supply resolutions, right-derived exactness and derived adjunction. Repaired C1/C4: resolution existence and tensor definitions alone did not supply those facts. Verified the directions and the substitution of both module categories.
+- Step 2: checked the cited generic tensor-pullback and underived tensor-pullback statements against Tag 07A4 and sites-modules.tex `lemma-tensor-product-pullback`; checked each balanced generator formula and the signs against the tensor-complex definition. Repaired the unsupported shuffle assertion: the actual map is the balanced extension-of-scalars comparison, with second-factor shift sign $(-1)^{np}$ and first-factor comparison identity. The site-descent statement now justifies checking naturality and identities on representatives. The unit multiplication and inverse are written out.
+- Step 3: checked all six cited statements and both cone differentials, including the connecting map convention $-p$; the cone comparison is identity on the unshifted summand and $(-1)^p$ on the shifted summand. Repaired the unexplained mapping-cone assertion by computing the off-diagonal entry and the connecting square. No flatness of the ring map or exactness of underived pullback is assumed. Exactness follows on derived objects from the cone definition, K-flatness and the two cited derived-functor results.
+- Step 4: checked the derived-adjunction statement, the generic Mathlib leaf `lem-weil-pbc-adjunction-shift-compatibility-unique`, and the K-injective-shift statement against derived.tex Tags 09T5/0DVC, 0A8D and 070H. Repaired E5: wrote the unit formula for the mate, its shift calculation, the equation for naturality in E, and the connecting square; verified every composition's domain/codomain. Canonical shift compatibility is justified by simultaneous reindexing of the derived-resolution systems and termwise adjunction, not inferred just from exactness of the functors. The tensor-unit case is the explicit adjunction triangle identity.
+- New nodes: none; therefore no B1–B7 or duplicate-node correction is needed. Searches by Tags 07A4, 06YY, 0G7E and the words K-flat/pullback/adjunction located the existing generic site nodes. Scheme-only tensor and shift nodes were opened and rejected because they impose scheme, properness or Noetherian hypotheses absent here.
+- Edge cases: for E=0 or P=0 all maps are zero maps between zero objects; for the unit the mate is identity as calculated; for the identity map over a field all balanced comparisons are ordinary tensor identities. For a nonflat field quotient A→A/I, the resolution model retains derived Tor and the proof never replaces an arbitrary complex by its underived pullback. On the empty site/topos the module category is zero and all formulas still hold. Shift n=0 has sign 1, n=1 has the cone sign above, and negative n obeys the same parity formula.
+- Independent Mathlib searches: ran msearch.py LeanFinder with “A tensor functor commutes with suspension and the counit of a derived adjunction is compatible with the translation functor”, Loogle with `"Adjunction", "CommShift"`, and grep with `tensor.*[Cc]ommShift|[Cc]ounit.*[Cc]ommShift`. Results are preserved in searches.jsonl: 8, 12 and 5 hits respectively. They concern abstract adjunction shifts, already represented by the existing Mathlib leaf cited in step 4; none states the full generic ringed-topos tensor construction of the item.
+
+Changes: replaced missing mathematical citations with existing site-level nodes; expanded the tensor generator, shift, cone, mate and connecting-square calculations; regenerated citations.json with one complete verbatim statement per actual citation; removed obsolete proof dependencies; corrected the newly added derived-pullback source tag to 06YY; marked the added compatibility calculations as agent expansions in proof_origin. Retained the original statement and the first worker's report/review sections. No new node, Mathlib leaf, Lean edit or compile was produced.

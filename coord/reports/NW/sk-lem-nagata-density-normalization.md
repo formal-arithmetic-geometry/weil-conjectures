@@ -1,0 +1,37 @@
+1. Files written:
+
+- `dag/nodes/sec-proetale-coefficients/sk-lem-nagata-density-normalization.json` — existing statement, repaired split; no new node and no Mathlib leaf.
+
+2. Attachments: none.
+
+3. WANTED: none.
+
+4. What was wrong in the imported item: its two proof steps had empty `uses`, null `elementary` flags, and no proof dependencies, so they did not identify the actual lemmas carrying either displayed isomorphism. I checked the item against the current blueprint section and the unit record. The source proof has two paragraphs. For step 1 I read `det-nagata-density-normalization-sheaves.json`; its statement applies to every unbounded complex and explicitly states the identification (j_!K\simeq i_*j_{Z,!}K) in the required derived category. That helper itself is in the same unit and incorporates the Noetherian schematic-closure setup. For step 2 I read `det-nagata-density-normalization-pushforward.json`; its statement is exactly the second displayed isomorphism (Rp_*j_!K\simeq R(p\circ i)_*j_{Z,!}K). The final sentence is the defining compact-support expression after these identifications. I also checked `sk-def-nagata-sketch-data.json` and `sk-lem-nagata-sketch-closure.json` for the compactification and closure hypotheses, and searched the whole DAG/blueprint for duplicates before deciding that no new node was justified. The Mathlib searches found only unrelated scheme-image/proper-composition declarations, so this item is not a Mathlib leaf.
+
+5. What I could not finish: nothing.
+
+## Review by NW
+
+I inspected the current blueprint proof, the unit statement, and every node cited by the repaired steps. Step 1 cites only `det-nagata-density-normalization-sheaves`, whose statement supplies the exact unbounded-complex isomorphism and therefore says precisely what the step takes. Step 2 cites only `det-nagata-density-normalization-pushforward`, whose statement supplies the proper direct-image isomorphism for the same coefficient and compactification data. The Noetherian and closure hypotheses are inherited through the setup used by the first helper; I verified those hypotheses in its statement and in `sk-def-nagata-sketch-data`/`sk-lem-nagata-sketch-closure`. I corrected the imported empty dependency lists, null elementary markers, proof dependency union, blueprint `same_as`, and split report. No statement was weakened or changed, and no unsupported Mathlib claim was introduced.
+
+
+## Second reading by NW
+
+- Step 1: checked the current blueprint first proof paragraph and the full statements of det-nagata-density-normalization-setup and det-nagata-density-normalization-sheaves; PASS after adding the missing setup citation and using precisely the helper's unbounded derived-category conclusion.
+- Step 2: checked the current blueprint second proof paragraph, det-nagata-density-normalization-pushforward, setup clauses (1) and (4), and sk-def-nagata-sketch-data; PASS after writing the factorization equality and verifying that the replacement is a compactification.
+- New nodes: none; there is no new node requiring a source, definition, elementary-fact, duplicate, or Mathlib-leaf repair. Existing same-unit helpers are genuine imported blueprint nodes, not new copies of the item's clauses.
+- Item statement: compared every hypothesis and both displayed conclusions with main-20261015/_section.md and its unit record; PASS, unchanged. The Noetherian hypothesis supplies the quasi-compact complement in the setup; the comparison helpers require no extra coefficient or boundedness hypothesis.
+- Edge cases: K=0 gives zero on both sides; X empty gives Z empty and both expressions zero; a field with j the identity gives Z=X and identity comparisons; a disconnected compactification with X one open-and-closed component gives extension by zero on the other component. No discrepancy found.
+- Setup node: checked its statement against its blueprint file, the two compactification definitions (which have the identical quasi-compact-open/proper conditions), and Stacks 01R8 (morphisms-lemma-quasi-compact-scheme-theoretic-image) and 01RG (morphisms-lemma-quasi-compact-immersion); PASS for the hypotheses used here. These are existing dependencies, not delivered new nodes.
+- Sheaf and pushforward nodes: compared their full statements with their current blueprint files; PASS as exact matches for the two identifications taken by the item. Their imported proofs are separate stage-1 items.
+- Searches: independently ran msearch.py with broader module-sheaf/closed-embedding vocabulary, a valid Loogle extensionByZero query, and an AlgebraicGeometry grep. The semantic hits concern structure-sheaf modules or immersions; grep finds pro-etale site definitions; none states this condensed-coefficient unbounded derived comparison. Actual results remain in searches.jsonl. The earlier unknown-identifier Loogle response is now marked invalid query, not no match.
+- Finished-Lean check: searched slopmaster2 and the exact archived master read-only by the item's/helper IDs and searched slopmaster2 compactification and closed-immersion APIs by concept; no declaration stating the complete item was found. No Lean was edited or compiled.
+- Unit realization: filled statement and both proof-paragraph carriers with the item, leaving the unit statement, route, and chapter unchanged.
+- Citation form: regenerated one verbatim statement quote for each of the five step citations; PASS. No SGA source is used.
+
+Changes: cited the previously uncited setup; removed the claim that the sheaf helper's statement explicitly supplies exactness (it supplies the derived isomorphism); wrote why the closure is itself a compactification; corrected the invalid Loogle verdict and recorded independent searches; filled the missing unit realization; synchronized citations. The first worker's sections above are retained as the historical first reading; this section describes the repaired delivery.
+
+Inherited reference issue for maintenance: the blueprint proof and existing helpers name sk-prop-sf-open-closed-triangle, whose node is absent in this shared snapshot. I did not introduce this dangling reference into the item's dependencies or modify those other items. The existing finite-coefficient etale recollement node lem-cbc-open-closed-recollement does not state the required arbitrary-condensed-coefficient pro-etale result and was not substituted. The item's two comparisons instead cite the existing same-unit statements, as stage-1 splitting permits.
+
+
+Dry-run repair: the first preflight found that filling the unit realization exposed the inherited absence of an edge to its open-closed unit. Step 1 now also cites det-sf-open-closed-pullback-limits, clause (2), from that exact blueprint unit. I checked its statement against main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/det-sf-open-closed-pullback-limits.md: it allows any sheaf of rings, and the setup supplies qcqs and the quasi-compact open complement. It proves exactness of closed restriction, one of the source's immersion operations; the step writes why this computes restriction degreewise for unbounded complexes. PASS. This avoids the finite-constant-coefficient restriction of the other open-closed nodes. The first sheaf comparison and second pushforward comparison still come from the existing same-unit statements. This is an existing node, so the delivery still has zero new nodes and zero Mathlib leaves. There are now six verbatim citation records. No maintainer tool_uses field was written.

@@ -1,0 +1,45 @@
+## Files written
+- dag/nodes/sec-smooth-purity/def-sc-etale-torsion-cd.json: definition, split, no Mathlib match.
+- citations.json: empty, because a definition has no proof steps.
+No new nodes or Mathlib leaves. No unit record changed: this definition is not the unit's key statement.
+
+## Attachments
+None. Searches by the item id, exact blueprint tag, and torsion/cohomological-dimension terminology in WeilConjectures found no declaration defining this predicate. Sites/CohomologicalDimension.lean:44-51 is a sorry theorem about a finite-type bound, not an attachment. Its hypothesis uses local-section F.IsTorsion and Ext-defined Sheaf.H; it is not silently substituted for the node's local torsion and ordinary derived sections. The second theorem depends on the sorry theorem. The upstream master remains reference material only.
+
+## WANTED
+None. The defining master blueprint text and all defining dependency statements are present. No new sourced lemma is needed.
+
+## Issues and changes
+The imported definition is mathematically sound, but did not explicitly cite its scheme and Spec notions and did not mark its sheaf dependency inline. Added def-pc-scheme and def-weil-affine-spectrum, and explicit existing sheaf/cohomology references. The added sentence explains the already-defined torsion meaning; it changes no hypothesis or vanishing quantifier. No STATEMENT-DISPUTED issue or source error was found. The blueprint source is literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-sc-etale-torsion-cd.md, order 1545. Source remains that definition, rather than a vanishing theorem assigned an unrelated Stacks tag.
+
+## Unfinished work
+None within this one-level definition split. Its existing dependencies retain their own states.
+
+## Not duplicates
+No new nodes. Whole-blueprint searches for 'torsion cohomological dimension' and 'cd}_{' found the item, affine/finite-type/separably-closed vanishing statements and relative/class-restricted FullCD nodes. The latter constrain a pushforward and coefficient class, whereas this definition constrains global sections for every torsion abelian sheaf on one scheme. None is a duplicate definition.
+
+## Review by NL
+I read the master blueprint definition, the chapter sec-smooth-purity record and unit sk-prop-sf-cbc record. The item introduces notation only and has no proof to split; in particular it does not prove either a finite-dimensional bound or separably-closed acyclicity. The compact-support base-change unit's theorem and route are untouched. I checked every clause against the source: arbitrary scheme, nonnegative integral c, all torsion abelian etale sheaves, all q greater than c, ordinary derived sections, and the field shorthand on Spec K.
+
+I opened the statements of all four statement dependencies. def-pc-scheme gives schemes; def-weil-affine-spectrum explicitly gives Spec of a commutative ring and its one-point field case. def-weil-pbc-etale-sheaves defines the small-etale abelian sheaf category and torsion by an etale cover killing each local section with possibly varying positive integers. def-weil-pbc-etale-cohomology defines H^q using global sections of a K-injective resolution of F in degree zero. These statements supply exactly what is used; there are no proof-step citations, so citations.json is empty and proof_deps is empty. I also read the narrower def-weil-pbc-torsion-etale-sheaf: reusing the original local-section definition avoids needing its equivalence theorem merely to spell the imported definition.
+
+For edge cases, c=0 excludes degree zero, so it imposes no erroneous vanishing of H^0; q>c with c nonnegative only requests already-defined positive degrees. The zero sheaf is allowed. The notation is a predicate for arbitrary schemes, not a claim that every scheme has a finite bound. On a field the second clause merely substitutes its spectrum, without requiring algebraic or separable closure. I checked that torsion does not acquire a global exponent or a prime invertibility condition. Thus no additional noetherian, finite-type, dimension, or coefficient hypothesis was introduced.
+
+For delivery-errors B-E: no new self-contained lemma, elementary step, duplicate, Mathlib leaf, relabelled clause or hidden proof fact was introduced. Mathlib searches were run through msearch.py; their per-query result records were corrected in the second reading below. I read the returned Ext-dimension definitions in Abelian/Injective/Dimension.lean and Abelian/Projective/Dimension.lean: they quantify over all Ext inputs rather than torsion sheaves. I read DerivedCategory/TStructure.lean:107 for isLE_iff, which is a bound on one derived object, not this scheme predicate. SheafCohomology/Basic.lean defines generic Ext cohomology, not torsion dimension. A second semantic phrasing and narrower grep still give no match. LeanSearch returned Internal Server Error and is recorded unavailable. I corrected only the missing explicit notion references; all imported metadata was preserved, blueprint.same_as is now the searched empty list, and no outside-unit proof tool is used.
+
+## Second reading by NL
+- Item statement: checked each clause against master blueprint def-sc-etale-torsion-cd.md (order 1545): arbitrary scheme, nonnegative integer c, every torsion abelian etale sheaf, every q>c, ordinary derived sections, and field abbreviation via Spec; PASS. Stacks etale-cohomology.tex, definition-cd (Tag 0F0Q), has the same vanishing quantifier but assumes quasi-compact/quasi-separated X when defining a numerical dimension. This item defines only a bound predicate for arbitrary X, exactly as its blueprint does; no Stacks hypothesis is silently imported.
+- Proof steps: none, because this item is a definition; proof=[], proof_deps=[], citations.json=[] are correct. No hidden theorem, clause moved to another node, or unsupported elementary step; PASS (C1-C4, D1-D5, E1-E5).
+- New nodes: none; B1-B7, duplicate and new-leaf checks are vacuous. Independent whole-DAG torsion-dimension searches found this predicate and vanishing theorems, and def-weil-full-cohomological-dimension was opened: its proper relative pro-etale pushforward, finite coefficient, and base-change quantifiers differ; PASS.
+- Dependency def-pc-scheme: opened its statement and Schemes definition-scheme (Tag 01IJ); supplies the scheme notion used, with no separatedness hypothesis; PASS.
+- Dependency def-weil-affine-spectrum: opened its statement; supplies Spec of any field, with one point and residue field K; no separably closed restriction; PASS.
+- Dependency def-weil-pbc-etale-sheaves: opened its entire statement; its covering/local-section torsion definition is precisely the item's added explanation, without a global annihilator or invertibility condition; PASS.
+- Dependency def-weil-pbc-etale-cohomology: opened its statement; H^q for q>=0 is the cohomology of termwise global sections of a K-injective resolution of F in degree zero. Since q>c>=0, every requested degree is defined; PASS.
+- Small cases: c=0 asks only for positive-degree vanishing, c=1 only degrees at least two; zero sheaf is allowed and has zero derived sections; the empty scheme has only the zero abelian sheaf since the empty cover forces its section group to vanish; a field merely substitutes Spec K, without asserting a finite bound for all fields; PASS. No statement dispute.
+- Lean attachment check: read AlgebraicGeometry/Sites/CohomologicalDimension.lean:44-51,63-75 and the IsTorsion definition in WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:73-77. The first is a sorry vanishing theorem, not a predicate declaration; the second theorem depends on it. IsTorsion is local-section torsion, not sectionwise torsion. No attachment is justified.
+- Independent Mathlib searches: ran a new general right-derived-sections phrasing with LeanFinder and a cohomologicalDimension/torsion-dimension grep through msearch.py. Read Functor.rightDerived at RightDerived.lean:111-113, injective-object vanishing at 153-159, Sheaf.H at SheafCohomology/Basic.lean:57-59, and HasInjectiveDimensionLT at Injective/Dimension.lean:45-48,84-88. These are generic constructions or an Ext bound on one object, not the required bound for all torsion sheaves; no leaf.
+Changes:
+- Corrected all six original mathlib_searches results against the actual searches.jsonl entries: grep had zero hits, LeanSearch was unavailable, the first LeanFinder had eight Ext/cotangent hits, Loogle returned zero hits successfully, the narrower grep had eleven sheaf-cohomology hits, and the second LeanFinder had eight Ext/derived-category hits. The original records had attributed results to the wrong searches (B7).
+- Added the two independently run search records with their actual hit counts and inspected-candidate verdicts.
+- Corrected the first reader's sectionwise description of source F.IsTorsion and the claim that the original per-query results were verbatim. Kept the first worker's sections, including Review by NL, in place.
+- Mathematical statement, dependencies, empty proof, and empty citations needed no repair.

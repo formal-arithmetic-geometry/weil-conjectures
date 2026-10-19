@@ -1,0 +1,34 @@
+1. Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-module-derived-restriction-resolution.json`: statement unchanged, five-step split, no Mathlib match for the entire formula.
+- `citations.json`: literal extracts from the statement of each node used by each step.
+
+2. Attachments: none. Searches by the exact blueprint tag, derived restriction/resolution names, and section/unit/Leray concepts in `WeilConjectures/` found no project declaration with the full module-valued statement. The archived upstream source was treated only as reference material.
+
+3. WANTED: none.
+
+4. Corrections and source audit: The original item had no proof. I retained its statement and provenance, and supplied the actual unit/adjunct calculation. In self-review I removed my undelivered draft auxiliary `lem-trf-module-derived-unit-sections`: it was too close to the unit clause of the item (delivery-errors D1/D2). Its mathematics is now written out in steps 3 and 4, with general categorical dependencies. The earlier passing dry run therefore did not suffice; the final split is checked again. I also corrected literal citation extracts and a guessed resolution tag. No definitions or coefficient categories were changed. The existing finite-pushforward result depends on this item and is not used, avoiding a cycle. The existing abelian-sheaf unit/Leray node is not used as though it were module-valued.
+
+5. Unfinished work: none for this one-level split. No Lean was written or compiled. No new nodes are delivered.
+
+## Not duplicates
+
+No new nodes. Whole-blueprint searches for derived restriction, injective sections, and Leray found no blueprint node stating the full arbitrary-ring module identity. Existing `lem-weil-pbc-kinjective-unit-leray` has abelian coefficients; `lem-trf-proetale-unit-leray-chain-formula` has pro-etale finite coefficients; the finite-pushforward module node has additional finite-morphism and base-change data and already depends on the present item. None supplies the statement as written.
+
+## Review by Q33
+
+I read the chapter and `sk-i-curve-zero` unit, the ancestral `lem-trf-local-term-locality` and the finite-pushforward parent, the current blueprint's curve-zero route, and the source paragraphs of Stacks sites-cohomology Tag 08J6 (remark-before-Leray), cohomology Tags 01F8/01F9/01FB (functoriality and its explicit arrow), derived Tags 013K, 070J, 070I, 070Y, 08BJ, 05TI and 015M (resolutions, Hom bijections, right derived functors and their composition), and injectives Tag 01DU (module sheaves have enough injectives). This follows the permitted Stacks resolution route; no SGA input is used.
+
+For step 1 I opened the module-enough-injectives, exact module inverse-image, injective-preserving right-adjoint, bounded-below injective representative, and right-derived-plus statements. They apply to the actual two constant-ring module categories, so `u_*J` is injective term by term. The K-injective resolution existence statement and generic derived-map computation justify use of the same models and comparisons for unbounded module-valued sections. The corresponding Stacks statements are module-category results or generic abelian-category results, with all existence hypotheses present.
+
+For step 2 I checked the full termwise-adjunction statement: its chain-level unit and formula `[f]` maps to `[u(f) composed with eta]` give the map `t` for this particular `a`. The module direct-image definition gives its component at the terminal object; evaluating it yields `Gamma(t)=Gamma(a) e`. This is an equality of module-linear chain maps, before localization.
+
+For step 3 I read the exact-functor factorization, K-injective Hom bijection, termwise-adjunction, and adjunction-of-natural-bijection statements. Their displayed Hom bijections give exactly the three isomorphisms in the step, and the latter node explicitly states that an adjunction transpose is the derived functor applied to the morphism followed by its unit. Both K-injective targets required by the localization bijections were established in step 1. I checked naturality in both variables through the same localization/lifting maps; this identifies the canonical derived adjunct of `Q(a)` with `delta_J Q(t)`.
+
+For step 4 I checked the direct-image definition's module clause and the generic resolution comparison/uniqueness statements. Since `u_*` preserves injective objects, `u_*L` itself is a valid injective representative, so the two section complexes have identical differentials, scalars and restriction maps. The canonical Leray normalization is written as an equation, not merely asserted to transport. For a change of representative, the K-injective Hom statement supplies comparison homotopy equivalences; applying sections gives identical maps in the two models. Thus the asserted naturality of Leray is proved using those cited statements, without invoking an abelian-sheaf Leray theorem for modules or taking a new lemma on trust.
+
+Step 5 uses only these previously established equations and the natural transformation furnished by the right-derived-plus statement. I checked the order of every factor and the source and target of `delta_J`, `alpha^T_(u_*J)` and `alpha_J`. Substitution yields precisely the statement's forward comparison on the target and inverse comparison on the source.
+
+I tested `a=0`, `u=id` with arbitrary `a`, zero complexes and the zero coefficient ring: the equations reduce respectively to zero, ordinary comparison naturality, and identities of zero objects. A non-quasi-isomorphism `a` never needs to be inverted; inverse image is not assumed to preserve injectives or sections acyclicity. No finiteness of `u` or of the ring occurs. Each final step is shorter than 2,000 characters; the Hom calculation and Leray normalization are explicit arguments of the item. All imported fields and the original statement are preserved. Every step/node pair has a literal statement extract in `citations.json`.
+
+Mathlib search results were read, including the actual source of `CategoryTheory.Adjunction.derivedη_fac_app` (Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:103), `InjectiveResolution.isoRightDerivedObj_hom_naturality` and `rightDerived_app_eq` (Mathlib/CategoryTheory/Abelian/RightDerived.lean:126,244), and the open-immersion module restriction unit (Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:442). The abstract derived-unit factorization is one ingredient, the right-derived object declarations concern degreewise functors, and the geometric restriction results are underived structure-sheaf modules. None is a one-line specialization giving the full module-valued unit/Leray identity. The new executed queries have been appended verbatim; the prior recorded searches and logs remain intact. The malformed early Loogle query is not evidence of absence; the later valid quoted-name query returned the abstract unit declarations.

@@ -1,0 +1,49 @@
+# Worker report
+
+1. Files written: dag/nodes/sec-smooth-purity/lem-fin-finite-type-fibre-dimension-bound.json (statement, split, no Mathlib match); citations.json (verbatim cited statements). No new nodes or Mathlib leaves.
+2. Attachments: none for the item. The source-library finite-field-scheme dimension theorem AlgebraicGeometry.exists_topologicalKrullDim_le (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:212) covers the existing lem-kun-dimension-finite-type ingredient, not this item's uniform assertion. I did not alter that existing node.
+3. WANTED: none.
+4. The item statement agrees with Stacks 0A3V and is unchanged. Its previous empty proof is replaced with the source's argument, expanding its 02FZ reference through the existing algebraic 00QH statement. The imported parent says a generating-set sketch hid non-elementary facts; this split exposes those facts through existing nodes, without recreating a clause of the item. The blueprint finiteness lemma's proof sketch need not be reused: its statement is the generic field-scheme finiteness theorem, also present in the project source. The symbol kundim is the topological chain dimension by the adjacent blueprint definition, not stalk Krull dimension.
+5. Nothing remains unfinished in this one-level split. No Lean changes, compilers, Lake, or builds were run. Mathlib searches were made with msearch.py and recorded from its output. LeanSearch returned Internal Server Error and is recorded unavailable. The two uniform-bound phrasings returned compact fibres, finite morphisms, and locally quasi-finite results, which do not give a uniform bound for arbitrary finite-type morphisms. The Artinian Loogle hit assumes dimension zero and local Noetherianity and cannot prove our item.
+
+## Not duplicates
+
+No nodes were created. I searched all DAG nodes for 02FZ, 00QH, the labels for bounded dimension and the local-to-global theorem, and searched the complete blueprint with blueprint_refs.py for bounded dimension, dimension of the fibre, local fibre dimension, 02FZ, and dimension-finite-type. The existing algebraic openness, affine coordinate comparison, open-subspace invariance, affine tensor-product formula, affine quasi-compactness, and field-scheme finiteness statements are all reused.
+
+## Review by NI
+
+I read morphisms.tex Tag 0A3V (lemma-morphism-finite-type-bounded-dimension), and its immediate predecessor Tag 02FZ (lemma-openness-bounded-dimension-fibres). The hypotheses are exactly finite type and a quasi-compact target; neither Noetherianity nor separatedness of the base occurs. I also read algebra.tex Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs), schemes.tex Tags 01I4/01JQ (affine fibre product), 01JR (open fibre product), 01K3/01K4 (quasi-compact morphisms), algebra.tex 00E8 (affine spectrum compactness), topology.tex Definition 0055 and Lemma 0B7I, and the blueprint finite-type dimension lemma and its adjacent definition. There are no new statements requiring a source review.
+
+In step 1, def-weil-finite-type-morphism supplies both locally finite type and quasi-compactness. The preimage-qc-open lemma actually allows any quasi-compact open W, so W=Y proves X quasi-compact without assuming Y affine. Empty X is explicitly handled.
+
+In step 2, the finite-type definition supplies affine A-algebra charts with finitely many generators. The affine-spectra fibre-product statement gives the tensor algebra and both projections. Its generators after scalar extension are exhibited, rather than assuming an unquoted base-change theorem. The affine-scheme-qcqs statement gives quasi-compactness; the spectrum of a field has one point, so its only nonempty affine open is the target itself, and the singleton affine cover meets the finite-type definition. The existing finite-type dimension lemma therefore applies to the entire affine fibre chart. The open-preimage-fibre-product statement is applied to the full fibre's projection and the open U of X; the universal property (pairs with equal base image) identifies it with the restricted fibre over V. Open-subspace invariance gives equality of local dimensions in this chart and in the full fibre. The dimension-at-point definition gives a nonnegative finite minimum bounded by the chart's global dimension. I checked that this is neighbourhood dimension, not dimension of the local ring.
+
+In step 3, the affine-coordinate-fibre-dimension node gives precisely the algebraic relative local dimension, at the prime corresponding to x. Open-subspace invariance relates it to the full fibre. The 00QH node requires a finite-type ring map and a finite nonnegative local dimension; both were established in step 2. It supplies a neighbourhood with bound equal to that point's dimension, which is at most n. Taking the union proves openness in each chart, and taking the union of the chart opens proves openness on X. This does not demand flatness, finite presentation, an affine intersection of charts, or quasi-separatedness. It expands 02FZ faithfully instead of making a new node that only repeats its conclusion.
+
+In step 4, the quasi-compact definition supplies the finite subcover of the increasing opens. Taking the maximum of finitely many indices and zero is an elementary integer operation. The fibre definition supplies the correspondence of fibre points with the preimage of y. The statement of the 0B7I node supplies the supremum equality, including its empty-space value, so it converts every local bound into the global bound claimed. This last step is marked non-elementary because it uses that theorem, despite the finite-maximum part being elementary.
+
+I checked empty X, empty Y (forcing empty X), non-surjective f, empty fibres, zero-dimensional fibres, and positive-dimensional affine-space fibres. Taking d=0 in the empty case is legitimate, and no local dimension is assigned to a nonexistent point. The conclusion does not claim a bound on dim X or on stalk dimensions of Y; Y may be non-Noetherian or infinite-dimensional. Each cited node was opened and its entire statement copied verbatim into citations.json; the uses lists match proof_deps. During self-review I added the explicit affine-scheme-qcqs citation, rather than leaving affine compactness implicit. All off-unit non-leaf ingredients are proposed below as generic tool uses for the maintainer to decide, preserving the parent's ordinary-fibre-bound route. No dependency points back to this item through the chosen ingredients.
+
+## Second reading by NI
+
+- Item statement: checked against Stacks `morphisms.tex`, Tag 0A3V, label `lemma-morphism-finite-type-bounded-dimension`; finite type, quasi-compact target, all ordinary scheme-theoretic fibres, and the empty-fibre convention agree hypothesis by hypothesis.
+- Step 1: checked the finite-type decomposition and the quasi-compact-preimage lemma; the empty-source case and the choice of `d=0` are valid.
+- Step 2: checked affine charts and tensor-product fibre identification against the cited statements; finite generation over the residue field, finite-type dimension finiteness, open restriction, and local-dimension comparison are all supplied. The field and empty-fibre edge cases are valid.
+- Step 3: checked affine coordinate comparison and the bounded-open theorem; the hypotheses (finite-type algebra and finite local dimension) are established in Step 2, and the chartwise openness argument covers all of `X`.
+- Step 4: checked quasi-compact finite-subcovering, the fibre-point correspondence, and the local-to-global supremum theorem; the maximum argument gives a uniform nonnegative bound, including empty fibres.
+- New nodes: none; therefore B1–B7 and duplicate-node checks are vacuous. Existing dependencies were searched in the DAG and blueprint before retaining them.
+- Changes made: Step 2 now cites the fibre-product definition and verifies the universal property on morphisms from every scheme, rather than merely on points; citations.json includes its verbatim statement. Retained split_report.tool_uses as proposals: tools/review_split.py lines 99–100 explicitly authorize that worker field; the maintainer alone copies accepted proposals into the top-level tool_uses field. The same proposals are listed below for review. No statement changes and no new nodes. The initial dry run passed; the repaired delivery is checked again below.
+
+Proposed cross-unit tools (C8; not maintainer-approved fields):
+
+- lem-weil-pbc-quasi-compact-morphism-preimage-qc-open: Generic quasi-compactness tool passing from the target to the source; no such statement in this unit.
+- lem-kun-dimension-finite-type: Generic field-scheme dimension finiteness applied only to one affine fibre chart, not uniform boundedness.
+- lem-weil-pbc-fibre-product-affine-spectra: Generic affine tensor-product formula for a fibre chart.
+- lem-weil-pbc-open-preimage-fibre-product: Generic identification of a restricted fibre as an open of the full fibre.
+- lem-weil-pbc-dimension-at-point-open-subspace: Generic invariance of local topological dimension on an open neighbourhood.
+- lem-sbc-affine-coordinate-fibre-dimension: Generic affine coordinate comparison; no flatness or separatedness required.
+- lem-weil-pbc-fibre-dimension-bounded-open-upstairs: Generic algebraic openness theorem 00QH underlying the Stacks route, not a replacement of the unit proof.
+- lem-weil-pbc-dimension-supremum-local-dimensions: Generic local-to-global topological dimension theorem including the empty space.
+- lem-weil-pbc-affine-scheme-qcqs: Generic affine quasi-compactness tool verifying that the single fibre chart is finite type over its residue field.
+
+Second-reader validation note: removing split_report.tool_uses caused the route check to fail. Reading review_split.py lines 97–100 confirmed the distinction between authorized worker proposals and maintainer approvals; restored the proposals, leaving top-level tool_uses untouched.

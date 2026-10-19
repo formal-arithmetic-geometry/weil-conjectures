@@ -1,0 +1,107 @@
+# lem-coef-simplicial-inversion-product-parameter — NW stage-1 report
+
+## Files written
+
+- dag/nodes/sec-six-functors/lem-coef-simplicial-inversion-product-parameter.json: statement item, split into six steps; no Mathlib match.
+- dag/nodes/sec-six-functors/lem-coef-simplicial-model-target-test.json: statement-only unsplit lemma; no Mathlib match. It detects an essentially surjective comparison using combinatorial simplicial model targets.
+- dag/nodes/sec-six-functors/lem-coef-simplicial-derived-exponential.json: statement-only unsplit lemma; no Mathlib match. It gives the enriched projective-diagram exponential bijection and the equivalence condition on its marked subsets.
+- citations.json: every use in each numbered step, with the verbatim used node statement, including all clauses needed.
+- searches.jsonl and search-results.json: search-command log and verbatim command results. prepare_split.py is an item-local preparation script, not a project tool.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 WeilConjectures source for the item id, Dwyer--Kan/Bergner, simplicial localization, inversion products, and the new notions; no project declaration proves the item or either new fact. Also checked dag/lean_names_upstream.json. The master reference is not used as evidence of a completed proof.
+
+## Wanted sources
+
+WANTED: Jacob Lurie, Higher Topos Theory, Appendix A.3.4 (Lemma A.3.4.6, Corollary A.3.4.11, Propositions A.3.4.12-A.3.4.13), printed pp.886,889-890; A.3.5 (Notation A.3.5.1, Proposition A.3.5.5, Lemma A.3.5.14), printed pp.891-893,896, for the item and both new nodes. I read the author's Harvard PDF online at https://people.math.harvard.edu/~lurie/papers/HTT.pdf; PDF pages 903,906-907,908-910,913 (zero-based). It is not archived in this repository, so the item's proof_origin.by is agent. No document was downloaded and no literature or live project file was changed. No Stacks tag states these enriched homotopy-theoretic facts. No SGA source is used.
+
+## Audit and corrections
+
+The item had its statement and searches but no proof. I retained the statement, existing source, prior search records, created metadata and blueprint ancestry, and filled a complete argument. Its homotopy-category formulation agrees with HTT A.3.5.14 for cartesian simplicial sets; no statement dispute or extra hypothesis on the item was needed. This item is a supporting node, not the key statement of its unit, so no unit record is changed.
+
+The current chapter/unit records were read, as were the main-20261015 ancestor statement and proof. This lemma supports the parameter interval in enriched coefficient-adjunction descent, below the existing unit; it changes no coefficient category, target, or base-change morphism. All proof citations inherit the same unit, so no off-route tool use is needed.
+
+There is a concrete circularity risk in the pre-existing foundations. For example the dependency path is lem-coef-simplicial-fully-faithful-homotopy-image -> lem-coef-coherent-nerve-comparison -> lem-coef-rigidification-equivalence-detection -> lem-coef-pinched-rigidification-resolution -> lem-coef-right-straightening-fiber-comparison -> lem-coef-contravariant-slice-model -> lem-coef-unstraightening-homotopy-descent -> lem-coef-projective-diagram-simplicial-descent -> lem-coef-simplicial-localization-comparison-calculus -> this item. The existing diagram-classification and model-nerve results similarly reach this item. I did not cite them or edit their files. The two new independent statements are formulated directly in the already available Bergner homotopy category and projective models, and have no coherent-nerve dependency.
+
+The new model-target test has an essential-surjectivity hypothesis. Omitting it would lose control of objects: targets of bifibrant objects are idempotent complete, so completion phenomena prevent treating these as arbitrary small test targets. The item obtains essential surjectivity from the localization universal property in step 1; it is not imposed on C,D,W. For a future split of the new detector, the source argument is: embed an arbitrary small target T homotopically fully faithfully into a simplicial presheaf model category using A.3.4.6, use A.3.4.11 to characterize maps landing in its essential image, observe that precomposition with an essentially surjective u preserves and reflects that object-image condition, then restrict the assumed test bijection and use Yoneda in h sCat. Standard model-category detection converts an isomorphism represented by a strict functor into a DK equivalence. This is a generic detection lemma and does not assume any localization-product comparison.
+
+For a future split of the new exponential, A.3.4.12 identifies both sides with weak-equivalence classes of enriched I-times-D diagrams, as A.3.4.13 states. Evaluation is permitted on bifibrant diagrams by the projective-model evaluation clause already present in the DAG. A natural transformation between bifibrant projective diagrams is a model equivalence exactly when it is an objectwise model equivalence; passage to the bifibrant simplicial homotopy category gives the stated pointwise equivalence condition. This is the exact extra condition needed to restrict the exponential bijection, and it was not silently inferred from ordinary currying.
+
+## Not duplicates
+
+lem-coef-simplicial-model-target-test vs lem-coef-simplicial-fully-faithful-homotopy-image: the existing node assumes a homotopically fully faithful inclusion and characterizes postcomposition; the new node detects an essentially surjective arbitrary comparison from a restricted family of model targets. It neither assumes a fully faithful comparison nor supplies a new copy of the existing inclusion statement. The existing node additionally reaches this item and cannot serve as a proof dependency here.
+
+lem-coef-simplicial-model-target-test vs lem-coef-fixed-cylinder-fibrant-target-detection: the latter tests maps in one model category against all its fibrant objects, with fixed-cylinder homotopy relations. It does not construct the restricted test family of bifibrant enriched combinatorial model categories or state the required enriched target reduction.
+
+lem-coef-simplicial-derived-exponential vs lem-coef-enriched-diagram-rectification: the latter is a coherent-nerve comparison with infinity functor categories and assumes coherent realization; the new node is the evaluation bijection in h sCat of A.3.4.13 and its projective pointwise equivalence criterion, without a coherent-nerve theorem.
+
+lem-coef-simplicial-derived-exponential vs lem-coef-simplicial-diagram-equivalence-classes: the existing statement classifies weak-equivalence classes of individual diagrams by maps into A^cf. It does not state the evaluation exponential between projective bifibrant diagram targets, or its marked-subset identification; it also reaches this item through its proof dependencies.
+
+lem-coef-simplicial-derived-exponential vs lem-coef-chunk-localized-evaluation-exponential: the latter uses localized fibrant chunks and their localized parameter product P_U(I,J), assumes the comparison calculus containing this item, and is not the projective bifibrant exponential required to prove that comparison calculus.
+
+Whole-DAG searches included source numbers A.3.4.6, A.3.4.11, A.3.4.13, model-target detection, simplicial/enriched Yoneda and enriched exponentials. Whole-blueprint searches included simplicial, exponential, presheaf, enriched localization, model target and the exact source numbers. No blueprint node states either new lemma; same_as is empty. Both new nodes carry the exact nearest ancestor and the inherited via chain with this item prepended.
+
+## Mathlib search review
+
+All new queries were run through msearch.py under NW and this item's id; results are retained verbatim and exact query text is in the nodes. Each new node has LeanFinder, LeanSearch, Loogle and grep, with a second semantic phrasing and second grep. All services answered successfully in this run. The item retains its imported queries and adds the searches performed here.
+
+Read SimplicialCategory/Basic.lean:1-79 (enrichment only), Enriched/Ordinary/Basic.lean:185-225 (coyoneda), Enriched/Basic.lean:490-550 (graded transformations, with functor-category enrichment still TODO), ModelCategory/Homotopy.lean:180-218 (invariance for known weak equivalences), SimplicialSet/NerveAdjunction.lean:452-468 (the ordinary homotopy-category functor), and the final product-localization declarations in CategoryTheory/Localization/Prod.lean. These are not exact matches or one-line specializations for the two new facts. Ordinary strict-localization products do not prove enriched derived inversion. No Mathlib leaf is claimed.
+
+## Review by NW
+
+I read HTT A.3.5.14 and its invoked A.3.4.13/A.3.5.5, then read the target-reduction inputs A.3.4.6/A.3.4.11 and the diagram classification A.3.4.12. The split follows its sequence of exponential, localization, pointwise inversion and localization bijections. I made two implicit checks explicit: the image of q generates all objects, and the composite of the four bijections is precomposition with the specified comparison.
+
+Step 1 uses the full injectivity and image clauses of lem-coef-simplicial-inversion-universal-property. I checked that its targets are arbitrary small simplicial categories, so the full subcategory Z is permitted, and that it imposes neither fibrancy nor saturated markings. Fullness retains inverses. The equation i v q=q then permits injectivity, giving i v=1 and essential surjectivity. This is elementary use of the cited universal property, not an independently queued lemma.
+
+Step 2 uses lem-coef-realization-finite-limits for the actual product-realization identification and writes out why paths and homotopy groups split into coordinates; the ordinary-category product equivalence has the explicit product quasi-inverse. It uses the inversion universal property to construct r with its defining triangle, having checked each (w,1_d) is inverted. The cited realization node is about k-spaces, which is exactly the product category used here. No theorem asserting the Bergner model is cartesian monoidal is being assumed.
+
+Step 3 uses lem-coef-simplicial-projective-model-calculus for existence and combinatorial simpliciality of A^D and for its evaluation clause. I read that statement in full: it allows every small D, with no local Kan or cofibrancy hypothesis, and says evaluation takes bifibrant diagrams to bifibrant objects. The new exponential's own statement gives both the homotopy-class bijection and the pointwise equivalence criterion. Thus the W versus W_D condition is cited as a theorem, rather than hidden in an unproved claim about pointwise inverses.
+
+Step 4 uses that same exponential and the full localization universal property twice. I checked both intermediate Hom_W subsets have the same target B and that the final inverse restriction has target A^cf. Enriched evaluation's restriction naturality and r q'=q times 1 identify the composite as r^*. This handles compatibility with the canonical comparison, not only equality of cardinalities.
+
+Step 5 uses the new model-target test only after its essential-surjectivity hypothesis has been verified by the triangle and step 1. The quantified A is arbitrary, and universe enlargement expressly allows the presheaf test categories in its source proof. Its last clause supplies DK detection for actual representatives, so that fact is not an uncited appeal to model saturation. This separate generic test does not restate either clause of the product-localization item.
+
+Step 6 uses functorial localization and injectivity from the universal-property node. I wrote the common restriction of the two maps in the naturality square explicitly and checked that f times g carries each marked (w,1_d) into the marked target collection. The same uniqueness proves identity and composition compatibility.
+
+For every cited pair I generated citations.json from the statement I had read, with a verbatim full-statement quote. proof_deps is the union of all uses. Both new nodes have statements only, no proof sketches or proof dependencies, and introduce their model targets, universes, mapping categories, bifibrant objects and conditions. Every notion has the relevant existing statement dependency. The new statements and the item were checked in the cases C empty, D empty, W empty, D terminal, and non-saturated markings. For D empty the exponential sides are singleton hom sets and the diagram category is terminal, so its pointwise condition is vacuous on both sides; for I empty both sides are singleton. The detector excludes an empty source and nonempty target by its essential-surjectivity hypothesis. The argument uses no objectwise strict inverse choices. No non-elementary proof step exceeds 2000 characters (lengths 923,1014,831,1022,749,802); no hidden lemma was left inside a long step. The elementary parts are written out and are not new nodes. I checked the B-E return checklist for statements, dependencies, source meaning, citation scope, circularity, duplicate/elementary/restatement nodes and missing hypotheses.
+
+## Unfinished work
+
+The two new genuine supporting statements remain unsplit, as required for a one-level split. There is no unfinished proof step in the item. A second reader should independently check the enriched model-target detector and the pointwise clause of the exponential against the named HTT inputs before delivery.
+
+## Dry run
+
+The required server dry run printed `OK (not pushed) deliver/NW/lem-coef-simplicial-inversion-product-parameter at 62d7d6f7a5: preflight passed` and saved a durable second-reader receipt. After correcting the new item-search verdict's Mathlib Prod.lean line reference to 118-144 and recording this result, the same command is repeated to validate the final handoff files. No delivery is pushed.
+
+
+## Second reading by NW
+
+Independent second reader, 2026-10-17. The maintenance recovery condition does not hold: the stage-1 packet contains its item and two new nodes, while the named retained stage-2 packet is absent. This reading therefore uses stage 1, with no Lean writes or compiles. The original worker sections, including `## Review by NW`, remain intact.
+
+Item statement: independently compared with HTT A.3.5.14, printed p.896, specialized to cartesian simplicial sets; PASS. Small categories, arbitrary vertex markings and the canonical comparison agree. Naturality follows from the specified universal property. No statement change or dispute is needed.
+
+- Step 1: read both image and injectivity clauses of lem-coef-simplicial-inversion-universal-property; PASS. Fullness retains inverses, and the retract equation implies essential surjectivity. Applying the component-category functor is understood modulo natural isomorphism, as in that dependency.
+- Step 2: read lem-coef-realization-finite-limits and the universal-property statement; PASS. Products of paths, sphere maps and based homotopies give the claimed component and homotopy-group products. A product quasi-inverse handles the ordinary categories. This establishes product invariance without a cartesian model-category assumption.
+- Step 3: read every clause of lem-coef-simplicial-projective-model-calculus and the new exponential; PASS. Evaluation preserves bifibrancy, with no restriction on D. The marked subset is a condition that all the specified arrows are inverted; other arrows may also be inverted.
+- Step 4: checked the four bijections against the universal property and new exponential; PASS. Naturality and injectivity identify their composite with restriction by r. No statement about equality of set cardinalities is substituted for this identification.
+- Step 5: checked the new detector's two hypotheses; PASS. Essential surjectivity of q times identity follows by pairing the image isomorphism with an identity, and the triangle supplies essential surjectivity of r. The arbitrary-model quantifier is provided by step 4.
+- Step 6: checked localization functoriality and injectivity; PASS after expansion. Both naturality-square restrictions coincide. Identity and composition compatibility now have their own equations instead of “the same argument”. The map f times g sends each marked pair to a marked pair.
+- New node lem-coef-simplicial-model-target-test: read HTT A.3.4.6 and A.3.4.11 (pp.886,889); PASS. Its essential-surjectivity hypothesis makes the essential-image restriction legitimate. Both hypotheses are necessary to the stated proof route. It is a generic target detector, not the product-localization conclusion.
+- New node lem-coef-simplicial-derived-exponential: read HTT A.3.4.12–A.3.4.13 (pp.889–890) and the projective weak-equivalence clause; PASS. For bifibrant diagrams, model equivalences are exactly objectwise model equivalences, so the marked-subset condition is justified. It states an internal mapping comparison, not a localization theorem.
+
+B1–B7 for both new nodes: PASS. Statements only, no proof dependencies or proof sketches; objects, universes, bifibrancy, products and markings are introduced; the two statement dependencies supply the definitions actually used. TeX is singly encoded. The source is an exact named HTT result rather than a nonexistent Stacks analogue, and neither node depends on SGA. They remain genuine unsplit supporting facts, not Mathlib leaves.
+
+Independent duplicate searches covered the whole DAG for A.3.4.6/A.3.4.11/A.3.4.13, model-target detection, derived exponentials and bifibrant diagrams, and the whole archived blueprint for those notions. I opened the candidates named in the first worker's duplicate section and additionally lem-coef-dk-weak-exponential-limit-criterion, lem-coef-simplicial-presheaf-localization-comparison, lem-coef-simplicial-presheaf-projective-model, lem-coef-enriched-projective-diagram-model and lem-coef-simplicial-model-coherent-diagrams. None states either new lemma: they concern limit criteria, ordinary-index presheaf models, dg diagrams, or coherent-nerve comparisons. The coherent-nerve and chunk alternatives have the downstream dependence already explained by the worker; replacing the new lemmas with those alternatives would be circular. The enriched presheaf embedding needed by the detector is absent from the existing ordinary-index presheaf-model statement, so the detector is not a two-line application of an available embedding theorem.
+
+I read the current unit and chapter records and the main-20261015 ancestor statement and proof at `sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint{,.proof}.md`. Paragraph 2 is the coefficient-adjunction/derived-limit comparison served by this inherited support chain. The delivery changes neither unit nor chapter route. An independent read-only search in slopmaster2 and dag/lean_names_upstream.json found no declaration attachment for these enriched inversion/exponential results; master sorry declarations were not treated as proofs.
+
+Independent Mathlib searches, run through msearch.py and recorded in searches.jsonl exactly as executed:
+
+- LeanFinder: `An essentially surjective simplicial functor is a Dwyer Kan equivalence if restriction of homotopy classes into every simplicial presheaf model category is bijective` — OK, 8 hits. Hits concern the ordinary simplicial-set homotopy-category functor and localization of cofibrant objects, not the restricted simplicial-model-target detector. Read CofibrantObjectHomotopy.lean:62 and its localization constructions; no match.
+- LeanFinder: `Homotopy category of enriched categories derived internal hom represented by cofibrant fibrant enriched functors with projective model structure` — OK, 8 hits. Read CategoryTheory/Enriched/FunctorCategory.lean:13–29,51–114: its end and homEquiv concern ordinary-index functors into an enriched ordinary category, with no projective model homotopy comparison. The QCat Cat-enrichment hit likewise is not the new lemma. No match.
+- Grep: `DKEquivalence|Dwyer|Bergner|projectiveModel|derived.*[Ee]xponential` — OK, 0 hits. This was an independent broader search in addition to the worker's searches. No leaf is claimed from absent grep hits alone.
+
+Edge cases independently checked: C or D empty; W empty or consisting only of identities; D terminal; I empty; and a one-object ordinary group viewed discretely. In the last case inverting group arrows changes nothing, consistent with the identity comparison. With D empty both sides of the exponential are singleton hom sets; with a terminal D it reduces to the bifibrant target. For the detector, an empty source forces an empty target by essential surjectivity; a nonempty source cannot map to an empty target. No saturation, nonemptiness or local-Kan hypothesis is used covertly.
+
+Changes: (1) step 3 now says “invert every arrow in W_D”, avoiding any implication that unmarked arrows must remain noninvertible; (2) step 6 spells out L(1) and L(f_2 f_1) using their equal restrictions, repairing E5; (3) added this independent reading and genuine search evidence. All statements and new-node contents are retained. citations.json was checked against every cited full statement and is unchanged because the uses and statements did not change. The six-step argument remains complete, and only the two named supporting facts remain unsplit.

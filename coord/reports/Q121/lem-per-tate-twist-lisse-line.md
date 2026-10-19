@@ -1,0 +1,13 @@
+# Stage-1 worker report
+
+1. Files written:
+   - `dag/nodes/sec-deligne-laumon-a1/lem-per-tate-twist-lisse-line.json`: statement, split proof, no new nodes, Mathlib searches recorded as unavailable/no match where applicable.
+   - `citations.json`: verbatim statement excerpts for every cited node and proof step.
+2. Attachments: none. No sorry-free declaration in the slopmaster2 source states this item exactly.
+3. WANTED: none beyond the cited Bhatt–Scholze pro-etale results; the finite Kummer facts are supplied by the existing Stacks-derived nodes.
+4. The imported statement is unchanged. I read the parent blueprint proof (`lem-per-smooth-pullback-t-exact.proof.md`, second paragraph), the item source references (Bhatt–Scholze Corollary 5.1.5, Definition 6.8.3, Proposition 6.8.4(1), Remark 6.8.15), and the statements of every cited DAG node. The three steps respectively check finite Kummer reductions and signed duals, comparison pullback/inverse limits, and the common-stage derived tensor. Hypotheses were checked: separated noetherian finite-dimensional X with ℓ invertible, finite coefficient extension E, all n≥1, and all m∈ℤ. I also checked m=0, negative m via duality, empty X, and scalar extension between finite coefficient fields. The item has no exact Lean declaration in slopmaster2, so it is not an attachment. The Mathlib searches were run with `msearch.py`; they found no Tate-twist or l-adic declaration (LeanFinder/LeanSearch returned only generic sheaf/category results and Loogle had no TateTwist identifier).
+5. Nothing remains unfinished in the split.
+
+## Review by Q121
+
+I checked the item against the current main-20261015 blueprint and the source files named in the node. Step 1 uses the finite étale twist statement for local rank-one triviality, the pro-étale Kummer locally-free statement for transition maps and finite reductions, and the locally-free Tate-line statement for negative twists and scalar stages. Step 2 uses the comparison-morphism definition together with the pro-étale reduction formula and the coefficient-twist definition; these give the displayed inverse-limit identification at each finite stage. Step 3 uses the coefficient-twist and completed tensor definitions plus the existing preservation theorem, whose statement explicitly supplies invertibility and derived completeness at integral coefficients. I read each cited node's statement and matched the quoted sentence in `citations.json`; no step uses a proof detail absent from a cited statement. The statement's hypotheses are retained exactly, and the finite-level, negative-twist, m=0, common-stage, and fibre claims were checked for edge cases.

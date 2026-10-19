@@ -1,0 +1,56 @@
+# Stage-1 delivery: thm-pur-vector-bundle-thom
+
+Group Q49, 2026-10-18 (local date). Direct delivery by the worker; the independent review belongs to the maintainer.
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/thm-pur-vector-bundle-thom.json — statement, split into eight proof steps; no Mathlib match.
+- citations.json — one verbatim statement excerpt for each of the 28 step/node citations.
+- report.md — this report. searches.jsonl contains the actual search-command log. prepare.py is sandbox-only preparation material.
+
+No new DAG nodes, no Mathlib leaves, and no unit-record edits. The item is an auxiliary compact-support Thom theorem of sk-prop-an, not the entire exceptional-inverse-image proposition, so it is not appropriate to claim realization of all that unit's statement or steps.
+
+## Attachments
+
+None. I searched WeilConjectures in the slopmaster2 source by the exact blueprint tag, by the item id, and by Thom, vector-bundle and affine-space terminology, as well as dag/lean_names_upstream.json. The nearby WeilConjectures/EtaleCohomology/Purity/Smooth/AffineSpace.lean explicitly states in its implementation notes (lines 47–55) that the Thom, integration and transpose maps and their normalization are not constructed, and that vector-bundle forms are not stated. Its nonempty affine-space exceptional-image isomorphisms do not state this specified compact-support morphism or its two compatibilities. There is no attachment to claim. The upstream master reference material also yielded no exact item tag or vector-bundle trace declaration, and its sorry declarations were not treated as proofs.
+
+## WANTED
+
+None. The current blueprint and the needed existing node statements are present locally.
+
+## Audit findings and repairs
+
+The item statement is preserved verbatim. Its current main-20261015 statement and proof are the same as the older imported item text; the proof follows the current version. The finite-level scope comes from the last finite-part clause of def-pur-conventions and from the already reviewed construction def-pur-vector-bundle-thom-class. There is no extension here to integral or rational coefficients, no extra assumption on the base, and no statement dispute.
+
+The imported proof used def-weil-derived-cohomology-sheaves for an unstated vanishing/conservativity theorem. It also moved from a supported exterior product to a compact-support generator without citing a map-comparison statement, and referred to Step 1 of the projective-bundle theorem instead of its statement. These are repaired using existing lem-pur-compact-product-proper-support-compatibility and covering-family locality in lem-cbc-proetale-stalk-conservative. I compute on affine spaces over the fixed field k and then pull back to bundle charts. This also avoids applying a fixed-k product lemma over an arbitrary larger algebraically closed geometric residue field.
+
+The direct-sum clause is now the explicit identity kappa_B tau_(E1+E2) = tau_E1 tensor tau_E2 for the specified compact-support relative product. Its comparison with the absolute compact product is supplied by lem-pur-finite-product-compactification. I use lem-pur-degree-zero-derived-map-gluing only after the source and target have been proved concentrated in degree zero; arbitrary derived morphisms are never assumed to be determined on an open cover.
+
+Statement dependencies now name the actual vector-bundle datum and compact-support functor, retaining the conventions, Thom-class construction and twists. The umbrella scheme-properties node and derived-tensor definition were not direct notions needed separately to state this item; tensor is already part of the named twist construction. Historical blueprint fields and import flags are retained. The item's same_as is empty after searches for Thom isomorphism and vector-bundle trace: the rank-one theorem is only a special case; the pur9 Thom definitions and exceptional-form propositions are not this full theorem.
+
+## Not duplicates
+
+No new nodes were created. Every non-elementary ingredient has been reused. In particular the compact-product/proper-support map-comparison node already states the previously missing comparison, and the degree-zero gluing node already states the equality detector. No new node duplicates the item or one of its clauses.
+
+## Review by Q49
+
+I read coord/brief-stage1.md, stages/1-dag.md, the three blueprint levels in SETUP.md, coord/delivery-errors.md B–E in full, GOAL.md and coord/dag-sync.md. I read the chapter and unit records and the current main-20261015 sk-prop-an text, the current item statement and proof, the current Thom-class definition, and the nearby affine-space Lean implementation notes. The current unit develops integration from the affine-line computation and then the independence of local frames; this auxiliary item retains its detailed blueprint's rank-one/product calculation. The proof neither invokes general smooth purity nor changes the section/diagonal/deformation route. No forbidden SGA source is used.
+
+I opened the full statement of every cited node. The checks for each proof step were as follows.
+
+1. def-pur-conventions explicitly confines finite-part purity to A=A_(E,n). def-coefficient-twists-detailed specifies the actual twists, lem-pur-twist-sheaf-locally-free gives their finite rank-one realization and reduction, and lem-asd-etale-finite-twist-pullback gives the rank-one etale models, all powers, and pullback/evaluation compatibilities. These verify the bounded-below etale-origin and finite-Tor domains; none is inferred merely from bounded constructibility. The reviewed Thom-class definition gives the compact-source identification and rank-zero identity. L1 of localized-top-chern and the rank-one theorem concern the same localized divisor map, with its Kummer sign.
+2. The Thom-class construction has a regular tautological section; after any base change it is again tautological and regular. L2 therefore applies even to nonflat base change. Finite-level pro-etale compact base change is an isomorphism for these witnessed inputs. The identity/pasting clauses of the etale compact base-change theorem, transported in that finite-level theorem, and the identity-normalized compact compositor identify the source comparison with the identity on A_(B'). Thus the equation is about the actual exchange map, not an unspecified isomorphism of objects.
+3. The geometric-point cohomology statement identifies the etale constant unit at Spec k, and the compact-product comparison explicitly agrees on its pro-etale realization. The rank-one theorem is applicable to the trivial line over k. The Thom definition's local product clause and the compact-product lemma's even-degree cup/exterior identity and u-product equation show that the specified higher-rank tau is the tensor product of the specified rank-one maps followed by the specified invertible compact exterior product. All supports here are origin points, hence proper over k. The induction has an explicit zero case, one case and j-to-j+1 step; no relative supported Kunneth assertion is used.
+4. The constant-rank locally free definition gives a Zariski trivializing cover. The relative-Spec bundle datum and the free-symmetric-algebra polynomial theorem give affine-space charts with the correct augmentation zero sections. Principal affine refinements stay finite type by the written finite-generator calculation; separatedness is inherited from the open subscheme. Step 2 then pulls back the universal calculation. Clause 1 of the conservativity node is exactly locality on covering families, so the pro-etale geometric-point warning is respected. This proves concentration before any use of degree-zero equality detection.
+5. I checked the displayed definition of the relative Kunneth comparison in sk-thm-sf-kunneth-relative against the forward T composite in lem-pur-finite-product-compactification: each inverse reverses one displayed arrow, with the same two symmetries. The latter identifies T with the proper compactification exterior product; that is precisely the defining map in lem-pur-compact-product-proper-support-compatibility. Only finite-Tor twist inputs occur, and their compact images have already been proved to be A_B, so the projection-formula domains are checked rather than obtained from an unrestricted ambient six-functor assertion.
+6. I checked L3 on the two coordinate blocks, writing why all the partial zero loci remain regular. The origin supports are proper, the degrees 2r and 2s are even, and the compact-product node explicitly identifies the supported cup product with the exterior class and its compact image. Hence this is an equality of the actual normalized class maps. The empty block is the unit, not an undefined negative-rank projective space.
+7. The concrete relative product states base-change compatibility. Pulling the universal identity to simultaneous bundle charts therefore gives the two local maps. Both global targets and sources are degree-zero sheaves by Step 4, so the hypotheses of lem-pur-degree-zero-derived-map-gluing hold. That node explicitly says equality of these maps can be checked on the cover. This avoids the false general assertion that arbitrary derived maps glue or are locally detected.
+8. The trace is the unique inverse, and the written product and base-change equations can be inverted. This step is elementary and has no missing external lemma.
+
+I tested r=0, r=1, a zero-rank summand, the empty base and its empty cover, nontrivial bundles via simultaneous frames, nonreduced base rings (coordinate-variable multiplication is still injective), arbitrary coefficient index n including non-field A, and nonflat base change. No false small case or added hypothesis appears. No proof step exceeds 2000 characters; the largest is 1382 characters. The long-step audit therefore finds no hidden sublemma. B1–B10 are vacuous for new nodes, except the searched item/attachment and reference checks just described; C1–C4 are covered by the explicit node-statement audit and verbatim citations, C5 by reuse searches, C6 by the dependency-path audit and server checks, and C7–C8 by declaring the two off-route generic tools plus coefficient/locality tools in split_report.tool_uses. D1–D5 are met by the actual induction and map identities rather than restating clauses as new nodes. E1–E6 are addressed by the input, coefficient, map and small-case checks above; no source-statement error of E7 was found.
+
+All Mathlib searches were executed by the required msearch.py command and read. The semantic hits are general sheaf pullbacks/free objects, ordinary algebraic etale morphisms, or affine coordinates, not compact-support Thom isomorphisms. Loogle's Thom substring hits are unrelated. The focused AlgebraicGeometry grep has zero hits; the broader grep finds Tate references and thom substrings in unrelated names/comments. A second semantic phrasing was tried. The exact queries and returned names/counts are retained in mathlib_searches and searches.jsonl; no unavailable service was counted as absence.
+
+## Unfinished work
+
+None at this one-level split. Existing unsplit ingredient nodes remain their own items; none is silently claimed proved here. The complete theorem is still subject to the maintainer's independent mathematical review.

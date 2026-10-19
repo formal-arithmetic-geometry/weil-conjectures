@@ -1,0 +1,31 @@
+## Worker report
+
+Files written: dag/nodes/sec-deligne-laumon-a1/lem-per-regular-closed-support-base-change.json (item, statement, split). Four explicit steps specialize the existing prime-power theorem and verify the canonical mate and its compositions. citations.json records the precise statement passages used. No new node and no new Mathlib leaf.
+
+Attachments: none. Searching WeilConjectures for the exact blueprint tag and for regular closed-supported base change found no declaration stating all clauses. The upstream master was used only as reference, not as completed proof evidence.
+
+WANTED: none.
+
+The unsplit item duplicated the n=1 case of the existing lem-per-regular-supported-base-change, discovered by whole-DAG concept search. Its proof is therefore reduced to that existing node rather than duplicated in another new node. The dependency on def-per-potential-dualizing was unused: no dualizing hypothesis is involved. Replaced that unused dependency by the finite Tate-twist and mate definitions actually needed. No statement was weakened or otherwise changed. The regular-supported theorem belongs to the same unit, and the formal composition and mate-pasting inputs are existing Mathlib leaves. No off-unit theorem route is introduced.
+
+Nothing remains unfinished in this one-level split. The existing general prime-power theorem remains an open dependency and has not been represented as a finished Lean proof.
+
+## Blueprint and searches
+
+Read the chapter sec-deligne-laumon-a1 and the unit sk-p-dl-a1-perverse. The item's ancestor is lem-per-artin-gabber-affine-curve, Step 3 on dimension-normalized duality, through the regular-potential-pullback chain. The comparison here is the fibre-supported input, not an alternate route to Fourier exactness. tools/blueprint_refs.py ancestor confirmed this ancestry. Whole-blueprint searches for regular closed support base change, regular.*base, and supported.*localization returned no blueprint node. The more general same-unit created node was found in the full DAG; its statement was opened in full. No node was created.
+
+Mathlib searches ran only through msearch.py, and their actual result summaries are preserved in searches.jsonl and the item's mathlib_searches. LeanFinder's two phrasings returned ring/scheme etaleness and flatness; LeanSearch returned ringed-space open-immersion identities and scheme-theoretic fibre products. Loogle found no declaration combining baseChange and supported. The grep hits for extraordinary were manifold bordism comments, not etale sheaf theorems. None proves the item's comparison. The inherited searches were retained.
+
+## Review by N3
+
+I read the actual PDF Travaux de Gabber, Expose XVII, printed pp. 281–282: Proposition 4.2.1 gives regular base change for qcqs direct image, Corollary 4.2.3 gives closed supported exchange for every D+ complex, and its proof takes the complementary open immersion. Lemma 4.3.1.1 explicitly localizes at a point before applying that comparison to the fibre. I also read Stacks etale-cohomology.tex, Tags 09XP (section-cohomology-support), 09XQ (lemma-sections-with-support-acyclic), 09XT (lemma-cohomology-with-support-triangle), and 09XU (lemma-complexes-with-support-on-closed); these explain the supported-kernel functor, its derived triangle, and the exact closed-supported equivalence. No SGA source is cited or used as a proof dependency.
+
+For step 1, I opened lem-per-regular-supported-base-change: it has finite prime-power coefficients with n>=1, regular maps between Noetherian schemes, ell invertible, a closed immersion and arbitrary bounded-below complexes. Setting n=1 gives the identical constant coefficient ring and identical derived supported functors. It explicitly includes naturality, twists, shifts, opens, localization, regular composition, and successive closed restrictions. Thus neither excellence nor constructibility nor finite type was smuggled into the specialization. This is reuse of a strictly more general existing node, not creation of a relabelled child.
+
+For step 2, the same statement explicitly supplies comparison of localization triangles and compatibility with the closed counits. I opened def-weil-pbc-adjunction-mate and checked its transpose formula against the displayed equation: L1=i_*, L2=iP_*, G=q^*, H=r^*. The equation determines exactly the mate in the requested direction. It does not infer invertibility of a mate merely from invertibility of a transformation; invertibility is the theorem used in step 1.
+
+For step 3, I opened lem-cat-right-adjoint-composition and checked that its statement includes pasted counits, not just existence of an isomorphism of right adjoints. I opened lem-weil-pbc-mate-pasting, whose clause 2 is precisely pasting along the adjunctions, and wrote the closed-immersion pasting arrow with domain u^*k^!i^!M and codomain kP^!iP^!r^*M. The regular-composition formula uses the explicit regular-composition clause of the same-unit prime-power theorem. Both general categorical inputs are Mathlib leaves. No excellence hypothesis from the separate costalk-calculus or general-specialization nodes is used.
+
+For step 4, I checked the same-unit theorem's localization and successive supported-restriction clauses and its explicit C_z(a^!M)=C_z(M) assertion. The point is first made closed in its local scheme; it is not treated as a closed immersion into the original global scheme. This is exactly the sequence used in XVII 4.3.1.1. No finite-type hypothesis on r is used when localizing.
+
+I tested the statement and specialization at i=identity, Z empty, r=identity, M=0, and a point which is not globally closed. They give respectively the identity comparison, zero comparison, the identity mate, zero objects, and the stipulated local-then-closed supported restriction. Negative shifts remain bounded below. There are no new statements needing separate small-case tests, duplicate-node explanations, or search certification. All four steps are under 2000 characters and none conceals an additional geometric lemma. The substantive theorem remains cited as the existing general prime-power node. During self-review I replaced generic citation snippets by the specific composition/localization passages and retained the exact item statement.

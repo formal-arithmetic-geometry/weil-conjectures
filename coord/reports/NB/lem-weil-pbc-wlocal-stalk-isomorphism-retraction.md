@@ -1,0 +1,19 @@
+1. files written: item `lem-weil-pbc-wlocal-stalk-isomorphism-retraction`; new Mathlib leaf `lem-weil-pbc-extremally-disconnected-component-section`; new closed node `lem-weil-pbc-wlocal-closed-component-retraction`.
+2. attachments: `WContractification.exists_retraction_of_isClosed_of_bijOn` belongs to `lem-weil-pbc-wlocal-closed-component-retraction`.
+3. WANTED: none.
+4. The imported item is the explicit ring-map/localization formulation of Stacks Tag 09AZ. The source Lean theorem uses typeclass algebra and `Algebra.BijectiveOnStalks`, so it is not an exact attachment for the item; I recorded its auxiliary closed-component theorem separately. The proof is split into the Gleason section, closed-point and component checks, and application of the auxiliary theorem. Existing DAG searches found no duplicate component-section or closed-component-retraction node.
+5. Nothing remains unfinished.
+
+## Review by NB
+I read Tag 09AZ in `literature/stacks-project/proetale.tex` and the source declaration and docstring in `WeilConjectures/RingTheory/ProEtale/WContractible.lean` lines 511–577 and 636 onward. Step 1 uses the new Mathlib leaf, whose statement is exactly the compact-Hausdorff extremally-disconnected lifting property supplied by `CompactT2.ExtremallyDisconnected.projective`; its hypotheses match the component spaces after faithful flatness gives surjectivity. Step 2 checks the ideal zero-loci and closed-point contraction directly from the definitions and the w-local hypotheses. Step 3 uses the closed auxiliary declaration: it requires w-local rings, stalk bijectivity, closed-point contraction, and a closed component subset mapping bijectively and surjectively; these are precisely the item hypotheses and Steps 1–2. I checked the localization-at-prime definition node for the interpretation of stalk bijectivity. I tested the empty-spectrum and identity-map edge cases conceptually: the component section and resulting retraction are valid, and no nonemptiness assumption was introduced. The Mathlib searches were run with the node ids and recorded, including LeanSearch unavailability.
+
+## Second reading by NB
+
+- Item statement: checked hypothesis-by-hypothesis against Stacks Tag 09AZ (lemma-w-local-extremally-disconnected), including w-local spectra, extremal disconnectedness, both closed-point zero loci, faithful flatness, and canonical prime-localization isomorphisms; verdict: faithful specialized formulation retained.
+- Step 1: checked against Tag 09AZ's section argument and the statements of the section, faithful-flat spectrum-surjectivity, and profinite component-space nodes; verdict: repaired citations and expanded the induced-component surjectivity argument.
+- Step 2: checked against Tag 09AZ's closed-point and section-range paragraphs; verdict: range closedness and the ideal-contraction argument are explicit and use only the stated hypotheses.
+- Step 3: checked against the closed-component auxiliary theorem and localization node; verdict: hypotheses and conclusion match exactly.
+- New node `lem-weil-pbc-extremally-disconnected-component-section`: checked against Topology Proposition (projective compact Hausdorff spaces) used in Tag 09AZ; verdict: Mathlib leaf declaration and searches are recorded; removed an irrelevant compact-bijection dependency.
+- New node `lem-weil-pbc-wlocal-closed-component-retraction`: checked against `WContractification.exists_retraction_of_isClosed_of_bijOn` (lines 511–577); verdict: repaired the statement to define the induced component map and state the restriction-bijection hypothesis self-containedly.
+
+Changes made: corrected stale `created.item` metadata on all three files; added existing spectrum-surjectivity and profinite-component citations to Step 1; made Step 2's ideal argument explicit; and made the auxiliary component map explicit. Empty-spectrum and identity-map cases remain valid.

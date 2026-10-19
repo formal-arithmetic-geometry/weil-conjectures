@@ -1,0 +1,51 @@
+## Worker report
+
+Files written: dag/nodes/sec-smooth-purity/lem-pur-retracted-support-localization-comparison.json (statement, split, no Mathlib match). No new nodes; zero Mathlib leaves. citations.json supplies a verbatim statement quote for every numbered step's citations. Actual new searches remain in searches.jsonl; earlier searches in the item have been preserved.
+
+Attachments: none. I searched /home/ubuntu/weil-src-slopmaster2/WeilConjectures for the exact blueprint tag, retracted support, localization/comparison, and edge/boundary terminology. No project declaration states this whole item. Upstream master is reference material only.
+
+WANTED: none.
+
+The input had no proof. Its statement is retained verbatim. The important distinction is between the finite transported exceptional inverse image and the ordinary pro-etale closed-support adjoint. Steps 4--5 compare these on the stated etale-origin input; they do not assert an ambient exceptional adjunction for general pro-etale inputs. Nothing remains unfinished in this one-level split.
+
+## Sources and searches
+
+I read main-20261015's sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md: the first localization paragraph, ps=id after Rp_*, and the global supported-class paragraph. I read the unit/chapter records and the ancestor context. The supplement follows precisely this localization route, before the A1 cohomology calculations of the parent.
+
+I read Stacks etale-cohomology.tex, section-cohomology-support (09XP), lemma-sections-with-support-acyclic (09XQ), and lemma-cohomology-with-support-triangle; sites-cohomology.tex, lemma-Leray-unbounded (0D6H), lemma-unbounded-describe-higher-direct-images (0D6I) and its reference to lemma-sheafification-cohomology (0BKV). The expanded proof is marked agent-written. No SGA source is used.
+
+Whole-DAG searches covered localization triangles, direct-image composition/comparison, supported sections, cohomology sheafification, hypercohomology edges, closed adjoints, injectives, cone comparisons and triangle isomorphisms. blueprint_refs.py searches included localization, edge, boundary, closed-support and hypercohomology left edge; ancestor returned prop-pur-affine-line-orientation-uniqueness. The existing lem-pe-bounded-complex-direct-image-presheaf, specialized to the identity, gives the required integer-degree local-class description. I did not cite the O_X ringed-space Leray nodes for constant coefficient site modules. I did not create a new node for an elementary edge naturality substitution.
+
+This run used msearch.py LeanFinder twice with different phrasings, Loogle, Mathlib grep and LeanSearch. The successful services returned etale-locus results, abstract triangulated-localization results, ordinary sheaf restriction naturality, group cohomology and short-complex homology naturality. None states this item. I read Mathlib/CategoryTheory/Localization/Triangulated.lean near lines 135 and 156: those hits construct triangles after abstract triangulated localization, not closed-support/site comparisons. Grep had zero hits. Queries/results are recorded as actually run. There are no new-node duplicate-tag pairs.
+
+## Review by Q157
+
+I opened the statement of each cited node and checked the source passages above. The coefficient ring remains finite commutative. B is bounded below without constructibility. The maps retain all the original scheme hypotheses. I checked each step as follows.
+
+1. The etale localization node explicitly names its closed adjoint and exact termwise s_*. The closed-immersion-proper node permits the identity/open then s/proper compactification. def-amb-etale-compact-support gives the compact-support functor for it, and det-sp-unique-right-adjoint specifies the counit-compatible identification. The finite formula in def-weil-exceptional-inverse-image and the comparison unit in sk-prop-sf-comparison give C=nu_Y^*D. The finite definition also justifies bounded-below typing; constructible preservation is not used.
+
+2. lem-exc-closed-support-triangle supplies the actual unit/counit arrows. lem-pc-right-derived-functor-triangulated permits applying Rp_*. The ordinary etale clause (5) and identity law of lem-weil-derived-direct-image-composition apply, giving the terms D and Rpi_*j^*B from ps=id and pj=pi. The restricted integral/rational composition domains are irrelevant.
+
+3. sk-thm-pe-direct-image-comparison states the module pullback comparison, bounded-below qcqs direct-image comparison, and compatibility with units, counits and composition. I checked p,s,j,pi are qcqs: p is separated finite type, s closed, j quasi-compact open and pi their composite. lem-sf-exact-functor-derived-triangulated applies to exact inverse image. The whole triangle is transported with its boundary sign; only matching the three objects would not suffice.
+
+4. lem-pur-support-localization-triangle supplies the D+ support adjoint S and triangle. The comparison for s gives another triangle with exactly the same middle-to-open unit. TR3 of the triangulated-category definition applies after rotation with identities on K and the open term, yielding a map commuting also with the boundary. lem-sf-triangle-morphism-iso makes the supported component invertible. No canonical choice of an arbitrary cone is assumed.
+
+5. lem-weil-pbc-proetale-ringed-open-closed gives exactness and s^*s_*=id. The derived adjunction of def-weil-pbc-proetale-operations therefore gives derived full faithfulness. The support adjunction of lem-pur-support-localization-triangle makes the comparison the unique transpose of the transported counit. This proves naturality and independence of the TR3 extension, while retaining its third square. It does not identify the transported exceptional functor with an ambient adjoint on arbitrary inputs.
+
+6. def-pur-flasque-support states the supported kernel and its identification with s_*s^!_0. The open-zero relation and full faithfulness from the ringed open/closed node give the sheaf Hom calculation written in the step. The right-adjoint-preserves-injectives node applies because s_* is exact. dplus-injective-representative and right-derived-plus-injective supply the resolution and actual derived computation, including the global-section computation for s^!_0I. These are assertions of the cited statements, not just facts read in their proofs.
+
+7. The sectionwise supported kernel identity, with its restricted differential, is elementary from the two cited definitions once step 6 supplies the derived computation. It identifies complexes of modules, not a sheaf with its global sections.
+
+8. lem-pur-support-exact supplies the short exact sheaf complex sequence. I separately checked sectionwise surjectivity: an epimorphism of sheaves alone would not give it. Injectivity against j_!A_U -> A_X, with the module adjunction and the section determined by 1, gives I(X) -> I(U) surjective. The proetale restriction-injectives node computes the open term. thm-pur-with-support-exactness includes bounded-below complexes with finite pro-etale coefficients. The cone-short-exact-quasi-iso statement gives exactly (b,a) -> bar(b); its shifted-kernel projection is the same before/after sections, fixing the boundary sign.
+
+9. def-weil-pbc-proetale-operations supplies exact inverse image and its derived adjunction. K-injective-preservation applies to its right adjoint. Evaluating a pushed-forward K-injective at the final object gives exactly the same complex as upstairs. The Hom-to-K-injective bijection proves naturality on derived maps. Direct-image composition fixes the same ps=id normalization. Thus no O_X theorem was silently used for these coefficients, and step 8's boundary remains the one after Rp_*.
+
+10. lem-pe-bounded-complex-direct-image-presheaf explicitly states integer-degree sheafification of local cohomology and naturality for complex maps. Its identity specialization uses exactly this pro-etale coefficient category. The cited Hom comparison represents every derived map between K-injectives. Homotopic maps act equally on local section cohomology, so the presheaf-to-sheaf naturality yields the stated edge square. The shift changes differentials by -1 but neither cycles nor images. This checks all integer degrees, rather than citing a natural-indexed edge statement without adjustment.
+
+11. Substituting d in step 10, and the boundary identification of step 9, is elementary. The cohomology-sheaf definition supplies the interpretation as delta^q. This substitution is not a new lemma.
+
+12. sk-prop-sf-comparison explicitly gives equality of derived global sections for etale-origin bounded-below inputs. sk-thm-pe-direct-image-comparison identifies functors and their unit/counit maps. Steps 4--5 give the full support triangle comparison, including boundary. Restricting a class on each etale object and applying the comparison unit commute by naturality; mapping the local classes into their sheafifications therefore commutes as well. This verifies site compatibility of the edge maps, not merely an isomorphism between the cohomology modules.
+
+Small cases: B=0 gives the zero triangle. Empty Y forces empty X since p exists. If s=p=id then U is empty and the triangle is C -> K -> 0. If X is Y disjoint union another component and s the first inclusion, localization splits and the boundary is zero, as the kernel/cone formulas require. Negative shifts move q through negative degrees without changing the computation. Disconnected Y is handled componentwise, without claiming its global sections form a rank-one module.
+
+I checked delivery-errors B1--B10, C1--C8, D1--D5 and E1--E7. No new statements, duplicates or clause-restatement nodes are introduced. Every proof step is under 2000 characters. The potentially hidden comparisons have their arguments in steps 4--5 (supported first term), 6--9 (global support and sign), and 10--12 (edge, shift and site maps). Off-unit prerequisites are declared in split_report.tool_uses for maintainer judgment: they implement the unit's localization route rather than replacing it. Each citation has a verbatim statement quote in citations.json. The repository/Lean source stayed read-only; no Lean writing, compiler, Lake or local preflight was run.

@@ -1,0 +1,41 @@
+# Q17: lem-coef-fixed-object-free-arrow-adjunction
+
+## Files written
+
+- dag/nodes/sec-six-functors/lem-coef-fixed-object-free-arrow-adjunction.json: statement, split into seven elementary steps; no exact Mathlib match.
+- citations.json: verbatim statement quotations for all six step citations.
+- report.md: this report. No new DAG nodes or Mathlib leaves.
+
+## Attachments
+
+None. Searches in /home/ubuntu/weil-src-slopmaster2/WeilConjectures by the item id, the blueprint tag, free/enriched/simplicial category terminology and fixed-object terminology found no declaration stating the item. The upstream master search for this id and interval-lifting id also found none; master is reference material only. The item's absent lean_audit is consistent with no declaration found, not evidence of an attachment.
+
+## WANTED
+
+WANTED: Bergner, Rigidification of algebras over multi-sorted theories, arXiv math/0508152, Example 3.5 (printed pp.1937–1938) and evaluation/free adjunction before Theorem 4.7 (printed p.1942), for lem-coef-fixed-object-free-arrow-adjunction. No local copy was found in the allowed literature tree or its LIST. The online PDF/HTML reader returned provider HTTP 429 on both attempts; I did not read that article and do not claim verification of its printed numbering. No document was downloaded. The proof is explicitly agent-written and follows directly from the construction in the statement, rather than invoking the article as a theorem.
+
+## Audit of the imported material and searches
+
+The item statement is correct and unchanged. In particular a loop generator must remain a genuine length-one word, not be identified with the length-zero identity. A construction using only a single off-diagonal hom would fail for a=b; the imported word construction does not have this fault.
+
+I read coord/brief-stage1.md, stages/1-dag.md, SETUP.md including its three levels and tool-lemma rule, GOAL.md, coord/dag-sync.md, roles/worker.md, coord/STATE.md, tools/README.md and delivery-errors B–E. The chapter and unit records were read. This is a technical descendant, not the unit's key statement; no unit realization fields change. I read both the ancestor statement and proof in literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint{,.proof}.md. Its second paragraph uses coefficient adjunction and transition-compatible units/counits; the present technical item supplies its recorded strict simplicial-category infrastructure without changing that route. No SGA source is used.
+
+I searched the whole DAG for free categories, finite composable words, path categories and Paths.lift. I read the statements of def-coef-free-category-comonad, lem-coef-fixed-object-simplicial-free-calculus and lem-coef-categorical-algebra-free-monad: these concern respectively a nonidentity-arrow comonad, model/free-product calculus, and infinity-operadic free algebras, and are not needed for this direct strict construction. Whole-blueprint searches for free category, fixed object and evaluation adjunction found no equivalent blueprint statement. blueprint_refs ancestor confirms prop-coef-integral-exceptional-adjoint; the item's already-specific from.place/via and same_as=[] remain intact. No child lemma is introduced, so there is no duplicate or clause-restatement issue.
+
+All new Mathlib queries were run through msearch.py and the actual summaries in searches.jsonl were copied into mathlib_searches. Both phrasings of LeanFinder were read. Loogle returned zero matches for the enriched adjunction patterns; the focused grep returned only homotopy-category/resolution mentions and the second returned zero. LeanSearch returned Quiv.adj, ordinary free monoid/group adjunctions and functor-category evaluation adjunctions. I read Mathlib/CategoryTheory/Category/Quiv.lean at free and the ordinary path construction, Mathlib/CategoryTheory/Adjunction/Evaluation.lean at evaluationLeftAdjoint/evaluationAdjunctionRight, and Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean at SimplicialCategory, sHom, sHomComp and homEquiv'. The latter compares ordinary morphisms with vertices, not free simplicial categories with mapping-set evaluation. None states the item or makes it a one-line specialization. Existing Q07 searches are retained, not represented as searches newly run by Q17.
+
+## Review by Q17
+
+For the item I read its complete statement and the above current blueprint ancestor. Since the Bergner reader was unavailable, I supplied and checked the elementary proof rather than attributing unread details to that source. There are no new-node sources to audit. I opened lem-coef-simplicial-interval-lifting and read its statement in full: it explicitly supplies the notions of small simplicial category (simplicial hom sets, associative unital simplicial composition) and fixed-object enriched functors. Those definitions, and not its much stronger model-structure or lifting assertions, are precisely what the proof uses. citations.json quotes its exact definitional sentence in each step that cites it. No step uses the proof of a cited node.
+
+Step 1 is finite-list construction: the empty list is present precisely on an endomorphism set; list concatenation supplies the category equations and finite lists preserve smallness. There is no external free-category universal-property theorem being invoked. Step 2 cites interval-lifting only for what it means to be a simplicial category. I checked each simplicial operator acts on letters, fixes endpoints and empty lists, respects concatenation, and inherits its functor law from K. Step 3 uses the same definition of enriched functor: substitution by a simplicial map preserves those operations; evaluation is functorial on the (a,b)-component. Step 4 uses simpliciality of an enriched functor to verify restriction to length-one words is a simplicial map, with the equality written out.
+
+Step 5 uses exactly the associative/unital simplicial composition stated by interval-lifting. It defines extension recursively and gives both inductions (concatenation and simplicial operators); no normal-form theorem or existence theorem is hidden. Step 6 uses just preservation of identities and binary composition to show uniqueness by induction on word length. Step 7 writes the two naturality equations on generators, gives unit/counit formulas and computes both triangles; the final adjunction is the defining natural Hom bijection. This needs no separate non-elementary adjunction theorem. Every step is routine finite-list recursion or a direct definitional calculation and is marked elementary, with the whole argument retained in the item. The longest step has 970 characters; no long step hides a separate lemma.
+
+I checked hypotheses at the construction and both extension maps: O and each K_n are small, objects are fixed pointwise, f is a map of simplicial sets, and T has simplicial associative/unital composition. No fibrancy, nonempty hom, a!=b, or finiteness of O is assumed. Small cases checked: K empty gives only identities and both Hom sets have one element; O with a single object gives all finite words (the free simplicial monoid), including arbitrary products of loop generators; distinct a,b admit no words longer than one; extra isolated objects retain only their identities. If O is empty the premise a,b in O cannot be instantiated. A generator can map to an identity in T: this affects its evaluated value, not its word or the inverse identities. Degenerate letters are not removed; simplicial operators can identify letters without changing word length, so the simplicial equations still hold. This checks E1–E7 without a statement dispute.
+
+Against B–E: no new nodes need statement, source or duplicate checks; all objects and operations are introduced in the item; JSON uses ordinary single TeX escapes after decoding; every cited claim is read and quoted verbatim; proof_deps is the union of uses; no new route/tool-use or cyclic dependency is introduced. No part is relabelled into a new lemma. The only source access limitation is disclosed above, and the self-contained argument does not depend on that access.
+
+## Unfinished work
+
+None in the requested split. Server dry-run and delivery results are recorded by the delivery tool.

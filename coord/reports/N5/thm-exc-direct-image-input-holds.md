@@ -1,0 +1,23 @@
+# Stage 1 report: thm-exc-direct-image-input-holds
+
+1. Files written: `dag/nodes/sec-smooth-purity/thm-exc-direct-image-input-holds.json` (item, no new nodes); `citations.json` records every proof-step citation.
+2. Attachments: none. No declaration carrying the item tag or exact two-clause statement occurs under `WeilConjectures/` in `/home/ubuntu/weil-src-slopmaster2` or `/home/ubuntu/weil-newtargets-master`.
+3. WANTED: the blueprint source documents named by the item and its cited nodes, for thm-exc-direct-image-input-holds. The local literature tree contains only citation lists/import tools, so the proof follows the imported DAG text and the existing source remark, with proof_origin.by = agent.
+4. The imported second step cited `lem-kun-cd-sep-closed-point`, whose statement is the distinct `\\kuncd(Spec K)=0` predicate. The clause needs `\\operatorname{cd}_{\\rm tor}(K)\\leq0`; I replaced that citation with the existing same-as node `lem-sf-separably-closed-torsion-cd` and added the definition node that unpacks the final vanishing. The first step now states explicitly how the finite ring and invertibility hypotheses match `thm-dg-finite-type-constructibility`, and how bounded constructibility yields constructible cohomology sheaves. The finite-type dimension phrase is used with the supplied upper bound `d`, as in the source route; the empty scheme is recorded separately.
+5. Nothing remains unfinished. No new node was created, so no duplicate split was introduced.
+
+## Review by N5
+
+I read the imported item, `def-exc-direct-image-input`, the source remark `rem-exc-direct-image-input-sources`, the unit and chapter records, and the complete statements of `thm-dg-finite-type-constructibility`, `def-weil-pbc-constructible-complexes`, `lem-sf-separably-closed-torsion-cd`, `thm-sc-finite-type-torsion-cd`, and `def-sc-etale-torsion-cd`. For step 1 I checked that the item’s finite ring is killed by an integer invertible in the separably closed base field, and that the cited derived statement supplies constructibility of each `R^q u_*F` after viewing `F` in degree zero. For step 2 I checked the hypotheses for an arbitrary separably closed `K`, including the prime-to-characteristic condition, then checked that the cited torsion-cd theorem is applied at base bound zero and that `def-sc-etale-torsion-cd` gives exactly the asserted vanishing for every torsion sheaf and every `q>2d`; the empty scheme is harmless. I also tested the edge cases `q=0`, `d=0`, zero coefficients, and empty source. The only correction was replacing the kuncd citation by the existing torsion-cd node and making the definition unpacking explicit. The proof uses the two cited theorems as declared cross-unit tools because the Kummer unit route has no alternative statements for either generic finiteness input. The Mathlib search log contains the required LeanFinder, Loogle, grep, and unavailable LeanSearch records; no Mathlib declaration states this project-specific two-clause input.
+
+## Second reading by N5
+
+- Item statement: checked against `def-exc-direct-image-input` and the source node `thm-exc-direct-image-input-holds`; the two hypotheses on `k`, `N`, and `Lambda` match the definition, and the zero-coefficient, field, empty-scheme, and `d = 0` cases are harmless; verdict: faithful.
+- Step 1: checked against the complete statement of `thm-dg-finite-type-constructibility` and `def-weil-pbc-constructible-complexes`; the finite ring `A = Lambda` is annihilated by an integer invertible in `k`, and degree-zero sheaf input gives constructible cohomology sheaves; the source discussion was checked against Stacks Tag 0GL0; verdict: sound.
+- Step 2: checked against the complete statements of `lem-sf-separably-closed-torsion-cd`, `thm-sc-finite-type-torsion-cd`, and `def-sc-etale-torsion-cd`, with the source discussion checked against Stacks Tags 0F0V and 0F0P and the separably closed point statements at Tags 04JQ and 04JM; verdict: repaired because the finite-type theorem assumes exact dimension.
+- New nodes: none; duplicate and Mathlib searches found no project-specific or Mathlib declaration replacing this item. The recorded searches include fresh LeanFinder, Loogle, grep, and unavailable LeanSearch results.
+
+Changes made:
+
+- Rewrote step 2 to split the empty case and set `e = dim W` for the nonempty case, apply the cited theorem at exact dimension `e`, and use `e <= d` to obtain the required `2d` vanishing bound. This removes the unsupported direct application of an exact-dimension theorem to an upper bound.
+- Removed one accidentally malformed local search-log entry (`--query` was passed as a query); the remaining entries record only searches that actually ran.

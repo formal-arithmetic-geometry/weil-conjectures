@@ -1,0 +1,95 @@
+# Q08 stage-1 delivery: curve regularization by point blowups
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-surface-curve-regularization-by-blowups.json`: item, statement unchanged, split into seven proof steps; no Mathlib match.
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-finite-curve-normalization-regular.json`: new statement-only input; no Mathlib match.
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-singular-curve-point-blowup-step.json`: new statement-only input; no Mathlib match.
+- `citations.json`: verbatim statement evidence for every citation in every item step.
+
+There are two new nodes and zero Mathlib leaves. No unit realization changes are needed: this item is not the unit's key statement. All writes were in this item's sandbox. No Lean, compiler, Lake, live repository, launcher file, or agent was used for mutation/work delegation.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 `WeilConjectures/` for the exact item id and for regularization, resolveCurve/resolve_curve, curve/blowup combinations, singular closed points, and regular normalization. No project declaration proves this item or either new node. The archived master was also searched for the item and its Stacks tags, and is not treated as proof evidence. The existing closed declaration `AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform` is already attached to `thm-nagata-strict-transform-is-blowup`; it proves the comparison used in step 6, not regularization or termination.
+
+## WANTED
+
+None. Every mathematical source used is present in `literature/`.
+
+## Audit of the imported item and retained work
+
+The initial sandbox contained an identical unsplit copy of the current repository item and `searches.jsonl`, but no split or report. These were read and retained. Its source and statement are correct. I did not add a field-of-definition, excellence, properness, or smoothness hypothesis. A sequence of length zero is allowed by the assertion of a finite sequence, and is used when the curve is already regular.
+
+One original `mathlib_searches` entry claimed a literal-normalization Loogle query, whereas the retained log actually recorded a query containing the unknown identifier `normalization`. I replaced that entry by the exact recorded query and reported the unknown-identifier response. I did not claim it was a substantive absence result. The new successful Loogle query `AlgebraicGeometry.Scheme.Hom.normalization`, the semantic searches and the greps provide the actual checks. No historical query was rerun just to recreate a log.
+
+The actual mathematical split follows `resolve.tex`, Tag 0BI4 (`lemma-resolve-curve`), proof of finite normalization implying a resolution by point blowups, and Tag 0BI5 (`lemma-blowup-curve`), proof transporting that tower into the ambient scheme. The coherent-module ascending-chain argument remains in the item; neither new input is a replacement resolution theorem. I read the chapter and unit records, and the current `main-20261015` Artin–Gabber proof text. The item's existing detailed `blueprint.from` ancestry records how this embedded-resolution input supports the potential-dualizing branch. That ancestry and its place are retained, and the two children add this item to `via`. Whole-blueprint searches for blowup, point blowup, singular, normalization, finite normalization, 0BI4 and 0BX2 did not find a node stating either new input. The two new nodes' `same_as` fields are empty.
+
+## Mathlib searches and reuse
+
+The exact queries and returned names/counts are in each JSON's `mathlib_searches` and the unmodified tool log `searches.jsonl`. Each new node has LeanFinder, LeanSearch, a successful Loogle response, and Mathlib grep. For normalization, the semantic results and Loogle give relative normalization, integrality of its source/structure morphism, and related universal maps. They do not give regularity and dimension one of the finite absolute normalization. Two distinct natural-language phrasings were read. For the single point blowup, the results are generic proper/finite or relative-normalization interfaces, without the blowup factorization and nonisomorphism; a second natural-language phrasing was also read. The direct regex searches returned zero hits. Preliminary Loogle queries with unrecognized project-only identifiers were read but are not used as the nodes' decisive Loogle checks. No search that was not run is recorded.
+
+Existing curve-normalization properties (`lem-sc-normalization-exists`, `lem-sc-normalization-properties`, `lem-sc-normalization-over-normal-locus`) assume finite type over a field. `lem-per-excellent-normalization-preparation` assumes excellence. Neither restriction follows from the item's Noetherian/finite-normalization hypotheses. Existing Noetherian coherent ACC, finite coherent pushforward, properness of blowups, finite-type preservation of Noetherianness, and closed-immersion/strict-transform facts are reused, with off-unit generic tools declared in `split_report.tool_uses`.
+
+## Review by Q08
+
+I read `resolve.tex` at both 0BI4 and 0BI5, including the full coherent-module termination argument and the singular-point choice, and checked the sources underlying both new statements. For the finite-normalization child I read `morphisms.tex` at 035Q (`lemma-normalization-normal`) and 0BXC (`lemma-normalization-birational`), and `properties.tex` at 0BX2 (`lemma-normal-dimension-1-regular`). Normalization is integral, surjective and birational; assumed finiteness makes its affine coordinate rings finite over Noetherian rings, hence Noetherian. Integral extensions preserve the dimension here; all local rings are normal and have dimension at most one, so 0BX2 makes the normalization regular. This child asserts properties of the fixed normalization, not that it has already been realized by blowups. The underlying finite-normalization hypothesis is essential and has been kept.
+
+For the single-blowup child I read the construction paragraph of 0BI4 and `varieties.tex` 0AB7 (`lemma-finite-in-codim-1`). I also read `divisors.tex` at `lemma-universal-property-blowing-up` (0806), `lemma-blow-up-integral-scheme`, and `lemma-blowing-up-projective` (02NS). A singular point of an integral Noetherian curve has dimension-one local ring and nonprincipal maximal ideal. The pulled-back point ideal on the regular dominating curve is a nonzero ideal locally in a DVR, hence invertible, so the blowup universal property factors the cover. The blowup is integral, proper, and generically unchanged; 0AB7 makes it finite everywhere over the dimension-one Noetherian base. Properness of the factor follows because its composite to the base is proper and the blowup is separated; 0AB7 likewise gives that factor finite. The exceptional point ideal becomes invertible on the blowup; if the blowup were an isomorphism, the original maximal ideal would be invertible and the point would be regular. This verifies nonisomorphism with no hidden excellence assumption. These are the non-elementary assertions intentionally left in this statement-only child, whose later split can use the recorded supporting sources.
+
+I opened and read the statement of every cited node (the exact text is copied in `citations.json`). Here is the check of what each step takes:
+
+1. `def-weil-closed-immersion` explicitly gives the affine quotient presentation. `def-weil-pbc-noetherian-ring` says that every ideal is finitely generated. The preimage of an ideal in a quotient has finitely many generators, whose images generate the original ideal. The finite affine cover, `pqf-def-locnoeth`, and `def-weil-pbc-quasi-compact-scheme` therefore give Noetherianness of the closed curve. I corrected the earlier wording that incorrectly attributed the equivalent ACC formulation directly to this definition. This elementary step supplies the Noetherian hypothesis needed in step 2 rather than silently assuming it.
+2. `lem-per-finite-curve-normalization-regular` supplies exactly the regular integral Noetherian curve, finite map, and generic-field identification. `lem-weil-pbc-finite-pushforward-coherent` explicitly includes the structure-sheaf case and supplies coherence of the fixed module on the locally Noetherian base. Its hypotheses hold because the normalization is finite by assumption and step 1 made the base Noetherian.
+3. `lem-per-singular-curve-point-blowup-step` supplies exactly the next curve, nonisomorphic finite blowup, and finite birational factorization. All its hypotheses are the maintained invariant. A nonregular point is closed since the only possible nonclosed point of an integral one-dimensional scheme is its generic point, whose local ring is a field. Finite composition is justified with products of module generators on affine inverse images, using `def-weil-finite-integral-morphism`, and does not require a new node. This step states the base and the induction explicitly.
+4. The affine presentations from `def-weil-finite-integral-morphism` and the domains from `def-pc-integral-scheme` give actual injected subalgebras of the fixed normalization algebra, not just abstract sheaves with inclusions asserted. The generic-field identifications prove injectivity. `lem-weil-pbc-finite-pushforward-coherent` gives coherence for each intermediate finite direct image. Equality of adjacent subalgebras makes the map of rings an isomorphism on the inverse images of every affine of the base; taking spectra makes the blowup an isomorphism. This is the elementary strict-inclusion argument, fully written out, from the cited statements and affine definitions.
+5. `lem-weil-pbc-noetherian-acc-quasi-coherent` states eventual constancy of exactly these submodules of a coherent module on a Noetherian scheme. It contradicts the strict inclusions of step 4. Stabilization alone would not prove regularity without that strictness argument; both are present. The base is the original fixed curve throughout, so no unsupported ACC on changing schemes is used. I read `coherent.tex` Tag 01Y8 (`lemma-acc-coherent`) and Tag 01Y6 (`lemma-finite-pushforward-coherent`) for steps 2, 4 and 5.
+6. `lem-weil-pbc-closed-immersion-comp` puts each reduced centre in the ambient scheme and retains the transformed closed immersion. `thm-nagata-global-blowup-proper` supplies properness since the centre ideal on the Noetherian ambient scheme is finite type. `def-weil-proper-morphism` says proper includes finite type, and `lem-weil-pbc-finite-type-over-noetherian` then supplies Noetherianness of the next ambient scheme; I read `morphisms.tex` Tag 01T6 (`lemma-finite-type-noetherian`). This also makes the point centre finitely presented, as required by the recorded `def-nagata-strict-transform`. The affine quotient calculation identifies the restricted point ideal as the reduced point ideal on the curve, with the correct scheme structure. `thm-nagata-strict-transform-is-blowup` explicitly gives the isomorphism with the curve blowup and compatibility over the base. I read its current `blueprint_update` and `divisors.tex` Tag 080E (`lemma-strict-transform`), as well as the recorded statement. `def-nagata-strict-transform` gives a scheme-theoretic closure, a closed subscheme of the fibre product, and `lem-weil-pbc-closed-immersion-base-change` makes that fibre product closed in the new ambient scheme. Their hypotheses are arbitrary base change and the already proved closed immersion; no extra separation assumption is needed. The ambient construction is a finite induction after termination of the intrinsic construction.
+7. This elementary conclusion uses the constructed identifications: regularity is transported by an isomorphism and each centre is the point already chosen to be singular. It takes no new fact from any unlisted node.
+
+Small cases checked: a regular integral curve (including the spectrum of a DVR) needs zero blowups; the normalization of a cusp over a field is finite and regular and the singular point ideal is noninvertible, so the one-step input has the intended nontrivial case; at an already regular point the blowup may be an isomorphism, which is why the new single-step input explicitly assumes singularity. No algebraically closed or perfect residue-field assumption is used, so mixed-characteristic and nonperfect-field examples are not excluded. Curves with nonfinite normalization do not satisfy the item's hypothesis. The empty scheme and dimension-zero integral schemes are excluded by the explicit dimension-one integral hypothesis. A nonregular one-dimensional integral scheme has a singular closed point without invoking openness of its regular locus.
+
+Against delivery-errors B–E: B1–B2: both children are self-contained propositions, with no proof/proof dependencies or inline proof sketch. B3–B7: all notions cite existing definition nodes or are spelled out, TeX is single-escaped, sources give tags and labels, and searches are actual logged calls (there are no proposed leaves). B8–B10: no one-line Mathlib specialization or completed project proof was found, and blueprint ancestry/duplicate checks were done. C1–C4: the per-step statement audit above checks coverage and exact clauses, including the corrected Noetherian/finitely-presented-centre bookkeeping. C5–C8: DAG/tag/blueprint searches preceded creation; children have only statement dependencies and cannot depend back on the item; generic off-unit tools are declared, not written into maintainer-owned `tool_uses`. D1–D2: normalization regularity and one singular-point blowup are proper smaller inputs, while coherent termination and ambient lifting stay in the item. D3–D5: the induction, strictness argument, and ideal comparison are supplied, not left as “standard” or deferred to a document. E1–E7: hypotheses, nonisomorphism, scheme structures, and edge cases were checked as above; no source error or statement dispute was found. Every proof step has fewer than 2000 characters, and none conceals a separate comparison lemma behind an unexpanded phrase.
+
+## Unfinished work and limitations
+
+No unresolved part of this one-level split. The two new inputs are intentionally unsplit, as required; they have no Lean proof claim. The maintainer's independent review remains part of the delivery process.
+
+## Validation
+
+The server `review_split` check passed. The first full dry run stopped before preflight because a concurrently added `lem-per-componentwise-normalization-properties` shared Tag 035Q. I opened its full statement and recorded the difference below: it has no regularity or dimension assertion for the normalized curve. The proper regularity input is retained; its later split can reuse that more general normalization interface. The final delivery dry run runs the authoritative full preflight, DAG checks and review checks before the push. The final result is recorded below after that process exits.
+
+## Not duplicates
+
+lem-per-finite-curve-normalization-regular vs lem-per-excellent-normalization-preparation: requires excellence and does not assert curve regularity; the new node assumes only finite normalization and dimension one.
+
+lem-per-finite-curve-normalization-regular vs lem-per-excellent-normalized-blowup-tower: assumes excellence and concerns normalized point blowups in arbitrary dimension; excellence is absent here and the new node concerns the initial finite curve normalization.
+
+lem-per-finite-curve-normalization-regular vs lem-per-integral-etale-chart-flatification: constructs simultaneous alteration charts over a quasi-excellent base, not a regular finite normalization of a curve.
+
+lem-per-finite-curve-normalization-regular vs lem-per-normal-projective-compactification: constructs compactifications after extending a mixed-characteristic trait; it is not a normalization-regularity assertion for arbitrary Noetherian curves.
+
+lem-per-finite-curve-normalization-regular vs lem-per-surface-curve-regularization-by-blowups: constructs an ambient resolving tower; the new input only describes the fixed normalization, or one intrinsic point blowup, and contains no termination or ambient regularization assertion.
+
+lem-per-finite-curve-normalization-regular vs lem-weil-pbc-geonormal-dim-one-smooth: requires a finite-type field scheme which is geometrically normal, and concludes smoothness; the new normalization input assumes neither a field base nor geometric normality.
+
+lem-per-finite-curve-normalization-regular vs lem-weil-pbc-reduced-algebraic-normalization-field-change: requires finite type over a field and concerns change of fields; that hypothesis is absent here.
+
+lem-per-finite-curve-normalization-regular vs lem-weil-pbc-reduced-normalization-over-normal-reduction: requires finite type over a field and identifies normalization on a prescribed normal open, not regularity of an arbitrary finite curve normalization.
+
+lem-per-finite-curve-normalization-regular vs lem-sbc-normal-finite-stage-universal: constructs universal finite stages of a normal approximation; it does not state regularity of a finite curve normalization.
+
+lem-per-finite-curve-normalization-regular vs lem-sbc-normalization-dominant-lift: states a universal lift from a normal source, with no regularity, Noetherianness or dimension assertion about the normalization.
+
+lem-per-finite-curve-normalization-regular vs lem-trf-normalized-blowup-calculus: assumes finite type over Q and treats normalized blowups; the new input treats a finite normalization of an arbitrary Noetherian integral curve.
+
+lem-per-singular-curve-point-blowup-step vs lem-per-generically-finite-proper-near-dimension-one: is the general local finiteness input, not a statement that point ideals lift invertibly to a regular birational cover or that the singular-point blowup is nonisomorphic.
+
+lem-per-singular-curve-point-blowup-step vs lem-per-surface-curve-regularization-by-blowups: constructs an ambient resolving tower; the new input only describes the fixed normalization, or one intrinsic point blowup, and contains no termination or ambient regularization assertion.
+
+lem-per-singular-curve-point-blowup-step vs lem-trf-proper-birational-curve-finite: assumes curves of finite type over a field and only concludes finiteness; the new step has no field base and also supplies blowup factorization and nonisomorphism.
+
+lem-per-singular-curve-point-blowup-step vs lem-trf-proper-birational-normal-curve-iso: has a normal target curve of finite type over a field and concludes isomorphism; the new step blows up a singular point and concludes nonisomorphism.
+
+
+lem-per-finite-curve-normalization-regular vs lem-per-componentwise-normalization-properties: the existing componentwise statement gives normality, integral surjectivity, generic fibres and birational recognition for locally Noetherian schemes; it asserts neither Noetherianness/dimension of a finite normalization nor regularity of a dimension-one normalization. The new input uses the additional dimension-one and finite-normalization assumptions to conclude regularity.

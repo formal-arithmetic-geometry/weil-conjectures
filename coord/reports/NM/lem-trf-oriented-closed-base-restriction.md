@@ -1,0 +1,59 @@
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-oriented-closed-base-restriction.json`: repaired statement node, twelve proof steps, unchanged statement and statement dependencies; no new nodes and no new Mathlib leaves.
+- `citations.json`: one verbatim statement quotation for every step/dependency pair.
+- `report.md`: this replacement report. The superseded reports, node versions, helper proposals, and repair scripts are retained under `retained-attempts/` and are not delivery nodes. The two proposed helpers have been removed from `dag/nodes/`.
+
+## Attachments
+
+None. The project-source searches for the blueprint tag, oriented closed-base terminology, and closed-base vanishing-topos terminology found no exact project declaration to attach. No Lean file was written or compiled. The existing Mathlib searches and their results were reread and retained, including the generic sheaf-equivalence hits: none states this scheme-specific oriented-product equivalence with its constructibility clauses. No new node or new Mathlib search is claimed in this repair.
+
+## WANTED:
+
+WANTED: Orgogozo, “Modifications et cycles proches sur une base générale”, Lemma 8.3.1, for `lem-trf-oriented-closed-base-restriction`, as an archival comparison with the general integral-base theorem. The local archival PDF is absent. I read the maintainer's report of its source check, not an unavailable PDF. The repaired proof does not invoke the integral-base theorem: it gives a direct proof for closed immersions from the locally available oriented universal property and complementary-subtopos results.
+
+## What was wrong and what changed
+
+This repairs returned head `397f006d7453e3dc9a764ab43ba4ad546fed9434`, with the detailed server review read from `local/nt-reviews/NM__lem-trf-oriented-closed-base-restriction__397f006d7453/review.md`. The item's statement agrees with the current shared node and is retained verbatim. The incorrect proof, rather than the statement, required repair. The earlier mechanically passing intermediate dry run is superseded and is not the basis for this delivery.
+
+D1/D2: the new point-lift statement disguised the desired equivalence as all-sheaf stalk comparisons. I withdrew that helper entirely. There is no replacement theorem that simply asserts the parent's equivalence. Steps 3–5 construct the inverse geometric morphism: the oriented arrow kills the pulled-back open complement, the first projection consequently factors through the closed complement, and full faithfulness of the closed étale embedding lifts the structural 2-arrow. The two composites are identified from their projections and arrows by the existing oriented universal property.
+
+C4/E5: the proof uses no point families or conservativity, for either sets or modules. In particular, neither a bijection of points nor module-only detection is used for set sheaves. The full-faithfulness input is the existing theorem explicitly about sheaves of sets. The rectangle helper is also withdrawn. Step 6 proves the restriction compatibility for `v` from the same projection/arrow data; Step 11 separately constructs the map needed for `r:E_T→V_f`, rather than applying a comparison for `v` to `r`.
+
+B2/B3: every topos, projection, complement subterminal, and structural arrow is introduced in the item. All non-elementary external inputs are existing cited statements, with their actual hypotheses checked below. The functor order in Step 4 is explicitly `l_* b_* H → f_{T,*} abar_* H`, so it is a morphism of sheaves on T. `proof_deps` is exactly the union of the step `uses`, and the generic off-unit tools are declared with their purpose.
+
+B9: no new helper needs ancestry. The item retains the complete current creator chain through oriented constructible subquotients, proper-surjective constructibility, good cohomology strata, nearby-cycle finiteness, finiteness exchange, and zero-section specialization to `lem-trf-local-term-locality`. I read the current ancestor proof, whose paragraph (1) and (2) actually mentions specialization to the normal cone; `from.place` quotes that sentence and does not invent a numbered closed-base step. This is a supporting nearby-cycle constructibility input along that chain. Blueprint searches found no separately imported blueprint statement identical to this technical item, so `same_as` remains empty.
+
+## What remains unfinished
+
+Nothing in the requested one-level split is left unfinished. The Orgogozo archival copy remains wanted for comparison, but is not an unproved input. All dependencies are existing DAG nodes; no implementation or proof completion of those nodes is claimed here.
+
+## Not duplicates
+
+No new nodes are delivered. The withdrawn point-lift and rectangle proposals are retained only as historical sandbox material, not as statements awaiting acceptance. Existing `lem-trf-oriented-product-universal`, `lem-trf-oriented-closed-base-localization`, `lem-trf-etale-closed-complement-sets`, and the constructibility definition supply the substantive general inputs. The restriction calculations are short applications of their actual statements, not separate nodes.
+
+## Review by NM
+
+I reviewed delivery-errors B–E against the repaired files, the full returned review, the chapter and unit route, the current blueprint ancestor, and each cited node's statement. The local mathematical sources I read were ILO, Travaux de Gabber, Exposé XI Theorem 1.4 and §§1.8–1.10 (in particular §1.9), and the Stacks source text: `sites.tex` for 08LY/08M0 and the constant-sheaf construction, `etale-cohomology.tex` for 04CA, `sites-modules.tex` for 093R, `morphisms.tex` for finite-type Noetherianity, and `topology.tex`/`properties.tex` for Noetherian spaces and constructible subsets. XI 1.8 describes points; XI 1.10(b) concerns étale localization. Neither is cited as a proof of integral base equivalence or of arbitrary locally closed rectangular comparison. No SGA route is used.
+
+Step 1 uses the set-valued small-étale adjunction's actual direct-image formula, the representable-sheaf statement, and the Yoneda Hom bijection to calculate the inverse image of an open representable. The empty-cover argument proves that the empty representable is initial. Fibre products and stability of closed immersions give the closed map `q`; the scheme clause of the closed-base localization node identifies its complement. These inputs apply to arbitrary schemes and to this open étale object.
+
+Step 2 uses the oriented-product universal property's full triple of data and the closed-complement theorem's factorization criterion, including 2-morphisms. Their statements give exactly the factorization test for the second projection, and hence identify the actual canonical map `r` with the inverse-image closed subtopos.
+
+Step 3 introduces arbitrary `Y→T` to cover subsequent restrictions, without finiteness assumptions. The geometric-morphism definition specifies the direction of the inverse-image mate. At the complement subterminal that mate maps to the initial object. Strictness of the initial set sheaf is stated by the finite-extensivity node; this is a theorem for sheaves of sets on a small site, not module conservativity. The closed-complement criterion then factors the first projection through `X_T`.
+
+Step 4 uses the direct-image composition convention and the fibre-product identity `f q = k f_T`. The set-sheaf closed-complement theorem states precisely that `k_*` is fully faithful, so it lifts the components of the oriented transformation and proves their naturality by faithfulness. The universal property constructs `w_Y` and identifies `v_Y w_Y`. Step 5 checks the other composite using factorization uniqueness and the same faithfulness, rather than merely asserting that the projections are equal. The constant-module inverse-image theorem identifies coefficient rings and operations, giving the module statement only after the set-topos equivalence is proved.
+
+Step 6 checks all projection and structural-arrow data of both composites in the restriction square and invokes the existing uniqueness clause. It works for scheme maps and immersion strata, without treating a locally closed stratum as an étale object. This is a written two-composite calculation, not a new comparison lemma assumed as a black box.
+
+Step 7 expands the local-model argument from the constructibility definition. The geometric-morphism definition gives finite-limit preservation; the cited adjunction/colimit statement supplies coproduct preservation, and the adjunction cancellation argument supplies epimorphism preservation. The constant-sheaf definition gives constants as sheaf coproducts of terminal objects, while the arbitrary-topos constant-module theorem supplies the module version on slices. The same finite set or finite module is retained. Applying the inverse equivalence proves reflection. No unmentioned coefficient invertibility is used.
+
+Step 8 uses finite presentation only to deduce finite type and then the cited source-Noetherianity theorem. The descending-chain characterization gives the required Noetherian underlying spaces, including closed subspaces. The constructible-subset and stratification definitions then apply to finite locally closed partitions. The proof explicitly checks pullback strata and composition of immersions; it does not appeal to an uncited constructibility theorem for arbitrary bases.
+
+Step 9 applies the already proved equivalence with `A=X_alpha`, `Y=T_beta`, checks the partitions through Step 8, and applies the actual restriction square and local-model pullback argument. Step 10 gives the reverse partitions, computes `A_alpha×_S T=A_alpha` from the closed-immersion quotient description and the scheme fibre-product property, and treats the added complement rectangle. On that rectangle the structural mate gives `1→0`; strictness gives a degenerate topos, where the unique sheaf has a finite constant model. Thus both directions, including empty rectangles, are covered.
+
+Step 11 treats the map `r` itself. It constructs each `h_alpha,beta` from `T×_S S_beta→S_beta`, verifies the two composites' projections and arrow, and pulls the finite local models along that map. It needs preservation, not an equivalence for this different morphism. Step 12 checks the closed-Z assertion using the generality already proved: Steps 1–7 allow arbitrary scheme morphisms, and Steps 8–11 need only Noetherian underlying spaces. Closed subspaces of X and of Z have these spaces. Thus it does not silently assume finite presentation of an arbitrary Z.
+
+I tested the identity immersion, empty T, empty X, empty strata, empty Z, and Z=X. A strictly henselian trait with T its closed point confirms the orientation: the structural mate kills the open complement on the first projection, the direction required for the factorization. A nilpotent closed immersion is also covered: the affine quotient calculation and the étale closed-complement theorem do not assume reducedness. The ring may be any finite commutative ring in the stated constructibility assertion. All twelve steps are below 2000 characters; the reusable inputs are existing cited nodes, and the short inline arguments are the explicit calculations described above.
+
+Every dependency quote was regenerated verbatim from its current node statement, and each was checked to contain the clause actually used, rather than only its terminology. There is no dependency path back to the item among the cited nodes. Searches and prior reports were retained rather than fabricated or overwritten without an archive. One earlier temporary repair script had mistakenly been written in `/tmp`; it has been moved into `retained-attempts/`. No live project or launcher file was modified, and no git command, compiler, or local DAG/preflight check was run. The final validation is performed by the prescribed server delivery tool after this report is written.

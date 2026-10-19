@@ -1,0 +1,54 @@
+# Stage-1 worker report
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-integral-realization-recursion.json`: statement node, now split in seven steps. The statement and all inherited provenance are unchanged. The proof uses four existing nodes. No new nodes and no Mathlib leaves.
+- `citations.json`: a verbatim statement quotation for every step/dependency pair.
+
+The sandbox was empty of node files and reports when this attempt began. I copied the current repository item, retained all its inherited searches, and appended only the five searches actually run by NW and recorded in `searches.jsonl`.
+
+## Attachments
+
+None. Searches in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact blueprint tag/id, `integral.*realization`, `realization.*integral`, and the canonical-recursion notion found no declaration stating this item. The audit is `none`. Generic project HomotopyCategory adjunction declarations do not state the item. No attachment is claimed from the upstream master source.
+
+## WANTED
+
+None. The relevant blueprint, Stacks sources, existing statement nodes, and the construction of the specified realization are available locally.
+
+## Corrections and source scope
+
+The item arrived with an empty proof. Its statement is correct and was not changed. No STATEMENT-DISPUTED correction is needed.
+
+The main-20261015 `fix-prop-coherence.proof.md` maps-used sentence gives the coefficient-comparison route, not a theorem about this particular expression-tree recursion. This is an agent expansion of that route, honestly marked `proof_origin.by = agent`. I also read the full seven-step proof and statement of `lem-sf-integral-compactification-system-realization`, in particular its defining steps 3-4, and the statement of `lem-sf-generator-reduction-coherence`. The parent construction explicitly fixes the inverse-unit variable normalization and these counit substitutions. The present proof writes the same construction using actual adjunction transposes and proves the formulas and uniqueness. It does not try to deduce normalization just from the parent's existential statement or its generator-intertwining conclusion: those alone would leave an automorphism ambiguity.
+
+The inherited ancestry refers to the purity transport Step 2. I checked the older master `sec-smooth-purity/sk-thm-purity-transport/_section.md`: Step 2 there is indeed the adic stage. The current main-20261015 rational-and-qbar proof uses a different step numbering. The actual current binding is `sk-thm-sf-compatibility`, whose coefficient clause is the relevant route; no chapter or unit metadata was edited. The node is not a unit's key theorem, so no unit realization record is due.
+
+## Unfinished work
+
+None for this one-level stage-1 split. All non-elementary inputs are existing cited statements. Their own downstream proofs remain the responsibility of their existing nodes.
+
+## Review by NW
+
+I read sections B-E of `coord/delivery-errors.md` with the item, its four dependency statements, the parent realization construction, and the sources open. I checked the fixed chapter and current `sk-thm-sf-compatibility` unit, the main-20261015 `fix-prop-coherence.proof.md` sentence on tensor reassociation/evaluation/units/counits, and master purity transport Step 2. For the foundational references I read Stacks `sites-cohomology.tex`, Tag 07A6 (`lemma-adjoint`) and Tag 0941 (`lemma-derived-limit-is-ok`); these supply derived adjunction/limit background and are not represented as statements of this domain-specific recursion. I also read Tag 0E48 (`remark-compatible-with-diagram`) when checking the generator source, but no diagram-coherence result is used as an extra uncited premise here. No SGA source is used.
+
+Step 1 takes canonical counit effectivity and completeness from `lem-coef-normalized-dvr-effectivity`, and identification of those counit components and detection of isomorphisms from `lem-coef-derived-system-evaluation-calculus`. Both statements say exactly these things. The input is a normalized coherent DVR tower on the same pro-etale site; it is not an arbitrary family of objects. The common finite intervals, constructibility, and compatible etale-origin witnesses are hypotheses of the item. The actual counit isomorphisms identify the reductions of its limit with those very levels. No equality is detected by evaluation.
+
+Step 2 uses the actual adjunction's right triangle and naturality, which the calculus statement supplies. The realization statement supplies an isomorphism for a variable expression, and I use only its existence at this point. This yields invertibility of the actual unit by conjugation along that isomorphism. In particular I did not silently identify an arbitrary map between Roos triangles with the unit. The reduction of an integral leaf is among the normalized input systems expressly assumed in the item.
+
+Step 3 uses the basic-operation coefficient transpose formula in the statement of `lem-sf-generator-reduction-coherence`, including its fixed open comparison, and the actual reduction/limit adjunction from the calculus statement. I wrote the unary and two-slot coefficient composites, the transposition formula, and its inverse explicitly. The cancellation is the actual left/right triangle identity, not faithfulness of derived evaluation. The coefficient composite is the construction, rather than an independently assumed theorem for arbitrary words. The local single-operation calculation proves that its transpose is exactly the prescribed inverse of d_A. For opens it therefore uses the localized ringed-site d_j already fixed in the generator statement.
+
+Step 4 uses those same two cited statements. Substituting q_V = e_M R(b_V), using functoriality, and applying naturality of d_A gives the displayed three-factor inverse comparison. Reversing its factor order gives exactly the claimed a_A, not its inverse. I checked every source and target: the map LA(e_M) runs from LA R L M to LA M, so its inverse is in the necessary direction in a_A. Properness for S_p, separated finite type for P_v, and quasi-compact openness for J_j are unchanged. At a recursive step the previous comparison identifies I_V with the complete constructible L M; applying the unary functor to its coefficient isomorphism identifies A R I_V with the assumed admissible A M. Thus no closure under normalization or finiteness is silently being applied to arbitrary inputs. This step is a short calculation from already cited formulas, so it is marked elementary.
+
+Step 5 is the two-slot version, with bifunctoriality written as a factorization. Naturality of d_tensor has both inputs, so the tensor of the two inner inverse comparisons appears in the correct place. Its inverse is the tensor of their inverses. I checked that system tensors are over the varying finite coefficient rings, whereas the target operation is completed integral tensor; no coefficient categories have been identified without d_tensor. Independent leaf slots are retained. This is again elementary substitution of the cited formulas.
+
+Step 6 gives the induction parameter, the leaf, and both decreasing recursive cases. It identifies this construction with the specified parent's construction by its inverse-unit leaf and the actual insertions e_M^{-1} and e_M^{-1} tensor e_N^{-1}; it does not take a theorem from an unpublished internal construction. The constituent maps are all the maps named in the generator and calculus statements, and all the comparison calculations appear in the present proof. A second induction proves uniqueness for an arbitrary family satisfying the displayed equations. This avoids moving the item or any of its clauses into a new node (D1-D2).
+
+Step 7 takes naturality of the actual unit/counit from the calculus statement and naturality of the specified single-operation comparisons from the generator statement. I wrote the equation for the inverse LA(e) factors, rather than saying they simply transport. The binary equation is obtained by tensoring the two explicit counit equations; pasting these squares with the children gives naturality in every slot. These are elementary operations on the previously established formulas.
+
+Small cases checked: a single leaf gives u^{-1}; a one-operation tree reduces to d_A by the triangle identity; the two-leaf tensor has exactly two counits and a single two-input d_tensor; zero input and an empty open have the unique zero-object morphisms; the identity open uses its specified localized comparison; at a geometric point K = R[0] the leaf map is the actual inverse completion unit. Equal-index reductions remain identity coefficient maps. All levels are n >= 1. There is no use of a shift comparison or an unsigned replacement for a signed tensor shift map. The proof does not assert a property for an unbounded/non-normalized intermediate system outside the given domain.
+
+I searched the whole DAG and whole imported blueprint with `tools/blueprint_refs.py search` (realization, canonical integral, counit) and `rg` for the recursive-realization notion. The nearest ancestor is `thm-pur-rational-and-qbar-purity`; the inherited from/via chain is retained. Existing generic transport and completed tensor/pullback substitution nodes do not state the complete specified unary/open/proper/tensor recursion. They are not needed as new duplicates. Since every additional argument here is finite-tree induction or a few equations from the cited adjunction, I created no new lemma node (B1-B9, C5). The four cited nodes are within the current unit route; no off-route tool declaration is necessary.
+
+Mathlib search: the first LeanFinder phrasing found only Lean-expression reification tactics. Loogle found the generic counit, triangle identities, and `Adjunction.toEquivalence`; LeanSearch found composition of adjunctions/equivalences. The second LeanFinder phrasing found monoidal-equivalence counit identities. I read `Adjunction/Basic.lean:110-180` and `Monoidal/Functor.lean:1200-1222`: these are generic infrastructure and do not identify the specified semilinear operations or d_A. The recorded grep hits are generic adjunction formulas (including `Adjunction/Unique.lean:60`). Accordingly the item is not a Mathlib leaf. Every appended query is copied exactly from the actual search log; all five services returned results, so no unavailable result has been mislabeled as absence.
+
+All seven steps are below 2000 characters (the longest is 1364); none hides a standard comparison theorem. Statement dependencies remain the original three, proof dependencies are exactly the union of uses, and every cited node's full statement was read before generating the verbatim quotations in citations.json. I corrected the potential normalization ambiguity by spelling out the actual coefficient composite/transposition calculation in the proof; the statement itself needed no alteration.

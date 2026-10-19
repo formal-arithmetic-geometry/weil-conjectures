@@ -1,0 +1,36 @@
+# Stage-1 report: lem-kun-flat-resolution-existence
+
+1. Files written: dag/nodes/sec-smooth-purity/lem-kun-flat-resolution-existence.json (statement, split; no Mathlib match), citations.json, report.md. No new nodes or Mathlib leaves.
+2. Attachments: none. The source has no blueprint-tagged declaration for the item. CochainComplex.exists_quasiIso_flat_kFlat, WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean:173, has the analogous conclusion in an abstract monoidal Grothendieck category with HasFunctorialFlatResolution; it is not an exact sheaf-module declaration. Identifying its categorical flatness and tensor with the present ringed-site predicates is additional work, so I make no attachment claim.
+3. WANTED: none. Stacks sources are present.
+4. The conclusion is correct; its proof is not. See Source error below. I replaced the invalid argument by the existing general ringed-site theorem, rather than creating another version of that theorem. Statement edits only make the existing notions and their definition nodes explicit; no hypothesis or conclusion changed.
+5. Unfinished: none in this one-level split. The second reader should independently check the specialization and source-error justification. No delivery was pushed.
+
+## Source error
+
+The blueprint proof resolves G by a K-injective I and obtains K -> I. Its final sentence claims a composite K -> G, but the resolution supplies G -> I, not I -> G. This is a genuine chain-level error, not just an omitted derived-category identification: on the etale site of an algebraically closed field with coefficients Z, take G=Z[0] and its injective resolution I=(Q -> Q/Z) in degrees 0 and 1. Every chain map I -> Z[0] is zero, since Hom(Q,Z)=0; none is a quasi-isomorphism. An inverse exists after localization, which does not supply the claimed chain map. In addition the imported proof attributes direct-sum flatness and direct-sum K-flatness to a clause of lem-kun-kflat-criteria which now states only triangle closure. I therefore do not retain those unsupported citations.
+
+The unit sk-prop-sf-kunneth-ordinary has no intermediate steps prescribing a finer route. The item explicitly cites Stacks 06YS; applying its already-existing ringed-site version preserves that literature route and the required resolution input to Kunneth. No chapter or unit record was changed. The off-unit use of lem-pc-kflat-resolution is declared in split_report.tool_uses.
+
+## Not duplicates
+
+No new nodes. The DAG tag search for 06YS and concept searches found lem-pc-kflat-resolution, which is strictly more general and even supplies degreewise surjectivity. It is reused. Whole-blueprint searches for K-flat and flat resolution found no other imported node with this exact assertion: same_as is empty (the ringed-site theorem is a created node, not an imported blueprint identity).
+
+## Review by NB
+
+I read the master blueprint item and its chapter/unit, the current statements of all seven imported proof citations, and Stacks sites-cohomology.tex, Tag 06YS (label lemma-K-flat-resolution). The Stacks statement is for an arbitrary ringed site and an arbitrary complex and explicitly supplies K-flatness, flat terms, and a termwise-surjective quasi-isomorphism to the given complex. I also read the existing lem-pc-kflat-resolution statement and its proof metadata: it states exactly this stronger theorem, so step 2 takes all three requested properties from its statement, not from its construction. Its hypotheses require only a site, a commutative ring sheaf and a cochain complex; all hold after the substitutions C=T_et and O=Lambda_T.
+
+For step 1 I opened def-weil-pbc-etale-site, whose last sentence states that T_et is a site, and def-kun-constant-sheaf, whose statement supplies the sheafification of the constant presheaf. The latter is applied to M=Lambda. Ring addition, multiplication, zero and unit are induced by the corresponding constant-presheaf operations; the commutative ring identities hold locally on sections, so this identifies the existing constant ring sheaf without invoking a separate non-elementary theorem. This is the elementary setup step. For step 2 I opened lem-pc-kflat-resolution and checked every clause, the direction K -> G, the lack of boundedness restrictions and the absence of Noetherian, finiteness or coefficient-torsion assumptions. Its K-flat and flat definitions are the same definition nodes used in the clarified item. Forgetting degreewise surjectivity adds no theorem. citations.json copies the actual cited statements verbatim for these two steps.
+
+Against B: no new unsplit proof, no unintroduced object, no new definition or duplicate, TeX is singly escaped, and sources specify the Stacks tag and label. Mathlib queries were all executed through msearch.py and recorded verbatim, including the invalid-identifier Loogle query and LeanSearch's HTTP failure as unavailable. The second semantic phrasing gives only K-projective/K-injective and t-structure ingredients. The grep hits in LeftResolution/Basic.lean are a generic input resolution structure, not existence of a flat sheaf resolution; I opened that file. There is no KFlat grep hit. Thus no result justifies a Mathlib leaf.
+
+Against C: every non-elementary fact is the explicit statement of lem-pc-kflat-resolution. Setup cites the appropriate actual definitions, not their proofs. No newly invented colimit index, exactness, closure, cone or lifting lemma is hidden in the steps. Against D: no clause was moved to a new node; the existing general theorem is a one-step specialization, as required by the duplicate rule. Against E: neither a K-injective map nor a derived inverse is reversed, and the ringed site and coefficients are the original ones. I checked zero complexes, the zero ring, the empty scheme and complexes unbounded in both directions: the general theorem includes all four, and no bound or nonzero hypothesis enters the specialization. The statement remains true in these cases. The corrections are the replacement of the invalid chain-level composite, removal of unsupported direct-sum citations, and explicit definition dependencies. No Lean was written or compiled.
+
+## Second reading by NB
+
+- Item statement: checked against Stacks `sites-cohomology.tex`, Tag 06YS, label `lemma-K-flat-resolution`; all hypotheses and the three conclusions agree, including the direction of the quasi-isomorphism.
+- Step 1: checked the cited site and constant-sheaf definition nodes; the ringed-site setup and module-complex identification follow elementarily from their statements and pointwise ring operations.
+- Step 2: checked `lem-pc-kflat-resolution` verbatim; it supplies K-flatness, flat terms, and a termwise-surjective quasi-isomorphism in the required direction, with no extra hypotheses.
+- No new nodes: B1–B7 and C5 checked; the existing general ringed-site node is reused, and all recorded Mathlib searches are present in `searches.jsonl`.
+- Edge cases: zero complex, zero coefficient ring, empty scheme/site, and unbounded complexes remain covered by Tag 06YS without hidden assumptions.
+- Changes made: none after the first review; its source-error repair and explicit dependencies remain correct.

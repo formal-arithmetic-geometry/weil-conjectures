@@ -1,0 +1,44 @@
+
+
+## lem-pur-co-smooth-etale-locality (2026-10-15 23:16 UTC, branch head e369579c3e)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-pur-co-smooth-etale-locality: coord/.merge.lock held for 120 s by pid 3168532: /usr/bin/python3 tools/merge_delivery.py NC lem-kun-stalk-faithful-derived --stage 1 --reviewer NT-Codex-NC-376d23af5 --head 376d23af57cb5d5b5b131991c9e26642789df863 --spot-checked Read all five steps, the new cone leaf, cited statements and sources. Verified Stacks 05QR/015F/03Q1/04JN/04JQ/03PT/03PU and the exact Mathlib declarations. Unbounded ordinary étale coefficients, hypotheses, edge cases, duplicates and dependency cycles checked. No repairs needed; accepted generic tool uses documented in rev Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-pur-smb-extraordinary (2026-10-16 04:53 UTC, branch head a5f1e764ce)
+
+L (re-issued by the launcher; the entry had been lost): .lock held for 120 s by pid 1872115: /usr/bin/python3 tools/merge_delivery.py N6 lem-amb-p1-diagonal-integrals --stage 1 --reviewer NT-Codex-N6-02637d96f --head 02637d96f89402c7f22bc8648601962ae70decb4 --spot-checked Reviewed the item, all seven proof steps, cited node statements, blueprint/unit route, source locations, Mathlib searches, and edge cases. The finite ordinary-etale coefficient repair and corrected exchange/stalk arguments are sound; review.md records the full audit. --verdict PASS
+
+
+
+
+## lem-cbc-completed-extension-zero-comparison (dedicated repair handoff)
+
+The previous worker ended with: Stage-2 interface repair required; prior binding withdrawn, not a proof failure.
+
+Compiler messages and attribution:
+The published completed open comparison cbcCompletedExchange uses cbcCompletedPullback, whereas its recorded statement prerequisite def-weil-pbc-completed-pullback and the proper completedExchange factor use AdicCoefficientDatum.completedPull. These functors are not definitionally equal, and the recorded modules expose no canonical natural transport preserving their ordinary-to-completed units. Thus the two prescribed factors of def-cbc-completed-exchange-map cannot compose. The prior reviewed Lean binding does not provide the dependency interface claimed by the node and must not count as stage-2-ready.
+
+Repair this owning prerequisite in stage 2, keeping its mathematical statement and quasi-compactness/completeness hypotheses. Publish the canonical completed open comparison on the recorded d.completedPull presentation, or publish an explicitly normalized natural transport from cbcCompletedPullback and use it to expose that comparison. Compare the actual completed coefficient maps, derived pullback counits and ordinary-to-completed units; preserve the finite quotient transitions and ordinary adjoint-mate normalization. An arbitrary endpoint isomorphism, extra comparison hypothesis or existing:true alias of the old theorem does not repair this defect. Retain the old public API for existing consumers. Read Sheaf.Paper.CompletedPullback, CompletedTowerPullback, CompletedExtensionZeroComparison and CompletedBaseChangeMap. Validate a consumer composing the actual proper and open factors for arbitrary scheme base change, with no extra hypotheses. Use a new side-only module if changing a side copy of a module also present in the live library would leave compilation resolving the published live interface. Compile one file at a time with the 60-second wrapper; never lake build. Land through the normal independent stage-2 review. The target worker resumes only once the prerequisite has a usable reviewed Lean binding.
+
+Archived binding: coord/reports/maintenance/def-cbc-completed-exchange-map.invalidated-lean.json
+
+
+
+## lem-weil-pbc-proper-smooth-curves-prime-coefficients (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 2 (2185 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 2 (2185 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+
+## lem-weil-finite-duality-site-comparison (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 2 (2364 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 2 (2364 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+## lem-per-algebraic-dualizing-torsion-hull (2026-10-19 01:49 UTC, branch head eefb6754e45)
+
+Route-pivot RETURN (2026-10-19 dropped section of clones/side/coord/route-pivot-dropped.txt, decision recorded in coord/repair-notes/lem-per-artin-gabber-affine-curve.json). The item lem-per-algebraic-dualizing-torsion-hull is itself dropped (line 1411), and so is the cited def-per-algebraic-normalized-dualizing (line 1368). Its only citer, lem-per-algebraic-local-duality (line 1414), is dropped, and so are that node's citers: local-cohomology-top-nonvanishing (1680), algebraic-completion-rhom (1405) and algebraic-torsion-completion-hom (1416). No target reaches this chain. Finding 1, the item citing def-per-algebraic-normalized-dualizing: no step justifies it, and the dependency is the statement's own hypothesis, so it cannot be removed. Finding 2, the new lem-per-finite-length-dualizing-hom citing the same def: same reason; the node exists only for the dropped item. The mathematics is otherwise sound and I read it in full. The statement is Stacks Tag 0A82, with RΓ_m equal to RΓ_Z for Noetherian A. Step 1 cites Tag 08Y3 (injective hulls exist over any ring), which removes the earlier circular cite. Step 2 shows A/m^n has finite length. Step 3 uses Tag 0954 (any ring, finitely generated ideal) and Tag 0A7Q (functorial finite-length duality) to get H^q = 0 for q ≠ 0. Step 4 uses evaluation at 1 and Tag 08Z4 (E = ∪E[m^n]). Steps 5–6 are the elementary transfer and the good-truncation zigzag. The four new nodes are faithful general Stacks lemmas, not restatements. No forbidden ingredient appears (no Qbar_l, adic or middle t-structure route, no Gabber or alterations). Precedents: Q159, Q110, Q26, Q86, Q35. Maintainer: withdraw the lem-per-algebraic-* local-duality items from dispatch.

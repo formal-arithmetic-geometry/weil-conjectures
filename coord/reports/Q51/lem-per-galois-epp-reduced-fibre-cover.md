@@ -1,0 +1,51 @@
+# Q51 stage-1 delivery: lem-per-galois-epp-reduced-fibre-cover
+
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-galois-epp-reduced-fibre-cover.json: statement, split in 14 steps; not a Mathlib leaf.
+- dag/nodes/sec-deligne-laumon-a1/lem-per-galois-compositum-restriction.json: statement, Mathlib leaf, with one declaration per clause (IsGalois.sup_right and IntermediateField.restrictRestrictAlgEquivMapHom_injective, with the restriction map itself).
+- citations.json: a verbatim statement quote for every citation of each item step.
+
+## Attachments
+
+None. Searches by blueprint tag, Epp, reduced special fibre, complete normal local domain and Galois preparation in the read-only slopmaster2 WeilConjectures source found no project declaration stating the item or the new field-algebra lemma. Mathlib declarations are recorded as a leaf rather than project attachments. Upstream master was checked as reference material, not treated as finished proof.
+
+## WANTED
+
+None. ILO and the relevant Stacks sources are present.
+
+## What was wrong or incomplete
+
+The item was a statement-only supporting node. Its statement is unchanged. The non-equivariant preparation lem-per-mixed-reduced-special-fibre-cover cannot alone imply the Galois compatibility: an arbitrary Galois closure after choosing the cover need not preserve the particular coefficient DVR or its reduced special fibre. The split therefore makes the constant extension Galois first, uses the existing Epp stability theorem for that further finite extension, and then chooses a field factor before normalizing. The full Galois group of that field factor acts compatibly on its embedded constants. It need not be the whole Galois group of the original constant extension; no linear disjointness is asserted. This is precisely the component/decomposition-group alternative already allowed in the item's source description, not a statement correction.
+
+I reused the statements of all supporting nodes from the existing non-equivariant split, not its internal construction as a black box. The localizations, monic-equation comparisons and residue-field arguments are written in the item. The new Mathlib leaf states a compositum theorem for actual subfields: identification of the chosen tensor quotient with their compositum is explicitly proved in step 7, and no tensor-to-subfield conversion is hidden in its Mathlib match.
+
+## Unfinished
+
+None within this one-level stage-1 task. Existing supporting nodes remain existing dependencies; the sole new node is a Mathlib leaf, so there are no new unsplit nodes.
+
+## Not duplicates
+
+lem-per-galois-compositum-restriction vs lem-sbc-field-torsor-component-galois-group: the latter assumes a finite etale scheme torsor and a specified component open immersion; the new leaf is a field-theoretic statement about subfields generating their compositum, with its explicit restriction homomorphism. No scheme torsor is constructed or assumed here.
+lem-per-galois-compositum-restriction vs lem-exc-finite-galois-tensor-decomposition: the latter decomposes E tensor E for a finite Galois extension and computes sheaf restrictions; it does not state the compositum theorem or injectivity of restriction used here.
+lem-per-galois-compositum-restriction vs lem-weil-pbc-tensor-galois-prime-transitivity: prime transitivity for a tensor product does not assert that a selected compositum is Galois or state restriction of its automorphisms.
+lem-per-galois-compositum-restriction vs lem-weil-pbc-finite-galois-receiving-separable-extensions: the latter constructs a Galois overfield receiving finitely many extensions; the new leaf concerns a given ambient compositum and its restriction map.
+The new node has a Mathlib source, not a shared Stacks tag. Whole-DAG key-word/declaration searches and blueprint_refs.py searches for Galois compositum, Galois base change, and finite Galois compositum found no node with the same statement. Searches for the item found only the original item and its citing parent. The existing non-equivariant reduced-fibre cover does not assert a Galois group or a compatible action on its coefficient DVR.
+
+## Review by Q51
+
+I read ILO Expose IV 3.1.2–3.1.3, 3.2.2–3.2.3, 4.1.7–4.1.9, 4.2.3–4.2.5 and 4.3.1–4.3.7, printed pages 55–61. I also read Stacks' Cohen-ring existence and formal-smoothness statements (0328/0329, labels lemma-cohen-rings-exist and lemma-cohen-ring-formally-smooth), the normal-closure proof (09DT, lemma-normal-closure), and the finite-Galois automorphism statement (09I1, lemma-finite-Galois). For the new node I read the actual local Mathlib source: Galois/Basic.lean lines 54–58, 553–569 and 600–629. These give exactly the two clauses recorded as the leaf, including the restriction formula, and require no Noetherian, completeness or finiteness hypothesis on the second subfield.
+
+I opened and read every cited DAG statement. Steps 1–3 use Cohen rings, formal-smooth lifting, finite minimal primes, associated-prime height one, localization of normal Noetherian domains, the dimension-one DVR criterion, excellence, complete quotients, the perfect-core lemma and the finite-family Epp theorem. Their hypotheses apply respectively to the maximal perfect subfield of the residue field, A, A/pA, the height-one localizations A_P, and the complete domains A/P. The residue field of A_P is Frac(A/P), not the closed residue field k. I checked that the perfect-core lemma applies to A/P with exactly the specified embedded perfect field; the residue perfect core is that field itself. No completeness of A_P is assumed, since the Epp node explicitly allows noncomplete upper traits.
+
+Step 4 uses the existing finite normal-overfield node on the finite fraction extension K_1/K_*. Separability is proved directly by the characteristic-zero derivative argument. Step 5 uses the complete-DVR normalization theorem for W_0 and the finite normal overfield, finite-implies-integral for W_1, and the unit-times-uniformizer statement to establish locality of W_1 to W. A finite generating set gives the finite residue extension; the existing algebraic-extension-perfect Mathlib leaf then gives perfectness. Crucially, clause (3) of the one-trait Epp node really says stability along a local W_0-algebra map, and I verified that map before invoking it. It therefore applies to every T_i after the Galois enlargement.
+
+Step 6 uses the finite-extension integral-closure theorem, complete-local Nagata theorem, and the definitions of Nagata and Japanese at the prime (0) of the domain A. These provide a finite normal A-domain with fraction field L, and the monic equations of W over W_0 put W inside it. Step 7 verifies the compositum hypothesis by surjectivity of the tensor quotient, applies the new leaf to the images of F and K in L, and uses the existing finite-Galois-fixed-field statement only for finiteness of the full automorphism group. Step 8 uses the finite-domain case of the finite-algebra-over-complete-local product theorem, which does give the unique maximal ideal over m; integrality and equal dimension then apply to an injective map. Residue finiteness is written using generators. Locality of W to C is proved using p=u pi^e, with e positive. Step 9 is elementary: applying g and its inverse to monic equations preserves both integral closures. Uniqueness of their maximal ideals makes the automorphisms local. The actions and the equivariance come from restrictions of the same automorphism of L, not separate choices.
+
+In steps 10–12, going down is used only because A is normal and C is an integral domain integral over it. A height-one prime over pi contracts to a height-one prime over p. The localization-of-integral-closure statement supplies precisely the integral closure of T_i in L. To identify it with the normalized tensor image, I checked both directions of integrality, citing finite-implies-integral and transitivity; L is the same maximal-ideal quotient of F tensor K as in step 6. Thus the Epp node applies to exactly this ring. Localization preserves reducedness by the explicit nilpotence calculation in step 12.
+
+Step 13 uses the normal-domain principal-quotient associated-height statement on the nonzero element pi in C, the quotient-localization isomorphism, and injection of a module into its associated-prime localizations. Together these turn generic reducedness into reducedness with no unproved S2 assertion. Step 14 uses complete-local excellence and the definition of universally catenary, plus minimal-support-associated and the same height-one statement. A saturated chain from (0) through Q to the unique maximal ideal has total length d, so dim(C/Q)=d-1. This verifies every minimal component rather than assuming an arbitrary normal ring is equidimensional.
+
+For delivery-errors B–E, I checked self-contained hypotheses and definitions of the sole new statement, statement-only Mathlib-leaf form, actual declaration lines, single TeX escaping, preservation of imported fields, searches logged as actually run, and the blueprint ancestor/via fields. The new node is neither an elementary monic-equation argument nor a clause of the geometric item: it is the generic field-algebra tool used at step 7. All non-elementary inputs are cited statements; every citation has its verbatim statement in citations.json. Off-unit generic tools are declared individually in split_report.tool_uses. There is no proposed SGA route. No proof step exceeds 2000 characters (the longest is step 11 at 1130 characters), and the normalization comparison there is spelled out by the cited localization and integrality theorems.
+
+Small cases checked: A=Z_p[[x]] and a trivial constant extension; ramified A=W(k)[[x,y]]/(x^r y-p), where passing to an arbitrary later Galois cover would not justify the special-fibre claim; imperfect residue fields, for which the maximal perfect subfield rather than all of k is used; non-disjoint F and K, including K already contained in F (then L=F and G is trivial); and a nontrivial compositum. The new leaf remains true for K=k, F=E, or F=k. The reducedness argument covers nilpotents supported away from generic points through associated primes, and the equidimensionality calculation applies at the boundary d=2. No counterexample or statement dispute was found.

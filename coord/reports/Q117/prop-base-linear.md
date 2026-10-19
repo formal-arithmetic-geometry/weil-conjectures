@@ -1,0 +1,56 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-fourier-transform/prop-base-linear.json`: statement retained; nine explicit proof steps, searched blueprint equality field, typed dependencies, and declared generic tool uses. Mathlib verdict: no match for this adic Fourier–Deligne proposition.
+- `dag/units/sk-prop-base-linear.json`: only `realized` and `realized_by`, identifying the item as the statement and sole unit proof step.
+- `citations.json`: verbatim statement excerpts for every step/dependency pair.
+
+New nodes: none. New Mathlib leaves: none. No Lean files or live/shared project files were written; nothing was compiled.
+
+Attachments: `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine` belongs to existing `lem-sf-adic-affine-direct-image-finiteness` (its `lean.declaration` and statement agree). This resolves the item's stale audit entry with `nodes: []`; I have not changed that other node or the audit. This is a mapping of an unfinished declaration, not a claim that its proof is closed.
+
+WANTED: none.
+
+What was wrong: the imported argument cited no statement for monoidal pullback or composition, used tensor constraints and a shift comparison without their coefficient interpretation, and attempted to commute an inverse image with an infinite Tate limit inline. Those gaps are replaced by existing statements. The new proof uses the stated all-integer Tate pullback theorem directly. It does not use an unproved general preservation of inverse limits. The proposition's source statement and the current main-20261015 statement agree; there is no statement correction. The coefficient assumption that the character is E-valued is the existing standing convention in `def-fourier-set`, not an additional assumption on this proposition.
+
+The Lean declarations in `FourierTransform/Properties/BaseLinear.lean` were read through line 164, and the Weil declaration in `WeilSheaf/FourierTateTwist/Transform.lean` through line 126. They are not an exact finished attachment: the étale statements use a finite coefficient ring and a finite-Tor base input, whereas the item is the adic E-field proposition with every bounded constructible base input. The audit also has open dependencies (the finite proper projection formula and the affine adic finiteness theorem). No sorry-free field-coefficient declaration stating every clause was found by the tag/name/concept searches in `WeilConjectures/`.
+
+Nothing mathematical remains unfinished in the split; its dependencies remain their own items. The prescribed remote dry run and push are the final validation/delivery steps.
+
+## Sources and searches
+
+I read the chapter record, unit record, master node proof and current main-20261015 node and proof. The unit's route is exactly monoidal pullback on the Fourier square, projection formula for its second projection, then the normalization shift. The two corollaries remain specializations of that same isomorphism. Laumon, Definition 1.2.1.1 (printed p. 141), confirms the normalization and Fourier kernel expression. I did not follow a different trace or purity route.
+
+For the coefficient constraints I read Bhatt–Scholze, Lemma 6.5.5 (printed pp. 49–50), which explicitly says the ordinary derived tensor of constructible integral objects is already complete, and the local proof following it. I read Stacks `sites-cohomology.tex`, `lemma-pullback-tensor-product` (Tag 07A4), and the preceding `lemma-derived-pullback-composition` (Tag 0D6D); these are finite-level inputs, not a licence to identify discrete E-sheaves with the adic category. Tag 0FPT (`lemma-symmetric-monoidal-derived`) supplies the ordinary derived tensor constraints; its precise usable statement is the existing ringed-site monoidal node. The completed right-shift comparison is already isolated in `lem-sf-completed-tensor-shift-right`; I use its stated signed comparison and rationalize, rather than hiding a new comparison lemma.
+
+I searched the entire DAG by titles, statements, Tate/pullback/monoidal/shift keywords and the exact open Lean declaration, including `lem-sf-adic-affine-direct-image-finiteness`. I ran `tools/blueprint_refs.py ancestor prop-base-linear`, `search 'base linear'`, `search Fourier tensor`, and `search Tate pullback`. The searches found generic coefficient/Tate statements to reuse, but no other blueprint node stating the complete proposition. Thus `same_as` is empty. Since there are no new nodes, there is no same-tag duplicate pair to distinguish.
+
+Every Mathlib query in the added records was run by `msearch.py Q117 prop-base-linear`, and its results were read. Both semantic phrasings returned ordinary sheaf pullback/free-functor comparisons and analytic Fourier material, not this kernel-transform statement. LeanSearch returned `FourierTransform.fourierₗ` and analytic linearity. The broad grep likewise returned analytic Fourier definitions; the AlgebraicGeometry grep for kernelTransform/Fourier–Deligne/TateTwist returned no matches. The two typed Loogle attempts reported unknown identifiers, recorded verbatim as unsuccessful queries rather than independent evidence of absence; a further quoted-name query returned Fourier–Motzkin tactic declarations. No query was invented and no remote service error was relabelled as absence.
+
+## Not duplicates
+
+No new nodes. In particular no node was created for tensor symmetry, tensor shifts, Tate pullback, the projection formula, or the already mapped affine adic finiteness declaration.
+
+## Review by Q117
+
+I checked the statement against the current Fourier source and the old source from which this node was imported: the vector bundle, coefficient category, order of tensor factors, normalization shift, two naturality variables, base-unit corollary, all integer twists, and Weil clause are all retained. I read each cited node's statement and recorded the portions actually used in citations.json. No step relies on a construction hidden only in a cited node's proof.
+
+Step 1 uses `def-fourier-set` for the standing E-valued coefficient convention and `def-weil-derived-pullback-tensor-hom` for integral/rational operations. The actual tensor-completion comparison is the theorem `lem-fix-constructible-tensor-completion`, not a definition. The ordinary symmetric constraints are precisely in `lem-sf-ringed-derived-closed-symmetric-monoidal`. The quasi-compact/quasi-separated hypothesis holds because all four schemes are separated and of finite type over k. Conjugating the existing constraints and rationalizing is the short transport written in the step, not a new lemma about a different tensor product.
+
+Step 2 uses the projections in `def-fd-kernel` and the exact statement of `lem-pod-separated-finite-type-base-change`. The polynomial chart checks that the original vector-bundle projection is affine, finite type and separated, before the base-change result is applied. Its base-change map is W to V-dual, not W to S and not the first projection.
+
+Step 3 uses `lem-pur-derived-pullback-tensor-iso` on its E-stage domain and clause (1) of `sk-thm-sf-compatibility` for composition. Both actually assert the needed natural isomorphisms on completed/rational categories. The equality pp1=p' p2 gives the middle identification. I did not cite the ordinary ringed-topos composition node as though it asserted completed composition.
+
+Step 4 takes integrand bounded constructibility exactly from the statement of `def-fd-kernel`. For L and the other tensor expressions it applies `lem-pur-integral-operations-preserve-constructible` to integral representatives and uses the explicit rationalization convention in `def-weil-derived-pullback-tensor-hom`. This corrected my initial use of the package's less explicit general domain sentence. `lem-weil-field-tor-amplitude` is specifically a theorem at the rationalized/common-field stages, and verifies L's finite Tor amplitude. The reassociation and interchange with the kernel are the already supplied constraints of step 1.
+
+Step 5 uses precisely clause (5) of `prop-functor-package`, whose formula and two input domains match A and L. The direction is its inverse. The hypotheses were checked in steps 2 and 4, not silently assumed from the kernel definition. `prop-sf-pf-coherence` explicitly asserts naturality in both inputs; that is the only assertion taken from it here. This is the unit's own route, not a substitute for its argument.
+
+Step 6 uses the existing completed right-shift isomorphism, its rational image, and the displayed three-arrow symmetry argument to obtain the first-factor shift. `def-fd-transform` supplies exactly p2,! of the integrand followed by [r]. No tensor degree sign is assumed trivial: the shift theorem already contains its signed comparison. Step 7 is elementary specialization to the bounded constructible unit: the only extra prerequisite is the explicit field-stage assertion of `lem-weil-constant-coefficient-objects-constructible`.
+
+Step 8 uses `prop-weil-twist-preserves`, which states bounded constructibility and invertibility at E for every integer; `det-prop-sfb-cartesian-coefficients-twists`, which states the all-integer pullback comparisons; and `def-wf-tate-twist`, which names the tensor twist. Thus negative twists are covered by a cited statement, not by an uncited claim that arbitrary inverse images commute with internal Hom. The new argument avoids the old inverse-limit shortcut altogether.
+
+Step 9 uses `lem-fix-weil-operations` for the exact list of equivariant operation maps and `def-weil-frobenius-coefficient-twists` for the canonical Tate Weil datum. The roots-of-unity square for the existing Tate comparison is spelled out at sections and respects the transitions and dual evaluation. `def-wf-weil-category` supplies the actual commuting-square condition, which is displayed for the final isomorphism and its inverse. The kernel and all geometric maps descend to k0, so these are the prescribed Fourier Weil structures, not arbitrarily chosen structures on the output.
+
+I checked the small cases K=0, N=0, K=E_V, N=E_S, r=0, m=0 and m=-1. Zero inputs give zero; the unit specialization removes only the tensor unit; rank zero makes the Fourier projections identities and removes the shift; m=0 is the main isomorphism with the unit line, and m=-1 is covered by the invertible dual line. None requires a nonempty scheme, a positive rank or a nonnegative twist. The finite ring counterexample to automatic finite Tor amplitude is irrelevant because the actual proposition is at field coefficients; the finite-ring Lean formulation was explicitly kept distinct.
+
+I checked C1/C4 at each use above, B1–B10 and D1–D5: there is no new node, relabelled clause, hidden proof inside a new statement or unsearched duplicate. E1–E7 were checked through the coefficient domains, separatedness, finite type, negative twists and Frobenius square. Generic off-unit tools are declared only in split_report.tool_uses with their precise roles. None changes the unit's route. Every proof step is under 2000 characters; the longest is the explicit Weil-square verification. A read-only dependency traversal found no path from any newly cited tool back to prop-base-linear. Maintainer-owned fields and import flags were preserved.

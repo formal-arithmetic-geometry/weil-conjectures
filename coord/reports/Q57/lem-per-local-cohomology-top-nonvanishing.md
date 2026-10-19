@@ -1,0 +1,69 @@
+# Stage-1 delivery: lem-per-local-cohomology-top-nonvanishing
+
+## Files written
+
+All six JSON files are under `dag/nodes/sec-deligne-laumon-a1/` in this sandbox.
+
+- `lem-per-local-cohomology-top-nonvanishing.json`: item, statement unchanged, split in seven steps following Stacks Tag 0DXE (lemma-cd-maximal).
+- `def-per-algebraic-normalized-dualizing.json`: new definition; algebraic dualizing complexes and residue-field normalization; unsplit, no Mathlib match.
+- `lem-per-algebraic-local-dualizing-normalization.json`: new statement; residue-field derived Hom is a shift of the residue field; unsplit, no Mathlib match.
+- `lem-per-algebraic-dualizing-generic-degree.json`: new statement; localized cohomology at a minimal prime is nonzero precisely in degree minus its component dimension; unsplit, no Mathlib match.
+- `lem-per-algebraic-local-duality.json`: new statement; completed Ext is the Matlis dual of local cohomology; unsplit, no Mathlib match.
+- `lem-per-local-cohomology-flat-base-change.json`: new statement; flat base change for right-derived ideal-power torsion; unsplit, no Mathlib match.
+
+`citations.json` gives a verbatim statement quote for every node used by every proof step. The interrupted turn's `searches.jsonl` and `research/*` results are retained; searches were read and reused, not fabricated or repeated. There are five new nodes and zero new Mathlib leaves. No unit realization is changed: this item is a supporting lemma, not the unit's key statement.
+
+## Attachments
+
+None. Searches of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the item tag, localCohomology, local_cohomology, localDuality, local_duality, normalizedDualizing and normalized_dualizing found no exact project declaration. The numerous etale relative dualizing-complex declarations concern sheaf coefficients, not the ordinary algebraic module duality here. Upstream master is not used as evidence of a completed proof. The repository item remains unsplit and carries no own Lean audit declaration.
+
+## Wanted literature
+
+None. All required sources were available in `literature/stacks-project/`.
+
+## Corrections and scope
+
+The statement is the top-degree nonvanishing clause of Tag 0DXE, rather than its additional equality of cohomological dimension. No hypotheses or conclusions were changed. In following its proof, the completion reduction is justified by an actual flat-base-change isomorphism; no equality or reflection of vanishing is inferred from an inequality-only change-of-rings assertion. For the local-duality formula I kept the completion on Ext. It can be removed at the application only after proving that the presenting ring is complete and applying the existing completion/tensor theorem to the finite cohomology module.
+
+The existence input that 0DXE cites as Tag 0BFR is expanded along that source's own Cohen-presentation route: existing Cohen presentation, regular-local bounded injective resolution and finite-map transfer; scalar self-Hom is evaluated explicitly, and the new normalization input supplies the shift. This avoids inventing another complete-local-existence node. The prime-chain argument selecting a minimal prime with full component dimension is written out as an elementary step; it is not another node. None of the five new statements restates the item. They apply to different objects or provide a general tool used inside its argument; they carry no proof or proof dependencies.
+
+The chapter and unit records, SETUP's three levels, GOAL and dag-sync were read. The inherited ancestor place records the middle-t-structure branch through the normal-local connectedness and isolated-intersection inputs. This split realizes that specific algebraic top-local-cohomology input and does not replace any chapter or unit step. The latest ancestor split uses the generic middle-t-structure input; the long recorded provenance is preserved. Generic off-unit algebra tools are explained in `split_report.tool_uses`, not asserted as maintainer-approved `tool_uses`.
+
+## Unfinished work
+
+None in this one-level split. The five new inputs are intentionally statement-only, for later splitting. No Lean was written and no compiler, Lake or library build was run. The server's `review_split` check passed before writing this report; the required full delivery dry run follows.
+
+## Not duplicates
+
+Whole-DAG keyword and source-tag searches and whole-blueprint searches for dualizing, local cohomology and 0DXE were read. `blueprint_refs.py ancestor` confirms `lem-per-artin-gabber-affine-curve`; no blueprint node states the new algebraic inputs, so `same_as` is empty. Tags were checked against `stacks-project/tags/tags`. Same-tag pairs are distinguished below.
+
+- def-per-algebraic-normalized-dualizing vs lem-trf-finite-map-dualizing-transfer: the new node defines a class of complexes and residue-field normalization; the existing theorem transfers the three dualizing conditions under a finite ring map. It is reused in step 3, and does not define normalization.
+- def-per-algebraic-normalized-dualizing vs lem-trf-regular-local-bounded-injective-resolution: the existing theorem supplies a bounded injective representative of the regular local ring; it states neither the dualizing conditions nor residue-field normalization. It is reused in step 2.
+- def-per-algebraic-normalized-dualizing vs lem-trf-complete-local-coherent-duality: the existing statement supplies an anti-equivalence and biduality on finite-cohomology objects over a complete local ring. The new node defines algebraic dualizing complexes over arbitrary Noetherian rings and the local normalization condition; no anti-equivalence is claimed.
+- lem-per-local-cohomology-flat-base-change vs lem-sbc-completed-punctured-quotient-fully-faithful: the existing statement is full faithfulness of a functor on finite etale covers of punctured completed schemes under a depth hypothesis. It gives no module local-cohomology base-change isomorphism.
+- lem-per-local-cohomology-flat-base-change vs lem-weil-pbc-ring-complex-cech-base-change: the existing statement compares two given augmented Cech-model complexes and a given augmentation-preserving map. It does not identify them with right-derived ideal torsion or state flat base change for every module.
+- lem-per-local-cohomology-flat-base-change vs lem-weil-pbc-ring-complex-functorial: the existing statement constructs functorial Cech-model complexes and their derived scalar-extension comparison. It does not identify their tensor with an arbitrary module with right-derived ideal torsion. That additional identification is part of the new statement, supported by Tag 0955.
+
+The local-duality, normalization and generic-degree source tags have no existing node stating their assertions. The new algebraic definition also differs from `def-trf-dualizing-complex` and `det-sp-dualizing-complex`: those are relative exceptional-pullback objects for etale/pro-etale sheaf coefficients over schemes, not dualizing complexes for the ring acting on its own modules.
+
+## Review by Q57
+
+I read the item source, `local-cohomology.tex` Tag 0DXE, including its completion paragraph and final local-duality paragraph. I checked every new node against its own source: `dualizing.tex` Tags 0A7B (definition-dualizing) and 0A7M (section-dualizing-local) for the definition, together with `more-algebra.tex` definition-injective-dimension for the expanded bounded-injective condition; 0A7L (lemma-find-function) and 0A7M for the normalization shift; 0A7V (lemma-nonvanishing-generically-local) for the exact degree at a minimal prime; 0AAK (lemma-special-case-local-duality) and 08Y3 (lemma-injective-hull) for local duality and existence of E; 0ALZ (lemma-torsion-change-rings) and 0955 (lemma-local-cohomology-noetherian) for base change and agreement of closed-support and derived-torsion models. I also read 0BFR (lemma-ubiquity-dualizing), whose complete-local argument is the route of steps 2 and 3. The five nodes introduce their rings and modules and state no proof sketch; the new definition has no existential choice of unspecified data.
+
+For step 1 I opened `def-weil-pbc-adic-completion` and all five cited completion theorems. Their statements supply, respectively, the completion, Noetherianity, the exact extended maximal ideal and residue field, dimension equality, flatness, and completeness as a module. The equality of powers of the extended ideal is written out, so module completeness really gives completeness for the completed ring's own maximal ideal. The Noetherian hypothesis ensures the ideal used in the module-completion theorem is finitely generated; the nonzero residue field ensures the completion is nonzero.
+
+For step 2 I opened `lem-weil-pbc-cohen-power-series-presentation`, `lem-trf-regular-local-bounded-injective-resolution`, `lem-weil-pbc-bounded-below-injectives-kinjective` and `def-pur-derived-internal-hom`. The first gives a surjective map from a complete Noetherian regular local ring, with all the adjectives needed by the next theorem. The bounded injective representative is K-injective by the third node. The internal-Hom definition permits computation by such a representative. Evaluation at 1 identifies the Hom complex and its differentials and identifies the scalar map with the original isomorphism. No regularity or dualizing property is assumed of the quotient.
+
+For step 3 I read every condition of `lem-trf-finite-map-dualizing-transfer`: both rings are Noetherian, the quotient is finite cyclic over its source, and step 2 checked the bounded-injective, finite-cohomology and scalar-action conditions on the source complex. Its conclusion gives all three conditions in the new algebraic definition over the quotient. The normalization theorem applies because the quotient is nonzero and local. The sign is correct: if RHom(kappa,Omega) is kappa[s], Omega[-s] normalizes it. Shifting preserves the finite-cohomology and bounded-injective properties.
+
+For step 4 the only citation is `def-weil-pbc-krull-dimension-ring`. I read its chain definition and its asserted equality with topological dimension. A finite integer supremum is attained; otherwise every chain length is at most d-1. Prepending a smaller prime would contradict maximal length, and inverse image/quotient gives an order-preserving bijection on the relevant primes. This proves the needed full-dimensional minimal prime directly, including d=0. This is the only elementary step; it does not hide a separate dimension theorem.
+
+For step 5 `lem-per-algebraic-dualizing-generic-degree` states precisely localized nonvanishing at the selected minimal prime, with e equal to the quotient dimension. Completeness is not a hidden hypothesis of that statement, and all its actual assumptions have been established. A zero module localizes to zero, so the cohomology module is nonzero before localization as well. Its finite generation comes from the definition already applied in step 3.
+
+For step 6 I read `lem-per-algebraic-local-duality`, `def-pur-derived-internal-hom`, and `lem-weil-pbc-completion-finite-module-tensor`. The local-duality statement applies to the finite cyclic module A and the nonnegative degree d. It supplies E and the isomorphism with completed Ext, not uncompleted Ext. Evaluation at 1 computes Ext from A as the indicated cohomology of omega. The completion/tensor theorem applies because this cohomology module is finite and A is Noetherian. Step 1 supplies A's own completeness, so the completed module is N and is nonzero. Only Hom(0,E)=0 is needed for the contradiction: no unstated cogenerator or Matlis anti-equivalence theorem is used.
+
+For step 7 `lem-per-local-cohomology-flat-base-change` gives exactly the isomorphism needed for R to its completion, since both rings are Noetherian and flatness and the extended maximal ideal were established in step 1. Nonvanishing of the right side contradicts vanishing of the original module. This direction does not require reflection of nonvanishing by a faithfully flat tensor functor.
+
+I tested the statements on a field (d=0, omega=kappa[0], H^0=the field), on a nonzero Artinian local ring (d=0, H^0=A, a normalized dualizing module is an injective hull), and on a complete discrete valuation ring (d=1, normalized omega=A[1], with the nonzero degree -1). Nilpotents are allowed: no domain or reducedness assumption is inserted in selecting the minimal prime. In the base-change input I checked M=0, the zero target ring, I=A (zero torsion) and I=0 (identity torsion): each side agrees. The zero local ring is excluded by the item's stated nonzero hypothesis. Over a field an arbitrary dualizing shift is corrected by the stated opposite shift, checking the normalization sign.
+
+I checked delivery-errors B through E: new statements have self-contained objects and definitions or inline meanings, single-escaped TeX, exact source tags and labels, no fake Mathlib leaf, and complete blueprint provenance. Existing same-tag statements were opened, with the differences recorded above. The semantic searches were read in two phrasings for each node, together with Loogle, grep and LeanSearch results: ordinary duals, abstract shifts/Ext, cotangent and dimension results do not state the algebraic-duality assertions. The localCohomology hits give constructions and radical reindexing, not local duality, flat derived-torsion base change, or nonvanishing. The source file's TODO explicitly distinguishes its colimit-Ext construction from derived ideal torsion. New nodes have no proofs; the item's argument is not moved into a relabelled clause. Every cited statement was read and quoted in citations.json. No step exceeds 2000 characters (the maximum is 962). The explicit module and prime-chain identifications are short calculations, not concealed new lemmas. No source or statement dispute was found.

@@ -1,0 +1,71 @@
+# Stage-1 report: lem-weil-pbc-w-local-partition
+
+## Files written
+
+- dag/nodes/sec-proper-base-change/lem-weil-pbc-w-local-partition.json: item split into seven proof steps; statement unchanged.
+- dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-spectrum-spectral-basis.json: statement, Mathlib leaf. PrimeSpectrum.instSpectralSpace (Topology.lean:844), PrimeSpectrum.isTopologicalBasis_basic_opens (:562), PrimeSpectrum.isCompact_basicOpen (:611), one declaration per clause.
+- citations.json: verbatim statement quotes for every citation in every item step.
+
+## Attachments
+
+None. Searched the exact blueprint tag and the whole WeilConjectures source by w-local and clopen-partition notions. WLocalSpace.isHomeomorph_connectedComponents_closedPoints (WeilConjectures/Topology/SpectralSpace/WLocal/ConnectedComponents.lean:31) and closedPointsHomeomorph (:85) concern a related homeomorphism. WLocalSpace spectralSpace_closedPoints and CompactSpace_closedPoints (ClosedPoints.lean:24,30) cover only spectrality and compactness of closed points. No set of project declarations was found stating every clause of this item under its exact component-based definition, including compact Hausdorff patch topology and the open-component assertion. The Lean WLocalSpace class uses unique closed specializations, whereas this DAG definition uses unique closed points per component; their agreement is supplied explicitly by step 2, not assumed as an attachment.
+
+## WANTED
+
+None. All sources used are present locally.
+
+## What was wrong and what changed
+
+The imported proof cited only the w-local definition, left elementary flags null, and supplied no node for its affine-component and zero-dimensional-spectrum assertions. The localization/idempotent-descent justification of the component fact was an unnecessary hidden argument, so the split cites the existing general Tag 005F component-intersection statement. Existing Tag 04MG and Tag 00E5 nodes likewise supply the closed-point quotient argument. The patch argument now applies the existing compactness/Hausdorff statements after explicitly identifying the two subbases. This retains the blueprint's proof route and all three clauses. No statement dispute or hypothesis change was needed.
+
+The item is not the key theorem of its unit, so its unit realization record is unchanged. The extra Mathlib leaf is background about every affine spectrum; it neither restates the item nor moves a w-local clause into a new node. Its searches were actually run with msearch.py, and the pinned Mathlib source was read. LeanSearch returned Internal Server Error and is recorded as unavailable. For the item, two semantic phrasings returned idempotent/clopen equivalences and compact Hausdorff partition refinements, none of which is the w-local restriction assertion.
+
+## Not duplicates
+
+lem-weil-pbc-affine-spectrum-spectral-basis vs lem-sf-constructible-partition-local-closed-stratum: the latter states a local refinement of a supplied finite constructible partition on a scheme, using spectrality in its source; it does not state spectrality or the quasi-compact basic-open basis of every affine spectrum. Both mention Tag 090M.
+
+lem-weil-pbc-affine-spectrum-spectral-basis vs lem-weil-pbc-proetale-point-components-maps: this existing node states profiniteness of the component quotient and the Hom-to-continuous-map correspondence for a weakly contractible affine object of a pro-etale site. It uses Tag 090M in its proof, but its statement does not supply affine spectrality or the basic-open basis for an arbitrary commutative ring.
+
+Whole-DAG tag and concept searches and blueprint_refs.py searches for spectral, basic opens, 090M and clopen partitions found no existing statement of the new leaf. The existing quasicompact-components-clopen-intersection and zero-dimensional-spectrum-profinite nodes were reused rather than duplicated. The new id was checked absent. The item's blueprint search found only itself, so same_as is empty.
+
+## What could not be finished
+
+Nothing remains within this one-level split. Existing cited unsplit nodes remain their owners' work. No Lean was written and no compiler, Lake or build was run. No direct delivery is authorized; the sandbox is for the second reader.
+
+## Review by NA
+
+I read the item's exact master blueprint file, including all three proof paragraphs, and its unit and chapter records. I also read Stacks algebra.tex Tag 090M (lemma-spec-spectral), the standard-open basis referenced by that lemma, Tag 00E0 (lemma-Zariski-topology), Tag 04MG (lemma-ring-with-only-minimal-primes), topology.tex Tags 005F (lemma-connected-component-intersection) and 0901 (lemma-constructible-hausdorff-quasi-compact), and proetale.tex Tags 0968 (lemma-spectral-split) and 096A (definition-w-local). The latter explicitly explains the final component/specialization argument. The source of the new leaf is Tag 090M; I compared all three clauses with the pinned Mathlib declarations at lines 562, 611 and 844. I read the existing quotient-spectrum node's exact statement and its Tag 00E5 source.
+
+Step 1 uses the new leaf for spectrality, quasi-compactness of basic opens and their basis property, and the w-local definition for the patch subbase. A finite subcover of each quasi-compact open makes the subbases equal. I opened both constructible-topology result nodes: they assert precisely quasi-compactness and Hausdorffness for a spectral space, so their spectral hypotheses are now established. The compactness node is a Mathlib leaf; the Hausdorff node is split in sk-thm-p1, which is explicitly in this unit's route. Neither citation changes the unit route.
+
+Step 2 uses the existing proper-ideal-contained-in-maximal statement, including its explicit prime-ideal consequence. I checked its maximal-existence assertion is available for arbitrary commutative rings, without Noetherian or nonzero hypotheses added. The rest is written from the Zariski definition: singleton closure is V(p); a maximal point is closed; closure of a point is connected. The component uniqueness comes from the exact w-local definition. This proves that every point in a component specializes to its one closed point and avoids silently replacing the component-based definition with Lean's specialization-based class.
+
+Step 3 uses closedness of the closed-point set from the w-local definition; the quotient-spectrum statement explicitly gives a homeomorphism onto V(J), not just a map or bijection. All points of that subspace are closed, so the criterion proved in step 2 makes every quotient prime maximal. The existing zero-dimensional-spectrum-profinite statement has exactly that hypothesis and the full compact Hausdorff totally disconnected conclusion. Neither reducedness nor finite dimension as a vector space is assumed.
+
+Step 4 checks all three prespectral hypotheses of the cited component-intersection statement using the spectral leaf. Its statement says connected components equal intersections of all clopen neighbourhoods, which really supplies a clopen separating c from d. I verified distinct closed points lie in different components using the w-local clause. No proof-internal construction of the cited node is used.
+
+Steps 5, 6 and 7 use only already proved steps. Step 5 gives each of the two finite-cover choices and handles E or its complement empty. Step 6 writes closed-point detection, symmetric-difference uniqueness and finite partition compatibility; it does not assume all connected components are themselves open. Step 7 explicitly applies stability of an open set under generalization to each point specializing to the closed point. Thus every non-elementary input is an actual cited statement and its quote appears in citations.json; prior-step uses remain within the same proof.
+
+I tested the zero ring (empty spectrum and empty partition), a field (one point), a local ring such as a DVR (one component, whose generic point is forced into an open containing the closed point), and finite products of local rings (componentwise finite partitions). The quotient proof still works with nilpotents. For infinitely many components I used compactness rather than assuming individual components are open; arbitrary clopen partitions have only finitely many nonempty parts. A general affine scheme such as Spec Z is not w-local, so the unique-closed-point argument is not being applied to it. Closedness of X^c is essential to realize it as V(J) and was checked exactly where used. I checked B--E against these files: new node statement-only, self-contained, correctly sourced and actually searched; no relabelling, no missing non-elementary citation, no appeal to the proof of another node, no extra hypotheses, and no weakened statement. The mechanical dry run is recorded below after it succeeds.
+
+## Dry run
+
+The required command `python3 /home/ubuntu/weil-launcher-nt/deliver.py NA lem-weil-pbc-w-local-partition --no-push` printed `OK (not pushed)` and `preflight passed` on 2026-10-14. After correcting the report's description of the existing Hausdorff node (split on the permitted sk-thm-p1 route, rather than a Mathlib leaf), the final sandbox is checked again by the same command. Nothing is pushed.
+
+## Second reading by NA
+
+- Item statement: compared all three clauses with the exact master blueprint lem-weil-pbc-w-local-partition.md; unchanged and valid for the zero ring, a field, a DVR, finite products, and infinitely many components. Closed-point topology is Zariski subspace topology, as in the source. Read GOAL.md and coord/dag-sync.md; only stage 1 was performed.
+- Step 1: checked Tag 0901 (topology.tex, lemma-constructible-hausdorff-quasi-compact), both constructible-topology node statements, and Tag 094L (properties.tex, lemma-quasi-compact-quasi-separated-spectral); replaced redundant new leaf by existing qcqs-scheme-spectral and localization-away-basic-open nodes. Read affine instance lines 561 and 167 in pinned Mathlib; both hypotheses are inferred for Spec A and Spec A_f. The localization node states the needed homeomorphism, not merely a bijection. Finite basic-open subcovers identify the patch subbases. PASS after repair.
+- Step 2: checked the proper-ideal-contained-in-maximal statement against Tag 00E0 (algebra.tex, lemma-Zariski-topology, clauses 2 and 8). Read the affine-spectrum and w-local definitions; singleton closure V(p), connectedness of a singleton closure, and uniqueness in a component give precisely the claimed specialization. No Noetherian or nonzero assumption used; for a zero ring there is no prime to choose. PASS.
+- Step 3: checked quotient-homeomorphism node against Tag 00E5 (lemma-spec-closed), and zero-dimensional-spectrum-profinite against all relevant clauses of Tag 04MG (lemma-ring-with-only-minimal-primes). Closedness of X^c supplies J; all quotient primes are maximal by step 2, without reducedness. Empty X^c and nilpotents cause no exception. PASS.
+- Step 4: read the component-intersection node against Tag 005F (topology.tex, lemma-connected-component-intersection): quasi-compactness, compact-open basis, and quasi-compact intersections all follow from spectrality in step 1 and the cited spectral-space definition. Distinct closed points lie in distinct components. PASS after citation repair.
+- Step 5: compared with the blueprint third paragraph. The two finite subcovers use compact E and F from step 3, separation from step 4, and only finite Boolean operations; both empty cases are explicitly handled. PASS.
+- Step 6: compared with blueprint uniqueness and partition conclusion. Closed-point detection follows from step 2; symmetric difference gives uniqueness. Moved the finite-subcover argument for partition finiteness before taking the complement of the union of the lifts, avoiding any implicit assertion that an infinite union of clopens is closed. Explicitly justified finiteness by disjointness and the converse restriction. PASS after repair.
+- Step 7: compared with blueprint final sentence and Tag 0968 (proetale.tex, lemma-spectral-split, proof of (2) implies (1)); the closed complement argument establishes generalization stability without assuming components open. PASS.
+- New node lem-weil-pbc-affine-spectrum-spectral-basis: checked statement against Tag 090M (lemma-spec-spectral), Tag 04PM (lemma-topology-spec), and pinned PrimeSpectrum declarations at Topology.lean:562,611,844, plus SpectralSpace at Spectral/Basic.lean:38. Statement true even for zero ring. B1--B7 form was sound, but C5 requires removal: existing qcqs-scheme-spectral gives spectrality using affine instances, and localization-away-basic-open gives the basic-open basis and compactness via Spec A_f. REMOVED.
+
+Changes: removed the one redundant new Mathlib leaf; replaced its citations with existing nodes and explicit affine instances; regenerated verbatim citations.json; put partition finiteness before the finite-union argument and spelled out the converse. All other correct steps and the first worker sections, including Review by NA, were retained. The earlier report's one-new-node counts are superseded: this delivery creates zero nodes and zero new Mathlib leaves.
+
+I independently searched the whole DAG for 090M and spectral/basic-open vocabulary, read qcqs-scheme-spectral and localization-away-basic-open, and searched the imported blueprint for spectral, 090M, basic opens, and clopen partition; no further new node is needed. Independent msearch.py queries used a new semantic phrasing (prime ideal spaces with compact principal basis and sobriety), Loogle isCompact_basicOpen, and a source grep for the three prime-spectrum declarations; the actual results remain in searches.jsonl. Read the slopmaster2 connected-components homeomorphism implementation: it states a related clause, not the entire item, so no whole-item attachment is justified. Upstream master was only read as reference; no sorry declaration was treated as a proof. Citations are the exact statements of the final cited nodes, with no reliance on their proof internals.
+
+Second-reader validation: deliver.py NA lem-weil-pbc-w-local-partition --no-push printed `OK (not pushed)` and `preflight passed` for repaired commit 35ec1b663c on 2026-10-14. The final delivery includes this validation record.

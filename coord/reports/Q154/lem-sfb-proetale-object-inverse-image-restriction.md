@@ -1,0 +1,53 @@
+# Q154: lem-sfb-proetale-object-inverse-image-restriction
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-proetale-object-inverse-image-restriction.json`: existing statement, now split in eight steps; no full Mathlib match.
+- `citations.json`: 16 verbatim statement excerpts, one for every dependency cited in each proof step.
+- `searches.jsonl`: the retained log of actual msearch.py calls; the node uses seven query entries, including two semantic phrasings and a corrected Loogle substring query. The node records the exact tool/query strings and the results read.
+- `report.md`: this report.
+
+New nodes: 0. New Mathlib leaves: 0. No Lean files or unit records changed. All writes are in the assigned sandbox. No compiler, Lake or manual git command was run.
+
+## Attachments
+
+None for the complete item. Searches of `WeilConjectures/` by the exact blueprint tag and by localization/restriction terminology found `AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`, `WeilConjectures/SixFunctors/ProEtale/LowerShriek/OpenImmersion/Defs.lean:192-195`, and the adjunction at lines 182-187. I read those declarations: they identify the sheaf inverse image with restriction for a fixed value category, but do not state the distinguished initial object, the specified presheaf coprojection isomorphism, the particular constant-ring structure map, or the constant-ring module pullback. They therefore do not justify attaching this three-clause item. The proof does not rely on their closure or on any master sorry declaration.
+
+## WANTED
+
+None. The Stacks sources used are present.
+
+## Corrections and findings
+
+The statement is correct and unchanged. In particular, the initial object belongs to I_U while the colimit is over I_U opposite. The definition `def-weil-proetale-inverse-image` explicitly gives this orientation. Reversing either one would be wrong. The item previously had no proof, and two inherited service-search entries explicitly said they were not run. I replaced the search list with the seven real searches in this delivery's log, including the unsuccessful short Loogle identifier and its successful substring retry. No unavailable service is reported as an empty mathematical result.
+
+The generic Mathlib restriction functor was read in `Mathlib/CategoryTheory/Sites/Over.lean:270-296,510-535`. Its `overPullback` and `Sheaf.over` do not by themselves identify the base-change-functor presheaf inverse image. The second semantic query returned generic module pullbacks; I read `Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:92-145`, including `pullbackIso`. That is the presheaf-pullback-plus-sheafification comparison, not the initial-object and constant-ring identification required here. The other hits concerned open immersions of ringed spaces, evaluation/global-section restrictions or the definition of the pro-etale topology. None states the full item as a one-line specialization.
+
+## Unfinished work
+
+None in this one-level split. The statements it uses already exist; no new frontier is needed. The remote validation and delivery result is recorded by the delivery command.
+
+## Not duplicates
+
+No new nodes. Whole-DAG and blueprint searches for `03CE`, inverse image/restriction and localization/restriction were made. The existing etale inverse-image restriction node is for the etale site and has a different, sheaf-adjunction statement. The pro-etale site equivalence and its canonical constant-ring identification are already precisely supplied by `lem-weil-proetale-weakly-etale-localization`; this split cites that node rather than creating another localization or constant-sheaf node. The colimit computation and tensor-unit computation are explicit routine steps, not new nodes that restate clauses of the item.
+
+## Review by Q154
+
+I read Stacks `sites.tex`, Tag 03CE (`lemma-localize-given-products`), including its proof by the product adjunction, Tag 00VC (`section-functoriality-PSh`) with the indexing category and its opposite-indexed colimit, and Tag 00XZ (`section-localize`) with the sectionwise restriction formula. I also read `sites-modules.tex`, Tag 03D2 (`lemma-pullback-module`) and Tag 03EK (`section-tensor-product`), whose definitions give the module action and the presheaf tensor followed by sheafification. I checked their labels in `literature/stacks-project/tags/tags`. There are no new nodes requiring further sources. For the blueprint route I read the current `sk-lem-proper-heart-bound-lattice.proof.md`: this item justifies the restriction/inverse-image identification used in its Completeness and Milnor paragraphs; it changes none of the cohomological argument or the chapter and unit route.
+
+I opened and read the statement of every cited dependency, not just its proof. Here is the clause-by-clause citation and hypothesis check.
+
+1. `lem-weil-proetale-weakly-etale-localization` clause (1) supplies composition as an equivalence with the slice, including the equality of coverings; `def-pur-localized-ringed-site` explicitly states that restriction is a sheaf, with sectionwise values, also for rings and modules. The input W is an ambient-site object, exactly as those clauses require. No open-immersion or monomorphism assumption is used.
+2. `def-weil-proetale-inverse-image` states the actual objects and arrows of I_U. `def-pc-fibre-product` states uniqueness from the two projections. The arrow out of the distinguished object is explicitly pr_V composed with phi; its existence and uniqueness are proved using that universal property. U is an ambient-site object by step 1, so this is a valid indexing object. No claim about another node's hidden construction is used.
+3. `def-weil-proetale-inverse-image` explicitly provides the colimit over I_U opposite in sets, abelian groups and rings. I wrote the cocone, the inverse map and both inverse identities on coprojections, directly from the universal property. This uses no cofinality theorem, element presentation of a ring colimit, or unrecorded size hypothesis. The definition supplies smallness in its larger universe.
+4. The same inverse-image definition states the restriction rule `(V,phi)` to `(V,phi b)`. The equation a_(phi b)=a_phi b proves commutation with restriction, and naturality of a sheaf morphism proves naturality in G. These explicit equations are the content required here, rather than an assertion that something merely transports.
+5. `def-weil-pbc-sheafification` supplies the universal factorization property, not any plus-construction formula. The two uses of uniqueness written in the proof show that the actual sheafification unit is invertible on an already-sheaf presheaf. The inverse-image definition supplies its identification with r inverse.
+6. Clause (2) of the localization lemma states both that e:A_W to A_X restricted is invertible and that it is the unique map fixing constant sections. The inverse-image definition specifies c as the adjoint of rho and rho on constants. I wrote the adjunct's cocone formula A_W(phi) rho_V and checked how it recovers rho. Consequently c fixes constants under the earlier comparison. `def-weil-pbc-constant-sheaf` and the sheafification universal property imply c e=id; since e is invertible this proves the identity c=e inverse, not just a noncanonical existence statement. All assertions are ring-valued; I did not assume arbitrary ring colimits are computed on underlying sets.
+7. The inverse-image definition explicitly gives the module action by inverse image of the action map and the finite-product comparison. Evaluating both factors at t_U shows that this action becomes the original multiplication a m at U. This is compatible with the comparison from the earlier steps and with restrictions, so the underlying abelian-sheaf comparison is the required R-linear one.
+8. `def-pur-sheaf-tensor-product` defines the sectionwise tensor and subsequent sheafification; the inverse-image definition specifies precisely this extension of scalars. I give both mutually inverse maps on pure tensors. The balancing relation proves the second inverse identity, and the transported A_W-action proves linearity. This presheaf is already isomorphic to the sheaf M, so the cited sheafification universal property applies. No theorem about tensor exactness, preservation of limits or stalks is invoked.
+
+I tested the statement and the formulas on r=id, on W empty (the empty covering forces the appropriate terminal section objects), on the zero coefficient ring, and on a non-monomorphic site object such as the two-point finite etale scheme over an algebraically closed field. The latter check matters: U can have several maps to W, but I_U fixes the structure map U to W, and projecting phi still produces exactly one arrow from t_U. Thus no false uniqueness of all maps into W enters the proof. The maps and identities still make sense on the empty object and for the zero module/ring.
+
+Against delivery-errors B-E: there are no unsplit new nodes, no missing new-node notion definitions, no clauses moved into surrogate nodes, no unquoted non-elementary theorem, and no definition used for an unstated theorem. Every quoted dependency statement contains exactly the excerpt in citations.json. The sole nonclosed statement used as an off-unit tool is the existing pro-etale localization lemma; `split_report.tool_uses` explains that generic use. There is no dependency on a result that uses this item. I checked all eight step lengths: all are below 2000 characters, and their explicit universal-property and balanced-tensor calculations hide no separate comparison lemma.
+
+Continuation review (2026-10-17): I compared the retained item with the current shared repository: its statement, ancestry, chapter and unit agree exactly; the base remains unsplit. I retained all eight proof steps and all recorded searches. Re-reading every current dependency exposed a stale step-5 quotation of the inverse-image definition (prime notation and whitespace differed); I replaced it with the current displayed colimit and sheafification formula. I also expanded the step-1 excerpt to include module restriction and the step-8 excerpt to include the sectionwise tensor formula and sheafification. All 16 excerpts are now literal substrings of the current statements. The argument needs no change: the initial object lies in the indexing category, which becomes terminal after taking its opposite; the maps on all coprojections prove both inverse identities. The constant-ring comparison uses the particular adjunct, and the module comparison uses its inverse in the balanced tensor formula. All step lengths remain below 2000 characters.

@@ -1,0 +1,60 @@
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/thm-wf-l2-dictionary.json`: statement split into eight steps, with unchanged conclusion and hypotheses; no Mathlib match.
+- `dag/nodes/sec-deligne-laumon-a1/lem-wf-rational-series-pole-radius.json`: one new statement-only analytic lemma, unsplit; no exact or one-line Mathlib match.
+- `citations.json`: a verbatim statement quotation for every step/node citation.
+- `searches.jsonl`: actual searches recorded by the required search tool.
+
+There is one new node and zero Mathlib leaves. The item is not the unit key statement `sk-l-dl-a1-energy`, so the unit record is untouched.
+
+## Attachments
+
+None. In `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/DeligneLaumon/AffineLine/TraceEnergy.lean`, `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal`, lines 548–557, has the same nonzero, lisse, real and pure sheaf statement on a smooth geometrically connected affine curve, but its proof is `sorry`. The blueprint-tag and concept searches found no finished declaration of the whole item. Its later purity-rigidity user relies on this theorem and cannot attach the item. The source analytic module `WeilConjectures/Mathlib/Analysis/Analytic/ConvergenceRadius.lean` was also read: `PowerSeries.eval_ne_zero_of_lt_radius_inv`, lines 179–207, treats reciprocal polynomials, not the new general identity `Qf=P` with an uncancelled numerator. No attachment to it is claimed.
+
+## WANTED
+
+None. The current and old blueprint sources and the relevant lecture notes are present locally. No document was downloaded.
+
+## Corrections and route
+
+The original statement agrees with `literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/thm-wf-l2-dictionary.md` and with the old master source. Its proof is identical in content in the two snapshots. I retained the statement and all import/maintainer metadata. The coefficient field is the original algebraic closure of the l-adic field with the fixed field isomorphism iota, and the sheaf is a Weil sheaf, not a different coefficient object.
+
+The original proof hid the analytic inference from a rational pole to a Taylor-radius bound. The new node isolates that general analytic fact; it contains no sheaf, weight, purity, positivity or cohomology assertion, and does not restate a clause of the item. Its future proof is as follows: if |a| were less than the radius, the series for f would converge absolutely at a. Multiply it by the finite polynomial series Q, interchange the finite sum and the absolutely convergent series, and use coefficient convolution in Qf=P. This gives Q(a) times the sum of f at a equal to P(a), contradicting Q(a)=0 and P(a) nonzero. The analytic input here is evaluation of the convergent Cauchy product; it is not just polynomial algebra or a definition. This is why it is a genuine smaller lemma, rather than an elementary node.
+
+In the item I wrote out a nonzero local stalk argument, the coefficient domination proving L is not a polynomial, and explicit polynomials C,D for its logarithmic derivative. This avoids assuming that every denominator factor survives or that H_c^2 is initially nonzero. I added the missing reality statement dependency. The old direct log-determinant citation is redundant once the full logarithmic-derivative clause of `lem-wf-conjugate-tensor-traces` is applied; the unused `lem-a1-affine-hc0` is likewise already incorporated in `cor-rp-euler-product`. I removed both from the proof dependencies rather than cite statements without using them. The existing `p-linear-spectra` supplies tensor eigenvalues; no new tensor-purity lemma is created.
+
+This remains the unit's route: conjugate tensor traces (here conjugation is realized by the same real sheaf), positivity of squared traces, a surviving finite pole, endpoint purity, and the upper energy/radius bound. No estimate for H_c^1 is used. The generic fibre/tensor equivalence `cor-galois-lisse-representations` is declared as a tool use because it establishes stalk and tensor facts, not a replacement weight argument.
+
+## Mathlib and duplicate searches
+
+The actual item searches used LeanFinder, LeanSearch, Loogle and grep, then a second semantic phrasing about trace-energy growth. Hits concern Lie-module traces and weights, number-field asymptotics and unrelated growth, not lisse Weil sheaves or this equality. Grep for `l2Weight|traceEnergy|WeilSheaf` found no Mathlib declaration.
+
+For `lem-wf-rational-series-pole-radius` the actual searches used both semantic services, Loogle patterns `"radius", "div"` and `Polynomial.eval, "radius"`, and greps of Analysis, Analysis/Analytic and Analysis/Meromorphic. A second semantic phrasing stated the polynomial identity Qf=P directly. I read the resulting radius, reciprocal-linear-factor, meromorphic-order and isolated-zero hits. None has this conclusion under these hypotheses, and the polynomial-times-series comparison is not a one-line specialization of the reciprocal-linear-factor power-series expansions. The exact query strings and outcomes in the node are drawn from `searches.jsonl`; no unavailable service is described as a no-match.
+
+Whole-DAG text searches and `tools/blueprint_refs.py search` were made for radius, pole, rational Taylor, polynomial series, nonzero stalk, L2 and Fourier-analytic weight. `lem-rp-positive-product-radius` concerns nonnegative product factors and reciprocal polynomials; its positivity hypotheses are not available for the reduced logarithmic-derivative denominator. `lem-zl-root-radius-separation` concerns two distinct spectral moduli and cancellation, not an analytic radius obstruction; its strict separation hypothesis is not available here. `lem-wf-l2-radius` converts a norm to its radius and contains no assertion about rational poles. None states the new lemma. Its blueprint ancestor is the item itself, and its from.place points precisely to the final paragraph's radius inference. The whole-item equality without reality in `lem-wf-l2-purity-rigidity` is downstream, not a noncircular proof of this item.
+
+## Not duplicates
+
+No new node has a Stacks tag shared with an existing node. The one new lemma is the general analytic inference explained above; no scheme, sheaf or spectral lemma is duplicated.
+
+## Review by Q141
+
+I read both the master proof and the current main-20261015 statement and separate proof file, the chapter and energy unit records, and L22.pdf pages 5–6, Definition 3.2, the positivity calculation immediately following it, and the Euler-product argument in Lemma 3.3. The item follows the blueprint's L2 specialization, so its proof_origin is agent, not an assertion that L22 itself states the dictionary theorem. The new node's source is precisely the final paragraph of the current proof; its self-contained polynomial-identity form exposes the analytic input needed there. I also read every statement quoted in citations.json and the source analytic module discussed in Attachments. No prohibited SGA route or reference is used.
+
+Step 1 uses clause (2) of `cor-galois-lisse-representations`, whose statement explicitly requires a connected Noetherian separated scheme and invertibility of ell and explicitly carries tensors to diagonal tensors. All hold on X. `def-real-weil-representation-operations` supplies the diagonal tensor action, `p-linear-spectra` supplies products of eigenvalues without requiring diagonalizability, and `def-weil-punctual-weights` makes their absolute value q_x^w exactly purity of weight 2w. Thus no theorem about lissity or eigenvalue products is borrowed from a definition that does not contain it.
+
+Step 2 uses `def-wf-iota-real` for conjugation-stability of the local multiset, not merely reality of one trace. Taking the second sheaf equal to G meets the hypothesis of `lem-wf-conjugate-tensor-traces`, whose statement gives both the square trace identity and the full logarithmic derivative of the Euler series. `def-wf-l2-series` names precisely that energy series. Inverting the constant-term-one Euler series is elementary formal algebra. The first displayed trace formula in the cited node suppresses the coefficient transport on its left side; only its unambiguous logarithmic-derivative clause is required here.
+
+Step 3 uses the actual two-term determinant quotient stated by `cor-rp-euler-product`, applied to T on the same smooth geometrically connected affine curve. Both constant terms are one. Step 4 then uses the purity clause of `lem-a1-middle-extension-endpoints` with the identity dense open immersion. Its weight shift gives 2w+2, and `def-weil-frobenius-module-weights` converts that to q^(w+1). No nonvanishing of H_c^2 is assumed. Taking reciprocal eigenvalues and their moduli is elementary linear algebra.
+
+Step 5 uses the closed-point existence statement of the existing Mathlib leaf `lem-sc-quasi-compact-kolmogorov-closed-point`, with the nonempty quasi-compact T0 scheme X_0. `def-weil-closed-point-degree` explicitly includes finiteness and positivity of the degree for finite-type schemes. Applying the fibre equivalence of `cor-galois-lisse-representations` at a geometric point above this point shows that a zero stalk would imply a zero sheaf. Thus r>0 really follows from the nonzero hypothesis. Invertibility of local Frobenius is part of its Frobenius-module datum. The local denominator has degree d r^2>0 even without semisimplicity, so its inverse is not polynomial by degree addition.
+
+Step 6 uses precisely clause (ii) of `lem-rp-even-tensor-positivity` with even exponent two and checks both nonnegativity and constant term one after degree substitution. For each coefficient the formal Euler product of step 3 is a finite product; choosing the contribution of the fixed factor and all other constant terms proves coefficient domination explicitly. The nonpolynomial inverse from step 5 therefore makes L nonpolynomial. Reducing the rational expression cannot make its denominator constant. A complex root of that reduced denominator exists; coprimality ensures the numerator does not vanish there. Because the reduced denominator divides the original one, its root lies on the known circle. These are finite polynomial arguments, not a claim that arbitrary Euler factors cannot cancel.
+
+Step 7 states the multiplicity factorization B=(t-a)^m b and explicitly computes C and D, including C(a)=-m A(a)b(a), D(a)=0 and D(0) nonzero. Thus it meets every hypothesis of the new radius-obstruction lemma, with f equal to the L2 series. `def-weil-polynomial-as-power-series` explicitly identifies rational identities regular at zero with their formal expansions. The local logarithmic-derivative algebra is written out rather than deferred to a separate node. Step 8 uses the one-step mixed filtration and the actual conclusion of `lem-wf-l2-upper`, then separately applies `lem-wf-l2-radius`; the former does not directly state an analytic radius bound. Since q>1 and R>0, monotonicity has the stated direction and the final logarithm yields w.
+
+I tested the new lemma with P=1,Q=1-T,f=1/(1-T),a=1 (equality), with a cancelled root P=Q=1-T (excluded by P(a) nonzero), with a=0 (excluded by Q(0) nonzero), and with a polynomial or zero f (the two evaluation conditions cannot both hold). For the item I checked a constant rank-one sheaf on the affine line, negative w, a closed point of degree greater than one, and a real rank-two stalk with eigenvalues alpha and -alpha (some traces vanish but its inverse factor is still nonpolynomial with nonnegative coefficients). G=0 is rightly excluded; H_c^2=0 is allowed provisionally and is ruled out only by the positivity argument. Jordan blocks do not affect the spectral or determinant calculations. No new node repeats the item, has a hidden proof in its statement, or adds a hypothesis to the item. All eight steps are shorter than 2000 characters; no long step hides an extra lemma.
+
+## Unfinished work
+
+The one new analytic lemma is deliberately statement-only, as required for a one-level split. No Lean was written or compiled. The independent maintainer review remains to be performed after delivery.

@@ -1,0 +1,19 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-smooth-purity/lem-cbc-disk-lifting-surjective.json` (item; statement and hypotheses unchanged, proof expanded to five steps); `citations.json` (empty because every proof step is elementary); and this report. The inherited Mathlib search records in the item were retained after reading their results. No Lean, compiler, Lake, unit, live repository, or launcher file was written.
+
+2. Attachments: none. I searched the slopmaster2 source by the item id, blueprint tag, disk-lifting terminology, chain-complex terminology, and likely declaration names. No sorry-free project declaration states this item. The item's Lean audit remains `none`.
+
+3. WANTED: Choudhury--Gallauer, §3.3, sequence (1), before Proposition 3.15, for the model-category disk-lifting calculation. That source is not archived in `literature/`; the delivered proof is therefore marked agent-written and expands the generator calculation directly from the item's displayed definitions.
+
+4. Corrections and limitations: the imported item had no proof steps. I did not alter its statement, its Dold--Kan statement dependency, its source, or its blueprint ancestry. I supplied the missing proof rather than introducing a helper node: the disk map and all chain-map checks are immediate from the definitions and the equation `∂²=0`. No statement error was found.
+
+5. What remains unfinished: nothing in this stage-1 split. The item is split; its existing Dold--Kan dependency remains an independently unsplit statement node.
+
+## Review by Q60
+
+I read `dag/nodes/sec-smooth-purity/lem-cbc-disk-lifting-surjective.json`, the cited `lem-cbc-dold-kan-normalization-equivalence` node, `dag/units/sk-prop-sf-cbc.json`, `dag/chapters/sec-smooth-purity.json`, and the ancestor blueprint proof `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md`. The item statement agrees with its source: it quantifies a commutative coefficient ring, nonnegative chain complexes of modules, a chain map `g`, `n≥1`, the free two-term disk with differential `e_n↦e_{n-1}`, the summand inclusion `j`, and the exact right-lifting conclusion. I checked that the existing Dold--Kan node states the nonnegative chain-complex convention and that this item uses it only as a statement dependency.
+
+Step 1 assumes degree-n surjectivity and takes `y=v(e_n)` and a preimage `x`; the only hypotheses used are the square's chain map `v` and the displayed disk differential. Step 2 defines the disk-to-`C` map on the two generators and checks both nonzero chain equations, including `∂²x=0`. Step 3 combines this map with `u` by the direct-sum universal property and checks `hj=u` and `gh=v` separately on `K`, `e_n`, and `e_{n-1}`; the `K` check is exactly the square hypothesis `gu=vj`. Steps 4 and 5 prove the converse: for arbitrary `y∈E_n`, the zero map on `K` and the assignment `e_n↦y`, `e_{n-1}↦∂y` form a chain-map square, and any lift supplies a preimage of `y`. No step cites a node, so `citations.json` is correctly empty.
+
+All five steps are short direct calculations (the longest is 277 characters), so none hides a lemma or comparison. I tested the edge cases `n=1`, `K=0`, `C=0`, `E=0`, the zero ring, and arbitrary `y` that is not a cycle: the converse uses `∂y` and therefore does not incorrectly require `y` to be closed. The construction works over any commutative ring and does not assume projectivity, boundedness beyond nonnegative indexing, or a chosen splitting. The statement is not in Mathlib according to the inherited LeanSearch, LeanFinder, Loogle, and Mathlib-source grep searches, whose hits I read and found to concern unrelated model-category or direct-sum facts. There are no new nodes, no duplicate check to record, no cycle, and no off-unit tool use.

@@ -1,0 +1,55 @@
+## Files written
+
+- dag/nodes/sec-trace-formula/lem-trf-slice-subtopos-site-presentation.json: statement, split with seven proof steps; no complete Mathlib match.
+- citations.json: one verbatim statement quotation for every step/dependency pair.
+- searches.jsonl: actual searches made through msearch.py; inherited node searches retained, new results appended.
+
+No new nodes and no new Mathlib leaves. The existing Mathlib leaf lem-weil-pbc-site-sheaf-sets-limits-sectionwise is reused. The unit is not this item's key node, so its realized fields are untouched.
+
+## Attachments
+
+None. I searched /home/ubuntu/weil-src-slopmaster2/WeilConjectures by the exact blueprint tag and node id, and by slice site, slice topos, localization, localize and overPullback. The localized constant-sheaf statements and ConstantSheafOver.preservesColimits_overPullback do not state the product-evaluation right adjoint, the adjunction and its graph counit together. The upstream master checkout is not evidence of a finished proof and is not used as such.
+
+## WANTED
+
+None. All sources used are present locally in literature/stacks-project/sites.tex.
+
+## Findings and changes
+
+The item's statement is retained verbatim. There is no statement dispute. The source pointer formerly called 00Y2 a restriction/counit computation. In the actual text, 00Y2 (lemma-restrict-back) asserts that the counit is an isomorphism under the extra hypothesis that each object has at most one map to U. It does not compute the general graph counit. I corrected the source pointer to 03CE and 00Y0 and wrote out the general Hom-bijection and counit calculation. No subterminality or subcanonicity is added, and no full-faithfulness conclusion is claimed.
+
+I read the chapter and sk-i-curve-zero unit, the main-20261015 lem-trf-local-term-locality blueprint text, and the stored ancestry through lem-trf-topos-complement-factorization. This is a generic localization input below that unit, not an alternative to its contracting-correspondence/normal-cone route. The already split lem-trf-topos-localization-site-presentation gives a slice equivalence, but does not give this right-adjoint formula or the graph counit. lem-weil-pbc-ringed-sheaf-slice-adjunction concerns module pullback and its LEFT adjoint; it is not the set-sheaf direct image here. Neither is used circularly as a substitute for the explicit argument.
+
+The imported site definition uses covering sieves, while the sectionwise-limit leaf uses covering families. I made that interface explicit in step 1 on the SAME finite-limit category: take all families generating covering sieves, check the three covering axioms, and extend pairwise compatible sections to their generated sieve using pullbacks. This avoids invoking lem-trf-sieve-sheaves-covering-site for something its statement does not give: that node produces an unspecified equivalent site and does not preserve this object's products or graph formulas.
+
+## Mathlib and existing-node searches
+
+I searched the whole DAG for tags 03CE and 00Y2 and for sectionwise limits and slice/localization statements, and ran tools/blueprint_refs.py ancestor and search for "slice site" and "localize". The blueprint results do not state the complete item, so same_as remains []. No node was created for the underlying-cover sheaf check, product pullback identity or two inverse Hom-formulas: these are explicit few-line computations from the cited definitions, not missing lemma placeholders. There is therefore no new-node duplicate pair to resolve.
+
+The actual new msearch.py records use two semantic phrasings of the CURRENT finite-limit-site adjunction, Loogle for CategoryTheory.GrothendieckTopology.overPullback, source grep for overPullback/overPushforward/sheafAdjunctionCocontinuous, and LeanSearch for direct image evaluated at V times U. I read Over.lean:269-291, CoverLifting.lean:275-372, Adjunction.lean:40-80, and the project ConstantSheafOver.lean:239-251. overPullback gives restriction only. The general sheafAdjunctionCocontinuous gives a right Kan extension, whose evaluation and counit still require identification with product/graph; it is not the entire node in one line. Sheaf.adjunction changes coefficient categories on the same site. The Mathlib product/Over adjunction is a category-level ingredient, not all the site/sheaf clauses. These are partial matches, so the item stays split rather than mathlib. The final grep on Over.lean returned zero hits for its stated pattern; it is not treated as evidence that general adjunction machinery is absent.
+
+## Review by Q08
+
+I read Stacks sites.tex 03CE (lemma-localize-given-products), both its three clauses and its proof; 00Y0 (definition-localize) and the following restriction formula; 00Y2 (lemma-restrict-back); 00W2 (lemma-limit-sheaf); and 00ZC (lemma-site-gives-topology). The hypothesis in 03CE is binary products, so the item's finite-limits hypothesis is sufficient. Its base-change argument is exactly the sheaf check in step 3. The graph calculation is an explicit expansion by this worker, recorded with proof_origin.by=agent, not attributed to an unprinted formula in 00Y2. There are no new nodes whose source or hypotheses would need another audit.
+
+For step 1 I opened def-weil-pbc-topos and def-weil-pbc-sites-and-cohomology. The former states all three sieve axioms and unique amalgamation; the latter states all three covering-family axioms and the equalizer condition. The step proves their interface on this finite-limit category: two factorizations through covering members are compared on their actual fibre product. Smallness makes the family of all arrows of a sieve allowable. The generated-cover topology has the same sieves: a sieve contains a generating covering family exactly when it is covering. Thus neither a category replacement nor an extra hypothesis is hidden here.
+
+For step 2 I read the covering and sheaf clauses of def-weil-pbc-sites-and-cohomology. Over U, pullbacks have the same underlying pullbacks in C, with their common composite to U. Thus the exact equalizer diagram in that statement is the one for A on the underlying cover. The smallness check and functoriality of restriction are direct definitions, not an appeal to a definition node as an unproved theorem.
+
+For step 3 the same definition gives base-change stability and the equalizer test. The covering is pulled back along V times U -> V, not along a nonexistent map V -> U. Both sides of the displayed pullback identification classify triples with the same V-coordinate and the same U-coordinate, so their two restriction maps agree. Therefore the sheaf condition for G applies precisely to the diagram asserted for HG. This is a direct three-line substitution, not an uncited general theorem about continuous functors.
+
+For step 4 I read the full-subcategory clause of def-weil-pbc-topos, which is all this step cites it for: natural transformations between the sheaves already established are sheaf morphisms. Naturality follows from q times 1_U and the displayed projection identity. Step 5 uses the same clause for the reverse construction. Its graph has domain W with structure map t and codomain W times U with second projection; the identity gamma_t q = (q times 1_U) gamma_t' uses precisely that q is OVER U. Naturality in both input sheaves is included, not just a set bijection for fixed objects.
+
+For step 6 I checked the two round trips independently. The first uses pr_1 gamma_t = id_W and naturality of a; the second uses naturality of b on pr_1 and (pr_1 times 1_U) gamma_pr_2 = id_(V times U). Contravariance reverses the order as printed. The counit is obtained from the identity on HG and has exactly the graph restriction in the original statement. This step needs no external lemma beyond these written identities and the definition of a natural Hom-bijection/adjunction.
+
+For step 7 I opened lem-weil-pbc-site-sheaf-sets-limits-sectionwise and read clauses (1) and (2), not its proof. It explicitly gives limits of sheaves as sectionwise limits of sets, with these projection maps, on any small covering-family site; step 1 puts C into that convention, and step 2 does so for C/U. The finite index category is small, including the empty one. I also read the corresponding Mathlib Sites/Limits.lean declarations isSheaf_of_isLimit and createsLimitsOfShape. Evaluating both cones at W -> U gives the SAME limit and projections; hence the comparison is the identity, with no general exactness theorem left implicit. Finally def-trf-geometric-morphism states exactly that an adjunction with finite-limit-preserving left adjoint is a geometric morphism for Grothendieck topoi, and def-weil-pbc-topos supplies these topoi by their small-site presentations. The off-unit statement used is already a Mathlib leaf, so it needs no non-Mathlib tool-use exception.
+
+I checked delivery-errors B through E against these files. B: no new statement-only nodes to misform, no unstated objects or tag-dependent meanings, inherited searches retained and actual new queries recorded, no attachment claimed from a partial theorem. C: every citation has a verbatim quotation, every cited fact is in the cited statement, and all remaining operations are explicitly written elementary computations; no dependency on the proof of another node, no route substitution and no new cyclic edge. D: the proof carries the product/graph argument itself, with no child that rephrases the item. E: finite limits supply all products and covering pullbacks; no subcanonical topology or subterminal object is assumed. No coefficient ring, scheme hypothesis or target base-change map is involved. Every step has fewer than 2000 characters; I checked them for hidden comparison lemmas, and the only general non-elementary fact used is the cited sectionwise-limit leaf.
+
+Small cases: if U is terminal the product projection and graph are inverse and the formulas reduce to the identity localization. Empty covering families are allowed: the sheaf equalizers force singleton values on their targets and the base-changed empty family does the same, so the proof never chooses a member of a cover. The empty finite diagram in step 7 gives the singleton sheaf, so terminal-object preservation is included. On the small skeleton of finite sets with the trivial topology, let U have two elements and G(T -> U) be the set of functions from T to a fixed two-element set. At W=1 with a chosen map to U, the counit is evaluation from four functions on U to two values; it is not injective. This checks both the direction of the graph map and why the 00Y2 subterminal hypothesis must not be silently imported.
+
+The changes after self-review were the corrected 00Y2 attribution and the explicit family/sieve interface. No statement was weakened. No SGA source is used. All writings are confined to the sandbox; no Lean, compiler, Lake, build or git command was run by this worker in a source/shared checkout.
+
+## Unfinished work
+
+None in the mathematical split. Delivery dry run and push results are recorded below after the required tools finish.

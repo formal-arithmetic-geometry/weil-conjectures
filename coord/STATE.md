@@ -1005,3 +1005,21 @@ Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about
 Written by the launcher: the names of the sessions of the project.
 
 One session, group `L`: the maintainer and the only lead, started 2026-10-09. It gives items to at most 5 workers at a time (sub-agents, model opus, effort medium; earlier in the day 10 fable workers at xhigh, then medium, then 10 opus workers), each splitting one node by one level, reviews each delivery, and commits after every batch.
+
+## Merged from ~/weil-newtargets (retired 2026-10-19)
+
+# Isolated new targets — 2026-10-14
+
+Only stage 1 is open. NA..NJ, four worker/second-reader slots each, gpt-6.1-sol.
+Five fresh Codex maintainer readers (eight while more than ten deliveries await review) review every delivery before DAG-only landing.
+Initial queue: 181; first reviewed landings: lem-weil-pbc-comparison-pullback (a5d43c5753), thm-weil-pbc-complete-proetale (92526cefe5), def-weil-pbc-proetale-modules (aecb160ff2).
+No Lean writing or compiling, no Lake, no stage 2/3. Stage documents are unchanged.
+Live DAG sync: every five minutes, before claims and forced before landing; live project is read-only.
+Live finished/split nodes win; side splits survive only while live is unsplit.
+Worker-reported source discrepancies and attachment candidates: coord/HUMAN.md.
+Run state on Codex machine: ~/weil-launcher-nt/run/ and review.state.json; server sync state: local/newtargets-sync.json.
+
+
+## Isolated stage-2 pilot — 2026-10-15
+
+Human-authorized stage 2 supersedes the old stage-1-only Lean prohibition for this pilot. Only NA runs, two worker/second-reader slots, at most two distinct items. Stage-1 dispatch remains stopped while the separate s1fix session finishes its nodes. Stage 1 keeps queue priority. Statements land in this project; single-file server compiles use live artifacts read-only, nice 19, two threads, 60 seconds per file. No side global build or live Lean change. Pro-etale master-dependent nodes are deferred. The reviewed stage-2 DAG changes are written and committed in the live DAG directly (one DAG since 2026-10-18; coord/dag-sync.md).

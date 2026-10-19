@@ -1,0 +1,59 @@
+# NY: lem-fd-constituent-nonexceptional-concentration
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-fd-constituent-nonexceptional-concentration.json`: statement, split into nine proof steps; no Mathlib match for the item.
+- `citations.json`: 29 verbatim statement quotations, one for each step/node citation.
+- `report.md`: this report. `searches.jsonl` was produced by the authorized search command; `prepare.py` is sandbox-only preparation code.
+
+No new DAG nodes, no Mathlib leaves, no unit changes. The item's statement and imported metadata are retained; its explicit statement dependencies now include the conventions and compact cohomology definitions already named in its statement.
+
+## Attachments and the upstream Lean audit
+
+`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine` belongs to `lem-sf-adic-affine-direct-image-finiteness` (existing node). I read the declaration at `WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean:411` in `/home/ubuntu/weil-src-slopmaster2`; its affine source and target, algebraically closed base, characteristic, finite-type and constructibility hypotheses agree with that node. Its body is `sorry`, so this is an attribution of an existing open result, not a claim of a completed proof. It is not used as an extra dependency: the present proof needs compact-support preservation, supplied by the existing coefficient-stage theorem.
+
+The item's recorded audit is stale relative to the supplied source checkout. `WeilConjectures/DeligneLaumon/AffineLine/DualNonexceptional.lean` and `WeilConjectures/WeilSheaf/ArtinSchreierDual.lean` do not exist here; the audited dual/twisted-dual and realified-kernel declarations are not present in the project-wide search. The present `AffineLine/Purity.lean` instead has the sorry theorem `AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner`, not the concentration statements in the audit. Searches for the exact item tag and for nonexceptionality, duals and concentration produced no project declaration giving every clause of the item. Thus there is no ATTACH claim for this item.
+
+The other audited open name, `AlgebraicGeometry.nonempty_iso_dual_artinSchreier`, is absent from this checkout. Its mathematical inverse-character assertion is already included in the statement of `lem-fd-as-characters`, which the proof cites; I did not create a duplicate node or claim to have checked an unavailable Lean statement. Audit fields themselves are left untouched for maintenance.
+
+## WANTED
+
+None. The proof is honestly marked agent-written: it follows the agent-written blueprint and expands its arguments, rather than pretending that the blueprint is a human literature proof. All cited general results are existing DAG nodes. No prohibited source is used.
+
+## Corrections and source error
+
+The archived master item and current main-20261015 statement agree. I read the master proof and the current `.proof.md`, current convention text and current unit statement, together with the chapter/unit records. The item's conclusion needs no correction.
+
+The proof's sentence identifying a geometric point of the dual line with an element of k is false: `Spec(overline{k(t)}) -> A^1_k` mapping to the generic point is a geometric point and has no coordinate in k. The conclusion is repaired without changing the statement: use the stalk formula at closed k-points, t-exact point pullback, constructibility of ordinary cohomology and the existing theorem that these constructible coefficient fibres are jointly conservative. This distinction matters for adic/pro-etale coefficients; ordinary geometric stalks on arbitrary pro-etale sheaves are not being used as a conservative family.
+
+The imported proof also cited `prop-functor-package` for triangulatedness, which its current statement does not assert. Step 9 instead uses the finite-level triangulatedness theorem and explains finite-biproduct preservation through the actual higher-coefficient defining formula. The package is cited only for its explicit all-stage compact-support composition formula. The projection formula has its own citation, and t-exact extension by zero is cited at the actual rational/common stages.
+
+## Unfinished work
+
+None within this stage-1 split. Existing unsplit dependencies remain their owners' work. The item is not the statement of its unit, so I did not fill maintainer/unit realization fields. The server's initial `review_split` check passed, noting that the unit has no realization yet. The full dry run first requested longer excerpts for two quotations; both were expanded to their complete relevant statements and preflight then passed. A final citation audit also added the explicit convention citation used in step 4.
+
+## Not duplicates
+
+There are no new nodes and hence no new/existing pairs to justify. The whole-blueprint searches `concentration` and `nonexceptional`, and the DAG statement searches for duality, composition series, fibre detection, extension by zero and affine finiteness were read. Nearby middle-extension, nonexceptionality-comparison, realified-kernel and purity nodes have different conclusions. The existing exact fibre, exact representation, immersion and all-coefficient projection nodes supply the tools that would otherwise have been duplicated.
+
+## Mathlib searches read
+
+Every recorded query was executed through `msearch.py`; the item's `mathlib_searches` uses the exact query/tool text and the actual UTC date from `searches.jsonl` (2026-10-17 UTC, 2026-10-18 local). LeanFinder was tried with two different full mathematical phrasings; its hits concern Hilbert 90, abstract sheaf cohomology, group cohomology, singular homology, section vanishing and inverse limits, not this statement. LeanSearch returned analytic Fourier definitions and the Riemann–Lebesgue lemma. Loogle's `Representation, "dual"` returned representation dual definitions and dual-tensor/Hom equivalences; I inspected `RepresentationTheory/Basic.lean:675–698` and the `Intertwining.lean` declaration at 816. These do not give the sheaf-theoretic concentration theorem. The second Loogle query `"ArtinSchreier"` and the source grep `ArtinSchreier|FourierDeligne|compactSupport.*cohom` returned no hits. All services responded; none is falsely recorded as unavailable or as a match.
+
+## Review by NY
+
+I read the item's proof in both the archived master and main-20261015 blueprint, its unit and chapter records, the convention text, and every cited node's current statement. No new nodes require a separate source review. The split keeps the unit's paired Fourier-complex route; generic tools outside the unit are declared in `split_report.tool_uses`, with individual reasons, rather than changing maintainer-owned `tool_uses`.
+
+Step 1 uses the lisse rank-one assertion of `lem-fd-as-characters`, the exact tensor assertion at E/Qbar of `cor-galois-lisse-representations`, and the precise vanishing statements of `lem-zl-affine-curve-range` and `lem-a1-affine-hc0`. The coordinate a descends to a finite extension before these finite-field curve lemmas are applied. U remains smooth, affine, nonempty and geometrically connected. No geometric irreducibility is needed. Step 2 uses exactly the displayed geometric-coinvariant isomorphism of `lem-a1-affine-hc2`; it does not replace geometric coinvariants by Weil coinvariants.
+
+Step 3 uses the exact representation equivalence, the inverse-character identity of `lem-fd-as-characters`, and the exclusion in `def-a1-constituent-nonexceptional`. I wrote out how a nonzero coinvariant quotient supplies a nonzero functional and a surjection to a rank-one inverse character. I also wrote the finite-dimensional induction constructing a composition series containing that quotient. This is elementary linear algebra, not an uncited vanishing theorem.
+
+Step 4 uses the explicitly defined inverse-transpose action in `def-real-weil-representation-operations`, tensor compatibility of the lisse equivalence, matching of subobjects in `prop-wf-weil-sheaf-representation-equivalence`, and the scalar action in `def-wf-constant-weil-twist`. Continuity, the evaluation/coevaluation identification of the lisse dual, the annihilator proof of irreducibility and the invariant-subspace argument for a nonzero scalar twist are written out. Step 5 uses the geometric triviality of that twist, the definition of geometric constituents and the inverse-character identity. Restriction of functionals identifies each annihilator quotient with the dual factor; its kernel and surjectivity are specified. Thus no assertion of geometric semisimplicity is hidden here.
+
+Step 6 cites the precise stalk formula with r=1, the all-stage projection formula with its finite-Tor hypothesis checked for a lisse line, the t-exact open extension statement of `lem-zl-immersion-weil-local-behavior`, and only the composition clause of `prop-functor-package`. This produces the cohomology of U rather than assuming an extension-by-zero identity without a source. Step 7 uses the inverse-character identity, the constructible preservation statement of `thm-sf-ctf-stability` including its E/Qbar passage, the constructible ordinary heart on a curve from `lem-a1-qbar-open-closed-cohomology`, t-exact closed-point pullback from `lem-zl-immersion-weil-local-behavior`, and the exactness and joint conservativity explicitly stated by `lem-dl-a1-constructible-fibres-exact`. A k-point is defined over a finite field extension, so the immersion statement applies over that extension. This is the correction of the source's generic-point gap. The fibre detection node is safe to cite: its dependency closure does not include the item.
+
+Step 8 uses only the actual direct-sum formula in `lem-fd-realified-kernel-real` and the rank-one shift in `def-fd-transform`. I checked the final generality clause in the realified-kernel statement: reality and the construction apply to every pure lisse sheaf, so its earlier, stronger irreducibility/unramifiedness wording introduces no extra assumption. Step 9 uses `lem-compact-support-direct-image-triangulated` only at its finite coefficient stage, then the displayed derived-limit/rational/common-stage definitions of `def-weil-integral-rational-qbar-compact-support`. Finite products and sums agree; right-derived inverse limits preserve the former, and reductions and scalar extensions preserve the latter. Inclusion followed by projection gives an actual retraction, not just a numerical equality of dimensions.
+
+I checked B–E against the files: no new definitions or unsupported notions, no duplicate or clause-restatement nodes, no unrun search records, all 29 quotations are verbatim substrings of their cited statements, and each non-elementary input is a node rather than a bare reference. The elementary flags mark written finite-dimensional or biproduct arguments, not the geometric input. Every step is shorter than 2000 characters. No cited node has a dependency path back to this item. Import flags, audit metadata, unit and chapter metadata are preserved. The statement is unchanged, so no STATEMENT-DISPUTED correction is needed.
+
+I tested the boundaries: a=0 excludes exactly the trivial geometric constituent; in characteristic two the inverse parameter is still covered; an empty finite complement S is allowed; a nontrivial Kummer line on G_m may have all cohomology zero at a=0, which satisfies concentration and does not justify claiming a nonzero transform stalk. Arithmetic irreducibility need not imply geometric irreducibility, and the annihilator-filtration argument handles that case. The b=0 case is excluded because a zero Frobenius scalar is not a Weil line. The shift [1] takes H_c^1 to degree zero, and shifting the transforms back by [-1] places the integrands' direct images in degree one. Purity is only used to select the stated realified kernel, not in the vanishing argument.

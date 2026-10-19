@@ -1,0 +1,30 @@
+1. Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-coherent-prism-pinch-identity.json`: statement split into four steps; no new nodes; Mathlib searches found no matching declaration.
+
+2. Attachments: none.
+
+3. WANTED: Arakawa, *Levelwise nerves of simplicial categories*, Remark 2.5 and Proposition 3.2 (the cited PDF is online but not archived locally); Lurie, HTT §2.2.2 for the explicit maximum-coordinate map; Kerodon tag 01L5 for the right-pinch construction.
+
+4. What was wrong or incomplete: the imported node had an empty proof and did not explain why the maximum-coordinate prism is the right pinch after the pinched adjunction. I supplied the pointwise construction, the degreewise identification through `Φ`, the right-pinch evaluation, and the simplicial/naturality assembly. No statement correction was needed. The five cited dependencies all belong to the same unit and no new lemma is required.
+
+5. What I could not finish: no local copies of the Arakawa, HTT, or Kerodon sources are available, so the proof is marked agent-written and records the online sources as WANTED. Lean was not written or compiled, per the stage-1 restriction.
+
+## Review by Q43
+
+I read the item and all five dependency node statements in `dag/nodes/sec-six-functors`. The item hypotheses, including a small locally Kan simplicial category, possibly equal endpoints, the coherent nerve, the specific `Q^n`, the maximum map `q^n`, and naturality under simplicial functors, are unchanged. Step 1 uses the coherent-nerve comparison only for its adjunction, subset-poset composition, and operator naturality; the monotonicity and union checks are the elementary part of the displayed construction. Step 2 uses the pinched-adjunction statement for the inverse description, the cube-latching statement for the maximum map, and the rigidification statement for `Sing_Q`; each cited statement supplies exactly that interface. Step 3 uses the infinity-pinch statement for the defining precomposition map and the coherent-nerve comparison for preservation of enriched composition; its subset calculation is written explicitly. Step 4 uses the naturality clauses of the coherent-nerve, pinched-adjunction, and infinity-pinch nodes and is elementary after the degreewise equality.
+
+I searched the whole DAG and blueprint for duplicate coherent-prism, maximum-map, and right-pinch statements; no existing node states this identity. I tested the formulas in the edge cases n=0, x=y, and a degenerate simplex: q^0 is the unique vertex, the equal-endpoint maps are identities, and degeneracies preserve the maximum formula. All five dependencies are in `sk-prop-sf-biduality-general`, so no off-unit tool declaration is needed. The proof dependency union equals the uses of the four steps, the citation quotes are verbatim excerpts of the cited statements, and the split is acyclic.
+
+
+### Resumption audit, 2026-10-17
+
+I re-read the current repository item (still unsplit) and all five cited statements. The statement in the sandbox is byte-for-byte unchanged. The retained search log records the previous real searches; the project-source search over all WeilConjectures found no item tag, right-pinch, pinched, coherent-prism, or maximum-coordinate declaration. I re-read Mathlib/AlgebraicTopology/SimplicialNerve.lean, in particular the subset-path realization and SimplicialNerve at line 193; it provides the notion but no matching identity. Whole-blueprint searches for pinch and maximum found no duplicate identity. There are still no new nodes.
+
+I opened the official online Arakawa PDF, Remark 2.5 (printed p.34) and Proposition 3.2 (pp.35–36), and HTT §2.2.2 (printed p.76). Arakawa gives the maximum-before-crossing formula, and HTT gives the canonical quotient, direct-image operators and largest-element map. These online reads improve the earlier attempt's source access; the WANTED entries above refer to local archival copies, not an assertion that the online sources cannot be read. The explicit equality remains an agent-written refinement.
+
+The earlier citation excerpts were not all verbatim (one used an ellipsis); I replaced them by contiguous passages of the current node statements. Step 1 now checks composition in both crossing cases explicitly, using only the coherent-nerve node's subset-union definition. Step 2 distinguishes the pinched simplex z from the prism j(z), and checks τ's simplicial compatibility using the cube node's direct-image formula and the definition of Sing_Q. Step 3 adds citations of the cube-latching and pinched-adjunction statements: it calculates h(S)=I(S)∪{n+1}, inserts an initial identity when the starting vertex is not 0, and uses the stated cube relation to identify {0}∪I(S) with I(S). This is a direct calculation on the displayed definitions, not a separate hidden comparison lemma. Step 4 writes the maximum identity establishing operator compatibility and postcomposition naturality.
+
+Small cases checked again: n=0 gives the edge corresponding to the vertex a; for x=y the constant-coordinate pairs remain identities while crossing pairs still use a (the map need not itself be the identity); all-zero or all-one chains are constant, repeated vertices give direct-image subsets, and an absent a when T is empty makes the degreewise assertion vacuous. The local Kan hypothesis is used to put P and its mapping spaces in the stated quasicategory/Kan interfaces; the subset calculation itself requires only a simplicial category. Every proof step is below 2000 characters. The B–E audit introduces no new definitions, claims, sources from SGA, or cycles, and no target statement or coefficient category is changed.
+
+I also read the online HTML articles for Kerodon Construction 4.6.5.7 (01L2), Proposition 4.6.5.10 (01L5), and Construction 4.6.4.15 (02GH). They identify right pinch as the restriction of the slice diagonal and state its homotopy-equivalence property. Step 3 only needs the explicit precomposition map already stated in lem-coef-infinity-pinch-comparison; it does not infer the subset formula from the homotopy-equivalence assertion. The formula is computed in the step itself.

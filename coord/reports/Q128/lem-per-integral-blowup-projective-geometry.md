@@ -1,0 +1,11 @@
+# Stage-1 worker report
+
+1. Files written: `dag/nodes/sec-deligne-laumon-a1/lem-per-integral-blowup-projective-geometry.json` (statement split; no new Mathlib leaves); `citations.json`; `report.md`.
+2. Attachments: none.
+3. WANTED: none.
+4. The imported node had an empty proof and stale provenance from an unrelated normalized-blowup item. I retained its statement and corrected the split provenance to record that the proof follows Stacks Tags 02ND and 02NS. The affine blowup domain calculation is elementary from the chart-ring definition (Stacks Tag 052R), so I did not create a duplicate helper node. I searched the whole DAG and blueprint for the chart, Rees, and relative-Proj facts and reused the existing nodes.
+5. Nothing remains unfinished.
+
+## Review by Q128
+
+I read the item source in `literature/stacks-project/divisors.tex`: Tag 02ND proves integrality by affine blowup charts and Tag 02NS proves projectivity from the symmetric-to-Rees graded surjection and the relative-Proj closed immersion. I also read the current statements of every node cited by the three proof steps. Step 1 uses the global blowup local-model and affine-blowup definitions, the finite standard-chart cover, and the chart-ring definition; these give the exact affine charts used. The only additional calculation is the two-line Tag 052R fraction argument, marked elementary. Step 2 uses the existing complement-isomorphism theorem and the integral-scheme definition: the nonzero ideal misses the generic point, the blowup is an isomorphism over the dense complement, and each chart has a dense basic open there, so the domain charts make the blowup reduced and the common dense open makes it irreducible. Step 3 uses the Rees-algebra definition, the symmetric-algebra existence statement, the chartwise identification of the global blowup with relative Proj, the surjective relative-Proj closed-immersion clause, and the projective-bundle definition; the finite-type hypothesis is exactly the one needed for the projective bundle. I checked the edge cases of a principal ideal (the blowup is the identity), the unit ideal, and the zero ideal (excluded by the nonzero hypothesis). The previous stale `blueprint.from` chain was replaced with an explicit note that no blueprint node states this auxiliary Stacks lemma.

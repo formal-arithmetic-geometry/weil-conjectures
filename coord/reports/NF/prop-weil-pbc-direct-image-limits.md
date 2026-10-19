@@ -1,0 +1,48 @@
+1. Files written.
+
+- item: prop-weil-pbc-direct-image-limits (statement, no Mathlib match).
+- lem-weil-pbc-tower-levelwise-derived (statement, no Mathlib match).
+- lem-weil-pbc-direct-image-derived-products (statement, Mathlib generalization only; no exact match).
+
+2. Attachments.
+
+None. No declaration tagged `(blueprint: prop-weil-pbc-direct-image-limits)` or matching the full statement was found in WeilConjectures.
+
+3. WANTED:
+
+None; the proof source is present in the blueprint and Stacks Tag 099N is cited there.
+
+4. What was wrong or incomplete.
+
+The imported proof compressed two substantive constructions into one paragraph: existence and levelwise evaluation of the derived direct image on the tower category, and the comparison of derived countable products under direct image. I made these precise as two statement-only child nodes. The remaining Roos-triangle comparison, completeness, and projection-formula steps were retained with their existing dependencies. No statement was changed.
+
+5. What could not be finished.
+
+The two new child statements remain unsplit as required for a one-level stage-1 delivery.
+
+## Review by NF
+
+I read the item and its proof in the blueprint file literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-direct-image-limits.md, and checked the source checkout for the blueprint tag and matching declarations; no finished Lean declaration exists. I read the statements of every cited existing node: the adic coefficient datum supplies the tower category and normalization maps, the Roos node supplies the two product triangle, and the perfect projection-formula node supplies the finite-level isomorphism. I added the tower-level derived-functor node because the first proof sentence uses existence of a total right derived functor and exact evaluation; its statement explicitly says both. I added the derived-product node because the comparison Rf_* R∏ ≃ R∏ Rf_* is a genuine non-elementary input; its statement explicitly gives the comparison and its naturality. Step 1 uses the tower definition and the new levelwise statement; step 2 uses the new product statement; step 3 uses the Roos triangle together with both new statements to identify the cones and commute with (1-s); step 4 uses the adic normalization data and the perfect projection formula, while recording the Stacks 099N completeness clauses as the external source named by the blueprint. I checked the small edge cases conceptually (zero tower and identity morphism reduce to the identity comparison) and recorded all required Mathlib searches for the item and both new nodes; no exact Mathlib declaration was found. The citations file quotes the complete verbatim statement of every node used by each step.
+
+## Second reading by NF
+
+- Item statement: compared every clause with the complete blueprint node and Stacks 099N (`proetale.tex`, `lemma-pushforward-Noetherian-case`), 099M (`lemma-naive-completion`), and 0944 (`sites-cohomology.tex`, `lemma-projection-formula`); unchanged. 099N concerns constant Noetherian coefficients, not the tower construction or the perfect projection formula; the proof below uses the blueprint's adic datum and separately cited reconstruction instead of treating 099N as an uncited black box.
+- Original step 1 / repaired steps 1–2: opened the adic datum, the generic functorial K-injective existence statement, the abstract derived category, and the generic Hom-to-K-injective statement. The original child simply repeated the tower clause (D1). Repaired existence uses Stacks 070K; the exact left adjoint to evaluation is written out, including its values at and above n, which proves preservation of K-injectives without inferring it merely from exact evaluation. All transition identifications come from a single strict tower resolution.
+- Original step 2 / repaired step 3: opened the pro-etale operations (including its derived adjunction) and the derived-inverse-limit definition (product universal property). The Hom adjunction/product calculation proves the comparison in three lines; the original new node was elementary and has been removed (C2).
+- Original step 3 / repaired steps 4–5: opened the Roos-triangle and derived-product-representation statements, not just their source notes. The nth-component calculation now proves compatibility with s and 1-s explicitly. The resolution and the shifted cone are specified; Hom complexes show their K-injectivity, exact inverse image gives K-injective direct images, and the ordinary product isomorphism gives an actual cone isomorphism. Thus no arbitrary triangulated cone identification is mistaken for a canonical map (E5). The pro-etale inverse-image definition, site-morphism definition, module-sheaf definition and coefficient-isomorphism hypothesis of the operations were checked for the exactness used here.
+- Original step 4 / repaired step 6: opened the perfect projection formula, projection-formula-map definition, coefficient datum, Koszul reconstruction and intrinsic completion. The original citations did not state completeness or coefficient compatibility. Reconstruction supplies the completion comparison; adjunction to the same counit proves compatibility with both quotient maps and maps from K. The statement about the composite is now proved from these maps, without quoting 099N as a proof dependency. Perfectness is used only for P_n, never for K or f.
+- Removed new node lem-weil-pbc-tower-levelwise-derived: checked against the first sentence of the item and its blueprint proof; it restated the entire first clause, used undefined plain-text symbols, and gave no argument for evaluation preserving K-injectives. Removed and replaced by the construction in steps 1–2.
+- Removed new node lem-weil-pbc-direct-image-derived-products: checked against the derived adjunction in def-weil-pbc-proetale-operations and product definition; it follows immediately from these. Removed and replaced by step 3. Its citation of the etale-only def-weil-pbc-derived-categories did not define the pro-etale objects in its statement.
+- New node lem-weil-pbc-kinjective-total-derived: checked hypothesis by hypothesis against Stacks 070K (`derived.tex`, `lemma-enough-K-injectives-implies`) and 070Y (`lemma-K-injective-defined`): arbitrary abelian category, enough K-injectives, arbitrary exact functor out of its homotopy category, unbounded derived category, and computation on every K-injective. It is a generic theorem used by the construction, not a tower clause. B1–B7: statement only, all objects and K-injectivity introduced, derived and triangulated notions cited, universal property spelled out, TeX once, exact tags and labels. Small tests: zero abelian category, zero exact functor, complexes of vector spaces, and zero complexes all give the expected derived functor/comparison; no boundedness, nonzero condition or excluded n=1 case is introduced.
+- Search/duplicate check: searched all DAG nodes and the entire blueprint with `blueprint_refs.py search` for K-injectives, K-injective resolution, right derived functor, derived products and 070K. The existing 070K-bearing definition states only etale K-injectivity, not this generic theorem; bounded-below derived-functor nodes do not cover unbounded towers. Ran fresh msearch semantic, Loogle and actual Mathlib grep searches, with different vocabulary, and read `DerivedCategory/DerivabilityStructureInjectives.lean`: its existence result is for Plus. The right-adjoint limit theorem is a general candidate for the removed product child, whose argument is now elementary; no new Mathlib leaf is needed.
+- Hypotheses and edge cases for the item: n=1 uses L_1(V) with just its first nonzero level; a zero tower has zero product/cone; the identity morphism gives identity comparisons; empty schemes give zero module categories; a field with I=0 gives a constant reduction tower. For I=A all P_n vanish, so a derived complete K must be zero, and the conclusion still holds. No properness, quasi-compactness, boundedness or constructibility is used.
+
+Changes: removed both original child nodes (D1 and elementary duplication), added one generic Stacks 070K node, expanded evaluation/shift/cone arguments, cited the actual completion reconstruction and projection-formula-map definition, and regenerated every citation quote from the repaired cited statement. The original Review by NF is retained as requested; its assertion that the original citations sufficed is superseded by the specific corrections above.
+
+Generic tool use: lem-weil-pbc-kinjective-functorial-existence is used solely for its Grothendieck-category resolution theorem. No node of this unit supplies that general existence result; its etale-specific resolutions-exist node is insufficient for towers. The maintainer may record this tool use; no tool_uses field was written here.
+
+## Not duplicates
+
+lem-weil-pbc-kinjective-total-derived vs def-weil-pbc-kinjective-resolutions: both mention 070K, but the existing node only defines K-injective etale module complexes and their resolutions; it does not assert the arbitrary-functor existence/computation theorem of 070K.
+lem-weil-pbc-kinjective-total-derived vs lem-weil-pbc-derived-exchange-unbounded-transport: the latter is a scheme-square-specific transport theorem whose hypotheses and conclusion concern an exchange comparison; it assumes rather than states the generic 070K total-derived-functor construction.
+lem-weil-pbc-kinjective-total-derived vs lem-weil-pbc-derived-exchange-bounded-comparison: the latter is the bounded-below special exchange comparison and does not state existence/computation of a total right derived functor for an arbitrary exact functor on K(A).

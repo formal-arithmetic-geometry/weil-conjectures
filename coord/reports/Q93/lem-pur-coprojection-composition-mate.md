@@ -1,0 +1,75 @@
+# Worker report: lem-pur-coprojection-composition-mate
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-coprojection-composition-mate.json`: statement; split into eleven proof steps. Its existing searches and provenance were retained, and seven actual Q93 searches were appended. No Mathlib match for the specialized statement.
+- `citations.json`: 35 entries, one for each step/node pair, copied verbatim from the cited statements.
+- `report.md`: this report. `searches.jsonl` is the unmodified log made by msearch.py. `write_split.py` is the sandbox-local generation script.
+
+## New nodes
+
+None: 0 new nodes, 0 new Mathlib leaves. In particular no clause of this item was moved into a new node. Projection composition, tensor/pullback preservation, compactification intertwining, and both mate-pasting laws already have nodes.
+
+## Attachments
+
+None. Searches under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` found no `(blueprint: lem-pur-coprojection-composition-mate)` declaration and no declaration proving the specified composition identity. I read `CategoryTheory/Adjunction/TensorInvertible.lean`, especially `CategoryTheory.Adjunction.tensorRightCompIsoOfTensorIso`, and `EtaleCohomology/Purity/Smooth/Coprojection.lean`, especially `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIsoOfTensorIso` and `...derivedTensorRightCompRightDerivedUpperShriekIso`. These construct co-projection isomorphisms in ordinary etale categories; they do not prove this equality of specified finite pro-etale transformations for two morphisms. They are therefore not attachments for this item.
+
+## WANTED
+
+None. The current blueprint, Stacks source, and Mathlib source needed here are available locally. No SGA source was used. No Lean file was written and no compiler, Lake, or build tool was run.
+
+## Statement correction / source error
+
+STATEMENT-DISPUTED: the original recipe calls its initial insertion an unlabelled isomorphism made from evaluation, associators and unit constraints, while also calling the result a conjugate under the tensor adjunction. The initial arrow must be the triangle-normalized unit for the prescribed evaluation counit. Reading it instead as the inverse of the evaluation reordered by symmetry gives a false formula in odd degree.
+
+Explicit small case: take k = the algebraic closure of F_2, A = F_3 (ell = 3, E = Q_3, n = 1), h = id_Spec(k), K = A in degree zero, N = A[1], N' = A[-1], and a chosen evaluation e: N tensor N' -> A. The symmetry on the two odd factors contributes -1. Thus using (e composed with symmetry)^{-1}: A -> N' tensor N as the first insertion, followed by e on N tensor N', gives kappa_id = -id. For f = g = id the asserted composition equality would give -id = (-id)(-id) = id, which is false over F_3. The normalized coevaluation instead satisfies both triangle identities and gives kappa_id = id.
+
+I corrected only this normalization: the initial arrow is labelled eta^N and its prescribed counit and normalized unit are explicitly stated, using the existing quasi-inverse-adjoint node. The source's intended mate construction and both composition conclusions are retained; no morphism or coefficient hypothesis was added, no conclusion weakened, and the unit/chapter route is unchanged. Tensor-invertible in D^b_ctf is read as invertible in that monoidal category, so its inverse is also an object of that category. Inverse-data independence is proved in step 5.
+
+I also replaced the explanatory appeal to lem-sf-mate by det-sp-unique-right-adjoint in the statement. The former has a separate six-functor-datum hypothesis. Here the same invertibility follows directly from the standing constructible adjunctions and the compact-support compositor, as proved in step 6. This removes an unnecessary datum assumption from the explanation; it does not change the exceptional comparison being defined.
+
+## DAG and blueprint searches
+
+I read the item, its chapter record, its unit record `sk-thm-regular`, and the current `main-20261015` proof of that unit. The required place is Step 4(ii), the comparison of smooth-purity identifications under etale pullback. This item supplies the formal co-projection composition compatibility needed there; it does not change the unit statement, any step, or its realized fields.
+
+`tools/blueprint_refs.py ancestor lem-pur-coprojection-composition-mate` gave sk-thm-regular, agreeing with the inherited blueprint ancestry. Whole-blueprint searches for `co-projection composition` and `projection associativity` both found zero equivalent blueprint statements, so same_as remains []. A broader projection search and whole-DAG title/statement searches located existing lem-sf-composition-projection-mate, lem-pur-pf-refinement-compatibility, lem-weil-pbc-mate-pasting, and lem-trf-iterated-square-mates. I opened their full statements. I also compared the ordinary etale lem-amb-shriek-tensor-composition and the strict-system projection lemmas: those are different coefficient/site domains, and I did not substitute them for a finite pro-etale theorem.
+
+## Mathlib searches
+
+All seven Q93 queries were executed with the required msearch.py and read. LeanFinder was tried with both the right-adjoint tensor-projection phrasing and the more general composite-adjunction-mates phrasing. Loogle was queried for CategoryTheory.mateEquiv and CategoryTheory.Adjunction.comp. The two grep searches covered projection/mate terms in CategoryTheory and composition of mateEquiv/conjugateEquiv in CategoryTheory/Adjunction. LeanSearch was queried for extraordinary inverse-image co-projection composition. Every service answered successfully. Its generic subfunctor/image results were irrelevant; the useful generic mate lemmas were read in their actual Mathlib source. None states the specialized theorem. The original Q66 search records are inherited records, not claimed as new Q93 executions.
+
+## Tool uses
+
+The split_report.tool_uses list declares the generic statement tools from other units: finite-Tor pullback and tensor closure, compact-support constructibility, strong monoidal pullback coherence, compact-support composition, Noetherian/qcqs facts and compactification existence/towers, projection composition and refinement intertwining, and constructible etale origin. They supply infrastructure, not a replacement proof of regular-immersion purity. The mate-calculus nodes are already Mathlib leaves. No new tool_uses field was installed on the item itself.
+
+## Review by Q93
+
+I read the item's current blueprint source `main-20261015/.../sk-thm-regular.proof.md`, especially Steps 2 and 4(ii). That text requires composition compatibility but does not carry out this double-mate calculation, so proof_origin is agent. I read Stacks categories.tex, Definition 0037 (definition-adjoint) and Lemma 0B65 (lemma-transformation-between-functors-and-adjoints), including the counit characterization of conjugation. For the exact generic pasting facts I read Mathlib/CategoryTheory/Adjunction/Mates.lean at mateEquiv_vcomp (170), mateEquiv_hcomp (209), iterated_mateEquiv_conjugateEquiv (464), and the two change-of-adjunction formulas (486, 505). I inspected the unique-adjoint source, Equivalence.lean lines 327–355 (adjointifyEta and Equivalence.mk), and Adjunction/Basic.lean lines 719–721 (Equivalence.toAdjunction), which preserve the prescribed counit and adjust the unit. I also read Stacks more-etale.tex, Tag 0F7J (lemma-shriek-composition), with its compatible compactification tower, and Tag 0F7B (lemma-shriek-proper-and-open), its proper/open comparison. There are no new node statements needing separate sources.
+
+1. Step 1 uses lem-sf-pullback-tor-amplitude for precisely its finite-Tor pullback assertion, lem-sf-tensor-ctf for products with a finite-Tor factor, and prop-finite-compact-support-constructibility for the bounded constructible output of F_h. I read the complete statement of def-weil-exceptional-inverse-image: its standing adjunction and finite-Tor preservation are available without an optional ambient datum. Lem-pur-derived-pullback-tensor-iso explicitly gives the monoidal and composition coherence later used. These are real preservation statements, not claims extracted from a definition of Tor amplitude. They put every object of the mate calculation in bounded constructible categories, where both copies of F_h are adjoint to the indicated H_h.
+
+2. Step 2 uses the full refined clause of lem-weil-pbc-quasi-inverse-adjoint: the counit is the chosen beta, while the unit is adjointified. Its statement actually permits prescribing this evaluation counit. Lem-pur-derived-pullback-tensor-iso says that tensor evaluations, associators, symmetry, units, and composition commute with pullback, so pulling back both triangle equations really gives the appropriate tensor adjunction on the source. This is where the sign ambiguity was repaired.
+
+3. Step 3 instantiates def-weil-pbc-adjunction-mate with tensor adjunctions and vertical functors F_h. I checked its displayed unit, counit, and transpose formulas, not merely its title. Its explicit composite gives exactly b_h with unit insertion, the actual PF at N', and the pulled-back evaluation. Def-exchange-projection supplies the specified natural PF and the tensor-pullback comparison in that composite; no invertibility of PF is inferred from that definition.
+
+4. Step 4 applies the same definition with the two exceptional adjunctions. Its transpose is (epsilon tensor 1)b_{h,H_hK}, precisely the corrected recipe. The full Hom chain is written out. Def-weil-pbc-composite-adjunction says that these Hom bijections compose in exactly that order. Lem-trf-iterated-square-mates states equality with conjugation for the four given adjunctions, so its use establishes the actual double mate, not just the existence of some isomorphism. Both cited statements say the claimed normalization.
+
+5. Step 5 gives an explicit map between two inverse objects and its two evaluation/coevaluation equations, using the two triangles. The inverse is obtained by exchanging the two pairs, and the adjacent triangle contractions prove both inverse identities. This is the tensor inverse instance of the unique right-adjoint comparison in det-sp-unique-right-adjoint; the explicit formula prevents a hidden dependence on an independently chosen unit. Naturality in N' is genuinely included in def-exchange-projection, and the mate bijection in def-weil-pbc-adjunction-mate then gives equality of kappa. No arbitrary equivalence transport was assumed.
+
+6. Step 6 reads pur9-def-upper-shriek-composition literally: c is the transpose of epsilon_gf alpha. Def-weil-pbc-composite-adjunction gives epsilon_g F_g(epsilon_f), so the displayed counit equation has the right order. Thm-sf-comp-composition gives the canonical invertible alpha, and det-sp-unique-right-adjoint gives the unique compatible comparison of the right adjoints of the same F_gF_f. Their stated domains are the ones checked in step 1. This proves c invertible without using the extra datum in lem-sf-mate.
+
+7. Step 7 cites lem-weil-pbc-finite-type-over-noetherian and lem-weil-pbc-locally-noetherian-quasi-separated to meet the qcqs hypotheses of thm-nagata-compactification and lem-weil-pbc-compatible-compactification-triangle. The base field is Noetherian by its two ideals, an elementary check. I opened the latter's statement and matched its c,b,p_Y,p triangle with the tower required by lem-sf-composition-projection-mate. That theorem explicitly states the exact PF equation for arbitrary finite pro-etale inputs; specialization to P,N' adds no hypothesis and is not the ordinary etale or strict-system-only equation.
+
+8. Step 8 uses clause (ii) of lem-sf-proetale-constructible-origin, which really is an equivalence for bounded constructible complexes (not only sheaves). Lem-pur-pf-refinement-compatibility explicitly intertwines the specified PF maps, including through a common refinement. Thm-sf-comp-composition explicitly makes alpha independent of the same choices. Thus replacing the tower by the statement's choices is justified for the named maps, not merely the underlying functors. The pullback-composition node identifies the actual pullback isomorphism, and the monoidal pullback lemma identifies the inverse tensor data under it.
+
+9. Step 9 uses clause (1) of lem-weil-pbc-mate-pasting with the three tensor adjunctions on X,Y,Z. I checked the common middle adjunction, the two F_h vertical functors, and the source and target of the resulting b equation. Changing the two vertical functors by alpha is the usual naturality of the unit/counit formula, with all four maps explicitly present. The mate definition is a bijection, so no inverse projection formula or general assertion that a square mate of an isomorphism is invertible is used.
+
+10. Step 10 uses clause (2) of the same pasting node with L1=L2=F_f and L3=L4=F_g. Its three vertical tensor functors are written out, and its resulting H_f(kappa_g) kappa_f is exactly the right-hand side. Clause (3) gives the c whiskerings and their order. The cited composite-adjunction statement fixes the pasted counit to the one defining c. This verifies the compatibility itself; it is not replaced by an appeal to functoriality with no equation.
+
+11. Step 11 reads the canonical-map characterization in lem-pur-coprojection, not only its isomorphism conclusion. The conjugation definition explicitly says that inverses conjugate to inverses, identifying its closed-immersion coProj with kappa^{-1}. For the general inverse clause the hypothesis is exactly the three invertibilities already stated in the item. The order of multiplication of the first formula is written out and gives the second formula with all endpoints matching.
+
+I tested the identity morphism, the unit coefficient N=A, odd shifted units N=A[1] at an odd coefficient prime, rescaling the evaluation by a unit, K=0, and empty schemes. With the normalized tensor unit, identity gives kappa=id; rescaling unit and counit cancels; the zero/empty cases impose no extra hypothesis. The odd-shift test is what forced the normalization clarification above. I checked that every cited node exists, is unmerged, and its statement actually contains the fact used. Reading the dependency closures of the candidate generic tools found no path back to this item. No proof step is over 2000 characters; no long step hides a separate lemma. I checked delivery-errors B–E: no new nodes or hollow notions; no unsupported tags, implicit ambient adjunction, site-category identification, relabelling, or changed unit route. The only corrections from this review were the normalized insertion, replacement of the conditional lem-sf-mate explanation, and explicit compactification intertwining.
+
+## Unfinished work
+
+The mathematical split and citation audit are complete. The first required remote dry run passed and recorded its durable success receipt at c5a1c52809. A final source-place clarification was then made in step 7; the final dry run and push use that version. No mathematical subtask remains unfinished.

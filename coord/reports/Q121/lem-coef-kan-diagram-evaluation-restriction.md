@@ -1,0 +1,53 @@
+# Worker report
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-kan-diagram-evaluation-restriction.json`: statement, split; not in Mathlib. The statement and its four statement dependencies are unchanged. Added six proof steps and their exact union of proof dependencies, proof origin, current searches, and split report. The inherited blueprint ancestry and all other fields are retained.
+- `citations.json`: twelve entries, one for each step/node citation, with verbatim excerpts checked against the current repository statements.
+- No new nodes; zero Mathlib leaves. `write_split.py` is a sandbox-only preparation script and `searches.jsonl` is the search-command log.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 `WeilConjectures/` both for the exact blueprint id and for coherent evaluation, rectification, projective cofibrant replacement, and Kan-diagram name variants. No declaration states this item. The exact master checkout is reference material only and supplies no attachment evidence. The node has no recorded Lean audit to chase and no missing open Lean declaration requiring a new node.
+
+## WANTED
+
+WANTED: Jacob Lurie, Higher Topos Theory, Proposition 4.2.4.4 and Section 1.1.5, archival copy under literature/, for lem-coef-kan-diagram-evaluation-restriction. Read the IAS online PDF, printed p.258, and checked the actual arbitrary-small-simplicial-set hypothesis and induced evaluation comparison.
+
+WANTED: Jacob Lurie, Higher Algebra, Construction 4.1.7.1, Proposition 4.1.7.2 and Notation 4.1.7.3, archival copy under literature/, for lem-coef-kan-diagram-evaluation-restriction. Read the Harvard online PDF, printed pp.485-486; the fully faithful inclusion of categories with their equivalences has the functorial localization left adjoint and its unit. Also checked Theorem 1.3.4.20, printed p.117, for the cited model-localization background.
+
+The proof is marked agent-written: these sources are online, not archived, and the restriction/replacement consequence itself is formulated by the agent. No downloading and no alteration of literature files occurred. There is no Stacks tag for this infinity-categorical assertion. No SGA source is used.
+
+## Faults found and corrections
+
+No statement dispute. The item is true with arbitrary simplicial index shapes, the containing universe, and ordinary functorial replacements as written. The original item had no proof. It is unnecessary and generally unjustified to assume that restricting a projectively cofibrant diagram remains projectively cofibrant; the new proof instead compares the two replacement evaluations through evaluation of the restricted original diagram. It also avoids choosing inverse maps independently at objects or attempting to apply the coherent nerve to an unenriched replacement functor.
+
+The current blueprint source is `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md`. I opened its statement and proof and the inherited master version; their second paragraph contains the same coherent derived Hom chain. The item's inherited maintainer-owned unit is not changed. This is generic infrastructure under the already recorded ancestry, not a replacement of a geometric or coefficient route. The blueprint `same_as=[]` is confirmed by `blueprint_refs.py search` for “localized Kan”, “restriction coherence” and “cofibrant replacement”, and the broader localization search. `blueprint_refs.py ancestor` reports prop-coef-integral-exceptional-adjoint. DAG concept searches included entire/whole functor categories, localization universality, replacement and enriched evaluation; the existing localized-evaluation and system-localization nodes are used rather than duplicated. The pre-existing universal-left-fibration-identity cites this item, so it was read as a user, never used as a dependency.
+
+## Mathlib searches
+
+All six new searches were run through the prescribed msearch command for Q121 and this item, with their unmodified result records copied into mathlib_searches. Both natural-language phrasings returned ordinary nerve/homotopy-category/replacement statements; Loogle returned ordinary localization constructions; grep found the coherent-nerve definition and invertible-interval definitions. I inspected `Mathlib/CategoryTheory/Localization/Predicate.lean`, especially functorEquivalence (236), liftNatTrans (326), liftNatIso (357), `Mathlib/AlgebraicTopology/SimplicialNerve.lean`, including its explicit list of still missing quasicategory-of-spaces results, and `Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean` (261-272). Ordinary categorical localization equivalences are not one-line specializations to infinity localizations of simplicial diagram categories. No service was unavailable. The item's inherited N2 search records were retained as historical records, with no claim that Q121 ran them.
+
+## Review by Q121
+
+I read coord/delivery-errors.md B-E in full and reviewed the completed six steps with the item and cited node statements open. There are no newly introduced statements or definitions to test against B1-B9: all non-elementary inputs already have nodes, and none is repackaged as a new clause node. Every step has fewer than 2000 characters (595, 721, 1220, 1195, 997, 1530). Thus no long step hides a separate statement-only lemma. The parameter argument in step 4 is just application of an equivalence and its specified quasi-inverse to the internal functor simplicial set, written explicitly.
+
+Step 1 uses the exact entire-functor-category assertion in lem-coef-simplicial-model-nerve-localization, which includes the fibrant-subcategory localization. Restriction preserves the weak-equivalence system by the vertex formula a_(vx), and preserves Kan values by evaluation at vx. This checks the precise hypotheses needed to descend q_(K') N(v*), including the universe for the target. No claim that restriction preserves cofibrancy enters.
+
+Step 2 uses the actual composable-chain evaluation formula in lem-coef-kan-diagram-localized-evaluation and the adjunction and its natural unit in lem-coef-coherent-nerve-comparison. I checked that these statements give more than object-level evaluation: they explicitly identify C[K] x [n], its coherent nerve and its operators. The substitution by C[v] x 1 and the natural-unit equation give equality of maps on K' x Delta^n for each n. This is a definitional computation, so this step alone is marked elementary. Its source is the induced enriched evaluation in HTT 4.2.4.4, with the full formula made explicit in the existing DAG node.
+
+Step 3 uses lem-coef-system-localization-universal, whose statement explicitly provides the functor L, fully faithful G and their unit, rather than just existence of localized objects. Its whole-functor-category clause and the evaluation node identify the resulting component with the already specified E_K, retaining E_K q_K ~ e_K. Objectwise weak equivalences contain identities, compose, and form a homotopy-stable system in the ordinary nerve. Consequently the A_K form a diagram of precisely the kind that L accepts. The construction descends a single strict natural transformation rather than choosing a homotopy for each restriction separately.
+
+Step 4 reads the same localization statement together with the explicit internal Fun definition in def-cbc-enhanced-diagrams-cones. For B=Delta^n and its faces/boundaries, composing a quasi-inverse and its two witnesses by Fun(B,-) proves that the complete diagram of comparisons descends. Functoriality of L already supplies identity/composite coherences. The whole universal property retains ordinary transformations and arbitrary localized higher simplices. This is the needed C4 distinction from a statement only on the homotopy category. No generic enriched-dg localization statement is substituted for the relevant ordinary-nerve infinity localization.
+
+Step 5 uses the final weak-equivalence clause of the localized-evaluation node, the componentwise equivalence criterion of lem-cbc-enhanced-functor-cone-calculus, and the explicit two-out-of-three convention in the model-localization node. Naturality a_P' Q(f)=f a_P proves Q preserves W, so the replacement functor and transformation really descend. Ordinary functoriality suffices to produce the nerve transformation b_K; no simplicial enrichment of Q is assumed. The pointwise criterion is declared in split_report.tool_uses because its node is in another unit and is a generic black box, with no replacement of a unit proof route.
+
+Step 6 uses the whole-category universal property of system-localization and the functor/equivalence definitions, not a new theorem about projective cofibrancy. I wrote the exact zigzag, the triple-replacement cancellation and the composable-restriction cancellation. The inverse is an inverse of a natural equivalence in a functor quasicategory, so its triangle witnesses and higher coherences are retained. This proves independence with the comparison to the original functor specified, rather than asserting literal equality of arbitrary chosen replacements. Step 4 then descends the entire parameter diagram.
+
+I tested empty K (the diagram category and functor category are terminal), K=Delta^0 (restriction reduces to evaluation of spaces), discrete K (coordinate projections), K=partial Delta^2 (a non-quasicategory index), an empty Kan value, identity restrictions, and two successive restrictions. On every index the replacement zigzag has common target e_(K') v*, even if v*Q_K P is not projectively cofibrant. For the composite, w* b_(K') v* and its inverse cancel, leaving precisely the zigzag for vw. These tests require no extra fibrancy, nonemptiness, smallness or enrichment hypotheses. The coefficient category is always the specified Kan-space category; no coefficient-stage identification is made.
+
+Citations were read as statements, not mined from their proofs. I checked the twelve citation strings programmatically as verbatim substrings. A read-only closure traversal of the proposed dependencies found 551 nodes and no path back to this item, so the proof does not create a circular use of the parent universal-family theorem. All retained statement dependencies occur in the unchanged statement. proof_deps is the exact union of the six uses lists. No new nodes, no duplicates, no statement weakening, no unproved inline comparison, and no changes outside the sandbox were needed.
+
+## Unfinished work
+
+None in this stage-1 split. The pre-existing non-elementary foundation nodes remain separate DAG tasks, as intended by one-level splitting. Delivery awaits the prescribed remote preflight and dry run.

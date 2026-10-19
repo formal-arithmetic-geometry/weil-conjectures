@@ -1,0 +1,9 @@
+# Q94 `lem-cbc-kan-relative-realization-lift`: provider concurrency repair
+
+The ten stage-1 attempts for this item were infrastructure failures. Each worker log ends with Codex's terminal HTTP 429 (`gateway_concurrency_limit` / `Too Many Requests`); the dispatcher converted the missing `last.txt` into `NOANSWER`. Attempt `1792194747` reached `deliver.py --no-push` and printed `preflight passed` before its answer was lost to the same provider failure. The item node, sandbox, and server delivery records contain no matching data or permission error.
+
+The dispatcher had raised its global `total_slots` to 700, while the launcher account rejected the resulting burst. The installed launcher repair now uses `codex_capacity.ProviderCapacity` to admit workers and maintenance sessions adaptively, classify provider failures as `PROVIDER_RATE_LIMIT`, retain the sandbox, and reduce admission after a 429. The existing dispatcher process was deliberately left running; its loaded code predates that repair. Existing worker sessions can finish naturally. Activation of adaptive admission remains pending the next dispatcher start; this report does not claim the running dispatcher enforces the cap.
+
+On the launcher machine, `/home/ubuntu/weil-launcher-all/config.json` now sets `provider_start_slots` to 8 and `provider_cooldown_s` to 60. The prior configuration is retained as `config.json.bak-Q94-rate-limit-1792197035`. Python syntax checks and a direct `ProviderCapacity` admission check pass. All 17 existing provider-admission, reader-retry, and failure-classification regressions also pass. No Lean source or project mathematics changed.
+
+The Q94 worker should resume the retained sandbox after provider capacity is available. It should inspect the existing successful dry-run evidence first and rerun the required no-push dry run; it should not redo the split merely because the historical dispatcher note says `NOANSWER`. Failure counts remain eligible for dispatch.

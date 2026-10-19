@@ -1,0 +1,27 @@
+# Worker report
+
+Files written: item `lem-trf-site-hypercover-injective-sections`; new statement node `lem-trf-site-hypercover-free-resolution`; Mathlib leaf `lem-trf-site-free-sheaf-sections` (`CategoryTheory.Sheaf.freeYonedaHomEquiv`). No attachments and no WANTED items.
+
+The source read for the item and the new site-theoretic node was `literature/stacks-project/hypercovering.tex`, Tags 01GE and 01GW together with the free simplicial resolution discussion in Tags 01GC--01GD. The source proves the sheafified free hypercover complex exact by comparing successive coskeleta and using local surjectivity of each matching map. The item keeps the arbitrary-site hypotheses and the covering-sieve formulation; no subcanonicality or splitness was added.
+
+## Review by Q37
+
+I searched the whole DAG and blueprint for an existing arbitrary-site injective hypercover statement. The existing hypercover nodes are scheme-specific or module-specific and do not state this site's matching-sieve result, so the new free-resolution node is not a duplicate. I also checked the source and slopmaster2 source tree for a declaration carrying the item tag; none exists.
+
+Step 1 cites the new free-resolution statement for exactness of the sheafified alternating-face complex and the Mathlib leaf for the natural Hom-to-sections identification. Those statements provide exactly the objects and maps used. Step 2 cites the same exact complex and the definition of injectivity; I wrote the extension argument degree by degree, including the augmentation kernel. Step 3 uses the naturality clause of the Mathlib leaf to identify every dual face map with restriction and the augmentation with restriction from `W`; this is the short calculation from the displayed free generators.
+
+For the new node, I checked the matching object and covering-sieve hypotheses against 01GE and the finite-limit assumptions against the site definition. Its first two proof steps follow the coskeleton chain in the source, and the final step uses exactness of sheafification. The Mathlib leaf was checked against `Mathlib/CategoryTheory/Generator/Sheaf.lean:42`: `freeYonedaHomEquiv` is exactly the required bijection after specializing to `AddCommGrpCat` and the free abelian generator. Small tests considered were the identity hypercover (where the complex contracts immediately), the zero sheaf, and the trivial one-object site; all give the asserted degree-zero restriction and vanishing positive degrees.
+
+## Not duplicates
+
+lem-trf-site-hypercover-free-resolution vs def-sc-presheaf-cech-complex: the existing node is only a definition of the Cech complex of one presheaf map; the new node proves exactness for an augmented all-degree simplicial hypercover with matching objects.
+lem-trf-site-hypercover-free-resolution vs lem-sc-injective-presheaf-module-nerve-acyclic: the existing node concerns injective module presheaves and an ordinary presheaf Cech nerve, while the new node is an abelian sheaf free resolution for arbitrary site hypercovers before coefficients are applied.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-cech-sheaf-augmentation-exact: the existing node proves only the degree-zero short complex for one locally-surjective arrow; the new node proves all positive degrees for a simplicial matching-cover augmentation.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-cech-sheaf-positive-exact: the existing node treats the nerve of one arrow and has no augmentation or matching-object induction; the new node treats arbitrary hypercovers and includes degree zero.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-cech-sheaf-resolution: the existing node constructs short exact sequences for a single Cech nerve of an arrow; the new node uses successive coskeleta of an arbitrary simplicial hypercover.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-free-nerve-comparison: the existing node compares module Hom complexes and does not assert sheaf exactness; the new node asserts exactness of the all-degree free abelian sheaf hypercover complex.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-free-nerve-exact: the existing node is positive exactness for a free module presheaf nerve of one map; the new node is an augmented free abelian sheaf complex for matching-cover hypercovers.
+lem-trf-site-hypercover-free-resolution vs lem-weil-pbc-cech-nerve-free-homology: the existing node proves the Cech nerve of one locally-surjective map; the new node extends this through the coskeleton tower for an arbitrary simplicial hypercover.
+lem-trf-site-hypercover-free-resolution vs lem-weil-pbc-free-module-sheafification-local-iso: the existing node is a sheafification invariance lemma for one map; the new node is a homological exactness theorem for a hypercover.
+lem-trf-site-hypercover-free-resolution vs lem-weil-pbc-hypercover-free-abelian-positive: the existing node is restricted to finite split etale hypercovers of qcqs schemes and only positive degrees; the new node is for any small finite-limit site and includes the augmentation degree.
+lem-trf-site-hypercover-free-resolution vs lem-sc-presheaf-cech-ext-edge-injective: the existing node is an Ext-edge injectivity statement for a locally-surjective presheaf arrow at a fixed degree; the new node is the all-degree free abelian sheaf resolution of a simplicial hypercover and has no Ext hypotheses.

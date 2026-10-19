@@ -1,0 +1,23 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors/lem-coef-lm-algebra-fibre-reconstruction.json` (statement, split, no exact Mathlib match) and `citations.json`. No new nodes or Mathlib leaves were created. The item keeps its existing LM encoding dependency and now has a five-step direct ordered-list proof. `searches.jsonl` records the four Mathlib searches run for this item.
+
+Attachments: none. I searched the read-only slopmaster2 project for the item tag, its title, and the ordered-fibre terminology; no sorry-free project declaration states the item. The read-only upstream master is reference material only and has no finished declaration for this item.
+
+WANTED: archived Higher Algebra (2017), Proposition 4.1.2.11 final cartesian-lift calculation and Remark 4.2.2.8, for the ordered-fibre reconstruction proof. The online source named by the imported node is not archived in `literature/`.
+
+The imported statement is well-typed and retains all hypotheses and edge cases. Its proof is the finite ordered-fibre calculation used by the parent prism approximation: composition gives consecutive concatenations, prefix sums recover `lambda`, endpoint assumptions give the range and discarded inputs, and the defining data then identifies `h` with `D_lambda`. No statement dispute or source error was found. No unit record was changed because this item is not the unit's key statement.
+
+## Not duplicates
+
+No new nodes. I searched `dag/nodes` and the whole blueprint for the item id, LM ordered fibres, active operator reconstruction, consecutive interval blocks, and the Higher Algebra places. The existing `def-coef-left-module-operadic-encoding` is the definition used by the proof, not a duplicate theorem; `lem-coef-lm-module-fibre-reconstruction` has a module target and a terminal module fibre, so it is a different statement.
+
+## Review by NW
+
+I read the item node, the complete statement of `def-coef-left-module-operadic-encoding`, the neighbouring module-fibre reconstruction node, the parent `lem-coef-lm-prism-approximation`, the `sec-six-functors` chapter record, and unit `sk-prop-sf-biduality-general`. I also read the parent proof's active-lift step that invokes this lemma. The item statement agrees clause by clause with the imported ordered-fibre formulation: `X_1` and `X_0`, the three arrow constructions, monotone endpoint maps, the two source levels `eta`, the concatenated fibres `C_j`, the `lambda` prefix sums, the equality `lambda circ alpha = delta`, the discarded-input assertion, and the cases `s=0` and empty fibres are all retained.
+
+Step 1 uses the definition's statement that “Composition substitutes ordered fibres, concatenating them in the outer order; inputs sent to $*$ are discarded.” This is exactly the composition calculation needed for the fibre of `T_alpha circ h`; the endpoint assumptions ensure every `C_j` occurs. Step 2 uses the same clause and spells out the elementary finite-list fact that a consecutive increasing interval split into ordered sublists has consecutive interval pieces. Taking lengths gives the prefix-sum endpoint identities and hence `lambda circ alpha = delta`; no unstated category-theoretic property is used. Step 3 uses the same definition and checks the range hypothesis explicitly by choosing an `i` with `j <= alpha(i)`; this also covers repeated alpha values and `s=0`. Step 4 uses the discard clause and the endpoint equalities `alpha(0)=0`, `alpha(n)=s` to show the outer arrow discards no `h` output, then compares with the exact discarded set of `D_delta`; the module input `r+1` is checked separately. Step 5 uses the definition's full morphism data (pointed map, ordered fibres, and the condition that a module input is last when the target has a module colour) to identify `h` with `D_lambda`, including the pure-algebra target and the module-source case. Every cited statement is copied verbatim into `citations.json`.
+
+I tested the statement on `n=0`, `s=0`, constant `alpha`, empty `C_j`, `delta(0)=delta(n)`, and both `eta=1` and `eta=0`. In the module-source case the module input is always discarded because the target is pure algebra and it lies above `delta(n)`. These checks expose no missing hypothesis or false conclusion. The proof steps are routine finite ordered-list arguments rather than hidden independent lemmas, so no new node is appropriate. The item uses no off-unit tool citation and no SGA source.
+
+The required Mathlib searches were run with new queries for LeanFinder, Loogle, source grep, and LeanSearch. Their hits concern unrelated simplex/order, fibre-partition, or ordered-partition declarations; none states this LM operator lemma. No Lean file was written and no compiler, Lake, or build tool was run.

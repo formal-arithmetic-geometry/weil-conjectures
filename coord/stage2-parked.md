@@ -108,3 +108,70 @@ A convention node gets `lean = {existing: true, declaration: null, module: null,
 - sbc-thm-bounded-below-derived-smooth-base-change | NA | 2026-10-14 | STATEMENT-DISPUTED stage-1 finding; requeue for correction | RESOLVED
 - def-weil-pbc-bounded-constructible-complete | NH | 2026-10-14 | STATEMENT-DISPUTED stage-1 finding; requeue for correction | RESOLVED
 - sbc-thm-bounded-allowable-torsion | NG | 2026-10-14 | STATEMENT-DISPUTED stage-1 finding; requeue for correction | RESOLVED
+
+## Merged from ~/weil-newtargets (retired 2026-10-19)
+
+# Stage-2 parked items
+- sbc-thm-bounded-below-derived-smooth-base-change | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NB 2026-10-13T17:29:08), not a unit-statement fault; claimable again
+- lemma-weil-pbc-completed-exchange-coherence | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NF 2026-10-13T18:47:01), not a unit-statement fault; claimable again
+- thm-weil-pbc-finite-extension | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: ND 2026-10-14T07:07:29), not a unit-statement fault; claimable again
+- nt-target-proetale-e | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NH 2026-10-13T18:25:26), not a unit-statement fault; claimable again
+- def-weil-pbc-bounded-constructible-complete | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NH 2026-10-13T17:32:28), not a unit-statement fault; claimable again
+- sbc-thm-bounded-allowable-torsion | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NG 2026-10-13T17:33:08), not a unit-statement fault; claimable again
+- def-weil-pbc-site-comparison-morphism | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NJ 2026-10-13T17:43:31), not a unit-statement fault; claimable again
+- lem-weil-pbc-rectangle-derived-limit | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: ND 2026-10-14T01:50:10), not a unit-statement fault; claimable again
+- nt-target-proetale-qbar | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NJ 2026-10-13T19:16:21), not a unit-statement fault; claimable again
+- nt-target-etale-smooth | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-13T17:57:25), not a unit-statement fault; claimable again
+- cor-weil-pbc-constructible-complete | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-13T18:08:13), not a unit-statement fault; claimable again
+- prop-weil-pbc-scalar-extension | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-14T09:09:00), not a unit-statement fault; claimable again
+- lemma-weil-pbc-completed-map-reduction | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NF 2026-10-13T18:16:55), not a unit-statement fault; claimable again
+- def-weil-pbc-adic-coefficient-datum | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-13T18:32:55), not a unit-statement fault; claimable again
+- prop-weil-pbc-preservation-constructible | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NF 2026-10-13T18:49:11), not a unit-statement fault; claimable again
+- def-weil-pbc-four-arrows | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NB 2026-10-13T18:54:05), not a unit-statement fault; claimable again
+- lemma-weil-pbc-level-map-derived-limit | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NE 2026-10-13T20:15:24), not a unit-statement fault; claimable again
+- lem-weil-pbc-reconstruction-uniform-tower | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-13T21:35:48), not a unit-statement fault; claimable again
+- lem-weil-pbc-ringed-topos-kflat-pullback | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: ND 2026-10-13T22:07:24), not a unit-statement fault; claimable again
+- prop-weil-pbc-qbar-condensed-two-colimit | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NH 2026-10-13T21:59:29), not a unit-statement fault; claimable again
+- prop-weil-pbc-rational-transport | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NF 2026-10-14T01:49:23), not a unit-statement fault; claimable again
+- lem-weil-pbc-sheaf-subcategory-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-14T02:58:13), not a unit-statement fault; claimable again
+- lem-weil-pbc-thickening-system-pushforward-lifting-assembly | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NK 2026-10-14T03:05:25), not a unit-statement fault; claimable again
+- lem-weil-pbc-horseshoe-correction | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NK 2026-10-14T03:22:48), not a unit-statement fault; claimable again
+- sbc-prop-extension-by-zero-and-arbitrary-base-change | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NS 2026-10-14T16:34:54), not a unit-statement fault; claimable again
+- lemma-weil-pbc-smooth-curve-kummer-localization | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-14T08:52:59), not a unit-statement fault; claimable again
+- lem-weil-pbc-small-set-of-covering-families | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-14T04:20:01), not a unit-statement fault; claimable again
+- lemma-weil-pbc-stein-connectedness | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NK 2026-10-14T04:57:54), not a unit-statement fault; claimable again
+- lem-weil-pbc-etale-lisse-finite-etale-filtration | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-14T07:18:24), not a unit-statement fault; claimable again
+- lem-fin-coordinate-generic-dimension | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NY 2026-10-14T07:08:56), not a unit-statement fault; claimable again
+- lem-cbc-abelian-etale-proetale-cohomology-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-14T07:01:07), not a unit-statement fault; claimable again
+- lem-fin-finite-boundary-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NN 2026-10-14T07:19:27), not a unit-statement fault; claimable again
+- lem-weil-pbc-finite-fp-pushforward-constructible | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NM 2026-10-14T07:08:11), not a unit-statement fault; claimable again
+- lem-weil-finite-free-completed-scalar-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NB 2026-10-14T07:20:37), not a unit-statement fault; claimable again
+- lem-exc-residue-tor-test | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NX 2026-10-14T06:44:02), not a unit-statement fault; claimable again
+- lem-cbc-affine-sepclosed-etale-acyclic | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-14T07:07:23), not a unit-statement fault; claimable again
+- lem-weil-pbc-etale-constant-shriek-rel-dim-1 | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NZ 2026-10-14T06:56:52), not a unit-statement fault; claimable again
+- lem-asd-smooth-generic-direct-image | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NN 2026-10-14T07:12:40), not a unit-statement fault; claimable again
+- lem-cbc-proetale-sheafification-geometric-stalk | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NX 2026-10-14T07:17:40), not a unit-statement fault; claimable again
+- lem-fin-radicial-exchange-descent | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NH 2026-10-14T06:52:28), not a unit-statement fault; claimable again
+- lem-fin-generic-radicial-smoothing | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NX 2026-10-14T07:15:27), not a unit-statement fault; claimable again
+- lem-kun-0f0c | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NA 2026-10-14T07:16:00), not a unit-statement fault; claimable again
+- def-weil-proetale-tor-amplitude | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NM 2026-10-14T07:16:51), not a unit-statement fault; claimable again
+- lem-kun-unbounded-abelian-exchange-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NJ 2026-10-14T07:01:42), not a unit-statement fault; claimable again
+- lem-kun-grothendieck-derived-coproducts | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NU 2026-10-14T07:15:15), not a unit-statement fault; claimable again
+- lem-kun-rgamma-unbounded-well-defined | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NH 2026-10-14T07:05:43), not a unit-statement fault; claimable again
+- lem-fin-noetherian-chow-modification | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NY 2026-10-14T07:15:33), not a unit-statement fault; claimable again
+- lem-kun-finite-cd-acyclic-complex | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NZ 2026-10-14T07:15:40), not a unit-statement fault; claimable again
+- def-kun-constant-sheaf | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NN 2026-10-14T07:14:42), not a unit-statement fault; claimable again
+- lem-finrepair-modification-c | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NP 2026-10-14T07:14:58), not a unit-statement fault; claimable again
+- lem-fin-projective-coordinate-boundary | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NY 2026-10-14T07:15:34), not a unit-statement fault; claimable again
+- lem-sf-proetale-residue-tor-test | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NS 2026-10-14T07:17:19), not a unit-statement fault; claimable again
+- lem-weil-pbc-derived-open-restriction | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NN 2026-10-14T07:19:28), not a unit-statement fault; claimable again
+- thm-cbc-finite-torsion | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NX 2026-10-14T08:54:32), not a unit-statement fault; claimable again
+- lem-weil-pbc-proper-smooth-curves-prime-coefficients | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NU 2026-10-14T09:29:09), not a unit-statement fault; claimable again
+- thm-amb-p1-adjunction | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NV 2026-10-14T10:25:22), not a unit-statement fault; claimable again
+- thm-amb-etale-exceptional-adjoint | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NR 2026-10-14T11:25:13), not a unit-statement fault; claimable again
+- lem-pc-section-cohomology-untwisted-comparisons | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NJ 2026-10-14T13:35:57), not a unit-statement fault; claimable again
+- prop-nagata-relative-proj-functoriality | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NW 2026-10-14T16:43:12), not a unit-statement fault; claimable again
+- lem-sc-pullback-monoidal-unit-comparison | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NU 2026-10-14T18:01:59), not a unit-statement fault; claimable again
+- lem-exc-closed-cover-extension | RESOLVED 2026-10-15 by the launcher: stale abandonment from the stage-1 era / old tools (last: NC 2026-10-14T18:11:24), not a unit-statement fault; claimable again
+- lem-pur-condensed-exceptional-reconstruction | RESOLVED 2026-10-18 by the maintainer: stale abandonment (group NL idle since 05:39Z left its returned delivery unrepaired), not a statement fault; claimable again, redo from the correction in the review (coord/returns/NL.md history)
+- lem-coef-finite-mapping-adjunction | RESOLVED 2026-10-18 by the maintainer: stale abandonment (group NL idle since 05:39Z left its returned delivery unrepaired), not a statement fault; claimable again, redo from the correction in the review (coord/returns/NL.md history)

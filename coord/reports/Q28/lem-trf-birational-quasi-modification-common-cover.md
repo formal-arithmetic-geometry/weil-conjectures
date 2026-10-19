@@ -1,0 +1,77 @@
+# Stage-1 delivery: lem-trf-birational-quasi-modification-common-cover
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-birational-quasi-modification-common-cover.json`: statement, unchanged; thirteen-step complete split, reusing existing DAG nodes. The item's Mathlib verdict is no match.
+- `report.md`: this worker report and signed mathematical review.
+- `citations.json`: one verbatim statement quote for each node used by each proof step (40 entries). This and `searches.jsonl` are the local delivery evidence.
+
+New nodes: none. New Mathlib leaves: none. The preparatory script `prepare.py` stays in this item's sandbox and is not a delivered project file.
+
+## Attachments
+
+None. The item has no exact declaration under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/`. I searched for the full item id, the blueprint tag, birationality, quasi-modifications and common covers. The hits about normalization, rational hypersurface models and sheaf covering refinements do not state this item. Upstream master was read only as reference, not as evidence of a completed proof. No Lean source was written or compiled.
+
+## Wanted literature
+
+WANTED: Michael Temkin, *Stable modification of relative curves*, arXiv:0707.3953v3, Proposition 3.2.6, Corollaries 3.2.5 and 3.2.7, printed pp. 16--17, and Proposition 4.5.1, p. 33; for lem-trf-birational-quasi-modification-common-cover. The primary PDF was read online at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf; its archival path recorded in the item is absent locally. Nothing was downloaded or written into the shared literature directory.
+
+The proof is marked `proof_origin.by = agent`: the finite-component variant is proved explicitly using Nagata compactification and a reduced closure in a product, instead of treating Temkin's proposition or its Riemann--Zariski covering consequence as a black box. The local Stacks source supplies the general tools. This is a proof below the existing unit route, not a replacement of a unit step.
+
+## Problems in the imported item or brief
+
+The item was a statement-only node created in the earlier split of valuation-stable-reduction. It had no proof. Its hypotheses and conclusion are correct, including for a non-Noetherian or nonseparated qcqs base with finitely many components. No statement correction or STATEMENT-DISPUTED is needed.
+
+The general Riemann--Zariski node `lem-trf-riemann-zariski-finite-refinement` is not sufficient here: its base must be integral of finite type over the integers, its chosen field is a separable closure, and it permits finite separable extensions of model function fields. This item requires the original component function fields with no enlargement. I did not cite it or silently substitute it for the item. Similarly `lem-trf-modifications-zariski-refinement` assumes an integral Noetherian base, so it is not a tool for the general qcqs statement.
+
+The current unit and blueprint ancestor have a normal-cone/local-term statement; this newly split item retains the historical ancestry through the existing Temkin/valuation-stable-reduction branch. The item does not realize the unit's key statement, so its unit record is not edited. Chapter, unit, created metadata and all inherited blueprint fields are retained. Searches of the whole blueprint by birationality, valuation and modification, and searches of the DAG for the statement, found no blueprint equivalent of this item; `same_as = []`.
+
+## Unfinished work
+
+None in this one-level split. Its inputs already exist in the DAG; this delivery does not split those inputs further. The missing archival PDF is recorded above. Independent maintainer mathematical review remains the normal next stage after delivery.
+
+## Review by Q28
+
+I read `coord/brief-stage1.md`, `stages/1-dag.md`, the three levels and tool-use rule of `SETUP.md`, `GOAL.md`, `coord/dag-sync.md`, `roles/worker.md`, and delivery-errors B--E in full. I read the trace-formula chapter and the `sk-i-curve-zero` unit, the current blueprint proof of `lem-trf-local-term-locality`, the parent valuation-stable-reduction statement and proof, and the neighboring Riemann--Zariski and globalization statements. I also read Temkin Proposition 3.2.6 and its proof, the valuation description in Corollary 3.2.5, and Corollary 3.2.7 in the primary PDF. His affine-cover/projective-line construction establishes the intended common-model geometry; the split gives a separate full compactification proof of that geometry at the generality of this item.
+
+I opened and read the statement of every cited node before writing its use. The citation packet copies those statements verbatim; it does not quote proof internals or turn a definition into a theorem. I checked each step as follows.
+
+1. The reduced-induced-closed-subscheme node supplies the existence and reducedness of each full component with its actual closed immersion. The integral-scheme definition identifies these nonempty reduced irreducible schemes as integral. The reduced-source-factorization node really allows a reduced source to factor through a closed subscheme when its image lies in the closed support. Continuity puts the image of each integral model in the closure of its generic image. The finite-type and proper/separated definitions justify the factor map on affine quotient charts and its diagonal. The valuation hypothesis passes to a component because its closed immersion is a monomorphism. I checked the field valuation at a component's generic point to ensure that the component is assigned a nonempty family.
+
+2. Nagata's node states compactification for a separated finite-type morphism over a qcqs base, with no Noetherian or absolute separatedness assumption. Its definition node includes both the open immersion and sheaf injection for density. These are precisely the data used. The compactification is reduced because nilpotent sections inject into a reduced scheme's sections; it is topologically the closure of the integral open, hence irreducible. I read Stacks `flat.tex`, Tag 0F41, label `theorem-nagata`, and checked that no finite-presentation hypothesis has been added.
+
+3. The function-field node states injection and fraction-field identification on every nonempty affine open of an integral scheme. The affine fibre-product node states the scheme isomorphism with the tensor-product spectrum. For the generic fibre, the rings satisfy A subset B subset K with Frac(A) = K, so inverting the nonzero elements of A in B is exactly K. This proves the generic-fibre assertion and all projection identifications, rather than just an abstract equality of field degrees. I read the source labels `lemma-fibre-product-affines` and `lemma-fibre-product-affine-schemes` and the fraction-field statement. This localization computation is elementary from the cited statements.
+
+4. The fibre-product definition provides the product and its projections. Proper-base-change and proper-composition apply repeatedly to its finite nonempty list of proper factors. The reduced-induced-closed-subscheme node applies to the closed subset which is the closure of the single generic point. Closed-immersion properness then makes the reduced main component proper over C. Taking the entire product instead would retain unwanted components; the proof explicitly takes its reduced generic closure.
+
+5. The same reduced-structure statement and integral definition show Z is integral. Its generic fibre is a nonempty closed subscheme of the field spectrum calculated in step 3, so its ideal is zero. I added the function-field citation explicitly in this step to account for the identification of the generic stalk and its residue field. This gives the original K, not an unspecified finite extension.
+
+6. Proper-to-separated has exactly the needed triangle: Z is proper over C, the target compactification is separated over C, and the projection is a C-map. It makes q_i proper. The open-base-change node makes W_i an actual inverse-image open, and proper-base-change makes W_i to Y_i proper. The function-field statement applies because these are nonempty integral opens containing the generic point. I checked Stacks Tag 01W6, `lemma-image-proper-scheme-closed`, part (2), and 01W4; the source label in the draft was corrected to its full actual name.
+
+7. The affine birational fraction-ring node is used with base S equal to its own affine target V, with the second structural map the identity. Both affine schemes are integral and locally of finite type over V; the identity on K is compatible with every element of the base ring. Its conclusion gives an isomorphism over V, so the forward map is the restriction of the given morphism. Thus this citation really proves the isomorphism-of-opens clause; it is not just the assertion that the schemes are abstractly birational. I read the full node and compared Stacks 0BAC, `lemma-birational-birational`, integral case, in `morphisms.tex`. This also avoids misusing the finite-birational-normal criterion on a nonnormal target.
+
+8. The function-field node's injectivity proves schematic density on each affine chart. A section zero on a nonempty open has zero germ at the generic point and must be zero. This short argument establishes precisely the item's sheaf-injection definition, and is marked elementary; it does not infer schematic density from topological density on a nonreduced scheme.
+
+9. The affine-open-stalk-localization node gives the local ring as a localization of a domain with fraction field K. Valuation-domination states exactly the existence of a valuation ring of that K dominating the local ring (also compatible with its current `blueprint_update`, which allows any local subring of a field). The local-spectrum morphism node supplies the morphism sending the closed point to z from that local homomorphism. I read Stacks Algebra Tag 00IA, `lemma-dominate`, and Schemes 01J6, `lemma-morphism-from-spec-local-ring`. The valuation need not be discrete, finite-height or henselian.
+
+10. The separated-valuation-uniqueness node compares the actual two maps Spec V to the compactification, which have the same base map and generic restriction. Separatedness is present by properness of the compactification, not assumed for the absolute base. Equality of these maps forces the given centre z into the particular inverse-image open. This proves coverage at every point of Z, even over intersections and specializations. No Riemann--Zariski surjectivity or compactness theorem is hidden here.
+
+11. The coproduct-family node includes its mapping property and pairwise disjoint open-and-closed pieces. Closed-immersion properness and proper composition give the proper component maps to X. The proof then checks the three conditions of properness for their finite disjoint union: finite unions after every base change for closedness, finite affine covers for finite type, and closed diagonal blocks with empty off-diagonal images for separatedness. This check works although the images of distinct components meet in X. I did not incorrectly call their fibre-product blocks empty.
+
+12. The dense-open-component-coproduct node allows specified dense opens B_a of every full reduced component and gives a single dense open of X lying in all those opens on their respective components. Its exact statement is what is required, with no Noetherian hypothesis. Restrict the already constructed source opens A_a to obtain the actual isomorphism U_1 to U. Density on each integral Z_a follows from step 8. For the reduced target X, the value of a section at every component generic point vanishes, hence its pullbacks vanish on all the components. Its residue values therefore vanish everywhere. The ideal formula in the reduced-induced-closed-subscheme node for the whole reduced scheme gives zero, proving the needed sheaf injection. I checked the finite-component reduction in Stacks 0BAJ, without using the later finite-morphism part of that lemma.
+
+13. The optional finite affine refinement preserves coverage because an open of a local spectrum containing the closed point is the whole spectrum. I read that explicit argument in the last paragraph of the proof of Stacks 01J6. Finite type over qcqs X makes Y_i qcqs, and the intersections of affine opens are quasi-compact, so each finite affine-cover member remains finite type over X. This is a cover-refinement step, not another existence input. The conclusion for the refined family is obtained by the already completed construction, with labels allowed to repeat.
+
+The seven generic tools from other units are declared only in `split_report.tool_uses`, each with the exact use and why the curve-zero unit has no such general statement. Existing Mathlib/closed inputs are reused as inputs; no worker-owned top-level `tool_uses` field was installed. No source prohibited by the SGA route lock is used.
+
+For the B checklist, there are no new nodes needing statements, searches, definition expansions, or leaf declaration records. The item retains all five existing statement dependencies and its complete inline meanings of valuation, quasi-modification, modification and schematic density. Its TeX uses normal single backslashes in decoded strings. Five new Mathlib queries were actually run with msearch.py and recorded in searches.jsonl: two distinct semantic phrasings, Loogle, LeanSearch and grep. I read all hits. They concern valuative properness, normalization, rational-map domains and open covers; none states this finite common-refinement theorem or specializes to it in one line. The earlier Q93 records in the item are retained unchanged. No unavailable search was recorded as no match.
+
+For C, the existing statements, not their proofs, support every non-elementary use; citations.json contains every step-use pair. For D, the entire construction and covering argument remain in the item's steps; nothing was moved into a new restatement. For E, I checked hypotheses separately over each component, the actual maps over C and X, properness under the two base changes, the distinction between an open source and a proper map to a different target, and schematic density on the possibly reducible target.
+
+Small cases checked: X empty (empty cover); a one-point integral field spectrum (all models are the same field and the construction gives it); one integral model already proper (its inverse-image open is the whole refinement); the two standard affine charts of a proper birational model (the cover is recovered by the valuation comparison); repeated or redundant model labels; two reduced components meeting in a point (the construction is the disjoint union of their modifications and is an isomorphism only after excluding component intersections); and a nonnormal or non-Noetherian integral base (none of the applied nodes assumes normality or Noetherianness). There are no new statements to test beyond the unchanged item. All non-elementary proof steps have fewer than 2000 characters; none is an oversized hidden comparison lemma. The server `review_split` check passed before writing this report.
+
+Signed: Q28, 2026-10-18.
+
+## Not duplicates
+
+No new nodes. The whole-DAG and blueprint searches led to reuse of the existing compactification, local valuation, reduced-structure, fibre-product, birationality and component-coproduct nodes. The arithmetic/separable-closure Riemann--Zariski refinement and the Noetherian Zariski-globalization node are not general enough to replace this item, as explained above.

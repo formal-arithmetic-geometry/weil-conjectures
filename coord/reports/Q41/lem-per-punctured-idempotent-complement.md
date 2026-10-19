@@ -1,0 +1,19 @@
+1. Files written:
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-punctured-idempotent-complement.json`: item split; no new nodes.
+- `citations.json`: verbatim statement quotations for every cited node in every proof step.
+
+2. Attachments: none.
+
+3. WANTED: none.
+
+4. The imported item had no proof. I checked the source at Stacks Project Tag 0C2A (`literature/stacks-project/more-algebra.tex`, label `lemma-glueing-sum-components-open`) and retained its statement, including finitely generated ideals with zero generators. The source's denominator-clearing argument was expanded into explicit steps. I searched the DAG for Tag 0C2A, its label, idempotent-localization keywords, and possible cover/localization lemmas; there is no duplicate of the item. Existing nodes `def-weil-ring-localization-away`, `lem-weil-pbc-localization-quotient-commute`, `def-weil-pbc-module-localization-away`, and `lem-weil-pbc-cover-module-exact` state exactly the external facts used, so no new node was created. The Mathlib searches found only single-idempotent localization/product results and locality lemmas, not the simultaneous punctured-complement construction.
+
+5. What I could not finish: no unresolved proof or split issue remains.
+
+## Review by Q41
+
+I read the item record, the chapter `dag/chapters/sec-deligne-laumon-a1.json`, the unit `dag/units/sk-p-dl-a1-perverse.json`, and the source proof of Stacks Tag 0C2A. The source is algebraic and is used here as supporting material through the item's recorded blueprint ancestor; the unit route itself is unchanged. The statement agrees hypothesis by hypothesis: one commutative ring map, a finitely generated ideal (including the empty list), an idempotent localization for every element of the ideal, and a surjective complementary quotient whose product map is an isomorphism after every localization.
+
+Step 1 handles the empty generating list directly; for the zero ring, localization at zero is the zero ring by the recorded fraction definition. Step 2 reads fractions in `R_f`, clears the idempotence equality, and chooses one common denominator. Step 3 checks the two induced localizations on `R_{f_i f_j}` and proves the overlap idempotents agree; the invertible-idempotent argument is written explicitly. Step 4 uses the fraction equality and a finite maximum to rescale numerators, proving both the common idempotence relation and the divisibility relation needed later. Step 5 applies the existing quotient-localization node; its statement says that `B_b/JB_b` is the localization of `B/J` at the image of `b`, so it gives `E'_f_i = R_f_i/(e_i)` exactly. Step 6 proves the elementary product decomposition of a ring at an idempotent, with the inverse formula. Step 7 checks localization of the product and identifies the map with the localized product map. Step 8 applies the existing `lem-weil-pbc-cover-module-exact` statement to the two `S`-modules `S=R_f` and `V=(E×E')_f`; its statement supplies both injectivity from principal localizations and gluing of compatible localized sections, yielding bijectivity of the ring map.
+
+I opened each cited node and checked that its statement, rather than its proof, supplies the fact used. The only off-unit citation is the existing principal-cover module-gluing lemma; it is declared in `split_report.tool_uses` because the unit has no commutative-algebra node for this generic tool. All non-elementary steps cite nodes, and the elementary steps are limited to fraction manipulations, idempotent product algebra, and localization bookkeeping. I tested the edge cases `r=0`, `K=0`, a zero factor, and a nonsurjective original map; the construction remains valid. The Mathlib search log records LeanFinder, LeanSearch, Loogle, and grep searches on 2026-10-19; all are no-match searches for this simultaneous construction. The server `check_dag` preflight passed with no findings.

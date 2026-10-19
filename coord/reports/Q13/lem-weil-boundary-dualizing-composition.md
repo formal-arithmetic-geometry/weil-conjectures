@@ -1,0 +1,50 @@
+# Q13 — lem-weil-boundary-dualizing-composition
+
+## Files written
+
+- dag/nodes/sec-six-functors/lem-weil-boundary-dualizing-composition.json: statement, split into seven proof steps; no exact Mathlib match for the full item.
+- citations.json: verbatim statement excerpts for all 22 step/node citations.
+- searches.jsonl: four fresh item searches, all services available; existing item searches retained.
+- report.md: this report.
+
+There are no new nodes and no new Mathlib leaves. No unit record is changed: this item is a child of cor-weil-boundary-duality-discharge, not the unit's key statement. Local drafting scripts are sandbox-only aids and are not delivery files.
+
+## Attachments
+
+None. I searched WeilConjectures/ in /home/ubuntu/weil-src-slopmaster2 by the exact blueprint tag and the dualizing/composition and upperShriek/composition notions. There is no exact-tag declaration. AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp in EtaleCohomology/Purity/Smooth/Basic.lean:362 concerns composable smooth morphisms, twist tensor products and additional twist hypotheses, and does not prove this item's adjunction and comparison clauses. The trace-formula dualizing_fixStr at SixFunctors/ProEtale/TraceFormula/ProperPushforward.lean:277 is an equality induced by equality of structure maps inside assumed geometric operations, not an exceptional composition theorem. The composition discussed in the docstring of SixFunctors/Etale/Derived/UpperShriek.lean is not a declaration; its bounded-below instance at line 169 contains sorry. These do not justify ATTACH.
+
+## WANTED
+
+None. The imported parent source and the existing generic DAG statements suffice; the formal argument is marked proof_origin.by = agent. The current main-20261015 snapshot does not contain the parent's file at the corresponding path, so I retained its actual existing master-source attribution and read that file. No blueprint_update is present on this item.
+
+## Corrections and scope
+
+The statement is unchanged. I added the site-comparison definition as a statement dependency because the statement explicitly introduces nu. There was no previous sandbox split, report or search log to recover, and no active delivery process for this item when I resumed.
+
+The important domain correction in the proof is to use compact-support composition only on D+. It is not asserted on arbitrary unbounded inputs. The ordinary etale adjoints are first constructed on unbounded categories, their D+ preservation is proved, and only then are the adjunctions restricted and composed. The item does not assert an ambient pro-etale exceptional adjunction. The pro-etale maps are written out using the comparison unit, including their direction. No biduality or boundary-duality theorem is used to establish the formal dualizing identification which those theorems later need.
+
+## Not duplicates
+
+No new nodes were created. I searched the entire DAG by right-adjoint composition, compact-support composition, dualizing composition and bounded-below adjunction, and used blueprint_refs.py searches for right adjoint composition, dualizing, dualizing objects compose, bounded-below and counit. The ancestor is cor-weil-boundary-duality-discharge. lem-cat-right-adjoint-composition already supplies the categorical theorem, so I reused that Mathlib leaf. thm-trf-dualizing-complex-composition requires exceptional admissibility of the structure morphisms and has neither the present unrestricted D+ composition assertion nor its explicit site-transport clause. It is not an exact duplicate or a sufficient citation here. lem-weil-finite-duality-site-comparison contains the separate dualizing-object comparison, but its internal-Hom and constructibility statements are unnecessary: the comparison needed here follows in two lines by substitution and the existing unit theorem. No node was introduced for that elementary substitution or for evaluating the natural isomorphism at A.
+
+## Review by Q13
+
+I read the standing brief, stage-1 rules, the three blueprint levels in SETUP, GOAL and dag-sync, the chapter and unit records, and delivery-errors B–E in full. The parent source is the first proof paragraph of literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md: its independently formal costalk comparison needs this dualizing identification, before it invokes biduality. The unit's locality/stratification biduality route is unchanged; this item supplies a generic adjunction tool. There are no new-node sources to review.
+
+For step 1 I opened each cited statement. The finite-type-over-Noetherian result supplies Noetherian schemes; the locally-Noetherian lemma supplies quasi-separatedness, and finite type supplies quasi-compactness. Thus Nagata applies to each target. Properness includes finite type, finite-type composition makes the compactification source finite type over k, and the dimension lemma supplies the finite bound required by the comparison-class theorem. thm-amb-etale-exceptional-adjoint gives exactly the ambient ordinary etale adjoint at a finite commutative coefficient ring. I checked Stacks Tag 01T6, morphisms-lemma-finite-type-noetherian in morphisms.tex, and the proper-definition and finite-type-composition statements. Empty compactifications use a nonnegative bound without a maximum of an empty cover.
+
+For step 2 I checked clause 2 of thm-sf-ambient-adjoint-class: it bounds the whole composite S_V h-times U_W on every bounded-below pro-etale input, not merely on constructible ones. It is applied to S_W L. thm-weil-pbc-site-comparison gives the unit at the etale bounded-below L and full faithfulness on D+; def-sf-comparison-derived-pullback gives exact termwise pullback on the unbounded category. Thus the argument does not presuppose that h-times L is bounded below: apply exactness to its cohomology, and use full faithfulness only on the degree-zero cohomology sheaves. This is a few-line consequence of those three statements, not a hidden new geometric lemma. I read Bhatt–Scholze Corollary 5.1.6 and its warning about unbounded comparison in Remark 5.1.8; no unit on an unbounded input is used.
+
+For step 3 I read the full statement of lem-amb-etale-compact-comparisons: it gives the ordinary etale D+ composition and refinement independence under the exact compactifiability and Noetherian hypotheses established in step 1. I also read its blueprint composition construction. Exact extension by zero and the bounded-below K-injective representative in lem-weil-pbc-dplus-injective-representative show that F_h stays in D+. Its statement explicitly includes module sheaf categories among the examples with enough injectives. def-amb-etale-compact-support fixes the unbounded construction and its restriction. Finally lem-cat-right-adjoint-composition supplies the natural representing isomorphism and counit normalization. I wrote the actual chain of Hom bijections to identify which mate is used. I did not cite the pro-etale theorem thm-sf-comp-composition as though it were an ordinary etale result.
+
+For step 4 I checked both sides of the displayed counit equation: each has source F_g F_f (gf)-times L and target L. I read Mathlib Adjunction.comp at Basic.lean:567, comp_counit_app at :580 and rightAdjointUniq at Unique.lean:102, including its counit characterization at :105. I also read Stacks Tag 0DV0, categories-lemma-compose-counits, including its proof. The formula uses the mate theta in the direction of the item's display; the closed dualizing identification is its inverse.
+
+For step 5 I added the existing closed-immersion properness lemma rather than silently assuming a closed immersion meets the finite-type and separated hypotheses. Its clause (a) says precisely that. The structure maps already meet the hypotheses because the schemes are separated finite type over k. A is a degree-zero bounded-below object, so evaluation is legitimate; its outputs are bounded below by step 2. This step is specialization, not an extracted restatement node.
+
+For step 6 I opened the finite formula of def-weil-exceptional-inverse-image, the site morphism definition and the unit theorem. I additionally cited lem-pe-constant-left-module-inverse-image: its statement gives the canonical ring-sheaf identification preserving scalars for every geometric morphism, which is the exact input identifying A_p with S_s A_e. The maps lambda and rho use the unit only on A_e and on a bounded-below H, and all functors in the formula are already available. For step 7 the four arrows are explicitly the images or inverses of the maps in steps 5–6; clause 2 of thm-sf-ambient-adjoint-class identifies their Hom bijections with the intended comparison-class adjunction. Thus 'transport' is not standing in for an omitted identification. No constructibility, finite-Tor, purity, or ambient pro-etale adjoint hypothesis has been introduced.
+
+I compared every citation with its node's statement and put verbatim excerpts in citations.json. The proof-dependency list is exactly the union of uses. All off-unit tools are declared in split_report.tool_uses with their individual purpose; no new route replaces a step of the unit. I inspected the transitive dependency paths of the main tools and found none returning to this item. I tested the identity map, the zero input, the empty closed subscheme, and a non-smooth closed immersion: the formulas still make sense, and no smoothness or purity premise appears. Every step is below 2000 characters; the largest is 1078. There is no extracted clause-node, proof inside an unsplit child, invented Mathlib result, or changed item statement. All four new Mathlib searches were actually run with msearch.py and their hits read; the generic composition APIs do not supply the whole item. No SGA source is used.
+
+## Unfinished work
+
+None in the split. The existing dependencies remain their own items. No Lean was written and no compiler, Lake or local project-checker was run. The required server dry run and delivery are the final validation steps.

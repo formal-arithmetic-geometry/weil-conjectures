@@ -1,0 +1,102 @@
+# Stage-1 repair: lem-trf-nearby-cycle-finiteness-exchange
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-nearby-cycle-finiteness-exchange.json`: item, fourteen proof steps; statement and statement dependencies unchanged; no Mathlib match.
+- `dag/nodes/sec-trace-formula/lem-trf-nearby-cycle-sheaf-finiteness.json`: one new statement-only node, unsplit, no Mathlib match. Standard constructibility and eventual vanishing for a constructible sheaf on the **geometric** generic fibre of a strictly henselian trait. It asserts neither geometric-generic descent, finite Tor preservation, exchanges, nor their compatibilities.
+- `citations.json`: regenerated against the current shared DAG and the new node; every proof citation has a verbatim statement quotation.
+- `searches.jsonl`: original searches retained, with six actual repair searches appended and their returned results read. The new node records exactly those queries and results.
+
+The rejected domination node and the previously accepted arithmetic-direct-image node are retained under `scratch/returned-a88651d2e8/`, together with the returned item, report and citations. Neither is part of this delivery: the repaired argument uses neither. Historical second-reading backups are retained. No unit record changes, Lean edits, compilation, direct git commands, agents, or push.
+
+## Attachments
+
+None. Rechecked the supplied slopmaster2 source under WeilConjectures for the item tag and nearby/vanishing-cycle terminology. It contains no declaration covering the item. The upstream master source is reference material only. The existing constructible-module limit-descent node has a project proof already; it is reused and not duplicated or split.
+
+## Literature wanted
+
+WANTED: archive Luc Illusie, *Grothendieck and vanishing cycles*, Ann. Fac. Sci. Toulouse 30 (2021), pp. 83–115, DOI 10.5802/afst.1667, especially §1.1 formula (1.2) and §1.2 final paragraph, pp. 85–86, for `lem-trf-nearby-cycle-sheaf-finiteness`. I read these pages in the publisher's online PDF, https://afst.centre-mersenne.org/item/10.5802/afst.1667.pdf . No document was downloaded or added to the read-only literature. The new node names that real online source rather than inventing a local literature path.
+
+The earlier WANTED reference was Illusie, *Autour du théorème de monodromie locale*, Astérisque 223 (1994), §4. I read its online §4.1, pp. 44–45, at https://www.numdam.org/article/AST_1994__223__9_0.pdf . It states the bounded constructible finite-Tor preservation result and attributes it to the classical finiteness source; it does not state the rejected domination lemma. It is no longer the source offered for that lemma.
+
+## What was wrong and what was repaired
+
+The returned head was a88651d2e8. The retained sandbox had the same rejected finite-stage domination route; the current shared main still has this item unsplit. I ran the retained version's required dry run first; it printed `OK (not pushed)` at 983a88e90d. That mechanical success did not address the return, so I then changed the mathematics.
+
+D1/D2: the domination lemma merely hid constructibility behind an epimorphism from arithmetic cohomology. It has been withdrawn from the delivery. The replacement is expressly the standard nearby-cycle sheaf finiteness theorem requested by the maintainer, not an allegedly independent reformulation of it. Its input is a geometric-generic sheaf, exactly the type of input in Illusie's definition and finiteness assertion. The item now supplies the missing argument for an arbitrary geometric-generic sheaf: descend it by existing Stacks 09YU, take finite pushforward on the arithmetic generic fibre, split off the chosen geometric component after base change, and take the kernel of the induced idempotent complement on nearby-cycle cohomology. This is a split inclusion obtained from a **geometric generic** clopen section, not the rejected arithmetic-cohomology domination assertion.
+
+D4: no proof of domination is promised, and no argument assumes the item's constructibility conclusion to produce a finite-stage comparison. The only new input openly states the standard theorem; its proof is a later DAG item. The retract maps used here are explicitly restriction and extension with zero on two clopen pieces. Their composite is the identity before nearby cycles, so their derived cohomology maps remain a splitting. This does not use constructibility to obtain the splitting.
+
+E5 / source §4: the new input is sourced to the precise sheaf specialization of Illusie (2021), §1.2, p. 86, read online. His coefficients are Z/ell^nu; the finite constant-ring version retains the finite ring action. Forgetting module coefficients commutes with derived direct image by the existing comparison node. A finite locally constant underlying sheaf with its finite ring action is locally constant as modules: trivialize the finite underlying sheaf etale locally and refine for the finitely many action endomorphisms. Thus constructibility of the underlying finite sheaf gives the stated finite-ring constructibility. This does not assume finite Tor dimension of the sheaf.
+
+The standard theorem's eventual vanishing is recorded faithfully. The item's stronger uniform bound for **all** sheaves, needed to test arbitrary modules for finite Tor amplitude, is still proved independently in step 3. The statement and the target remain unchanged; there is no statement dispute or change to the unit/chapter route.
+
+## For HUMAN.md: nearby-cycle source question
+
+MAINTAINER ACTION REQUESTED: copy this question to `coord/HUMAN.md`. The worker is expressly forbidden to write to the shared repository or to coord/, so this delivery report is the authorized upward-reporting channel.
+
+The route lock excludes SGA 4½. Varshavsky §1.3.1(e) refers to Illusie (1994), §4, but Illusie §4.1 itself attributes nearby-cycle bounded constructible finite-Tor preservation to the excluded classical finiteness theorem. Illusie (2021), §1.2, p. 86, explicitly states bounded constructibility without a finite-Tor input hypothesis and is the permitted, non-SGA source used for the new standard sheaf input. It too credits Deligne. Please confirm whether a non-SGA source that states this standard theorem but credits its historical SGA proof is acceptable for the future split of that input, or specify an independent permitted proof route. Please also archive the 2021 paper in literature and its LIST entry. The current delivery does not claim to have furnished an independent proof of that theorem or to have resolved the historical provenance question. No prohibited source is cited as a proof dependency or used to prove the item.
+
+## What remains unsplit
+
+Only `lem-trf-nearby-cycle-sheaf-finiteness`, the openly named standard nearby-cycle sheaf theorem. It has no proof or proof dependencies, as required for a new unsplit node. Its archival/source-route question is identified above for the human. The independent finite Tor and exchange proofs remain in the item itself.
+
+## Not duplicates
+
+`lem-trf-nearby-cycle-sheaf-finiteness` vs `lem-trf-nearby-cycle-finiteness-exchange`: the input concerns a sheaf on a geometric generic fibre, while the item also supplies descent from an arithmetic stage. The item supplies geometric-generic descent and the split summand argument, then passes to complexes and proves finite Tor preservation, proper and smooth exchanges, derived cone compatibility and mate coherence. This named standard input is the first repair option explicitly requested in the return.
+
+`lem-trf-nearby-cycle-sheaf-finiteness` vs `thm-dg-finite-type-constructibility` and `sbc-thm-finiteness-finite-type`: these concern direct images of finite-type schemes over a field. The new result is geometric nearby cycles over a trait. It is not ordinary arithmetic direct image along the generic open immersion.
+
+`lem-trf-nearby-cycle-sheaf-finiteness` vs `lem-weil-pbc-constructible-module-limit-descent`: the latter gives descent of constructible modules to a stage of an affine-transition limit, with no nearby-cycle finiteness assertion. It is reused in step 4.
+
+`lem-trf-nearby-cycle-sheaf-finiteness` vs `lem-trf-specialization-cohomological-comparison`: that is a deformation-family cohomology comparison, not sheaf finiteness over a trait; it is not used to prove this item.
+
+Whole-DAG searches for nearby cycles, cycles proches, the Illusie source title/DOI and the new id found no existing standard sheaf-finiteness node. Whole imported-blueprint searches for nearby and cycles found no such node. The new node has no Stacks tag; existing Stacks 09YU, finite-image, clopen-section and Serre nodes are reused. Its blueprint ancestry is the item's nearest imported ancestor, `lem-trf-local-term-locality`, through the item and its zero-section parent.
+
+## Review by N1
+
+I read the return, the retained node files and report, current main's item, the worker and stage-1 instructions, delivery-errors B–E, GOAL and dag-sync, the three blueprint levels in SETUP, the chapter and unit, and the main-20261015 local-term proof. I read the actual Varshavsky PDF at §§0.2, 1.3.1(e), 1.3.2(b)–(c) and the §3.2 cone discussion. I reread the retained ILO XIII 2.3.1(i), p.197: its arithmetic theorem was valid, but does not independently provide the geometric domination needed by the returned argument. Both old nodes and their searches are preserved as historical work, not offered again as a repair.
+
+For the sole new node I read Illusie (2021), §1.1 and §1.2, pp.85–86, online at the publisher, checking that the source takes K on the geometric generic fibre X_{\barη}, uses the separable geometric generic point, and asserts bounded constructibility without assuming finite Tor. I restricted it to a sheaf and a strictly henselian trait. The finite ring action qualification is explained above; no adic/pro-etale coefficient category is substituted. The source statement supplies both constructibility and eventual vanishing, and the new node openly records precisely that input. I also read Illusie (1994) §4.1 to verify the source-attribution problem, rather than treating the earlier WANTED reference as a proof.
+
+Step 1 uses the current deformation definition for i,j and ordinary etale constant coefficients, exact module inverse image, right-derived triangulated exactness and the module/abelian direct-image comparison. I read all these statements. The geometric j is affine qcqs, not an ordinary finite-type open immersion.
+
+Step 2 uses the torsion bounded-below strict-henselization stalk formula, derived continuity with coefficients from the fixed generic fibre, the module/abelian comparison and the small affine representative system provided by the strict-henselization definition. Step 3 uses the etale local-dimension equality and relative 2d torsion bound for **arbitrary** module sheaves; cohomology commutes with stalks and stalks detect zero. I checked those statements and the empty-generic-fibre case. The bound requires no constructibility and is retained for the later Tor argument.
+
+Step 4 uses exactly the existing 09YU constructible-module descent statement, which I opened in full and checked against Stacks lemma-category-is-colimit (3). Its index is the small directed set of finite subfields of the chosen separable closure; all stages are finite-type schemes over K_0, hence qcqs, and transitions are affine. The finite separable extension theorem gives etaleness, and the base-change theorem gives etaleness of v. Finiteness is the displayed affine basis calculation. Finite-type-over-Noetherian and finite-over-locally-Noetherian implies finite presentation justify the hypotheses of lem-kun-095r. That node explicitly gives both constructibility of G and absence of higher direct images. No field-base finiteness theorem is applied on the total trait.
+
+Step 5 uses finite implies proper, etale base-change stability, the actual clopen-section theorem and the unbounded proper base-change theorem, all of whose statements I read. The section exists from the **chosen** embedding L into bar K. The scheme P, projection w and pulled-back sheaf H are explicitly given. Finite-image finiteness is applied over bar K, with finite presentation justified by Noetherianity there too. The etale inverse-image/restriction statement identifies the sections of s^*H. Restriction to the chosen component and zero on its complement are A-linear sheaf maps, with composite identity by the sheaf axiom on a two-piece disjoint open cover. This proves a retract without division by the degree, even when that degree is divisible by ell.
+
+Step 6 applies the new node to the constructible geometric-generic sheaf G_{\bar K}; the arithmetic sheaf G was descended in step 4 and pulled back in step 5, so the corrected hypotheses match exactly. Additivity preserves the explicitly obtained retract. The cited Serre theorem supplies kernels of maps **between constructible sheaves**, so ker(1-e_q) is constructible; it does not rely on an arbitrary-subobject assertion. The algebra U_q R_q U_q=U_q and R_q U_q=1 identifies that kernel with the desired sheaf. Step 7 uses the bounded-constructible definition and the kernels/cokernels/extensions clauses of Serre closure in finite truncation induction; the uniform bound is already step 3.
+
+Steps 8–9 retain the previous scalar-projection Tor argument. I reread the full scalar projection statement and clause (2) of 0F10: the former allows arbitrary coefficient complexes and requires full torsion cohomological dimension, supplied by the latter. The uniform 2d estimate is distinct. Finite Tor puts the tensors in a fixed bounded interval before continuity is used. The filtered-colimit and free-resolution tensor calculation is written out and tests infinite modules. Monoidal stalk inverse image and stalk conservativity extend the interval to tensoring by every module sheaf, exactly the item's Tor convention.
+
+Steps 10–11 retain the reviewed proper and smooth exchanges. I reread pushforward composition, unbounded torsion proper base change, geometric proper/smooth base-change stability, field-base constructibility and the exact bounded smooth-base-change statement. Proper base change accepts the possibly unbounded Rj_*K; smooth base change has qcqs g=j_Y and bounded constructible L only on the geometric generic fibre. The resulting maps are the definition's actual adjunction exchanges.
+
+Step 12 retains the functorial resolution and filtered-model cone calculation; I reread both cited statements, including the general abelian-category clause, and checked the two-cone permutation (d,c,b,a) -> (d,b,c,-a). Step 13 uses the actual mate-pasting/composite-unit/composite-counit formulas and the nearby unit i^*eta_j. Step 14 uses actual compact-support base-change pasting, supplied compactifications from Nagata, and then takes exceptional mates only on the constructible finite-Tor fibre domains. I read these cited statements; no exceptional operation on arbitrary total-trait complexes is assumed.
+
+I checked zero coefficients, zero sheaf, empty X, empty generic or special fibre, q=0, and X equal to the trait. For the new input, nearby cycles on the geometric generic point of the trait give the original finite module in degree zero and zero in higher degrees; this is not an arithmetic-inertia calculation. For steps 4–6, L=K_0 gives the identity section and any finite separable degree, including an ell-divisible degree, still gives the component retract. The projector kernel argument uses Serre closure only between known constructible objects. No statement was weakened, no target or unit was changed, and no new node is an elementary fact or duplicate.
+
+I checked B–E point by point. The new node introduces its rings, schemes, maps and sheaf, defines the DVR conditions inline and cites the henselian definition; it has a statement only, empty proof dependencies, actual logged searches and a second semantic phrasing. Every proof citation is supported by its exact statement in citations.json. All off-unit generic tools are declared in split_report.tool_uses. The repaired steps each have fewer than 2000 characters; none hides a finite-extension domination lemma or an identification requiring constructibility. The item statement and statement dependencies match current main exactly. The required checks are run through the server/delivery tools only. The source/archive question is explicitly escalated, not represented as settled.
+
+
+## Second reading by N1
+
+- Item statement: checked against the current `lem-trf-local-term-locality` blueprint ancestry, `def-trf-deformation-specialization`, and Varshavsky §1.3.1(e), §1.3.2(b)–(c); verdict: matches the stated bounded constructible, finite-Tor, exchange, cone, and mate claims.
+- Step 1: checked the strict-henselization definition, exact inverse image, triangulated derived direct image, and module/abelian comparison; verdict: cited statements support the ambient functor setup.
+- Step 2: checked the strict-henselization stalk formula, affine-neighborhood limit, derived etale continuity, and bounded-below qualification; verdict: the stalk computation and its Tor-qualified use are explicit.
+- Step 3: checked the etale local-dimension equality, torsion cohomological bound, stalk cohomology, and stalk conservativity; verdict: the uniform $2d$ bound and empty-fibre case are justified.
+- Step 4: checked Stacks Tags 09YU and 095R plus the finite-separable, finite-presentation, and Noetherian dependency statements; verdict: finite-stage descent and constructible finite pushforward are correctly applied over the arithmetic generic field.
+- Step 5: checked finite-to-proper, etale base change, clopen section, proper base change, finite pushforward, and etale restriction statements; verdict: the chosen geometric component gives a genuine split retract without dividing by the extension degree.
+- Step 6: checked the corrected geometric-generic child statement and the constructible Serre closure theorem; verdict: the projector-kernel argument applies to $G_{\bar K}$ and identifies the desired nearby-cycle sheaf.
+- Step 7: checked bounded constructibility, truncation triangles, and Serre closure; verdict: the sheaf result is lifted to bounded complexes with the independent uniform bound.
+- Step 8: checked scalar projection, monoidal inverse image, finite cohomological dimension, and resolution naturality; verdict: the Tor-amplitude interval is propagated through the stalk colimit for arbitrary modules.
+- Step 9: checked stalk-as-pullback, stalk cohomology, stalk conservativity, and the Tor definition; verdict: stalkwise bounds imply the full sheaf Tor condition.
+- Step 10: checked derived pushforward composition, unbounded torsion proper base change, proper base-change stability, and finite-type constructibility; verdict: the proper exchange has the correct orientation and hypotheses.
+- Step 11: checked the bounded derived smooth-base-change statement, qcqs generic open map, exact inverse image, and smooth base-change stability; verdict: the smooth exchange is the stated canonical map.
+- Step 12: checked filtered derived-operation lifts, injective-resolution naturality, and the explicit iterated-cone permutation; verdict: cone compatibility is computed on supplied models rather than asserted formally.
+- Step 13: checked mate-pasting formulas and the nearby unit from the specialization definition; verdict: composition, identity, and unit compatibilities follow from the displayed units and counits.
+- Step 14: checked compact-support base-change pasting, Nagata compactification, and exceptional mate restrictions; verdict: the compact-support and exceptional compatibilities are confined to the admissible constructible finite-Tor domains.
+- New node `lem-trf-nearby-cycle-sheaf-finiteness`: checked against Illusie (2021) §1.1 formula (1.2) and §1.2, pp. 85–86; verdict: corrected to the source’s geometric-generic sheaf hypothesis, with finite torsion coefficients, constructibility, and eventual vanishing.
+
+Changes made: corrected the child node and its step-6 citation from arithmetic-generic to geometric-generic input; updated the report to record that correction and its reason. No target statement, proof route, dependency, or existing node was otherwise changed. Small cases checked: zero sheaf and coefficients, empty generic fibre, $q=0$, $X=S$, and finite separable extensions whose degree is divisible by $\ell$.

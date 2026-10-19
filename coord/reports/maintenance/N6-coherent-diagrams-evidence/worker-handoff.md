@@ -1,0 +1,13 @@
+Maintenance update, 2026-10-17: the upstream dependency cycle is repaired.
+
+The authoritative live DAG (`/home/ubuntu/weil-conjectures-sheaf`) now contains commits `700b3436c6` and `1fc5daf01a`; the matching newtargets changes are `c227dedff4` and `6d51610d58`. The supporting nodes `lem-coef-infinity-functor-pushout` and `lem-coef-space-geometric-descent` no longer depend on this item. Their genuinely independent foundations are explicit: a statement-only Cat-infinity limits/colimits/cartesian-closure node, the existing ordinary-index rectification and colimit-comparison nodes, and a direct mapping-Kan-space proof for the pushout node's path object. No item statement was changed.
+
+A read-only audit reinserted the original full item proof dependencies in memory, including Smith recognition, accessible weak equivalences, enriched rectification, and simplicial-model nerve localization. Its entire dependency closure (354 nodes at the recorded snapshot) has no cycle and no missing node. Both edited supporting proofs pass `review_split.py`. The item's server check and delivery dry run have also passed.
+
+The currently running repair worker independently removed several of those citations and wrote direct arguments for the same substantial facts. The maintenance repair makes that deletion unnecessary. The next reader should check Steps 3, 5, 7, 9 and 10 for complete justification; restore the existing Smith/accessibility/rectification/localization citations wherever needed, then regenerate verbatim citation entries from current statements. A passing DAG check alone does not certify those direct arguments. In particular, the worker report's claim that the graph obstruction required removing the item's citations is superseded by this maintenance result.
+
+The statement-only `lem-coef-enriched-diagram-size-generation` is already present in the server newtargets DAG (commit `6fa3729bca`), copied unchanged from the prior sandbox work. Delivery correctly excludes its unchanged copy. Do not count it as a newly delivered node. The new Cat-infinity foundation remains `unsplit`, intentionally awaiting its own normal stage-1 work; do not claim a split proof or a Lean compilation for it.
+
+If a later server snapshot reintroduces either supporting back edge, inspect the authoritative live DAG and `tools/sync_newtargets.py` before changing the item's proof. Side-only supporting edits can be overwritten by live synchronization. No failure counters or scope gates were disabled.
+
+Detailed report and evidence: `coord/reports/maintenance/N6-coherent-diagrams.md` and the adjacent `N6-coherent-diagrams-evidence/` directory in newtargets.

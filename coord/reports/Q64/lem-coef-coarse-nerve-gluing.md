@@ -1,0 +1,89 @@
+# Worker report: lem-coef-coarse-nerve-gluing
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-coarse-nerve-gluing.json`: statement, split. The statement is unchanged. Twelve elementary steps give the full word pairing, face checks, attachment pushouts and exhaustion. Mathlib verdict: no match.
+- `citations.json`: the three proof-step citations, with verbatim excerpts of the cited definition's statement.
+- `report.md`: this report.
+
+There are **0 new nodes and 0 Mathlib leaves**. `selfcheck/` holds the local writing/checking scripts and finite-check output; it is not delivery content. The required search command produced `searches.jsonl`.
+
+## Attachments
+
+None. Searched the entire read-only slopmaster2 `WeilConjectures/` by the item tag and by `inner.?anodyne`, `codiscrete`, `indiscrete`, and coarse nerve/groupoid terminology. Also searched the upstream master reference tree and `dag/lean_names_upstream.json`. There is no matching project declaration to attach. The parent itself invokes this item in its Step 4; it does not provide an independent project proof.
+
+## Sources and WANTED
+
+WANTED: Gepner–Haugseng, *Enriched infinity-categories via nonsymmetric infinity-operads*, arXiv:1312.3178v4, Theorem 5.2.5, the coarse-nerve inner-horn filtration, for `lem-coef-coarse-nerve-gluing`. Read the primary text online at https://arxiv.org/html/1312.3178v4, Section 5.2, in full from the theorem through its proof. No copy is listed/available under the permitted literature directory. I did not download or modify literature. The proof is marked `by: agent`, with the archived blueprint ancestor as document and the online source specified in its place; its word calculations are explicit.
+
+Read `dag/chapters/sec-six-functors.json`, `dag/units/sk-prop-sf-biduality-general.json`, the current main-20261015 and historical master statement/proof of `prop-coef-integral-exceptional-adjoint`, and the parent `lem-coef-algebroid-equivalence-nerve` (in particular its Step 4). The inherited ancestry serves the enhanced coefficient adjunction, through the equivalence-nerve groupoid calculation. This item is not the unit's key node; no unit realization or binding was changed.
+
+The only cited node is `def-cbc-enhanced-diagrams-cones`, read in full. It defines exactly the standard simplex, horn and ordinary nerve used here. Its literature source is the archived Scholze six-functor notes, Lecture II, Definitions 2.1–2.2; no theorem about horn gluing is taken from that definition. The coarse nerve and the closure operations defining inner anodyne are already specified explicitly in the item's unchanged statement. There is no applicable Stacks tag for this particular simplicial combinatorial theorem.
+
+## Search and reuse
+
+Whole-DAG searches covered coarse/codiscrete/indiscrete nerves, inner-anodyne attachments and horn pairings. `tools/blueprint_refs.py search` was run with `anodyne`, `coarse`, `codiscrete`, `indiscrete`, and `horn`; no blueprint statement duplicates the item. The incidental `horn` matches in Picard-framework concern different algebraic geometry statements. `blueprint_refs.py ancestor` confirms `prop-coef-integral-exceptional-adjoint`; the existing full via chain and precise from.place were preserved, and same_as is `[]`.
+
+I inspected `lem-coef-free-product-nerve-gluing`: its statement is a weak homotopy equivalence for a categorical free product with a common discrete object set. It does not assert this inner-anodyne inclusion and is not cited. General skeletal or lifting-calculus lemmas are unnecessary because each characteristic simplex and each degreewise pushout are computed explicitly.
+
+Repeated the item's Mathlib searches through the required command, with two distinct LeanFinder phrasings, Loogle, a source grep, and LeanSearch. The queries and command-produced result records are appended verbatim in mathlib_searches and remain in searches.jsonl. All five services/calls succeeded. The two semantic phrasings found nerve/quasicategory/StrictSegal and horn/subcomplex infrastructure. The Loogle conjunction had no hits. Read the actual candidates: NerveCodiscrete.lean:30–36 gives tuple coordinates; CoherentIso.lean gives the walking isomorphism and its nerve; Inner/Basic.lean:38–62 defines inner-anodyne extensions and generators; Quasicategory/Nerve.lean supplies inner horn fillers for a nerve; SubcomplexColimits.lean:82–100 assumes a bicartesian lattice square. None proves this inclusion inner anodyne. No inferred theorem is recorded as a leaf.
+
+## What was wrong or incomplete
+
+The node was an unsplit statement. Its canonical-map statement agrees with the coarse-nerve subclaim in Theorem 5.2.5 after relabelling the pivot; no hypothesis or conclusion was changed. The proof is now complete, including the case A={a}, the first edge attachments, the faces of the higher cells, and pushouts for words with repeated nonadjacent vertices.
+
+## Source error
+
+The printed proof's intermediate indexing is inconsistent: its second filtration ends at the transition index n−1, which at n=1 leaves no step even though the missing cross-colour edges must be added. Its last displayed inclusion also points opposite to the immediately preceding decreasing-t filtration. The endpoint separator is placed after the selected endpoint, so its missing face is deletion of that separator, as explicitly indexed by k=i+1 in this split. These are issues with the intermediate formulas, not counterexamples to the theorem.
+
+Below the fixed unit level I use an explicit first-colour-change pairing and the ranks (lower dimension, number of colour changes). This verifies the source's pivot-insertion mechanism without relying on its ambiguous indices or its omitted one-transition case. The original item statement, the ancestor's coefficient categories, and the unit/chapter route are unchanged.
+
+## Not duplicates
+
+No new nodes. All finite-word calculations remain proof steps; no clause of the item was moved to another statement.
+
+## Review by Q64
+
+I checked the unchanged statement against the primary online Theorem 5.2.5, proof, and checked the inherited blueprint context against the current and old ancestor files. Its finite set A supplies finitely many cells at each length; nonemptiness supplies the chosen pivot a; b outside A makes the colours disjoint. No order on A, no distinctness of nonadjacent vertices, and no assumption that a lies at an endpoint are used. The degenerate case A={a} is handled before the pairing.
+
+Step 1 uses only the cited definition's ordinary nerve and the item's degreewise tuple description. The intersection of the two word sets consists exactly of constant a words, proving the pushout identification. Step 2 derives its own unique degeneracy normal form by maximal constant runs; it does not silently invoke the general Eilenberg–Zilber lemma.
+
+Steps 3–4 introduce and verify the matching. Erasing a preserves every remaining label, and the selected endpoints have opposite colours, so inserting or deleting their single separator produces inverse operations on nondegenerate words. I checked the inner index 0<k<n+1 and the bounds 1<=r<=n, including lower dimension one. Steps 5–8 prove the full other-face assertion: deletion cannot increase the binary change count; an untouched selected gap remains selected; deleting its left endpoint either retains a separator or removes the first change; deleting its right endpoint either retains the separator, removes two changes, or removes the last change. Possible adjacent a's are explicitly treated as degeneracies. These steps use no cited theorem: their finite-list arguments are written in the item.
+
+Step 9 states the induction invariant, its vertex base case, and the dimension/rank induction step. A remaining upper face of dimension n belongs to a pair with lower dimension n−1; a remaining lower face has smaller r. Thus every required horn face is already present, and the lower simplex's boundary is present too. The distinctness/newness claim comes from the inverse matching of Step 4, not from an unproved assertion about a global filtration.
+
+Steps 10–11 cite the definition node's exact monotone-map simplex and omitted-vertex horn formulas (the corresponding sentences are copied into citations.json). I checked that the complement of this horn consists precisely of maps onto all indices or onto all except k. The adjacent-distinct words u and v give unique run lengths, so those complements map bijectively to the new word simplices in every degree. This proves the pushout, including possible identifications on the horn boundary. There is no assertion that the characteristic simplex is a monomorphism: it usually is not when vertices repeat.
+
+Step 12 applies only the closure operations defined in the item. Finite A gives finite rank batches, so attaching one cell at a time avoids assuming a separate coproduct-closure theorem. Every nondegenerate missing word occurs in exactly one pair, which proves exhaustion; the countable composite is inner anodyne by definition. The argument and all intermediate constructions are in the item's steps, so no non-elementary black box or renamed clause is hidden in a new node.
+
+For the small-case audit I checked the singleton case and both cross-edge orientations b,c and c,b, which attach the triangles b,a,c and c,a,b along their inner horns. I also exhaustively checked all adjacent-distinct words on a,b,c,d through length 9, their insertion/deletion matching, and every non-pivot face. A separate degreewise check enumerated monotone maps outside the relevant horns and compared their images with independently enumerated run expansions of both new words, including upper words with repeated vertices. These are supplementary finite checks; the all-dimensions proof is Steps 2–11. The results are in selfcheck/check_pairing.txt.
+
+Against delivery-errors B–E: no new nodes, incomplete statements or unsupported notion references were introduced; every citation says exactly what its step takes; the proof graph adds only the definition dependency and cannot cycle back through the parent; the full proof remains on the item; and all edge cases and face hypotheses above were checked. I corrected the source-index ambiguity by specifying the actual matching and verified the pushout degreewise, rather than using a picture as a proof. No Lean files, compiler, Lake, live repository, launcher code or maintainer-owned metadata were changed.
+
+## What could not be finished
+
+Nothing mathematical remains open in this stage-1 split. The item is left for the required independent second reading; no delivery push is authorized or performed.
+
+## Second reading by Q64
+
+I independently read the item and all twelve steps, the full statement of its sole cited node `def-cbc-enhanced-diagrams-cones`, and Gepner–Haugseng arXiv:1312.3178v4, Theorem 5.2.5 and its complete proof (online HTML Section 5.2). There is no Stacks tag for this simplicial combinatorial assertion. The source's finite object set, common pivot and one new object give exactly the item's hypotheses after a bijective relabelling. The tuple operators and degreewise pushout match. The statement remains verbatim unchanged. I also read the current blueprint ancestor's proof and the parent's Step 4: this inner-anodyne inclusion is exactly the input that step requests. The original review above remains the first worker's review; this section records the independent second reading.
+
+- Step 1: checked against the definition node's ordinary nerve and the explicit tuple statement; the intersection is the constant pivot word in every degree. PASS, including `A={a}`, where the map is an identity.
+- Step 2: checked directly against selecting/repeating entries. PASS after adding that compression is a face as well as the source of a degeneracy, proving both directions of the membership criterion without an uncited normal-form theorem.
+- Step 3: checked against the source's nondegenerate-word description and the explicit erased two-colour list. PASS: the first opposite-colour endpoints exist, and their gap has zero or one pivot because adjacent pivots would be degenerate.
+- Step 4: checked insertion and deletion on the selected gap, including both orientations `b,c` and `c,b`. PASS: inverse pairing, unchanged erased list, and the inner index bounds hold also for lower dimension one.
+- Step 5: checked the two-colour table for deleting an internal letter and the endpoint cases. PASS; changed “change” to “decrease” to specify the sign of the displayed old-count-minus-new-count formula. A degenerate face of dimension `n` compresses to dimension at most `n-1`.
+- Step 6: checked deletion before and after the selected endpoints. PASS: no earlier change can appear; the displayed separator survives, so every nondegenerate such face is upper. Deletion of another pivot is included explicitly.
+- Step 7: checked deletion of the left endpoint with and without a preceding non-pivot letter. PASS: the preceding colour is the initial colour, an existing intervening pivot causes adjacent pivots, and absence of a predecessor removes exactly the first change.
+- Step 8: checked deletion of the right endpoint with next colour equal to either endpoint and with no successor. PASS: respectively an upper face, a decrease by two, or a decrease by one; adjacent pivots are degenerate. Together Steps 5–8 exhaust every non-pivot face.
+- Step 9: checked the ordering against that full face classification. PASS after making the exact induction invariant explicit: `H` contains precisely `K` and the processed pairs. This proves newness from the partition by pairs rather than from uniqueness alone, and preserves the invariant after adjoining both words and their degeneracies. An upper `n`-face belongs to lower dimension `n-1`; a lower `n`-face has smaller transition rank.
+- Step 10: checked against the verbatim monotone-map simplex and omitted-vertex horn formulas of the cited definition. PASS: the complement has image all indices or all except the pivot index, and every horn face is already in `H`.
+- Step 11: checked the same cited formulas and the run normal form of Step 2. PASS: monotonicity and adjacent-distinctness recover every run length, even when nonadjacent letters repeat. Thus the complement maps bijectively to the two new degeneracy families in every degree; the set pushout, with all horn identifications, is the asserted simplicial subset.
+- Step 12: checked against the inner-anodyne closure operations stated inline in the item. PASS: each batch is finite, the complete order has at most countably many attachments, and the pair partition proves exhaustion. No coproduct-closure or categorical-equivalence theorem is being assumed.
+- New nodes: none. B1–B7 introduce no obligations; no elementary argument, duplicate, special case or item clause has been moved to a new node. The only three proof citations are exactly those of Steps 1, 10 and 11; I checked all three quotes verbatim against the current definition statement, so `citations.json` needs no change.
+
+For independent reuse checks I searched the whole DAG and both permitted project source trees for coarse/codiscrete/indiscrete nerves and this item. I opened `lem-coef-free-product-nerve-gluing`: it concerns a weak homotopy equivalence for a free product on a common discrete object set, and does not give the inner-anodyne inclusion here. The parent's use of the item is not an independent proof. No sorry-free project declaration was found. I ran fresh required `msearch.py` LeanFinder, Loogle and Mathlib grep searches using “wedge”, “connected thin groupoids”, and the codiscrete vocabulary. The Loogle conjunction of `innerAnodyneExtensions` and `Codiscrete` succeeded with zero hits. Their actual records are in `searches.jsonl` and appended unchanged to the item's search results. I read Mathlib `NerveCodiscrete.lean:30–40`, `Inner/Basic.lean:38–98` and `SubcomplexColimits.lean:83–100`: these give tuple coordinates, the inner-anodyne class/generators and an abstract pushout criterion, respectively, not this gluing theorem. The returned nondegeneracy/injectivity criterion assumes a partial order, which the codiscrete category does not have. No Mathlib leaf is warranted.
+
+Small cases checked: singleton `A`, no missing vertices (dimension zero), the two missing edge orientations in dimension one, and upper words `b,a,c,b` and `c,a,b,c` with repeated nonadjacent vertices. I inspected and reran the supplied finite check: 70,190 non-pivot faces and 4,294 degreewise complement elements pass; the script checks the two-colour classification and independently enumerates both sides of the complement bijection. I additionally ran an independently written actual-filtration check on the four-letter alphabet: 3,018 ordered cells had all horn and lower-boundary faces already present, both designated members new, and exhaustion through word length seven. These checks support, and do not replace, the all-dimensions argument above. Fields/rings/schemes are not objects of this statement; no zero-object or empty-scheme hypothesis is being substituted for its nonempty finite set hypothesis.
+
+Changes made: expanded Step 2's two-way membership argument; clarified the sign in Step 5; strengthened the explicit invariant and newness justification in Step 9; appended three independent actual search records; added this second reading. No statement, source route, definition dependency, citation quote, or new-node count changed. The printed source's indexing inconsistencies described in the first report are confirmed by the displayed filtration endpoints and arrows; the repaired explicit matching avoids both and proves the unchanged intended assertion. No Lean, compiler, Lake, live project, launcher, or agent delegation was used.

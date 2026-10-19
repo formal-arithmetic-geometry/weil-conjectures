@@ -1,0 +1,44 @@
+1. Files written:
+
+- `dag/nodes/sec-proetale-coefficients/det-proper-heart-continuity-sections.json`: statement item, now split; no exact Mathlib match; no new nodes.
+- `citations.json`: a verbatim statement quote for every cited node in each of the three proof steps.
+
+2. Attachments: none. Searches under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact blueprint tag, item id, and weak-contractibility/evaluation/section-continuity terminology found no declaration stating the complete item. The item has no `lean_audit` record. The exact upstream master is reference material only; no sorry declaration was counted as a proof.
+
+3. WANTED: none.
+
+4. What was wrong and what changed:
+
+The imported proof had empty `uses`, null `elementary`, and no statement dependencies. Its sk-cor-pe-wc-sections reference concerns the affines provided by the w-contractible-ring basis construction; that narrower statement must not be silently applied to an arbitrary weakly contractible site object. The stronger, already split and reviewed `det-pe-sections-limits-colimits` explicitly covers arbitrary weakly contractible affine site objects, with arbitrary sheaves of rings. I reused it. It belongs to sk-cor-pe-sections, which this item's unit sk-cor-pe-bounded-continuity explicitly cites. This is the prescribed unit route. The report declares that unit citation in split_report.tool_uses for the route checker, not a replacement of a unit step.
+
+The similar `lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits` was also opened. Its statement assumes a sheaf of commutative rings and is not a proof of this item's arbitrary-ring statement; its downstream Lean proof was not used as an attachment. No new child node restates the item. The stronger blueprint node supplies the real existing infrastructure; the steps retain the argument passing from module-valued evaluation to abelian groups. The imported statement is unchanged and no statement dispute was found.
+
+I searched the DAG for the item, Tag 0935, and weakly-contractible evaluation/sections keywords, and searched the whole blueprint with tools/blueprint_refs.py (ancestor and sections search). The existing stronger blueprint theorem is a reuse, not a new duplicate. No equivalent node requiring a same_as entry was found: the reused node also asserts all limits. No new node means there are no tag-pair distinctions to list under Not duplicates.
+
+Recorded Mathlib searches were run through msearch.py and recorded from searches.jsonl with their exact query texts and service notes. The first two Loogle queries produced identifier errors, which are recorded as invalid queries rather than evidence of absence; the successful fully qualified query returned zero hits. An initial grep mistakenly supplied a redundant Mathlib/ prefix to the wrapper's subdirectory; its zero hits are not evidence of absence. The corrected grep in Algebra/Category/ModuleCat found the four sheaf-limit evaluation instances (Limits.lean:70, 85, 98, 108), which give limits only. LeanSearch returned presheaf evaluation-colimit instances and existence of sheaf colimits, not preservation of sheaf colimits by evaluation. LeanFinder's first and second phrasings returned affine-scheme global sections, presheaf evaluation, module presentations, and condensed-category constructions; their hypotheses and conclusions do not state this item. No Mathlib leaf is claimed.
+
+5. Nothing remains unfinished except the fresh second reader's independent review and delivery. No Lean files, compiler, Lake, or global build were used. The delivery command with the brief's extra trailing dot printed usage; the tool's documented --no-push invocation is the actual dry run. Nothing was pushed.
+
+## Review by NX
+
+I read the item's current main-20261015 statement and its two-paragraph proof; the chapter record and all three steps of the bounded-continuity unit; the sk-cor-pe-sections and sk-cor-pe-wc-sections blueprint sources; and the full statement and proof of existing det-pe-sections-limits-colimits. I checked its source inputs against the local Stacks texts: sites-modules.tex Tag 0935, label lemma-sections-over-quasi-compact (especially clause 2 for arbitrary ring sheaves); Tag 03DA, lemma-abelian; Tag 03DB, lemma-limits-colimits; and sites-cohomology.tex Tag 0946, lemma-w-contractible. None assumes commutative coefficients. The sk-def-pe-site statement supplies the finite-refinement topology, while sk-def-pe-weak-contractible defines categorical projectivity of the representable; I did not replace this by ring-theoretic w-contractibility.
+
+For step 1, I opened the cited statement of det-pe-sections-limits-colimits: it explicitly preserves all limits and colimits in modules over the section ring, under exactly the item's affine and weak-contractibility hypotheses. I also opened def-weil-sheaf-of-modules-category: it supplies the sectionwise scalar actions, linear morphisms, and abelian category. Evaluating addition is the displayed elementary equality, not an additional theorem. I corrected the initial draft to avoid claiming the commutative-ring proper-base-change theorem or the narrower w-contractible-ring exactness theorem.
+
+For step 2, the sole node citation is the module-category definition, whose abelianness and description of kernels/cokernels is explicit. Step 1 supplies preservation of these finite diagrams. Kernels of a linear map are its zero-preimage subgroup, and cokernels its image quotient with induced action, so the underlying additive-group sequence remains short exact. This elementary conversion writes out why the output is abelian groups rather than merely modules over A(W).
+
+For step 3, I opened def-weil-pbc-category-colimit, which states exactly the compatible-family and unique-factorization universal property used. The step explicitly constructs the two direct sums and the relations iota_j D(u)(x) - iota_i(x), verifies that their image is a submodule, and checks factorization both for additive and for linear cocones. Thus forgetting scalars preserves these colimit cocones without invoking an uncited forgetful-preservation theorem. Applying step 1 identifies the canonical comparison itself, with its original cocone maps. This corrects the initial draft's unsupported one-sentence assertion that underlying groups create colimits.
+
+I checked zero modules, the empty diagram, an arrow diagram, and a discrete diagram. For the empty diagram both sums and their quotient are zero. For an arrow, the relation identifies the source with its image in the target; for a discrete diagram there are no relations, giving the direct sum. The same presentation works for nonfiltered categories; filteredness is only a special case. A disconnected affine weakly contractible W is permitted throughout and no lifting into one cover member is assumed. Arbitrary noncommutative A is allowed since all modules are left modules and no scalar commutation was used.
+
+Every proof dependency is an existing, unmerged node whose full statement was opened; citations.json copies those statements verbatim. The two definition nodes are Mathlib leaves. The other proof dependency is the existing stronger theorem in the unit expressly cited by the assigned unit, so no circular dependency or route substitution was introduced. The zero-new-node split avoids all B1–B9 new-node issues, C1/C4 missing or mismatched citations, and D1/D2 clause relabelling; no SGA source is cited.
+
+## Second reading by NX
+
+- Item statement: checked against blueprint `det-proper-heart-continuity-sections`, Stacks Tag 0935 (`lemma-sections-over-quasi-compact`) and Tag 0946 (`lemma-w-contractible`); exactness, arbitrary colimits, filtered colimits, and direct sums have the stated hypotheses and conclusion. Zero module, empty diagram, arrow diagram, and discrete diagram cases are valid; verdict pass.
+- Step 1: checked the full statements of `det-pe-sections-limits-colimits` and `def-weil-sheaf-of-modules-category`; the stronger evaluation theorem has the same arbitrary ring-sheaf and weakly contractible affine hypotheses, and additive evaluation is explicit; verdict pass.
+- Step 2: checked `def-weil-sheaf-of-modules-category` and Step 1; kernels and cokernels of evaluated linear maps have the claimed underlying additive-group descriptions, so exactness follows; verdict pass.
+- Step 3: checked `def-weil-pbc-category-colimit` and Step 1; the direct-sum/cokernel presentation proves the underlying abelian-group universal property, including empty and discrete diagrams, without an uncited preservation theorem; verdict pass.
+- New nodes: none; no duplicate, elementary, restatement, or Mathlib leaf nodes were introduced.
+
+Changes made during this second reading: none. The worker's statement, three proof steps, dependency list, verbatim citations, blueprint metadata, and recorded searches were already consistent with the sources and DAG contract.

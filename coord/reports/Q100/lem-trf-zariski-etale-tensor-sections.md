@@ -1,0 +1,45 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-zariski-etale-tensor-sections.json`: statement, split into eight proof steps; not a Mathlib leaf.
+- `citations.json`: all 21 step citations, with verbatim statements including their hypotheses.
+- `report.md`: this report.
+
+New nodes: none. Mathlib leaves: none.
+
+Attachments: none. The exact blueprint tag and searches for Zariski/etale comparison and tensor sections in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` found no declaration giving all clauses of this item. The upstream master was read only as reference. Its declarations are not treated as finished proofs.
+
+WANTED: none.
+
+The statement agrees with Stacks 070S (`descent-lemma-compare-sites`), part (2), and 03FH (`descent-remark-change-topologies-ringed-sites`), part (1). The restriction formula appears in the proof of 0GN7 (`descent-lemma-fully-faithful-associated`). The source explicitly omits the proof of (2), so this split is marked agent-origin and supplies that proof. The original statement is unchanged mathematically; two explicit citations now identify its Zariski-site and ringed-morphism notions. No quasi-coherence, separation, quasi-compactness or finiteness assumption was added.
+
+The site's inclusion, the structure-functions additive sheaf, normalized pullback restrictions, naturality in a module map, open-immersion pullback/restriction, and both module adjunctions already have DAG nodes. I reused them. Searches of all DAG nodes by tags 070S, 03FH and 0GN7 and by comparison/structure-sheaf keywords, and `blueprint_refs.py search` for `change topology`, `tensor sections`, `070S` and `structure sheaf`, found no blueprint node stating this complete item. The ancestor command confirms `lem-trf-local-term-locality`. Its historical ancestry and unit metadata are retained. This auxiliary topology comparison does not re-prove or change the curve unit's contracting-local-term route.
+
+Mathlib searches were run with msearch.py and their exact queries/results are in searches.jsonl. LeanFinder was tried with two phrasings; LeanSearch, Loogle and source grep also succeeded. The closest hits were `SheafOfModules.pullbackIso`, `sheafificationCompPullback`, `PullbackConstruction.adjunction`, and the scheme module pullback adjunction. I read `Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean` lines 39-126: it constructs the abstract left adjoint and identifies it with sheafification of a presheaf left adjoint. It does not identify that presheaf with sections of scheme pullbacks. Thus this item is not a one-line specialization of those declarations. Earlier Q77 searches in the item's record are retained unchanged, and the searches of this delivery are appended.
+
+Nothing remains unfinished in the one-level split. No new unsplit statements are needed. No Lean was written and no compiler, Lake or build was run.
+
+## Review by Q100
+
+I read the chapter and unit records, the current blueprint ancestor, Stacks descent.tex around labels `lemma-compare-sites`, `remark-change-topologies-ringed-sites`, `definition-structure-sheaf`, and `lemma-fully-faithful-associated`, sheaves.tex at `definition-pushforward` and `lemma-adjoint-pullback-pushforward-modules` (0095/0096), and sites-modules.tex at the ringed-site definition and `lemma-adjoint-pullback-pushforward-modules` (03D7). There are no new nodes with separate sources to review. The source's generality is essential: 070S(2) is about every module, whereas quasi-coherent descent alone would prove only a special case.
+
+For step 1, I opened `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites`: clause (3) gives precisely the geometric morphism and restriction formula, including finite-limit preservation of inverse image. `def-sc-etale-additive-structure-restriction` actually specifies the additive sheaf with values ULift Gamma(V,O_V) and function restrictions, so removing the universe lift supplies additive gluing, not just notation for a presheaf. Ring operations commute with restriction and therefore preserve the unique glued functions. `def-weil-pbc-ringed-topos-morphism` defines the ring-map data and induced scalar action used here. The structural map is adjoint to the identity O_T = epsilon_* O_et; no unjustified assertion epsilon^{-1}O_T = O_et is made.
+
+For step 2, I checked `lem-sc-etale-qcoherent-presheaf-functorial` despite its name: its statement quantifies over every sheaf of modules, defines the unit-normalized restrictions, and states semilinearity, identity and composition. `lem-sc-etale-tensor-sections-map-naturality` also explicitly imposes no quasi-coherence hypothesis. `def-weil-presheaf-modules-sheafification` gives the module-linear universal property and functoriality actually used; this is not an appeal to a plus construction or to sectionwise surjectivity of sheafification.
+
+Step 3 is elementary from the two cited definitions: every Zariski open cover inside an etale object is an etale cover; evaluation of G and its action on its morphisms give G_u and the maps G_u to a_*G_u'. These are Zariski sheaves on V. They are not asserted to be scheme pullbacks of G_T, nor are arbitrary etale sheaves assumed cartesian.
+
+For step 4 I opened `lem-pc-module-pullback-adjunction`. Its statement gives the natural hom bijection for arbitrary scheme modules, including the exact pushforward scalar action. The map b_u is specified on each open W by the actual etale-site arrow V_W to W. Hence it is O_T-linear with exactly that scalar action. Taking its adjoint is legitimate for every u:V to T and every G_u from step 3.
+
+For step 5 the same scheme-module adjunction is used twice. The second cited node states the composite-unit normalization equation for c_{a,u}. It permits comparison of the two adjoints by their transposes. Both transposes have the explicitly written value beta_W(m) restricted to V'_W; composition of site restriction maps proves equality. Thus naturality is established on every object, rather than inferred from a vague tensor comparison. Naturality in M and G follows from the natural bijection stated in the adjunction node and the formula for b_u.
+
+For step 6 I read `lem-weil-pbc-open-immersion-module-pullback-restriction` in full: it gives an O-linear natural isomorphism and its equation with the open restriction unit. The normalized composition statement then makes restrictions between opens the usual restrictions of M. This proves that theta restricts to a sheaf-module map beta; the same unit equation proves that starting with beta recovers beta. I did not use a mere additive comparison as an unsupported assertion of module linearity.
+
+For step 7 these same two statements identify the sections on every open A of V with P_M(A). The resulting maps a_u^theta are maps of Zariski module sheaves, so the cited scheme adjunction applies. The equation is tested on each open W of T and each m in M(W); theta's naturality along V_W to W and the explicitly normalized composite unit give exactly b_u. Injectivity of the adjunction hom bijection proves equality of maps, hence recovers every theta_u. This avoids an uncited theorem about local pure-tensor generators or an incorrect assumption that sections commute with tensor products.
+
+For step 8 I checked the statements of `lem-weil-pbc-ringed-topoi-module-adjunction` and `lem-weil-pbc-conjugate-iso-unit-equation`. The former applies to an arbitrary geometric morphism with a structural ring map, not just a site-specific construction; these are exactly step 1's data. The latter states the unique isomorphism between left adjoints to the same right adjoint, normalized by their units. Together with the already-checked sheafification universal property this gives the canonical natural isomorphism, with the module morphism action fixed in step 2.
+
+I tested the argument for the empty scheme, an empty open and empty etale objects: module sections there are zero and all displayed maps and unit equations remain defined. Zero modules and identity arrows also give the required identities. Nothing uses affine intersections, a finite cover, a nonempty object, a presentation of M, or any quasi-coherence property. For a general non-quasi-coherent M the presheaf is deliberately sheafified; I never identify P_M with its sheafification before applying its universal property. All non-elementary ingredients occur in the statements quoted in citations.json. There are no new nodes, so no duplicate pairs or statement-only node checks arise. Every non-elementary step is shorter than 2000 characters; each is one explicit construction or adjunction calculation. The generic off-unit tools are declared in split_report.tool_uses.
+
+I corrected the imported absence of a proof, not the statement. In particular the missing small-site proof in 070S was not replaced by a new node restating its conclusion. The work is checked against delivery-errors B-E: no invented searches, no new duplicate or hollow node, no use of another node's proof instead of its statement, and no additional geometric hypotheses. No SGA source is used.

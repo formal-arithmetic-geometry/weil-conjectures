@@ -1,0 +1,53 @@
+# Worker report: lem-per-henselian-component-dimension
+
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-henselian-component-dimension.json: statement, split into six proof steps; no Mathlib match for the whole item.
+- citations.json: one verbatim statement quotation for each of the fifteen step/node citations.
+- report.md: this report and the author's review.
+
+No new nodes and no new Mathlib leaves. Scratch contains only the local PDF text and the script used to write the sandbox JSON; neither is a delivery file. No Lean was written, compiled or built. The repository and both source checkouts were read only.
+
+## Attachments
+
+None for this item. Searches under /home/ubuntu/weil-src-slopmaster2/WeilConjectures for its blueprint id, henselian/component/dimension terminology and the relevant RingTheory files found no project declaration with the complete component comparison. The generic integral dimension equality already belongs to lem-weil-pbc-integral-injective-dimension-equal (its audit records ringKrullDim_eq_of_isIntegral); that is a dependency, not an attachment of this item.
+
+## WANTED
+
+None for this split. The item source and the Stacks inputs are present. The existing generic ind-etale lemma already has an expanded agent proof with local Stacks references; this delivery uses its statement, not its unavailable original archival source or anything hidden in its proof.
+
+## Findings and changes
+
+The sandbox had searches.jsonl but no item copy, split or report. I read and reused all nine logged queries and their returned names, including the second leanfinder phrasing. The inherited item was unsplit, with no lean_audit or blueprint_update. Its statement agrees with ILO XIV 2.1.5, so I did not change it. The inherited mathlib_searches included query strings not present in Q41's log; the delivered search record uses the exact logged Q41 queries instead. The failed grep and unavailable Loogle call are recorded unavailable. The later malformed Loogle pattern returned a type error, not evidence of absence, and is likewise labelled unavailable. Successful semantic searches returned henselian root criteria, DVR or dimension-at-most-one statements, and generic spectrum results, not the item. I read Henselian.lean:108-145 and KrullDimension/Basic.lean and checked the generic spectrum hit against the already-existing minimal-prime node. No search was repeated and no unrun search is represented as this worker's query.
+
+The source's proof uses a flat integral surjective map and its components. I express the same route by minimal primes and the integral extension dimension equality. Integrality is not asserted for strict henselizations of arbitrary local rings: it is obtained over the henselian base using the existing generic ind-etale lemma and the universal property of henselization. This is precisely where the item's henselian assumption enters. The construction of the strict henselization is matched to the triples theorem before applying its properties; this avoids identifying two coordinate-ring constructions without a cited comparison.
+
+The chapter sec-deligne-laumon-a1 and unit sk-p-dl-a1-perverse were read, as was the blueprint ancestor lem-per-artin-gabber-affine-curve. This auxiliary node serves the dimension-normalization/immediate-specialization branch already recorded in blueprint.from. Its blueprint same_as is empty after searching the whole imported blueprint for henselian, henselization integral, and one-dimensional irreducible component. This is not the unit's key node, so no realized fields are changed. Existing generic local-algebra statements from other units are declared under split_report.tool_uses; their application does not replace a Fourier/perversity unit step.
+
+## Not duplicates
+
+No new nodes. Whole-DAG statement searches for strict henselization, integrality, flatness, going down, lying over, minimal primes and integral dimension equality found the existing nodes used here. No clause of this item was moved into a new node.
+
+## Review by Q41
+
+I read the PDF text of ILO, Expose XIV, Lemma 2.1.5 and its proof (printed p. 210), together with the neighbouring Proposition 2.1.4 and Lemma 2.1.6 to distinguish the strict-henselization claim from the completion claim. The source assumes a Noetherian henselian local scheme and a geometric point of its closed point, and asserts existence of a dimension-one component in either scheme. These are exactly the item's hypotheses and conclusion. No excellence, universal catenarity, normality, reducedness or finite residue field is required here. The adjacent completion lemma does need a different hypothesis for its converse and is not used.
+
+For Step 1, I opened lem-weil-pbc-etale-local-ring-triples: its final clause identifies the neighbourhood colimit with the triples colimit compatibly with each structural map. I then read all three clauses of lem-weil-pbc-strict-henselization-triples: they give a filtered etale presentation, locality with maximal ideal contracting to the chosen prime, and henselianity. The chosen prime is the closed point m_A; the separable closure is the one inside the geometric field. These are the hypotheses in lem-sc-strict-henselization-faithfully-flat. That node states faithful flatness, and def-weil-pbc-faithfully-flat-ring-map explicitly includes flatness. The ind-etale definition is applied to the filtered etale presentation, not used as an unproved flatness assertion. I read Stacks algebra.tex, lemma-strict-henselization (04GP), and more-algebra.tex, lemma-dumb-properties-henselization (07QM), including its faithful flatness proof.
+
+For Step 2, I read the complete statement of lem-trf-ind-etale-local-henselian-integral and checked its three hypotheses: B is henselian local, B is ind-etale over A, and its maximal ideal contracts to m_A, all supplied in Step 1. Its conclusion is integrality over the ordinary henselization of A_(m_A), not directly over A. I explicitly identify A_(m_A) with A by fractions and use the initial local-map property in def-weil-pbc-henselization-at-prime to construct mutually inverse maps. This is an elementary use of a universal property and not a new theorem node. I wrote how monic coefficients are pulled back through that isomorphism. I also opened lem-weil-pbc-faithfully-flat-universally-injective: it asserts injectivity of N to N tensor B, and taking N=A under the multiplication isomorphism gives the needed injective ring map. I read its source algebra.tex, Tag 05CK, lemma-faithfully-flat-universally-injective. Thus the later lying-over citation is used under both integrality and injectivity, not under faithful flatness alone without explanation.
+
+For Step 3, lem-sc-flat-going-down states exactly the prime-chain lifting property for a flat ring map. I read algebra.tex, Tag 00HS, lemma-flat-going-down. Given a prime below the contraction of a minimal prime of B, it supplies a prime below that minimal prime; minimality then forces equality. This argument establishes minimality of the contraction, and does not assume it for an arbitrary integral map.
+
+For Step 4, lem-weil-pbc-integral-injective-lying-over supplies a prime over every prime of A for an integral injective map, exactly the hypotheses obtained in Step 2. I read algebra.tex, Tag 00GQ, lemma-integral-overring-surjective. The second citation lem-weil-pbc-prime-contains-minimal-prime states existence of a minimal prime below a supplied prime, including the case I=0; I use that clause. Its contraction lies below the already minimal prime of A, so equality follows directly. This proves existence, not uniqueness, of a minimal prime above the original one.
+
+For Step 5, I opened lem-weil-pbc-integral-injective-dimension-equal and read algebra.tex, Tag 00OK, lemma-integral-sub-dim-equal. Its input is an injective integral homomorphism without a finite-module or domain assumption. The kernel calculation proves injectivity of A/p to B/q, and reducing a monic equation proves integrality; neither property is silently assumed to descend to arbitrary quotients. The cited statement therefore gives exactly equality of the dimensions of these quotient rings.
+
+For Step 6, lem-weil-pbc-spec-irreducible-components-minimal-primes states that all components are exactly V(p) for minimal primes. I read algebra.tex, Tag 00ES, lemma-irreducible, especially clause (3). The next node lem-weil-pbc-spec-quotient-homeomorphism-zero-locus states the homeomorphism Spec(R/I) to V(I); I read algebra.tex, Tag 00E5, lemma-spec-closed. Finally def-weil-pbc-krull-dimension-ring explicitly identifies ring dimension with the topological dimension of Spec; def-kun-topological-krull-dimension supplies the inherited statement convention. Hence the dimensions compared in Step 5 really are the component dimensions in the item. Steps 3 and 4 supply the two existence directions. No unproved assertion about images of components or closedness of an integral morphism is hidden in this step.
+
+I checked small cases: for a field (including a separably closed field) both sides have only zero-dimensional components; for an Artinian henselian local ring the quotient comparison likewise cannot produce a dimension-one component; for a strictly henselian DVR the unique minimal prime has dimension-one quotient and the conclusion is consistent with the identity strict henselization. For a reducible henselian ring the argument treats each minimal prime separately and allows several primes upstairs over one downstairs. Nilpotents are allowed throughout, because all component identifications pass through prime quotients. The zero ring is excluded by the supplied geometric closed point; the proof never chooses a prime without either that setup or a lying-over/minimal-prime theorem.
+
+I checked delivery-errors B through E against the actual node statements: no new unsplit node contains a proof, no new definition or duplicate is introduced, every non-elementary input is an explicit uses citation, and citations.json quotes verbatim from those statements. The identification and quotient arguments are written out rather than hidden behind 'transport'. All six non-elementary steps are below 2000 characters (692, 850, 361, 513, 501, 847 before any mechanical repair), so none conceals a long independent lemma. proof_deps is exactly the union of the uses lists. Statement and source fields, creation provenance and blueprint.from were retained. No statement dispute was found.
+
+## Unfinished work
+
+No mathematical gap remains in the stage-1 split. Server validation and the delivery result are recorded below when available.

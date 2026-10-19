@@ -1,0 +1,81 @@
+# Stage 1 repair: lem-trf-nearby-cycle-sheaf-finiteness
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-nearby-cycle-sheaf-finiteness.json`: statement unchanged; eleven proof steps, one conditional constructibility input and separate uniform vanishing argument.
+- `dag/nodes/sec-trace-formula/lem-trf-psi-good-oriented-cohomology-strata.json`: statement-only, unsplit; no Mathlib match after five authenticated searches, including two semantic phrasings, Loogle and Mathlib grep. It gives finite oriented strata under a Psi-goodness hypothesis, with no degree bound.
+- `citations.json`: one verbatim statement quotation for every node used in every numbered item step.
+
+One new node, zero Mathlib leaves. The rejected, unlanded `thm-trf-nearby-cycle-bounded-constructible` is removed from the delivery. The original returned item, child and report are retained outside `dag/` as `returned-*.json` and `returned-report.md`; the immutable review packet remains available. Search receipts for the replacement input are in `searches.jsonl`. The item's historical Mathlib records remain as on current main; the rejected child's unauthenticated searches are not reused or asserted to have run.
+
+## Attachments
+
+None. Searches by the item id, nearby-cycle terms, `nearbyCycle` and `NearbyCycle` in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` returned no declaration. The master source is reference material, not attachment evidence. No Lean was written or compiled.
+
+## WANTED
+
+WANTED: local archival copy of Lu–Zheng, *Duality and nearby cycles over general bases*, v7, https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf, Example 4.26(2), Theorem 4.27(2) and the following definition and proof, printed pp. 36–37, for `lem-trf-psi-good-oriented-cohomology-strata` and this item. I read these pages online.
+
+WANTED: local archival copy of Illusie, *Around the Thom–Sebastiani theorem*, https://www.imo.universite-paris-saclay.fr/~luc.illusie/Illusie-nearby-cycles28.pdf, Sections 1.3–1.6, formula (1.12.6), Theorem 1.14 and Corollary 1.15, for this item's geometric restriction and degree bound. I read these passages online.
+
+WANTED: local archival copy of Illusie, *Grothendieck and vanishing cycles*, https://afst.centre-mersenne.org/item/10.5802/afst.1667.pdf, printed pp. 85–86, for the item's historical source. I read it online to distinguish its arithmetic-generic input and cyclic coefficients; it is not used to justify an arbitrary-geometric-input theorem.
+
+## Repairs to the returned head
+
+I read the full `review.md` for returned head `7951fb39bea63d33710b1051d78bd9d0acfb1e13` and compared the delivered files there with the retained sandbox and the current shared main copies, using file reads only. Current main still has this item unsplit and has no rejected child. Its statement and provenance are preserved. The repair starts from that current item and retains its historical search entries and ancestry.
+
+D1/D2: the former Step 1 and stronger full-finiteness child are discarded. The proof now constructs a total-scheme sheaf, establishes its Psi-goodness, obtains conditional oriented strata, pulls them back and descends the resulting trivializations, and proves uniform vanishing independently from the fibre-dimension and strict-local Gabber bounds. The replacement child neither states geometric nearby-cycle finiteness over a trait nor asserts boundedness. Its extra Psi-goodness hypothesis is proved by an existing independent node. The geometric-slice comparison and uniform bound also come from independent existing nodes. This is an argument combining distinct inputs, not an application of a renamed parent.
+
+C4: the replacement input is exactly the sheaf-in-degree-zero instance of Lu–Zheng Theorem 4.27(2), with the finite-partition conclusion spelled out. The theorem explicitly allows Noetherian rings killed by an invertible integer, and its following proof explains that coefficient generality. Our finite ring is Noetherian, so there is no unsupported extension from cyclic coefficients and no change of coefficient category. The input is the total-scheme sheaf j_!F, not an arbitrary complex on a geometric generic fibre. Step 7 only restricts this actual sheaf. Steps 5–8 account for the algebraic versus separable closure conventions, including imperfect separably closed residue fields. The old exactness argument is retained in Step 11.
+
+F1–F2: the following review records which source and hypotheses were checked in every step and gives an accurate file list. The former claims that Illusie 2021 directly covered all finite rings and all geometric-generic inputs have been withdrawn. No statement dispute or change of the item was needed.
+
+## Not duplicates
+
+Before creating the replacement I searched the whole DAG by nearby-cycle/constructibility terminology, Psi-goodness, finite partitions and the source places 4.27 and 1.6.1; I searched the whole imported blueprint with `blueprint_refs.py search` for nearby, Psi-good, oriented, nearby constructibility and 4.27 (and inspected the constructibility inventory), and searched the Lean source by the same notions. The ancestry command gives `lem-trf-local-term-locality`. I opened the following candidates rather than inferring their content from their names.
+
+lem-trf-psi-good-oriented-cohomology-strata vs lem-trf-orgogozo-good-modification: same paper and theorem number, but the existing node is clause (1), existence of a modification making a pair good; the new input is clause (2), constructibility of the cohomology of an already good pair. Neither statement contains the other conclusion.
+
+lem-trf-psi-good-oriented-cohomology-strata vs lem-trf-trait-nearby-base-change: the existing node asserts base-change invariance over a trait, with no cohomology-stratification conclusion. We cite it to discharge the new input's essential hypothesis.
+
+lem-trf-psi-good-oriented-cohomology-strata vs lem-trf-nearby-cycle-finiteness-exchange: the existing package concerns the project's fixed trait and coefficients, includes geometric-generic finiteness, finite Tor and exchanges, and depends on this item. It cannot supply an independent input here. The new result is conditional, on the total-scheme oriented topos over a Noetherian base, and has no boundedness or exchange clause.
+
+lem-trf-psi-good-oriented-cohomology-strata vs lem-trf-geometric-duality-uniform-range: the existing node includes duality and bounds under excellence and equal-positive-characteristic hypotheses and specialized coefficients. It is not this conditional oriented-strata assertion and cannot be applied to an arbitrary strictly henselian DVR.
+
+lem-trf-psi-good-oriented-cohomology-strata vs lem-trf-good-oriented-nearby-kunneth: the existing node is a conditional tensor comparison, not a constructibility theorem.
+
+There is no new Stacks-tag duplicate. The parent is not replaced by either of its downstream packages. No chapter or unit records are changed.
+
+## Review by Q46
+
+I reread the node statements alongside the actual primary passages. For the historical statement, Illusie 2021 Sections 1.1–1.2 uses arithmetic-generic K and Z/ell^nu; that passage alone does not justify the former child's claims. For the new node, I read Lu–Zheng v7 Theorem 4.27(2), its immediately following constructibility definition, and its proof. The theorem assumes finite presentation, finitely many irreducible components of the base and a Noetherian torsion ring with invertible annihilator. A Noetherian base has finitely many components; a finite ring is Noetherian since its ideal set is finite. A constructible sheaf in degree zero is a Dc input. The actual conclusion is constructibility of each cohomology sheaf, which is the finite-partition assertion written in the new node; no cohomological bound is claimed there. Its locally constant finite-type values are finite because Lambda is finite. The statement is self-contained, all its notions have definition dependencies, and its proof and proof dependencies are empty as required for a new unsplit node.
+
+Step 1: I read the affine quasi-compactness, finite-type-over-Noetherian and finite-type-Noetherian-finite-presentation node statements. They give exactly the three geometric facts used. Stacks 01T6 (`lemma-finite-type-noetherian`) and 00FP give the corresponding source facts. Here R is Noetherian by the item, S is affine, f is finite type and separated, hence quasi-compact and quasi-separated. Thus the finite-presentation hypothesis in the new input is actually supplied. The generic open D(t) is valid because a DVR has just the generic and closed primes.
+
+Step 2: I read the extension-by-zero definition, the two clauses of `lem-weil-pbc-extension-by-zero-stalks`, the geometric-stalk conservativity statement and the finite-stratification definition. Stacks 03S3 and 03S5 (`definition-extension-zero`, `proposition-describe-jshriek`) give precisely the construction and stalk values. Restriction on the open follows directly by sheafifying the same presheaf there. Vanishing on the complement is detected after forgetting constant-Lambda module structure to abelian sheaves. Appending the zero stratum gives the finite locally constant trivializations required by the constructibility definition. This elementary extension argument is written in the parent, not promoted to a new lemma. It does not require finite Tor.
+
+Step 3: the entire `lem-trf-trait-nearby-base-change` statement gives Psi-goodness of the bounded total-scheme input, with a finite ring killed by an invertible m. I read Example 4.26(2); it includes spectra of valuation rings, not just excellent or algebraically closed-residue traits. With m=ell^n all its coefficient hypotheses hold. This node has no path through the item in its own proof input.
+
+Step 4: the new input's finite partitions are exactly what this step takes. Every hypothesis has been established in Steps 1–3. Unlike the former child, this invocation gives neither automatic goodness nor the eventual vanishing conclusion.
+
+Step 5: I read `lem-weil-pbc-etale-residue-field-extension-separable` and `lem-sc-etale-henselian-ring-lift`, and checked Stacks 02G8 and 08HQ (`lemma-unramified-etale-fibres`, `lemma-map-into-henselian`). The etale residue extension at the chosen point equals k because it is separable algebraic over the separably closed k. The henselian lift uses target R and its actual quotient R→k, so its residue map is surjective as required. Uniqueness gives compatible sections of the pointed affine neighbourhoods; the identity pointed object is initial, which computes the defining limit. This explicitly verifies that the strict base in the geometric-slice statement is our S.
+
+Step 6: I read the integral/radicial/surjective criterion and the cover-preserving topological-invariance statement, checking Stacks 04DZ (`theorem-topological-invariance`). The purely inseparable extensions need not be finite; algebraicity still makes their field maps integral, and their residue extensions are radicial. Universal-homeomorphism base change is part of the definition. Transporting the finite-operation module data along the sheaf equivalences gives exact constant-Lambda module equivalences. No condensed or pro-etale coefficients are introduced.
+
+Step 7: I read every clause of `lem-trf-nearby-geometric-slice` and Illusie's formula (1.3.4). Its input is L on X, and its conclusion uses the restriction L on the chosen geometric generic fibre. This is our pi^*F after the explicit field equivalence. The equality j_a=jbar h is checked, and the derived composition with h_* is justified using preservation of injectives by an exact equivalence; it is not an unproved arbitrary base-change claim. The result is an isomorphism with a^*C on X_(k^a), not a silent identification of different closed fibres.
+
+Step 8: I read the universal property and inverse-image description in `lem-trf-oriented-product-universal`, and the exact constant-coefficient pullback convention in `def-trf-oriented-nearby-cycles`. The factorization uses first projection into X_alpha and second projection at the generic stratum. Pulling back a trivializing cover leaves its constant finite module values unchanged. The topological-invariance statement explicitly preserves and reflects covers, which descends these trivializations along each Z_alpha×_k k^a→Z_alpha. The Z_alpha are finite constructible locally closed strata of X_k because X is Noetherian. This proves precisely the constructibility definition, without supposing that arbitrary inverse image preserves an unspecified finiteness notion.
+
+Step 9: I opened `lem-fin-finite-type-fibre-dimension-bound` and `lem-trf-gabber-strict-local-torsion-bound`, and read Stacks 0A3V and Illusie Corollary 1.15 under Theorem 1.14. The former requires finite type and quasi-compact base, both established; the latter accepts every sheaf on the strict localization over a Z/m-algebra, with dimension bound d. No constructibility, excellence, perfection or finite-Tor condition is hidden. The same d works for every x.
+
+Step 10: `lem-trf-oriented-nearby-strict-local-description` explicitly gives sigma_x^* R Psi_f L = R f_(x)* L_(x), exact inverse images and joint conservativity. These are its statement, not facts taken from its proof. I read Illusie (1.12.6) for the formula. Applying it to the sheaf L and using Step 9 kills every G_q for q>2d. Exactness of the geometric restriction and the equivalence a^* transfers this single bound to C; this avoids confusing stalk-dependent bounds with eventual global vanishing.
+
+Step 11: I reread `prop-weil-pbc-inverse-image-modules-exact`, including its constant-ring identification and compatibility with forgetting module structures, and `def-weil-pbc-direct-image`, including its module-sheaf paragraph and H^q definition. Stacks 04JC (`lemma-flat-pullback-exact`) agrees. Preservation of kernels and images is the written elementary reason for H^q i^*=i^*H^q. This is the returned delivery's correct formal step, kept after the two independent finiteness arguments.
+
+I checked the following small cases against the item and the new node: zero ring, zero sheaf, X empty, X_eta empty (including a vertical total scheme), identity trait with a constant finite module, and d=0. For R=k[[t]], Lambda=Z/ell^2 and F the constant Z/ell module, the method applies although F has infinite projective dimension as a Lambda-module. For imperfect separably closed k, the separate purely inseparable comparisons are necessary and are included. The new input alone has no vanishing claim, and its hypothesis of goodness is never dropped even in these tests. Finite presentation over the Noetherian base was checked before applying it. No target statements or coefficient-category identifications were changed.
+
+For B1–B9 and C1–C5 I checked that the replacement node is statement-only, complete and in TeX, that its searches are real receipts, that every cited statement supplies the claimed fact, and that the two small extension/restriction arguments are parent steps rather than extra nodes. All eleven steps are below 2000 characters (the longest is about 1120), and I reread them for hidden non-elementary assertions regardless of length. Generic off-unit tools are declared in `split_report.tool_uses`: prescribed-residue henselian lifting, topological invariance, and the uniform fibre-dimension bound. They supply auxiliary hypotheses and identifications; they do not change the normal-cone unit route. The sources opened here are Stacks, Illusie and Lu–Zheng; no prohibited SGA source is used.
+
+## Remaining work
+
+Only the one new conditional oriented-stratification theorem is left unsplit; its future worker has its precise primary source and complete statement. The current item has a complete natural-language proof. Server preflight passed in the dry run at `a1c4b6f2d7`; the initial citation-length diagnostics were repaired by replacing the short excerpts with the complete relevant statements or paragraphs. The final files are revalidated before the authorized push. The geometric finite-presentation step also spells out why the closed diagonal is quasi-compact. No Lean or build tool was invoked.

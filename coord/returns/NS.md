@@ -1,0 +1,50 @@
+
+
+## lem-cbc-comparison-pullback-sections (2026-10-14 17:38 UTC, branch head 99eb4cc3db)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-cbc-comparison-pullback-sections: lem-cbc-comparison-pullback-sections: no longer stage-1-open; live completion takes priority Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-pur-co-smooth-composition (2026-10-15 23:11 UTC, branch head f2dc6bd154)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-pur-co-smooth-composition: coord/.merge.lock held for 120 s by pid 3123252: /usr/bin/python3 tools/merge_delivery.py NQ lem-kun-unbounded-exchange-agrees --stage 1 --reviewer NT-Codex-NQ-4edf9df8f --head 4edf9df8f213665f2fee00d7ef42317bfbe740e9 --spot-checked The mathematical split and six proof steps check out, including the corrected H^0 formulation, cited Stacks sources, coefficient categories, edge cases, and duplicate/search checks. The statement contains a TeX/JSON escape defect in its first comparison: `\\nu^{-1}\\iota_V` is stored/rendered incorrectly; it must be `u^{-1} Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## def-pur-dnc-section-family (2026-10-16 00:27 UTC, branch head 8c12a90136)
+
+L: approved by the reader, but the landing refused it: NOT MERGED def-pur-dnc-section-family: coord/.merge.lock held for 120 s by pid 3843898: /usr/bin/python3 tools/merge_delivery.py Q21 lem-coef-finite-dualizing --stage 1 --reviewer NT-Codex-Q21-c3a742b79 --head c3a742b79af08edfcaa8e87225e20a6f09ca58a6 --spot-checked Read the full item, report, all 44 cited statements, chapter/unit route, and cited source passages. Verified all 11 steps, specified coefficient map, boundedness domains, counit/locality/cocycle calculations, edge cases, and finite pro-étale scope. No new nodes, duplicate replacement, dependency cycle, or target weakening found. Acc Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## thm-sf-pf-adic (2026-10-16 01:20 UTC, branch head b22744a1b7)
+
+L: approved by the reader, but the landing refused it: NOT MERGED thm-sf-pf-adic: cited node thm-sf-pf-finite: statement changed since the reviewed delivery; rebase and revalidate the citation Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+
+
+## lem-coef-finite-free-extension (2026-10-16 05:18 UTC, branch head abfd9a9aa5)
+
+L: independent stage-2 immutable head abfd9a9aa552: H3/H5: the delivered theorem replaces the node’s five canonical isomorphisms, quantified constructible/Tor domains, coefficient quotient data, and coherence clauses with unconstrained Prop fields. It also uses an arbitrary ring map/module instance and Finite B, so it does not state canonical finite freeness. review.md records compiler evidence and required correction.
+
+## lem-sp-proper-open-tower-comparison (2026-10-16 05:28 UTC, branch head a5943c43ea)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-sp-proper-open-tower-comparison: lem-sp-proper-open-tower-comparison: no longer stage-1-open; live completion takes priority Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-sp-filtered-homology-tower-forward-representatives (2026-10-17 04:26 UTC, branch head cd97b1774d)
+
+L: independent stage-2 immutable head cd97b1774d81: incremental DAG validation: blueprint: lem-sp-filtered-homology-tower-forward-representatives: blueprint.from.node lem-sp-filtered-homology-tower-differential is not a blueprint node
+
+## lem-sp-completed-pullback-adjunction (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 3 (2039 characters); step 4 (2032 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 3 (2039 characters); step 4 (2032 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+## lem-pur-closed-support-exceptional-comparison (2026-10-17 19:07 UTC, branch head e5a92eebf2)
+
+L: independent stage-2 immutable head e5a92eebf294: H3/H6: e is an arbitrary family of bijections, not the relative exceptional adjunction of thm-sf-ambient-adjoint-class(2) (ComparisonClassAdjunction.homEquiv at Compactification.ofIsProper i). The theorem is false as stated: negate e at B alone; T=B0 pins phi, then the counit clause gives -eps0=eps0, false over Z/3 with B0!=0. Restate with e from ComparisonClassAdjunction and a canonical P_c=i_* comparison with supportClosedDerivedPlus, not an arbitrary iso. H3: T must range over bounded-below etale-origin objects (EtaleOriginWitness/plusEtaleOrigin), not all of D+. H3: drop the added hypothesis hB (B bounded constructible); the node asserts etale origin of B0 and B, which follows from hB0 and from the formula. H4: use the recorded intrinsicFiniteTorsionConstructible, or a 1(B)-noted transport, instead of DerivedCategory.boundedConstructible. H13/H4: drop the BoundedDerivedSubcategories module, which duplicates Mathlib DerivedCategory.Plus/Minus/Bounded (the node's exact mathlib_match) and is not imported by the item. H11: the second reading missed all of this. Compile: nt_compile --json on both files, rc=0, clean.
+
+## lem-zl-proper-unit-condensed-realization (2026-10-18 00:27 UTC, branch head 85e3dee898)
+
+I read the whole delivery: the item, all four steps, and the full statement of every cited node. There are no new nodes. Batch-5 check: lem-sp-et-proet-coefficient-compatibility is a finite-coefficient compatibility between étale and pro-étale compact-support coefficient changes. Neither assumption gives it and it is not a step of either proof. The flagged path ends at lem-pod-lisse-module-sheaves-as-module-objects, a general lemma about lisse sheaves as module objects that is reached through proper base change, so this citation is acceptable and is not why I return. C4/E4 (step 2): the step defines b_{h,R,M}: P_RM -> P_RM', a morphism on s, and sets d_{h,.} := T_f^c(b_{h,R,M}). But lem-weil-compact-support-reduction-tower-functor makes T_f^c a functor D(A_X) -> D(Tow(A_Y)). It only accepts morphisms on X, so the expression typechecks only when X = s and f = id. Read as T_{id_s}, it gives a map between reduction towers of P_RM, and no cited node identifies those with T_f(M) at the level of whole towers. So the tower morphism T_f(M) -> T_f(M') that the item explicitly requires is never constructed. That was the point of the previous return, and it is still open (G2). Step 2 also cites no node for an integral adjunction Lh*_comp -| Rh_*. C4/E5 (step 3): a_{f,E,K} in lem-pur-compact-support-condensed-realization is natural in K and compatible with refinement, but it is not stated to respect composition of morphisms (a_{fh} against a_f and J Rh_* = Rh_{c,*} J) or proper coincidence. The proper-unit map does not have the form P_R(phi), so naturality in K is not enough. lem-cbc-strict-tower-proper-open-calculus is stated for towers over a constant ring B_T, mentions neither J nor a, and does not cover the completed-coefficient towers of T_f^c. Steps 1 and 4 are acceptable on their own; step 1 can use the trivial compactification of the proper map h. Edge cases: h = id and M = 0 give the identity and zero squares, so the statement is fine there. No fixes written; details are in review.md.
+
+## det-sp-tower-gluing (2026-10-19 00:13 UTC, branch head 4b980019a8)
+
+L: independent stage-2 immutable head 4b980019a8ce: Read item node, 19 steps, all stmt_deps, the 660-line module SmoothPurityTowerGluing.lean, report, live CoefficientTowerShriekCalculus.lean and the prior NF reviews. nt_compile --json clean (32.6 s). Hypotheses, clauses 2-3 (represents/unique/adjunction/levels/unit/counit/CoefficientComparison/reduction), non-hollow defs, docstrings, statement verbatim and edge cases are OK. R1 (H2): stmt_deps adds theorem lem-sp-coefficient-tower-shriek-calculus, but the statement uses only plain defs/abbrevs/structures of Sheaf.Paper.CoefficientTowerShriekCalculus (Coordinates, C, inclusion, F, realization, etalePullback, openExtension, openComposition, Evaluation, quotient, reduction; no .choose) -> add a definition node owning that module (existing:true listing those decls), cite it instead of the theorem, keep the theorem in proof_deps. R2 (H3): clause 1 counit pin ChartTraceNormalization uses an existential natural iso beta (eval_n chart object ≅ affineTraceRight/ordinaryFinitePullback model); by uniqueness of representing pairs any representing epsilon (e.g. -epsilon) satisfies it, so the fibre-sum-then-P1-integration normalization is lost -> replace beta by the canonical comparison built from the calculus evaluation/pullback comparisons, levelwise twist via TateTower.projection matched with the OrdinaryFiniteTwistTransport twist, shift commutation and originIso (construct missing helpers in the same delivery), and update the docstring.

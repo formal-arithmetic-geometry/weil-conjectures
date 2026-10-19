@@ -1,0 +1,55 @@
+
+## lem-weil-integral-scalar-extension-well-defined (2026-10-14 17:39 UTC, branch head d9205b1f14)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-scalar-extension-well-defined: lem-weil-integral-scalar-extension-well-defined: no longer stage-1-open; live completion takes priority Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## thm-fin-deligne-generic-open (2026-10-14 17:42 UTC, branch head 75b92a2aa0)
+
+L: approved by the reader, but the landing refused it: NOT MERGED thm-fin-deligne-generic-open: thm-fin-deligne-generic-open: no longer stage-1-open; live completion takes priority Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-weil-pbc-weak-etale-integral-closure (2026-10-14 18:40 UTC, branch head 0838135937)
+
+Full reading recorded in review.md. C1/C2/D3: step 1 treats uncited valuation-separation and product weak-dimension theorems as elementary. C1/C5: step 3 omits existing lying-over, faithful-flatness and equalizer-descent citations. B3: missing definition dependencies. F2/F5: second reading describes removed nodes and a flag absent from the final delivery. More than three repairable faults; no counterexample found to the item statement.
+
+## lem-amb-p1-diagonal-integrals (2026-10-16 04:47 UTC, branch head ab9be6405c)
+
+L: independent stage-2 immutable head ab9be6405c4d: file-only compilation failed: preliminary Sheaf/AlgebraicGeometry/OrdinarySupportedKummer.lean
+timeout after 60 s: the fault is usually a definition that is expensive to unfold, not the limit
+
+
+## lem-exc-constant-tensor (2026-10-16 04:53 UTC, branch head 464b69e393)
+
+L (re-issued by the launcher; the entry had been lost): r-datum --stage 1 --reviewer NT-Codex-NY-105cbaf87 --head 105cbaf87fa0e0da457ab58c727cd18eb70960ed --spot-checked Read the full item, unit, chapter, master source, report, all 17 dependency statements and cited sources. Verified hypotheses, coefficient stages, base-change morphisms, compact-support direction/domain, constructible exceptional adjoint distinction, edge cases, duplicate status, route, and Mathlib searches. No faults or repairs required; review.md records the checks. --verdict PASS
+
+
+## prop-exc-base-change-proper (2026-10-16 04:53 UTC, branch head 54b8f26c4a)
+
+L (re-issued by the launcher; the entry had been lost): reviewer NT-Codex-NJ-5bcfca90e --head 5bcfca90e70d99c3f86221a07d9f9a53125e94cf --spot-checked Read the full item, report, cited statements, source passages, and unit/chapter route. All six steps check, including the canonical comparison’s normalization and tower compatibility. Edge cases and duplicate/dependency searches found no gap or cycle. No new nodes, fixes, or accepted tool_uses. Detailed checks are in review.md; no target-level coefficient-category comparison is inferred. --verdict PASS
+
+## lem-sf-unbounded-compact-support-proper-composition (2026-10-16 05:19 UTC, branch head 761cdce727)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-sf-unbounded-compact-support-proper-composition: coord/.merge.lock held for 120 s by pid 3899732: /usr/bin/python3 tools/merge_delivery.py Q09 def-weil-point-fg-complete-complexes --stage 1 --reviewer NT-Codex-Q09-c11642d41 --head c11642d41f89636fded4141f370039aa584bd918 --spot-checked Read the item, full report, all five dependency statements, cited source passages, and unit/chapter route. All three category conditions match the source; edge cases pass. No new nodes, cycles, missing citations, or unsupported coefficient comparisons found. Exact archived target morphisms and cat Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-asd-etale-finite-twist-pullback (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 2 (2324 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 2 (2324 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+
+## lem-amb-unbounded-compact-support-comparisons (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 7 (2762 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 7 (2762 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+## det-pe-finite-local-systems-type (2026-10-18 02:09 UTC, branch head 3361d77f05)
+
+L: independent stage-2 immutable head 3361d77f0558: All clauses match node: X : Scheme.{t}; Λ with ULift coefficient lift; Λ_X = constantSheaf on ProEt.topology composed with forget₂; hF = recorded IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses with Module.FinitePresentation models, varying per member (definition read); hM/hR give exactly one representative per iso class (∃!); U : R → X.Opens with IsClopenDecomposition and IsColimit of the cofan of (U r).ι; per-r covers of ProEt.mk (U r).ι with model fixed to M r. No extra assumptions. Empty X/pieces, zero ring, infinite R, universes t/u/v all fine. Statement verbatim, docstrings with source/blueprint and 8 proof steps, sorry only, no definitions, no pro-etale substitute. nt_compile (side overlay) clean in 2.5 s, reproducible. Second-reading section is an admitted self-check (noted). FAULT (delivery-errors H2/H12, statement must rest on definitions): stmt_deps adds theorem node lem-galois-coproduct-copies-morphisms-clopen, but the Lean statement uses only the def AlgebraicGeometry.IsClopenDecomposition (CoproductCopiesMorphismsClopen.lean:31) from its module; the theorem's conclusion is not needed. Correction: in this delivery create a definition node (item chapter, §5/H12 fields, source Groupoids 03YW/Schemes 01JB) owning a module with IsClopenDecomposition (source/blueprint docstring), import it in the item, and cite that definition node in stmt_deps instead of lem-galois-coproduct-copies-morphisms-clopen (keep the lemma as proof dependency only); recompile with nt_compile.py.
+
+## sk-lem-geo-cartier (2026-10-18 02:21 UTC, branch head a18c124ad2)
+
+L: independent stage-2 immutable head a18c124ad2da: Per-file compile reproduced clean (42.4 s, no errors or warnings). The étale family κ is uniquely pinned by SupportedKummerRelative (Ext^2_A(i_*A_D,-) equals Ext^2_Z(i_*Z_D,-) because i_*Z_D is Z-flat), so the étale Chern, exponent, coefficient (every φ) and base-change (every Cartier-preserving square) clauses are correct and not vacuous. The pro-étale c is uniquely the ν^*-transport of κ, and the comparison isomorphism is asserted. No hollow defs, sorry only in the theorem, docstrings and the record verbatim OK, edge cases OK. RETURN H3: the node's conclusions about c_D in D(Z_proet,Λ) are absent. (1) The composite of c with the pro-étale adjunction unit Λ_Z→i_*i^*Λ_Z=i_*Λ_D equal to ν^*c_1 is missing, and no pro-étale unit or c_1 is defined. (2) Coefficient compatibility of c for Λ→Λ' is stated only on étale κ. (3) Base change with the pro-étale g^*, the canonical exchange and the Tate-line pullback is stated only on étale κ. These need step-8 comparison theorems and are not in the statement; citers (det-prop-diagonal-tower-trace, sk-lem-geo-p1-cohomology) use the pro-étale composite. Correction: add the pro-étale Chern equation, coefficient square and base-change square for c in FiniteCoefficientDerivedCategory (finiteModuleAdjunction/finiteCoefficientDerivedDirectImage for the unit, finiteCoefficientDerivedPullback, comparisonDirectImageCanonicalMate, the canonical constant and Tate-line isomorphisms). H4: the recorded proEtaleSheafInverseImage and proEtaleConstantModuleDirectImage of the cited stmt_deps are unused; ProEtale.lowerStar (def-sfb-finite-lower-star, not in stmt_deps) is used with no §1(B) note. Use the recorded declarations or cite and note the substitution.
+

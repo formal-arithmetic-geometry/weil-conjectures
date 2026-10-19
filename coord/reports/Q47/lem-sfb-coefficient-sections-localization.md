@@ -1,0 +1,56 @@
+# Worker report: lem-sfb-coefficient-sections-localization
+
+## Files written
+
+- `dag/nodes/sec-proetale-coefficients/lem-sfb-coefficient-sections-localization.json`: statement, split into seven proof steps; no Mathlib match for the full statement.
+- `citations.json`: verbatim statement passages for all 17 step/node citations.
+
+No new nodes and no new Mathlib leaves. The sandbox also retains the actual search log and the local writing script; these are not delivery files.
+
+## Attachments
+
+None. Searched the read-only slopmaster2 `WeilConjectures/` for the exact blueprint tag and id, coefficient/section terminology, slice restriction and global-sections pullback. There is no declaration proving all clauses for arbitrary commutative condensed rings and their specified canonical alpha maps. `AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`, in `SixFunctors/ProEtale/LowerShriek/OpenImmersion/Defs.lean`, supplies only a related inverse-image/restriction comparison. `UpperLowerStar/Restriction.lean` has general section transport, and `GlobalSectionsMonoidal.lean` uses WeilCoefficients; these are not the full requested coefficient statement. The ModuleObject coefficient declarations named by the new blueprint are absent in this slopmaster2 source tree. I did not count the upstream master's sorry declarations as proofs.
+
+## WANTED
+
+None. All source texts used were present locally.
+
+## What needed repair
+
+The item was unsplit, with a correct self-contained statement and existing searches. I preserved its statement, provenance, source, original searches and blueprint ancestry. Its generic localization assertions already occur in the DAG; creating another localization or section-comparison node would duplicate existing work. The coefficient comparison needs more than the bare slice definition: its alpha maps come from pullback from the point, so their compatibility is proved using the existing canonical eta composition theorem, rather than asserted from an unspecified identification.
+
+The blueprint local-model discussion is the ancestor, not a proof of this technical coefficient lemma. I read the current main-20261015 local-model statement and proof and its DAG counterexample Steps 5–6. This item supplies precisely the evaluation, test-object restriction, and multiplication pullback used there. It does not identify condensed coefficients with constant sheaves or change the local-model unit's route.
+
+## Mathlib searches and existing-node search
+
+The original eight searches remain verbatim. Five additional actual searches were made with the required msearch.py command and are recorded from searches.jsonl: LeanFinder on pro-etale coefficient sections, Loogle on `CategoryTheory.Sheaf.over, CategoryTheory.Sheaf`, grep on `overPullback|pushforwardOverMapIso|overMap` in CategoryTheory/Sites, LeanSearch on sections of restricted ring sheaves, and a second LeanFinder phrasing on restriction and multiplication. All five services returned successfully. Read their hits: these include ordinary scheme sections, condensed evaluation constructors, `Sheaf.over`, `Sheaf.pushforwardOverMapIso`, the over-map adjunction, `Sheaf.ΓRes`, and ordinary module restriction lemmas. I read Mathlib/CategoryTheory/Sites/Over.lean:288 and 520–538 and GlobalSections.lean:60–85. They give useful general interfaces but do not prove the scheme pro-etale comparison with the canonical condensed alpha maps in one line. Hence the item remains a split, not a Mathlib leaf.
+
+Searched the whole DAG for localization tags and terminology and then read the statements of `lem-weil-proetale-weakly-etale-localization`, `lem-sfb-proetale-object-inverse-image-restriction`, `def-pur-localized-ringed-site`, and all other cited nodes. Blueprint search on localization, coefficient sections, and inverse-image restriction found no blueprint statement equivalent to the entire item. The broad localization search was followed by the specific searches: the coefficient-sections hit is a Tate-datum definition and is not this statement. The ancestor command identifies `det-def-sfb-constructible-local-model`, as already recorded. No new node is necessary.
+
+## Not duplicates
+
+No new nodes. Existing nodes were reused for site equivalence, arbitrary abelian/ring inverse-image restriction, coefficient composition, and scalar extension. In particular, the constant-coefficient module clauses of the localization node were not used as a theorem about condensed coefficient modules.
+
+## Unfinished work
+
+None in the split. This is stage 1 only: no Lean file was written and no compiler, Lake command, or build was run. Server dry-run and push results are recorded below after they finish.
+
+## Review by Q47
+
+I read Sites Definition 00Y0 and the following restriction formula, Lemma 03CE (`lemma-localize-given-products`) with its adjunction proof, and Lemma 03EH (`lemma-relocalize`). I also read Pro-etale Cohomology Tag 098T (`lemma-morphism-big-small`), which fixes the scheme base-change pushforward. For modules I read Modules on Sites Definition 04IX (`definition-localize-ringed-site`) and Lemma 03EL (`lemma-tensor-product-pullback`), together with the actual blueprint files defining the coefficient maps, module upper-star, extension of scalars and the eta-composition statement and proof. There are no new-node sources to certify. The original statement agrees with this localization construction and its canonical condensed specialization, and was not corrected or weakened.
+
+Step 1 uses the site-equivalence clause of `lem-weil-proetale-weakly-etale-localization`, including its explicit permanence assertion for maps between objects. This checks that h itself is eligible for localization. Clause (1) of `lem-sfb-proetale-object-inverse-image-restriction` explicitly covers arbitrary abelian sheaves and rings; the auxiliary ring A is harmless (choose Z). I checked that this clause, rather than clauses (2) and (3) about constant coefficients, is all that is used. `def-sfb-finite-upper-star` and `def-weil-proetale-inverse-image` have the same sheafified Kan-extension construction, so the identification applies to the exact abelian inverse image of the item. The bounded-site/skeleton convention is retained through the existing equivalence, not silently replaced by equality of chosen categories.
+
+Step 2 uses the final ring-isomorphism assertion of `sk-def-sfb-coefficient-morphisms`. Evaluation of that isomorphism gives theta, with no need for the coefficient sheaf to be constant. `def-pur-localized-ringed-site` explicitly gives the restriction values and maps. The remaining elementary argument identifies a compatible family with its value at the terminal object and verifies the ring operations by evaluation.
+
+Step 3 checks the unit, not just an abstract inverse-image isomorphism. I followed the indexing category of `def-weil-proetale-inverse-image`: its graph initial object in the localization lemma sends the unit's index to restriction along the first projection. Applying `def-sfb-eta` then gives the displayed coefficient-unit formula. Restricting along the diagonal yields theta because the first projection composed with the diagonal is identity. For h evaluated at the terminal object, V times_V W is W, so eta_h is exactly the section map alpha_h following inverse image. This also checks the monoidal-unit convention in the statement: the section map sends the pulled-back integer generator 1 to the restricted section. This is a short colimit-index calculation from the cited formulas, and is marked elementary.
+
+Step 4 applies the same formula to w=u h and restricts along the graph gamma=(h,id). I checked the domains: V is a B-object, V times_B W is a W-object, and gamma is a W-morphism. Naturality of the coefficient sheaf map is part of the morphism specified by `sk-def-sfb-coefficient-morphisms`. Its evaluation gives precisely theta_W(F(h)(s)), with the section s unchanged.
+
+Step 5 uses the full statement of `lem-sfb-eta-comp` with f=h and g=u. Its source construction of m, alpha and eta is the same inverse-composition comparison and mate used by the coefficient-morphisms definition. No new coherence hypothesis is imposed. `def-sfb-finite-lower-star-comp` states its sectionwise fibre-product comparison. I checked that P=V times_B V is over V by its SECOND projection: otherwise the diagram would not prove this formula. The base change of delta is gamma under (v1,v2,z) -> (v1,z), with v2=h(z). Naturality of eta_h along delta now gives the displayed equality. Steps 3 and 4 identify its sides with the two sides required by the item. Thus the non-elementary content is supplied by the cited eta theorem; the remaining calculation is a single component/naturality computation, not an unproved alpha cocycle lemma.
+
+Step 6 uses `def-sfb-module-upper-star` for the exact transport-and-extension functor, `def-sfb-modobj-extension` for its balancing coequalizer, and `sk-def-sfb-sheaf-tensor` for the sheafified tensor construction and preservation of colimits. The ambient category here is abelian sheaves with its symmetric tensor: the required coequalizer can be formed by sheafifying the presheaf cokernel of the difference, and the cited tensor statement supplies preservation by tensor. R and S are the actual inverse-image and target coefficient rings, and alpha_h is the actual scalar map. I verified balancing, both inverse equations for q, and compatibility with restriction. These are explicit elementary ring calculations. They do not presume that global sections commute with sheaf tensor products. Step 7 uses the morphism formula in `def-sfb-modobj-extension`; its equality is on the bilinear maps defining the sheaf tensor and therefore descends to the coequalizer. It gives multiplication by alpha_h(t), and Step 5 supplies the required value of that scalar.
+
+Checked small cases: h=id, V=B, empty V or W, the zero coefficient ring, s=0 and s=1. The empty-site terminal value is the zero ring and every displayed ring isomorphism still has that meaning. More significantly, for a non-monomorphic object such as V=B disjoint-union B, the diagonal is not discarded; the graph calculation still holds. No quasi-compactness, flatness of a module, finiteness of Lambda, or discrete-coefficient condition was introduced. The regular tensor calculation works even before using invertibility of alpha_h. I checked sections B–E of delivery-errors.md: no statement-only children with hidden proofs, no relabelled clauses, no uncited tags, no dependence on proofs of cited nodes, no forbidden SGA route, and no new node requiring a duplicate-pair explanation. All seven steps are below 2000 characters, including both non-elementary steps; their arguments and citations were read for mathematical content regardless of length.
+
+The three off-unit statements are declared in split_report.tool_uses. They are generic localization and canonical coefficient-composition tools, with no replacement of the local-model unit's proof. Every used node statement was opened, and citations.json copies its actual wording. There was no previous split or report to repair in this sandbox; the initial inspection found only restart-marker files and no active Q47 delivery process.

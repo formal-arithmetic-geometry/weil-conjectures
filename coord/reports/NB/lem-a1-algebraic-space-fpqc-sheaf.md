@@ -1,0 +1,61 @@
+# Stage-1 delivery: lem-a1-algebraic-space-fpqc-sheaf
+
+1. Files written:
+   - dag/nodes/sec-purity-real-sheaves/lem-a1-algebraic-space-fpqc-sheaf.json: existing statement, split in seven proof steps; statement retained, not a Mathlib leaf.
+   - dag/nodes/sec-purity-real-sheaves/lem-a1-qc-map-affine-etale-neighbourhood.json: new statement-only geometric lemma; unsplit, no Mathlib match.
+   - dag/nodes/sec-purity-real-sheaves/lem-a1-separated-lqf-fpqc-effective-descent.json: new statement-only scheme-descent lemma; unsplit, no Mathlib match.
+   - dag/nodes/sec-purity-real-sheaves/lem-a1-fpqc-sheaf-affine-criterion.json: new Mathlib leaf, AlgebraicGeometry.isSheaf_type_propQCTopology_iff with P=Flat, SheafQuasiCompact.lean:36.
+   - citations.json: one verbatim statement quotation for each proof-step citation.
+   - searches.jsonl: actual msearch records; no unrun searches have been added.
+2. Attachments: none. Searches of WeilConjectures in the read-only slopmaster2 source, both by the blueprint id and by algebraic-space/fpqc terminology, found no declaration proving this item. The master checkout is reference material only. The scheme and coefficient-function fpqc sheaf declarations do not state descent to arbitrary algebraic-space targets.
+3. WANTED: none; all sources used are in literature/stacks-project.
+4. The old item was a correct statement with no proof, not an attachment. Tag 04P2 explicitly refers its scheme-domain case to Gabber's Proposition 0APL in spaces-properties.tex. A direct citation of 0APL as a new node would merely rename the item, so the item instead contains the actual proof. The omitted affine-chart selection and effective separated locally quasi-finite scheme descent are separate geometric inputs. The omitted cocycle and invariant-map calculations are now explicit. The absolute Mathlib criterion has domain Sch, whereas E is initially a sheaf on Sch/S: the presheaf H of pairs (map to S, E-section) in step 2 resolves this domain issue rather than silently applying an absolute criterion on the relative site.
+5. Unfinished: the two new geometric lemmas are intentionally unsplit, with complete self-contained statements and their sources. Their later splits are separate stage-1 items. The current item's split is complete.
+
+## Sources and route
+
+Read the chapter sec-purity-real-sheaves and unit sk-p-real-rankin, and the ancestor lem-a1-affine-hc0, before expanding this auxiliary input. This is the fpqc morphism descent input to the representability branch through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. It does not replace either step of the Rankin unit. No unit or chapter file is changed; no SGA source is used.
+
+Read spaces-descent.tex, lemma-fpqc-universal-effective-epimorphisms (04P2), including its explicit reference to the scheme-domain case; then spaces-properties.tex, proposition-sheaf-fpqc (0APL), proof in full. Read the supporting special-cover statements 03FX and 03FZ and their proofs, and the point/topology formulation 03BX used there. The affine-neighbourhood node states precisely the finite selection of affine charts used by Gabber, with the projection's etale, separated, locally quasi-finite, and surjectivity properties. The source for local quasi-finiteness is 03WS in morphisms.tex.
+
+Read more-morphisms.tex, lemma-etale-separated-ind-quasi-affine (0AP9), whose statement is for every separated locally quasi-finite morphism despite its historical label; then more-groupoids.tex, lemma-ind-quasi-affine (0APK). This gives effective descent for the singleton fpqc datum in the new node without a quasi-compactness assumption. It is a theorem about scheme descent data, not algebraic-space-valued sections, so it is strictly different from the item.
+
+Read topologies.tex, lemma-sheaf-property-fpqc (022H), its (2-prime) equivalence and refinement proof. In the pinned Mathlib source read SheafQuasiCompact.lean:30-41 and Fpqc.lean:75-89, the Flat instances at Flat.lean:54,78,81, and the matching-family equivalence IsSheafFor.lean:968. The leaf is a one-line specialization P=Flat of the existing general theorem, followed by the displayed equality of topologies. The morphism-property instances are already present, so they are not extra geometric lemmas. Affine schemes may be replaced by their canonical spectrum presentations. The scalar flat-surjection condition is exactly the one-map affine fpqc condition. The leaf has no proof steps.
+
+## Review by NB
+
+I checked delivery-errors B through E against the actual statements and sources, not only the JSON shape. The imported statement is correct as written, including arbitrary fpqc families, arbitrary scheme bases, and the absence of separatedness or finiteness on E. No STATEMENT-DISPUTED correction is needed.
+
+Step 1 uses the definition of algebraic space for the representable diagonal and for evaluation on scheme tests; it does not take fpqc descent from that definition. The equality fibre P is a scheme. Its projection is monic because equality over a test map contains no additional data. The scheme-target descent node gives exactly both existence and uniqueness of the local lifts into P, and its uniqueness also proves pr=id_T. It is not being used for descent into E. This establishes arbitrary-cover injectivity directly, including nonseparated targets.
+
+Step 2 uses the actual fppf sheaf property in def-trf-algebraic-space and the covering interpretation in def-pc-fppf-site; Zariski gluing of scheme maps is written locally in continuous maps and structure-sheaf maps. H is a presheaf on all schemes in the fixed universes, so the new absolute Mathlib criterion applies to precisely this H. Scheme-target fpqc descent gives the map to S before the affine existence argument is attempted. Uniqueness of its base map and the already proved relative injectivity give uniqueness for H. This avoids relying on a nonexistent relative version of the Mathlib statement.
+
+Step 3 uses the new affine-neighbourhood node for every one of the asserted properties of V, including local quasi-finiteness. The affine source T-prime is quasi-compact; the target E need not be. The definition of descent datum is exactly the isomorphism and triple-overlap cocycle that the step verifies. The scheme fibre-product node states its universal property and functoriality, which justify keeping the U coordinate and all base coordinates unchanged. No theorem about descent of V is hidden in this construction.
+
+Step 4 uses the new effectivity node with precisely the separated, locally quasi-finite projection supplied in step 3. It gives W and an isomorphism inducing the datum, not merely a descended underlying space. The existing etale-descent node states descent of etaleness after an fpqc family, so it applies to W->T after the isomorphism identifies its base change with V. The covering definition supplies pointwise surjectivity of f. The argument lifting t to t-prime and then to V proves surjectivity of W directly. There is no inference from scheme-theoretic image containment, and no quasi-compactness assumption is used on V.
+
+Step 5 uses base-change stability of fpqc coverings to obtain W-prime->W. It writes the invariance needed to apply scheme-target descent to b-prime: the descent isomorphism fixes the U coordinate. The target U is a scheme; the cited node really glues such morphisms. The same node's uniqueness for target S proves that b is an S-map. The equation a-prime|W-prime=c follows from the defining fibre product V and is stated explicitly.
+
+Step 6 uses the base-change covering statement again on R=W x_T W, and uses the established injectivity of step 1 for maps R->E. The etale definition supplies flatness and local finite presentation, making the surjective etale map W->T an fppf cover by def-pc-fppf-site. The algebraic-space definition is now used only for its genuine fppf gluing condition. For the required restriction af=c, the comparison cover is V->T-prime, which is surjective etale by the neighbourhood lemma. Fppf separatedness of E on that cover proves the equality. Neither E's diagonal nor its atlas is assumed quasi-compact or proper.
+
+Step 7 uses the affine criterion only after both of its hypotheses for H were proved. Scheme-target descent uniqueness identifies the base map of the glued pair with the fixed structure T->S. This recovers an S-morphism and every required clause of the item. The quotation for each cited node is copied verbatim into citations.json; in particular none of the citations substitutes a definition for an effectivity theorem or a fully-faithful Yoneda statement for evaluation.
+
+Small cases checked: if T is empty, the empty family has the unique section because E is an fppf sheaf, and the H construction preserves that terminal value. In the neighbourhood node C empty allows U empty; for a representable E the chart construction specializes to the usual finite affine neighbourhood selection. A non-quasi-compact or nonseparated E is allowed, since only the image of C is compact and the chosen affine U is separated; V is expressly allowed not to be quasi-compact. In the effectivity node, the identity covering gives W=V, while the empty scheme causes no failure; the theorem's generality does not presume all etale morphisms descend effectively without separatedness. The cocycle on a triple product keeps a single U-coordinate, so repeated indices and diagonal overlaps also satisfy it. Arbitrary-index and empty-index cases of the main theorem are covered by the Mathlib sheaf criterion, not by an assumed finite coproduct argument.
+
+I reviewed the lengths of the seven steps: all are below 2,000 characters. The two independent geometric subclaims were made nodes rather than hidden in long steps; the remaining constructions and comparisons are explicit applications or fibre-product calculations. No new statement is a clause of the item. The datum-effectivity lemma is reusable for any separated locally quasi-finite scheme, and the chart lemma does not assert fpqc gluing. The affine sheaf criterion is in Mathlib and is recorded as a leaf, not queued as a new unsplit theorem.
+
+## Not duplicates
+
+Whole-DAG source-tag searches found no existing source-node pairs for the new nodes' tags (022H; 03BX,03FX,03FZ,03WS,0APL; 0AP9,0APK). Whole-blueprint searches for algebraic space, affine etale, separated locally quasi-finite, ind-quasi-affine, fpqc sheaf, and the relevant tags found no equivalent blueprint node. DAG statement searches also found no general fpqc sheaf criterion.
+
+lem-a1-separated-lqf-fpqc-effective-descent vs lem-trf-separated-lqf-fppf-effective-descent: the existing node assumes an fppf covering; the new one allows a singleton fpqc covering that is not locally of finite presentation. The existing statement cannot be applied to f:T-prime->T.
+
+lem-a1-separated-lqf-fpqc-effective-descent vs lem-trf-quasi-affine-fpqc-effective-descent: the existing node assumes a quasi-affine morphism (in particular quasi-compact). The new node permits a separated locally quasi-finite morphism not quasi-compact, and uses Gabber's ind-quasi-affine theorem instead. For example an infinite disjoint union of copies of the base is separated etale but is not quasi-compact over a nonempty affine base.
+
+lem-a1-qc-map-affine-etale-neighbourhood vs lem-trf-affine-etale-relation-separated-lqf: the existing node concerns projections and the relation map of a given etale equivalence relation on an affine scheme. It does not select an affine chart covering the image of a given quasi-compact source in an arbitrary space.
+
+lem-a1-fpqc-sheaf-affine-criterion vs lem-weil-pbc-fpqc-local-on-base-criterion: the existing node concerns locality/descent of a property of scheme morphisms, whereas the new Mathlib leaf characterizes a set-valued presheaf's sheaf condition.
+
+## Generic tools from other units
+
+The split_report.tool_uses declarations request the existing scheme-target descent, fpqc base-change, and etale-descent lemmas as geometric tools. No node of sk-p-real-rankin supplies these general facts; using them implements the existing auxiliary descent route. No maintainer-owned tool_uses field was set.

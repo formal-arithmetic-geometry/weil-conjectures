@@ -1,0 +1,45 @@
+# Worker report — Q76
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-nondegenerate-simplex-comma-initial.json`: statement, split; no complete Mathlib match. The statement and `stmt_deps` are unchanged. Three proof steps replace the empty proof.
+- `citations.json`: one literal statement quotation for each step/node citation.
+- `report.md`: this report. `searches.jsonl` is the search command's own log.
+
+No new nodes; zero new Mathlib leaves. The original copy at the sandbox root is an unchanged working reference, not a node delivery.
+
+## Attachments
+
+None. Searches for the exact blueprint id and for nondegenerate-simplex and comma terminology under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` found no project declaration stating the item. The exact-id search under the read-only upstream master also found none; upstream sorry declarations would not count as completed proofs. No Lean files were written and no compiler, Lake or build command was run.
+
+## Wanted sources
+
+WANTED: Jacob Lurie, Higher Topos Theory, archived PDF, Variants 4.2.3.15(5) and 4.2.3.16, printed p. 256, for lem-coef-nondegenerate-simplex-comma-initial. I read the Harvard author PDF online (https://people.math.harvard.edu/~lurie/papers/HTT.pdf), PDF page index 273. Variant 4.2.3.16 gives exactly the monomorphism hypothesis and the left-adjoint assertion; the split expands its universal arrow explicitly. There is no Stacks tag asserted for this particular combinatorial lemma. The pre-existing decomposition node records Stacks Tag 017R, `lemma-splitting-simplicial-sets`, and is already a Mathlib leaf. No SGA source is used.
+
+## Issues found and corrections
+
+The item was statement-only and needed its proof. Its statement is true as written, with no missing hypothesis or disputed clause. I kept its historical blueprint ancestry and binding: this is a combinatorial tool below the displayed derived Hom/derived limit calculation in the second paragraph of `prop-coef-integral-exceptional-adjoint`, through the presentability/poset-replacement chain. I read that blueprint proof, the chapter record and `sk-prop-sf-biduality-general`; this item does not realize the unit statement and requires no unit-file edit.
+
+The source's left adjoint is not used as an uncited theorem. The existing `lem-coef-nondegenerate-simplex-face-poset` states the precise unique factorization needed, so no new lemma or duplicate is needed. The proof explicitly distinguishes arbitrary simplex operators from injective face maps. The existing nerve natural-homotopy theorem supplies weak equivalence, rather than confusing ordinary connectedness with vanishing higher homotopy groups.
+
+The inherited N6 Mathlib searches in the item are retained as inherited records. Q76 ran the five searches in its `searches.jsonl` and appended those actual records without altering query strings. The Loogle query with `IsInitial` reported an unknown identifier; this is recorded as an unsuccessful name query, not treated as proof of absence. A second LeanFinder phrasing and a LeanSearch phrasing were also run. I read `NonDegenerateSimplices.lean:240-300`, `Nerve.lean:34-80`, `Nonempty.lean:54-64`, `Quasicategory/Nerve.lean`, and `Limits/IsConnected.lean:151-174`: the candidates give decomposition, nerve definitions/horn properties or connectedness, and none states the full comma-initiality/weak-contractibility conclusion. These are not exact or one-line full matches.
+
+## Unfinished work
+
+None within this one-level split. The cited existing face-poset factorization theorem remains its own DAG item; it is not proved again here. The source archive request is recorded above.
+
+## Review by Q76
+
+I read delivery-errors sections B through E in full against the delivered node and the statements of every dependency. I read HTT Variants 4.2.3.15(5) and 4.2.3.16 online. The monomorphism in the source means degreewise injective, exactly as in the item and in the face-poset node. No finiteness of X and no quasicategory hypothesis on X are introduced. The proof is marked agent-written because it expands the source's left-adjoint assertion into the argument below and the source is not archived locally.
+
+Step 1 uses `lem-weil-pbc-simplicial-set-nondegenerate-decomposition`, whose statement explicitly supplies the unique nondegenerate simplex and surjective finite-order operator. This is exactly what makes the chosen pair an object of the displayed comma category. `def-cbc-enhanced-diagrams-cones` supplies the ordinary nerve and weak-equivalence conventions. Smallness is checked directly: a countable union of the small degree sets of X gives all simplices, finite-ordinal monotone maps form a small set, and comma objects/arrows are subsets of these sets. The step is elementary after those cited definitions and decomposition.
+
+Step 2 uses the final sentence of `lem-coef-nondegenerate-simplex-face-poset`. I opened its statement: it asserts unique factorization of EVERY arrow from a simplex to a nondegenerate simplex through the specified surjection, not merely uniqueness of injective faces. Smallness and embedded nondegenerate simplices are precisely the hypotheses in force. A morphism in the comma category is by definition a t with t composed with the degeneracy equal to a, so that statement gives exactly one such morphism. No claim about the source node's proof is used. This is an elementary application of an existing statement, not a new node restating the initiality clause.
+
+Step 3 uses `lem-coef-nerve-natural-homotopy-equivalence`. I read its entire statement, which allows natural transformations with noninvertible components and says that functors with composite-to-identity zigzags induce weakly equivalent nerves. The point functor P and the selection Q are between small categories; QP is the constant functor at the proven initial object and PQ is the point identity. For every h the naturality equality follows from uniqueness of arrows out of that initial object, so all hypotheses are actually exhibited. A one-link identity transformation works for the other composite. The conclusion is that the actual map NP to the one-point nerve is a weak equivalence. The nerve formula in `def-cbc-enhanced-diagrams-cones` identifies that target degree by degree with Delta^0, and its explicit definition of weak contractibility gives the desired conclusion. This step is marked non-elementary because it invokes the nerve homotopy theorem. There is no hidden topology lemma inside it.
+
+For section B, no new nodes or new leaf claims are made, so B1, B2 and B4-B8 raise no new-node obligations. Existing notions are covered by the unchanged statement dependencies (B3), the exact `blueprint.from.place` is retained with `same_as: []` after searches (B9), and the project attachment search was performed (B10). For C1-C4, each non-elementary input above is the statement of a cited node, with verbatim quotations in `citations.json`; no definition is cited for a theorem it does not state. For C5, the whole-DAG searches for nondegenerate simplices and comma/initial/contractible nerves found the reusable face-poset and nerve-homotopy nodes, and `tools/blueprint_refs.py search` with the exact phrase, `nondegenerate` and `initial object` found no blueprint duplicate. For C6-C8, the two theorem inputs are already in the item's unit, the decomposition is an existing Mathlib leaf and the other input is a definition; no off-unit theorem or tool-use declaration is needed. The server's DAG check will verify acyclicity on the current overlay.
+
+For D1-D5, the argument is carried by the item's three steps; there is no new node to which its conclusion is moved, no circular induction and no unexpanded appeal to a standard argument. The proof-dependency list is exactly the union of the step uses. Step lengths are 669, 611 and 983 characters, all below 2000; none hides an independent lemma requiring extraction.
+
+For E1-E7, I checked the hypotheses at each application as above and the actual comma arrow direction: the chosen object maps TO every (tau,a), since a = t composed with s, rather than the reverse. Test cases: X empty has no sigma and is vacuous; X = Delta^0 has one nondegenerate object and all degeneracies have the point as their ancestor, so their comma category is a point. In X = Delta^1, a constant higher simplex at vertex 0 has unique arrows from its ancestor vertex to that vertex and to the edge; a nonconstant degeneracy of the edge has the edge as ancestor. A nondegenerate sigma gives s = identity and the usual undercategory identity object. Finally the one-vertex simplicial circle explains why the hypothesis matters: its nondegenerate loop has equal endpoints, so there are two arrows from the vertex ancestor to that loop, defeating initiality. It is excluded because that loop simplex is not degreewise injective. Thus I found no counterexample under the stated hypotheses, no changed coefficient/category convention, and no statement correction was needed.

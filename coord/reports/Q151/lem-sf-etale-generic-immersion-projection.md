@@ -1,0 +1,18 @@
+# Worker report: lem-sf-etale-generic-immersion-projection
+
+Files written: the item node `dag/nodes/sec-six-functors/lem-sf-etale-generic-immersion-projection.json`; `citations.json`; this report. No new nodes were needed.
+
+Attachments: none.  
+WANTED: none.
+
+I searched the whole DAG for the Stacks places and for closed/open immersion projection formulas. The existing nodes `lem-pur-etale-open-derived-tensor`, `lem-cbc-derived-extension-zero-base-change-underived-compatibility`, `lem-weil-pbc-closed-immersion-finite`, `lemma-weil-pbc-finite-direct-image-exact`, the finite geometric-stalk formula, and the stalk tensor comparison supply the component facts. `lem-asd-open-projection-exchange` supplies the ordinary-etale open tensor/base-change identity and is recorded as an off-unit tool use. No existing node states the full arbitrary-complex immersion formula or its combined base-change identity, so this item is not a duplicate. Mathlib searches were run with both phrasings recorded in the node; the hits concern algebraic geometry or monoidal structures and none states this ordinary-etale derived comparison.
+
+## Review by Q151
+
+I read the item source entry (sites-modules.tex, Tag 0E8I) and the closed-support reference (stacks-project/etale-cohomology.tex, Tag 0A45), together with the unit blueprint paragraph for `thm-weil-etale-geometric-biduality`. The statement retains the finite coefficient ring, the chosen closed-then-open factorization, arbitrary unbounded ordinary-etale derived objects, the canonical map, and the Cartesian pullback clause without adding boundedness or constructibility assumptions.
+
+Step 1 uses the finite nature of a closed immersion, exact finite direct image, exact open extension, exact constant-coefficient inverse image, K-flat resolutions, and the ringed-topos tensor-pullback statement; each cited node states exactly those facts. Step 2 checks the closed tensor map at a geometric point: the finite-stalk formula gives an empty or singleton fibre for a closed immersion, the closed-pushforward stalk statement identifies the surviving stalk, and the stalk tensor theorem gives the component tensor map. Geometric-stalk conservativity then proves the sheaf isomorphism; K-flat totalization gives the derived form. Step 3 applies the existing ordinary-etale open projection isomorphism and the canonical pullback-composition comparison, then identifies `i^*j^*` with `s^*`; its factors are isomorphisms and their naturality gives naturality of `pi_s`. Step 4 checks the closed factor after Cartesian pullback on the same empty/singleton geometric fibres. The inverse-image germ map carries each pure tensor to the corresponding primed germ, while the monoidal and composition comparisons carry all associators, so the canonical closed maps agree. Step 5 applies the existing open projection/base-change equation with `a=g_X`, then composes with Step 4 and the specified extension-by-zero base-change map `b_P`; this is exactly the asserted equality for `pi_s` and `pi_{s'}`.
+
+I checked the edge cases `S=empty`, `s=id`, `i=id`, and `j=id`: the stalk calculation reduces respectively to zero, the identity tensor map, the open projection formula, and the closed pushforward formula. I also checked that no step uses the exceptional right adjoint `Ri^!`; it remains only part of the item's surrounding notation. No statement was corrected, no Lean declaration is an attachment, no SGA source was used, and no new node or cycle was introduced.
+
+All five proof steps are below the 2000-character review threshold and contain no hidden standalone lemma. I checked every citation quote against the cited node statement verbatim.

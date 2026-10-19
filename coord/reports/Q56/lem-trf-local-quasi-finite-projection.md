@@ -1,0 +1,19 @@
+# Report: lem-trf-local-quasi-finite-projection
+
+1. Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-local-quasi-finite-projection.json` — split statement with three proof steps.
+- `dag/nodes/sec-trace-formula/lem-trf-weak-relative-noether-normalization.json` — unsplit statement-only child; Mathlib searches found no match.
+- `citations.json` — verbatim statement quotes for every cited node in every step.
+
+2. Attachments: none. No sorry-free declaration in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` carries the item tag or states this result.
+
+3. WANTED: the author PDF `https://www.cmls.polytechnique.fr/perso/orgogozo/articles/Modifications%20et%20cycles%20proches%20sur%20une%20base%20g%C3%A9n%C3%A9rale.pdf`, Proposition 2.3, proof, printed p. 4, for the local quasi-finite projection argument. The split uses the locally available Stacks proof of Tag 0GTG instead.
+
+4. What was checked and corrected: the statement was compared with the imported node and with the first-reduction sentence in the project blueprint. I searched the complete DAG and both blueprint snapshots for the item, Tag 0GTG, weak relative Noether normalization, and quasi-finite polynomial projections; no existing node states the affine algebraic lemma. I also searched the read-only source tree for the blueprint tag and relevant names; there is no finished declaration. The item proof has three steps. Step 1 uses the definition of locally finite type and the existing affine-pair characterization (Stacks 01T2) to choose `U = Spec A` and a finite-type map `R → A`; I checked that the base `B` itself is affine, so no extra target shrinking is needed. Step 2 verifies that each fibre of `U → B` is an open subscheme of the corresponding fibre of `Y → B`, so its irreducible chains have dimension at most `N`, then applies the new child node, which is exactly the affine form of Stacks Tag 0GTG. Step 3 translates the polynomial-ring map into `e : U → A^d_B`, checks the structural composite from the fact that the map is an `R`-algebra homomorphism, and takes separatedness from the existing affine-morphism permanence node; the quasi-finite conclusion includes finite type and discrete finite fibres by the existing definition. I read the full statement of every cited node and copied the relevant sentences into `citations.json`. The new child is strictly smaller than the item: it has no geometric-point or neighbourhood conclusion, only the affine ring core, so it is not a restatement or duplicate.
+
+5. What I could not finish: no local copy of the cited Orgogozo PDF is present, so the source-specific prose is recorded as WANTED. No Lean code, compiler, Lake, or build tool was run.
+
+## Review by Q56
+
+I checked the item source, its imported dependencies, and the blueprint ancestor `lem-trf-local-term-locality`. The affine-pair node says exactly that local finite type is equivalent to finite-type maps on every compatible affine pair, which is the fact used in Step 1. The new Tag 0GTG child explicitly assumes a finite-type affine morphism and the same fibre-dimension bound, and states the polynomial-ring map with `d ≤ N` and quasi-finite induced morphism used in Step 2. The relative-affine-space definition identifies `Spec(R[T_1,…,T_d])` on the affine base, and the affine-morphism permanence node states that an affine morphism is separated, which are the facts used in Step 3. The quasi-finite definition states the finite-type and isolated-fibre clauses that the conclusion requires. I checked the hypotheses at each use: `B` is affine by the item, `U` is chosen affine around the given point, the restricted fibres are opens of the original fibres, and the polynomial map is over `R`. I corrected the initially unsplit item by adding only the genuine affine normalization lemma and by making the dimension restriction and separatedness arguments explicit.

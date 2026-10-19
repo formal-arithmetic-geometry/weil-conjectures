@@ -1,0 +1,77 @@
+# Stage-1 split: lem-coef-operadic-operation-segal-product
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-operadic-operation-segal-product.json`: the item, statement preserved verbatim, eight proof steps, status `split`; no Mathlib match.
+- `citations.json`: thirteen entries covering every step/node citation, with literal excerpts from the current cited statements.
+- `report.md`: this report. `write_split.py` is sandbox-local preparation code, not a delivery file.
+
+## New nodes
+
+None. No new definitions, unsplit lemmas or Mathlib leaves are needed. The block restriction and gluing arguments are written in the item's steps using existing axioms and universal properties.
+
+## Attachments
+
+None. Searches of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the exact blueprint id/tag, `Op_Q`, generalized operads, active/inert and operation/Segal terminology returned no candidate project declaration. The item has no inherited Lean audit/declaration to inspect. Upstream master is not being used as evidence of a closed proof.
+
+## Sources and wanted archives
+
+WANTED: Gepner–Haugseng, *Enriched infinity-Categories via Nonsymmetric infinity-Operads*, arXiv:1312.3178, Definitions 2.4.1–2.4.2 and 3.1.13–3.1.17, and Appendix E, especially the proof of E.0.1, for this item. Read the arXiv HTML online on 2026-10-17; no copy is archived under literature/. The proof is attributed to the agent because it expands the unproved product sentence, with no newly downloaded archive.
+
+WANTED: Lurie, *Higher Topos Theory*, Proposition 2.4.4.3, printed p. 131, for the existing cocartesian mapping-square tool (opposite dual). Read this proposition online and checked the source hypotheses against its DAG statement. No archive was downloaded.
+
+The existing homotopy-fiber criterion is sourced to Kerodon 00ZN, read online, and the composition tool to Kerodon 01PF. These are Kerodon tags, not Stacks tags. No Stacks tag states the generalized infinity-operad product decomposition. No SGA source is used.
+
+## Issues in the imported item and route
+
+The statement is correct; no STATEMENT-DISPUTED or statement correction is needed. The title's phrase “fixed-arity” means that morphisms preserve arity, not that the equivalence is a product at one common fixed input length. Step 8 proves the correct grading: the left length is the sum of the right lengths.
+
+The item arrived with no proof. The source's one sentence “as the zero fiber is a space” suppresses the endpoint cancellation, source Segal gluing, and target incidence mapping-space argument. These are now written out. In particular, we do not replace a generalized Segal fiber product by an ordinary product of color spaces. The output vertices remain fixed; maps from input endpoints to them are invertible, and that is what makes the endpoint gluing spaces contractible.
+
+I read `dag/chapters/sec-six-functors.json`, `dag/units/sk-prop-sf-biduality-general.json`, the historical ancestor record `prop-coef-integral-exceptional-adjoint`, and its current main-20261015 proof in `sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md`. The inherited unit and ancestry are historical provenance for the finite-coefficient mapping-complex enhancement subroute; the current ancestor's second paragraph is the finite adjunction inside derived inverse limit. This split fills the product comparison used by the already existing localization-operation criterion, rather than changing the unit or its geometric route. No unit binding, realized fields, chapter record, or maintainer field is changed. The item's existing precise `blueprint.from.place` and `via` chain are retained, and `same_as` was checked anew.
+
+## Mathlib and duplication searches
+
+I ran the required launcher search command five times, all successfully, with the exact queries appended to `mathlib_searches`: two differently phrased LeanFinder searches, Loogle `SSet.StrictSegal`, grep `operad|Operad|Segal.*product`, and a LeanSearch query about active operation spaces and inert projections. The search results are recorded honestly as returned; none was unavailable. The closest hits are strict simplicial spine bijections and concatenation. I read `Mathlib/AlgebraicTopology/SimplicialSet/StrictSegal.lean:11-23,43-62,115-180`: these concern a single strict Segal simplicial set and are not a one-line specialization giving homotopy-coherent active-operation spaces of generalized operads. Grep's only operad hits are bibliography mentions. No node is classified as Mathlib.
+
+Whole-blueprint searches with `tools/blueprint_refs.py search` for `Segal`, `active`, `operad`, and `operation` found no equivalent blueprint statement (the last term has many unrelated six-operation hits). Whole-DAG searches for the product terminology, incidence axiom and inert block language found the item, its consumer, and related but different operadic tools. The related monoidal-block coherence node assumes a monoidal category and gives transport coherence, not this generalized-operad operation-space equivalence. The composable-bimodule node gives an algebra-category gluing equivalence for a specific planar operad. Neither is an equivalent statement, and neither is used. A dependency traversal from every proposed proof dependency found no return path to the item.
+
+## Not duplicates
+
+There are no new-node/existing-node pairs: no new node is created. No elementary fact or clause of the item has been moved to a new node.
+
+## Review by Q12
+
+I read delivery-errors B–E in full and checked the mathematical argument against the online source and the actual current statements of every cited node. The source explicitly asserts the operation-space product in its erratum, and Definitions 2.4.1 and 3.1.13 provide the two distinct Segal axioms used below. My expansion preserves both, including all vertex terms. Every non-elementary comparison used by a step is supplied by an existing cited statement; the proof does not appeal to an unrecorded operadic factorization theorem. The only base factorizations used are the explicit interval formulas.
+
+1. Step 1 uses the generalized fiber-Segal clause of `lem-coef-operadic-algebra-presentability`, not its presentability conclusion. It really states the iterated fiber product over the zero fiber. Componentwise inversion proves that all source fibers are groupoidal. Arity preservation follows from the stated restriction to base identities. No quotient by source arrows of different arities is introduced.
+2. Step 2 uses the inert-lift existence in that same statement and the full square of `lem-coef-infinity-cocartesian-mapping-criterion`. Its hypotheses are satisfied: the operad projection is an inner fibration over the quasicategorical nerve of the ordinary simplex category; the chosen source projection is cocartesian. Taking the square's fiber over the explicitly computed base factorization gives an equivalence of the exact fixed-base mapping spaces required. Thus this citation supplies factorization with higher data, not merely the word “cocartesian.”
+3. Step 3 is the elementary empty-output calculation. The endpoint condition forces input arity zero, and the arrow groupoid of the zero fiber with target C contracts by the explicit fixed-final-endpoint path contraction. The cited enhanced-category definition really defines homotopy fibers, coherent arrow diagrams and contractibility. This does not mistake a possibly disconnected or noncontractible zero fiber for a point.
+4. Step 4 uses the actual incidence diagram to both vertices and edges in the operad statement, and the same cocartesian mapping-square equivalence for the two endpoints of each input block. The resulting maps are in the zero fiber, so the space hypothesis applies precisely there. It would be invalid to cancel them for a non-groupoidal zero fiber; no such cancellation is assumed more generally.
+5. Step 5 gives the junction equation and its solution space explicitly. The composition tool's statement supplies the associative/unital homotopies and the inverse-edge interpretation used to verify the inverse to postcomposition. The source Segal equivalence supplies the lift of the glued input string. Regrouping is explained by the same edge/vertex cone data, and a zero block contributes a vertex rather than an extra edge. All choices are homotopy fibers of equivalences, not assertions that path components have a unique representative.
+6. Step 6 uses exactly the target incidence mapping-space equivalence in the cited operad statement. Its input is a map to every C_i AND every V_j with the specified compatibility homotopies. The preceding junction equations supply those homotopies. The stated cocartesian square recovers the endpoint factorizations in the reverse direction. This explicitly identifies the full fiber of restriction with successive contractible choices, so higher simplices are not discarded. The homotopy-fiber detection node is also cited here to make each forgetful map of choice spaces an equivalence; this avoids a hidden assertion that an iterated family of contractible choices is contractible without a fiber argument. I corrected the potentially misleading shortcut “the vertex terms are contractible” by keeping them until the maps to fixed vertices and junction identifications are specified.
+7. Step 7 uses the homotopy-fiber detection statement with identity base B, not with an unspecified base comparison. Its node explicitly allows arbitrary vertical maps and empty fibers; no fibration or surjectivity hypothesis has been added. The target of the compared fiber map is the fiber of id_B and is contractible. This is the non-elementary equivalence test, now cited instead of being called obvious.
+8. Step 8 computes the partial sums and the naturality square. An inert-preserving f sends the chosen inert lifts to cocartesian lifts; the mapping-square criterion identifies the two factorizations and their higher data. This is exactly what that tool states. The conclusion is natural in f and does not assert preservation of arbitrary active cocartesian arrows.
+
+Small cases checked: k=0 forces n=0; k=1 gives the identity restriction; n=0 with k positive gives only nullary blocks, including repeated junction vertices; a mixture such as (n_1,n_2,n_3)=(0,2,0) retains both zero-length endpoint blocks; an empty right-hand operation space forces an empty left-hand space. For Q=Delta^op the operation spaces are discrete active base maps, so the product is exactly the bijection between monotone endpoint-preserving maps and tuples of nonnegative lengths. For the many-object model Delta_X^op, the endpoint paths are precisely the gluing data, including when X has nontrivial loops; no assumption that X is discrete or contractible enters. All indexing sets and fixed-arity operations are small because Q is small. All cited statement nodes are in the item's existing unit; the enhanced-diagram definition is a notion, so there is no off-route tool substitution.
+
+The JSON preserves the statement, provenance, created record, unit, chapter and all inherited search records. The new proof dependencies are exactly the union of its uses. Citations contain verbatim statement excerpts. There are no new-node self-containment, unsplit-proof, false new statement, or duplicated-source issues. No Lean was written, compiled or built; no git command or write was run in either read-only checkout.
+
+## Unfinished work
+
+No mathematical part of this one-level split remains. This is the first-reader preparation only: the second reader must review and deliver it. The required server dry run is the handoff gate; this worker does not push the delivery.
+
+## Second reading by Q12
+
+I reread the imported item and all eight proof steps against arXiv:1312.3178, Definitions 2.4.1, 3.1.13, 3.1.15 and 3.1.17, and the Erratum correction and proof of Corollary E.0.1. The item statement has the same active-map endpoint condition, fixed-target trivial-active operation groupoid, inert block projections, space hypotheses, empty-output clause, arity sum, and inert-preserving naturality; no hypothesis or conclusion is added or dropped. The source's corrected `M_{triv,act}/C` morphisms lie over inert maps, which are identities here by active/inert factorization, matching the item's source-change condition.
+
+1. Step 1 was checked against Definitions 2.4.1(ii), 3.1.13(ii), and the generalized operad node: the Segal fiber products of the space fibers make every Q_[n] a space, so identity-fiber source changes are equivalences and arity/base components are retained. The elementary classification is valid.
+2. Step 2 was checked against Definitions 2.4.1(i), 3.1.13(i), the cited cocartesian mapping-square criterion, and the source's inert block factorization: the equation rho_i alpha = beta_i sigma_i has the stated endpoint values, and the mapping-space equivalence supplies the restriction map on all coherent simplices. No pointwise choice is used.
+3. Step 3 was checked against the k=0 clause of the Erratum proof and the enhanced homotopy-fiber definition: endpoint preservation forces n=0, and the fixed-final-endpoint arrow space in Q_[0] has terminal identity at C. The elementary contraction does not assert Q_[0] itself is contractible.
+4. Step 4 was checked against Definition 3.1.13(iii) and its incidence diagram, including the [0]-projections, together with the cocartesian mapping criterion. Endpoint factorizations exist with contractible homotopy fibers, and their arrows are equivalences because Q_[0] is a space. The n_i=0 case retains the coincident endpoint.
+5. Step 5 was checked against the source Segal equivalence and the mapping-composition node. Postcomposition by an endpoint equivalence has contractible homotopy fibers; the regrouped Segal diagram handles zero-length blocks and supplies the glued source with coherent junction data. The argument keeps higher identifications rather than choosing strict equalities.
+6. Step 6 was checked against the full incidence mapping-space axiom, the cocartesian mapping criterion, and the homotopy-fiber detection node. The endpoint and junction homotopies give a point of the entire incidence limit, so the incidence equivalence supplies the active lift; the reverse restriction recovers every listed datum. Homotopy fibers, rather than components, are used throughout.
+7. Step 7 was checked against the exact hypotheses and orientation of the homotopy-fiber detection node with r = R, q = id, and v = id. The fibers computed in steps 4–6 compare with the contractible fibers of the identity; the empty-base case is valid because a map into the empty simplicial set forces an empty source.
+8. Step 8 was checked against the active endpoint calculation and Definition 3.1.17's inert-preserving maps. Partial sums give the unique active base map and the stated arity sum, including nullary blocks; images of cocartesian inert projections give the naturality square on all coherent simplices.
+
+There are no new nodes, so B1–B7, duplicate-node, and Mathlib-leaf checks are vacuous. I reran the existing-node searches described in the first review and found no equivalent DAG or Mathlib statement. I corrected the item record's `created.item` field from the unrelated localization criterion to `lem-coef-operadic-operation-segal-product`, which is required for delivery ownership metadata. No Lean, compiler, Lake, or live-project files were touched.

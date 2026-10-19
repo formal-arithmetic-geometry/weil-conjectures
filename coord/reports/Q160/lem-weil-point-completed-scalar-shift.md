@@ -1,0 +1,53 @@
+# Worker report: lem-weil-point-completed-scalar-shift
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-weil-point-completed-scalar-shift.json`: statement node, split in six steps; not a Mathlib leaf. The mathematical statement and its hypotheses are unchanged. No new nodes and no new Mathlib leaves.
+- `citations.json`: thirteen verbatim statement excerpts, one for each dependency cited in each proof step.
+- `report.md`: this report. `searches.jsonl` records this group's five actual searches. `prepare_split.py` is sandbox-only preparation, not a delivery file.
+
+## Attachments
+
+None. Searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` and `Comparator/` for the exact blueprint tag and the item id, then WeilConjectures for completed scalar extension and completion/shift terminology. No declaration states this item. `dag/lean_names_upstream.json` has no binding for the id. No upstream master sorry declaration is treated as a finished proof.
+
+## WANTED
+
+None. The relevant blueprint, Bhatt–Scholze PDF and Stacks source are present. This is an agent-written sign calculation, not a claimed quotation of a theorem in Bhatt–Scholze.
+
+## Faults found and changes
+
+The imported item was statement-only. Its source mentioned Stacks 070M as context for the strict tower model. Reading derived.tex, lemma-difficulty-K-injectives, shows that 070M concerns a particular K-injective tower of bounded-below resolutions of truncations; it does not state the present sign identity. The source attribution now distinguishes the fixed strict scalar model in the existing DAG from the actual sign conventions: Stacks 011G, homology-definition-shift-cochain, and 014E, derived-definition-cone. The original source document and blueprint ancestry are retained; the proof points to the identical current main-20261015 point-category text (under sec-six-functors-basics rather than the historical sec-smooth-purity directory).
+
+The reordered cone differential and the displayed sign formula are correct. In particular the off-diagonal entry of the reordered shifted cone is negative, so omitting the second-coordinate sign would fail for odd shifts. No statement dispute or route change was needed. The six steps carry this calculation, naturality, shift-addition coherence, and localization explicitly; no clause is repackaged as a new lemma.
+
+## Mathlib and duplicate searches
+
+The five Q108 search records already in the imported node were retained as inherited records; they are not represented as searches made by Q160. Q160 ran and read five further searches, all logged in this sandbox and appended with their exact tool/query text: two different LeanFinder formulations, Loogle, LeanSearch, and grep of Mathlib/Algebra/Homology. All services answered. The generic candidate `CochainComplex.mappingCone.shiftIso` was opened at Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:347–375. Its statement compares a shifted cone with the cone of a shifted map. It supplies no completed coefficient sheaves, no specified quotient-map comparison, and no descent of this particular comparison. Hence the full item is not a one-line specialization of that declaration. Other hits are shift evaluations, cone maps or cone cocycles; none states the item.
+
+Before adding anything, searched the whole DAG for strict towers, mapping cones, cochain shifts and completed scalar comparisons, and ran `tools/blueprint_refs.py ancestor lem-weil-point-completed-scalar-shift`, followed by whole-blueprint searches for `completion comparison shift`, `shift`, and `scalar extension`. The ancestor is `def-weil-finite-coefficient-point`; no other blueprint node states this normalized shift square. Existing nodes already provide the K-flat localization equivalence, change of rings, scalar-extension model, and its canonical completion comparison. They are cited directly. No new node was created; therefore there are no new/existing same-tag pairs to disambiguate. `blueprint.same_as` remains the verified empty list.
+
+## Unfinished work
+
+None in the stage-1 split. This delivery writes no Lean and runs no compiler, Lake, or build tool. Its prerequisite nodes remain their existing separate tasks.
+
+## Review by Q160
+
+I read the chapter and unit records (sec-smooth-purity, sk-def-sf-admissible), the historical point-category blueprint and its current main-20261015 counterpart. Their final display describes the common finite-stage fibre equivalence; the present node isolates the additional shift compatibility needed by the existing point-equivalence split. It is not the key statement of the admissibility unit, so no unit realization record is changed. I read Bhatt–Scholze Definition 3.4.10, Lemma 3.4.12, Proposition 3.5.1 and Definition 3.5.2 (PDF pp.22–24), and Lemma 6.8.2(1) with its proof (pp.58–59). These explain completed coefficients and completion, but do not assert the displayed alpha formula. For its signs I read Stacks homology.tex, definition-shift-cochain (011G), and derived.tex, definition-cone (014E), in full. I also opened 070M to check and correct the attribution above. No SGA route is used.
+
+For step 1 I opened all four cited node statements. `lem-pc-kflat-resolution` provides a degreewise-surjective quasi-isomorphism from a K-flat complex with flat terms on a ringed site. `lem-pur-derived-change-of-rings` explicitly computes ordinary derived scalar extension on such complexes. `def-weil-integral-scalar-extension` defines the degreewise product cone with the specified quotient transitions. `lem-weil-finite-free-completed-scalar-comparison` explicitly gives the comparison by quotient maps and zero shifted-product component, its independence of the resolution and naturality. Thus this step does not take construction details merely from another node's proof. The site and coefficient ring match each cited statement. None of them imposes noetherianity, finite dimension of Y, or boundedness of K in this use.
+
+For step 2 I opened the statements of `def-weil-abstract-derived-category`, `def-pc-tensor-complex-sheaves`, and `def-pc-kflat-complex`. They give the signed shift, the signed direct-sum total differential, and the acyclic-tensor definition respectively. The summand sign epsilon_m^i verifies that shifting the second tensor factor preserves K-flatness, rather than presuming a replacement of P[m]. The quotient rings occur in degree zero, so the scalar-extension shift comparison has no extra tensor sign. Restriction of scalars and products are degreewise in the specified model. This is an elementary calculation from the cited definitions, not an extra resolution theorem.
+
+For step 3 the abstract-derived-category statement gives exactly the cone differential used. Reordering Cone(h)[-1] yields (dx,-dy-hx). I computed both shifted differentials: alpha d and d alpha both yield (epsilon_m dx,-dy-epsilon_m h x). The inverse has the same coordinate formula because epsilon_m squared is 1. These are equalities of module-sheaf maps, checked on arbitrary local sections. The argument is elementary and has no topological or finite-dimensional hypothesis.
+
+Step 4 uses only the preceding coordinate formulas. A chain map induces the diagonal cone map (D(f),D(f)), which commutes with alpha. Multiplication of the two integer parity signs gives alpha_(m+n); epsilon_0=1 gives the identity. This is explicitly the zero/successive-shift coherence, not an inference from the existence of some cone isomorphism. No additional non-elementary fact is used and there are no external dependencies in this step.
+
+For step 5 I reread the canonical comparison statement, especially its sentence about the zero component. On a local tensor section z both sides of the claimed square are (c_P[m](z),0). This verifies the actual specified map, and does not identify morphisms merely because they have the same projections in a bare triangulated category.
+
+For step 6 I opened `lem-weil-pbc-site-derived-tensor-descent` and used its explicit first assertion: localization of the homotopy category of flat-term K-flat complexes at its quasi-isomorphisms is equivalent to D(R_E). I also read the underlying Stacks sites-cohomology.tex passages 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor and its preceding construction), and 0G7D (lemma-factor-through-K-flat), checking that the last permits flat terms. This is the needed representative-localization interface; I did not assume arbitrary derived maps lift to direct chain maps between chosen resolutions. I reread clauses (1)–(2) of `lem-pur-derived-change-of-rings` and `lem-weil-integral-scalar-extension-well-defined`: they give quasi-isomorphism invariance and canonical comparisons for the two models. A naturality square with invertible vertical arrows also commutes for their inverses, so the equalities descend along the equivalence. The comparison node identifies the descended map with chi_K itself. This uses that node's stated canonicity, not an arbitrary completion of a triangle. Completeness is needed for the comparison to be an isomorphism as in its prerequisite; the actual shift equation is checked before imposing completeness. All these cited prerequisites are generic tools of other units, declared with their precise purpose in `split_report.tool_uses`; no unit route is replaced by another geometric theorem.
+
+I checked B–E against the final files. There are no new unsplit statements, no hidden new definitions, no claims copied from another node's proof, no recited source in place of an argument, and no invented Mathlib searches. Each use has a verbatim quote in citations.json. I tested the formulas at m=0, 1, -1, and 2; for successive shifts 1+(-1) the two signs cancel. I also checked zero complexes, the empty scheme, identity field extension L=E (with its canonical completeness map), and arbitrary nonzero differentials, where the off-diagonal sign is visible. No unramified-extension, flatness-of-quotient, finite-Tor, noetherian, or nonemptiness assumption is introduced. Every step is below 2000 characters; each elementary one is the displayed coordinate calculation itself. No helper lemma has been hidden in a long step.
+
+## Validation
+
+The required server dry run exited successfully: `OK (not pushed) deliver/Q160/lem-weil-point-completed-scalar-shift at 26f862336a: preflight passed`. The complete validation runs server preflight, DAG checking and split review; no local checker or compiler was run. The report was then updated with that result and the final dry run was requested before push.

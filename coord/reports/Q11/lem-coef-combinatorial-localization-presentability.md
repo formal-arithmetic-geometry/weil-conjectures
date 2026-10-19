@@ -1,0 +1,90 @@
+# Worker report: lem-coef-combinatorial-localization-presentability
+
+## Files written
+
+All files are under `/home/ubuntu/weil-newtargets-sandbox/Q11/lem-coef-combinatorial-localization-presentability/`.
+
+- `dag/nodes/sec-six-functors/lem-coef-combinatorial-localization-presentability.json`: item, statement unchanged, eight proof steps, status split. Refreshed its Mathlib searches and retained its original ancestry, chapter, unit, source, and other fields.
+- `dag/nodes/sec-six-functors/lem-coef-combinatorial-presheaf-presentation.json`: statement only, unsplit; no Mathlib match. Dugger's small-presentation theorem, with its model structures and the Quillen-equivalence criterion specified.
+- `dag/nodes/sec-six-functors/lem-coef-space-presheaf-presentability.json`: statement only, unsplit; no Mathlib match. Presentability of coherent space-valued presheaves.
+- `dag/nodes/sec-six-functors/lem-coef-simplicial-presheaf-localization-comparison.json`: statement only, unsplit; no Mathlib match. Identifies Bousfield-local simplicial presheaves with the full infinity category of local space-valued presheaves, including mapping spaces.
+- `dag/nodes/sec-six-functors/lem-coef-relative-symmetric-monoidal-localization.json`: statement only, unsplit; no Mathlib match. The generic monoidal localization theorem, with no model-category or presentability hypothesis.
+- `citations.json`: ten entries, one per node citation in the eight item steps, quoting the cited statements verbatim. Full statements are quoted where several clauses and their hypotheses are used together.
+- `searches.jsonl`: actual msearch.py log; every new node records its own semantic, Loogle, grep, and second semantic phrasing from this log. The initial grep calls on individual files exposed the search wrapper's filename parsing limitation; I repeated those searches on directories and used the directory results in the new nodes.
+- `write_split.py`: sandbox-only preparation script; not part of the DAG delivery.
+
+## Attachments
+
+None. Searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact item tag and for combinatorial, homotopy coherent localization, Dugger, Bousfield, presheaf presentability, and symmetric localization. No project declaration states the item or a new node. Also searched the master source for the new concepts as reference material; its sorry declarations were not treated as proofs.
+
+## Sources wanted
+
+WANTED: Lurie, Higher Algebra, September 18, 2017, sections 1.3.4 and 4.1.7, for the item and lem-coef-relative-symmetric-monoidal-localization. Read online at https://www.math.harvard.edu/~lurie/papers/HA.pdf; the IAS URL in the imported item timed out. The document is not archived in literature/.
+
+WANTED: Lurie, Higher Topos Theory, Proposition 4.2.4.4, Remark 5.5.3.7, Proposition 5.5.4.15, and Appendix A.3.7, for lem-coef-space-presheaf-presentability and lem-coef-simplicial-presheaf-localization-comparison. Read online at https://www.math.ias.edu/~lurie/papers/HTT.pdf. Not archived in literature/.
+
+WANTED: Daniel Dugger, Combinatorial Model Categories Have Presentations, Advances in Mathematics 164 (2001), 177–201, Theorem 1.1 and its proof, for lem-coef-combinatorial-presheaf-presentation. Read the introduction, definitions, theorem, and the proof on printed pp. 182–183 online at https://www.sas.rochester.edu/mth/sites/doug-ravenel/otherpapers/dugger-comb.pdf. Not archived in literature/.
+
+These are genuine infinity-category/model-category results, with no corresponding Stacks tags. No tag was invented. Nothing was downloaded or written into literature/. As the archives are missing, the item's proof_origin is agent: it is an explicit synthesis of the online primary-source route and existing DAG interfaces, rather than a claimed proof from an archived document.
+
+## Findings and corrections
+
+The imported statement is mathematically consistent with HA Proposition 1.3.4.22 and Example 4.1.7.6. No statement dispute or correction was necessary. The important distinction is between the coherent localization and the ordinary homotopy category; Mathlib's ordinary localization theorems do not finish this item.
+
+At startup the shared checkout was behind the live read-only DAG mirror: the claimed item and several of its siblings existed in `/home/ubuntu/weil-nt-live-dag/nodes/` but not yet in the shared checkout. I read the mirror without modifying it, and after the automatic shared refresh the preparation script reread the original item from the shared checkout before writing its sandbox copy. The shared blueprint_refs.py initially returned no ancestor because its checkout lacked the item. I also ran that script's read-only search and ancestor functions against the live mirror, with bytecode writes disabled: the ancestor is prop-coef-integral-exceptional-adjoint, through the exact five-node via chain already stored on the item. Each new node prepends this item to that chain. No live/shared repository, launcher, unit, or chapter was modified.
+
+I read the current main-20261015 ancestor statement and proof in `sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.*.md`, together with the chapter record and the item's existing unit `sk-prop-sf-biduality-general`. This generic model-theory foundation supports the coherent mapping-complex calculation in proof paragraph 2. It replaces no geometric, coefficient, or unit-level route. The item is not a unit key node, so no realized fields are changed.
+
+The new presentation theorem does not claim presentability of a localization. The presheaf comparison is a concrete identification of two models with their mapping spaces, and the presheaf-presentability theorem is the separate accessibility input. The monoidal theorem is a general result for tensor-stable systems in arbitrary symmetric monoidal infinity categories; applying it requires the item's explicit pushout-product and Brown calculations. Thus the four nodes neither restate the item's clauses nor move the entire argument into one new node. The elementary replacement and pushout-product arguments remain steps of the item.
+
+## Not duplicates
+
+Searched the whole shared DAG and live mirror for Dugger, Bousfield, simplicial presheaves, presheaves of spaces, A.3.7.3, 5.5.3.7, and 4.1.7.4, and searched all blueprint nodes with blueprint_refs.py for combinatorial; presheaf + presentable; simplicial + localization; symmetric + localization; Dugger; and 4.1.7.4. No new id existed. No new source has a Stacks tag, so there are no same-tag pairs requiring comparison.
+
+The blueprint search's apparent hits were read: def-pc-picard-functor defines a representable Picard sheaf, and det-pe-topos-functoriality-site states ordinary Grothendieck-topos facts. Neither states presentability of a coherent space-presheaf infinity category. sk-def-sfb-derived-categories and sk-def-sfb-derived-tensor-hom concern ordinary derived sheaf categories and K-flat relative tensor, not the general localization of an arbitrary monoidal model category. The relative-projective-space hit is also unrelated. Accordingly same_as is empty on the item and all four new nodes.
+
+Reused lem-coef-model-infinity-derived-adjunction and lem-coef-presentable-infinity-adjoints. The former gives the actual mapping-space adjunction, replacement unit/counit, and preservation of weak equivalences between cofibrant objects; the latter gives the presentable local-object category and the adjoint/colimit criterion. No new copy of either interface was created. They and the new nodes have the same unit as the item; no off-route tool permission is needed.
+
+## Review by Q11
+
+I checked the item against HA 1.3.4.16, 1.3.4.21–22 and 4.1.7.4–6. HA's proof of presentability explicitly passes through a simplicial presentation and HTT A.3.7.6; I expanded the latter's localized-presheaf argument instead of introducing a new theorem saying that the localization is presentable. For the monoidal conclusion I checked the actual tensor-stability hypothesis of HA 4.1.7.4, rather than assuming that tensoring arbitrary model objects preserves weak equivalences.
+
+For the new presentation node I checked Dugger's definition of a presentation, Theorem 1.1, Definition 2.1, and the proof of the theorem and Corollary 1.2. Its source category is projective simplicial presheaves localized at a SMALL set, its left adjoint points toward the given model category, and its existence does not assume that the given category is simplicial or proper. The statement defines the model and localization conventions inline and spells out the criterion for a Quillen equivalence. For the space-presheaf node, HTT Remark 5.5.3.7 states exactly the required presentability; Example 5.5.1.8 and Proposition 5.5.3.6 supply an independent source path. For the comparison node I read HTT 4.2.4.4 and A.3.7.3(1)–(3), A.3.7.5, and the first part of the proof of A.3.7.6, together with HA 1.3.4.20 and 1.3.4.16. This matches both the projective presheaf model and the localized model with coherent, full local-object subcategories. The use of an arbitrary small S is by derived mapping spaces; the source's cofibration presentation can be obtained by replacing arrows without changing their derived locality conditions, as A.3.7.5 explains. For the monoidal node I read HA Construction 4.1.7.1, Proposition 4.1.7.4 and Remark 4.1.7.5. Its source is the generic infinity-categorical theorem, with no unjustified model-category, cofibrancy, or presentability assertion included.
+
+Step 1 is the two explicit replacement composites: naturality and two-out-of-three make Q relative, and the replacement transformation identifies both localized composites with the identity. This uses the localization universal property already in the item's statement, including natural transformations, and not an unstated mapping-space comparison.
+
+Step 2 uses precisely the new small-presentation statement. Both D and S are small in the fixed smaller universe; no colimit over all objects of the large category M is taken. Step 3 opens and uses the actual statement of lem-coef-model-infinity-derived-adjunction: it supplies an infinity adjunction with the indicated replacement unit and counit. The presentation node supplies the Quillen-equivalence criterion, which makes both displayed adjuncts weak equivalences. The source of each test map is cofibrant and its target is fibrant. This proves the equivalence at mapping-space level without asserting that an equivalence of ordinary homotopy categories suffices.
+
+Step 4 uses the new space-presheaf statement for presentability, the new comparison statement for the image of S and for the local-object identification, and the small-set clause of lem-coef-presentable-infinity-adjoints for presentability of that full subcategory. I checked all three statements rather than taking the result from their proofs. The final transport preserves colimit universal properties and compact-generation conditions because mapping spaces are identified by the equivalence.
+
+Step 5 is the elementary substitution of 0→K into the stated pushout-product axiom. Closedness is used to identify tensor with the initial object as initial, and the given cofibrancy of the unit is retained. These are the exact reasons the cofibrant subcategory is monoidal and both partial tensor functors are left Quillen. Step 6 cites lem-coef-model-infinity-derived-adjunction specifically for its preservation of weak equivalences between cofibrant objects, a clause explicitly present in its statement. Restricting both tensor inputs to cofibrant objects is essential here; no general flatness of every model object is assumed.
+
+Step 7 cites the new relative symmetric-monoidal localization theorem only after Step 6 has checked its hypotheses. The localizing class includes equivalences and is stable under composition and tensor. The ordinary nerve is the input monoidal infinity category, not the ordinary localized homotopy category. The theorem provides every coherence. The proof also writes the comparison zigzags for two choices of Q, using tensor invariance proved in Step 6.
+
+Step 8 uses the existing model infinity-adjunction statement for the partial closed tensor adjunction and its replacement formula. Its left functor agrees with the tensor of Step 7 because QK→K is a weak equivalence between cofibrant objects. I then use the direction 'has a right adjoint implies preserves small colimits' of lem-coef-presentable-infinity-adjoints. The source and target are presentable by Step 4. This covers all small coherent diagram shapes, not only strict ordinary-indexed diagrams. Symmetry gives the other variable, and cofibrant representatives cover all localized objects.
+
+I tested the boundary cases: D empty gives the terminal presheaf infinity category and S empty recovers unlocalized presheaves; an invertible map in S changes nothing; locality uses mapping spaces rather than only connected components. For monoidal localization, taking W to be equivalences recovers the given monoidal infinity category; taking the terminal category or only identity maps is harmless. The item includes the empty colimit: tensor by a cofibrant object is a derived left adjoint and therefore sends the initial object to an initial object. The unit need not be fibrant and is never assumed fibrant. Neither right properness, a monoid axiom, simplicial enrichment of M, nor universal cofibrancy is used. The smallness convention is the item's original relative-universe convention; any generic localization may be formed in the larger ambient universe, and the presheaf comparison supplies the smaller-universe presentability.
+
+I checked B–E with these files open: new nodes have statements only and introduce their own objects, sources give the exact results (no misleading Stacks tags), each non-elementary step has node citations whose statements contain the used clauses, the elementary arguments are written rather than exported as nodes, and no item clause is merely renamed. Mathlib search hits were read in Presentable/Presheaf.lean:90–95, Localization/Monoidal/Basic.lean:13–26, Localization/Monoidal/Braided.lean:32 and 145–151, ModelCategory/CofibrantObjectHomotopy.lean:62–72, and Quasicategory/StrictBicategory.lean:15–32: all relevant-looking hits are ordinary categorical constructions. No search was invented, and no unavailable service was labeled no-match. No new statement has a counterexample found in these tests. The only preparation correction was repeating the grep wrapper's single-file calls on their parent directories to obtain correctly identified source-file hits.
+
+## Unfinished work
+
+The four new nodes intentionally remain unsplit, as required for a one-level split. Their later workers must expand their proofs. No Lean was written, and no compiler, Lake, or build command was run. The dry run is the final validation; delivery/push is reserved for the independent second reader.
+
+## Second reading by Q11
+
+- Item statement: checked against HA Proposition 1.3.4.22 and the monoidal localization discussion around HA Proposition 4.1.7.4; all model, localization, pushout-product, unit, and separate-colimit clauses agree, including coherent mapping spaces.
+- Step 1: checked the cofibrant-replacement naturality and two-out-of-three argument; verdict correct and elementary.
+- Step 2: checked against Dugger Theorem 1.1, Definition 2.1, and Corollary 1.2; the small category, small relation set, left Bousfield localization, and Quillen equivalence are exactly the cited node's conclusion.
+- Step 3: checked against `lem-coef-model-infinity-derived-adjunction` and the presentation criterion; cofibrant/fibrant hypotheses on the unit and counit tests are present and the mapping-space conclusion follows.
+- Step 4: checked against HTT Remark 5.5.3.7, Appendix A.3.7, and the presentable-localization node; the local full subcategory and equivalence transport are stated with the needed small-set hypotheses.
+- Step 5: checked the pushout-product calculations for `0 → K`, `0 → A`, and `0 → B`; verdict elementary and correct under closedness and the stated axiom.
+- Step 6: checked the Brown preservation clause of `lem-coef-model-infinity-derived-adjunction`; tensor stability is applied only to cofibrant objects and the nerve's mapping spaces are coherent.
+- Step 7: checked against HA Proposition 4.1.7.4 and Remark 4.1.7.5; the tensor-stable localization and replacement-independence argument use precisely the hypotheses established in Steps 5–6.
+- Step 8: checked the closed tensor/Hom Quillen adjunction and the presentable adjoint criterion; separate preservation of all small colimits, including the empty one, follows for every localized object via cofibrant representatives.
+- `lem-coef-combinatorial-presheaf-presentation`: checked Dugger's presentation definition and Theorem 1.1; self-contained statement, correct localization and Quillen-equivalence clauses, verdict pass.
+- `lem-coef-space-presheaf-presentability`: checked HTT Remark 5.5.3.7 and the presheaf presentability result; all universe and coherent-space clauses are explicit, verdict pass.
+- `lem-coef-simplicial-presheaf-localization-comparison`: checked HTT Proposition 4.2.4.4 and Appendix A.3.7.3–6; objectwise nerve comparison and local full-subcategory identification retain mapping spaces, verdict pass.
+- `lem-coef-relative-symmetric-monoidal-localization`: checked HA Proposition 4.1.7.4 and Remark 4.1.7.5; tensor-stability, strong monoidal universal property, and ordinary-nerve specialization are self-contained, verdict pass.
+
+Changes made: none to the mathematical statements or proof steps; I verified the existing citation quotes verbatim against the current DAG statements and confirmed all recorded Mathlib searches in `searches.jsonl`. No new node is a duplicate or a restatement, and no statement dispute or source error was found. The item metadata inherited from the shared DAG remains maintainer-owned and is left untouched by this second reading.

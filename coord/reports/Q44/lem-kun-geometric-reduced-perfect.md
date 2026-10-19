@@ -1,0 +1,133 @@
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-kun-geometric-reduced-perfect.json`: split into eight steps; statement unchanged; no Mathlib match for the whole item.
+- `citations.json`: twenty step/node entries with verbatim statement quotations.
+- No new nodes, no new Mathlib leaves, no unit edit. The unit's key proposition is not this auxiliary lemma, and its recorded proof has no steps.
+
+## Attachments
+
+No attachment of the whole item. `AlgebraicGeometry.GeometricallyReduced.of_perfectField` in `WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:111` is sorry-free, and its transitive sorry-map entry has `s:false, ts:false`; it proves only geometric reducedness, not flatness and finite presentation. It therefore does not meet the whole-item attachment requirement.
+
+`isReduced_tensorProduct_of_perfectField` belongs to the existing `lem-weil-pbc-perfect-reduced-tensor`; its source declaration is at `WeilConjectures/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:123` in this checkout, with the older audit/map recording lines 118-129. The declaration's proof and its helpers were read, and the recorded transitive sorry flag is false. No change to that existing node is requested.
+
+## Literature
+
+The shared checkout has the source lists but omits the literature payload. I read the identical supplied literature mirror at `/home/ubuntu/weil-launcher-nt/literature/`, including the master blueprint item, its unit and chapter records, Stacks `algebra.tex`, `schemes.tex`, `morphisms.tex`, `properties.tex`, and the `tags/tags` mapping. Canonical `literature/...` paths remain in the node. No download and no WANTED document.
+
+## What was wrong
+
+The imported proof was one unjudged paragraph with no cited dependencies. Its parenthesis about the nilradical being killed by the separable degree is not a valid explanation of geometric reducedness: the fraction field need not have finite degree at all, and a finite separable degree need not be invertible in positive characteristic (for example the degree of the separable extension of finite fields of degree p is zero in characteristic p). I removed that parenthesis and used the already existing, closed ring theorem, Stacks 00I4.
+
+The original affine argument also did not explain how the affine base changes cover the global scheme, and finite presentation was concluded from an affine algebra without supplying global quasi-separatedness. Both gaps are filled. The statement itself is correct; there is no STATEMENT-DISPUTED correction and no added separatedness assumption. The unit route is preserved: this is the same auxiliary geometric lemma, using generic ring and scheme tools.
+
+## Searches and reuse
+
+The whole-DAG search found `lem-weil-pbc-perfect-reduced-tensor` (closed), and the existing Mathlib leaves for affine tensor pullbacks, open fibre products, reduced affine spectra, flatness over fields, finite type over Noetherian rings, finite presentation over Noetherian rings, and quasi-separatedness. All were read as statements, not merely recognized by tags. `tools/blueprint_refs.py search` was run for `perfect`, `reduced scheme`, `geometric reduced`, and `geometrically reduced`, as well as finite-presentation terminology. No other blueprint node states all clauses of the item; `same_as` is empty. `lem-wf-affine-product-reduced` is for algebraically closed fields and finitely generated algebras in both factors, which does not allow arbitrary L/K here. It was not used.
+
+All six Mathlib searches recorded in the item were actually run with msearch.py and remain in `searches.jsonl`: two LeanFinder phrasings, Loogle on `AlgebraicGeometry.GeometricallyReduced`, and greps in AlgebraicGeometry and RingTheory/Nilpotent. LeanSearch returned HTTP 500 and is recorded as unavailable. The hits give definitions and criteria for already geometrically reduced algebras, or formally unramified algebras, not geometric reducedness of arbitrary reduced schemes over perfect fields. The project theorem is outside Mathlib and covers only one clause. No new node required searches or a duplicate comparison.
+
+## Unfinished work
+
+No mathematical gap remains in this one-level split. The existing perfect-reduced-tensor node supplies the only deeper commutative-algebra input and is already Lean-closed. No Lean was written or compiled. This packet is for the independent second reader, who will deliver it.
+
+## Review by Q44
+
+I read the master item and the chapter/unit records, then the source lemmas at Stacks 00I4 (`lemma-perfect-reduced`), 00FP (`lemma-Noetherian-finite-type-is-finite-presentation`), 01J1 (`lemma-reduced`), 01J2 (`lemma-affine-reduced`), 01I4/01JQ (affine fibre products), 01JR (`lemma-open-fibre-product`), 01T6 (`lemma-finite-type-noetherian`), and 01OY (`lemma-locally-Noetherian-quasi-separated`). The supplied tag index was checked; during this review I corrected an initially mistyped affine-reduced source tag to 01J2. There are no new-node statements to approve under B1-B9 or D1-D2.
+
+Step 1 uses exactly the finite affine cover in `def-weil-finite-type-morphism` and section-wise reducedness in `def-pc-reduced-scheme`. It does not assume arbitrary affine intersections are affine. Step 2 uses the full statement of the existing `lem-weil-pbc-perfect-reduced-tensor`: reduced commutative K-algebras over perfect K. The field L is reduced by the explicit inverse argument, and this node has no finite-generation requirement on L. This avoids the imported fraction-field separability explanation altogether.
+
+Step 3 cites the open-fibre-product statement with all three specified opens, the affine tensor-product identification with its actual base ring K, and the reduced-affine-spectrum equivalence. Their statements give precisely the claimed open chart and its reducedness. Step 4's local-to-global argument is written as restriction of an arbitrary nilpotent section followed by the sheaf uniqueness axiom; its reducedness criterion is exactly the quoted definition. The reducedness clause of `def-pc-geometrically-irreducible`, despite the node's shorter title, explicitly quantifies over every field extension. The affine-spectrum statement explicitly gives the unique point and residue field of Spec K. The fibre-product definition supplies the identity-base-change universal property; no field-valued map or fibre is silently changed.
+
+Step 5's `lem-pc-flat-field` explicitly permits every K-scheme. I read the corresponding Mathlib flatness instance at Morphisms/Flat.lean:115-121. Step 6 checks the Noetherian hypothesis before using the finite-type-to-finite-presentation ring statement: the only ideals of K are zero and K. The conclusion is local finite presentation, exactly the finite affine-neighbourhood definition in `def-sbc-locally-finite-presentation`, not yet global finite presentation.
+
+Step 7 first checks that Spec K is Noetherian (one affine chart with Noetherian ring and a one-point, hence compact, space) in the precise sense defined in `lem-weil-pbc-finite-type-over-noetherian`. That lemma then gives locally Noetherian X. The statement of `lem-weil-pbc-locally-noetherian-quasi-separated` gives quasi-separated X, and clause (1) of `lem-weil-pbc-qcqs-morphism-permanence` explicitly converts source quasi-separatedness to quasi-separatedness of f. These are existing Mathlib leaves, so no route exception is needed. Step 8 combines this with the quasi-compactness in the finite-type definition and the local finite presentation of step 6, exactly as the quoted finite-presentation convention requires. Every non-elementary input is thus an actual cited node (C1), and the quotations in citations.json were copied from those statements (C4).
+
+I tested the hypotheses and endpoints on the empty scheme (the finite cover is empty and all assertions remain valid), Spec K, affine space, and a reducible reduced affine scheme such as Spec K[x,y]/(xy). I also checked the doubled affine line over K: it need not be separated, but is locally Noetherian and hence quasi-separated, so the proof still applies. Arbitrarily transcendental L/K is permitted by the tensor theorem. Perfectness cannot be removed: over K=F_p(t), the field algebra K[u]/(u^p-t) is reduced, while after adjoining t^(1/p) it becomes nonreduced. Thus no missing perfection hypothesis is hidden in step 2. There are no new statements whose edge cases require an additional audit (E2), no proof sketch moved to a new node (D), and no unsupported permanence or gluing claim left in a step (E5). The original unjudged paragraph, the separable-degree explanation, and the missing quasi-separatedness argument are the corrections made in this pass.
+
+
+## Earlier second reading (a previous round; superseded)
+
+I independently opened the master blueprint item and its unit/chapter records, the current statements of all 17 proof dependencies and all statement dependencies, and the supplied Stacks source mirror under `/home/ubuntu/weil-launcher-nt/literature/`. The item's hypotheses and all four conclusions agree exactly with the blueprint. Stacks 00I4 (`algebra-lemma-perfect-reduced`) supplies the stronger tensor-product theorem actually used, with perfect base field and two reduced algebras and no finiteness condition on either algebra. The imported separable-degree explanation is indeed invalid, and the worker's replacement is correct. The current shared item is still imported and unreviewed, so no finished live split is being superseded.
+
+- Step 1: checked `def-weil-finite-type-morphism` and `def-pc-reduced-scheme` against Stacks 01J1 (`schemes-lemma-reduced`); PASS: finite affine cover and reduced section rings are explicit clauses of the cited statements, including the empty cover.
+- Step 2: checked the full current statement of `lem-weil-pbc-perfect-reduced-tensor` against Stacks 00I4 (`algebra-lemma-perfect-reduced`); PASS: K is perfect, A_i and L are reduced commutative K-algebras, and arbitrary transcendental or infinite extensions are allowed. The field reducedness argument is elementary (for exponent zero the assumed equation already contradicts 1 != 0).
+- Step 3: checked `lem-weil-pbc-open-fibre-product`, `lem-weil-pbc-fibre-product-affine-spectra`, and `lem-weil-pbc-affine-scheme-reduced-iff` against Stacks 01JR (`lemma-open-fibre-product`), 01I4 (`lemma-fibre-product-affine-schemes`), 01JQ (`lemma-fibre-product-affines`), and 01J2 (`lemma-affine-reduced`); PASS: all three opens and both K-algebra maps are correct, and inverse images of the finite cover cover X_L.
+- Step 4: checked section-wise reducedness, the reducedness clause of `def-pc-geometrically-irreducible`, the field clause of `def-weil-affine-spectrum`, and the universal property in `def-pc-fibre-product`, with Stacks 01J1 and 01K0 (`definition-fibre`); REPAIRED: added the exact existing `def-pc-scheme-fibre` citation and wrote the inverse maps for the identity fibre and their base changes. Sheaf uniqueness proves reducedness locally, including the empty scheme; fibre-product uniqueness proves the displayed isomorphisms without a new theorem node.
+- Step 5: checked `lem-pc-flat-field` and Mathlib `Morphisms/Flat.lean:115-121`; PASS: the target is Spec K, a one-point integral scheme, and every K-scheme qualifies without finiteness or reducedness.
+- Step 6: checked `lem-weil-pbc-finite-type-noetherian-finite-presentation` against Stacks 00FP (`lemma-Noetherian-finite-type-is-finite-presentation`), clause (3), and `def-sbc-locally-finite-presentation` against 01TP (`definition-finite-presentation`); PASS: K has only the two principal ideals, hence is Noetherian, and the chosen charts give precisely the pointwise local-presentation condition.
+- Step 7: checked `pqf-def-locnoeth`, `lem-weil-pbc-finite-type-over-noetherian`, `lem-weil-pbc-locally-noetherian-quasi-separated`, and clause (1) of `lem-weil-pbc-qcqs-morphism-permanence` against Stacks 01OV (`definition-noetherian`), 01T6 (`lemma-finite-type-noetherian`), 01OY (`lemma-locally-Noetherian-quasi-separated`), and 01KV (`lemma-compose-after-separated`); PASS: Spec K is locally Noetherian and quasi-compact, f is finite type, and source quasi-separatedness suffices for f. No separatedness or affine-intersection assumption is introduced.
+- Step 8: checked the finite-type definition and the finite-presentation comparison clause against Stacks 01TP; PASS: local finite presentation, quasi-compactness, and quasi-separatedness are all supplied by the preceding steps and definitions.
+- New nodes: NONE; no elementary fact, duplicate, special case, or restatement has been made a node, and B1-B9 introduce no additional obligations. All cited records were opened as statements; all twenty final step/citation entries quote their complete current statements verbatim.
+
+Small cases checked independently: empty X; X = Spec K; affine space of dimension zero or one; reduced reducible Spec K[x,y]/(xy); and the doubled affine line (not separated, still quasi-separated). All conclusions and each proof step hold. Perfectness is essential: over K = F_p(t), the field K[u]/(u^p-t) becomes L[u]/((u-t^(1/p))^p) for L = K(t^(1/p)), which is nonreduced. No field extension is assumed finite, and zero affine rings cause no exception to the cited tensor theorem. No statement correction or STATEMENT-DISPUTED is needed.
+
+I also opened `WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:111` and `WeilConjectures/Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean:123` in the read-only slopmaster2 checkout, and their records in `local/sorry_map_slopmaster2_7d675a26.jsonl.gz`: both have s=false and ts=false. The first gives only geometric reducedness and cannot attach the entire item; the second is already carried by the cited closed tensor node. No Lean or compiler was run.
+
+Changes in this second reading: added one existing fibre-definition citation and expanded the identity-fibre/base-change argument in step 4, to remove implicit identification (B3, C1, E5); updated proof_deps and citations.json to match. The item statement, other seven steps, and the worker's review remain intact. There are zero new nodes and zero new Mathlib leaves. The delivery tool's documented syntax omits the terminal dot from the brief; the literal dotted invocation printed usage, so validation uses its documented equivalent command.
+
+Validation: the final repaired packet passed the required `deliver.py Q44 lem-kun-geometric-reduced-perfect --no-push` run, printing `OK (not pushed)` at b2cca18981. The unchanged item statement, all step references, proof_deps union, and all twenty complete-statement quotations were also checked against the current shared DAG. Delivery follows this successful dry run.
+
+## Rebase repair after landing refusal
+
+The prior approved delivery was not merged because the shared merge lock was held by another landing. I rebased the packet against the current shared DAG by comparing every statement dependency and proof dependency used by the item; none of the cited node files had changed or been merged, so no citation or proof-step rewrite was needed. I reread the current statements of all sixteen proof dependencies and all eight statement dependencies, including the two off-unit tools used in the route (`lem-weil-pbc-perfect-reduced-tensor` and `pqf-def-locnoeth`), and rechecked every quotation in `citations.json` against those current statements. I reran the required Mathlib searches (LeanFinder, Loogle, grep; LeanSearch remains unavailable) and then reran the delivery dry run, which passed as `OK (not pushed)` at commit `66e53746a0`.
+
+
+## Earlier second reading (a previous round; superseded)
+
+I independently reread the current DAG statements and the source statements in the supplied literature mirror. The item agrees verbatim with its master blueprint statement: reduced, finite type, and perfect field hypotheses, arbitrary field extensions, flatness, finite presentation, and geometrically reduced fibres. No statement dispute arises.
+
+- Step 1: checked both cited definitions and Stacks 01J1 (`schemes-lemma-reduced`); PASS: finite affine cover and reduced section rings, including an empty cover.
+- Step 2: checked the tensor node and Stacks 00I4 (`algebra-lemma-perfect-reduced`); PASS: both factors are reduced algebras over perfect K; no finiteness hypothesis on L is used.
+- Step 3: checked all three cited statements and Stacks 01JR, 01I4, and 01J2 (`lemma-open-fibre-product`, `lemma-fibre-product-affine-schemes`, `lemma-affine-reduced`); PASS: the correct three opens, tensor base K, and inverse-image covering give reduced charts.
+- Step 4: checked all five cited definitions, 01J1, and 01K0 (`definition-fibre`); PASS: sheaf uniqueness gives reducedness; the identity fibre and the base changes of its explicit inverse maps give geometrically reduced fibres. These are elementary arguments from the quoted definitions.
+- Step 5: checked `lem-pc-flat-field` and Mathlib `Morphisms/Flat.lean:115-121`; PASS: every K-scheme satisfies the leaf's hypotheses.
+- Step 6: checked both cited statements, 00FP clause (3) (`lemma-Noetherian-finite-type-is-finite-presentation`), and 01TP (`definition-finite-presentation`); PASS: the elementary ideal argument makes K Noetherian and each chart is finitely presented.
+- Step 7: checked all four cited statements, 01OV (`definition-noetherian`), 01T6 (`lemma-finite-type-noetherian`), 01OY (`lemma-locally-Noetherian-quasi-separated`), and the cancellation in 01KV (`lemma-compose-after-separated`); PASS: the one-point base is Noetherian and source quasi-separatedness suffices for the structure morphism. No separatedness assumption is added.
+- Step 8: checked both cited definitions against 01TP; PASS: quasi-compactness, local finite presentation, and quasi-separatedness have each been established.
+- New nodes: NONE; no elementary fact, duplicate, special case, or item restatement has been added as a node; no new Mathlib-leaf or B1-B9 obligations arise. All twenty step/node quotations in `citations.json` were mechanically compared with the complete current DAG statements and are exact; their pairs equal the step-use pairs.
+
+Small cases checked: empty X, Spec K, affine space of dimension zero or one, Spec K[x,y]/(xy), and the doubled affine line. The last example confirms that separatedness is unnecessary. Arbitrary transcendental L/K and zero affine rings cause no exception. Without perfection, the field algebra K[u]/(u^p-t) over K = F_p(t) becomes nonreduced after adjoining a p-th root of t, so the perfection hypothesis is essential.
+
+I also reread the two project declarations named in Attachments. The whole-item geometric-reducedness candidate states only that clause; the tensor declaration states exactly the existing tensor node, whose current audit is closed. The locally-Noetherian definition is an off-unit tool (not a Mathlib leaf); this is already explained in the split report and is for the maintainer to authorize, rather than setting a maintainer-owned field here.
+
+Changes in this second reading: appended this required section and corrected the report's count of distinct proof dependencies below; the item, its eight proof steps, and all twenty citations required no further mathematical change. The prior fibre-definition and explicit identity-fibre repairs are retained. There are seventeen distinct proof dependencies (the earlier rebase paragraph's “sixteen” was a count error). No Lean or compiler was run. The original worker sections, including `## Review by Q44`, remain intact.
+
+
+## Not duplicates
+
+No new nodes are created. The tensor-product theorem, affine base-change and reducedness facts, and finite-presentation tools are all reused from the existing DAG, so there are no new/existing pairs to distinguish.
+
+## Source error
+
+The blueprint proof's parenthetical separable-degree argument is invalid: for example, a separable finite-field extension of degree p has degree zero in characteristic p, and a transcendental fraction field need not have finite degree at all. This concerns the explanation, not the statement. The repaired split instead cites the existing stronger tensor theorem, Stacks 00I4, and proves reducedness by an affine cover and sheaf uniqueness. All hypotheses and conclusions of the item remain unchanged.
+
+## Repair of the returned delivery, 2026-10-16
+
+The return has one point: preparation failed because the launcher's temporary blobcache file 4d11ab65df34a22a0e4ab14196f5e6594f8fde29.tmp was missing. That is a delivery-tool failure, not a failed mathematical check. I have not edited or reconstructed the launcher's cache; the authorized delivery dry run will prepare a fresh temporary worktree.
+
+I reread the current chapter and unit records before the item: the unit has no proof steps, and this auxiliary lemma is not its key proposition. The shared item is still imported with no reviewed split or closed whole-item declaration. I opened every current statement dependency and all seventeen distinct proof dependencies. The twenty citation pairs exactly equal the step-use pairs, each quotation is a literal substring of its current node statement, and proof_deps is their union. No citation was inferred from a node's title or proof.
+
+For steps 1-4 I reread the master blueprint item and Stacks 00I4, 01J1, 01J2, 01I4, 01JR, and 01K0 in the supplied literature mirror. Step 1 takes the finite affine cover and section-wise reducedness from the two named definitions. Step 2 applies the tensor theorem to reduced A_i and the field L, with perfect base K; neither tensor factor is required to be finitely generated. Step 3 uses the actual open-fibre-product image statement and the affine tensor-product identification, then the affine reducedness equivalence. Step 4 restricts a nilpotent section to that covering and uses sheaf uniqueness, and writes explicit inverse maps for the identity fibre and its base changes. The geometric-reducedness definition quantifies over all field extensions, exactly as required.
+
+For steps 5-8 I reread the cited Mathlib flatness instance at Morphisms/Flat.lean:115-121, Stacks 00FP(3), 01TP, 01OV, 01T6, 01OY, and 01KV. Step 5 needs only a K-scheme. Step 6 checks K is Noetherian before applying finite type implies finite presentation to the affine coordinate algebras. Step 7 checks the one-point base is Noetherian, uses finite type over Noetherian to obtain locally Noetherian X, and then the two cited quasi-separatedness statements. Step 8 combines local finite presentation, quasi-compactness and quasi-separatedness using precisely the cited convention. No separatedness hypothesis is assumed.
+
+I repeated the whole-blueprint searches for perfectness and geometric reducedness and the project-source searches for the item tag and relevant perfect-field declarations. The project theorem GeometricallyReduced.of_perfectField proves only the geometric-reducedness clause, so it does not attach the whole item. The closed ring tensor theorem remains exactly the existing dependency. The recorded earlier msearch queries and their actual logged outcomes are retained; no new Mathlib search or node is claimed in this repair.
+
+I checked the empty scheme, Spec K, affine space, the reduced reducible affine scheme Spec K[x,y]/(xy), and the doubled affine line. The last example confirms that the quasi-separatedness argument does not silently require separatedness. Arbitrary transcendental extensions are permitted by 00I4. Over the nonperfect field F_p(t), K[u]/(u^p-t) becomes nonreduced after adjoining a p-th root of t, confirming the necessity of perfectness. There is no statement dispute or new statement to repair.
+
+The concrete metadata correction in this pass is to put the two generic tool declarations in split_report.tool_uses, where the standing brief requires them. Earlier report text called these tools declared, but the field was missing. The maintainer-owned tool_uses field remains untouched. This section, Not duplicates, and Source error make the current repair and its source check explicit; the original Review by Q44 is retained. No Lean was written or compiled, no agents were started, and no push is authorized in this worker pass. WANTED: none. Unfinished mathematics: none in this one-level split. A fresh second reader will review and deliver the accepted sandbox.
+
+## Second reading by Q44
+
+I reread the item statement against the master blueprint node and found the hypotheses and all four conclusions unchanged. There are no new nodes, so the B1-B9 checks are vacuous; the existing dependency statements were checked in the shared DAG and each citation quote is verbatim.
+
+- Step 1: checked `def-weil-finite-type-morphism` and `def-pc-reduced-scheme` against Stacks 01J1 and the finite-type definition; PASS, including the empty scheme.
+- Step 2: checked `lem-weil-pbc-perfect-reduced-tensor` against Stacks 00I4; PASS for arbitrary field extensions and reduced field factor, with perfectness retained.
+- Step 3: checked the open fibre-product, affine tensor-product, and affine-reduced statements against Stacks 01JR, 01I4, and 01J2; PASS, with the base ring K and a covering by inverse images stated explicitly.
+- Step 4: checked the sheaf-local reducedness argument, geometric-reducedness definition, affine-spectrum field clause, fibre definition, and fibre-product universal property against Stacks 01J1 and 01K0; PASS, including explicit identity-fibre inverse maps and their base changes.
+- Step 5: checked `lem-pc-flat-field` and Mathlib `Morphisms/Flat.lean:115-121`; PASS for every K-scheme.
+- Step 6: checked the Noetherian field argument, `lem-weil-pbc-finite-type-noetherian-finite-presentation` (00FP), and local finite-presentation definition (01TP); PASS.
+- Step 7: checked the locally Noetherian definition (01OV), finite-type-over-Noetherian (01T6), locally-Noetherian quasi-separatedness (01OY), and source quasi-separatedness permanence; PASS without a separatedness hypothesis.
+- Step 8: checked finite-type quasi-compactness and the finite-presentation convention in 01TP; PASS.
+
+I searched for duplicate or Mathlib statements using the recorded LeanFinder, Loogle, grep, and unavailable LeanSearch queries; no exact whole-item declaration exists, and no new node is needed. I tested the empty scheme, `Spec K`, affine space, `Spec K[x,y]/(xy)`, the doubled affine line, and a transcendental extension. I repaired the packet only by adding this required second-reading section; the item, proof, citations, and tool declarations required no further mathematical changes. No Lean or compiler was run.

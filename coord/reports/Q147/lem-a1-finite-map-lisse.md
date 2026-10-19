@@ -1,0 +1,63 @@
+# Worker report: lem-a1-finite-map-lisse
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-a1-finite-map-lisse.json`: statement; split, not a Mathlib leaf. Seven proof steps, 22 distinct dependencies; no new nodes.
+- `citations.json`: 27 entries, one for every step/node citation, with verbatim portions of the cited statements.
+- `report.md`: this report. Search-tool output is retained in `searches.jsonl`; the two local writer scripts are sandbox aids, not DAG delivery files.
+
+## Attachments
+
+None. I searched the read-only slopmaster2 `WeilConjectures/` tree for the exact node id and for finite direct images, `IsLisse`, `isLisse_lowerStar`, `IsLisse.lowerStar`, and `isAdicLisseSheaf_lowerStar`. No declaration states all clauses of this item. Generic finite direct-image exactness results do not prove adic lissity or the Weil-sheaf assertion; the general finiteness declarations in `WeilSheaf/LowerStar.lean` do not supply this statement either. Upstream master is reference material only; no attachment is inferred from its sorry declarations.
+
+## WANTED
+
+None. All sources used for this split are present locally.
+
+## Findings and changes
+
+The existing item was an unsplit auxiliary node created by Q47 for the lissity assertion in the opening sentence of `main-20261015/.../lem-a1-reduction-lisse-pure.proof.md`. I read that proof, the chapter and unit records, and the current statement. The statement is correct and is unchanged. Its statement dependencies and blueprint ancestry are retained. The unit's key statement is not this item, so no unit realization fields are changed.
+
+The missing argument is a finite-sheet computation, followed by the coefficient-tower passage and then the Weil lift. In particular, the finite discrete etale theorem cannot simply be applied to the adic category, and `prop-weil-operations` is not a bounded-constructibility theorem. The split proves bounded constructibility and degree zero before invoking that proposition. It never asserts that a whole Qlbar local system is trivialized by a finite etale cover: the finite etale morphism is split, whereas lattice levels or a pro-etale cover trivialize the coefficients.
+
+No source error or statement dispute was found. There are no unresolved obligations in the item's natural-language proof beyond its explicitly named DAG dependencies.
+
+## Searches and reuse
+
+I searched the whole DAG by finite-etale, splitting, direct-image, local-constancy, lisse and adic-tower concepts, and searched the blueprint with `blueprint_refs.py search` for `finite map lisse`, `finite.*lisse`, `095B`, `finite etale`, and `pushforward`; I also ran `blueprint_refs.py ancestor lem-a1-finite-map-lisse`. The nearest ancestor is `lem-a1-reduction-lisse-pure`. No other blueprint statement states this full Weil/adic lissity assertion. I read the candidate node statements rather than importing facts from their proofs.
+
+The existing nodes already contain the needed geometric splitting (04HN), finite-coefficient pushforward (095B), exact-derived-functor theorem (015F), integral-lisse tower equivalence, and epimorphic-tower derived-limit theorem. Therefore no new auxiliary node, elementary finite-product node, or relabelled lissity clause was created.
+
+Actual msearch queries and their output summaries are appended to the item's search record; inherited Q47 entries remain unchanged. The two semantic phrasings were `finite etale direct image preserves lisse adic sheaves` and `direct image along a finite covering sends local systems to local systems`. The first returned etale scheme-morphism properties; the second returned condensed locally constant functors and profinite factorization lemmas. Loogle reported unknown `IsAdicLisseSheaf`. LeanSearch returned generic pushforward constructions, including `SheafOfModules.pushforward`, not a local-system preservation result. Source grep found only the finite-limit property of `Scheme.Etale.forget` at Etale.lean:218 and locally constant finite-flat rank declarations in FlatRank.lean. I read those source locations and the module-sheaf pushforward definition at PushforwardContinuous.lean:44: none states the item or a one-line specialization giving it. All services used returned results; no unavailable service is misreported as a negative search.
+
+## Not duplicates
+
+There are no new nodes, hence no new/existing same-tag pairs. In particular, `lem-weil-pbc-etale-finite-pushforward-locally-constant` is reused for its finite-ring module assertion rather than duplicated as an adic or Weil result. `lem-fet-locally-trivial` was inspected but not used: its globally fixed finite index set would require care for disconnected schemes of varying degree. The pointwise splitting node 04HN supplies exactly the covering family needed here.
+
+## Review by Q147
+
+I checked the item against the main-20261015 opening proof sentence, which asks for lissity on the locus where the transported map is finite etale. The separate punctual-purity node is not used to prove lissity. I read Stacks `etale.tex`, Tag 04HN (label `lemma-finite-etale-etale-local`), and `etale-cohomology.tex`, Tags 095B (`lemma-pushforward-locally-constant`) and 0959 (`lemma-finite-pushforward-commutes-with-base-change`). For the adic part I read Bhatt–Scholze, Lemma 6.8.2, Definition 6.8.3 and Proposition 6.8.4, pp. 59–60, and the comparison discussion through Remark 6.8.15. For lattices and Weil structures I read Stanford L19, Definition 1.1.7 and Proposition 1.1.9, pp. 2–3. I read Stacks `derived.tex`, Tag 015F (`lemma-right-derived-exact-functor`), the local `proetale.tex` comparison Tag 099Y, and the current blueprint statement and proof of `det-pe-milnor-epimorphic`. The latter's recursion on weakly contractible objects is why an epimorphic tower on this site has ordinary limit equal to derived limit. No new nodes need source review. No SGA source is used.
+
+For step 1, `def-pod-lisse-l-adic-sheaves` supplies a finite E-stage, the integral-system definition and the passage back to E and Qlbar. The connected-component node supplies finite open components, including the empty-space case. I checked the hypotheses of `cor-galois-lisse-representations`(2): the geometric source is Noetherian and separated, ell is invertible, and each nonempty component has a geometric base point. The stable-lattice statement supplies a genuinely free finite lattice in the continuous representation; it does not assert Frobenius invariance. The finite-site comparison statement supplies pro-etale realizations of the levels, and `lem-sfb-integral-lisse-reduction-equivalence` supplies their completed-ring inverse-limit realization and quotient identifications. Thus the integral lift here is classical geometric monodromy, not an unjustified claim that every pro-etale E-local system admits a global lisse lattice.
+
+For step 2, I read the permanence statements: finite-morphism permanence (a) gives finiteness after the geometric base change, and etale-base-change-finite-limits (1) gives etaleness. The 04HN node states the local decomposition into finitely many copies of the target neighborhood, precisely the data used. There is no surjectivity assumption and no single globally constant degree. Its finite index set may be empty.
+
+For step 3, `lem-weil-proetale-weakly-etale-localization` identifies the site restriction, `def-weil-proetale-module-direct-image` gives the sectionwise formula and scalar action, and `lem-weil-pbc-proetale-restriction-injectives` explicitly states exactness of restriction for constant-coefficient modules. Only that exactness clause is taken from the last node; injective preservation is not used. The product formula itself is written from the sheaf axiom on the disjoint clopen cover. Coordinate kernels and local lifts of the finitely many coordinates give exactness in two elementary operations. This is marked elementary, with the nontrivial site/restriction inputs explicitly cited, rather than made into another node.
+
+For step 4, the exact-derived-functor statement says every complex computes the right-derived functor of an exact functor, so it does give the degree-zero identification. The 095B node supplies finite locally constant MODULE sheaves for the finite ring A_n, not just an underlying set sheaf. It is not used to assert freeness: that comes from the finite sum of the locally free sheet restrictions, with a finite common refinement of their trivializations. The finite-exchange node explicitly gives the finite underived exchange isomorphism and its compatibility, which is what the etale/pro-etale comparison takes from it. Both comparisons on a split sheet are identities. The pushed transition on each coordinate is the original quotient transition, so the quotient isomorphism and the quotient cocycle are checked explicitly, not hidden in the word 'transport'.
+
+For step 5, the integral-lisse reduction equivalence is applied only after step 4 has verified all its normalized finite locally free tower hypotheses. The Milnor statement requires epimorphic transitions; these were verified, and it is applied to the pro-etale M and N towers, not to inverse limits on the small etale site. The locally free completed module has ordinary reduction equal to derived reduction by the two-term uniformizer resolution. The direct-image definition then identifies its derived limit with the output tower, using exactly the actual transitions; the sectionwise direct-image formula identifies the ordinary limit with underived g_*. The definition of the integral constructible category requires completeness and a common reduction amplitude: the calculation proves completeness and amplitude [0,0], and the finite-torsion constructibility definition applies with the single stratum X. No unproved finite-reduction comparison for an arbitrary morphism is assumed.
+
+For step 6, I checked the rational/common-stage convention in `def-weil-derived-direct-image` and the lisse E/Qlbar definitions, rather than treating E as a discrete etale coefficient ring. The scalar-extension comparison is the identity on the finite sheet coordinates after tensoring, and it respects quotient maps. The constructible-heart definition says what is needed to identify the resulting degree-zero bounded constructible object as a sheaf. These are elementary finite-sum and coefficient-stage deductions from the preceding steps and the cited definitions.
+
+For step 7, I checked the proviso in `prop-weil-operations`: the lift is available on domains where underlying bounded constructibility has already been proved. Step 5 supplies it integrally and step 6 after rationalization. The proposition's displayed direct-image Weil isomorphism is exactly the one written in the proof; its forgetful compatibility is also stated. The Weil-sheaf definition's clause (3) identifies the constructible-heart condition. Lissity is the underlying geometric condition already proved, and g_0 being defined over k_0 gives the Frobenius square used by the lift.
+
+I tested the argument on the empty source, the empty target, the zero sheaf, an identity morphism, a split finite cover with different sheet ranks, and a disconnected target with varying degree. Empty products are zero modules, and all quotient and scalar-extension formulas remain valid. No smoothness, connectedness of X_0 or Y_0, global constant degree, arithmetic descent or Frobenius-stable lattice has been added. Every step is under 2000 characters, and I checked that the finite product and finite refinement arguments are elementary; the substantive geometric, monodromy, tower and equivariance assertions all have cited nodes. I corrected an initially mistyped source tag for finite exchange to 0959 before delivery. The statement, blueprint metadata and inherited creation/search records remain intact.
+
+All off-unit statements used as generic tools are declared with their particular purpose in `split_report.tool_uses`; they supply geometry, coefficient or equivariance interfaces below the lissity assertion and replace no step of the affine-line unit.
+
+## Validation
+
+The server `srvcheck.py ... review_split` passed for the sandbox split (zero new nodes), before this report was written. The missing realization warning concerns the unit's key node, not this auxiliary item. Full delivery dry-run results are recorded below after running the required command.
+
+Full delivery dry run: `deliver.py Q147 lem-a1-finite-map-lisse --no-push` exited 0 and printed `OK (not pushed)` at `16b15c2d5b`, with server preflight passed. The final dry run is repeated with this validation note included before the push.

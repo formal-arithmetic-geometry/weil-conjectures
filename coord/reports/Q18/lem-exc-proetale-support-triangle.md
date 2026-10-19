@@ -1,0 +1,70 @@
+# Stage-1 repair: lem-exc-proetale-support-triangle
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-exc-proetale-support-triangle.json`: repaired item, unchanged statement and Lean record, eight proof steps.
+- `dag/nodes/sec-smooth-purity/lem-exc-proetale-open-derived-image.json`: unsplit statement-only lemma identifying open restriction, its K-injective computation, and its derived unit; no Mathlib match.
+- `dag/nodes/sec-smooth-purity/lem-exc-proetale-supported-kernel-complex.json`: unsplit statement-only lemma transferring the supported-unit theorem to arbitrary finite rings and assembling kernel complexes when the open units are epic; no Mathlib match.
+- `dag/nodes/sec-smooth-purity/lem-exc-proetale-derived-adjunction-triangle.json`: unsplit statement-only lemma identifying the sheaf support adjunction and derived counit from explicit exactness and support hypotheses; no Mathlib match. Its historical id is retained, but it does not assert the support triangle.
+- `citations.json`: 24 verbatim statement quotations, one for each step/node citation.
+- `searches.jsonl`: all searches from the interrupted attempts retained. The new-node records now faithfully use the successful later searches already logged; in particular, the open-node LeanSearch result was successful, not unavailable.
+
+## Attachments
+
+None. Searched the item tag and support-triangle notions under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/`. `ProEtale/Derived/ClosedImmersion.lean` gives related sheaf and derived closed-support adjunctions, but no project declaration found gives this triangle on the intrinsic finite-coefficient categories under every item hypothesis. Its fixed-scalar ModuleCat-valued sheaves are not silently identified with the item's ring-sheaf module categories. The existing stage-2 record is retained verbatim.
+
+## WANTED
+
+None.
+
+## Return addressed
+
+The human returned original steps 2 (2591 characters), 5 (3190), and 6 (2270) for hiding non-elementary arguments. Original step 2 is now a short application of the open-derived-image lemma. Original step 5 is split into the explicit Noetherian finite-subcover argument and application of the supported-kernel lemma. Original step 6 uses the derived-adjunction lemma; applying the existing short-exact-complex triangle remains an item step. Original steps 1, 3, and 4 retain their text and route, with the forward reference in step 1 renumbered. The item statement, coefficient scope, original imports/audit metadata, and Lean record are unchanged.
+
+On resuming, there was no active Q18 delivery process. The required initial dry run exited with five stale citation-quote errors and pushed nothing. I repaired the quotations and also corrected a malformed math delimiter, the erroneous description of Rj_* as deriving j^*, and insufficient interfaces in the retained new nodes. The supported-kernel node now explicitly supplies the general supported-unit and j^*i_* vanishing claims needed by the adjunction step. Its complex clause assumes epic open units, which the unchanged injective lifting argument actually proves. The adjunction node assumes neither the short exact complex sequence nor the desired triangle. Unsplit nodes contain statements only, with empty proofs and proof dependencies. No Lean, compiler, Lake, or build tool was used.
+
+## Not duplicates
+
+lem-exc-proetale-open-derived-image vs lem-exc-proetale-open-unit: the former concerns j_* and the derived unit j^* ⊣ Rj_*; the latter is the underived unit for j_! ⊣ j^*.
+
+lem-exc-proetale-open-derived-image vs lem-pur-kinjective-restrict-localized: the latter supplies abstract localized restriction of K-injectives; it does not identify the prescribed noncommutative coefficient maps, geometric open inverse image, or derived unit.
+
+lem-exc-proetale-supported-kernel-complex vs lem-exc-proetale-closed-essential-image: the existing statement is for commutative ring-sheaf coefficients; the new statement assumes precisely that interface for B=Z/nZ and gives the actual A-linear units for arbitrary finite A, together with the natural complex comparison under an epic-unit hypothesis.
+
+lem-exc-proetale-supported-kernel-complex vs def-pur-flasque-support: the latter is a definition with a commutative coefficient convention; it supplies neither arbitrary finite noncommutative coefficient transport nor the stated complex sequence.
+
+lem-exc-proetale-derived-adjunction-triangle vs lem-exc-proetale-closed-support: the existing node assumes a finite commutative ring; the new conditional lemma handles the original item's arbitrary finite ring and additionally specifies the counit as the actual supported-kernel inclusion.
+
+lem-exc-proetale-derived-adjunction-triangle vs det-lem-formal-closed-support-adjunction: the existing node uses condensed-ring coefficients and that coefficient framework's operations; the new node uses ordinary sheaves of left modules over the concrete A_S ring sheaves. Passing between those categories is not a one-line specialization, and is not assumed here.
+
+## Review by Q18
+
+I read the chapter `sec-smooth-purity`, unit `sk-prop-sf-localization`, the original blueprint item, and both current `main-20261015` item files (statement and separate proof). The current text retains the same resolution, open restriction, free-module lifting, supported-kernel, and short-exact-complex route. The item has no `blueprint_update` replacing this argument. Its source is `literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md`; the proof is marked agent-written because the coefficient and adjunction details elaborate that blueprint. Each of the three extracted statements cites this same source and locates the exact quoted sentence of its proof in `blueprint.from.place`. No SGA source was used.
+
+The item and all new statements use arbitrary finite unital rings, including noncommutative rings, left module sheaves with the precise coefficient sheaves of `def-weil-pbc-proetale-modules`, ordinary unbounded derived categories, and no constructibility condition. I compared the sandbox item to current shared DAG: its natural statement and its whole `lean` record are identical. Maintainer-owned data is retained by the delivery tool.
+
+Step 1 uses the site/module definitions for universes and coefficients, `lem-weil-pbc-ring-sheaves-grothendieck` for arbitrary ring-sheaf Grothendieck categories, `lem-pur-kinjective-degreewise-existence` for a functorial unbounded K-injective replacement with injective terms, exact coefficient-preserving inverse image, sectionwise kernels, and the total right-derived computation theorem. I opened all seven cited statements. In particular the resolution theorem explicitly supplies injective terms, rather than only K-injectivity. The termwise additive functor preserves the shift and cone matrices, giving the homotopy functor to which the total-derived theorem applies.
+
+Step 2 cites the new open-derived-image statement, which explicitly supplies localization as restriction with its coefficient action and unit, preservation of K-injectivity, and the termwise model of Rj_*j^*K. It does not infer any of these from the definition of inverse image alone. Step 3, retained from the original proof, cites the geometric monomorphism clause of `lem-weil-proetale-weakly-etale-localization` with auxiliary coefficient Z, the explicit free-Yoneda module, module sheafification, and its exactness. Those statements justify precisely the free-basis injection and its sheafification. Step 4 is retained: the free-module Hom bijection and sheafification adjunction identify precomposition with restriction by checking the identity generator; the injective lifting definition then extends each section. The module-category statement says morphisms are sectionwise, justifying epicness by the two-maps test. Its few-line lifting argument is elementary relative to those statements.
+
+Step 5 explicitly proves the quasi-compactness of the open immersion, rather than treating Noetherianity as an unexplained implication: minimality of the family of closed complements gives a maximal finite union in a cover, so each open has a finite subcover. This applies to each U∩V for affine V. The sole cited statement gives exactly that minimality. Step 6 invokes the commutative essential-image statement for B_S only, with its ring-sheaf identifications from `prop-weil-pbc-proetale-constant-ring-map`. The new supported-kernel lemma states precisely the finite noncommutative extension, vanishing j^*i_*M, natural unit identifications of complexes, and the short exact sequence under epic termwise units. Step 4 verifies this last hypothesis; Step 2 verifies that the open unit is identity on U.
+
+Step 7 takes exactness and full faithfulness from the existing finite-ring statements, whose quasi-compact-complement condition is verified in Step 5. Step 6 supplies both support hypotheses of the new adjunction lemma, and Step 2 supplies the restriction hypothesis. That lemma states the sheaf adjunction, unbounded right derived adjunction, and the actual counit map, not merely existence of some right adjoint. Step 8 applies `lem-weil-pbc-complex-ses-triangle`, whose statement explicitly provides a distinguished triangle for a degreewise short exact complex sequence. The preceding steps identify all vertices and the two adjunction arrows, which is necessary to obtain exactly the item's triangle.
+
+For every cited node I opened the statement and checked the needed clause rather than using its proof or a definition as a theorem. All 24 citations quote actual statement text in `citations.json`. The eight step lengths are 1296, 314, 941, 850, 495, 777, 568, and 362 characters; no non-elementary step exceeds 2000 characters.
+
+For duplication I searched the whole imported blueprint with `blueprint_refs.py search` for supported kernels, closed support, open direct image, and restriction K-injective, and searched the whole DAG statements and titles for the corresponding notions. `blueprint_refs.py ancestor` confirms the new nodes' nearest blueprint ancestor is this item. I read the closest hits listed above. Generic derived-counit declarations in Mathlib assume an existing sheaf adjunction and absolute derived functors; they do not construct this geometric kernel adjunction. The logged semantic hits also concern scheme O-module restriction or condensed coefficients rather than this intrinsic finite-ring statement. A further valid Loogle search for the quoted name fragment restrictScalars found only scalar-restriction operations on linear maps. I also read SheafOfModules.restrictScalars in Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:36: it constructs scalar restriction but has no pro-etale support-unit or complex-comparison assertion. I read `Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean`, including its derived-functor hypotheses. Each new node records two logged semantic phrasings, LeanSearch, Loogle, and Mathlib grep. Queries and success/unavailability agree with the retained `searches.jsonl`; no unrun search is claimed.
+
+I tested the extracted statements on A=0 (then n=1), A=M_2(F_2) (the map F_2→A is central, no commutativity of A is used), the zero complex, Z empty, U empty, i an isomorphism, and disconnected T. The complex lemma assumes epic open units rather than claiming surjectivity for an arbitrary complex. It therefore applies to the injective-term resolution and does not impose a false flasqueness assertion on arbitrary sheaves. For U empty it is 0→I→I→0, while for Z empty it is 0→0→I→I→0. None of the new statements asserts boundedness or constructibility.
+
+## Retained arguments for the new statement-only nodes
+
+The open calculation uses the initial inverse-image indexing object (W,W→U×_TW); after passing to the opposite category its colimit is N(W). The coefficient maps agree on constants and hence on open fibres of locally constant sections and their sheafifications. Localized restriction preserves K-injectives. The exact left adjoint j^* makes j_* preserve K-injectives, and the K-injective Hom comparisons identify the derived unit with the termwise restriction map. These are the arguments extracted from original step 2.
+
+For supported units, the maps B_S→A_S commute with the prescribed coefficient structure maps since they agree on constants, open fibres, and sheafification. The transported actions show that forgetting A to B commutes with the inverse/direct images and units. Apply the commutative essential-image theorem over B. The resulting underlying unit is the actual A-linear unit; its inverse is A-linear because applying the injective unit to h(ry) and rh(y) gives the same element ry. The same forgetting argument gives j^*i_*M=0. Naturality of the open unit restricts differentials to kernels, whose squares vanish after the monic inclusions. Naturality of the supported units identifies these kernels with i_*H(I) as complexes. Epic termwise units then give the short exact complex sequence. This preserves the substance of original step 5 without hiding it in an item step.
+
+For the closed adjunction, any i_*M→N factors uniquely through F(N), since its composite with the open unit is zero by j^*i_*M=0 and naturality. The supported-unit isomorphism and full faithfulness give the natural bijection Hom_T(i_*M,N)=Hom_Z(M,H(N)). The identity of H(N) corresponds to the inverse supported unit followed by the kernel inclusion. Termwise naturality identifies chain maps and homotopies. Exactness of i_* makes H preserve K-injectives; the Hom-into-K-injective comparison gives Hom_D(T)(i_*M,I)=Hom_D(Z)(M,H(I)), naturally with functorial replacements. The identity of H(I) gives the asserted derived counit. These are the adjunction arguments extracted from original step 6, and not an assumption of the triangle.
+
+## Unfinished work
+
+The three new lemmas are deliberately unsplit, as the one-level stage-1 brief requires. The repair itself is complete pending the required successful server dry run and delivery.

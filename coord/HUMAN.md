@@ -165,3 +165,41 @@ interfaces. The unit statement and chapter route are unchanged. This
 established-error replacement is recorded in
 coord/reports/maintenance/Q12-devissage-generation-route.md and the adjacent
 reproducible source patch. Q12's split still requires independent review.
+
+## Merged from ~/weil-newtargets (retired 2026-10-19)
+
+# Stage-1 findings for the human — isolated newtargets, 2026-10-14
+
+The following are worker reports, awaiting independent mathematical review; no change to the live DAG or to upstream target declarations has been made. Stage 1 continues on other items. Full worker logs are on the Codex machine in ~/weil-launcher-nt/run/, and future abandoned sandboxes are preserved in ~/weil-launcher-nt/abandoned/.
+
+- NB / thm-weil-pbc-finite-extension: ABANDON thm-weil-pbc-finite-extension: arbitrary base change permits nonnoetherian Y', but Dbc(Y',E) is defined only for noetherian finite-dimensional schemes; the cited integral corollary requires these missing hypotheses.
+- NB / sbc-thm-bounded-below-derived-smooth-base-change: ABANDON sbc-thm-bounded-below-derived-smooth-base-change: statement is ill-typed; both sides lie in the derived category on X, but the conclusion specifies S. Source-error report saved in sandbox.
+- NB / sbc-lem-bounded-below-truncation-criterion: ATTACH sbc-lem-bounded-below-truncation-criterion: AlgebraicGeometry.Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app, AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChangeSource_map_truncLEι_app, AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChangeTarget_map_truncLEι_app, WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean:160,170,180
+- NG / sbc-thm-bounded-allowable-torsion: ABANDON sbc-thm-bounded-allowable-torsion: the source asserts BC(K) is in D^b_P-tor(S_et), but its defining map lives on X_et; category mismatch documented in sandbox/report.md.
+- NG / sbc-lem-bounded-below-truncation-criterion: ATTACH sbc-lem-bounded-below-truncation-criterion: AlgebraicGeometry.Etale.isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app, AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChangeSource_map_truncLEι_app, AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChangeTarget_map_truncLEι_app, /home/ubuntu/weil-conjectures-slopmaster2/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Derived.lean:160,170,180
+- NE / lemma-weil-pbc-completed-exchange-coherence: ABANDON lemma-weil-pbc-completed-exchange-coherence: could not prove that the prescribed completed exchange composite respects the canonical composition comparisons; finite-level reduction and limit functoriality alone do not establish pasting.
+- NH / def-weil-pbc-bounded-constructible-complete: ABANDON def-weil-pbc-bounded-constructible-complete: its general identification with Stacks 09C1 is false; A=F_ell[epsilon]/(epsilon²), I=0 admits the uniform tower A/(epsilon), which has infinite Tor dimension.
+- NA / nt-target-proetale-e: ABANDON nt-target-proetale-e: could not establish the source-verified comparison between the exact condensed coefficient category/base-change map and the blueprint rationalized category/exchange map.
+
+## Shared-DAG fold collisions (2026-10-14)
+
+Live versions kept:
+- dag/nodes/sec-abelian-varieties/lem-sc-picard-cech-cup-pullback-compat.json
+
+## Shared landing collisions
+- dag/nodes/sec-proper-base-change/def-weil-pbc-completed-reduction-square.json (live kept)
+
+
+## Established unit-route error repaired: Q12 generation (2026-10-16 08:27 UTC)
+
+The generation unit's opening appeal to sk-thm-sf-ctf-stability was circular:
+thm-sf-ctf-stability -> cor-weil-finite-constructible-hom -> lem-weil-finite-duality-site-comparison -> lem-trf-devissage-generation.
+The maintainer confirmed the failing proof order and replaced that appeal
+with the existing open/closed immersion preservation and site-comparison
+interfaces. The unit statement and chapter route are unchanged. This
+established-error replacement is recorded in
+coord/reports/maintenance/Q12-devissage-generation-route.md and the adjacent
+reproducible source patch. Q12's split still requires independent review.
+
+## Shared landing collisions
+- dag/nodes/sec-proetale-coefficients/det-pe-morphisms-etale-comparison.json (live kept)

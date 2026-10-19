@@ -1,0 +1,84 @@
+# Stage-1 worker report: lem-pur-smooth-pair-local-coordinates
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-smooth-pair-local-coordinates.json`: item, split into four proof steps; no Mathlib match.
+- `dag/nodes/sec-smooth-purity/lem-pur-smooth-pair-regular-immersion.json`: one statement-only prerequisite for the regular-immersion input (Tag 067U); no Mathlib match.
+- `citations.json`: verbatim statement excerpts for every cited node in every step.
+
+## Attachments
+
+None. I searched the project Lean source for the item id, the Stacks labels, and the local-coordinate terminology. No sorry-free project declaration states this arbitrary-base coordinate theorem. The existing `sbc-thm-etale-local-normal-form` is only the smooth-morphism normal form and does not include a prescribed closed subscheme or its regular equations.
+
+## WANTED
+
+None. The required Stacks sources are present locally.
+
+## Corrections and source audit
+
+The synchronized DAG supplied the target as an unsplit node after the initial repository scan; its statement and blueprint ancestry were retained. The source statement is the arbitrary-base version of Stacks Tag 0FUE, with the regular-sequence conclusion made explicit from Tag 067U. I added only the strictly smaller regular-immersion input as a statement-only child, since no current DAG node states Tag 067U for a general base.
+
+The proof follows Tag 0FUE. Step 1 applies the new child to obtain affine local equations forming a regular sequence. Step 2 applies `sbc-thm-etale-local-normal-form` to the smooth morphism (Y\to S), then lifts the étale coordinates to the ambient affine ring. Step 3 forms the map with the lifted coordinates and the regular equations; it spells out the finite-presentation, fibrewise dimension, Cohen–Macaulay flatness, fibre criterion, and local étale criterion used in the source proof (Tags 039C and 02GU). Step 4 identifies the fibre product with the inverse image of the coordinate subspace, invokes base-change stability of étaleness, and identifies the pulled-back last coordinates with the regular sequence.
+
+Small cases were checked: (b=0) gives an open-and-closed immersion and no last coordinates; (a=0) gives an étale map to the base point; (Y=X) gives the identity coordinate chart; and the empty fibre is vacuous. The regular-immersion child is not a duplicate of `lem-pur-regular-immersion-linearization` (that node assumes a perfect field and fixed purity setting), the diagonal regular-immersion nodes (which only treat diagonals), or `sbc-thm-etale-local-normal-form` (which has no closed immersion).
+
+## Not duplicates
+
+- `lem-pur-smooth-pair-regular-immersion` vs `lem-pur-relative-support-bottom-descent`: the new node supplies affine regular equations for a smooth closed immersion over any scheme; the existing node proves lower supported-cohomology vanishing and the degree-2c descent edge isomorphism for finite coefficients and supplied frames. It uses the coordinate theorem as an input, and cannot provide its regular-equation input.
+
+- `lem-pur-smooth-pair-regular-immersion` vs `lem-pur-regular-immersion-linearization`: the new statement is arbitrary-base regularity of a smooth immersion; the existing node is an étale coordinate theorem over the fixed perfect field with a prescribed pure codimension.
+- `lem-pur-smooth-pair-regular-immersion` vs `lem-sc-smooth-diagonal-regular-immersion`: the new statement applies to every smooth closed immersion; the existing statement applies only to a separated smooth morphism's diagonal.
+- `lem-pur-smooth-pair-regular-immersion` vs `sbc-thm-etale-local-normal-form`: the existing statement supplies coordinates for a smooth morphism alone and says nothing about a closed subscheme or regular sequence.
+
+## Mathlib searches
+
+The required searches were run through `msearch.py` for both the item and its prerequisite. The item searches found only generic `IsSmooth`, `IsClosedImmersion`, and standard-smooth declarations; none states simultaneous coordinates for a prescribed smooth closed subscheme. The prerequisite searches found only generic immersion/open-immersion instances and manifold immersion declarations; Loogle's identifier query was invalid because Mathlib has no `AlgebraicGeometry.IsRegularImmersion`. The searches and their actual outputs are recorded in the two node JSON files and the Q10 search log.
+
+## Review by Q10
+
+I read `coord/brief-stage1.md`, `stages/1-dag.md`, `SETUP.md`, `GOAL.md`, `coord/dag-sync.md`, `roles/worker.md`, and delivery-errors B–E. I read the current target node, its chapter and unit records, the main-20261015 blueprint ancestry, and the source passages in `literature/stacks-project/more-morphisms.tex` at Tag 0FUE and in `divisors.tex` at Tag 067U. I also read the full statement of every cited existing node.
+
+For step 1, the new child says exactly what is taken from Tag 067U: local affine equations of the closed immersion form a regular sequence. For step 2, `sbc-thm-etale-local-normal-form` says that a smooth morphism at a point becomes étale over an affine-space projection after affine shrinking; this is exactly the coordinate input used. Step 3 checks all hypotheses from the source proof: the lifted-coordinate map is locally of finite presentation, its restriction to the coordinate subspace is étale, smooth fibres are regular and Cohen–Macaulay, the regular sequence changes local dimension by (b), the étale restriction preserves the local dimension of (Y_s), and the fibre ring is finite. The cited Stacks fibre criterion and local étale criterion then give étaleness at the chosen point. Step 4 uses only the scheme-theoretic fibre-product definition, base change of étaleness, and the displayed regular sequence; it supplies the ideal-sheaf and regular-sequence clauses of the item.
+
+I verified that every `uses` entry is in `proof_deps`, every `citations.json` quote is a verbatim substring of its node statement, and no proof step relies on a node's proof text. No coefficient categories, field hypotheses, or extra separatedness assumptions were introduced. The new prerequisite is strictly smaller than the item because it gives only regularity of the immersion and no étale coordinates or coordinate-subspace identification. No SGA source is used.
+
+## Unfinished work
+
+None. No Lean was written or compiled, no Lake/build command was run, no git command was run in the shared repository, and nothing was delivered or pushed by this worker.
+- `lem-pur-smooth-pair-regular-immersion` vs `lem-pur-smooth-pair-local-coordinates`: the child isolates only the regular-immersion consequence of Tag 067U; the item additionally constructs an étale ambient coordinate map, identifies the scheme-theoretic coordinate subspace, and proves the restriction étale.
+- `lem-pur-smooth-pair-regular-immersion` vs `lem-sc-smooth-proper-diagonal-koszul-regular`: the child applies to arbitrary smooth closed immersions over any scheme; the existing node treats only a separated smooth morphism's diagonal and adds Koszul regularity, codimension, perfectness, and properness.
+
+
+## Second reading by Q10
+
+The first worker's sections above are retained as requested. This section describes the repaired delivery and supersedes the earlier claim that every input was cited. The item's statement is unchanged: it agrees hypothesis by hypothesis with Stacks 0FUE (more-morphisms.tex, lemma-etale-local-structure), including an arbitrary scheme base, a closed immersion, both smooth structure maps, and a Zariski open neighbourhood in the ambient scheme. The regular-equation clause is the first paragraph of that source proof. No field, Noetherian, separatedness, constant relative-dimension, or coefficient hypothesis was added.
+
+- Step 1: checked against 067U and the cited affine smoothness comparison and smooth-ring-flat statements; PASS after the child was changed to supply regular equations on an affine open, rather than merely in one local ring.
+- Step 2: checked against 054L and the complete statement of sbc-thm-etale-local-normal-form, and the open-immersion/composition theorem; PASS after explicitly arranging compatible base and ambient shrinkings, restricting the etale chart, and proving that localization preserves the chosen equations. A chart of Y is not assumed to be an ambient open without the subspace-topology argument.
+- Step 3: checked against the displayed map in 0FUE, affine-space definition and quotient/tensor universal properties; PASS. The finite P-presentation and its inverse are written out. The coordinate-subspace square is Cartesian because its defining ideal pulls back to (f), independently of etaleness.
+- Step 4: checked against 0FUD, 00TT, 00NQ, and every cited node's statement; PASS. The specified sequence on the fibre comes from the new relative-equation theorem, with both flatness hypotheses from step 1, not from an unjustified arbitrary-base-change assertion about regular sequences.
+- Step 5: checked against 07QP and 00KW; PASS. The dimension-drop lemma is applied only to nonzerodivisors in maximal ideals of Noetherian local rings. Both dimension calculations are written out; the etale ring comparison is cited for the scheme-to-ring use of 07QP.
+- Step 6: checked against 02GL and 00R4; PASS. The local fibre equals the fibre of the etale restriction, hence is a finite separable field; it has dimension zero. Regularity, Cohen--Macaulayness and the exact dimension equality are all in force before miracle flatness is applied.
+- Step 7: checked against the complete five-hypothesis statement of the existing ring fibre criterion (00R7), the input to 039C; PASS. The two essentially finite presentations, nonzero module, finite presentation over the final local ring, base flatness and closed-fibre flatness are separately supplied.
+- Step 8: checked against 02GU and the existing 00U6 pointwise criterion, 00RV differential base change, 00DV Nakayama, and the definition of unramifiedness; PASS. The finite differential module, its reduction, localization formula, Nakayama application and resulting principal etale neighbourhood are explicit. No general assertion of openness of an unspecified locus is used.
+- Step 9: checked against the Cartesian square of step 3, 02GO, 02GP and 02GN, and the affine-space definition; PASS. Restriction preserves the equations; base change gives etaleness on V; composition with the base-open inclusion gives the promised morphisms over the original S.
+- New node lem-pur-smooth-pair-regular-immersion: checked against divisors.tex 067U, lemma-immersion-smooth-into-smooth-regular-immersion, 063J, definition-regular-immersion, and the explicit affine consequence in 0FUE; PASS after repair. It is a statement only, restricts to the closed-immersion case actually needed, introduces all objects, and cites definitions for affine opens, base change and regular sequences. It supplies only regular equations, not the simultaneous etale coordinates of the item.
+- New node lem-pur-relative-regular-equations-base-change: checked against divisors.tex 0FUD, remark-relative-regular-immersion-elements, with the cited 0CEP input; PASS. It is a statement only, with flat finitely presented ambient algebra and flat final quotient. The prime is required to contain the equations, ensuring the local final quotient is nonzero. This generic algebraic lemma constructs no chart and is not a restatement of the item.
+
+Changes and reasons:
+
+1. Replaced the original step 3, which invoked 039C, 02GU, Cohen--Macaulay flatness, dimension comparisons and fibre regularity without node citations, by steps 3--8 with the actual theorem statements cited. Reused the existing flatness, dimension, regularity, differential and Nakayama nodes; no duplicates were created for them.
+2. Repaired the original child: removed the undefined general immersion formulation and made its conclusion affine regular equations, the exact input the item requires. The original formulation only gave generators in a local ring; a bare local-ring assertion cannot be used as an affine regular sequence without additional work over a non-Noetherian base.
+3. Added the genuinely missing relative-equation base-change input 0FUD. Arbitrary base change does not in general preserve a regular sequence: for R=A=Z and f=2, tensoring with Z/2 makes f zero. The new theorem excludes that example because A/(2) is not flat over R. Both ambient and quotient flatness hold for the smooth pair.
+4. Corrected the causal claim in the original last step: the inverse-image equality follows from the equations, not from etaleness. Wrote the base-open composition needed to pass back to the original S.
+5. Rebuilt citations.json: each citation now quotes the entire cited statement verbatim, one entry for every step/use pair. The generic inputs are read for their statements, never for their proofs.
+6. Independently searched Mathlib using algebra/quotient vocabulary. All actual outputs remain in searches.jsonl and the new search entries include those log records. I read Mathlib/RingTheory/Regular/Flat.lean, especially lines 34--53 and 75--96, against the base-change lemma: its theorems require the changing algebra to be flat or faithfully flat, which is absent here. They are ingredients, not an exact match or a one-line specialization. The regular-immersion searches returned standard-smooth charts and conormal facts, not equations for a prescribed smooth quotient. No Mathlib leaf was found.
+7. Searched the complete imported blueprint with blueprint_refs.py for regular immersion, regular sequence, relative regular, closed immersion smooth, 067U and 0FUD; searched DAG tag references and read the nearby diagonal, fixed-perfect-field linearization, relative-CI and Grothendieck regular-sequence statements. None supplies either new theorem under the current arbitrary-base hypotheses. No source Lean attachment matches: the existing RegularImmersion.smooth_comp and stalk-dimension declarations assume a perfect field and an already regular immersion. Upstream sorry declarations were not treated as proofs.
+
+Edge cases: empty Y is vacuous; if X=Y the empty regular sequence and b=0 recover a smooth chart. For b=0 at a chosen point, the construction removes other ambient components as needed and identifies V=U. For a=0 the restricted chart is etale over S, and the argument still works. Over a field the calculations reduce to the usual regular local-ring argument; for a nonclosed point the proof uses the actual local dimensions and finite separable fibre extensions, not a closed-point dimension formula. The arbitrary-base flatness criterion is used before imposing any Noetherian hypotheses on the base. No item-statement dispute was found.
+
+Generic tools from other units, for the maintainer's review (no tool_uses field was installed by this reader): sbc-thm-etale-local-normal-form supplies the smooth chart; lem-weil-pbc-smooth-ring-map-flat and lem-weil-pbc-smooth-ring-map-iff-smooth-affine supply the affine smooth/flat inputs; lem-pc-smooth-flat supplies flatness of the final local ring over the local base in step 7; lem-weil-pbc-smooth-fibre-regular-local, lem-weil-pbc-polynomial-ring-smooth and lem-weil-pbc-smooth-over-field-regular-local supply fibre regularity; lem-weil-pbc-regular-local-generators-regular-sequence, lem-weil-pbc-dimension-quotient-nonzerodivisor, lem-sc-etale-local-dimension, lem-weil-pbc-etale-fibre-discrete-separable-points and lem-weil-pbc-miracle-flatness are the exact local-algebra inputs in the 0FUE proof; lem-weil-pbc-criterion-flatness-fibre, lem-sc-etale-at-prime-flat-unramified-criterion, lem-weil-pbc-kahler-differentials-base-change and lem-weil-pbc-nakayama-local-generators implement its two pointwise criteria; lem-weil-pbc-etale-scheme-base-change, lem-weil-pbc-etale-ring-map-iff-etale-affine and lem-weil-pbc-etale-composition-cancellation supply only etale permanence/comparison. These are generic tools, not a replacement for a unit route. No same-unit node gives these arbitrary-base algebraic inputs. The other cited nodes are definitions. The unit and chapter bindings were retained.
+
+No agents were started, no Lean was written, no compiler or build was run, and no shared/live repository or launcher file was changed. No SGA source was used.
+
+Preflight repair: the first dry run stopped at the 0FUE tag collision with lem-pur-relative-support-bottom-descent. I opened that complete statement and added the required pairwise distinction under "## Not duplicates" above. I also replaced the step-1 scheme-flat citation by lem-weil-pbc-smooth-ring-map-flat (00TA), which directly supplies flatness of the affine algebras; step 7 retains scheme smooth-flatness for the stalk. Citations were regenerated after that refinement. This section was complete before the next dry run.

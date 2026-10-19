@@ -1,0 +1,63 @@
+# Stage-1 report: lem-coef-segal-equivalence-classifier
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-segal-equivalence-classifier.json`: item proof split into three steps; no statement change.
+- `citations.json`: verbatim quotations for each cited dependency in the proof steps.
+
+## New nodes
+
+None. The strict restriction-fibration input is already stated by `lem-coef-segal-cartesian-exponent`, and the Kan/trivial-fibration criteria are already stated by `lem-coef-kan-quillen-right-proper`.
+
+## Dependency modules
+
+None; this is a stage-1 natural-language split and writes no Lean module.
+
+## Attachments
+
+None. I searched both read-only source checkouts for the item id, its title, the walking-isomorphism terminology, and the blueprint tag; no project declaration states this item.
+
+## WANTED
+
+WANTED: Rezk, *A model for the homotopy theory of homotopy theory*, Theorem 6.2 and Proposition 11.1, for the strict simplicial-space walking-isomorphism classifier. The cited PDF is online but is not archived under `literature/`.
+
+## Not duplicates
+
+`lem-coef-segal-equivalence-classifier` vs `lem-coef-segal-inverse-evaluation`: the latter is formulated in the infinity-category `Fun(Delta^op, Spaces)` and uses its homotopy mapping spaces; this item uses strict simplicial-space internal homs, Reedy fibrancy, strict fibers, and an explicit collapse map.
+
+`lem-coef-segal-equivalence-classifier` vs `lem-coef-segal-categorical-equivalence-dk`: the latter concerns a pair of categorical homotopy inverse maps between Segal spaces and concludes Dwyer–Kan equivalence; it does not classify equivalence edges by maps from the walking isomorphism.
+
+`lem-coef-segal-equivalence-classifier` vs `lem-coef-quasicategory-invertible-interval`: the latter is an endpoint-extension theorem for quasicategories and does not apply to Reedy fibrant simplicial spaces or their strict mapping objects.
+
+## What I checked and corrected
+
+The imported statement is mathematically coherent and already has its blueprint ancestor and `from.place` filled. I retained all hypotheses, including Reedy fibrancy, the strict fiber definition of `M_V(x,y)`, the map over `V_0^2`, and the final collapse-to-`s_0` clause. The proof follows Rezk Sections 6 and 11: first the exponent lemma gives the restriction Kan fibration and the walking groupoid forces its image into `V_eq`; then the inverse-edge and two triangle data give the contractible Kan fibers over exactly the invertible components; finally precomposition proves endpoint naturality and identifies the collapse composite with `s_0`.
+
+I opened and read the statements of both cited nodes. `lem-coef-segal-cartesian-exponent` explicitly supplies the Reedy fibration for restriction along a degreewise injective map and the Segal internal-hom condition; `lem-coef-kan-quillen-right-proper` explicitly supplies Kan fibrancy and the boundary-lifting characterization of trivial fibrations. The `citations.json` quotes are copied verbatim from those statements. No off-unit tool lemma was used.
+
+I checked edge cases at the statement level: for the empty Segal space both sides are empty; for a discrete nerve, only identity edges lie in `V_eq` and the walking-isomorphism maps reduce to constant identity maps; for a groupoid nerve every arrow is in `V_eq`; and for the terminal Segal space the restriction map is the identity. The nearby infinity-categorical node was deliberately not substituted because its mapping object is not the strict simplicial-space internal hom used here.
+
+## Review by NI
+
+I read the item node, `sk-prop-sf-biduality-general`, the chapter record, Rezk's cited Sections 6 and 11 online, and the full statements of `lem-coef-segal-cartesian-exponent` and `lem-coef-kan-quillen-right-proper`. Step 1 uses exactly the exponent node's restriction-fibration assertion and checks that the walking groupoid's inverse and identity triangles force the image into `V_eq`. Step 2 uses the exponent node for the Kan mapping objects and the Kan node for the horn/trivial-fibration criterion; I wrote out the inverse-edge horn filtration and the contractible-fiber conclusion rather than hiding it behind a new clause node. Step 3 is elementary precomposition and explicitly checks the collapse map gives the degeneracy `s_0`. I checked all stated hypotheses at each use, preserved the strict-versus-infinity distinction, tested the four small cases above, and verified that no dependency cycle or duplicate split was introduced.
+
+## Second reading by NI
+
+The first reading above is retained as the worker's record. Its assertion that the original Step 2 wrote out a horn filtration was incorrect: that step did not specify any filtration, did not justify contractibility, and cited two nodes whose statements do not supply it (C1, C3, D3, E5). The seven steps below replace the original three-step proof. The item statement is unchanged: Rezk, Theorem 6.2 (printed p. 14), uses the same discrete nerve E, the same chosen arrow and strict enriched mapping space, and assumes a Reedy fibrant Segal space without completeness. Section 2.3 identifies this mapping space with the degree-zero cartesian internal hom. Section 6 identifies its collapse and endpoint maps. No Stacks tag states this homotopical theorem. I opened the online Rezk PDF, in particular pp. 6-7, 14-15, 24 and 26-28, rather than treating a tag or theorem number as a proof.
+
+- Step 1: checked against the full statement of lem-coef-segal-cartesian-exponent and Rezk Sections 2.3-2.5 and 6. The inclusion is monic in both directions, V is Reedy fibrant, and the two actual triangles 010 and 101 give both inverse equations. The endpoint composites have the correct d^1/d^0 order. PASS.
+- Step 2: checked against new lem-coef-segal-equivalence-outer-horn (Rezk Lemma 11.10), the full exponent statement, and the full Kan model statement. The horn lemma supplies precisely the missing weak equivalence. For k=2 the missing edge is invertible by [12]=[02][01]^{-1}; for k>=3 every edge already lies in the horn. This verifies the exact inverse-image equality needed to pull back the unrestricted Kan fibration. Fibration plus weak equivalence means trivial fibration in the cited model structure, which supplies boundary lifting including dimension zero. PASS, substantive repair.
+- Step 3: checked directly against the alternating-word filtration and pushout (11.8) on Rezk pp. 24 and 26. E(1)=F(1); at stage k the only new nondegenerate simplices are 010... of dimension k and 101... of dimension k-1. The other face at the end already occurs and the internal faces are degenerate. This is a direct degreewise pushout calculation, not a horn-filling theorem. Checked k=2 and k=3 explicitly. PASS, elementary.
+- Step 4: checked against the final proof of Proposition 11.1 on Rezk pp. 27-28 and the item's definition of hV. E(2) gives only gf=1, so the invertibility of f must still be imposed there; E(3) contains the second triangle and forces fg=1 as well. The proof now distinguishes these cases and explains why the assertions hold on inner simplices. PASS, elementary.
+- Step 5: checked against the exact strict mapping-space definitions, the pushout of Step 3 and Rezk's use of (11.8). The all-edges conditions agree under gluing because the edges are covered by the two pushout pieces. Projection of a boundary problem and pairing with its prescribed other coordinate proves pullback stability directly; the Kan node's statement identifies the result as a trivial fibration. PASS, elementary lifting calculation.
+- Step 6: checked against Rezk's deduction of Theorem 6.2 from Proposition 11.1 (p. 24) and the Kan node's boundary-lifting statement. Compatible maps glue degreewise over the union; recursive boundary lifts, including the empty boundary q=0, prove the inverse-limit projection trivial. No unstated theorem that inverse limits preserve arbitrary weak equivalences, and no uncited fiber criterion, is used. PASS, elementary recursive lifting calculation.
+- Step 7: checked against precomposition in the item's displayed internal-hom definition and the maps of Rezk Section 6. Naturality preserves both inverse equations; endpoint maps and collapse are proved in every inner degree, rather than only on vertices. The collapse-edge composite is the unique [1]->[0] and hence induces s_0. PASS, elementary.
+- New node lem-coef-segal-equivalence-outer-horn: checked hypothesis by hypothesis against Rezk Section 11.7 and Lemma 11.10 (printed pp. 26-27). Its H(k) is exactly the union of faces other than d^0, k>=2; its T_V(X) is exactly Rezk's all-equivalence-edge mapping subspace. It assumes Reedy fibrancy and the Segal equivalences and does not assume completeness. B1-B7 checked: statement only, all objects and operators defined, inherited definition dependencies introduce simplicial sets/Kan weak equivalences/Reedy fibrancy, single-escaped TeX, exact source lemma and definitions, no Stacks-tag shorthand, no unsupported Mathlib attachment. PASS.
+
+New-node necessity and searches: this horn-restriction result is strictly smaller than the item and is used at every finite cell attachment; it does not mention E or classify walking-isomorphism maps. It is not a two-line consequence of Segal fibrancy (Rezk proves it by an induction using Lemmas 11.6 and 11.11). I searched the entire DAG's statement/title/source text for 11.10, 11.11, 11.6, outer/zeroth horn and equivalence-horn combinations, and ran tools/blueprint_refs.py search for Segal and horn across the imported blueprint; no matching blueprint node exists. The existing lem-cbc-equivalence-outer-horn-filling is about a quasicategory and existence of a simplex, not a weak equivalence of strict mapping spaces of a simplicial space. The existing lem-coef-segal-inverse-evaluation is the item's infinity-categorical version and does not state this finite horn lemma. Read-only searches of the slopmaster2 and exact master WeilConjectures sources and dag/lean_names_upstream.json found no matching finished declaration.
+
+I ran my own msearch.py searches in LeanSearch, LeanFinder and Mathlib grep with the new outer-horn/Segal/invertible-edge queries, then captured their actual returned output verbatim in the new node and their authenticated entries in searches.jsonl. The semantic searches returned StrictSegal/quasicategory/horn-inclusion or generic fibrant-object declarations; none has the required simplicial-space mapping-space statement. I opened Mathlib's SimplicialSet/StrictSegal.lean:42-57, Quasicategory/StrictSegal.lean:34-35 and SimplicialSet/CoherentIso.lean:1-90: the first concerns strict Segal simplicial sets, the second only establishes inner-horn existence, and the third constructs a coherent-isomorphism simplicial set. None supplies the new node. There are zero new Mathlib leaves.
+
+Small cases: for empty V the horn source and target are empty (H(k) has vertices), so the asserted weak equivalence is valid without a nonemptiness assumption. For terminal V both are points. For the discrete nerve of an ordinary category, maps with all edges invertible are functors into its maximal subgroupoid and every indicated horn has a unique filler. In particular a groupoid with a nonidentity isomorphism verifies that all such arrows, not just identities, occur. This corrects the earlier report's assertion that a discrete nerve has only identity equivalences: that assertion holds for a discrete category, not for an arbitrary ordinary category's discrete nerve. In the nerve of [1], an unrestricted H(2) with vertices (0,1,0) has edges 0->1 and id_0 but has no filler; the all-equivalence condition correctly excludes it. Thus the new restriction on components is essential, and k=0,1 are correctly excluded from the horn lemma while the item's F(0) and identity-edge cases remain covered.
+
+Changes made: replaced the unsupported contractible-filler paragraph by the explicit alternating-word pushouts, exact all-edge subspaces, and recursive inverse-limit boundary lifting; added only the non-elementary Rezk Lemma 11.10 as an unsplit node; retained the item statement and the correct exponent input; repaired the collapse check to equality of simplicial maps in all degrees; regenerated citations.json with one verbatim quotation for every cited node at each repaired step. No off-unit proof tool, SGA source, Lean file or compiler was used. WANTED additionally: archive Rezk Section 11, especially Lemma 11.10 and the definitions immediately preceding it. The earlier 'New nodes: None' and three-step descriptions record the original worker's draft and are superseded by this second reading: the final split has one new node and seven proof steps.

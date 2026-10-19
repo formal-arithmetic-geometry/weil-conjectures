@@ -1,0 +1,82 @@
+## Worker report
+
+Files submitted:
+
+- `dag/nodes/sec-proetale-coefficients/sk-def-sfb-bounded-constructible.json`: existing definition, split. No whole-item Mathlib match; no new nodes or Mathlib leaves.
+- `report.md`: this repair report.
+
+Sandbox support files: `citations.json` contains eight complete verbatim statement quotations; `searches.jsonl` retains actual search receipts; `citation-baseline.json` retains the previous comparison and adds the current direct-dependency statement hashes. These support files are not submitted by deliver.py.
+
+Attachments: none. The exact blueprint tag has no hit in the slopmaster2 project source. I opened `WeilConjectures/SixFunctors/ProEtale/Derived/Constructible.lean:86`: `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible` is the essential image of bounded constructible étale complexes, with the different coefficient-category hypotheses shown in that file. Its docstring explicitly limits the agreement with intrinsic constructibility to finite coefficient stages. It does not state this item for arbitrary internal ring objects. Reference master `WeilConjectures/ConstructibleSheaf/ProEtaleModule/DerivedCategory.lean:62,70,87` gives the intended predicate, its cohomological characterization and its full subcategory, but line 92's triangulated instance is sorried, and that checkout is reference material only.
+
+WANTED: none. The current blueprint and Stacks sources are available locally.
+
+The imported proof cited detailed definitions and a triangulatedness assertion without supplying the construction. Its sketch dependencies were circular and used different constructibility conventions. The split constructs the full subcategory using the existing general ring-object definition `def-sfb-constructible-module`, the ordinary derived category and bounded cohomology. Its ambient module category is abelian by the cited sheaf tensor and module-abelianness statements. It imposes no completeness condition. The original unconditional triangulatedness assertion requires the explicit correction below.
+
+No mathematical work remains for this one-level split. No Lean was written or compiled, and no compiler, Lake, build command, worker git command, live-project edit or launcher edit was used. This worker does not deliver; a fresh reader must review and deliver the sandbox after its accepted dry run.
+
+## Repair of the returned delivery
+
+The return names exactly one prohibited file: `dag/units/sk-def-sfb-bounded-constructible.json`. The retained sandbox already has that file removed. I checked the full sandbox delivery inventory: it contains one node JSON and no unit JSON, no other node and no coordination file. I retain that scope repair rather than recreating the unit realization fields allowed by the older standing brief. Unit realization must be handled by the maintainer under this return's narrower rule.
+
+I reread the current chapter and unit records, the shared item's imported metadata, all eleven distinct direct statement/proof dependency statements, and the retained report and citation baseline. None of the recorded dependency statement hashes has changed since the previous repair. In particular, the current expanded `def-sfb-constructible-module` still requires exactly the coefficient hypotheses, strong monoidal pullback, module transport over the actual pulled-back ring, and finite stratification used in step 1. The eight quotes were regenerated from the current shared node statements, not copied from the superseded report. The original blueprint metadata and flags remain intact.
+
+This repair updates the item's split_report to document exclusion of the unit file, refreshes real Mathlib-search records, and replaces the accumulated contradictory historical report with this current account. The statement and proof argument require no further change. The required `deliver.py --no-push` builds a fresh commit on fetched current origin/newtargets-dag, preserves the current maintainer-owned node fields, and submits only the item node and report for server preflight. That is the authorized rebase; no unchanged branch is re-pushed and no push is performed by this worker.
+
+## Source error
+
+STATEMENT-DISPUTED: The unit's final sentence claims that topological Noetherianity of X makes the bounded constructible category triangulated for an arbitrary coefficient ring object. Kernel closure of finitely presented modules fails over noncoherent coefficient rings, even on a point.
+
+For a field k take
+
+$$
+ B=k[x,y_1,y_2,\ldots]/(xy_i\mid i\geq1),\qquad X=\operatorname{Spec}(\bar k),
+$$
+
+with abelian-group coefficients and the constant ring sheaf R associated to B. Both copies of R in multiplication by x are free of rank one. Its kernel is the constant sheaf on J=(y_i | i>=1). Indeed B is, as a k-vector space, the direct sum of k[x] and the positive-degree polynomials in the y_i. Multiplication by x is injective on the first summand and zero on the second. J is not finitely generated: any finite collection of proposed generators involves finitely many variables; setting those variables to zero kills those generators but leaves an unused y_j nonzero.
+
+Nor can this kernel become locally finitely presented on the pro-étale site: a finite free presentation on a nonempty member of a cover, pulled back to a geometric point, would give a finite presentation of J over B. Inverse image is exact and sends constant finite free modules to the corresponding B-modules. The one-point scheme admits no finite stratification avoiding this obstruction. The cone of x:R[0] -> R[0] has H^{-1}=J and H^0=B/(x), hence is not bounded constructible although source and target are. X is topologically Noetherian.
+
+The corrected statement retains the same bounded constructible predicate and full subcategory. It claims triangulatedness when the constructible module objects explicitly contain zero, are invariant under isomorphism, and are closed under kernels, cokernels and extensions. Stacks Tag 06UQ, `derived.tex`, `lemma-cohomology-in-serre-subcategory`, and Tag 0754, `homology.tex`, `lemma-characterize-weak-serre-subcategory`, give exactly this criterion including bounded intersections. No Noetherianity is then needed. The current existing `prop-weil-pbc-module-bounded-constructible-triangulated` corroborates this correction; it is not an extra proof dependency.
+
+The current blueprint's `prop-sfb-bounded-constructible-triangulated.proof.md`, final “Kernels” paragraph, itself identifies coefficient coherence as missing. I read that paragraph, the unit `_section.md` and proof, `def-sfb-bounded-constructible-complexes.md`, `lem-sfb-bounded-constructible-iff.md`, and `sk-def-sfb-constructible/def-sfb-constructible-module.md`. The correction follows their intended ordinary internal-module construction and Stacks' weak Serre criterion. No target statement or file is edited.
+
+## Mathlib searches
+
+The retained queries and receipts are preserved. Fresh searches on 2026-10-17 used msearch.py with the exact query strings recorded in the node: LeanFinder on bounded constructible internal-module cohomology after finite stratification; LeanSearch with the second phrasing in terms of a full derived subcategory; Loogle on `"constructible"`; and grep on `boundedConstructible|BoundedConstructible|IsConstructibleModuleObject`. All four services ran successfully. No unavailable service is described as a negative result.
+
+LeanFinder returned ordinary sheaf-of-modules finite presentation and generators. I read `Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:267`: `SheafOfModules.IsFinitePresentation` concerns local finite free presentations in that particular module category, without finite scheme stratification or a bounded derived predicate for arbitrary internal coefficients. LeanSearch returned generic ObjectProperty.FullSubcategory machinery; I read `CategoryTheory/ObjectProperty/FullSubcategory.lean`, including its objects, induced category and fully faithful inclusion. Loogle returned constructible subsets of topological spaces; I read `Topology/Constructible.lean:178`. Grep returned zero hits. The boundedness statements in `Algebra/Homology/DerivedCategory/TStructure.lean:90,107` express only cohomological bounds. None states the entire item. Generic full-subcategory construction remains an elementary proof step, not a newly manufactured node.
+
+## Not duplicates
+
+No new nodes, hence no new/existing same-tag pairs. I searched the whole DAG and blueprint for bounded constructible complexes and weak Serre subcategories, and opened the existing detailed definition, its iff node, the generic constructible-module definition, the generic module triangulatedness proposition and the weak Serre theorem. The detailed bounded constructible definition gives the same underlying object predicate and remains in blueprint.same_as. This split gives the construction in the item and introduces no clause-restatement or elementary lemma node.
+
+## Review by N1
+
+I read the current main-20261015 blueprint unit, detailed definition, cohomological iff statement and triangulatedness proof, the current chapter/unit records, the reference master definition, and Stacks Tags 05RU, 06UQ and 0754 with their local labels. There are no new nodes requiring individual source audits. The original object predicate, full-subcategory morphisms and no-completeness clauses are retained with the generic coefficient convention made explicit. The false final clause has the counterexample and correction above; it is not silently strengthened or identified with the étale-origin category.
+
+Step 1 cites seven existing node statements. `def-weil-pbc-proetale-site` supplies the universe/small-skeleton convention, meeting the essentially-small input of `lem-weil-pbc-sheaf-tensor-closed`. The latter explicitly gives the abelian sheaf category, additive tensor and preservation of all colimits by R tensor -. Finite-colimit preservation therefore meets `lem-sfb-modobj-abelian` exactly. The general clauses of `sk-def-sfb-module-objects` apply to this monoid object; its special condensed-ring clause is not being used. The now abelian module category meets `def-weil-abstract-derived-category`, which supplies its ordinary derived category and cohomology. `def-weil-pbc-bounded-derived-subcategories` identifies boundedness with finite cohomological support. The current `def-sfb-constructible-module` has the same closed symmetric monoidal Grothendieck abelian A, additive tensor and scheme X, accepts a ring object without requiring commutativity, and restricts modules by mapMod over the pulled-back ring on a finite stratification. Thus it applies to each cohomology module here. The explicit minimum/maximum argument normalizes possibly reversed preliminary bounds. This step correctly remains non-elementary; module-object definitions alone would not prove abelianness.
+
+Step 2 uses no non-elementary fact: objects pair an ambient object with its predicate proof; Hom sets, identities and composition are ambient ones, and their laws and full faithfulness follow immediately. Membership contains only the cohomology conditions, so no completeness property is introduced. Its elementary flag is appropriate.
+
+Step 3 uses the statement of `lem-sbc-cohomology-in-weak-serre-subcategory`, not an argument hidden in its proof. The abelian ambient category comes from step 1. The constructible class is a full subcategory by construction and is strictly full by the explicit isomorphism-invariance hypothesis. Zero, kernels, cokernels and extensions are explicit hypotheses as well. The cited statement expressly includes the intersection with D^b and inherited shifts and distinguished triangles. That intersection is exactly the predicate in steps 1–2. I checked these hypotheses against Stacks 06UQ and 0754; no coefficient or scheme hypothesis is smuggled in.
+
+For C1 and C4, every non-elementary fact used is supplied by a cited statement, and all eight complete quotations in citations.json are verbatim current statements. For C3, none uses a construction available only in the proof of another node. Proof dependencies equal the union of step uses. Generic off-unit sheaf and weak Serre tools remain declared in split_report.tool_uses as the standing brief requires; maintainer-owned top-level tool_uses is not set. The old sketch dependencies are excluded, and dependency traversal verifies that no cited branch returns to this item.
+
+For B1–B10 and D1–D5, there are no new nodes or Mathlib leaves, so no unsplit proof sketch, duplicate, elementary node or clause-restatement is introduced. The argument stays in the item, source places and blueprint.same_as are supplied, and imported metadata is preserved. The scope repair explicitly excludes the unit record despite the older unit-realization instruction. The current report supersedes the old accumulated validation claims; a fresh second reader still has work to do before delivery.
+
+For E1–E7, I checked the zero complex, empty scheme, degree-zero objects and their shifts, finite and reversed bounds, and unbounded cohomology. Zero has bounds [0,0]; every finite support fits an ordered interval; shifts translate it; unbounded support is excluded. On the empty scheme the predicate is vacuous. The one-point noncoherent-ring example fails the corrected kernel-closure hypothesis, so it cannot contradict the conditional result. No completeness or coefficient-category identification is used in these checks.
+
+## Validation
+
+Only this sandbox was modified. JSON, field preservation, citations, proof dependencies, dependency closure and actual search receipts were checked locally without running the prohibited local DAG/preflight scripts. The required final validation is `python3 /home/ubuntu/weil-launcher-nt/deliver.py N1 sk-def-sfb-bounded-constructible --no-push .`; it rebuilds on fetched current main and runs the project's preflight, check_dag and review_split on the server. Its complete result is kept in this sandbox's repair-dry-run.log. READY is reported only after that final invocation prints OK. No push is authorized for this worker.
+
+## Second reading by N1
+
+- Item statement: checked against the blueprint `_section.md` at order 866 and the detailed definition; the ambient category, pro-étale sheaf category, module-object convention, bounded cohomology predicate, morphisms, and absence of completeness are present with the required hypotheses. The final topological-Noetherian triangulatedness sentence is correctly marked `STATEMENT-DISPUTED` and replaced by the explicit weak-Serre closure criterion, with the noncoherent coefficient counterexample in the source-error section.
+- Step 1: checked every cited statement in the current DAG and its quotation in `citations.json`; the sheaf-tensor lemma supplies abelianness and colimit preservation, the module-object lemma supplies an abelian module category, and the derived/bounded/constructible definitions supply exactly the displayed predicate. The finite/reversed-bound normalization is elementary and valid.
+- Step 2: checked against the definition of a full subcategory and the ambient derived-category statement; inherited objects, homs, identities, composition, and full faithfulness are elementary, and no completeness datum is added.
+- Step 3: checked against `lem-sbc-cohomology-in-weak-serre-subcategory`, Stacks Tag 06UQ (`lemma-cohomology-in-serre-subcategory`) and Tag 0754 (`lemma-characterize-weak-serre-subcategory`); its zero, isomorphism, kernel, cokernel, and extension hypotheses match the corrected clause, and the bounded intersection is exactly the item predicate.
+- New nodes and Mathlib leaves: none were introduced; therefore there are no unsplit node statements or leaf declarations to audit. Existing-node and blueprint duplicate searches were checked in the DAG and blueprint tree.
+- Edge cases: checked zero and shifted complexes, finite and reversed cohomological bounds, empty schemes, degree-zero objects, and the unbounded case; the noncoherent-ring kernel example confirms why the original unconditional clause cannot stand.
+- Changes made in this second reading: added this required second-reading record; retained the worker's removal of the prohibited unit file, refreshed the item statement/proof metadata and verbatim citations, and preserved the explicit source dispute and correction. No mathematical step or dependency required further repair.

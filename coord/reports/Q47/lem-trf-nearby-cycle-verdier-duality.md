@@ -1,0 +1,76 @@
+# Q47: lem-trf-nearby-cycle-verdier-duality
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-nearby-cycle-verdier-duality.json`: item, split; statement unchanged. Eleven proof steps establish the evaluation-defined comparison by dimension and cohomological-degree induction, then the relative field-extension clause.
+- `dag/nodes/sec-trace-formula/lem-trf-plurinodal-alteration.json`: statement, unsplit; no Mathlib match. Semistable alteration input and the smooth proper alteration input over an algebraically closed field.
+- `dag/nodes/sec-trace-formula/lem-trf-constructible-free-etale-resolution.json`: statement, unsplit; no Mathlib match. Free étale generators and bounded-above resolutions, with no finite-projective-dimension assertion.
+- `dag/nodes/sec-trace-formula/lem-trf-geometric-duality-uniform-range.json`: statement, unsplit; no Mathlib match. Bounds on all bounded constructible inputs, including non-flat modules, and the bounded-above extension needed by the degree induction.
+- `dag/nodes/sec-trace-formula/lem-trf-nearby-duality-operation-squares.json`: statement, unsplit; no Mathlib match. The actual evaluation comparisons and their proper/smooth squares, localization, compactification composition and geometric descent. It does not assert invertibility of the comparison on arbitrary inputs.
+- `citations.json`: one verbatim statement quotation for every step/node pair.
+
+## Attachments
+
+None. Searches under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the blueprint tag, nearby cycles, alterations, free étale resolutions and geometric Verdier comparisons did not supply a declaration proving this item. Existing fixed-base six-functor declarations are not geometric nearby duality. The upstream master checkout is reference material, not evidence of a finished proof.
+
+## Literature wanted
+
+WANTED: Illusie, *Autour du théorème de monodromie locale*, Theorem 4.2, for lem-trf-nearby-cycle-verdier-duality. Varshavsky §4.1.4(b) explicitly cites this theorem; it does not give its proof.
+
+WANTED: Lu–Zheng, *Duality and nearby cycles over general bases*, arXiv:1712.10216v7, Remark 3.3, canonical comparison (3.4), Theorem 5.1 and its proof, Lemma 5.5 and squares (5.4)–(5.5), pp. 24 and 42–43, for the item and the four new inputs. The online PDF was read through the browser at https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf; no copy was downloaded into the project. Accordingly the item is proof_origin.by=agent and the absent local source is explicitly marked WANTED.
+
+WANTED: Kashiwara–Schapira, Lemma 13.2.1(b), as cited in Lu–Zheng's proof of Theorem 5.1, for lem-trf-constructible-free-etale-resolution.
+
+WANTED: Orgogozo, Lemma 4.7, and de Jong's semistable alteration theorem, as cited in Lu–Zheng's proof of Theorem 5.1, for lem-trf-plurinodal-alteration. The available ILO volume's discussion in VII §3.4 was checked but not presented as an exact statement of the whole tower assertion.
+
+## What required repair
+
+The source gives an axiom-(V) citation, not a split proof. This delivery supplies the double induction and the nodal-curve detection argument rather than moving the desired invertibility into a child. The field-extension assertion is handled separately, with the dualizing objects relative to the fields. The statement of the item is unchanged; there is no statement dispute.
+
+An attempted global finite-flat trace epimorphism was rejected during self-review: for the map of affine lines x ↦ x^ell and coefficients F_ell, the usual multiplicity trace at the totally ramified point is multiplication by ell, hence zero. No such node is delivered. Step 5 constructs a surjection only on a suitably shrunken dense open, by summing the universal-homeomorphism sheets. This is elementary from two existing cited statements, so even the corrected generic trace assertion was folded into Step 5 rather than delivered as a fifth child. The genuine searches for both discarded candidates remain in searches.jsonl and their result files; they are not represented as searches for a delivered new lemma.
+
+A second repair removed an unjustified extension of a generic finite factorization over the trait. The existing finite-normalization statements concern schemes over a field. Step 4 instead applies Nagata first to X and then to U → Xbar. Localization and compact-support composition are stated explicitly in the operation-squares input over the required geometric fields. Thus no field-only normalization theorem is applied to a trait scheme, and no Zariski-main node is cited.
+
+The degree induction must include non-flat kernels over O_E/varpi^n. It does not use thick generation by constants, a finite free resolution, or a finite global dimension of this ring. The uniform-range input explicitly retains the broader constructible domain as an independent obligation. The field-extension inputs allow a separably closed K, since a geometric generic point is not required to have algebraically closed residue field.
+
+## What remains unfinished
+
+No Lean or compiler work was attempted, as required by the stage-1 restriction. The four new nodes intentionally remain statement-only; their proofs are subsequent queue items. The present item's mathematical proof is complete relative to those independently stated inputs. Missing source copies are listed above rather than concealed.
+
+## Not duplicates
+
+No delivered new node cites a Stacks tag shared with an existing node. The existing generic finite splitting and universal-homeomorphism equivalence, rather than fresh nodes for these facts, are used directly.
+
+lem-trf-plurinodal-alteration vs thm-nagata-compactification: a proper compactification does not give a generically finite plurinodal alteration; neither node implies the other by specialization.
+
+lem-trf-constructible-free-etale-resolution vs lem-trf-devissage-generation: the latter only gives thick generation of the finite-Tor category by arbitrary flat lisse strata and explicitly says constants do not suffice. The new input is an infinite bounded-above free étale resolution on a Noetherian scheme, also for non-flat constructible modules.
+
+lem-trf-geometric-duality-uniform-range vs lem-trf-nearby-cycle-finiteness-exchange: the existing node gives nearby constructibility and finite-Tor preservation over the fixed trait, not uniform lower bounds for the two contravariant functors over all finite extensions, nor bounds for non-flat inputs and field extension.
+
+lem-trf-geometric-duality-uniform-range vs lem-pod-coefficient-dual-perfect: the latter is coefficient duality of perfect finite-Tor objects in fixed conventions. The new input concerns geometric dualizing objects and all constructible inputs, with uniform dimensions and nearby cycles.
+
+lem-trf-geometric-duality-uniform-range vs lem-sfb-dc-hom-preserves: the latter has condensed O_E/E/Qbar_l coefficients and does not give the finite-ring geometric nearby-cycle bounds.
+
+lem-trf-nearby-duality-operation-squares vs lem-trf-nearby-cycle-finiteness-exchange: ordinary nearby exchange is not the equality of the evaluation-defined duality arrows; the new node also treats general finite trait extensions, geometric-field comparisons and all constructible inputs.
+
+lem-trf-nearby-duality-operation-squares vs prop-functor-package: the existing package has fixed finite-field-algebraic-closure base, proétale finite-Tor domains. The new input explicitly retains geometric generic fields, arbitrary constructible finite-ring kernels and compatibility of these particular arrows. It is not claimed to follow by silently changing the base or category of that package.
+
+lem-trf-nearby-duality-operation-squares vs lem-trf-nearby-cycle-verdier-duality: the child only defines the comparisons and gives formal compatibility squares. It asserts no general invertibility. The parent proves invertibility by the alteration, degree and nodal-curve argument.
+
+## Review by Q47
+
+I read the current main-20261015 blueprint ancestor lem-trf-local-term-locality, its normal-cone specialization proof, and the sk-i-curve-zero unit. This item provides the nearby-duality input in the specialization chain through lem-trf-trace-specialization and lem-trf-specialization-cohomological-comparison, rather than replacing the unit's contraction or purity route. I read Varshavsky §4.1.4(b) and the relative duality conventions of §§0.2 and 1.3. I then read the online Lu–Zheng proof of Theorem 5.1 and its comparison squares. It is the model for the dimension/degree induction, the nodal-curve argument, the resolution input and its bounds. The source copies missing locally are named above. No forbidden SGA purity route is used. Smooth purity is the diagonal/deformation construction; the operation-square child explicitly requires that construction over the stated fields, rather than pretending the existing fixed-k theorem alone covers them.
+
+For each new statement I checked its scope against the place just named. The alteration lemma requires excellence and an equal-characteristic trait; it allows finite extensions before the plurinodal tower and never requires prime-to-ell degree. Its length-zero case is an actual trait. The field case assumes algebraically closed F, where smooth alterations are available. The free-resolution lemma uses Noetherian X and finite coefficients: finite generation lets finitely many local lifts dominate an epimorphism, and noetherian constructibility controls successive kernels. It says bounded above, not finite. The range lemma uses the truncated-DVR coefficient ring, not an arbitrary coefficient ring of potentially infinite injective dimension. It explicitly covers the D^- extension and finite-extension-uniform generic-dimension bounds needed by the induction. The operation-square lemma compares the actual structural-counit/evaluation arrows; its proper and smooth formulas include the appropriate twist and shift. These are strictly smaller compatibility assertions, not the desired isomorphism. I added localization and composition in its stated geometric domains when Step 4 was repaired.
+
+Step 1 uses the operation-square statement's definition, finite-extension compatibility and descent; all are explicitly present. Step 2 uses its closed-support/localization and proper squares. The lower-dimensional induction is stated for every total scheme in this class, not only proper ones; vertical components carry no generic input. Step 3 uses exactly the lower bounds and D^- extension in the range node and the displayed triangle in the free-resolution node. For Q concentrated in nonpositive degrees, Q^0 is a subcomplex, and its quotient has degrees at most -1. Applying either contravariant functor raises a lower bound by one; induction on that bound then proves vanishing degree by degree. This checks the shift sign and avoids a circular use of the conclusion for the kernel.
+
+Step 4 uses Nagata's actual statement for separated finite-type maps to qcqs schemes, twice. The second target is the proper compactification of X, so these hypotheses hold; the descended U is separated finite type over that target. Taking its closure introduces no extra generic components. The localization and composition statements of the operation-square node identify Rh_*e_! with the original generator extended by zero. Boundary and component-intersection errors have strictly smaller generic-dimensional support. In particular I do not cite a definition node as a compactification or normalization theorem.
+
+Step 5 uses the alteration statement only for the existence of P, and the existing generic-finite-splitting statement only after restricting to the dense open where h is finite. That statement permits zero sheets in general; proper dominance rules out this case here. The existing universal-homeomorphism site-equivalence statement identifies each nonempty sheet with the target étale site. A finite product of copies of A has the surjective sum map; overlap identifications permute the sheets, and sum is invariant under permutations. The resulting sheaf map therefore glues. Localization discards its boundary errors using Step 2, while the kernel of its epimorphism is handled by the already established lower-degree bound, not by assuming it is flat. This also covers generically inseparable alterations without degree inversion.
+
+Step 6 is multiplication/evaluation on a geometric point: both relative dualizing objects are A and the unit normalization is Psi A=A. This directly gives the identity. Step 7 uses the alteration statement's finite nonsmooth locus and the operation statement's proper and smooth squares. Rf_*A is bounded constructible by the latter's explicit domain assertion. The outer induction applies to Y since its generic dimension is smaller; hence Rf0_* of the cone is zero. On the smooth locus the cone is the shifted twisted pullback of the zero cone on Y. I opened lem-trf-finite-support-defect-conservativity and checked that it requires boundedness, closed support and finiteness of the composite of that support with f: these are exactly supplied by the range, operation and alteration statements. Its conclusion is precisely the remaining cone vanishing; it asserts no duality theorem.
+
+Step 8 uses finite-extension descent from the operation statement, and finite-Tor preservation from the existing nearby-finiteness statement only after the all-constructible induction is finished. Steps 9 and 10 repeat the explicit dimension/degree reductions with the field functors and use smooth proper alterations over algebraically closed F. The extension K is allowed to be merely separably closed in both the bounds and operation statements. On a smooth r-fold, the stipulated diagonal/DNC purity normalization makes delta the identity on A(r)[2r], so beta(A)=delta is invertible. The induction proves beta on all bounded constructibles; setting M=A then proves delta for arbitrary T. This does not assume beforehand the field-extension conclusion it proves. Step 11 is the tensor–Hom transposition equation itself, so it checks evaluation compatibility, not just the existence of some isomorphism.
+
+I tested the empty generic fibre, a geometric point, a length-zero tower, a nodal curve with finite singular support, a purely inseparable sheet, a ramified finite cover with degree divisible by ell, and a non-flat A/varpi kernel when n>1. These tests account for the repairs above. I also checked that relative dualizing objects on the two fields create no trait-dimension shift. Every cited statement was opened and its operative clause is copied verbatim into citations.json; no step relies on the proof of a cited node. Every new node has empty proof and proof_deps and a blueprint origin. Whole-DAG/blueprint searches and Mathlib search outputs were read; the nearby notions are absent, and returned generic linear-dual, structure-sheaf module and abstract derived-resolution theorems are not one-line specializations of these geometric assertions. All proof steps are below 2000 characters. Off-unit generic tools are declared with reasons in split_report.tool_uses. No Lean, build, live-project write, live-launcher write, or manual git operation was performed.

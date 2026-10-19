@@ -1,0 +1,31 @@
+# Stage-1 report: det-prop-sfb-qlbar-colimit-x-pullback
+
+Files written:
+
+- `dag/nodes/sec-proetale-coefficients/det-prop-sfb-qlbar-colimit-x-pullback.json`: existing statement node, status changed to `split`; no new nodes.
+- `citations.json`: verbatim statement quotes for every cited node in every proof step.
+- `searches.jsonl`: the four required Mathlib searches for the item, recorded by `msearch.py`.
+
+Attachments: none. I searched the project source for the item id, its blueprint tag, and the coefficient-comparison names. No sorry-free declaration in `WeilConjectures/` states this item, so this is a split rather than an attachment.
+
+WANTED: none.
+
+The imported node already contained a complete six-step proof and all of its dependencies. I retained that proof and its statement. The imported `sk-prop-sfb-cartesian-coefficients` forward reference is not used by any step and remains only in maintainer-owned import metadata; the proof dependencies are exactly the union of the six steps. No new lemma node is needed: the finite-subextension point-colimit argument is written directly as Step 5, and the other universal-property arguments use existing nodes. The item is not a Mathlib leaf because the statement is project-specific.
+
+## Review by Q07
+
+I read the item statement and the four-step unit route in `dag/units/sk-prop-sfb-qlbar-colimit-x.json`, the chapter record, and the current blueprint source `literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md`. The statement fixes the prime, algebraic closure, finite extension, coefficient rings, pulled-back coefficient sheaves, and canonical comparison `alpha_f`; its three conclusions match the blueprint's integral inverse-limit, localization, and finite-subextension colimit comparisons. I also checked that the item has no finished declaration in the read-only Lean source.
+
+For Step 1, I read `det-pe-topos-functoriality-site`, `det-pe-topos-functoriality-inverse-image`, and `lem-galois-yoneda-hom-bijection`. Their statements provide subcanonicity, the inverse-image/pushforward adjunction and section formula, and Yoneda evaluation with naturality. These are exactly the ingredients used to identify an inverse image of a representable with the representable of its fibre product and to transport maps. The step is elementary once those three statements are cited.
+
+For Step 2, I read `sk-def-sfb-pullback-from-point`, `det-prop-sfb-qlbar-colimit-x-integral-limit`, `sk-def-sfb-pullback-from-point-comp`, `lem-galois-yoneda-hom-bijection`, `def-sfb-finite-upper-star-comp`, `def-sfb-finite-lower-star-comp`, and `sk-def-sfb-condensed-ring`. The pullback-from-point statement supplies the representing schemes and their fibre-product description; the integral-limit node supplies the finite-level and ring identifications; the composition nodes say how the upper and lower star composition maps are defined; the condensed-ring node identifies sections of a profinite ring; and Yoneda supplies the universal-element calculation. I checked that the step uses only the stated naturality and fibre-product formulas, including the reduction maps.
+
+For Step 3, I read `det-prop-sfb-qlbar-colimit-x-integral-limit` and `sk-def-sfb-pullback-from-point-comp`. The former states the canonical integral-limit isomorphism and its projections; the latter states the canonical monoidal comparison `alpha_f`. Equality after every limit projection gives the claimed equality by the limit universal property, and the componentwise ring operations give equality as ring maps. The hypotheses are the fixed finite extension and scheme morphism already introduced by the item.
+
+For Step 4, I read `def-sfb-integers-to-subfield`, `det-prop-sfb-qlbar-colimit-x-invert-ell`, `sk-def-sfb-pullback-from-point-comp`, `def-sfb-module-upper-star`, and `def-sfb-module-upper-lower-adjunction`. The first node gives the coefficient inclusion, the localization node gives the cocone legs `ell^{-m} phi`, the comparison node gives their naturality, and the two module nodes give the tensor pullback and its adjunction. I checked explicitly that the argument uses the balanced tensor maps to identify the pulled-back module cocone, then the adjunction to establish its colimit property; the ring comparison follows from monoidality.
+
+For Step 5, I read `sk-def-sfb-qlbar-condensed`, `sk-def-sfb-condensed-ring`, `def-sfb-qlbar-subextension-map`, and `def-sfb-qlbar-subextension-to-qlbar`. The condensed algebraic-closure definition says every section has finite-subextension image; the condensed-ring definition supplies the topology and continuity; the two map nodes give functorial finite-subextension inclusions and the cocone legs. The common finite compositum proves independence, additivity, and naturality, while the fixed algebraic closure makes the index a set. This is a direct universal-property step rather than a separately introduced node.
+
+For Step 6, I read `sk-def-sfb-pullback-from-point`, `def-sfb-qlbar-x-cocone`, `sk-def-sfb-pullback-from-point-comp`, `def-sfb-finite-upper-lower-star-adjunction`, and `sk-def-sfb-sheaf-tensor`. The first three identify the pulled-back finite-subextension objects and every cocone leg under `alpha_f`; the adjunction gives preservation of the abelian colimit; and the tensor statement supplies preservation of colimits needed to check the induced ring multiplication on pairs of legs. I checked the finite-compositum argument for multiplication and the unit, and verified that the same formula is transported by the monoidal comparison.
+
+I opened every cited node named above and generated `citations.json` from its exact `statement` field, so each quote is verbatim and records what the corresponding step takes from that node. The six-step `proof_deps` list is the union of all `uses`; no cited node is omitted. I tested the edge cases relevant to the construction in the written argument: the inverse-limit index starts at `n >= 1`, the finite-subextension index is directed by composita and is a set, and the universal-property arguments include the zero and unit maps. The required server `check_dag` check passed before this report was written.

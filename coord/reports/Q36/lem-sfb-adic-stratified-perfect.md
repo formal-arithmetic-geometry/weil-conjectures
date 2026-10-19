@@ -1,0 +1,76 @@
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-adic-stratified-perfect.json`: repaired split, replacing returned step 5 by steps 5–9; statement and Lean record unchanged.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-noetherian-global-constructibility.json`: one statement-only node, unsplit; no Mathlib match after two semantic phrasings, Loogle and source grep.
+- `citations.json`: verbatim statement excerpts for every node cited by every proof step.
+
+Attachments:
+
+None. Searches of the read-only Slopmaster2 project by the blueprint tag and by adic/stratified/perfect notions found no exact finished declaration. The item's existing stage-2 Lean record is retained as required; it is not evidence of a finished proof.
+
+WANTED:
+
+None. Bhatt–Scholze and the Stacks sources used here are present.
+
+What was wrong in the returned node:
+
+Returned step 5 (2905 characters) combined completed-model reduction, K-flatness, exact constant realization, uniform bounds, affine-local/global constructibility, and comparison. The repair follows the same route and keeps the item's statement and Lean record exactly unchanged. Existing nodes supply all but the affine-local/global sheaf argument, which is extracted to the one new node. Steps 1–4 remain verbatim; the old last step is retained with its reference to old step 5 updated to new step 8 and with a citation for that constructibility equivalence.
+
+The interrupted attempt had already made this extraction and run four searches plus a second LeanFinder phrasing. I read and retained those logs and results. Its new node still used plain-text mathematics, an absent `constructible-local` label in proetale.tex, an incomplete ancestry `via`, and an unnecessarily ambiguous clause about passage between sites. I corrected these: the source is Tag 095E, `etale-cohomology-lemma-constructible-quasi-compact-quasi-separated`, its Noetherian-module clause and finite-refinement proof, together with Tag 005L, `topology-lemma-constructible-Noetherian-space`. The same finite-refinement argument applies separately to sheaves on the pro-étale site. The statement now explicitly introduces constant module coefficients, inverse-image restrictions, site-local trivializations, and finitely presented values, and claims the equivalence separately on each site. Site comparison remains the job of the existing comparison theorem. No proof was put in the new node.
+
+The retained proof cited the general abelian-monoidal K-flat node without verifying its extra colimit hypotheses. Step 5 now cites the more direct existing ringed-site lemma `lem-pc-bounded-above-flat-kflat-site`; the finite-projective terms are flat by their idempotent direct-summand description. The malformed earlier Loogle query is retained as such, with no claimed absence result from it; a valid quoted-name query was run and returned zero hits. Its exact query and result are recorded.
+
+What I could not finish:
+
+No mathematical stage-1 obligation remains identified. The first required dry run exited with a duplicate-documentation failure for Tag 005L; this report now distinguishes the new sheaf lemma from that existing topology definition and the other same-tag nodes. A fresh dry run and push follow this repair.
+
+## Supporting argument retained from returned step 5
+
+For the new affine-local/global lemma, take a finite Noetherian affine cover U_1,...,U_m. The underlying space of X is Noetherian, so locally closed sets are constructible (005L). Global-to-local uses the fibre products of immersed strata with an affine open; their restrictions are still locally constant with the same module values. Local-to-global orders the affine charts, puts W_i = U_i minus the preceding charts, and pulls each local stratum back to W_i. These actual scheme fibre products have disjoint locally closed constructible images covering X and actual projection morphisms to the local strata. Pulling back their constant trivializations gives the desired global finite stratification. This finite-refinement argument does not depend on the chosen étale or pro-étale site. The source's Noetherian-module finite-type values are finitely presented because R is Noetherian. This argument belongs to the future split of the new lemma; it is recorded here to preserve the returned proof route.
+
+## Review by Q36
+
+I read the chapter and `sk-lem-integral-models` unit, the current blueprint text of `det-lem-integral-models-stacks`, Bhatt–Scholze Proposition 6.6.11 and its proof, Definition 6.5.1 and the boundedness/triangulatedness route of Lemma 6.5.3. For the new node I read Stacks 095E in etale-cohomology.tex, including its explicit Noetherian-module version and finite-affine-cover refinement proof, and 005L in topology.tex. I also read proetale.tex Definition 09AJ, comparison Lemmas 09AK/09AL, and weak Serre Lemma 09B5. The new lemma isolates only the sheaf-theoretic local/global convention; it neither restates the adic criterion nor claims derived comparison. The item's proof retains the integral-criterion route and uses no SGA source.
+
+Step 1 uses the immersion-limit statement for actual locally closed immersions, the weakly-étale localization statement for actual site objects, and the constant/completed coefficient statement for the Koszul completion unit and finite reductions. Exact countable products, their derived representation, the strict-tower Roos triangle, and finite-stratum detection supply exactly the limit and conservativity statements used there. The fixed sheaf universes and slices remain the ones in those statements; there is no assertion about arbitrary completed-coefficient scheme pullback.
+
+Step 2 uses the statements of exactness and conservativity of geometric stalks and the ringed-topos tensor/pullback isomorphism. The remaining argument is the displayed field-vector-space tensor calculation. It uses k=A/I being a field, rather than asserting that a bounded complex over A or A/I^n is perfect.
+
+Step 3 uses the actual fibre-product stratification refinement statement, the comparison-pullback isomorphism, and the residue-lisse perfect-lifting statement. The refined strata are Noetherian and quasi-compact; A is Noetherian and I-adically complete by the unchanged hypotheses; the restricted residue complex has locally constant finitely generated values and the Tor bound from step 2. These are the hypotheses of the lifting statement. No finite-cardinality or dimension assumption was inserted.
+
+Step 4 uses power-torsion inverse-limit completeness, the constant/completed equivalence, the pro-étale covering definition, and finite-stratum detection. A local model term is an idempotent summand of a finite free completed sheaf; its finite quotients are I-power torsion. Quasi-compactness of each stratum and the finite-piece covering axiom give finitely many perfect models, hence a single cohomological interval. The empty scheme uses [0,0].
+
+Step 5 now uses the ringed-site bounded-above flat K-flat statement, whose only relevant hypotheses are a ringed site and bounded-above flat terms, and the completed-constant reduction statement B tensor^L_A k = k_U. Flatness of a finite-projective local term is proved by its direct-summand tensor functor. Step 6 uses the exact constant-module section functor to pass cohomology through constant realization; finite-dimensionality is the subquotient calculation over the residue field. Step 7 uses the finite-stratum-detection statement for cohomological vanishing on the same strata and covering pieces. None of these arguments is hidden behind the new lemma.
+
+Step 8 uses exactly (ii) implies (i) of the new lemma, applied separately to each cohomology sheaf of the reduction on the pro-étale site. The previous local model calculation provides its global strata and locally constant finitely presented values. Step 9 uses the bounded constructible derived equivalence in `sk-thm-pe-constructible-comparison`, not just a sheaf equivalence: X is Noetherian, hence qcqs, and k is a discrete Noetherian ring even if infinite. The resulting étale C is bounded and affine-locally constructible; the new lemma on the étale site provides finite global stratifications, and step 2 gives the required Tor bound. Thus every hypothesis and clause of (a) is recovered.
+
+Step 10 retains the exact completion-unit/strict-limit argument and uses the exact derived-change-of-rings statement for residue reduction, the bounded constructible comparison, the cohomological long exact sequence, and the discrete-Noetherian weak-Serre statement. The latter actually states kernel, cokernel and extension closure, as the cone calculation requires. The added citation to the new lemma supports the renumbered step-8 reference. This is not an appeal to an unspecified proof of a definition node.
+
+I checked delivery-errors B–E against the files: the new node has only a self-contained statement, empty proof/dependencies, exact definition dependencies, TeX, a source tag and label, and full blueprint ancestry through both the item and its parent. Searches used the whole DAG (including same tags and key words), the whole blueprint via `blueprint_refs.py`, and the read-only project source. No existing node gives its arbitrary-Noetherian-coefficient, two-site local/global assertion; in particular the finite-coefficient étale lemma below is insufficient. Semantic hits concerned Noetherian schemes or quasi-coherent generator/presentation data, not these constant-module strata; source grep hits concerned topological constructibility and Chevalley. I kept the recorded searches and added the previously logged second phrasing and the valid Loogle result without inventing any query.
+
+Small cases checked: X empty and zero sheaves give empty strata; one affine chart gives the original partition; overlapping charts are disjointized by actual pullbacks to locally closed pieces, so no scheme factorization is inferred from image containment; nonreduced charts are allowed. R=0 causes no exception; an infinite field is allowed, and finite presentation is not confused with finite cardinality. The equivalence does not transport an arbitrary pro-étale sheaf to the étale site. In the item I=0 gives ordinary constant perfect field models, zero complexes and shifts satisfy the stated bounds, and no residue-characteristic invertibility or dimension bound is used. All non-elementary steps are below 2000 characters. For the return's single numbered issue, each argument of the old long step now has an explicit existing or new node citation, and the item statement/Lean record are preserved.
+
+Generic off-unit tools are declared in `split_report.tool_uses`, including the ringed-site K-flat lemma. They justify the completion, stalk, tensor and comparison operations, not a replacement of the unit route. Every item-step citation has a verbatim quote in `citations.json`.
+
+## Not duplicates
+
+- lem-sfb-noetherian-global-constructibility vs def-weil-constructible-subset: defines constructible subsets and their Noetherian-space characterization; it does not compare affine-local and global stratifications of module sheaves.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-qcqs-affine-local: assumes a finite coefficient ring and treats the étale site; the new lemma permits every Noetherian coefficient ring and separately treats the pro-étale site, under the stronger Noetherian scheme hypothesis.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-curve-constructible-quot-part: asserts constructibility of a quotient in a curve short exact sequence; it gives no local/global characterization.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-module-subobject-noetherian: asserts stability under subobjects on the étale site, not equivalence of affine-local and global definitions.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-curve-constructible-sub-part: asserts constructibility of a subobject in a curve short exact sequence, not a local/global equivalence.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-module-underlying-sets: forgets finite module coefficients to underlying constructible sets, without comparing local/global partitions.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-curve-constructible-sub-quotient: proves subobject and quotient closure for torsion curve sheaves, not the local/global criterion for arbitrary Noetherian module coefficients.
+- lem-sfb-noetherian-global-constructibility vs q1-constructible-integral-coefficients: compares integral module and finite-set predicates for torsion abelian sheaves, both already global.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-torsion-modules-agree: compares abelian and Z/n-module structures for torsion curve coefficients, both already global.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-curve-constructible-annihilator: bounds an annihilating integer for a torsion curve sheaf, not its stratification conventions.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-module-surjectivity-locus: proves constructibility of the nonsurjectivity locus of a finite-coefficient morphism, not the sheaf local/global equivalence.
+- lem-sfb-noetherian-global-constructibility vs def-weil-pbc-etale-constructible-sheaf: defines global constructibility for finite coefficients on the étale site; it proves no local/global equivalence for arbitrary Noetherian rings.
+- lem-sfb-noetherian-global-constructibility vs def-weil-pbc-constructible-abelian-sheaf: defines global finite locally constant abelian constructibility and does not give a module-sheaf local/global equivalence.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-stalk-cardinality-bound: bounds finite stalk cardinalities; the new lemma allows infinite finitely presented module values.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-closed-generic-criterion: gives a closed-subscheme dense-open criterion for finite locally constant étale values, not a finite-cover affine-local/global equivalence.
+- lem-sfb-noetherian-global-constructibility vs q1-constructible-integral-coefficients-backward: compares torsion integral-module and finite-set constructibility, both global, in one direction.
+- lem-sfb-noetherian-global-constructibility vs q1-constructible-integral-coefficients-forward: compares torsion integral-module and finite-set constructibility, both global, in the other direction.
+- lem-sfb-noetherian-global-constructibility vs lem-weil-pbc-constructible-etale-module-sheaf-comparison: compares the project finite-coefficient global predicate with its source-library counterpart, not affine-local/global constructibility for arbitrary Noetherian rings.
+
+The existing `lem-weil-pbc-etale-stratification-local-gluing-core` constructs an actual global refinement of finite local immersed partitions; it supplies no assertion about the module-sheaf predicates, either direction of their equivalence, or pullback local constancy. It is a usable ingredient for the future split of the new lemma, rather than a duplicate of its statement. No additional node is created for elementary vector-space or finite-minimum calculations.

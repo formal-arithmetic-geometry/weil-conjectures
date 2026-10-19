@@ -1,0 +1,48 @@
+# Q132: lem-per-very-tame-local-kummer-quotient
+
+## Files written
+
+- `dag/nodes/sec-deligne-laumon-a1/lem-per-very-tame-local-kummer-quotient.json` — repaired the returned split into eight steps; statement retained byte for byte.
+- `citations.json` — regenerated with a verbatim statement quotation for every step/node citation.
+
+No new nodes and no new Mathlib leaves. The earlier report, citations and search work were read before repair; its valid proof arguments and all node search records and `searches.jsonl` are retained. The current repository still has this item unsplit; comparison showed differences only in the delivered proof, its dependency/origin/report fields, status and blueprint metadata. The initial required dry run passed at `81e77502c0` before this repair. That mechanical pass did not resolve the mathematical return.
+
+## Attachments
+
+None. Source searches in the read-only slopmaster2 checkout for the exact item/blueprint id and tame-diagonal, invariant-logarithmic and Kummer quotient terminology found no declaration stating this result. The upstream master was also searched as reference material, without treating sorry declarations as proofs. No Lean was written and no compiler, Lake or build tool was run.
+
+## WANTED
+
+None. The source is available as `literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf`; the retained `ilo.txt` supplies its text.
+
+## Corrections and source audit
+
+I reread ILO Exposé VI 3.4, Proposition 3.5(a)–(c), and the proof 3.7(a)–(c), printed pp.74–76. The item remains faithful to 3.5(b), 3.7(b) and the opening stratum assertion of 3.7(c). In particular the proof needs neither log regularity nor generic freeness nor the dimension formula. All originally stated hypotheses and conclusions remain unchanged. The chapter and perverse unit route, GOAL.md and coord/dag-sync.md were read; this is still the same local uniformization input of the recorded blueprint ancestor.
+
+The returned head was `b716df3f87`. Each mathematical fault is repaired as follows.
+
+1. **Original Step 3, saturation.** Repaired Step 3 starts with `p` in `P^gp`, not in `P`. The inclusion `P^gp ⊆ L` and saturation of `Q` give membership in both factors of `P=L∩Q`. The bounded-residue finite generation and the `u-v+nv` group-completion arguments are retained.
+2. **Original Step 4(i), unit twist.** Repaired Step 4 writes the actual equation `h(u)χ_q(h)=u`. Reduction to the residue field first gives residue character 1. Injectivity of reduction on roots of unity is proved directly with `(ζ−1)(1+⋯+ζ^(n−1))=0`, whose second factor is a unit. Only then does one deduce `q∈P` and `u∈B^×`. There is no cancellation of structural monomials, which could be zero.
+3. **Original Step 4(ii), other points.** Repaired Steps 5–6 cite the existing `lem-per-tame-diagonal-standard-closed-immersion`. Its statement expressly provides charts of the actual invariant log structure on source AND target neighbourhoods and the strict closed immersion (3.c); it is stronger than merely constructing the comparison morphism. It supplies the missing all-stalk comparison, including the geometry that the earlier closed-stalk computation did not establish. Step 4 is explicitly only a closed-stalk computation. I checked that the comparison node has no dependency path back to this item.
+4. **Original Step 4(iii), neighbourhood of the quotient.** Step 6 uses that same node's explicit pointed étale TARGET neighbourhood and chart of `(q_*M)^G`. This is an existing theorem with exactly the conclusion needed, not a claim that the equivariant-chart node's source neighbourhood automatically descends. For strict-localized data from an original quotient, the comparison node is applied to that original quotient and its geometric stabilizer. I removed the unnecessary application of the equivariant sharp-chart theorem: the chart and character are already hypotheses, and are kept fixed throughout.
+5. **Original Step 5, incorrect averaging.** The comparison node states that `B⊗Z[P] Z[Q] → A` is surjective. Step 8 first uses this to expand every coefficient into a finite B-linear combination of monomials. It then averages those B-monomials, with the character sum computed explicitly. Positive monomials stay positive by sharpness. Hence invariant elements of `I` lie in `J`. This avoids the false claim for arbitrary A-coefficients: nontrivial isotypic coefficients are absorbed into monomial exponents before averaging. The alternative Krull argument is unnecessary because the cited surjective presentation is available.
+
+## Review by Q132
+
+I read the complete statements of every cited node: `lem-per-tame-admissible-scheme-quotient`, `lem-per-finite-quotient-strict-local-invariants`, `def-trf-fs-log-blowup`, and `lem-per-tame-diagonal-standard-closed-immersion`. I compared the last with ILO VI 3.5(b) and (3.b)–(3.c), including the trivial-stratum/averaging/Nakayama paragraph. Its statement includes both the displayed surjective ring map and pointed neighbourhoods on the quotient carrying charts of the actual invariant direct image. Those are the exact assertions cited here; no construction internal to another node's proof is used. It needs no log regularity. The first two nodes supply the underlying quotient and its strict-local description, also without log regularity or generic freeness.
+
+For Step 1 the tame quotient node applies to the single invariant affine open X: geometric stabilizer orders divide n and n is invertible everywhere. Its stated affine formula identifies its quotient with Spec B and supplies orbit fibres, finite surjectivity, invariant structure sheaf and Noetherianity. The strict-local node then applies, and its canonical compatibility gives the strict henselian description of B and the invariant log/unit stalks. Step 2 uses the chart pushout description in the definition node at the closed point, where only 0 becomes a unit. It uses the specified chart, rather than constructing a different one. Step 3 is the elementary finite-generator calculation described above; I checked saturation with the correct domain P^gp, and neither saturation of a finite-index subgroup inside Q^gp nor a torsion-freeness claim for the character quotient is asserted.
+
+For Step 4 the quotient node supplies the actual invariant stalk. The rest is the explicit unit equation and residue-field factorization, so it is valid even when a monomial's image in A is zero. For Step 5 I checked every hypothesis of the comparison node: the finite quotient and Noetherian target come from Step 1, the finite B-module structure is assumed, the geometric stabilizer is H, the roots and diagonal chart are assumed, the characteristic action is trivial because H changes each chart section only by a unit, and the closed-stratum action is the stated hypothesis. Its statement gives the needed surjective ring homomorphism. Step 6 uses the additional target-chart and pointed étale neighbourhood assertion in that same statement; it proves the chart clause beyond the closed point and the original quotient's neighbourhood clause. In particular it does not use a stalk-spreading theorem that assumes beforehand that the invariant log structure is fine.
+
+Step 7 is the finite averaging identity using triviality on A/I, and proves surjectivity of B/J to A/I. For Step 8 the sole non-elementary input is the comparison node's surjectivity, which is cited again. Each coefficient is expanded using that surjectivity. The character sum vanishes because a nontrivial root differs from 1 by a unit; this follows from Step 4, and its inverse is fixed. Thus every averaged positive monomial has exponent in P minus 0, exactly the generators of J. This proves injectivity. I checked that no surjectivity or flatness of an uncited monoid-ring comparison is assumed.
+
+The elementary algebra was tested on Q=0 (the stratum condition forces the action on A itself to be trivial), trivial H, Q=N with sign character, and Q=N² with diagonal sign character. For the last example P is the even-total-degree submonoid, with generators (2,0),(1,1),(0,2); the invariant ideal is generated by x²,xy,y². The returned counterexample with an odd coefficient multiplying x is handled by expanding that coefficient before averaging; the resulting even exponent is retained, not discarded. I also checked nonfaithful actions and charts with zero structural monomials: the unit proof is in the integral log monoid, not a cancellation in A. There are no new statements needing further edge-case tests. No step exceeds 2000 characters; the longer algebraic steps contain explicit calculations, not an unnamed comparison lemma. The statement was not disputed or changed. No SGA source was used.
+
+## Not duplicates
+
+No new nodes were created. DAG keyword searches and blueprint searches for the strict closed immersion and invariant chart found the existing `lem-per-tame-diagonal-standard-closed-immersion` (created for Q145's other quotient item), which is reused unchanged. Its source is exactly the missing ILO 3.c comparison. There is no newly created chart/descent theorem duplicating it. The item retains substantial inline work: the kernel monoid, the closed unit calculation, and the stratum isomorphism. The other cited nodes supply only the underlying finite quotient, strict-local identifications, and the definition of chart. All citations quote actual statement substrings, checked locally; `proof_deps` is precisely the union of step uses.
+
+## What could not be finished
+
+No mathematical repair remains. The repaired version is submitted to the required server dry run and then delivered by the prescribed tool; no shared or launcher file is edited.

@@ -1,0 +1,57 @@
+# Repair: lem-weil-pbc-frobenius-vector-bundle-kernel
+
+## Files written
+
+- dag/nodes/sec-proper-base-change/lem-weil-pbc-frobenius-vector-bundle-kernel.json: existing statement node, repaired split; no new nodes and no new Mathlib leaves.
+- citations.json: one verbatim statement quotation per citation of each of the ten steps.
+- report.md: this report.
+
+## Attachments
+
+None. Searched the read-only project source under WeilConjectures for the item's blueprint tag and Frobenius/vector-bundle kernel terminology; no declaration states both conclusions. The existing stage-2 Lean record is retained exactly, not claimed as a finished proof. ConstructibleSheaf/Pullback.lean has general constant/local-constant pullback declarations, but its IsFiniteSheaf convention concerns finite generation, which does not establish finite cardinality for abelian groups. No such declaration is substituted for this item's finite abelian values.
+
+## WANTED
+
+None. The necessary Stacks and blueprint sources are present locally.
+
+## What was wrong and what changed
+
+The returned step 7 was 2620 characters and hid the inverse-image/constant-object comparison in an adjunction, coproduct and algebraic-operation argument. The human requested that this argument be cited as a separate node and that the statement, Lean record, other steps and proof route remain unchanged. I retained steps 1--6 verbatim and replaced the last step with steps 7--10. The refinement and pulled-back cover now appear separately, the constant-object argument cites the existing general theorem lem-kun-pullback-constant, and the last step applies the constructibility definition. The hidden comparison is no longer proved inline.
+
+All ten steps are shorter than 2000 characters (lengths 1043, 782, 1277, 1419, 819, 715, 634, 613, 706, 545). No step was merely shortened by moving the original item's conclusion into a new node. The matrix/Jacobian, Lang surjectivity, represented kernel, finite-etale stratification, abelian local constancy and global-refinement route is the original route. The statement, source hypotheses, blueprint ancestry and Lean record are unchanged. Current shared-repository and retained sandbox item were identical before repair; no pre-existing report or split changes were discarded. Existing searches.jsonl was read and retained; this repair introduces no node requiring new searches and does not change the old search question.
+
+## Existing-node and blueprint searches
+
+Searched all dag/nodes statements for inverse image/constant and locally constant/pullback combinations, and ran tools/blueprint_refs.py search with 'constant inverse image', 'locally constant pullback', 'pullback finite locally constant', and 'inverse image constant abelian sheaf'. The first query finds lem-kun-pullback-constant. Its module clause, with Lambda = Z, covers every finite abelian value used here. A new constant-abelian-pullback node would duplicate that clause. The existing lem-weil-pbc-pullback-finite-locally-constant was also opened; its statement uses the set-sheaf finite-stalk convention from def-weil-pbc-etale-sheaves. Rather than importing that convention and an additional finite-value comparison, the repaired steps keep the original explicit finite abelian values and the actual pulled-back trivializing covering.
+
+## Not duplicates
+
+No new nodes. The constant-object argument is supplied by the already existing lem-kun-pullback-constant; no duplicate node is created.
+
+## Review by NX
+
+I read the entire Stacks more-etale.tex lemma-frobenius-linear-on-vb (Tag 0GKU), including its polynomial algebra and kernel representation. Its hypotheses are prime characteristic, a finite locally free module and an additive p-semilinear map; it does not require invertible Frobenius or globally constant rank. The item's Noetherian specialization and finite-abelian constructibility conclusion agree with that source. I read the fixed proper-base-change chapter and sk-thm-properbasechange unit records and kept their route. I also read the existing lem-kun-pullback-constant statement and proof, the definition def-kun-constant-sheaf, the definition def-weil-pbc-constant-sheaf, and Stacks etale-cohomology.tex definition-finite-locally-constant (03RU) and lemma-pullback-locally-constant (095A), with sites-modules.tex lemma-pullback-locally-constant (093R). No SGA route is used.
+
+For steps 1--6 I opened every cited node statement, rather than relying on its proof or its name:
+
+1. lem-weil-pbc-locally-noetherian-quasi-separated supplies quasi-separatedness from locally Noetherian. lem-weil-pbc-etale-inverse-image-restriction identifies the restriction along each open chart with abelian inverse image. def-sc-etale-qcoherent-module gives the tensor-pullback sections and def-pc-module-pullback gives the module pullback. The finite affine trivializing cover comes from the given local freeness, affine basis and quasi-compactness; the coordinate formula then follows by additivity and semilinearity. There is no assertion that a closed-stratum abelian inverse image is a quasi-coherent pullback.
+2. def-exc-jacobian-presentation states the square Jacobian presentation and lem-exc-etale-jacobian-presentation supplies etaleness and finite presentation. The affine description in def-weil-etale-morphism relates it to the scheme map. The derivative calculation uses p = 0; its diagonal entries are 1 even for nonreduced rings. The empty determinant is 1 at rank zero.
+3. lem-sc-lang-steinberg states surjectivity of F - 1 for every finite-dimensional p-linear endomorphism over an algebraically closed characteristic-p field; neither injectivity nor invertibility of F is used. def-weil-affine-spectrum turns each coordinate solution into a point over the specified base point. def-weil-pbc-etale-site makes the resulting surjective etale map a covering, and lem-weil-pbc-abelian-sheaf-epi-locally-surjective supplies the abelian epimorphism. Zero cokernel then follows in the abelian category. The rank and characteristic assumptions match at every fibre.
+4. def-weil-affine-spectrum gives the quotient-algebra points; def-sc-etale-qcoherent-module identifies their coordinate tuples with sections. lem-weil-pbc-etale-inverse-image-restriction handles chart restriction. The subgroup sheaf satisfies the universal property of a kernel in def-weil-pbc-abelian-etale-sheaves: glue solutions, and factor any map killed by F - 1 sectionwise. This is the original elementary argument, retained verbatim. Both the scheme maps and sections glue uniquely and the variable-to-coordinate bijection commutes with restrictions.
+5. lem-weil-pbc-etale-stratified-finite assumes qcqs source and base and an etale map: these hold because P and W are affine and step 2 gives etaleness. It gives actual finite constructible locally closed strata and finite-etale base changes. lem-galois-inverse-image-representable applies since P is etale over W, and gives the represented inverse image. lem-weil-pbc-etale-inverse-image-algebraic-structures identifies the underlying set sheaf of the abelian inverse image. These statements give exactly the three claims made here, with no module-base-change substitution.
+6. lem-weil-pbc-finite-etale-yoneda-local-trivializations supplies local constancy and finite geometric stalks of each represented finite-etale sheaf. lem-weil-pbc-finite-local-abelian-forget supplies abelian local constancy with finite stalks. On every nonempty trivializing object the constant abelian value is its stalk group and is therefore a finite set. Empty objects are discarded. This supplies precisely the finite abelian values required by def-weil-pbc-constructible-abelian-sheaf; finite generation is not substituted for cardinal finiteness.
+
+For the repaired final argument:
+
+7. lem-weil-pbc-etale-stratification-local-gluing-core states existence of one finite global stratification whose immersions factor by actual scheme morphisms through chart strata. Its qcqs hypotheses were checked in step 1. The composition statement of lem-weil-pbc-inverse-image-composition and chart-restriction statement of lem-weil-pbc-etale-inverse-image-restriction identify f-inverse K with the step-6 sheaf and j-inverse K with g-inverse G. Merely containing the image of a stratum would not suffice; the cited node explicitly supplies the required morphism g.
+8. lem-weil-pbc-etale-covering-base-change states that the base change of a jointly surjective etale family along any scheme morphism remains a covering. The input family is the actual step-6 trivializing family. lem-weil-pbc-inverse-image-composition states the abelian functor composition isomorphisms, and the fibre-product equation g k_i = v_i q_i identifies their composite maps. Thus the displayed sheaf isomorphism follows without assuming g or q_i is etale.
+9. lem-kun-pullback-constant explicitly states that inverse image of a constant Lambda-module sheaf is the same constant sheaf for every scheme morphism, with no torsion, invertibility, or base-field restriction. Taking Lambda = Z and M = A_i gives the missing comparison. An abelian group with its unique integer scalar action is a Z-module; forgetting that action identifies the two constant presheaves and their sheafifications from def-weil-pbc-constant-sheaf. This forgetful identification is an identification of the operations already specified, not a comparison with quasi-coherent modules. Consequently the isomorphism is an abelian-sheaf isomorphism and preserves the same finite value A_i. The cited module theorem covers the hidden comparison rather than only defining constant sheaves. It is declared as a generic tool use in split_report: its role is independent of Frobenius and does not replace a unit-level proof step.
+10. def-weil-pbc-constructible-abelian-sheaf requires a single finite constructible locally closed partition and finite abelian local constancy on each stratum. Step 7 gives that partition and steps 8--9 give exactly its abelian trivializing data. The cokernel conclusion was already proved in step 3.
+
+I tested the unchanged item and the newly cited specialization on empty S, empty strata/cover members, zero-rank bundles, F = 0, and F equal to scalar Frobenius on rank one. Rank zero gives the identity solution cover and zero kernel. For F = 0, F - 1 is minus the identity and its kernel is zero. For rank-one Frobenius the finite fixed-point values include F_p, with no assertion of a global rank for arbitrary F. The constant comparison also applies to the zero abelian group and arbitrary finite abelian groups, not only vector spaces or groups of order invertible on the scheme. None of these cases requires reducedness or connectedness. All citations are recorded as verbatim statement text in citations.json.
+
+The B--E checklist yielded no new nodes to audit for missing notions, source tags, Mathlib leaves, or duplication. The specific C4 risk was checked by opening the module constant-sheaf statement and specializing it to Z, not by citing a definition as a preservation theorem. There is no new dependency on the item itself and no replacement by a restatement of its conclusion. The only new proof dependency is lem-kun-pullback-constant; server cycle/route checks are part of the required dry run.
+
+## What remains unfinished
+
+No mathematical repair remains. Delivery validation is performed with the required server-side dry run; no Lean file, compiler, Lake command, live repository or launcher file was written by this worker.

@@ -1,0 +1,17 @@
+# Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/det-proper-heart-bound-lattice.json` (statement, split; no new nodes), and `citations.json`. No Mathlib leaves or attachments were added. The item was copied from the current shared DAG after checking that the source tree has no declaration tagged `(blueprint: det-proper-heart-bound-lattice)` and no exact declaration for this result.
+
+No new nodes were created: all dependencies named by the five proof steps already exist in the shared DAG. No `WANTED:` items arose. The item remains in the imported finite-type setting, with the pro-étale test object `V` and its base change `X_V` explicitly unrestricted by finite-type hypotheses. The negative-dimensional-bound case is handled directly before invoking the nonnegative torsion bound.
+
+## Review by Q150
+
+I read the item node, its unit `sk-lem-proper-heart-bound`, and the blueprint proof and statement under `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/`. I also read the source locations named in the item: Stacks Tags 09BM, 09BP, 094U, 03DJ, 03DB, 015F, 07KC, 08TC, 0D6K, 07KY, 07KW, 03CE and 03FD, together with the existing DAG statements they cite. The target statement agrees with the blueprint: proper `p : X → Y`, geometric-fibre dimension bound `d`, weakly contractible affine pro-étale object `V → Y`, locally closed `a : S ↪ X`, and lisse finite-free integral lattice `L₀`, with vanishing only for `q > 2d+1`.
+
+Step 1 uses the existing integral-models statement for derived completeness and the reductions `B_n ≃ a_!(L₀/π_E^n)`. Its hypotheses apply to `X`, `S`, and the finite-type standing setting; the text does not apply them to `V` or `X_V`. Step 2 uses the existing weakly-étale base-change, pro-étale localization, exact slice restriction, and sectionwise limits statements; these give the slice functor and its product comparison while retaining the restricted coefficient sheaf. Step 3 uses the exact-functor derived triangulation, termwise derived products, and the derived-limit definition; the displayed projection calculation verifies that the image of the Roos triangle is the Roos triangle for the restricted tower, with transition maps named `f_n`. Step 4 uses the existing ringed-site derived-sections/derived-limit statement and reindexes the tower explicitly. Step 5 uses the existing Milnor sequence, torsion bound, inverse-image definition, localization, sheafification, K-injective and Grothendieck-category statements, and the ringed-site-to-abelian cohomology comparison. Those statements establish that each `H^r(C_n)` is the torsion-bound group before applying the bounds `q-1 > 2d` and `q > 2d`; hence both inverse-limit terms vanish.
+
+I checked the edge cases stated in the proof: `d < 0` forces `X` empty by a geometric-point argument; `d = 0` gives the range `q > 1`; zero lattices and empty `V` give zero groups; and the borderline `q = 2d+1` is excluded. I verified every `uses` entry against the cited node's statement and recorded verbatim statement text in `citations.json`. The imported split had already corrected the undefined transition name in step 3 and the coefficient-ring identification gap in step 5; I retained those corrections and removed only maintainer review metadata for this worker delivery.
+
+## Not duplicates
+
+No new nodes were created, so there are no duplicate pairs to report.

@@ -1,0 +1,35 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-six-functors-basics/sk-lem-brown-hypotheses.json` (repaired statement and split), `dag/units/sk-lem-brown-hypotheses.json` (realization fields only), and `citations.json`. No new nodes or Mathlib leaves.
+2. Attachments: none. Searches of `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` by the blueprint id and Brown/compact-generation vocabulary found no exact sorry-free project declaration.
+3. WANTED: none.
+4. **STATEMENT-DISPUTED:** The imported item omitted the finite-type standing scheme setting. Its unrestricted reading is false: for a countable disjoint union of geometric points and $A=\mathbf F_\ell$, the constant sheaf is constructible of Tor amplitude $[0,0]$, but the identity into the coproduct of the component extensions would require finite support, giving the nonsurjective map $\bigoplus A\to\prod A$. I restored the standing datum (distinct characteristic and coefficient primes, the standing field $k$, and separated finite-type $X$), made the full admissible coefficient list explicit, and added `sk-def-sfb-dc-setting` to the statement and proof dependencies. The compactness detail is now applied only in that finite-type setting. The unit's realization bindings were also filled.
+5. Nothing remains unfinished for this one-level split.
+
+## Review by Q09
+
+I re-read `GOAL.md`, `coord/dag-sync.md`, `coord/brief-stage1.md`, stages 1, and delivery-errors B–E, the current Brown unit and proof, the six-functors chapter, and the current statements of `sk-def-sfb-dc-setting`, `sk-def-localizing-closure`, `det-brown-hypotheses-ambient`, `det-brown-hypotheses-small`, and `det-brown-hypotheses-generation`. The source unit itself suppresses the scheme setting, while the chapter and all compactness routes use the standing separated finite-type range. I therefore recorded `STATEMENT-DISPUTED` above and repaired the statement faithfully to that implicit source setting rather than asserting the false arbitrary-scheme version. The imported detail records abbreviate their scheme hypotheses as “admissible $\Lambda$”; each is used here only after Step 1 fixes the finite-type standing $X$, so the cited conclusion is taken in that restricted instance.
+
+The counterexample was checked directly. Let $X=\coprod_{i\in\mathbf N}\operatorname{Spec}(\overline{\mathbf F}_p)$ and $A=\mathbf F_\ell$ with $p\ne\ell$. The constant $A_X$ and each component extension by zero are finite locally modeled, bounded constructible, and finite-Tor. Their coproduct is the constant sheaf, while a map from $A_X$ to that coproduct has finite component support; the all-components identity lies in the product and not the direct sum. Thus compactness cannot hold without the finite-type hypothesis. The empty scheme and a single geometric point remain valid edge cases of the corrected statement; $A=\mathbf Z/\ell^2$ remains a finite nonregular coefficient case and introduces no regularity or completeness assumption.
+
+Step 1 now uses exactly the standing-setting statement for the separated finite-type scheme and the localizing-closure statement for the coefficient list, condensed topologies, pulled-back ring, module-object ambient derived category, replete intersection, and small coproduct universe. It asserts no existence or compactness result and is marked elementary. Step 2 applies the ambient detail for local smallness, triangulation, arbitrary direct sums, and split idempotents, and the smallness detail for thickness and essential smallness; both are applied under the corrected standing hypotheses. Choosing representatives from an essentially small category is the only elementary skeleton choice. Step 3 applies the generation detail to the same finite-type scheme, coefficient, and chosen skeleton, taking exactly its compactness and all-integer-shifts zero-detection clauses. The conclusion is then quantified over the arbitrary standing datum and admissible coefficient.
+
+Every non-elementary fact used by a proof step is supplied by a cited node, and every cited node says the clause taken from it. `citations.json` has one verbatim quote for each step/node pair, including the standing-setting sentence newly added to step 1. `proof_deps` is exactly the union of the five `uses` entries. No new node, duplicate, clause-restatement node, Mathlib leaf, SGA citation, or Lean/build action was introduced. The retained Mathlib searches found only generic categorical interfaces and no Brown compact-generation theorem for these sheaves; the repair adds no Mathlib absence claim.
+
+The unit record now binds the item as its statement carrier and binds all three source paragraphs: the first to the item together with the ambient and smallness detail nodes, the second to the item and generation detail, and the final route-explanation paragraph to the item. This satisfies the unit's nonempty realization requirement without pretending that the route explanation is an additional mathematical conclusion. The item and unit carry the current chapter/unit metadata.
+
+## Dry run
+
+The required command `python3 /home/ubuntu/weil-launcher-nt/deliver.py Q09 sk-lem-brown-hypotheses --no-push` completed successfully: `OK (not pushed) deliver/Q09/sk-lem-brown-hypotheses at 4e8e4bd87e: preflight passed`.
+
+The current repair dry run also completed successfully: `OK (not pushed) deliver/Q09/sk-lem-brown-hypotheses at 41cb25587f: preflight passed`.
+
+## Second reading by Q09
+
+- Item statement: checked against `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md` and the standing coefficient and scheme definitions; the explicit distinct-prime, separated finite-type, and six-coefficient hypotheses correctly restore the source setting. Empty scheme, one geometric point, and finite nonregular coefficient ring cases remain included.
+- Step 1: checked against the localizing-closure and standing-setting node statements; it only unpacks their definitions and is elementary, with no compactness or existence conclusion smuggled in.
+- Step 2: checked against the verbatim statements of `det-brown-hypotheses-ambient` and `det-brown-hypotheses-small`; those statements supply exactly local smallness, triangulation, sums, split idempotents, thickness, and essential smallness under the admissible standing datum, and the skeleton choice is elementary.
+- Step 3: checked against the verbatim statement of `det-brown-hypotheses-generation`; it uses precisely compactness and the all-shifts zero-detection criterion for the chosen skeleton.
+- New nodes: none; there were no new-node statements requiring source or Mathlib repair.
+- Changes made in this second reading: added this review section, recorded the source and edge-case checks, and confirmed that no proof, citation, dependency, or node correction was needed beyond the worker's finite-type statement repair.
+- Delivery checks: the required no-push dry run was rerun after this review section and passed preflight; no Lean, compiler, Lake, or build tool was run.

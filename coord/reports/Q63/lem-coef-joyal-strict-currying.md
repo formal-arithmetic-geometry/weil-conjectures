@@ -1,0 +1,21 @@
+1. Files written:
+   - `dag/nodes/sec-six-functors/lem-coef-joyal-strict-currying.json`: split statement, 0 new nodes, 0 Mathlib leaves.
+   - `citations.json`: four verbatim citations to `def-cbc-enhanced-diagrams-cones`.
+   - `searches.jsonl`: prescribed Q63 Mathlib searches and their returned results.
+2. Attachments: none.
+3. WANTED: Lurie, *Higher Topos Theory*, Proposition 1.2.7.3 (printed p.94), for the explicit simplicial currying calculation. The PDF is available at the source URL recorded in the item, but no archival copy is present under `literature/`; the proof is therefore marked agent-written. No Stacks tag supplies this simplicial-set statement.
+4. No statement or blueprint error was found. The shared snapshot did not contain the item node, so I retained the exact imported copy from the earlier Q21 sandbox, including its statement, dependencies, source, blueprint ancestry, and imported search records. The existing Mathlib candidates (`SSet.instMonoidalClosed`, `SSet.yonedaEquiv`, and `CategoryTheory.FunctorToTypes.functorHomEquiv`) provide general closedness or Yoneda interfaces but do not state the specified explicit `Hom(K × Δ^n,Q)` model and formulas; hence the item is not a Mathlib leaf. No duplicate supporting node was created. The argument itself is elementary degreewise verification from the Fun definition, so introducing another helper node would only restate a proof step.
+5. Nothing remains unfinished in the split. No Lean source was written or compiled.
+
+## Review by Q63
+
+I read the imported item statement and the canonical `def-cbc-enhanced-diagrams-cones` statement. The latter defines `Fun(K, C)_n` as `Hom_sSet(K × Δ^n,C)` and explicitly says that a simplicial operator acts by precomposition with `id_K × Δ(α)`; this is exactly the definition used in every proof step. I also checked the current `sec-six-functors` chapter and `sk-prop-sf-biduality-general` unit records; this item is a supporting descendant and does not change the unit's realized fields.
+
+Step 1 defines evaluation at the identity simplex and verifies the simplicial-map equation after an arbitrary simplex operator. The only cited statement is the Fun degree/operator formula, and it supplies precisely the data used. Step 2 defines the transpose on an arbitrary pair `(k, α)` and checks both the simpliciality in the `K × Δ^n` variables and compatibility as `x` varies. Step 3 computes both composites: the first at `α = id`, and the second by the naturality equation for `f` and the stated precomposition operator. This proves the claimed bijection and explicitly records why no fibrancy is used. Step 4 checks covariance in `Q`, contravariance in `K`, and covariance in `X` by substituting into the same formulas; all equalities are strict. Each step cites the exact sentence that defines the relevant Fun object and operator, and `citations.json` records those verbatim quotes.
+
+I searched the whole DAG for the item, its key terms, and the existing currying/tensor nodes, and searched the blueprint for strict simplicial currying. The closest existing statements concern generic enriched tensor calculus or cocartesian sections and do not identify this explicit simplicial-set model, so they are not duplicates. I read the Mathlib candidates found by the Q63 searches: `SSet.instMonoidalClosed` in `Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean`, `SSet.yonedaEquiv` in `StdSimplex.lean`, `SSet.prodStdSimplex` identities, and `CategoryTheory.FunctorToTypes.functorHomEquiv`. They do not include the displayed degreewise formulas as a one-line specialization. The small cases `X=∅`, `K=∅`, and `K=Δ^0` reduce to singleton-map or ordinary evaluation bijections, and the formulas still work for arbitrary non-fibrant `Q`.
+
+## Not duplicates
+
+- `lem-coef-joyal-strict-currying` vs `lem-coef-enriched-category-tensor-calculus`: the existing node concerns coherent enriched functor-category equivalences; this item gives a strict degreewise bijection for arbitrary simplicial sets with explicit evaluation and transpose formulas.
+- `lem-coef-joyal-strict-currying` vs `lem-cbc-cocartesian-section-currying`: that node assumes a quasicategory and cocartesian fibration and compares cocartesian sections; this item has no fibrancy or fibration hypotheses and concerns all strict simplicial maps.

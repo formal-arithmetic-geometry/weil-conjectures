@@ -1,0 +1,69 @@
+# lem-coef-space-transport-classification — Q115 stage 1
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-space-transport-classification.json`: statement; split into twelve steps; no Mathlib match. Reuses all mathematics and citations of the retained eight-step proof, separating its restriction, constant, base-change, size and Hom-action arguments. The statement itself is unchanged.
+- `citations.json`: 41 step/node pairs with contiguous verbatim quotations from the current statements.
+- `searches.jsonl`: the item and helper-node Mathlib searches, read before recording verdicts. `prepare.py` and three Kerodon HTML extracts are sandbox-only working material.
+
+Four new statement-only nodes; no Mathlib leaves. No unit record or Lean file is written.
+
+## New nodes
+
+- `lem-coef-derived-restriction-rectification`: statement-only derived restriction and coherent evaluation; no Mathlib match.
+- `lem-coef-simplicial-opposite-realization`: statement-only opposite-realization equivalence; no Mathlib match.
+- `lem-coef-space-universe-repletion`: statement-only universe repletion equivalence; no Mathlib match.
+- `lem-coef-twisted-arrow-equivalence-invariance`: statement-only twisted-arrow invariance; no Mathlib match.
+
+## Attachments
+
+None. Searches of WeilConjectures in the read-only slopmaster2 checkout by the blueprint tag and by left/right fibration and straightening notions found no declaration of this theorem. The upstream master reference and the historical NF stage-2 interface do not establish a finished proof. The node's stage-2 review explicitly records a sorry, so it is not an attachment.
+
+## WANTED
+
+WANTED: Jacob Lurie, Higher Topos Theory, §§2.1.4, 2.2.1–2.2.3, 3.3.2, Proposition 4.2.4.4, for lem-coef-space-transport-classification. The PDF was read online; it is not archived under literature/.
+
+WANTED: Kerodon, tags 03JQ, 03K0 and 03N7 (and the Hom-functor normalization in 03N6/03NK), for lem-coef-space-transport-classification. The three proposition pages were read online and their HTML retained only in this sandbox. These are Kerodon tags, not Stacks tags. No Stacks theorem gives the classification in the stated models.
+
+## What was wrong or needed clarification
+
+The shared node is currently marked unsplit although it retains a detailed proof, an older stage-1 review and a later stage-2 interface review. None is a reason to skip the current stage-1 check. The recovery note about NF is historical; this delivery does only the authorized natural-language work through deliver.py.
+
+The returned proof's third, fifth and eighth steps combine distinct applications in more than 2000 characters. The returned repair specifically required helper lemmas rather than only shortening prose. I examined their claims individually and extracted strict-diagram restriction (step 3), opposite realization (steps 4 and 9), universe repletion (step 7), and twisted-arrow invariance (step 11). Their substantive inputs are existing statements: projective model structure and replacements, evaluation rectification, localization, DK nerve comparison, twisted-arrow/Hom comparison and the normalized universal identity theorem. The direct computations left inline are the enriched composition formula, products of homotopies, and fullness on simplices. There is no new unproved comparison hidden in the shortened text, and extracted the four independent helper statements listed above.
+
+Removed statement dependencies for hammock localization, pushout/join saturation, cartesian fibrations and twisted arrows: the item statement uses none of those constructions. Their necessary proof infrastructure remains available through the actual proof citations. All other metadata, including the historical reviews, Lean interface and prior search records, is preserved; deliver.py keeps maintainer-owned fields from the current base.
+
+## Not duplicates
+
+Blueprint-wide searches for space transport, straightening and mapping bifunctor found no imported equivalent. I also searched the whole current DAG for the notions and read the existing space-valued-straightening statement. That node's first paragraph specializes classification to a small quasicategory base, while its remaining statement adds a concrete ordinary-category quotient/counit comparison. It does not replace this item's arbitrary simplicial bases, mapping-space formula, universe clause and mapping-bifunctor normalization.
+
+- `lem-coef-derived-restriction-rectification` vs `lem-coef-enriched-diagram-rectification`: the new statement specializes rectification to a restricted projective diagram and adds the unstraightening pullback conclusion.
+- `lem-coef-simplicial-opposite-realization` vs `lem-cbc-realization-singular-unit-weak`: the new statement adds the opposite-coordinate homeomorphism; the existing node only states the singular unit weak equivalence.
+- `lem-coef-simplicial-opposite-realization` vs `lem-coef-twisted-arrow-left-fibration`: the new statement proves realization coordinate reversal and a localization zigzag for opposites; the existing node constructs the twisted-arrow left fibration and slice comparisons, and does not state an opposite-realization equivalence.
+- `lem-coef-space-universe-repletion` vs `lem-coef-spaces-small-colimits-universe`: the new statement concerns the full replete Kan subcategory and coherent-nerve equivalence, while the existing node concerns colimits and change of universe for right-fibration models.
+- `lem-coef-twisted-arrow-equivalence-invariance` vs `lem-coef-twisted-arrow-left-fibration`: the new statement concerns invariance under an equivalence, while the existing node constructs the twisted-arrow left fibration itself.
+
+The twisted-arrow, enriched-Hom recognition, universal identity, slice-arrow, rectification and model-localization inputs already exist and are reused.
+
+## Review by Q115
+
+I read the source places in HTT Theorem 2.2.1.2, Theorem 2.2.5.1, Proposition 4.2.4.4, Kerodon 03JQ and 03N7, and opened every existing node cited by the item and each new node. I read each new node source and its three recorded Mathlib searches. The four new statements are strictly smaller than the item: derived restriction packages only the projective replacement/evaluation comparison; opposite realization packages only the coordinate reversal and localization zigzag; universe repletion packages only the change-of-universe Dwyer–Kan equivalence; twisted-arrow invariance packages only the equivalence induced by an equivalence of quasicategories. Blueprint-wide searches found no duplicate statements, and the source checkout has no finished declaration for this item or these lemmas.
+
+Step 3 now uses the exact statement of `lem-coef-derived-restriction-rectification`; its hypotheses are the objectwise Kan and projective-model hypotheses supplied by the cited presentation. Step 7 uses the exact universe-repletion statement before restricting to essentially small fibers. Step 9 uses the opposite-realization statement for the fiber comparison, so the homeomorphism and its localization zigzag are no longer hidden. Step 11 uses twisted-arrow invariance for `Tw(j)` and retains the enriched-Hom and universal-left-fibration statements for the normalization and composition. I checked that all other steps cite statements containing the facts they use, and the new nodes have statement-only proofs as required.
+
+I ran LeanSearch, Loogle and grep for every new node, recording actual queries and returned declarations in `searches.jsonl` and each node's `mathlib_searches`; all candidates were general simplicial-set or category-theory declarations and none states the node. Small-case checks covered the empty simplicial set, a point, a discrete Kan complex, and the nerve of `[1]`; coordinate reversal is involutive and the twisted-arrow fibers have the expected empty/nonempty mapping spaces. No compiler, Lake, or git command was run.
+
+
+### Resumed repair audit, 2026-10-17
+
+The first required dry run exited with a search-check failure: the twisted-arrow node omitted the grep query already present in searches.jsonl. I read that log, restored its exact record without rerunning it, included the previously logged second semantic phrasings, and recorded the Loogle unknown-identifier failure as unavailable. I read the candidate signatures in Mathlib's SimplicialSet/Op.lean (42–94), CategoryTheory/Comma/Arrow.lean (398–414), CategoryTheory/Enriched/FunctorCategory.lean (127–180), and CategoryTheory/EssentiallySmall.lean (74 onward). They concern an ordinary category equivalence on simplicial sets, ordinary arrow categories, enriched composition components, and ordinary essential smallness; they do not state these four helpers. I found no exact project declaration by blueprint tag or straightening/one-sided-fibration notions.
+
+I compared the retained node with the current repository: both the statement and the entire Lean record are identical. The original eight steps have lengths 1982, 1128, 2973, 1591, 2191, 1454, 1324 and 2056. The repaired twelve-step proof keeps this route and its other arguments, with every step at most 1982 characters. No lemma is obtained by applying the item itself, and no new helper has a proof or proof dependencies. I corrected the new nodes' ancestry to put this item before its inherited via chain. I clarified universes and the actual map to the pulled-back twisted-arrow fibration in the new statements. The opposite-realization node now cites HTT Remark 2.2.2.1 and Example 2.2.2.2 for the realization construction and explicitly identifies reversal as an extracted auxiliary argument; Kerodon 03JQ only asserts the twisted-arrow left fibration.
+
+I opened HTT Proposition 2.2.1.1 and Theorem 2.2.1.2 (printed p.74), Theorem 2.2.5.1 (p.89), Proposition 4.2.4.4 (p.258), and Kerodon 03JF, 03JQ and 03N7. The restriction lemma uses the projective factorization followed by enriched evaluation and the explicit unstraightening base-change isomorphism. The universe lemma uses the full simplicial subcategory and the coherent-nerve equivalence criterion; no resizing principle is assumed. The twisted-arrow lemma packages equivalence invariance, not the whole mapping-bifunctor construction. The realization lemma packages a natural homeomorphism and the singular-unit zigzag; it asserts equivalence as spaces, not isomorphism of simplicial sets. These are agent-extracted auxiliary statements from the retained route; the report does not attribute their full assertions verbatim to those source propositions.
+
+For the citations (C1/C4), I checked each current statement against what its step uses. Step 1 uses the ordinary Quillen equivalence in the presentation, the derived-adjunction unit/counit, the pointwise equivalence criterion, simplicial-model localization, the evaluation rectification equivalence, and the Kan model hypotheses. Step 2 uses the presentation's actual Kan over-base mapping complexes and localization's composition-compatible mapping comparison. Step 3 cites the new replacement/evaluation lemma, with F projectively cofibrant-fibrant as chosen in step 1. Step 4 cites the constant-product clause, the new opposite-realization zigzag and the bifibrant mapping comparison; taking products of the resulting maps and homotopies is direct. Step 5 uses the presentation's strict base-change isomorphism and its composition law, rectification's enriched evaluation, and the full functor-category localization universal property. Step 6 uses the presentation's explicit opposite-realization isomorphism and contravariant model, rectification and the coherent-nerve mapping comparison; it does not infer an enriched functor from ordinary taking opposites. Step 7 uses exactly the new universe equivalence, followed by pointwise coherent functor calculus. Step 8 uses the definition of a full subcategory and the presentation's size clause; its simplexwise factorization is direct from the definition. Step 9 uses the twisted-arrow slice equivalence, right-fibration equivalences on fibers, the slice's exact right-pinched fiber, and the new opposite-realization comparison. Step 10 uses the explicit over-base slice-arrow equivalence, the arrow right fibration, and the presentation's relation between the two variances. Step 11 uses the locally Kan presentation, the enriched-Hom comparison with its identity witness, the correctly normalized universal-left-fibration theorem, and the new twisted-arrow equivalence map to the pullback; the presentation's fiberwise criterion and functor calculus justify the resulting equivalence. Step 12 uses enriched-Hom's simplicial pre/postcomposition with higher unit and composition compatibility, and the coherent-nerve comparison; associativity and units are the enriched category axioms. Citations.json now has exactly 41 used step/node pairs, each with an unchanged contiguous quotation of its current statement.
+
+Small cases: the empty indexing simplicial set has the unique empty restriction; the point base reduces restriction to a weak equivalence of Kan complexes. For the empty Kan value the constant total space and all relevant fibers are empty, permitted by the cited presentations. Coordinate reversal is involutive already on the interval and respects all face/degeneracy gluing operators. For the nerve of [1], Tw has the three arrows and the same empty or one-point vertex fibers as its Hom spaces. An equivalence of one-object groupoids induces the same mapping-space equivalence on these fibers. Universe enlargement changes no mapping simplices between two small Kan objects. These checks use neither a nonempty fiber assumption nor a small-base hypothesis for the essentially-small-fiber case.
+
+No statement dispute, attachment, Lean edit, compiler invocation, or route change was needed. Validation and delivery results follow below.

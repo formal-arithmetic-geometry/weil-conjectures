@@ -1,0 +1,137 @@
+## Worker report
+
+1. Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-nerve-natural-homotopy-equivalence.json`: the item, split into five steps with its statement unchanged.
+- `dag/nodes/sec-six-functors/lem-coef-homotopy-equivalence-weak.json`: one new statement-only topological lemma; Mathlib verdict no match.
+- `citations.json`: verbatim statement excerpts for every node cited in every item step.
+
+The earlier, never-committed `lem-coef-nerve-natural-transformation-homotopy.json` was removed from this sandbox delivery: it just repeated the first clause of the item. No new Mathlib leaves are created. The proof reuses the existing Mathlib leaf `lem-cbc-quotient-cylinder-continuity`.
+
+2. Attachments: none. Searches in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the item id, its blueprint tag and nerve/homotopy/natural-transformation terminology found no project declaration proving the item. Searches for the new topological lemma found only chain-complex homotopy-equivalence declarations, which have different objects. The upstream master reference is not counted as evidence of a completed proof.
+
+3. WANTED: archival copy of Dwyer–Kan, *Calculating simplicial localizations*, Proposition 8.2 and its following Proofs paragraph (ii), printed p. 29 (PDF page 13), for this item. The PDF was read online at the source URL in the node; it was not downloaded or written to the shared literature. The explicit expansion is marked `proof_origin.by: agent`.
+
+WANTED: archival copy of Hatcher, *Algebraic Topology*, §4.1, printed pp. 341–342 (PDF chapter pages 5–6), especially the paragraph immediately before Proposition 4.1, for `lem-coef-homotopy-equivalence-weak`. This source was also read online at its node URL. These sources concern classical homotopy theory; there is no claimed Stacks tag for either theorem and no SGA source is used.
+
+4. Corrections to the earlier attempt:
+
+- Its only child restated the natural-transformation clause; the item now proves that clause with a specific interval functor and barycentric prism instead.
+- Its assertion that unbased homotopic maps induce the same based homotopy-group maps was unjustified and in general false without basepoint transport. The final inference now cites a separate classical topology theorem which explicitly allows moving basepoints.
+- The child's statement formerly contained a prism proof sketch and the citation quote was not verbatim because the statement inserted a newline. The replacement child is statement-only, and every current quote was checked against its exact parsed statement.
+- Loogle queries using unknown unqualified identifiers are not used as evidence of absence. Current records use valid quoted fragments or fully qualified names. The stored query text and results are taken directly from the actual msearch log, including its UTC date.
+- Earlier report prose said the source was unavailable without reading it. I read Dwyer–Kan online; its one-line nerve-homotopy assertion is expanded here rather than treated as a proof.
+
+No error was found in the item's mathematical statement and no target statement, chapter, unit binding, imported flag or blueprint update is changed. The unit record has no proof steps and this item is not its key node. The current main-20261015 blueprint places the ancestor at `sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md`; its second paragraph is the displayed derived Hom/limit computation. The historical unit binding and ancestry are retained. Proposition 8.2 is an intermediate technical source in the descendant chain, not a paragraph of that blueprint ancestor itself; the revised `blueprint.from.place` and `split_report.blueprint` distinguish these places.
+
+5. No mathematical part of this split remains unfinished. The new child remains unsplit as required; a later worker proves the general topological theorem. The sandbox is for second reading and the required no-push dry run only.
+
+## Not duplicates
+
+Before choosing the new id I searched the complete DAG statements, titles and source fields for homotopy equivalences, homotopy groups, weak equivalences, Hatcher, ATch4 and the relevant source page; no existing node states the new generic topological assertion. Whole-blueprint searches were run for `nerve`, `simplicial homotopy`, `geometric realization`, `homotopy equivalence`, `homotopy inverse`, `homotopy groups`, and the new id fragment. The few matches concern derived functors or hypercovers. `blueprint_refs.py ancestor` gives `prop-coef-integral-exceptional-adjoint`. There are no same-source/tag duplicate pairs for the new child.
+
+- `lem-coef-homotopy-equivalence-weak` vs `lem-coef-serre-homotopy-exact-sequence`: the latter supplies the long exact sequence of a Serre fibration, with a lifting hypothesis; it does not give homotopy invariance for arbitrary continuous homotopy equivalences.
+- `lem-coef-homotopy-equivalence-weak` vs `lem-coef-hammock-pair-homotopy-invariance`: the latter concerns mapping simplicial sets of hammock localizations of simplicial pairs; the new node concerns arbitrary topological spaces and their actual based homotopy-group maps.
+- `lem-coef-homotopy-equivalence-weak` vs `lem-cbc-kan-mapping-homotopy-invariance`: the latter starts with a weak equivalence and concludes a simplicial mapping-space homotopy equivalence; it does not prove the topological implication used here.
+
+The new lemma does not mention category nerves, natural transformations, or zigzags, and proves none of the prism construction. It is a standard independent topological input, rather than the item's natural-transformation clause under a new name. The existing quotient-cylinder leaf already states exactly the needed descent theorem, so no duplicate continuity node was made.
+
+## Review by NY
+
+I read the item, the complete chapter and unit records, and the current main-20261015 ancestor statement/proof. The ancestor's second paragraph uses derived coefficient adjunction in the displayed mapping-limit calculation. This item is the nerve-homotopy input reached through the already recorded flat-model, frame, special-hammock and fractions descendants. I read the end of Dwyer–Kan Proposition 8.2 and the following Proofs paragraph (ii) on printed p. 29: it explicitly invokes the natural-transformation-to-nerve-homotopy fact. The construction below supplies the details it omits and preserves this route.
+
+For step 1 I opened `def-cbc-enhanced-diagrams-cones`: its statement defines the nerve by functors from [n], standard simplices by monotone maps, and products degree by degree. Those are exactly the definitions used to obtain the interval-category simplicial map. The mixed-arrow formula is well typed from F(a) to G(a'); the two possible mixed composition patterns use the displayed naturality equality and the functor laws. No invertibility assumption enters.
+
+Step 2 again uses the same definition node for the quotient realization. I checked that S_0=1, S_(n+1)=0, the prism regions cover, and the listed weights are nonnegative and sum to one on their own region. On an adjacent-region overlap, deleting the zero-weight vertex gives respectively eta composed with F(t) and G(t) composed with eta, exactly the hypothesis of the item. Nonadjacent overlaps reduce by successive zero-weight deletions. Continuity on each region is affine-coordinate continuity followed by a realization characteristic map. The finite-closed-cover argument is included explicitly via preimages of closed sets; no pasting theorem is silently assumed.
+
+For step 3 I read the realization equivalence relation in `def-cbc-enhanced-diagrams-cones` and all of `lem-cbc-quotient-cylinder-continuity`. I also read its Mathlib declaration `Topology.IsQuotientMap.continuous_lift_prod_left` at `Topology/CompactOpen.lean:584–598`. The statement requires precisely a surjective quotient map and a locally compact second factor, not Hausdorffness of the source or the target. Here q is the defining realization quotient, and [0,1] has compact subinterval neighborhoods. The proof checks faces with zero weights and degeneracies by merging repeated-vertex weights. It therefore constructs the descended function before applying continuity descent. This deals with ordinary product topology directly and avoids silently identifying a k-space product with an ordinary product.
+
+Step 4 uses only the nerve/realization definition from that same node and the homotopies already constructed, not any uncited conclusion from another node's proof. I checked the time reversal, subdivision formula, common endpoints and constant homotopy for a zero-link zigzag. Applying functors to a composable chain shows the required identities of composite realized maps with exactly the stated domains. Both zigzags, rather than just one, are used.
+
+Step 5 cites the new topological lemma and `def-coef-zigzag-homotopy-calculus`. I opened the latter and copied its exact definition of weak homotopy equivalence. The spaces X,Y and maps f,g are the realized nerves and their functor maps, and step 4 supplies both homotopies. The new lemma's conclusion includes every positive dimension and every source basepoint, as well as components, so it supplies exactly the data required by the definition. Hatcher §4.1, p. 342 expressly includes nonstationary basepoints. No stationary-basepoint assertion is used.
+
+For the new child's statement I read Hatcher pp. 341–342 online, checked the cubical homotopy-group convention, and compared every hypothesis: arbitrary topological spaces, ordinary continuous homotopies, no connectedness assumption. To check the omitted higher-dimensional exercise, the change-of-basepoint maps from p. 341 are isomorphisms, obtained by shrinking a cube and adding the basepoint path in its outer shell. Thus each homotopy composite (gf)_* or (fg)_* is an isomorphism after that transport. At x, invertibility of g_* f_* implies that g_* at f(x) is surjective; invertibility of f_* g_* at f(x) implies that this same g_* is injective. Therefore it is an isomorphism, and then f_* at x is an isomorphism. On components the paths H(x,-) and K(y,-) give two inverse set maps. This argument is reported here, not hidden in the statement-only child.
+
+I tested the item on empty A (the unique empty homotopy), on a terminal category, on A terminal and B=[1] with eta the noninvertible arrow 0→1, on a degenerate identity edge, and on zero-length zigzags. For n=0 the prism weights are (1-t,t), so the homotopy is the actual eta edge. Repeated vertices merge correctly at all possible cut positions. The general topological child was checked for empty spaces (both must be empty if both maps exist), a point, disconnected spaces, identity maps and moving-basepoint homotopies. None of these cases requires an additional hypothesis.
+
+The Mathlib searches for the item and the new child were actually run through the required msearch command, with second phrasings. I read the hits in `Nerve.lean:50–95`, `NerveAdjunction.lean:232–250`, `Topology/Homotopy/Equiv.lean:43–53`, `Topology/Homotopy/HomotopyGroup.lean:438–471` and `FundamentalGroupoid/InducedMaps.lean:65–91`. The nerve hits are definitions and truncated-nerve adjunctions. The homotopy-equivalence hit defines inverse data, and the groupoid equivalence covers the fundamental-group dimension. None states the required all-dimensional map theorem, so the new child remains non-Mathlib. Its statement cites `def-cbc-enhanced-diagrams-cones` for the continuous cubical conventions and also defines the notation inline for arbitrary topological spaces; it contains no proof sketch and has empty proof/proof-dependency lists. The first server dry run required this explicit definition-node citation, which I added without changing the mathematical assertion. I verified the verbatim citation substrings for every step and equality of proof_deps with the union of uses. The off-unit continuity citation is already a Mathlib leaf, so it is a permitted tool without a new route declaration.
+
+## Second reading by NY
+
+- Item statement: checked every hypothesis and clause against Dwyer–Kan, *Calculating simplicial localizations*, Proposition 8.2 and following Proofs paragraph (ii), printed p. 29; small categories, arbitrary natural-transformation orientations, finite zigzags, and the weak-equivalence conclusion agree.
+- Step 1: checked the interval-category construction against `def-cbc-enhanced-diagrams-cones`; the mixed-arrow formula is exactly naturality and the endpoint nerve maps are correct; the functor check is elementary.
+- Step 2: checked the barycentric regions, nonnegative weights, sums, overlap identifications, and finite closed gluing against the realization definition and Dwyer–Kan's nerve-homotopy argument; the prism construction is explicit and non-elementary.
+- Step 3: checked face and degeneracy relations against `def-cbc-enhanced-diagrams-cones`, and quotient-times-locally-compact continuity against `lem-cbc-quotient-cylinder-continuity`; all hypotheses (surjective quotient, locally compact interval, ordinary products) are present.
+- Step 4: checked reversal, finite concatenation including zero links, endpoint agreement, and composition of realized nerve maps; it uses only the stated nerve and realization definitions and is elementary after those definitions.
+- Step 5: checked the two homotopies against `lem-coef-homotopy-equivalence-weak` and the exact weak-equivalence definition in `def-coef-zigzag-homotopy-calculus`; moving basepoints are covered by the child theorem.
+- New node `lem-coef-homotopy-equivalence-weak`: checked self-contained spaces, maps, ordinary products, cubical based groups, all positive dimensions, components, and edge cases against Hatcher §4.1 pp. 341–342; statement-only form, source, searches, and dependency are valid.
+- Existing dependencies: opened `def-cbc-enhanced-diagrams-cones`, `lem-cbc-quotient-cylinder-continuity`, and `def-coef-zigzag-homotopy-calculus`; each cited quote is verbatim and states exactly what its steps use. Whole DAG and blueprint searches found no duplicate topological node; Mathlib searches are recorded in `searches.jsonl` and yield no exact theorem.
+- Edge cases checked: empty and terminal categories, the identity and zero-link zigzags, a noninvertible natural-transformation component, degenerate simplices, point and disconnected spaces, empty spaces, identity maps, and nonstationary homotopies; no extra hypotheses are needed.
+
+Changes made in this second reading:
+
+- Corrected the item node metadata so `created.item` names `lem-coef-nerve-natural-homotopy-equivalence` and records group `NY`; the previous value named an unrelated item and would fail delivery ownership checks.
+- Added this independent second-reading record; no mathematical statement, proof step, citation quote, or search result required alteration.
+
+## Second reading by Q54
+
+I read the item node, its Dwyer--Kan source place, and the complete Lean module. The
+node introduces two small categories \(\mathcal A,\mathcal B\); functors \(F,G\), a
+natural transformation \(\eta:F\Rightarrow G\), and then functors \(P,Q\) with finite
+zigzags in both composite directions. In the file, these render as
+`{A B : Type u} [Category.{u,u} A] [Category.{u,u} B]`, `{F G : A ⥤ B}` and
+`η : NatTrans F G`, followed by `P : A ⥤ B`, `Q : B ⥤ A` and two
+`Relation.ReflTransGen` hypotheses. `NatTrans` supplies exactly the component family
+and its naturality equation; no invertibility is assumed. The relation is the
+symmetric one-link relation, so it permits either orientation and zero or finitely
+many links.
+
+The helper `nerveRealizationMap` is the ordinary nerve functor followed by
+`SSet.toTop`, with the map exposed as a continuous map. The first conclusion is the
+nonempty type of continuous homotopies between the realized maps for `F` and `G`.
+The second conclusion gives homotopies from the realized composites `Q` after `P`
+and `P` after `Q` to the corresponding identity continuous maps, and concludes
+`SSet.Enhanced.IsWeakHomotopyEquivalence (nerveFunctor.map P.toCatHom)`, which is
+exactly the node's realization-based weak-equivalence convention. Composition order
+was checked against Lean's `Functor.comp` and `ContinuousMap.comp`; the A-composite
+is `P.comp Q` and the B-composite is `Q.comp P`, while the realized map is `Q` after
+`P` in the first homotopy. No hypothesis beyond smallness and the stated natural
+transformation/zigzags appears.
+
+I checked edge cases explicitly: empty categories make the natural-transformation
+homotopy and realized maps vacuous; terminal categories and identity transformations
+reduce to constant/identity homotopies; zero-length `ReflTransGen` zigzags are
+allowed; a noninvertible component is allowed by `NatTrans`; and the weak-equivalence
+conclusion has the node's all-basepoint and positive-dimensional clauses through the
+existing `IsWeakHomotopyEquivalence` definition. The universe binder is the standard
+small-category convention and does not add algebraic or finiteness hypotheses.
+
+Searches were repeated with `rg` over `lean/Sheaf` and the slopmaster2
+`WeilConjectures` tree for nerve realization natural homotopy terminology and for the
+full declaration names, and with the recorded LeanFinder, LeanSearch, Loogle, and
+grep searches in the node report. Mathlib's nerve declarations only construct nerve
+maps or truncated-nerve adjunctions; no continuous realization homotopy or finite
+zigzag criterion exists. No project declaration duplicates either the helper or the
+statement.
+
+The worker delivery had no module. I added the statement module and recorded both
+its declarations. I also supplied the missing proof dependency module
+`Sheaf.CategoryTheory.HomotopyEquivalenceWeak` for
+`lem-coef-homotopy-equivalence-weak`, whose split node had no Lean attachment. That
+module states the dependency verbatim in terms of the project's `componentsMap` and
+`homotopyGroupMap`, with arbitrary topological spaces and nonstationary homotopies;
+its node record now has the required `lean.note`. The item node's stale `created.item`
+metadata was corrected to this item and group Q54. No mathematical clause or source
+statement was changed.
+
+## Dependency modules
+
+`lem-coef-homotopy-equivalence-weak` had a split statement but no recorded Lean
+attachment, so its proof input was unusable. I added
+`Sheaf.CategoryTheory.HomotopyEquivalenceWeak`, whose
+`SSet.Enhanced.homotopy_equivalence_weak` declaration states exactly the dependency:
+for arbitrary topological spaces and continuous maps with homotopies from both
+composites to identities, the component map and every positive-dimensional
+`homotopyGroupMap` are bijective. The module uses the existing conventions from
+`def-cbc-enhanced-diagrams-cones`; it introduces no stronger hypotheses or alternate
+notion.

@@ -1,0 +1,70 @@
+# Stage-1 report: lem-weil-pbc-auslander-buchsbaum
+
+## Files written
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-auslander-buchsbaum.json`: statement; split into nine steps; no Mathlib match for the depth formula.
+- `citations.json`: verbatim statement quotations for every step citation.
+- `report.md`: this report. No new nodes, no new Mathlib leaves, no unit record changed.
+
+## Attachments
+None. I searched the project declarations under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` by the item id, Auslander/Buchsbaum, depth, regular sequences and resolutions. The Auslander–Buchsbaum declarations found concern unique factorization of regular local rings or scheme local rings (Tag 0AG0), not the depth formula (Tag 090V). The read-only upstream master likewise supplied no declaration matching this item. No master sorry was used as evidence of completion.
+
+## Wanted sources
+None. All source material used is present in `literature/stacks-project/algebra.tex`.
+
+## Corrections and choices
+The statement agrees exactly with Stacks 090V, `proposition-Auslander-Buchsbaum`: Noetherian local ring, finite nonzero module, finite projective dimension, equality of the indicated three integers. No statement dispute or statement change was necessary. The original statement dependencies were retained, after opening each definition and checking its meaning.
+
+The source's induction route is retained. Its implicit claims that the reduced resolution remains exact and has unchanged projective dimension are now explicit. I did not misuse `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact`: that node only gives exactness above the bottom free term and does not use regularity on the cokernel. Instead Step 7 gives the complete elementary element chase with regularity on every right-hand syzygy, including the module itself. Step 8 computes top Tor with the residue field using the existing flat-resolution comparison node, so it proves the necessary minimal-length assertion rather than assuming it.
+
+No finite-depth node was created: for positive depth the definition supplies a regular element, and the existing depth-drop node explicitly asserts finiteness. No minimal-resolution-length node was created: the existing Tor comparison computes homology for both the given resolution and a hypothetically shorter finite free resolution. The existing last-minors node supplies the non-elementary regular-sequence bound; only its determinant-to-maximal-ideal consequence is elementary.
+
+I searched the whole DAG for 090V, 00N1, 0AUJ, minimal resolutions, depth, depth drops, regular elements, quotient depths, Tor/resolution comparison and finite syzygies, and searched the whole blueprint using `tools/blueprint_refs.py search` (depth, finite depth, minimal, regular sequence, resolution, projective dimension, 00LS, 0AUJ, Auslander, Buchsbaum, 090V). No other blueprint node states the item. The ancestor command identifies `thm-weil-pbc-amplification-proper`; all work stays below its proof (c), TOW, via the uniform-perfect-quotient bound. The chapter and proper-base-change unit were read; neither is changed.
+
+The only generic theorem outside this unit's route requiring a tool-use declaration is `lem-pc-flat-resolution-tor-comparison` (Picard unit). Its statement gives the exact resolution comparison used in Step 8. The finite-free flatness and Noetherian-submodule-finiteness nodes are existing Mathlib leaves. The depth and resolution nodes of the P1 unit lie on the proper-base-change unit's route.
+
+## Mathlib searches
+Queries were run only through `/home/ubuntu/weil-launcher-nt/msearch.py NJ lem-weil-pbc-auslander-buchsbaum ...`; `searches.jsonl` holds the actual records. Two phrasings were tried for finite depth and for minimal-resolution length before deciding to fold those consequences into the proof rather than create nodes. LeanFinder returned support/Krull-dimension and regular-sequence results, or categorical projective-dimension inequalities; none states the depth formula or minimal-resolution criterion. Loogle `"depth"` returned recursion-depth names; `"projectiveDimension"` returned categorical Ext-based definitions and inequalities. Grep returned no formula or minimal-resolution hit. LeanSearch was unavailable (HTTP Internal Server Error), recorded as unavailable. The item's earlier searches are preserved; the new actual formula search and relevant grep/Loogle/LeanSearch records are appended. No unsuccessful or unavailable query was represented as a match or as a successful absence check.
+
+## Unfinished work
+None for this one-level split. No Lean was written or compiled, and no agent was started.
+
+## Review by NJ
+I read the complete proof of Stacks Tag 090V at `proposition-Auslander-Buchsbaum` in algebra.tex, including its depth-zero case and reduction by a common nonzerodivisor. I also read the sources behind the reusable nodes: 00N1 (`proposition-what-exact`, exactness implies the top-minors regular-sequence condition), 0CXF (`lemma-what-kind-of-resolutions-Noetherian-local`, finite free resolutions), 00LS (`lemma-compare-resolutions`) and 00LZ (`lemma-tor-welldefined`, independence after tensoring), 00LX (`lemma-depth-in-ses`), 090R (`lemma-depth-drops-by-one`), the depth definition 00LI and finiteness discussion 0AUJ, and the Tor section 00LY. The existing quotient-depth node is the specialization of 0AUK already in the DAG; I read its complete statement, which explicitly includes both module depth and the depth of the quotient ring. There are no new nodes whose sources require separate review.
+
+For Step 1 I checked that the Nakayama node requires an ideal inside the Jacobson radical and a finite module, both satisfied by the maximal ideal here. The depth and regular-sequence definitions give a first regular element when depth is positive. The cited depth-drop node actually includes finite depth in its statement, so the induction parameter is a natural number; I did not silently rely on finiteness of depth as an uncited theorem.
+
+For Step 2 I opened the minimal finite free resolution node: it gives a resolution of length at most the prescribed integer, with all differential images inside the maximal ideal times the next term. The finite-projective-dimension definition provides the integer e. I also opened and cited part (2) of the projective-dimension well-definedness node: its least integer has a resolution of that length and the stated inequality is equivalent to the resolution bound. This is used again for the shorter resolution in Step 8, rather than treating that claim as part of the definition. Free modules are projective by the direct-summand formulation of the projective-module definition. A zero last term would shorten the resolution, proving positive last rank for e>0 without another node.
+
+For Step 3 I checked the regular-sequence definition directly coordinatewise on nonzero finite free modules. This establishes equality of free-module depth with ring depth, rather than attributing it to the depth lemma. The Noetherian-submodule-finite node really states finite generation for every submodule of a finite module. Nonzero syzygies follow from the shortest length e, not from a gratuitous nonzero assumption. This verifies the nonzero hypotheses of the depth-in-ses node before any application.
+
+For Step 4 I opened the exact-free-complex last-minors node: its hypothesis is exactness at all positive-degree free terms, precisely what our augmented resolution gives. It allows either a unit minors ideal or a length-e regular sequence. Since n_e>0 and the entries lie in the maximal ideal, every top minor lies in that ideal; the unit alternative is excluded. The depth definition then gives d>=e. Applying the existing depth-drop node to the first regular element gives finite d, so later arithmetic is ordinary integer arithmetic.
+
+For Step 5 I checked the second inequality of the cited depth-in-ses statement, including its infinity convention. The descending syzygy calculation is written with its base, indexing and induction inequality. Since d>=e, every integer bound used before the last step is nonnegative. This gives depth(M)>=d-e and closes the depth-zero case. The e=0 case was already proved separately, so no nonexistent top differential is used.
+
+For Step 6 I checked the first inequality of depth-in-ses on the split sequence R, R+M, M. Both endpoint depths are positive here. Nakayama applies to the finite direct sum, so positive depth means the regular-sequence supremum supplies an element, with no exceptional IM=M branch. An element regular on the direct sum is injective on each summand by the coordinate inclusions, establishing all hypotheses for the reduction.
+
+For Step 7 I verified nonzero N using the actual nonzero-quotient clause of depth-drops-by-one. Quotient locality and Noetherianity are justified through ideals and their finite generators. I checked every element-chase equality: a=xb in the injection, the image of b killed by x in the quotient C, and b-xb_1 in A for middle exactness. Multiplication by x on each syzygy is injective because that syzygy is a submodule of a free module, except C=M where Step 6 provides it. Thus the complete resolution is exact after reduction, including e=1 and the augmentation.
+
+For Step 8 I opened both the finite-free-flat Mathlib leaf and the flat-resolution-Tor-comparison node. The latter explicitly allows arbitrary nonnegative augmented resolutions with flat terms and computes Tor in every natural degree. Both our length-e resolution and the hypothetically shorter resolution satisfy these hypotheses, after padding by zeros. Entries in the maximal ideal give zero differentials over the residue field; the top homology is k^{n_e}, nonzero because k is a field and n_e>0. A shorter resolution has zero term in that degree and hence zero homology. No invariance statement was taken from a definition node instead of the theorem.
+
+For Step 9 I checked both applications of the depth-drop statement and both applications of quotient-depth equality with I=xR. S and N are finite R-modules annihilated by I, and the quotient-ring version has exactly the same maximal ideal image. The induction hypothesis ranges over rings as well as modules, so it applies to (S,N) with depth t-1. Finite d and t justify adding one to the equality.
+
+I checked delivery-errors B–E against the actual files: no new restatement nodes (D1/D2), every non-elementary fact cited by a node, every citation supported by its actual statement, no proof-only construction used as a black box, no route change, no cycle-producing dependency on a descendant of this item. Quotations in citations.json are copied verbatim from those statements. Small cases checked: a field and nonzero free modules (e=0); a regular local ring with M the residue field (depth-zero case); e=1 and a quotient by a regular element (full augmentation exactness); the zero module, a unit reduction and a nonregular reduction are excluded by the explicit hypotheses rather than being incorrectly covered. The dual-number ring with its residue field has infinite projective dimension, so it is not a counterexample to the stated theorem. No correction of the statement was needed.
+
+I also read the existing finite-free-flat leaf’s Mathlib sources: `Module.Flat.of_free` at RingTheory/Flat/Basic.lean:231 and `Module.finitePresentation_of_projective` at Algebra/Module/FinitePresentation.lean:161. The first dry run passed. A final citation audit added the existing projective-dimension well-definedness lemma in Steps 2 and 8 to make the resolution-bound use explicit; the final dry run checks that version.
+
+## Second reading by NJ
+
+I reopened Stacks Tag 090V (`proposition-Auslander-Buchsbaum`) and checked the item statement hypothesis by hypothesis: Noetherian local ring, nonzero finite module, finite projective dimension, and the exact depth equality all agree; the field, zero-module exclusion, and depth-zero cases behave as stated.
+
+- Step 1: checked Nakayama, the depth and regular-sequence definitions, and depth-drop 090R; the induction parameter is finite once positive depth is established.
+- Step 2: checked the finite-projective-dimension definition, projective-dimension well-definedness, and minimal finite-free-resolution node; the shortest length and positive top rank claims follow as written.
+- Step 3: checked the coordinatewise free-module depth argument, exact syzygy sequences, and Noetherian submodule finiteness; all depth-lemma nonzero and finite hypotheses are supplied.
+- Step 4: checked the last-minors regular-sequence node and the determinant calculation placing minors in the maximal ideal; the resulting bound and finiteness claim are valid.
+- Step 5: checked the depth-in-short-exact-sequence inequality and its descending induction, including the infinity convention; the depth-zero base case follows.
+- Step 6: checked the split sequence, Nakayama, and regular-sequence definition; the common nonzerodivisor on both summands is justified.
+- Step 7: checked the quotient-ring hypotheses and the explicit element chase for exactness after reduction; locality, Noetherianity, finiteness, and nonzero quotient are all established.
+- Step 8: checked finite-free flatness, the flat-resolution Tor comparison, and the projective-dimension well-definedness/minimal-resolution nodes; tensoring kills the minimal differentials and detects exact length e.
+- Step 9: checked both depth-drop applications and quotient-depth identification; strong induction applies to the reduced local ring and module.
+
+There are no new nodes to audit under B1--B7. I checked every cited existing node statement against the fact used in its step and found no proof-only dependency, duplicate, cycle, or uncited non-elementary fact. The recorded Mathlib searches are genuine (including the unavailable LeanSearch result). I repaired the node metadata so its `created.item` names this item (it incorrectly named the neighboring uniform-perfect-quotient item); no mathematical statement or proof step required alteration.

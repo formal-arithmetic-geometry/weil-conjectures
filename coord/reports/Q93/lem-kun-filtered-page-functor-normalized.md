@@ -1,0 +1,60 @@
+# Stage-1 delivery: lem-kun-filtered-page-functor-normalized
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-kun-filtered-page-functor-normalized.json`: statement item, now split in ten steps; the statement and statement dependencies are unchanged. No Mathlib match for the whole assertion.
+- `citations.json`: one verbatim statement quotation for each node cited by each numbered step.
+- `report.md`: this report. The sandbox also retains the actual search log and the authoring script as working records.
+
+## New nodes
+
+None. Zero new Mathlib leaves. The existing spectral-sequence definition is a Mathlib leaf; it is reused, not delivered again.
+
+## Attachments
+
+None. I searched the project under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact item id, normalized successor/homology language, filtered spectral sequences, and the filtered-page names. There is no project declaration stating this complete assertion. The Grothendieck spectral sequence declarations have different inputs and do not give this filtered-complex interface. The upstream master source was not treated as evidence of finished proofs.
+
+## WANTED
+
+None. The Stacks Homology source, tag-to-label table, and relevant blueprint files are present.
+
+## Audit of the imported item
+
+The imported statement is mathematically consistent and needs no correction or additional hypotheses. It had no proof. A bare application of the page-core existence theorem would not prove the extra normalization: its conclusion does not pin its successor isomorphisms. Likewise, the statement of `lem-sp-filtered-quotient-canonical-functor` specifies the page differentials and maps but does not explicitly assert the successor normalization. I did not use the proof of either node as if it were part of its statement.
+
+Instead, Steps 1--4 construct the functor directly from the existing representative differential data, page chain maps, uniquely normalized homology isomorphisms, and their homology-naturality theorem. The identity page-to-quotient comparisons then make the requested normalization literal. Steps 5--10 supply every additional page-core clause for this same functor.
+
+There is a second interface detail: `lem-sp-filtered-quotient-comparisons` states naturality of a family of quotient-image comparisons but does not explicitly normalize that family at every positive page. I use its normalized first-page comparison and its filtration/quotient maps, and choose the positive-page image comparisons separately from `lem-sp-filtered-complex-quotient-image-comparison`. Step 6 writes out the representative computation that proves naturality of those actual choices. This avoids changing the page-to-quotient comparison to absorb an arbitrary image-comparison automorphism, which would not justify our successor normalization for that comparison.
+
+## Blueprint and Mathlib searches
+
+I read the item's unit and chapter, the three levels in SETUP, and the current main-20261015 `lem-kun-0f0f.md`. The auxiliary page construction remains on the inherited finite filtered tensor/Tor branch of the projection-formula unit. The ancestor command returns `lem-kun-0f0f`. Whole-blueprint searches for `filtered complex`, `normalized`, and `successor`, together with DAG searches for the tags, normalized homology, and representative differentials, reveal the existing spectral-sequence interfaces used here. None of the blueprint matches states this whole normalized page-one functor with the page-core data. The item's already precise `blueprint.from.place` and ancestry are retained, and `same_as` stays empty. I declare each off-unit statement as a generic homological-algebra tool in `split_report.tool_uses`; these tools implement the auxiliary construction, without replacing a step of the Künneth unit.
+
+All new Mathlib searches ran through `msearch.py` and their outputs are in `searches.jsonl`; the inherited searches remain in the item. I tried two semantic phrasings, Loogle with `CategoryTheory.SpectralSequence, HomologicalComplex.homology`, LeanSearch, and two source patterns. Loogle finds the abstract structure, its constructor, successor isomorphisms and morphism compatibility. Reading `Mathlib/Algebra/Homology/SpectralSequence/Basic.lean` lines 37--61 confirms that these are inputs/fields of the structure, not a filtered-complex construction or a normalization theorem. The semantic hits concern connected complexes, ordinary homology, and Dold--Kan normalization, not the assertion here. No service returned an unavailable result in these searches.
+
+## Not duplicates
+
+No new nodes were created. In particular the page-differential, normalized-homology, page-map, homology-naturality, quotient-image, exact-couple and abutment facts already have nodes. No elementary step or clause of the item was repackaged as a new item.
+
+## Review by Q93
+
+I read `coord/delivery-errors.md` B through E whole and checked this split against the sources and the actual statements it cites. For the item I read Stacks `homology.tex`, section-filtered-complex (Tag 012K), lemma-spectral-sequence-filtered-complex (012M), lemma-spectral-sequence-filtered-complex-functorial (012O), the first-differential lemma (012N), definition-filtration-cohomology-filtered-complex (012P), and lemma-biregular-ss-converges (012W), checking their labels in `tags/tags`. I also read the blueprint filtered-complex proof and the relevant existing node proofs as background, while using only their stated conclusions. No new node has a source to audit. The proof origin is agent because the assembly and normalization checks are written explicitly here from these interfaces; this does not claim the Stacks functoriality sentence contains all those details.
+
+1. Step 1 uses the quotient-comparison statement for its boundary containments and representative-normalized first-page isomorphisms, and the differential statement for a square-zero family on the actual quotients. These conclusions are explicitly stated. Every input is a finite decreasing filtered integer cochain complex; all supplied transition maps have exactly the required source-projection equation.
+2. Step 2 uses the page-map statement for chain maps, the universal four-square property, and identity/composition laws. It does not infer successor compatibility from a chain-map statement: that comes later.
+3. Step 3 uses the normalized-homology statement for existence and uniqueness, and the successor-cycle-cover statement for the actual epic map to cycles. In particular the normalization is not vacuous: the required cycle lift exists. The map equation gives the precise meaning of the representative rule in an abstract abelian category; no claim that objects have underlying sets is needed.
+4. Step 4 uses the homology-naturality statement with the same fixed differential family, page-map family and normalized isomorphisms. Its conclusion has exactly the successor square needed by the Mathlib spectral-sequence morphism definition. The page-map laws then prove the functor laws page by page. This is an explicit assembly, not an appeal to a node that simply restates this item.
+5. Step 5 uses the pointwise quotient-image statement, including its representative equation, and the representative-epimorphism statement. Equality of the supplied and constructed transition maps follows by cancellation of the source cokernel projection. The two representative maps to the cycle subobject agree by cancellation of its monic inclusion, so the projection used here is epic. Thus the representative equation holds with the identity page-to-quotient comparison used in Step 4.
+6. Step 6 uses the stated quotient-comparison maps, the representative restriction from the map-restriction statement, the page-map four-square characterization, and the representative equation from the quotient-image statement. I checked the types of both transition quotients and the direction of each composite. The equality `a phi_V = phi_U b` follows by precomposition with the source quotient projection. The two equations involving rho follow by monic cancellation. The displayed sequence of composites uses exactly those equations and the defining projection square for induced cohomology maps; cancelling the epic `z_U pi_U` proves naturality. I corrected the component notation to `(p,q)` to distinguish it from the quotient map called `a`. This is an elementary diagram chase, not an uncited exactness or comparison theorem.
+7. Step 7 uses the two explicit representative normalizations to prove the first-page image equation after epic cancellation. The source quotient really is the graded complex at r=1. The same graded map has page-one quotient restrictions by the quotient-comparison statement, whose first-page naturality holds for every such descent. The page-map statement identifies that descent with our actual functor map. Thus first-page naturality is also for the selected functor.
+8. Step 8 applies the canonical-structure statement to our chosen functor, not to its own existentially chosen functor. Its hypotheses explicitly allow any spectral sequence with page-to-quotient isomorphisms intertwining the supplied representative differentials; with identity comparisons those equations are identities. The normalized e_H from Step 1 meets its other hypothesis. Its conclusion explicitly gives both the first connecting map and the exact couple, with all index shifts and equations required by the page core.
+9. Step 9 applies the bounded-couple-abutment statement to that very exact couple and those comparisons. I checked its alpha and initial-gamma hypotheses against the conclusions used in Step 8. Its statement supplies the image filtration, finiteness/separatedness, limits/colimits, cocone equation, convergence and infinite-page comparison. No extra convergence theorem or countable exact sums are silently used.
+10. Step 10 is direct substitution in the filtration and cycle/boundary definitions. With `R=max(1,b-p,p+1-a)`, the outgoing filtration index is at least b and the incoming index is strictly below a. The corresponding graded pieces vanish, so the relevant differential has zero target or source. The two tail subobjects become literally constant, which identifies all later quotient pages. This is elementary and requires no new stabilization lemma.
+
+I tested the statement and steps on the zero complex, a one-step filtration (only one nonzero column), zero differential, negative filtration indices, and cochain complexes unbounded in both directions with a finite filtration. The zero case permits arbitrary choices of whole/zero indices; the same inequalities still prove all claims. In a one-column filtration every positive differential vanishes and the normalization gives the identity on represented classes. Zero differential gives zero boundaries and the expected graded-page quotients. Negative indices enter only the displayed integer inequalities, with no first-quadrant assumption. An unbounded complex causes no direct sum or cochain truncation in the construction: the only global bounds are filtration indices a and b. Nothing requires degreewise projectives, injectives, enough points, or module elements.
+
+All ten proof steps are below 2000 characters. The non-elementary content of every step is an explicitly cited existing statement, with a verbatim quotation in `citations.json`. The remaining arguments are specified projection equations, monic/epic cancellation and substitution into definitions. I introduced no hollow object, no statement change, no missing hypothesis and no new intermediate node. The statement-only/new-node, duplication, relabelling and TeX checks in B--D are therefore satisfied without creating a redundant layer.
+
+## Unfinished work
+
+None in this stage-1 split. Existing cited dependencies retain their own current proof/audit status; this delivery makes no claim to close their Lean proofs. No Lean file was written and no compiler, Lake, build or local preflight/review checker was run. The required server dry run and push are performed using the delivery wrapper after this report is written.

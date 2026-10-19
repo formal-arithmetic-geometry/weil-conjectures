@@ -1,0 +1,55 @@
+# Stage-1 delivery: lem-pur-cartier-class-agreement
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-cartier-class-agreement.json`: statement; split into seven proof steps, all using existing nodes. Mathlib verdict: no match after LeanSearch, two LeanFinder phrasings, two Loogle queries, and source grep. No new nodes and no Mathlib leaves.
+- `citations.json`: one entry for every step/node pair (28 entries). Each quote is the full verbatim statement of the cited node, so that all the clauses actually used remain visible together.
+- `searches.jsonl`: actual search-command log, retained with the delivery sandbox. The item's search entries use exactly these tool names and query texts.
+
+## Attachments
+
+None. I searched the read-only slopmaster2 `WeilConjectures/` for the exact blueprint tag and for Cartier/class/Kummer terminology, and read `EtaleCohomology/Purity/Smooth/KummerClass.lean`. Its Kummer classes are an abstract parameter with naturality/multiplicativity and rank-one normalization; it does not identify the two specified global Cartier constructions. The exact tag has no hit. No declaration states all the clauses of this item, so an attachment would be incorrect. No master sorry declaration was treated as a proof.
+
+## WANTED
+
+None. All source material needed for this comparison is present locally. No source was downloaded.
+
+## Statement correction and normalization
+
+STATEMENT-DISPUTED: the instruction to apply the smooth-divisor clause of `lem-pur-divisor-class` with base B=T and the identity T→T does not meet that clause's hypotheses for a nonempty Cartier divisor. Explicitly, take T=Spec k[t] and D=V(t). The identity T→T is smooth, but D→T is not smooth: it is not flat, since tensoring multiplication by t on k[t] with k[t]/(t) gives the zero map on k. This example satisfies the hypotheses of the item and shows why that application cannot justify it.
+
+The correction is to invoke the *second paragraph* of the cited node, which explicitly constructs the class for every effective Cartier divisor on T, using its line bundle with specified open trivialization. This keeps the original hypothesis-free Cartier intent and every conclusion. It adds no smoothness assumption and does not alter the unit or chapter route.
+
+I also expanded the normalization of the named c_D in the statement from its source construction. The bare existence, first-Chern-class and pullback assertions in the statement of `lem-amb-cartier-kummer-map` do not characterize a unique relative lift. The comparison cannot be deduced just from those properties or from equality of local restrictions. Its defining construction in `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md` explicitly takes the relative torsor boundary, realizes it in supported Hom, then extends scalars. The item now specifies exactly that constructed morphism as its convention. No theorem hidden in another node's proof is used as an extra black box: the comparison of the two recipes, including the coefficient unit and site comparison, is written in steps 3–6.
+
+The inherited four-entry search list included an explicitly unrun service placeholder. It has been replaced by seven actual logged searches made in this sandbox; the earlier list was not represented as searches made by Q14.
+
+## Unfinished work
+
+None in the one-level split. Existing cited nodes retain their own proof/audit state and are not claimed to be Lean-closed here. This delivery contains no Lean edits or compiler runs. Validation is the required server-side dry run, followed by direct delivery.
+
+## Not duplicates
+
+No new nodes are proposed. I searched the whole DAG and blueprint for Cartier, relative Kummer, and divisor class, and reused the existing relative torsor, ordinary supported Kummer, scalar-adjunction, support-cone, and support-Hom naturality interfaces. In particular `lem-asd-supported-kummer-support-hom-naturality` and `lem-pur-supported-hom-pullback` overlap on the etale pullback clause; I use the latter because its statement also supplies the needed etale-to-pro-etale equality. Neither the ordinary supported Kummer lemma nor the relative-cone lemma states the present two-construction comparison, and I did not create another node for either of them.
+
+## Review by Q14
+
+I read the chapter record `sec-smooth-purity`, the unit record `sk-prop-an`, and the current blueprint sources, including `thm-pur-localized-top-chern.proof.md` Step 4 (L1), the complete Cartier-map proof, and the divisor-class proof. The ancestor is `thm-pur-localized-top-chern`, with no intervening created node. This item fills the promised rank-one comparison inside L1 and does not change the model-purity route. The source's loose local-to-global language in the divisor proof is not needed: the existing reviewed divisor-class statement already specifies a global relative torsor construction. I checked the actual Stacks sources `etale-cohomology.tex` at `lemma-kummer-sequence` (03PL) and `lemma-cohomology-with-support-triangle` (0A45), and `sites-cohomology.tex` at `lemma-torsors-h1` (03AJ) and `lemma-adjoint` (07A6). The relative and normalized refinements are attributed to the cited DAG nodes, not claimed to be verbatim consequences stated by those Stacks tags. No new-node source remains to review. No SGA source is used.
+
+In step 1 the divisor-class statement explicitly extends to every effective Cartier divisor, the divisor-line definition really is the dual ideal, the line-bundle/torsor statement applies on any scheme, and the relative-torsor statement classifies a torsor *with its chosen section*. The displayed dual-basis calculation fixes the same section in both recipes. This avoids the incorrect implication that a Picard class alone fixes a supported class.
+
+In step 2 the frame-class definition specifies N=ell^n, NA=0, the roots projection, rho, and sigma for every coefficient index. The Kummer node requires N invertible, which follows from ell≠p. The relative-torsor node supplies the relative connecting map, and the relative-cone node states coefficient and site-comparison compatibility. The divisor-class statement says its class is obtained by exactly this connecting map and this coefficient map. Thus the equation cl(D)=t_*nu^*beta_D uses their statements and is global.
+
+In step 3 the module/abelian comparison statement constructs its isomorphism from sectionwise scalar forgetting and states compatibility with restriction. This gives a map of the two restriction cones, not merely an abstract equality of cohomology dimensions. The supported-Hom node states the natural restriction-cone formula. The relative-cone node states the signed differential and the kernel inclusion. I fixed the same cone in both identifications, so no sign or forgotten-support uniqueness is hidden.
+
+In step 4 the ordinary supported Kummer statement explicitly says it is the derived scalar extension of the integral finite-root map, with its canonical source and target. I noticed its source is written Ri_*A_D, whereas this item uses i_*A_D, and supplied finite-direct-image exactness to justify that conversion. A closed immersion is finite because its affine quotient algebra is cyclic; module exactness follows from the abelian kernels and cokernels. The finite-twist node with A=R makes mu_N flat; the bounded-above-flat/K-flat node then ensures the target B is a degree-zero sheaf. The coefficient-adjunction statement really gives the normalized unit x↦x tensor 1. Its naturality square, evaluated at the supported generator, proves the scalar-coefficient comparison in this step. This is a routine adjunction computation using those statements; it is not a new sublemma moved out of the item. A is never assumed flat over R.
+
+In step 5 the Cartier-map statement supplies the etale-origin witness B and the projection-induced comparison with the specified pro-etale twist. The frame definition fixes its map on root tensors, so q nu(u)=sigma rho is an actual equality of coefficient maps. The support-Hom-pullback statement explicitly includes the site-comparison equation with the canonical supported-constant comparison. Its hypothesis is a bounded-below etale complex; B[0] satisfies it by step 4. The pro-etale supported-Hom statement is natural in its target, allowing postcomposition with q. This is why it is valid for the fixed pro-etale twist rather than for an unrelated etale coefficient category.
+
+Step 6 is elementary substitution of the two specified recipes. I repeated the exact c_D construction as an explicit statement convention so that this step does not cite an unstated uniqueness claim from a lemma's proof. The c_D lemma is used for its named construction and, in step 7, its actual pullback assertion. No new node merely restates this agreement.
+
+For step 7 I reread the c_D lemma's precise hypothesis: the scheme-theoretic pullback must remain Cartier. This is exactly the item's hypothesis. The support-Hom-pullback node includes the pro-etale equality for etale-origin bounded-below coefficients and the inverse supported-source exchange. The supported-cup-functoriality node names the canonical localization pullback on both sites and its comparison compatibility. Finally the supported-Hom node gives an isomorphism, so cancelling it is legitimate. The calculation proves equality of supported classes, not only their ordinary images. Cross-unit generic tools are listed in `split_report.tool_uses`; none replaces a unit step.
+
+I tested the empty divisor and empty scheme: the trivialized line has zero relative class, so both supported classes are zero. For T=Spec k[t], D=V(t^2), the divisor need not be smooth; both constructions use the same doubled divisor pair and give the doubled class, including when it vanishes in the coefficients. For h induced by t↦t^2 and D=V(t), the pullback is the double Cartier divisor, consistent with the same equality; no smoothness of h is required. A map landing entirely in a nonempty divisor has zero pulled-back equation and generally does not give a Cartier divisor, so it is correctly excluded. A ramified coefficient example with n=2 and ramification index at least two makes A nonflat over Z/ell^2; the derived-adjunction argument still applies. No step assumes the coefficient index is divisible by the ramification index. A zero-divisor local equation is outside the Cartier hypothesis.
+
+I checked delivery-errors B–E against the written files: no unnecessary new nodes, no new proof sketches in statement-only nodes, all statement objects introduced, explicit source places/tags, actual searches only, no circular reasoning by local gluing or Chern-class uniqueness, and each proof use backed by the opened statement. Every proof step is under 2000 characters; the coefficient calculation in step 4 is one normalized adjunction square. The full literal quotations in citations.json were copied from those statements. The status is split; no reviewed or maintainer metadata was set.

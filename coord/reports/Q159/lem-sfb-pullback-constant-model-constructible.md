@@ -1,0 +1,31 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-pullback-constant-model-constructible.json` (item, split); `citations.json` (eleven exact statement quotations covering every proof use); and this report. No new nodes were created. The retained `searches.jsonl` contains the four fresh `msearch.py` searches for the item plus the inherited searches. No Lean, compiler, Lake, live project, or launcher file was written.
+
+2. Attachments: none. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` and `/home/ubuntu/weil-newtargets-master/WeilConjectures` for the item id, blueprint terminology, constructible-module pullback, and finite constant local models. No sorry-free project declaration states this item. The item's Lean audit remains `none`; the upstream master is reference material only.
+
+3. WANTED: none. The item source, Stacks morphisms Tag 054I, and Bhatt–Scholze are present in the named literature directories.
+
+4. What was wrong in the retained split and what I corrected: the original Step 1 used `lemma-constructible-pullback-stratification`, whose statement gives locally closed strata but does not say their inverse images are constructible. I added the existing Mathlib leaf `lem-pur-scheme-constructible-preimage` (Mathlib declaration `AlgebraicGeometry.Scheme.Hom.isConstructible_preimage`, `Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:172`) and made that hypothesis explicit. The original Step 2 cited `det-pe-topos-functoriality-site`, which only states cover pullback inside one fixed pro-etale site; I replaced it with the existing arbitrary-morphism site theorem `det-pe-topos-functoriality-inverse-image`, clause 1, and recorded it as a generic tool use. The original Step 3 asserted that the same scalar matrix survives pullback without showing why. I expanded it through the exact coefficient compatibility `sk-prop-sfb-cartesian-coefficients`, the module-pullback definition, and naturality of the coefficient comparison, then made the matrix/cokernel and pullback-composition identifications explicit. The final step remains the direct constructibility definition. All proof dependencies equal the union of step uses, and every quotation in `citations.json` is verbatim from the cited statement.
+
+## Not duplicates
+
+`lem-sfb-pullback-constant-model-constructible` vs `lemma-constructible-pullback-stratification`: the existing node only states that a finite scheme stratification pulls back to a stratification; this item additionally proves constructibility of the inverse-image strata and transports module covers and finite constant scalar local models.
+
+`lem-sfb-pullback-constant-model-constructible` vs `lem-weil-pbc-constructible-preimage`: that existing Mathlib leaf concerns inverse images of constructible subsets under a retrocompact-preimage hypothesis; the Mathlib leaf used here, `lem-pur-scheme-constructible-preimage`, is the arbitrary-scheme morphism result, while this item additionally treats constructible module sheaves and local coefficient models.
+
+`lem-sfb-pullback-constant-model-constructible` vs `lem-pur-scheme-constructible-preimage`: the existing Mathlib leaf states only constructibility of the set-theoretic inverse image of one constructible subset; this item states preservation of a module's finite constant local models on every stratum and gives the pulled-back covers and scalar modules.
+
+## Review by Q159
+
+I reread the current item node, the chapter and unit records, the main-20261015 blueprint proof for `sk-prop-proper-base-change-unbounded`, the source paragraph, and the Stacks 054I proof. I also opened the complete statements of every cited node before editing the proof: `lemma-constructible-pullback-stratification`, `lem-pur-scheme-constructible-preimage`, `det-pe-topos-functoriality-inverse-image`, `sk-prop-sfb-cartesian-coefficients`, `sk-def-sfb-module-pushforward-pullback`, `sk-def-sfb-pulled-back-coefficients`, `sk-def-sfb-coefficient-morphisms`, `det-def-sfb-constructible-local-model`, and `sk-def-sfb-constructible`. The item statement and all hypotheses are unchanged.
+
+Step 1 now takes the finite stratification from the hypothesis, the existing pullback-stratification statement for finite locally closed strata, and the Mathlib leaf for constructible inverse images. I checked that the latter applies to an arbitrary scheme morphism and therefore needs no finite-type or Noetherian assumption. Step 2 uses exactly clause 1 of the arbitrary-morphism pro-etale inverse-image statement: the base-change functor sends covering families to covering families. This addresses the earlier mismatch between the item’s arbitrary `g` and the fixed-site covering axiom.
+
+Steps 3 and 4 were checked against the local-model definition and its matrix equivalence. For each finitely presented scalar module I choose a finite presentation, identify the local model with the cokernel of its scalar matrix, use exact coefficient-compatible module inverse image to preserve finite sums and cokernels, and use naturality of the coefficient morphism to see that each scalar entry is the same element of `\Lambda(*)`. The module-pullback composition isomorphism identifies the result with the restriction of `g^*M`; hence the original finitely presented `P_{a,i}` works on the fibre-product cover. No flatness or coefficient-category change is introduced. Step 5 applies the qcqs constructibility definition.
+
+I checked edge cases `Y'=\varnothing`, an empty stratum or cover member, the zero module (`P=0`), the identity map, and a one-point stratum. Each is covered by the same finite-family and cokernel argument. The fresh LeanFinder, Loogle, grep, and LeanSearch searches returned only generic pullback/sheaf APIs or no exact constructible-module theorem; the existing Mathlib constructible-preimage declaration was separately checked at its source line and is cited as an existing leaf. No SGA source is cited, and no proof step exceeds the 2000-character long-step threshold.
+
+## What remains
+
+Nothing remains in the stage-1 split. The mandated server checks and final delivery dry run are being run by the required tools; no local compiler or project build is used.

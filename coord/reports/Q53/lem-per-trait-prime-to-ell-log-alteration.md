@@ -1,0 +1,72 @@
+# Stage-1 split: lem-per-trait-prime-to-ell-log-alteration
+
+## Files written
+
+All paths below are under this item's sandbox, in dag/nodes/sec-deligne-laumon-a1/.
+
+- lem-per-trait-prime-to-ell-log-alteration.json: item, split into eight steps, original statement retained verbatim.
+- def-per-fs-log-smooth-etale.json: definition, unsplit; no Mathlib match.
+- lem-per-trait-semistable-galois-alteration.json: statement only, unsplit; no Mathlib match.
+- lem-per-tame-trait-quotient-log-etale.json: statement only, unsplit; no Mathlib match.
+- lem-per-gabber-log-smooth-equivariant-modification.json: statement only, unsplit; no Mathlib match.
+- lem-per-log-regular-projective-log-resolution.json: statement only, unsplit; no Mathlib match.
+- lem-per-projective-finite-group-quotient.json: statement only, unsplit; no Mathlib match.
+
+Six new nodes, zero new Mathlib leaves. citations.json records the statements used by every proof-step citation. searches.jsonl and the per-node search-result text files preserve the actual tool executions and their hits. Temporary scripts and ILO's extracted text are sandbox-only research material.
+
+## Attachments
+
+None. Searched the entire read-only slopmaster2 and master WeilConjectures trees both for the item's blueprint tag and for log smoothness, log structures, semistability, Galois alterations and projective scheme quotients. The only broader grep hits were unrelated module-quotient material. No declaration gives this item, or one of the six new intermediate statements. The older ATTACH.md in the group directory concerns another item and was not reused.
+
+## WANTED
+
+WANTED: Kato, Logarithmic structures of Fontaine--Illusie (1988), Theorem 3.5, for def-per-fs-log-smooth-etale; the local ILO volume recalls the relevant chart criterion in X Proposition 1.2 and XVI 3.6.3.
+
+WANTED: Vidal (2004b), Proposition 4.4.1, for lem-per-trait-semistable-galois-alteration. ILO XVI 3.7 reproduces the exact semistable G-equivariant diagram and its four properties, so the input can already be stated from the locally available source. The constant-field normalization in the preceding paragraph belongs to that input.
+
+WANTED: David Rydh, Existence and properties of geometric quotients, arXiv:0708.3333v2, Theorem 4.4, Proposition 4.7 and Remark 4.9, pp.20--23, for lem-per-projective-finite-group-quotient. Read the primary paper online at https://arxiv.org/pdf/0708.3333; did not download into or modify the shared literature. Proposition 4.7 includes projectivity and quasi-projectivity over a Noetherian base. On the ample bases used here this agrees with the finite-projective-space convention. The new node is statement-only and its source explicitly says WANTED locally; it asserts no completed proof from an unavailable local document.
+
+## Problems corrected and scope
+
+No statement dispute was found in the item, and its mathematical statement is unchanged. The imported item had no proof. The split makes explicit that the geometric construction stops before applying punctual purity. It therefore uses neither the purity theorem above the item nor any purity conclusion for an alteration.
+
+Two easy-to-miss qualifications have been retained. The action on the intermediate trait need not be faithful, so its degree divides the Sylow order rather than necessarily equalling it. The relative Gabber modification can enlarge the boundary along the nonfree locus, including a horizontal component. It is not asserted to be a log-etale morphism to the original semistable model; only the final saturated log-blowup resolution is log etale.
+
+The graph step supplies quasi-projectivity over the intermediate trait instead of assuming it from quasi-projectivity over S prime. Generic finite etaleness is proved by explicitly removing proper closed images, not by assuming that an arbitrary modification preserves a fixed finite-etale open.
+
+## Not duplicates
+
+- lem-per-log-regular-projective-log-resolution vs lem-trf-log-regular-desingularization: the existing node assumes an algebraically closed ground field and only asserts a proper regular modification with normal-crossings boundary; the new node works over excellent affine rings, including mixed-characteristic traits, and asserts projective log-etale blowups and preservation of a given log-smooth structural morphism. The existing statement cannot be applied to Q/T.
+- lem-per-log-regular-projective-log-resolution vs lem-trf-monoidal-resolution-tower: the existing statement resolves characteristic monoids without log regularity and does not assert regularity of the underlying scheme, projectivity or log etaleness. It is an input to a future split of the new resolution node, not its conclusion.
+- lem-per-log-regular-projective-log-resolution vs lem-trf-log-blowup-normalization: that existing node describes one supplied blowup and its normalization; it does not construct a finite regularizing tower or assert relative log smoothness of the regular outcome.
+- def-per-fs-log-smooth-etale vs def-trf-fs-log-blowup: the existing definition gives fs structures, log regularity, morphisms and blowup universal properties, but does not define log smooth or log etale morphisms. The new definition supplies the kernel/cokernel chart conditions.
+- def-per-fs-log-smooth-etale vs lem-trf-log-smooth-log-regular: that theorem assumes injective charts with torsion-free cokernel and proves log regularity; the new definition also allows invertible torsion in the cokernel and defines log etaleness. The tame trait extension has torsion cokernel, so the old theorem is not a replacement.
+- lem-per-trait-semistable-galois-alteration vs lem-trf-de-jong-geometrically-irreducible-tower: the existing theorem constructs a plurinodal tower over a general altered base, with no Galois torsor or regular semistable total space over a finite trait extension. Those missing clauses are used in the Sylow construction.
+- lem-per-trait-semistable-galois-alteration vs lem-per-trait-prime-to-ell-log-alteration: the new raw cover has unrestricted degree and is not the prime-to-ell conclusion; no prime ell occurs in its hypotheses. The item must choose H, change the trait, modify equivariantly, form the quotient, resolve logarithmic singularities and compute the subgroup index.
+- lem-per-tame-trait-quotient-log-etale vs lem-exc-finite-dvr-tame-inertia: the existing statement concerns normalization and the inertia character of a field extension, and does not assert the log-etale morphism or log-smooth change of base for trait quotients. It does not state the fact used here.
+- lem-per-projective-finite-group-quotient vs lem-weil-pbc-connected-torsor-subgroup-quotient: the latter treats free finite-etale torsors only and is reused for the generic open. The new theorem allows nonfree actions and establishes a projective scheme quotient globally.
+- lem-per-projective-finite-group-quotient vs lem-exc-finite-invariant-quotient-normal-action: the existing statement is an invariant-ring stabilizer/normal-maximal-quotient theorem, without geometric scheme quotients or projectivity.
+
+DAG-wide concept and title searches, plus tools/blueprint_refs.py searches for log-smooth, logarithmic, semistable, Galois alteration, quotient and monoidal, found no blueprint node stating a new input. The two logarithmic blueprint hits concern unrelated logarithmic sheaves. The numerous ordinary quotient and monoidal-category hits do not assert scheme quotient or fs-log geometry. Their exact search output is preserved in blueprint-searches.txt. Existing Sylow and subgroup-torsor nodes were reused rather than duplicated. All new blueprint.from records use lem-per-artin-gabber-affine-curve and prepend this item to the inherited via list.
+
+## Review by Q53
+
+I read the item against ILO XVI 3.7, pp.254--255, including the constant-field preparation, all four bullets of the semistable G-alteration, the Sylow quotient of the trait, the relative equivariant resolution and the final logarithmic blowup. The purity sentences following this geometric construction are not used. I read X Theorem 1.1 on pp.135--136 for the relative modification and VI 3.1--3.2 on pp.73--74 for the meaning and effect of very tame actions. I also read VIII 3.4.6 and 3.4.8--3.4.9 on pp.111--112 and VI 1.7--1.8 on p.70 for the logarithmic resolution. These passages are the sources of the new semistable, modification, trait and resolution statements, not merely sources named from memory. For the new definition I checked X 1.2 and the chart criterion used in XVI 3.6.3; the general Kato reference is requested above. For the finite-quotient node I read Rydh's Theorem 4.4, Proposition 4.7 and Remark 4.9 online. No SGA source was used as a route or citation.
+
+For Step 1, the new semistable theorem explicitly supplies G, the finite trait, the projective map, the regular log-smooth model and its connected generic torsor. The preliminary normalization of constants is included in that input; the item does not multiply its final degree by an arbitrary base-extension degree. For Step 2 I opened the existing Sylow node: its statement gives both an ell-group and index prime to ell. The new tame-trait node gives the complete strictly henselian quotient and log-smooth composite, precisely what the step takes from it. H can have a kernel on the trait; its invertible order is enough.
+
+For Step 3 I opened the closed-immersion base-change statement and the finite-morphism and separatedness definitions. The graph is a genuine closed subscheme, being a pullback of the diagonal, and is not merely a map whose image lies in a chosen subset. The coordinate generators and the finite affine cover give finite type over the intervening ring. This is a short elementary graph argument, not a new lemma. For Step 4 the source theorem is the relative X 1.1, whose conclusion actually preserves log smoothness of the quotient. T is complete, its canonical trait log structure is log regular, the action is over T and generically free, and stabilizer orders are powers of the invertible prime ell. The new specialized theorem absorbs the standard Noetherian/quasi-excellence verification for finite-type schemes over complete traits. It does not incorrectly infer relative log smoothness from the absolute VIII modification theorem.
+
+For Step 5 I read the H-projective composition theorem and both projectivity clauses of the new finite-group quotient. The quotient can be taken over T and over X because the two actions are compatible; categorical uniqueness identifies the outcomes. X is Noetherian because regular means locally Noetherian and its finite-type morphism to affine S makes it quasi-compact. For Step 6 the existing complete-local-excellence node says exactly that the ring of T is excellent. The resolution statement requires an excellent affine base, and Q has all of its integral/quasi-projective/fs-log-regular hypotheses from earlier steps. Its conclusion includes preservation of the log-smooth map to T, so this step cites a theorem that says the needed assertion rather than merely the definition of a blowup.
+
+For Step 7 I opened the existing connected-torsor subgroup-quotient statement and the Galois-cover convention. They supply the finite-etale quotient with geometric fibre cardinality [G:H], without assuming H normal. I corrected the initial draft's uncited use of finite maps being closed: the final version uses the already available projective/proper map a to remove the closed image of the non-isomorphism locus. The quotient theorem says explicitly that restriction to an invariant open gives its quotient. For Step 8 I opened projective-implies-proper, the proper-morphism definition, the Segre theorem over every base, and finite-type composition. The closed bad locus misses the sole generic point over X, so removing its proper image leaves a nonempty open. The two embeddings and the actual Segre closed immersion prove the required quasi-projectivity over each trait. Finite type follows from properness and composition. Every node used by every step has a verbatim quote in citations.json; I checked the mathematical content of those quotations, not only their substring validity.
+
+I tested the new statements on trivial H, a nonfaithful trait action, X=S, a generic-only X over S, a smooth semistable chart with r=1, an already regular log model, a length-zero logarithmic resolution, and the finite-quotient action on an affine scheme. Trivial H makes T=S prime and its log-etale map the identity. The degree formula remains [G:H], hence positive, including d=1. Invertibility is required on S, so a wild characteristic-p stabilizer is excluded. The log-resolution input is excellent and no unsupported assertion about completion of an arbitrary nonexcellent DVR is made. Empty input schemes are excluded in the two alteration statements by integrality. The finite-quotient theorem itself also permits the empty scheme.
+
+For delivery-errors B: every new node is self-contained, has definitions inline or cited, single-escaped TeX, exact literature places, complete search records, and no proof steps. No absent Mathlib match was promoted to a leaf: the hits concern ordinary etale/smooth morphisms, invariant fields, projectivizations and module quotients. Both semantic phrasings, Loogle and source grep were actually executed for each new node. For C and D: all substantive geometric facts are cited statements; generic shrinking and graph arguments are written out; no new theorem states the final prime-to-ell alteration. The generic Sylow index and the quotient/resolution assembly remain in the item. For E: the bases, morphisms and nonfaithful action caveat were checked as above. None of the eight proof steps exceeds 2000 characters, and none hides a standalone comparison lemma.
+
+The off-unit citations declared in split_report.tool_uses are general finite-group, scheme-embedding, projectivity, finite-type and torsor-quotient tools; they do not replace the ILO XVI route with another unit's proof. No tool_uses maintainer field was set.
+
+## Unfinished work
+
+No part of this one-level split is left unfinished. The six new nodes are intentionally unsplit and retain no proof; proving their statements is subsequent work. Local copies of the WANTED primary references remain to be obtained by the maintainer. The final dry run and delivery outcome are recorded by the delivery command.

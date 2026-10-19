@@ -1,0 +1,45 @@
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-finite-coefficient-coinduction-locality.json: statement, split into nine proof steps; not a Mathlib leaf.
+- citations.json: verbatim statement quotations for all 25 step citations.
+- No new nodes and no Mathlib leaves. No unit record changed: this is not the unit's key node.
+
+## Attachments
+
+None. I searched WeilConjectures/ in the read-only slopmaster2 checkout for the exact blueprint tag and for coinduction/coefficient-restriction terminology. There is no complete project declaration to attach. The ordinary-module node lem-trf-derived-coinduction-adjunction is not a sheaf locality theorem, and lem-sc-sheaf-coinduction-action constructs an underived action for a structural sheaf map and explicitly asserts no adjunction.
+
+## WANTED
+
+None. The item is an agent-formulated general interface: its principal source, Gabber XVII Proposition 6.2.1.1, printed page 294 (PDF page 300), gives the quotient-coefficient application and says supported cohomology commutes with derived Hom. The present proof explicitly expands that sentence, rather than pretending that the proposition states arbitrary coefficient-ring locality verbatim.
+
+## Corrections and searches
+
+The statement is unchanged. I added def-pur-sheaf-tensor-product to stmt_deps because the statement uses tensor products. The earlier node contained no proof; it now has an argument rather than a source citation. Its inherited Mathlib searches were retained. New searches were run only through msearch.py, and their queries and outcomes are logged in searches.jsonl. The first leanfinder request completed and logged its outcome before the provider interruption; its result was read from that log, so it was not blindly repeated. The later phrasing changed the search question to pseudo-coherent coefficients. The hits concern ordinary module coextension, representation coinduction, underived sheaf scalar restriction, free sheaf pullback, or light condensed internal Hom. I read Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean: restrictScalars at line 36 is an underived construction and supplies no derived locality theorem. None is an exact match or a one-line specialization of the item.
+
+The DAG and whole-blueprint searches included coinduction, finite-free, supported kernel, coefficient and adjunction; exact existing nodes were then opened for the Hom model, constant exactness, injectives, homotopy adjunction, closed support adjunction, right-adjoint composition and mate pasting. The searches for broad concepts returned many nodes; I used their statements, not arguments hidden in their proofs. No new node was necessary, and there are no new/existing duplicate pairs.
+
+## What remains unfinished
+
+No mathematical clause remains open in this one-level split. Independent maintainer review remains the delivery protocol's next review. No Lean was written, compiled, or built.
+
+## Review by N6
+
+I read the chapter and sk-p-dl-a1-perverse unit, the current main-20261015 ancestor proof Step 3, the item's complete statement and provenance, and Gabber XVII Proposition 6.2.1.1 on printed p. 294. I also read Stacks sites-cohomology.tex, Tag 08JI (lemma-Rhom-complex-of-direct-summands-finite-free), and etale-cohomology.tex, Tag 09XQ (lemma-sections-with-support-acyclic), including its preceding definition of the supported sheaf and the proof's closed adjunction. This split supplies a generic locality interface on the existing duality branch; it replaces no unit or chapter route and uses no SGA source. The origin is marked agent because the general formulation and detailed comparisons are an expansion, not a quotation of Gabber's specialized proposition.
+
+Step 1 uses the module-sheaf definition's actual sectionwise-kernel/sheafified-cokernel description to check exact scalar restriction. It uses the sheaf-Hom definition on localized sites to write both directions of the coinduction adjunction explicitly. The injective-preservation lemma states exactly what is needed once that left adjoint is exact. This step neither treats global sheaf sections as an exact functor nor identifies structural and constant coefficients.
+
+Step 2 uses module-sheaves-enough-injectives and the bounded-below representative statement, including its specified lower bound and K-injectivity clause. The termwise-adjunction lemma supplies the homotopy-category bijection, and the K-injective-Hom lemma supplies both localization bijections and comparison homotopy equivalences. I checked the coefficient category in each Hom expression: U(M) and I are A-objects, M and H(I) are B-objects. This proves the lower bound without finite projective dimension or constructibility.
+
+Step 3 uses the existing constant-exactness theorem for an arbitrary commutative coefficient ring and small site, not the weaker finite-module constant-sheaf lemma. Tag 08JI's node states both the bounded-above/finite-projective hypotheses and the finite-diagonal signed formula. Here its upper bound is zero and its target has a lower bound a. The RHom-invariance node applies because the chosen injective target is K-injective and the augmentation is a quasi-isomorphism. The Hom model is used only after forgetting B, since an arbitrary free A-resolution is not itself given a strict B-action.
+
+Step 4 uses the inverse-image-exactness node's canonical identification of constant ring sheaves, finite-limit/finite-colimit preservation, and module-action compatibility. Its comparison is defined in D(B) by the derived coinduction adjunct of the pulled-back evaluation counit. The finite-free calculation identifies its underlying A-map with coordinatewise pullback: all matrices of d_P are constant scalar matrices. The derived-isomorphism criterion justifies conservativity through unchanged underlying cohomology. This does not assume that forgetting scalars is faithful on arbitrary derived morphisms. No non-flat tensor pullback is substituted for constant-coefficient inverse image.
+
+Step 5 checks a subtle coefficient issue: the closed-support adjunction node is stated for abelian sheaves. I wrote the extension to module-linear maps, using equivariance of the canonical kernel maps and the adjunction correspondence on scalar multiplication equations. Exactness then follows on underlying abelian sheaves. The injective-preservation and bounded-below/homotopy/localization nodes prove the derived adjunction for this supported kernel. I did not cite its definition as if it already asserted an adjunction.
+
+Step 6 uses the actual composition-adjunction theorem: both composites are right adjoints to the same functor, since restriction and closed direct image are identical on the displayed sections. The three Hom identifications explicitly fix the resulting B-linear isomorphism. That cited theorem includes pasted units and counits, so it supplies exactly the claimed normalization. Step 7 uses the two relevant pasting clauses in the mate-pasting statement and its identity clause; it proves composition compatibility in D(B), not merely after scalar restriction.
+
+Step 8 is elementary substitution of the preceding comparisons into the definition of the residue-field-valued costalk. The localization source is arbitrary, and its closed point is the closed immersion to which Step 6 applies. The geometric-fibre clause adds ordinary inverse image only. No purity, support base-change, excellence, or Noetherian condition is smuggled into this step.
+
+Step 9 uses the sheaf-Hom and tensor definitions to write the actual balanced comparison h tensor (b tensor l) mapped to the function b' mapped to h(bb') tensor l. Its inverse can be checked locally in a frame of L. Tensor by an invertible sheaf is an exact equivalence with inverse tensor by its evaluation dual; the injective-preservation theorem therefore applies. Consequently I tensor L is a legitimate injective representative. The differential and shift compatibility are checked from the displayed maps and the signed Hom differential, rather than asserted by an unexplained transport.
+
+I tested A=B, the zero coefficient ring, an empty scheme, identity and composite closed immersions and pullbacks, an arbitrary lower bound a, and the standard A=Z/ell^2, B=Z/ell example with its infinite periodic resolution. In the latter case each total degree still has only a finite interval of indices, so the argument does not accidentally require B perfect. Local frames differing by an invertible scalar give the same twist map because the formula is tensor-balanced. The empty diagonal produces zero, including below a. All non-elementary proof steps are shorter than 2000 characters. I checked B1-B10, C1-C8, D1-D5, and E1-E7 against these files: no statement-only children with sketches, no new duplicates or clause-restatements, no tag used as an uncited theorem, and every cited statement was opened and copied into citations.json. The only correction was adding the missing tensor definition dependency; the mathematical statement itself needed none.

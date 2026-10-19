@@ -1,0 +1,42 @@
+## Worker report
+
+Files written: dag/nodes/sec-proper-base-change/lem-weil-pbc-integral-chow-relatively-ample.json (item, split, not a Mathlib leaf); citations.json; this report. No new nodes and no new Mathlib leaves. The statement is unchanged.
+
+Attachments: none. I searched WeilConjectures for the exact item tag and for Chow/relative ampleness, and read AlgebraicGeometry/ChowLemma.lean and ChowLemma/EmbeddingOver.lean. The existing Chow declarations supply the general modification but do not assert the modification is integral or the relatively ample twist. ChowLemma.lean explicitly leaves the irreducible modification as a TODO. These declarations therefore do not attach this item. No master sorry declaration was treated as a proof.
+
+WANTED: none.
+
+The imported item had no proof. Its crucial distinction from lem-pc-chow-relative-ample and its geometric/twist variants is that X need not be proper over k. Those statements assume both structural maps proper and cannot be applied here. Instead the graph into projective space over X is closed because pi is proper. No blueprint or statement correction was necessary. The parent blueprint's Artin--Schreier calculation and Tag 0A3M identify this as a geometric input to the coherent finite-dimensionality branch, not a replacement of the unit route. This item is not the unit's key node, so no unit realization was edited.
+
+Unfinished: none in this one-level split. The cited existing lemmas retain their own DAG status.
+
+## Review by NY
+
+I read coherent.tex Tag 0200 (lemma-chow-Noetherian), all three parts of Tag 0201 (remark-chow-Noetherian), and the Chow paragraph in etale-cohomology.tex Tag 0A3M (lemma-top-cohomology-coherent). Tag 0200 assumes separated finite type over a Noetherian base, not a proper source; a field provides precisely that base. Remark 0201 (2),(3) allows schematic closure of the good open and reducedness. I also read morphisms.tex Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image), Tag 01W6 (lemma-image-proper-scheme-closed), and Tag 02NR (lemma-characterize-ample-on-finite-type); properties.tex Tag 01PU (lemma-ample-on-closed), and constructions.tex lemma-ample-on-proj. The final step uses the existing stronger explicit projective-ample node, rather than inventing a new version of the relative ampleness clause.
+
+Step 1 uses the actual general statement of lem-weil-pbc-chow-noetherian, and the finite-type-over-Noetherian lemma for X and Z. Proper and finite-type definitions account for the composite's finite type. Nonemptiness and irreducibility in def-pc-integral-scheme justify choosing a nonempty affine U inside the good open and retaining density. I checked that none of these applications requires X proper.
+
+Step 2 uses locally-Noetherian implies quasi-separated and the qcqs permanence lemma to check that the affine good open maps quasi-compactly into Z. This matters: without quasi-compactness the image ideal need not be quasi-coherent. The statement of lemma-nagata-scheme-image-ideal-qc supplies the closed image and identifies its topological support with the closure; the statement of lemma-nagata-scheme-image-restrict-open identifies its restriction over V with the image of the identity. The zero kernel calculation, not an unstated stronger Chow conclusion, proves that Y is unchanged over V.
+
+Step 3 uses the affine kernel formula in lem-weil-pbc-scheme-image-qc-kernel, and the domain stalk clause of lem-sc-integral-scheme-stalks-in-function-field applied to V. The radical-kernel argument is written out: a nilpotent image section has zero germs and hence is zero. Irreducibility is the elementary closure argument. The integral-scheme definition explicitly equates nonempty reduced irreducible with integral. This prevents assuming that an arbitrary Chow output is integral.
+
+Step 4 uses precisely the closed-immersion properness, proper composition, immersion composition and separated composition clauses in lem-weil-pbc-proper-fp-permanence. Closedness of the image is part of the definition of a proper morphism. Containment of the dense U gives surjectivity. Restriction over U was already checked in step 2. Finite type of Y over k follows by composing pi with X's structure map, not from an unproved assertion that every immersion is quasi-compact.
+
+Step 5 uses the tuple-immersion statement with the two k-morphisms j and pi. Projective space over X is proper, hence separated, over X by lemma-nagata-projective-space-base-change-proper and the proper definition. The hypotheses of lem-weil-pbc-proper-over-separated are therefore pi proper and q separated; it is not applied over k. Finally lem-weil-pbc-proper-immersion-closed converts this proper immersion to a closed immersion. All these conclusions are in the cited statements; no construction internal to a proof is borrowed.
+
+Step 6 uses closed-immersion base change in the permanence lemma and the full statement of lem-weil-pbc-projective-ample-invertible over the arbitrary ring A of W. The compatibility of the line bundles is a written elementary gluing calculation with the transition functions x_i/x_j from def-pc-projective-space-twist, followed by the pullback composition isomorphism explicitly stated in def-pc-module-pullback. Thus the cited ampleness theorem applies to the very line bundle in the item's statement. It proves invertibility as well as ampleness; no relative ampleness theorem with a properness assumption on X is used.
+
+I checked B--E against the files: there is no new unsplit node carrying a hidden proof or a clause of this item, no new definition or duplicate, and no new search record invented. The whole-DAG and blueprint searches for Chow, scheme-theoretic image and ample found the existing nodes used here. I opened each cited statement and copied it verbatim into citations.json. Off-unit geometric tools are declared in split_report.tool_uses; they supply generic image/projective-space facts and do not change the curve-calculation route. Small cases checked: X=Spec(k), X=A^1_k (where j need only be an immersion), N=0, and empty affine W. Integral X is nonempty by definition, so the requested nonempty U is valid. The positive-dimensional nonproper example specifically checks the distinction that would invalidate the preexisting proper-source relative-ample lemma. No new node needs a separate source or edge-case audit.
+
+Mathlib searches were rerun using msearch.py: two semantic phrasings produced normalization/Proj properness facts, not the asserted Chow modification and twist; Loogle produced no hits. The broad grep produced irrelevant Salchow author matches, so the earlier AlgebraicGeometry-restricted search was also checked. LeanSearch was unavailable (HTTP 500), not evidence of absence. No compiler, Lake command, Lean writing, direct git command or live project/launcher edit was performed.
+
+## Second reading by NY
+
+Step 1 checked against coherent.tex Tags 0200 and 0201 and the cited finite-type, integral, proper, and finite-type definitions; all hypotheses and the nonempty affine-open choice are present. Verdict: sound.
+Step 2 checked against the qcqs permanence and scheme-theoretic-image statements (including restriction to an open); the affine source supplies quasi-compactness and the kernel over the identity open is zero. Verdict: sound.
+Step 3 checked against the scheme-image kernel, integral-stalk, and integral-scheme statements; the closure irreducibility and nilpotent-kernel argument is explicit and elementary. Verdict: sound.
+Step 4 checked against the proper/finite-type/immersion permanence clauses and the definition of properness; closed image plus the dense open gives surjectivity, with no properness assumption on X. Verdict: sound.
+Step 5 checked against the tuple-immersion, projective-space properness, proper-over-separated, and proper-immersion-closed statements; the product is over X and only pi is required proper. Verdict: sound.
+Step 6 checked against projective-space twist and pullback definitions, closed-immersion base change, and the projective-ample theorem; transition functions identify exactly the line bundle in the item for every affine W, including the empty case. Verdict: sound.
+
+The item has no new auxiliary nodes, so B1--B7 and duplicate/Mathlib-node checks are vacuous. I rechecked the source tags, every citation quote, blueprint metadata, and all recorded search results (including LeanSearch unavailable). No changes were necessary in the second reading.

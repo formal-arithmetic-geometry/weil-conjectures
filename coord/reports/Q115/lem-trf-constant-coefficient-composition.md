@@ -1,0 +1,58 @@
+# Worker report
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-constant-coefficient-composition.json`: statement, split into six steps; no exact Mathlib match. The statement, hypotheses, coefficient category and maintainer fields are unchanged.
+- `citations.json`: a verbatim statement excerpt for every node used by every proof step.
+- `report.md`: this report and signed mathematical self-review.
+- `searches.jsonl`: five authentic msearch.py queries, retained as returned by the command.
+
+New nodes: 0. New Mathlib leaves: 0. No unit record needs editing: the item is not the key node of sk-d-weil.
+
+## Attachments
+
+None. I searched the named read-only slopmaster2 WeilConjectures source by the exact node id/docstring tag and by constant coefficient, constant ring, constantSheaf, constantPullback and upperStarComp. No project declaration states the whole item. In particular the pro-etale MonoidalIso.lean composition instances are for WeilCoefficients l (Qbar_l modules), not arbitrary finite commutative constant ring sheaves. The generic upperStarComp and its conjugate identities are categorical tools and do not themselves give this canonical coefficient identity. No compilation was performed; upstream master sorry declarations were not treated as proofs.
+
+## WANTED
+
+None: all sources used are available locally.
+
+## What needed repair
+
+The item had a correct statement and no proof. I supplied the missing argument and retained the inherited citations and search history. The inverse-image composition comparison must have its adjunction normalization specified: an arbitrary isomorphism of the two left adjoints could twist coefficients. Step 3 fixes the orientation with delta=d^{-1}; Steps 4 and 5 explicitly compute the transposes, rather than claiming without calculation that composition preserves constants.
+
+Duplicate discovered in the existing DAG: lem-pur-proetale-constant-ring-composition has exactly this equality for the same arbitrary finite commutative ring and scheme morphisms; the extra mention of the empty scheme in this item is already included in its unrestricted quantifiers. It too is currently unsplit. Maintainer action requested: merge the duplicate and redirect its citers after this proof is reviewed. I did not edit that other node or make the item's proof simply cite its identical statement. The supplied dispatch authorizes splitting this existing item, not modifying another worker's node.
+
+## Not duplicates
+
+No new node was created. For maintenance, lem-trf-constant-coefficient-composition vs lem-pur-proetale-constant-ring-composition: equivalent existing statements (rename W,Y and V,X); merge recommended, not a claimed distinction.
+
+lem-weil-pbc-constant-pullback-composition-coherence is only about abelian sheaves on small etale sites. lem-weil-pbc-etale-set-constant-pullback-composition is about set sheaves on the etale sites. lem-weil-pbc-finite-discrete-sheaf-pullback-composition concerns transport through a specified coefficient equivalence, rather than this ring-sheaf map. pur713-def-pullback-comparison contains the coefficient argument for O_E/varpi^n coefficients as part of defining a derived square comparison; it does not state the present all-finite-commutative-rings theorem. It therefore does not belong in blueprint.same_as. The whole-blueprint searches for constant sections, constant coefficient composition, constant-ring, constant coefficient and pullback comparison found no exact blueprint statement. The equivalent purity lemma is created material, not an imported blueprint node.
+
+## What could not be finished
+
+Nothing in the mathematical split. The duplicate merge is outside the worker's permissions and is reported above. Server validation and delivery are performed by the required deliver.py commands.
+
+## Review by Q115
+
+I read coord/brief-stage1.md, stages/1-dag.md, the three blueprint levels in SETUP.md, GOAL.md and coord/dag-sync.md, and all of delivery-errors.md B through E. I read the chapter record sec-trace-formula and unit sk-d-weil, the current main-20261015 ancestor lem-trf-iterated-weil-cocycle statement and separate proof, and the older master ancestor. The item's ancestry is the canonical pullback identification in that proof's first paragraph, and the final sentence's use of naturality. This split supplies the constant coefficient compatibility required by that identification; it makes no change to the unit's Frobenius convention or route.
+
+Sources checked in their actual local TeX: sites.tex Tag 03CB, label lemma-composition-morphisms-sites (two left adjoints of the direct-image composite); sites.tex Tag 0H7J, example-constant-sheaf, and Tag 00WH, proposition-sheafification-adjoint; proetale.tex Tag 09A5, section-morphism (base-change functor for any scheme morphism, before the subsequent qcqs comparison lemma); categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints, and Tag 0DV0, lemma-compose-counits. I verified these labels against tags/tags. I do not attribute the full ring-sheaf composition identity to a single Stacks assertion: proof_origin is agent, and the explicit specialization is the content of the six steps. No SGA source is used.
+
+Step 1: I opened the statements of def-weil-proetale-inverse-image, prop-weil-pbc-proetale-constant-ring-map and def-pc-fibre-product. The first supplies ring-sheaf adjunctions and the actual evaluation R_f G(B)=G(source(f) times_target(f) B); the second identifies the item's maps with the adjoints of the specified constant-section maps; the third supplies the universal property and uniqueness of the fibre product, including the induced maps. The two inverse maps between Z times_Y (Y times_X B) and Z times_X B preserve projections to Z and B. Their being inverses and naturality are two direct universal-property checks. Restriction along this isomorphism has direction R_{kh} -> R_k R_h because a sheaf is contravariant. This elementary step does not invoke an etale-only composition theorem on pro-etale ring sheaves.
+
+Step 2: I opened def-weil-pbc-constant-sheaf and def-weil-pbc-sheafification as well as the inverse-image definition. These say precisely that A_X is the sheafification in rings of the constant presheaf and that maps into a ring sheaf are determined after precomposition with it. At every B and every a, the two proposed maps have the same constant value on Z times_Y (Y times_X B). Naturality of the canonical presheaf-to-sheaf map supplies preservation under the restriction phi_B. Thus this equality follows directly from the definitions, not from a constant-section Hom statement hidden inside the proof of the constant-ring-map proposition. The target R_k R_h A_Z is a ring sheaf by the cited direct-image construction.
+
+Step 3: I read def-weil-pbc-composite-adjunction and lem-weil-pbc-conjugate-iso-unit-equation, not only their titles. The former states the composite hom bijection and the unit R_k(eta_h L_k) eta_k. In the latter I substituted L1=L_{kh}, R1=R_{kh}, L2=L_h L_k, R2=R_k R_h, delta=d^{-1}; its equation becomes R(alpha) eta_{kh}=d^{-1} eta'. This is the required direction alpha:L_{kh}->L_h L_k. Both adjunctions are in the same commutative-ring-sheaf categories, so the generic lemma applies. The unit normalization is the only non-elementary categorical theorem used here and has its own existing Mathlib-leaf citation. No new comparison lemma is hidden in this step.
+
+Step 4: The composite-adjunction statement gives the actual transpose of b=c_h L_h(c_k). Naturality of eta_h at c_k changes R_h L_h(c_k) eta_{h,L_k A_X} into eta_{h,A_Y} c_k. After R_k, the two defining adjunct equalities R_f(c_f) eta_f=rho^f give R_k(rho^h) rho^k. I checked the intermediate domain L_k A_X and codomain A_Y; neither is replaced by a constant object through an unproved identification. This is an elementary calculation from the two cited definitions and Step 1's established identification of c_f.
+
+Step 5: Naturality of d at b gives d_{A_Z} R(b)=R'(b) d_{L'A_X}. Its unit equation from Step 3, followed by Steps 4 and 2, identifies the transported adjunct of b alpha with d rho^{kh}. Cancelling d and using injectivity of the ring-sheaf adjunction bijection proves the exact equality. The step uses the statement of the ring-sheaf adjunction, not faithfulness of inverse image or a geometric-stalk detection theorem. The typed equation in the node spells out each factor; there is no unexplained transport.
+
+Step 6: The constant-ring-map proposition explicitly says that with empty source both inverse-image and target coefficient objects are zero ring sheaves. Between these there is only one ring-sheaf morphism, so the two maps agree. I checked that the argument does not assume constants inject into sections: the empty scheme identifies 0 and 1 in every section ring. This also handles A the zero ring.
+
+Hypotheses and edge cases: only arbitrary composable scheme morphisms and a finite commutative ring are used. No qcqs, smoothness, properness, invertibility of the coefficient characteristic, connectedness, nonemptiness, derived-category or coefficient-realization assumption is imported. Identity h or k reduces the calculations to the identity adjunction normalization. For a disconnected source, equality is checked on the defining constant presheaf before sheafification, so it does not mistake arbitrary locally constant sections for globally constant ones. For Z empty and for A=0 the zero-ring calculations above apply. The proof actually needs no finiteness beyond the existing finite-coefficient input, but the statement has been left unchanged.
+
+Mathlib audit: I ran all five queries recorded in this sandbox's searches.jsonl and appended exactly their tool/query texts to the inherited mathlib_searches. The two LeanFinder phrasings, Loogle, grep and LeanSearch all returned successfully. I read the returned signatures and opened ConstantSheaf.lean:66-72,184-205 and PullbackContinuous.lean:150-198. constantSheafAdj is the adjunction already used through definitions; constantCommuteCompose changes the category of values on one fixed site; pullbackComp and conjugateEquiv_pullbackComp_inv concern module pullbacks with an already specified composite ring map. They cannot supply this equality of the canonical ring maps by a one-line specialization. The second LeanFinder results concerned GammaHomEquiv naturality and scheme-module comparison; they do not change that verdict.
+
+B1-B9: there are no new nodes and therefore no unsupported statements, hollow constructions, invented searches, duplicate children, or deferred proof sketches. All six proof steps are under 1200 characters; the only non-elementary step is 718 characters, so the long-step rule raises no hidden-lemma issue. C1-C4: the only generic categorical theorem is cited as its existing Mathlib leaf; all other work is written out from the definitions, and citations.json quotes the relevant statements verbatim. C5-D2: whole-DAG and blueprint searches were made and the exact existing duplicate is reported; the item's argument remains in the item. D3-D5: both the constant-presheaf comparison and the adjunction computation are explicit, not outsourced or circular. E1-E7: hypotheses, coefficient categories, map directions and empty cases were checked as above; no statement/source error was found. The sole off-unit non-leaf theorem, prop-weil-pbc-proetale-constant-ring-map, is declared as a generic tool use in split_report; it does not replace a step of the Weil-unit route. No files outside the sandbox were written and no compiler, Lake, build, git, or local validation script was invoked by the worker.

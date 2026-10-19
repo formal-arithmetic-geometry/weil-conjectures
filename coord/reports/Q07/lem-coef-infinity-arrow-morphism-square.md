@@ -1,0 +1,61 @@
+# Stage-1 report: lem-coef-infinity-arrow-morphism-square
+
+Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-infinity-arrow-morphism-square.json` — statement, split proof, no new nodes, no Mathlib match.
+- `citations.json` — verbatim citations for all uses of `def-cbc-enhanced-diagrams-cones`.
+
+Attachments: none.
+
+WANTED: archived Kerodon Theorem 8.3.7.1 (Tag 06BZ), including the oriented-fiber-product Hom-square statement and its naturality. The source was read online; no archived copy is present in `literature/`.
+
+The existing item statement was retained. No Lean declaration under `WeilConjectures/` carries the blueprint tag or states this result, and the Mathlib declarations found concern ordinary categorical arrows or truncated nerves rather than quasicategorical mapping spaces. The statement dependency `def-cbc-enhanced-diagrams-cones` already defines the internal functor simplicial set, right-pinched mapping spaces, coherent higher simplices, and homotopy-fiber model, so no new node was necessary. The proof follows Kerodon 06BZ: identify the interval functor category, apply its oriented fiber-product mapping-space theorem, unpack the homotopy-pullback triples and then check the endpoint projection and naturality.
+
+No statement error or source error was found. The empty-mapping-space case is covered by the homotopy-pullback model, and in an ordinary category the path component reduces to the usual commutative-square condition.
+
+## Not duplicates
+
+`lem-coef-infinity-arrow-morphism-square` vs `lem-coef-infinity-pinch-comparison`: the existing node compares right-pinched mapping spaces with fixed-target arrow fibers for a single pair of vertices; it does not compute mapping spaces between two interval arrows or their joint endpoint projection.
+
+`lem-coef-infinity-arrow-morphism-square` vs `lem-coef-infinity-arrow-target-right-fibration`: the existing node proves only that source evaluation on arrows with fixed target is a right fibration; it does not state the interval-arrow Hom pullback formula.
+
+`lem-coef-infinity-arrow-morphism-square` vs `lem-coef-infinity-slice-arrow-equivalence`: the existing node compares a join slice with a fixed-target arrow category; it does not compute morphisms between arbitrary arrows.
+
+## Review by Q07
+
+I checked the item against the recovered unsplit node and the blueprint route in `prop-coef-integral-exceptional-adjoint`, and searched `WeilConjectures/` for the item tag and its mathematical terminology. I read `def-cbc-enhanced-diagrams-cones` in full, verifying that it really defines `Fun(K,C)_n`, coherent transformations and higher simplices, right-pinched mapping spaces, and the homotopy-fiber model quoted in `citations.json`. Step 1 uses only the internal-functor definition. Step 2 applies exactly Kerodon 06BZ to the interval and checks that the two maps to the cross term are postcomposition by `v` and precomposition by `u`; no extra hypotheses are introduced. Step 3 verifies that the displayed homotopy pullback is the definition’s path-space model, retaining all higher simplices. Step 4 checks the joint endpoint projection, naturality in both arrows and simplicial functors, and composition coherence from the same Kerodon Hom-functor square. I tested edge cases conceptually: empty mapping spaces give empty pullbacks, while for nerves of ordinary categories the coherent path is precisely the usual commutative-square witness. I ran all required `msearch.py` queries (LeanFinder, Loogle, grep, and LeanSearch); only ordinary-arrow/truncated-nerve declarations appeared, so `mathlib_match` remains null.
+
+The repository-level `check_dag.py` reports pre-existing global DAG issues unrelated to this sandbox; `review_split.py` cannot resolve this side DAG path from the live repository checkout. The required `deliver.py --no-push` preflight is the authoritative dry run.
+
+What could not be finished: no archival Kerodon copy is available, so the report records the requested WANTED source.
+
+## Second reading by Q07
+
+The statement was checked against Kerodon Theorem 8.3.7.1 (06BZ), equation `equation:Hom-in-oriented-fiber-product`, with both structural functors the identity of the arbitrary quasicategory D: the four endpoints, directions of the two cross-composition maps, pullback of spaces, and joint endpoint projection agree. The source is Kerodon, not a Stacks tag; there is no claimed Stacks .tex counterpart. I also opened Kerodon 01PF (Corollary 4.6.8.5, Construction 4.6.8.9 and the unitality/associativity statements), 01DP (Lemma 4.4.4.8), and 01L5 (Proposition 4.6.5.10). Stacks `simplicial.tex`, labels `definition-trivial-kan` (08NL) and `lemma-trivial-kan-homotopy` (08NS), were checked for the existing boundary-lifting and homotopy-equivalence nodes. No extra hypothesis or statement correction is needed. The item remains byte-for-byte unchanged in its statement.
+
+- Step 1: checked the internal-functor definition, `lem-cbc-internal-hom-quasicategory`, and the whole statement of `lem-coef-infinity-pinch-comparison` against Kerodon 01L5; the square really has u,v as its horizontal boundary, and all four spaces to which the pinch is applied are mapping spaces in quasicategories. PASS.
+- Step 2: checked `lem-cbc-simplicial-composition-spine` against Kerodon 01PF, 4.6.8.5/9, and `lem-weil-pbc-trivial-kan-homotopy-equivalence` against 08NS; fixing edge 12=v or edge 01=u is a genuine pullback of the spine map, and the two spans have the claimed composition directions. The cited Kan model statement supplies the Kan condition, with no nonemptiness assumption. PASS.
+- Step 3: checked all four cited statements in full: the inner pushout-product lemma supplies inner horn lifts, `lem-cbc-invertible-prism-extension` supplies outer horns in dimension at least 2, and componentwise equivalences plus isofibration exponentiation supply dimension 1. Both prescribed edge unions contain all three vertices, so the vertex-direction edges are identities. Order reversal exchanges outer horns while preserving the hypotheses, and the target-specified edge lift is explicitly obtained in opposites. This is written as the proof, not hidden in a new node or a claim that a spine map makes the long-edge map a fibration. PASS.
+- Step 4: checked degree by degree against `def-cbc-enhanced-diagrams-cones`: the two nondegenerate triangles of the square meet in precisely the d0-to-e1 diagonal; gluing and both endpoint restrictions are literal equalities of simplicial maps. This step alone is elementary. PASS.
+- Step 5: checked `lem-coef-kan-quillen-right-proper` and the composition-spine statement: P_v,Q_u,C are Kan and both maps to C were proved Kan fibrations, so the strict pullback computes the homotopy pullback. The weak-equivalence spans are the composition maps in spaces, with endpoint projections retained. PASS.
+- Step 6: checked the path model against the definition and the item's inline definition, and all pinch comparisons against 01L5; restricting a pinched square to either endpoint is the pinch of the restriction, so the equivalence is over the specified pair of endpoint mapping spaces. No higher simplices are discarded. PASS.
+- Step 7: checked the composition-spine and pinch statements again; the pasted compatibility path is explicitly `(delta whiskered by a)` followed by `(gamma whiskered by b')`, its endpoints are written, and face/degeneracy restrictions for longer strings give the higher compatibility. The argument applies the spine theorem also to Fun(Delta^1,D), already proved a quasicategory in step 1. It establishes precomposition/postcomposition naturality rather than merely claiming that a definition supplies it. PASS.
+- New nodes: none in the first split or the repair. B1-B7 therefore have no new-node cases. I searched the current DAG by 06BZ, oriented fiber products, triangle/spine/composition terminology, and read all reused statements; the two-triangle proof uses existing nodes throughout. PASS.
+
+Small-case checks: for D empty the quantified arrows do not exist, so the assertion is vacuous; for D=Delta^0 (and for both identity arrows on a zero object) all the spaces in the formula are contractible. In a discrete category the formula is empty unless the endpoint maps exist. In the nerve of an ordinary category each triangle is its unique strict composite, and the strict common-diagonal pullback is exactly the set of pairs (a,b) satisfying va=bu. For an infinity groupoid the formula retains paths between composites and their higher simplices. Empty Kan spaces are allowed in every cited construction and no step selects a point from an empty space; sections of the trivial Kan fibrations are over their own bases, including empty bases. There is no ring, scheme or integer parameter in this statement, so field/empty-scheme/n=0 tests do not impose extra hypotheses; dimension-zero boundary lifting is included in the cited definition.
+
+I ran independent `msearch.py` searches with a different composition/fibration phrasing (LeanFinder), the broader Loogle pattern `"Quasicategory", "hom"`, and grep for pinched/morphism-space/spine-fibration vocabulary in AlgebraicTopology. The raw results remain in searches.jsonl, and actual result records were appended to the item. Loogle found the internal-hom quasicategory instances, only a prerequisite already covered by an existing node; LeanFinder found abstract model-category path objects and the ordinary nerve. I read pinned Mathlib `Comma/Arrow.lean:31-46,165-189`, `Comma/Basic.lean:96-105`, and `AnodyneExtensions/Inner/PushoutProduct.lean:90-125`: ordinary Arrow.homMk requires an equality and is not this mapping-space theorem. No Mathlib leaf was identified. I also searched both permitted upstream Lean source trees for the item tag, Kerodon tag, twisted-arrow and right-mapping terminology; no declaration for the item was found. Sorry declarations of master were not treated as proofs.
+
+Changes and reasons:
+
+- Replaced the original step 2, which invoked all of Kerodon 06BZ with `uses: []` and `elementary: true` (C1/C2), and the unsupported naturality invocation in original step 4 (C3/C4), by the seven-step triangulation proof above. The original internal-functor and path-model observations are retained in steps 1 and 6.
+- Added existing proof dependencies for composition, pinches, Kan replacement, inner pushout-products, outer prisms and exponential isofibrations; added no new node and no restatement of the item.
+- Rebuilt citations.json with one verbatim statement quote for each citation of each repaired step, after opening each dependency. Updated proof_origin and split_report to describe the actual agent-expanded triangulation argument; retained the existing statement, source and blueprint place.
+- Replaced vague naturality/composition language by the explicit pasted path and the face/degeneracy argument. Only literal gluing remains marked elementary.
+- Left every first-worker report section, including `## Review by Q07`, in place as requested. Its claims about the original four steps are superseded by this second reading. I did not run any DAG/preflight tools locally; the required delivery dry run is the remote validation.
+
+Tool-use note for the maintainer: `lem-cbc-simplicial-composition-spine`, `lem-cbc-invertible-prism-extension`, `lem-cbc-enhanced-functor-cone-calculus`, and `lem-cbc-internal-hom-quasicategory` are existing generic foundations from sk-prop-sf-cbc; `lem-weil-pbc-trivial-kan-homotopy-equivalence` is the existing simplicial trivial-fibration tool from sk-prop-h2. They serve as tools for the prescribed interval-arrow calculation, not as replacements for a unit step; no node in this item's unit states these particular general facts. I have not assigned maintainer-owned tool_uses. I read the transitive statement/proof dependencies of every proposed tool to confirm that none depends on this item.
+
+WANTED remains an archived copy of Kerodon 06BZ/01PF/01DP/01L5. The online source is available and was read; no write was made to the shared literature directory.
+
+Remote validation: `python3 /home/ubuntu/weil-launcher-nt/deliver.py Q07 lem-coef-infinity-arrow-morphism-square --no-push` printed `OK (not pushed)` at 6c38f2face, with preflight passed. No local checker, compiler, Lake command, or build was run.

@@ -1,0 +1,40 @@
+# Stage-1 worker report
+
+Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-infinity-cocartesian-base-restriction.json` — item split, preserving the imported statement; zero new nodes and zero Mathlib leaves.
+- `citations.json` — verbatim excerpts of the statements used by every proof step.
+
+Attachments: none. Searches in the project source under `WeilConjectures/` for the exact blueprint tag and cocartesian base-change/restriction terminology found no declaration giving this quasicategorical statement. No Lean or compiler work was performed.
+
+WANTED: archive of Lurie's *Higher Topos Theory*, Proposition 2.4.1.3(2), Remark 2.4.1.9, Proposition 2.4.1.7, Definition 2.4.2.1, and Remark 2.4.2.13, for this item. The PDF was read online at the URL in the node.
+
+WANTED: archive of Kerodon Proposition 4.4.2.13, Tag 01H0, for the existing equivalence outer-horn lifting tool used here. Read online at https://kerodon.net/tag/01H0; this is a Kerodon identifier, not a Stacks tag.
+
+The item statement is correct and unchanged. The interrupted attempt's proof, report, citations, and logged searches were recovered and checked against the current repository. Its initial required dry run passed at `ff33b8f6ac`, but a mathematical audit found a C1/C4 gap: the mapping-space argument invoked stability under a strict pullback, whereas the cited homotopy-pullback-pasting statement did not supply that assertion. I replaced those steps by the explicit relative horn-filler argument, retained the initial-lift comparison for reflection, and supplied the missing justification that the target equivalence is p-cocartesian by citing the existing relative equivalence outer-horn lifting theorem. The comparison is now directed from the chosen lift to the original edge, so its triangle can be used directly with composition. The old unnecessary mapping-space and pasting dependencies have been removed, with their search history retained. As the sources are online and not archived, the complete argument is recorded with `proof_origin.by = agent`.
+
+Mathlib searches: the inherited search records and every result in `searches.jsonl` were read and retained. The resumed searches include LeanFinder, LeanSearch, Loogle, and grep with two natural-language phrasings. The latest four logged records have been added verbatim to the item's search list. Hits are ordinary categorical cocartesian arrows and ordinary fibered-category pullbacks, or basic quasicategory horn-filling APIs; none gives the assertion for horn-cocartesian edges of quasicategories. No search was rerun merely because the previous provider call failed.
+
+Nothing remains mathematically unfinished in this one-level split. Its generic input lemmas remain their own DAG items. No new nodes were created, and no SGA source was used.
+
+## Review by Q48
+
+I read the standing brief, stage-1 contract, the three-level restrictions in SETUP, GOAL and dag-sync, and delivery-errors B through E in full. I compared the sandbox item to the current unsplit repository item: their statements are identical, and no blueprint_update is present. I read the chapter and biduality unit records and the statement/source/ancestry of `prop-coef-integral-exceptional-adjoint`. This item supports the existing ancestry's restriction to an inert color edge within the derived mapping-complex argument; it does not replace a geometric or coefficient route. The whole-blueprint search for cocartesian restriction and the DAG/source searches did not reveal a second blueprint statement to identify in same_as. This is not the unit key node, so no realization field was changed.
+
+For the item's source I read HTT Proposition 2.4.1.3(2) on base restriction, Remark 2.4.1.9 on initial/final lifts, Remark 2.4.1.12 on local base restriction, Remark 2.4.2.13 on comparison with a global lift, and Definition 2.4.2.1. I also read Kerodon 01H0, which gives the final outer horn over an inner fibration when its final edge is an equivalence; reversing simplex order gives exactly the initial-outer-horn clause of the existing node. No new node has a source to check. No Stacks tag is substituted for these infinity-category results.
+
+I opened and read the full statements of both definition nodes, `lem-coef-infinity-cocartesian-composition-initiality`, and `lem-cbc-inner-fibration-equivalence-outer-horn-lift`. I also read the mapping-criterion and homotopy-pullback-pasting statements before removing the unsupported use of them.
+
+Step 1 uses the coordinatewise pullback and inner-horn definitions. Given the prescribed simplex in T, p fills the projected E-horn over its image in B; pairing the two simplices gives the exact required filler. When checking P itself is a quasicategory, T supplies that prescribed simplex first. No categorical-fibration or isofibration hypothesis is hidden here.
+
+Step 2 uses only the same two definitions. A specified outer horn over T projects to the outer horn over B with distinguished edge j(v); its p-cocartesian filler pairs with the already specified T-simplex. The proof writes both required equalities. Thus the step is elementary even though its conclusion is one direction of the item: it is a direct two-coordinate lifting check, with no homotopy-pullback comparison.
+
+Step 3 uses the exact equality in the image-edge lift hypothesis and the endpoint equality obtained by applying p to the chosen edge. Step 2 supplies cocartesianness of the pair, and the definition of cocartesian fibration supplies the conclusion. No assumption that p is globally cocartesian is used.
+
+Step 4 applies the composition/initiality node to r, after step 1 has checked its inner-fibration and quasicategory hypotheses. That node explicitly states the lift category is a quasicategory, each cocartesian lift is initial, the universal comparison between two initial lifts is an equivalence, and its target edge is an equivalence in the fiber. The chosen direction is from the constructed lift to v, giving the triangle (constructed lift, comparison, v). Both its base degeneracy and the fiber location of the comparison are specified. Applying the simplicial projection to its inverse and two triangles proves j(c) is an equivalence directly from the definition.
+
+Step 5 uses the initial-horn clause of the equivalence outer-horn lifting node for p. Its hypotheses hold: E and B are quasicategories in the fixed universe, p is inner, and the distinguished edge is the equivalence just obtained. Its fillers are exactly those of the definition of p-cocartesian. The composition clause of the composition/initiality node has the right orientation: with the FIRST edge cocartesian it identifies cocartesianness of the second edge and the long edge. Here the first edge is the chosen lift and the second is j(c), so the long edge j(v) is cocartesian. This external-unit generic tool is declared in split_report.tool_uses with its precise purpose; no node of this unit states the needed implication.
+
+Step 6 checks constant/degenerate h, T equal to a point or an edge, empty fibers, and even empty T directly in the horn-and-pair construction. Empty source fibers give vacuous conditions; a source over a nonempty fiber still has the required target by the item hypothesis. These checks introduce no assumption on lifts outside h(T) and no extra mapping-space theorem. The argument is also valid for nerves of ordinary categories and ordinary opfibrations.
+
+I checked C1/C4 step by step, regenerated citations.json from the actual current statements, and verified every quote is a literal substring of the corresponding statement. proof_deps is the union of step uses. All steps have fewer than 2000 characters (the longest is about 1000), and no separate comparison theorem is hidden inside an elementary step. There are no new-node duplicates, no restatement node, no Mathlib claim, and no cycle introduced. Only the sandbox was written. The initial mechanical dry run passed; the repaired split is submitted to the same required dry run again before pushing.

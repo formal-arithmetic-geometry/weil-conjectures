@@ -1,0 +1,47 @@
+## Files written
+- dag/nodes/sec-proper-base-change/lem-weil-pbc-horseshoe-correction.json: split into four elementary steps; exact statement unchanged.
+- citations.json: full verbatim statements for the definitions used by each step.
+No new nodes; no new Mathlib leaves.
+
+## Attachments
+No eligible attachment. The read-only source WeilConjectures/ has no declaration matching the blueprint tag, corrected_middle_map, or horseshoe. An exact sorry-free proof is present at lean/Sheaf/CategoryTheory/Abelian/HorseshoeMorphismLift.lean:33–54, full name CategoryTheory.InjectiveResolution.corrected_middle_map. It is outside the brief's permitted attachment root. No Lean was written or compiled.
+
+## Wanted sources
+None needed: the proof is elementary from the available bilinearity definition.
+
+## Source error
+The inherited source.place claims “Tag 015I, final correction of the middle map”. Read derived.tex, label lemma-cartan-eilenberg (line 7127): its conclusion is existence of a Cartan–Eilenberg resolution, and its proof constructs resolutions recursively; it does not give this correction theorem. The actual mathematical input is homology.tex, Tag 00ZY, label definition-preadditive (lines 48 onward): morphism groups and bilinear composition. The maintained source field is left untouched because it is not a split-owned field; proof_origin and each step's source identify the truthful provenance, an agent-written elementary calculation. This is a citation error, not a false statement, and no hypotheses or conclusions have changed.
+
+## Blueprint and existing-node searches
+Read the chapter and sk-thm-p1 unit: the correction belongs below the horseshoe tool, not a replacement of the projective-line proof route. Read the parent's exact statement and current two-step proof; the old Step 4 reference identifies the final correction now appearing in its step 2. Blueprint searches correction, horseshoe, subtraction, and middle map produced no exact blueprint statement; correction returned only unrelated def-sc-ext-sheaf and prop-fd-zero-extension-comparison. DAG keyword/tag searches locate the existing correction, homotopy-correction, preliminary-data and parent nodes; no new node is necessary. The ancestor command prints None for this historically stage-3-created item (created.item is a module); reconstructed the actual imported ancestor from the parent’s recorded provenance after preflight rejected the inherited immediate-parent reference. blueprint.from now points to lemma-weil-pbc-injective-restriction-acyclicity and via includes the horseshoe parent and its four intervening nodes. same_as is empty.
+
+## Mathlib searches
+All searches were run by msearch.py and recorded verbatim with their actual outcomes. The second semantic phrasing returned CategoryTheory.Preadditive.comp_sub and sub_comp, verified at Mathlib/CategoryTheory/Preadditive/Basic.lean:151 and :146. These state the distribution identities, not an existential map with all three constraints. They need only elementary substitution here. The combined Loogle pattern returned no hits; the second substring pattern returned unrelated composition lemmas. LeanSearch returned HTTP Internal Server Error and is recorded unavailable. No absent-Mathlib claim rests on that unavailable service.
+
+## Unfinished work
+Nothing remains for the stage-1 split. Source-field repair, inherited live status/review metadata, are maintainer concerns, reported here without editing maintainer fields.
+
+## Review by NA
+I read homology.tex definition-preadditive (Tag 00ZY) and derived.tex lemma-cartan-eilenberg (Tag 015I), and compared the exact imported statement with the Sheaf theorem. The statement is true with exactly its five hypotheses: two preliminary squares, two vanishing correction compositions, and the augmentation defect identity. The unused X′/Z and the arbitrary single-degree objects are harmless; no exactness, enough injectives, or injective resolution assumptions are used.
+
+Step 1 cites def-sp-abelian, whose statement explicitly says abelian categories are preadditive, and def-weil-preadditive-category, whose statement gives abelian morphism groups and bilinear composition. I wrote the componentwise chain-map equation so subtraction is demonstrably a map of complexes rather than a hidden construction theorem. Steps 2–4 use only the same bilinearity statement and the corresponding hypotheses in the item; I checked their domains and codomains. The augmentation uses hε itself, not an unsupported naturality claim. The left square uses hχα and hqa; the right square uses hχβ and hqb. Every uses entry has its verbatim statement in citations.json. These are elementary computations from definitions; no non-elementary theorem is hidden and no clause has been moved into a new node.
+
+For B1–B9 there are no new nodes; the existing statement and all maintained fields are preserved and blueprint.same_as is filled. For C1–C4 I opened both cited definition nodes and checked the exact portions quoted; neither is asked to supply a lifting or homotopy theorem. For C5–C8 the searches and no-new-node decision avoid duplication and cycles, and the only off-unit citation is a Mathlib definition leaf. For D1–D5 all correction identities are written explicitly. For E1–E7, the hypotheses suffice in degree zero and every higher degree, and even when all objects are zero, q=0, χ=q, or α and β′ are zero. In particular χ=q forces b≫ε′=0 by hε, so the zero witness still works. No statement dispute was found. I corrected the inadequate one-line proof and erroneous proof attribution, not the statement or the route.
+
+## Dry-run repair
+The first preflight rejected only the inherited blueprint.from.node, which named a created node rather than an imported blueprint node. I opened the horseshoe parent, its intervening ancestors, and the imported ancestor’s blueprint source; repaired from.node and via using that recorded chain, with an explicit subordinate-place description. No mathematical dependency or statement changed.
+
+## Second reading by NA
+
+- Item statement: checked every domain, codomain and all five hypotheses against the imported node and the bilinear composition of homology.tex, Tag 00ZY, label definition-preadditive; correct elementary consequence. derived.tex, Tag 015I, label lemma-cartan-eilenberg is about existence of Cartan–Eilenberg resolutions, not this statement; the first reader correctly flagged this inherited attribution error. No statement dispute.
+- Step 1: opened def-sp-abelian and def-weil-preadditive-category; the former supplies preadditivity and the latter abelian morphism groups and bilinear composition. Checked the differential equation in every nonnegative degree; correct, and expanded its intermediate equalities so closure under subtraction can be checked directly.
+- Step 2: checked the quoted statement of def-weil-preadditive-category and the exact augmentation defect hypothesis hε; distribution on the right gives precisely ε ≫ (χ − q) = b ≫ ε′, with the source single₀(U) and target Y′. Correct and elementary.
+- Step 3: checked the quoted preadditivity definition, hχα and hqa; distribution gives φA ≫ α′ − 0, a map X → Y′. Correct and elementary; no injectivity of α is presumed.
+- Step 4: checked the quoted preadditivity definition, hχβ and hqb; distribution gives β ≫ φC − 0, a map Y → Z′, and completes the conjunction in the stated order. Correct and elementary; no surjectivity of β′ is presumed.
+- New nodes: none. Checked the sandbox inventory: only the item node is present; no clause restatements, duplicates or new Mathlib leaves need removal or searches. Read Mathlib/CategoryTheory/Preadditive/Basic.lean:146–152: sub_comp and comp_sub are the expected elementary distribution identities, not the entire existence theorem. DAG tag searches for 00ZY and 015I confirm existing source nodes; no additional theorem is needed.
+- Edge cases: the zero category and zero complexes give the zero witness; for complexes of vector spaces over any field (including characteristic two), the componentwise equations hold without division. In degrees 0 and 1 the displayed differential equation has the same valid indices. If χ = q, hε forces b ≫ ε′ = 0 and the two vanishing hypotheses force both outer composites to be zero. Schemes and empty schemes impose no hypotheses here.
+- Citation audit: opened both cited definition statements and checked all five quotes in citations.json verbatim. No citation changes are needed because the repaired first step still uses exactly the same definitions.
+
+Changes: expanded the first step into its full three-equality differential calculation; appended this independent reading. The statement and the other three correct steps are preserved. tools/node_fields.py explicitly lists source as maintainer-owned, so its inherited 015I error cannot be overwritten by this delivery; proof_origin and all four step sources already carry the correct 00ZY attribution with its label. This is an inherited node-metadata error, not an error in Stacks. The maintainer should replace source.place by an agent-written elementary calculation from Tag 00ZY, definition-preadditive.
+
+Delivery isolation: deliver.py normally mutates the path described in the brief as read-only. Use its existing WEIL_CLONE_PREFIX option with a separate isolated clone, weil-secondreader-correction-NA; no git command is run in the read-only reference repository.

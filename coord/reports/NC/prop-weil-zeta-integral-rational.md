@@ -1,0 +1,39 @@
+## Files written
+
+- `dag/nodes/sec-zeta-weil/prop-weil-zeta-integral-rational.json`: statement, split into three elementary applications/conjunction steps; no Mathlib match.
+- `citations.json`: four verbatim extracts, one for each cited node in its proof step.
+- `report.md`: this report. No new DAG nodes or Mathlib leaves.
+
+## Attachments
+
+No exact whole-item attachment. Searched the project source `WeilConjectures/` by the blueprint id, zeta rationality and integrality terminology, and read `Statement.lean`, `ZetaIntegrality.lean`, `ZetaLinearAlgebra/Rationality.lean`, `Hankel.lean` and `Fatou.lean`. `AlgebraicGeometry.Scheme.zetaSeries_rational` (`Statement.lean:80`) contains `sorry`. `AlgebraicGeometry.Scheme.Hom.zetaSeries_rational_of_traceDatum` (`Rationality.lean:104`) additionally asks for an explicit trace datum and the identification of its integers with point counts; the item's imported hypotheses instead give the cohomological family, the determinant identity, and finite Hankel rank. It is not an exact attachment under the given hypotheses. `Hom.exists_int_zetaSeries` and `Hom.constantCoeff_of_map_eq_zetaSeries` in `ZetaIntegrality.lean` cover integrality and normalization only. `PowerSeries.exists_normalized_fraction_of_map_rat` is a general descent theorem, not the complete scheme-specific conclusion. These declarations are not treated as proof of this item.
+
+## WANTED
+
+None. The source followed is the current local blueprint. Its proof is agent-written, and `proof_origin.by` remains `agent`.
+
+## Findings and repairs
+
+The statement is unchanged. In particular, all assumptions inherited from `prop-rational-descent`, including the closed-point product, trace-to-determinant identity, and finite Hankel rank, remain assumptions. The proof does not claim to establish them. The old single paragraph was a valid corollary but had no explicit finite-type check or step-source fields; the new proof exposes these checks and the final conjunction. No statement dispute was found.
+
+The current main-20261015 statement and separate proof agree with the inherited master text for this item. The existing `prop-euler-product` node's statement and `blueprint_update.statement` explicitly include integrality, even though its recorded old Lean declarations cover only the point-count and product identities (its blueprint status note says so). We rely on its natural-language statement as a dependency, not on the inaccurate inference that the old closed audit proves every clause. The later project file `ZetaIntegrality.lean` supplies the missing integrality clause, as noted above; no other node or audit is edited.
+
+Searched the whole imported blueprint with `tools/blueprint_refs.py search 'zeta series'` and `'integral rational'`, and the DAG for the same notions. `sk-thm-rationality` states an unconditional, more general rationality result and normalized integral-polynomial presentation; `prop-weil-integral-rational-series` assumes integrality and rationality and proves the unique normalized reduced presentation. Neither is an exact alternative statement of this conditional corollary. `blueprint.same_as` is therefore empty. The item's imported ancestry remains intact. It is not the unit key node, so no unit realization is changed.
+
+The six actual Mathlib searches in `searches.jsonl` are copied, with identical tools and query texts, into the item. Read the results of LeanSearch, Loogle, both LeanFinder phrasings and both grep patterns. Arithmetic-function and number-field zeta results concern different functions; Laurent-series embeddings and Hilbert-polynomial results do not state this theorem. The second phrasing returned Dedekind zeta and integral Weierstrass model results, also different statements. Both grep patterns returned no hits. No service was reported unavailable and no unrun query is recorded.
+
+## Unfinished work
+
+None for this one-level split. The already existing rational-descent and Euler-product dependencies retain their own statuses and proofs; they are not resplit here.
+
+## Review by NC
+
+I read the current blueprint `main-20261015/blueprint/sec-zeta-weil/sk-thm-rationality/prop-weil-zeta-integral-rational.md` and its `.proof.md`, and compared the statement to the master node. I also read the full current statement of `prop-rational-descent` and the current blueprint statement of `prop-euler-product`. The item really is conditional on the entire situation of rational descent; removing those hypotheses would change the proposition. I retained the statement verbatim. There are no new nodes whose statements or literature need a separate review.
+
+For step 1 I opened `def-weil-proper-morphism`: its statement expressly includes finite type in properness. I checked its source in Stacks `morphisms.tex`, tag 01W1, label `definition-proper`, lines 9854–9857. Thus applying the finite-type Euler-product theorem does not add a hypothesis. I opened `prop-euler-product`, whose displayed conclusion expressly contains `Z(Y_0,T) ... in 1+T Z[[T]]`, and specialize it to `Y_0=X_0`. I opened `def-weil-point-counts-zeta` in its actual chapter, `sec-algebraic-groups-lie-algebras`: its exponential uses the same positive-index point counts, the same finite field and the same variable as rational descent. These statements justify all three cited facts in step 1; there is no tacit identification of distinct zeta functions, no extra local-finiteness lemma and no inline reconstruction of the Euler product. This is elementary specialization of the cited theorem and a definition.
+
+For step 2 I read the complete hypotheses, not just the conclusion, of `prop-rational-descent`: prime p, positive exponent a, q=p^a, algebraic closure, prime ell different from p, dimension d>=0, smooth/proper/geometrically connected X_0, its smooth-proper family, the point-count exponential, both identities and finite Hankel rank. The phrase 'in the situation' in the item imports exactly these hypotheses. The quotation in `citations.json` includes its whole statement, so its hypotheses and last displayed formula, rationality over Q, are both visible. The first dry run rejected the initial conclusion-only extract as shorter than the required 40 characters; I replaced it with this full-statement quotation. No trace datum, coefficient-field extension argument, integral Fatou theorem or normalization theorem is silently used here. Step 3 only conjoins the two memberships for that same series, so it cites nothing and is elementary.
+
+I checked B–E against the files: no new lemma repeats a clause of the item, no new objects or missing-definition nodes are introduced, no proof is pushed into a new unsplit statement, no forbidden SGA source is used, and no step relies on a cited node's proof instead of its statement. The four quotes in `citations.json` were checked as literal substrings of the corresponding statements. The proof uses only route-approved rational descent, the unit's Euler-product route, and definition nodes. Each step is shorter than 2000 characters; none hides a separate comparison or standard lemma.
+
+For edge cases I tested dimension zero with X_0=Spec(F_q): all counts are 1 and Z=(1-T)^(-1), consistent with both conclusions. The empty scheme would have Z=1 and also causes no problem for the Euler-product application, although the imported geometrically connected hypothesis excludes it. No positivity of dimension or existence of a nonconstant cohomological factor is used. The constant coefficient is 1, not merely an integer, because the cited Euler-product statement explicitly has 1+T Z[[T]]. The corrections from this reading were the explicit proper-to-finite-type justification, keeping all rational-descent assumptions visible in step 2, and reporting the partial old Euler-product Lean coverage instead of claiming a whole-item attachment.

@@ -1,0 +1,48 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-smooth-purity/lem-pur-ringed-site-injective-mono-restriction.json`: item, statement, status split. Statement unchanged; complete five-step proof of Stacks Tag 093X. No new nodes and no new Mathlib leaves; five existing Mathlib nodes supply all cited inputs.
+- `citations.json`: six step/node entries with verbatim parts of the cited statements.
+- `searches.jsonl`: five real searches through the prescribed msearch command, retained with their original query text, results and digests.
+
+Attachments: none. Searching the project under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact blueprint id found no declaration. Concept searches found preservation of injectivity by localized restriction, componentwise injectivity of morphisms, torsion divisibility and special geometric restrictions; none states the general assertion for every ringed site and monomorphism. No upstream master sorry was treated as a proof.
+
+WANTED: none. All source material needed is present locally.
+
+The original item was an unsplit, correct statement of Stacks 093X. There was no earlier sandbox node or report. I preserved the statement, source, metadata, ancestry, and inherited searches; added a proof, proof dependencies, origin, searched blueprint correspondence and split report. The blueprint ancestor's original Step 2 incorrectly discusses extension of arbitrary sheaf sections. This item supplies only the injective-term extension used in ancestor Steps 3–4, as the parent split already requires. It does not rely on that false arbitrary-sheaf assertion or on the assertion that every K-injective complex has injective terms.
+
+Nothing remains unfinished in this one-level split. The proof uses no SGA source and changes no Lean, project coordinator, unit, chapter, or live file.
+
+## Sources and searches
+
+Read `literature/stacks-project/sites-cohomology.tex`, Tag 093X, label `lemma-restriction-along-monomorphism-surjective`, lines 1962–2009, including the entire proof. Read `literature/stacks-project/sites-modules.tex`, Tag 03DI, label `lemma-extension-by-zero`, lines 2058–2143, and `equation-map-lower-shriek-OU-into-module`, lines 2149–2157; Tag 03EI, `lemma-sheafification-exact`, lines 874–890. Checked the Stacks tag-to-label table. The existing free-Yoneda node supplies precisely the free presheaf used by that construction. Its explicit inverse formula and the sheafification adjunction let Step 1 identify the representing object without introducing localization machinery.
+
+Read the chapter and unit records `sec-smooth-purity` and `sk-prop-a1-kummer`, the parent `lem-pur-module-restriction-kernel-comparison`, and the current main-20261015 ancestor statement and proof under `sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-with-support-exactness.*.md`. This is a generic injective-term input below the unit, with precisely the established ancestor ancestry. The inherited unit binding is unchanged.
+
+DAG searches used Stacks tag 093X, the extension-by-zero label, exact module sheafification, free Yoneda, and representable-section language. I opened the statements of the candidate nodes, rejecting fixed-ring, abelian-only, scheme-only and pro-etale-only versions where they would not apply. Whole-blueprint searches via `tools/blueprint_refs.py search` were `free module`, `monomorphism surjective`, `injective restriction`, and `093X`. The injective-restriction result is the henselian geometric acyclicity statement, not this assertion. No blueprint duplicate was found. `ancestor` returns `thm-pur-with-support-exactness`.
+
+The item's six inherited searches and their recorded results were read and retained. The five new logged searches comprise LeanSearch, Loogle, grep of `Algebra/Category/ModuleCat`, and LeanFinder with two different phrasings. Every service answered successfully. The actual result types distinguish injectivity of components of a presheaf morphism from an injective object. Read Mathlib `Presheaf/EpiMono.lean:20–63`, `Presheaf/Generator.lean:48–73`, `Presheaf/Sheafification.lean:150–194`, `Sheaf/Generators.lean:43–70`, and `CategoryTheory/Preadditive/Injective/Basic.lean:25–70`. In particular `Injective.factorThru` only supplies the final extension property, while `GeneratingSections.epi` concerns a presentation by global generating sections. They do not make the whole item a one-line Mathlib specialization. No search not actually run was added; new entries reproduce the query text and digest from searches.jsonl.
+
+## Not duplicates
+
+No new node is proposed. Existing nodes `lem-weil-pbc-free-yoneda-presheaf-module`, `def-weil-presheaf-modules-sheafification`, `lem-weil-pbc-ringed-site-module-sheafification-exact`, `def-sp-injective-resolutions`, and `def-weil-sheaf-of-modules-category` are reused. The generic sheafification result covers varying ring sheaves, unlike the similarly named fixed-ring result.
+
+## Review by Q09
+
+I compared every hypothesis of the item with 093X: the base is a ringed site, the coefficient is a sheaf of commutative unital rings as in the Stacks conventions, the site arrow is monic, and the module sheaf is injective in its module category. Smallness and the common universe ensure that the representing free sums and their sheafifications are in that same category. No subcanonicality, covering, scheme, flatness, torsion, or underlying-abelian injectivity hypothesis is inserted.
+
+Step 1 uses the statement of `lem-weil-pbc-free-yoneda-presheaf-module`, which explicitly gives Hom(P_U,F) = F(U), evaluation on the identity generator, and the inverse e_phi -> F(phi)(s). It also uses `def-weil-presheaf-modules-sheafification`, whose statement explicitly gives the module-sheafification adjunction and unique extension of maps. Composing these two stated bijections is sufficient; I did not cite a fully-faithful Yoneda statement in place of evaluation. The free presheaves have exactly O(V) as coefficients, and restrictions are semilinear over the correct restriction of O.
+
+Step 2 is elementary and has no external citation: the basis map is given explicitly and its two naturality composites both send r e_phi to O(g)(r)e_(m phi g). Its domain is P_W and its codomain P_T, in the direction needed for extension into I. This construction is the second paragraph of 093X, with its omitted naturality verified.
+
+Step 3 is elementary: monicity makes the map on indexing hom-sets injective, and each original coefficient is recovered as the coordinate at m phi. I also wrote the objectwise cancellation proving categorical monicity, rather than invoking an uncited theorem about presheaf monomorphisms. Coordinate recovery need not be natural and is not claimed to define a presheaf retraction. This distinction matters because an arbitrary mono need not admit a compatible retraction.
+
+Step 4 uses only `lem-weil-pbc-ringed-site-module-sheafification-exact`. I read its statement: it asserts finite-limit and finite-colimit preservation for PMod(C,O) -> Mod(C,O) for a general ringed site, not merely a constant ring. Thus it applies to this exact O and to the mono just constructed. Preserving finite limits preserves monomorphisms, giving the required sheaf mono. I checked Tag 03EI and the Mathlib finite-limit instance with alpha = identity against that statement.
+
+Step 5 uses `def-weil-sheaf-of-modules-category` for its stated abelian-category clause under smallness; `def-sp-injective-resolutions` for its precise surjectivity of Hom(N,I) -> Hom(M,I) for a monomorphism; and the explicit inverse formula in the free-Yoneda node. The abelian premise is met in the actual category of module sheaves. I evaluated the composite map on e_id_W: it becomes e_m, and then I(m)(t). Therefore the surjectivity obtained categorically is exactly that of the restriction homomorphism in the statement. The naturality of the sheafification unit ensures that this calculation on presheaf generators computes the sheaf composite; no illicit evaluation of a sheafified generator as though sheafification were sectionwise is made.
+
+For delivery-errors B–E: there are no new statements requiring hidden hypotheses, definition nodes, or further searches; every non-elementary input is in a cited existing statement, with verbatim quotes in citations.json. All other steps contain their full short calculation. The proof is not delegated to a new copy of the item. No dependency on the item, its parent, or a descendant is introduced. All proof citations are existing Mathlib leaves, so no off-unit tool exception is needed. Each step is under 2000 characters; none conceals a separate comparison lemma.
+
+Small cases: m = identity gives the identity of the free presheaves and of restriction; O = 0 gives zero modules and surjectivity; an object covered by the empty family has zero module sections and the same argument still applies after sheafification. The proof never evaluates Hom from a representable sheaf, so it also applies when representables are not sheaves. On the one-point site with O = Z/2, the injective module Z/2 need not be injective as an abelian group, and the proof still applies since all extensions occur in Mod(O). Nonmonicity would allow two distinct basis elements to acquire the same image, explaining exactly where that hypothesis is needed.
+
+During my check I included the existing category-definition node in Step 5 to make the abelian-category premise explicit. I kept the module-sheafification theorem rather than substituting its fixed-ring analogue, and wrote both the coordinate cancellation and restriction-identification calculations out. There is no statement correction or new lemma left for another worker.

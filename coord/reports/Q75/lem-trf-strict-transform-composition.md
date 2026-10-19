@@ -1,0 +1,31 @@
+# Stage 1 report: lem-trf-strict-transform-composition
+
+1. Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-strict-transform-composition.json`: split statement, no Mathlib match; repaired returned dependency and identification gaps.
+- `dag/nodes/sec-trace-formula/lem-trf-strict-transform-sheaf-kernel.json`: statement-only supporting lemma, no Mathlib match; repaired its module-definition citation and added the structure-sheaf clause.
+- `dag/nodes/sec-trace-formula/lem-trf-strict-transform-different-centers.json`: statement-only Tag 080H comparison, no Mathlib match; retained only the strict-transform clause and added the finite-type center hypothesis.
+- `citations.json`: verbatim citations for every proof-step dependency.
+
+2. Attachments: none. No sorry-free declaration in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` states the item or either new node.
+
+3. WANTED: none.
+
+4. The imported item matches Stacks Tag 080I, clause (2), including the finite-type ideal hypotheses, support equality, chosen composite blow-up isomorphism, and compatibility conclusion. The original split was returned for four issues. I repaired them as follows: both sheaf nodes now cite the Q71 module strict-transform definition rather than treating the scheme closure definition as a module definition; the kernel node explicitly states that the module strict transform of `O_X` is the structure sheaf of the closure-defined scheme strict transform; the different-centers node now states only Tag 080H's strict-transform comparison, while Step 3 cites the existing `lemma-nagata-blowup-invertible-factor` for the omitted blow-up isomorphism; Step 3 cites `lemma-nagata-admissible-blowup-over-open` for the isomorphism away from the first center before taking the inverse-image union; and Step 4 uses `lem-trf-strict-transform-affine-pushforward` together with the elementary pullback/pushforward identity for a base-changed closed immersion to identify the successive scheme transform with the module transform. The finite-type center hypotheses are now explicit and are attributed to `pqf-def-coherent`, not to the blow-up definition. Existing Mathlib searches were read and reused because the search questions did not change; no Mathlib declaration states these geometric strict-transform results.
+
+## Review by Q75
+
+I reread Stacks `divisors.tex` at Tags 080D, 080G, 080H and 080I, the current shared nodes `def-trf-module-strict-transform`, `lem-trf-strict-transform-affine-pushforward`, `lemma-nagata-blowup-invertible-factor`, `lemma-nagata-admissible-blowup-over-open`, `thm-nagata-blowup-principalizes-center`, `lemma-nagata-strict-transform-closure-characterization`, and `def-pc-fibre-product`, and the two retained new nodes. Step 1 uses the kernel node's surjection and supported-kernel sentence twice, with the finite-type hypotheses supplied by the item. Step 2 uses the same sentence for the composite center and the stated support equality. Step 3 checks principalization gives an effective Cartier divisor, checks the no-supported-sections hypothesis for the first transform, applies the repaired Tag 080H clause, and separately cites the invertible-factor node for the product-center blow-up. It also cites the admissible-open node to justify that `b_0` is an isomorphism over the complement of `V(I)`, which is the missing input for the inverse-image union. Step 4 uses the kernel node's new `O_X` structure-sheaf clause, then the affine-pushforward node for the closed immersion and the elementary base-changed pushforward identity, before invoking the closure characterization to identify the closed subschemes. Step 5 uses the fibre-product universal property for all compatibility claims. I checked the hypotheses at each application, including finite-type centers, Cartier invertibility, and the support condition, and updated `citations.json` so every quote is verbatim. Edge cases (identity blow-up, Cartier center, and disjoint second center) remain consistent with the repaired statements.
+
+## Not duplicates
+
+lem-trf-strict-transform-sheaf-kernel vs lem-pur-dnc-affine-blowup-complement: the existing node is a special affine chart computation for the strict transform of $V(t)$ in the blow-up of $(I,t)$, while the new node is the general quasi-coherent sheaf quotient and supported-section kernel for an arbitrary finite-type center.
+lem-trf-strict-transform-sheaf-kernel vs lem-trf-flattening-by-admissible-blowup: the existing node asserts existence of a flattening blow-up and its flat finite-presentation strict transform, while the new node states the local sheaf kernel/no-supported-sections characterization used in the 080I comparison.
+lem-trf-strict-transform-sheaf-kernel vs def-trf-module-strict-transform: the existing definition only defines the quotient module, while this new statement records its supported-section kernel, the resulting vanishing properties, and the additional identification for $\mathcal O_X$ with the closure-defined scheme strict transform.
+
+
+## Repair of returned landing — current strict-transform definition
+
+The landing return identified `def-trf-module-strict-transform` as changed after the reviewed delivery. I reread the complete current definition in the shared DAG. Its current statement introduces the exceptional closed subscheme $E=b^{-1}V(\mathcal I)$, the two fibre-product projections, the quotient by sections vanishing off $q^{-1}E$, the explicit tensor formula for $p^*\mathcal F$, and the fact that the centre ideal is retained. These clauses are exactly the module meaning used by the composition proof.
+
+I repaired the split substantively by adding the current definition as a direct dependency of Step 1 and by stating there that both successive strict transforms are the current quotient constructions with their centre ideals and exceptional complements. I added the verbatim current-definition quotation to `citations.json`, updated `proof_deps`, and checked that the existing sheaf-kernel quotation still applies to this quotient. I reread every other cited node and all five proof steps; no other citation changed, and no Mathlib search question changed. The required dry run after this repair passed preflight (`OK (not pushed)`).

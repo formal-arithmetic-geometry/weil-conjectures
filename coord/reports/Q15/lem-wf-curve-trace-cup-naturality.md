@@ -1,0 +1,64 @@
+# Worker report: lem-wf-curve-trace-cup-naturality
+
+## Files written
+
+- `dag/nodes/sec-purity-real-sheaves/lem-wf-curve-trace-cup-naturality.json`: item, statement unchanged, split into nine steps; Mathlib searches found no match.
+- `dag/nodes/sec-purity-real-sheaves/lem-wf-etale-cup-functoriality.json`: one new statement-only lemma, ordinary small-etale cup products for compatible bilinear coefficient pairings; unsplit, no Mathlib match.
+- `citations.json`: 17 step/node entries, each quoting the cited statement verbatim, including its hypotheses.
+- `searches.jsonl`: actual msearch records; retained and read. The item's earlier Q112 searches were rerun under Q15 and their actual returned hits recorded. The auxiliary lemma has two natural-language phrasings, Loogle, LeanSearch and a source grep. No unavailable service is recorded as a negative result.
+
+## Attachments
+
+None. I searched the project Lean sources for the exact blueprint tag and for cup products, trace, reduction and semilinear naturality. `WeilConjectures/EtaleCohomology/PoincareDuality/TraceCup.lean` defines the derived tensor-morphism cup operation and proves graded commutativity; it does not state the arbitrary abelian-sheaf coefficient/pullback lemma or the finite curve trace compatibilities here. The WeilSheaf Poincare declarations and the DAG's Frobenius transport statements have finite-field/pro-etale or rational coefficient hypotheses. They do not attach to this ordinary small-etale statement over an arbitrary algebraically closed field.
+
+## WANTED
+
+None. All sources used are present.
+
+## Corrections and route
+
+The item arrived as an unsplit auxiliary statement, not a proof. Its statement is mathematically sound and remains byte-for-byte unchanged. The current main-20261015 proof of `lem-wf-curve-h1-dual-tate-module`, first paragraph before (4.2)-(4.3), needs exactly coefficient compatibility and Galois equivariance of the finite-level trace-cup adjoints. The rank-one unit's proper-curve Kummer/Picard route is retained. No finite-field hypothesis or six-functor purity theorem has been substituted.
+
+During self-review I replaced the draft assertion “Kummer is natural” by its three explicit vertical coefficient maps. The second copy of Gm is mapped by the identity, while the first is mapped by the power ell^(n-m). This is why reduction sends the Kummer class of O(P) to the same point class, without an extra factor. I also added the existing divisor-class/Picard theorem: the definition of a divisor alone does not assert that every line bundle is represented by one. For semilinear maps I separated change of site, the units comparison, and the H1(Gm)/Picard identification. The draft auxiliary formula was corrected to apply all three coefficient maps on the appropriate cohomology groups, and to include the compatibility of the bilinear evaluations. These were draft proof repairs, not changes to the delivered item's statement.
+
+No work remains unfinished within this one-level split. The new general cup lemma is deliberately statement-only and joins the queue. No Lean was written or compiled.
+
+## Not duplicates
+
+lem-wf-etale-cup-functoriality vs lem-wf-curve-trace-cup-naturality: the new statement is a generic bilinear cup compatibility on arbitrary small-etale sites of schemes; it has no curve trace, point classes, or either trace-pairing conclusion. The item's substantive trace argument is written in Steps 1-4 and 6-7, not deferred to the new lemma.
+
+lem-wf-etale-cup-functoriality vs lem-wf-curve-h1-dual-tate-module: the existing node identifies finite-level curve H1 duals with Jacobian Tate-module duals and their inverse limit. It uses trace-cup naturality; it does not state general cup naturality. I have not introduced a dependency back to this ancestor.
+
+lem-wf-etale-cup-functoriality vs lem-pur-support-site-comparison: the existing node compares etale and pro-etale supported cohomology and exterior products on separated finite-type schemes over an algebraically closed field with a finite ring. It does not state compatibility of an ordinary small-etale cup with arbitrary coefficient maps and arbitrary scheme morphisms. Both cite Stacks 0H9A, for different applications.
+
+lem-wf-etale-cup-functoriality vs lem-pur-supported-cup-functoriality: that node fixes the purity finite datum and Tate twists and takes morphisms of k-schemes. It does not provide arbitrary bilinear coefficient maps, nor semilinear scheme morphisms. It is not a generalization of the new statement.
+
+lem-wf-etale-cup-functoriality vs prop-sf-mixed-cup-coefficient-change: that statement fixes a finite-field six-functor datum, bounded constructible finite-Tor pro-etale complexes and derived change-of-ring comparison isomorphisms. The new lemma concerns ordinary abelian sheaves, their bilinear pairings and coefficient morphisms, not those comparison isomorphisms.
+
+lem-wf-etale-cup-functoriality vs lem-sc-scalar-cup-pullback-coefficient-naturality: the existing statement is about scalar cohomology of structure-sheaf modules with morphisms over a fixed field. Its topology and coefficients are not ordinary small-etale abelian sheaves. The same distinction excludes the scalar Ext-cup and module/Godement cup nodes.
+
+Before creating the auxiliary node I searched the whole DAG by cup/naturality/pullback/coefficient keywords, searched tags 0H9A and 0FPJ, and used `tools/blueprint_refs.py search` for cup-product functoriality and those tags. No blueprint node states the new lemma. Its blueprint ancestry is the current H1-dual-Tate-module paragraph, through this item in `from.via`.
+
+## Review by Q15
+
+I read Milne's Lectures on Etale Cohomology, Propositions 14.2 and 14.5, Remark 14.6, Theorem 14.7, Example 14.8, and the cup-product construction in section 22 (p.135). Milne treats the trace as degree normalized via Kummer and the pairing as the specific cup-trace pairing, not merely some perfect pairing. The item retains smoothness, properness, connectedness, algebraic closure, invertibility of ell, and positive levels. Properness permits the ordinary H2 trace used here. The present proof needs its given point normalization and additivity, and does not invoke nondegeneracy or the parent H1 duality theorem.
+
+For the sole new lemma I read `sites-cohomology.tex`, section-cup-product (0FPJ) and lemma-base-change-cup-product (0H9A), including the displayed square and its tensor-pullback identification; I also read lemma-compose-cup-product and its counit proof. Specializing the square to the global-sections maps and a scheme's small-etale inverse image gives pullback compatibility. Naturality in the two derived tensor arguments, followed by the given commuting evaluation square, gives precisely the three coefficient maps in the new statement. Its sheaf tensor and pullback notions refer to existing definitions. It assumes neither flatness nor cohomology/base-change isomorphisms: the derived tensor is followed by its ordinary-tensor morphism. The source omits the proof of 0H9A; this generic fact remains an unsplit node rather than being silently treated as elementary.
+
+Step 1 uses the actual statements of `lem-sc-second-kummer-divisors` and `lem-sc-divisor-class-curve`, not their proofs: the former identifies H2 with Picard modulo the exponent by the Kummer boundary; the latter says the divisor-class map to Picard is an additive isomorphism. `def-sc-divisor` makes Div the free group on closed points. Surjectivity through those two quotients proves generation in a few lines. Algebraic closure and invertibility of ell verify the first theorem's hypotheses; smooth connectedness verifies the divisor/Picard theorem's hypotheses. In particular, I did not incorrectly take the invertibility or surjectivity theorem from the divisor definition.
+
+Step 2 uses `lem-weil-pbc-abelian-etale-sheaves-grothendieck` and `lem-sp-grothendieck-enough-injectives` to verify the category hypothesis of `lem-weil-pbc-right-derived-universal-delta-functor`. Its statement explicitly includes naturality for every morphism of short exact sequences. The global-sections functor preserves kernels by the sectionwise kernel/gluing argument written in the step, and is additive pointwise. The cohomology definition is the derived global-sections construction to which the generic theorem applies. This avoids taking a Zariski or structure-sheaf-module result as a theorem about etale abelian sheaves.
+
+Step 3 uses `lem-sc-kummer-exact` with positive exponents ell^n and ell^m invertible in k. I read both its existing statement and its current blueprint_update, which generalizes exactness to schemes; the curves here satisfy either version. The power/identity diagram is checked explicitly before applying the coefficient-boundary naturality stated by the delta-functor node. `lem-sc-second-kummer-divisors` explicitly identifies this boundary with the Picard map. Step 4 is then an elementary comparison of additive maps on the Step 1 generators, using the trace normalization in the item itself. No theorem about arbitrary traces or their uniqueness was hidden in a new node.
+
+Step 5 uses the new lemma's exact displayed formula with f the identity, coefficient maps (reduction, power, power) and the evaluation pairings. Its hypothesis is checked by the exponent identity in the step, including the fact that z^ell^(n-m) has order dividing ell^m. This does not identify the power map with the inclusion of root sheaves, and it does not treat derived reduction as an isomorphism.
+
+Step 6 uses the statement of `lem-weil-pbc-pullback-cohomology-long-exact-ladder`: it supplies exactness of the inverse-image sequence and commutation of pullback with its connecting maps. It alone would not supply arbitrary coefficient naturality, so the distinct units-comparison ladder uses the delta-functor theorem of Step 2. `lem-sc-h1-gm-pic-pullback` explicitly allows arbitrary scheme morphisms between curves over possibly different algebraically closed fields, and identifies H1(c_f) composed with cohomology pullback with geometric line-bundle pullback. Thus it applies to the given semilinear isomorphism. I checked these clauses verbatim rather than citing a field-extension-only Kummer theorem.
+
+Step 7 is elementary from the divisor definition and Step 6: an isomorphism carries a closed point to a unique closed point, preserves maximal-ideal powers in the local rings and therefore normalized valuations (first on regular elements, then on quotients). The valuation-bound description of O(P) on corresponding opens gives the asserted line-bundle pullback. Both point traces are 1, so Step 1's generation extends equality to every class. This argument uses neither a k-linear morphism nor a choice of primitive root. Step 8 applies the new lemma again, now to f, after checking that unit pullback commutes with integer powers and that constant scalar residues remain the same scalar residues. Step 9 is substitution into the stated definitions for the three complementary nonnegative degree pairs.
+
+The generic facts used from other units are declared individually in `split_report.tool_uses`: Kummer/Picard and divisor-class tools, the abelian-sheaf/enough-injectives/delta-functor tools, exactness and the two pullback identifications. They supply ingredients of this unit's finite curve-cohomology route, not an alternative proof of its unit theorem. Reading the dependency closure found no path back to the item through these citations. Every use has a verbatim statement quote in citations.json. There is no SGA citation or smooth-purity trace substitution.
+
+For small cases I checked n=m (all three coefficient maps in the reduction ladder are identities), n=2,m=1 (the Kummer input remains the same line bundle), degree i=0 and i=2 (no negative-degree cohomology), and genus zero (the H1 pairing is zero but the point-generated H2 trace argument still applies). An automorphism of the algebraically closed base can move roots of unity, but point Kummer classes still map to the corresponding point class, so this does not invalidate Step 7. For the new general lemma, p=q=0 is exactly the assumed commuting bilinear coefficient square, f=id is ordinary coefficient naturality, and a zero sheaf or the empty scheme makes both sides zero. Non-flat coefficient sheaves are permitted because the cup is defined through derived tensor before mapping to ordinary tensor. All non-elementary proof steps have fewer than 2000 characters; no long step hides a separate comparison lemma.
+
+The direct-delivery brief authorizes this self-review; the maintainer's independent review follows delivery. The principal self-review repairs were the exact Kummer ladder, the missing divisor/Picard citation and the separation of coefficient naturality from change-of-site naturality, as described above.

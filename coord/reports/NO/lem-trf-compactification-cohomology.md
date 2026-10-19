@@ -1,0 +1,43 @@
+# Stage-1 report: lem-trf-compactification-cohomology
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-compactification-cohomology.json`: repaired split, statement unchanged, 8 proof steps, no Mathlib leaf.
+- `dag/nodes/sec-trace-formula/lem-trf-open-compact-support-normalization.json`: new statement-only node, Mathlib searches found no match.
+- `citations.json`: verbatim statement quotes for every cited node in every proof step.
+
+## Attachments
+
+No sorry-free declaration in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` states the item or the new normalization node exactly. The related `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology` declarations in `WeilConjectures/WeilSheaf/Cohomology.lean` are definitions of individual cohomology groups with padic-algebraic-closure coefficients, not the finite-coefficient derived comparison here. The nearby affine-curve-range theorem contains `sorry`. None is an attachment for this item.
+
+## WANTED
+
+None. The proof follows the current `main-20261015` blueprint and Stacks Tags 0F7H/0F7I already present in `literature/stacks-project/more-etale.tex`.
+
+## What was wrong and what changed
+
+The returned version had a 2487-character Step 3 that hid several independent lemmas. I kept its statement, route, and all other arguments, and replaced that step by four short steps. The first checks bounded constructibility of `Ra_{X!}K` and transports it across the comparison isomorphism. The second proves that the compactification open immersion is quasi-compact, finite type, and separated from the cited geometry nodes. The third cites the new normalization node for `Rj_!K ≅ j_!K`, then applies the existing finite compact-support theorem to `j` and closes the ordinary-cohomology domain under isomorphism. The fourth applies the fibre functor and identifies both sides by the existing ordinary-cohomology definition. Every resulting step is under 2000 characters.
+
+The new node isolates precisely the hidden argument: for a separated finite-type open immersion on the witnessed étale-origin domain, compact-support direct image is canonically extension by zero, using the identity compactification and the existing compactification-coherence comparisons. It has no proof steps because it is a statement-only child for later stage work. Its Mathlib searches were run through `msearch.py` (two semantic searches, Loogle and source grep); all returned unrelated generic sheaf/topology facts or no hits.
+
+## Not duplicates
+
+`lem-trf-open-compact-support-normalization` vs `lem-weil-pbc-etale-shriek-compactification-independence`: the existing node gives independence of two compactifications for ordinary étale `D^+` candidates; the new node gives the normalized identification of an open immersion's compact-support functor with its extension-by-zero functor on the pro-étale witnessed domain.
+
+`lem-trf-open-compact-support-normalization` vs `lem-amb-etale-compact-comparisons`: the existing node states coherence of ambient étale compactification candidates for Noetherian schemes; the new node specializes the identity compactification normalization and transports it to the pro-étale witnessed domain used here.
+
+`lem-trf-open-compact-support-normalization` vs `lem-amb-unbounded-compact-support-comparisons`: the existing node treats unbounded ordinary étale compact-support comparisons and proper-composition coherence; the new node states the open-immersion normalization needed for this finite coefficient, witnessed pro-étale argument.
+
+`lem-trf-open-compact-support-normalization` vs `lem-sf-unbounded-compact-support-proper-composition`: the existing node states ordinary small-etale unbounded compactification coherence and composition for a proper first morphism, including proper normalization; the new node states open-immersion normalization on the finite-coefficient witnessed pro-etale domain, not proper composition.
+
+`lem-trf-open-compact-support-normalization` vs `lem-cbc-etale-local-compact-support-extension`: the existing node constructs bounded-below ordinary small-etale compact-support functors with local restriction and exchange comparisons; the new node identifies a pro-etale open immersion's compact-support functor with termwise extension by zero on witnessed objects. An etale-to-pro-etale comparison would be additional work, not a one-line specialization.
+
+## Review by NO
+
+I reread the item statement against `literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-formula/lem-trf-compactification-cohomology.md` and its proof file. I also compared the preserved node with the current repository copy; its statement and maintainer-owned fields are unchanged. I read the statements of every node cited by the repaired proof. The first repaired step uses exactly the restriction conclusion of `prop-finite-compact-support-constructibility`, the finite-torsion definition, and the isomorphism-closed bounded constructibility theorem `lem-weil-proetale-dbc-triangulated`. The next uses the proper definition for separatedness, the Nagata quasi-compact-open-immersion lemma, and the qc-open-immersion finite-type lemma; the diagonal of an open immersion is the identity after identifying the fibre product with the source. The new normalization node is cited only for the explicit isomorphism `Rj_! ≅ j_!` on witnessed complexes, exactly as its statement says. The following step uses the restriction conclusion for `j` and closure under isomorphism to establish that `j_!K` is in the ordinary cohomology domain. The fibre step uses the definition of `Fib_s` and the displayed definitions of ordinary and compact-support cohomology. The preserved naturality and cocycle steps cite the coherence proposition, induced-category definition, fibre functor, and ordinary-cohomology notation only for the equations stated there.
+
+I checked hypotheses at each use: `k` is a field, `A=A_{E,n}` is finite with `n≥1` and `ell` invertible, `a_X` is separated finite type, `bar a` is proper and therefore separated finite type, and `j` is the compactification open immersion. I checked edge cases `K=0`, empty `X`, proper `X` with the identity compactification, and an extra disjoint component of `bar X`; the comparison remains canonical. No finite-Tor hypothesis was introduced. No SGA 4 or SGA 4½ route was used. The only correction was the mandated re-splitting of the long Step 3; all eight resulting steps are below the 2000-character review threshold.
+
+I resumed the preserved repair after its transport failure and ran the required dry run first. It identified two additional same-tag nodes not discussed in the old report. I opened their full statements and added the two distinctions above; neither states the witnessed pro-etale open normalization. The retained searches.jsonl records the normalization searches actually performed, with two phrasings and all required search kinds; I read the logged hit lists and retained those queries rather than rerunning them. I read Stacks 0F7H (more-etale.tex, section-derived-lower-shriek-compactification) and 0F7I (lemma-shriek-well-defined): these give the ordinary etale candidate and independence, not themselves the pro-etale theorem. The new node's intended proof uses the existing pro-etale candidate and coherence statements, with the identity pushforward normalization; its statement records that normalization explicitly for later splitting. It works also for zero complexes, empty opens, the identity open, arbitrary bounded-below witnessed complexes, and fields not algebraically closed; the algebraically closed base restriction belongs only to the fibre functor in the parent.
+
+For the B-E checklist I verified that the new node is statement-only, introduces its field, coefficient, schemes, immersion and witnessed domain, and cites definitions for them. Its normalization is an auxiliary functor fact, not a restatement of the parent's cohomology comparison, naturality or compactification-change clauses. The boundedness transport cites the existing isomorphism-closure theorem; the only inline geometry left is the identity diagonal of an open immersion, and functorial transport in Steps 6-8 uses the written inverse and equations. The restriction theorem is used only for its bounded-constructible conclusion, without invoking its fibre-dimension or reduction clauses. Every cited quote in citations.json is a verbatim substring of the node statement and every step/node pair is covered. The original statement, Lean record, blueprint snapshot/update and maintainer metadata match the current repository. No long non-elementary step remains.

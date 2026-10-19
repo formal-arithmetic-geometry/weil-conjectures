@@ -1,0 +1,53 @@
+1. Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-infinity-slice-right-fibration.json`: the unchanged statement with a five-step split; zero new nodes and zero new Mathlib leaves.
+- `citations.json`: one verbatim statement excerpt for each node cited by each step.
+
+2. Attachments: none. Searches of `WeilConjectures/` in both read-only source checkouts by the exact blueprint tag, slice/right-fibration words, and Kerodon tags found no declaration stating the item. Upstream sorry declarations were not treated as completed proofs.
+
+3. WANTED: local archival copies of Kerodon Proposition 4.3.6.1 (018F), Proposition 4.3.6.4 (018J), Construction 4.6.5.1 (01KX), Proposition 4.6.5.5 (01L0), and Corollary 4.4.2.3 (019E). Read online, not downloaded. These are Kerodon tags, not the unrelated Stacks tags with identical characters. No Stacks theorem with this simplicial infinity-category statement was identified.
+
+4. Problems corrected: the imported item had no proof. The first draft used plain-text mathematical notation and paraphrased citation quotations; the delivered version uses TeX and copies exact statement substrings, including delimiters. I also expanded the horn-face gluing and the extension argument across the weakly saturated inner-anodyne class. The item statement, its hypotheses, and its mapping-space convention are unchanged. No statement dispute was found.
+
+The current blueprint ancestor is `literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md`, paragraph 2 (derived coefficient Hom/derived-limit calculation). The item's inherited via chain gives the auxiliary stable-enhancement/final-index route under that calculation; the blueprint paragraph itself does not explicitly state a join-slice theorem. I read the historical unit `sk-prop-sf-biduality-general` and chapter record; I did not change their maintainer-owned binding. Whole-blueprint searches for slice, right fibration and pinched found no blueprint statement matching this item. Existing auxiliary nodes are reused rather than duplicated.
+
+5. Nothing mathematical remains unfinished. No Lean writing, compilation, Lake, build, delivery push, or additional agents.
+
+## Review by NB
+
+I read the item and its sources Kerodon 018F, 018J, 01KX, 01L0, and 019E, then opened the complete statements of all three cited DAG nodes. The proof follows the source's pushout-join route to the slice projection, with the argument written explicitly rather than invoking the proposition being split.
+
+Step 1 uses the standard simplices and simplicial operators of `def-cbc-enhanced-diagrams-cones`. Composing precomposition operators gives the slice simplicial identities and commuting restriction map. Splitting ordinal maps at the last vertex gives the singleton-join identification with the correct orientation. This is a calculation from the stated definitions, not a new lemma node.
+
+Step 2 uses the horn definition from that same node, and only the pushout-join clause of `lem-coef-infinity-anodyne-cocones`. I checked that this statement allows arbitrary small K and does not assume K is a quasicategory. The first input is the right-horn generator with 0 < i <= n; the second input is the monomorphism from the empty simplicial set into K. The degreewise join formula makes the joined faces cover the joined horn, with coincident pure K summands and exactly the corresponding mixed summands. Thus the slice horn really supplies a map on the claimed glued domain. Its agreement with the base simplex is precisely the original square's commutativity. No source proof is being used as a substitute for a cited statement.
+
+Step 3 uses the inner-anodyne weak-saturation definition explicitly given by the cited cocone node, and the inner-horn quasicategory axiom from the definition node. I wrote why the extension class contains isomorphisms and generators and survives pushouts, transfinite composition (including compatible maps at limits), and arrow retracts. This is the elementary lifting-class closure argument; it does not assume that the entire class consists only of single horns. The extension preserves both the prescribed base simplex and the map p because these lie in its original domain.
+
+Step 4 uses the quasicategory axiom in the base and the already proved right-fibration property, with 0 < j < m implying 0 < j <= m. Thus it establishes the quasicategory hypothesis on the total slice before the fiber theorem is applied.
+
+Step 5 uses the exact right-pinched mapping-space definition of `def-cbc-enhanced-diagrams-cones`, retaining the entire constant initial simplex and the extended last-vertex operators in every degree. The Kan-fiber clause of `lem-coef-infinity-right-fibration-fibers` states exactly what is needed. Its statement mentions two fibrations: I instantiate both by the same slice projection, with E = F. Both total objects and the base are quasicategories and both projections are right fibrations by the earlier steps. The additional conditional equivalence-on-fibers assertion is not used. Empty fibers are explicitly allowed.
+
+I checked small cases: for K empty the slice is C and q is the identity; for K a point the degree-zero fiber is the set of edges from x to t and its higher simplices have the required constant initial face; for n = 1, i = 1 and K a point the joined extension is an inner 2-horn, confirming the right/left orientation. Empty C admits only the empty diagram, and has no vertices to test in the final clause. A discrete two-point C with distinct x and t has an empty mapping fiber, which remains Kan, so the proof does not force nonemptiness. K need not be finite or have any horn fillers; smallness suffices for the join and weak-saturation constructions. The dependency closure was checked for missing nodes and cycles. No new statements require a duplicate comparison.
+
+For Mathlib, the exact queries and returned summaries are appended verbatim from this sandbox's `searches.jsonl`; earlier inherited search records remain. I read the semantic hits in Quasicategory/Basic.lean:34-50, SimplicialSet/CategoryWithFibrations.lean:35-100, and SimplicialSet/Coskeletal.lean:42-51. They give primitive inner fillers, all-horn Kan fibrations, or ordinary truncated right extensions, not the arbitrary-diagram slice projection. Two unquoted Loogle queries reported unknown identifiers and were recorded as invalid, not absence evidence; the subsequent quoted SSet/slice query ran successfully with no hits. Both semantic phrasings were tried. The search-before-proof guidance of the lean4 skill was used only for read-only searches; the user's stage-1 prohibition on compiles and agents governs this task.
+
+
+Recheck of the inherited sandbox, 2026-10-16: I reopened the five Kerodon tags online and checked the displayed statements and proofs. Tag 018J has the required right-anodyne/monomorphism orientation; substituting the empty inclusion in the second factor gives exactly the glued domain in Step 2. Tag 01KX uses the strict right-slice fiber, and 01L0 derives its Kan property through 019E, matching Step 5. I independently traversed the three cited nodes' statement/proof dependencies: none reaches this item. Every citation in citations.json is an exact, unnormalized substring of the current cited statement. There are no new nodes, so the statement-only, new-node duplicate, and Mathlib-leaf line-number requirements are vacuous. The proof does not move any clause into a new node. The statement and hypotheses still match the imported source; the explicit tests above include empty shapes, empty fibers and the smallest right horn.
+
+I reran the prescribed msearch command with two fresh semantic phrasings and with Loogle, grep and LeanSearch. Their actual JSON log entries are appended to mathlib_searches, and I opened the relevant Mathlib source lines, including ModelCategory/Over.lean:66–79: its overcategory is an ordinary category of objects over S, not the simplicial join slice. No match was found and no unrun query was added. The search-only guidance of the lean4 skill was followed, subject to the explicit ban on compiles and agents.
+
+Tool syntax correction: the brief's trailing dot makes deliver.py print its usage without running preflight. The documented invocation without that dot is used for the required --no-push dry run. Redundant waiting invocations were stopped before they acquired the shared worktree lock; no validation gate was bypassed.
+
+## Second reading by NB
+
+- Item statement: checked against Kerodon Proposition 4.3.6.1 (018F), Construction 4.6.5.1 (01KX), Proposition 4.6.5.5 (01L0), and Corollary 4.4.2.3 (019E); all hypotheses and conclusions agree, including the right-fibration orientation, arbitrary small diagram, strict fibers, and empty-fiber allowance.
+- Step 1: checked against the stated join and simplicial-operator definitions in `def-cbc-enhanced-diagrams-cones`; the ordinal split and singleton identification are a short definitional calculation. Verdict: correct and elementary.
+- Step 2: checked against 018J and the exact statement of `lem-coef-infinity-anodyne-cocones`; the empty-to-K monomorphism gives the required pushout join, and the horn-face gluing is explicit. Verdict: correct, non-elementary, cited.
+- Step 3: checked against the weak-saturation clause of `lem-coef-infinity-anodyne-cocones` and the quasicategory horn axiom; closure under pushouts, transfinite composites, and retracts is a substantive argument. Verdict: correct, non-elementary; corrected its metadata from `elementary: true` to `false`.
+- Step 4: checked against the quasicategory definition and Step 3's right-fibration conclusion; the index inequalities are sufficient. Verdict: correct and elementary.
+- Step 5: checked against 01KX, 01L0, 019E, and the complete statement of `lem-coef-infinity-right-fibration-fibers`; the fiber is the right-pinched mapping space degreewise, and both fibration instances are the same projection. Verdict: correct and cited.
+- Cited-node audit: every citation quote is an exact substring of the current cited statement; no proof step relies on a cited node's proof, and the dependency graph has no cycle.
+- New-node audit: the split creates no new nodes and no Mathlib leaves; searches found no existing Mathlib declaration of the arbitrary-diagram join-slice theorem.
+- Edge cases: checked empty K, singleton K, empty and discrete quasicategories, the smallest right horn, and empty fibers; no statement dispute or source error was found.
+
+Changed only Step 3's `elementary` flag because weak-saturation closure is substantive under C2; added this second-reading audit. The required dry run passed after the repair.

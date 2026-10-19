@@ -1,0 +1,52 @@
+# Q18 — lem-asd-internal-adjunction-evaluation
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/lem-asd-internal-adjunction-evaluation.json: statement item, now split into seven steps. Mathlib verdict: no exact match for ordinary etale compact-support internal adjunction and its normalization; abstract inverse-Hom/counit formulas already have a Mathlib leaf in the DAG.
+- citations.json: verbatim statement quotations for every step/node pair.
+- searches.jsonl: six searches actually run with msearch.py; all services answered. The node retains its inherited searches as well as these new records.
+- report.md: this report. No new DAG nodes and no new Mathlib leaves.
+
+## Attachments
+
+None. Searched WeilConjectures/ of the read-only slopmaster2 source for the blueprint id and for internalAdjunction, internal_adjunction, internal adjunction and exceptional/counit terminology. The hits were unrelated pro-etale trace-formula declarations. No project declaration states this item. Also checked the archived master's etale SixFunctors tree; it supplies no finished attachment for this item. The existing closed open-projection definition remains the attachment of its own node, not an attachment of this evaluation formula.
+
+## WANTED
+
+None. All sources needed for this split were available locally.
+
+## Findings and corrections
+
+The item previously had a complete statement but no proof, no split report and no recorded Lean audit. Its statement is unchanged. The current blueprint's corresponding files moved to sec-six-functors-basics: prop-asd-internal-adjunction.proof.md in sk-prop-sf-cbc, and lem-asd-smooth-generic-direct-image.proof.md in sk-lem-geo-smooth-generic. Read these as well as the imported master proof. The Hom-bijection route and its final evaluation/counit sentence agree. The existing nearest ancestor and inherited unit binding are retained; this item is not the unit's key statement and changes no realization record.
+
+The blueprint mentions def-weil-derived-pullback-tensor-hom as if it supplied the ordinary etale adjunctions. Its current DAG statement concerns pro-etale finite/integral/rational coefficient operations and does not supply the ordinary etale assertion here. I do not cite it. Instead step 1 verifies the needed ordinary unbounded inverse-image bijection directly from the existing exact module-adjunction and K-injective statements, and step 2 takes global H^0 of the existing ringed-site tensor/internal-Hom isomorphism. This does not change the proof route or coefficient category.
+
+The key calculation does not cite the evaluation formula from the proof of prop-asd-internal-adjunction as though it were in that node's statement. Steps 1–5 explicitly construct the natural Hom bijections; step 6 constructs their representing isomorphism and its inverse; step 7 evaluates their action at the specified h. The proposition's statement is used only to identify the name of the canonical isomorphism. No new node restates a clause of the item.
+
+## Unfinished work
+
+None for the authorized one-level stage-1 split. Proofs of existing dependencies retain their own states. No Lean was written and no compiler, Lake or build tool was run.
+
+## Not duplicates
+
+No new nodes. Whole-DAG and whole-blueprint searches for internal adjunction, evaluation and tensor-Hom adjunction were checked before deciding to reuse the existing statements. In particular prop-asd-internal-adjunction asserts a canonical isomorphism but its statement does not assert the requested action on pairings; it cannot be used as a one-line proof of this item. lem-weil-pbc-adjunction-of-natural-bijection already states the general inverse-Hom/counit formula and is reused instead of creating another abstract mate lemma. lem-weil-pbc-ringed-internal-hom-exact-restriction, together with lem-pur-rhom-global-sections, supplies the tensor-Hom bijection in two lines; no node for that specialization is warranted. prop-weil-pbc-derived-inverse-image-adjunction only states bounded-below abelian-sheaf adjunction, so it is deliberately not cited for the unbounded module assertion. The scheme-O_X tensor-Hom nodes and pro-etale derived-adjunction nodes have the wrong ringed sites for the present application.
+
+## Review by Q18
+
+I read the item's source sentence in the current smooth generic-direct-image proof and the full current internal-adjunction proof, and compared the latter with the imported master text. I also read Stacks sites-cohomology.tex, lemma-adjoint (07A6), lemma-internal-hom (08J9), lemma-section-RHom-over-U (08JA), and lemma-j-shriek-and-tensor (0GL1), with derived.tex lemma-K-injective (070I) and lemma-enough-K-injectives-implies (070K). The counit convention was checked in Mathlib/CategoryTheory/Adjunction/Basic.lean, lines 164–182, including homEquiv_symm_apply and its homEquiv_counit alias. The proper projection and exceptional-adjoint blueprint sources were also read. There are no new node sources to review.
+
+For step 1 I opened the statements of prop-weil-pbc-inverse-image-modules-exact, prop-pur-kinjective-resolutions-exist, lem-weil-pbc-kinjective-hom-derived and lem-weil-pbc-kinjective-total-derived. The first really supplies exact constant-A module inverse image and its underived adjunction; the others supply unbounded K-injectives, calculation of morphisms into them, and computation of Rf_* on them. The extra assertion that f_*I is K-injective is proved there by the displayed degreewise-adjunction equality and the definition of K-injectivity. It is a two-line specialization from the cited statements: maps from acyclic T correspond to maps from the acyclic f^*T and vanish up to homotopy. The chain-homotopy equation and exactness of the cone construction are written out, so there is no appeal to an unstated derived-adjunction theorem. This is why step 1 is marked elementary relative to its citations.
+
+For step 2 I opened lem-weil-pbc-ringed-internal-hom-exact-restriction and lem-pur-rhom-global-sections. Their statements give precisely the internal-Hom isomorphism and the H^0/Hom identification used. Taking H^0 and substituting the identity into the naturality equation gives both the Hom bijection and the evaluation convention. No existence of a monoidal structure on an unrelated category is presumed. The small-etale sites are taken in the project's fixed small-skeleton universe; the ring sheaf is the constant commutative A-sheaf.
+
+For step 3 I read all seven cited statements. def-asd-compactifiable gives the open/proper factorization. def-weil-proper-morphism and def-weil-finite-type-morphism give the precise locally-finite-type and quasi-compact conditions used; pqf-lem-locnoeth-lft applies because S is Noetherian. The finite-cover argument ensures the middle scheme is Noetherian before either proper projection or exceptional adjunction is applied. lem-amb-proper-coproducts-projection explicitly states the counit-defined projection morphism, including its tensor symmetries, on arbitrary unbounded ordinary etale complexes. def-amb-etale-compact-support fixes Rr_*j_! on a chosen compactification. lem-pur-etale-open-derived-tensor gives exactly the natural derived extension-by-zero tensor comparison. Its factors are reversed relative to the item's order, so step 3 spells out the two tensor symmetries rather than silently substituting a differently normalized isomorphism. This is the only non-elementary step: its substantive isomorphisms are all cited statements.
+
+For step 4 the Noetherian factorization and finite commutative ring satisfy thm-amb-etale-exceptional-adjoint exactly. I opened lem-weil-pbc-adjunction-of-natural-bijection and checked its actual formula Psi^{-1}(b)=epsilon composed with F(b), not only its title. Substituting F=Rf_!, G=f^times and b=p_B gives the displayed exceptional transpose with the correct source and target. This uses the existing Mathlib leaf as a generic category-theoretic tool.
+
+For step 5 each Hom set and arrow is a composition of the bijections already constructed in steps 1–4. Naturality is inherited from those bijections and the natural proper/open projection maps. For step 6 the identities defining theta and psi and the two inverse identities are an explicit elementary Yoneda argument, not an invocation of full faithfulness as if it asserted the general Yoneda lemma. I opened prop-asd-internal-adjunction's statement: it is only used for the named canonical isomorphism; its action on h is established by the preceding construction. Step 7 substitutes B=Q and a=h in the exact formula, cancels c with c^{-1}, and identifies p with the inverse-image and tensor-Hom transpose in the item. No additional non-elementary fact occurs in these last three steps.
+
+Checked delivery-errors B–E in full against these files. B: no unsplit new nodes, no hidden new notions, no fabricated searches, sources use Stacks tags with labels, and inherited ancestry is retained with same_as searched. C: every external statement used is cited, every cited statement was opened, citations.json contains its verbatim text, and no proof-only assertion is borrowed. The off-unit ringed-site resolution/Hom/local-Noetherian tools are declared in split_report.tool_uses; they support the original unit route. D: seven actual computations replace the missing proof; there is no new-node relabelling, self-citation, induction or circular dependency. E: checked all ring, site, finite-type and Noetherian hypotheses, and checked that no constructibility, boundedness, smoothness, invertibility or pro-etale comparison is introduced. No statement dispute was found.
+
+Small cases: for f the identity, both adjunctions and Pi are identities and the formula becomes ordinary tensor-Hom evaluation; for M=0, Q=0 or K=0 both maps are zero; for A the zero ring all categories are trivial; for proper f take j the identity, and for open f take r the identity, giving respectively the specified proper and open projection formulas. Arbitrary shifts of Q and M use the same signed tensor symmetries throughout, so no extra swap or sign enters the composite. These checks also confirm that the formula uses Pi rather than its inverse.
+
+Every step is shorter than 2000 characters (the longest is step 3, 1221 characters). I checked the two foundational elementary reductions separately for hidden lemmas: each is explicitly derived from existing statements in the few lines indicated above. No new statement-only node is justified by them.

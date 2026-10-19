@@ -1,0 +1,56 @@
+# Stage-1 worker report
+
+## Files written
+
+- `dag/nodes/sec-proper-base-change/lem-weil-pbc-singleton-site-module-comparison.json`: statement, split; the statement is unchanged. Ten proof steps give the direct singleton-site calculation and cite the existing derived interfaces. Mathlib searches found related evaluation and bottom-topology declarations, but no declaration covering the whole statement.
+- `citations.json`: sixteen step/node entries, quoting the statements actually used.
+- `searches.jsonl`: six searches run through the required msearch command, including two independent semantic phrasings, Loogle, LeanSearch and two source greps. The inherited item searches are retained separately in its JSON.
+- `write_split.py`: sandbox-only reproducible preparation script. It is not a delivered node or a project-tool modification.
+
+New nodes: 0. New Mathlib leaves: 0. No unit or chapter records were changed.
+
+## Attachments
+
+None. Searched `WeilConjectures/` in the read-only slopmaster2 source for the item id, singleton/module combinations, and the narrower phrases `punctual site`, `punctual topos`, `singleton_site`, and `singletonSite`. The punctual-site mention in `CategoryTheory/SpectralSequence/Grothendieck.lean:769` discusses a special spectral-sequence interpretation, not this equivalence with tensor and derived-unit compatibilities. There is no project declaration giving all clauses of the item.
+
+## WANTED
+
+None. All source passages used are present in the shared literature directory.
+
+## Problems found and corrected
+
+The item was an unsplit, statement-only node with no sandbox predecessor. Its statement agrees with the punctual-site specialization and needs no correction or added hypothesis. The source at Tag 00X9 identifies sheaves with sets; it does not itself assert the tensor, K-flat or derived-unit clauses. I therefore marked this proof as agent-written and supplied the missing calculations, rather than attributing the whole argument to that paragraph.
+
+Restriction of scalars occurred in the statement without its own definition dependency; added `def-pc-sheaf-restrict-scalars`. Added actual proof dependencies, including the direct-sum total tensor definition and the existing normalized derived adjunction. The final unit comparison is now a formula on a flat-term K-flat representative and an explicit naturality formula for an arbitrary object. No compatibility is asserted merely by saying that an equivalence transports it.
+
+The inherited blueprint ancestry points through the finite-level integral-lattice reconstruction to `thm-weil-pbc-finite-extension`. I read the current main-20261015 file for that ancestor as well as its DAG record: the current file states finite-extension proper base change but has no proof paragraph to replace this auxiliary calculation. The historical place and via list are retained, and the split report identifies precisely the auxiliary reconstruction this comparison serves. This does not alter the chapter route or realize the unit's key theorem in place of its proper-base-change argument.
+
+## Unfinished work
+
+None within this one-level split. The existing unsplit normalized derived-adjunction node remains an independent frontier node; its statement, rather than its unwritten proof, is what step 10 uses.
+
+## Not duplicates
+
+No new node was created. Searched the whole DAG by titles and statements for punctual/singleton sites, exact equivalences, derived equivalences, homotopy categories, change of rings, and localization factorization. Ran blueprint searches for `singleton`, `punctual topos`, `exact equivalence`, and `localization equivalence`, and the ancestor command for this item. The singleton hits concerned geometric or covering singletons. The existing `lem-kun-exact-equivalence-derived-plus` only gives a bounded-below derived equivalence and would not justify this unbounded statement; step 7 instead uses the existing unbounded `lem-weil-pbc-exact-functor-derived-factorization` and the localization universal property. No duplicate general-equivalence lemma was introduced.
+
+## Review by N5
+
+I read the punctual topos paragraph in `sites.tex`, Tag 00X9 (`section-topoi`), after Definition 00XA (`definition-topos`). Its site has exactly one object, one arrow and the identity covering, precisely as in the item. The matching-family argument in step 1 verifies the sheaf condition without importing a result about sheaves on a topological one-point space, whose site would be different. The definition of module sheaves was opened and checked: it gives the semilinear restrictions and componentwise linear morphisms used here, so the only restriction is forced to be the identity. The evaluation and constant functors have identity components for both natural isomorphisms.
+
+For step 2 I reread `def-weil-sheaf-of-modules-category`, including its kernel and sheafified cokernel assertion (Tag 03DA). The site is small, so its abelian-category hypothesis holds in any chosen module universe. The proof checks kernel, cokernel and arbitrary small coproduct universal properties at the unique object. It does not invoke the generally false assertion that evaluation on an arbitrary site is exact or preserves direct sums. No new lemma is needed for these one-component factorizations.
+
+For step 3 I read `sites-modules.tex`, Tag 03EK (`section-tensor-product`), and Tag 03CY (`lemma-sheafification-presheaf-modules`), together with the statements of `def-pur-sheaf-tensor-product` and `def-weil-presheaf-modules-sheafification`. They respectively specify sectionwise tensor followed by sheafification and its factorization property. Since every presheaf here is already a sheaf, the inverse sheafification comparison follows from that property in two compositions. Pure tensors give the displayed natural tensor identification and its structure compatibilities. This is a direct calculation on this site, not an unproved general monoidal-equivalence assertion.
+
+For step 4 I checked the restriction definition `def-pc-sheaf-restrict-scalars` and the change-of-rings clause of `def-pur-sheaf-tensor-product`. I also read the restriction/change-of-rings paragraph and Tag 03CZ (`lemma-adjointness-tensor-restrict`) in `sites-modules.tex`. The proof itself writes both Hom correspondences and their inverse formulas. Commutativity of the rings is exactly what makes the stated right-hand tensor convention and the action `s v(m)` agree with the source's left-hand tensor convention. Naturality and the unit are verified from those formulas. No separate adjunction node is created for this elementary specialization.
+
+Steps 5 and 6 use the actual complex, cohomology and quasi-isomorphism clauses of `def-weil-abstract-derived-category`. I read the cochain-homotopy equation preceding Homology Lemma 0112 and the homotopy-category definition in Derived Categories Tag 05RN (`section-homotopy`). Step 5 repeats that equation explicitly and checks it in both directions, so no general homotopy-invariance theorem is hidden. Step 6 identifies kernels, images and quotients using the already proved exactness and hence proves quasi-isomorphism preservation and reflection, including for unbounded complexes. The current blueprint update of the derived-category definition agrees with the localization convention used here.
+
+For step 7 I opened `lem-weil-pbc-exact-functor-derived-factorization` and checked that its statement is for unbounded derived categories, gives the natural factorization through Q, and requires the exact additive functors that steps 1 and 2 constructed. I read Tag 015F (`lemma-right-derived-exact-functor`) and Tag 05RU (`definition-unbounded-derived-category`) in `derived.tex`. The inverse equivalence is checked by descending the already constructed degreewise identity isomorphisms through localization; their inverses descend as well. I do not use the bounded-below equivalence node for an unbounded claim. This cited factorization node is a Mathlib leaf, so it needs no off-unit tool declaration.
+
+For step 8 I read the full statements of `def-pc-tensor-complex-sheaves`, `def-pc-kflat-complex` and `def-pc-flat-sheaf-modules`, and the source K-flat definition 06YN (`definition-K-flat`) and flatness definition 03ER (`definition-flat`). The total differential is the direct-sum differential with sign (-1)^p specified by the tensor-complex node. Each summand and the direct sum are identified by steps 2 and 3. The K-flat test quantifies over every acyclic complex: applying the constant inverse supplies every module test, and evaluation supplies every sheaf test. Thus both directions are proved. Termwise flatness is checked by the same equivalence of exact tensor tests, rather than presumed from an equivalence of underlying categories alone.
+
+For step 9 I read `lem-pc-kflat-resolution` and `lem-pur-derived-change-of-rings` in full, and the source passages 06YS (`lemma-K-flat-resolution`), 06YT (`lemma-derived-tor-quasi-isomorphism-other-side`) and 06YY (`lemma-derived-base-change`). The first supplies a resolution with flat terms; the second explicitly gives the K-flat computation, invariance under quasi-isomorphisms between K-flat complexes, and canonical comparison between resolutions. The step takes exactly those clauses. Its chain representative and maps are identified by the earlier tensor formulas, so no ordinary-module/sheaf coefficient categories are silently equated.
+
+For step 10 I opened `lem-pur-sheaf-ring-derived-coefficient-adjunction`, whose statement gives both the normalized unit on a K-flat complex with flat terms and the normalized transpose of a chain map. I read the source adjunction 07A6 (`lemma-adjoint`) for ringed topoi. The singleton site is small; the coefficient sheaves are commutative; and the chosen resolution has the required flat terms. The displayed naturality formula identifies the unit on the original derived object using the quasi-isomorphism q, so this comparison includes the actual unit morphism rather than just existence of an adjunction. The generic K-flat resolution, change-of-rings and normalized adjunction nodes are declared as tool uses: they supply homological algebra, not a replacement for the unit's geometric proper-base-change route.
+
+I tested the calculations for R=0, the zero module and zero complex, and the identity ring map. There is no nonzero-ring or boundedness requirement hidden in any step. For a nonflat map such as Z to Z/2, the proof uses a K-flat resolution and never assumes extension of scalars exact; this is why steps 9 and 10 cannot be replaced by termwise extension on an arbitrary complex. Unbounded total tensor uses direct sums, including all integer bidegrees, not a finite-totalization assumption. All sixteen citations have verbatim excerpts in citations.json. There are no newly stated lemmas to audit for duplicates or missing hypotheses, and no step exceeds 2000 characters (the longest is 915). I checked B through E: no new statement-only or Mathlib leaf records are fabricated, every non-elementary theorem used is a cited node, the cited clauses supply the claimed results, and the direct computations are written out instead of relabelled as new nodes.

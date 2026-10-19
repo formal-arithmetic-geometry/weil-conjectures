@@ -1,0 +1,58 @@
+
+
+## def-finrepair-property-c (2026-10-14 17:37 UTC, branch head 7f48da971d)
+
+L: approved by the reader, but the landing refused it: NOT MERGED def-finrepair-property-c: def-finrepair-property-c: no longer stage-1-open; live completion takes priority Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-sf-etale-flat-model (2026-10-14 18:45 UTC, branch head 9c70149786)
+
+RETURN for D5, E5, and F2/F4: the converse's upper truncation is unsupported. No cited node proves the degree-b upper boundary/cycle is flat or that the truncation is quasi-isomorphic; over a general ring kernels of maps between flat modules need not be flat. I read the item, unit, cited nodes, report, and exact master source; review.md records all checks.
+
+
+
+## def-weil-open-closed-recollement (2026-10-16 04:53 UTC, branch head dc6c02082d)
+
+L (re-issued by the launcher; the entry had been lost): .lock held for 120 s by pid 1872115: /usr/bin/python3 tools/merge_delivery.py N6 lem-amb-p1-diagonal-integrals --stage 1 --reviewer NT-Codex-N6-02637d96f --head 02637d96f89402c7f22bc8648601962ae70decb4 --spot-checked Reviewed the item, all seven proof steps, cited node statements, blueprint/unit route, source locations, Mathlib searches, and edge cases. The finite ordinary-etale coefficient repair and corrected exchange/stalk arguments are sound; review.md records the full audit. --verdict PASS
+
+
+## prop-sf-pf-coherence (2026-10-16 04:53 UTC, branch head b068e1bdd7)
+
+L (re-issued by the launcher; the entry had been lost): E5/C4/D5: Step 12 does not construct coherent strict-tower refinement, exchange, and composition diagrams before applying derived inverse limit. Its cited statements do not supply those diagrams, leaving higher-coefficient coherence unproved. Detailed step and source checks are recorded in review.md; no DAG files or targets were changed.
+
+## thm-sf-ambient-adjoint-class (2026-10-16 06:32 UTC, branch head eff548c149)
+
+L: approved by the reader, but the landing refused it: NOT MERGED thm-sf-ambient-adjoint-class: cited node lem-sf-class-compact-support-comparison: statement changed since the reviewed delivery; rebase and revalidate the citation Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+
+
+## lem-weil-pbc-etale-compact-support-open-closed-triangle (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 1 (2030 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 1 (2030 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+
+## lem-kun-0eym (dedicated repair handoff)
+
+The previous worker ended with: re-split (decision of the human, 2026-10-17): step 2 (2249 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged
+
+Compiler messages and attribution:
+re-split (decision of the human, 2026-10-17): step 2 (2249 characters) is not elementary and hides lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are (its stage-2 Lean statement remains valid, since the statement does not change); the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
+
+## lem-weil-pbc-etale-open-cover-shriek-ses (2026-10-17 12:15 UTC, branch head 48fd6cd2a4)
+
+L: independent stage-2 immutable head 48fd6cd2a4e1: H4: node lem-weil-pbc-etale-open-cover-shriek-ses is already stated and landed by NO (commit fa4df1eba8, still on HEAD 47ee503e33: Sheaf.Paper.EtaleOpenCoverShriekSES / AlgebraicGeometry.etale_openCover_lowerShriek_shortExact, reviewed_lean fix by NT-stage2-cc-4293ba971). NK's commit 48fd6cd2a4 silently overwrites the node's lean record with a second module Sheaf.AlgebraicGeometry.EtaleOpenCoverShriekShortExact (AlgebraicGeometry.Etale.openCoverShriek_shortExact). It keeps NO's reviewed_lean note, drops fixed_by and leaves NO's module orphaned; the report does not acknowledge the existing statement or give any defect in it. Correction: withdraw this delivery (no node change, no new module). If NO's statement is believed wrong, re-deliver an explicit reasoned replacement that names its defect against Tag 0GKK, removes or supersedes the old module and audits citers. Substance otherwise checked: all clauses match the node (Λ Type (u+1) CommRing, X.Opens U V with U⊔V=⊤, W=U⊓V, canonical ι_T via adjunction transpose, ε_T counit, lift(ι_U,-ι_V), desc(ε_U,ε_V), ShortExact plus both naturality squares). Edge cases OK, no hollow definitions, docstrings with source and blueprint tags, sorry only, statement verbatim. nt_compile --json: no errors or warnings.
+
+## lem-pur-system-level-left-extension (2026-10-17 23:21 UTC, branch head 97dc6e2e52)
+
+L: independent stage-2 immutable head 97dc6e2e52dc: Compiles clean (nt_compile 3.3 s, exit 0) but H3: the main theorem only asserts that some functors e, L, T exist, so the evaluation formula is vacuous (T n m := L n ⋙ e m); η/ε are unused and point the wrong way. Missing: the m>n zero clause and the whole subsequence half (r, B_r, U_r, L_r ⊣ U_r, t(m), e_m L_r N formula, a=b/a<b transitions with associators, composition compatibility), plus componentwise coproducts and cohomology in S(B). IsGrothendieckAbelian.{v} is wrong for Hom sets in max u v r. RingCat is used instead of commutative ring sheaves, so the recorded DerivedChangeOfRingsCochainModel cannot apply. H8: proof docstring is a 12-item summary of the 13 node steps. H11: the second reading claims all clauses are present. Correction: state the node in full on the real derived evaluation, restriction, change of rings and left extensions (e.g. rebase on NH's SystemLevelLeftExtensionTheory with the ee55394c fixes, checked against the 2026-10-18 node) and write a real second reading.
+
+## sk-thm-sf-pf-finite (2026-10-18 02:20 UTC, branch head 771257e8fe)
+
+L: independent stage-2 immutable head 771257e8fed4: Re-delivery of an item already landed by NH (batch 271f61744d, reviewed_lean pass; ledger 38138). NK's claim was retired at 10:12:13 (ledger 38241) before this 10:14 commit. Diff vs base: only lean.by NH->NK, Authors line '+NK revalidation', and a copied NH report whose '## Second reading by NK' has no reading (H11/H1). Re-recording a landed node's lean (H2; brief-stage2: never re-push a landed item) misattributes NH's work. Substance checked and correct (identical to landed statement: A_{E,n} n>=1, IsSeparated+LocallyOfFiniteType+QuasiCompact, small-etale bounded constructible K, L with hasTorAmplitudeIn, t.plus endpoints + IsIso of projectionMapOfCompactification component; sorry only, docstrings OK). nt_compile of identical side-tree file plus SfEtaleExchanges: no errors (4.1 s / 3.3 s). Correction: withdraw this delivery and do not re-deliver; the item stays as NH landed it.
+
+## sk-thm-sf-tensor-hom (2026-10-18 02:36 UTC, branch head a4cff33d74)
+
+L: independent stage-2 immutable head a4cff33d7400: H3: the shift-compatibility clause is vacuous. AtStage takes the shift structures of both sides (sourceShift/targetShift/sourceFirstShift/targetFirstShift) as free instance fields unrelated to A.G/A.F/push/homX/homY, whose own shift fields are also unpinned, so shift/shiftFirst hold for any exchange via Functor.CommShift.ofIso_compatibility. Repair: drop the four fields; state shift on the composite A.G ⋙ RHom(M,-) ⋙ push with the shift structures it inherits from A.rightShift, homXShift and pushShift, target homYShift (A.F.obj M), and shiftFirst through A.F.op with first-variable Hom shifts; pin the ring-stage Hom and push shifts to the ambient signed internal-Hom shifts (RingedInternalHomSignedCalculus) and the derived direct-image shift, and require the field-stage Change vertical isos to commute with shifts. Otherwise checked OK: hypotheses (separated finite-type f, finite-type X and Y, no admissibility), the four coefficient categories, exchange direction, naturality, Yoneda/transpose normalization, reduction and scalar squares, universes, edge cases, docstrings with all 15 steps, only sorry, lean.statement verbatim, stmt_deps additions allowed; nt_compile clean in 46.0 s with no error or warning.
+

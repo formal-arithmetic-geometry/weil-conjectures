@@ -1,0 +1,40 @@
+# Worker report: lem-amb-cartier-kummer-map
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-amb-cartier-kummer-map.json`: existing item, statement retained, proof split into 13 explicit steps, status `split`; no new nodes and no Mathlib leaves.
+- `citations.json`: one verbatim full-statement quote for every cited node in every proof step.
+
+## Attachments
+
+None. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` by the item id, Cartier/Kummer terms, and the relevant Kummer modules. The source contains general Kummer-class and Kummer-boundary operations, but no sorry-free declaration stating this item. The existing declarations use an assumed `HasKummerClass` datum and do not construct the supported Cartier map required here.
+
+## WANTED
+
+No new document is needed for the current split. The relative torsor-with-specified-open-section refinement remains agent-stated in the existing node `lem-amb-relative-torsor-cohomology`; its source records the ordinary Stacks Tag 03AJ torsor result and the relative refinement. The current blueprint proof and the cited Stacks files are present locally.
+
+## What was checked and corrected
+
+The imported item had a long nine-step proof, stale master-blueprint provenance, an overcompressed supported-Hom/scalar-extension paragraph, and a finite-twist argument that cited a restrictive finite-Kummer lemma even though the statement allows arbitrary `m` and does not assume the ramification index divides `m`. I retained the statement exactly and followed the `main-20261015` Cartier blueprint. I rewrote the proof as 13 steps: the Cartier frame and its complement trivialization; its relative torsor class; the Kummer boundary; module/abelian relative-cone comparison; derived scalar extension with the supported source identified by geometric stalks; Cartier pullback; supported etale base change; the pro-etale finite-twist comparison; the open-closed quotient comparison; definition from the etale-origin witness; independence of the auxiliary exponent; coefficient reductions; and pro-etale pullback coherence. The revised proof uses `lem-asd-etale-finite-twist-pullback` for arbitrary invertible finite exponent and `lem-pur-twist-sheaf-locally-free` for the original completed twist, so it does not impose `e \mid m` or assume coefficient flatness.
+
+## Review by Q96
+
+I read the item, the unit `sk-prop-sf-cbc`, the chapter record, the current `main-20261015` node and proof files under `literature/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/`, the older imported master proof, and the source modules `EtaleCohomology/Purity/Smooth/KummerClass.lean` and `KummerBaseChange.lean`. The source modules define Kummer classes and boundaries for a pre-existing normalized datum; they do not give this item's canonical Cartier construction, so there is no attachment.
+
+For step 1, the line-bundle statement [def-pc-divisor-line-bundle] supplies `O_T(D)=I_D^vee`, and [lem-sc-line-bundle-torsor] supplies the line-bundle/frame-torsor correspondence. The local equations and transition identities are elementary once those statements are read. Step 2 uses exactly the relative torsor-classification statement of [lem-amb-relative-torsor-cohomology], including the specified section and the map forgetting it. Step 3 uses the exact Kummer sequence [lem-amb-kummer-any-base] and the relative connecting map in that same node; `n` is invertible because `n=ell^r` and `ell` is invertible on `T`.
+
+Step 4 uses [lem-weil-pbc-derived-module-underlying-comparison] for the module/abelian cohomology comparison and its compatibility with restriction, [lem-amb-closed-support-hom] for the support-Hom cone identification, and [lem-weil-pbc-open-closed-short-exact] for the quotient map whose derived Hom is the forget-support map. Their statements explicitly provide the comparisons used. Step 5 uses [lem-pur-derived-change-of-rings] and [lem-pur-sheaf-ring-derived-coefficient-adjunction] for derived extension and its unit, then [lemma-weil-pbc-finite-stalk-formula], [lem-kun-inverse-image-monoidal], [lem-kun-stalk-as-pullback], and [lem-kun-pullback-constant] to calculate the source stalks as `A` on `D` and zero away from `D`; [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative] justify passing from stalkwise isomorphisms to an isomorphism. This checks the no-flatness claim.
+
+Step 6 checks the Cartier hypothesis at every pulled-back chart: it is precisely what makes the pulled-back generator a nonzerodivisor. The transition and section formulas identify the pulled-back line bundle with `O_{T'}(D')`; [lem-amb-relative-torsor-cohomology] and [lem-amb-kummer-any-base] then give naturality of the relative torsor and Kummer boundary. Step 7 uses [lem-asd-etale-finite-twist-pullback] for the roots-of-unity inverse-image isomorphism and its transition compatibility, the finite-stalk and stalk-conservativity nodes for the supported constant exchange, [prop-weil-pbc-inverse-image-modules-exact] for exact inverse image, and [lem-amb-closed-support-hom] together with [lem-weil-pbc-open-closed-short-exact] to check the support-Hom comparison itself. The step records the hypotheses `D'` Cartier and the geometric-stalk argument explicitly.
+
+Step 8 uses the locally free rank-one finite twist [lem-asd-finite-etale-twist-line], bounded-above flat complexes [lem-pc-bounded-above-flat-kflat-site], the original completed twist definition [def-coefficient-twists-detailed], and the reduction clauses of [lem-pur-twist-sheaf-locally-free]. The cokernel calculation for `M/ell^r M` is elementary; the root-trivializing-cover comparison is the rank-one assertion in the cited finite-twist node. This is the place where I checked the edge cases `m=1` and ramification index `e=2`: no divisibility condition on `m` is introduced.
+
+Step 9 applies the etale open-closed short exact sequence, exact comparison pullback, [lem-cbc-proetale-extension-zero-comparison], and [lem-sf-proetale-open-closed-sequence]. The complement is quasi-compact because on a Cartier affine chart it is a principal open; the cited pro-etale sequence has exactly this quasi-compactness hypothesis. Step 10 uses [def-sf-comparison-derived-pullback] only to transport the already constructed etale witness, and the preceding quotient and twist comparisons identify its composite with the specified `c_1`.
+
+Step 11 checks two allowed exponents by comparing them through their maximum. The Kummer transition is the power map, and [lem-amb-relative-torsor-cohomology] gives its boundary naturality. [lem-asd-etale-finite-twist-pullback], [lem-pur-sheaf-ring-derived-coefficient-adjunction], and [lem-pur-kflat-change-of-rings] state respectively the finite twist comparison, derived adjunction, and termwise successive extension calculation. Step 12 uses the same K-flat calculation for `A_{E,b}\to A_{E,a}` and checks the pure-tensor formulas for source and target reductions. Step 13 uses the explicit base-change constructions [def-weil-proetale-inverse-image] and [def-weil-pbc-site-comparison-morphism], their monoidal composition compatibility [lem-weil-pbc-left-exact-site-inverse-image-tensor], finite constant-ring pullback [prop-weil-pbc-proetale-constant-ring-map], and the previously checked `a_T` and `q_{r,T}` formulas. Identity and composition coherence are reduced to the stated quotient, projection, and tensor identities.
+
+I generated `citations.json` from the exact current statements of all 31 distinct proof dependencies; every step/node pair has a verbatim quote, and the local dependency audit found no missing ids or proof-dependency mismatch. The server checks passed: `check_dag OK` and `review_split.py lem-amb-cartier-kummer-map: PASS; 0 new nodes`. The route notices are generic tool-use advisories, recorded in `split_report.tool_uses` for maintainer review.
+
+## Not duplicates
+
+No new nodes were created, so no duplicate pair needs to be recorded. The existing `lem-amb-relative-torsor-cohomology`, `lem-amb-kummer-any-base`, and finite-twist nodes were reused after reading their statements.

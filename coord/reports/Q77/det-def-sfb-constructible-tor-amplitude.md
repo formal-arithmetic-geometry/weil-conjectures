@@ -1,0 +1,33 @@
+## Worker report
+
+Files written: `dag/nodes/sec-proetale-coefficients/det-def-sfb-constructible-tor-amplitude.json` (definition, split, no Mathlib match), `citations.json` (22 verbatim statement quotations), and this report. No new nodes and no new Mathlib leaves. The prescribed searches are retained in `searches.jsonl`; all four commands were run for this item on 2026-10-17. No Lean was written, compiled, or built.
+
+Attachments: none. I searched the read-only slopmaster2 `WeilConjectures/` tree for the blueprint tag, the target wording, `constructibleFiniteTor`, and Tor-amplitude declarations. The source contains the later finite-coefficient `DerivedCategory.constructibleFiniteTor` API, but no declaration stating this condensed-ring definition and its well-definedness clauses exactly; no sorry-free attachment exists. The upstream master checkout is reference material only and was not used as proof evidence.
+
+WANTED: none.
+
+The imported statement agrees with `literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-tor-amplitude.md`, including the arbitrary-scheme affine-local convention, the pulled-back coefficient object, the internal/sectionwise module identification, and the degree-zero module test in Tor amplitude. I retained every hypothesis and conclusion. I rewrote the imported five proof steps as seven shorter steps so the internal-module comparison, derived tensor comparison, and shift argument are separately auditable; no new lemma node was needed because each non-elementary input is an existing DAG statement. No statement error, source error, duplicate, clause relabelling, or cycle was found.
+
+## Not duplicates
+
+No new nodes were created. I searched the whole DAG and current blueprint for internal/sectionwise module equivalence, derived tensor comparison, K-flat transport, Tor amplitude, and thick-subcategory statements; every fact used is supplied by an existing cited node or by the definitions in the item.
+
+## Review by Q77
+
+I read the chapter `dag/chapters/sec-proetale-coefficients.json`, unit `dag/units/sk-def-sfb-constructible.json`, the imported item, and both the main-20261015 statement and proof files. I also opened the complete current statements of all twelve proof dependencies: `det-def-sfb-constructible-local-model`, `def-weil-abstract-derived-category`, `sk-def-sfb-derived-tensor-hom`, `det-def-sfb-sheaf-tensor-structure`, `det-def-sfb-sheaf-tensor-closed`, `def-weil-pbc-internal-abelian-sheaf-module-equivalence`, `def-sfb-modobj-relative-tensor`, `lem-pc-sites-sheaf-tensor-bilinear-universal`, `def-weil-sheaf-of-modules-category`, `lem-weil-pbc-ringed-projection-mate-exact`, `def-weil-triangulated-category`, and `lem-sf-derived-homology-long-exact`. `citations.json` quotes each cited node's current statement verbatim; it does not quote a proof or use a definition node for a theorem absent from its statement.
+
+Step 1 uses the local-model node for restriction and finite scalar models, the abstract-derived-category node for functorial cohomology, and the derived-tensor node for functorial relative derived tensor. Those statements say exactly the three isomorphism-invariance facts used. The conclusion that the resulting full subcategories are replete is the direct definition-level consequence.
+
+Step 2 is the coefficient-category comparison. The sheaf-tensor-structure statement supplies strong monoidality, the sheaf-tensor-closed statement supplies colimit preservation, and the internal-module equivalence supplies the sectionwise module category and preservation of underlying sheaves. The relative-tensor definition supplies the balanced coequalizer, while the bilinear-universal node identifies its representing functor with the ordinary sheaf tensor. I checked the site and ring hypotheses against the stated pro-étale setting; no finiteness assumption on `X` or `Lambda` is introduced.
+
+Step 3 applies the abstract derived-category cone and shift construction to the exact internal/sectionwise equivalence. The derived-tensor statement explicitly says Layer B is the two-variable K-flat functor of the relative tensor, so the K-flat resolution comparison is the same construction on both sides. The argument uses only preservation of finite biproducts, addition, quasi-isomorphisms, and acyclicity under an equivalence; it does not import an unstated theorem about a different tensor product.
+
+Step 4 uses the exactness clause of `lem-weil-pbc-ringed-projection-mate-exact`, whose statement explicitly says derived tensor is exact in each variable. The small-site clause of `def-weil-sheaf-of-modules-category` supplies the universe convention, and `def-weil-triangulated-category` supplies the meaning of exact functor. The shift formula and cohomology indexing come verbatim from `def-weil-abstract-derived-category`; checking `q` outside `[a-1,b-1]` gives `q+1` outside `[a,b]`.
+
+Step 5 uses the same exact-tensor statement to obtain a distinguished triangle after tensoring, and `lem-sf-derived-homology-long-exact` supplies the exact cohomology segment. Both outer terms vanish in degrees outside `[a,b]`, so the middle term vanishes; this is the only extension argument and is uniform in every module `N`.
+
+Step 6 uses functoriality of the derived tensor and cohomology statements to transport a retract identity. Factoring the identity through the zero cohomology object forces the retract's cohomology to be zero outside the interval. This proves the direct-summand clause without assuming idempotent completeness.
+
+Step 7 uses exactness and additivity to handle the zero object and common interval enlargement, rotates triangles using the triangulated-category axioms, and uses the cone matrix in the abstract-derived-category statement for finite biproducts. The cone and shift closure makes TR1--TR4 restrict to the full replete subcategory, while Step 6 supplies closure under existing direct summands. The final intersection is exactly clause 4 of the item's definition, so no independent claim that `Dbc` is triangulated is made.
+
+I tested the definitions on the zero ring, the empty scheme, the zero complex, a degree-zero module (amplitude `[0,0]` when tensor-exact), zero test module, shifts by both signs, a triangle with a zero outer term, and a retract of the zero object. All clauses behave as stated. Every proof step is below the 2000-character long-step threshold. The off-unit generic tensor facts are retained in `split_report.tool_uses` for maintainer review; the unit route itself is unchanged. No SGA source, compiler, Lake command, live-project write, or repository git command was used.

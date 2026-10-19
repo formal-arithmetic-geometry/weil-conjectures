@@ -1,0 +1,23 @@
+Files written:
+
+- `dag/nodes/sec-six-functors/lem-coef-ind-presheaf-small-locality-generators.json`: split statement with eight proof steps; no new nodes.
+- `citations.json`: verbatim statement quotes for every cited node in every proof step.
+- No Mathlib leaves or unsplit child nodes were created.
+
+Attachments: none.
+
+WANTED: an archival copy of Gepner–Haugseng–Nikolaus, *Lax Colimits and Free Fibrations in infinity-Categories*, arXiv:1501.02161v3, specifically Definition 9.1, Proposition 9.12, Proposition 9.16, Corollary 9.17, Proposition 10.5 and Lemma 10.6. The proof follows the online HTML read on 2026-10-17 because no copy is stored under `literature/`.
+
+The imported item had an empty proof and its statement dependencies omitted the explicit representable-locality argument. I filled the proof while preserving its hypotheses and its two conditions. I did not create a node for the assertion that a lambda-small colimit is detected by fibre pushouts and less-than-lambda coproducts: the existing `lem-coef-infinity-limits-products-pullbacks` states exactly this bounded limits criterion after passing to the opposite category. I likewise reused `lem-coef-infinity-presheaf-colimit-locality`, which states the Yoneda representable map and identifies its locality condition with the corresponding limit comparison. No new node duplicates an existing statement, so a separate duplicate section is unnecessary.
+
+## Review by Q18
+
+I read the item, the unit `sk-prop-sf-biduality-general`, its imported blueprint ancestor `prop-coef-integral-exceptional-adjoint`, and the online GHN text at Definition 9.1, Proposition 9.12, Proposition 9.16, Corollary 9.17, Proposition 10.5 and Lemma 10.6. The item is an auxiliary locality statement used by the Ind-presheaf accessibility route; it is not a Verdier-biduality conclusion. I checked the statement’s universes, the small base (A), the coherent functor (F_0), the cocartesian fibration (p:E\to A), the relative cone, the cylinder transformation, and the empty coproduct clause.
+
+Step 1 uses the existing GHN relative-cone/presheaf-fibre statement for the same (D), (j), (X), and (Psi\to p^*X); its statement explicitly supplies the coherent cylinder model and the cocartesian pullback condition. Step 2 uses `lem-coef-infinity-yoneda-presheaf-limits`, `lem-coef-infinity-relative-cone-equivalence`, and `lem-coef-infinity-coslice-colimit-formula`; I verified that these state limits in spaces, opposite duality, and the coherent slice/coslice formula, including the empty diagram. Step 3 uses the exact bounded products-and-pullbacks criterion in `lem-coef-infinity-limits-products-pullbacks`, with (κ=λ), after taking opposites; I checked that the fibre has only the λ-small colimits assumed by the item and that empty products are included.
+
+Step 4 spells out that a cocartesian edge gives the square in condition (i), with the comparison map Ψ(f) to the pullback (X(b)\times_{X(a)}Ψ(e)). This is an elementary unpacking of the cited coherent-diagram definitions. Step 5 uses `lem-coef-join-slice-cocone-comparison`, opposite duality, and the coherent cone criterion to put each fibre test into the common-cone-point shape required by the item. Step 6 uses the statement of `lem-coef-ghn-ind-presheaf-cartesian-realization` to identify these double-cone limits with limits in the coherent slice; I checked the empty and coproduct cases separately, including Ψ(0_a)\to X(a), and the pushout case as a slice pullback.
+
+Step 7 checks smallness directly: cocartesian edges, vertices of (A), maps from each cardinal discrete shape (I<λ), and the finite pushout shape are all sets in the smaller universe; adjoining the two cone vertices preserves smallness. Step 8 cites `lem-coef-infinity-presheaf-colimit-locality`, whose statement gives the exact representable map (s_r) and says its precomposition map is the limit comparison, including coherent legs. I checked that the chosen (D) and all (B_r) satisfy that node’s smallness assumptions. Every citation is accompanied by a verbatim quote in `citations.json`, and every proof dependency is the union of the step citations. The only generic off-unit tool use is coherent cone/mapping-space calculus; it is declared in `split_report.tool_uses`.
+
+I initially considered adding a fibrant completion of the relative simplicial pushout, but removed that alteration after checking that the cited GHN relative-cone theorem uses the same coherent relative-cone model and already supplies the needed quasicategorical presheaf fibre. The delivered statement therefore stays faithful to the imported source statement.

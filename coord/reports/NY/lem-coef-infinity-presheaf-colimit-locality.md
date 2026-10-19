@@ -1,0 +1,29 @@
+## Worker report
+
+1. Files written: `dag/nodes/sec-six-functors/lem-coef-infinity-presheaf-colimit-locality.json` (item, statement unchanged, split into five proof steps); `citations.json` (verbatim quotes for every cited node at every step); `searches.jsonl` (actual msearch output); and this report. No new DAG nodes or Mathlib leaves were created. No Lean, compiler, Lake, live project, or launcher file was written.
+
+2. Attachments: none. I searched `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the item id, its blueprint tag, and the presheaf/Yoneda colimit-locality terminology. No sorry-free project declaration states the item. The item has no matching Lean declaration; the imported record has no `lean_audit` field, and no maintainer-owned audit metadata was added.
+
+3. WANTED: Lurie, *Higher Topos Theory*, Proposition 5.3.6.2 (proof of (3), printed pp. 414–415), Proposition 5.1.2.2, Corollary 5.1.2.3, and Lemma 5.1.5.2. HTT is not archived in `literature/`; the proof is therefore recorded as agent-written and follows the stated blueprint route. No external document was downloaded.
+
+4. What was wrong or changed: the imported item was unsplit. I retained its exact statement, statement dependencies, blueprint ancestry, and existing Mathlib search records. The proof now explicitly separates presheaf colimit existence, Yoneda evaluation, the colimit-to-limit mapping-space formula, naturality identifying precomposition with the comparison map, and the representable/empty-shape consequences. Every non-elementary input is an existing DAG statement; no clause of the item was moved into a new node.
+
+5. Nothing remains unfinished in this stage-1 split. The cited existing lemmas remain separate queue items where applicable; this delivery does not claim to formalize them.
+
+## Not duplicates
+
+`lem-coef-infinity-presheaf-colimit-locality` vs `lem-coef-infinity-yoneda-presheaf-limits`: the existing node gives the general mapping-space criterion for an actually colimiting cocone and objectwise functor-category limits; this item additionally constructs the map `s_λ` for an arbitrary non-colimiting cocone and characterizes locality under precomposition.
+
+`lem-coef-infinity-presheaf-colimit-locality` vs `lem-coef-infinity-yoneda-evaluation`: the existing node is only the representable evaluation equivalence `Map(y(a),X) ≃ X(a)`; this item also identifies maps out of a colimit of representables and the locality comparison.
+
+`lem-coef-infinity-presheaf-colimit-locality` vs `lem-coef-infinity-presheaf-free-cocompletion`: the existing node proves existence and the universal free-cocompletion property of `P(C)`; this item gives the explicit mapping-space comparison and locality test for a specified cocone.
+
+## Review by NY
+
+I read the current item node, the `sec-six-functors` chapter record, the `sk-prop-sf-biduality-general` unit record, the blueprint ancestor `prop-coef-integral-exceptional-adjoint`, and the complete statements of `def-coef-presentable-infinity-category`, `def-cbc-enhanced-diagrams-cones`, `lem-coef-infinity-presheaf-free-cocompletion`, `lem-coef-infinity-yoneda-evaluation`, and `lem-coef-infinity-yoneda-presheaf-limits`. The item statement agrees with the imported source: `C` is small, `K` is any small simplicial set, `λ` need not be colimiting, `B_λ` is the presheaf colimit, and all coherence and empty-base clauses are retained.
+
+Step 1 uses the free-cocompletion statement, which explicitly says that `P(D)` has small mapping spaces and admits all small colimits; this supplies the colimit cocone and the induced `s_λ`. Step 2 uses the exact Yoneda-evaluation statement, including its naturality in the presheaf and object. Step 3 uses the dual colimiting-cocone clause of the Yoneda-limits statement and then the evaluation statement at every `p(k)`; it therefore says exactly why the limit of mapping spaces becomes `lim X(p(k))`. Step 4 uses the naturality clauses of both cited statements to identify the actual precomposition map, with component `X(λ_k)` and higher coherence `Xλ`; no unquoted comparison theorem is being assumed. Step 5 applies the same dual criterion in `C` when `λ` is colimiting, with the correct contravariant formula `Map_C(a,c) ≃ lim Map_C(p(k),c)`. For an arbitrary empty cocone only the presheaf colimit is initial and its mapping-space target is terminal; the apex `a` in `C` is required to be initial only if that cocone is colimiting. None of these steps is marked elementary because each uses a cited naturality or universal-property assertion.
+
+I checked the hypotheses at each citation: the free-cocompletion node applies to a small infinity category; the Yoneda evaluation node applies to `D=C` and `F=X`; the Yoneda-limits node applies to `E=P(C)`, the coherent diagram `y∘p`, and the colimit cocone constructed in Step 1. The representable specialization uses `E=C` and `X=y(c)`. Small `K`, empty `K`, and non-colimiting `λ` are all allowed by the statements. I tested the edge cases `K=∅` (initial apex and terminal limit), `K=Δ⁰` (the comparison is `X(a)→X(p)`), and a colimiting cocone with `X=y(c)`; each reduces to the displayed criterion. There is no dependency cycle, and `proof_deps` is exactly the union of the step uses.
+
+The four required Mathlib search kinds were run for the item with `msearch.py` and their actual outputs are retained in `searches.jsonl`; ordinary-category hits such as `CategoryTheory.Limits.colimitYonedaHomIsoLimit` were read and rejected because they do not state the coherent infinity-categorical assertion. No SGA source is used. Self-review corrected the variance of the representable formula and separated arbitrary empty cocones from empty colimiting cocones. It also expanded step 4 to display the naturality square on entire coherent cones. All five steps have fewer than 1100 characters. The item is ready for the required remote `deliver.py` dry run.

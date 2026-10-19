@@ -1,0 +1,78 @@
+1. Files written:
+- dag/nodes/sec-poincare-duality/nt-target-poincare-uncurry.json: item, split into three explicit formal calculation steps; agent proof.
+- dag/nodes/sec-poincare-duality/lem-pod-closed-uncurry-laws.json: statement, Mathlib leaf. The two clauses match CategoryTheory.MonoidalClosed.uncurry_curry (Closed/Basic.lean:180) and uncurry_natural_left (same file:175).
+- citations.json: verbatim statement quotations for each citation, at steps 1 and 3. Existing searches.jsonl retains the actual wrapper queries and results. Sandbox repair.py is historical working material, not a delivery file.
+
+2. Attachments: none. I searched the supplied /home/ubuntu/weil-src-slopmaster2/WeilConjectures tree for the exact target id, uncurry_poincareMap, poincareMap and trace/cup terminology. No project declaration states this relative condensed identity. The trace-cup structures in ZetaLinearAlgebra and the ordinary étale coefficient trace/cup declarations do not state it. A path mentioned by the previous report, Etale/Derived/PoincarePairing.lean, is absent in this supplied snapshot and is not evidence for this retry. Upstream master is reference material, not a finished attachment.
+
+3. WANTED: WeilConjectures/PoincareDuality/Abstract.lean, Verdier.lean and SmoothPurity/Defs.lean at the target source commit d838516ef, to inspect the imported implementation and exact effective smoothness signature. These imports are absent from the allowed reference tree. Poincare.lean itself is now available and was read; the earlier claim that it was missing is obsolete.
+
+4. What was wrong and repaired:
+- The initial, never-committed auxiliary lem-pod-uncurry-poincare-formal used a left-unitor identification for arbitrary K. This is ill-typed (see STATEMENT-DISPUTED below) and also moved the whole item to one auxiliary. It was removed in the earlier repair. The present leaf consists only of two general Mathlib laws; the item's three steps carry the argument.
+- The earlier use of point-valued sk-def-pairing could not identify the relative maps over arbitrary S. That dependency is removed. The current proof uses precisely the operations introduced in the item, in its relative condensed categories.
+- The initial missing notion citation, TeX and proof_origin findings are repaired: the leaf cites the actual monoidal-category definition and specifies its chosen adjunction inline; new mathematics is TeX; the item has an agent proof_origin. There is no unsplit auxiliary with a proof hidden inside its statement.
+- The target and nt-target-poincare-tate-bc now exist in the shared DAG. The earlier missing-target and missing-Tate-dependency failures are obsolete. The Tate dependency is retained; boundedness is not inferred from naturality.
+- Blueprint ancestry remains represented inconsistently by the base metadata. The target explicitly binds to sk-thm-sf-identification, but its created.item is a launcher description rather than a node id. The required `python3 tools/blueprint_refs.py ancestor nt-target-poincare-uncurry` currently prints `a node created for nt-target-poincare-uncurry has blueprint.from.node = None`. The inherited sandbox leaf has from.node=null, matching that command. I have not changed the target's creation stamp, its unit, its explicit blueprint binding, or any shared tool. The leaf's place explicitly identifies the first paragraph of the registered sk-thm-sf-identification proof and the transpose calculation it serves. This supersedes the old report's assertion that the sandbox leaf still has a non-null from.node.
+
+5. What could not finish: final server acceptance is pending the required no-push dry run. There is also an exact-signature concern recorded below for the second reader. No shared project or launcher file, Lean file, unit record, or maintainer-owned metadata was changed. No compiler, Lake command or local copy of a forbidden checker was run. Nothing was pushed.
+
+## STATEMENT-DISPUTED
+
+The initial auxiliary, not the target, was ill-typed: for vector spaces K=Q^2 and D=Q, the left unitor 1 tensor D -> D transposes to D -> Hom(1,D). It cannot identify D with Hom(K,D), which has dimension two. The auxiliary was removed. The item uses K=1_X throughout; its mathematical statement was not weakened. Plain-text arrows in the inherited item were changed to TeX arrows only.
+
+## Source-signature concern
+
+I read literature/upstream-master-20261017/WeilConjectures/PoincareDuality/Poincare.lean, lines 67–136. Its variable block and module introduction assume a smooth morphism of pure relative dimension d. Its definitions of the purity map, trace and Poincare map use that setting, whereas line 130 explicitly says `omit [SmoothOfRelativeDimension d p.left] in` before the target. Without the absent imported modules, and without compilation (forbidden here), the effective signature cannot be certified. The natural-language target follows the source's stated smooth setting; the split's identity is formal for any specified purity map and does not assert existence of one outside that setting. This is disclosed for exact-binding review, not used as a finished-proof attachment or concealed by adding a new geometric hypothesis.
+
+## Review by N4
+
+I reread coord/brief-stage1.md, roles/worker.md, stages/1-dag.md, SETUP's three levels, GOAL, dag-sync, delivery-errors B–E, the current target, its chapter record and the sk-thm-sf-identification unit. I read the current main-20261015 identification proof paragraph: it identifies the tensor–Hom chain as the transpose of cup, evaluation and normalized trace. Its point-valued perfectness and degreewise clauses are broader than this relative unit-object identity, so this item cannot truthfully realize the whole unit and no unit realization fields are changed. The proof is explicitly agent-written; it supplies the formal calculation rather than claiming that the blueprint paragraph proves the full relative geometric framework.
+
+For the item I read the upstream variable block and definitions of boundedConstructibleTateTwist, boundedConstructibleSmoothPurityIso, trace, poincareMap, cupProduct and the target. They confirm the condensed coefficient ring, relative base S, shift 2d, inverse purity map, and order cup then trace. No ordinary étale/condensed equivalence, finite-field specialization, global-section identification, or passage to the point category is made.
+
+For the only new node I read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:145–198 in the pinned source. Line 180 is cancellation of curry by uncurry, and line 175 is precomposition naturality. Line 194 defines uncurry by tensoring followed by evaluation. The two-clause match records both declarations, common file, and their individual lines. I opened def-sfb-monoidal-category: its statement supplies the tensor bifunctor, unit, natural unitors and their meaning. The leaf specifies the natural adjunction bijection inline, so it needs no scheme, dualizability or nonzero-object hypothesis. Its proof and proof_deps are empty, as required for a leaf.
+
+Step 1 cites exactly the leaf's two displayed laws, quoted verbatim in citations.json. With F=Rp_!, R=Rp^!, U=Lp^*, V=Rp_*, A=1_X, B=1_S, T the shifted Tate object, D=RB, theta=purity inverse, j=curry(lambda_D), and h=theta;j, the source definition gives PD=Vh;Phi. Naturality of uncurry in precomposition gives the first tensor factor 1_FA tensor Vh, and inverse cancellation evaluates the defining transpose Phi. The domain is FA tensor VT and the codomain is B throughout. These are not additional existence or preservation assertions.
+
+Step 2 is elementary: it writes the projection transformation's naturality equation at Vh and the adjunction counit's naturality equation at h. Their common intermediate arrow is UVh. Substitution and the tensor/functor composition axioms give exactly the displayed five factors. No projection map is inverted, and neither properness nor a projection-formula isomorphism is silently used. This step invokes only the naturality and functoriality explicitly present in those definitions, so it has no non-elementary citation to omit.
+
+Step 3 cites the cancellation clause of the same leaf, again quoted verbatim. Since A is literally the tensor unit, evaluation of j is lambda_D. Naturality of the left unitor moves theta across it, yielding lambda_T;theta. Applying F and comparing the factors with the displayed definitions gives cup_c followed by Tr_p. The two tensor factors stay in the stated order; no symmetry or suppressed reassociation is needed. The proof never uses sk-def-pairing beyond its statement's point-valued scope.
+
+I tested the invalid old auxiliary on K=Q^2 as above. For the replacement laws, identity precomposition and zero vector spaces give the defining inverse/naturality equations, with no exceptional hypotheses. For the item, p=id and d=0 give the same unit evaluation equation; empty or zero objects still satisfy every naturality square. No nonempty fiber, dimension positivity or division is used. The smoothness, characteristic, coefficient and purity data remain in the statement; the proof only establishes the requested compatibility once those data are supplied.
+
+I repeated whole-DAG and whole-blueprint searches for uncurry, curry, tensor/internal Hom, uncurry_curry and uncurry_natural_left. There is no blueprint uncurry match. The curry hit lem-sf-hom-comparison-finite-free and the sheaf/coherent Hom-model statements have specified resolution or coefficient hypotheses and do not state these two generic laws. sk-thm-sf-identification and thm-pod-identification-of-the-comparison concern a point and broader duality statements, not the exact relative target. The new leaf is strictly smaller than the item, creates no proof cycle, uses no SGA source, and has no Stacks tag shared with another node. Hence there are no same-tag pairs requiring a Not duplicates entry and no off-route geometric tool declaration is needed.
+
+All recorded Mathlib searches are the actual wrapper queries retained in searches.jsonl. I inspected their hits and reread the exact successful matches; zero-hit combined-name queries remain described as zero hits, and no unavailable service is described as a negative mathematical result. I reran local JSON parsing, equality of proof_deps with the union of uses, verbatim citation checks, and membership of every recorded query in the actual search log; these passed. The dry run, which includes the server preflight/review_split/check_dag, is still required before READY.
+
+## Current dry run
+
+`python3 /home/ubuntu/weil-launcher-nt/deliver.py N4 nt-target-poincare-uncurry --no-push` is pending inside the delivery service without output. An independent `srvcheck.py weil-newtargets N4 nt-target-poincare-uncurry check_dag` is also pending. Final results will be appended when returned. No acceptance is claimed yet.
+
+The independent server command `python3 /home/ubuntu/weil-launcher-all/srvcheck.py weil-newtargets N4 nt-target-poincare-uncurry check_dag` completed successfully on this retry: `check_dag OK: no finding introduced by the sandbox or on its nodes`. The required deliver.py no-push preflight remains pending; this result alone is not READY.
+
+## Accepted no-push dry run
+
+The required command `python3 /home/ubuntu/weil-launcher-nt/deliver.py N4 nt-target-poincare-uncurry --no-push` completed successfully on this retry:
+
+> OK (not pushed) deliver/N4/nt-target-poincare-uncurry at c82b000983: preflight passed
+
+This supersedes the historical B9 failure. The accepted sandbox has one new node, the Mathlib leaf lem-pod-closed-uncurry-laws, and the three-step item proof. The server preflight (including check_dag and review_split) passed. The independent server check_dag also passed. The ancestry command/base-metadata discrepancy and upstream source-signature concern remain disclosed above for the second reader; no maintainer metadata or source statement was forged. Nothing was pushed. The sandbox is ready for the required fresh second reading and delivery.
+
+## Second reading by N4
+
+- Item statement: reread upstream `Poincare.lean` lines 67–136; checked the prime/positive-characteristic assumptions, finite type/separated scheme assumptions, dimension and chosen purity, and the displayed trace/cup/transpose clauses. These agree with the source's explicit setting and definitions. Line 130's `omit [SmoothOfRelativeDimension d p.left]` remains the disclosed exact-signature concern: the imported definition modules are absent, so no effective Lean-signature certification is claimed. The formal proof needs only the specified purity map.
+- New node `lem-pod-closed-uncurry-laws`: reread Mathlib `CategoryTheory.MonoidalClosed.uncurry_natural_left` (line 175) and `uncurry_curry` (line 180); both clauses are exact, with the adjunction and composition convention stated inline. Its Mathlib searches and source lines are recorded; it is a statement-only leaf.
+- Step 1: checked against the target definitions of `poincareMap` and Verdier exchange; the cited uncurrying cancellation and precomposition laws give precisely the displayed transpose expansion.
+- Step 2: checked the projection and adjunction-counit naturality equations against their defining natural transformations; the substitution and functoriality calculation is elementary and uses no hidden geometric hypothesis.
+- Step 3: checked uncurrying cancellation against the Mathlib leaf and left-unitor naturality against `def-sfb-monoidal-category`; the resulting factors are exactly `cupProduct` followed by `trace`, in the displayed tensor order.
+- Edge cases: identity morphism with relative dimension zero, zero/empty objects, and identity precomposition satisfy the same equations; the removed left-unitor auxiliary remains invalid for a non-unit object (tested on a two-dimensional vector space).
+
+Changes made in this second reading:
+
+- Added `def-sfb-monoidal-category` to step 3 and to `proof_deps`, because left-unitor naturality is a cited structural fact rather than an uncurry law.
+- Added the verbatim `def-sfb-monoidal-category` quotation to `citations.json` and named it directly in step 3.
+- Rechecked JSON, citation verbatimness, dependency closure, blueprint ancestry, and the no-SGA route. The relative calculation remains strictly smaller than the target and has no cycle.
+
+Independent second-reader searches: `leanfinder "Naturality of the tensor Hom adjunction hom equivalence in its source object"` returned eight rigid tensor–Hom and evaluation/coevaluation naturality hits; `grep "uncurry_natural|uncurry_curry" CategoryTheory/Monoidal` returned twenty hits including Basic.lean lines 175 and 180. Both outputs are recorded verbatim in the leaf from searches.jsonl. I reread the pinned source lines 145–198, and existing nodes lem-weil-duality-pairing, lem-sc-picard-perfect-pairing-of-counit, lem-sc-picard-canonical-base-change-comparisons and lem-pc-tensor-hom-evaluation-precomposition: their geometric/module hypotheses and evaluation/perfectness conclusions do not state the two generic closed-category laws. Stacks categories.tex, definition-monoidal-category (Tag 0FFK in the definition node), and its unit paragraph confirm the chosen unit convention. No new Stacks-sourced statement was introduced.
+
+Second-reader fresh dry run: `python3 /home/ubuntu/weil-launcher-nt/deliver.py N4 nt-target-poincare-uncurry --no-push` completed with `OK (not pushed) deliver/N4/nt-target-poincare-uncurry at 9bb199d171: preflight passed`. This validates the repaired node/citation/search records and second-reading section through the required server preflight, check_dag and review_split. The final delivery command follows.

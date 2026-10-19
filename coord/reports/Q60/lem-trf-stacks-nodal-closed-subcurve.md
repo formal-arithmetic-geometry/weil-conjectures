@@ -1,0 +1,51 @@
+# Q60: lem-trf-stacks-nodal-closed-subcurve
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-stacks-nodal-closed-subcurve.json`: item, statement, status split; nine proof steps; no Mathlib match.
+- `citations.json`: one verbatim statement quote for every node used in every step.
+- No new nodes, no new definitions, no new Mathlib leaves, and no unit-record edits.
+
+## Attachments
+
+None. I searched the project declarations under `/home/ubuntu/weil-src-slopmaster2/WeilConjectures/` for the exact blueprint tag, nodal/closed-subcurve terminology and the Stacks label. No declaration of the item was found. The keyword hits are unrelated explanatory docstrings. I also searched the read-only master source; it supplies no finished attachment. This item has no existing Lean declaration recorded in its node.
+
+## WANTED
+
+None: all documents used are present locally.
+
+## Audit and corrections
+
+The repository's item was unsplit with an empty proof, and the sandbox initially contained only dispatcher marker files. I retained the statement, source, ancestry, creator metadata and inherited search records, and supplied the full proof rather than introducing a child that restates Tag 0E38. No statement dispute was found. The statement's explicit split-node hypotheses are stronger than the source's general nodal convention; its conclusion is exactly the split specialization needed by its parent. Finite type, rather than properness, gives finiteness of the boundary.
+
+The source is `literature/stacks-project/curves.tex`, Tag 0E38, label `lemma-closed-subscheme-nodal-curve`, statement and entire proof (lines 4577–4646 in this copy). Its displayed component-completion maps contain a repeated target subscript: the second map must go to the other component, Z. My proof spells out both quotient maps, so does not reproduce that typographical error. The proof does not cite the parent `lem-trf-nodal-subcurve-boundary`, which would make a cycle.
+
+I read the chapter and unit records and the current blueprint route, and searched all imported blueprint nodes with `blueprint_refs.py search subcurve` and `search nodal` (no matching blueprint node); the nearest ancestor is `lem-trf-local-term-locality`. The existing ancestry and its geometric-input place remain appropriate. This is the existing nodal-subcurve geometry input below the unit, not a replacement of a unit step or of a chapter route. The off-unit citations are generic algebra and zero-dimensional topology tools and are declared with reasons in `split_report.tool_uses`.
+
+Mathlib searches were run through the required logged command only. The sandbox's `searches.jsonl` contains grep, Loogle, LeanSearch and two differently phrased LeanFinder searches. All returned successfully. I read the returned declaration names and types: reduced-scheme results do not control singularities of a union of components; Weierstrass good-reduction and nonsingularity results concern another kind of object; smooth/etale locus theorems do not prove the subcurve theorem. The finite product decomposition of an etale field algebra assumes etaleness and supplies no nodal-subcurve or reduced-boundary implication. Thus none is an exact match or a one-line specialization of this item. All actual searches are appended without inventing queries or replacing inherited records.
+
+## Review by Q60
+
+I checked B–E of `coord/delivery-errors.md` against the actual item and the source, with each cited node's statement open. There are no new unsplit nodes to check for B1/B2, new notions, duplicate IDs, sources, new-node Mathlib leaves or relabelled clauses. The item introduces its objects and keeps its definition references. JSON uses single TeX escapes in the decoded strings. Every step has a Boolean elementary flag, its own source, and only existing, unmerged node IDs. All non-elementary inputs are named as nodes; the union of uses is exactly proof_deps. No proof step exceeds 2000 characters. The two elementary steps merely apply the component-case distinctions already proved, and create no independent hidden lemma.
+
+For Step 1 I read the statements of `lem-weil-pbc-finite-type-over-noetherian`, `lem-trf-complementary-pure-subcurve-components` and `lem-trf-reduced-scheme-image`. The first applies over the Noetherian field, the second has exactly the required reducedness and dimension hypotheses and supplies both complementary component unions, and the third identifies the scheme-theoretic closure, not just its support. The argument that T has no nonclosed point is written out using chains of irreducible closed subsets of a one-dimensional scheme. Quotient rings and closed quasi-compactness verify Noetherianity of T. This corrects the potential confusion between the reduced topological closure and the scheme-theoretic closure.
+
+For Step 2 I read `lem-weil-pbc-smooth-over-field-regular-local`, `lem-sc-regular-local-domain` and `lem-weil-pbc-spec-irreducible-components-minimal-primes`. I use smoothness only on an affine neighbourhood where it holds; its local ring is regular and hence a domain. The component/minimal-prime statement then gives the single incident component. The open equality Y=X follows from the actual reduced component union of Step 1 after removing the other components, not merely from set containment. No claim about separability of all smooth closed points is used.
+
+For Step 3 I read the entire statements of `lem-weil-pbc-local-completion-faithfully-flat`, `lem-weil-pbc-local-completion-local-ring`, `lem-weil-pbc-power-series-field-cohen-regular-complete` and the same component/minimal-prime node. The first explicitly includes surjectivity on spectra, needed to lift each minimal prime. The second supplies the maximal ideal and residue comparison. Applying the power-series theorem with a field and one variable gives exactly local domain and dimension one. Primality and uv=0 give the three-prime list in the completed node ring; no unproved comparison of geometric and algebraic branches is being assumed. A closed point on each dimension-one component has a strict generic specialization and there is no longer chain, so the relevant local quotients have dimension one.
+
+Step 4 is elementary: if every incident component is retained, deleting all nonincident components gives equality on a neighbourhood and hence equality of the actual local k-algebras and completions. It handles an irreducible nodal curve as well as the case where both components at a crossing belong to Y. A node need not have two distinct global components.
+
+For Step 5 I read `lem-trf-curve-normalization-completion`, `lem-weil-pbc-local-completion-quotient`, `lem-weil-pbc-faithfully-flat-ideal-contraction` and `lem-weil-pbc-zero-locus-eq-iff-radical-eq`. The first really states reducedness and dimension one of the completed ring; I use that clause only, applied to each domain A/p_i, not to an arbitrary reduced Noetherian ring. Each A/p_i is local and essentially of finite type over the field, so its hypotheses hold. The quotient-completion statement identifies the induced maps and their kernels, not only abstract isomorphism types. The radical-intersection statement justifies the radical-ideal list; the expansion c+u f(u)+v g(v) proves the intersection of the two axes is zero. Faithfully flat contraction excludes zero extended ideals and identifies the two distinct component ideals with the two different axes. This fills the nontrivial identification which the source compresses into its branch paragraph. It does not create a duplicate node for that inline computation.
+
+For Step 6 I again checked the local-completion maximal-ideal statement and ideal-contraction statement. They say exactly what is needed to descend the equality of extended ideals p_1+p_2=m; there is no inference from equality of completed rings alone. The local intersection is the quotient by the sum of the two actual component ideals, so it is precisely F, with the inherited k-algebra structure.
+
+For Step 7 I checked `lem-weil-pbc-power-series-field-cohen-regular-complete`, `lem-weil-pbc-completion-regular-local` and `lem-weil-pbc-regular-local-separable-residue-smooth` against Algebra 00TV and More on Algebra 07NY. The axis completion is regular, the component local ring is Noetherian, and the residue field is the same finite separable F specified at the ambient nonsmooth point. The affine coordinate ring of the closed subcurve is finite type, as required by the smoothness criterion. No perfectness or algebraic closedness of k is assumed. The supporting completion source 00MA and the contraction source 05CK were also read in `algebra.tex`; reducedness of the completed curve quotient is the completion clause of Varieties 0C3V, read in `varieties.tex`.
+
+Step 8 merely assembles the preceding cases: the only nonsmooth closed points of Y are the unchanged ambient nodes; boundary points are precisely in the mixed two-component case, hence are ambient nodes and smooth on Y. Step 9 uses exactly the conclusion of `lem-sc-zero-dim-noetherian-finite-discrete`: finite discrete underlying space, including the empty scheme. I also read Properties 0AAX. For each open singleton I explicitly identify an affine neighbourhood and its stalk; Step 6 then makes it Spec F. This proves the scheme decomposition, not only a bijection of points, and finite separability was verified locally at the ambient node.
+
+Small cases checked: Y empty and Y=X (empty boundary); a smooth irreducible curve (Y equals it locally); the two axes uv=0 with Y one axis (intersection is F and that axis is smooth); both axes retained (the node stays a node and is not boundary); an irreducible split nodal curve (one global component, two formal branches, handled by Step 4); disconnected curves and nonseparated finite-type curves (the argument uses only the finite component set, local rings and a closed zero-dimensional boundary, not separatedness or properness); and finite separable node residue fields F different from k. I introduced no new assertions requiring additional hypotheses and found no need to change the item statement.
+
+## Unfinished work
+
+None within this one-level split. The generic cited nodes retain their existing statuses and belong to their own workers.

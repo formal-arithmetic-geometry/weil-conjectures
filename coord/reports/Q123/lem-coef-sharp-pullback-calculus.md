@@ -1,0 +1,67 @@
+# Worker report: lem-coef-sharp-pullback-calculus
+
+## Files written
+
+- `dag/nodes/sec-six-functors/lem-coef-sharp-pullback-calculus.json`: statement item, repaired split; its statement and complete existing Lean record are unchanged.
+- `dag/nodes/sec-six-functors/lem-coef-kan-fibrant-path-recognition.json`: statement, unsplit, no Mathlib match; compares the two-leg fibration model over an arbitrary base with the path model after functorial Kan replacement.
+- `dag/nodes/sec-six-functors/lem-coef-kan-homotopy-cartesian-invariance.json`: statement, unsplit, no Mathlib match; invariance under weak equivalences of entire commutative square diagrams.
+- `dag/nodes/sec-six-functors/lem-coef-kan-homotopy-cartesian-fibration-criterion.json`: statement, unsplit, no Mathlib match; recognizes homotopy-cartesian squares by the strict comparison when one leg is a Kan fibration, without a Kan base hypothesis.
+- `citations.json`: a verbatim statement quotation for every citation of each numbered item step.
+
+The preserved factorization-criterion candidate is retained in `scratch/preserved-factorization-candidate.json`, outside the deliverable DAG: after the two cited criteria it is just two successive applications, now written explicitly in elementary Step 4. The earlier item text is retained in `scratch/preserved-item-before-repair.json`. The actual search log is preserved and extended, not replaced.
+
+## Attachments
+
+None. Searching `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` for the item tag and sharp/homotopy-cartesian/homotopy-pullback terminology produced no project declaration giving this calculus or the new nodes. The current project module `lean/Sheaf/AlgebraicTopology/SharpPullbackCalculus.lean` has the exact stage-2 theorem `SSet.sharp_pullback_calculus`, whose proof is `sorry`; it is not an attachment. Its predicates really use two-leg weak-equivalence/Kan-fibration factorizations over the original base. The source and Lean record were inspected read-only; no compiler or Lean writing was used.
+
+## Wanted literature
+
+WANTED: Charles Rezk, *Fibrations and Homotopy Colimits of Simplicial Sheaves*, Section 2, especially Section 2.3, Lemma 2.5 and Proposition 2.7, printed pp. 3–4, archival copy for the item and all three new nodes. Read online at https://rezk.web.illinois.edu/rezk-sharp-maps.pdf on 2026-10-17. This is not in the archived literature tree; the item's `proof_origin.by` remains `agent`. No SGA source is used.
+
+## Faults and repair of the return
+
+The human returned Step 1 (3448 characters) because it contained several lemmas inline. I started from the current returned-head proof, not the shorter incomplete rewrite alone. Original Step 1's path-model identification, consequence (a), and consequence (b) now have the three statement-only nodes listed above. Steps 1–3 cite their statements. Consequence (c) is Step 4: change only the fourth corner by the chosen weak equivalence and apply square invariance, then the fibration criterion. It carries no independent hidden argument. The remaining six returned-head steps are retained, with step references renumbered and the path bridge/fibration criterion explicitly cited where used. All proof steps have fewer than 2000 characters; the longest is Step 5 (1377 characters).
+
+The interrupted attempt had no report. Its new-node search entries accidentally embedded the LeanSearch result in the LeanFinder entry even though both searches really ran. I corrected that association from the existing `searches.jsonl`, keeping each actual tool/query pair and its own recorded hits. Additional second phrasings and valid Loogle patterns were run; no search was fabricated or repeated merely because the session was interrupted. Before this repair the server-side `review_split` reported only that the item was still `unsplit`; that status is now `split`.
+
+No statement dispute was found. The imported statement, hypotheses, conclusion, source record, and stage-2 Lean record are unchanged. No new unit or route change is requested: the inherited unit is `sk-prop-sf-biduality-general`, the blueprint ancestor is `prop-coef-integral-exceptional-adjoint`, and the supporting comparison is on the inherited route through paragraph 2's derived coefficient adjunction. No unit record is edited.
+
+## Not duplicates
+
+I searched the whole DAG by statement, by homotopy-cartesian/pullback/fibrant-replacement terminology and by the Rezk source places, and ran `tools/blueprint_refs.py ancestor` and whole-blueprint searches for `homotopy cartesian`, `homotopy-cartesian`, `path-space`, `fibrant replacement`, and `sharp`. The three specialized homotopy searches returned no blueprint match; the broad sharp hits concerned unrelated notions. The candidate statements below were opened, not inferred from their titles. No Stacks tag states these particular simplicial homotopy comparisons; Kerodon identifiers on existing nodes are not being treated as Stacks identifiers.
+
+- lem-coef-kan-fibrant-path-recognition vs lem-coef-kan-quillen-right-proper: the latter's last clause computes a pullback only for cospans of Kan complexes; the new node identifies two-leg factorizations over an arbitrary non-Kan base with the functorial Kan path model and specifies the comparison from the fourth corner.
+- lem-coef-kan-fibrant-path-recognition vs lem-coef-kan-pullback-path-comparison: the latter starts with Kan corners and a fibration leg; it does not compare that model with the arbitrary-object two-leg definition.
+- lem-coef-kan-homotopy-cartesian-invariance vs lem-coef-kan-homotopy-pullback-invariance: the existing node concerns induced maps between path pullbacks of Kan cospans; the new node concerns arbitrary square diagrams, including their fourth corner, in the fibration-replacement convention. It records the separate consequence (a) explicitly requested by the return.
+- lem-coef-kan-homotopy-cartesian-invariance vs lem-coef-kan-nerve-pullback-recognition: the latter assumes Kan corners and concerns coherent limiting cones; it does not supply the arbitrary-object bridge.
+- lem-coef-kan-homotopy-cartesian-fibration-criterion vs lem-coef-kan-pullback-fibration-invariance: the existing statement gives weak-equivalence invariance of strict pullbacks, with no definition or recognition of homotopy-cartesian squares; the new statement is the recognition theorem.
+- lem-coef-kan-homotopy-cartesian-fibration-criterion vs lem-coef-brown-fibrant-localization-pullbacks: Brown's node assumes all objects are fibrant and concerns limiting coherent squares in its localization, not arbitrary simplicial bases and their specified strict comparison.
+- Each new node vs lem-coef-sharp-pullback-calculus: none mentions sharp maps or states any sharpness, arbitrary-base-change, product or pasting clause. They are the model-comparison prerequisites used by the item's argument, not clauses of its conclusion.
+
+## Mathlib reading
+
+Every new node records the preserved first semantic queries, a second phrasing, a valid Loogle query, and actual Mathlib grep results. I read the displayed hits and the relevant source in `Mathlib/AlgebraicTopology/ModelCategory/PathObject.lean`, `Instances.lean`, and `SimplicialSet/CategoryWithFibrations.lean` and `KanComplex.lean`. The pullback projection instances require a trivial fibration and prove a weak equivalence of a strict projection. `PathObject.weakEquivalence_ι` and the endpoint instances concern a path object of one object. Neither is an exact statement or one-line specialization of the new comparisons. The broader homotopy-cartesian/derived-pullback grep in `AlgebraicTopology` returned zero hits. The semantic hits about Whitehead, good path objects, Brown resolutions and ordinary commutative squares likewise do not state these nodes. Hence three unsplit nodes, zero Mathlib leaves.
+
+## Review by Q123
+
+I read Rezk Section 2 online, including the definition on printed p.3, Section 2.3 and the proof of Lemma 2.5 on p.4, and Proposition 2.7. I also opened the inherited blueprint proof paragraph 2, the chapter and unit records, the item and each cited existing statement. The paper defines sharpness by preservation of weak equivalences and then identifies it with universal homotopy-cartesianness; the item starts from the latter formulation and proves the former. This reverses presentation, not content. The paper's fibration-factorization model matches the current Lean predicates, and the new path-recognition node supplies the previously inline bridge. The two definitions must not be silently identified on non-Kan objects.
+
+For the new path-recognition statement I checked that the replacement is functorial, that each replacement map is a trivial cofibration, that all four replaced objects are Kan, and that the comparison uses the constant path forced by the strict commutation equation. Its source is the explicit agent comparison at the blueprint place, supported by the read Rezk Section 2.3 definition and the existing Kan comparison statements; I do not claim that Rezk states that exact path formula verbatim. The objectwise-invariance node requires commuting maps of whole square diagrams, not just weak equivalences of four unrelated objects. The fibration-criterion node requires the actual leg g to lift all horns, but never assumes its base is Kan. These three statements introduce all their objects, cite their notions, and contain no proof steps or proof sketches. Their possible future proofs belong in their later splits.
+
+Step 1 uses the model-core statement for functorial replacement and the new path-recognition statement for exactly the constant-path test after applying R. Step 2 uses exactly the new whole-square invariance assertion. Step 3 uses exactly the new arbitrary-object fibration comparison. Step 4 is the written two-application corollary of core factorization, invariance and the fibration criterion: the map of squares is identity on Q,X,Z, so its fourth-corner map is the only new equivalence. This step is elementary relative to its cited theorems.
+
+Step 5 uses the existing strict-pullback invariance theorem with the cospan map (id_Ef,id_B,u); I checked that both distinguished legs Ef→B are Kan fibrations, while A,A′,B need not be Kan. Core factorization and two-out-of-three are the only model axioms additionally used. The two strict pullback squares are homotopy cartesian by the assumed sharpness, so Step 4 applies. In the converse it is t:T→B which is factored, and the weak-equivalence preservation hypothesis is applied over B. Neither direction assumes an arbitrary strict pullback preserves weak equivalences.
+
+Step 6 is an elementary calculation of iterated pullbacks and Step 5: composing a map over B′ with B′→B changes no underlying weak-equivalence assertion, and the two pullbacks identify compatibly with u. This correct base-change argument from the returned head is retained. The product assertion is this base change along B×K→B; it does not assume that projection is a Kan fibration.
+
+Step 7 uses the path-recognition statement before applying the existing path-pasting theorem, whose statement requires spaces/Kan complexes. Both adjacent squares become squares of Kan complexes after R. The right square is homotopy cartesian by sharpness. The identity B′→B′ lifts every horn, so the new fibration criterion applies to the remaining square. The comparison is exactly E′→P with P=B′×_B E; no claim is taken from the proof of a cited node.
+
+Step 8 uses the same path-recognition/pasting statements. Here p′ being sharp supplies the left strict-pullback square, and the given square supplies the right one. The outer square has base T→B and right vertical p, so Step 7 identifies its comparison with the displayed E′×_{B′}T→T×_B E. Both formulations of the clause follow.
+
+Step 9 again uses only path recognition and the pasting statement for the arbitrary-simplicial-set pasting part. For products, Step 6 makes P→B′ sharp, Step 7 supplies c:E′→P as a weak equivalence and also recognizes its square over id_B′, and Step 8 is applied with T=B′×K. The canonical identity (B′×K)×_{B×K}(E×K)≅P×K then gives the actual comparison c×id_K. This is the returned head's argument, not an unsupported assertion that products commute with homotopy pullbacks. Step 10 is just the degreewise pullback identification (E×L)×_{B×L}(B×K)≅E×K and sharpness already established in Step 6.
+
+I tested identity maps, all empty objects, the terminal base, K empty, and K→L equal to ∅→L. The statements never add nonemptiness. In the new fibration criterion an identity leg gives Q→X as its comparison, as it should. For the path bridge with Z empty, existence of all structure maps forces the four original corners empty, and their replacements remain weakly equivalent to empty, so both tests agree. A genuinely non-Kan base (for example Δ¹) is allowed: the proof uses the arbitrary-object strict-pullback invariance node rather than the Kan-only path comparison on original corners. Universe bounds are the fixed small simplicial-set bounds of the existing definitions. No step uses an off-unit tool, an unrecorded lemma, or SGA. The only intentionally unsplit arguments left are precisely the three named new nodes.
+
+## Unfinished work
+
+No part of the item's argument remains unwritten. The three prerequisite nodes are statement-only as required for a one-level split. Server dry run and delivery results are recorded below when obtained.

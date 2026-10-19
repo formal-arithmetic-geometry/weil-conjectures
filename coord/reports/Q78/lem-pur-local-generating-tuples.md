@@ -1,0 +1,158 @@
+## Worker report
+
+Item: lem-pur-local-generating-tuples
+
+1. Files written: `dag/nodes/sec-smooth-purity/lem-pur-local-generating-tuples.json`, statement, now split into six steps; not a Mathlib leaf. No new nodes and no new Mathlib leaves. `citations.json` contains the exact server statement of every node used by every step. `searches.jsonl` records the additional searches made through msearch.py.
+2. Attachments: none. No project declaration states this arbitrary-local-ring, arbitrary-finite-module theorem. The notion/tag searches in WeilConjectures found only the frame-independence discussion in `EtaleCohomology/Purity/Smooth/RegularImmersion.lean:160`; its `existsUnique_fundamentalClass` theorem ends in `sorry`, and its geometric statement is not the present statement. The master checkout is reference material only.
+3. WANTED: none.
+4. Problems found: the assigned node was absent from the local shared snapshot and from its blueprint ancestry index. Read-only ssh confirmed that both the isolated server DAG and the live server DAG already contain it, identically, as an unsplit Q85 child of `lem-pur-frame-independence`. I copied the isolated server node into this sandbox, preserving its statement, source, ancestry, inherited searches, and metadata. The motivating current blueprint proof says "Smith normal form" over an arbitrary local ring, which is not justified by a PID theorem. The present item already formulates the correct general replacement. Its proof now establishes the actual change of generators using quotient induction, so no normal-form assumption, minimality assumption, or regular-sequence assumption enters. No statement change is proposed.
+5. Unfinished mathematical work: none at this level. The item has a full natural-language proof; its only substantive inputs are already Mathlib leaves.
+
+## Proof and source
+
+I read `literature/stacks-project/algebra.tex`, Tag 00DV, label `lemma-NAK`, especially parts (2), (4), and (8), including its proof; and Tag 00E9, label `lemma-characterize-local-ring`, the statement and proof of (1) iff (3). I also read the main-20261015 `sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.md` and `.proof.md`, the imported chapter and unit records, and the existing finite-module, Nakayama-local-generators, and local-ring-unit-criterion nodes. This item's proof is explicitly agent-written: the Stacks lemmas supply the two tools, but Stacks is not being claimed to print the tuple induction.
+
+The induction is on tuple length, uniformly in all finite modules over the fixed ring. If the module is nonzero, Nakayama says its reduction modulo the maximal ideal is nonzero. A target generator survives reduction and therefore has a unit coefficient in its expression in the source generators. Scaling and shearing make those first generators agree. The two tails generate the quotient by that common first generator, so induction applies to length one less. Performing those operations upstairs changes the desired tail only by multiples of the fixed first generator; explicitly adding those multiples finishes the transformation. Products of the displayed elementary matrices give exactly the claimed matrix statement.
+
+## Searches and reuse
+
+Before considering children, I searched the whole local DAG for Tag 00DV, Nakayama, local-unit/maximal-ideal criteria, and generating tuples. This located the existing Mathlib leaves `lem-weil-pbc-nakayama-local-generators` and `lem-weil-pbc-local-ring-unit-criterion`. The existing `def-weil-finitely-generated-module` supplies the definition. The current server statements were read again and copied verbatim to citations.json; this matters because some old local statements have doubled TeX backslashes whereas the server statements are normalized.
+
+Whole-blueprint searches through `tools/blueprint_refs.py search` for "generating", "generating tuples", "elementary changes", "Nakayama", and "local ring" found no blueprint statement duplicating the item; the matching frame-independence nodes concern a cohomology class and do not assert this algebra lemma. Read-only searches over all current server node statements for "generating tuples", "elementary changes", "elementary operations", and "elementary matrices" found only this item. No new node is needed.
+
+I retained and read the item's inherited searches and their reported hits, and added fresh msearch.py searches: both a direct tuple phrasing and a transitive-action-on-surjections phrasing in LeanFinder; a tuple phrasing in LeanSearch; the local-ring/span Loogle query; and greps of LinearAlgebra and RingTheory/LocalRing. The semantic hits concerned Smith normal form over a PID, basis changes, free presentations, and Nakayama. None states the item for arbitrary finite modules over arbitrary commutative local rings. In particular I read `Mathlib/LinearAlgebra/Matrix/Transvection.lean:70,676`: its diagonal/transvection factorization is over a field. I read `Mathlib/RingTheory/LocalRing/Module.lean:61-78`: `IsLocalRing.map_mkQ_eq_top` gives precisely the already existing Nakayama leaf, not the whole tuple-transitivity theorem. This item therefore remains a split statement, not a Mathlib leaf. All additional recorded searches are the exact queries logged by msearch.py.
+
+## Not duplicates
+
+No new nodes. The proof reuses the three existing nodes named above. The two cross-unit theorem inputs are Mathlib leaves and hence generic tools under the route rules; no unit step is replaced. The item's blueprint.from retains the exact local-ring paragraph of `lem-pur-frame-independence` and blueprint.same_as is empty after the whole-blueprint search.
+
+## Review by Q12
+
+I checked the unchanged statement against the motivating blueprint paragraph and the two Stacks inputs. The ring stays nonzero, commutative, unital, and local throughout. The module may have torsion and redundant generators, and finite generation is the ordinary module notion, not finiteness of its underlying set. There is no appeal to a basis, a domain, Noetherianity, or Smith normal form.
+
+Step 1 sets up the uniform induction and proves both zero cases directly from generation. It uses no theorem. Step 2 uses the complete statement of `lem-weil-pbc-nakayama-local-generators`, in particular its final clause that a submodule equals M if its image in M/mM is everything: when M/mM is zero, the submodule 0 has exactly this property. Finiteness and locality are present. The subsequent choice of a surviving target generator follows by reducing its spanning expressions, rather than by an uncited dimension theorem. Step 3 uses exactly the equivalence in `lem-weil-pbc-local-ring-unit-criterion`. The coefficient outside the maximal ideal exists because a sum of maximal-ideal multiples lies in mM. Scaling that entry and adding the other coefficients produces the displayed target entry, with explicit inverse operations. This does not assume independence of the generators.
+
+Step 4 uses only the finite-generation definition in `def-weil-finitely-generated-module` to check that the quotient is finite: the c-1 tail images are actual generators. The rest is the stated induction hypothesis, applied over the same ring to this quotient. Both tails generate because their omitted first entry maps to zero. No quotient-finiteness lemma or finite-dimensional vector-space argument is hidden here. Step 5 explicitly lifts each type of operation through the R-linear quotient map, then uses the definition of its kernel R times the first generator to choose and add the corrective coefficients. Each correction keeps the first entry fixed and has distinct source and target indices. These are elementary calculations, not a cited theorem. Step 6 writes the elementary matrices and their inverses, verifies the shear inverse by E_ij squared equals zero for distinct indices, and records the multiplication order as the chronological action on a column tuple. It covers the matrix formulation and the ideal specialization directly.
+
+For B1-B9 and C1-C5, no new statement-only node was created, and every non-elementary input is one of the two existing theorem statements just described. I opened both cited nodes rather than using facts from their proofs. All three actual citations have exact, substantive statement quotes in citations.json. There is no self-citation or return edge through the parent frame-independence lemma: the only proof dependencies are the two existing Mathlib leaves and the finite-module definition. The construction itself stays in the steps, so it is not a relabelling or a transfer of the item's content into a child.
+
+For the hypothesis and small-case checks of E: c=0 forces M=0 and gives the empty sequence and the identity on the zero free module. M=0 at any positive length gives the identical all-zero tuples. For c=1 and M nonzero, Nakayama supplies a nonzero residue class of the sole target generator, so its coefficient is a unit; the quotient then has empty generating tails and is zero. A redundant example over Z/4Z, M=R, f=(2,1), g=(1,0), is handled by a swap and subtraction and satisfies the same pivot argument. Over the field F_2, the length-one unit scaling and inverse shear formulas still hold. For the nonfree example R=k[epsilon]/(epsilon squared), M=(epsilon), the proof uses M as a module and induction on its quotient; it never divides by epsilon. General non-Noetherian local rings cause no problem because the only finiteness used is that of M and the explicit finite generating tails of its quotients. Locality is essential to the cited unit criterion; it was not weakened to a general ring.
+
+Corrections made in this reading were to replace the empty imported proof with the explicit six-step argument and to record the server/local snapshot mismatch. No imported statement, source, chapter, unit, or ancestry was changed. The mandatory server checks and final delivery dry run are run after this report; the accepted sandbox is handed to the independent second reader without pushing.
+
+
+## Second reading by Q12
+
+Statement: checked every hypothesis and conclusion against the local-ring paragraph of `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md` and the actual statements of Stacks 00DV (`lemma-NAK`) and 00E9 (`lemma-characterize-local-ring`); PASS. This is an explicitly agent-formulated consequence, not a verbatim Stacks lemma. The stronger arbitrary-finite-module version really supplies the parent's ideal case; no basis, PID, regular-sequence, or minimality assumption is needed. The tags were independently verified in `literature/stacks-project/tags/tags`.
+
+Step 1: checked the uniform induction against the empty-span definition and the zero module; PASS, elementary, with induction over all finite modules and the same fixed ring.
+Step 2: opened `lem-weil-pbc-nakayama-local-generators` and checked its final submodule clause against Stacks 00DV (4) and Mathlib `IsLocalRing.map_mkQ_eq_top`, `RingTheory/LocalRing/Module.lean:72-74`; PASS, all finiteness and locality hypotheses present, and the zero-submodule specialization proves the needed nonzero quotient.
+Step 3: opened `lem-weil-pbc-local-ring-unit-criterion` and checked it against Stacks 00E9 (1) iff (3) and Mathlib `IsLocalRing.notMem_maximalIdeal`, `RingTheory/LocalRing/MaximalIdeal/Basic.lean:79-84`; PASS, a nonzero reduced target generator forces a unit coefficient, and the displayed scaling and shears produce it without independence.
+Step 4: opened `def-weil-finitely-generated-module` and checked its spanning definition against the two quotient-tail expressions; PASS, both tails generate the same quotient over R, which directly proves its finite generation before applying induction.
+Step 5: checked each lifted operation under the quotient map and each corrective shear against the kernel definition; PASS after spelling out the scaling, swap and shear formulas and induction along the finite list. The first entry remains fixed, so every corrective coefficient is added from the correct entry.
+Step 6: checked the three inverse matrices by multiplication, including $E_{ij}^2=0$ for distinct indices, the empty product, and the ideal specialization; PASS after writing the exact order $P=A_s\cdots A_1$ for chronological operations $A_1,\ldots,A_s$.
+New nodes: none; no elementary fact, duplicate, or clause of the item has been made into a child. The three reused dependencies are existing Mathlib leaves, and the two theorem inputs are generic tools whose complete statements were read. B1-B7 impose no new-node repairs. All three `citations.json` quotes were independently compared with the shared node statements and are verbatim; the cited steps and dependency list are unchanged.
+
+Independent edge cases: $c=0$ forces $M=0$; $M=0$ at any length has identical zero tuples; $c=1$ uses the unit coefficient and an empty quotient tail. Over $\mathbf F_2$ all the same identities hold. For the nonfree module $M=(\epsilon)$ over $R=k[\epsilon]/(\epsilon^2)$, the two redundant tuples $(\epsilon,0)$ and $(0,\epsilon)$ differ by a swap, while $(\epsilon,\epsilon)$ is reached by a shear. Over $\mathbf Z/4\mathbf Z$, $(2,1)$ goes to $(1,0)$ by swapping and subtracting twice the first entry. These check torsion and redundancy without any division by a nonunit. No statement dispute was found.
+
+Independent reuse and source audit: searched the current DAG by tags 00DV and 00E9 and by generating tuples and elementary changes; no duplicate of this item was found. Searched all current-blueprint chapters for generating tuples, generating families, elementary changes and change of generators; no matching statement. Checked the slopmaster2 source and upstream-name index by the item id and tuple/transitivity vocabulary. The geometric `existsUnique_fundamentalClass` at `WeilConjectures/EtaleCohomology/Purity/Smooth/RegularImmersion.lean:164-173` is about a supported cohomology class and ends in `sorry`; it does not close this algebra item. Read the actual Mathlib Nakayama and local-unit declarations, and the field-dependent matrix factorization at `LinearAlgebra/Matrix/Transvection.lean:70,676-680`.
+
+Independent Mathlib searches: ran msearch.py with the new epimorphisms/automorphism phrasing in LeanFinder (8 hits, principally Orzech's property, which concerns endomorphisms rather than two presentations); a RingTheory grep for surjection/automorphism/equivalence and spanning/transitivity vocabulary (25 reported hits, unrelated uses); and a targeted LocalRing grep for transitivity, transvections, elementary operations, generating families and automorphisms (one hit, the generating-family/basis result). Read `RingTheory/OrzechProperty.lean:85-110` and `RingTheory/LocalRing/Module.lean:219-237` to reject those candidates under their actual statements and hypotheses. The exact queries and result digests are appended by msearch.py to `searches.jsonl`; the two useful searches are also recorded in the item's `mathlib_searches`. No new Mathlib leaf.
+
+Changes made: expanded step 5's quotient compatibility into formulas for each operation and a finite-list induction (E5); specified step 6's matrix multiplication order explicitly (E4/E5); appended the independent search evidence and this step-by-step review. The original worker's sections, including `## Review by Q12`, are preserved. The statement and all citation quotes were already correct and remain unchanged. Required server-only dry run and delivery follow this completed second-reading report; no local compiler or project validation script was run.
+
+## Second reading by Q78
+
+The supplied stage-2 sandbox had only dispatcher markers: there was no retained
+Lean module, node copy, worker report, or Q78 review section. The stage-1 worker
+report above was recovered from the shared Q12 report and preserved for provenance;
+its historical references to citations.json and searches.jsonl concern that stage-1
+packet. I reconstructed the stage-2 statement and then reviewed the resulting file
+against the unchanged node. No independent earlier stage-2 statement was available.
+
+Object-by-object and clause-by-clause reading:
+
+- Nonzero commutative unital local ring R, with its unique maximal ideal: binders
+  `{R : Type u} [CommRing R] [IsLocalRing R]`. I opened Mathlib's LocalRing/Defs:
+  `IsLocalRing` extends `Nontrivial R`; its commutative-ring form is equivalent to
+  having a unique maximal ideal. The ideal is `IsLocalRing.maximalIdeal R` in the
+  proof and requires no separate parameter or extra hypothesis. Verdict: exact.
+- Finite R-module M: `{M : Type v} [AddCommGroup M] [Module R M]
+  [Module.Finite R M]`. Opened the dependency node `def-weil-finitely-generated-module`
+  and Mathlib `RingTheory/Finiteness/Defs.lean`: `Module.Finite` is finite generation
+  of the top submodule, not finiteness of the underlying type. Verdict: exact.
+- Length c >= 0 and two ordered generating tuples: `(c : ℕ) (f g : Fin c → M)` with
+  `hf` and `hg` each asserting `Submodule.span R (Set.range ...) = ⊤`. Verdict: exact;
+  neither independence nor minimality is imposed.
+- Finite sequence from f to g: existential `s : ℕ`, `x : ℕ → Fin c → M`, endpoints
+  `x 0 = f`, `x s = g`, and one allowed step for every `t < s`. Values beyond s are
+  immaterial extensions of a finite sequence. Verdict: exact.
+- Unit scaling: `i : Fin c`, `u : Rˣ`, and `x (t+1) k` equals `(u : R) • x t i`
+  at i and equals `x t k` elsewhere. Verdict: exact.
+- Interchange: distinct `i,j` with the two entries interchanged by nested conditionals,
+  fixing all other entries. Identity swaps can be omitted from a finite sequence,
+  so distinctness excludes no claimed transformation. Verdict: exact.
+- Shear: distinct `i,j`, `a : R`, and replacement `x t i + a • x t j` at i, with all
+  other entries fixed. Verdict: exact, including zero a and all characteristics.
+- Matrix form: existential `P : Matrix.GeneralLinearGroup (Fin c) R` with
+  `g i = ∑ j, (P : Matrix (Fin c) (Fin c) R) i j • f j`. The same step witnesses
+  constrain `A : Fin s → Matrix.GeneralLinearGroup (Fin c) R` on every vector z of
+  R^c by the corresponding scaling, swap or shear formula. Testing standard vectors
+  characterizes exactly those matrices. `P = (List.ofFn A).reverse.prod` is the
+  chronological action `A (s-1) ... A 0` on column tuples. Verdict: exact.
+- Ideal specialization: take M to be the ideal as a module and use its generating
+  elements as subtype elements. This is an instance of the same general theorem,
+  not a separate extra assumption or construction. Verdict: covered.
+- Absence of freeness, regularity, PID, Noetherianity and minimality hypotheses:
+  none occur in the signature. Verdict: exact.
+
+Source and proof dependencies: read Stacks algebra.tex lines 3366-3404 (Tag 00E9,
+lemma-characterize-local-ring, equivalence (1)/(3)) and lines 3615-3700 (Tag 00DV,
+lemma-NAK, including (2), (4), (8) and the proof). The node explicitly describes an
+agent-formulated consequence, not a verbatim Stacks statement. Opened both proof
+nodes and their actual Mathlib signatures: `IsLocalRing.map_mkQ_eq_top` in
+`RingTheory/LocalRing/Module.lean:72`, and `IsLocalRing.notMem_maximalIdeal` in
+`RingTheory/LocalRing/MaximalIdeal/Basic.lean:83`. The former requires a finite
+module and the latter a commutative local ring, exactly as supplied here. Their
+modules are ordinary proof imports; the finite-module and local-ring definitions
+and general-linear-group definition are public imports. No new definition or
+dependency repair is needed. The theorem docstring records all six node proof
+steps, the quotient-tail lift, corrective shears, inverses and reversed product.
+Its proof is only `sorry`, and there are no hollow definitions or other theorems.
+
+Edge cases: `c = 0` includes `Fin 0` and empty sums/products; the span hypotheses
+force the module to be zero, and a positive s cannot satisfy an operation step
+because each disjunct needs an index of `Fin 0`. Thus s must be zero and the matrix
+is the empty product. If M is zero at positive c, the all-zero tuples agree and
+zero operations suffice. At c = 1 a nonzero module needs only a unit scaling, as
+the induction proof shows. Redundant and nonfree tuples, e.g. `(2,1)` to `(1,0)`
+over Z/4 and `(ε,0)` to `(0,ε)` in `(ε)` over dual numbers, are included. In
+characteristic 2 inverse shears still work. Ring and module have independent
+universes u and v. No scheme is involved and no empty-scheme restriction arises.
+
+Independent searches actually executed in this reading:
+
+- LeanFinder via msearch.py: "Two surjective homomorphisms from R^n to a finite
+  module over a local commutative ring differ by a finite product of elementary
+  generator changes". Eight hits, including finite free surjections, quotient
+  existence, Orzech endomorphism bijectivity and split surjectivity after localization.
+  None compares two arbitrary surjections by the required elementary operations.
+- Loogle via msearch.py: `"IsLocalRing", "Matrix"`: zero hits.
+- LeanSearch via msearch.py: "equal length spanning lists of a module over a local
+  ring are connected by invertible row operations". Eight hits, including
+  `Module.Basis.invertibleToMatrix`, matrix-to-equivalence, rank comparisons and
+  matrix transvection list lengths. None states the arbitrary-module local-ring result.
+- rg of Mathlib LinearAlgebra/Matrix and RingTheory/LocalRing, slopmaster2
+  WeilConjectures, project lean/Sheaf and upstream name index, with generating-tuple,
+  elementary-change and full proposed declaration-name vocabulary: no duplicate.
+  Read `Matrix.Pivot.exists_list_transvec_mul_diagonal_mul_list_transvec` and its
+  field parameter in Matrix/Transvection.lean:70 and 676. It needs a field, while
+  basis results require bases and Smith normal form needs PID assumptions. These
+  cannot realize this node.
+
+Repairs made: reconstructed the missing packet; added proper module visibility,
+source/blueprint docstrings and the complete six-step proof plan; retained the exact
+module and local-ring notions; removed an unnecessary named-maximal-ideal parameter;
+corrected the draft chronological product to `reverse.prod`. There is no statement
+correction, new node, dependency module, local notation, unbound variable, or theorem
+proof beyond `sorry`. No shared source was edited.
