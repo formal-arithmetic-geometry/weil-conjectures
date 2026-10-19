@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-sf-datum",
   "def-weil-site-perfect-complex",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-pf"
  ],
  "proof": [
   {
@@ -358,5 +359,28 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-e6bc36189 (reviewer sub-agent of L); spot-checked: I read the item, all 11 steps and the new node in full, the statement of every cited node, the unit and chapter records, the main-20261015 and master blueprint (identical statement), and Stacks 08JI (l.11959) and 08JJ (l.13048). The item statement and stmt_deps are byte-identical to the base and to the live node, which is still unsplit; nothing is weakened and no SGA is cited. Steps 1-3: slice restriction comes from lem-weil-pbc-ringed-internal-hom-exact-restriction; term Hom is exact as a retract of (-)^m; the hypotheses of lem-pc-bounded-exact-term-hom-quasi-iso hold; I recomputed the sign (-1)^{n+1} phi d_P^{-n-1} and the support [-b,-a] from def-pur-hom-complex. Steps 5-9: the new node is applied with A=O_E, t=varpi_E and R the completed sheaf; lem-pc-stupid-tail-hom-short-exact applies with k=r; lem-weil-pbc-complex-ses-triangle gives the connecting square; scalar localization is exact because D(R) is O_E-linear; the shift sign (-1)^{rq} commutes with postcomposition by j; the descending induction has an explicit base P_{>=b+1}=0 and claim and uses two-out-of-three (lem-sf-triangle-morphism-iso). Steps 10-11 are unchanged and correct: the common-stage comparisons come from lem-fix-operation-reduction, and evaluation is the counit in sk-def-sf-operations (i). The new node lem-sf-rational-term-hom-comparison is true (Q(c_F) is a retract of Q(c_{R^m}) = Q(j^m) by full faithfulness on degree-zero modules and linear extension) and was tested on t=0, t invertible, m=0, F=R and F=O+O/varpi, where the torsion Ext dies rationally. It is self-contained, statement-only, strictly smaller than the item and no restated clause. It duplicates nothing: lem-weil-pbc-ringed-site-bounded-free-rhom-model needs actual summands, lem-sf-hom-finite-projective needs separated X, and lem-pod-coefficient-dual-perfect and thm-sf-dual-perfect are under the Poincare conventions. Its id is absent from the live DAG. Fix: the new node lacked merged_into and lean_audit (brief section 3); the corrected whole file is in fixes/dag/nodes/sec-six-functors/lem-sf-rational-term-hom-comparison.json. Accepted tool_uses: lem-pur-site-restriction-module-adjunction-exact, lem-weil-pbc-ringed-internal-hom-exact-restriction, lem-pc-bounded-exact-term-hom-quasi-iso, lem-pc-stupid-tail-hom-short-exact, lem-weil-linear-scalar-localization-triangulated, lem-weil-scalar-extension-exact-triangulated, lem-fix-operation-reduction. The other two declared ones (lem-sf-triangle-morphism-iso, lem-weil-pbc-complex-ses-triangle) are Mathlib leaves and need no tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SitePerfectCoefficientDual",
+  "declaration": "WeilConjectures.sixFunctor_sitePerfect_dual",
+  "declarations": [
+   "WeilConjectures.sixFunctorCoefficientEvaluation",
+   "WeilConjectures.sixFunctor_sitePerfect_dual"
+  ],
+  "file": "lean/Sheaf/Paper/SitePerfectCoefficientDual.lean",
+  "statement": "theorem sixFunctor_sitePerfect_dual (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (S : SixFunctorDatum D C E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) (X : SixFunctorSpace D) : (∀ K : (S.toSixFunctorOperationDatum.finiteTorDomain X).FullSubcategory, IsFiniteCoefficientSitePerfect C.l E X.obj.left n K.obj.obj → IsFiniteCoefficientSitePerfect C.l E X.obj.left n ((sixFunctorCoefficientDual (S.finiteClosed X)).obj (op K)).obj.obj) ∧ (∀ K : (S.toSixFunctorOperationDatum.integralFiniteTorDomain X).FullSubcategory, IsIntegralCoefficientSitePerfect C.l E X.obj.left K.obj.obj → IsIntegralCoefficientSitePerfect C.l E X.obj.left ((sixFunctorCoefficientDual (S.integralClosed X)).obj (op K)).obj.obj) ∧ (∀ K : (⊤ : ObjectProperty (sfRationalConstructibleCategory C.l E X.obj.left)).FullSubcategory, IsSfRationalCoefficientSitePerfect C.l E X.obj.left K.obj → IsSfRationalCoefficientSitePerfect C.l E X.obj.left ((sixFunctorCoefficientDual (S.rationalClosed X)).obj (op K)).obj) ∧ (∀ K : (⊤ : ObjectProperty (generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left)).FullSubcategory, IsGeneralAlgebraicallyClosedCoefficientSitePerfect C.l C.Qbar X.obj.left K.obj → IsGeneralAlgebraicallyClosedCoefficientSitePerfect C.l C.Qbar X.obj.left ((sixFunctorCoefficientDual (S.commonClosed X)).obj (op K)).obj)",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The four conjuncts state coefficient-dual site-perfectness at finite, completed integral, rational and common-stage coefficients. The canonical evaluation is a real definition, symmetry followed by the specified counit, valid for every closed stage. Reuses sixFunctorCoefficientDual from def-sf-pf without adding the separatedness binders of its stage-specific abbreviations. Positive finite exponent is n+1, including exponent one."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-382a01897",
+  "group": "NW",
+  "result": "pass",
+  "note": "Item matches node/source: four stage conjuncts with the same site-perfect predicates on K and on sixFunctorCoefficientDual (RHom into the closed unit), arbitrary X (no separatedness), n+1 exponent; evaluation is a real braiding+adjunction-counit def. def-sf-pf stmt_dep genuine, no cycle. §1(B) append to SitePerfectComplex is an append-only superset (IsGeneralAlgebraicallyClosedCoefficientSitePerfect = legacy common-stage body on the general category commonClosed uses). nt_compile --json clean (item 4.9 s, dep 3.7 s); all 6 live importers of SitePerfectComplex clean against the delivered text. Advisory M1: dep record primary declaration changed to the new def (by ND→NW); M2: NX prop-sf-dualizable-hom 6569357a appends the identical decl to the same module, so the second to land should be dependency-reverted."
  }
 }

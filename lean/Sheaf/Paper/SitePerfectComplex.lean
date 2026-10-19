@@ -10,6 +10,7 @@ public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.Paper.IntegralDerivedOperations
 public import Sheaf.Paper.AlgebraicallyClosedCoefficients
 public import Sheaf.Paper.SfRationalizationKaroubi
+public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 
 /-!
 # Perfect complexes on the coefficient site
@@ -181,5 +182,23 @@ noncomputable def IsSfRationalCoefficientSitePerfect (l : ℕ) [Fact l.Prime]
           ((integralDerivedPullback l E U.hom).obj K.obj.obj) :
             sitePerfectRationalAmbient l E U.left) ≅
           ScalarLocalization.mk (DerivedCategory.Q.obj F))
+
+/-- Site-perfectness in the intrinsic common-stage category means descent, up to
+isomorphism in that pair category, from a site-perfect intrinsic rational stage.
+This is the same finite-stage condition as the legacy common-stage predicate above;
+the finite-stage objects use the intrinsic categories of the six-functor datum.
+Source: blueprint order 1881, algebraically closed paragraph
+(blueprint: def-weil-site-perfect-complex). -/
+noncomputable def IsGeneralAlgebraicallyClosedCoefficientSitePerfect
+    (l : ℕ) [Fact l.Prime]
+    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+    (Y : AlgebraicGeometry.Scheme.{u})
+    (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y) : Prop :=
+  ∃ E : AlgebraicallyClosedCoefficients.Index l Ω,
+    ∃ P : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E,
+      IsSfRationalCoefficientSitePerfect l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y P ∧
+      Nonempty (K ≅ (GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := l) (Ω := Ω) (Y := Y) E).obj P)
 
 end WeilConjectures

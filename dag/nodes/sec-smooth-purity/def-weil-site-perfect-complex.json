@@ -258,14 +258,14 @@
  "reviewed_lean": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2bb18c959",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-382a01897",
+  "group": "NW",
   "result": "pass",
-  "note": "Re-delivery after the 05e512e5 H13/H4 RETURN; the repair is exactly as prescribed. IsSfRationalCoefficientSitePerfect is appended to Q33's Sheaf/Paper/SitePerfectComplex.lean with the live IsRationalCoefficientSitePerfect body clause for clause (only the domain changes, to sfRationalConstructibleCategory), plus a public import of SfRationalizationKaroubi; the rest of the file is unchanged against live. The def-weil-site-perfect-complex record is a superset: same module, file, primary declaration and statement, all 8 Q33 decls plus the new one, and a lean.note. IntrinsicSitePerfectComplex is dropped and the item's import of SitePerfectComplex is public. The item module changes only in its imports; the item node is identical to the returned delivery and the statement is verbatim with one sorry. Re-checked H3: Retracts, EvaluationRestriction, VerdierRestriction (pinned Datum, delta and inverse formulas), ScalarExtension via rationalTensorScalarComparison, site-perfect unit evaluation; edge cases (empty X, zero/identity splittings, iota = id) covered. The other 5 dep records are identical to live; the item is not on the dropped list. nt_compile --json: delivered files clean (2.7 s / 4.8 s); the 5 live importers (BasicOperationsCoefficientReduction, FiniteTorStability, Paper and SixFunctors InternalHomPullback, GeometricFrobeniusInternalHomComparison) compiled clean against the delivered SitePerfectComplex (7.5-24.1 s)."
+  "note": "Item matches node/source: four stage conjuncts with the same site-perfect predicates on K and on sixFunctorCoefficientDual (RHom into the closed unit), arbitrary X (no separatedness), n+1 exponent; evaluation is a real braiding+adjunction-counit def. def-sf-pf stmt_dep genuine, no cycle. §1(B) append to SitePerfectComplex is an append-only superset (IsGeneralAlgebraicallyClosedCoefficientSitePerfect = legacy common-stage body on the general category commonClosed uses). nt_compile --json clean (item 4.9 s, dep 3.7 s); all 6 live importers of SitePerfectComplex clean against the delivered text. Advisory M1: dep record primary declaration changed to the new def (by ND→NW); M2: NX prop-sf-dualizable-hom 6569357a appends the identical decl to the same module, so the second to land should be dependency-reverted."
  },
  "lean": {
   "module": "Sheaf.Paper.SitePerfectComplex",
-  "declaration": "WeilConjectures.IsFiniteCoefficientSitePerfect",
+  "declaration": "WeilConjectures.IsGeneralAlgebraicallyClosedCoefficientSitePerfect",
   "declarations": [
    "WeilConjectures.sitePerfectOverAbSheafify",
    "WeilConjectures.sitePerfectOverAbLocallyBijective",
@@ -275,15 +275,16 @@
    "WeilConjectures.IsRationalFiniteProjectiveTerm",
    "WeilConjectures.IsRationalCoefficientSitePerfect",
    "WeilConjectures.IsAlgebraicallyClosedCoefficientSitePerfect",
-   "WeilConjectures.IsSfRationalCoefficientSitePerfect"
+   "WeilConjectures.IsSfRationalCoefficientSitePerfect",
+   "WeilConjectures.IsGeneralAlgebraicallyClosedCoefficientSitePerfect"
   ],
   "file": "lean/Sheaf/Paper/SitePerfectComplex.lean",
-  "statement": "def IsFiniteCoefficientSitePerfect (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t}) (n : ℕ) (K : @DerivedCategory (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)) _ _ (HasDerivedCategory.standard _)) : Prop",
+  "statement": "def IsGeneralAlgebraicallyClosedCoefficientSitePerfect (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (Y : AlgebraicGeometry.Scheme.{u}) (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y) : Prop",
   "branch": "sheaf-dag",
-  "by": "ND",
+  "by": "NW",
   "date": "2026-10-19",
   "existing": false,
-  "note": "Section 1(B), ownership-preserving extension: the legacy IsRationalCoefficientSitePerfect takes rationalConstructibleCategory, while the recorded rationalization dependency uses sfRationalConstructibleCategory. Append IsSfRationalCoefficientSitePerfect to the same owning SitePerfectComplex module, with the identical covering-sieve, bounded-complex and localized finite-projective-term formula on intrinsic objects. All eight Q33 declarations and all their bodies are retained. The finite, completed integral, legacy rational and common-stage interfaces remain available unchanged; no integral lift of rational splittings is required."
+  "note": "Section 1(B), ownership-preserving extension: the recorded IsAlgebraicallyClosedCoefficientSitePerfect accepts the legacy algebraicallyClosedConstructibleCategory, whereas SixFunctorDatum.commonClosed and the recorded common-stage internal Hom use generalAlgebraicallyClosedConstructibleCategory with intrinsic sf rational stages. Append IsGeneralAlgebraicallyClosedCoefficientSitePerfect to this same owning module: exactly existence, up to common-stage isomorphism, of an IsSfRationalCoefficientSitePerfect finite-field representative. Preserve all nine existing declarations, signatures and bodies; no integral lift of rational retractions, common-stage completion or extra hypothesis is added."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
