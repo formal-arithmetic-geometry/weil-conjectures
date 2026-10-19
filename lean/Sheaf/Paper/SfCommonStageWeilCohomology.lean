@@ -42,7 +42,74 @@ theorem sfTruncationShift_existsUnique
     (∃! e : (t.truncGE 0).obj (K⟦(1 : ℤ)⟧) ≅ ((t.truncGE 1).obj K)⟦(1 : ℤ)⟧,
       (t.truncGEπ 0).app (K⟦(1 : ℤ)⟧) ≫ e.hom =
         ((t.truncGEπ 1).app K)⟦(1 : ℤ)⟧') := by
-  sorry
+  let eK : K⟦(1 : ℤ)⟧ ≅ K⟦(1 : ℤ)⟧ :=
+    { hom := -𝟙 _, inv := -𝟙 _
+      hom_inv_id := by simp
+      inv_hom_id := by simp }
+  constructor
+  · obtain ⟨e, he⟩ := t.triangle_iso_exists
+      (t.triangleLEGE_distinguished 0 1 (by decide) (K⟦(1 : ℤ)⟧))
+      (Pretriangulated.Triangle.shift_distinguished _
+        (t.triangleLEGE_distinguished 1 2 (by decide) K) 1)
+      eK 0 1
+      (by change t.IsLE ((t.truncLE 0).obj (K⟦(1 : ℤ)⟧)) 0; infer_instance)
+      (by change t.IsGE ((t.truncGE 1).obj (K⟦(1 : ℤ)⟧)) 1; infer_instance)
+      (by
+        change t.IsLE (((t.truncLE 1).obj K)⟦(1 : ℤ)⟧) 0
+        exact t.isLE_shift _ 1 1 0 (by decide))
+      (by
+        change t.IsGE (((t.truncGE 2).obj K)⟦(1 : ℤ)⟧) 1
+        exact t.isGE_shift _ 2 1 1 (by decide))
+    let a := ((Pretriangulated.Triangle.π₁).mapIso e)
+    have ha : a.hom ≫ ((t.truncLEι 1).app K)⟦(1 : ℤ)⟧' =
+        (t.truncLEι 0).app (K⟦(1 : ℤ)⟧) := by
+      have h := e.hom.comm₁.symm
+      simp only [Pretriangulated.Triangle.shiftFunctor_eq,
+        Pretriangulated.Triangle.shiftFunctor, Int.negOnePow_one,
+        Functor.comp_obj, Pretriangulated.Triangle.mk_mor₁,
+        Triangulated.TStructure.triangleLEGE_obj_mor₁,
+        Units.neg_smul, one_smul, Preadditive.comp_neg, he, neg_inj, eK] at h
+      change a.hom ≫ ((t.truncLEι 1).app K)⟦(1 : ℤ)⟧' =
+        (t.truncLEι 0).app (K⟦(1 : ℤ)⟧) ≫ 𝟙 _ at h
+      simpa only [Category.comp_id] using h
+    refine ⟨a, ha, ?_⟩
+    intro b hb
+    apply Iso.ext
+    apply (cancel_mono a.inv).1
+    apply t.to_truncLE_obj_ext
+    simp only [Category.assoc, ← ha, Iso.inv_hom_id_assoc, hb, Iso.hom_inv_id,
+      Category.id_comp]
+  · obtain ⟨e, he⟩ := t.triangle_iso_exists
+      (t.triangleLEGE_distinguished (-1) 0 (by decide) (K⟦(1 : ℤ)⟧))
+      (Pretriangulated.Triangle.shift_distinguished _
+        (t.triangleLEGE_distinguished 0 1 (by decide) K) 1)
+      eK (-1) 0
+      (by change t.IsLE ((t.truncLE (-1)).obj (K⟦(1 : ℤ)⟧)) (-1); infer_instance)
+      (by change t.IsGE ((t.truncGE 0).obj (K⟦(1 : ℤ)⟧)) 0; infer_instance)
+      (by
+        change t.IsLE (((t.truncLE 0).obj K)⟦(1 : ℤ)⟧) (-1)
+        exact t.isLE_shift _ 0 1 (-1) (by decide))
+      (by
+        change t.IsGE (((t.truncGE 1).obj K)⟦(1 : ℤ)⟧) 0
+        exact t.isGE_shift _ 1 1 0 (by decide))
+    let a := ((Pretriangulated.Triangle.π₃).mapIso e)
+    have ha : (t.truncGEπ 0).app (K⟦(1 : ℤ)⟧) ≫ a.hom =
+        ((t.truncGEπ 1).app K)⟦(1 : ℤ)⟧' := by
+      have h := e.hom.comm₂
+      simp only [Int.reduceNeg, Pretriangulated.Triangle.shiftFunctor_eq,
+        Pretriangulated.Triangle.shiftFunctor,
+        Int.negOnePow_one, Functor.comp_obj, Triangulated.TStructure.triangleLEGE_obj_mor₂,
+        he, Pretriangulated.Triangle.mk_mor₂, Units.neg_smul, one_smul,
+        Preadditive.comp_neg,
+        Preadditive.neg_comp, neg_neg, eK] at h
+      change (t.truncGEπ 0).app (K⟦(1 : ℤ)⟧) ≫ a.hom =
+        𝟙 _ ≫ ((t.truncGEπ 1).app K)⟦(1 : ℤ)⟧' at h
+      simpa only [Category.id_comp] using h
+    refine ⟨a, ha, ?_⟩
+    intro b hb
+    apply Iso.ext
+    have := t.isGE_shift ((t.truncGE 1).obj K) 1 1 0 (by decide)
+    exact t.from_truncGE_obj_ext (hb.trans ha.symm)
 
 /-- The shift comparison H^0(K[1]) = H^1(K), built from the uniquely normalized
 truncation comparisons and the prescribed zero shift. This fixes its sign.
@@ -156,7 +223,14 @@ theorem sfModelWeilCohomology_mem (n : ℤ)
     (K : sfCommonStageWeilComplex D l hl X₀ Ω) :
     sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω
       (((sfModelWeilCohomologyPair D l hl Ω X₀ n).obj K).carrier) := by
-  sorry
+  rw [← (sfCommonStageHeart_properties l (D.geometricFiber X₀).left Ω D hl).1]
+  change (sfCommonStageStandardTStructure l (D.geometricFiber X₀).left Ω D hl).heart
+    ((constructibleTruncationCohomology
+      (sfCommonStageStandardTStructure l (D.geometricFiber X₀).left Ω D hl) n).obj K.carrier)
+  let t := sfCommonStageStandardTStructure l (D.geometricFiber X₀).left Ω D hl
+  change t.heart (((t.truncGE n).obj ((t.truncLE n).obj K.carrier))⟦n⟧)
+  rw [t.mem_heart_iff]
+  exact ⟨t.isLE_shift _ n n 0 (add_zero n), t.isGE_shift _ n n 0 (add_zero n)⟩
 
 /-- Standard cohomology with values in the recorded constructible Weil heart.
 Source: blueprint cohomology convention (blueprint: def-weil-derived-cohomology-sheaves). -/
