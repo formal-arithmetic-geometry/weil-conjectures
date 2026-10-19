@@ -26,9 +26,8 @@
  ],
  "proof": [
   {
-   "text": "Fix $q$ and, for every complex $L$ vanishing below $a$, put $P_L(V)=H^q(X\\times_YV,L)$ as an abelian presheaf. The base-change functor on pro-etale sites and the direct image on underlying sheaves are those of [det-pe-topos-functoriality-inverse-image]. Apply [lem-pe-bounded-complex-direct-image-presheaf] to obtain $P_L^\\#\\cong R^qf_*L$, naturally in $L$. Here direct image has coefficients in $f_*\\mathcal R$, and all comparisons below are read as abelian sheaves, so no assumption that $\\mathcal R$ is pulled back from $Y$ is needed.",
+   "text": "Use boundedRingModuleDirectImage_hasKInjectiveResolutions from [lem-pe-bounded-complex-direct-image-presheaf] to prove resolution existence. For each complex L with the common lower bound, use the explicitly constructed inverseImageCohomologyPresheaf and boundedComplexDirectImagePresheafIso of that same node. Its naturality theorem supplies the comparison of diagrams and cocones. The ring module direct image and its bounded variant are definitionally the same pushforward along proEtaleBaseChange; their derived versions coincide by proof irrelevance of the resolution-existence witness.",
    "uses": [
-    "det-pe-topos-functoriality-inverse-image",
     "lem-pe-bounded-complex-direct-image-presheaf"
    ],
    "elementary": false,
@@ -38,10 +37,9 @@
    }
   },
   {
-   "text": "Let $V$ be an affine object of $Y_{\\mathrm{proét}}$. It is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. By [det-pe-topos-functoriality-inverse-image], $U=X\\times_YV$ is an object of $X_{\\mathrm{proét}}$. The map $U\\to V$ is quasi-compact and quasi-separated by part (3) of [lem-weil-pbc-qcqs-morphism-permanence], applied to the given $f$. Part (2) of the same node, with $V$ quasi-compact and quasi-separated, shows that $U$ itself is quasi-compact and quasi-separated.",
+   "text": "For an affine pro-etale object V of Y, apply [lem-weil-pbc-affine-scheme-qcqs] and base-change permanence [lem-weil-pbc-qcqs-morphism-permanence] to the literal pullback V ×_Y X, the underlying scheme of proEtaleBaseChange f at V. The projection to V is qcqs, hence this pullback is qcqs. These are the existing Mathlib instances and permanence theorems; the packaged topos-functoriality theorem is not needed.",
    "uses": [
     "lem-weil-pbc-affine-scheme-qcqs",
-    "det-pe-topos-functoriality-inverse-image",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
    "elementary": false,
@@ -51,7 +49,7 @@
    }
   },
   {
-   "text": "Form the termwise colimit $K=\\varinjlim_iK_i$ of module sheaves; its terms below $a$ are zero since those diagrams are identically zero. Module-sheaf colimits exist and their underlying abelian sheaves are the abelian-sheaf colimits by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Functoriality gives a presheaf map $\\varphi:\\varinjlim_iP_{K_i}\\to P_K$, with the colimit here taken sectionwise in abelian groups. On an affine $V$, Step 2 permits applying [det-pe-bounded-continuity-sections] to $U=X\\times_YV$ and the original diagram on $X_{\\mathrm{proét}}$. Its comparison is exactly $\\varphi(V)$; it is an isomorphism. There is no substitution of evaluation of a sheaf colimit for a sectionwise colimit in this argument.",
+   "text": "The evaluation functors on module complexes preserve colimits. Their image of the colimit cocone is a colimit of zero objects below a, hence the colimit also has the same lower bound. Put P = inverseImageCohomologyPresheaf f R q and take the canonical presheaf comparison colimit.post D P. Evaluation preserves colimits, and colimit.post_post identifies evaluation of this comparison with [det-pe-bounded-continuity-sections] at the qcqs pullback. Cancel the invertible evaluation comparison to conclude invertibility on affine objects. Module-sheaf forgetting preserves colimits and reflects isomorphisms by [lem-weil-pbc-module-sheaves-colimits-forgetful].",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "det-pe-bounded-continuity-sections"
@@ -63,11 +61,11 @@
    }
   },
   {
-   "text": "Every object $V$ of $Y_{\\mathrm{proét}}$ has a covering by affine objects $V_j$ by [det-pe-wcb-cover]. If two sections of the source of $\\varphi(V)$ have equal images, their restrictions to each $V_j$ are equal because $\\varphi(V_j)$ is injective. Every target section restricts to a section on $V_j$ which lifts because $\\varphi(V_j)$ is surjective. Thus $\\varphi$ is locally injective and locally surjective in the precise sense of [lem-weil-pbc-site-sheafification-iso-locally-bijective], so $\\varphi^\\#$ is an isomorphism. Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact] with the constant ring $\\mathbf Z$ to these abelian presheaves: sheafification preserves colimits, hence $(\\varinjlim_iP_{K_i})^\\#\\cong\\varinjlim_iP_{K_i}^\\#$. The natural identifications in Step 1 turn $\\varphi^\\#$ into the map of the statement: on each colimit cocone leg it is the map induced by $K_i\\to K$. This proves that the canonical comparison is an isomorphism.",
+   "text": "For every pro-etale object use its ordinary affine open cover, which is a pro-etale covering by Scheme.ProEt.mem_topology_of_openImmersion. Invertibility on affine sources gives local injectivity using equalizer sieves and local surjectivity using image sieves. Apply [lem-weil-pbc-site-sheafification-iso-locally-bijective], specifically topology.W_of_isLocallyBijective and W_iff. Abelian presheaf sheafification is a left adjoint and therefore preserves colimits directly by Mathlib. The common lower bound for the termwise colimit permits [lem-pe-bounded-complex-direct-image-presheaf]. Its naturality identifies the sheafified presheaf cocone, with vertex comparison A.map φ followed by the natural direct-image isomorphism, with the higher-direct-image cocone. The module forgetful functor preserves the relevant colimit by [lem-weil-pbc-module-sheaves-colimits-forgetful] and reflects isomorphisms, hence reflects that colimit. Uniqueness of colimits proves invertibility of the original canonical colimit.desc.",
    "uses": [
-    "det-pe-wcb-cover",
     "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+    "lem-pe-bounded-complex-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
@@ -78,19 +76,16 @@
  ],
  "proof_deps": [
   "det-pe-bounded-continuity-sections",
-  "det-pe-topos-functoriality-inverse-image",
-  "det-pe-wcb-cover",
   "lem-pe-bounded-complex-direct-image-presheaf",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
   "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/det-pe-bounded-continuity-direct-image.proof.md",
-  "place": "Both proof paragraphs; expanded into four steps"
+  "place": "Both original proof paragraphs, implemented by S9 on 2026-10-19 using ordinary affine open covers, the existing natural presheaf comparison, and Mathlib colimit universal properties."
  },
  "mathlib_searches": [
   {
@@ -194,12 +189,9 @@
   ]
  },
  "tool_uses": [
-  "det-pe-topos-functoriality-inverse-image",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "det-pe-wcb-cover",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -249,5 +241,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261019T112530-L-3951034",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
