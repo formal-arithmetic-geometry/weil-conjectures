@@ -17696,3 +17696,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:12 L: merged deliver/G2/Sheaf.Paper.ResidueLisseProjectiveModels (stage 3; reviewer PASS; first push; landing 20261019T231200-L-558480 (interface); batch 20261019T231019; modules 8; new nodes 7)
 - 23:12 L: merged deliver/G6/Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance (stage 3; reviewer PASS; first push; landing 20261019T231203-L-558923 (interface); batch 20261019T231019; modules 6; new nodes 5; change records: coord/changes/affine-linear-trace-action-relocation.md)
 - 23:12 L: merged deliver/G7/Sheaf.AlgebraicGeometry.InvertibleOrdersColimit (stage 3; reviewer PASS; first push; landing 20261019T231205-L-559229 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:12 L: merged deliver/G7/Sheaf.Paper.OrdinaryCompletedIntegralPullback (stage 3; reviewer PASS; first push; landing 20261019T231207-L-559821 (proof); batch 20261019T231019; modules 1; new nodes 0)
