@@ -337,5 +337,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-3635ae085 (reviewer sub-agent of L); spot-checked: Read both files in full, every cited statement, ILO XIII 2.3.1 (printed p.197) and Zheng 3.14–3.16 (pp.18–19). The item statement and stmt_deps are identical to the live node, which is still unsplit. New node lem-per-low-base-open-sheaf-finiteness: R^q j_* of a constructible F_ell-module sheaf is constructible and bounded per sheaf, over a regular Noetherian base of dimension <=1. It is a special case of ILO XIII 2.3.1(i), which needs only S Noetherian of dimension 1. The dimension-0 case via S ⊔ Spec Q[t] is valid, and Zheng 3.16(1) states the same. B1–B9 hold: statement only, objects introduced, defs correct, six searches recorded. It is not a duplicate of lem-per-gabber-open-immersion-sheaf-finiteness, which needs quasi-excellence that fails for a non-excellent DVR. Proof steps: Step 1 sets up a valid Noetherian induction over closed subsets, with D^b_c triangulated via thm-constructible-serre and the weak-Serre lemma. Step 2 gives finitely many per-sheaf bounds through truncation triangles and Rv_* triangulated. Step 3 uses generic constancy; for F_ell, abelian and module local constancy coincide. Step 4 is a genuinely elementary finite-free RHom calculation on slices. Step 5's degree bound [c-b, d-a] checks out. Step 6 applies the localization triangle with K=A_T to give i_*Ri^!N, then uses i^*i_*≅1 and exact i^* to show Ri^!N ∈ D^b_c(Z). Step 7 applies the induction on Z, finite pushforward and the localization triangle, which closes the induction. No SGA citation and no purity or dualizing input. The tool_uses are all generic and accepted. The parent's use on (P^1)^n over a field or an excellent DVR is covered. Edge cases checked: empty X, Z empty, field base, non-excellent DVR, nonreduced X. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LowBaseConstructibleInternalHom",
+  "declaration": "AlgebraicGeometry.Etale.isBoundedConstructible_derivedHom_of_regular_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/LowBaseConstructibleInternalHom.lean",
+  "statement": "theorem isBoundedConstructible_derivedHom_of_regular_base {S X : Scheme.{u}} [IsNoetherian S] (_hS : IsRegularScheme S) (_hdim : topologicalKrullDim S ≤ 1) (ell : ℕ) [Fact ell.Prime] (_hinv : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) (f : X ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (M N : DerivedCategoryModule (ULift.{u + 1} (ZMod ell)) X) (_hM : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ell)) X M) (_hN : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ell)) X N) : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ell)) X (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) X).obj (op M)).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-017fdaab7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Node unchanged except lean; 7 stmt_dep records identical to live. Lean matches every clause: IsNoetherian+IsRegularScheme S, topologicalKrullDim S ≤ 1, ell prime with stalk invertibility, IsSeparated+LocallyOfFiniteType+QuasiCompact f, A=ULift(ZMod ell) in the recorded DerivedCategoryModule encoding, hypotheses and conclusion via recorded isBoundedConstructible (constructible cohomology plus a finite [a,b] range), RHom = recorded Etale.derivedHom (genuine internal Hom of the derived closed structure, right adjoint of ⊗ᴸ). No extra hypotheses; universes clean; edge cases (empty S/X, zero, dim 0, non-excellent DVR, nonreduced X) covered. No duplicate (side derived-Hom theorems are over finite fields or fields, or are hypothesis classes). Docstrings carry source, blueprint and all 7 steps; sorry only; lean.statement verbatim; report has both sections. nt_compile --json: rc 0, 4.2 s, clean. No findings."
  }
 }

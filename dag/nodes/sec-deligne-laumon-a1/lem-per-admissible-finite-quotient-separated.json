@@ -189,5 +189,23 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-aef893515 (reviewer sub-agent of L); spot-checked: The statement is unchanged: it is byte-identical to the item as created unsplit in the Q136 snapshots. The only stmt_deps change adds def-weil-surjective-morphism, which the statement's 'finite surjective' needs. No new nodes. Step 1 unpacks def-per-admissible-finite-scheme-quotient: q is finite, and a topological quotient map is surjective, so q is surjective with h∘q=p. Step 2 cites the Mathlib leaf lem-weil-pbc-finite-proper (IsProper.instOfIsFinite, Proper.lean:69), so q is proper and therefore universally closed. Step 3 applies lem-weil-pbc-surjective-universally-closed-separated with X=M, Y=Q, f=q; its statement matches Stacks 09MQ(4) (morphisms.tex l.10114-10158), and every hypothesis is supplied. ILO IX 1.4 (printed pp.132-133) was read: it gives the admissible quotients, and the item makes their implicit separatedness explicit. No SGA is used. Small cases checked: empty M, trivial G, a swap of two copies of S, and a non-free Z/p action in characteristic p; the line with doubled origin shows the separatedness hypothesis is needed. No duplicate: projective-finite-group-quotient, admissible-quotient-affine-integral-charts, tame-admissible-scheme-quotient, free-finite-group-affine-quotient and the trf/a1 quotient nodes were read, and none states this. No cycle. I accept the declared tool_use: the 09MQ node was reviewed with a pass (L, 2026-10-10), is closed in slopmaster2 Lean without sorry, and is a generic black box. The citer lem-per-equivariant-marked-nodal-alteration step 14 uses exactly the conclusion. Advisory only: the existence of the induced morphism Q→S is presupposed by the statement's wording; it follows in a few lines from the quotient definition."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleFiniteQuotientSeparated",
+  "declaration": "AlgebraicGeometry.isSeparated_of_admissibleFiniteSchemeQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleFiniteQuotientSeparated.lean",
+  "statement": "theorem isSeparated_of_admissibleFiniteSchemeQuotient {G : Type v} [Group G] [Finite G] {S M Q : Scheme.{u}} [IsNoetherian S] (p : M ⟶ S) [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] (a : G →* Aut M) (q : M ⟶ Q) (hquot : IsAdmissibleFiniteSchemeQuotient a q) (r : Q ⟶ S) (hr : q ≫ r = p) : IsSeparated r",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-711eefd3d",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Noetherian S, separated finite-type p (LOFT+QC per record), finite G : Type v acting via G →* Aut M, recorded IsAdmissibleFiniteSchemeQuotient (orbits in affine opens, finite, invariant, quotient map, orbit fibres, invariant sections), induced r with q ≫ r = p, conclusion IsSeparated r; S-automorphism clause implied by invariance + hr; no freeness/|G| assumption; edge cases (empty M, trivial G, char p non-free) covered. Dep node files identical to live; item node changed only in lean; lean.statement verbatim. No duplicate in side lean/Mathlib/runs. Docstrings carry ILO IX 1.4 source, blueprint id and 3-step proof; sorry only; lines ≤100. nt_compile --json clean (3.0 s). Advisories: proof-dep module imported as public import (brief prefers plain import); second reading brief but clause-matching."
  }
 }

@@ -247,5 +247,23 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-b760a2853 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 8 steps, the full statement of every cited node, and the parent's use of the item. Stacks 0539 checked at the source. Temkin is not local (WANTED) and the proof is marked by:agent; I checked each step's mathematics directly. Unchanged statement is true and not weakened; edge cases checked: A=0, empty coefficient set, trivial valuation, K_0≠K. Steps 1 and 3 are elementary and correct. Step 2 applies Abhyankar to F (finitely generated) and algebraic-height to K_0/F with V_0∩F=W, so V_0 has finite height. Step 4: torsion-free gives flat (0539 leaf); local plus flat gives faithfully flat. Steps 5–7 use the presentation base-change leaf correctly and descend flatness via 00HJ. Step 8 uses the base-change equality of the fibre-locus node for K_0→K. One fault, fixed (C1/C4): def-weil-pbc-relative-separable-closure uses separably closed in the def-pc root sense, while the item needs K and K_0 separably closed in the def-kun sense. Step 2 now writes out the K direction and cites lem-pc-sepclosed-finite-sep-trivial (Mathlib leaf) for K_0. The corrected whole file is at fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-arbitrary-height-limit.json (step 2 text and uses, proof_deps); step 2 stays under 800 characters. No new nodes and no duplicate of the item in the DAG. Non-leaf citations are all in sk-i-curve-zero; off-unit citations are Mathlib leaves, so no tool_uses. No cycle and no SGA. Note for the maintainer: the inherited statement's 'geometrically reduced' and 'height' carry no definition citation; I left them because changing the statement text needs a statement_change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationArbitraryHeightLimit",
+  "declaration": "valuation_arbitrary_height_limit",
+  "file": "lean/Sheaf/TraceFormula/ValuationArbitraryHeightLimit.lean",
+  "statement": "theorem valuation_arbitrary_height_limit (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) (A : Type v) [CommRing A] [Algebra V A] [Module.Flat V A] [Algebra.FinitePresentation V A] (hgeom : @_root_.id (∀ [Algebra K (A ⊗[V] K)], Prop) (fun [Algebra K (A ⊗[V] K)] ↦ Algebra.IsGeometricallyReduced K (A ⊗[V] K)) (Algebra.TensorProduct.rightAlgebra (R := V) (A := A) (B := K))) : ∃ (K₀ : Subfield K) (V₀ : ValuationSubring K₀), IsSepClosed K₀ ∧ ringKrullDim V₀ < ⊤ ∧ (∀ x : K₀, x ∈ V₀ ↔ (x : K) ∈ V) ∧ ∃ (iV : V₀ →+* V), (∀ x : V₀, ((iV x : V) : K) = ((x : K₀) : K)) ∧ IsLocalHom iV ∧ RingHom.FaithfullyFlat iV ∧ @_root_.id (∀ [Algebra V₀ V], Prop) (fun [Algebra V₀ V] ↦ ∃ (A₀ : Type (max u v)) (_ : CommRing A₀) (_ : Algebra V₀ A₀), Module.Flat V₀ A₀ ∧ Algebra.FinitePresentation V₀ A₀ ∧ @_root_.id (∀ [Algebra K₀ (A₀ ⊗[V₀] K₀)], Prop) (fun [Algebra K₀ (A₀ ⊗[V₀] K₀)] ↦ Algebra.IsGeometricallyReduced K₀ (A₀ ⊗[V₀] K₀)) (Algebra.TensorProduct.rightAlgebra (R := V₀) (A := A₀) (B := K₀)) ∧ @_root_.id (∀ [Algebra V (A₀ ⊗[V₀] V)], Prop) (fun [Algebra V (A₀ ⊗[V₀] V)] ↦ Nonempty (A₀ ⊗[V₀] V ≃ₐ[V] A)) (Algebra.TensorProduct.rightAlgebra (R := V₀) (A := A₀) (B := V))) iV.toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3315146a3",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only the node's lean record is added; NL fields unchanged; statement verbatim in file. H3: IsSepClosed K, ValuationSubring K (fraction field K), Flat+FinitePresentation, hgeom = IsGeometricallyReduced K (A⊗[V]K) via rightAlgebra (rfl probe). Conclusion: Subfield K₀ IsSepClosed, V₀ = V∩K₀ by membership iff, ringKrullDim V₀<⊤ (height), iV pinned to the inclusion via the K-coercion equation, IsLocalHom and RingHom.FaithfullyFlat, base change along iV.toAlgebra, A₀ in max u v (same as the node via ULift) flat, f.p., A₀⊗K₀ geometrically reduced, Nonempty V-AlgEquiv with rightAlgebra. Edge cases A=0, height 0, empty coefficients, K₀=K, any characteristic covered; no extra hypotheses. No definitions, sorry only, source/blueprint docstrings with 8-step plan, proof-only imports exist on side. nt_compile --json: exit 0, 3.4 s, clean. Report has Worker report and Second reading by NA (a self-check, advisory)."
  }
 }

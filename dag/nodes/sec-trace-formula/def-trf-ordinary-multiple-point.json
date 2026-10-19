@@ -1,0 +1,122 @@
+{
+ "id": "def-trf-ordinary-multiple-point",
+ "kind": "definition",
+ "title": "Ordinary multiple points and their coordinate-axes algebras",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme] over $k$ with structure map $p$, and let $x\\in X$. For $n\\geq0$, define $R_n=k[[T_1,\\ldots,T_n]]/(T_iT_j\\mid i\\ne j)$ using [def-weil-pbc-multivariate-power-series]. The point $x$ is a (split) ordinary $n$-fold point if $n\\geq1$ and the maximal-ideal completion [def-weil-pbc-adic-completion] of $\\mathcal O_{X,x}$ is isomorphic to $R_n$ compatibly with the structural scalar map $k\\to\\mathcal O_{X,x}$ (the map of [def-trf-orgogozo-induction-data]). Thus the isomorphism is one of $k$-algebras. The one-axis case is included.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "def-trf-orgogozo-induction-data"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Appendix B, definition of ordinary n-fold points, printed p. 56; https://arxiv.org/pdf/0707.3953v3, PDF page 56. Also Stacks Project curves.tex, equation-multicross, Tags 0C1U and 0C1W."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "delta invariant branches ordinary multiple point algebraic curve",
+   "results": "8 hits: Weierstrass j/discriminant and DeltaGeneratedSpace; none defines ordinary multiple points.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "delta invariant of algebraic curve number of normalization branches ordinary multiple point",
+   "results": "8 hits: WeierstrassCurve valuation, good reduction and integral-model discriminants; no ordinary multiple-point notion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AdicCompletion",
+   "results": "10 hits: MvPowerSeries.toAdicCompletion and associated maps/equivalences; no coordinate-axes quotient or ordinary multiple-point predicate.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "deltaInvariant|IsOrdinary|branchCount|multicross (Mathlib); IsOrdinaryMultiplePoint|ordinaryMultiplePointRing (WeilConjectures and lean/Sheaf); ordinary.*fold point|ordinary.*multiple point|coordinate.axes (dag/nodes); blueprint_refs.py search ordinary multiple",
+   "results": "Mathlib msearch: 0 hits. No project/upstream declaration of the multiple-point notion. Project Orgogozo.IsOrdinaryDoublePoint is only n=2 and is reused for nodes. DAG matches are theorem applications, not a definition of general n-fold points; blueprint search found 0 nodes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-point-delta-branches",
+  "date": "2026-10-18",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Appendix B ordinary multiple point completion condition in the branch–delta equality criterion.",
+   "via": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion",
+    "lem-trf-valuation-exceptional-blowdown",
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryMultiplePoint",
+  "declaration": "AlgebraicGeometry.IsOrdinaryMultiplePoint",
+  "declarations": [
+   "AlgebraicGeometry.ordinaryMultiplePointRing",
+   "AlgebraicGeometry.IsOrdinaryMultiplePoint"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryMultiplePoint.lean",
+  "statement": "def IsOrdinaryMultiplePoint {k : Type u} [Field k] {X : Scheme.{u}} (p : X ⟶ Spec (.of k)) (x : X) (n : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6bb1ca",
+  "group": "Q160",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6bb1ca",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read the item, all 15 stmt_deps, both new def nodes, both modules and the report. Every clause matches the Lean (H3): alg-closed k; reduced finite-type X = LocallyOfFiniteType+QuasiCompact; pure dim 1; closed point x; b = Nat.card of the reducedNormalization fibre; delta = finrank over k of the stalk of conductorCokernel (genuine moduleStalkFunctor, restricted along localScalar); finiteness of both as conclusions; b>=1; b-1<=delta; equality iff IsOrdinaryMultiplePoint b (ring equiv of AdicCompletion with scalar compatibility = k-algebra iso); 1-fold iff smooth at x; 2-fold iff existing Orgogozo.IsOrdinaryDoublePoint (same ideal); smooth gives delta=0; node gives b=2, delta=1. No extra hypotheses or universe restrictions. New def-trf-ordinary-multiple-point is non-hollow, sourced to Temkin App. B and Stacks 0C1U/0C1W, and not a duplicate. def-trf-conductor-cokernel is an existing:true ownership record of the landed conductorCokernel (accepted Q07 pattern). No closure cycle. H4 searches of side/live Sheaf, WeilConjectures, Mathlib and DAG defs found no duplicate. Only sorry is the item theorem; docstrings carry source, blueprint tag and 11 steps. nt_compile --json is clean (2.6 s, 3.4 s, exit 0). Advisory: conductorCokernel is listed in both the theorem node and the new existing:true def node."
+ }
+}

@@ -18,7 +18,8 @@
   "def-weil-closed-immersion",
   "def-weil-polynomial-ring",
   "def-pc-finite-locally-free",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -292,5 +293,32 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-cb225ef4b (reviewer sub-agent of L); spot-checked: Read in full: ILO XVI 3.4.2, 3.4.5–3.4.9 (printed pp.245–248), the item, both new nodes and all 20 cited statements. The item statement is unchanged from live (still unsplit there), so no target is weakened. Steps 1–8 are correct. Step 2 applies lem-sbc-etale-regular-divisor-base-change with g=1, which is legitimate because the zero ring is vacuously regular under def-weil-regular-scheme. Step 3 uses the finite-base strict-localization node: the geometric fibre is Ω[u]/(u^ℓ), so it has one component. Step 4 uses the procyclic two-term complex for H^{≥2}(BG,A)=0. Step 5 uses direct image g'_*A, as on ILO p.248. Steps 6–7 give the explicit A[z]/(z^ℓ) filtration and the least-degree injection. Step 8 applies the strict-local divisor criterion to (X,D) and (X',D'). No cycle. Both new nodes are true, are not restatements of the parent and have no duplicate. lem-per-strict-local-divisor-low-kummer is an ingredient of the classifying node, not a duplicate. Faults fixed: (1) C1/C4: step 7 derived distinguished triangles from short exact sequences citing only def-weil-abstract-derived-category; it now cites the Mathlib leaf lem-sf-derived-ses-triangle. (2) B3: the relative-cone node used 'Grothendieck topos' with no definition node; it now cites def-weil-pbc-topos. Batch-5 flags: lem-trf-finite-base-strict-localization is generic strict-henselization algebra; its closure has only 4 trf nodes, all commutative algebra. The strict-local criterion reaches lem-trf-closed-immersion-strict-localization-cartesian, which is generic geometry; its closure has 43 trf/pod nodes, all generic infrastructure, with no trf/pod theorem, no sk-thm-trace-transport and no nt-* node. Neither is a step of the trace-formula or Poincaré-duality proofs, so both flags are accepted. The declared tool_uses are all generic black boxes and are accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KummerRootRegularDivisorPurity",
+  "declaration": "AlgebraicGeometry.Etale.kummer_root_regular_divisor_purity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.divisorRootAlgebra",
+   "AlgebraicGeometry.Etale.divisorRootScheme",
+   "AlgebraicGeometry.Etale.divisorRootCoordinate",
+   "AlgebraicGeometry.Etale.divisorRootProjection",
+   "AlgebraicGeometry.Etale.divisorRootDivisor",
+   "AlgebraicGeometry.Etale.divisorRootDivisorInclusion",
+   "AlgebraicGeometry.Etale.kummer_root_regular_divisor_purity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KummerRootRegularDivisorPurity.lean",
+  "statement": "theorem kummer_root_regular_divisor_purity (ℓ : ℕ) (hℓ : ℓ.Prime) (B : CommRingCat.{u}) [IsNoetherianRing B] (hB : IsRegularScheme (Spec B)) (hInv : IsUnit (ℓ : B)) (f : B) (hf : IsSMulRegular B f) (hD : IsRegularScheme (Spec (.of (B ⧸ Ideal.span {f})))) : ∃ (_hN : IsNoetherian (divisorRootScheme B ℓ f)) (_hND : IsNoetherian (divisorRootDivisor B ℓ f)) (_hi' : IsClosedImmersion (divisorRootDivisorInclusion B ℓ f)), IsRegularScheme (divisorRootScheme B ℓ f) ∧ IsRegularScheme (divisorRootDivisor B ℓ f) ∧ IsSMulRegular (divisorRootAlgebra B ℓ f) (divisorRootCoordinate B ℓ f) ∧ (divisorRootDivisorInclusion B ℓ f).ker.IsInvertible ∧ (∃ e : divisorRootDivisor B ℓ f ≅ Spec (.of (B ⧸ Ideal.span {f})), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {f}))) = divisorRootDivisorInclusion B ℓ f ≫ divisorRootProjection B ℓ f) ∧ (∃ (hi : IsStalkRegularClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {f})))) 1) (hi' : IsStalkRegularClosedImmersion (divisorRootDivisorInclusion B ℓ f) 1) (hX : IsUnit ((ℓ ^ 1 : ℕ) : Γ(Spec B, ⊤))) (hX' : IsUnit ((ℓ ^ 1 : ℕ) : Γ(divisorRootScheme B ℓ f, ⊤))), IsIso (punctualPurityClassMap ℓ hℓ (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {f})))) 1 hi hX) ↔ IsIso (punctualPurityClassMap ℓ hℓ (divisorRootDivisorInclusion B ℓ f) 1 hi' hX')) ∧ (divisorRootProjection B ℓ f).IsFiniteLocallyFreeOfDegree ℓ ∧ Surjective (divisorRootProjection B ℓ f) ∧ (divisorRootProjection B ℓ f ⁻¹ᵁ PrimeSpectrum.basicOpen f = PrimeSpectrum.basicOpen (divisorRootCoordinate B ℓ f)) ∧ Surjective (morphismRestrict (divisorRootProjection B ℓ f) (PrimeSpectrum.basicOpen f)) ∧ Etale (morphismRestrict (divisorRootProjection B ℓ f) (PrimeSpectrum.basicOpen f))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a90a8820f",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node diff vs side: lean record plus stmt_dep def-per-punctual-purity (landed, used for punctualPurityClassMap, no cycle); statement and proof unchanged; lean.statement matches the file verbatim. Every node clause is rendered: F_ell coefficients; Spec B regular and Noetherian with ell a unit; f an IsSMulRegular nonzerodivisor with no nonunit assumption (empty divisors allowed); D regular; literal AdjoinRoot X' and quotient D'; X' and D' regular; U a nonzerodivisor; ker.IsInvertible (meaningful Cartier condition); D'≅D pinned over X; IsIso iff of class maps with c=1, twist 1, shift 2; IsFiniteLocallyFreeOfDegree ell; p surjective; preimage of D(f) = D(U); restriction surjective and etale. The existential witnesses are Props, follow from the hypotheses, are not vacuous and add no hypothesis. Edge cases checked: ell prime, zero ring, unit f; one universe with no forced equality. No duplicate root-algebra definition; helpers are literal constructions with source and blueprint docstrings; proof steps in the docstring; proof is sorry. nt_compile --json clean (8.4 s, exit 0). Advisory only: upstream class-family uniqueness."
  }
 }

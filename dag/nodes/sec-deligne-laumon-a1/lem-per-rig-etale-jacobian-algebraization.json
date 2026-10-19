@@ -13,7 +13,8 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -217,5 +218,26 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-68f6a6e7b (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes; review.md has the details. The item keeps the statement of 0AKG(8) with 0AJU(3) unchanged. Its 7 steps follow the 0AKA induction, checked against restricted.tex l.2064-2205: t=0 base; Step 2 shrinks to the étale locus with g=1+x∈1+IC from 0ALQ(2), and the inverse mod I^n is written out; t=1 uses 0ALS; Step 4 base-changes to A/(a^m), and V(IA_m)=V(K_m) holds because a is nilpotent there (0GB2/0AL6); Step 5 combines the induction hypothesis with the conditional assembly node, taking the independent C_m to an (a)-complete F with F^_I≅E; Step 6 shows C/I^nC≅Ĉ_(a)/I^nĈ_(a) through exact completion on finite modules over Noetherian C, using a^n∈I^n; Step 7 closes the induction. The four new nodes are each true and strictly smaller than the item; I tested each on small cases. The principal case (0ALS) checks for a=0, for a unit, and for ℤ with x²−p. Closed base change (0GB2+0AL6) holds because E is Noetherian and the topologies agree under the radical equality. The assembly node is 0AKA from the compatibility claim to the rig-étaleness of B', and it keeps the original I^c-torsion hypothesis the source needs for the uniform bound; it algebraizes nothing, so it is not a restatement of the item. Shrinking (0ALQ(2)) checks on ℤ[x]/(x²−p) with g=1+p, which removes the prime (2,x+1). No duplicates in the snapshot or the live chapter: lem-per-completed-etale-jacobian-torsion goes the converse direction, lem-per-elkik-finite-etale-away-completion (a henselian finite-algebra equivalence) is the item's citer and no cycle arises, lem-per-etale-away-completion-hom-lifting is 0AKJ, and the live lem-per-conormal-torsion-algebraization is 0ALR with a different hypothesis. Everything stays in unit sk-p-dl-a1-perverse; no tool_uses, no SGA. The live item is still unsplit and this is its first delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RigEtaleJacobianAlgebraization",
+  "declaration": "AlgebraicGeometry.rigEtaleJacobianAlgebraization",
+  "declarations": [
+   "AlgebraicGeometry.rigEtaleJacobianAlgebraization"
+  ],
+  "file": "lean/Sheaf/RingTheory/RigEtaleJacobianAlgebraization.lean",
+  "statement": "theorem rigEtaleJacobianAlgebraization {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (r : ℕ) (J : Ideal (rigPolynomialCompletion I r)) [IsAdicComplete I (rigPolynomialCompletion I r ⧸ J)] (c : ℕ) (hkernel : I ^ c • (rigJacobianDifferential r I J).ker ≤ ⊥) (hcoker : I ^ c • (⊤ : Submodule A ((Fin r → (rigPolynomialCompletion I r ⧸ J)) ⧸ (rigJacobianDifferential r I J).range)) ≤ ⊥) : ∃ (D : Type u) (_ : CommRing D) (_ : Algebra A D), RingHom.FiniteType (algebraMap A D) ∧ (∀ f : A, f ∈ I → Etale (Spec.map (CommRingCat.ofHom (IsLocalization.Away.map (Localization.Away f) (Localization.Away (algebraMap A D f)) (algebraMap A D) f)))) ∧ Nonempty (AdicCompletion (I.map (algebraMap A D)) D ≃ₐ[A] (rigPolynomialCompletion I r ⧸ J))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a8f8cebad",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Item statement matches Stacks 0AKG(8) with 0AJU(3) clause by clause. Conditions: Noetherian A; P = AdicCompletion(IQ) of MvPolynomial (Fin r) A; IsAdicComplete I (P/J); I^c kills ker and coker of δ on Mathlib J.Cotangent → (Fin r → P/J). Conclusion: ∃ D : Type u finite type; étale over every D(f), f ∈ I, via the canonical map A_f → D_f (equivalent to étale over Spec A \\ V(I)); Nonempty A-algebra iso D^∧ ≃ P/J. New def node def-per-completed-polynomial-conormal: ∂_i is the .choose of a true ∃! (unique A-linear, filtration-preserving extension of pderiv), not hollow; J² well-definedness is a named stage-3 obligation; matches (NL) and 0AJU. Only change to the live node is stmt_deps adding the def node. No duplicate in the live DAG, lean/Sheaf or Mathlib (0ALR ConormalTorsionAlgebraization is a different statement). Edge cases r=0, c=0, I=0, I=A, J=P covered. Docstrings carry the source place, blueprint tag and 7 proof steps. nt_compile --json on both files: exit 0, clean (6.3 s, 4.0 s). Advisory: the étale clause is phrased via the D(f) cover, the Elkik citer via restriction to the open complement; equivalent."
  }
 }

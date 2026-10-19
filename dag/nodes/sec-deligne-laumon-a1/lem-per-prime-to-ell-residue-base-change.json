@@ -232,5 +232,23 @@
   "group": "Q151",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-b951b3890 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found nothing to fix. Shape: one commit containing the report and the item node, with no new nodes. The statement is byte-identical to the live unsplit node. stmt_deps gained only the tensor-product and vector-space-dimension definitions, which the statement uses. No SGA is cited. Source: ILO, Travaux de Gabber, Exposé II, Prop. 1.2.7 (printed pp. 25–26) says that for k'/k finite of degree prime to ℓ and any K/k, some residue field of k'⊗_k K has degree prime to ℓ over K. The item states exactly this, plus finiteness of every residue degree, which is true and is what the parent lem-per-alteration-cover-calculus uses in Steps 3 and 8 (with k=κ(x), L=κ(u), K=κ(y)). Small cases tested: L=k; C/R with K=C; Q(2^{1/3}) with K=R and with K=Q(2^{1/3}); the inseparable F_p(t^{1/p}) case, whose tensor algebra is nonreduced. Step 1 checked: it cites 01I4 (affine fibre product), 01JT (points), the residue-field sentence of 01JT (compatible with the map from K) and Spec of a field; each cited statement says what the step uses. Step 2 checked: the elementary basis argument gives dim_K A = d, with K-linearity checked and no finiteness of K/k used. Step 3 checked: A/p is a finite-dimensional domain, so the domain-is-field leaf applies with all its hypotheses, and Step 1 then gives κ(z) ≅ A/p over K. Step 4 checked: A is Artinian (00J6) and has a length-one filtration (00JB+00J3; that node allows non-local rings), with r>0. Step 5 checked: it writes out 00J2, Q_i ≅ A/m_i with m_i maximal, and the maximality argument is correct. Step 6 checked: dimension additivity gives d = Σ[κ(z_i):K] counted with multiplicity, and the divisibility contradiction follows. Tag labels 00J2/00J6/00JB/00J3/01I4/01JT checked against tags/tags. Route: the proof uses only definitions, Mathlib leaves and two nodes already proved in slopmaster2, which count as tools. The declared tool_use of lem-weil-pbc-fibre-product-point-residue-field is accepted. The filtration degree sum covers both of ILO's cases (étale and radicial) at once; this is not a route departure. Duplicate grep ('1.2.7', 'prime to ... residue degree', 'maximalement', the item id) found no existing node stating the item."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange",
+  "file": "lean/Sheaf/DeligneLaumon/PrimeToEllResidueBaseChange.lean",
+  "declaration": "AlgebraicGeometry.prime_to_ell_residue_base_change",
+  "statement": "theorem prime_to_ell_residue_base_change {k L K : Type u} [Field k] [Field L] [Field K] [Algebra k L] [Algebra k K] [FiniteDimensional k L] (d ell : ℕ) (hd : Module.finrank k L = d) (hell : Nat.Prime ell) (hcop : ¬ ell ∣ d) : (∀ z : pullback (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K))), ((pullback.snd (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).residueFieldAlgebraMap z).Finite) ∧ ∃ z : pullback (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K))), ¬ ell ∣ (pullback.snd (C := Scheme) (Spec.map (CommRingCat.ofHom (algebraMap k L))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).degreeOver z",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdf66af6f",
+  "group": "N6",
+  "result": "pass",
+  "note": "Clause-by-clause match vs node and ILO II Prop 1.2.7 (pp. 25-26): Field/Algebra/FiniteDimensional/finrank=d/Nat.Prime/¬ell∣d binders exact, K/k arbitrary; P = Scheme pullback of Spec.maps; clause 1 = RingHom.Finite of residueFieldAlgebraMap of pullback.snd (finite dimension over K; second reading correctly replaced the cardinality Finite); clause 2 = ∃ z, ¬ell ∣ degreeOver z (upstream ZetaSeries finrank via the same map). Shared universe forced by Scheme.{u}. Edge cases L=k, C/R with K=C, inseparable checked. lean.statement verbatim; only lean field changed vs live node; sorry-only proof; source/blueprint docstrings with 6 proof steps; no duplicate. nt_compile --json clean (2.5 s, exit 0). Advisory: degreeOver owned by a node outside stmt_deps; def-weil-field/tensor-product deps lack lean records (pre-existing)."
  }
 }

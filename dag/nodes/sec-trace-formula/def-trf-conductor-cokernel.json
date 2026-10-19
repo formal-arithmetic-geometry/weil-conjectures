@@ -1,0 +1,108 @@
+{
+ "id": "def-trf-conductor-cokernel",
+ "kind": "definition",
+ "title": "Normalization cokernel sheaf",
+ "status": "split",
+ "statement": "For a scheme $S$ [def-pc-scheme], let $S^{\\mathrm{rn}}$ be its componentwise reduced normalization [def-weil-pbc-reduced-normalization]. Define the normalization cokernel sheaf $\\mathcal Q_S$ to be the cokernel of the canonical morphism of $\\mathcal O_S$-modules $\\mathcal O_S\\to (S^{\\mathrm{rn}}\\to S)_*\\mathcal O_{S^{\\mathrm{rn}}}$ induced by the normalization map. This is the sheaf denoted `conductorCokernel S`.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07T8, conductor ideal and normalization cokernel construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cokernel of the structure sheaf map to the pushforward of the componentwise normalization",
+   "results": "No exact normalization-cokernel definition; the existing project declaration AlgebraicGeometry.conductorCokernel was inspected.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit cokernel",
+   "results": "Mathlib exposes the canonical unit-to-pushforward morphism and categorical cokernel operations, but no named normalization-cokernel declaration.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conductorCokernel|unitToPushforwardObjUnit",
+   "results": "The project contains AlgebraicGeometry.conductorCokernel in Sheaf.TraceFormula.ConductorSmoothBaseChange; no other DAG or Lean definition node records this notion.",
+   "date": "2026-10-19",
+   "verdict": "existing project declaration found"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-point-delta-branches",
+  "date": "2026-10-19",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normalization cokernel used to define the local delta module in the ordinary branch--delta criterion.",
+   "via": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion",
+    "lem-trf-valuation-exceptional-blowdown",
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.ConductorSmoothBaseChange",
+  "declaration": "AlgebraicGeometry.conductorCokernel",
+  "statement": "def conductorCokernel (S : Scheme.{u}) : S.Modules",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Existing project declaration is already landed in Sheaf.TraceFormula.ConductorSmoothBaseChange; this definition node records the notion so statement dependencies rest on the definition rather than the theorem conductor_smooth_base_change."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6bb1ca",
+  "group": "Q160",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6bb1ca",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read the item, all 15 stmt_deps, both new def nodes, both modules and the report. Every clause matches the Lean (H3): alg-closed k; reduced finite-type X = LocallyOfFiniteType+QuasiCompact; pure dim 1; closed point x; b = Nat.card of the reducedNormalization fibre; delta = finrank over k of the stalk of conductorCokernel (genuine moduleStalkFunctor, restricted along localScalar); finiteness of both as conclusions; b>=1; b-1<=delta; equality iff IsOrdinaryMultiplePoint b (ring equiv of AdicCompletion with scalar compatibility = k-algebra iso); 1-fold iff smooth at x; 2-fold iff existing Orgogozo.IsOrdinaryDoublePoint (same ideal); smooth gives delta=0; node gives b=2, delta=1. No extra hypotheses or universe restrictions. New def-trf-ordinary-multiple-point is non-hollow, sourced to Temkin App. B and Stacks 0C1U/0C1W, and not a duplicate. def-trf-conductor-cokernel is an existing:true ownership record of the landed conductorCokernel (accepted Q07 pattern). No closure cycle. H4 searches of side/live Sheaf, WeilConjectures, Mathlib and DAG defs found no duplicate. Only sorry is the item theorem; docstrings carry source, blueprint tag and 11 steps. nt_compile --json is clean (2.6 s, 3.4 s, exit 0). Advisory: conductorCokernel is listed in both the theorem node and the new existing:true def node."
+ }
+}

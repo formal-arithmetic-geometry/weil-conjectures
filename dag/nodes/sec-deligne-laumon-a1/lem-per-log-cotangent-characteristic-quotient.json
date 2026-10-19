@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-stalk",
+  "def-per-log-characteristic-generator-image"
  ],
  "proof": [
   {
@@ -238,5 +240,29 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-51d853cce (reviewer sub-agent of L); spot-checked: I read the full statement and all 7 steps against ILO Exposé X Prop 1.2 (printed pp.136-138): map (1), choice of t_i, cokernel of u killed by an invertible m, and m-divisibility of O*. D matches the source's \\bar M^gp_{X/Y}, because the chart Q→N surjects onto \\bar N_y. E is the cokernel of u. Divisibility for every invertible a includes the source's m, so nothing is weakened. All hypotheses are retained; log smoothness is unused, and the report says so. Step 1: geometric stalk = affine colimit (cofinal lemma) = strictly henselian by lem-weil-pbc-strict-henselization-local-structure (Stacks 04HX). Step 2: finite generation from the chart pushout in def-trf-fs-log-blowup. Step 3: every relation checked. dα(m) holds because a nonunit has residue 0 and a unit m has class 0 since α^{-1}(O^×)≅O^×; base sections land in im Q^gp. Steps 4-5: basis extraction, and k⊗E=0 for any basis choice. Step 6: the exact Mathlib structure leaf, with nonzero pairings ruling out free and p-primary summands; n is a unit by the unit criterion. Step 7: T^a−ū is separable with a simple nonzero root, lifted by the (ii)-direction of the henselian root-lifting node (Stacks 04GF), and the lift is a unit. Small cases checked: trivial log structure; char 0 with D=Z⊕Z/2; char p with D=Z, where t=q·gen with q≠p is a basis and p·gen is not; a=1. No new nodes and no SGA. Tool uses accepted: affine-neighbourhood cofinality, strict-henselization local structure, henselian root lifting and the unit criterion, all generic. Maintainer note: lem-per-log-smooth-differential-generators (Q50) is a stronger overlapping variant with the same proof pattern. It is not a one-line source for this item's any-basis / all-a form, so the two pre-existing nodes may later be merged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogCotangentCharacteristicQuotient",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.logCotangent_characteristic_quotient",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogHom.RelativeCharacteristicGroup",
+   "AlgebraicGeometry.EtaleLogHom.relativeCharacteristicClass",
+   "AlgebraicGeometry.EtaleLogHom.characteristicGroupBasisImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogCotangentCharacteristicQuotient.lean",
+  "statement": "theorem logCotangent_characteristic_quotient (hf : f.IsLogSmooth) (hQ : IsFineSaturatedMonoid Q) (hsharp : ∀ q : Q, IsUnit q → q = 1) (hβ : Y.logStructure.IsChart (Scheme.Etale.mk (𝟙 Y.scheme)) β) : ∃ (_ : IsLocalRing (strictLocalRing X.scheme t)), (∃ π : TensorProduct (strictLocalRing X.scheme t) (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (f.LogDifferential t) →ₗ[ IsLocalRing.ResidueField (strictLocalRing X.scheme t)] TensorProduct ℤ (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (f.RelativeCharacteristicGroup t β), Function.Surjective π ∧ (∀ m : X.logStructure.stalk t, π (1 ⊗ₜ[strictLocalRing X.scheme t] f.logDLog t m) = 1 ⊗ₜ[ℤ] f.relativeCharacteristicClass t β (Additive.ofMul (Algebra.GrothendieckGroup.of m))) ∧ ∀ a : strictLocalRing X.scheme t, π (1 ⊗ₜ[strictLocalRing X.scheme t] f.logD t a) = 0) ∧ (∃ (r : ℕ) (ts : Fin r → Algebra.GrothendieckGroup (X.logStructure.stalk t)) (b : Module.Basis (Fin r) (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (TensorProduct ℤ (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (f.RelativeCharacteristicGroup t β))), ∀ i, b i = 1 ⊗ₜ[ℤ] f.relativeCharacteristicClass t β (Additive.ofMul (ts i))) ∧ (∀ (r : ℕ) (ts : Fin r → Algebra.GrothendieckGroup (X.logStructure.stalk t)), (∃ b : Module.Basis (Fin r) (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (TensorProduct ℤ (IsLocalRing.ResidueField (strictLocalRing X.scheme t)) (f.RelativeCharacteristicGroup t β)), ∀ i, b i = 1 ⊗ₜ[ℤ] f.relativeCharacteristicClass t β (Additive.ofMul (ts i))) → Finite (Algebra.GrothendieckGroup (X.logStructure.characteristic t) ⧸ f.characteristicGroupBasisImage t β ts) ∧ ∃ n : ℕ, 0 < n ∧ IsUnit (n : strictLocalRing X.scheme t) ∧ ∀ c : Algebra.GrothendieckGroup (X.logStructure.characteristic t) ⧸ f.characteristicGroupBasisImage t β ts, c ^ n = 1) ∧ ∀ a : ℕ, 0 < a → IsUnit (a : strictLocalRing X.scheme t) → ∀ v : (strictLocalRing X.scheme t)ˣ, ∃ w : (strictLocalRing X.scheme t)ˣ, w ^ a = v",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the landed logarithmic differential quotient and characteristic-class/generator-image helpers. The three definitions in this module construct the relative characteristic group, its canonical class map, and the subgroup generated by group-completion basis lifts. Locality of the actual geometric ring stalk is provided existentially in the conclusion, without adding a local-ring hypothesis or choosing another coefficient field. The residue map is uniquely characterized on the generating ordinary and logarithmic monoid symbols; logarithmic group-completion symbols follow by additivity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-979d2e83b",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Lean byte-identical to returned dfc523; H2 repaired by def-per-log-characteristic-generator-image (existing:true on the unchanged LogSmoothDifferentialGenerators: characteristicClass, differentialGeneratorImage). Its statement matches the bodies, its stmt_deps own the body decls, no cycle, item adds no theorem stmt_dep vs live. All clauses re-checked (A = strictLocalRing with Prop IsLocalRing, π surjective and characterized, ∃ basis with M^gp lifts, finite invertible-n cokernel for every basis, all-a unit divisibility; r=0, D=0, char p, a=1). nt_compile --json clean 4.8 s. FIX: new node lean.statement trimmed of 'noncomputable' (check_existing now clean). Advisory: strictLocalRing owner def-trf-log-regular-pair not in stmt_deps (base-era)."
  }
 }

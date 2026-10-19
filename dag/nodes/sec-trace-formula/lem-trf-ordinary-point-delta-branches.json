@@ -18,7 +18,12 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-pure-dimension"
+  "def-weil-pure-dimension",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-module-stalk-functor",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-conductor-cokernel",
+  "def-trf-ordinary-multiple-point"
  ],
  "proof": [
   {
@@ -322,5 +327,27 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-6dc4738e2 (reviewer sub-agent of L); spot-checked: I read the item, all 21 proof deps and 10 stmt deps in full, the unit sk-i-curve-zero, and the Stacks sources. The Temkin PDF is WANTED and not available locally, so I checked the statement against Stacks curves.tex 0C1U/0C1V/0C1W/0C1X (multicross) and varieties.tex 0C1R, 0C3S, 0C3V and lemma-delta-number-branches-inequality(-sh). The statement is true as written and nothing was weakened; cases checked: b=1, node, three axes, cusp, tacnode, plane triple point, irreducible nodal curve. There are no new nodes. Searches of the DAG and both blueprints found no duplicate; the nodal-quotient nodes assume global properness and nodality, so they do not generalize this item. I accept all 12 declared tool_uses: they are generic algebra and curve tools used as black boxes. Two repairs are in fixes/dag/nodes/sec-trace-formula/lem-trf-ordinary-point-delta-branches.json. (1) C1/C4, Step 5: 'Completeness gives' had no node for the completeness of R_i, and the DVR-completion node does not state it. I added lem-weil-pbc-local-completion-local-ring (maximal ideal = t_iR_i) and the Mathlib leaf lem-weil-pbc-adic-completion-mod-ideal. (2) E5, Step 11: the node definition is a ring isomorphism, but 'the equality criterion then gives delta=1' needs a k-algebra isomorphism, and the step never derived node => ordinary two-fold point. The rewritten step shows that the ring isomorphism carries C onto D, so C/H is simple, delta=1=b-1, and Steps 6-7 give the k-algebra isomorphism. proof_deps was recomputed. I suggest adding Stacks 0C1V/0C1X as a local source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryPointDeltaBranches",
+  "declaration": "AlgebraicGeometry.ordinary_point_delta_branches",
+  "declarations": [
+   "AlgebraicGeometry.normalizationDeltaModule",
+   "AlgebraicGeometry.ordinary_point_delta_branches"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryPointDeltaBranches.lean",
+  "statement": "theorem ordinary_point_delta_branches (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsReduced X] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (hpure : X.IsPureDimension 1) (x : X) (hx : IsClosed ({x} : Set X)) : Finite {y : X.reducedNormalization // X.fromReducedNormalization y = x} ∧ Module.Finite k (normalizationDeltaModule (X ↘ Spec (.of k)) x) ∧ 1 ≤ Nat.card {y : X.reducedNormalization // X.fromReducedNormalization y = x} ∧ Nat.card {y : X.reducedNormalization // X.fromReducedNormalization y = x} - 1 ≤ Module.finrank k (normalizationDeltaModule (X ↘ Spec (.of k)) x) ∧ (Module.finrank k (normalizationDeltaModule (X ↘ Spec (.of k)) x) = Nat.card {y : X.reducedNormalization // X.fromReducedNormalization y = x} - 1 ↔ IsOrdinaryMultiplePoint (X ↘ Spec (.of k)) x (Nat.card {y : X.reducedNormalization // X.fromReducedNormalization y = x})) ∧ (IsOrdinaryMultiplePoint (X ↘ Spec (.of k)) x 1 ↔ ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ (X ↘ Spec (.of k)))) ∧ (IsOrdinaryMultiplePoint (X ↘ Spec (.of k)) x 2 ↔ Orgogozo.IsOrdinaryDoublePoint (X ↘ Spec (.of k)) x) ∧ ((∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ (X ↘ Spec (.of k)))) → Module.finrank k (normalizationDeltaModule (X ↘ Spec (.of k)) x) = 0) ∧ (Orgogozo.IsOrdinaryDoublePoint (X ↘ Spec (.of k)) x → Nat.card {y : X.reducedNormalization // X.fromReducedNormalization y = x} = 2 ∧ Module.finrank k (normalizationDeltaModule (X ↘ Spec (.of k)) x) = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5a6bb1ca",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read the item, all 15 stmt_deps, both new def nodes, both modules and the report. Every clause matches the Lean (H3): alg-closed k; reduced finite-type X = LocallyOfFiniteType+QuasiCompact; pure dim 1; closed point x; b = Nat.card of the reducedNormalization fibre; delta = finrank over k of the stalk of conductorCokernel (genuine moduleStalkFunctor, restricted along localScalar); finiteness of both as conclusions; b>=1; b-1<=delta; equality iff IsOrdinaryMultiplePoint b (ring equiv of AdicCompletion with scalar compatibility = k-algebra iso); 1-fold iff smooth at x; 2-fold iff existing Orgogozo.IsOrdinaryDoublePoint (same ideal); smooth gives delta=0; node gives b=2, delta=1. No extra hypotheses or universe restrictions. New def-trf-ordinary-multiple-point is non-hollow, sourced to Temkin App. B and Stacks 0C1U/0C1W, and not a duplicate. def-trf-conductor-cokernel is an existing:true ownership record of the landed conductorCokernel (accepted Q07 pattern). No closure cycle. H4 searches of side/live Sheaf, WeilConjectures, Mathlib and DAG defs found no duplicate. Only sorry is the item theorem; docstrings carry source, blueprint tag and 11 steps. nt_compile --json is clean (2.6 s, 3.4 s, exit 0). Advisory: conductorCokernel is listed in both the theorem node and the new existing:true def node."
  }
 }

@@ -328,5 +328,29 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-03d04848b (reviewer sub-agent of L); spot-checked: Read the complete item, all ten steps, fourteen cited statements, and relevant ILO/Stacks sources. Component gluing, torus action, smooth projection, reduced products, and edge cases check out; no repairs or new nodes needed. Detailed review written to review.md. The snapshot lacks the exact route-pivot exclusion list; content and dependency inspection found no dropped machinery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ToricRealizationFiniteType",
+  "declaration": "AlgebraicGeometry.Monoscheme.toric_realization_finite_type",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.torusGroup",
+   "AlgebraicGeometry.Monoscheme.coordinateTorusGroup",
+   "AlgebraicGeometry.Monoscheme.toric_realization_finite_type"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ToricRealizationFiniteType.lean",
+  "statement": "theorem toric_realization_finite_type (M : Fine.{u}) (hM : Fine.IsTorsionFree M) : IsReduced (realization (ULift.{u} ℚ) M) ∧ LocallyOfFiniteType (realizationToBase (ULift.{u} ℚ) M) ∧ QuasiCompact (realizationToBase (ULift.{u} ℚ) M) ∧ Finite (ConnectedComponents (realization (ULift.{u} ℚ) M).carrier) ∧ (∀ D : ConnectedComponents (realization (ULift.{u} ℚ) M).carrier, ∃ C : ToricComponent M, Set.range (componentι (ULift.{u} ℚ) C) = {x | ConnectedComponents.mk x = D}) ∧ (∀ C : ToricComponent M, IsIntegral (componentRealization (ULift.{u} ℚ) C) ∧ ∃ r : ℕ, Nonempty (C.lattice ≃* Multiplicative (Fin r → ℤ)) ∧ Nonempty (torusGroup (ULift.{u} ℚ) C ≅ coordinateTorusGroup (ULift.{u} ℚ) r) ∧ Smooth (torusToBase (ULift.{u} ℚ) C) ∧ LocallyOfFiniteType (torusToBase (ULift.{u} ℚ) C) ∧ QuasiCompact (torusToBase (ULift.{u} ℚ) C) ∧ IsCanonicalTorusAction (ULift.{u} ℚ) C (torusAction (ULift.{u} ℚ) C) ∧ ∃ action : ModObj (torusGroup (ULift.{u} ℚ) C).X (Over.mk (componentToBase (ULift.{u} ℚ) C)), action.smul.left = torusAction (ULift.{u} ℚ) C) ∧ (∀ (C : ToricComponent M) (Y : Scheme.{u}) (fY : Y ⟶ Spec (.of (ULift.{u} ℚ))), IsReduced Y → LocallyOfFiniteType fY → QuasiCompact fY → IsReduced (pullback (torusToBase (ULift.{u} ℚ) C) fY) ∧ LocallyOfFiniteType (pullback.snd (torusToBase (ULift.{u} ℚ) C) fY ≫ fY) ∧ QuasiCompact (pullback.snd (torusToBase (ULift.{u} ℚ) C) fY ≫ fY) ∧ Smooth (pullback.snd (torusToBase (ULift.{u} ℚ) C) fY) ∧ Surjective (pullback.snd (torusToBase (ULift.{u} ℚ) C) fY)) ∧ (∀ (n : ℕ) (N : Fin n → Fine.{u}), (∀ i : Fin n, Fine.IsTorsionFree (N i)) → IsReduced (∐ fun i : Fin n => realization (ULift.{u} ℚ) (N i)) ∧ Finite (ConnectedComponents (∐ fun i : Fin n => realization (ULift.{u} ℚ) (N i)).carrier) ∧ LocallyOfFiniteType (Sigma.desc (fun i : Fin n => realizationToBase (ULift.{u} ℚ) (N i))) ∧ QuasiCompact (Sigma.desc (fun i : Fin n => realizationToBase (ULift.{u} ℚ) (N i))))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Canonical group-scheme bundlings are transparent abbreviations of the existing torus and standard Laurent coordinate torus, using Mathlib Hopf structures. ULift ℚ permits any universe without changing the base field. Legacy imports follow the recorded monoscheme dependency, which is not a module-system file."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c00e2df58",
+  "group": "NO",
+  "result": "pass",
+  "note": "All node clauses rendered faithfully (Grp-iso of canonical Hopf tori, ModObj action equal to the chart-pinned torusAction, component ranges = actual ConnectedComponents fibres with IsIntegral, pullback.snd smooth/surjective with reduced/finite-type product over Q, finite Fin n coproducts via Sigma.desc); hypotheses exactly Fine + Fine.IsTorsionFree; ULift ℚ matches landed sibling, no universe restriction; edge cases (empty M, n=0, rank 0, empty/reducible Y) covered. Helpers torusGroup/coordinateTorusGroup are real canonical constructions; def-sc-gm-ga is rank-1 only, so no duplicate. Node diff vs live = lean only; statement verbatim; docstrings carry source and 10 steps; sole sorry. nt_compile --json clean 4.5 s, broken control fails. Advisory: redundant IsCanonicalTorusAction conjunct; def-weil-connected-scheme has no lean record."
  }
 }

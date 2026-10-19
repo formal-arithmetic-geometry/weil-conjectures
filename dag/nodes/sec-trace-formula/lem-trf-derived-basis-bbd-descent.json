@@ -223,5 +223,29 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q103-632c0f122 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the item metadata incorrectly records created.item=lem-trf-relative-duality-polynomial-chart and group=Q89. Corrected whole DAG JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-derived-basis-bbd-descent.json; review.md records all source, step, edge-case, route, and search checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBasisBbdDescent",
+  "declaration": "AlgebraicGeometry.derived_basis_bbd_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBasisBbdDescent.lean",
+  "statement": "theorem derived_basis_bbd_descent (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (B : Set X.Opens) (hcover : sSup B = ⊤) (hrefine : ∀ U ∈ B, ∀ V ∈ B, sSup {W : X.Opens | W ∈ B ∧ W ≤ U ⊓ V} = U ⊓ V) (K : ∀ U : {U : X.Opens // U ∈ B}, DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U.val))) (rho : ∀ (U V : {U : X.Opens // U ∈ B}) (h : V.val ≤ U.val), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.obj (K U) ≅ K V) (rho_id : ∀ U : {U : X.Opens // U ∈ B}, (rho U U le_rfl).hom = (derivedModuleOpenMapIdIso X U.val).hom.app (K U)) (rho_comp : ∀ (U V W : {U : X.Opens // U ∈ B}) (hUV : V.val ≤ U.val) (hVW : W.val ≤ V.val), (derivedModuleOpenMapCompIso X (homOfLE hVW) (homOfLE hUV)).inv.app (K U) ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hVW)).mapDerivedCategory.map (rho U V hUV).hom ≫ (rho V W hVW).hom = (rho U W (hVW.trans hUV)).hom) (hnegative : ∀ (U : {U : X.Opens // U ∈ B}) (i : ℤ), i < 0 → Subsingleton (K U ⟶ K U⟦i⟧)) : ∃ (KX : schemeDerivedCategory X) (rhoX : ∀ U : {U : X.Opens // U ∈ B}, (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U.val).mapDerivedCategory.obj KX ≅ K U), (∀ (U V : {U : X.Opens // U ∈ B}) (h : V.val ≤ U.val), (SheafOfModules.openRestrictionComparison (moduleRings X.toRingedSpace) (homOfLE h)).inv.app KX ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.map (rhoX U).hom ≫ (rho U V h).hom = (rhoX V).hom) ∧ ∀ (KX' : schemeDerivedCategory X) (rhoX' : ∀ U : {U : X.Opens // U ∈ B}, (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U.val).mapDerivedCategory.obj KX' ≅ K U), (∀ (U V : {U : X.Opens // U ∈ B}) (h : V.val ≤ U.val), (SheafOfModules.openRestrictionComparison (moduleRings X.toRingedSpace) (homOfLE h)).inv.app KX' ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.map (rhoX' U).hom ≫ (rho U V h).hom = (rhoX' V).hom) → ∃! a : KX ≅ KX', ∀ U : {U : X.Opens // U ∈ B}, (rhoX U).hom ≫ (rhoX' U).inv = (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U.val).mapDerivedCategory.map a.hom",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Local categories use the canonical localized-open-site presentation, equivalent to modules on each open subscheme by Scheme.Modules.overEquiv. The two real helper definitions supply the canonical sectionwise identity comparison for same-open restriction, avoiding expensive definitional reduction to the identity functor. Uniqueness explicitly quantifies over compatible isomorphisms. No mathematical statement correction.",
+  "declarations": [
+   "AlgebraicGeometry.moduleOpenMapIdIso",
+   "AlgebraicGeometry.derivedModuleOpenMapIdIso",
+   "AlgebraicGeometry.derived_basis_bbd_descent"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9a84c416",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0D67/0D68/0D6C clause by clause: sSup cover and refinement; K_U over the over-site; rho for every inclusion; rho_id against the canonical sectionwise identity comparison; rho_comp via derivedModuleOpenMapCompIso.inv (directions checked); Subsingleton negative self-Homs; existence with the openRestrictionComparison compatibility; ∃! compatible iso for every other solution. No extra hypotheses, universes u and w bound. Edge cases checked: empty B, empty open, U=V=W, non-quasi-compact X. Two new helper isos are real data with docstrings and duplicate nothing. Docstring has the 8 proof steps; imports follow rule 7; proof is sorry only. nt_compile --json clean, 15.2 s, rc 0. Advisory: derivedModuleOpenMapCompIso and openRestrictionComparison come from theorem-node modules outside stmt_deps; H2 bars citing them, so this is a maintainer note, not a fault."
  }
 }
