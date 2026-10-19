@@ -13,9 +13,106 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-per-rational-surface-singularity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-regular-local-localization], $R$ is a regular ring. Thus [lem-weil-pbc-regular-ring-normal] makes it normal, and [lem-sc-regular-local-domain] makes it a domain. Noetherianity is part of regular locality [def-weil-regular-scheme]. In particular $R$ satisfies the ambient conditions of [def-per-rational-surface-singularity]. Put $S=\\operatorname{Spec}R$ and denote its closed point by $s$. Its affine coordinate ring is regular, so $S$ is regular [def-weil-regular-scheme]; it is integral [def-pc-integral-scheme] since that ring is a domain, and is Noetherian. Fix an arbitrary normal modification $f:Z\\to S$ as in [def-per-rational-surface-singularity]. It remains to prove $H^1(Z,\\mathcal O_Z)=0$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-sc-regular-local-domain",
+    "def-weil-regular-scheme",
+    "def-per-rational-surface-singularity",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, ambient hypotheses and the sentence fixing a normal modification; regular-local localization is algebra.tex Tag 0AFS."
+   }
+  },
+  {
+   "text": "The morphism $f$ is an isomorphism over $S\\setminus\\{s\\}$. Indeed, every nonmaximal prime of the two-dimensional local domain $R$ has height at most one: a chain of length two ending at a nonmaximal prime could be prolonged by the maximal ideal, contradicting $\\dim R=2$. At a height-one prime the local ring is regular by [lem-weil-pbc-regular-local-localization] and is a DVR by [lem-sc-regular-dim1-dvr]. Apply clauses (1) and (2) of [lem-per-normal-modification-codimension-one]: its Noetherian-target hypothesis holds for $S$, and its reduced-source hypothesis holds because $Z$ is integral. Hence its isomorphism open contains every point other than $s$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-sc-regular-dim1-dvr",
+    "lem-per-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, preparation for domination; resolve-situation-vanishing and the following paragraph, using varieties.tex Tag 0BFP."
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-point-blowup-domination] to $X=S$, $Y=Z$, and $T=\\{s\\}$. The set $T$ is finite and closed, and $\\mathcal O_{S,s}=R$ is regular local of dimension two. The isomorphism away from $T$ was proved in Step 2. We obtain $X_n\\xrightarrow{b_n}\\cdots\\xrightarrow{b_1}X_0=S$ and $h:X_n\\to Z$ over $S$, with each center a reduced closed point lying above $s$.",
+   "uses": [
+    "lem-per-regular-point-blowup-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, first paragraph, domination by Tag 0AHI."
+   }
+  },
+  {
+   "text": "Induct on $i$ to check that $X_i$ is integral, regular and Noetherian, its map to $S$ is proper and birational, and every closed point above $s$ has a local ring of dimension two. The base $X_0=S$ has these properties by Step 1, and its only point above $s$ is $s$. For the induction step the next center $p_i$ is one of these closed points. Apply [lem-per-regular-point-blowup-acyclic]. It gives the asserted integrality, regularity and Noetherianity of $X_{i+1}$, properness of $b_{i+1}$, and the isomorphism off $p_i$, so the composite to $S$ remains proper by [lem-weil-pbc-proper-composition] and birational by its unchanged generic point and function field. If a closed point $q$ above $s$ maps to $p_i$, its local dimension is two by the same cited statement. Otherwise its local ring is unchanged by the isomorphism away from $p_i$; its image is closed since $b_{i+1}$ is proper, and the induction hypothesis gives dimension two there. This completes the induction. Every $X_i$ is also normal by clause (1) of [rem-pc-regular-normal]. The same blowup result gives $R^1(b_i)_*\\mathcal O_{X_i}=0$ for every $1\\leq i\\leq n$.",
+   "uses": [
+    "lem-per-regular-point-blowup-acyclic",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, regularity sentence and last sentence, using Tags 0AGR and 0AGS."
+   }
+  },
+  {
+   "text": "The affine-vanishing statement [lem-pc-affine-vanishing] applied to the structure sheaf on $X_0=S$ gives $H^1(X_0,\\mathcal O_{X_0})=0$. Inductively suppose $H^1(X_{i-1},\\mathcal O_{X_{i-1}})=0$. Apply [lem-per-modification-h1-exact-sequence] with base $R$, target modification $X_{i-1}\\to S$, source modification $X_i\\to S$, and comparison $b_i$. Step 4 gives normality of the target and both modification hypotheses. Its right-hand term $H^0(X_{i-1},R^1(b_i)_*\\mathcal O_{X_i})$ is zero by Step 4. Exactness then forces the middle term $H^1(X_i,\\mathcal O_{X_i})$ to vanish. Thus $H^1(X_n,\\mathcal O_{X_n})=0$, also when $n=0$.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-per-modification-h1-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, reduction to the vanishing of the first direct images via Tag 0AXF; affine base case made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-per-modification-h1-exact-sequence] to $Z\\to S$, $X_n\\to S$, and $h:X_n\\to Z$. The target $Z$ is normal by its choice in Step 1, and Step 4 gives the source modification. The left arrow is an injection $H^1(Z,\\mathcal O_Z)\\hookrightarrow H^1(X_n,\\mathcal O_{X_n})$. Step 5 makes its target zero, so its source is zero. Since $Z$ was an arbitrary normal modification, [def-per-rational-surface-singularity] gives that $R$ defines a rational singularity.",
+   "uses": [
+    "lem-per-modification-h1-exact-sequence",
+    "def-per-rational-surface-singularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4Q, injection by Tag 0AXF and conclusion by Tag 0B4N."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-per-rational-surface-singularity",
+  "def-weil-regular-scheme",
+  "lem-pc-affine-vanishing",
+  "lem-per-modification-h1-exact-sequence",
+  "lem-per-normal-modification-codimension-one",
+  "lem-per-regular-point-blowup-acyclic",
+  "lem-per-regular-point-blowup-domination",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0B4Q, resolve-lemma-regular-rational; the preparatory punctured-spectrum argument is in resolve-situation-vanishing and the following paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +148,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata regular local ring dimension two rational singularity",
+   "results": "OK 8 hits; IsDedekindDomainDvr.ring_dimensionLEOne, IsLocalRing.finrank_CotangentSpace_eq_one_iff, IsLocalRing.finrank_CotangentSpace_eq_one, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.TFAE, Algebra.IsStandardSmoothOfRelativeDimension, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern regular sequences, smoothness, normalization, cotangent or group cohomology, or affine limits; none states this point-blowup or surface-modification theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Nagata regular local ring of dimension two defines a rational singularity",
+   "results": "OK 8 hits; IsDiscreteValuationRing.toIsLocalRing, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, IsLocalRing.finrank_CotangentSpace_eq_one_iff, IsDedekindRing.casesOn, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, IsDiscreteValuationRing.TFAE, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern regular sequences, smoothness, normalization, cotangent or group cohomology, or affine limits; none states this point-blowup or surface-modification theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rational\", \"singularity\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern regular sequences, smoothness, normalization, cotangent or group cohomology, or affine limits; none states this point-blowup or surface-modification theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.?singular|regular.*surface",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern regular sequences, smoothness, normalization, cotangent or group cohomology, or affine limits; none states this point-blowup or surface-modification theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular local surface rings have rational singularities since all normal birational models have H1 O zero",
+   "results": "OK 8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.instSmoothOfIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.smoothLocus",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern regular sequences, smoothness, normalization, cotangent or group cohomology, or affine limits; none states this point-blowup or surface-modification theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -81,5 +213,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-surface-rational",
+  "worker": "Q26",
+  "summary": "Read Tag 0B4Q and all cited Stacks lemmas; expanded the punctured-spectrum argument, the regularity/dimension induction and the two exact-sequence applications. Reused the existing regular-local localization and codimension-one modification nodes, retaining the previous item and search records. Three statement-only children record point domination, point-blowup geometry/acyclicity without excellence, and modification H1 exactness.",
+  "blueprint": "Technical Tag 0B4Q input below lem-per-artin-gabber-affine-curve proof Step 1 through the recorded surface-resolution chain. Steps 1-3 realize the normal-modification domination paragraph; Step 4 its regularity and R1-vanishing assertions; Steps 5-6 its two uses of Tag 0AXF. The chapter and unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra localization theorem establishing regularity of all prime localizations; the perverse unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra regular-implies-normal theorem establishing the ambient normal local domain."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-scheme normality, applied to intermediate blowups; no perverse-unit theorem supplies this property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-regular-ring-normal",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-4691b508d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-4691b508d (reviewer sub-agent of L); spot-checked: Read Stacks resolve.tex 0B4Q, 0AHI, 0AGQ/0AGR/0AGS, situation-vanishing, 0AXF and 0B4N. The item statement is unchanged and is verbatim 0B4Q (Nagata kept because 0B4N requires it). The six steps follow 0B4Q. Step 1: the localization, regular-normal and domain nodes give the ambient hypotheses. Step 2: height-1 primes are DVRs, so clauses (1)-(2) of lem-per-normal-modification-codimension-one give the isomorphism off the closed point, with all hypotheses checked. Step 3: domination applied with T={s}. Step 4: a stated induction (base, step, closed points over p_i vs. others via closedness of proper maps, proper-composition leaf, normality from rem-pc-regular-normal(1)). Steps 5-6: the 0AXF sequence used twice plus affine vanishing, n=0 included. New nodes: domination = 0AHI exactly (empty tower allowed); acyclic = 0AGR + 0AGS(2) globalized via 02KH/02ND, checked true without excellence (closed points over p have dim 2 via the 0AGR local equation, R^1 supported at p with zero stalk); exact-sequence = the 0AXF short exact sequence with situation-vanishing hypotheses written out, X normal. All three are statement-only, self-contained and strictly smaller than the item. No duplicates: the 0AHH principalization, local maximal-blowup and excellent point-blowup nodes differ, and there is no 0AGS/0AXF node. No cycle (the excellent-propagation node cites the item one way). Batch-5 flag on lem-per-normal-modification-codimension-one -> lem-trf-proper-finite-fibre-finite-near: generic scheme theory (proper with a finite fibre is finite near the point), neither assumption nor part of its proof. Its own closure contains only 02IJ and a separated-finite-type base-change Mathlib leaf from the trf/pod chapters, no trace-transport and no batch-4 target, so it is accepted. The three tool_uses are generic commutative algebra and are accepted. No changes."
  }
 }
