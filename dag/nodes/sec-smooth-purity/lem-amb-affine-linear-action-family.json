@@ -1,0 +1,166 @@
+{
+ "id": "lem-amb-affine-linear-action-family",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-linear-trace-invariance",
+   "place": "Proof paragraphs 1–2: Specialization and identity restriction of the universal compact-support action",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Specialization and identity restriction of the universal compact-support action",
+ "statement": "For positive N, finite commutative A killed by N, supplied normalized Tate transport t, a Noetherian S with N invertible, and d≥0, the identity matrix acts as the identity on the affine trace source. Form the universal matrix action on that source over GL_d,S. For every g in GL_d(Γ(S,O)), there is an isomorphism C from its pullback along the section of g to the affine trace source over S such that pullback(universal action) followed by C equals C followed by the action of g. In particular its restriction along the identity section is the identity, by cancellation. This states specialization and normalization only, not constancy of the universal action or preservation of a trace. The objects and actions are those of [def-amb-affine-linear-universal-action].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2"
+ },
+ "stmt_deps": [
+  "def-amb-affine-linear-universal-action"
+ ],
+ "proof": [
+  {
+   "text": "The identity matrix gives the identity polynomial map. Its coefficient pullback is the identity pullback comparison by the left unit law and naturality. Apply unboundedEtaleCompactSupport_baseChange_id and cancel the coordinate-tower comparison to prove affineLinearAction_one.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "The coefficient tower is descended from the ordered shifted Tate tensor on the base. Build its base-change isomorphism using the tensor and shifted-line pullback isomorphisms and the Cartesian projection square. Associativity of inverse-image composition proves descended_coefficient_square; naturality then proves coefficientBaseChange_equivariant. No compatibility of arbitrary trace normalizations is required.",
+   "uses": [
+    "def-amb-affine-linear-trace-action",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Apply affineLinearExchange_action_naturality to the linear-map squares and the coefficient isomorphism. Compact-support base change is invertible on the affine projections. Conjugate its equation by the coordinate-tower compact-support comparisons; this constructs the comparison C and proves action_baseChange.",
+   "uses": [
+    "lem-amb-affine-linear-exchange-coherence",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  },
+  {
+   "text": "Take the base-change map to be the section of g in the existing determinant-open. The universal matrix specializes to g, so action_baseChange is the stated family formula. At g=1, affineLinearAction_one and cancellation give identity restriction. Dimension zero and an empty base use the same unit equations.",
+   "uses": [
+    "def-amb-affine-linear-universal-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+    "place": "Proof paragraphs 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-affine-linear-exchange-coherence",
+  "def-amb-affine-linear-universal-action"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.proof.md",
+  "place": "Proof paragraphs 1–2, explicit Lean interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of affine space acts on compactly supported top etale cohomology by a locally constant scalar function in an algebraic family",
+   "results": "AffineSpace.map, AffineEquiv.linearHom_apply, MulAction.automorphize_smul_left; no compact-support scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar action on top compactly supported cohomology of affine space varies locally constantly on the general linear group",
+   "results": "ContinuousCohomology linear action functors; no compact-support trace scalar-family comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PrimeSpectrum.*[Ii]rreducible|[Ii]rreducibleSpace.*PrimeSpectrum|apply_eq_of_preconnectedSpace; constant.*End; upperStar.*faithful",
+   "results": "PrimeSpectrum.irreducibleSpace; Topology.IsOpenEmbedding.preirreducibleSpace; IsLocallyConstant.apply_eq_of_preconnectedSpace. No affine trace scalar or residue equality detector.",
+   "date": "2026-10-19",
+   "verdict": "geometry follows from Mathlib; the two comparison obligations are not already declared"
+  },
+  {
+   "tool": "grep",
+   "query": "generalLinearOpen|exists_isPreconnected_glOne|eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible",
+   "results": "Source FrameIndependence.lean supplies relative GL and its connected-fibre geometry; InvertibleRestriction.lean supplies identity detection for invertible complexes. Both are proved. Neither supplies compact-support specialization of this tower action.",
+   "date": "2026-10-19",
+   "verdict": "reuse the proved source geometry and identity detector; only action specialization remains open"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance",
+  "group": "G6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLinearActionFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLinearActionFamily.lean",
+  "declaration": "AlgebraicGeometry.Etale.affineLinearAction_family",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineLinearAction_one",
+   "AlgebraicGeometry.Etale.affineLinearAction_family"
+  ],
+  "statement": "theorem affineLinearAction_family (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) : ∀ g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤), ∃ C : (ordinaryFinitePullback A (generalLinearOpen.lift (𝟙 S) g.val (Matrix.isUnits_det_units g))).obj (linearActionObject A N hA (generalLinearOpen d S).toScheme d) ≅ linearActionObject A N hA S d, (ordinaryFinitePullback A (generalLinearOpen.lift (𝟙 S) g.val (Matrix.isUnits_det_units g))).map (linearActionMatrix N hN A hA t (generalLinearOpen d S).toScheme (linearUniversalInvertible N S hS d) d (linearUniversalMatrix S d)) ≫ C.hom = C.hom ≫ linearActionMatrix N hN A hA t S hS d g",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261019T231203-L-558923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-74f1b",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261019T231203-L-558923",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 5 new proved modules/nodes against node lem-amb-linear-trace-invariance, relocation diff vs clone (verbatim, change record), 7 direct importers compiled against new oleans, axioms traced to upstream open statements"
+ }
+}
