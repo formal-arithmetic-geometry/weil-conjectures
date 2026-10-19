@@ -16,14 +16,12 @@ import Sheaf.Paper.PurEtaleClosedRightAdjointCoproducts
 import Sheaf.Paper.PurEtaleLisseDualizable
 import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.CategoryTheory.DerivedModuleRankOneCompact
 import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
-import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 
 /-!
 # Compactness of a lisse sheaf extended from a locally closed stratum
@@ -217,8 +215,47 @@ theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyCon
       ((DerivedCategory.singleFunctor
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj
         ((Etale.lowerStar (ModuleCat.{u + 1} C) g).obj
-          ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} C) j).obj L)))  :=
-  sorry
+          ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} C) j).obj L))) := by
+  classical
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian g
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace g
+  have : IsNoetherian Z := ⟨⟩
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian j
+  have : NoetherianSpace V :=
+    j.isOpenEmbedding.isEmbedding.noetherianSpace
+  have : QuasiCompact j := inferInstance
+  let hcX : HasCoproducts.{u + 1} (DerivedCategoryModule C X) :=
+    CategoryTheory.derived_hasCoproducts
+  let hcZ : HasCoproducts.{u + 1} (DerivedCategoryModule C Z) :=
+    CategoryTheory.derived_hasCoproducts
+  let hcV : HasCoproducts.{u + 1} (DerivedCategoryModule C V) :=
+    CategoryTheory.derived_hasCoproducts
+  refine ⟨hcX, ?_⟩
+  let K := (DerivedCategory.singleFunctor
+    (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj L
+  obtain ⟨braiding⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C))
+  let : BraidedCategory (DerivedCategoryModule C V) := braiding
+  have hK : IsCompactObject K := compact_of_dualizable K
+    (isDualizable_singleFunctor_lisseFlat L hL) (compact_unit (j ≫ g ≫ f))
+  let J := openImmersionLowerShriek (ModuleCat.{u + 1} C) j
+  let G := lowerStar (ModuleCat.{u + 1} C) g
+  have : (upperStar (ModuleCat.{u + 1} C) j).mapDerivedCategory.IsLeftAdjoint :=
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} C) j).isLeftAdjoint
+  have hJ := compact_of_adjunction
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} C) j) K hK
+  have (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I)
+      G.rightDerivedFunctor.rightAdjoint := preservesCoproducts_closedRightAdjoint C g f I
+  have hG := compact_of_adjunction (Adjunction.ofIsLeftAdjoint G.rightDerivedFunctor)
+    (J.mapDerivedCategory.obj K) hJ
+  let e := (G.rightDerivedFunctorIsoMapDerivedCategory.app
+      (J.mapDerivedCategory.obj K)) ≪≫
+    G.mapDerivedCategory.mapIso ((J.mapDerivedCategorySingleFunctor 0).app L) ≪≫
+    (G.mapDerivedCategorySingleFunctor 0).app (J.obj L)
+  exact compact_of_iso e hG
 
 end AlgebraicGeometry.Etale
 

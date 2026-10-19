@@ -17401,3 +17401,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:26 L: merged deliver/X2/Sheaf.Paper.SupportPairComposition (stage 3; reviewer PASS; first push; landing 20261019T112614-L-3961247 (interface); batch 20261019T112432; modules 1; new nodes 0; change records: coord/changes/support-pair-composition-private-helpers.md)
 - 11:26 L: merged deliver/X3/Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen (stage 3; reviewer PASS; first push; landing 20261019T112615-L-3961377 (interface); batch 20261019T112432; modules 4; new nodes 3)
 - 11:26 L: merged deliver/X3/Sheaf.LinearAlgebra.SpectrumExactSequence (stage 3; reviewer PASS; first push; landing 20261019T112616-L-3961479 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:26 L: merged deliver/X3/Sheaf.Paper.PurEtaleLisseStratumCompact (stage 3; reviewer PASS; first push; landing 20261019T112617-L-3961684 (proof); batch 20261019T112432; modules 1; new nodes 0)
