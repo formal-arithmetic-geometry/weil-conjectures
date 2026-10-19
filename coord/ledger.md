@@ -17626,3 +17626,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:29 L: merged deliver/Z9/Sheaf.Paper.RationalRestrictionGlue (stage 3; reviewer PASS; first push; landing 20261019T192900-L-1880384 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:31 L: merged deliver/NQ/cor-coef-verdier-weil-equivariance (stage 2; reviewer PASS; parallel immutable checks)
 - 19:31 L: returned deliver/NO/fix-lem-tensor-adjunction (reviewer RETURN: L: independent stage-2 immutable head 99a16cfbb636: Identical re-delivery: the TensorAdjunctionExchange.lean sha256 (e9b)
+- 19:32 L: returned deliver/W8/Sheaf.SixFunctors.IntegralCompactificationSystemRealization (reviewer RETURN: (reviewer C-b4389, head b4389548d) Brief 2/5/6 (delivery-errors.md has no stage-3 section; nearest H2/H7): the removed t)
