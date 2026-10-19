@@ -45,6 +45,15 @@ theorem rootOfUnity_modulus_and_isOfWeight_zero
     ‖ι (ζ : PadicAlgCl l)‖ = 1 ∧
       IsOfWeight ι.toRingHom (p ^ r) 0 (ζ : PadicAlgCl l) ∧
       ∀ κ : PadicAlgCl l ≃+* ℂ, ‖κ (ζ : PadicAlgCl l)‖ = 1 := by
-  sorry
+  obtain ⟨n, hn, hζ⟩ := hζ
+  have hpow : (ζ : PadicAlgCl l) ^ n = 1 := by
+    simpa only [Units.val_pow_eq_pow_val, Units.val_one] using congrArg Units.val hζ
+  have hnorm (κ : PadicAlgCl l ≃+* ℂ) : ‖κ (ζ : PadicAlgCl l)‖ = 1 := by
+    apply Complex.norm_eq_one_of_pow_eq_one (n := n)
+    · rw [← map_pow, hpow, map_one]
+    · exact Nat.ne_of_gt hn
+  refine ⟨hnorm ι, ?_, hnorm⟩
+  rw [IsOfWeight, zero_div, Real.rpow_zero]
+  exact hnorm ι
 
 end AlgebraicGeometry.WeilGroup
