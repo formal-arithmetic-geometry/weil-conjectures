@@ -24,9 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Since $K$ is intrinsically bounded constructible, clause (ii) of [lem-sf-proetale-constructible-origin], applied to $T=X$ and the same finite coefficient ring $A$, supplies $K'\\in D^b_c(X_{\\Et},A)$ and an isomorphism $e:K\\xrightarrow{\\sim}\\nu_X^*K'$. In particular $K'$ is bounded below. This uses the equivalence for derived constructible complexes, not merely the equivalence for individual sheaves.",
+   "text": "Use the finite-ring constructible-derived-origin essential-image criterion with B = Padic.coefficientExtensionRing l E n. Finiteness follows from hn. The finite support of the intrinsic cohomology supplies explicit lower and upper integer bounds, so the criterion supplies a bounded constructible etale complex K' and an isomorphism from the specified intrinsic derived comparison of K' to K. This is the derived etale-origin step required by the unit, directly in the constant-ring coefficient presentation.",
    "uses": [
-    "lem-sf-proetale-constructible-origin"
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
    ],
    "elementary": false,
    "source": {
@@ -46,9 +46,10 @@
    }
   },
   {
-   "text": "Apply [cor-sf-direct-image-ctf-nonproper] to $f$ and $K'$. Its hypotheses are exactly the finite-type $k$-schemes $X,Y$, separated finite-type morphism $f$, source dimension bound $\\dim X\\le d$, bounded constructibility from step 1, and Tor interval from step 2. Thus $L:=Rf_{\\Et,*}K'$ is bounded constructible on $Y_{\\Et}$ with Tor amplitude $[a,b+2d]$. No properness or separatedness of the structure morphism of $X$ is added.",
+   "text": "Apply [cor-sf-direct-image-ctf-nonproper] to $f$ and $K'$. Its hypotheses are exactly the finite-type $k$-schemes $X,Y$, separated finite-type morphism $f$, source dimension bound $\\dim X\\le d$, bounded constructibility from step 1, and Tor interval from step 2. Thus $L:=Rf_{\\Et,*}K'$ is bounded constructible on $Y_{\\Et}$ with Tor amplitude $[a,b+2d]$. No properness or separatedness of the structure morphism of $X$ is added. Convert the two equivalent finite-ring etale constructibility predicates with the existing constructible-etale-module-sheaf comparison theorem. The bundled Over objects supply the structure-map and IsOver instances for the current directImageCTFNonproper interface.",
    "uses": [
-    "cor-sf-direct-image-ctf-nonproper"
+    "cor-sf-direct-image-ctf-nonproper",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
@@ -57,23 +58,24 @@
    }
   },
   {
-   "text": "Check the geometric hypotheses for the direct-image comparison. Finite type includes quasi-compactness by [def-weil-finite-type-morphism]. Separatedness means that the relative diagonal $\\Delta_f:X\\to X\\times_YX$ is a closed immersion by [def-weil-proper-morphism]. Clause (c) of [lem-weil-pbc-proper-fp-permanence] makes $\\Delta_f$ proper. By the definition of proper in [def-weil-proper-morphism], $\\Delta_f$ is of finite type, hence quasi-compact by [def-weil-finite-type-morphism]. Therefore $f$ is quasi-separated by [def-weil-quasi-separated-morphism]. This proves both comparison hypotheses from assumptions actually present in the item.",
+   "text": "QuasiCompact f is an explicit hypothesis. The Mathlib instance IsSeparated f implies QuasiSeparated f: its closed diagonal is quasi-compact. No intervening proof that the diagonal is proper or of finite presentation is needed.",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-weil-proper-morphism",
-    "lem-weil-pbc-proper-fp-permanence",
     "def-weil-quasi-separated-morphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-proetale.md",
     "place": "Proof, sentence preceding the direct-image comparison display: qcqs check, with quasi-separatedness justified using separatedness."
    }
   },
   {
-   "text": "The bounded complex $K'$ belongs to $D^+(X_{\\Et},A)$, and $f$ is quasi-compact and quasi-separated by step 4. Specializing [prop-weil-pbc-comparison-direct-image] to $u=f$, $\\Lambda=A$ and its input complex $K'$ gives $\\alpha:\\nu_Y^*L\\xrightarrow{\\sim}Rf_{\\Proet,*}\\nu_X^*K'$. Applying the functor $Rf_{\\Proet,*}$ to $e$ and composing with $\\alpha^{-1}$ gives the isomorphism $Rf_{\\Proet,*}K\\xrightarrow{\\sim}\\nu_Y^*L$.",
+   "text": "Apply isIso_comparisonDirectImagePlus to the bounded-below complex K' and f. Use rightDerivedFunctorPlusCompatibility and mapDerivedCategoryPlusCompatibility on both sites to obtain the isomorphism in the unbounded derived categories. Factor the intrinsic comparison into fixed-coefficient inverse image followed by intrinsic realization using mapDerivedCategoryCompIso. The existing section-normalized sfIntrinsicDerivedDirectImageComparison commutes realization past direct image. Compose with derived direct image of the origin isomorphism to identify the comparison image of L = Rf_Et,* K' with the original intrinsic direct image Rf_Proet,* K.",
    "uses": [
-    "prop-weil-pbc-comparison-direct-image"
+    "prop-weil-pbc-comparison-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -82,11 +84,12 @@
    }
   },
   {
-   "text": "Apply clause (i) of [lem-sf-comparison-tor-amplitude] on $T=Y$ to the bounded constructible etale complex $L$ and its interval $[a,b+2d]$. It follows that $\\nu_Y^*L$ is intrinsically bounded constructible and has that Tor interval. The isomorphism in step 5 transfers both properties to $Rf_{\\Proet,*}K$: cohomology sheaves of isomorphic derived objects are isomorphic, and for every degree-zero $A$-module sheaf $M$, tensoring that isomorphism gives isomorphic cohomology sheaves for their derived tensor products with $M$. Thus the bounded constructibility condition of [def-weil-finite-torsion-constructibility] and every required vanishing in [def-weil-finite-tor-amplitude] hold. This proves the assertion for the original arbitrary intrinsic object $K$.",
+   "text": "Apply finiteCoefficient_comparison_preserves_torAmplitude to L and [a,b+2d]. Transport finite cohomological support through the homology isomorphisms. Transport each intrinsic constructible homology sheaf by proEtaleModuleRestriction_constructible_iff and isConstructible_of_iso. For the Tor predicate, every representative isomorphic to the original direct image is also isomorphic to the comparison image by composition; apply the comparison-image Tor hypothesis to exactly that representative, resolution and test module. This proves both conclusions for the arbitrary intrinsic K.",
    "uses": [
     "lem-sf-comparison-tor-amplitude",
     "def-weil-finite-torsion-constructibility",
-    "def-weil-finite-tor-amplitude"
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
    "elementary": false,
    "source": {
@@ -96,21 +99,24 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lem-sf-comparison-tor-amplitude",
   "cor-sf-direct-image-ctf-nonproper",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "def-weil-finite-type-morphism",
   "def-weil-proper-morphism",
-  "lem-weil-pbc-proper-fp-permanence",
   "def-weil-quasi-separated-morphism",
   "prop-weil-pbc-comparison-direct-image",
+  "src-right-derived-functor-plus-compatibility",
+  "def-weil-proetale-inverse-image",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-proetale-constant-module-constructibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-proetale.md",
-  "place": "Proof, all paragraphs and displayed comparison, read in /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-proetale.md. Six steps expand the prescribed route; step 4 corrects the source inference using separatedness and Stacks Tag 01W5 (morphisms.tex, lemma-closed-immersion-proper). Maintainer provenance correction: the six-step assembly follows the agent-written master blueprint and uses existing DAG statements as black boxes; reading the local blueprint does not make this a human-document proof. The independently checked Stacks inputs remain cited in the individual steps."
+  "place": "Proof, all paragraphs and displayed comparison, read in /home/ubuntu/weil-launcher-nt/literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/cor-sf-direct-image-ctf-proetale.md. Six steps expand the prescribed route; step 4 corrects the source inference using separatedness and Stacks Tag 01W5 (morphisms.tex, lemma-closed-immersion-proper). Maintainer provenance correction: the six-step assembly follows the agent-written master blueprint and uses existing DAG statements as black boxes; reading the local blueprint does not make this a human-document proof. The independently checked Stacks inputs remain cited in the individual steps. E1 stage 3: realize these steps using the already stated finite-ring origin theorem in the identical constant-ring presentation, the existing constructibility bridges, the canonical realization/direct-image comparison, and the bounded-below/unbounded compatibility API. The Mathlib separated-to-quasi-separated instance removes the detour through properness of the diagonal."
  },
  "mathlib_searches": [
   {
@@ -260,11 +266,9 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-proetale-constructible-origin",
   "lem-sf-comparison-tor-amplitude",
   "cor-sf-direct-image-ctf-nonproper",
   "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-proper-fp-permanence",
   "def-weil-quasi-separated-morphism",
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude"
@@ -295,5 +299,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Intrinsic finite-coefficient specialization using the recorded finiteTorConstructible, intrinsicFiniteTorsionConstructible, HasProEtaleTorAmplitude and canonical proEtaleConstantDerivedDirectImage. Bundled schemes over the algebraic closure record both structure maps and the compatibility of f. The upstream similarly named theorem uses a different etale-origin constructibility interface and cannot be used as an exact existing attachment."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c6978",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261019T093339-L-2298449",
+  "kind": "proof",
+  "note": "independent cc review: Delivered module (compiles 8.2 s; theorem signature identical to live; axioms propext, sorryAx (only from cited still-sorry dependency statements), Classical.choice, Quot.sound) and node proof/proof_deps/proof_origin against the Lean proof; the removed FiniteTorAmplitudeSites (étale predicate, unused before) against the empty realized list of unit sk-cor-sf-direct-image-ctf; 4 of 5 direct importers compile against the delivery"
  }
 }
