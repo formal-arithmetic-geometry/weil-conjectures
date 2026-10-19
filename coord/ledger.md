@@ -17184,3 +17184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/F3/Sheaf.AlgebraicGeometry.FiniteProetaleSmoothBaseChange (stage 3; reviewer PASS; first push; landing 20261019T093353-L-2302154 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F5/Sheaf.AlgebraicGeometry.RegularNormalDecomposition (stage 3; reviewer PASS; first push; landing 20261019T093355-L-2302350 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F5/Sheaf.RingTheory.FieldsExcellent (stage 3; reviewer PASS; first push; landing 20261019T093356-L-2302548 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/F6/Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite (stage 3; reviewer PASS; first push; landing 20261019T093357-L-2302917 (proof); batch 20261019T093237; modules 1; new nodes 0)

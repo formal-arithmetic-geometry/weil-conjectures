@@ -16,63 +16,63 @@
  ],
  "proof": [
   {
-   "text": "Put $Y_i=X\\times_{S,F_S^i}S$ with projections $\\pi_i:Y_i\\to X$ and $s_i:Y_i\\to S$; identify $Y_0$ with $X$, $\\pi_0$ with the identity, and $s_0$ with $f$. Every $Y_i$ has characteristic $p$: the sheaf map of $s_i$ sends $p\\cdot1=0$ to $p\\cdot1$ [def-weil-scheme-characteristic-p]. Here are the identifications needed for iteration, explicitly from [def-pc-fibre-product]. Write $Z_i=Y_i\\times_{S,F_S}S$ with projections $a_i:Z_i\\to Y_i$ and $b_i:Z_i\\to S$. The pair $(\\pi_i a_i,b_i)$ gives a map $\\theta_i:Z_i\\to Y_{i+1}$ because $f\\pi_i a_i=F_S^i s_i a_i=F_S^{i+1}b_i$. Conversely, the pair $(\\pi_{i+1},F_Ss_{i+1})$ defines $c_i:Y_{i+1}\\to Y_i$, and $(c_i,s_{i+1})$ defines $\\eta_i:Y_{i+1}\\to Z_i$. Indeed, $\\pi_{i+1}\\theta_i\\eta_i=\\pi_i c_i=\\pi_{i+1}$ and $s_{i+1}\\theta_i\\eta_i=s_{i+1}$, so $\\theta_i\\eta_i=\\mathrm{id}$. Also $\\pi_i c_i\\theta_i=\\pi_i a_i$ and $s_i c_i\\theta_i=F_S b_i=s_i a_i$, so $c_i\\theta_i=a_i$; together with $b_i\\eta_i\\theta_i=b_i$, this gives $\\eta_i\\theta_i=\\mathrm{id}$. Thus $\\theta_i$ is an isomorphism. Let $u_i:Y_i\\to Z_i$ be the one-step relative Frobenius and set $r_i=\\theta_i u_i:Y_i\\to Y_{i+1}$. Its projections satisfy $\\pi_{i+1}r_i=\\pi_iF_{Y_i}$ and $s_{i+1}r_i=s_i$. Existence of $u_i$ follows from $s_iF_{Y_i}=F_Ss_i$: both structure-sheaf maps send a section $t$ to $(s_i^\\sharp t)^p$ [def-weil-absolute-frobenius-scheme].",
+   "text": "Pull $p=0$ back along $f$ on global sections and restrict to every open to obtain the characteristic of $X$ [def-weil-scheme-characteristic-p]. Write $F=F_S^n$ and $G=F_X^n$ [def-weil-absolute-frobenius-scheme]. The equality $Gf=fF$ follows on spaces because both Frobenii are the identity, and on sections because ring maps preserve powers. The universal property [def-pc-fibre-product] gives $r=(G,f):X\\to X\\times_{S,F}S$ with the two required projection equations and proves its uniqueness.",
    "uses": [
     "def-weil-scheme-characteristic-p",
-    "def-pc-fibre-product",
-    "def-weil-absolute-frobenius-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCG, remark-n-fold-relative-frobenius: successive Frobenius twists and the first factorization formula; the fibre-product identifications are written out"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-relative-frobenius-universal-homeomorphism] with its base $X$ equal to $S$, its scheme $V$ equal to $Y_i$, and its morphism $v$ equal to $s_i$. Its integrality conclusion makes $u_i$ integral, without any finite-type or quasi-compactness assumption on $Y_i$. Hence $r_i$ is integral as well, directly by [def-weil-finite-integral-morphism]: for every affine open $V\\subseteq Y_{i+1}$, its inverse image $W=\\theta_i^{-1}(V)$ is isomorphic to $V$, hence affine, and $r_i^{-1}(V)=u_i^{-1}(W)$ is affine. The section map $\\mathcal O(V)\\to\\mathcal O(r_i^{-1}(V))$ is the composite of the isomorphism $\\mathcal O(V)\\cong\\mathcal O(W)$ with the integral section map of $u_i$. For each element of the last ring, take its monic equation over $\\mathcal O(W)$ and replace every coefficient by its inverse image in $\\mathcal O(V)$; the resulting monic equation proves integrality. For $i\\geq1$ set $C_i=r_{i-1}\\circ\\cdots\\circ r_0:X\\to Y_i$. The base case $C_1=r_0$ is integral. If $C_i$ is integral, clause (e) of [lem-weil-pbc-closed-immersion-integral-separated-uc] applied to $C_i$ and $r_i$ makes $C_{i+1}=r_iC_i$ integral. Thus $C_n$ is integral.",
-   "uses": [
-    "lem-trf-relative-frobenius-universal-homeomorphism",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCB, lemma-relative-frobenius (integrality); Tag 0CCG, remark-n-fold-relative-frobenius; composition: morphisms.tex Tag 01WK, lemma-composition-finite, second sentence"
-   }
-  },
-  {
-   "text": "We identify $C_n$ with the morphism in the statement, rather than assuming the iteration formula of Tag 0CCG. For $i=1$, the projections of $C_1$ are $F_X$ and $f$ by step 1. If $\\pi_iC_i=F_X^i$ and $s_iC_i=f$, then $\\pi_{i+1}C_{i+1}=\\pi_iF_{Y_i}C_i=F_X\\pi_iC_i=F_X^{i+1}$ and $s_{i+1}C_{i+1}=s_iC_i=f$. The middle equality is naturality of absolute Frobenius: on sections it is the identity $\\pi_i^\\sharp(t^p)=(\\pi_i^\\sharp t)^p$, and on spaces Frobenius is the identity [def-weil-absolute-frobenius-scheme]. By uniqueness in [def-pc-fibre-product], the two projection identities imply $C_n=F_{X/S}^{(n)}$. In particular $F_{X/S}^{(n)}$ is integral and $s_nF_{X/S}^{(n)}=f$.",
-   "uses": [
     "def-weil-absolute-frobenius-scheme",
     "def-pc-fibre-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CCG, remark-n-fold-relative-frobenius, first factorization formula, proved by induction on both projections; naturality is lemma-frobenius-endomorphism-identity, Tag 0CC7"
+    "place": "Tag 0CC7, lemma-frobenius-endomorphism-identity; Tag 0CCG, remark-n-fold-relative-frobenius"
    }
   },
   {
-   "text": "The factorization $f=s_n\\circ F_{X/S}^{(n)}$ has locally finite type composite by the hypothesis on $f$. Clause (f) of [lem-weil-pbc-proper-fp-permanence], applied to $F_{X/S}^{(n)}:X\\to Y_n$ and $s_n:Y_n\\to S$, therefore shows that $F_{X/S}^{(n)}$ is locally of finite type. This clause requires no separatedness, finite-type, or quasi-compactness hypothesis on $s_n$ or $S$.",
+   "text": "The absolute iterate $G$ is affine: the inverse image of each affine open is that same affine open, since $G$ is the identity on the space. Its map on sections is $s\\mapsto s^{p^n}$. Every section $s$ of the inverse image satisfies the monic polynomial $T^{p^n}-s$ with coefficients mapped by $G^\\sharp$, since its evaluation is $s^{p^n}-s^{p^n}=0$. The exponent $p^n$ is nonzero because $p$ is prime. This proves integrality directly from [def-weil-finite-integral-morphism], without any finite-type hypothesis on the absolute Frobenius.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC8, lemma-frobenius: direct monic-equation argument for the n-fold iterate"
+   }
+  },
+  {
+   "text": "The same identity-on-spaces observation makes $F$ affine. By clauses (1) and (3) of [lem-weil-pbc-affine-morphism-permanence], its base change $\\pi_1:X\\times_{S,F}S\\to X$ is affine and separated. Now $r\\pi_1=G$ is integral by the preceding step, so [lem-weil-pbc-integral-of-comp-separated] gives integrality of $r$. This replaces successive twists and integral composition by cancellation against a separated projection.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-integral-of-comp-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035D, lemma-finite-permanence, part (2); Tag 01S7, lemma-affine-separated"
+   }
+  },
+  {
+   "text": "The second projection $\\pi_2$ satisfies $r\\pi_2=f$. The latter is locally of finite type by hypothesis, so clause (f) of [lem-weil-pbc-proper-fp-permanence] proves that $r$ is locally of finite type. No hypothesis on $\\pi_2$ is required.",
    "uses": [
     "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T8, lemma-permanence-finite-type; this packages the finite-type part of the affine argument in varieties.tex Tag 0CCD, lemma-relative-frobenius-finite"
+    "place": "Tag 01T8, lemma-permanence-finite-type"
    }
   },
   {
-   "text": "The map $F_{X/S}^{(n)}$ is integral by steps 2 and 3 and locally of finite type by step 4. The reverse implication of [lem-weil-pbc-finite-iff-integral-lft] now proves that it is finite. This is the finite-type-plus-integrality criterion used in the proof of Tag 0CCD, applied after the explicit iteration check, and proves the asserted result for every $n\\geq1$.",
+   "text": "Combine the integrality and local finite type of $r$ using [lem-weil-pbc-finite-iff-integral-lft] to obtain finiteness. Together with the projection identities and uniqueness from the first step, this proves exactly the stated n-fold relative Frobenius assertion.",
    "uses": [
     "lem-weil-pbc-finite-iff-integral-lft"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WJ, lemma-finite-integral; the criterion follows from Algebra, lemma-characterize-finite-in-terms-of-integral, the final citation in varieties.tex Tag 0CCD"
+    "place": "Tag 01WJ, lemma-finite-integral"
    }
   }
  ],
@@ -81,15 +81,15 @@
   "def-weil-absolute-frobenius-scheme",
   "def-weil-finite-integral-morphism",
   "def-weil-scheme-characteristic-p",
-  "lem-trf-relative-frobenius-universal-homeomorphism",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-finite-iff-integral-lft",
+  "lem-weil-pbc-integral-of-comp-separated",
   "lem-weil-pbc-proper-fp-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0CCB, 0CCD and 0CCG: integrality and finite type imply finiteness; the iteration identification is expanded using fibre-product projections, and finite type is supplied by Morphisms Tag 01T8."
+  "place": "Tags 0CC7, 0CC8, 0CCD and 0CCG; direct power-map monic equations replace iteration, followed by separated postcomposition cancellation (Morphisms Tag 035D), finite-type cancellation (01T8), and finite iff integral plus locally finite type (01WJ). The Lean proof is by F6, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -258,5 +258,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Read the node, the five statement dependencies and their declarations (Scheme.IsCharacteristic, LocallyOfFiniteType, Scheme.iterateFrobenius, pullback, IsFinite), Stacks 0CCD/0CCG, the module and the report (Worker report and Second reading by Q06 both present). Every clause matches: prime p, char-p base, locally finite type f only, n>=1, pullback f (F_S^n), projection equations F_X^n and f, explicit uniqueness, IsFinite r. The existential hX : X.IsCharacteristic p follows from hS, is needed only to type X.iterateFrobenius, adds no hypothesis, and matches the recorded one-step sibling interface. Edge cases checked: n=1, f=id, empty and zero schemes, nilpotents, imperfect bases, infinite disjoint unions; n=0 excluded as in the node. One universe u, no restriction. No duplicate: the slopmaster2 relativeFrobenius finiteness assumes IsFinite of both Frobenii. No definitions, proof only sorry, docstrings carry the source place and blueprint id. The node differs from base only in lean, and lean.statement equals the file signature. nt_compile.py --json against the side overlay exits 0 with no errors or warnings (2.0 s). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T093357-L-2302917",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
