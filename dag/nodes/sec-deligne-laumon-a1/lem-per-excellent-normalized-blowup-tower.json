@@ -18,7 +18,9 @@
   "def-weil-pbc-normal-ring",
   "def-weil-finite-integral-morphism",
   "def-trf-projective-bundle-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-trf-normalized-blowup",
+  "def-weil-pbc-reduced-normalization"
  ],
  "proof": [
   {
@@ -331,5 +333,23 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-4785cc7ea (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement and stmt_deps are identical to base (checked against the Q102 snapshot), so no target is weakened. The 8 steps iterate Stacks 0BFT (resolve.tex) and get projectivity from 0B3I, 02NS and 0C4P. Steps: (1) normalization preparation; for integral T the componentwise and function-field normalizations agree by definition, and chart integrality comes from 01HV/01ON. (2) Dimension by 02JX: closed because proper, transcendence-degree term zero. (3) Normal open: 035K, written out with lem-sbc-normal-dense-open-integral-section; D(s) is dense and A→A_s→Frac A is injective. (4) The induction is stated with its invariants. Because d≥1, the ideal of the closed point is nonzero, quasi-coherent and finitely generated. (5) Excellence and Noetherianity of the blowup via 07QU and 0HAB. (6) Complement theorem and 02JX give dim B = d. (7) Noetherian schemes are qcqs (01OY), so 0C4P applies twice. (8) The normal-open clause, checked on fibre products. New node lem-per-integral-blowup-projective-geometry is exactly 02ND + 02NS(1); tested with I=O_T, with I=0 excluded, and with the point blowup of A². New node lem-per-projective-bundle-composition is 0C4P with the qcqs target kept. Neither duplicates an existing node (rg for 02ND/02NS/0C4P; the nearest candidates, the quasiprojective normalized blowup, the smooth-centre blowup and H-projective composition, are narrower or different). Batch-5 flags: the closures of all flagged citations reach only generic trf nodes: 0HAB with its G-ring/J-2/catenary pieces, the 02JX pieces, 0B3I, 01WC and the bundle-projective definitions. No trace-formula or Poincaré proof step and no sk-thm-trace-transport is reached, so I accept the flags. No SGA is cited. Only a cosmetic slip: the Step 6 source says 02ND is in morphisms.tex; it is in divisors.tex."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentNormalizedBlowupTower",
+  "declaration": "AlgebraicGeometry.excellent_normalized_blowup_tower",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentNormalizedBlowupTower.lean",
+  "statement": "theorem excellent_normalized_blowup_tower (X : Scheme.{u}) [IsIntegral X] (d : ℕ) (hd : 1 ≤ d) [IsNoetherian X] (hExcellent : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) (hDim : topologicalKrullDim X = d) (n : ℕ) (level : Fin (n + 1) → Scheme.{u}) (center : ∀ i : Fin n, (level i.castSucc).IdealSheafData) (arrow : ∀ i : Fin n, level i.succ ⟶ level i.castSucc) (hzero : level 0 = X.normalization) (hpoint : ∀ i : Fin n, ∃ x : level i.castSucc, IsClosed ({x} : Set (level i.castSucc)) ∧ center i = Scheme.IdealSheafData.vanishingIdeal ⟨closure ({x} : Set (level i.castSucc)), isClosed_closure⟩) (hblowup : ∀ i : Fin n, ∃ e : level i.succ ≅ (center i).normalizedBlowup, e.hom ≫ (center i).normalizedBlowupMap = arrow i) (π : ∀ i : Fin (n + 1), level i ⟶ X) (hπzero : π 0 = eqToHom hzero ≫ X.fromNormalization) (hπstep : ∀ i : Fin n, arrow i ≫ π i.castSucc = π i.succ) (r : level (Fin.last n) ⟶ X) (hr : r = π (Fin.last n)) : ∃ hIntegral : ∀ i : Fin (n + 1), IsIntegral (level i), (∀ i : Fin (n + 1), IsNoetherian (level i)) ∧ (∀ i : Fin (n + 1), topologicalKrullDim (level i) = d) ∧ (∀ i : Fin (n + 1), ∀ U : (level i).affineOpens, IsExcellent Γ(level i, U)) ∧ (∀ i : Fin (n + 1), ∀ x : level i, IsDomain ((level i).presheaf.stalk x) ∧ IsIntegrallyClosed ((level i).presheaf.stalk x)) ∧ IsFinite X.fromNormalization ∧ (∀ i : Fin n, IsFinite ((center i).blowup.fromReducedNormalization)) ∧ IsProjectiveBundle r ∧ (∃ hη : r (@genericPoint (level (Fin.last n)) _ inferInstance (@irreducibleSpace_of_isIntegral _ (hIntegral (Fin.last n)))) = genericPoint X, IsIso (@Scheme.Hom.functionFieldMap _ _ (hIntegral (Fin.last n)) inferInstance r hη)) ∧ (∀ U : X.Opens, (∀ x : U.toScheme, IsDomain (U.toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed (U.toScheme.presheaf.stalk x)) → (∀ i : Fin n, ∀ x : level i.castSucc, x ∈ (center i).support → π i.castSucc x ∉ U) → IsIso (pullback.snd r U.ι)) ∧ (∀ U : X.Opens, (∀ x : U.toScheme, IsDomain (U.toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed (U.toScheme.presheaf.stalk x)) → IsIso (pullback.snd X.fromNormalization U.ι))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d217c486a",
+  "group": "N1",
+  "result": "pass",
+  "note": "Re-delivery of the 592cdcdeabd3 RETURN (H2 theorem stmt_dep). stmt_deps now cites def-trf-normalized-blowup (existing:true, owns normalizedBlowup/normalizedBlowupMap) and def-weil-pbc-reduced-normalization (owns fromReducedNormalization) in place of lem-trf-normalized-blowup-calculus; both nodes are live, and their declarations are real noncomputable defs (blowup.reducedNormalization, fromReducedNormalization ≫ blowupMap), not .choose of a theorem. Lean module byte-identical to the previously reviewed head (sha256 8a8dda67…); clause-by-clause H3 match re-confirmed (integral/Noetherian/excellent/dim d≥1, X0=normalization, reduced closed-point centers, normalizedBlowup levels, all-level conclusions, finiteness, IsProjectiveBundle, function-field iso, normal-open clause, n=0 clause); node differs from live base only in lean and the two added stmt_deps; lean.statement verbatim; docstrings carry the source place and 8 steps; sorry only. nt_compile --json clean (4.1 s, exit 0). Advisories only: functionFieldMap has no owning node; topologicalKrullDim vs the ring Krull-dimension node; hzero uses scheme equality."
  }
 }

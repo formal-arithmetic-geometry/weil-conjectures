@@ -20,7 +20,8 @@
   "def-weil-pbc-module-localization",
   "def-sc-topological-abelian-cohomology",
   "def-nagata-global-blowup",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-sc-structure-sheaf-cohomology-pullback"
  ],
  "proof": [
   {
@@ -296,5 +297,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-896264b79 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full against resolve.tex: the 0BFV–0BFZ modification section, 0BBV, 0BG0, 0BGE and the full proof of 0BGM. The item statement and stmt_deps are byte-identical to the base, so no target is weakened. Step 1: 07QW, 07QU and 07QV make B excellent and Nagata, and the item's H^1 hypothesis is exactly the normal-modification quantifier of def-per-rational-surface-singularity, with Zariski cohomology identified via def-sc-topological-abelian-cohomology. Step 2: every hypothesis of the 0BBV Gorenstein node holds; each arrow is proper by blowup properness and each stage stays Noetherian by finite type over Noetherian. Step 3: 02JX gives dim X = 2 because the map is closed with transcendence degree 0; the excellent-normal-surface node then gives finitely many closed singular points with normal completions. Using excellence here instead of a dominating resolution is legitimate. Step 4: 0BG0 applies once the local injective essentially-finite-type extension with equal fraction fields is checked, which the step does via the affine-stalk node. Step 5: 0BGE gets all its hypotheses, including the normal completion. Steps 6–8: gluing, a regularity check point by point and concatenation, all correct. The new node lem-per-local-ordinary-point-blowups-globalize (0BFY converse with 0BFX) is true: blowing up commutes with the flat base change to the local scheme, local rings agree by localization, and normality and singularity of centres carry over. Its dimension-0 edge case (the blowup of a field at its point is empty) is excluded by the integrality hypothesis. It is not a duplicate: lem-per-local-normalized-blowups-globalize (0BFZ) gives normalized blowups and endpoint comparisons only, and grep for 0BFV–0BFZ and for the modifications lemmas found no other match. It is not a restated clause of the item, and there is no cycle. Batch-5: the closure of lem-per-complete-local-excellence reaches only commutative-algebra trf nodes (universally catenary, CM, fraction degree). lem-trf-closed-dominant-dimension is the generic 02JX dimension formula. Neither is part of the trace formula or Poincaré duality, so both are accepted. I accept the declared tool_uses as generic; no SGA source is used. Minor point: that affine opens of a finite-type scheme have finite-type coordinate rings (01T2) is used as a definitional unfolding. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalSurfacePointBlowupResolution",
+  "declaration": "AlgebraicGeometry.exists_regular_ordinary_point_blowup_tower",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalSurfacePointBlowupResolution.lean",
+  "statement": "theorem exists_regular_ordinary_point_blowup_tower (C : Type u) [CommRing C] [IsNoetherianRing C] [IsLocalRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] (B : Type v) [CommRing B] [IsLocalRing B] [IsDomain B] [IsIntegrallyClosed B] (hDim : ringKrullDim B = 2) (hEss : ∃ (D : CommRingCat.{max u v}) (φ : C →+* D) (S : Submonoid D), φ.FiniteType ∧ Nonempty (LocalizedModule S D ≃+* B)) (hRat : ∀ (Z : Scheme.{v}) [IsIntegral Z], (∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) → ∀ (f : Z ⟶ Spec (CommRingCat.of B)) [IsProper f] (hη : f (genericPoint Z) = genericPoint (Spec (CommRingCat.of B))), IsIso (f.functionFieldMap hη) → Subsingleton (Sheaf.H' Z.structureSheafAb 1 ⊤)) : ∃ (n : ℕ) (V : Fin (n + 1) → Scheme.{v}) (p : ∀ i : Fin (n + 1), V i ⟶ Spec (CommRingCat.of B)), IsIso (p 0) ∧ (∀ i : Fin (n + 1), IsIntegral (V i) ∧ ∀ x : V i, IsDomain ((V i).presheaf.stalk x) ∧ IsIntegrallyClosed ((V i).presheaf.stalk x)) ∧ IsRegularScheme (V (Fin.last n)) ∧ ∀ j : Fin n, ∃ (x : V j.castSucc) (hx : IsClosed ({x} : Set (V j.castSucc))) (I : (V j.castSucc).IdealSheafData), I = Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩ ∧ ¬ IsRegularLocalRing ((V j.castSucc).presheaf.stalk x) ∧ p j.castSucc x = IsLocalRing.closedPoint B ∧ ∃ e : V j.succ ≅ I.blowup, IsProper (e.hom ≫ I.blowupMap) ∧ e.hom ≫ I.blowupMap ≫ p j.castSucc = p j.succ",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b41e96f0",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Only the lean record and one stmt_dep were added vs live; the added dep (def-sc-structure-sheaf-cohomology-pullback) is already landed and its structureSheafAb is used. Every clause matches the node: C Noetherian complete local; B normal local domain of dim 2; localization of a finite-type C-algebra via LocalizedModule in universe max u v (no restriction). H1 vanishing holds for all integral normal proper Z with iso functionFieldMap (Sheaf.H' structureSheafAb 1 top). Conclusion: IsIso(p 0); every level integral and normal; IsRegularScheme at the end; centres are the vanishing ideal of a closed singleton, not regular, over the closed point; each step is an ordinary blowup, proper, and the tower commutes. n=0 is allowed. Same shape as the PASSed normalized-refinement sibling. Statement verbatim in the file; sorry only; docstrings carry source, blueprint and 8 steps; no name collision. nt_compile --json clean in 4.3 s, and a broken control copy fails. Advisory: the Second reading section is a placeholder; unused private imports of proof-dep modules."
  }
 }

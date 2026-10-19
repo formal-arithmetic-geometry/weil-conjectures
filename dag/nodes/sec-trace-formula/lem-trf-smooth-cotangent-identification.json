@@ -238,5 +238,28 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N0-2f53a180c (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited sources; all four steps, canonical augmentation, arbitrary localization, edge cases, and route restrictions check out. Corrected two failed Loogle-query verdicts from “no match” to “unavailable”; no mathematical changes. Full review in review.md and corrected JSON under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialCotangentIdentification",
+  "declaration": "Algebra.CotangentResolution.polynomial_augmentation_isIso",
+  "declarations": [
+   "Algebra.CotangentResolution.DifferentialAugmentation",
+   "Algebra.CotangentResolution.kahlerAlgebraMapIso",
+   "Algebra.CotangentResolution.polynomial_augmentation_isIso"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialCotangentIdentification.lean",
+  "statement": "theorem polynomial_augmentation_isIso [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)] (C : Coherence.{u}) (A : Type u) [CommRing A] (E : Type u) : (∃ a : DifferentialAugmentation C (Arrow.mk (CommRingCat.ofHom (algebraMap A (MvPolynomial E A)))), IsIso (DerivedCategory.Q.map a.map)) ∧ ∀ T : Submonoid (MvPolynomial E A), ∃ a : DifferentialAugmentation C (Arrow.mk (CommRingCat.ofHom (algebraMap A (Localization T)))), IsIso (DerivedCategory.Q.map (a.map ≫ (HomologicalComplex.single (ModuleCat.{u} (Localization T)) (ComplexShape.up ℤ) 0).map ((kahlerAlgebraMapIso A (Localization T)).hom ≫ ModuleCat.ofHom (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale A (MvPolynomial E A) (Localization T)).symm.toLinearMap)))",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-346668f4a",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; statement verbatim; nt_compile --json clean (3.3 s, exit 0, no errors or warnings). Clauses match Stacks 08QH/08SF: arbitrary A and E (same universe u, as the dependency's Coherence.{u} interface requires and the report states), standard cotangent complex from the recorded Coherence, augmentation pinned on all degree-0 generators b⊗dx ↦ b·d(εx) so it is the unique canonical chain map (exists since εd0=εd1), IsIso in D(P); localization clause for every Submonoid T via eqToIso along toAlgebra_algebraMap and Mathlib tensorKaehlerEquivOfFormallyEtale.symm. Edge cases: E empty or infinite, A=0, T=⊥, 0∈T all covered. No duplicate in Mathlib or side; docstrings carry source place, blueprint tag and all 4 proof steps; sorry only in the theorem proof. Advisory: unused proof-only imports; second reading is the author's own pass; the title's 'basis' is proof-only."
  }
 }

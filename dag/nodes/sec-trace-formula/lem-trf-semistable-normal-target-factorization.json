@@ -19,7 +19,8 @@
   "lem-weil-pbc-relative-normalization",
   "def-weil-pbc-normal-ring",
   "def-weil-finite-integral-morphism",
-  "def-weil-irreducible-components"
+  "def-weil-irreducible-components",
+  "def-trf-horizontal-valuation-curve-data"
  ],
  "proof": [
   {
@@ -285,5 +286,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-1a1ce0c2b (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, and the full statement of all 19 cited nodes. The delivery adds no new nodes and does not weaken the statement. Its one citer (exceptional-closed-image-criterion) uses exactly the factorization and the two contraction equivalences. No cycle. proof_deps equals the union of the step uses. No SGA is cited. Source: Temkin is not in literature/; the report lists it as WANTED and the proof is marked agent, which is the correct handling. I checked the steps against the Temkin arXiv text found under /tmp: §4 preamble, Remark 4.1, Prop 3.5.2, Lemma 4.4.1(i) and the first sentence of the Lemma 4.4.4 proof. The item is a faithful expansion of that first sentence. Step checks: S1, a nonzero a in the least nonzero prime gives D(a)={eta} and V[1/a]=K; torsion-free sections then give schematic density. S2, the relative normalization in X_eta equals the absolute normalization because A_K is a product of normal domains C_i whose fraction fields are the component function fields (density plus finitely many components). The qcqs hypothesis for X_eta->X is immediate but not written. S3, horizontal-curve-models applies to the reduced finite modification nu. D_N sits inside N x_X D as a closed subscheme, which gives finiteness of nu_D. S4, eta-normal applies to the semistable Y, and preparation then gives Y^nu=Y. S5, factorization for a normal source, then proper-to-separated. S6, the kernel-ideal factorization (h is quasi-compact via qcqs-permanence), cancelling the closed immersion D->X, then proper over D. S7, by the definition. S8, the fibre of nu is finite discrete: the fibre algebra is finite over kappa(x), primes are maximal and inclusion is preserved, so the irreducible image is a point; base change by finite-permanence (a). Edge cases checked: height 0, empty D, non-integral or non-separated X, imperfect K. The rg search for duplicates found none. Tool uses accepted: lem-sc-flat-invertible-sections-torsion-free and lem-sbc-normal-sections-finite-product, both generic black boxes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SemistableNormalTargetFactorization",
+  "declaration": "AlgebraicGeometry.Temkin.semistable_normal_target_factorization",
+  "file": "lean/Sheaf/TraceFormula/SemistableNormalTargetFactorization.lean",
+  "statement": "theorem semistable_normal_target_factorization (B : HorizontalValuationBase.{u}) (P Q : MultipointedCurve B.T) (f : Q.Hom P) (hSmooth : Smooth (pullback.snd P.x B.genericMap)) (hEtale : Etale (pullback.snd P.d B.genericMap)) (hf : f.IsEtaModification B.genericMap) (hQ : Q.IsSemistable) : ∃ (_ : QuasiCompact (pullback.fst P.x B.genericMap)) (_ : QuasiSeparated (pullback.fst P.x B.genericMap)), (∀ z : (pullback.fst P.x B.genericMap).normalization, IsDomain ((pullback.fst P.x B.genericMap).normalization.presheaf.stalk z) ∧ IsIntegrallyClosed ((pullback.fst P.x B.genericMap).normalization.presheaf.stalk z)) ∧ IsFinite (pullback.fst P.x B.genericMap).fromNormalization ∧ ∃ (hn : RelativeCurve ((pullback.fst P.x B.genericMap).fromNormalization ≫ P.x)) (D : Scheme.{u}) (i : D ⟶ (pullback.fst P.x B.genericMap).normalization) (hD : FlatClosure ((pullback.fst P.x B.genericMap).fromNormalization ≫ P.x) B.genericMap (horizontalGenericMarkingι P B.genericMap (pullback.fst P.x B.genericMap).fromNormalization) i) (r : D ⟶ P.D) (hr : r ≫ P.d = i ≫ (pullback.fst P.x B.genericMap).fromNormalization ≫ P.x) (hi : r ≫ P.i = i ≫ (pullback.fst P.x B.genericMap).fromNormalization), (horizontalClosurePairMap P B.genericMap (pullback.fst P.x B.genericMap).fromNormalization i hn hD r hr hi).IsEtaModification B.genericMap ∧ ∃ g : Q.Hom (horizontalClosurePair ((pullback.fst P.x B.genericMap).fromNormalization ≫ P.x) B.genericMap (horizontalGenericMarkingι P B.genericMap (pullback.fst P.x B.genericMap).fromNormalization) i hn hD), g.IsEtaModification B.genericMap ∧ f.curve = g.curve ≫ (pullback.fst P.x B.genericMap).fromNormalization ∧ f.marking = g.marking ≫ r ∧ (∀ (t : B.T) (C : Set (Q.x.fiber t)), C ∈ irreducibleComponents (Q.x.fiber t) → (((Q.x.fiberι t ≫ f.curve) '' C).Subsingleton ↔ ((Q.x.fiberι t ≫ g.curve) '' C).Subsingleton)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B.T) (C : Set (pullback (C := Scheme) Q.x s)), C ∈ irreducibleComponents (pullback (C := Scheme) Q.x s) → (((f.curveBaseChange s) '' C).Subsingleton ↔ ((g.curveBaseChange s) '' C).Subsingleton))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91367d620",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Re-delivery repairing RETURN L (H2). Item .lean byte-identical to 0e2ab812 (sha c5e564e1); node changes only stmt_dep lem-trf-valuation-horizontal-curve-models -> new def-trf-horizontal-valuation-curve-data (theorem kept in proof_deps). New def node is existing:true ownership of 9 unchanged published decls in Sheaf.TraceFormula.ValuationHorizontalCurveModels; its TeX matches HorizontalValuationBase/.T/.genericMap, RelativeCurve, horizontalGenericCurveMap, horizontalGenericMarkingι, FlatClosure, horizontalClosurePair, horizontalClosurePairMap clause by clause; ClosureRestrictionStable/theorem excluded; all owner decls used by the item listed; statement verbatim; 12 def stmt_deps exist, no cycle; no other live owner node (no race). Statement re-read vs node/Temkin 4.4.4/4.4.1(i)/Rem 4.1: real Mathlib normalization, stalkwise normality, IsFinite, RelativeCurve, FlatClosure ideal pin, pair eta-modification with canonical generic iso, f = nu∘g on both components, ordinary + geometric (Ω : Type u) contracted-component iff; no extra hypotheses or universe restriction; one sorry; docstrings with source, blueprint tag, 8 steps; report sections present. nt_compile --json clean, 3.3 s, exit 0. Advisory: owner decl docstrings still tag the theorem node; maintainer note: projective-preparation and finite-fibre-valuation-domination can cite the new def node."
  }
 }

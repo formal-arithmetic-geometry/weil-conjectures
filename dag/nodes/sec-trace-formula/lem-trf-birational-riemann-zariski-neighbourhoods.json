@@ -12,7 +12,9 @@
   "def-pc-integral-scheme",
   "def-weil-affine-spectrum",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-birational-valuation-neighbourhood-data",
+  "def-trf-riemann-zariski-generic-models"
  ],
  "proof": [
   {
@@ -366,5 +368,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-5e85bdf77 (reviewer sub-agent of L); spot-checked: I read the item's statement (unchanged), all 14 steps and the statement of every one of the 24 proof_deps and 4 stmt_deps. The statement is the true fixed-field Riemann–Zariski result. I tested it on four cases: a field base, the trivial valuation, the line with doubled origin, where the prescribed morphism keeps two centres with the same O apart, and non-Noetherian bases. Step 1: the reduced closure is integral with k(C)=F and is proper. Step 2: the equalizer is the pullback of the closed diagonal, and its ideal is zero because sections inject into F. Step 4: the models are qcqs and the refinements are proper (triangle lemma), so the spectral directed-limit node gives (i). Steps 5–7: R_x is local, the P^1 graph shows it is a valuation ring (P(n;S)=S×P^n_Z checked), and the valuative criterion plus valuation-intersection with K=L=F give O=R_x, so the map is a homeomorphism. Step 8: separated finite-type maps compose (elementary). Steps 9–11 prove (ii) by Nagata over a qcqs base, using the reduced closure, uniqueness of separated lifts and stability of opens under generization, and both continuity directions are checked. Steps 12–14 prove (iii): arrows are unique, refinements use affine neighbourhoods inside intersections of inverse images (no claim that intersections of affines are affine), small and cofiltered, A_s shrinking gives union O, and the restrictions are cofinal. A transitive walk from the item finds no cycle (205 nodes reached). The three existing RZ nodes need a separable closure and some a finite-type base, so none is a duplicate or generalization. There are no new nodes. I accept all 11 declared tool_uses as generic tools. Temkin §3.2 is not in literature/: the WANTED entry and proof_origin=agent are correct, and I judged the proof against the cited statements. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalRiemannZariskiNeighbourhoods",
+  "declaration": "AlgebraicGeometry.RiemannZariski.birational_riemann_zariski_neighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalRiemannZariskiNeighbourhoods.lean",
+  "statement": "theorem birational_riemann_zariski_neighbourhoods (Z : Scheme.{u}) [IsIntegral Z] [CompactSpace Z] [QuasiSeparatedSpace Z] : (∀ (v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (M : Model Z Z.functionField (Z.fromSpecStalk (genericPoint Z))), ∃! l : Spec (.of v.V) ⟶ M.X, l ≫ M.map = v.centre ∧ Spec.map (CommRingCat.ofHom v.V.subtype) ≫ l = M.generic) ∧ (∀ c : (v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) → (M : Model Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) → M.X, (∀ (v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (M : Model Z Z.functionField (Z.fromSpecStalk (genericPoint Z))), ∃ l : Spec (.of v.V) ⟶ M.X, l ≫ M.map = v.centre ∧ Spec.map (CommRingCat.ofHom v.V.subtype) ≫ l = M.generic ∧ l (IsLocalRing.closedPoint v.V) = c v M) → valuationTopology Z Z.functionField (Z.fromSpecStalk (genericPoint Z)) = ⨅ M, TopologicalSpace.induced (fun v ↦ c v M) inferInstance) ∧ @CompactSpace (ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (valuationTopology Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) ∧ (∀ U : QuasiModel Z Z.functionField (Z.fromSpecStalk (genericPoint Z)), @IsOpenEmbedding (ValuationPoint U.X Z.functionField U.generic) (ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (valuationTopology U.X Z.functionField U.generic) (valuationTopology Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (ValuationPoint.push U)) ∧ (∀ v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z)), Nonempty (AffineValuationColimit v (fun _ ↦ True))) ∧ (∀ (v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (M : Model Z Z.functionField (Z.fromSpecStalk (genericPoint Z))), Nonempty (AffineValuationColimit v (fun N ↦ N.AboveWithin M ⊤))) ∧ (∀ (v : ValuationPoint Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (M : Model Z Z.functionField (Z.fromSpecStalk (genericPoint Z))) (l : Spec (.of v.V) ⟶ M.X), l ≫ M.map = v.centre → Spec.map (CommRingCat.ofHom v.V.subtype) ≫ l = M.generic → ∀ W : M.X.Opens, l (IsLocalRing.closedPoint v.V) ∈ W → Nonempty (AffineValuationColimit v (fun N ↦ N.AboveWithin M W)))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0e0cc5b4",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Re-delivery after the H12 return on 6090e662: adds def-trf-riemann-zariski-generic-models (existing:true on RiemannZariskiFiniteRefinement; declarations are exactly GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint, ValuationPoint.push; statement matches the live Lean; stmt_deps are definitions only). The neighbourhood-data def node now cites it instead of the theorem node; the item adds it to stmt_deps. Declarations used by both files are within the six (none of Point, Corresponds, LiftsTo, finite_refinement). No duplicate or racing def node in side dag. Lean files byte-identical to the previously reviewed head; all seven clauses faithful, data real, one sorry, docstrings ok; lean.statement verbatim for both records. Independent second reading present. nt_compile --json clean (3.6 s, 2.9 s)."
  }
 }

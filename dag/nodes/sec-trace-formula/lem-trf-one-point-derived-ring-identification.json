@@ -16,7 +16,8 @@
   "def-weil-abstract-derived-category",
   "def-weil-module-base-change",
   "lem-pur-left-derived-from-kflat-class",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-trf-singleton-site-operations"
  ],
  "proof": [
   {
@@ -343,5 +344,28 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-21d8524f3 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, every cited statement, lem-pc-kflat-resolution and the Stacks places 05S9, equation-everywhere, 06XN, 06YY, 03CW/03DA/03EK, 06YL/06YN/06XZ, 05RN/05RU, 05G3. The statement is true and unchanged; tested on A=0, A'=0, f=id and Z->Z/2 with M=Z/2, where Tor_1 is nonzero so the counit is not an isomorphism. Steps 1-8 and 10-12 are correct; localization clauses (1)-(3), the conjugated counit and the Kan-extension direction were checked. One fault (C4/E1), now repaired: step 9 took the universal pair and the K-flat counit isomorphisms from lem-pur-left-derived-from-kflat-class without checking that lemma's hypotheses (F_s exact, resolutions from the K-flat class exist, F_s inverts quasi-isomorphisms between K-flat complexes), and resolution existence had no citation; the statement of lem-pur-derived-change-of-rings does not give it. Stacks 06XN needs it and the proof of 06YY supplies it. The fix rewrites step 9 to apply the lemma with these three checks, citing lem-pc-kflat-resolution (unit on route, no cycle) and clause (1) of lem-pur-derived-change-of-rings, and identifies L_s with the derived change of rings by uniqueness of the universal pair. proof_deps gains lem-pc-kflat-resolution; nothing else changed. There are no new nodes and no duplicate was found. The two declared tool uses are accepted; both units are on the sk-i-curve-zero route anyway.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.OnePointDerivedRingIdentification",
+  "file": "lean/Sheaf/TraceFormula/OnePointDerivedRingIdentification.lean",
+  "declaration": "CategoryTheory.one_point_derived_ring_identification",
+  "declarations": [
+   "CategoryTheory.OnePointDerivedRingIdentification",
+   "CategoryTheory.one_point_derived_ring_identification"
+  ],
+  "statement": "theorem one_point_derived_ring_identification (A : Type u) [CommRing A] : OnePointDerivedRingIdentification A",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "H2 repair of returned head 21ac0ebe8940: the singleton-site definitions and comparison predicates used in the signature are owned by def-trf-singleton-site-operations, existing:true on the published SingletonSiteModuleComparison module. No chosen witness of singleton_site_module_comparison is used; the Lean module and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03a160414",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned 21ac0ebe: the Lean file is byte-identical (sha 885a11e8) and compiles clean via nt_compile --json against the side overlay (13.8 s, exit 0). The only item-record change replaces theorem stmt_dep lem-weil-pbc-singleton-site-module-comparison with new node def-trf-singleton-site-operations; statement and proof equal live. The new node is existing:true on the unchanged SingletonSiteModuleComparison and lists 24 singleton* defs/abbrevs/instances (theorem excluded). check_existing reports nothing, lean.statement 'abbrev singletonSite : Type' is verbatim, the TeX matches every predicate and asserts none of them, all stmt_deps are existing definition nodes with no cycle, and no competing owner exists. The item's clauses were re-checked against the node (exact equivalence, tensor, total tensor, cohomology, quasi-isomorphism/K-flat iffs, homotopy, localization, normalized derived scalar pairs; no flatness or boundedness assumptions; universes u and u+1). Advisories: Nonempty-only total-tensor/cohomology isomorphisms, two unused private imports, owner docstrings still name the theorem node, no definition owner for the base-era siteSheafTensorTmul/SecondMap. Maintainer: repoint lem-trf-pseudocoherent-rhom-flat-base-change to the new definition node."
  }
 }

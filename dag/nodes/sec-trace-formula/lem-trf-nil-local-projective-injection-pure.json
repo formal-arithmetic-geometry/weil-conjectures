@@ -237,5 +237,23 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-b580c3387 (reviewer sub-agent of L); spot-checked: I read Stacks 05GM/05GN/05GP/05GQ and 05GR. The item correctly specialises 05GP to a local ring whose maximal ideal is nil; step 2 proves property (P) directly by pigeonhole. Cited nodes checked: the local-projective-free node (arbitrary rank) for step 1, the unit criterion for step 3, and the free-module and tensor definitions. I verified by substitution the rank induction (pivot unit, H = ker λ free on q_b, b≠b0, w injective, the retraction formula with the c_i correction), the elementwise finite-support tensor reduction with no flatness of T, and the factor swap. Small cases checked: a field, k[ε]/ε², the 05GR infinite-rank map, rank 0. There is no cycle, no duplicate (05GP is cited only by the item and its citer), no SGA, and no new nodes; the citer's use (residue-field clause on projective B/IB) is consistent. Two small repairs: added 05GP to source.place (the report says it was added, but it was only in proof_origin), and step 3 now chooses a basis (q_b) of the arbitrary free target F before using it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecTraceFormula.NilLocalProjectiveInjectionPure",
+  "file": "lean/Sheaf/SecTraceFormula/NilLocalProjectiveInjectionPure.lean",
+  "declaration": "LinearMap.injective_lTensor_of_projective_of_nil_maximalIdeal",
+  "statement": "theorem injective_lTensor_of_projective_of_nil_maximalIdeal (A : Type u) [CommRing A] [IsLocalRing A] (hnil : ∀ a : A, a ∈ IsLocalRing.maximalIdeal A → IsNilpotent a) (P : Type v) (Q : Type w) [AddCommGroup P] [AddCommGroup Q] [Module A P] [Module A Q] [Module.Projective A P] [Module.Projective A Q] (u : P →ₗ[A] Q) (hu : Function.Injective u) : (∀ (T : Type t) [AddCommGroup T] [Module A T], Function.Injective (u.lTensor T)) ∧ Function.Injective (u.rTensor (A ⧸ IsLocalRing.maximalIdeal A))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-19"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bad3d5d74",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause (CommRing+IsLocalRing, elementwise nil maximal ideal, arbitrary projective P Q in own universes w/o finiteness, injective u, ∀ T : Type t lTensor injective ∧ rTensor (A ⧸ maximalIdeal) injective); delivered node differs from live only in lean; lean.statement verbatim in file; stmt_deps Module.Projective/TensorProduct existing records read; no duplicate in Mathlib or side Sheaf (own grep); edge cases field, k[ε]/ε², zero/infinite rank, universes covered; docstrings carry source place, blueprint tag and condensed 7-step proof plan; nt_compile --json clean (1.7 s, exit 0). Advisory H9: plain import Sheaf.RingTheory.ProjectiveOverLocalFree used only by proof plan."
  }
 }

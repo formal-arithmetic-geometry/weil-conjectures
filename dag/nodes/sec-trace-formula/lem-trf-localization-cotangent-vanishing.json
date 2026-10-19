@@ -201,5 +201,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-2cd2b750a (reviewer sub-agent of L); spot-checked: Read the item, report, unit/chapter route, all four cited nodes, and Stacks Tags 08QI, 08QH, 08QZ, 08QP, 08R0, and 08R2(3). Verified all five proof steps, coefficient category, base-change maps, arbitrary multiplicative sets, zero-ring and other edge cases, duplicate/cycle risks, route-pivot compliance, and Mathlib searches. Wrote review.md; no repairs or accepted tool uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationCotangentVanishing",
+  "declaration": "Algebra.CotangentResolution.localization_cotangent_vanishing",
+  "file": "lean/Sheaf/RingTheory/LocalizationCotangentVanishing.lean",
+  "statement": "theorem localization_cotangent_vanishing [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)] (C : Coherence.{u}) (R : CommRingCat.{u}) (S : Submonoid R) : IsZero (cotangentComplex C (Arrow.mk (CommRingCat.ofHom (algebraMap R (Localization S))))) ∧ ∀ i : ℤ, IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (CommRingCat.of (Localization S))) i).obj (cotangentComplex C (Arrow.mk (CommRingCat.ofHom (algebraMap R (Localization S))))))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9c564c03",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Read item, both stmt_deps (CotangentResolutionCoherence Coherence/cotangentComplex/DifferentialModel; Mathlib DerivedCategory/homologyFunctor), Stacks cotangent.tex 08R2(3) l.1616-1632, module and report. R:CommRingCat.{u}, S:Submonoid R (0∈S, infinite S allowed), actual Localization S with algebraMap, dependency cotangentComplex C, both IsZero and ∀ i:ℤ homology vanishing; C and HasDerivedCategory.{u+1} family = dependency interface, holds for all C; no extra hypotheses or universe restriction. Docstrings: source place, blueprint, 5 proof steps. lean.statement verbatim. No duplicate in live Sheaf. nt_compile --json 2.1 s exit 0 clean. Advisory: two proof-only imports unused (compiles without them); second reading is author self-check."
  }
 }

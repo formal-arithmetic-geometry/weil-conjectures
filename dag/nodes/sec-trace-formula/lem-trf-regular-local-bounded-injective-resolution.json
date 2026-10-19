@@ -255,5 +255,23 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-12a55b3dc (reviewer sub-agent of L); spot-checked: Read the item, all ten cited node statements, the report, and Stacks 0AWX (dualizing.tex l.3763), 0A5S/0A5T (more-algebra.tex l.17510/17530), 065R, 00O7 and 06XR. The delivery has one commit with two files. It creates no new nodes and leaves the statement, stmt_deps and blueprint unchanged. The statement is 0AWX's finite-injective-dimension conclusion in the 0A5S form; it is not weakened. Step 1 takes gl.dim ≤ d from regular-local-finite-gl-dim. Step 2 takes Ext^{≥d+1}(M,A)=0 for arbitrary M from the 065R node, the all-modules form, as A/T needs. Step 3 builds an exact injective resolution with I^{<0}=0 (enough-injectives + clause (1) of 013K) and sets J=ker ∂^d. Step 4 is a direct Baer test, which I checked line by line: the extension f, ∂^d f=hπ, h a (d+1)-cocycle, then the 06XR node with H^{d+1}=0 gives h=∂^d g, and v=f−gπ restricts to u on T. Edge cases T=0 and T=A hold. This correctly replaces 0A5T's distinguished-triangle argument. Step 5 applies the stated direction of the Baer node (0AVF). Step 6's truncation is a quasi-isomorphism: H^d=J/im ∂^{d-1}=0, with the d=0 and d=1 cases checked, and it is an iso in D(A) by the localization definition. Duplicate search over dag/nodes (0AWX, 0A5T, injective dimension, Gorenstein) found no node stating the item. The generic pbc/sf homological tools outside sk-i-curve-zero are declared in split_report.tool_uses, and I accept them. There is no cycle, no SGA, and the citer is unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalBoundedInjectiveResolution",
+  "declaration": "IsRegularLocalRing.exists_bounded_injective_complex",
+  "file": "lean/Sheaf/RingTheory/RegularLocalBoundedInjectiveResolution.lean",
+  "statement": "theorem exists_bounded_injective_complex (A : Type u) [CommRing A] [IsRegularLocalRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] : ∃ (a b : ℤ), a ≤ b ∧ ∃ I : CochainComplex (ModuleCat.{u} A) ℤ, (∀ j : ℤ, Injective (I.X j)) ∧ (∀ j : ℤ, j < a ∨ b < j → IsZero (I.X j)) ∧ Nonempty ((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A) ≅ DerivedCategory.Q.obj I)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e96eae018",
+  "group": "NB",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0AWX/0A5S: IsRegularLocalRing A (Mathlib, local+Noetherian+spanFinrank=dim), ∃ a≤b, ℤ-cochain complex with all terms Injective, IsZero outside [a,b], Nonempty (singleFunctor 0 (ModuleCat.of A A) ≅ Q.obj I) under HasDerivedCategory.{w}; no extra hypotheses or universe restriction; edge cases d=0, negative degrees, zero terms, zero ring OK. Only the item's lean field changed vs live; stmt_dep files identical; lean.statement verbatim; plain imports = proof_deps' modules/mathlib_matches; no duplicate (FunctorialBoundedInjectiveResolution is bounded-below only); docstrings carry source, blueprint id and all 6 proof steps; sorry-only; lines ≤100. nt_compile --json clean (2.6 s, exit 0). No findings."
  }
 }

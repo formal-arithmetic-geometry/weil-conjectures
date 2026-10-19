@@ -1,0 +1,141 @@
+{
+ "id": "def-trf-horizontal-valuation-curve-data",
+ "kind": "definition",
+ "title": "Horizontal valuation bases, relative curves and flat closure pair data",
+ "status": "split",
+ "statement": "A horizontal valuation base consists of a valuation domain $V$ [def-trf-valuation-ring], a specified fraction field $K$ [def-weil-field], its algebra structure $V\\to K$, separable closedness of $K$ [def-kun-separably-closed], and a finite linearly ordered prime spectrum of $V$. Write $T=\\operatorname{Spec}V$ and $\\eta:\\operatorname{Spec}K\\to T$ for the actual morphism induced by the algebra map [def-weil-affine-spectrum]. For schemes $T,Y$ [def-pc-scheme] and $y:Y\\to T$, a relative curve means a flat [def-weil-flat-morphism], finitely presented morphism (locally of finite presentation, quasi-compact and quasi-separated [def-sbc-locally-finite-presentation]) whose scheme-theoretic fibres [def-pc-scheme-fibre] all have pure dimension one [def-weil-pure-dimension]. For any $\\eta:S\\to T$, multipointed curve $P=(X,D)$ [def-trf-multipointed-curve], and $q:Y\\to X$, let $q_\\eta:Y\\times_T S\\to X\\times_T S$ be the canonical base-change map and let $j:Z\\to Y\\times_T S$ be the pullback of the marking $D\\times_T S\\to X\\times_T S$ along $q_\\eta$, using the canonical base-change marking of [def-trf-multipointed-curve-modification]. More generally, for any $j:Z\\to Y\\times_T S$ and $e:E\\to Y$, a flat closure datum consists of: $e$ a closed immersion [def-weil-closed-immersion]; equality of its kernel ideal sheaf with the kernel ideal sheaf of $Z\\xrightarrow{j}Y\\times_T S\\to Y$; flatness and finite presentation of $E\\to T$; pure dimension zero of all its fibres; and equality of the pullback of $\\ker(e)$ to $Y\\times_T S$ with $\\ker(j)$. These are conditions on the specified maps, not an existence assertion. A relative curve datum for $y$ and such a flat closure datum define the multipointed curve with curve $Y$, marking $E$, inclusion $e$, and structure maps $y$ and $e$ followed by $y$. In the case $y=q$ followed by $X\\to T$ and $j$ the pulled-back generic marking above, any $r:E\\to D$ satisfying $r$ followed by $D\\to T=e$ followed by $q$ followed by $X\\to T$ and $r$ followed by $D\\to X=e$ followed by $q$ defines the morphism of multipointed curves to $P$ with curve map $q$ and marking map $r$ [def-trf-multipointed-curve-modification]. Empty markings and empty fibres are allowed; no separatedness or properness condition is included.",
+ "stmt_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-field",
+  "def-kun-separably-closed",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-pure-dimension",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 1.2 (relative curves), section 4 opening conventions (finite-height separably closed valuation base), Remark 4.1 and opening of section 4.2 (generic markings and their schematic closures); Lemma 3.5.1 (flat finite-presentation closure data). Exact existing interfaces in ValuationHorizontalCurveModels.lean."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite height valuation domain with separably closed fraction field and flat schematic closures of generic markings on relative curves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.valuation_def\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"ValuationSubring\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDedekindDomain.HeightOneSpectrum.valuation_le_one\", \"IsDedekindDomain.HeightOneSpectrum.valuation_of_mk'\", \"IsDedekindDomain.HeightOneSpectrum.intValuation\"], \"digest\": \"947a49fcc3efe1f4\"}",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match for the combined interface; reuse the exact published side-project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.HorizontalValuationBase, AlgebraicGeometry.FlatClosure, AlgebraicGeometry.RelativeCurve",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.HorizontalValuationBase'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match for the combined interface; reuse the exact published side-project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "HorizontalValuationBase|structure RelativeCurve|structure FlatClosure|horizontalClosurePair",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match for the combined interface; reuse the exact published side-project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "HorizontalValuationBase|horizontalClosurePair|structure FlatClosure|structure RelativeCurve in Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "No matches in Mathlib or upstream WeilConjectures. Exact definitions in lean/Sheaf/TraceFormula/ValuationHorizontalCurveModels.lean:42-172; consumers in ValuationCurveProjectivePreparation.lean and FiniteFibreValuationDomination.lean. Reused without copying.",
+   "date": "2026-10-19",
+   "verdict": "existing exact definitions in newtargets-dag"
+  },
+  {
+   "tool": "blueprint_refs.py search; rg",
+   "query": "horizontal; schematic closure; HorizontalValuationBase|FlatClosure|horizontalClosurePair in dag/nodes",
+   "results": "No existing definition node owns this combined interface. The statement node lem-trf-valuation-horizontal-curve-models lists these helper declarations but its statement asserts a theorem about them. Other hits are consumers and unrelated closures. def-trf-valuation-ring owns only the underlying valuation-ring notion and is cited.",
+   "date": "2026-10-19",
+   "verdict": "Add definition ownership record for the exact existing declarations, as requested by return L."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-normal-target-factorization",
+  "date": "2026-10-19",
+  "group": "Q81"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The normal-target factorization statement uses the valuation base, relative-curve and flat schematic-closure interfaces, independently of the horizontal-model theorem.",
+   "via": [
+    "lem-trf-semistable-normal-target-factorization",
+    "lem-trf-valuation-exceptional-closed-image-criterion",
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationHorizontalCurveModels",
+  "declaration": "AlgebraicGeometry.HorizontalValuationBase",
+  "declarations": [
+   "AlgebraicGeometry.HorizontalValuationBase",
+   "AlgebraicGeometry.HorizontalValuationBase.T",
+   "AlgebraicGeometry.HorizontalValuationBase.genericMap",
+   "AlgebraicGeometry.RelativeCurve",
+   "AlgebraicGeometry.horizontalGenericCurveMap",
+   "AlgebraicGeometry.horizontalGenericMarkingι",
+   "AlgebraicGeometry.FlatClosure",
+   "AlgebraicGeometry.horizontalClosurePair",
+   "AlgebraicGeometry.horizontalClosurePairMap"
+  ],
+  "statement": "structure HorizontalValuationBase where",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Definition ownership required by return L on immutable head 0e2ab812e4d3. All nine declarations are already published in this module; no declarations are copied or changed and horizontal_curve_models is not part of this definition node. The consumer cites the definitions in stmt_deps and keeps the theorem solely in proof_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91367d620",
+  "group": "Q81",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91367d620",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Re-delivery repairing RETURN L (H2). Item .lean byte-identical to 0e2ab812 (sha c5e564e1); node changes only stmt_dep lem-trf-valuation-horizontal-curve-models -> new def-trf-horizontal-valuation-curve-data (theorem kept in proof_deps). New def node is existing:true ownership of 9 unchanged published decls in Sheaf.TraceFormula.ValuationHorizontalCurveModels; its TeX matches HorizontalValuationBase/.T/.genericMap, RelativeCurve, horizontalGenericCurveMap, horizontalGenericMarkingι, FlatClosure, horizontalClosurePair, horizontalClosurePairMap clause by clause; ClosureRestrictionStable/theorem excluded; all owner decls used by the item listed; statement verbatim; 12 def stmt_deps exist, no cycle; no other live owner node (no race). Statement re-read vs node/Temkin 4.4.4/4.4.1(i)/Rem 4.1: real Mathlib normalization, stalkwise normality, IsFinite, RelativeCurve, FlatClosure ideal pin, pair eta-modification with canonical generic iso, f = nu∘g on both components, ordinary + geometric (Ω : Type u) contracted-component iff; no extra hypotheses or universe restriction; one sorry; docstrings with source, blueprint tag, 8 steps; report sections present. nt_compile --json clean, 3.3 s, exit 0. Advisory: owner decl docstrings still tag the theorem node; maintainer note: projective-preparation and finite-fibre-valuation-domination can cite the new def node."
+ }
+}

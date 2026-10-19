@@ -223,5 +223,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-1f9f3fede (reviewer sub-agent of L); spot-checked: I read the item's 7-step split in full. Its statement and stmt_deps are unchanged from the Q115-created record, and it adds no new nodes. Source check: Stacks morphisms.tex Tag 0BAB lemma-birational-generic-fibres, affine paragraph. The steps expand it faithfully: residue-field surjection, so pA_q is maximal; prime correspondence plus minimal-prime existence, so pA_q is the only prime; elements outside p are units; explicit inverse fractions, so the canonical map θ=ψ⁻¹h is an iso. Cited statements read: def-weil-pbc-localization-at-prime, clause (1) of lem-weil-pbc-localization-prime-residue-field-iso, and the Mathlib leaves lem-weil-pbc-prime-contains-minimal-prime and lem-weil-pbc-proper-ideal-contained-in-maximal. None carries a hidden hypothesis, and proof_deps equal the union of the steps' uses. I accept the declared tool use: lem-weil-pbc-localization-prime-residue-field-iso (sk-thm-p1) is a generic 00E3 correspondence with no node in the perverse unit. Small cases check out: k[x,e]/(e^2,xe) over k[x] and the reverse map work, so the proof needs neither reducedness nor injectivity. No duplicate: lem-trf-unique-prime-localization needs a finite map. No SGA citation, no long step, no weakened target."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BirationalGenericLocalization",
+  "declaration": "Localization.generic_localization_bijective_of_unique_minimalPrimes",
+  "file": "lean/Sheaf/RingTheory/BirationalGenericLocalization.lean",
+  "statement": "theorem generic_localization_bijective_of_unique_minimalPrimes {B : Type u} {A : Type v} [CommRing B] [CommRing A] (φ : B →+* A) (q : PrimeSpectrum B) (p : PrimeSpectrum A) (hq : minimalPrimes B = {q.asIdeal}) (hp : minimalPrimes A = {p.asIdeal}) (hqp : q.asIdeal = p.asIdeal.comap φ) (hlocal : Function.Bijective (localRingHom q.asIdeal p.asIdeal φ hqp)) : Function.Bijective (IsLocalization.map (Localization (q.asIdeal.primeCompl.map φ)) φ q.asIdeal.primeCompl.le_comap_map : Localization.AtPrime q.asIdeal →+* Localization (q.asIdeal.primeCompl.map φ))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88a8cb9da",
+  "group": "NW",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0BAB clause by clause: hq/hp singleton minimalPrimes give unique minimal primes, hqp oriented for localRingHom, hlocal is bijectivity of the canonical localRingHom, conclusion is bijectivity of the canonical IsLocalization.map from B_q to A localized at q.primeCompl.map φ; no extra hypotheses, independent universes. Edge cases (zero ring, non-reduced, non-injective) covered. No definitions, sorry-only, docstrings with source and blueprint, proof-dep plain imports match recorded modules, lean.statement verbatim, node diff only in lean. nt_compile --json clean 2.7 s. Advisory: the second reading was a self-review by the same worker."
  }
 }

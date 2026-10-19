@@ -1,0 +1,124 @@
+{
+ "id": "def-trf-riemann-zariski-generic-models",
+ "kind": "definition",
+ "title": "Generic factorizations, models and centred valuation points",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $L$ a field [def-weil-field], and $\\eta:\\operatorname{Spec}L\\to T$ a morphism [def-weil-affine-spectrum]. A generic factorization of $\\eta$ consists of an integral scheme $X$ [def-pc-integral-scheme], morphisms $p:X\\to T$ and $g:\\operatorname{Spec}L\\to X$, such that the unique point of $\\operatorname{Spec}L$ maps to the generic point of $X$ and $p\\circ g=\\eta$. A model is a generic factorization with $p$ proper [def-weil-proper-morphism]. A quasi-model is a generic factorization with $p$ separated and of finite type [def-weil-finite-type-morphism], with separatedness as in [def-weil-proper-morphism]. A morphism from a model $M$ to a model $N$ is a morphism $h:X_M\\to X_N$ satisfying $p_N\\circ h=p_M$ and $h\\circ g_M=g_N$. A valuation point over $(T,L,\\eta)$ consists of a valuation subring $V\\subseteq L$ (a subring containing $a$ or $a^{-1}$ for every nonzero $a\\in L$) and a morphism $c:\\operatorname{Spec}V\\to T$ whose composition with the spectrum map of $V\\hookrightarrow L$ is $\\eta$. For a quasi-model $U$, composition with $p_U$ defines the push map from valuation points over $(X_U,L,g_U)$ to valuation points over $(T,L,\\eta)$: it retains $V$ and replaces $c$ by $p_U\\circ c$. These are structures and an explicit composition map for arbitrary $T,L,\\eta$; no existence, compactness or finite-refinement assertion is included.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 3.2, opening paragraph p. 15 (generic factorizations and K-(quasi-)modifications), valuation-point definition before Corollary 3.2.5 p. 16, and composition preceding Proposition 3.2.6 and Corollary 3.2.7 pp. 16--17; underlying data for arbitrary specified generic map."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GenericScheme|QuasiModel|ValuationPoint|ModelHom [Mathlib/AlgebraicGeometry]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib has valuation subrings but no generic-model or scheme-centred valuation-point structures. Reuse the six existing Sheaf declarations; add only their definition-node record."
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic factorization proper models separated finite type quasi models centred valuation subrings of a field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"ValuationSubring.instValuationRingSubtypeMem\", \"ValuationSubring.le_total_ideal\", \"ValuationSubring.mk.noConfusion\", \"ValuationSubring.instCommRingSubtypeMem\", \"ValuationSubring.toSubring\", \"instIsIntegrallyClosedSubtypeMemSubring\", \"ValuationSubring.instInhabited\"], \"digest\": \"4b04c506a53bb6f0\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib has valuation subrings but no generic-model or scheme-centred valuation-point structures. Reuse the six existing Sheaf declarations; add only their definition-node record."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RiemannZariski\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib has valuation subrings but no generic-model or scheme-centred valuation-point structures. Reuse the six existing Sheaf declarations; add only their definition-node record."
+  },
+  {
+   "tool": "grep",
+   "query": "rg GenericScheme|QuasiModel|ValuationPoint|ModelHom in /home/ubuntu/weil-src-slopmaster2/WeilConjectures and lean/Sheaf; definition-kind scan of dag/nodes; blueprint_refs.py search generic model",
+   "results": "No upstream declaration. The six concrete declarations occur in Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement; the DAG only records them under its finite_refinement theorem. No standalone generic-model definition node. def-trf-centred-valuation is the distinct predicate IsCenteredValuation for a fixed point and its residue field, not these arbitrary-L factorization structures. Blueprint search: 0 nodes. Live scompile.py --source confirmed the existing module and signatures.",
+   "date": "2026-10-19",
+   "verdict": "Existing:true on the published module, with exactly the six requested declarations; no duplicate Lean definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-birational-riemann-zariski-neighbourhoods",
+  "date": "2026-10-19",
+  "group": "Q111"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generic model, quasi-model, model-morphism and valuation-point data underlying the birational Riemann--Zariski neighbourhood assertion.",
+   "via": [
+    "lem-trf-birational-riemann-zariski-neighbourhoods",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement",
+  "declaration": "AlgebraicGeometry.RiemannZariski.GenericScheme",
+  "declarations": [
+   "AlgebraicGeometry.RiemannZariski.GenericScheme",
+   "AlgebraicGeometry.RiemannZariski.Model",
+   "AlgebraicGeometry.RiemannZariski.QuasiModel",
+   "AlgebraicGeometry.RiemannZariski.ModelHom",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint.push"
+  ],
+  "statement": "structure GenericScheme (T : Scheme.{u}) (L : Type u) [Field L] (η : Spec (.of L) ⟶ T)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Records only the six concrete definition declarations already published in this module, not finite_refinement or any choice from that theorem. Generic factorizations, proper/separated finite-type models, compatible model morphisms, valuation subrings with specified centre, and push by composition all have real data for arbitrary T, L and η. Requested by L in the independent return on head 6090e6624977 (H12)."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0e0cc5b4",
+  "group": "Q111",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0e0cc5b4",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Re-delivery after the H12 return on 6090e662: adds def-trf-riemann-zariski-generic-models (existing:true on RiemannZariskiFiniteRefinement; declarations are exactly GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint, ValuationPoint.push; statement matches the live Lean; stmt_deps are definitions only). The neighbourhood-data def node now cites it instead of the theorem node; the item adds it to stmt_deps. Declarations used by both files are within the six (none of Point, Corresponds, LiftsTo, finite_refinement). No duplicate or racing def node in side dag. Lean files byte-identical to the previously reviewed head; all seven clauses faithful, data real, one sorry, docstrings ok; lean.statement verbatim for both records. Independent second reading present. nt_compile --json clean (3.6 s, 2.9 s)."
+ }
+}

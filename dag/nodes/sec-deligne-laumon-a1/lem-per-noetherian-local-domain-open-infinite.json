@@ -221,5 +221,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-a7a6d2a56 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited node's statement, the report, and Stacks algebra.tex at 02IG (lemma-Noetherian-local-domain-dim-2-infinite-opens), 02IE (lemma-elements-generate-ideal-definition) and 07DU (definition-ideal-definition); the tag/label pairs match the tags file. The item statement is unchanged and agrees with 02IG. Steps 1-7 check out against the cited statements. Step 1 uses the 00ES closure clause: (0) lies in O and {(0)} is open. Step 2 uses the dimension definition (ring dimension equals topological dimension) and the finite-dimension clause of the parameters node, so 2<=d<infinity. Step 3 uses the basis clause of the basic-open node to get D(x)={(0)} with x nonzero, not a unit, and in n. Step 4 uses the nonzerodivisor node (00KW) for dim R/xR=d-1. Step 5 uses the parameters node on R/xR; the lifts lie in n and the power bound gives sqrt(I)=n. Step 6 applies 02IE to the reordered sequence y_2,x,... for i=1 and i=2. Step 7 is genuinely elementary: y_2 is nonzero, the prime correspondence gives a prime containing y_2 but not x, and that contradicts D(x)={(0)}. No step uses another node's proof, there is no cycle and no SGA. The new node lem-per-partial-parameters-quotient-dimension is faithful to 02IE and true in general (the lower bound by iterating 00KW, the upper bound by 00KQ on the quotient). I tested it on k[[s,t]] and on the non-regular k[[u,v,w]]/(u^2,uv) with parameters v,w (dimensions 1 and 0). It passes B1-B5, B7 and B9. A scan of all DAG statements for 02IE/00KW/00KQ/'system of parameters'/'ideal of definition' found no duplicate: the nearest nodes are the existence-only parameters node, the nonzerodivisor drop, the height-quotient bound and the regular power-series quotient. The new node restates no clause of the item. Route and blueprint ancestry via lem-per-punctured-local-closed-points are correct; no tool_uses are needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianLocalDomainInfiniteOpens",
+  "declaration": "AlgebraicGeometry.Spec.infinite_of_isOpen_of_two_le_topologicalKrullDim",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalDomainInfiniteOpens.lean",
+  "statement": "theorem Spec.infinite_of_isOpen_of_two_le_topologicalKrullDim (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] (hdim : 2 ≤ topologicalKrullDim (Spec (CommRingCat.of R))) (O : Set (Spec (CommRingCat.of R))) (hO : IsOpen O) (hne : O.Nonempty) : O.Infinite",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-414753248",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02IG clause by clause (CommRing, IsNoetherianRing, IsLocalRing, IsDomain covering nonzero, 2 ≤ topologicalKrullDim (Spec (CommRingCat.of R)), O open and nonempty ⇒ O.Infinite); no extra assumptions or universe restriction; stmt_deps use their recorded declarations; no existing Mathlib/project duplicate found; lean.statement verbatim in file; sorry-only proof; docstrings carry the source place, blueprint id and all 7 steps; nt_compile --json clean (2.2 s). Advisory: plain imports for proof deps with no Lean record yet are not required by rule 7 but harmless."
  }
 }

@@ -237,5 +237,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-22915aa8a (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item agrees with Stacks 08XW (2) (dualizing.tex l.336-343): any Noetherian ring, any ideal K, any injective E, with no hypothesis added or weakened. The statement and stmt_deps are unchanged and the delivery has no new nodes. The six-step Baer–Artin–Rees proof is correct. Step 1: reduction via lem-sf-baer-criterion (Module.Baer.iff_injective, which is Stacks 0AVF (1)<=>(3)). Step 2: a uniform exponent m=1+Σm_i, using the Noetherian definition only on the domain ideal J; r=0 is covered. Step 3: Artin–Rees (lem-weil-pbc-artin-rees, Stacks 00IN) applied to the finite module A with N=J and n=m+c, giving J∩K^n ⊆ K^mJ, so f vanishes there. Step 4: h(j+k)=f(j) on J+K^n is well defined and linear, written out explicitly. Step 5: E's Baer property gives g; e=g(1) is killed by K^n, so b↦be lands in Γ_K(E) and extends f. Step 6: the reverse direction of Baer. proof_deps equal the union of the step uses, and the provenance is honestly marked agent. Edge cases checked: K=0, K=A, K nilpotent, J=0, E=0, and Z/(p)/Q/Z (Γ=Z[p^∞], divisible). Duplicate search: a DAG grep for 08XW/0AVF and for injective+torsion+Noetherian statements, plus blueprint_refs, found only this item and its citer lem-per-local-cohomology-sum-spectral, whose Step 3 uses exactly this statement. The nearby sbc punctured-injective nodes and lem-trf-torsion-injective-subcomplex state different things. The two off-unit citations are Mathlib leaves, so tool_uses=[] is correct. No SGA source is cited, there is no cycle, and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.IdealPowerTorsionInjective",
+  "declaration": "ModuleCat.idealPowerTorsion_obj_injective",
+  "file": "lean/Sheaf/Algebra/Homology/IdealPowerTorsionInjective.lean",
+  "statement": "theorem idealPowerTorsion_obj_injective {A : Type u} [CommRing A] [IsNoetherianRing A] (K : Ideal A) (E : ModuleCat.{u} A) [CategoryTheory.Injective E] : CategoryTheory.Injective ((idealPowerTorsion K).obj E)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98eefa62e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches Stacks 08XW (2) clause by clause: Noetherian A via IsNoetherianRing, arbitrary ideal K, injective E as CategoryTheory.Injective in ModuleCat.{u} A, and Gamma_K(E) as (idealPowerTorsion K).obj E = primaryComponent E K (exists n, K^n kills x). No extra hypotheses; one universe u, forced by the recorded functor. lean.statement matches the file exactly; the node differs from live only by the lean record; no new nodes, dep repairs or statement change. Docstrings give the source place, blueprint tag and the six proof steps; proof is sorry; no definitions, so nothing hollow; no existing declaration found. nt_compile --json exit 0 in 3.0 s; a broken-signature control fails as expected. Advisory: two proof-only imports unused until the proof is written."
  }
 }

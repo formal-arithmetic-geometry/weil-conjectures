@@ -164,5 +164,31 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-fe1c56610 (reviewer sub-agent of L); spot-checked: Read the full item, all new nodes, cited node statements, unit/chapter route, and Stacks Tags 08QQ, 08SI, 08SJ plus conormal-basis sources. The repaired derived base-change hypothesis and coefficient category are correct; Koszul quotient, polynomial special case, conormal identification, shifts, edge cases, searches, duplicate checks, and route restrictions pass. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulQuotientCotangentVanishing",
+  "declaration": "Algebra.KoszulQuotientCotangent.exists_canonical_iso_and_vanishing",
+  "declarations": [
+   "Algebra.KoszulQuotientCotangent.quotientArrow",
+   "Algebra.KoszulQuotientCotangent.quotientModel",
+   "Algebra.KoszulQuotientCotangent.relationVector",
+   "Algebra.KoszulQuotientCotangent.conormalHomologyMap",
+   "Algebra.KoszulQuotientCotangent.exists_canonical_iso_and_vanishing"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulQuotientCotangentVanishing.lean",
+  "statement": "theorem exists_canonical_iso_and_vanishing (C : Coherence.{u}) (R : Type u) [CommRing R] (r : ℕ) (f : Fin r → R) (hreg : RingTheory.Sequence.IsKoszulRegular f) : (∃ e : cotangentComplex C (quotientArrow R (Ideal.span (Set.range f))) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} (CommRingCat.of (R ⧸ Ideal.span (Set.range f)))) (-1)).obj (ModuleCat.of (R ⧸ Ideal.span (Set.range f)) (Ideal.span (Set.range f)).Cotangent), ∀ a : Ideal.span (Set.range f), ∃ z : (quotientModel C R (Ideal.span (Set.range f))).cycles (-1), (quotientModel C R (Ideal.span (Set.range f))).iCycles (-1) z = relationVector C R (Ideal.span (Set.range f)) a ∧ conormalHomologyMap C R (Ideal.span (Set.range f)) e ((quotientModel C R (Ideal.span (Set.range f))).homologyπ (-1) z) = (Ideal.span (Set.range f)).toCotangent a) ∧ ∀ i : ℤ, i ≠ -1 → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (CommRingCat.of (R ⧸ Ideal.span (Set.range f)))) i).obj (cotangentComplex C (quotientArrow R (Ideal.span (Set.range f)))))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the recorded standard-resolution Coherence interface without choosing unspecified data. The isomorphism to the single conormal module in degree -1 is normalized on every standard relation 1 tensor d([C(a)] - [0]); the statement includes cycle existence and cohomology vanishing. All helper definitions have real data and belong to this canonical conormal identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f0e194f5",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Delivery changes only the item node's lean field; dependency records equal live; lean.statement matches the file verbatim. Every clause is rendered: CommRing R, r>=0 with Fin r -> R, recorded IsKoszulRegular, I = span(range f), B = R/I via quotientArrow, the recorded cotangentComplex of Coherence.{u} in D(ModuleCat (R/I)), I.Cotangent placed in degree -1 = (I/I^2)[1], vanishing for all i != -1, no Noetherian hypothesis. The canonical iso is pinned: relationVector 1 ⊗ d([C a]-[C 0]) is a genuine cycle (faces give a and 0, checked against standardFace) and is required to map to toCotangent a for every a in I. These classes cover I/I^2, so H^-1(e) and hence e are determined; not a bare Nonempty. Sign +[a] is a convention the node leaves open; the statement is true either way. Edge cases r=0, a unit in the sequence (B=0) and the zero ring are covered. Helpers carry real data, proof is sorry, the docstring has the four node steps, no duplicate in the project or Mathlib (H1Cotangent is the naive notion). nt_compile --json: 2.4 s, exit 0. Advisory: unused proof-dep imports KoszulConormalBasis/KoszulDerivedQuotient."
  }
 }
