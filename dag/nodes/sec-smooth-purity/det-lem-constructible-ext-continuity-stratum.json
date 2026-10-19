@@ -29,149 +29,84 @@
  ],
  "proof": [
   {
-   "text": "Geometric hypotheses. Work on the small pro-etale sites, in the ordinary derived categories of module sheaves over the pulled-back coefficient ring. In particular, the colimit in the statement is the degreewise colimit of module sheaves. The closed immersion $i$ is quasi-compact: over an affine of $X$ its source is the spectrum of a quotient ring. Its diagonal is an isomorphism, so it is quasi-separated. The same diagonal argument makes $u$ and $j$ quasi-separated. Apply [lem-weil-pbc-qcqs-morphism-permanence] (2), first to $i$, then to the quasi-compact $u$: $Z$ and $S$ are qcqs. The hypothesis on the complement makes $j$ quasi-compact as well. Thus $j$ satisfies both hypotheses of bounded direct-image continuity, and $S$, viewed as the final object of its own pro-etale site, satisfies qcqs sections continuity.",
+   "text": "Closed i and quasi-compact open uS imply that Z and S are qcqs. Use the given quasi-compact complementary open, rather than deriving its quasi-compactness from noetherianity.",
    "uses": [
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01IO (definition-immersion), 01KV (lemma-compose-after-separated), 01KU (lemma-separated-permanence); Morphisms Tag 01QO (lemma-closed-immersion); blueprint proof, First term"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $L^\\vee=\\mathcal Hom_{\\Lambda_S}(L,\\Lambda_S)$ and $\\Phi(M)=L^\\vee\\otimes_{\\Lambda_S}u^*i^*M$. By [sk-prop-sfb-cartesian-coefficients] the pullbacks here, and also $j^*$, are exact module inverse images. By the module adjunction of [sk-def-sfb-module-pushforward-pullback] they preserve colimits: for a diagram $M_t$ and any $N$, maps from $f^*(\\operatorname{colim}_tM_t)$ to $N$ are compatible families of maps $M_t\\to f_*N$, hence compatible families $f^*M_t\\to N$. On a covering trivializing $L$ as $\\Lambda_S^d$, its dual is also $\\Lambda_S^d$ and tensoring by it is the finite direct-sum functor $N\\mapsto N^d$. This is exact and preserves colimits; these claims are local for module sheaves (kernels are sectionwise and cokernels are sheafified cokernels), so they hold globally. Consequently $\\Phi$ is exact and colimit-preserving. Exactness gives $\\mathcal H^r(\\Phi M)=\\Phi\\mathcal H^r(M)$ by applying it to kernels, images and their quotients; termwise it preserves every strict lower bound. By [lem-sf-exact-functor-derived-triangulated] it also preserves distinguished triangles.",
+   "text": "Generalize the existing closed-costalk continuity proof to qcqs T with a specified quasi-compact complementary open. Apply the natural recollement triangle to the diagram and its good-truncated colimit cocone. Homology and qcqs open pushforward commute with this colimit. Exact filtered colimits and the five lemma give the closed term, and exact fully faithful closed pushforward reflects its isomorphism. Uniqueness of right adjoints handles the specified exceptional inverse image.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-module-pushforward-pullback",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, opening sentence; the local finite-free calculation expands exactness and colimit preservation (Modules on Sites Tag 03DL, definition-site-local)"
-   }
+   "elementary": false
   },
   {
-   "text": "For any bounded-below $M$, let $T(M)=Rj_*j^*M$, $B(M)=\\Phi M$, $C(M)=\\Phi T(M)$ and $A(M)=L^\\vee\\otimes u^*R\\underline\\Gamma_ZM$. Clause (4) of [det-lem-formal-closed-support-adjunction], together with Step 2, supplies a natural distinguished triangle $A(M)\\to B(M)\\to C(M)\\to A(M)[1]$, since $R\\underline\\Gamma_ZM=i^*\\operatorname{fib}(M\\to T(M))$ and [det-sf-open-closed-sequence-ring-sheaf] (2) identifies $i^*i_*R\\underline\\Gamma_ZM$ with $R\\underline\\Gamma_ZM$. The natural Hom identification of [det-lem-formal-closed-support-stratum-hom] gives\n$$\\operatorname{Hom}_{D(X)}(a_!L,M[q])=H^q(S,A(M)).$$\nFinite locally free implies finite locally projective, so this node applies to the given $L$. Applying $R\\Gamma(S,-)$ to the triangle and then cohomology gives a natural long exact sequence: right derived functors are triangulated by [lem-pc-right-derived-functor-triangulated], and [lem-sf-derived-homology-long-exact] gives its cohomology sequence. The needed module categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], hence have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence].",
+   "text": "Bounded-below injective complexes are K-injective. Apply the derived comparison and its naturality to the source diagram and cocone vertex. The representative comparison criterion turns derived costalk continuity into a quasi-isomorphism of strict costalk cocones.",
    "uses": [
+    "lem-weil-pbc-condensed-closed-costalk-injective-continuity",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity-representatives-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve the diagram and its colimit functorially by bounded injective complexes preserving the common strict lower bound. Construct the objectwise injective embedding from the degree-zero part of the existing Grothendieck K-injective resolution. Exact filtered colimits make the resolution cocone a quasi-colimit. Apply closed costalk and exact open restriction; derived adjunction gives compatible Hom diagram and vertex isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-functorial-bounded-injective-resolution",
+    "lem-weil-pbc-kinjective-functorial-existence",
     "det-lem-formal-closed-support-adjunction",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "det-lem-formal-closed-support-stratum-hom",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-kinjective-functorial-existence"
+    "lem-weil-pbc-condensed-local-piece-costalk-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, first paragraph: Hom formula and the natural triangle; Stacks Tags 0159 (lemma-right-derived-properties) and 05RS (lemma-cohomology-homological)"
-   }
+   "elementary": false
   },
   {
-   "text": "First term. The complexes $B(K_t)=\\Phi K_t$ vanish strictly below $b$, and their degreewise colimit is $\\Phi K=B(K)$ by Step 2. Apply [det-pe-bounded-continuity-sections] on the final qcqs object $S$ of $S_{\\mathrm{proet}}$ with coefficient sheaf $\\Lambda_S$. It gives, for every $n$, the canonical isomorphism\n$$\\operatorname{colim}_tH^n(S,B(K_t))\\ \\cong\\ H^n(S,B(K)).$$\nThis version of the existing sections theorem includes the hypercover-existence input; no choice of a hypercover is an extra hypothesis here.",
+   "text": "Transport the lisse trivializations along the invertible coefficient pullback, using scalar restriction equivalences and regular-module isomorphisms. Internal Hom from a locally finite free module preserves colimits. Its tensor left adjoint is exact, so internal Hom preserves K-injectives. Derived composition, internal-Hom sections and derived coyoneda evaluation identify shifted Hom with derived sections of termwise internal Hom. Qcqs sections continuity proves its comparison invertible. This argument requires no noetherian hypothesis.",
    "uses": [
-    "det-pe-bounded-continuity-sections"
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+    "lem-weil-pbc-condensed-internal-hom-sections",
+    "lem-weil-pbc-derived-coyoneda-evaluation",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-condensed-finite-free-hom-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, First term; existing equivalent qcqs-object continuity statement det-pe-bounded-continuity-sections"
-   }
+   "elementary": false
   },
   {
-   "text": "Second term: lower bound and spectral sequences. Write $T_t=Rj_*j^*K_t$, $T=Rj_*j^*K$, $N_t=\\Phi T_t$, and $N=\\Phi T$. To check the lower bound for $T_t$ and $T$, apply [thm-sp-truncation-e2] first to $v=j_*$, which is additive and left exact by [sk-def-sfb-module-pushforward-pullback], and the complexes $j^*K_t$ and $j^*K$. The source and target module categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian]. Its quadrant and finite-filtration assertions show $\\mathcal H^r(T_t)=\\mathcal H^r(T)=0$ for $r<b$: in total degree $r<b$ the allowed pairs $p\\ge0$, $q\\ge b$, $p+q=r$ form the empty set. Step 2 gives the same bound for $N_t,N$.\nNow apply [thm-sp-truncation-e2] to $v=\\Gamma(S,-)$ and bounded-below representatives of $N_t,N$. This gives\n$$E_2^{p,r}(t)=H^p(S,\\Phi\\mathcal H^r(T_t))\\Longrightarrow H^{p+r}(S,N_t),\\qquad E_2^{p,r}=H^p(S,\\Phi\\mathcal H^r(T))\\Longrightarrow H^{p+r}(S,N).$$\nThe natural maps from $K_t$ to $K$ give maps of these spectral sequences and of their abutment filtrations. Indeed [lem-weil-pbc-truncation-triangle] gives natural truncation triangles for every derived morphism; applying $R\\Gamma$ and cohomology gives maps of truncation exact couples. Taking kernels, images and quotients gives the maps of successive pages. The abutment identifications in [thm-sp-truncation-e2] (5)-(6) are made from these same truncation maps, their images and quotients, so they commute with these maps. This uses derived morphisms, without assuming a degreewise colimit diagram of injective resolutions.",
+   "text": "Precompose the desired comparison equation with every colimit inclusion. The compatibility identity of the costalk model identifies its composite with the vertex isomorphism with the colimit of the diagram isomorphism followed by the finite-free Hom comparison. Both are invertible, so cancel the vertex isomorphism. This proves the original colimit.post, with its unchanged signature. Rank zero and empty strata are included throughout.",
    "uses": [
-    "thm-sp-truncation-e2",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-weil-pbc-truncation-triangle",
-    "sk-def-sfb-module-pushforward-pullback"
+    "lem-weil-pbc-condensed-local-piece-costalk-model",
+    "lem-weil-pbc-condensed-finite-free-hom-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, Second term, spectral sequence from the canonical filtration; Stacks Tags 015J (lemma-two-ss-complex-functor), 015K (remark-functorial-ss), 015X (remark-final-functorial), 08J5 (remark-truncation-distinguished-triangle)"
-   }
-  },
-  {
-   "text": "Second term: the second page. Exact, colimit-preserving $j^*$ gives $\\operatorname{colim}_t j^*K_t=j^*K$, with strict common lower bound $b$. Apply [det-lem-bounded-continuity-direct-image] to the qcqs morphism $j$ verified in Step 1. In the notation for higher direct images of complexes it asserts\n$$\\operatorname{colim}_t\\mathcal H^r(T_t)\\ \\cong\\ \\mathcal H^r(T)$$\nfor every integer $r$. Applying the colimit-preserving $\\Phi$ and then [det-pe-bounded-continuity-sections] on $S$ to the sheaves $\\Phi\\mathcal H^r(T_t)$, placed in degree zero, gives\n$$\\operatorname{colim}_t E_2^{p,r}(t)\\ \\cong\\ E_2^{p,r}.$$\nThese are the maps induced by the original cocone $K_t\\to K$, since both cited continuity statements specify the canonical maps and Step 5 constructs the second-page identification naturally.",
-   "uses": [
-    "det-lem-bounded-continuity-direct-image",
-    "det-pe-bounded-continuity-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, Second term: direct-image continuity and sections continuity on the second page"
-   }
-  },
-  {
-   "text": "Comparison at finite pages and at the stationary page. Filtered colimits of abelian groups preserve kernels by [lem-weil-pbc-filtered-colimits-commute-finite-limits]. They preserve cokernels because cokernels and colimits are both colimits: maps out of either iterated colimit are exactly the same compatible families. Thus they are exact and commute with taking the cohomology of a differential. Starting from Step 6, induction with $E_{s+1}=\\ker d_s/\\operatorname{im}d_s$ proves $\\operatorname{colim}_t E_s^{p,r}(t)\\cong E_s^{p,r}$ for every finite $s\\ge2$. The uniform quadrant $p\\ge0,r\\ge b$ forces every outgoing and incoming differential at $(p,r)$ to vanish when $s>\\max(r-b+1,p)$. In particular the integer $s_0=\\max(2,r-b+2,p+1)$ works for every $t$ and for the target, exactly as in [thm-sp-truncation-e2] (4). Apply the finite-page result at this fixed $s_0$ to obtain the same comparison for $E_\\infty^{p,r}$. Only a fixed finite page is used at each bidegree.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "thm-sp-truncation-e2"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, Second term, comparison and uniform first-quadrant stabilization; Stacks Tag 002W (lemma-directed-commutes) and the bound in thm-sp-truncation-e2 (4)"
-   }
-  },
-  {
-   "text": "Comparison on the abutments. Fix $n\\ge b$, and put $H_t=H^n(S,N_t)$, $H=H^n(S,N)$. The canonical filtrations in [thm-sp-truncation-e2] (5)-(6) satisfy $F^0H_t=H_t$, $F^{n-b+1}H_t=0$, and the same formulas for $H$, with $\\operatorname{gr}^pH_t\\cong E_\\infty^{p,n-p}(t)$ and $\\operatorname{gr}^pH\\cong E_\\infty^{p,n-p}$. All these maps are compatible by Step 5. By the exactness proved in Step 7, the colimits of\n$$0\\to F^{p+1}H_t\\to F^pH_t\\to\\operatorname{gr}^pH_t\\to0$$\nare short exact. Descend from $p=n-b+1$, where the comparison is $0\\to0$. At each step the comparisons on $F^{p+1}$ and on the quotient are isomorphisms by induction and Step 7. The middle comparison is then an isomorphism: lift the image of a target element in the quotient, subtract its lift to land in the subobject, and use surjectivity there; for injectivity an element killed in the middle has zero quotient class, so comes from the subobject, where injectivity kills it. At $p=0$ this proves\n$$\\operatorname{colim}_tH^n(S,C(K_t))\\ \\cong\\ H^n(S,C(K)).$$\nFor $n<b$ both sides vanish by Step 5, so the assertion holds for every integer $n$.",
-   "uses": [
-    "thm-sp-truncation-e2"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, Second term, finite filtrations of the abutments; the finite extension argument is written out"
-   }
-  },
-  {
-   "text": "Finish with the natural triangles of Step 3. Take their long exact cohomology sequences, the cocone maps to the sequence for $K$, and the filtered colimit of the sequences for $K_t$. Exactness of that colimit follows as in Step 7 from [lem-weil-pbc-filtered-colimits-commute-finite-limits] and preservation of cokernels. In the five-term segment\n$$H^{q-1}(S,B)\\to H^{q-1}(S,C)\\to H^q(S,A)\\to H^q(S,B)\\to H^q(S,C),$$\nthe first, second, fourth and fifth comparisons are isomorphisms by Steps 4 and 8. The middle comparison is bijective by the following exact-sequence chase. For surjectivity, lift a target middle element's image in the fourth term; its image in the fifth vanishes, so exactness lifts it to a source middle element. Their difference lies in the image of the target second term; lift that second-term element and correct. For injectivity, a source middle element killed in the target has zero fourth-term image; lift it from the source second term. The image of that lift in the target second term comes from the target first term, which lifts from the source first term. Subtracting this lift leaves zero in the target second term, hence zero in the source second term, proving the original middle element zero. By the natural Hom identification of Step 3, this middle comparison is exactly the map in the statement. It is an isomorphism of abelian groups, hence a bijection, for every $q$.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "det-lem-formal-closed-support-stratum-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-    "place": "Proof, first paragraph: exact filtered colimits and five-lemma reduction; Stacks Tag 002W (lemma-directed-commutes)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-module-pushforward-pullback",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sf-exact-functor-derived-triangulated",
-  "det-lem-formal-closed-support-adjunction",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "det-lem-formal-closed-support-stratum-hom",
-  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-condensed-closed-costalk-derived-continuity",
   "lem-sf-derived-homology-long-exact",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-condensed-closed-costalk-injective-continuity",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity-representatives-homology",
+  "lem-weil-pbc-functorial-bounded-injective-resolution",
   "lem-weil-pbc-kinjective-functorial-existence",
-  "det-pe-bounded-continuity-sections",
-  "thm-sp-truncation-e2",
-  "lem-weil-pbc-truncation-triangle",
-  "det-lem-bounded-continuity-direct-image",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "det-lem-formal-closed-support-adjunction",
+  "lem-weil-pbc-condensed-local-piece-costalk-model",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+  "lem-weil-pbc-condensed-internal-hom-sections",
+  "lem-weil-pbc-derived-coyoneda-evaluation",
+  "lem-weil-pbc-condensed-finite-free-hom-continuity"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-constructible-ext-continuity-stratum.proof.md",
-  "place": "All three paragraphs, expanded with the general truncation spectral-sequence theorem and explicit comparison arguments"
+  "kind": "agent-written",
+  "by": "E3",
+  "date": "2026-10-18",
+  "source": "Blueprint stratum continuity proof; Hemo--Richarz--Scholbach Lemma 5.3(1),(2), and the existing Lean costalk-model argument, generalized to qcqs schemes with a specified quasi-compact open complement."
  },
  "mathlib_searches": [
   {
@@ -276,14 +211,7 @@
  "tool_uses": [
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "thm-sp-truncation-e2",
-  "lem-weil-pbc-truncation-triangle",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "det-pe-bounded-continuity-sections"
+  "lem-sf-derived-homology-long-exact"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -324,5 +252,15 @@
   "group": "N1",
   "result": "pass",
   "note": "Re-delivery after the H12/H4 RETURN of 31ca687c50b3. The duplicate node def-pur-condensed-finite-locally-free and ProEtaleFiniteLocallyFree.lean are deleted. In stmt_deps that node is replaced by the landed def-sfb-lisse-coefficient-module (its snapshot record is identical to live). The item .lean differs in exactly two lines: the import Sheaf.Paper.CoefficientHeartCommonStratification and hL : ProEtale.IsLisseCoefficientModule Λ L. Only the lean and stmt_deps node fields differ; statement, proof and sources are unchanged. lean.statement is verbatim. The lisse predicate is pro-etale locally finite free, with varying ranks and rank 0 allowed, and adds no assumption. The other clauses (qcqs X, closed i with quasi-compact open complement j, quasi-compact open u, admissible Λ, a_!L as in closedSupport_stratum_globalHom, uniform termwise bound b, IsIso of colimit.post for every q) are unchanged from the earlier review. nt_compile --json: 3.5 s, EXIT 0, clean. Advisory: the Second reading section is the accepted placeholder."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261019T002531-L-2149172",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
