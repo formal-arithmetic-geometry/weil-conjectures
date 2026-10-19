@@ -17501,3 +17501,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:11 L: merged deliver/NL/lem-sfb-constructible-cocone-hom-inj (reviewer FIX; first push; new nodes: 0)
 - 17:14 L: merged deliver/NM/lem-sfb-constructible-cocone-hom-surj (stage 2; reviewer PASS; parallel immutable checks)
 - 17:15 L: merged deliver/NH/lem-coef-finite-exceptional (stage 2; reviewer PASS; parallel immutable checks)
+- 17:15 L: returned deliver/NJ/fix-lem-exchanges (reviewer RETURN: L: independent stage-2 immutable head bc5774b4da5c: Compile clean (nt_compile --json 10.5 s, no warnings); statement ver)
