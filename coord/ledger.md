@@ -17490,3 +17490,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:04 L: merged deliver/K4/Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit (stage 3; reviewer PASS; first push; landing 20261019T160420-L-3355581 (interface); batch 20261019T160413; modules 1; new nodes 0; change records: coord/changes/K4-proetale-tensor-composition-local-attributes.md)
 - 16:04 L: merged deliver/U5/Sheaf.Paper.CoefficientHeartClosure (stage 3; reviewer PASS; first push; landing 20261019T160421-L-3355771 (proof); batch 20261019T160413; modules 1; new nodes 0)
 - 16:04 L: merged deliver/Y6/Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback (stage 3; reviewer PASS; first push; landing 20261019T160421-L-3355947 (proof); batch 20261019T160413; modules 1; new nodes 0)
+- 16:06 L: returned deliver/NH/lem-coef-finite-exceptional (reviewer RETURN: L: independent stage-2 immutable head 490c38d86e7e: RETURN H3 + H13. Compiled clean (nt_compile --json, 5.4 s, no errors)
