@@ -17550,3 +17550,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:26 L: merged deliver/C6/Sheaf.Algebra.Homology.DerivedChangeOfRingsGeneral (stage 3; reviewer PASS; first push; landing 20261019T192655-L-1853616 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:26 L: merged deliver/C6/Sheaf.Paper.ProEtaleProjectionFormulaArrows (stage 3; reviewer PASS; first push; landing 20261019T192656-L-1853845 (interface); batch 20261019T192638; modules 1; new nodes 0; change records: coord/changes/C6-proetale-projection-unit-local-transparency.md)
 - 19:26 L: merged deliver/C7/Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows (stage 3; reviewer PASS; first push; landing 20261019T192657-L-1854064 (proof); batch 20261019T192638; modules 1; new nodes 0)
+- 19:26 L: merged deliver/C8/Sheaf.Paper.PurTwistSheafLocallyFree (stage 3; reviewer PASS; first push; landing 20261019T192658-L-1854291 (proof); batch 20261019T192638; modules 1; new nodes 0)

@@ -25,10 +25,12 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -48,7 +50,6 @@ import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Paper.SfIntegralConstructible
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The integral Tate line on the pro-etale site
 
@@ -213,6 +214,72 @@ noncomputable def purTwistRootsModule (n : ℕ) :=
   (SheafOfModules.restrictScalars (purTwistFiniteRingIso S l n).hom).obj
     (proEtaleRootsOfUnityModule S (l ^ (n + 1)) (pow_pos (Fact.out : l.Prime).pos _))
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem purTwistConstantModule_hom_linear (N : ℕ) (hN : 0 < N)
+    (A B : SheafOfModules.{u + 1} (proEtaleRootsOfUnityCoefficientRing S N))
+    (φ : (SheafOfModules.toSheaf _).obj A ⟶ (SheafOfModules.toSheaf _).obj B)
+    (U : S.ProEtᵒᵖ) (a : (proEtaleRootsOfUnityCoefficientRing S N).obj.obj U)
+    (x : A.val.obj U) :
+    φ.hom.app U (a • x) = a • (@id (B.val.obj U) (φ.hom.app U x)) := by
+  let F := (SheafOfModules.toSheaf _).obj A
+  let G := (SheafOfModules.toSheaf _).obj B
+  let MA (U : S.ProEtᵒᵖ) :
+      Module ((proEtaleRootsOfUnityCoefficientRing S N).obj.obj U) (A.val.obj U) :=
+    inferInstance
+  let MB (U : S.ProEtᵒᵖ) :
+      Module ((proEtaleRootsOfUnityCoefficientRing S N).obj.obj U) (B.val.obj U) :=
+    inferInstance
+  have normalized (H : SheafOfModules.{u + 1}
+      (proEtaleRootsOfUnityCoefficientRing S N)) :
+      IsConstantZModSheafModuleStructure (ProEt.topology S) N
+        ((SheafOfModules.toSheaf _).obj H) (fun U ↦ (H.val.obj U).isModule) := by
+    constructor
+    · intro U z x
+      change @SMul.smul _ _ ((H.val.obj U).isModule).toSMul
+        (((toSheafify (ProEt.topology S) ((Functor.const S.ProEtᵒᵖ).obj
+          (RingCat.of (ULift.{u + 1} (ZMod N))))).app U).hom
+            (z : ULift.{u + 1} (ZMod N))) x = z • x
+      rw [map_intCast]
+      exact @Int.cast_smul_eq_zsmul _ _ _ _ (H.val.obj U).isModule z x
+    · intro U V f a x
+      exact H.val.map_smul f a x
+  exact torsionSheaf_hom_linear (ProEt.topology S) N hN F G
+    (fun U x ↦ constantZModModuleSheaf_nsmul _ N hN A U x)
+    (fun U x ↦ constantZModModuleSheaf_nsmul _ N hN B U x)
+    φ MA MB (normalized A) (normalized B) U a x
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem purTwistTransition_smul (n : ℕ) (U : S.ProEtᵒᵖ)
+    (a : (purTwistFiniteRing S l (n + 1)).obj.obj U)
+    (x : (purTwistRootsModule S l (n + 1)).val.obj U) :
+    ((proEtaleRootsOfUnityTower S l (Fact.out : l.Prime)).map
+        (homOfLE (Nat.le_succ n)).op).hom.app U (a • x) =
+      ((purTwistFiniteTransition S l n).hom.app U a) •
+        (@id ((purTwistRootsModule S l n).val.obj U)
+          (((proEtaleRootsOfUnityTower S l (Fact.out : l.Prime)).map
+            (homOfLE (Nat.le_succ n)).op).hom.app U x)) := by
+  let α := (purTwistFiniteRingIso S l (n + 1)).inv
+  let β := (sheafCompose (ProEt.topology S) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+    (purTwistFiniteTransition S l n)
+  let A := (SheafOfModules.restrictScalars α).obj (purTwistRootsModule S l (n + 1))
+  let B := (SheafOfModules.restrictScalars (α ≫ β)).obj (purTwistRootsModule S l n)
+  let φ := (proEtaleRootsOfUnityTower S l (Fact.out : l.Prime)).map
+    (homOfLE (Nat.le_succ n)).op
+  have h := purTwistConstantModule_hom_linear S (l ^ (n + 1 + 1))
+    (pow_pos (Fact.out : l.Prime).pos _) A B φ U
+    ((purTwistFiniteRingIso S l (n + 1)).hom.hom.app U a) x
+  have ha : α.hom.app U ((purTwistFiniteRingIso S l (n + 1)).hom.hom.app U a) = a := by
+    exact congrArg (fun f ↦ f.hom.app U a) (purTwistFiniteRingIso S l (n + 1)).hom_inv_id
+  change φ.hom.app U ((α.hom.app U _) • x) =
+    ((α ≫ β).hom.app U _) • (@id ((purTwistRootsModule S l n).val.obj U)
+      (φ.hom.app U x)) at h
+  change φ.hom.app U ((α.hom.app U _) • x) =
+    (β.hom.app U (α.hom.app U _)) •
+      (@id ((purTwistRootsModule S l n).val.obj U) (φ.hom.app U x)) at h
+  rw [ha] at h
+  exact h
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The completed scalar action is determined coordinatewise on the root limit.
 Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free).
 Proof: limits of abelian sheaves are sectionwise compatible tuples. Multiplication
@@ -235,7 +302,110 @@ theorem purTwistZlAction_existsUnique :
           (@id ((purTwistRootsModule S l n).val.obj U)
             ((limit.π (proEtaleRootsOfUnityTower S l (Fact.out : l.Prime)) (op n)).hom.app
               U x)) := by
-  sorry
+  classical
+  let F := proEtaleRootsOfUnityTower S l (Fact.out : l.Prime)
+  let ev (U : S.ProEtᵒᵖ) := sheafToPresheaf (ProEt.topology S) AddCommGrpCat.{u + 1} ⋙
+    (CategoryTheory.evaluation _ _).obj U
+  let c (U : S.ProEtᵒᵖ) := (ev U).mapCone (limit.cone F)
+  let hc (U : S.ProEtᵒᵖ) : IsLimit (c U) :=
+    isLimitOfPreserves (ev U) (limit.isLimit F)
+  let q (n : ℕ) (U : S.ProEtᵒᵖ) := (limit.π F (op n)).hom.app U
+  let r (n : ℕ) (U : S.ProEtᵒᵖ) := (purTwistZlProjection S l n).hom.app U
+  have extU (U : S.ProEtᵒᵖ) (x y : (purTwistZlOne S l).obj.obj U)
+      (h : ∀ n : ℕ, q n U x = q n U y) : x = y := by
+    exact Concrete.isLimit_ext (F ⋙ ev U) (hc U) x y (fun n ↦ h n.unop)
+  let ca (U : S.ProEtᵒᵖ) (a : (purTwistZlCompletion S l).obj.obj U) :
+      Cone (F ⋙ ev U) :=
+    { pt := (purTwistZlOne S l).obj.obj U
+      π := NatTrans.ofOpSequence
+        (fun n ↦ AddCommGrpCat.ofHom
+          { toFun := fun x ↦ (r n U a) • (@id ((purTwistRootsModule S l n).val.obj U)
+              (q n U x))
+            map_zero' := by simp only [map_zero, id_eq, smul_zero]
+            map_add' := fun x y ↦ by simp only [map_add, id_eq, smul_add] }) (by
+          intro n
+          ext x
+          change (r n U a) • (@id ((purTwistRootsModule S l n).val.obj U)
+            (q n U x)) =
+              ((F.map (homOfLE (Nat.le_succ n)).op).hom.app U)
+                ((r (n + 1) U a) •
+                  (@id ((purTwistRootsModule S l (n + 1)).val.obj U) (q (n + 1) U x)))
+          rw [purTwistTransition_smul]
+          have hr := congrArg (fun f ↦ f.hom.app U a)
+            (limit.w (purTwistZlTower S l) (homOfLE (Nat.le_succ n)).op)
+          have hq := congrArg (fun f ↦ f.hom.app U x)
+            (limit.w F (homOfLE (Nat.le_succ n)).op)
+          change ((purTwistZlTower S l).map (homOfLE (Nat.le_succ n)).op).hom.app U
+            (r (n + 1) U a) = r n U a at hr
+          simp only [purTwistZlTower, Functor.ofOpSequence_map_homOfLE_succ] at hr
+          have hq' : ((F.map (homOfLE (Nat.le_succ n)).op).hom.app U)
+              (q (n + 1) U x) = q n U x := by
+            change ((F.map (homOfLE (Nat.le_succ n)).op).hom.app U)
+              (q (n + 1) U x) = q n U x at hq
+            exact hq
+          exact (congrArg₂ (fun b y ↦
+            b • (@id ((purTwistRootsModule S l n).val.obj U) y)) hr hq').symm) }
+  let sm (U : S.ProEtᵒᵖ) (a : (purTwistZlCompletion S l).obj.obj U)
+      (x : (purTwistZlOne S l).obj.obj U) : (purTwistZlOne S l).obj.obj U :=
+    (hc U).lift (ca U a) x
+  have hsm (n : ℕ) (U : S.ProEtᵒᵖ)
+      (a : (purTwistZlCompletion S l).obj.obj U) (x : (purTwistZlOne S l).obj.obj U) :
+      q n U (sm U a x) = (r n U a) •
+        (@id ((purTwistRootsModule S l n).val.obj U) (q n U x)) := by
+    exact congrArg (fun f ↦ f x) ((hc U).fac (ca U a) (op n))
+  let M (U : S.ProEtᵒᵖ) :
+      Module ((purTwistZlCompletion S l).obj.obj U) ((purTwistZlOne S l).obj.obj U) :=
+    { smul := sm U
+      one_smul := fun x ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U 1 x) = q n U x
+        simp only [hsm, map_one, id_eq, one_smul])
+      mul_smul := fun a b x ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U (a * b) x) = q n U (sm U a (sm U b x))
+        simp only [hsm, map_mul, id_eq, mul_smul])
+      smul_zero := fun a ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U a 0) = q n U 0
+        simp only [hsm, map_zero, id_eq, smul_zero])
+      smul_add := fun a x y ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U a (x + y)) = q n U (sm U a x + sm U a y)
+        simp only [hsm, map_add, id_eq, smul_add])
+      add_smul := fun a b x ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U (a + b) x) = q n U (sm U a x + sm U b x)
+        simp only [hsm, map_add, id_eq, add_smul])
+      zero_smul := fun x ↦ extU U _ _ (fun n ↦ by
+        change q n U (sm U 0 x) = q n U 0
+        simp only [hsm, map_zero, id_eq, zero_smul]) }
+  refine ⟨M, ⟨?_, hsm⟩, ?_⟩
+  · intro U V f a x
+    apply extU V
+    intro n
+    change q n V ((purTwistZlOne S l).obj.map f (sm U a x)) =
+      q n V (sm V ((purTwistZlCompletion S l).obj.map f a)
+        ((purTwistZlOne S l).obj.map f x))
+    have hnat (z : (purTwistZlOne S l).obj.obj U) :
+        q n V ((purTwistZlOne S l).obj.map f z) =
+          (F.obj (op n)).obj.map f (q n U z) :=
+      NatTrans.naturality_apply (limit.π F (op n)).hom f z
+    rw [hnat]
+    change (F.obj (op n)).obj.map f (q n U (sm U a x)) = q n V (sm V _ _)
+    rw [hsm, hsm]
+    dsimp only [id]
+    change (purTwistRootsModule S l n).val.map f ((r n U a) • _) = _
+    rw [(purTwistRootsModule S l n).val.map_smul]
+    have hr : (purTwistFiniteRing S l n).obj.map f (r n U a) =
+        r n V ((purTwistZlCompletion S l).obj.map f a) :=
+      (NatTrans.naturality_apply (purTwistZlProjection S l n).hom f a).symm
+    change (purTwistFiniteRing S l n).obj.map f (r n U a) •
+      (@id ((purTwistRootsModule S l n).val.obj V)
+        ((F.obj (op n)).obj.map f (q n U x))) = _
+    rw [hr, ← hnat]
+    rfl
+  · intro M' hM'
+    funext U
+    apply Module.ext
+    funext a x
+    apply extU U
+    intro n
+    exact (hM'.2 n U a x).trans (hsm n U a x).symm
 
 /-- The unique coordinatewise completed coefficient action.
 Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
@@ -292,6 +462,69 @@ theorem purTwistIntegersMap_existsUnique :
 /-- The canonical inclusion, chosen from its equality in the coefficient field.
 Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
 noncomputable def purTwistIntegersMap := (purTwistIntegersMap_existsUnique l E).exists.choose
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem purTwistIntegers_basis :
+    ∃ k : ℕ, Nonempty (@Module.Basis (Fin k) ℤ_[l]
+      (Padic.coefficientExtensionIntegers l E) _ _
+      (Module.compHom (Padic.coefficientExtensionIntegers l E) (purTwistIntegersMap l E))) := by
+  classical
+  let O := Padic.coefficientExtensionIntegers l E
+  let : Module ℤ_[l] O := Module.compHom O (purTwistIntegersMap l E)
+  have hbase (a : ℚ_[l]) :
+      a ∈ Padic.coefficientExtensionIntegers l ℚ_[l] ↔ ‖a‖ ≤ 1 := by
+    have h := (Padic.extension_integers_dvr l ℚ_[l]
+      (Padic.coefficientExtensionAbsoluteValue l ℚ_[l])
+      (spectralNorm_extends (K := ℚ_[l]) (L := ℚ_[l]))).choose_spec.choose_spec.1 a
+    change a ∈ Padic.coefficientExtensionIntegers l ℚ_[l] ↔
+      spectralNorm ℚ_[l] ℚ_[l] a ≤ 1 at h
+    have hs := spectralNorm_extends (K := ℚ_[l]) (L := ℚ_[l]) a
+    simp only [Algebra.algebraMap_self_apply] at hs
+    rw [hs] at h
+    exact h
+  obtain ⟨b, hb, hexp⟩ := Padic.exists_integral_basis l ℚ_[l] E (by
+    intro a
+    change spectralNorm ℚ_[l] E (algebraMap ℚ_[l] E a) =
+      spectralNorm ℚ_[l] ℚ_[l] a
+    rw [spectralNorm_extends]
+    have hs := spectralNorm_extends (K := ℚ_[l]) (L := ℚ_[l]) a
+    simpa only [Algebra.algebraMap_self_apply] using hs.symm)
+  let v (i : Fin (Module.finrank ℚ_[l] E)) : O := ⟨b i, hb i⟩
+  let f : (Fin (Module.finrank ℚ_[l] E) → ℤ_[l]) →ₗ[ℤ_[l]] O :=
+    ∑ i, (LinearMap.proj i).smulRight (v i)
+  have hf (a : Fin (Module.finrank ℚ_[l] E) → ℤ_[l]) :
+      (f a : E) = ∑ i, algebraMap ℚ_[l] E (a i : ℚ_[l]) * b i := by
+    simp only [f, LinearMap.sum_apply, LinearMap.smulRight_apply, LinearMap.proj_apply]
+    change ((∑ i, (a i) • v i : O) : E) = _
+    calc
+      _ = ∑ i, ((a i • v i : O) : E) := map_sum O.subtype _ _
+      _ = _ := ?_
+    apply Finset.sum_congr rfl
+    intro i _
+    change (((purTwistIntegersMap l E) (a i) : O) : E) * b i = _
+    exact congrArg (fun z : E ↦ z * b i)
+      ((purTwistIntegersMap_existsUnique l E).exists.choose_spec (a i))
+  have hbij : Function.Bijective f := by
+    constructor
+    · intro a a' heq
+      obtain ⟨c, hc, huniq⟩ := hexp (f a : E) (f a).property
+      have hca : (fun i ↦ (a i : ℚ_[l])) = c :=
+        huniq _ ⟨fun i ↦ (hbase _).2 (a i).property, hf a⟩
+      have hca' : (fun i ↦ (a' i : ℚ_[l])) = c :=
+        huniq _ ⟨fun i ↦ (hbase _).2 (a' i).property, by
+          rw [heq]
+          exact hf a'⟩
+      funext i
+      apply Subtype.ext
+      exact congrFun (hca.trans hca'.symm) i
+    · intro x
+      obtain ⟨a, ha, _⟩ := hexp (x : E) x.property
+      let a' (i : Fin (Module.finrank ℚ_[l] E)) : ℤ_[l] :=
+        ⟨a i, (hbase _).1 (ha.1 i)⟩
+      refine ⟨a', Subtype.ext ?_⟩
+      exact (hf a').trans ha.2.symm
+  exact ⟨Module.finrank ℚ_[l] E,
+    ⟨Module.Basis.ofEquivFun (LinearEquiv.ofBijective f hbij).symm⟩⟩
 
 /-- The constant valuation-ring sheaf.
 Source: coefficient-twist blueprint, order 1505 (blueprint: lem-pur-twist-sheaf-locally-free). -/
@@ -669,6 +902,72 @@ noncomputable def purTwistFiniteOne (n : ℕ) :
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (purTwistIntegralQuotient S l E n)
     (purTwistIntegralOne S l E)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem purTwistUnitsPower_locallySurjective
+    (hl : IsUnit (l : Γ(S, ⊤))) :
+    Sheaf.IsLocallySurjective (proEtaleUnitsPower S l) where
+  imageSieve_mem {U} s := by
+    have hlU : IsUnit (l : Γ(U.left, ⊤)) := by
+      simpa only [map_natCast] using hl.map U.hom.appTop.hom
+    have hl0 : l ≠ 0 := (Fact.out : l.Prime).ne_zero
+    obtain ⟨V, f, hf, hsurj, ω, hω⟩ :=
+      exists_etale_surjective_pow_eq_appTop hl0 hlU (Units.isUnit (Additive.toMul s.down))
+    have : Etale f := hf
+    have : Surjective f := hsurj
+    have : WeaklyEtale (f ≫ U.hom) := by infer_instance
+    let W : S.ProEt := ProEt.mk (f ≫ U.hom)
+    let g : W ⟶ U := MorphismProperty.Over.homMk f rfl
+    have hcov : Sieve.ofArrows (fun _ : Unit ↦ W) (fun _ ↦ g) ∈ ProEt.topology S U := by
+      apply Precoverage.generate_mem_toGrothendieck
+      change Presieve.map (ProEt.forget S ⋙ Over.forget S)
+        (Presieve.ofArrows (fun _ : Unit ↦ W) (fun _ ↦ g)) ∈ proetalePrecoverage U.left
+      rw [Presieve.map_ofArrows]
+      apply etalePrecoverage_le_proetalePrecoverage
+      apply (ofArrows_mem_precoverage_iff _).2
+      exact ⟨fun x ↦ ⟨(), hsurj.surj x⟩, fun _ ↦ hf⟩
+    apply GrothendieckTopology.superset_covering _ ?_ hcov
+    rw [Sieve.ofArrows, Sieve.generate_le_iff]
+    rintro _ _ ⟨⟩
+    have hωu : IsUnit ω := (isUnit_pow_iff hl0).mp (hω ▸ (Units.isUnit _).map _)
+    refine ⟨⟨Additive.ofMul hωu.unit⟩, ?_⟩
+    change l • (ULift.up (Additive.ofMul hωu.unit)) =
+      (proEtaleUnitsSheaf S).obj.map g.op s
+    apply ULift.ext
+    apply Additive.toMul.injective
+    apply Units.ext
+    change ((hωu.unit : Γ(V, ⊤)) ^ l) = f.appTop.hom _
+    rw [IsUnit.unit_spec, hω]
+    rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem purTwistTransition_epi (hl : IsUnit (l : Γ(S, ⊤))) (n : ℕ) :
+    Epi (proEtaleRootsOfUnityTransition S (l ^ (n + 1)) (l ^ (n + 2))
+      (pow_pos (Fact.out : l.Prime).pos _) (pow_pos (Fact.out : l.Prime).pos _)
+      (pow_dvd_pow l (Nat.le_succ (n + 1)))) := by
+  have := purTwistUnitsPower_locallySurjective S l hl
+  have : Epi (proEtaleUnitsPower S l) := Sheaf.epi_of_isLocallySurjective _
+  let f := proEtaleUnitsPower S l
+  let g := proEtaleUnitsPower S (l ^ (n + 1))
+  have hfg : f ≫ g = proEtaleUnitsPower S (l ^ (n + 2)) := by
+    simp only [f, g, proEtaleUnitsPower, Preadditive.comp_nsmul, Category.comp_id,
+      smul_smul, ← pow_succ]
+  have hex := (kernelCokernelCompSequence_exact f g).exact 1
+  have hδ : kernelCokernelCompSequence.δ f g = 0 :=
+    (isZero_cokernel_of_epi f).eq_of_tgt _ _
+  have hepi : Epi (kernel.map (f ≫ g) g f (𝟙 _) (by simp)) := hex.epi_f hδ
+  let e := kernelIsoOfEq hfg
+  have hfac : e.inv ≫ kernel.map (f ≫ g) g f (𝟙 _) (by simp) =
+      proEtaleRootsOfUnityTransition S (l ^ (n + 1)) (l ^ (n + 2))
+        (pow_pos (Fact.out : l.Prime).pos _) (pow_pos (Fact.out : l.Prime).pos _)
+        (pow_dvd_pow l (Nat.le_succ (n + 1))) := by
+    apply (cancel_mono (kernel.ι g)).mp
+    rw [Category.assoc, kernel.lift_ι, ← Category.assoc,
+      kernelIsoOfEq_inv_comp_ι]
+    ext U x
+    exact (proEtaleRootsOfUnityTransition_prime S l (Fact.out : l.Prime) n U x).symm
+  rw [← hfac]
+  infer_instance
 
 /-- All four properties of the concrete Tate lines, including the empty-scheme case.
 Source: Stacks Project, Tag 03PK and Lemma 03RV; coefficient-twist blueprint, order 1505
