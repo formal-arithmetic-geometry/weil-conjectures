@@ -25,22 +25,10 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import Sheaf.Paper.IntrinsicComparisonConstructibility
+import Sheaf.Paper.IntrinsicComparisonTorAmplitude
 
 /-!
 # Comparison of étale and pro-étale Tor amplitude
@@ -107,7 +95,8 @@ theorem finiteCoefficient_comparison_preserves_torAmplitude
         ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
           (Padic.coefficientExtensionRing l E n) inferInstance
           (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b := by
-  sorry
+  exact ⟨intrinsicComparison_boundedConstructible D l _hlp E n hn T K' _hK',
+    intrinsicComparison_torAmplitude D l _hlp E n hn T a b _hab K' _hK' _hTor'⟩
 
 /-- Clause (ii): comparison reflects the Tor interval of a bounded-below étale origin.
 Source: blueprint `sec-six-functors/sk-prop-sf-rf-shriek-preservation/`

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-intrinsic-comparison-tor-amplitude",
+ "kind": "statement",
+ "title": "IntrinsicComparisonTorAmplitude",
+ "statement": "theorem intrinsicComparison_torAmplitude\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})\n    [∀ x : T, Invertible (l : T.residueField x)] (a b : ℤ) (_hab : a ≤ b)\n    (K' : Etale.DerivedCategoryModule\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T)\n    (_hK' : @Etale.DerivedCategory.isBoundedConstructible.{u}\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) inferInstance\n      ((Equiv.ulift : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n) ≃\n        Padic.coefficientExtensionRing l E n).finite_iff.mpr\n          (Padic.finite_coefficientExtensionRing l E n hn)) T K')\n    (_hTor' : Etale.DerivedCategory.hasTorAmplitudeIn\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K') :\n    Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n)\n      ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T\n        (Padic.coefficientExtensionRing l E n) inferInstance\n        (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-finite-tor-comparison/lem-sf-comparison-tor-amplitude.proof.md",
+  "place": "Constant scalar realization and clauses (i), steps 1–4; Exact comparison preserves the specified Tor interval.\nSource: blueprint `lem-sf-comparison-tor-amplitude`, steps 3 and 4\n(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).\n\nProof: choose an étale flat model in the given interval using the flat-model\ncharacterization. Comparison preserves the flatness of each term; intrinsic\nrealization converts it to site flatness. An additive functor preserves zero objects,\nso support is unchanged. The exact derived functor factorization gives the required\nisomorphism of the comparison image with the localized termwise model. Apply the\npro-étale flat-model characterization, using preserved bounded constructibility."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-locally-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "choose an étale flat model in the given interval using the flat-model\ncharacterization. Comparison preserves the flatness of each term; intrinsic\nrealization converts it to site flatness. An additive functor preserves zero objects,\nso support is unchanged. The exact derived functor factorization gives the required\nisomorphism of the comparison image with the localized termwise model. Apply the\npro-étale flat-model characterization, using preserved bounded constructibility.",
+   "uses": [
+    "lem-sf-intrinsic-comparison-constructibility",
+    "lem-sf-intrinsic-realization-flat",
+    "lem-sf-flat-model",
+    "lem-exc-constant-inverse-image-flat",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-intrinsic-comparison-constructibility",
+  "lem-sf-intrinsic-realization-flat",
+  "lem-sf-flat-model",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Exact comparison preserves the specified Tor interval.\nSource: blueprint `lem-sf-comparison-tor-amplitude`, steps 3 and 4\n(blueprint: lem-sf-intrinsic-comparison-tor-amplitude).\n\nProof: choose an étale flat model in the given interval using the flat-model\ncharacterization. Comparison preserves the flatness of each term; intrinsic\nrealization converts it to site flatness. An additive functor preserves zero objects,\nso support is unchanged. The exact derived functor factorization gives the required\nisomorphism of the comparison image with the localized termwise model. Apply the\npro-étale flat-model characterization, using preserved bounded constructibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact comparison inverse image from etale to proetale sheaves preserves and reflects Tor amplitude of derived tensor products",
+   "results": "8 hits: Algebra.FormallyEtale.instTensorProduct, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Module.FaithfullyFlat.rTensor_reflects_exact, Module.FaithfullyFlat.lTensor_reflects_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|comparisonUpperStar",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification along locally bijective constant scalar map preserves flat module sheaves and tensor products",
+   "results": "8 hits: PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.instNonemptySMulCandidate, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_toSheafify",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafification\", \"flat\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "siteSheafTensorRight|intrinsicRealization|intrinsicComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact comparison encoding theorem; generic sheafification APIs used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of sheaves of modules and constructibility under constant coefficient realization and etale proetale inverse image",
+   "results": "{\"t\": \"2026-10-18T17:11:04Z\", \"tool\": \"leansearch\", \"query\": \"Flatness of sheaves of modules and constructibility under constant coefficient realization and etale proetale inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.Flat.of_isLocalizedModule\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.of_linearEquiv\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"b556ae76577f81d8\"}",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the project local relation criterion and exact comparison API are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComparisonTorAmplitude",
+  "date": "2026-10-18",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-comparison-tor-amplitude",
+   "place": "Clause (i): constant scalar realization, flat model and constructibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntrinsicComparisonTorAmplitude",
+  "file": "lean/Sheaf/Paper/IntrinsicComparisonTorAmplitude.lean",
+  "declaration": "AlgebraicGeometry.intrinsicComparison_torAmplitude",
+  "statement": "theorem intrinsicComparison_torAmplitude\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})\n    [∀ x : T, Invertible (l : T.residueField x)] (a b : ℤ) (_hab : a ≤ b)\n    (K' : Etale.DerivedCategoryModule\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T)\n    (_hK' : @Etale.DerivedCategory.isBoundedConstructible.{u}\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) inferInstance\n      ((Equiv.ulift : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n) ≃\n        Padic.coefficientExtensionRing l E n).finite_iff.mpr\n          (Padic.finite_coefficientExtensionRing l E n hn)) T K')\n    (_hTor' : Etale.DerivedCategory.hasTorAmplitudeIn\n      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K') :\n    Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n)\n      ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T\n        (Padic.coefficientExtensionRing l E n) inferInstance\n        (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T002605-L-2157182",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T002605-L-2157182",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

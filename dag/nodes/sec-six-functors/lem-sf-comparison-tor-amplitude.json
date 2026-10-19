@@ -27,62 +27,15 @@
  ],
  "proof": [
   {
-   "text": "Put $F=\\nu_T^*$. First identify the coefficient rings for the ringed-topos pullback. The comparison geometric morphism and its restriction formula are those of [def-weil-pbc-site-comparison-morphism]. Lift its adjunction to commutative ring objects by [lem-weil-pbc-adjunction-lifts-group-ring-objects], identifying these with ring sheaves by [lem-weil-pbc-sheaf-algebraic-structures-objects]. For a pro-étale ring sheaf $B$, sheafification and the definition of a constant sheaf give\n$$\n\\operatorname{Hom}(\\nu_T^{-1}A_{T,\\Et},B)\n\\cong\\operatorname{Hom}(A_{T,\\Et},\\nu_{T,*}B)\n\\cong\\operatorname{Hom}_{\\mathrm{CRing}}(A,(\\nu_{T,*}B)(T))\n=\\operatorname{Hom}_{\\mathrm{CRing}}(A,B(T))\n\\cong\\operatorname{Hom}(A_{T,\\Proet},B).\n$$\nHere maps out of the constant presheaf are determined by their component at the terminal site object $T$; the other components are its restrictions. The bijections preserve the constant sections. Thus the two objects have the same universal property, giving the canonical ring isomorphism $c:\\nu_T^{-1}A_{T,\\Et}\\xrightarrow{\\sim}A_{T,\\Proet}$ (its maps in both directions are obtained by taking each object for $B$, and are inverse by uniqueness). Module pullback $A_{T,\\Proet}\\otimes_{\\nu_T^{-1}A_{T,\\Et}}\\nu_T^{-1}M$ is consequently $FM$: the maps are $a\\otimes m\\mapsto c^{-1}(a)m$ and $m\\mapsto1\\otimes m$. This agrees with the fixed-$A$ comparison functor, which applies inverse image to addition and each scalar endomorphism.",
+   "text": "Clause (i): combine preserved bounded constructibility with the flat-model proof of preserved Tor amplitude. These are separate components, with no rephrasing of the conjunction as a new assumption.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification"
+    "lem-sf-intrinsic-comparison-constructibility",
+    "lem-sf-intrinsic-comparison-tor-amplitude"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi) and Tag 0H7J (example-constant-sheaf); elementary universal-property specialization to the comparison inclusion"
-   }
+   "elementary": false
   },
   {
-   "text": "By [prop-weil-pbc-site-comparison-finite-level], $F$ is exact on $A$-module sheaves. By [lem-weil-pbc-exact-functor-derived-factorization] its functor on the unbounded derived categories is computed by applying $F$ termwise. By [lem-weil-pbc-exact-functor-derived-functor] this is also its total left derived functor, so it is the ringed-topos $L\\nu_T^*$ under step 1. Finally [lem-weil-pbc-exact-functor-complex-cohomology] gives\n$$\\mathcal H^r(FC)\\cong F\\mathcal H^r(C)$$\nfor every integer $r$ and every derived complex $C$, with no boundedness restriction. Termwise application also sends $N[0]$ to $(FN)[0]$ and the zero complex to zero. To use this complex-level cohomology statement for a derived object $C$, choose a representing complex $C^\\bullet$. The factorization identifies $FC$ with $Q(FC^\\bullet)$, while $\\mathcal H^r(C)=H^r(C^\\bullet)$ and $\\mathcal H^r(FC)=H^r(FC^\\bullet)$ by the definition of derived cohomology. Thus the displayed isomorphism applies to every derived object, including the tensor in step 5.",
-   "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), with homology.tex Tag 010N (lemma-exact-functor); exact comparison is the finite-level proposition"
-   }
-  },
-  {
-   "text": "For (i), apply the étale clause of [lem-sf-flat-model] to $K'$. Its hypotheses hold: $K'$ is bounded constructible, its Tor interval is $[a,b]$, $A=A_{E,n}$ and $\\ell$ is invertible on $T$. Obtain an isomorphism $K'\\cong P'$ with $P'^q=0$ for $q\\notin[a,b]$ and all $P'^q$ flat. By [lem-exc-constant-inverse-image-flat], every $FP'^q$ is a flat pro-étale $A$-module sheaf. Step 2 shows that $P=FP'$ represents $FK'$; since $F0=0$, it still has terms only in $[a,b]$. No constructibility of the terms of the flat model is needed.",
-   "uses": [
-    "lem-sf-flat-model",
-    "lem-exc-constant-inverse-image-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-comparison-tor-amplitude.md",
-    "place": "Proof (i), first two sentences: choose the étale flat model and pull it back termwise"
-   }
-  },
-  {
-   "text": "The complex $P$ of step 3 is bounded above and termwise flat on the ringed pro-étale site. It is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For every pro-étale module sheaf $N$ placed in degree zero, [def-weil-derived-tensor] therefore computes $FK'\\otimes_A^{\\mathbf L}N$ by $P\\otimes_A N[0]$. Its degree $q$ term is $P^q\\otimes_A N$, which is zero outside $[a,b]$; hence its cohomology vanishes there, giving precisely the Tor bound of [def-weil-proetale-tor-amplitude]. Independently, clause (ii) of [lem-sf-proetale-constructible-origin] says that $FK'$ is bounded constructible. These two assertions prove all of (i).",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-weil-derived-tensor",
-    "def-weil-proetale-tor-amplitude",
-    "lem-sf-proetale-constructible-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); blueprint Proof (i), K-flat tensor calculation and final constructibility sentence"
-   }
-  },
-  {
-   "text": "For (ii), fix an arbitrary étale $A$-module sheaf $N$ and put $C=K'\\otimes_A^{\\mathbf L}N[0]$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\nu_T$, the constant commutative ring sheaves and the isomorphism $c$ of step 1. Its sites are taken small relative to the module universe as in [def-weil-pbc-site-comparison-morphism]. Step 2 identifies its derived pullback with $F$, yielding\n$$\nFC\\cong FK'\\otimes_A^{\\mathbf L}(FN)[0]\n\\cong K\\otimes_A^{\\mathbf L}(FN)[0].\n$$\nThe second isomorphism uses the given $K\\cong FK'$. The complex $(FN)[0]$ is a module sheaf in degree zero, so the assumed Tor bound on $K$, unpacked by [def-weil-proetale-tor-amplitude], gives $\\mathcal H^r(FC)=0$ for $r\\notin[a,b]$. The tensor-comparison theorem applies to the unbounded derived categories; no bounded-below assertion about $C$ is used.",
+   "text": "For (ii), fix an arbitrary étale $A$-module sheaf $N$ and put $C=K'\\otimes_A^{\\mathbf L}N[0]$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\nu_T$, the constant commutative ring sheaves and the canonical constant-scalar identification. Its sites are taken small relative to the module universe as in [def-weil-pbc-site-comparison-morphism]. The exact-functor derived comparison identifies its derived pullback with $F$, yielding\n$$\nFC\\cong FK'\\otimes_A^{\\mathbf L}(FN)[0]\n\\cong K\\otimes_A^{\\mathbf L}(FN)[0].\n$$\nThe second isomorphism uses the given $K\\cong FK'$. The complex $(FN)[0]$ is a module sheaf in degree zero, so the assumed Tor bound on $K$, unpacked by [def-weil-proetale-tor-amplitude], gives $\\mathcal H^r(FC)=0$ for $r\\notin[a,b]$. The tensor-comparison theorem applies to the unbounded derived categories; no bounded-below assertion about $C$ is used.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "def-weil-pbc-site-comparison-morphism",
@@ -95,7 +48,7 @@
    }
   },
   {
-   "text": "For each $r\\notin[a,b]$, the cohomology comparison in step 2 identifies $F\\mathcal H^r(C)$ with the zero sheaf from step 5. Apply the sheaf-level unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] to $M=\\mathcal H^r(C)$: it gives $M\\cong\\nu_{T,*}FM=0$. The last equality follows directly from restriction, $(\\nu_{T,*}0)(U)=0(U)=0$, in [def-weil-pbc-site-comparison-morphism]. Thus $\\mathcal H^r(K'\\otimes_A^{\\mathbf L}N[0])=0$ outside $[a,b]$ for every étale module sheaf $N$. By [def-kun-tor-amplitude] this is exactly the étale Tor-amplitude assertion of (ii). This argument works cohomology sheaf by cohomology sheaf, so the bounded-below hypothesis on $K'$ suffices without imposing any new hypothesis on its derived tensor.",
+   "text": "For each $r\\notin[a,b]$, exact comparison with cohomology identifies $F\\mathcal H^r(C)$ with the zero sheaf from the preceding tensor calculation. Apply the sheaf-level unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] to $M=\\mathcal H^r(C)$: it gives $M\\cong\\nu_{T,*}FM=0$. The last equality follows directly from restriction, $(\\nu_{T,*}0)(U)=0(U)=0$, in [def-weil-pbc-site-comparison-morphism]. Thus $\\mathcal H^r(K'\\otimes_A^{\\mathbf L}N[0])=0$ outside $[a,b]$ for every étale module sheaf $N$. By [def-kun-tor-amplitude] this is exactly the étale Tor-amplitude assertion of (ii). This argument works cohomology sheaf by cohomology sheaf, so the bounded-below hypothesis on $K'$ suffices without imposing any new hypothesis on its derived tensor.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
     "def-weil-pbc-site-comparison-morphism",
@@ -110,27 +63,17 @@
  ],
  "proof_deps": [
   "def-kun-tor-amplitude",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-proetale-tor-amplitude",
-  "lem-exc-constant-inverse-image-flat",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-sf-flat-model",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-intrinsic-comparison-constructibility",
+  "lem-sf-intrinsic-comparison-tor-amplitude",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-comparison-tor-amplitude.md",
-  "place": "Proof (i) and (ii), with the boundedness gap in (ii) repaired using the existing unbounded ringed-topos tensor theorem and sheaf-level comparison unit"
+  "place": "G1: clause (i) implemented through intrinsic realization, constructibility and flat-model components; clause (ii) remains open."
  },
  "mathlib_searches": [
   {
@@ -401,5 +344,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, and canonical constructions checked. scompile.py passed sandbox and library compilation without errors or warnings; no repository mutation.; reverted the delivery's change of existing node(s) def-weil-derived-tensor (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261019T002605-L-2157182",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

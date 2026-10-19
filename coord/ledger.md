@@ -16693,3 +16693,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/F8/Sheaf.Paper.CompactSupportReductionTower (stage 3; reviewer PASS; first push; landing 20261019T002604-L-2156748 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/F8/Sheaf.Paper.EtaleCompactSupportCoefficientChange (stage 3; reviewer PASS; first push; landing 20261019T002604-L-2156863 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/F8/Sheaf.Paper.ProperUnboundedWindowIso (stage 3; reviewer PASS; after a return; landing 20261019T002605-L-2157050 (interface); batch 20261019T002449; modules 2; new nodes 0; change records: coord/changes/F8-proper-window-standing-setting.md)
+- 00:26 L: merged deliver/G1/Sheaf.Paper.ComparisonTorAmplitude (stage 3; reviewer PASS; first push; landing 20261019T002605-L-2157182 (interface); batch 20261019T002449; modules 5; new nodes 5)
