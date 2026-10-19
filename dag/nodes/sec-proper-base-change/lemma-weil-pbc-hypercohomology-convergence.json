@@ -21,24 +21,54 @@
  ],
  "proof": [
   {
-   "text": "Apply the right-derived negative-vanishing theorem to the canonical truncation couples for $f_*$ and $f'_*g'^{-1}$; exact inverse image transports the lower bound when the comparison sequence is used. Thus all pages lie in $p\\geq0$ and $q\\geq a$, and on $p+q=n$ the range is $a\\leq q\\leq n$. The truncation image filtrations are finite, exhaustive and separated; the half-plane convergence theorem identifies their stable pages with the associated graded pieces and makes the quotient systems eventually constant, so no derived inverse-limit condition is needed.",
+   "text": "Transfer the given vanishing bound from L to the homology of its representative K. Use the proved lower-bound and truncation-map lemmas of the hypercohomology filtration module: right-derived direct image preserves IsGE, and exact inverse image preserves IsGE before the second right-derived direct image. Thus the D-terms vanish below a, the initial E-terms vanish for p<0 or q<a, and H^n(F tau<=n K) -> H^n(F K) is invertible. The D, E and alpha projections of the explicit exact-couple construction are identified by eliminating its exactness witnesses.",
    "uses": [
     "def-weil-pbc-hypercohomology-filtrations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.proof.md",
-    "place": "proof of lemma-weil-pbc-hypercohomology-convergence, order 1376"
+    "place": "proof of lemma-weil-pbc-hypercohomology-convergence, order 1376; truncation cocones as in Stacks 015J and 05TC"
+   }
+  },
+  {
+   "text": "Induct on the page index: each next E-term is a quotient of the kernel of its differential, so vanishing of the original term persists. If p+q=n and the term is nonzero, half-plane vanishing forces p>=0 and q>=a, hence a<=q<=n.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.proof.md",
+    "place": "proof of lemma-weil-pbc-hypercohomology-convergence, order 1376; truncation cocones as in Stacks 015J and 05TC"
+   }
+  },
+  {
+   "text": "Apply halfPlaneConvergence to obtain limiting subobjects. For each derived functor F, let H(n)=H^n(F K) and j(n,q) be the actual truncation abutment map, with equality transports from D(n-q,q). Naturality of truncation inclusions makes these maps a diagonal cocone. Integer-index equality transport and induction on alpha iterates prove its nonnegative-index normalization. The component at q=n is invertible by the truncation-map lemma. Apply abutment_image_filtration to this normalized invertible cocone to obtain convergence to the actual abutment H(n). Its cocone equation gives exactly the abutment maps in the conclusion. Pushing images through the equality identifying the colimit object with H(n) gives the specified image-subobject equation; injectivity of this subobject map transfers the finite top and bottom bounds back to the colimit image filtration. Apply this construction separately to Rf_* and Rf'_*(g')^{-1}.",
+   "uses": [
+    "def-weil-pbc-hypercohomology-filtrations",
+    "thm-sp-half-plane-convergence",
+    "lem-sp-abutment-image-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.proof.md",
+    "place": "proof of lemma-weil-pbc-hypercohomology-convergence, order 1376; truncation cocones as in Stacks 015J and 05TC"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-hypercohomology-filtrations"
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-sp-exact-couple",
+  "thm-sp-half-plane-convergence",
+  "lem-sp-abutment-image-filtration"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0DDE (lemma-proper-base-change, line 18708), proof (the spectral sequences $R^pf_*H^q(E)$, $R^pf'_*(g')^{-1}H^q(E)$ converge), with the convergence argument of Derived Categories Lemma 015J (derived.tex, line 7177) and Homology Lemmas 0132, 012W, 0BDV (homology.tex): finitely many nonzero terms on each line $p+q=n$ give bounded spectral sequences and finite filtrations. The spectral sequences are realized, on the blueprint's route, by the truncation exact couples (not Stacks' Cartan-Eilenberg double complex), so the general exact-couple convergence is taken from [thm-sp-half-plane-convergence]."
+  "by": "agent",
+  "group": "S9",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-hypercohomology-convergence.proof.md",
+  "place": "proof of lemma-weil-pbc-hypercohomology-convergence, order 1376; truncation cocones as in Stacks 015J and 05TC",
+  "note": "Current half-plane and invertible-cocone interfaces; equality-transport glue adapted from the retired convergence helper of HypercohomologyFiltrations. No new unproved statements."
  },
  "mathlib_searches": [
   {
@@ -132,8 +162,7 @@
   "summary": "Statement made explicit and extended to the three couples (1), (2), (3) now defined in def-weil-pbc-hypercohomology-filtrations (the imported text said 'both'; the target thm-weil-pbc-bounded-below Step 5 uses (2) and (3), (2) being the g^{-1}Rf_* couple): quadrant, the range a<=q<=n, 0<=p<=n-a on the line p+q=n, the explicit stabilization page max(q-a+2,p+1) (uniformly n-a+2 on degree n), and F^0=H^n, F^{n-a+1}=0 for the decreasing filtration F^p = image of H^n of tau_{<=n-p}K, giving finite/exhaustive/separated, trivial lim condition and E_inf = gr. The one-paragraph proof was split into six steps: (1) vanishing of D for q<a and of E for q<a and p<0 for (1),(3) from lem-weil-pbc-derived-functor-negative-vanishing (Stacks 05TC); (2) transfer to (2) by the exact g^{-1}; (3) finitely many terms, elementary; (4) stabilization from the bidegree (r,1-r) of d_r (Stacks 0BDV), agreeing with the bound of thm-sp-half-plane-convergence; (5) the finite filtration and convergence from thm-sp-half-plane-convergence, with the explicit bounds (Stacks 0121, 012U, 012W); (6) identification of the canonical abutment D^{0,n} and its filtration with the abutment and image filtration of the definition via lem-weil-pbc-derived-functor-truncation-iso (Stacks 05TC (2)). Source: Stacks 0DDE and its convergence references 015J/0132/012W, adapted to the blueprint's truncation exact couples. No new nodes; Mathlib has spectral objects and first-quadrant spectral sequences but no exact couples or convergence (searches recorded)."
  },
  "tool_uses": [
-  "thm-sp-half-plane-convergence",
-  "lem-sp-kinjective-computes"
+  "thm-sp-half-plane-convergence"
  ],
  "reviewed": {
   "date": "2026-10-09",
@@ -332,5 +361,15 @@
    "def-sp-convergence",
    "def-sp-filtration"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261019T112529-L-3950863",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

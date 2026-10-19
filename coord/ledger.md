@@ -17353,3 +17353,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/S6/Sheaf.Paper.PurityDncFiniteRealization (stage 3; reviewer PASS; first push; landing 20261019T112526-L-3950398 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/S6/Sheaf.RingTheory.DvrNormValuationSum (stage 3; reviewer PASS; first push; landing 20261019T112527-L-3950527 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/S8/Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones (stage 3; reviewer PASS; first push; landing 20261019T112528-L-3950707 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/S9/Sheaf.AlgebraicGeometry.HypercohomologyConvergenceStatement (stage 3; reviewer PASS; first push; landing 20261019T112529-L-3950863 (proof); batch 20261019T112432; modules 1; new nodes 0)

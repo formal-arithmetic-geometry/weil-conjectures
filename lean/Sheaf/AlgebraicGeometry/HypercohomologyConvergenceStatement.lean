@@ -13,6 +13,9 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
+import all Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
+import WeilConjectures.CategoryTheory.HalfPlaneConvergence
+import WeilConjectures.CategoryTheory.AbutmentImageFiltration
 
 /-!
 # Half-plane convergence of the hypercohomology spectral sequences
@@ -30,10 +33,202 @@ universe u v u' v'
 
 open CategoryTheory CategoryTheory.Limits
 
+namespace CategoryTheory
+
+private theorem couple_D
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (K : CochainComplex.Plus A) (p q : ℤ) :
+    (hypercohomologyCouple F K).D p q = hypercohomologyD F K p q := by
+  unfold hypercohomologyCouple
+  rcases hypercohomology_maps_exact F K with ⟨_, _, _, _, _, _⟩
+  rfl
+
+private theorem couple_E
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (K : CochainComplex.Plus A) (p q : ℤ) :
+    (hypercohomologyCouple F K).E p q = hypercohomologyE F K p q := by
+  unfold hypercohomologyCouple
+  rcases hypercohomology_maps_exact F K with ⟨_, _, _, _, _, _⟩
+  rfl
+
+private theorem couple_alpha
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (K : CochainComplex.Plus A) (p q : ℤ) :
+    (hypercohomologyCouple F K).alpha p q =
+      eqToHom (couple_D F K p q) ≫ hypercohomologyAlpha F K p q ≫
+        eqToHom (couple_D F K (p - 1) (q + 1)).symm := by
+  generalize_proofs
+  unfold hypercohomologyCouple at *
+  generalize hx : hypercohomology_maps_exact F K = h at *
+  rcases h with ⟨_, _, _, _, _, _⟩
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+
+private theorem canonical_abutment
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (K : CochainComplex.Plus A) (a : ℤ)
+    (hD : ∀ p q : ℤ, q < a → IsZero (hypercohomologyD F K p q))
+    (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (hypercohomologyE F K p q))
+    (hiso : ∀ n : ℤ, IsIso (hypercohomologyAbutmentMap F K n n)) :
+    ∃ Z : (hypercohomologyCouple F K).LimitSubobjects,
+      ∃ T : ∀ n : ℤ, (hypercohomologyCouple F K).AlphaColimit n,
+      ∃ hT : ∀ n : ℤ, (T n).obj =
+        (DerivedCategory.homologyFunctor B n).obj (F.obj (DerivedCategory.Q.obj K.obj)),
+      ∃ hD' : ∀ n p : ℤ, (hypercohomologyCouple F K).D p (n - p) =
+        (DerivedCategory.homologyFunctor B n).obj
+          (F.obj (DerivedCategory.Q.obj (TruncationCouple.truncation K (n - p)).obj)),
+      (hypercohomologyCouple F K).ConvergesTo Z T ∧
+      (∀ n p : ℤ, (T n).ι p ≫ eqToHom (hT n) =
+        eqToHom (hD' n p) ≫ hypercohomologyAbutmentMap F K n (n - p)) ∧
+      (∀ n : ℤ, ((hypercohomologyCouple F K).imageFiltration n (T n)).IsFinite) ∧
+      (∀ n p : ℤ, (Subobject.«exists» (eqToHom (hT n))).obj
+        (((hypercohomologyCouple F K).imageFiltration n (T n)).step p) =
+          imageSubobject (hypercohomologyAbutmentMap F K n (n - p))) := by
+  let X := hypercohomologyCouple F K
+  let H (n : ℤ) := (DerivedCategory.homologyFunctor B n).obj
+    (F.obj (DerivedCategory.Q.obj K.obj))
+  let j (n q : ℤ) : X.D (n - q) q ⟶ H n :=
+    eqToHom (by rw [couple_D]; unfold hypercohomologyD; congr 2; omega) ≫
+      hypercohomologyAbutmentMap F K n q
+  let c (n : ℤ) : X.D 0 n ⟶ H n :=
+    eqToHom (by congr 1; omega) ≫ j n n
+  have hco (n p : ℤ) : X.alphaDiagonal n p ≫
+      eqToHom (by congr 1; omega) ≫ j n (n - p) =
+        eqToHom (by congr 1; omega) ≫ j n (n - (p + 1)) := by
+    have ha (p q n t : ℤ) (hn : p + q = n) (ht : q + 1 = t) :
+        hypercohomologyAlpha F K p q =
+          eqToHom (by unfold hypercohomologyD; rw [hn]; rfl) ≫
+          (DerivedCategory.homologyFunctor B n).map
+            (F.map (DerivedCategory.Q.map
+              (eqToHom (congrArg (fun r : ℤ ↦ K.obj.truncLE r)
+                (by omega : q = t - 1)) ≫ TruncationCouple.transition K t))) ≫
+          eqToHom (by unfold hypercohomologyD; rw [← ht, ← hn]; congr 2; omega) := by
+      subst n
+      subst t
+      simp only [eqToHom_refl, Category.id_comp]
+      rfl
+    dsimp only [BigradedExactCouple.alphaDiagonal]
+    dsimp only [X]
+    rw [couple_alpha]
+    simp only [Category.assoc]
+    rw [ha (p + 1) (n - (p + 1)) n (n - p) (by omega) (by omega)]
+    simp only [j, hypercohomologyAbutmentMap, Category.assoc, eqToHom_trans_assoc,
+      eqToHom_refl, Category.id_comp]
+    rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp]
+    have hq : n - (p + 1) = n - p - 1 := by omega
+    simp only [Category.assoc, TruncationCouple.transition_comp_ιTruncLE]
+    have hι := eqToHom_naturality (fun r : ℤ ↦ K.obj.ιTruncLE r) hq
+    simp only [eqToHom_refl, Category.comp_id] at hι
+    rw [hι]
+  have hn : ∀ (n p : ℤ) (_ : 0 ≤ p), eqToHom (by congr 1 <;> omega) ≫ j n (n - p) =
+      X.incomingAlphaIter p.toNat 0 n ≫ c n := by
+    let k (n p : ℤ) : X.D p (n - p) ⟶ H n :=
+      eqToHom (by congr 1; omega) ≫ j n (n - p)
+    have hk (n p : ℤ) : X.alphaDiagonal n p ≫ k n p = k n (p + 1) := hco n p
+    have hi (n : ℤ) (r : ℕ) (p q : ℤ) (hn : p + q = n) :
+        X.alphaIter r p q ≫ eqToHom (by congr 1; omega) ≫ k n (p - r) =
+          eqToHom (by congr 1; omega) ≫ k n p := by
+      induction r generalizing p q with
+      | zero =>
+        simp only [BigradedExactCouple.alphaIter, eqToHom_trans_assoc]
+        have he := eqToHom_naturality (k n) (by omega : p - (↑(0 : ℕ) : ℤ) = p)
+        simp only [eqToHom_refl, Category.comp_id] at he
+        rw [he, eqToHom_trans_assoc]
+      | succ r ih =>
+        simp only [BigradedExactCouple.alphaIter, Category.assoc, eqToHom_trans_assoc]
+        have he := ih (p - 1) (q + 1) (by omega)
+        have hidx : p - ↑(r + 1 : ℕ) = p - 1 - ↑r := by omega
+        have hcast := eqToHom_naturality (k n) hidx
+        simp only [eqToHom_refl, Category.comp_id] at hcast
+        rw [hcast, eqToHom_trans_assoc, he]
+        have hq : q = n - p := by omega
+        subst q
+        have he' := hk n (p - 1)
+        simp only [BigradedExactCouple.alphaDiagonal, Category.assoc] at he'
+        dsimp only [k] at he' ⊢
+        simp only [eqToHom_trans_assoc] at he' ⊢
+        convert! he' using 1 <;> congr! 4 <;> omega
+    intro n p hp
+    lift p to ℕ using hp
+    have he := hi n p (p : ℤ) (n - p) (by omega)
+    have hend := eqToHom_naturality (k n) (by omega : (p : ℤ) - p = 0)
+    simp only [eqToHom_refl, Category.comp_id] at hend
+    rw [hend, eqToHom_trans_assoc] at he
+    simp only [k, eqToHom_trans_assoc] at he
+    simp only [Int.toNat_natCast, BigradedExactCouple.incomingAlphaIter, c,
+      Category.assoc, eqToHom_trans_assoc]
+    convert! he.symm using 1 <;> congr! 4 <;> omega
+  have hc (n : ℤ) : IsIso (c n) := by
+    dsimp [c, j]
+    infer_instance
+  have hDX : ∀ p q : ℤ, q < a → IsZero (X.D p q) := by
+    simpa only [X, couple_D] using hD
+  have hEX : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q) := by
+    simpa only [X, couple_E] using hE
+  obtain ⟨Z, T₀, hT₀, hT₀ι, hsupport, _⟩ :=
+    BigradedExactCouple.halfPlaneConvergence X a hDX hEX
+  obtain ⟨FA, FH, hFA, hFA0, hFH, hj, htop, hbot, hfinite, hneg, T, hT, hι, hconv⟩ :=
+    abutment_image_filtration X a hDX hEX Z H j c (fun _ ↦ rfl) hc hco hn
+  let hD' (n p : ℤ) : X.D p (n - p) =
+      (DerivedCategory.homologyFunctor B n).obj
+        (F.obj (DerivedCategory.Q.obj (TruncationCouple.truncation K (n - p)).obj)) := by
+    rw [couple_D]
+    unfold hypercohomologyD
+    congr 2
+    omega
+  have hι' (n p : ℤ) : (T n).ι p ≫ eqToHom (hT n) =
+      eqToHom (hD' n p) ≫ hypercohomologyAbutmentMap F K n (n - p) := by
+    simpa only [j, Category.assoc, eqToHom_trans_assoc] using hι n p
+  have himage (n p : ℤ) : (Subobject.«exists» (eqToHom (hT n))).obj
+      ((X.imageFiltration n (T n)).step p) =
+        imageSubobject (hypercohomologyAbutmentMap F K n (n - p)) := by
+    rw [Subobject.exists_obj_eq_imageSubobject]
+    change imageSubobject ((imageSubobject ((T n).ι p)).arrow ≫ eqToHom (hT n)) = _
+    rw [← imageSubobject_comp_of_epi (factorThruImageSubobject ((T n).ι p)),
+      ← Category.assoc, imageSubobject_arrow_comp, hι', imageSubobject_iso_comp]
+  refine ⟨Z, T, hT, hD', hconv, hι', ?_, himage⟩
+  intro n
+  have hstep (p : ℤ) : (Subobject.map (eqToHom (hT n))).obj
+      ((X.imageFiltration n (T n)).step p) = (FH n).step p := by
+    rw [← Subobject.exists_iso_map, himage, hj]
+    dsimp only [j]
+    rw [imageSubobject_iso_comp]
+  obtain ⟨l, r, hl, hr⟩ := (hfinite n).1
+  refine ⟨l, r, ?_, ?_⟩
+  · apply Subobject.map_obj_injective (eqToHom (hT n))
+    rw [hstep, hl, Subobject.map_top, Subobject.mk_eq_top_of_isIso]
+  · apply Subobject.map_obj_injective (eqToHom (hT n))
+    rw [hstep, hr, Subobject.map_bot]
+
+private theorem page_vanishing
+    {B : Type v} [Category.{u'} B] [Abelian B]
+    (X : BigradedExactCouple B 0) (a : ℤ)
+    (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q))
+    (r : ℕ) (p q : ℤ) (h : p < 0 ∨ q < a) :
+    IsZero ((X.pageCouple r).E p q) := by
+  induction r with
+  | zero => exact hE p q h
+  | succ r ih =>
+    have : Epi ((X.pageCouple r).derivedEProjection p q) := by
+      dsimp [BigradedExactCouple.derivedEProjection, BigradedExactCouple.derivedE]
+      infer_instance
+    exact IsZero.of_epi ((X.pageCouple r).derivedEProjection p q)
+      (IsZero.of_mono (kernel.ι ((X.pageCouple r).d p q)) ih)
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.Etale
 
 open CategoryTheory
 
+set_option linter.unusedVariables false in
 /--
 The two canonical truncation spectral sequences of a torsion bounded-below étale
 complex are half-plane spectral sequences.  In each total degree their image
@@ -133,6 +328,39 @@ theorem hypercohomology_convergence_statement
             (A₂ n)).step p) =
           imageSubobject
             (hypercohomologyAbutmentMap (hypercohomologySecondFunctor f' g') K n (n - p)))) := by
-  sorry
+  have haK (q : ℤ) (hq : q < a) : IsZero (K.obj.homology q) :=
+    (ha q hq).of_iso
+      (((DerivedCategory.homologyFunctorFactors _ q).app K.obj).symm ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso e)
+  have hF₁ (M : DerivedCategory _) (n : ℤ) (hM : M.IsGE n) :
+      ((hypercohomologyFirstFunctor f).obj M).IsGE n :=
+    rightDerived_preserves_isGE _ M n
+  have hF₂ (M : DerivedCategory _) (n : ℤ) (hM : M.IsGE n) :
+      ((hypercohomologySecondFunctor f' g').obj M).IsGE n := by
+    have := Functor.isGE_mapDerivedCategory_obj
+      (upperStar AddCommGrpCat.{u + 1} g') M n
+    exact rightDerived_preserves_isGE _ _ n
+  obtain ⟨hD₁, hE₁, hi₁⟩ :=
+    hypercohomology_bounds_of_isGE (hypercohomologyFirstFunctor f) K a haK hF₁
+  obtain ⟨hD₂, hE₂, hi₂⟩ :=
+    hypercohomology_bounds_of_isGE (hypercohomologySecondFunctor f' g') K a haK hF₂
+  have hz₁ := page_vanishing (hypercohomologyCouple (hypercohomologyFirstFunctor f) K) a
+    (by simpa only [couple_E] using hE₁)
+  have hz₂ := page_vanishing (hypercohomologyCouple (hypercohomologySecondFunctor f' g') K) a
+    (by simpa only [couple_E] using hE₂)
+  refine ⟨hz₁, ?_, hz₂, ?_,
+    canonical_abutment (hypercohomologyFirstFunctor f) K a hD₁ hE₁ hi₁,
+    canonical_abutment (hypercohomologySecondFunctor f' g') K a hD₂ hE₂ hi₂⟩
+  all_goals
+    intro r n p q hn hne
+    have hq : a ≤ q := le_of_not_gt (fun h ↦ hne (by
+      first
+      | exact hz₁ r p q (Or.inr h)
+      | exact hz₂ r p q (Or.inr h)))
+    have hp : 0 ≤ p := le_of_not_gt (fun h ↦ hne (by
+      first
+      | exact hz₁ r p q (Or.inl h)
+      | exact hz₂ r p q (Or.inl h)))
+    exact ⟨hq, by omega⟩
 
 end AlgebraicGeometry.Etale
