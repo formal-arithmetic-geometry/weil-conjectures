@@ -16666,3 +16666,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/E4/Sheaf.Paper.SfWeilSheafComplex (stage 3; reviewer PASS; first push; landing 20261019T002534-L-2149804 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/E5/Sheaf.Paper.FiniteStagePairCategory (stage 3; reviewer PASS; first push; landing 20261019T002534-L-2149964 (interface); batch 20261019T002449; modules 1; new nodes 0; change records: coord/changes/E5-finite-stage-pair-private-construction.md)
 - 00:25 L: merged deliver/E6/Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback (stage 3; reviewer PASS; first push; landing 20261019T002535-L-2150105 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/E6/Sheaf.AlgebraicGeometry.ProEtalePointPullback (stage 3; reviewer PASS; first push; landing 20261019T002535-L-2150210 (proof); batch 20261019T002449; modules 1; new nodes 0)

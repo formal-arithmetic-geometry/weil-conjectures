@@ -2,10 +2,7 @@ module
 
 public import Mathlib.Topology.Category.Profinite.AsLimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import all Sheaf.Paper.ProfiniteTestObjectFunctor
 
 /-!
 # Pullback from the pro-étale point
@@ -132,6 +129,96 @@ theorem sfbPullbackFromPoint_spec :
         G.obj.obj (op ((profiniteToProEtOf X).obj S))) ∧
     (∀ (X : Scheme.{u}),
       Nonempty (sfbPullbackFromPoint X ⊣ sfbPullbackFromPointRightAdjoint X)) := by
-  sorry
+  -- The existing test-object theorem gives limits over X; forgetting preserves
+  -- these connected limits. Its Spec Z comparison gives the absolute formula.
+  have hlim (X : Scheme.{u}) (S : Profinite.{u}) :
+      Nonempty (IsLimit ((profiniteToProEtOf X ⋙ Scheme.ProEt.forget X ⋙
+        Over.forget X).mapCone S.asLimitCone)) := by
+    have : IsConnected (DiscreteQuotient S) := IsCofiltered.isConnected _
+    have hs (i : DiscreteQuotient S) : Function.Surjective (S.asLimitCone.π.app i) :=
+      i.proj_surjective
+    exact ⟨isLimitOfPreserves (Over.forget X)
+      ((profinite_test_object_functor X).2.2.2.1 _ S.fintypeDiagram
+        S.asLimitCone S.asLimit hs).some⟩
+  -- Use continuity into the subcanonical scheme site to preserve disjoint unions.
+  have hcop (X : Scheme.{u}) :
+      PreservesFiniteCoproducts (profiniteToProEtOf X ⋙ Scheme.ProEt.forget X ⋙
+        Over.forget X) := by
+    let F := profiniteToProEtOf X ⋙ Scheme.ProEt.forget X ⋙ Over.forget X
+    have : (profiniteToProEtOf X).IsContinuous (coherentTopology Profinite)
+        (Scheme.ProEt.topology X) := by
+      have := Scheme.ProEt.isContinuous_overPullback (toSpecZ X)
+      unfold profiniteToProEtOf
+      exact Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology specZ) _
+    have : F.IsContinuous (coherentTopology Profinite) Scheme.proetaleTopology :=
+      Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology X) _
+    refine ⟨fun n ↦ ?_⟩
+    have : PreservesColimitsOfShape (Discrete (ULift.{u} (Fin n))) F :=
+      coproducts_of_continuous F Scheme.proetaleTopology _
+    exact preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) F
+  -- Finite-limit preservation sends the singleton to the terminal object over X.
+  have hpoint (X : Scheme.{u}) :
+      IsIso ((profiniteToProEtOf X).obj (Profinite.of PUnit.{u + 1})).hom := by
+    let F := profiniteToProEtOf X ⋙ Scheme.ProEt.forget X
+    have : PreservesFiniteLimits F := by
+      have := (profinite_test_object_functor X).1
+      dsimp [F]
+      infer_instance
+    have hterm : IsTerminal (F.obj (Profinite.of PUnit.{u + 1})) :=
+      Profinite.isTerminalPUnit.isTerminalObj F _
+    have : IsIso (Over.homMk ((profiniteToProEtOf X).obj
+        (Profinite.of PUnit.{u + 1})).hom : F.obj (Profinite.of PUnit.{u + 1}) ⟶
+          Over.mk (𝟙 X)) := isIso_of_isTerminal hterm Over.mkIdTerminal _
+    exact inferInstanceAs (IsIso ((Over.forget X).map
+      (Over.homMk ((profiniteToProEtOf X).obj (Profinite.of PUnit.{u + 1})).hom :
+        F.obj (Profinite.of PUnit.{u + 1}) ⟶ Over.mk (𝟙 X))))
+  let e := (profinite_test_object_functor specZ.{u}).2.2.2.2.2.some
+  refine ⟨fun _ _ f ↦ comp_toSpecZ f, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_,
+    ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro S
+    exact ⟨IsLimit.mapConeEquiv e (hlim specZ S).some⟩
+  · have := hcop specZ.{u}
+    exact ⟨fun n ↦ preservesColimitsOfShape_of_natIso e⟩
+  · have : PreservesFiniteLimits profiniteToScheme.{u} := by
+      have : (Over.forget specZ.{u}).IsEquivalence :=
+        (Over.equivalenceOfIsTerminal specULiftZIsTerminal).isEquivalence_functor
+      change PreservesFiniteLimits
+        (profiniteToProEt ⋙ Scheme.ProEt.forget specZ ⋙ Over.forget specZ)
+      infer_instance
+    exact isIso_of_isTerminal
+      (Profinite.isTerminalPUnit.isTerminalObj profiniteToScheme _)
+      specULiftZIsTerminal _
+  · intro S
+    infer_instance
+  · infer_instance
+  · exact coverPreserving_profiniteToProEt
+  · infer_instance
+  · intro X S
+    rfl
+  · exact hlim
+  · exact hcop
+  · exact hpoint
+  · exact ⟨pointUpperStarLowerStarAdjunction⟩
+  · exact pointUpperStarLowerStarAdjunction.isLeftAdjoint
+  · infer_instance
+  · intro F G
+    infer_instance
+  · exact ⟨inferInstance⟩
+  · intro F G
+    exact Functor.LaxBraided.braided F G
+  · intro X
+    rfl
+  · intro X
+    exact (pointUpperStarLowerStarAdjunction.comp
+      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
+  · intro X
+    exact ⟨inferInstance⟩
+  · intro X F G
+    exact Functor.LaxBraided.braided F G
+  · intro X G S
+    rfl
+  · intro X
+    exact ⟨pointUpperStarLowerStarAdjunction.comp
+      (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))⟩
 
 end AlgebraicGeometry.ProEtale

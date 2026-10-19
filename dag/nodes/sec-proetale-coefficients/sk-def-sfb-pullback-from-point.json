@@ -45,12 +45,14 @@
    }
   },
   {
-   "text": "For $X$, take the composite of $u$ with base change along $\\pi_X$ as in [def-sfb-profinite-test-objects]. Base change is a functor between the stated small pro-étale sites by [def-sfb-finite-lower-star], applied to $g=\\pi_X$ and $\\mathcal A=\\Ab$. The test-object statement supplies both $X[S]=\\Spec LC(S,\\Z)\\times_{\\Spec\\Z}X$ and $X[S]\\cong\\lim_i\\coprod_{S_i}X$. In particular, put $X=\\Spec\\Z$ and use its identity structure map to obtain the inverse-limit formula for $\\Spec LC(S,\\Z)$ in part 1. All displayed equalities with limits mean the canonical isomorphisms of schemes over the base.",
+   "text": "For X take profiniteToProEtOf X, the composite of u with base change along its structure map, as in [def-sfb-profinite-test-objects] and [def-sfb-finite-lower-star]. Apply the cofiltered finite-quotient clause of [lem-weil-pbc-profinite-test-object-functor] to Profinite.asLimitCone S: Profinite.asLimit proves it limiting and each quotient projection is surjective. Forgetting from Over X preserves this connected limit, giving the asserted scheme limit. For finite coproducts, the composite functor to schemes is continuous into the subcanonical pro-etale scheme site, by continuity of u and base change. Restriction of each representable is therefore a sheaf, hence a sheaf for the extensive topology on Profinite. Its finite-product condition and Yoneda give preservation of finite coproducts (the proved coproducts_of_continuous helper of the test-object module). Finite-limit preservation of the relative test functor sends the singleton to the terminal object over X; its structural morphism to X is consequently an isomorphism. At Spec Z the natural comparison in the final clause of [lem-weil-pbc-profinite-test-object-functor] transports the limit and coproduct properties to profiniteToScheme. Its singleton structural map is an isomorphism because profiniteToScheme preserves the terminal object: forget from Over Spec Z is an equivalence since Spec Z is terminal.",
    "uses": [
     "def-sfb-profinite-test-objects",
-    "def-sfb-finite-lower-star"
+    "def-sfb-finite-lower-star",
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-sfb-profinite-to-proetale-continuous"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/sk-def-sfb-pullback-from-point.proof.md",
     "place": "part 2; second paragraph of the blueprint proof, also the inverse-limit formula of part 1"
@@ -133,6 +135,7 @@
   "lem-sfb-profinite-to-proetale-continuous",
   "def-sfb-profinite-test-objects",
   "def-sfb-finite-lower-star",
+  "lem-weil-pbc-profinite-test-object-functor",
   "def-sfb-point-lower-star",
   "lem-sfb-point-lan-exists",
   "def-sfb-point-upper-star",
@@ -149,7 +152,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/sk-def-sfb-pullback-from-point.proof.md",
-  "place": "proof of sk-def-sfb-pullback-from-point"
+  "place": "proof of sk-def-sfb-pullback-from-point; E6 stage-3 proof, 2026-10-18: use the existing profinite_test_object_functor as a geometric tool for the finite-quotient formulas, its proved private coproducts_of_continuous helper for the scheme-valued finite coproducts, terminal-object arguments for singletons, and the canonical monoidal instances and composite adjunction for the sheaf clauses."
  },
  "mathlib_searches": [
   {
@@ -525,5 +528,15 @@
   "existing": false,
   "note": "The canonical point pullback and right adjoint are exposed as aliases of the published profinite-to-pro-etale and finite-coefficient constructions; the specification theorem records every site, test-object, adjunction, monoidal, braided, and evaluation clause of the item.",
   "fixed_by": "NT-stage2-cc-adfa8927f"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261019T002535-L-2150210",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
