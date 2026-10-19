@@ -18,7 +18,9 @@
   "def-weil-flat-morphism",
   "def-weil-geometric-fibre",
   "def-weil-pbc-normal-ring",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-modification",
+  "def-trf-relative-curve"
  ],
  "proof": [
   {
@@ -471,5 +473,29 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-77dc0e9ab (reviewer sub-agent of L); spot-checked: Read the full item, all fourteen steps, cited node statements and sources, chapter/unit route, Temkin passages, and Stacks sources. Hypotheses and edge cases check out; no duplicate, cycle, forbidden route, or repair is needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationNormalizedGraphModel",
+  "declaration": "AlgebraicGeometry.valuation_normalized_graph_model",
+  "declarations": [
+   "AlgebraicGeometry.relativeGraphImageProjection",
+   "AlgebraicGeometry.relativeGraphImageGenericInclusion",
+   "AlgebraicGeometry.valuation_normalized_graph_model"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ValuationNormalizedGraphModel.lean",
+  "statement": "theorem valuation_normalized_graph_model (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {X Y : Scheme.{u}} (p : X ⟶ Spec (.of V)) (f : Y ⟶ X) (hX : RelativeCurve p) (hY : RelativeCurve (f ≫ p)) (hnX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (hnY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (hsX : Smooth (pullback.snd p (Spec.map (CommRingCat.ofHom V.subtype)))) (hsY : Smooth (pullback.snd (f ≫ p) (Spec.map (CommRingCat.ofHom V.subtype)))) (hf : EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) f p) (u : Y ⟶ ℙ(ULift.{u} (Fin 2); Spec (.of V))) (hu : u ≫ (ℙ(ULift.{u} (Fin 2); Spec (.of V)) ↘ Spec (.of V)) = f ≫ p) : IsReduced (ProjectiveSpace.liftBaseChange f u hu.symm).image ∧ RelativeCurve (relativeGraphImageProjection p f u hu ≫ p) ∧ ∃ (_ : QuasiCompact (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu)) (_ : QuasiSeparated (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu)), IsFinite (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ∧ (∀ z : (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization, IsDomain ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization.presheaf.stalk z) ∧ IsIntegrallyClosed ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization.presheaf.stalk z)) ∧ RelativeCurve ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ≫ relativeGraphImageProjection p f u hu ≫ p) ∧ ∃ q : Y ⟶ (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization, q ≫ (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization = (ProjectiveSpace.liftBaseChange f u hu.symm).toImage ∧ (∀ q' : Y ⟶ (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization, q' ≫ (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization = (ProjectiveSpace.liftBaseChange f u hu.symm).toImage → q' = q) ∧ EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) q ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ≫ relativeGraphImageProjection p f u hu ≫ p) ∧ EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ≫ relativeGraphImageProjection p f u hu) p ∧ q ≫ (relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ≫ relativeGraphImageProjection p f u hu = f ∧ (∀ z, GeometricallyConnected (q.fiberToSpecResidueField z)) ∧ (∀ (s : Spec (.of V)) (A : Set ((f ≫ p).fiber s)), A ∈ irreducibleComponents ((f ≫ p).fiber s) → (topologicalKrullDim (q '' ((f ≫ p).fiberι s '' A)) = 0 ↔ topologicalKrullDim (f '' ((f ≫ p).fiberι s '' A)) = 0 ∧ topologicalKrullDim (u '' ((f ≫ p).fiberι s '' A)) = 0)) ∧ (∀ z, (∀ W : ((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).normalization).Opens, z ∈ W → ¬ IsIso (q ∣_ W)) ↔ 0 < topologicalKrullDim (q.fiber z)) ∧ (∀ U : X.Opens, IsIso (f ∣_ U) → IsIso (q ∣_ (((relativeGraphImageGenericInclusion p (Spec.map (CommRingCat.ofHom V.subtype)) f u hu).fromNormalization ≫ relativeGraphImageProjection p f u hu) ⁻¹ᵁ U)))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The graph and its image are canonical Mathlib constructions. Normalization is actual relative integral closure in the smooth generic fibre, as in the landed ValuationNormalizationPreparation interface; this agrees with normalization in the component function fields. The landed def-trf-relative-curve records the existing RelativeCurve structure; its reviewed ownership record is reused unchanged; def-trf-modification owns EtaModification. The horizontal-curve-model theorem remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b61bdf63d",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery of the PASSed head 161df23b87b6. The module is byte-identical (sha256 906b80a6). The item node changes only lean.note; stmt_deps cite NC's landed, reviewed def-trf-relative-curve (existing:true RelativeCurve: flat/LFP/qc/qs/pure dim 1) and def-trf-modification; ND's duplicate node copy is dropped. Compared with live, only the item node differs; no dependency-record change; the item is not live yet. lean.statement matches the file signature verbatim. Clauses re-checked against the node: canonical liftBaseChange graph, kernel image, relative normalization in the smooth generic fibre (equal to normalization in the component function fields), qc/qs binders provable, EtaModification argument order right, contraction criterion via topologicalKrullDim of component images, modification-locus iff, iso over f-iso opens. No extra assumptions; edge cases covered (V a field, empty or disconnected curves, non-Noetherian V, one universe). Helpers are real maps; the proof is only sorry; docstring carries the 14 steps. nt_compile --json clean in 10.6 s, no warnings. Advisory: re-tag the RelativeCurve docstring blueprint to def-trf-relative-curve."
  }
 }

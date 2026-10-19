@@ -202,5 +202,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-d74dd7598 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no fixes. The delivery is one commit with the item and its report, and it adds no new nodes. The statement's hypotheses and conclusion are unchanged from the NQ snapshot that created the node; the delivery only adds a sentence spelling out the valuation, topology and valuation-ring conventions, and stmt_deps are unchanged. The citer lem-per-dense-henselian-field-etale-comparison (Steps 1, 3 and 4) gets exactly the open neighbourhood it uses. Source: ILO XX 4.4, printed p.374 (PDF p.380) only invokes forms of Krasner's lemma and refers to Bourbaki AC VI §8 exercises 12 and 14a, which is not available locally, so proof_origin agent is correct. No SGA is cited. Step 1 uses only the uniqueness clause of lem-per-henselian-finite-extension-topology (same unit, unsplit, no proof_deps, so no cycle). w∘σ is a prolongation, so σ⁻¹(O)=O. Henselianity is needed exactly here: for Q(i) over Q with p≡1 mod 4, σ swaps the two prolongations. Step 2: G is finite by the finite-Galois Mathlib leaf; ratio membership in O preserves weak and strict comparisons, and finite order gives w∘σ=w, with no rank-one assumption. Step 3: with d=α−β, the inequality w(d−σd) ≥ w(α−β) contradicts the hypothesis; the direction is correct and d=0 is covered. Step 4: InfiniteGalois.fixedField_fixingSubgroup (Infinite.lean:85, read) applies to any intermediate field, and the stabilizer of β equals the pointwise stabilizer of F(β). Step 5: a finite maximum r is taken in the value group and the ball around α is a basic open set. If S is empty, IsGalois.mem_range_algebraMap_iff_fixed (Basic.lean:340, read) gives α∈F and U=N. Small cases tested: Q_p(√p) with p odd, a rank-two valued field, and α∈F or β=α. Searches for Krasner and for valuation prolongation with automorphisms or isometries found no duplicate. The off-unit citations are Mathlib leaves only, so no tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.HenselianKrasnerNeighbourhood",
+  "declaration": "FieldTheory.henselianKrasnerNeighbourhood",
+  "file": "lean/Sheaf/FieldTheory/HenselianKrasnerNeighbourhood.lean",
+  "statement": "theorem henselianKrasnerNeighbourhood (F : Type u) (N : Type v) [Field F] [Field N] [Algebra F N] (Γ : Type a) [LinearOrderedCommGroupWithZero Γ] [vF : Valued F Γ] [vN : Valued N Γ] [HenselianLocalRing vF.v.integer] [FiniteDimensional F N] [IsGalois F N] (h_nontrivial : ∃ x : F, x ≠ 0 ∧ vF.v x ≠ 1) (h_prolong : ∀ x : F, vN.v (algebraMap F N x) = vF.v x) : ∀ α : N, (∀ β : N, (∀ σ : N ≃ₐ[F] N, σ α ≠ α → vN.v (α - β) < vN.v (α - σ α)) → α ∈ IntermediateField.adjoin F ({β} : Set N)) ∧ ∃ U : Set N, IsOpen U ∧ α ∈ U ∧ (∀ β : N, β ∈ U → α ∈ IntermediateField.adjoin F ({β} : Set N)) ∧ (α ∈ Set.range (algebraMap F N) → U = Set.univ)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65498dd5a",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. Field, Valued F/N Γ with h_prolong (a common Γ loses no generality), the nontriviality hypothesis (∃ x ≠ 0, v x ≠ 1), HenselianLocalRing on vF.v.integer (same ring as the sibling's valuationSubring), and FiniteDimensional + IsGalois (= Algebra.IsSeparable + Normal) render the hypotheses. The strict inequality is correctly reversed to the multiplicative vN.v(α−β) < vN.v(α−σα). The conclusions are α ∈ IntermediateField.adjoin F {β}, an open U in the valuation topology from Valued, and U = univ when α ∈ range algebraMap; quantifier order matches. Edge cases checked: α ∈ F, α = 0, N = F, β = α, rank-2 Γ, char p. No duplicate (Mathlib IsKrasner is normed). Docstrings carry the source, the blueprint and all 5 proof steps; only sorry; lean.statement is verbatim and only the lean field changed vs live. nt_compile --json clean (4.0 s, exit 0). Advisory: the non-public proof-dependency imports are unused by the statement."
  }
 }

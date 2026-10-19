@@ -249,5 +249,27 @@
   "group": "Q134",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-a26f44575 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unchanged statement, nine proof steps, no new nodes. Delivery shape (A) is clean: one commit with the item and its report; the report has its Review section; proof_deps equals the union of the step citations. All five cited nodes are Mathlib leaves, and I checked each one's statement against the step that uses it. The cited Stacks tags match (015Z is homology.tex line 7270, case (b)⇒(c), with no enough-injectives hypothesis; the other tags exist with the labels the report gives), and there is no SGA citation. Mathematics: Step 1 checks the biproduct map w=Σι_j u_j L(π_j) through both identities. Steps 2-3 build kernels and cokernels componentwise; the cokernel step relies on L(q_a) being a cokernel of L(a), which comes from the colimit-preservation leaf. Step 4 shows a map of triples is mono (or epi) exactly when both components are. Step 5 checks the normal-mono and normal-epi axioms of def-sp-abelian. Step 6 shows short exact sequences are exact componentwise, so e_0, e_1, Δ and Z are exact. Steps 7-8 set up the four adjunctions Δ⊣e_0, Z⊣e_1, e_0⊣r_0 and e_1⊣r_1, the last via the adjoint transpose against the counit ε_J. The cited node lem-sp-right-adjoint-preserves-injectives then gives the injectivity claims without R exact. Step 9 embeds each triple by ((i,(ju)^),j) into r_0(I)⊕r_1(J) and proves that biproduct injective inline. I tested L=id (the arrow category), L=0 (the product category) and a non-exact R; all behave as claimed. The parent lem-per-kummer-relative-cone-functor uses exactly the clauses proved here. No duplicate found in a DAG search for comma/triple/enough-injectives/recollement nodes. No Lean declaration for this item in the project tree. No fixes, no drop_nodes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactCommaInjectives",
+  "declaration": "CategoryTheory.exactComma_injectives",
+  "declarations": [
+   "CategoryTheory.exactCommaGraph",
+   "CategoryTheory.exactComma_injectives"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactCommaInjectives.lean",
+  "statement": "theorem exactComma_injectives [Abelian A] [Abelian B] [EnoughInjectives A] [EnoughInjectives B] (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] (R : B ⥤ A) [R.Additive] (adj : L ⊣ R) : ∃ h : Abelian (Comma L (𝟭 B)), h.toPreadditive = instPreadditiveComma L (𝟭 B) ∧ EnoughInjectives (Comma L (𝟭 B)) ∧ PreservesFiniteLimits (Comma.fst L (𝟭 B)) ∧ PreservesFiniteColimits (Comma.fst L (𝟭 B)) ∧ PreservesFiniteLimits (Comma.snd L (𝟭 B)) ∧ PreservesFiniteColimits (Comma.snd L (𝟭 B)) ∧ (Comma.fst L (𝟭 B)).PreservesInjectiveObjects ∧ (Comma.snd L (𝟭 B)).PreservesInjectiveObjects ∧ (exactCommaGraph L).Additive ∧ PreservesFiniteLimits (exactCommaGraph L) ∧ PreservesFiniteColimits (exactCommaGraph L)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57565b963",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Comma L (𝟭 B) with componentwise addition pinned by h.toPreadditive = instPreadditiveComma (rest of Abelian is Prop-valued); kernels/cokernels/exactness as fst/snd preserving finite limits and colimits (true since L is a left adjoint); EnoughInjectives; PreservesInjectiveObjects for fst/snd; exactCommaGraph is real data (rfl probes on obj hom and map right) and stated additive and exact; R not assumed exact; four independent universes; L = 𝟭 instantiation typechecks. No duplicate in Mathlib or the side/newtargets lean trees; delivered node differs from live only in lean (live has none); statement verbatim; docstrings carry source, blueprint id and the 9 steps; only sorry is the theorem proof. nt_compile --json clean 3.2 s, probe 4.7 s. Advisory: EnoughInjectives belongs to def-sp-enough-injectives, reached only through def-sp-injective-resolutions; plain Adjunction.Limits import is for the later proof."
  }
 }

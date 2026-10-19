@@ -11,7 +11,8 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-finite-type-algebra"
+  "def-weil-pbc-finite-type-algebra",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -242,5 +243,23 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-e89b55324 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, the new node and every cited statement in full against Stacks restricted.tex 0ALS, 0AJU(3)/(6), 0GAW (l.1421-1545), 0AK7/0AK6 with proofs (l.1023-1105), C-prime and equation-NL. Item: the statement is 0ALS via 0AJU(1)<=>(3) with no added hypothesis (E/aE is automatically finite type); it matches the parent's citing steps 3 and 6. Step 2 (alpha, beta=a^c alpha, Delta=a^{2cr}, b Delta=a^d, a^d J in (f)+J^2): re-derived, elementary is fine. Step 3: U cap a^tE=0 proved directly; Delta' = Delta mod a^n because continuous derivatives are A-linear. Step 4: D = Q^/L by completion exactness and the tensor naturality. Step 5: matrix rows/columns checked; det T=Delta'^2; H_0 delta_D = det through the surjective q; z^2 Delta'^2=a^{2d}; h=2d is independent of n. Step 6: psi_n kills every g_j; the new lifting node's hypotheses hold with n>max(2h,h+t), n-h>=1. Step 7: complete-source surjectivity with D precomplete and E Hausdorff. Step 8: the transitivity node allows the zero-variable D-presentation of E (K/K^2 -> 0); exactness at K/K^2 gives a^{h+c}(K/K^2)=0. Step 9: 0ALR node applies exactly. New node lem-per-principal-adic-homomorphism-lift: a valid specialization of 0AK7. A chain nullhomotopy of a^h on the two-term NL^ makes a^h zero in D(R), so a^h kills every Ext^i, which is stronger than the source's Ext^1 hypothesis; the torsion bound, n bound and congruence are literal. Edge cases checked: a invertible, a=0, h=0, q=0. It is statement-only and self-contained, with 5 genuine searches. DAG grep (0AK7/0AK6, a^infty, Elkik, rig-etale, nullhomotopy) and blueprint search found no duplicate; it is not a clause of the item. Tool_uses lem-weil-pbc-adic-completion-noetherian and lem-weil-pbc-complete-source-surjective-mod-ideal are generic commutative algebra and accepted. No SGA, no cycle, proof_deps = union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalJacobianAlgebraization",
+  "declaration": "AlgebraicGeometry.principalJacobianAlgebraization",
+  "file": "lean/Sheaf/RingTheory/PrincipalJacobianAlgebraization.lean",
+  "statement": "theorem principalJacobianAlgebraization {A : Type u} [CommRing A] [IsNoetherianRing A] (a : A) (r : ℕ) (J : Ideal (rigPolynomialCompletion (Ideal.span {a}) r)) [IsAdicComplete (Ideal.span {a}) (rigPolynomialCompletion (Ideal.span {a}) r ⧸ J)] (c : ℕ) (hkernel : (Ideal.span {a}) ^ c • (rigJacobianDifferential r (Ideal.span {a}) J).ker ≤ ⊥) (hcoker : (Ideal.span {a}) ^ c • (⊤ : Submodule A ((Fin r → (rigPolynomialCompletion (Ideal.span {a}) r ⧸ J)) ⧸ (rigJacobianDifferential r (Ideal.span {a}) J).range)) ≤ ⊥) : ∃ (C : Type u) (_ : CommRing C) (_ : Algebra A C), RingHom.FiniteType (algebraMap A C) ∧ Nonempty (AdicCompletion ((Ideal.span {a}).map (algebraMap A C)) C ≃ₐ[A] (rigPolynomialCompletion (Ideal.span {a}) r ⧸ J))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72e848b10",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Item lem-per-principal-jacobian-algebraization: the Lean matches node and Stacks 0ALS/0AJU(3) clause by clause (A Noetherian; P = rigPolynomialCompletion (span{a}) r; E = P⧸J with IsAdicComplete; (span{a})^c kills ker and coker of rigJacobianDifferential, the landed unique-continuous-derivative δ; ∃ C : Type u finite type with Nonempty (Ĉ_(a) ≃ₐ[A] E)). No extra hypotheses, conclusion not stronger, single universe. The added stmt_dep def-per-completed-polynomial-conormal is a landed node, allowed by brief §140. Not a duplicate of rigEtaleJacobianAlgebraization (extra étale clause, cites this item) or exists_finiteType_algebraization_of_conormal_torsion (different hypothesis). Edge cases r=0, c=0, a=0, a unit, J=⊤ covered. Docstrings give source place, blueprint id and the 9 node proof steps; statement field verbatim; sorry only; report sections present. nt_compile --json clean 4.3 s exit 0. Advisory: proof-only imports (H9)."
  }
 }

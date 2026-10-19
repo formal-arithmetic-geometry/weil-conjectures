@@ -201,5 +201,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-cbe12e79e (reviewer sub-agent of L); spot-checked: Read the item, its six steps, the three cited nodes, the Q94 citer, ILO VI 3.7(b) (printed p.75, PDF p.81; motivation only, and proof_origin=agent says so honestly) and Stacks 00FP(2). The statement is true and needs no finite-type base; it is consistent with Nagarajan's wild example, where no trace-one element exists. Small cases tested: F_2xF_2 with the swap and a=(1,0) (|G|=0 but trace 1; R free of rank 2 over A); trivial Z/2 on Z[1/2]; R=0; nonfaithful actions. Step checks: skew-group associativity uses (gh)(u)=g(h(u)), and S is right-free on the [g]. [h]e=e, e^2=e and pi(re)=r give injectivity and Se=Re. eSe=Ae because [h]re=h(r)e, and A commutes with each [g]. Step 4 applies the leaf lem-trf-noetherian-submodule-finitely-presented to the right R-submodule SeS of the finite module S; these are exactly its hypotheses, and the n_i extraction is correct. Step 5 uses Se=Ie, n_i s e=r_i b_i e and injectivity, so the r_i generate R over A. Step 6 uses the A-linear retraction rho(r)=sum g(ar) on generators of JR re-chosen in J. No duplicate: the tame-inertia trace node supplies the hypothesis, groupoid-integral-invariants gives only integrality, and Eakin-Nagata finite-quotient-noetherian-descent is a different statement and is not used. No new nodes; the unit route is unaffected. Batch-5 flag on lem-trf-noetherian-submodule-finitely-presented: a sec-trace-formula Mathlib leaf (Stacks 00FP, Module.IsNoetherian.finite) with empty proof_deps and generic definition stmt_deps. It is pure commutative algebra, neither an assumed statement nor a step of the trace-formula or Poincare-duality proofs, so the flag is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TraceOneInvariantFiniteness",
+  "declaration": "FixedPoints.isNoetherianRing_and_finite_of_trace_one",
+  "file": "lean/Sheaf/RingTheory/TraceOneInvariantFiniteness.lean",
+  "statement": "theorem isNoetherianRing_and_finite_of_trace_one (R : Type u) [CommRing R] [IsNoetherianRing R] (G : Type v) [Group G] [Fintype G] [MulSemiringAction G R] (htrace : ∃ a : R, ∑ g : G, g • a = 1) : IsNoetherianRing (FixedPoints.subring R G) ∧ Module.Finite (FixedPoints.subring R G) R",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f714d7b04",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Item lean record + new module only; dep records identical to side. Every clause matches the node: CommRing+IsNoetherianRing R; Group+Fintype G (needed for the sum, not stronger than the citer's Finite); MulSemiringAction G R (ring automorphisms, no faithfulness); A = Mathlib FixedPoints.subring R G; trace-one hypothesis as a sum over all of G; conclusion IsNoetherianRing A ∧ Module.Finite A R. No |G| invertibility or finite-type assumption. Edge cases R=0, trivial G, non-faithful actions, |G|=0 (F2xF2 swap) and independent universes u v all covered. No duplicate in Mathlib or the project; no definitions; proof is sorry only; docstrings give source place, blueprint tag and all six steps; lean.statement matches the file verbatim. nt_compile --json clean in 4.5 s. Advisory only: two plain imports unused until the stage-3 proof."
  }
 }

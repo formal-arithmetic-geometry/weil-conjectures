@@ -215,5 +215,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-7b4ed409a (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults, so no fixes were made; full review in review.md. Item statement: it matches Stacks 036N exactly as defined in 036H, i.e. an arbitrary jointly surjective flat locally-finitely-presented family with no added quasi-compactness, separatedness or Noetherian hypothesis, and empty cases allowed; it is unchanged from the base. Steps: I checked all eight against the cited statements. Step 1 is the composition leaf. Steps 2-4 choose affine opens V and W and refine over W using openness of flat lfp maps and quasi-compactness of W, which is the selection in the proof of 02KL. Step 5 builds the finite affine coproduct Z = Spec of the product of the B_j, with p equal to f restricted to W composed with q, by uniqueness. Step 6 is correctly marked elementary: it uses only the definitions, through stalks and the witness pairs from step 3. Step 7 gets A->B flat and finitely presented, R->B finitely presented, and A->B faithfully flat from the affine criteria and Module.FaithfullyFlat.of_comap_surjective. Step 8 applies the new node. proof_deps equals the union of the uses and there is no cycle. New node lem-trf-finite-presentation-fppf-source-algebra: it is exactly Stacks 02KK (descent.tex line 4261, proof read). I tested A=B, B=0 (forcing A=0, and R->0 is finitely presented) and R=A. It carries a statement only, and its definition citations are correct. It is not in Mathlib: grep finds only the tensor-product (base-change) descent. The 02KK declaration is project code at WeilConjectures/Mathlib/RingTheory/Finiteness/Descent.lean:231-265; that file contains no sorry, and attaching the declaration is left to the maintainer. It is not a duplicate: lem-a1-finite-type-fppf-source-algebra is the finite-type statement of Tag 0367, lem-weil-pbc-finite-presentation-descends-faithfully-flat is base-change descent, and lem-a1-lft-flat-lfp-source-descent is a scheme-level finite-type statement. It is strictly smaller than the item (no D1 fault), and its blueprint ancestor and via are correct. Route: every cited lemma from another unit is a Mathlib leaf, so tool_uses [] is right and nothing needs accepting. The parent lem-trf-nodal-family-etale-source-locality step 2 uses the item exactly as stated. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFinitePresentationFppfSource",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_iff_of_fppf_source_family",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/LocallyOfFinitePresentationFppfSource.lean",
+  "statement": "theorem locallyOfFinitePresentation_iff_of_fppf_source_family {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (U : I → Scheme.{u}) (h : ∀ i : I, U i ⟶ X) [∀ i : I, Flat (h i)] [∀ i : I, LocallyOfFinitePresentation (h i)] (hjoint : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) : LocallyOfFinitePresentation f ↔ ∀ i : I, LocallyOfFinitePresentation (h i ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-869bc7a3e",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 036N/descent definition-property-morphisms-local-source clause by clause: Scheme.{u} morphism f, arbitrary I : Type v, U : I → Scheme.{u}, [Flat (h i)], [LocallyOfFinitePresentation (h i)], joint surjectivity ∀ x, ∃ i y, h i y = x, conclusion LocallyOfFinitePresentation f ↔ ∀ i, LocallyOfFinitePresentation (h i ≫ f). No qc/separated/Noetherian hypotheses, no unbound universes; empty I forces empty X and is covered. Only node change is a complete lean record whose statement is verbatim in the file. Dependency records are exact Mathlib classes. No existing family theorem in Mathlib, side or upstream: upstream LocallyOfFinitePresentation.of_comp_of_flat_of_surjective is the single-map one-way 02KL statement, and Mathlib DescendsAlong is target-side. Proof is sorry-only; docstrings carry the source places, blueprint id and all 8 steps; lines ≤100; plain imports are the proof_deps' Mathlib homes. Report has Worker report and the standard Second reading notice. nt_compile --json rc 0, 4.3 s, clean. No findings."
  }
 }

@@ -398,5 +398,23 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-47a2e87c2 (reviewer sub-agent of L); spot-checked: Read the item in full: all 11 steps, the new node and every cited statement. The mathematics is correct and the only repair is cosmetic. I checked the item against ILO IX Prop 2.1 on printed pp.133-134. It replaces the SGA1 XIII 5.3 that ILO cites with Stacks 0BRM/0BMB, so the route lock holds and there is no SGA citation in the item or the new node. All Stacks tags match their labels. The statement is true: torsor degree dividing n gives e,f|n, so the cover is tame; adjoining the n-th roots kills ramification; purity applies on the regular B; strict henselianity gives the section. I checked r=0, n=1 and disconnected P, and the statement fits how the parent's Step 4 uses it. Steps 1-11 match the statements they cite hypothesis by hypothesis. Step 4: the idempotent argument identifies D with Q(T), so C[1/f]=T canonically. Step 6: B tensor V_i is local and equals A_i, with m_V A_i = m_A^n. Step 8: the tame tensor-factor lemma applies with L_j tensor_{V_i} A_i = L_j tensor_K E, and 0307 transfers its conclusion to C_a. Step 9: the height-one primes are exhausted. Step 10: the image is closed and contains the generic point, so the cover is surjective, and the section is taken with H=A=B. Step 11: pullback of the torsor isomorphism. The new node lem-per-finite-normalization-codimension-one-purity is true: going-down gives equal heights, so Stacks 0BMB applies at every nonzero prime, and the zero prime is a separable field extension. It is not a duplicate of lem-sbc-regular-local-punctured-etale-purity, lem-sbc-regular-codimension-two-etale-extension, lem-sbc-regular-codimension-two-finite-etale-model or lem-sbc-stalk-normalization-fibre-purity, since none of them concludes that a given normalization is etale from codimension-one unramifiedness. Its fields satisfy B1-B9. For the item, lem-sbc-regular-divisor-galois-root-splitting is only an etale-local single-divisor statement, so it is not a duplicate. There is no cycle, and I accept the 17 tool_uses as generic black-box algebra tools. FIX (B4): the Step 6 display had a stray comma, m_{A_i}^{,n}; it is corrected to m_{A_i}^{n} in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-snc-root-punctured-torsor-splitting.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SncRootPuncturedTorsorSplitting",
+  "declaration": "AlgebraicGeometry.snc_root_punctured_torsor_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SncRootPuncturedTorsorSplitting.lean",
+  "statement": "theorem snc_root_punctured_torsor_splitting (R : Type u) [CommRing R] [IsRegularLocalRing R] [IsStrictlyHenselianLocalRing R] (r : ℕ) (t : Fin r → R) (_ht : ∀ i, t i ∈ IsLocalRing.maximalIdeal R) (_hparameters : ∃ s : List R, IsLocalRing.IsRegularSystemOfParameters (List.ofFn t ++ s)) (G : Type v) [Group G] [Finite G] (_hn : IsUnit (Nat.card G : R)) (cover : Scheme.GaloisCoverAction G (Spec (.of (Localization.Away (∏ i, t i))))) : ∃ e : pullback cover.π (Spec.map (CommRingCat.ofHom (Localization.awayMap (algebraMap R (MvPolynomial (Fin r) R ⧸ Ideal.span (Set.range (fun i ↦ MvPolynomial.X i ^ Nat.card G - MvPolynomial.C (t i))))) (∏ i, t i)))) ≅ ∐ fun _ : G ↦ Spec (.of (Localization.Away (algebraMap R (MvPolynomial (Fin r) R ⧸ Ideal.span (Set.range (fun i ↦ MvPolynomial.X i ^ Nat.card G - MvPolynomial.C (t i)))) (∏ i, t i)))), e.hom ≫ Sigma.desc (fun _ ↦ 𝟙 _) = pullback.snd _ _",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76c9fc434",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Every clause matches the node: strictly henselian regular local R via IsRegularLocalRing (includes local and Noetherian) and IsStrictlyHenselianLocalRing; t in m extending to a regular system of parameters (recorded def); U = Spec R[1/∏t]; finite G : Type v with IsUnit |G|; the recorded Scheme.GaloisCoverAction, no connectedness; B written inline as the same expansion as sncParameterRootRing, avoiding an import cycle with the downstream parent; canonical awayMap base change; ∐_G U_B isomorphism over U_B, no equivariance. _ht follows from the parameter hypothesis, so it is not stronger. r=0, n=1, disconnected P, nonempty U and independent universes checked. lean.statement is verbatim; the node differs from live only in lean; docstrings carry the source place, blueprint tag and 11 proof steps; no definitions; sorry only. nt_compile --json on the snapshot module: 9.4 s, exit 0, clean. No findings."
  }
 }
