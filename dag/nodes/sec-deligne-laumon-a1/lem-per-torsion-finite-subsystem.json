@@ -19,9 +19,65 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The set-local-system calculus writes the underlying set sheaf of $G$ as a filtered union of finite local-system subsheaves $E$, where finite local system means represented by a finite etale $X$-scheme. By the finite-etale representability theorem, every such $E$ is a finite locally constant set sheaf. Thus a section of $G$ is etale locally in one such $E$; no global factorization of an arbitrary section is asserted.",
+   "uses": [
+    "lem-per-set-local-system-calculus",
+    "lem-galois-flc-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Definition 7.2.1 and Proposition 7.2.3, p. 301; finite-subsystem reduction in Lemma 7.2.6, p. 302. Finite-etale representability is the cited theorem."
+   }
+  },
+  {
+   "text": "Apply the finite torsion generated-subgroup lemma to each inclusion $E\\hookrightarrow G$ from Step 1. Its hypotheses are precisely that $X$ is Noetherian, $G$ is an ind-finite etale set local system with torsion geometric stalks, and $E$ is finite locally constant. It supplies a finite locally constant abelian subgroup $H\\hookrightarrow G$ containing $E$. Consequently the finite subgroup sheaves cover $G$ locally on sections.",
+   "uses": [
+    "lem-per-finite-torsion-generated-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.2.6, p. 303, finite local subgroup systems in the torsion case."
+   }
+  },
+  {
+   "text": "The zero subgroup is finite locally constant, so the poset is nonempty. Given finite locally constant abelian subgroup sheaves $H_1,H_2$, the finite-local-abelian comparison makes their underlying set sheaves finite locally constant. By finite-etale representability they are finite local-system subsheaves of $|G|$. The filtered finite-subobject assertion of the set-local-system calculus gives a finite local-system subsheaf $E$ containing both. Representability makes $E$ finite locally constant, and the generated-subgroup lemma gives a finite locally constant abelian subgroup $H$ containing $E$, hence containing $H_1$ and $H_2$. This proves directedness without asserting that finite stalks alone imply local constancy. Smallness follows by choosing a small skeleton of the etale site in the fixed universe: a subgroup subsheaf is determined by a subset of $G(U)$ for each object $U$, and these choices form a set. Replacing the site by that skeleton does not change its sheaves or inclusions.",
+   "uses": [
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lem-galois-flc-representable",
+    "lem-per-set-local-system-calculus",
+    "lem-per-finite-torsion-generated-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.2.6, p. 303, ordered family of finite local subgroup systems."
+   }
+  },
+  {
+   "text": "Steps 1 and 2 say that the sheaf union is $G$: any section $s$ on $U$ has an etale cover on each member of which $s$ lies in a finite subgroup sheaf. For a compatible family of maps from these subgroup sheaves to a set sheaf $F$, define the image of $s$ locally using these maps. On overlaps, directedness puts any two chosen subgroups in one subgroup, so compatibility makes the local images equal. The sheaf axiom glues them uniquely, independently of all choices, and this construction commutes with restrictions. This is exactly the set-sheaf colimit universal property. For abelian $F$ and homomorphisms in the family, refine a cover to represent two sections and put their subgroup sheaves in a common upper bound; the local image of their sum is the sum of the local images. The glued map is therefore additive, and the same uniqueness proves the abelian-sheaf colimit assertion. The empty scheme and the zero sheaf are covered by the zero subgroup case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.2.6, p. 303, final filtered-union assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-flc-representable",
+  "lem-per-finite-torsion-generated-subgroup",
+  "lem-per-set-local-system-calculus",
+  "lem-weil-pbc-finite-local-abelian-forget"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Propositions 7.2.2-7.2.4, pp. 301-302, and the implicit finite-subgroup exhaustion in Lemma 7.2.6, p. 303; explicit directedness, smallness and colimit gluing supplied by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-torsion-torsor-descent",
@@ -72,7 +128,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof of lem-per-artin-gabber-affine-curve, Verdier-duality reduction; inherited coefficient-duality branch through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison, lem-per-ctf-hom-condition-b, lem-per-galois-partition-exact-refinement and lem-per-torsion-local-system-monodromy. The extension step is ILO XVII Proposition 7.2.5, whose proof uses Lemma 7.2.6. Lemma 7.2.6, p. 303, exhaustion of G by finite local subsystems before descending its H^1 class.",
+   "place": "Proof of lem-per-artin-gabber-affine-curve: the ILO XVII Lemma 7.2.6 exhaustion of a torsion local system by finite local subgroup systems, used before the H^1 descent.",
    "via": [
     "lem-per-torsion-torsor-descent",
     "lem-per-torsion-local-system-monodromy",
@@ -87,5 +143,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-torsion-finite-subsystem",
+  "worker": "stage1",
+  "summary": "Retained the earlier split and its one auxiliary node; repaired invalid JSON, supplied verifiable searches, corrected ancestry and exact citation quotes, and replaced the unsupported finite-stalk image argument by filtered finite-set containment. Wrote the sheaf-local colimit argument explicitly. No statement or hypothesis changed.",
+  "blueprint": "The steps realize the Lemma 7.2.6 finite-subsystem paragraph and its final assertion that the ordered finite subgroup systems have union G and give the filtered colimits.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-flc-representable",
+    "why": "Generic equivalence between finite etale representables and finite locally constant set sheaves, needed to pass between the calculus and the finite subgroup lemma; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-abelian-forget",
+    "why": "Generic finite set/abelian local-constancy comparison used only to regard finite subgroup sheaves as finite set local systems; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-flc-representable",
+  "lem-weil-pbc-finite-local-abelian-forget"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-153b3cecc",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-153b3cecc (reviewer sub-agent of L); spot-checked: I read ILO XVII Def 7.2.1 and Props 7.2.2-7.2.5 (pp. 301-302) and Lemma 7.2.6 (pp. 302-303; it uses the ordered set of finite abelian sub-local-systems of a torsion G and a union of finite sub-local-systems). The item's statement and stmt_deps are unchanged from base and match that lemma: Noetherian base, torsion germs, no exponent bound. The parent lem-per-torsion-torsor-descent gets the union, filteredness and colimit it uses. Step 1: calculus clause (1) gives the filtered union of finite-étale-represented subsheaves, and flc-representable (1) makes them finite locally constant; the step claims only local containment. Step 2: every hypothesis of the new node is in force. Step 3: the zero subgroup gives nonemptiness. For directedness, the forget lemma (⇐) and representability (2) turn H1 and H2 into finite local-system subsheaves; the calculus filtered clause gives a finite E containing both, and the new node gives H containing E. Smallness via a small skeleton is correct. Step 4 is an acceptable elementary gluing argument for both the set and abelian colimits. New node lem-per-finite-torsion-generated-subgroup is true: on each component a finite π1-stable set generates a finite π1-stable torsion subgroup, or alternatively E lies in G[n], which is a local system as an equalizer, and the Z/n monodromy node applies. Small cases tested: empty X, constant Q/Z, μ5 inside μ∞ over Q, ⊕Z/p; constant Z shows torsion is needed. The node is strictly smaller than the item and not a restated clause. rg over the DAG found no duplicate (closest: torsion-local-system-monodromy with fixed n, the field-base finite-stalk subobjects node, and the constructible-subsheaf lemmas 03SA/u2). Both files are free of SGA. B1-B9 hold. I accept the two declared tool_uses, lem-galois-flc-representable and lem-weil-pbc-finite-local-abelian-forget, as generic black boxes. No changes made."
  }
 }
