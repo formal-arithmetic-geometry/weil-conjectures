@@ -27,73 +27,76 @@
  ],
  "proof": [
   {
-   "text": "Apply the localized cotangent criterion [lem-sc-etale-at-prime-formally-etale-cotangent-criterion] to Algebra.IsEtaleAt R q: it gives H_1(L_{S/R})_q=0 and (Omega_{S/R})_q=0. Since S is a finitely presented R-algebra, the etale-near-prime lemma [lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing] (with A=R, C=S) then gives g in S\\q such that the affine scheme map Spec(S_g) \\to Spec(R) is etale, proving (1) implies (2).",
-   "uses": [
-    "lem-sc-etale-at-prime-formally-etale-cotangent-criterion",
-    "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing"
-   ],
-   "elementary": false,
+   "text": "For (1) iff (2), apply Mathlib Algebra.exists_etale_of_isEtaleAt in the forward direction. In the reverse direction, Algebra.basicOpen_subset_etaleLocus_iff_etale identifies etaleness of S_g with containment of D(g) in the etale locus; q belongs to D(g) since g is outside q. These are direct Mathlib statements, so no passage through naive cotangent vanishing or affine scheme morphisms is needed.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00U6 and 08WD, localized at q"
+    "place": "Tags 00U6 and 08WD; localization of differentials and flatness"
    }
   },
   {
-   "text": "Assume (2). The affine etale ring-map criterion [lem-weil-pbc-etale-ring-map-iff-etale-affine] gives H_1(L_{S_g/R})=0 and Omega_{S_g/R}=0. Localizing these zero modules at the prime induced by q gives the two vanishings required by [lem-sc-etale-at-prime-formally-etale-cotangent-criterion]; the identity (S_g)_{qS_g}=S_q is the defining localization identity. Hence S_q is formally etale over R, so (1) holds.",
+   "text": "For (1) implies (3), choose an etale basic neighbourhood S_g by the first step. By [lem-weil-pbc-etale-algebra-flat], S_g is flat over R. Give S_q its canonical S_g-algebra structure using powers(g) <= q.primeCompl. The localization-of-localization theorem identifies S_q as a localization of S_g, so it is flat over S_g and hence over R. Apply [lem-weil-pbc-flat-over-localization] to R -> R_p to obtain flatness over R_p, with the algebra structure defined by Localization.localRingHom. For differential vanishing, specialize Algebra.etaleLocus_eq_compl_support, the realization of [lem-sc-etale-at-prime-formally-etale-cotangent-criterion], at q and take its differential-support component.",
    "uses": [
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-over-localization",
     "lem-sc-etale-at-prime-formally-etale-cotangent-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition 00U1 and Lemmas 00U6, 08WD"
+    "place": "Tags 00U6 and 08WD; localization of differentials and flatness"
    }
   },
   {
-   "text": "Assume (2). By [lem-weil-pbc-etale-algebra-flat], S_g is flat over R. Apply [lem-weil-pbc-flat-over-localization] with A=S_g, W the complement of qS_g, A'=(S_g)_{qS_g}=S_q and M=S_q: M is free, hence flat, over A', so S_q is flat over S_g. A flat module over a flat algebra is flat over the base (tensor associativity, Stacks Tag 00HC), so S_q is flat over R. Elements of R\\setminus p map to units of S_q, so S_q is an R_p-module; applying [lem-weil-pbc-flat-over-localization] to R\\to R_p with M=S_q gives that S_q is flat over R_p. The vanishing Omega_{S_g/R}=0 from [lem-weil-pbc-etale-ring-map-iff-etale-affine] localizes to (Omega_{S/R})_q=0, since (Omega_{S/R})_g=Omega_{S_g/R} (Stacks Tag 00RT) and S_q is a localization of S_g. Thus (3) holds.",
+   "text": "For (3) implies (2), first use [lem-weil-pbc-flat-over-localization] to turn flatness of S_q over R_p into flatness over R. The canonical IsLocalizedModule.iso identifies S_q with LocalizedModule q.primeCompl S. Apply [lem-weil-pbc-openness-of-flatness] to M=S. Vanishing of localized differentials puts q in the unramified locus by Mathlib Algebra.unramifiedLocus_eq_compl_support. This locus is open because S is of finite presentation, hence essentially of finite type. Choose D(g) containing q inside the intersection of these two open loci.",
    "uses": [
-    "lem-weil-pbc-etale-algebra-flat",
     "lem-weil-pbc-flat-over-localization",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+    "lem-weil-pbc-openness-of-flatness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 08WD and the localization clause for differentials"
+    "place": "Tags 00U6 and 08WD; localization of differentials and flatness"
    }
   },
   {
-   "text": "Assume (3). Apply [lem-weil-pbc-openness-of-flatness] to M=S. Its flat locus contains q, so choose g1 not in q such that every localization S_{q'} for q' in Spec(S_{g1}) is flat over R. After localizing the base, [lem-weil-pbc-flat-over-localization] gives flatness over each corresponding R_{q' cap R}; then [lem-pc-affine-sections-flat-over-base] gives S_{g1} flat over R. Since S is finitely presented, Omega_{S/R} is finitely generated; the vanishing at q in (3) therefore gives g2 not in q with (Omega_{S/R})_{g2}=0. Put g=g1g2. Then Spec(S_g)\\to Spec(R) is flat, and [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] identifies the vanishing of Omega_{S_g/R} with unramifiedness. It is locally of finite presentation because S is finitely presented, so [def-weil-etale-morphism] makes Spec(S_g)\\to Spec(R) etale. This proves (2).",
+   "text": "For every maximal ideal P of S_g, let p be its contraction to S. The element g is outside p since its image in S_g is a unit. The flat-locus inclusion from the preceding step gives R-flatness of S_p. Mathlib IsLocalization.localizationLocalizationAtPrimeIsoLocalization identifies S_p with (S_g)_P; restrict scalars on this equivalence to R. The local flatness criterion [lem-pc-affine-sections-flat-over-base], realized by Module.flat_of_isLocalized_maximal, now gives flatness of S_g over R.",
    "uses": [
-    "lem-weil-pbc-openness-of-flatness",
-    "lem-weil-pbc-flat-over-localization",
-    "lem-pc-affine-sections-flat-over-base",
-    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U6 and 08WD; localization of differentials and flatness"
+   }
+  },
+  {
+   "text": "The same basic-open inclusion gives FormallyUnramified R S_g directly by Mathlib Algebra.basicOpen_subset_unramifiedLocus_iff. Principal localization preserves finite presentation. Mathlib Algebra.Etale.of_formallyUnramified_of_flat (Tag 08WD) combines these two instances and flatness from the preceding step to give Algebra.Etale R S_g. This is the ring form of the flat, unramified, finitely presented criterion in [def-weil-etale-morphism]. Apply the reverse direction of the first step.",
+   "uses": [
     "def-weil-etale-morphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemmas 00U6, 00UW, 08WD and Definition 02GI"
+    "place": "Tags 00U6 and 08WD; localization of differentials and flatness"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-at-prime-formally-etale-cotangent-criterion",
-  "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-flat-over-localization",
+  "lem-sc-etale-at-prime-formally-etale-cotangent-criterion",
   "lem-weil-pbc-openness-of-flatness",
   "lem-pc-affine-sections-flat-over-base",
-  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
   "def-weil-etale-morphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 00U6 with Tag 08WD"
+  "place": "Tags 00U6 and 08WD, implemented with Mathlib etale/unramified loci, localization flatness, and the existing open-flat-locus theorem"
  },
  "mathlib_searches": [
   {
@@ -181,21 +184,15 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-flat-over-localization",
   "lem-weil-pbc-openness-of-flatness",
   "lem-pc-affine-sections-flat-over-base",
-  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
   "def-weil-etale-morphism",
-  "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-flat-over-localization",
   "lem-weil-pbc-openness-of-flatness",
   "lem-pc-affine-sections-flat-over-base",
-  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
   "def-weil-etale-morphism"
  ],
  "reviewed": {
@@ -236,5 +233,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T231059-L-546216",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
