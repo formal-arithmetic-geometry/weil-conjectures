@@ -41,11 +41,11 @@
    }
   },
   {
-   "text": "Fix $q\\in\\mathbf Z$ and put $r=q-2d-1$, $A_\\alpha=\\tau_{\\leq q}K_\\alpha$, and $W_\\alpha=\\tau_{\\geq r}A_\\alpha$, with the canonical truncation functors of [def-kun-truncations]. These objects lie in $\\Dic(X,\\Lambda)$ by [det-ambient-ind-derived-sums](2). Write $A_S=\\tau_{\\leq q}S$ and $W_S=\\tau_{\\geq r}A_S$. Let $a:\\bigoplus_\\alpha A_\\alpha\\to A_S$ and $w:\\bigoplus_\\alpha W_\\alpha\\to W_S$ be the maps whose $\\alpha$th components are $\\tau_{\\leq q}(\\iota_\\alpha)$ and $\\tau_{\\geq r}\\tau_{\\leq q}(\\iota_\\alpha)$. By [def-kun-truncations], $A_T$ retains $H^n(T)$ for $n\\leq q$ and $W_T$ retains it for $r\\leq n\\leq q$, with zero cohomology elsewhere, naturally in $T$. Hence, by the cohomology-of-sums formula [det-ambient-ind-derived-sums](1), $H^n(a)$ is the canonical isomorphism $\\bigoplus_\\alpha H^n(K_\\alpha)\\to H^n(S)$ for $n\\leq q$ and $0\\to0$ for $n>q$, and likewise $H^n(w)$ for $r\\leq n\\leq q$ and $0\\to0$ otherwise. So $a$ and $w$ are isomorphisms by [lem-weil-pbc-unbounded-derived-iso-cohomology]. They are compatible with the arrows $K_\\alpha\\leftarrow A_\\alpha\\to W_\\alpha$ and $S\\leftarrow A_S\\to W_S$: on the $\\alpha$th coprojection this is naturality of the truncation maps $\\tau_{\\leq q}T\\to T$ and $\\tau_{\\leq q}T\\to\\tau_{\\geq r}\\tau_{\\leq q}T$ with respect to $\\iota_\\alpha$.",
+   "text": "Fix $q\\in\\mathbf Z$ and put $r=q-2d-1$, $A_\\alpha=\\tau_{\\leq q}K_\\alpha$, and $W_\\alpha=\\tau_{\\geq r}A_\\alpha$, with the canonical truncation functors of [def-kun-truncations]. These objects lie in $\\Dic(X,\\Lambda)$ by [det-ambient-ind-derived-sums](2). Write $A_S=\\tau_{\\leq q}S$ and $W_S=\\tau_{\\geq r}A_S$. Let $a:\\bigoplus_\\alpha A_\\alpha\\to A_S$ and $w:\\bigoplus_\\alpha W_\\alpha\\to W_S$ be the maps whose $\\alpha$th components are $\\tau_{\\leq q}(\\iota_\\alpha)$ and $\\tau_{\\geq r}\\tau_{\\leq q}(\\iota_\\alpha)$. By [def-kun-truncations], $A_T$ retains $H^n(T)$ for $n\\leq q$ and $W_T$ retains it for $r\\leq n\\leq q$, with zero cohomology elsewhere, naturally in $T$. Hence, by the cohomology-of-sums formula [det-ambient-ind-derived-sums](1), $H^n(a)$ is the canonical isomorphism $\\bigoplus_\\alpha H^n(K_\\alpha)\\to H^n(S)$ for $n\\leq q$ and $0\\to0$ for $n>q$, and likewise $H^n(w)$ for $r\\leq n\\leq q$ and $0\\to0$ otherwise. So $a$ and $w$ are isomorphisms by [lem-weil-pbc-unbounded-derived-iso-cohomology]. They are compatible with the arrows $K_\\alpha\\leftarrow A_\\alpha\\to W_\\alpha$ and $S\\leftarrow A_S\\to W_S$: on the $\\alpha$th coprojection this is naturality of the truncation maps $\\tau_{\\leq q}T\\to T$ and $\\tau_{\\leq q}T\\to\\tau_{\\geq r}\\tau_{\\leq q}T$ with respect to $\\iota_\\alpha$. In Lean, the preservation of the double-truncated cofan is supplied by [lem-sfb-derived-truncation-coproducts].",
    "uses": [
     "def-kun-truncations",
     "det-ambient-ind-derived-sums",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-sfb-derived-truncation-coproducts"
    ],
    "elementary": false,
    "source": {
@@ -76,10 +76,11 @@
    }
   },
   {
-   "text": "The $W$ row is an isomorphism by step 3. In each square of step 4 the vertical maps are invertible, so conjugating first along $A\\to W$ and then along $A\\to K$ shows that the $K$ row is an isomorphism. By [det-ambient-ind-derived-sums], $\\bigoplus_\\alpha H^q(FK_\\alpha)\\cong H^q(\\bigoplus_\\alpha FK_\\alpha)$ with the same coprojections, so the $K$ row is $H^q(c_K)$. Since this holds for every $q$, [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $c_K$ is an isomorphism in the ambient unbounded derived category.",
+   "text": "The $W$ row is an isomorphism by step 3. In each square of step 4 the vertical maps are invertible, so conjugating first along $A\\to W$ and then along $A\\to K$ shows that the $K$ row is an isomorphism. By [det-ambient-ind-derived-sums], $\\bigoplus_\\alpha H^q(FK_\\alpha)\\cong H^q(\\bigoplus_\\alpha FK_\\alpha)$ with the same coprojections, so the $K$ row is $H^q(c_K)$. Since this holds for every $q$, [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $c_K$ is an isomorphism in the ambient unbounded derived category. The categorical transport and comparison identification are packaged in the proved [lem-sfb-proper-coproduct-window-transport], supplied here with the window, sum-closure, homology, truncation and bounded-family hypotheses.",
    "uses": [
     "det-ambient-ind-derived-sums",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-sfb-proper-coproduct-window-transport"
    ],
    "elementary": false,
    "source": {
@@ -103,13 +104,15 @@
   "det-ambient-ind-derived-sums",
   "sk-lem-proper-unbounded-window",
   "def-kun-truncations",
+  "lem-sfb-derived-truncation-coproducts",
+  "det-proper-unbounded-window-ii-bounded",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "det-proper-unbounded-window-ii-bounded"
+  "lem-sfb-proper-coproduct-window-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-general.proof.md",
-  "place": "Source finite-window argument, with the missing global fibre bound made explicit and the two canonical truncation squares and full-subcategory conclusion written out."
+  "place": "The same six-step finite-window route. Two proved generic helpers make explicit double-truncation coproduct preservation and transport of colimit cofans along the canonical cohomology window zigzag."
  },
  "mathlib_searches": [
   {
@@ -440,5 +443,15 @@
    "def-weil-size-convention",
    "sk-def-sfb-module-derived-pushpull"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261019T034307-L-418429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

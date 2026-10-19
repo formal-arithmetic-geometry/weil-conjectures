@@ -8,10 +8,11 @@ module
 public import Sheaf.Paper.ProperUnboundedWindow
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Paper.ProperUnboundedCoproductComparison
+import Sheaf.Paper.DerivedTruncationCoproducts
 import Sheaf.Paper.AmbientIndDerivedSums
 import Sheaf.Paper.ProperUnboundedWindowBounded
+import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 
 /-!
 # Proper direct image preserves arbitrary small direct sums
@@ -33,6 +34,9 @@ ambient coproduct or additional coproduct-existence hypothesis is imposed on cal
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
@@ -115,7 +119,35 @@ theorem properUnbounded_preservesCoproducts
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d : WithBot ℕ∞)) :
     ProperUnboundedCoproductAssertions (Profinite.continuousMapRingObj.{u} E) p := by
-  sorry
+  have hdim : ∀ (y : Y) (n : ℕ),
+      (n : WithBot ℕ∞) ≤ topologicalKrullDim
+        (pullback p (Spec.map (CommRingCat.ofHom
+          (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+            Y.fromSpecResidueField y) : Scheme.{u}) → (n : ℤ) ≤ (d : ℤ) := by
+    intro y n hn
+    have hnd : (n : WithBot ℕ∞) ≤ (d : WithBot ℕ∞) := hn.trans (hd y)
+    exact_mod_cast hnd
+  have hw := properUnboundedWindow ℓ E k p₀ hp₀ hpℓ X Y p d hdim
+  refine ⟨?_, ?_⟩
+  · intro K hK n
+    exact (hw K hK).1 n
+  · have sx := indConstructibleDerived_sums_and_truncations ℓ E k p₀ hp₀ hpℓ X
+    have sy := indConstructibleDerived_sums_and_truncations ℓ E k p₀ hp₀ hpℓ Y
+    apply properUnbounded_coproductComparison (Profinite.continuousMapRingObj E) p d hw
+      sx.2.1 sy.2.1 sx.2.2.1
+    · intro I D c hc q
+      let B := pulledBackModuleObjects (Profinite.continuousMapRingObj E) Y
+      let : HasColimitsOfShape (Discrete I) B :=
+        IsGrothendieckAbelian.hasColimitsOfShape_discrete B I
+      let : HasExactColimitsOfShape (Discrete I) B :=
+        IsGrothendieckAbelian.hasExactColimitsOfShape_discrete B I
+      exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
+    · exact derivedTruncation_coproducts (Profinite.continuousMapRingObj E) X
+    · intro a b I M hM hb
+      obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded ℓ E p a b I M hM hb
+      refine ⟨c, hc, ?_⟩
+      have := hi
+      exact ⟨(Cofan.isColimitMapCoconeEquiv _ M c).2 hc'.ofPointIso⟩
 
 /-- The arbitrary-sum theorem for the condensed algebraic closure, whose sections have
 values in a finite subextension, in the standing scheme setting with the same fibre bound.
@@ -149,6 +181,34 @@ theorem properUnbounded_preservesCoproducts_padicAlgCl
         (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
           Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d : WithBot ℕ∞)) :
     ProperUnboundedCoproductAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p := by
-  sorry
+  have hdim : ∀ (y : Y) (n : ℕ),
+      (n : WithBot ℕ∞) ≤ topologicalKrullDim
+        (pullback p (Spec.map (CommRingCat.ofHom
+          (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+            Y.fromSpecResidueField y) : Scheme.{u}) → (n : ℤ) ≤ (d : ℤ) := by
+    intro y n hn
+    have hnd : (n : WithBot ℕ∞) ≤ (d : WithBot ℕ∞) := hn.trans (hd y)
+    exact_mod_cast hnd
+  have hw := properUnboundedWindow_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hdim
+  refine ⟨?_, ?_⟩
+  · intro K hK n
+    exact (hw K hK).1 n
+  · have sx := indConstructibleDerived_sums_and_truncations_padicAlgCl ℓ k p₀ hp₀ hpℓ X
+    have sy := indConstructibleDerived_sums_and_truncations_padicAlgCl ℓ k p₀ hp₀ hpℓ Y
+    apply properUnbounded_coproductComparison (Profinite.padicAlgClRingObj ℓ) p d hw
+      sx.2.1 sy.2.1 sx.2.2.1
+    · intro I D c hc q
+      let B := pulledBackModuleObjects (Profinite.padicAlgClRingObj ℓ) Y
+      let : HasColimitsOfShape (Discrete I) B :=
+        IsGrothendieckAbelian.hasColimitsOfShape_discrete B I
+      let : HasExactColimitsOfShape (Discrete I) B :=
+        IsGrothendieckAbelian.hasExactColimitsOfShape_discrete B I
+      exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
+    · exact derivedTruncation_coproducts (Profinite.padicAlgClRingObj ℓ) X
+    · intro a b I M hM hb
+      obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded_padicAlgCl ℓ p a b I M hM hb
+      refine ⟨c, hc, ?_⟩
+      have := hi
+      exact ⟨(Cofan.isColimitMapCoconeEquiv _ M c).2 hc'.ofPointIso⟩
 
 end AlgebraicGeometry.ProEtale
