@@ -145,7 +145,7 @@ def rewrite(text, mapping, header=False):
     # Remove operational comments, but retain mathematical source docstrings.
     parts = list(ledger.segments(text))
     for kind,a,b in reversed(parts):
-        if kind in ('line','block') and re.search(r'\b(?:SHEAF|sheaf-dag|stage [123]|landing|sandbox|worker|pipeline|group [A-Z][0-9]|STATEMENT-DISPUTED)\b',text[a:b]):
+        if kind in ('line','block') and re.search(r'\b(?:SHEAF|newtargets-dag|stage [123]|landing|sandbox|worker|pipeline|group [A-Z][0-9]|STATEMENT-DISPUTED)\b',text[a:b]):
             raise ValueError('operational comment requires manual mathematical rewrite: '+text[a:b][:180])
     return text
 
@@ -295,7 +295,7 @@ def check(directory):
             if r['kind'] in ('theorem','lemma') and re.fullmatch(r'\s*(?::=)?\s*(?:by\s+)?trivial\s*',proof):
                 errors.append(f"{rel}:{r['line']}: trivial body requires statement review")
         for pattern,label in [(r'(?<![\w.])Sheaf\.', 'old module reference'),
-          (r'\b(?:SHEAF|DAG|sheaf-dag|pipeline|sandbox|landing|worker|stage[- ][123]|group [A-Z][0-9]+|STATEMENT-DISPUTED)\b|(?:coord|dag|tools|stages)/','process vocabulary'),
+          (r'\b(?:SHEAF|DAG|newtargets-dag|pipeline|sandbox|landing|worker|stage[- ][123]|group [A-Z][0-9]+|STATEMENT-DISPUTED)\b|(?:coord|dag|tools|stages)/','process vocabulary'),
           (r'(?:\b(?:\d{1,3}\.){3}\d{1,3}\b|BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|gh[pousr]_[A-Za-z0-9]+|ssh-(?:rsa|ed25519))','address/key pattern')]:
             if re.search(pattern,t):errors.append(rel+': '+label)
         for i,l in enumerate(t.splitlines(),1):

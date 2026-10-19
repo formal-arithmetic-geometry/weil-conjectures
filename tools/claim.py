@@ -6,6 +6,8 @@ Usage:
                                                if given; prints one item per line (a module, or a DAG node in stages 1 and 2)
   tools/claim.py take <group> <module>         claim a given module (also before changing someone else's statement)
   tools/claim.py take-many <g1> <m1> <g2> <m2> ...   take for many pairs; one line per pair: OK|NO, group, item[, reason]
+  tools/claim.py take-many --with-stage <g1> <m1> <s1> ...   the same, each item claimed FOR the stage the caller will
+                                               work it in: refused when the live node is already finished for that stage
   tools/claim.py renew <group> <module>        keep a claim alive during long work
   tools/claim.py done <group> <module> <note>  delivered; if the module still has `sorry`, it goes back to the queue
   tools/claim.py release <group> <module> <reason>   give the item back, stuck or abandoned
@@ -70,6 +72,49 @@ def drop_return_entries(group: str, item: str) -> int:
     return n
 
 
+def _lock_held_by_ancestor() -> bool:
+    """True when coord/.merge.lock is held by one of our ancestors (merge_delivery.py, batch_land.py or a
+    `flock coord/.merge.lock ...` running this tool): taking it again would wait for ourselves."""
+    import mergelock
+    h = mergelock.holder(mergelock.LOCK)
+    if not h.startswith("pid ") or not h[4:].split(":")[0].isdigit():
+        return False
+    holder, pid = int(h[4:].split(":")[0]), os.getppid()
+    while pid > 1:
+        if pid == holder:
+            return True
+        try:
+            pid = int(pathlib.Path(f"/proc/{pid}/stat").read_text().rsplit(")", 1)[1].split()[1])
+        except (OSError, ValueError, IndexError):
+            return False
+    return False
+
+
+def commit_bookkeeping(paths, msg):
+    """Commit coord files this tool wrote (repair handoffs in coord/returns, repair-note states) under
+    coord/.merge.lock, like the other tools; an uncommitted returns file blocks tools/retire_stage1.py.
+    Under a lock held by the calling tool (merge_delivery.py, batch_land.py) that tool commits them."""
+    rels = [pathlib.Path(p).resolve().relative_to(li.ROOT).as_posix() for p in paths if pathlib.Path(p).exists()]
+    if not rels or _lock_held_by_ancestor():
+        return
+    import mergelock
+    git = lambda *a: subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", *a],
+                                    cwd=li.ROOT, capture_output=True, text=True, env=dict(os.environ, SHEAF_LEAD="L-only"))
+    try:
+        with mergelock.merge_lock():
+            if not git("status", "--porcelain", "--untracked-files=all", "--", *rels).stdout.strip():
+                return
+            git("add", "--", *rels)
+            msg += "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+            r = git("commit", "-q", "--only", "--author=Bin Wu <844524296@qq.com>", "-m", msg, "--", *rels)
+            if r.returncode:
+                time.sleep(2); r = git("commit", "-q", "--only", "--author=Bin Wu <844524296@qq.com>", "-m", msg, "--", *rels)
+            if r.returncode:
+                print("warning: bookkeeping commit failed: " + (r.stderr or r.stdout).strip()[:300], file=sys.stderr)
+    except mergelock.LockTimeout as e:
+        print(f"warning: bookkeeping left uncommitted ({e})", file=sys.stderr)
+
+
 def lock(m): return C / (m.replace("/", "__") + ".lock")
 
 
@@ -113,12 +158,20 @@ def handoff_return(who, m):
     """Any next claimant receives the failed repair's full diagnostic handoff."""
     nr = repair_note(m)
     if nr.get('state') != 'released': return
+    # Scope the return to the snapshot being handed off. Without a head the
+    # dispatcher treats every later push as the same unresolved return.
+    ref = f'refs/heads/deliver/{who}/{m}'
+    r = subprocess.run(['git', 'rev-parse', '-q', '--verify', ref], cwd=li.ROOT,
+                       capture_output=True, text=True)
+    head = r.stdout.strip() if r.returncode == 0 else subprocess.check_output(
+        ['git', 'rev-parse', '--verify', 'HEAD'], cwd=li.ROOT, text=True).strip()
     p = RETURNS / (who + '.md'); p.parent.mkdir(parents=True, exist_ok=True)
     drop_return_entries(who, m)
     with open(p, 'a') as f:
-        f.write('\n\n## ' + m + ' (dedicated repair handoff)\n\n'
+        f.write('\n\n## ' + m + ' (dedicated repair handoff; head ' + head + ')\n\n'
                 + 'The previous worker ended with: ' + nr.get('note', '')
                 + '\n\nCompiler messages and attribution:\n' + nr.get('reason', '') + '\n')
+    commit_bookkeeping([p], f"repair handoff to {who}: {m}")
 
 
 def _delivered(who, m):
@@ -126,10 +179,31 @@ def _delivered(who, m):
     return subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/heads/deliver/{who}/{m}"], cwd=str(li.ROOT),
                           capture_output=True).returncode == 0
 
-def take(who, m, quiet=False) -> bool:
-    if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
+
+def retire_delivery(who, m):
+    """Archive deliver/<who>/<m> at refs/superseded/<who>/<m>/<head> and delete it; the archived head, or None if there
+    is no branch. Called when <who> abandons <m> (2026-10-18): the branch of an abandoned item was left to "the
+    maintainer", nobody deleted it, and a delivery branch without a claim and without a return entry is dispatched to
+    no one (the dispatcher counts every branch as taken), so the item was stuck for hours."""
+    ref = f"refs/heads/deliver/{who}/{m}"
+    r = subprocess.run(["git", "rev-parse", "-q", "--verify", ref], cwd=li.ROOT, capture_output=True, text=True)
+    if r.returncode:
+        return None
+    head = r.stdout.strip()
+    subprocess.run(["git", "update-ref", f"refs/superseded/{who}/{m}/{head}", head], cwd=li.ROOT, check=True)
+    subprocess.run(["git", "update-ref", "-d", ref, head], cwd=li.ROOT, check=True)
+    log(f"delivery branch of {who} for {m} archived at refs/superseded/{who}/{m}/{head} (item abandoned)")
+    return head
+
+def take(who, m, quiet=False, stage=None) -> bool:
+    """`stage`: the stage the caller will work the item in (take-many --with-stage). 2026-10-19 (stale dispatch): the
+    dispatcher claimed from its copy of coord/queue.tsv, a merge rewrote the queue meanwhile (stage 1 -> 2), and the
+    stage-blind check below then judged a just-merged, reviewed split by the stage-2 rule (no Lean yet: open) and granted
+    the claim; the worker was started with the stage-1 brief and answered BLOCKED "already split and reviewed"
+    (~40-100 sessions an hour). Judged for the caller's stage, such a claim is refused."""
+    if stage is not None and node_finished(m, stage) and repair_note(m).get('state') != 'released':
         if not quiet:
-            print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
+            print(f"{m} is already completed for stage {stage} (live node); nothing to claim for that stage")
         return False
     if li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
             and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()):
@@ -138,9 +212,15 @@ def take(who, m, quiet=False) -> bool:
         if not quiet:
             print(f"{m} has no sorry on the main branch; nothing to claim")
         return False
-    if node_finished(m) and repair_note(m).get('state') != 'released':   # launcher's order 2026-10-10 20:55 UTC: refuse a node already split, matched or attached
+    if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
         if not quiet:
-            print(f"{m} is already split, matched or attached; nothing to claim")
+            print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
+        return False
+    # node_finished is stage-aware: a stage-2 split is open until it has a Lean
+    # record. Recheck even queued stage-2 items: queue.tsv can predate a landing.
+    if node_finished(m) and repair_note(m).get('state') != 'released':
+        if not quiet:
+            print(f"{m} is already completed for its queued stage; nothing to claim")
         return False
     # 2026-10-16: a held item already delivered (its branch waits for review) does not count toward the cap, so a
     # group keeps working while its deliveries wait; the cap limits items in work, not deliveries in review
@@ -169,7 +249,7 @@ def take(who, m, quiet=False) -> bool:
 
 
 
-def take_many(pairs):
+def take_many(pairs, stages=None):
     """`take` for many (group, item) pairs in one call (launcher, 2026-10-17: the dispatcher claimed one item per ssh
     call, about 12 starts a minute). Prints one line per pair, `OK<TAB>group<TAB>item` or `NO<TAB>group<TAB>item<TAB>reason`,
     and returns. The repair handoffs written meanwhile are committed afterwards in one bookkeeping commit by a detached
@@ -180,11 +260,11 @@ def take_many(pairs):
     if real is not None:
         globals()["commit_bookkeeping"] = lambda paths, msg: (deferred.extend(paths), msgs.append(msg))
     try:
-        for who, m in pairs:
+        for k, (who, m) in enumerate(pairs):
             buf = io.StringIO()
             try:
                 with contextlib.redirect_stdout(buf):
-                    ok = take(who, m)
+                    ok = take(who, m, stage=stages[k] if stages else None)
             except Exception as e:   # one bad pair never costs the others their answer
                 ok = False; buf.write(f"error: {e!r}")
             reason = " ".join(buf.getvalue().split())
@@ -206,19 +286,25 @@ def take_many(pairs):
 
 
 def queue_stage(m: str):
-    """The stage of an item as coord/queue.tsv lists it (None when the queue does not list it)."""
+    """Return the highest queued stage (duplicate rows can represent a keep-plan re-split)."""
     q = WORK / "queue.tsv"
     if not q.exists():
         return None
+    stages = []
     for l in q.read_text().splitlines():
         r = l.split("\t")
-        if r and r[0] == m and len(r) > 1:
-            return r[1]
-    return None
+        if r and r[0] == m and len(r) > 1 and r[1].isdigit():
+            stages.append(int(r[1]))
+    # A released keep-plan node can have its stage-1 repair row beside the
+    # stage-2 formalization row.  The first-match result dispatched stage 1
+    # repeatedly, although the handoff explicitly required stage-2 evidence.
+    return str(max(stages)) if stages else None
 
 
 def node_file(m: str):
-    """The node file the queue reads: dag_queue.nodes_dir() (SHEAF_DAG in coord/sheaf.env when set), else dag/nodes."""
+    """The node file the queue reads: dag_queue.nodes_dir() (SHEAF_DAG in coord/sheaf.env, the live DAG for this
+    isolated project since 2026-10-16), else the project's own dag/nodes. 2026-10-18: claim.py read only the project's
+    own copy, which the sync keeps a side-owned split's `reviewed` in; the queue read the live node without it."""
     import dag_queue
     for base in dict.fromkeys((dag_queue.nodes_dir(), li.ROOT / "dag" / "nodes")):
         hits = list(base.glob(f"*/{m}.json"))
@@ -247,20 +333,16 @@ def node_finished(m: str, stage=None) -> bool:
         if isinstance(l, dict) and l.get("convention"):   # a convention node (L, 2026-10-11): no Lean notion, not an item
             return True
         return d.get("status") in ("mathlib", "merged")
-    # the human, 2026-10-18: stage-1 claimability follows dag_queue.stage1(): a split node is finished only when its review
-    # stands (`reviewed` set, dag_queue.unfolded); a split whose review was withdrawn (`reviewed` removed when its statement
-    # changed, as lem-sfb-dc-lower-star-preserves in 1bab541d8d) is a stage-1 item again (re-review / re-split for the
-    # changed statement) and must be claimable. Before, by the launcher's order of 2026-10-10 20:55 UTC, any `split`
-    # counted as finished whether or not `reviewed` was set. Mathlib leaves and merged nodes stay finished.
+    # 2026-10-18 (s1loop): stage-1 claimability is dag_queue.stage1_completed, the predicate stage1() and the stage-1
+    # landing (tools/retire_stage1.py) use, read on the node the queue reads (node_file). It holds the earlier rules: the
+    # recorded first-task completions and the closed audit (finished), a split whose review stands (unfolded; a split
+    # whose review was withdrawn is claimable again, the human 2026-10-18), Mathlib leaves and merged nodes; and it adds
+    # that a released stage-1 repair note keeps a split open until its repair lands. Before, an attached node whose audit
+    # was closed_part and a split with an owed repair note were judged differently here, in stage1() and at the landing,
+    # and such items were dispatched, delivered and archived as already completed over and over (thm-sf-pf-proetale ~60
+    # times, lem-sfb-modobj-abelian). The raw lean_audit 'closed'/'attached' test of 2026-10-10 is covered by finished().
     import dag_queue
-    if dag_queue.unfolded(d) or d.get("status") in ("mathlib", "merged"):
-        return True
-    # launcher's finding, 2026-10-10 17:30 UTC: a node attached to a sorry-free Lean declaration (lean_audit closed or
-    # attached) stays status unsplit but is finished; groups claimed such nodes eight times each
-    la = d.get("lean_audit") or {}
-    if la.get("state") in ("closed", "attached") or (la.get("slopmaster2") or {}).get("state") in ("closed", "attached"):
-        return True
-    return False
+    return dag_queue.stage1_completed(d)
 
 
 def attachment_pending(m: str) -> bool:
@@ -392,7 +474,8 @@ def main() -> int:
                 # (an item of coord/repairs.txt is a repair even without a `sorry`: a false statement, a duplicate,
                 # undetermined data; 2026-10-14 all 25 queued repairs were skipped here and nobody could claim them)
                 continue
-            if node_finished(m) and repair_note(m).get('state') != 'released':  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
+            # Recheck the node even for stage 2; a stale queue may list a landed statement.
+            if node_finished(m) and repair_note(m).get('state') != 'released':
                 continue
             if attachment_pending(m):  # an attachment release L has not verified yet (launcher, 2026-10-10 17:30 UTC)
                 continue
@@ -405,6 +488,9 @@ def main() -> int:
             print("nothing to claim" if n > 0 else f"{who} already holds {LIMIT} claims")
     elif cmd == "take-many":
         rest = a[1:]
+        if rest[:1] == ["--with-stage"]:
+            rest = rest[1:]
+            return take_many(list(zip(rest[0::3], rest[1::3])), stages=list(rest[2::3]))
         return take_many(list(zip(rest[0::2], rest[1::2])))
     elif cmd == "take":
         return 0 if take(a[1], a[2]) else 1
@@ -427,6 +513,7 @@ def main() -> int:
             nr = repair_note(m)
             if nr:
                 nr['state'] = 'resolved'; np.write_text(json.dumps(nr, ensure_ascii=False))
+                commit_bookkeeping([np], f"repair note resolved: {m} ({who})")
             log(f"{who} done {m} (sorry left: {left}) {note}")
             print("done" + (f"; {left} sorry left, so the module returns to the queue" if left else ""))
         else:
@@ -440,17 +527,20 @@ def main() -> int:
                     print(f"refused: {m} has " + (f"an open return entry in coord/returns/{who}.md" if opened else "")
                           + (" and " if opened and branch else "") + (f"a delivery branch deliver/{who}/{m}" if branch else "")
                           + ". Repair the delivery (push it) or abandon the item: give a reason starting with 'abandon:'; "
-                          "an abandoned item is released, its delivery branch is deleted by the maintainer and the abandonment is counted for the group.")
+                          "an abandoned item is released, its delivery branch is archived under refs/superseded and the abandonment is counted for the group.")
                     return 1
                 if note.startswith("abandon:"):
                     log(f"{who} abandoned {m}: {note}")
                     if drop_return_entries(who, m):
                         log(f"return entries of {who} for {m} dropped (item abandoned)")
-                    print("abandoned; the maintainer deletes the delivery branch" if branch else "abandoned")
+                        commit_bookkeeping([RETURNS / f"{who}.md"], f"return entries of {who} for {m} dropped (abandoned)")
+                    head = retire_delivery(who, m)
+                    print(f"abandoned; the delivery branch is archived at refs/superseded/{who}/{m}/{head} and the item is open" if head else "abandoned")
                     return 0
             log(f"{who} released {m}: {note}")
             if drop_return_entries(who, m):
                 log(f"return entries of {who} for {m} dropped (item released)")
+                commit_bookkeeping([RETURNS / f"{who}.md"], f"return entries of {who} for {m} dropped (released)")
             print("released")
     elif cmd == "mine":
         print("\n".join(held_by(a[1])))

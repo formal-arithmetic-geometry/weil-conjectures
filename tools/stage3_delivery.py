@@ -387,7 +387,7 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
 
 
 ROUTE_PIVOT_MODULES = pathlib.Path(os.environ.get("SHEAF_ROUTE_PIVOT_MODULES",
-                                                  "/home/ubuntu/weil-newtargets/coord/route-pivot-dropped-modules.txt"))
+                                                  str(pathlib.Path(__file__).resolve().parent.parent / "coord/route-pivot-dropped-modules.txt")))
 
 
 def route_pivot_fails(D: dict) -> list[tuple[str, str]]:

@@ -70,7 +70,13 @@ def cmd_blueprint(args) -> int:
         total += 1
         i = str(fm.get("id") or pathlib.PurePosixPath(path).stem)
         if i in ids:
-            names[i] = [str(x) for x in lean]
+            # 2026-10-15: blueprint front matter also uses a Lean record.
+            # Iterating that table emitted metadata keys as declaration names.
+            if isinstance(lean, dict):
+                lean = ([lean["declaration"]] if lean.get("declaration") else []) + list(lean.get("declarations") or [])
+            elif isinstance(lean, str):
+                lean = [lean]
+            names[i] = list(dict.fromkeys(x for x in lean if isinstance(x, str) and x))
     out = load_out()
     out["blueprint"] = {"ref": ref, "commit": git(repo, "rev-parse", "--short", ref).strip(), "names": dict(sorted(names.items())),
                         "lists_in_repo": total}

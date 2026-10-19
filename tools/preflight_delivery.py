@@ -24,8 +24,8 @@ Checks (roles/remote-lead.md §4-5, the returns of 2026-10-09):
      by a cited node (or by the node itself); a non-elementary step that only quotes a tag fails;
      a step marked elementary may name a tag for a fact of two or three lines (warning only;
      the reviewer judges whether it is elementary; rule of 2026-10-10 17:10 UTC);
-  7. tools/review_split.py <item> passes and tools/check_dag.py reports no cycle, route or
-     dependency error;
+  7. tools/review_split.py <item> passes and tools/check_dag.py reports no blocking cycle or
+     dependency error; route findings are printed as advisories (human decision, 2026-10-16);
   8. blueprint references (stages/1-dag.md §6, rule of 2026-10-10): the item and every new node
      carry the `blueprint` field; `from.place` is filled (not "unspecified"); `same_as` is a list
      (the whole blueprint was searched with tools/blueprint_refs.py search); a new node's
@@ -523,32 +523,31 @@ def main() -> int:
         out = (r.stdout + r.stderr).strip()
         if "PASS" not in out.splitlines()[0] if out else True:
             f("tools/review_split.py does not pass:\n   " + "\n   ".join(out.splitlines()[:12]))
-        r = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, capture_output=True, text=True)
-        # a "route:" warning counts only when it names the item or a new node; standing ones belong to the lead
-        def findings(text):
-            return [l for l in text.splitlines()
-                    if l.startswith(("error", "unit", "cycle", "deps")) or "ERROR" in l
-                    or (l.startswith("route") and any(i in l for i in [item, *new_nodes]))]
-        bad = findings(r.stdout + r.stderr)
-        # launcher's finding, 2026-10-10 15:30 UTC: the preflight fails only on what the delivery introduces. The findings
-        # already present on the base are not the delivery's: they are computed on a temporary worktree of the base and
-        # subtracted. (Pre-existing route warnings blocked thm-constructible-serre 29 times.)
-        if bad:
-            import tempfile, shutil
-            wt = tempfile.mkdtemp(prefix="preflight-base-")
+        import dag_delta
+        # pfinc 2026-10-17 (cpu): tools/dag_inc.py recomputes only the lines of the full check that the delivery can
+        # change and takes the rest from the cached base check; it returns None (full check below) for anything else.
+        # SHEAF_PREFLIGHT_FULL=1 forces the full check.
+        inc = None
+        if __import__("os").environ.get("SHEAF_PREFLIGHT_FULL") != "1":   # SHEAF_INC_DEBUG=1: why the full check ran
             try:
-                subprocess.run(["git", "worktree", "add", "--detach", "-q", wt, base], cwd=ROOT, capture_output=True, text=True, check=True)
-                rb = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=wt, capture_output=True, text=True)
-                on_base = set(findings(rb.stdout + rb.stderr))
-                bad = [l for l in bad if l not in on_base]
-            except subprocess.CalledProcessError as e:
-                print(f"   (note: could not check the base {base} in a worktree: {e.stderr.strip()[:200]}; all findings count)")
-            finally:
-                subprocess.run(["git", "worktree", "remove", "--force", wt], cwd=ROOT, capture_output=True, text=True)
-                shutil.rmtree(wt, ignore_errors=True)
-        last = (r.stdout.strip().splitlines() or [""])[-1]
-        if bad or "0 cycles" not in last:
-            f("tools/check_dag.py reports a problem introduced by the delivery (findings already on the base are not counted):\n   " + "\n   ".join((bad or [last])[:12]))
+                import dag_inc
+                inc = dag_inc.delivery_findings(base, {item, *new_nodes})
+            except Exception as e:  # noqa: BLE001
+                inc = None
+                if __import__("os").environ.get("SHEAF_INC_DEBUG") == "1":
+                    sys.stderr.write(f"dag_inc: full check: {type(e).__name__}: {e}\n")
+        if inc is not None:
+            bad, routes = inc
+        else:
+            r = subprocess.run([sys.executable, "tools/check_dag.py", "--cycles"], cwd=ROOT, capture_output=True, text=True)
+            try:
+                baseline = dag_delta.check_ref(base)
+                bad, routes = dag_delta.delivery_findings(r.stdout + r.stderr, baseline, {item, *new_nodes})
+            except Exception as e:
+                bad, routes = ["Could not verify the DAG baseline: " + str(e)], []
+        warns.extend("tools/check_dag.py (recorded, not refused): " + line for line in routes)
+        if bad:
+            f("tools/check_dag.py reports an introduced finding or a finding on a delivered node:\n   " + "\n   ".join(bad[:12]))
     else:
         f("review_split.py and check_dag.py were not run because the working tree is not clean")
 

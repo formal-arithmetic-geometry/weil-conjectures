@@ -202,17 +202,36 @@ def route(nodes=None, units=None, chapters=None):
     return sorted(((k, u, units[u]["chapter"]) for u, k in rank.items()), key=lambda x: (x[0], x[1]))
 
 
-def check(nodes=None, verbose=True) -> list[str]:
-    nodes = nodes or dq.load(); units, chapters = load_units()
-    errs, info, tools_accepted = [], collections.Counter(), collections.Counter()
-    g = dq.Dag(nodes)
-    for i, d in g.live.items():
-        if d.get("chapter") not in chapters:
-            errs.append(f"units: {i} has no chapter ({d.get('chapter')!r})")
-        if d.get("unit") is not None and d.get("unit") not in units:
-            errs.append(f"units: {i} names a unit that does not exist: {d.get('unit')!r}")
-    # units: realized fields
+def unit_bits(nodes, g, units, deps_all):
+    """pfinc 2026-10-17 (cpu): for every node, the units (as bits of an int) of the nodes it reaches through g.deps(x, "all"),
+    itself included; one pass over the strongly connected components (emitted children first). Only units of `units`."""
+    import check_dag
+    ubit = {u: 1 << k for k, u in enumerate(units)}
+    graph = {x: deps_all(x) for x in nodes}
+    comp_of, cbits = {}, []
+    for comp in check_dag.sccs(graph):
+        k = len(cbits)
+        for m in comp:
+            comp_of[m] = k
+        bits = 0
+        for m in comp:
+            bits |= ubit.get(nodes[m].get("unit"), 0)
+            for w in graph[m]:
+                j = comp_of.get(w)
+                if j is not None and j != k:
+                    bits |= cbits[j]
+        cbits.append(bits)
+    return ubit, {x: cbits[comp_of[x]] for x in graph}
+
+
+def realized_errors(nodes, g, units, deps_all, full_carriers, only=None):
+    """The `realized` part of check(): for each unit (of `only`, default all) whose realized fields are filled, its
+    realizing nodes exist, its statement and steps are carried, and the units it cites are reached from those nodes."""
+    errs = []
+    ubit, nbits = unit_bits(nodes, g, units, deps_all)
     for u, rec in units.items():
+        if only is not None and u not in only:
+            continue
         r = rec.get("realized") or {}
         if not (r.get("statement") or any(r.get("steps", []))):
             continue
@@ -226,39 +245,75 @@ def check(nodes=None, verbose=True) -> list[str]:
                 errs.append(f"units: {u} step {k} is carried by no node")
         # the units it cites are reached from its realizing nodes
         start = [x for x in r.get("statement", []) + [y for s in r.get("steps", []) for y in s] if x in g.live]
+        need = {v for v in rec.get("uses", []) if v in units}
+        got = 0
+        for x in start:
+            got |= nbits.get(x, 0)
+        if all(got & ubit[v] for v in need):
+            continue
+        # some cited unit is not reached by unit stamps: the whole reach decides through the fully realized units
         reach, st = set(), list(start)
         while st:
             x = st.pop()
             if x in reach:
                 continue
-            reach.add(x); st += g.deps(x, "all")
+            reach.add(x); st.extend(y for y in deps_all(x) if y not in reach)
         hit = {nodes[x].get("unit") for x in reach if x in nodes}
         # A sketch may be expanded by nodes located in a different blueprint unit.
         # Preserve their source-based unit stamp and honor the explicit binding only
         # when the entire statement and every proof step have been reached.
-        for v, vrec in units.items():
-            vr = vrec.get("realized") or {}
-            statements, steps = vr.get("statement") or [], vr.get("steps") or []
-            if not statements or len(steps) != len(vrec.get("steps") or []) or not all(steps):
-                continue
-            carriers = set(statements + [x for step in steps for x in step])
+        for v, carriers in full_carriers:
             if carriers <= reach:
                 hit.add(v)
         for v in rec.get("uses", []):
             if v in units and v not in hit:
                 errs.append(f"units: {u} cites {v}, which its nodes do not reach")
+    return errs
+
+
+def check(nodes=None, verbose=True) -> list[str]:
+    nodes = nodes or dq.load(); units, chapters = load_units()
+    errs, info, tools_accepted = [], collections.Counter(), collections.Counter()
+    g = dq.Dag(nodes)
+    _dall = {}       # fastland: g.deps(x, "all") per node, computed once
+
+    def deps_all(x):
+        r = _dall.get(x)
+        if r is None:
+            r = _dall[x] = g.deps(x, "all")
+        return r
+    # fastland: the units whose statement and every step are realized, with their carrier nodes, computed once
+    full_carriers = []
+    for v, vrec in units.items():
+        vr = vrec.get("realized") or {}
+        statements, steps = vr.get("statement") or [], vr.get("steps") or []
+        if not statements or len(steps) != len(vrec.get("steps") or []) or not all(steps):
+            continue
+        full_carriers.append((v, set(statements + [x for step in steps for x in step])))
+    for i, d in g.live.items():
+        if d.get("chapter") not in chapters:
+            errs.append(f"units: {i} has no chapter ({d.get('chapter')!r})")
+        if d.get("unit") is not None and d.get("unit") not in units:
+            errs.append(f"units: {i} names a unit that does not exist: {d.get('unit')!r}")
+    errs += realized_errors(nodes, g, units, deps_all, full_carriers)
     # nodes: proof dependencies leaving the route. The route is about proofs: a step of a statement in unit U may use a
     # statement (not a Mathlib leaf, not a definition: those are notions) only from U or a unit U cites, transitively.
     # A unit with no proof and no `uses` (a remark or an assembly) constrains nothing.
+    _closure, _skip = {}, {}   # pfinc 2026-10-17 (cpu): per unit / per cited node, computed once
     for i, d in g.live.items():
         u, ch = d.get("unit"), d.get("chapter")
         if not u or dq.is_def(d) or u not in units:
             continue
         if not units[u].get("uses") and not units[u].get("steps"):
             continue
-        allowed = closure(units, u)
+        allowed = _closure.get(u)
+        if allowed is None:
+            allowed = _closure[u] = closure(units, u)
         for c in g.deps(i, "proof"):
-            if c not in g.live or dq.is_def(nodes[c]) or dq.is_leaf(nodes[c]) or dq.finished(nodes[c]):
+            sk = _skip.get(c)
+            if sk is None:
+                sk = _skip[c] = c not in g.live or dq.is_def(nodes[c]) or dq.is_leaf(nodes[c]) or dq.finished(nodes[c])
+            if sk:
                 continue
             cu, cc = nodes[c].get("unit"), nodes[c].get("chapter")
             ok = cu in allowed if cu else True

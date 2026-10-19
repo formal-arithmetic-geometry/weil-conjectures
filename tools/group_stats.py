@@ -28,7 +28,9 @@ if p.exists():
             g(m.group(1))["merged"].append(m.group(2))
 p = ROOT / "coord" / "ledger.md"
 if p.exists():
-    lines = p.read_text().splitlines()
+    # fastland 2026-10-17: the ledger was rotated; the archived lines (local/ledger-archive/, oldest first) count too
+    lines = [l for a in sorted((ROOT / "local" / "ledger-archive").glob("ledger-until-*.md")) for l in a.read_text(errors="ignore").splitlines()]
+    lines += p.read_text().splitlines()
     for n, line in enumerate(lines):
         m = re.search(r"delivery of (\S+): (\S+) returned", line)
         if m:

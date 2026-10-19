@@ -142,8 +142,44 @@ class Fail(RuntimeError):
     pass
 
 
+def _route_dag(a):
+    """One DAG (2026-10-18, tools/livedag.py): dag/nodes is the link to the live DAG. The DAG paths of an add or a
+    reset are dropped (this repository never stages them); those of a commit are committed in the live repository
+    first, with the same message. Returns the remaining argument list, or None when nothing is left to do here."""
+    j = 0
+    while j + 1 < len(a) and a[j] == "-c":     # tools/nt_merge2.py puts -c identity options first
+        j += 2
+    if not (j < len(a) and a[j] in ("add", "commit", "reset") and "--" in a):
+        return a
+    import livedag
+    if not livedag.active():
+        return a
+    i = a.index("--")
+    side, dag = livedag.split(a[i + 1:])
+    lean = livedag.lean_to_live(side) if a[j] == "commit" else []   # one repository: landed modules go to live too
+    if not dag and not lean:
+        return a
+    if a[j] == "commit":
+        msg = a[a.index("-m") + 1] if "-m" in a else "DAG change"
+        msg = msg.replace(livedag.TRAILER, "").rstrip()
+        livedag.commit_live(dag + lean, msg)
+    return a[:i + 1] + side if side else None
+
+
 def git(*a, check=True):
-    r = subprocess.run(["git", *a], cwd=ROOT, text=True, capture_output=True)
+    # 2026-10-15: maintainer commits, including returns/queue refreshes, use the
+    # human's required identity and attribution, rather than a delivery bot author.
+    a = _route_dag(list(a))
+    if a is None:
+        return ""
+    if a and a[0] == "commit":
+        a = [x for x in a if not x.startswith("--author=")]
+        a.insert(1, "--author=Bin Wu <844524296@qq.com>")
+        if "-m" in a:
+            i = a.index("-m") + 1
+            a[i] = a[i].rstrip() + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+    r = subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", *a],
+                       cwd=ROOT, text=True, capture_output=True)
     if check and r.returncode != 0:
         raise Fail(f"git {' '.join(a[:3])}{' ...' if len(a) > 3 else ''} failed: {(r.stderr or r.stdout).strip()}")
     return (r.stdout or "").strip()
@@ -364,8 +400,15 @@ class Tree:
         p.write_text(text)
 
     def restore(self):
-        if self.touched:
-            subprocess.run(["git", "checkout", "HEAD", "--", *self.touched], cwd=ROOT, capture_output=True)
+        import livedag
+        dag = [r for r in self.touched if livedag.is_dag(r)] if livedag.active() else []
+        rest = [r for r in self.touched if r not in dag]
+        if rest:
+            subprocess.run(["git", "checkout", "HEAD", "--", *rest], cwd=ROOT, capture_output=True)
+        for rel in dag:     # the live file back as HEAD carries it (the live DAG grafted when the lock was taken)
+            blob = subprocess.run(["git", "show", f"HEAD:{rel}"], cwd=ROOT, capture_output=True)
+            if blob.returncode == 0:
+                (ROOT / rel).write_bytes(blob.stdout)
         for rel in self.created:
             subprocess.run(["git", "rm", "-q", "--cached", "--ignore-unmatch", "--", rel], cwd=ROOT, capture_output=True)
             (ROOT / rel).unlink(missing_ok=True)
@@ -472,9 +515,29 @@ def cmd_merge(o):
     if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
         raise Fail(f"the working tree is not on {MAIN}")
     with merge_lock():
+        import dag_queue
+        graph = dag_queue.Dag(dag_queue.load())
+        if item not in {nid for _, nid in graph.stage1()}:
+            raise Fail(f"{item}: no longer stage-1-open; live completion takes priority")
         base, commits, kinds = inspect(group, item)
         if o.head and not git("rev-parse", br).startswith(o.head):
             raise Fail(f"the branch head is {git('rev-parse', '--short', br)}, not {o.head}: the group pushed again; review the new head")
+        # A reader must not certify a proof against a cited statement that live
+        # synchronization changed after the branch was written. Lean/audit-only
+        # updates are harmless here; natural-language statements are not.
+        cited = set()
+        delivered_ids = {pathlib.Path(f).stem for f, k in kinds.items() if k in ("item", "new")}
+        import dag_queue
+        for f, k in kinds.items():
+            if k in ("item", "new"):
+                cited.update(dag_queue.deps_of(load_json_at(br, f), "all"))
+        for nid in cited - delivered_ids:
+            rel = node_path(nid)
+            if rel and exists_at(br, rel):
+                before = load_json_at(br, rel)
+                now = load_json_at("HEAD", rel)
+                if before.get("statement") != now.get("statement"):
+                    raise Fail(f"cited node {nid}: statement changed since the reviewed delivery; rebase and revalidate the citation")
         dirty = git("status", "--porcelain", "--", *kinds)
         if dirty:
             raise Fail(f"local changes on the delivery's files, resolve first: {' | '.join(dirty.splitlines())}")
@@ -521,13 +584,21 @@ def cmd_merge(o):
                     raise Fail("review_split.py: " + " | ".join(l.strip() for l in (rs.stdout + rs.stderr).splitlines() if l.strip()))
             else:
                 pre_rule = False
-            cd = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, text=True, capture_output=True)
-            # "reach:" warnings are not errors of the delivery (new nodes of other workers in progress are unreached until
-            # their item is written); check_dag.py exits 1 on them, so only the listed kinds fail the merge.
-            # A "route:" warning counts only when it names a delivered node (standing ones are the lead's).
-            bad = [l for l in (cd.stdout + cd.stderr).splitlines()
-                   if l.startswith(("error", "unit", "cycle", "deps")) or "ERROR" in l
-                   or (l.startswith("route") and any(i in l for i in ids))]
+            import dag_delta
+            # 2026-10-16 20:30 (launcher): the HEAD baseline (cached, else ~20 s) runs beside the candidate check
+            # (a plain thread: concurrent.futures imports the stdlib queue, shadowed here by tools/queue.py)
+            import threading as _th
+            _bres = {}
+            _bt = _th.Thread(target=lambda: _bres.__setitem__("v", dag_delta.check_ref("HEAD")), daemon=True); _bt.start()
+            cd = subprocess.run([sys.executable, "tools/check_dag.py", "--cycles"], cwd=ROOT, text=True, capture_output=True)
+            # Current HEAD is the side tip before this uncommitted DAG delivery. The
+            # live snapshot may inherit unrelated defects; reject introduced defects
+            # and defects on delivered nodes, with the same advisory-route policy
+            # as preflight. No Lean checkout or compile.
+            _bt.join(); baseline = _bres["v"] if "v" in _bres else dag_delta.check_ref("HEAD")
+            bad, routes = dag_delta.delivery_findings(cd.stdout + cd.stderr, baseline, ids)
+            for line in routes:
+                print("check_dag.py (recorded, not refused): " + line)
             if bad:
                 raise Fail("check_dag.py: " + " | ".join(bad))
 
@@ -563,6 +634,11 @@ def cmd_merge(o):
             done = subprocess.run([sys.executable, "tools/claim.py", "done", group, item,
                                    f"delivered by {group} on {br}, merged by L (reviewer {rid})"],
                                   cwd=ROOT, text=True, capture_output=True)
+            # 2026-10-18 (s1loop): the stage-1 landing resolves a released repair note itself (claim.py done does so only
+            # for the claim holder); committed below with the landing, restored by unbook
+            _np = ROOT / "coord" / "repair-notes" / (item + ".json")
+            book["note"] = (_np, _np.read_text() if _np.exists() else None)
+            dag_queue.resolve_stage1_note(item, f"{group} {git('rev-parse', '--short=12', br)} reviewed by {rid}")
             new = [f for f, k in kinds.items() if k == "new"]
             book["ledger"] = ledger_line(
                 f"merged {br} (reviewer {verdict}; {'after a return' if returned else 'first push'}; new nodes: {len(new)})"
@@ -574,6 +650,9 @@ def cmd_merge(o):
                 paths.append(rp.relative_to(ROOT).as_posix())
             if book["claim"][1] is not None and exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
                 paths.append(claim.relative_to(ROOT).as_posix())
+            note = ROOT / "coord" / "repair-notes" / (item + ".json")
+            if note.exists() and git("status", "--porcelain", "--", note.relative_to(ROOT).as_posix()).strip():
+                paths.append(note.relative_to(ROOT).as_posix())
             git_retry("add", "-A", "--", *paths)
             git_retry("commit", "-q", f"--author={author}", "-m",
                       f"Split {item} ({group}, reviewed by {rid})\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
@@ -585,6 +664,11 @@ def cmd_merge(o):
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
         refresh_queue(item)
+    try:
+        import dag_delta
+        dag_delta.warm_head()
+    except Exception:  # noqa: BLE001
+        pass
     print(f"MERGED {item} {sha}")
     return 0
 
@@ -601,6 +685,10 @@ def unbook(book):
         p, t = book["claim"]
         if t is not None and not p.exists():
             p.write_text(t)
+    if "note" in book:   # 2026-10-18 (s1loop): a repair note the landing resolved
+        p, t = book["note"]
+        if t is not None:
+            p.write_text(t)
     if "dlog" in book:
         p, before = book["dlog"]
         if p.exists():
@@ -612,11 +700,19 @@ def unbook(book):
 
 
 def refresh_queue(item):
+    if (ROOT / 'local/stage2/parallel-enabled').exists():
+        request = ROOT / 'local/stage2/queue-requested'
+        request.parent.mkdir(parents=True, exist_ok=True)
+        request.touch()
+        print('queue refresh requested in background:', item)
+        return
     """The queue after the merge, unless it was written less than 60 s ago (a merge right before)."""
     q = ROOT / "coord" / "queue.tsv"
     if q.exists() and time.time() - q.stat().st_mtime < 60:
         return
-    subprocess.run([sys.executable, "tools/blueprint_refs.py", "backfill"], cwd=ROOT, capture_output=True)
+    import livedag
+    if not livedag.active():    # one DAG (2026-10-18): a whole-tree backfill would rewrite live nodes behind live's back
+        subprocess.run([sys.executable, "tools/blueprint_refs.py", "backfill"], cwd=ROOT, capture_output=True)
     r = subprocess.run([sys.executable, "tools/queue.py", "write"], cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
         return
@@ -668,7 +764,7 @@ def cmd_return(group, item, reasons):
 
 # ---------------------------------------------------------------- stage 2
 
-def cmd_merge2(o):
+def cmd_merge2(o, batch=None):
     """A stage-2 delivery: land the modules in dependency order, record `lean` and `reviewed_lean` on the item, on the
     new definition nodes (written whole, with `reviewed`) and on the dependency nodes, the item's added stmt_deps, the
     report, the bookkeeping (coord/STATE.md, STAGE 2 EXTRA NODES)."""
@@ -681,7 +777,7 @@ def cmd_merge2(o):
         raise Fail("--stage 2 needs --head SHA (the commit the reviewer read)")
     if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
         raise Fail(f"the working tree is not on {MAIN}")
-    lock = merge_lock()  # a dry run too: it reads the tree a merge may be writing
+    lock = merge_lock() if batch is None else contextlib.nullcontext()
     with lock:
         # (1) the branch and its head
         if not has_ref(f"refs/heads/{br}"):
@@ -888,7 +984,9 @@ def cmd_merge2(o):
             reviewed["note"] = "; ".join(x for x in (o.spot_checked, dnote) if x)
         reviewed_new = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower(),
                         "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"}
-        tree = Tree()
+        if batch is not None and getattr(batch, "preparing", False):
+            return batch.prepare(o, D, records, reviewed, reviewed_new)
+        tree = Tree() if batch is None else batch.tree()
         book = {"group": group, "item": item}
         landed = []   # (module, landing id)
         paths_nodes = {item: node_rel}
@@ -953,6 +1051,8 @@ def cmd_merge2(o):
                                        + " | ".join(c["out"].splitlines()[-25:]))
             for m in mods:
                 lib_rel = m["file"]
+                if batch is not None:
+                    tree.remember(lib_rel)
                 sand = ROOT / "lean" / ".sandbox" / "L" / f"{m['node']}.lean"
                 cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / lib_rel)]
                 say(f"write {sand.relative_to(ROOT)} ({len(m['text'].splitlines())} lines) and run SHEAF_GROUP=L tools/land.sh "
@@ -961,7 +1061,8 @@ def cmd_merge2(o):
                     continue
                 sand.parent.mkdir(parents=True, exist_ok=True)
                 sand.write_text(m["text"])
-                r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
+                r = (subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
+                     if batch is None else batch.land(sand, ROOT / lib_rel))
                 if r.returncode != 0:
                     raise Fail(f"land.sh {lib_rel} exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
                 mm = re.search(r"as landing (\S+)", r.stdout)
@@ -1007,6 +1108,9 @@ def cmd_merge2(o):
                 print(f"  would delete the branch {br} and rewrite the queue (if coord/queue.tsv is older than 60 s)")
                 print(f"DRY RUN {item}: nothing changed")
                 return 0
+            if batch is not None:
+                batch.stage(o, tree, paths, paths_nodes, ltext, msg, br)
+                return 0
             book["returns"] = (rp, rtext)
             if returned:
                 rp.write_text("".join(keep))
@@ -1021,6 +1125,9 @@ def cmd_merge2(o):
                 paths.append(rp.relative_to(ROOT).as_posix())
             if book["claim"][1] is not None and exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
                 paths.append(claim.relative_to(ROOT).as_posix())
+            note = ROOT / "coord" / "repair-notes" / (item + ".json")
+            if note.exists() and git("status", "--porcelain", "--", note.relative_to(ROOT).as_posix()).strip():
+                paths.append(note.relative_to(ROOT).as_posix())
             git_retry("add", "-A", "--", *paths)
             git_retry("commit", "-q", f"--author={author}", "-m", msg, "--", *paths)
         except BaseException as e:
@@ -1033,7 +1140,8 @@ def cmd_merge2(o):
             raise
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
-        refresh_queue(item)
+        if _os.environ.get("SHEAF_STAGE2_DEFER_QUEUE") != "1":
+            refresh_queue(item)
     print(f"MERGED {item} {sha}" + (f" (new nodes: {', '.join(new)})" if new else ""))
     return 0
 

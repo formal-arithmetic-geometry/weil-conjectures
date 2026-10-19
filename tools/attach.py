@@ -39,6 +39,9 @@ def load():
 
 
 def main() -> int:
+    if "--stage2" in sys.argv[1:]:
+        from nt_attach_stage2 import main as attach_stage2
+        return attach_stage2(ROOT)
     a = sys.argv[1:]; dry = "--dry" in a; note = ""
     if "--note" in a: i = a.index("--note"); note = a[i + 1] if i + 1 < len(a) else ""; del a[i:i + 2]
     a = [x for x in a if x != "--dry"]
@@ -67,9 +70,10 @@ def main() -> int:
     if bad: print("REFUSED:\n " + "\n ".join(bad)); return 1
     lockf = ROOT / "coord" / ".merge.lock"
     import mergelock
-    with open(lockf, "a") as lf:
+    import contextlib, livedag
+    with contextlib.ExitStack() as stack:
         try:
-            mergelock.acquire(lf, lockf)
+            stack.enter_context(mergelock.merge_lock(lockf))   # one DAG (2026-10-18): also live's lock
         except mergelock.LockTimeout as e:
             print(f"REFUSED: {e}"); return 1
         p = hits[0]; d = json.loads(p.read_text())
@@ -87,14 +91,26 @@ def main() -> int:
         p.write_text(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
         rel = str(p.relative_to(ROOT))
         def git(*x): return subprocess.run(["git", "-C", str(ROOT), *x], capture_output=True, text=True)
-        r = git("commit", "-q", "-m", f"Attach {nid} ({g}): {recs[0]['name']}", "--", rel)
+        if livedag.active():    # one DAG (2026-10-18): dag/nodes is the live DAG; commit the node there
+            try:
+                h = (livedag.commit_live([rel], f"Attach {nid} ({g}): {recs[0]['name']}") or "")[:10]
+            except Exception as e:  # noqa: BLE001
+                p.write_bytes(subprocess.run(["git", "-C", str(ROOT), "show", f"HEAD:{rel}"], capture_output=True).stdout)
+                print(f"REFUSED: the live commit failed: {str(e)[:300]}"); return 1
+            r = subprocess.CompletedProcess([], 0, "", "")
+        else:
+            r = git("commit", "-q", "-m", f"Attach {nid} ({g}): {recs[0]['name']}", "--", rel)
         if r.returncode:
             time.sleep(2); r = git("commit", "-q", "-m", f"Attach {nid} ({g}): {recs[0]['name']}", "--", rel)
         if r.returncode:
             git("checkout", "--", rel); print("REFUSED: the commit failed: " + (r.stderr or r.stdout).strip()[:300]); return 1
-        h = git("rev-parse", "--short", "HEAD").stdout.strip()
+        if not livedag.active():
+            h = git("rev-parse", "--short", "HEAD").stdout.strip()
     subprocess.run([sys.executable, str(ROOT / "tools" / "claim.py"), "release", g, nid, f"attached by tools/attach.py at {h}: {recs[0]['name']}"], capture_output=True, text=True)
     print(f"ATTACHED {nid} at {h}")
+    # 2026-10-15 (launcher): the queue reads the live DAG; copy the attachment there too (tools/nt_promote_attach.py).
+    pr = subprocess.run([sys.executable, str(ROOT / "tools" / "nt_promote_attach.py"), nid], capture_output=True, text=True)
+    print((pr.stdout + pr.stderr).strip())
     return 0
 
 

@@ -63,21 +63,27 @@ def sccs(graph: dict[str, list[str]]) -> list[list[str]]:
 
 def main() -> int:
     show = "--cycles" in sys.argv
+    warn = "--warnings" in sys.argv   # the human, 2026-10-18: warnings are not findings (landings ignore them)
     errors: list[str] = []
     seen: dict[str, pathlib.Path] = {}
     files = sorted(dq.nodes_dir().rglob("*.json"))
+    # pfinc 2026-10-17 (cpu): one parse per file; nodes and the blueprint nodes are built exactly as dq.load() and
+    # blueprint_refs.load() build them (same sorted file list, later files override earlier ones)
+    nodes, bp_nodes = {}, {}
     for p in files:
         try:
             d = json.loads(p.read_text())
         except (OSError, json.JSONDecodeError) as e:
             errors.append(f"ids: {p} does not parse: {e}"); continue
+        if isinstance(d, dict) and d.get("id"):
+            bp_nodes[str(d["id"])] = d
         i = dq.field(d, "id") if isinstance(d, dict) else None
         if not i:
             errors.append(f"ids: {p} has no id"); continue
+        nodes[str(i)] = d
         if str(i) in seen:
             errors.append(f"ids: {i} occurs in {seen[str(i)]} and {p}")
         seen[str(i)] = p
-    nodes = dq.load()
     g = dq.Dag(nodes)
 
     for i, d in nodes.items():
@@ -131,16 +137,76 @@ def main() -> int:
     import units as un  # noqa: E402
     errors += un.check(nodes, verbose=False)
     import blueprint_refs as br  # noqa: E402
-    errors += br.errors(br.load()[0])
+    same = dq.nodes_dir().resolve() == br.NODES.resolve()
+    errors += br.errors(bp_nodes if same else br.load()[0])
+    warnings: list[str] = []
+    if warn:
+        # the human, 2026-10-18: a stated node whose statement rests on theorem nodes (see stage2_delivery.theorem_stmt_dep_notes)
+        PFX = ("lem-", "prop-", "thm-", "cor-", "sk-thm-")
+        for i, d in g.live.items():
+            if not dq.has_decl(d) or dq.is_leaf(d):
+                continue
+            hits = []
+            for c in dq.field(d, "stmt_deps") or []:
+                c = g.resolve(str(c)); cd = g.live.get(c)
+                if cd is None or dq.is_leaf(cd):
+                    continue
+                if c.startswith(PFX) or not dq.is_def(cd):
+                    hits.append(c)
+            if hits:
+                warnings.append(f"warn: stmt_deps of {i} name theorem nodes {', '.join(hits)}: a statement should rest on "
+                                "definitions; move the notions into a definition node")
+        for x in warnings:
+            print(x)
     kinds = collections.Counter(e.split(":")[0] for e in errors)
     for e in errors:
         print(e)
     print(f"{len(files)} files, {len(nodes)} nodes, {len(g.merged)} merged, {len(g.targets)} targets, "
           f"{len(g.dist)} reached, {len(g.live) - len(g.dist)} not reached; "
           f"{len(comps)} cycles ({sum(len(c) for c in comps)} nodes), {len(loops)} self-loops; "
-          + ("no errors" if not errors else ", ".join(f"{v} {k}" for k, v in sorted(kinds.items()))))
+          + ("no errors" if not errors else ", ".join(f"{v} {k}" for k, v in sorted(kinds.items())))
+          + (f"; {len(warnings)} warnings (--warnings, not findings)" if warn else ""))
     return 1 if errors else 0
 
 
+def cached_main() -> int:
+    """SHEAF_CHECK_DAG_CACHE (set by the server preflight, 2026-10-17 cpu): one delivery is preflighted twice
+    (preflight_delivery.py and the dag_delta check), ~20-60 s of one core each, 30+ at a time. On a clean tree the
+    output depends only on the commit tree, the live HEAD (live_closed), the arguments and SHEAF_ variables."""
+    import hashlib, io, os, subprocess, contextlib
+    cache = os.environ.get("SHEAF_CHECK_DAG_CACHE")
+    root = pathlib.Path(__file__).resolve().parent.parent
+    def git(*a, cwd=root):
+        r = subprocess.run(["git", *a], cwd=cwd, capture_output=True, text=True)
+        return r.stdout.strip() if r.returncode == 0 else None
+    key = None
+    if cache and git("status", "--porcelain") == "":
+        tree = git("rev-parse", "HEAD^{tree}")
+        import live_closed
+        live = git("rev-parse", "HEAD", cwd=live_closed.LIVE) or ""
+        if tree:
+            env = sorted((k, v.replace(str(root), "<ROOT>")) for k, v in os.environ.items() if k.startswith("SHEAF_") and k != "SHEAF_CHECK_DAG_CACHE")
+            raw = json.dumps([tree, live, sys.argv[1:], env])
+            key = hashlib.sha1(raw.encode()).hexdigest()
+            f = pathlib.Path(cache) / key
+            try:
+                rc, out = f.read_text().split("\n", 1)
+                sys.stdout.write(out.replace("\0ROOT\0", str(root))); return int(rc)
+            except (OSError, ValueError):
+                pass
+    if not key:
+        return main()
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = main()
+    sys.stdout.write(buf.getvalue())
+    try:
+        d = pathlib.Path(cache); d.mkdir(parents=True, exist_ok=True)
+        t = d / f"{key}.{os.getpid()}.tmp"; t.write_text(f"{rc}\n" + buf.getvalue().replace(str(root), "\0ROOT\0")); t.replace(d / key)
+    except OSError:
+        pass
+    return rc
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(cached_main())

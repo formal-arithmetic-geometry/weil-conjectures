@@ -2,7 +2,7 @@
 """Mechanical part of the lead's review of a stage-1 delivery (stages/1-dag.md §2, coord/brief-stage1.md).
 
 Usage:
-  tools/review_split.py <item id> [<item id> ...]     check each item and the nodes created for it; exit 1 if anything fails
+  tools/review_split.py [--stage2] <item id> [<item id> ...]     check each item and the nodes created for it; exit 1 if anything fails
 
 Checked, for the item: status is `split`; a statement has a proof in steps, each with text, `uses` and `elementary`
 true/false, and `proof_deps` is exactly the union of the steps' `uses`; a definition has `stmt_deps`; every id cited exists
@@ -42,11 +42,34 @@ def check_ids(d, nodes, merged, where, errs):
             errs.append(f"{where}: cites {c}, merged into {merged[c]}")
 
 
-def main() -> int:
-    nodes = dq.load(); g = dq.Dag(nodes)
-    files = {p.stem: p for p in dq.nodes_dir().rglob("*.json")}
+def main(nodes=None, files=None, items=None) -> int:
+    supplied = nodes is not None
+    import blueprint_refs as br
+    import units as un
+    bnodes = None
+    if nodes is None:
+        # pfinc 2026-10-17 (cpu): one parse of the 18k node files for both dq.load() and blueprint_refs.load(), built
+        # exactly as they build them (same sorted file list, later files override earlier ones)
+        nodes, bp = {}, {}
+        for p in sorted(dq.nodes_dir().rglob("*.json")):
+            try:
+                d = json.loads(p.read_text())
+            except (OSError, json.JSONDecodeError):
+                continue
+            if isinstance(d, dict) and dq.field(d, "id"):
+                nodes[str(dq.field(d, "id"))] = d
+            if isinstance(d, dict) and d.get("id"):
+                bp[str(d["id"])] = d
+        if dq.nodes_dir().resolve() == br.NODES.resolve():
+            bnodes = bp
+    g = dq.Dag(nodes)
+    files = files if files is not None else {p.stem: p for p in dq.nodes_dir().rglob("*.json")}
+    if bnodes is None:
+        bnodes = nodes if supplied else br.load()[0]
+    units_, _ = un.load_units()
+    stage2 = supplied or "--stage2" in sys.argv[1:]
     bad = 0
-    for item in sys.argv[1:]:
+    for item in (items if items is not None else (x for x in sys.argv[1:] if x != "--stage2")):
         errs, notes = [], []
         d = nodes.get(item)
         if d is None:
@@ -87,8 +110,7 @@ def main() -> int:
                 notes.append("proof written by an agent")
         check_ids(d, nodes, g.merged, item, errs)
         # the unit route (stages/1-dag.md §7): proof dependencies on statements stay inside the unit's route
-        import units as un
-        units_, _ = un.load_units(); u = d.get("unit")
+        u = d.get("unit")
         if u and u in units_ and not dq.is_def(d) and (units_[u].get("uses") or units_[u].get("steps")):
             allowed = un.closure(units_, u)
             for c in dq.deps_of(d, "proof"):
@@ -99,7 +121,7 @@ def main() -> int:
                     declared = {t.get("node") for t in ((d.get("split_report") or {}).get("tool_uses") or []) if isinstance(t, dict)}
                     if c in declared:        # declared by the worker in split_report.tool_uses (decision of the human, 2026-10-10 evening); the reviewer judges it, the merge copies it into tool_uses
                         notes.append(f"tool use declared: {c}"); continue
-                    errs.append(f"route: proof uses {c} of unit {cn.get('unit')}, which {u} does not cite (a departure from the unit's route needs an established error, SETUP.md)")
+                    notes.append(f"route: proof uses {c} of unit {cn.get('unit')}, which {u} does not cite (recorded, not refused: the human, 2026-10-16)")
         if u and u in units_:
             r = units_[u].get("realized") or {}
             if item in (r.get("statement") or []) or any(item in st for st in (r.get("steps") or [])):
@@ -116,7 +138,13 @@ def main() -> int:
                         errs.append(f"{k} changed from the committed version")
             if hv.get("statement") != d.get("statement"):
                 notes.append("statement changed")
-        new = [i for i, n in nodes.items() if (n.get("created") or {}).get("item") == item]
+        # The four maintainer-seeded declaration targets are not children added by a worker split.
+        cfg = ROOT / "coord" / "newtargets.json"
+        scaffold = set(json.loads(cfg.read_text()).get("targets", [])) if cfg.exists() else set()
+        new = [i for i, n in nodes.items() if (n.get("created") or {}).get("item") == item and i not in scaffold]
+        # launcher, 2026-10-16: a returned split keeps the children its first delivery created; those are committed
+        # nodes (reviewed then), not new nodes of the repair, and must not be refused for their status
+        new = [i for i in new if (head_version(files[i]) or {}).get("created", {}).get("item") != item]
         for i in new:
             n = nodes[i]
             if files[i].stem != i:
@@ -133,14 +161,29 @@ def main() -> int:
             st = str(n.get("status"))
             if st == "mathlib" and not n.get("mathlib_match"):
                 errs.append(f"new node {i}: status mathlib without a match")
-            if st not in ("mathlib", "unsplit"):
+            # Stage-2 extra nodes are checked definition nodes with status split,
+            # as required by stage2_delivery.check_new_node. Stage 1 stays strict.
+            stated_definition = (stage2 and n.get("kind") == "definition"
+                                 and isinstance(n.get("lean"), dict)
+                                 and isinstance(n.get("reviewed_lean"), dict))
+            if st not in ("mathlib", "unsplit") and not (st == "split" and stated_definition):
                 errs.append(f"new node {i}: status {st!r}")
             if st == "unsplit" and n.get("mathlib_match"):
                 errs.append(f"new node {i}: has a match but is unsplit")
             check_ids(n, nodes, g.merged, f"new node {i}", errs)
+        # route lock (the human and the project's expert, 2026-10-16): no SGA source except SGA 5 (Lefschetz-Verdier pairing)
+        import re as _re
+        def _sga(n):
+            src = n.get("source") or ""
+            if "literature/blueprint/" in json.dumps(src): src = ""   # a blueprint nodes own external references are the blueprints
+            parts = [json.dumps(src, ensure_ascii=False)]
+            parts += [json.dumps((st.get("source") if isinstance(st, dict) else "") or "", ensure_ascii=False) for st in (n.get("proof") or [])]
+            return [m.group(0) for t in parts for m in _re.finditer(r"literature/sga/SGA4[^\"]*|SGA ?4(?: ?1/2|\u00bd)?(?! ?\d)", t)]
+        for nid in [item, *new]:
+            hits = _sga(nodes[nid]) if nid in nodes else []
+            if hits:
+                errs.append(f"route lock: {nid} cites {sorted(set(hits))[:3]}; no SGA source except SGA 5 (coord/brief-stage1.md, 2026-10-16)")
         # blueprint references (stages/1-dag.md §6)
-        import blueprint_refs as br
-        bnodes, _ = br.load()
         strict = {item, *new}
         errs += [e for e in br.errors(bnodes, strict) if any(e.startswith(f"blueprint: {k} ") or e.startswith(f"blueprint: {k}:") for k in strict)]
         anc = br.ancestor_for_item(item, bnodes)

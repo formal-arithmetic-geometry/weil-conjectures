@@ -127,6 +127,15 @@ def main_stage2(g, item) -> int:
         l = n.get("lean") if isinstance(n.get("lean"), dict) else None
         lean = (f"convention node, no Lean notion (L): {l.get('note')}" if l and l.get("convention") else (f"`{l.get('module')}` / `{l.get('declaration')}`" + (f"\n  - statement: `{l.get('statement')}`" if l.get("statement") else "")
                 + (f"\n  - branch {l.get('branch')}" if l.get("branch") else "")) if l else "**no Lean declaration recorded**")
+        if not l:
+            # 2026-10-18: a dependency finished through the upstream audit has no `lean` record, but its declarations exist
+            # in slopmaster2 (which live imports verbatim): the audit record's decls name them, so the worker can cite them
+            import dag_queue as dq
+            if dq.audit_state(n) in dq.DONE_STATES:
+                decls = [x for x in ((n.get("lean_audit") or {}).get(dq.done_branch()) or {}).get("decls") or [] if isinstance(x, dict)]
+                lean = (f"**no `lean` record, but finished upstream (lean_audit {dq.done_branch()}: closed): its declarations in the "
+                        f"slopmaster2 source, cite these**" + "".join(f"\n  - `{x.get('name')}` ({x.get('kind')}) in `{x.get('module')}`"
+                        + (f" lines {x['lines'][0]}-{x['lines'][-1]}" if isinstance(x.get("lines"), list) and x["lines"] else "") for x in decls))
         if u in deps:
             lean += "\n  - **the delivery replaces this record by a dependency module: see section 8**"
         w(f"- **[{u}]** ({n.get('kind')}): {n.get('statement')}\n  - lean: {lean}\n")

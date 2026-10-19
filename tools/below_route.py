@@ -31,7 +31,7 @@ from __future__ import annotations
 import collections, json, os, pathlib, re, sys
 
 R = pathlib.Path(__file__).resolve().parent.parent
-NEWTARGETS = pathlib.Path(os.environ.get("SHEAF_NEWTARGETS", "/home/ubuntu/weil-newtargets"))
+NEWTARGETS = pathlib.Path(os.environ.get("SHEAF_NEWTARGETS") or R)   # 2026-10-19: one repository (~/weil-newtargets retired)
 REACH = R / "local" / "stage3-reach.json"
 
 
@@ -55,7 +55,7 @@ def batch_nodes(batches=None, newtargets: pathlib.Path = NEWTARGETS) -> dict[str
     batches = list(batches) if batches is not None else open_batches()
     out, missing = {}, []
     for b in batches:
-        nodes = set(_lines(newtargets / "coord" / f"{b}-targets.txt"))
+        nodes = set(_lines(newtargets / "coord" / f"nodes-{b}-targets.txt"))   # node ids; coord/batchN-targets.txt are modules
         if nodes:
             out[b] = nodes
         else:

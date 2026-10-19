@@ -178,6 +178,10 @@ def main() -> int:
     if dag_queue.nodes_dir().is_dir():
         g = dag_queue.Dag(dag_queue.load())
         s1 = g.stage1(); s2, why = g.stage2(); waiting = g.waiting()
+        # retirement of ~/weil-newtargets (2026-10-19): the stage-2 dependency waits of tools/nt_stage2.py put the missing
+        # prerequisites first (no dispatch restriction; the human, 2026-10-16)
+        import nt_stage2
+        s2, why = nt_stage2.eligible(g, s2, why)
         if dist:
             below, route_t = below_route_reach(g)
     items3, held = stage3(imports, dist, {m for m, _ in waiting}, below)

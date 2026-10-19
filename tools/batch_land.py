@@ -667,6 +667,9 @@ def land_one(plan: dict, batch_id: str) -> dict:
         if claim_text is not None and md.exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
             paths.append(claim.relative_to(ROOT).as_posix())
         author = md.git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
+        note = ROOT / "coord" / "repair-notes" / (item + ".json")
+        if note.exists() and md.git("status", "--porcelain", "--", note.relative_to(ROOT).as_posix()).strip():
+            paths.append(note.relative_to(ROOT).as_posix())
         md.git_retry("add", "-A", "--", *paths)
         md.git_retry("commit", "-q", f"--author={author}", "-m",
                      f"Prove {item} ({g}, reviewed by {reviewer})\n\nDelivered by group {g} ({br}); landing "

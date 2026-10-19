@@ -112,7 +112,7 @@ def branches():
     out = []
     for l in git("for-each-ref", "--format=%(refname:short)", "refs/heads/deliver").split("\n"):
         p = l.split("/")
-        if len(p) == 3: out.append((p[1], p[2]))
+        if len(p) == 3 and "." in p[2]: out.append((p[1], p[2]))   # 2026-10-19: node ids are stage-1/2 deliveries
     return out
 def classify_job(job):
     g, item, head = job
@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 save({**cache, **new})
         for line in refs.splitlines():
             branch, hd = line.split(); parts = branch.split("/")
-            if len(parts) != 3:
+            if len(parts) != 3 or "." not in parts[2]:   # 2026-10-19: node-id branches are stage-1/2 deliveries
                 continue
             _, g, i = parts; e = cache.get(f"{g}/{i}")
             if e and len(e) >= 5 and e[4] == CACHE_POLICY and e[0] == hd and now - e[3] < 1200:

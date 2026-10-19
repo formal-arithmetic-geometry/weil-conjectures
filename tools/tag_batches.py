@@ -46,13 +46,37 @@ def reach(n):
 
 ns = sorted(int(m.group(1)) for p in (R / "coord").glob("batch*-targets.txt") if (m := re.fullmatch(r"batch(\d+)-targets\.txt", p.name)))
 rs = [(f"batch{n}", reach(n)) for n in ns]
+# Stages 1 and 2 (node ids; retirement of ~/weil-newtargets, 2026-10-19, its tools/tag_batches.py): an item reached from a
+# batch-2 target node (coord/new-targets.txt minus coord/nodes-batch3/4/5-targets.txt) is batch2; reached only from the
+# batch-3 target nodes batch3; only from batch-4 nodes batch4; only from batch-5 nodes (and no batch-2/3/4 node) batch5;
+# reached by none: batch3. A batch's closure does not enter the nodes it assumes (coord/assumed.tsv).
+import dag_queue as dq
+_read = lambda f: [l.split()[0] for l in (R / f).read_text().splitlines() if l.strip() and not l.startswith("#")] if (R / f).exists() else []
+_b3 = set(_read("coord/nodes-batch3-targets.txt")); _b4 = set(_read("coord/nodes-batch4-targets.txt")); _b5 = set(_read("coord/nodes-batch5-targets.txt"))
+_b2 = [t for t in _read("coord/new-targets.txt") if t not in _b3 | _b4 | _b5]
+_g = dq.Dag(dq.load())
+_reach2 = set(_g.batch_reach("batch2", set(_b2) & set(_g.live)))
+_reach3 = set(_g.batch_reach("batch3", _b3 & set(_g.live)))
+_full4 = set(_g.batch_reach("batch4", _b4 & set(_g.live))); _reach4 = _full4 - _reach3
+_full5 = set(_g.batch_reach("batch5", _b5 & set(_g.live))); _reach5 = _full5 - _reach3 - _full4
+_nfull = {"batch2": _reach2, "batch3": _reach3, "batch4": _full4, "batch5": _full5}
+
+
+def node_tag(i):
+    return "batch2" if i in _reach2 else "batch4" if i in _reach4 else "batch5" if i in _reach5 else "batch3"
+
+
+def node_tags_all(i):
+    return ",".join(b for b in ("batch2", "batch3", "batch4", "batch5") if i in _nfull[b])
+
+
 rows = []; allrows = []
 for l in (R / "coord/queue.tsv").read_text().splitlines():
     r = l.split("\t")
     if l.startswith("#") or len(r) < 2: continue
-    b = "untagged" if r[1] != "3" else next((name for name, s in rs if r[0] in s), "unneeded")
+    b = node_tag(r[0]) if r[1] != "3" else next((name for name, s in rs if r[0] in s), "unneeded")
     rows.append(f"{r[0]}\t{b}")
-    allb = ",".join(name for name, s in rs if r[0] in s) if r[1] == "3" else ""
+    allb = ",".join(name for name, s in rs if r[0] in s) if r[1] == "3" else node_tags_all(r[0])
     allrows.append(f"{r[0]}\t{allb or b}")
 tmp = R / "coord/.queue-batches.tsv"; tmp.write_text("# item\tbatch\n" + "\n".join(rows) + "\n"); tmp.replace(R / "coord/queue-batches.tsv")
 tmp = R / "coord/.queue-batches-all.tsv"; tmp.write_text("# item\tbatches (every open batch whose sorry route has the item or whose route sorry it lies below; queue-batches.tsv has the dispatch tag)\n" + "\n".join(allrows) + "\n"); tmp.replace(R / "coord/queue-batches-all.tsv")

@@ -16,10 +16,34 @@ LEAN = (ROOT / "lean").resolve()
 COMMENT_KINDS = ("line", "block", "doc", "moddoc")
 
 
+_CONFIG_CACHE: dict = {}
+
+
 def config() -> dict[str, str]:
+    # 2026-10-17 (cpu): dag_queue calls this once per node per check (68k calls, ~27 s of a 57 s check_dag run on
+    # every preflight); memoized on the files' mtimes and the SHEAF_ environment, so edits are still picked up.
+    import socket, time
+    raw = getattr(os.environ, "_data", None)   # bytes view: no per-key decode (os.environ.items() cost ~2 s per run)
+    env_key = (tuple(sorted((k, v) for k, v in raw.items() if k[:6] == b"SHEAF_")) if isinstance(raw, dict)
+               else tuple(sorted((k, v) for k, v in os.environ.items() if k.startswith("SHEAF_"))))
+    hit = _CONFIG_CACHE.get("v")
+    now = time.monotonic()
+    if hit and hit[3] == env_key and now - hit[2] < 2.0:   # files re-stat'ed at most every 2 s; env compared every call
+        return dict(hit[1])
+    paths = (ROOT / "coord" / "sheaf.env", ROOT / "coord" / "machines" / f"{socket.gethostname()}.env")
+    stamp = []
+    for p in paths:
+        try:
+            st = p.stat(); stamp.append((st.st_mtime_ns, st.st_size))
+        except OSError:
+            stamp.append(None)
+    env = tuple(sorted((k, v) for k, v in os.environ.items() if k.startswith("SHEAF_")))
+    key = (tuple(stamp), env)
+    if hit and hit[0] == key:
+        _CONFIG_CACHE["v"] = (key, hit[1], now, env_key)
+        return dict(hit[1])
     cfg = {}
-    import socket
-    for p in (ROOT / "coord" / "sheaf.env", ROOT / "coord" / "machines" / f"{socket.gethostname()}.env"):
+    for p in paths:
         if not p.exists():
             continue
         for line in p.read_text().splitlines():
@@ -27,7 +51,8 @@ def config() -> dict[str, str]:
             if "=" in line:
                 k, v = line.split("=", 1)
                 cfg[k.strip()] = " ".join(shlex.split(v))
-    cfg.update({k: v for k, v in os.environ.items() if k.startswith("SHEAF_")})
+    cfg.update(dict(env))
+    _CONFIG_CACHE["v"] = (key, dict(cfg), now, env_key)
     return cfg
 
 

@@ -18,8 +18,8 @@ and, by the rule STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UT
   (A) NEW DEFINITION NODES dag/nodes/<chapter of the item>/<id>.json, absent on the base, with the fields of
       check_new_node (kind definition, status split, created.item = the item, created.group = G, ...), each with its
       own module and `lean` record (or `existing: true` and no module), cited by the item;
-  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base (or added to them by the item's statement
-      correction), its node file changed only in `lean` (the module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
+  (B) DEPENDENCY MODULES: for a node in the item's statement/proof prerequisite closure on the base or as delivered,
+      its node file changed only in `lean` (the module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
       module.
 Every module is the lean.file of exactly one of these nodes; a module may import a sibling module of the delivery
 (compile_modules defers it until the sibling is in the library; the merge lands the modules in dependency order).
@@ -39,6 +39,7 @@ from node_fields import (changed_fields_except, STAGE2_OWNS, STAGE2_ITEM_ALSO, S
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SOURCE = pathlib.Path(os.environ.get("SHEAF_SOURCE_REPO", str(pathlib.Path.home() / "weil-conjectures-slopmaster2")))
+LIVE = pathlib.Path(os.environ.get("SHEAF_LIVE_LEAN", str(ROOT.parent / "weil-conjectures-sheaf/lean"))).resolve()
 KEYS = ("module", "declaration", "statement", "branch", "by", "date", "existing")
 OPTIONAL = ("declarations", "file", "fixed_by", "note")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -315,12 +316,18 @@ def upstream_has(name: str) -> str | None:
 
 
 def existing_file(module: str) -> pathlib.Path | None:
+    """Resolve the same published sources used by nt_compile, then side-only sources."""
     rel = module.replace(".", "/") + ".lean"
     if module.startswith("Mathlib."):
-        return SOURCE / ".lake" / "packages" / "mathlib" / rel
-    if module.startswith("WeilConjectures."):
-        return SOURCE / rel
-    return None
+        candidates = [LIVE / ".lake/packages/mathlib" / rel,
+                      SOURCE / ".lake/packages/mathlib" / rel]
+    elif module.startswith("WeilConjectures."):
+        candidates = [LIVE / rel, ROOT / "lean" / rel, SOURCE / rel]
+    elif module.startswith("Sheaf."):
+        candidates = [LIVE / rel]
+    else:
+        return None
+    return next((p for p in candidates if p.is_file()), None)
 
 
 def check_existing(rec: dict, git: "Git | None" = None, base: str | None = None) -> tuple[list[tuple[str, str]], list[str]]:
@@ -340,15 +347,16 @@ def check_existing(rec: dict, git: "Git | None" = None, base: str | None = None)
             fails.append(("d", f"declaration {decl}: names carry no `Sheaf.` prefix (only the module path is Sheaf.<...>)"))
         rel = "lean/" + mod.replace(".", "/") + ".lean"
         text = (git or Git(ROOT)).show(base or "HEAD", rel)
-        if text is None:
-            fails.append(("d", f"lean.module {mod}: no file {rel} on {(base or 'HEAD')[:10]} (an existing project declaration is landed on sheaf-dag)"))
-            return fails, notes
         p = pathlib.Path(rel)
+        if text is None:
+            p = existing_file(mod)
+            if p is None:
+                fails.append(("d", f"lean.module {mod}: absent from {(base or 'HEAD')[:10]} and the live published sources"))
+                return fails, notes
+            text = p.read_text(errors="ignore")
+            notes.append(f"existing declaration: {mod} resolved in the live published library")
     else:
         p = existing_file(mod)
-        if not SOURCE.is_dir():
-            notes.append(f"existing declaration: not checked here (no source checkout {SOURCE}; set SHEAF_SOURCE_REPO)")
-            return fails, notes
         if p is None or not p.exists():
             fails.append(("d", f"lean.module {mod}: no file {p}"))
             return fails, notes
@@ -595,6 +603,32 @@ def module_path(rec: dict) -> str | None:
     return "lean/" + m.replace(".", "/") + ".lean" if isinstance(m, str) and m else None
 
 
+
+def check_invalidated_binding(git: Git, base: str, nid: str, rec: dict) -> list[tuple[str, str]]:
+    """2026-10-16: an alias of a withdrawn interface cannot discharge its repair.
+
+    Read the repair obligation from the immutable base, like the node records.
+    New modules and existing interfaces with newly published declarations still
+    receive the normal statement review; this only rejects the known stale alias.
+    """
+    if rec.get("existing") is not True:
+        return []
+    raw = git.show(base, f"coord/repair-notes/{nid}.json")
+    if raw is None:
+        return []
+    note = json.loads(raw)
+    old = note.get("invalidated_lean")
+    if note.get("stage") != "2" or note.get("state") != "released" or not isinstance(old, dict):
+        return []
+    names = {rec.get("declaration")} | set(rec.get("declarations") or [])
+    old_names = {old.get("declaration")} | set(old.get("declarations") or [])
+    if rec.get("module") == old.get("module") and names <= old_names:
+        return [("d", f"{nid}: existing alias repeats a maintenance-invalidated interface; "
+                 f"read coord/repair-notes/{nid}.json and repair the recorded defect: "
+                 + str(note.get("reason") or "missing canonical interface"))]
+    return []
+
+
 def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1,
                   overrides: dict | None = None, drop=(), revert=(), drop_files=(), revert_statement: bool = False) -> dict:
     """Checks (a), (b), (c) without the compile, (d), (e) of the delivery `ref` against `base`.
@@ -706,7 +740,49 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     # (T-depcorr 2026-10-11, after lem-pc-derived-adjoint-functors): stmt_deps of the corrected node (or a fixed one)
     corr_deps = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str) and x not in base_deps] \
         if base_text is not None and correction_fields(bnode, node) else []
+    # A gained landed dependency is already permitted below; its stale lean record
+    # may be repaired in the same delivery just like an original stmt_dep.
+    gained_landed_deps = []
+    for nid in node.get("stmt_deps") or []:
+        if nid in base_deps or nid not in base_paths:
+            continue
+        bd = json.loads(git.show(base, base_paths[nid]) or "{}")
+        r = bd.get("lean") or {}
+        if (isinstance(r, dict) and (r.get("module") or r.get("convention"))) or bd.get("status") in ("mathlib", "merged"):
+            gained_landed_deps.append(nid)
     # classify the other node files: new definition nodes and dependency nodes
+    _closure = {}
+    def _dep_closure():
+        """2026-10-16 (the human: nothing waits): a worker states missing prerequisites in the same delivery, which may be
+        dependencies of dependencies. Start with BOTH dependency fields of the item, on the base and as delivered:
+        the item may itself need an inherited structure recorded only in proof_deps, or cite an existing unstated
+        prerequisite it supplies in this delivery. Dependency nodes still change only in lean, checked below."""
+        if "c" in _closure: return _closure["c"]
+        roots = {x for dn in (bnode, node) for field in ("stmt_deps", "proof_deps")
+                 for x in (dn.get(field) or [])}
+        seen, todo = set(), list(roots)
+        # A truncated closure silently refuses valid prerequisites. The finite
+        # input trees and seen set bound traversal, including dependency cycles.
+        while todo:
+            x = todo.pop()
+            if x in seen: continue
+            seen.add(x)
+            for src in ((ref, f"dag/nodes/{pathlib.PurePosixPath(p).parent.name}/{x}.json") for _, p in node_files if pathlib.PurePosixPath(p).stem == x):
+                try: dn = json.loads(git.show(*src) or "{}")
+                except Exception: dn = {}
+                for field in ("stmt_deps", "proof_deps"):
+                    todo.extend(str(c) for c in (dn.get(field) or []))
+            if x in base_paths:
+                try: dn = json.loads(git.show(base, base_paths[x]) or "{}")
+                except Exception: dn = {}
+                # A statement dependency can require an inherited structure that
+                # is recorded only in its proof_deps.  Stage 2 explicitly permits
+                # supplying such a prerequisite in the same delivery, so the
+                # admissible closure follows both dependency fields.
+                for field in ("stmt_deps", "proof_deps"):
+                    todo.extend(str(c) for c in (dn.get(field) or []))
+        _closure["c"] = seen
+        return seen
     drop = set(drop or ())
     revert = set(revert or ())
     if item in revert:
@@ -748,10 +824,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if nid in base_paths:
             if base_paths[nid] != p:
                 f("b", f"{p}: the node {nid} is {base_paths[nid]} on the base"); continue
-            if nid not in base_deps and nid not in corr_deps:
-                f("b", f"{p}: the node {nid} exists on the base and is not in the item's stmt_deps there nor in those of "
-                       "its statement correction: a delivery changes only the item, new definition nodes and dependency "
-                       "nodes of the item")
+            if nid not in base_deps and nid not in corr_deps and nid not in gained_landed_deps and nid not in _dep_closure():
+                f("b", f"{p}: the node {nid} exists on the base and is not in the item's statement/proof prerequisite "
+                       "closure on the base or as delivered: a delivery changes only the item, new definition nodes "
+                       "and dependency nodes of the item")
                 continue
             bd = json.loads(git.show(base, p) or "{}")
             D["deps"][nid] = {"path": p, "node": nd, "base_node": bd}
@@ -876,12 +952,15 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             except ValueError:
                 bn = {}
             r = bn.get("lean")
+            import dag_queue   # 2026-10-18: a node finished upstream (audit closed on the done branch) is stated too (Dag.stated)
             if isinstance(r, dict) and (r.get("module") or r.get("existing") is True or r.get("convention")) \
-                    or bn.get("status") in ("mathlib", "merged"):
+                    or bn.get("status") in ("mathlib", "merged") or dag_queue.closed_upstream(bn):
                 landed.append(x)
         if landed:
             D["notes"].append(f"the item's stmt_deps gained the landed node(s) {', '.join(landed)} (STMT_DEPS MAY GAIN LANDED NODES)")
-        bad = [x for x in added if x not in new_ids and x not in landed]
+        # 2026-10-16 (the human: nothing waits): a node this delivery states itself (its node file changed in `lean`) may
+        # be added too; the worker states missing prerequisites in the same delivery
+        bad = [x for x in added if x not in new_ids and x not in landed and x not in D.get("deps", {})]
         if bad:
             f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are neither new nodes of the delivery nor nodes landed "
                    "on the base with a lean record (only those may be added, or a statement correction with statement_change)")
@@ -927,9 +1006,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         r = nd.get("lean")
         fails.extend(check_record(r, group, f"dependency node {nid}"))
         if isinstance(r, dict):
-            if r.get("existing") is not False and not (r.get("existing") is True and str(r.get("module") or "").startswith("Sheaf.")):
-                f("b", f"dependency node {nid}: lean.existing must be false (a dependency module states the notion), or true "
-                       "with branch sheaf-dag and module Sheaf.<...> (a declaration another node of this project already landed)")
+            if r.get("existing") is not False and not (r.get("existing") is True and str(r.get("module") or "").startswith(IMPORT_OK)):
+                f("b", f"dependency node {nid}: use a new dependency module or an existing Mathlib, upstream, or landed project declaration")
             if not str(r.get("note") or "").strip():
                 f("b", f"dependency node {nid}: lean.note missing: why the recorded declaration or mathlib_match is unusable "
                        "and what the module states")
@@ -964,6 +1042,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if not isinstance(r, dict):
             continue
         who = "the item" if role == "item" else f"{role} node {nid}"
+        fails.extend(check_invalidated_binding(git, base, nid, r))
         if r.get("existing") is True:
             if role == "item" and lean_files and not D["new"] and not D["deps"]:
                 f("d", f"lean.existing is true but the commit has Lean file(s) {', '.join(lean_files)}")
@@ -1003,6 +1082,21 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["notes"].append(f"{m['file']} ({m['node']}): imports {i}, the landed module of that name on sheaf-dag "
                               "(the delivery's copy is left out)")
         bad = [i for i in bad if i not in landed]
+        # 2026-10-16 (launcher): a reverted dependency (another delivery landed it meanwhile, possibly in a module of
+        # another name): the import is pointed at the module the landed record names; the landing compile checks it
+        remap = {}
+        for nid, x in (D.get("reverted") or {}).items():
+            try:
+                cur = json.loads(git.show("sheaf-dag", tip_paths[nid]) or "{}") if nid in tip_paths else {}
+            except Exception:
+                cur = {}
+            r = cur.get("lean") if isinstance(cur, dict) else None
+            if x.get("module") and isinstance(r, dict) and r.get("module"):
+                remap[x["module"]] = r["module"]
+        for i in [i for i in bad if i in remap]:
+            m["text"] = re.sub(rf"^((?:public\s+)?import\s+){re.escape(i)}\s*$", lambda mo: mo.group(1) + remap[i], m["text"], flags=re.M)
+            D["notes"].append(f"{m['file']} ({m['node']}): import {i} pointed at the landed module {remap[i]}")
+        bad = [i for i in bad if i not in remap]
         if bad:
             f("c", f"{m['file']} ({m['node']}): imports the dropped/reverted module(s) {', '.join(bad)} (fix it to "
                    "import the landed declaration's module)")
@@ -1065,11 +1159,74 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         for nid in sorted(reach):
             if item in (D["new"][nid]["node"].get("stmt_deps") or []) + (D["new"][nid]["node"].get("proof_deps") or []):
                 f("b", f"--revert-statement: the new node {nid} cites the item, which cites it: a cycle in the DAG")
+    fails.extend(route_pivot_fails(git, base, item, D, mods))
+    D["notes"].extend(theorem_stmt_dep_notes(git, base, item, D))
     # (e) the report
     rt = show(report)
     D["report"] = rt
     fails.extend(check_report(rt, group, report, list(D["new"]), list(D["deps"]), D["corrected"], D["citers"]))
     return D
+
+
+
+def route_pivot_fails(git: "Git", base: str, item: str, D: dict, mods: list) -> list[tuple[str, str]]:
+    """Route pivot (the human, 2026-10-18): a statement may not rest on, and a module may not import the module of, a
+    node listed in coord/route-pivot-dropped.txt on sheaf-dag (the dropped infinity/dg/model machinery and the
+    Zariski-gluing branch). Called by read_delivery, hence by merge_delivery --stage 2, nt_preflight2 and the parallel
+    stage-2 landing (nt_land2 --prepare-archive -> nt_parallel2.prepare -> merge_delivery.cmd_merge2)."""
+    out = []
+    rp = git.show("sheaf-dag", "coord/route-pivot-dropped.txt") or ""
+    drop = {l.split()[0] for l in rp.splitlines() if l.strip() and not l.startswith("#")}
+    if not drop:
+        return out
+    for nid, nd in [(item, D.get("node") or {})] + [(k, (v or {}).get("node") or {}) for k, v in (D.get("new") or {}).items()]:
+        hit = sorted(set(nd.get("stmt_deps") or []) & drop)
+        if hit:
+            out.append(("b", f"{nid}: stmt_deps name route-pivot dropped node(s) {', '.join(hit)} "
+                             "(coord/route-pivot-dropped.txt): state it without them"))
+    owner = {}
+    for nid, nd in nodes_at(git, base).items():
+        l = nd.get("lean") if isinstance(nd, dict) else None
+        if nid in drop and isinstance(l, dict) and l.get("module"):
+            owner[l["module"]] = nid
+    for m in mods:
+        hit = sorted(i for i in imports(m["text"]) if i in owner)
+        if hit:
+            out.append(("c", f"{m['file']} ({m['node']}): imports module(s) of route-pivot dropped nodes: "
+                             + ", ".join(f"{i} ({owner[i]})" for i in hit) + " (coord/route-pivot-dropped.txt)"))
+    return out
+
+
+
+THEOREM_PREFIX = ("lem-", "prop-", "thm-", "cor-", "sk-thm-")
+
+
+def theorem_stmt_dep_notes(git: "Git", base: str, item: str, D: dict) -> list[str]:
+    """The human, 2026-10-18: a stage-2 delivery that ADDS to the item's stmt_deps a theorem node (lem-/prop-/thm-/cor-/
+    sk-thm-, or a node whose kind is not a definition) gets a FULL-review finding, not a refusal: a statement should rest
+    on definitions; when the Lean statement only uses definitions that live in the lemma's module, those notions belong
+    in a definition node of their own (as def-coef-small-dg-category and def-pur-integral-compact-support-coefficient-data).
+    Only for an item with a lean record (every stage-2 item). Returned as notes; review_class already classes a changed
+    stmt_deps as FULL, and the cc review prompt (weil-review-svc/svc.py prep_s2) repeats the finding."""
+    node = D.get("node") or {}
+    rec = D.get("rec") if isinstance(D.get("rec"), dict) else (node.get("lean") if isinstance(node.get("lean"), dict) else None)
+    if not rec or not (rec.get("module") or rec.get("convention")):
+        return []
+    base_deps = set((D.get("base_node") or {}).get("stmt_deps") or [])
+    added = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str) and x not in base_deps]
+    if not added:
+        return []
+    nb = nodes_at(git, base)
+    hits = []
+    for x in added:
+        d = nb.get(x) or ((D.get("new") or {}).get(x) or {}).get("node") or {}
+        kind = str(d.get("kind") or "").lower()
+        if x.startswith(THEOREM_PREFIX) or (d and kind not in ("def", "definition", "stmt", "notion", "structure")):
+            hits.append(x)
+    if not hits:
+        return []
+    return [f"stmt_deps of {item} name theorem nodes {', '.join(hits)}: a statement should rest on definitions; move the "
+            "notions into a definition node"]
 
 
 def check_report(rt: str | None, group: str, where: str, new_ids=(), dep_ids=(), corrected: bool = False,
@@ -1164,6 +1321,10 @@ def can_compile(root: pathlib.Path) -> str | None:
     lean = root / "lean"
     if not (lean / "lakefile.toml").exists() or not (root / "tools" / "lean_file.sh").exists():
         return "no lean/ project"
+    # 2026-10-15: side-project compiler reads live artifacts, needs no side build.
+    if (root / "tools/nt_compile.py").exists():
+        live = root.parent / "weil-conjectures-sheaf/lean/.lake/build/lib/lean"
+        return None if live.is_dir() else "no live published library on this machine"
     if not shutil.which("lake"):
         return "no lake on PATH"
     m = re.search(r'^packagesDir\s*=\s*"([^"]+)"', (lean / "lakefile.toml").read_text(), re.M)

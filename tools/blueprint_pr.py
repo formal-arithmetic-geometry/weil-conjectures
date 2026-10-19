@@ -15,7 +15,7 @@ import tempfile
 import tomllib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-FORBIDDEN = re.compile(r'(?i)\b(?:delivery|landing|sheaf-dag|stage\s*[123]|blueprint_pr|upstream-bp|[A-Z][123]\s+(?:group|worker))\b|(?:\d{1,3}\.){3}\d{1,3}|-----BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:gh[pousr]_|sk-proj-)[A-Za-z0-9]+')
+FORBIDDEN = re.compile(r'(?i)\b(?:delivery|landing|newtargets-dag|stage\s*[123]|blueprint_pr|upstream-bp|[A-Z][123]\s+(?:group|worker))\b|(?:\d{1,3}\.){3}\d{1,3}|-----BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:gh[pousr]_|sk-proj-)[A-Za-z0-9]+')
 
 
 def load_nodes():
@@ -231,9 +231,9 @@ def clean_provenance(text):
     parts = text.split('+++', 2)
     front = tomllib.loads(parts[1])
     tags = front.get('tags', [])
-    if 'sheaf-dag' not in tags:
+    if 'newtargets-dag' not in tags:
         return text
-    kept = [tag for tag in tags if tag != 'sheaf-dag']
+    kept = [tag for tag in tags if tag != 'newtargets-dag']
     replacement = 'tags = ' + json.dumps(kept, ensure_ascii=False) if kept else ''
     parts[1] = re.sub(r'(?m)^tags\s*=\s*\[[^\]\n]*\]\n?', replacement + ('\n' if replacement else ''), parts[1])
     return '+++'.join(parts)
