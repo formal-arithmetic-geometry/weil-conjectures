@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NC
+Authors: SHEAF groups NC and W5
 -/
 module
 
@@ -9,10 +9,7 @@ public import Sheaf.Paper.IntegralDerivedReduction
 public import Sheaf.Paper.RestrictionOfScalarsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 
 /-!
 # Independence of the augmented integral reduction tower
@@ -29,6 +26,7 @@ K-flat computation isomorphisms. No arbitrary comparison or transition is chosen
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 universe d t u
 
@@ -36,6 +34,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 
 namespace WeilConjectures
+
+-- Avoid unfolding the inverse limit and the constructed maps when identifying interfaces.
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence
+  unrestrictedIntegralReductionExistence integralReductionExistence
+  integralReductionDerivedExistence
+  unrestrictedTowerUnit unrestrictedTowerTransition unrestrictedTowerResolutionIso
+  unrestrictedTowerFiniteComparison unrestrictedTowerComparison
 
 attribute [local instance] integralReductionChangeOfRingsAdditive
 
@@ -70,15 +76,13 @@ attribute [local instance] integralTowerRestrictionColimits
 Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
 noncomputable abbrev integralTowerFiniteComplex (n : ℕ)
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :=
-  ((integralReductionChangeOfRings l E Y D hl n).mapHomologicalComplex
-    (ComplexShape.up ℤ)).obj P
+  unrestrictedTowerFiniteComplex l E Y n P
 
 /-- The same reduction regarded as a complex over the completed coefficient sheaf.
 Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
 noncomputable abbrev integralTowerComplex (n : ℕ)
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :=
-  ((completedIntegralRestrictScalars l E Y D hl n).mapHomologicalComplex
-    (ComplexShape.up ℤ)).obj (integralTowerFiniteComplex l E Y D hl n P)
+  unrestrictedTowerComplex l E Y n P
 
 /-- A pure tensor, followed by sheafification, in the recorded finite reduction.
 Transport uses the object equality in the defining change-of-rings witness.
@@ -106,15 +110,7 @@ noncomputable def integralTowerResolutionIso (n : ℕ)
       (R := completedIntegralCommRingSheaf l E Y D hl) q) :
     (integralDerivedReduction l E Y D hl n).obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Q.obj (integralTowerFiniteComplex l E Y D hl n P) :=
-  (integralDerivedReduction l E Y D hl n).mapIso
-      ((DerivedCategory.quotientCompQhIso _).app K).symm ≪≫
-    integralDerivedReductionResolutionIso l E Y D hl n q hq ≪≫
-    DerivedCategory.Qh.mapIso
-      (((integralReductionChangeOfRings l E Y D hl n).mapHomotopyCategoryFactors
-        (ComplexShape.up ℤ)).app P) ≪≫
-    (DerivedCategory.quotientCompQhIso
-      (SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n))).app
-        (integralTowerFiniteComplex l E Y D hl n P)
+  unrestrictedTowerResolutionIso l E Y n q hq
 
 /-- The finite comparison is defined through the common derived reduction of K.
 Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
@@ -173,6 +169,40 @@ def integralTowerTransitionCondition
       integralTowerTensorSection l E Y D hl n (P.X i) U
         ((integralCoefficientSheafTransition l E Y n).hom.app U s) x
 
+private theorem integralTowerTensorSection_ext (n : ℕ)
+    (M N : completedIntegralModuleSheaves l E Y D hl)
+    (f g : (completedIntegralRestrictScalars l E Y D hl n).obj
+      ((integralReductionChangeOfRings l E Y D hl n).obj M) ⟶ N)
+    (h : ∀ U s x,
+      f.val.app U (integralTowerTensorSection l E Y D hl n M U s x) =
+        g.val.app U (integralTowerTensorSection l E Y D hl n M U s x)) : f = g := by
+  let e := (integralReductionExistence l E Y D hl n).choose_spec.choose M
+  let a := (completedIntegralRestrictScalars l E Y D hl n).map (eqToHom e.symm)
+  apply (cancel_epi a).1
+  apply (SheafOfModules.toSheaf _).map_injective
+  apply Sheaf.hom_ext
+  apply CategoryTheory.sheafify_hom_ext _ _ _ N.isSheaf
+  ext U z
+  induction z using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul s x => exact h U s x
+  | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
+
+private theorem integralTowerUnrestricted_condition
+    (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :
+    integralTowerUnitCondition l E Y D hl P (unrestrictedTowerUnit l E Y P) ∧
+      integralTowerTransitionCondition l E Y D hl P
+        (unrestrictedTowerTransition l E Y P) := by
+  constructor
+  · change unrestrictedTowerUnitCondition l E Y P (unrestrictedTowerUnit l E Y P)
+    exact unrestrictedTowerUnit_condition l E Y P
+  · intro n i U s x
+    have h :=
+      (unrestrictedIntegralTransition_existsUnique l E Y n).exists.choose_spec P i U s x
+    unfold unrestrictedIntegralTensorSection at h
+    unfold unrestrictedTowerTransition unrestrictedIntegralTransition integralTowerTensorSection
+    exact h
+
 /-- There is a unique pair of chain-level unit and reduction maps with the stated
 pure-tensor formulas. These formulas specify maps on the sheafifications, not just on
 constant sections.
@@ -194,7 +224,26 @@ theorem integralTowerMaps_existUnique
         integralTowerComplex l E Y D hl n P),
       integralTowerUnitCondition l E Y D hl P a.1 ∧
         integralTowerTransitionCondition l E Y D hl P a.2 := by
-  sorry
+  classical
+  let γ : ∀ n : ℕ, P ⟶ integralTowerComplex l E Y D hl n P :=
+    unrestrictedTowerUnit l E Y P
+  let τ : ∀ n : ℕ, integralTowerComplex l E Y D hl (n + 1) P ⟶
+      integralTowerComplex l E Y D hl n P := unrestrictedTowerTransition l E Y P
+  have hγ : integralTowerUnitCondition l E Y D hl P γ :=
+    (integralTowerUnrestricted_condition l E Y D hl P).1
+  have hτ : integralTowerTransitionCondition l E Y D hl P τ :=
+    (integralTowerUnrestricted_condition l E Y D hl P).2
+  refine ⟨(γ, τ), ⟨hγ, hτ⟩, ?_⟩
+  intro a ha
+  apply Prod.ext
+  · funext n
+    ext i U x
+    exact (ha.1 n i U x).trans (hγ n i U x).symm
+  · funext n
+    ext i : 1
+    apply integralTowerTensorSection_ext l E Y D hl (n + 1) (P.X i)
+    intro U s x
+    exact (ha.2 n i U s x).trans (hτ n i U s x).symm
 
 /-- The chain-level unit x ↦ x⊗1, determined uniquely by its sectionwise formula.
 Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
@@ -209,6 +258,24 @@ noncomputable def integralTowerTransition
     (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (n : ℕ) :
     integralTowerComplex l E Y D hl (n + 1) P ⟶ integralTowerComplex l E Y D hl n P :=
   (integralTowerMaps_existUnique l E Y D hl P).exists.choose.2 n
+
+private theorem integralTowerMaps_eq
+    (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) :
+    (integralTowerMaps_existUnique l E Y D hl P).exists.choose =
+      (unrestrictedTowerUnit l E Y P, unrestrictedTowerTransition l E Y P) := by
+  exact (integralTowerMaps_existUnique l E Y D hl P).unique
+    (integralTowerMaps_existUnique l E Y D hl P).exists.choose_spec
+    (integralTowerUnrestricted_condition l E Y D hl P)
+
+private theorem integralTowerUnit_eq
+    (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (n : ℕ) :
+    integralTowerUnit l E Y D hl P n = unrestrictedTowerUnit l E Y P n :=
+  congrArg (fun a ↦ a.1 n) (integralTowerMaps_eq l E Y D hl P)
+
+private theorem integralTowerTransition_eq
+    (P : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (n : ℕ) :
+    integralTowerTransition l E Y D hl P n = unrestrictedTowerTransition l E Y P n :=
+  congrArg (fun a ↦ a.2 n) (integralTowerMaps_eq l E Y D hl P)
 
 /-- The image of the resolution augmentation is invertible in the derived category.
 Source: Stacks Tag 06YS (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
@@ -269,6 +336,19 @@ theorem integralReductionTowerWellDefined
         (integralTowerComparison l E Y D hl n q q' hq hq').hom =
       (integralTowerComparison l E Y D hl (n + 1) q q' hq hq').hom ≫
         DerivedCategory.Q.map (integralTowerTransition l E Y D hl P' n)) := by
-  sorry
+  have hc (n : ℕ) : integralTowerComparison l E Y D hl n q q' hq hq' =
+      unrestrictedTowerComparison l E Y n q q' hq hq' := by
+    simp only [integralTowerComparison, integralTowerFiniteComparison,
+      integralTowerResolutionIso, unrestrictedTowerComparison,
+      unrestrictedTowerFiniteComparison]
+    rfl
+  obtain ⟨hu, ht⟩ := unrestrictedReductionTowerWellDefined l E Y q q' hq hq'
+  constructor
+  · intro n
+    rw [integralTowerUnit_eq, integralTowerUnit_eq, hc]
+    simpa only [integralTowerAugmentationIso, unrestrictedTowerAugmentationIso] using hu n
+  · intro n
+    rw [integralTowerTransition_eq, integralTowerTransition_eq, hc, hc]
+    exact ht n
 
 end WeilConjectures

@@ -43,7 +43,8 @@ open scoped ChangeOfRings
 
 namespace WeilConjectures
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  scalarReductionExistence scalarReductionDerivedExistence
   unrestrictedIntegralReductionExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -538,15 +539,12 @@ theorem unrestrictedReductionTowerWellDefined
           DerivedCategory.Q.map (unrestrictedTowerTransition l E Y B n) =
         DerivedCategory.Q.map (unrestrictedTowerTransition l E Y A n) ≫
           DerivedCategory.Q.map ((towerFunctor l E Y n).map f) := by
-    have heq := (unrestrictedIntegralTransition l E Y n).naturality f
-    have hQ := congrArg
-      (fun g : unrestrictedTowerComplex l E Y (n + 1) A ⟶
-          unrestrictedTowerComplex l E Y n B ↦ DerivedCategory.Q.map g) heq
-    dsimp only [towerFunctor, unrestrictedIntegralComplexFunctor,
-      unrestrictedIntegralFiniteComplex, unrestrictedTowerTransition,
-      scalarReductionExtension, unrestrictedIntegralReductionFunctor,
-      scalarReductionExistence, unrestrictedIntegralReductionExistence] at hQ ⊢
-    simpa only [Functor.map_comp] using hQ
+    let τ : towerFunctor l E Y (n + 1) ⟶ towerFunctor l E Y n :=
+      unrestrictedIntegralTransition l E Y n
+    have hQ := (Functor.whiskerRight τ
+      (DerivedCategory.Q (C := scalarReductionSource l E Y))).naturality f
+    simpa only [Functor.comp_map, Functor.whiskerRight_app, τ,
+      unrestrictedTowerTransition] using hQ
   constructor
   · intro n
     apply (cancel_epi (DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q)).1

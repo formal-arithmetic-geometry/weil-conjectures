@@ -6,7 +6,8 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.Paper.IntegralReductionTower
+public import Sheaf.Paper.CompletedIntegralCoefficients
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Integral reduction towers without a finite-field datum
 
@@ -14,8 +15,9 @@ Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tags 03EK and 06YY
 (blueprint: def-weil-integral-reduction-tower).
 
 The completion and its projections already have unrestricted versions. This supplies
-the same reduction tower without the irrelevant global finite-field datum. The old
-interface remains imported. Index n means exponent n+1.
+the same reduction tower without the irrelevant global finite-field datum. The completed
+coefficient sheaf is shared with the finite-field interface.
+Index n means exponent n+1.
 -/
 
 @[expose] public section
