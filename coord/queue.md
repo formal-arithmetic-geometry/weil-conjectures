@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (24)
+## Stage 2: nodes to state (23)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,7 +27,6 @@
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-pur-finite-free-compact-composition` | 1 | state | 0 |
 | `lem-pur-finite-free-projection-exchange` | 1 | state | 0 |
 | `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
@@ -39,7 +38,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1221)
+## Stage 3: modules to prove (1222)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -895,6 +894,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CoefficientTowerShriekCalculus` | - | 1 | proof | 4 |
 | `Sheaf.Paper.ConstructibleFiniteTorAdjunctions` | - | 1 | proof | 4 |
 | `Sheaf.Paper.ConstructibleHomComparison` | - | 1 | proof | 4 |
+| `Sheaf.Paper.FiniteFreeCompactSupportComposition` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FinitePointInternalHomEvaluation` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteRingCompactSupportProjection` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FixedStalkIdentificationReduction` | - | 3 | proof | 4 |
