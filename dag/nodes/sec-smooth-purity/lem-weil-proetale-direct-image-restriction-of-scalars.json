@@ -72,11 +72,11 @@
    }
   },
   {
-   "text": "Check the normalization. Let $J$ be the given K-injective $B_X$-complex and $j:\\operatorname{Res}_{\\varphi,X}J\\to I$ the given K-injective $A_X$-resolution. The composition theorem on $(c_X,f_A)$ states that $f_{A,*}j:h_*J=f_{A,*}\\operatorname{Res}_{\\varphi,X}J\\to f_{A,*}I$ is a quasi-isomorphism representing $\\kappa_{f_A,c_X}$ at $QJ$. For the other factorization choose a K-injective $B_Y$-resolution $q:f_{B,*}J\\to L$, which exists on the small ringed site. Its normalized comparison is $c_{Y,*}q:\\operatorname{Res}_{\\varphi,Y}f_{B,*}J\\to\\operatorname{Res}_{\\varphi,Y}L$. Since $c_{Y,*}$ is exact, the exact-functor derived theorem identifies this map with the canonical identification of $Rc_{Y,*}(Qf_{B,*}J)$ with $Q\\operatorname{Res}_{\\varphi,Y}f_{B,*}J$; under that identification its class is the identity. Therefore the composite from step 3 is precisely the inverse of the class of $f_{A,*}j$ stated in the item. The composition theorem explicitly makes its resolution identifications and comparisons natural in the derived argument, so this formula is independent of the resolutions and natural for all derived morphisms, not just chain maps between selected representatives.",
+   "text": "For the fixed-scalar K-injective normalization, first show that the underived pullback/restriction square has identity direct-image mate: apply the restriction/coextension mate equivalence, the iterated-mate conjugation identity and its canonical pullback-square computation, then the module restriction/coextension triangle identity. Transport the derived mate across the canonical left-derived-pullback/map-derived-category isomorphism using Adjunction.derived_eq_ofNatIsoLeft. The generic derived_mate_factors theorem gives its factorization through the right-derived units. Apply unit naturality to j: Res(J) -> I and cancel the unit isomorphisms for the K-injective complexes J and I. This gives exactly the displayed normalization equation, using the inverse of the named mate as in the unchanged definition. Finally, global invertibility from steps 1-3 and the other computation isomorphisms imply that Q(f_*(j)) is invertible; the quasi-isomorphism criterion for Q proves the first conjunct. Thus the normalization is proved conditional on the separately named global invertibility theorem, which remains open in Lean.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
    "source": {
@@ -95,12 +95,13 @@
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-ring-map",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6E, label lemma-derived-pushforward-composition, applied to the two coefficient factorizations; exact restriction by derived.tex Tag 015F"
+  "place": "Tag 0D6E, label lemma-derived-pushforward-composition, applied to the two coefficient factorizations; exact restriction by derived.tex Tag 015F; step 4: U7 fixed-scalar normalization via the proved generic derived-mate factorization and right-derived unit naturality (2026-10-19)"
  },
  "mathlib_searches": [
   {
@@ -258,5 +259,15 @@
   "from_unit": "sk-def-sf-operations",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261019T112548-L-3955715",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
