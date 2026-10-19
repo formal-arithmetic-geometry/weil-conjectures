@@ -17455,3 +17455,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:57 L: merged deliver/ND/lem-coef-rational-retract-evaluation (stage 2; reviewer PASS; parallel immutable checks)
 - 15:14 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head ce30b36715af: Identical re-push of sha 787e4e0b (≈24 prior N7 heads, all RETURNed))
 - 15:21 L: returned deliver/NO/fix-lem-tensor-adjunction (reviewer RETURN: L: independent stage-2 immutable head dc185ea524b5: H3 (F1): Model.projection is free at the integral/rational/closed st)
+- 15:25 L: merged deliver/Q56/lem-sf-constant-semilinear-generator-comparison (stage 2; reviewer PASS; parallel immutable checks)
