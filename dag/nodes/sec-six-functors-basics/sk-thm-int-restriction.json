@@ -22,94 +22,40 @@
  ],
  "proof": [
   {
-   "text": "Work in the standing setting [sk-def-sfb-dc-setting]: the schemes are separated and of finite type over the standing field, with $\\ell$ invertible. Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, one of the allowed coefficient rings of [sk-def-localizing-closure]. The coefficients are the condensed valuation ring $\\mathcal O_E$ and its pulled-back module-object sheaves, as in the statement's categories, not discrete constant $\\mathcal O_E$-sheaves. By [lem-weil-pbc-qcqs-over-affine], the standing schemes are qcqs: their structure maps to the affine scheme $\\operatorname{Spec}k$ are separated and of finite type. For these schemes, clause (2) of [det-def-localizing-closure-ctf-equals-bc] gives $\\Dctf(T,\\mathcal O_E)=\\Dbc(T,\\mathcal O_E)$ and equality of their localizing closures. We may therefore prove the assertion using $\\Dbc$ throughout. Fix $K\\in\\Dbc(Y,\\mathcal O_E)$.",
+   "text": "The structure maps of X and Y are quasi-compact and separated over Spec k, so Mathlib supplies CompactSpace and QuasiSeparatedSpace. Apply det-def-localizing-closure-ctf-equals-bc to identify Dctf with constant-model Dbc on both schemes.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-localizing-closure",
-    "lem-weil-pbc-qcqs-over-affine",
     "det-def-localizing-closure-ctf-equals-bc"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
-    "place": "clause (2), specialized to the integral coefficient ring"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a finite affine cover $V_\\beta=\\operatorname{Spec}A_\\beta$ of the quasi-compact scheme $Y$. By the finite-type definition [def-weil-finite-type-morphism], each $f^{-1}(V_\\beta)$ has a finite cover by affine opens $U_{\\beta\\alpha}=\\operatorname{Spec}B_{\\beta\\alpha}$ with $B_{\\beta\\alpha}$ finitely generated over $A_\\beta$. Choose generators $b_1,\\ldots,b_d$; evaluation $A_\\beta[t_1,\\ldots,t_d]\\twoheadrightarrow B_{\\beta\\alpha}$ identifies $B_{\\beta\\alpha}$ with its source modulo the kernel. The affine-quotient characterization of [def-weil-closed-immersion] gives a closed immersion $i:U_{\\beta\\alpha}\\hookrightarrow\\mathbf A^d_{V_\\beta}$. With projection $p$ and open inclusions $u:U_{\\beta\\alpha}\\hookrightarrow X$, $v:V_\\beta\\hookrightarrow Y$, we have $fu=vpi$. These finitely many opens $U_{\\beta\\alpha}$ cover $X$.",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-local.proof.md",
-    "place": "Existence of charts; the finitely generated algebra presentation is written out"
-   }
-  },
-  {
-   "text": "Write $\\mathcal T_T=\\Loc(\\Dbc(T,\\mathcal O_E))$ for each scheme in a chart. The integral functors $Rh_!$ and their right adjoints on these categories are those of [det-prop-int-brown-construction] and [det-prop-int-brown-adjoint]. The chart schemes $U$, $V$ and $\\mathbf A^d_V$ are affine, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Since $X$ and $Y$ are quasi-separated, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes the inclusions $u$ and $v$ quasi-compact. Clause (1) of [det-sf-mate-open-restriction] therefore supplies $u_!\\dashv u^*$ and $v_!\\dashv v^*$ here. The compact-support composition comparison and $fu=vpi$ give $Rf_!u_!\\simeq v_!Rp_!Ri_!$. Thus, for every $A\\in\\mathcal T_U$, the natural bijections are\n$$\\operatorname{Hom}(A,u^*f^!K)\\simeq\\operatorname{Hom}(u_!A,f^!K)\\simeq\\operatorname{Hom}(Rf_!u_!A,K)\\simeq\\operatorname{Hom}(v_!Rp_!Ri_!A,K)\\simeq\\operatorname{Hom}(Rp_!Ri_!A,v^*K)\\simeq\\operatorname{Hom}(A,i^!p^!v^*K).$$\nThis yields $u^*f^!K\\simeq i^!p^!v^*K$. Explicitly, a natural bijection between these two represented Hom functors sends the identity of the first representing object to a map from it to the second, and the inverse bijection sends the second identity to the reverse map; naturality makes both composites identities. These are adjunctions on the localizing categories, so no constructibility of $f^!K$ is assumed in this calculation.",
+   "text": "The constructible preservation clause of det-prop-int-brown-construction gives preservation by the actual compactification image. For every x in X choose affine opens U of X and V of Y with x in U and U contained in f inverse V. Compactness gives a finite subcover. Apply lem-sfb-integral-exceptional-affine-chart to K in Dbc(Y) on each member; clause (1) only of det-thm-int-restriction-glue gives G K in Dbc(X). The chart node retains the affine-space, closed-immersion and local adjoint comparison route.",
    "uses": [
     "det-prop-int-brown-construction",
-    "det-prop-int-brown-adjoint",
-    "det-sf-mate-open-restriction",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-sfb-integral-exceptional-affine-chart",
+    "det-thm-int-restriction-glue"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "paragraph (2), expanded composition/uniqueness-of-right-adjoints calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "The integral projective-line and affine-space theorem [det-thm-int-restriction-line] supplies $Rq_*\\dashv q^*(1)[2]$, $q^!\\simeq q^*(1)[2]$, $p^!\\simeq p^*(d)[2d]$, and preservation of $\\Dbc$ by these shifted twisted pullbacks. For the chart above, $v^*K\\in\\Dbc(V,\\mathcal O_E)$ by [sk-lem-int-tensor], and hence $p^!v^*K\\in\\Dbc(\\mathbf A^d_V,\\mathcal O_E)$. The integral closed-immersion theorem [det-thm-int-restriction-closed] then gives $i^!p^!v^*K\\simeq R\\underline\\Gamma_U(p^!v^*K)\\in\\Dbc(U,\\mathcal O_E)$. Applying the preceding isomorphism shows $u^*f^!K\\in\\Dbc(U,\\mathcal O_E)$ on every member of the finite cover.",
+   "text": "Translate both preservation assertions back along the Dctf=Dbc equalities. Restrict the given Brown adjunction on Hom sets of the full subcategories. Explicitly lift its homEquiv and inverse using ObjectProperty.homMk; ambient inverse laws and naturality imply the four laws by ObjectProperty.hom_ext. Adjunction.mkOfHomEquiv supplies the adjunction between exactly the functors in ctfRestrictionAssertions.",
    "uses": [
-    "det-thm-int-restriction-line",
-    "sk-lem-int-tensor",
-    "det-thm-int-restriction-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
-    "place": "Projective line and affine space; Closed immersions; General f, first sentence"
-   }
-  },
-  {
-   "text": "Apply only clause (1) of [det-thm-int-restriction-glue] to $M=f^!K$ and the finite open cover just constructed: it gives $f^!K\\in\\Dbc(X,\\mathcal O_E)$. Also $Rf_!$ preserves $\\Dbc$ by [det-prop-int-brown-construction]. For $A\\in\\Dbc(X,\\mathcal O_E)$ the adjunction of [det-prop-int-brown-adjoint] therefore gives\n$$\\operatorname{Hom}_{\\Dbc(Y,\\mathcal O_E)}(Rf_!A,K)\\simeq\\operatorname{Hom}_{\\Dbc(X,\\mathcal O_E)}(A,f^!K).$$\nIndeed these full-subcategory Hom sets are exactly the ambient Hom sets. Naturality in $A$ and $K$ is inherited from the ambient adjunction, so the restricted functors are adjoint. Translating by the equalities in step 1 proves both assertions for $\\Dctf$. This does not invoke clause (2) of the gluing node, which already restates the item.",
-   "uses": [
-    "det-thm-int-restriction-glue",
-    "det-prop-int-brown-construction",
     "det-prop-int-brown-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "paragraph (1), finite-cover locality; paragraph (2), final three sentences"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-dc-setting",
-  "sk-def-localizing-closure",
-  "lem-weil-pbc-qcqs-over-affine",
   "det-def-localizing-closure-ctf-equals-bc",
-  "def-weil-finite-type-morphism",
-  "def-weil-closed-immersion",
   "det-prop-int-brown-construction",
-  "det-prop-int-brown-adjoint",
-  "det-sf-mate-open-restriction",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "det-thm-int-restriction-line",
-  "sk-lem-int-tensor",
-  "det-thm-int-restriction-closed",
-  "det-thm-int-restriction-glue"
+  "lem-sfb-integral-exceptional-affine-chart",
+  "det-thm-int-restriction-glue",
+  "det-prop-int-brown-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
-  "place": "three proof paragraphs, with local-factorization Hom bijections expanded"
+  "place": "Finite affine cover and glue clause (1), actual Hom-equivalence restriction; chart calculation isolated in lem-sfb-integral-exceptional-affine-chart"
  },
  "mathlib_searches": [
   {
@@ -257,5 +203,15 @@
   "by": "NH",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

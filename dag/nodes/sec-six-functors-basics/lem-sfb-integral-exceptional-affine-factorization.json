@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-integral-exceptional-affine-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-int-restriction",
+   "place": "General f paragraph: polynomial presentation and composition of adjoints"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine presentation and integral exceptional adjoint comparison",
+ "statement": "Let $\\ell$ be a prime, $E$ a finite intermediate field of $\\overline{\\mathbb Q}_\\ell/\\mathbb Q_\\ell$, $k$ a field of prime characteristic different from $\\ell$, and $\\Lambda=\\mathcal O_E$ with its recorded condensed ring structure. Let $X$ and $Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism ([sk-def-sfb-dc-setting]). Write $\\operatorname{Dbc}(T,\\Lambda)$ for the bounded complexes with finite constant scalar constructible models ([sk-def-sfb-constructible]) and $\\operatorname{Loc}(\\operatorname{Dbc}(T,\\Lambda))$ for their ordinary ambient localizing closure ([sk-def-localizing-closure]). Fix a boundary compactification $c$ of $f$, a witness that its actual compact-support composite $R f_!$ preserves these localizing closures, and any functor $G$ with an adjunction $R f_!\\dashv G$ as in [det-prop-int-brown-adjoint]. Let $u:U\\hookrightarrow X$ and $v:V\\hookrightarrow Y$ be affine open inclusions with $U\\subseteq f^{-1}(V)$. There exist $d\\in\\mathbb N$, a closed immersion $i:U\\hookrightarrow\\mathbb A^d_V$ over $k$, boundary compactifications of $p:\\mathbb A^d_V\\to V$ and $i$, witnesses that their actual compact-support composites preserve the localizing closures, and right adjoints $G_p,G_i$ with their adjunctions, such that $i\\,p\\,v=u\\,f$. For every $K\\in\\operatorname{Loc}(\\operatorname{Dbc}(Y,\\Lambda))$, $v^*K\\in\\operatorname{Loc}(\\operatorname{Dbc}(V,\\Lambda))$ and there is an isomorphism $u^*(G K)\\simeq G_i(G_p(v^*K))$ in the ambient derived category over $U$. The statement asserts no bounded-constructibility preservation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
+  "place": "General f paragraph, local affine chart"
+ },
+ "stmt_deps": [
+  "det-prop-int-brown-adjoint",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "For q = f.resLE V U hUV, the finite-type affine coordinate ring map has finitely many ring generators. Enumerate a generating finset by ULift (Fin d), construct AffineSpace.homOfVector q, and use the existing source-library criterion AffineSpace.isClosedImmersion_homOfVector. The projection equation gives i p v = u f, including d=0 and empty charts.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine opens of the standing schemes are quasi-compact and remain separated of finite type over k. Affine space over V has the same properties. Use lem-sfb-compactification-over-base to obtain a boundary compactification of p; use (id,i) for i. Apply det-prop-int-brown-adjoint to get the two adjoints and adjunctions, eliminating their existence only inside this proposition.",
+   "uses": [
+    "lem-sfb-compactification-over-base",
+    "det-prop-int-brown-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use localizing_pull from det-prop-int-brown-construction for u and v. Restrict the ambient open adjunctions with Adjunction.restrictFullyFaithful, transporting their left sides by mateOpenTrivialLowerShriek (the identity direct-image comparison) from det-sf-mate-open-restriction. Compact-support composition from det-prop-int-brown-construction identifies Lu Lf and Li Lp Lv through the same compactification of u f; the equation of scheme morphisms allows Compactification.copy without changing the functor. Lift the comparisons to the full localizing subcategories. Compose the adjunctions and apply Adjunction.rightAdjointUniq. Evaluating its isomorphism and the full inclusion yields the required object comparison for each K.",
+   "uses": [
+    "det-prop-int-brown-construction",
+    "det-sf-mate-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-sfb-compactification-over-base",
+  "det-prop-int-brown-adjoint",
+  "det-prop-int-brown-construction",
+  "det-sf-mate-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
+  "place": "General f: finite presentation and uniqueness of the composite right adjoint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of right adjoints identifies exceptional pullback on an affine chart with a closed immersion followed by affine space pullback",
+   "results": "8 general affine-space and pullback hits; no complete local exceptional comparison",
+   "date": "2026-10-19",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq and its compatibility equations",
+   "date": "2026-10-19",
+   "verdict": "used for the final composite adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedImmersion_homOfVector|rightAdjointUniq",
+   "results": "Source-library WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace proves the closed-immersion criterion; Mathlib Adjunction.Unique supplies uniqueness",
+   "date": "2026-10-19",
+   "verdict": "used existing declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of right adjoints compares exceptional inverse image on an affine open chart with a closed immersion followed by affine space projection",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app_assoc; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app; CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app; CategoryTheory.Adjunction.rightAdjointUniq_inv_app",
+   "date": "2026-10-19",
+   "verdict": "Used Adjunction.rightAdjointUniq; no complete geometric comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExceptionalRestriction",
+  "date": "2026-10-19",
+  "group": "N4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralExceptionalAffineFactorization",
+  "file": "lean/Sheaf/SixFunctors/IntegralExceptionalAffineFactorization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralExceptionalAffineFactorization",
+  "statement": "theorem integralExceptionalAffineFactorization (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]\n    (c : Compactification.BoundaryCompactification f)\n    (h : ∀ K, localizing (Profinite.padicIntegersRingObj ℓ E.val) X K →\n      localizing (Profinite.padicIntegersRingObj ℓ E.val) Y\n        ((image (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj).obj K))\n    (G : (localizing (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory ⥤\n      (localizing (Profinite.padicIntegersRingObj ℓ E.val) X).FullSubcategory)\n    (_adj : lowerShriek (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj h ⊣ G)\n    (U : X.Opens) (V : Y.Opens) (_hU : IsAffineOpen U) (_hV : IsAffineOpen V)\n    (_hUV : U ≤ f ⁻¹ᵁ V) :\n    let Λ := Profinite.padicIntegersRingObj ℓ E.val\n    ∃ (d : ℕ) (i : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) V.toScheme)\n      (_hi : IsClosedImmersion i) (_hio : i.IsOver (Spec (.of k)))\n      (cp : Compactification.BoundaryCompactification\n        (AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme))\n      (hp : ∀ K, localizing Λ (AffineSpace (ULift.{u} (Fin d)) V.toScheme) K →\n        localizing Λ V.toScheme ((image Λ cp.obj.obj).obj K))\n      (Gp : (localizing Λ V.toScheme).FullSubcategory ⥤\n        (localizing Λ (AffineSpace (ULift.{u} (Fin d)) V.toScheme)).FullSubcategory)\n      (_adjp : lowerShriek Λ cp.obj.obj hp ⊣ Gp)\n      (ci : Compactification.BoundaryCompactification i)\n      (hi' : ∀ K, localizing Λ U.toScheme K →\n        localizing Λ (AffineSpace (ULift.{u} (Fin d)) V.toScheme)\n          ((image Λ ci.obj.obj).obj K))\n      (Gi : (localizing Λ (AffineSpace (ULift.{u} (Fin d)) V.toScheme)).FullSubcategory ⥤\n        (localizing Λ U.toScheme).FullSubcategory)\n      (_adji : lowerShriek Λ ci.obj.obj hi' ⊣ Gi),\n      i ≫ (AffineSpace (ULift.{u} (Fin d)) V.toScheme ↘ V.toScheme) ≫ V.ι = U.ι ≫ f ∧\n      ∀ K : (localizing Λ Y).FullSubcategory,\n        ∃ hK : localizing Λ V.toScheme ((pull Λ V.ι).obj K.obj),\n          Nonempty ((pull Λ U.ι).obj (G.obj K).obj ≅\n            (Gi.obj (Gp.obj ⟨(pull Λ V.ι).obj K.obj, hK⟩)).obj)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

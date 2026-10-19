@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-integral-exceptional-affine-chart",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-int-restriction",
+   "place": "General f paragraph, affine chart calculation"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral exceptional preservation on an affine chart",
+ "statement": "Let $\\ell$ be a prime, $E$ a finite intermediate field of $\\overline{\\mathbb Q}_\\ell/\\mathbb Q_\\ell$, $k$ a field of prime characteristic different from $\\ell$, and $\\Lambda=\\mathcal O_E$ with its recorded condensed ring structure. Let $X$ and $Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism ([sk-def-sfb-dc-setting]). Write $\\operatorname{Dbc}(T,\\Lambda)$ for the bounded complexes with finite constant scalar constructible models ([sk-def-sfb-constructible]) and $\\operatorname{Loc}(\\operatorname{Dbc}(T,\\Lambda))$ for their ordinary ambient localizing closure ([sk-def-localizing-closure]). Fix a boundary compactification $c$ of $f$, a witness that its actual compact-support composite $R f_!$ preserves these localizing closures, and any functor $G$ with an adjunction $R f_!\\dashv G$ as in [det-prop-int-brown-adjoint]. Let $u:U\\hookrightarrow X$ and $v:V\\hookrightarrow Y$ be affine open inclusions with $U\\subseteq f^{-1}(V)$. For every $K\\in\\operatorname{Loc}(\\operatorname{Dbc}(Y,\\Lambda))$ whose ambient object belongs to $\\operatorname{Dbc}(Y,\\Lambda)$, the actual derived restriction $u^*(G K)$ belongs to $\\operatorname{Dbc}(U,\\Lambda)$. No global preservation or finite-cover gluing hypothesis is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
+  "place": "General f paragraph, local affine chart"
+ },
+ "stmt_deps": [
+  "det-prop-int-brown-adjoint",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-integral-exceptional-affine-factorization to construct the closed affine-space presentation and obtain Brown adjoints Gp, Gi and the object comparison u* G K ≅ Gi(Gp(v* K)). This step does not assume any constructibility preservation.",
+   "uses": [
+    "lem-sfb-integral-exceptional-affine-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructible_pull clause of det-prop-int-brown-construction puts v* K in the constant-model bounded constructible subcategory. Apply the affine-space Brown comparison and preservation clauses of det-thm-int-restriction-line to Gp. Apply the support comparison and preservation clauses of det-thm-int-restriction-closed to Gi. Transfer constructibility across the comparison isomorphism; the private helpers prove isomorphism invariance directly from local scalar models and homology.",
+   "uses": [
+    "det-prop-int-brown-construction",
+    "det-thm-int-restriction-line",
+    "det-thm-int-restriction-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-exceptional-affine-factorization",
+  "det-prop-int-brown-construction",
+  "det-thm-int-restriction-line",
+  "det-thm-int-restriction-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction.proof.md",
+  "place": "General f: affine-space and closed-immersion preservation after the explicit factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralExceptionalAffineChart|exceptional.*[Aa]ffine.*[Cc]hart",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting the integral exceptional inverse image to an affine open chart over an affine target gives a bounded constructible complex",
+   "results": "general algebraic geometry hits only",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"constructible\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the integral exceptional inverse image to an affine chart preserves bounded constructible sheaves",
+   "results": "AlgebraicGeometry.IsIntegralHom.instMorphismRestrict; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.IsProper.instMorphismRestrict; CategoryTheory.Sheaf.ΓRes; AlgebraicGeometry.morphismRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict; AlgebraicGeometry.Scheme.Hom.resLE",
+   "date": "2026-10-19",
+   "verdict": "No complete chart theorem; general restriction results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExceptionalRestriction",
+  "date": "2026-10-18",
+  "group": "N4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralExceptionalAffineChart",
+  "file": "lean/Sheaf/SixFunctors/IntegralExceptionalAffineChart.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralExceptionalAffineChart",
+  "statement": "theorem integralExceptionalAffineChart (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]\n    (c : Compactification.BoundaryCompactification f)\n    (h : ∀ K, localizing (Profinite.padicIntegersRingObj ℓ E.val) X K →\n      localizing (Profinite.padicIntegersRingObj ℓ E.val) Y\n        ((image (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj).obj K))\n    (G : (localizing (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory ⥤\n      (localizing (Profinite.padicIntegersRingObj ℓ E.val) X).FullSubcategory)\n    (_adj : lowerShriek (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj h ⊣ G)\n    (U : X.Opens) (V : Y.Opens) (_hU : IsAffineOpen U) (_hV : IsAffineOpen V)\n    (_hUV : U ≤ f ⁻¹ᵁ V)\n    (K : (localizing (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory)\n    (_hK : generators (Profinite.padicIntegersRingObj ℓ E.val) Y K.obj) :\n    generators (Profinite.padicIntegersRingObj ℓ E.val) U.toScheme\n      ((pull (Profinite.padicIntegersRingObj ℓ E.val) U.ι).obj (G.obj K).obj)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
