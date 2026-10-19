@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
 import Mathlib.Algebra.Category.Ring.Limits
 import Sheaf.CategoryTheory.ModuleInverseImageAdjunction
 import Sheaf.CategoryTheory.SheafPullbackForgetComparison
@@ -467,6 +468,184 @@ theorem finiteCoefficientCommRingMap_isIso :
 
 attribute [instance] finiteCoefficientCommRingMap_isIso
 
+section
+open Scheme
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def finiteTensorModelEquivalence (X : Scheme.{u})
+    (A : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
+    SheafOfModules.{u + 1}
+      (((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+        RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj A) ≌
+      SheafOfModules.{u + 1} A := by
+  let B := ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
+    RingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)).obj A
+  let : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsContinuous
+      (ProEt.topology X) (proEtaleModelTopology X) := proEtaleModelUp_isContinuous X
+  let : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsContinuous
+      (proEtaleModelTopology X) (ProEt.topology X) := by
+    change AsSmall.down.IsContinuous (proEtaleModelTopology X) (ProEt.topology X)
+    infer_instance
+  exact SheafOfModules.pushforwardPushforwardEquivalence
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)) (𝟙 A) (𝟙 B)
+    (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
+    (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
+
+private noncomputable def finiteTensorScalarEquivalence (X : Scheme.{u})
+    {A B : Sheaf (ProEt.topology X) RingCat.{u + 1}} (rc : A ≅ B) :
+    SheafOfModules.{u + 1} B ≌ SheafOfModules.{u + 1} A := by
+  let : (CategoryTheory.Equivalence.refl (C := X.ProEt)).functor.IsContinuous
+      (ProEt.topology X) (ProEt.topology X) := by
+    change (𝟭 X.ProEt).IsContinuous _ _
+    infer_instance
+  let : (CategoryTheory.Equivalence.refl (C := X.ProEt)).inverse.IsContinuous
+      (ProEt.topology X) (ProEt.topology X) := by
+    change (𝟭 X.ProEt).IsContinuous _ _
+    infer_instance
+  exact SheafOfModules.pushforwardPushforwardEquivalence
+    (J := ProEt.topology X) (K := ProEt.topology X) (S := A) (R := B)
+    (CategoryTheory.Equivalence.refl (C := X.ProEt)) rc.hom rc.inv
+    (by
+      apply NatTrans.ext
+      funext U
+      dsimp [CategoryTheory.Equivalence.refl]
+      erw [B.obj.map_id]
+      exact congrArg (fun q ↦ q.hom.app U) rc.inv_hom_id.symm)
+    (by
+      apply NatTrans.ext
+      funext U
+      dsimp [CategoryTheory.Equivalence.refl]
+      erw [A.obj.map_id, Category.comp_id]
+      exact congrArg (fun q ↦ q.hom.app U) rc.hom_inv_id)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def finiteTensorAdjunction :
+    finiteCoefficientModulePullback f Λ ⊣
+      SheafOfModules.pushforward (finiteCoefficientDirectImageMap f Λ) := by
+  let A := finiteCoefficientRingSheaf V Λ
+  let B := finiteCoefficientInverseRing f Λ
+  let eV := finiteTensorModelEquivalence V A
+  let eU := finiteTensorModelEquivalence U B
+  let a₀ := eV.symm.toAdjunction.comp
+    ((SheafOfModules.pullbackPushforwardAdjunction
+      (finiteCoefficientModelRingUnit f Λ)).comp eU.toAdjunction)
+  let a₁ := (finiteTensorScalarEquivalence U
+    (asIso (finiteCoefficientInverseImageMap f Λ))).symm.toAdjunction
+  let a := a₀.comp a₁
+  change finiteCoefficientModulePullback f Λ ⊣ _ at a
+  apply a.ofNatIsoRight
+  let ρ := (proEtaleSheafAdjunction f RingCat.{u + 1}).unit.app A ≫
+    (proEtaleSheafDirectImage f RingCat.{u + 1}).map (finiteCoefficientInverseImageMap f Λ)
+  have hρ : ρ = finiteCoefficientDirectImageMap f Λ := by
+    exact ((proEtaleSheafAdjunction f RingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+  refine (NatIso.ofComponents (fun M ↦ ?_) ?_) ≪≫ SheafOfModules.pushforwardCongr hρ
+  · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+    exact PresheafOfModules.isoMk (fun W ↦ Iso.refl _) (by intros; rfl)
+  · intro M N g
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro W
+    rfl
+set_option backward.isDefEq.respectTransparency false in
+omit [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] in
+private theorem finiteTensorForgetUnit (T : Scheme.{u}) :
+    Functor.whiskerRight
+        (toSheafify (ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of Λ)))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫
+      ((constantCommuteCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).hom.app (CommRingCat.of Λ)).hom =
+      toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of Λ)) := by
+  rw [constantCommuteCompose_hom_app_hom, ← Category.assoc, sheafComposeIso_inv_fac]
+  change toSheafify _ _ ≫ sheafifyMap _ (𝟙 _) = _
+  rw [sheafifyMap_id, Category.comp_id]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem finiteTensorComparisonUnit (T : Scheme.{u}) :
+    Functor.whiskerRight
+        (toSheafify (ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of Λ)))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫
+      (finiteCoefficientCommRingComparison Λ T).hom = finiteCoefficientScalarMap T Λ := by
+  change _ ≫ (_ ≫ _) = _
+  rw [← Category.assoc, finiteTensorForgetUnit]
+  exact Equiv.apply_symm_apply
+    ((sheafificationAdjunction (ProEt.topology T) RingCat.{u + 1}).homEquiv _ _) _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem finiteTensorDirectImageSquare :
+    finiteCoefficientCommRingComparison Λ V ≫ finiteCoefficientDirectImageMap f Λ =
+      ((sheafCompose (ProEt.topology V)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of Λ))) ≫
+        (proEtaleSheafDirectImage f RingCat.{u + 1}).map
+          (finiteCoefficientCommRingComparison Λ U) := by
+  let J := ProEt.topology V
+  let η := Functor.whiskerRight
+    (toSheafify J ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of Λ)))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let i := ((constantCommuteCompose J
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app (CommRingCat.of Λ))
+  apply (cancel_epi i.inv).mp
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _
+    (((proEtaleSheafDirectImage f RingCat.{u + 1}).obj
+      (finiteCoefficientRingSheaf U Λ)).property)
+  have hη : toSheafify J ((Functor.const V.ProEtᵒᵖ).obj (RingCat.of Λ)) ≫ i.inv.hom = η := by
+    rw [← finiteTensorForgetUnit Λ V]
+    change (η ≫ i.hom.hom) ≫ i.inv.hom = η
+    rw [Category.assoc, ← ObjectProperty.FullSubcategory.comp_hom, i.hom_inv_id,
+      ObjectProperty.FullSubcategory.id_hom]
+    exact Category.comp_id η
+  simp only [ObjectProperty.FullSubcategory.comp_hom, ← Category.assoc]
+  erw [hη]
+  simp only [Category.assoc]
+  change η ≫ ((finiteCoefficientCommRingComparison Λ V).hom ≫
+      (finiteCoefficientDirectImageMap f Λ).hom) =
+    η ≫ ((Functor.whiskerRight
+      (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of Λ)).hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) ≫ _)
+  rw [← Category.assoc, finiteTensorComparisonUnit]
+  have hd : toSheafify J (finiteCoefficientPresheaf V Λ) ≫
+      (finiteCoefficientDirectImageMap f Λ).hom =
+      finiteCoefficientDirectImagePresheafMap f Λ := Equiv.apply_symm_apply
+    ((sheafificationAdjunction J RingCat.{u + 1}).homEquiv
+      (finiteCoefficientPresheaf V Λ)
+      ((proEtaleSheafDirectImage f RingCat.{u + 1}).obj (finiteCoefficientRingSheaf U Λ)))
+    (finiteCoefficientDirectImagePresheafMap f Λ)
+  change (finiteCoefficientConstants V Λ ≫ toSheafify J _) ≫ _ = _
+  rw [Category.assoc]
+  erw [hd]
+  have hc : toSheafify J ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of Λ)) ≫
+      (proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of Λ)).hom =
+      Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology U)
+          ((Functor.const U.ProEtᵒᵖ).obj (CommRingCat.of Λ))) := Equiv.apply_symm_apply
+    ((sheafificationAdjunction J CommRingCat.{u + 1}).homEquiv
+      ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of Λ))
+      ((proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
+        (finiteCoefficientCommRing Λ U)))
+    (Functor.whiskerLeft (proEtaleBaseChange f).op
+      (toSheafify (ProEt.topology U)
+        ((Functor.const U.ProEtᵒᵖ).obj (CommRingCat.of Λ))))
+  have hc' := congrArg
+    (fun z ↦ Functor.whiskerRight z (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) hc
+  simp only [CategoryTheory.Functor.whiskerRight_comp] at hc'
+  rw [← Category.assoc, hc']
+  apply NatTrans.ext
+  funext W
+  change (finiteCoefficientConstants V Λ).app W ≫ finiteCoefficientDirectImageApp f Λ W =
+    (Functor.whiskerRight (toSheafify (ProEt.topology U)
+      ((Functor.const U.ProEtᵒᵖ).obj (CommRingCat.of Λ)))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app _ ≫
+        (finiteCoefficientCommRingComparison Λ U).hom.app _
+  rw [← NatTrans.comp_app, finiteTensorComparisonUnit]
+  ext a
+  rfl
+end
+
 /-- The commutative tensor pullback is naturally isomorphic to the specified transport
 pullback under the canonical constant-preserving coefficient identifications.
 Source: blueprint order 1236; Stacks Tag 03D2 and tensor cancellation along an isomorphism
@@ -490,6 +669,55 @@ theorem finiteCoefficientModulePullback_tensor :
             (finiteCoefficientCommRing Λ V) (finiteCoefficientCommRing Λ U)
             (asIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
               (CommRingCat.of Λ)))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  let C (T : Scheme.{u}) := (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (finiteCoefficientCommRing Λ T)
+  have hi (T : Scheme.{u}) : IsIso (finiteCoefficientCommRingComparison Λ T) := by
+    have := (finiteCoefficientConstantComparison_isIso Λ T).1
+    dsimp [finiteCoefficientCommRingComparison]
+    infer_instance
+  let eV := finiteTensorScalarEquivalence V (asIso (finiteCoefficientCommRingComparison Λ V))
+  let eU := finiteTensorScalarEquivalence U (asIso (finiteCoefficientCommRingComparison Λ U))
+  let a := eV.symm.toAdjunction.comp ((finiteTensorAdjunction f Λ).comp eU.toAdjunction)
+  let c := asIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
+    (CommRingCat.of Λ))
+  let ρ : C V ⟶ (Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj (C U) :=
+    finiteCoefficientCommRingComparison Λ V ≫ finiteCoefficientDirectImageMap f Λ ≫
+      (Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).map
+        (inv (finiteCoefficientCommRingComparison Λ U))
+  let ψ : C V ⟶ (Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj (C U) :=
+    (sheafCompose (Scheme.ProEt.topology V)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        (Scheme.proEtaleRingDirectImageMap f
+          (finiteCoefficientCommRing Λ V) (finiteCoefficientCommRing Λ U) c)
+  have hρ : ρ = ψ := by
+    have hc : Scheme.proEtaleRingDirectImageMap f
+        (finiteCoefficientCommRing Λ V) (finiteCoefficientCommRing Λ U) c =
+        Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of Λ) :=
+      Equiv.apply_symm_apply
+        ((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _) _
+    dsimp only [ρ, ψ]
+    rw [hc, ← Category.assoc, finiteTensorDirectImageSquare]
+    rw [Category.assoc, ← Functor.map_comp, IsIso.hom_inv_id]
+    rw [CategoryTheory.Functor.map_id]
+    exact Category.comp_id _
+  let er : eU.inverse ⋙ SheafOfModules.pushforward (finiteCoefficientDirectImageMap f Λ) ⋙
+      eV.functor ≅ SheafOfModules.pushforward ρ := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+      exact PresheafOfModules.isoMk (fun W ↦ Iso.refl _) (by intros; rfl)
+    · intro M N g
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro W
+      rfl
+  let a' := a.ofNatIsoRight (er ≪≫ SheafOfModules.pushforwardCongr hρ)
+  let b := Scheme.proEtaleRingModuleAdjunction f
+    (finiteCoefficientCommRing Λ V) (finiteCoefficientCommRing Λ U) c
+  let e := a'.leftAdjointUniq b
+  exact ⟨(Functor.isoWhiskerRight eV.unitIso
+      (finiteCoefficientModulePullback f Λ ⋙ eU.functor)) ≪≫
+    Functor.isoWhiskerLeft eV.functor e⟩
 
 end AlgebraicGeometry.ProEtale
