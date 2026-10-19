@@ -18,15 +18,15 @@ Source: Stacks Project, Modules on Sites, Tag 093T, the finite presentation argu
 
 @[expose] public noncomputable section
 
-universe u
+universe u v w
 
 open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-  {Λ : Type u} [CommRing Λ] {M N : ModuleCat.{u} Λ}
-  {P : Cᵒᵖ ⥤ ModuleCat.{u} Λ} (η : (Functor.const Cᵒᵖ).obj N ⟶ P)
+variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+  {Λ : Type w} [CommRing Λ] {M N : ModuleCat.{w} Λ}
+  {P : Cᵒᵖ ⥤ ModuleCat.{w} Λ} (η : (Functor.const Cᵒᵖ).obj N ⟶ P)
 
 /-- The sieve on which a linear map to sections lifts to the constant source of `η`. -/
 def linearLiftSieve {U : Cᵒᵖ} (a : M ⟶ P.obj U) : Sieve U.unop where

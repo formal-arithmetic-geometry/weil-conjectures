@@ -24,74 +24,54 @@
  ],
  "proof": [
   {
-   "text": "Put $E=\\operatorname{Hom}_\\Lambda(P,Q)$, $F(M)=\\underline M$, and $H(U)=\\operatorname{Hom}_{\\underline\\Lambda|_U}(F(P)|_U,F(Q)|_U)$. By [lem-sf-local-module-hom-sheaf] this is a sheaf of sets; the identification with [def-pur-sheaf-hom] equips it with its sectionwise abelian-group and $\\underline\\Lambda$-module structures. For $f\\in E$ define $c_U(f)=F(f)|_U$. The restriction rule of [def-pur-localized-ringed-site] makes $c:\\operatorname{const}(E)\\to H$ a natural transformation. Write $\\eta_M$ for the constant-module unit. The explicit construction [def-sf-site-constant-module-functor] gives $F(f)_V(\\eta_P(p))=\\eta_Q(f(p))$. Thus $c_U(f+g)=c_U(f)+c_U(g)$ and $c_U(\\lambda f)=\\eta_\\Lambda(\\lambda)c_U(f)$: the corresponding global sheaf maps agree on the constant-presheaf unit by the displayed formula, so uniqueness in sheafification [def-weil-pbc-sheafification] makes those global maps equal, and restricting gives the asserted equalities on each slice. Consequently $c$ is, in particular, a morphism of presheaves of abelian groups.",
+   "text": "For F=constantModuleHomFunctor, construct the linear constant-section unit after transport along constantModuleHomRingIso. Its underlying additive map is toSheafify, hence locally bijective. For any M,N and U send a linear map f to restrictOver(F(f)) on U. To check additivity and compatibility with constant scalars, use naturality of toSheafify and the unit scalar equation; the equality of local maps follows by representing each input section locally by a constant and applying separatedness. This gives a morphism from the constant Hom module presheaf to the internal Hom with scalars restricted to the constant ring.",
    "uses": [
-    "lem-sf-local-module-hom-sheaf",
+    "def-sf-site-constant-module-functor",
     "def-pur-sheaf-hom",
     "def-pur-localized-ringed-site",
-    "def-sf-site-constant-module-functor",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant (1), canonical comparison; Tag 03CY, lemma-sheafification-presheaf-modules; Tag 0E8H, lemma-internal-hom-restriction"
-   }
+   "elementary": false
   },
   {
-   "text": "The images of the $b$ standard basis vectors under $\\Lambda^b\\to P$ generate $P$: surjectivity says every $p$ is the image of a finite linear combination of those basis vectors. Hence $P$ is finitely generated, including $b=0$. Apply [lem-sf-constant-module-hom-locally-injective] with $M=P,N=Q$ and [lem-sf-constant-module-hom-locally-surjective] with the same modules. Their canonical presheaf comparison is precisely $c$, since both send $f$ to its induced constant-module map on every slice. The first lemma gives local injectivity, and the second uses exactly the given finite presentation of $P$ to give local surjectivity. Neither lemma asks that $Q$ be finitely generated or that $\\Lambda$ be finite.",
+   "text": "Extend this linear map along the locally bijective constant-module unit using Mathlib PresheafOfModules.homEquivOfIsLocallyBijective. Then apply restrictHomEquivOfIsLocallySurjective for the constant-ring unit to obtain a map linear over the entire constant ring sheaf. The two hom equivalences are induced by precomposition/restriction, so their inverse equations give exactly the required constant-section formula.",
    "uses": [
-    "lem-sf-constant-module-hom-locally-injective",
-    "lem-sf-constant-module-hom-locally-surjective"
+    "def-weil-pbc-sheafification",
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T, lemma-locally-constant (1), finite-presentation comparison expanded through the existing local injectivity and local surjectivity lemmas"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-site-sheafification-iso-locally-bijective] to the additive presheaf map $c$. It gives an isomorphism $c^\\#: (\\operatorname{const}E)^\\#\\to H^\\#$ of abelian sheaves. Because $H$ is already a sheaf, the universal property [def-weil-pbc-sheafification] identifies $H^\\#$ with $H$: the identity of $H$ extends to a map $H^\\#\\to H$, inverse to its sheafification unit by uniqueness. The source is the underlying abelian sheaf of $F(E)$ by [def-sf-site-constant-module-functor]. We therefore obtain an additive sheaf isomorphism $\\alpha:F(E)\\to H$ characterized by $\\alpha_U(\\eta_E(f))=c_U(f)$. This factorization equation identifies the map with the canonical map of the statement, rather than merely giving an isomorphism between the two objects.",
+   "text": "For a finitely generated M, equality of two constant local maps implies that their values on each of finitely many generators have equal unit images. Intersect the corresponding covering equalizer sieves. On every arrow in the intersection the constant linear maps agree on the generators and thus agree. For finitely presented M and a local map x over U, compose the unit of M with x at the identity of U to get a linear map from M to sections of F(N). Apply [lem-sf-finite-presentation-local-linear-lift] to the locally bijective linear unit of N. Each resulting lift g:M→N induces the restriction of x: first check constants using naturality on the slice, then all sections by local constant representatives and separatedness. Thus the same additive constant-Hom comparison is locally bijective.",
+   "uses": [
+    "lem-sf-finite-presentation-local-linear-lift",
+    "def-sf-site-constant-module-functor",
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite of the comparison with the constant-Hom unit is the locally bijective map of the preceding step. Cancel that locally bijective unit to show the comparison is locally injective and locally surjective. Apply the Mathlib locally-bijective isomorphism criterion to its underlying additive sheaf morphism, and reflect isomorphisms through SheafOfModules.toSheaf. This proves IsIso for P,Q when P is finitely presented.",
    "uses": [
     "lem-weil-pbc-site-sheafification-iso-locally-bijective",
     "def-weil-pbc-sheafification",
-    "def-sf-site-constant-module-functor"
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WH, proposition-sheafification-adjoint; Tag 00WK, lemma-sections-sheafification, and Tag 00WN, lemma-mono-epi-sheaves, underlying the locally bijective criterion"
-   }
+   "elementary": false
   },
   {
-   "text": "The local surjectivity in [lem-sf-constant-module-unit-locally-bijective], applied to $E$, represents any $s\\in F(E)(U)$ locally by $\\eta_E(f)$. For the constant ring presheaf, [lem-pc-sites-sheafification-underlying-sets] says that the underlying set sheaf of $\\underline\\Lambda$ and its unit are the set sheafification of the constant underlying set. Hence [lem-weil-pbc-site-sheafification-sections-local] represents any $r\\in\\underline\\Lambda(U)$ locally by $\\eta_\\Lambda(\\lambda)$. Represent $s$ first and then represent the restrictions of $r$, giving a common covering by the transitivity axiom of [def-weil-pbc-sites-and-cohomology]. The scalar action of [def-sf-site-constant-module-functor] extends the constant presheaf action. Therefore on this covering the computation in step 1 gives $\\alpha(rs)=c(\\lambda f)=\\eta_\\Lambda(\\lambda)c(f)=r\\alpha(s)$. Separatedness of $H$ gives this equality on $U$, so $\\alpha$ is $\\underline\\Lambda$-linear. Its additive inverse is linear too: for $h=\\alpha(s)$, the equality $\\alpha(rs)=rh$ and injectivity of $\\alpha_U$ imply $\\alpha_U^{-1}(rh)=r\\alpha_U^{-1}(h)$. Hence $\\alpha$ is an isomorphism of module sheaves. Empty covering sieves cause no exception, since sections of a sheaf on an object covered by the empty sieve are unique.",
+   "text": "For naturality precompose both composites with the constant-Hom sheafification unit. By its universal property it suffices to compare constant f. The unit formula and functoriality identify both sides with F(a≫f≫b) restricted to the slice; homObjMap is precisely pre- and post-composition. For the stated localization equation, specialize the constant-section formula to V.left and evaluate the resulting local map at the identity of V.left. The definitions of over and restrictOver give exactly the requested restricted map.",
    "uses": [
-    "lem-sf-constant-module-unit-locally-bijective",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sf-site-constant-module-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY, lemma-sheafification-presheaf-modules, explicit scalar compatibility; sites.tex Tag 00WK, local representatives"
-   }
-  },
-  {
-   "text": "For linear maps $u:P^\\prime\\to P$ and $v:Q\\to Q^\\prime$, with $P^\\prime$ finitely presented when asserting the corresponding comparison is an isomorphism, both naturality composites on a constant section $f\\in\\operatorname{Hom}_\\Lambda(P,Q)$ give $F(vfu)=F(v)\\circ F(f)\\circ F(u)$. Functoriality is the constant-presheaf functoriality followed by sheafification in [def-sf-site-constant-module-functor]. By local surjectivity of $\\eta_E$ in [lem-sf-constant-module-unit-locally-bijective], every section is locally a constant section; separatedness of the target sheaf makes the two composites equal on every object. For localization at $U$, use [lem-weil-pbc-site-constant-restriction] for $P,Q,\\Lambda,E$. Its comparisons preserve the units and send each constant linear map to the same linear map. By [def-pur-sheaf-hom] and relocalization [def-pur-localized-ringed-site], both $H|_U$ and the slice internal Hom assign to $(V\\to U)$ the maps $F(P)|_V\\to F(Q)|_V$, with exactly the same restrictions. Under these identifications both the restricted $\\alpha$ and the slice comparison send $\\eta_E(f)$ to $F(f)|_V$; local constant representatives and separatedness again make them equal. This proves the stated naturality and compatibility with every localized site without invoking any pullback assertion for an arbitrary morphism of topoi.",
-   "uses": [
+    "def-weil-pbc-sheafification",
     "def-sf-site-constant-module-functor",
-    "lem-sf-constant-module-unit-locally-bijective",
-    "lem-weil-pbc-site-constant-restriction",
     "def-pur-sheaf-hom",
     "def-pur-localized-ringed-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093T (1), canonical map on constant linear maps; Tag 0E8H, lemma-internal-hom-restriction, by relocalization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -100,19 +80,13 @@
   "def-sf-site-constant-module-functor",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-sf-constant-module-hom-locally-injective",
-  "lem-sf-constant-module-hom-locally-surjective",
-  "lem-sf-constant-module-unit-locally-bijective",
-  "lem-sf-local-module-hom-sheaf",
-  "lem-weil-pbc-site-constant-restriction",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-sf-finite-presentation-local-linear-lift",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093T (1), canonical comparison, proved using the already existing local injectivity/surjectivity nodes in place of the source finite-free kernel argument; scalar linearity, naturality and Tag 0E8H localization are written explicitly."
+  "place": "Tags 093T(1), 03CY and 0E8H. Q9: implement the canonical map via Mathlib linear sheafification hom equivalences, finite-presentation local lifting, the additive locally-bijective criterion and unit uniqueness."
  },
  "mathlib_searches": [
   {
@@ -279,14 +253,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-local-module-hom-sheaf",
-  "lem-sf-constant-module-hom-locally-injective",
-  "lem-sf-constant-module-hom-locally-surjective",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "lem-sf-constant-module-unit-locally-bijective",
-  "lem-weil-pbc-site-constant-restriction",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -332,5 +299,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261019T005408-L-2763623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
