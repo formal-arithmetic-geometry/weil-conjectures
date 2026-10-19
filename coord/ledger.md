@@ -17505,3 +17505,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:22 L: returned deliver/NA/lem-trf-regular-hilbert-coefficient-data (reviewer RETURN: I read the item in full: 9 steps, statement byte-identical to base. I read all 4 new nodes, every cited statement (jet-d)
 - 17:35 L: returned deliver/Q17/lem-coef-finite-adjunction-transition (reviewer RETURN: L: independent stage-2 immutable head 46c51e37df61: H3 (F2 of the 85d9672bde92 return is still open): the only delta is )
 - 17:36 L: merged deliver/NF/def-sf-datum (stage 2; reviewer PASS; parallel immutable checks)
+- 17:53 L: returned deliver/Q01/lem-pur-condensed-exceptional-reconstruction (reviewer RETURN: L: independent stage-2 immutable head 5b36ccb0e139: H3 F1 unrepaired: Comparison.canonicalScalarComparison is still a fr)
