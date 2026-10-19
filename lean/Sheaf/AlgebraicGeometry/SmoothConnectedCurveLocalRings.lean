@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 import WeilConjectures.AlgebraicGeometry.Regular

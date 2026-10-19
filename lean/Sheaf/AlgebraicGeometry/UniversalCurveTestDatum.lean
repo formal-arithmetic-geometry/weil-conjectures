@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
 import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection

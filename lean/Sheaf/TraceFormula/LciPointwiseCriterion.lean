@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection

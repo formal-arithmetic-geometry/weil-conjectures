@@ -7,7 +7,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends

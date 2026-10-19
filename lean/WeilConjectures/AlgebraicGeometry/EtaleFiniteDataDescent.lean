@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.CategoryTheory.PathCategory.Basic
 import Mathlib.Data.Fintype.Order
 import Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels
-import Sheaf.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!

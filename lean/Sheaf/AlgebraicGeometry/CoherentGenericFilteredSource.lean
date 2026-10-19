@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.PushforwardFinSumSuccIso
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # A filtered source surjecting at a generic stalk

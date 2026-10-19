@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.TraceFormula.EssentiallyFiniteTypeCIKernelInvariance
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Mathlib.RingTheory.RegularLocalRing.Polynomial

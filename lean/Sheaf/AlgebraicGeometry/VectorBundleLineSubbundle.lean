@@ -16,12 +16,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DvrSaturationLine
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 @[expose] public section
 

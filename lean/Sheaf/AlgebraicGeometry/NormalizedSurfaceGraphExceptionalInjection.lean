@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 import Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne

@@ -17,9 +17,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 import Mathlib.RingTheory.Localization.Module
 import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
 import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Affine comparison for the restriction source

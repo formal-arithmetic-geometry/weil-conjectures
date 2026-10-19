@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 public import Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism

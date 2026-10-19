@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
-import Sheaf.Algebra.Homology.ModuleHomComplex
+import WeilConjectures.Algebra.Homology.ModuleHomComplex
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.HomologySequence

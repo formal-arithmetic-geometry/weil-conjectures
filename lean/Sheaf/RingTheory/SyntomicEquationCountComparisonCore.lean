@@ -2,7 +2,7 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.SyntomicPresentationLocalKernel
 
 @[expose] public section

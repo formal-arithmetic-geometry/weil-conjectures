@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Sheaf.AlgebraicGeometry.NormalScheme
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

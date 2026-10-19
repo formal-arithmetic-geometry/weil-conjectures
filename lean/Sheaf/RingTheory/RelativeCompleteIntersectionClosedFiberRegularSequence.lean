@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
-import Sheaf.RingTheory.PolynomialLocalClosedFiberEquiv
+import WeilConjectures.RingTheory.PolynomialLocalClosedFiberEquiv
 import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 
 /-! # Regularity of complete-intersection equations in the polynomial closed fibre

@@ -6,7 +6,7 @@ Authors: SHEAF group Q21
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso

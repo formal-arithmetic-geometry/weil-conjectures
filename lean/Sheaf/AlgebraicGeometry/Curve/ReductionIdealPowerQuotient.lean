@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # The additive quotient of consecutive nilradical ideal powers

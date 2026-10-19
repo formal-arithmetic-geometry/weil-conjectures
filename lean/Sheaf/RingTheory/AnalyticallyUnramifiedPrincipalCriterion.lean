@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.QuotientAssociatedPrimesFlatBaseChange
 import Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified
-import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct

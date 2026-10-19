@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.Paper.PointFiniteCohomologyComplexes
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Paper.StrictPerfectPackageOnSite
 public import Sheaf.Algebra.Homology.BoundedFlatKFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful

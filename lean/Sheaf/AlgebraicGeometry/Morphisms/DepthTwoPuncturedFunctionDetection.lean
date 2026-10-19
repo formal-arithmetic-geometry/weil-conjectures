@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-! # Detecting functions on the punctured spectrum of a depth-two local ring

@@ -5,7 +5,7 @@ Authors: SHEAF group Q22
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

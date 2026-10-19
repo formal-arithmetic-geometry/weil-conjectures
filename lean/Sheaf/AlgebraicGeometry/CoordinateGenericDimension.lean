@@ -6,7 +6,7 @@ Authors: SHEAF group NA
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
 
 /-!

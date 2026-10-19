@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CompletedAdicCoefficientDatum
 public import Sheaf.Paper.SequentialDerivedInverseLimit
-public import Sheaf.CategoryTheory.KInjectiveBridge
+public import WeilConjectures.CategoryTheory.KInjectiveBridge
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution

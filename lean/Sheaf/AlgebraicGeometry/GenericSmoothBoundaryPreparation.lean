@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.Topology.Sober
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth

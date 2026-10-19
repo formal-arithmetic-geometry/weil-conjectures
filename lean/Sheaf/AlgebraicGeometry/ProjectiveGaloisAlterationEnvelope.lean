@@ -5,7 +5,7 @@ Authors: SHEAF group Q11
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
 public import Sheaf.AlgebraicGeometry.NormalScheme
 public import Sheaf.RingTheory.ExcellentRing
@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
 import Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import Sheaf.AlgebraicGeometry.ProjectiveBundleComposition
 import Sheaf.AlgebraicGeometry.ProjectiveGenericallyFinite
 import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension

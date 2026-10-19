@@ -26,7 +26,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso

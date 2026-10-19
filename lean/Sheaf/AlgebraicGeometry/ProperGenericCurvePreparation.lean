@@ -20,7 +20,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Fiber
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.Topology.Sober
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
@@ -39,7 +39,7 @@ import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
 import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import Sheaf.AlgebraicGeometry.FiniteInseparableGeometricReduction
-import Sheaf.AlgebraicGeometry.NormalSectionsFiniteProduct
+import WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import WeilConjectures.AlgebraicGeometry.Regular

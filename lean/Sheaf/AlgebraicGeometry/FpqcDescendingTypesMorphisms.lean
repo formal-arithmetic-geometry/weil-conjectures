@@ -8,9 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.FpqcSingletonAffineRefinement
-import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
-import Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
+import WeilConjectures.AlgebraicGeometry.FpqcSingletonAffineRefinement
+import WeilConjectures.AlgebraicGeometry.FpqcCanonicalPullbackDatum
+import WeilConjectures.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
 import Sheaf.AlgebraicGeometry.FpqcEffectivityAffineBaseGluing
 
 /-!

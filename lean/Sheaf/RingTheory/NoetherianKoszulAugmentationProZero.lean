@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.RingTheory.KoszulGeneratorChainMap
+import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 import all Sheaf.RingTheory.KoszulProjectiveResolution
 import Sheaf.RingTheory.KoszulPowerHomologyProZero
 import Sheaf.RingTheory.KoszulConeHomologyProZero

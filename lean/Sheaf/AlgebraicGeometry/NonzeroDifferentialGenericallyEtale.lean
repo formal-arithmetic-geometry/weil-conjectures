@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Kaehler.Basic
 
-import Sheaf.AlgebraicGeometry.FunctionField
+import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Mathlib.RingTheory.Etale.Kaehler

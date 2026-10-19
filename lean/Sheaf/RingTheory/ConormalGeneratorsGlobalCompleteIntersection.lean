@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 
 /-!

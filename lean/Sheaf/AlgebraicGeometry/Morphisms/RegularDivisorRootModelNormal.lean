@@ -12,10 +12,10 @@ public import Mathlib.Algebra.Regular.SMul
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.Algebra.Polynomial.Derivation
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.FiniteProductNormal
+import WeilConjectures.RingTheory.FiniteProductNormal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! Normality of full root algebras along a regular divisor. -/

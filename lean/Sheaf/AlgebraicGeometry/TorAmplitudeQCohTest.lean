@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import all Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal
 
 /-! # Testing Tor amplitude on quasi-coherent modules

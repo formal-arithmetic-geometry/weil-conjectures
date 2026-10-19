@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Blowup.InvertibleCenter
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Blowup.BlowupUniversal
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber

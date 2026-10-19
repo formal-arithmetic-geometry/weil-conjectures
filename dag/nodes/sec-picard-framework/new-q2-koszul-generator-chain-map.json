@@ -92,13 +92,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.KoszulGeneratorChainMap",
-  "file": "lean/Sheaf/RingTheory/KoszulGeneratorChainMap.lean",
+  "module": "WeilConjectures.RingTheory.KoszulGeneratorChainMap",
+  "file": "lean/WeilConjectures/RingTheory/KoszulGeneratorChainMap.lean",
   "declaration": "ExteriorAlgebra.exists_koszul_generator_chain_map",
   "statement": "theorem exists_koszul_generator_chain_map\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)\n    (t : (Fin r →₀ A) →ₗ[A] (Fin r →₀ A))\n    (ht : (Finsupp.linearCombination A g).comp t = Finsupp.linearCombination A f)\n    (εf : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n    (εg : (koszulComplex A r g).extend ComplexShape.embeddingDownNat ⟶\n      (CochainComplex.singleFunctor (ModuleCat A) 0).obj (ModuleCat.of A (A ⧸ I)))\n    (haugf : ∀ x : ⋀[A]^0 (Fin r →₀ A),\n      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n        (ModuleCat.of A (A ⧸ I))).hom\n        (εf.f 0 (((koszulComplex A r f).extendXIso\n          ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n      Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x))\n    (haugg : ∀ x : ⋀[A]^0 (Fin r →₀ A),\n      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n        (ModuleCat.of A (A ⧸ I))).hom\n        (εg.f 0 (((koszulComplex A r g).extendXIso\n          ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =\n      Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x))\n    : ∃ U : (koszulComplex A r f).extend ComplexShape.embeddingDownNat ⟶\n        (koszulComplex A r g).extend ComplexShape.embeddingDownNat,\n      U ≫ εg = εf ∧\n      ((koszulComplex A r f).extendXIso ComplexShape.embeddingDownNat\n        (i := r) rfl).inv ≫ U.f (-(r : ℤ)) =\n      ModuleCat.ofHom (exteriorPower.map r t) ≫\n        ((koszulComplex A r g).extendXIso ComplexShape.embeddingDownNat\n          (i := r) rfl).inv",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.KoszulGeneratorChainMap; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

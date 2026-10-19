@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.Paper.NoetherianApproximation
 import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
 import Sheaf.RingTheory.FilteredColimitFiniteData

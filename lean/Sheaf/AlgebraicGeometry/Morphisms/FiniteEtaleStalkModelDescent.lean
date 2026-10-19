@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 /-!
 # Descent of a finite etale cover from a stalk family

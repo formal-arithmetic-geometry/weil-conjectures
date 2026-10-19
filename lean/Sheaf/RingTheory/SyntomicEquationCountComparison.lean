@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import all Sheaf.RingTheory.SyntomicEquationCountComparisonCore
 import Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators

@@ -6,7 +6,7 @@ Authors: SHEAF group Q06
 module
 
 public import Sheaf.AlgebraicGeometry.NormalScheme
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.InvertibleTorsionOrders
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

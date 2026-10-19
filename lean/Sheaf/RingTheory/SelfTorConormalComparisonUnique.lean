@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.SelfTorConormalComparisonPredicate
-import Sheaf.RingTheory.KoszulGeneratorChainMap
+import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! Uniqueness of the normalized self-Tor comparison. -/

@@ -6,9 +6,9 @@ Authors: SHEAF group U3
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-public import Sheaf.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.SyntomicPolynomialFibreComparison
-import Sheaf.RingTheory.LocalizedIdealConormalGeneratorBound
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
+import WeilConjectures.RingTheory.SyntomicPolynomialFibreComparison
+import WeilConjectures.RingTheory.LocalizedIdealConormalGeneratorBound
 import Sheaf.RingTheory.LciConormalFreeRankCodimension
 import Mathlib.RingTheory.Polynomial.Basic
 

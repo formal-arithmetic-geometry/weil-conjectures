@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.KInjectiveBridge
+public import WeilConjectures.CategoryTheory.KInjectiveBridge
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple

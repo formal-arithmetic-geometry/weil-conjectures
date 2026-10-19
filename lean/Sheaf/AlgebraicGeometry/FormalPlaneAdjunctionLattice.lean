@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic

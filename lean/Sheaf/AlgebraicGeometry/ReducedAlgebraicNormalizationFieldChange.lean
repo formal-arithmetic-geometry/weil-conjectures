@@ -18,7 +18,7 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 import Mathlib.AlgebraicGeometry.SpreadingOut
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 
 /-!
 # Geometry and separable field change of reduced algebraic normalization

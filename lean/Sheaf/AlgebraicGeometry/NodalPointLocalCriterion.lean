@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
 public import Sheaf.AlgebraicGeometry.NodalGeometricFibres
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.ZetaSeries
 public import Mathlib.FieldTheory.Separable

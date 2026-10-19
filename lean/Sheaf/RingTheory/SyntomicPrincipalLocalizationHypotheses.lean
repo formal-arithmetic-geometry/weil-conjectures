@@ -6,7 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.SyntomicPrincipalLocalizationFibreTransport
 
 /-!

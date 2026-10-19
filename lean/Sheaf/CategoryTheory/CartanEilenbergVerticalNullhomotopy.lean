@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergExists
+public import WeilConjectures.CategoryTheory.CartanEilenbergExists
 public import Mathlib.Algebra.Homology.Homotopy
 import Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly
 import all Sheaf.CategoryTheory.CartanEilenbergComparisonCycleStage

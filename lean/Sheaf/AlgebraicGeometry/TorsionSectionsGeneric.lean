@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Data.List.TFAE
 import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.FunctionField
+import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Topology.PresheafModuleStalkFunctor

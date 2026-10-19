@@ -12,7 +12,7 @@ public import Sheaf.RingTheory.Depth
 
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Mathlib.RingTheory.Regular.IsSMulRegular
-import Sheaf.AlgebraicGeometry.Morphisms.AffineSectionAssociatedStalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineSectionAssociatedStalk
 
 /-! # Uniqueness of restriction across a depth-positive boundary
 

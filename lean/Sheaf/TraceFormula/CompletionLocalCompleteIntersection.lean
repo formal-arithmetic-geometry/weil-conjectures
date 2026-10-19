@@ -5,7 +5,7 @@ Authors: SHEAF group NK
 -/
 module
 
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic

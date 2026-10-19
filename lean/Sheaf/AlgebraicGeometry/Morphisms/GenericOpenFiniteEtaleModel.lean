@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 /-!
 # Spreading a generic finite étale cover to an open

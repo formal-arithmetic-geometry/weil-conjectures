@@ -5,7 +5,7 @@ Authors: SHEAF group Q25
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Mathlib.Algebra.Homology.Single
 
 /-! # Precomposition and homotopies on module-valued total Hom complexes

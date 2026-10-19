@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
 import Sheaf.RingTheory.FiniteTypeIntGRing

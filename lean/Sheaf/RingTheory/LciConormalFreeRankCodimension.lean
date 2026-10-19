@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Localization.AtPrime.Basic

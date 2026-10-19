@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.LocalCompleteIntersectionFieldChange
 import Sheaf.TraceFormula.LciAffineOpenLocality
 

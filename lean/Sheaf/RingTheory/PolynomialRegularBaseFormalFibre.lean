@@ -16,9 +16,9 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.CompletionRegularLocal
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.PolynomialNonzeroFibreHypersurface
+import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
+import WeilConjectures.RingTheory.HypersurfaceDerivationRegular
+import WeilConjectures.RingTheory.PolynomialNonzeroFibreHypersurface
 
 /-!
 # Regular polynomial formal fibres over a regular local base in characteristic zero

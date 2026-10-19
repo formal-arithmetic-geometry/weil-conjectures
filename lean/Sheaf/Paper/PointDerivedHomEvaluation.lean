@@ -10,7 +10,7 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.PointProEtaleSectionsExact
 public import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.Paper.IntegralHomReduction
 public import Sheaf.Algebra.Homology.HomComplexProjections
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality

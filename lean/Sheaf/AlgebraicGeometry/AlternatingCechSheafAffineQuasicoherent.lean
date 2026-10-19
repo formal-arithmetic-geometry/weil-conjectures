@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AlternatingCechSheafConstruction
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AlternatingCechSheafTerms
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 /-! # Quasi-coherence of affine pushforward Čech terms
 

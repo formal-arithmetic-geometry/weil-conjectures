@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
+import WeilConjectures.AlgebraicGeometry.FpqcCanonicalPullbackDatum
 import Sheaf.AlgebraicGeometry.FpqcEffectivityOpenLocal
 
 /-! Auxiliary step of effective fpqc descent, following the Stacks Project. -/

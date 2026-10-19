@@ -11,8 +11,8 @@ public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.RingTheory.KoszulAugmentationLiftExists
-import Sheaf.RingTheory.KoszulGeneratorChainMap
+import WeilConjectures.RingTheory.KoszulAugmentationLiftExists
+import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.CategoryTheory.Adjunction.Additive

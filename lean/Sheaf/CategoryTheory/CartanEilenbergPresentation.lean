@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.CategoryTheory.CartanEilenbergExists
+public import WeilConjectures.CategoryTheory.CartanEilenbergExists
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic

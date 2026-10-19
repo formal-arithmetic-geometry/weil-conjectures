@@ -2,7 +2,7 @@ module
 
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import WeilConjectures.RingTheory.Derivation.CompletionAndLocalization
 
 @[expose] public section
 

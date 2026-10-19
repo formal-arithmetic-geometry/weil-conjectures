@@ -5,7 +5,7 @@ Authors: SHEAF group Q55
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian

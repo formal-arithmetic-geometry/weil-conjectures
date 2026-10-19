@@ -5,7 +5,7 @@ Authors: SHEAF group Q92
 -/
 module
 
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.TraceFormula.SyntomicGeometricFibresAffineCriterion

@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Sheaf.TraceFormula.LciPointwiseCriterion
 
 /-!

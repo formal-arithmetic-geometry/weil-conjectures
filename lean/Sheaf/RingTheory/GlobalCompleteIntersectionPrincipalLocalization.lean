@@ -5,7 +5,7 @@ Authors: SHEAF group F1
 -/
 module
 
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
 import WeilConjectures.Mathlib.Topology.KrullDimension

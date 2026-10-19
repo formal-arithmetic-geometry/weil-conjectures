@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
 public import Sheaf.AlgebraicGeometry.PureDimension
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Stalk

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.UnboundedCumulativeUniversalBaseChangeProperty
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -23,9 +23,6 @@ import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
-import WeilConjectures.AlgebraicGeometry.ConstantPullbackCompositionCoherence
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 
 /-!
 # Failure of base change over an algebraically closed function field

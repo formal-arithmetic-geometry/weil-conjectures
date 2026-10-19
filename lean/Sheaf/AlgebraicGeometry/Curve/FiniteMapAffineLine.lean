@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
-import Sheaf.AlgebraicGeometry.FunctionField
+import WeilConjectures.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Mathlib.Topology.KrullDimension

@@ -16,7 +16,7 @@ public import Mathlib.Topology.KrullDimension
 
 import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.CompleteIntersectionOverField
+import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch

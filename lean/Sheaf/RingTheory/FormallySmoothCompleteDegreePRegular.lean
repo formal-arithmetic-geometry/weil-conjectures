@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import Sheaf.RingTheory.FormallySmoothCompleteDegreePUnitDerivation
-import Sheaf.AlgebraicGeometry.DegreePExtensionRegular
+import WeilConjectures.AlgebraicGeometry.DegreePExtensionRegular
 
 /-!
 # The degree-p step for formally smooth complete local algebras

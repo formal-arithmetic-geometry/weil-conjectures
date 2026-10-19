@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.FiniteClosedPoints

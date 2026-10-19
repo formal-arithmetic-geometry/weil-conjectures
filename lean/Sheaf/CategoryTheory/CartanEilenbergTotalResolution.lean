@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-public import Sheaf.CategoryTheory.KInjectiveBridge
+public import WeilConjectures.CategoryTheory.KInjectiveBridge
 import Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 

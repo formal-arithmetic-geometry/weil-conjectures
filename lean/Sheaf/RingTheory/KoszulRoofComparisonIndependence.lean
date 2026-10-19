@@ -10,8 +10,8 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 
-import Sheaf.RingTheory.KoszulGeneratorChainMap
-import Sheaf.RingTheory.KoszulDerivedTopEvaluation
+import WeilConjectures.RingTheory.KoszulGeneratorChainMap
+import WeilConjectures.RingTheory.KoszulDerivedTopEvaluation
 import Sheaf.RingTheory.KoszulConormalBasis
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis

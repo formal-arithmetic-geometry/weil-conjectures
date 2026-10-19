@@ -12,9 +12,9 @@ import Mathlib.AlgebraicGeometry.Gluing
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.FppfAffineRefinement
-import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
-import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
-import Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
+import WeilConjectures.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import WeilConjectures.AlgebraicGeometry.FpqcCanonicalPullbackDatum
+import WeilConjectures.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
 import Sheaf.AlgebraicGeometry.FpqcEffectivityOpenLocal
 import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 

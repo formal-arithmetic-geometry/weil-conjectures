@@ -5,10 +5,10 @@ Authors: SHEAF group W3
 -/
 module
 
-public import Sheaf.Algebra.Homology.ModuleHomComplex
+public import WeilConjectures.Algebra.Homology.ModuleHomComplex
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
 public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
-import Sheaf.RingTheory.KoszulGeneratorChainMap
+import WeilConjectures.RingTheory.KoszulGeneratorChainMap
 
 /-! # Increasing-wedge Koszul boundary evaluation
 

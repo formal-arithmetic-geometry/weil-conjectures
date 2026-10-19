@@ -5,7 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.AlgebraicGeometry.Ample

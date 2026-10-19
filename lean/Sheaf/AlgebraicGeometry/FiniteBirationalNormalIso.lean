@@ -5,7 +5,7 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 

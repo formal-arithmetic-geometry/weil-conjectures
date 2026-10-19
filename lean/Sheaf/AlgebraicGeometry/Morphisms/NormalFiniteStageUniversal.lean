@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 @[expose] public section

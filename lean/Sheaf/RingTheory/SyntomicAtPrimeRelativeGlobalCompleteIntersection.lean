@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization

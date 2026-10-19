@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace
 public import Mathlib.LinearAlgebra.Trace
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.Algebra.Homology.ModuleHomComplex
+import WeilConjectures.Algebra.Homology.ModuleHomComplex
 import Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy
 import Sheaf.CategoryTheory.DerivedCategory.FrameDualMate
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided

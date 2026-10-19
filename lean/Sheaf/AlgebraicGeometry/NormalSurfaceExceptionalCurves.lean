@@ -6,7 +6,7 @@ Authors: SHEAF group Q138
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

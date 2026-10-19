@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.IntegralIdealCommonSubmodule
 import Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration
-import Sheaf.CategoryTheory.FiniteFiltrationRefinement
+import WeilConjectures.CategoryTheory.FiniteFiltrationRefinement
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk

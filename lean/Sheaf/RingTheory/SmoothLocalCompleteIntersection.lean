@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Smooth.Basic
-public import Sheaf.RingTheory.CompleteIntersectionOverField
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence

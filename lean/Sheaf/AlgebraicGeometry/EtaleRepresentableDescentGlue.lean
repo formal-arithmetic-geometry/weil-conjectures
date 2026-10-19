@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
+public import WeilConjectures.AlgebraicGeometry.FpqcSingletonFullyFaithful
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.AlgebraicGeometry.Sites.Proetale

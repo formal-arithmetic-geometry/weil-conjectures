@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.MvPowerSeriesFlat
 import Sheaf.RingTheory.QuotientAssociatedPrimesFlatBaseChange
-import Sheaf.RingTheory.MvPowerSeriesPrimeExtension
-import Sheaf.AlgebraicGeometry.Morphisms.AssociatedGermDetection
+import WeilConjectures.RingTheory.MvPowerSeriesPrimeExtension
+import WeilConjectures.AlgebraicGeometry.Morphisms.AssociatedGermDetection
 import Mathlib.RingTheory.KrullDimension.Field
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.RingTheory.DepthLeDimAssociatedPrime

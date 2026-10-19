@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf

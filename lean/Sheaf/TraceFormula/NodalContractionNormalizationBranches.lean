@@ -21,7 +21,7 @@ public import Sheaf.AlgebraicGeometry.PureDimension
 public import Sheaf.Paper.OrgogozoInductionData
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.TraceFormula.CurveNormalizationCompletion
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso

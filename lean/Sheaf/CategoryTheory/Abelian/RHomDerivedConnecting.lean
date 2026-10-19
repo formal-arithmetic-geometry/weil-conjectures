@@ -5,7 +5,7 @@ Authors: SHEAF group M1, SHEAF group H1
 -/
 module
 
-public import Sheaf.CategoryTheory.KInjectiveBridge
+public import WeilConjectures.CategoryTheory.KInjectiveBridge
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle

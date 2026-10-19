@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.AlgebraicGeometry.FunctionField
+public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
