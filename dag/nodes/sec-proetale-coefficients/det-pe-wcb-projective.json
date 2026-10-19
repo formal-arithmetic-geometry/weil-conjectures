@@ -20,89 +20,37 @@
  ],
  "proof": [
   {
-   "text": "By [det-pe-topos-functoriality-site], $h_U=\\operatorname{Hom}_X(-,U)$ is a sheaf. Let $\\varphi:F\\to h_U$ be an epimorphism. Apply [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to $\\mathrm{id}_U\\in h_U(U)$. It gives a covering $\\{u_i:U_i\\to U\\}_{i\\in I}$ and $a_i\\in F(U_i)$ such that $\\varphi_{U_i}(a_i)=u_i$ for each $i$. This is local surjectivity in sheaves of sets, with no assumption that $\\varphi_U$ is already surjective.",
+   "text": "Apply the already proved source theorem [lem-weil-pbc-source-affine-wcontractible-evaluation] to the identity isomorphism of Spec D. This gives weak contractibility of U for Type (u+1)-valued sheaves. Its closed proof uses exactly the finite affine refinement, splitting of the coproduct cover, inverse-image disjoint clopen partition, and gluing route in this unit. No new geometric assertion is assumed.",
    "uses": [
-    "det-pe-topos-functoriality-site",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "opening sentence and part 1, local lifts of the identity; Stacks sites.tex Tag 00WN, lemma-mono-epi-sheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [det-pe-wcb-clopen-partition] to this covering of the affine $U=\\operatorname{Spec}D$, using precisely the assumed w-contractibility of $D$. Obtain a finite clopen partition $U=\\bigsqcup_{k=1}^m U_k^\\prime$ and $U$-morphisms $g_k:U_k^\\prime\\to U_{i_k}$. Write $j_k:U_k^\\prime\\hookrightarrow U$ for the inclusions and put $b_k=F(g_k)(a_{i_k})$. Naturality gives $\\varphi_{U_k^\\prime}(b_k)=u_{i_k}\\circ g_k=j_k$. No lift into a single member of the original covering is asserted.",
+   "text": "For every epimorphism φ:F→G, [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] makes φ locally surjective. The weak-contractibility conclusion from step 1 therefore makes φ_U surjective. This is clause 2, for arbitrary F and G and without any nonemptiness hypothesis.",
    "uses": [
-    "det-pe-wcb-clopen-partition"
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "part 1, clopen refinement and restrictions of the lifts; Stacks proetale.tex Tag 098F, lemma-w-contractible-proetale-cover"
-   }
+   "elementary": true
   },
   {
-   "text": "The inclusions $j_k$ form a Zariski covering, hence a pro-étale covering by the explicit Zariski-cover clause of [sk-def-pe-site]. In particular the pieces and their intersections are objects of this site. For any sheaf of sets $H$, the empty covering of the empty scheme is a covering by the finite-refinement covering definition, so the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology] makes $H(\\varnothing)$ a singleton. Thus for $k\\ne l$ the restrictions of $b_k$ and $b_l$ to $U_k^\\prime\\times_U U_l^\\prime=\\varnothing$ agree; for $k=l$ the fibre product is $U_k^\\prime$ and the two restrictions are identical. The same sheaf equalizer condition glues these sections uniquely to $b\\in F(U)$. The sections $\\varphi_U(b)$ and $\\mathrm{id}_U$ restrict to $j_k$ on every piece, so separatedness of $h_U$ gives $\\varphi_U(b)=\\mathrm{id}_U$. For $U=\\varnothing$ the same reasoning uses the empty partition and the unique empty matching family.",
-   "uses": [
-    "sk-def-pe-site",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "part 1, disjointness, gluing and equality with the identity; Stacks proetale.tex Tag 098B, lemma-etale-proetale, and sites.tex sheaf equalizer definition"
-   }
-  },
-  {
-   "text": "Apply [lem-galois-yoneda-hom-bijection] to the category $X_{\\mathrm{proét}}$ and the underlying presheaf of $F$. The section $b$ corresponds to a natural transformation $s:h_U\\to F$, explicitly $s_V(t)=F(t)(b)$ for $t:V\\to U$. Since sheaves form a full subcategory of presheaves, it is a sheaf morphism. Naturality of $\\varphi$ and $\\varphi_U(b)=\\mathrm{id}_U$ give $\\varphi_V(s_V(t))=h_U(t)(\\mathrm{id}_U)=t$ for every $V,t$. Hence $\\varphi\\circ s=\\mathrm{id}_{h_U}$, proving clause 1.",
-   "uses": [
-    "lem-galois-yoneda-hom-bijection",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "end of part 1, Yoneda and the section; Stacks categories.tex Tag 001P, lemma-yoneda"
-   }
-  },
-  {
-   "text": "For clause 2 let $\\alpha:F\\to G$ be any epimorphism and let $y\\in G(U)$. By [lem-galois-yoneda-hom-bijection] it determines a sheaf map $\\eta:h_U\\to G$ with $\\eta_V(t)=G(t)(y)$. Define the pullback sheaf explicitly by $P(V)=\\{(x,t)\\in F(V)\\times h_U(V):\\alpha_V(x)=G(t)(y)\\}$, with coordinatewise restrictions. It is a sheaf: glue the two coordinates by the sheaf equalizer condition of [def-weil-pbc-sites-and-cohomology]; the displayed equality holds on the glued coordinates because it holds after restriction to each member of the cover and $G$ is separated. The projection $p:P\\to h_U$ is locally surjective: for $t\\in h_U(V)$, local surjectivity of $\\alpha$ from [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], applied to $G(t)(y)$, gives locally sections $x_i$ with $\\alpha(x_i)=G(t|_{V_i})(y)$, so $(x_i,t|_{V_i})$ lifts $t|_{V_i}$. The converse direction of that same node makes $p$ an epimorphism. This proves the particular stability of epimorphisms under pullback used here directly from its local-lifting criterion.",
-   "uses": [
-    "lem-galois-yoneda-hom-bijection",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "part 2, pull back the epimorphism along the map represented by y; explicit verification of the topos assertion"
-   }
-  },
-  {
-   "text": "Apply clause 1, already proved in steps 1–4, to the epimorphism $p:P\\to h_U$. Its section $r$ yields $r_U(\\mathrm{id}_U)=(x,\\mathrm{id}_U)$ for some $x\\in F(U)$. The defining equality for $P(U)$ says $\\alpha_U(x)=G(\\mathrm{id}_U)(y)=y$. Thus $F(U)\\to G(U)$ is surjective for every epimorphism. Under the natural Yoneda bijections of [lem-galois-yoneda-hom-bijection], this is exactly the lifting property of $h_U$ against epimorphisms, hence its projectivity, proving clause 2.",
+   "text": "For an epimorphism φ:F→h_U, apply the surjectivity from step 2 to id_U (with the universe lift). Let x be its preimage. The sheaf version of [lem-galois-yoneda-hom-bijection] sends x to a morphism s:h_U→F. Naturality of the Yoneda bijection in the sheaf identifies s≫φ with the identity because both evaluate to id_U. This proves clause 1, including the empty scheme. Mathlib already supplies subcanonicality of ProEt.topology, so det-pe-topos-functoriality-site is not needed.",
    "uses": [
     "lem-galois-yoneda-hom-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-    "place": "end of part 2, section of the pullback and projection to F"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "det-pe-topos-functoriality-site",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
   "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "det-pe-wcb-clopen-partition",
-  "sk-def-pe-site",
-  "def-weil-pbc-sites-and-cohomology",
   "lem-galois-yoneda-hom-bijection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-projective.proof.md",
-  "place": "parts 1 and 2, with local-surjectivity, Yoneda and the pullback argument made explicit"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProEtale/WeaklyContractible.lean",
+  "place": "isWeaklyContractible_of_iso and the generic disjoint-cover gluing theorem; finish by Mathlib sheaf uliftYonedaEquiv, following det-pe-wcb-projective.proof.md part 1"
  },
  "mathlib_searches": [
   {
@@ -229,9 +177,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-topos-functoriality-site"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -271,5 +217,15 @@
   "group": "Q31",
   "result": "pass",
   "note": "Delivery shape: one commit changing only the report, the new module Sheaf/AlgebraicGeometry/ProEtale/Projective.lean, and the item's lean record; lean.statement verbatim in the file. Statement matches node and blueprint source det-pe-wcb-projective.md clause by clause: X : Scheme.{u} with no extra assumptions; D : Type u [CommRing D] [IsWContractibleRing D] (recorded sk-def-pe-wlocal class, read); U = ProEt.mk f with [WeaklyEtale f] on Mathlib ProEt.topology (recorded mathlib_match, no pro-etale substitute); h_U = Mathlib uliftYoneda.{u+1} sheaf (canonical, no new def); clause 1 = section of every Epi onto h_U (s ≫ φ = 𝟙); clause 2 = surjectivity of the U-component of every Epi. Sheaf values in Type (u+1), the same convention as proetale_site_properties; universes checked with pp.universes, nothing collapsed. Edge cases included: zero ring / empty Spec D, empty sheaves; no characteristic or finiteness restriction. Gates: no definitions, only proof is sorry, module and theorem docstrings carry source place, blueprint tag and all six proof steps; imports follow convention. nt_compile.py --json on the local side overlay compiled the module clean in 2.5 s; a probe copy confirmed the tool reports messages. No existing declaration states the node (upstream IsWeaklyContractible / isWeaklyContractible_of_iso covers only clause 2, noted for stage 3). Cosmetic only: the Worker report still describes the first round (removed helper proetaleRepresentableSheaf); the second reading records that repair. No fixes needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T002619-L-2161210",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

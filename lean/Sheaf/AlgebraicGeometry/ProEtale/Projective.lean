@@ -9,9 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Mathlib.CategoryTheory.Sites.Subcanonical
-import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition
 
 /-!
 # Projectivity of representables on the pro-étale site
@@ -73,6 +72,17 @@ theorem proetale_wContractible_projective
         Function.Surjective
           (((sheafToPresheaf (ProEt.topology X) (Type (u + 1))).map φ).app
             (op (ProEt.mk f)))) := by
-  sorry
+  have hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} (ProEt.mk f) :=
+    ProEt.isWeaklyContractible_of_iso (R := CommRingCat.of D) (Iso.refl _)
+  have hsurj (F G : Sheaf (ProEt.topology X) (Type (u + 1)))
+      (φ : F ⟶ G) [Epi φ] : Function.Surjective (φ.hom.app (op (ProEt.mk f))) :=
+    hU φ ((Sheaf.isLocallySurjective_iff_epi φ).mpr inferInstance)
+  refine ⟨?_, hsurj⟩
+  intro F φ _
+  obtain ⟨x, hx⟩ := hsurj F _ φ ⟨𝟙 (ProEt.mk f)⟩
+  refine ⟨(ProEt.topology X).uliftYonedaEquiv.symm x, ?_⟩
+  apply (ProEt.topology X).uliftYonedaEquiv.injective
+  rw [GrothendieckTopology.uliftYonedaEquiv_comp, Equiv.apply_symm_apply]
+  exact hx
 
 end AlgebraicGeometry.Scheme
