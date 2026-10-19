@@ -11,9 +11,91 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-adically-complete-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=R[P]$ and let $\\iota:S\\to B$ be the canonical map. Choose generators $u_1,\\ldots,u_t$ of $\\mathfrak a$ and a finite generating list $q_1,\\ldots,q_h$ of $P$ with its zero entries removed. Every nonzero $p\\in P$ has an expression as a nonempty sum of these $q_i$, so $z^p$ is a multiple of some $z^{q_i}$. Consequently $\\mathfrak b=(u_1,\\ldots,u_t,z^{q_1},\\ldots,z^{q_h})$ is finitely generated. For $P=\\{0\\}$ take the empty list.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent argument: finite generation needed for Tag 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adic-completion-mod-power] to the commutative ring $S$ and its finitely generated ideal $\\mathfrak b$. For every $n\\ge1$ the coordinate projection $\\pi_n:B\\to S/\\mathfrak b^n$ has kernel $\\mathfrak b^nB$ and satisfies $\\pi_n\\iota(g)=g\\bmod\\mathfrak b^n$. In particular, for each $f\\in B$ choose a representative $g_n\\in S$ of $\\pi_n(f)$; then $f-\\iota(g_n)\\in\\mathfrak b^nB$. Thus the coordinate-kernel neighborhoods and the $(\\mathfrak bB)$-adic neighborhoods coincide, since $(\\mathfrak bB)^n=\\mathfrak b^nB$ by expanding products of generators.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, lemma-hathat-finitely-generated (2) and final paragraph, specialized to M = S; agent spelling out polynomial representatives."
+   }
+  },
+  {
+   "text": "Define $e_a:S\\to A$ by the finite sum $e_a(\\sum_p c_pz^p)=\\sum_p\\alpha(c_p)a(p)$. Addition and the unit are preserved since $a(0)=1$. For multiplication, expanding the two finite supports gives $\\sum_{p,q}\\alpha(c_p d_q)a(p+q)=\\sum_{p,q}\\alpha(c_p)\\alpha(d_q)a(p)a(q)$, which is the product of the two evaluations. This uses only $a(p+q)=a(p)a(q)$, so no cancellation or integrality of $P$ is assumed. The generators of $\\mathfrak b$ go into $J$; expressing elements of $\\mathfrak b^n$ as finite sums of multiples of products of $n$ generators proves $e_a(\\mathfrak b^n)\\subseteq J^n$ for every $n\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite-sum computation using the monoid-algebra operations written in the item."
+   }
+  },
+  {
+   "text": "The previous containment makes $\\bar e_{a,n}:S/\\mathfrak b^n\\to A/J^n$, $[g]\\mapsto[e_a(g)]$, a well-defined ring map. For $m\\le n$, reducing this formula to $A/J^m$ equals first reducing $[g]$ to $S/\\mathfrak b^m$ and then applying $\\bar e_{a,m}$. Hence $f\\mapsto(\\bar e_{a,n}(\\pi_n(f)))_n$ takes values in $\\varprojlim_n A/J^n$ and is a ring map: the compatibility and all ring operations are checked coordinatewise [def-weil-pbc-adic-completion]. Compose it with the inverse of the canonical ring isomorphism $A\\to\\varprojlim_n A/J^n$ supplied by the definition of completeness [def-weil-pbc-adically-complete-ring]. The resulting ring map $E_a:B\\to A$ satisfies $E_a(f)\\bmod J^n=\\bar e_{a,n}(\\pi_n(f))$. Substituting $f=\\iota(g)$ shows $E_a\\iota=e_a$, since their residues agree for all $n$ and $A$ is separated. This gives the required values on $R$ and on every $z^p$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 0317, definition-complete, and section-completion: agent coordinatewise construction of the evaluation map."
+   }
+  },
+  {
+   "text": "An element of $\\mathfrak b^nB$ is a finite sum $\\sum_j\\iota(v_j)f_j$ with $v_j\\in\\mathfrak b^n$ and $f_j\\in B$. Applying $E_a$ gives $\\sum_j e_a(v_j)E_a(f_j)\\in J^n$. This proves the claimed filtration bound, including $n=0$, where it is simply $E_a(B)\\subseteq A$. For every $n$, therefore, the preimage of $J^n$ contains the open ideal $\\mathfrak b^nB$ from step 2. Translation by any $f\\in B$ gives continuity at $f$ for the adic topologies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite ideal-generator calculation; the coordinate-kernel topology is identified in step 2."
+   }
+  },
+  {
+   "text": "Let $F:B\\to A$ be any continuous ring map with the specified coefficient and monomial values. On a finite sum in $S$ those values give $F\\iota=e_a$. The same finite ideal-generator calculation as in step 5 yields $F(\\mathfrak b^nB)\\subseteq J^n$. For $f\\in B$ use the representative $g_n$ of step 2: both $F(f)$ and $E_a(f)$ equal $e_a(g_n)$ modulo $J^n$. Thus $F(f)-E_a(f)\\in\\bigcap_{n\\ge1}J^n=0$ [def-weil-pbc-adically-complete-ring], giving uniqueness. No extra density theorem is used.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, lemma-hathat-finitely-generated (2), and Definition Tag 0317; agent uniqueness argument with finite-level representatives."
+   }
+  },
+  {
+   "text": "Now let $a,b$ satisfy the stated congruences on $p_1,\\ldots,p_h$. For any $p$, choose an expression $p=p_{i_1}+\\cdots+p_{i_k}$; when $p=0$ use the empty expression. Set $x_j=a(p_{i_j})$ and $y_j=b(p_{i_j})$. The finite identity $\\prod_{j=1}^k x_j-\\prod_{j=1}^k y_j=\\sum_{j=1}^k(x_j-y_j)(\\prod_{l<j}x_l)(\\prod_{l>j}y_l)$ shows $a(p)-b(p)\\in J^r$, with zero difference for the empty product. Applying the finite-sum formula of step 3 gives $e_a(g)-e_b(g)\\in J^r$ for every $g\\in S$. For $f\\in B$ choose $g_r$ as in step 2 using [lem-weil-pbc-adic-completion-mod-power]. Step 5 for each evaluation sends $f-\\iota(g_r)\\in\\mathfrak b^rB$ into $J^r$. Therefore $E_a(f)-E_b(f)=E_a(f-\\iota(g_r))+(e_a(g_r)-e_b(g_r))-E_b(f-\\iota(g_r))\\in J^r$. This establishes the congruence without taking a closure of $J^r$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, lemma-hathat-finitely-generated (2), for the representative; agent telescoping-product argument for congruence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent proof of monoid evaluation and congruence; finite-level approximation is Stacks Tag 05GG, lemma-hathat-finitely-generated, and completeness is Tag 0317, definition-complete. ILO VI 2.3 supplies the intended formal chart application, not this general evaluation lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -70,10 +152,59 @@
    "results": "{\"t\": \"2026-10-18T22:54:24Z\", \"tool\": \"leansearch\", \"query\": \"Unique continuous evaluation homomorphism on the completion of a monoid ring with respect to a finitely generated ideal and congruence of evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.eval₂_unique\", \"MvPowerSeries.eval₂_unique\", \"MvPowerSeries.aeval_unique\", \"MvPowerSeries.eval₂Hom\", \"UniformSpace.Completion.extensionHom\", \"PowerSeries.aeval_unique\", \"PowerSeries.eval₂Hom\", \"MvPowerSeries.aeval\"], \"digest\": \"a4fb74c06ec96a4b\"}; Read AdicCompletion/RingHom.lean:35-135 and MvPowerSeries/Evaluation.lean:230-302. The former lifts compatible maps into quotients; the latter evaluates free-variable series. Neither states evaluation on completed monoid rings with relations together with the congruence estimate. The implicit elimination theorem is also absent from these hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eval|liftRingHom",
+   "results": "{\"t\": \"2026-10-18T23:14:55Z\", \"tool\": \"grep\", \"query\": \"eval|liftRingHom\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"a070fef0c1be0e61\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ring homomorphism from a monoid ring extends continuously to its adic completion and congruent monoid generators give congruent evaluations",
+   "results": "{\"t\": \"2026-10-18T23:14:56Z\", \"tool\": \"leansearch\", \"query\": \"A ring homomorphism from a monoid ring extends continuously to its adic completion and congruent monoid generators give congruent evaluations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniformSpace.Completion.extensionHom\", \"IsAdicComplete.liftRingHom\", \"UniformSpace.Completion.extensionHom_coe\", \"IsAdicComplete.of_liftRingHom\", \"UniformSpace.Completion.mapRingHom_apply\", \"IsAdicComplete.mk_comp_liftRingHom\", \"AddMonoidHom.completion_coe\", \"Isometry.extensionHom\"], \"digest\": \"1664891685c88e67\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"eval\"",
+   "results": "{\"t\": \"2026-10-18T23:14:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"eval\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.eval\", \"AdicCompletion.eval_comp_of\", \"AdicCompletion.eval_surjective\", \"AdicCompletion.pow_smul_top_le_ker_eval\", \"AdicCompletion.transitionMap_comp_eval\", \"AdicCompletion.range_eval\", \"AdicCompletion.eval_of\", \"AdicCompletion.eval_lift\"], \"digest\": \"6c8b284a3d6a5f89\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a completed monoid algebra in an adically complete ring, with congruence of evaluations modulo ideal powers",
+   "results": "{\"t\": \"2026-10-18T23:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation of a completed monoid algebra in an adically complete ring, with congruence of evaluations modulo ideal powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.evalₐ_mk\", \"AdicCompletion.evalₐ_mkₐ\", \"AdicCompletion.evalₐ_of\", \"AdicCompletion.eval_of\", \"AdicCompletion.eval_apply\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.factor_eval_eq_evalₐ\", \"AdicCompletion.factor_evalₐ_eq_eval\"], \"digest\": \"38591bb5c0ffee37\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*MonoidAlgebra|MonoidAlgebra.*AdicCompletion|eq_liftRingHom|mk_comp_liftRingHom",
+   "results": "{\"t\": \"2026-10-18T23:15:42Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*MonoidAlgebra|MonoidAlgebra.*AdicCompletion|eq_liftRingHom|mk_comp_liftRingHom\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\"], \"digest\": \"773bf1bb0e393e34\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-18T23:15:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.liftNC\", \"AddMonoidAlgebra.liftNCRingHom\", \"AddMonoidAlgebra.liftNC_single\", \"AddMonoidAlgebra.liftNC_one\", \"AddMonoidAlgebra.liftNCRingHom_single\", \"AddMonoidAlgebra.liftNC_mul\", \"AddMonoidAlgebra.liftNC_smul\", \"AddMonoidAlgebra.lift\"], \"digest\": \"c7684fbf9cdb5673\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from adic completions of additive monoid algebras: finite quotient evaluations and equality modulo powers for congruent generators",
+   "results": "{\"t\": \"2026-10-18T23:15:44Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from adic completions of additive monoid algebras: finite quotient evaluations and equality modulo powers for congruent generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.ext_evalₐ\", \"AdicCompletion.evalₐ_mk\", \"AdicCompletion.evalₐ_mkₐ\", \"AdicCompletion.evalₐ_of\", \"AdicCompletion.factor_eval_eq_evalₐ\", \"IsAdicComplete.algHom_ext\", \"AdicCompletion.factorₐ_evalₐ_one\"], \"digest\": \"acbc01da0d556a46\"}; Read RingTheory/AdicCompletion/RingHom.lean:35-100. IsAdicComplete.liftRingHom assembles already-compatible quotient maps, rather than constructing monoid evaluation and its congruence estimate. AddMonoidAlgebra.liftNCRingHom and lift cover the finite monoid algebra only. Coordinate evaluations of the completion do not state this whole item. The mod-power kernel fact is reused through the existing DAG leaf.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-formal-monoid-implicit-elimination",
@@ -102,5 +233,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-formal-monoid-adic-evaluation",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved evaluation by explicit finite-sum maps on quotients and the defining inverse-limit isomorphism of the complete target. Reused the existing Mathlib leaf for kernels modulo powers, with finite generation checked. Proved filtration, uniqueness and generator congruence with finite representatives; no new nodes, no Noetherian hypothesis or finite generation of J. Preserved earlier searches and added logged searches with two phrasings.",
+  "blueprint": "Auxiliary algebra beneath lem-per-artin-gabber-affine-curve through the existing Kummer-chart branch: realizes the completion-evaluation detail in ILO VI 2.3, printed p.73, used by lem-per-formal-monoid-implicit-elimination. No new blueprint counterpart was found by searches for completed monoid, monoid algebra or adic evaluation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-9ac76e1c1",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-9ac76e1c1 (reviewer sub-agent of L); spot-checked: I read the item, the three cited nodes, the citer lem-per-formal-monoid-implicit-elimination, and Stacks algebra.tex 22645-22678 (05GG, lemma-hathat-finitely-generated). Shape (A): one commit with the item and the report, no new nodes. The statement and stmt_deps are identical to the live node, which is still unsplit. proof_deps equals the union of the step uses, and every step is under 900 characters. The statement is true and no hypothesis was weakened: R is arbitrary, 𝔞 is finitely generated, J is arbitrary and A is J-complete. Sharpness is unused and harmless, since an invertible p would give 1 ∈ J and so A=0. Step 1: 𝔟 is finitely generated because every z^p with p≠0 is a multiple of some z^{q_i}; P={0} is covered. Step 2: the Mathlib leaf lem-weil-pbc-adic-completion-mod-power (pow_smul_top_eq_ker_eval, 05GG(2)) gives ker π_n = 𝔟^nB and the representatives g_n, and (𝔟B)^n = 𝔟^nB is elementary. Step 3: e_a is a ring map by a finite double sum using only a(p+q)=a(p)a(q), and e_a(𝔟^n) ⊆ J^n. Step 4: E_a is the inverse of A ≅ lim A/J^n composed with the compatible maps ē_{a,n}π_n, which uses exactly what the two definition leaves state, and E_aι = e_a. Step 5: elements of 𝔟^nB are Σι(v_j)f_j, so E_a(𝔟^nB) ⊆ J^n, and continuity follows from cosets. Step 6: uniqueness through g_n and ⋂J^n = 0; it does not even need continuity of F. Step 7: the telescoping product identity gives a(p)−b(p) ∈ J^r, then e_a−e_b on S, then the result for f via g_r, with no closure of J^r. Edge cases checked: P={0}, J=0, A=0, the noncancellative monoid {0,e} with e+e=e, and J not finitely generated. The citer uses exactly the existence, uniqueness and congruence clauses. The DAG search found no duplicate, and the searches cover all four tools. The cited nodes are Mathlib leaves, so there is no route issue, no tool_uses are needed and no SGA is cited. No changes."
  }
 }
