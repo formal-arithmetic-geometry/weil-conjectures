@@ -25,6 +25,54 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.ObjectProperty
 
+private theorem inverseImage_retracts
+    {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
+    (P : ObjectProperty D) [P.IsStableUnderRetracts] (F : C ⥤ D) :
+    (P.inverseImage F).IsStableUnderRetracts :=
+  ⟨fun r h ↦ P.prop_of_retract (r.map F) h⟩
+
+private theorem map_inclusion_retracts
+    {C : Type u} [Category.{v} C]
+    (A : ObjectProperty C) [A.IsStableUnderRetracts]
+    (P : ObjectProperty A.FullSubcategory) [P.IsStableUnderRetracts] :
+    (P.map A.ι).IsStableUnderRetracts := by
+  constructor
+  rintro X Y r ⟨Z, hZ, ⟨e⟩⟩
+  let X' : A.FullSubcategory :=
+    ⟨X, A.prop_of_retract r (A.prop_of_iso e Z.property)⟩
+  let r' : Retract X' Z :=
+    { i := A.homMk (r.i ≫ e.inv)
+      r := A.homMk (e.hom ≫ r.r)
+      retract := by ext; simp }
+  exact ⟨X', P.prop_of_retract r' hZ, ⟨Iso.refl _⟩⟩
+
+private theorem ambient_envelope_iff
+    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    (A : ObjectProperty C) [A.IsTriangulated] [A.IsStableUnderRetracts]
+    (S : ObjectProperty A.FullSubcategory) (K : A.FullSubcategory) :
+    (S.map A.ι ⊔ IsZero).triangEnvelope K.obj ↔ (S ⊔ IsZero).triangEnvelope K := by
+  let P := (S ⊔ IsZero).triangEnvelope
+  let H := (S.map A.ι ⊔ IsZero).triangEnvelope
+  have : (P.map A.ι).IsStableUnderRetracts := map_inclusion_retracts A P
+  have : (H.inverseImage A.ι).IsStableUnderRetracts := inverseImage_retracts H A.ι
+  have hHP : H ≤ P.map A.ι := by
+    apply (triangEnvelope_le_iff (S.map A.ι ⊔ IsZero) (Q := P.map A.ι)).mpr
+    refine sup_le ?_ (fun X hX ↦ (P.map A.ι).prop_of_isZero hX)
+    rintro X ⟨Y, hY, ⟨e⟩⟩
+    exact ⟨Y, (S ⊔ IsZero).le_triangEnvelope _ (Or.inl hY), ⟨e⟩⟩
+  have hPH : P ≤ H.inverseImage A.ι := by
+    apply (triangEnvelope_le_iff (S ⊔ IsZero) (Q := H.inverseImage A.ι)).mpr
+    refine sup_le ?_ (fun X hX ↦ (H.inverseImage A.ι).prop_of_isZero hX)
+    intro X hX
+    exact (S.map A.ι ⊔ IsZero).le_triangEnvelope _
+      (Or.inl (S.prop_map_obj A.ι hX))
+  constructor
+  · intro hK
+    obtain ⟨L, hL, ⟨e⟩⟩ := hHP _ hK
+    exact P.prop_of_iso (A.isoMk e) hL
+  · exact hPH K
+
 /-- Exact equivalences between full thick subcategories transport ambient thick closures.
 Source: the Weil conjectures blueprint, `sec-six-functors/sk-lem-sf-ctf-generation`,
 proof, first paragraph (blueprint: lem-trf-ambient-thick-closure-equivalence).
@@ -72,6 +120,66 @@ theorem ambient_thickClosure_equivalence
           (S.map (E.functor ⋙ B.ι) ⊔ IsZero).triangEnvelope.FullSubcategory,
         Nonempty (e.functor ⋙ (S.map (E.functor ⋙ B.ι) ⊔ IsZero).triangEnvelope.ι ≅
           ObjectProperty.ιOfLE hC ⋙ E.functor ⋙ B.ι) := by
-  sorry
+  let HC := (S.map A.ι ⊔ IsZero).triangEnvelope
+  let HD := (S.map (E.functor ⋙ B.ι) ⊔ IsZero).triangEnvelope
+  let PA := (S ⊔ IsZero).triangEnvelope
+  let PB := (S.map E.functor ⊔ IsZero).triangEnvelope
+  have hC : HC ≤ A := by
+    apply (triangEnvelope_le_iff (S.map A.ι ⊔ IsZero) (Q := A)).mpr
+    refine sup_le ?_ (fun X hX ↦ A.prop_of_isZero hX)
+    rintro X ⟨Y, _, ⟨e⟩⟩
+    exact A.prop_of_iso e Y.property
+  have hD : HD ≤ B := by
+    apply (triangEnvelope_le_iff (S.map (E.functor ⋙ B.ι) ⊔ IsZero) (Q := B)).mpr
+    refine sup_le ?_ (fun X hX ↦ B.prop_of_isZero hX)
+    rintro X ⟨Y, _, ⟨e⟩⟩
+    exact B.prop_of_iso e (E.functor.obj Y).property
+  have hmap : (S.map E.functor).map B.ι = S.map (E.functor ⋙ B.ι) := by
+    ext X
+    constructor
+    · rintro ⟨Y, ⟨Z, hZ, ⟨e⟩⟩, ⟨f⟩⟩
+      exact ⟨Z, hZ, ⟨B.ι.mapIso e ≪≫ f⟩⟩
+    · rintro ⟨Z, hZ, ⟨e⟩⟩
+      exact ⟨E.functor.obj Z, S.prop_map_obj E.functor hZ, ⟨e⟩⟩
+  have hA (K : A.FullSubcategory) : HC K.obj ↔ PA K :=
+    ambient_envelope_iff A S K
+  have hB (L : B.FullSubcategory) : HD L.obj ↔ PB L := by
+    change (S.map (E.functor ⋙ B.ι) ⊔ IsZero).triangEnvelope L.obj ↔
+      (S.map E.functor ⊔ IsZero).triangEnvelope L
+    simpa only [hmap] using ambient_envelope_iff B (S.map E.functor) L
+  have : (PB.inverseImage E.functor).IsStableUnderRetracts :=
+    inverseImage_retracts PB E.functor
+  have : (PA.inverseImage E.inverse).IsStableUnderRetracts :=
+    inverseImage_retracts PA E.inverse
+  have hf : PA ≤ PB.inverseImage E.functor := by
+    apply (triangEnvelope_le_iff (S ⊔ IsZero) (Q := PB.inverseImage E.functor)).mpr
+    refine sup_le ?_ (fun X hX ↦ (PB.inverseImage E.functor).prop_of_isZero hX)
+    intro X hX
+    exact (S.map E.functor ⊔ IsZero).le_triangEnvelope _
+      (Or.inl (S.prop_map_obj E.functor hX))
+  have hg : PB ≤ PA.inverseImage E.inverse := by
+    apply (triangEnvelope_le_iff (S.map E.functor ⊔ IsZero) (Q := PA.inverseImage E.inverse)).mpr
+    refine sup_le ?_ (fun X hX ↦ (PA.inverseImage E.inverse).prop_of_isZero hX)
+    rintro X ⟨Y, hY, ⟨e⟩⟩
+    exact PA.prop_of_iso (E.unitIso.app Y ≪≫ E.inverse.mapIso e)
+      ((S ⊔ IsZero).le_triangEnvelope _ (Or.inl hY))
+  have hmem (K : A.FullSubcategory) : HC K.obj ↔ HD (E.functor.obj K).obj := by
+    rw [hA, hB]
+    exact ⟨hf K, fun h ↦ PA.prop_of_iso (E.unitIso.app K).symm (hg _ h)⟩
+  refine ⟨hC, hD, hmem, ?_⟩
+  let F : HC.FullSubcategory ⥤ HD.FullSubcategory :=
+    HD.lift (ιOfLE hC ⋙ E.functor ⋙ B.ι)
+      (fun X ↦ (hmem ((ιOfLE hC).obj X)).mp X.property)
+  have : F.EssSurj := by
+    constructor
+    intro Y
+    let L : B.FullSubcategory := ⟨Y.obj, hD _ Y.property⟩
+    have hL : HC (E.inverse.obj L).obj :=
+      (hmem (E.inverse.obj L)).mpr
+        (HD.prop_of_iso (B.ι.mapIso (E.counitIso.app L)).symm Y.property)
+    exact ⟨⟨(E.inverse.obj L).obj, hL⟩,
+      ⟨HD.isoMk (B.ι.mapIso (E.counitIso.app L))⟩⟩
+  have : F.IsEquivalence := { }
+  exact ⟨F.asEquivalence, ⟨Iso.refl _⟩⟩
 
 end CategoryTheory.ObjectProperty

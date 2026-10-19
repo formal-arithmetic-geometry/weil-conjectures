@@ -17388,3 +17388,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:26 L: merged deliver/V7/Sheaf.Paper.SemilinearSystemModels (stage 3; reviewer PASS; first push; landing 20261019T112601-L-3958248 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:26 L: merged deliver/V8/Sheaf.AlgebraicGeometry.Curve.ReducedBoundarySmooth (stage 3; reviewer PASS; first push; landing 20261019T112602-L-3958584 (proof); batch 20261019T112432; modules 1; new nodes 1)
 - 11:26 L: merged deliver/W2/Sheaf.Paper.StratumScalarExtension (stage 3; reviewer PASS; first push; landing 20261019T112603-L-3958856 (interface); batch 20261019T112432; modules 2; new nodes 1; change records: coord/changes/stratum-scalar-extension-proof-context.md)
+- 11:26 L: merged deliver/W3/Sheaf.CategoryTheory.Triangulated.AmbientThickClosureEquivalence (stage 3; reviewer PASS; first push; landing 20261019T112604-L-3959110 (proof); batch 20261019T112432; modules 1; new nodes 0)
