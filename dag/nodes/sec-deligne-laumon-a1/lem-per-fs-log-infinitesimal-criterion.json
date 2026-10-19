@@ -19,9 +19,197 @@
   "def-weil-pbc-sheafification",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a log-smooth chart, [lem-per-log-smooth-infinitesimal-calculus] gives both local finite presentation and etale-local existence for precisely the arbitrary fine strict square-zero tests in this statement. Its local log lifts are the required family. A log-etale chart is also a log-smooth chart: its finite whole cokernel has finite torsion, and its etale comparison is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Thus the same existence and finite-presentation assertions hold for a log-etale morphism.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "def-per-fs-log-smooth-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.4 and 3.8, forward implication of 3.5; ILO chart conventions X 1.2."
+   }
+  },
+  {
+   "text": "For log-etale charts, two lifts differ by $(D,\\delta)$ as in [lem-per-log-smooth-infinitesimal-calculus]. On chart monoids $Q\\to P$, the restriction $\\delta|_{P^{\\rm gp}}$ kills $Q^{\\rm gp}$, so factors through the finite cokernel. Its order is a unit on the test scheme; multiplication by that order on the square-zero ideal is invertible, hence $\\delta|_{P^{\\rm gp}}=0$. Consequently the two ring maps agree on base functions and chart monomials, by $D\\alpha(p)=\\alpha(p)\\delta(p)=0$. They give two lifts over the etale comparison $c$. After base change to the test scheme, its sections reducing to the same section on $T_0$ coincide, since restriction on etale objects is fully faithful by [sbc-lem-thickening-etale-site]. Thus $D=0$. For a unit $u$, $D(u)=a_0^*(u)\\delta(u)$ forces $\\delta(u)=0$; the chart and units generate the log structure, so $\\delta=0$. This proves local uniqueness. The local lifts given by the calculus therefore agree on overlaps; their underlying scheme maps glue uniquely by [lem-weil-pbc-small-etale-representable-presheaf-sheaf], and their log maps, being maps of etale sheaves agreeing locally, glue too. This gives exactly one global log lift.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "def-per-fs-log-smooth-etale",
+    "sbc-lem-thickening-etale-site",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.4 and 3.9; Stacks Tag 03SI (proposition-topological-invariance)."
+   }
+  },
+  {
+   "text": "For the converse assume local finite presentation and the existence condition; the unique-lifting case implies this condition. Apply [lem-per-infinitesimal-log-differential-calculus], whose hypotheses are exactly these fine strict tests, to obtain $\\omega_f$ and local bases $d\\log t_1,\\ldots,d\\log t_r$. The lifting condition persists on the etale neighbourhoods used below. Fix a geometric point $\\bar x$ and its image $\\bar y$. Apply [lem-per-very-tame-equivariant-sharp-chart] to $Y$ with the trivial group: its order is $1$, its action is trivial, and it gives a sharp fs chart $Q$ near $\\bar y$. Thus $Q^{\\rm gp}$ is free of finite rank by [lem-trf-fs-face-sharpening] with the unit face. Work over this neighbourhood.",
+   "uses": [
+    "lem-per-infinitesimal-log-differential-calculus",
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{X,\\bar x}$, $k=A/\\mathfrak m$, $B=M_{\\bar x}^{\\rm gp}$ and $C=B/A^\\times$. Localizing a given fs chart at the face mapping to units, [lem-trf-fs-face-sharpening] shows that $\\overline M_{\\bar x}$ is sharp fs and $C$ is finite free. The defining differential relations give a surjection $k\\otimes_A\\omega_{f,\\bar x}\\to k\\otimes_{\\mathbf Z}(C/\\operatorname{im}Q^{\\rm gp})$: send $d\\log m$ to its class and $da$ to zero. To check the relation involving $\\alpha(m)$, its scalar is zero in $k$ if $m$ is a nonunit, and its characteristic class is zero if $m$ is a unit; base symbols also map to zero. Therefore the chosen $t_i$ give a surjection after tensoring with $k$ from $L=\\mathbf Z^r\\oplus Q^{\\rm gp}$ to $C$. By the finite abelian group structure theorem, $C/\\operatorname{im}L$ is finite, annihilated by some $n>0$ invertible in $A$: a free summand, or a primary summand of residue characteristic, would survive tensoring with $k$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-per-infinitesimal-log-differential-calculus",
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "The ring $A$ is strictly henselian by [lem-weil-pbc-strict-henselization-local-structure], using the affine-neighbourhood identification of its geometric-stalk colimit in [lemma-weil-pbc-affine-neighbourhood-cofinal]. Its residue field is separably closed. For $u\\in A^\\times$, the polynomial $T^n-u$ has a nonzero simple residue root: $n$ is invertible. The root-lifting theorem [lem-weil-pbc-henselian-local-root-lifting] gives an $n$th root which is again a unit. Hence $A^\\times$ is $n$-divisible. Apply [lem-per-divisible-unit-lattice-extension] with $D=A^\\times\\subset B$, $L=\\mathbf Z^r\\oplus Q^{\\rm gp}$ and $\\varphi(a,q)=\\sum a_it_i+f^\\flat(q)$. The preceding step verified its torsion-free quotient and finite-cokernel hypotheses. It gives finite free $G$, an injection $i:L\\to G$, a quotient $G/iL$ killed by a power of $n$, and $h:G\\to B$ extending $\\varphi$ and surjecting onto $C$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-per-divisible-unit-lattice-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Define $P=h^{-1}(M_{\\bar x})\\subset G$. Here $M_{\\bar x}$ is the inverse image of $\\overline M_{\\bar x}\\subset C$ in $B$, because two elements with the same characteristic differ by a unit. The surjection $G\\to C$ splits by lifting a finite basis of the free group $C$. If $K$ is its kernel, then $P\\cong\\overline M_{\\bar x}\\oplus K$. The subgroup theorem [lem-weil-subgroup-finite-free-abelian-group-free] makes $K$ finite free. Thus $P$ is finitely generated, integral and saturated, and $P^{\\rm gp}=G$: these assertions follow componentwise, and a group factor is generated as a monoid by a basis and its negatives. Put $E=h^{-1}(A^\\times)=K$. The map $P\\oplus_E A^\\times\\to M_{\\bar x}$ is onto by surjectivity onto the characteristic. If $h(p)u=h(p')u'$, then $p-p'\\in K=E$, and this equality is precisely a unit-pushout relation. This proves injectivity as well.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fine-log-stalk-chart-spreading] to $h|_P$, using the pushout isomorphism just proved. It gives a chart by this prescribed fs monoid $P$ on a pointed etale neighbourhood $W$ of $\\bar x$. The homomorphism $Q\\to P$ is $q\\mapsto i(0,q)$. It agrees with the base log map at the stalk; after shrinking, agreement on finitely many generators of $Q$ gives agreement of the maps. Thus it is a compatible chart. The map $Q^{\\rm gp}\\to G$ is injective. Moreover $G/i(Q^{\\rm gp})$ contains $\\mathbf Z^r$ with finite quotient killed by a power of $n$. Any torsion element injects into this finite quotient, so its order is invertible on a sufficiently small neighbourhood. These are the group conditions in [def-per-fs-log-smooth-etale]. In the unique-lifting case the new calculus gives $\\omega_f=0$, hence $r=0$, and the whole cokernel is finite of invertible order.",
+   "uses": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "def-per-fs-log-smooth-etale",
+    "lem-per-infinitesimal-log-differential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Let $\\widetilde Z=Y\\times_{\\operatorname{Spec}\\mathbf Z[Q]}\\operatorname{Spec}\\mathbf Z[P]$ and let $Z\\subseteq\\widetilde Z$ be the open subscheme where the integer $n$ of Step 4 is invertible, with its pulled-back $P$-log structure. Since $n$ is invertible on $W$ (Step 7), the chart comparison $W\\to\\widetilde Z$ factors through $Z$; call it $c:W\\to Z$. It is strict, since both its pulled-back log structure and $M|_W$ are associated to the same chart $P$. Etale maps are locally of finite presentation by [lem-kun-etale-lfp], and composition preserves this property by [lem-sbc-locally-finite-presentation-composition]. Localization on the base also preserves it: for an affine base map of finite type, the finite presentation is obtained by the same substitution formula below. Locally take $Y=\\operatorname{Spec}R$, $W=\\operatorname{Spec}H$ and $\\widetilde Z=\\operatorname{Spec}S$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], $H=R[x_1,\\ldots,x_a]/(g_1,\\ldots,g_b)$. The algebra $S$ is generated over $R$ by finitely many monomials $s_j$. If $a_j(x)$ represents their images in $H$, then $H=S[x_1,\\ldots,x_a]/(g_1,\\ldots,g_b,s_j-a_j(x))$: substitution reduces the quotient to exactly the original presentation of $H$. This proves that $W\\to\\widetilde Z$, hence its factorization $c$ through the open $Z$, is locally of finite presentation by [def-sbc-locally-finite-presentation]. Also $Z$ is locally Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-per-fs-log-smooth-etale",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-kun-etale-lfp",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "The identity comparison chart makes $Z\\to Y$ chart-log-smooth: $Q^{\\rm gp}\\to G$ is injective and the torsion of $G/Q^{\\rm gp}$ is finite of order a power of $n$, which is invertible on $Z$ by construction (on all of $\\widetilde Z$ it need not be, e.g. at points of residue characteristic dividing $n$). Its logarithmic differential module is $\\mathcal O_Z\\otimes_{\\mathbf Z}(G/Q^{\\rm gp})$: in the symbol presentation, every function is a sum of base multiples of monomials, so $d(z^p)=z^p d\\log p$, and the only remaining relations are additivity in $P^{\\rm gp}$ and vanishing on $Q^{\\rm gp}$. This also constructs the inverse to the displayed presentation. Tensoring the inclusion $L\\to G$ with $A$ is an isomorphism, since its finite cokernel is killed by a power of the unit $n$; in bases this is an integer matrix with determinant a unit. Thus $A\\otimes(G/Q^{\\rm gp})\\to\\omega_{f,\\bar x}$ sends the standard basis of $A^r$ to $d\\log t_i$ and is an isomorphism. Both sheaves are finite locally free by the two calculus statements. Shrinking $W$ where the determinant of this matrix is a unit makes $c^*\\omega_{Z/Y}\\to\\omega_{W/Y}$ an isomorphism.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-infinitesimal-log-differential-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Test $c$ on an affine square-zero scheme thickening $T_0\\hookrightarrow T$ over $Z$. Give $T$ the log structure of its pulled-back $P$ chart, and $T_0$ its reduction. These are fine, strict test objects by [lem-per-integral-chart-logification-thickening]; strictness of $c$ makes the given map $T_0\\to W$ a log map. The assumed existence property of $W\\to Y$ gives a log lift $a:T\\to W$ etale locally on $T$. Its composite $ca$ and the prescribed $b:T\\to Z$ have the same reduction and are over $Y$. By [lem-per-log-smooth-infinitesimal-calculus] for $Z/Y$, their difference is a homomorphism from the pullback of $\\omega_{Z/Y}$ to the square-zero ideal. Through the preceding differential isomorphism this is uniquely a homomorphism from the pullback of $\\omega_{W/Y}$. Acting on $a$ by its negative, using [lem-per-infinitesimal-log-differential-calculus], changes $ca$ by the negative of the original difference. The resulting lift therefore satisfies $ca=b$.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening",
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-infinitesimal-log-differential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "Two local lifts over $Z$ differ, by the new calculus, by a homomorphism from $\\omega_{W/Y}$ to the ideal. Its restriction from $\\omega_{Z/Y}$ is zero because their composites to $Z$ are equal. The differential isomorphism forces the homomorphism to be zero, so the two lifts coincide. In particular their underlying scheme maps coincide. The local scheme lifts constructed above consequently glue over the etale cover by [lem-weil-pbc-small-etale-representable-presheaf-sheaf], giving exactly one global scheme lift over $Z$. Every candidate scheme lift determines a compatible log lift, since $c$ is strict and the test log structure was pulled back from $Z$; this follows from the pullback/associated-log universal property, equivalently the chart-map bijection in [lem-per-integral-chart-logification-thickening]. Thus uniqueness holds among all scheme lifts, not merely among a chosen family of log lifts.",
+   "uses": [
+    "lem-per-infinitesimal-log-differential-calculus",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-per-integral-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  },
+  {
+   "text": "The comparison $c$ is locally of finite presentation and has exactly one scheme lift for every affine first order thickening. Apply [lem-per-lfp-unique-infinitesimal-lifts-etale] to conclude that $c$ is etale. It is therefore smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. The compatible fs charts at every $\\bar x$ have injective group map and prime-to-residue-characteristic torsion cokernel, so they satisfy the log-smooth definition. Under the original unique-lifting hypothesis they have $r=0$, hence finite whole cokernel of invertible order, so they satisfy the log-etale definition. Together with the two forward steps this proves both equivalences.",
+   "uses": [
+    "lem-per-lfp-unique-infinitesimal-lifts-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Kato 3.13, printed pp.204–205; ILO X 1.2 proof, pp.136–138 and XVI 3.6.3 proof, p.252; argument expanded here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-per-fs-log-smooth-etale",
+  "def-sbc-locally-finite-presentation",
+  "lem-kun-etale-lfp",
+  "lem-per-divisible-unit-lattice-extension",
+  "lem-per-infinitesimal-log-differential-calculus",
+  "lem-per-integral-chart-logification-thickening",
+  "lem-per-lfp-unique-infinitesimal-lifts-etale",
+  "lem-per-log-smooth-infinitesimal-calculus",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Kato 3.4, 3.9–3.13 read in the online primary source (WANTED locally); ILO X 1.2 and XVI 3.6.3 read locally. Explicit chart and derivation-correction argument; no appeal to the chart criterion as a black box."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,7 +248,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-smooth-composition-strict-base-change",
@@ -87,5 +275,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-fs-log-infinitesimal-criterion",
+  "worker": "stage1",
+  "summary": "Repaired the earlier opaque chart-extraction step. Added one statement-only infinitesimal differential-calculus input, whose hypotheses are strict lifting rather than chart smoothness. Constructed the lattice and fs chart explicitly, verified the comparison differential isomorphism, and corrected arbitrary local lifts by logarithmic derivations to prove the comparison etale. Retained the statement and its fine-test conventions unchanged. Reused existing lattice, chart-spreading and ordinary etale criterion nodes.",
+  "blueprint": "Supports the unchanged ancestry through lem-per-artin-gabber-affine-curve: infinitesimal characterization used in composition of log-smooth structural maps and log-etale modifications. Realizes that supporting logarithmic-chart input by the Kato lattice construction, rather than presupposing chart smoothness in its converse.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-etale-lfp",
+    "why": "Generic etale finite-presentation/composition input used to retain local finite presentation in Step 8."
+   },
+   {
+    "node": "lem-trf-fine-log-stalk-chart-spreading",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic local algebra, etale-site or monoid tool used exactly as stated; it supplies an input to the unchanged logarithmic chart construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-etale-lfp",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N0-50a8d427b",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-50a8d427b (reviewer sub-agent of L); spot-checked: I read the item's 12 steps, the new node lem-per-infinitesimal-log-differential-calculus and every cited statement. Sources were ILO X 1.2 (pp.136-139), XVI 3.6.3 (p.252) and Kato 3.3/3.5/3.9-3.10/3.13. The item statement and stmt_deps are byte-identical to the version Q144 landed, so the statement is unchanged. Steps 1-7 and 10-12 check out: the forward direction kills delta on the finite cokernel of invertible order and uses 03SI for D=0; the converse obtains the dlog basis from the new node and the sharp chart from very-tame-equivariant-sharp-chart with G=1. Step 4 gives a finite cokernel of invertible order; Step 5 gives n-divisible units by Hensel and applies lattice-extension; I checked the Step 6 pushout bijection by hand; Step 7 applies chart-spreading; Steps 10-11 correct the lifts and prove uniqueness; Step 12 applies the ordinary etale criterion. Fault 1 (E1): Steps 8-9 called Z=Y x_{Z[Q]} Z[P] chart-log-smooth over Y, but the torsion of G/Q^gp has order a power of n, which need not be invertible on Z (example Q=P=Z, q->2q over Z[s^{+-1}]), and O_Z tensor G/Q^gp is then not locally free. Fixed by taking the open subscheme where n is invertible; W lands there by Step 7, and Kato 3.13 also inverts n. Fault 2 (C4): Step 2 attributed the gluing of local lifts to the calculus node, which says nothing about gluing; it now cites lem-weil-pbc-small-etale-representable-presheaf-sheaf. New node: true (Kato 3.9 torsor and 3.10 local freeness under the lifting definition; the dlog basis holds because du=u dlog u for units and da=d(a-1) for nonunits; unique lifts imply omega=0 using the test X[omega]). It is statement-only and self-contained, not circular and not a duplicate: every existing log-differential node assumes chart log smoothness. Batch-5 flags: for logification-thickening, very-tame-equivariant-sharp-chart, fine-log-stalk-chart-spreading, fs-face-sharpening and def-trf-fs-log-blowup, the closure contains only trf definitions and generic monoid/log lemmas, with no thm-, sk- or nt- node. None is a step of the trace formula or of Poincare duality, so all are accepted, as are the tool_uses. No cycle, no SGA, all steps under 2000 characters. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-fs-log-infinitesimal-criterion.json.; 1 file(s) fixed by the reviewer"
  }
 }
