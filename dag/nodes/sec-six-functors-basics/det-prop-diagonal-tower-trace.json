@@ -18,7 +18,11 @@
   "sk-def-sp-tate-twist",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-diagonal-tower-limit",
-  "sk-lem-geo-p1-cohomology"
+  "sk-lem-geo-p1-cohomology",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-limit-characterization"
  ],
  "proof": [
   {
@@ -432,5 +436,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerTrace",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonalTower_trace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalTraceFirstModel",
+   "AlgebraicGeometry.ProEtale.diagonalTraceSecondModel",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.NormalizedSource",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.NormalizedSource.hom",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.IsIntegration",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.supportedSourceNormalization",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.SupportedSource",
+   "AlgebraicGeometry.ProEtale.diagonalTower_trace"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerTrace.lean",
+  "statement": "theorem diagonalTower_trace (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤))) [DiagonalTraceLocalizations l Y] [DiagonalTraceLocalizations l (ProjectiveLine Y)] [DiagonalTraceLocalizations l (diagonalSurface Y)] (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))) (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D) (hsystem : DiagonalCycleSystemSpec l Y hY D) (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) (hδ : IsDiagonalLimit l Y hY D δ) : ∃ (tq : Result l (ULift.{u} (Padic l)) (ProjectiveLine Y ↘ Y)) (t₁ : Result l (ULift.{u} (Padic l)) (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))) (t₂ : Result l (ULift.{u} (Padic l)) (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))), tq.model.model = Iso.refl (ProjectiveLine Y) ∧ t₁.model.model = diagonalTraceFirstModel Y ∧ t₂.model.model = diagonalTraceSecondModel Y ∧ ∃ (a₁ : SupportedSource l Y (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₁.Rc) (a₂ : SupportedSource l Y (pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y)) t₂.Rc), IsIntegration t₁.Rc.R a₁.hom t₁.trace δ ∧ IsIntegration t₂.Rc.R a₂.hom t₂.trace δ",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f60c01ca",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, 4 new def nodes, report, all 5 modules and the recorded deps (diagonalTower_limit, DiagonalTowerSystem, GeoP1Cohomology, SpTowerShriek, TowerClass*). Clause 1: strict splitting IsIso on constant-Z_l towers, completed trace pinned by IsTrace, reductions plus torsion 0/1 normalization, p1/p2 models over fst/snd (checked). Clause 2: IsIntegration a≫R.map δ≫t=𝟙 for both projections. δ fixed by IsDiagonalLimit = diagonalTower_limit conclusion token for token (∃! as named δ plus uniqueness). SupportedSource HEq types equal by with_unfolding_all rfl (probe clean). All comparisons pinned; no free arrows. No extra hypotheses; edge cases (empty Y, n=0, l=2) and universes ok. Statements verbatim, docstrings with all 11 steps, item changed only lean plus new def stmt_deps. nt_compile --json: clean once (Limit 57.5 s at load 125), later Limit timeouts (IsDiagonalLimit ~40 s CPU) → maintainer: land at lower load, re-push same head if returned. Advisory: new def node cites theorem det-sp-tower-shriek-levels for plain SpTowerShriek defs (no owning def node; landed tower-class nodes do the same); torsion trace characterized rather than naming geoP1Trace; Model generalizes SpTowerClasses.Projective."
  }
 }

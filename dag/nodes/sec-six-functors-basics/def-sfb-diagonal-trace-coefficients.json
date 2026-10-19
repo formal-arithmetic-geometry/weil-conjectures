@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-diagonal-trace-coefficients",
+ "kind": "definition",
+ "title": "Normalized coefficient and root-limit cones for the trace",
+ "status": "split",
+ "statement": "Use the projective coefficient systems and discrete-scalar restriction of [def-sfb-diagonal-trace-models], the canonical scalar-extended root module of [def-sp-tower-class-chern], and the completed coefficient and root-limit sheaves of [det-prop-diagonal-tower-limit]. Define normalized coefficient-cone data to consist of the completed coefficient-unit and root-line projection cones onto the restricted strict coefficient systems. The coefficient system is identified with the finite ring tower by an isomorphism taking one to one. The root system is identified with the root-of-unity tower by the isomorphism taking the scalar-extension section $1\\otimes x$ to the root specified by the normalized Chern datum. Under these identifications, every cone component is exactly the existing completed ring projection or root-limit projection. Define the derived coefficient and line comparisons by composing the exact single-functor comparisons, the ordinary limit cone map, and the universal right-derived-limit unit.",
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sp-tower-class-chern",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "trace proof steps 1--8; normalized structural data used by the trace construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical projective line trace on strict inverse systems and its completed coefficient inverse limit",
+   "results": "8 hits; InverseSystem.limit, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.invLimEquiv.congr_simp, UniformSpace.Completion.hatInv, InverseSystem.globalEquiv, IsAdicComplete.of_lift, InverseSystem.piEquivLim.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projective line trace on strict inverse systems and its completed coefficient inverse limit",
+   "results": "8 hits; InverseSystem.piLTLim_apply, InverseSystem.piLTLim, InverseSystem.pEquivOnLim, Profinite.NobelingProof.πs, Profinite.NobelingProof.πs', InverseSystem.piLTLim_symm_apply, InverseSystem.globalEquiv, InverseSystem.piLTProj",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, DerivedCategory.singleFunctor",
+   "results": "0 hits; . loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*trace|trace.*projective|Tate.*limit",
+   "results": "19 hits; Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalTrace\\.(Model|Restriction|Coefficients|Presentation)|diagonalTower_trace in lean/WeilConjectures and lean/Sheaf",
+   "results": "No hits. TowerClassProjective supplies the standard projective-line model with varying coefficients; its Chern, tensor/Hom and projection constructions are reused for the transported models. TraceBaseChangeFirst gives condensed module operations, not these strict discrete-scalar towers or normalized coefficient cones.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate of the introduced normalized records."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'projective line trace'",
+   "results": "0 blueprint nodes match 'projective line trace'. DAG search found no def-sfb-diagonal-trace-models, def-sfb-diagonal-trace-coefficients or def-sfb-diagonal-trace-presentation.",
+   "date": "2026-10-19",
+   "verdict": "Auxiliary definitions extracted from the item proof, not new mathematical assertions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-diagonal-tower-trace",
+  "date": "2026-10-19",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "trace proof steps 1--8",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerTraceCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.Coefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.completedUnit",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.completedLine",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.Coefficients",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.Coefficients.unitMap",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.Coefficients.lineMap"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerTraceCoefficients.lean",
+  "statement": "structure Coefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) [DiagonalTraceLocalizations l T] (c : Chern l E T) (r : Restriction l E T)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f60c01ca",
+  "group": "O1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f60c01ca",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, 4 new def nodes, report, all 5 modules and the recorded deps (diagonalTower_limit, DiagonalTowerSystem, GeoP1Cohomology, SpTowerShriek, TowerClass*). Clause 1: strict splitting IsIso on constant-Z_l towers, completed trace pinned by IsTrace, reductions plus torsion 0/1 normalization, p1/p2 models over fst/snd (checked). Clause 2: IsIntegration a≫R.map δ≫t=𝟙 for both projections. δ fixed by IsDiagonalLimit = diagonalTower_limit conclusion token for token (∃! as named δ plus uniqueness). SupportedSource HEq types equal by with_unfolding_all rfl (probe clean). All comparisons pinned; no free arrows. No extra hypotheses; edge cases (empty Y, n=0, l=2) and universes ok. Statements verbatim, docstrings with all 11 steps, item changed only lean plus new def stmt_deps. nt_compile --json: clean once (Limit 57.5 s at load 125), later Limit timeouts (IsDiagonalLimit ~40 s CPU) → maintainer: land at lower load, re-push same head if returned. Advisory: new def node cites theorem det-sp-tower-shriek-levels for plain SpTowerShriek defs (no owning def node; landed tower-class nodes do the same); torsion trace characterized rather than naming geoP1Trace; Model generalizes SpTowerClasses.Projective."
+ }
+}

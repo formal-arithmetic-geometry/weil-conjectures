@@ -1,0 +1,160 @@
+{
+ "id": "def-sfb-diagonal-trace-limit-characterization",
+ "kind": "definition",
+ "title": "The full normalized characterization of the completed diagonal arrow",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $Y$ a scheme with $\\ell$ invertible. Use the simultaneous derived reduction $D$ and strict Cartier system of [det-prop-diagonal-tower-system], and the completed coefficients, derived limits, source and target comparisons of [det-prop-diagonal-tower-limit], with that node's derived-category size conventions. A completed arrow $\\delta:\\Delta_*\\Zl\\to\\Zl(1)[2]$ is a normalized diagonal limit when it admits exactly the full normalized data in the conclusion of the latter node: a root system $H$ with its root identification, the canonical single-functor source comparison, the signed boundary class and all finite positive Cartier normalizations; total derived limit and completed reduction data; ordinary source and root limit isomorphisms normalized by their canonical generators and projections; invertible derived-limit comparisons; derived completeness of both endpoints; the whole-system comparison equation for $\\delta$ and its uniqueness for those comparisons; and the stated reduction comparisons at every finite level. The root-limit comparison is the actual composite of preservesLimitIso and HasLimit.isoOfNatIso. This is a predicate on an already specified arrow, not a choice from its finite evaluations.",
+ "stmt_deps": [
+  "det-prop-diagonal-tower-system",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.md",
+  "place": "diagonal-limit clause 3; trace proof step 11"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical projective line trace on strict inverse systems and its completed coefficient inverse limit",
+   "results": "8 hits; InverseSystem.limit, InverseSystem.isNatEquiv_piEquivLim, InverseSystem.invLimEquiv_symm_apply_coe, InverseSystem.invLimEquiv.congr_simp, UniformSpace.Completion.hatInv, InverseSystem.globalEquiv, IsAdicComplete.of_lift, InverseSystem.piEquivLim.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical projective line trace on strict inverse systems and its completed coefficient inverse limit",
+   "results": "8 hits; InverseSystem.piLTLim_apply, InverseSystem.piLTLim, InverseSystem.pEquivOnLim, Profinite.NobelingProof.πs, Profinite.NobelingProof.πs', InverseSystem.piLTLim_symm_apply, InverseSystem.globalEquiv, InverseSystem.piLTProj",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory, DerivedCategory.singleFunctor",
+   "results": "0 hits; . loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*trace|trace.*projective|Tate.*limit",
+   "results": "19 hits; Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Enriched/Limits/HasConicalLimits.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Abelian/Basic.lean, Mathlib/CategoryTheory/Comma/Presheaf/Colimit.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact normalized strict-system trace construction. Reuse the recorded derived and coefficient APIs."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalTrace\\.(Model|Restriction|Coefficients|Presentation)|diagonalTower_trace in lean/WeilConjectures and lean/Sheaf",
+   "results": "No hits. TowerClassProjective supplies the standard projective-line model with varying coefficients; its Chern, tensor/Hom and projection constructions are reused for the transported models. TraceBaseChangeFirst gives condensed module operations, not these strict discrete-scalar towers or normalized coefficient cones.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate of the introduced normalized records."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'projective line trace'",
+   "results": "0 blueprint nodes match 'projective line trace'. DAG search found no def-sfb-diagonal-trace-models, def-sfb-diagonal-trace-coefficients or def-sfb-diagonal-trace-presentation.",
+   "date": "2026-10-19",
+   "verdict": "Auxiliary definitions extracted from the item proof, not new mathematical assertions."
+  },
+  {
+   "tool": "rg",
+   "query": "IsDiagonalLimit|NormalizedSource|supportedSourceNormalization|IsIntegration in lean/Sheaf, lean/WeilConjectures, and Mathlib",
+   "results": "No hits. IsDiagonalLimit packages the entire recorded diagonalTower_limit conclusion; NormalizedSource is its generic source-comparison record and IsIntegration is the literal composition equation.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate helper declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed diagonal cycle morphism uniquely specified by its derived inverse limit comparison and canonical finite Cartier projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The morphism $ g $ maps the object $ D(i') $ in the diagram to the pullback of $ f $ with itself, constructed by composing the diagram's morphism $ D(h_{i'i}) $ with the unique lift provided by the pu\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hab\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f),\\n  CategoryTheory.CategoryStru\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation $t: D \\\\Rightarrow \\\\Delta(S)$ to the constant diagram at $S$, and a morphism $f: X \\\\to S$,\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} {inst : CategoryTheory.Category.{u, u} I} {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  {c : CategoryTheory.Limits.Cone D} {hc : CategoryTheory.Limits.IsLimit c} {i : I} {a : D.\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, if two instances of th\"}",
+   "date": "2026-10-19",
+   "verdict": "No predicate for the completed normalized diagonal arrow. The existing generic preserved-limit and natural-isomorphism components are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "preservesLimitIso",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'preservesLimitIso'",
+   "date": "2026-10-19",
+   "verdict": "No predicate for the completed normalized diagonal arrow. The existing generic preserved-limit and natural-isomorphism components are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.preservesLimitIso",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.preservesLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] : G.\", \"doc\": \"If `G` preserves limits, we have an isomorphism from the image of the limit of a functor `F`\\nto the limit of the functor `F ⋙ G`.\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_hom_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (j :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (j :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.lift_comp_preservesLimitIso_hom\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (t :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_hom_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (j :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitIso_inv_π_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (j :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.lift_comp_preservesLimitIso_hom_assoc\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.PreservesLimit F G] [CategoryTheory.Limits.HasLimit F] (t :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitNatIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] [CategoryTheory.Limits.PreservesLimitsOfShape J G] [CategoryTheory.Limits.HasLimitsOfShape J D] [CategoryTheory.Lim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesLimitNatIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheory.Functor C D) {J : Type w} [CategoryTheory.Category.{w', w} J] [CategoryTheory.Limits.PreservesLimitsOfShape J G] [CategoryTheory.Limits.HasLimitsOfShape J D] [CategoryTheory.Lim\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.limitPresheafOfModules_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (PresheafOfModules.evaluation R X)).comp (CategoryTheory.fo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Limits.fiberwiseColimitLimitIso_inv_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Grothendieck\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {H : Type u₂} [CategoryTheory.Category.{v₂, u₂} H] {J : Type u₃} [CategoryTheory.Category.{v₃, u₃} J] {F : CategoryTheory.Functor C CategoryTheory.Cat} (K : CategoryTheory.Functor J (CategoryTheory.Functor (CategoryTheory.Grothendieck F) H)) [∀ (c \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Limits.fiberwiseColimitLimitIso_hom_app\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Grothendieck\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {H : Type u₂} [CategoryTheory.Category.{v₂, u₂} H] {J : Type u₃} [CategoryTheory.Category.{v₃, u₃} J] {F : CategoryTheory.Functor C CategoryTheory.Cat} (K : CategoryTheory.Functor J (CategoryTheory.Functor (CategoryTheory.Grothendieck F) H)) [∀ (c \", \"doc\": \"\"}",
+   "date": "2026-10-19",
+   "verdict": "No predicate for the completed normalized diagonal arrow. The existing generic preserved-limit and natural-isomorphism components are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*limit|limit.*diagonal in CategoryTheory",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal\"}\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Limits.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/Saturate.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"line\": \"135\", \"text\": \"        · simp only [Category.assoc, diagonal_fst, Category.comp_id, limit.lift_π,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/Diagonal.lean\", \"line\": \"137\", \"text\": \"        · simp only [condition_assoc, Category.assoc, diagonal_snd, Category.comp_id, limit.lift_π,\"}",
+   "date": "2026-10-19",
+   "verdict": "No predicate for the completed normalized diagonal arrow. The existing generic preserved-limit and natural-isomorphism components are reused."
+  },
+  {
+   "tool": "blueprint_refs.py and rg",
+   "query": "normalized diagonal limit; def-sfb-diagonal-trace-limit-characterization in dag/nodes",
+   "results": "0 blueprint nodes match 'normalized diagonal limit'; no DAG node with the new id. The existing diagonal-limit statement supplies an unbundled existential characterization, which this definition packages.",
+   "date": "2026-10-19",
+   "verdict": "No existing definition predicate of this normalized arrow."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-diagonal-tower-trace",
+  "date": "2026-10-19",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "trace proof step 11, use of the completed diagonal arrow",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerTraceLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.IsDiagonalLimit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.rootLimitComparison",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.IsDiagonalLimit"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerTraceLimit.lean",
+  "statement": "def IsDiagonalLimit (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤))) [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))] [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y))) (δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y) : Prop",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f60c01ca",
+  "group": "O1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8f60c01ca",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read node, 4 new def nodes, report, all 5 modules and the recorded deps (diagonalTower_limit, DiagonalTowerSystem, GeoP1Cohomology, SpTowerShriek, TowerClass*). Clause 1: strict splitting IsIso on constant-Z_l towers, completed trace pinned by IsTrace, reductions plus torsion 0/1 normalization, p1/p2 models over fst/snd (checked). Clause 2: IsIntegration a≫R.map δ≫t=𝟙 for both projections. δ fixed by IsDiagonalLimit = diagonalTower_limit conclusion token for token (∃! as named δ plus uniqueness). SupportedSource HEq types equal by with_unfolding_all rfl (probe clean). All comparisons pinned; no free arrows. No extra hypotheses; edge cases (empty Y, n=0, l=2) and universes ok. Statements verbatim, docstrings with all 11 steps, item changed only lean plus new def stmt_deps. nt_compile --json: clean once (Limit 57.5 s at load 125), later Limit timeouts (IsDiagonalLimit ~40 s CPU) → maintainer: land at lower load, re-push same head if returned. Advisory: new def node cites theorem det-sp-tower-shriek-levels for plain SpTowerShriek defs (no owning def node; landed tower-class nodes do the same); torsion trace characterized rather than naming geoP1Trace; Model generalizes SpTowerClasses.Projective."
+ }
+}
