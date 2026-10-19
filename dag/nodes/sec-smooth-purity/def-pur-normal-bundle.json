@@ -37,10 +37,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-affine-morphism-relative-spec](2) to this quasi-coherent algebra and define $N_{Z/X}=\\underline{\\operatorname{Spec}}_Z(\\mathcal G)$ with its affine projection $p$ to $Z$. The nonnegative grading makes the projection $\\epsilon:\\mathcal G\\to\\mathcal G_0=\\mathcal O_Z$ multiplicative: the only products with total degree zero have both factors of degree zero. Thus it is an algebra map and is a left inverse of the structural inclusion. The anti-equivalence in clause (3) defines $z:Z\\to N_{Z/X}$ and gives $p z=\\mathrm{id}_Z$. On any affine open $W=\\operatorname{Spec}B$ of $Z$, the inverse image $p^{-1}W=\\operatorname{Spec}\\mathcal G(W)$ is affine, and $z$ is induced by the surjective map $\\epsilon_W$, which fixes constants. Since $z^{-1}(p^{-1}W)=W$, these opens cover $N_{Z/X}$ with affine inverse images and surjective structure maps. The converse affine-cover criterion [lem-weil-pbc-closed-immersion-affine-cover-criterion](2) proves that $z$ is a closed immersion.",
+   "text": "Apply [lem-weil-pbc-affine-morphism-relative-spec] to the conormal algebra and its degree-zero augmentation. The resulting arrow is a morphism in the over category, so its over-category equation gives the section identity. The projection is affine, and its composite with the section is the identity, hence a closed immersion. Mathlib IsClosedImmersion.of_comp therefore makes the section a closed immersion. This proves zeroSection_spec without a separate affine-cover calculation.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+    "lem-weil-pbc-affine-morphism-relative-spec"
    ],
    "elementary": false,
    "source": {
@@ -64,12 +63,12 @@
    }
   },
   {
-   "text": "Use the canonical graded algebra map $\\psi:\\operatorname{Sym}(\\mathcal C)\\to\\mathcal G$ and its stalk description in [lem-pur-conormal-graded-algebra]. Fix $z$ and a regular generating sequence $f_1,\\ldots,f_c$ of $J_z$. By [lem-weil-pbc-regular-sequence-conormal-free] its classes form a basis of $\\mathcal C_z=J_z/J_z^2$. The basis-to-polynomial isomorphism [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identifies $\\operatorname{Sym}_{R_z/J_z}(J_z/J_z^2)$ with $(R_z/J_z)[T_1,\\ldots,T_c]$, taking the class of $f_j$ to $T_j$ (the isomorphism for a chosen basis follows by the symmetric-algebra universal property, with inverse sending the standard basis back to these classes). Under this identification $\\psi_z$ sends $T_j$ to $[f_j]_1$ and fixes constants. It is therefore exactly the map $\\theta$ of [lem-pur-regular-sequence-graded-polynomial], which is an isomorphism. This uses all degrees, rather than inferring the associated-graded identification from its degree-one part.",
+   "text": "Use the canonical comparison and its constant and generator formulas from [lem-pur-conormal-graded-algebra]. At a point z transport the regular-sequence basis from [lem-weil-pbc-regular-sequence-conormal-free] along the conormal stalk equivalence and the quotient-ring equivalence. Mathlib SymmetricAlgebra.equivMvPolynomial identifies its symmetric algebra with the polynomial ring on this basis [lem-weil-pbc-symmetric-algebra-free-module-polynomial]. Every conormal stalk element has a representative on the inverse image of an affine open of X: choose a germ, refine its neighborhood using the closed embedding, and use [lem-weil-pbc-affine-conormal-sections] and the surjective cotangent quotient. The comparison therefore sends each polynomial variable to the corresponding degree-one associated-graded class and sends each constant to its degree-zero class. MvPolynomial.ringHom_ext identifies it with the map of [lem-pur-regular-sequence-graded-polynomial], after changing coefficients by the quotient-ring equivalence. That map is bijective, so the comparison is an isomorphism at each stalk. The ideal-equality transport and the polynomial comparison are proved as private algebraic helpers before specialization to stalks; these introduce no new assumed results.",
    "uses": [
     "lem-pur-conormal-graded-algebra",
     "lem-weil-pbc-regular-sequence-conormal-free",
     "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-affine-conormal-sections",
     "lem-pur-regular-sequence-graded-polynomial"
    ],
    "elementary": false,
@@ -79,9 +78,8 @@
    }
   },
   {
-   "text": "The underlying module map of $\\psi$ is bijective on all stalks by Step 4, so [lem-weil-pbc-module-iso-on-stalks] makes it an isomorphism. Its inverse is an algebra map as well: apply $\\psi$ to each addition, multiplication, scalar and unit identity for the inverse and use injectivity. Applying the relative-spectrum anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec](3) to $\\psi:\\operatorname{Sym}(\\mathcal C)\\xrightarrow{\\sim}\\mathcal G$ gives an isomorphism over $Z$ from $N_{Z/X}$ to $\\underline{\\operatorname{Spec}}_Z(\\operatorname{Sym}(\\mathcal C))$. Together with the rank-$c$ locally free module of Step 3 this is exactly the vector-bundle data of [def-pur-vector-bundle-zero-section]. No choice of a globally trivial bundle has been made.",
+   "text": "Apply Mathlib TopCat.Presheaf.isIso_of_stalkFunctor_map_iso directly to the comparison of commutative-ring sheaves. The forgetful functor from the under category reflects isomorphisms, so the canonical algebra comparison is an isomorphism. Apply the relative-spectrum anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec] to it; together with the finite locally free conormal module of Step 3, this constructs exactly the vector-bundle datum of [def-pur-vector-bundle-zero-section] on the already defined normal cone. Its over-base compatibility is Over.w. No global frame is chosen.",
    "uses": [
-    "lem-weil-pbc-module-iso-on-stalks",
     "lem-weil-pbc-affine-morphism-relative-spec",
     "def-pur-vector-bundle-zero-section"
    ],
@@ -108,22 +106,20 @@
  "proof_deps": [
   "lem-pur-conormal-graded-algebra",
   "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "def-pur-regular-immersion",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-regular-sequence-conormal-free",
   "lem-sc-coherent-free-stalks-locally-free",
   "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-affine-conormal-sections",
   "lem-pur-regular-sequence-graded-polynomial",
-  "lem-weil-pbc-module-iso-on-stalks",
   "def-pur-vector-bundle-zero-section",
   "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0630/0631/0632/0633/0636/0637 and Lemma 063M, reduced explicitly to Algebra Lemma 00LN and the existing coherent free-stalk criterion."
+  "place": "Tags 0630/0631/0632/0633/0636/0637 and Lemma 063M, reduced explicitly to Algebra Lemma 00LN and the existing coherent free-stalk criterion. Lean proof by P2 uses the closed-section and commutative-ring-sheaf stalk criteria directly; affine conormal representatives use Morphisms Tags 01R2/01R3."
  },
  "mathlib_searches": [
   {
@@ -241,10 +237,7 @@
   "lem-weil-pbc-regular-sequence-conormal-free",
   "lem-sc-coherent-free-stalks-locally-free",
   "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-symmetric-algebra-universal-property",
-  "lem-weil-pbc-module-iso-on-stalks",
   "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
  ],
  "reviewed": {
@@ -280,5 +273,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "§1(B): retain and import the recorded PurityNormalBundle relative-spectrum cone, conormal algebra and regular vector bundle. The missing interface is its identification with the published extended-Rees quotient used in DNC geometry. This module supplies that comparison, preserving projection and augmentation, and the unique closed-immersion factorization of the Rees projection. No second conormal or vector-bundle definition is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261019T112507-L-3947029",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
