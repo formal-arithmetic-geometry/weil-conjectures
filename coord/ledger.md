@@ -17026,3 +17026,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/O3/lem-per-finite-point-fp-gluing (reviewer RETURN: Route fault, not a fault in the maths. The item lem-per-finite-point-fp-gluing is listed itself in the '# section 2026-1)
 - 03:58 L: returned deliver/Q93/lem-per-separable-closure-perfect-core (reviewer RETURN: I return this because the item is itself dropped. On the mechanical finding: Step 2 cites lem-per-algebraic-extension-pe)
 - 03:58 L: returned deliver/Q78/lem-per-kummer-strict-local-standard-model (reviewer RETURN: Route-pivot drop (F, route decision of the human recorded in coord/repair-notes/lem-per-artin-gabber-affine-curve.json).)
+- 03:58 L: returned deliver/Q48/lem-per-regular-alteration-hypercover (reviewer RETURN: Route pivot. The item lem-per-regular-alteration-hypercover is itself in the 2026-10-19 artin-gabber section of coord/ro)
