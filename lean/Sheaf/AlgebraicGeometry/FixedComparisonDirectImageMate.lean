@@ -8,27 +8,8 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
-import Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity
-import Sheaf.AlgebraicGeometry.ProEtale.BasisDerivedDetection
-import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.IndEtaleUniverseTransport
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Canonical direct-image mate in fixed coefficients
@@ -51,7 +32,68 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
+open scoped CategoryTheory.Functor
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+
+section
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+variable {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+  [Abelian C] [Abelian D] [Abelian C'] [Abelian D']
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  [HasDerivedCategory C'] [HasDerivedCategory D']
+  [EnoughInjectives D] [EnoughInjectives D']
+  {l : C ⥤ D} {r : D ⥤ C} {p : C' ⥤ D'} {t : D' ⥤ C'}
+  {a : C ⥤ C'} {b : D ⥤ D'}
+  [l.Additive] [r.Additive] [p.Additive] [t.Additive] [a.Additive] [b.Additive]
+  [PreservesFiniteLimits l] [PreservesFiniteColimits l]
+  [PreservesFiniteLimits p] [PreservesFiniteColimits p]
+  [PreservesFiniteLimits a] [PreservesFiniteColimits a]
+  [PreservesFiniteLimits b] [PreservesFiniteColimits b]
+
+-- This calculation follows the proved helper in
+-- Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonCounit.
+private theorem derived_mate_eq (e : l ⊣ r) (d : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) :
+    let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
+      Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
+    Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom).natTrans =
+      (mateEquiv e.derivedPlus d.derivedPlus θ.hom).natTrans := by
+  dsimp only
+  let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
+    Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
+  have hθ (N : HomotopyCategory.Plus C) :
+      θ.hom.app (DerivedCategory.Plus.Qh.obj N) ≫
+        D+(b).map (l.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
+        b.mapDerivedCategoryPlusFactorsh.hom.app (l.mapHomotopyCategoryPlus.obj N) =
+      D+(p).map (a.mapDerivedCategoryPlusFactorsh.hom.app N) ≫
+        p.mapDerivedCategoryPlusFactorsh.hom.app (a.mapHomotopyCategoryPlus.obj N) ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.hom).app N) := by
+    simp only [θ, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+    rw [Functor.mapDerivedCategoryPlusCompIso_hom_app_factorsh l b N]
+    rw [Functor.mapDerivedCategoryPlusNatIso_hom_app_factorsh σ N]
+    rw [← Functor.mapDerivedCategoryPlusCompIso_hom_app_factorsh a p N]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  apply Functor.rightDerived_ext (R+(r) ⋙ D+(a))
+    (Functor.whiskerRight r.rightDerivedFunctorPlusUnit D+(a) ≫
+      (Functor.associator _ _ _).hom) (HomotopyCategory.Plus.quasiIso D)
+  apply NatTrans.ext
+  funext M
+  have hf := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac
+    (mateEquiv e d σ.hom).natTrans) M
+  have hm := Adjunction.derivedPlus_mateEquiv_app_fac e d σ.hom θ.hom hθ M
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.comp_id] at hf ⊢
+  rw [hf, hm]
+  simp [Functor.rightDerivedFunctorPlusBaseChangeAux,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app]
+
+end
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -92,53 +134,90 @@ noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRi
 Source: Stacks Tag 099R; blueprint comparison-direct-image proof
 (blueprint: lem-weil-pbc-comparison-direct-image-canonical-mate).
 
-Proof (the six steps of the node):
-1. Form q by the inverse pullback comparison followed by the pulled-back etale
-counit. The adjunction Hom bijection defines its unique mate b
-(def-weil-pbc-adjunction-mate). The underived mate and right-derived base-change
-construction give the displayed named transformation on injective representatives.
-2. Naturality of the counit and pullback comparison gives naturality of q. Transpose
-that identity under the adjunction to obtain naturality of b.
-3. Restrict to affine opens of V. Both direct images evaluate over the same fibre
-products, and restriction preserves injectives on both sites. The pullback comparison
-and counit commute with these restrictions; hence the restricted b is the mate for
-the restricted morphism. The sheaf axiom detects vanishing on this open cover.
-4. On an affine ind-etale basis object W = lim W_i, put U_i = U times_V W_i.
-The qcqs hypothesis makes each U_i qcqs, with affine transition maps. Fix one stage
-and pass to its cofinal tail so the complexes are pullbacks of fixed-stage complexes.
-Apply lem-weil-pbc-derived-cohomology-continuity twice. The middle identification
-is the termwise equality of sections of etale direct image on an injective
-representative, using lem-weil-pbc-etale-restriction-injectives.
-5. Apply lem-weil-pbc-comparison-global-cohomology on U times_V W. Pro-etale
-restriction preserves injectives, and exact inverse image makes its right adjoint
-preserve injectives, so the resulting groups are the target's derived sections.
-6. Represent K by etale injectives I and resolve A_U I into pro-etale injectives J.
-The chain map is the transpose of the pulled-back counit followed by the resolution
-map. Comparison pullbacks of injectives are section-acyclic on the basis
-(lem-weil-pbc-comparison-injective-acyclicity), so Leray acyclicity permits evaluation
-of that source complex. By lem-weil-pbc-comparison-sections its sections are the
-filtered colimit of the sections over U_i. The counit sends each such section to
-itself on its fibre product, followed by restriction to U times_V W and the comparison
-and resolution maps. It is therefore precisely the continuity isomorphism of steps
-4 and 5, compatibly with differentials and transitions. The named map is invertible
-by lem-weil-pbc-basis-derived-detection. The counit normalization is stated below. -/
+Proof: the canonical underived comparison is invertible for qcqs f by
+`isIso_lowerStarComparisonUpperStarBaseChange`. The comparison pullback of every
+injective etale sheaf is acyclic for the pro-etale direct image by
+`rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective`. Apply the general
+right-derived base-change invertibility theorem to this actual underived map.
+Thus it is the specified transformation, rather than an arbitrary comparison,
+that is invertible. -/
 theorem isIso_fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V)
     [QuasiCompact f] [QuasiSeparated f] :
     IsIso (fixedComparisonDirectImageMatePlus Λ f) := by
-  sorry
+  have := isIso_lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)
+  exact Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
+    (asIso (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)))
+    (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective
+      (ModuleCat.{u + 1} Λ) f I)
+
+section
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+-- The underived mate calculation is shared with the proof of
+-- AlgebraicGeometry.ProEtale.comparison_counit.
+private theorem underived_comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
+    (K : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).inv.app
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≫
+      (ProEtale.upperStar (ModuleCat.{u + 1} Λ) f).map
+        ((lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)).app K) ≫
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).obj K) =
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) := by
+  have h := mateEquiv_counit_symm
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ)) K
+  have hi := iterated_mateEquiv_conjugateEquiv_symm
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    (comparisonAdjunction (ModuleCat.{u + 1} Λ) V)
+    (comparisonAdjunction (ModuleCat.{u + 1} Λ) U)
+    (lowerStarCompComparisonLowerStarIso f (ModuleCat.{u + 1} Λ)).inv
+  unfold lowerStarComparisonUpperStarBaseChange at h
+  rw [hi] at h
+  change _ = (comparisonUpperStarCompUpperStarIso
+    (ModuleCat.{u + 1} Λ) f).hom.app _ ≫ _ at h
+  simpa only [lowerStarComparisonUpperStarBaseChange, Category.assoc,
+    Iso.inv_hom_id_app_assoc] using
+    congrArg (fun t ↦ (comparisonUpperStarCompUpperStarIso
+      (ModuleCat.{u + 1} Λ) f).inv.app ((Etale.lowerStar
+        (ModuleCat.{u + 1} Λ) f).obj K) ≫ t) h
+
+private theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
+    lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) =
+      (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).hom).natTrans := by
+  apply NatTrans.ext
+  funext K
+  apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit]
+  rw [mateEquiv_counit]
+  apply (cancel_epi ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).inv.app
+    ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K))).1
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using
+    underived_comparison_counit Λ f K
+
+end
 
 /-- The specified counit-mate normalization. It also characterizes the named component
 as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison.
 Source: Stacks Tag 0B65; blueprint comparison-direct-image proof, first paragraph
 (blueprint: lem-weil-pbc-comparison-direct-image-canonical-mate).
 
-Proof: the underived comparison is defined by the sheaf counit mate. Apply the exact
-comparison and inverse-image functors termwise to bounded-below injective representatives.
-The defining right-derived base-change factorization descends the same mate identity.
-The derived adjunction triangle identities cancel the inserted unit and counit, giving
-this formula. The adjunction Hom bijection then identifies this component with the
-transpose specified in the node. Naturality is built into the transformation. -/
+Proof: the iterated-mate identity identifies the underived direct-image comparison
+as the mate of the specified pullback comparison. On bounded-below homotopy categories,
+the factorization equations for the induced pullback comparison verify the hypothesis of
+`Adjunction.derivedPlus_mateEquiv_app_fac`. Compare its conclusion with the defining
+factorization of derived base change. Uniqueness of right-derived transformations gives
+the derived mate identity. Identify the restricted adjunctions with `derivedPlus`, apply
+`mateEquiv_counit`, and cancel the inverse pullback comparison. Compatibility of the
+induced natural isomorphism with inversion is checked through the faithful inclusion
+of D+ into the unbounded derived category. Naturality is built into the transformation. -/
 theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V)
     [QuasiCompact f] [QuasiSeparated f]
@@ -151,6 +230,42 @@ theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing 
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategoryPlus.obj K) =
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategoryPlus.map
         ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app K) := by
-  sorry
+  dsimp only [derivedUpperStarLowerStarAdjunctionPlus,
+    Etale.derivedUpperStarLowerStarAdjunctionPlus]
+  rw [Adjunction.derivedAdjunctionPlus_eq_derivedPlus,
+    Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
+  let σ := comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f
+  let θ := (Functor.mapDerivedCategoryPlusCompIso
+    (comparisonUpperStar (ModuleCat.{u + 1} Λ) V)
+    (upperStar (ModuleCat.{u + 1} Λ) f)).symm ≪≫
+    Functor.mapDerivedCategoryPlusNatIso σ ≪≫
+    Functor.mapDerivedCategoryPlusCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) f)
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
+  have hb : fixedComparisonDirectImageMatePlus Λ f =
+      (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom).natTrans := by
+    unfold fixedComparisonDirectImageMatePlus
+    rw [underived_comparison_mate, derived_mate_eq]
+  rw [hb, mateEquiv_counit]
+  have hθ : (fixedComparisonPullbackPlus Λ f).hom = θ.inv := by
+    have hσ : (Functor.mapDerivedCategoryPlusNatIso σ.symm).hom =
+        (Functor.mapDerivedCategoryPlusNatIso σ).inv := by
+      apply NatTrans.ext
+      funext X
+      apply DerivedCategory.Plus.ι.map_injective
+      rw [Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
+        Functor.mapDerivedCategoryNatIso_symm]
+      have h : DerivedCategory.Plus.ι.mapIso
+          ((Functor.mapDerivedCategoryPlusNatIso σ).app X) =
+          (Functor.mapDerivedCategoryNatIso σ).app X.obj :=
+        Iso.ext (Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app σ X)
+      exact (congrArg Iso.inv h).symm
+    simp only [fixedComparisonPullbackPlus, θ, Iso.trans_hom, Iso.trans_inv,
+      Iso.symm_hom, Iso.symm_inv, hσ, Category.assoc, σ]
+  rw [hθ]
+  change θ.inv.app _ ≫ θ.hom.app _ ≫ _ = _
+  rw [Iso.inv_hom_id_app_assoc]
+
 
 end AlgebraicGeometry.ProEtale
+
