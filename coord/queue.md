@@ -1,6 +1,6 @@
 # Work queue
 
-1245 items; claim with `tools/claim.py next <group> [--stage N]`.
+1255 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -8,35 +8,44 @@
 |---|---|---|
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (21)
+## Stage 2: nodes to state (30)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-fix-six-functor-datum` | 2 | state | 230 |
+| `def-sf-datum` | 1 | state | 91 |
 | `sk-d-six` | 1 | state | 42 |
 | `sk-def-sp-trace` | 2 | state | 2 |
 | `det-sp-tower-classes` | 1 | state | 1 |
+| `lem-coef-finite-exceptional` | 1 | state | 117 |
+| `fix-cor-verdier-exchange` | 2 | state | 105 |
+| `fix-lem-exchanges` | 1 | state | 87 |
+| `fix-prop-projection-formula` | 1 | state | 72 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `det-prop-diagonal-tower-trace` | 1 | state | 3 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
-| `lem-pur-flag-localized-product` | 1 | state | 1 |
+| `lem-coef-completed-tensor-hom-transpose` | 2 | state | 2 |
+| `fix-lem-tensor-adjunction` | 1 | state | 1 |
+| `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
+| `lem-pur-flag-local-comparison` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
+| `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
+| `lem-trf-finite-structural-maps-commshift` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 304 nodes that below a finished node, not needed, 120 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1223)
+## Stage 3: modules to prove (1224)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -1075,6 +1084,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.InternalHomDualTorAmplitude` | - | 1 | proof | 6 |
 | `Sheaf.Paper.KummerAdditivity` | - | 3 | proof | 6 |
 | `Sheaf.Paper.KunHigherExchangeCoefficientCube` | - | 1 | proof | 6 |
+| `Sheaf.Paper.LocalizedFlagProduct` | - | 11 | proof | 6 |
 | `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ProjectiveBundleFormula` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurityChernClasses` | - | 1 | proof | 6 |
