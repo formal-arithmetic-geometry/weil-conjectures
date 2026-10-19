@@ -30,6 +30,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Sheaf.Paper.PuritySectionInvariantCompared
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+
 /-! # The pro-etale section invariant
 
 Source: blueprint sec-smooth-purity/sk-def-purity-conv/def-pur-section-invariant.md
@@ -85,6 +88,36 @@ theorem sectionInvariant_invertible (P : PurityFiniteSetting.{u}) {V B : Scheme.
           (ModuleCat.{u + 1} P.Coefficient) B Q ∧
         Nonempty (P.sectionInvariant g aB s ⊗ Q ≅ 𝟙_ _) ∧
         Nonempty (Q ⊗ P.sectionInvariant g aB s ≅ 𝟙_ _) := by
-  sorry
+  classical
+  let A := ModuleCat.{u + 1} P.Coefficient
+  have : IsNoetherian B := P.noetherian aB
+  let c := HasCompactification.compactification g
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace V :=
+    c.i.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact g := inferInstance
+  have : Etale.HasBoundedBelowUpperShriek A g := exceptionalBoundedBelow P.Coefficient g
+  have hunit : _root_.DerivedCategory.TStructure.t.plus
+      (𝟙_ (_root_.DerivedCategory (Sheaf B.smallEtaleTopology A))) := by
+    apply _root_.DerivedCategory.TStructure.t.plus.prop_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+    exact ⟨0, inferInstance⟩
+  have := ProEtale.isIso_derivedComparisonAdjunction_unit_app A B _ hunit
+  let eω : P.dualizing g aB ≅ ProEtale.finiteComparedDualizing P g :=
+    (ProEtale.rightDerivedUpperShriek A g).mapIso
+      (ProEtale.DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso
+        P.Coefficient B).symm ≪≫
+    (ProEtale.comparisonUpperStar A V).mapDerivedCategory.mapIso
+      ((Etale.rightDerivedUpperShriek A g).mapIso
+        (asIso ((ProEtale.derivedComparisonAdjunction A B).unit.app (𝟙_ _))).symm)
+  let e : P.sectionInvariant g aB s ≅ P.comparedSectionInvariant g s :=
+    (ProEtale.upperStar A s).leftDerivedFunctor.mapIso eω
+  obtain ⟨hC, Q, hQ, ⟨e₁⟩, ⟨e₂⟩⟩ := P.comparedSectionInvariant_invertible g aB s hs
+  refine ⟨(ProEtale.DerivedCategory.constructibleFiniteTor A B).prop_of_iso e.symm hC,
+    Q, hQ, ⟨?_⟩, ⟨?_⟩⟩
+  · exact (tensorIso e (Iso.refl Q)) ≪≫ e₁
+  · exact (tensorIso (Iso.refl Q) e) ≪≫ e₂
 
 end WeilConjectures.PurityFiniteSetting
