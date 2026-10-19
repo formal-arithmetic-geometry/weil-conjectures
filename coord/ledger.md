@@ -16702,3 +16702,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/G4/Sheaf.SixFunctors.IntTensorProjection (stage 3; reviewer PASS; first push; landing 20261019T002609-L-2157997 (interface); batch 20261019T002449; modules 3; new nodes 2)
 - 00:26 L: merged deliver/G5/Sheaf.AlgebraicGeometry.ProEtaleOpenTensor (stage 3; reviewer PASS; first push; landing 20261019T002609-L-2158118 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/G5/Sheaf.Paper.CompletedCondensedCoefficients (stage 3; reviewer PASS; first push; landing 20261019T002610-L-2158234 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/G5/Sheaf.RepresentationTheory.ResolutionInflationComparison (stage 3; reviewer PASS; first push; landing 20261019T002610-L-2158352 (proof); batch 20261019T002449; modules 1; new nodes 0)
