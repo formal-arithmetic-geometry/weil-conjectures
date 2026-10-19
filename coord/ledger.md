@@ -17329,3 +17329,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/N3/Sheaf.Paper.FiniteExtensionProperBaseChange (stage 3; reviewer PASS; first push; landing 20261019T112503-L-3945725 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/N4/Sheaf.Paper.ClosedSupportConstructible (stage 3; reviewer PASS; after a return; landing 20261019T112504-L-3946005 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ProEtaleConstantExact (stage 3; reviewer PASS; first push; landing 20261019T112505-L-3946307 (interface); batch 20261019T112432; modules 1; new nodes 0; change records: coord/changes/P2-proetale-constant-tensor-private-scopes.md)
+- 11:25 L: merged deliver/P2/Sheaf.Paper.EtaleIsoDescent (stage 3; reviewer PASS; first push; landing 20261019T112506-L-3946633 (proof); batch 20261019T112432; modules 1; new nodes 0)

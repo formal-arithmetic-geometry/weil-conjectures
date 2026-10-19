@@ -13,19 +13,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.EtaleComparison
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Isomorphisms descend along étale surjections
@@ -54,36 +45,19 @@ Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
 lem-pur-etale-iso-descent, order 2336 (blueprint: lem-pur-etale-iso-descent).
 
 Proof:
-1. By det-pe-morphisms-etale-comparison, the étale morphism is weakly étale.
-   It is flat and locally of finite presentation, hence open by
-   lem-weil-pbc-flat-lfp-open. For an affine open V of X, the images of affine opens
-   of its inverse image cover V. By lem-weil-pbc-affine-scheme-qcqs a finite
-   subfamily suffices. Thus u is a singleton pro-étale cover by
-   def-weil-pbc-proetale-site, including the empty refinement for empty V.
-2. Use lem-weil-proetale-weakly-etale-localization to identify the site of U with
-   the slice site X_proet/U, preserving constant scalars. For W over U, the pair
-   (W, graph(W to U)) is initial in the inverse-image indexing category: the unique
-   map to (V, phi : W to U times_X V) is pr_V composed with phi. The opposite
-   colimit in def-weil-proetale-inverse-image therefore evaluates to F(W).
-   This is natural in W and F and fixes constant scalar sections. Consequently
-   module inverse image is restriction of def-pur-localized-ringed-site, which
-   is exact by lem-pur-site-restriction-module-adjunction-exact.
-3. By def-weil-derived-pullback-tensor-hom, exact inverse image computes derived
-   pullback termwise. By lem-weil-pbc-exact-functor-complex-cohomology its
-   cohomology is the restriction of cohomology. Naturality holds on complex maps,
-   their inverted quasi-isomorphisms, and composites of roofs. Thus every
-   cohomology map h_r of phi restricts to an isomorphism over U.
-4. For a test object T over X, base change gives a cover T times_X U of T by
-   def-weil-pbc-sites-and-cohomology. Both it and its double overlap map to U.
-   Injectivity of h_r on T follows from separatedness of the source sheaf.
-   A target section lifts uniquely over the cover; its two overlap restrictions
-   agree by injectivity there. The sheaf axiom glues the lift, whose image is the
-   original section by separatedness. The inverse maps are additive, linear, and
-   natural since these equations hold after applying the injective h_r. Thus
-   every h_r is an isomorphism. For empty X the empty cover forces zero sections.
-5. Apply lem-weil-pbc-unbounded-derived-iso-cohomology to get an ambient inverse
-   of phi. The category in def-weil-finite-torsion-constructibility is full, so
-   this is also an inverse in the stated bounded constructible category.
+1. The singleton family given by f is an etale cover by surjectivity. Mathlib's
+   etalePrecoverage_le_proetalePrecoverage makes it a pro-etale cover.
+2. The published upperStarIsoLocalizationRestriction identifies inverse image with
+   restriction for the weakly etale map f. The published sheaf-axiom argument
+   isIso_of_isIso_localizationRestriction detects isomorphisms on this cover.
+3. The actual intrinsic finite-coefficient inverse image is the conjugate of this
+   fixed-scalar inverse image by the canonical module realization equivalences.
+   Thus it also reflects isomorphisms.
+4. The natural mapDerivedCategoryHomologyFunctorIso identifies inverse image of
+   every cohomology map with cohomology of derived inverse image. Reflect these
+   isomorphisms on module sheaves and apply DerivedCategory.isIso_iff.
+5. The inclusion of the full bounded constructible subcategory reflects the
+   resulting ambient isomorphism.
 -/
 theorem isIso_of_surjective_etale_pullback (P : PurityFiniteSetting.{u})
     (U X : Over (Spec (CommRingCat.of P.field.k)))
@@ -97,6 +71,46 @@ theorem isIso_of_surjective_etale_pullback (P : PurityFiniteSetting.{u})
       (Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
         P.level P.level_pos) U.left X.left f.left).map φ.hom)) :
     IsIso φ := by
-  sorry
+  let A := P.Ring
+  let : Finite A := Padic.finite_coefficientExtensionRing P.coefficients.l P.extension
+    P.level P.level_pos
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  have hc : Presieve.ofArrows (fun _ : Unit ↦ U.left) (fun _ ↦ f.left) ∈
+      Scheme.proetalePrecoverage X.left := by
+    apply Scheme.etalePrecoverage_le_proetalePrecoverage
+    apply (Scheme.ofArrows_mem_precoverage_iff _).mpr
+    refine ⟨?_, fun _ ↦ inferInstance⟩
+    intro x
+    obtain ⟨y, hy⟩ := f.left.surjective x
+    exact ⟨(), y, hy⟩
+  have hF : (ProEtale.upperStar B f.left).ReflectsIsomorphisms := by
+    constructor
+    intro K L a ha
+    apply ProEtale.isIso_of_isIso_localizationRestriction B a
+      (fun _ : Unit ↦ f.left) hc
+    intro i
+    exact (NatIso.isIso_map_iff
+      (ProEtale.upperStarIsoLocalizationRestriction B f.left inferInstance) a).mp ha
+  have hI : (sfIntrinsicPullback A f.left).ReflectsIsomorphisms := by
+    dsimp only [sfIntrinsicPullback, sfIntrinsicTransport]
+    infer_instance
+  have hD : (sfIntrinsicDerivedPullback A f.left).ReflectsIsomorphisms := by
+    constructor
+    intro K L a ha
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    have : IsIso ((sfIntrinsicPullback A f.left).map
+        ((DerivedCategory.homologyFunctor _ n).map a)) :=
+      (NatIso.isIso_map_iff
+        ((sfIntrinsicPullback A f.left).mapDerivedCategoryHomologyFunctorIso n) a).mpr
+        (by change IsIso ((DerivedCategory.homologyFunctor _ n).map
+              ((sfIntrinsicDerivedPullback A f.left).map a)); infer_instance)
+    exact isIso_of_reflects_iso _ (sfIntrinsicPullback A f.left)
+  have : IsIso φ.hom := isIso_of_reflects_iso φ.hom (sfIntrinsicDerivedPullback A f.left)
+  change IsIso ((intrinsicFiniteTorsionConstructible P.coefficients.l P.extension
+    P.level P.level_pos X.left).ι.map φ) at this
+  exact isIso_of_reflects_iso φ
+    (intrinsicFiniteTorsionConstructible P.coefficients.l P.extension
+      P.level P.level_pos X.left).ι
 
 end WeilConjectures
