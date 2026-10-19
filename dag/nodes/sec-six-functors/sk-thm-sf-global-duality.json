@@ -346,5 +346,35 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-754f573d6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes. The item statement is byte-identical to main-20261015 sk-thm-sf-global-duality (order 2507) and matches the detailed thm-sf-global-duality hypothesis by hypothesis; nothing is weakened. The coefficient category is the pro-etale point category of def-weil-finite-coefficient-point at all four stages, with the unconditional Rf^! of sk-def-sf-operations(vi). The route is the blueprint's: exchange, then point evaluation. All 12 deps exist and none is merged; proof_deps equals the union of the step uses; there is no cycle (closure over 14410 nodes); no SGA source is cited. Step 1: thm-sf-ctf-stability (v),(ii),(iv),(iii) and (vii) give membership. Step 2: sk-thm-sf-verdier-exchange with f=a_X, Y=s, M=K meets its hypotheses and uses no properness. Step 3: lem-sf-point (1),(2),(3), lem-weil-point-fibre-equivalence and def-weil-ordinary-compact-cohomology are correct, and gamma_K points the right way. Step 4 had one fault (C3/C4/E5): it asserted without proof that the evaluation mate alpha_C is invertible, and lem-sf-point(2) gives only some unspecified isomorphism, with no naturality. I repaired step 4's text only: alpha_C is defined as the transpose of u.Fe.t^-1, and H^r(alpha_C) is shown bijective by test objects Lambda_s[-r] (lem-sf-point(5)), adjunction (i), full faithfulness of Fib_s, and the comparisons t and u; boundedness then makes alpha_C invertible. The uses are unchanged. Step 5: the derived reduction and phi_{L/E} with its tower are correct. Step 6 is genuinely elementary. Small cases checked: X=s, K=0, A^1, the non-proper G_m, and an integral torsion K. I accept the 5 declared tool_uses: thm-sf-ctf-stability, lem-weil-point-fibre-equivalence, lem-sf-point-fibre-derived-tensor, lem-pod-point-sections-derived-reduction and lem-weil-point-sections-scalar-extension. thm-pod-global-verdier-duality is a related statement of another form (site-perfect coefficient clause), not a duplicate. The slopmaster2 Nonempty declaration is not an exact attachment. Fix file: fixes/dag/nodes/sec-six-functors/sk-thm-sf-global-duality.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GlobalVerdierDuality",
+  "declaration": "WeilConjectures.GlobalVerdierDuality.global_verdier_duality",
+  "declarations": [
+   "WeilConjectures.GlobalVerdierDuality.identityOperation",
+   "WeilConjectures.GlobalVerdierDuality.Data",
+   "WeilConjectures.GlobalVerdierDuality.unitEvaluation",
+   "WeilConjectures.GlobalVerdierDuality.unitCoevaluation",
+   "WeilConjectures.GlobalVerdierDuality.Conclusion",
+   "WeilConjectures.GlobalVerdierDuality.Package",
+   "WeilConjectures.GlobalVerdierDuality.GeometricAlternative",
+   "WeilConjectures.GlobalVerdierDuality.Assertion",
+   "WeilConjectures.GlobalVerdierDuality.global_verdier_duality"
+  ],
+  "file": "lean/Sheaf/Paper/GlobalVerdierDuality.lean",
+  "statement": "theorem global_verdier_duality (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [Smooth (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [GeometricallyConnected (X ↘ Spec (.of D.k))] (d : ℕ) (_hd : X.IsPureDimension d) (_hX : GeometricAlternative D (Over.mk (X ↘ Spec (.of D.k)))) : Assertion l Ω D hl X",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "All four coefficient stages, with the canonical projection/evaluation transpose, naturality, signed shifts, finite reduction, scalar extension and the same-map coefficient-unit specialization. The isomorphisms live in the full finite-Tor constructible point category, hence in its full bounded constructible point category. Systems are universally quantified choices of the independently constructed operations, not hypotheses of ambient admissibility. Concrete notation is supplied by the landed NA record: ω_X = F.G.obj unit, D_X = VerdierExchange.StageData.dualX, and the point coefficient dual = VerdierExchange.StageData.dualY using the literal identityOperation; this item reuses those declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1509a044f",
+  "group": "O4",
+  "result": "pass",
+  "note": "Re-delivery of dbfc7b74 (RETURN H13): def-sf-pf.json now identical to NA's landed record; item .lean byte-identical (sha 230c3b5a) to the head whose substance was accepted; item node differs from live only in lean (note records omega_X=F.G.obj unit, D_X=StageData.dualX, point dual=StageData.dualY with identityOperation). Independently re-checked: smooth/separated/finite type/geometrically connected/pure dimension d; IsProper or Over-iso to geometricFiber X0 (Over.pullback), no properness in branch 2; no admissibility hypothesis; epsilon components = canonical StageData.epsilon; dualizing = refl; ring realizations/projection/shift pinned; ringScalar q = A.ring.comparison q plus unit equation; rational/common b.exceptional = System comparisons; unpinned structureX/Y only rescale by a scalar automorphism of the unit and the square is linear in it, so not hollow; K=Lambda_X clause = same component with pinned unit evaluation/coevaluation. Edge cases X=Spec k, K=0, empty X, A1/Gm. No H4 duplicate; single sorry; docstrings OK; statement verbatim; 9 declarations listed. nt_compile --json clean 11.0 s, error-injection control detected. Advisories: def-sf-verdier-exchange-data and def-weil-exceptional-inverse-image owner decls are not direct stmt_deps; lean.note misattributes StageData to NA; proof-only imports not individually tested."
  }
 }
