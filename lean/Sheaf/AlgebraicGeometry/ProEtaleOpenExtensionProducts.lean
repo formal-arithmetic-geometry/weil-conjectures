@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NN
+Authors: SHEAF groups NN and V7
 -/
 module
 
@@ -14,12 +14,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 import Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits
-import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleModuleObjectProductsExact
+import Sheaf.CategoryTheory.ExactLocalizationDerivedTriangle
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 
 /-!
 # Products and sequential derived limits of open extensions
@@ -131,6 +128,203 @@ def ringSheafDerivedClosedLocalization {X Z U : Scheme.{u}}
     comp_preservesFiniteColimits _ _
   (ringSheafInverseImage i B ⋙ ringSheafDirectImage i B).mapDerivedCategory
 
+private theorem kernel_preserves_products
+    {C D : Type*} [Category* C] [Category* D] [Abelian D]
+    (I : Type*) [HasProductsOfShape I C]
+    (F G H : C ⥤ D) (a : F ⟶ G) (b : G ⟶ H)
+    (hab : ∀ M, a.app M ≫ b.app M = 0)
+    (hk : ∀ M, IsLimit (KernelFork.ofι (a.app M) (hab M)))
+    [PreservesLimitsOfShape (Discrete I) G]
+    [PreservesLimitsOfShape (Discrete I) H] :
+    PreservesLimitsOfShape (Discrete I) F := by
+  classical
+  have h (K : I → C) : PreservesLimit (Discrete.functor K) F := by
+    let P := ∏ᶜ K
+    let cg := Fan.mk (G.obj P) (fun n ↦ G.map (Pi.π K n))
+    let ch := Fan.mk (H.obj P) (fun n ↦ H.map (Pi.π K n))
+    let hg : IsLimit cg := isLimitOfHasProductOfPreservesLimit G K
+    let hh : IsLimit ch := isLimitOfHasProductOfPreservesLimit H K
+    let lift (s : Fan (fun n ↦ F.obj (K n))) : s.pt ⟶ G.obj P :=
+      Fan.IsLimit.lift hg (fun n ↦ s.proj n ≫ a.app (K n))
+    have hz (s : Fan (fun n ↦ F.obj (K n))) : lift s ≫ b.app P = 0 := by
+      apply Fan.IsLimit.hom_ext hh
+      intro n
+      dsimp [ch]
+      change (lift s ≫ b.app P) ≫ H.map (Pi.π K n) = 0 ≫ H.map (Pi.π K n)
+      rw [Category.assoc, ← b.naturality, ← Category.assoc]
+      change (lift s ≫ cg.proj n) ≫ b.app (K n) = _
+      rw [Fan.IsLimit.fac]
+      simp [hab, Category.assoc]
+    let l (s : Fan (fun n ↦ F.obj (K n))) : s.pt ⟶ F.obj P :=
+      (hk P).lift (KernelFork.ofι (lift s) (hz s))
+    apply preservesLimit_of_preserves_limit_cone (productIsProduct K)
+    apply (isLimitMapConeFanMkEquiv F K _).symm.toFun
+    refine Fan.IsLimit.mk _ l (fun s n ↦ ?_) (fun s m hm ↦ ?_)
+    · have : Mono (a.app (K n)) := mono_of_isLimit_fork (hk (K n))
+      apply (cancel_mono (a.app (K n))).1
+      change (l s ≫ F.map (Pi.π K n)) ≫ a.app (K n) = _
+      rw [Category.assoc, a.naturality, ← Category.assoc]
+      change ((hk P).lift (KernelFork.ofι (lift s) (hz s)) ≫
+        (KernelFork.ofι (a.app P) (hab P)).ι) ≫ cg.proj n = _
+      rw [Fork.IsLimit.lift_ι]
+      exact Fan.IsLimit.fac hg _ n
+    · have : Mono (a.app P) := mono_of_isLimit_fork (hk P)
+      apply (cancel_mono (a.app P)).1
+      apply Fan.IsLimit.hom_ext hg
+      intro n
+      dsimp [cg]
+      change ∀ n, m ≫ F.map (Pi.π K n) = s.proj n at hm
+      rw [Category.assoc, ← a.naturality, ← Category.assoc, hm]
+      change _ = ((hk P).lift (KernelFork.ofι (lift s) (hz s)) ≫
+        (KernelFork.ofι (a.app P) (hab P)).ι) ≫ cg.proj n
+      rw [Fork.IsLimit.lift_ι]
+      change s.proj n ≫ a.app (K n) = lift s ≫ cg.proj n
+      exact (Fan.IsLimit.fac hg (fun n ↦ s.proj n ≫ a.app (K n)) n).symm
+  let := h
+  exact preservesLimitsOfShape_of_discrete F
+
+private theorem products_of_essSurj
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (I : Type*) [HasProductsOfShape I C]
+    (Q : C ⥤ D) [Q.EssSurj] (F : D ⥤ E)
+    [PreservesLimitsOfShape (Discrete I) Q]
+    [PreservesLimitsOfShape (Discrete I) (Q ⋙ F)] :
+    PreservesLimitsOfShape (Discrete I) F := by
+  classical
+  have h (K : I → D) : PreservesLimit (Discrete.functor K) F := by
+    let K' := fun n ↦ Q.objPreimage (K n)
+    let e : Discrete.functor K' ⋙ Q ≅ Discrete.functor K :=
+      Discrete.natIso (fun n ↦ Q.objObjPreimageIso (K n.as))
+    have : PreservesLimit (Discrete.functor K' ⋙ Q) F :=
+      preservesLimit_of_preserves_limit_cone
+        (isLimitOfPreserves Q (limit.isLimit (Discrete.functor K')))
+        (isLimitOfPreserves (Q ⋙ F) (limit.isLimit (Discrete.functor K')))
+    exact preservesLimit_of_iso_diagram F e
+  let := h
+  exact preservesLimitsOfShape_of_discrete F
+
+private theorem derived_products_of_Q
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (I : Type*) [HasProductsOfShape I C]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesLimitsOfShape (Discrete I) F]
+    [PreservesLimitsOfShape (Discrete I) (DerivedCategory.Q (C := C))]
+    [PreservesLimitsOfShape (Discrete I) (DerivedCategory.Q (C := D))] :
+    PreservesLimitsOfShape (Discrete I) F.mapDerivedCategory := by
+  have : PreservesLimitsOfShape (Discrete I)
+      (DerivedCategory.Q ⋙ F.mapDerivedCategory) :=
+    preservesLimitsOfShape_of_natIso F.mapDerivedCategoryFactors.symm
+  exact products_of_essSurj I DerivedCategory.Q F.mapDerivedCategory
+
+private theorem sheaf_openExtension_products
+    {X Z U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ)
+    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]
+    (I : Type (u + 1)) :
+    PreservesLimitsOfShape (Discrete I) (ringSheafOpenExtension j B) := by
+  classical
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B
+  let seq := proEtale_openClosed_sequence_ring_sheaf i j hU B
+  let Q := ringSheafInverseImage j B
+  let F := ringSheafOpenExtension j B
+  let H := ringSheafInverseImage i B ⋙ ringSheafDirectImage i B
+  let a : Q ⋙ F ⟶ 𝟭 A := (ringSheafOpenAdjunction j B).counit
+  let b : 𝟭 A ⟶ H := (ringSheafAdjunction i B).unit
+  have hk (M : A) : IsLimit (KernelFork.ofι (a.app M)
+      (show a.app M ≫ b.app M = 0 from
+        ((seq.2.2.2.2.2.2.2.2.2.1 M).2.2.sc 0).zero)) := by
+    have hm := seq.2.2.2.2.2.2.2.2.2.1 M
+    let : Mono (a.app M) := hm.1
+    have he := hm.2.2.exact 0 (by omega)
+    change (ShortComplex.mk (a.app M) (b.app M) _).Exact at he
+    exact he.fIsKernel
+  let : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace j
+  let : PreservesLimitsOfSize.{u + 1, u + 1} (ringSheafInverseImage i B) :=
+    (Scheme.closed_inverseImage_preserves_limits i
+      (by rw [← hU]; exact isCompact_range j.continuous) B).2.2.2.1
+  let : PreservesLimitsOfShape (Discrete I) (ringSheafDirectImage i B) :=
+    (ringSheafAdjunction i B).rightAdjoint_preservesLimits.preservesLimitsOfShape
+  let : PreservesLimitsOfShape (Discrete I) H := comp_preservesLimitsOfShape _ _
+  let : PreservesLimitsOfShape (Discrete I) (Q ⋙ F) :=
+    kernel_preserves_products I (Q ⋙ F) (𝟭 A) H a b _ hk
+  let : PreservesLimitsOfShape (Discrete I) Q :=
+    (ringSheafOpenAdjunction j B).rightAdjoint_preservesLimits.preservesLimitsOfShape
+  have : Q.EssSurj := ⟨fun N ↦ by
+    let := seq.2.2.2.2.1 N
+    exact ⟨F.obj N, ⟨(asIso ((ringSheafOpenAdjunction j B).unit.app N)).symm⟩⟩⟩
+  exact products_of_essSurj I Q F
+
+private theorem open_directImage_counit_iso
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B] :
+    IsIso (ringSheafAdjunction j B).counit := by
+  have h : IsIso (upperStarLowerStarAdjunction Ab.{u + 1} j).counit := by
+    let adj := openImmersionRestrictionLowerStarAdjunction Ab.{u + 1} j
+    let : (lowerStar Ab.{u + 1} j).Full := adj.fullyFaithfulROfIsIsoCounit.full
+    let : (lowerStar Ab.{u + 1} j).Faithful := adj.fullyFaithfulROfIsIsoCounit.faithful
+    exact (upperStarLowerStarAdjunction Ab.{u + 1} j).counit_isIso_of_R_fully_faithful
+  have h' (N : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      ((upperStar Ab.{u + 1} j).obj B)) :
+      IsIso ((ringSheafAdjunction j B).counit.app N) := by
+    have : IsIso ((Mod.forget _).map ((ringSheafAdjunction j B).counit.app N)) := by
+      change IsIso
+        ((((upperStarLowerStarAdjunction Ab.{u + 1} j).mapModAdjunction B).counit.app N).hom)
+      rw [Adjunction.mapModAdjunction_counit_app_hom]
+      infer_instance
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  exact NatIso.isIso_of_isIso_app _
+
+private theorem map_isDerivedLimit
+    {C D : Type*} [Category* C] [Category* D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated]
+    {K : ℕ → C} [HasProduct K]
+    [PreservesLimit (Discrete.functor K) F]
+    (t : ∀ n : ℕ, K (n + 1) ⟶ K n) (L : C) (hL : IsDerivedLimit t L) :
+    Exists fun [_hP : HasProduct (fun n : ℕ ↦ F.obj (K n))] ↦
+      IsDerivedLimit (K := fun n : ℕ ↦ F.obj (K n))
+        (fun n : ℕ ↦ F.map (t n)) (F.obj L) := by
+  classical
+  let : HasProduct (fun n : ℕ ↦ F.obj (K n)) :=
+    ⟨⟨Fan.mk _ (fun n ↦ F.map (Pi.π K n)),
+      isLimitOfHasProductOfPreservesLimit F K⟩⟩
+  refine ⟨inferInstance, ?_⟩
+  obtain ⟨p, δ, h⟩ := hL
+  let e := PreservesProduct.iso F K
+  have hs₀ : F.map (towerProductShift t) ≫ e.hom =
+      e.hom ≫ towerProductShift (fun n ↦ F.map (t n)) := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, e, PreservesProduct.iso_hom, piComparison_comp_π]
+    rw [← F.map_comp, towerProductShift, Pi.lift_π, F.map_comp]
+    simp [towerProductShift]
+  have hs : F.map (towerTransitionEndomorphism t) ≫ e.hom =
+      e.hom ≫ towerTransitionEndomorphism (fun n ↦ F.map (t n)) := by
+    dsimp only [towerTransitionEndomorphism]
+    rw [F.map_sub, F.map_id, Preadditive.sub_comp, Preadditive.comp_sub,
+      Category.id_comp, Category.comp_id, hs₀]
+  refine ⟨F.map p ≫ e.hom,
+    e.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L, ?_⟩
+  exact isomorphic_distinguished _ (F.map_distinguished _ h) _
+    (Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
+      (by change (F.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ F.map p; simp)
+      (by
+        change towerTransitionEndomorphism (fun n ↦ F.map (t n)) ≫ e.inv =
+          e.inv ≫ F.map (towerTransitionEndomorphism t)
+        rw [Iso.eq_inv_comp, ← Category.assoc, Iso.comp_inv_eq]
+        exact hs.symm)
+      (by
+        change (e.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L) ≫
+          (shiftFunctor D (1 : ℤ)).map (𝟙 _) =
+          e.inv ≫ (F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app L)
+        simp))
+
+set_option linter.unusedVariables false in
 /-- Open extension has a distinguished triangle natural in the input, preserves small
 products on both derived categories and module sheaves, and sends every sequential Roos
 limit to a sequential Roos limit. The existential product instance in the sequential clause
@@ -193,6 +387,57 @@ theorem proEtale_openExtension_products_derivedLimits
           (fun n : ℕ ↦ (ringSheafDerivedOpenExtension j B).map (t n))
           ((ringSheafDerivedOpenExtension j B).obj L)) ∧
     (∀ I : Type (u + 1), PreservesLimitsOfShape (Discrete I) (ringSheafOpenExtension j B)) := by
-  sorry
+  let C := Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+    ((upperStar Ab.{u + 1} j).obj B)
+  let D := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B
+  let := HasDerivedCategory.standard C
+  let := HasDerivedCategory.standard D
+  let seq := proEtale_openClosed_sequence_ring_sheaf i j hU B
+  let F := ringSheafOpenExtension j B
+  let S := ringSheafInverseImage j B
+  let G := ringSheafDirectImage j B
+  let H := ringSheafInverseImage i B ⋙ ringSheafDirectImage i B
+  let : PreservesFiniteColimits (ringSheafDirectImage i B) := seq.2.2.2.2.2.2.1
+  let : PreservesFiniteLimits H := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits H := comp_preservesFiniteColimits _ _
+  let : IsIso (ringSheafAdjunction j B).counit := open_directImage_counit_iso j B
+  let a : S ⋙ F ⟶ 𝟭 D := (ringSheafOpenAdjunction j B).counit
+  let b : 𝟭 D ⟶ H := (ringSheafAdjunction i B).unit
+  have hab (M : D) : a.app M ≫ b.app M = 0 :=
+    ((seq.2.2.2.2.2.2.2.2.2.1 M).2.2.sc 0).zero
+  have hseq (M : D) : (ShortComplex.mk (a.app M) (b.app M) (hab M)).ShortExact := by
+    have hm := seq.2.2.2.2.2.2.2.2.2.1 M
+    let : Mono (a.app M) := hm.1
+    let : Epi (b.app M) := hm.2.1
+    exact ⟨hm.2.2.exact 0 (by omega)⟩
+  let := Mod.isGrothendieckAbelian.{u + 1} ((upperStar Ab.{u + 1} j).obj B)
+  let h := fun K : CochainComplex C ℤ ↦
+    (show ∃ (J : CochainComplex C ℤ) (s : K ⟶ J), J.IsKInjective ∧ QuasiIso s from
+      ⟨(CochainComplex.kInjectiveResolutionFunctor.{u + 1} C).obj K,
+        (CochainComplex.toKInjectiveResolution.{u + 1} C).app K, inferInstance,
+        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} C K).2⟩)
+  have htri := exactLocalization_derived_triangle F S G (ringSheafAdjunction j B)
+    H a b hab hseq h
+  have hp (I : Type (u + 1)) : PreservesLimitsOfShape (Discrete I)
+      (ringSheafDerivedOpenExtension j B) := by
+    let := proEtale_moduleObject_products_exact U ((upperStar Ab.{u + 1} j).obj B) I
+    let := proEtale_moduleObject_products_exact X B I
+    let := sheaf_openExtension_products i j hU B I
+    exact derived_products_of_Q I F
+  refine ⟨htri, hp, ?_, sheaf_openExtension_products i j hU B⟩
+  let : (ringSheafDerivedOpenExtension j B).Additive := by
+    dsimp only [ringSheafDerivedOpenExtension]
+    infer_instance
+  let : (ringSheafDerivedOpenExtension j B).CommShift ℤ := by
+    dsimp only [ringSheafDerivedOpenExtension]
+    infer_instance
+  let : (ringSheafDerivedOpenExtension j B).IsTriangulated := by
+    dsimp only [ringSheafDerivedOpenExtension]
+    infer_instance
+  intro K t _ L hL
+  let : PreservesLimitsOfShape (Discrete ℕ) (ringSheafDerivedOpenExtension j B) :=
+    preservesLimitsOfShape_of_equiv
+      (Discrete.equivalence Equiv.ulift) _
+  exact map_isDerivedLimit (ringSheafDerivedOpenExtension j B) t L hL
 
 end AlgebraicGeometry.ProEtale

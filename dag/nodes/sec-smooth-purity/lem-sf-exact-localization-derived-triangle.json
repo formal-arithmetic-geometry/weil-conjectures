@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-exact-localization-derived-triangle",
+ "kind": "lemma",
+ "title": "Natural derived triangle of an exact localization sequence",
+ "statement": "Let $C,D$ be abelian categories with derived categories. Let $F:C\\to D$, $S:D\\to C$ and $H:D\\to D$ be additive exact functors, and let $G:C\\to D$ be additive with an adjunction $S\\dashv G$ whose counit is invertible. Suppose natural maps $a:FS\\to\\mathrm{id}_D$ and $b:\\mathrm{id}_D\\to H$ give a short exact sequence at every object of $D$. Suppose every cochain complex in $C$ admits a quasi-isomorphism to a K-injective complex. Then there are natural maps $DF\\to RG\\to DH\\circ RG\\to DF[1]$ forming a distinguished triangle at every derived object, where $RG$ is the universal right derived functor [def-sfb-right-derived-functor] and the exact functors descend termwise [lem-sf-exact-functor-derived-triangulated].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 070I (lemma-K-injective), 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined); blueprint det-sf-open-closed-extension-zero-limits proof (1)"
+ },
+ "stmt_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose for each derived object a K-injective complex and an isomorphism from its localization, using essential surjectivity of Q and the supplied resolutions. For every derived morphism, fullness of the homotopy quotient and the Hom bijection into a K-injective target lift its conjugate to a chain map. The quotientCompQhIso naturality identity identifies the localization of that chain map with the conjugate morphism.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the short exact sequence to G(J) degree by degree. Naturality of a and b makes its arrows chain maps, and degreewise short exactness gives short exactness of complexes. The inverse counit S G(J) is naturally isomorphic to J. The canonical short-exact-sequence boundary supplies a distinguished triangle natural in chain maps. A private transport theorem proves that compatible isomorphisms with these three localized terms yield natural transformations, including the shifted boundary, and objectwise distinguished triangles.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mapDerivedCategoryFactors and the inverse adjunction counit to identify DF(K) with the localized first term. Identify RG(K) with the localized middle term using the right-derived computation isomorphism at the identity of J. Prove its naturality directly from naturality of the derived unit and quotientCompQhIso. Identify the third term by applying DH to this comparison, then its exact-functor factorization isomorphism. For each lifted chain map, check all three compatibility identities by the counit, derived-unit and factorization naturality identities. Apply the private transport theorem.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sfb-right-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+  "place": "Proof (1), implemented completely by lifting morphisms to K-injectives, verifying all three naturality squares, and transporting canonical SES triangles; V7 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of exact functors gives a natural distinguished triangle on derived categories using K-injective resolutions",
+   "results": [
+    "CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished",
+    "CategoryTheory.ShortComplex.ShortExact.singleTriangle",
+    "DerivedCategory.triangleOfSES_distinguished",
+    "DerivedCategory.triangleOfSES",
+    "DerivedCategory.triangleOfSES_mor₁",
+    "DerivedCategory.triangleOfSES_obj₃",
+    "DerivedCategory.triangleOfSES_obj₂",
+    "DerivedCategory.triangleOfSES_obj₁"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSESδ",
+   "results": [
+    "DerivedCategory.triangleOfSESδ",
+    "DerivedCategory.triangleOfSES_mor₃",
+    "DerivedCategory.triangleOfSESδ_naturality",
+    "DerivedCategory.triangleOfSESδ_naturality_assoc",
+    "DerivedCategory.descShortComplex_triangleOfSESδ",
+    "DerivedCategory.descShortComplex_triangleOfSESδ_assoc",
+    "CategoryTheory.DerivedCategory.map_triangleOfSESδ"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ_naturality",
+   "results": [
+    "Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenExtensionProducts",
+  "date": "2026-10-19",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-open-closed-extension-zero-limits",
+   "place": "Proof (1), the natural distinguished triangle obtained from the degreewise open-closed sequence",
+   "via": [
+    "det-sf-open-closed-extension-zero-limits"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactLocalizationDerivedTriangle",
+  "file": "lean/Sheaf/CategoryTheory/ExactLocalizationDerivedTriangle.lean",
+  "declaration": "CategoryTheory.exactLocalization_derived_triangle",
+  "statement": "theorem exactLocalization_derived_triangle\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (S : D ⥤ C) [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]\n    (G : C ⥤ D) [G.Additive] (adj : S ⊣ G) [IsIso adj.counit]\n    (H : D ⥤ D) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D ⟶ H)\n    (hab : ∀ M, a.app M ≫ b.app M = 0)\n    (hseq : ∀ M, (ShortComplex.mk (a.app M) (b.app M) (hab M)).ShortExact)\n    (h : ∀ K : CochainComplex C ℤ,\n      ∃ (J : CochainComplex C ℤ) (s : K ⟶ J), J.IsKInjective ∧ QuasiIso s) :\n    ∃ (α : F.mapDerivedCategory ⟶ G.rightDerivedFunctorOfQuasiIsoResolutions h)\n      (β : G.rightDerivedFunctorOfQuasiIsoResolutions h ⟶\n        G.rightDerivedFunctorOfQuasiIsoResolutions h ⋙ H.mapDerivedCategory)\n      (δ : G.rightDerivedFunctorOfQuasiIsoResolutions h ⋙ H.mapDerivedCategory ⟶\n        F.mapDerivedCategory ⋙ shiftFunctor (DerivedCategory D) (1 : ℤ)),\n      ∀ K, Triangle.mk (α.app K) (β.app K) (δ.app K) ∈\n        distTriang (DerivedCategory D)",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034329-L-422084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034329-L-422084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

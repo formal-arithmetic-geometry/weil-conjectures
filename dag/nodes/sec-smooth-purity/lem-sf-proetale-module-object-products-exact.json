@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-proetale-module-object-products-exact",
+ "kind": "lemma",
+ "title": "Exact products for arbitrary pro-etale module objects",
+ "statement": "Let $X$ be a scheme and $B$ an arbitrary monoid object in abelian sheaves on $X_{\\mathrm{proét}}$. For every small index set $I$, products of shape $I$ are exact in $\\operatorname{Mod}(\\operatorname{Ab}(X_{\\mathrm{proét}}),B)$ [det-pe-products-exact]. No commutativity of $B$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+  "place": "Proof (2), transfer of det-pe-products-exact to the module-object coefficient encoding"
+ },
+ "stmt_deps": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "det-pe-products-exact"
+ ],
+ "proof": [
+  {
+   "text": "For T the tensor unit in abelian sheaves, the unit axiom forces every T-module action to be the left unitor. Thus the forgetful functor is fully faithful; free T-modules and the unitor prove essential surjectivity. Apply the existing section-module equivalence for the commutative monoid T. Exact products for the reconstructed ring sheaf follow from det-pe-products-exact, and transport through the composite equivalence yields exact products of abelian sheaves.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module-object forgetful functor for arbitrary B creates products, preserves finite colimits, and reflects finite colimits since it is exact and conservative. Pull back exactness of discrete limits along it using Mathlib HasExactLimitsOfShape.domain_of_functor. No commutative structure on B occurs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-closed-unit/det-sf-open-closed-extension-zero-limits.proof.md",
+  "place": "Proof (2), implemented using the unit-module equivalence and exact forgetful functor; V7 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Products in module objects are exact when products in the underlying abelian category are exact",
+   "results": [
+    "instAB4StarModuleCat",
+    "ModuleCat.binaryProductLimitCone",
+    "instAB4ModuleCat",
+    "CategoryTheory.IsGrothendieckAbelian.ab4OfSize",
+    "CategoryTheory.AB4StarOfSize",
+    "CategoryTheory.AB4Star",
+    "CategoryTheory.AB4OfSize",
+    "CategoryTheory.instAB4StarOfSize"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial: exact products in ordinary modules and the AB4Star interface; transfer to arbitrary pro-etale module objects still requires the unit-module bridge and forgetful-functor argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact products for module objects over an arbitrary monoid using the conservative exact forgetful functor",
+   "results": [
+    "instAB4ModuleCat",
+    "instAB4StarModuleCat",
+    "Condensed.instAB4CondensedMod",
+    "Condensed.instAB4StarCondensedMod",
+    "instAB5ModuleCat",
+    "Condensed.instAB5CondensedMod",
+    "instIsGrothendieckAbelianModuleCat",
+    "LightCondensed.instCountableAB4StarLightCondMod"
+   ],
+   "date": "2026-10-19",
+   "verdict": "no exact match: hits treat plain or condensed modules, not arbitrary pro-etale module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasExactLimitsOfShape.domain_of_functor",
+   "results": [
+    "CategoryTheory.HasExactLimitsOfShape.domain_of_functor"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial: the exactness transfer lemma is used; the unit-module equivalence bridges the coefficient presentations"
+  },
+  {
+   "tool": "grep",
+   "query": "HasExactLimitsOfShape.*(domain_of_functor|of_codomain_equivalence)",
+   "results": [
+    "Mathlib/Condensed/AB.lean",
+    "Mathlib/Algebra/Category/ModuleCat/AB.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean",
+    "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean"
+   ],
+   "date": "2026-10-19",
+   "verdict": "partial: the exactness transfer lemma is used; the unit-module equivalence bridges the coefficient presentations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenExtensionProducts",
+  "date": "2026-10-19",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-open-closed-extension-zero-limits",
+   "place": "Proof (2), exact products for the monoid-object module encoding",
+   "via": [
+    "det-sf-open-closed-extension-zero-limits"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-closed-unit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleObjectProductsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleObjectProductsExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_moduleObject_products_exact",
+  "statement": "theorem proEtale_moduleObject_products_exact (X : Scheme.{u})\n    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]\n    (I : Type (u + 1)) :\n    HasExactLimitsOfShape (Discrete I)\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B)",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034329-L-422084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261019T034329-L-422084",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
