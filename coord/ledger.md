@@ -17259,3 +17259,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/P5/Sheaf.SixFunctors.SchemeFrobenius (stage 3; reviewer PASS; first push; landing 20261019T093535-L-2324759 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/P6/Sheaf.RingTheory.PolynomialDistinctLinearCRT (stage 3; reviewer PASS; first push; landing 20261019T093536-L-2325029 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/P8/Sheaf.Paper.CompletedTowerCompatibility (stage 3; reviewer PASS; first push; landing 20261019T093539-L-2325287 (interface); batch 20261019T093237; modules 3; new nodes 1; change records: coord/changes/P8-completed-tower-definitions.md)
+- 09:35 L: merged deliver/P9/Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing (stage 3; reviewer PASS; first push; landing 20261019T093541-L-2325583 (proof); batch 20261019T093237; modules 1; new nodes 0)

@@ -19,52 +19,53 @@
  ],
  "proof": [
   {
-   "text": "To test vanishing of $R^p j_*\\mathcal F$, it is enough to test its stalk at an arbitrary point $x\\in X$. The map from $\\operatorname{Spec}\\mathcal O_{X,x}$ to $X$ is flat: on an affine neighbourhood $V=\\operatorname{Spec}A$ of $x$, the stalk identification gives $\\mathcal O_{X,x}\\cong A_{\\mathfrak p_x}$ by [lem-weil-pbc-affine-open-stalk-localization], and this localization is flat by [lem-weil-pbc-localization-flat]. The inclusion $j$ is quasi-compact by retrocompactness and quasi-separated because its diagonal is an isomorphism. Therefore the flat base-change theorem [lem-pc-flat-base-change-cohom] identifies the stalk calculation with the higher direct images of the pulled-back open $U_x\\hookrightarrow\\operatorname{Spec}\\mathcal O_{X,x}$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-localization-flat",
-    "lem-pc-flat-base-change-cohom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 09N8, proof: \"We may check the vanishing ... at stalks\" and the appeal to Cohomology of Schemes, Lemma 02KH (flat base change)"
-   }
+   "text": "Retrocompactness makes U.ι quasi-compact: for any affine open V of X, the image of its inverse image under the open embedding U.ι is U ∩ V, compact by retrocompactness. An open immersion is quasi-separated. To prove that G = R^p(U.ι)_*F is zero, apply stalkwise detection of zero objects to its underlying abelian sheaf, and reflect zero through the faithful forgetful functor from modules.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Write $A=\\mathcal O_{X,x}$ and let $\\mathfrak m$ be its closed point. The local-spectrum classification [lem-a1-local-spectrum-open-classification] applies because $A$ is Noetherian and has Krull dimension at most one. If $\\mathfrak m\\in U_x$, then $U_x=\\operatorname{Spec}A$ and the inclusion is the identity, whose higher direct images vanish. If $\\mathfrak m\\notin U_x$, then $U_x$ is an affine open with finite discrete underlying space.",
+   "text": "Fix x in X and put c = X.fromSpecStalk x. By [lem-weil-pbc-spec-local-ring-canonical-morphism], c is flat, hence so is its pullback g = pullback.snd c U.ι. Put j = pullback.fst c U.ι, an open immersion into Spec O_{X,x}. Apply [lem-a1-local-spectrum-open-classification] to j.opensRange. If it contains the closed point, it is the whole affine spectrum. Otherwise its induced scheme is affine by that classification. The isomorphism from the source of j to its open range therefore makes the source affine in both cases. Since the target is affine, j is an affine morphism.",
    "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
     "lem-a1-local-spectrum-open-classification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 09N8, proof: local spectrum case split at the closed point"
-   }
+   "elementary": false
   },
   {
-   "text": "In the second case of Step 2, the morphism $U_x\\to\\operatorname{Spec}A$ is affine because both source and target are affine. Applying the affine higher-direct-image theorem [lem-pc-affine-morphism-hi] to the quasi-coherent pullback of $\\mathcal F$ gives $R^p(U_x\\to\\operatorname{Spec}A)_*\\mathcal F_x=0$ for every $p>0$. Together with the identity case, this proves the vanishing of every stalk from Step 1, hence $R^p j_*\\mathcal F=0$ for all $p>0$.",
+   "text": "Let F′ = tensorPullback(g)(F). Uniqueness of left adjoints identifies tensorPullback(g) with the usual module pullback; transport quasi-coherence across this isomorphism. Apply [lem-pc-affine-morphism-hi] to the affine morphism j and F′ to obtain H = R^p j_*F′ = 0 for p > 0.",
    "uses": [
     "lem-pc-affine-morphism-hi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 09N8, proof: the affine-open conclusion and Cohomology of Schemes, Lemma 01XB/relative-affine vanishing"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Choose injective resolutions I of F and J of F′. The comparison lift of [lem-weil-pbc-flat-base-change-lift] gives an augmentation-preserving chain map t. By [lem-weil-pbc-flat-base-change-resolution-iso], its actual sheaf-valued comparison beta : c*G → H is an isomorphism, since U.ι is quasi-compact and quasi-separated and c and g are flat.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjoint a : G → c_*H of beta. By [lem-weil-pbc-local-pullback-adjoint-stalk-iso], its map on the stalk at x is invertible. Pushforward and the module-stalk functor preserve the zero object, so H = 0 implies (c_*H)_x = 0. Transport across the stalk isomorphism to conclude G_x = 0. The underlying abelian stalk is therefore subsingleton, proving the stalkwise condition of the first step.",
+   "uses": [
+    "lem-weil-pbc-local-pullback-adjoint-stalk-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-localization-flat",
-  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
   "lem-a1-local-spectrum-open-classification",
-  "lem-pc-affine-morphism-hi"
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-flat-base-change-lift",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-weil-pbc-local-pullback-adjoint-stalk-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 09N8, lemma-affine, complete proof"
+  "place": "Tag 09N8, lemma-affine, complete proof; formal specialization by P9 using the existing resolution-defined general flat-base-change map and its local adjoint stalk comparison, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -219,7 +220,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-flat-base-change-cohom",
   "lem-pc-affine-morphism-hi"
  ],
  "reviewed": {
@@ -247,5 +247,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, route-pivot compliance, and Lean compilation all checked successfully."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261019T093541-L-2325583",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
