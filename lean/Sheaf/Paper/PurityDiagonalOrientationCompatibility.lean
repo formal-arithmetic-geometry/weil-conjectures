@@ -19,6 +19,7 @@ import Sheaf.Paper.ProEtaleLisseOrigin
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleAffineLineEndomorphismRigidity
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 
 /-! # Coefficient compatibility of normalized deformation comparisons
 
@@ -35,7 +36,6 @@ extension of the inverse of the specialization dependency's actual `atZero` map.
 
 @[expose] public section
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -77,6 +77,45 @@ instance scalarExtension_additive {X : Scheme.{u}} (ell r m : ℕ) (hmr : m ≤ 
     (scalarExtension ell r m hmr (X := X)).Additive :=
   (scalarExtensionAdjunction ell r m hmr (X := X)).left_adjoint_additive
 
+private noncomputable def scalarExtensionCompRestrictionTensorIso
+    {X : Scheme.{u}} (ell r m : ℕ) (hmr : m ≤ r) :
+    scalarExtension ell r m hmr (X := X) ⋙
+        Sheaf.restrictScalars X.smallEtaleTopology (coefficientMap ell r m hmr) ≅
+      MonoidalCategory.tensorRight
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Coeff ell r))).obj
+          ((ModuleCat.restrictScalars (coefficientMap ell r m hmr)).obj
+            (ModuleCat.of (Coeff ell m) (Coeff ell m)))) := by
+  let J := X.smallEtaleTopology
+  let f := coefficientMap ell r m hmr
+  have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1} f) :=
+    Sheaf.preservesSheafification_of_adjunction J
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} f)
+  let S := sheafToPresheaf J (ModuleCat.{u + 1} (Coeff ell r))
+  let W := (Functor.whiskeringRight X.Etaleᵒᵖ _ _).obj (ModuleCat.extendScalars f)
+  let a' := presheafToSheaf J (ModuleCat.{u + 1} (Coeff ell m))
+  let a := presheafToSheaf J (ModuleCat.{u + 1} (Coeff ell r))
+  let ι := Sheaf.restrictScalars J f
+  let Q := (Functor.const X.Etaleᵒᵖ).obj
+    ((ModuleCat.restrictScalars f).obj (ModuleCat.of (Coeff ell m) (Coeff ell m)))
+  exact Functor.associator S (W ⋙ a') ι ≪≫
+    Functor.isoWhiskerLeft S (Functor.associator W a' ι) ≪≫
+    Functor.isoWhiskerLeft S (Functor.isoWhiskerLeft W
+      (sheafComposeNatIso J (ModuleCat.restrictScalars f)
+        (sheafificationAdjunction J (ModuleCat.{u + 1} (Coeff ell m)))
+        (sheafificationAdjunction J (ModuleCat.{u + 1} (Coeff ell r)))).symm) ≪≫
+    Functor.isoWhiskerLeft S (Functor.associator W _ a).symm ≪≫
+    Functor.isoWhiskerLeft S (Functor.isoWhiskerRight
+      (Functor.whiskeringRightObjCompIso _ _ ≪≫
+        (Functor.whiskeringRight _ _ _).mapIso
+          (ModuleCat.extendScalarsCompRestrictScalarsIso f) ≪≫
+        whiskeringRightTensorRightIso _) a) ≪≫
+    Functor.isoWhiskerLeft S (Sheaf.presheafToSheafCompTensorRightIso Q).symm ≪≫
+    (Functor.associator S a (MonoidalCategory.tensorRight (a.obj Q))).symm ≪≫
+    Functor.isoWhiskerRight
+      (asIso (sheafificationAdjunction J (ModuleCat.{u + 1} (Coeff ell r))).counit)
+      (MonoidalCategory.tensorRight (a.obj Q)) ≪≫
+    Functor.leftUnitor _
+
 /-- The finite-coefficient scalar extension preserves K-flat quasi-isomorphisms. Source:
 Stacks Tags 06YT and 06YY (blueprint: lem-pur-diagonal-orientation-compatibility).
 Proof: evaluate at etale stalks. Tensoring an acyclic K-flat complex with B is
@@ -86,7 +125,10 @@ without assuming that the quotient A to B is flat. -/
 theorem scalarExtension_preservesKFlatQuasiIso_proof {X : Scheme.{u}} (ell r m : ℕ)
     (hmr : m ≤ r) :
     (scalarExtension ell r m hmr (X := X)).PreservesKFlatQuasiIso := by
-  sorry
+  constructor
+  intro K L hK hL φ hφ
+  exact CochainComplex.quasiIso_map_of_iso_tensorRight _ _
+    (scalarExtensionCompRestrictionTensorIso ell r m hmr) φ hK hL
 
 /-- Register the named K-flat quasi-isomorphism preservation theorem.
 Source: Stacks 06YY (blueprint: lem-pur-diagonal-orientation-compatibility). -/
@@ -94,6 +136,8 @@ instance scalarExtension_preservesKFlatQuasiIso {X : Scheme.{u}} (ell r m : ℕ)
     (hmr : m ≤ r) :
     (scalarExtension ell r m hmr (X := X)).PreservesKFlatQuasiIso :=
   scalarExtension_preservesKFlatQuasiIso_proof ell r m hmr
+
+attribute [local irreducible] ProEtale.etaleSheafExtendScalars
 
 /-- The canonical left-derived scalar extension on the ordinary etale derived category.
 Source: Stacks Tags 06YT and 06YY (blueprint: lem-pur-diagonal-orientation-compatibility). -/
@@ -239,7 +283,13 @@ theorem atZero_isIso
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
     [QuasiCompact (Scheme.Hom.normalConeProj g s)] :
     IsIso (atZero (NoetherianSectionSpecialization.Coeff ell m) g s) := by
-  sorry
+  let : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian g
+  let : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace g
+  let : IsNoetherian V := ⟨⟩
+  have hV : ∀ x : V, IsUnit (ell : V.presheaf.stalk x) := by
+    intro x
+    simpa using (hS (g x)).map (g.stalkMap x).hom
+  exact (lines_and_fibres ell m hm hS hV d g s hs hregular).2.2.2
 
 /-- The canonical zero-fibre identification at coefficient level `m`. Source: blueprint
 sk-thm-dnc, opening fibre comparison (blueprint: lem-pur-diagonal-orientation-compatibility). -/
@@ -288,7 +338,13 @@ theorem atOne_isIso
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
     [QuasiCompact (Scheme.Hom.normalConeProj g s)] :
     IsIso (atOne (NoetherianSectionSpecialization.Coeff ell m) g s hs) := by
-  sorry
+  let : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian g
+  let : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace g
+  let : IsNoetherian V := ⟨⟩
+  have hV : ∀ x : V, IsUnit (ell : V.presheaf.stalk x) := by
+    intro x
+    simpa using (hS (g x)).map (g.stalkMap x).hom
+  exact (lines_and_fibres ell m hm hS hV d g s hs hregular).2.2.1
 
 /-- The canonical one-fibre identification at coefficient level `m`. Source: blueprint
 sk-thm-dnc, opening fibre comparison (blueprint: lem-pur-diagonal-orientation-compatibility). -/
