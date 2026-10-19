@@ -26,9 +26,143 @@
   "def-sc-zariski-cohomology",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar s$ with algebraically closed residue field $F$, and put $C=Z_{\\bar s}$ and $D=H_{\\bar s}$. By [def-trf-multipointed-curve], $Z/S$ is finitely presented and its ordinary fibres have pure dimension one. Apply [lem-trf-relative-dimension-base-change] to the geometric-point base change: $C$ is pure of dimension one, and is finite type over $F$. By [lem-trf-nodal-points-reduced-algebraically-closed], $C$ is reduced. The hypothesis on $H$ says that $D$ is one reduced irreducible component, hence is pure of dimension one. Apply [lem-trf-nodal-subcurve-boundary] with $X=C$, $Y=D$ and $N=C$: $D$ is nodal, and it is smooth at every point where it meets the closure of $C\\setminus D$. Away from that closure, $D=C$ on an open neighbourhood: in a reduced affine ring the intersection of the minimal primes is zero, and after removing the other components only the prime defining $D$ remains. Thus the nodes of $D$ are exactly the ambient nodes with both branches on $D$. At a point meeting another component the boundary assertion makes $D$ smooth; at an ambient node meeting no other component the two branches both belong to $D$ and the open-neighbourhood equality makes it a node of $D$. This also covers an irreducible component with a self-node.",
+   "uses": [
+    "def-trf-multipointed-curve",
+    "lem-trf-relative-dimension-base-change",
+    "lem-trf-nodal-points-reduced-algebraically-closed",
+    "lem-trf-nodal-subcurve-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, lemma-closed-subscheme-nodal-curve, statement (1), (2)(c) and proof distinguishing nodes on one component from nodes on two components; reducedness input as in Tag 0E37; geometric fibre dimension: Morphisms Tag 02NK, lemma-base-change-relative-dimension-d"
+   }
+  },
+  {
+   "text": "Write $\\Sigma_H=\\operatorname{Sing}(H/S)$ and $\\Sigma_Z=\\operatorname{Sing}(Z/S)$ for the first-Fitting singular subschemes. Step 1 verifies the nodal-fibre hypothesis for $H/S$; its flatness and finite presentation are assumed. Apply [lem-trf-nodal-family-fitting-singular] to $H/S$ and $Z/S$. These singular schemes are closed, commute with every base change, and are unramified over $S$. Set $Q=\\Sigma_H$, $P=H\\times_Z\\Sigma_Z$ and $R=H\\times_Z M$. Both $P\\to H$ and $R\\to H$ are closed immersions by [lem-weil-pbc-closed-immersion-base-change]. All three schemes $Q,P,R$ are proper over $S$ by [lem-weil-pbc-closed-immersion-proper], using only properness of $H/S$. Their geometric fibres are respectively the singular subscheme of $H_{\\bar s}$, its scheme-theoretic intersection with the ambient singular subscheme, and its scheme-theoretic intersection with the marking. In particular, the first has the desired self-node support by step 1.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59 and 0C5B, lemma-nodal-family and lemma-base-change-nodal-family; closed immersion base change and properness: Morphisms Tags 01QR and 01W5"
+   }
+  },
+  {
+   "text": "The morphisms $P/S$ and $R/S$ are also unramified. To check this without assuming either $\\Sigma_Z/S$ or $M/S$ proper, work on a geometric fibre over $F$. By [lem-trf-geometric-fibre-unramified-criterion], $(\\Sigma_Z)_{\\bar s}/F$ is unramified. By [lem-weil-pbc-unramified-over-field-discrete] its points are open, and by [lem-trf-unramified-over-field-local-criterion] their local rings are finite separable extensions of $F$, hence are $F$ itself. By [lem-weil-pbc-closed-immersion-base-change], $P\\to\\Sigma_Z$ and $R\\to M$ (base changes of $H\\to Z$) and their geometric fibres are closed immersions. Its closed subscheme $P_{\\bar s}$ therefore consists of a subset of these reduced points: a quotient of the local ring $F$ is either zero or $F$. For $R$, the hypothesis makes $M_s/\\kappa(s)$ etale, and [lem-weil-pbc-etale-scheme-base-change] makes $M_{\\bar s}/F$ etale. The fibre description [lem-weil-pbc-etale-fibre-discrete-separable-points] expresses it as a disjoint union of spectra of finite separable extensions of $F$, again just copies of $F$. Its closed subscheme $R_{\\bar s}$ likewise selects reduced points. The local-ring criterion just cited makes both $P_{\\bar s}/F$ and $R_{\\bar s}/F$ unramified. Finally $P/S$ and $R/S$ are locally of finite type, since they are proper by step 2. Apply the converse of [lem-trf-geometric-fibre-unramified-criterion] to obtain their unramifiedness over $S$. This argument includes empty intersections.",
+   "uses": [
+    "lem-trf-geometric-fibre-unramified-criterion",
+    "lem-weil-pbc-unramified-over-field-discrete",
+    "lem-trf-unramified-over-field-local-criterion",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02G7, 02G8, 02GO and 02GL: unramified-over-field, unramified-etale-fibres, base-change-etale, etale-over-field"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-generic-flat-finite-presentation] separately to $Q/S$, $P/S$ and $R/S$. Its source hypothesis holds because these are proper morphisms, hence locally of finite type and quasi-compact, and $S$ is integral. Intersect the three resulting nonempty opens. Their intersection $U$ is nonempty because $S$ is irreducible. Over $U$ the three maps are flat and locally of finite presentation. Their unramifiedness restricts to $U$ (the diagonal is the restriction of the original open immersion). By [def-weil-etale-morphism] all three maps over $U$ are etale.",
+   "uses": [
+    "lem-sbc-generic-flat-finite-presentation",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A, proposition-generic-flatness, structure-sheaf case; Tag 02GI / 02GV, etale definition and flat-unramified criterion"
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of $S$, which lies in $U$. Each of $Q_U,P_U,R_U$ remains proper over $U$ by [lem-weil-pbc-proper-base-change]. By [lem-weil-pbc-etale-fibre-discrete-separable-points], its fibre at $\\eta$ is discrete. That fibre is proper over $\\kappa(\\eta)$ by the same proper-base-change statement, so it is quasi-compact; its cover by singleton open subsets therefore has a finite subcover. Its underlying set is finite. Apply [lem-trf-proper-finite-fibre-finite-near] at $\\eta$ to each of the three proper maps, and intersect the resulting neighbourhoods. On the resulting nonempty open $W\\subseteq U$, all three maps are finite and etale. Subsequent open restrictions preserve finiteness, since on affine opens a finite algebra stays finite after localization; etaleness is preserved by [lem-weil-pbc-etale-scheme-base-change].",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-trf-proper-finite-fibre-finite-near",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood, applied at the generic point; fibre description: Morphisms Tag 02GL; proper base change: Morphisms Tag 01W4"
+   }
+  },
+  {
+   "text": "Over $W$ use $Q_W$ for the self-node scheme and $T=P_W\\amalg R_W$ for the incidence scheme. The latter is finite and etale: over any affine open of $W$ its algebra is the product of the two finite algebras for $P_W$ and $R_W$, generated by the union of their finite module generating sets; etaleness holds on its two open summands. For each geometric fibre, the supports of $P_{\\bar s}$ and $R_{\\bar s}$ are disjoint. By hypothesis $M_s$ lies in an open $U_s\\subseteq Z_s$ smooth over $\\kappa(s)$; by [lem-pc-proper-base-change], clause (2), its base change $U_{\\bar s}\\subseteq Z_{\\bar s}$ is smooth over $F$ and contains $M_{\\bar s}$. By [lem-trf-nodal-family-fitting-singular] the underlying set of $(\\Sigma_Z)_{\\bar s}$ is the nonsmooth locus of $Z_{\\bar s}$, which misses $U_{\\bar s}$; so $R_{\\bar s}\\subseteq M_{\\bar s}$ and $P_{\\bar s}\\subseteq(\\Sigma_Z)_{\\bar s}$ have disjoint supports. The closed immersion into $H_{\\bar s}$ is injective on points on each summand. Step 3 shows that these fibres have reduced structure. Consequently the geometric fibre of $T$ identifies with the DISTINCT points of $H_{\\bar s}\\cap(M_{\\bar s}\\cup\\operatorname{Sing}(Z_{\\bar s}))$, with each point occurring once. This construction requires no finiteness of the ambient marking.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "lem-pc-proper-base-change",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent combination of the two disjoint special-point loci, using the marking-in-the-smooth-locus hypothesis; finite-product algebra calculation and etale locality on the two summands"
+   }
+  },
+  {
+   "text": "Apply [thm-pc-semicontinuity-base-change], parts (1) and (2), to $H/S$, $\\mathcal F=\\mathcal O_H$, and $q=1$. The morphism is proper and of finite presentation by hypothesis. The structure sheaf is finitely presented as an $\\mathcal O_H$-module (free of rank one), and is flat over $S$ by flatness of $H/S$. Thus $\\beta(s)=\\dim_{\\kappa(s)}H^1(H_s,\\mathcal O_{H_s})$ is a finite natural number and is upper semicontinuous. On the nonempty open $W$, choose the least attained value $b$ of $\\beta$. The set $V=\\{s\\in W:\\beta(s)<b+1\\}$ is nonempty and open in $S$, and $\\beta=b$ there by minimality of $b$. For any $s$ and any algebraic closure $F$ of $\\kappa(s)$, $H_s$ is proper by [lem-weil-pbc-proper-base-change], and a field extension is flat (a vector space is free). Apply [lem-sc-flat-base-change-coherent] to obtain $H^1(H_{\\bar s},\\mathcal O)\\cong H^1(H_s,\\mathcal O)\\otimes_{\\kappa(s)}F$. A basis of the finite-dimensional vector space on the right before extension remains a basis after tensoring. Therefore $p(s)=\\beta(s)$, for every choice of algebraic closure. In particular $p=b$ on $V$.",
+   "uses": [
+    "thm-pc-semicontinuity-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sc-flat-base-change-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BDN, lemma-jump-loci-geometric, finiteness and upper semicontinuity; coherent.tex Tag 02KH, lemma-flat-base-change-cohomology, field-extension case"
+   }
+  },
+  {
+   "text": "Restrict $Q_W$ and $T$ to the nonempty open $V$ of step 7. They are finite etale by steps 5 and 6. Since $V$ is a nonempty open of an integral scheme, it is irreducible and connected. Apply [lem-weil-pbc-finite-etale-trace-degree], parts (a) and (b), separately to these two finite etale maps: there are integers $a,c\\geq0$ such that every geometric fibre has respectively $a$ and $c$ reduced points, independently of the algebraically closed field representing the geometric point. Steps 1, 2 and 6 identify these fibres with exactly the self-nodes and the distinct incidence points requested. Together with step 7 this proves all assertions. Empty singular or marking intersections correspond to degree zero; no properness or finiteness of $Z/S$ or $M/S$ was used.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04HN, lemma-finite-etale-etale-local; constant degree on a connected base and geometric fibre cardinality, as stated in the cited degree node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-multipointed-curve",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-proper-base-change",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sc-flat-base-change-coherent",
+  "lem-trf-geometric-fibre-unramified-criterion",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-proper-finite-fibre-finite-near",
+  "lem-trf-relative-dimension-base-change",
+  "lem-trf-unramified-over-field-local-criterion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-unramified-over-field-discrete",
+  "thm-pc-semicontinuity-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Combination of Tags 0E38, 0C59, 0C5B with generic flatness (052A), proper finite-fibre finiteness (02UP), semicontinuity (0BDN), flat cohomology base change (02KH), and finite-etale local splitting (04HN). The nominal Temkin PDF is absent locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -92,10 +226,66 @@
    "results": "{\"t\": \"2026-10-17T21:55:20Z\", \"tool\": \"leanfinder\", \"query\": \"A proper flat irreducible component family inside a nonproper marked nodal curve has generically constant arithmetic genus self node count and distinct boundary point count\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\"], \"digest\": \"a359e846e4f8f051\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and grep lines; these supply basic morphism properties, component definitions, rank or limit infrastructure, not this nodal component theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|selfNode|semicontinu|rankAtStalk",
+   "results": "{\"t\": \"2026-10-18T23:10:11Z\", \"tool\": \"grep\", \"query\": \"nodal|selfNode|semicontinu|rankAtStalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"644d4455b51d43ba\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The numbers of nodes and special marked points and the dimension of first structure sheaf cohomology of a proper component in a nodal family are constant on a nonempty open",
+   "results": "{\"t\": \"2026-10-18T23:10:11Z\", \"tool\": \"leansearch\", \"query\": \"The numbers of nodes and special marked points and the dimension of first structure sheaf cohomology of a proper component in a nodal family are constant on a nonempty open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.Scheme.component_nontrivial\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.StructureSheaf.exists_const\", \"AlgebraicGeometry.Scheme.IdealSheafData.mk.sizeOf_spec\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_I₀\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"704f6b02debe8de1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-18T23:10:11Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsProper, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat component of a nodal curve family has generically constant arithmetic genus and finite etale self node and marked incidence loci",
+   "results": "{\"t\": \"2026-10-18T23:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"A proper flat component of a nodal curve family has generically constant arithmetic genus and finite etale self node and marked incidence loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"e1bf24e3528bfe48\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|arithmeticGenus|semicontinuity|IsUnramified|isLocallyConstant_finrank",
+   "results": "{\"t\": \"2026-10-18T23:11:12Z\", \"tool\": \"grep\", \"query\": \"nodal|arithmeticGenus|semicontinuity|IsUnramified|isLocallyConstant_finrank\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"b480b6fb2d0093b2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank",
+   "results": "{\"t\": \"2026-10-18T23:11:13Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.finrank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finrank\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank\", \"AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso\", \"AlgebraicGeometry.Scheme.Hom.finrank_SpecMap_eq_finrank\", \"AlgebraicGeometry.Scheme.Hom.finrank_eq_one_of_isIso\", \"AlgebraicGeometry.Scheme.Hom.isIso_iff_finrank_eq\", \"AlgebraicGeometry.Scheme.Hom.one_le_finrank_iff_surjective\", \"AlgebraicGeometry.Scheme.Hom.finrank_SpecMap_algebraMap\"], \"digest\": \"bd7a8ef808846b23\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Upper semicontinuity of coherent cohomology of a proper flat family and nodal singular points spreading to finite etale schemes",
+   "results": "{\"t\": \"2026-10-18T23:11:13Z\", \"tool\": \"leansearch\", \"query\": \"Upper semicontinuity of coherent cohomology of a proper flat family and nodal singular points spreading to finite etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UpperHemicontinuousAt\", \"UpperSemicontinuousAt\", \"UpperHemicontinuous.upperHemicontinuousAt\", \"UpperSemicontinuousWithinAt\", \"upperHemicontinuous_iff\", \"UpperSemicontinuous.upperSemicontinuousAt\", \"UpperHemicontinuousWithinAt.congr_of_eventuallyEq\", \"UpperHemicontinuousAt.upperHemicontinuousWithinAt\"], \"digest\": \"d7d787359763f341\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The singular subscheme of a nodal family is unramified and proper quasi finite unramified schemes over an integral base become finite etale on a dense open",
+   "results": "{\"t\": \"2026-10-18T23:11:17Z\", \"tool\": \"leanfinder\", \"query\": \"The singular subscheme of a nodal family is unramified and proper quasi finite unramified schemes over an integral base become finite etale on a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus\"], \"digest\": \"6329b79575b17247\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types and grep hits; basic smooth/flat/etale and rank infrastructure does not state generic nodal-component incidence and coherent-cohomology constancy."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-contracted-component-generic-data",
@@ -116,5 +306,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-contracted-component-generic-spread",
+  "worker": "stage1",
+  "summary": "Split using only existing DAG nodes: geometric subcurve nodality identifies self-nodes; three closed loci in the proper component are unramified, generically flat and then finite etale; disjoint singular and marked loci count distinct incidences. Semicontinuity and flat coherent base change give constant geometric H1. No new node, no statement change, no ambient properness assumption. Checked all cited statements and edge cases, recorded actual Mathlib searches, and supplied verbatim citations. Resumption audit made preservation of pure fibre dimension explicit via the existing relative-dimension base-change node.",
+  "blueprint": "Retains the inherited historical stable-modification approximation branch below lem-trf-local-term-locality, via stability-locus, constructibility and generic-data: the supplied proper component is the input here. Steps 1--6 realize its numerical/finite incidence spread; steps 7--8 realize genus and cardinality constancy. The current main-20261015 ancestor addresses contracting local terms and no longer contains this historical auxiliary paragraph; no change to its chapter or unit route is made. Whole-blueprint searches for nodal, self-node, arithmetic genus and singular subscheme found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Closed pullbacks put both special-point intersections inside the proper H; no ambient properness is available."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Transfers the assumed properness of H to its three closed special-point schemes."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-over-field-discrete",
+    "why": "Makes unramified field fibres discrete, so closed intersections select points."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Preserves the fibrewise marking etaleness under algebraic closure and the resulting etaleness under open restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Supplies the reduced point description of the marking fibres and discrete generic fibres of the three etale maps."
+   },
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "Makes the three proper unramified maps flat and locally finitely presented on a common nonempty open."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Ensures properness after open and residue-field base changes before using finiteness or coherent cohomology."
+   },
+   {
+    "node": "thm-pc-semicontinuity-base-change",
+    "why": "Supplies finiteness and upper semicontinuity of H1(O_H), allowing elementary selection of a constant open."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Identifies H1 after arbitrary algebraic closure by tensor extension; the unit has no coherent-cohomology substitute."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-trace-degree",
+    "why": "Uses only parts (a),(b): constant finite geometric fibre size on connected V, with zero degree allowed."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Clause (2) only: smoothness of the open containing M_s survives base change to the geometric fibre, giving disjointness of marking and ambient singular incidences; the unit has no smooth base-change node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-unramified-over-field-discrete",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-weil-pbc-proper-base-change",
+  "thm-pc-semicontinuity-base-change",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NA-10237a488",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-10237a488 (reviewer sub-agent of L); spot-checked: Read in full: all 8 steps, the statements of the 20 cited nodes, the parent generic-data steps 2 and 4 (both uses fit the item's hypotheses), and Stacks 0E38 at curves.tex l.4577; the other tags (0C59/0C5B, 02G7/02G8, 052A, 02UP, 02NK, 0BDN, 02KH) were checked through the cited nodes' statements. The Temkin PDF is absent, so WANTED and proof_origin=agent are right. No SGA anywhere in the item. 'Finitely presented' includes quasi-compact, so Z_sbar is of finite type as step 1 needs. Steps 1, 2, 4, 5, 7 and 8 are correct: N=C use of 0E38 for self-nodes; Fitting Sing commutes with base change and is unramified; properness comes only from H; generic flatness plus étale by definition; 02UP finiteness at eta; semicontinuity minimum and flat base change to any algebraic closure; finite-étale degree on a connected V. Faults, both fixed: (C1) step 6 was marked elementary but carried the hypothesis 'M_s lies in the smooth locus of Z_s' over to Z_sbar without a smooth base-change citation. It now cites lem-pc-proper-base-change clause (2) and lem-trf-nodal-family-fitting-singular, is set elementary:false, and lem-pc-proper-base-change is added to tool_uses. Step 3 used P_sbar in (Sigma_Z)_sbar and R_sbar in M_sbar as closed subschemes without a citation; lem-weil-pbc-closed-immersion-base-change is now cited there. proof_deps rebuilt. Edge cases tested: smooth component with no marking (degree 0); nodal cubic (a=b=p=1); node between two components (in P, not Q); marked smooth point; singular locus that is only vertical; nonproper Z and nonfinite M; imperfect residue fields. The statement is not weakened. No new nodes. The Temkin ancestry is inherited from the parent and is not a fault of this delivery. The fix file is fixes/dag/nodes/sec-trace-formula/lem-trf-contracted-component-generic-spread.json.; 1 file(s) fixed by the reviewer"
  }
 }
