@@ -61,7 +61,10 @@ Evaluating their composite on a gives the displayed equation. -/
 theorem pbcCompletedSection_naturality (U V : T.ProEtᵒᵖ) (f : U ⟶ V) (a : A) :
     (pbcAdicCompletion T d).obj.map f (pbcCompletedSection T d U a) =
       pbcCompletedSection T d V a := by
-  sorry
+  let s := toSheafify (ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of A)) ≫ (pbcCompletedScalar T d).hom
+  change (s.app U ≫ (pbcAdicCompletion T d).obj.map f) a = s.app V a
+  exact (ConcreteCategory.congr_hom (s.naturality f) a).symm
 
 /-- The scalar action factors through the compatible global sections of the completed
 ring. Source: blueprint order 1305 (blueprint: def-weil-pbc-rational-category). -/
