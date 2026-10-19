@@ -1,0 +1,124 @@
+{
+ "id": "lem-pe-direct-image-mate-compatibility",
+ "kind": "lemma",
+ "title": "ProEtaleDirectImageMateCompatibility",
+ "statement": "Let $\\Lambda$ be a discrete commutative ring and $g:X\\to Y$ a scheme morphism. On bounded-below derived categories [def-weil-pbc-derived-categories], put $a=\\nu_Y^*$, $b=\\nu_X^*$, $l=g_e^*$, $r=Rg_{e,*}$, $p=g_p^*$, $t=Rg_{p,*}$, with the canonical derived adjunctions $l\\dashv r$ and $p\\dashv t$ [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-proetale-operations]. Let $c:pa\\xrightarrow{\\sim}bl$ be the exact localization of the canonical inverse-image comparison, and let $\\beta:ar\\to tb$ be the specified right-derived etale/pro-etale base-change transformation. For every object $A$ of $D^+(Y_e,\\Lambda)$ and $B$ of $D^+(X_e,\\Lambda)$, the specified maps satisfy $\\beta_{lA}\\circ a(\\eta^e_A)=t(c_A)\\circ\\eta^p_{aA}$ and $\\varepsilon^p_{bB}\\circ p(\\beta_B)=b(\\varepsilon^e_B)\\circ c_{rB}$. Here $\\eta^e,\\varepsilon^e,\\eta^p,\\varepsilon^p$ are the respective derived units and counits. There is no quasi-compactness, quasi-separatedness or finiteness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison.proof.md",
+  "place": "Opening sentences: the canonical comparison is adjoint to the inverse-image square followed by the etale counit and is compatible with units and counits"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-derived-categories",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib iterated_mateEquiv_conjugateEquiv_symm to the four ordinary inverse-image/direct-image adjunctions. It identifies the mate of the specified pullback comparison with lowerStarComparisonUpperStarBaseChange. Apply the exact functors termwise to bounded-below complexes and localize. The composition and natural-isomorphism factorization equations for mapDerivedCategoryPlus show that directImageComparisonPullbackPlusIso is the localized ordinary square. Adjunction.derivedPlus_mateEquiv_app_fac computes its derived mate after the unit of the right-derived etale direct image. The defining factorization of rightDerivedFunctorPlusBaseChange gives the identical formula for comparisonDirectImageCanonicalMate. Uniqueness of transformations out of that right-derived functor identifies these maps. Mathlib unit_mateEquiv and mateEquiv_counit then give the two displayed equations. The equation derivedAdjunctionPlus_eq_derivedPlus identifies the recorded adjunctions; no finiteness or qcqs condition is used in this normalization, and zero categories satisfy the same identities.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+  "place": "Extracted specified-square coherence and mate normalization steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful etale to proetale comparison commutes with derived direct image for quasi compact quasi separated schemes",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus.*mate|mapDerivedCategoryPlusCompIso_hom_app",
+   "results": "No results.",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image comparison is the mate of the inverse image comparison and satisfies the adjunction unit and counit equations",
+   "results": "CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived', SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη.congr_simp",
+   "date": "2026-10-19",
+   "verdict": "No match for the specified scheme comparison assertion. Generic derived-adjunction and sheaf-composition APIs do not identify this comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-direct-image-comparison",
+   "place": "Opening sentences: the canonical comparison is adjoint to the inverse-image square followed by the etale counit and is compatible with units and counits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-direct-image-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageMateCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDirectImageMateCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageMateCompatibility",
+  "statement": "theorem directImageMateCompatibility\n    (Λ : Type u) [CommRing Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) :\n    (∀ A : DerivedCategory.Plus\n          (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))),\n        (comparisonUpperStar\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) Y).mapDerivedCategoryPlus.map\n            ((Etale.upperStarLowerStarAdjunction\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).derivedAdjunctionPlus.unit.app A) ≫\n          (comparisonDirectImageCanonicalMate (ULift.{u + 1, u} Λ) g).app\n            ((Etale.upperStar\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).mapDerivedCategoryPlus.obj A) =\n        (ProEtale.upperStarLowerStarAdjunction\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).derivedAdjunctionPlus.unit.app\n            ((comparisonUpperStar\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) Y).mapDerivedCategoryPlus.obj A) ≫\n          (ProEtale.lowerStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).rightDerivedFunctorPlus.map\n              ((directImageComparisonPullbackPlusIso (ULift.{u + 1, u} Λ) g).hom.app A)) ∧\n    (∀ B : DerivedCategory.Plus\n          (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))),\n        (ProEtale.upperStar\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).mapDerivedCategoryPlus.map\n            ((comparisonDirectImageCanonicalMate (ULift.{u + 1, u} Λ) g).app B) ≫\n          (ProEtale.upperStarLowerStarAdjunction\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).derivedAdjunctionPlus.counit.app\n              ((comparisonUpperStar\n                (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).mapDerivedCategoryPlus.obj B) =\n        (directImageComparisonPullbackPlusIso (ULift.{u + 1, u} Λ) g).hom.app\n          ((Etale.lowerStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).rightDerivedFunctorPlus.obj B) ≫\n          (comparisonUpperStar\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) X).mapDerivedCategoryPlus.map\n              ((Etale.upperStarLowerStarAdjunction\n                (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) g).derivedAdjunctionPlus.counit.app B))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageComparisonPullbackPlusIso",
+   "AlgebraicGeometry.ProEtale.directImageMateCompatibility"
+  ]
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
+ }
+}

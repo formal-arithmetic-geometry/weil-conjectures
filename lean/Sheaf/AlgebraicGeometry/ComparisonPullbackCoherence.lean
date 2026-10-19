@@ -643,9 +643,9 @@ all identity, arbitrary-composite and chosen-square cases. -/
 theorem comparison_pullback_coherent :
     ComparisonPullbackCoherent (Type (u + 1)) ∧
       ComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
-      ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],
+      ∀ (Λ : Type (u + 1)) [Ring Λ],
         ComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  exact ⟨comparison_coherent _, comparison_coherent _, fun Λ _ _ ↦
+  exact ⟨comparison_coherent _, comparison_coherent _, fun Λ _ ↦
     comparison_coherent (ModuleCat.{u + 1} Λ)⟩
 
 end ProEtale

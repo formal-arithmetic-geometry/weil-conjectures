@@ -6,10 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalDirectImagePreservation
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImageComparisonCoherence
+public import Sheaf.AlgebraicGeometry.ProEtaleDirectImageMateCompatibility
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ComparisonDirectImageCanonicalMate
 public import Sheaf.AlgebraicGeometry.ComparisonDirectImage
@@ -19,17 +20,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
-import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.SixFunctors.ClassicalDefinition
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Direct-image comparison for discrete coefficients
@@ -47,25 +37,6 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
-
-/-- The canonical comparison square on bounded-below derived categories:
-apply the exact functors termwise, then localize the sheaf comparison and its inverse.
-Source: blueprint sk-thm-pe-direct-image-comparison, proof steps 2, 3 and 6; Stacks Tag 09A6
-(blueprint: sk-thm-pe-direct-image-comparison). -/
-noncomputable def directImageComparisonPullbackPlusIso
-    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategoryPlus ⋙
-        (ProEtale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlus ≅
-      (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlus ⋙
-        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus :=
-  (Functor.mapDerivedCategoryPlusCompIso
-    (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y)
-    (ProEtale.upperStar (ModuleCat.{u + 1} Λ) g)).symm ≪≫
-      Functor.mapDerivedCategoryPlusNatIso
-        (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) g) ≪≫
-      Functor.mapDerivedCategoryPlusCompIso
-        (Etale.upperStar (ModuleCat.{u + 1} Λ) g)
-        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
 
 /-- Direct-image comparison for arbitrary discrete constant coefficients.
 Source: blueprint sk-thm-pe-direct-image-comparison, order 730; Stacks Tag 09A6
@@ -246,6 +217,20 @@ theorem directImageComparison
         IsClassicalComplex (X := X) Λ M →
           IsClassicalComplex (X := Y) Λ
             ((Scheme.proEtaleConstantDerivedDirectImage g Λ).obj M)) := by
-  sorry
+  have hcoh := inverseImageComparisonCoherence Λ g
+  have hmate := directImageMateCompatibility Λ g
+  refine ⟨?_, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, hcoh.1, hcoh.2,
+    hmate.1, hmate.2, ?_, ?_, ?_⟩
+  · intro hqc hqs
+    let := hqc
+    let := hqs
+    exact isIso_comparisonDirectImagePlus (ULift.{u + 1, u} Λ) g
+  · exact comparisonDirectImagePlus_id (ULift.{u + 1, u} Λ)
+  · exact fun f h L ↦ comparisonDirectImagePlus_comp (ULift.{u + 1, u} Λ) f h L
+  · intro hqc hqs M hM hc
+    let := hqc
+    let := hqs
+    exact classicalDirectImagePreservation Λ g M hM hc
 
 end AlgebraicGeometry.ProEtale

@@ -81,7 +81,7 @@ filtered colimit of sections of I; exact filtered colimits commute with cohomolo
 finite stage the counit is identity on sections, so its restriction is precisely the map
 used by continuity. Thus the specified mate induces the computed isomorphisms, and basis
 derived detection proves it invertible. This follows the seven proof steps of the node. -/
-theorem isIso_comparisonDirectImagePlus (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
+theorem isIso_comparisonDirectImagePlus (Λ : Type (u + 1)) [Ring Λ]
     {U V : Scheme.{u}}
     (f : U ⟶ V) [QuasiCompact f] [QuasiSeparated f] :
     IsIso (Functor.rightDerivedFunctorPlusBaseChange
@@ -373,7 +373,7 @@ Proof: for the identity morphism the defining pulled-back counit mate is the ide
 under the canonical identity identifications. The adjunction triangle identities cancel
 the inserted unit and counit. Deriving preserves this equality by the universal property
 of the bounded below right derived functor and its normalization on injective complexes. -/
-theorem comparisonDirectImagePlus_id (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
+theorem comparisonDirectImagePlus_id (Λ : Type (u + 1)) [Ring Λ]
     (U : Scheme.{u})
     (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (Functor.rightDerivedFunctorPlusBaseChange
@@ -525,10 +525,9 @@ preserve injectives because inverse images are exact. Thus the canonical derived
 composition isomorphisms compute the same equality termwise; their universal-property
 normalizations give the displayed formula. Naturality in L is already the naturality
 of the derived base-change transformation. -/
-theorem comparisonDirectImagePlus_comp (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
+theorem comparisonDirectImagePlus_comp (Λ : Type (u + 1)) [Ring Λ]
     {U V W : Scheme.{u}}
     (f : U ⟶ V) (g : V ⟶ W)
-    [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g] [QuasiSeparated g]
     (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) W).mapDerivedCategoryPlus.map
       ((etaleComparisonDirectImageCompIso Λ f g).hom.app L) ≫

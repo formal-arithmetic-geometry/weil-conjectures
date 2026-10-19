@@ -271,7 +271,8 @@ theorem supportSiteComparison_pullback_coherent :
       supportSiteComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
       ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],
         supportSiteComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  exact comparison_pullback_coherent
+  exact ⟨comparison_pullback_coherent.1, comparison_pullback_coherent.2.1,
+    fun Λ _ _ ↦ comparison_pullback_coherent.2.2 Λ⟩
 
 end ProEtale
 end AlgebraicGeometry

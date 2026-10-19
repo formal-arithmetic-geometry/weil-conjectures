@@ -1,0 +1,116 @@
+{
+ "id": "lem-pe-inverse-image-comparison-coherence",
+ "kind": "lemma",
+ "title": "ProEtaleInverseImageComparisonCoherence",
+ "statement": "Let $\\Lambda$ be a discrete commutative ring and, for every scheme $T$, write $\\nu_T^*$ for the canonical etale-to-pro-etale inverse image [def-weil-pbc-site-comparison-morphism]. For a scheme morphism $f:U\\to V$, write $f_e^*$ and $f_p^*$ for etale and pro-etale inverse image [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image], and $c_f:f_p^*\\nu_V^*\\xrightarrow{\\sim}\\nu_U^*f_e^*$ for the inverse of the unit-normalized coefficient pullback comparison. Let $i^e_T:(\\mathrm{id}_T)_e^*\\xrightarrow{\\sim}\\mathrm{id}$ and $i^p_T:(\\mathrm{id}_T)_p^*\\xrightarrow{\\sim}\\mathrm{id}$ be the specified identity comparisons, and let $a^e_{f,h}:(h\\circ f)_e^*\\xrightarrow{\\sim}f_e^*h_e^*$ and $a^p_{f,h}:(h\\circ f)_p^*\\xrightarrow{\\sim}f_p^*h_p^*$ be the specified composition comparisons. Then $\\nu_T^*(i^e_T)\\circ c_{\\mathrm{id}_T}=i^p_T\\nu_T^*$, and for all $U\\xrightarrow{f}V\\xrightarrow{h}W$, $\\nu_U^*(a^e_{f,h})\\circ c_{h\\circ f}=(c_fh_e^*)\\circ f_p^*(c_h)\\circ(a^p_{f,h}\\nu_W^*)$, as transformations on sheaves of $\\Lambda$-modules. No quasi-compactness or finiteness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/lem-weil-pbc-comparison-pullback.proof.md",
+  "place": "The inverse-image isomorphism, its identity and composition coherence; lem-weil-pbc-comparison-pullback.proof.md, Steps 1-3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-derived-categories",
+  "sk-def-pe-classical-definition",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use comparison_pullback_coherent for the lifted coefficient ring, with its unused Finite assumption removed. All comparison functors and adjunctions are definitionally the same, and comparisonCoefficientPullbackIso is definitionally the inverse of comparisonUpperStarCompUpperStarIso. Precompose the identity equation by the invertible comparison. For composition precompose by the inverse comparison for the composite, replace the two-step inverse comparison by the existing coherence equation, and cancel each inverse with its hom, including the pair inside upperStar.map. These are the two componentwise equations stated.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+  "place": "J3: explicit cancellation proof from the general coefficient coherence theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful etale to proetale comparison commutes with derived direct image for quasi compact quasi separated schemes",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus.*mate|mapDerivedCategoryPlusCompIso_hom_app",
+   "results": "No results.",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exact etale to proetale inverse image comparison commutes with identity and composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AbstractCompletion.inverse_compare, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, AlgebraicGeometry.LocallyRingedSpace.stalkMap_hom_inv, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap",
+   "date": "2026-10-19",
+   "verdict": "No match for the specified scheme comparison assertion. Generic derived-adjunction and sheaf-composition APIs do not identify this comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-direct-image-comparison",
+   "place": "The inverse-image isomorphism, its identity and composition coherence; lem-weil-pbc-comparison-pullback.proof.md, Steps 1-3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-direct-image-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageComparisonCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImageComparisonCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.inverseImageComparisonCoherence",
+  "statement": "theorem inverseImageComparisonCoherence\n    (Λ : Type u) [CommRing Λ] {X Y : Scheme.{u}} (_g : X ⟶ Y) :\n    (∀ (U : Scheme.{u})\n          (F : Sheaf U.smallEtaleTopology\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))),\n        (comparisonUpperStarCompUpperStarIso\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) (𝟙 U)).hom.app F ≫\n          (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) U).map\n            ((Etale.upperStarId (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) U).hom.app F) =\n        (ProEtale.upperStarId (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) U).hom.app\n          ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) U).obj F)) ∧\n    (∀ {U V W : Scheme.{u}} (f : U ⟶ V) (h : V ⟶ W)\n          (F : Sheaf W.smallEtaleTopology\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))),\n        (comparisonUpperStarCompUpperStarIso\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) (f ≫ h)).hom.app F ≫\n          (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) U).map\n            ((Etale.upperStarComp\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) f h).hom.app F) =\n        (ProEtale.upperStarComp\n          (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) f h).hom.app\n            ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) W).obj F) ≫\n          (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) f).map\n            ((comparisonUpperStarCompUpperStarIso\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) h).hom.app F) ≫\n          (comparisonUpperStarCompUpperStarIso\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) f).hom.app\n              ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ)) h).obj F))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-pe-classical-direct-image-preservation",
+ "kind": "lemma",
+ "title": "Classicality of bounded-below pro-etale direct images",
+ "statement": "Let $\\Lambda$ be a discrete commutative ring, $X,Y$ schemes, and $g:X\\to Y$ a quasi-compact quasi-separated morphism. Let $M$ be an object of the ordinary uncompleted derived category of modules over the constant pro-etale ring sheaf $\\Lambda_X$ [def-weil-pbc-proetale-operations], with $H^q(M)=0$ for all $q<n$ for some integer $n$. Suppose every $H^q(M)$ satisfies the canonical affine-presentation continuity condition defining classicality [sk-def-pe-classical-definition]. Then every $H^q(Rg_*M)$ satisfies the same continuity condition on $Y$, where $Rg_*$ is the recorded ordinary uncompleted intrinsic module-sheaf derived direct image. No finiteness of $\\Lambda$ or nonempty-scheme hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/sk-thm-pe-direct-image-comparison-classical.proof.md",
+  "place": "Classicality consequence; sk-thm-pe-direct-image-comparison-classical.proof.md: counit equivalence followed by direct-image comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "sk-def-pe-classical-definition"
+ ],
+ "proof": [
+  {
+   "text": "Construct intrinsicRestriction by restricting every section module along the constant-section sheafification unit. Local bijectivity of that unit makes restriction fully faithful, using restrictHomEquivOfIsLocallySurjective. For essential surjectivity sheafify the fixed-scalar module presheaf; its unit is an isomorphism because the underlying additive presheaf is already a sheaf. Thus restriction is an additive exact equivalence. No finiteness assumption is used.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct restrictionDirectImageIso with identity section functions. Their scalar linearity follows from the sheafification adjunction equation: the coefficient direct-image map composed with the target constant-section unit equals the source constant-section unit after base change. Restriction maps and naturality are literal sectionwise equalities.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive that isomorphism by rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorNatIso and rightDerivedFunctorCompIso. The source equivalence preserves K-injectives; replace its right derived functor by its exact mapDerivedCategory. This identifies the recorded uncompleted intrinsic direct image with the ordinary fixed-scalar derived direct image.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact-functor homology compatibility to identify classicality before and after restriction. The fixed-scalar classicality predicate uses the standard localization, so construct fixedHomologyStandardIso by fully faithful precomposition with the localization and the two homology factorization isomorphisms. Continuity-map naturality proves invariance under the resulting cohomology isomorphisms; the sectionwise restriction identifies the intrinsic and fixed-scalar continuity diagrams definitionally.",
+   "uses": [
+    "sk-def-pe-classical-definition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed-scalar bounded-below classical complex, the invertible bounded-below comparison unit and classicalDerivedEquivalence give an invertible counit from nu_X^* K. The existing acyclic comparison theorem gives nu_Y^* Rg_et,* K isomorphic to Rg_proet,* nu_X^* K for qcqs g. Apply the classical-essential-image clause of classicalDerivedEquivalence and invariance under isomorphism.",
+   "uses": [
+    "sk-prop-sf-comparison",
+    "det-pe-classical-derived-equivalence",
+    "prop-weil-pbc-comparison-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact restriction functor preserves the supplied lower bound. Regard its image as an object of D+, apply the preceding fixed-scalar result, then rightDerivedFunctorPlusCompatibility and restrictionDerivedDirectImageIso. The cohomology/classicality identification of step 4 transports the conclusion back to the given intrinsic direct image.",
+   "uses": [
+    "sk-def-pe-classical-definition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "sk-def-pe-classical-definition",
+  "sk-prop-sf-comparison",
+  "det-pe-classical-derived-equivalence",
+  "prop-weil-pbc-comparison-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+  "place": "Step 5, now proved in Lean by explicit scalar restriction, exact derived transport, and the classical derived-equivalence route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact fully faithful etale to proetale comparison commutes with derived direct image for quasi compact quasi separated schemes",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus.*mate|mapDerivedCategoryPlusCompIso_hom_app",
+   "results": "No results.",
+   "date": "2026-10-18",
+   "verdict": "No exact match for this scheme comparison assertion; available mate APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below classical pro etale complex has classical derived direct image along a quasi compact quasi separated scheme morphism",
+   "results": "DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1",
+   "date": "2026-10-19",
+   "verdict": "No match for the specified scheme comparison assertion. Generic derived-adjunction and sheaf-composition APIs do not identify this comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison",
+  "date": "2026-10-19",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-direct-image-comparison",
+   "place": "Classicality consequence; sk-thm-pe-direct-image-comparison-classical.proof.md: counit equivalence followed by direct-image comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-direct-image-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClassicalDirectImagePreservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClassicalDirectImagePreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.classicalDirectImagePreservation",
+  "statement": "theorem classicalDirectImagePreservation\n    (Λ : Type u) [CommRing Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)\n    [QuasiCompact g] [QuasiSeparated g]\n    (M : Scheme.proEtaleDerivedCategory X Λ)\n    (hM : ∃ n : ℤ, DerivedCategory.IsGE M n)\n    (hc : IsClassicalComplex (X := X) Λ M) :\n    IsClassicalComplex (X := Y) Λ\n      ((Scheme.proEtaleConstantDerivedDirectImage g Λ).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-19"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-746e3",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T093448-L-2314816",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
+ }
+}

@@ -219,7 +219,8 @@
    "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientDirectImageIso",
    "AlgebraicGeometry.ProEtale.supportSiteComparisonCoefficientPullbackIso",
    "AlgebraicGeometry.ProEtale.supportSiteComparisonPullbackCoherent",
-   "AlgebraicGeometry.ProEtale.supportSiteComparison_pullback_coherent"
+   "AlgebraicGeometry.ProEtale.supportSiteComparison_pullback_coherent",
+   "AlgebraicGeometry.ProEtale.comparison_pullback_coherent"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/SupportComparisonPullbackCoherence.lean",
   "statement": "theorem supportSiteComparison_pullback_coherent : supportSiteComparisonPullbackCoherent (Type (u + 1)) ∧ supportSiteComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧ ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], supportSiteComparisonPullbackCoherent (ModuleCat.{u + 1} Λ)",
@@ -227,17 +228,17 @@
   "by": "NY",
   "date": "2026-10-16",
   "existing": false,
-  "note": "H2 stage-3 reuse: the earlier import-family conflict no longer occurs in the published module API. The support-prefixed constructions and all identity, composition and chosen-square maps are definitionally the unprefixed canonical constructions. The support coherence predicate abbreviates ComparisonPullbackCoherent, whose square clause unfolds through ComparisonSquareComponent and comparisonSquareData to the original support-site equation. The proved comparison_pullback_coherent specializes directly; the declaration signature text is unchanged.",
+  "note": "H2 stage-3 reuse: the earlier import-family conflict no longer occurs in the published module API. The support-prefixed constructions and all identity, composition and chosen-square maps are definitionally the unprefixed canonical constructions. The support coherence predicate abbreviates ComparisonPullbackCoherent, whose square clause unfolds through ComparisonSquareComponent and comparisonSquareData to the original support-site equation. The proved comparison_pullback_coherent specializes directly; the declaration signature text is unchanged. J3 additionally records the underlying comparison_pullback_coherent, whose unused Finite binder is removed in this delivery; the support-prefixed theorem retains its original finite specialization and signature.",
   "fixed_by": "NT-stage2-Codex-712728d22"
  },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "C-cad3d",
-  "group": "H2",
+  "reviewer": "C-746e3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261019T005301-L-2748184",
+  "landing": "20261019T093448-L-2314816",
   "kind": "interface",
-  "note": "independent cc review: old 3-clause supportSiteComparisonPullbackCoherent vs ComparisonPullbackCoherent D: textually identical bodies under renaming plus rfl for the direct-image, coefficient-pullback and both square isos; clause 3 unfolded field by field; 86/86 direct importers compile; axioms clean"
+  "note": "independent cc review: Item theorem unchanged and now proved from inverseImageComparisonCoherence, directImageMateCompatibility, the generalized isIso/_id/_comp of ComparisonDirectImage and classicalDirectImagePreservation; all 7 files compile clean; original SupportComparisonPullbackCoherence fails as reported; 31 direct importers compile; axioms only propext/choice/Quot.sound plus sorryAx from the still-open classicalDerivedEquivalence; change records cover the 3 interface changes in unclaimed modules"
  }
 }
