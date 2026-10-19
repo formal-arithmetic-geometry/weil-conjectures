@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Write $j=j_U^*$ and $E=j_{U!}$. By [lem-pur-site-restriction-module-adjunction-exact], $E\\dashv j$ and both functors are exact. Define $E^{\\operatorname{Tow}}$ by applying $E$ to each term and transition. The componentwise adjunction bijections identify tower maps $E^{\\operatorname{Tow}}T\\to S$ with tower maps $T\\to j^{\\operatorname{Tow}}S$: naturality of the bijection changes the equation for each transition on one side into the equation on the other. Hence $E^{\\operatorname{Tow}}\\dashv j^{\\operatorname{Tow}}$. Both are additive and exact, since addition and exactness are levelwise by [lem-weil-tower-category-levelwise-abelian]. Exactness preserves $\\ker d/\\operatorname{im}d$, so $j$ and $j^{\\operatorname{Tow}}$ preserve quasi-isomorphisms and induce the termwise derived functors in [def-weil-abstract-derived-category].",
+   "text": "Promote the given sectionwise commutative ring sheaf to CommRingCat without changing its underlying ring sheaf (the private proved helper slice_commRingSheaf). Apply the independent-universe localizedSystemExact and localizedSystemAdjunction declarations of [lem-pur-site-restriction-module-adjunction-exact]. Whisker the adjunction by the strict tower index. Mathlib whiskeringRight_preservesLimitsOfShape and whiskeringRight_preservesColimitsOfShape lift both exactness assertions levelwise, using [lem-weil-tower-category-levelwise-abelian]. The actual exact restrictions induce mapDerivedCategory as in [def-weil-abstract-derived-category].",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "lem-weil-tower-category-levelwise-abelian",
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "For a tower of module sheaves $T$, its ordinary limit is the sheaf assigning to $V$ the compatible tuples $(t_n)$ in $\\prod_n T_n(V)$. Indeed a matching family of compatible tuples glues coordinate by coordinate; uniqueness of gluing makes the glued coordinates satisfy each transition equation. This gives the limit universal property for module sheaves [def-weil-sheaf-of-modules-category]. Restriction is sectionwise by [def-pur-localized-ringed-site]. Therefore on $V\\to U$ both $j(\\lim T)$ and $\\lim(j^{\\operatorname{Tow}}T)$ are precisely those tuples in $\\prod_nT_n(V)$. The identity on tuples gives a natural isomorphism $c_T:j\\lim T\\to\\lim j^{\\operatorname{Tow}}T$. It commutes with projections and with differentials when $T$ is a tower complex.",
+   "text": "The actual restriction is a right adjoint by Step 1 and therefore preserves countable limits. Mathlib preservesLimitNatIso gives lim followed by restriction isomorphic to levelwise restriction followed by lim. Apply NatIso.mapHomologicalComplex to obtain the natural comparison c on complexes. The limit universal property identifies its components with the already fixed sliceStrictTowerLimitComparison: after composing with each projection, both degreewise maps equal the restriction of that projection by preservesLimitIso_hom_π and limit.post_π. The equality with every limit projection is limit.post_π. This uses the actual sectionwise functor [def-pur-localized-ringed-site] on module sheaves [def-weil-sheaf-of-modules-category].",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-localized-ringed-site"
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Represent $X$ by a tower complex and take a K-injective tower resolution $q:X\\to I$ using [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Then $L_{\\mathcal A}(X)$ is represented by $\\lim I$. Step 1 makes $j^{\\operatorname{Tow}}q$ a quasi-isomorphism, and Step 2 makes its target K-injective. The same cited strict-tower model on the small slice site thus computes $L_{\\mathcal A_U}(j^{\\operatorname{Tow}}X)$ by $\\lim j^{\\operatorname{Tow}}I$. Exactness of $j$ computes the other side by $j\\lim I$. Apply $c_I$ of Step 3 to obtain the asserted isomorphism. It uses the original coefficient ring restricted to the slice, with no change of coefficients.",
+   "text": "Obtain L, LU and their units from ringedStrictTowerHomotopyLimitOfUniverses of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] on the original and localized sites. On the full category of K-injective tower complexes let QI be inclusion followed by DerivedCategory.Q. Whiskering the original unit by restriction gives an invertible transformation α. Composing the exact-functor factorization isomorphism, the comparison c, the localized unit and the inverse tower factorization gives β. It is invertible because restriction preserves K-injectivity by Step 2 and both units are invertible there. Thus α inverse followed by β is an isomorphism after precomposition with QI.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "This construction is canonical on the derived tower category. By [lem-weil-pbc-kinjective-hom-derived], a morphism between two objects is represented by a unique homotopy class of maps between their chosen K-injective tower representatives. The isomorphisms $c_I$ commute with these maps by the tuple formula of Step 3. Applying either restriction or inverse limit to the equations defining a chain homotopy again gives those equations, since both functors are additive. Thus the construction respects the representing homotopy classes and is natural on the derived category. Replacing a K-injective representative uses a homotopy equivalence by that same cited statement; the naturality equation identifies the two constructions. On a K-injective representative its map is exactly the underived comparison $c_I$, so this is the derived comparison specified in the statement.",
+   "text": "The private proved helper slice_kinjective_localization shows QI is a localization at quasi-isomorphisms. Fullness follows from the Hom bijection of [lem-weil-pbc-kinjective-hom-derived] and the full homotopy quotient; essential surjectivity follows from the resolutions of Step 4. If two chain maps have equal derived images, the same Hom bijection makes them homotopic. Their standard cylinder remains K-injective, its projection is a quasi-isomorphism, and it realizes this homotopy. Mathlib isLocalization_of_essSurj_of_full_of_exists_cylinders applies. Fully faithful whiskering along this localization descends α inverse followed by β to the required natural isomorphism e. Its defining equation holds on K-injectives. For an arbitrary complex choose q into a K-injective resolution: naturality and cancellation of the invertible derived image of q extend that equation to every complex. Composing with the tower factorization gives exactly the required normalization.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived"
    ],
@@ -74,7 +74,7 @@
    }
   },
   {
-   "text": "For each $n$, the projection is represented by $\\lim I\\to I_n$. To view its target as $X_n$, invert the evaluated resolution map $q_n:X_n\\to I_n$, which is a quasi-isomorphism by [lem-weil-tower-category-levelwise-abelian]. The tuple formula gives $\\operatorname{pr}_n\\,c_I=j(\\operatorname{pr}_n)$, with source $j\\lim I$; exact restriction also inverts $j(q_n)$. This proves compatibility with every derived tower projection. Finally, for a representative $H^\\bullet$ of $H$, multiplication by a global $a$ defines a strict tower complex. A different representative is connected through quasi-isomorphisms, which are levelwise quasi-isomorphisms of these towers, so its derived tower is well defined. Sectionwise restriction [def-pur-localized-ringed-site] sends each transition $a:H^\\bullet\\to H^\\bullet$ to multiplication by $a|_U$. Applying Steps 4–5 to this tower proves the final assertion with its actual scalar transitions.",
+   "text": "For a K-injective tower complex I both units are invertible by Step 4 and preservation from Step 2. Cancel the image of the original unit in the defining equation for e; then compose with the inverse localized unit. The remaining equality is DerivedCategory.Q applied to limit.post_π from Step 3, so the asserted nth projection identity follows for every n. The functors are the fixed restrictions [def-pur-localized-ringed-site], and [lem-weil-tower-category-levelwise-abelian] supplies their levelwise interpretation. Consequently multiplication-by-a transitions restrict to multiplication by the restricted scalar, including a=0 and a=1.",
    "uses": [
     "lem-weil-tower-category-levelwise-abelian",
     "def-pur-localized-ringed-site"
@@ -99,7 +99,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0940/0941 strict-tower K-injective model, combined with sites-modules.tex Tags 03DI/03DJ and derived.tex Tags 08BJ/070I; the levelwise adjunction, tuple comparison and its normalization are expanded here."
+  "place": "Tags 0940/0941, with sites-modules.tex Tags 03DI/03DJ/04IX and derived.tex Tags 08BJ/070I. S4 formalizes the existing six-step route using exact tower restriction, the canonical limit comparison and fully faithful descent along the K-injective localization; no new assumed lemmas."
  },
  "mathlib_searches": [
   {
@@ -235,5 +235,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Read the node, its 5 stmt_deps and records (ringedSiteModules; def-pur-localized-ringed-site Mathlib leaf overFunctor/J.over/Sheaf.over; Mathlib DerivedCategory; ringedStrictTowerHomotopyLimitOfUniverses full signature), the proof-dep records (whose modules are exactly the 4 plain imports), Stacks 0941 and its proof, the module and the report. Clause by clause: small site u,v with coefficients max u v r as in the dependency; R with _hcomm; overFunctor restriction, levelwise tower restriction by whiskeringRight; exactness witnesses are existential conclusions (true); L/LU are IsRightDerivedFunctor at quasiIso with units invertible on K-injectives (same interface as the dependency); e is a natural iso on all of D(Tow A); the normalization holds for every complex with the real limit.post chain map (true for all I by reducing to K-injective resolutions), which pins e canonically; the projection clause is true and also follows from normalization; the mult-by-a corollary is a direct instance of e. Edge cases X=0, R=0, n=0, a=0/1, independent universes; no extra hypotheses. Gates: no hollow def, sorry-only proof, docstrings carry source, blueprint and the 6 proof steps, autoImplicit false, lines <=100, names unique, only the lean field changed, lean.statement verbatim. The Second reading section is the worker's labelled self-check under direct delivery; it is clause-referenced and names its repairs, and was accepted as in the Q04 precedent. nt_compile.py --json on the side overlay: rc 0, target 8.4 s, no errors or warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261019T005422-L-2766935",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
