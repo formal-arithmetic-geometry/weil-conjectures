@@ -10,16 +10,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.StructureSheaf
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
 import Sheaf.Paper.QuasiCompactH1Zero
 import Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing
@@ -76,6 +71,36 @@ theorem isAffineOpen_spec_of_isNoetherianRing_of_topologicalKrullDim_le_one
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (hdim : topologicalKrullDim (Spec (CommRingCat.of A)) ≤ 1)
     (U : (Spec (CommRingCat.of A)).Opens) : IsAffineOpen U := by
-  sorry
+  let X := Spec (CommRingCat.of A)
+  have hnoeth (x : X) : IsNoetherianRing (X.presheaf.stalk x) := inferInstance
+  have hlocaldim (x : X) : ringKrullDim (X.presheaf.stalk x) ≤ 1 := by
+    rw [ringKrullDim_stalk_eq_coheight]
+    exact (coheight_le_topologicalKrullDim x).trans hdim
+  have hretro : IsRetrocompact (U : Set X) :=
+    fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _
+  have : CompactSpace U :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact (U : Set X))
+  have : CategoryTheory.EnoughInjectives U.toScheme.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives U.toScheme.toRingedSpace).2
+  change IsAffine U.toScheme
+  apply quasiCompact_affine_of_h1_ideal_zero U.toScheme
+  intro I hI
+  let F : U.toScheme.Modules := I.toModules
+  have : F.IsQuasicoherent := hI
+  have hvan (q : ℕ) (hq : 0 < q) :
+      CategoryTheory.Limits.IsZero ((Scheme.Modules.higherDirectImage U.ι q).obj F) := by
+    exact isZero_higherDirectImage_open_of_stalk_dimension_le_one X hnoeth hlocaldim
+      U hretro F hI q hq
+  let G := (Scheme.Modules.pushforward U.ι).obj F
+  have : G.IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated U.ι F
+  have : Subsingleton (G.H 1) := Scheme.Modules.subsingleton_H_succ_of_isAffine G 0
+  obtain ⟨e⟩ :=
+    Scheme.Modules.nonempty_linearEquiv_H_pushforward_of_higherDirectImage_vanishing
+      U.ι (CategoryTheory.CategoryStruct.id X) F hvan 1
+  have : Subsingleton (F.H 1) :=
+    ⟨fun x y ↦ e.symm.injective (Subsingleton.elim _ _)⟩
+  obtain ⟨c, _⟩ := Scheme.Modules.exists_moduleCohomology_source_comparison U.toScheme 1
+  exact ⟨fun x y ↦ (c F).injective (Subsingleton.elim _ _)⟩
 
 end AlgebraicGeometry
