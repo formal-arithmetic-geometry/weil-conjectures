@@ -17091,3 +17091,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:33 L: returned deliver/G7/Sheaf.Paper.ComparisonTorAmplitude (reviewer RETURN: (reviewer C-f9008, head f9008d6b3) H9: lean/Sheaf/Paper/ComparisonTorAmplitude.lean line 19: delete `public import Sheaf)
 - 05:36 L: returned deliver/U4/Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic (reviewer RETURN: (reviewer C-7f34a, head 7f34aa450) C1/D4 (point 6) dag/nodes/sec-smooth-purity/lem-weil-integral-scalar-extension-constr)
 - 05:39 L: returned deliver/Q49/lem-per-finite-coefficient-dual-constructible (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-finite-coefficient-dual-constructible: review_)
+- 05:48 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head d7b42f7cdfbd: Byte-identical (sha256 787e4e0b) re-delivery of 07e0057e6c after a s)
