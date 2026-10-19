@@ -17496,3 +17496,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:30 L: merged deliver/C1/Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones (stage 3; reviewer PASS; first push; landing 20261019T163008-L-3720616 (proof); batch 20261019T162952; modules 1; new nodes 0)
 - 16:32 L: merged deliver/NP/lem-sfb-constructible-cocone-hom-surj (reviewer FIX; first push; new nodes: 0)
 - 16:40 L: merged deliver/NN/fix-cor-verdier-exchange (stage 2; reviewer PASS; parallel immutable checks)
+- 16:41 L: merged deliver/NM/lem-sf-proper-open-tensor-compatibility (stage 2; reviewer PASS; parallel immutable checks)
