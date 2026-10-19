@@ -17292,3 +17292,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:08 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 29e81d2f25dc: Compiles (nt_compile --json 19.9 s) but the statement is wrong in su)
 - 11:24 L: returned deliver/C7/Sheaf.Paper.SfRationalLocalGlobalPowerTorsion (reviewer RETURN: (the landing tools, head da5005885) the delivery did not land: lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean: )
 - 11:24 L: returned deliver/J3/Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction (reviewer RETURN: (the landing tools, head c04f1e512) the delivery did not land: (d) user Sheaf.Paper.AdicSectionCanonicalModels (mentions)
+- 11:24 L: returned deliver/T5/Sheaf.Paper.CompletedPullbackTriangles (reviewer RETURN: (the landing tools, head 81440ae7a) the delivery did not land: lean/Sheaf/Paper/CompletedPullbackTriangles.lean: <unattr)
