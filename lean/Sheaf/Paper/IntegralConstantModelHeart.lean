@@ -19,22 +19,18 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.EssentiallySmall
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.DerivedNakayamaFirstReduction
-import Sheaf.Paper.IntegralHeartLocalModel
-import Sheaf.Paper.IntegralModels
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import Mathlib.CategoryTheory.Abelian.Subcategory
+import Sheaf.AlgebraicGeometry.ConstructibleModuleObjectsEssentiallySmall
+import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import Sheaf.Paper.IntegralConstantModelHeartClosure
+import Sheaf.Paper.IntegralCoefficientRingComparison
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
 # The integral constant-model constructible category and its heart
@@ -74,6 +70,390 @@ noncomputable abbrev integralHeartCoefficientRingObj
   letI := spectralNorm.normedField (Padic ℓ) (Shrink.{0} E)
   Profinite.continuousMapRingObj (Padic.coefficientExtensionIntegers ℓ (Shrink.{0} E))
 
+section Helpers
+attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
+open MonoidalCategory MonObj CondensedRing
+open scoped CategoryTheory.Obj
+open scoped ZeroObject
+universe v₁ v₂ u₁ u₂
+
+section Presentation
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+  [Abelian C] [Abelian D] [MonoidalCategory C] [MonoidalCategory D]
+  [MonoidalPreadditive C] [MonoidalPreadditive D]
+  {R : C} {S : D} [MonObj R] [MonObj S]
+  [PreservesFiniteColimits (tensorLeft R)] [PreservesFiniteColimits (tensorLeft S)]
+private lemma fp_map (F : Mod C R ⥤ Mod D S) [F.Additive]
+    [PreservesFiniteColimits F]
+    (e : ∀ n : ℕ, F.obj (Mod.finiteFree R n) ≅ Mod.finiteFree S n)
+    {M : Mod C R} (hM : Mod.IsFinitelyPresented R M) :
+    Mod.IsFinitelyPresented S (F.obj M) := by
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := hM
+  refine ⟨n, m, (e m).inv ≫ F.map g ≫ (e n).hom, ⟨?_⟩⟩
+  exact F.mapIso eg ≪≫ PreservesCokernel.iso F g ≪≫
+    cokernel.mapIso _ _ (e m) (e n) (by simp)
+end Presentation
+section
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+  (φ : Λ ⟶ Λ') [IsMonHom φ] [IsIso φ]
+omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
+private lemma fp_point {P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ'}
+    (hP : Mod.IsFinitelyPresented Λ' P) :
+    Mod.IsFinitelyPresented Λ ((Mod.comap φ).obj P) := by
+  apply fp_map (Mod.comap φ) _ hP
+  intro n
+  exact (Mod.comap φ).mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ') ≪≫
+    biproduct.mapIso (fun _ ↦ by simpa using Mod.regularIsoOfIsIso (inv φ))
+private noncomputable def pull_comap {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    Mod.comap (coefficientMap φ X) ⋙ CondensedRing.upperStar Λ f ≅
+      CondensedRing.upperStar Λ' f ⋙ Mod.comap (coefficientMap φ Y) :=
+  (CondensedRing.comapUpperStarIso φ f).symm
+private lemma local_iso {X : Scheme.{u}}
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (e : M ≅ N) (hM : HasFiniteConstantLocalModel Λ X M) :
+    HasFiniteConstantLocalModel Λ X N := by
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hU i
+  exact ⟨P, hP, ⟨((CondensedRing.upperStar Λ (U.f i)).mapIso e).symm ≪≫ eP⟩⟩
+private lemma local_comap (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
+    (hM : HasFiniteConstantLocalModel Λ' X M) :
+    HasFiniteConstantLocalModel Λ X ((Mod.comap (coefficientMap φ X)).obj M) := by
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hU i
+  refine ⟨(Mod.comap φ).obj P, fp_point φ hP, ⟨?_⟩⟩
+  exact (pull_comap φ (U.f i)).app M ≪≫
+    (Mod.comap (coefficientMap φ (U.X i))).mapIso eP ≪≫
+    ((upperStarFromPoint (U.X i)).mapModComapIso φ).symm.app P
+private lemma stratified_comap (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
+    (hM : IsFiniteConstantStratified Λ' X M) :
+    IsFiniteConstantStratified Λ X ((Mod.comap (coefficientMap φ X)).obj M) := by
+  obtain ⟨S, hS⟩ := hM
+  refine ⟨S, fun a ↦ ?_⟩
+  exact local_iso ((pull_comap φ (S.immersion a)).app M).symm
+    (local_comap φ _ _ (hS a))
+private lemma stratified_iso {X : Scheme.{u}}
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (e : M ≅ N) (hM : IsFiniteConstantStratified Λ X M) :
+    IsFiniteConstantStratified Λ X N := by
+  obtain ⟨S, hS⟩ := hM
+  exact ⟨S, fun a ↦ local_iso
+    ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
+private lemma constructible_iso {X : Scheme.{u}}
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (e : M ≅ N) (hM : IsConstantModelConstructible Λ X M) :
+    IsConstantModelConstructible Λ X N := by
+  classical
+  unfold IsConstantModelConstructible at hM ⊢
+  by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
+  · simp only [if_pos h] at hM ⊢
+    exact stratified_iso e hM
+  · simp only [if_neg h] at hM ⊢
+    intro U hU
+    exact stratified_iso ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
+private lemma constructible_comap (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X))
+    (hM : IsConstantModelConstructible Λ' X M) :
+    IsConstantModelConstructible Λ X ((Mod.comap (coefficientMap φ X)).obj M) := by
+  classical
+  unfold IsConstantModelConstructible at hM ⊢
+  by_cases h : CompactSpace X ∧ QuasiSeparatedSpace X
+  · simp only [if_pos h] at hM ⊢
+    exact stratified_comap φ X M hM
+  · simp only [if_neg h] at hM ⊢
+    intro U hU
+    exact stratified_iso ((pull_comap φ U.ι).app M).symm
+      (stratified_comap φ _ _ (hM U hU))
+
+private theorem constantModel_comap_iff (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X)) :
+    IsConstantModelConstructible Λ X ((Mod.comap (coefficientMap φ X)).obj M) ↔
+      IsConstantModelConstructible Λ' X M := by
+  constructor
+  · intro h
+    have hh := constructible_comap (inv φ) X _ h
+    exact constructible_iso
+      (((Mod.comapComp (coefficientMap (inv φ) X) (coefficientMap φ X)).symm ≪≫
+        Mod.comapCongr (by rw [← coefficientMap_comp]; simp) ≪≫
+          Mod.comapId _).app M) hh
+  · exact constructible_comap φ X M
+end
+
+end Helpers
+
+section General
+attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
+open scoped CategoryTheory.Obj
+open scoped ZeroObject
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ]
+
+private lemma local_zero {X : Scheme.{u}}
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (hM : IsZero M) : HasFiniteConstantLocalModel Λ X M := by
+  let U : Scheme.Cover.{u} Scheme.proetalePrecoverage X :=
+    .singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _)
+  refine ⟨U, fun i ↦ ?_⟩
+  let P := cokernel (𝟙 (Mod.finiteFree Λ 0))
+  have hP : Mod.IsFinitelyPresented Λ P := ⟨0, 0, 𝟙 _, ⟨Iso.refl _⟩⟩
+  refine ⟨P, hP, ⟨?_⟩⟩
+  let : (upperStarFromPoint (U.X i)).IsLeftAdjoint := by
+    unfold upperStarFromPoint
+    exact (pointUpperStarLowerStarAdjunction.comp
+      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ (U.X i)))).isLeftAdjoint
+  let : PreservesBinaryBiproducts (upperStarFromPoint (U.X i)) :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
+  let : (upperStarFromPoint (U.X i)).Additive :=
+    Functor.additive_of_preservesBinaryBiproducts _
+  let F := (upperStarFromPoint (U.X i)).mapMod Λ
+  exact ((CondensedRing.upperStar Λ (U.f i)).map_isZero hM).iso
+    (F.map_isZero (isZero_cokernel_of_epi _))
+
+private lemma stratified_zero {X : Scheme.{u}}
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (hM : IsZero M) : IsFiniteConstantStratified Λ X M := by
+  refine ⟨Scheme.Stratification.trivial X, fun a ↦ ?_⟩
+  exact local_zero Λ ((CondensedRing.upperStar Λ _).map_isZero hM)
+
+private lemma constructible_zero (X : Scheme.{u}) :
+    ObjectProperty.ContainsZero (IsConstantModelConstructible Λ X) := by
+  classical
+  refine ⟨0, isZero_zero _, ?_⟩
+  unfold IsConstantModelConstructible
+  split
+  · exact stratified_zero Λ (isZero_zero _)
+  · intro U hU
+    exact stratified_zero Λ ((CondensedRing.upperStar Λ U.ι).map_isZero (isZero_zero _))
+
+private lemma constructible_iso_closed (X : Scheme.{u}) :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) :=
+  ⟨fun e h ↦ constructible_iso e h⟩
+
+private lemma bounded_iso (X : Scheme.{u}) :
+    (constantModelBoundedConstructible Λ X).IsClosedUnderIsomorphisms := by
+  let := constructible_iso_closed Λ X
+  change (DerivedCategory.TStructure.t.bounded ⊓
+    DerivedCategory.homologyProperty (IsConstantModelConstructible Λ X)).IsClosedUnderIsomorphisms
+  infer_instance
+
+private lemma bounded_trunc (X : Scheme.{u})
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) (hK : constantModelBoundedConstructible Λ X K) (n : ℤ) :
+    constantModelBoundedConstructible Λ X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+    constantModelBoundedConstructible Λ X ((DerivedCategory.TStructure.t.truncGE n).obj K) := by
+  let := constructible_zero Λ X
+  let := constructible_iso_closed Λ X
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+  let := ha
+  let := hb
+  constructor
+  · refine ⟨⟨⟨a, ?_⟩, ⟨n, inferInstance⟩⟩,
+      DerivedCategory.homologyProperty_truncLE hK.2 n⟩
+    exact inferInstanceAs (DerivedCategory.TStructure.t.IsGE
+      ((DerivedCategory.TStructure.t.truncLT (n + 1)).obj K) a)
+  · exact ⟨⟨⟨n, inferInstance⟩, ⟨b, inferInstance⟩⟩,
+      DerivedCategory.homologyProperty_truncGE hK.2 n⟩
+
+private lemma bounded_single (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsConstantModelConstructible Λ X M) :
+    constantModelBoundedConstructible Λ X ((DerivedCategory.singleFunctor _ 0).obj M) := by
+  let := constructible_zero Λ X
+  let := constructible_iso_closed Λ X
+  refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
+  by_cases hn : n = 0
+  · subst n
+    exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ X)
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M).symm hM
+  · apply ObjectProperty.prop_of_isZero (IsConstantModelConstructible Λ X)
+    rcases lt_or_gt_of_ne hn with hn | hn
+    · exact DerivedCategory.isZero_of_isGE _ 0 n hn
+    · exact DerivedCategory.isZero_of_isLE _ 0 n hn
+
+private lemma single_image (X : Scheme.{u})
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+      DerivedCategory.singleFunctor _ 0).essImage K ↔
+      constantModelBoundedConstructible Λ X K ∧
+      DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K := by
+  let := bounded_iso Λ X
+  let := constructible_iso_closed Λ X
+  constructor
+  · rintro ⟨M, ⟨e⟩⟩
+    refine ⟨(constantModelBoundedConstructible Λ X).prop_of_iso e
+      (bounded_single Λ X M.obj M.property), ?_, ?_⟩
+    · have he : (DerivedCategory.singleFunctor _ 0).obj M.obj ≅ K := e
+      exact (DerivedCategory.TStructure.t.isLE_of_iso he 0).le
+    · have he : (DerivedCategory.singleFunctor _ 0).obj M.obj ≅ K := e
+      exact (DerivedCategory.TStructure.t.isGE_of_iso he 0).ge
+  · rintro ⟨hK, hle, hge⟩
+    let : K.IsLE 0 := ⟨hle⟩
+    let : K.IsGE 0 := ⟨hge⟩
+    obtain ⟨M, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE K 0
+    have hM : IsConstantModelConstructible Λ X M :=
+      ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ X)
+        ((DerivedCategory.homologyFunctor _ 0).mapIso e ≪≫
+          (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app M) (hK.2 0)
+    exact ⟨⟨M, hM⟩, ⟨e.symm⟩⟩
+
+private lemma constructible_products (X : Scheme.{u})
+    [ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X)] :
+    ObjectProperty.IsClosedUnderFiniteProducts (IsConstantModelConstructible Λ X) := by
+  let P : ObjectProperty _ := IsConstantModelConstructible Λ X
+  let := constructible_zero Λ X
+  let := constructible_iso_closed Λ X
+  let : P.IsClosedUnderBinaryProducts := by
+    constructor
+    rintro Z ⟨d⟩
+    have h₁ : P (d.diag.obj ⟨WalkingPair.left⟩) := d.prop_diag_obj _
+    have h₂ : P (d.diag.obj ⟨WalkingPair.right⟩) := d.prop_diag_obj _
+    exact P.prop_of_iso
+      (biprod.isoProd _ _ ≪≫ (HasLimit.isoOfNatIso (diagramIsoPair d.diag)).symm ≪≫
+        (limit.isoLimitCone ⟨_, d.isLimit⟩)) (P.prop_biprod h₁ h₂)
+  exact ObjectProperty.IsClosedUnderFiniteProducts.mk'
+
+private lemma bounded_tri (X : Scheme.{u})
+    [ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ X)]
+    [ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ X)]
+    [ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X)] :
+    (constantModelBoundedConstructible Λ X).IsTriangulated := by
+  let := constructible_zero Λ X
+  let := constructible_iso_closed Λ X
+  change (DerivedCategory.TStructure.t.bounded ⊓
+    DerivedCategory.homologyProperty (IsConstantModelConstructible Λ X)).IsTriangulated
+  infer_instance
+
+private lemma constructible_small (X : Scheme.{u}) [IsNoetherian X] :
+    EssentiallySmall.{u + 1} (ConstantModelConstructible Λ X) := by
+  let := constructibleModuleObjects_essentiallySmall (X := X) (condensedRingObj Λ X)
+  have h : IsConstantModelConstructible Λ X ≤
+      IsConstructibleModuleObject (condensedRingObj Λ X) := by
+    intro M hM
+    have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
+    rw [IsConstantModelConstructible, if_pos hqc] at hM
+    obtain ⟨S, hS⟩ := hM
+    refine ⟨S, fun a ↦ ?_⟩
+    have hlfp := (hS a).isLocallyFinitelyPresented _
+    unfold CondensedRing.upperStar at hlfp
+    exact localFinitePresentation_of_comap (inv (condensedPullbackHom Λ (S.immersion a)))
+      (localFinitePresentation_of_iso
+        ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ (S.immersion a))).app _) hlfp)
+  let : ObjectProperty.EssentiallySmall.{u + 1} (IsConstantModelConstructible Λ X) :=
+    ObjectProperty.EssentiallySmall.of_le h
+  infer_instance
+
+private lemma general_heart (X : Scheme.{u}) [IsNoetherian X]
+    [ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ X)]
+    [ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ X)]
+    [ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X)] :
+    ObjectProperty.IsClosedUnderIsomorphisms
+      (constantModelBoundedConstructible Λ X) ∧
+    ObjectProperty.IsTriangulated
+      (constantModelBoundedConstructible Λ X) ∧
+    (∀ K, constantModelBoundedConstructible Λ X K →
+      DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ,
+        constantModelBoundedConstructible Λ X
+          ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+        constantModelBoundedConstructible Λ X
+          ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+    (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+      DerivedCategory.singleFunctor _ 0).Full ∧
+    (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+      DerivedCategory.singleFunctor _ 0).Faithful ∧
+    (∀ K, (ObjectProperty.ι
+        (IsConstantModelConstructible Λ X) ⋙
+        DerivedCategory.singleFunctor _ 0).essImage K ↔
+      constantModelBoundedConstructible Λ X K ∧
+      DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧
+    Nonempty (Abelian (ConstantModelConstructible Λ X)) ∧
+    ObjectProperty.IsClosedUnderKernels
+      (IsConstantModelConstructible Λ X) ∧
+    ObjectProperty.IsClosedUnderCokernels
+      (IsConstantModelConstructible Λ X) ∧
+    ObjectProperty.IsClosedUnderExtensions
+      (IsConstantModelConstructible Λ X) ∧
+    EssentiallySmall.{u + 1}
+      (ConstantModelConstructible Λ X) := by
+  let := constructible_zero Λ X
+  let := constructible_iso_closed Λ X
+  let := constructible_products Λ X
+  exact ⟨bounded_iso Λ X, bounded_tri Λ X,
+    fun K hK ↦ ⟨hK.1, bounded_trunc Λ X K hK⟩,
+    inferInstance, inferInstance, single_image Λ X, ⟨inferInstance⟩,
+    inferInstance, inferInstance, inferInstance, constructible_small Λ X⟩
+
+end General
+
+section SerreTransport
+attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
+open scoped CategoryTheory.Obj
+variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+  [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+
+private lemma serre_transport (X : Scheme.{u}) (e : Mon.mk Λ ≅ Mon.mk Λ')
+    (hkc : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ' X)) (f : M ⟶ N),
+      IsConstantModelConstructible Λ' X M → IsConstantModelConstructible Λ' X N →
+      IsConstantModelConstructible Λ' X (kernel f) ∧
+      IsConstantModelConstructible Λ' X (cokernel f))
+    (hext : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ' X)), S.ShortExact →
+      IsConstantModelConstructible Λ' X S.X₁ → IsConstantModelConstructible Λ' X S.X₃ →
+      IsConstantModelConstructible Λ' X S.X₂) :
+    ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ X) ∧
+    ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ X) ∧
+    ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X) := by
+  let a := e.inv.hom
+  let : IsMonHom a := inferInstanceAs (IsMonHom e.inv.hom)
+  let : IsIso a := inferInstanceAs (IsIso e.inv.hom)
+  let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) :=
+    Mod.comap (coefficientMap a X)
+  have cmp (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :
+      IsConstantModelConstructible Λ' X (F.obj M) ↔ IsConstantModelConstructible Λ X M :=
+    constantModel_comap_iff a X M
+  have ker_coker {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)} (f : M ⟶ N)
+      (hM : IsConstantModelConstructible Λ X M)
+      (hN : IsConstantModelConstructible Λ X N) :
+      IsConstantModelConstructible Λ X (kernel f) ∧
+      IsConstantModelConstructible Λ X (cokernel f) := by
+    obtain ⟨hk, hc⟩ := hkc _ _ (F.map f) ((cmp _).mpr hM) ((cmp _).mpr hN)
+    exact ⟨(cmp _).mp (constructible_iso (PreservesKernel.iso F f).symm hk),
+      (cmp _).mp (constructible_iso (PreservesCokernel.iso F f).symm hc)⟩
+  refine ⟨⟨?_⟩, ⟨?_⟩, ⟨?_⟩⟩
+  · rintro Z ⟨f, k, hk, hf⟩
+    exact constructible_iso (limit.isoLimitCone ⟨k, hk⟩) (ker_coker f hf.1 hf.2).1
+  · rintro Z ⟨f, k, hk, hf⟩
+    exact constructible_iso (colimit.isoColimitCocone ⟨k, hk⟩) (ker_coker f hf.1 hf.2).2
+  · intro S hS h₁ h₃
+    exact (cmp _).mp (hext (S.map F) (hS.map_of_exact F) ((cmp _).mpr h₁)
+      ((cmp _).mpr h₃))
+end SerreTransport
+
+private lemma integralHeart_serre (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (X : Scheme.{u}) [IsNoetherian X] :
+    ObjectProperty.IsClosedUnderKernels
+      (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧
+    ObjectProperty.IsClosedUnderCokernels
+      (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧
+    ObjectProperty.IsClosedUnderExtensions
+      (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) := by
+  let : Small.{0} E := Module.Finite.small (Padic ℓ) E
+  let : FiniteDimensional (Padic ℓ) (Shrink.{0} E) :=
+    (Shrink.algEquiv (Padic ℓ) E).symm.toLinearEquiv.finiteDimensional
+  let := spectralNorm.normedField (Padic ℓ) (Shrink.{0} E)
+  obtain ⟨F, ⟨e⟩⟩ := integralCoefficientRingComparison.{u} ℓ (Shrink.{0} E)
+  obtain ⟨hkc, hext⟩ := isConstantModelConstructible_serre_padicIntegers X ℓ F
+  exact serre_transport X e hkc hext
+
 /-- The integral bounded constructible category is full triangulated, bounded and stable
 under both standard truncations. The degree-zero single functor identifies its heart
 with the full abelian category of constructible module sheaves, which is closed under
@@ -81,48 +461,14 @@ ambient kernels, cokernels and extensions and is essentially small.
 Source: blueprint main-20261015, integral-heart-triangulated, assertions 1--2
 (blueprint: det-lem-int-integral-heart-triangulated).
 
-Proof (the nine steps of the DAG node):
-1. The coefficient DVR has finite residue field (lem-weil-l-adic-extension-integers-dvr).
-The scheme is Noetherian by pqf-lem-locnoeth-lft and quasi-compactness of its finite-type
-structure morphism. The actual integral-model equivalence sk-lem-integral-models(2)
-identifies bounded constructibility with derived completeness and bounded constructible
-etale-origin residue reduction. The zero object satisfies both conditions.
-2. Completeness is stable under all shifts (det-pe-derived-nakayama-first-reduction).
-Derived reduction is exact (lem-pur-derived-change-of-rings). The finite-coefficient
-triangulation and origin results (lem-weil-proetale-dbc-triangulated and
-lem-weil-pbc-finite-ring-constructible-derived-origin) give shift stability of the reduction;
-apply the integral-model equivalence again.
-3. For a distinguished triangle with constructible outside vertices, rotate it to use
-cone closure of completeness. Exact reduction gives a finite-coefficient triangle, whose
-middle vertex is bounded constructible and has etale origin by the same two results.
-The integral-model equivalence gives the middle vertex. This is precisely
-ObjectProperty.IsTriangulated, and the ambient full-subcategory inclusion is exact.
-4. Boundedness is part of sk-def-sfb-constructible. Both standard truncations preserve
-constructibility by det-lem-int-integral-heart-local-model(3). In degree zero, the
-cohomological definition says exactly that the single module is constructible. Conversely,
-lem-sf-derived-concentrated-single identifies every degree-zero complex with its H^0
-placed in degree zero; lem-weil-pbc-derived-single-fully-faithful identifies all morphisms.
-5. The cone of C to C' has H^-1 equal to its ambient kernel and H^0 equal to its ambient
-cokernel, by lem-sf-derived-homology-long-exact. Its cohomology is constructible by
-local-model(2), giving closure under the actual ambient kernels and cokernels.
-6. Zero and finite sums are constructible (use the cone of the zero map C[-1] to C').
-Fullness inherits addition and the ambient kernel/cokernel universal properties. The
-ambient coimage-image comparison is invertible with inverse in the full subcategory,
-so it is abelian. A module short exact sequence gives the distinguished triangle of
-lem-weil-pbc-complex-ses-triangle; outside-vertex closure proves extension closure.
-7. On a fixed stratum, finite scalar presentations form a set of finite matrices.
-Covers and overlap isomorphisms on the fixed small site also form sets. The sheaf
-axiom glues equal local data into a unique global isomorphism. Retain realizable data;
-this gives a set of representatives of finite constant local models on that stratum.
-8. For a stratification a_s and chosen models F_s, the adjunction units and their local
-identifications define C to the finite product of a_s* F_s. Pulling back each component
-has left inverse given by the counit and the inverse model identification, by the
-triangle identity. Exact pullback and cartesian coefficients reduce its kernel to zero
-on all strata. lem-weil-pbc-noetherian-stratum-detection kills the global kernel.
-9. Stratifications and tuples of models form sets. Subobjects of each fixed product
-are sectionwise subsheaves, specified by a subset of its sections on each site object.
-They form a set and contain representatives of all constructible sheaves, proving
-essential smallness in the chosen universe, including the empty scheme. -/
+Proof: identify the small coefficient extension with its image in the fixed algebraic
+closure using uniqueness of the extended p-adic norm. Transport the existing weak Serre
+closure theorem along the resulting condensed ring isomorphism; finite presentations and
+constant local models are preserved by restriction of scalars. Apply the homology-property
+triangulation and truncation theorems. Concentration and full faithfulness of the single
+functor identify the degree-zero heart. The abelian-subcategory criterion gives
+abelianness. Finally finite constant local models are locally finitely presented, so the
+existing essential-smallness theorem for constructible module objects applies. -/
 theorem integralConstantModelHeart
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p)
     (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p)
@@ -158,6 +504,15 @@ theorem integralConstantModelHeart
       (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧
     EssentiallySmall.{u + 1}
       (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) := by
-  sorry
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsNoetherian X := ⟨⟩
+  let Λ := integralHeartCoefficientRingObj ℓ E
+  obtain ⟨hk, hc, he⟩ := integralHeart_serre ℓ E X
+  let : ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible Λ X) := hk
+  let : ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible Λ X) := hc
+  let : ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible Λ X) := he
+  exact general_heart Λ X
 
 end AlgebraicGeometry.ProEtale
