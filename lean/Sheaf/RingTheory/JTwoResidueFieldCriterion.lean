@@ -15,13 +15,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.ExcellentRing
 import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.FieldTheory.SeparableExtension
-import WeilConjectures.FieldTheory.MakeSeparable
-import Sheaf.RingTheory.JZeroFiniteTypeDomainDescent
-import Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent
 import Sheaf.RingTheory.RegularLocusOpenFromPrimeQuotients
-import WeilConjectures.FieldTheory.MakeSeparable
-import WeilConjectures.FieldTheory.SeparableExtension
+import Sheaf.RingTheory.JTwoDomainResidueModel
 
 /-!
 # A residue-field finite-model criterion for J-2
@@ -85,4 +80,11 @@ theorem isOpen_regularLocus_of_residueField_finite_models
           ∀ q ∈ U, IsRegularLocalRing (Localization.AtPrime q.asIdeal))
     (A : Type (max u v)) [CommRing A] [Algebra R A] [Algebra.FiniteType R A] :
     IsOpen {q : PrimeSpectrum A | IsRegularLocalRing (Localization.AtPrime q.asIdeal)} := by
-  sorry
+  let : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing R A
+  apply RingTheory.isOpen_regularLocus_of_primeQuotient_regularOpen A
+  intro p hp
+  let : p.IsPrime := hp
+  let : Algebra.FiniteType R (A ⧸ p) :=
+    Algebra.FiniteType.of_surjective (Ideal.Quotient.mkₐ R p)
+      Ideal.Quotient.mk_surjective
+  exact exists_nonempty_regular_open_of_residueField_finite_models_domain R hmodels (A ⧸ p)
