@@ -17633,3 +17633,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: returned deliver/N3/Sheaf.Paper.IntegralTensorProduct (reviewer RETURN: (the landing tools, head be4ef4185) the delivery did not land: missing import source modules: Sheaf.Paper.IntegralTensor)
 - 23:10 L: returned deliver/N3/Sheaf.SixFunctors.GeneratorReductionStatement (reviewer RETURN: (the landing tools, head 464b7c1fb) the delivery did not land: (d) user Sheaf.Paper.TensorAdjunctionExchange (mentions W)
 - 23:10 L: returned deliver/Q4/Sheaf.Paper.CompactSupportPerfectness (reviewer RETURN: (the landing tools, head ae8f5aff6) the delivery did not land: lean/Sheaf/Paper/CompactSupportPerfectness.lean changed o)
+- 23:10 L: returned deliver/Q6/Sheaf.RingTheory.NagataOfWeaklyEtale (reviewer RETURN: (the landing tools, head ec12de32a) the delivery did not land: lean/Sheaf/RingTheory/NagataOfWeaklyEtale.lean changed on)
