@@ -23,15 +23,13 @@
  ],
  "proof": [
   {
-   "text": "Write $N_i=\\nu_{T_i}^*$, $N_X=\\nu_X^*$, $J_i=j^{\\mathrm{et}}_{i!}$ and $P_i=j^{\\mathrm{proet}}_{i!}$. The comparison inverse images are exact on finite-coefficient module sheaves by [prop-weil-pbc-site-comparison-finite-level]; the $J_i$ and $P_i$ are exact by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]. Thus their termwise functors induce derived functors by [lem-sf-exact-functor-derived-triangulated], and preserve $D^+$ by [lem-weil-pbc-exact-functor-bounded-below]. Apply [lem-cbc-proetale-extension-zero-comparison] to $j_i$ to obtain natural sheaf isomorphisms $\\delta_i:N_iJ_i\\xrightarrow{\\sim}P_iN_X$. Apply each component in every degree of a complex. Naturality for each differential makes this a chain map, and its degreewise inverse is a chain map as well. These maps descend to a natural isomorphism on $D^+$ by [lem-weil-pbc-localization-universal-property](2). We keep the notation $\\delta_i$ for that isomorphism. In particular $J_iL$ and $K=N_XL$ are bounded below. No constructibility assumption on $L$ is needed.",
+   "text": "Write N_i = nu_T_i^*, N_X = nu_X^*, J_i = j_i! on the etale site, and P_i = j_i! on the pro-etale site. Use the existing natural sheaf isomorphism openImmersionLowerShriekComparisonUpperStarIso of [lem-cbc-proetale-extension-zero-comparison]. Retain [prop-weil-pbc-site-comparison-finite-level], which realizes step 3 of unit sk-prop-pe-comparison-morphism, for the finite-level comparison exactness. The public fixed-module sheaf interfaces supply the exactness instances for these functors; etale extension exactness is [lem-weil-pbc-extension-by-zero-exact]. The exact-functor derived construction [lem-sf-exact-functor-derived-triangulated], with bounded-below restriction [lem-weil-pbc-exact-functor-bounded-below], turns this into delta_i : J_i followed by N_i isomorphic to N_X followed by P_i. Explicitly compose the inverse derived-composition isomorphism, mapDerivedCategoryPlusNatIso of the sheaf comparison, and the derived-composition isomorphism. This is properOpenSiteExtensionIso. Localization and descent are already performed by these existing exact-functor APIs; no separate localization construction is needed here.",
    "uses": [
     "prop-weil-pbc-site-comparison-finite-level",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact",
     "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-cbc-proetale-extension-zero-comparison"
    ],
    "elementary": false,
    "source": {
@@ -40,15 +38,14 @@
    }
   },
   {
-   "text": "Let $\\alpha^e_u:J_2L\\to R u_{\\mathrm{et},*}J_1L$ be the specified etale map of [def-weil-pbc-proper-open-comparison]. Its hypotheses hold: the same proper $u$, opens $j_i$, equation $u j_1=j_2$, finite commutative coefficient ring, and bounded-below $L$ are given. It is an isomorphism by [lem-weil-pbc-proper-open-comparison-iso]. Properness includes finite type and separatedness [def-weil-proper-morphism]; finite type includes quasi-compactness [def-weil-finite-type-morphism], and separatedness implies quasi-separatedness [lem-pc-separated-quasi-separated]. Therefore [prop-weil-pbc-comparison-direct-image], applied to the bounded-below etale complex $J_1L$ from step 1, gives a natural isomorphism\n$$D_{u,M}:N_2R u_{\\mathrm{et},*}M\\xrightarrow{\\sim}R u_{\\mathrm{proet},*}N_1M,\\qquad M\\in D^+(T_{1,\\mathrm{et}},\\Lambda),$$\ncompatible with identities and composites. Specify $D_{u,M}$ to be the named counit-mate $b_{u,M}$ of [lem-weil-pbc-comparison-direct-image-canonical-mate]: it is the adjoint transpose of $N_1(\\varepsilon^e_{u,M})\\circ a_{u,Ru_{\\mathrm{et},*}M}^{-1}$, where $a_u$ is the specified pullback comparison. That node proves invertibility of this very map, so no arbitrary isomorphism between the two objects is chosen. Neither $R u_*$ is being asserted exact on sheaves.",
+   "text": "Use the specified etale map alpha_r = properOpenComparison of [def-weil-pbc-proper-open-comparison], invertible by [lem-weil-pbc-proper-open-comparison-iso]. Properness gives quasi-compactness and quasi-separatedness through [def-weil-proper-morphism], [def-weil-finite-type-morphism], and [lem-pc-separated-quasi-separated]. Apply isIso_comparisonDirectImagePlus of [prop-weil-pbc-comparison-direct-image] to the existing rightDerivedFunctorPlusBaseChange of lowerStarComparisonUpperStarBaseChange. This is the canonical underived counit-mate transformation derived by the public upstream API, and has the identity and composition laws in the same cited node. No separately restated fixed-coefficient mate or its normalization theorem is needed.",
    "uses": [
     "def-weil-pbc-proper-open-comparison",
     "lem-weil-pbc-proper-open-comparison-iso",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
     "lem-pc-separated-quasi-separated",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+    "prop-weil-pbc-comparison-direct-image"
    ],
    "elementary": false,
    "source": {
@@ -57,7 +54,7 @@
    }
   },
   {
-   "text": "Define the pro-etale map to be the following composite in $D^+(T_{2,\\mathrm{proet}},\\Lambda)$:\n$$\\begin{aligned}\n\\beta_{u,L}:P_2K&\\xrightarrow{\\delta_{2,L}^{-1}}N_2J_2L\n\\xrightarrow{N_2(\\alpha^e_{u,L})}N_2R u_{\\mathrm{et},*}J_1L\\\\\n&\\xrightarrow{D_{u,J_1L}}R u_{\\mathrm{proet},*}N_1J_1L\n\\xrightarrow{R u_{\\mathrm{proet},*}(\\delta_{1,L})}R u_{\\mathrm{proet},*}P_1K.\n\\end{aligned}$$\nEvery arrow is an isomorphism by steps 1 and 2 and functoriality, so their composite is an isomorphism. This specifies the claimed canonical map, without choosing a representative or an inverse of an unspecified existence witness. Its naturality in $L$ follows by composing the natural maps used in steps 1 and 2.",
+   "text": "Define properOpenProEtaleIsoPlus as delta_2 inverse, followed by N_2(alpha_r), the canonical derived direct-image comparison at J_1 L, and Rr_proet,*(delta_1). All four factors are isomorphisms by steps 1 and 2. Define the ambient properOpenProEtaleIso by transporting this bounded-below isomorphism through the existing mapDerivedCategoryPlusCompatibility and rightDerivedFunctorPlusCompatibility isomorphisms for the inclusion into the unbounded category. These are explicit composites of the prescribed isomorphisms, without choosing any new data.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -66,7 +63,7 @@
    }
   },
   {
-   "text": "Check coherence explicitly. Let $v:T_2\\to T_3$ be another proper map fixing the open $X$, with $j_3=vj_2$, and write $N_3,J_3,P_3,\\delta_3$ similarly. The composite $vu$ is proper by [lem-weil-pbc-proper-composition], and $(vu)j_1=j_3$ by associativity and the two given equations, so step 3 defines $\\beta_{vu,L}$. The complex $Ru_{\\mathrm{et},*}J_1L$ lies in $D^+$: it is isomorphic by $\\alpha^e_u$ to $J_2L$, which is bounded below by step 1. Thus both arguments of the naturality square below lie in the domain of $D_v$. Suppress $L$ and canonical direct-image composition isomorphisms in this calculation. By [lem-weil-pbc-proper-open-comparison-composition], $\\alpha^e_{vu}=(R v_{\\mathrm{et},*}\\alpha^e_u)\\alpha^e_v$. By the composite compatibility in [prop-weil-pbc-comparison-direct-image],\n$$D_{vu,J_1L}=(R v_{\\mathrm{proet},*}D_{u,J_1L})\\,D_{v,R u_{\\mathrm{et},*}J_1L}.$$\nNaturality of $D_v$ for the morphism $\\alpha^e_u:J_2L\\to R u_{\\mathrm{et},*}J_1L$ reads\n$$D_{v,Ru_{\\mathrm{et},*}J_1L}\\,N_3(R v_{\\mathrm{et},*}\\alpha^e_u)\n=R v_{\\mathrm{proet},*}(N_2\\alpha^e_u)\\,D_{v,J_2L}.$$\nSubstituting these two equalities into the formula of step 3 gives\n$$\\begin{aligned}\n\\beta_{vu,L}\n={}&R v_{\\mathrm{proet},*}\\bigl(R u_{\\mathrm{proet},*}(\\delta_{1,L})\\,D_{u,J_1L}\\,N_2(\\alpha^e_{u,L})\\bigr)\\,\nD_{v,J_2L}\\,N_3(\\alpha^e_{v,L})\\,\\delta_{3,L}^{-1}\\\\\n={}&R v_{\\mathrm{proet},*}(\\beta_{u,L})\\,\\beta_{v,L}.\n\\end{aligned}$$\nIn the last equality insert $R v_{\\mathrm{proet},*}(\\delta_{2,L}^{-1})R v_{\\mathrm{proet},*}(\\delta_{2,L})=1$ and use the two definitions from step 3. For $u=\\mathrm{id}$ the cited etale map and $D_{\\mathrm{id}}$ are identities, and the remaining factors are $\\delta_i\\delta_i^{-1}=1$. This proves exactly the asserted identity and composition laws.",
+   "text": "For r : T_1 -> T_2 and s : T_2 -> T_3, proper composition is [lem-weil-pbc-proper-composition]. Expand the four factors of properOpenProEtaleIsoPlus for r, s, and r followed by s. Substitute properOpenComparison_comp from [lem-weil-pbc-proper-open-comparison-composition]. Apply comparisonDirectImagePlus_comp from [prop-weil-pbc-comparison-direct-image] at J_1 L. Naturality of the comparison for s moves N_3(Rs_et,*(alpha_r)) through that comparison. Naturality of proEtaleComparisonDirectImageCompIso moves delta_1 through the direct-image compositor. On the other side, functoriality and delta_2.hom followed by delta_2.inv cancel the two middle extension factors. Associativity gives exactly properOpenProEtaleIsoPlus_comp. For the identity, naturality of the canonical right-derived identity identification moves delta.hom to the end. Apply comparisonDirectImagePlus_id, map the identity law properOpenComparison_id, and cancel delta.inv followed by delta.hom. This proves properOpenProEtaleIsoPlus_id. All calculations take place in the given bounded-below derived categories.",
    "uses": [
     "lem-weil-pbc-proper-composition",
     "lem-weil-pbc-proper-open-comparison-composition",
@@ -82,25 +79,22 @@
  "proof_deps": [
   "prop-weil-pbc-site-comparison-finite-level",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-localization-universal-property",
   "def-weil-pbc-proper-open-comparison",
   "lem-weil-pbc-proper-open-comparison-iso",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-pc-separated-quasi-separated",
   "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-weil-pbc-proper-composition",
   "lem-weil-pbc-proper-open-comparison-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-proetale.md",
-  "place": "Imported proof, three paragraphs; expanded via existing extension-by-zero comparison and an explicit composition calculation. Raw blueprint unavailable locally (WANTED in report)."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/lem-weil-pbc-proper-open-comparison-proetale.proof.md",
+  "place": "All three paragraphs; implemented through the public exact-functor and canonical derived comparison APIs, followed by explicit naturality and cancellation for both coherence laws."
  },
  "mathlib_searches": [
   {
@@ -229,8 +223,7 @@
   "prop-weil-pbc-site-comparison-finite-level",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-cbc-proetale-extension-zero-comparison",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+  "prop-weil-pbc-comparison-direct-image"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -239,5 +232,15 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-7a3521e21 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master blueprint route, and relevant sources. Verified canonical mate, coefficients, all four proof steps, coherence, edge cases, and absence of cycles or new duplicates. Accepted five declared tool uses; no repairs needed. Detailed checks written to review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261019T005402-L-2762328",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

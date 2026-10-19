@@ -15,12 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 import Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ProperOpenComparison
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # The canonical proper-open comparison on the pro-etale site
@@ -133,7 +128,61 @@ theorem properOpenProEtaleIsoPlus_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite
         (proEtaleComparisonDirectImageCompIso Λ r s).hom.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj
             ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj L)) := by
-  sorry
+  let A := ModuleCat.{u + 1} Λ
+  let N₁ := (comparisonUpperStar A T₁).mapDerivedCategoryPlus
+  let N₂ := (comparisonUpperStar A T₂).mapDerivedCategoryPlus
+  let N₃ := (comparisonUpperStar A T₃).mapDerivedCategoryPlus
+  let R := (Etale.lowerStar A r).rightDerivedFunctorPlus
+  let S := (Etale.lowerStar A s).rightDerivedFunctorPlus
+  let R' := (lowerStar A r).rightDerivedFunctorPlus
+  let S' := (lowerStar A s).rightDerivedFunctorPlus
+  let H' := (lowerStar A (r ≫ s)).rightDerivedFunctorPlus
+  let M := (Etale.openImmersionLowerShriek A j₁).mapDerivedCategoryPlus.obj L
+  let P := (Etale.openImmersionLowerShriek A j₂).mapDerivedCategoryPlus.obj L
+  let Q := (Etale.openImmersionLowerShriek A j₃).mapDerivedCategoryPlus.obj L
+  let B₁ := (openImmersionLowerShriek A j₁).mapDerivedCategoryPlus.obj
+    ((comparisonUpperStar A X).mapDerivedCategoryPlus.obj L)
+  let B₂ := (openImmersionLowerShriek A j₂).mapDerivedCategoryPlus.obj
+    ((comparisonUpperStar A X).mapDerivedCategoryPlus.obj L)
+  let B₃ := (openImmersionLowerShriek A j₃).mapDerivedCategoryPlus.obj
+    ((comparisonUpperStar A X).mapDerivedCategoryPlus.obj L)
+  let d₁ : N₁.obj M ≅ B₁ := (properOpenSiteExtensionIso Λ j₁).app L
+  let d₂ : N₂.obj P ≅ B₂ := (properOpenSiteExtensionIso Λ j₂).app L
+  let d₃ : N₃.obj Q ≅ B₃ := (properOpenSiteExtensionIso Λ j₃).app L
+  let a : P ⟶ R.obj M := Etale.properOpenComparison Λ r j₁ j₂ hr L
+  let b : Q ⟶ S.obj P := Etale.properOpenComparison Λ s j₂ j₃ hs L
+  let hc := (Category.assoc j₁ r s).symm.trans ((congrArg (· ≫ s) hr).trans hs)
+  let c : Q ⟶ (Etale.lowerStar A (r ≫ s)).rightDerivedFunctorPlus.obj M :=
+    Etale.properOpenComparison Λ (r ≫ s) j₁ j₃ hc L
+  let Dᵣ := Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange r A)
+  let Dₛ := Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange s A)
+  let Dᵣₛ := Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange (r ≫ s) A)
+  let ce := etaleComparisonDirectImageCompIso Λ r s
+  let cp := proEtaleComparisonDirectImageCompIso Λ r s
+  have ha : c = b ≫ S.map a ≫ ce.hom.app M :=
+    Etale.properOpenComparison_comp Λ r s j₁ j₂ j₃ hr hs L
+  have hD : N₃.map (ce.hom.app M) ≫ Dᵣₛ.app M =
+      Dₛ.app (R.obj M) ≫ S'.map (Dᵣ.app M) ≫ cp.hom.app (N₁.obj M) :=
+    comparisonDirectImagePlus_comp Λ r s M
+  have hn : N₃.map (S.map a) ≫ Dₛ.app (R.obj M) =
+      Dₛ.app P ≫ S'.map (N₂.map a) := Dₛ.naturality a
+  have hp : cp.hom.app (N₁.obj M) ≫ H'.map d₁.hom =
+      S'.map (R'.map d₁.hom) ≫ cp.hom.app B₁ :=
+    (cp.hom.naturality d₁.hom).symm
+  have hd : S'.map d₂.hom ≫ S'.map d₂.inv = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id]
+  change (d₃.inv ≫ N₃.map c ≫ Dᵣₛ.app M ≫ H'.map d₁.hom) =
+    (d₃.inv ≫ N₃.map b ≫ Dₛ.app P ≫ S'.map d₂.hom) ≫
+      S'.map (d₂.inv ≫ N₂.map a ≫ Dᵣ.app M ≫ R'.map d₁.hom) ≫
+        cp.hom.app B₁
+  rw [ha]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hd]
+  rw [reassoc_of% hD, hp, reassoc_of% hn]
+
 
 /-- For the identity proper map the comparison is the identity under the canonical
 right-derived identity identification.
@@ -153,6 +202,34 @@ theorem properOpenProEtaleIsoPlus_id (Λ : Type (u + 1)) [CommRing Λ] [Finite �
             ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj
               ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj L)) =
       𝟙 _ := by
-  sorry
+  let A := ModuleCat.{u + 1} Λ
+  let N := (comparisonUpperStar A T).mapDerivedCategoryPlus
+  let J := (Etale.openImmersionLowerShriek A j).mapDerivedCategoryPlus
+  let R := (lowerStar A (𝟙 T)).rightDerivedFunctorPlus
+  let d := properOpenSiteExtensionIso Λ j
+  let e := Functor.rightDerivedFunctorPlusNatIso (lowerStarId A T) ≪≫
+    Functor.rightDerivedFunctorPlusIdIso _
+  let D := Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange (𝟙 T) A)
+  let α : J.obj L ⟶ (Etale.lowerStar A (𝟙 T)).rightDerivedFunctorPlus.obj (J.obj L) :=
+    Etale.properOpenComparison Λ (𝟙 T) j j (Category.comp_id j) L
+  let e' := Functor.rightDerivedFunctorPlusNatIso (Etale.lowerStarId A T) ≪≫
+    Functor.rightDerivedFunctorPlusIdIso _
+  have hD : D.app (J.obj L) ≫ e.hom.app (N.obj (J.obj L)) =
+      N.map (e'.hom.app (J.obj L)) := comparisonDirectImagePlus_id Λ T (J.obj L)
+  have hα : α ≫ e'.hom.app (J.obj L) = 𝟙 _ :=
+    Etale.properOpenComparison_id Λ j L
+  change (d.inv.app L ≫ N.map α ≫ D.app (J.obj L) ≫ R.map (d.hom.app L)) ≫
+    e.hom.app _ = 𝟙 _
+  simp only [Category.assoc]
+  rw [e.hom.naturality (d.hom.app L)]
+  change d.inv.app L ≫ N.map α ≫ D.app (J.obj L) ≫
+    e.hom.app (N.obj (J.obj L)) ≫ d.hom.app L = 𝟙 _
+  rw [reassoc_of% hD]
+  rw [← N.map_comp_assoc]
+  rw [hα]
+  rw [N.map_id, Category.id_comp]
+  exact d.inv_hom_id_app L
+
 
 end AlgebraicGeometry.ProEtale
