@@ -17121,3 +17121,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:00 L: returned deliver/NO/lem-a1-adic-compactification-section-realization (reviewer RETURN: L: independent stage-2 immutable head 0bda8c757340: H4/H12 + spurious stmt_dep: new def node def-a1-galois-lisse-represe)
 - 09:10 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 5a9218b803fa: Compiles clean (nt_compile --json, 12.7 s, exit 0), but the statemen)
 - 09:19 L: merged deliver/Q26/def-fix-six-functor-datum (stage 2; reviewer FIX; parallel immutable checks)
+- 09:20 L: merged deliver/NN/lem-pur-flag-localized-product (stage 2; reviewer PASS; parallel immutable checks)
