@@ -1,0 +1,117 @@
+{
+ "id": "def-pe-milnor-towers",
+ "kind": "definition",
+ "title": "Tower constructions used by the Milnor sequence",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian] with countable products [def-weil-category-product]. For an inverse tower $M$, let $T$ act on its product by $T((m_n))=(t_n(m_{n+1}))$. Define $C(M)=\\operatorname{coker}(1-T)$ and, for a tower map $f$, define $C(f)$ by the induced map on cokernels. For a tower $K$ of cochain complexes [def-weil-abstract-derived-category], define its degree-$q$ cohomology tower by applying $H^q$ to its objects and maps. For a tower $M$ in $A$, define its single tower by applying the degree-zero single-complex functor. These are the four unchanged constructions formerly in det-pe-milnor-sequence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
+  "place": "First paragraph: cone long exact sequence, extraction, product comparison, inverse limit and naturality"
+ },
+ "stmt_deps": [
+  "def-weil-category-product",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of sequential derived inverse limit Milnor exact sequence cone one minus shift",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh; HomologicalComplex.coneOfHasLimitEval_pt_d; DerivedCategory.triangleOfSESδ; CategoryTheory.Functor.homologySequence_exact₁; HomotopyCategory.spectralObjectMappingCone_δ'_app; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"homology\"",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|milnor|Roos|roos",
+   "results": "Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Milnor exact sequence cohomology of a sequential inverse tower defined by the shifted mapping cone of one minus shift on products",
+   "results": "CategoryTheory.Limits.SequentialProduct.cone; CochainComplex.mappingCone; CochainComplex.mappingCone.triangle; no specialized Milnor theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general sequential product and mapping-cone APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence",
+  "date": "2026-10-18",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-milnor-sequence",
+   "place": "First paragraph: the shifted cone sequence, its endpoint identifications and naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-milnor",
+ "blueprint_snapshot": "main-20261015",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MilnorTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/MilnorTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernel",
+  "statement": "abbrev milnorTowerCokernel (M : ℕᵒᵖ ⥤ A) : A",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernel",
+   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernelMap",
+   "AlgebraicGeometry.Scheme.ProEt.milnorCohomologyTower",
+   "AlgebraicGeometry.Scheme.ProEt.milnorSingleTower"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "independent cc review: delivered MilnorTower/RoosCohomology*/ProEtaleMilnorSequence vs live base and det-pe-milnor-sequence node; moved tower defs verbatim + public re-export; 5 delivered modules and all 8 direct importers compiled; #print axioms (new theorems clean, milnor_sequence sorryAx only via products_exact)"
+ }
+}

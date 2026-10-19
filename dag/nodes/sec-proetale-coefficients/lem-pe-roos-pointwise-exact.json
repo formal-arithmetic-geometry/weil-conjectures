@@ -1,0 +1,170 @@
+{
+ "id": "lem-pe-roos-pointwise-exact",
+ "kind": "lemma",
+ "title": "Explicit endpoint comparisons and pointwise exactness of the Roos sequence",
+ "statement": "Let A be an abelian category with countable limits and exact countable products. For every inverse tower K of unbounded cochain complexes and every integer q, construct a(K,q): C(H^(q-1)(K)) -> H^q(Cone(1-T)[-1]) and b(K,q): H^q(Cone(1-T)[-1]) -> lim H^q(K). The first is the factorization of the cone connecting morphism through its cokernel, transported along the product/homology comparison; the second is the cone projection factored through its kernel, transported along the kernel-to-limit isomorphism. Then a(K,q)b(K,q)=0 and this pair is short exact. The tower constructions are [def-pe-milnor-towers], the abelian category structure is [def-sp-abelian], products are [def-weil-category-product], and the inverse limit is [def-pur-sheaf-inverse-limit].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
+  "place": "First paragraph: cone long exact sequence, extraction, product comparison, inverse limit and naturality"
+ },
+ "stmt_deps": [
+  "def-pe-milnor-towers",
+  "def-sp-abelian",
+  "def-weil-category-product",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the distinguished mapping-cocone triangle long exact sequence to 1-T on the product. The three adjacent short complexes are exact.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In any abelian category an exact five-term segment factors to a short exact sequence from the cokernel of its first map to the kernel of its last map. Monicity and epicity follow from the adjacent exactness statements; middle exactness is transported along the cokernel epi and kernel mono.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The homology functor preserves countable products because these products are exact. Use the projection comparison, and check each component to show that it conjugates the cohomology transition endomorphism to 1-T. Kernel and cokernel mapIso transport the endpoints.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A compatible family into a tower product is exactly a map killed by 1-T. The kernel fork therefore has the limit universal property. Transport the factored short exact sequence along these endpoint isomorphisms.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pe-milnor-towers"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "def-weil-category-product",
+  "def-pur-sheaf-inverse-limit",
+  "def-pe-milnor-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
+  "place": "First paragraph: cone long exact sequence, extraction, product comparison, inverse limit and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of sequential derived inverse limit Milnor exact sequence cone one minus shift",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh; HomologicalComplex.coneOfHasLimitEval_pt_d; DerivedCategory.triangleOfSESδ; CategoryTheory.Functor.homologySequence_exact₁; HomotopyCategory.spectralObjectMappingCone_δ'_app; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"homology\"",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|milnor|Roos|roos",
+   "results": "Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Milnor exact sequence cohomology of a sequential inverse tower defined by the shifted mapping cone of one minus shift on products",
+   "results": "CategoryTheory.Limits.SequentialProduct.cone; CochainComplex.mappingCone; CochainComplex.mappingCone.triangle; no specialized Milnor theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general sequential product and mapping-cone APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence",
+  "date": "2026-10-18",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-milnor-sequence",
+   "place": "First paragraph: the shifted cone sequence, its endpoint identifications and naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-milnor",
+ "blueprint_snapshot": "main-20261015",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RoosCohomologyMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/RoosCohomologyMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.milnor_shortExact",
+  "statement": "theorem milnor_shortExact [HasExactLimitsOfShape (Discrete ℕ) A]\n    (K : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) :\n    ∃ h : milnorInclusion K q ≫ milnorProjection K q = 0,\n      (ShortComplex.mk (milnorInclusion K q) (milnorProjection K q) h).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.extract_shortExact",
+   "AlgebraicGeometry.Scheme.ProEt.towerKernelIso",
+   "AlgebraicGeometry.Scheme.ProEt.productHomologyIso",
+   "AlgebraicGeometry.Scheme.ProEt.productHomologyIso_transition",
+   "AlgebraicGeometry.Scheme.ProEt.roosTransition",
+   "AlgebraicGeometry.Scheme.ProEt.roosBoundary",
+   "AlgebraicGeometry.Scheme.ProEt.roosProjection",
+   "AlgebraicGeometry.Scheme.ProEt.roosBoundary_exact",
+   "AlgebraicGeometry.Scheme.ProEt.roosCokernelIso",
+   "AlgebraicGeometry.Scheme.ProEt.roosKernelIso",
+   "AlgebraicGeometry.Scheme.ProEt.milnorInclusion",
+   "AlgebraicGeometry.Scheme.ProEt.milnorProjection",
+   "AlgebraicGeometry.Scheme.ProEt.milnor_shortExact"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "independent cc review: delivered MilnorTower/RoosCohomology*/ProEtaleMilnorSequence vs live base and det-pe-milnor-sequence node; moved tower defs verbatim + public re-export; 5 delivered modules and all 8 direct importers compiled; #print axioms (new theorems clean, milnor_sequence sorryAx only via products_exact)"
+ }
+}

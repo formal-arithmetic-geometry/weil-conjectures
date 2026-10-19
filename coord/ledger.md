@@ -16925,3 +16925,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/V4/Sheaf.Paper.CoefficientRingedSequenceSite (stage 3; reviewer PASS; first push; landing 20261019T034324-L-421183 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V5/Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic (stage 3; reviewer PASS; first push; landing 20261019T034325-L-421291 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V5/Sheaf.Paper.EtaleProEtaleAdjunctionTransfer (stage 3; reviewer PASS; first push; landing 20261019T034326-L-421448 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/V6/Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence (stage 3; reviewer PASS; first push; landing 20261019T034326-L-421589 (interface); batch 20261019T034248; modules 5; new nodes 4; change records: coord/changes/V6-milnor-tower-location.md)

@@ -21,99 +21,43 @@
  ],
  "proof": [
   {
-   "text": "Work in the abelian category $\\mathcal A=\\Mod(X_{\\mathrm{proét}},\\mathcal R)$ of [def-weil-sheaf-of-modules-category], in a universe containing a small representative of the site. For a chain map $\\varphi:A\\to B$, put $D=\\operatorname{Cone}(\\varphi)[-1]$. The cone triangle is distinguished by [def-weil-abstract-derived-category]. The long exact cohomology sequence [lem-sf-derived-homology-long-exact], with $H^{q-1}(\\operatorname{Cone}(\\varphi))=H^q(D)$, contains\n$$H^{q-1}(A)\\xrightarrow{H^{q-1}\\varphi}H^{q-1}(B)\\xrightarrow{\\beta}H^q(D)\\xrightarrow{\\gamma}H^q(A)\\xrightarrow{H^q\\varphi}H^q(B).$$\nIn particular this applies to $A=B=P=\\prod_n K_n$ and $\\varphi=1-T$, the termwise product complex of [det-pe-products-derived].",
+   "text": "Apply exact countable products for pro-etale module sheaves, then the generic natural Roos cohomology sequence. Its explicit maps arise from the cone long exact sequence, its kernel/cokernel factorization, the projection-induced product/homology comparison, and the kernel-to-limit comparison.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact",
-    "det-pe-products-derived"
+    "det-pe-products-exact",
+    "lem-pe-roos-cohomology-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "First paragraph: cone triangle and long exact sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "Extract the short exact sequence from Step 1 inside $\\mathcal A$ [def-weil-sheaf-of-modules-category]. Exactness says $\\ker\\beta=\\operatorname{im}(H^{q-1}\\varphi)$, $\\operatorname{im}\\beta=\\ker\\gamma$, and $\\operatorname{im}\\gamma=\\ker(H^q\\varphi)$. Thus $\\beta$ induces an injection of $\\operatorname{coker}(H^{q-1}\\varphi)$ into $H^q(D)$ with image $\\ker\\gamma$, while $\\gamma$ induces a surjection onto $\\ker(H^q\\varphi)$. These are the coimage-image factorizations in an abelian category [def-sp-abelian]. They give\n$$0\\to\\operatorname{coker}(H^{q-1}\\varphi)\\to H^q(D)\\to\\ker(H^q\\varphi)\\to0.$$\nThe cokernels and images are sheaf cokernels and images; no assertion of surjectivity on arbitrary sections is used.",
+   "text": "For a tower of modules in degree zero, the homology tower vanishes in every degree other than zero, and its degree-zero tower is naturally isomorphic to the original tower. At q=0 the left endpoint of the generic short exact sequence vanishes, so its projection is an isomorphism onto the limit. At q=1 its right endpoint vanishes, so its inclusion is an isomorphism from the cokernel. Transport these by the natural degree-zero homology tower isomorphism. In every other degree both endpoints vanish, hence so does the middle. Naturality of the resulting two isomorphisms follows by composing the sequence squares with this natural tower isomorphism and using inverse isomorphism cancellation.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
+    "lem-pe-roos-cohomology-sequence",
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian",
+    "def-pe-milnor-towers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each q retain the same inclusion and projection from the generic sequence. Precompose its inclusion with the degree-one isomorphism for the tower H^(q-1)(K). Transport short exactness through this isomorphism of short complexes. This proves the final clause with the same maps as the first clause.",
+   "uses": [
+    "lem-pe-roos-cohomology-sequence",
     "def-sp-abelian"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "First paragraph: extraction of the short exact sequence"
-   }
-  },
-  {
-   "text": "The product/cohomology isomorphism exists by [det-pe-products-derived]. Check that the isomorphism induced by the coordinate projections is the one needed here. Write $Z_n^r=\\ker d_n^r$ and $B_n^r=\\operatorname{im}d_n^{r-1}$, as in [def-weil-abstract-derived-category]. Products preserve kernels: a map into the product is killed by the product differential exactly when each component factors through $Z_n^r$, by [def-weil-category-product]. Apply [det-pe-products-exact] to $0\\to Z_n^{r-1}\\to K_n^{r-1}\\to B_n^r\\to0$. The resulting epimorphism onto $\\prod_n B_n^r$, followed by its monomorphism into $\\prod_nK_n^r$, shows that the boundaries of $P$ are $\\prod_nB_n^r$. Apply the same exactness to $0\\to B_n^r\\to Z_n^r\\to H^r(K_n)\\to0$. It gives the isomorphism $\\alpha^r:H^r(P)\\xrightarrow{\\sim}\\prod_nH^r(K_n)$ induced by the projections. Functoriality of cohomology and $\\pi_n(1-T)=\\pi_n-t_n\\pi_{n+1}$ now give\n$$H^r(\\pi_n)H^r(1-T)=H^r(\\pi_n)-H^r(t_n)H^r(\\pi_{n+1}).$$\nConsequently $\\alpha^r$ conjugates $H^r(1-T)$ to $1-T$ on $\\prod_nH^r(K_n)$. The same projection equations show that $\\alpha^r$ commutes with every morphism of towers.",
-   "uses": [
-    "det-pe-products-derived",
-    "def-weil-abstract-derived-category",
-    "def-weil-category-product",
-    "det-pe-products-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "First paragraph after the short exact sequence: canonical product/cohomology comparison"
-   }
-  },
-  {
-   "text": "For the cohomology tower $N_n=H^q(K_n)$ with transitions $H^q(t_n)$, the kernel of $1-T$ on $\\prod_nN_n$ is the inverse limit [def-pur-sheaf-inverse-limit], reindexing $r\\geq1$ as $n\\geq0$. By the universal properties of the kernel and of the product [def-weil-category-product], a morphism $g:L\\to\\ker(1-T)$ is the same as a family $g_n=\\pi_ng:L\\to N_n$ with $0=\\pi_n(1-T)g=g_n-H^q(t_n)g_{n+1}$ for all $n$, that is, a cone over the tower. Hence $\\ker(1-T)$, with the maps $\\pi_n$, is a limit of the tower in $\\Mod(X_{\\mathrm{proét}},\\mathcal R)$ [def-weil-sheaf-of-modules-category], and uniqueness of limits identifies it with $\\varprojlim_nN_n$, taking $\\pi_n$ to the coordinate maps. On sections this is the description in [def-pur-sheaf-inverse-limit]: the families $(h_n)$ with $h_n=H^q(t_n)(h_{n+1})$, with componentwise restrictions. Substitute this kernel identification and the comparison of Step 3 into the short exact sequence of Step 2. The result is precisely clause 1, with its left term the sheaf cokernel of $1-T$.",
-   "uses": [
-    "def-pur-sheaf-inverse-limit",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "First paragraph, final sentences: kernel as inverse limit and clause 1"
-   }
-  },
-  {
-   "text": "To verify naturality in clause 1, let $(f_n):(K_n,t_n)\\to(K'_n,t'_n)$ be a morphism of towers. The map $F=\\prod_nf_n$ satisfies $F(1-T)=(1-T')F$ after each projection, by $f_nt_n=t'_nf_{n+1}$ and [def-weil-category-product]. In the cone convention of [def-weil-abstract-derived-category], write $D^r=A^r\\oplus B^{r-1}$, with differential $(a,b)\\mapsto(d_Aa,-d_Bb-\\varphi a)$. The cone map is $(a,b)\\mapsto(Fa,Fb)$; the displayed commutation with $\\varphi$ verifies the chain-map equation. The adjacent maps in the shifted cone sequence are the inclusion $b\\mapsto(0,b)$ and the negative projection $(a,b)\\mapsto-a$, since the cone triangle has last map $-p$. The cone map commutes with both: its second coordinate is $Fb$ and $-Fa=F(-a)$. The maps $\\beta,\\gamma$ of Step 1 are $H^q$ of these two chain maps: $\\beta$ is $H^{q-1}$ of the triangle map $i$, and the connecting morphism of [lem-sf-derived-homology-long-exact] (its Mathlib match `DerivedCategory.HomologySequence.δ`) is $H^{q-1}$ of the third map $-p$ followed by $H^{q-1}(A[1])=H^q(A)$. Passing to cohomology gives commutative squares around $H^q(D)$, and the universal properties of cokernel and kernel give the squares for Step 2's short exact sequence. Step 3's comparisons commute with $F$. The inverse-limit identifications commute with $F$ because their projections are the coordinate maps [def-pur-sheaf-inverse-limit]. This proves naturality of the sequence of clause 1.",
-   "uses": [
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category",
-    "def-pur-sheaf-inverse-limit",
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "First paragraph: naturality of the asserted short exact sequence, written using the cone formulas"
-   }
-  },
-  {
-   "text": "For a tower of modules $(M_n)$ in degree $0$, $P=\\prod_nM_n$ is concentrated in degree $0$. The cone and shift formulas [def-weil-abstract-derived-category] give $\\operatorname{Cone}(1-T)[-1]$ with $P$ in degrees $0,1$, zero elsewhere, and differential $-(1-T):P\\to P$. Multiplication by $-1$ in degree $1$ identifies it with the two-term complex with differential $1-T$. Thus $H^0=\\ker(1-T)$, $H^1=\\operatorname{coker}(1-T)$, and $H^p=0$ for every $p\\notin\\{0,1\\}$, including negative $p$. The kernel is $\\varprojlim_nM_n$ by [def-pur-sheaf-inverse-limit]. This proves clause 2 for the definition $R^p\\varprojlim_nM_n=H^p(\\operatorname{Cone}(1-T)[-1])$ in the item. Apply this calculation to the induced tower $M_n=H^{q-1}(K_n)$ and substitute $R^1\\varprojlim_n M_n=\\operatorname{coker}(1-T)$ into clause 1. This proves clause 3. The two-term identifications commute with tower maps, since they use only kernels, cokernels, and multiplication by $-1$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pur-sheaf-inverse-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-    "place": "Second paragraph: degree-zero tower calculation and combination with clause 1"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "lem-sf-derived-homology-long-exact",
-  "det-pe-products-derived",
-  "def-sp-abelian",
-  "def-weil-category-product",
   "det-pe-products-exact",
-  "def-pur-sheaf-inverse-limit"
+  "lem-pe-roos-cohomology-sequence",
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "def-pe-milnor-towers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
-  "place": "Both paragraphs; the cone long exact sequence is supported by Stacks derived.tex Definitions 014E (definition-cone), 014Q (definition-distinguished-triangle), 0147 (definition-homological), 05RU (definition-unbounded-derived-category), and Lemma 05RS (lemma-cohomology-homological)."
+  "place": "V6 Lean realization, 2026-10-18: first paragraph factored into explicit maps, exactness and naturality; second paragraph obtained from the generic sequence and single-object homology."
  },
  "mathlib_searches": [
   {
@@ -265,10 +209,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence",
   "declaration": "AlgebraicGeometry.Scheme.ProEt.milnor_sequence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernel",
-   "AlgebraicGeometry.Scheme.ProEt.milnorTowerCokernelMap",
-   "AlgebraicGeometry.Scheme.ProEt.milnorCohomologyTower",
-   "AlgebraicGeometry.Scheme.ProEt.milnorSingleTower",
    "AlgebraicGeometry.Scheme.ProEt.milnor_sequence"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleMilnorSequence.lean",
@@ -289,5 +229,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "independent cc review: delivered MilnorTower/RoosCohomology*/ProEtaleMilnorSequence vs live base and det-pe-milnor-sequence node; moved tower defs verbatim + public re-export; 5 delivered modules and all 8 direct importers compiled; #print axioms (new theorems clean, milnor_sequence sorryAx only via products_exact)"
  }
 }

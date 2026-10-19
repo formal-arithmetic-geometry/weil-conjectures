@@ -1,0 +1,133 @@
+{
+ "id": "lem-pe-roos-cohomology-sequence",
+ "kind": "lemma",
+ "title": "The natural cohomology sequence of a strict Roos complex",
+ "statement": "In an abelian category with countable limits and exact countable products, for every q there are natural maps from C(H^(q-1)(K)) to H^q(Roos K) to lim H^q(K), for every unbounded inverse tower K, and the resulting pair is short exact. Naturality is with respect to the existing strict RoosMap on tower morphisms. The abelian category structure is [def-sp-abelian], the tower constructions are [def-pe-milnor-towers], and the inverse limit is [def-pur-sheaf-inverse-limit].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
+  "place": "First paragraph: cone long exact sequence, extraction, product comparison, inverse limit and naturality"
+ },
+ "stmt_deps": [
+  "def-pe-milnor-towers",
+  "def-sp-abelian",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose the explicitly constructed inclusion and projection. Their pointwise short exactness is lem-pe-roos-pointwise-exact.",
+   "uses": [
+    "lem-pe-roos-pointwise-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Their two naturality squares are exactly lem-pe-roos-cohomology-naturality.",
+   "uses": [
+    "lem-pe-roos-cohomology-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-roos-pointwise-exact",
+  "lem-pe-roos-cohomology-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-milnor/det-pe-milnor-sequence.proof.md",
+  "place": "First paragraph: cone long exact sequence, extraction, product comparison, inverse limit and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of sequential derived inverse limit Milnor exact sequence cone one minus shift",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh; HomologicalComplex.coneOfHasLimitEval_pt_d; DerivedCategory.triangleOfSESδ; CategoryTheory.Functor.homologySequence_exact₁; HomotopyCategory.spectralObjectMappingCone_δ'_app; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"homology\"",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "grep",
+   "query": "Milnor|milnor|Roos|roos",
+   "results": "Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-18",
+   "verdict": "No specialized Milnor theorem; general cone API or unrelated results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Milnor exact sequence cohomology of a sequential inverse tower defined by the shifted mapping cone of one minus shift on products",
+   "results": "CategoryTheory.Limits.SequentialProduct.cone; CochainComplex.mappingCone; CochainComplex.mappingCone.triangle; no specialized Milnor theorem",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general sequential product and mapping-cone APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence",
+  "date": "2026-10-18",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-milnor-sequence",
+   "place": "First paragraph: the shifted cone sequence, its endpoint identifications and naturality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-pe-milnor",
+ "blueprint_snapshot": "main-20261015",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RoosCohomologySequence",
+  "file": "lean/Sheaf/AlgebraicGeometry/RoosCohomologySequence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.roos_cohomology_sequence",
+  "statement": "theorem roos_cohomology_sequence {A : Type a} [Category.{b} A] [Abelian A]\n    [HasCountableLimits A] [HasExactLimitsOfShape (Discrete ℕ) A] :\n    ∀ q : ℤ,\n        ∃ (a : ∀ K : ℕᵒᵖ ⥤ CochainComplex A ℤ,\n            milnorTowerCokernel (milnorCohomologyTower K (q - 1)) ⟶\n              (WeilConjectures.integralOperationsRoos K).homology q)\n          (b : ∀ K : ℕᵒᵖ ⥤ CochainComplex A ℤ,\n            (WeilConjectures.integralOperationsRoos K).homology q ⟶\n              limit (milnorCohomologyTower K q)),\n          (∀ K : ℕᵒᵖ ⥤ CochainComplex A ℤ,\n            ∃ h : a K ≫ b K = 0, (ShortComplex.mk (a K) (b K) h).ShortExact) ∧\n          (∀ (K L : ℕᵒᵖ ⥤ CochainComplex A ℤ) (f : K ⟶ L),\n            milnorTowerCokernelMap\n                (Functor.whiskerRight f\n                  (HomologicalComplex.homologyFunctor A\n                    (ComplexShape.up ℤ) (q - 1))) ≫ a L =\n              a K ≫ HomologicalComplex.homologyMap\n                (WeilConjectures.integralOperationsRoosMap f) q ∧\n            HomologicalComplex.homologyMap\n                (WeilConjectures.integralOperationsRoosMap f) q ≫ b L =\n              b K ≫ limMap (Functor.whiskerRight f\n                (HomologicalComplex.homologyFunctor\n                  A (ComplexShape.up ℤ) q)))",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-c63c0",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034326-L-421589",
+  "kind": "interface",
+  "note": "independent cc review: delivered MilnorTower/RoosCohomology*/ProEtaleMilnorSequence vs live base and det-pe-milnor-sequence node; moved tower defs verbatim + public re-export; 5 delivered modules and all 8 direct importers compiled; #print axioms (new theorems clean, milnor_sequence sorryAx only via products_exact)"
+ }
+}
