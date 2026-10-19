@@ -17429,3 +17429,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:32 L: merged deliver/D6/Sheaf.Paper.CompactSupportUniformTorBound (stage 3; reviewer PASS; first push; landing 20261019T133210-L-1272491 (interface); batch 20261019T133206; modules 1; new nodes 0; change records: coord/changes/D6-compact-support-uniform-imports.md)
 - 13:36 L: merged deliver/X5/Sheaf.Algebra.Homology.TwoStepFilteredModuleDerived (stage 3; reviewer PASS; first push; landing 20261019T133629-L-1342677 (proof); batch 20261019T133624; modules 1; new nodes 0)
 - 13:39 L: merged deliver/NZ/lem-fd-kernel-composition (reviewer FIX; first push; new nodes: 0)
+- 13:39 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 4b46885f9b2f: Identical re-delivery: LisseRationalRealization.lean sha256 787e4e0b)
