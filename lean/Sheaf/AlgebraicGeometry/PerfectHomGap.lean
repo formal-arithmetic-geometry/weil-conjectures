@@ -11,7 +11,7 @@ import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparisonDual
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction

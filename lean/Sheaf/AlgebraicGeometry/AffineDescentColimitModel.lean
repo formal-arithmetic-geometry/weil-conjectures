@@ -8,10 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.AffineDescentRingDiagram
 
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.AffineDescentSpectrumIso
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 

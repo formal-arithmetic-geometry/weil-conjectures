@@ -14,7 +14,7 @@ import Sheaf.RingTheory.CompletedMonoidSupportProjection
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularRingNormal
+import WeilConjectures.RingTheory.RegularRingNormal
 import Sheaf.TraceFormula.SharpFsOrthantEmbedding
 
 /-!

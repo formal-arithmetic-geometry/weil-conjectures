@@ -17,7 +17,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
 import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound
-import Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
+import WeilConjectures.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison
 
 /-! # Affine-basis lower truncation tower inputs
 Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/

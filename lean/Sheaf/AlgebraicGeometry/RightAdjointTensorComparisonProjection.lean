@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
 import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
+import WeilConjectures.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures
 import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts

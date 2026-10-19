@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreeCompletedQuotientLift
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing
 import Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct

@@ -13,11 +13,11 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 
 /-! # Affine perfect models and geometric chain-map comparison
 

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.RingTheory.CompletedMonoidSupportProjection
-import Sheaf.RingTheory.SerreCriterionNormal
+import WeilConjectures.RingTheory.SerreCriterionNormal
 import WeilConjectures.RingTheory.SerreS2TotalFractionMembership
 import Sheaf.GroupTheory.SharpConeLatticeIntersection
 import Sheaf.RingTheory.CompleteToricFacetValuations

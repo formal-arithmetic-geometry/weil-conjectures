@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
-import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
+import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Perfectness detected on open neighbourhoods
 

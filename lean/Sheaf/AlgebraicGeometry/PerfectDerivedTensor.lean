@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import Sheaf.AlgebraicGeometry.PerfectCommonAffineModels
+import WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels
 import Sheaf.AlgebraicGeometry.StrictPerfectTensorLocalComparison
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import Mathlib.Data.Int.Interval

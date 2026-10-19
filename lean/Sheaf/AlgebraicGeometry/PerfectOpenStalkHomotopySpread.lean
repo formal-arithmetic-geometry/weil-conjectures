@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkReverseComponentsLift
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkChainMapEquality
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Spreading a single stalk homotopy of a strictly perfect complex

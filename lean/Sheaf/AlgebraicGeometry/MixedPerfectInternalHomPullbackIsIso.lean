@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 import all Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 
 /-! # Perfect internal-Hom pullback with no module localization choice

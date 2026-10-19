@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Mathlib.CategoryTheory.HomCongr
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SpectrumStructureRestrictionComparison
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport

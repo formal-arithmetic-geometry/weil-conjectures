@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Finite-term presentations on arbitrary affine schemes

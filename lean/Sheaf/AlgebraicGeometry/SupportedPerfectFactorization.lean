@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import all Sheaf.CategoryTheory.CompactGeneratorAmbientThick
 import all Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives
 import all Sheaf.AlgebraicGeometry.SupportedKoszulRelativeDetector

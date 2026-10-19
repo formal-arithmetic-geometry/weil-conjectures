@@ -6,7 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.CanonicalSingleBaseChangeComparison

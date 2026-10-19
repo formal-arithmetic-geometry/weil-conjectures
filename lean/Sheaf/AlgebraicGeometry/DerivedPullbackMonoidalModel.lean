@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import Sheaf.AlgebraicGeometry.ModulePullbackTensorCoherence
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent
 
 /-! # The canonical monoidal model of derived pullback

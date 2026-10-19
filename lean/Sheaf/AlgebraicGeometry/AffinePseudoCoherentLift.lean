@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 import Sheaf.AlgebraicGeometry.AffineOpenLocalizedModel
 import Sheaf.RingTheory.FiniteLocalizationFreeModel
 import Sheaf.AlgebraicGeometry.QcOpenDerivedLift

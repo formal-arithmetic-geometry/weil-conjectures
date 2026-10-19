@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
+public import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
 import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore

@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 import Sheaf.AlgebraicGeometry.PseudoCoherentSummand
 import Sheaf.AlgebraicGeometry.DerivedTensorVanishingRetract
 import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentLocallyFiniteTor
-import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
 
 /-! # Direct summands of perfect complexes
 

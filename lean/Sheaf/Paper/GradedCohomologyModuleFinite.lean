@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
+import WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-!

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologySurjective
-import Sheaf.AlgebraicGeometry.PrincipalOpenCechHomologyInjective
+import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechHomologyInjective
 
 /-! # Alternating total Čech complexes on finite principal covers
 

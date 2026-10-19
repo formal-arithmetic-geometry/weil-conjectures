@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Sheaf.GroupTheory.SharpConeLatticeIntersection
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.Curve.Divisor
-import Sheaf.RingTheory.SerreCriterionNormal
+import WeilConjectures.RingTheory.SerreCriterionNormal
 import WeilConjectures.RingTheory.SerreS2TotalFractionMembership
 import Sheaf.RingTheory.CompleteToricBoundaryClassInjectivity
 import Sheaf.RingTheory.CompleteToricFacetValuations

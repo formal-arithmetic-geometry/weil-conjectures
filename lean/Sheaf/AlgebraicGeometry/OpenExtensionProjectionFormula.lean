@@ -6,7 +6,7 @@ Authors: SHEAF group H4
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.OpenExtensionDerivedAdjunction
+import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedAdjunction
 import Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormulaAux
 
 /-! # Projection formula for open extension by zero

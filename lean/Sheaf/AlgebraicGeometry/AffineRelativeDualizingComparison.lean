@@ -33,7 +33,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
-import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat

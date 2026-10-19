@@ -1,7 +1,7 @@
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
+import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import Sheaf.AlgebraicGeometry.OpenExtensionTensorCounitIsIso
 
 /-! Projection mate for transported open extension.

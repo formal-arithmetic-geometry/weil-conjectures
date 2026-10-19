@@ -90,13 +90,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitCoverAwayDivisorCharts.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootSplitCoverAwayDivisorCharts.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_split_cover_away_divisor_charts",
   "statement": "theorem root_split_cover_away_divisor_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),\n      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) (y : Spec R) (hy : g ∉ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (φ : R →+* S) (z : Spec S),\n      Etale (Spec.map (CommRingCat.ofHom φ)) ∧\n      (Spec.map (CommRingCat.ofHom φ)) z = y ∧\n      IsUnit (φ g) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin d,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin d,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g)))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin d,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ (1 : ℕ) - Polynomial.C (φ g))) (φ g))\n        ∃ γ : pullback p (Spec.map (CommRingCat.ofHom φ)) ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p (Spec.map (CommRingCat.ofHom φ))",
   "branch": "sheaf-dag",
   "by": "K3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts retired; now WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverAwayDivisorCharts."
  },
  "reviewed": {
   "date": "2026-10-13",

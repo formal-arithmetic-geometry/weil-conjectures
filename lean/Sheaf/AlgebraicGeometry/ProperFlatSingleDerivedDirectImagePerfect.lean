@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.ProperFlatSingleOpenPseudoCoherent
 import Sheaf.AlgebraicGeometry.ProperFlatSingleLocalFiniteTor
 import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
-import Sheaf.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionPerfectLocalModels
 import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Perfection of the direct image of a relatively flat single module

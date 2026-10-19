@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.LocalCohomology
 import Sheaf.Algebra.Homology.LocalCohomologyDerivedTorsion
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedHOneDerivedTorsion
 
 /-! # PuncturedHOneLocalCohomologyComparison
 

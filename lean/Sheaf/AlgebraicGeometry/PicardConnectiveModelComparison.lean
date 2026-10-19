@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 import WeilConjectures.AlgebraicGeometry.ConnectiveSingleHom

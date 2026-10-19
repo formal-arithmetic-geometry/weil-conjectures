@@ -99,13 +99,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/HomogeneousBasisSheafTwists.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/HomogeneousBasisSheafTwists.lean",
   "declaration": "AlgebraicGeometry.Proj.homogeneous_basis_sheaf_twists",
   "statement": "theorem homogeneous_basis_sheaf_twists (k : Type u) [Field k] (C : ProjectiveLine.ProjChartIsomorphism k) (M : ModuleCat.{u} (MvPolynomial (Fin 2) k)) (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M), a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z)) (F : (Proj (homogeneousSubmodule (Fin 2) k)).Modules) (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ), 0 < d → f ∈ homogeneousSubmodule (Fin 2) k d → F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+ LocalizedModule.Away f M) (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d) (hf : f ∈ homogeneousSubmodule (Fin 2) k d), Function.Injective (alpha f d hd hf) ∧ Set.range (alpha f d hd hf) = degreeZeroFractions (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k))) (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f)) (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d) (hf : f ∈ homogeneousSubmodule (Fin 2) k d) (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f) (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))), alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) = algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f) (Localization.Away f) r • alpha f d hd hf s) (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b) (hf : f ∈ homogeneousSubmodule (Fin 2) k d) (hg : g ∈ homogeneousSubmodule (Fin 2) k b) (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤ basicOpen (homogeneousSubmodule (Fin 2) k) f) (e c : ℕ) (a : MvPolynomial (Fin 2) k), 0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f → ∀ (m : ℕ) (y : M) (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))), alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) → alpha g b hb hg (F.val.map (homOfLE inc).op s) = mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) (r : ℕ) (d : Fin r → ℤ) (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) M) (hb : ∀ a : Fin r, b a ∈ 𝓜 (-(d a))) : Nonempty ((Scheme.Modules.pullback C.iso.inv).obj F ≅ ∐ (fun a ↦ ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (d a)))",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists retired; now WeilConjectures.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists."
  },
  "reviewed": {
   "date": "2026-10-12",

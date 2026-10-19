@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPresheafStalkWedge
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+public import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos
 import Sheaf.AlgebraicGeometry.AffineModelHomTransportAssembly
 import Mathlib.RingTheory.TensorProduct.Finite

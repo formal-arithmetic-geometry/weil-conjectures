@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition
 import Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.TorIndependentPerfectPullbackComparison
 

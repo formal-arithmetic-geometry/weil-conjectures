@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
 import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.Data.Int.Interval
-import Sheaf.AlgebraicGeometry.OpenDerivedCategorySmall
+import WeilConjectures.AlgebraicGeometry.OpenDerivedCategorySmall
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 import Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction

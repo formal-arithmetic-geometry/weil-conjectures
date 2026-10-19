@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.RingTheory.FibreRingNoetherian
 import WeilConjectures.RingTheory.RegularityRkGoesUp
-import Sheaf.RingTheory.SerreCriterionNormal
+import WeilConjectures.RingTheory.SerreCriterionNormal
 import WeilConjectures.RingTheory.SerreSkGoesUp
 
 /-!
@@ -50,13 +50,13 @@ theorem normal_of_flat_normal_fibers {R : Type u} {S : Type v}
     ∀ (q : Ideal S) [q.IsPrime],
       IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q) := by
   let : Algebra R S := φ.toAlgebra
-  have hbase := (Ring.serreCriterionNormal R).mp hR
+  have hbase := (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS R).mp hR
   have hfibreConditions (p : Ideal R) [p.IsPrime] :
       ∃ (_ : IsNoetherianRing (p.Fiber S)),
         Ring.IsSerreR (p.Fiber S) 1 ∧ Ring.IsSerreS (p.Fiber S) 2 := by
     let := Ideal.isNoetherianRing_fiber (B := S) p
-    exact ⟨inferInstance, (Ring.serreCriterionNormal (p.Fiber S)).mp (hfibres p)⟩
-  apply (Ring.serreCriterionNormal S).mpr
+    exact ⟨inferInstance, (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS (p.Fiber S)).mp (hfibres p)⟩
+  apply (Ring.forall_isIntegrallyClosed_localization_iff_isSerreR_and_isSerreS S).mpr
   constructor
   · apply regularity_rk_goes_up 1 hflat _ hbase.1
     intro p hp

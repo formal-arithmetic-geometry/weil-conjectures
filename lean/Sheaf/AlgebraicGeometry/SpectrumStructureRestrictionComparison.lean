@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 import Mathlib.CategoryTheory.Adjunction.Unique
 

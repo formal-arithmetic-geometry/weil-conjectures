@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
 
 /-! # Affine perfect extension after adjoining a shift

@@ -20,7 +20,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Functors
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.Adjunction
-import Sheaf.AlgebraicGeometry.ModuleResolutionHomologyExt
+import WeilConjectures.AlgebraicGeometry.ModuleResolutionHomologyExt
 import WeilConjectures.AlgebraicGeometry.FieldScalarRestrictionInjectives
 import Mathlib.Algebra.FiveLemma
 import Mathlib.Algebra.Homology.ConcreteCategory

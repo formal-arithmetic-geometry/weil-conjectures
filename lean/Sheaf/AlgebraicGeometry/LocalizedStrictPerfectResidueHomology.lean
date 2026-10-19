@@ -14,7 +14,8 @@ import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.Topology.PointModuleEvaluationEquivalence
-import Sheaf.AlgebraicGeometry.ResiduePullbackGlobalSections
+import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Natural residue homology comparison for localized strictly perfect complexes
 

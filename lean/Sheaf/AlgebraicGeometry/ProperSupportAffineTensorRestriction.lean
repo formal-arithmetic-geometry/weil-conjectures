@@ -15,8 +15,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import Sheaf.AlgebraicGeometry.CartesianTensorDataComparison
-import Sheaf.AlgebraicGeometry.ProperSupportTensorPullbackProperties
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.ProperSupportTensorPullbackProperties
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Affine restriction of proper-support tensor data

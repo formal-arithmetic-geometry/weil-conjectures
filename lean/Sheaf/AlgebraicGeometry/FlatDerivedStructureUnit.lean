@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnitProperties
 
 /-! # The derived structure unit and its degree-zero and fibre comparisons

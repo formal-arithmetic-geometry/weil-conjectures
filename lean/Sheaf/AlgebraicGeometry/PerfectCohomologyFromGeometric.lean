@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Finiteness.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.CategoryTheory.Preadditive.LeftExact

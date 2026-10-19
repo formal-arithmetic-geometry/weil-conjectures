@@ -19,7 +19,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
-import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart
 import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
