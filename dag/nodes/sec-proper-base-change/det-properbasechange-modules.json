@@ -18,39 +18,29 @@
  ],
  "proof": [
   {
-   "text": "Step 1 (compatibility after forgetting coefficients). Apply [lem-weil-pbc-exchange-forget-coefficients] to the given Cartesian square and $K\\in D^+(X_{\\Et},\\Lambda)$; here $D^+(T_{\\Et},\\mathbf Z)$ is the bounded below derived category of abelian sheaves, $\\Mod(T_{\\Et},\\mathbf Z)=\\Ab(T_{\\Et})$, and $\\Ex^\\Lambda_{\\square,K}$ is the derived exchange morphism formed with the $\\Lambda$-linear adjunctions, as in clause (3) of that lemma. Its clause (1) gives the inverse-image identifications $\\mathrm{For}\\circ u^{-1}=u^{-1}\\circ\\mathrm{For}$ for $u\\in\\{f,f',g,g'\\}$ named in the item. Its clause (2) gives, for $u\\in\\{f,f'\\}$, the comparison $\\mathrm{For}(Ru_*K)\\xrightarrow{\\sim}Ru_*(\\mathrm{For}K)$; this is the canonical isomorphism of clause (3) of [det-pbc-conventions-module-cohomology] named in the item: choosing a bounded below complex $I^\\bullet$ of injective $\\Lambda$-module sheaves with $K\\simeq I^\\bullet$, both maps are $\\mathrm{For}(Ru_*K)=u_*\\mathrm{For}I^\\bullet\\to Ru_*(\\mathrm{For}I^\\bullet)=Ru_*(\\mathrm{For}K)$, the map from the underived to the derived direct image (Stacks Lemma 0D6J (3)), and it is an isomorphism because the terms $\\mathrm{For}I^m$ are $u_*$-acyclic by clause (1) of [det-pbc-conventions-module-cohomology]. Under these comparisons, clause (3) of [lem-weil-pbc-exchange-forget-coefficients] identifies $\\mathrm{For}(\\Ex^\\Lambda_{\\square,K})$ with $\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$, which is the claimed identification. The lemma requires neither properness nor torsion, so it applies to every $K$ here.",
+   "text": "Apply exchange_forget_coefficients to Λ, the chosen Cartesian square sq, and K. Its final two conjuncts give exactly the displayed exchange compatibility and the equivalence between invertibility of the module and abelian derived exchange maps. The source and target isomorphisms are the same named canonical comparisons as in the statement, so no additional cohomology comparison theorem is needed.",
    "uses": [
-    "lem-weil-pbc-exchange-forget-coefficients",
-    "det-pbc-conventions-module-cohomology"
+    "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6J (lemma-modules-abelian-unbounded), part (3), and Remark 07A7 (remark-base-change); compatibility is the statement of the cited existing node"
-   }
+   "elementary": true
   },
   {
-   "text": "Step 2 (torsion consequence). Suppose that the cohomology sheaves of $\\mathrm{For}K$ are torsion. Exactness of $\\mathrm{For}$ and its cohomology comparison, stated in [lem-weil-pbc-exchange-forget-coefficients], ensure that $\\mathrm{For}K$ is bounded below. The square is Cartesian and $f$ is proper, so [thm-weil-pbc-bounded-below] applied to $\\mathrm{For}K$ makes $\\Ex^{\\mathbf Z}_{\\square,\\mathrm{For}K}$ an isomorphism. The final equivalence in [lem-weil-pbc-exchange-forget-coefficients] then gives that $\\Ex^\\Lambda_{\\square,K}$ is an isomorphism in $D^+(Y'_{\\Et},\\Lambda)$.",
+   "text": "Convert the specified pullback isomorphism and its two projection equations to IsPullback with CategoryTheory.IsPullback.of_iso_pullback. Given locally torsion cohomology of For K, Scheme.isTorsionSheaf_iff_isTorsion converts each degree to stalkwise torsion, giving DerivedCategory.Plus.torsionHomology. Apply isIso_baseChange_of_isProper to this abelian complex and square. Rewrite baseChange_eq_derivedBaseChangeMapPlus to obtain invertibility of the abelian exchange map. Apply the reverse implication of the equivalence from exchange_forget_coefficients to obtain invertibility of the module exchange map.",
    "uses": [
     "thm-weil-pbc-bounded-below",
     "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.proof.md",
-    "place": "Proof, Step 2"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-exchange-forget-coefficients",
-  "det-pbc-conventions-module-cohomology",
   "thm-weil-pbc-bounded-below"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange-modules.proof.md",
+  "place": "Steps 1 and 2, implemented by the existing exchange_forget_coefficients theorem and bounded-below abelian proper base change; X2, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -194,5 +184,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261019T034345-L-424955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyConventions
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
+import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
 /-!
 # Étale proper base change for module coefficients
@@ -44,10 +46,12 @@ Proof:
 1. Apply `exchange_forget_coefficients` to the chosen Cartesian square.  Its canonical
    edge comparisons give the displayed equality between the forgotten module exchange
    and the abelian exchange.
-2. Exact forgetting identifies torsion cohomology of the module complex with torsion
-   cohomology of its underlying abelian complex.  Apply the bounded-below proper base
-   change theorem to the latter and use the equivalence clause of
-   `exchange_forget_coefficients` to obtain invertibility of the module exchange.
+2. Convert the chosen pullback identification to `IsPullback`. In each degree,
+   `Scheme.isTorsionSheaf_iff_isTorsion` converts the given torsion hypothesis to
+   stalkwise torsion. Apply bounded-below abelian proper base change and rewrite
+   `baseChange_eq_derivedBaseChangeMapPlus` to obtain invertibility of the abelian exchange.
+3. Use the equivalence clause of `exchange_forget_coefficients` to obtain invertibility
+   of the module exchange.
 -/
 theorem properBaseChangeModules (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
@@ -67,6 +71,15 @@ theorem properBaseChangeModules (Λ : Type (u + 1)) [CommRing Λ]
       ((D+(moduleAbelianForget Λ X)).obj K)).IsTorsion) →
       IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ)
         sq.toCommSq).app K)) := by
-  sorry
+  obtain ⟨_, _, _, _, _, _, _, _, hcompat, hiso⟩ :=
+    exchange_forget_coefficients Λ sq K
+  refine ⟨hcompat, fun hK ↦ hiso.mpr ?_⟩
+  have hsq : IsPullback g' f' f g :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  have hK' : DerivedCategory.Plus.torsionHomology X (D+(moduleAbelianForget Λ X).obj K) :=
+    fun n ↦ (Scheme.isTorsionSheaf_iff_isTorsion _).mpr (hK n)
+  have h := isIso_baseChange_of_isProper hsq (D+(moduleAbelianForget Λ X).obj K) hK'
+  rw [baseChange_eq_derivedBaseChangeMapPlus] at h
+  exact h
 
 end AlgebraicGeometry.Etale
