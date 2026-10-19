@@ -9,11 +9,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 
 /-!
 # Derived change of rings on a ringed site
@@ -116,8 +113,11 @@ theorem derivedChangeOfRingsGeneral
             (HomotopyCategory.quasiIso (SheafOfModules.{max u v} (derivedChangeRing J O))
               (ComplexShape.up ℤ)) ∧
           (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
-          ∀ P : CochainComplex (SheafOfModules.{max u v} (derivedChangeRing J O)) ℤ, P.IsAcyclicTensorKFlat →
+          ∀ P : CochainComplex (SheafOfModules.{max u v} (derivedChangeRing J O)) ℤ,
+            P.IsAcyclicTensorKFlat →
             IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  -- At coefficient universe max u v, the two K-flat predicates agree definitionally.
+  -- Relative essential smallness and sheafification are supplied by existing instances.
+  exact derivedChangeOfRingsIndependentCoefficients φ
 
 end SheafOfModules
