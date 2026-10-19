@@ -17075,3 +17075,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: returned deliver/NG/lem-trf-elementary-semistable-chart-globalization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem)
 - 04:02 L: returned deliver/Q26/def-fix-six-functor-datum (reviewer RETURN: L: independent stage-2 immutable head b87e0dbee541: b87e0dbee541 vs RETURNed 5ff2b0984a2e: main 5b7f9412, stages 27f404b)
 - 04:08 L: merged deliver/Q09/lem-zl-framework-pbc-open-exchange-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 04:09 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 07e0057e6cf3: H3: sfRationalLisseProperty ignores its chart U, so it requires a gl)
