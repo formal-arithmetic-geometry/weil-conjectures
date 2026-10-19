@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-constructible-cocone-hom-inj",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "(Hom-inj) for the constructible cocone",
@@ -18,20 +18,117 @@
  ],
  "proof": [
   {
-   "text": "The proof of [lem-sfb-constructible-cocone-hom-surj] shows that the canonical map\n$\\operatorname{colim}_{H'\\supseteq H}\\Hom(T_{H,H'}K,T_{H,H'}L)\\to\n\\Hom(T_{H,\\Qlb}K,T_{H,\\Qlb}L)$ is bijective. If $g$ and $g'$ have the same image, their classes in\nthe filtered colimit agree by injectivity, i.e. $T_{H,H'}(g)=T_{H,H'}(g')$ for some\n$H'\\supseteq H$.",
-   "uses": [],
-   "elementary": false
+   "text": "Write $R=H_X$ and $S=\\overline{\\mathbf Q}_{\\ell,X}$, and let $T:D(\\operatorname{Mod}_R)\\to D(\\operatorname{Mod}_S)$ be total left derived scalar extension. By [def-sfb-derived-extend-to-qlbar] and [def-sfb-constructible-extend-to-qlbar], the cocone functor $T_{H,\\Qlb}$ is precisely the restriction of $T$, on both objects and arrows. Check the coefficient convention needed below: [def-sfb-padic-subfield-condensed-ring] gives $\\underline H(P)=C(P,H)$, while [sk-def-sfb-qlbar-condensed] gives continuous maps into $\\Qlb$ whose image is contained in one finite intermediate field. The first is exactly the ring $\\underline E(S)=C(S,E)$ of [def-weil-pbc-condensed-e-module-category] for $E=H$; the second is the finite-subfield-valued continuous-function condensed $\\Qlb$ that the statement of [lem-weil-pbc-condensed-coefficient-derived-faithful] (step 2) names explicitly, the node [def-weil-pbc-condensed-e-module-category] itself defining only finite-field coefficients. The inverse image in [sk-def-sfb-pullback-from-point] is the same composite $\\pi_X^*\\circ(\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}})$ used there. Thus the rings, inclusion and ambient derived scalar extension agree; this is an unfolding of their definitions, without identifying the finite-subfield-valued coefficient ring with all continuous $\\Qlb$-valued functions. Forgetting to the ambient category, the assumed equality is $T(g)=T(g')$.",
+   "uses": [
+    "def-sfb-derived-extend-to-qlbar",
+    "def-sfb-constructible-extend-to-qlbar",
+    "def-sfb-padic-subfield-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "def-weil-pbc-condensed-e-module-category",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-condensed-coefficient-derived-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-inj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-inj, order 1771"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-condensed-coefficient-derived-faithful] with $E=H$, $\\Omega=\\Qlb$ and this scheme $X$. Its hypothesis is any scheme, a prime $\\ell$, and a finite intermediate field, all present here; its rings are $p_X^*$ of $C(-,H)$ and of the finite-subfield-valued condensed $\\Qlb$, with the same inverse image, as checked in step 1. It says that $T$ is faithful on the entire ambient derived category. Faithfulness means that its map on each Hom set is injective, so $T(g)=T(g')$ implies $g=g'$ in $D(\\operatorname{Mod}_{H_X})$. By [def-sfb-dcons-subfield], the constructible category is a full subcategory with precisely these ambient morphisms; hence $g=g'$ also in $D_{\\mathrm{cons}}(X,H)$.",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-derived-faithful",
+    "def-sfb-dcons-subfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-inj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-inj, order 1771"
+   }
+  },
+  {
+   "text": "Take the finite extension $H'=H$, with its reflexive inclusion. Applying the transition functor $T_{H,H}$ supplied by [def-sfb-constructible-cocone] to the equality $g=g'$ gives $T_{H,H}(g)=T_{H,H}(g')$. This is the eventual-equality assertion (Hom-inj) of [sk-def-sfb-filtered-two-colimit]. No identification of $T_{H,H}$ with the identity is needed: every functor maps equal arrows to equal arrows.",
+   "uses": [
+    "def-sfb-constructible-cocone",
+    "sk-def-sfb-filtered-two-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-inj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-inj, order 1771"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-derived-extend-to-qlbar",
+  "def-sfb-constructible-extend-to-qlbar",
+  "def-sfb-padic-subfield-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-pbc-condensed-e-module-category",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-condensed-coefficient-derived-faithful",
+  "def-sfb-dcons-subfield",
+  "def-sfb-constructible-cocone",
+  "sk-def-sfb-filtered-two-colimit"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-inj.md",
-  "place": "## Proof"
+  "place": "Hom-injectivity statement; replace the unsupported appeal to the proof of Hom-surj by the existing ambient derived-faithfulness tool"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructibleCocone|HomInj|faithful.*[Pp]adic|[Pp]adic.*[Ff]aithful",
+   "results": "Hits: Mathlib/GroupTheory/RegularWreathProduct.lean, Mathlib/GroupTheory/RegularWreathProduct.lean, Mathlib/GroupTheory/RegularWreathProduct.lean",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; returned general scalar-extension or other unrelated declarations do not establish the stated constructible-cocone property"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars from a finite p-adic coefficient field to the condensed algebraic closure is faithful on derived module sheaves",
+   "results": "Hits: comonadicExtendScalars, CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor, PresheafOfModules.instFaithfulRestrictScalars, PadicAlgCl.instCoePadic, PadicComplex.instIsScalarTowerPadicPadicAlgCl, Ring.instFaithfulSMulSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, PadicComplex.nnnorm_extends",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; returned general scalar-extension or other unrelated declarations do not establish the stated constructible-cocone property"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Faithful\", \"map_injective\"",
+   "results": "Hits: FaithfulSMul.algebraMap_injective, faithfulSMul_iff_algebraMap_injective, CategoryTheory.Functor.Faithful.map_injective, CategoryTheory.Functor.FullyFaithful.map_injective, Ideal.map_injective_of_faithfullyFlat, CategoryTheory.JointlyFaithful.map_injective",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; generic faithful-functor injectivity is the definition of faithfulness, not a theorem that the coefficient functor is faithful"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two morphisms between bounded constructible pro-etale complexes over a finite p-adic field which become equal over its algebraic closure agree after a finite coefficient extension",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, BDeRhamPlus, StandardEtalePair.hom_ext, StandardEtalePair.hom_ext_iff, StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, StandardEtalePresentation.mk.inj, StandardEtalePair.homEquiv_apply_coe",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; returned general scalar-extension or other unrelated declarations do not establish the stated constructible-cocone property"
+  },
+  {
+   "tool": "grep",
+   "query": "Faithful|extendScalars",
+   "results": "Hits: 11, 14, 16, 18, 42",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; generic faithful-functor injectivity is the definition of faithfulness, not a theorem that the coefficient functor is faithful"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split linear inclusion of condensed coefficient rings induces a faithful total derived extension of scalars functor on pro-etale module sheaves",
+   "results": "Hits: CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor, LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete, Condensed.profiniteSolid, CondensedMod.IsSolid",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; returned general scalar-extension or other unrelated declarations do not establish the stated constructible-cocone property"
+  },
+  {
+   "tool": "grep",
+   "query": "map_injective|class Faithful",
+   "results": "Hits: 20, 52, 54, 57, 62",
+   "date": "2026-10-19",
+   "verdict": "no match for the whole item; generic faithful-functor injectivity is the definition of faithfulness, not a theorem that the coefficient functor is faithful"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -82,5 +179,54 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-20",
+  "item": "lem-sfb-constructible-cocone-hom-inj",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Replaced a use of the proof, rather than statement, of Hom-surj by the existing ambient scalar-extension faithfulness theorem. Checked identical finite-subfield-valued condensed coefficients and full-subcategory arrows, then took H prime = H. No new nodes. No attachment claimed.",
+  "blueprint": "Realizes the equality and finite-stage conclusion of lem-sfb-constructible-cocone-hom-inj and unit step (4). Below the unit level its proof uses the already reviewed generic derived-faithfulness tool instead of referring to the proof of Hom-surj; unit step (2) and its continuity route are not altered.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-coefficient-derived-faithful",
+    "why": "Generic scalar-extension faithfulness on the ambient derived categories; stronger than the required finite-stage equality and not dependent on this item. The unit still obtains its full Hom-colimit bijection by its prescribed continuity argument."
+   },
+   {
+    "node": "def-weil-pbc-condensed-e-module-category",
+    "why": "Coefficient and module-category definitions used only to check that the faithfulness tool has the identical rings and inverse image."
+   },
+   {
+    "node": "sk-def-sfb-qlbar-condensed",
+    "why": "The finite-subfield-valued condensed algebraic closure convention needed to instantiate the faithfulness tool."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Definition of the inverse image used to identify the coefficient pullback in the two notations."
+   },
+   {
+    "node": "def-sfb-padic-subfield-condensed-ring",
+    "why": "Definition of continuous-function condensed finite-field coefficients."
+   },
+   {
+    "node": "sk-def-sfb-filtered-two-colimit",
+    "why": "Definition of the Hom-inj predicate in the conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-coefficient-derived-faithful",
+  "def-weil-pbc-condensed-e-module-category",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-padic-subfield-condensed-ring",
+  "sk-def-sfb-filtered-two-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NL-c07f3f015",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-c07f3f015 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to main-20261015, and the item is neither in side-live route-pivot-dropped.txt nor already split live. There are no new nodes. All 10 cited ids exist, proof_deps equals the union of uses, and the 996-node closure has no cycle. The blueprint proof uses the proof of hom-surj (C3), because that node states only surjectivity. The same-unit node that states the bijection, det-lem-coefficient-finite-descent-hom, needs a standing scheme, and sk-lem-constructible-ext-continuity needs a Noetherian scheme; the item assumes only a topologically Noetherian space. The worker instead uses lem-weil-pbc-condensed-coefficient-derived-faithful (any scheme, finite E, faithful on the unbounded D). This matches the unit's own detail node det-lem-coefficient-finite-descent-hom step 4, so it is an accepted tool use and not a detour around the route. The tool is true: an H-linear retraction Qlb→H is continuous on each finite F, which gives a split unit. Step 1 coefficient checks: T_{E,Qlb} is the ambient L(Ext) restricted on arrows; the rings are p_X^*C(-,E) and p_X^* of the finite-subfield-valued Qlb; π_X^* (Lan+sheafify) agrees with π_T^{-1}. Step 2: def-sfb-dcons-subfield is full. Step 3: H'=H is allowed, since E≤F includes equality and Hom-inj asks for k'≥k. Edge cases checked: empty X, g=g', zero objects. FIX: step 1 misattributed the Qlb ring convention to def-weil-pbc-condensed-e-module-category (C4), which defines only finite-E coefficients. It now credits the faithfulness node's statement for the Qlb convention, adds that node to step 1's uses (it was already in proof_deps), and spells out the conventions in step 2. No other change.; 1 file(s) fixed by the reviewer"
  }
 }
