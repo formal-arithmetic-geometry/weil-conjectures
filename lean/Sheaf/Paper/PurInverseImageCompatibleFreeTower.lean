@@ -13,7 +13,9 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Sheaf.Paper.SliceSiteLocalization
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import Sheaf.CategoryTheory.Sites.NormalizedSliceInverseImage
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-!
@@ -237,6 +239,340 @@ def NaturalComparison {D : Type u} [SmallCategory D] {K : GrothendieckTopology D
 
 end PurCompatibleFreeTowerData
 
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_natural_comparison
+    (T : PurCompatibleFreeTowerData J)
+    {D : Type u} [SmallCategory D] {K : GrothendieckTopology D}
+    (L : Sheaf J (Type (u + 1)) ⥤ Sheaf K (Type (u + 1))) :
+    T.NaturalComparison L := by
+  intro T' r m hm
+  exact limit.map_post (Functor.whiskerRight m
+    (sheafCompose J (forget AddCommGrpCat.{u + 1}))) L
+
+set_option backward.isDefEq.respectTransparency.types false in
+private abbrev towerProduct
+    {A : Type*} [Category A] [HasBinaryProducts A] (F G : ℕᵒᵖ ⥤ A) : ℕᵒᵖ ⥤ A where
+  obj j := F.obj j ⨯ G.obj j
+  map f := prod.map (F.map f) (G.map f)
+  map_id j := by simp
+  map_comp f g := by simp [prod.map_map]
+
+set_option backward.isDefEq.respectTransparency.types false in
+private def towerScalar (T : PurCompatibleFreeTowerData J) :
+    towerProduct T.rings T.modules ⟶ T.modules :=
+  NatTrans.ofOpSequence (T.scalar) (by
+    intro n
+    dsimp only [towerProduct]
+    ext W x
+    change @SMul.smul ((T.ring n).obj.obj W) ((T.M n).val.obj W) _
+      ((prod.fst : T.rings.obj (op n) ⨯ T.modules.obj (op n) ⟶ _).hom.app W
+        ((prod.map (T.rings.map (homOfLE (Nat.le_succ n)).op)
+          (T.modules.map (homOfLE (Nat.le_succ n)).op)).hom.app W x))
+      ((prod.snd : T.rings.obj (op n) ⨯ T.modules.obj (op n) ⟶ _).hom.app W
+        ((prod.map (T.rings.map (homOfLE (Nat.le_succ n)).op)
+          (T.modules.map (homOfLE (Nat.le_succ n)).op)).hom.app W x)) =
+      (T.modules.map (homOfLE (Nat.le_succ n)).op).hom.app W
+        (@SMul.smul ((T.ring (n + 1)).obj.obj W) ((T.M (n + 1)).val.obj W) _
+          ((prod.fst : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶ _).hom.app W x)
+          ((prod.snd : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶ _).hom.app W x))
+    have hfst := ConcreteCategory.congr_hom
+      (congrArg (fun f : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶
+          T.rings.obj (op n) ↦ f.hom.app W) (prod.map_fst
+        (T.rings.map (homOfLE (Nat.le_succ n)).op)
+        (T.modules.map (homOfLE (Nat.le_succ n)).op))) x
+    have hsnd := ConcreteCategory.congr_hom
+      (congrArg (fun f : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶
+          T.modules.obj (op n) ↦ f.hom.app W) (prod.map_snd
+        (T.rings.map (homOfLE (Nat.le_succ n)).op)
+        (T.modules.map (homOfLE (Nat.le_succ n)).op))) x
+    dsimp at hfst hsnd
+    rw [hfst, hsnd]
+    simp only [PurCompatibleFreeTowerData.modules, PurCompatibleFreeTowerData.abelian,
+      Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ]
+    exact (T.semilinear n W
+        ((prod.fst : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶ _).hom.app W x)
+        ((prod.snd : T.rings.obj (op (n + 1)) ⨯ T.modules.obj (op (n + 1)) ⟶ _).hom.app W x)).symm)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private abbrev towerAction
+    {A : Type*} [Category A] [HasBinaryProducts A] [HasLimitsOfShape ℕᵒᵖ A]
+    (F G : ℕᵒᵖ ⥤ A) (s : towerProduct F G ⟶ G) :
+    limit F ⨯ limit G ⟶ limit G :=
+  limit.lift G
+    { pt := limit F ⨯ limit G
+      π :=
+        { app := fun j ↦ prod.map (limit.π F j) (limit.π G j) ≫ s.app j
+          naturality := by
+            intro i j f
+            change 𝟙 _ ≫ _ = _
+            simp only [Category.id_comp, Category.assoc]
+            rw [← s.naturality f]
+            change _ = prod.map (limit.π F i) (limit.π G i) ≫
+              prod.map (F.map f) (G.map f) ≫ s.app j
+            rw [← Category.assoc, prod.map_map, limit.w, limit.w] } }
+
+set_option backward.isDefEq.respectTransparency.types false in
+@[reassoc]
+private theorem towerAction_π
+    {A : Type*} [Category A] [HasBinaryProducts A] [HasLimitsOfShape ℕᵒᵖ A]
+    (F G : ℕᵒᵖ ⥤ A) (s : towerProduct F G ⟶ G) (j : ℕᵒᵖ) :
+    towerAction F G s ≫ limit.π G j =
+      prod.map (limit.π F j) (limit.π G j) ≫ s.app j :=
+  limit.lift_π _ _
+
+
+set_option backward.isDefEq.respectTransparency.types false in
+private def transportedScalar
+    {A B : Type*} [Category A] [Category B] [HasBinaryProducts A] [HasBinaryProducts B]
+    (F G : ℕᵒᵖ ⥤ A) (s : towerProduct F G ⟶ G) (L : A ⥤ B)
+    [PreservesLimitsOfShape (Discrete WalkingPair) L] :
+    towerProduct (F ⋙ L) (G ⋙ L) ⟶ G ⋙ L where
+  app j := inv (prodComparison L (F.obj j) (G.obj j)) ≫ L.map (s.app j)
+  naturality i j f := by
+    dsimp only [towerProduct, Functor.comp_obj, Functor.comp_map]
+    rw [← Category.assoc, ← prodComparison_inv_natural L (F.map f) (G.map f),
+      Category.assoc, ← L.map_comp, s.naturality f, L.map_comp, Category.assoc]
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_scalar_comparison
+    (T : PurCompatibleFreeTowerData J)
+    {D : Type u} [SmallCategory D] {K : GrothendieckTopology D}
+    (L : Sheaf J (Type (u + 1)) ⥤ Sheaf K (Type (u + 1)))
+    [PreservesLimitsOfShape (Discrete WalkingPair) L] :
+    T.ScalarComparison L := by
+  let a := towerAction T.rings T.modules (towerScalar T)
+  let a' := inv (prodComparison L (limit T.rings) (limit T.modules)) ≫ L.map a
+  let s := transportedScalar T.rings T.modules (towerScalar T) L
+  let c := towerAction (T.rings ⋙ L) (T.modules ⋙ L) s
+  refine ⟨a, a', fun n ↦ s.app (op n), c, ?_, ?_, ?_, ?_, ?_⟩
+  · intro n
+    exact towerAction_π _ _ _ (op n)
+  · dsimp only [a']
+    simp only [IsIso.hom_inv_id_assoc]
+  · intro n
+    dsimp only [s, transportedScalar]
+    simp only [IsIso.hom_inv_id_assoc]
+    rfl
+  · intro n
+    exact towerAction_π _ _ _ (op n)
+  · apply limit.hom_ext
+    intro j
+    dsimp only [a', c]
+    simp only [Category.assoc, limit.post_π, towerAction_π]
+    rw [← L.map_comp, towerAction_π]
+    change inv (prodComparison L (limit T.rings) (limit T.modules)) ≫
+      L.map (prod.map (limit.π T.rings j) (limit.π T.modules j) ≫
+        (towerScalar T).app j) = _
+    rw [L.map_comp, ← Category.assoc, prodComparison_inv_natural]
+    dsimp only [s, transportedScalar]
+    rw [Category.assoc, ← Category.assoc
+      (prod.map (limit.post T.rings L) (limit.post T.modules L)), prod.map_map]
+    simp only [limit.post_π]
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem over_preserves_tower_limits (V : C) :
+    PreservesLimitsOfShape ℕᵒᵖ (J.overPullback (Type (u + 1)) V) := by
+  have : PreservesLimitsOfShape ℕᵒᵖ
+      (J.overPullback (Type (u + 1)) V ⋙
+        sheafToPresheaf (J.over V) (Type (u + 1))) :=
+    inferInstanceAs (PreservesLimitsOfShape ℕᵒᵖ
+      (sheafToPresheaf J (Type (u + 1)) ⋙
+        (Functor.whiskeringLeft _ _ _).obj (Over.forget V).op))
+  exact preservesLimitsOfShape_of_reflects_of_preserves _ (sheafToPresheaf _ _)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_local_basis
+    (T : PurCompatibleFreeTowerData J) (V : C)
+    (b : ∀ n : ℕ, (SheafOfModules.unit (T.ring n)).over V ≅ (T.M n).over V)
+    (hb : T.CompatibleBases V b) :
+    ∃ B : (limit T.rings).over V ≅ (limit T.modules).over V,
+      ∀ n : ℕ, B.hom ≫ (J.overPullback (Type (u + 1)) V).map
+          (limit.π T.modules (op n)) =
+        (J.overPullback (Type (u + 1)) V).map (limit.π T.rings (op n)) ≫
+          (T.basisIso V n (b n)).hom := by
+  let Q := J.overPullback (Type (u + 1)) V
+  have : PreservesLimitsOfShape ℕᵒᵖ Q := over_preserves_tower_limits V
+  let β : T.rings ⋙ Q ⟶ T.modules ⋙ Q :=
+    NatTrans.ofOpSequence (fun n ↦ (T.basisIso V n (b n)).hom) (fun n ↦ (hb n).symm)
+  have : ∀ j, IsIso (β.app j) := fun j ↦ inferInstanceAs
+    (IsIso (T.basisIso V j.unop (b j.unop)).hom)
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  let B := preservesLimitIso Q T.rings ≪≫ HasLimit.isoOfNatIso (asIso β) ≪≫
+    (preservesLimitIso Q T.modules).symm
+  refine ⟨B, ?_⟩
+  intro n
+  change (preservesLimitIso Q T.rings).hom ≫
+    (HasLimit.isoOfNatIso (asIso β)).hom ≫
+      (preservesLimitIso Q T.modules).inv ≫ Q.map (limit.π T.modules (op n)) = _
+  rw [preservesLimitIso_inv_π, HasLimit.isoOfNatIso_hom_π]
+  rw [← Category.assoc, preservesLimitIso_hom_π]
+  rfl
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_continuous
+    {D : Type u} [SmallCategory D] [HasFiniteLimits C]
+    (J₀ : Precoverage C) (K₀ : Precoverage D) (hJ : J₀.IsSiteForCoverings)
+    (U : C ⥤ D) [PreservesFiniteLimits U]
+    (hU : ∀ (X : C) (S : Presieve X), S ∈ J₀ X → S.map U ∈ K₀ (U.obj X)) :
+    U.IsContinuous J₀.toGrothendieck K₀.toGrothendieck := by
+  refine ⟨fun G ↦ ?_⟩
+  rw [J₀.isSheaf_toGrothendieck_iff]
+  intro X Y f R hR
+  obtain ⟨I, V, a, rfl⟩ := R.exists_eq_ofArrows
+  obtain ⟨P, p, q, hpb, hp⟩ := hJ.2.2 I X V a hR Y f
+  rw [← Sieve.ofArrows, ← Sieve.ofArrows_eq_pullback_of_isPullback a hpb,
+    Sieve.ofArrows, ← Presieve.isSheafFor_iff_generate]
+  let : (Presieve.ofArrows P p).HasPairwisePullbacks :=
+    J₀.hasPairwisePullbacks_of_mem hp
+  let : U.PreservesPairwisePullbacks (Presieve.ofArrows P p) :=
+    ⟨fun A B a b ha hb ↦ inferInstance⟩
+  apply (Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks U G.obj _).2
+  exact ((isSheaf_iff_isSheaf_of_type _ _).1 G.property).isSheafFor_of_mem_precoverage
+    (hU _ _ hp)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_isIso_of_cover
+    {F G : Sheaf J (Type (u + 1))} (φ : F ⟶ G)
+    {X : C} (hX : IsTerminal X) {I : Type (u + 1)} (V : I → C)
+    (a : ∀ i, V i ⟶ X)
+    (hc : Sieve.generate (Presieve.ofArrows V a) ∈ J X)
+    (hφ : ∀ i, IsIso ((J.overPullback (Type (u + 1)) (V i)).map φ)) : IsIso φ := by
+  have hb (i : I) (W : C) (q : W ⟶ V i) : Function.Bijective (φ.hom.app (op W)) := by
+    have := hφ i
+    have : IsIso (((J.overPullback (Type (u + 1)) (V i)).map φ).hom.app
+      (op (Over.mk q))) := inferInstance
+    exact (isIso_iff_bijective _).1 this
+  apply (Sheaf.isLocallyBijective_iff_isIso φ).1
+  constructor
+  · constructor
+    intro W x y h
+    apply J.superset_covering _ (J.pullback_stable (hX.from W.unop) hc)
+    intro Z f hf
+    obtain ⟨Y, g, t, ⟨i⟩, he⟩ := hf
+    apply (hb i Z g).injective
+    rw [NatTrans.naturality_apply, NatTrans.naturality_apply, h]
+  · constructor
+    intro W y
+    apply J.superset_covering _ (J.pullback_stable (hX.from W) hc)
+    intro Z f hf
+    obtain ⟨Y, g, t, ⟨i⟩, he⟩ := hf
+    exact (hb i Z g).surjective (G.obj.map f.op y)
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tower_local_comparison
+    {D : Type u} [SmallCategory D] (K : GrothendieckTopology D)
+    (U : C ⥤ D) [U.IsContinuous J K] [RepresentablyFlat U]
+    (T : PurCompatibleFreeTowerData J) (V : C)
+    (b : ∀ n : ℕ, (SheafOfModules.unit (T.ring n)).over V ≅ (T.M n).over V)
+    (hb : T.CompatibleBases V b) : T.LocalComparison K U V b := by
+  let L := purTowerInverseImage (J := J) K U
+  let Q := J.overPullback (Type (u + 1)) V
+  let Q' := K.overPullback (Type (u + 1)) (U.obj V)
+  have : PreservesLimitsOfShape ℕᵒᵖ Q' := over_preserves_tower_limits (U.obj V)
+  obtain ⟨H, η, e, hη, he⟩ := unit_normalized_slice_inverse_image J K U V
+  change Q ⋙ H ≅ L ⋙ Q' at e
+  have en {F G : Sheaf J (Type (u + 1))} (f : F ⟶ G) :
+      H.map (Q.map f) ≫ e.hom.app G = e.hom.app F ≫ Q'.map (L.map f) :=
+    e.hom.naturality f
+  have eni {F G : Sheaf J (Type (u + 1))} (f : F ⟶ G) :
+      Q'.map (L.map f) ≫ e.inv.app G = e.inv.app F ≫ H.map (Q.map f) :=
+    e.inv.naturality f
+  let transport {F G : Sheaf J (Type (u + 1))} (b : F.over V ≅ G.over V) :
+      (L.obj F).over (U.obj V) ≅ (L.obj G).over (U.obj V) :=
+    (e.app F).symm ≪≫ H.mapIso b ≪≫ e.app G
+  have ht {F G : Sheaf J (Type (u + 1))} (b : F.over V ≅ G.over V) :
+      PurTowerLocalInverseImage K U V b (transport b) := by
+    intro W q x
+    have hn := ConcreteCategory.congr_hom (congrArg
+      (fun f : (F.over V).obj ⟶ (Over.post U).op ⋙ (H.obj (G.over V)).obj ↦
+        f.app (op (Over.mk q))) (hη b.hom)) x
+    dsimp only [transport, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    change (e.hom.app G).hom.app _
+      ((H.map b.hom).hom.app _ ((e.inv.app F).hom.app (op (Over.mk (U.map q)))
+        ((purTowerInverseImageUnit K U F).app (op W) x))) = _
+    have heF := he F W q x
+    change (e.hom.app F).hom.app (op (Over.mk (U.map q)))
+      ((η (F.over V)).app (op (Over.mk q)) x) =
+        (purTowerInverseImageUnit K U F).app (op W) x at heF
+    rw [← heF]
+    have hi' := ConcreteCategory.congr_hom (congrArg
+      (fun f : H.obj (F.over V) ⟶ H.obj (F.over V) ↦
+        f.hom.app (op (Over.mk (U.map q)))) (e.app F).hom_inv_id)
+      ((η (F.over V)).app (op (Over.mk q)) x)
+    dsimp at hi'
+    have hc : (e.inv.app F).hom.app (op (Over.mk (U.map q)))
+        ((e.hom.app F).hom.app (op (Over.mk (U.map q)))
+          ((η (F.over V)).app (op (Over.mk q)) x)) =
+          (η (F.over V)).app (op (Over.mk q)) x := hi'
+    have hn' : (H.map b.hom).hom.app (op (Over.mk (U.map q)))
+        ((η (F.over V)).app (op (Over.mk q)) x) =
+      (η (G.over V)).app (op (Over.mk q))
+        (b.hom.hom.app (op (Over.mk q)) x) := hn.symm
+    exact (congrArg (fun z ↦ (e.hom.app G).hom.app (op (Over.mk (U.map q)))
+      ((H.map b.hom).hom.app (op (Over.mk (U.map q))) z)) hc).trans
+        ((congrArg (fun z ↦ (e.hom.app G).hom.app (op (Over.mk (U.map q))) z) hn').trans
+          (he G W q (b.hom.hom.app (op (Over.mk q)) x)))
+  obtain ⟨B, hB⟩ := tower_local_basis T V b hb
+  let b' := fun n ↦ transport (T.basisIso V n (b n))
+  let β : T.rings ⋙ Q ⟶ T.modules ⋙ Q :=
+    NatTrans.ofOpSequence (fun n ↦ (T.basisIso V n (b n)).hom) (fun n ↦ (hb n).symm)
+  let β' : (T.rings ⋙ L) ⋙ Q' ⟶ (T.modules ⋙ L) ⋙ Q' := {
+    app j := (b' j.unop).hom
+    naturality i j f := by
+      change Q'.map (L.map (T.rings.map f)) ≫ _ = _ ≫ Q'.map (L.map (T.modules.map f))
+      change Q'.map (L.map (T.rings.map f)) ≫ e.inv.app (T.rings.obj j) ≫
+        H.map (β.app j) ≫ e.hom.app (T.modules.obj j) =
+          (e.inv.app (T.rings.obj i) ≫ H.map (β.app i) ≫
+            e.hom.app (T.modules.obj i)) ≫ Q'.map (L.map (T.modules.map f))
+      rw [← Category.assoc, eni]
+      simp only [Category.assoc]
+      rw [← H.map_comp_assoc]
+      have hn := β.naturality f
+      change Q.map (T.rings.map f) ≫ _ = _ at hn
+      rw [hn, H.map_comp]
+      simp only [Category.assoc]
+      simp only [Functor.comp_map]
+      rw [en] }
+  have : ∀ j, IsIso (β'.app j) := fun j ↦ inferInstanceAs (IsIso (b' j.unop).hom)
+  have : IsIso β' := NatIso.isIso_of_isIso_app β'
+  let B'' := preservesLimitIso Q' (T.rings ⋙ L) ≪≫
+    HasLimit.isoOfNatIso (asIso β') ≪≫ (preservesLimitIso Q' (T.modules ⋙ L)).symm
+  refine ⟨B, hB, transport B, ht B, b', fun n ↦ ht _, B'', ?_, ?_⟩
+  · intro n
+    change (preservesLimitIso Q' (T.rings ⋙ L)).hom ≫
+      (HasLimit.isoOfNatIso (asIso β')).hom ≫
+        (preservesLimitIso Q' (T.modules ⋙ L)).inv ≫
+          Q'.map (limit.π (T.modules ⋙ L) (op n)) = _
+    rw [preservesLimitIso_inv_π, HasLimit.isoOfNatIso_hom_π]
+    rw [← Category.assoc, preservesLimitIso_hom_π]
+    rfl
+  · apply (isLimitOfPreserves Q' (limit.isLimit (T.modules ⋙ L))).hom_ext
+    intro j
+    change (transport B).hom ≫ Q'.map (limit.post T.modules L) ≫
+      Q'.map (limit.π (T.modules ⋙ L) j) =
+        (Q'.map (limit.post T.rings L) ≫ B''.hom) ≫
+          Q'.map (limit.π (T.modules ⋙ L) j)
+    rw [← Q'.map_comp, limit.post_π]
+    dsimp only [B'', Iso.trans_hom, Iso.symm_hom]
+    simp only [Category.assoc, preservesLimitIso_inv_π,
+      HasLimit.isoOfNatIso_hom_π, preservesLimitIso_hom_π_assoc]
+    rw [← Q'.map_comp_assoc, limit.post_π]
+    dsimp only [transport, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    erw [← en (limit.π T.modules j)]
+    rw [← H.map_comp_assoc, hB j.unop, H.map_comp]
+    simp only [Category.assoc]
+    change e.inv.app (limit T.rings) ≫ H.map (Q.map (limit.π T.rings j)) ≫
+      H.map (β.app j) ≫ e.hom.app (T.modules.obj j) =
+        Q'.map (L.map (limit.π T.rings j)) ≫
+          (e.inv.app (T.rings.obj j) ≫ H.map (β.app j) ≫ e.hom.app (T.modules.obj j))
+    rw [← Category.assoc, ← eni]
+    simp only [Category.assoc]
+
+
+-- The site-axiom witness hK is retained in the original public signature.
+set_option backward.isDefEq.respectTransparency.types false in
+set_option linter.unusedVariables false in
 /-- Inverse image of the inverse limit of a locally compatibly free module tower.
 
 The scalar and local comparison predicates above expand all the stated equations.
@@ -253,8 +589,9 @@ Proof:
    coordinatewise action, and uniquely specified by its projections.
 2. Cover and finite-limit preservation make U continuous and its Kan-extension
    inverse image left exact (lem-weil-pbc-left-exact-site-inverse-image-tensor).
-   The slice comparison (lem-weil-pbc-slice-site-localization, Stacks 03CF)
-   gives B' and the b'_n; its adjunction compatibility gives the unit equations.
+   The unit-normalized slice comparison
+   (lem-pur-unit-normalized-slice-inverse-image, Stacks 03CF) gives B' and the b'_n
+   and their required unit equations.
 3. Restriction to slices is sectionwise (def-pur-localized-ringed-site), hence
    commutes with inverse limits. Taking limits of b'_n gives B''. Projection
    squares identify the local module comparison with the local ring comparison.
@@ -289,6 +626,40 @@ theorem pur_inverse_image_compatible_free_tower
         (∀ n : ℕ, θ ≫ limit.π (T.modules ⋙ purTowerInverseImage K₀.toGrothendieck U) (op n) =
           (purTowerInverseImage K₀.toGrothendieck U).map (limit.π T.modules (op n))) →
         θ = limit.post T.modules (purTowerInverseImage K₀.toGrothendieck U) := by
-  sorry
+  have : U.IsContinuous J₀.toGrothendieck K₀.toGrothendieck :=
+    tower_continuous J₀ K₀ hJ U hUcover
+  have : RepresentablyFlat U := flat_of_preservesFiniteLimits U
+  have : AB5OfSize.{u, u} (Type (u + 1)) :=
+    AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  have : PreservesFiniteLimits
+      (purTowerInverseImage (J := J₀.toGrothendieck) K₀.toGrothendieck U) := by
+    dsimp only [purTowerInverseImage]
+    infer_instance
+  refine ⟨?_, tower_scalar_comparison T _, ?_, tower_natural_comparison T _, ?_⟩
+  · let L := purTowerInverseImage (J := J₀.toGrothendieck) K₀.toGrothendieck U
+    have hi (i : I) : IsIso ((K₀.toGrothendieck.overPullback (Type (u + 1))
+        (U.obj (V i))).map (limit.post T.modules L)) := by
+      obtain ⟨B, hB, B', hB', b', hb', B'', hB'', hsq⟩ :=
+        tower_local_comparison K₀.toGrothendieck U T (V i) (b i) (hb i)
+      let Q := K₀.toGrothendieck.overPullback (Type (u + 1)) (U.obj (V i))
+      have := hκ
+      have : IsIso (Q.map (limit.post T.rings L)) := inferInstance
+      have he : Q.map (limit.post T.modules L) =
+          B'.inv ≫ Q.map (limit.post T.rings L) ≫ B''.hom := by
+        rw [← hsq, Iso.inv_hom_id_assoc]
+      rw [he]
+      infer_instance
+    apply tower_isIso_of_cover (limit.post T.modules L)
+      (IsTerminal.isTerminalObj U (⊤_ C) terminalIsTerminal) (fun i ↦ U.obj (V i))
+      (fun i ↦ U.map (a i)) _ hi
+    have hc := hUcover (⊤_ C) (Presieve.ofArrows V a) hcover
+    rw [Presieve.map_ofArrows] at hc
+    exact Precoverage.Saturate.of _ _ hc
+  · intro i
+    exact tower_local_comparison _ U T (V i) (b i) (hb i)
+  · intro θ hθ
+    apply limit.hom_ext
+    intro n
+    exact (hθ n.unop).trans (limit.post_π _ _ n).symm
 
 end CategoryTheory

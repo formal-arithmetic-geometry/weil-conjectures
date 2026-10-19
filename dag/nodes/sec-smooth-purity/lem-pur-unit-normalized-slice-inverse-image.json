@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-unit-normalized-slice-inverse-image",
+ "kind": "statement",
+ "title": "Unit-normalized inverse-image comparison on localized sheaf sites",
+ "statement": "Let $\\mathcal C$ and $\\mathcal D$ be small categories in universe $u$, equipped with Grothendieck topologies $J$ and $K$ [def-weil-pbc-sites-and-cohomology]. Let $U:\\mathcal C\\to\\mathcal D$ be continuous (precomposition carries sheaves to sheaves) and representably flat (for every $d$, the category of arrows $d\\to U(c)$ is cofiltered). Take set sheaves in universe $u+1$, and let $L$ be literally left Kan extension along $U^{\\mathrm{op}}$ followed by $K$-sheafification [lem-weil-pbc-left-exact-site-inverse-image-tensor]. For $V\\in\\mathcal C$, let $Q_V$ and $Q_{U(V)}$ denote restriction to the localized sites [def-pur-localized-ringed-site]. There exist a functor $H:\\operatorname{Sh}(\\mathcal C/V)\\to\\operatorname{Sh}(\\mathcal D/U(V))$, a natural family of presheaf maps $\\eta_F:F\\to (\\operatorname{Over.post}U)^{\\mathrm{op}}\\circ H(F)$, and a natural isomorphism $e:H\\circ Q_V\\cong Q_{U(V)}\\circ L$, such that for every global sheaf $F$, every $q:W\\to V$, and $x\\in F(W)$, the component of $e_F$ at $U(q)$ takes $\\eta_{Q_VF,q}(x)$ to the actual unit $(F\\to U^{\\mathrm{op}*}L(F))_W(x)$ of the Kan-extension/sheafification adjunction. Naturality of $\\eta$ means $\\eta_G\\circ f=H(f)\\circ\\eta_F$, with the precomposition on the right understood explicitly. No tower, coefficient rings, bases, or limit comparison is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF (lemma-localize-morphism), the inverse-image comparison and final product calculation; normalized by the Kan-extension/sheafification adjunction units."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Form the disjoint-union presheaf S(A)(W)=Σ(q:W→V),A(q) and its projection to the lifted representable hV. Let P be left Kan extension along U.op followed by K-sheafification. On the target slice take the fibre of P(S(A))→P(hV) at the restriction of the actual-unit image of idV. Naturality preserves fibres; separatedness of the base sheaf proves that the resulting subfunctor is a sheaf. This constructs H and its action on arrows explicitly.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), the inverse-image comparison and final product calculation; normalized by the Kan-extension/sheafification adjunction units."
+   }
+  },
+  {
+   "text": "Apply the actual unit to the pair (q,x). Naturality for the projection gives the fibre condition; naturality for the sigma map gives naturality of the family η. Both facts are equations of the Kan-extension unit followed by the sheafification unit.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), the inverse-image comparison and final product calculation; normalized by the Kan-extension/sheafification adjunction units."
+   }
+  },
+  {
+   "text": "For a restricted global sheaf F, the sigma presheaf is the binary product hV × F.obj, by its explicit projections and pair construction. Flat left Kan extension and sheafification preserve binary products. The second projection from each fibre of the preserved product is bijective: joint monicity proves injectivity and the product lift proves surjectivity. These maps form the desired natural isomorphism. Unit naturality for the second projection proves its normalization equation.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CF (lemma-localize-morphism), the inverse-image comparison and final product calculation; normalized by the Kan-extension/sheafification adjunction units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF product calculation, implemented directly by the sigma presheaf, preserved binary-product universal property, and actual-unit equations; X8, 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit compatible isomorphism between localized sheaf inverse image and inverse image restricted to a slice site",
+   "results": "Eight hits: restriction stalk formulas, sheafCongr unit, and module pullback of the unit object. No normalized slice inverse-image comparison.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\"",
+   "results": "Ten hits, including sheafPullbackConstruction.sheafPullback, sheafAdjunctionContinuous, sheafPullbackIso and finite-limit preservation; no slice comparison or its unit equation.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "slice.*unit|unit.*slice|localiz.*inverse.*image",
+   "results": "No relevant comparison in Mathlib. Repository SliceSiteLocalization gives unnormalized Nonempty natural isomorphisms for the older precoverage interface, in Type (max u v); it does not give the required unit equation. Blueprint search for slice inverse image unit found zero matching blueprint nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurInverseImageCompatibleFreeTower",
+  "date": "2026-10-18",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Integral twist paragraph, local compatible-basis argument; parent lem-pur-inverse-image-compatible-free-tower proof step 2, including the actual-unit normalization.",
+   "via": [
+    "lem-pur-inverse-image-compatible-free-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.NormalizedSliceInverseImage",
+  "file": "lean/Sheaf/CategoryTheory/Sites/NormalizedSliceInverseImage.lean",
+  "declaration": "CategoryTheory.unit_normalized_slice_inverse_image",
+  "statement": "theorem unit_normalized_slice_inverse_image\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (U : C ⥤ D) [U.IsContinuous J K] [RepresentablyFlat U] (V : C) :\n    ∃ (H : Sheaf (J.over V) (Type (u + 1)) ⥤\n          Sheaf (K.over (U.obj V)) (Type (u + 1)))\n      (η : ∀ F : Sheaf (J.over V) (Type (u + 1)),\n        F.obj ⟶ (Over.post U).op ⋙ (H.obj F).obj)\n      (e : J.overPullback (Type (u + 1)) V ⋙ H ≅\n        Functor.sheafPullbackConstruction.sheafPullback U (Type (u + 1)) J K ⋙\n          K.overPullback (Type (u + 1)) (U.obj V)),\n      (∀ {F G : Sheaf (J.over V) (Type (u + 1))} (f : F ⟶ G),\n        f.hom ≫ η G = η F ≫ Functor.whiskerLeft (Over.post U).op (H.map f).hom) ∧\n      ∀ (F : Sheaf J (Type (u + 1))) (W : C) (q : W ⟶ V) (x : F.obj.obj (op W)),\n        (e.hom.app F).hom.app (op (Over.mk (U.map q)))\n            ((η (F.over V)).app (op (Over.mk q)) x) =\n          ((U.op.lanAdjunction (Type (u + 1))).unit.app F.obj ≫\n            Functor.whiskerLeft U.op (toSheafify K (U.op.lan.obj F.obj))).app (op W) x",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261019T034350-L-425630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261019T034350-L-425630",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
