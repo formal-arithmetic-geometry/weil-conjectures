@@ -18,9 +18,146 @@
   "def-weil-etale-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=S\\setminus\\{s\\}$. Every $P_i$ is finite type over $S$ by the definition of $\\operatorname{alt}/S$, hence Noetherian. The opens $U$ and $V_i$ are Noetherian, in particular quasi-compact; since their targets are Noetherian their open immersions are quasi-compact, and $V_i\\to P_i$ is finite type. A finite-presentation morphism is finite type: its affine presentations have finitely many algebra generators, and it is quasi-compact by definition. Consequently every $T_t$ is Noetherian and finite type over $S$, and every $Q_{tj}$ is Noetherian and finite type over $S$ by composition. These observations justify all subsequent applications of the Noetherian cover and dominant-part results.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, pp.43--44, finiteness bookkeeping for the pointed-etale neighborhoods; Stacks Tags 01T6, 01OW, 01OZ, 01T0, 01T2 and 01TP"
+   }
+  },
+  {
+   "text": "The base changes $T_t\\times_SU\\to U$ are etale. For $u\\in U$, choose the neighborhood indexed by $t=u$. Its specified point $t^{\\prime}$ gives a point over $u$ in $T_u\\times_SU$ with residue field exactly $\\kappa(u)$, since restriction to an open changes no local ring. Thus this family is completely decomposed. Apply the completely-decomposed finite-subcover lemma to the Noetherian scheme $U$ to obtain a finite subset $F\\subseteq |U|$ for which it remains completely decomposed. If $U$ is empty take $F=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-open-immersion",
+    "lem-per-completely-decomposed-etale-finite-subcover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Corollary 2.2.4, p.27, applied to the punctured scheme; III Proposition 6.2, first paragraph, pp.43--44"
+   }
+  },
+  {
+   "text": "All schemes that will occur as covering sources can be regarded over $S$. Indeed $S_{\\mathrm{md}}=S$, and the etale comparison in the dominant-part lemma gives $(T_t)_{\\mathrm{md}}\\simeq T_t\\times_SS=T_t$. Hence $T_t$ is reduced and all its components dominate $S$. The etale residue-field lemma, applied on affine charts, gives finite residue extensions, so $T_t\\in\\operatorname{alt}/S$. Likewise $(P_i)_{\\mathrm{md}}=P_i$ and applying that comparison to the open etale immersion $V_i\\to P_i$ gives $(V_i)_{\\mathrm{md}}=V_i$; its generic residue extensions over $S$ are inherited from $P_i$. Finally a generic point of $Q_{tj}$ maps to a generic point of $T_t$, hence to that of $S$, and its residue degree over $S$ is finite by the tower formula. Thus $V_i$ and the composites $Q_{tj}\\to S$ are objects of $\\operatorname{alt}/S$.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.1.10 and 1.2.2--1.2.6, pp.24--25; Stacks Tag 00U3 for finite etale residue extensions"
+   }
+  },
+  {
+   "text": "For each $t\\in F$, Step 3 has placed $T_t$ in $\\operatorname{alt}/S$; it is Noetherian by Step 1. Apply alteration-site localization to $T_t\\to S$. It identifies $\\operatorname{alt}/T_t$ with the slice of $\\operatorname{alt}/S$ at $T_t$ and identifies their topologies. Consequently the given covering family $(Q_{tj}\\to T_t)_j$ is also a covering family with ambient category $\\operatorname{alt}/S$. This changes neither the schemes $Q_{tj}$ nor their specified boundaries.",
+   "uses": [
+    "lem-per-alteration-site-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Proposition 1.1.10, proof of Proposition 1.2.6, and 2.3.1, pp.24--28; the pointed-etale covering step in III Proposition 6.2, pp.43--44"
+   }
+  },
+  {
+   "text": "Fix $i$. Write $W_{it}=P_i\\times_ST_t$ for $t\\in F$. By the etale comparison of dominant parts and $(P_i)_{\\mathrm{md}}=P_i$, its dominant part equals this ordinary fibre product. Its projection to $P_i$ is etale, and it is an object of $\\operatorname{alt}/S$ by the categorical fibre-product statement. Consider $\\{V_i\\to P_i\\}\\cup\\{W_{it}\\to P_i:t\\in F\\}$. A point $p$ over $s$ lies in $V_i$ by hypothesis and lifts with identical residue field. If the image of $p$ is $u\\ne s$, Step 2 supplies $t\\in F$ and $z\\in T_t$ over $u$ with $\\kappa(z)=\\kappa(u)$. Compose $\\operatorname{Spec}\\kappa(p)\\to\\operatorname{Spec}\\kappa(u)\\cong\\operatorname{Spec}\\kappa(z)\\to T_t$ (the point $z$ of Step 2, which need not be the specified point $t^{\\prime}$ over $t$). Together with the point $p$ of $P_i$, the fibre-product universal property gives a section over $\\operatorname{Spec}\\kappa(p)$ of the fibre of $W_{it}\\to P_i$. Its image has residue field $\\kappa(p)$: the section makes that residue field embed back into $\\kappa(p)$ over $\\kappa(p)$, forcing equality. The family is therefore completely decomposed etale, hence $\\ell^{\\prime}$-decomposed (degree $1$) and covering by the definition of the topology.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-per-alteration-cover-calculus",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-pc-fibre-product",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Correction of III Proposition 6.2, p.44: replace its II 4.1.1 invocation by II 2.1.1--2.1.2 and 2.3.1, pp.26--28, on each $P_i$"
+   }
+  },
+  {
+   "text": "For each $i,t$, pull the covering $(Q_{tj}\\to T_t)_j$ of Step 4 back along $W_{it}\\to T_t$ inside $\\operatorname{alt}/S$. The cover calculus identifies its sources $R_{itj}$ with the reduced dominant parts of the usual fibre products $W_{it}\\times_{T_t}Q_{tj}$, and says they cover $W_{it}$. Compose with the covering of $P_i$ in Step 5, keeping $V_i$ on its branch, and then compose with $(P_i\\to S)_i$. The resulting finite family $\\{V_i\\to S\\}_i\\cup\\{R_{itj}\\to S\\}_{i,t,j}$ is covering. Each $R_{itj}$ has its projection to $Q_{tj}$. Hence this covering family refines $\\{V_i\\to S\\}_i\\cup\\{Q_{tj}\\to S\\}_{t,j}$, whose generated sieve contains the covering sieve just constructed. A supersieve of a covering sieve is covering: its pullback along each arrow of the smaller sieve contains the identity and is therefore maximal, so the transitivity axiom applies. No regularity of $R_{itj}$ is claimed or needed.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "def-per-prime-to-ell-alteration-topology",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.6 and 2.3.1, pp.25,28; composition and refinement replace the unsupported prime-to-ell closed-fibre shrinking step in III 6.2, p.44"
+   }
+  },
+  {
+   "text": "The covering sources $V_i$ and $Q_{tj}$ are regular by the hypotheses, and are Noetherian by Step 1. The regular-normal-components theorem makes each a finite disjoint union of open-and-closed integral components. Its reduced component scheme is precisely that open subscheme; because the whole source is an object of $\\operatorname{alt}/S$ by Step 3, every nonempty component is dominant over $S$ and has finite generic residue degree. The component-cover clause of the alteration calculus and composition therefore replace the finite covering of Step 6 by the finite family of these reduced dominant components. Empty sources contribute no components. Regularity on each component follows from the unchanged local rings of an open subscheme.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-weil-open-immersion",
+    "def-weil-regular-scheme",
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 6.2, p.44, disjoint integral regular components near the special fibre; Stacks Tags 0569 and 033M for regularity, normality and components"
+   }
+  },
+  {
+   "text": "Restrict each specified boundary to each selected open-and-closed component $C$ of its source $X$. Every integral boundary component of $X$ is contained in exactly one such $C$, since its irreducible support cannot meet two disjoint opens. Discard the boundary components lying outside $C$. On $C$ the ideal of the boundary is the same effective Cartier radical ideal as on $X$, all nonempty intersections have the same local rings, and the ambient and intersection dimensions at their points are unchanged. Thus all clauses of the strict-normal-crossings definition hold after restriction, including the empty-boundary case. The support is the intersection of the old support with $C$, and so remains contained in the inverse image of $Z$, since the composite $Q_{tj}\\to S$ pulls $Z$ back to the inverse image of $e_t^{-1}Z$. These are precisely the sources and boundaries asserted in the conclusion, together with the finite $F$ already obtained in Step 2.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 6.1--6.2, pp.43--44; VIII 4.1.2--4.1.4(i) and Remark 4.2.2(i), pp.117--119, restriction of the defining boundary conditions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-per-prime-to-ell-alteration-topology",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-topos",
+  "def-weil-regular-scheme",
+  "lem-per-alteration-cover-calculus",
+  "lem-per-alteration-site-localization",
+  "lem-per-completely-decomposed-etale-finite-subcover",
+  "lem-per-dominant-part-coreflection",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "III Proposition 6.2, printed pp.43--44, corrected using II 1.2.5--1.2.6, 2.1.1--2.1.2, Corollary 2.2.4 and 2.3.1; the prime-to-ell case is proved by explicit gluing, not II 4.1.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +179,108 @@
    "results": "No hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, CategoryTheory.GrothendieckTopology",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsEtale'; no hits",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue regular prime-to-ell alteration covers on a local scheme using a regular open neighborhood of the closed fibre and completely decomposed etale neighborhoods of the punctured scheme",
+   "results": "; AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.Cover.gluedCover_J, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S; inspected returned signatures: ordinary scheme gluing and etale-site declarations do not state the prime-to-ell alteration gluing assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|completely.decomposed|closed.fibre.*cover",
+   "results": "; no hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite covers in the alteration topology glued from regular neighborhoods of a closed fibre and pointed etale neighborhoods of every nonclosed point",
+   "results": "; AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.Scheme.Cover.gluedCover_J, AlgebraicGeometry.Scheme.Cover.fromGlued_open_map, AlgebraicGeometry.Scheme.Cover.ι_fromGlued, AlgebraicGeometry.Scheme.Cover.gluedCover_U, AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding; inspected returned signatures: ordinary scheme gluing and etale-site declarations do not state the prime-to-ell alteration gluing assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich completely decomposed etale finite subcover and composition of prime to ell alteration covering families on a noetherian local scheme",
+   "results": "; AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans, AlgebraicGeometry.Scheme.AffineCover; inspected returned signatures: ordinary scheme gluing and etale-site declarations do not state the prime-to-ell alteration gluing assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"etaleTopology\"",
+   "results": "; AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.ofArrows_mem_smallEtaleTopology_iff, AlgebraicGeometry.Scheme.AffineEtale.instIsCoverDenseEtaleSpecSmallEtaleTopology, AlgebraicGeometry.Scheme.AffineEtale.instIsDenseSubsiteEtaleTopologySmallEtaleTopologySpec, AlgebraicGeometry.Scheme.AffineEtale.instIsOneHypercoverDenseEtaleSpecTopologySmallEtaleTopology, AlgebraicGeometry.Scheme.instHasSheafifyAffineEtaleTopology; inspected returned signatures: ordinary scheme gluing and etale-site declarations do not state the prime-to-ell alteration gluing assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "over_toGrothendieck_eq_toGrothendieck_comap_forget",
+   "results": "; Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned ordinary sites, scheme covers or ring localizations do not identify alteration slice sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generated Grothendieck topology commutes with localization to the over category for a precoverage stable under base change",
+   "results": "; CategoryTheory.Pretopology.toGrothendieck, CategoryTheory.GrothendieckTopology.over, CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget, AlgebraicGeometry.Scheme.overPretopology, CategoryTheory.Coverage.toGrothendieck, AlgebraicGeometry.Scheme.overGrothendieckTopology_eq_toGrothendieck_overPretopology, CategoryTheory.Precoverage.toGrothendieck, AlgebraicGeometry.Scheme.overGrothendieckTopology",
+   "date": "2026-10-18",
+   "verdict": "candidate: generic generated-topology localization only; the alteration-category equivalence and its compatibility with generators remain to prove"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"over_toGrothendieck_eq_toGrothendieck_comap_forget\"",
+   "results": "; CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget",
+   "date": "2026-10-18",
+   "verdict": "candidate: generic generated-topology localization only; the alteration-category equivalence and its compatibility with generators remain to prove"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization to an over category of the Grothendieck topology generated by a pullback stable precoverage equals the topology generated by the pulled back precoverage",
+   "results": "; CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget, AlgebraicGeometry.Scheme.overGrothendieckTopology_eq_toGrothendieck_overPretopology, CategoryTheory.GrothendieckTopology.over, CategoryTheory.MorphismProperty.grothendieckTopology_eq_toGrothendieck_pretopology, AlgebraicGeometry.Scheme.overGrothendieckTopology, CategoryTheory.Precoverage.toGrothendieck_toCoverage, AlgebraicGeometry.Scheme.smallGrothendieckTopologyOfLE, AlgebraicGeometry.Scheme.mem_overGrothendieckTopology",
+   "date": "2026-10-18",
+   "verdict": "candidate: generic generated-topology localization only; the alteration-category equivalence and its compatibility with generators remain to prove"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|completely.decomposed|PrimeToEll",
+   "results": "; no hits",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned ordinary sites, scheme covers or ring localizations do not identify alteration slice sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime to ell alteration site over T is the localized alteration site over S when T is generically finite over S",
+   "results": "; AlgebraicGeometry.StructureSheaf.Localizations, IsLocalization.AtPrime.isPrime_map_of_liesOver, IsLocalization.liesOver_of_isPrime_of_disjoint, IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFinite.of_isIntegral_of_finiteType, Localization.AtPrime.instAlgebraOfLiesOver.congr_simp",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned ordinary sites, scheme covers or ring localizations do not identify alteration slice sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Over\", \"toGrothendieck\"",
+   "results": "; CategoryTheory.Precoverage.toGrothendieck, CategoryTheory.GrothendieckTopology.toGrothendieck_toPrecoverage_le, CategoryTheory.Precoverage.toGrothendieck_monotone, CategoryTheory.Precoverage.le_toPrecoverage_toGrothendieck, CategoryTheory.Precoverage.galoisConnection_toGrothendieck_toPrecoverage, CategoryTheory.Precoverage.toGrothendieck_mono, CategoryTheory.Precoverage.toGrothendieck_toPretopology_eq_toGrothendieck, CategoryTheory.Precoverage.toGrothendieck_le_iff_le_toPrecoverage",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned ordinary sites, scheme covers or ring localizations do not identify alteration slice sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme S and an object T of alt/S, alt/T is equivalent to the slice of alt/S over T and the prime to ell alteration topologies agree",
+   "results": "; AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.Scheme.smallGrothendieckTopology, AlgebraicGeometry.Scheme.overPretopology, AlgebraicGeometry.Scheme.overGrothendieckTopology, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.Scheme.instOverBind, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned ordinary sites, scheme covers or ring localizations do not identify alteration slice sites"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-complete-local-descent",
@@ -72,5 +307,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-cover-closed-fibre-shrink",
+  "worker": "stage1",
+  "summary": "Proved finite punctured completely-decomposed extraction, checked all sources and the ambient alteration categories, constructed a completely-decomposed covering on each P_i, and composed/refined covers before taking regular clopen components and restricting SNC boundaries. Reused existing DAG lemmas and isolated one genuine comparison lemma, alteration-site localization, as a statement-only node. The generic Mathlib localization theorem is only a candidate because the scheme-category equivalence must also be proved. Preserved the corrected statement and source warning about II 4.1.1. All cited statements read and quoted in citations.json.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3 (Verdier duality), through the IX 1.1 uniformization input: realizes the closed-fibre gluing portion of III Proposition 6.2 used by lem-per-uniformization-complete-local-descent; preserves the perverse-curve unit and chapter route.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-Noetherian scheme decomposition into clopen integral components; the curve-perverse unit has no scheme-component theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-fd6ab786d",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-fd6ab786d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new node and every cited statement in full, and checked them against ILO II 1.1.10, II 2.2.3-2.2.4, II 2.3.1-2.3.2, II 4.1.1 (p.31, alt only) and III 6.2 (pp.43-44). The item statement is unchanged from live. It is the corrected inductive gluing, with pointed étale T_t at the non-closed points and an open V_i containing the closed fibre, not the false ℓ′ shrink RETURNed in Q142, and it never uses II 4.1.1. Steps 1-3 check: everything is Noetherian and finite type, F comes from the completely-decomposed finite subcover on U (F empty when S is a field), and the étale clause of the dominant-part lemma gives (T_t)_md = T_t, (V_i)_md = V_i and (W_it)_md = W_it. Step 4 is the only use of the new node. Step 5's family {V_i, P_i×_S T_t} on each P_i is completely decomposed, so it is a type (i) generator. Step 6 composes the covers and proves the refinement through sieve axiom (iii). Step 7 takes the clopen integral components. Step 8 restricts the SNC boundary, checked against every clause of def-trf-strict-normal-crossings-boundary. FIX: Step 5 composed with 'the specified point of T_t', but after the finite subcover the point over u is Step 2's z, not t′. The corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-alteration-cover-closed-fibre-shrink.json; only that step's text changed. New node lem-per-alteration-site-localization is true. An X in alt/S mapping to T sends its generic points to generic points of T, because T_η is zero-dimensional (as in II 1.1.10); X→T is finite type since X is Noetherian. The generators depend only on the arrows into X and are stable under pullback (II 2.3.2), so the localized topology equals the ℓ′-alteration topology on alt/T. I tested T empty, S a field and S a DVR. The node is statement-only and self-contained, the Mathlib candidate over_toGrothendieck_eq_toGrothendieck_comap_forget is correctly recorded as a candidate and not a match, and a DAG grep found no existing node with this statement. It is strictly smaller than the item. Accepted tool use: rem-pc-regular-normal, a generic scheme fact. Batch-5 flag on lem-per-alteration-cover-calculus: I recomputed the closure from both targets without the item, and the calculus node and lem-per-generic-fibre-finiteness-criterion are already in it. The delivery adds only the new node and no trf or pod node. lem-trf-finite-residue-point-closed-in-fibre is the generic fact that a point with finite residue extension is closed in its fibre, not part of the trace formula or Poincaré duality, so the flag is accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
