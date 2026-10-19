@@ -35,45 +35,28 @@
    "elementary": false
   },
   {
-   "text": "For (ii), fix an arbitrary étale $A$-module sheaf $N$ and put $C=K'\\otimes_A^{\\mathbf L}N[0]$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\nu_T$, the constant commutative ring sheaves and the canonical constant-scalar identification. Its sites are taken small relative to the module universe as in [def-weil-pbc-site-comparison-morphism]. The exact-functor derived comparison identifies its derived pullback with $F$, yielding\n$$\nFC\\cong FK'\\otimes_A^{\\mathbf L}(FN)[0]\n\\cong K\\otimes_A^{\\mathbf L}(FN)[0].\n$$\nThe second isomorphism uses the given $K\\cong FK'$. The complex $(FN)[0]$ is a module sheaf in degree zero, so the assumed Tor bound on $K$, unpacked by [def-weil-proetale-tor-amplitude], gives $\\mathcal H^r(FC)=0$ for $r\\notin[a,b]$. The tensor-comparison theorem applies to the unbounded derived categories; no bounded-below assertion about $C$ is used.",
+   "text": "For clause (ii), put A = A_{E,n}, which is finite for n >= 1. Regard K' as an object of D+ using the given bounded-below hypothesis. The ordered interval follows from HasProEtaleTorAmplitude. Apply the reverse implication of lem-exc-comparison-tor-interval. Its intrinsic realization after the bounded-below site pullback is canonically isomorphic to the derived functor of their composite, by mapDerivedCategoryCompIso. Compose this isomorphism with the given K isomorphism. Transport the pro-etale Tor predicate along it: any representative isomorphism Q(L) to the iterated pullback composes with its inverse to give Q(L) to K, and hence the original universal K-flat tensor test supplies the identical vanishing conclusion. This proves the premise of the reverse implication and therefore the etale Tor bound. No new constructibility or tensor-boundedness hypothesis is introduced. The composition isomorphism is the already proved source-library declaration CategoryTheory.Functor.mapDerivedCategoryCompIso; no derived-Kan-extension theorem is used.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-pbc-site-comparison-morphism",
+    "lem-exc-comparison-tor-interval",
     "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), specializing to the comparison morphism; blueprint Proof (ii), displayed tensor comparison"
-   }
-  },
-  {
-   "text": "For each $r\\notin[a,b]$, exact comparison with cohomology identifies $F\\mathcal H^r(C)$ with the zero sheaf from the preceding tensor calculation. Apply the sheaf-level unit isomorphism of [prop-weil-pbc-site-comparison-finite-level] to $M=\\mathcal H^r(C)$: it gives $M\\cong\\nu_{T,*}FM=0$. The last equality follows directly from restriction, $(\\nu_{T,*}0)(U)=0(U)=0$, in [def-weil-pbc-site-comparison-morphism]. Thus $\\mathcal H^r(K'\\otimes_A^{\\mathbf L}N[0])=0$ outside $[a,b]$ for every étale module sheaf $N$. By [def-kun-tor-amplitude] this is exactly the étale Tor-amplitude assertion of (ii). This argument works cohomology sheaf by cohomology sheaf, so the bounded-below hypothesis on $K'$ suffices without imposing any new hypothesis on its derived tensor.",
-   "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-kun-tor-amplitude"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-comparison-tor-amplitude.md",
-    "place": "Proof (ii), final vanishing-reflection argument, repaired to use the sheaf unit rather than applying the bounded-below derived unit to an unbounded tensor"
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-cor-sf-direct-image-ctf/lem-exc-comparison-tor-interval.md",
+    "place": "Converse implication, specialized to the finite ring A_{E,n}; canonical derived composition and representative-isomorphism transport."
    }
   }
  ],
  "proof_deps": [
-  "def-kun-tor-amplitude",
-  "def-weil-pbc-site-comparison-morphism",
   "def-weil-proetale-tor-amplitude",
+  "lem-exc-comparison-tor-interval",
   "lem-sf-intrinsic-comparison-constructibility",
-  "lem-sf-intrinsic-comparison-tor-amplitude",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "lem-sf-intrinsic-comparison-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-comparison-tor-amplitude.md",
-  "place": "G1: clause (i) implemented through intrinsic realization, constructibility and flat-model components; clause (ii) remains open."
+  "place": "G7: retain the existing clause (i) proof; clause (ii) reuses the existing general finite-ring comparison Tor-interval equivalence with canonical derived-composition and isomorphism transport."
  },
  "mathlib_searches": [
   {
@@ -307,12 +290,7 @@
   "lem-sf-flat-model",
   "lem-exc-constant-inverse-image-flat",
   "lem-sf-proetale-constructible-origin",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+  "lem-pc-bounded-above-flat-kflat-site"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -348,11 +326,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "C-dc4c0",
+  "group": "G7",
   "result": "pass",
-  "landing": "20261019T002605-L-2157182",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261019T093424-L-2309621",
+  "kind": "proof",
+  "note": "independent cc review: delivered ComparisonTorAmplitude.lean + node vs clones/live; clause (ii) proved via the converse of ProEtale.comparison_torAmplitudeIn_iff + mapDerivedCategoryCompIso; compiles 3.1 s; axioms as expected (sorryAx only from cited sorry dep); 26/28 importers compile, 2 fail identically against the published build"
  }
 }

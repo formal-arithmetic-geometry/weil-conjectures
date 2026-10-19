@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
@@ -25,8 +24,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ComparisonTorInterval
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Paper.IntrinsicComparisonConstructibility
 import Sheaf.Paper.IntrinsicComparisonTorAmplitude
 import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
@@ -104,16 +103,15 @@ theorem finiteCoefficient_comparison_preserves_torAmplitude
 Source: blueprint `sec-six-functors/sk-prop-sf-rf-shriek-preservation/`
 `lem-sf-comparison-tor-amplitude.md`, (ii) (blueprint: lem-sf-comparison-tor-amplitude).
 
-Proof: identify the constant coefficient rings as in clause (i), and identify exact
-termwise comparison with its total derived functor. For every étale module N in degree
-zero put C = K' ⊗ᴸ N. The unbounded derived tensor-pullback comparison
-(lem-weil-pbc-ringed-topoi-derived-tensor-pullback) identifies its pullback with
-K ⊗ᴸ (ν* N)[0], using the given isomorphism. The assumed pro-étale Tor bound makes every
-cohomology sheaf outside [a,b] zero. Exactness identifies these with the pullbacks of the
-cohomology sheaves of C. The sheaf-level unit of
-prop-weil-pbc-site-comparison-finite-level is an isomorphism, and comparison direct image
-is restriction, hence sends zero to zero. It therefore reflects vanishing of each
-cohomology sheaf of C. This proves the étale Tor condition. No boundedness of C is used. -/
+Proof: A = A_{E,n} is finite for n ≥ 1. Regard K' as an object of D⁺ by the
+bounded-below hypothesis; the ordered interval a ≤ b is part of HasProEtaleTorAmplitude. Apply
+the reverse implication of lem-exc-comparison-tor-interval
+(ProEtale.comparison_torAmplitudeIn_iff). Its pro-étale side is the intrinsic realization
+after the bounded-below site pullback, canonically isomorphic to the derived functor of
+the composite (mapDerivedCategoryCompIso). Compose with the given K ≅ ν*K'; any
+representative isomorphism Q(L) ≅ ν*K' composed with its inverse gives Q(L) ≅ K, so the
+assumed K-flat tensor test on K yields the same vanishing. This is the premise of the
+reverse implication, hence the étale Tor bound. -/
 theorem finiteCoefficient_comparison_reflects_torAmplitude
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hlp : l ≠ D.p)
@@ -132,6 +130,19 @@ theorem finiteCoefficient_comparison_reflects_torAmplitude
           (Padic.finite_coefficientExtensionRing l E n hn)).obj K') :
     Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K' := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E n
+  have : Finite A := Padic.finite_coefficientExtensionRing l E n hn
+  let F := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
+  let G := ProEtale.finiteCoefficientIntrinsicRealization T A
+  let Kplus : _root_.DerivedCategory.Plus
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
+    ⟨K', _hPlus⟩
+  apply (ProEtale.comparison_torAmplitudeIn_iff A T a b _hTor.1 Kplus).mpr
+  have ecomp := (Functor.mapDerivedCategoryCompIso F G).app K'
+  have e : K ≅ G.mapDerivedCategory.obj (F.mapDerivedCategory.obj K') :=
+    _e ≪≫ ecomp
+  refine ⟨_hTor.1, ?_⟩
+  intro L P hL f hf hP M i hi
+  exact _hTor.2 L P (hL.map (fun eL ↦ eL ≪≫ e.symm)) f hf hP M i hi
 
 end AlgebraicGeometry
