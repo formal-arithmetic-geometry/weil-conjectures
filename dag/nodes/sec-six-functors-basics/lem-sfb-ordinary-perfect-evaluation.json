@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-ordinary-perfect-evaluation",
+ "kind": "statement",
+ "title": "Ordinary evaluation for a bounded finite-projective complex",
+ "statement": "For a ringed site with independent universes, a bounded complex K carrying a degreewise finite-free-retract package, and any complex F, the specified ordinary signed total evaluation ringedSiteOrdinaryEvaluation K F is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, final paragraph: finite diagonal evaluation calculation"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Project the degree n ordinary evaluation to each Hom-product factor. Outside the finite support interval of K the factor is zero; on the factor indexed by a supported term, the map is the canonical sheaf-module evaluation F^(a+n) tensor Hom(K^a,O) to Hom(K^a,F^(a+n)).",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite free term the canonical evaluation is inverted by the finite dual-basis sum. Naturality restricts this inverse along the given finite-free retraction, so every supported diagonal factor is invertible. Since the diagonal is finite, the total degree map is invertible; the specified ordinary map is already a chain map, hence the complex morphism is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-duality-maps",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pc-finite-projective-internal-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a bounded complex of finite projective sheaves, ordinary total tensor with its dual equals the internal Hom complex",
+   "results": "dualTensorHomEquivOfBasis; dualTensorHomEquiv; HomologicalComplex.tensorObj; PiTensorProduct.dualDistribEquiv; HomologicalComplex.monoidalCategoryStruct; map_dualTensorHom; HomologicalComplex.instHasTensorTensorUnit_1; PiTensorProduct.dualDistrib.",
+   "date": "2026-10-20",
+   "verdict": "The module-level contraction and native total tensor are useful ingredients but do not state the independent-universe ordinary internal-Hom evaluation for sheaf complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsDualizable",
+   "results": "No hits: unknown identifier CategoryTheory.IsDualizable in Mathlib index.",
+   "date": "2026-10-20",
+   "verdict": "The source-library dualizable APIs were read directly; they do not identify the independent-universe specified ordinary evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*Evaluation|Evaluation.*IsIso",
+   "results": "Mathlib/CategoryTheory/Shift/SingleFunctors.lean:201; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:120.",
+   "date": "2026-10-20",
+   "verdict": "No match for ordinary finite-projective evaluation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "date": "2026-10-20",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-strict-perfect-evaluation",
+   "place": "Proof, second paragraph: finite diagonal ordinary evaluation",
+   "via": [
+    "lem-sfb-perfect-evaluation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteOrdinaryPerfectEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteOrdinaryPerfectEvaluation.lean",
+  "declaration": "CategoryTheory.ringedSiteOrdinaryEvaluation_isIso",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-20",
+  "statement": "theorem ringedSiteOrdinaryEvaluation_isIso\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (K : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n))\n    (pkg : SheafOfModules.StrictPerfectCoefficientPackageOnSite _ K)\n    (F : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :\n    IsIso (ringedSiteOrdinaryEvaluation.{c, v, r} J R K F)"
+ },
+ "split_report": {
+  "date": "2026-10-20",
+  "item": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "worker": "stage3",
+  "summary": "The independent finite diagonal ordinary evaluation calculation remains as the sole open result.",
+  "blueprint": "Tag 08JJ final paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T231226-L-563203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T231226-L-563203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

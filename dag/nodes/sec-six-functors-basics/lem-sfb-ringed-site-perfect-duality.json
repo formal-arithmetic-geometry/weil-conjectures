@@ -20,164 +20,57 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical maps $b_P$ and $e_{P,N}$ of [lem-sfb-ringed-site-duality-maps]; the comparison in the statement is $e_{P,N}$ preceded by the symmetry $P^\\vee\\otimes^{\\mathbf L}N\\cong N\\otimes^{\\mathbf L}P^\\vee$. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], $P^\\vee|_U=R\\mathcal Hom(P|_U,\\mathcal O_U)$, and the canonical maps restrict to the canonical maps of the slice site by [lem-sfb-ringed-site-duality-maps]. By the local perfectness condition of [def-weil-pbc-strict-perfect-coefficient-package], every site object has a covering on each member of which $P$ is represented by a bounded complex $E$ of finite-free summands. Fix one such member and work on its localized ringed site; write its coefficient ring sheaf again as $\\mathcal O$. Bounds and splitting ranks will be chosen only on this member.",
+   "text": "Extract a locally strictly perfect complex K and the isomorphism P to QK from hP. Choose a normalized duality presentation using the existing canonical-map existence theorem.",
    "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-sfb-ringed-site-duality-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, first paragraph; Tag 08JB, lemma-restriction-RHom-to-U"
-   }
+   "elementary": true
   },
   {
-   "text": "For any term $T=E^i$, choose its splitting $T\\xrightarrow{i}\\mathcal O^{\\oplus r}\\xrightarrow{p}T$. With the standard sections $u_j$ and coordinate functionals $u_j^*$ put $t_j=p(u_j)$ and $\\lambda_j=u_j^*i$, so $\\sum_jt_j\\lambda_j=1_T$. The sheaf Hom and tensor definitions [def-pur-sheaf-hom, def-pur-sheaf-tensor-product] give, for every module sheaf $B$, mutually inverse maps\n$$B\\otimes T^\\vee\\longrightarrow\\mathcal Hom(T,B),\\quad b\\otimes\\phi\\longmapsto(t\\mapsto b\\phi(t)),\\qquad h\\longmapsto\\sum_jh(t_j)\\otimes\\lambda_j.$$\nIndeed their composites send $h$ to $h\\sum_jt_j\\lambda_j=h$ and $b\\otimes\\phi$ to $b\\otimes\\sum_j\\phi(t_j)\\lambda_j=b\\otimes\\phi$. All formulas are compatible with further restriction. The dual maps $p^\\vee,i^\\vee$ exhibit $T^\\vee$ as a summand of $(\\mathcal O^{\\oplus r})^\\vee=\\mathcal O^{\\oplus r}$. The double-dual map $t\\mapsto(\\phi\\mapsto\\phi(t))$ has inverse $\\alpha\\mapsto\\sum_j\\alpha(\\lambda_j)t_j$. Finally $\\mathcal Hom(T,-)$ is a retract, naturally in its argument, of $\\mathcal Hom(\\mathcal O^{\\oplus r},-)=(-)^{\\oplus r}$. The latter is exact by [lem-sc-finite-free-internal-hom-exact]. Applying the retraction to any short exact sequence splits its kernels, images and cokernels, so its retract sequence is exact too. Likewise $-\\otimes T$ and $-\\otimes T^\\vee$ are retracts of the finite direct-sum functor and are exact; hence $T,T^\\vee$ are flat by [def-pc-flat-sheaf-modules].",
+   "text": "The dual local-model lemma gives local strict perfectness of I(Hom(K,I(O[0]))). The fixed Hom resolution comparison identifies the derived dual of QK with QHom(K,I(O[0])). Compose with the localized outer augmentation, which is an isomorphism since that augmentation is a quasi-isomorphism. Transport the source along P to QK. This constructs the representative required by the literal derived perfectness definition.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product",
-    "lem-sc-finite-free-internal-hom-exact",
-    "def-pc-flat-sheaf-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, final finite-free/direct-summand calculation; dual splittings and termwise evaluation"
-   }
-  },
-  {
-   "text": "Let $M$ be any complex on this slice, with no boundedness hypothesis. For the K-injective resolution $M\\to I(M)$ used by [def-pur-derived-internal-hom], the bounded-exact-source lemma [lem-pc-bounded-exact-term-hom-quasi-iso] and the exactness of every $\\mathcal Hom(E^i,-)$ from step 2 show that $\\mathcal Hom^\\bullet(E,M)\\to\\mathcal Hom^\\bullet(E,I(M))$ is a quasi-isomorphism. Thus the ordinary Hom complex canonically represents $R\\mathcal Hom(QE,QM)$. By [def-pur-hom-complex] its degree $n$ term is $\\bigoplus_i\\mathcal Hom(E^i,M^{i+n})$: the product is a finite sum because only finitely many $E^i$ are nonzero. Its differential is $d_Mf-(-1)^nf d_E$. This comparison is the actual map induced by the resolution augmentation, so it is natural in $M$ and in chain maps of $E$.",
-   "uses": [
+    "lem-sfb-perfect-dual-local-model",
     "def-pur-derived-internal-hom",
-    "lem-pc-bounded-exact-term-hom-quasi-iso",
-    "def-pur-hom-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH, lemma-Rhom-strictly-perfect, ordinary-to-derived Hom comparison; bounded exact-source proof instead of its local-actual-map argument"
-   }
-  },
-  {
-   "text": "Apply step 3 with $M=\\mathcal O[0]$. Then $P^\\vee$ on this slice is represented by $D=\\mathcal Hom^\\bullet(E,\\mathcal O[0])$, where\n$$D^q=(E^{-q})^\\vee,\\qquad d_D^q=(-1)^{q+1}(d_E^{-q-1})^\\vee.$$\nThe differential follows by substituting the zero differential of $\\mathcal O[0]$ in [def-pur-hom-complex]. If $E$ is supported in $[a,b]$, then $D$ is supported in $[-b,-a]$. Step 2 gives finite-free-summand splittings for every $D^q$, so $D$ is strictly perfect. Applying the same argument to $D$ computes the derived double dual by its ordinary double Hom complex. This proves local perfectness of $P^\\vee$, without imposing a global interval on $P$.",
-   "uses": [
     "def-pur-hom-complex",
-    "def-weil-pbc-strict-perfect-coefficient-package"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, second paragraph, model of the dual and finite-free-summand dual terms"
-   }
-  },
-  {
-   "text": "Under the two ordinary-Hom comparisons of steps 3 and 4, the canonical $b_P$ of [lem-sfb-ringed-site-duality-maps] is the chain map\n$$\\beta^i:E^i\\longrightarrow(E^i)^{\\vee\\vee},\\qquad \\beta^i(x)(\\phi)=(-1)^i\\phi(x).$$\nThe sign is the Koszul interchange of degrees $i$ and $-i$. To check the chain condition explicitly, [def-pur-hom-complex] gives the double-dual differential $d_{DD}^i=-(d_E^i)^{\\vee\\vee}$, and therefore $d_{DD}^i\\beta^i(x)(\\psi)=(-1)^{i+1}\\psi(d_Ex)=\\beta^{i+1}(d_Ex)(\\psi)$. Each $\\beta^i$ is invertible by step 2, with inverse $\\alpha\\mapsto(-1)^i\\sum_j\\alpha(\\lambda_j)t_j$. Consequently the canonical bidual map is an isomorphism on this slice, including in odd degrees and in characteristic two. The two augmentation quasi-isomorphisms required by the normalization clause for $b$ in [lem-sfb-ringed-site-duality-maps] are those of step 3 (with $M=\\mathcal O[0]$) and of step 4 (the same argument applied to $D$).",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, second paragraph: canonical bidual map is termwise evaluation up to sign; Tag 0A97 for the canonical map"
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat representative $F\\to M$ of the arbitrary restriction of $N$ by [lem-pc-kflat-resolution]. By step 2, the terms of $D$ are flat; $D$ is bounded above by step 4. Thus [lem-pc-bounded-above-flat-kflat-site] makes $D$ K-flat. Both $D$ and $F$ are therefore in the resolving class of [lem-weil-pbc-site-derived-tensor-descent], so $N\\otimes^{\\mathbf L}P^\\vee$ on this slice is represented by $\\operatorname{Tot}(F\\otimes D)$ with its canonical tensor comparison. Step 3 also identifies $R\\mathcal Hom(P,N)$ with $\\mathcal Hom^\\bullet(E,F)$. None of these uses boundedness of $F$ or $N$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, final paragraph: choose a K-flat representative of M; Tags 06YS and 06YQ for K-flat resolutions and bounded-above flat complexes"
-   }
-  },
-  {
-   "text": "In these models the canonical comparison $e_{P,N}$ of [lem-sfb-ringed-site-duality-maps] has on the $(p,q)$ summand in degree $n=p+q$ the evaluation map\n$$F^p\\otimes(E^{-q})^\\vee\\longrightarrow\\mathcal Hom(E^{-q},F^p),\\qquad y\\otimes\\phi\\longmapsto(x\\mapsto y\\phi(x)).$$\nIts other Hom projections are zero. Step 2 proves each displayed map invertible for arbitrary $F^p$. For fixed $n$, the sum over $q$ is finite since $D$ is bounded; it is exactly the same finite indexing set on both sides. Thus the degree-$n$ comparison is an isomorphism. For the differential check, [def-pc-tensor-complex-sheaves] and step 4 give $d_Fy\\otimes\\phi+(-1)^{p+q+1}y\\otimes(\\phi d_E)$. Evaluation takes this to $d_Ff-(-1)^{p+q}fd_E$, precisely the differential of [def-pur-hom-complex]. This is the actual graded evaluation used in the canonical map, rather than an unspecified isomorphism between the objects. Preceding it by the Koszul symmetry $\\phi\\otimes y\\mapsto(-1)^{pq}y\\otimes\\phi$ gives exactly the comparison with the tensor order in the statement, also an isomorphism. This symmetry is its own inverse. For its chain condition, the coefficients of $d_Fy\\otimes\\phi$ and $y\\otimes d_D\\phi$ after either composite are respectively $(-1)^{pq}$ and $(-1)^{pq+p}$, directly from the tensor differential. The hypotheses of the normalization clause of [lem-sfb-ringed-site-duality-maps] hold here: $F$ and $D$ are K-flat by step 6, and the two augmentation maps are quasi-isomorphisms by step 3 (with $M=\\mathcal O[0]$ and $M=F$).",
-   "uses": [
-    "lem-sfb-ringed-site-duality-maps",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JJ, last three displays and final sentence, including the evaluation map; section-hom-complexes for signs"
-   }
-  },
-  {
-   "text": "Local invertibility implies global invertibility. Restriction of module sheaves to slices is exact by [lem-pur-site-restriction-module-adjunction-exact], so it is computed termwise on complexes, sends quasi-isomorphisms to quasi-isomorphisms, and commutes with kernels, images and hence cohomology; in particular the restriction of $Q(f)$ to a slice is $Q(f|_U)$. The small family of all slice objects chosen in step 1 covers the site in the sense of [lem-sfb-sheaf-cover-local-isomorphism]: for each object its chosen covering arrows already belong to that family's generated sieve. Let $\\gamma$ be a morphism of $D(\\mathcal O)$ whose restriction to every chosen slice is invertible. Choose K-injective representatives of its source and target by [prop-pur-kinjective-resolutions-exist]; by [lem-weil-pbc-kinjective-hom-derived] $\\gamma=Q(f)$ for an actual chain map $f$. Each $H^n(f)|_U=H^n(f|_U)$ is invertible, since the cohomology functors of [def-weil-abstract-derived-category] send isomorphisms to isomorphisms. The cited sheaf-cover criterion, applied to the morphism $H^n(f)$ of abelian sheaves, makes every $H^n(f)$ invertible. Thus $f$ is a quasi-isomorphism and $\\gamma$ is invertible. By step 1 the restrictions of $b_P$ and $e_{P,N}$ to the chosen slices are the canonical maps there [lem-sfb-ringed-site-duality-maps], which are invertible by steps 5 and 7; hence $b_P$ and $e_{P,N}$ (and the comparison of the statement, which differs from $e_{P,N}$ by the symmetry isomorphism) are isomorphisms.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sfb-sheaf-cover-local-isomorphism",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category",
     "lem-sfb-ringed-site-duality-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/injectives.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, local-to-global passage; Tag 08FI, sites-cohomology-lemma-restrict-K-injective-to-open; Tag 070I, derived-lemma-K-injective, equivalence (1)/(3); Tag 079P, injectives-theorem-K-injective-embedding-grothendieck."
-   }
+   "elementary": false
   },
   {
-   "text": "Perfectness of $P^\\vee$. Take one global K-injective representative $J$ of $P^\\vee$ by [prop-pur-kinjective-resolutions-exist]. For each chosen slice $U$ its restriction $J|_U$ is K-injective by [lem-pur-kinjective-restrict-localized] and represents $P^\\vee|_U$ by exactness of restriction. The local derived isomorphism $QD\\cong P^\\vee|_U=Q(J|_U)$ from step 4 is therefore $Q$ of an actual chain map $D\\to J|_U$ by [lem-weil-pbc-kinjective-hom-derived]. Its cohomology maps are isomorphisms ([def-weil-abstract-derived-category]), so it is a quasi-isomorphism. Since every object has such a covering (step 1) and each $D$ is bounded with terms direct summands of finite free $\\mathcal O_U$-modules (step 4), the complex $J$ satisfies precisely the local condition of [def-weil-pbc-strict-perfect-coefficient-package], so $P^\\vee$ is perfect.",
+   "text": "Apply canonical bidual invertibility to QK. Bidual naturality for P to QK gives a square whose other three arrows are isomorphisms. Cancel the mapped double-dual isomorphism to prove canonical biduality for P.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-strict-perfect-coefficient-package"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/injectives.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, local-to-global passage; Tag 08FI, sites-cohomology-lemma-restrict-K-injective-to-open; Tag 070I, derived-lemma-K-injective, equivalence (1)/(3); Tag 079P, injectives-theorem-K-injective-embedding-grothendieck."
-   }
-  },
-  {
-   "text": "Naturality. The maps $e_{P,N}$ are natural in $N$ by [lem-sfb-ringed-site-duality-maps], and so is the symmetry; since every component is invertible by step 8, composing each naturality square with the component inverses shows that the inverses are natural too, so the comparison is a natural isomorphism. Steps 8 and 9 together with this prove all three assertions.",
-   "uses": [
+    "lem-sfb-perfect-bidual-model",
     "lem-sfb-ringed-site-duality-maps"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/injectives.tex",
-    "place": "Tag 08JJ, lemma-dual-perfect-complex, local-to-global passage; Tag 08FI, sites-cohomology-lemma-restrict-K-injective-to-open; Tag 070I, derived-lemma-K-injective, equivalence (1)/(3); Tag 079P, injectives-theorem-K-injective-embedding-grothendieck."
-   }
+   "elementary": true
+  },
+  {
+   "text": "For every N apply model evaluation invertibility to QK. Source naturality and mapped tensor/Hom isomorphisms transport invertibility to P. Precompose with the symmetry isomorphism to obtain the left-ordered canonical component. The natural transformation already has this component by definition; Mathlib componentwise invertibility makes it an isomorphism.",
+   "uses": [
+    "lem-sfb-perfect-evaluation-model",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-site-duality-maps",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "def-weil-pbc-strict-perfect-coefficient-package",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-tensor-product",
-  "lem-sc-finite-free-internal-hom-exact",
-  "def-pc-flat-sheaf-modules",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sfb-perfect-dual-local-model",
   "def-pur-derived-internal-hom",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
   "def-pur-hom-complex",
-  "lem-pc-kflat-resolution",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sfb-sheaf-cover-local-isomorphism",
-  "def-weil-abstract-derived-category",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-kinjective-restrict-localized"
+  "def-weil-abstract-derived-category",
+  "lem-sfb-perfect-bidual-model",
+  "lem-sfb-perfect-evaluation-model"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JJ, lemma-dual-perfect-complex, complete local strict-perfect proof; expanded ordinary Hom comparison via the existing bounded exact-source lemma (Tag 08JH)."
+  "place": "Tag 08JJ: separate the local dual, bidual and evaluation calculations; use the existing fixed Hom representative, localization, naturality and componentwise invertibility to assemble the conclusions."
  },
  "mathlib_searches": [
   {
@@ -348,16 +241,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-sc-finite-free-internal-hom-exact",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-pc-kflat-resolution",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-kinjective-restrict-localized"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -371,7 +255,7 @@
   "module": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
   "declaration": "CategoryTheory.ringedSitePerfectDuality",
   "file": "lean/Sheaf/CategoryTheory/RingedSitePerfectDuality.lean",
-  "statement": "theorem ringedSitePerfectDuality {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J CommRingCat.{max c v r}) [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))] (P : DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))) (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R P) : ∃ M : RingedSiteDualityModel.{c, v, r, w} J R, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj (op P, ringedSiteDualityUnit.{c, v, r, w} J R)) ∧ IsIso (ringedSiteBidual M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R) P) ∧ IsIso (ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R) M.unitIso P)",
+  "statement": "theorem ringedSitePerfectDuality\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (P : DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)))\n    (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R P) :\n    ∃ M : RingedSiteDualityModel.{c, v, r, w} J R,\n      SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R\n        ((derivedInternalHomOfUniverses.{c, v, r, w} J R).obj\n          (op P, ringedSiteDualityUnit.{c, v, r, w} J R)) ∧\n      IsIso (ringedSiteBidual M.closed M.symmetric\n        (ringedSiteDualityUnit.{c, v, r, w} J R) P) ∧\n      IsIso (ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric\n        (ringedSiteDualityUnit.{c, v, r, w} J R) M.unitIso P)",
   "branch": "newtargets-dag",
   "by": "Q32",
   "date": "2026-10-17",
@@ -385,5 +269,15 @@
   "group": "Q32",
   "result": "pass",
   "note": "Item ringedSitePerfectDuality matches node/Stacks 08JJ clause by clause: small ringed site with independent universes c,v,r,w; recorded IsPerfectOnRingedSiteOfUniverses hypothesis (extra slice-sheafify instances are exactly those the predicate requires); conclusions are perfectness of derivedInternalHomOfUniverses(op P, O[0]), IsIso of the transposed signed bidual, and IsIso of the evaluation NatTrans in the dual⊗N order. The ∃ M : RingedSiteDualityModel is a presentation pinned by CoefficientTensorModels.uncurry_model plus symmetry/unit/associator normalizations on K-flats, so it is equivalent to ∀ M, not an arbitrary choice. Dependency module RingedSiteDualityMaps (lem-sfb-ringed-site-duality-maps, genuine prerequisite supplied in the same delivery): real transposes, correct signs ((i*q).negOnePow, unsigned φ(x)•y), unique-characterization choices, normalization hypotheses exactly as in the node, restriction via overFunctor (= recorded localizedModuleRestriction) with true coefficient equality; the existential evaluation-compatible restriction comparisons are acceptable because no general recorded comparison exists. merge_delivery stage 2 keeps the upstream Q41 proof of the dependency node. Statements verbatim, 31 declarations present, all sorrys named theorems with source/blueprint/proof docstrings, no pro-etale substitute, report has Worker report and Second reading by Q32. nt_compile --json of both files: rc 0, no warnings besides sorry (DualityMaps 57.2 s of the 60 s limit, PerfectDuality 3.9 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T231226-L-563203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-perfect-dual-local-model",
+ "kind": "statement",
+ "title": "The fixed K-injective model of the coefficient dual is locally strictly perfect.",
+ "statement": "For a small ringed site (C,J,R) with independent universes and the sheafification hypotheses of [def-weil-pbc-strict-perfect-coefficient-package], let K be a cochain complex of R-module sheaves satisfying the local bounded finite-free-retract condition [def-weil-pbc-strict-perfect-coefficient-package]. Let I be the fixed functorial K-injective replacement [prop-pur-kinjective-resolutions-exist] and O[0] the coefficient unit [lem-sfb-ringed-site-duality-maps]. Then I(Hom(K,I(O[0]))) satisfies that same local strict-perfect condition.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, paragraphs 1 and 2"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-derived-internal-hom",
+  "lem-sfb-ringed-site-duality-maps",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof": [
+  {
+   "text": "For each object V retain the covering sieve provided by the local perfectness hypothesis. For each member extract its bounded finite-free-retract model E and its actual quasi-isomorphism to the restriction of K.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved ordinary-dual lemma to E on this slice. It supplies the reversed bounds and explicit degreewise finite-free retractions of D=Hom(E,O_U[0]).",
+   "uses": [
+    "lem-sfb-perfect-ordinary-dual"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local comparison supplies an actual quasi-isomorphism from this same D to the specified restricted outer replacement. These data on the original sieve are precisely local strict perfectness.",
+   "uses": [
+    "lem-sfb-perfect-dual-local-comparison",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-perfect-ordinary-dual",
+  "lem-sfb-perfect-dual-local-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, complete local strict-perfect proof; expanded ordinary Hom comparison via the existing bounded exact-source lemma (Tag 08JH)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*dual|dual.*perfect|rhom|RHom",
+   "results": "Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/Bifunctor.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation (grep in Algebra/Homology)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes on a ringed site have perfect derived dual and RHom P M is tensor of the dual of P with M",
+   "results": "lTensorHomEquivHomLTensor; dualTensorHomEquiv; dualTensorHomEquivOfBasis; LinearMap.IsPerfPair.flip; LinearMap.IsPerfPair.dualEval; Module.dual_projective; dualTensorHom; ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.HasRightDual",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site the derived dual of a perfect complex is perfect and derived internal Hom from it equals tensor with its dual",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instLinear; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; Ext; LightCondensed.instMonoidalClosedLightCondMod; CochainComplex.IsKProjective.Qh_map_bijective",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally bounded complex of finite projective module sheaves is dualizable in the unbounded derived category of any ringed site",
+   "results": "CochainComplex.IsKProjective; CochainComplex.isKProjective_of_op; CochainComplex.isKProjective_of_projective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; CochainComplex.isKProjective_iff_leftOrthogonal; DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "Perfect|perfect",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: the results do not state perfect-complex duality on ringed sites or constructible finite-Tor preservation (grep in Algebra/Homology/DerivedCategory)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category of sheaves of modules, a bounded locally finite projective complex is rigid and internal Hom out of it is tensor with its dual",
+   "results": "CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; Ext; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned Tor, Ext and internally-projective declarations do not establish local-perfect ringed-site duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"hom\"",
+   "results": "OrderHom.dual; OrderHom.dualIso; OrderHom.dual_id; OrderHom.symm_dual_id; OrderHom.dual_apply_coe; OrderHom.dual_symm_apply_coe; OrderHom.dual_comp; OrderHom.symm_dual_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned order duals do not concern module complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*[Pp]erfect|[Pp]erfect.*SheafOfModules|[Ll]ocally[Pp]erfect|isPerfectComplex",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no locally perfect sheaf-complex declaration found in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a locally bounded complex of finite projective sheaves has perfect derived dual, is isomorphic to its bidual, and internal Hom out of it equals tensor with its dual",
+   "results": "LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; CochainComplex.isKProjective_of_op; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem of local-perfect duality for arbitrary small ringed sites; returned ordinary module duality or underived condensed-category structures does not establish the derived sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*dual|dual.*perfect|isLocallyPerfect|RHom",
+   "results": "Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorShift.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean; Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem of local-perfect duality for arbitrary small ringed sites; returned ordinary module duality or underived condensed-category structures does not establish the derived sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes of module sheaves on a ringed site satisfy derived biduality and their derived Hom is tensor with their perfect dual",
+   "results": "dualTensorHomEquiv; LinearMap.IsPerfPair.dualEval; LinearMap.IsPerfPair.flip; Module.Dual.instIsReflecive; Module.IsReflexive.of_isPerfPair; LinearMap.IsPerfPair.restrict; SheafOfModules.PullbackConstruction.adjunction; LinearMap.IsPerfectCompl.flip",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem of local-perfect duality for arbitrary small ringed sites; returned ordinary module duality or underived condensed-category structures does not establish the derived sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"dual\"",
+   "results": "No hits.",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem of local-perfect duality for arbitrary small ringed sites; returned ordinary module duality or underived condensed-category structures does not establish the derived sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom from a bounded complex of sheaves that are locally retracts of finite free modules is computed by its dual tensor any unbounded complex",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.ihomPoints; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-17",
+   "verdict": "no match: no theorem of local-perfect duality for arbitrary small ringed sites; returned ordinary module duality or underived condensed-category structures does not establish the derived sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The K-injective representative of the derived dual of a locally strictly perfect complex of sheaves of modules is locally strictly perfect",
+   "results": "CochainComplex.isKInjective_of_injective; CochainComplex.IsKInjective; CochainComplex.isKInjective_of_iso. No local-perfect duality statement.",
+   "date": "2026-10-19",
+   "verdict": "no match: K-injectivity results do not supply local strict-perfect dual models or invertibility of canonical maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally bounded complex of finite projective sheaves has invertible canonical signed bidual map and tensor evaluation computes derived internal Hom",
+   "results": "LightCondensed monoidal closed and internally projective declarations; no derived local-perfect calculation for a general ringed site.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*isIso|isIso.*bidual|ihomUnitTensorToIhom in Mathlib CategoryTheory/Monoidal",
+   "results": "No general ringed-site local strict-perfect calculation; existing rigid-category tools require dualizability already.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Proof, second paragraph, final sentence: a locally constant perfect complex is dualizable and internal Hom from it is tensor with its coefficient dual.",
+   "via": [
+    "lem-sfb-ringed-site-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSitePerfectDualLocalModel",
+  "file": "lean/Sheaf/CategoryTheory/RingedSitePerfectDualLocalModel.lean",
+  "declaration": "CategoryTheory.ringedSitePerfectDual_localModel",
+  "statement": "theorem ringedSitePerfectDual_localModel\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (K : CochainComplex (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)\n    (hK : SheafOfModules.IsLocallyStrictPerfectComplexOfUniverses.{c, v, r} R K) :\n    SheafOfModules.IsLocallyStrictPerfectComplexOfUniverses.{c, v, r} R\n      ((WeilConjectures.coefficientHomResolution.{r, c, v} J R).obj\n        (homComplex (R := R) K\n          ((WeilConjectures.coefficientHomResolution.{r, c, v} J R).obj\n            (ringedSiteDualityUnitComplex.{c, v, r} J R))))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "Sheaf.CategoryTheory.RingedSitePerfectDuality",
+  "worker": "stage3",
+  "summary": "Strict sub-obligation of the existing Stacks 08JJ proof; complete proof in words and independent-universe Lean statement.",
+  "blueprint": "Proof, second paragraph, final sentence: a locally constant perfect complex is dualizable and internal Hom from it is tensor with its coefficient dual.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T231226-L-563203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T231226-L-563203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
