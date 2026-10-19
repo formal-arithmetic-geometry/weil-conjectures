@@ -105,6 +105,7 @@ The formula also makes sense at `n = 0`, where it gives the zero ring.
 
 Source: blueprint `def-weil-finite-field-fiber`, order 411, and slopmaster2 Definition
 `def:weil-finite-coefficient-datum` (blueprint: def-weil-l-adic-coefficient-extension). -/
+@[reducible]
 noncomputable def coefficientExtensionRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
     Type u :=
