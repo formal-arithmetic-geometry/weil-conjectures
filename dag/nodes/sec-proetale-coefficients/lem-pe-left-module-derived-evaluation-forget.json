@@ -20,88 +20,53 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\operatorname{Mod}(\\Lambda_{\\mathcal C})$, $A_0=\\operatorname{Ab}(\\mathcal C)$, and denote their evaluation functors by $G_W:A\\to\\Lambda\\text{-}\\operatorname{Mod}$ and $G_{0,W}:A_0\\to\\operatorname{Ab}$. The functor $V$ is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful](1); its hypothesis on sheafification holds on a small site in the common universe. The ordinary module forgetful functor $v$ is exact: kernels and quotient groups carry the induced left action, so forgetting preserves both. Hence $V$ and $v$ act termwise on derived categories, preserve boundedness below and commute with cohomology. There is the literal natural equality $vG_W=G_{0,W}V$, including differentials and restriction maps: both evaluate the same underlying abelian sheaf at $W$. This does not require commutativity or flatness of $\\Lambda$.",
+   "text": "Forgetful V and v are exact. Abelian inverse-image exactness follows by reflecting limits through underlying sets and using its left-adjoint structure for colimits. The underived evaluation square is the literal identity.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-pe-constant-left-module-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "03FD, first paragraph of proof; Modules on Sites 03DA/03DB"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $J$ be an injective left-module sheaf. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] with $\\mathcal O=\\Lambda_{\\mathcal C}$ and $M=J$. Its module evaluation takes values in abelian groups, so its higher derived values vanish: the complex consisting of $J$ in degree zero is an injective resolution by [def-sp-injective-resolutions]. The comparison therefore gives $H^q(W,VJ)=0$ for every $q>0$ and every $W$. This is exactly $G_{0,W}$-acyclicity of $VJ$. All size and enough-injectives assumptions of the comparison are among the hypotheses here. We have used acyclicity, not injectivity of $VJ$.",
+   "text": "The existing injective-module abelian acyclicity theorem, transported along the cohomology/right-derived sections isomorphism, proves forgottenInjectiveAcyclic. Apply the general right-acyclic base-change criterion for the comparison. For an injective complex use its invertible module unit and the acyclic-complex unit criterion on its image under V.",
    "uses": [
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "03FD, second paragraph of proof and objectwise cohomology equality"
-   }
-  },
-  {
-   "text": "Choose $L$ as in the statement; such a bounded-below injective representative exists by [lem-weil-pbc-dplus-injective-representative]. By step 1, $VL$ represents $VK$, and by step 2 it is termwise $G_{0,W}$-acyclic. The category $A_0$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck] applied to the constant integer ring sheaf: abelian sheaves are exactly its module sheaves, since the integer action is forced by addition. Thus clause (3) of [lemma-weil-pbc-leray-acyclicity] applies to the identity quasi-isomorphism $VL\\to VL$. It says that the canonical derived-evaluation unit $Q(G_{0,W}VL)\\to RG_{0,W}(QVL)$ induces isomorphisms in every cohomological degree, hence is an isomorphism. On the module side $G_WL=L(W)$ computes $RG_WK$ by the specified injective-resolution convention. After $v$, these two complexes are literally equal by step 1. Composing with the abelian evaluation unit produces the required isomorphism $a_W:vRG_WK\\xrightarrow{\\sim}RG_{0,W}(VK)$ for every such $L$.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-site-cohomology-right-derived-sections",
     "lemma-weil-pbc-leray-acyclicity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "03FD together with Derived Categories 015E (lemma-leray-acyclicity), 05TA (proposition-enough-acyclics (1))"
-   }
+   "elementary": false
   },
   {
-   "text": "Identify $a_W$ with the canonical right-derived square comparison $R(a)$ attached to $a:G_W\\,;v\\cong V\\,;G_{0,W}$ (the identity in step 1), in the notation of [lem-weil-pbc-right-derived-plus-cube]. On an injective complex its defining comparison is precisely the abelian evaluation unit used in step 3, because the module evaluation unit already computes $RG_W$. Consequently it is independent of the representative and natural in $K$. To verify objectwise restriction, apply that cube lemma with $B=B'=A$, $B_0=B'_0=A_0$, $G=G_W$, $H=G_{W'}$, $G_0=G_{0,W}$, $H_0=G_{0,W'}$, $P=P_0=\\mathrm{id}$, $Q=Q_0=\\mathrm{id}$, $U=U'=V$, and output forgetful functors both $v$. Let $e,e_0$ be evaluation restriction along $W'\\to W$, and $c,d$ identities. The underived cube equality is equality of the same restriction homomorphism after forgetting scalars, from step 1. The lemma yields exactly $a_{W'}\\circ vR(e)=R(e_0)\\circ a_W$. Its $R(e),R(e_0)$ are the derived evaluation restriction maps, which proves the stated naturality in $W$.",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-cube"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "03FD, canonical evaluation comparison; formal derived square lifting as in 0736"
-   }
+   "text": "For restriction, right-derived uniqueness reduces the desired equality to the homotopy category. Expand the comparison factorization and the derived natural-transformation unit identity. Naturality of the exact forgetting comparison and the literal equality of forgotten restriction maps finish the equality.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For a geometric morphism $f:\\operatorname{Sh}(\\mathcal D)\\to\\operatorname{Sh}(\\mathcal C)$, let $P=f^*_{\\Lambda}$ and $P_0=f^{-1}_{\\operatorname{Ab}}$. By [lem-pe-constant-left-module-inverse-image], both are exact and $V_{\\mathcal D}P\\cong P_0V_{\\mathcal C}$ carries the module adjunction unit to the abelian unit. Assume terminal objects and take $G,G_0$ to be global evaluation on $\\mathcal C$, and $H,H_0$ global evaluation on $\\mathcal D$, with module and abelian outputs respectively. The underived maps $e:G\\to H P$ and $e_0:G_0\\to H_0P_0$ send a global section to its inverse-image section, via those units. After forgetting, they are the same map. Apply [lem-weil-pbc-right-derived-plus-cube] with $B=\\operatorname{Mod}(\\Lambda_{\\mathcal C})$, $B'=\\operatorname{Mod}(\\Lambda_{\\mathcal D})$, $B_0=\\operatorname{Ab}(\\mathcal C)$, $B'_0=\\operatorname{Ab}(\\mathcal D)$, $U=V_{\\mathcal C}$, $U'=V_{\\mathcal D}$, output forgetful functors $v$, $Q=Q_0=\\mathrm{id}$, $c=\\mathrm{id}$, $a,b$ the evaluation identities, and $d$ the preceding inverse-image isomorphism in the direction required by the cube. The unit agreement verifies its underived equality. Its derived equality states precisely that $a_{\\mathcal C}$ and $a_{\\mathcal D}$ commute with global-cohomology pullback, including the specified exact inverse-image identification. Enough injectives holds for both small sites as assumed; no claim that $P$ preserves injectives is used.",
+   "text": "Construct normalizedGlobalPullback explicitly: terminal-constant-sheaf maps represent sections. Preservation of products and abelian_addition prove additivity. Natural scalar endomorphisms and scalar_compatibility prove linearity, without assuming the ring commutative. Naturality gives the two section transformations and moduleSetIso_compatibility gives their forgotten square. Apply rightDerivedFunctorPlusBaseChange_cube with identity output functors. The exact derived identity unit laws cancel the output comparisons, leaving the required derivedUnderlying and global pullback equation.",
    "uses": [
     "lem-pe-constant-left-module-inverse-image",
     "lem-weil-pbc-right-derived-plus-cube"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "03FD and 0736 (lemma-base-change-map-flat-case), derived comparison from adjunction units"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally take $H^n$ of $a_W$ for any integer $n$. Exactness of $v$ proved in step 1 gives $H^n(vL(W))=vH^n(L(W))$: kernels and images are unchanged after forgetting the left action. Step 3 identifies these with the two derived evaluations. Thus the induced isomorphism is exactly the asserted identification of underlying abelian cohomology groups, with all compatibilities already proved in steps 4–5.",
+   "text": "Apply homology to the comparison isomorphism and compose with the exact forgetting homology isomorphism in every integer degree.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Conclusion from the common evaluation complex"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
   "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-sc-site-cohomology-right-derived-sections",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-right-derived-plus-cube",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
   "lemma-weil-pbc-leray-acyclicity"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "03FD and derived.tex 015E/05TA for the resolution argument; formal square/cube specialization for naturality and geometric pullback"
+  "place": "Tag 03FD, with derived.tex 015E and sites-cohomology.tex 0736; explicit normalized section construction and Lean proof by P1, 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -271,9 +236,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lemma-weil-pbc-leray-acyclicity",
   "lem-weil-pbc-right-derived-plus-cube"
  ],
@@ -328,5 +290,15 @@
    "CategoryTheory.LeftModuleDerivedEvaluation.globalAbelianPullback",
    "CategoryTheory.leftModuleDerivedEvaluationForget"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261019T005353-L-2759610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
