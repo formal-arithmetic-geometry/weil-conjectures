@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Relative supported Cartier Kummer boundary
 

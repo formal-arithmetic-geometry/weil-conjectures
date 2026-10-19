@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedStructureTensorProjection
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

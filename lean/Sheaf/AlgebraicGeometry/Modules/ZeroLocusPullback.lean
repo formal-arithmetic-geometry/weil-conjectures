@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.Modules.PullbackLocalCoefficient
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine

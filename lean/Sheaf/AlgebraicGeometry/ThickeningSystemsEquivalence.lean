@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
 import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardLifting
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Pushforward of coherent thickening systems is an equivalence with adic systems.
 

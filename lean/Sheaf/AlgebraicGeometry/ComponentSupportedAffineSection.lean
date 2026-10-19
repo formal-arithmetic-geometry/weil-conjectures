@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection
 import WeilConjectures.AlgebraicGeometry.AffineImageAwayClosedCover
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme

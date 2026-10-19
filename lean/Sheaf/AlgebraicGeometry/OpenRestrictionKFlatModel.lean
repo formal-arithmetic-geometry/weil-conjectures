@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # K-flat models under open restriction
 

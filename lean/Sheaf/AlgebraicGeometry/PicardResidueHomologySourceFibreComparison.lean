@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible

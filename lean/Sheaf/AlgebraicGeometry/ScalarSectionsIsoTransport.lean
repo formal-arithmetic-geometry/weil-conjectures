@@ -6,7 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardScalarAffineSectionsExact
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 

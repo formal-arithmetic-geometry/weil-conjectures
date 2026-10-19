@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.AlgebraicGeometry.CartesianFlatSingleLocalizedBaseChange
 import Sheaf.AlgebraicGeometry.LocalizedMixedPullbackFiniteFreeModel

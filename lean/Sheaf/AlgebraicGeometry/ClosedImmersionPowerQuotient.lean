@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import WeilConjectures.AlgebraicGeometry.Modules.HomOfBasis

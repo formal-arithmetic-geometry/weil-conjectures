@@ -6,7 +6,7 @@ Authors: SHEAF group W4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineSectionZeroAtStage
 import Sheaf.AlgebraicGeometry.SectionBaseChangeZeroPersists

@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
 import Sheaf.AlgebraicGeometry.LerayEdgeGrothendieckComparison
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 @[expose] public section

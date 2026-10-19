@@ -6,7 +6,7 @@ Authors: SHEAF group NC
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion

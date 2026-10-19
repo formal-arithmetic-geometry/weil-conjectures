@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.FlatBaseChangeTargetLerayComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Canonical affine section comparisons before flat base change
 
 Source: Stacks Project, Tags 02KH (affine dictionary paragraph), 01XJ, 01XK,

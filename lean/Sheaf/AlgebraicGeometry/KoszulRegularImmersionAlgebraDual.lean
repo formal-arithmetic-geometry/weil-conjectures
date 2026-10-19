@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module

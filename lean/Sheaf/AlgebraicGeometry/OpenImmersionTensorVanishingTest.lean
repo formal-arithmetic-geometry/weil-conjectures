@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 

@@ -14,7 +14,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Degree
 import WeilConjectures.AlgebraicGeometry.PicardFunctor
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!

@@ -18,7 +18,7 @@ import Sheaf.AlgebraicGeometry.PicardScalarDerivedCycles
 import Sheaf.AlgebraicGeometry.PicardDirectImageTestSections
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Realizing scalar cycles of a fixed perfect direct-image model

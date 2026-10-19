@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.ModuleStalkExact

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Constructible
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

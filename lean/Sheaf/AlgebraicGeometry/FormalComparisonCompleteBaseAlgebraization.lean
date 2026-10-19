@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Basic

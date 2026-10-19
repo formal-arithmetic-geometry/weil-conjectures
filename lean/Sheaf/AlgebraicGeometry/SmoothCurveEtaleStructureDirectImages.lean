@@ -25,7 +25,7 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit
@@ -41,7 +41,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 

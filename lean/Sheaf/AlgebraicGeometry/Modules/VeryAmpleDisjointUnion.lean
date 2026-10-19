@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ProjPolynomialTwistChart
 import Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing
 import Sheaf.Paper.NonvanishingSectionTrivializes

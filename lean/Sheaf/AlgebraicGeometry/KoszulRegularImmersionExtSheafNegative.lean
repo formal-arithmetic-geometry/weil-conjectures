@@ -6,7 +6,7 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Sheaf.Algebra.Homology.DerivedInternalHom

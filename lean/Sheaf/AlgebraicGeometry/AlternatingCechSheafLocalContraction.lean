@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSheafConstruction
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.AlternatingCechSheafInsertionHomotopy
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

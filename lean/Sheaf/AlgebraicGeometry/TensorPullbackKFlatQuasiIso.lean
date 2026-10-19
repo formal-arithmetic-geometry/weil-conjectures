@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
 import Sheaf.AlgebraicGeometry.InverseImageExactKFlat

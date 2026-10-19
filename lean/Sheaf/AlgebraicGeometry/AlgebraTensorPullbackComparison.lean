@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction

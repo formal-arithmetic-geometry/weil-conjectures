@@ -13,7 +13,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.ChosenModuleFlatProperStage
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-!
 # Refining an already chosen complex to flat terms with proper support

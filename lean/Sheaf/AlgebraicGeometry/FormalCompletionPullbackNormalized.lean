@@ -6,7 +6,7 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import all WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
 

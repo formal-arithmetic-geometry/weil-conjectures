@@ -6,7 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.AmpleIdealSection

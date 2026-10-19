@@ -6,7 +6,7 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.SelfTorProjectionHomology

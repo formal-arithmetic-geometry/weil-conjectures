@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module

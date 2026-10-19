@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import Sheaf.AlgebraicGeometry.ScalarInverseImageCompositionCoherence
 import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Composition of scalar cohomology pullbacks
 

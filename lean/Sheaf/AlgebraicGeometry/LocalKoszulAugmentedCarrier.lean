@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution

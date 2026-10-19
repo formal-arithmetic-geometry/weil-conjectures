@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

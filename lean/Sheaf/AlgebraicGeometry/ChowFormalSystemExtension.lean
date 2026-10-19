@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 import Sheaf.AlgebraicGeometry.FormalModuleSupportConstant

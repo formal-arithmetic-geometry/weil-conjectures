@@ -6,7 +6,7 @@ Authors: SHEAF group F2
 module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.PicardCupProductMap
 import Sheaf.AlgebraicGeometry.StalkFiniteFree

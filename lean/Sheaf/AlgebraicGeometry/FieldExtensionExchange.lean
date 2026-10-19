@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Topology.InverseImageModule

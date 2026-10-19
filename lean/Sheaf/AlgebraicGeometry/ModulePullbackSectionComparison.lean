@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 

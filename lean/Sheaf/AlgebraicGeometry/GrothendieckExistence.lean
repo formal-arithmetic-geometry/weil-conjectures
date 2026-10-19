@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian

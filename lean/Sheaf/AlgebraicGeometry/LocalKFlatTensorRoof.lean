@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions

@@ -6,7 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
+import WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections

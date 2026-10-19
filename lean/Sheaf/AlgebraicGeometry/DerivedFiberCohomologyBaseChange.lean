@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Scalar extension of derived fibre cohomology
 

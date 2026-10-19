@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffinePullbackChartTensorSections
 import Sheaf.AlgebraicGeometry.AffineChartRelativeFlatCriterion

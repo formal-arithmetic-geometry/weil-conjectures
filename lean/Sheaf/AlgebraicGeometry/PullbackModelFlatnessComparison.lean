@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Relative flatness is independent of a chosen pullback
 

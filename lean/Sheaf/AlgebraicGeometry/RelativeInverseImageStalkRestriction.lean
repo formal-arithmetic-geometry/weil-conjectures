@@ -6,7 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Functor

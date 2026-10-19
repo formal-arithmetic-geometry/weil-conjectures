@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 

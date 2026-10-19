@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
@@ -14,7 +14,6 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 

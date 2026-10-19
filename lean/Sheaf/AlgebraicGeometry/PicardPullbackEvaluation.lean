@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
 import Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
 import Sheaf.AlgebraicGeometry.PicardPullbackBaseChange
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 

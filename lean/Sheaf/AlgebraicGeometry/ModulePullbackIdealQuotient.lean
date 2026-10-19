@@ -1,7 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage

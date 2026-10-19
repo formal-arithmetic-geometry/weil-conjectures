@@ -6,7 +6,7 @@ Authors: SHEAF group S2
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Tensor pullback preserves finite presentation

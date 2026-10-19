@@ -6,7 +6,7 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.AlgebraicGeometry.ClosedStructureTensorProjectionStalk

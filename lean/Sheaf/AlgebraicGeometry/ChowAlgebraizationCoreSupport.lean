@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties

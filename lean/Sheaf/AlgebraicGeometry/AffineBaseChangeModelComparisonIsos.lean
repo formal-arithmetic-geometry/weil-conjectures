@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.AffineBaseChangeSchemeComparisons
+import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSchemeComparisons
 import Sheaf.AlgebraicGeometry.AffineBaseChangeModelIsosOfSchemeComparisons
 public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import Sheaf.AlgebraicGeometry.AffineModelComparisonData

@@ -25,7 +25,7 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.RingTheory.AssociatedGradedRingStructure
 import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Topology.InverseImageModule

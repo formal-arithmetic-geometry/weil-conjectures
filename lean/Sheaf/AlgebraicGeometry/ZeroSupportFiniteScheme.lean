@@ -11,7 +11,7 @@ public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence

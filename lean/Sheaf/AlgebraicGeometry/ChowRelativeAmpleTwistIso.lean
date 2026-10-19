@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 
 /-! Auxiliary decomposition for Chow relative ampleness. -/

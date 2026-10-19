@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardUniversalSingleRankMatch
 import all Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Source locality of one universal direct-image rank condition
 

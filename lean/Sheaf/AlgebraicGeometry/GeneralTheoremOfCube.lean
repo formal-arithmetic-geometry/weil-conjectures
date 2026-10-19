@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 import Sheaf.AlgebraicGeometry.PicardLocusClosed
 import Sheaf.AlgebraicGeometry.PicardProductOpen

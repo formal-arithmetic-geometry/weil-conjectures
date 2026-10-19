@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf

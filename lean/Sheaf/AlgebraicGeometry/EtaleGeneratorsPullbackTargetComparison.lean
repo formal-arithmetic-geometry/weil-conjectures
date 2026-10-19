@@ -6,7 +6,7 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSourceComparison
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # EtaleGeneratorsPullbackTargetComparison
 

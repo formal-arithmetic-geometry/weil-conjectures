@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore
 import Sheaf.AlgebraicGeometry.ThickeningSystemComparisonTransport
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Transport of compatible morphism families
 

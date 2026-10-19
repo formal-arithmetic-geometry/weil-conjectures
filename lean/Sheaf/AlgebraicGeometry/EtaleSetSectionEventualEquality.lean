@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality

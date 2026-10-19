@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.ModuleMapIsoLocusPullback
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusCompact

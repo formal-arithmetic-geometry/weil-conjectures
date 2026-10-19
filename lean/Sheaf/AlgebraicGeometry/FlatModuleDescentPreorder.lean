@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.FlatModuleDescentPreorderStage
 import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation

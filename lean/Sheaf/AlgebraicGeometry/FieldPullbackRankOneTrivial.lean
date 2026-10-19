@@ -5,7 +5,7 @@ Authors: SHEAF group D2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import Mathlib.AlgebraicGeometry.Properties

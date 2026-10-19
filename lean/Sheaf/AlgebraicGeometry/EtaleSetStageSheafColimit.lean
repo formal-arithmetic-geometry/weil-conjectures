@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.LocallyBijective

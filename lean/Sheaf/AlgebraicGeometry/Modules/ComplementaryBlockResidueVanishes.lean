@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 import WeilConjectures.AlgebraicGeometry.Modules.LocalBlockResidueRank
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Fibrewise vanishing of the complementary block -/
 

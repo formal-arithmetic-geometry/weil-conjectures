@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech

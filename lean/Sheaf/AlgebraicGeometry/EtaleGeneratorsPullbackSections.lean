@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 
 /-! # Pullback of generator sections

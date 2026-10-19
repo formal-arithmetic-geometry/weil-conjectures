@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.IntersectionNumber
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.EffectiveCartierDimensionDrop
 import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact

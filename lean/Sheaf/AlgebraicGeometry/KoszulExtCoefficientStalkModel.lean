@@ -7,7 +7,7 @@ module
 
 public import Sheaf.RingTheory.KoszulQuotientCoefficientComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

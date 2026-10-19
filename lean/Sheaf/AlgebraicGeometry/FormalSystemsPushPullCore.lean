@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent

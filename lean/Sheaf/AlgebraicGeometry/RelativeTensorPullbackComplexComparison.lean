@@ -5,7 +5,7 @@ Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.AlgebraicGeometry.InverseImageModuleFunctor

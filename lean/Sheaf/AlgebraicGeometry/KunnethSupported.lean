@@ -22,7 +22,7 @@ public import Sheaf.Paper.EtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.InverseImageModule
 public import Mathlib.Algebra.Category.Ring.Colimits

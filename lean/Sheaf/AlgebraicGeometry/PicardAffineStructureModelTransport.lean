@@ -6,7 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Mathlib.AlgebraicGeometry.Limits
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 

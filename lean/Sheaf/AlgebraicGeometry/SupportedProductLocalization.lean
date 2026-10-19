@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits

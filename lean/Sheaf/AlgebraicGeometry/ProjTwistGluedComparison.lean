@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
 import WeilConjectures.AlgebraicGeometry.ProjTwistTransportedData

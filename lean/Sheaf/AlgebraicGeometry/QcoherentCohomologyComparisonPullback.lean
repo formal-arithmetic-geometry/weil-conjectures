@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.QcoherentPullbackSections
 import Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare
 import Sheaf.AlgebraicGeometry.QcoherentNormalizedComparison

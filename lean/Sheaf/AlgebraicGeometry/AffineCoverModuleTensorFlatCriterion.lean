@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.AffinePullbackChartTensorFlatStalks

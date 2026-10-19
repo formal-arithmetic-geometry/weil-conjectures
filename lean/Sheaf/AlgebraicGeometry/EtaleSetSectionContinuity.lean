@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws

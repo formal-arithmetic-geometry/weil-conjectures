@@ -5,7 +5,7 @@ Authors: SHEAF group N3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Surjectivity of the second affine tensor unit
 
 Source: Stacks Project, Morphisms, Lemma 01SB.

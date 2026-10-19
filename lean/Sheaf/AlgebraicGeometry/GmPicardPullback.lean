@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
 import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackEquivariant
 import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality

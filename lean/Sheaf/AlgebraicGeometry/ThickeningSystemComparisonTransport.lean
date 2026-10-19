@@ -1,5 +1,5 @@
 module
-public import Sheaf.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 

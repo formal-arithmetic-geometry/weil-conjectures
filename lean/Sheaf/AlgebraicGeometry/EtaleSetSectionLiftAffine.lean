@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit
 import WeilConjectures.AlgebraicGeometry.AffineSectionsColimit
 import Mathlib.CategoryTheory.Filtered.Final
