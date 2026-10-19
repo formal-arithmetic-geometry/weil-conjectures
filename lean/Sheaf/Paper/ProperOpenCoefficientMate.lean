@@ -23,8 +23,7 @@ public import Sheaf.Paper.ProEtaleProperOpenComparison
 public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.CompactSupportSiteComparisonOpen
 
 /-! # Coefficient and site naturality of proper/open interchange
 
@@ -102,6 +101,41 @@ def properOpenCoefficientInterchangePlus (A : Type (u + 1)) [CommRing A] [Finite
       (properOpenCoefficientInterchange A sq).app E.obj ≪≫
       (properOpenCoefficientTargetPlus (p := p) (k := k) A E).symm)
 
+private def properOpenCoefficientInterchangePlusIso
+    (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i) :
+    (r)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus ⋙
+        (i)_!open[ModuleCat.{u + 1} A].mapDerivedCategoryPlus ≅
+      (k)_!open[ModuleCat.{u + 1} A].mapDerivedCategoryPlus ⋙
+        (p)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus :=
+  Functor.fullyFaithfulCancelRight DerivedCategory.Plus.ι
+    (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (r)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus
+        ((i)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        ((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorPlusCompatibility
+        D((i)_!open[ModuleCat.{u + 1} A]) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft DerivedCategory.Plus.ι
+        (properOpenCoefficientInterchange A sq) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        ((k)_!open[ModuleCat.{u + 1} A]).mapDerivedCategoryPlusCompatibility.symm
+        R((p)_*[ModuleCat.{u + 1} A]) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (k)_!open[ModuleCat.{u + 1} A].mapDerivedCategoryPlus
+        ((p)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorPlusCompatibility.symm ≪≫
+      (Functor.associator _ _ _).symm)
+
+private lemma properOpenCoefficientInterchangePlusIso_app
+    (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i)
+    (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (properOpenCoefficientInterchangePlusIso A sq).hom.app E =
+      (properOpenCoefficientInterchangePlus A sq E).hom := by
+  apply DerivedCategory.Plus.ι.map_injective
+  simp [properOpenCoefficientInterchangePlusIso, properOpenCoefficientInterchangePlus,
+    properOpenCoefficientTargetPlus, Functor.preimageIso, Category.assoc]
+
 /-- The exact same restriction exchange in bounded-below coordinates.
 Source: Stacks 0F7B (blueprint: lem-sp-proper-open-coefficient-mate). -/
 def properOpenCoefficientRestrictionPlus (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -118,6 +152,44 @@ def properOpenCoefficientRestrictionPlus (A : Type (u + 1)) [CommRing A] [Finite
         (properOpenCoefficientTargetPlus (p := p) (k := k) A E) ≪≫
       (properOpenCoefficientRestriction A sq).app E.obj ≪≫
       (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorPlusCompatibility.app E).symm)
+
+private lemma properOpenCoefficientRestrictionPlus_inv
+    (A : Type (u + 1)) [CommRing A] [Finite A] (sq : IsPullback k r p i)
+    (E : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (properOpenCoefficientRestrictionPlus A sq E).inv =
+      (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+        (ModuleCat.{u + 1} A) i).unit.app
+          ((r)_*[ModuleCat.{u + 1} A].rightDerivedFunctorPlus.obj E) ≫
+        (i)^*[ModuleCat.{u + 1} A].mapDerivedCategoryPlus.map
+          (properOpenCoefficientInterchangePlus A sq E).hom := by
+  apply DerivedCategory.Plus.ι.map_injective
+  simp only [Functor.map_comp]
+  rw [properOpenCoefficientRestrictionPlus, Functor.preimageIso_inv, Functor.map_preimage]
+  rw [derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus,
+    Adjunction.mapDerivedCategoryPlusAdjunction,
+    Adjunction.map_restrictFullyFaithful_unit_app]
+  have hmap : DerivedCategory.Plus.ι.map
+      ((i)^*[ModuleCat.{u + 1} A].mapDerivedCategoryPlus.map
+        (properOpenCoefficientInterchangePlus A sq E).hom) =
+      D((i)^*[ModuleCat.{u + 1} A]).map
+        (DerivedCategory.Plus.ι.map (properOpenCoefficientInterchangePlus A sq E).hom) := rfl
+  rw [hmap]
+  rw [properOpenCoefficientInterchangePlus, Functor.preimageIso_hom, Functor.map_preimage]
+  simp only [properOpenCoefficientRestriction, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_inv, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp]
+  dsimp only [Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_hom,
+    Iso.refl_inv, Iso.refl_hom, NatTrans.id_app, Functor.comp_obj]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+  simp only [Category.comp_id, Category.assoc]
+  erw [Category.id_comp]
+  erw [← reassoc_of% (derivedOpenImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} A) i).unit.naturality
+      (((r)_*[ModuleCat.{u + 1} A]).rightDerivedFunctorPlusCompatibility.hom.app E)]
+  rfl
+
+
 
 /-- The coefficient-square composite through the B proper/open map.
 The two scalar comparisons are the recorded summandwise maps, and the proper
@@ -181,11 +253,65 @@ theorem properOpen_coefficient_mate_naturality
       properOpenCoefficientComposite φ sq E ≫
         R((p)_*[ModuleCat.{u + 1} B]).map
           (D((k)_!open[ModuleCat.{u + 1} B]).map ((scalarExtension φ U).map f)) := by
-  sorry
+  dsimp [properOpenCoefficientComposite]
+  rw [← Category.assoc, ← Category.assoc, ← Category.assoc]
+  have hq := (openScalarExtension φ i).hom.naturality (R((r)_*[ModuleCat.{u + 1} A]).map f)
+  have hmap : (scalarExtension φ Z).map
+      (D((i)_!open[ModuleCat.{u + 1} A]).map (R((r)_*[ModuleCat.{u + 1} A]).map f)) =
+      (derivedExtension i ⋙ scalarExtension φ Z).map (R((r)_*[ModuleCat.{u + 1} A]).map f) := rfl
+  rw [hmap, hq]
+  have hmap2 : (scalarExtension φ W ⋙ derivedExtension i).map
+      (R((r)_*[ModuleCat.{u + 1} A]).map f) =
+      D((i)_!open[ModuleCat.{u + 1} B]).map
+        ((scalarExtension φ W).map (R((r)_*[ModuleCat.{u + 1} A]).map f)) := rfl
+  rw [hmap2]
+  simp only [Category.assoc]
+  nth_rewrite 2 [← Category.assoc]
+  rw [← D((i)_!open[ModuleCat.{u + 1} B]).map_comp]
+  rw [finiteCoefficientDirectImageMap_naturality]
+  rw [D((i)_!open[ModuleCat.{u + 1} B]).map_comp]
+  have hmap3 : D((i)_!open[ModuleCat.{u + 1} B]).map
+        (R((r)_*[ModuleCat.{u + 1} B]).map
+          ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension
+            U.smallEtaleTopology φ).map f)) =
+      (R((r)_*[ModuleCat.{u + 1} B]) ⋙ D((i)_!open[ModuleCat.{u + 1} B])).map
+        ((AlgebraicGeometry.ProEtale.pbcFixedScalarExtension
+          U.smallEtaleTopology φ).map f) := rfl
+  have hi := (properOpenCoefficientInterchange B sq).hom.naturality
+    ((scalarExtension φ U).map f)
+  rw [hmap3]
+  simp only [Category.assoc]
+  rw [hi]
+  rfl
+
 
 end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
+
+private lemma transportOpenAdjunct
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (a : L ⊣ R) (b : L' ⊣ R') (N : D ⥤ D') (M : C ⥤ C')
+    (e : L ⋙ N ≅ M ⋙ L') (t : R ⋙ M ≅ N ⋙ R')
+    (hc : ∀ Y : D, N.map (a.counit.app Y) =
+      e.hom.app (R.obj Y) ≫ L'.map (t.hom.app Y) ≫ b.counit.app (N.obj Y))
+    (X : C) (Y : D) (l : X ⟶ R.obj Y)
+    (P : C') (d : M.obj X ≅ P) (Z : D') (c : N.obj Y ⟶ Z) :
+    N.map ((a.homEquiv X Y).symm l) ≫ c = e.hom.app X ≫ L'.map d.hom ≫
+      (b.homEquiv P Z).symm
+        (d.inv ≫ M.map l ≫ t.hom.app Y ≫ R'.map c) := by
+  dsimp only [Functor.comp_obj] at *
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [← L'.map_comp_assoc, d.hom_inv_id]
+  rw [hc Y]
+  have hn := e.hom.naturality l
+  dsimp only [Functor.comp_map] at hn
+  rw [← Category.assoc, ← Category.assoc, hn]
+  simp only [Category.assoc]
+  rw [b.counit_naturality]
+  simp only [L'.map_id, Category.id_comp]
+
 
 variable {U V W Z : Scheme.{u}}
   [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
@@ -221,6 +347,27 @@ def properOpenSiteRestrictionInverse (A : Type (u + 1)) [CommRing A] [Finite A]
             (ModuleCat.{u + 1} A) k).mapDerivedCategoryPlus.obj E) ≪≫
         (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctorPlus.mapIso
           ((properOpenSiteExtensionIso A k).app E))
+
+private lemma openComparisonPlus_counit
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (j : X ⟶ Y) [IsOpenImmersion j]
+    (B : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategoryPlus.map
+        ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+          (ModuleCat.{u + 1} A) j).counit.app B) =
+      (properOpenSiteExtensionIso A j).hom.app
+          ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.obj B) ≫
+        (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map
+          ((fixedComparisonPullbackPlus A j).hom.app B) ≫
+        (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+          (ModuleCat.{u + 1} A) j).counit.app
+          ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategoryPlus.obj B) := by
+  let c := Compactification.ofIsOpenImmersion j
+  have : IsNoetherian c.Z := by
+    change IsNoetherian Y
+    infer_instance
+  exact (compactSupportSiteComparison_open_counits A c).2 B
 
 /-- Gamma on bounded-below etale-origin complexes, defined by the open adjunct of
 inverse transported restriction and open unit, with the retained origin E.
@@ -275,7 +422,37 @@ theorem properOpen_site_mate (A : Type (u + 1)) [CommRing A] [Finite A]
           (openImmersionLowerShriek (ModuleCat.{u + 1} A) i).mapDerivedCategoryPlus.map
             ((fixedComparisonDirectImageMatePlus A r).app E) ≫
           properOpenSiteInterchange A sq E) := by
-  sorry
+  apply congrArg DerivedCategory.Plus.ι.map
+  let a := Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+    (ModuleCat.{u + 1} A) i
+  let b := derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+    (ModuleCat.{u + 1} A) i
+  have hγ : (a.homEquiv _ _).symm
+      (Etale.properOpenCoefficientRestrictionPlus A sq E).inv =
+        (Etale.properOpenCoefficientInterchangePlus A sq E).hom := by
+    rw [Etale.properOpenCoefficientRestrictionPlus_inv]
+    change (a.homEquiv _ _).symm
+      ((a.homEquiv _ _) (Etale.properOpenCoefficientInterchangePlus A sq E).hom) = _
+    exact (a.homEquiv _ _).symm_apply_apply _
+  have h := transportOpenAdjunct a b
+    (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus
+    (comparisonUpperStar (ModuleCat.{u + 1} A) W).mapDerivedCategoryPlus
+    (properOpenSiteExtensionIso A i) (fixedComparisonPullbackPlus A i)
+    (openComparisonPlus_counit A i) _ _
+    (Etale.properOpenCoefficientRestrictionPlus A sq E).inv _
+    ((@asIso _ _ _ _ (fixedComparisonDirectImageMatePlus A r)
+      (isIso_fixedComparisonDirectImageMatePlus A r)).app E) _
+    ((fixedComparisonDirectImageMatePlus A p).app
+        ((Etale.openImmersionLowerShriek
+          (ModuleCat.{u + 1} A) k).mapDerivedCategoryPlus.obj E) ≫
+      (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctorPlus.map
+        ((properOpenSiteExtensionIso A k).hom.app E))
+  rw [hγ] at h
+  dsimp only [Functor.comp_obj] at h
+  simpa only [properOpenSiteComposite, properOpenSiteInterchange,
+    properOpenSiteRestrictionInverse, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+    Iso.app_inv, Functor.mapIso_hom, Functor.map_comp, asIso_hom, Category.assoc, b] using h
+
 
 /-- Both site-square composites are natural in every bounded-below etale-origin input.
 Source: Stacks 0F7B and blueprint exceptional coefficient comparison, naturality
@@ -300,6 +477,21 @@ theorem properOpen_site_mate_naturality (A : Type (u + 1)) [CommRing A] [Finite 
         (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctorPlus.map
           ((openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapDerivedCategoryPlus.map
             ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategoryPlus.map f)) := by
-  sorry
+  let γ := Etale.properOpenCoefficientInterchangePlusIso A sq
+  let η :=
+    Functor.whiskerRight γ.hom
+        (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (Etale.openImmersionLowerShriek
+        (ModuleCat.{u + 1} A) k).mapDerivedCategoryPlus
+        (fixedComparisonDirectImageMatePlus A p) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (properOpenSiteExtensionIso A k).hom
+        (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctorPlus
+  simpa only [η, γ, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.comp_map, Functor.comp_obj, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+    Etale.properOpenCoefficientInterchangePlusIso_app, properOpenSiteComposite] using
+    η.naturality f
 
 end AlgebraicGeometry.ProEtale

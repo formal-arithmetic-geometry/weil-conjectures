@@ -38,13 +38,12 @@
    }
   },
   {
-   "text": "For the site equation, use the exact comparison functor $N=\\nu^*$ and its inverse-image compatibility [lem-weil-pbc-comparison-pullback]. For a proper edge $v$, the map $d_v$ is the specified counit mate and satisfies the counit normalization in [lem-weil-pbc-comparison-direct-image-canonical-mate]. For an open edge $a$, $e_a$ is the natural extension-by-zero comparison, compatible with composition, by [lem-cbc-proetale-extension-zero-comparison]. Transport the same mate rectangle from Step 1 across $N$: the tensor comparison is natural by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], the proper and open sides become $d_v$ and $e_a$, and the transported open-adjunction prescription is precisely the definition of $\\Gamma_R^{\\rm pro}$. The mate-pasting identities therefore identify both sides with the same transported mate, yielding the displayed pro-etale equality on every bounded-below etale-origin object.",
+   "text": "For the site equation, first identify the inverse bounded-below restriction comparison with the open-adjunction transpose of the bounded-below proper/open map. Apply the fully faithful inclusion, the canonical inclusion compatibility isomorphisms, and naturality of the unbounded open unit to prove this identification. Use the open counit normalization of [lem-amb-compact-support-site-comparison-open], specialized to the compactification of the open immersion i. Expand the inverse open-adjunction bijections as counit composites. Naturality of the open site-extension comparison moves the inverse restriction map across comparison; cancellation of the proper direct-image comparison and counit naturality identify the two composites. This is the elementary transportOpenAdjunct calculation. Its specialization gives exactly properOpenSiteRestrictionInverse and hence properOpenSiteInterchange. Finally apply the bounded-below inclusion to the resulting equality. The proper comparison is the specified map of [lem-weil-pbc-comparison-direct-image-canonical-mate] and the extension comparison is that of [lem-cbc-proetale-extension-zero-comparison]; neither is redefined by the desired equality.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
+    "lem-amb-unbounded-proper-open-interchange",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
     "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-mate-pasting"
+    "lem-amb-compact-support-site-comparison-open"
    ],
    "elementary": false,
    "source": {
@@ -53,9 +52,10 @@
    }
   },
   {
-   "text": "Every constituent map in both composites is natural in the input: this is part of the naturality assertions for the tensor comparison, the proper/open interchange, the direct-image counit mate, and the extension-by-zero comparison cited above. Composition of natural transformations is natural, so both displayed equalities are natural in $E$.",
+   "text": "For coefficient naturality, compose naturality of openScalarExtension from [lem-coef-etale-open-tensor], finiteCoefficientDirectImageMap_naturality from [lem-coef-finite-direct-image], and properOpenCoefficientInterchange from [lem-amb-unbounded-proper-open-interchange]. For site naturality, transport the unbounded proper/open natural isomorphism through the fully faithful bounded-below inclusion, and show its component equals properOpenCoefficientInterchangePlus. Whisker its hom with site comparison, then compose the proper direct-image natural transformation of [lem-weil-pbc-comparison-direct-image-canonical-mate] and the open-extension natural isomorphism of [lem-cbc-proetale-extension-zero-comparison]. Naturality of this composite gives the stated identity. These naturality proofs do not require the corresponding square equality.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-etale-open-tensor",
+    "lem-coef-finite-direct-image",
     "lem-amb-unbounded-proper-open-interchange",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
     "lem-cbc-proetale-extension-zero-comparison"
@@ -68,17 +68,19 @@
   }
  ],
  "proof_deps": [
+  "lem-amb-compact-support-site-comparison-open",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-cbc-proetale-extension-zero-comparison",
+  "lem-coef-etale-open-tensor",
+  "lem-coef-finite-direct-image",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Existence, uniqueness, naturality; mate-pasting transport of the proper/open comparison"
+  "place": "Coefficient argument retained; site and naturality arguments implemented by X5 using the open counit normalization, elementary adjunction transport, and composition of natural transformations."
  },
  "mathlib_searches": [
   {
@@ -271,5 +273,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The module states the coefficient square, site square, and naturality of both. The site equation is mapped through the fully faithful D+ inclusion into the unbounded category. Its pro-etale map is the open adjunct of transported inverse restriction, not a definition by the desired square. Three already-landed dependencies supply the canonical coefficient direct-image, open tensor, and derived site-extension interfaces."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261019T034347-L-425320",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
