@@ -17663,3 +17663,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: merged deliver/C7/Sheaf.Paper.KunBaseChange (stage 3; reviewer PASS; first push; landing 20261019T231056-L-545820 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/C7/Sheaf.Paper.SfRationalLocalGlobalPowerTorsion (stage 3; reviewer PASS; after a return; landing 20261019T231058-L-546040 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/sf-rational-local-global-warning-option.md)
 - 23:11 L: merged deliver/D2/Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion (stage 3; reviewer PASS; first push; landing 20261019T231059-L-546216 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:11 L: merged deliver/D3/Sheaf.AlgebraicGeometry.SupportedProductLocalization (stage 3; reviewer PASS; first push; landing 20261019T231101-L-546563 (proof); batch 20261019T231019; modules 1; new nodes 0)
