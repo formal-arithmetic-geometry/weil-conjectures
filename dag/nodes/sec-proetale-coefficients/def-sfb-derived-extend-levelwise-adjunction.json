@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "def-sfb-derived-extend-levelwise-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-sfb-derived-extension-of-scalars"
+  ]
  },
  "kind": "definition",
  "title": "Derived extension of scalars is left adjoint to termwise restriction",
@@ -13,24 +15,100 @@
   "place": "node def-sfb-derived-extend-levelwise-adjunction, order 1629"
  },
  "stmt_deps": [
-  "lem-sfb-extend-scalars-kflat"
+  "lem-sfb-extend-scalars-kflat",
+  "def-sfb-derived-extend-restrict-adjunction",
+  "def-sfb-derived-restrict-levelwise"
  ],
  "proof": [
   {
-   "text": "Transport the adjunction [def-sfb-derived-extend-restrict-adjunction] along the\nisomorphism of right adjoints\n$R(\\operatorname{Res}_\\varphi)\\cong D(\\operatorname{Res}_\\varphi)$\n[def-sfb-derived-restrict-levelwise].",
+   "text": "Put $E=\\operatorname{Ext}_\\varphi$, $U=\\operatorname{Res}_\\varphi$, $F=LE$ and $G=RU$. The ambient hypotheses in [lem-sfb-extend-scalars-kflat] are precisely those of [def-sfb-derived-extend-restrict-adjunction]: a closed symmetric monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions, and a morphism of commutative ring objects. The latter node therefore supplies $F\\dashv G$, with natural bijections $a_{K,N}:\\operatorname{Hom}(FK,N)\\xrightarrow{\\sim}\\operatorname{Hom}(K,GN)$ for $K\\in D(\\Mod_{\\mathcal R})$, $N\\in D(\\Mod_{\\mathcal S})$. By definition $F=\\mathcal S\\otimes^{\\mathrm L}_{\\mathcal R}-$; no flatness of $\\mathcal S$ as an $\\mathcal R$-module or boundedness of complexes is imposed.",
+   "uses": [
+    "lem-sfb-extend-scalars-kflat",
+    "def-sfb-derived-extend-restrict-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-levelwise-adjunction.proof.md",
+    "place": "only paragraph: the derived adjunction to be transported"
+   }
+  },
+  {
+   "text": "Under the same hypotheses, [def-sfb-derived-restrict-levelwise] supplies a canonical natural isomorphism $\\rho:G\\xrightarrow{\\sim}H$, where $H=D(U):D(\\Mod_{\\mathcal S})\\to D(\\Mod_{\\mathcal R})$ is restriction applied termwise. Both $G$ and $H$ have this direction, so each $\\rho_N$ can be postcomposed with a map $K\\to GN$.",
+   "uses": [
+    "def-sfb-derived-restrict-levelwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-levelwise-adjunction.proof.md",
+    "place": "only paragraph: canonical isomorphism of the two right adjoints"
+   }
+  },
+  {
+   "text": "Define $b_{K,N}(h)=\\rho_N\\circ a_{K,N}(h)$. Its inverse is $c_{K,N}(k)=a_{K,N}^{-1}(\\rho_N^{-1}\\circ k)$. The identities $\\rho_N^{-1}\\rho_N=1$ and $\\rho_N\\rho_N^{-1}=1$ give $cb(h)=h$ and $bc(k)=k$. For $u:K'\\to K$ and $v:N\\to N'$, naturality of $a$ and $\\rho$ gives explicitly\n$$b_{K',N'}(v\\circ h\\circ F(u))=\\rho_{N'}\\circ G(v)\\circ a_{K,N}(h)\\circ u\n=H(v)\\circ b_{K,N}(h)\\circ u.$$\nThus $b$ is a natural Hom bijection and defines the required adjunction $F\\dashv H$. Its unit is $\\rho_{FK}\\circ\\eta_K$ and its counit at $N$ is $\\epsilon_N\\circ F(\\rho_N^{-1})$, where $\\eta,\\epsilon$ belong to the adjunction in step 1. This is the transport of that adjunction along exactly the canonical isomorphism in step 2. The inverse and naturality computations give the construction directly, without a separate transport lemma.",
    "uses": [],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-levelwise-adjunction.proof.md",
+    "place": "only paragraph: expand transport into its Hom bijection, inverse and naturality"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sfb-extend-scalars-kflat",
+  "def-sfb-derived-extend-restrict-adjunction",
+  "def-sfb-derived-restrict-levelwise"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-levelwise-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-extend-levelwise-adjunction.proof.md",
+  "place": "only paragraph, expanded by the explicit natural Hom bijection"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedExtendMapDerivedCategoryAdjunction|derivedExtendRestrictAdjunction|ofNatIsoRight",
+   "results": "19 hits, including Mathlib/CategoryTheory/Adjunction/Basic.lean:521-531 for transport formulas. No derived extension/restriction declaration for module objects. Actual search heads: Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "CategoryTheory.Adjunction.ofNatIsoRight and its Hom-bijection formulas; read Mathlib/CategoryTheory/Adjunction/Basic.lean:496-531. This transports an already supplied adjunction; it does not construct the derived module-object functors. Actual search heads: CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_apply, CategoryTheory.Adjunction.homEquiv_ofNatIsoRight_symm_apply",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product extension of scalars is left adjoint to the exact termwise restriction functor on derived categories",
+   "results": "Eight ordinary ModuleCat scalar-change hits, including ModuleCat.extendRestrictScalarsAdj, not unbounded derived module-object functors. Actual search heads: ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for module objects is left adjoint to restriction of scalars applied termwise on unbounded derived categories",
+   "results": "Eight hits as recorded in searches.jsonl; ordinary ModuleCat adjunctions and generic derived-category results. Read Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-151: its composite-derived-functor inputs are not the module-object construction. Actual search heads: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.derived, DerivedCategory.instLinear, DerivedCategory.instLinearCochainComplexIntQ, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ee]xtend|[Ee]xtend.*[Dd]erived|rightDerived.*[Rr]estrict|ofNatIsoRight",
+   "results": "19 hits, including Mathlib/CategoryTheory/Adjunction/Basic.lean:521-531 for transport formulas. No derived extension/restriction declaration for module objects. Actual search heads: Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived functor of extension of scalars for commutative ring objects is adjoint to the functor induced by exact restriction of scalars",
+   "results": "Eight hits as recorded in searches.jsonl; ordinary ModuleCat adjunctions and generic derived-category results. Read Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144-151: its composite-derived-functor inputs are not the module-object construction. Actual search heads: ModuleCat.extendRestrictScalarsAdj, comonadicExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit_app",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -123,5 +201,21 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "def-sfb-derived-extend-levelwise-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the imported statement. Recorded the existing derived-adjunction and termwise-comparison constructions as statement and proof dependencies, and expanded transport into its Hom bijection, inverse and naturality. No new nodes. The recorded slopmaster2 module is absent from the current source checkout, so no attachment is claimed.",
+  "blueprint": "Realizes the only paragraph of def-sfb-derived-extend-levelwise-adjunction.proof.md, and the final termwise-adjunction clause of its unit. The unit key node includes this clause together with existence and computation of derived extension, hence is recorded in same_as without citing it (which would create a cycle).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-5054b4046",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5054b4046 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing; review.md is written. The item's statement is byte-identical to the main-20261015 blueprint .md (order 1629). Its stmt_deps and proof_deps equal the blueprint uses list: lem-sfb-extend-scalars-kflat, def-sfb-derived-extend-restrict-adjunction and def-sfb-derived-restrict-levelwise. There are no new nodes and no SGA. The three steps carry out the one-paragraph blueprint proof: transport L(Ext) ⊣ R(Res) along R(Res) ≅ D(Res). This is also the route in the last sentence of the unit's proof. Step 1: the hypotheses of the cited adjunction node (closed symmetric monoidal Grothendieck abelian, additive tensor, functorial flat resolution with flat values and an epimorphism onto M, morphism of commutative monoid objects) match the lemma's situation one by one. The adjunction is taken from that node's statement, not its proof. Step 2: the levelwise node states a canonical isomorphism of functors D(Mod_S) → D(Mod_R) in the right direction. Step 3: I checked b = ρ∘a, its inverse a^{-1}(ρ^{-1}∘−), the two-variable naturality, the unit ρ_{FK}η_K and the counit ε_N F(ρ_N^{-1}). They are all correct and match Mathlib Adjunction.ofNatIsoRight. Edge cases φ = id, S = 0 and Z → Z/n all hold, and no flatness or boundedness is used. I computed the full dependency closure of the item over the snapshot DAG (336 nodes) and the item is not in it, so there is no cycle. The parent unit node sk-def-sfb-derived-extension-of-scalars already states and proves this adjunction as its last clause. Both are imported blueprint nodes, so this is not a new-node duplicate, and it is correctly recorded in same_as without being cited. The six Mathlib search records are plausible and their 'no exact match' verdicts are correct. No Lean attachment is claimed, which is right because the slopmaster2 declaration rests on a sorry. Advisory: step 1's 'by definition F = S⊗^L_R −' relies on notation that only the unit node defines. tool_uses: none."
  }
 }
