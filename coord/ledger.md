@@ -16996,3 +16996,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: returned deliver/Q23/lem-per-rational-singularity-birational-propagation (reviewer RETURN: Return under the route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json). Section '2026-10)
 - 03:56 L: returned deliver/Q96/lem-per-surface-modification-h1-exact (reviewer RETURN: Dropped item. The item lem-per-surface-modification-h1-exact is in side coord/route-pivot-dropped.txt, section '2026-10-)
 - 03:57 L: returned deliver/Q38/lem-per-nisnevich-cover-limit-descent (reviewer RETURN: Route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json). The listed finding is confirmed: )
+- 03:57 L: returned deliver/Q81/lem-per-oriented-special-fibre-totalization (reviewer RETURN: I return this delivery because the item has been dropped from the route; the mathematics is not the problem. Side coord/)
