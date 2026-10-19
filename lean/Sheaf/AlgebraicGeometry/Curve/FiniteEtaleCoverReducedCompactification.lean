@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.FiniteEtaleCoverReducedCompactification
-public import WeilConjectures.AlgebraicGeometry.Curve

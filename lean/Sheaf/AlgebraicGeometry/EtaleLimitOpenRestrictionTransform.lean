@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenRestrictionTransform
-public import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCohomologyCoconeDegree
-public import Mathlib.Algebra.Category.Grp.AB

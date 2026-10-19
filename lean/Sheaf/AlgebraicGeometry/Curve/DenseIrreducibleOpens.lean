@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
-public import WeilConjectures.AlgebraicGeometry.Curve

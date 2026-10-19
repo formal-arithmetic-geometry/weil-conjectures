@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.AdditiveScalarBaseChange
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance

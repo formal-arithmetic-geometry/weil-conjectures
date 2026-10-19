@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
-public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex

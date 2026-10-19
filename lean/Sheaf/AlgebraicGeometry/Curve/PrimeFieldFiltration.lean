@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.PrimeFieldFiltration
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact

@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.FieldTheory.IsSepClosed
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism

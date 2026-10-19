@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCurve
-public import WeilConjectures.AlgebraicGeometry.Curve
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism

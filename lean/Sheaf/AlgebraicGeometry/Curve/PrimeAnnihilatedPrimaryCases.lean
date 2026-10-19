@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions

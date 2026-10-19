@@ -1,3 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections

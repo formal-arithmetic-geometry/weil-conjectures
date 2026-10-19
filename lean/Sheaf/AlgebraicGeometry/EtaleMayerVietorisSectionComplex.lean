@@ -1,7 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
-public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyMaps
-public import Mathlib.Algebra.Category.Grp.Biproducts
-public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf

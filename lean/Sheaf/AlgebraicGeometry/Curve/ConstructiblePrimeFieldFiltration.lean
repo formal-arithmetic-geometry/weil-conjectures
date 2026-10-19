@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.ConstructiblePrimeFieldFiltration
-public import WeilConjectures.AlgebraicGeometry.Curve.PrimeFieldFiltration

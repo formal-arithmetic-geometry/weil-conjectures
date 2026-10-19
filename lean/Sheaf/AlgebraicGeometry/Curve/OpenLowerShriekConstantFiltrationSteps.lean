@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs

@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
