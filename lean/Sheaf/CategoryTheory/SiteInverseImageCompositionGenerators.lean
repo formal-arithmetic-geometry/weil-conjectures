@@ -109,6 +109,145 @@ def SiteInverseImageCompositionGenerators : Prop :=
         ((sheafPullback u A K L).obj ((sheafPullback v A J K).obj F)).obj.map r.op =
       siteInverseImageNestedGenerator J K L v u A F U' V W (r ≫ φ) ψ)
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem nested_generator_eq (F : Sheaf J A)
+    (U : E) (V : D) (W : C) (φ : U ⟶ u.obj V) (ψ : V ⟶ v.obj W) :
+    siteInverseImageNestedGenerator J K L v u A F U V W φ ψ =
+      ((sheafAdjunctionContinuous v A J K).unit.app F).hom.app (op W) ≫
+        ((sheafAdjunctionContinuous u A K L).unit.app
+          ((sheafPullback v A J K).obj F)).hom.app (op (v.obj W)) ≫
+        ((sheafPullback u A K L).obj ((sheafPullback v A J K).obj F)).obj.map
+          (φ ≫ u.map ψ).op := by
+  let P := (sheafPullback v A J K).obj F
+  let Q := (sheafPullback u A K L).obj P
+  let η := (sheafAdjunctionContinuous u A K L).unit.app P
+  let a : F.obj.obj (op W) ⟶ P.obj.obj (op (v.obj W)) :=
+    ((sheafAdjunctionContinuous v A J K).unit.app F).hom.app (op W)
+  have hn : P.obj.map ψ.op ≫ η.hom.app (op V) =
+      η.hom.app (op (v.obj W)) ≫ Q.obj.map (u.map ψ).op :=
+    η.hom.naturality ψ.op
+  change (a ≫ P.obj.map ψ.op) ≫ (η.hom.app (op V) ≫ Q.obj.map φ.op) =
+    a ≫ η.hom.app (op (v.obj W)) ≫ Q.obj.map (φ ≫ u.map ψ).op
+  calc
+    _ = a ≫ (P.obj.map ψ.op ≫ η.hom.app (op V)) ≫ Q.obj.map φ.op := by
+      simp only [Category.assoc]
+    _ = a ≫ (η.hom.app (op (v.obj W)) ≫ Q.obj.map (u.map ψ).op) ≫
+        Q.obj.map φ.op := congrArg (fun f ↦ a ≫ f ≫ Q.obj.map φ.op) hn
+    _ = _ := by simp only [op_comp, Functor.map_comp, Category.assoc]
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem composition_generators :
+    SiteInverseImageCompositionGenerators J K L v u A := by
+  let := Functor.isContinuous_comp v u J K L
+  let adj := (sheafAdjunctionContinuous v A J K).comp
+    (sheafAdjunctionContinuous u A K L)
+  let adj' : sheafPullback (v ⋙ u) A J L ⊣
+      u.sheafPushforwardContinuous A K L ⋙ v.sheafPushforwardContinuous A J K :=
+    sheafAdjunctionContinuous (v ⋙ u) A J L
+  let κ := adj.leftAdjointUniq adj'
+  refine ⟨κ, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro F
+    simpa only [adj, adj', κ, Adjunction.comp_unit_app, Functor.comp_map, Category.assoc] using
+      adj.unit_leftAdjointUniq_hom_app adj' F
+  · intro κ' hκ'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext F
+    apply (adj.homEquiv F _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    simpa only [adj, adj', κ, Adjunction.comp_unit_app, Functor.comp_map, Category.assoc] using
+      (hκ' F).trans (by
+        simpa only [adj, adj', κ, Adjunction.comp_unit_app, Functor.comp_map, Category.assoc] using
+          (adj.unit_leftAdjointUniq_hom_app adj' F).symm)
+  · intro F U V W φ ψ
+    let P := (sheafPullback v A J K).obj F
+    let Q := (sheafPullback u A K L).obj P
+    let R := (sheafPullback (v ⋙ u) A J L).obj F
+    let a : F.obj.obj (op W) ⟶ Q.obj.obj (op ((v ⋙ u).obj W)) :=
+      ((sheafAdjunctionContinuous v A J K).unit.app F).hom.app (op W) ≫
+        ((sheafAdjunctionContinuous u A K L).unit.app P).hom.app (op (v.obj W))
+    have hκ : a ≫ (κ.hom.app F).hom.app (op ((v ⋙ u).obj W)) =
+        ((sheafAdjunctionContinuous (v ⋙ u) A J L).unit.app F).hom.app (op W) := by
+      have hh := congrArg (fun f ↦ f.hom.app (op W))
+        (adj.unit_leftAdjointUniq_hom_app adj' F)
+      simpa only [a, P, Q, adj, adj', κ, Adjunction.comp_unit_app,
+        ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Functor.comp_map,
+        Functor.sheafPushforwardContinuous_map_hom_app,
+        Functor.comp_obj, Functor.id_obj, Category.assoc] using hh
+    have hn : Q.obj.map (φ ≫ u.map ψ).op ≫ (κ.hom.app F).hom.app (op U) =
+        (κ.hom.app F).hom.app (op ((v ⋙ u).obj W)) ≫
+          R.obj.map (φ ≫ u.map ψ).op :=
+      (κ.hom.app F).hom.naturality (φ ≫ u.map ψ).op
+    rw [nested_generator_eq]
+    dsimp only [siteInverseImageGenerator]
+    simp only [← Category.assoc] at ⊢
+    change (a ≫ Q.obj.map (φ ≫ u.map ψ).op) ≫ (κ.hom.app F).hom.app (op U) =
+      ((sheafAdjunctionContinuous (v ⋙ u) A J L).unit.app F).hom.app (op W) ≫
+        R.obj.map (φ ≫ u.map ψ).op
+    calc
+      _ = a ≫ (Q.obj.map (φ ≫ u.map ψ).op ≫ (κ.hom.app F).hom.app (op U)) :=
+        Category.assoc _ _ _
+      _ = a ≫ ((κ.hom.app F).hom.app (op ((v ⋙ u).obj W)) ≫
+          R.obj.map (φ ≫ u.map ψ).op) := congrArg (fun f ↦ a ≫ f) hn
+      _ = _ := by rw [← Category.assoc, hκ]
+  · intro F H α β h
+    apply (adj.homEquiv F H).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext W
+    have hh := h ((v ⋙ u).obj W.unop) (v.obj W.unop) W.unop (𝟙 _) (𝟙 _)
+    dsimp only [siteInverseImageNestedGenerator, siteInverseImageGenerator] at hh
+    erw [Functor.map_id, Functor.map_id, Category.comp_id, Category.comp_id] at hh
+    simpa only [adj, Adjunction.comp_unit_app,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Functor.comp_map,
+      Functor.sheafPushforwardContinuous_map_hom_app,
+        Functor.comp_obj, Functor.id_obj, Category.assoc] using hh
+  · intro F F' f U V W φ ψ
+    let T := sheafPullback v A J K ⋙ sheafPullback u A K L
+    let Q := T.obj F
+    let Q' := T.obj F'
+    let g := T.map f
+    let a : F.obj.obj (op W) ⟶ Q.obj.obj (op (u.obj (v.obj W))) :=
+      ((sheafAdjunctionContinuous v A J K).unit.app F).hom.app (op W) ≫
+        ((sheafAdjunctionContinuous u A K L).unit.app
+          ((sheafPullback v A J K).obj F)).hom.app (op (v.obj W))
+    let a' : F'.obj.obj (op W) ⟶ Q'.obj.obj (op (u.obj (v.obj W))) :=
+      ((sheafAdjunctionContinuous v A J K).unit.app F').hom.app (op W) ≫
+        ((sheafAdjunctionContinuous u A K L).unit.app
+          ((sheafPullback v A J K).obj F')).hom.app (op (v.obj W))
+    have hη : a ≫ g.hom.app (op (u.obj (v.obj W))) = f.hom.app (op W) ≫ a' := by
+      have hh := congrArg (fun h ↦ h.hom.app (op W)) (adj.unit.naturality f)
+      simpa only [a, a', Q, Q', g, T, adj, Adjunction.comp_unit_app,
+        ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Functor.comp_map,
+        Functor.sheafPushforwardContinuous_map_hom_app,
+        Functor.comp_obj, Functor.id_obj, Functor.id_map, Category.assoc] using
+        hh.symm
+    have hn : Q.obj.map (φ ≫ u.map ψ).op ≫ g.hom.app (op U) =
+        g.hom.app (op (u.obj (v.obj W))) ≫ Q'.obj.map (φ ≫ u.map ψ).op :=
+      g.hom.naturality (φ ≫ u.map ψ).op
+    rw [nested_generator_eq, nested_generator_eq]
+    simp only [← Category.assoc] at ⊢
+    change (a ≫ Q.obj.map (φ ≫ u.map ψ).op) ≫ g.hom.app (op U) =
+      ((f.hom.app (op W) ≫
+        ((sheafAdjunctionContinuous v A J K).unit.app F').hom.app (op W)) ≫
+        ((sheafAdjunctionContinuous u A K L).unit.app
+          ((sheafPullback v A J K).obj F')).hom.app (op (v.obj W))) ≫
+          Q'.obj.map (φ ≫ u.map ψ).op
+    rw [Category.assoc (f.hom.app (op W))]
+    change _ = (f.hom.app (op W) ≫ a') ≫ Q'.obj.map (φ ≫ u.map ψ).op
+    calc
+      _ = a ≫ (Q.obj.map (φ ≫ u.map ψ).op ≫ g.hom.app (op U)) :=
+        Category.assoc _ _ _
+      _ = a ≫ (g.hom.app (op (u.obj (v.obj W))) ≫
+          Q'.obj.map (φ ≫ u.map ψ).op) := congrArg (fun h ↦ a ≫ h) hn
+      _ = _ := by rw [← Category.assoc, hη]
+  · intro F U U' r V W φ ψ
+    simp [siteInverseImageNestedGenerator, siteInverseImageGenerator,
+      ← Functor.map_comp, ← op_comp]
+
 end Coefficients
 
 /-- The preceding composition statement for the two coefficient categories of the node.
@@ -159,6 +298,9 @@ theorem site_inverse_image_composition_generators
     (L : GrothendieckTopology E) (v : C ⥤ D) (u : D ⥤ E)
     [v.IsContinuous J K] [u.IsContinuous K L] :
     SiteInverseImageCompositionGeneratorsForSetsAndAbelianGroups.{u, w} J K L v u := by
-  sorry
+  let : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{max u w}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, w, u, w} _
+  exact ⟨composition_generators J K L v u (Type (max u w)),
+    composition_generators J K L v u AddCommGrpCat.{max u w}⟩
 
 end CategoryTheory
