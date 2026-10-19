@@ -17522,3 +17522,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:15 L: merged deliver/N0/lem-sf-constructible-exceptional-coefficient-construction (reviewer FIX; first push; new nodes: 0)
 - 19:15 L: merged deliver/Q17/lem-coef-finite-adjunction-transition (stage 2; reviewer PASS; parallel immutable checks)
 - 19:16 L: merged deliver/Q10/thm-sf-verdier-exchange (stage 2; reviewer PASS; parallel immutable checks)
+- 19:18 L: returned deliver/NZ/lem-sf-constructible-exceptional-coefficient-coherence (reviewer RETURN: I read the item, all 13 steps, the cited statements, the citer and construction nodes, and the live Lean record behind t)
