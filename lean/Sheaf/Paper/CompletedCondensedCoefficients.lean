@@ -15,8 +15,7 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 
 /-!
 # Comparison with completed condensed coefficients
@@ -155,6 +154,43 @@ noncomputable def completedSubfieldLeg (X : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) :=
   completedCoefficientMap X (Profinite.padicSubfieldCondensedRingToPadicAlgCl l E)
 
+set_option backward.isDefEq.respectTransparency false in
+open CategoryTheory.MonObj CategoryTheory.MonoidalCategory in
+private noncomputable def siftedRingCoconeIsColimit
+    {C : Type*} [Category C] [MonoidalCategory C]
+    {J : Type*} [Category J] [IsSifted J]
+    {D : J ⥤ Mon C} (c : Cocone D)
+    (hc : IsColimit ((Mon.forget C).mapCocone c))
+    [PreservesColimit₂ (D ⋙ Mon.forget C) (D ⋙ Mon.forget C) (curriedTensor C)] :
+    IsColimit c := by
+  let desc (s : Cocone D) : c.pt ⟶ s.pt := by
+    let d : c.pt.X ⟶ s.pt.X := hc.desc ((Mon.forget C).mapCocone s)
+    have hd (j : J) : (c.ι.app j).hom ≫ d = (s.ι.app j).hom :=
+      hc.fac ((Mon.forget C).mapCocone s) j
+    have : IsMonHom d := by
+      constructor
+      · obtain ⟨j⟩ := IsSifted.nonempty (C := J)
+        rw [← IsMonHom.one_hom (c.ι.app j).hom, Category.assoc, hd j]
+        exact IsMonHom.one_hom (s.ι.app j).hom
+      · apply (hc.tensor hc).hom_ext
+        intro j
+        change ((c.ι.app j).hom ⊗ₘ (c.ι.app j).hom) ≫ μ[c.pt.X] ≫ d =
+          ((c.ι.app j).hom ⊗ₘ (c.ι.app j).hom) ≫ (d ⊗ₘ d) ≫ μ[s.pt.X]
+        rw [← IsMonHom.mul_hom_assoc, hd j,
+          tensorHom_comp_tensorHom_assoc, hd j]
+        exact IsMonHom.mul_hom (s.ι.app j).hom
+    exact Mon.Hom.mk d
+  refine { desc := desc, fac := ?_, uniq := ?_ }
+  · intro s j
+    apply Mon.Hom.ext
+    exact hc.fac ((Mon.forget C).mapCocone s) j
+  · intro s m hm
+    apply Mon.Hom.ext
+    apply hc.hom_ext
+    intro j
+    exact (congrArg Mon.Hom.hom (hm j)).trans
+      (hc.fac ((Mon.forget C).mapCocone s) j).symm
+
 /-- Integral comparison with the inverse limit of the finite constant quotient rings.
 A uniformizer is specified by generating the maximal ideal. Each pulled-back quotient
 is identified as the constant sheaf with that finite quotient ring as value.
@@ -240,7 +276,10 @@ These are steps 3--5 of the node's proof.
 -/
 theorem completedCondensedAlgebraicClosure (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     Nonempty (IsColimit (completedSubfieldCocone X l)) := by
-  sorry
+  have : IsSifted (PadicAlgCl.FiniteIntermediateField l) := IsFiltered.isSifted
+  refine ⟨siftedRingCoconeIsColimit _ ?_⟩
+  change IsColimit (padicAlgClRingObjCocone X l)
+  exact isColimitPadicAlgClRingObjCocone X l
 
 /-- Inverse image respects every reduction, integral inclusion and finite-field leg.
 Together with the limit and colimit universal properties this states compatibility of
