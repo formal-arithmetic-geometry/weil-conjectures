@@ -9,6 +9,8 @@ public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.PbcRationalCategory
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Mathlib.GroupTheory.OrderOfElement
 
 /-!
 # Finite-extension specialization and scalars for the published complete category
@@ -51,7 +53,38 @@ theorem pbcPadicCoefficientFacts (l : ℕ) [Fact l.Prime]
       (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1))) ∧
       (∀ n : ℕ, 1 ≤ n → adicQuotientPerfect (Padic.coefficientExtensionIntegers l E)
         (Ideal.span {Padic.coefficientExtensionUniformizer l E}) n) := by
-  sorry
+  have h := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hpid : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+    h.2.2.2.2.2.2.2.2.1
+  have hfinite (n : ℕ) : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
+  refine ⟨inferInstance, Submodule.fg_span_singleton _, ?_, hfinite, ?_⟩
+  · have : Finite (Padic.coefficientExtensionIntegers l E ⧸
+        Ideal.span {Padic.coefficientExtensionUniformizer l E}) := by
+      simpa only [Padic.coefficientExtensionRing, Padic.coefficientExtensionIdeal,
+        Nat.zero_add, pow_one]
+        using hfinite 0
+    intro x
+    exact (isOfFinAddOrder_of_finite x).exists_nsmul_eq_zero
+  · intro n hn
+    obtain ⟨P, hge, hle, hfree, _, hrest⟩ :=
+      (AlgebraicGeometry.standard_quotients_perfect l n hn).2 E
+    obtain ⟨_, _, _, φ, ε, hε, _, _, _⟩ := hrest
+    have hqi : QuasiIso ε := by
+      have hiso : IsIso (DerivedCategory.Q.map ε) := by
+        rw [hε]
+        infer_instance
+      exact (DerivedCategory.isIso_Q_map_iff_quasiIso (φ := ε)).1 hiso
+    let := HasDerivedCategory.standard
+      (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
+    unfold adicQuotientPerfect
+    refine ⟨P, -1, 0, hge, hle, ?_, ?_⟩
+    · intro i
+      have := (hfree i).1
+      exact ⟨inferInstance, (hfree i).2⟩
+    · exact ⟨(asIso (DerivedCategory.Q.map ε)).symm⟩
 
 /-- The actual p-adic coefficient datum, with its principal ideal and positive quotients.
 Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/

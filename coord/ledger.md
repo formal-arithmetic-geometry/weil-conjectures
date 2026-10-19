@@ -16763,3 +16763,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/K4/Sheaf.CategoryTheory.ScalarLocalizationDerivedHom (stage 3; reviewer PASS; first push; landing 20261019T005313-L-2750689 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/K4/Sheaf.Paper.IndConstructibleExtensions (stage 3; reviewer PASS; first push; landing 20261019T005313-L-2750797 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/ind-constructible-extensions-private-universes.md)
 - 00:53 L: merged deliver/K5/Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage (stage 3; reviewer PASS; first push; landing 20261019T005314-L-2750908 (interface); batch 20261019T005255; modules 3; new nodes 2)
+- 00:53 L: merged deliver/K5/Sheaf.Paper.IntegralUniformCoefficient (stage 3; reviewer PASS; first push; landing 20261019T005314-L-2751011 (proof); batch 20261019T005255; modules 1; new nodes 0)
