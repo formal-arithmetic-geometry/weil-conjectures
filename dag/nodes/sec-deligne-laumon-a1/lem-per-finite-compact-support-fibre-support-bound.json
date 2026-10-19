@@ -1,0 +1,131 @@
+{
+ "id": "lem-per-finite-compact-support-fibre-support-bound",
+ "kind": "statement",
+ "title": "Fibre support bound for compactly supported higher direct images at finite coefficients",
+ "statement": "Let $k$ be a field and $\\Lambda$ a finite commutative ring whose additive exponent is invertible in $k$. Use the ordinary derived categories $D(T_{\\mathrm{et}},\\Lambda)$ of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories]. Let $f:X\\to Y$ be a separated morphism of finite type between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions], and let $d\\ge0$ be an integer such that every scheme-theoretic fibre $X_y$, $y\\in Y$ [def-pc-scheme-fibre], has topological Krull dimension at most $d$ [def-kun-topological-krull-dimension]. Let $Rf_!$ be the compact-support direct image of [def-amb-etale-compact-support] and $R^qf_!=\\mathcal H^qRf_!$ [def-weil-derived-cohomology-sheaves]. Let $F$ be a constructible sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-constructible-complexes] and $a\\ge0$ an integer such that the closed support of a sheaf (the complement of the largest Zariski open on which it vanishes; by [lemma-weil-pbc-geometric-stalk-conservative] this is the closure of the set of points with a nonzero geometric stalk) $Z$ of $F$ has dimension at most $a$. Then for every integer $q$ the closed support of $R^qf_!F$ has dimension at most $a+d-q$, the empty set having dimension $-\\infty$. In particular $R^qf_!F=0$ for $q<0$ and for $q>a+d$.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "4.2.4 (support estimate for the compact-support direct image along fibres of dimension <= d)",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F0V"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-amb-etale-compact-support",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constructible-complexes",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof": [
+  {
+   "text": "Choose a compactification $f=rj$ with $j:X\\hookrightarrow\\overline X$ an open immersion and $r:\\overline X\\to Y$ proper [thm-nagata-compactification], so $Rf_!F=Rr_*(j_!F)$ [def-amb-etale-compact-support]. The sheaf $j_!F$ is constructible: keep the finitely many strata of $F$ and add the closed complement $\\overline X\\setminus X$, on which it is zero. The scheme $\\overline X$ is of finite type over $k$, so $Rr_*$ preserves bounded constructibility [thm-dg-finite-type-constructibility]; hence every $R^qf_!F$ is constructible, and it is zero for $q<0$. For a constructible sheaf $G$ on the Noetherian scheme $Y$ the set $S(G)$ of points with a nonzero geometric stalk is a finite union of strata, so it is constructible; its closure is the closed support of $G$ [lemma-weil-pbc-geometric-stalk-conservative], and the generic point of every irreducible component of that closure lies in $S(G)$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-amb-etale-compact-support",
+    "thm-dg-finite-type-constructibility",
+    "def-weil-pbc-constructible-complexes",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1.1 and 4.2.4: constructibility of the direct images and supports of constructible sheaves"
+   }
+  },
+  {
+   "text": "Let $y\\in Y$ with a geometric point $\\bar y$ over it, and write $X_{\\bar y}\\subset\\overline X_{\\bar y}$ for the fibres. Proper base change for $r$ along $\\bar y\\to Y$ [lem-kun-proper-base-change-torsion-ring] and base change for extension by zero [lem-cbc-extension-zero-base-change] identify $(R^qf_!F)_{\\bar y}$ with $H^q(\\overline X_{\\bar y},(j_!F)|_{\\overline X_{\\bar y}})$, the cohomology with compact support of $F|_{X_{\\bar y}}$. Proper base change is a general theorem of etale cohomology (not a step of the trace formula or of Poincare duality).",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0F0X (stalks of direct images); proper base change"
+   }
+  },
+  {
+   "text": "Put $Z_y=Z\\times_Y\\operatorname{Spec}\\kappa(y)$ and $e(y)=\\dim Z_y\\le\\dim X_y\\le d$. The restriction of $j_!F$ to $\\overline X_{\\bar y}$ vanishes off the closure $W$ of $Z_{\\bar y}$. As $Z_{\\bar y}$ is closed in the open $X_{\\bar y}$, it is open and dense in $W$, so $\\dim W=\\dim Z_{\\bar y}$, and $\\dim Z_{\\bar y}=e(y)$ by [lem-sc-fibre-dimension-after-base-change]. The sheaf is pushed forward from $W$ [lem-kun-04ca], so its cohomology is that of a torsion sheaf on the finite-type $\\kappa(\\bar y)$-scheme $W$. The field $\\kappa(\\bar y)$ is separably closed, of torsion cohomological dimension $0$, so [thm-sc-finite-type-torsion-cd] gives vanishing in degrees $q>2\\dim W$. Hence $(R^qf_!F)_{\\bar y}=0$ whenever $Z_y$ is empty or $q>2e(y)$.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "lem-kun-04ca",
+    "thm-sc-finite-type-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0F0V and the bound cd <= 2 dim for finite-type schemes over a separably closed field"
+   }
+  },
+  {
+   "text": "Let $q\\ge0$ and let $T$ be an irreducible component of the closed support of $R^qf_!F$, with generic point $t$. By Step 1, $t$ has a nonzero stalk, so Step 3 gives $q\\le2e(t)\\le2d$ and $Z_t\\neq\\varnothing$. Let $Z'$ be the closure in $Z$ of an irreducible component of $Z_t$ of dimension $e(t)$; it is an irreducible closed subset of $Z\\times_YT$ dominating $T$, its generic point $\\zeta$ lies over $t$, and its fibre over $t$ is irreducible with generic point $\\zeta$ and dimension $e(t)$. Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $Z'\\to Y$ (with the reduced structure): $\\dim Z'=\\dim T+r$, and the local fibre dimension equals $r$ on a dense open of $Z'$, which contains $\\zeta$; so $r=e(t)$. Therefore $\\dim T=\\dim Z'-e(t)\\le a-\\lceil q/2\\rceil$.",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "def-kun-topological-krull-dimension",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: dim f(Z) + fibre dimension <= dim Z, Kiehl--Weissauer III"
+   }
+  },
+  {
+   "text": "Since $q\\le2d$ we have $\\lfloor q/2\\rfloor\\le d$, hence $a-\\lceil q/2\\rceil=a-q+\\lfloor q/2\\rfloor\\le a+d-q$. The closed support of $R^qf_!F$ is the finite union of its irreducible components, so its dimension is at most $a+d-q$. When $a+d-q<0$ no component can exist, as a nonempty space has dimension at least $0$, and $R^qf_!F=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.2.4: the count of degrees"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-constructible-complexes",
+  "lem-cbc-extension-zero-base-change",
+  "lem-kun-04ca",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-dg-finite-type-constructibility",
+  "thm-nagata-compactification",
+  "thm-sc-finite-type-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "L (route decision of the human, 2026-10-19)",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "4.2.4 and the fibrewise bound behind 4.1.1, at finite coefficients"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "L",
+  "item": "lem-per-artin-gabber-affine-curve",
+  "date": "2026-10-19",
+  "group": "L",
+  "why": "route decision of the human, 2026-10-19"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 2: the sheaf estimate of the support side",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

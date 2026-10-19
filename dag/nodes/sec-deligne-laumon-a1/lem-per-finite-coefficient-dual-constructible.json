@@ -1,0 +1,117 @@
+{
+ "id": "lem-per-finite-coefficient-dual-constructible",
+ "kind": "statement",
+ "title": "The finite-coefficient Verdier dual over a field has constructible cohomology",
+ "statement": "Let $k$ be a field and $\\Lambda$ a finite commutative ring whose additive exponent is invertible in $k$. Use the ordinary derived categories $D(T_{\\mathrm{et}},\\Lambda)$ of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories]. Let $T$ be a separated finite-type $k$-scheme with structure morphism $a:T\\to\\operatorname{Spec}k$, compactifiable by [thm-nagata-compactification]. Let $a^\\times$ be the right adjoint of $Ra_!$ [thm-amb-etale-exceptional-adjoint], put $\\omega_T=a^\\times\\Lambda$ and $D_T=R\\mathcal Hom_\\Lambda(-,\\omega_T)$ [def-pur-derived-internal-hom]. Then $\\omega_T$ is bounded with constructible cohomology sheaves [def-weil-pbc-constructible-complexes], and for every bounded complex $K$ with constructible cohomology sheaves, $D_TK$ lies in $D^+(T_{\\mathrm{et}},\\Lambda)$ and all its cohomology sheaves are constructible.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "4.1 and 4.2.4 (D_X of a constructible complex is constructible over a field)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "thm-nagata-compactification",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Both assertions are local on $T$. For an open immersion $u:U\\to T$, $u^*\\omega_T\\cong\\omega_U$ [lem-amb-etale-adjoint-locality] and $u^*R\\mathcal Hom_\\Lambda(K,\\omega_T)\\cong R\\mathcal Hom_\\Lambda(u^*K,u^*\\omega_T)$ [lem-weil-pbc-ringed-internal-hom-exact-restriction]. A sheaf on $T$ is constructible if its restrictions to the members of a finite open cover are: intersect the strata on $U_j$ with $U_j\\setminus\\bigcup_{l<j}U_l$. So assume $T$ affine.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1: the finiteness of the operations is local on the scheme"
+   }
+  },
+  {
+   "text": "Choose a closed immersion $i:T\\hookrightarrow P=\\mathbf A^n_k$ and let $p:P\\to\\operatorname{Spec}k$ be the projection, $h:P\\setminus T\\hookrightarrow P$ the open complement. The composition isomorphism of compact supports [lem-amb-unbounded-compact-support-comparisons] and uniqueness of adjoints give $a^\\times\\cong i^\\times p^\\times$, and [cor-amb-affine-space-adjunction] gives $p^\\times\\Lambda\\cong\\Lambda_P(n)[2n]$, a lisse sheaf in one degree [def-asd-finite-etale-tate-twist]. For $M\\in D^b_c(P,\\Lambda)$ the closed-support triangle $i_*i^\\times M\\to M\\to Rh_*h^*M\\to$ [lem-exc-closed-support-triangle, lem-exc-closed-ambient] has $Rh_*h^*M$ bounded constructible by [thm-dg-finite-type-constructibility]; the cohomology sequence and [thm-constructible-serre] make $i_*i^\\times M$ bounded constructible, and $i^*i_*\\cong1$ [lem-kun-04ca] gives $i^\\times M\\in D^b_c(T,\\Lambda)$. With $M=\\Lambda_P(n)[2n]$ this proves the assertion on $\\omega_T$. No finiteness theorem beyond finite-type direct images over the field $k$ is used.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "cor-amb-affine-space-adjunction",
+    "def-asd-finite-etale-tate-twist",
+    "lem-exc-closed-support-triangle",
+    "lem-exc-closed-ambient",
+    "thm-dg-finite-type-constructibility",
+    "thm-constructible-serre",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1 and 4.2.4: f^! of a closed immersion into affine space, computed from Rh_* and purity of affine space"
+   }
+  },
+  {
+   "text": "$D_TK$ is bounded below, since $K$ is bounded above and $\\omega_T$ is bounded below. For constructibility, the truncation triangles of $K$ [lem-weil-heart-short-exact-triangles], the long exact sequences of $\\mathcal Ext$ sheaves and [thm-constructible-serre] reduce to $K=G$ a constructible sheaf, and then, by a finite partition into strata and the same closure, to $G=c_*u_!L$ with $u:S\\hookrightarrow V$ open, $c:V\\hookrightarrow T$ closed and $L$ lisse on $S$. Then $R\\mathcal Hom(c_*u_!L,\\omega_T)\\cong c_*Ru_*R\\mathcal Hom(L,u^*c^\\times\\omega_T)$ by the adjunctions $c_*\\dashv c^\\times$ and $u_!\\dashv u^*$ in sheafified form [lem-exc-closed-ambient, lem-amb-etale-adjoint-locality], and $c^\\times\\omega_T$ is bounded constructible by the argument of Step 2 applied to $c$ and its open complement in $T$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "thm-constructible-serre",
+    "lem-exc-closed-ambient",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1: devissage of a constructible sheaf along strata"
+   }
+  },
+  {
+   "text": "Etale locally $L$ is the constant sheaf of a finite $\\Lambda$-module $L_0$. Resolving $L_0$ by finite free $\\Lambda$-modules, $\\mathcal Ext^q(L_0,N)$ for $N\\in D^+$ with constructible cohomology depends only on finitely many terms of the resolution and of $N$, and each term contributes a finite sum of copies of a cohomology sheaf of $N$; so it is constructible. For $N\\in D^+$, $\\mathcal H^q(Ru_*N)=\\mathcal H^q(Ru_*\\tau^{\\le q}N)$ because $Ru_*$ maps $D^{>q}$ into $D^{>q}$, and the right side is constructible by [thm-dg-finite-type-constructibility]; $c_*$ is exact and preserves constructibility. Hence every cohomology sheaf of $D_TK$ is constructible.",
+   "uses": [
+    "thm-dg-finite-type-constructibility",
+    "thm-constructible-serre",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.1.1 and the finiteness of the six operations over a field used in 4.2.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-amb-affine-space-adjunction",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-constructible-complexes",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-kun-04ca",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "thm-constructible-serre",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "proof_origin": {
+  "by": "L (route decision of the human, 2026-10-19)",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "closed immersion into affine space, purity of affine space and finite-type direct images over the field k"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "L",
+  "item": "lem-per-artin-gabber-affine-curve",
+  "date": "2026-10-19",
+  "group": "L",
+  "why": "route decision of the human, 2026-10-19"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 4: constructibility of D_X(K[n]) on the cosupport side",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

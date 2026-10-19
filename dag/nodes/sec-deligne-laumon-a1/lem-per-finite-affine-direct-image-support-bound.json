@@ -1,0 +1,106 @@
+{
+ "id": "lem-per-finite-affine-direct-image-support-bound",
+ "kind": "statement",
+ "title": "Artin's affine support estimate for the direct image at finite coefficients",
+ "statement": "Let $k$ be a field and $\\Lambda$ a finite commutative ring whose additive exponent is invertible in $k$. Use the ordinary derived categories $D(T_{\\mathrm{et}},\\Lambda)$ of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories]. Let $f:X\\to Y$ be an affine morphism of finite type [pqf-def-affine-morphism] between separated finite-type $k$-schemes [def-weil-pbc-scheme-conventions], and let $Rf_*$ be the right derived functor of the module direct image [def-weil-pbc-direct-image] on $D^+(-_{\\mathrm{et}},\\Lambda)$. Let $L\\in D^+(X_{\\mathrm{et}},\\Lambda)$ have constructible cohomology sheaves [def-weil-pbc-constructible-complexes] and satisfy the support condition: for every $i$ the closed support of a sheaf (the complement of the largest Zariski open on which it vanishes; by [lemma-weil-pbc-geometric-stalk-conservative] this is the closure of the set of points with a nonzero geometric stalk) of $\\mathcal H^{-i}L$ [def-weil-derived-cohomology-sheaves] has dimension at most $i$, the empty set having dimension $-\\infty$, as in [def-per-support-condition] read at finite coefficients. Then $Rf_*L$ is bounded with constructible cohomology sheaves and satisfies the support condition.",
+ "source": {
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Theorem 4.1.1 (Artin's estimate: Rf_* of an affine morphism preserves pD^{<=0})",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F0X"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-derived-cohomology-sheaves",
+  "def-per-support-condition",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof": [
+  {
+   "text": "For $i<0$ the closed support of $\\mathcal H^{-i}L$ has dimension $<0$, so it is empty and $\\mathcal H^{-i}L=0$. As $L$ is bounded below, it has only finitely many nonzero cohomology sheaves $F_i=\\mathcal H^{-i}L$, $0\\le i\\le N$, each constructible with closed support $Z_i$ of dimension at most $i$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-per-support-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "2.1.2: the support condition bounds the degrees"
+   }
+  },
+  {
+   "text": "Fix $i$ and $q\\ge0$. A point $x$ with $(F_i)_{\\bar x}\\ne0$ lies in $Z_i$, so $\\overline{\\{x\\}}\\subset Z_i$ and $\\operatorname{trdeg}_k\\kappa(x)=\\dim\\overline{\\{x\\}}\\le i$ [lem-sc-closed-irreducible-dimension-trdeg]: the support of $F_i$ in the sense of [def-kun-support] lies in $E_i(X)$. Cohomology of $\\Lambda$-module sheaves agrees with that of the underlying abelian sheaves [lem-weil-pbc-etale-module-cohomology-forget], which are torsion, so [lem-kun-affine-direct-image-support-bound] shows that every point $y$ with $(R^qf_*F_i)_{\\bar y}\\ne0$ has $\\operatorname{trdeg}_k\\kappa(y)\\le i-q$. The sheaf $R^qf_*F_i$ is constructible [thm-dg-finite-type-constructibility], so its closed support is the finite union of the closures of the generic points of its components, which have nonzero stalks (as in Step 1 of [lem-per-finite-compact-support-fibre-support-bound]); each has dimension $\\operatorname{trdeg}_k\\kappa(y)\\le i-q$ by [lem-sc-closed-irreducible-dimension-trdeg]. Thus the closed support of $R^qf_*F_i$ has dimension at most $i-q$.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "def-kun-support",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-kun-affine-direct-image-support-bound",
+    "thm-dg-finite-type-constructibility",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0F0X (Lemma 59.95.8): the support of R^q f_* F lies in E_{a-q}(Y)"
+   }
+  },
+  {
+   "text": "Hence $\\mathcal H^{j}(Rf_*(F_i[i]))=R^{i+j}f_*F_i$ has closed support of dimension at most $-j$ and vanishes for $i+j<0$: $Rf_*(F_i[i])$ satisfies the support condition. The truncation triangles of the standard t-structure [lem-weil-heart-short-exact-triangles] build $L$ from the finitely many $F_i[i]$; $Rf_*$ is triangulated, and the support condition is closed under extensions (the middle cohomology sheaf of a triangle vanishes where both outer ones vanish). So $Rf_*L$ satisfies the support condition. It is bounded with constructible cohomology by [thm-dg-finite-type-constructibility].",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "thm-dg-finite-type-constructibility",
+    "def-per-support-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 4.1.1: the sheaf estimate and the truncation induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-support",
+  "def-per-support-condition",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-affine-direct-image-support-bound",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "proof_origin": {
+  "by": "L (route decision of the human, 2026-10-19)",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "Theorem 4.1.1 with the finite-coefficient calculation of Stacks Tag 0F0X"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "L",
+  "item": "lem-per-artin-gabber-affine-curve",
+  "date": "2026-10-19",
+  "group": "L",
+  "why": "route decision of the human, 2026-10-19"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 4: the affine estimate of the cosupport side",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
