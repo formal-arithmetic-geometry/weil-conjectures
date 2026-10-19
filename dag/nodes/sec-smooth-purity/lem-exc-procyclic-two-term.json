@@ -1,342 +1,325 @@
 {
-  "id": "lem-exc-procyclic-two-term",
-  "blueprint": {
-    "is": "lem-exc-procyclic-two-term",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "A two-term computation for a procyclic group",
-  "statement": "Let $\\ell$ be a prime number, $s\\geq0$ an integer, and $A$ a finite ring killed by $\\ell^s$. Let $G$ be the additive group of $\\mathbf Z_\\ell$ [def-weil-l-adic-numbers], with its usual inverse-limit topology $\\mathbf Z_\\ell=\\varprojlim_{r\\geq1}\\mathbf Z/\\ell^r\\mathbf Z$, and let $\\tau=1$ be its additive topological generator. For a discrete continuous $A[G]$-module $M$ and its continuous cohomology as in [def-exc-continuous-cohomology], that cohomology is computed by\n$$\n[\\,M\\xrightarrow{\\tau-1}M\\,]\n\\quad\\text{in degrees }0,1,\n$$\nwhere $(\\tau-1)m=\\tau\\cdot m-m$.",
-  "source": {
+ "id": "lem-exc-procyclic-two-term",
+ "blueprint": {
+  "is": "lem-exc-procyclic-two-term",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A two-term computation for a procyclic group",
+ "statement": "Let $\\ell$ be a prime number, $s\\geq0$ an integer, and $A$ a finite ring killed by $\\ell^s$. Let $G$ be the additive group of $\\mathbf Z_\\ell$ [def-weil-l-adic-numbers], with its usual inverse-limit topology $\\mathbf Z_\\ell=\\varprojlim_{r\\geq1}\\mathbf Z/\\ell^r\\mathbf Z$, and let $\\tau=1$ be its additive topological generator. For a discrete continuous $A[G]$-module $M$ and its continuous cohomology as in [def-exc-continuous-cohomology], that cohomology is computed by\n$$\n[\\,M\\xrightarrow{\\tau-1}M\\,]\n\\quad\\text{in degrees }0,1,\n$$\nwhere $(\\tau-1)m=\\tau\\cdot m-m$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
+  "place": "node lem-exc-procyclic-two-term, order 1915"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-exc-continuous-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $A$ and $G$. The inverse-limit description in the statement makes $G$ profinite, with the kernels $\\ell^rG$ of reduction modulo $\\ell^r$ a neighbourhood basis at zero. Work in the abelian category $\\mathcal C$ of discrete continuous $A[G]$-modules from [lem-exc-discrete-modules-abelian]. Define the functor $K:\\mathcal C\\to\\operatorname{CochainComplex}(A\\text{-Mod},\\mathbf N)$ by $K(M)^0=K(M)^1=M$, $d^0=\\tau-1$, and zero in all other degrees; an equivariant coefficient map induces that same map in degrees zero and one. It commutes with $\\tau-1$. Its cohomology is $T^0(M)=\\ker(\\tau-1)$, $T^1(M)=M/(\\tau-1)M$, and $T^q(M)=0$ for $q\\geq2$. The first is $M^G$: a vector fixed by $\\tau$ is fixed by every integer multiple of $\\tau$, and its stabilizer is closed as well as open (the complement of an open subgroup is a union of open cosets), hence contains the closure of that dense cyclic subgroup. This identification is natural in coefficient maps.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "node lem-exc-procyclic-two-term, order 1915"
+    "place": "Proof, first paragraph; explicit construction of the two-term functor"
+   }
   },
-  "stmt_deps": [
-    "def-weil-l-adic-numbers",
-    "def-exc-continuous-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Fix $A$ and $G$. The inverse-limit description in the statement makes $G$ profinite, with the kernels $\\ell^rG$ of reduction modulo $\\ell^r$ a neighbourhood basis at zero. Work in the abelian category $\\mathcal C$ of discrete continuous $A[G]$-modules from [lem-exc-discrete-modules-abelian]. Define the functor $K:\\mathcal C\\to\\operatorname{CochainComplex}(A\\text{-Mod},\\mathbf N)$ by $K(M)^0=K(M)^1=M$, $d^0=\\tau-1$, and zero in all other degrees; an equivariant coefficient map induces that same map in degrees zero and one. It commutes with $\\tau-1$. Its cohomology is $T^0(M)=\\ker(\\tau-1)$, $T^1(M)=M/(\\tau-1)M$, and $T^q(M)=0$ for $q\\geq2$. The first is $M^G$: a vector fixed by $\\tau$ is fixed by every integer multiple of $\\tau$, and its stabilizer is closed as well as open (the complement of an open subgroup is a union of open cosets), hence contains the closure of that dense cyclic subgroup. This identification is natural in coefficient maps.",
-      "uses": [
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-        "place": "Proof, first paragraph; explicit construction of the two-term functor"
-      }
-    },
-    {
-      "text": "A short exact sequence in $\\mathcal C$ is short exact on underlying $A$-modules by [lem-exc-discrete-modules-abelian], so applying $K$ gives a degreewise short exact sequence of complexes (the original sequence in degrees zero and one and the zero sequence elsewhere). Apply [lem-weil-pbc-complex-ses-homology-long-exact] to obtain its connecting maps, and [lem-weil-pbc-complex-ses-long-exact-naturality] to obtain their naturality. There is an initial zero because these complexes have no negative terms: the map on their degree-zero kernels is the restriction of the original injection and is injective. The maps on $T^0$ and $T^1$ are induced by the coefficient maps on a kernel and a quotient, so they preserve addition of maps; the higher functors are zero. Thus these functors and connecting maps satisfy precisely [def-weil-pbc-delta-functor].",
-      "uses": [
-        "lem-exc-discrete-modules-abelian",
-        "lem-weil-pbc-complex-ses-homology-long-exact",
-        "lem-weil-pbc-complex-ses-long-exact-naturality",
-        "def-weil-pbc-delta-functor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 0117, lemma-long-exact-sequence-cochain, including functoriality; Tags 010Q--010S"
-      }
-    },
-    {
-      "text": "Apply [lem-exc-coinduced-discrete-embedding] to obtain the discrete continuous $A[G]$-module $D(M)=\\operatorname{Cont}(G,M)$ with action $(g\\cdot f)(x)=f(x+g)$ and the equivariant $A$-linear injection $\\iota_M(m)(x)=x\\cdot m$. For any $f\\in D(M)$, [lem-exc-coinduced-functions-open-stabilizer] gives an open subgroup $U$ with $f(x+u)=f(x)$ for $u\\in U$. By the neighbourhood basis in Step 1 choose $r\\geq1$ with $\\ell^rG\\subseteq U$. Consequently $f$ factors through reduction $G\\to\\mathbf Z/\\ell^r\\mathbf Z$: two lifts of the same residue differ by an element of $\\ell^rG$.",
-      "uses": [
-        "lem-exc-coinduced-discrete-embedding",
-        "lem-exc-coinduced-functions-open-stabilizer"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-        "place": "Proof, second paragraph; open-stabilizer factorization supplied by the existing generic nodes"
-      }
-    },
-    {
-      "text": "Write $L=\\ell^r$ for the modulus obtained in Step 3 and $N=\\ell^{r+s}=L\\ell^s$. Pull $f$ back to $\\mathbf Z/N\\mathbf Z$. Each residue modulo $L$ occurs $\\ell^s$ times, so $\\sum_{a=0}^{N-1}f(a)=\\ell^s\\sum_{a=0}^{L-1}f(a)=0$, since $\\ell^sM=0$. On representatives $0\\leq a<N$ set $h(a)=\\sum_{b=0}^{a-1}f(b)$, with empty sum zero. For $a<N-1$ subtraction gives $h(a+1)-h(a)=f(a)$; for $a=N-1$ the zero total sum gives $h(0)-h(N-1)=f(N-1)$. Thus $h$ is well defined on the cyclic quotient, and its pullback is continuous because that quotient is finite discrete. With the translation action it satisfies $(\\tau-1)h(x)=h(x+1)-h(x)=f(x)$. Therefore $\\tau-1:D(M)\\to D(M)$ is surjective.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-        "place": "Proof, third paragraph, explicit periodic partial-sum construction including the wraparound equation"
-      }
-    },
-    {
-      "text": "Step 4 gives $T^1(D(M))=0$, and $T^q(D(M))=0$ for $q\\geq2$ already follows from the definition of $K$. The injection $\\iota_M$ of Step 3 therefore induces zero in every positive degree. The category $\\mathcal C$ is abelian by Step 1 and $A\\text{-Mod}$ is abelian; Step 2 supplies a cohomological delta-functor. All hypotheses of [lem-weil-pbc-effaceable-delta-functor-universal] now hold, and hence $T$ is universal.",
-      "uses": [
-        "lem-weil-pbc-effaceable-delta-functor-universal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 010T, lemma-efface-implies-universal; applied to the effacement constructed in the blueprint third paragraph"
-      }
-    },
-    {
-      "text": "Let $C(M)^n=\\operatorname{Cont}(G^n,M)$ with the inhomogeneous differential of [lem-exc-continuous-cochains-delta-functor]. This node supplies its complex functor and its cohomological delta-functor $S^q=H^q(C(-))$. For $q>0$, [lem-exc-coinduced-continuous-acyclic] gives $S^q(D(M))=0$ for exactly the translation action used in Step 3. The natural monomorphism in [lem-exc-coinduced-discrete-embedding] therefore effaces every positive $S^q$. Apply [lem-weil-pbc-effaceable-delta-functor-universal] again to conclude that $S$ is universal. In degree zero the given differential is $d^0m(g)=g\\cdot m-m$, so its kernel is $M^G$, with no incoming boundaries. Thus $S^0$ and $T^0$ have the same natural identification with invariants.",
-      "uses": [
-        "lem-exc-continuous-cochains-delta-functor",
-        "lem-exc-coinduced-continuous-acyclic",
-        "lem-exc-coinduced-discrete-embedding",
-        "lem-weil-pbc-effaceable-delta-functor-universal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DVG, section-continuous-group-cohomology, displayed differential and discrete-module delta-functor; coinduced effacement from the cited existing nodes"
-      }
-    },
-    {
-      "text": "Define a natural map of complexes $e_M:C(M)\\to K(M)$ by $e_M^0=\\operatorname{id}_M$ under $C(M)^0=M$, $e_M^1(f)=f(\\tau)$, and $e_M^n=0$ for $n\\geq2$. Its only nontrivial differential equation is $e_M^1(d^0m)=\\tau\\cdot m-m=d_K^0(e_M^0m)$; in positive degrees both sides of the remaining equations are zero. Evaluation is $A$-linear and commutes with postcomposition by every coefficient map, so this is a natural chain map. The induced map in degree-zero cohomology is the identity on $M^G$.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-        "place": "Proof, final identification clause; explicit comparison chain map supplied by the agent"
-      }
-    },
-    {
-      "text": "For every short exact coefficient sequence, [lem-exc-continuous-cochains-short-exact] gives the degreewise short exact sequence of $C$-complexes, and Step 2 gives that of $K$-complexes. Naturality of $e$ makes its three components a morphism between these two sequences. Apply [lem-weil-pbc-complex-ses-long-exact-naturality] to obtain $H^{q+1}(e_{M'})\\circ\\delta_S^q=\\delta_T^q\\circ H^q(e_{M''})$. Hence $H^\\bullet(e):S\\to T$ is a morphism of delta-functors with degree-zero component the identity.",
-      "uses": [
-        "lem-exc-continuous-cochains-short-exact",
-        "lem-weil-pbc-complex-ses-long-exact-naturality"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 0117, lemma-long-exact-sequence-cochain, functoriality applied to the explicit comparison map"
-      }
-    },
-    {
-      "text": "By universality of $T$ there is a morphism $u:T\\to S$ extending the inverse degree-zero identification. The two composites $u\\circ H^\\bullet(e)$ and $H^\\bullet(e)\\circ u$ extend the identities in degree zero. By uniqueness for the universal delta-functors $S$ and $T$, respectively, each composite is the identity. This uses exactly the universal property in [def-weil-pbc-delta-functor], furnished in Steps 5 and 6 by [lem-weil-pbc-effaceable-delta-functor-universal]. Thus every $H^q(e_M)$ is an isomorphism, so $e_M$ is a quasi-isomorphism and becomes an isomorphism in the ordinary derived category by [def-weil-abstract-derived-category]. The continuous-cochain description of [def-exc-continuous-cohomology] identifies $C(M)$ as the complex computing the continuous cohomology in the statement. Consequently $K(M)=[M\\xrightarrow{\\tau-1}M]$ computes it as well, naturally in $M$; in particular $H^0(G,M)=\\ker(\\tau-1)$, $H^1(G,M)=\\operatorname{coker}(\\tau-1)$, and $H^q(G,M)=0$ for $q\\geq2$.",
-      "uses": [
-        "def-weil-pbc-delta-functor",
-        "lem-weil-pbc-effaceable-delta-functor-universal",
-        "def-weil-abstract-derived-category",
-        "def-exc-continuous-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-        "place": "Proof, third paragraph, final identification; universal-property argument and comparison quasi-isomorphism made explicit"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "A short exact sequence in $\\mathcal C$ is short exact on underlying $A$-modules by [lem-exc-discrete-modules-abelian], so applying $K$ gives a degreewise short exact sequence of complexes (the original sequence in degrees zero and one and the zero sequence elsewhere). Apply [lem-weil-pbc-complex-ses-homology-long-exact] to obtain its connecting maps, and [lem-weil-pbc-complex-ses-long-exact-naturality] to obtain their naturality. There is an initial zero because these complexes have no negative terms: the map on their degree-zero kernels is the restriction of the original injection and is injective. The maps on $T^0$ and $T^1$ are induced by the coefficient maps on a kernel and a quotient, so they preserve addition of maps; the higher functors are zero. Thus these functors and connecting maps satisfy precisely [def-weil-pbc-delta-functor].",
+   "uses": [
     "lem-exc-discrete-modules-abelian",
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "def-weil-pbc-delta-functor",
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, including functoriality; Tags 010Q--010S"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-coinduced-discrete-embedding] to obtain the discrete continuous $A[G]$-module $D(M)=\\operatorname{Cont}(G,M)$ with action $(g\\cdot f)(x)=f(x+g)$ and the equivariant $A$-linear injection $\\iota_M(m)(x)=x\\cdot m$. For any $f\\in D(M)$, [lem-exc-coinduced-functions-open-stabilizer] gives an open subgroup $U$ with $f(x+u)=f(x)$ for $u\\in U$. By the neighbourhood basis in Step 1 choose $r\\geq1$ with $\\ell^rG\\subseteq U$. Consequently $f$ factors through reduction $G\\to\\mathbf Z/\\ell^r\\mathbf Z$: two lifts of the same residue differ by an element of $\\ell^rG$.",
+   "uses": [
     "lem-exc-coinduced-discrete-embedding",
-    "lem-exc-coinduced-functions-open-stabilizer",
-    "lem-weil-pbc-effaceable-delta-functor-universal",
-    "lem-exc-continuous-cochains-delta-functor",
-    "lem-exc-coinduced-continuous-acyclic",
-    "lem-exc-continuous-cochains-short-exact",
-    "def-weil-abstract-derived-category",
-    "def-exc-continuous-cohomology"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-exc-coinduced-functions-open-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
-    "place": "Proof, all three paragraphs; Stacks 0117 and 010T and the existing coinduction nodes supply the generic facts, with an explicit comparison chain map"
+    "place": "Proof, second paragraph; open-stabilizer factorization supplied by the existing generic nodes"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "procyclic|continuousCohomology|cohomology.*invariant",
-      "results": "14 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean; searched Mathlib/RepresentationTheory/",
-      "date": "2026-10-15",
-      "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
-    },
-    {
-      "tool": "leansearch",
-      "query": "continuous cohomology of a discrete module for the procyclic group Z_l is computed by invariants and coinvariants in degrees zero and one",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "ContinuousCohomology, ZMod, invariants, coinvariants, cohomology",
-      "results": "loogle: unknown identifier 'ContinuousCohomology'",
-      "date": "2026-10-15",
-      "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "continuous cohomology of a discrete module for the procyclic group Z_l is computed by the two-term complex M -> M",
-      "results": "8 hits; continuousCohomology; Rep.FiniteCyclicGroup.moduleCatCochainComplex; ContinuousCohomology.MultiInd.complex; Rep.FiniteCyclicGroup.groupCohomologyIso₀; ContinuousCohomology.continuousCohomologyZeroIso; ContinuousCohomology.homogeneousCochains; groupCohomology; Rep.FiniteCyclicGroup.moduleCatChainComplex",
-      "date": "2026-10-15",
-      "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
-    },
-    {
-      "tool": "grep",
-      "query": "FiniteCyclicGroup|procyclic|invariants|quotientToInvariants",
-      "results": "25 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; searched Mathlib/RepresentationTheory/Homological",
-      "date": "2026-10-15",
-      "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "cohomology of Z_p profinite group with discrete torsion coefficients two term resolution",
-      "results": "8 hits; groupCohomologyIso; Rep.FiniteCyclicGroup.groupCohomologyIso₀; groupCohomology; Rep.FiniteCyclicGroup.resolution_quasiIso; Rep.FiniteCyclicGroup.groupCohomologyIsoEven; Rep.FiniteCyclicGroup.groupCohomologyπEven; Rep.FiniteCyclicGroup.resolution; groupCohomology.H2",
-      "date": "2026-10-15",
-      "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
-    },
-    {
-      "tool": "loogle",
-      "query": "continuousCohomology, groupCohomology, FiniteCyclicGroup, invariants",
-      "results": "loogle: unknown identifier 'FiniteCyclicGroup'",
-      "date": "2026-10-15",
-      "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "surjectivity of translation minus identity on continuous functions from Z_l to an l^s-torsion discrete module",
-      "results": "8 hits; AdicCompletion.eval_surjective; ZSpan.fractRestrict_surjective; surjective_of_mkQ_comp_surjective; AdicCompletion.mk_surjective; AdicCompletion.of_surjective; AdicCompletion.map_surjective; AdicCompletion.map_surjective_of_mkQ_comp_surjective; ProfiniteGrp.toLimit_surjective",
-      "date": "2026-10-15",
-      "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
-    },
-    {
-      "tool": "leansearch",
-      "query": "For continuous f from the l-adic integers to a module killed by l^s, construct h with h(x+1)-h(x)=f(x)",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "ContinuousMap, ZMod, translation, surjective, Function.Surjective",
-      "results": "loogle: unknown identifier 'translation'",
-      "date": "2026-10-15",
-      "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
-    },
-    {
-      "tool": "grep",
-      "query": "surjective|translation|continuous.*ZMod|ZMod.*sum|cumulative",
-      "results": "25 hits; recorded first hits: Mathlib/Topology/AlexandrovDiscrete.lean; Mathlib/Topology/Bornology/Basic.lean; Mathlib/Topology/Bornology/Hom.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/Gluing.lean; searched Mathlib/Topology/",
-      "date": "2026-10-15",
-      "verdict": "No match among returned hits; this broad query was not used to conclude absence."
-    },
-    {
-      "tool": "grep",
-      "query": "procyclic|PadicInt.*[Cc]ohomology|[Cc]ohomology.*PadicInt|groupCohomologyIso|def zeroIso",
-      "results": "12 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean; searched Mathlib/RepresentationTheory/Homological",
-      "date": "2026-10-15",
-      "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"procyclic\"",
-      "results": "0 hits; ",
-      "date": "2026-10-15",
-      "verdict": "No match."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"continuousCohomology\"",
-      "results": "12 hits; continuousCohomology; ContinuousCohomology.cocycles; ContinuousCohomology.π; ContinuousCohomology.cocyclesMap_id; ContinuousCohomology.map_id; ContinuousCohomology.cocyclesMap; ContinuousCohomology.map; ContinuousCohomology.resolutionMap_id",
-      "date": "2026-10-15",
-      "verdict": "No match: definitions and functoriality of topological continuous cohomology, not this computation."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1915,
-  "blueprint_uses": [
-    "def-exc-continuous-cohomology"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Write $L=\\ell^r$ for the modulus obtained in Step 3 and $N=\\ell^{r+s}=L\\ell^s$. Pull $f$ back to $\\mathbf Z/N\\mathbf Z$. Each residue modulo $L$ occurs $\\ell^s$ times, so $\\sum_{a=0}^{N-1}f(a)=\\ell^s\\sum_{a=0}^{L-1}f(a)=0$, since $\\ell^sM=0$. On representatives $0\\leq a<N$ set $h(a)=\\sum_{b=0}^{a-1}f(b)$, with empty sum zero. For $a<N-1$ subtraction gives $h(a+1)-h(a)=f(a)$; for $a=N-1$ the zero total sum gives $h(0)-h(N-1)=f(N-1)$. Thus $h$ is well defined on the cyclic quotient, and its pullback is continuous because that quotient is finite discrete. With the translation action it satisfies $(\\tau-1)h(x)=h(x+1)-h(x)=f(x)$. Therefore $\\tau-1:D(M)\\to D(M)$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
+    "place": "Proof, third paragraph, explicit periodic partial-sum construction including the wraparound equation"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-exc-procyclic-two-term",
-    "worker": "stage1",
-    "summary": "Made the implicit prime and exponent parameters explicit, added the existing definitions of l-adic integers and continuous cohomology to statement dependencies, and split the imported effacement argument into nine steps. Reused existing coinduction and homological nodes, wrote the periodic partial-sum argument including its last residue, and exhibited a natural comparison quasi-isomorphism from continuous cochains. No new nodes, attachments, or Mathlib leaves.",
-    "blueprint": "Steps 1-2 realize the blueprint first paragraph (kernel, two-term complexes, delta-functor); Step 3 realizes its second paragraph (translation coinduction and embedding); Steps 4-5 realize the third paragraph through effacement; Steps 6-9 make precise its final uniqueness/ordinary-derived-category identification. No unit step is replaced.",
-    "tool_uses": [
-      {
-        "node": "lem-exc-discrete-modules-abelian",
-        "why": "The argument requires the abelian category and exactness on underlying modules; this generic discrete-representation tool is not a geometric step of the affine-line/Kummer unit."
-      },
-      {
-        "node": "lem-exc-coinduced-discrete-embedding",
-        "why": "Supplies the exact translation-action object and natural monomorphism used by the imported effacement route; this unit has no coinduction construction node."
-      },
-      {
-        "node": "lem-exc-coinduced-functions-open-stabilizer",
-        "why": "Supplies open translation invariance for a continuous function so the procyclic finite-quotient argument can be written explicitly; no node of this unit states the generic topology lemma."
-      },
-      {
-        "node": "lem-exc-continuous-cochains-delta-functor",
-        "why": "Supplies the generic continuous complex and delta-functor to compare with the two-term complex; the unit has no replacement for this homological infrastructure."
-      },
-      {
-        "node": "lem-exc-coinduced-continuous-acyclic",
-        "why": "Supplies vanishing for the coinduced continuous complex needed for its universality; it is a generic tool within the imported effacement route."
-      },
-      {
-        "node": "lem-exc-continuous-cochains-short-exact",
-        "why": "Supplies short exactness of the continuous-complex sequence, needed for compatibility of the concrete comparison map with connecting maps."
-      },
-      {
-        "node": "lem-weil-pbc-effaceable-delta-functor-universal",
-        "why": "Supplies the universality and uniqueness theorem explicitly invoked by the imported proof; no theorem of this unit gives that generic delta-functor criterion."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-exc-discrete-modules-abelian",
-    "lem-exc-coinduced-discrete-embedding",
-    "lem-exc-coinduced-functions-open-stabilizer",
-    "lem-exc-continuous-cochains-delta-functor",
-    "lem-exc-coinduced-continuous-acyclic",
-    "lem-exc-continuous-cochains-short-exact",
+  {
+   "text": "Step 4 gives $T^1(D(M))=0$, and $T^q(D(M))=0$ for $q\\geq2$ already follows from the definition of $K$. The injection $\\iota_M$ of Step 3 therefore induces zero in every positive degree. The category $\\mathcal C$ is abelian by Step 1 and $A\\text{-Mod}$ is abelian; Step 2 supplies a cohomological delta-functor. All hypotheses of [lem-weil-pbc-effaceable-delta-functor-universal] now hold, and hence $T$ is universal.",
+   "uses": [
     "lem-weil-pbc-effaceable-delta-functor-universal"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q35-8173e15fa",
-    "group": "Q35",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-8173e15fa (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All nine steps check, including periodic wraparound, effacement, and the explicit comparison map’s connecting-map compatibility. Small cases and dependency-cycle checks passed; no duplicate or repair needed. Accepted generic tool uses are recorded in review.md."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010T, lemma-efface-implies-universal; applied to the effacement constructed in the blueprint third paragraph"
+   }
   },
-  "lean": {
-    "module": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
-    "declaration": "Rep.exists_procyclic_twoTerm_computation",
-    "file": "lean/Sheaf/RepresentationTheory/ProcyclicTwoTerm.lean",
-    "statement": "theorem exists_procyclic_twoTerm_computation (l : ℕ) [Fact l.Prime] (s : ℕ) (A : Type u) [Ring A] [Finite A] (hA : (l ^ s : ℕ) • (1 : A) = 0) : ∃ K : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]) ⥤ CochainComplex (ModuleCat.{w} A) ℕ, ∃ (e₀ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 0 ≃ₗ[A] M.obj.V) (e₁ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 1 ≃ₗ[A] M.obj.V), (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 0), e₀ N (((K.map f).f 0).hom x) = f.hom.hom (e₀ M x)) ∧ (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 1), e₁ N (((K.map f).f 1).hom x) = f.hom.hom (e₁ M x)) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (x : (K.obj M).X 0), e₁ M (((K.obj M).d 0 1).hom x) = M.obj.ρ (Multiplicative.ofAdd (1 : ℤ_[l])) (e₀ M x) - e₀ M x) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (n : ℕ), 2 ≤ n → IsZero ((K.obj M).X n)) ∧ ∀ q : ℕ, Nonempty (discreteContinuousCohomologyFunctor.{0, u, w} (Multiplicative ℤ_[l]) A q ≅ K ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{w} A) (ComplexShape.up ℕ) q)",
-    "branch": "newtargets-dag",
-    "by": "Q33",
-    "date": "2026-10-16",
-    "existing": false
+  {
+   "text": "Use [lem-exc-cochains-derived-invariants] to obtain the specific invariant functor V and its natural linear equivalences to the intersection of the kernels of rho(g)-id. This is exactly the choice used by [def-exc-continuous-cohomology]. The density argument of Step 1 identifies the degree-zero homology of K naturally with V. To obtain left exactness of this particular V, apply [lem-exc-continuous-cochains-invariants-zero] to the cochain complex supplied by the comparison theorem, obtaining a left exact invariant functor V′. Both V and V′ are naturally isomorphic to H^0(K), using their specified invariant-submodule identifications. Transfer finite-limit preservation along this natural isomorphism. Now [lem-weil-pbc-right-derived-universal-delta-functor] supplies a universal delta-functor R with R^q equal to the right derived functors of V and R^0 naturally isomorphic to V.",
+   "uses": [
+    "lem-exc-cochains-derived-invariants",
+    "def-exc-continuous-cohomology",
+    "lem-exc-continuous-cochains-invariants-zero",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
+    "place": "Proof, third paragraph, comparison by universality; the recorded derived-invariants interface replaces reconstruction of the continuous-cochain delta-functor."
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a57fe3bf0",
-    "group": "Q33",
-    "result": "pass",
-    "note": "Statement, dependencies, docstrings, edge cases, source/report sections, and universe details checked; scompile.py local/server compilation passed cleanly."
+  {
+   "text": "Let T be the universal delta-functor of Steps 2--5. The invariant identifications give T^0 isomorphic to R^0. Extend this isomorphism and its inverse using the universal properties of T and R. Each composite has degree-zero component the identity, so uniqueness makes both composites the identity in every degree. Thus R^q is naturally isomorphic to H^q(K) for all q. Unfolding [def-exc-continuous-cohomology] identifies R^q with the cohomology functor in the statement. The concrete K, the identity coefficient equivalences in degrees zero and one, their naturality, the differential equation, and the zero terms in degrees at least two give the asserted existential statement.",
+   "uses": [
+    "def-weil-pbc-delta-functor",
+    "def-exc-continuous-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
+    "place": "Proof, third paragraph, uniqueness of universal delta-functors and final identification."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "def-weil-pbc-delta-functor",
+  "lem-exc-coinduced-discrete-embedding",
+  "lem-exc-coinduced-functions-open-stabilizer",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-exc-cochains-derived-invariants",
+  "def-exc-continuous-cohomology",
+  "lem-exc-continuous-cochains-invariants-zero",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term.md",
+  "place": "Proof, all three paragraphs. The explicit finite-quotient partial sums and two-term delta-functor are proved in Lean. Comparison is directly with universal right derived invariants, using the existing cochain/invariant interfaces, so the separate cochain-to-two-term chain map and derived-category passage are unnecessary."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "procyclic|continuousCohomology|cohomology.*invariant",
+   "results": "14 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean; searched Mathlib/RepresentationTheory/",
+   "date": "2026-10-15",
+   "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous cohomology of a discrete module for the procyclic group Z_l is computed by invariants and coinvariants in degrees zero and one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousCohomology, ZMod, invariants, coinvariants, cohomology",
+   "results": "loogle: unknown identifier 'ContinuousCohomology'",
+   "date": "2026-10-15",
+   "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous cohomology of a discrete module for the procyclic group Z_l is computed by the two-term complex M -> M",
+   "results": "8 hits; continuousCohomology; Rep.FiniteCyclicGroup.moduleCatCochainComplex; ContinuousCohomology.MultiInd.complex; Rep.FiniteCyclicGroup.groupCohomologyIso₀; ContinuousCohomology.continuousCohomologyZeroIso; ContinuousCohomology.homogeneousCochains; groupCohomology; Rep.FiniteCyclicGroup.moduleCatChainComplex",
+   "date": "2026-10-15",
+   "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteCyclicGroup|procyclic|invariants|quotientToInvariants",
+   "results": "25 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; searched Mathlib/RepresentationTheory/Homological",
+   "date": "2026-10-15",
+   "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of Z_p profinite group with discrete torsion coefficients two term resolution",
+   "results": "8 hits; groupCohomologyIso; Rep.FiniteCyclicGroup.groupCohomologyIso₀; groupCohomology; Rep.FiniteCyclicGroup.resolution_quasiIso; Rep.FiniteCyclicGroup.groupCohomologyIsoEven; Rep.FiniteCyclicGroup.groupCohomologyπEven; Rep.FiniteCyclicGroup.resolution; groupCohomology.H2",
+   "date": "2026-10-15",
+   "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology, groupCohomology, FiniteCyclicGroup, invariants",
+   "results": "loogle: unknown identifier 'FiniteCyclicGroup'",
+   "date": "2026-10-15",
+   "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity of translation minus identity on continuous functions from Z_l to an l^s-torsion discrete module",
+   "results": "8 hits; AdicCompletion.eval_surjective; ZSpan.fractRestrict_surjective; surjective_of_mkQ_comp_surjective; AdicCompletion.mk_surjective; AdicCompletion.of_surjective; AdicCompletion.map_surjective; AdicCompletion.map_surjective_of_mkQ_comp_surjective; ProfiniteGrp.toLimit_surjective",
+   "date": "2026-10-15",
+   "verdict": "No match: none of the returned declarations computes continuous cohomology of a discrete Z_l-module by this two-term complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For continuous f from the l-adic integers to a module killed by l^s, construct h with h(x+1)-h(x)=f(x)",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, ZMod, translation, surjective, Function.Surjective",
+   "results": "loogle: unknown identifier 'translation'",
+   "date": "2026-10-15",
+   "verdict": "No result from this query; its unknown identifier prevents an absence conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|translation|continuous.*ZMod|ZMod.*sum|cumulative",
+   "results": "25 hits; recorded first hits: Mathlib/Topology/AlexandrovDiscrete.lean; Mathlib/Topology/Bornology/Basic.lean; Mathlib/Topology/Bornology/Hom.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/ClopenBox.lean; Mathlib/Topology/Gluing.lean; searched Mathlib/Topology/",
+   "date": "2026-10-15",
+   "verdict": "No match among returned hits; this broad query was not used to conclude absence."
+  },
+  {
+   "tool": "grep",
+   "query": "procyclic|PadicInt.*[Cc]ohomology|[Cc]ohomology.*PadicInt|groupCohomologyIso|def zeroIso",
+   "results": "12 hits; recorded first hits: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean; searched Mathlib/RepresentationTheory/Homological",
+   "date": "2026-10-15",
+   "verdict": "No match: these are continuous-cohomology infrastructure and abstract-group results, not the procyclic two-term computation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"procyclic\"",
+   "results": "0 hits; ",
+   "date": "2026-10-15",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": "12 hits; continuousCohomology; ContinuousCohomology.cocycles; ContinuousCohomology.π; ContinuousCohomology.cocyclesMap_id; ContinuousCohomology.map_id; ContinuousCohomology.cocyclesMap; ContinuousCohomology.map; ContinuousCohomology.resolutionMap_id",
+   "date": "2026-10-15",
+   "verdict": "No match: definitions and functoriality of topological continuous cohomology, not this computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1915,
+ "blueprint_uses": [
+  "def-exc-continuous-cohomology"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-exc-procyclic-two-term",
+  "worker": "stage1",
+  "summary": "Made the implicit prime and exponent parameters explicit, added the existing definitions of l-adic integers and continuous cohomology to statement dependencies, and split the imported effacement argument into nine steps. Reused existing coinduction and homological nodes, wrote the periodic partial-sum argument including its last residue, and exhibited a natural comparison quasi-isomorphism from continuous cochains. No new nodes, attachments, or Mathlib leaves.",
+  "blueprint": "Steps 1-2 realize the blueprint first paragraph (kernel, two-term complexes, delta-functor); Step 3 realizes its second paragraph (translation coinduction and embedding); Steps 4-5 realize the third paragraph through effacement; Steps 6-9 make precise its final uniqueness/ordinary-derived-category identification. No unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-discrete-modules-abelian",
+    "why": "The argument requires the abelian category and exactness on underlying modules; this generic discrete-representation tool is not a geometric step of the affine-line/Kummer unit."
+   },
+   {
+    "node": "lem-exc-coinduced-discrete-embedding",
+    "why": "Supplies the exact translation-action object and natural monomorphism used by the imported effacement route; this unit has no coinduction construction node."
+   },
+   {
+    "node": "lem-exc-coinduced-functions-open-stabilizer",
+    "why": "Supplies open translation invariance for a continuous function so the procyclic finite-quotient argument can be written explicitly; no node of this unit states the generic topology lemma."
+   },
+   {
+    "node": "lem-exc-continuous-cochains-delta-functor",
+    "why": "Supplies the generic continuous complex and delta-functor to compare with the two-term complex; the unit has no replacement for this homological infrastructure."
+   },
+   {
+    "node": "lem-exc-coinduced-continuous-acyclic",
+    "why": "Supplies vanishing for the coinduced continuous complex needed for its universality; it is a generic tool within the imported effacement route."
+   },
+   {
+    "node": "lem-exc-continuous-cochains-short-exact",
+    "why": "Supplies short exactness of the continuous-complex sequence, needed for compatibility of the concrete comparison map with connecting maps."
+   },
+   {
+    "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+    "why": "Supplies the universality and uniqueness theorem explicitly invoked by the imported proof; no theorem of this unit gives that generic delta-functor criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-discrete-modules-abelian",
+  "lem-exc-coinduced-discrete-embedding",
+  "lem-exc-coinduced-functions-open-stabilizer",
+  "lem-weil-pbc-effaceable-delta-functor-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-8173e15fa",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-8173e15fa (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, source passages, and unit/chapter route. All nine steps check, including periodic wraparound, effacement, and the explicit comparison map’s connecting-map compatibility. Small cases and dependency-cycle checks passed; no duplicate or repair needed. Accepted generic tool uses are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProcyclicTwoTerm",
+  "declaration": "Rep.exists_procyclic_twoTerm_computation",
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicTwoTerm.lean",
+  "statement": "theorem exists_procyclic_twoTerm_computation (l : ℕ) [Fact l.Prime] (s : ℕ) (A : Type u) [Ring A] [Finite A] (hA : (l ^ s : ℕ) • (1 : A) = 0) : ∃ K : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]) ⥤ CochainComplex (ModuleCat.{w} A) ℕ, ∃ (e₀ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 0 ≃ₗ[A] M.obj.V) (e₁ : ∀ M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l]), (K.obj M).X 1 ≃ₗ[A] M.obj.V), (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 0), e₀ N (((K.map f).f 0).hom x) = f.hom.hom (e₀ M x)) ∧ (∀ (M N : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (f : M ⟶ N) (x : (K.obj M).X 1), e₁ N (((K.map f).f 1).hom x) = f.hom.hom (e₁ M x)) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (x : (K.obj M).X 0), e₁ M (((K.obj M).d 0 1).hom x) = M.obj.ρ (Multiplicative.ofAdd (1 : ℤ_[l])) (e₀ M x) - e₀ M x) ∧ (∀ (M : DiscreteContinuousRep.{u, 0, w} A (Multiplicative ℤ_[l])) (n : ℕ), 2 ≤ n → IsZero ((K.obj M).X n)) ∧ ∀ q : ℕ, Nonempty (discreteContinuousCohomologyFunctor.{0, u, w} (Multiplicative ℤ_[l]) A q ≅ K ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{w} A) (ComplexShape.up ℕ) q)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a57fe3bf0",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, source/report sections, and universe details checked; scompile.py local/server compilation passed cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261019T192646-L-1852070",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
