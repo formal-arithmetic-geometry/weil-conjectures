@@ -14,9 +14,105 @@
   "def-weil-abstract-derived-category",
   "lem-trf-derived-colimit-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\mathcal P^{op}$ and $\\mathcal B=\\mathcal D^{op}$. A presheaf is a covariant module functor on the corresponding non-opposite category. The bar theorem identifies the stated derived colimits with derived colimits on these small categories. To use the simplicial-computation theorem, identify its first-vertex bar convention with the bar theorem's last-vertex convention: their differentials in degree $-n$ differ by $(-1)^n$, and multiplication by $\\lambda_n=(-1)^{n(n+1)/2}$ is a chain isomorphism since $\\lambda_n=(-1)^n\\lambda_{n-1}$. This is the identity in degree zero and commutes with every reindexing map and augmentation. Work in these identified models. Choose the standard polynomial resolution $P_\\bullet\\to B$ supplied by the resolution-coherence theorem, within the fixed size bound, and set $U_n=(P_n\\to B,P_n[E]\\to C)$. Each is an object of $\\mathcal A$, and extending every simplicial operator by the identity on $E$ makes $U_\\bullet$ a simplicial object. Transport to the chosen small representatives by isomorphisms when necessary.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), first paragraph; Tag 08QI (remark-resolution); sites-cohomology.tex Tag 08Q9, with the explicit bar sign identification."
+   }
+  },
+  {
+   "text": "The resolution-coherence theorem says that every $P_n\\to B$ is surjective and $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. For constant $B$, the alternating differential is zero in odd positive chain degree and the identity in even positive degree, so $s(\\operatorname{const} B)\\to B[0]$ is a quasi-isomorphism. Therefore $s(P_\\bullet)\\to s(\\operatorname{const} B)$ is a quasi-isomorphism. Applying the surjective-quasi-isomorphism criterion to the underlying simplicial abelian groups proves that $P_\\bullet\\to\\operatorname{const} B$ is a trivial Kan fibration, with the boundary lifting property and vertex surjectivity of the cited definition.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); cotangent.tex Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "The map $P_\\bullet[E]\\to\\operatorname{const}(B[E])$ is also termwise surjective and a quasi-isomorphism on alternating complexes. Indeed let $\\mathcal M=\\mathbf N^{(E)}$ be the set of finitely supported monomial exponent functions. Coefficients identify its underlying simplicial abelian-group map with $\\bigoplus_{m\\in\\mathcal M}(P_\\bullet\\to\\operatorname{const} B)$, because simplicial operators act on coefficients and fix all variables. The alternating complex is the same direct sum of complexes. A cycle in a direct sum has finite support and is a tuple of coordinate cycles; a boundary is a tuple of coordinate boundaries. Choosing preimages only on that finite support proves $H_n(\\bigoplus C_m)=\\bigoplus H_n(C_m)$. Thus Step 2 gives the required homology isomorphisms. Termwise surjectivity follows by lifting the finitely many coefficients of a polynomial. Apply the same surjective-quasi-isomorphism criterion. This proves the trivial Kan fibration needed for the top polynomial algebra, including infinite $E$, without a filtered-colimit preservation theorem.",
+   "uses": [
+    "lem-trf-surjective-qis-simplicial-group-trivial-kan"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph, expanded by the finite-support coefficient argument; simplicial.tex Tag 08P1 (lemma-qis-simplicial-abelian-groups)."
+   }
+  },
+  {
+   "text": "For $W=(P\\to B,Q\\to C)$ choose polynomial coordinates $P=A[S]$, $Q=P[T]$. A simplex of $X_W=\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)$ consists precisely of elements $x_s\\in P_\\bullet$ over $\\beta(s)$ for $s\\in S$, and $y_t\\in P_\\bullet[E]$ over $\\gamma(t)$ for $t\\in T$: the second algebra map extends the first and is determined freely by the $y_t$. This coordinate description commutes with all faces and degeneracies. A boundary lifting problem for $X_W\\to *$ is therefore a family of boundary lifting problems for the maps in Steps 2 and 3 over the indicated constant simplices. Fill each coordinate, choose the fillers for the sets $S,T$, and extend uniquely by the polynomial universal property. Vertex lifts are obtained in the same way. Consequently $X_W\\to *$ is a trivial Kan fibration by the cited definition, and the homotopy-equivalence theorem makes $X_W$ homotopy equivalent to a singleton. Empty generator sets give empty products, hence a singleton; infinite generator sets cause no restriction because each chosen coordinate defines an algebra map out of a free polynomial algebra.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), representable mapping simplicial sets; simplicial.tex Tag 08NS (lemma-trivial-kan-homotopy)."
+   }
+  },
+  {
+   "text": "Apply the simplicial derived-colimit computation to $\\mathcal A$, the coefficient functor $v^{-1}F$, and $U_\\bullet$. Step 4 verifies its representable-contractibility hypothesis, so it gives an isomorphism $a_U:s(F(C))\\xrightarrow{\\sim}L\\pi_{\\mathcal P,!}^R(v^{-1}F)$. Here $vU_n=P_n[E]\\otimes_{P_n}B\\simeq B[E]=C$, canonically by the maps fixing coefficients and variables; all operators become identities. In $\\mathcal B$, the augmented algebra $(C\\xrightarrow{1}C)$ is terminal: the unique augmentation-preserving map from $T\\to C$ to it is the augmentation of $T$. Its constant simplicial object therefore has singleton representable mapping sets. The same theorem gives $a_C:s(F(C))\\xrightarrow{\\sim}L\\pi_{\\mathcal D,!}^R F$. Apply its reindexing naturality to $v^{op}:\\mathcal A\\to\\mathcal B$, identity coefficients, and the displayed simplicial isomorphism $v^{op}U_\\bullet\\simeq\\operatorname{const} C$. It says $c\\,a_U=a_C$, where $c$ is the canonical reindexing map. The bar theorem and Step 1's signs identify this $c$ with exactly the reindexing map in the statement. Hence $c$ is an isomorphism.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), applied to both categories; Tags 08PG and 08PH, reindexing map; cotangent.tex Tag 08QV."
+   }
+  },
+  {
+   "text": "Write $M=F(C)$ and let $\\epsilon_{\\mathcal D}:K_{\\mathcal D}(F)\\to M[0]$ be the augmentation whose degree-zero component at $T$ is restriction along $C\\to T$ in $\\mathcal D$. The maps form a cocone, so this is a chain map. Let $i:*\\to\\mathcal B$ pick $C$, with coefficient $M$ on the one-object category. Apply the simplicial-computation theorem there to its constant unique object, obtaining an isomorphism $a_*:s(M)\\to\\mathbf H(*,M)$. Its reindexing naturality gives $a_C=\\mathbf H(i,1)a_*$. On bars, $\\epsilon_{\\mathcal D}\\mathbf H(i,1)$ is exactly the augmentation $\\epsilon_*:K_*(M)\\to M[0]$, since the only degree-zero image is $(C,x)\\mapsto x$. This augmentation is a quasi-isomorphism: the constant alternating complex has differential zero in odd degrees and identity in positive even degrees; its degree-zero section and the homotopy $h_n=1$ for odd $n$, $h_n=0$ for even $n$ contract it to $M[0]$. Thus $\\epsilon_{\\mathcal D}a_C=\\epsilon_*a_*$ is an isomorphism. Since $a_C$ is an isomorphism, so is $\\epsilon_{\\mathcal D}$. This argument applies also to $M=0$ and to any coefficient ring $R$.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top), evaluation at C; sites-cohomology.tex Tags 08PG, 08PH and 08Q9, reindexing from the one-object category."
+   }
+  },
+  {
+   "text": "Finally $\\epsilon_{\\mathcal D}c$ is exactly the requested augmentation. In degree zero its bar generator $(W,x)$ maps to $(vW,x)$ and then to the restriction of $x$ along $C\\to vW$. In higher degrees both augmentations to $M[0]$ are zero. These are equal chain maps; the sign identification of Step 1 does not alter them in degree zero. The arrows $C\\to vW$ are natural because both sides of their naturality square are the augmentation of the polynomial $B$-algebra in the non-opposite category. Thus the stated canonical map, with its stated factorization, is the composite of the two isomorphisms proved in Steps 5 and 6, and is an isomorphism in $D(R)$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top); sites-cohomology.tex Tag 08PH (example-morphism-categories), explicit augmentation and reindexing formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QV (lemma-polynomial-on-top); follows its polynomial-resolution route, expands polynomial-extension and representable lifting by finite-support coefficients, and uses the naturality of sites-cohomology.tex Tag 08Q9 to identify the stated canonical augmentation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +148,52 @@
    "results": "8 hits: Algebra.PreSubmersivePresentation.ofHasCoeffs, Algebra.PreSubmersivePresentation.naive_toPresentation, Algebra.Generators.exists_presentation_of_free_cotangent, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.PreSubmersivePresentation.ofHasCoeffs_σ', Algebra.Presentation.ModelOfHasCoeffs, Algebra.PreSubmersivePresentation.toPresentation. Digest fcdb5429890b2d4d. ",
    "date": "2026-10-18",
    "verdict": "no match: ordinary Kan extension, generic derived functors, presheaf colimits and algebra presentations do not state this derived module-presheaf computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived colimit of polynomial presentation pairs with polynomial target computes evaluation at target",
+   "results": "{\"t\": \"2026-10-19T00:35:59Z\", \"tool\": \"leanfinder\", \"query\": \"derived colimit of polynomial presentation pairs with polynomial target computes evaluation at target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"CommRingCat.Colimits.descFunLift\", \"PresheafOfModules.colimitCocone_ι_app_app\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CommRingCat.Colimits.descFun\", \"CommRingCat.Colimits.coconeMorphism\", \"CommRingCat.Colimits.coconeFun\"], \"digest\": \"a9c74ac825991d48\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read returned types; ordinary colimits, Dold–Kan, polynomial evaluation and Cech cohomology do not state the polynomial-presentation-pair derived-colimit computation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits colimit, Polynomial",
+   "results": "{\"t\": \"2026-10-19T00:36:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits colimit, Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `CategoryTheory.Limits`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "inconclusive query: loogle: Unknown identifier `CategoryTheory.Limits`; the second valid Loogle query has no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*resolution|derived.*colimit|cosimplicial",
+   "results": "{\"t\": \"2026-10-19T00:36:00Z\", \"tool\": \"grep\", \"query\": \"polynomial.*resolution|derived.*colimit|cosimplicial\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean\", \"Mathlib/CategoryTheory/Idempotents/SimplicialObject.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean\"], \"digest\": \"d7d413c30197b436\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read returned types; ordinary colimits, Dold–Kan, polynomial evaluation and Cech cohomology do not state the polynomial-presentation-pair derived-colimit computation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a polynomial target algebra makes the derived colimit of polynomial presentation pairs equal evaluation at the target",
+   "results": "{\"t\": \"2026-10-19T00:36:01Z\", \"tool\": \"leansearch\", \"query\": \"a polynomial target algebra makes the derived colimit of polynomial presentation pairs equal evaluation at the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.algebraMap_pi_self_eq_eval\", \"Polynomial.aeval\", \"PresheafOfModules.evaluationJointlyReflectsColimits\", \"PresheafOfModules.evaluation_preservesColimitsOfShape\", \"Polynomial.mapAlgHom_eq_eval₂AlgHom'_CAlgHom\", \"Algebra.Generators.Hom.algebraMap_toAlgHom\", \"Polynomial.eval₂_algebraMap_X\", \"Polynomial.aeval_algEquiv\"], \"digest\": \"80c5b0d01e8e7b35\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read returned types; ordinary colimits, Dold–Kan, polynomial evaluation and Cech cohomology do not state the polynomial-presentation-pair derived-colimit computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of polynomial presentation category computed by constant value on a cosimplicial polynomial resolution",
+   "results": "{\"t\": \"2026-10-19T00:41:55Z\", \"tool\": \"leanfinder\", \"query\": \"homology of polynomial presentation category computed by constant value on a cosimplicial polynomial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"CategoryTheory.Idempotents.DoldKan.Γ_obj_obj\", \"CategoryTheory.Abelian.DoldKan.N\", \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"AlgebraicTopology.DoldKan.Γ₀\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"MvPolynomial.counitNat\"], \"digest\": \"b647d97487e591b5\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read returned types; ordinary colimits, Dold–Kan, polynomial evaluation and Cech cohomology do not state the polynomial-presentation-pair derived-colimit computation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-19T00:41:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read returned types; ordinary colimits, Dold–Kan, polynomial evaluation and Cech cohomology do not state the polynomial-presentation-pair derived-colimit computation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-lower-shriek",
@@ -86,5 +224,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-cotangent-lower-shriek-polynomial-top",
+  "worker": "stage1",
+  "summary": "Q42 preserves the statement and all inherited searches, gives the full polynomial-resolution and coordinate boundary-lifting proof of Stacks 08QV with arbitrary constant module coefficients, and identifies the canonical augmentation through the naturality of the existing derived-colimit comparison. No new nodes are needed.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. This split realizes the polynomial-top computation used for the third lower-shriek counit; Steps 1–4 establish the resolution hypothesis and Steps 5–7 compute and identify the canonical augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial-set lifting theorem converts the explicitly verified trivial Kan fibration Hom(W,U) to a homotopy equivalence with a singleton, exactly as Stacks 08QV requires; no node of this unit supplies that conversion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-c1010485a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-c1010485a (reviewer sub-agent of L); spot-checked: I read the delivery in full. The statement is unchanged and identical to the live node, which is still unsplit. There are no new nodes and no cycle (312-node closure without the item), and no SGA source is used. I checked the item against Stacks 08QV, whose route it follows: U_n=(P_n,P_n[E]), contractible Hom(W,U_•), then the 08Q9 computation. Step 1: the sign λ_n=(-1)^{n(n+1)/2} correctly matches the last-vertex bar convention of the bar node with the first-vertex convention of the computation node, and size stays within the cardinal bound. Step 2: the coherence node gives termwise surjectivity and the quasi-isomorphism; s(const B) has differentials 0/1, so 08P1 makes P_•→const B a trivial Kan fibration. Step 3: P_•[E] is a direct sum of copies of P_• indexed by finite-support monomials, which replaces Stacks' filtered-colimit lemma and is valid for infinite E. Step 4: a morphism (A[S],P[T])→U_n is the same as coordinates x_s over β(s) and y_t over γ(t), so lifting reduces to fibrewise lifts, and 08NS then gives contractibility. Step 5: C→C is terminal in D^op, vU_•≅const C, and the reindexing clause gives c a_U=a_C. Step 6: ε_D H(i,1)=ε_*, the constant complex contracts, so ε_D is an isomorphism. Step 7: the composite is the stated augmentation. I tested E empty, infinite E, A→B non-surjective or non-flat, R=0 or F=0, and empty S or T; nothing breaks. Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2, which the unit does not cite) as a generic 08NS black box. Route pivot: def-weil-pbc-trivial-kan-fibration is the classical 08NL definition, used at Steps 2 and 4 for lifting; 'simplicial set' means the classical Hom-simplicial sets of 08Q9, not dropped ∞/model-category machinery. I accept both."
  }
 }
