@@ -11,7 +11,8 @@
   "def-fix-six-functor-datum",
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-pullback-tensor-hom",
-  "fix-lem-exchanges"
+  "fix-lem-exchanges",
+  "def-weil-frobenius-square-exchange"
  ],
  "proof": [
   {
@@ -255,5 +256,24 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-08a8f137a (reviewer sub-agent of L); spot-checked: Read all seven proof steps, thirteen direct cited statements, source passages and unit/chapter route. Verified semilinear geometry, compatible witnesses, canonical pasting and both inverse equations; checked edge cases, reuse candidates and cycles. No repairs needed. Accepted all six declared tool uses. Full findings are in review.md; no condensed/raw coefficient comparison is assumed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusExchangeEquivalence",
+  "declaration": "WeilConjectures.FrobeniusExchange.compactSupportFrobeniusExchange_isIso",
+  "file": "lean/Sheaf/Paper/FrobeniusExchangeEquivalence.lean",
+  "statement": "theorem compactSupportFrobeniusExchange_isIso (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X₀ Y₀ : Over (Spec (.of D.k₀))} [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated Y₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (c₀ : Compactification f₀.left) : IsIso (frobeniusRational D l hl E f₀ (frobeniusCompactModel D f₀ c₀))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the landed canonical frobeniusRational with frobeniusCompactModel, on the entire raw rational constructible category. The arbitrary compactification only presents the canonical compact-support construction; no Weil structure, compatible-origin witness, stable lattice, smoothness or k-linearity hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d8fd3c46",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Statement matches the node: IsIso of the landed canonical frobeniusRational over frobeniusCompactModel D f₀ c₀ for every c₀, on the full raw rational sfRationalConstructibleCategory, direction Lg_Y^*Rf_! → Rf_!Lg_X^*. Actual semilinear galois = geometricFrobenius maps, no k-linearity, Weil structure, lattice or witness assumed. Hypotheses (sep. finite type X₀, Y₀, f₀; l≠p; finite E/Q_l, Type u as in the dependencies) exact. Statement verbatim; docstrings carry source, blueprint tag and all 7 steps; sorry only. stmt_dep records identical to live; stmt_deps += landed def-weil-frobenius-square-exchange (justified). No duplicate found. Item not dropped. Compile: nt_compile clean 40.5 s at load ~250 (one earlier 60 s load timeout; lcompile 560 s clean). Advisory: NormalizedEtaleOriginWitnesses reached via FiniteCoefficientAdjointComparisons to get past the route-pivot gate's false attribution to dropped def-per-scalar-extension-unit; maintainer should clean that stale record."
  }
 }
