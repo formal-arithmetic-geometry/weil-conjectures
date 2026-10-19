@@ -30,94 +30,45 @@
  ],
  "proof": [
   {
-   "text": "Write $A=\\mathcal O_E$ and choose a uniformizer $\\pi$. The affine Noetherian-ring cover in [pqf-def-locnoeth] has a finite subcover by quasi-compactness [def-weil-pbc-quasi-compact-scheme]. Thus $X$ satisfies precisely the finite-affine-cover meaning of Noetherian used by the adic comparison below. By [det-prop-sfb-qlbar-colimit-x-integral-limit](3), the actual coefficient ring $R_X=p_X^*\\underline A$ is canonically isomorphic to $B_X=\\varprojlim_n(A/\\pi^n)_X$. The constant scalar $a\\in A$ goes to the compatible constant residues $(a\\bmod\\pi^n)_n$, so the scalar-section maps in the local models agree under this identification. For a stratum immersion $i:T\\hookrightarrow X$, [lem-weil-pbc-proetale-immersion-limit-preservation] gives $i^{-1}B_X=\\varprojlim_n(A/\\pi^n)_T=B_T$, while [sk-def-sfb-constructible] identifies the restricted condensed coefficients with $R_T$. The restricted coefficient isomorphism is the one for $T$: their composites with every finite quotient projection are the same constant-residue maps, so uniqueness of maps to the limit identifies them. On every trivializing cover of $T$, it therefore sends a presentation by a scalar matrix to the presentation by that identical scalar matrix over $B_T$. Thus the two coefficient conventions define precisely the same constructible modules. Transport a module by retaining its abelian sheaf and letting $b\\in B_X$ act through the inverse ring isomorphism. This transport and its inverse retain the underlying maps and exact sequences; hence the kernels and cokernels in [def-weil-sheaf-of-modules-category] are carried to the corresponding ambient kernels and cokernels. We may work over $B_X$ throughout.",
+   "text": "Construct explicitly the continuous ring isomorphism between the valuation integers of the given small embedded finite coefficient field and latticeCoefficientIntegers for its universe lift. The algebra equivalence WithAbs(O_E) to E preserves norms by Mathlib NormedAlgebra.norm_eq_spectralNorm. The DVR membership characterization identifies the integer subrings. Postcomposition and its inverse give the isomorphism of condensed ring objects; this is constructed on sections, not chosen from an existence theorem.",
    "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-pbc-quasi-compact-scheme",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars along an isomorphism preserves finite presentations: transport finite free modules and their presenting cokernels. The mapModComapIso and comapUpperStarIso comparisons commute this restriction with pullback from the point and restriction to cover members and strata. Transport each finite constant local model, keeping its cover and stratification. The inverse isomorphism proves the converse, including the affine-local branch of constructibility. Apply integralLfpConstantModelComparison to the lifted coefficient field, then transport local finite presentation along the same coefficient isomorphism. This identifies the original constant-model predicate with IsConstructibleModuleObject for the original integral coefficient object.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-weil-pbc-module-constructible-pullback",
     "sk-def-sfb-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.10 and Lemma 6.8.2(1); coefficient identification with Definition 6.5.1"
-   }
+   "elementary": false
   },
   {
-   "text": "Verify the coefficient hypotheses needed for [lem-sfb-adic-stratified-perfect]. By [lem-weil-l-adic-extension-integers-dvr](1),(2),(4), $A$ is local with maximal ideal $(\\pi)$ and is a PID, hence Noetherian: each ideal has one generator. Put $r=|\\pi|_E$, with $0<r<1$. For a compatible family in $\\varprojlim_n A/\\pi^n$, choose lifts $x_n\\in A$. If $m\\geq n$, then $x_m-x_n\\in\\pi^n A$, so $|x_m-x_n|_E\\leq r^n$. Completeness [lem-weil-l-adic-extension-complete] gives a limit $x\\in E$. The nonarchimedean inequality [lem-weil-l-adic-extension-absolute-value] gives $|x|_E\\leq1$ and $|x-x_n|_E\\leq r^n$. By the DVR factorization in [lem-weil-l-adic-extension-integers-dvr](5), the latter inequality is equivalent to $x-x_n\\in\\pi^nA$. Thus $x\\in A$ realizes the family. An element of $\\bigcap_n\\pi^n A$ has norm at most every $r^n$ and is zero. Therefore $A\\simeq\\varprojlim_n A/\\pi^n$, and $(A,I)=(\\mathcal O_E,(\\pi))$ satisfies all ring hypotheses of that theorem. This argument concerns the coefficient ring alone.",
+   "text": "The given normed integral coefficient object integralCoeff is definitionally the padicIntegersRingObj for the embedded finite coefficient field. Apply integralConstructible_serre to obtain closure of IsConstructibleModuleObject under ambient kernels, cokernels and extensions. Convert the two input hypotheses and each conclusion using the predicate equivalence of the previous step. Mathlib prop_kernel, prop_cokernel and prop_X₂_of_shortExact give the required conjunction without changing any ambient module or short exact sequence.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-sfb-adic-stratified-perfect"
+    "lem-weil-pbc-integral-constructible-serre",
+    "lem-sfb-integral-lfp-constant-model-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1, specialized to the finite extension coefficients of Definition 6.8.10"
-   }
-  },
-  {
-   "text": "Use the ordinary unbounded derived category $D(\\operatorname{Mod}(B_X))$ and its degree-zero complexes, cohomology and cone triangles [def-weil-abstract-derived-category]. Let $\\mathcal T$ be the full subcategory specified by condition (2) of [lem-sfb-integral-cohomological-adic-criterion]: derived $(\\pi)$-completeness and a bounded constructible étale residue complex of finite Tor amplitude. Its hypotheses are exactly the Noetherian $X$, finite $E$, completed coefficient $B_X$ and scalar finite-presentation convention established above. In particular its constructibility uses $B_T\\otimes_A P$, with $P$ finitely presented over the scalar ring $A$, exactly as in this item. By that criterion, $K\\in\\mathcal T$ if and only if $K$ is bounded and all its cohomology sheaves are constructible. For $(A,I)$ from step 2, this is condition (a) of [lem-sfb-adic-stratified-perfect]. The last paragraph of that theorem therefore makes $\\mathcal T$ closed under distinguished triangles with any two vertices in $\\mathcal T$. The zero module is constructible using the scalar model $P=0$; for a module $F$ in degree zero, $H^0(F[0])=F$ and all other cohomology vanishes by the cohomology formula in [def-weil-abstract-derived-category]. Hence $F[0]\\in\\mathcal T$ exactly when $F$ is constructible. No completeness condition has been imposed on arbitrary ambient modules.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-sfb-integral-cohomological-adic-criterion",
-    "lem-sfb-adic-stratified-perfect"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1 and its triangulatedness observation; Proposition 6.6.11; Proposition 6.8.11(3), scalar-model characterization"
-   }
-  },
-  {
-   "text": "Let $f:F\\to G$ be a morphism of constructible $B_X$-modules. Then $F[0]$ and $G[0]$ belong to $\\mathcal T$ by step 3. The cone triangle of their degree-zero complex map [def-weil-abstract-derived-category] has third vertex represented by $[F\\xrightarrow f G]$ in degrees $-1,0$. The two-vertex closure in [lem-sfb-adic-stratified-perfect] puts this cone in $\\mathcal T$. The reverse implication of [lem-sfb-integral-cohomological-adic-criterion] makes its cohomology sheaves constructible. Compute them in the abelian module category: at degree $-1$ there is no incoming differential, so $H^{-1}=\\ker f$; at degree $0$ the outgoing differential is zero, so $H^0=G/\\operatorname{im}f=\\operatorname{coker}f$. All other cohomology is zero. Thus these actual ambient kernel and cokernel sheaves, with their given module structures, are constructible. Step 1 returns this assertion to $\\operatorname{Mod}(R_X)$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-sfb-adic-stratified-perfect",
-    "lem-sfb-integral-cohomological-adic-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(1), kernel and cokernel clauses; expanded through the scalar-model characterization of (3) and the cone construction"
-   }
-  },
-  {
-   "text": "Let $0\\to F'\\to F\\to F''\\to0$ be the given ambient short exact sequence. Place it in degree zero, obtaining a degreewise short exact sequence of complexes (all other terms are zero). By [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle $F'[0]\\to F[0]\\to F''[0]\\to F'[1]$. The constructible ends are in $\\mathcal T$ by step 3, so the two-vertex closure in [lem-sfb-adic-stratified-perfect] puts $F[0]$ in $\\mathcal T$. By [lem-sfb-integral-cohomological-adic-criterion], its sole cohomology sheaf $F$ is constructible. Transporting back as in step 1 proves extension closure over $R_X$. Every theorem used above allows this arbitrary Noetherian $X$; no step introduces finite type, separatedness, a dimension bound, or invertibility of $\\ell$ on $X$.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-sfb-adic-stratified-perfect",
-    "lem-sfb-integral-cohomological-adic-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(1), extension clause; Definition 6.5.1, ambient triangle closure; Stacks Tag 0152 (derived.tex, lemma-derived-canonical-delta-functor)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "def-weil-sheaf-of-modules-category",
+  "def-weil-l-adic-coefficient-extension",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-sfb-adic-stratified-perfect",
-  "def-weil-abstract-derived-category",
-  "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "sk-def-sfb-constructible"
+  "def-weil-finite-subextension-directed-set",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-weil-pbc-module-constructible-pullback",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-integral-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Expansion of Proposition 6.8.11(1), using the independent stratified-perfect characterization of Proposition 6.6.11, Definition 6.5.1 and the scalar-model comparison of Proposition 6.8.11(3); cone and short-exact-triangle argument written out here."
+  "place": "Proposition 6.8.11(1): shorter route through the existing local-finite-presentation closure and integral constant-model comparison; explicit universe and coefficient transport by H7."
  },
  "mathlib_searches": [
   {
@@ -292,14 +243,7 @@
   ]
  },
  "tool_uses": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-sfb-adic-stratified-perfect",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-proetale-immersion-limit-preservation"
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -338,5 +282,15 @@
   "by": "Q28",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261019T005304-L-2748626",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
