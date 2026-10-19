@@ -1,13 +1,12 @@
 # Work queue
 
-1234 items; claim with `tools/claim.py next <group> [--stage N]`.
+1233 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (5)
+## Stage 1: nodes to split (4)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-per-artin-gabber-affine-curve` | - | sorry_here |
-| `lem-per-finite-affine-direct-image-support-bound` | - | none |
 | `lem-per-finite-coefficient-dual-constructible` | - | none |
 | `lem-per-finite-compact-support-fibre-support-bound` | - | none |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
@@ -34,16 +33,16 @@
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
 | `lem-a1-qbar-curve-duality` | 1 | state | 0 |
 | `lem-coef-tower-natural-currying` | 1 | state | 0 |
+| `lem-per-finite-affine-direct-image-support-bound` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
-| `lem-weil-cohomology-scalar-extension-qlbar` | 1 | state | 0 |
 | `lem-zl-framework-pbc-open-exchange-comparison` | 1 | state | 0 |
 | `lem-zl-weil-constant-extension-frobenius` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 311 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 136 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 305 nodes that below a finished node, not needed, 2 nodes that wait for stage 1 (statement downstream not grounded), 136 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (1203)
 
