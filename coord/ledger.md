@@ -17453,3 +17453,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/V1/Sheaf.Paper.CompactSupportDirectImageTriangulated (stage 3; reviewer PASS; after a return; landing 20261019T144023-L-2350769 (proof); batch 20261019T144009; modules 1; new nodes 0)
 - 14:54 L: merged deliver/NA/lem-trf-hilbert-samuel-local-presentations (reviewer FIX; first push; new nodes: 5)
 - 14:57 L: merged deliver/ND/lem-coef-rational-retract-evaluation (stage 2; reviewer PASS; parallel immutable checks)
+- 15:14 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head ce30b36715af: Identical re-push of sha 787e4e0b (≈24 prior N7 heads, all RETURNed))
