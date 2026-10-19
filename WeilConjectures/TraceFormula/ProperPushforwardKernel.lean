@@ -194,18 +194,6 @@ induced proper map of fixed loci `h : Fix(c) ⟶ Fix(b)` (blueprint `sk-d-proper
 noncomputable def traceClassPushforward : BorelMooreSection ℓ Fb.F :=
   BorelMooreSection.pushforward (P.fixMap Fc Fb) (c.traceClass Fc)
 
-/-- **Proper pushforward compatibility of the trace class** (blueprint
-`thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
-diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
-`h_* Tr_c(u) = Tr_b([f, g]_! u)`. No properness over `s` and no cartesian leg square are needed.
-The special case `f = 𝟙` is blueprint `lem-trf-proper-pushforward-trace-class`. The proof in the
-blueprint goes through the exchange of the trace maps (`lem-trf-trace-map-exchange`) and of the
-trace-class sources (`lem-trf-trace-source-exchange`), coherences of the compactification data
-which are not among the stated axioms (blueprint `rem-sf-trace-coherence`). -/
-theorem traceClassPushforward_eq :
-    P.traceClassPushforward Fc Fb = P.pushforward.traceClass Fb :=
-  sorry
-
 end ProperPushforwardDiagram
 
 end Correspondence

@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.LocalTermLocality
-public import WeilConjectures.TraceFormula.ProperPushforwardKernel
+public import WeilConjectures.TraceFormula.PointNormalization
+public import WeilConjectures.TraceFormula.ProperCompatibility
 public import WeilConjectures.TraceFormula.TraceClassAdditivity
 
 /-!
