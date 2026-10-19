@@ -14,17 +14,18 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-import Sheaf.AlgebraicGeometry.PullbackConstantModule
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.Paper.ProjectionMateExact
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
-import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+import Mathlib.Algebra.DirectSum.Finsupp
+import Mathlib.Data.Finsupp.Fintype
+import Mathlib.LinearAlgebra.Finsupp.VectorSpace
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+import WeilConjectures.SixFunctors.Etale.Derived.Hom
 
 /-!
 # Constant coefficient tensor comparison for an open immersion
@@ -43,7 +44,193 @@ set_option autoImplicit false
 
 universe u
 
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+
+namespace ExceptionalConstantTensor
+
 open CategoryTheory CategoryTheory.Limits
+
+universe v
+
+variable {R : Type v} [CommRing R]
+
+/-- Free module on the elements of a module, with its canonical finite basis when finite. -/
+private noncomputable abbrev freeModule (M : ModuleCat.{v} R) := ModuleCat.of R (M →₀ R)
+
+private noncomputable def cover (M : ModuleCat.{v} R) : freeModule M ⟶ M :=
+  ModuleCat.ofHom (Finsupp.linearCombination R (fun x : M ↦ x))
+
+private theorem cover_surjective (M : ModuleCat.{v} R) : Function.Surjective (cover M) := by
+  intro x
+  exact ⟨Finsupp.single x 1, by simp [cover]⟩
+
+private noncomputable def syzygy (M : ModuleCat.{v} R) : ℕ → ModuleCat.{v} R
+  | 0 => M
+  | n + 1 => ModuleCat.of R (LinearMap.ker (cover (syzygy M n)).hom)
+
+private theorem finite_syzygy [Finite R] (M : ModuleCat.{v} R) [Finite M] (n : ℕ) :
+    Finite (syzygy M n) := by
+  classical
+  induction n with
+  | zero => exact ‹Finite M›
+  | succ n ih =>
+    let := ih
+    let := Fintype.ofFinite (syzygy M n)
+    let := Fintype.ofFinite R
+    change Finite (LinearMap.ker (cover (syzygy M n)).hom)
+    infer_instance
+
+private noncomputable def differential (M : ModuleCat.{v} R) (n : ℕ) :
+    freeModule (syzygy M (n + 1)) ⟶ freeModule (syzygy M n) :=
+  cover (syzygy M (n + 1)) ≫
+    ModuleCat.ofHom (LinearMap.ker (cover (syzygy M n)).hom).subtype
+
+private theorem differential_cover (M : ModuleCat.{v} R) (n : ℕ) :
+    differential M n ≫ cover (syzygy M n) = 0 := by
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact (cover (syzygy M (n + 1)) x).property
+
+private theorem differential_sq (M : ModuleCat.{v} R) (n : ℕ) :
+    differential M (n + 1) ≫ differential M n = 0 := by
+  change differential M (n + 1) ≫
+    (cover (syzygy M (n + 1)) ≫
+      ModuleCat.ofHom (LinearMap.ker (cover (syzygy M n)).hom).subtype) = 0
+  rw [← Category.assoc, differential_cover, zero_comp]
+
+private noncomputable def resolutionComplex (M : ModuleCat.{v} R) :
+    ChainComplex (ModuleCat.{v} R) ℕ :=
+  ChainComplex.of (fun n ↦ freeModule (syzygy M n)) (differential M) (differential_sq M)
+
+private theorem differential_exact (M : ModuleCat.{v} R) (n : ℕ) :
+    (ShortComplex.mk (differential M (n + 1)) (differential M n)
+      (differential_sq M n)).Exact := by
+  rw [ShortComplex.moduleCat_exact_iff]
+  intro x hx
+  have hx' : cover (syzygy M (n + 1)) x = 0 := by
+    apply Subtype.ext
+    exact hx
+  obtain ⟨y, hy⟩ := cover_surjective (syzygy M (n + 2)) ⟨x, hx'⟩
+  exact ⟨y, congrArg Subtype.val hy⟩
+
+private theorem augmentation_exact (M : ModuleCat.{v} R) :
+    (ShortComplex.mk (differential M 0) (cover M) (differential_cover M 0)).Exact := by
+  rw [ShortComplex.moduleCat_exact_iff]
+  intro x hx
+  obtain ⟨y, hy⟩ := cover_surjective (syzygy M 1) ⟨x, hx⟩
+  exact ⟨y, congrArg Subtype.val hy⟩
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The explicit free resolution obtained by repeatedly covering the kernel. -/
+private noncomputable def resolution (M : ModuleCat.{v} R) : ProjectiveResolution M where
+  complex := resolutionComplex M
+  projective n := ModuleCat.projective_of_free (Finsupp.basisSingleOne)
+  π := (ChainComplex.toSingle₀Equiv _ _).symm ⟨cover M, by
+    change differential M 0 ≫ cover M = 0
+    exact differential_cover M 0⟩
+  quasiIso := ⟨fun n ↦ by
+    cases n with
+    | zero =>
+      rw [ChainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros']
+      · refine (ShortComplex.exact_and_epi_g_iff_of_iso ?_).2
+          ⟨augmentation_exact M, (ModuleCat.epi_iff_surjective _).2 (cover_surjective M)⟩
+        exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+          (by change differential M 0 = differential M 0; rfl) (by simp)
+      all_goals rfl
+    | succ n =>
+      rw [quasiIsoAt_iff_exactAt']
+      · rw [HomologicalComplex.exactAt_iff' _ (n + 2) (n + 1) n (by simp) (by simp)]
+        simpa [HomologicalComplex.sc', HomologicalComplex.shortComplexFunctor',
+          resolutionComplex, ChainComplex.of.d] using differential_exact M n
+      · apply ChainComplex.exactAt_succ_single_obj⟩
+
+section Devissage
+
+variable {D : Type*} [Category* D] [HasShift D ℤ] [Preadditive D]
+  [HasZeroObject D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+  {F G : _root_.DerivedCategory (ModuleCat.{v} R) ⥤ D}
+  [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated]
+  (τ : F ⟶ G) [NatTrans.CommShift τ ℤ]
+
+omit [NatTrans.CommShift τ ℤ] in
+private theorem isIso_free (M : ModuleCat.{v} R) [Finite M]
+    (h : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj
+      (ModuleCat.of R R)))) :
+    IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj (freeModule M))) := by
+  classical
+  let Z : M → ModuleCat.{v} R := fun _ ↦ ModuleCat.of R R
+  have hsum : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj
+      (ModuleCat.coproductCocone Z).pt)) :=
+    NatTrans.isIso_app_of_isColimit_cofan τ
+      (_root_.DerivedCategory.isColimitCofanMkQObj
+        (isColimitCofanMkObjOfIsColimit (HomologicalComplex.single _ (.up ℤ) 0) _ _
+          (ModuleCat.coproductCoconeIsColimit Z))) (fun _ ↦ h)
+  exact (NatTrans.isIso_app_iff_of_iso τ
+    ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
+      (finsuppLEquivDirectSum R R M).toModuleIso)).2 hsum
+
+private theorem isIso_telescope
+    [PreservesColimitsOfShape (Discrete ℕ) F] [PreservesColimitsOfShape (Discrete ℕ) G]
+    {L : CochainComplex (ModuleCat.{v} R) ℤ} (N : ℕ → L.SubcomplexFamily)
+    (hN : ∀ n, N n ≤ N (n + 1)) (hL : ∀ i (x : L.X i), ∃ n, x ∈ (N n).N i)
+    (h : ∀ n, IsIso (τ.app (_root_.DerivedCategory.Q.obj
+      (CochainComplex.subcomplex (N n))))) :
+    IsIso (τ.app (_root_.DerivedCategory.Q.obj L)) := by
+  have hsum : IsIso (τ.app (_root_.DerivedCategory.Q.obj
+      (∐ fun n ↦ CochainComplex.subcomplex (N n)))) :=
+    NatTrans.isIso_app_of_isColimit_cofan τ
+      (_root_.DerivedCategory.isColimitCofanMkQObj (coproductIsCoproduct _)) h
+  exact NatTrans.isIso_app_obj₃_of_isIso_app_obj₁₂ τ
+    (_root_.DerivedCategory.triangleOfSES_distinguished
+      (CochainComplex.telescopeShortComplex_shortExact N hN hL)) hsum hsum
+
+private theorem isIso_finite [Finite R]
+    [PreservesColimitsOfShape (Discrete ℕ) F] [PreservesColimitsOfShape (Discrete ℕ) G]
+    (h : IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj
+      (ModuleCat.of R R)))) (M : ModuleCat.{v} R) [Finite M] :
+    IsIso (τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj M)) := by
+  let P := resolution M
+  have hterm (i : ℤ) : IsIso (τ.app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (P.cochainComplex.X i))) := by
+    by_cases hi : i ≤ 0
+    · let k := (-i).toNat
+      have e := P.cochainComplexXIso i k (by dsimp [k]; omega)
+      apply (NatTrans.isIso_app_iff_of_iso τ
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso e)).2
+      have : Finite (syzygy M k) := finite_syzygy M k
+      exact isIso_free τ (syzygy M k) h
+    · have hz : IsZero ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          (P.cochainComplex.X i)) :=
+        (_root_.DerivedCategory.singleFunctor _ 0).map_isZero
+          (CochainComplex.isZero_of_isStrictlyLE P.cochainComplex 0 i (by omega))
+      exact ⟨⟨0, (F.map_isZero hz).eq_of_src _ _, (G.map_isZero hz).eq_of_src _ _⟩⟩
+  have hP : IsIso (τ.app (_root_.DerivedCategory.Q.obj P.cochainComplex)) :=
+    isIso_telescope τ (fun m ↦ CochainComplex.stupidTruncGEFamily P.cochainComplex (-m))
+      (fun m ↦ CochainComplex.stupidTruncGEFamily_le_of_le (by omega))
+      (fun i x ↦ ⟨(-i).toNat,
+        (CochainComplex.mem_stupidTruncGEFamily_iff x).2 (Or.inl (by omega))⟩)
+      (fun m ↦ _root_.DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE
+        τ _ (-m) 0 (fun i ↦ by
+          by_cases hi : - (m : ℤ) ≤ i
+          · have := CochainComplex.isIso_subcomplexι_stupidTruncGEFamily_f
+              (L := P.cochainComplex) (Or.inl hi)
+            exact (NatTrans.isIso_app_iff_of_iso τ
+              ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
+                (asIso ((CochainComplex.subcomplexι
+                  (CochainComplex.stupidTruncGEFamily P.cochainComplex (-m))).f i)))).2
+              (hterm i)
+          · have hz := CochainComplex.isZero_of_isStrictlyGE
+              (CochainComplex.subcomplex
+                (CochainComplex.stupidTruncGEFamily P.cochainComplex (-m))) (-m) i (by omega)
+            have hz' := (_root_.DerivedCategory.singleFunctor _ 0).map_isZero hz
+            exact ⟨⟨0, (F.map_isZero hz').eq_of_src _ _, (G.map_isZero hz').eq_of_src _ _⟩⟩))
+  exact (NatTrans.isIso_app_iff_of_iso τ
+    (asIso (_root_.DerivedCategory.Q.map P.π'))).1 hP
+
+end Devissage
+
+end ExceptionalConstantTensor
 
 namespace AlgebraicGeometry.Etale
 
@@ -56,38 +243,31 @@ with `N_U[0]`, so this is precisely `(Rj_*K) tensor^L N_T → Rj_*(K tensor^L N_
 Source: blueprint sec-smooth-purity/sk-prop-a1-kummer/lem-exc-constant-tensor.md
 (blueprint: lem-exc-constant-tensor).
 
-Proof plan:
-1. Put M₀ = N. For each finite Mᵣ take the finite free module A^(Mᵣ) mapping its basis
-   vector eₓ to x, and let Mᵣ₊₁ be its kernel. Finiteness of A makes every kernel finite.
-   The surjections and kernel inclusions form a finite-free resolution P → N[0] in
-   nonpositive degrees, with no finite-projective-dimension assumption.
-2. Exact constant sheafification gives resolutions P_T → N_T[0] and P_U → N_U[0].
-   The canonical constant inverse-image isomorphisms commute with every differential
-   and augmentation: both adjuncts send a constant section x to its image under the
-   corresponding module homomorphism. Thus they agree by sheafification's universal
-   property (lem-kun-pullback-constant and def-weil-pbc-sheafification).
-3. For fixed K write F(L) = Rj_*K tensor^L L and G(L) = Rj_*(K tensor^L j⁻¹L).
-   The canonical projection mate is natural, exact, shift-compatible, and the identity
-   at A_T under unit identifications (lem-weil-pbc-ringed-projection-mate-exact).
-   It is therefore invertible on finite sums and shifts of A_T.
-4. Induct on the brutal truncations Eₘ = P_T in degrees -m through 0. The degreewise
-   split short exact sequence adjoining the bottom term gives a distinguished triangle
-   (lem-weil-pbc-complex-ses-triangle). The mate is a morphism of these triangles, so
-   invertibility of its first and third components proves invertibility on Eₘ
-   (lem-sf-triangle-morphism-iso).
-5. The degreewise colimit of the Eₘ is P_T, since every degree eventually stabilizes.
-   The complex-colimit telescope theorem (lem-kun-complex-colimit-hocolim) gives the
-   distinguished triangle B → B → P_T → B[1], with B = ⨁ₘ Eₘ and first map 1-shift.
-6. F preserves countable coproducts by lem-kun-derived-tensor-direct-sums. G does too:
-   inverse image is a left adjoint (lem-weil-pbc-left-adjoint-preserves-colimits), tensor
-   preserves coproducts, and Rj_* preserves them by hypothesis.
-7. Naturality identifies the mate on B with the coproduct of its invertible components
-   on Eₘ. Exactness and shift compatibility make the canonical mate a morphism of the
-   telescope triangles, including the connecting square. The first two components
-   are invertible, hence so is the component on P_T (lem-sf-triangle-morphism-iso).
-8. Naturality at the augmentation isomorphism P_T ≅ N_T[0] transfers invertibility to
-   N_T[0]. Under the canonical constant inverse-image isomorphism of step 2 this is
-   the displayed comparison. Nothing bounds K or the length of P. -/
+Proof:
+1. Construct a free resolution of N by repeatedly taking the free module on the elements
+   of the preceding kernel. Each kernel is finite because A and the preceding module are
+   finite. Surjectivity of the covers proves exactness and the augmentation quasi-isomorphism.
+2. Precompose the canonical projection map with the exact derived constant-sheaf functor.
+   Its value on A[0] is invertible by the existing projection-map unit theorem and the
+   monoidal constant-sheaf unit isomorphism. The existing projection-map shift theorem
+   supplies compatibility with shifts, and the functors are triangulated.
+3. Naturality on a finite coproduct identifies the component on each finite free module
+   with the finite coproduct of the component on A[0]. Thus it is invertible on every
+   resolution term placed in degree zero.
+4. Apply the existing bounded-complex induction from ModuleCatGeneration to each brutal
+   truncation of the resolution. This induction uses the short exact sequence adjoining
+   one term and two out of three for the resulting distinguished triangles.
+5. The brutal truncations increase to the resolution. Their module-complex telescope is
+   short exact. Its derived distinguished triangle has two copies of the countable sum
+   of the truncations followed by the resolution.
+6. The derived constant-sheaf functor, inverse image, and tensor functors preserve countable
+   coproducts by their adjunctions. Derived direct image does so by hypothesis. Naturality
+   identifies the projection-map component on the sum with a sum of isomorphisms. Shift
+   compatibility and two out of three in the telescope triangle give invertibility on
+   the resolution, and the augmentation transfers this to N[0].
+7. The natural comparison between the derived exact constant-sheaf functor and the
+   degree-zero single functor transfers the result to the stated constant sheaf N_T[0].
+   No bound on K or on the length of the free resolution is used. -/
 theorem isIso_projectionMap_finiteConstant_of_preservesCountableCoproducts
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
@@ -97,6 +277,53 @@ theorem isIso_projectionMap_finiteConstant_of_preservesCountableCoproducts
     IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K).app
       ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N))) := by
-  sorry
+  let c := (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).mapDerivedCategory
+  let τ : (derivedTensor (ModuleCat.{u + 1} A) T).obj
+      ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj K) ⟶
+      ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor ⋙
+        (derivedTensor (ModuleCat.{u + 1} A) U).obj K) ⋙
+        (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor :=
+    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) j).app K
+  let α := Functor.whiskerLeft c τ
+  have hunit : IsIso (α.app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of A A))) := by
+    have h : IsIso (τ.app (𝟙_ _)) :=
+      isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit _ j K
+    change IsIso (τ.app (c.obj _))
+    refine (NatTrans.isIso_app_iff_of_iso τ ?_).2 h
+    exact (Functor.mapDerivedCategorySingleFunctor _ 0).app _ ≪≫
+      (_root_.DerivedCategory.singleFunctor _ 0).mapIso (Functor.Monoidal.εIso
+        (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).symm ≪≫
+      _root_.DerivedCategory.singleFunctorObjUnitIso _
+  have hshift : NatTrans.CommShift α ℤ := inferInstance
+  have hc : PreservesColimitsOfShape (Discrete ℕ) c := by
+    let adj := (constantSheafΓAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)).derivedAdjunction
+    have : PreservesColimitsOfShape (Discrete ℕ)
+        (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).leftDerivedFunctor :=
+      adj.leftAdjoint_preservesColimits.preservesColimitsOfShape
+    exact preservesColimitsOfShape_of_natIso
+      (Functor.leftDerivedFunctorIsoMapDerivedCategory
+        (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)))
+  have hG : PreservesColimitsOfShape (Discrete ℕ)
+      (((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor ⋙
+        (derivedTensor (ModuleCat.{u + 1} A) U).obj K) ⋙
+        (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor) := by
+    have : PreservesColimitsOfShape (Discrete ℕ)
+        (upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor :=
+      (derivedUpperStarLowerStarAdjunction _ j).leftAdjoint_preservesColimits
+        |>.preservesColimitsOfShape
+    have : PreservesColimitsOfShape (Discrete ℕ)
+        ((derivedTensor (ModuleCat.{u + 1} A) U).obj K) :=
+      (derivedTensorHomAdjunction (ModuleCat.{u + 1} A) K).leftAdjoint_preservesColimits
+        |>.preservesColimitsOfShape
+    infer_instance
+  have hF : PreservesColimitsOfShape (Discrete ℕ)
+      ((derivedTensor (ModuleCat.{u + 1} A) T).obj
+        ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj K)) :=
+    (derivedTensorHomAdjunction (ModuleCat.{u + 1} A) _).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have hN := ExceptionalConstantTensor.isIso_finite α hunit N
+  exact (NatTrans.isIso_app_iff_of_iso τ
+    ((Functor.mapDerivedCategorySingleFunctor _ 0).app N)).1 hN
 
 end AlgebraicGeometry.Etale
