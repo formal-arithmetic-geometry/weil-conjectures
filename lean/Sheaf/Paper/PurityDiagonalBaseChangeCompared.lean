@@ -9,14 +9,7 @@ public import Sheaf.Paper.PuritySectionInvariantCompared
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackIdentity
-import Sheaf.Paper.CohomologicalSmoothnessTheorem
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PurityFiniteSetting
-import Sheaf.Paper.PuritySectionInvariantIntrinsic
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
 /-!
 # The specified diagonal base-change comparison in finite coordinates
@@ -106,6 +99,55 @@ theorem comparedDiagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{
       (IsPullback.of_hasPullback f f).flip) ∧
     IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient
       (IsPullback.of_hasPullback f f)) := by
-  sorry
+  have _ := hf
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+  have : HasInvertibleExponent P.Coefficient X := by
+    let l := P.coefficients.l
+    let E := P.extension
+    let n := P.level
+    have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+    have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+      calc
+        Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by
+          change spectralNorm (Padic l) E (l : E) = ‖(l : Padic l)‖
+          simpa only [map_natCast] using
+            (spectralNorm_extends (K := Padic l) (L := E) (l : Padic l))
+        _ < 1 := Padic.norm_p_lt_one
+    have hlm : (l : Padic.coefficientExtensionIntegers l E) ∈
+        Padic.coefficientExtensionMaximalIdeal l E :=
+      (h.2.1 _).2 (by simpa only [SubringClass.coe_natCast] using habv)
+    have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) =
+        Padic.coefficientExtensionMaximalIdeal l E :=
+      h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+    have hpow : (l : Padic.coefficientExtensionIntegers l E) ^ n ∈
+        Padic.coefficientExtensionIdeal l E n := by
+      change _ ∈ Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ n
+      rw [hgen]
+      exact Ideal.pow_mem_pow hlm n
+    refine ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos _, ?_, ?_⟩
+    · apply ULift.ext
+      change ((l ^ n : ℕ) : Padic.coefficientExtensionIntegers l E ⧸
+        Padic.coefficientExtensionIdeal l E n) = 0
+      rw [← map_natCast (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)),
+        Ideal.Quotient.eq_zero_iff_mem]
+      simpa only [Nat.cast_pow] using hpow
+    · apply X.toRingedSpace.isUnit_of_isUnit_germ
+      intro x hx
+      change IsUnit ((X.toRingedSpace.presheaf.germ ⊤ x hx).hom
+        ((l ^ n : ℕ) : X.toRingedSpace.presheaf.obj _))
+      rw [map_natCast, Nat.cast_pow]
+      exact (P.coefficientPrime_isUnit_stalk X aX x).pow n
+  refine ⟨(IsPullback.of_hasPullback f f).flip, inferInstance, inferInstance, ?_, ?_⟩
+  · have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+      P.Coefficient f d (IsPullback.of_hasPullback f f).flip
+    exact (Etale.isIso_dualizingComplexBaseChangeMap_iff P.Coefficient
+      (IsPullback.of_hasPullback f f).flip).2 inferInstance
+  · have := Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+      P.Coefficient f d (IsPullback.of_hasPullback f f)
+    exact (Etale.isIso_dualizingComplexBaseChangeMap_iff P.Coefficient
+      (IsPullback.of_hasPullback f f)).2 inferInstance
 
 end WeilConjectures.PurityFiniteSetting

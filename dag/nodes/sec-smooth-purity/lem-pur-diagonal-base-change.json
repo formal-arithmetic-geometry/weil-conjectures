@@ -1,347 +1,312 @@
 {
-  "id": "lem-pur-diagonal-base-change",
-  "blueprint": {
-    "is": "lem-pur-diagonal-base-change",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Base change for the dualizing object of a projection",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension\n$d$, put $W=X\\times_YX$ with projections $p_1,p_2$ and diagonal $\\Delta=(\\operatorname{id}_X,\\operatorname{id}_X):X\\to W$. The square\n\n$$\n\\begin{array}{ccc}\nW& \\xrightarrow{\\ p_2\\ }&X\\\\\np_1\\big\\downarrow &&\\big\\downarrow f\\\\\nX&\\xrightarrow{\\ f\\ }&Y\n\\end{array}\n$$\n\nis Cartesian and $p_1$ is smooth (the base change of $f$); by the\nbase-change theorem [thm-pur-cohomological-smoothness] (the comparison of\n[def-pur-co-smoothness]),\n\n$$\n\\omega_{p_1}=Rp_1^!\\Lambda_X\n\\;\\cong\\;Lp_2^*Rf^!\\Lambda_Y=Lp_2^*\\omega_f,\n$$\n\nand symmetrically $\\omega_{p_2}\\cong Lp_1^*\\omega_f$. Here $C$ denotes the section invariant of [def-pur-section-invariant]. In\nparticular, since $p_2\\Delta=\\operatorname{id}_X$,\n\n$$\nC(p_1,\\Delta)=L\\Delta^*\\omega_{p_1}\n\\;\\cong\\;L\\Delta^*Lp_2^*\\omega_f\n\\;\\cong\\;\\omega_f.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
-    "place": "node lem-pur-diagonal-base-change, order 2009"
-  },
-  "stmt_deps": [
+ "id": "lem-pur-diagonal-base-change",
+ "blueprint": {
+  "is": "lem-pur-diagonal-base-change",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change for the dualizing object of a projection",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be smooth separated of pure relative dimension\n$d$, put $W=X\\times_YX$ with projections $p_1,p_2$ and diagonal $\\Delta=(\\operatorname{id}_X,\\operatorname{id}_X):X\\to W$. The square\n\n$$\n\\begin{array}{ccc}\nW& \\xrightarrow{\\ p_2\\ }&X\\\\\np_1\\big\\downarrow &&\\big\\downarrow f\\\\\nX&\\xrightarrow{\\ f\\ }&Y\n\\end{array}\n$$\n\nis Cartesian and $p_1$ is smooth (the base change of $f$); by the\nbase-change theorem [thm-pur-cohomological-smoothness] (the comparison of\n[def-pur-co-smoothness]),\n\n$$\n\\omega_{p_1}=Rp_1^!\\Lambda_X\n\\;\\cong\\;Lp_2^*Rf^!\\Lambda_Y=Lp_2^*\\omega_f,\n$$\n\nand symmetrically $\\omega_{p_2}\\cong Lp_1^*\\omega_f$. Here $C$ denotes the section invariant of [def-pur-section-invariant]. In\nparticular, since $p_2\\Delta=\\operatorname{id}_X$,\n\n$$\nC(p_1,\\Delta)=L\\Delta^*\\omega_{p_1}\n\\;\\cong\\;L\\Delta^*Lp_2^*\\omega_f\n\\;\\cong\\;\\omega_f.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
+  "place": "node lem-pur-diagonal-base-change, order 2009"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-co-smoothness",
+  "def-pur-section-invariant",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Work with the existing coefficient quotient A = O_E/(varpi^n) and its universe lift. The spectral absolute value of ell in E is the p-adic norm of ell, which is less than one. Thus ell belongs to the maximal ideal m_E. The recorded uniformizer generates m_E, so ell^n belongs to (varpi)^n and its image in A is zero. This uses the membership and generator assertions of the recorded DVR theorem; it requires no condition that the ramification index divide n. The integer ell^n is positive because ell is prime. The local-unit assertion coefficientPrime_isUnit_stalk makes its image a unit in every stalk of X, since X is a scheme over the fixed field and ell differs from the characteristic. The stalkwise unit criterion makes it a unit in global sections, giving HasInvertibleExponent A X. Finiteness of A is the existing finiteComparedCoefficientFinite instance.",
+   "uses": [
     "def-pur-conventions",
-    "def-pur-co-smoothness",
-    "def-pur-section-invariant",
-    "def-sbc-smooth-morphisms",
-    "def-weil-proper-morphism",
-    "def-pc-fibre-product",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-finite-tor-amplitude"
-  ],
-  "proof": [
-    {
-      "text": "By [def-pc-fibre-product], $W=X\\times_YX$ has $fp_1=fp_2$ and represents pairs of maps into $X$ having equal composites with $f$. Thus the displayed square is Cartesian. The pair $(\\operatorname{id}_X,\\operatorname{id}_X)$ defines $\\Delta$ and gives both $p_1\\Delta=\\operatorname{id}_X$ and $p_2\\Delta=\\operatorname{id}_X$. Separatedness of $f$ says exactly that this diagonal is a closed immersion, by [def-weil-proper-morphism]. The first projection is the base change of $f$ along $f$ with the roles of the two copies of $X$ labelled as in the displayed square; for the second projection, the square with upper map $p_1$ and left map $p_2$ is Cartesian because compatible maps $a:T\\to X$ to the lower copy and $b:T\\to X$ to the right copy uniquely lift as $(b,a):T\\to W$. Thus $p_2$ is also a base change of $f$ along $f$. Apply [lem-sbc-smooth-relative-dimension-permanence] (1) to get smoothness of relative dimension $d$ for both projections. They are separated and of finite type by [lem-pod-separated-finite-type-base-change], applied to the separated finite-type morphism $f$ of the fixed purity setting: [def-weil-exceptional-inverse-image] specifies that $X,Y$ are finite-type schemes over the fixed field and $f$ is a separated finite-type morphism. For completeness, $W$ is also a finite-type scheme over the fixed field: by [def-weil-finite-type-morphism], choose a finite affine cover $X=\\bigcup_i\\operatorname{Spec}B_i$ with each $B_i$ finitely generated over the field, then a finite affine cover of each $p_1^{-1}(\\operatorname{Spec}B_i)$ by $\\operatorname{Spec}C_{ij}$ with $C_{ij}$ finitely generated over $B_i$. The union of generators of $B_i$ over the field and of $C_{ij}$ over $B_i$ generates $C_{ij}$ over the field; these finitely many affine opens cover $W$. In particular $(p_1,\\Delta)$ meets the geometric hypotheses of the section-invariant definition.",
-      "uses": [
-        "def-pc-fibre-product",
-        "def-weil-proper-morphism",
-        "lem-sbc-smooth-relative-dimension-permanence",
-        "lem-pod-separated-finite-type-base-change",
-        "def-weil-exceptional-inverse-image",
-        "def-weil-finite-type-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 01VB (lemma-base-change-smooth), Tag 02NK (lemma-base-change-relative-dimension-d); schemes.tex Tags 01JP (definition-fibre-product) and 01KK (definition-separated), as supplied by the cited existing nodes; blueprint item, displayed square; Tag 01KU (lemma-separated-permanence), Tag 01T4 (lemma-base-change-finite-type), and finite affine-cover definition in Tag 01T0."
-      }
-    },
-    {
-      "text": "Apply the base-change clause of [thm-pur-cohomological-smoothness] to $X'=W$, $Y'=X$, $u=p_2$, $v=f$, and $f'=p_1$. Its hypothesis is that the original vertical map $f$ is smooth separated of relative dimension $d$, which is assumed. Its base map $v$ is arbitrary, so this application is permitted even though $f$ need not be proper or etale. The theorem gives the canonical isomorphism $b_1:Lp_2^*\\omega_f\\xrightarrow{\\sim}\\omega_{p_1}$. Taking $b_1^{-1}$ gives precisely $\\omega_{p_1}\\cong Lp_2^*\\omega_f$, with $\\omega_f=Rf^!\\Lambda_Y$ and $\\omega_{p_1}=Rp_1^!\\Lambda_X$.",
-      "uses": [
-        "thm-pur-cohomological-smoothness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
-        "place": "Proof, first sentence: specialize base change to $Y\\prime=X$, $g=f$, $g\\prime=p_2$, $f\\prime=p_1$; supplied by sk-prop-cohsm clause (c)"
-      }
-    },
-    {
-      "text": "Use the Cartesian square established in Step 1 with upper map $p_1$ and left map $p_2$: take $X'=W$, $Y'=X$, $u=p_1$, $v=f$, $f'=p_2$. The original vertical map is the assumed smooth separated $f:X\\to Y$ of pure relative dimension $d$, and the lower base map is $f:X\\to Y$; arbitrary base maps are allowed. Step 1 supplies the required finite-type schemes and morphisms. The base-change clause of [thm-pur-cohomological-smoothness] now gives $b_2:Lp_1^*\\omega_f\\xrightarrow{\\sim}\\omega_{p_2}$. Its inverse is the claimed symmetric comparison $\\omega_{p_2}\\cong Lp_1^*\\omega_f$.",
-      "uses": [
-        "thm-pur-cohomological-smoothness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
-        "place": "Statement, symmetric projection comparison; same base-change argument with the factors interchanged"
-      }
-    },
-    {
-      "text": "The closed section from Step 1 has section invariant $C(p_1,\\Delta)=L\\Delta^*\\omega_{p_1}$ by [def-pur-section-invariant]. Apply the functor $L\\Delta^*$ to the inverse $b_1^{-1}$ constructed in Step 2. A functor takes an isomorphism and its inverse to mutually inverse maps, since it preserves compositions and identities. This gives the specified isomorphism $C(p_1,\\Delta)\\xrightarrow{\\sim}L\\Delta^*Lp_2^*\\omega_f$.",
-      "uses": [
-        "def-pur-section-invariant"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
-        "place": "Proof, last sentence: pull the first projection comparison back along the diagonal"
-      }
-    },
-    {
-      "text": "Work at $\\Lambda=A=A_{E,n}$ as required by [def-pur-conventions]. Apply [lem-pur-proetale-constant-ring-composition] to $h=\\Delta:X\\to W$ and $k=p_2:W\\to X$. Its equality says that the specified coefficient map for $p_2\\Delta$ is the composite coefficient map. Thus the ring-sheaf identifications required in [lem-weil-pbc-proetale-derived-pullback-composition] are the canonical constant-$A$ identifications for these three morphisms, rather than an independently chosen structure map.",
-      "uses": [
-        "def-pur-conventions",
-        "lem-pur-proetale-constant-ring-composition",
-        "lem-weil-pbc-proetale-derived-pullback-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0D6D (lemma-derived-pullback-composition), as stated by the cited pro-etale composition node; blueprint item Proof, last sentence, $p_2\\Delta=\\operatorname{id}_X$"
-      }
-    },
-    {
-      "text": "Use [lem-weil-pbc-proetale-derived-pullback-composition] for $h=\\Delta$, $k=p_2$ and the compatible constant ring sheaves from Step 5. The finite-level functors of [def-weil-derived-pullback-tensor-hom] are these module pullbacks. Invert the canonical comparison and use $p_2\\Delta=\\operatorname{id}_X$ from Step 1 to obtain $L\\Delta^*Lp_2^*\\omega_f\\cong L(\\operatorname{id}_X)^*\\omega_f$.",
-      "uses": [
-        "lem-weil-pbc-proetale-derived-pullback-composition",
-        "def-weil-derived-pullback-tensor-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0D6D (lemma-derived-pullback-composition), as stated by the cited pro-etale composition node; blueprint item Proof, last sentence, $p_2\\Delta=\\operatorname{id}_X$"
-      }
-    },
-    {
-      "text": "Apply [lem-pur-proetale-derived-pullback-identity] with $X$ and the finite ring $A$ to obtain $L(\\operatorname{id}_X)^*\\omega_f\\cong\\omega_f$. Compose this with Steps 4 and 6 to obtain the asserted $C(p_1,\\Delta)\\cong\\omega_f$. Its factors are the specified base-change comparison and the canonical composition and identity comparisons. This proves the finite-coefficient assertion of the fixed purity conventions; higher coefficient versions remain the transports specified there.",
-      "uses": [
-        "lem-pur-proetale-derived-pullback-identity"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0D6D (lemma-derived-pullback-composition), as stated by the cited pro-etale composition node; blueprint item Proof, last sentence, $p_2\\Delta=\\operatorname{id}_X$"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pc-fibre-product",
-    "def-weil-proper-morphism",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-pod-separated-finite-type-base-change",
-    "def-weil-exceptional-inverse-image",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-purity-conv/def-pur-conventions.md",
+    "place": "Finite coefficient conventions; the recorded DVR theorem and the existing coefficientPrime_isUnit_stalk supply the membership, generator and local-unit assertions."
+   }
+  },
+  {
+   "text": "The structure morphism aY is locally of finite type over the spectrum of a field, so LocallyOfFiniteType.isLocallyNoetherian gives that Y is locally Noetherian, hence quasi-separated. The self-product has its canonical Cartesian square and the flipped square. Both projections are smooth of relative dimension d by base-change stability. Their compactifications come from base change of the given compactification of f, and they are quasi-compact by base-change stability. Use the given structure map aX directly for the coefficient-unit assertion; no substitution along hf is necessary.",
+   "uses": [
     "def-weil-finite-type-morphism",
-    "thm-pur-cohomological-smoothness",
-    "def-pur-section-invariant",
-    "def-pur-conventions",
-    "lem-pur-proetale-constant-ring-composition",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-pur-proetale-derived-pullback-identity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-diagonal-base-change.md",
-    "place": "Expanded argument from the imported statement/proof and unit sk-thm-smooth-purity Step 1; second reader checked the geometric and composition sources in Stacks Tags 01JP, 01KK, 01KU, 01T4, 01VB, 02NK and 0D6D. Separate blueprint source remains unavailable (WANTED in report.md)."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "dualizingComplex|sectionInvariant|upperShriek",
-      "results": "Zero hits in the Mathlib source for dualizingComplex|sectionInvariant|upperShriek.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Base change of the relative dualizing complex for a smooth separated scheme morphism and restriction along its diagonal",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.Limits.pullback.fst",
-      "results": "AlgebraicGeometry.instSmoothFstScheme (Mathlib.AlgebraicGeometry.Morphisms.Smooth): smoothness of a pullback projection only; it does not give exceptional-inverse-image comparisons.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth separated morphism f of schemes, the relative dualizing complex of the self-product projection p1 is canonically isomorphic to p2 pullback of the relative dualizing complex of f, and its diagonal restriction is the dualizing complex of f",
-      "results": "Eight hits: AlgebraicGeometry.diagonal_SpecMap, diagonal_Spec_map, Scheme.Pullback.diagonalRestrictIsoDiagonal, and pullbackSpecIso_hom_fst'/fst/snd/base projection identities in Mathlib/AlgebraicGeometry/Pullbacks. These concern scheme pullbacks, not dualizing complexes.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"dualizing\"",
-      "results": "Zero hits for declarations containing dualizing.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Smooth base change for exceptional inverse image of constant coefficient sheaves gives pullback of the dualizing complex on the pro-etale site",
-      "results": "Eight hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pullbackIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackObjFreeIso, conjugateEquiv_pullbackComp_inv, freeFunctorCompPullbackIso, pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree or PullbackContinuous). These describe underived module pullback/free-unit comparisons, not smooth exceptional base change.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pullback functors on derived categories of sheaves compose canonically, and pulling a relative dualizing object to a diagonal section recovers the original dualizing object",
-      "results": "Eight hits, including SheafOfModules.pullbackComp, pullback_id_comp and pullbackIso: ordinary module pullback comparisons, not exceptional derived base change or the complete item. Read PullbackContinuous.lean lines 139, 167-183, 208-216.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.mapIso",
-      "results": "Twelve hits, including CategoryTheory.Functor.mapIso and its composition/inverse identities; these justify the elementary functor argument only, not the full item.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizing|upperShriek|exceptionalInverse",
-      "results": "Ten hits: occurrences of dualizing in order-duality and category-theory comments; no exceptional inverse image or relative dualizing comparison.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Canonical smooth base change for a relative dualizing complex and its restriction along the diagonal of a scheme morphism",
-      "results": "Eight hits: Scheme.Modules.pullback, pullbackPushforwardAdjunction, pullbackComp and related pseudofunctor and relative-differential facts. Their types concern ordinary structure-sheaf modules, not exceptional derived inverse image on the small pro-etale site.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a smooth morphism f, exceptional inverse image of the constant torsion sheaf commutes with arbitrary base change",
-      "results": "Eight hits: Scheme.Modules.pushforwardComp_inv_app_app, pseudofunctor_right_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv and free-module/pushforward comparison identities. Their types do not state exceptional base change.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Relative dualizing complex smooth base change along a self product and pullback by the diagonal",
-      "results": "Service unavailable: Internal Server Error.",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The pullback of a sheaf of modules along a composite is naturally isomorphic to the composite of the pullback functors, with a unit isomorphism for the identity morphism",
-      "results": "Eight hits: SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv, pullbackIso and two presheaf analogues. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean lines 139-216: these are underived module comparisons, not canonical smooth exceptional base change.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules.pullbackComp",
-      "results": "Five hits: SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv. Ordinary sheaf-module pullbacks, not the full derived dualizing assertion.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    },
-    {
-      "tool": "grep",
-      "query": "dualizingComplex|sectionInvariant|rightDerivedUpperShriek|baseChange.*[Ss]mooth",
-      "results": "Eleven hits, all smoothness or standard-smoothness base-change instances in AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory files. No exceptional inverse image or diagonal section invariant.",
-      "date": "2026-10-16",
-      "verdict": "no match for the complete item"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2009,
-  "blueprint_uses": [
-    "def-pur-co-smoothness",
-    "def-pur-conventions",
-    "def-sbc-smooth-morphisms",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-tensor",
-    "def-weil-scheme-morphism-properties",
-    "sbc-thm-etale-local-normal-form"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-derived-tensor",
-    "def-weil-scheme-morphism-properties",
-    "sbc-thm-etale-local-normal-form"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-smooth-purity",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-pur-diagonal-base-change",
-    "worker": "stage1",
-    "summary": "Expanded the self-product base-change argument into geometry, the two canonical projection comparisons, pullback along the closed diagonal, and pro-etale derived pullback composition/identity. Replaced the erroneous appeal to the definition of cohomological smoothness by the existing theorem; introduced the diagonal and cited the section-invariant definition explicitly. Reused existing nodes only, removed unused normal-form and tensor dependencies, and recorded actual Mathlib searches and absent literature. No mathematical hypotheses or conclusions changed. Resumption audit made finite type of the self-product over the fixed field explicit using a finite affine cover and union of algebra generators, citing the existing definition; no new node. Q41 return repair: preserved the statement, Lean record and Steps 1-4 verbatim, and replaced the 2159-character Step 5 by three short applications. Extracted the constant-ring composition compatibility and the module-linear derived identity normalization as two statement-only nodes. Maintainer reader: dropped the stale tool-use declaration of lem-weil-proetale-isomorphism-inverse-image (no step uses it; it is now a statement dependency of lem-pur-proetale-derived-pullback-identity) and recorded pur713-def-pullback-comparison as same_as of the composition node.",
-    "blueprint": "Realizes unit sk-thm-smooth-purity first paragraph, Step 1, and item Proof: the $Y\\prime=X$, $g=f$ specialization, its symmetric comparison, and $p_2\\Delta=\\operatorname{id}_X$ with pullback composition. No change to the unit route or use of twist/shift purity.",
-    "tool_uses": [
-      {
-        "node": "lem-sbc-smooth-relative-dimension-permanence",
-        "why": "Generic base-change stability of smoothness and fixed relative dimension for the self-product projections; the smooth-purity unit does not supply this scheme-theoretic permanence lemma."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-derived-pullback-composition",
-        "why": "Generic composition law for derived module pullbacks on the pro-etale site, applied to the diagonal and second projection; no such composition statement is supplied by the smooth-purity unit."
-      }
-    ],
-    "second_reading": "NV: independently checked all five steps, all 14 citation pairs, Stacks tag/label sources and the unit proof; expanded Step 3 hypotheses and the finite-coefficient citation; reran semantic, Loogle and source searches. No new nodes or mathematical statement changes. Q41 repaired the human long-step return on 2026-10-17."
-  },
-  "tool_uses": [
+    "def-pc-fibre-product",
     "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-proetale-isomorphism-inverse-image"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q41-a2a4909e5",
-    "group": "Q41",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-a2a4909e5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, unit sk-thm-smooth-purity Step 1 and Stacks proetale.tex section-morphism (09A5). The route is kept: base change via thm-pur-cohomological-smoothness clause 3 (sk-prop-cohsm), with u=p_2, v=f, f'=p_1 and the symmetric case. Then LΔ^* is applied, and pullback composition uses p_2Δ=id_X as an equality of morphisms, so L(p_2Δ)^* is literally L(id)^* with coefficient c^{id}. The coefficient category is the finite A_{E,n} pro-étale one throughout. Step 1 geometry (Cartesian swap, Δ closed by separatedness, permanence, finite type of W) satisfies def-pur-section-invariant. New lem-pur-proetale-constant-ring-composition: types check, and the statement is true because both sides have adjunct a↦constant a on Z×_V T. Tested on h=id, empty schemes and A=0. It supplies exactly the coefficient hypothesis of lem-weil-pbc-proetale-derived-pullback-composition. New lem-pur-proetale-derived-pullback-identity: e_{A_X}=c^{id}, it is linear after scalar transport, and the termwise isomorphism descends because u^* is exact. True, including X empty and A=0. Neither new node restates a parent clause. No DAG duplicates: the étale, ringed-space and topos composition nodes differ. Fixes: (1) B9: the blueprint definition pur713-def-pullback-comparison contains the composition claim inline (a claim inside a definition, so the new statement node is justified); recorded it in the composition node's blueprint.same_as. (2) Removed the stale split_report.tool_uses entry lem-weil-proetale-isomorphism-inverse-image, which no step uses any more. Accepted tool uses: lem-sbc-smooth-relative-dimension-permanence and lem-weil-pbc-proetale-derived-pullback-composition. I could not cross-check the search records against searches.jsonl from this machine. Corrected files are in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 2 file(s) fixed by the reviewer"
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/lem-pur-diagonal-base-change.proof.md",
+    "place": "The Cartesian self-product specialization; Mathlib Noetherian and smooth/base-change permanence interfaces."
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-693b6794d",
-    "group": "Q21",
-    "result": "pass",
-    "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
+  {
+   "text": "Apply the existing canonical smooth exceptional-base-change theorem directly to f and each of the two Cartesian self-product squares. Its source-exponent hypothesis is Step 1 and its quasi-separated-base hypothesis is Step 2. It makes rightDerivedUpperShriekBaseChangeMap invertible. The dualizingComplexBaseChangeMap is its component at the coefficient unit, followed by the exceptional image of the canonical pullback-unit isomorphism. The lemma isIso_dualizingComplexBaseChangeMap_iff therefore proves invertibility of each specified dualizing map. This uses the underlying smooth base-change result directly instead of importing the entire tensor/invertibility/composition theorem thm-pur-cohomological-smoothness.",
+   "uses": [
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/lem-pur-diagonal-base-change.proof.md",
+    "place": "First sentence, base-change clause, specialized with Y prime = X and g = f; upstream SmoothDuality/SmoothBaseChange and UpperShriekCanonicalMaps supply exactly these canonical maps."
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.PurityDiagonalBaseChangeCompared",
-    "declaration": "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange",
-    "declarations": [
-      "WeilConjectures.PurityFiniteSetting.finiteDiagonalRestriction",
-      "WeilConjectures.PurityFiniteSetting.diagonalComparedRestriction",
-      "WeilConjectures.PurityFiniteSetting.diagonalComparedProEtale",
-      "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange"
-    ],
-    "file": "lean/Sheaf/Paper/PurityDiagonalBaseChangeCompared.lean",
-    "statement": "theorem comparedDiagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] [SmoothOfRelativeDimension d f] (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) : IsPullback (pullback.snd f f) (pullback.fst f f) f f ∧ SmoothOfRelativeDimension d (pullback.fst f f) ∧ SmoothOfRelativeDimension d (pullback.snd f f) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f).flip) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f))",
-    "branch": "newtargets-dag",
-    "by": "Q21",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "The recorded diagonal module imports the incompatible legacy section-invariant and smoothness interfaces. This replacement uses the same specified dualizing base-change mates, supplies the explicit inverse-beta/diagonal/composition chain and its actual pro-etale transport, and states invertibility for both self-product projections. Compactification binders are consequences of the existing finite-type setting. The identical diagonal restriction chain is also exposed with a coefficient-ring variable as finiteDiagonalRestriction, for specialization only after elaborating the pasting proposition."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth separated of pure relative dimension\n$d$, put $W=X\\times_YX$ with projections $p_1,p_2$. The square\n\n$$\n\\begin{array}{ccc}\nW& \\xrightarrow{\\ p_2\\ }&X\\\\\np_1\\big\\downarrow &&\\big\\downarrow f\\\\\nX&\\xrightarrow{\\ f\\ }&Y\n\\end{array}\n$$\n\nis Cartesian and $p_1$ is smooth (the base change of $f$); by the\nbase-change compatibility of\n[def-pur-co-smoothness],\n\n$$\n\\omega_{p_1}=Rp_1^!\\Lambda_X\n\\;\\cong\\;Lp_2^*Rf^!\\Lambda_Y=Lp_2^*\\omega_f,\n$$\n\nand symmetrically $\\omega_{p_2}\\cong Lp_1^*\\omega_f$. In\nparticular, since $p_2\\Delta=\\operatorname{id}_X$,\n\n$$\nC(p_1,\\Delta)=L\\Delta^*\\omega_{p_1}\n\\;\\cong\\;L\\Delta^*Lp_2^*\\omega_f\n\\;\\cong\\;\\omega_f.\n$$",
-    "proof": [
-      {
-        "text": "The pullback composition used in the last display is the one of [def-weil-derived-pullback-tensor-hom].\nThis is the case $Y'=X$, $g=f$ of the\n[def-pur-co-smoothness] base-change statement, with\n$g'=p_2$, $f'=p_1$; the second part is the composition\n$p_2\\circ\\Delta=\\operatorname{id}_X$ and the functoriality of $L(-)^*$.",
-        "uses": [
-          "def-weil-derived-pullback-tensor-hom",
-          "def-pur-co-smoothness"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Keep finiteDiagonalRestriction and diagonalComparedRestriction unchanged: apply the diagonal pullback to the inverse of the first specified base-change isomorphism, then apply leftDerivedUpperStarCompSectionIso at the dualizing object. This existing etale library comparison is the composition comparison followed by identity pullback, using diagonal_snd. Keep diagonalComparedProEtale unchanged as well: comparedSectionPresentation identifies the actual pro-etale section invariant with this etale presentation, and comparison inverse image transports the specified chain. Thus the same diagonal, composition and identity route is retained without the separate constant-ring composition, general ringed-module composition or general ringed-module identity statements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/lem-pur-diagonal-base-change.proof.md",
+    "place": "Last sentence; the existing definitions in this module, PuritySectionInvariantCompared and UpperStarIdCoherence construct the specified comparisons."
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "prop-asd-smooth-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/lem-pur-diagonal-base-change.proof.md",
+  "place": "R3 stage-3 Lean proof, 2026-10-19: canonical self-product smooth base change, coefficient-exponent proof, and unchanged inverse-mate/diagonal/composition/identity chain in etale presentation with explicit pro-etale transport. Unit route unchanged; no orientation or deformation theorem is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|sectionInvariant|upperShriek",
+   "results": "Zero hits in the Mathlib source for dualizingComplex|sectionInvariant|upperShriek.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of the relative dualizing complex for a smooth separated scheme morphism and restriction along its diagonal",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Limits.pullback.fst",
+   "results": "AlgebraicGeometry.instSmoothFstScheme (Mathlib.AlgebraicGeometry.Morphisms.Smooth): smoothness of a pullback projection only; it does not give exceptional-inverse-image comparisons.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth separated morphism f of schemes, the relative dualizing complex of the self-product projection p1 is canonically isomorphic to p2 pullback of the relative dualizing complex of f, and its diagonal restriction is the dualizing complex of f",
+   "results": "Eight hits: AlgebraicGeometry.diagonal_SpecMap, diagonal_Spec_map, Scheme.Pullback.diagonalRestrictIsoDiagonal, and pullbackSpecIso_hom_fst'/fst/snd/base projection identities in Mathlib/AlgebraicGeometry/Pullbacks. These concern scheme pullbacks, not dualizing complexes.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Zero hits for declarations containing dualizing.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for exceptional inverse image of constant coefficient sheaves gives pullback of the dualizing complex on the pro-etale site",
+   "results": "Eight hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pullbackIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackObjFreeIso, conjugateEquiv_pullbackComp_inv, freeFunctorCompPullbackIso, pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit (Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree or PullbackContinuous). These describe underived module pullback/free-unit comparisons, not smooth exceptional base change.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback functors on derived categories of sheaves compose canonically, and pulling a relative dualizing object to a diagonal section recovers the original dualizing object",
+   "results": "Eight hits, including SheafOfModules.pullbackComp, pullback_id_comp and pullbackIso: ordinary module pullback comparisons, not exceptional derived base change or the complete item. Read PullbackContinuous.lean lines 139, 167-183, 208-216.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Twelve hits, including CategoryTheory.Functor.mapIso and its composition/inverse identities; these justify the elementary functor argument only, not the full item.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|exceptionalInverse",
+   "results": "Ten hits: occurrences of dualizing in order-duality and category-theory comments; no exceptional inverse image or relative dualizing comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical smooth base change for a relative dualizing complex and its restriction along the diagonal of a scheme morphism",
+   "results": "Eight hits: Scheme.Modules.pullback, pullbackPushforwardAdjunction, pullbackComp and related pseudofunctor and relative-differential facts. Their types concern ordinary structure-sheaf modules, not exceptional derived inverse image on the small pro-etale site.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism f, exceptional inverse image of the constant torsion sheaf commutes with arbitrary base change",
+   "results": "Eight hits: Scheme.Modules.pushforwardComp_inv_app_app, pseudofunctor_right_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv and free-module/pushforward comparison identities. Their types do not state exceptional base change.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex smooth base change along a self product and pullback by the diagonal",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a sheaf of modules along a composite is naturally isomorphic to the composite of the pullback functors, with a unit isomorphism for the identity morphism",
+   "results": "Eight hits: SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv, pullbackIso and two presheaf analogues. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean lines 139-216: these are underived module comparisons, not canonical smooth exceptional base change.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "Five hits: SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv. Ordinary sheaf-module pullbacks, not the full derived dualizing assertion.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|sectionInvariant|rightDerivedUpperShriek|baseChange.*[Ss]mooth",
+   "results": "Eleven hits, all smoothness or standard-smoothness base-change instances in AlgebraicGeometry/Morphisms/Smooth.lean and RingTheory files. No exceptional inverse image or diagonal section invariant.",
+   "date": "2026-10-16",
+   "verdict": "no match for the complete item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2009,
+ "blueprint_uses": [
+  "def-pur-co-smoothness",
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-derived-tensor",
+  "def-weil-scheme-morphism-properties",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-diagonal-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the self-product base-change argument into geometry, the two canonical projection comparisons, pullback along the closed diagonal, and pro-etale derived pullback composition/identity. Replaced the erroneous appeal to the definition of cohomological smoothness by the existing theorem; introduced the diagonal and cited the section-invariant definition explicitly. Reused existing nodes only, removed unused normal-form and tensor dependencies, and recorded actual Mathlib searches and absent literature. No mathematical hypotheses or conclusions changed. Resumption audit made finite type of the self-product over the fixed field explicit using a finite affine cover and union of algebra generators, citing the existing definition; no new node. Q41 return repair: preserved the statement, Lean record and Steps 1-4 verbatim, and replaced the 2159-character Step 5 by three short applications. Extracted the constant-ring composition compatibility and the module-linear derived identity normalization as two statement-only nodes. Maintainer reader: dropped the stale tool-use declaration of lem-weil-proetale-isomorphism-inverse-image (no step uses it; it is now a statement dependency of lem-pur-proetale-derived-pullback-identity) and recorded pur713-def-pullback-comparison as same_as of the composition node.",
+  "blueprint": "Realizes unit sk-thm-smooth-purity first paragraph, Step 1, and item Proof: the $Y\\prime=X$, $g=f$ specialization, its symmetric comparison, and $p_2\\Delta=\\operatorname{id}_X$ with pullback composition. No change to the unit route or use of twist/shift purity.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base-change stability of smoothness and fixed relative dimension for the self-product projections; the smooth-purity unit does not supply this scheme-theoretic permanence lemma."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic composition law for derived module pullbacks on the pro-etale site, applied to the diagonal and second projection; no such composition statement is supplied by the smooth-purity unit."
+   }
+  ],
+  "second_reading": "NV: independently checked all five steps, all 14 citation pairs, Stacks tag/label sources and the unit proof; expanded Step 3 hypotheses and the finite-coefficient citation; reran semantic, Loogle and source searches. No new nodes or mathematical statement changes. Q41 repaired the human long-step return on 2026-10-17."
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-a2a4909e5",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-a2a4909e5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, unit sk-thm-smooth-purity Step 1 and Stacks proetale.tex section-morphism (09A5). The route is kept: base change via thm-pur-cohomological-smoothness clause 3 (sk-prop-cohsm), with u=p_2, v=f, f'=p_1 and the symmetric case. Then LΔ^* is applied, and pullback composition uses p_2Δ=id_X as an equality of morphisms, so L(p_2Δ)^* is literally L(id)^* with coefficient c^{id}. The coefficient category is the finite A_{E,n} pro-étale one throughout. Step 1 geometry (Cartesian swap, Δ closed by separatedness, permanence, finite type of W) satisfies def-pur-section-invariant. New lem-pur-proetale-constant-ring-composition: types check, and the statement is true because both sides have adjunct a↦constant a on Z×_V T. Tested on h=id, empty schemes and A=0. It supplies exactly the coefficient hypothesis of lem-weil-pbc-proetale-derived-pullback-composition. New lem-pur-proetale-derived-pullback-identity: e_{A_X}=c^{id}, it is linear after scalar transport, and the termwise isomorphism descends because u^* is exact. True, including X empty and A=0. Neither new node restates a parent clause. No DAG duplicates: the étale, ringed-space and topos composition nodes differ. Fixes: (1) B9: the blueprint definition pur713-def-pullback-comparison contains the composition claim inline (a claim inside a definition, so the new statement node is justified); recorded it in the composition node's blueprint.same_as. (2) Removed the stale split_report.tool_uses entry lem-weil-proetale-isomorphism-inverse-image, which no step uses any more. Accepted tool uses: lem-sbc-smooth-relative-dimension-permanence and lem-weil-pbc-proetale-derived-pullback-composition. I could not cross-check the search records against searches.jsonl from this machine. Corrected files are in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityDiagonalBaseChangeCompared",
+  "declaration": "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteDiagonalRestriction",
+   "WeilConjectures.PurityFiniteSetting.diagonalComparedRestriction",
+   "WeilConjectures.PurityFiniteSetting.diagonalComparedProEtale",
+   "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDiagonalBaseChangeCompared.lean",
+  "statement": "theorem comparedDiagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] [SmoothOfRelativeDimension d f] (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) : IsPullback (pullback.snd f f) (pullback.fst f f) f f ∧ SmoothOfRelativeDimension d (pullback.fst f f) ∧ SmoothOfRelativeDimension d (pullback.snd f f) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f).flip) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded diagonal module imports the incompatible legacy section-invariant and smoothness interfaces. This replacement uses the same specified dualizing base-change mates, supplies the explicit inverse-beta/diagonal/composition chain and its actual pro-etale transport, and states invertibility for both self-product projections. Compactification binders are consequences of the existing finite-type setting. The identical diagonal restriction chain is also exposed with a coefficient-ring variable as finiteDiagonalRestriction, for specialization only after elaborating the pasting proposition."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of [def-pur-conventions],\nlet $f:X\\to Y$ be smooth separated of pure relative dimension\n$d$, put $W=X\\times_YX$ with projections $p_1,p_2$. The square\n\n$$\n\\begin{array}{ccc}\nW& \\xrightarrow{\\ p_2\\ }&X\\\\\np_1\\big\\downarrow &&\\big\\downarrow f\\\\\nX&\\xrightarrow{\\ f\\ }&Y\n\\end{array}\n$$\n\nis Cartesian and $p_1$ is smooth (the base change of $f$); by the\nbase-change compatibility of\n[def-pur-co-smoothness],\n\n$$\n\\omega_{p_1}=Rp_1^!\\Lambda_X\n\\;\\cong\\;Lp_2^*Rf^!\\Lambda_Y=Lp_2^*\\omega_f,\n$$\n\nand symmetrically $\\omega_{p_2}\\cong Lp_1^*\\omega_f$. In\nparticular, since $p_2\\Delta=\\operatorname{id}_X$,\n\n$$\nC(p_1,\\Delta)=L\\Delta^*\\omega_{p_1}\n\\;\\cong\\;L\\Delta^*Lp_2^*\\omega_f\n\\;\\cong\\;\\omega_f.\n$$",
+  "proof": [
+   {
+    "text": "The pullback composition used in the last display is the one of [def-weil-derived-pullback-tensor-hom].\nThis is the case $Y'=X$, $g=f$ of the\n[def-pur-co-smoothness] base-change statement, with\n$g'=p_2$, $f'=p_1$; the second part is the composition\n$p_2\\circ\\Delta=\\operatorname{id}_X$ and the functoriality of $L(-)^*$.",
+    "uses": [
+     "def-weil-derived-pullback-tensor-hom",
+     "def-pur-co-smoothness"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261019T192826-L-1873033",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
