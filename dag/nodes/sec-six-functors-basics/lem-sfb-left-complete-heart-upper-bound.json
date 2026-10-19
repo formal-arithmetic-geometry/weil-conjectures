@@ -67,11 +67,12 @@
    }
   },
   {
-   "text": "The exact-countable-product theorem applies to both $\\mathcal A$ and $\\mathcal B$: their derived categories have countable products, computed termwise, and cohomology preserves those products with their projections. Left completeness, as assumed in the statement, supplies the Roos triangle for $K$ and $(K_n,u_n)$. The homotopy-limit mapping theorem applies to $T$, since it is exact and preserves precisely these countable products. It yields a distinguished triangle\n$$TK\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow TK[1],\\qquad P=\\prod_{n\\ge0}TK_n,\\quad \\operatorname{pr}_n s=T(u_n)\\operatorname{pr}_{n+1}.$$\nHere the products are derived-category products; no termwise preservation by $T$ is assumed. Indexing from zero rather than one only reindexes the countable product. The maps of $TK$ to the terms are $T$ of the stipulated truncation projections.",
+   "text": "Exact countable products give countable products in D(A) and preservation of those products by each cohomology functor in D(B). Apply T directly to the distinguished Roos triangle supplied by left completeness. Its middle morphism is T(1-s); applying H^r gives (T followed by H^r)(1-s). The composite T followed by H^r preserves the original product, so the images of its projections form a limiting fan. This permits the splitting construction and the vanishing argument to be performed on H^r(T(product K_n)) itself, without transporting the triangle to a chosen product of the images.",
    "uses": [
     "lem-weil-derived-limit-products-core",
     "def-weil-derived-limit",
-    "lem-pc-homotopy-limit-map"
+    "def-weil-triangulated-category",
+    "def-weil-category-product"
    ],
    "elementary": false,
    "source": {
@@ -80,7 +81,7 @@
    }
   },
   {
-   "text": "Fix $j>b+c$. Applying the long exact cohomology sequence to step 4 and using the product/cohomology identifications gives the exact segment in $\\mathcal B$\n$$\\prod_n H^{j-1}(TK_n)\\xrightarrow{1-s_{j-1}}\\prod_n H^{j-1}(TK_n)\\longrightarrow H^j(TK)\\longrightarrow\\prod_n H^j(TK_n)=0.$$\nThe last equality is step 2. The components of $s_{j-1}$ are the actual transition morphisms $H^{j-1}(T(u_n))$, by compatibility of the product identifications with projections. Thus it suffices to show that the first displayed morphism is an epimorphism; a uniform upper bound on the terms alone would not justify this.",
+   "text": "Fix j > b+c. In the mapped Roos triangle, H^j(T(product K_n)) is zero: its mapped projection fan is limiting for the product of the zero objects H^j(TK_n), by step 2. Its long exact sequence has the segment H^(j-1)(TP) --H^(j-1)(T(1-s))--> H^(j-1)(TP) --> H^j(TK) --> H^j(TP)=0. It suffices that the first map be an epimorphism.",
    "uses": [
     "lem-sf-derived-homology-long-exact",
     "lem-weil-derived-limit-products-core"
@@ -92,7 +93,7 @@
    }
   },
   {
-   "text": "Write $A_n=H^{j-1}(TK_n)$ and $f_n=H^{j-1}(T(u_n))$. Choose $N=\\max(0,c-j+1)$; step 3 makes $f_n$ invertible for $n\\ge N$. Let $Q=\\prod_n A_n$ and $p_n:Q\\to A_n$ be its projections. Define morphisms $v_n:Q\\to A_n$ by $v_N=0$, then $v_n=p_n+f_n v_{n+1}$ for $n=N-1,\\ldots,0$, and $v_{n+1}=f_n^{-1}(v_n-p_n)$ for $n\\ge N$. Each $v_n$ is a finite expression in projections and transition maps. The universal property of the product gives $v:Q\\to Q$ with components $v_n$. For every $n$ the displayed recursion says $v_n-f_n v_{n+1}=p_n$; hence $(1-s_{j-1})v=\\mathrm{id}_Q$. This is a section of $1-s_{j-1}$ in the abelian category $\\mathcal B$, so that map is an epimorphism. No argument using elements, surjectivity of arbitrary tower transitions, or enough injectives is required.",
+   "text": "Work more generally with a product-preserving additive functor F and a tower whose mapped transitions F(f_n) are invertible for n >= N. For any source Q and maps p_n:Q -> F(K_n), construct maps v_n with v_n - v_(n+1) >> F(f_n) = p_n. Induct on N. When N=0, start v_0=0 and recursively put v_(n+1)=(v_n-p_n) >> inverse(F(f_n)); the equation follows by cancellation. For N+1, apply the induction hypothesis to the shifted tower K_(n+1), put v_(n+1)=w_n and v_0=p_0+w_0 >> F(f_0). Taking Q=F(product K_n) and p_n the mapped projections, the universal property of the preserved product supplies a map s with projections v_n. The projection equations defining the tower transition endomorphism then give s >> F(1-s)=identity. Hence F(1-s) is split epi. Apply this with F=T followed by H^(j-1), using step 3 for eventual invertibility. All recursions construct actual morphisms; no arbitrary existence witness or elementwise argument is used.",
    "uses": [
     "def-weil-category-product"
    ],
@@ -119,7 +120,6 @@
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
   "lem-pc-derived-lower-truncation-step-triangle",
-  "lem-pc-homotopy-limit-map",
   "lem-sf-derived-homology-long-exact",
   "lem-sp-derived-cohomology-shift",
   "lem-weil-derived-limit-products-core"
@@ -127,7 +127,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-direct-sums.proof.md",
-  "place": "Proof (2), lower-tail upper bound; explicit finite induction and eventual-transition splitting using Stacks Tags 08J5, 07KC, 05RS, 08TC."
+  "place": "Proof (2), lower-tail upper bound. Lean proof by finite truncation induction, eventual invertibility, and a recursive splitting in the preserved product fan; directly map the Roos triangle, avoiding a separate homotopy-limit mapping theorem. Stacks Tags 08J5, 07KC, 05RS, 08TC."
  },
  "mathlib_searches": [
   {
@@ -365,7 +365,6 @@
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
   "lem-pc-derived-lower-truncation-step-triangle",
-  "lem-pc-homotopy-limit-map",
   "lem-sf-derived-homology-long-exact",
   "lem-sp-derived-cohomology-shift",
   "lem-weil-derived-limit-products-core"
@@ -407,5 +406,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261019T002537-L-2150687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
