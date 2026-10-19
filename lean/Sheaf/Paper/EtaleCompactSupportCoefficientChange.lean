@@ -10,32 +10,6 @@ public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
-import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.ProEtaleConstructibleOrigin
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SecSmoothPurity.DirectImageScalarExchange
-import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
-import Sheaf.SecSmoothPurity.OpenScalarExchange
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-! # Ordinary-etale coefficient comparison for compact support
 
@@ -75,7 +49,54 @@ theorem coefficientRestrictionOpenMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     IsIso (coefficientRestrictionOpenMap φ j) := by
-  sorry
+  have hopen (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      IsIso ((j)^*[ModuleCat.{u + 1} A].map
+        ((coefficientRestrictionOpenMap φ j).app F)) := by
+    have h := unit_mateEquiv_symm
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
+      (asIso (upperStarRestrictScalars φ j).natTrans).inv F
+    change _ = _ ≫ (j)^*[ModuleCat.{u + 1} A].map
+      ((coefficientRestrictionOpenMap φ j).app F) at h
+    dsimp only [Functor.id_obj] at h
+    have hi : IsIso ((openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} A) j).unit.app
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ≫
+        (j)^*[ModuleCat.{u + 1} A].map
+          ((coefficientRestrictionOpenMap φ j).app F)) := by
+      rw [← h]
+      infer_instance
+    exact (isIso_comp_left_iff _ _).mp hi
+  have happ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      IsIso ((coefficientRestrictionOpenMap φ j).app F) := by
+    refine Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ ?_
+    let t := Z.algClosurePoint x
+    by_cases ht : t.base (IsLocalRing.closedPoint _) ∈ Set.range j.base
+    · have h := isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map
+        (ModuleCat.{u + 1} A) j _ (hopen F)
+        (IsOpenImmersion.lift j t (Scheme.range_base_subset_of_closedPoint_mem t ht))
+      rw [IsOpenImmersion.lift_fac] at h
+      exact h
+    · have hd : Disjoint (Set.range j.base) (Set.range t.base) := by
+        rw [Set.disjoint_right]
+        rintro _ ⟨p, rfl⟩
+        simpa only [Subsingleton.elim p (IsLocalRing.closedPoint _)] using ht
+      have h₁ := isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
+        (ModuleCat.{u + 1} A) j t hd
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F)
+      have h₂ := ((Sheaf.restrictScalars _ φ).map_isZero
+        (isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
+          (ModuleCat.{u + 1} B) j t hd F)).of_iso
+        ((asIso (upperStarRestrictScalars φ t).natTrans).app
+          ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).obj F))
+      have hi : IsIso ((t)^*[ModuleCat.{u + 1} A].map
+          ((coefficientRestrictionOpenMap φ j).app F)) :=
+        ⟨⟨h₂.to_ _, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩⟩
+      have h := isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map
+        (ModuleCat.{u + 1} A) t _ hi (𝟙 _)
+      rw [Category.id_comp] at h
+      exact h
+  exact NatIso.isIso_of_isIso_app _
 
 /-- The open restriction comparison descends termwise to bounded-below complexes.
 Source: Stacks Tag 0GL6 (blueprint: lem-fix-compact-support-coefficient-change). -/
