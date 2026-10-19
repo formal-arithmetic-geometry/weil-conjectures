@@ -9,9 +9,9 @@
 | `lem-sfb-constructible-cocone-hom-inj` | - | sorry_here |
 | `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
 | `lem-a1-lisse-sections-stalk-evaluation` | - | none |
-| `lem-trf-hilbert-samuel-local-presentations` | - | none |
+| `lem-trf-regular-hilbert-coefficient-data` | - | none |
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (26)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -32,9 +32,7 @@
 | `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `det-sp-tower-p1-adjunction` | 1 | state | 0 |
-| `lem-coef-rational-retract-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
 | `lem-sfb-constructible-cocone-obj` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
@@ -44,9 +42,9 @@
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 295 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 300 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (962)
+## Stage 3: modules to prove (964)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -104,7 +102,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ResidueLissePerfectLift` | 4 | 2 | proof | route |
 | `Sheaf.SixFunctors.SmoothDualityBaseChangeCompat` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
-| `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | proof | route |
@@ -212,7 +209,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.FiniteCoefficientVerdier` | 6 | 1 | proof | route |
 | `Sheaf.SixFunctors.FiniteDualitySiteComparison` | 6 | 1 | proof | route |
 | `Sheaf.SixFunctors.FlatModelGeneration` | 6 | 3 | proof | route |
-| `Sheaf.SixFunctors.FrobeniusCohomologyTransportIso` | 6 | 6 | proof | route |
 | `Sheaf.SixFunctors.OpenTensorNormalization` | 6 | 2 | proof | route |
 | `Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension` | 7 | 1 | proof | route |
@@ -246,7 +242,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteFreeHomComparison` | 7 | 1 | proof | route |
 | `Sheaf.Paper.FiniteProperLocalizing` | 7 | 3 | proof | route |
 | `Sheaf.Paper.FiniteSystemPullbackCoherence` | 7 | 2 | proof | route |
-| `Sheaf.Paper.FrobeniusSquareExchange` | 7 | 7 | proof | route |
 | `Sheaf.Paper.IntegralCanonicalTruncations` | 7 | 3 | proof | route |
 | `Sheaf.Paper.IntegralCohomologicalAdicCriterion` | 7 | 1 | proof | route |
 | `Sheaf.Paper.IntegralConstructibleHeart` | 7 | 1 | proof | route |
@@ -272,6 +267,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.FiniteCompactProetale` | 7 | 1 | proof | route |
 | `Sheaf.SixFunctors.FiniteDualizing` | 7 | 9 | proof | route |
 | `Sheaf.SixFunctors.FiniteMappingAdjunction` | 7 | 1 | proof | route |
+| `Sheaf.SixFunctors.FrobeniusCohomologyTransportIso` | 7 | 6 | proof | route |
 | `Sheaf.SmoothPurity.InternalAdjunctionEvaluation` | 7 | 1 | proof | route |
 | `Sheaf.SmoothPurity.TensorMateEtalePrecomp` | 7 | 1 | proof | route |
 | `Sheaf.Algebra.Homology.RingedSiteTorFlatModel` | 8 | 1 | proof | route |
@@ -326,6 +322,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.DivisibleExtensionDerivedReduction` | 9 | 5 | proof | route |
 | `Sheaf.Paper.EtaleFiniteCoefficientHomArrow` | 9 | 7 | proof | route |
 | `Sheaf.Paper.ExceptionalProEtaleRealization` | 9 | 6 | proof | route |
+| `Sheaf.Paper.FrobeniusSquareExchange` | 9 | 7 | proof | route |
 | `Sheaf.Paper.IntegralStratumHomFormula` | 9 | 2 | proof | route |
 | `Sheaf.Paper.ProperHeartBoundTorsion` | 9 | 1 | proof | route |
 | `Sheaf.Paper.UniformConstructibleExtRational` | 9 | 1 | proof | route |
@@ -399,6 +396,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.StratifiedLattice` | 5 | 1 | proof | 1 |
 | `Sheaf.Paper.ZlFiniteAdicDirectImage` | 5 | 1 | proof | 1 |
 | `Sheaf.Paper.ZlImmersionWeilLocalBehavior` | 5 | 1 | proof | 1 |
+| `Sheaf.SixFunctors.CoefQbarVerdier` | 5 | 1 | proof | 1 |
 | `Sheaf.SixFunctors.RationalVerdier` | 5 | 1 | proof | 1 |
 | `Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds` | 6 | 1 | proof | 1 |
 | `Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient` | 6 | 1 | proof | 1 |
@@ -569,6 +567,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.WfTensorCompletionFrobenius` | - | 4 | proof | 2 |
 | `Sheaf.SixFunctors.CompositionProjectionMate` | - | 1 | proof | 2 |
 | `Sheaf.SixFunctors.ProperOpenProjectionMate` | - | 2 | proof | 2 |
+| `Sheaf.SixFunctors.RationalRetractEvaluation` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer` | 4 | 2 | proof | 3 |
@@ -635,7 +634,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralHeartDualizable` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.SpecifiedPullbackComparisonAlpha` | 8 | 1 | proof | 3 |
 | `Sheaf.Paper.SupportedCup` | 8 | 4 | proof | 3 |
-| `Sheaf.Paper.SystemOperationExchangeRealization` | 8 | 20 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionExceptional` | 8 | 2 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ScalarExtensionFunctor` | 8 | 15 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite` | 9 | 1 | proof | 3 |
@@ -643,6 +641,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FourierAdicArtinSchreier` | 9 | 3 | proof | 3 |
 | `Sheaf.Paper.TorsionLimitSheafCompleteness` | 9 | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionDirectImage` | 9 | 2 | proof | 3 |
+| `Sheaf.Paper.SystemOperationExchangeRealization` | 10 | 20 | proof | 3 |
 | `Sheaf.Paper.PointFibreDerivedTensorBasic` | 11 | 1 | proof | 3 |
 | `Sheaf.Paper.SmoothPurityReductionTowerNormalized` | 12 | 1 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | 12 | 20 | proof | 3 |
@@ -886,6 +885,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange` | - | 1 | proof | 7 |
 | `Sheaf.Paper.ClosedSupportedCupVanishing` | - | 1 | proof | 7 |
 | `Sheaf.Paper.ProEtaleCompositionTowerNormalization` | - | 1 | proof | 7 |
+| `Sheaf.SixFunctors.ConstantSemilinearGeneratorComparison` | - | 18 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle` | 9 | 13 | proof | 8 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology` | 10 | 1 | proof | 8 |
 | `Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion` | 12 | 1 | proof | 8 |
@@ -1015,7 +1015,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (32)
+## Stage 3: waiting for statements of dependencies (31)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1025,7 +1025,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.FiniteCoefficientSmoothPurity` | 5 | 1 | `def-pur-affine-space-comparison` |
 | `Sheaf.Paper.FiniteReductionOfPurity` | 5 | 8 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.Paper.FiniteTorStability` | 5 | 15 | `cor-pur-affine-space-zero-section-purity` |
-| `Sheaf.SixFunctors.CoefQbarVerdier` | 5 | 1 | `lem-coef-rational-retract-evaluation` |
 | `Sheaf.SixFunctors.RationalOperations` | 5 | 1 | `lem-coef-finite-scalar-mate-realization` |
 | `Sheaf.Paper.AdicSmoothDualizingComplexes` | 6 | 12 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.CohomologicalSmoothnessTheorem` | 6 | 1 | `fix-prop-projection-formula` |
