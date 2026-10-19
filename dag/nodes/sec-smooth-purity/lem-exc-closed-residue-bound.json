@@ -1,0 +1,171 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "id": "lem-exc-closed-residue-bound",
+ "kind": "statement",
+ "title": "Closed-support finite-constant tensor bound",
+ "statement": "Let $A$ be a finite commutative ring and $N$ a finite $A$-module. Let $i:Z\\hookrightarrow T$ be a closed immersion and $j:U\\hookrightarrow T$ its quasi-compact complementary open immersion [def-weil-pbc-scheme-conventions]. Use the ordinary derived categories of constant-$A$ module sheaves [def-weil-pbc-derived-categories], derived direct image [def-weil-pbc-direct-image], its ambient closed right adjoint $Ri^!$ [lem-exc-closed-ambient], and derived tensor [def-kun-derived-tensor]. For a scheme $S$, let $N_S$ denote the constant module sheaf associated to $N$, placed in degree zero [def-weil-pbc-constant-sheaf]. Let $a,b,c\\in\\mathbf Z$ with $c\\geq0$. Assume $\\mathcal H^q(Rj_*M)=0$ for every $A$-module sheaf $M$ on $U$ and every $q>c$. If $K$ has Tor amplitude in $[a,b]$ [def-kun-tor-amplitude], then $\\mathcal H^q(Ri^!K\\otimes_A^L N_Z)=0$ for $q<a$ or $q>b+c+1$. No constructibility hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+  "place": "node prop-exc-closed-tor, order 1913"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "lem-exc-closed-ambient",
+  "def-kun-tor-amplitude",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Rewrite the integer cohomological-dimension bound as vanishing of right-derived functors in natural degrees above c.toNat. The open immersion is quasi-separated. By lem-exc-direct-image-coproducts, Rj_* preserves countable coproducts. Apply lem-exc-constant-tensor to the given finite module N to obtain the invertible projection map.",
+   "uses": [
+    "lem-exc-direct-image-coproducts",
+    "lem-exc-constant-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+    "place": "Proof, constant derived tensor and support-triangle paragraphs (steps 5–6 of prop-exc-closed-tor)"
+   }
+  },
+  {
+   "text": "Put V=N_T[0] and H=K tensor V. Tensor the distinguished support triangle of K with V. Compose the open projection isomorphism with the inverse-image tensor isomorphism and the canonical identification of derived and termwise exact inverse images; this identifies the third term with Rj_*j^*H. The projection-map unit identity, followed by cancellation of the inverse-image comparison, identifies the middle arrow with the unit of H. TR3 extends the identity on H and this third-term isomorphism to a morphism of distinguished triangles. The two-isomorphisms lemma makes its first component invertible. No functorial cone is chosen.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-kun-derived-tensor-triangulated",
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+    "place": "Proof, constant derived tensor and support-triangle paragraphs (steps 5–6 of prop-exc-closed-tor)"
+   }
+  },
+  {
+   "text": "Apply Li^* to the first-term isomorphism. Monoidality and the fully faithful closed direct-image counit Li^*Ri_* isomorphic to Id identify its source with Ri^!K tensor Li^*V and its target with Ri^!H. The constant inverse-image isomorphism, transported through the degree-zero embedding, identifies Li^*V with N_Z[0]. Thus Ri^!K tensor N_Z is isomorphic to Ri^!H.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+    "place": "Proof, constant derived tensor and support-triangle paragraphs (steps 5–6 of prop-exc-closed-tor)"
+   }
+  },
+  {
+   "text": "Test the assumed Tor amplitude of K directly on the constant sheaf N_T, giving cohomology of H in [a,b]. Apply only the cohomology clause of lem-exc-closed-amplitude to H, obtaining cohomology of Ri^!H in [a,b+c+1]. Transport the vanishing along the isomorphism of the preceding step. The argument also applies when a>b and uses no constructibility of H.",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "lem-exc-closed-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+    "place": "Proof, constant derived tensor and support-triangle paragraphs (steps 5–6 of prop-exc-closed-tor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-direct-image-coproducts",
+  "lem-exc-constant-tensor",
+  "lem-exc-closed-support-triangle",
+  "lem-kun-derived-tensor-triangulated",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-kun-pullback-constant",
+  "def-kun-tor-amplitude",
+  "lem-exc-closed-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
+  "place": "Proof: tensor the support triangles, then apply exact monoidal closed pullback and its fully faithful counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedSupport.*tensor|tensor.*closedSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no direct match: generic category and cohomology APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁",
+   "results": "1 hits: CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁",
+   "date": "2026-10-19",
+   "verdict": "no direct match: generic category and cohomology APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor amplitude of exceptional inverse image for a closed immersion from a support triangle and projection formula",
+   "results": "8 hits: DerivedCategory.IsGE, DerivedCategory.TStructure.t, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-19",
+   "verdict": "no direct match: generic category and cohomology APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of closed exceptional inverse image with a finite constant sheaf commutes with closed support, giving a cohomology amplitude bound",
+   "results": "8 hits: CategoryTheory.constantSheafAdj_counit_w; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.constantSheafΓAdj; CategoryTheory.constantSheafAdj_counit_app; CompHausLike.LocallyConstant.counit_app_val; CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite",
+   "date": "2026-10-19",
+   "verdict": "No direct match: ordinary sheaf adjunction, pullback, and t-structure results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude",
+  "date": "2026-10-19",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-exc-closed-tor",
+   "place": "Proof, constant derived tensor and support-triangle paragraphs (steps 5–6 of prop-exc-closed-tor)"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSupportResidueBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSupportResidueBound.lean",
+  "declaration": "AlgebraicGeometry.Etale.closedSupport_finiteTensor_vanishing",
+  "statement": "theorem closedSupport_finiteTensor_vanishing\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ModuleCat.{u + 1} A) [Finite N]\n    {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]\n    (_hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (a b c : ℤ) (_hc : 0 ≤ c)\n    (_hcd : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ), c < q →\n      IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj\n        ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj\n          ((_root_.DerivedCategory.singleFunctor _ 0).obj M))))\n    (K : DerivedCategoryModule A T)\n    (_hTor : DerivedCategory.hasTorAmplitudeIn A T a b K) :\n    ∀ q : ℤ, q < a ∨ b + c + 1 < q → IsZero\n      ((_root_.DerivedCategory.homologyFunctor _ q).obj\n        (((derivedTensor (ModuleCat.{u + 1} A) Z).obj\n          ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K)).obj\n          ((_root_.DerivedCategory.singleFunctor _ 0).obj\n            ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261019T192829-L-1873950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261019T192829-L-1873950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

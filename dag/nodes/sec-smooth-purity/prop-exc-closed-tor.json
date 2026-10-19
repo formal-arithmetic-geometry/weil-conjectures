@@ -23,120 +23,35 @@
  ],
  "proof": [
   {
-   "text": "The diagonal of an open immersion is an isomorphism, hence quasi-compact, so $j$ is quasi-separated. Apply [lem-exc-direct-image-coproducts] with the finite commutative ring $A$ of [def-weil-l-adic-coefficient-extension] and the stated nonnegative bound $c$. It gives preservation by $Rj_*$ of every set-indexed coproduct, in particular of countable coproducts as required in Step 5.",
+   "text": "Apply the constructibility clause of lem-exc-closed-amplitude using the bounded interval already supplied by bounded constructibility of K. Converting the two t-structure bounds into cohomology vanishing and using c >= 0 gives an ordered bounded interval for Q = Ri!K. No ordering of the input Tor interval is needed.",
    "uses": [
-    "lem-exc-direct-image-coproducts",
-    "def-weil-l-adic-coefficient-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, quasi-compact/quasi-separated coproduct sentence"
-   }
-  },
-  {
-   "text": "Put $Q=Ri^!K$ and $d=b+c+1$. Taking the test sheaf $A_T$ in the definition [def-kun-tor-amplitude] shows that $K$ has cohomology in $[a,b]$, since $K\\otimes_A^L A_T=K$. If $a>b$, these cohomology sheaves all vanish, so $K=0$ in the derived category, and $Ri^!K=0$ has the asserted properties; hence assume $a\\leq b$. Apply the constructible clause of [lem-exc-closed-amplitude] to $K$ with the assumed vanishing and constructibility of all $R^qj_*$. Thus $Q$ is bounded constructible, with cohomology in $[a,d]$. This establishes constructibility before any tensor comparison or residue-field test on $Q$.",
-   "uses": [
-    "def-kun-tor-amplitude",
     "lem-exc-closed-amplitude"
    ],
    "elementary": false,
    "source": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, first sentence: constructibility is lem-exc-closed-amplitude"
+    "place": "## Proof"
    }
   },
   {
-   "text": "Put $\\kappa=A/(\\varpi_E)$. Choose a resolution $P^\\bullet\\to\\kappa$ in degrees $\\leq0$ with each term finite free over $A$: map a finite free module onto $\\kappa$, then onto each successive kernel, which is a finite set because $A$ is finite. The constant complexes $P_V^\\bullet\\to\\kappa_V$ are resolutions on $V=T,U,Z$ by [lem-constructible-constant-exact]. Their terms are finite sums of the tensor unit $A_V$, hence flat, and [lem-kun-kflat-criteria] (1) makes each $P_V^\\bullet$ K-flat. Therefore tensoring a representing complex with $P_V^\\bullet$ computes its derived tensor with $\\kappa_V$ in [def-kun-derived-tensor].",
+   "text": "Apply the closed-support finite-constant tensor bound to the finite residue module, then the converse residue test to the bounded constructible exceptional image. A generic implication combines the tensor bound with any applicable finite-module Tor test before specializing the coefficient ring.",
    "uses": [
-    "lem-constructible-constant-exact",
-    "lem-kun-kflat-criteria",
-    "def-kun-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, constant derived tensor; explicit common resolution for the stalk calculation"
-   }
-  },
-  {
-   "text": "A closed immersion is finite: on affine charts its quotient algebra is generated as a module by $1$. Thus [lemma-weil-pbc-finite-direct-image-exact] makes $i_*$ exact on abelian sheaves, hence on $A$-module sheaves, since their kernels and cokernels are computed on underlying abelian sheaves. By [lemma-weil-pbc-finite-stalk-formula], its stalk is the original stalk on $Z$ and zero off $Z$; exact stalks and their conservativity [prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative] show that $i_*$ detects cohomology bounds for complexes. Choose a bounded complex $L$ representing the bounded object $Q$ of Step 2, by good truncation below $a$ and above $d$ of any representative (the truncation maps induce isomorphisms on every cohomology sheaf). In degree $r$ the total complex $L\\otimes_A P_Z$ has only finitely many summands, since $L$ is bounded. For each finite free $P^s=A^{m_s}$, the comparison $i_*(L^t\\otimes_A(P^s)_Z)\\cong(i_*L^t)\\otimes_A(P^s)_T$ is the identity on the $m_s$ copies of $i_*L^t$. Additivity of $i_*$ preserves these finite sums, and $A$-linearity preserves the matrices of $d_P$; hence these comparisons commute with $d_L\\otimes1+(-1)^t1\\otimes d_P$. They give an isomorphism of total complexes, and, by Step 3 and exactness of $i_*$, an isomorphism $i_*(Q\\otimes_A^L\\kappa_Z)\\cong(i_*Q)\\otimes_A^L\\kappa_T$. This is the source's closed-direct-image tensor calculation; it uses no coefficient change of $Ri^!$.",
-   "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, sentence beginning “Exact closed direct image commutes with this constant derived tensor”"
-   }
-  },
-  {
-   "text": "Tensor the distinguished triangle of [lem-exc-closed-support-triangle] for $K$ with $\\kappa_T$, using exactness of derived tensor [lem-kun-derived-tensor-triangulated]. Step 4 identifies its first term with $i_*(Q\\otimes_A^L\\kappa_Z)$. By Step 1, [lem-exc-constant-tensor] identifies its third term with $Rj_*(j^*K\\otimes_A^L\\kappa_U)=Rj_*j^*(K\\otimes_A^L\\kappa_T)$; restriction of the common constant resolution in Step 3 gives the displayed equality. Write $H=K\\otimes_A^L\\kappa_T$. Under this comparison the middle arrow is the adjunction unit $\\eta_H:H\\to Rj_*j^*H$: its adjoint is the identity of $j^*H$, by the projection-formula definition [def-kun-projection-formula-map]: the tensor comparison is adjoint to the direct-image counit tensored with $\\kappa_U$ and $\\varepsilon_{j^*K}\\circ j^*\\eta_K=1$. Compare with the closed-support triangle for $H$ from [lem-exc-closed-support-triangle]. Rotate both triangles so that their first arrow is $\\eta_H$; the identities on $H$ and $Rj_*j^*H$ extend by (TR3) of [def-weil-triangulated-category] to a morphism of triangles. Its third component is an isomorphism by [lem-sf-triangle-morphism-iso]. Shifting back gives an isomorphism $i_*(Q\\otimes_A^L\\kappa_Z)\\cong i_*Ri^!H$, all with coefficient ring $A$. No functorial choice of a cone or identification of connecting maps is assumed.",
-   "uses": [
-    "lem-exc-closed-support-triangle",
-    "lem-kun-derived-tensor-triangulated",
-    "lem-exc-constant-tensor",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "def-kun-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, tensor the support triangle and identify it with the support triangle of K tensor kappa"
-   }
-  },
-  {
-   "text": "The forward implication of [lem-exc-residue-tor-test] applied to $K$ gives $H\\in D^{[a,b]}(T_{\\mathrm{et}},A)$. Apply the cohomology-only clause of [lem-exc-closed-amplitude] to $H$, using the original $A$-module vanishing hypothesis. It gives $Ri^!H\\in D^{[a,d]}(Z_{\\mathrm{et}},A)$. Exactness of $i_*$ and the isomorphism of Step 5 imply that $i_*(Q\\otimes_A^L\\kappa_Z)$ has cohomology in $[a,d]$. Detection of bounds from Step 4 gives the same interval for $Q\\otimes_A^L\\kappa_Z$. This step requires no constructibility assertion for $H$.",
-   "uses": [
-    "lem-exc-residue-tor-test",
-    "lem-exc-closed-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, first residue test and the closed-support amplitude computation"
-   }
-  },
-  {
-   "text": "Apply the converse of [lem-exc-residue-tor-test] on $Z$ to $Q$. Its bounded constructibility was established in Step 2, and Step 6 gives the required cohomology interval for $Q\\otimes_A^L\\kappa_Z$. Thus $Q=Ri^!K$ has Tor amplitude in $[a,b+c+1]$, as asserted.",
-   "uses": [
+    "lem-exc-closed-residue-bound",
     "lem-exc-residue-tor-test"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-    "place": "## Proof, final sentence: second residue test"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-exc-direct-image-coproducts",
-  "def-weil-l-adic-coefficient-extension",
-  "def-kun-tor-amplitude",
   "lem-exc-closed-amplitude",
-  "lem-constructible-constant-exact",
-  "lem-kun-kflat-criteria",
-  "def-kun-derived-tensor",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-exc-closed-support-triangle",
-  "lem-kun-derived-tensor-triangulated",
-  "lem-exc-constant-tensor",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "def-kun-projection-formula-map",
+  "lem-exc-closed-residue-bound",
   "lem-exc-residue-tor-test"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md",
-  "place": "## Proof"
+  "place": "Proof: tensor the support triangles, then apply exact monoidal closed pullback and its fully faithful counit"
  },
  "mathlib_searches": [
   {
@@ -315,11 +230,6 @@
   "lem-exc-direct-image-coproducts",
   "lem-exc-closed-support-triangle",
   "lem-exc-residue-tor-test",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-kun-kflat-criteria",
   "lem-kun-derived-tensor-triangulated"
  ],
  "reviewed": {
@@ -352,5 +262,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Uses the recorded finite p-adic coefficient quotient directly. The auxiliary functor is the actual ambient right adjoint, with its Finite proof supplied by Padic.finite_coefficientExtensionRing; no extra finiteness hypothesis is imposed. Constructibility is the recorded finite-value stratification predicate throughout. All variables and universes are explicit; no interval-order, Noetherian, invertibility, or finite-type assumption is added."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261019T192829-L-1873950",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

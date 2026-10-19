@@ -14,29 +14,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectImageCoproducts
-import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportAmplitude
-import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import Sheaf.Paper.EtaleKFlatCriteria
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
-import Sheaf.AlgebraicGeometry.ExceptionalConstantTensor
+
 import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
-import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportResidueBound
 
 /-!
 # Finite Tor amplitude for closed support
@@ -59,7 +43,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
 /-- The ambient closed exceptional inverse image for the recorded finite coefficient ring.
 It is the chosen right adjoint to the actual unbounded derived closed direct image.
 Only the finiteness proof from def-weil-l-adic-coefficient-extension is installed;
@@ -76,45 +59,76 @@ noncomputable def finiteCoefficientClosedExceptionalInverseImage
     Padic.finite_coefficientExtensionRing l E n hn
   (R(lowerStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) i)).rightAdjoint
 
+
+private theorem closed_support_boundedConstructible_torAmplitude
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ModuleCat.{u + 1} A) [Finite N]
+    (htest : ∀ (S : Scheme.{u}) (x y : ℤ) (L : DerivedCategoryModule A S),
+      DerivedCategory.isBoundedConstructible A S L →
+      (DerivedCategory.hasTorAmplitudeIn A S x y L ↔
+        ∀ q : ℤ, q < x ∨ y < q → IsZero
+          ((_root_.DerivedCategory.homologyFunctor _ q).obj
+            (((derivedTensor (ModuleCat.{u + 1} A) S).obj L).obj
+              ((_root_.DerivedCategory.singleFunctor _ 0).obj
+                ((constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N))))))
+    {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
+    (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (a b c : ℤ) (hc : 0 ≤ c)
+    (hcd : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ), c < q →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+        ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj M))))
+    (hcons : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ),
+      Scheme.IsConstructibleEtaleModuleSheaf M →
+      Scheme.IsConstructibleEtaleModuleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj
+          ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj M))))
+    (K : DerivedCategoryModule A T)
+    (hK : DerivedCategory.isBoundedConstructible A T K)
+    (hTor : DerivedCategory.hasTorAmplitudeIn A T a b K) :
+    DerivedCategory.isBoundedConstructible A Z
+      ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K) ∧
+    DerivedCategory.hasTorAmplitudeIn A Z a (b + c + 1)
+      ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K) := by
+  let Q := (R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K
+  obtain ⟨a₀, b₀, hab₀, hK₀⟩ := hK.2
+  have hKbounds : _root_.DerivedCategory.homologyConcentratedIn a₀ b₀ K := by
+    constructor
+    · exact (_root_.DerivedCategory.isGE_iff K a₀).2 fun q hq ↦ hK₀ q (Or.inl hq)
+    · exact (_root_.DerivedCategory.isLE_iff K b₀).2 fun q hq ↦ hK₀ q (Or.inr hq)
+  obtain ⟨hQbounds, hQcons⟩ :=
+    (closedImmersion_rightAdjoint_amplitude A i j hij a₀ b₀ c hc hcd).2
+      hcons K hKbounds hK.1
+  have hQ : DerivedCategory.isBoundedConstructible A Z Q := by
+    refine ⟨hQcons, a₀, b₀ + c + 1, by omega, ?_⟩
+    intro q hq
+    rcases hq with hq | hq
+    · exact (_root_.DerivedCategory.isGE_iff Q a₀).1 hQbounds.1 q hq
+    · exact (_root_.DerivedCategory.isLE_iff Q (b₀ + c + 1)).1 hQbounds.2 q hq
+  exact ⟨hQ, (htest Z a (b + c + 1) Q hQ).2
+    (closedSupport_finiteTensor_vanishing A N i j hij a b c hc hcd K hTor)⟩
+
 /-- Closed exceptional inverse image preserves bounded constructibility and changes
 Tor amplitude [a,b] to [a,b+c+1] under the stated bounds on the complementary open image.
 Source: blueprint sec-smooth-purity/sk-prop-a1-kummer/prop-exc-closed-tor.md,
 order 1913 (blueprint: prop-exc-closed-tor).
 
-Proof (the seven steps of the node):
-1. The open immersion is quasi-separated since its diagonal is an isomorphism.
-   The coefficient ring is finite (def-weil-l-adic-coefficient-extension), so
-   lem-exc-direct-image-coproducts gives all coproducts, including countable ones, for Rj_*.
-2. Set Q = Ri^! K and d = b+c+1. Testing Tor amplitude on the tensor unit gives
-   cohomology of K in [a,b] (def-kun-tor-amplitude). If a>b, K and Q are zero.
-   Otherwise lem-exc-closed-amplitude makes Q bounded constructible in [a,d].
-3. For kappa = A/(varpi), successively resolve kappa by finite free A-modules in
-   nonpositive degrees; all successive kernels are finite. Constant sheaves preserve
-   this resolution (lem-constructible-constant-exact). Its terms are flat and the
-   complex is K-flat (lem-kun-kflat-criteria), computing def-kun-derived-tensor.
-4. Closed direct image is exact (lemma-weil-pbc-finite-direct-image-exact), and its
-   stalk is the original stalk on Z and zero off Z (lemma-weil-pbc-finite-stalk-formula).
-   Exact conservative geometric stalks (prop-weil-pbc-geometric-stalks-exact and
-   lemma-weil-pbc-geometric-stalk-conservative) detect cohomology bounds. Represent
-   the bounded Q by a bounded complex L. Tensor L with the resolution in step 3.
-   Every total degree has finitely many summands. Since i_* is additive and A-linear,
-   it commutes with those sums, the finite free terms, and the differential matrices.
-   Thus i_*(Q tensor^L kappa_Z) is (i_* Q) tensor^L kappa_T.
-5. Tensor the support triangle (lem-exc-closed-support-triangle) with kappa_T, using
-   lem-kun-derived-tensor-triangulated. Step 4 identifies its first term. Step 1 and
-   lem-exc-constant-tensor identify its third term with Rj_* j^*(K tensor^L kappa_T).
-   The middle arrow is the unit: its adjoint is the identity by
-   def-kun-projection-formula-map and the adjunction triangle identity. Rotate and
-   apply TR3 (def-weil-triangulated-category) to compare with the support triangle
-   of H = K tensor^L kappa_T. The third map is invertible by
-   lem-sf-triangle-morphism-iso. Shifting back identifies the closed images of
-   Q tensor^L kappa_Z and Ri^! H, with coefficient ring A throughout.
-6. The forward lem-exc-residue-tor-test gives H in [a,b]. Apply only the cohomology
-   clause of lem-exc-closed-amplitude to H, obtaining Ri^! H in [a,d]. Step 5 and
-   exactness and detection of bounds in step 4 give Q tensor^L kappa_Z in [a,d].
-   No constructibility hypothesis on H is needed.
-7. Q is bounded constructible by step 2. The converse lem-exc-residue-tor-test on Z,
-   applied with step 6, gives its Tor amplitude in [a,d]. -/
+Proof:
+1. The bounded interval in bounded constructibility of K and the closed-support
+   cohomology theorem give bounded constructibility of Q = Ri!K.
+2. Finite cohomological dimension gives countable coproduct preservation for Rj_*.
+   The residue test puts H = K tensor kappa_T in [a,b]. The cohomology clause of
+   the closed-support amplitude theorem puts Ri!H in [a,b+c+1].
+3. Tensor the support triangle of K by kappa_T. The open projection formula
+   identifies its third term with that of the support triangle of H. The unit
+   identity for the projection map proves the middle square. TR3 and the
+   two-isomorphisms lemma identify the first terms.
+4. Apply the monoidal closed pullback to this comparison. The fully faithful
+   closed direct-image counit identifies Q tensor Li*kappa_T with Ri!H.
+   Pullback of constants identifies Li*kappa_T with kappa_Z. Transport the
+   cohomology bounds and apply the converse residue test to Q. -/
 theorem closedImmersion_rightAdjoint_torAmplitude
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -145,6 +159,15 @@ theorem closedImmersion_rightAdjoint_torAmplitude
       inferInstance (Padic.finite_coefficientExtensionRing l E n hn) Z
       ((finiteCoefficientClosedExceptionalInverseImage l E n hn i).obj K) ∧
     DerivedCategory.hasTorAmplitudeIn (Padic.coefficientExtensionRing l E n) Z
-      a (b + c + 1) ((finiteCoefficientClosedExceptionalInverseImage l E n hn i).obj K) := sorry
+      a (b + c + 1) ((finiteCoefficientClosedExceptionalInverseImage l E n hn i).obj K) := by
+  let : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n hn
+  let N := Padic.coefficientExtensionResidueModule l E n
+  have : Finite N := by
+    unfold N Padic.coefficientExtensionResidueModule
+    exact Finite.of_surjective (Ideal.Quotient.mk _) (Ideal.Quotient.mk_surjective)
+  exact closed_support_boundedConstructible_torAmplitude
+    (Padic.coefficientExtensionRing l E n) N
+    (residue_tor_amplitude_test l E n hn) i j _hij a b c _hc _hcd _hcons K _hK _hTor
 
 end AlgebraicGeometry.Etale

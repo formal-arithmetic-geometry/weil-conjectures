@@ -17603,3 +17603,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:28 L: merged deliver/R3/Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic (stage 3; reviewer PASS; first push; landing 20261019T192825-L-1872647 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:28 L: merged deliver/R3/Sheaf.Paper.PurityDiagonalBaseChangeCompared (stage 3; reviewer PASS; first push; landing 20261019T192826-L-1873033 (proof); batch 20261019T192638; modules 1; new nodes 0)
 - 19:28 L: merged deliver/R3/Sheaf.Paper.SequentialDerivedInverseLimitCompleted (stage 3; reviewer PASS; first push; landing 20261019T192827-L-1873504 (proof); batch 20261019T192638; modules 1; new nodes 0)
+- 19:28 L: merged deliver/R6/Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude (stage 3; reviewer PASS; first push; landing 20261019T192829-L-1873950 (interface); batch 20261019T192638; modules 2; new nodes 1)
