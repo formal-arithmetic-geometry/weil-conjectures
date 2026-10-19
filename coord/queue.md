@@ -1,24 +1,21 @@
 # Work queue
 
-795 items; claim with `tools/claim.py next <group> [--stage N]`.
+796 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (3)
+## Stage 1: nodes to split (1)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-sfb-constructible-cocone-hom-inj` | - | sorry_here |
-| `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
 | `lem-trf-regular-hilbert-coefficient-data` | - | none |
 
-## Stage 2: nodes to state (27)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sf-datum` | 1 | state | 91 |
 | `sk-d-six` | 1 | state | 42 |
 | `sk-def-sp-trace` | 2 | state | 2 |
-| `lem-coef-finite-exceptional` | 1 | state | 117 |
-| `fix-cor-verdier-exchange` | 2 | state | 105 |
+| `lem-coef-finite-adjunction-diagram-realization` | 1 | state | 113 |
 | `fix-lem-exchanges` | 1 | state | 87 |
 | `fix-prop-projection-formula` | 1 | state | 71 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
@@ -28,23 +25,25 @@
 | `det-prop-diagonal-tower-trace` | 1 | state | 3 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
 | `fix-lem-tensor-adjunction` | 1 | state | 1 |
+| `lem-coef-cartesian-section-adjoint-mates` | 1 | state | 1 |
 | `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `det-sp-tower-p1-adjunction` | 1 | state | 0 |
 | `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
+| `lem-pur-finite-adjoint-mate-compatibility` | 1 | state | 0 |
+| `lem-pur-finite-dnc-normalization-reduction` | 1 | state | 0 |
 | `lem-sp-tower-p1-arbitrary-base-integrals` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
-| `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
+| `lem-sfb-constructible-cocone-hom-inj` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 300 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 300 nodes that below a finished node, not needed, 119 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (765)
+## Stage 3: modules to prove (767)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -346,6 +345,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstructiblePullbackTExact` | 6 | 4 | proof | 2 |
 | `Sheaf.Paper.DerivedPullbackTensorIso` | 6 | 19 | proof | 2 |
 | `Sheaf.Paper.DirectImageTorAmplitude` | 6 | 1 | proof | 2 |
+| `Sheaf.Paper.DirectImagesConstructible` | 6 | 2 | proof | 2 |
 | `Sheaf.Paper.DualityPairing` | 6 | 2 | proof | 2 |
 | `Sheaf.Paper.FiniteClopenDerivedDecomposition` | 6 | 16 | proof | 2 |
 | `Sheaf.Paper.FiniteCoefficientReductionFlatModel` | 6 | 2 | proof | 2 |
@@ -607,6 +607,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry` | 5 | 1 | proof | 4 |
 | `Sheaf.Paper.RingedProjectionTensorComposition` | 5 | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel` | 6 | 1 | proof | 4 |
+| `Sheaf.Paper.CompactSupportCoefficientChange` | 6 | 8 | proof | 4 |
 | `Sheaf.Paper.CompactSupportFiniteAction` | 6 | 5 | proof | 4 |
 | `Sheaf.Paper.FinitePullbackTensorComparison` | 6 | 5 | proof | 4 |
 | `Sheaf.Paper.KFlatConeComparison` | 6 | 1 | proof | 4 |
@@ -816,7 +817,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 20 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 20 |
 
-## Stage 3: waiting for statements of dependencies (24)
+## Stage 3: waiting for statements of dependencies (28)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -832,7 +833,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.DlConstructibleFibresExact` | 6 | 1 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.DualizingObjectPurity` | 6 | 1 | `lem-pur-projection-purity-agreement` |
 | `Sheaf.Paper.PurityCompositionCoherence` | 6 | 12 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 6 | 8 | `lem-coef-finite-exceptional` |
+| `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 6 | 8 | `fix-prop-projection-formula` |
 | `Sheaf.SixFunctors.IntegralDualizing` | 6 | 1 | `lem-coef-finite-adjunction-transition` |
 | `Sheaf.Paper.CohomologicalSmoothComposition` | 7 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
@@ -840,12 +841,16 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | 10 | 4 | `det-sp-tower-gamma` |
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | 13 | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.AlgebraicGeometry.FiniteCoefficientEtaleProjectionFormula` | - | 1 | `def-sf-pf` |
+| `Sheaf.Paper.AdmissibleVerdierExchange` | - | 1 | `fix-lem-tensor-adjunction` |
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | - | 2 | `fix-prop-projection-formula` |
+| `Sheaf.Paper.FiniteFreeCompactComposition` | - | 8 | `lem-coef-finite-adjunction-diagram-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FiniteUniversalSmoothTrace` | - | 1 | `lem-pur-vector-integration-site-comparison` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
+| `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.RationalPurityTraceCoherence` | - | 8 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
+| `Sheaf.SixFunctors.FiniteExceptional` | - | 9 | `fix-prop-projection-formula` |
 
 ## Stage 3: held for an open upstream PR (11)
 
