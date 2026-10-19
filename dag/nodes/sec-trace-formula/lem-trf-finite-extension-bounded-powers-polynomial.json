@@ -10,9 +10,76 @@
  "stmt_deps": [
   "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite $F$-basis of $L$ makes $L$ a finitely generated $F$-module. Apply [lem-weil-pbc-finite-algebra-is-integral] with $A=F$ and $B=L$: every $x\\in L$ has a monic annihilating polynomial, hence $L/F$ is algebraic. For each $x$ choose a monic annihilator $p_x$ of least degree. Such a polynomial has positive degree, since the only monic constant is $1$, which does not vanish in the field $L$. Two monic least-degree annihilators have the same degree and their difference is a lower-degree annihilator; if that difference were nonzero, dividing it by its leading coefficient would contradict minimality. Thus $p_x$ is the unique monic minimal polynomial. This explains the notation in the spectral-norm input without assuming separability.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK, lemma-finite-is-integral; the choice and uniqueness of a least-degree monic annihilator are the elementary argument written here."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-spectral-norm-algebraic-extension] to this algebraic extension of the complete nontrivially normed nonarchimedean field $F$. It gives the norm $s(x)=\\operatorname{spectralValue}(p_x)$, with $s(xy)=s(x)s(y)$, $s(1)=1$ and $s(cx)=|c|s(x)$. We use the given norm $\\nu$ only as a vector-space norm; no multiplicativity or submultiplicativity of $\\nu$ has been asserted.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent assembly of the spectral-norm argument using the declarations cited in lem-trf-spectral-norm-algebraic-extension; BGR Theorem 3.2.4/2 is referenced by Mathlib but the book is not locally available."
+   }
+  },
+  {
+   "text": "Use two copies of the underlying $F$-vector space $L$, with norms $\\nu$ and $s$. Both are Hausdorff topological $F$-vector spaces: their norm distances separate points, and the strong triangle inequality controls sums of increments, and $N(cx-c_0x_0)\\le\\max(|c|N(x-x_0),|c-c_0|N(x_0))$ for either norm $N$, with $|c|$ bounded near $c_0$, proves continuity of scalar multiplication; negation preserves the norm. The identity $\\iota:(L,\\nu)\\to(L,s)$ is $F$-linear, its source has a finite $F$-basis, and $F$ is complete and nontrivially normed. Hence [lem-sfb-finite-dimensional-linear-map-continuous] makes $\\iota$ continuous. Apply [lem-trf-continuous-linear-map-norm-bound] to obtain a single constant $C>0$ with $s(x)\\le C\\nu(x)$ for every $x\\in L$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "lem-trf-continuous-linear-map-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+    "place": "LinearMap.continuous_of_finiteDimensional, lines 283–285; then Mathlib/Analysis/Normed/Operator/Basic.lean, ContinuousLinearMap.bound, lines 132–133."
+   }
+  },
+  {
+   "text": "Choose a real $M\\ge1$ with $\\nu(a^m)\\le M$ for every $m\\ge0$, using the bounded-powers hypothesis. Multiplicativity of $s$ and $s(1)=1$ give $s(a^m)=s(a)^m$ by induction, including $m=0$. Therefore $s(a)^m\\le CM$ for every $m$. If $s(a)>1$, put $\\delta=s(a)-1>0$. Induction gives $(1+\\delta)^m\\ge1+m\\delta$: multiplying the inductive inequality by $1+\\delta$ adds the nonnegative term $m\\delta^2$. Choose a natural $m>(CM-1)/\\delta$ to obtain $s(a)^m\\ge1+m\\delta>CM$, a contradiction. Thus $s(a)\\le1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Agent assembly of the spectral-norm argument using the declarations cited in lem-trf-spectral-norm-algebraic-extension; BGR Theorem 3.2.4/2 is referenced by Mathlib but the book is not locally available."
+   }
+  },
+  {
+   "text": "Take $q=p_a$ from step 1 and put $e=\\deg q\\ge1$. The defining identity $s(a)=\\operatorname{spectralValue}(q)$ and step 4 give $\\operatorname{spectralValue}(q)\\le1$. The monic-polynomial criterion [lem-sfb-monic-spectral-value-coefficients] now gives $|q_j|\\le1$ for every natural index $j$, in particular for $j<e$. Since $q$ is monic, its coefficient expansion is $q(T)=T^e+\\sum_{j<e}q_jT^j$; it satisfies $q(a)=0$ by its choice. These are all the required clauses.",
+   "uses": [
+    "lem-sfb-monic-spectral-value-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralValue_le_one_iff, lines 200–219; the coefficient criterion already recorded in lem-sfb-monic-spectral-value-coefficients."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-polynomial-ring",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-trf-continuous-linear-map-norm-bound",
+  "lem-sfb-monic-spectral-value-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "Agent assembly from the spectral norm theorem and finite-dimensional continuity, followed by the explicit bounded-powers growth contradiction and the existing spectral coefficient criterion. BGR Non-Archimedean Analysis Theorem 3.2.4/2, referenced in this Mathlib file, is WANTED, not read."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +136,38 @@
    "results": "{\"t\": \"2026-10-18T23:24:00Z\", \"tool\": \"leanfinder\", \"query\": \"If the powers of an element of a finite dimensional normed field extension are bounded then it is integral over the unit ball of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Embeddings.pow_eq_one_of_norm_le_one\", \"NumberField.Embeddings.finite_of_norm_le\", \"NumberField.Embeddings.pow_eq_one_of_norm_eq_one\", \"exists_integral_multiples\", \"Algebra.isIntegral_norm\", \"PowerBasis.repr_pow_isIntegral\", \"PowerBasis.repr_gen_pow_isIntegral\", \"IsAlmostIntegral\"], \"digest\": \"083fed5df5263da6\"}",
    "date": "2026-10-19",
    "verdict": "no match: bounded-integral analysis hits concern integration; the semantic hits concern number fields, integral multiples, or almost-integral definitions, not this normed finite-extension criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\"",
+   "results": "{\"t\": \"2026-10-19T00:13:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"spectralNorm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"spectralNorm\", \"spectralNorm_nonneg\", \"spectralNorm_one\", \"spectralNorm_zero\", \"isNonarchimedean_spectralNorm\", \"isPowMul_spectralNorm\", \"eq_zero_of_map_spectralNorm_eq_zero\", \"spectralNorm.metricSpace\"], \"digest\": \"8f972011a141306e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the item: the hits provide spectral norms and the coefficient criterion, but the comparison with an arbitrary nonmultiplicative vector norm and the bounded-powers argument still have to be supplied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "power bounded element finite dimensional normed field extension integral unit ball",
+   "results": "{\"t\": \"2026-10-19T00:13:54Z\", \"tool\": \"leansearch\", \"query\": \"power bounded element finite dimensional normed field extension integral unit ball\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Embeddings.finite_of_norm_le\", \"Set.instTietzeExtensionUnitBall\", \"FiniteField.algebraMap_norm_eq_pow_sum\", \"Submonoid.unitClosedBall\", \"NumberField.Embeddings.pow_eq_one_of_norm_le_one\", \"Metric.unitClosedBall.coe_pow\", \"Valued.integer.norm_le_one\", \"NumberField.Embeddings.pow_eq_one_of_norm_eq_one\"], \"digest\": \"fb5f8debe1a83d87\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the item: the hits provide spectral norms and the coefficient criterion, but the comparison with an arbitrary nonmultiplicative vector norm and the bounded-powers argument still have to be supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "power[Bb]ounded|IsPowerBounded|spectralNorm_unique|spectralValue_le_one_iff",
+   "results": "{\"t\": \"2026-10-19T00:13:54Z\", \"tool\": \"grep\", \"query\": \"power[Bb]ounded|IsPowerBounded|spectralNorm_unique|spectralValue_le_one_iff\", \"sub\": \"Analysis/Normed\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\"], \"digest\": \"d882c610910f7adc\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the item: the hits provide spectral norms and the coefficient criterion, but the comparison with an arbitrary nonmultiplicative vector norm and the bounded-powers argument still have to be supplied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A power bounded element for any vector space norm on a finite extension of a complete nonarchimedean field satisfies a monic polynomial whose coefficients have norm at most one",
+   "results": "{\"t\": \"2026-10-19T00:13:56Z\", \"tool\": \"leanfinder\", \"query\": \"A power bounded element for any vector space norm on a finite extension of a complete nonarchimedean field satisfies a monic polynomial whose coefficients have norm at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"norm_root_le_spectralValue\", \"spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow\", \"isPowMul_spectralNorm_of_finiteDimensional_normal\", \"norm_le_spectralNorm\", \"spectralValue_le_one_iff\", \"NumberField.Embeddings.coeff_bdd_of_norm_le\", \"spectralNorm.spectralMulAlgNorm_eq_of_mem_roots\", \"exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional\"], \"digest\": \"5f18b28cebe8e8f8\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the item: the hits provide spectral norms and the coefficient criterion, but the comparison with an arbitrary nonmultiplicative vector norm and the bounded-powers argument still have to be supplied."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-affinoid-polynomial-closed-point-comparison",
@@ -107,5 +202,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-finite-extension-bounded-powers-polynomial",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps: finite implies integral and least-degree monic annihilators; spectral extension norm; continuity and a uniform comparison with the arbitrary supplied vector norm; explicit power-growth contradiction; existing spectral-value coefficient criterion. Two new Mathlib leaves, with all searches actually logged. BGR remains WANTED. No Lean edits or builds.",
+  "blueprint": "Historical analytic prerequisite of the completed-local-ring comparison used in the ancestor chain of lem-trf-local-term-locality, specifically step 9 of lem-trf-affinoid-polynomial-closed-point-comparison. Retains the explicit historical qualification in blueprint.from.place; it does not replace the current unit’s contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-monic-spectral-value-coefficients",
+    "why": "Generic monic polynomial coefficient criterion, already implemented in Mathlib as spectralValue_le_one_iff; no trace-formula unit lemma supplies this analytic tool. Its status is split but its existing Mathlib declaration and reviewed proof are recorded."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-monic-spectral-value-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-62946d7e0",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-62946d7e0 (reviewer sub-agent of L); spot-checked: I read the item, both new leaves, every cited node's statement, the parent's step 9 and the Mathlib sources at the cited lines; the item's statement is unchanged and is exactly what the parent's step 9 uses. Step 1 cites lem-weil-pbc-finite-algebra-is-integral (Algebra.IsIntegral.of_finite) and correctly proves that the least-degree monic annihilator exists, has positive degree and is unique. Step 2: every hypothesis of the new leaf lem-trf-spectral-norm-algebraic-extension holds. Checked in SpectralNorm.lean: spectralValueTerms 101, spectralValue 115, spectralNorm 381, extends 573, smul 597, nonarchimedean 645, mul 827, normedField 854, normedSpace 899. The ambient hypotheses at 691-692 and 823 are a nontrivially normed, ultrametric, complete base and an algebraic extension, which are exactly the stated ones. Step 3: lem-sfb-finite-dimensional-linear-map-continuous (FiniteDimension.lean:283) makes the identity (L,ν)→(L,s) continuous, and the new leaf lem-trf-continuous-linear-map-norm-bound (ContinuousLinearMap.bound, Operator/Basic.lean:132-133, with the identity ring map) then gives s ≤ Cν. Step 4 (elementary) is correct: s(a)^m ≤ CM and Bernoulli's inequality give s(a) ≤ 1. Step 5: lem-sfb-monic-spectral-value-coefficients (spectralValue_le_one_iff, line 202) gives |q_j| ≤ 1; that node is off-unit with status split, and its declared tool use is accepted as a generic Mathlib-exact criterion. Small cases checked: a=0, a=1, L=F, purely inseparable L, and a rescaled ν (which only changes C). proof_deps equals the union of the uses and there is no cycle. A grep of the whole DAG for spectral norms, continuous-linear-map bounds and power-bounded statements found no duplicate; lem-weil-l-adic-extension-absolute-value covers only Q_ℓ, and lem-trf-affinoid-powerbounded-integral has different objects. Neither new leaf restates a clause of the item. No SGA is cited; BGR is absent from literature/, so the WANTED line and proof_origin agent are right. The live item is still unsplit. No fixes were written."
  }
 }
