@@ -7,6 +7,16 @@ module
 
 public import Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward
 import Sheaf.AlgebraicGeometry.EllAdicLocalizingBrownRepresentability
+import all Sheaf.Paper.CondensedCoefficientIsoConstructible
+import all Sheaf.Paper.BrownHypothesesGeneration
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import all Sheaf.Paper.FiniteCoefficientDescentTwoColimit
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.IntegralLfpConstantModelComparison
+import all Sheaf.CategoryTheory.Triangulated.LocalizingFunctor
+import Sheaf.Paper.ExceptionalInverseImageExistence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Cohomological boundedness of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)
@@ -19,9 +29,354 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+-- Universe lifting for the finite-field local triviality theorem.
+
+open MonoidalCategory MonObj Opposite Functor.LaxMonoidal Functor.OplaxMonoidal in
+private lemma general_field_lf (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) X))
+    (hM : IsLocallyFinitelyPresented (condensedRingObj (Profinite.continuousMapRingObj E) X) M) :
+    ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i,
+      Mod.IsFree ((upperStar Ab.{u + 1} (U.f i)).obj
+        (condensedRingObj (Profinite.continuousMapRingObj E) X))
+        (((upperStar Ab.{u + 1} (U.f i)).mapMod
+          (condensedRingObj (Profinite.continuousMapRingObj E) X)).obj M) := by
+  let E' := ULift.{u} E
+  let : NormedField E' :=
+    { (inferInstance : NormedCommRing E'), (inferInstance : Field E') with
+      norm_mul a b := norm_mul a.down b.down }
+  have : IsCommMonObj (Profinite.continuousCoefficientRingObj E') :=
+    Sheaf.isCommMonObj_sheafCompose_obj
+      (coherentTopology Profinite.{u}) (Profinite.continuousCoefficientRingSheaf E')
+      (by
+        intro S a b
+        apply ULift.ext
+        change (a.down * b.down : C(S.unop, E')) = b.down * a.down
+        exact mul_comm a.down b.down)
+  let e := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso (liftCoefficientIso E)
+  let φ := (upperStarFromPoint X).map e.hom
+  have : IsMonHom e.hom := Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
+    (liftCoefficientIso E).hom
+  have : IsMonHom φ := inferInstance
+  have h := exists_finiteFree_cover_of_condensedField_lfp ℓ E' X
+    ((Mod.comap (inv φ)).obj M) (lfp_comap (inv φ) hM)
+  exact locally_free_of_iso (locally_free_comap φ h)
+    ((Mod.comapEquivalenceOfIsIso φ).counitIso.app M)
+
+attribute [local irreducible] upperStarFromPoint
+
+-- Transport both constructibility conventions through a coefficient-ring isomorphism.
+private theorem general_constructible_iso {X : Scheme.{u}}
+    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R]
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (e : M ≅ N) (h : IsConstructibleModuleObject R M) :
+    IsConstructibleModuleObject R N := by
+  obtain ⟨S, hS⟩ := h
+  exact ⟨S, fun a ↦ lfp_of_iso (hS a)
+    (((upperStar Ab (S.immersion a)).mapMod R).mapIso e)⟩
+
+private theorem general_constructible_comap {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] [IsIso φ]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S}
+    (h : IsConstructibleModuleObject S M) :
+    IsConstructibleModuleObject R ((Mod.comap φ).obj M) := by
+  obtain ⟨T, hT⟩ := h
+  refine ⟨T, fun a ↦ ?_⟩
+  let F := upperStar Ab (T.immersion a)
+  exact lfp_of_iso (lfp_comap (F.map φ) (hT a)) ((F.mapModComapIso φ).app M).symm
+
+private theorem comparison_transport
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']
+    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u})
+    (h : ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ' X),
+      IsConstructibleModuleObject (condensedRingObj Λ' X) M ↔
+        IsConstantModelConstructible Λ' X M)
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    IsConstructibleModuleObject (condensedRingObj Λ X) M ↔
+      IsConstantModelConstructible Λ X M := by
+  let φ := (upperStarFromPoint X).map e.inv.hom
+  let ψ := (upperStarFromPoint X).map e.hom.hom
+  let F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) :=
+    Mod.comap φ
+  let G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) ⥤
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
+    Mod.comap ψ
+  let ei : G.obj (F.obj M) ≅ M :=
+    ((Mod.comapComp ψ φ).symm.app M) ≪≫
+      ((Mod.comapCongr (show ψ ≫ φ = 𝟙 _ by
+        exact ((upperStarFromPoint X).mapIso ((Mon.forget _).mapIso e)).hom_inv_id)).app M) ≪≫
+      (Mod.comapId _).app M
+  constructor
+  · intro hM
+    have hc := (h (F.obj M)).mp (general_constructible_comap φ hM)
+    exact constructible_iso ei (constructible_comap e.hom.hom X _ hc)
+  · intro hM
+    have hc := (h (F.obj M)).mpr (constructible_comap e.inv.hom X _ hM)
+    exact general_constructible_iso ei (general_constructible_comap ψ hc)
+
+private theorem continuous_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E] :
+    ∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+      Nonempty (Mon.mk (Profinite.continuousMapRingObj.{u} E) ≅
+        Mon.mk (Profinite.continuousMapRingObj F)) := by
+  let f : E →ₐ[ℚ_[ℓ]] PadicAlgCl ℓ := IsAlgClosed.lift
+  let F : PadicAlgCl.FiniteIntermediateField ℓ :=
+    ⟨f.fieldRange, f.equivFieldRange.toLinearEquiv.finiteDimensional⟩
+  have : FiniteDimensional ℚ_[ℓ] F := F.property
+  let e : E ≃ₐ[ℚ_[ℓ]] F := f.equivFieldRange
+  have he : Continuous e := e.toLinearMap.continuous_of_finiteDimensional
+  have hei : Continuous e.symm := e.symm.toLinearMap.continuous_of_finiteDimensional
+  exact ⟨F, ⟨WeilConjectures.continuousCoefficientMonIso e.toRingEquiv he hei⟩⟩
+
+private theorem continuous_generators (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    [TopologicalSpace.NoetherianSpace X] :
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+      boundedConstructible
+        (condensedRingObj (Profinite.continuousMapRingObj E) X) := by
+  exact constantModel_eq_of_localFree _ (general_field_lf ℓ E) X
+
+private theorem integral_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    ∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+      Nonempty (Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E) ≅
+        Mon.mk (Profinite.padicIntegersRingObj ℓ F)) := by
+  let f := IsScalarTower.toAlgHom ℚ_[ℓ] E (PadicAlgCl ℓ)
+  let F : PadicAlgCl.FiniteIntermediateField ℓ :=
+    ⟨f.fieldRange, f.equivFieldRange.toLinearEquiv.finiteDimensional⟩
+  let e : E ≃ₐ[ℚ_[ℓ]] F := f.equivFieldRange
+  let t : PadicAlgCl.integers ℓ E ≃+* PadicAlgCl.integers ℓ F :=
+    { toFun := fun x ↦ ⟨e x.val, x.property⟩
+      invFun := fun x ↦ ⟨e.symm x.val, by
+        have h := (PadicAlgCl.mem_integers_iff ℓ F x.val).mp x.property
+        change ‖algebraMap E (PadicAlgCl ℓ) (e.symm x.val)‖₊ ≤ 1
+        change ‖(e (e.symm x.val)).val‖₊ ≤ 1
+        simpa only [e.apply_symm_apply, IntermediateField.algebraMap_apply] using h⟩
+      left_inv := fun x ↦ Subtype.ext (e.symm_apply_apply x.val)
+      right_inv := fun x ↦ Subtype.ext (e.apply_symm_apply x.val)
+      map_add' := fun x y ↦ Subtype.ext (e.map_add x.val y.val)
+      map_mul' := fun x y ↦ Subtype.ext (e.map_mul x.val y.val) }
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ F
+  have ht : Isometry t := by
+    apply Isometry.of_dist_eq
+    intro x y
+    rfl
+  have hti : Continuous t.symm :=
+    (show _ ≃ᵢ _ from ⟨t.toEquiv, ht⟩).symm.continuous
+  exact ⟨F, ⟨WeilConjectures.continuousCoefficientMonIso t ht.continuous hti⟩⟩
+
+-- The spectral and embedded valuations agree by uniqueness of the extended norm.
+private theorem spectral_embedded_norm
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E)] (x : ULift.{u} E) :
+    Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E) x =
+      ‖(algebraMap E (PadicAlgCl ℓ) x.down)‖ := by
+  let f : ULift.{u} E →+* PadicAlgCl ℓ :=
+    (algebraMap E (PadicAlgCl ℓ)).comp ULift.ringEquiv.toRingHom
+  let a : AbsoluteValue (ULift.{u} E) ℝ :=
+    { toFun := fun x ↦ ‖f x‖
+      map_mul' := fun x y ↦ by rw [map_mul, norm_mul]
+      nonneg' := fun x ↦ norm_nonneg _
+      eq_zero' := fun x ↦ by simp only [norm_eq_zero, map_eq_zero_iff f f.injective]
+      add_le' := fun x y ↦ by rw [map_add]; exact norm_add_le _ _ }
+  have ha : ∀ y : ℚ_[ℓ], a (algebraMap ℚ_[ℓ] (ULift.{u} E) y) = ‖y‖ := by
+    intro y
+    change ‖algebraMap E (PadicAlgCl ℓ) (algebraMap ℚ_[ℓ] E y)‖ = ‖y‖
+    rw [← IsScalarTower.algebraMap_apply ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    exact PadicAlgCl.norm_extends ℓ y
+  exact (spectralNorm_unique_field_norm_ext ha x).symm
+open CategoryTheory.Limits Opposite
+open scoped CategoryTheory.Obj
+private theorem mem_lift_integers
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E)] (x : ULift.{u} E) :
+    x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E) ↔
+      x.down ∈ PadicAlgCl.integers ℓ E := by
+  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E)
+    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E))
+    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E))).choose_spec.choose_spec.1 x
+  rw [spectral_embedded_norm ℓ E x] at h
+  exact h.trans (by
+    rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
+    rfl)
+
+private noncomputable def latticeLiftEquiv
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    PadicAlgCl.integers ℓ E ≃+* latticeCoefficientIntegers ℓ (ULift.{u} E) where
+  toFun x := ⟨WithAbs.toAbs _ (ULift.up x.val), (mem_lift_integers ℓ E _).mpr x.property⟩
+  invFun x := ⟨x.val.ofAbs.down, (mem_lift_integers ℓ E _).mp x.property⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+  map_mul' _ _ := rfl
+  map_add' _ _ := rfl
+
+private noncomputable def latticeLiftHomeo
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+    PadicAlgCl.integers ℓ E ≃ₜ latticeCoefficientIntegers ℓ (ULift.{u} E) := by
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let e := latticeLiftEquiv.{u} ℓ E
+  have hi : Isometry e := by
+    apply Isometry.of_dist_eq
+    intro x y
+    simp only [dist_eq_norm]
+    change Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E)
+      (ULift.up (x.val - y.val)) = ‖algebraMap E (PadicAlgCl ℓ) (x.val - y.val)‖
+    exact spectral_embedded_norm ℓ E _
+  exact { e.toEquiv with
+    continuous_toFun := hi.continuous
+    continuous_invFun := (hi.right_inv e.right_inv).continuous }
+
+private noncomputable def latticeRingSheafIso
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] :
+    Profinite.padicIntegersCondensedRing.{u} ℓ E ≅
+      Profinite.continuousMapRingSheafOfUniverse.{u, u}
+        (latticeCoefficientIntegers ℓ (ULift.{u} E)) := by
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let e := latticeLiftEquiv.{u} ℓ E
+  let h := latticeLiftHomeo.{u} ℓ E
+  let forward (S : Profinite.{u}ᵒᵖ) :
+      ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E) →+*
+        ULift.{u + 1} C(S.unop, latticeCoefficientIntegers ℓ (ULift.{u} E)) :=
+    ULift.ringEquiv.symm.toRingHom.comp
+      ((e.toRingHom.compLeftContinuous _ h.continuous_toFun).comp ULift.ringEquiv.toRingHom)
+  let backward (S : Profinite.{u}ᵒᵖ) :
+      ULift.{u + 1} C(S.unop, latticeCoefficientIntegers ℓ (ULift.{u} E)) →+*
+        ULift.{u + 1} C(S.unop, PadicAlgCl.integers ℓ E) :=
+    ULift.ringEquiv.symm.toRingHom.comp
+      ((e.symm.toRingHom.compLeftContinuous _ h.continuous_invFun).comp
+        ULift.ringEquiv.toRingHom)
+  refine
+    { hom := ⟨{ app := fun S ↦ RingCat.ofHom (forward S)
+                naturality := by intros; ext x; rfl }⟩
+      inv := ⟨{ app := fun S ↦ RingCat.ofHom (backward S)
+                naturality := by intros; ext x; rfl }⟩
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · ext S x
+    apply ULift.ext
+    ext t
+    rfl
+  · ext S x
+    apply ULift.ext
+    ext t
+    rfl
+
+private theorem integral_generators (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] :
+    constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X =
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X) := by
+  let q := latticeRingSheafIso.{u} ℓ E
+  let F := sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat Ab)
+  let e0 := F.mapIso q
+  have : IsMonHom e0.hom :=
+    Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) q.hom
+  let e : Mon.mk (Profinite.padicIntegersRingObj ℓ E) ≅
+      Mon.mk (integralCondensedRing ℓ (ULift.{u} E)) := Mon.mkIso' e0
+  have hm := comparison_transport e X
+    (integralLfpConstantModelComparison ℓ (ULift.{u} E) X)
+  funext K
+  apply propext
+  exact and_congr_right fun _ ↦ forall_congr' fun n ↦ (hm _).symm
+
+-- The three certificates therefore have the same bounded constructible generators.
+private theorem certified_comparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : CondensedRing.IsEllAdicCoefficient ℓ Λ inferInstance)
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [IsLocallyNoetherian X]
+    [TopologicalSpace.NoetherianSpace X] :
+    IsLocalizingAdmissibleCoefficient ℓ Λ ∧
+      (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
+        boundedConstructible (condensedRingObj Λ X) := by
+  cases hΛ with
+  | continuous E =>
+    obtain ⟨F, he⟩ := continuous_coefficient_iso.{u} ℓ E
+    refine ⟨Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩))), ?_⟩
+    have ht := (localizingClosure_ctf_equals_bc ℓ X
+      (Profinite.continuousMapRingObj E)
+      (Or.inr (Or.inr (Or.inl ⟨F, Or.inr he⟩)))).1.2.2.1
+    exact ht.trans (continuous_generators ℓ E X)
+  | integral E =>
+    obtain ⟨F, he⟩ := integral_coefficient_iso.{u} ℓ E
+    refine ⟨Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨F, he⟩)))), ?_⟩
+    have ht := (localizingClosure_ctf_equals_bc ℓ X
+      (Profinite.padicIntegersRingObj ℓ E)
+      (Or.inr (Or.inr (Or.inl ⟨F, Or.inl he⟩)))).1.2.2.1
+    exact ht.trans (integral_generators ℓ E X)
+  | algebraicClosure =>
+    refine ⟨Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))), ?_⟩
+    have ht := (localizingClosure_ctf_equals_bc ℓ X
+      (Profinite.padicAlgClRingObj ℓ)
+      (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩)))).1.2.2.1
+    exact ht.trans (constantModel_eq_of_localFree _ (algcl_lf ℓ) X)
+
+end AlgebraicGeometry.ProEtale
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+attribute [local irreducible] upperStarFromPoint openImmersionLowerShriek lowerStar
+  Functor.rightAdjoint
+
+-- Compare the two coproduct-universe conventions using small support.
+private theorem hull_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
+    (heq : (constantModelBoundedConstructible Λ T ⊓
+      DerivedCategory.finiteTorAmplitude _) = boundedConstructible (condensedRingObj Λ T)) :
+    localizingClosureProEtale Λ T = boundedConstructibleLocalizingClosure Λ T := by
+  unfold localizingClosureProEtale
+  rw [heq]
+  have he : localizingClosure (boundedConstructible (condensedRingObj Λ T)) =
+      localizingClosureOfSize.{u + 1} (boundedConstructible (condensedRingObj Λ T)) :=
+    CategoryTheory.Functor.closure_index_eq.{u + 1, u + 1, u + 2} _
+  rw [he]
+  apply le_antisymm
+  · intro K hK
+    apply hK
+    · exact ⟨inferInstance, inferInstance, fun {I} A hA h ↦ by
+        have := hA
+        exact (boundedConstructibleLocalizingClosure Λ T).prop_colimit A
+          (fun i ↦ h i.as)⟩
+    · exact boundedConstructible_le_localizingClosure Λ T
+  · intro K hK P hP hS
+    have := hP.1
+    have := hP.2.1
+    have (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) :=
+      CategoryTheory.Functor.closedUnderCoproducts.{u + 1, u + 1, u + 2} P hP I
+    exact boundedConstructibleLocalizingClosure_le Λ T P hS K hK
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -49,7 +404,78 @@ theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
       IsZero ((DerivedCategory.homologyFunctor _ i).obj
         (((@Functor.rightAdjoint _ _ _ _ (ellAdicLocalizingLowerStar Λ ℓ g hΛ) hF).obj
           ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) := by
-  sorry
+  have : IsLocallyNoetherian Z.left := LocallyOfFiniteType.isLocallyNoetherian Z.hom
+  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  have : CompactSpace Z.left := QuasiCompact.compactSpace_of_compactSpace Z.hom
+  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  have : QuasiSeparatedSpace Z.left := quasiSeparatedSpace_of_quasiSeparated Z.hom
+  have : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
+  have : IsNoetherian Z.left := ⟨⟩
+  have : IsNoetherian Y.left := ⟨⟩
+  obtain ⟨hadm, hX⟩ := certified_comparison Λ ℓ hΛ Z.left
+  have hY := (certified_comparison Λ ℓ hΛ Y.left).2
+  classical
+  let LX := localizingClosureProEtale Λ Z.left
+  let LY := localizingClosureProEtale Λ Y.left
+  have eX := hull_eq Λ Z.left hX
+  have eY := hull_eq Λ Y.left hY
+  let jX := ObjectProperty.ιOfLE (le_of_eq eX)
+  let jY := ObjectProperty.ιOfLE (le_of_eq eY)
+  let iX := ObjectProperty.ιOfLE (le_of_eq eX.symm)
+  let F := ellAdicLocalizingLowerStar Λ ℓ g hΛ
+  let H := @Functor.rightAdjoint _ _ _ _ F hF
+  let adjH : F ⊣ H := @Adjunction.ofIsLeftAdjoint _ _ _ _ F hF
+  have ex := exceptionalInverseImage_exists Λ ℓ k g hadm
+  rcases ex with ⟨triX, triY, hSX, hSY, h, sumsX, sumsY, hex⟩
+  obtain ⟨_, _, _, _, _, hcomp, ⟨G, _, _, ⟨adjG⟩, hG⟩, _⟩ := hex
+  let eShriek : openImmersionLowerShriek Λ (𝟙 Z.left) ≅ 𝟭 _ :=
+    ((openImmersionLowerShriekUpperStarAdjunction Λ (𝟙 Z.left)).ofNatIsoRight
+      (upperStarId Λ Z.left)).leftAdjointUniq Adjunction.id
+  let eId : (openImmersionLowerShriek Λ (𝟙 Z.left)).mapDerivedCategory ≅ 𝟭 _ :=
+    Functor.mapDerivedCategoryNatIso eShriek ≪≫ Functor.mapDerivedCategoryIdIso _
+  let ec : rightDerivedLowerShriekOfCompactification Λ
+      (Compactification.ofIsProper g.left) ≅ R((g.left)_*⟦Λ⟧) :=
+    Functor.isoWhiskerRight eId _ ≪≫ Functor.leftUnitor _
+  obtain ⟨bc⟩ := hcomp (Compactification.ofIsProper g.left)
+  let beta : localizingLowerShriek Λ (compactificationOverField g) h ⋙ LY.ι ≅
+      LX.ι ⋙ R((g.left)_*⟦Λ⟧) :=
+    bc ≪≫ Functor.isoWhiskerLeft LX.ι ec
+  let J := jY ⋙ H ⋙ iX
+  let FStar := (LY).lift (LX.ι ⋙ R((g.left)_*⟦Λ⟧))
+    (fun A ↦ (le_of_eq eY.symm) _
+      (ellAdic_localizing_rightDerivedLowerStar_obj Λ ℓ g hΛ A.obj (jX.obj A).property))
+  let alpha : localizingLowerShriek Λ (compactificationOverField g) h ≅ FStar :=
+    NatIso.ofComponents (fun A ↦ ObjectProperty.isoMk LY (beta.app A)) (by
+      intro A B f
+      apply ObjectProperty.hom_ext
+      exact beta.hom.naturality f)
+  let adjJ : FStar ⊣ J := adjH.restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulιOfLE (le_of_eq eX))
+    (ObjectProperty.fullyFaithfulιOfLE (le_of_eq eY))
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl))
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl))
+  let eg : G ≅ J := adjG.rightAdjointUniq (adjJ.ofNatIsoLeft alpha.symm)
+  let N : LY.FullSubcategory := ⟨K.obj, (le_of_eq eY.symm) _
+    (boundedConstructible_le_localizingClosure Λ Y.left K.obj K.property)⟩
+  have hN : (constantModelBoundedConstructible Λ Y.left ⊓
+      DerivedCategory.finiteTorAmplitude _) N.obj := (congrFun hY K.obj).mpr K.property
+  have hGK := hG N hN
+  have hJK : (constantModelBoundedConstructible Λ Z.left ⊓
+      DerivedCategory.finiteTorAmplitude _) (J.obj N).obj := by
+    have hprop := (constantModelConstructibleFiniteTor_wellDefined Λ Z.left).2.1
+    exact (constantModelBoundedConstructible Λ Z.left ⊓
+      DerivedCategory.finiteTorAmplitude _).prop_of_iso (LX.ι.mapIso (eg.app N)) hGK
+  have hbnd := hJK.1.1
+  change (∃ a, _) ∧ (∃ b, _) at hbnd
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hbnd
+  let M := (J.obj N).obj
+  have : M.IsGE a := ha
+  have : M.IsLE b := hb
+  refine ⟨a, b, fun i hi ↦ ?_⟩
+  change IsZero ((DerivedCategory.homologyFunctor _ i).obj M)
+  rcases hi with hi | hi
+  · exact DerivedCategory.isZero_of_isGE M a i hi
+  · exact DerivedCategory.isZero_of_isLE M b i hi
 
 /-- The supplied localizing right adjoint has finite cohomological amplitude on a bounded
 constructible input.
