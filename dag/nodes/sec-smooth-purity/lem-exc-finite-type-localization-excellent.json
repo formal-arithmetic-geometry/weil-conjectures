@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "By [def-exc-excellent-ring], $R$ is Noetherian, a G-ring, J-2, and universally catenary. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to $R\\to A$ to obtain Noetherianity of $A$. Apply [lem-weil-pbc-finite-type-over-g-ring] to the same finite type map to obtain that $A$ is a G-ring. Both applications use exactly the given finite type hypothesis; neither requires that $R\\to A$ be injective.",
+   "text": "Unpack excellence of R using [def-exc-excellent-ring]. Its Noetherianity and [lem-weil-pbc-finite-type-algebra-noetherian] give Noetherianity of A. Apply [lem-weil-pbc-finite-type-over-g-ring] to obtain the G-ring property for A. Neither application assumes injectivity of the algebra map.",
    "uses": [
     "def-exc-excellent-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian",
@@ -32,11 +32,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QU, lemma-finite-type-over-excellent, finite type case; Tag 07PV, proposition-finite-type-over-G-ring; algebra.tex Tag 00FN, lemma-Noetherian-permanence"
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, finite type case; Tag 07PV"
    }
   },
   {
-   "text": "For any finite type $A$-algebra $T$, choose finite algebra generators $a_1,\\ldots,a_n$ of $A$ over $R$ and $t_1,\\ldots,t_m$ of $T$ over $A$. Substitution of polynomial expressions shows that the images of the $a_i$, together with the $t_j$, generate $T$ over $R$, by [def-weil-pbc-finite-type-algebra]. Since $R$ is J-2 and universally catenary, [def-exc-excellent-ring] therefore says that the regular locus of $T$ is open and that $T$ is catenary. As $T$ was arbitrary, $A$ is J-2 and universally catenary. Together with step 1 this makes $A$ excellent.",
+   "text": "For any finite type A-algebra T, compose its structure map with R to A. Transitivity of finite type [def-weil-pbc-finite-type-algebra] makes T finite type over R. Finite type algebras are small relative to their coefficient ring (Algebra.FiniteType.small); replace T by Shrink T in the universe of R and transport its R-algebra structure by Shrink.algEquiv. Excellence of R gives openness of its regular locus and catenarity of this small model. Transport regular loci back along the spectrum comap homeomorphism: Localization.localRingEquiv identifies the corresponding local rings and IsRegularLocalRing.of_ringEquiv preserves regularity. Transport catenarity using the ideal order isomorphism: prime ideals, strict inclusions, endpoints, and prime ideals insertable between consecutive terms all correspond. Thus prime chains and saturated prime chains have the same lengths in both rings. These arguments are the two proved private helpers in Lean. This gives J-2 and universal catenarity of A, completing IsExcellent A by [def-exc-excellent-ring].",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
     "def-exc-excellent-ring"
@@ -44,84 +44,31 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QU, lemma-finite-type-over-excellent, first proof sentence; Tag 07P7, definition-J; algebra.tex Tag 00NL, definition-universally-catenary"
+    "place": "Tag 07QU, lemma-finite-type-over-excellent, first sentence; the Shrink transport handles the fixed-universe quantifiers of the Lean predicates"
    }
   },
   {
-   "text": "Put $B=S^{-1}A$ and let $\\lambda:A\\to B$ send $a$ to $a/1$. The fraction construction of [def-weil-pbc-module-localization] in the case of the module $A$ supplies a commutative ring, sends every $s\\in S$ to a unit, represents every element as $\\lambda(a)\\lambda(s)^{-1}$, and says that $\\lambda(a)=0$ implies $sa=0$ for some $s\\in S$. Thus all localization hypotheses of [lem-weil-pbc-localization-noetherian] hold; with the Noetherianity from step 1 it makes $B$ Noetherian.",
+   "text": "Let B be LocalizedModule S A, definitionally the ring Localization S of [def-weil-pbc-module-localization]. Apply [lem-weil-pbc-localization-noetherian] with the Noetherianity of A to obtain Noetherianity of B. The localization map A to B is weakly etale in the sense of [def-weil-pbc-ind-etale-algebra]: Algebra.WeaklyEtale.of_isLocalization (Stacks Tag 092J(1)) supplies this directly, and RingHom.weaklyEtale_algebraMap_iff gives the ring-homomorphism form. Explicitly localization is flat and its tensor multiplication is an isomorphism, hence flat. This elementary specialization of the source library theorem requires no finite type hypothesis on B over A and no exclusion of zero from S.",
    "uses": [
     "def-weil-pbc-module-localization",
-    "lem-weil-pbc-localization-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FN, lemma-Noetherian-permanence, localization assertion; Section 00CM, section-localization, fraction formulas"
-   }
-  },
-  {
-   "text": "For every prime $\\mathfrak q$ of $B$, let $\\mathfrak p=\\lambda^{-1}(\\mathfrak q)$. By parts (2) and (3) of [lem-weil-pbc-localization-prime-residue-field-iso], the map $e:A_{\\mathfrak p}\\xrightarrow{\\sim}B_{\\mathfrak q}$, $a/t\\mapsto\\lambda(a)/\\lambda(t)$, is an isomorphism carrying the maximal ideal onto the maximal ideal. Apply [lem-weil-pbc-adic-completion-ring-equiv] at these maximal ideals to obtain an isomorphism $E:(A_{\\mathfrak p})^\\wedge\\xrightarrow{\\sim}(B_{\\mathfrak q})^\\wedge$ commuting with the canonical completion maps. The map $A_{\\mathfrak p}\\to(A_{\\mathfrak p})^\\wedge$ is regular because $A$ is a G-ring, by [def-weil-pbc-g-ring]. The commuting square with vertical isomorphisms $e,E$ satisfies exactly the hypothesis of [lem-weil-pbc-regular-ring-map-ring-equiv], so $B_{\\mathfrak q}\\to(B_{\\mathfrak q})^\\wedge$ is regular. Since $\\mathfrak q$ was arbitrary and $B$ is Noetherian by step 3, [def-weil-pbc-g-ring] makes $B$ a G-ring.",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-adic-completion-ring-equiv",
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-regular-ring-map-ring-equiv"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PV, proposition-finite-type-over-G-ring, opening proof sentence on localization; Tag 07GH, definition-G-ring; algebra.tex Tag 00C9, item-localization-localization"
-   }
-  },
-  {
-   "text": "Fix any finite type $B$-algebra $C$, with generators $c_1,\\ldots,c_m$ as in [def-weil-pbc-finite-type-algebra]. Inside $C$ let $D$ be the subring of polynomial expressions in the $c_i$ with coefficients in the image of $A$. It is a finite type $A$-algebra, with those same generators. Let $S_D$ be the image of $S$ in $D$; its elements are units in $C$, since the structure map factors through $B$. The formula $d/s\\mapsto d\\,s^{-1}$ defines a homomorphism $S_D^{-1}D\\to C$ by [def-weil-pbc-module-localization]: the relation $u(td-se)=0$ implies equality of the two fractions after multiplying by the unit $ust$. This map is injective because $d\\,s^{-1}=0$ implies $d=0$ in the subring $D$. It is surjective: express an element of $C$ as a polynomial in the $c_i$ with finitely many coefficients $a_\\alpha/s_\\alpha\\in B$, and put $s=\\prod_\\alpha s_\\alpha\\in S$. That polynomial equals $d/\\lambda_C(s)$, where $d=\\sum_\\alpha \\lambda_C(a_\\alpha)\\prod_{\\beta\\ne\\alpha}\\lambda_C(s_\\beta)c^\\alpha\\in D$ and $\\lambda_C:A\\to C$ is the structure map. Thus $C\\cong S_D^{-1}D$ by this explicit map. No finite-presentation or injectivity hypothesis on $A\\to C$ was used.",
-   "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-module-localization"
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NJ, lemma-localization-catenary, finite type localization model in its proof; explicit image-subalgebra and common-denominator argument"
+    "document": "lean/WeilConjectures/Mathlib/RingTheory/Etale/Weakly.lean",
+    "place": "Algebra.WeaklyEtale.of_isLocalization, Stacks Tag 092J(1); weaklyEtale_algebraMap_iff in WeilConjectures/RingTheory/ProEtale/WeaklyEtale.lean"
    }
   },
   {
-   "text": "For the arbitrary $C$ and $D$ of step 5, both rings are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]: apply it to the finite type maps $A\\to D$ and $B\\to C$, using the Noetherianity of $A$ and $B$ from steps 1 and 3. Now $D$ has open regular locus because $A$ is J-2, by [def-exc-excellent-ring]. The canonical map $h:\\operatorname{Spec}C\\to\\operatorname{Spec}D$ is continuous by [lem-weil-pbc-localization-spectrum-embedding], applied to the localization isomorphism of step 5. Part (2) of [lem-weil-pbc-localization-prime-residue-field-iso] identifies $C_{\\mathfrak q}$ with $D_{h(\\mathfrak q)}$ for each prime $\\mathfrak q$. Regular locality is invariant under this ring isomorphism directly from [def-weil-regular-scheme]: it bijects ideals and their finite generating families, carries the unique maximal ideal to the unique maximal ideal, and bijects prime chains, preserving their lengths and hence Krull dimension. Consequently $\\operatorname{Reg}(C)=h^{-1}(\\operatorname{Reg}(D))$ is open. Since this holds for every finite type $B$-algebra $C$, $B$ is J-2. The argument only uses continuity; it does not assert that the image of an arbitrary localization is open.",
+   "text": "Apply [lem-exc-weakly-etale-excellent] to the localization map A to B, the excellence of A proved above, the Noetherianity of B and weak etaleness from the preceding step. It gives IsExcellent B. Pair this with IsExcellent A to prove the stated conjunction. This replaces the longer componentwise localization argument by an existing declaration, without changing the unit statement or any unit proof step. All maps and arguments include the zero ring and submonoids containing zero.",
    "uses": [
-    "def-exc-excellent-ring",
-    "lem-weil-pbc-localization-spectrum-embedding",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-finite-type-algebra-noetherian"
+    "lem-exc-weakly-etale-excellent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QU, lemma-finite-type-over-excellent, omitted localization assertion for J-2, supplied here from Tag 07P7, definition-J; algebra.tex Tags 00E3, lemma-spec-localization, and 00KU, definition-regular-local"
-   }
-  },
-  {
-   "text": "The finite type $A$-algebra $D$ in step 5 is catenary because $A$ is universally catenary, by [def-exc-excellent-ring]. By part (1) of [lem-weil-pbc-localization-prime-residue-field-iso], contraction identifies primes of $C$ with primes of $D$ disjoint from $S_D$, and extension is its inverse. Both preserve inclusion, since contraction and the formation of the ideal generated by an image preserve inclusion. If $\\mathfrak p\\subseteq\\mathfrak q$ are the contractions of two primes of $C$, every prime of $D$ between them avoids $S_D$ because it is contained in $\\mathfrak q$, which avoids $S_D$. Hence the entire interval of primes is preserved, not only its endpoints. Every finite chain corresponds to a chain of the same length; a chain is saturated on one side exactly when it is saturated on the other, since any insertable prime lies in this interval. The bound on finite chain lengths and the common length of saturated chains for $D$ therefore give the same two conditions for $C$. Thus $C$ is catenary. As $C$ was arbitrary and $B$ is Noetherian, $B$ is universally catenary.",
-   "uses": [
-    "def-exc-excellent-ring",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NJ, lemma-localization-catenary, proof; Tags 00NI, definition-catenary, and 00NL, definition-universally-catenary"
-   }
-  },
-  {
-   "text": "Steps 3, 4, 6 and 7 respectively give Noetherianity, the G-ring property, J-2 and universal catenarity for $B=S^{-1}A$. These are exactly the conditions for excellence in [def-exc-excellent-ring], proving the principal assertion. Step 2 already proves the final assertion that $A$ is excellent. Equivalently, for $S=\\{1\\}$ the mutually inverse maps $a/1\\mapsto a$ and $a\\mapsto a/1$ of [def-weil-pbc-module-localization] identify $S^{-1}A$ with $A$. No condition that $S$ avoid zero is needed: if $0\\in S$, then $B=0$ by the fraction relation, there are no primes, and every $B$-algebra is zero, so the primewise and open-locus conditions used above are vacuous.",
-   "uses": [
-    "def-exc-excellent-ring",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QU, lemma-finite-type-over-excellent, assembled from the defining conditions of Tag 07QT, definition-excellent"
+    "place": "Tag 07QU, localization assertion; proved here using the existing Greco Theorem 5.3(iv) ascent theorem"
    }
   }
  ],
@@ -132,17 +79,13 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-adic-completion-ring-equiv",
-  "def-weil-pbc-g-ring",
-  "lem-weil-pbc-regular-ring-map-ring-equiv",
-  "lem-weil-pbc-localization-spectrum-embedding",
-  "def-weil-regular-scheme"
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-weakly-etale-excellent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07QU, lemma-finite-type-over-excellent: follows its finite type argument and fills its omitted localization proof using the explicit finite type localization model and the prime-interval argument of algebra.tex Tag 00NJ, lemma-localization-catenary; G-ring localization follows the opening paragraph of 07PV."
+  "place": "Tag 07QU: finite type argument from the definitions, with proved universe transports; localization uses Algebra.WeaklyEtale.of_isLocalization (Stacks 092J(1)) and the existing Greco Theorem 5.3(iv) declaration lem-exc-weakly-etale-excellent. Lean proof by F6, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -279,10 +222,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-g-ring",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-adic-completion-ring-equiv",
-  "lem-weil-pbc-regular-ring-map-ring-equiv"
+  "lem-weil-pbc-finite-type-over-g-ring"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -321,5 +261,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261019T093401-L-2303704",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

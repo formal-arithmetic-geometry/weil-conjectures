@@ -9,14 +9,12 @@ public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Sheaf.RingTheory.FiniteTypeGRing
+import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.RingTheory.AdicCompletionRingEquiv
-import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.RegularRingEquiv
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Mathlib.RingTheory.Finiteness.Small
+import Mathlib.Algebra.Algebra.Shrink
+import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
+import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 
 /-!
 # Excellence of finite type algebras and their localizations
@@ -30,6 +28,62 @@ Source: Stacks Project, More on Algebra, Tag 07QU, lemma-finite-type-over-excell
 set_option autoImplicit false
 
 universe u v
+
+private theorem catenary_equiv {R : Type u} {A : Type v}
+    [CommRing R] [CommRing A] (e : R ≃+* A) (hR : IsCatenaryRing R) :
+    IsCatenaryRing A := by
+  let E := e.idealComapOrderIso
+  have prime (p : Ideal A) (hp : p.IsPrime) : (E p).IsPrime := by
+    exact hp.comap e.toRingHom
+  have chain (p q : Ideal A) (n : ℕ) (c : Fin (n + 1) → Ideal A)
+      (hc : IsPrimeChain A p q n c) :
+      IsPrimeChain R (E p) (E q) n (fun i ↦ E (c i)) := by
+    refine ⟨fun i ↦ prime _ (hc.1 i), congrArg E hc.2.1,
+      congrArg E hc.2.2.1, fun i ↦ E.lt_iff_lt.mpr (hc.2.2.2 i)⟩
+  have saturated (p q : Ideal A) (n : ℕ) (c : Fin (n + 1) → Ideal A)
+      (hc : IsSaturatedPrimeChain A p q n c) :
+      IsSaturatedPrimeChain R (E p) (E q) n (fun i ↦ E (c i)) := by
+    refine ⟨chain p q n c hc.1, ?_⟩
+    intro i
+    rintro ⟨r, hr, hleft, hright⟩
+    have : r.IsPrime := hr
+    have hprime : (E.symm r).IsPrime := by
+      change (r.map e).IsPrime
+      exact Ideal.map_isPrime_of_equiv e
+    apply hc.2 i
+    refine ⟨E.symm r, hprime, ?_, ?_⟩
+    · exact E.lt_iff_lt.mp (by simpa using hleft)
+    · exact E.lt_iff_lt.mp (by simpa using hright)
+  intro p q hp hq hpq
+  have : (E p).IsPrime := prime p hp
+  have : (E q).IsPrime := prime q hq
+  obtain ⟨⟨N, hN⟩, hsat⟩ := hR (E p) (E q) (E.monotone hpq)
+  refine ⟨⟨N, fun n c hc ↦ hN n _ (chain p q n c hc)⟩, ?_⟩
+  intro n m c d hc hd
+  exact hsat n m _ _ (saturated p q n c hc) (saturated p q m d hd)
+
+private theorem open_regular_equiv {R : Type u} {A : Type v}
+    [CommRing R] [CommRing A] (e : R ≃+* A)
+    (hR : IsOpen {p : PrimeSpectrum R |
+      IsRegularLocalRing (Localization.AtPrime p.asIdeal)}) :
+    IsOpen {p : PrimeSpectrum A |
+      IsRegularLocalRing (Localization.AtPrime p.asIdeal)} := by
+  have heq : {p : PrimeSpectrum A |
+      IsRegularLocalRing (Localization.AtPrime p.asIdeal)} =
+      PrimeSpectrum.comap e.toRingHom ⁻¹' {p : PrimeSpectrum R |
+        IsRegularLocalRing (Localization.AtPrime p.asIdeal)} := by
+    ext p
+    let q : Ideal R := p.asIdeal.comap e.toRingHom
+    let a := Localization.localRingEquiv q p.asIdeal e rfl
+    constructor
+    · intro hp
+      have : IsRegularLocalRing (Localization.AtPrime p.asIdeal) := hp
+      exact IsRegularLocalRing.of_ringEquiv a.symm
+    · intro hp
+      have : IsRegularLocalRing (Localization.AtPrime q) := hp
+      exact IsRegularLocalRing.of_ringEquiv a
+  rw [heq]
+  exact hR.preimage (PrimeSpectrum.continuous_comap e.toRingHom)
 
 /-- A localization of a finite type algebra over an excellent ring is excellent;
 in particular the finite type algebra itself is excellent. Here `LocalizedModule S A`
@@ -83,4 +137,37 @@ theorem isExcellent_finiteType_localization {R : Type u} {A : Type v}
     [CommRing R] [CommRing A] [Algebra R A] (hR : IsExcellent R)
     [Algebra.FiniteType R A] (S : Submonoid A) :
     IsExcellent (LocalizedModule S A) ∧ IsExcellent A := by
-  sorry
+  have hA : IsExcellent A := by
+    have : IsNoetherianRing R := hR.1.1
+    have hnoeth : IsNoetherianRing A := Algebra.FiniteType.isNoetherianRing R A
+    refine ⟨⟨hnoeth, isGRing_of_finiteType hR.1.2.1, ?_⟩, hnoeth, ?_⟩
+    · intro T _ _ _
+      let : Algebra R T := ((algebraMap A T).comp (algebraMap R A)).toAlgebra
+      have : IsScalarTower R A T := IsScalarTower.of_algebraMap_eq' rfl
+      have : Algebra.FiniteType R T :=
+        Algebra.FiniteType.trans (R := R) (S := A) inferInstance inferInstance
+      have : Small.{u} T := Algebra.FiniteType.small (R := R)
+      let T₀ := Shrink.{u} T
+      have : Algebra.FiniteType R T₀ :=
+        Algebra.FiniteType.of_surjective (Shrink.algEquiv R T).symm.toAlgHom
+          (Shrink.algEquiv R T).symm.surjective
+      exact open_regular_equiv (Shrink.algEquiv R T).toRingEquiv (hR.1.2.2 T₀)
+    · intro T _ _ _
+      let : Algebra R T := ((algebraMap A T).comp (algebraMap R A)).toAlgebra
+      have : IsScalarTower R A T := IsScalarTower.of_algebraMap_eq' rfl
+      have : Algebra.FiniteType R T :=
+        Algebra.FiniteType.trans (R := R) (S := A) inferInstance inferInstance
+      have : Small.{u} T := Algebra.FiniteType.small (R := R)
+      let T₀ := Shrink.{u} T
+      have : Algebra.FiniteType R T₀ :=
+        Algebra.FiniteType.of_surjective (Shrink.algEquiv R T).symm.toAlgHom
+          (Shrink.algEquiv R T).symm.surjective
+      exact catenary_equiv (Shrink.algEquiv R T).toRingEquiv (hR.2.2 T₀)
+  have : IsNoetherianRing A := hA.1.1
+  have : IsNoetherianRing (LocalizedModule S A) :=
+    IsLocalization.isNoetherianRing S _ inferInstance
+  refine ⟨?_, hA⟩
+  -- Localization is weakly étale, so the existing excellence ascent theorem applies.
+  apply RingHom.isExcellent_of_weaklyEtale (algebraMap A (LocalizedModule S A)) hA
+  exact RingHom.weaklyEtale_algebraMap_iff.mpr
+    (Algebra.WeaklyEtale.of_isLocalization A S _)
