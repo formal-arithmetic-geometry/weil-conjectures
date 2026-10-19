@@ -7,15 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-public import Mathlib.CategoryTheory.Adjunction.Additive
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-! # Ordinary direct image with the continuous-function finite coefficient sheaf
 
@@ -67,7 +59,18 @@ theorem finiteCoefficientPullbackSections_naturality
     (finiteCoefficientPresheaf T Λ).map a ≫ finiteCoefficientPullbackSections f Λ V =
       finiteCoefficientPullbackSections f Λ U ≫
         (finiteCoefficientPresheaf S Λ).map ((Scheme.proEtaleBaseChange f).op.map a) := by
-  sorry
+  ext s
+  change C(ConnectedComponents U.unop.left, Λ) at s
+  apply ContinuousMap.ext
+  intro c
+  obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
+  change s (ConnectedComponents.mk ((pullback.fst V.unop.hom f ≫ a.unop.left) x)) =
+    s (ConnectedComponents.mk
+      ((((Scheme.proEtaleBaseChange f).map a.unop).left ≫
+        pullback.fst U.unop.hom f) x))
+  simp only [Scheme.proEtaleBaseChange, MorphismProperty.Over.pullback_map_left,
+    pullback.lift_fst]
+  rfl
 
 /-- The actual presheaf coefficient map. Source: blueprint ordinary operations;
 Stacks Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
@@ -106,7 +109,9 @@ base change. Addition of module-sheaf morphisms is sectionwise, so precompositio
 preserves addition and zero; restriction of scalars does not change these maps. -/
 theorem finiteCoefficientModuleDirectImage_additive :
     (finiteCoefficientModuleDirectImage f Λ).Additive := by
-  sorry
+  constructor
+  intro X Y g h
+  rfl
 
 attribute [instance] finiteCoefficientModuleDirectImage_additive
 
@@ -122,7 +127,10 @@ kernels and cokernels sectionwise. This is the same small-site argument as the r
 arbitrary-ring-sheaf operations, now keeping the finite coefficient RingCat sheaf. -/
 theorem finiteCoefficientModules_hasKInjectiveResolutions (V : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (FiniteCoefficientModules V Λ) := by
-  sorry
+  let : IsGrothendieckAbelian.{u + 1} (FiniteCoefficientModules V Λ) :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, u + 1}
+      (Scheme.ProEt.topology V) (finiteCoefficientRingSheaf V Λ)
+  infer_instance
 
 attribute [instance] finiteCoefficientModules_hasKInjectiveResolutions
 
@@ -153,7 +161,7 @@ adjunction. This is exactly the equivalence used in the proof of
 `finiteCoefficientRealization_exact`; it applies also to the zero ring and empty scheme. -/
 theorem finiteCoefficientRealization_isEquivalence :
     (finiteCoefficientRealization T Λ).IsEquivalence := by
-  sorry
+  exact finiteCoefficientRealization_isEquivalence_ring T Λ
 
 attribute [instance] finiteCoefficientRealization_isEquivalence
 
