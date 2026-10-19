@@ -17383,3 +17383,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/V4/Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBoundCore (stage 3; reviewer PASS; first push; landing 20261019T112555-L-3956931 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/V4/Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction (stage 3; reviewer PASS; first push; landing 20261019T112557-L-3957032 (interface); batch 20261019T112432; modules 4; new nodes 3)
 - 11:25 L: merged deliver/V4/Sheaf.FieldTheory.FiniteSeparableClosure (stage 3; reviewer PASS; first push; landing 20261019T112558-L-3957301 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/V4/Sheaf.Paper.IntegralCohomologicalAdicCriterion (stage 3; reviewer PASS; first push; landing 20261019T112559-L-3957646 (interface); batch 20261019T112432; modules 5; new nodes 4)
