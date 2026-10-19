@@ -309,5 +309,31 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-81f6cd3c0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, and the full statement of all 13 cited nodes. Source checked: Stacks cotangent.tex Tag 08QQ (lemma-flat-base-change-cotangent-complex) with its proof, and Tag 08QP (lemma-flat-base-change) with its proof. Every other cited tag exists with the stated label (08QI, 08QL, 00RX, 064K, 06Y6, 07A6, 0FND, 09T5, 08SJ). The statement matches 08QQ hypothesis by hypothesis. It works over arbitrary commutative rings, uses the derived-tensor quasi-isomorphism hypothesis, assumes neither B'=B⊗A' nor any flatness, uses ordinary-module D(T), and takes beta as the derived adjoint of the square-induced functoriality map. It is not weakened. Step 1: S=s(P^std) has free terms and is bounded above, so it is K-flat. Step 2: the adjunction clause (2) with g=fq represents mu by p⊗a'↦a'f(ε(p)), and a right-exactness cokernel argument derives alpha: C⊗A'≅C' rather than assuming it. Step 3: the Tor-independent resolution node applies with exactly its hypothesis, and composing with alpha keeps surjectivity and the quasi-isomorphism. Step 4: the arbitrary-variable Kähler basis leaf (correctly not the finite-variable one) gives free terms, so K is K-flat. Steps 5–6: I rechecked that theta is well defined (derivation, balancing over P_n and C), bijective basis to basis, and simplicial on generators. Step 7: I recomputed that K(h)∘θ∘u equals dp⊗c↦d(tp)⊗f(c), and the naturality clause gives c_R K(h)=c_{P'}. Step 8: the adjunct of the Step 7 chain map equals K(h)∘θ under c_K, so beta is a composite of isomorphisms. The one-point transport of Res and of termwise flatness is not stated in that node but is elementary. Small cases: flat polynomial base change gives an isomorphism. For A=k[t], C=A/t, A'=C'=k the hypothesis fails (Tor_1≠0) and so would the conclusion. A=Z, C=Z[x], A'=F_p passes without flatness. Empty variable sets and zero rings are fine. No new nodes. Duplicate search (rg 08QQ/08QP, cotangent terms) found only weaker neighbours and the citers. The proof-dependency closure (1232 nodes) does not contain the item, so there is no cycle. No SGA is cited. Accepted tool_uses: lem-pc-module-bounded-flat-kflat, lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-pc-kflat-scalar-extension-counit. They are generic homological algebra from sk-thm-picard-semicon and sk-def-sf-operations and do not replace the route of unit sk-i-curve-zero. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentFlatBaseChange",
+  "declaration": "Algebra.CotangentResolution.isIso_cotangentBaseChange",
+  "declarations": [
+   "Algebra.CotangentResolution.baseChangeExtension",
+   "Algebra.CotangentResolution.baseChangeAdjunction",
+   "Algebra.CotangentResolution.squareModuleMap",
+   "Algebra.CotangentResolution.derivedSquareMultiplication",
+   "Algebra.CotangentResolution.cotangentBaseChange",
+   "Algebra.CotangentResolution.isIso_cotangentBaseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentFlatBaseChange.lean",
+  "statement": "theorem isIso_cotangentBaseChange (C : Coherence.{u}) {f g : Arrow CommRingCat.{u}} (q : f ⟶ g) (hmu : IsIso (derivedSquareMultiplication q)) : IsIso (cotangentBaseChange C q)",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc3be3864",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 08QQ clause by clause: Arrow square q, ordinary D(Mod T) with HasDerivedCategory.{u+1}, μ = adjunct of the real C→C' module map (linearity from q.w) under the normalized derived extension/restriction adjunction, hmu : IsIso μ, β = homEquiv.symm of cotangentMap from the landed coherence dependency, conclusion IsIso β. No flatness, finiteness or universe restriction; edge cases (identity squares, zero rings, empty or infinite variables, non-flat squares) covered. No hollow defs; only the theorem has sorry. Docstrings carry source/blueprint and all 8 steps; lean.statement matches the file; report has both sections. nt_compile --json clean (6.6 s, exit 0). Advisories: report wrongly says the one-point node has no declaration (proof-only); unused proof-only imports; second reading is the author's self-check; third wrapper of the same ring-level derived extension of scalars (same term as affineDerivedExtension and relativeDualizingDerivedExtension)."
  }
 }

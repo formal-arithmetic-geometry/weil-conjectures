@@ -358,5 +358,23 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-40f19883e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, ILO XIII 2.3.1 with its proof sketch (printed p.197) and Zheng 3.16(1) (printed p.19). The item statement is unchanged from the earlier unsplit copy, its sources cite no SGA, and its closure contains no via-ancestor (no cycle). The six steps follow ILO's route: generic open plus local DVR. Step 1 uses rem-pc-regular-normal to reduce to integral components, with open restriction. Step 3 shows every non-generic point is closed because dim<=1, so E is a finite set of closed points, each with a DVR local ring by lem-sc-regular-dim1-dvr. Step 4 compares S_a->S with S by ind-Zariski localization: the invariance node gives (T_a)_(t)=T_(p_a t) over T, then the stalk formula, the forget comparison and conservativity give the isomorphism (the global base-change arrow is the standard adjunction map). Step 5 checks the hypotheses of the DVR node by base-change nodes; the closed fibre of T_a is T_{s_a}. Step 6 glues the strata, which is elementary in Noetherian T, and takes the maximum of finitely many bounds. The generic node is Deligne's generic finiteness over an integral Noetherian base, true and not a duplicate: thm-fin-deligne-generic-open and sk-thm-geo-generic-open need a base of finite type over a field, and the Gabber/quasi-excellent nodes need excellence. A later split of it must avoid SGA 4 1/2. The DVR closed-fibre node is true by ILO 2.3.1(i) or Zheng over Spec R, and strictly smaller than the item (local base, closed fibre only). A non-SGA split exists: completion plus Gabber-Fujiwara plus lem-per-quasi-excellent-etale-direct-image-finiteness. It is not a duplicate of the nearby-cycle or quasi-excellent nodes. Batch-5 check: lem-trf-ind-etale-strict-local-invariance is Stacks 05WR, generic, and its 253-node closure has no other trace-formula or Poincare-duality node; I accept it. The only other such node in the closure is lem-pod-separated-finite-type-base-change, a generic Mathlib leaf. The generic tool_uses are accepted. Maintainer notes: the item's source.place still mentions the S+Spec Q[t] trick that the proof no longer uses; lem-sc-regular-dim1-dvr should cite tag 00PD, not 00DV."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LowBaseOpenSheafFiniteness",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImage_constructible_bounded_of_regular_low_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/LowBaseOpenSheafFiniteness.lean",
+  "statement": "theorem higherDirectImage_constructible_bounded_of_regular_low_base {S T V : Scheme.{u}} [IsNoetherian S] (_hS : IsRegularScheme S) (_hdim : topologicalKrullDim S ≤ 1) (ell : ℕ) [Fact ell.Prime] (_hinv : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) (f : T ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (j : V ⟶ T) [IsOpenImmersion j] (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))) (_hF : Scheme.IsConstructibleEtaleModuleSheaf F) : (∀ q : ℕ, Scheme.IsConstructibleEtaleModuleSheaf (higherDirectImage (ULift.{u + 1} (ZMod ell)) j (q : ℤ) F)) ∧ (∃ cF : ℕ, ∀ q : ℕ, cF < q → IsZero (higherDirectImage (ULift.{u + 1} (ZMod ell)) j (q : ℤ) F))",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47fc9dbdc",
+  "group": "Q134",
+  "result": "pass",
+  "note": "All clauses match the node with the recorded dependency declarations: IsNoetherian, IsRegularScheme, topologicalKrullDim ≤ 1, ell prime and a unit in every stalk, IsSeparated + LocallyOfFiniteType + QuasiCompact, IsOpenImmersion, IsConstructibleEtaleModuleSheaf on the small étale site with ULift (ZMod ell) coefficients in universe u+1, constructibility for all q : ℕ and ∃ cF : ℕ with vanishing above it. Edge cases covered (empty base, dimension 0, q = 0). Only the lean record changed; lean.statement matches the file; docstring has all 6 proof steps with their uses, the source places and the blueprint tag; ordinary imports are exactly the 11 proof-dependency modules; theorem proof is sorry only. nt_compile --json: 6.8 s, clean. Advisory: higherDirectImage is owned by sk-def-bc, outside stmt_deps, and is exactly H^q of the recorded rightDerivedLowerStarPlus."
  }
 }

@@ -172,5 +172,24 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-153b3cecc (reviewer sub-agent of L); spot-checked: I read ILO XVII Def 7.2.1 and Props 7.2.2-7.2.5 (pp. 301-302) and Lemma 7.2.6 (pp. 302-303; it uses the ordered set of finite abelian sub-local-systems of a torsion G and a union of finite sub-local-systems). The item's statement and stmt_deps are unchanged from base and match that lemma: Noetherian base, torsion germs, no exponent bound. The parent lem-per-torsion-torsor-descent gets the union, filteredness and colimit it uses. Step 1: calculus clause (1) gives the filtered union of finite-étale-represented subsheaves, and flc-representable (1) makes them finite locally constant; the step claims only local containment. Step 2: every hypothesis of the new node is in force. Step 3: the zero subgroup gives nonemptiness. For directedness, the forget lemma (⇐) and representability (2) turn H1 and H2 into finite local-system subsheaves; the calculus filtered clause gives a finite E containing both, and the new node gives H containing E. Smallness via a small skeleton is correct. Step 4 is an acceptable elementary gluing argument for both the set and abelian colimits. New node lem-per-finite-torsion-generated-subgroup is true: on each component a finite π1-stable set generates a finite π1-stable torsion subgroup, or alternatively E lies in G[n], which is a local system as an equalizer, and the Z/n monodromy node applies. Small cases tested: empty X, constant Q/Z, μ5 inside μ∞ over Q, ⊕Z/p; constant Z shows torsion is needed. The node is strictly smaller than the item and not a restated clause. rg over the DAG found no duplicate (closest: torsion-local-system-monodromy with fixed n, the field-base finite-stalk subobjects node, and the constructible-subsheaf lemmas 03SA/u2). Both files are free of SGA. B1-B9 hold. I accept the two declared tool_uses, lem-galois-flc-representable and lem-weil-pbc-finite-local-abelian-forget, as generic black boxes. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.TorsionFiniteSubsystem",
+  "declaration": "AlgebraicGeometry.Scheme.torsion_local_system_finite_subsystem",
+  "file": "lean/Sheaf/DeligneLaumon/TorsionFiniteSubsystem.lean",
+  "statement": "theorem torsion_local_system_finite_subsystem (X : Scheme.{u}) [IsNoetherian X] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : IsIndFiniteEtaleSheaf ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) (htorsion : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X) (g : (pointedEtaleStalk G t : AddCommGrpCat.{u + 1})), ∃ n : ℕ, 0 < n ∧ n • g = 0) : ∃ (I : Type (u + 1)) (_ : PartialOrder I) (S : I ↪o Subobject G) (ι : S.monotone.functor ⋙ Subobject.underlying ⟶ (Functor.const I).obj G), IsFiltered I ∧ (∀ i : I, ι.app i = (S i).arrow) ∧ (∀ H : Subobject G, (∃ (𝒰 : Cover.{u} etalePrecoverage X), ∀ j : 𝒰.I₀, ∃ (A : AddCommGrpCat.{u + 1}) (_ : Finite A), Nonempty ((H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).over (𝒰.etalePrecoverageToEtale j) ≅ (constantSheaf (X.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale j)) AddCommGrpCat.{u + 1}).obj A)) ↔ ∃ i : I, S i = H) ∧ Nonempty (IsColimit (Cocone.mk G ι)) ∧ Nonempty (IsColimit ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapCocone (Cocone.mk G ι)))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-53d336b43"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53d336b43",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Statement matches node and ILO XVII 7.2.6 in every clause: IsNoetherian; abelian sheaf on X.smallEtaleTopology; IsIndFiniteEtaleSheaf on the underlying set sheaf; torsion on pointed geometric stalks with n>0; S : I ↪o Subobject G whose image is exactly the FLC subobjects (étale cover, restriction ≅ constantSheaf of a finite A, matching the project's LocallyConstantDatum pattern); I : Type (u+1), IsFiltered; legs = (S i).arrow; IsColimit in abelian and in set sheaves. Edge cases (empty X, G=0, n=0, disconnected X, universes) are covered. Delivered and fixed files compile clean via nt_compile --json (exit 0). H8 fault: the docstring gave a different π1-module route and the report falsely said the node proof was empty. FIX: fixes/TorsionFiniteSubsystem.lean puts the node's 4 proof steps with the nodes they use into the docstring (signature byte-identical), and fixes/lem-per-torsion-finite-subsystem.report.md corrects the report."
  }
 }

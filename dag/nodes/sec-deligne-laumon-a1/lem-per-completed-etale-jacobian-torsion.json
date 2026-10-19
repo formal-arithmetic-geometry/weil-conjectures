@@ -13,7 +13,8 @@
   "def-weil-finitely-generated-module",
   "def-weil-affine-spectrum",
   "def-weil-etale-morphism",
-  "def-weil-pbc-mv-polynomial-ring"
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-per-completed-polynomial-conormal"
  ],
  "proof": [
   {
@@ -196,5 +197,23 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-ae257bb86 (reviewer sub-agent of L); spot-checked: I read the delivery in full against restricted.tex: equation-NL (l.278), 0GAF lemma-NL-is-completion (l.343-375), 0AJU (3) and 0ALQ (1) (l.1764-1805). The item statement is unchanged and is 0ALQ(1)+0AJU(3) for a finite E over a complete base, with completeness from 00MA(3). Steps 1, 2, 4, 5 and 6 are correct. Step 1: finite-module completeness gives E≅Ê. Step 2: an ordinary presentation with K finitely generated; U and V are finite because E is Noetherian. Step 4: exact localization, then a uniform power of g from finitely many generators. Step 5: the pigeonhole bound c=1+Σ(n_i−1), and c=1 when I=0. Step 6: the new node with B=E, composed with Ê≅E, identifies δ with d_0. Step 3 is correct, but C1: it went from the conormal criterion's ⊕E dx_k and partial-derivative differential to the principal-localization lemma's Ω_{P/A}⊗B without citing the polynomial Kähler basis. FIXED: Step 3 now cites the Mathlib leaf lem-weil-pbc-polynomial-ring-kahler-basis-any-variables, writes out the identification and notes f=a; proof_deps updated. The new node lem-per-polynomial-conormal-completion is exactly 0GAF's first assertion with equation-NL derivatives. I checked it independently: exactness and flatness of completion on finite S-modules, J=KP, J/J²=(K/K²)⊗B̂, and ∂(Σp_jk_j)≡Σp_j∂k_j mod J. Small cases: I=0, I=A, K=0, r=0. It is statement-only and self-contained, has three kinds of search and the correct blueprint from/via, and is not a restatement. The duplicate sweep covered the 0GAF/0ALQ/0AJU tags and every conormal-plus-completion statement in the DAG; shrink (0ALQ(2)), retraction-conormal-torsion, conormal-torsion-algebraization (0ALR), trf determinant comparison and completed-differential are all different. I tested the item's edge cases I=0 (k[x]/x² non-étale), I=A, nilpotent I and r=0. The sk-thm-p1 inputs are Mathlib leaves or Lean-closed. I accept the declared tool_use (finite-module completeness). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedEtaleJacobianTorsion",
+  "declaration": "AlgebraicGeometry.exists_completedEtaleJacobianTorsion",
+  "file": "lean/Sheaf/RingTheory/CompletedEtaleJacobianTorsion.lean",
+  "statement": "theorem exists_completedEtaleJacobianTorsion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] (E : Type u) [CommRing E] [Algebra A E] [Module.Finite A E] (het : Etale (Spec.map (CommRingCat.ofHom (algebraMap A E)) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set A)).isOpen_compl⟩)) : IsAdicComplete I E ∧ RingHom.FiniteType (Ideal.quotientMap (I.map (algebraMap A E)) (algebraMap A E) Ideal.le_comap_map) ∧ ∃ (r : ℕ) (f : rigPolynomialCompletion I r →ₐ[A] E), Function.Surjective f ∧ ∃ c : ℕ, I ^ c • (rigJacobianDifferential r I (RingHom.ker f.toRingHom)).ker ≤ ⊥ ∧ I ^ c • (⊤ : Submodule A ((Fin r → (rigPolynomialCompletion I r ⧸ RingHom.ker f.toRingHom)) ⧸ (rigJacobianDifferential r I (RingHom.ker f.toRingHom)).range)) ≤ ⊥",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d0d0c2a6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement exists_completedEtaleJacobianTorsion matches node clause by clause: Noetherian A, [IsAdicComplete I A], finite E, Etale on restriction to (zeroLocus I)ᶜ; conclusions IsAdicComplete I E, FiniteType of canonical A/I→E/IE, ∃ r, surjective f : rigPolynomialCompletion I r →ₐ[A] E, J = ker f, ∃ c with I^c killing ker/coker of landed Q93 rigJacobianDifferential (exact input form of rigEtaleJacobianAlgebraization). Node diff vs live: only lean + stmt_dep def-per-completed-polynomial-conormal (used in signature). Edge cases I=0/nilpotent/A, r=0, c=0, E=0 OK; same-universe E forced by Spec.map, no loss. Docstrings carry source + blueprint + 6 steps; sorry only; imports match proof_deps. nt_compile --json clean, exit 0, 7.8 s. Advisory: statement text does not cite the new stmt_dep id."
  }
 }

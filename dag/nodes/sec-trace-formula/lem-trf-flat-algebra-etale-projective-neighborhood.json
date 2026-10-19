@@ -321,5 +321,27 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-e134260f5 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited node statement. Read Stacks flat.tex: 05HX (l.1652), the definition of an elementary étale localization (l.1629), remark-same-notion, 05I1 (l.1757), 05IB (l.3229), 05ID with its proof (l.3287), the 05B8 proof and the 05IG first paragraph. The item statement and stmt_deps are byte-identical to base. The item is 05ID for O_{Spec S}, with the fibre map formed over κ(p') (05IG typo handled); nothing is weakened. Step checks: S1 existence node with N=S; S2 étale graph T=S⊗R_0→S_0 by base change and cancellation (3), with no cartesian claim; S3 finite presentation via lfp on affines, base change and composition; S4 flatness via base change, étale⇒flat and composition; S5 the 05IB node with all hypotheses met, then localization keeps finite presentation; S6 open immersion, cancellation (1)(2), localization bijection and residue-field isomorphisms, with q'∩R'=p' elementary; S7 the fibre map is étale by base change to κ(p') and ι; S8 fibre-prime uniqueness. The new 05HX definition matches conditions (1)-(8). Its added condition 'rB_i prime' is harmless: it holds whenever the fibre is nonempty (flat, smooth, geometrically irreducible), and 05I1 at q' supplies a nonempty fibre. The 05I1 node only drops the at-q' refinement, so it is true. The 05IB node has exactly the source hypotheses (small case k[x]/k checked). No duplicates in the DAG: 057S, 05I6 and 05FT nodes differ. No new node restates a clause of the item. No SGA. All eleven off-unit lem-weil-pbc-* tool uses are generic and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatAlgebraEtaleProjectiveNeighborhood",
+  "declaration": "Algebra.exists_etale_projective_neighborhood",
+  "declarations": [
+   "Ideal.Fiber.mapOfPrimeSquare",
+   "Algebra.exists_etale_projective_neighborhood"
+  ],
+  "file": "lean/Sheaf/RingTheory/FlatAlgebraEtaleProjectiveNeighborhood.lean",
+  "statement": "theorem exists_etale_projective_neighborhood (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] [Algebra.FinitePresentation R S] (p : PrimeSpectrum R) (q : PrimeSpectrum S) (hpq : PrimeSpectrum.comap (algebraMap R S) q = p) : ∃ (R' : Type u) (S' : Type v) (_ : CommRing R') (_ : CommRing S') (_ : Algebra R R') (_ : Algebra S S') (_ : Algebra R' S') (p' : PrimeSpectrum R') (q' : PrimeSpectrum S') (hcomm : (algebraMap S S').comp (algebraMap R S) = (algebraMap R' S').comp (algebraMap R R')) (hp : PrimeSpectrum.comap (algebraMap R R') p' = p) (hq : PrimeSpectrum.comap (algebraMap S S') q' = q) (hpq' : PrimeSpectrum.comap (algebraMap R' S') q' = p'), AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R R'))) ∧ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap S S'))) ∧ Function.Bijective (Ideal.ResidueField.map p.asIdeal p'.asIdeal (algebraMap R R') (congrArg PrimeSpectrum.asIdeal hp.symm)) ∧ Function.Bijective (Ideal.ResidueField.map q.asIdeal q'.asIdeal (algebraMap S S') (congrArg PrimeSpectrum.asIdeal hq.symm)) ∧ Algebra.FinitePresentation R' S' ∧ Module.Projective R' S' ∧ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Fiber.mapOfPrimeSquare p.asIdeal p'.asIdeal (congrArg PrimeSpectrum.asIdeal hp.symm) hcomm))) ∧ PrimeSpectrum.comap (Ideal.Fiber.mapOfPrimeSquare p.asIdeal p'.asIdeal (congrArg PrimeSpectrum.asIdeal hp.symm) hcomm) (PrimeSpectrum.preimageOrderIsoFiber R' S' p' ⟨q', hpq'⟩) = PrimeSpectrum.preimageOrderIsoFiber R S p ⟨q, hpq⟩",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32cf9cf13",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Only two files change: the item node (lean field only, statement and stmt_deps byte-identical to live) and the new module. Hypotheses match the node (flat, finitely presented as an algebra, q over p), with no extra assumptions. The square only has to commute. Clauses (1)-(4) match: etale spectrum maps, all contractions, bijective induced residue-field maps, finitely presented plus projective with no finiteness. The fibre map is Ideal.Fiber.mapOfPrimeSquare, a canonical mapRingHom with real data and no duplicate in Mathlib or lean/Sheaf. The fibre-prime clause uses the recorded preimageOrderIsoFiber correspondence. Universes are harmless. Docstrings and all 8 proof steps are present, the proof is sorry-only, and the lean.statement field matches the file exactly. nt_compile --json is clean (5.9 s). No findings."
  }
 }
