@@ -40,10 +40,63 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
+private theorem completedRingComparisonNaturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+    (e : F ⋙ G ≅ H) [NatTrans.IsMonoidal e.hom] (A B : Mon C) (a : A.X ⟶ B.X) :
+    G.map (F.map a) ≫
+        (((Functor.mapMonCompIso (F := F) (G := G)).symm.app B ≪≫
+          (Functor.mapMonNatIso e).app B).hom).hom =
+      (((Functor.mapMonCompIso (F := F) (G := G)).symm.app A ≪≫
+        (Functor.mapMonNatIso e).app A).hom).hom ≫ H.map a := by
+  simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Mon.comp_hom',
+    Functor.mapMonCompIso_inv_app_hom, Functor.mapMonNatIso_hom_app_hom]
+  change G.map (F.map a) ≫ (𝟙 _ ≫ e.hom.app B.X) =
+    (𝟙 _ ≫ e.hom.app A.X) ≫ H.map a
+  simp only [Category.id_comp]
+  exact e.hom.naturality a
+
+private theorem completedLimitTransport
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : C ⥤ E) (H : D ⥤ E) (e : F ⋙ H ≅ G)
+    {A : C} (T : ℕ → C) (t : ∀ n, T (n + 1) ⟶ T n) (r : ∀ n, A ⟶ T n)
+    (cY : Cone (Functor.ofOpSequence (X := fun n ↦ F.obj (T n)) (fun n ↦ F.map (t n))))
+    (cX : Cone (Functor.ofOpSequence (X := fun n ↦ G.obj (T n)) (fun n ↦ G.map (t n))))
+    (aY : F.obj A ≅ cY.pt) (aX : G.obj A ≅ cX.pt)
+    (hY : ∀ n, aY.hom ≫ cY.π.app (op n) = F.map (r n))
+    (hX : ∀ n, aX.hom ≫ cX.π.app (op n) = G.map (r n))
+    (hcX : IsLimit cX) : Nonempty (IsLimit (H.mapCone cY)) := by
+  let β : Functor.ofOpSequence (X := fun n ↦ F.obj (T n)) (fun n ↦ F.map (t n)) ⋙ H ⟶
+      Functor.ofOpSequence (X := fun n ↦ G.obj (T n)) (fun n ↦ G.map (t n)) :=
+    NatTrans.ofOpSequence (fun n ↦ e.hom.app (T n)) (fun n ↦ by
+      simp only [Functor.comp_map, Functor.ofOpSequence_map_homOfLE_succ]
+      exact e.hom.naturality (t n))
+  have hβ (n : ℕᵒᵖ) : IsIso (β.app n) := by
+    change IsIso (e.hom.app (T n.unop))
+    infer_instance
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  let v : H.obj cY.pt ≅ cX.pt := H.mapIso aY.symm ≪≫ e.app A ≪≫ aX
+  have hw (n : ℕᵒᵖ) :
+      (H.mapCone cY).π.app n ≫ β.app n = v.hom ≫ cX.π.app n := by
+    apply (cancel_epi (H.map aY.hom)).1
+    change H.map aY.hom ≫ (H.map (cY.π.app n) ≫ e.hom.app (T n.unop)) =
+      H.map aY.hom ≫ v.hom ≫ cX.π.app n
+    rw [← H.map_comp_assoc, hY n.unop]
+    dsimp only [v, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom]
+    simp only [Category.assoc]
+    rw [← H.map_comp_assoc, aY.hom_inv_id, H.map_id,
+      Category.id_comp, hX n.unop]
+    exact e.hom.naturality (r n.unop)
+  exact ⟨(IsLimit.equivOfNatIsoOfIso (asIso β) (H.mapCone cY) cX
+    (Cone.ext v hw)).symm hcX⟩
+
+
 /-- Convert a condensed ring sheaf to its existing ring object, then pull back to `X`.
 Source: blueprint comparison with completed coefficients, notation `Λ_X`
 (blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable abbrev completedCoefficient (X : Scheme.{u})
+noncomputable def completedCoefficient (X : Scheme.{u})
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) :=
   coefficientRing X
     (Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))
@@ -283,6 +336,8 @@ theorem completedCondensedAlgebraicClosure (X : Scheme.{u}) (l : ℕ) [Fact l.Pr
   change IsColimit (padicAlgClRingObjCocone X l)
   exact isColimitPadicAlgClRingObjCocone X l
 
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+
 /-- Inverse image respects every reduction, integral inclusion and finite-field leg.
 Together with the limit and colimit universal properties this states compatibility of
 all three canonical comparisons with every scheme morphism, including identities.
@@ -329,7 +384,69 @@ theorem completedCondensedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (l : ℕ) [F
       Nonempty (IsLimit c) ∧ Nonempty (IsLimit (((f)^*[Ab.{u + 1}]).mapMon.mapCone c))) ∧
     Nonempty (IsColimit (((f)^*[Ab.{u + 1}]).mapMon.mapCocone
       (completedSubfieldCocone Y l))) := by
-  sorry
+  classical
+  have hnat := completedRingComparisonNaturality (upperStarFromPoint Y)
+    ((f)^*[Ab.{u + 1}]) (upperStarFromPoint X) (upperStarFromPointComp f)
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro n
+    have h := hnat
+      (Mon.mk (Profinite.padicIntegersRingObj l E))
+      (Mon.mk (Profinite.continuousMapRingObj (completedResidue l E π n)))
+      ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (completedReduction l E π n))
+    exact h
+  · have h := hnat
+      (Mon.mk (Profinite.padicIntegersRingObj l E))
+      (Mon.mk (Profinite.continuousMapRingObj E))
+      ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing l E))
+    exact h
+  · have h := hnat
+      (Mon.mk (Profinite.continuousMapRingObj E))
+      (Mon.mk (Profinite.padicAlgClRingObj l))
+      ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (Profinite.padicSubfieldCondensedRingToPadicAlgCl l E))
+    exact h
+  · have hCY := (completedCondensedIntegral.{u} Y l E π hπ).1
+    have hCX := (completedCondensedIntegral.{u} X l E π hπ).1
+    let cY := hCY.choose
+    let eY := hCY.choose_spec.choose
+    have hY := hCY.choose_spec.choose_spec.1
+    let hcY := hCY.choose_spec.choose_spec.2.some
+    let cX := hCX.choose
+    let eX := hCX.choose_spec.choose
+    have hX := hCX.choose_spec.choose_spec.1
+    let hcX := hCX.choose_spec.choose_spec.2.some
+    let P := (upperStarFromPoint Y).mapMon
+    let Q := (upperStarFromPoint X).mapMon
+    let H := ((f)^*[Ab.{u + 1}]).mapMon
+    let e : P ⋙ H ≅ Q :=
+      (Functor.mapMonCompIso (F := upperStarFromPoint Y)
+        (G := (f)^*[Ab.{u + 1}])).symm ≪≫
+        Functor.mapMonNatIso (upperStarFromPointComp f)
+    let A := Mon.mk (Profinite.padicIntegersRingObj.{u} l E)
+    let T (n : ℕ) := Mon.mk (Profinite.continuousMapRingObj.{u}
+      (completedResidue l E π n))
+    let t (n : ℕ) : T (n + 1) ⟶ T n :=
+      Mon.Hom.mk ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (completedResidueTransition l E π n))
+    let r (n : ℕ) : A ⟶ T n :=
+      Mon.Hom.mk ((sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (completedReduction l E π n))
+    have hp : Nonempty (IsLimit (H.mapCone cY)) :=
+      completedLimitTransport P Q H e T t r cY cX eY eX hY hX hcX
+    exact ⟨cY, eY, hY, ⟨hcY⟩, hp⟩
+  · have : IsSifted (PadicAlgCl.FiniteIntermediateField l) := IsFiltered.isSifted
+    refine ⟨siftedRingCoconeIsColimit _ ?_⟩
+    change IsColimit (((f)^*[Ab.{u + 1}]).mapCocone (padicAlgClRingObjCocone Y l))
+    exact isColimitOfPreserves ((f)^*[Ab.{u + 1}])
+      (isColimitPadicAlgClRingObjCocone Y l)
+
 
 /-- The usual continuous reduction of p-adic integers to Z/l^(n+1).
 Source: blueprint comparison with completed coefficients, final paragraph

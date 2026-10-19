@@ -84,12 +84,10 @@
    }
   },
   {
-   "text": "For pullback compatibility, first compute the inverse image of a representable. Let $f:X\\to Y$, let $V$ be an object of $Y_{\\mathrm{proét}}$, and let $G$ be a sheaf of sets on $X_{\\mathrm{proét}}$. Subcanonicity is [det-pe-topos-functoriality-site]. The adjunction and the formula for direct image in [det-pe-topos-functoriality-inverse-image], together with [lem-galois-yoneda-hom-bijection], give naturally in $G$ and $V$:\n$$\\operatorname{Hom}(f^{-1}h_V,G)\\cong\\operatorname{Hom}(h_V,f_*G)\\cong(f_*G)(V)=G(V\\times_YX)\\cong\\operatorname{Hom}(h_{V\\times_YX},G).$$\nApply [lem-galois-yoneda-fully-faithful] to the opposite of the category of sheaves to obtain $f^{-1}h_V\\cong h_{V\\times_YX}$, naturally in $V$. In particular this identification takes a morphism between representing objects to its base change.",
+   "text": "For each reduction, integral inclusion and finite-field leg, apply naturality of the monoidal comparison f^* p_Y^* ≅ p_X^* from [sk-def-sfb-pullback-from-point-comp]. The mapMon composition and natural-isomorphism comparisons have underlying components equal to the original comparison components, so their naturality gives precisely the three displayed squares for ring objects of [sk-def-sfb-pulled-back-coefficients]. This is the private generic Lean helper completedRingComparisonNaturality; no separate representable calculation is needed here.",
    "uses": [
-    "det-pe-topos-functoriality-site",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-galois-yoneda-hom-bijection",
-    "lem-galois-yoneda-fully-faithful"
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-pulled-back-coefficients"
    ],
    "elementary": true,
    "source": {
@@ -98,10 +96,9 @@
    }
   },
   {
-   "text": "Apply step 6 to $V=Y[\\cO_E]$ and $V_n=\\coprod_{T_n}Y$ of [det-prop-sfb-qlbar-colimit-x-integral-limit]. The test-object formula [sk-def-sfb-pullback-from-point] gives\n$$Y[\\cO_E]\\times_YX=(\\operatorname{Spec}LC(\\cO_E,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}Y)\\times_YX\\cong\\operatorname{Spec}LC(\\cO_E,\\mathbf Z)\\times_{\\operatorname{Spec}\\mathbf Z}X=X[\\cO_E].$$\nAlso $V_n\\times_YX\\cong\\coprod_{T_n}X$, by the open-and-closed decomposition defining the coproduct. Naturality in $V$ in step 6 takes every reduction projection $Y[\\cO_E]\\to V_n$ to $X[\\cO_E]\\to\\coprod_{T_n}X$. Therefore $f^{-1}$ of the integral-limit cone is the integral-limit cone over $X$, which is a limit by the integral-limit lemma. The identification on $\\cO_{E,X}$ is the component of the natural isomorphism $f^{-1}p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp]: both are induced by $Y[S]\\times_YX\\cong X[S]$, at $S=\\cO_E$. Indeed the right adjoints have section formulas $S\\mapsto G(Y[S]\\times_YX)$ and $S\\mapsto G(X[S])$ by [sk-def-sfb-pullback-from-point], and this test-object identification is the identification of those right adjoints that induces the composition isomorphism. The same naturality applies to addition, multiplication, zero and one, so the first comparison commutes with inverse image as a ring comparison. This proves preservation of this particular inverse limit, without asserting preservation of all inverse limits.",
+   "text": "Take normalized integral limit cones over Y and X supplied by completedCondensedIntegral (the integral comparison of step 1, from [det-prop-sfb-qlbar-colimit-x-integral-limit]). The comparison [sk-def-sfb-pullback-from-point-comp], lifted to ring objects, is an isomorphism between their inverse diagrams. Its component at the integral ring and the two vertex identifications give an isomorphism from the pulled-back Y-cone vertex to the X-cone vertex. To check every leg, cancel the image of the Y vertex identification, use both normalization equations, then apply naturality at the reduction. Transport IsLimit along the resulting cone and diagram isomorphisms. This is the private generic helper completedLimitTransport. It uses no preservation of arbitrary inverse limits.",
    "uses": [
     "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sfb-pullback-from-point",
     "sk-def-sfb-pullback-from-point-comp"
    ],
    "elementary": true,
@@ -111,12 +108,11 @@
    }
   },
   {
-   "text": "For the rationalization and finite-subextension colimit, [det-pe-topos-functoriality-inverse-image] gives preservation of colimits by $f^{-1}$. The monoidal natural isomorphism $\\alpha:f^{-1}p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp] respects the inclusion $\\underline{\\cO_E}\\to\\underline E$, multiplication by $\\ell$, and every inclusion $\\underline E\\to\\underline F\\to\\underline{\\Qlb}$. Thus it identifies the diagrams and cocones over $Y$ and $X$ used in steps 2 and 4. More explicitly the $m$-th rationalization map $\\ell^{-m}\\varphi_Y$ is taken to $\\ell^{-m}\\varphi_X$ of [det-prop-sfb-qlbar-colimit-x-invert-ell], and each finite-field leg $p_Y^*j_E$ is taken to $p_X^*j_E$. By uniqueness of the induced maps from a colimit, the two pullbacks are the same comparisons as over $X$. Monoidality of $\\alpha$ gives the compatibility of their ring structures.",
+   "text": "The integral-inclusion and finite-field-leg squares were obtained in step 6 directly from [sk-def-sfb-pullback-from-point-comp]. For the finite-subfield cocone, apply the colimit-preserving inverse image functor of [det-pe-topos-functoriality-inverse-image] to the already available additive colimit isColimitPadicAlgClRingObjCocone. Upgrade this to a ring-object colimit using the same siftedRingCoconeIsColimit helper as in the algebraic-closure comparison (steps 3–5). Tensoring preserves colimits by [sk-def-sfb-sheaf-tensor], and the finite-subextension index is filtered, hence sifted. This proves the final pullback colimit clause.",
    "uses": [
-    "det-pe-topos-functoriality-inverse-image",
     "sk-def-sfb-pullback-from-point-comp",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "def-sfb-qlbar-subextension-to-qlbar"
+    "det-pe-topos-functoriality-inverse-image",
+    "sk-def-sfb-sheaf-tensor"
    ],
    "elementary": true,
    "source": {
@@ -151,17 +147,14 @@
   "def-sfb-qlbar-coefficient-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-sheaf-tensor",
-  "det-pe-topos-functoriality-site",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-galois-yoneda-fully-faithful",
   "sk-def-sfb-pullback-from-point-comp",
+  "det-pe-topos-functoriality-inverse-image",
   "def-weil-l-adic-numbers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "Four comparison paragraphs, with explicit point-colimit, ring, and pullback arguments; Stacks Tags 001P and 0038 supply the generic categorical tools."
+  "place": "Four comparison paragraphs, with explicit point-colimit, ring, and pullback arguments; Stacks Tags 001P and 0038 supply the generic categorical tools. N3 stage 3: pullback steps 6–8 use monoidal naturality, transport of normalized integral cones, and the existing additive finite-subfield colimit; the other comparison steps remain the plan for the four retained holes."
  },
  "mathlib_searches": [
   {
@@ -501,26 +494,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "G5",
+  "reviewer": "C-c04ed",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261019T002610-L-2158234",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.completedCondensedAlgebraicClosure",
-   "AlgebraicGeometry.ProEtale.completedCondensedIntegral",
-   "AlgebraicGeometry.ProEtale.completedCondensedPadicIntegral",
-   "AlgebraicGeometry.ProEtale.completedCondensedPadicRational",
-   "AlgebraicGeometry.ProEtale.completedCondensedPullback",
-   "AlgebraicGeometry.ProEtale.completedCondensedRational"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.completedCondensedIntegral",
-   "AlgebraicGeometry.ProEtale.completedCondensedPadicIntegral",
-   "AlgebraicGeometry.ProEtale.completedCondensedPadicRational",
-   "AlgebraicGeometry.ProEtale.completedCondensedPullback",
-   "AlgebraicGeometry.ProEtale.completedCondensedRational"
-  ]
+  "landing": "20261019T231250-L-567498",
+  "kind": "interface",
+  "note": "independent cc review: completedCondensedPullback proof (naturality of upperStarFromPointComp via mapMon + cone transport of completedCondensedIntegral cones + isColimitOfPreserves) against node sk-prop-sfb-qlbar-colimit-x steps 6–8; abbrev→def completedCoefficient against coord/changes/completedCoefficient.md and all 14 direct importers compiled"
  }
 }
