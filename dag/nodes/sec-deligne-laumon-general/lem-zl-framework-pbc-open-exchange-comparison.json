@@ -26,7 +26,11 @@
   "def-cbc-completed-exchange-map",
   "def-weil-weil-sheaf-complex",
   "def-kun-topological-krull-dimension",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-zl-compactification-open-diagram",
+  "def-zl-framework-pbc-open-comparison-data",
+  "def-zl-open-diagram-comparison-transport",
+  "def-zl-framework-open-exchange"
  ],
  "proof": [
   {
@@ -546,5 +550,34 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-55e2fb980 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item statement (unchanged; created by Q03), all 13 steps, the current statements and blueprint_updates of all 34 cited nodes, the parent sk-l-dl-general-quasifinite steps 3-4 and its unit, main-20261015 thm-cbc-qbar and its proof, thm-cbc-complete-proetale.proof, and Stacks 09BP (lemma-j-shriek-limits). The base-change map is exactly the ordered completed exchange of def-cbc-completed-exchange-map at the completed coefficient A_T. Steps 1-13 hold. The hypotheses are checked: T and T_V are Noetherian and finite-dimensional, j is quasi-compact, f is separated with no absolute separatedness, there is no finite-Tor restriction, and the witnesses come from Step 1. The 09BP kernel argument is correct. The Step 8 cancellation is right: T d_t^{-1} = q_t^{-1}, so Ex^pbc S = T J(Ex^sf). There are no new nodes and no SGA citations. One fault, C1/C4: Steps 4 and 6 relied on Step 2, which covers only restriction along ring isomorphisms (lem-weil-pbc-flat-ringed-diagram-restriction requires flatness). They need restriction along the non-flat maps R -> A_n, to identify the framework levels Res_n Rp_{*,A_n} j_!K_n and the finite proper mates with the PBC tower evaluations and with the constant-R tower e_•. Repaired by citing lem-pur-completed-coefficient-pushforward-comparison (strict-diagram comparison F_R V_n = V_n F_n) and lem-pur-ringed-coefficient-restriction-counit (counit compatibility with no flatness assumed; units follow by the triangle identities). Both are added to proof_deps and to split_report.tool_uses (unit sk-lem-sf-mate). Both closures are batch-5 clean and create no cycle, and both steps stay under 2000 characters. Batch-5 check: lem-cbc-integral-compact-support-uniform-restriction is accepted. It proves that Rp_*j_! preserves constructibility, which neither assumption gives and which is not a step of their proofs. Its flagged path ends in lem-trf-additive-homotopy-category-triangulated, a Mathlib leaf saying the homotopy category of an additive category is triangulated. lem-trf-integral-pullback-comparison-realization is also accepted as generic coherence (the Q60 ruling). All other sec-trace-formula and sec-poincare-duality nodes in the closure are generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison",
+  "declaration": "WeilConjectures.ZlFrameworkPbc.openExchangeComparison",
+  "declarations": [
+   "WeilConjectures.ZlFrameworkPbc.openExchangeComparison",
+   "WeilConjectures.ZlFrameworkPbc.diagramNaturality",
+   "WeilConjectures.ZlExchange.fixedPairSupportComparison",
+   "WeilConjectures.ZlExchange.pastedExchangeComparison",
+   "WeilConjectures.ZlFrameworkPbc.frameworkOpenRestrictionCoherence",
+   "WeilConjectures.ZlFrameworkPbc.descendedFrobenius",
+   "WeilConjectures.ZlFrameworkPbc.frobeniusWeilSupportComparison",
+   "WeilConjectures.ZlFrameworkPbc.frobeniusWeilSupportComparisonPair"
+  ],
+  "file": "lean/Sheaf/Paper/ZlFrameworkPbcOpenExchangeComparison.lean",
+  "statement": "theorem openExchangeComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] : ∃ S : FdCoefficientComparisonSystem.{u} l Ω, ∃ N : PullSystem l Ω S, FdComparisonSchemeCoherence l Ω S ∧ ∀ G : OpenDiagram D l, (G.u.IsOver (Spec (.of D.k)) ∧ G.v.IsOver (Spec (.of D.k))) ∨ (IsIso G.u ∧ IsIso G.v) → ∃ Q : SquarePacket D l hl Ω G S, (∀ E, (Q.data.integral E).pullV = N.comparison G.v E ∧ (Q.data.integral E).pullU = N.comparison G.u E) ∧ (∀ E, (Q.data.integral E).comparisons.Commutes (Q.data.integral E).sfExchange (Q.data.integral E).pbcExchange) ∧ (∀ E, (Q.data.finiteComparisons E).Commutes (Q.data.sfExchange.τ E) (Q.data.pbcExchange.τ E)) ∧ Q.data.pairComparisons.Commutes Q.data.sfPairExchange Q.data.pbcPairExchange",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The listed declarations state the exchange comparison, whole-diagram naturality at all three stages, actual identity and successive-open coherence, and the descended geometric-Frobenius fixed-pair compatibility, with generic algebraic helpers. The auxiliary data and independent framework exchange are in four new definition nodes. No absolute separatedness, uniform finite-Tor bound, or exchange invertibility is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f69e8438d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Rebased re-push of the PASSed bb7f17c4, which was never landed (superseded at 11:48:27). All 5 Lean modules, the item and 4 new def-node JSONs, and the report are byte-identical to bb7f17c4, so the earlier substance review stands: Ex_sf is built independently in def-zl-framework-open-exchange, Ex_pbc is pinned to completedCompactSupportExchange, and identity/iterated/Frobenius coherence is stated on actual diagrams. The item node differs from side-live only in lean/stmt_deps. The 19 dependency records in the snapshot match side-live, and no Zl* module or namespace clash exists. nt_compile --json of all 5 files: at load ~115 and ~130, ZlFrameworkPbcOpenComparisonData timed out after 60 s (load). At load ~65 the unmodified delivery was clean: 3.6, 14.9, 41.6, 41.8, 33.7 s. Profile: kernel checking of the SfPullFamily structure and the PullNormalization auxiliaries; genInjectivity/genSizeOf are already off, and linter-off gives no gain (41.0 s), so no speed-up FIX. Land at lower load. Advisory as before: new def nodes use owners outside their stmt_deps."
  }
 }
