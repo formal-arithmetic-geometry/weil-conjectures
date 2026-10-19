@@ -21,10 +21,11 @@
  ],
  "proof": [
   {
-   "text": "For any of the stated coefficient rings, [sk-def-sfb-module-lower-shriek] states that the module-object functor $j_!$ is exact and left adjoint to $j^*$. Apply [lem-sf-exact-functor-derived-triangulated] to this additive exact functor. It gives the ambient triangulated functor $J=D(j_!)$ on the unbounded derived categories. Exactness also gives, directly on a complex representative,\n$$H^r(JK)=\\ker(j_!d^r)/\\operatorname{im}(j_!d^{r-1})\\cong j_!(\\ker d^r/\\operatorname{im}d^{r-1})=j_!H^r(K).$$\nIndeed $j_!$ preserves the kernels and cokernels defining the image and its quotient. Thus $J$ preserves any cohomological vanishing interval; this calculation applies even when $K$ is unbounded.",
+   "text": "The exact additive module-object extension by zero induces the triangulated functor J = D(j_!) by [lem-sf-exact-functor-derived-triangulated]. Its existing cohomology comparison identifies H^n(J K) with j_! H^n(K), so the existing bounded_mapDerivedCategory_obj lemma preserves boundedness. Use the derived adjunction already constructed from [sk-def-sfb-module-lower-shriek]; its left adjoint J preserves colimits of every discrete shape by [lem-weil-pbc-left-adjoint-preserves-colimits], including empty and larger-indexed existing coproducts.",
    "uses": [
     "sk-def-sfb-module-lower-shriek",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
    "source": {
@@ -33,11 +34,10 @@
    }
   },
   {
-   "text": "By [det-def-localizing-closure-existence], clause (1), applied on $T=U$ and on $T=X$ to the commutative condensed ring $\\Lambda$, both ambient derived categories $D(\\Mod_{\\Lambda_T})$ have all small direct sums, and the sum of a small family $(K_s)_{s\\in I}$ is represented by the termwise coproduct complex $(\\bigoplus_sK_s)^r=\\bigoplus_sK_s^r$ with the termwise coprojections. No boundedness or constructibility assumption is imposed on the family. The sheaf-level adjunction $j_!\\dashv j^*$ of [sk-def-sfb-module-lower-shriek] and [lem-weil-pbc-left-adjoint-preserves-colimits], applied to the small discrete indexing category $I$, give\n$$j_!\\Bigl(\\bigoplus_{s\\in I}K_s^r\\Bigr)\\cong\\bigoplus_{s\\in I}j_!K_s^r,$$\nthe comparison identifying the target coprojections with the $j_!\\iota_s^r$, where $\\iota_s^r$ are the degree-$r$ coprojections. Functoriality gives $(j_!d^r)(j_!\\iota_s^r)=(j_!\\iota_s^{r+1})(j_!d_s^r)$; equality on every coprojection proves compatibility with the differentials. Thus the comparisons form an isomorphism of complexes $J(\\bigoplus_sK_s)\\cong\\bigoplus_sJ(K_s)$ compatible with the coprojections, hence $J$ preserves all small direct sums in the derived categories. For $I=\\varnothing$ both complexes are zero, and the exact additive $j_!$ sends zero to zero.",
+   "text": "Apply [det-def-localizing-closure-existence] to the generating predicates on U and X. It supplies the actual localizing closures as replete triangulated subcategories and supplies the ambient small coproducts. For the final restriction, closure under object-universe existing coproducts implies closure under each smaller Discrete I by the equivalence with Discrete (ULift I). Mathlib full-subcategory inclusions therefore create and preserve these coproducts.",
    "uses": [
     "det-def-localizing-closure-existence",
-    "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "sk-def-localizing-closure"
    ],
    "elementary": false,
    "source": {
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "Let $K\\in\\Dctf(U,\\Lambda)$. By [sk-def-sfb-constructible] there are integers $a\\le b$ with $H^r(K)=0$ for $r\\notin[a,b]$, and every $H^r(K)$ is a constructible $\\Lambda_U$-module in the sense of that definition: finite constant local models on the strata of a finite stratification of $U$ by constructible locally closed subschemes. By step 1, $H^r(JK)\\cong j_!H^r(K)$ for every $r$. Hence $H^r(JK)=0$ for $r\\notin[a,b]$, and by [lem-sf-open-extension-zero-constant-model-constructible] each $j_!H^r(K)$, and so each isomorphic module $H^r(JK)$, is constructible on $X$ in the same constant-local-model sense (a finite constant local model transfers along an isomorphism of $\\Lambda_X$-modules by composing the local isomorphisms). Thus $JK\\in\\Dbc(X,\\Lambda)$ in the sense of [sk-def-sfb-constructible], for the same coefficient ring $\\Lambda$ and in the same ambient category.",
+   "text": "For a bounded constructible finite-Tor object K, boundedness follows from step 1. The standing finite-type scheme U is qcqs, so its constant-model constructibility hypothesis supplies an actual Scheme.Stratification of each H^n(K). Copy the stratification fields into a finite locally closed stratification, retaining the constructibility proof separately. Apply [lem-sf-open-extension-zero-constant-model-constructible] to those fields and the finite constant local models. That declaration gives constructibility of j_!H^n(K). Transfer the same stratification and scalar models along the inverse-image images of the cohomology isomorphism from step 1. This gives constantModelBoundedConstructible for J K.",
    "uses": [
     "sk-def-sfb-constructible",
     "lem-sf-open-extension-zero-constant-model-constructible"
@@ -58,11 +58,10 @@
    }
   },
   {
-   "text": "Choose a Tor interval $[a,b]$ for $K$, meaning that $H^r(K\\otimes^L_{\\Lambda_U}N)=0$ for $r\\notin[a,b]$ for every module sheaf $N$ on $U$, as in [sk-def-sfb-constructible]. Let $M$ be any module sheaf on $X$, placed in degree zero. By [sk-prop-sfb-cartesian-coefficients], $j^*$ is the exact inverse image, so its derived functor sends $M[0]$ to $(j^*M)[0]$. Specialize [det-lem-int-tensor-projection] to the locally closed immersion with open part $u=j$ and closed part $i=\\operatorname{id}_X$ (thus $\\overline S=X$). The identity direct and inverse images are identity functors, giving\n$$(JK)\\otimes^L_{\\Lambda_X}M\\cong j_!(K\\otimes^L_{\\Lambda_U}j^*M).$$\nThe Tor hypothesis applies to the sheaf $j^*M$. The exactness calculation in step 1 therefore identifies the degree $r$ cohomology on the right with $j_!H^r(K\\otimes^L j^*M)$, which is zero outside $[a,b]$. Since $M$ was arbitrary, this is precisely finite Tor amplitude for $JK$. Together with step 3 it gives $JK\\in\\Dctf(X,\\Lambda)$. This uniform calculation covers finite, integral and field coefficients, and requires neither a geometric-stalk conservativity assertion nor an equality $\\Dctf=\\Dbc$ at an integral stage.",
+   "text": "Use the existing proved source-library open projection comparison isIso_openImmersionProjectionComparison (WeilConjectures.PoincareDuality.ProjectionFormula) for arbitrary commutative condensed coefficients; this is the open special case of the argument in the source locally closed projection-formula argument. Given a Tor interval [a,b] for K and any module M on X, the exactness comparison Lj^*(M[0]) ≅ D(j^*)(M[0]) ≅ (j^*M)[0] identifies the Tor test object. The projection comparison yields J(K tensor Lj^*(M[0])) ≅ J K tensor M[0]. The source Tor hypothesis and homologyConcentratedIn_mapDerivedCategory_obj show the first object concentrated in [a,b]; transfer across the isomorphism. The same interval works for every M, without an integral Dctf=Dbc assertion.",
    "uses": [
     "sk-def-sfb-constructible",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-lem-int-tensor-projection"
+    "sk-def-sfb-module-lower-shriek"
    ],
    "elementary": false,
    "source": {
@@ -71,10 +70,11 @@
    }
   },
   {
-   "text": "Apply [det-proper-image-localizing-principle] with $\\mathcal T=D(\\Mod_{\\Lambda_U})$, $\\mathcal T'=D(\\Mod_{\\Lambda_X})$, $F=J$, $\\mathcal G=\\Dctf(U,\\Lambda)$ and $\\mathcal G'=\\Dctf(X,\\Lambda)$. The ambient categories have all small direct sums by step 2; $J$ is triangulated by step 1 and preserves those sums by step 2. Step 4 gives $J(\\mathcal G)\\subseteq\\mathcal G'\\subseteq\\Loc(\\mathcal G')$, where the second inclusion is part of the definition [sk-def-localizing-closure]. All hypotheses of the cited principle hold. Its conclusion gives the required restricted functor and says that it is exact and preserves direct sums; these are the ambient sums, since both localizing closures are full triangulated subcategories closed under them.",
+   "text": "Implement directly the defining intersection argument of [sk-def-localizing-closure]. The inverse image under J of the target localizing closure is triangulated and replete by Mathlib inverse-image instances. It is closed under every existing object-universe coproduct because J is a left adjoint: transfer the target closure property across preservesColimitIso. Step 4 maps every generator into the target generators and hence into their closure. Evaluating membership in the source intersection on this inverse-image candidate gives the required object map h. The canonical lift is triangulated by the Mathlib lift instance. Both inclusions create and preserve the smaller-indexed coproducts by step 2; their composite with J preserves them, and the target inclusion reflects them, proving preservation by the lift.",
    "uses": [
-    "det-proper-image-localizing-principle",
-    "sk-def-localizing-closure"
+    "sk-def-localizing-closure",
+    "det-def-localizing-closure-existence",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
    "source": {
@@ -86,19 +86,16 @@
  "proof_deps": [
   "sk-def-sfb-module-lower-shriek",
   "lem-sf-exact-functor-derived-triangulated",
-  "det-def-localizing-closure-existence",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "det-def-localizing-closure-existence",
+  "sk-def-localizing-closure",
   "sk-def-sfb-constructible",
-  "lem-sf-open-extension-zero-constant-model-constructible",
-  "sk-prop-sfb-cartesian-coefficients",
-  "det-lem-int-tensor-projection",
-  "det-proper-image-localizing-principle",
-  "sk-def-localizing-closure"
+  "lem-sf-open-extension-zero-constant-model-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
-  "place": "four proof paragraphs, with the module-object projection-formula argument for finite Tor amplitude"
+  "place": "Formal properties, Constructibility, Finite Tor amplitude and Localizing categories; X5 Lean implementation using the proved open projection comparison and the closure intersection directly"
  },
  "mathlib_searches": [
   {
@@ -217,14 +214,7 @@
  },
  "tool_uses": [
   "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sfb-dc-open-lower-shriek-preserves",
-  "sk-prop-sfb-cartesian-coefficients",
-  "det-lem-int-tensor-projection",
-  "det-proper-image-localizing-principle",
   "det-def-localizing-closure-existence"
  ],
  "reviewed": {
@@ -264,5 +254,15 @@
   "group": "Q89",
   "result": "pass",
   "note": "Every hypothesis and conclusion clause matches node det-proper-image-localizing-open and its blueprint source (separated finite-type k-schemes, open k-immersion j, char p>0 with p≠ℓ). IsLocalizingAdmissibleCoefficient (§1(B) module for sk-def-localizing-closure) lists exactly the six admissible rings as Mon-isomorphism classes of C(-,T) condensed rings. Q̄_ℓ uses all continuous maps, as sk-def-sfb-condensed-ring prescribes; the upstream colimit object (IsFinitenessCoefficient) is rightly not used. Dctf is constantModelBoundedConstructible ⊓ finiteTorAmplitude (finite-constant-model sense), the same predicate localizingClosureProEtale closes. D(j_!) is the recorded exact module-object functor's mapDerivedCategory. Clause 2: PreservesColimitsOfShape (Discrete I) for all I : Type (u+1), the hom universe (objects u+2), empty family included. Clause 3: the canonical full-subcategory lift is IsTriangulated and sum-preserving; the closures' IsTriangulated witnesses are conclusions, not hypotheses. Universes checked by #check; no forced equalities. Edge cases (U empty, j=id, K=0, n=0 zero ring, non-regular coefficients) covered. No hollow definitions; only the theorem is sorry (#print axioms); docstrings carry source place, blueprint id and the 5 proof steps; item statement and deps unchanged; lean.statement verbatim. nt_compile.py --json on both modules: rc 0, no diagnostics (2-3 s each); probe compiles. Non-blocking remarks: (1) the §1(B) record replaces N2's closure record, so localizingClosureProEtale, localizingClosure and IsLocalizingSubcategory leave every node's lean.declarations and LocalizingClosure.lean becomes unowned; the new module still re-exports the closure, but the maintainer may want to re-add those names (a stage-2 apply-fixes cannot change a dependency record). (2) The predicate uses the Type-0 continuousMapRingObj instead of the recorded continuousCoefficientRingObj; harmless because the predicate is up to isomorphism."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261019T034346-L-425219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
