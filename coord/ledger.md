@@ -17502,3 +17502,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:14 L: merged deliver/NM/lem-sfb-constructible-cocone-hom-surj (stage 2; reviewer PASS; parallel immutable checks)
 - 17:15 L: merged deliver/NH/lem-coef-finite-exceptional (stage 2; reviewer PASS; parallel immutable checks)
 - 17:15 L: returned deliver/NJ/fix-lem-exchanges (reviewer RETURN: L: independent stage-2 immutable head bc5774b4da5c: Compile clean (nt_compile --json 10.5 s, no warnings); statement ver)
+- 17:22 L: returned deliver/NA/lem-trf-regular-hilbert-coefficient-data (reviewer RETURN: I read the item in full: 9 steps, statement byte-identical to base. I read all 4 new nodes, every cited statement (jet-d)
