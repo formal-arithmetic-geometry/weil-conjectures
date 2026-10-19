@@ -74,7 +74,13 @@ theorem fixedScheme_relations (c : TrfCohomologicalCorrespondence F l E n hl X K
     c.fixedInclusion ≫ c.toProduct = c.fixedProjection ≫ pullback.diagonal X.hom ∧
       c.fixedInclusion ≫ c.c₁.left = c.fixedProjection ∧
       c.fixedInclusion ≫ c.c₂.left = c.fixedProjection := by
-  sorry
+  have hc : c.fixedInclusion ≫ c.toProduct =
+      c.fixedProjection ≫ pullback.diagonal X.hom := pullback.condition
+  refine ⟨hc, ?_, ?_⟩
+  · simpa [toProduct, Category.assoc] using
+      congrArg (fun f ↦ f ≫ pullback.fst X.hom X.hom) hc
+  · simpa [toProduct, Category.assoc] using
+      congrArg (fun f ↦ f ≫ pullback.snd X.hom X.hom) hc
 
 end TrfCohomologicalCorrespondence
 
@@ -122,7 +128,36 @@ theorem trfEndomorphismFixedScheme_equalizer {F : FiniteFieldDatum.{u}}
           g ≫ trfEndomorphismFixedInclusion X h) ∧
       ((∃! g : T ⟶ trfEndomorphismFixedScheme X h,
         g ≫ trfEndomorphismFixedInclusion X h = t) ↔ t ≫ h.left = t) := by
-  sorry
+  have hproj (g : T ⟶ trfEndomorphismFixedScheme X h) :
+      g ≫ trfEndomorphismFixedInclusion X h =
+        g ≫ pullback.snd (trfFixedGraphMap X h) (pullback.diagonal X.hom) := by
+    have hc := congrArg (fun f ↦ g ≫ f ≫ pullback.fst X.hom X.hom)
+      (pullback.condition (f := trfFixedGraphMap X h) (g := pullback.diagonal X.hom))
+    simpa [trfEndomorphismFixedInclusion, trfFixedGraphMap, Category.assoc] using hc
+  have hfixed (g : T ⟶ trfEndomorphismFixedScheme X h) :
+      (g ≫ trfEndomorphismFixedInclusion X h) ≫ h.left =
+        g ≫ trfEndomorphismFixedInclusion X h := by
+    have hc := congrArg (fun f ↦ g ≫ f ≫ pullback.snd X.hom X.hom)
+      (pullback.condition (f := trfFixedGraphMap X h) (g := pullback.diagonal X.hom))
+    simp only [Category.assoc, trfFixedGraphMap, pullback.lift_snd,
+      pullback.diagonal_snd, Category.comp_id] at hc
+    simpa only [trfEndomorphismFixedInclusion, trfFixedGraphMap, Category.assoc] using
+      hc.trans (hproj g).symm
+  refine ⟨hfixed, ?_⟩
+  constructor
+  · rintro ⟨g, hg, _⟩
+    simpa [hg] using hfixed g
+  · intro ht
+    have hc : t ≫ trfFixedGraphMap X h = t ≫ pullback.diagonal X.hom := by
+      apply pullback.hom_ext
+      · simp [trfFixedGraphMap, Category.assoc]
+      · simpa [trfFixedGraphMap, Category.assoc] using ht
+    refine ⟨pullback.lift t t hc, ?_, ?_⟩
+    · exact pullback.lift_fst _ _ _
+    · intro g hg
+      apply pullback.hom_ext
+      · simpa [trfEndomorphismFixedInclusion] using hg
+      · simpa using (hproj g).symm.trans hg
 
 end WeilConjectures
 
@@ -173,7 +208,20 @@ identities. For the empty index type the same argument is the initial-scheme ide
 Finiteness is the stated convention; no reduction of the structure sheaf occurs. -/
 theorem isIso_clopenConnectedComponentsMap (F : Scheme.{u})
     (hF : F.HasFiniteClopenConnectedComponents) : IsIso (F.clopenConnectedComponentsMap hF) := by
-  sorry
+  apply (Cofan.nonempty_isColimit_iff_isIso_sigmaDesc
+    (Cofan.mk F (fun β ↦ (F.clopenConnectedComponentOpen hF β).ι))).mp
+  apply nonempty_isColimit_cofanMk_of
+  · simp only [Scheme.Opens.opensRange_ι]
+    change ⨆ β, F.clopenConnectedComponentOpen hF β = ⊤
+    apply eq_top_iff.mpr
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨ConnectedComponents.mk x, rfl⟩
+  · intro β γ hβγ
+    simp only [Scheme.Opens.opensRange_ι]
+    change Disjoint (F.clopenConnectedComponentOpen hF β)
+      (F.clopenConnectedComponentOpen hF γ)
+    exact TopologicalSpace.Opens.coe_disjoint.mp
+      ((Set.disjoint_singleton.mpr hβγ).preimage ConnectedComponents.mk)
 
 /-- The canonical identification of the component coproduct with the scheme. Its inverse
 is uniquely determined by the canonical map, rather than chosen from arbitrary data.

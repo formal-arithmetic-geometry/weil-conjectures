@@ -17156,3 +17156,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/C6/Sheaf.AlgebraicGeometry.OpenImmersionHigherDirectImages (stage 3; reviewer PASS; first push; landing 20261019T093314-L-2293030 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C7/Sheaf.CategoryTheory.AdjointMate (stage 3; reviewer PASS; first push; landing 20261019T093315-L-2293444 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/C8/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology (stage 3; reviewer PASS; first push; landing 20261019T093317-L-2293756 (interface); batch 20261019T093237; modules 5; new nodes 4; change records: coord/changes/ell-adic-localizing-interface-context.md)
+- 09:33 L: merged deliver/C8/Sheaf.Paper.TraceFixedScheme (stage 3; reviewer PASS; first push; landing 20261019T093318-L-2294228 (proof); batch 20261019T093237; modules 1; new nodes 0)
