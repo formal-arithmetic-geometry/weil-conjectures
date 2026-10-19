@@ -1,0 +1,126 @@
+{
+ "id": "def-trf-affine-diagonal-module-data",
+ "kind": "definition",
+ "title": "K-flat scalar extension and the affine diagonal module",
+ "status": "split",
+ "statement": "For a homomorphism $\\varphi:A\\to B$ of commutative rings and ordinary unbounded derived categories [def-weil-abstract-derived-category], define $E_\\varphi:D(A)\\to D(B)$ by applying the total left derived functor construction to ordinary extension of scalars. This is the K-flat representative model of derived scalar extension [def-zl-ring-derived-scalar-extension]: on a K-flat representative $F$ use $B\\otimes_A F$, and on maps use extension of scalars followed by localization. Separately, for commutative rings $R,A$ and an $R$-algebra structure on $A$, put $B=A\\otimes_R A$. Define the diagonal object $\\Delta_{R,A}$ in $D(B)$ to be the complex concentrated in degree zero with module $A$, restricted from its regular $A$-module structure along multiplication $\\mu:B\\to A$, $a\\otimes a\\prime\\mapsto aa\\prime$. No Noetherian, flatness, finiteness or nonzero hypotheses are part of these definitions.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-zl-ring-derived-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra), algebraic diagonal and first pullback; K-flat scalar extension from more-algebra.tex, Tag 06Y0 (lemma-K-flat-quasi-isomorphism)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total derived coinduction and extension of scalars for modules and the multiplication diagonal module",
+   "results": "{\"t\": \"2026-10-18T23:37:25Z\", \"tool\": \"leansearch\", \"query\": \"The total derived coinduction and extension of scalars for modules and the multiplication diagonal module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.coextendScalars\", \"ModuleCat.instIsRightAdjointCoextendScalars\", \"ModuleCat.CoextendScalars.smul_apply\", \"ModuleCat.CoextendScalars.obj'\", \"ModuleCat.CoextendScalars.mulAction\", \"ModuleCat.CoextendScalars.isModule\", \"comonadicExtendScalars\"], \"digest\": \"ed4fabdc865d86c5\"}",
+   "date": "2026-10-18",
+   "verdict": "Ordinary scalar functors only; reuse the existing project derived constructions, without duplicating Lean definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.coextendScalars, ModuleCat.extendScalars",
+   "results": "{\"t\": \"2026-10-18T23:37:26Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.coextendScalars, ModuleCat.extendScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Ordinary scalar functors only; reuse the existing project derived constructions, without duplicating Lean definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoinduction|relativeDualizingDerivedExtension|relativeDualizingModuleDiagonal",
+   "results": "{\"t\": \"2026-10-18T23:37:56Z\", \"tool\": \"grep\", \"query\": \"derivedCoinduction|relativeDualizingDerivedExtension|relativeDualizingModuleDiagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Ordinary scalar functors only; reuse the existing project derived constructions, without duplicating Lean definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoinduction|relativeDualizingDerivedExtension|relativeDualizingModuleDiagonal in WeilConjectures and lean/Sheaf",
+   "results": "No match in WeilConjectures. Existing definitions in Sheaf.Algebra.Homology.DerivedCoinductionAdjunction (derivedCoinduction) and Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison (relativeDualizingDerivedExtension, relativeDualizingModuleDiagonal).",
+   "date": "2026-10-18",
+   "verdict": "Exact existing declarations; existing:true records use their present modules."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoinduction|relativeDualizingDerivedExtension|relativeDualizingModuleDiagonal in dag/nodes; blueprint_refs.py search derived coinduction; blueprint_refs.py search diagonal module; blueprint_refs.py search scalar extension",
+   "results": "The exact names are recorded only by theorem nodes, not definition nodes. Blueprint search derived coinduction: 0 matches. The general scalar-extension definition def-zl-ring-derived-scalar-extension names a different abstract-left-adjoint API; it is cited for the general notion rather than redefined.",
+   "date": "2026-10-18",
+   "verdict": "Definition ownership records are required by the immutable-head return; no new Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-diagonal-rhom-reduction",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Definition interface for the ordinary module constructions used to state the polynomial diagonal reduction.",
+   "via": [
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison",
+  "declaration": "AlgebraicGeometry.relativeDualizingDerivedExtension",
+  "declarations": [
+   "AlgebraicGeometry.relativeDualizingDerivedExtension",
+   "AlgebraicGeometry.relativeDualizingModuleDiagonal"
+  ],
+  "statement": "def relativeDualizingDerivedExtension {A B : Type u}\n    [CommRing A] [CommRing B] (φ : A →+* B)\n    [HasDerivedCategory.{u} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{u} (ModuleCat.{u} B)] :\n    DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} B)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership for existing real construction data, as requested by the return on immutable head 3ba1c8264a7b. The owning module stays unchanged; no theorem is used to choose this data."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b96d6db0",
+  "group": "N2",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b96d6db0",
+  "group": "N2",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 3ba1c8264a7b (theorem stmt_deps). Two new definition nodes with existing:true records on the unchanged modules repair it: def-trf-derived-coinduction owns ModuleCat.derivedCoinduction, def-trf-affine-diagonal-module-data owns relativeDualizingDerivedExtension and relativeDualizingModuleDiagonal. Item stmt_deps are now the 6 base def nodes plus these 2, with no theorem node; in the item record only lean and stmt_deps differ from live. Item .lean is byte-identical (sha e40d9949) to the previous head, which was accepted clause by clause; re-read against the node with the same mapping. New-node statements are verbatim in the live files (from 'def'); node texts match the bodies and sources 0A70/0A71 and 0E2U/06Y0; universes wR/wB stay free; definitions are real, not hollow; the declaration lists cover all owner-module decls used; no cycle; no sibling def node owns these decls in side live. nt_compile --json clean in 7.4 s, only the theorem is sorry. Advisory: two Lean definitions of derived scalar extension now exist (concrete K-flat relativeDualizingDerivedExtension and the abstract left-adjoint moduleDerivedExtension of def-zl-ring-derived-scalar-extension), both landed before this delivery; maintainer note only."
+ }
+}

@@ -319,5 +319,34 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-18a376f43 (reviewer sub-agent of L); spot-checked: Read the item, new normalization node, unit/chapter route, cited DAG statements, ILO VIII source §§3.1.13–3.2.19, and delivery report. Verified all 13 proof steps, hypotheses, toric charts, normalization, smooth pullback, edge cases, Mathlib searches, duplicate checks, and accepted tool uses. No route-pivot or SGA violation; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ToricMonoidComparison",
+  "declaration": "AlgebraicGeometry.Monoscheme.toric_ideal_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.toricActionDomain",
+   "AlgebraicGeometry.Monoscheme.toricActionBase",
+   "AlgebraicGeometry.Monoscheme.IsToricComparison",
+   "AlgebraicGeometry.Monoscheme.toric_ideal_comparison",
+   "AlgebraicGeometry.Monoscheme.toric_blowup_comparison",
+   "AlgebraicGeometry.Monoscheme.realizationMap_smooth",
+   "AlgebraicGeometry.Monoscheme.isSmooth_of_realization_smooth",
+   "AlgebraicGeometry.Monoscheme.isSmooth_of_rational_realization_regular"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ToricMonoidComparison.lean",
+  "statement": "theorem toric_ideal_comparison (k : Type u) [Field k] (M : Fine.{u}) (hM : M.IsTorsionFree) : (∀ I : IdealFamily M, IsCoherentIdeal I → (∀ U : (realization k M).affineOpens, ((ringIdeal k I).ideal U).FG) ∧ IsTorusEquivariant k M (ringIdeal k I)) ∧ (∀ J : (realization k M).IdealSheafData, (∀ U : (realization k M).affineOpens, (J.ideal U).FG) → IsTorusEquivariant k M J → ∃! I : IdealFamily M, IsCoherentIdeal I ∧ ringIdeal k I = J) ∧ (∀ (I I' : IdealFamily M), IsCoherentIdeal I → IsCoherentIdeal I' → ringIdeal k I = ringIdeal k I' → I = I') ∧ ringIdeal k (emptyIdeal M) = ⊥ ∧ (∀ I : IdealFamily M, IsCoherentIdeal I → (ringIdeal k I = ⊤ ↔ I = wholeIdeal M) ∧ ∀ C : ToricComponent M, (ringIdeal k I).comap (componentι k C) ≠ ⊥ ↔ ∃ x : M.space, ConnectedComponents.mk x = C.component ∧ (idealStalk I x).Nonempty) ∧ (∀ (N : Fine.{u}) (f : Hom N M) (I : IdealFamily M), IsCoherentIdeal I → IsCoherentIdeal (pullbackIdeal f I) ∧ ringIdeal k (pullbackIdeal f I) = (ringIdeal k I).comap (realizationMap k f))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The five theorem declarations cover clauses (i), (ii), smooth realization, reflection, and the rational regularity consequence. IsToricComparison spells out equivariance and the unchanged dense torus; smooth pullback is an actual IsPullback square. Legacy imports are required by the recorded monoscheme dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b848c2d6",
+  "group": "NN",
+  "result": "pass",
+  "note": "Item lem-trf-toric-monoid-comparison matches the node clause by clause. (i): bijection (forward, unique inverse, injective), empty→⊥, ⊤↔wholeIdeal, component nonvanishing via comap componentι, arbitrary pullback using IdealSheafData.comap = extended ideal. (ii): existence, torsion-free, ∃! iso over k[M] to normalizedBlowup, IsToricComparison pins lifted actions, equivariance and the unchanged torus embedding, smooth-pullback IsPullback square with naturality. (iii): smooth realization, converse for torsion-free M, ULift ℚ regular ⇒ N^r×Z^t stalks. No extra hypotheses. Dependency §1(B) repair is a pure append of 8 declarations; realizationMap and torusEmbedding are chosen from chart-pinned ∃!; no competing repair live or in runs. Records: lean-only diffs, statement verbatim, all proof_dep modules imported. nt_compile --json clean (10.8 s / 8.6 s, load ~100); broken control fails. Advisory: the dependency's new lean.note drops Q25's legacy-import explanation."
  }
 }

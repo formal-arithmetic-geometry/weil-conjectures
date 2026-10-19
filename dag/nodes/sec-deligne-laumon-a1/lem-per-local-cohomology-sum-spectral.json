@@ -227,5 +227,24 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-c3d75b631 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-ideal-torsion-preserves-injectives, every cited statement and the Stacks sources. Sources: dualizing.tex 0BJC (lemma-local-cohomology-ss), 0955(3) (lemma-local-cohomology-noetherian) and 08XW(2) (lemma-injective-module-divide); tags checked in tags/tags. Item statement: same as live/base apart from two added notion citations (def-sp-spectral-sequence, def-sp-filtration). It is 0BJC for ideal-power torsion via 0955, with I and J swapped, which is harmless. Step 1: Mod(A) is Grothendieck (Mathlib leaf), and Gamma_K preserves kernels (ker = Gamma_K(ker u)) and finite products (max exponent). Step 2: (I+J)^{a+b} is the sum of I^uJ^v, and I^c, J^c lie in (I+J)^c, so Gamma_I Gamma_J = Gamma_{I+J} as sets, naturally. Step 3: the new node gives Gamma_J(E) injective, so it is Gamma_I-acyclic by the degree-0 resolution; this meets every clause of def-sp-composite-acyclicity with F=Gamma_J, G=Gamma_I. Step 4: thm-sp-grothendieck applies, and the abutment is the same subcomplex Gamma_{I+J}(E^.). Step 5: abutment under def-sp-convergence (exhaustive and separated) plus the first quadrant gives F^0=H^n and F^{n+1}=0. thm-sp-double-complex-spectral-sequences, named in the Grothendieck construction, states this directly (advisory only). New node: matches 08XW(2) hypothesis by hypothesis (Noetherian ring, any ideal, any injective module, no finite generation); statement only, self-contained, correct notion citations, three kinds of search recorded. Small cases: K=0 or nilpotent gives E, K=A gives 0, zero ring is trivial. No duplicate: no DAG node carries 08XW, 0BJC or 0EF6, the torsion+injective statement scan found only site/functional nodes, and the blueprint has no match. It is not a restatement of an item clause. Item edge cases (I=0, I=A, M=0, degree 0) are consistent. Off-unit tools thm-sp-grothendieck and lem-sp-derived-well-defined are declared; I accept them. No SGA source, no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalCohomologySumSpectral",
+  "declaration": "ModuleCat.idealPowerTorsion_sum_spectralSequence",
+  "file": "lean/Sheaf/Algebra/Homology/LocalCohomologySumSpectral.lean",
+  "statement": "theorem idealPowerTorsion_sum_spectralSequence {A : Type u} [CommRing A] [IsNoetherianRing A] (I J : Ideal A) (_hI : I.FG) (_hJ : J.FG) : ∃ E : E₂CohomologicalSpectralSequenceNat (ModuleCat.{u} A ⥤ ModuleCat.{u} A), (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅ (idealPowerTorsion J).rightDerived q ⋙ (idealPowerTorsion I).rightDerived p)) ∧ E.AbutsTo (fun n : ℕ ↦ (idealPowerTorsion (I ⊔ J)).rightDerived n)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-707ece44e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-707ece44e",
+  "group": "NK",
+  "result": "fix",
+  "note": "Statement correct: Noetherian A, I J FG, ModuleCat.{u} A (dep universe), ∃ E₂CohomologicalSpectralSequenceNat in Mod A ⥤ Mod A with page-2 (p,q) ≅ R^qΓ_J ⋙ R^pΓ_I and AbutsTo R^nΓ_{I⊔J} (F0=⊤, F(n+1)=⊥, gr ≅ E∞ at page p+q+2), so the spectral sequence is natural in M; edge cases n=0, I/J=0 or A, M=0, zero ring covered; no defs, proof sorry, no duplicate; lean.statement verbatim; only lean record changed vs live. nt_compile --json clean (7.0 s delivered, 3.7 s fixed). H8 FIX: theorem docstring followed the old 0955(3)/derived-support route instead of the node's 5 split steps; replaced by Steps 1-5 (fixes/LocalCohomologySumSpectral.lean, docstring only), and the stale report sentence 'proof and proof_deps are empty' corrected (fixes/lem-per-local-cohomology-sum-spectral.report.md)."
  }
 }

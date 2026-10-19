@@ -8,7 +8,8 @@
   "place": "Agent algebra lemma for ILO Expose X 1.3(vii) and Lemma 1.5; dimension shifting and monomial filtrations using Tag 00M0 (lemma-long-exact-sequence-tor) and Tag 0BNF (lemma-tor-commutes-filtered-colimits). Neither Stacks lemma alone states this criterion."
  },
  "stmt_deps": [
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-tor-modules",
+  "def-per-monomial-subset-span"
  ],
  "proof": [
   {
@@ -255,5 +256,24 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-562e4e99d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps in full, together with the statements of all 8 cited nodes. Statement unchanged; there are no new nodes. Small cases hold: Q={0} gives Tor over Z of a free group; Q=N with M=Z[x]/(x-1) meets the monomial tests but is not flat, and the conclusion still holds for Laurent and Z[x]/(x) quotients; V=0 when T is empty or U=T. The target matches its application in ILO Exp. X 1.3(vii) (p.140) and the proof of 1.5 (p.142), where Kato 6.1 is used for Z[P] and Lambda[P]/(I) over the chart ring of Q. Step 2: projective implies flat, then flat tensor exactness, then the full cochain long exact sequence; this gives extension closure for Tor_1. Step 3 writes out the 0BNF colimit argument using the tensor/colimit and filtered-exactness Mathlib leaves. Step 4: basis calculation giving W_j/W_{j-1} ≅ D/Z[I_j]; injectivity of h makes the labels distinct, and the edge cases I_j empty or Q are covered. Step 5: finite induction, then a directed union over finite E. Step 6: Tor_2(N,D/Z[I])=0 from symmetry, the first-variable dimension shift on 0->Z[I]->D->D/Z[I]->0, and Step 5 applied to Z[I] ≅ Z[h(I)]; this is not circular. Steps 7-8: explicit free syzygies carry A(K_r) forward, and iterated shifts reduce Tor_i to degree 1. Cited statements say what the steps use. The two non-leaf tools (dimension-shift-natural, tor-symmetry) are Lean-closed. Stacks tags verified; no SGA is cited. Searched the DAG for duplicates (trf Kato chart Tor test, the flat-Tor ideal criterion, the dimension-shifting special case): none states the item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonomialModuleTorDevissage",
+  "declaration": "AddMonoidAlgebra.monomialModule_tor_vanishes",
+  "file": "lean/Sheaf/RingTheory/MonomialModuleTorDevissage.lean",
+  "statement": "theorem monomialModule_tor_vanishes {Q : Type u} [AddCommMonoid Q] {G : Type v} [AddCommGroup G] (h : Q →+ G) (_hh : Function.Injective h) (M : Type w) [AddCommGroup M] [Module (AddMonoidAlgebra ℤ Q) M] (_hM : ∀ (I : Set Q), (∀ q ∈ I, ∀ q' : Q, q + q' ∈ I) → IsZero (((Tor' (ModuleCat.{max u v w} (ULift.{max u v w} (AddMonoidAlgebra ℤ Q))) 1).obj (ModuleCat.of (ULift.{max u v w} (AddMonoidAlgebra ℤ Q)) (ULift.{max u v w} M))).obj (ModuleCat.of (ULift.{max u v w} (AddMonoidAlgebra ℤ Q)) (ULift.{max u v w} (AddMonoidAlgebra ℤ Q ⧸ Ideal.span ((fun q : Q ↦ single q (1 : ℤ)) '' I)))))) (U T : Set G) (_hUT : U ⊆ T) (_hT : ∀ t ∈ T, ∀ q : Q, t + h q ∈ T) (_hU : ∀ t ∈ U, ∀ q : Q, t + h q ∈ U) (i : ℕ) (_hi : 0 < i) : IsZero (((Tor' (ModuleCat.{max u v w} (ULift.{max u v w} (AddMonoidAlgebra ℤ Q))) i).obj (ModuleCat.of (ULift.{max u v w} (AddMonoidAlgebra ℤ Q)) (ULift.{max u v w} M))).obj (ModuleCat.of (ULift.{max u v w} (AddMonoidAlgebra ℤ Q)) (ULift.{max u v w} ((monomialSubsetSpan h T) ⧸ (monomialSubsetSpan h U).comap (monomialSubsetSpan h T).subtype))))",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Q141 supplies the stage-2 statement only. The Q84 stage-1 split and passing review are preserved. Canonical ULift transport via ULift.ringEquiv and ULift.moduleEquiv places all modules and the coefficient ring in a common universe without equating the independent universes u, v, w."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a30041df",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean: injective h : Q →+ G; arbitrary D-module M with no flatness; the stable-ideal test via Ideal.span of monomials with Tor' 1, derived in the first variable; U ⊆ T, both stable; V = span T ⧸ comap of span U; all i > 0. ULift into max u v w is a canonical size transport (ULift scalar action checked by rfl). New def-per-monomial-subset-span is real data, restrictScalars along mapDomainRingHom plus Submodule.span; probes confirmed the translation action and that the empty span is ⊥. No duplicate in side, WeilConjectures or Mathlib. Edge cases empty T, empty U, U=T, empty and full ideal covered. lean.statement verbatim for both nodes; docstrings carry source place, blueprint and all 8 proof steps; only the theorem proof is sorry. nt_compile --json on both files clean (1.8 s, 2.8 s); a broken control copy failed as expected. Advisory: the citer uses multiplicative MonoidAlgebra, this item AddMonoidAlgebra (stage-3 transport)."
  }
 }

@@ -23,7 +23,8 @@
   "def-weil-residue-field",
   "def-weil-etale-morphism",
   "def-weil-polynomial-ring",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-trf-strict-semistable-curve"
  ],
  "proof": [
   {
@@ -351,5 +352,28 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-836b7299e (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps, the new node, every cited node statement, the parent strict-chart Step 3 that applies the item, the unit sk-i-curve-zero with its transitive route, and Stacks 0357 (properties.tex lemma-normal-locally-finite-nr-irreducibles) and 0052 (topology.tex lemma-Noetherian). The statement is unchanged and true, and it is not an nt-target, so no base-change morphism or coefficient category is involved. Test cases: the standard chart uv=c, c a unit on a generization, a disconnected chart. Dropping the smooth-component hypothesis lets a self-nodal component break the conclusion, so that hypothesis is genuinely needed, and Step 8 is where it is used. Steps 1, 2, 4-9 and 11 are correct as written. Step 2 is correct: R/t is a valuation domain, normal, the polynomial ring and its localizations are normal, and an etale extension of a normal ring is normal. Step 4: the open image in local Spec R/(c) is everything. Step 5: flat over a domain gives an injective map, and the generic-fibre localization is a domain. Step 6: the eps^3 obstruction plus pointwise etale reflection. Step 8: at the generic point the ideal is nilpotent, so it pulls back to zero in the domains; flat-tensor injectivity gives scheme-theoretic factorization through the smooth component, and etale plus smooth makes the fibre smooth, a contradiction. The new node lem-trf-normal-topologically-noetherian-components is true (0357 with 0052(1),(2)) and stated alone without a proof, as required. It is not a duplicate: rem-pc-regular-normal (2) and lem-fin-etale-normal-components need algebraic Noetherianity, which fails for valuation-base branch schemes. It is not a restated clause, and its blueprint.from and via are correct. All citations are on the sk-i-curve-zero route, so the four declared tool_uses are harmless but unnecessary; accepted. FIX (one citation fault, C4/C1): Step 3 used finite-type-over-noetherian (which gives a Noetherian scheme) to get Noetherian underlying space, and Step 10 reused the Step 7 finiteness for W_s without citations. I added lem-sc-affine-noetherian-underlying-space (Mathlib leaf) to Step 3, and to Step 10 one sentence with finite-type-over-noetherian, affine-noetherian-underlying-space and noetherian-finite-irreducible-components. proof_deps is updated; the corrected item is fixes/dag/nodes/sec-trace-formula/lem-trf-ordered-nodal-branch-overlap.json, and nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrderedNodalBranchOverlap",
+  "declaration": "AlgebraicGeometry.exists_ordered_nodal_branch_overlap",
+  "declarations": [
+   "AlgebraicGeometry.strictNodalCoordinate",
+   "AlgebraicGeometry.strictNodalCoordinateIdeal",
+   "AlgebraicGeometry.exists_ordered_nodal_branch_overlap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrderedNodalBranchOverlap.lean",
+  "statement": "theorem exists_ordered_nodal_branch_overlap (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : X ⟶ Spec (.of V)) [Flat f] [LocallyOfFinitePresentation f] (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of V)), (pullback (C := Scheme.{u}) f g).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme.{u}) f g, z ∉ (pullback.snd (C := Scheme.{u}) f g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f g).presheaf.stalk z)) ((pullback (C := Scheme.{u}) f g).presheaf.stalk z) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * MvPowerSeries.X 1}))) (hcomponents : ∀ (s : Spec (.of V)) (Z : TopologicalSpace.Closeds (f.fiber s)), (Z : Set (f.fiber s)) ∈ irreducibleComponents (f.fiber s) → Smooth ((Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ f.fiberToSpecResidueField s)) (c : V) (hc : c ≠ 0) (p : Y ⟶ X) [Etale p] (h : Y ⟶ (StrictSemistableModel.nodal (A := .of V) c).scheme) [Etale h] (hover : h ≫ (StrictSemistableModel.nodal (A := .of V) c).baseMap = p ≫ f) (y : Y) (hy : p y ∉ f.smoothLocus) (horigin : ∀ i : Fin 2, Y.evaluation ⊤ y trivial (h.appTop (strictNodalCoordinate (.of V) c i)) = 0) : ∃ (U : X.Opens) (Y0 : Y.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen Y0) (e : Y0 ≤ p ⁻¹ᵁ U), p y ∈ U ∧ y ∈ Y0 ∧ Surjective (p.resLE U Y0 e) ∧ ∀ (s : Spec (.of V)) (ξ : (pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ p ≫ f).fiber s) (Z : Set ((pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ p ≫ f).fiber s)), Z ∈ irreducibleComponents ((pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ p ≫ f).fiber s) → IsGenericPoint ξ Z → ∀ i : Fin 2, strictNodalCoordinateIdeal (A := .of V) c (pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ h) ((pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ p ≫ f).fiberι s ξ) i = strictNodalCoordinateIdeal (A := .of V) c (pullback.snd (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ h) ((pullback.fst (C := Scheme.{u}) (p.resLE U Y0 e) (p.resLE U Y0 e) ≫ Y0.ι ≫ p ≫ f).fiberι s ξ) i",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d43ad5cb9",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Every clause matches the node, with no extra hypotheses and a single universe u. The only stmt_deps change adds the landed def-trf-strict-semistable-curve, whose nodal model the Lean uses (allowed by brief-stage2 l.140). Helpers carry real data; docstrings have the source place, blueprint id and all 11 steps; no line over 100 chars; proof is sorry only. nt_compile --json: clean, 9.0 s. Advisory: the completion hypothesis is a ring isomorphism over all algebraically closed Omega, equivalent to the node's and unused by the proof; strictNodalCoordinate is close to the theorem-owned symmetricNodalCoordinate."
  }
 }

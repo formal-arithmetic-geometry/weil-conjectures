@@ -266,5 +266,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-7f49898dc (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; the full checks are in review.md. Source: I read Stacks 0AKJ (restricted.tex 1847-1907) and 0ALQ (1764-1805). The item is 0AKJ with a henselian target (C^h=C), with the same hypotheses; its statement was not changed. Step 1: by 05GG, phi is continuous and equals lim phi_n. Step 2: sigma on (D⊗C)^ is a retraction; 00FN gives Noetherian and 02GO gives etale off V(IC). Step 3: the new conormal-torsion node applies (R=C, S=E). The 0ALR node is applied with base = algebra = E, so beta: T^ ≅ C^ is an E-algebra iso; this keeps the map out of D. Step 4: beta is C-linear, so T/J^nT ≅ C/J^n via the structural map, and 0A43(2) gives an etale open W containing V(JT). Step 5: I checked the departure from the source. g ∈ L with g−1 ∈ JT, D(g) ⊂ W, and the inverse of g mod J^n is the geometric sum. This correctly replaces the 0ALQ(2) localization. Step 6: the single-stage map node is applied to C and to C^ (henselian by 0ALJ). Uniqueness gives iota_C tau = beta iota_F, so iota_C u = phi iota_D. Step 7: 09XI gives J ⊆ Jac(C), and 00IQ gives iota_C injective, which proves uniqueness. New node lem-per-completed-retraction-conormal-torsion: I checked it is true independently (K/K^2 ≅ completed Omega_{S/R} ⊗ R^, and Omega_{S/R} is finite and supported in V(J)). I tested it on S=R, J=0, J=R, J nilpotent, k[t][x]/(x(x−t)) (c=1) and a case with no retraction (vacuous). It does not restate a clause of the item. I grepped for 0ALQ, 0ALM, 0AKJ and conormal and found no duplicate; the Jacobian-torsion and algebraization nodes differ. B1-B9 hold, all three kinds of Mathlib search are recorded, and the blueprint from/via are correct. I accept the declared tool_uses: generic Stacks commutative-algebra and etale tools. No SGA. One advisory: the stage-map node says 'etale ring map' while Step 5 gives an etale affine morphism. The two agree by the 02GI definition (one line via Mathlib HasRingHomProperty), as used throughout the DAG, so I do not count it as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleAwayCompletionHomLifting",
+  "declaration": "AdicCompletion.existsUnique_algHom_of_etale_away_completion",
+  "file": "lean/Sheaf/RingTheory/EtaleAwayCompletionHomLifting.lean",
+  "statement": "theorem existsUnique_algHom_of_etale_away_completion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (D : Type u) [CommRing D] [Algebra A D] (hD : RingHom.FiniteType (algebraMap A D)) (hetale : Etale (Spec.map (CommRingCat.ofHom (algebraMap A D)) ∣_ ⟨(PrimeSpectrum.zeroLocus (I : Set A))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set A)).isOpen_compl⟩)) (C : Type v) [CommRing C] [Algebra A C] [IsNoetherianRing C] [HenselianRing C (I.map (algebraMap A C))] (φ : AdicCompletion (I.map (algebraMap A D)) D →ₐ[A] AdicCompletion (I.map (algebraMap A C)) C) : ∃! f : D →ₐ[A] C, ∀ d : D, algebraMap C (AdicCompletion (I.map (algebraMap A C)) C) (f d) = φ (algebraMap D (AdicCompletion (I.map (algebraMap A D)) D) d)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9dfeb1609",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read node, Stacks 0AKJ (restricted.tex 1847-1910), all 6 stmt_dep records/declarations and the module. Every hypothesis matches: Noetherian A, ideal I, finite-type D (RingHom.FiniteType), restriction of Spec D→Spec A to the complement of V(I) is étale, Noetherian C with HenselianRing C (IC), AdicCompletion along ID/IC with the canonical A-algebra instance. Conclusion ∃! f : D →ₐ[A] C with ι_C∘f = φ∘ι_D is the node's stated equivalent form; C^h = C for a henselian pair; uniqueness in C via Jacobson radical + Krull. Edge cases I=0, I=⊤, zero rings covered. A and D share universe u as forced by Spec/Etale; C has independent universe v. No new defs, one sorry, source/blueprint docstrings and 7 proof steps present, statement verbatim, no duplicate found in lean/Sheaf or Mathlib. nt_compile --json: clean, 5.5 s. Second reading is a disclosed self-check."
  }
 }

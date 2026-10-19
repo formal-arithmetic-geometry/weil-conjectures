@@ -666,5 +666,74 @@ Source: ILO VIII 2.3.2 (blueprint: def-trf-monoscheme-toric-realization). -/
 def NormalizedTower.IsDesingularization {n : ℕ} (T : NormalizedTower.{u} n) : Prop :=
   IsRegularScheme (T.level (Fin.last n))
 
+/-- Coherence allowing the empty ideal: local finite generation, with zero generators allowed.
+Source: ILO VIII 3.1.18 (blueprint: def-trf-monoscheme-toric-realization). -/
+def IsCoherentIdeal {M : Fine.{u}} (I : IdealFamily M) : Prop :=
+  IsIdealSheaf I ∧ ∀ x : M.space,
+    ∃ (U : Opens M.space) (_hx : x ∈ U) (n : ℕ)
+      (s : Fin n → M.space.presheaf.obj (op U)),
+      (∀ i, s i ∈ I U) ∧
+      ∀ (y : M.space) (hy : y ∈ U) (t : FineFan.stalk M.space.presheaf y),
+        t ∈ idealStalk I y ↔ ∃ (i : Fin n) (q : FineFan.stalk M.space.presheaf y),
+          t = FineFan.germ M.space.presheaf U y hy (s i) * q
+
+/-- The empty monoid ideal has no germs; its sections on the empty open are the unique section.
+Source: ILO VIII 3.1.18, 3.2.14 (blueprint: def-trf-monoscheme-toric-realization). -/
+def emptyIdeal (M : Fine.{u}) : IdealFamily M :=
+  fun U ↦ {_s | ∀ x : M.space, x ∈ U → False}
+
+/-- The section homomorphism on a source affine open mapping into a target affine open.
+Source: ILO VIII 3.2.2 (blueprint: def-trf-monoscheme-toric-realization). -/
+def Hom.sectionMap {N M : Fine.{u}} (f : Hom N M)
+    (U : AffineOpens N) (V : AffineOpens M)
+    (h : U.1 ≤ (Opens.map f.map.hom.base).obj V.1) :
+    M.space.presheaf.obj (op V.1) ⟶ N.space.presheaf.obj (op U.1) :=
+  f.map.hom.c.app (op V.1) ≫ N.space.presheaf.map (homOfLE h).op
+
+/-- The realization map is characterized on every pair of incident affine charts.
+Source: ILO VIII 3.2.2 (blueprint: def-trf-monoscheme-toric-realization). -/
+def IsRealizationMap (k : Type u) [Field k] {N M : Fine.{u}} (f : Hom N M)
+    (g : realization k N ⟶ realization k M) : Prop :=
+  ∀ (U : AffineOpens N) (V : AffineOpens M)
+    (h : U.1 ≤ (Opens.map f.map.hom.base).obj V.1),
+    realizationι k N U ≫ g =
+      Spec.map ((monoidAlgebra k).map (f.sectionMap U V h)) ≫ realizationι k M V
+
+/-- There is a unique map with the specified monomial formulas.
+Source: ILO VIII 3.2.2 (blueprint: def-trf-monoscheme-toric-realization).
+Proof: refine source charts by affine subopens lying over target affine charts. These
+cover because affine monoid opens form a basis. On each use Spec of the induced monoid
+algebra map. Restriction commutes with the sheaf morphism, so these maps agree on overlaps.
+Glue them in the open colimits defining realization. The same cover proves uniqueness. -/
+theorem existsUnique_realizationMap (k : Type u) [Field k] {N M : Fine.{u}}
+    (f : Hom N M) : ∃! g, IsRealizationMap k f g := by
+  sorry
+
+/-- The canonical monomial realization of a monoscheme morphism, determined uniquely above.
+Source: ILO VIII 3.2.2 (blueprint: def-trf-monoscheme-toric-realization). -/
+noncomputable def realizationMap (k : Type u) [Field k] {N M : Fine.{u}} (f : Hom N M) :
+    realization k N ⟶ realization k M :=
+  Classical.choose (existsUnique_realizationMap k f).exists
+
+/-- The dense torus embedding is the localization map specified by every component chart.
+Source: ILO VIII 3.2.4 (blueprint: def-trf-monoscheme-toric-realization).
+Proof: on each affine component chart, localize its monoid to the generic group. The
+resulting Spec map is open (finitely many monoid generators suffice) and dense, and is
+Spec of the degree map. These maps agree under restriction and hence give the same map
+into the component realization. Every component has a chart, so the formula is unique. -/
+theorem existsUnique_torusEmbedding (k : Type u) [Field k] {M : Fine.{u}}
+    (C : ToricComponent M) :
+    ∃! j : torus k C ⟶ componentRealization k C,
+      ∀ U : ComponentAffineOpens C,
+        j = Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom k (degree C U))) ≫
+          componentChart k C U := by
+  sorry
+
+/-- The original torus as an open subscheme of the ambient realization.
+Source: ILO VIII 3.2.4 (blueprint: def-trf-monoscheme-toric-realization). -/
+noncomputable def torusEmbedding (k : Type u) [Field k] {M : Fine.{u}}
+    (C : ToricComponent M) : torus k C ⟶ realization k M :=
+  Classical.choose (existsUnique_torusEmbedding k C).exists ≫ componentι k C
+
 end Monoscheme
 end AlgebraicGeometry

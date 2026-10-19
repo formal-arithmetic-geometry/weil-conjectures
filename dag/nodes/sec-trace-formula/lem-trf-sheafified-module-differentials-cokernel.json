@@ -246,5 +246,32 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-bef1a435b (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, every cited node statement (none merged, none with a blueprint_update), Stacks sites-modules.tex 04BK/04BL/04BN/08TP/08TQ (lines 5915-6085), the only citer lem-trf-topos-inverse-image-differentials, and unit sk-i-curve-zero. Statement and source: the item matches 08TP for an arbitrary site and a presheaf ring map. The added derivation and representing-module sentence is exactly 04BK/04BN and fixes the old ring-only citation. Nothing is weakened. The coefficient category is Mod(B^#), a sheaf of rings, so it matches. Steps: S1's relation map matches the 08TP display and its quotient is 07BK. S2 uses the presheaf-ring interface (03CY), exactness of # (cokernels) and module cokernels as sheafified sectionwise cokernels; each cited node states what is used. S3 is a correct elementary gluing argument that B x B -> B^# x B^# is a set sheafification: common refinement by site axioms (ii)/(iii), local equality by 00WK. S4 checks the Hom chain identifying B[T]^# as the free sheaf on T^#. S5 identifies r^# by its values on generators. S6/S7 are the 04BL universal-property argument, and d_U(b) maps to d(eta b). Edge cases: identity map gives 0, A -> A[x] keeps dx, the zero ring, empty coverings, a non-sheaf presheaf ring. No new nodes. No duplicate found by rg for 08TP/04BL/04BN/differentials+sheafification, so same_as [] is right. No cycle. Accepted tool_uses: the 4 declared generic sheaf lemmas (3 Mathlib leaves, plus lem-weil-pbc-site-sheafification-sections-local from sk-thm-p1). Searches recorded honestly, LeanSearch marked unavailable. FIX (B4): the statement had a bare ^# in TeX math; corrected to ^\\# in fixes/dag/nodes/sec-trace-formula/lem-trf-sheafified-module-differentials-cokernel.json, with no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SheafifiedDifferentialsCokernel",
+  "declaration": "CategoryTheory.SheafifiedDifferentials.sheafified_differentials_cokernel",
+  "declarations": [
+   "CategoryTheory.SheafifiedDifferentials.relationLabels",
+   "CategoryTheory.SheafifiedDifferentials.symbols",
+   "CategoryTheory.SheafifiedDifferentials.relations",
+   "CategoryTheory.SheafifiedDifferentials.associatedRing",
+   "CategoryTheory.SheafifiedDifferentials.associatedModules",
+   "CategoryTheory.SheafifiedDifferentials.sheafified_differentials_cokernel"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/SheafifiedDifferentialsCokernel.lean",
+  "statement": "theorem sheafified_differentials_cokernel (J : GrothendieckTopology C) {A B : Cᵒᵖ ⥤ CommRingCat.{max u v}} (φ : A ⟶ B) : ∃ (r : relations A B ⟶ symbols B) (p : symbols B ⟶ relativeDifferentials' φ), (∀ (U : Cᵒᵖ) (a b : B.obj U), r.app U (ModuleCat.freeMk (Sum.inl (a, b))) = ModuleCat.freeMk (a + b) - ModuleCat.freeMk a - ModuleCat.freeMk b) ∧ (∀ (U : Cᵒᵖ) (f g : B.obj U), r.app U (ModuleCat.freeMk (Sum.inr (Sum.inl (f, g)))) = ModuleCat.freeMk (f * g) - g • ModuleCat.freeMk f - f • ModuleCat.freeMk g) ∧ (∀ (U : Cᵒᵖ) (h : A.obj U), r.app U (ModuleCat.freeMk (Sum.inr (Sum.inr h))) = ModuleCat.freeMk (φ.app U h)) ∧ (∀ (U : Cᵒᵖ) (b : B.obj U), p.app U (ModuleCat.freeMk b) = (derivation' φ).d b) ∧ (∃ h : (associatedModules J B).map r ≫ (associatedModules J B).map p = 0, Nonempty (IsColimit (CokernelCofork.ofπ ((associatedModules J B).map p) h))) ∧ ∃ d : ((associatedModules J B).obj (relativeDifferentials' φ)).val.Derivation' (sheafifyMap J φ), (∀ (U : Cᵒᵖ) (b : B.obj U), d.d ((CategoryTheory.toSheafify J B).app U b) = (CategoryTheory.toSheafify J (relativeDifferentials' φ).presheaf).app U ((derivation' φ).d b)) ∧ (∀ (N : ringedSiteModules.{max u v} (associatedRing J B)) (D : N.val.Derivation' (sheafifyMap J φ)), ∃! α : (associatedModules J B).obj (relativeDifferentials' φ) ⟶ N, d.postcomp α.val = D) ∧ (∀ (M : ringedSiteModules.{max u v} (associatedRing J B)) (dM : M.val.Derivation' (sheafifyMap J φ)), (∀ (N : ringedSiteModules.{max u v} (associatedRing J B)) (D : N.val.Derivation' (sheafifyMap J φ)), ∃! α : M ⟶ N, dM.postcomp α.val = D) → ∃! e : (associatedModules J B).obj (relativeDifferentials' φ) ≅ M, d.postcomp e.hom.val = dM ∧ (∀ (U : Cᵒᵖ) (b : B.obj U), e.hom.val.app U ((CategoryTheory.toSheafify J (relativeDifferentials' φ).presheaf).app U ((derivation' φ).d b)) = dM.d ((CategoryTheory.toSheafify J B).app U b)) ∧ ∃ h : (associatedModules J B).map r ≫ ((associatedModules J B).map p ≫ e.hom) = 0, Nonempty (IsColimit (CokernelCofork.ofπ ((associatedModules J B).map p ≫ e.hom) h)))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The sheaf differential module is expressed by its representing property among sheaf modules, using Mathlib Derivation' on the underlying presheaf. The unique isomorphism is normalized on the universal derivation and original sectionwise differentials. Helpers specialize existing free-module and sheafification functors; no alternative differential-module construction is introduced. The three free summands are encoded as the free module on their disjoint union."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eae9e9d89",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 08TP/04BK/04BL/04BN: arbitrary site J with ring values in max u v, arbitrary presheaf CommRing map φ, sheafifyMap J φ, Mathlib relativeDifferentials'/derivation', sheafification of the module = PresheafOfModules.sheafification along the ring unit (underlying presheaf is sheafify J P.presheaf, unit toSheafify by rfl), sheaf derivations as Derivation' (d, d_map, d_mul, d_app). Universal d is pinned by toSheafify-images; unique normalized iso to any representing pair; the three relation formulas cover the whole free basis and p is given on generators, so r and p are not arbitrary; both cokernel clauses are in sheaf modules. Only lean changed; statement verbatim; plain imports = proof-dep modules; docstrings, lines ≤100 chars, bound universes, sorry-only proof all OK. No Mathlib sheaf-differential decl; the citer's omega is in its own theorem module (import would be a cycle). nt_compile --json clean, 8.9 s. Advisory: the citer's EssentiallySmall.{w} setting needs a small-model transport at stage 3; the second-reading section is brief."
  }
 }

@@ -230,5 +230,36 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-82b23e30c (reviewer sub-agent of L); spot-checked: I read the full item, all five steps, every cited node statement and the Stacks sources: 08SJ (cotangent.tex, lemma-mod-regular-sequence proof), 062E, 062F, 062H (the first identity in its proof, lines 7351-7356, which holds for any ring map) and 064K. There are no new nodes and no SGA citations. The hypotheses and conclusion of the statement are unchanged. The only addition says that the derived tensor is Z[0] ⊗^L_P R[0] in D(R), via clause (2) of lem-pc-derived-tensor-second-factor-functor. This matches its only user, step 2 of lem-trf-koszul-quotient-cotangent-vanishing, which feeds mu: Z ⊗^L_P R -> B[0] in D(A')=D(R) into lem-trf-cotangent-flat-base-change. The category, the order of the factors and the canonical map all agree. Steps: (1) The polynomial successive-injectivity check is correct and elementary. (2) 062F is applied over P with M=P and its hypothesis matches exactly; H_0 = P/J follows from d_1(e_i)=x_i. (3) Finite free terms are flat, and 064K applies because the complex is bounded above in cochain degrees [-r,0]. Clause (2) then computes the derived tensor in D(R) with no flatness of R over P. (4) Koszul base change without flatness; the step writes the isomorphism explicitly and checks it, and Z ⊗_P R ≅ B by mutually inverse maps, so the canonical map is the augmentation. (5) Koszul-regularity clause (3) together with H_0 = B gives a quasi-isomorphism. proof_deps equals the union of the step uses, and the 80-node dependency closure has no cycle. I accept the four declared generic tool_uses: lem-weil-pbc-regular-sequence-koszul-regular, lem-pc-module-bounded-flat-kflat, lem-pc-derived-tensor-second-factor-functor and lem-sc-koszul-base-change-iso. Duplicate search (grep of dag/nodes and blueprint_refs search): the nearest node, new-j3-koszul-projective-resolution, does not state the derived identification, so same_as [] is right. Mathlib has no Koszul complex (the only hits are a TODO in RegularSequence.lean, LocalCohomology and an unrelated differential-geometric Koszul connection). Small cases checked: r=0; Z with (2); Z/4 with (2), where Koszul-regularity fails and the conclusion fails too; a unit in the sequence; R=0. One cosmetic point needs no change: some recorded zero-hit searches carry boilerplate text. No fixes; details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulDerivedQuotient",
+  "declaration": "RingTheory.KoszulDerivedQuotient.isIso_comparison",
+  "declarations": [
+   "RingTheory.KoszulDerivedQuotient.PolynomialRing",
+   "RingTheory.KoszulDerivedQuotient.polynomialMap",
+   "RingTheory.KoszulDerivedQuotient.variableIdeal",
+   "RingTheory.KoszulDerivedQuotient.zeroSection",
+   "RingTheory.KoszulDerivedQuotient.ringComplex",
+   "RingTheory.KoszulDerivedQuotient.zeroSectionComplex",
+   "RingTheory.KoszulDerivedQuotient.ordinaryModuleIso",
+   "RingTheory.KoszulDerivedQuotient.ordinaryComplexIso",
+   "RingTheory.KoszulDerivedQuotient.comparison",
+   "RingTheory.KoszulDerivedQuotient.isIso_comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulDerivedQuotient.lean",
+  "statement": "theorem isIso_comparison {R : Type u} [CommRing R] {r : ℕ} (f : Fin r → R) (hreg : RingTheory.Sequence.IsKoszulRegular f) [HasDerivedCategory.{wP} (ModuleCat.{u} (PolynomialRing.{u} r))] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] (L : DerivedCategory (ModuleCat.{u} (PolynomialRing.{u} r)) ⥤ DerivedCategory (ModuleCat.{u} R)) (ε : DerivedCategory.Q ⋙ L ⟶ ((ModuleCat.mixedTensor (polynomialMap f)).flip.map₂CochainComplex).flip.obj (ringComplex R) ⋙ DerivedCategory.Q) [L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat.{u} (PolynomialRing.{u} r)) (.up ℤ))] : IsIso (comparison f L ε)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical comparison is the left-derived counit followed by the explicit ordinary tensor/quotient isomorphism. L and ε quantify over the existing dependency interface, with its left-derived universal property; existence is supplied by lem-pc-derived-tensor-second-factor-functor. The polynomial coefficient ring ULift ℤ is the universe-compatible copy of ℤ. All helpers belong to this canonical comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5b6c0fa3",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 08SJ: R any comm ring, f : Fin r → R (r=0 ok), IsKoszulRegular (recorded decl), P = MvPolynomial (Fin r) (ULift ℤ) (universe copy only), polynomialMap = eval₂Hom x_i↦f_i, ℤ = P/(X), B = R/span(range f); derived tensor = universally quantified L, ε with IsLeftDerivedFunctor of exactly the dependency's B.flip.obj R[0] functor (existence supplied by lem-pc-derived-tensor-second-factor-functor, independent wP/wR universes like the dep); comparison = ε.app ℤ[0] ≫ Q.map of canonical mapBifunctorSingle₂Iso/singleMap/λ/tensorEquivExtendScalars/quotIdealMapEquivTensorQuot/quotientEquivAlgOfEq iso; conclusion IsIso. Only the item's lean field changed; statement verbatim; docstrings with 08SJ, blueprint id and 5 proof steps; plain imports = proof-dep modules; lines ≤100; no hollow defs, only sorry in theorem. Edge cases r=0, R=0, unit generator fine. nt_compile --json clean 6.2 s; probe confirms API signatures and axioms."
  }
 }

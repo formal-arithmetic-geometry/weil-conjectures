@@ -20,7 +20,8 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-pure-dimension"
+  "def-weil-pure-dimension",
+  "def-trf-completed-local-scalar-map"
  ],
  "proof": [
   {
@@ -215,5 +216,23 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-8135450c6 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 5 steps, every cited node's statement, unit sk-i-curve-zero, and the parent step 8 of lem-trf-semistable-modification-fibre-contractions, which uses exactly the item's hypotheses. Sources: Stacks 0AB1 (morphisms.tex line 14630, lemma and proof) and the tag labels for 01T6, 0BA8 and 035Q. The Temkin Appendix B PDF is not in literature; the report records it as WANTED and proof_origin is agent. The statement is true. Small cases: the empty scheme; the identity; smooth Y (reduces to 0AB1); two disjoint lines over a node (excluded by the connected-fibre hypothesis); the cusp normalization (shows the nodal hypothesis is needed); an isolated point over a node (shows pure dimension one is needed). rg over dag/nodes found no duplicate. No new nodes and no SGA. Steps 3–5 are correct: the node has b=2 and dim B/R=1, so A=R or A=B; A=B gives a two-point geometric fibre, which is disconnected; then every stalk map is an isomorphism and f is affine. Three repairs, in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-birational-nodal-connected-iso.json. (1) Step 1 assumed without argument that every generic point of X lies over U. I added the argument: fibres of a finite map are finite, so a one-dimensional component cannot map to a closed point, and its generic point maps to a generic point of Y, which lies in U. (2) Step 2 applied lem-trf-finite-birational-normal-iso (integral schemes only) and lem-sc-smooth-normal (separated curves only) to Y, which is neither. I restricted both to an affine open in the smooth locus meeting one component, which is integral with integral preimage. I also justified why O_Y -> f_*O_X is injective (Y reduced, U dense). (3) The off-unit statements lem-sc-normalization-properties and lem-sc-smooth-normal (unit sk-thm-br, both Lean-closed in slopmaster2) were cited without a tool_uses declaration. I added split_report.tool_uses for both, matching the earlier merged delivery lem-trf-nodal-contraction-normalization-branches, and I accept them. Statement, uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteBirationalNodalConnectedIso",
+  "declaration": "AlgebraicGeometry.isIso_of_finite_birational_nodal_connected",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteBirationalNodalConnectedIso.lean",
+  "statement": "theorem isIso_of_finite_birational_nodal_connected {k : Type u} [Field k] [IsAlgClosed k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsReduced X] [IsReduced Y] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (hXdim : X.IsPureDimension 1) (hYdim : Y.IsPureDimension 1) (hnodal : ∀ y : Y, y ∈ closedPoints Y → y ∉ (Y ↘ Spec (.of k)).smoothLocus → Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ ((Y ↘ Spec (.of k)).completedLocalScalarMap y).toAlgebra inferInstance)) (f : X ⟶ Y) [IsFinite f] [Surjective f] (U : Y.Opens) (hmeets : ∀ Z : Set Y, Z ∈ irreducibleComponents Y → (Z ∩ (U : Set Y)).Nonempty) (hUiso : IsIso (f ∣_ U)) (hconnected : ∀ y : Y, ConnectedSpace ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y))) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01be33a81",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on f56eebcf6073: the theorem stmt_dep lem-trf-nodal-point-etale-locality is replaced by the new definition node def-trf-completed-local-scalar-map (existing:true on the unchanged NodalPointEtaleLocality completedLocalScalarMap; four-arrow statement matches the body; stmt_deps exist; record statement verbatim, ignoring whitespace; no duplicate owner in the live DAG). Item JSON differs from the returned head only in that stmt_dep; Lean byte-identical (sha 6546be50). H3 clauses re-checked: f not required over k is weaker and still true; X's k-structure is implied. Edge cases and universes fine. nt_compile --json clean, rc 0, 3.2 s. Advisory: the owner docstring still carries only the theorem node's blueprint tag."
  }
 }

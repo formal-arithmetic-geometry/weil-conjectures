@@ -295,5 +295,23 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-40deb90fd (reviewer sub-agent of L); spot-checked: Read Stacks varieties 0C3N (lemma-normalization-and-change-of-fields) in full, plus 030K and 0BRA. The item statement is unchanged and is 0C3N's universal-homeomorphism clause for integral finite-type X, with the componentwise normalization of (X_K)_red; the hypotheses match. New node lem-per-reduced-total-fractions-field-extension is true. Checked by flat going-down: minimal primes of B_L and of R_L⊗M contract to minimal primes, so R_L→R_M is injective, preserves nonzerodivisors and gives an injection Q_L→Q_M; θ_L = S^{-1}(B_L→R_L) has kernel exactly nil(F⊗L); towers and principal localization are compatible. Tested on F_p(s)[u]/(u^p−s)⊗k(s^{1/p}), C⊗_R C and A=k. It is self-contained, statement-only, searched in four tools, and not a duplicate (grep for total-quotient/field-extension nodes and all 0C3N citers; the trf inseparable node needs geometric normality). Steps 1-8 are checked against the cited statements: chart and total-fraction product with coordinatewise integrality; φ_K is canonical because a B_L-algebra map A'→Q_L is unique (a'=x/s), so the separable comparison in steps 4 and 7 is φ; nil kernel via flatness; char 0 ⇒ separable; finite-coefficient descent with the nonzerodivisor and the equation reflected; separable-first for H/k(t) with E/k separably generated; Frobenius with n≥1; 0BRA hypotheses (nil kernel, p-powers, p^n x=0); gluing over the cover Spec(A'⊗K). No SGA citation. All cited statements are on the route of sk-p-dl-a1-perverse; the four declared tool_uses are generic algebra and are accepted. No cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationFieldExtensionHomeomorphism",
+  "declaration": "AlgebraicGeometry.normalization_field_extension_homeomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationFieldExtensionHomeomorphism.lean",
+  "statement": "theorem normalization_field_extension_homeomorphism {k : Type u} [Field k] (X : Scheme.{u}) (q : X ⟶ Spec (.of k)) [IsIntegral X] [LocallyOfFiniteType q] [QuasiCompact q] (K : Type u) [Field K] [Algebra k K] : ∃! b : (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).reducedNormalization ⟶ pullback (X.fromNormalization ≫ q) (Spec.map (CommRingCat.ofHom (algebraMap k K))), (b ≫ pullback.fst _ _ ≫ X.fromNormalization = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.fst q (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (b ≫ pullback.snd _ _ = (pullback q (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fromReducedNormalization ≫ pullback.snd q (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (topologically IsHomeomorph).universally b",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a05bef03",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Statement-only delivery (lean record + one module, proof sorry); node lean.statement verbatim in file. Clauses match deps: IsIntegral X, LocallyOfFiniteType+QuasiCompact q, arbitrary K with Algebra k K, X_K = pullback, X.fromNormalization (def-sc-normalization), reducedNormalization/fromReducedNormalization (def-weil-pbc-reduced-normalization), (topologically IsHomeomorph).universally b. ∃! with fst/snd equations = b over X_K; uniqueness true (flat going-down: A∖0 stays nonzero on each component, a/s forced), consistent with separable dep pattern. Edge cases: nonempty via IsIntegral, inseparable nonreduced, reducible, transcendental; universes consistent. Docstrings carry Stacks 0C3N + blueprint + 8 proof steps; no defs, no hollow, no live write; no existing declaration found. nt_compile --json: clean, 2.9 s."
  }
 }

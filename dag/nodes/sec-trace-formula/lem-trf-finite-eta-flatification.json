@@ -404,5 +404,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-08cc72cf1 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements (with blueprint_update), the base version, the citer, unit sk-i-curve-zero, and Stacks 081R (flat.tex l.9123) and 052A (morphisms.tex l.5172). Temkin is not in literature/ (WANTED), so the statement judgement rests on a counterexample I checked myself. The worker dropped the clause requiring U1 to be schematically dense in the target. That clause is false: take S=Spec k[t], X=S⊔Spec k at t=0. Surjectivity makes the vertical component C nonempty and open-closed, a dense U1 must meet it, giving a nonempty open of X1 killed by t, which contradicts flatness over the integral S1. A second test (Bl_0 A^2 over itself) fails it too. All other hypotheses and conclusions are kept, the change is named under Source error, and the item is not a target. Steps 1-7 checked against what each cited node states, every hypothesis included. Step 1: f.p. gives finite type, then generic flatness, then an affine qc U containing eta. Step 2: every hypothesis of 081R holds. Step 3: V is qc, so the blowup is proper and admissible and iso over V. Step 4: charts A[I/a] sit inside K, a common dense generic point gives integral S1, and the closed image is surjective. Step 5: the strict transform is closed hence finite, and scheme-image-restrict with g:Y_V->Y, W=Y_V gives an iso over U1=Y_V. Step 6 (elementary): flat over a domain gives B into B⊗K. Step 7 (elementary): density of a^{-1}(U1). No new nodes and no duplicate found (closest is lem-trf-finite-after-blowup, a different statement). Searches cover all three kinds. All 16 declared tool_uses accepted; no SGA. Maintainer actions: the reviewed citer lem-trf-reduced-fibre-modification uses the dropped clause in Steps 1 and 8, and its own statement is false by the same example, so it must be reopened. The maintainer-owned source.place still says target density is retained and should be updated. No fix files written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteEtaFlatification",
+  "declaration": "AlgebraicGeometry.exists_finite_eta_flatification",
+  "file": "lean/Sheaf/TraceFormula/FiniteEtaFlatification.lean",
+  "statement": "theorem exists_finite_eta_flatification {S X : Scheme.{u}} [IsIntegral S] [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [IsDominant f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] : ∃ (S₁ : Scheme.{u}) (b : S₁ ⟶ S), IsIntegral S₁ ∧ IsProper b ∧ Surjective b ∧ IsIso (pullback.snd b S.fromSpecFunctionField) ∧ ∃ (X₁ : Scheme.{u}) (a : X₁ ⟶ pullback f b), IsFinite a ∧ IsIso (pullback.map (a ≫ pullback.snd f b ≫ b) S.fromSpecFunctionField (pullback.snd f b ≫ b) S.fromSpecFunctionField a (𝟙 _) (𝟙 _) (by simp) (by simp)) ∧ ∃ (U₁ : (pullback f b).Opens), IsIso (a ∣_ U₁) ∧ SchematicallyDenseOpen (a ⁻¹ᵁ U₁) ∧ Flat (a ≫ pullback.snd f b) ∧ LocallyOfFinitePresentation (a ≫ pullback.snd f b) ∧ IsSchemeTheoreticallyDominant (pullback.fst (a ≫ pullback.snd f b ≫ b) S.fromSpecFunctionField)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-716cdde00",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Lean statement matches the corrected node clause by clause: qcqs integral S; f dominant, LFP, QC, QS; integral S1 with b proper and surjective; IsIso(pullback.snd b fromSpecFunctionField); IsFinite a; canonical pullback.map a_eta iso; U1 with IsIso(a|U1) and SchematicallyDenseOpen(a^-1 U1); Flat and LFP of a≫snd; IsSchemeTheoreticallyDominant of the generic-fibre projection; no target density. No extra hypotheses; one universe u; lean.statement verbatim; only the item lean record changed and the 10 dep records are identical to live; no duplicate found. nt_compile --json clean in 3.2 s. Advisories: conclusion has LFP only (QC/QS follow from IsFinite a and f qcqs), loose docstring wording about where the open is asserted, redundant Sober import; maintainer: source.place still says target density is retained, and citer lem-trf-reduced-fibre-modification needs reopening per Q44."
  }
 }

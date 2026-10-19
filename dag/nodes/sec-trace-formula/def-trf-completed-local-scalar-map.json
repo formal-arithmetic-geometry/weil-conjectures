@@ -1,0 +1,116 @@
+{
+ "id": "def-trf-completed-local-scalar-map",
+ "kind": "definition",
+ "title": "Canonical scalar map into a completed local ring",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a scheme [def-pc-scheme], $f:X\\to\\operatorname{Spec}k$ a morphism, where $\\operatorname{Spec}$ is the affine spectrum [def-weil-affine-spectrum], and $x\\in X$. Write $R=\\mathcal O_{X,x}$ and $\\mathfrak m_x$ for its maximal ideal. The canonical completed-local scalar map $k\\to\\widehat R$ [def-weil-pbc-adic-completion] is the composite $k\\xrightarrow{\\sim}\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\xrightarrow{f^\\#}\\Gamma(X,\\mathcal O_X)\\xrightarrow{\\mathrm{germ}_x}R\\to\\widehat R$, where the last map is maximal-ideal completion. Its associated $k$-algebra structure on $\\widehat R$ is the one used for completed local $k$-algebras; no coefficient field or splitting is chosen.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-adic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Section Nodal curves, section-nodal (Tag 0C46), and lemma-node-etale-local (Tag 0C57): canonical k-algebra structures on completed local rings."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar map from a field to the completion of a scheme local ring via global sections and germs",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.StructureSheaf.toStalk; AdicCompletion.mkₐ; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec; AlgebraicGeometry.toSpecΓ; AlgebraicGeometry.germ_stalkClosedPointIso_hom; UniformSpace.Completion.map_smul_eq_mul_coe. These are constituent maps or unrelated completions, not the completed-local scalar composite.",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical field algebra structure on completed local ring of a scheme over a field",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.stalkFunctionFieldAlgebra; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.Scheme.functionField; AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; AlgebraicGeometry.LocallyRingedSpace.instFieldCarrierResidueField; AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme. Function-field and residue-field structures, not the requested composite.",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedLocalScalarMap|completed.*[Ss]calar|[Ss]calar.*[Cc]omplet (Mathlib/AlgebraicGeometry; WeilConjectures/AlgebraicGeometry; lean/Sheaf/AlgebraicGeometry)",
+   "results": "msearch.py Mathlib/AlgebraicGeometry: [grep] OK 0 hit(s). rg upstream: no matching composite. rg lean/Sheaf/AlgebraicGeometry: Scheme.Hom.completedLocalScalarMap is defined at NodalPointEtaleLocality.lean:38; other scalar-completion hits concern formal modules. Reuse the exact existing definition.",
+   "date": "2026-10-18",
+   "verdict": "existing project definition; no definition-node owner"
+  },
+  {
+   "tool": "grep",
+   "query": "completedLocalScalarMap|completed.local.scalar|completed stalk.*scalar (dag/nodes); blueprint_refs.py search completedLocalScalarMap",
+   "results": "DAG references occur in lem-trf-nodal-point-etale-locality, prop-trf-rational-frobenius-integral-model, and thm-trf-trace-formula-e; none is a definition node owning this map. IsOrdinaryNode in NodalOpenLocus is a different predicate. blueprint_refs.py search completedLocalScalarMap: 0 blueprint nodes match 'completedLocalScalarMap'.",
+   "date": "2026-10-18",
+   "verdict": "existing project definition; no definition-node owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-birational-nodal-connected-iso",
+  "date": "2026-10-18",
+  "group": "Q139"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Canonical k-algebra structure on completed local rings in the nodal finite-birational criterion used by the semistable-alteration input.",
+   "via": [
+    "lem-trf-finite-birational-nodal-connected-iso",
+    "lem-trf-semistable-modification-fibre-contractions",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointEtaleLocality",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.completedLocalScalarMap",
+  "statement": "noncomputable def Scheme.Hom.completedLocalScalarMap\n    {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) (x : X) :\n    k →+* AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x))\n      (X.presheaf.stalk x)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Owns the canonical explicit composite already defined in the unchanged published NodalPointEtaleLocality module. The theorem nodalPoint_etale_locality is not needed to construct or use this map; no duplicate Lean declaration is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01be33a81",
+  "group": "Q139",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01be33a81",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on f56eebcf6073: the theorem stmt_dep lem-trf-nodal-point-etale-locality is replaced by the new definition node def-trf-completed-local-scalar-map (existing:true on the unchanged NodalPointEtaleLocality completedLocalScalarMap; four-arrow statement matches the body; stmt_deps exist; record statement verbatim, ignoring whitespace; no duplicate owner in the live DAG). Item JSON differs from the returned head only in that stmt_dep; Lean byte-identical (sha 6546be50). H3 clauses re-checked: f not required over k is weaker and still true; X's k-structure is implied. Edge cases and universes fine. nt_compile --json clean, rc 0, 3.2 s. Advisory: the owner docstring still carries only the theorem node's blueprint tag."
+ }
+}

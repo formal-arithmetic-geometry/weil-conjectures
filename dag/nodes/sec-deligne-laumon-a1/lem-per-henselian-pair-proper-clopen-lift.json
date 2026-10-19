@@ -242,5 +242,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-f2a3f2b0c (reviewer sub-agent of L); spot-checked: I read Stacks 0CT9 (more-morphisms.tex l.15462, all three paragraphs). The item statement matches the source hypothesis by hypothesis and is unchanged. The five steps replace the Chow reduction with Nagata, which is Lean-closed and applies over Spec A once Step 1 shows Spec A is qcqs; then they follow the source's second paragraph. Step 2: open-immersion base change, proper-fp-permanence (b) and 01W6(2) show that Y^c is clopen in Xbar_0. Step 3: the surjectivity clause of 0A0B on the proper Xbar gives Wbar; a clopen open subscheme is a closed immersion, so Wbar is proper over S, and Wbar_0=Y^c as open subschemes. Step 4: by the irreducible-closed-subset clause of lemma-weil-pbc-stein-connectedness (in both its statement and its blueprint_update), a nonempty boundary T would meet Wbar_0, so T is empty. Step 5 restricts along j and is genuinely elementary. Every cited statement says what its step takes from it. I tested Y empty, I=0, A=0, proper X, and k[[t]] disjoint union k((t)) over k[[t]] with I=(t); each case is handled. There are no new nodes. The DAG has no duplicate (0CT9 appears only in the item and its citer), and walking the dependency closure (2073 nodes) finds no cycle. proof_deps is exactly the union of the steps' uses. I accept all eight declared off-unit generic tool_uses. There is no SGA. Cosmetic only: the verdict text on the first four mathlib_searches is generic, and citations.json, mentioned in the report, is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianPairProperClopenLift",
+  "declaration": "AlgebraicGeometry.Scheme.exists_proper_clopen_lift_of_henselianPair",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianPairProperClopenLift.lean",
+  "statement": "theorem Scheme.exists_proper_clopen_lift_of_henselianPair {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Y : (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).Opens) (hY : IsClosed (Y : Set (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) : Scheme.{u}))) [IsProper (Y.ι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))] : ∃ W : X.Opens, IsClosed (W : Set X) ∧ IsProper (W.ι ≫ f) ∧ (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ⁻¹ᵁ W = Y",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e352796a",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Stacks 0CT9 vs node vs Lean matched clause by clause: HenselianRing A I; IsSeparated, LocallyOfFiniteType and QuasiCompact on f; X₀ = Limits.pullback along Spec.map of Quotient.mk; Y an Opens with IsClosed and IsProper of Y.ι ≫ pullback.snd; ∃ W : X.Opens, closed, IsProper (W.ι ≫ f), fst ⁻¹ᵁ W = Y (equality of open subschemes). No extra hypotheses, single universe u as in Mathlib schemes. Edge cases checked: Y empty, I=0, A=0, I=⊤, proper X. lean.statement verbatim; node identical to live apart from lean; dependency records used as recorded; no definitions, sorry only; docstrings give source, blueprint id and all 5 steps. No duplicate found (grep 0CT9/proper_clopen_lift; henselian_clopen_restriction needs a proper ambient scheme). nt_compile --json clean in 3.0 s, exit 0."
  }
 }

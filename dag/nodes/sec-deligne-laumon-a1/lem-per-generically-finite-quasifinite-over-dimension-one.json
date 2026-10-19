@@ -325,5 +325,23 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-a8f97b540 (reviewer sub-agent of L); spot-checked: I read Stacks 0AB6 (varieties lemma-quasi-finite-in-codim-1), statement and proof. The item is exactly condition (1), and the statement is unchanged from the live node, which is still unsplit. There are no new nodes. Every cited statement checks out: Step 1 (01T2, 01HV localization), Step 2 (00DK base change), Step 3 (component generics through 00ES and density; correctly marked elementary), Step 4 (00E3 clauses (1) and (3); minimality gives QC = Q', so algebraicity transfers), Steps 5–7 (quotient domains E ⊂ D; algebra trdeg 0; the 02IJ inequality clause only, so no universal catenarity is needed; vertical case ht 0, horizontal case 1 ≤ 1 − t), Step 8 (00E5 and lem-kun-closed-point-field (a)), Step 9 (00KH dim 0 ⇒ finite discrete, empty case included) and Step 10 (fibre iso, pqf-lem-locqf-fibre-discrete, then pqf-def-quasifinite with the same witnesses). The one fault, repaired: Step 10 derived 'U→V locally of finite type' from the every-affine-pair criterion of lft-affine-pairs plus the single finite-type map R→A. One pair does not verify that criterion. I rewrote the sentence to derive it from g: every affine pair of U→V is an affine pair of g. Edge cases checked: dim 0 base, empty fibre, nonreduced rings, and counter-tests showing the hypotheses are needed (A¹_k; R[x] over a DVR; the vertical line). Duplicates: lem-trf-birational-curve-quasifinite is only the special case of integral curves over a field. I accept the four tool_uses. Batch-5 flag on lem-trf-affine-dimension-inequality: accepted. It is pure commutative algebra (02IJ inequality), and neither assumption gives it. Its own closure is 23 algebra nodes, and it is the only trf node among them, so citing it imports nothing from the trace formula's proof. The only other 02IJ node (sec-smooth-purity) is the equality clause and needs a universally catenary base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericallyFiniteQuasiFiniteOverDimensionOne",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericallyFiniteQuasiFiniteOverDimensionOne.lean",
+  "declaration": "AlgebraicGeometry.quasiFiniteAtPoint_of_generic_algebraic_of_local_dim_le_one",
+  "statement": "theorem quasiFiniteAtPoint_of_generic_algebraic_of_local_dim_le_one {Z S : Scheme.{u}} (g : Z ⟶ S) [LocallyOfFiniteType g] (s : S) [IsNoetherianRing (S.presheaf.stalk s)] (hdim : ringKrullDim (S.presheaf.stalk s) ≤ 1) (hgeneric : ∀ (T : Set Z), T ∈ irreducibleComponents Z → ∀ (η : Z), IsGenericPoint η T → @Algebra.IsAlgebraic (S.residueField (g η)) (Z.residueField η) _ _ (g.residueFieldMap η).hom.toAlgebra) : ∀ z : Z, g z = s → Scheme.Hom.IsQuasiFiniteAtPoint g z",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a41af01e9",
+  "group": "N4",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 0AB6(1) clause by clause: LocallyOfFiniteType g; IsNoetherianRing and ringKrullDim ≤ 1 on S.presheaf.stalk s; ∀ T ∈ irreducibleComponents Z, ∀ η, IsGenericPoint η T → Algebra.IsAlgebraic via residueFieldMap.toAlgebra; conclusion ∀ z, g z = s → IsQuasiFiniteAtPoint g z (recorded pqf-def-quasifinite, Stacks 01TD with finite type). No extra hypotheses or universe restriction; lean.statement verbatim; all 8 stmt_dep records read (irreducible-components is status mathlib with exact match). No duplicate: DominantIntegralCurveQuasiFinite is a special case, GenericallyFiniteProperNearDimensionOne is stronger. sorry only, docstrings carry source and blueprint id, report has both sections. nt_compile --json clean, 2.8 s. Advisory: proof docstring condenses the 10 node steps."
  }
 }

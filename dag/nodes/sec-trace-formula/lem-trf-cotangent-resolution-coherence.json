@@ -255,5 +255,50 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2ea633985 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node's statement and the sources: Stacks simplicial 08P1 (l.5836-5881), 08P2 (l.5884-5961), 019K/definition-homotopy-equivalent, 08ND; cotangent 08PT, both proofs. Steps 1-3 follow the first proof of 08PT: 08ND, then 08P2, then 08P1. The constant-complex calculation is checked: d^{-n} is 1 for even n and 0 for odd n, so s(const B) has cohomology B[0]. Steps 4-5 follow the second proof of 08PT: lifting generator by generator over constant simplices, including n=0, empty and infinite E, then 08NS. Step 6 uses only the 'natural in Q' clause of the derived-colimit node. In Steps 7-9 the recursive t_n, u(T)=T⊗A', theta and k are checked, and the cancellation c_{Q'}K(h)=K(t)c_Q is verified. New nodes: self-contained, statement-only, not restatements of the item; rg over the DAG for 08P1/08P2/simplicial abelian group finds no duplicate; blueprint from/via correct. FIX (one repair, B/C4-type): lem-trf-simplicial-abelian-set-homotopy-quasi-iso required single homotopies 'gf≃id' whose direction was ambiguous, while 08ND and the adjunction node supply only 'homotopic' in the 019K chain sense. Its hypothesis is changed to that sense, matching 08P2 exactly; the corrected file is in fixes/dag/nodes/sec-trace-formula/. The split_report tool use 08NS (lem-weil-pbc-trivial-kan-homotopy-equivalence) is accepted. The item's old maintainer tool_uses (lem-cbc-normalized-alternating-homotopy-equivalence, lem-cbc-realization-weak-equivalence, lem-cbc-simplicial-module-model, lem-coef-kan-quillen-right-proper) are unused and can be removed at landing. The dropped-machinery return is repaired.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentResolutionCoherence",
+  "declaration": "Algebra.CotangentResolution.exists_coherence",
+  "declarations": [
+   "Algebra.CotangentResolution.negativeComplex",
+   "Algebra.CotangentResolution.Augmentation",
+   "Algebra.CotangentResolution.AugmentedMap",
+   "Algebra.CotangentResolution.standardTerm",
+   "Algebra.CotangentResolution.standardBase",
+   "Algebra.CotangentResolution.standardAugmentation",
+   "Algebra.CotangentResolution.standardFace",
+   "Algebra.CotangentResolution.standardDegeneracy",
+   "Algebra.CotangentResolution.standardSquareMap",
+   "Algebra.CotangentResolution.IsStandard",
+   "Algebra.CotangentResolution.additiveAugmentation",
+   "Algebra.CotangentResolution.IsPolynomialResolution",
+   "Algebra.CotangentResolution.differentialTerm",
+   "Algebra.CotangentResolution.differentialGenerator",
+   "Algebra.CotangentResolution.DifferentialModel",
+   "Algebra.CotangentResolution.differentialComplex",
+   "Algebra.CotangentResolution.complexGenerator",
+   "Algebra.CotangentResolution.restrictComplex",
+   "Algebra.CotangentResolution.DifferentialMap",
+   "Algebra.CotangentResolution.derivedDifferentials",
+   "Algebra.CotangentResolution.Coherence",
+   "Algebra.CotangentResolution.cotangentComplex",
+   "Algebra.CotangentResolution.cotangentMap",
+   "Algebra.CotangentResolution.transportedMap",
+   "Algebra.CotangentResolution.exists_coherence"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentResolutionCoherence.lean",
+  "statement": "theorem exists_coherence [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)] : Nonempty (Coherence.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62c3655e9",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read the item, both stmt_deps (Mathlib DerivedCategory/HasDerivedCategory, KaehlerDifferential via CommRingCat.KaehlerDifferential), the module (25 decls) and the report. Statement field verbatim; the snapshot node differs from live only in lean. Clause checks: standardTerm/Base/Augmentation/Face/Degeneracy match the comonad formulas d_i=G^i eps G^{n+1-i}, s_i=G^i delta G^{n-i} (same convention as def-trf-comonad-standard-resolution); IsStandard pins objects, base, augmentation, all delta and sigma by HEq; negativeComplex = alternating complex extended along n->-n; IsPolynomialResolution = A-algebra iso A[E]~P_n, surjectivity, QuasiIso to B[0]; DifferentialModel and DifferentialMap pinned on generators b(x)dx; standardMap pinned to the recursive standardSquareMap with strict id/comp. Nonempty record not hollow: the only free field, comparison, is pinned by comparison_standard=refl plus compatibility with an augmented map std->P (std is levelwise free with generator-preserving degeneracies, so it lifts against the trivial fibration), hence it is the canonical 08QI comparison. Edge cases B=0, empty or infinite E, n=0, identity squares; no extra hypotheses; HasDerivedCategory.{u+1} family always satisfiable. No duplicate L_{B/A} (cotangent citers have no lean record; Mathlib cotangentComplex is the conormal map). nt_compile --json: 6.5 s, exit 0, clean. Advisory: second reading is the author's self-check; the two proof-only non-public imports are unused; the proof-only TrivialKanFibration source is missing from the checkout (maintainer note)."
  }
 }

@@ -11,7 +11,9 @@
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
   "def-weil-etale-morphism",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-per-fs-log-group-action",
+  "def-per-strict-log-morphism"
  ],
  "proof": [
   {
@@ -281,5 +283,31 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-c890a5eaf (reviewer sub-agent of L); spot-checked: I read ILO X Prop 1.2 and its whole proof (printed pp.136-139). The item statement is unchanged from the Q143 delivery that created it: 1.2's first and last assertions, with hypotheses the same as ILO's or slightly more general. Not weakened. I checked all 10 steps against the cited statements. Step 2: μ_N(A)=⟨ζ_N⟩ because Π(1−ζ^k)=N is a unit, and the roots lemma gives order N. Step 3: every hypothesis of divisible-unit-lattice-extension holds (B/D=C is free). Step 4: z^{mN}=1, reduction is injective on μ_{mN}(A), and g is trivial on k, so z is a character with values in μ_N. Steps 5-6: P=v̄⁻¹(S)≅K⊕S is fs with P^×=K free, the stalk chart holds with E=K, and the cokernel torsion embeds in F/iL. Step 7: the double product of translates is valid. Step 8: restricting to m invertible is needed, and strictness and log smoothness of Y°/B were checked. Step 9: k⊗(F/Q^gp)≅k⊗Z^r, and composing with π gives a basis-to-basis map, hence injectivity. Step 10: the strict Jacobian criterion applies and smoothness spreads over translates. Edge cases tested: trivial G, S=Q=0, Kummer chart, Q→S not injective, nonabelian G, D with p-torsion. New nodes: lem-per-log-cotangent-characteristic-quotient is true (π respects every relation; the cokernel E has k⊗E=0 so its order is invertible; Hensel gives divisibility). It is not a duplicate of log-smooth-differential-generators, which bases all of ω, or of kato-lattice-chart-realization. lem-per-strict-log-jacobian-criterion (Kato 3.12, WANTED) is true and has no existing node. Neither new node restates a clause of the item (D1). Batch-5: the closures of the flagged citations (sharp-cone-lattice, fine-log-stalk-chart-spreading, associated-log-universal-stalks, def-trf-fs-log-blowup, def-per-fs-log-smooth-etale) contain only trf monoid and log definitions and generic algebra. There is no thm-trf, trace-transport or Poincaré node, so all seven flags are accepted. The four declared tool uses are accepted. No cycle and no SGA. FIX (C4): Step 1 applied the cone lemma to S=M̄_x̄ as sharp fs without a citation. It now cites lem-per-very-tame-equivariant-sharp-chart, which states this and was already in proof_deps; proof_deps still equals the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantLogSmoothChart",
+  "declaration": "AlgebraicGeometry.LogSmoothPreparation.exists_equivariant_logSmooth_chart",
+  "declarations": [
+   "AlgebraicGeometry.LogSmoothPreparation.FixesCharacteristic",
+   "AlgebraicGeometry.LogSmoothPreparation.UnitMultiple",
+   "AlgebraicGeometry.LogSmoothPreparation.globalLogAction",
+   "AlgebraicGeometry.LogSmoothPreparation.globalLogPullback",
+   "AlgebraicGeometry.LogSmoothPreparation.Chart",
+   "AlgebraicGeometry.LogSmoothPreparation.exists_equivariant_logSmooth_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantLogSmoothChart.lean",
+  "statement": "theorem exists_equivariant_logSmooth_chart {X B : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X B) (hf : f.IsLogSmooth) (G : Type v) [Group G] [Finite G] (aX : FSLogGroupAction G X) (aB : FSLogGroupAction G B) (hequivariant : aX.IsEquivariant aB f) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X.scheme) (hfixed : ∀ g : G, x ≫ (aX.baseAction g).hom = x) (horder : IsUnit (Nat.card G : B.scheme.presheaf.stalk ((x ≫ f.base) default))) (hX : FixesCharacteristic aX x) (hB : FixesCharacteristic aB (x ≫ f.base)) (N : ℕ) (hN : 0 < N) (hexponent : ∀ g : G, g ^ N = 1) (Λ : Type u) [CommRing Λ] [Algebra (CyclotomicRing N ℤ ℚ) Λ] (S : Submonoid (CyclotomicRing N ℤ ℚ)) [IsLocalization S Λ] (hinvertN : (N : CyclotomicRing N ℤ ℚ) ∈ S) (ζ : Λˣ) (hζ : IsPrimitiveRoot (ζ : Λ) N) (cB : Λ →+* Γ(B.scheme, ⊤)) (hcoefficients : ∀ (g : G) (r : Λ), (aB.logMap g).base.appTop (cB r) = cB r) (Q : Type u) [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (hsharp : ∀ q : Q, IsUnit q → q = 1) (a : Q →* B.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 B.scheme)))) (ha : B.logStructure.IsChart (Scheme.Etale.mk (𝟙 B.scheme)) a) (χQ : G →* (Algebra.GrothendieckGroup Q →* Subgroup.zpowers ζ)) (heigen : ∀ (g : G) (q : Q), UnitMultiple B.logStructure (Scheme.Etale.mk (𝟙 B.scheme)) cB (χQ g (Algebra.GrothendieckGroup.of q)).val (a q) (globalLogAction aB g (a q))) : Nonempty (Chart f aX aB x Λ ζ cB Q a χQ)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59e5e6e36",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of afea8ee616ca. Lean file byte-identical (sha256 7a6a18ca); the only node change replaces stmt_dep lem-trf-log-fan-chart-blowup with landed def-per-strict-log-morphism (existing:true on LogFanChartBlowup, owns IsStrict/CharacteristicRelation, record identical to side). Versus live: only lean and added def-node stmt_deps (group-action, strict) differ; no other files touched. Re-checked every hypothesis and conclusion clause against node and ILO X 1.2: FixesCharacteristic, UnitMultiple eigen equations, cartesian Λ[P] target with monomial chart and character action, strict, smooth and equivariant comparison, invertible cokernel torsion, torsion-free units. Edge cases OK; no theorem stmt_dep; no hollow defs; sorry only; docstrings OK; statement verbatim. nt_compile --json clean, exit 0, 20.1 s. Advisories: IsFineSaturatedMonoid owner def-trf-log-regular-pair reached only transitively; targetAction log part could be pinned on targetChart."
  }
 }

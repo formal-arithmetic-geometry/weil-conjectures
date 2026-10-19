@@ -213,5 +213,23 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q49-97611c337 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, sources, and unit route in full. Corrected JSON and review.md supplied: replaced the unnecessary finite-Euler wrapper with the existing affine cohomology comparison, added the missing higher-cohomology vanishing citation, and recorded generic tool uses. Original statement preserved; edge cases and route-pivot exclusions checked.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalCurveNormalizationEuler",
+  "declaration": "AlgebraicGeometry.Scheme.nodal_curve_normalization_euler",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalCurveNormalizationEuler.lean",
+  "statement": "theorem nodal_curve_normalization_euler (k : Type u) [Field k] [IsAlgClosed k] (B : Scheme.{u}) [B.Over (Spec (.of k))] [IsProper (B ↘ Spec (.of k))] [IsReduced B] [ConnectedSpace B] (hpure : ∀ Z : Set B, Z ∈ irreducibleComponents B → topologicalKrullDim Z = 1) (hnodal : ∀ x : B, x ∉ (B ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (B.presheaf.stalk x)) (B.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (N : Set B) (hN : N = {x : B | x ∉ (B ↘ Spec (.of k)).smoothLocus}) (v : ℕ) (components : Fin v ≃ irreducibleComponents B) (Z : Fin v → Scheme.{u}) [∀ a : Fin v, IsIntegral (Z a)] (j : ∀ a : Fin v, Z a ⟶ B) [∀ a : Fin v, IsClosedImmersion (j a)] (hcomponents : ∀ a : Fin v, Set.range (j a) = (components a).1) (hnormalizations : ∀ a : Fin v, IsProper ((Z a).fromNormalization ≫ j a ≫ B ↘ Spec (.of k)) ∧ Smooth ((Z a).fromNormalization ≫ j a ≫ B ↘ Spec (.of k)) ∧ ConnectedSpace (Z a).normalization) : Scheme.Modules.eulerChar k (Modules.unit B) = (v : ℤ) - (N.ncard : ℤ) - ∑ a : Fin v, (((Z a).fromNormalization ≫ j a ≫ B ↘ Spec (.of k)).genus : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08fedb11b",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Checked each clause of the node against the Lean: k algebraically closed, B proper/reduced/connected, pure dimension one per component, split-node completion condition worded as in the landed dependency lemma, e = number of nonsmooth points (finite by that lemma, ncard), components as integral closed subschemes (unique up to iso), recorded normalization/Hom.genus/eulerChar declarations; formula in ℤ correct. Genus uses the recorded def-sc-genus declaration (dim H0 of Ω¹), which the genus node states equals dim H1(O) for smooth proper connected curves. No extra hypotheses; universes as in the dependency lemma. Item record differs from live only by the added lean field; the 12 dependency records are unchanged; lean.statement matches the file exactly. No duplicate statement in lean/Sheaf. Docstrings carry the source place and blueprint tag, the proof docstring follows the four steps, proof is sorry only, both report sections present. nt_compile --json: 3.4 s, exit 0, clean. Advisory: the worker report says reduced-normalization helpers are used, but the statement does not use them."
  }
 }

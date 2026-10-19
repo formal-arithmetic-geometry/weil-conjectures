@@ -13,7 +13,9 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-finitely-presented-algebra",
-  "def-pc-ring-pseudo-coherent-complex"
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-trf-derived-coinduction",
+  "def-trf-affine-diagonal-module-data"
  ],
  "proof": [
   {
@@ -350,5 +352,29 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-2f74e6ecd (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, the statements of all 25 cited nodes, the parent's citing step, unit sk-i-curve-zero, and Stacks dga.tex 09LN (l.4954) and 09LT (l.5416). The item statement is unchanged; it holds on A=R[x], A=R[x]/(x^2) and A=0. The proof never uses the hypotheses on T, which stay in the statement. Steps 1-11 check: B is perfect over S via A_1 tensor_R L, and P->S is flat. Step 3 applies shriek-calculus (iii) to P->A_2 with flat P->S, giving E=RHom_S(B,S)=B tensor_{A_2} D in D(B); biduality makes E perfect over S. In Step 4 the adjunct alpha_V restricts over S to bidual tensor V followed by signed finite-projective evaluation; the degree/differential nodes make this a chain isomorphism, and conservativity gives an isomorphism in D(B). Steps 5-6 are K-flat cancellations, and the S-action through e is checked. Step 7 is the new adjunction with X=A. Step 8: x_i-a_i is regular, so the Koszul complex is a bounded free resolution. Step 9 gives H=A[-n] in D(A). Step 10: coinduction of a perfect algebra gives C_e(V)=T[-n]. Step 11: the shriek-Hom adjunction gives RHom_A(D[n],T)=RHom_A(C,T), with the correct shift sign. New node lem-trf-derived-bimodule-tensor-hom is true by currying with a K-projective model of X and a K-injective model of V, and is correctly sourced to 09LN/09LT. It holds on S=B, E=0 and k[t]->k with both sides k[-1]. It is not a duplicate: the coinduction adjunctions are the special case E=B and def-sfb-derived-tensor-hom-adjunction-modules is a same-ring adjunction. It is not a clause of the item, and B1-B9 hold. I accept the declared generic algebra tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PolynomialDiagonalRhomReduction",
+  "declaration": "AlgebraicGeometry.polynomial_diagonal_rhom_reduction",
+  "declarations": [
+   "AlgebraicGeometry.polynomialDiagonalHom",
+   "AlgebraicGeometry.polynomialDiagonalDualizing",
+   "AlgebraicGeometry.polynomial_diagonal_rhom_reduction"
+  ],
+  "file": "lean/Sheaf/TraceFormula/PolynomialDiagonalRhomReduction.lean",
+  "statement": "theorem polynomial_diagonal_rhom_reduction (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [IsNoetherianRing R] [IsNoetherianRing A] (hflat : RingHom.Flat (algebraMap R A)) [Algebra.FinitePresentation R A] (n : ℕ) (p : MvPolynomial (Fin n) R →ₐ[R] A) (hp : Function.Surjective p) [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} A)] [HasDerivedCategory.{u} (ModuleCat.{u} (MvPolynomial (Fin n) R))] [HasDerivedCategory.{u} (ModuleCat.{u} (A ⊗[R] A))] : ∃ e : ∀ (T : DerivedCategory (ModuleCat.{u} A)), DerivedCategory.IsPseudoCoherent T → (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj T) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q))) → ((polynomialDiagonalHom R A).obj T ≅ (ihom (polynomialDiagonalDualizing R A n p.toRingHom)).obj T), ∀ (T T' : DerivedCategory (ModuleCat.{u} A)) (hT : DerivedCategory.IsPseudoCoherent T) (hT' : DerivedCategory.IsPseudoCoherent T') (hTor : (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj T) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q)))) (hTor' : (∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj T') ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj Q)))) (f : T ⟶ T'), (polynomialDiagonalHom R A).map f ≫ (e T' hT' hTor').hom = (e T hT hTor).hom ≫ (ihom (polynomialDiagonalDualizing R A n p.toRingHom)).map f",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the landed affine-comparison constructions for the diagonal and K-flat first scalar extension, and the landed derived-coinduction construction for RHom_P(A,P) with its precomposition A-action. The family of isomorphisms is quantified over exactly pseudo-coherent T of finite R-Tor amplitude; its equation asserts naturality for every morphism between such objects. Definition ownership is recorded by def-trf-derived-coinduction and def-trf-affine-diagonal-module-data; the coinduction adjunction theorem remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b96d6db0",
+  "group": "N2",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 3ba1c8264a7b (theorem stmt_deps). Two new definition nodes with existing:true records on the unchanged modules repair it: def-trf-derived-coinduction owns ModuleCat.derivedCoinduction, def-trf-affine-diagonal-module-data owns relativeDualizingDerivedExtension and relativeDualizingModuleDiagonal. Item stmt_deps are now the 6 base def nodes plus these 2, with no theorem node; in the item record only lean and stmt_deps differ from live. Item .lean is byte-identical (sha e40d9949) to the previous head, which was accepted clause by clause; re-read against the node with the same mapping. New-node statements are verbatim in the live files (from 'def'); node texts match the bodies and sources 0A70/0A71 and 0E2U/06Y0; universes wR/wB stay free; definitions are real, not hollow; the declaration lists cover all owner-module decls used; no cycle; no sibling def node owns these decls in side live. nt_compile --json clean in 7.4 s, only the theorem is sorry. Advisory: two Lean definitions of derived scalar extension now exist (concrete K-flat relativeDualizingDerivedExtension and the abstract left-adjoint moduleDerivedExtension of def-zl-ring-derived-scalar-extension), both landed before this delivery; maintainer note only."
  }
 }

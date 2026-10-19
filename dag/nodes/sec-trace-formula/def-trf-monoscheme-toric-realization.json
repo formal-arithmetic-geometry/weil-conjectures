@@ -193,22 +193,30 @@
    "AlgebraicGeometry.Monoscheme.NormalizedTower",
    "AlgebraicGeometry.Monoscheme.NormalizedPullback",
    "AlgebraicGeometry.Monoscheme.NormalizedContraction",
-   "AlgebraicGeometry.Monoscheme.NormalizedTower.IsDesingularization"
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.IsDesingularization",
+   "AlgebraicGeometry.Monoscheme.IsCoherentIdeal",
+   "AlgebraicGeometry.Monoscheme.emptyIdeal",
+   "AlgebraicGeometry.Monoscheme.Hom.sectionMap",
+   "AlgebraicGeometry.Monoscheme.IsRealizationMap",
+   "AlgebraicGeometry.Monoscheme.existsUnique_realizationMap",
+   "AlgebraicGeometry.Monoscheme.realizationMap",
+   "AlgebraicGeometry.Monoscheme.existsUnique_torusEmbedding",
+   "AlgebraicGeometry.Monoscheme.torusEmbedding"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeToricRealization.lean",
   "statement": "structure Fine",
   "branch": "newtargets-dag",
-  "by": "Q25",
+  "by": "NN",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The source file uses legacy imports because the recorded FineFanBlowup module is not a Lean module-system file. Its definitions are imported and reused. Named proof obligations establish sharpening and canonical gluing; all theorem proofs remain sorry. The torus action is selected only from its unique chartwise characterization, never from a bare existence of a map."
+  "note": "Interface repair under brief-stage2 §1(B): the recorded module provided only nonempty coherent ideals, and no induced realization map or dense torus embedding. Preserve every existing declaration and append coherence allowing zero generators, the empty subsheaf ideal, the section homomorphism on incident charts, the realization map pinned by its unique monomial chart formulas, and the torus embedding pinned by the degree/localization map on every component chart. Only uniquely determined objects use a postponed existence/uniqueness theorem; no bare existence choice supplies data."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b2c25b3f9",
-  "group": "Q25",
+  "reviewer": "NT-stage2-cc-5b848c2d6",
+  "group": "NN",
   "result": "pass",
-  "note": "Re-delivery after RETURN of 084029194154. R1 fixed: theorem stmt_dep replaced by new existing:true def node def-trf-normalized-blowup (normalizedBlowup/normalizedBlowupMap in NormalizedBlowupCalculus; statement verbatim from live line 48; plain defs = blowup.reducedNormalization and fromReducedNormalization ≫ blowupMap; stmt_deps def-nagata-global-blowup + def-weil-pbc-reduced-normalization; no competing node in live or runs/2). R2 fixed: ToricComponent M is an actual connected-component class of an arbitrary M with per-component torsion-freeness; generic point from a true named ∃! (affine charts nonempty, T0); torus Spec k[L] acting on the actual open componentRealization ⊆ realization k M by a chart-pinned ∃!-choose action; IsTorusEquivariant k M J compares comaps of an ideal of k[M] through componentι for every torsion-free component, which covers the three citers. Rest of the module unchanged from the reviewed head. Node diff vs live: only lean and stmt_deps. 71 declarations match the record; 10 sorry, all named theorems with docstring proofs; no sorry data. nt_compile --json exit 0 (6.1 s); broken control fails. Advisory: def-sc-normalization is reached only transitively."
+  "note": "Item lem-trf-toric-monoid-comparison matches the node clause by clause. (i): bijection (forward, unique inverse, injective), empty→⊥, ⊤↔wholeIdeal, component nonvanishing via comap componentι, arbitrary pullback using IdealSheafData.comap = extended ideal. (ii): existence, torsion-free, ∃! iso over k[M] to normalizedBlowup, IsToricComparison pins lifted actions, equivariance and the unchanged torus embedding, smooth-pullback IsPullback square with naturality. (iii): smooth realization, converse for torsion-free M, ULift ℚ regular ⇒ N^r×Z^t stalks. No extra hypotheses. Dependency §1(B) repair is a pure append of 8 declarations; realizationMap and torusEmbedding are chosen from chart-pinned ∃!; no competing repair live or in runs. Records: lean-only diffs, statement verbatim, all proof_dep modules imported. nt_compile --json clean (10.8 s / 8.6 s, load ~100); broken control fails. Advisory: the dependency's new lean.note drops Q25's legacy-import explanation."
  }
 }

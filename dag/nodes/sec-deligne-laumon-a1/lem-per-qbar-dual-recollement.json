@@ -477,5 +477,45 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-980a30ac4 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 32 dependency statements, unit sk-p-dl-a1-perverse, the main-20261015 blueprint text of lem-per-artin-gabber-affine-curve (Steps 2 and 3, the correct from.place), and Bhatt-Scholze Lemmas 6.1.9-6.1.16, 6.7.19 and 6.7.20. The statement is unchanged and true. Small cases checked: U or Z empty, clopen X, K=j_!L or Ri_*L, X=Spec k. No cycle, no new nodes, no SGA. The off-unit tool uses are generic infrastructure and I accept them. prop-sf-open-closed-triangle-all-stages is not a duplicate: it is over the finite-field datum and gives only the first triangle. Three repairs, all in the item's proof (fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-qbar-dual-recollement.json; only proof and proof_deps changed). (1) E1/C1, Step 1: separatedness of Z, U, i and j is required by the duality, ordinary-adjunction, exceptional-projection and heart-fibre nodes but was never shown. I added [lem-weil-pbc-separated-cancellation] and the diagonal factorization. (2) C4/E5: the statement says the adjunction maps give j^*j_!≅1 and i^*Ri_*≅1, but the cited nodes (and BS 6.1.12) give only abstract isomorphisms, and the old Steps 12-13 called them the unit and counit. New Step 12 writes out the standard argument that an abstract RL≅1 makes the unit invertible (dually for the counit). (3) Steps 8 and 12: the first triangle used the descended sheaf unit, while Steps 10, 14 and 16 used the existence-only adjunction of lem-per-qbar-ordinary-adjunction. Step 8 now writes the descended unit as Ri_*(γ) composed with the cited unit, and Step 12 proves γ invertible, so the triangle with the cited unit is distinguished. Cross-references renumbered in Steps 13, 15, 16 and 17; every step is at most 2000 characters and proof_deps equals the union of uses. Advisory only: Step 7 assumes the scalar comparisons for j_! and j^* carry the termwise unit and counit. I accept this as the canonical identification j^!=j^* (restriction commutes strictly with tensoring by O_L).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.QbarDualRecollement",
+  "declaration": "WeilConjectures.QbarDualRecollement.qbar_dual_recollement",
+  "declarations": [
+   "WeilConjectures.sfArbitraryBaseStandard_existsUnique",
+   "WeilConjectures.sfArbitraryBaseStandard",
+   "WeilConjectures.QbarDualRecollement.dual",
+   "WeilConjectures.QbarDualRecollement.exceptional",
+   "WeilConjectures.QbarDualRecollement.Exact",
+   "WeilConjectures.QbarDualRecollement.cohomology",
+   "WeilConjectures.QbarDualRecollement.rationalDatum",
+   "WeilConjectures.QbarDualRecollement.rationalDual",
+   "WeilConjectures.QbarDualRecollement.dualInclusion",
+   "WeilConjectures.QbarDualRecollement.Restriction",
+   "WeilConjectures.QbarDualRecollement.DualRestrictions",
+   "WeilConjectures.QbarDualRecollement.restrictionShift",
+   "WeilConjectures.QbarDualRecollement.exceptionalShift",
+   "WeilConjectures.QbarDualRecollement.ShiftCompatible",
+   "WeilConjectures.QbarDualRecollement.OpenScalarCompatible",
+   "WeilConjectures.QbarDualRecollement.rationalExceptional",
+   "WeilConjectures.QbarDualRecollement.exceptionalInclusion",
+   "WeilConjectures.QbarDualRecollement.ClosedScalarCompatible",
+   "WeilConjectures.QbarDualRecollement.Conclusion",
+   "WeilConjectures.QbarDualRecollement.qbar_dual_recollement"
+  ],
+  "file": "lean/Sheaf/SixFunctors/QbarDualRecollement.lean",
+  "statement": "theorem qbar_dual_recollement (X Z U : PerAdic.Base k) (i : Z.scheme ⟶ X.scheme) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (j : U.scheme ⟶ X.scheme) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (hc : Set.range j = (Set.range i)ᶜ) : ∃ (B : ∀ W : PerAdic.Base k, Datum l hk.out Ω (𝟙 W.scheme)) (P : ∀ W : PerAdic.Base k, Properties l hk.out Ω (B W)), Nonempty (Conclusion l Ω B P X Z U i j)",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea253bd78",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery of Q141 lem-per-qbar-dual-recollement after the RETURN of e891ba5a4387. H13 fixed: the lem-per-adic-heart-pullback-fibres record is byte-identical to live, the AdicHeartArbitraryBase module is gone, and sfArbitraryBaseStandard_existsUnique/sfArbitraryBaseStandard moved into the item module with docstrings, listed in lean.declarations; no live duplicate of an arbitrary-base standard t-structure (SfConstructibleHeart version needs a finite-field datum). H3 fixed: the free exists-CommShift is replaced by exceptionalShift, built from the two dualShifts, restrictionShift_i(-n) and neg_neg; endpoints checked by hand, closed square now mirrors the open one. Rest of statement unchanged from the previous head and re-checked against the node (six exact functors, adjunctions, invertible units/counits, zero composites, both triangles with actual unit/counit, dual restrictions with shift and scalar squares, cohomology/fibre restriction); edge cases empty Z/U/X, K=0, all n. Only the item record differs from live, by its lean block; statement verbatim; all 20 declarations exist. nt_compile --json on the snapshot module: 24.2 s, exit 0, no warnings. Advisory: rationalDatum .choose; free CommShift in the push exactness fields."
  }
 }
