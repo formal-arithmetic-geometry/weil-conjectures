@@ -17253,3 +17253,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/M5/Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField (stage 3; reviewer PASS; first push; landing 20261019T093527-L-2322858 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/M7/Sheaf.RingTheory.GRingOfWeaklyEtale (stage 3; reviewer PASS; first push; landing 20261019T093528-L-2323080 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/M8/Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyOfFinitePresentation (stage 3; reviewer PASS; first push; landing 20261019T093530-L-2323272 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:35 L: merged deliver/N4/Sheaf.AlgebraicGeometry.KummerModuleCoefficients (stage 3; reviewer PASS; first push; landing 20261019T093531-L-2323446 (proof); batch 20261019T093237; modules 1; new nodes 0)

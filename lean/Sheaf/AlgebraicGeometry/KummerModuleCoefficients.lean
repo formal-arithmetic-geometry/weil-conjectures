@@ -73,7 +73,21 @@ theorem kummerCoefficientInsertion_naturality (X : Scheme.{u}) (m : ℕ)
         AddCommGrpCat.ofHom (kummerCoefficientInsertionApp X m A a V) =
       AddCommGrpCat.ofHom (kummerCoefficientInsertionApp X m A a U) ≫
         ((kummerAbelianTwist X m).obj A).obj.map f := by
-  sorry
+  ext x
+  let P := kummerRootModulePresheaf X m ⊗ (Functor.const X.Etaleᵒᵖ).obj A
+  have h := congrArg (fun g ↦ g.hom (TensorProduct.tmul _ x a))
+    ((toSheafify X.smallEtaleTopology P).naturality f)
+  change ((toSheafify X.smallEtaleTopology P).app V).hom
+      ((P.map f).hom (TensorProduct.tmul _ x a)) =
+    ((sheafify X.smallEtaleTopology P).map f).hom
+      (((toSheafify X.smallEtaleTopology P).app U).hom (TensorProduct.tmul _ x a)) at h
+  have hp : (P.map f).hom
+      (TensorProduct.tmul _ (x : (kummerRootModulePresheaf X m).obj U) a) =
+      TensorProduct.tmul _
+        ((kummerRootModulePresheaf X m).map f x) a := by
+    rfl
+  rw [hp] at h
+  exact h
 
 /-- The canonical map `i_a : μ_m → μ_m ⊗ A_C`, `x ↦ x ⊗ a`.
 Source: Stacks, Tags 03PK and 03EK (blueprint: def-pur-kummer-module-coefficients). -/
@@ -89,7 +103,15 @@ Proof: multiplication by m on the roots sheaf is zero by its kernel inclusion in
 The additive cohomology functor sends this equality to multiplication by m equal to zero. -/
 theorem kummerRootCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
     (x : Sheaf.H (X.rootsOfUnitySheaf m) q) : m • x = 0 := by
-  sorry
+  have h : m • 𝟙 (X.rootsOfUnitySheaf m) = 0 := by
+    change m • 𝟙 (kernel (m • 𝟙 X.gmSheaf)) = 0
+    rw [← cancel_mono (kernel.ι (m • 𝟙 X.gmSheaf)), Preadditive.nsmul_comp,
+      Category.id_comp, zero_comp, ← Category.comp_id (kernel.ι _),
+      ← Preadditive.comp_nsmul, kernel.condition]
+  have hx := congrArg (fun f ↦ Sheaf.H.map f q x) h
+  rw [Sheaf.H.map_nsmul_apply, Sheaf.H.map_id_apply, Sheaf.H.map_apply,
+    Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero] at hx
+  exact hx
 
 /-- The unique residue-ring action on roots-of-unity cohomology.
 Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients). -/
@@ -105,7 +127,20 @@ the identity equal to zero; apply the additive cohomology functor in degree q. -
 theorem kummerModuleCohomology_annihilated (X : Scheme.{u}) (m q : ℕ)
     (A : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod m)))
     (x : Sheaf.H ((kummerAbelianTwist X m).obj A) q) : m • x = 0 := by
-  sorry
+  let F := (kummerModuleTwist X m).obj A
+  have h : m • 𝟙 ((kummerAbelianTwist X m).obj A) = 0 := by
+    apply Sheaf.hom_ext
+    ext U y
+    have hy (z : F.obj.obj U) : m • z = 0 := by
+      rw [← Nat.cast_smul_eq_nsmul (ULift.{u + 1} (ZMod m)),
+        show (m : ULift.{u + 1} (ZMod m)) = 0 by
+          apply ULift.ext
+          exact ZMod.natCast_self m, zero_smul]
+    exact hy y
+  have hx := congrArg (fun f ↦ Sheaf.H.map f q x) h
+  rw [Sheaf.H.map_nsmul_apply, Sheaf.H.map_id_apply, Sheaf.H.map_apply,
+    Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero] at hx
+  exact hx
 
 /-- The unique residue-ring action on twisted coefficient cohomology.
 Source: Stacks, Tag 03PK (blueprint: def-pur-kummer-module-coefficients). -/
