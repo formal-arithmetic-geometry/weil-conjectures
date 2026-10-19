@@ -13,9 +13,70 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V=\\mathcal O_v$ and let $C$ be the integral closure of $V$ in $E$. By [lem-per-valuation-normalization-localizations], $C$ is a nonzero domain integral over $V$, with fraction field $E$. A domain has only the idempotents $0,1$: $e^2=e$ gives $e(e-1)=0$. Thus [lem-trf-integral-component-henselian-permanence] applies to $V\\to C$ and makes $C$ henselian local. Write $\\mathfrak n$ for its unique maximal ideal. Its localization $C_{\\mathfrak n}$ equals $C$, since every denominator outside $\\mathfrak n$ is already a unit. The normalization lemma makes this a valuation ring whose intersection with $F$ is $V$. Conversely every valuation ring of a prolongation is $C_{\\mathfrak m}$ for a maximal ideal $\\mathfrak m$ of $C$; locality forces $\\mathfrak m=\\mathfrak n$. This proves existence and uniqueness of the prolongation up to equality of valuation subrings, and its valuation ring is henselian. The argument in this step applies to every henselian valuation ring of $F$ and every finite algebraic extension of $F$.",
+   "uses": [
+    "lem-per-valuation-normalization-localizations",
+    "lem-trf-integral-component-henselian-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, valued-field background; agent refinement: local integral closure and maximal-localization description of prolongations"
+   }
+  },
+  {
+   "text": "Choose the additive valuation $\\widetilde v:E\\to\\Delta\\cup\\{\\infty\\}$ of $C$, identifying its restriction value group with $\\Gamma=v(F^\\times)$. By [lem-per-algebraic-valuation-coarsening-correspondence], $\\Delta/\\Gamma$ is torsion. Fix $\\varepsilon\\in\\Gamma$ with $\\varepsilon>0$, possible since $v$ is nontrivial. For any threshold $\\delta\\in\\Delta$, choose $n>0$ with $n\\delta\\in\\Gamma$. The element $\\gamma=n\\max(\\delta,0)+\\varepsilon$ belongs to $\\Gamma$ and is strictly greater than $\\delta$. Thus $\\Gamma$ is cofinal in $\\Delta$. Balls on $F$ cut out by $\\gamma\\in\\Gamma$ are exactly the original $v$-balls; every ball cut out by a threshold in $\\Delta$ contains such a ball, and every original ball is the intersection with $F$ of the same $\\widetilde v$-ball. Translation gives the asserted subspace topology on $F$.",
+   "uses": [
+    "lem-per-algebraic-valuation-coarsening-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, valued-field background; agent refinement: cofinality of base values, with no Archimedean hypothesis"
+   }
+  },
+  {
+   "text": "Let $w$ be any valuation on $E$ whose topology restricts to the original topology on $F$, and put $W=\\mathcal O_w$ and $V_w=W\\cap F$. Apply [lem-per-algebraic-valuation-coarsening-correspondence] to $W$ and $E/F$. The value group of the restriction $w|_F$ is cofinal in that of $w$: use exactly the inequality $n\\max(\\delta,0)+\\varepsilon>\\delta$ of Step 2 with any positive restricted value. Such a positive value exists: if $w|_F$ were trivial, its value group would be zero, so the torsion assertion and torsion-freeness of an ordered group would force $w$ trivial; its restricted topology would then be discrete, whereas the given nontrivial $v$-topology is nondiscrete. Consequently the valuation topology of $w|_F$ equals the induced topology, hence equals the $v$-topology by hypothesis. By [lem-per-valuation-topology-common-coarsening] there is a proper valuation ring $U\\subsetneq F$ containing both $V_w$ and $V$. By [lem-per-henselian-valuation-coarsenings], $U$ is henselian because it contains the henselian valuation ring $V$.",
+   "uses": [
+    "lem-per-algebraic-valuation-coarsening-correspondence",
+    "lem-per-valuation-topology-common-coarsening",
+    "lem-per-henselian-valuation-coarsenings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, valued-field background; agent refinement: comparison of the restricted valuation itself, then a common henselian coarsening"
+   }
+  },
+  {
+   "text": "Apply [lem-per-algebraic-valuation-coarsening-correspondence] once to $W$ over $V_w$ and once to $C$ over $V$. In both cases $U$ is a proper valuation overring of the restricted ring. We obtain proper valuation overrings $U_W\\supseteq W$ and $U_C\\supseteq C$ in $E$ with $U_W\\cap F=U_C\\cap F=U$. To compare them, form the integral closure $D$ of $U$ in $E$. It is a nonzero integral domain integral over $U$ by [lem-per-valuation-normalization-localizations]. Since $U$ is henselian, [lem-trf-integral-component-henselian-permanence] makes $D$ local; as in Step 1 its only maximal localization is $D$ itself. The converse clause of the normalization lemma therefore forces $U_W=D=U_C$. Hence $W$ and $C$ have a common proper valuation overring in $E$. They are nontrivial (their restrictions to $F$ are nontrivial), so [lem-per-valuation-topology-common-coarsening] gives equality of their topologies on $E$. This proves the requested separable-extension clause. This argument in fact also works for finite inseparable extensions; no strengthening of the recorded statement is needed.",
+   "uses": [
+    "lem-per-algebraic-valuation-coarsening-correspondence",
+    "lem-per-valuation-normalization-localizations",
+    "lem-trf-integral-component-henselian-permanence",
+    "lem-per-valuation-topology-common-coarsening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374, valued-field background; agent refinement: lift the common coarsening and compare its two prolongations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-valuation-normalization-localizations",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-per-algebraic-valuation-coarsening-correspondence",
+  "lem-per-valuation-topology-common-coarsening",
+  "lem-per-henselian-valuation-coarsenings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed pp.373–374, valued-field background for the Bourbaki VI §8 Krasner reference. The normalization/coarsening route is written by Q09; the missing Bourbaki text is WANTED in report.md. Stacks Tag 092X supplies the existing integral henselian-domain permanence input."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +133,38 @@
    "results": "{\"t\": \"2026-10-18T22:53:04Z\", \"tool\": \"grep\", \"query\": \"valuation.*topolog|topolog.*valuation\", \"sub\": \"Topology/Algebra/Valued\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/ValuativeRel.lean\", \"Mathlib/Topology/Algebra/Valued/WithZeroMulInt.lean\", \"Mathlib/Topology/Algebra/Valued/WithZeroMulInt.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\"], \"digest\": \"4ee2ef9c7d756f92\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian valued fields have unique prolongations to finite extensions and a unique extending valuation topology even for arbitrary rank",
+   "results": "{\"t\": \"2026-10-18T23:56:54Z\", \"tool\": \"leanfinder\", \"query\": \"Henselian valued fields have unique prolongations to finite extensions and a unique extending valuation topology even for arbitrary rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"Valued.completable\", \"Valued.extension_extends\", \"IsNonarchimedeanLocalField.instIsRankLeOne\", \"LaurentSeries.valuation_LaurentSeries_equal_extension\", \"Valuation.instRankOneCompletion\", \"Valued.exists_coe_eq_v\", \"Valued.extensionValuation\"], \"digest\": \"491490f8d3d27b3b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: complete-field extensions and henselian definitions do not give arbitrary-rank algebraic prolongations with the topology-only uniqueness clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Valuation",
+   "results": "{\"t\": \"2026-10-18T23:56:53Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, Valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: complete-field extensions and henselian definitions do not give arbitrary-rank algebraic prolongations with the topology-only uniqueness clause."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|Henselian",
+   "results": "{\"t\": \"2026-10-18T23:56:53Z\", \"tool\": \"grep\", \"query\": \"henselian|Henselian\", \"sub\": \"Topology/Algebra/Valued\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: complete-field extensions and henselian definitions do not give arbitrary-rank algebraic prolongations with the topology-only uniqueness clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite separable extension of a henselian valued field has a unique valuation topology restricting to the original topology",
+   "results": "{\"t\": \"2026-10-18T23:56:53Z\", \"tool\": \"leansearch\", \"query\": \"Every finite separable extension of a henselian valued field has a unique valuation topology restricting to the original topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNonarchimedeanLocalField.toIsValuativeTopology\", \"Valued.extensionValuation_apply_coe\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"Valued.extension_extends\", \"Valued.extensionValuation\", \"ValuativeTopology\", \"IntermediateField.finSepDegree_top\", \"Field.sepDegree\"], \"digest\": \"0936a88da2685bdb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: complete-field extensions and henselian definitions do not give arbitrary-rank algebraic prolongations with the topology-only uniqueness clause."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-dense-henselian-field-etale-comparison",
@@ -103,5 +192,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-finite-extension-topology",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and clause. Construct the unique prolonged valuation ring as the local integral closure using existing integral henselian permanence and a generic normalization lemma. Torsion of algebraic value-group quotients gives the subspace topology. For a valuation with only the same restricted topology, pass to a common proper coarsening, use henselianity of that coarsening, lift it, and compare its prolongations. Four genuine valuation-tool statements are left unsplit, searched under two phrasings; no new Mathlib leaf or Lean attachment. Missing Bourbaki background is explicitly WANTED.",
+  "blueprint": "Refines the imported ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (dimension-normalized duality), along the recorded completion/open-rigidity and dense henselian field comparison chain; realizes the algebraic-prolongation and topology preliminary of ILO XX 4.4, p.374. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-component-henselian-permanence",
+    "why": "Generic permanence of connected integral algebras over a henselian local ring; used for the two integral closures. This is local commutative algebra, not a replacement of any perverse/Fourier unit step, and no node in this unit supplies the general permanence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-component-henselian-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-4321cb4de",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-4321cb4de (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps and all 4 new nodes in full, plus the statement of every cited node and the source, ILO XX 4.4 printed pp.373–374 (dense henselian valued fields, Krasner, Bourbaki VI §8; Bourbaki is WANTED and the proof is agent-written). The item statement is unchanged against live, where the item is unsplit. Step 1: the normalization lemma gives C as a domain integral over V; a domain has only the idempotents 0 and 1, so integral henselian permanence makes C local, and the converse clause plus locality gives a unique henselian prolongation. Step 2: the torsion clause gives n·max(δ,0)+ε>δ, so Γ is cofinal in Δ and the subspace topology on F is the v-topology. Step 3: w|_F is nontrivial (otherwise w would be trivial and the topology discrete), then the common-coarsening criterion gives a proper U ⊇ V ∪ V_w, which is henselian by the coarsening node because V is henselian. Step 4: lift U to U_W and U_C, and the integral closure D of U is local, so U_W = D = U_C and W and C have the same topology. All hypotheses are checked, no node's proof is used, and there is no cycle. The new nodes are the classical theorems: Bourbaki VI §8.6 (prolongations are the maximal localizations of the normalization), coarsenings of a henselian valuation are henselian, the algebraic value-group quotient is torsion with the coarsening correspondence, and equal topologies iff dependent valuations. I tested them on small cases (E=F; Z_(5) in Q(i); Z in (1/e)Z; p-adic vs q-adic valuations on Q; a rank-2 refinement), and they are true. They are statement-only and searched with all three kinds of search. I scanned the whole DAG and found no duplicates; the krasner-neighbourhood, simple-root-stability, nagata-extension and trf-prime-convex nodes are different statements. No node relabels a clause of the item. The tool use of lem-trf-integral-component-henselian-permanence is accepted. Batch-5 flags: def-trf-valuation-ring is a general definition with a closure of 3 nodes; lem-trf-integral-component-henselian-permanence is pure Stacks 092X/09XK algebra, and its 196-node closure has no other trace-formula or Poincaré node. Neither is part of the assumed statements or their proofs, so both are accepted. No fixes."
  }
 }
