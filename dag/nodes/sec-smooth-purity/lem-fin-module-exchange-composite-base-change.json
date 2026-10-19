@@ -28,21 +28,9 @@
  ],
  "proof": [
   {
-   "text": "Write $\\theta_i^0$ for the sheaf square comparisons. Clause (2) of [lem-weil-pbc-square-iso-pasting], with $f'=f_1$, $f''=f_2$, $h=k$, $h'=k_1$, gives\n$$\\theta_{21}^0\\circ(f_2^{-1}c_{g,k})=(c_{g_1,k_1}f^{-1})\\circ(k_1^{-1}\\theta_1^0)\\circ(\\theta_2^0g^{-1}).$$\nThis identity also holds on constant-$\\Lambda$ module sheaves: the inverse images and their module structures are those of [prop-weil-pbc-inverse-image-modules-exact] (2), and the canonical $c$ maps are $\\Lambda$-linear as specified in the item. Each $\\theta^0$ is the composite $c^{-1}c$ specified by the square-pasting statement. The two sides are therefore module maps whose underlying abelian-sheaf maps are equal. Equality of module maps is equality of their underlying maps, proving the displayed module identity.",
+   "text": "Derive the associativity equation for the termwise inverse-image composition isomorphisms. Apply mapDerivedCategoryNatIso to upperStarComp_assoc', the ordinary coherence used in the proof of [lem-weil-pbc-square-iso-pasting], with coefficients ModuleCat Λ. Its compatibility with composition, isoWhiskerLeft and isoWhiskerRight, and mapDerivedCategoryCompIso_assoc, are the already proved localization coherence laws. These give the same associativity equation for D(upperStar); the composition isomorphisms are exactly those specified by [def-kun-unbounded-exchange]. This works on all unbounded complexes by the localization universal property [lem-weil-pbc-localization-universal-property].",
    "uses": [
     "lem-weil-pbc-square-iso-pasting",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
-   }
-  },
-  {
-   "text": "Apply the sheaf identity of step 1 in each degree of any cochain complex. All its transformations commute with differentials by naturality. Exactness of the module inverse images [prop-weil-pbc-inverse-image-modules-exact] (3) gives the termwise derived inverse images and their comparison isomorphisms as specified in [def-kun-unbounded-exchange]. The localization universal property [lem-weil-pbc-localization-universal-property] (2) respects composition, and (3) detects equality after precomposition with the complex localization. Hence the degreewise identity descends to\n$$\\theta^D_{21}\\circ(f_2^{-1}c^\\Lambda_{g,k})=(c^\\Lambda_{g_1,k_1}f^{-1})\\circ(k_1^{-1}\\theta^D_1)\\circ(\\theta^D_2g^{-1}).$$\nThese are precisely the specified module comparisons, because that definition constructs them by this same termwise descent. This argument uses all complexes and imposes no boundedness condition.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
     "def-kun-unbounded-exchange",
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -53,8 +41,21 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-mate-pasting] (1) with $L_1=f^{-1}$, $L_2=f_1^{-1}$, $L_3=f_2^{-1}$, $R_1=Rf_*$, $R_2=Rf_{1*}$, $R_3=Rf_{2*}$, $G=g^{-1}$, $H=g_1^{-1}$, $G_2=k^{-1}$ and $H_2=k_1^{-1}$. The three adjunctions and the identifications $(\\theta_i^D)^\\flat=\\Ex_{\\square_i}$ are given by [def-kun-unbounded-exchange]. Thus\n$$\\gamma=(k_1^{-1}\\theta_1^D)\\circ(\\theta_2^Dg^{-1})$$\nhas mate\n$$\\gamma^\\flat=(\\Ex_{\\square_2}g_1^{-1})\\circ(k^{-1}\\Ex_{\\square_1}).$$\nThis application is in the unbounded module derived categories themselves; no comparison to abelian-sheaf derived direct images is used.",
+   "text": "For an abstract system of inverse images with these composition isomorphisms, form the square comparison as the inverse of the source composition comparison followed by the target one. The three associativity rewrites in the proof of [lem-weil-pbc-square-iso-pasting] give horizontal pasting for this square. Specialize the system to the exact module derived inverse images. Expanding mapDerivedCategoryNatIso_trans and mapDerivedCategoryNatIso_symm identifies this comparison with exactDerivedSquareUpperStarIso: the intermediate composition comparisons cancel.",
    "uses": [
+    "lem-weil-pbc-square-iso-pasting",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
+   }
+  },
+  {
+   "text": "Take the mate under the canonical adjunctions D(f inverse image) ⊣ Rf*, D(f₁ inverse image) ⊣ Rf₁*, and D(f₂ inverse image) ⊣ Rf₂*. The derived square pasting equality, mateEquiv_whiskerTop_whiskerBottom [lem-weil-pbc-mate-whisker], and mateEquiv_vcomp [lem-weil-pbc-mate-pasting] give the pasted exchange square, with its two outside composition comparisons. Evaluating at K yields the four-arrow formula. The square comparison and adjunctions are exactly those defining exactDerivedBaseChangeMap [def-kun-unbounded-exchange], so this is the specified exchange, with no comparison to another coefficient category.",
+   "uses": [
+    "lem-weil-pbc-mate-whisker",
     "lem-weil-pbc-mate-pasting",
     "def-kun-unbounded-exchange"
    ],
@@ -65,19 +66,7 @@
    }
   },
   {
-   "text": "Rearrange step 2 to obtain\n$$\\theta_{21}^D=(c^\\Lambda_{g_1,k_1}f^{-1})\\circ\\gamma\\circ(f_2^{-1}(c^\\Lambda_{g,k})^{-1}).$$\nApply [lem-weil-pbc-mate-whisker] with $\\alpha=\\gamma$, $\\sigma=(c^\\Lambda_{g,k})^{-1}$ and $\\tau=c^\\Lambda_{g_1,k_1}$, keeping the endpoint adjunctions $f^{-1}\\dashv Rf_*$ and $f_2^{-1}\\dashv Rf_{2*}$. The mate of this expression is\n$$(Rf_{2*}c^\\Lambda_{g_1,k_1})\\circ\\gamma^\\flat\\circ((c^\\Lambda_{g,k})^{-1}Rf_*).$$\nBy [def-kun-unbounded-exchange] its left side is $\\Ex_{\\square_2\\cdot\\square_1}$. Substituting step 3 gives exactly the equality asserted in the item. All equalities used are equalities of natural transformations, so the result is natural in $K$.",
-   "uses": [
-    "lem-weil-pbc-mate-whisker",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal); Tag 07A7 (remark-base-change), with the omitted verification supplied by the cited mate identities"
-   }
-  },
-  {
-   "text": "At every $K$, the first and last factors in the displayed four-arrow formula are isomorphisms, since the $c^\\Lambda$ are natural isomorphisms and functors preserve inverses. A composite $a\\circ m\\circ b$ with invertible $a,b$ is invertible if and only if $m=a^{-1}\\circ(a\\circ m\\circ b)\\circ b^{-1}$ is invertible. Taking $m=\\Ex_{\\square_2,g_1^{-1}K}\\circ k^{-1}\\Ex_{\\square_1,K}$ proves the last clause.",
+   "text": "Use natural-transformation extensionality on the component formula, insert the functor associators (whose components are identities), and unfold moduleInverseImageCompIso. This gives the equality of natural transformations in the statement. For the second clause, the first and last component factors are isomorphisms. Apply isIso_comp_left_iff, reassociate, and apply isIso_comp_right_iff to cancel them. The remaining morphism is exactly the composite of the two middle exchanges.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -91,8 +80,7 @@
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-mate-whisker",
-  "lem-weil-pbc-square-iso-pasting",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-square-iso-pasting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -206,7 +194,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-square-iso-pasting",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "def-kun-unbounded-exchange"
  ],
  "reviewed": {
@@ -238,5 +225,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Read node, all 8 stmt deps, report, module and the exact declarations (exactDerivedBaseChangeMap/exactDerivedSquareUpperStarIso, ChosenCartesianSquare, upperStarComp, CommSq.horiz_comp, DerivedCategoryModule). Squares match def-kun orientation; horiz_comp gives CommSq (k1≫g1) f2 f (k≫g) = outer rectangle; the four-factor formula is an equality of natural transformations, in node order, with c^Λ = inverse of the descended upperStarComp (direction v⁻¹u⁻¹≅(uv)⁻¹, real data, sorry-free). The iff clause tests the composite. No extra hypotheses; Λ:Type(u+1) is the recorded convention; edge cases allowed. True via the source-library squareUpperStarIso_paste_horiz_hom/baseChangeMap_paste_horiz conventions. lean.statement verbatim; only the lean field added; docstrings carry source, blueprint id and the 5 proof steps; lines ≤100. nt_compile.py --json: rc=0, no errors or warnings in its output; #print axioms: theorem sorryAx only, helper sorry-free. Observations only: the helper is the same composite as unboundedEtaleUpperStarCompIso (another node's module; reuse would add an unrelated heavy import and edge); the report misstates the node proof as empty (fields unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261019T112552-L-3956453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
