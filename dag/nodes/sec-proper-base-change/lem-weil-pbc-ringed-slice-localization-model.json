@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-localization-model",
+ "kind": "lemma",
+ "title": "Ordinary single-complex model for pullback of section localization",
+ "statement": "For continuous u : D ⥤ C, a sheaf ring map a : R ⟶ u_* S, and V : D whose induced slice functor is continuous, termwise module pullback on the slices carries the degree-zero complex R|V[1/t] to the degree-zero complex S|u(V)[1/a(t)]. The isomorphism sends pullback of the localization-unit chain map to ringedSliceLocalizationGenerator. The coefficient localization and slice presentations are [def-weil-pbc-ringed-slice-derived-data] and [def-weil-pbc-ringed-section-localization]. No derived adjunction or exactness assumption is needed for this ordinary calculation.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099J, lemma-pushforward-derived-complete, displayed local adjunction formula; sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites; sites-cohomology.tex Tag 07A6, lemma-adjoint."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-slice-derived-data"
+ ],
+ "proof": [
+  {
+   "text": "Over.post u preserves the terminal over-object, so it is final. Its module pullback therefore carries the unit module isomorphically to the unit module. Apply the ordinary adjunction hom equivalence to prove that this isomorphism intertwines multiplication by each section and its image; this reduces sectionwise to multiplicativity of a and its naturality. Use the localizationSheafCoconeIsColimit and localizationSheafMap_step calculations of lem-weil-pbc-ringed-koszul-factor-colimit. Pullback preserves the telescope colimit since it is left adjoint. The unique colimit isomorphism gives an isomorphism of localized module sheaves. The cocone uses the fraction x/t^(n+1); recover the localization unit by multiplication by t followed by its first cocone map, and use the scalar intertwining equation. Finally apply HomologicalComplex.singleMapHomologicalComplex and its naturality to obtain the claimed complex isomorphism and generator equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-factor-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-factor-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Q7 Lean proof using the existing localization telescope colimit and the ordinary pullback adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction of pullback and direct image of sheaves of modules compatible with restriction to slice site",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.derived\"",
+   "results": "12 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "total derived adjunction of module pullback and pushforward on a ringed site",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to a slice commutes with derived direct image and the inverse mate is invertible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_counit_symm\"",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of localization of a sheaf of rings at a section is localization at the image section and is flat",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, RingHom.Flat.holdsForLocalizationAway, IsLocalization.flat, RingHom.Smooth.holdsForLocalizationAway, Module.Flat.localizedModule, RingHom.Flat.ofLocalizationSpanTarget, Module.flat_iff_of_isLocalization",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived|localization",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedDerivedSliceLocalization",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Last paragraph, “the exchange is the canonical ambient ringed-topos mate ... followed by derived completion and the direct-image/completion comparison”: supporting comparison used in completing the mate. Derived slice formulas and pullback of a localized ring in the local Hom test. Supporting obligation: Flat single-complex model for pullback of section localization",
+   "via": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedSliceLocalizationModel",
+  "file": "lean/Sheaf/Paper/RingedSliceLocalizationModel.lean",
+  "declaration": "SheafOfModules.ringedSliceLocalizationModel",
+  "statement": "theorem ringedSliceLocalizationModel (V : D) [(Over.post (X := V) u).IsContinuous (K.over V) (J.over (u.obj V))] (t : R.obj.obj (op V)) : ∃ loc : ((ringedSliceModulePullback (Over.post (X := V) u) (localizedRingedSiteMap u a V)).mapHomologicalComplex (.up ℤ)).obj ((CochainComplex.singleFunctor _ 0).obj (ringedSectionLocalization (R.over V) (ringedSliceSection R V t))) ≅ (CochainComplex.singleFunctor _ 0).obj (ringedSectionLocalization (S.over (u.obj V)) (ringedSliceSection S (u.obj V) (a.hom.app (op V) t))), ((ringedSliceModulePullback (Over.post (X := V) u) (localizedRingedSiteMap u a V)).mapHomologicalComplex (.up ℤ)).map ((CochainComplex.singleFunctor _ 0).map (ringedSectionLocalizationUnit (R.over V) (ringedSliceSection R V t))) ≫ loc.hom = ringedSliceLocalizationGenerator (Over.post (X := V) u) (localizedRingedSiteMap u a V) (ringedSliceSection S (u.obj V) (a.hom.app (op V) t))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-675ad",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261019T192821-L-1871607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-675ad",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261019T192821-L-1871607",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and 5 new modules (all compiled, no sorry; sorryAx only via pre-existing ringedSite_restriction_exact_kflat and localization_away_colimit) vs live base item (11 interface decls moved verbatim into public-imported RingedDerivedSliceData; statement differs only hc→_hc) and 6 direct importers compiled against the delivery"
+ }
+}

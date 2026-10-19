@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-ringed-slice-derived-comparisons",
+ "kind": "lemma",
+ "title": "Normalized derived direct-image slice comparison and invertibility of its mate",
+ "statement": "Let $\\mathcal D$ and $\\mathcal C$ be small categories with Grothendieck topologies $K$ and $J$, let $u:\\mathcal D\\to\\mathcal C$ be continuous, let $R$ and $S$ be sheaves of commutative rings on them, and let $a:R\\to u_*S$ be a sheaf ring map. Suppose $u^{-1}$ on sheaves of sets preserves finite limits. Use module sheaves [def-weil-sheaf-of-modules-category] and unbounded derived categories [def-weil-abstract-derived-category] with chosen localization universes. For a continuous morphism of small ringed sites with left exact inverse image, fix an object V, its localized morphism, and any normalized global and localized derived adjunction presentations [def-weil-pbc-ringed-slice-derived-data]. There is a natural isomorphism beta from restriction after derived direct image to local derived direct image after restriction, whose square with the right-derived units and the termwise restriction factorizations commutes on every complex. Its inverse adjunction mate is invertible. No section localization assertion is part of this lemma.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099J, lemma-pushforward-derived-complete, displayed local adjunction formula; sites-modules.tex Tag 04J0, lemma-localize-morphism-ringed-sites; sites-cohomology.tex Tag 07A6, lemma-adjoint."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-slice-derived-data"
+ ],
+ "proof": [
+  {
+   "text": "1. Use the generic K-injective derivability structure for the composite of ordinary pushforward and restriction. The unit for derived pushforward followed by derived restriction is invertible on K-injectives. Restriction preserves K-injectives, so the comparison unit for restriction followed by the local right derived pushforward is also invertible on K-injectives. The good-object criterion proves that both composites are right derived functors of the same ordinary composite. Right-derived uniqueness gives beta. Its factorization equation, conjugated by the two restriction factorizations, gives the displayed normalization on every complex. 2. Apply the inverse-mate invertibility lemma to this normalized beta.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-ringed-slice-derived-mate-isIso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-ringed-slice-derived-mate-isIso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "K-injective derivability, rightDerivedUnique and its factorization equation, followed by the inverse-mate lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction of pullback and direct image of sheaves of modules compatible with restriction to slice site",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.derived\"",
+   "results": "12 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived",
+   "results": "4 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "total derived adjunction of module pullback and pushforward on a ringed site",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to a slice commutes with derived direct image and the inverse mate is invertible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.arrowResLEAppIso, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_counit_symm\"",
+   "results": "1 hits: CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of localization of a sheaf of rings at a section is localization at the image section and is flat",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, RingHom.Flat.holdsForLocalizationAway, IsLocalization.flat, RingHom.Smooth.holdsForLocalizationAway, Module.Flat.localizedModule, RingHom.Flat.ofLocalizationSpanTarget, Module.flat_iff_of_isLocalization",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived|localization",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-19",
+   "verdict": "Ordinary module constructions and general derived or mate APIs; no exact ringed-site derived comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedDerivedSliceLocalization",
+  "date": "2026-10-19",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Last paragraph, “the exchange is the canonical ambient ringed-topos mate ... followed by derived completion and the direct-image/completion comparison”: supporting comparison used in completing the mate. Derived slice formulas and pullback of a localized ring in the local Hom test. Supporting obligation: Normalized derived direct-image slice comparison and invertibility of its mate",
+   "via": [
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-weil-pbc-ringed-pushforward-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedSliceDerivedComparisons",
+  "file": "lean/Sheaf/Paper/RingedSliceDerivedComparisons.lean",
+  "declaration": "SheafOfModules.ringedSliceDerivedComparisons",
+  "statement": "theorem ringedSliceDerivedComparisons [PreservesFiniteLimits (u.sheafPullback (Type u) K J)] (V : D) [(Over.post (X := V) u).IsContinuous (K.over V) (J.over (u.obj V))] [PreservesFiniteLimits ((Over.post (X := V) u).sheafPullback (Type u) (K.over V) (J.over (u.obj V)))] [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose K (forget₂ CommRingCat RingCat)).obj R).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).over (u.obj V)))] (e : RingedSliceDerivedImage.{u, w} u a) (l : RingedSliceDerivedImage.{u, w} (Over.post (X := V) u) (localizedRingedSiteMap u a V)) : ∃ beta : e.right ⋙ ringedSliceRestriction.{u, w} R V ≅ ringedSliceRestriction.{u, w} S (u.obj V) ⋙ l.right, IsIso (((mateEquiv e.adjunction l.adjunction).symm (TwoSquare.mk _ _ _ _ beta.hom)).natTrans) ∧ (∀ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S)) ℤ), (ringedSliceRestriction.{u, w} R V).map (X := DerivedCategory.Q.{w}.obj (((ringedSliceModulePushforward u a).mapHomologicalComplex (.up ℤ)).obj I)) (Y := e.right.obj (DerivedCategory.Q.{w}.obj I)) (e.eta.app I) ≫ beta.hom.app (DerivedCategory.Q.{w}.obj I) ≫ l.right.map (X := (ringedSliceRestriction.{u, w} S (u.obj V)).obj (DerivedCategory.Q.{w}.obj I)) (Y := DerivedCategory.Q.{w}.obj ((CategoryTheory.ringedSliceComplexRestriction.{u, u, u} J S (u.obj V)).obj I)) ((ringedSliceRestrictionFactors.{u, w} S (u.obj V)).hom.app I) = (ringedSliceRestrictionFactors.{u, w} R V).hom.app (((ringedSliceModulePushforward u a).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.{w}.map (ringedSlicePushforwardComplexIso u a V I).hom ≫ l.eta.app ((CategoryTheory.ringedSliceComplexRestriction.{u, u, u} J S (u.obj V)).obj I))",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-675ad",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261019T192821-L-1871607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-675ad",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261019T192821-L-1871607",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and 5 new modules (all compiled, no sorry; sorryAx only via pre-existing ringedSite_restriction_exact_kflat and localization_away_colimit) vs live base item (11 interface decls moved verbatim into public-imported RingedDerivedSliceData; statement differs only hc→_hc) and 6 direct importers compiled against the delivery"
+ }
+}
