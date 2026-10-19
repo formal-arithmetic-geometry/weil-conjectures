@@ -15,9 +15,93 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-per-rational-surface-singularity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K=\\operatorname{Frac}R$, $L=\\operatorname{Frac}S$. By [def-per-rational-surface-singularity], choose $B\\geq0$ bounding $\\operatorname{length}_R H^1(X,\\mathcal O_X)$ for every normal modification of $R$. Apply [lem-per-integral-trace-dual-lattice] to the given finite injective map and its separable fraction-field extension. Fix its basis $b_1,\\ldots,b_n$ and nonzero $d\\in R$ once and for all. These choices depend on $R\\hookrightarrow S$, not on any modification.",
+   "uses": [
+    "def-per-rational-surface-singularity",
+    "lem-per-integral-trace-dual-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AXL, first paragraph and boundedness hypothesis."
+   }
+  },
+  {
+   "text": "Let $Y_0\\to\\operatorname{Spec}S$ be any normal modification. By [lem-per-normalized-generically-finite-domination] obtain normal modifications $X\\to\\operatorname{Spec}R$, $Y\\to\\operatorname{Spec}S$, a proper birational $S$-morphism $h:Y\\to Y_0$, and a compatible finite morphism $\\pi:Y\\to X$. Apply [lem-per-modification-h1-exact-sequence] with $A=S$ (Noetherian, being Nagata), the normal modification $Y_0$ in the role of $X$, $Y$ in the role of $X'$ and $g=h$; its hypotheses hold since both are integral and proper over $\\operatorname{Spec}S$ inducing isomorphisms of function fields, $Y_0$ is normal, and $h$ is an $S$-morphism. Its first arrow is an injective $S$-linear map $h^*:H^1(Y_0,\\mathcal O_{Y_0})\\hookrightarrow H^1(Y,\\mathcal O_Y)$ of Zariski cohomology. Thus a uniform length bound for the latter gives the same bound for the original arbitrary $Y_0$.",
+   "uses": [
+    "lem-per-normalized-generically-finite-domination",
+    "lem-per-modification-h1-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AXL, second paragraph; Tag 0AXF for the domination reduction."
+   }
+  },
+  {
+   "text": "Use [lem-per-integral-trace-dual-lattice] on this finite map between normal models. It gives $0\\to\\pi_*\\mathcal O_Y\\xrightarrow{\\Phi}\\mathcal O_X^{\\oplus n}\\to Q\\to0$ with $dQ=0$. Finiteness implies affineness by [def-weil-finite-integral-morphism]; the structure sheaf is quasi-coherent (on an affine it is the module associated to its coordinate ring), so [lem-weil-pbc-affine-morphism-cohomology-edge] identifies $H^1(X,\\pi_*\\mathcal O_Y)$ with $H^1(Y,\\mathcal O_Y)$ as $R$-modules. By [lem-weil-pbc-scheme-modules-enough-injectives], the abelian category of module sheaves has enough injectives; global sections is left exact since kernels are computed sectionwise. The module cohomology convention is [pqf-def-cohomology]. The long exact derived-functor sequence [lem-weil-pbc-derived-functor-long-exact], applied to global sections of sheaves of modules, therefore gives an exact segment $H^0(X,Q)\\to M\\xrightarrow{\\alpha}H^1(X,\\mathcal O_X)^{\\oplus n}$, where $M=H^1(Y,\\mathcal O_Y)$. Here finite direct sums commute with this cohomology: take the finite direct sum of injective resolutions, which remains an injective resolution since a finite sum is a finite product, and apply global sections termwise. Since $dQ=0$, linearity of the connecting homomorphism gives $d\\ker\\alpha=0$. By [lem-sc-module-abelian-zariski-cohomology] these module-cohomology groups are canonically isomorphic to the Zariski cohomology groups of [def-per-rational-surface-singularity], naturally in the sheaf; naturality for the multiplication endomorphisms by elements of $R$ (on $\\mathcal O_X$) and of $S$ (on $\\mathcal O_Y$) makes these isomorphisms $R$- resp. $S$-linear. So $M$, $\\alpha$ and the bound $B$ of Step 1 may be read in Zariski cohomology, as Steps 2, 4 and 5 do.",
+   "uses": [
+    "lem-per-integral-trace-dual-lattice",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "pqf-def-cohomology",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AXL, third paragraph, exact cohomology segment."
+   }
+  },
+  {
+   "text": "The image of $d$ in $S$ is nonzero by injectivity of $R\\to S$. Apply [lem-per-normal-surface-modification-torsion-bound] with $(A,a)=(S,d)$: there is $C\\geq0$ independent of $Y$ with $\\operatorname{length}_S M[d]\\leq C$. Write $k_R=R/\\mathfrak m_R$, $k_S=S/\\mathfrak m_S$ and $e=[k_S:k_R]$. This integer is finite: finite $R$-module generators of $S$ descend to a spanning set for its quotient $k_S$ over $k_R$; locality makes $\\mathfrak m_R$ act by zero. The singleton maximal ideal of $S$ contracts to $\\mathfrak m_R$, as required for [lem-exc-semilocal-restriction-length]. Apply it to the finite-length $S$-module $M[d]$. As $S$ is already local, localization at its maximal ideal changes neither the ring nor the module, and it gives $\\operatorname{length}_R M[d]=e\\operatorname{length}_S M[d]\\leq eC$.",
+   "uses": [
+    "lem-per-normal-surface-modification-torsion-bound",
+    "lem-exc-semilocal-restriction-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AXL, last two sentences; Tag 0AXJ and algebra Tag 02M0 for restriction of scalars."
+   }
+  },
+  {
+   "text": "By Step 3, $\\ker\\alpha\\subseteq M[d]$, so its $R$-length is at most $eC$. The image of $\\alpha$ has $R$-length at most $nB$, since it is a submodule of $H^1(X,\\mathcal O_X)^{\\oplus n}$. Consequently $\\operatorname{length}_R M\\leq eC+nB$. These elementary length inequalities follow directly from [def-weil-pbc-module-length]: chains in submodules remain chains in the ambient module; chains in a quotient lift by inverse image; in a short exact sequence a strict inclusion in a chain in the middle must induce a strict inclusion either in its intersection with the kernel or in its image in the quotient, giving the sum bound. Applying this repeatedly also bounds the length of a finite direct sum by the sum of its lengths. Every strict chain of $S$-submodules is a strict chain of $R$-submodules, so $\\operatorname{length}_S M\\leq\\operatorname{length}_R M$. The injection of Step 2 gives $\\operatorname{length}_S H^1(Y_0,\\mathcal O_{Y_0})\\leq eC+nB$. This bound is independent of $Y_0$, proving the required reduction property by [def-per-rational-surface-singularity].",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "def-per-rational-surface-singularity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AXL, final boundedness inference with its module-length argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-rational-surface-singularity",
+  "lem-per-integral-trace-dual-lattice",
+  "lem-per-normalized-generically-finite-domination",
+  "lem-per-modification-h1-exact-sequence",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "pqf-def-cohomology",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-per-normal-surface-modification-torsion-bound",
+  "lem-exc-semilocal-restriction-length",
+  "def-weil-pbc-module-length"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AXL (resolve-lemma-go-up-separable), complete proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +137,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-separated, meaning that the diagonal morphism $ X \\\\to X \\\\times_{\\\\text{Normalization}(f)} X $ is quasi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite separable extensions of normal local surface rings preserve bounded geometric genus of normal modifications",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"separableClosure.isGalois\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"[Normal F E] : IsGalois F (separableClosure F E)\", \"doc\": \"If $ E $ is a normal extension of $ F $, then the separable closure of $ F $ in $ E $ is a Galois extension of $ F $. This means that the maximal subfield of $ E $ consisting of elements separable ove\"}\n  {\"name\": \"separableClosure\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \": IntermediateField F E\", \"doc\": \"The separable closure of a field $ F $ in an extension field $ E $ is the intermediate field consisting of all elements of $ E $ that are separable over $ F $. An element is separable over $ F $ if it\"}\n  {\"name\": \"Algebra.IsSeparable.finInsepDegree_eq\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"[Algebra.IsSeparable F E] : finInsepDegree F E = 1\", \"doc\": \"If $ E $ is a separable algebra over $ F $, then the finite inseparable degree of the field extension $ E/F $, defined as the finite rank of $ E $ as a module over the separable closure of $ F $ in $ \"}\n  {\"name\": \"IsGalois.mk\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"∀ {F : Type u_1} [inst : Field F] {E : Type u_2} [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [to_isSeparable : Algebra.IsSeparable F E] [to_normal : Normal F E], IsGalois F E\", \"doc\": \"If $ E $ is a separable and normal extension of $ F $, then the field extension $ E/F $ is Galois.\"}\n  {\"name\": \"Field.Algebra.IsSeparable.finSepDegree_eq\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"∀ (F : Type u) (E : Type v) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [Algebra.IsSeparable F E],\\n  Field.finSepDegree F E = Module.finrank F E\", \"doc\": \"For a finite separable field extension $ E $ over $ F $, the separable degree $ [E:F]_s $ is equal to the dimension of $ E $ as an $ F $-vector space.\"}\n  {\"name\": \"Field.instNeZeroFinSepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableDegree\", \"type\": \"[FiniteDimensional F E] : NeZero (finSepDegree F E)\", \"doc\": \"For any finite-dimensional field extension $ E $ over $ F $, the separable degree $ [E:F]_s $ is non-zero. This follows from the fact that the separable degree counts the number of distinct $ F $-alge\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"IsSepClosure.isGalois\", \"module\": \"Mathlib.FieldTheory.IsSepClosed\", \"type\": \"[Algebra k K] [IsSepClosure k K] : IsGalois k K\", \"doc\": \"If $ K $ is a separable closure of a field $ k $, then the field extension $ K/k $ is Galois, meaning it is algebraic, normal, and separable.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned separable-extension, normalization and properness facts do not give uniform H1 bounds for surface modifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"separable\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: returned separable-extension, normalization and properness facts do not give uniform H1 bounds for surface modifications"
+  },
+  {
+   "tool": "grep",
+   "query": "separable.{0,40}rational|bounded.{0,30}genus",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: returned separable-extension, normalization and properness facts do not give uniform H1 bounds for surface modifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded lengths of first coherent cohomology of normal proper birational surface models ascend under finite separable maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (AlgebraicGeometry.Scheme.Hom.normalizationDiagram f)).rightOp.comp\\n          AlgebraicGe\", \"doc\": \"The composition of the opposite of the affine Zariski site inclusion functor for a scheme $ Y $, the normalization diagram of a morphism $ f $, the right opposite functor, the contravariant Spec funct\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned separable-extension, normalization and properness facts do not give uniform H1 bounds for surface modifications"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -83,5 +195,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-separable-rational-reduction",
+  "worker": "stage1",
+  "summary": "Read Tags 0AXL, 0AXF and 0AXJ; split normal finite domination, trace-coordinate sheaf lattice, H1 monotonicity and uniform fixed-element torsion. Reused affine cohomology, long exact derived sequence and semilocal length restriction. Made the scalar change and elementary final length bound explicit. Preserved the item statement.",
+  "blueprint": "Realizes the surface-resolution input of lem-per-artin-gabber-affine-curve proof Step 1 through the recorded ancestor chain; follows Tag 0AXL used by lem-per-complete-normal-surface-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic quasi-coherent affine-cohomology comparison for the finite map pi; the unit contains no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact derived-functor sequence applied to global sections, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-exc-semilocal-restriction-length",
+    "why": "Generic restriction-of-scalars length formula, needed to compare S-torsion bounds with an R-linear trace map."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic existence of injective resolutions for module sheaves, verifying the hypothesis of the derived-functor long exact sequence."
+   },
+   {
+    "node": "lem-sc-module-abelian-zariski-cohomology",
+    "why": "Generic comparison of module and abelian Zariski cohomology (Lean-closed in slopmaster2), needed to read the module-cohomology exact segment of Step 3 in the Zariski cohomology of def-per-rational-surface-singularity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-exc-semilocal-restriction-length",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-module-abelian-zariski-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-c47cb9514",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-c47cb9514 (reviewer sub-agent of L); spot-checked: Read Stacks 0AXL in full, plus 0AXF, 0AXJ with equation-a-torsion, situation-vanishing (modification = proper birational, so it matches def-per-rational-surface-singularity), 0B49, the item, the four new nodes and every cited statement. The item statement agrees with 0AXL hypothesis by hypothesis and is not weakened. Steps 1, 4 and 5 are correct; the e=[k_S:k_R] restriction-of-scalars length conversion is checked. Fault 1 (C5, parallel race): since this delivery's base, two 0AXF nodes have landed live in the same unit, lem-per-modification-h1-exact-sequence (Q26) and lem-per-surface-modification-h1-exact (Q15). The new node lem-per-normal-surface-modification-h1-monotone is their first arrow, specialized. It is dropped, and Step 2 now cites lem-per-modification-h1-exact-sequence with its hypotheses checked (A=S, X=Y_0 normal, X'=Y, g=h; injective S-linear h^*). Fault 2 (C1/E1): Step 3 computes the exact segment in module cohomology (pqf-def-cohomology), but B, C, the Step 2 injection and the conclusion use the Zariski cohomology of def-sc-zariski-cohomology. Repaired by citing lem-sc-module-abelian-zariski-cohomology (Lean-closed in slopmaster2): a natural isomorphism, which is R- and S-linear by naturality for multiplication maps. Added to proof_deps and declared as a tool use; Step 3 is now 1764 characters. The other new nodes are true and are neither duplicates nor restated clauses of the item. Trace lattice: checked that pi is dominant, Tr(D) lies in C by normality, Phi is injective (0BIL), and d=T adj(T) kills the cokernel; small cases R=S and p dividing n. Torsion bound: faithful to 0AXJ plus a-torsion. Domination: checked via 0B49 (B is locally free over the height <=1 points) and Nagata normalization. Corrected item: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-separable-rational-reduction.json. Maintainer note: the live Q26 and Q15 0AXF nodes duplicate each other and should be merged.; 1 file(s) fixed by the reviewer"
  }
 }
