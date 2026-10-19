@@ -2,7 +2,7 @@
  "id": "lem-per-set-local-system-calculus",
  "kind": "statement",
  "title": "Set local systems: finite subobjects, colimits and finite etale total spaces",
- "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. On its small etale site [def-weil-pbc-etale-site], call a set sheaf a local system if it is ind-finite etale [def-per-ind-finite-etale-local-system]. A finite local system means a sheaf represented by a finite etale $X$-scheme [def-weil-pbc-finite-etale-category]. (1) Every local system is the filtered union, in ambient set sheaves, of its finite local-system subsheaves. The full category of local systems is closed under all small ambient colimits and finite limits [def-weil-pbc-category-colimit]. (2) Let $q:Y\\to X$ be finite etale, with $Y$ Noetherian. The equivalence between set sheaves on $Y_{\\mathrm{et}}$ and set sheaves on $X_{\\mathrm{et}}$ equipped with a map to $h_Y$ sends $E$ to its total-space sheaf $q_!E\\to h_Y$. In the reverse direction it sends $p:F\\to h_Y$ to the sheaf whose sections on $(a:U\\to Y)$ are $\\{t\\in F(U):p(t)=a\\}$. It preserves the corresponding group actions, with a $G$-action over $h_Y$ corresponding to a $q^{-1}G$-action on $E$ [def-weil-pbc-inverse-image]. Pullback $q^{-1}$ preserves local systems, and $q_!$ sends local systems on $Y$ to local systems on $X$.",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. On its small etale site [def-weil-pbc-etale-site], call a set sheaf a local system if it is ind-finite etale [def-per-ind-finite-etale-local-system]. A finite local system means a sheaf represented by a finite etale $X$-scheme [def-weil-pbc-finite-etale-category]. (1) Every local system is the filtered union, in ambient set sheaves, of its finite local-system subsheaves. The full category of local systems is closed under all small ambient colimits and finite limits [def-weil-pbc-category-colimit]. (2) Let $q:Y\\to X$ be finite etale, with $Y$ Noetherian. The equivalence between set sheaves on $Y_{\\mathrm{et}}$ and set sheaves on $X_{\\mathrm{et}}$ equipped with a map to $h_Y$ sends $E$ to its total-space sheaf $q_!E\\to h_Y$. In the reverse direction it sends $p:F\\to h_Y$ to the sheaf whose sections on $(a:U\\to Y)$ are $\\{t\\in F(U):p(t)=a\\}$. It preserves the corresponding group actions, with a $G$-action over $h_Y$ corresponding to a $q^{-1}G$-action on $E$ [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Pullback $q^{-1}$ preserves local systems, and $q_!$ sends local systems on $Y$ to local systems on $X$. Here $q^{-1}$ is the inverse image on set sheaves, identified for etale $q$ with restriction to $Y_{\\mathrm{et}}$ [lem-weil-pbc-sets-etale-inverse-image-restriction]. Explicitly $(q_!E)(U)=\\coprod_{a\\in\\operatorname{Hom}_X(U,Y)}E(U,a)$, with restriction along $V\\to U$ induced by $a\\mapsto a|_V$ and by restriction in $E$; this presheaf is a sheaf. In the action assertion $G$ is a group sheaf on $X_{\\mathrm{et}}$, and the action on $F$ is required to leave $p:F\\to h_Y$ fixed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Propositions 7.2.2–7.2.4, pp. 301–302; the finite-subobject union and the slice/total-space equivalence q_! are used explicitly in the proof of Lemma 7.2.6, p. 302. No torsion extension-closure assertion is included."
@@ -15,11 +15,174 @@
   "def-per-ind-finite-etale-local-system",
   "def-weil-pbc-finite-etale-category",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the finite-stage calculation. A finite diagram of finite locally constant set sheaves can be trivialized on an etale cover; the local-section description of sheafification lets us refine further so that every arrow is a fixed map between its finite sets (there are only finitely many elements, arrows and objects). Its finite limit is then the constant sheaf of the corresponding finite-set limit: the sheaf equalizer condition verifies this locally. Its finite colimit is the constant sheaf of the finite-set colimit: the constant-presheaf functor preserves colimits objectwise, and sheafification, being a left adjoint, preserves colimits. These calculations descend: for each member $j:U_i\\to X$ of the cover, restriction to $U_i$ is the set-valued inverse image $j^{-1}$, which is a left adjoint (to $j_*$) and so carries the ambient colimit on $X$ to the colimit of the restricted diagram on $U_i$, while limits restrict sectionwise; and compatible maps of sheaves glue uniquely. Thus finite limits and finite colimits of finite local systems, computed in all set sheaves, are finite local systems by the finite-etale/FLC equivalence. The same calculation shows that a map of finite local systems with injective fibre at a geometric point on a connected base is an ambient monomorphism: the finite fibre equivalence identifies its kernel pair with the diagonal, and the ambient finite-limit calculation applies.",
+   "uses": [
+    "thm-galois-lc-etale",
+    "thm-galois-fundamental",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.4, finite-stage part of the stated stability properties; finite-set calculation expanded by Q127."
+   }
+  },
+  {
+   "text": "Suppose $X$ connected, choose $x$, and write $F=\\varinjlim_i h_{P_i}$. By the set-valued monodromy equivalence, $F_x=\\varinjlim_i |(P_i)_x|$ equivariantly. The image of each finite stage is a finite invariant subset, so these images exhaust $F_x$. All finite invariant subsets $A\\subseteq F_x$ form a small directed poset under union (including the empty subset). The finite fibre equivalence gives a finite local system $P_A$ for each $A$, compatible with inclusions, and the full set-valued equivalence gives compatible maps $P_A\\to F$. The ambient filtered colimit $L=\\varinjlim_A P_A$ is a local system by its definition, and its fibre is $\\bigcup_A A=F_x$. Hence $L\\to F$ is an isomorphism by the equivalence. Each $P_A\\to L$ is an ambient monomorphism: transitions are ambient monomorphisms by step 1; evaluation of this filtered colimit on affine etale objects is a set colimit by the affine-site comparison and the affine-section colimit lemma, so these injections stay injective. The affine-site equivalence detects monomorphisms. Consequently the $P_A$ are finite subsheaves of $F$, and every finite local-system subsheaf is among them, since its fibre inclusion determines it by full faithfulness. This proves precisely the filtered-union assertion.",
+   "uses": [
+    "lem-per-set-local-system-monodromy",
+    "thm-galois-fundamental",
+    "thm-galois-lc-etale",
+    "def-per-ind-finite-etale-local-system",
+    "aux-weil-pbc-affine-sections-colimit",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.2–7.2.3 and the finite-subsystem union used at the start of 7.2.6."
+   }
+  },
+  {
+   "text": "Finite products are obtained by taking products of finite subsystems: $F\\times G$ is the ambient filtered colimit of the finite local systems $F_a\\times G_b$. Indeed finite limits of sheaves are computed sectionwise, and on the affine etale basis evaluation commutes with filtered colimits; there the assertion is filtered-colimit/finite-product commutation for sets. The terminal sheaf is represented by $X$. For two maps $u,v:F\\rightrightarrows G$, their monodromy maps send each finite invariant subset $A\\subset F_x$ into a finite invariant subset $B\\subset G_x$. Full faithfulness gives the corresponding maps $F_A\\rightrightarrows G_B$. Their ambient equalizer $E_{A,B}$ is finite by step 1. Enlarging $A,B$ gives a filtered system. Its colimit is the ambient equalizer of $u,v$: on the affine basis every section of $F$ comes from some $F_A$, and equality of its images in $G$ is witnessed at a sufficiently large finite stage by the set-colimit equivalence relation. This also gives injectivity of the comparison. Products and equalizers supply all finite limits, including the empty limit.",
+   "uses": [
+    "lem-per-set-local-system-monodromy",
+    "aux-weil-pbc-affine-sections-colimit",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.4, finite projective limits."
+   }
+  },
+  {
+   "text": "An arbitrary small coproduct of local systems is the filtered colimit of the finite coproducts of their finite subsystems: a map from either candidate to an arbitrary sheaf $H$ amounts exactly to one map from each summand to $H$, by the universal properties of the filtered unions and finite coproducts. Each finite coproduct is finite by step 1, so the ambient coproduct is a local system. This includes the empty coproduct, represented by the empty finite etale cover.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-per-ind-finite-etale-local-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.4, inductive limits; coproduct construction."
+   }
+  },
+  {
+   "text": "For $u,v:F\\rightrightarrows G$, take the directed poset of pairs of finite invariant subsets $(A,B)$ of $(F_x,G_x)$ such that $u(A)\\cup v(A)\\subseteq B$. These pairs exhaust both fibres, since one can enlarge $B$ by the two finite images. Let $C_{A,B}$ be the ambient coequalizer of the finite-stage pair $F_A\\rightrightarrows G_B$; it is a finite local system by step 1. The ambient filtered colimit $C$ of the $C_{A,B}$ is a local system. For every ambient sheaf $H$, compatible maps $C_{A,B}\\to H$ amount to compatible maps $G_B\\to H$ equalizing $u,v$ on every $F_A$. By the filtered-union assertion this is exactly a map $G\\to H$ equalizing $u,v$ on $F$. Thus $C$ is the ambient coequalizer. For a diagram $D:I\\to\\mathcal L(X)$, its colimit is the coequalizer of the two maps $\\coprod_{a:i\\to j}D(i)\\rightrightarrows\\coprod_iD(i)$, one induced by each $D(a)$ and one by source inclusion: maps from this coequalizer to $H$ are exactly cocones on $D$. Both coproducts are small. This proves closure under every small ambient colimit.",
+   "uses": [
+    "lem-per-set-local-system-monodromy",
+    "def-per-ind-finite-etale-local-system",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.4, inductive limits; finite relations and the universal property expanded by Q127."
+   }
+  },
+  {
+   "text": "For a general Noetherian $X$, every nonempty set of closed subsets of $|X|$ has a minimal element, so (taking complements) every ascending chain of open subsets stabilizes; hence its connected components form a finite open-and-closed partition. A sheaf on $X_{\\mathrm{et}}$ is the same as a tuple of sheaves on those components: for $U\\to X$, write $U$ as the disjoint union of its pullbacks to the components and apply the sheaf gluing condition. Thus ambient limits and colimits are componentwise. A finite tuple of finite etale covers gives a finite etale cover of $X$, and a finite tuple of filtered presentations can be indexed by their filtered product. The connected arguments therefore give all of clause (1). If $X$ is empty, the empty covering forces every sheaf to have exactly one section on the unique empty object; the sole sheaf is represented by the empty cover, so the same conclusions hold.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-per-ind-finite-etale-local-system",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.2–7.2.4, reduction to connected components."
+   }
+  },
+  {
+   "text": "Let $q:Y\\to X$ be finite etale. Objects of $Y_{\\mathrm{et}}$ identify with pairs $(U,a)$, where $U$ is etale over $X$ and $a:U\\to Y$ is an $X$-map: composition is etale and cancellation makes every such $a$ etale. Coverings are the same underlying jointly surjective etale families. Define $T(E)(U)=\\coprod_{a:U\\to Y}E(U,a)$. For matching local sections $(a_i,t_i)$, the labels $a_i$ glue uniquely to $a:U\\to Y$ because $h_Y$ is a sheaf (it is finite locally constant by the finite-etale/FLC equivalence). Then the $t_i$ glue uniquely in $E$ over $(U,a)$. Hence $T(E)$ is already a sheaf and has its label map to $h_Y$. Conversely $E_p(U,a)=\\{t\\in F(U):p(t)=a\\}$ is a sheaf on $Y_{\\mathrm{et}}$ by the sheaf condition for $F$. The bijection $\\coprod_a E_p(U,a)\\to F(U)$ forgets the label, whose inverse is $t\\mapsto(p(t),t)$. The fibre of $T(E)(U)$ at $a$ is exactly $E(U,a)$. These inverse maps commute with restrictions and all sheaf maps; they prove the claimed equivalence and identify $q_!$ with $T$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.6, p. 302, identification of a sheaf over the finite local system $Y$ with a sheaf on $Y$; explicit construction expanded by Q127."
+   }
+  },
+  {
+   "text": "If a group sheaf $G$ acts on $F$ with $p(gt)=p(t)$, then for each $(U,a)$ the formula $(g,t)\\mapsto gt$ restricts to $G(U)\\times E_p(U,a)\\to E_p(U,a)$. Set-valued etale inverse-image/restriction identifies $G(U)$ here with $(q^{-1}G)(U,a)$. Thus these are exactly the sectionwise maps of a $q^{-1}G$-action on $E_p$, with identity and associativity unchanged. Conversely such fibre actions define the action of $G(U)$ on $T(E)(U)$ by $(g,(a,t))\\mapsto(a,gt)$. The displayed inverse equivalence preserves equivariant maps. In particular a free action remains free, since for each fixed $t$ the equality $gt=t$ is tested in the same fibre.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.6, action of $G$ corresponds to action of $q^*G$ on the associated sheaf."
+   }
+  },
+  {
+   "text": "For any ambient sheaf $H$ on $X$, a map $T(E)\\to H$ is exactly a family of maps $E(U,a)\\to H(U)$ natural on $Y_{\\mathrm{et}}$. Inverse-image/restriction therefore gives $\\operatorname{Hom}_X(T(E),H)=\\operatorname{Hom}_Y(E,q^{-1}H)$, naturally. Hence $T=q_!$ preserves all small colimits by the left-adjoint lemma. Also $q^{-1}$ preserves colimits by its set-valued adjunction to $q_*$. On finite stages $q^{-1}h_P=h_{P\\times_XY}$ directly by restriction and the fibre-product universal property; this is finite etale by base change. On a finite stage $E=h_P$ over $Y$, $T(E)(U)$ is the set of pairs $a:U\\to Y$, $b:U\\to P$ with $a$ equal to the structure map after $b$, hence is exactly $h_P(U)$ with $P$ now over $X$. The composite $P\\to Y\\to X$ is finite etale by finite and etale composition. Passing through any filtered finite-stage presentation, both $q^{-1}$ and $q_!$ thus preserve local systems. These formulas also cover empty $Y$ and empty fibres; no surjectivity of $q$ is used.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-per-ind-finite-etale-local-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.2.4 and 7.2.6, finite-etale total spaces and inverse images; adjunction verified on sections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "aux-weil-pbc-affine-sections-colimit",
+  "def-per-ind-finite-etale-local-system",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-sheafification",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-per-set-local-system-monodromy",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO XVII 7.2.2–7.2.4, pp. 301–302, and 7.2.6, p. 302. Q127 expands the finite-stage stability and slice constructions; set-valued monodromy is isolated as a statement-only node. No SGA source is used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +218,17 @@
    "results": "{\"t\": \"2026-10-18T22:30:33Z\", \"tool\": \"leansearch\", \"query\": \"ind finite etale set local systems are closed under colimits and descend through finite etale surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace.instHasColimits\"], \"digest\": \"0c6eaac7726d2059\"}",
    "date": "2026-10-18",
    "verdict": "no match: the finite Galois-category equivalence concerns finite actions, not ind-finite etale set sheaves or their ambient subobjects and total spaces; condensed locally constant presheaves and existence of site colimits do not assert these clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind finite etale sheaves are filtered unions of finite subobjects and closed under ambient colimits and finite limits",
+   "results": "{\"t\": \"2026-10-19T00:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"Ind finite etale sheaves are filtered unions of finite subobjects and closed under ambient colimits and finite limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.IsFinitePresentation\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"7288ac0a667af83b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: finite-presentation module sheaves, etale site definitions and condensed finite colimit presentations do not assert ind-finite etale set-sheaf closure or total-space calculus."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-torsion-torsor-descent",
@@ -85,5 +255,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-set-local-system-calculus",
+  "worker": "stage1",
+  "summary": "Retained the earlier split and repaired its missing ind-finite monodromy input, invalid module-valued citations, finite-relation colimit argument, and explicit slice equivalence. One new statement-only set-monodromy node records ILO XVII 7.2.3. All ambient comparisons are justified; disconnected and empty cases and non-surjective finite etale maps are included.",
+  "blueprint": "The four steps realize the finite-subobject and ambient closure assertions of ILO XVII Propositions 7.2.2–7.2.4, followed by the slice/total-space construction and its pullback/direct-image clauses used in Lemma 7.2.6.",
+  "tool_uses": [
+   {
+    "node": "aux-weil-pbc-affine-sections-colimit",
+    "why": "Generic tool for Filtered colimit of affine étale sections; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic tool for Effective descent and morphism gluing for sheaves of sets along a covering; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic tool for A Noetherian space has finitely many open connected components; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic tool for The small affine etale site computes the etale topos and its cohomology; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic tool for Open immersions are etale; etale morphisms compose and cancel; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Generic tool for Filtered colimits of sets and of abelian groups commute with finite limits; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Generic tool for Composition of finite morphisms; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic tool for Left adjoints preserve colimits; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "why": "Generic tool for Composition isomorphisms of etale inverse images of sheaves of sets, with units; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Generic tool for Inverse image of sheaves of sets along an etale morphism is restriction; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic tool for Limits of sheaves of sets on a site are computed sectionwise; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic tool for The fibre functor is an equivalence; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic tool for Finite locally constant sheaves and finite etale schemes; used in the explicit set-sheaf calculation, not as a replacement for the perverse unit route. The unit has no result supplying this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local sections of a sheafified constant presheaf are locally constant labels; needed to make the finitely many finite-stage arrow tables fixed. No statement of the perverse unit gives this generic sheafification fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "aux-weil-pbc-affine-sections-colimit",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-9056a6757",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-9056a6757 (reviewer sub-agent of L); spot-checked: Read ILO XVII 7.2.1–7.2.6 (pp. 301–303), the item's 9 steps, the new node and every cited statement. New node lem-per-set-local-system-monodromy is ILO 7.2.3 for arbitrary discrete continuous π1-sets plus the stalk-of-colimit comparison. It is true (tested on Spec k, the empty colimit and infinite sets), statement-only with no proof deps, self-contained, searched (grep/LeanSearch/Loogle/LeanFinder), not a restatement of an item clause, not a duplicate (thm-galois-fundamental covers finite sets only, lem-per-torsion-local-system-monodromy covers torsion modules and depends on this item, lem-exc-* cover field bases only), and makes no cycle. Coefficient category: everything is set sheaves. Replacing the module-valued def-weil-pbc-inverse-image with the set-valued inverse-image nodes and making q_! the explicit total-space formula only clarifies the statement and weakens nothing. The citer lem-per-torsion-torsor-descent still gets every clause it uses. No SGA is cited. Steps 2–5 and 7–9 are correct: the finite-subset union, products and equalizers over (A,B), coproducts, coequalizers, the slice equivalence, actions, q_! ⊣ q^{-1} and finite-stage representability. Two C1/C4 faults, both repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-set-local-system-calculus.json: (1) step 1 descended the ambient finite colimit from the cover without stating that restriction to U_i preserves colimits; I now cite lem-weil-pbc-sets-etale-inverse-image-restriction and -composition-units (j^{-1} = restriction, which is a left adjoint). (2) step 6 applied lem-sfb-noetherian-connected-components-open, which needs ACC on opens, without deriving it for |X|; I now cite lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (a Mathlib leaf), with complements giving ACC. proof_deps was recomputed. The declared tool_uses are all generic and accepted.; 1 file(s) fixed by the reviewer"
  }
 }
