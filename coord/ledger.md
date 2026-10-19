@@ -17185,3 +17185,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:33 L: merged deliver/F5/Sheaf.AlgebraicGeometry.RegularNormalDecomposition (stage 3; reviewer PASS; first push; landing 20261019T093355-L-2302350 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F5/Sheaf.RingTheory.FieldsExcellent (stage 3; reviewer PASS; first push; landing 20261019T093356-L-2302548 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:33 L: merged deliver/F6/Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite (stage 3; reviewer PASS; first push; landing 20261019T093357-L-2302917 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:33 L: merged deliver/F6/Sheaf.CategoryTheory.PerfectConstantDerivedMapLocal (stage 3; reviewer PASS; first push; landing 20261019T093359-L-2303218 (interface); batch 20261019T093237; modules 2; new nodes 1; change records: coord/changes/perfect-constant-derived-map-local-scopes.md)
