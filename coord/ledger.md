@@ -17012,3 +17012,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: returned deliver/Q71/lem-per-blowup-differentials-dualizing (reviewer RETURN: F (route pivot): the item lem-per-blowup-differentials-dualizing is itself in the 2026-10-19 artin-gabber dropped sectio)
 - 03:57 L: returned deliver/Q88/lem-trf-affine-cotangent-comparison (reviewer RETURN: L: independent stage-2 immutable head 3fa06f3fb06a: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
 - 03:57 L: returned deliver/Q43/lem-per-rig-etale-principal-tower-conormal-transfer (reviewer RETURN: Route-pivot drop (class F, 2026-10-19 artin-gabber section of side coord/route-pivot-dropped.txt). The item itself is dr)
+- 03:57 L: returned deliver/Q71/lem-per-rdp-nonsquare-conic-transition (reviewer RETURN: Route pivot (F/B9, coord/repair-notes/lem-per-artin-gabber-affine-curve.json, 2026-10-19). The item itself is in the 202)
