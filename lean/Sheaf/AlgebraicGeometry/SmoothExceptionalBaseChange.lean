@@ -25,6 +25,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
+public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 
 /-! # Arbitrary base change for smooth ambient duality
 
@@ -549,7 +550,6 @@ already invertible exchanges. The twist/pullback and tensor identifications of
 explicit composite adjunction, and compares its right adjoint directly with the ambient right
 adjoint of [thm-amb-etale-exceptional-adjoint] by the unique counit-preserving comparison. The
 imported affine-space adjunction with its pro-etale twist dependency is not used. Uses:
-public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
 lem-amb-etale-adjoint-locality, def-weil-pbc-etale-shriek-base-change-map,
 lem-weil-pbc-mate-pasting, lem-asd-etale-finite-twist-pullback,
 thm-amb-etale-exceptional-adjoint, lem-asd-etale-compact-support-normalization.
