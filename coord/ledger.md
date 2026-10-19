@@ -16714,3 +16714,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:26 L: merged deliver/H1/Sheaf.SixFunctors.SemilinearProperOpenMatePasting (stage 3; reviewer PASS; first push; landing 20261019T002615-L-2159749 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/H2/Sheaf.AlgebraicGeometry.InjectiveComplexSliceSectionModel (stage 3; reviewer PASS; first push; landing 20261019T002616-L-2159873 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:26 L: merged deliver/H3/Sheaf.Algebra.Homology.PrincipalKoszulQuotientTowers (stage 3; reviewer PASS; first push; landing 20261019T002616-L-2159971 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:26 L: merged deliver/H3/Sheaf.Paper.EtaleKFlatCriteria (stage 3; reviewer PASS; first push; landing 20261019T002616-L-2160077 (proof); batch 20261019T002449; modules 1; new nodes 0)

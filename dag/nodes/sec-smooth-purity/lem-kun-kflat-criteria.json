@@ -22,71 +22,83 @@
  ],
  "proof": [
   {
-   "text": "For (1), take the ringed site $(\\mathcal C,\\mathcal O)=(T_{\\Et},\\Lambda_T)$. The flatness and K-flatness conventions are precisely those in [def-pc-flat-sheaf-modules] and [def-kun-derived-tensor]. Apply [lem-pc-bounded-above-flat-kflat-site] to this site and the given bounded-above complex. Its hypotheses require only an upper degree bound and tensor-flat terms, both assumed; it supplies acyclicity after tensor with every acyclic complex, with no lower degree bound.",
+   "text": "Set R to the constant coefficient ring sheaf on the small etale site. Given an upper bound b, CochainComplex.isStrictlyLE_iff equips P with IsStrictlyLE b. Apply the proved independent-universe bounded-flat criterion [lem-weil-pbc-independent-bounded-flat-kflat] directly to the assumed IsFlatOnSite terms [def-pc-flat-sheaf-modules]. Its IsKFlatIndependentCoefficients conclusion is definitionally the existing IsAcyclicTensorKFlat predicate at these universes. No tensor-factor interchange or lower bound is required.",
    "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
     "def-pc-flat-sheaf-modules",
-    "def-kun-derived-tensor",
-    "lem-pc-bounded-above-flat-kflat-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, sites-cohomology-lemma-bounded-flat-K-flat"
-   }
-  },
-  {
-   "text": "For a mapping-cone triangle $K_1\\to K_2\\to C(f)\\to K_1[1]$, fix any acyclic complex $A$. By [def-kun-derived-tensor], the two K-flat terms give acyclic total tensor complexes with $A$. Apply [lem-pc-kflat-tensor-cone-two-out-of-three], with the acyclic factor on the left, to obtain acyclicity for the third tensor complex. The sign symmetry $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ in bidegree $(p,q)$ identifies this with the convention of [def-kun-derived-tensor]. Since $A$ was arbitrary, the third term is K-flat. This proves the cone assertion.",
-   "uses": [
-    "def-kun-derived-tensor",
-    "lem-pc-kflat-tensor-cone-two-out-of-three"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A3, sites-cohomology-lemma-K-flat-two-out-of-three"
-   }
-  },
-  {
-   "text": "For a general distinguished triangle in the homotopy category, [lem-pur-homotopy-category-triangulated] identifies it up to homotopy-category isomorphism with a mapping-cone triangle. K-flatness is invariant under these isomorphisms: if $h:K^q\\to L^{q-1}$ is a chain homotopy, on $A^p\\otimes K^q$ use $H=(-1)^p(1\\otimes h)$. For the total differential of [def-pc-tensor-complex-sheaves], the two terms involving $d_A$ cancel and $dH+Hd=1\\otimes(dh+hd)$. Thus tensor carries homotopy inverse maps to homotopy inverse maps. Such maps induce inverse maps on cohomology, since $dh+hd$ acts trivially on cycles modulo boundaries. Hence tensor acyclicity, and so K-flatness [def-kun-derived-tensor], transfers along the three isomorphisms; the preceding step proves (2).",
-   "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "def-pc-tensor-complex-sheaves",
     "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "Use tensorPreadditive from the bounded-flat module and tensorLeft_preservesColimits_independentCoefficients from [lem-weil-pbc-independent-sheaf-tensor-colimits], shrinking preservation to countable diagrams to construct all unbounded direct-sum total tensor complexes [def-pc-tensor-complex-sheaves]. For each fixed complex A, the already-proved source-library bifunctorMapHomotopyCategory applied to curriedTensor descends total tensor to a functor G on the homotopy category; the IsTriangulated instance of WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated gives G.map_distinguished. These instances use the cone comparison and signed tensor homotopies, so no separate cone/homotopy calculation is needed in this item.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-homotopy-category-triangulated"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A3, passage from cone triangles to distinguished triangles; explicit homotopy calculation"
+    "place": "lemma-derived-tor-exact (exactness of total tensor on the homotopy category)"
    }
   },
   {
-   "text": "For (3), fix any acyclic complex $A$. The small-skeleton convention [def-weil-size-convention] satisfies the small-site hypothesis of [lem-pc-module-filtered-colimits-tensor]. That node identifies $\\operatorname{Tot}((\\varinjlim_i K_i)\\otimes A)$ with $\\varinjlim_i\\operatorname{Tot}(K_i\\otimes A)$ and says filtered module-sheaf colimits are exact. Every tensor complex on the right is acyclic by [def-kun-derived-tensor]. More explicitly, set $C_i=\\operatorname{Tot}(K_i\\otimes A)$ and $Z_i^n=\\ker d_{C_i}^n$. Acyclicity gives short exact sequences $0\\to Z_i^n\\to C_i^n\\to Z_i^{n+1}\\to0$, compatible with transition maps. Exactness of the filtered colimit gives the same sequences with colimits, and $\\colim Z_i^{n+1}\\to\\colim C_i^{n+1}$ is monic. Therefore the image of the colimit differential in degree $n-1$ and the kernel of its differential in degree $n$ are both $\\colim Z_i^n$. The colimit complex is acyclic. As $A$ was arbitrary, the colimit is K-flat. The final assertion follows by applying (1) to each diagram term and then this result.",
+   "text": "Let P be HomotopyCategory.subcategoryAcyclic. For each of the three representative isomorphisms e_j, P.prop_iff_of_iso (G.mapIso e_j), followed by quotient_obj_mem_subcategoryAcyclic_iff_acyclic, identifies P(G(Delta.obj_j)) with acyclicity of Tot(A tensor K_j). Apply P.ext_of_isTriangulatedClosed_3, _2 and _1 to G.map_distinguished Delta hDelta. Quantify over acyclic A to obtain all three K-flat implications. Specializing this result to mappingCone.triangleh f, using mappingCone_triangleh_distinguished and the identity isomorphisms, proves the explicit cone corollary.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-kun-derived-tensor"
+    "def-kun-derived-tensor",
+    "lem-pur-homotopy-category-triangulated"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YR, sites-cohomology-lemma-colimit-K-flat; its exact-colimit proof applies to every small filtered category"
+    "place": "Tag 07A3, lemma-K-flat-two-out-of-three"
+   }
+  },
+  {
+   "text": "For a small filtered category I, exactness of I-colimits of abelian groups passes to abelian sheaves by Mathlib CategoryTheory.Sheaf.hasExactColimitsOfShape, then to R-module sheaves by HasExactColimitsOfShape.domain_of_functor applied to SheafOfModules.toSheaf. The source-library preservesColimitsOfShape_toSheaf instance follows from module sheafification [def-weil-presheaf-modules-sheafification]. Tensor-colimit preservation [lem-weil-pbc-independent-sheaf-tensor-colimits] and the source BifunctorColimits instances show that total tensor G with a fixed A preserves I-colimits.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YR, lemma-colimit-K-flat (the exact-colimit argument applies to arbitrary small filtered categories)"
+   }
+  },
+  {
+   "text": "Prove acyclic_colimit for any abelian category with exact I-colimits. In degree n, form in the functor category I to D the short complex S of differentials in degrees n-1,n,n+1. ShortComplex.functorEquivalence constructs S from the diagram of degree-n short complexes. Pointwise acyclicity makes S exact: exact_iff_isZero_homology, Functor.isZero_iff, and S.mapHomologyIso for each evaluation give this directly. Apply colim.exact_mapShortComplex to S, the colimit cocones preserved by each of the three HomologicalComplex.eval functors, and the commutation equations of colimit. This makes the colimit complex exact in degree n. Apply this helper to F followed by total tensor G: every diagram term is acyclic by the assumed K-flatness. Transfer along (preservesColimitIso G F).symm to show tensoring colimit F with A is acyclic. Quantifying over A proves filtered-colimit K-flatness. Finally apply the bounded-flat clause termwise to prove the last corollary; each term may have its own upper bound.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YR, lemma-colimit-K-flat (the exact-colimit argument applies to arbitrary small filtered categories)"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "def-pc-flat-sheaf-modules",
   "def-kun-derived-tensor",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-size-convention",
-  "lem-pc-module-filtered-colimits-tensor"
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-size-convention"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YQ, 07A3, 06YR (labels lemma-bounded-flat-K-flat, lemma-K-flat-two-out-of-three, lemma-colimit-K-flat)"
+  "place": "Tags 06YQ, 07A3, 06YR; compiled H3 proof reusing independent-universe bounded flatness, the triangulated total-tensor functor, and exact filtered colimits"
  },
  "mathlib_searches": [
   {
@@ -195,11 +207,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "lem-pc-module-filtered-colimits-tensor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -225,5 +233,15 @@
   "date": "2026-10-15",
   "existing": true,
   "note": "Exact existing statement in the published newtargets-dag module Sheaf.Paper.EtaleKFlatCriteria (original group NO delivery). All three criteria and the cone and filtered-flat corollaries agree clause by clause; verified current source and clean scompile.py compilation. No module redeclared."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261019T002616-L-2160077",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
