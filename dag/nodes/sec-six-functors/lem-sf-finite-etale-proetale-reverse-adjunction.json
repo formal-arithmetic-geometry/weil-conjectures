@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-finite-etale-proetale-reverse-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-exc-finite-etale-adjoint",
+   "place": "Proof, first two paragraphs: the finite-sum/finite-product comparison and the underived reverse adjunction, before passage to complexes.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Underived finite etale reverse adjunction on pro-etale module sheaves",
+ "statement": "Let $e:V\\to X$ be a finite etale morphism of schemes [def-weil-finite-integral-morphism, def-weil-etale-morphism], and let $R$ be any commutative ring. On the small pro-etale sites [def-weil-pbc-proetale-site], let $e_*$ denote direct image on sheaves of $R$-modules [def-weil-proetale-module-direct-image, def-weil-sheaf-of-modules-category], and let $e^*$ denote inverse image [def-weil-proetale-inverse-image]. There exists an adjunction $e_*\\dashv e^*$. This assertion concerns the abelian sheaf categories, not derived categories. No finite coefficient, characteristic, invertibility, surjectivity, quasi-compactness, finite-type, or boundedness hypothesis is imposed beyond finite etaleness of $e$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
+  "place": "Proof, first two paragraphs, ending before passage to complexes; the finite sum/product argument for the sheaf-level adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the natural isomorphism of sheafified localization extension with direct image [lem-sf-finite-etale-proetale-localization-comparison]. The actual left-Kan-extension/sheafification adjunction gives extension left adjoint to restriction. Transport its left functor along the comparison. Since e is weakly etale, upperStarIsoLocalizationRestriction identifies inverse image with restriction, by uniqueness of left adjoints to the existing direct image [def-weil-proetale-inverse-image]. Transport the right functor along the inverse of this isomorphism. The resulting adjunction is e_* left adjoint to e^*.",
+   "uses": [
+    "lem-sf-finite-etale-proetale-localization-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
+    "place": "Proof, first two paragraphs, ending before passage to complexes; the finite sum/product argument for the sheaf-level adjunction."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pushforward along a finite etale morphism is left adjoint to inverse image on sheaves of modules",
+   "results": "TopCat.Presheaf.pushforwardPullbackAdjunction; TopCat.Sheaf.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.pushforward_map_val",
+   "date": "2026-10-19",
+   "verdict": "no match: the results give the ordinary pullback/direct-image adjunction, not the reverse adjunction on small pro-etale module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite etale morphism the pushforward on sheaves is left adjoint to pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-19",
+   "verdict": "no match: the results give the ordinary pullback/direct-image adjunction, not the reverse adjunction on small pro-etale module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarUpperStarAdjunctionOfIsFinite|finiteEtale_sheaf_adjunction",
+   "results": "No matches.",
+   "date": "2026-10-19",
+   "verdict": "no match: the results give the ordinary pullback/direct-image adjunction, not the reverse adjunction on small pro-etale module sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleAdjunction",
+  "date": "2026-10-19",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "import_flags": [],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleReverseAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleProEtaleReverseAdjunction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteEtale_reverseModuleAdjunction",
+  "statement": "theorem finiteEtale_reverseModuleAdjunction {V X : Scheme.{u}} (e : V ⟶ X)\n    [IsFinite e] [Etale e] (R : Type (u + 1)) [CommRing R] :\n    Nonempty (lowerStar (ModuleCat.{u + 1} R) e ⊣ upperStar (ModuleCat.{u + 1} R) e)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "proof_deps": [
+  "lem-sf-finite-etale-proetale-localization-comparison",
+  "def-weil-proetale-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261019T112443-L-3941558",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261019T112443-L-3941558",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -26,67 +26,20 @@
  ],
  "proof": [
   {
-   "text": "An etale map is flat and unramified [def-weil-etale-morphism, def-weil-unramified-morphism], so its diagonal is an open immersion. An open immersion induces isomorphisms on local rings [def-weil-open-immersion], hence is flat [def-weil-flat-morphism]. Thus an etale map is flat with flat diagonal, i.e. weakly etale [def-weil-weakly-etale-morphism]. In particular $e$ is an object of $X_{\\mathrm{proet}}$. By [lem-weil-proetale-weakly-etale-localization], its slice site is $V_{\\mathrm{proet}}$ and the restricted constant ring is $A_V$. The inverse image $e^*$ is restriction to this slice: the direct-image formula [def-weil-proetale-module-direct-image] on a test object $W$ is $F(W\\times_XV)$, the direct image for the localization morphism, and the inverse images of this morphism agree. Apply [lem-pur-site-restriction-module-adjunction-exact] with $\\mathcal O=A_X$ and slice object $V$. Denote its exact left adjoint to $e^*$ by $J_e$ to distinguish slice extension by zero from the compact-support derived functor. Thus $J_e\\dashv e^*$ and both $J_e,e^*$ are exact. For each point $x\\in X$, [lem-weil-pbc-finite-etale-etale-local-split] gives an etale neighbourhood $U\\to X$ on which $V_U=\\coprod_{s\\in S_U}U$, with $S_U$ finite. These neighbourhoods are jointly surjective. Their maps are flat and locally of finite presentation by [def-weil-etale-morphism], and hence open by [lem-weil-pbc-flat-lfp-open]. Over each affine test open, cover their inverse images by affine opens; their images are open and cover the test open, so quasi-compactness selects finitely many. Together with weak etaleness this is precisely the covering criterion of [def-weil-pbc-proetale-site]; the sheet count is allowed to vary with $U$.",
+   "text": "Apply the sheaf-level reverse adjunction [lem-sf-finite-etale-proetale-reverse-adjunction] with R = ULift A. Conjugate it by sfIntrinsicModuleEquivalence on V and X. The normalized sfIntrinsicDirectImageComparison from [def-weil-proetale-inverse-image] identifies the left functor with the actual intrinsic direct image [def-weil-proetale-module-direct-image]; its right functor is sfIntrinsicPullback. The intrinsic direct image already preserves finite limits, and its new left adjunction supplies finite colimits. This proves exactness without imposing boundedness or constructibility.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-proetale-module-direct-image",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "def-weil-pbc-proetale-site",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-weil-weakly-etale-morphism",
-    "lem-weil-pbc-flat-lfp-open"
+    "lem-sf-finite-etale-proetale-reverse-adjunction",
+    "def-weil-proetale-inverse-image",
+    "def-weil-proetale-module-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, first paragraph: local splitting and the slice-site interpretation"
+    "place": "node prop-exc-finite-etale-adjoint, order 2062"
    }
   },
   {
-   "text": "Fix one splitting neighbourhood $U$ and write $S=S_U$. A test object $W\\to V_U$ is covered by its disjoint inverse images $W_s$ of the sheets. The sheaf condition says $F(W)=\\prod_s F(W_s)$, with zero value on an empty intersection. Thus a sheaf on $V_U$ is exactly a family $(F_s)_{s\\in S}$ of module sheaves on $U$, and module maps are exactly families of module maps [def-weil-sheaf-of-modules-category]. The direct-image formula [def-weil-proetale-module-direct-image] becomes $e_*F|_U=\\prod_sF_s$ by applying that sheaf condition to $W\\times_UV_U=\\coprod_sW$. Restriction inverse image is the diagonal $N\\mapsto(N)_s$ [lem-weil-proetale-weakly-etale-localization]. The presheaf formula [def-weil-extension-by-zero-presheaf] and its sheafification in [lem-pur-site-restriction-module-adjunction-exact] give $J_eF|_U=\\bigoplus_sF_s$: a map $W\\to V_U$ is locally the inclusion of one sheet, so its generator is locally the corresponding summand generator, and restricting these generators gives exactly the restriction maps of that sum. Restriction to a slice uses the same covering families [def-pur-localized-ringed-site], so sheafification and this local description agree. For finitely many module sheaves this sum is also the sectionwise product: the coordinatewise module operations and restrictions satisfy the sheaf axiom, and the sum of finitely many coordinate maps has the coproduct universal property.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-module-direct-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-extension-by-zero-presheaf",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, first paragraph: finite tuple formulas, with sheaf condition and extension-by-zero construction expanded"
-   }
-  },
-  {
-   "text": "On this neighbourhood the canonical map $b:\\bigoplus_sF_s\\to\\prod_tF_t$ has $(t,s)$-component $\\operatorname{id}$ for $t=s$ and $0$ otherwise. Its inverse is $\\sum_s\\iota_s\\pi_s$; composing in either order gives the identity by the finite coordinate calculation. For a change of splitting, refine the overlap into the open-and-closed inverse images of the sheets under the two splittings; on each such piece the change is a permutation. Relabelling $s,t$ preserves both the equality test $s=t$ in $b$ and the sum defining its inverse. Hence both local maps agree on overlaps. Apply [lem-pur-sheaf-hom-cover-gluing] to $J_eF$ and $e_*F$ over $X$, and to the reversed pair, to glue $b$ and its inverse. The composites and naturality squares agree after the covering and therefore globally by uniqueness in that same lemma. This gives a natural isomorphism $J_e\\cong e_*$. Consequently $e_*$ is exact and $e_*\\dashv e^*$, by the exact adjunction of step 1. The empty sheet set gives the zero sheaf on both sides and the unique isomorphism; no nonempty-fibre assumption is used.",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing",
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, second paragraph: permutation compatibility and gluing, with inverse maps and exactness"
-   }
-  },
-  {
-   "text": "Here are the unit, counit and triangles of the resulting adjunction, to fix its direction. On a splitting neighbourhood the unit at $F=(F_s)_s$ has $s$-component the inclusion $F_s\\to\\bigoplus_tF_t$; the counit at $N$ is $\\bigoplus_sN\\to N$, $(n_s)_s\\mapsto\\sum_sn_s$. These maps commute with restrictions and permutations, so their uniqueness under [lem-pur-sheaf-hom-cover-gluing] agrees with the adjunction obtained in step 3. The first triangle on a vector $\\iota_s(m)$ sends it into the $s$-summand of $\\bigoplus_s\\bigoplus_tF_t$ and then sums the outer coordinate, returning $\\iota_s(m)$. The second triangle on the $s$-component $N$ is $N\\xrightarrow{\\iota_s}\\bigoplus_tN\\xrightarrow{\\sum}N$, the identity. Equality of sheaf maps is checked on the covering by uniqueness of gluing. For $S=\\varnothing$ the first identity is the identity of zero and the second is an identity in the zero product category.",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, second paragraph: explicit adjunction maps and the two triangle calculations"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-exact-functor-derived-triangulated] to the two exact additive functors $e_*$ and $e^*$. Their termwise functors preserve quasi-isomorphisms: exactness identifies cohomology in each integer degree with the functor applied to cohomology. The unit and counit of step 4 give degreewise chain maps, since their naturality commutes with each differential, and their two composite chain maps are the identities degreewise. Localization at quasi-isomorphisms therefore carries these natural transformations and identities to the unbounded derived categories and defines the adjunction there. If $K\\to I$ is the K-injective resolution used in [def-weil-derived-direct-image], then $e_*K\\to e_*I$ is a quasi-isomorphism by exactness. Thus termwise $e_*$ computes $Re_*$, and [def-weil-derived-pullback-tensor-hom] already identifies $e^*$ with termwise inverse image. No boundedness or constructibility is needed in this passage.",
+   "text": "Use the exact-functor construction [lem-sf-exact-functor-derived-triangulated]. The library rightDerivedFunctorIsoMapDerivedCategory identifies RF with the exact termwise derived functor, and mapDerivedCategoryFactors identifies Q followed by RF with the degreewise functor followed by Q, proving the displayed isomorphism for [def-weil-derived-direct-image]. The proved mapDerivedCategoryRightDerivedAdjunction derives the transported adjunction. Apply the exactness comparison on the right and its inverse on the left to obtain RF left adjoint to the specified termwise inverse image [def-weil-derived-pullback-tensor-hom].",
    "uses": [
     "lem-sf-exact-functor-derived-triangulated",
     "def-weil-derived-direct-image",
@@ -95,51 +48,36 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, second paragraph: passage to complexes and ordinary unbounded derived categories"
+    "place": "node prop-exc-finite-etale-adjoint, order 2062"
    }
   },
   {
-   "text": "The map $e$ is proper by [lem-weil-pbc-finite-proper]. In the finite-type setting of the compact-support clause, $c=(\\operatorname{id}_V,e)$ is therefore a compactification. By the formula in [def-weil-compact-support-candidate], $Re_!^c=Re_*\\,(\\operatorname{id}_V)_!$ on the entire derived category. Extension by zero for the identity is the identity: in [def-weil-extension-by-zero-presheaf] every test object has its unique structure map to the final object $V$, so the extension presheaf has one summand equal to the original sheaf and needs no further sheafification. Hence $Re_!^c=Re_*$ on the entire derived category, and step 5 proves the displayed adjunction. On the etale-origin subcategory specified in [def-compact-support-direct-image-detailed], the chosen compactification superscript may be suppressed. This step invokes no unbounded compactification-independence assertion.",
+   "text": "Finite implies proper [lem-weil-pbc-finite-proper], so Compactification.ofIsProper has open part the identity. Identity extension by zero is the identity: its adjunction has right adjoint upperStar id, naturally isomorphic to the identity, so uniqueness of left adjoints gives the required isomorphism. Conjugate it by the scalar realization and descend it termwise. Whiskering with RF identifies the intrinsic compact-support functor [def-compact-support-direct-image-detailed] with RF. In the finite-field clause, l distinct from the prime characteristic is a unit in the finite field, hence in its algebraic closure and every stalk of a scheme over it. Apply the first theorem and transport its left adjoint along the compact-support isomorphism. This proves the clause on the entire derived category without compactification independence.",
    "uses": [
     "lem-weil-pbc-finite-proper",
-    "def-weil-compact-support-candidate",
-    "def-weil-extension-by-zero-presheaf",
     "def-compact-support-direct-image-detailed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-    "place": "Proof, second paragraph: properness and identity compactification, with the ambient scope made explicit"
+    "place": "node prop-exc-finite-etale-adjoint, order 2062"
    }
   }
  ],
  "proof_deps": [
   "def-compact-support-direct-image-detailed",
-  "def-pur-localized-ringed-site",
-  "def-weil-compact-support-candidate",
   "def-weil-derived-direct-image",
   "def-weil-derived-pullback-tensor-hom",
-  "def-weil-etale-morphism",
-  "def-weil-extension-by-zero-presheaf",
-  "def-weil-flat-morphism",
-  "def-weil-open-immersion",
-  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
   "def-weil-proetale-module-direct-image",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-unramified-morphism",
-  "def-weil-weakly-etale-morphism",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-sf-finite-etale-proetale-reverse-adjunction",
+  "lem-weil-pbc-finite-proper"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/prop-exc-finite-etale-adjoint.md",
-  "place": "## Proof"
+  "place": "Proof, first two paragraphs: underived geometry isolated as its own lemma, then canonical scalar transport, exact unbounded derivation, and identity compactification as implemented in Lean."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -217,5 +155,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Wrote review.md. Checked all statement dependencies, source places, exact declarations, hypotheses, conclusions, edge cases, universes, dependency repair, docstrings and report sections. Both immutable Lean modules compiled through scompile.py with exit 0 and no diagnostics. No corrections needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261019T112443-L-3941558",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

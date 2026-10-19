@@ -19,26 +19,12 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.Paper.SfDerivedDirectImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Ulift
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.UnramifiedMorphism
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.SfCommonStageDirectImage
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleReverseAdjunction
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Mathlib.Algebra.CharP.CharAndCard
+import Mathlib.Algebra.CharP.Invertible
 
 /-!
 # The reverse adjunction for a finite etale pro-etale direct image
@@ -93,25 +79,17 @@ etale direct image. No boundedness, nonempty-fibre, or constructibility conditio
 Source: blueprint order 2062, first displayed adjunction
 (blueprint: prop-exc-finite-etale-adjoint).
 
-Proof plan: (1) An etale map is weakly etale, so identify its small site with the slice
-site by lem-weil-proetale-weakly-etale-localization. The exact slice extension `J_e`
-is left adjoint to restriction by lem-pur-site-restriction-module-adjunction-exact.
-Use lem-weil-pbc-finite-etale-etale-local-split to cover the base by etale neighbourhoods
-on which the number of sheets is finite (and may vary). These are pro-etale covers.
-(2) The sheaf condition identifies sheaves on a split cover with tuples; direct image
-is their finite product, inverse image is the diagonal, and `J_e` is their finite sum.
-(3) The diagonal matrix with identity entries gives the sum-to-product isomorphism,
-with inverse the sum of inclusions composed with projections. Both commute with
-permutations, so lem-pur-sheaf-hom-cover-gluing glues them naturally. Hence direct
-image is exact and left adjoint to inverse image. The empty tuple gives zero.
-(4) The unit is inclusion of each sheet and the counit is summation. On a summand,
-both triangle identities reduce to the identity; uniqueness of gluing proves them
-globally. (5) Apply both exact functors termwise to unbounded complexes. Naturality
-makes units and counits chain maps, whose triangles hold degreewise. Localization
-preserves them. Exactness sends every K-injective resolution quasi-isomorphism to a
-quasi-isomorphism, so the termwise direct image computes the recorded total derived
-image. Exact inverse image is the already specified termwise derived pullback.
-This is the argument of lem-sf-exact-functor-derived-triangulated. -/
+Proof: use the underived finite-etale adjunction from
+`ProEtale.finiteEtale_reverseModuleAdjunction` and conjugate it by the canonical
+constant-coefficient realization equivalences. The normalized direct-image
+comparison identifies its left functor with the recorded intrinsic direct image.
+This functor already preserves finite limits, and the transported left adjunction
+gives finite colimits. Exactness identifies its total right derived functor with
+its termwise derived functor; the factorization through `DerivedCategory.Q` gives
+the displayed termwise computation. Derive the transported adjunction, then use
+the exactness comparisons on both sides to identify its functors with the two
+functors in the statement. All constructions use the ordinary unbounded derived
+category; no boundedness or constructibility is introduced. -/
 theorem finiteEtale_proEtale_exact_derived_adjunction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) {V X : Scheme.{u}} (e : V ⟶ X)
@@ -131,7 +109,30 @@ theorem finiteEtale_proEtale_exact_derived_adjunction
     Nonempty
       (proEtaleConstantDerivedDirectImage e (Padic.coefficientExtensionRing l E (n + 1)) ⊣
         finiteEtaleAdjunction_inverseImage e (Padic.coefficientExtensionRing l E (n + 1))) := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  let qV := sfIntrinsicModuleEquivalence V A
+  let qX := sfIntrinsicModuleEquivalence X A
+  obtain ⟨a⟩ := ProEtale.finiteEtale_reverseModuleAdjunction e (ULift.{u + 1, u} A)
+  let transport : proEtaleConstantModuleDirectImage e A ≅
+      qV.inverse ⋙ ProEtale.lowerStar B e ⋙ qX.functor :=
+    (Functor.isoWhiskerLeft qV.inverse (sfIntrinsicDirectImageComparison e A).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight qV.counitIso _ ≪≫ Functor.leftUnitor _).symm
+  let adj : proEtaleConstantModuleDirectImage e A ⊣ sfIntrinsicPullback A e :=
+    ((qV.symm.toAdjunction.comp a).comp qX.toAdjunction).ofNatIsoLeft transport.symm
+  have hlim : PreservesFiniteLimits (proEtaleConstantModuleDirectImage e A) :=
+    (proEtaleConstantModuleDirectImage_additive_leftExact e A).2
+  have hcol : PreservesFiniteColimits (proEtaleConstantModuleDirectImage e A) := by
+    have : PreservesColimitsOfSize.{0, 0} (proEtaleConstantModuleDirectImage e A) :=
+      adj.leftAdjoint_preservesColimits
+    infer_instance
+  let rd := (proEtaleConstantModuleDirectImage e A).rightDerivedFunctorIsoMapDerivedCategory
+  refine ⟨hlim, hcol, ⟨?_⟩, ⟨?_⟩⟩
+  · exact Functor.isoWhiskerLeft DerivedCategory.Q rd ≪≫
+      (proEtaleConstantModuleDirectImage e A).mapDerivedCategoryFactors
+  · exact (adj.mapDerivedCategoryRightDerivedAdjunction.ofNatIsoRight
+      (sfIntrinsicPullback A e).rightDerivedFunctorIsoMapDerivedCategory).ofNatIsoLeft rd.symm
 
 /-- For the proper identity compactification the compact-support candidate is the
 ordinary total direct image and has inverse image as right adjoint, on the entire
@@ -140,7 +141,7 @@ subcategory gives the usual compactification-independent notation `Re_! = Re_*`.
 Source: blueprint order 2062, compact-support clause
 (blueprint: prop-exc-finite-etale-adjoint).
 
-Proof plan: (6) A finite map is proper (lem-weil-pbc-finite-proper), so
+Proof: a finite map is proper (lem-weil-pbc-finite-proper), so
 `Compactification.ofIsProper e.left` is exactly `(id_V,e)`. The formula of
 def-weil-compact-support-candidate and def-compact-support-direct-image-detailed is
 `Re_*` after extension by zero for the identity. In the defining presheaf every
@@ -167,6 +168,40 @@ theorem finiteEtale_proEtale_identityCompactification_adjunction
           (Padic.coefficientExtensionRing l E (n + 1)) ⊣
         finiteEtaleAdjunction_inverseImage e.left
           (Padic.coefficientExtensionRing l E (n + 1))) := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  let q := sfIntrinsicModuleEquivalence V.left A
+  let : q.functor.Additive :=
+    ProEtale.finiteCoefficientIntrinsicRealization_additive V.left A
+  let ei : ProEtale.openImmersionLowerShriek B (𝟙 V.left) ≅ 𝟭 _ :=
+    (ProEtale.openImmersionLowerShriekUpperStarAdjunction B (𝟙 V.left)).leftAdjointUniq
+      (Adjunction.id.ofNatIsoRight (ProEtale.upperStarId B V.left).symm)
+  let ez : sfIntrinsicExtensionByZero (𝟙 V.left) A ≅ 𝟭 _ :=
+    Functor.isoWhiskerLeft q.inverse
+      (Functor.isoWhiskerRight ei q.functor ≪≫ Functor.leftUnitor q.functor) ≪≫
+        q.counitIso
+  let ed := Functor.mapDerivedCategoryNatIso ez ≪≫ Functor.mapDerivedCategoryIdIso _
+  let ec : sfIntrinsicCompactSupport (Compactification.ofIsProper e.left) A ≅
+      proEtaleConstantDerivedDirectImage e.left A :=
+    Functor.isoWhiskerRight ed _ ≪≫ Functor.leftUnitor _
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hc : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hc
+  have hu : IsUnit (l : D.k₀) := (CharP.isUnit_natCast_iff D.prime).2 (by
+    intro hdiv
+    exact _hl ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 hdiv).symm)
+  have hk : IsUnit (l : D.k) := by
+    simpa only [map_natCast] using hu.map (algebraMap D.k₀ D.k)
+  have hunit (T : Over (Spec (CommRingCat.of D.k))) (t : T.left) :
+      IsUnit (l : T.left.presheaf.stalk t) := by
+    have h := hk.map ((StructureSheaf.toStalk (CommRingCat.of D.k) (T.hom t)) ≫
+      T.hom.stalkMap t).hom
+    simpa only [map_natCast] using h
+  obtain ⟨adj⟩ :=
+    (finiteEtale_proEtale_exact_derived_adjunction l E n e.left
+      (hunit V) (hunit X)).2.2.2
+  exact ⟨⟨ec⟩, ⟨adj.ofNatIsoLeft ec.symm⟩⟩
 
 end AlgebraicGeometry.Scheme
