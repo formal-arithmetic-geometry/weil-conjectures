@@ -10,10 +10,17 @@ public import Sheaf.Paper.ProjectionCompactification
 public import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.Paper.ProjectionFormulaTotalization
 public import Sheaf.Paper.RingedProjectionRestriction
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
+import WeilConjectures.CategoryTheory.Monoidal.Dualizable
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-!
 # The compactified projection formula for locally perfect coefficients
@@ -89,6 +96,9 @@ Source: Stacks, Tag 03EL; definition 1264
 Proof: test on pure tensors after the canonical module unit. Naturality follows from
 naturality of that unit and bilinearity. Multiplication gives the unit comparison;
 the same pure-tensor equation forces it uniquely. -/
+-- STATEMENT-DISPUTED: Operation permits the empty-site functor into a one-object site.
+-- Pullback is zero and OrdinaryTensor holds vacuously, but its unit cannot be the
+-- nonzero target coefficient ring. A unit-preservation hypothesis is missing.
 theorem restrictionProjectionTensor_normalized :
     (∀ (M M' N N' : Mod R) (v : M ⟶ M') (z : N ⟶ N'),
       o.pullback.map (((tensor R).map v).app N ≫ ((tensor R).obj M').map z) ≫
@@ -106,6 +116,39 @@ theorem restrictionProjectionTensor_normalized :
           ((SheafOfModules.monoidalCategory S).rightUnitor (o.pullback.obj M)).hom =
         o.pullback.map (((SheafOfModules.monoidalCategory R).rightUnitor M).hom) := sorry
 
+private lemma isDualizable_finite_power
+    {A : Type*} [Category A] [Preadditive A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [HasFiniteBiproducts A]
+    (U : A) (hU : IsDualizable U) (n : ℕ) :
+    IsDualizable (∏ᶜ fun _ : Fin n ↦ U) := by
+  let : HasBinaryBiproducts A := HasBinaryBiproducts.of_hasBinaryProducts
+  induction n with
+  | zero =>
+    apply IsZero.isDualizable
+    rw [IsZero.iff_id_eq_zero]
+    apply Pi.hom_ext
+    intro i
+    exact Fin.elim0 i
+  | succ n hn =>
+    let V := ∏ᶜ fun _ : Fin n ↦ U
+    let e : U ⊞ V ≅ ∏ᶜ (fun _ : Fin (n + 1) ↦ U) :=
+      { hom := Pi.lift (Fin.cases biprod.fst (fun i ↦ biprod.snd ≫ Pi.π _ i))
+        inv := biprod.lift (Pi.π _ 0) (Pi.lift fun i : Fin n ↦ Pi.π _ i.succ)
+        hom_inv_id := by
+          apply biprod.hom_ext
+          · simp
+          · apply Pi.hom_ext
+            intro i
+            simp
+        inv_hom_id := by
+          apply Pi.hom_ext
+          intro i
+          refine Fin.cases ?_ (fun j ↦ ?_) i
+          · simp
+          · simp }
+    exact (hU.biprod hn).of_iso e
+
+
 /-- Bounded finite-free retracts give resolving coefficients on every localized site.
 Source: Stacks, Tags 06YS and 07A4; definition 1264
 (blueprint: lemma-weil-pbc-projection-formula-compactified).
@@ -115,7 +158,73 @@ these exact predicates without changing coefficient size. -/
 theorem restrictionStrictPerfect_flat (A : CochainComplex (Mod R) ℤ)
     (P : SheafOfModules.StrictPerfectCoefficientPackageOnSite _ A)
     (hb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (A.X n)) :
-    resolving R A := sorry
+    resolving R A := by
+  classical
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.tensorPreadditive R
+  let : HasFiniteBiproducts (Mod R) := HasFiniteBiproducts.of_hasFiniteProducts
+  have hflat (n : ℤ) : SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X n) := by
+    have hd : IsDualizable (A.X n) :=
+      IsDualizable.of_retract ⟨P.i n, P.p n, P.splitting n⟩
+        (isDualizable_finite_power _ isDualizable_unit (P.N n))
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R (A.X n)).symm hd.flat.2
+  obtain ⟨a, b, hab⟩ := hb
+  have : A.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff A b).2
+    (fun n hn ↦ hab n (Or.inr hn))
+  exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat A).1
+    (SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite R A b hflat),
+    hflat⟩
+
+private lemma resolving_resolution (A : CochainComplex (Mod R) ℤ) :
+    ∃ (P : CochainComplex (Mod R) ℤ) (_hp : resolving R P) (p : P ⟶ A),
+      QuasiIso p ∧ Epi p := by
+  obtain ⟨P, p, hk, hf, hq, he⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients A
+  let := SheafOfModules.monoidalCategory R
+  have hp : resolving R P := ⟨hk, fun n ↦ (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R (P.X n)).symm (hf n)⟩
+  exact ⟨P, hp, p, hq, HomologicalComplex.epi_of_epi_f p he⟩
+
+private lemma total_quasiIso_right (a : TensorModel R)
+    {P A B : CochainComplex (Mod R) ℤ} (p : P ⟶ A) (hq : QuasiIso p)
+    (hb : resolving R B) : QuasiIso ((total R).map (Prod.mkHom p (𝟙 B))) := by
+  let := SheafOfModules.monoidalCategory R
+  let := a.preadditive
+  have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic p).1 hq
+  have ht := hb.1 (CochainComplex.mappingCone p) hc
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
+  intro i
+  have hh : (total R).map (Prod.mkHom p (𝟙 B)) =
+      HomologicalComplex.mapBifunctorMap p (𝟙 B) (tensor R) (.up ℤ) := by
+    ext n : 1
+    apply HomologicalComplex₂.total.hom_ext (.up ℤ)
+    intro x y h
+    simp [total, HomologicalComplex.ι_mapBifunctorMap]
+  rw [hh]
+  exact (ht i).of_iso
+    (CochainComplex.mapBifunctorMappingCone₁Iso p B (tensor R))
+
+private lemma quasiIso_pullback_snd
+    {A : Type*} [Category A] [Abelian A]
+    {P Q M : CochainComplex A ℤ} (q : P ⟶ M) [Epi q] [QuasiIso q] (p : Q ⟶ M) :
+    QuasiIso (pullback.snd q p) := by
+  let S : ShortComplex (CochainComplex A ℤ) :=
+    ShortComplex.mk (kernel.ι q) q (kernel.condition q)
+  have hs : S.ShortExact := { exact := ShortComplex.exact_kernel q }
+  have hk : (kernel q).Acyclic := hs.acyclic_X₁ inferInstance
+  have ht := hs.pullback p
+  rw [quasiIso_iff]
+  intro n
+  rw [quasiIsoAt_iff_isIso_homologyMap]
+  have hz (i : ℤ) : IsZero ((kernel q).homology i) :=
+    (HomologicalComplex.exactAt_iff_isZero_homology _ i).1 (hk i)
+  have hm : Mono (HomologicalComplex.homologyMap (pullback.snd q p) n) :=
+    (ht.homology_exact₂ n).mono_g ((hz n).eq_of_src _ _)
+  have he : Epi (HomologicalComplex.homologyMap (pullback.snd q p) n) :=
+    (ht.homology_exact₃ n (n + 1) (by simp)).epi_f ((hz (n + 1)).eq_of_tgt _ _)
+  exact isIso_of_mono_of_epi _
 
 /-- Mixed representatives are uniquely fixed by their square at every flat resolution.
 Source: Stacks, Tag 07A4; definition 1264
@@ -131,7 +240,61 @@ theorem restrictionMixedTensor_existsUnique (a : TensorModel R)
       ∀ (P : CochainComplex (Mod R) ℤ) (hp : resolving R P) (p : P ⟶ A), QuasiIso p →
         a.functor.map (Prod.mkHom (DerivedCategory.Q.map p) (𝟙 _)) ≫ z.hom =
           a.representative.inv.app (⟨P, hp⟩, ⟨B, hb⟩) ≫
-            DerivedCategory.Q.map ((total R).map (Prod.mkHom p (𝟙 B))) := sorry
+            DerivedCategory.Q.map ((total R).map (Prod.mkHom p (𝟙 B))) := by
+  classical
+  let F := DerivedCategory.Q ⋙ (Functor.curry.obj a.functor).flip.obj (DerivedCategory.Q.obj B)
+  let G := (Functor.curry.obj (total R)).flip.obj B ⋙ DerivedCategory.Q
+  let rep (P : CochainComplex (Mod R) ℤ) (hp : resolving R P) :=
+    a.representative.symm.app (⟨P, hp⟩, ⟨B, hb⟩)
+  have nat {P P' : CochainComplex (Mod R) ℤ} (hp : resolving R P)
+      (hp' : resolving R P') (v : P ⟶ P') :
+      F.map v ≫ (rep P' hp').hom = (rep P hp).hom ≫ G.map v := by
+    simpa [F, G, rep] using a.representative.inv.naturality
+      (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hp⟩) (Y := ⟨P', hp'⟩) v)
+        (𝟙 (⟨B, hb⟩ : (resolving R).FullSubcategory)))
+  obtain ⟨P₀, hp₀, q, hq, he⟩ := resolving_resolution A
+  let := hq
+  let := he
+  have : IsIso (F.map q) := by
+    change IsIso ((a.functor.mapIso
+      (Iso.prod (asIso (DerivedCategory.Q.map q)) (Iso.refl _))).hom)
+    infer_instance
+  have : IsIso (G.map q) := by
+    have := total_quasiIso_right a q hq hb
+    change IsIso (DerivedCategory.Q.map ((total R).map (Prod.mkHom q (𝟙 B))))
+    infer_instance
+  let z : F.obj A ≅ G.obj A := (asIso (F.map q)).symm ≪≫ rep P₀ hp₀ ≪≫ asIso (G.map q)
+  have hz : F.map q ≫ z.hom = (rep P₀ hp₀).hom ≫ G.map q := by simp [z]
+  have hzall (P : CochainComplex (Mod R) ℤ) (hp : resolving R P)
+      (p : P ⟶ A) (hq' : QuasiIso p) :
+      F.map p ≫ z.hom = (rep P hp).hom ≫ G.map p := by
+    obtain ⟨T, ht, r, hr, _⟩ := resolving_resolution (pullback q p)
+    have hs := quasiIso_pullback_snd q p
+    let := hr
+    let := hs
+    let v : T ⟶ P := r ≫ pullback.snd q p
+    let w : T ⟶ P₀ := r ≫ pullback.fst q p
+    have hv : QuasiIso v := by dsimp [v]; infer_instance
+    have hcomm : w ≫ q = v ≫ p := by simp [w, v, Category.assoc, pullback.condition]
+    have : IsIso (F.map v) := by
+      change IsIso ((a.functor.mapIso
+        (Iso.prod (asIso (DerivedCategory.Q.map v)) (Iso.refl _))).hom)
+      infer_instance
+    apply (cancel_epi (F.map v)).1
+    calc
+      F.map v ≫ (F.map p ≫ z.hom) = F.map w ≫ (F.map q ≫ z.hom) := by
+        rw [← Category.assoc, ← Functor.map_comp, ← hcomm, Functor.map_comp, Category.assoc]
+      _ = F.map w ≫ ((rep P₀ hp₀).hom ≫ G.map q) := by rw [hz]
+      _ = (rep T ht).hom ≫ G.map (w ≫ q) := by
+        rw [← Category.assoc, nat ht hp₀ w, Category.assoc, ← Functor.map_comp]
+      _ = (rep T ht).hom ≫ G.map (v ≫ p) := by rw [hcomm]
+      _ = F.map v ≫ ((rep P hp).hom ≫ G.map p) := by
+        rw [Functor.map_comp, ← Category.assoc, ← nat ht hp v, Category.assoc]
+  refine ⟨z, hzall, ?_⟩
+  intro z' hz'
+  apply Iso.ext
+  apply (cancel_epi (F.map q)).1
+  exact (hz' P₀ hp₀ q hq).trans hz.symm
 
 /-- The unique mixed representative comparison, with no arbitrary isomorphism choice.
 Source: definition 1264 (blueprint: lemma-weil-pbc-projection-formula-compactified). -/
