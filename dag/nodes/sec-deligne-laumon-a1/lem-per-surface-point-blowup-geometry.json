@@ -23,9 +23,189 @@
   "def-weil-residue-field",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal I$ be the ideal sheaf of the reduced closed point $p$. The closed-immersion ideal-sheaf description makes it quasi-coherent. On an affine $\\operatorname{Spec}R$ containing $p$ it is the maximal ideal of $p$, and on an affine not containing $p$ it is the unit ideal. Each is finitely generated because $R$ is Noetherian; thus $\\mathcal I$ is of finite type. It is nonzero: at $p$, its stalk is the maximal ideal of the two-dimensional regular local ring, which cannot be zero (a field has dimension zero).",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-coherent",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Preparation for quadratic transformations; reduced-point ideal"
+   }
+  },
+  {
+   "text": "Apply the integral finite-type blowup theorem to $(X,\\mathcal I)$: $X\\prime$ is integral and $b$ is projective in the projective-bundle sense. Since $X$ has an ample invertible sheaf, the projective-bundle-to-H-projective theorem gives a closed immersion into a finite projective space over $X$, as required. The blowup properness theorem makes $b$ proper, hence of finite type by the definition of properness. Finite type over the Noetherian scheme $X$ makes $X\\prime$ Noetherian. On an excellent affine open $\\operatorname{Spec}R\\subseteq X$, choose finite generators of the centre ideal $I$. Each blowup chart has ring $R[I/a]$, generated over $R$ by the finitely many fractions $i/a$ from those generators. These rings, and their localizations, are excellent by finite-type stability of excellent rings. Hence $X\\prime$ is excellent.",
+   "uses": [
+    "lem-per-integral-blowup-projective-geometry",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "def-nagata-blowup-chart-ring",
+    "prop-nagata-affine-blowup-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND and 02NS; morphisms.tex Tag 087S; more-algebra.tex Tag 07QU"
+   }
+  },
+  {
+   "text": "Choose an ample invertible module $M$ on $X$. By step 2 (the integral finite-type blowup theorem) $b$ is projective in the projective-bundle sense. The theorem that a projective-bundle-projective morphism is quasi-projective therefore supplies an invertible $\\mathcal O_{X\\prime}$-module $N$ that is $b$-relatively ample: $b$ is quasi-compact and $N|_{b^{-1}(V)}$ is ample for every affine open $V\\subseteq X$. These are exactly the hypotheses of the relative-to-absolute twisting theorem for $f=b$, together with the ample module $M$ on $X$; it gives an integer $a\\geq0$ for which $N\\otimes b^*(M^{\\otimes a})$ is ample on $X\\prime$. This constructs the ample module needed for the next blowup; no ampleness of $b^*M$ alone is asserted.",
+   "uses": [
+    "lem-per-integral-blowup-projective-geometry",
+    "lem-per-projective-bundle-relative-ample",
+    "lem-per-relative-ample-absolute-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 07RL (lemma-projective-quasi-projective); Tag 0892(1) (lemma-pullback-ample-tensor-relatively-ample)"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{X,p}$, with maximal ideal $\\mathfrak m$ and residue field $k=\\kappa(p)$. Choose an affine neighbourhood $\\operatorname{Spec}R$ of $p$ corresponding to a maximal ideal $\\mathfrak n$, so $A=R_{\\mathfrak n}$. Localization is flat, and flat base change of blowups identifies $B=\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)$ with $X\\prime\\times_X\\operatorname{Spec}A$. This preserves the fibre over $p$, and every local ring at a point of that fibre: on an affine chart with ring $C$, the base change replaces $C$ by $(R\\setminus\\mathfrak n)^{-1}C$. A prime $\\mathfrak q$ over $\\mathfrak n$ avoids these denominators, so $((R\\setminus\\mathfrak n)^{-1}C)_{\\mathfrak q}=C_{\\mathfrak q}$. Thus it suffices to compute $B$ along its closed fibre.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-flat",
+    "thm-nagata-blowup-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 and 0AGQ: reduction to the local surface"
+   }
+  },
+  {
+   "text": "Since $A$ is regular local of dimension two, choose generators $x,y$ of $\\mathfrak m$. Both orders $(x,y)$ and $(y,x)$ are regular sequences. The blowup chart isomorphisms and the regular-sequence presentation give the covering charts $C_x=A[\\mathfrak m/x]=A[t]/(xt-y)$ and $C_y=A[\\mathfrak m/y]=A[u]/(yu-x)$. These charts cover because $x,y$ in degree one generate the Rees algebra. In the first chart $\\mathfrak m C_x=(x)$, and in the second $\\mathfrak m C_y=(y)$. Multiplication by the chart generator is injective: $C_x\\subseteq A_x$ and $x$ is a unit in $A_x$, and likewise for $y$. This proves the local nonzerodivisor assertion directly, without assuming regularity of the blowup.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-nagata-affine-blowup",
+    "def-nagata-affine-blowup-chart-map",
+    "prop-nagata-affine-blowup-chart",
+    "def-nagata-blowup-chart-ring",
+    "lem-trf-blowup-chart-regular-sequence-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ proof; more-algebra.tex Tag 0BIQ"
+   }
+  },
+  {
+   "text": "The closed fibre on these charts has coordinate rings $C_x/(x)=k[t]$ and $C_y/(y)=k[u]$. On their overlap $t=y/x$ is invertible and $u=x/y=t^{-1}$. The standard projective-space chart theorem identifies exactly this gluing with $\\mathbf P^1_k$, so $E\\cong\\mathbf P^1_k$ as schemes, not just as sets. The polynomial ring over a field is regular; hence all local rings of $E$, being the prime localizations on these two charts, are regular local. Thus $E$ is regular.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ proof, exceptional fibre computation"
+   }
+  },
+  {
+   "text": "Let $q$ lie on $E$. By the local-ring comparison above, $\\mathcal O_{X\\prime,q}$ is a prime localization of $C_x$ or $C_y$. It is Noetherian, since $X\\prime$ is Noetherian. The appropriate chart generator $g=x$ or $y$ belongs to its maximal ideal and is a nonzerodivisor, and the quotient by $g$ is $\\mathcal O_{E,q}$, regular local by the preceding step. Apply regularity lifting from a regular-sequence quotient with the sequence $(g)$. Away from $E$, the blowup-complement isomorphism identifies local rings with those of the regular scheme $X$. All local rings of $X\\prime$ are therefore regular local, so $X\\prime$ is regular.",
+   "uses": [
+    "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "thm-nagata-global-blowup-complement",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR proof; algebra.tex Tag 00NU"
+   }
+  },
+  {
+   "text": "For $q\\in E$, the dimension formula for a local quotient by one nonzerodivisor gives $\\dim\\mathcal O_{X\\prime,q}=1+\\dim\\mathcal O_{E,q}$. Since $E$ is covered by spectra of $k[t]$, whose Krull dimension is one, these local dimensions are at most two. At the point $t=0$ the localization $k[t]_{(t)}$ has dimension one: $(0)\\subsetneq(t)$ gives a chain of length one and the global dimension bounds it above. Thus one local ring of $X\\prime$ has dimension two. Off $E$ all local dimensions are at most $\\dim X=2$ by the complement isomorphism. Taking the supremum of all local-ring dimensions proves $\\dim X\\prime=2$.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-sf-noetherian-polynomial-dimension",
+    "def-pc-dimension",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR proof; algebra.tex Tag 00KW and the polynomial dimension formula"
+   }
+  },
+  {
+   "text": "Let $W\\subseteq X$ be closed and contain $p$, and put $U=X\\setminus\\{p\\}$. The strict transform is a closed subscheme of $W\\times_X X\\prime$ and agrees with that fibre product over $U$. The support of $W\\times_X X\\prime$ is $b^{-1}(|W|)$: locally, an ideal $J$ defining $W$ lies in the prime of a point upstairs exactly when its image lies in that prime, equivalently when the contracted prime lies in $V(J)$. Consequently $E=b^{-1}(p)$ lies in this support. Every point of the support outside $E$ is in the strict transform by the agreement over $U$, while the strict transform itself lies in the support of the fibre product. These two inclusions prove the asserted union, including when $W=p$ or $W=X$.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-strict-transform-restrict",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC proof, first sentence; support calculation"
+   }
+  },
+  {
+   "text": "For an integral closed subscheme $Y\\subseteq X$, apply the closed-ambient strict-transform theorem to its closed immersion and the blowup of $p$. It identifies the strict transform with $\\operatorname{Bl}_{p\\times_XY}(Y)$, with its morphism to $X\\prime$. This also covers $Y=p$: the pulled-back ideal is zero, its Rees algebra has only degree zero, and its Proj is empty, as is the strict transform of the subscheme contained in the centre. If $Y$ avoids $p$, the pulled-back ideal is the unit ideal and the blowup is $Y$.",
+   "uses": [
+    "lemma-nagata-strict-transform-ambient-closed",
+    "def-nagata-affine-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E(1); Tag 0BIC proof, description of strict transforms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-regular-scheme",
+  "lem-per-integral-blowup-projective-geometry",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "def-nagata-blowup-chart-ring",
+  "prop-nagata-affine-blowup-chart",
+  "lem-per-projective-bundle-relative-ample",
+  "lem-per-relative-ample-absolute-twist",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-flat",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-nagata-affine-blowup",
+  "def-nagata-affine-blowup-chart-map",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-exc-regular-local-lift-regular-sequence-quotient",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-sf-noetherian-polynomial-dimension",
+  "def-pc-dimension",
+  "def-nagata-strict-transform",
+  "lemma-nagata-strict-transform-restrict",
+  "def-weil-closed-immersion",
+  "lemma-nagata-strict-transform-ambient-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0AGQ and 0AGR, the two-chart calculation of the point blowup and regularity from its exceptional divisor; Tag 0BIC opening paragraph. Ampleness and projectivity use divisors.tex 02NS and morphisms.tex 087S, 0892."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +248,24 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{r : A} {n : ℕ} (hn : 0 < n) (hr : r ∈ 𝒜 n) :\\n  (fromOfGlobalSections 𝒜 f hf).resLE _ _ (fromOfGlobalSections_preimage_basicOpen _ _ _ hn hr).ge =\\n    toBasicOpenOfGlobalSections 𝒜 f rfl hn hr\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] : IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X.OpenCover\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toIsLocallyNoetherian : AlgebraicGeometry.IsLocallyNoetherian X]\\n  [toCompactSpace : CompactSpace ↥X], AlgebraicGeometry.IsNoetherian X\", \"doc\": \"A scheme $X$ is Noetherian if it is locally Noetherian (admits an open cover by Noetherian schemes) and its underlying topological space is compact (every open cover has a finite subcover).\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: Noetherian and Proj declarations do not state the point-blowup assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup at a closed point of a regular surface is regular with exceptional fibre the projective line and preserves an ample invertible sheaf",
+   "results": "8 hits; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, WeierstrassCurve.Projective.NonsingularLift, AlgebraicGeometry.Proj",
+   "date": "2026-10-19",
+   "verdict": "no match: smooth morphisms and Proj constructions do not assert regularity or the exceptional fibre of a point blowup"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|BlowUp|ReesAlgebra.*ample|ample.*ReesAlgebra",
+   "results": "0 hits; ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: no scheme blowup declaration in the searched Mathlib/AlgebraicGeometry tree"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-embedded-surface-curve-resolution",
@@ -97,5 +291,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-surface-point-blowup-geometry",
+  "worker": "stage1",
+  "summary": "Reused the earlier sandbox and search log. Proved the point-blowup geometry through regular-sequence affine charts, explicit exceptional-fibre gluing, lifting regularity and local dimension; reused the general integral/projective blowup, excellence and strict-transform nodes. Added only the general relative-to-absolute ampleness input (Tag 0892(1)), statement-only; the relatively ample module comes from the existing node lem-per-projective-bundle-relative-ample (Tag 07RL) (review FIX: the tautological-twist node was dropped). No statement change.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BIC (resolve-lemma-embedded-resolution), including the hypotheses and the blow-up induction; realizes preservation of the surface hypotheses and the total/strict-transform support assertions at each step of the embedded-resolution induction.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic Projective-bundle projectivity over an ample base implies H-projectivity used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic A regular system of parameters is a regular sequence used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   },
+   {
+    "node": "lem-trf-blowup-chart-regular-sequence-presentation",
+    "why": "Generic Affine blowup chart presentation for a regular sequence used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic Standard charts and coordinate sections of projective space over a scheme used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   },
+   {
+    "node": "lem-exc-regular-local-lift-regular-sequence-quotient",
+    "why": "Generic Regularity lifts from the quotient by a regular sequence used exactly through its statement in the Stacks point-blowup calculation; this unit has no corresponding general tool, and its curve/perverse route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-exc-regular-local-lift-regular-sequence-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-5f16caaf5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-5f16caaf5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and the Stacks sources: 02NS with its proof, 0892 with its full proof, 01VH and 07RL. Steps 1-10 are correct. Step 1: the ideal is finite type and nonzero. Step 2: 087S needs an ample sheaf on X, which is assumed; properness gives finite type and 01T6 gives Noetherian; excellence comes from 07QU on the charts R[I/a]. Step 4: flat base change to Spec A with explicit local-ring equality. Step 5: 0BIQ charts A[t]/(xt-y), and x is a nonzerodivisor because C_x is inside A_x. Step 6: the exceptional fibre is glued from k[t] and k[u] into P^1_k. Step 7: regularity lifts by 00NU. Step 8: dimension is 2 by 00KW. Steps 9-10: support and strict transform, with edge cases W=p, W=X, Y=p and Y disjoint from p. Batch-5 flags: lem-trf-projective-bundle-to-h-projective (087S) and lem-trf-blowup-chart-regular-sequence-presentation (0BIQ) are generic projective geometry and commutative algebra. Their own closures (179 and 18 nodes) reach no trace-formula proof step, no sec-poincare-duality node, no nt-assume leaf and no sk-thm-trace-transport, so both are accepted. New node lem-per-relative-ample-absolute-twist matches 0892(1) and is kept. New node lem-per-blowup-tautological-relative-ample (02NS(2)) is true but unneeded: step 3 only needs some b-relatively ample module, and the existing same-unit node lem-per-projective-bundle-relative-ample (07RL, landed by Q01) gives one, because step 2 already makes b projective in the projective-bundle sense. FIX: step 3 now cites lem-per-integral-blowup-projective-geometry, lem-per-projective-bundle-relative-ample and lem-per-relative-ample-absolute-twist; proof_deps and summary updated; the item was the only citer of the dropped node. The six tool_uses (087S, 07QU, 00NQ, 0BIQ, 01NG, 00NU) are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
