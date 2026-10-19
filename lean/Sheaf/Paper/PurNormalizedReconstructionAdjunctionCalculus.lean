@@ -112,6 +112,8 @@ def purRestrictedAdjunction :
     (purCompleteProperty l E W S Q).fullyFaithfulι
     (purNormalizedProperty l E W Q).fullyFaithfulι (Iso.refl _) (Iso.refl _)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The restricted unit and counit are exactly the ambient ones and are invertible.
 Source: the same proof paragraph
 (blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
@@ -126,7 +128,43 @@ theorem purRestrictedUnitCounit :
       S.adjunction.unit.app K.obj) ∧
     (∀ N, ((purRestrictedAdjunction l E W hl S Q).counit.app N).hom =
       S.adjunction.counit.app N.obj) := by
-  sorry
+  have hu (K : (purCompleteProperty l E W S Q).FullSubcategory) :
+      ((purRestrictedAdjunction l E W hl S Q).unit.app K).hom =
+        S.adjunction.unit.app K.obj := by
+    exact (S.adjunction.map_restrictFullyFaithful_unit_app
+      (purCompleteProperty l E W S Q).fullyFaithfulι
+      (purNormalizedProperty l E W Q).fullyFaithfulι (L := purRestrictedReduction l E W S Q)
+      (R := purRestrictedLimit l E W hl S Q) (Iso.refl _) (Iso.refl _) K).trans
+        (by
+          change S.adjunction.unit.app K.obj ≫
+            (coefficientSequenceLimit l E W).map (𝟙 _) ≫ 𝟙 _ = _
+          rw [CategoryTheory.Functor.map_id, CategoryTheory.Category.comp_id]
+          exact CategoryTheory.Category.comp_id _)
+  have hc (N : (purNormalizedProperty l E W Q).FullSubcategory) :
+      ((purRestrictedAdjunction l E W hl S Q).counit.app N).hom =
+        S.adjunction.counit.app N.obj := by
+    exact (S.adjunction.map_restrictFullyFaithful_counit_app
+      (purCompleteProperty l E W S Q).fullyFaithfulι
+      (purNormalizedProperty l E W Q).fullyFaithfulι (L := purRestrictedReduction l E W S Q)
+      (R := purRestrictedLimit l E W hl S Q) (Iso.refl _) (Iso.refl _) N).trans
+        (by
+          change 𝟙 _ ≫ S.reduction.map (𝟙 _) ≫ S.adjunction.counit.app N.obj = _
+          rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp])
+  refine ⟨?_, ?_, hu, hc⟩
+  · intro K
+    have : IsIso ((purCompleteProperty l E W S Q).ι.map
+        ((purRestrictedAdjunction l E W hl S Q).unit.app K)) := by
+      change IsIso (((purRestrictedAdjunction l E W hl S Q).unit.app K).hom)
+      rw [hu]
+      exact (purNormalizedReconstruction l E W hl S).2 K.obj K.property.1
+    exact isIso_of_reflects_iso _ (purCompleteProperty l E W S Q).ι
+  · intro N
+    have : IsIso ((purNormalizedProperty l E W Q).ι.map
+        ((purRestrictedAdjunction l E W hl S Q).counit.app N)) := by
+      change IsIso (((purRestrictedAdjunction l E W hl S Q).counit.app N).hom)
+      rw [hc]
+      exact ((purNormalizedReconstruction l E W hl S).1 N.obj N.property.1).2
+    exact isIso_of_reflects_iso _ (purNormalizedProperty l E W Q).ι
 
 /-- The restricted adjoint equivalence, retaining the actual unit and counit.
 Source: the same proof paragraph
@@ -209,6 +247,49 @@ structure Calculus (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃
       (compositionComparison eX eY eZ F H).hom ≫
         realizedTransformation eX eZ (Functor.whiskerRight α H ≫ Functor.whiskerLeft F' β)
 
+private theorem calculus (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃) :
+    Calculus eX eY eZ := by
+  constructor
+  · intro F G adj K
+    simp [realizedAdjunction, Adjunction.comp_counit_app,
+      CategoryTheory.Functor.map_comp, Category.assoc]
+  · intro F G adj P N a
+    rw [Adjunction.homEquiv_counit]
+    simp only [realized, CategoryTheory.Functor.comp_obj, realizationComparison,
+      Iso.trans_inv, isoWhiskerRight_inv, NatTrans.comp_app, CategoryTheory.Functor.id_obj,
+      leftUnitor_inv_app, whiskerRight_app, CategoryTheory.Functor.comp_map, Category.id_comp,
+      CategoryTheory.Functor.map_comp, Equivalence.fun_inv_map, Category.assoc,
+      Iso.inv_hom_id_app_assoc, realizedAdjunction, Adjunction.comp_counit_app,
+      Equivalence.toAdjunction_counit, Equivalence.symm_counit, cancelIso, Iso.trans_hom,
+      isoWhiskerRight_hom, leftUnitor_hom_app, Category.comp_id]
+    rw [eY.unitInv_app_inverse]
+    simp only [← eY.inverse.map_comp]
+    congr 1
+    have h := adj.counit.naturality_assoc (eY.counitIso.inv.app N) (eY.counit.app N)
+    change F.map (G.map (eY.counitIso.inv.app N)) ≫
+      adj.counit.app (eY.functor.obj (eY.inverse.obj N)) ≫ eY.counit.app N =
+        adj.counit.app N ≫ eY.counitIso.inv.app N ≫ eY.counit.app N at h
+    rw [h]
+    simp
+  · intro F H K
+    simp [compositionComparison]
+  · intro F F' H H' α β
+    ext K
+    simp only [realizedTransformation, realized, compositionComparison,
+      NatTrans.comp_app, whiskerRight_app, whiskerLeft_app, CategoryTheory.Functor.comp_obj,
+      CategoryTheory.Functor.comp_map, isoWhiskerLeft_hom, isoWhiskerRight_hom,
+      Iso.trans_hom, CategoryTheory.Functor.leftUnitor_hom_app]
+    dsimp only [CategoryTheory.Functor.comp_obj, CategoryTheory.Functor.id_obj,
+      CategoryTheory.Functor.comp_map, CategoryTheory.Functor.id_map]
+    simp only [Category.comp_id, ← CategoryTheory.Functor.map_comp]
+    apply congrArg eZ.inverse.map
+    rw [← β.naturality, ← Category.assoc, ← H.map_comp]
+    have h : eY.functor.map (eY.inverse.map (α.app (eX.functor.obj K))) ≫
+        eY.counitIso.hom.app (F'.obj (eX.functor.obj K)) =
+      eY.counitIso.hom.app (F.obj (eX.functor.obj K)) ≫ α.app (eX.functor.obj K) :=
+      eY.counit.naturality _
+    rw [h, H.map_comp, Category.assoc]
+
 end PurReconstruction
 
 /-- Reconstruction and adjunction calculus, including arbitrary replete restrictions.
@@ -241,6 +322,6 @@ theorem purNormalizedReconstructionAdjunctionCalculus
       (purReconstructionEquivalence l E X hX SX QX)
       (purReconstructionEquivalence l E Y hY SY QY)
       (purReconstructionEquivalence l E Z hZ SZ QZ) := by
-  sorry
+  exact PurReconstruction.calculus _ _ _
 
 end WeilConjectures
