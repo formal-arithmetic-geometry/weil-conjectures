@@ -7,8 +7,8 @@ module
 public import Sheaf.Paper.PurityAffineLineDatum
 public import Sheaf.AlgebraicGeometry.SupportLongExact
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyConventions
-public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
-public import Sheaf.CategoryTheory.Abelian.ExtRightDerivedCocycleComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedCocycleComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial

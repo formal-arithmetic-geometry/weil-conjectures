@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside

@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechAugmentationHomology
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechResolutionTransfer
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
+import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 
 /-! # Existence of normalized additive étale Čech edges
 Source: Stacks Project, Tags 03P2, 01EQ and 01FD. -/

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Over
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.AffineCoverModuleEmbedding
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!

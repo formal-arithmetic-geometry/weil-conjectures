@@ -5,7 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 /-!

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.HomComplexRestrictScheme
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 

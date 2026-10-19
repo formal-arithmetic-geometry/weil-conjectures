@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 import Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNatural
 import Sheaf.Algebra.Homology.StrictlyPerfectHomQuasiIso
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 

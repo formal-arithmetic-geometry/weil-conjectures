@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedExistence
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedScalar
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedInverseImage
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 
 /-! # Étale additive cohomology in ordinary Čech coordinates
 

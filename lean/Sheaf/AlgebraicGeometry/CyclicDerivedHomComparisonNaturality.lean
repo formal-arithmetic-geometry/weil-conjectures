@@ -5,9 +5,9 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonMap
+public import WeilConjectures.AlgebraicGeometry.CyclicDerivedHomComparisonMap
 import Sheaf.AlgebraicGeometry.AbelianRepresentableCohomologyMapNaturality
-import Sheaf.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility
+import WeilConjectures.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility
 
 /-! # Naturality of cyclic free-representable cohomology comparison
 Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf.

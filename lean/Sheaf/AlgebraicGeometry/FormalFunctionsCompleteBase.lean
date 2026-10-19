@@ -14,8 +14,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

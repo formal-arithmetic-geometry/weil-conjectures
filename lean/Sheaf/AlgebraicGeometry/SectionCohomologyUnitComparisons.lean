@@ -5,10 +5,10 @@ Authors: SHEAF group T2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.SectionCohomologyUntwistedComparisons
+import WeilConjectures.AlgebraicGeometry.SectionCohomologyUntwistedComparisons
 import Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus
 
 /-! # Tensor-unit comparisons for raw section cohomology

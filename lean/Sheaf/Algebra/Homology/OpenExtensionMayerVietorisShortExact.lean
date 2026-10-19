@@ -5,14 +5,13 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-! # Short exact Mayer--Vietoris sequence for extension by zero

@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE

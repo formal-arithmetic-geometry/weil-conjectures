@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OpenCohomologyFractionZeroComparison
-import Sheaf.AlgebraicGeometry.OpenCohomologyZeroRestriction
+import WeilConjectures.AlgebraicGeometry.OpenCohomologyZeroRestriction
 import Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization
 
 /-! # Localization of cohomology on an ambient affine open

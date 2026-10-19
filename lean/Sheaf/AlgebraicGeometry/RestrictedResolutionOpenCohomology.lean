@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyAugmentedLift
 
 /-! # Restriction on the homology of fixed-resolution section complexes

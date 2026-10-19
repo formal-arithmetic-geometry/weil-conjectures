@@ -5,13 +5,13 @@ Authors: SHEAF group B2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import Sheaf.AlgebraicGeometry.ResolutionOpenRestrictionCore
-import Sheaf.AlgebraicGeometry.ResolutionOpenScalarCore
-import Sheaf.AlgebraicGeometry.RestrictedResolutionSectionsExist
+import WeilConjectures.AlgebraicGeometry.ResolutionOpenScalarCore
+import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Untwisted comparison of resolution sections
 

@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyMayerVietoris

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting
-import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 

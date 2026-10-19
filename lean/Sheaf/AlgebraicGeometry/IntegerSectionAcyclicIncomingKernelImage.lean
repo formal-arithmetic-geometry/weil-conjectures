@@ -8,7 +8,7 @@ module
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Incoming kernel and image acyclicity for integer complexes

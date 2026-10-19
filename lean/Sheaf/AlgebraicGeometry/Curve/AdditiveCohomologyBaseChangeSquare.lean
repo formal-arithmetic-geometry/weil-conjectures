@@ -5,7 +5,7 @@ Authors: SHEAF group E2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyPullbackComparison

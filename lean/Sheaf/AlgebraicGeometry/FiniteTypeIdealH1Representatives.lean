@@ -9,10 +9,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
+import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.Compactification.FiniteTypeDirected
 import Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram
-import Sheaf.Topology.ModuleCohomologyTopComparison
+import WeilConjectures.Topology.ModuleCohomologyTopComparison
 import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Finite-type representatives for first cohomology of ideal sheaves

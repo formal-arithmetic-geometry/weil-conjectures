@@ -6,7 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsCore
-import Sheaf.AlgebraicGeometry.RestrictionResolutionLiftSections
+import WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections
 
 /-! # The section formula for the restricted lift
 

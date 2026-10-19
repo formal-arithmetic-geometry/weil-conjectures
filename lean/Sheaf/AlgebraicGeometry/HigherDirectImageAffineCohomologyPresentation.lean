@@ -6,11 +6,11 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.Paper.HigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientComparison
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageCoefficientComparison
 import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Affine-local presentation of ordinary higher direct images

@@ -5,8 +5,8 @@ Authors: SHEAF group C2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictionUnitNormalization
 
 /-! # Unit-compatible coefficient isomorphism on a fixed base-change chart

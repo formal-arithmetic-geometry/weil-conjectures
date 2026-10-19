@@ -5,7 +5,7 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

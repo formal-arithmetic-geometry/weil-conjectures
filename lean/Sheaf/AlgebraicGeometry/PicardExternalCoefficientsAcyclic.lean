@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsDirectImages
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
+import WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Category.Grp.Zero

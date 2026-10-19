@@ -6,10 +6,11 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.LeraySectionsResolutionComparison
 import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import Sheaf.Paper.PQFCohomology
 
 /-! # Natural additive comparison for acyclic module direct image
 

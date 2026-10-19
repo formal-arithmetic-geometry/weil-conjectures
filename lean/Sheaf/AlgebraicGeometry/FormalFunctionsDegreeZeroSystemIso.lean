@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 /-! # Degree-zero comparison of the formal fibre systems
 

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionTransfer
-import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import Mathlib.Algebra.Category.Grp.Ulift
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap

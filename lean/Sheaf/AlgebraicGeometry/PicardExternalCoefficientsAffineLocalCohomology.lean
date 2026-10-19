@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
-public import Sheaf.Topology.OpenModuleCohomology
+public import WeilConjectures.Topology.OpenModuleCohomology
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison
 import Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
