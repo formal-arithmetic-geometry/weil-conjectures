@@ -10,12 +10,8 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.EssentialImage
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 
 /-!
 # Restriction of the étale-origin coefficient class
@@ -124,6 +120,18 @@ lemma etaleOrigin_restriction_to_proetale_base_change
             (pullback f V.hom)).map
             ((Etale.upperStar (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))
               (pullback.fst f V.hom)).map a)) := by
-  sorry
+  refine ⟨IsPullback.of_hasPullback f V.hom, inferInstance, ?_, ?_, ?_⟩
+  · obtain ⟨G, ⟨α⟩⟩ := _hF
+    exact ⟨(Etale.upperStar _ (pullback.fst f V.hom)).obj G,
+      ⟨(etaleOriginRestrictionWitnessIso (pullback.fst f V.hom) G α).symm⟩⟩
+  · intro G α
+    exact ⟨etaleOriginRestrictionWitnessIso (pullback.fst f V.hom) G α⟩
+  · intro G G' a
+    simpa [etaleOriginRestrictionWitnessIso, Functor.comp_map,
+      etaleComparisonPullback, comparisonCoefficientPullback, proEtaleComparisonPullback,
+      Etale.upperStar, ProEtale.upperStar, comparisonUpperStar, Scheme.smallEtaleTopology] using
+      (comparisonCoefficientPullbackIso
+        (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))
+        (pullback.fst f V.hom)).inv.naturality a
 
 end AlgebraicGeometry.ProEtale
