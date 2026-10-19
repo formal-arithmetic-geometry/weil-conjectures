@@ -25,92 +25,53 @@
  ],
  "proof": [
   {
-   "text": "By [sk-def-sfb-module-objects] and the sheafified objectwise tensor of [sk-def-sfb-sheaf-tensor], a module object over $\\Lambda_X$ is equivalently a sheaf with sectionwise $\\Lambda_X$-linear action: the action $\\Lambda_X\\otimes M\\to M$ corresponds to the compatible bilinear actions on sections by the defining universal property of the sheaf tensor product. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the small pro-étale site and its sheaf of rings $\\Lambda_X$. The category $\\mathcal A$ has exact small filtered colimits. For a small family $(M_s)$, its direct sum is the filtered colimit over finite subsets $T$ of $\\bigoplus_{s\\in T}M_s$: compatible maps from these finite sums are exactly families of maps from the $M_s$. Finite sums preserve short exact sequences in an abelian category; taking this filtered colimit proves that arbitrary small sums in $\\mathcal A$ are exact.",
+   "text": "The internal module category is Grothendieck abelian by the existing module-object Grothendieck instance (lem-sfb-modobj-grothendieck). Its small colimits exist, AB4 makes coproducts exact, and Grothendieck K-injective resolutions exist. Apply the proved source-library instance DerivedCategory.preservesColimitsOfShape_homologyFunctor. Given the arbitrary coproduct cocone c and cohomology cocone d of the statement, isColimitOfPreserves makes H^n(c) colimiting. IsColimit.nonempty_isColimit_iff_isIso_desc proves invertibility of exactly the specified canonical desc map. No boundedness or nonempty-index assumption is used.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-weil-pbc-ring-sheaves-grothendieck"
+    "lem-sfb-modobj-grothendieck"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB, lemma-limits-colimits; proof of (1) in the blueprint"
-   }
+   "elementary": false
   },
   {
-   "text": "Represent $K_s$ by cochain complexes $C_s$. Part (1) of [det-def-localizing-closure-existence] identifies their derived coproduct with the termwise coproduct $C=\\bigoplus_s C_s$, with differential $\\bigoplus_s d_s$. Put $Z_s^n=\\ker d_s^n$ and $B_s^n=\\operatorname{im}d_s^{n-1}$. Applying the exact sum functor of step 1 to $0\\to Z_s^n\\to C_s^n\\to B_s^{n+1}\\to0$ and $0\\to B_s^n\\to Z_s^n\\to H^n(C_s)\\to0$ shows that $Z^n(C)=\\bigoplus_sZ_s^n$, $B^n(C)=\\bigoplus_s B_s^n$, and $H^n(C)=\\bigoplus_sH^n(C_s)$. These identifications use the coprojections themselves, so the displayed canonical comparison map is the resulting isomorphism. No common cohomological bound on the family is required.",
-   "uses": [
-    "det-def-localizing-closure-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, lemma-derived-products (1)-(2), together with blueprint proof (1)"
-   }
-  },
-  {
-   "text": "If every $K_s$ belongs to $\\Dic$, then every $H^n(K_s)$ belongs to $\\IndCons$. The arbitrary-direct-sum clause of [det-ind-heart-filtered-colimits] puts $\\bigoplus_sH^n(K_s)$ in $\\IndCons$. Step 2 therefore puts all cohomology sheaves of $\\bigoplus_sK_s$ in $\\IndCons$, which is precisely membership in $\\Dic$.",
+   "text": "Apply the sum clause of det-ind-heart-filtered-colimits to the cofan whose vertex is H^n(c.pt) and whose legs are H^n(c.inj i). Preservation from step 1 gives its colimit property. The assumed cohomology condition on each summand supplies every premise, proving sum closure of Dic. The empty family and the zero vertex give ContainsZero for the IndCons predicate; colimit universality follows from the unique maps out of zero.",
    "uses": [
     "det-ind-heart-filtered-colimits"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-sums.proof.md",
-    "place": "proof (1), final sentence"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $C$ represent $K$ and fix $n$. By [lem-weil-pbc-truncation-cohomology], $H^m(\\tau_{\\le n}C)\\cong H^m(C)$ for $m\\le n$, and it is zero for $m>n$. For the lower truncation, its terms vanish below $n$, so its cohomology does also. In degree $n$ its cycles are $\\ker(C^n/\\operatorname{im}d^{n-1}\\to C^{n+1})=\\ker d^n/\\operatorname{im}d^{n-1}=H^n(C)$, and there are no boundaries from degree $n-1$. In degree $n+1$ the image of $C^n/\\operatorname{im}d^{n-1}\\to C^{n+1}$ equals the image of $d^n$, and all higher terms and differentials are unchanged; hence $H^m(\\tau_{\\ge n}C)=H^m(C)$ for every $m\\ge n$. These computations also show that truncation preserves quasi-isomorphisms and hence give the formulas in the derived category. On each affine open of $X$, take its one-stratum stratification and the finite constant local model with scalar module $P=0$ in [sk-def-sfb-constructible]. This proves that the zero sheaf is constructible, also for arbitrary $X$ by the affine-local clause of that definition. Its one-object filtered diagram has colimit zero, so zero is ind-constructible. Both truncations thus have ind-constructible cohomology in every degree, proving (2).",
+   "text": "ObjectProperty.ind is closed under isomorphisms. Apply the proved source-library lemmas DerivedCategory.homologyProperty_truncLE and DerivedCategory.homologyProperty_truncGE to the IndCons predicate, with ContainsZero from step 2. These lemmas compute surviving cohomology by the canonical truncation maps and use vanishing in the other degrees. This proves both truncation clauses for every integer cutoff.",
    "uses": [
-    "lem-weil-pbc-truncation-cohomology",
     "sk-def-sfb-constructible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, canonical truncations (cochain complexes); blueprint proof (2)"
-   }
+   "elementary": true
   },
   {
-   "text": "For $K\\in\\Dbc$, each $H^n(K)$ is constructible by [sk-def-sfb-bounded-constructible]. A constructible sheaf is its own colimit over the one-object filtered category, so is ind-constructible by the inline definition. The zero $\\Lambda_X$-module is constructible by the zero local model in [sk-def-sfb-constructible], so the zero cohomology sheaves outside the finite interval are ind-constructible as well. Thus every $H^n(K)$ is ind-constructible and $K\\in\\Dic$. This proves the first inclusion in (3).",
+   "text": "Unfold constantModelBoundedConstructible only to obtain constructibility of every cohomology object. ObjectProperty.le_ind views each constructible object as its own filtered colimit over the one-object category, giving Dbc contained in Dic.",
    "uses": [
-    "sk-def-sfb-bounded-constructible",
     "sk-def-sfb-constructible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-sums.proof.md",
-    "place": "proof (3), first sentence"
-   }
+   "elementary": true
   },
   {
-   "text": "The statement [det-ambient-ind-derived-triangulated] makes $\\Dic$ a full triangulated subcategory closed under isomorphisms. Step 3 makes it closed under arbitrary small sums, and step 5 makes it contain $\\Dbc$. Apply part (2) of [det-def-localizing-closure-existence] with $\\mathcal S=\\Dbc$: the intersection defining $\\Loc(\\Dbc)$ is contained in each full triangulated subcategory with these closure properties, in particular in $\\Dic$. This proves the second inclusion in (3).",
+   "text": "Use the triangulated clause of det-ambient-ind-derived-triangulated for Dic. Repleteness is inherited from ObjectProperty.ind under all homology functors. To meet the larger-index convention in sk-def-localizing-closure, inject the nonzero summands of any existing coproduct into its endomorphisms by their coordinate idempotents. For distinct indices these idempotents differ: composing with the first injection and its retraction gives an identity on one side and zero on the other. Thus locally small Homs make the nonzero support small in the coefficient universe. Remove zero summands using their unique maps, then shrink that support by equivShrink. The original coproduct remains the colimit of this small cofan. Apply step 2 to prove closure under every existing coproduct. Dic is therefore an IsLocalizingSubcategory. Evaluate the defining intersection localizingClosure at Dic and use step 4 to obtain Loc(Dbc) contained in Dic. Run these steps separately for the two coefficient rings, using the bottom finite subextension only to instantiate the unused finite-coefficient binder of the algebraic-closure triangulated clause.",
    "uses": [
     "det-ambient-ind-derived-triangulated",
-    "det-def-localizing-closure-existence"
+    "sk-def-localizing-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-sums.proof.md",
-    "place": "proof (3), localizing-subcategory and minimality sentences"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "det-ambient-ind-derived-triangulated",
-  "det-def-localizing-closure-existence",
   "det-ind-heart-filtered-colimits",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-truncation-cohomology",
-  "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-constructible",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor"
+  "lem-sfb-modobj-grothendieck",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ambient-ind-derived/sk-cor-ambient-ind-derived-sums.proof.md",
-  "place": "Proof (1)-(3), expanded using Stacks Tags 03DB, 07D9, 0118"
+  "place": "Proof (1)-(3), realized using the proved HomologyCoproducts and HomologyProperty APIs; the nonzero-support universe argument is the existing LocalizingClosureExistence proof-plan step 4."
  },
  "mathlib_searches": [
   {
@@ -214,10 +175,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "det-def-localizing-closure-existence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -338,5 +296,15 @@
   "result": "pass",
   "note": "Read the node, all 9 statement dependencies, the source (sk-cor-ambient-ind-derived-sums.md, sk-def-sfb-dc-setting, sk-lem-coefficient-heart 'standing scheme'), the module and the sibling Lean (AmbientIndDerivedTriangulated, IndConstructibleFilteredColimits, CondensedConstantConstructibility, LocalizingClosure). The source-based §1(C) correction restores the dc-setting hypotheses (field k of char p>0, p≠ℓ; X separated of finite type) with conclusions unchanged; the 11 citers are complete, and the holds verdicts were spot-checked on det-finite-window-bounded (false) and det-constructible-compactness-bounded (true). The Lean matches clause by clause: the canonical comparison as IsColimit.desc, Dic sum closure, t.truncLE/truncGE, Dbc⊆Dic and localizingClosure(Dbc)⊆Dic, for both Λ=E and Λ=Q̄ℓ; IndCons as ObjectProperty.ind.{u+1} of IsConstantModelConstructible, identical to the siblings. Observations: Dbc is the constant-model Dbc of sk-def-sfb-constructible, which is consistent with Cons and needed by proof step 5; the large-index localizing interface is inherited and equivalent since Homs are essentially small. Edge cases checked: empty family, zero object, all n, empty scheme, universes. Gates: only two theorems proved by sorry, docstrings carry the source and all six proof steps, proof-dependency imports present, no extra assumptions, side pro-étale framework used. lean.statement is verbatim in the file. nt_compile --json: 42.1 s, exit 0, no errors or warnings.",
   "statement_corrected": true
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261019T002545-L-2152705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
