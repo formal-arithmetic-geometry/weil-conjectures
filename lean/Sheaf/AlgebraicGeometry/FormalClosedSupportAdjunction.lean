@@ -43,7 +43,7 @@ no commutativity, constructibility or boundedness hypothesis is imposed.
 
 set_option autoImplicit false
 
-universe u
+universe u w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open scoped CategoryTheory.Obj
@@ -203,9 +203,9 @@ theorem formal_closed_support_adjunction
     {X Z V : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ)
-    [HasDerivedCategory.{u + 2} (FormalSupportModules Λ X)]
-    [HasDerivedCategory.{u + 2} (FormalSupportModules Λ Z)]
-    [HasDerivedCategory.{u + 2} (FormalSupportModules Λ V)] :
+    [HasDerivedCategory.{w} (FormalSupportModules Λ X)]
+    [HasDerivedCategory.{w} (FormalSupportModules Λ Z)]
+    [HasDerivedCategory.{w} (FormalSupportModules Λ V)] :
     IsIso (formalSupportKernelComparison Λ i j) ∧
     PreservesFiniteLimits (formalClosedSupport Λ i j) ∧
     ∃ a : lowerStar Λ i ⊣ formalClosedSupport Λ i j,

@@ -27,106 +27,65 @@
  ],
  "proof": [
   {
-   "text": "The standing setting makes $X$ and $Z$ finite type over the field $k$. Every ideal in a field is either zero or the whole field, hence finitely generated. The one affine chart of $\\operatorname{Spec}k$ is therefore Noetherian and its underlying singleton space is quasi-compact; thus $\\operatorname{Spec}k$ is a Noetherian scheme. Consequently [lem-weil-pbc-finite-type-over-noetherian] makes both $X$ and $Z$ Noetherian. In particular $X$ is quasi-separated, since a locally Noetherian scheme is [lem-weil-pbc-locally-noetherian-quasi-separated]. Let $j:U\\hookrightarrow X$ be the open immersion of the complement $U=X\\setminus Z$. Then $U$ is Noetherian and therefore quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Applying [lem-weil-pbc-qcqs-morphism-permanence] to $U\\to X$ shows that $j$ is quasi-compact. Thus the hypotheses of the open direct-image and closed-support inputs apply.",
+   "text": "Finite type over Spec k gives locally Noetherian X and Z; quasi-compact structure maps give compact X and Z. The open immersion j is quasi-compact over locally Noetherian X. Its source U is locally Noetherian and compact. All three schemes are therefore quasi-separated. Give U the composite structure map j followed by the structure map of X; finite type and separatedness follow by composition.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "pqf-def-locnoeth",
-    "def-pc-scheme"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "first paragraph: Noetherian standing-scheme case and quasi-compact complement"
-   }
+   "elementary": false
   },
   {
-   "text": "For $f=j$ or $f=i$, the coefficient identification and exact module inverse image are given by [sk-prop-sfb-cartesian-coefficients]. Pull a finite stratification back along $f$ using [lemma-constructible-pullback-stratification]. Pull back its pro-étale local covers as well. On each such cover, [det-def-sfb-constructible-local-model] writes the module as the cokernel of a finite scalar matrix $A$. The exact inverse image preserves that cokernel and the finite free source and target; the coefficient identification carries $A$ to the same scalar matrix, giving the required finite constant local model on the inverse-image stratum. Exactness preserves kernels and cokernels [lem-weil-pbc-site-pullback-abelian-exact], hence also $H^q=\\ker d^q/\\operatorname{im}d^{q-1}$. The exact derived inverse image is computed termwise by [sk-def-sfb-derived-categories], so its cohomology is $f^*H^q$ and remains zero outside the original finite interval. This proves that $j^*$ and $i^*$ preserve the finite-constant-model bounded constructible category.",
+   "text": "For each of the two coefficient choices use [lem-sfb-pullback-constant-model-constructible] to preserve constructible cohomology under i and j. Compare the ordinary upperStar, which uses extension of scalars, with formalSupportPullback, which restricts along the inverse coefficient isomorphism, using Mod.extendScalarsIsoComapInv. Transport the finite-cover witnesses along this isomorphism. The exact-functor boundedness and homology comparison show that the formal derived pullbacks preserve bounded constant-model constructibility.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lemma-constructible-pullback-stratification",
-    "det-def-sfb-constructible-local-model",
+    "lem-sfb-pullback-constant-model-constructible",
     "sk-def-sfb-derived-categories"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "second paragraph: restriction and pullback preserve constructibility"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply clause (3) of [det-lem-formal-closed-support-derived] to $i$ and its open complement $j$. It gives, without any constructibility assumption, the distinguished triangle\n$$i_*R\\underline\\Gamma_ZK\\longrightarrow K\\longrightarrow Rj_*j^*K\\longrightarrow(i_*R\\underline\\Gamma_ZK)[1]$$\nin the ambient derived category, with second arrow the unit of $j^*\\dashv Rj_*$. In particular $F:=i_*R\\underline\\Gamma_ZK$ is the fiber of that unit map. Only this formal triangle is used here; its statement imposes no choice between the two constructibility conventions.",
+   "text": "Use the existing formal_closed_support_adjunction realization of [det-lem-formal-closed-support-adjunction], at the actual derived-category Hom universe, to obtain its distinguished localization triangle and fiber isomorphism for F=i_*RGamma_Z K. No coefficient or constructibility assumptions enter this formal input.",
    "uses": [
-    "det-lem-formal-closed-support-derived"
+    "det-lem-formal-closed-support-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "first paragraph: the derived closed-support localization triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "By step 2, $j^*K\\in\\Dbc(U,\\Lambda)$. Apply [lem-sfb-rational-open-direct-image-constructible] to the quasi-compact open immersion $j$ of step 1. Its conclusion gives $Rj_*j^*K\\in\\Dbc(X,\\Lambda)$ in the finite-constant-local-model convention, for both $E$ and $\\overline{\\mathbf Q}_\\ell$.",
+   "text": "Apply [lem-sfb-rational-open-direct-image-constructible] to j and the constructible formal derived pullback j^*K from step 2. The source of that declaration is ordinary upperStar, but its direct-image functor is exactly lowerStar used by the formal triangle. Rewrite ringChar k=p to satisfy its standing characteristic hypotheses.",
    "uses": [
     "lem-sfb-rational-open-direct-image-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "second paragraph: restriction and open direct-image finiteness"
-   }
+   "elementary": false
   },
   {
-   "text": "The middle term $K$ is in $\\Dbc(X,\\Lambda)$ by hypothesis, and the third term is in that category by step 4. The finite-constant-model bounded constructible category is triangulated and closed under isomorphisms by [det-cor-coefficient-heart-ii-triangulated]. Applying its two-out-of-three property to the triangle in step 3 yields $F:=i_*R\\underline\\Gamma_ZK\\in\\Dbc(X,\\Lambda)$; its shift $F[1]$ is also in $\\Dbc(X,\\Lambda)$.",
+   "text": "Install the isomorphism and triangulated-closure instances on X and isomorphism closure on Z from [det-cor-coefficient-heart-ii-triangulated]. Apply ext_of_isTriangulatedClosed₁ to the distinguished triangle and its constructible second and third vertices. This proves that F is bounded constant-model constructible.",
    "uses": [
     "det-cor-coefficient-heart-ii-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "second paragraph: triangulated closure of the localization triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "The fiber formula in [det-lem-formal-closed-support-derived] identifies $R\\underline\\Gamma_ZK$ with $i^*F$, because $F$ is the fiber of the unit map $K\\to Rj_*j^*K$ in the triangle of step 3. The scheme $Z$ is Noetherian by step 1. Applying the exact pullback preservation argument of step 2 to $i$ gives $i^*F\\in\\Dbc(Z,\\Lambda)$, and closure under isomorphisms in [det-cor-coefficient-heart-ii-triangulated] transfers this membership across the fiber-formula isomorphism. Therefore $R\\underline\\Gamma_ZK\\in\\Dbc(Z,\\Lambda)$, while step 5 already gives all three displayed terms and the shift in $\\Dbc(X,\\Lambda)$.",
-   "uses": [
-    "det-lem-formal-closed-support-derived",
-    "det-cor-coefficient-heart-ii-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-    "place": "second paragraph, last sentence: recover supported complex by closed pullback and fiber formula"
-   }
+   "text": "Apply derived formal pullback along i to F, using step 2. Transport the resulting membership along the inverse of the formal fiber isomorphism RGamma_Z K ≅ i^*F. Carry out the argument once for each finite intermediate field E and once for the algebraic-closure coefficient. For the latter, choose the bottom finite intermediate field only as the unused E argument of the already stated two-clause open-image theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-noetherian-ring",
   "det-cor-coefficient-heart-ii-triangulated",
-  "det-def-sfb-constructible-local-model",
-  "det-lem-formal-closed-support-derived",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-pullback-constant-model-constructible",
   "lem-sfb-rational-open-direct-image-constructible",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lemma-constructible-pullback-stratification",
-  "pqf-def-locnoeth",
-  "sk-def-sfb-dc-setting",
-  "sk-def-sfb-derived-categories",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-def-sfb-derived-categories"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-  "place": "Both paragraphs: localization triangle, open direct-image finiteness, triangulated closure, and closed inverse image; expanded for the finite constant local model convention"
+  "place": "Both paragraphs; C1 formalizes the localization triangle, pullback, open-image and two-out-of-three proof using existing declarations."
  },
  "mathlib_searches": [
   {
@@ -528,5 +487,15 @@
   "by": "Q47",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261019T005259-L-2747459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
