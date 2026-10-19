@@ -19,6 +19,31 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.OrdinaryDerivedOpenClosedAdjunctions
+import Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedCoefficientPushforwardComparison
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.PbcRoosTriangle
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfIntegralConstructibleLinear
+import Sheaf.Paper.SfIntegralDirectImageConstructible
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-!
 # Closed direct image is fully faithful at every coefficient stage

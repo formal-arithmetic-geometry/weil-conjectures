@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.TameLogQuotientModification
 import Sheaf.AlgebraicGeometry.NoetherianLogPairStrictResolution
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
+import Sheaf.AlgebraicGeometry.UniformizationNodalQuotientReduction
 
 /-!
 # Gabber's prime-to-ell covering by regular pairs

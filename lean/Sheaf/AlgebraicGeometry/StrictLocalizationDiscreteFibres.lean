@@ -20,6 +20,7 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Discrete fibres of strict localization

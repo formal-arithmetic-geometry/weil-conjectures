@@ -46,6 +46,7 @@ import Sheaf.Paper.PbcScalarExtension
 import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
 import Sheaf.Paper.CanonicalOriginCompactSupportComposition
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.Paper.FiniteExceptionalSystemAdjunction
 
 /-! # Arbitrary-field adic exceptional projection and coefficient coherence
 Source: Bhatt--Scholze Section 6.7 and Remark 6.8.15

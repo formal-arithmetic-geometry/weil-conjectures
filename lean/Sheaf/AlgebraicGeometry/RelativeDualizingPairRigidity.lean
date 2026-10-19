@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.AffineRelativeDualizingComparison
 import Sheaf.RingTheory.AlgebraicRelativeDualizingIsomorphism
 import Sheaf.TraceFormula.AlgebraicShriekCalculus
 import Sheaf.TraceFormula.AlgebraicShriekRelativePerfect
+import Sheaf.AlgebraicGeometry.DerivedBasisBbdDescent
 
 /-! # Rigidity of supplied coherent relative dualizing pairs
 

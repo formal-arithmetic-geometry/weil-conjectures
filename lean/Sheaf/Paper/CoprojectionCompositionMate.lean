@@ -33,6 +33,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Paper.CanonicalOriginCompactSupportComposition
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import WeilConjectures.Compactification.NagataCompactification
+import Sheaf.SixFunctors.CompositionProjectionMate
 
 /-!
 # Composition of co-projection mates

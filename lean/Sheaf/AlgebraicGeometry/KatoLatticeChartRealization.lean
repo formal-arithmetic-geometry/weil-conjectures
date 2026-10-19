@@ -14,6 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.TraceFormula.FgCommutativeMonoidFinitePresentation
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.LfpUniqueInfinitesimalLiftsEtale
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Kato's prescribed lattice chart

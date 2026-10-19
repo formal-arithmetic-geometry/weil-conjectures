@@ -16,6 +16,11 @@ public import Mathlib.LinearAlgebra.Matrix.Defs
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Finite coefficient descent on quasi-compact pro-étale objects

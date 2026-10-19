@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import Sheaf.AlgebraicGeometry.AffineOpenStrictLocalConstructibleCohomology
 
 /-!
 # Cohomology of affine opens of an excellent strictly local scheme

@@ -19,6 +19,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.PrimeFieldPunctualPurity
+import Sheaf.AlgebraicGeometry.PunctualPurityTwoOfThree
 
 /-!
 # Coordinate-divisor criterion for monomial punctual purity

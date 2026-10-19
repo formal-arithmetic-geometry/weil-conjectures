@@ -24,6 +24,7 @@ import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.TraceFormula.MultipointedCurve
+import Sheaf.TraceFormula.ContractedComponentNoExtraGeneric
 
 /-! # Generic constancy of contracted-component numerical data
 

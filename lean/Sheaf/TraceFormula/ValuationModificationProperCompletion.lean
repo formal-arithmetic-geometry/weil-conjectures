@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.AlgebraicGeometry.SepClosedValuationGeometricComponents
 
 /-! # Proper completion of a valuation-curve modification near a smooth centre
 

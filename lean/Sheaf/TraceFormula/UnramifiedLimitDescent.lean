@@ -10,6 +10,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import Sheaf.RingTheory.ColimitUnramifiedAlgebra
 
 /-! # Descent of unramified morphisms along affine-transition limits
 

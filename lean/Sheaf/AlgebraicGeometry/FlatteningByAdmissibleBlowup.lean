@@ -22,6 +22,11 @@ import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Compactification.StrictTransformBlowup
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.FlatteningModuleByAdmissibleBlowup
+import Sheaf.AlgebraicGeometry.ModuleStrictTransform
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
+import Sheaf.AlgebraicGeometry.StrictTransformComposition
 
 /-!
 # Flattening by an admissible blowup

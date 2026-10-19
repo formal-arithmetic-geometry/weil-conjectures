@@ -40,6 +40,7 @@ import Sheaf.RingTheory.FiniteMapColimitDescent
 import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.RingTheory.TraceOneInvariantFiniteness
 
 /-!
 # Marked invariant algebras descend to a polynomial cylinder

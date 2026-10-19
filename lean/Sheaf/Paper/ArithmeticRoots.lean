@@ -19,6 +19,8 @@ import Sheaf.Paper.EmbeddingExtension
 import WeilConjectures.ZetaFunction.Weights
 import Mathlib.Algebra.Polynomial.Eval.Coeff
 import Sheaf.ZetaWeil.WeightPurityRoots
+import Sheaf.Paper.SmoothProperPurityHypotheses
+import Sheaf.Paper.WeilCohomologyScalarExtensionQlbar
 
 /-!
 # Arithmetic roots of the integral Frobenius factors

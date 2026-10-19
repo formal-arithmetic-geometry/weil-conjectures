@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.Topology.NoetherianSpace
+import Sheaf.RingTheory.PuncturedLocalClosedPoints
 
 /-!
 # Cutting a closed subset while meeting locally closed pieces

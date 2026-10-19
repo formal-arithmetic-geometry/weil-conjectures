@@ -48,6 +48,8 @@ import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.CurveSectionDegreePositivity
 import Sheaf.RingTheory.HenselianSmoothAlgebraLifting
+import Sheaf.TraceFormula.PointedGenusZeroProjectiveLine
+import Sheaf.TraceFormula.SmoothCurveSectionCartier
 
 /-! # Polar sections on a proper valuation curve
 

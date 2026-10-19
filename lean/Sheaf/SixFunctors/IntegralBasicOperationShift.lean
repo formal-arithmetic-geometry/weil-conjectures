@@ -20,6 +20,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 import Mathlib.CategoryTheory.Shift.CommShift
+import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 
 /-!
 # Shift squares for the specified single-operation integral comparisons

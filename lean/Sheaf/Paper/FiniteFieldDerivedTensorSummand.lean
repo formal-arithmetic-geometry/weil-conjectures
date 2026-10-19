@@ -22,6 +22,7 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # The diagonal summand for finite-field derived tensor

@@ -25,6 +25,9 @@ import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.AlgebraicGeometry.ModuleLocalConstancyOfFiniteUnderlying
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constant direct image across a strict normal crossings boundary

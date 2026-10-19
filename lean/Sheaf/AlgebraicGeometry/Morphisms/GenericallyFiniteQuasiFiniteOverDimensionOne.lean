@@ -14,6 +14,10 @@ public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Irreducible
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.RingTheory.AffineDimensionInequality
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
 # Generic algebraicity gives quasi-finiteness over dimension one

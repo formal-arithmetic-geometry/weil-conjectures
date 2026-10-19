@@ -62,6 +62,7 @@ import Mathlib.Algebra.Colimit.Module
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Paper.CompletedScalarShift
 import Sheaf.Paper.PointSectionsTensorShift
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Exact equivalences given by the four geometric-point fibre functors

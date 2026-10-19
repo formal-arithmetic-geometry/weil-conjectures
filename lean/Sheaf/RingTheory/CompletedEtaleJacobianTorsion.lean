@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.EtaleRingMapConormalCriterion
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.RingTheory.PolynomialConormalCompletion
 
 /-!
 # Completed Jacobian torsion for a finite algebra étale away from an ideal

@@ -30,6 +30,7 @@ import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
 import Sheaf.Paper.FiniteProperBaseChange
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tower compact-support projection over an arbitrary standing field

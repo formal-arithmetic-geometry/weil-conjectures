@@ -37,6 +37,10 @@ import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.FiniteProperBaseChange
 import Sheaf.Paper.IntegralProperBaseChange
 import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.Paper.CondensedOpenClosedRecollement
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Compactification refinement on the ambient localizing category

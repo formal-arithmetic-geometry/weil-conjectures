@@ -18,6 +18,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.RingTheory.PowerSeriesNormalDomain
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
+import Sheaf.AlgebraicGeometry.NormalizationSingularSkyscraper
 
 /-! # Normalization quotient at split nodes
 

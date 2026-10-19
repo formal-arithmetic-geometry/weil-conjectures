@@ -35,6 +35,7 @@ import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 /-! # Closed symmetric monoidal derived categories of ringed sites
 
 Source: Stacks Project, Cohomology on Sites, Tags 0FPT and 08J9

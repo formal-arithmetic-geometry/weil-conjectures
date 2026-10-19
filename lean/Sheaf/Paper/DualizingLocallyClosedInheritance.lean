@@ -24,6 +24,8 @@ import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
+import Sheaf.CategoryTheory.RelativeBidualTriangles
+import Sheaf.Paper.FiniteExceptionalInternalHom
 
 /-!
 # Dualizing complexes on locally closed subschemes

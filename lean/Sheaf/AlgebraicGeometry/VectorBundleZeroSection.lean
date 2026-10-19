@@ -18,6 +18,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # The vector bundle Spec Sym(F), its augmentation and zero section

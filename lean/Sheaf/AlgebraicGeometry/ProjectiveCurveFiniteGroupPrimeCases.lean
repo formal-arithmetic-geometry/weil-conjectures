@@ -8,6 +8,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits

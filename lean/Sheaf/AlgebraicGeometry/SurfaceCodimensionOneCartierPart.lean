@@ -14,6 +14,7 @@ import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.Topology.NoetherianSpace
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.RegularPrimeDivisorLocalEquations
 
 /-!
 # The codimension-one Cartier part on a regular surface

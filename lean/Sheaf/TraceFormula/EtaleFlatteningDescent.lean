@@ -19,6 +19,7 @@ import Sheaf.RingTheory.EtaleIdealLocalFactor
 import WeilConjectures.Blowup.Extension
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformFlatPullback
 
 /-!
 # Etale descent of local module flatifications

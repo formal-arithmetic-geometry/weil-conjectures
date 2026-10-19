@@ -10,6 +10,24 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
+import Sheaf.AlgebraicGeometry.InvertibleSectionRing
+import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
+import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import Sheaf.AlgebraicGeometry.ProperIntegralCurveAmpleDegree
+import Sheaf.AlgebraicGeometry.SchemeAmpleCanonicalProjCriterion
+import Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme
+import WeilConjectures.AlgebraicGeometry.Ample
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Degree one on a genus-zero proper curve
 

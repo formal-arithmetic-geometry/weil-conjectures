@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.Algebra.CharP.Frobenius
+import WeilConjectures.Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Coefficient sections with prescribed p-basis lifts

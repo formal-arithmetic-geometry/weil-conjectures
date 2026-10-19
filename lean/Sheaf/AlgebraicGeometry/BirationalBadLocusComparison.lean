@@ -32,6 +32,7 @@ import Sheaf.Paper.RingedDerivedSliceLocalization
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.AlgebraicGeometry.ProperFiniteCoefficientBoundedPreservation
 
 /-!
 # Birational comparison along the bad locus

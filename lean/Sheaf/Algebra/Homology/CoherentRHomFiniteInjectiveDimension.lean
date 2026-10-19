@@ -15,6 +15,7 @@ import Sheaf.Algebra.Homology.ModuleHomComplex
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.Algebra.Homology.BoundedAboveCoherentRHom
 
 /-! # Coherent derived Hom into a finite-injective-dimension complex
 

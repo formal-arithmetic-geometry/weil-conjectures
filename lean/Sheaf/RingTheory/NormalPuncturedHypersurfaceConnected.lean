@@ -21,6 +21,7 @@ import Sheaf.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Mathlib.Topology.Irreducible
+import Sheaf.RingTheory.CompleteLocalConnectednessBound
 
 /-!
 # Connected punctured principal slices of excellent normal local domains

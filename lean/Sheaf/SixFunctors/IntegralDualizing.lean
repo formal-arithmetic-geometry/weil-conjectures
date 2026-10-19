@@ -60,6 +60,8 @@ import Sheaf.Paper.ConstantCoefficientScalarNormalization
 import Sheaf.SixFunctors.CoefTowerEvaluationPairing
 import Sheaf.SixFunctors.CoefTowerTraceRectification
 import Sheaf.SixFunctors.FiniteDualitySiteComparison
+import Sheaf.SixFunctors.CoefTowerNaturalCurrying
+import Sheaf.SixFunctors.FiniteMappingAdjunction
 
 /- Stage-2 statement delivery metadata: Q117, 2026-10-18. -/
 /-!

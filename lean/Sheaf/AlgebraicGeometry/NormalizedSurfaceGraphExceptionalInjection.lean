@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.ProperBasic
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+import Sheaf.AlgebraicGeometry.NormalSurfaceExceptionalCurves
 
 /-!
 # Exceptional curves of a normalized dominating graph

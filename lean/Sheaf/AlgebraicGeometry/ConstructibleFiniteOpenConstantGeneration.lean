@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.FiniteEtaleIntegralModelsAfterShrinking
 
 /-!
 # Finite-open constant generators for constructible finite-field sheaves

@@ -17,6 +17,8 @@ import Sheaf.RingTheory.CompleteLocalSubideal
 import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.SerreCriterionReduced
 import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.Algebra.Homology.LocalCohomologyGeneratorBound
+import Sheaf.Paper.PuncturedDerivedCompletionSections
 
 /-!
 # Formal sections on a reduced punctured complete local spectrum

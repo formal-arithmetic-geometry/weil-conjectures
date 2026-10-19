@@ -11,6 +11,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.PadicIntegersInvertEll
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of the three coefficient comparisons

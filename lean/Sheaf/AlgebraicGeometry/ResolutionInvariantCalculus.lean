@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Regular
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.SecTraceFormula.SmoothCenterBlowupGeometry
 
 /-!
 # Local dimension-corrected embedded resolution invariant calculus

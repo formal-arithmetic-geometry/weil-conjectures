@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.InvertibleKummerChartLogRegular
 import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
 import Sheaf.TraceFormula.LogRegularDivisorialStructure
 import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.DiagonalRootInvariantMonoidAlgebra
+import Sheaf.DeligneLaumon.SncParameterRootQuotient
 
 /-!
 # Kummer charts on finite normalizations of invertible-order torsors

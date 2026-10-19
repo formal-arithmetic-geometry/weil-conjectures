@@ -13,6 +13,7 @@ import Sheaf.Paper.SmoothPurityTowerLevels
 import Sheaf.Paper.ConstantModelTorAmplitude
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Paper.SmoothPurityCoefficientTowers
+import Sheaf.Paper.CompactSupportUniformTorBound
 
 /-!
 # Compactly supported direct image preserves constructible towers

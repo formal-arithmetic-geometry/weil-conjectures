@@ -49,6 +49,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
+import Sheaf.AlgebraicGeometry.EtaleInternalHomLocalization
 
 /-! # Regular pullback of internal Hom and strict-local testing
 

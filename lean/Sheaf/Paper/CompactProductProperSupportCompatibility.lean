@@ -19,6 +19,15 @@ public import Sheaf.AlgebraicGeometry.CompactProductRealizationArrows
 public import Sheaf.Paper.CompactProductRealizationCoreLaws
 import Sheaf.AlgebraicGeometry.ClosedSupportHom
 import WeilConjectures.Compactification.CategoryBaseChange
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.OrdinaryKunnethFiniteRing
+import Sheaf.AlgebraicGeometry.SupportSiteComparison
+import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.SupportedCup
+import Sheaf.Paper.SupportedCupFunctoriality
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Compact exterior products and proper-support compatibility
 

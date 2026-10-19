@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.CategoryTheory.RingedSliceExtensionExactness
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Exact restriction and K-flat complexes on a localized ringed site

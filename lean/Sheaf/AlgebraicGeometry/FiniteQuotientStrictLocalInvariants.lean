@@ -8,6 +8,15 @@ module
 public import Sheaf.AlgebraicGeometry.FSLogGroupAction
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
+import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.RingTheory.FiniteInjectiveNoetherianDescent
+import Sheaf.TraceFormula.FiniteBaseStrictLocalization
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 
 /-!
 # Strict local invariants of a finite scheme quotient

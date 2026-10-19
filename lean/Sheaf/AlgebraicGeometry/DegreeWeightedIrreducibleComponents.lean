@@ -33,6 +33,7 @@ import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.CurveEulerTensorGenericRank
 
 /-!
 # Degree as a multiplicity-weighted sum over reduced irreducible components

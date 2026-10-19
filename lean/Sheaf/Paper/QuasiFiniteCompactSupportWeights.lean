@@ -31,6 +31,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.Paper.A1FiniteWeilSectionsDecomposition
+import Sheaf.Paper.ZlFrameworkPbcOpenExchangeComparison
 
 /-! # Quasi-finite compact-support images and upper weights
 

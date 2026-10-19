@@ -16,6 +16,8 @@ import Mathlib.RingTheory.Ideal.UFD
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.RingTheory.IsRegularSystemOfParameters
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Local equations of a prime divisor on a regular scheme

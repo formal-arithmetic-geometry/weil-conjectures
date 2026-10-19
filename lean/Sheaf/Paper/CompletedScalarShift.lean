@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.IntegralScalarExtensionUniverses
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Completed scalar extension and cochain shifts

@@ -30,6 +30,12 @@ import Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds
 import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+import Sheaf.DeligneLaumon.Reduction.Composition
+import Sheaf.Paper.AffineCurveHcZero
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.FiniteBoundaryWeights
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
+import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
 
 /-! # Affine compact-support upper bound
 

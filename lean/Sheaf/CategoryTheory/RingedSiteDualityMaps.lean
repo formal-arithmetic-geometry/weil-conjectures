@@ -27,6 +27,7 @@ import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 /-! # Canonical coefficient-duality maps on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A97 and 0A98

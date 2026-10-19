@@ -22,6 +22,14 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.KummerAdditivity
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.PurTwistSheafLocallyFree
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.ShiftedTensorMorphismCalculus
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-! # Nested supported Cartier classes of vector subbundles
 

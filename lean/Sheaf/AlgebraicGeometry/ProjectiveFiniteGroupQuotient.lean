@@ -23,6 +23,10 @@ import Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres
 import Sheaf.TraceFormula.ProjQcOpenTwistAmple
 import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import Sheaf.AlgebraicGeometry.AdmissibleQuotientAffineIntegralCharts
+import Sheaf.AlgebraicGeometry.EquivariantProjectiveEnvelope
+import Sheaf.AlgebraicGeometry.FiniteGradedProjMorphism
+import Sheaf.AlgebraicGeometry.QuasiprojectiveAffineComposition
 
 /-!
 # Finite group quotients preserve relative projectivity

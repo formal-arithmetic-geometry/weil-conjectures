@@ -15,6 +15,8 @@ import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.RingTheory.LocalizationCotangentVanishing
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.RingTheory.Kaehler.Polynomial
+import Sheaf.RingTheory.CotangentFlatBaseChange
+import Sheaf.RingTheory.CotangentTransitivityTriangle
 
 /-!
 # Cotangent bootstrap from the diagonal

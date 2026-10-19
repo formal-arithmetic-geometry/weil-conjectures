@@ -33,6 +33,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.Topology.Irreducible
 import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.ConstructibleDegreeZeroProperSupport
 
 /-! # Degree-zero compact-support vanishing for ordinary adic middle extensions
 

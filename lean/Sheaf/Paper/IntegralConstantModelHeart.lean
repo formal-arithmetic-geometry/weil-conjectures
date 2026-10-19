@@ -33,6 +33,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.DerivedNakayamaFirstReduction
+import Sheaf.Paper.IntegralHeartLocalModel
+import Sheaf.Paper.IntegralModels
 
 /-!
 # The integral constant-model constructible category and its heart

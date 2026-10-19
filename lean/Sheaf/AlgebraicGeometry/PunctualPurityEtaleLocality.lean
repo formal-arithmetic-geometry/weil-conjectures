@@ -31,6 +31,7 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus
 
 /-!
 # Étale locality of punctual cohomological purity

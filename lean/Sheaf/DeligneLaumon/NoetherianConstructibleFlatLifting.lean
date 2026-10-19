@@ -32,6 +32,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.Topology.Constructible
 import Mathlib.Topology.NoetherianSpace
+import Sheaf.AlgebraicGeometry.NoetherianAffineFreePresentation
+import Sheaf.AlgebraicGeometry.NoetherianEtaleSumConstructible
 
 /-!
 # Flat constructible lifting covers for Noetherian coefficients

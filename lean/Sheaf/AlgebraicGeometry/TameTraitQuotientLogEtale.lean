@@ -26,6 +26,7 @@ import Sheaf.FieldTheory.FiniteDVRTameInertia
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
 import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
+import Sheaf.DeligneLaumon.TraitLogSmoothUniformizerChart
 
 /-!
 # Tame quotients of complete strictly henselian traits

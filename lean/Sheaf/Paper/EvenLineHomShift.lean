@@ -18,6 +18,7 @@ import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Even line twists and the signed source shift of internal Hom
 

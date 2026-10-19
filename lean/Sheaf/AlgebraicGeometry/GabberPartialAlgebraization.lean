@@ -25,6 +25,9 @@ import Sheaf.RingTheory.GRingCompletionRegular
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.AlgebraicGeometry.LocalDimensionFunctionCalculus
+import Sheaf.AlgebraicGeometry.RegularStrictLocalModel
+import Sheaf.RingTheory.ElkikFiniteEtaleAwayCompletion
 
 /-!
 # Gabber's partial algebraization of complete normal strictly local schemes

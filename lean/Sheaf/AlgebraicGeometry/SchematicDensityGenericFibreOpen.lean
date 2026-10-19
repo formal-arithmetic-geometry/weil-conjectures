@@ -2,6 +2,8 @@ import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.Topology.Irreducible
 import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.AffineSchematicDensityCriterion
+import Sheaf.RingTheory.GenericFlatness
 
 /-!
 # Schematic density in fibres spreads from the generic fibre

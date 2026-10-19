@@ -18,6 +18,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import Sheaf.RingTheory.RegularLocalDimOneIffNormal
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.RingTheory.OrderOfVanishing.Basic
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Blowup.Affine.Defs
+import WeilConjectures.Blowup.Gluing
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Intersection multiplicity decreases after blowing up a regular curve point

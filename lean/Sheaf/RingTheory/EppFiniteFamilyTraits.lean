@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.FieldTheory.Perfect
+import Sheaf.RingTheory.CommonFiniteTraitExtension
 
 /-!
 # Simultaneous Epp base change for finitely many traits

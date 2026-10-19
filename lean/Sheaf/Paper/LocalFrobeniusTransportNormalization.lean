@@ -38,6 +38,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Sheaf.TraceFormula.PointTransportComposition
 public import Sheaf.Paper.FrobeniusCoefficientReductionCoherence
 import Sheaf.SixFunctors.FrobeniusFixedPoints
+import Sheaf.SixFunctors.SchemeGaloisCoefficientChange
 
 /-!
 # Rational-point transport and scheme-Frobenius normalization

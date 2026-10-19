@@ -12,6 +12,7 @@ public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.Sober
 public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import Sheaf.AlgebraicGeometry.Morphisms.BirationalCommonDenseOpens
 
 /-!
 # Birational morphisms are isomorphisms over a dense open

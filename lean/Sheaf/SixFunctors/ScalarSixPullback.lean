@@ -7,6 +7,19 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
 public import Sheaf.Paper.ProEtaleSectionModuleFunctors
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleModuleObjects
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.ProfinitePointPullback
+import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-! # Coefficient change, inverse image and locally closed extension
 

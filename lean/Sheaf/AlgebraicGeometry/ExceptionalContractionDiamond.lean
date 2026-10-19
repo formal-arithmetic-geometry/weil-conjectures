@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.Connected.Basic
 import Sheaf.SixFunctors.TraceFormula.NodalGeometricFibresReduced
 import Sheaf.TraceFormula.NodalSubcurveBoundary
+import Sheaf.AlgebraicGeometry.MultipointedCurveModification
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 
 /-! # Local diamond for exceptional rational-component contractions
 

@@ -22,6 +22,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import WeilConjectures.Blowup.FlatBaseChange
+import Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry
+import WeilConjectures.Blowup.Affine.Defs
 
 /-!
 # Globalizing finite ordinary point-blowup towers

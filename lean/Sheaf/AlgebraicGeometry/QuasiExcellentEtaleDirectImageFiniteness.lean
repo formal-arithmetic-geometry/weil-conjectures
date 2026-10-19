@@ -33,6 +33,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.AlgebraicGeometry.EtaleInjectiveFiniteCechRows
 import Mathlib.Topology.Constructible
 import Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability
+import Sheaf.AlgebraicGeometry.GabberOpenImmersionSheafFiniteness
 
 /-!
 # Etale direct-image finiteness over quasi-excellent bases

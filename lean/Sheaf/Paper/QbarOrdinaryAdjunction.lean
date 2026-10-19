@@ -23,6 +23,7 @@ import Sheaf.Paper.ContinuousRationalDerivedRealization
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.ArbitraryFieldAdjunctionScalars
 
 /-! # Ordinary adic adjunction over an arbitrary field
 

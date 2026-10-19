@@ -12,6 +12,7 @@ public import Mathlib.GroupTheory.Finiteness
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.FinitePatternFactorization
 
 /-!
 # Coefficients in a completed positive monoid algebra

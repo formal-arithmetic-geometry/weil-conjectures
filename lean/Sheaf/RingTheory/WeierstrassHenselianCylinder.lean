@@ -23,6 +23,8 @@ import Sheaf.RingTheory.PowerSeriesAdicEvaluation
 import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Sheaf.RingTheory.QuotientHenselianPair
+import Sheaf.RingTheory.LocalPairHenselizationComparison
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Weierstrass coordinates and the henselian cylinder

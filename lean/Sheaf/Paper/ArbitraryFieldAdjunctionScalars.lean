@@ -15,6 +15,13 @@ import Sheaf.Paper.CompletedPullbackTriangles
 import Sheaf.Paper.DerivedAdjunctionShift
 import Sheaf.Paper.RingedComparisonTensorAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.Paper.ContinuousRationalDerivedRealization
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcRationalTransport
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.SfCommonStageDirectImage
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Scalar compatibility of the ordinary adjunction over an arbitrary field
 

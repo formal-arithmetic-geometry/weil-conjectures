@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
 import Sheaf.Paper.IsomorphismDerivedPullback
 import Sheaf.Paper.PurInverseImageTensorHom
 import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Stage independence of the canonical constant Weil structure
 

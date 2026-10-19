@@ -49,6 +49,7 @@ import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Paper.CompactificationCoherence
 import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Open compact supports preserve finite-Tor constructibility

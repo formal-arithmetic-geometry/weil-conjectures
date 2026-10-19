@@ -27,6 +27,10 @@ import Sheaf.Paper.IntegralFinitePullbackComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
+import Sheaf.Paper.IntegralPullbackComparisonRealization
+import Sheaf.Paper.QcqsCompactSupportRealization
 
 /-! # Whole-system compact-support and Frobenius normalization
 

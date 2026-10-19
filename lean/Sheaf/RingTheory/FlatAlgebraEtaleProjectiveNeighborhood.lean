@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.RingHom.FinitePresentation
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.TraceFormula.CompleteDevissageProjectiveLocalization
 
 /-!
 # Pointed étale projective neighborhoods of a flat finitely presented algebra

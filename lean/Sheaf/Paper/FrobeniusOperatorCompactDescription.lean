@@ -11,6 +11,13 @@ import Sheaf.Paper.FrobeniusPullbackComparisonCoherence
 import Sheaf.CategoryTheory.NaturalTransportInduction
 import Sheaf.Paper.IteratedWeilCocycle
 import Sheaf.Paper.IsomorphismDerivedPullback
+import Sheaf.Paper.FrobeniusGeometricExchange
+import Sheaf.Paper.IteratedWeilMap
+import Sheaf.Paper.TraceFormulaCoefficientConventions
+import Sheaf.SixFunctors.FrobeniusCohomologyTransport
+import Sheaf.SixFunctors.FrobeniusCohomologyTransportIso
+import Sheaf.SixFunctors.SchemeFrobenius
+import Sheaf.TraceFormula.CompactFrobeniusTransportComposition
 
 /-!
 # Compact-support description of global geometric Frobenius

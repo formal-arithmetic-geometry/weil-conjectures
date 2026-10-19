@@ -17,6 +17,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Flat.EquationalCriterion
+import Sheaf.AlgebraicGeometry.NoetherianConstructibleGaloisPartition
+import Sheaf.DeligneLaumon.NoetherianConstructibleFlatLifting
 
 /-!
 # Constructible flat models over Noetherian coefficient algebras

@@ -32,6 +32,8 @@ import Sheaf.TraceFormula.ValuationStrictSemistableCofinality
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
+import Sheaf.AlgebraicGeometry.BirationalRiemannZariskiNeighbourhoods
+import Sheaf.FieldTheory.ValuedCurveEtaleParameter
 
 /-! # Strictly semistable local uniformization along centred valuations
 

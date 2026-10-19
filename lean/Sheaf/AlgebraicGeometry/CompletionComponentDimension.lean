@@ -19,6 +19,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Ideal.GoingDown
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+import Sheaf.RingTheory.RatliffFormalCatenarity
 
 /-!
 # One-dimensional components and completion

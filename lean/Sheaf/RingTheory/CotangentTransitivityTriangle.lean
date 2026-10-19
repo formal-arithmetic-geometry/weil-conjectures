@@ -15,6 +15,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.RingTheory.Kaehler.Basic
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.RingTheory.Kaehler.Polynomial
+import Sheaf.CategoryTheory.DerivedColimitBar
 
 /-!
 # The cotangent transitivity triangle

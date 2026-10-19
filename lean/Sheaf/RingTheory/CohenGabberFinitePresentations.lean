@@ -29,6 +29,12 @@ import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.RegularPrincipalPrimeLocalizationDvr
+import Sheaf.Paper.CoefficientFieldGenericDifferentialBasis
+import Sheaf.RingTheory.FiniteAlgebraEtaleNearFieldOrDvr
+import Sheaf.RingTheory.FiniteFormalMapDifferentialCokernel
+import Sheaf.RingTheory.MixedReducedSpecialFibreCover
+import Sheaf.RingTheory.ParameterIdealFormalNormalization
+import Sheaf.RingTheory.PerfectResidueCoefficientDvr
 
 /-!
 # Cohen–Gabber finite power-series presentations

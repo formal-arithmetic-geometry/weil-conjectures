@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.Mathlib.RingTheory.Smooth.Local
+import Sheaf.AlgebraicGeometry.BertiniIrreducibleMember
+import Sheaf.AlgebraicGeometry.BertiniSmoothMember
+import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
+import Sheaf.DeligneLaumon.BertiniSections
 
 /-!
 # Curves through prescribed points preserving a finite étale cover

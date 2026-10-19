@@ -12,6 +12,12 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.PureDimension
+import Sheaf.AlgebraicGeometry.NodalPointFiniteSeparableSplitting
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.FormalLocalStructureNodalFamily
+import Sheaf.TraceFormula.NodalFamilyNoetherianApproximation
+import Sheaf.TraceFormula.RelativeCompletionEtaleApproximation
+import WeilConjectures.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
 
 /-! # Étale local model of an at-worst-nodal family
 

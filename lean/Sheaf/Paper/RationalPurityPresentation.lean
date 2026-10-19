@@ -31,6 +31,7 @@ import Sheaf.Paper.PbcFiniteStageKaroubian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
+import Sheaf.Paper.RationalSmoothPurityCanonical
 
 /-! # Coefficient transitivity and retracts of PBC smooth purity
 

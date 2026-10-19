@@ -28,6 +28,7 @@ import Mathlib.RingTheory.Flat.Basic
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.NormalTopologicallyNoetherianComponents
 
 /-! # Ordered nodal branches on an étale overlap
 

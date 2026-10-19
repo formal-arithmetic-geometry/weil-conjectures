@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.FineLogStalkChartSpreading
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.TameUnitExtensionCharacter
 
 /-!
 # Equivariant sharp charts for tame geometric stabilizers

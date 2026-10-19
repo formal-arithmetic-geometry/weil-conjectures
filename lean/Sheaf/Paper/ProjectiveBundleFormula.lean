@@ -37,6 +37,7 @@ import Sheaf.Paper.PurityDivisorClass
 import Sheaf.Paper.SfCommonStageWeilCohomology
 import Sheaf.Paper.SupportedCupFunctoriality
 import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+import Sheaf.Paper.CompactProductProperSupportCompatibility
 
 /-!
 # The finite-coefficient projective-bundle formula

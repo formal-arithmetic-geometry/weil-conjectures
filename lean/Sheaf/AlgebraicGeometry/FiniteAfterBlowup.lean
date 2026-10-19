@@ -3,6 +3,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Compactification.StrictTransform
+import Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup
+import Sheaf.AlgebraicGeometry.NagataBoundaryDivisor
+import Sheaf.AlgebraicGeometry.StrictTransformComposition
+import Sheaf.TraceFormula.ProperFlatFiniteDenseOpen
+import WeilConjectures.Blowup.Density
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Finite locally free strict transform after an admissible blow-up

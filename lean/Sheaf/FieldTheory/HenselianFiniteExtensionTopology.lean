@@ -9,6 +9,8 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.Topology.Algebra.Valued.ValuationTopology
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.FieldTheory.ValuationTopologyCommonCoarsening
+import Sheaf.RingTheory.IntegralComponentHenselianPermanence
 
 /-!
 # Finite extensions of henselian valued fields

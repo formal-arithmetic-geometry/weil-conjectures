@@ -34,6 +34,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.Algebra.Homology.PseudoCoherentRHomFlatBaseChange
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.SecTraceFormula.LocalDerivedTensorNonvanishing
+import Sheaf.Algebra.Homology.CompleteLocalCoherentDuality
 
 /-! # Derived Hom from a semidualizing complex is conservative
 

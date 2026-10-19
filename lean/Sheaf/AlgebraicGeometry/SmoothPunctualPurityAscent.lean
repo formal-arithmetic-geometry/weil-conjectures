@@ -27,6 +27,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.PrimeFieldPunctualPurity
+import Sheaf.AlgebraicGeometry.PunctualPurityTwoOfThree
 
 /-!
 # Smooth ascent of punctual purity over a trait

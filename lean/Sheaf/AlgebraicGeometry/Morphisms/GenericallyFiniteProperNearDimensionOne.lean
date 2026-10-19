@@ -19,6 +19,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.Morphisms.GenericallyFiniteQuasiFiniteOverDimensionOne
 
 /-!
 # A proper generically finite morphism is finite near local dimension at most one

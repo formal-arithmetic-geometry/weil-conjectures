@@ -15,6 +15,7 @@ public import Sheaf.RingTheory.CompletionMapForLocalHom
 public import Sheaf.RingTheory.GRing
 
 import Sheaf.RingTheory.FiniteTypeGRing
+import Sheaf.TraceFormula.ArtinApproximationEtaleLocalMap
 
 /-!
 # Approximation of a local map into a completed stalk

@@ -47,6 +47,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Higher Tor and flat cohomology for complete integral coefficients

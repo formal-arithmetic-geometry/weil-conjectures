@@ -48,6 +48,7 @@ import Sheaf.Paper.SfCommonStageDirectImage
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Integral compact-support constructibility
 

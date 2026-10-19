@@ -19,6 +19,9 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.TraceFormula.LogRegularDivisorialStructure
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+import Sheaf.AlgebraicGeometry.InvertibleKummerChartLogRegular
+import Sheaf.AlgebraicGeometry.PrimeToOrderSNCKummerCharts
+import Sheaf.AlgebraicGeometry.RegularBoundaryDivisorialChart
 
 /-!
 # Log regularity of tame normalization over a regular boundary

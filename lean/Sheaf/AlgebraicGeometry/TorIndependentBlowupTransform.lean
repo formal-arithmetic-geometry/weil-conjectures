@@ -32,6 +32,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 import WeilConjectures.Compactification.StrictTransformBlowup
 import WeilConjectures.Blowup.FiniteDegree.Algebra
+import Sheaf.RingTheory.NoetherianLocalKoszulCriterion
 
 /-!
 # Tor-independent base change of regular blowups and strict transforms

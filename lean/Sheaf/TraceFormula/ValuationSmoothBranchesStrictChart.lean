@@ -26,6 +26,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence
 import Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover
 import Sheaf.RingTheory.VerticalPrincipalIdealFibreDetection
+import Sheaf.AlgebraicGeometry.OrderedNodalBranchOverlap
 /-! # Zariski strict pair charts from smooth fibre branches
 
 Source: Temkin, Stable Modification of Relative Curves, §4.3, p. 27 and Remark 4.5.2,

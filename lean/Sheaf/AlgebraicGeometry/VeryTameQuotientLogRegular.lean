@@ -12,6 +12,10 @@ public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 import Sheaf.TraceFormula.LogRegularDivisorialStructure
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.AlgebraicGeometry.FiniteQuotientStrictLocalInvariants
+import Sheaf.AlgebraicGeometry.LogRegularPair
+import Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart
+import Sheaf.AlgebraicGeometry.VeryTameLocalKummerQuotient
 
 /-!
 # Very tame quotients of log regular pairs

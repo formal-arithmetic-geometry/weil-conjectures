@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Order.Fin.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-! # Derived ideal torsion and the extended alternating localization complex
 

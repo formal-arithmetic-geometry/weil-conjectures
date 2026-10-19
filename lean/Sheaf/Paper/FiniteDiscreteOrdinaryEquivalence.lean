@@ -47,6 +47,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-! # Finite discrete internal and ordinary coefficients
 

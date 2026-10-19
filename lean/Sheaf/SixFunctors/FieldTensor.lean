@@ -24,6 +24,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.CoefficientHeart
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tensor closure of rational localizing categories

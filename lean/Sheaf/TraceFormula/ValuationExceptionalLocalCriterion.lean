@@ -23,6 +23,8 @@ import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange
 import Sheaf.TraceFormula.MultipointedCurve
 import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
+import Sheaf.AlgebraicGeometry.ProperNormalGeometricConnectedness
+import Sheaf.AlgebraicGeometry.SepClosedValuationGeometricComponents
 
 /-! # The valuation-curve exceptional-tree local criterion
 

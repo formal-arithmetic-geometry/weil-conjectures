@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.GenericGeometricallyReducedPreparation
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
 import Sheaf.AlgebraicGeometry.ReductionGenericFibre
+import Sheaf.AlgebraicGeometry.NonreducedFibreOpen
 
 /-!
 # Non-geometrically reduced fibres near the generic fibre

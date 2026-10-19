@@ -14,6 +14,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 
 /-! # Euler characteristic of a nodal curve from its normalization
 

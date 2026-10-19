@@ -57,6 +57,8 @@ import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.SixFunctors.ProEtale.DerivedCompletion
+import Sheaf.Paper.IntegralHeartLocalModel
+import Sheaf.Paper.IntegralModels
 
 /-!
 # Integral constructibility under immersions and generation by strata

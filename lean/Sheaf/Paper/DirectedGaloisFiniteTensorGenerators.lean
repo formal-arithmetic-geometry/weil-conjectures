@@ -29,6 +29,8 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.ConstructibleSheaf.GaloisDescentMonodromyTensor
+import Sheaf.DeligneLaumon.ConstructibleExtensionFiniteStage
 
 /-!
 # Finite tensor generators for a directed Galois partition

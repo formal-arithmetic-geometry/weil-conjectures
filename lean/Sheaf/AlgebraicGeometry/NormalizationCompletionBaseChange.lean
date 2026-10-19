@@ -15,6 +15,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
+import Sheaf.RingTheory.FibrePrimesResidueFields
+import Sheaf.RingTheory.FormalGlueingData
+import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataOfCompleteLocal
+import Sheaf.RingTheory.NagataUniversallyJapanese
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Normalization and completion away from the special fibre

@@ -16,6 +16,8 @@ import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.RingTheory.TorIndependentCotangentBaseChange
+import Sheaf.TraceFormula.OnePointDerivedRingIdentification
 
 /-!
 # Derived base change for ring cotangent complexes

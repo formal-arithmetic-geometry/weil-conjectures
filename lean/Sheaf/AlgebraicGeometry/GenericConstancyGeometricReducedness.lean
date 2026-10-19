@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.GenericFibreGeometricallyReducedOpen
+import Sheaf.AlgebraicGeometry.GenericFibreNotGeometricallyReducedOpen
 
 /-!
 # Generic constancy of geometric reducedness of fibres

@@ -24,6 +24,7 @@ import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Normalized multiplication of support quotients

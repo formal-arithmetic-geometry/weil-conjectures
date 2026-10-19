@@ -27,6 +27,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.SiteTorIntervalRestriction
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Local perfect models in a prescribed Tor interval

@@ -21,6 +21,7 @@ import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.NoetherianLocalColimitRegular
 
 /-!
 # Smooth filtered colimits with Noetherian fibres are regular

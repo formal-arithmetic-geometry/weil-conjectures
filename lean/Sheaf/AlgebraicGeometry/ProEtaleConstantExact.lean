@@ -17,6 +17,9 @@ import Sheaf.CategoryTheory.SheafPullbackForgetComparison
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Abelian.ShortExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Exact pullback of finite constant pro-etale left modules

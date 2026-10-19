@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.AlgebraicGeometry.IsFiniteOfFpqcCover
 import Sheaf.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+import Sheaf.AlgebraicGeometry.FreeFiniteGroupAffineQuotient
 
 /-!
 # The given subgroup quotient of a connected Galois cover

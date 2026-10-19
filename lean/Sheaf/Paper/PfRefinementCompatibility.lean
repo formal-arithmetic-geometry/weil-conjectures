@@ -24,6 +24,7 @@ import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
+import Sheaf.SixFunctors.ProperOpenProjectionMate
 
 /-!
 # Refinement compatibility of finite projection transformations

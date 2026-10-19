@@ -37,6 +37,7 @@ import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.AffineOpenStrictLocalCohomology
 
 /-!
 # Support-sensitive étale dimension bounds on a strictly local scheme

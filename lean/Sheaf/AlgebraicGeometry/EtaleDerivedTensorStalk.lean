@@ -18,6 +18,7 @@ import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Geometric étale stalks and unbounded derived tensor products

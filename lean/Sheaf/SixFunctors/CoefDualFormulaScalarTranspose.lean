@@ -60,6 +60,7 @@ public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Sheaf.AlgebraicGeometry.SfOpenExceptionalBaseChange
 public import Sheaf.Paper.OrdinaryCompletedIntegralPullback
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.FiniteFreeCoefficientExtension
 
 /-!
 # Scalar transpose of the canonical integral exceptional formula

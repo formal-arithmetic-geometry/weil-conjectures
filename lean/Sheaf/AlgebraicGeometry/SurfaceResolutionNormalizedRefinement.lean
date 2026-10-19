@@ -24,6 +24,12 @@ import Sheaf.RingTheory.CompletionDimension
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.FiniteDegree.Algebra
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import Sheaf.AlgebraicGeometry.ExcellentNormalSurfaceLocalData
+import Sheaf.AlgebraicGeometry.ExcellentNormalizedBlowupTower
+import Sheaf.AlgebraicGeometry.ExcellentSurfaceNormalizedDomination
+import Sheaf.AlgebraicGeometry.NormalizedBlowupCompletionDescent
+import Sheaf.AlgebraicGeometry.RationalSurfacePointBlowupResolution
+import Sheaf.AlgebraicGeometry.RegularSurfaceBirationalRationalLocalRings
 
 /-!
 # Refining a local surface resolution by normalized point blowups

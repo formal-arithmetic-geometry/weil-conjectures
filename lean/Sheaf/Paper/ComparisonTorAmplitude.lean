@@ -29,6 +29,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.Paper.IntrinsicComparisonConstructibility
 import Sheaf.Paper.IntrinsicComparisonTorAmplitude
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Comparison of étale and pro-étale Tor amplitude

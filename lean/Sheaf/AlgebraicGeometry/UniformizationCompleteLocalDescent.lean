@@ -18,6 +18,7 @@ import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.CompletionDimension
 import Sheaf.RingTheory.HenselianPairApproximation
 import Mathlib.RingTheory.FinitePresentation
+import Sheaf.RingTheory.HenselianNormalCompletionPreparation
 
 /-!
 # Descent of regular alteration coverings from complete local bases

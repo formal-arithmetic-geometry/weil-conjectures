@@ -27,6 +27,7 @@ import Sheaf.Paper.FiniteProperBaseChange
 import Sheaf.Paper.IntegralCriterionReductions
 import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Sheaf.Paper.IntegralModels
 /-!
 # Proper base change with integral adic coefficients
 

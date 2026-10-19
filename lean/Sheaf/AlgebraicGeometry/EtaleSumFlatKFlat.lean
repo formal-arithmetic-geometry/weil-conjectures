@@ -16,6 +16,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
+import Sheaf.Paper.EtaleSumTensorTotalization
 /-!
 # Étale sum extension preserves flatness and K-flatness
 

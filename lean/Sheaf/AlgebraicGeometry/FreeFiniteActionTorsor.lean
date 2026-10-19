@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.FpqcDescentEtale
 import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # The free open locus of a finite scheme quotient

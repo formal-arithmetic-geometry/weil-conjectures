@@ -13,6 +13,7 @@ import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 import Mathlib.RingTheory.Flat.Basic
+import Sheaf.AlgebraicGeometry.ModuleStrictTransform
 
 /-!
 # Flat pullback of module strict transforms

@@ -13,6 +13,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Blowup.FlatBaseChange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
+import Sheaf.AlgebraicGeometry.EmbeddedResolutionAmbientComparison
 
 /-!
 # Smooth-functorial ordinary resolution in characteristic zero

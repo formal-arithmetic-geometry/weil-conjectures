@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
 import Sheaf.Paper.RingedTopoiTensorComparisonData
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Signed calculus of shifted derived tensor morphisms

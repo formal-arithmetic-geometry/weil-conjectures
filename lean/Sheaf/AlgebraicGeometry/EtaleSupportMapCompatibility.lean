@@ -51,6 +51,13 @@ import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
+import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
+import Sheaf.Paper.EtaleSumTensorTotalization
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # Compatibility of the etale proper-support comparison

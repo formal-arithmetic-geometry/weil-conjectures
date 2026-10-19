@@ -13,6 +13,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
+import Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates
+import Sheaf.TraceFormula.ReducedSchemeImage
+import WeilConjectures.Blowup.Affine.ChartAlgebra
+import WeilConjectures.Blowup.Complement
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Smooth-center blowups and reduced strict transforms

@@ -57,6 +57,7 @@ import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.FiniteEtaleDescent
 import Sheaf.CategoryTheory.AdjointMate
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-! # Finite free coefficient extensions and cofinal levels
 

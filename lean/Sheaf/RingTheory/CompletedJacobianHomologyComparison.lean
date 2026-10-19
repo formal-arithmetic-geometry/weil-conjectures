@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.CompletedPolynomialConormal
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.PolynomialConormalCompletion
 
 /-!
 # Completed Jacobian homology comparison

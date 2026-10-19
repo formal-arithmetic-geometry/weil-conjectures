@@ -34,6 +34,30 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.GeometricStalkToposPoint
+import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
+import WeilConjectures.SixFunctors.OpenClosed.Complex
+import WeilConjectures.SixFunctors.OpenClosed.Exact
+import WeilConjectures.SixFunctors.OpenClosed.Vanishing
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Ordered strata, sheaf filtrations, and thick generation over finite rings

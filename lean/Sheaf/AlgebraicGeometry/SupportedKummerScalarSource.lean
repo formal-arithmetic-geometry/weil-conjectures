@@ -27,6 +27,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Finite.BaseChange
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Derived scalar extension of a closed supported constant sheaf

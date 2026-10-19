@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.CategoryTheory.ComposableArrows.Basic
+import Sheaf.AlgebraicGeometry.LocalDimensionFunctionCalculus
+import Sheaf.AlgebraicGeometry.RegularDimensionFunctionPullback
+import Sheaf.AlgebraicGeometry.RegularStrictLocalModel
+import Sheaf.AlgebraicGeometry.StrictLocalRegularIntegralFibres
 
 /-!
 # Generic-fibre lifting and codimension for regular specializations

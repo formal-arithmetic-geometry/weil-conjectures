@@ -27,6 +27,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.AlgebraicGeometry.EtaleClosedSheafInternalAdjunction
 
 /-!
 # The ordinary finite-coefficient affine-line unit over a Noetherian base

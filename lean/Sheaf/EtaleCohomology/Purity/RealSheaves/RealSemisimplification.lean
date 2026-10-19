@@ -13,6 +13,7 @@ import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 import Sheaf.Paper.EtaleWeilSheafEquivalence
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
+import Sheaf.Paper.AdicLocalCharacteristicFactor
 
 /-!
 # Reality survives semisimplification

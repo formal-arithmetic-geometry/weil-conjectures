@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.SixFunctors.TraceFormula.NodalGeometricFibresReduced
+import Sheaf.AlgebraicGeometry.SepClosedValuationGeometricComponents
+import Sheaf.TraceFormula.ExceptionalComponentSpecialization
+import Sheaf.TraceFormula.SemistableNormalTargetFactorization
 
 /-! # Closed-image exceptional components detect stability
 

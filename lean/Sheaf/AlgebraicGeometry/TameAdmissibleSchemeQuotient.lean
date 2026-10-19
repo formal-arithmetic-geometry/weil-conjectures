@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.AdmissibleQuotientAffineIntegralCharts
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.TameInertiaSurjectiveGroupTrace
+import Sheaf.RingTheory.TraceOneInvariantFiniteness
 
 /-!
 # Finite quotients of tame admissible actions

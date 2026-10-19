@@ -16,6 +16,12 @@ public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Closed support for arbitrary condensed coefficients

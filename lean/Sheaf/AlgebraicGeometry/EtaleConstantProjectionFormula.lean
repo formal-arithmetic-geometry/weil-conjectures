@@ -40,6 +40,7 @@ import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.ProjectionMateExact
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tensoring derived global sections with a constant complex

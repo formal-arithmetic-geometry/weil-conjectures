@@ -18,6 +18,11 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluat
 import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.GaloisPartitionExactRefinement
+import Sheaf.AlgebraicGeometry.NoetherianCtfFlatModel
+import Sheaf.Paper.GaloisPartitionTensorClosure
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Condition (B) for flat locally constant constructible sheaves

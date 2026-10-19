@@ -34,6 +34,7 @@ import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Reconstruction of a normalized smooth-purity coefficient tower

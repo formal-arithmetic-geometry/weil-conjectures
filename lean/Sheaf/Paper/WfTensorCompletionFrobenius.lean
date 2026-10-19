@@ -14,6 +14,9 @@ import Sheaf.Paper.IntrinsicCompletionCompleted
 import Sheaf.Paper.IntegralOperationsPreserveConstructible
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcWeilCategory
+import Sheaf.Paper.WeilCompletedTensorReflector
 
 /-!
 # Frobenius compatibility of ordinary and completed tensor

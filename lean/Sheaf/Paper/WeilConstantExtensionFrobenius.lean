@@ -17,6 +17,14 @@ import Sheaf.Paper.IteratedWeilCocycle
 import Sheaf.Paper.LocalFrobeniusConjugacyClass
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Mathlib.FieldTheory.Finite.Basic
+import Sheaf.AlgebraicGeometry.FrobeniusDetailed
+import Sheaf.Paper.AdicPunctualWeights
+import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.SixFunctors.FrobeniusCohomologyTransport
 
 /-! # Constant extension of a lisse Weil sheaf and Frobenius powers
 

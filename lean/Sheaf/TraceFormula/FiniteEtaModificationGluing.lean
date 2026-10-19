@@ -12,6 +12,17 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Sheaf.TraceFormula.SchematicallyDenseOpen
+import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.AlgebraicGeometry.IntegralAlgebraDirectedColimitFinite
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.RingTheory.IntegralClosureFiniteNormalProduct
+import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # Finite-base reconciliation of local reduced generic modifications
 

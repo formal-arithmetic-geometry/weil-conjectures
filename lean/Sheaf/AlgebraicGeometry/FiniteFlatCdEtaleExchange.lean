@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.FiniteFreeAlgebraSpectrum
 import Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree
 import Mathlib.RingTheory.Etale.Basic
 import Mathlib.RingTheory.FiniteStability
+import Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover
+import Sheaf.AlgebraicGeometry.OrdinaryHenselianPointedNeighbourhoodLimit
 
 /-!
 # Exchanging finite flat maps and completely decomposed étale families

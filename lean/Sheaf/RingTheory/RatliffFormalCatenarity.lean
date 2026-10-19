@@ -28,6 +28,14 @@ import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.CatenaryCompletionHyperplane
+import Sheaf.RingTheory.ClosedFibrePolynomialPresentation
+import Sheaf.RingTheory.ConormalTorsionAlgebraization
+import Sheaf.RingTheory.FlatEquidimensionalCatenaryDescent
+import Sheaf.RingTheory.OneDimensionalComponentConormal
+import Sheaf.RingTheory.PolynomialClosedFibreComponents
+import Sheaf.RingTheory.UniversallyCatenaryMinimalQuotients
+import Sheaf.RingTheory.UniversallyCatenaryQuotient
 
 /-!
 # Ratliff's criterion for universal catenarity

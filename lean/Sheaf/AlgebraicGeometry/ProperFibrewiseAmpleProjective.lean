@@ -22,6 +22,7 @@ import Sheaf.AlgebraicGeometry.AmpleIffNormalizedComponentDegreePos
 import Sheaf.TraceFormula.AmpleNeighbourhood
 import Sheaf.TraceFormula.ProjectiveBundleSeparated
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.RelativeAmpleVeryAmple
 
 /-! # Positive fibre degrees give a projective-bundle embedding
 

@@ -32,6 +32,7 @@ import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.StrictRoosComparison
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # The counit identity for the integral inverse-image comparison

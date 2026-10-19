@@ -30,6 +30,7 @@ import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.ScalarLocalization
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 
 /-! # Coefficient biduality, triangles, restriction and scalar localization
 

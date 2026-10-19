@@ -54,6 +54,7 @@ import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import Sheaf.Paper.BasicOperationsCoefficientReduction
 import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # The canonical open-closed triangle at all coefficient stages

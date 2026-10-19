@@ -23,6 +23,8 @@ import Sheaf.AlgebraicGeometry.SupportLongExact
 import Sheaf.CategoryTheory.ModuleRestrictionKernelComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.GeometricAffineSpaceAcyclicity
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Geometric projective-space cohomology and the positive hyperplane class

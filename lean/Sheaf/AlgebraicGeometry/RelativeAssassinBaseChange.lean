@@ -30,6 +30,8 @@ import Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.AlgebraicGeometry.FlatPullbackAssociatedPoints
+import Sheaf.RingTheory.TensorFieldsCohenMacaulay
 
 /-!
 # Relative associated points under arbitrary base change

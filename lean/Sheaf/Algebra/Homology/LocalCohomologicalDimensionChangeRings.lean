@@ -6,6 +6,7 @@ Authors: SHEAF group Q36
 module
 
 public import Sheaf.Algebra.Homology.LocalCohomologicalDimension
+import Sheaf.Algebra.Homology.IdealTorsionCechComputation
 
 /-! # Local cohomological dimension under change of rings
 

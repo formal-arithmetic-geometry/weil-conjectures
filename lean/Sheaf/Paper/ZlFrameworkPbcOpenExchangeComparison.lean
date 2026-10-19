@@ -12,6 +12,35 @@ import Sheaf.Paper.CompletedCoefficientPushforwardComparison
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import Sheaf.Paper.AdicPullbackPresentationTransport
 import Sheaf.CategoryTheory.RingedCoefficientRestrictionCounit
+import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CompleteProetaleStrictTowerRealization
+import Sheaf.Paper.CompletedCoefficientPresentationTransport
+import Sheaf.Paper.CompletedCompactSupportExchange
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedOpenExchangeTransport
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.ExactProductFunctorStrictLimit
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.IntegralCompactSupportUniformRestriction
+import Sheaf.Paper.IntegralPullbackComparisonRealization
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.KoszulReconstruction
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.RationalCoefficientCategoryComparison
+import Sheaf.Paper.SfWeilSheafComplex
 
 /-! # Framework and PBC open exchange comparison
 Source: thm-cbc-qbar.proof.md, common-stage descent

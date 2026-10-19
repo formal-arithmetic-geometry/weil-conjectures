@@ -13,6 +13,7 @@ import Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.RingTheory.FinitePresentation
 import Sheaf.AlgebraicGeometry.SmoothEtaleLocalSource
+import Sheaf.AlgebraicGeometry.EtaleLocalInfinitesimalLiftsSmooth
 
 /-!
 # The strict logarithmic Jacobian criterion

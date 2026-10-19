@@ -38,6 +38,7 @@ import Sheaf.Paper.WeilCompletedTensorReflector
 import WeilConjectures.Algebra.Homology.RoosComplex
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finite free completed scalar comparison

@@ -18,6 +18,12 @@ import Sheaf.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
+import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.FiniteQuotientStrictLocalInvariants
+import Sheaf.AlgebraicGeometry.TameAdmissibleSchemeQuotient
+import Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart
+import Sheaf.AlgebraicGeometry.VeryTameLocalKummerQuotient
 
 /-!
 # Very tame quotient and its Kummer charts

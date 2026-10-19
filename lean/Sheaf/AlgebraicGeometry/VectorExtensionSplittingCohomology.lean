@@ -28,6 +28,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.ModuleCohomologyConventions
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.NoetherianAffineLineUnit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Splittings of vector-bundle extensions and ordinary etale cohomology

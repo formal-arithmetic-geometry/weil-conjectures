@@ -25,6 +25,7 @@ import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
 import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.SixFunctors.OpenTensorNormalization
+import Sheaf.SixFunctors.AmbientProperOpenPasting
 
 /-! # Refinement substitution in strict-system projection maps
 

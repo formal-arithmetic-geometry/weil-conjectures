@@ -21,6 +21,8 @@ import Sheaf.Paper.AdicPunctualWeights
 import Sheaf.Paper.CartesianCoefficientTwists
 import Sheaf.Paper.DerivedPullbackTensorIso
 import WeilConjectures.WeilSheaf.TateTwistCohomology
+import Sheaf.Paper.FrobeniusCoefficientTwistsCanonical
+import Sheaf.Paper.TwistFrobeniusScalar
 
 /-! # Weight shift under a Tate twist
 

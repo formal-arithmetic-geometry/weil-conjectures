@@ -15,6 +15,15 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+import Sheaf.FieldTheory.HenselianFiniteExtensionTopology
+import Sheaf.FieldTheory.HenselianKrasnerNeighbourhood
+import Sheaf.FieldTheory.HenselianSimpleRootStability
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
+import WeilConjectures.FieldTheory.FiniteGaloisReceivingSeparableExtensions
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Étale comparison for dense extensions of henselian valued fields

@@ -19,6 +19,9 @@ import Sheaf.GroupTheory.DivisibleUnitLatticeExtension
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.AlgebraicGeometry.FineLogStalkChartSpreading
 import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
+import Sheaf.AlgebraicGeometry.LogCotangentCharacteristicQuotient
+import Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion
+import Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart
 
 /-!
 # Compatible equivariant charts for log smooth morphisms

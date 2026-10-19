@@ -14,6 +14,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.FiniteType
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.FormalMonoidAdicEvaluation
 
 /-!
 # Implicit elimination in completed sharp monoid algebras

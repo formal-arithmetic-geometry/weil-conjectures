@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Connected.Basic
 import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
+import Sheaf.Algebra.Homology.LocalCohomologyGeneratorBound
+import Sheaf.AlgebraicGeometry.FormalPuncturedSections
+import Sheaf.RingTheory.IsolatedIntersectionDimensionBound
+import Sheaf.RingTheory.PrimeAvoidanceConnectednessSlice
 
 /-!
 # Connectedness bounds for complete local rings

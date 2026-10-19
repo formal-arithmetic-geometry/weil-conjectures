@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.IntegralOperationsWellDefined
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Right shifts of the completed integral tensor
 

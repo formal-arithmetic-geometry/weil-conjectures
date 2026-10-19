@@ -18,6 +18,7 @@ import Sheaf.TraceFormula.FiniteFibreValuationDomination
 import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
 import Sheaf.TraceFormula.ValuationExceptionalLocalCriterion
 import Sheaf.TraceFormula.ValuationNodalPolarSection
+import Sheaf.TraceFormula.ValuationNormalizedGraphModel
 
 /-! # One exceptional blow-down over a finite-height valuation ring
 

@@ -16,6 +16,7 @@ import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.Algebra.Homology.SemidualizingRHomConservative
 import Sheaf.TraceFormula.AlgebraicShriekRelativePerfect
+import Sheaf.TraceFormula.PolynomialDiagonalRhomReduction
 
 /-! # Unnormalized uniqueness of algebraic relative dualizing objects
 

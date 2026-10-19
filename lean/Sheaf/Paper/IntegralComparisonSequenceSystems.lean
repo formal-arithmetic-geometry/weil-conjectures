@@ -20,6 +20,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
 import Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CoefficientRingedSequenceSite
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.IntegralScalarExtensionWellDefined
 /-!
 # Realization of integral pullback comparisons
 

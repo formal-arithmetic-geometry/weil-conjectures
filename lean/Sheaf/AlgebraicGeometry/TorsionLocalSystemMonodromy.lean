@@ -29,6 +29,11 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.TorsionTorsorDescent
+import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Monodromy and ambient exactness of torsion local systems
 

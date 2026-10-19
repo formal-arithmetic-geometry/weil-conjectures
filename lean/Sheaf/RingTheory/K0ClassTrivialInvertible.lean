@@ -6,6 +6,7 @@ public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 public import Sheaf.RingTheory.FiniteProjectiveK0
+import Sheaf.RingTheory.K0DeterminantMap
 
 /-!
 # Triviality from a multiple of the ring class in `K₀`

@@ -51,6 +51,7 @@ import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.IntegralCohomologicalAdicCriterion
 import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.IntegralConstructibleHeart
 
 /-!
 # Integral proper direct image on localizing categories

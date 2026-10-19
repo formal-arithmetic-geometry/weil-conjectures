@@ -28,6 +28,8 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.Flat.Localization
 import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.RegularComposition
+import Sheaf.AlgebraicGeometry.AlterationGeneratorsReducedBaseChange
+import Sheaf.AlgebraicGeometry.SNCBoundaryParameterCriterion
 
 /-!
 # Regular pullback of alteration pairs

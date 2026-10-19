@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.CotangentResolutionCoherence
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.Algebra.Homology.FlatSurjectionDerivedSelfTensor
+import Sheaf.RingTheory.CotangentBootstrap
+import Sheaf.RingTheory.DerivedDiagonalCotangentVanishing
 
 /-!
 # Vanishing of the cotangent complex of an étale ring map

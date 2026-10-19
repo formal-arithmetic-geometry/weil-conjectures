@@ -13,6 +13,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.AlgebraicGeometry.OrdinaryPointDeltaBranches
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Finite birational maps to nodal curves with connected geometric fibres

@@ -11,6 +11,9 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CurveEulerTensorGenericRank
+import Sheaf.AlgebraicGeometry.DegreeWeightedIrreducibleComponents
+import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 
 /-!
 # Additivity of line bundle degree on proper schemes of dimension at most one

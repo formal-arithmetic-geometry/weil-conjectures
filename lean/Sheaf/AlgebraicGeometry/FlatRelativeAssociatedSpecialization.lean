@@ -30,6 +30,7 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.ValuativeFibreComponentLift
 import Sheaf.RingTheory.ValuationDomainFibreDimensions
 import Sheaf.TraceFormula.ValuationFiniteModuleInjectivity
+import Sheaf.AlgebraicGeometry.RelativeAssassinBaseChange
 
 /-! # Specialization of a relative associated point at a flat component generic point
 

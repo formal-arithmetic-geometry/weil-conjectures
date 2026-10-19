@@ -27,6 +27,9 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.AlgebraicGeometry.EtaleClosedSheafInternalAdjunction
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The etale internal Hom localization triangle over an arbitrary ring

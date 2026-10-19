@@ -16,6 +16,22 @@ import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntegralTStructure
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.LocalizedTStructure
+import Sheaf.Paper.PbcRationalTransport
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.QbarOrdinaryAdjunction
+import Sheaf.Paper.SfIntegralDirectImageConstructible
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Affine higher-direct-image support bound at adic field coefficients
 

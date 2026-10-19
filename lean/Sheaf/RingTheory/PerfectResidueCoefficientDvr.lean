@@ -15,6 +15,7 @@ import Sheaf.RingTheory.FormallySmoothAdicLift
 import Sheaf.RingTheory.FormallySmoothAdicFlat
 import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
 
 /-!
 # Perfect-residue coefficient DVR extension and local lifting

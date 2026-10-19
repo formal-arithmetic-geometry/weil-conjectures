@@ -19,6 +19,10 @@ import Sheaf.Paper.FiniteClopenDerivedDecomposition
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Mathlib.CategoryTheory.Localization.Adjunction
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.SixFunctors.OpenTensorNormalization
+import WeilConjectures.Compactification.Refinement
 
 /-! # Ambient proper/open pasting
 

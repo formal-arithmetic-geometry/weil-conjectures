@@ -15,6 +15,7 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.PartialParametersQuotientDimension
 
 /-!
 # Infinite open subsets of a Noetherian local domain

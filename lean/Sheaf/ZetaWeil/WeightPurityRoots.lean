@@ -10,6 +10,7 @@ public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
 public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
 import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.Paper.WeilCohomologyScalarExtensionQlbar
 
 /-!
 # Weight of reciprocal roots

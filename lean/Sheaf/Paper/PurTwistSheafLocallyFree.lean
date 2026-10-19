@@ -48,6 +48,7 @@ import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Paper.SfIntegralConstructible
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The integral Tate line on the pro-etale site
 

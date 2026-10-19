@@ -30,6 +30,7 @@ import Mathlib.RingTheory.Ideal.Span
 import WeilConjectures.AlgebraicGeometry.Descent
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.SecTraceFormula.SurjectiveTwoTermDeterminantCalculus
 
 /-! # Determinants of two-term perfect complexes
 

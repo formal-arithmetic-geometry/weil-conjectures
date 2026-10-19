@@ -18,6 +18,12 @@ import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.AlgebraicGeometry.Sites.SupportDimensionFiniteUnion
+import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
+import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Affine torsion cohomology with a transcendence-degree support bound

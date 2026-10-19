@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.RingTheory.AdicCompletion.Exactness
+import Sheaf.RingTheory.JacobianTorsionClosedBaseChange
+import Sheaf.RingTheory.JacobianTorsionEtaleShrink
+import Sheaf.RingTheory.PrincipalJacobianAlgebraization
 
 /-!
 # Algebraization from torsion in the completed conormal differential

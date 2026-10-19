@@ -7,6 +7,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.AlgebraicGeometry.ReductionGenericFibre
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Reduced dominant part and its coreflection

@@ -25,6 +25,7 @@ import Sheaf.TraceFormula.MultipointedCurve
 import Sheaf.TraceFormula.NodalContractionNormalizationBranches
 import Sheaf.TraceFormula.NodalSubcurveBoundary
 import Sheaf.TraceFormula.ReducedCurveNormalizationGenus
+import Sheaf.AlgebraicGeometry.OrdinaryPointDeltaBranches
 
 /-! # The exceptional-tree criterion for a marked curve contraction
 

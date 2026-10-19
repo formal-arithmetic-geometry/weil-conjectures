@@ -13,6 +13,7 @@ import Sheaf.Paper.DerivedPullbackTensorHom
 import Sheaf.Paper.IntegralPullbackComposition
 import Sheaf.SixFunctors.FrobeniusPointTransport
 import Sheaf.SixFunctors.FrobeniusPointTransportNatural
+import Sheaf.SixFunctors.FrobeniusCohomologyTransportIso
 
 /-! # Independence of the local Frobenius operator from the embedding
 

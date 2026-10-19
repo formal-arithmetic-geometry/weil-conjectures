@@ -20,6 +20,11 @@ import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import WeilConjectures.Blowup.BlowupUniversal
 import WeilConjectures.Blowup.Complement
+import Sheaf.AlgebraicGeometry.CurveIntersectionBlowupDecrease
+import Sheaf.AlgebraicGeometry.SurfaceCodimensionOneCartierPart
+import Sheaf.AlgebraicGeometry.SurfaceCurveRegularizationByBlowups
+import Sheaf.AlgebraicGeometry.SurfacePointBlowupGeometry
+import Sheaf.AlgebraicGeometry.SurfacePointIdealPrincipalization
 
 /-!
 # Embedded SNC resolution on a regular excellent surface

@@ -11,6 +11,9 @@ public import Sheaf.Paper.CommonStageWeilShriek
 public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.CommonStageCompactWeilCohomology
 public import Sheaf.Paper.GlobalGeometricFrobenius
+import Sheaf.Paper.PoincarePointFiniteness
+import Sheaf.Paper.SfWeilSheafComplex
+import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 
 /-!
 # The smooth proper hypotheses for purity

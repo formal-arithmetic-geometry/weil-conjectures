@@ -12,6 +12,12 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+import Sheaf.Algebra.Homology.IdealPowerTorsionInjective
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Local cohomology spectral sequence for a sum of ideals

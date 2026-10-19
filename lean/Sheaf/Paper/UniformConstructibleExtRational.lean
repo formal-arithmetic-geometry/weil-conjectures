@@ -23,6 +23,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import Sheaf.SixFunctors.ScalarSixPullback
 
 /-!
 # Uniform Ext vanishing with rational coefficients

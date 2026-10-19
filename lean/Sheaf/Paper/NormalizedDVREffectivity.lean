@@ -30,6 +30,7 @@ import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.PbcRoosTriangle
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Effectivity of normalized DVR towers
 

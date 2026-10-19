@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
 import Sheaf.AlgebraicGeometry.NodalPointEtaleLocality
 import Sheaf.AlgebraicGeometry.SmoothEtaleLocalSource
+import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFinitePresentationFppfSource
 
 /-!
 # Nodal families are étale local on the source

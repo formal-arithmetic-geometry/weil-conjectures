@@ -21,6 +21,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Completed constant sheaves and finite reduction

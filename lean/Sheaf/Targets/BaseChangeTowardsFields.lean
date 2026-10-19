@@ -22,6 +22,10 @@ import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.AlgebraicGeometry.UnboundedCumulativeUniversalBaseChangeProperty
 import Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField
 import Sheaf.AlgebraicGeometry.KunnethBaseChangeFailure
+import Sheaf.AlgebraicGeometry.AbelianDegreeZeroFlatBaseChange
+import Sheaf.AlgebraicGeometry.FieldExtensionExchange
+import Sheaf.AlgebraicGeometry.InvertibleOrdersColimit
+import Sheaf.AlgebraicGeometry.NormalGenericFibreVanishing
 
 /-!
 # Base change towards spectra of fields

@@ -44,6 +44,7 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.KrullDimension.Polynomial
+import Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry
 
 /-!
 # Blowing up a closed point on a regular surface

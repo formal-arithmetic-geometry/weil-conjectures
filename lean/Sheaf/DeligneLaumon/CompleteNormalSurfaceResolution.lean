@@ -33,6 +33,8 @@ import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.RingTheory.RegularLocalLocalization
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import Sheaf.AlgebraicGeometry.ExcellentNormalizedBlowupTower
+import Sheaf.DeligneLaumon.NormalSurfaceCoverCompletedDegree
 
 /-!
 # Resolution of complete normal local surfaces

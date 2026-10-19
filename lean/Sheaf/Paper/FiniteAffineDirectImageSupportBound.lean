@@ -23,6 +23,7 @@ import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The finite-coefficient affine direct-image support estimate

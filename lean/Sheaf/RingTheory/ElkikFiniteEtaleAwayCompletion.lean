@@ -21,6 +21,10 @@ import Sheaf.RingTheory.IntegralOverHenselianPair
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.HenselianPairProperClopenLift
+import Sheaf.RingTheory.CompletedEtaleJacobianTorsion
+import Sheaf.RingTheory.EtaleAwayCompletionHomLifting
+import Sheaf.RingTheory.RigEtaleJacobianAlgebraization
 
 /-!
 # Elkik equivalence for finite algebras étale away from an ideal

@@ -9,6 +9,8 @@ public import Sheaf.Paper.IsomorphismDerivedPullback
 public import Sheaf.Paper.SfWeilSheafComplex
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.Paper.SfConstructibleHeart
 
 /-! # Canonical Weil structure on constant coefficients
 

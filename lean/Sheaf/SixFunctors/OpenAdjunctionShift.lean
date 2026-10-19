@@ -13,6 +13,7 @@ import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Paper.CoefficientRingedSequenceSite
 
 /-! # Shift compatibility of the open adjunction on coefficient systems
 

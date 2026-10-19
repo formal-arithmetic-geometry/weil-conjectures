@@ -22,6 +22,7 @@ import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 
 /-!
 # Simultaneous Galois partitions for constructible module sheaves

@@ -14,6 +14,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import Sheaf.AlgebraicGeometry.ExcellentNormalSurfaceLocalData
+import Sheaf.AlgebraicGeometry.ExcellentNormalizedBlowupTower
+import Sheaf.AlgebraicGeometry.NormalizedBlowupCompletionDescent
+import Sheaf.AlgebraicGeometry.SurfaceResolutionNormalizedRefinement
+import Sheaf.DeligneLaumon.CompleteNormalSurfaceResolution
 
 /-!
 # Projective resolution of excellent integral surfaces

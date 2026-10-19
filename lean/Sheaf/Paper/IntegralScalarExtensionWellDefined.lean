@@ -27,6 +27,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Well-defined completed integral scalar extension
 

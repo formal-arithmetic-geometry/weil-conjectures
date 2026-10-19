@@ -16,6 +16,7 @@ import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import Sheaf.ConstructibleSheaf.GaloisCoverModuleDescent
+import Sheaf.ConstructibleSheaf.GaloisDescentMonodromyTensor
 
 /-! # Tensor comparison for arbitrary torsion local systems
 

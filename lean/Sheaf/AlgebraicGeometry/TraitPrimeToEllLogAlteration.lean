@@ -28,6 +28,13 @@ import Sheaf.AlgebraicGeometry.NormalScheme
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
 import Sheaf.RingTheory.CompleteLocalExcellent
+import Sheaf.AlgebraicGeometry.GabberLogSmoothEquivariantModification
+import Sheaf.AlgebraicGeometry.LogRegularProjectiveLogResolution
+import Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient
+import Sheaf.AlgebraicGeometry.TameTraitQuotientLogEtale
+import Sheaf.AlgebraicGeometry.TorsorSubgroupQuotientFiniteEtale
+import Sheaf.AlgebraicGeometry.TraitSemistableGaloisAlteration
+import Sheaf.DeligneLaumon.TraitLogSmoothUniformizerChart
 
 /-!
 # Prime-to-ell log-smooth alteration over a trait

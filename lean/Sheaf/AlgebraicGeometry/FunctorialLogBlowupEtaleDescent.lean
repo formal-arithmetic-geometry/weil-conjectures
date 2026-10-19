@@ -8,6 +8,9 @@ import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.CoherentLogIdealChartConstruction
 import Sheaf.CategoryTheory.SetSheafCoverDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Sheaf.AlgebraicGeometry.FineFanBlowup
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.LogFanChartBlowup
 
 /-!
 # Étale descent of finite functorial log blowup procedures

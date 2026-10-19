@@ -13,6 +13,13 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.AlterationCoverCalculus
+import Sheaf.AlgebraicGeometry.GenericFibreFinitenessCriterion
+import Sheaf.DeligneLaumon.DominantPartCoreflection
+import Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange
+import Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest
+import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Reduced flat base change of alteration objects, products and generators

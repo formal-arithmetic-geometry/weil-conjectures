@@ -35,6 +35,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 
 /-! # Cartesian coefficients and Tate twists
 

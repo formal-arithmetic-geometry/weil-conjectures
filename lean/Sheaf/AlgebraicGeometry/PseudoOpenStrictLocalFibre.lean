@@ -14,6 +14,7 @@ import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-! # Strict-local fibres of pseudo-open immersions
 

@@ -49,6 +49,7 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Finite clopen decomposition of derived coefficient categories
 

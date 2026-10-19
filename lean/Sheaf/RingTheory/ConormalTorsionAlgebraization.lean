@@ -18,6 +18,8 @@ import Mathlib.RingTheory.Henselian
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import WeilConjectures.RingTheory.BijectiveQuotientMapPowOfFlat
 import WeilConjectures.RingTheory.LiftIdempotentUpstairs
+import Sheaf.RingTheory.FormalGlueingFiniteAlgebras
+import Sheaf.RingTheory.PuncturedIdempotentComplement
 
 /-!
 # Algebraization of a completion quotient with torsion conormal

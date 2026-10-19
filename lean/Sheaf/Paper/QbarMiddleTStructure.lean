@@ -14,6 +14,10 @@ import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
 import Sheaf.Paper.PbcVerdierAxioms
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.DeligneLaumon.GenericDualityModel
+import Sheaf.Paper.AdicHeartIntrinsicFibres
+import Sheaf.Paper.QbarPerverseSupportCondition
+import Sheaf.SixFunctors.QbarDualRecollement
 
 /-! # The middle perverse t-structure on intrinsic common-stage coefficients
 

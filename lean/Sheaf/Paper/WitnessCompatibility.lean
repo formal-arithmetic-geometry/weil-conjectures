@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 import WeilConjectures.CategoryTheory.Sites.ReductionFlat
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 
 /-!
 # Compatibility of normalized towers with retained étale origins

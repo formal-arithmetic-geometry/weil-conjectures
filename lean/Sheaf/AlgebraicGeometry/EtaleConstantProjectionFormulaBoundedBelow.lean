@@ -34,6 +34,7 @@ import Sheaf.Algebra.Homology.IntegerFlatRepresentative
 import Sheaf.RingTheory.Flat.LazardPresentation
 import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
 # Tensoring derived global sections with a bounded-below constant integer complex
 

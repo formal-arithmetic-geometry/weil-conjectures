@@ -13,6 +13,8 @@ public import Sheaf.Paper.FiniteDiscreteCondensedRing
 public import Sheaf.Paper.FiniteDiscreteSchemeRing
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.AlgebraicGeometry.FrobeniusFactorization
+import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality
+import Sheaf.SixFunctors.SchemeFrobenius
 
 /-!
 # Coefficient naturality of the specified scheme--Galois comparison

@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.UniversallyCatenaryQuotient
 
 /-!
 # Universal catenarity checked on minimal-prime quotients

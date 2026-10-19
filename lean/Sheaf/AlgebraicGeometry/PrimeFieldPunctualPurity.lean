@@ -18,6 +18,11 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus
 import Sheaf.Paper.NoetherianPrimePowerSmoothDuality
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.AlgebraicGeometry.PunctualStrictCompletionTest
+import Sheaf.AlgebraicGeometry.RegularImmersionClassCalculus
+import Sheaf.RingTheory.PrimeFieldCompleteCoordinateModel
 
 /-!
 # Punctual purity over prime fields

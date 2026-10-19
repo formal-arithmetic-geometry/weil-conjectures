@@ -48,6 +48,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.IntegralTensorPullback
+import Sheaf.Paper.IntegralConstructibleHeart
+import Sheaf.Paper.IntegralModels
 
 /-!
 # The ordinary integral derived tensor product

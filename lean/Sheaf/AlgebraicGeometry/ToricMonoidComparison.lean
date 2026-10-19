@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Regular
 import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.Algebra.Module.SpanRankOperations
+import Sheaf.AlgebraicGeometry.FineFanBlowup
 
 /-!
 # Toric comparison of ideals, saturated blowups and smoothness

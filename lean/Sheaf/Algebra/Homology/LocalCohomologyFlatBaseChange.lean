@@ -5,6 +5,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
+import Sheaf.Algebra.Homology.IdealTorsionCechComputation
 
 /-! # Flat base change for derived ideal-torsion local cohomology
 

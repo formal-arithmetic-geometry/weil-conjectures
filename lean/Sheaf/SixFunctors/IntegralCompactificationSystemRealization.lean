@@ -40,6 +40,7 @@ import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.SixFunctors.GeneratorReductionStatement
 
 /-! # Coherent integral realization of compactification expressions
 

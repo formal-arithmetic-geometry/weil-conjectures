@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DirectImageSplitCoverProduct
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Mathlib.CategoryTheory.Sites.Sheafification
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite etale direct image of locally constant finite-type module sheaves

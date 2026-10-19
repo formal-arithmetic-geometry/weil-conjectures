@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
 
 /-!
 # Exceptional preservation for the all-continuous-map algebraic-closure coefficient

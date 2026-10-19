@@ -22,6 +22,7 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.Paper.PrimeFieldTensorDevissage
+import Sheaf.Paper.CtfHomCoefficientComparison
 
 /-!
 # Dualizing complexes under extension of coefficients

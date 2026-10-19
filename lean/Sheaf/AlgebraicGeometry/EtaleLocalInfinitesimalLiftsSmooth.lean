@@ -12,6 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import WeilConjectures.AlgebraicGeometry.FormallySmooth
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Étale-local infinitesimal lifts imply smoothness

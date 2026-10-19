@@ -10,6 +10,7 @@ public import Sheaf.Paper.CommonStageCompactWeilCohomology
 import Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.Paper.A1FiniteWeilSectionsDecomposition
 
 /-! # Weights of the cohomology of a finite boundary
 

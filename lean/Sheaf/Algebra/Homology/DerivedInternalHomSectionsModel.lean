@@ -17,6 +17,11 @@ import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 /-! # K-injective models for internal Hom and its derived global sections
 
 Source: Stacks Project, sites-cohomology.tex, Section 08J7 (section-internal-hom),

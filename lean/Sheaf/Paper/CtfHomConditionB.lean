@@ -18,6 +18,10 @@ import Sheaf.Paper.CohomologyInWeakSerreSubcategory
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.AlgebraicGeometry.GaloisPartitionExactRefinement
+import Sheaf.AlgebraicGeometry.NoetherianCtfFlatModel
+import Sheaf.Paper.CtfHomLocalizationDevissage
+import Sheaf.Paper.DualizingLocallyClosedInheritance
 
 /-!
 # Uniform internal Hom bounds for a fixed Galois partition

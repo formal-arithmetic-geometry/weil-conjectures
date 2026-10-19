@@ -28,6 +28,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleLeftComplete
 import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 import Sheaf.CategoryTheory.CompactObjectsThick
+import Sheaf.Paper.IntegralConstructibleHeart
 
 /-!
 # Integral constructible complexes are compact

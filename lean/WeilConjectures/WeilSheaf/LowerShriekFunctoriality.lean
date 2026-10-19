@@ -73,6 +73,8 @@ import Sheaf.SixFunctors.CoefQbarVerdier
 import Sheaf.SixFunctors.IntegralVerdier
 import Sheaf.SixFunctors.RationalOperations
 import Sheaf.SixFunctors.RationalVerdier
+import Sheaf.Paper.PurAdicReconstruction
+import Sheaf.Paper.RationalSmoothPurityCanonical
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes

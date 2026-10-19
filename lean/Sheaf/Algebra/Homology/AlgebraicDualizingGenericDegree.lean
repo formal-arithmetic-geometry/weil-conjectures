@@ -21,6 +21,7 @@ import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.Algebra.Homology.PseudoCoherentRHomFlatBaseChange
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
 /-! # The generic degree of a normalized algebraic dualizing complex
 

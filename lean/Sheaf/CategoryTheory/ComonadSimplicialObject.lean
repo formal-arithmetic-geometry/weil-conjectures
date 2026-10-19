@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Sheaf.CategoryTheory.NaturalTransportInduction
+import Sheaf.CategoryTheory.SimplicialOperatorsReconstruction
 
 /-! # The augmented simplicial object of a comonad
 

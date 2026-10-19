@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction
 import Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # The atlas equalizer for a module direct image on an algebraic space

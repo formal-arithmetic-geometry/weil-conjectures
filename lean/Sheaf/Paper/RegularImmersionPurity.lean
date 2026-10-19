@@ -21,6 +21,7 @@ public import Sheaf.Paper.RegularImmersionClassData
 public import Sheaf.Paper.RegularImmersionExteriorClass
 public import Sheaf.Paper.RegularImmersionSignedEvaluation
 public import Sheaf.Paper.RegularImmersionCancellation
+import Sheaf.Paper.PurityFiniteSetting
 /-!
 # Purity for regular closed immersions
 

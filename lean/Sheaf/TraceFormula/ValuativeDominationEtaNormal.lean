@@ -27,6 +27,7 @@ import Mathlib.RingTheory.FinitePresentation
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.BirationalQuasiModificationCommonCover
 import Sheaf.TraceFormula.BaseModificationComparisonFibreImage
+import Sheaf.AlgebraicGeometry.BirationalRiemannZariskiNeighbourhoods
 
 /-! # Valuative domination for eta-normal schemes
 

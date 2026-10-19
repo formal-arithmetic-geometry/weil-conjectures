@@ -27,6 +27,7 @@ import Mathlib.RingTheory.Jacobson.Ring
 import Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange
 import Sheaf.TraceFormula.FiniteResiduePointClosedInFibre
 import Sheaf.TraceFormula.LciPointwiseCriterion
+import Sheaf.TraceFormula.SyntomicLocusBaseChange
 
 /-! # The nodal open locus in a flat family
 

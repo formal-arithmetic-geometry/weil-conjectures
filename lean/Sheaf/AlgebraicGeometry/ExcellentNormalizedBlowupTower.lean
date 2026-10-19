@@ -27,6 +27,8 @@ import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
 import Sheaf.TraceFormula.ProjectiveBundleProper
 import WeilConjectures.Blowup.Complement
+import Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry
+import Sheaf.AlgebraicGeometry.ProjectiveBundleComposition
 
 /-!
 # Geometry of finite normalized point-blowup towers

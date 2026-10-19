@@ -27,6 +27,7 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.FieldTheory.SylowSimultaneousFieldSections
 
 /-!
 # Proper normal form for alteration covers

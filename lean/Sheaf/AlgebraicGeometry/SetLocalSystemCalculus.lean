@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Calculus of set local systems
 

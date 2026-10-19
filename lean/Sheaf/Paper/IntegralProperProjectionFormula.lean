@@ -26,6 +26,7 @@ import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.ModuleRingedToposDerivedComparison
 import Sheaf.Paper.UnboundedLocalizingPullback
 import Sheaf.SixFunctors.ProperImageLocalizingProper
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # The integral proper projection formula

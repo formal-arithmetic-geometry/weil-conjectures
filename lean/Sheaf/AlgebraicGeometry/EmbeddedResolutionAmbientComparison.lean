@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LabeledEmbeddedResolution
 import WeilConjectures.Blowup.FlatBaseChange
 import WeilConjectures.Compactification.StrictTransformBlowup
+import Sheaf.AlgebraicGeometry.ResolutionInvariantCalculus
 
 /-!
 # Synchronized embedded resolution independent of the ambient scheme

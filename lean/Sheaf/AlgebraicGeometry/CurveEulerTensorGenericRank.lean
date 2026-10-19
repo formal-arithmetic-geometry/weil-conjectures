@@ -28,6 +28,7 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
 import Sheaf.AlgebraicGeometry.CoherentPropertyDevissage
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Euler characteristic of an invertible twist on an integral proper curve
 

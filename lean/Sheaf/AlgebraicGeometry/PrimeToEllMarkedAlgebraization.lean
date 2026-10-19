@@ -39,6 +39,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Sheaf.RingTheory.EquivariantMarkedCylinderAlgebraization
 
 /-!
 # Partial algebraization with a marking and prime-to-ell degree

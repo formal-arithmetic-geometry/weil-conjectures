@@ -30,6 +30,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Open and closed formulas for internal derived Hom

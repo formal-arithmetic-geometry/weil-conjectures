@@ -23,6 +23,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import Sheaf.Paper.ConstantCoefficientScalarNormalization
 import Sheaf.Paper.InverseImagePullbackComparisonDerived
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Canonical coefficient pullback and its finite quotient projections

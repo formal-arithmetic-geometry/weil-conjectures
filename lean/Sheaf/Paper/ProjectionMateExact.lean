@@ -33,6 +33,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Paper.DerivedAdjunctionShift
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Exact projection mates for ringed topoi

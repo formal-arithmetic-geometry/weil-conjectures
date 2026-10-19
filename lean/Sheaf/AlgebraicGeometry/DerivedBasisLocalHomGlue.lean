@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import Sheaf.AlgebraicGeometry.ExistsContinuousMapOfOpenSubcollection
+import Sheaf.TraceFormula.DerivedBasisLocalExtSheaf
 
 /-! # Negative Hom vanishing and unique gluing on an intersection-refining open cover
 

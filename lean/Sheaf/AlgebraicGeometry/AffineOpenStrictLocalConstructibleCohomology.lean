@@ -43,6 +43,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 import WeilConjectures.RingTheory.QuasiFiniteAtPrime
+import Sheaf.AlgebraicGeometry.AffineOpenStrictLocalConstantBound
 
 /-!
 # Constructible sheaf cohomology on affine opens of an excellent strictly local scheme

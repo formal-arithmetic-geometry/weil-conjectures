@@ -26,6 +26,7 @@ import WeilConjectures.Blowup.Gluing
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Compactification.FiniteTypeExtension
 import WeilConjectures.Compactification.StrictTransform
+import Sheaf.AlgebraicGeometry.StrictTransformFlatBaseChange
 
 /-! # Semistable separation of a marking over a valuation ring
 

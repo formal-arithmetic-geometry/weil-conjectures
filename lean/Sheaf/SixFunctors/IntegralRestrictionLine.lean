@@ -23,6 +23,15 @@ import Sheaf.Paper.IntegralExtensionByZero
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.ProEtale.CondensedRing.BoundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctionAlias
+import Sheaf.Paper.DiagonalTowerLimit
+import Sheaf.Paper.FormalClosedSupportSheaves
+import Sheaf.Paper.ProjectionSectionNormalization
+import Sheaf.Paper.TraceBaseChangeFirst
+import Sheaf.Paper.TraceBaseChangeSecond
+import Sheaf.SixFunctors.IntegralLocalizingCompactSupport
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Integral purity for the projective line and affine space

@@ -17,6 +17,7 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.Topology.Spectral.Basic
 import Mathlib.Topology.Spectral.ConstructibleTopology
+import Sheaf.AlgebraicGeometry.RationalLiftLocallyClosedSection
 
 /-!
 # Finite completely decomposed étale subfamilies

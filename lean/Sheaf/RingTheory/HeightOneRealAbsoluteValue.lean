@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.Data.NNReal.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+import Sheaf.TraceFormula.ValuationPrimeConvexCorrespondence
 
 /-!
 # A real absolute value for a height-one valuation ring

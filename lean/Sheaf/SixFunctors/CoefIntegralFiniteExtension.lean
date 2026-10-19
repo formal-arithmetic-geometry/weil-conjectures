@@ -40,6 +40,7 @@ import Sheaf.SixFunctors.IntegralDualizing
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Paper.FiniteCoefficientHomChange
 import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.Paper.FiniteFreeCoefficientExtension
 
 /-! # Integral duality under finite coefficient extension
 

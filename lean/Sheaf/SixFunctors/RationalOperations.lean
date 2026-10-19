@@ -58,6 +58,8 @@ import Sheaf.SixFunctors.IntegralVerdier
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import Sheaf.SixFunctors.CoefDualFormulaScalarTranspose
 import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.FiniteFreeCoefficientExtension
 
 /-! # Identification of rational internal Hom and exceptional inverse image
 

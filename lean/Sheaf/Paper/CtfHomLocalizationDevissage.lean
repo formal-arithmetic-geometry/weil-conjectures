@@ -17,6 +17,9 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.EtaleInternalHomLocalization
+import Sheaf.AlgebraicGeometry.GaloisPartitionExactRefinement
+import Sheaf.Paper.GaloisLocalizationUniformBounds
 
 /-!
 # Closed/open dévissage for the finite-Tor internal-Hom condition

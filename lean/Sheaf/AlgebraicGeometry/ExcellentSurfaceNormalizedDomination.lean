@@ -17,6 +17,9 @@ import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.AlgebraicGeometry.ExcellentNormalizedBlowupTower
 import Sheaf.TraceFormula.ProjectiveBundleProper
 import WeilConjectures.Blowup.Principalization
+import Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry
+import Sheaf.AlgebraicGeometry.NormalSurfaceExceptionalCurves
+import Sheaf.AlgebraicGeometry.NormalizedSurfaceGraphExceptionalInjection
 
 /-!
 # Domination by normalized point blowups of an excellent surface

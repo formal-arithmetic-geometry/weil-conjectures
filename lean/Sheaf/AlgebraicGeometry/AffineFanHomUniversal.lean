@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q64
 -/
 import Sheaf.AlgebraicGeometry.FineFanBlowup
+import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
 
 /-!
 # The universal property of a sharp affine monoid spectrum

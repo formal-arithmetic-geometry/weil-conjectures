@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.RingTheory.KoszulConormalBasis
 import Sheaf.RingTheory.KoszulDerivedQuotient
+import Sheaf.RingTheory.CotangentFlatBaseChange
 
 /-!
 # The cotangent complex of a Koszul-regular quotient

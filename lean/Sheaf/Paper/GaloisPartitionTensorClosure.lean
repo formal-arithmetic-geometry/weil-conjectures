@@ -20,6 +20,8 @@ import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Sheaf.AlgebraicGeometry.LocalSystemTensorMonodromy
+import Sheaf.AlgebraicGeometry.TorsionLocalSystemMonodromy
 
 /-!
 # Tensor closure for a fixed Galois partition

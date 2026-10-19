@@ -23,6 +23,7 @@ import Sheaf.CategoryTheory.DerivedModuleRankOneCompact
 import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 
 /-!
 # Compactness of a lisse sheaf extended from a locally closed stratum

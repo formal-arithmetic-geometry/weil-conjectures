@@ -14,6 +14,7 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 /-!
 # Bounded above acyclic complexes compute a left derived functor

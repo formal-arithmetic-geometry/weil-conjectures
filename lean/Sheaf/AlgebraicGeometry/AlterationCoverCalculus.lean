@@ -13,6 +13,11 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.GenericFibreFinitenessCriterion
+import Sheaf.AlgebraicGeometry.PrimeToEllDecomposedEtaleFiniteSubcover
+import Sheaf.CategoryTheory.Sites.GrothendieckTopos
+import Sheaf.DeligneLaumon.DominantPartCoreflection
+import Sheaf.DeligneLaumon.PrimeToEllResidueBaseChange
 
 /-!
 # Cover calculus for prime-to-ell alterations

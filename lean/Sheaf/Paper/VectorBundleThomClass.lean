@@ -14,6 +14,11 @@ import Sheaf.Paper.SfOpenClosedTriangleAllStages
 import Sheaf.Paper.FiniteDirectImageComposition
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry
+import Sheaf.Paper.KummerAdditivity
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.SupportedCup
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # Thom classes of vector bundles

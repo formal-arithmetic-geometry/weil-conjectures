@@ -26,6 +26,8 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.TorsionLocalSystemMonodromy
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 
 /-!
 # Exactness and directed common refinements of Galois partitions

@@ -9,6 +9,9 @@ import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.RingTheory.ProjectiveOverLocalFree
 import Sheaf.RingTheory.RingPseudoCoherent
+import Sheaf.Algebra.Homology.PseudoCoherentTensorClosure
+import Sheaf.Algebra.Homology.TopDegreeTensor
+import Sheaf.RingTheory.LocalFiniteTensorNontrivial
 
 /-!
 # Tensor nonvanishing over a local ring

@@ -40,6 +40,7 @@ import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
 import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Operations on bounded constructible integral coefficient complexes

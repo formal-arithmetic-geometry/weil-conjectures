@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.LocalCohomologicalDimension
 public import Sheaf.Algebra.Homology.IdealPowerTorsionFunctor
 public import Mathlib.RingTheory.Ideal.Operations
+import Sheaf.Algebra.Homology.IdealTorsionCechComputation
+import Sheaf.Algebra.Homology.LocalCohomologySumSpectral
 
 /-!
 # Local cohomological dimension: generator and proper-sum bounds

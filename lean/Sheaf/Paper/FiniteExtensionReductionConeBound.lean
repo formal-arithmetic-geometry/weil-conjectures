@@ -18,6 +18,7 @@ import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Paper.SfCommonStageWeilCohomology
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Uniformizer cone comparison and uniform reduction bound

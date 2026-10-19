@@ -13,6 +13,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
+import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedSupportAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
+import Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.ComparisonPullbackExact
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-!
 # Finite duality: comparison for a closed immersion

@@ -10,6 +10,32 @@ public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SecSmoothPurity.DirectImageScalarExchange
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import Sheaf.SecSmoothPurity.OpenScalarExchange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-! # Ordinary-etale coefficient comparison for compact support
 

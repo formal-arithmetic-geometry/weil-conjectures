@@ -12,6 +12,8 @@ public import Mathlib.RingTheory.Valuation.ValuationSubring
 import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.TraceFormula.SemistableModificationFibreContractions
+import Sheaf.AlgebraicGeometry.SepClosedValuationGeometricComponents
+import Sheaf.AlgebraicGeometry.ValuationStableBlowdownUniqueness
 
 /-! # Inclusion of contracted fibre components in a common semistable model
 

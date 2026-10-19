@@ -16,6 +16,9 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.AlgebraicGeometry.FiniteOverProjective
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
+import Sheaf.AlgebraicGeometry.GabberEquivariantLogModification
+import Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient
+import Sheaf.AlgebraicGeometry.VeryTameQuotientLogRegular
 
 /-!
 # A log regular modification of a tame quotient

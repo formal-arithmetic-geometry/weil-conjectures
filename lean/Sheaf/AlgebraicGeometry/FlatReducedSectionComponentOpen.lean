@@ -13,6 +13,7 @@ public import Mathlib.Topology.Connected.Basic
 import Mathlib.Topology.Constructible
 import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
 import Sheaf.AlgebraicGeometry.SectionComponentLocallyConstructible
+import Sheaf.AlgebraicGeometry.FlatReducedSectionComponentGeneralization
 
 /-!
 # Openness of the section component in a flat family with geometrically reduced fibres

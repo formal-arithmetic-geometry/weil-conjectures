@@ -8,6 +8,9 @@ public import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 import Sheaf.GroupTheory.DivisibleUnitLatticeExtension
+import Sheaf.AlgebraicGeometry.KatoLatticeChartRealization
+import Sheaf.AlgebraicGeometry.LogSmoothDifferentialGenerators
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Uniformizer charts for log smooth schemes over a trait

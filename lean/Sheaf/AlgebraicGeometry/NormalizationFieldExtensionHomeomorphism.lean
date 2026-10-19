@@ -20,6 +20,9 @@ import Mathlib.RingTheory.Flat.Basic
 import Mathlib.FieldTheory.SeparablyGenerated
 import Mathlib.FieldTheory.FinTrdeg
 import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.RingTheory.ReducedTotalFractionsFieldExtension
+import WeilConjectures.FieldTheory.SeparableExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Normalization after arbitrary extension of the ground field

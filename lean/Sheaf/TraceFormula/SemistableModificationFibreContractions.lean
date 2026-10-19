@@ -21,6 +21,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.TraceFormula.NodalSubcurveBoundary
 import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
 import Sheaf.TraceFormula.ValuationExceptionalLocalCriterion
+import Sheaf.AlgebraicGeometry.FiniteBirationalNodalConnectedIso
+import Sheaf.AlgebraicGeometry.ProperNormalGeometricConnectedness
 
 /-! # Elementary contraction sequences on geometric fibres of semistable modifications
 

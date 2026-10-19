@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+import Sheaf.AlgebraicGeometry.DimensionFunctionsStrictLocalization
+import Sheaf.AlgebraicGeometry.LocalDimensionFunctionCalculus
+import Sheaf.AlgebraicGeometry.RegularStrictLocalModel
+import Sheaf.AlgebraicGeometry.StrictLocalRegularIntegralFibres
 
 /-!
 # Regular pullback of dimension functions

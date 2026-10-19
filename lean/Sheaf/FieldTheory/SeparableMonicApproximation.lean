@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Order.AbsoluteValue.Basic
 public import Mathlib.Data.Real.Basic
 public import Mathlib.FieldTheory.Separable
+import Sheaf.FieldTheory.PolynomialConstantShiftsFiniteExceptions
 
 /-!
 # Approximation by monic separable polynomials

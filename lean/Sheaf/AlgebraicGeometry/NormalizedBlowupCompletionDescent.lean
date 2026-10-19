@@ -20,6 +20,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.AlgebraicGeometry.NormalizationCompletionBaseChange
 
 /-!
 # Descent of normalized point blowups from completion

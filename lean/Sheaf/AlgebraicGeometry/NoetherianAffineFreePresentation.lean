@@ -30,6 +30,7 @@ import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardFiniteType
 
 /-!
 # Affine free presentations for constructible modules

@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
 import Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.AlgebraicSpacePushforwardAtlasEqualizer
+import Sheaf.AlgebraicGeometry.SmallEtaleQuasiCoherentKernel
 
 /-!
 # Quasi-coherence of algebraic-space direct images

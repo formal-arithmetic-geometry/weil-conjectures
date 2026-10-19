@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Topology.JacobsonSpace
 import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Sheaf.AlgebraicGeometry.EtaleCompletedLocalRingIso
 
 /-! # Étale locality of nodal completed local algebras
 

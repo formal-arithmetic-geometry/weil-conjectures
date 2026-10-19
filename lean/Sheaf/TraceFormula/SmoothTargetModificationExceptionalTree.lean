@@ -27,6 +27,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.NodalContractionEulerDefect
+import Sheaf.AlgebraicGeometry.ProperNormalGeometricConnectedness
+import Sheaf.TraceFormula.ValuationModificationProperCompletion
 
 /-! # Exceptional fibres of modifications over smooth points
 

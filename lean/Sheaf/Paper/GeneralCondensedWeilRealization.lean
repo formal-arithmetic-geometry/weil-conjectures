@@ -38,6 +38,7 @@ import WeilConjectures.Compactification.BaseChange
 import WeilConjectures.Compactification.Dense
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+import Sheaf.Paper.CompactSupportCondensedRealization
 
 /-! # Condensed realization of finite-stage Weil complexes
 

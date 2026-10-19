@@ -31,6 +31,11 @@ import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import Sheaf.AlgebraicGeometry.BirationalBadLocusComparison
+import Sheaf.AlgebraicGeometry.ConstructibleFiniteOpenConstantGeneration
+import Sheaf.AlgebraicGeometry.PrimeToEllUniformizationStandardForm
+import Sheaf.AlgebraicGeometry.RegularNormalCrossingsConstantImage
+import Sheaf.CategoryTheory.ThickVerdierQuotientKernel
 
 /-!
 # Gabber finiteness for an open immersion

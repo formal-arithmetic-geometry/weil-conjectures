@@ -13,6 +13,14 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.CategoryTheory.Endomorphism
 public import Sheaf.RingTheory.ExcellentRing
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
+import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.TraceFormula.LogRegularDivisorialStructure
+import Sheaf.TraceFormula.ProjectiveBundleProper
+import WeilConjectures.AlgebraicGeometry.Ample
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 
 /-!
 # Gabber equivariant very-tame modification

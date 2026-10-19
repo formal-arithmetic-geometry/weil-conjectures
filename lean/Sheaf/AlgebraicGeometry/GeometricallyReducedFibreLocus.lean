@@ -23,6 +23,7 @@ import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.NoetherianConstructibleSubsetCriterion
 import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
+import Sheaf.AlgebraicGeometry.GenericConstancyGeometricReducedness
 
 /-!
 # The geometrically reduced fibre locus of a finitely presented algebra

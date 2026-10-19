@@ -23,6 +23,7 @@ import Sheaf.Paper.PointFdQbarCategory
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.WeilSheaf.Finiteness
 import WeilConjectures.ZetaFunction.CohomologicalFamily
+import Sheaf.Paper.FiniteCoefficientPoint
 
 /-! # Scalar extension of ordinary cohomology to Qlbar
 

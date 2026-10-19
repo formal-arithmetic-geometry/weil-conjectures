@@ -60,6 +60,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.IntegralProperBaseChange
 import Sheaf.SixFunctors.IntegralModelsGenerators
+import Sheaf.SixFunctors.ScalarSixPullback
 
 /-!
 # Proper direct image with rational condensed coefficients

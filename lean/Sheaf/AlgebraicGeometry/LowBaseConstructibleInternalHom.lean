@@ -29,6 +29,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.LowBaseOpenSheafFiniteness
 
 /-!
 # Constructible internal Hom over a regular base of dimension at most one

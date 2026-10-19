@@ -10,6 +10,7 @@ public import Sheaf.Paper.SystemTensorMateArrows
 import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.SixFunctors.OpenTensorNormalization
+import Sheaf.SixFunctors.ProperOpenProjectionMate
 
 /-!
 # Proper/open tensor-mate interchange on varying coefficient systems

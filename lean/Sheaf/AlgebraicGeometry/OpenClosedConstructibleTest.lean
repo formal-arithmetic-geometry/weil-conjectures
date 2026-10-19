@@ -30,6 +30,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.GabberOpenImmersionSheafFiniteness
 
 /-!
 # Bounded constructibility detected by open and exceptional closed restriction

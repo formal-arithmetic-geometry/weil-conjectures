@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.AlgebraicNormalizedDualizing
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
 /-! # Normalizing an algebraic dualizing complex over a local ring
 

@@ -22,6 +22,8 @@ import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.FinitePresentation
+import Sheaf.AlgebraicGeometry.FiniteEtaleGenericComponentSplitting
+import Sheaf.AlgebraicGeometry.NodalClosedPointsReduced
 
 /-! # Enumerating contracted components after finite étale base change
 

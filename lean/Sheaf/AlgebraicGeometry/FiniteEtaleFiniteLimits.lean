@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescent
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Finite limits and colimits of finite étale covers

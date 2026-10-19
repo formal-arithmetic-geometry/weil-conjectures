@@ -13,6 +13,10 @@ import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.RingTheory.Localization.LocalizationLocalization
+import Sheaf.RingTheory.IntegralSupportSaturation
+import Sheaf.RingTheory.MonoidAlgebraDomainFraction
+import Sheaf.RingTheory.MonomialIntegrality
+import Sheaf.RingTheory.SaturatedMonoidAlgebraNormal
 
 /-!
 # Normalization of an affine torsion-free monoid algebra

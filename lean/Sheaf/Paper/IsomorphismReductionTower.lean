@@ -11,6 +11,16 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.PurInverseImageTensorHom
 
 /-! # Isomorphism inverse image of completed coefficient reduction towers
 

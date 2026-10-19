@@ -10,6 +10,7 @@ import Sheaf.Paper.CommonStageCompactWeilCohomology
 import Sheaf.Paper.ConstantWeilStructure
 import Sheaf.Paper.PointProEtaleSectionsExact
 import Sheaf.SixFunctors.FrobeniusCohomologyTransport
+import Sheaf.Paper.GlobalGeometricFrobenius
 
 /-!
 # Cohomology and conjugate geometric Frobenius automorphisms

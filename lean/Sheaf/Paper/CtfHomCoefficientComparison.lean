@@ -17,6 +17,9 @@ public import Mathlib.Data.ZMod.Basic
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.AlgebraicGeometry.NoetherianCtfFlatModel
+import Sheaf.Paper.CtfHomConditionB
+import Sheaf.Paper.HomUniversalCoefficients
 
 /-!
 # Finite-Tor constructible internal Hom and change of coefficients

@@ -25,6 +25,7 @@ public import Sheaf.Paper.CompletedConstantSheafReduction
 import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
 /-!
 # Perfect projection formula for completed coefficient reductions

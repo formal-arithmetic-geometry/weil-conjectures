@@ -31,6 +31,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Sheaf.AlgebraicGeometry.EtaleSupportedSections
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.TraitSheafGluing
+import Sheaf.FieldTheory.CanonicalTraitTameCharacter
 
 /-!
 # The canonical residue model on a strictly henselian trait

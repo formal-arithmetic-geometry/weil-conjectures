@@ -42,6 +42,7 @@ import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finite-level bounded constructibility for proper support

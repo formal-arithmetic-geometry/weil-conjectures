@@ -36,6 +36,8 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+import Sheaf.Paper.ConstructibleRHomCoproductContinuity
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Universal coefficients for constructible derived internal Hom

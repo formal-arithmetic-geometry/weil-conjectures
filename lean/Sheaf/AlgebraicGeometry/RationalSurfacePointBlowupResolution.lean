@@ -25,6 +25,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.AlgebraicGeometry.ExcellentNormalSurfaceLocalData
 import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.LocalOrdinaryPointBlowupsGlobalize
 
 /-!
 # Resolution of rational surface singularities by ordinary point blowups

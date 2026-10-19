@@ -15,6 +15,8 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
+import Sheaf.CategoryTheory.Sites.InverseImageFreeModule
+import Sheaf.CategoryTheory.Sites.SheafifiedDifferentialsCokernel
 
 /-!
 # Inverse image of sheaf differentials

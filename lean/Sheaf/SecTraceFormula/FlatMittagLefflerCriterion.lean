@@ -9,6 +9,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.RingTheory.IsMittagLeffler
 import Sheaf.RingTheory.Flat.LazardPresentation
+import Sheaf.RingTheory.FlatMLDualCriterion
+import Sheaf.RingTheory.FlatMittagLefflerMinimalSupport
 
 /-!
 # Flat Mittag-Leffler criterion

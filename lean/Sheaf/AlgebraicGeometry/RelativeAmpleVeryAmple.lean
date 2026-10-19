@@ -19,6 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AmpleTwistGlobalGeneration
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.CanonicalSymmetricGradedAlgebra
+import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Finite-type relative ampleness and common very ample powers

@@ -22,6 +22,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import WeilConjectures.ConstructibleSheaf.MonoidalParts
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tensor with a flat constructible etale sheaf

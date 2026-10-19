@@ -5,6 +5,10 @@ Authors: SHEAF group Q69
 -/
 
 import Sheaf.AlgebraicGeometry.FineFanBlowup
+import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
+import Sheaf.AlgebraicGeometry.SmoothFunctorialNormalizedToricDesingularization
+import Sheaf.AlgebraicGeometry.ToricMonoidComparison
+import Sheaf.TraceFormula.SharpeningFanBijection
 
 /-!
 # Existence of smooth-functorial saturated fan desingularization

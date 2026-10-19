@@ -11,6 +11,7 @@ public import Sheaf.RingTheory.TorKernelBoundaryConstruction
 public import Mathlib.Algebra.MonoidAlgebra.Basic
 import Sheaf.RingTheory.TorIdealKernelNaturality
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 
 /-!
 # First Tor under face localization and a change of sharp chart

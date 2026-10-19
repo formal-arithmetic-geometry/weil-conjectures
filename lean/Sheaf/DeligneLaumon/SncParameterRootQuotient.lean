@@ -35,6 +35,7 @@ import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
+import Sheaf.AlgebraicGeometry.SncRootPuncturedTorsorSplitting
 
 /-!
 # Etale-local parameter-root quotients of invertible-order torsors

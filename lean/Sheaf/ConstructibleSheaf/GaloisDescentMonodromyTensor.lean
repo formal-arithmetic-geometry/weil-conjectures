@@ -15,6 +15,15 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits
 import Sheaf.CategoryTheory.SetSheafCoverDescent
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegree
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Monodromy and tensor products of descended modules
 

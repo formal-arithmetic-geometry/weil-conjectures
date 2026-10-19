@@ -21,6 +21,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.FlatAlgebraEtaleProjectiveNeighborhood
+import Sheaf.RingTheory.WeaklyAssociatedEtale
+import Sheaf.SecTraceFormula.NilLocalProjectiveInjectionPure
 
 /-!
 # Weak association after flat finitely presented base change

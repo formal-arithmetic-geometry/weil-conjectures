@@ -14,6 +14,14 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
+import Sheaf.RingTheory.RegularSequenceConormal
+import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import WeilConjectures.Blowup.Affine.ChartAlgebra
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Conormal and blowup geometry of a regular flag

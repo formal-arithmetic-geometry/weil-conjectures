@@ -19,6 +19,9 @@ public import Mathlib.Data.Complex.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.SmoothRelativeDifferentialsFiniteLocallyFree
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+import Sheaf.RepresentationTheory.LocalCyclotomicGroupAlgebraSplit
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
 
 /-! # Equivariant étale coordinates for a tame smooth morphism
 

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 import Sheaf.AlgebraicGeometry.FineFanBlowup
 import Mathlib.Algebra.MonoidAlgebra.MapDomain
 import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import Sheaf.RingTheory.IntegralSupportSaturation
 
 /-!
 # Integral closedness of saturated monoid algebras

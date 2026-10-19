@@ -30,6 +30,7 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.Paper.IntegralOperationsPreserveConstructible
 import Sheaf.SixFunctors.SchemeFrobenius
+import Sheaf.SixFunctors.SchemeGaloisCoefficientChange
 /-!
 # Frobenius pullback and coefficient reduction coherence
 

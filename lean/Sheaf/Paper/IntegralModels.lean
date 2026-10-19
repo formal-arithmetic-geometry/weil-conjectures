@@ -27,6 +27,7 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
 import Sheaf.Paper.IntegralModelsOperations
 import Sheaf.Paper.CartesianCoefficients
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
 
 /-! # Integral models for constructible l-adic complexes
 

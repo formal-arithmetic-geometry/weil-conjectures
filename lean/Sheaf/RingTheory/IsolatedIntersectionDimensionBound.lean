@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Topology.KrullDimension
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.Algebra.Homology.LocalCohomologicalDimensionChangeRings
+import Sheaf.Algebra.Homology.TopLocalCohomologyNonvanishing
 
 /-! # Dimension bounds for isolated intersections
 

@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.Completeness
+import Sheaf.FieldTheory.DenseHenselianEtaleComparison
 
 /-!
 # Henselian completion rigidity on the open complement

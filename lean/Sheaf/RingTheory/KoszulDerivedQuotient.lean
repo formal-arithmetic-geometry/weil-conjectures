@@ -14,6 +14,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.RingTheory.KoszulBaseChangeIso
+import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-!
 # A Koszul-regular quotient as a derived polynomial base change

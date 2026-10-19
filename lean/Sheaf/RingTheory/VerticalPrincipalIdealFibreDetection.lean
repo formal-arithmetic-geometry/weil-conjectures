@@ -14,6 +14,7 @@ import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+import Sheaf.RingTheory.WeaklyAssociatedTensorFlatFinitePresentation
 
 /-!
 # Fibre-generic detection of vertical principal ideals

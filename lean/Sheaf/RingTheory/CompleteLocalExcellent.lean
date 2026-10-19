@@ -17,6 +17,8 @@ import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.CompleteLocalDomainRegularOpen
+import Sheaf.RingTheory.JTwoFiniteAlgebraCriterion
 
 /-!
 # Complete Noetherian local rings are excellent

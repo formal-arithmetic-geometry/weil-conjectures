@@ -21,6 +21,7 @@ import Sheaf.SixFunctors.FrobeniusCohomologyTransportIso
 import Mathlib.FieldTheory.Finite.GaloisField
 public import Sheaf.Paper.ProperSectionsSemilinearGerms
 public import Mathlib.Algebra.DirectSum.Module
+import Sheaf.SixFunctors.FrobeniusCohomologyTransport
 
 /-! # Evaluation of finite Weil sections and Frobenius return
 

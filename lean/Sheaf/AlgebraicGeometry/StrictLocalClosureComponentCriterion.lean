@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselizationStructuralFlat
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.RingTheory.Ideal.GoingDown
 import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.StrictLocalizationDiscreteFibres
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Reduced local closure and strict-local components

@@ -14,6 +14,8 @@ import Sheaf.TraceFormula.LciPointwiseCriterion
 import Sheaf.TraceFormula.LciFieldChangeLocal
 import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 import Mathlib.RingTheory.Extension.Presentation.Basic
+import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.TraceFormula.SyntomicPointwiseLocalModel
 
 /-!
 # The fibrewise complete-intersection locus

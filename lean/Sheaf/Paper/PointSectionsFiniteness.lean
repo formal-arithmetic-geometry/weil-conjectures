@@ -49,6 +49,7 @@ import Sheaf.RingTheory.DerivedCompleteModuleFinite
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finiteness of sections over the algebraically closed coefficient point

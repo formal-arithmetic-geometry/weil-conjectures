@@ -14,6 +14,25 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.Galois.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
+import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
+import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
+import Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
+import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift
+import Sheaf.AlgebraicGeometry.ProjectiveBundleComposition
+import Sheaf.AlgebraicGeometry.ProjectiveGenericallyFinite
+import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataDomainN2
+import Sheaf.RingTheory.QuasiExcellentNagata
+import Sheaf.TraceFormula.ProjectiveBundleProper
+import WeilConjectures.AlgebraicGeometry.ChowLemma
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
+import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.FieldTheory.FiniteGaloisReceivingSeparableExtensions
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # A normal projective Galois envelope of a separable alteration

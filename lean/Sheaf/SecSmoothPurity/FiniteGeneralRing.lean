@@ -32,6 +32,7 @@ import Sheaf.Paper.CohomologicalSmoothnessTheorem
 import Sheaf.Paper.FiniteComparisonLocalizing
 import Sheaf.Paper.PurityDncFamilyIntrinsic
 import Sheaf.Paper.PurityDncInvariance
+import Sheaf.SecSmoothPurity.PurityDncCoefficientTransport
 
 /-! # Smooth purity over an arbitrary finite coefficient ring
 

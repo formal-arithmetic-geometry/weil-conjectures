@@ -29,6 +29,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import Mathlib.CategoryTheory.Sites.CoverLifting
+import Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits
 
 /-! # Arbitrary-coefficient module descent along a finite Galois cover
 

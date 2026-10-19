@@ -43,6 +43,7 @@ import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
 import Sheaf.AlgebraicGeometry.GenericPointGeometricIrreducibility
+import Sheaf.DeligneLaumon.HProjectivePermanence
 
 /-!
 # Normal projective compactification over a complete trait

@@ -10,6 +10,7 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import Mathlib.Algebra.Group.Torsion
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.TraceFormula.RationalConeDualFinite
+import Sheaf.RingTheory.IntegralSupportWeightedInitialDegree
 
 /-!
 # Support of an integral group-algebra element

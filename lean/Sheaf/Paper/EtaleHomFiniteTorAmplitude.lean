@@ -53,6 +53,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.SitePerfectTorWindow
 import Sheaf.AlgebraicGeometry.EtaleSheafZeroOnCover
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Derived internal Hom at finite coefficients on the etale site

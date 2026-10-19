@@ -21,6 +21,10 @@ import Sheaf.Paper.OpenImmersionLocalizing
 import Sheaf.Compactification.BoundaryRefinement
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.LocalizingLowerShriekComposition
+import Sheaf.Paper.NonrationalLocalizingLowerShriekComposition
+import Sheaf.SixFunctorsBasics.BrownHypotheses
 
 /-!
 # Open restriction of the Brown exceptional inverse image

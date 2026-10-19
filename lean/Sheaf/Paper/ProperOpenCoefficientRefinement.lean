@@ -36,6 +36,7 @@ import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.Paper.EtaleUnboundedRestrictionComparison
 
 /-!
 # Coefficient naturality of the proper/open refinement

@@ -35,6 +35,7 @@ import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.Paper.QbarTwistCommonStage
 import Sheaf.Paper.SfRationalizationKaroubi
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Tate twists preserve finiteness conditions
 

@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.AlterationCoverStandardRefinement
+import Sheaf.AlgebraicGeometry.GabberPrimeToEllRegularCover
 
 /-!
 # Prime-to-ell uniformization in standard form

@@ -13,6 +13,9 @@ import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability
+import Sheaf.AlgebraicGeometry.AlterationCoverProperNormalForm
+import Sheaf.AlgebraicGeometry.FiniteFlatCdEtaleExchange
+import Sheaf.AlgebraicGeometry.IntegralEtaleChartFlatification
 
 /-!
 # Standard refinement of a prime-to-ell alteration cover

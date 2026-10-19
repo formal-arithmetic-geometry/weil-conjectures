@@ -12,6 +12,11 @@ import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.FieldTheory.ValueGroupDivisible
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation
+import Sheaf.AlgebraicGeometry.SepClosedValuationGeometricComponents
+import Sheaf.RingTheory.GrauertRemmertPowerbounded
+import Sheaf.TraceFormula.ValuationArbitraryHeightLimit
+import Sheaf.TraceFormula.ValuationFiniteHeightComposition
+import Sheaf.TraceFormula.ValuationRankOneFormalComparison
 
 /-!
 # Relative integral closure over a separably closed valuation field

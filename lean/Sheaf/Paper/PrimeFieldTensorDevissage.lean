@@ -27,6 +27,9 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 import WeilConjectures.SixFunctors.Finite.Stalk
+import Sheaf.ConstructibleSheaf.GaloisCoverModuleDescent
+import Sheaf.Paper.ConstructibleFiniteMonodromyFiltration
+import Sheaf.RingTheory.FiniteAlgebraExternalTensorFiltration
 
 /-!
 # Prime-field tensor generators for constructible complexes

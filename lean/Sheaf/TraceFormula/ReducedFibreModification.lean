@@ -22,6 +22,10 @@ import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.TraceFormula.ValuationReducedFibreNormalization
+import Sheaf.AlgebraicGeometry.QcqsSeparableRiemannZariskiRefinement
+import Sheaf.TraceFormula.FiniteEtaFlatification
+import Sheaf.TraceFormula.FiniteEtaModificationGluing
+import Sheaf.TraceFormula.FiniteEtaModificationSpreading
 
 /-!
 # Reduced fibres after a separable alteration

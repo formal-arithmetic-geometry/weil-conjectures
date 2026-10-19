@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
 import Sheaf.Compactification.NagataSketchClosure
 import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.ModificationFibreCentreFinite
 
 /-!
 # Finite fibre-valuation tests for domination

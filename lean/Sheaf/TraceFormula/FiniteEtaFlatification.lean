@@ -16,6 +16,14 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Sheaf.TraceFormula.SchematicallyDenseOpen
+import Sheaf.AlgebraicGeometry.FlatteningByAdmissibleBlowup
+import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import WeilConjectures.Blowup.AdmissibleBlowup
+import WeilConjectures.Blowup.Affine.ChartAlgebra
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Blowup.Gluing
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Compactification.StrictTransform
 
 /-! # Finite generic flatification after a birational base modification
 

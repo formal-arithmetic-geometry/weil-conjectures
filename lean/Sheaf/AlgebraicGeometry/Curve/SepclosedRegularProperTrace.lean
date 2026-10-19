@@ -38,6 +38,10 @@ import Sheaf.AlgebraicGeometry.SecondKummerDivisors
 import Sheaf.AlgebraicGeometry.Curve.DegreeNormalizedTrace
 import WeilConjectures.FieldTheory.PurelyInseparablePthRootTower
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import Sheaf.AlgebraicGeometry.BirationalCurveDegreeInvariance
+import Sheaf.AlgebraicGeometry.DegreeWeightedIrreducibleComponents
+import Sheaf.AlgebraicGeometry.NormalizationFieldExtensionHomeomorphism
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Trace on a regular proper curve over a separably closed field

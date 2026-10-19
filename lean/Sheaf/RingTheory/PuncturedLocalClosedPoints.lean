@@ -12,6 +12,7 @@ import Mathlib.RingTheory.LocalRing.Quotient
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.Topology.Separation.Basic
 import Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.NoetherianLocalDomainInfiniteOpens
 
 /-!
 # Closed points in a punctured local spectrum

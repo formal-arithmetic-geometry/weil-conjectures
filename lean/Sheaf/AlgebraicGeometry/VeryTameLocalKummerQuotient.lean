@@ -12,6 +12,9 @@ public import Mathlib.GroupTheory.Abelianization.Defs
 public import Mathlib.GroupTheory.Index
 public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.FiniteQuotientStrictLocalInvariants
+import Sheaf.AlgebraicGeometry.TameAdmissibleSchemeQuotient
 
 /-!
 # The very tame local Kummer quotient

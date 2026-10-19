@@ -37,6 +37,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AmpleRestrictClosedImmersion
 
 /-!
 # Quasi-projectivity of normalized blowups over excellent affine bases

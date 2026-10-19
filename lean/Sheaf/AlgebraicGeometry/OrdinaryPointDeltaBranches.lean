@@ -28,6 +28,7 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.AlgebraicGeometry.NormalizationSingularSkyscraper
 
 /-! # Delta invariant and normalization branches of an ordinary point
 

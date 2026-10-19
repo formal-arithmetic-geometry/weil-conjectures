@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.CotangentResolutionCoherence
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.RingTheory.LocalizationCotangentVanishing
+import Sheaf.RingTheory.CotangentFlatBaseChange
 
 /-!
 # The derived diagonal criterion for cotangent vanishing

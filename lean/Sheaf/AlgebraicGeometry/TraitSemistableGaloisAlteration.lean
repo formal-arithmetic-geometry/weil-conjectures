@@ -33,6 +33,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.MarkedNodalTowerSemistableModification
+import Sheaf.AlgebraicGeometry.NormalProjectiveCompactification
 
 /-!
 # Semistable Galois alteration over a complete trait

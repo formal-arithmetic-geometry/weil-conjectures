@@ -39,6 +39,8 @@ import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Localization.Basic
 import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
 import Sheaf.RingTheory.ExcellentRing
+import Sheaf.RingTheory.EppFiniteFamilyTraits
+import Sheaf.RingTheory.EppPerfectCoreCompleteLocal
 
 /-!
 # A finite mixed-characteristic cover with reduced equidimensional special fibre

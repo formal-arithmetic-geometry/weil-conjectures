@@ -15,6 +15,13 @@ import Sheaf.SixFunctors.OpenTensorNormalization
 import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
 import Sheaf.Paper.DerivedAdjunctionShift
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.PurReductionLimitShiftAdjunction
+import Sheaf.SixFunctors.GeneratorReductionStatement
+import Sheaf.SixFunctors.IntegralBasicOperationShift
+import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
+import Sheaf.SixFunctors.IntegralRealizationRecursion
+import Sheaf.SixFunctors.OpenAdjunctionShift
+import Sheaf.SixFunctors.SystemPrimitiveComparisonShift
 
 /-! # Slotwise shift coherence of the specified integral realization
 

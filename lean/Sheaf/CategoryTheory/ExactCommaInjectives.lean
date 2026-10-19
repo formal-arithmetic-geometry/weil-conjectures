@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Comma
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Injectives in the comma category of an exact left adjoint

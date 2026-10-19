@@ -19,6 +19,21 @@ import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 import Sheaf.Paper.SmoothPurityMap
+import Sheaf.Paper.IntegralDirectImageTower
+import Sheaf.Paper.IntegralResidueTor
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.PbcDescentFunctors
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcRationalTransport
+import Sheaf.Paper.RationalCompactSupportCoefficientCoherence
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SmoothPurityNormalizedEquivalence
+import Sheaf.SixFunctors.FrobeniusSquareCartesian
+import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
+import Sheaf.SixFunctors.RationalOperations
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-! # Rational purity and the geometric-Frobenius adjunction mate
 
 Source: main-20261015, sec-poincare-duality/sk-lem-finite,

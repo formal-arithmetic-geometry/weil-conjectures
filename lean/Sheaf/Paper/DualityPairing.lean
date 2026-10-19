@@ -40,6 +40,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Compactification.Defs
 import WeilConjectures.Compactification.Noetherian
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 
 /-! # Evaluation and the ambient double-dual morphism
 

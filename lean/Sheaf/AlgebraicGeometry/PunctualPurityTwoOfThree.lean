@@ -26,6 +26,9 @@ import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
+import Sheaf.AlgebraicGeometry.RegularImmersionClassCalculus
 
 /-!
 # Punctual purity and the two-of-three criterion

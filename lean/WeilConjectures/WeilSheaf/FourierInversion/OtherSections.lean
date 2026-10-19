@@ -9,6 +9,43 @@ public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CartierKummerMap
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.AlgebraicGeometry.FrobeniusDetailed
+import Sheaf.AlgebraicGeometry.GeometricPointCohomology
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CompactFiberStalk
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.ConstructibleTruncations
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FrobeniusCompactSupportExchange
+import Sheaf.Paper.IsomorphismDerivedPullback
+import Sheaf.Paper.PurityDivisorClass
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.PurityFrameClass
+import Sheaf.Paper.PurityVectorBundleZeroSection
+import Sheaf.Paper.RationalWeilPurityNaturalityMate
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.SixFunctors.FrobeniusPointTransportNatural
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Fourier inversion: inputs from other sections

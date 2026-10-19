@@ -11,6 +11,18 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleSheafTopologicalInvariance
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-!
 # Surjective closed immersions and ordinary module sheaves

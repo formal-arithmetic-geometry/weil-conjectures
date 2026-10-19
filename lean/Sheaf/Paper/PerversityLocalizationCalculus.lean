@@ -44,6 +44,8 @@ import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.AlgebraicGeometry.SupportedGeneratorsCostalkDetection
+import Sheaf.CategoryTheory.SetGeneratedSheafAisle
 
 /-! # Pointwise perversity and its localization calculus
 

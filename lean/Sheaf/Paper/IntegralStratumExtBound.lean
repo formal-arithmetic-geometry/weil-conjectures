@@ -43,6 +43,8 @@ import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Paper.IntegralConstructibleHeart
+import Sheaf.Paper.IntegralModels
 
 /-!
 # Uniform vanishing of integral constructible Ext

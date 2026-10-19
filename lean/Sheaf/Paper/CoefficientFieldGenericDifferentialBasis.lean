@@ -15,6 +15,9 @@ import WeilConjectures.FieldTheory.ExistsPBasis
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.PBasisComplementMonomialBasis
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+import Sheaf.RingTheory.CofinitePBasisCompletedGenericRank
+import Sheaf.RingTheory.CompletedDifferentialFiniteConormal
+import Sheaf.RingTheory.PrescribedPBasisCoefficientSection
 
 /-!
 # Coefficient representatives with a common generic differential basis

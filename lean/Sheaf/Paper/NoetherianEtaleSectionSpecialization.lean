@@ -30,6 +30,19 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.PurityConventions
 public import Sheaf.SixFunctors.SmoothDualityBaseChangeCompat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
+import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
+import Sheaf.AlgebraicGeometry.SmoothTensorDuality
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Normalized ordinary etale specialization along a smooth section
 

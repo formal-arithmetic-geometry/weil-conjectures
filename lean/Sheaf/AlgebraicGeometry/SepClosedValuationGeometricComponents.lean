@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
 import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 import Mathlib.RingTheory.KrullDimension.Zero
 import Mathlib.RingTheory.Localization.BaseChange
+import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Geometric components over valuation residue fields

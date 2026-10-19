@@ -13,6 +13,11 @@ import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.RingTheory.SelectedBasisOfLocalizedSplit
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.LogSmoothDifferentialLocalFreeness
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Logarithmic differential generators and their characteristic cokernel

@@ -96,6 +96,22 @@ import Sheaf.Paper.IntegralResidueTor
 import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Paper.IntegralHomReduction
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteCoefficientHomChange
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.PurityAffineChartBounds
+import Sheaf.Paper.SfPreservationClass
+import Sheaf.SixFunctors.CoefQbarVerdier
+import Sheaf.SixFunctors.FiniteCoefficientVerdier
+import Sheaf.SixFunctors.IntegralVerdier
+import Sheaf.SixFunctors.RationalOperations
+import Sheaf.SixFunctors.RationalVerdier
+import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 
 /-! # Stability of the constructible finite-Tor domains
 

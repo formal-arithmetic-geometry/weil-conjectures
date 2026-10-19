@@ -19,6 +19,7 @@ import Sheaf.Paper.CoefficientHeartGeneration
 import Sheaf.Paper.CoefficientHeartTriangulated
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import Sheaf.SixFunctors.ScalarSixPullback
 
 /-!
 # Finite coefficient descent of bounded constructible objects

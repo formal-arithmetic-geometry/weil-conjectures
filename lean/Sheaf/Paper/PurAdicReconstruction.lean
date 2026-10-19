@@ -25,6 +25,8 @@ import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteTorAmplitudeSites
 /-! # Adic reconstruction of the specified finite smooth-purity comparisons
 Source: blueprint thm-pur-adic-reconstruction, current main-20261015 snapshot.
 The source is integral pullback followed by the actual coefficient twist and shift.

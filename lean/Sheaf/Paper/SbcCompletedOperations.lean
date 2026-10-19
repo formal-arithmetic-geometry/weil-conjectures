@@ -40,6 +40,7 @@ import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.Paper.WeilCompletedTensorReflector
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Linear completed operations and their canonical exchange
 Source: blueprint order 1442, Stacks Tags 099N, 099K and 07A7

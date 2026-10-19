@@ -21,6 +21,8 @@ import Sheaf.RingTheory.PBasisComplementMonomialBasis
 import WeilConjectures.FieldTheory.PBasisDifferentialsBasis
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Etale.Kaehler
+import Sheaf.FieldTheory.CofiniteSubfieldsDifferentialRank
+import Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison
 
 /-!
 # Stabilized generic rank of completed differentials over cofinite coefficient subfields

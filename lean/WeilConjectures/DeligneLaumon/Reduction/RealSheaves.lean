@@ -50,6 +50,8 @@ import Sheaf.Paper.SfWeilSheafComplex
 import Sheaf.Paper.StratifiedLattice
 import Sheaf.Paper.ZlFiniteAdicDirectImage
 import Sheaf.Paper.ZlImmersionWeilLocalBehavior
+import Sheaf.Paper.AdicLocalCharacteristicFactor
+import Sheaf.Paper.QuasiFiniteCompactSupportWeights
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed

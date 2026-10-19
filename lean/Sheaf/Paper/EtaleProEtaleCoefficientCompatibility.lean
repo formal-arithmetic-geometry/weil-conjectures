@@ -41,6 +41,20 @@ import Sheaf.AlgebraicGeometry.EtaleSumStalks
 import Sheaf.Paper.AcyclicFlatProperCoefficientModel
 import Sheaf.Paper.RefinementCoefficientMate
 public import Sheaf.Paper.EtaleProEtaleCoefficientTransport
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.ProperOpenCoefficientMate
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Etale/pro-etale coefficient compatibility
 

@@ -24,6 +24,7 @@ import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 import Sheaf.TraceFormula.EtaleComponentCoordinateIdentification
 import Sheaf.TraceFormula.EtaleRegularIntersectionDescent
 import Sheaf.AlgebraicGeometry.PermissibleCoordinateChart
+import Sheaf.AlgebraicGeometry.StrictTransformFlatBaseChange
 
 /-!
 # Permissible blowups preserve a normal-crossings boundary

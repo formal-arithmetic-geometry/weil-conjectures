@@ -40,6 +40,7 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.Paper.DirectedGaloisFiniteTensorGenerators
 
 /-!
 # Uniform Galois-partition bounds for open image and closed support

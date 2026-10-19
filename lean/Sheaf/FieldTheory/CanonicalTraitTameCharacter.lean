@@ -11,6 +11,16 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.GroupTheory.Index
+import Sheaf.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import Sheaf.FieldTheory.FiniteDVRTameInertia
+import Sheaf.FieldTheory.FiniteTameCharacterTower
+import Sheaf.GroupTheory.InfiniteTameInverseLimit
+import Sheaf.NumberTheory.DvrGaloisDegreeData
+import Sheaf.RingTheory.DvrCharZeroTangentKernel
+import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
+import WeilConjectures.RingTheory.HenselianLocalRootLifting
 
 /-!
 # The canonical tame character of a strictly henselian trait

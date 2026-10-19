@@ -16,6 +16,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 import WeilConjectures.Compactification.Dense
 import Sheaf.Compactification.BoundaryRefinement
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.Paper.AdicSectionClosedSupport
 
 /-! # Constructible degree-zero sections with proper support
 

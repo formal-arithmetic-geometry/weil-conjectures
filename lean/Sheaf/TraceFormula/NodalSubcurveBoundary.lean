@@ -21,6 +21,7 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents
+import Sheaf.AlgebraicGeometry.StacksNodalClosedSubcurve
 
 /-! # Reduced nodal subcurves and their boundary
 

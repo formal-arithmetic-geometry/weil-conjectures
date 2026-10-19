@@ -18,6 +18,10 @@ import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.IntegralCohomologicalAdicCriterion
+import Sheaf.Paper.IntegralModels
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 
 /-!
 # Local models for the integral constructible heart

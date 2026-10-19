@@ -8,6 +8,7 @@ import Mathlib.Algebra.MonoidAlgebra.MapDomain
 import Mathlib.GroupTheory.Finiteness
 import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import Sheaf.AlgebraicGeometry.FineFanBlowup
+import Sheaf.RingTheory.MonoidAlgebraDomainFraction
 
 /-!
 # Negative support weights obstruct integrality

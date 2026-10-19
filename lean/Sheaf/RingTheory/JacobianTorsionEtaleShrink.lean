@@ -18,6 +18,7 @@ import Mathlib.RingTheory.Kaehler.Polynomial
 import Sheaf.RingTheory.PresentationsHomotopyEquivalent
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.Kaehler.Basic
+import Sheaf.RingTheory.CompletedJacobianHomologyComparison
 
 /-!
 # Shrinking a finite type model using its completed Jacobian

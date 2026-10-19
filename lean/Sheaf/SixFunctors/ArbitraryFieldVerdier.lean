@@ -35,6 +35,7 @@ import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Paper.PbcScalarExtension
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 import Sheaf.CategoryTheory.StageSystemFunctorDescent
+import Sheaf.Paper.AdicExceptionalProjection
 
 /-! # Relative Verdier duality over an arbitrary field
 

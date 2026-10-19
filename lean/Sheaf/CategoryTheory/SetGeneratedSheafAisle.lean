@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall
 import Mathlib.CategoryTheory.SmallObject.IsCardinalForSmallObjectArgument
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
+import Sheaf.CategoryTheory.PreaisleTransfiniteMonomorphismClosure
 
 /-!
 # Set-generated aisles of derived module sheaves

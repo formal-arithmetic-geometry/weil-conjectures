@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.TraceFormula.FsFaceSharpening
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.LinearAlgebra.FreeModule.PID
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.DeligneLaumon.TraitLogSmoothUniformizerChart
 
 /-!
 # Monomial etale charts over a canonically logged trait

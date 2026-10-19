@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Sheaf.AlgebraicGeometry.Morphisms.BirationalDenseOpenIso
+import Sheaf.AlgebraicGeometry.Morphisms.GenericallyFiniteProperNearDimensionOne
 
 /-!
 # The isomorphism open of a proper birational modification

@@ -12,6 +12,9 @@ import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.LocalCompletionQuotient
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FiniteEtaleFormalMonoidCoefficientLift
+import Sheaf.RingTheory.FormalMonoidImplicitElimination
+import Sheaf.RingTheory.TameKummerGroupAlgebraCompletion
 
 /-!
 # Completed local normal forms for invertible Kummer monoid extensions

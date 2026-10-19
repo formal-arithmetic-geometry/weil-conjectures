@@ -21,6 +21,8 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
+import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Etale sheaves on a strictly henselian trait as specialization triples

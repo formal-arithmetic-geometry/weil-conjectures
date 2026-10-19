@@ -27,6 +27,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Sheaf.Paper.IntegralHeartDualizable
 
 /-!
 # Continuity of Ext out of integral constructible complexes

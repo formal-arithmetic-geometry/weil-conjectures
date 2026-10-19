@@ -40,6 +40,9 @@ import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import Sheaf.AlgebraicGeometry.AdmissibleQuotientAffineIntegralCharts
+import Sheaf.AlgebraicGeometry.AlterationCoverCalculus
+import Sheaf.AlgebraicGeometry.ProjectiveFiniteGroupQuotient
 
 /-!
 # Normalized base refinement of marked nodal quotients

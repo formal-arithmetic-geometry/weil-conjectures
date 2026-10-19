@@ -29,6 +29,8 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
+import Sheaf.AlgebraicGeometry.HypersurfaceNonzeroRelativeDifferential
 
 /-!
 # Dimension bound for the singular locus in a Bertini family

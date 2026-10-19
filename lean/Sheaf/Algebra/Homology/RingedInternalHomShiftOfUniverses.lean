@@ -27,6 +27,7 @@ import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Normalized internal-Hom shifts with independent site universes
 

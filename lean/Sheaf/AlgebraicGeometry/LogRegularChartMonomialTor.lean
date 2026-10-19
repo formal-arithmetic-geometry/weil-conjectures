@@ -21,6 +21,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.RingTheory.Flat.TorsionFree
+import Sheaf.RingTheory.MonomialModuleTorDevissage
 
 /-!
 # Monomial quotient Tor vanishing over a log regular chart

@@ -43,6 +43,7 @@ import Sheaf.Paper.EtaleCompactSupportCoefficientChange
 import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Integral compact supports have the prescribed reductions

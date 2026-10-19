@@ -15,6 +15,8 @@ import Sheaf.CategoryTheory.FirstResolutionExtensionClass
 import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Yoneda splicing and the signed localization boundary

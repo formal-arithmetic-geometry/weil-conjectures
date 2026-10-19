@@ -33,6 +33,7 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 /-! # Filtered finite-free coefficient passage for internal Hom
 
 Source: Bhatt--Scholze, Lemma 6.8.12, Proposition 6.8.14 and Remark 6.8.15;

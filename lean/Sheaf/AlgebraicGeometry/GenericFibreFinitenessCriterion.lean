@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
+import Sheaf.TraceFormula.FiniteResiduePointClosedInFibre
+import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 
 /-!
 # Generic residue extensions and finite generic fibres

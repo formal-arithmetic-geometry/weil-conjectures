@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.EtaleLocalNoetherianDescent
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 
 /-!
 # Effective polarized étale descent for fine log schemes

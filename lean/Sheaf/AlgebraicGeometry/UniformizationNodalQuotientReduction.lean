@@ -15,6 +15,16 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.ClosedDominantDimension
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.AlgebraicGeometry.AlterationCoverCalculus
+import Sheaf.AlgebraicGeometry.EquivariantMarkedNodalAlteration
+import Sheaf.AlgebraicGeometry.FreeFiniteActionTorsor
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.AlgebraicGeometry.NodalQuotientNormalizedBaseRefinement
+import Sheaf.AlgebraicGeometry.PrimeToEllMarkedAlgebraization
+import Sheaf.AlgebraicGeometry.ProperGenericCurvePreparation
+import Sheaf.AlgebraicGeometry.RegularPairAlterationPullback
+import Sheaf.AlgebraicGeometry.UniformizationCompleteLocalDescent
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Reduction of prime-to-ell uniformization to marked nodal quotients

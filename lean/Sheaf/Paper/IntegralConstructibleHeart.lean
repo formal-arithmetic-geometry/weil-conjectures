@@ -9,6 +9,8 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.IntegralConstantModelHeart
 public import Sheaf.Paper.IntegralHeartLocalModel
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+import Sheaf.Paper.IntegralHeartDualizable
+import Sheaf.Paper.IntegralModels
 
 /-!
 # Structure of integral constructible complexes

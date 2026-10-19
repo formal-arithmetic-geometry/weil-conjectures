@@ -18,6 +18,9 @@ import Sheaf.RingTheory.CohenPowerSeriesPresentation
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.CoherentRHomFiniteInjectiveDimension
+import Sheaf.Algebra.Homology.DerivedEvaluationFiniteInjective
+import Sheaf.RingTheory.RegularLocalBoundedInjectiveResolution
 
 /-! # Coherent duality over a complete Noetherian local ring
 

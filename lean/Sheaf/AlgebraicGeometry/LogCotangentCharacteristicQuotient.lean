@@ -9,6 +9,11 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Mathlib.GroupTheory.FiniteAbelian.Basic
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # The residue logarithmic cotangent quotient

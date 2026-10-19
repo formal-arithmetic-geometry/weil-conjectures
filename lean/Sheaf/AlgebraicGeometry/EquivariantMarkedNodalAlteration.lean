@@ -51,6 +51,8 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
 import WeilConjectures.FieldTheory.TensorFieldExtensionGaloisInvariants
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.AdmissibleFiniteQuotientSeparated
+import Sheaf.AlgebraicGeometry.ProjectiveGaloisAlterationEnvelope
 
 /-!
 # Equivariant marked nodal alteration

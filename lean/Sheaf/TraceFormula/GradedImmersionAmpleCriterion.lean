@@ -19,6 +19,7 @@ import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
 import Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison
 import Sheaf.TraceFormula.ProjQcOpenTwistAmple
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.AmpleRestrictClosedImmersion
 
 /-!
 # Graded immersion criterion for ampleness

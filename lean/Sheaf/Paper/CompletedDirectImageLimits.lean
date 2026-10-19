@@ -11,6 +11,25 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedDerivedInverseLimit
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.KoszulReconstruction
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.Algebra.Homology.RoosComplex
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # The canonical direct-image/derived-limit comparison

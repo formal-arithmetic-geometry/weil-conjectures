@@ -11,6 +11,12 @@ import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.FrobeniusGeometricExchange
 
 /-! # Proper coincidence and Frobenius
 

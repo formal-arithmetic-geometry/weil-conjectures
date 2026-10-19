@@ -23,6 +23,8 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.PbcQbarCompletedPullback
 import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntegralConstructibleHeart
+import Sheaf.Paper.IntegralModels
 
 /-!
 # Integral inverse image and completed inverse image

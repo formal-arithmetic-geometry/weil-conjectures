@@ -22,6 +22,7 @@ import Sheaf.TraceFormula.FlatPolynomialQuotientPerfect
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.CategoryTheory.DerivedCategory.PerfectComplexDerivedBiduality
 import Sheaf.TraceFormula.UpperShriekBoundedCoherent
+import Sheaf.Algebra.Homology.AlgebraicShriekDerivedHomAdjunction
 
 /-! # Relative perfection of the algebraic polynomial upper-shriek model
 

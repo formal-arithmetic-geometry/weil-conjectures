@@ -33,6 +33,10 @@ import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.Algebra.Homology.KFlatTotalTensorModel
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.EtaleSumTensorTotalization
+import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 
 /-!
 # Tensor compatibility for étale sum extension

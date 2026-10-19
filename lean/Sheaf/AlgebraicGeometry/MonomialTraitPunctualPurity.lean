@@ -16,6 +16,15 @@ import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.Flat.Basic
+import Sheaf.AlgebraicGeometry.FiniteFlatRegularDivisorPurityDescent
+import Sheaf.AlgebraicGeometry.KummerRootRegularDivisorPurity
+import Sheaf.AlgebraicGeometry.MonomialBoundaryPurityCriterion
+import Sheaf.AlgebraicGeometry.PrimeFieldPunctualPurity
+import Sheaf.AlgebraicGeometry.PrimitiveMonomialTraitGeometry
+import Sheaf.AlgebraicGeometry.PunctualPurityEtaleLocality
+import Sheaf.AlgebraicGeometry.PunctualPurityTwoOfThree
+import Sheaf.AlgebraicGeometry.SemistableCoordinateDivisorPurity
+import Sheaf.AlgebraicGeometry.SmoothPunctualPurityAscent
 
 /-!
 # Punctual purity of monomial models over an arbitrary trait

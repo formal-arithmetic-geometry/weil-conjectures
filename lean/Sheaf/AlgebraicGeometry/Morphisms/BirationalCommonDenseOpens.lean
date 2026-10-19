@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.BirationalGenericLocalization
 
 /-!
 # Common dense opens of a locally finitely presented birational morphism

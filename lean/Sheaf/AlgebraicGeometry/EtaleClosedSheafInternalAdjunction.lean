@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The closed support adjunction and internal sheaf Hom

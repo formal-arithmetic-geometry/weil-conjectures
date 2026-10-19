@@ -18,6 +18,18 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.AlgebraicGeometry.EtaleExceptionalConstantTensor
+import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageCoproducts
+import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.CategoryTheory.SystemLevelLeftExtension
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.SemilinearDerivedSections
 /-!
 # The strict étale coefficient-system adjoint
 Source: Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,

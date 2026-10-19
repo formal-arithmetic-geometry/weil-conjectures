@@ -14,6 +14,7 @@ public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.LowerStar
 import Sheaf.Paper.AdicPunctualWeights
 import Sheaf.Paper.ZlFiniteAdicDirectImage
+import Sheaf.Paper.A1FiniteWeilSectionsDecomposition
 
 /-! # Finite pushforward preserves punctual upper bounds and purity
 

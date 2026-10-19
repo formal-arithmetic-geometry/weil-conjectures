@@ -20,6 +20,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The derived scalar-extension unit and distinguished triangles
 

@@ -89,6 +89,7 @@ import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Restriction of the evaluation-transpose double-dual morphism
 

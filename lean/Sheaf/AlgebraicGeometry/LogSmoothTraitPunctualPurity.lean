@@ -21,6 +21,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import Sheaf.AlgebraicGeometry.RegularLogSmoothMonomialChart
+import Sheaf.AlgebraicGeometry.MonomialTraitPunctualPurity
+import Sheaf.AlgebraicGeometry.PunctualPurityEtaleLocality
 
 /-!
 # Punctual purity for regular log smooth schemes over a trait

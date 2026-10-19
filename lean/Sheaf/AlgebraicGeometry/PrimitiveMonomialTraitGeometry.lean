@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Polynomial.Eisenstein.Criterion
 import Mathlib.Algebra.MvPolynomial.PDeriv
 import Sheaf.RingTheory.HypersurfaceDerivationRegular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Geometry of a primitive monomial model over a trait

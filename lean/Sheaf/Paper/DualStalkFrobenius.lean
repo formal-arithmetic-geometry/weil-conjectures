@@ -17,6 +17,7 @@ import Sheaf.Paper.PointFibreDerivedTensor
 import Sheaf.Paper.SfWeilSheafComplex
 import Sheaf.SixFunctors.FrobeniusPointTransport
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.SixFunctors.FrobeniusCohomologyTransportIso
 
 /-! # Dual stalks and contragredient local Frobenius
 

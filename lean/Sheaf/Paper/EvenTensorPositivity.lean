@@ -15,6 +15,7 @@ import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 import WeilConjectures.ZetaLinearAlgebra.DetTrace
 import Mathlib.RingTheory.PowerSeries.Exp
+import Sheaf.Paper.AdicLocalCharacteristicFactor
 
 /-!
 # Reality and positivity of tensor powers of a real Weil sheaf

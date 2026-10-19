@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.StrictLocalEtaleDimensionBounds
 
 /-!
 # Support-sensitive cohomology on a strictly local punctured spectrum

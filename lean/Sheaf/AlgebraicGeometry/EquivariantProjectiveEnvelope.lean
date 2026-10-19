@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 
 /-!
 # An equivariant homogeneous projective envelope

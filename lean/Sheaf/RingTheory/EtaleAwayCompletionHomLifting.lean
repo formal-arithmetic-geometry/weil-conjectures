@@ -16,6 +16,7 @@ import Sheaf.RingTheory.ConormalTorsionAlgebraization
 import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
 import Sheaf.RingTheory.HenselizationStageMap
 import Sheaf.RingTheory.HenselianFactorizationCriterion
+import Sheaf.RingTheory.CompletedRetractionConormalTorsion
 
 /-!
 # Unique lifting of completed maps into a henselian target

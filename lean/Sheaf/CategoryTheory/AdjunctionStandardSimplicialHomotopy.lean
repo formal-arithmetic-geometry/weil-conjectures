@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ComonadStandardResolution
 public import Mathlib.CategoryTheory.Monad.Adjunction
 public import Mathlib.AlgebraicTopology.SimplicialObject.Homotopy
 import Mathlib.AlgebraicTopology.ExtraDegeneracy
+import Sheaf.CategoryTheory.ComonadSimplicialObject
 
 /-!
 # The standard simplicial object of an adjunction and its contractions

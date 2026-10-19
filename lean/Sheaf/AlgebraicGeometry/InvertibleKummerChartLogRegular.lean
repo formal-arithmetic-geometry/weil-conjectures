@@ -18,6 +18,8 @@ import Sheaf.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationDimension
+import Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension
+import Sheaf.RingTheory.StrictHenselizationNoetherian
 
 /-!
 # Log regularity for invertible Kummer charts

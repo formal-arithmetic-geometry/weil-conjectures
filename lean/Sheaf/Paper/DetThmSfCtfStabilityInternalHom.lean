@@ -66,6 +66,13 @@ import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom
+import Sheaf.AlgebraicGeometry.ProEtale.CondensedRing.BoundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctionAlias
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.Paper.IntegralConstructibleHeart
+import Sheaf.Paper.IntegralHeartLocalModel
+import Sheaf.SixFunctors.CtfStabilityDirectImages
 
 /-!
 # Internal Hom stability on constructible finite-Tor complexes

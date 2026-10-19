@@ -17,6 +17,8 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Free
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.SetLocalSystemCalculus
+import Sheaf.DeligneLaumon.TorsionFiniteSubsystem
 
 /-! # Free actions of torsion local systems
 

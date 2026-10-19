@@ -22,6 +22,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.AlgebraicGeometry.PuncturedSupportCohomologicalBound
 
 /-!
 # High-degree comparison on a punctured strictly local scheme

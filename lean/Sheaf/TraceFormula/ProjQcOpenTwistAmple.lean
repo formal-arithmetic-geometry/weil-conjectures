@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 import Sheaf.AlgebraicGeometry.ProjTwistSectionBasicOpen
+import Sheaf.TraceFormula.ProjCommonDegreeTwistInvertible
 
 /-!
 # Sufficiently divisible twists on a quasi-compact Proj open

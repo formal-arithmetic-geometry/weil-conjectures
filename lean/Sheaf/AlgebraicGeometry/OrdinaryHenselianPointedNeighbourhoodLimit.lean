@@ -20,6 +20,7 @@ import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
 import Sheaf.RingTheory.EtaleResidueTripleIdealRefinement
 import Sheaf.RingTheory.FilteredColimitFiniteData
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
+import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 
 /-!
 # Ordinary henselian limits of pointed affine étale neighbourhoods

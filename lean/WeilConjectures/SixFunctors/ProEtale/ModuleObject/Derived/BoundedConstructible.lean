@@ -52,6 +52,12 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.Paper.SfIntegralDirectImageConstructible
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
+import Sheaf.Paper.DerivedInternalHomFilteredColimit
+import Sheaf.Paper.IntegralHomReduction
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
 /-!
 

@@ -24,6 +24,7 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.CategoryTheory.Yoneda
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Finite direct image and closed exceptional restriction

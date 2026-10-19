@@ -28,6 +28,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Derived reduction of an extension by a divisible sheaf

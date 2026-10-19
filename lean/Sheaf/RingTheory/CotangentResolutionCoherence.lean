@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.Algebra.MvPolynomial.Eval
 import Sheaf.CategoryTheory.AdjunctionStandardSimplicialHomotopy
 import Sheaf.Paper.TrivialKanHomotopyEquivalence
+import Sheaf.AlgebraicTopology.SimplicialAbelianSetHomotopyQuasiIso
 
 /-!
 # Cotangent complexes from polynomial resolutions
