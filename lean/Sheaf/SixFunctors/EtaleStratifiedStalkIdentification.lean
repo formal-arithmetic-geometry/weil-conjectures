@@ -7,10 +7,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.PointedEtaleStalk
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Derived geometric stalk of a constant local model
@@ -61,6 +59,25 @@ theorem derivedGeometricStalkIso
     (ubar : Spec (.of Ω) ⟶ U) :
     Nonempty ((geometricStalk A (ubar ≫ f)).obj K ≅
       _root_.DerivedCategory.Q.obj E) := by
-  sorry
+  obtain ⟨α⟩ := α
+  let F := (pointSmallEtale ubar).sheafFiber (A := ModuleCat.{u + 1} A)
+  have : F.Additive := (pointSmallEtale ubar).sheafFiber_additive
+  let G := (pointSmallEtale (ubar ≫ f)).sheafFiber (A := ModuleCat.{u + 1} A)
+  have : G.Additive := (pointSmallEtale (ubar ≫ f)).sheafFiber_additive
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (forget (ModuleCat.{u + 1} A)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let c := constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)
+  let e : c ⋙ F ≅ 𝟭 (ModuleCat.{u + 1} A) :=
+    (pointSmallEtale ubar).constantSheafCompSheafFiberIso _ _
+  change Nonempty (G.mapDerivedCategory.obj K ≅ _)
+  exact ⟨((Functor.mapDerivedCategoryNatIso
+      (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) f ubar)).app K).symm ≪≫
+    (Functor.mapDerivedCategoryCompIso (upperStar (ModuleCat.{u + 1} A) f) F).app K ≪≫
+    F.mapDerivedCategory.mapIso α ≪≫ F.mapDerivedCategoryFactors.app _ ≪≫
+    _root_.DerivedCategory.Q.mapIso
+      ((Functor.mapHomologicalComplexCompIso e (ComplexShape.up ℤ)).app E ≪≫
+        (Functor.mapHomologicalComplexIdIso (ModuleCat.{u + 1} A)
+          (ComplexShape.up ℤ)).app E)⟩
 
 end AlgebraicGeometry.Etale
