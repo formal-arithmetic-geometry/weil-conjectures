@@ -64,7 +64,10 @@ Source: blueprint `sec-smooth-purity/sk-def-purity-conv`, derived-functor clause
 Proof: compose each proposed equality with the kernel inclusion. The resulting equality
 is additivity of evaluation on sections; the kernel inclusion is monic. -/
 theorem supportedSectionsFunctor_additive : (supportedSectionsFunctor J A j).Additive := by
-  sorry
+  refine ⟨?_⟩
+  intro F G f g
+  apply equalizer.hom_ext
+  simp [supportedSectionsFunctor, Preadditive.add_comp, Preadditive.comp_add]
 
 attribute [instance] supportedSectionsFunctor_additive
 
