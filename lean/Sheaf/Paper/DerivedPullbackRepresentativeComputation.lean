@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.RingedTopoiCanonicalTensorComparisonOfUniverses
+public import Sheaf.Paper.DerivedPullbackComplexComparison
+public import Sheaf.Algebra.Homology.KFlat
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import Sheaf.CategoryTheory.AlgebraicInverseImage
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel

@@ -6,16 +6,23 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+public import Sheaf.Paper.DerivedPullbackComplexComparison
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Sheaf.Paper.RingedTopoiTensorComparisonData
 public import Mathlib.Algebra.Homology.BifunctorShift
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitExistence
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.TensorPullbackRepresentativeDescent
+import Sheaf.Paper.ResolvingRepresentativeWhiskering
+import Sheaf.Paper.DerivedPullbackRepresentativeComputation
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitExistence
+import all Sheaf.Paper.RingedTopoiScalarTensorComparison
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitUnique
 import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
@@ -34,7 +41,7 @@ Modules on Sites, Tag 03EL
 
 universe u v u' v'
 
-open CategoryTheory CategoryTheory.Limits MonoidalCategory
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategory
 
 namespace CategoryTheory
 
@@ -201,23 +208,6 @@ theorem tensorPullbackTotal_isIso
 
 universe wA wB
 
-/-- Transport the homotopy left-derived comparison to the complex localization Q.
-Source: Stacks 06YY and 07A4
-(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
-noncomputable def derivedPullbackComplexComparison
-    [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
-    (LF : DerivedCategory A ⥤ DerivedCategory B)
-    (epsilon : DerivedCategory.Qh ⋙ LF ⟶
-      L.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
-    (P : CochainComplex A ℤ) :
-    LF.obj (DerivedCategory.Q.obj P) ⟶ DerivedCategory.Q.obj
-      ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :=
-  LF.map ((DerivedCategory.quotientCompQhIso A).inv.app P) ≫
-    epsilon.app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map ((L.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).hom.app P) ≫
-        (DerivedCategory.quotientCompQhIso B).hom.app
-          ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
-
 /-- Transport the homotopy right-derived comparison to the complex localization Q.
 Source: Stacks 070K (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
 noncomputable def derivedPushforwardComplexComparison
@@ -237,6 +227,115 @@ end CategoryTheory
 
 namespace SheafOfModules
 
+private theorem monoidalPreadditive_of_tensorAdditive
+    {E : Type u} [Category.{v} E] [Preadditive E] [MonoidalCategory E]
+    [∀ X : E, (tensorLeft X).Additive] [∀ X : E, (tensorRight X).Additive] :
+    MonoidalPreadditive E where
+  whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
+  zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
+  whiskerLeft_add := fun {X _Y _Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
+  add_whiskerRight := fun {X _Y _Z} f g ↦ (tensorRight X).map_add (f := f) (g := g)
+
+private theorem quotient_resolutions
+    {E : Type u} [Category.{v} E] [Abelian E]
+    (P : ObjectProperty (CochainComplex E ℤ))
+    (hres : ∀ X : CochainComplex E ℤ,
+      ∃ (Y : CochainComplex E ℤ) (f : Y ⟶ X), P Y ∧ QuasiIso f) :
+    ∀ X : HomotopyCategory E (.up ℤ),
+      ∃ (Y : ObjectProperty.FullSubcategory (fun T : HomotopyCategory E (.up ℤ) ↦ P T.as))
+        (f : Y.obj ⟶ X), HomotopyCategory.quasiIso E (.up ℤ) f := by
+  intro X
+  obtain ⟨Y, f, hY, hf⟩ := hres X.as
+  exact ⟨⟨(HomotopyCategory.quotient E (.up ℤ)).obj Y, hY⟩,
+    (HomotopyCategory.quotient E (.up ℤ)).map f,
+    (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hf⟩
+
+private theorem tensorMap_factor
+    {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [HasCoproducts.{0} A]
+    {P P' Q Q' : CochainComplex A ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
+    HomologicalComplex.mapBifunctorMap f (𝟙 Q) (curriedTensor A) (.up ℤ) ≫
+      HomologicalComplex.mapBifunctorMap (𝟙 P') g (curriedTensor A) (.up ℤ) =
+      HomologicalComplex.mapBifunctorMap f g (curriedTensor A) (.up ℤ) := by
+  simp [HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
+
+private theorem tensorPullbackTotal_naturality
+    {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
+    {B : Type u'} [Category.{v'} B] [Abelian B] [MonoidalCategory B]
+    [MonoidalPreadditive A] [MonoidalPreadditive B]
+    [HasCoproducts.{0} A] [HasCoproducts.{0} B]
+    (L : A ⥤ B) [L.Additive]
+    (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
+    (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
+      L.map (f ⊗ₘ g) ≫ (e X' Y').hom =
+        (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
+    {P P' Q Q' : CochainComplex A ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
+    HomologicalComplex.mapBifunctorMap
+      ((L.mapHomologicalComplex (.up ℤ)).map f)
+      ((L.mapHomologicalComplex (.up ℤ)).map g) (curriedTensor B) (.up ℤ) ≫
+        tensorPullbackTotal L e he P' Q' =
+      tensorPullbackTotal L e he P Q ≫ (L.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.mapBifunctorMap f g (curriedTensor A) (.up ℤ)) := by
+  have hi {X X' Y Y' : A} (a : X ⟶ X') (b : Y ⟶ Y') :
+      (L.map a ⊗ₘ L.map b) ≫ (e X' Y').inv =
+        (e X Y).inv ≫ L.map (a ⊗ₘ b) := by
+    apply (cancel_mono (e X' Y').hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [he, Iso.inv_hom_id_assoc]
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro a b hab
+  simp only [HomologicalComplex.comp_f, tensorPullbackTotal,
+    HomologicalComplex.ι_mapBifunctorMap_assoc, tensorPullbackTotalComponent,
+    HomologicalComplex.ι_mapBifunctorDesc_assoc, HomologicalComplex.ι_mapBifunctorDesc]
+  simp only [Category.assoc]
+  change (L.map (f.f a) ▷ L.obj (Q.X b)) ≫
+    (L.obj (P'.X a) ◁ L.map (g.f b)) ≫ _ = _
+  rw [← tensorHom_def_assoc]
+  change (L.map (f.f a) ⊗ₘ L.map (g.f b)) ≫ (e (P'.X a) (Q'.X b)).inv ≫
+      L.map (CochainComplex.ιMapBifunctor P' Q' (curriedTensor A) a b n hab) =
+    (e (P.X a) (Q.X b)).inv ≫
+      L.map (CochainComplex.ιMapBifunctor P Q (curriedTensor A) a b n hab) ≫
+        L.map ((HomologicalComplex.mapBifunctorMap f g (curriedTensor A) (.up ℤ)).f n)
+  rw [← Category.assoc, hi, Category.assoc, ← L.map_comp]
+  congr 2
+  rw [← L.map_comp]
+  congr 1
+  rw [HomologicalComplex.ι_mapBifunctorMap]
+  rw [tensorHom_def, Category.assoc]
+  rfl
+
+
+
+@[no_expose] private noncomputable def tensorPullbackComparisonNatIso
+    {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
+    {B : Type u'} [Category.{v'} B] [Abelian B] [MonoidalCategory B]
+    [MonoidalPreadditive A] [MonoidalPreadditive B]
+    [HasCoproducts.{0} A] [HasCoproducts.{0} B]
+    (L : A ⥤ B) [L.Additive]
+    (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
+    (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
+      L.map (f ⊗ₘ g) ≫ (e X' Y').hom =
+        (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
+    (beta : ∀ P Q : CochainComplex A ℤ,
+      CochainComplex.mapBifunctor
+        ((L.mapHomologicalComplex (.up ℤ)).obj P)
+        ((L.mapHomologicalComplex (.up ℤ)).obj Q) (curriedTensor B) ≅
+      (L.mapHomologicalComplex (.up ℤ)).obj
+        (CochainComplex.mapBifunctor P Q (curriedTensor A)))
+    (hbeta : ∀ P Q, (beta P Q).hom = tensorPullbackTotal L e he P Q) :
+    ((L.mapHomologicalComplex (.up ℤ)).prod (L.mapHomologicalComplex (.up ℤ))) ⋙
+        Functor.uncurry.obj ((curriedTensor B).map₂HomologicalComplex
+          (.up ℤ) (.up ℤ) (.up ℤ)) ≅
+      Functor.uncurry.obj ((curriedTensor A).map₂HomologicalComplex
+        (.up ℤ) (.up ℤ) (.up ℤ)) ⋙ L.mapHomologicalComplex (.up ℤ) :=
+  NatIso.ofComponents (fun X ↦ beta X.1 X.2) (by
+    intro X Y f
+    dsimp only [Functor.comp_map, Functor.prod_map]
+    simp only [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
+      tensorMap_factor, hbeta]
+    exact tensorPullbackTotal_naturality L e he f.1 f.2)
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -259,19 +358,7 @@ local notation "𝓡" R => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u
 @[no_expose] private noncomputable def ts (M N : SheafOfModules.{u} (𝓡 B))
     (W : Dᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory B).tensorObj M N).val.obj W :=
-  (tensorObjIsoSheafification M N).inv.val.app W
-    (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
-      (M.val ⊗ N.val)).app W (m ⊗ₜ[B.obj.obj W] n))
-private theorem ts_naturality (M N : SheafOfModules.{u} (𝓡 B))
-    {W V : Dᵒᵖ} (i : W ⟶ V) (m : M.val.obj W) (n : N.val.obj W) :
-    ((monoidalCategory B).tensorObj M N).val.map i (ts B M N W m n) =
-      ts B M N V (M.val.map i m) (N.val.map i n) := by
-  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)
-  let v := m ⊗ₜ[B.obj.obj W] n
-  have hi := PresheafOfModules.naturality_apply
-    (tensorObjIsoSheafification M N).inv.val i ((adj.unit.app (M.val ⊗ N.val)).app W v)
-  have hu := PresheafOfModules.naturality_apply (adj.unit.app (M.val ⊗ N.val)) i v
-  exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
+  RingedTensor.pure B M N W m n
 @[no_expose] private noncomputable def tensorPair (M N : SheafOfModules.{u} (𝓡 B))
     (Z : Sheaf J (Type u))
     (x : Z ⟶ ((toSheaf (𝓡 B) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})).obj M))
@@ -289,7 +376,7 @@ private theorem ts_naturality (M N : SheafOfModules.{u} (𝓡 B))
          ((monoidalCategory B).tensorObj M N).val.map i
            (ts B M N W (x.hom.app W t) (y.hom.app W t))
        rw [hx, hy]
-       exact (ts_naturality B M N i _ _).symm }⟩
+       exact (RingedTensor.pure_restrict B M N i _ _).symm }⟩
 
 private theorem productElements {E : Type u} [Category.{v} E] [HasBinaryProducts E]
     (F : E ⥤ Type v) (X Y : E) [PreservesLimit (pair X Y) F]
@@ -312,107 +399,6 @@ private theorem productElements {E : Type u} [Category.{v} E] [HasBinaryProducts
 
 variable (c : A ⟶ B)
 
-@[no_expose] private noncomputable def ins (M : SheafOfModules.{u} (𝓡 A))
-    (W : Dᵒᵖ) (m : M.val.obj W) : (changeOfRings.{u, u, u} c M).val.obj W :=
-  (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
-    (changeOfRingsPresheaf.{u, u, u} c M)).app W
-      ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
--- Expand the two scalar extensions through the sheafification adjunction.
-private theorem scalar_tensor_ext
-    (M N : SheafOfModules.{u} (𝓡 A)) (H : SheafOfModules.{u} (𝓡 B))
-    {f g : (monoidalCategory B).tensorObj (changeOfRings.{u, u, u} c M)
-      (changeOfRings.{u, u, u} c N) ⟶ H}
-    (h : ∀ W m n, f.val.app W (ts B _ _ W (ins A B c M W m) (ins A B c N W n)) =
-      g.val.app W (ts B _ _ W (ins A B c M W m) (ins A B c N W n))) : f = g := by
-  let := monoidalCategory B
-  let adj := PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)
-  let S := PresheafOfModules.sheafification (𝟙 (𝓡 B).obj)
-  let E := changeOfRingsPresheaf.{u, u, u} c M
-  let F := changeOfRingsPresheaf.{u, u, u} c N
-  let ηE := adj.unit.app E
-  let ηF := adj.unit.app F
-  have hη (G : PresheafOfModules.{u} (𝓡 B).obj) :
-      (J.W.inverseImage (PresheafOfModules.toPresheaf (𝓡 B).obj)) (adj.unit.app G) := by
-    rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
-      (𝟙 (𝓡 B).obj)]
-    change IsIso (S.map (adj.unit.app G))
-    dsimp only [S, adj]
-    infer_instance
-  have hηη := (J.W.inverseImage (PresheafOfModules.toPresheaf (𝓡 B).obj)).tensorHom_mem
-    ηE ηF (hη E) (hη F)
-  have hi : IsIso (S.map (ηE ⊗ₘ ηF)) := by
-    rw [PresheafOfModules.inverseImage_W_toPresheaf_eq_inverseImage_isomorphisms
-      (𝟙 (𝓡 B).obj)] at hηη
-    exact hηη
-  let q := S.map (ηE ⊗ₘ ηF) ≫ (tensorObjIsoSheafification (S.obj E) (S.obj F)).inv
-  have : IsIso q := inferInstance
-  apply (cancel_epi q).mp
-  apply (adj.homEquiv (E ⊗ F) H).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  apply PresheafOfModules.hom_ext
-  intro W
-  let : CommRing ((𝓡 B).obj.obj W) := inferInstanceAs (CommRing (B.obj.obj W))
-  let a : (E.obj W) ⊗[(𝓡 B).obj.obj W] (F.obj W) →ₗ[(𝓡 B).obj.obj W]
-      H.val.obj W := ((adj.unit.app (E ⊗ F) ≫
-        (forget (𝓡 B) ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡 B).obj)).map
-          (q ≫ f)).app W).hom
-  let b : (E.obj W) ⊗[(𝓡 B).obj.obj W] (F.obj W) →ₗ[(𝓡 B).obj.obj W]
-      H.val.obj W := ((adj.unit.app (E ⊗ F) ≫
-        (forget (𝓡 B) ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡 B).obj)).map
-          (q ≫ g)).app W).hom
-  have hh : ModuleCat.ofHom (X := E.obj W)
-      (Y := ModuleCat.of ((𝓡 B).obj.obj W) ((F.obj W) →ₗ[(𝓡 B).obj.obj W] H.val.obj W))
-        (TensorProduct.curry a) = ModuleCat.ofHom (X := E.obj W)
-        (Y := ModuleCat.of ((𝓡 B).obj.obj W) ((F.obj W) →ₗ[(𝓡 B).obj.obj W] H.val.obj W))
-          (TensorProduct.curry b) := by
-    apply ModuleCat.ExtendScalars.hom_ext
-    intro m
-    change TensorProduct.curry a _ = TensorProduct.curry b _
-    have hm : ModuleCat.ofHom (X := F.obj W) (Y := H.val.obj W)
-        (TensorProduct.curry a ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) =
-        ModuleCat.ofHom (X := F.obj W) (Y := H.val.obj W)
-          (TensorProduct.curry b ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)) := by
-      apply ModuleCat.ExtendScalars.hom_ext
-      intro n
-      have hn := adj.unit.naturality (ηE ⊗ₘ ηF)
-      have he := congrArg (fun k ↦ (k.app W)
-        (((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m) ⊗ₜ[B.obj.obj W]
-          ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n))) hn
-      change (adj.unit.app ((S.obj E).val ⊗ (S.obj F).val)).app W
-          (ηE.app W ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m)
-            ⊗ₜ[B.obj.obj W]
-            ηF.app W ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n)) =
-        (S.map (ηE ⊗ₘ ηF)).val.app W
-          ((adj.unit.app (E ⊗ F)).app W
-            (((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m) ⊗ₜ[B.obj.obj W]
-              ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n))) at he
-      change f.val.app W ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W
-          ((S.map (ηE ⊗ₘ ηF)).val.app W ((adj.unit.app (E ⊗ F)).app W _))) =
-        g.val.app W ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W
-          ((S.map (ηE ⊗ₘ ηF)).val.app W ((adj.unit.app (E ⊗ F)).app W _)))
-      exact (congrArg (fun v ↦ f.val.app W
-        ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W v)) he.symm).trans
-          ((h W m n).trans (congrArg (fun v ↦ g.val.app W
-            ((tensorObjIsoSheafification (S.obj E) (S.obj F)).inv.val.app W v)) he))
-    exact congrArg ModuleCat.Hom.hom hm
-  exact ModuleCat.hom_ext (TensorProduct.curry_injective (congrArg ModuleCat.Hom.hom hh))
-
-private theorem ts_cast
-    (M N : SheafOfModules.{u} (𝓡 A))
-    (X Y : SheafOfModules.{u} (𝓡 B))
-    (hx : X = changeOfRings.{u, u, u} c M)
-    (hy : Y = changeOfRings.{u, u, u} c N)
-    (W : Dᵒᵖ) (m : (changeOfRings.{u, u, u} c M).val.obj W)
-    (n : (changeOfRings.{u, u, u} c N).val.obj W) :
-    (eqToHom (congrArg₂ (monoidalCategory B).tensorObj hx.symm hy.symm)).val.app W
-      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W m n) =
-    ts B X Y W ((eqToHom hx.symm).val.app W m)
-      ((eqToHom hy.symm).val.app W n) := by
-  subst X
-  subst Y
-  rfl
-
 private theorem scalarTensorSections_hom_ext
     (M N : SheafOfModules.{u} (𝓡 A))
     (X Y H : SheafOfModules.{u} (𝓡 B))
@@ -420,24 +406,14 @@ private theorem scalarTensorSections_hom_ext
     (hy : Y = changeOfRings.{u, u, u} c N)
     {f g : (monoidalCategory B).tensorObj X Y ⟶ H}
     (h : ∀ W m n, f.val.app W (ts B X Y W
-      ((eqToHom hx.symm).val.app W (ins A B c M W m))
-      ((eqToHom hy.symm).val.app W (ins A B c N W n))) =
+      ((eqToHom hx.symm).val.app W (RingedTensor.ins c M W m))
+      ((eqToHom hy.symm).val.app W (RingedTensor.ins c N W n))) =
       g.val.app W (ts B X Y W
-        ((eqToHom hx.symm).val.app W (ins A B c M W m))
-        ((eqToHom hy.symm).val.app W (ins A B c N W n)))) : f = g := by
-  let e := eqToHom (congrArg₂ (monoidalCategory B).tensorObj hx.symm hy.symm)
-  apply (cancel_epi e).mp
-  apply scalar_tensor_ext A B c M N H
-  intro W m n
-  change f.val.app W (e.val.app W
-      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W
-        (ins A B c M W m) (ins A B c N W n))) =
-    g.val.app W (e.val.app W
-      (ts B (changeOfRings.{u, u, u} c M) (changeOfRings.{u, u, u} c N) W
-        (ins A B c M W m) (ins A B c N W n)))
-  dsimp only [e]
-  rw [ts_cast A B c M N X Y hx hy]
-  exact h W m n
+        ((eqToHom hx.symm).val.app W (RingedTensor.ins c M W m))
+        ((eqToHom hy.symm).val.app W (RingedTensor.ins c N W n)))) : f = g := by
+  subst X
+  subst Y
+  exact RingedTensor.scalar_tensor_ext c M N H h
 
 end TensorSections
 
@@ -463,11 +439,7 @@ theorem ringedTensorPreadditive :
       RingCat.{u})).obj R)) _ _ (monoidalCategory R) :=
   by
     let := monoidalCategory R
-    exact
-      { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
-        zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
-        whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
-        add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
+    exact monoidalPreadditive_of_tensorAdditive
 
 section TensorUniqueness
 
@@ -639,6 +611,16 @@ noncomputable def CanonicalRingedTensorComparison.totalIso [L.Additive]
   @asIso _ _ _ _ (k.total R S RI uInv I c L hobj P Q)
     (k.total_isIso R S RI uInv I c L hobj V am P Q)
 
+private theorem CanonicalRingedTensorComparison.totalIso_hom [L.Additive]
+    (k : CanonicalRingedTensorComparison R S RI uInv I c L hobj)
+    (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤
+      SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am : L ⊣
+      V)
+    (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
+      RingCat.{u})).obj R)) ℤ) :
+    (k.totalIso R S RI uInv I c L hobj V am P Q).hom =
+      k.total R S RI uInv I c L hobj P Q := rfl
+
 attribute [local irreducible] CanonicalRingedTensorComparison.totalIso monoidalCategory
 
 set_option synthInstance.maxSize 2048 in
@@ -749,7 +731,118 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
                 (k.totalIso R S RI uInv I c uStar hobj V am P Q)).inv ≫
                   rS.hom.app
                     (⟨(uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P, hp'⟩,
-                      ⟨(uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q, hq'⟩) := sorry
+                      ⟨(uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q, hq'⟩) := by
+  have hPRflat := hPR
+  have flatSite {E : Type u} [Category.{u} E] {J : GrothendieckTopology E}
+      (T : Sheaf J CommRingCat.{u})
+      (M : SheafOfModules.{u}
+        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj T)) :
+      IsFlatOnSite (J := J) (R := T) M ↔ M.IsFlat := by
+    exact ⟨fun h ↦ (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso T M) h,
+      fun h ↦ (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso T M).symm h⟩
+  have hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧
+      ∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n) := by
+    intro P
+    exact (hPR P).trans (and_congr_right fun _ ↦ forall_congr' fun n ↦
+      (flatSite R (P.X n)).symm)
+  have hPS : ∀ P, PS P ↔ P.IsAcyclicTensorKFlat ∧
+      ∀ n : ℤ, IsFlatOnSite (J := JD) (R := S) (P.X n) := by
+    intro P
+    exact (hPS P).trans (and_congr_right fun _ ↦ forall_congr' fun n ↦
+      (flatSite S (P.X n)).symm)
+  have hpres : ∀ P : CochainComplex (SheafOfModules.{u}
+      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ,
+      P.IsAcyclicTensorKFlat →
+      (∀ n : ℤ, IsFlatOnSite (J := JC) (R := R) (P.X n)) →
+      CochainComplex.IsAcyclicTensorKFlat
+        ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧
+      ∀ n : ℤ, IsFlatOnSite (J := JD) (R := S)
+        (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n) := by
+    intro P hp hf
+    exact isKFlat_ringedToposPullback uInv uPush adj I c uStar hobj hmap P hp hf
+  let A := SheafOfModules.{u}
+    ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  let B := SheafOfModules.{u}
+    ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)
+  let F := uStar.mapHomologicalComplex (.up ℤ)
+  let tR := Functor.uncurry.obj ((@curriedTensor A _ (monoidalCategory R)).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ))
+  let tS := Functor.uncurry.obj ((@curriedTensor B _ (monoidalCategory S)).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ))
+  let eps : DerivedCategory.Q ⋙ LF ⟶ F ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso A).inv LF ≫
+      Functor.whiskerLeft (HomotopyCategory.quotient A (.up ℤ)) epsilon ≫
+      Functor.whiskerRight (uStar.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh ≫
+      Functor.whiskerLeft F (DerivedCategory.quotientCompQhIso B).hom
+  have hF : ∀ P, PR P → PS (F.obj P) := by
+    intro P hp
+    exact (hPS _).2 (hpres P ((hPR _).1 hp).1 ((hPR _).1 hp).2)
+  set_option backward.isDefEq.respectTransparency true in
+    have hc := CanonicalTensorPullbackOfUniverses.derivedPullback_kflat_tensor_computation.{u, u, w}
+      (C := C) (D := D) (JC := JC) (JD := JD) (R := R) (S := S) (RI := RI)
+      uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+  obtain ⟨he, het⟩ := hc
+  let b0 : (F.prod F) ⋙ tS ≅ tR ⋙ F := by
+    let := monoidalCategory R
+    let := monoidalCategory S
+    let := ringedTensorPreadditive R
+    let := ringedTensorPreadditive S
+    exact tensorPullbackComparisonNatIso uStar k.mu k.naturality
+      (k.totalIso R S RI uInv I c uStar hobj V am)
+      (fun P Q ↦ k.totalIso_hom R S RI uInv I c uStar hobj V am P Q)
+  let b := b0.symm
+  let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ PR X.as
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : H.FullSubcategory) (f : Y.obj ⟶ X), HomotopyCategory.quasiIso A (.up ℤ) f :=
+    quotient_resolutions PR (by
+      intro G
+      obtain ⟨P, f, hp, hf, hq, _⟩ :=
+        CochainComplex.exists_isKFlatResolutionIndependentCoefficients G
+      have hp' := (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).1 hp
+      exact ⟨P, f, (hPRflat P).2 ⟨hp', hf⟩, hq⟩)
+  set_option backward.isDefEq.respectTransparency true in
+    have hff := CategoryTheory.resolvingRepresentativesFullyFaithfulWhiskering
+      (K := CochainComplex A ℤ) (H := HomotopyCategory A (.up ℤ))
+      (D := DerivedCategory A) (DerivedCategory B)
+      (HomotopyCategory.quotient A (.up ℤ)) HomotopyCategory.quotient_obj_surjective
+      (HomotopyCategory.quasiIso A (.up ℤ)) DerivedCategory.Qh PR H (fun _ ↦ Iff.rfl) hres
+  obtain ⟨ff⟩ := hff
+  let ff' := ff.ofIso ((Functor.whiskeringLeft _ _ (DerivedCategory B)).mapIso
+    (NatIso.prod (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))
+      (isoWhiskerLeft PR.ι (DerivedCategory.quotientCompQhIso A))))
+  set_option backward.isDefEq.respectTransparency true in
+    have hdes := CategoryTheory.tensorComparisonDescent
+      (K := CochainComplex A ℤ) (H := CochainComplex B ℤ)
+      (D := DerivedCategory A) (E := DerivedCategory B)
+      DerivedCategory.Q DerivedCategory.Q F LF eps PR PS hF ff' tR tS TR TS rR rS b
+      (fun P hp ↦ he P ((hPR _).1 hp).1 ((hPR _).1 hp).2)
+      (fun P Q hp hq ↦ het P Q ((hPR _).1 hp).1 ((hPR _).1 hp).2
+        ((hPR _).1 hq).1 ((hPR _).1 hq).2)
+  have heps (P : CochainComplex A ℤ) :
+      eps.app P = derivedPullbackComplexComparison uStar LF epsilon P := rfl
+  have hb (P Q : CochainComplex A ℤ) :
+      DerivedCategory.Q.map (b.hom.app (P, Q)) =
+        (DerivedCategory.Q.mapIso
+          (k.totalIso R S RI uInv I c uStar hobj V am P Q)).inv := rfl
+  constructor
+  · intro P hp hf
+    have h := hpres P hp (fun n ↦ (flatSite R (P.X n)).2 (hf n))
+    exact ⟨h.1, fun n ↦ (flatSite S _).1 (h.2 n)⟩
+  · set_option backward.isDefEq.respectTransparency true in
+      refine (existsUnique_congr fun _alpha ↦ ?_).mp hdes
+    constructor
+    · intro ha P Q hp hq
+      refine ⟨hF P hp, hF Q hq, ?_⟩
+      have hh := ha P Q hp hq
+      simp only [heps, hb] at hh
+      exact hh
+    · intro ha P Q hp hq
+      set_option backward.isDefEq.respectTransparency true in
+        obtain ⟨hp', hq', hh⟩ := ha P Q hp hq
+      simp only [heps, hb]
+      exact hh
+
+
 
 set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in

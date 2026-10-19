@@ -29,16 +29,18 @@
  ],
  "proof": [
   {
-   "text": "Use the existing ringed-topos pullback preservation theorem to obtain K-flatness and termwise site-flatness of every pulled-back representative.",
+   "text": "For the legacy same-universe interface, identify monoidal flatness with site-flatness through siteSheafTensorRightIso. Use the existing ringed-topos pullback preservation theorem to obtain K-flatness and termwise site-flatness of every pulled-back representative; transport flatness back for the legacy conclusion.",
    "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false
   },
   {
    "text": "The complex comparison is the composite of the quotient comparison, the specified counit, the mapHomotopyCategory factorization, and the target quotient comparison. The K-flat computation lemma makes it invertible on representatives and their tensor products.",
    "uses": [
-    "lem-weil-pbc-kflat-tensor-pullback-computation-universes"
+    "lem-weil-pbc-kflat-tensor-pullback-computation-universes",
+    "def-weil-pbc-derived-pullback-complex-comparison"
    ],
    "elementary": false
   },
@@ -51,16 +53,15 @@
    "elementary": true
   },
   {
-   "text": "Use independent-universe K-flat resolutions and the explicit site tensor/right tensor isomorphism to resolve every homotopy object. The resolving-representative restriction lemma gives fully faithful restriction in two variables; transport along the canonical quotient comparison.",
+   "text": "Use the existing independent-coefficient K-flat resolution theorem with flat terms. Convert its K-flat predicate through the proved equivalence and apply the original characterization of the source representative class. A generic quotient-resolution lemma maps each resolution to the homotopy category using the quotient quasi-isomorphism criterion. The resolving-representative restriction lemma gives fully faithful restriction in two variables; transport along the canonical quotient comparison.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-resolving-representative-whiskering",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+    "lem-weil-pbc-resolving-representative-whiskering"
    ],
    "elementary": false
   },
   {
-   "text": "Apply tensorComparisonDescent to the explicit natural complex comparison and total tensor isomorphism. Its square gives existence. Proof irrelevance identifies the target representative membership witnesses; the same square and fully faithful restriction give uniqueness.",
+   "text": "Apply tensorComparisonDescent to the explicit natural complex comparison and total tensor isomorphism. Its square gives existence. Proof irrelevance identifies the existential target representative membership witnesses with the fixed preservation witnesses. The same square and the descent uniqueness clause give uniqueness of the derived comparison.",
    "uses": [
     "lem-weil-pbc-tensor-comparison-descent-representatives"
    ],
@@ -75,12 +76,13 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-resolving-representative-whiskering",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-tensor-comparison-descent-representatives"
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "def-weil-pbc-derived-pullback-complex-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 and 0G7E: explicit representative square, localization descent; B4 formalization, 2026-10-18"
+  "place": "Tags 07A4 and 0G7E: representative square and localization descent. B4 independent-universe proof specialized by C1 to the original same-universe interface, with explicit flatness transport, 2026-10-20."
  },
  "mathlib_searches": [
   {
@@ -208,11 +210,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
+  "reviewer": "C-b98d2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261019T002506-L-2141445",
+  "landing": "20261019T231045-L-544096",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item/new/adapted modules (run_set, 560 s) and all 17 direct importers compiled against the delivery; diff vs live; #print axioms (sorryAx only via the cited derivedPullback_kflat_tensor_computation); item node proof/proof_deps vs Lean; new def node vs the moved declaration; Fractions import removal test fails (so it is needed)"
  }
 }
