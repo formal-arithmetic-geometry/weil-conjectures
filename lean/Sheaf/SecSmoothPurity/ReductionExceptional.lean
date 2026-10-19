@@ -96,7 +96,24 @@ the displayed derived equality, with the existing K-injective localization. -/
 theorem reductionConstantPush_eq (A : Type u) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     directImageConstantPush A f = proEtaleConstantDerivedDirectImage f A := by
-  sorry
+  have h : proEtaleRingDirectImageMap f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (proEtaleConstantRingComparison f A) =
+        proEtaleCoefficientDirectImageMap f A := by
+    change (proEtaleSheafAdjunction f CommRingCat.{u + 1}).unit.app _ ≫
+      (proEtaleSheafDirectImage f CommRingCat.{u + 1}).map
+        ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
+          (proEtaleCoefficientDirectImageMap f A) ≫
+            (proEtaleSheafAdjunction f CommRingCat.{u + 1}).counit.app _) = _
+    exact (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
+      |>.apply_symm_apply (proEtaleCoefficientDirectImageMap f A)
+  have hF : proEtaleRingModuleDirectImage f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (proEtaleConstantRingComparison f A) =
+        proEtaleConstantModuleDirectImage f A := by
+    unfold proEtaleRingModuleDirectImage proEtaleConstantModuleDirectImage
+    rw [h]
+  unfold directImageConstantPush proEtaleRingDerivedDirectImage
+    proEtaleConstantDerivedDirectImage
+  congr 1
 
 /-- Canonical realization of the chosen compact-support functor, obtained by cancelling
 the realization equivalences at the open factor and then using the specified
@@ -156,16 +173,72 @@ def reductionRealizationScalarMap {A B : Type u} [CommRing A] [CommRing B]
     (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ))).symm
       (TwoSquare.mk _ _ _ _ (reductionRealizationRestrict φ T).inv)).natTrans
 
+-- With equivalences on both sides, precomposition by the inverse mate is the
+-- composite of the two adjunction Hom equivalences and the realization equivalences.
+private theorem reductionInverseMate_isIso
+    {C : Type*} {D : Type*} {E : Type*} {F : Type*}
+    [Category* C] [Category* D] [Category* E] [Category* F]
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e : C ≌ E) (e' : D ≌ F)
+    (β : R₁ ⋙ e.functor ≅ e'.functor ⋙ R₂) :
+    IsIso (((mateEquiv adj₁ adj₂).symm β.hom).natTrans) := by
+  let α := ((mateEquiv adj₁ adj₂).symm β.hom).natTrans
+  have h (x : C) (y : D) :
+      Function.Bijective (fun k : e'.functor.obj (L₁.obj x) ⟶ e'.functor.obj y ↦
+        α.app x ≫ k) := by
+    let q := e'.fullyFaithfulFunctor.homEquiv.symm.trans
+      ((adj₁.homEquiv x y).trans
+        (e.fullyFaithfulFunctor.homEquiv.trans
+          ((Iso.homCongr (Iso.refl _) (β.app y)).trans
+            (adj₂.homEquiv (e.functor.obj x) (e'.functor.obj y)).symm)))
+    suffices heq : (fun k : e'.functor.obj (L₁.obj x) ⟶ e'.functor.obj y ↦
+        α.app x ≫ k) = q from heq.symm ▸ q.bijective
+    funext k
+    dsimp [q, Iso.homCongr]
+    simp only [Category.id_comp]
+    rw [Adjunction.homEquiv_naturality_left_symm]
+    simp only [α, mateEquiv_symm_apply, Adjunction.homEquiv_unit,
+      Adjunction.homEquiv_counit, Functor.FullyFaithful.homEquiv_apply,
+      Functor.FullyFaithful.homEquiv_symm_apply, Functor.map_comp, Category.assoc]
+    dsimp only [TwoSquare.natTrans, TwoSquare.mk,
+      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.comp_obj, Functor.comp_map, Functor.associator_hom_app,
+      Functor.associator_inv_app, Functor.leftUnitor_inv_app,
+      Functor.rightUnitor_hom_app]
+    simp only [Category.id_comp, Category.assoc]
+    congr 1
+    have hn := β.hom.naturality (e'.fullyFaithfulFunctor.preimage k)
+    change e.functor.map (R₁.map _) ≫ β.hom.app y =
+      β.hom.app (L₁.obj x) ≫ R₂.map (e'.functor.map _) at hn
+    conv_rhs =>
+      rw [← L₂.map_comp_assoc, hn, L₂.map_comp, Category.assoc,
+        adj₂.counit_naturality]
+    simp
+  have (x : C) : IsIso (α.app x) := by
+    apply isIso_of_coyoneda_map_bijective
+    intro z
+    let q := Iso.homCongr (Iso.refl (e'.functor.obj (L₁.obj x))) (e'.counitIso.app z)
+    let q' := Iso.homCongr (Iso.refl (L₂.obj (e.functor.obj x))) (e'.counitIso.app z)
+    have hq := q'.bijective.comp ((h x (e'.inverse.obj z)).comp q.symm.bijective)
+    simpa [q, q', Iso.homCongr, Function.comp_def, Category.assoc] using hq
+  exact NatIso.isIso_of_isIso_app α
+
 /-- The section-normalized scalar mate is invertible without flatness of phi.
 Source: blueprint Step 4 (blueprint: det-sp-reduction-exceptional).
-Proof: use flat K-flat representatives. The realization equivalence preserves flatness
-and K-flatness, since its section-action inverse identifies ordinary tensor products.
-The mate sends the sheafified generator b tensor m to the same b tensor m. Ordinary
-balanced-tensor universality gives its inverse; localizing proves invertibility. -/
+Proof: precomposition by the inverse mate is the composite of the two adjunction
+Hom equivalences and the realization Hom equivalences. Naturality identifies this
+composite with the specified mate. Essential surjectivity of the target realization
+extends bijectivity to every test object, so the coyoneda criterion applies. -/
 theorem reductionRealizationScalarMap_isIso {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) (T : Scheme.{u}) :
     IsIso (reductionRealizationScalarMap φ T) := by
-  sorry
+  exact reductionInverseMate_isIso
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars.{u} (ProEt.topology T)
+        (RingHom.ulift.{u + 1, u + 1, u, u} φ)))
+    (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ))
+    (sfIntrinsicDerivedEquivalence T A) (sfIntrinsicDerivedEquivalence T B)
+    (reductionRealizationRestrict φ T).symm
 
 /-- The canonical scalar comparison in the original intrinsic coefficient categories.
 Source: blueprint Step 4 (blueprint: det-sp-reduction-exceptional). -/
@@ -216,6 +289,8 @@ def reductionSiteCompactSupportIso (A : Type u) [CommRing A] [Finite A]
         (⟨Z, p, j, rfl, inferInstance, inferInstance⟩ : Compactification (j ≫ p))) _ ≪≫
     Functor.associator _ _ _
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The scalar map on the actual ordinary Tate line, fixed on every root generator.
 Source: blueprint Step 6 (blueprint: det-sp-reduction-exceptional).
 Proof: the balanced tensor presentation sends a tensor z to phi(a) tensor z. Balancing
@@ -229,7 +304,84 @@ theorem reductionEtaleTateMap_existsUnique
       ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W),
         τ.hom.app W (finiteEtaleTateOneGenerator A N T hA W a z) =
           finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
-  sorry
+  let J := T.smallEtaleTopology
+  let P := finiteEtaleMuModulePresheaf T N
+  let r := finiteEtaleTwistScalar N A hA
+  let L := (Sheaf.restrictScalars J φ).obj (finiteEtaleTateLine T N B hB)
+  let adj := ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} r
+  let g (W : T.Etaleᵒᵖ) : P.obj W ⟶ (ModuleCat.restrictScalars r).obj (L.obj.obj W) :=
+    letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N W)
+    ModuleCat.ofHom (X := P.obj W)
+      (Y := (ModuleCat.restrictScalars r).obj (L.obj.obj W))
+      (({ toFun := Etale.ordinaryFiniteRootGenerator B N hB T W
+          map_zero' := (Etale.ordinaryFiniteRootGenerator B N hB T W).map_zero
+          map_add' := (Etale.ordinaryFiniteRootGenerator B N hB T W).map_add } :
+        P.obj W →+ ((ModuleCat.restrictScalars r).obj (L.obj.obj W))).toZModLinearMap N)
+  let q (W : T.Etaleᵒᵖ) : (ModuleCat.extendScalars r).obj (P.obj W) ⟶ L.obj.obj W :=
+    (adj.homEquiv _ _).symm (g W)
+  have hq (W : T.Etaleᵒᵖ) (z : (T.rootsOfUnitySheaf N).obj.obj W) :
+      q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z) =
+        Etale.ordinaryFiniteRootGenerator B N hB T W z := by
+    have hh := congrArg (fun f ↦ f z) ((adj.homEquiv _ _).apply_symm_apply (g W))
+    change q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _
+      (Module.compHom _ r) _ (1 : A) z) = (g W) z at hh
+    exact hh
+  have hqa (W : T.Etaleᵒᵖ) (a : A)
+      (z : (T.rootsOfUnitySheaf N).obj.obj W) :
+      q W (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z) =
+        finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
+    let _ := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N W)
+    have hx : (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z) =
+        a • (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ (1 : A) z :
+          (ModuleCat.extendScalars r).obj (P.obj W)) := by
+      simpa only [mul_one] using
+        (ModuleCat.ExtendScalars.smul_tmul r a 1 (show P.obj W from z)).symm
+    rw [hx, map_smul, hq]
+    change φ a • (show (finiteEtaleTateLine T N B hB).obj.obj W from
+      Etale.ordinaryFiniteRootGenerator B N hB T W z) = _
+    change φ a • ((toSheafify J (P ⋙ ModuleCat.extendScalars
+      (finiteEtaleTwistScalar N B hB))).app W
+        ((@TensorProduct.tmul (ZMod N) _ _ _ _ _
+          (Module.compHom _ (finiteEtaleTwistScalar N B hB)) _ (1 : B) z))) =
+      (toSheafify J (P ⋙ ModuleCat.extendScalars
+        (finiteEtaleTwistScalar N B hB))).app W
+          ((@TensorProduct.tmul (ZMod N) _ _ _ _ _
+            (Module.compHom _ (finiteEtaleTwistScalar N B hB)) _ (φ a) z))
+    rw [← map_smul]
+    congr 1
+    simpa only [mul_one] using
+      (ModuleCat.ExtendScalars.smul_tmul (finiteEtaleTwistScalar N B hB)
+        (φ a) 1 (show P.obj W from z))
+  let η : P ⋙ ModuleCat.extendScalars r ⟶ L.obj :=
+    { app := q
+      naturality := by
+        intro W V f
+        change (ModuleCat.extendScalars r).map (P.map f) ≫ q V = q W ≫ L.obj.map f
+        apply (adj.homEquiv _ _).injective
+        rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+        simp only [q, Equiv.apply_symm_apply]
+        ext z
+        exact congrArg (fun k ↦ k z)
+          (Etale.ordinaryFiniteRootGenerator_naturality B N hB T f) }
+  let τ : finiteEtaleTateLine T N A hA ⟶ L :=
+    ⟨sheafifyLift J η L.property⟩
+  have hτ : ∀ (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W),
+      τ.hom.app W (finiteEtaleTateOneGenerator A N T hA W a z) =
+        finiteEtaleTateOneGenerator B N T hB W (φ a) z := by
+    intro W a z
+    have hh := congrArg (fun f ↦ f.app W
+      (@TensorProduct.tmul (ZMod N) _ _ _ _ _ (Module.compHom _ r) _ a z))
+      (toSheafify_sheafifyLift J η L.property)
+    exact hh.trans (hqa W a z)
+  refine ⟨τ, hτ, ?_⟩
+  intro τ' hτ'
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _ L.property
+  ext W x
+  induction x using TensorProduct.induction_on with
+  | zero => simp
+  | tmul a z => exact (hτ' W a z).trans (hτ W a z).symm
+  | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
 /-- The canonical generator-normalized ordinary Tate scalar map.
 Source: blueprint Step 6 (blueprint: det-sp-reduction-exceptional). -/
