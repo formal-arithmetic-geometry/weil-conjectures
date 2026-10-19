@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-kflat-tensor-quasiiso-independent",
+ "kind": "statement",
+ "title": "K-flat tensor transport for independent coefficient universes",
+ "statement": "Let C be a site essentially small in the coefficient universe r, let O be a sheaf of commutative rings, and let A be its module sheaves [def-weil-sheaf-of-modules-category]. Let P be K-flat for the acyclic total-tensor predicate [def-pc-kflat-complex], at independent coefficient and site universes. For any quasi-isomorphism f:X→Y of cochain complexes [def-weil-abstract-derived-category], the total tensor map f tensor id_P [def-pc-tensor-complex-sheaves], in the canonical second-variable tensor model koszulTensorFunctor [def-pur-principal-koszul-quotient-towers], is a quasi-isomorphism. No regularity, tower, limit, completion or Roos-triangle assumptions are needed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pur-principal-koszul-quotient-towers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN, definition-K-flat; Tag 06YP, lemma-K-flat-quasi-isomorphism; parent Koszul reconstruction proof, step 2."
+ },
+ "proof": [
+  {
+   "text": "The mapping cone of f is acyclic because f is a quasi-isomorphism. Tensoring that cone with the K-flat P is acyclic by definition. Tensor of sheaves is additive: it is sheafification of the sectionwise additive presheaf tensor and sheafification is additive. Apply CochainComplex.mapBifunctorMappingCone₁Iso to identify this total tensor with the cone of the tensor map, then apply the converse acyclic-cone criterion. This proves the result for arbitrary f, including f on zero complexes and an isomorphism, without any assumption on a section t.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-19",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YN and parent reconstruction proof step 2; standard acyclic mapping-cone proof expanded by worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K-flat second variable total tensor preserves quasi-isomorphisms of complexes of sheaves with independent coefficient universe",
+   "results": "8 hits, including HomologicalComplex.HasGoodTensor₁₂ and Module.Flat.rTensor_shortComplex_exact; none states the independent-universe acyclic tensor predicate result.",
+   "date": "2026-10-19",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.mapBifunctorMappingCone₁Iso\"",
+   "results": "0 hits; the cone-tensor comparison is in the source library instead of Mathlib.",
+   "date": "2026-10-19",
+   "verdict": "Use source-library cone comparison in eventual proof."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat_iff_preservesQuasiIso|kFlat_iff_preserves_acyclic",
+   "results": "Logged Mathlib source search: 0 hits. A direct source-library search finds CochainComplex.kFlat_iff_preservesQuasiIso and HomotopyCategory.kFlat_iff_preserves_acyclic in FromJoel.CategoryTheory.Abelian.Flat.KFlat. Their monoidal preadditive input is not directly supplied by the independent sheaf tensor interface.",
+   "date": "2026-10-19",
+   "verdict": "Not an exact replacement without establishing tensor additivity and the monoidal homotopy interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a quasi-isomorphism with a K-flat complex of sheaves preserves quasi-isomorphisms",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.rTensor_exact, HomologicalComplex.quasiIso_map_of_preservesHomology, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology, HomologicalComplex.quasiIso, Module.Flat.lTensor_shortComplex_exact, quasiIso_comp, DerivedCategory.instIsIsoMapCochainComplexIntQ. None states the independent-coefficient K-flat tensor result.",
+   "date": "2026-10-19",
+   "verdict": "No exact match; the general cone criterion is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedCompleteKoszulReconstruction",
+  "date": "2026-10-19",
+  "group": "Y7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-derived-complete-koszul-reconstruction",
+   "place": "Proof step 2: K-flat tensor of the acyclic augmentation cone."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTensorPreservesQuasiIsoIndependentCoefficients.lean",
+  "declaration": "CategoryTheory.kFlatTensorPreservesQuasiIsoIndependentCoefficients",
+  "statement": "theorem kFlatTensorPreservesQuasiIsoIndependentCoefficients\n    (P : CochainComplex 𝒜 ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P)\n    {X Y : CochainComplex 𝒜 ℤ} (f : X ⟶ Y) (hf : QuasiIso f) :\n    QuasiIso ((koszulTensorFunctor R P).map f)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

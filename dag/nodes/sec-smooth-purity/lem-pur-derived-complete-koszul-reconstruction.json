@@ -2,7 +2,7 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "For every $m\\geq1$, multiplication by $t^m$ on $\\mathcal O$ is the $m$-fold composite of the monomorphism $t$, hence injective. So $H^{-1}(Q_m)=\\ker(t^m)=0$ and $H^0(Q_m)=\\operatorname{coker}(t^m)=B_m$, and the map $\\epsilon_m:Q_m\\to B_m[0]$ (zero in degree $-1$, the quotient map in degree $0$) is a chain map inducing the identity of $B_m$ on $H^0$; thus $\\epsilon_m$ is a quasi-isomorphism [def-weil-abstract-derived-category]. The transition $Q_{m+1}\\to Q_m$ ($t$ in degree $-1$, identity in degree $0$) is a chain map because $t^m\\cdot(t x)=t^{m+1}x$, and $\\epsilon_m\\circ(Q_{m+1}\\to Q_m)=(B_{m+1}\\to B_m)\\circ\\epsilon_{m+1}$ since both are the quotient map $\\mathcal O\\to B_m$ in degree $0$; so the $\\epsilon_m$ form a morphism of inverse systems [def-weil-inverse-system]. Likewise the degree-zero map $\\mathcal O[0]\\to Q_m$ is a chain map compatible with the transitions, and its composite with $\\epsilon_m$ is the quotient map $\\mathcal O\\to B_m$.",
+   "text": "For every $m\\geq1$, multiplication by $t^m$ on $\\mathcal O$ is the $m$-fold composite of the monomorphism $t$, hence injective. So $H^{-1}(Q_m)=\\ker(t^m)=0$ and $H^0(Q_m)=\\operatorname{coker}(t^m)=B_m$, and the map $\\epsilon_m:Q_m\\to B_m[0]$ (zero in degree $-1$, the quotient map in degree $0$) is a chain map inducing the identity of $B_m$ on $H^0$; thus $\\epsilon_m$ is a quasi-isomorphism [def-weil-abstract-derived-category]. The transition $Q_{m+1}\\to Q_m$ ($t$ in degree $-1$, identity in degree $0$) is a chain map because $t^m\\cdot(t x)=t^{m+1}x$, and $\\epsilon_m\\circ(Q_{m+1}\\to Q_m)=(B_{m+1}\\to B_m)\\circ\\epsilon_{m+1}$ since both are the quotient map $\\mathcal O\\to B_m$ in degree $0$; so the $\\epsilon_m$ form a morphism of inverse systems [def-weil-inverse-system]. Likewise the degree-zero map $\\mathcal O[0]\\to Q_m$ is a chain map compatible with the transitions, and its composite with $\\epsilon_m$ is the quotient map $\\mathcal O\\to B_m$. The Lean proof uses Mathlib mappingCone.quasiIso_descShortComplex on the image under the degree-zero single-complex functor of the short exact cokernel sequence; monicity of endoPow is proved by induction.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-inverse-system"
@@ -14,11 +14,12 @@
    }
   },
   {
-   "text": "Choose the stated K-flat representative $P$ of $K$. Tensor each $\\epsilon_m$ of step 1 with $P$ and use the total tensor complexes of [def-pc-tensor-complex-sheaves]. The cone of $P\\otimes Q_m\\to P\\otimes B_m[0]$ is the tensor of $P$ with the cone of $\\epsilon_m$; it is acyclic by K-flatness, so the resulting map $a_m:V_m\\to U_m$ is a quasi-isomorphism. The transition formulas in the statement commute with these tensor maps, hence the $a_m$ form the strict tower morphism $a$.",
+   "text": "Choose the stated K-flat representative $P$ of $K$. Tensor each $\\epsilon_m$ of step 1 with $P$ and use the total tensor complexes of [def-pc-tensor-complex-sheaves]. The cone of $P\\otimes Q_m\\to P\\otimes B_m[0]$ is the tensor of $P$ with the cone of $\\epsilon_m$; it is acyclic by K-flatness, so the resulting map $a_m:V_m\\to U_m$ is a quasi-isomorphism. The transition formulas in the statement commute with these tensor maps, hence the $a_m$ form the strict tower morphism $a$. In Lean, apply the independent-coefficient tensor-preservation lemma [lem-pur-kflat-tensor-quasiiso-independent] to the canonical augmentation. This isolates only the acyclic-cone tensor argument, not the tower or reconstruction conclusions.",
    "uses": [
     "def-pc-kflat-complex",
     "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-pur-kflat-tensor-quasiiso-independent"
    ],
    "elementary": false,
    "source": {
@@ -27,7 +28,7 @@
    }
   },
   {
-   "text": "Because evaluation of strict towers is exact, the levelwise quasi-isomorphisms $a_m$ make $a$ a quasi-isomorphism in the derived category of $\\operatorname{Tow}(\\mathcal A)$, where $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact derived inverse-limit functor, so $R\\lim(a):C_t(K)\\to R\\lim U_\\bullet$ is an isomorphism and is compatible with the strict augmentations.",
+   "text": "Because evaluation of strict towers is exact, the levelwise quasi-isomorphisms $a_m$ make $a$ a quasi-isomorphism in the derived category of $\\operatorname{Tow}(\\mathcal A)$, where $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] supplies the exact derived inverse-limit functor, so $R\\lim(a):C_t(K)\\to R\\lim U_\\bullet$ is an isomorphism and is compatible with the strict augmentations. The Lean map on complexes of towers preserves composition componentwise by reflexivity, so the augmentation equation follows from the two functors map_comp laws.",
    "uses": [
     "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
@@ -40,7 +41,7 @@
    }
   },
   {
-   "text": "The given distinguished triangle for $K$ is a Roos triangle for the tower $(U_m)$ in $D(\\mathcal A)$ [def-weil-derived-limit]. Take the canonical Roos triangle $C_t(K)\\xrightarrow{p_V}\\prod_m^DV_m\\xrightarrow{1-s}\\prod_m^DV_m\\to C_t(K)[1]$ of the strict tower $V_\\bullet$ supplied by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Since $a$ is a strict tower morphism, $u=\\prod_m a_m:\\prod_m^DV_m\\to\\prod_m^DU_m$ satisfies $u\\circ(1-s)=(1-s)\\circ u$; each $a_m$ is an isomorphism in $D(\\mathcal A)$ by step 2, so $u$ is an isomorphism and $u^{-1}$ also commutes with $1-s$. Apply (TR3) of [def-weil-triangulated-category] to the rotated triangles with the pair $(u^{-1},u^{-1})$ on the two product terms: it gives $\\phi:K\\to C_t(K)$ with $p_V\\circ\\phi=u^{-1}\\circ c$ and compatible third maps, i.e. a morphism of Roos triangles $(\\phi,u^{-1},u^{-1})$. By [lemma-weil-pbc-r-lim-levelwise-isomorphism], applied to the levelwise isomorphisms $a_m^{-1}$, $\\phi$ is an isomorphism, so $(\\phi,u^{-1},u^{-1})$ is an isomorphism of the two Roos triangles. The $m$-th component of $u\\circ p_V\\circ\\phi=c$ reads $a_m\\circ\\mathrm{pr}_m\\circ p_V\\circ\\phi=$ the quotient map $K\\to U_m$, which is the projection equation of the statement.",
+   "text": "The given distinguished triangle for $K$ is a Roos triangle for the tower $(U_m)$ in $D(\\mathcal A)$ [def-weil-derived-limit]. Take the canonical Roos triangle $C_t(K)\\xrightarrow{p_V}\\prod_m^DV_m\\xrightarrow{1-s}\\prod_m^DV_m\\to C_t(K)[1]$ of the strict tower $V_\\bullet$ supplied by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Since $a$ is a strict tower morphism, $u=\\prod_m a_m:\\prod_m^DV_m\\to\\prod_m^DU_m$ satisfies $u\\circ(1-s)=(1-s)\\circ u$; each $a_m$ is an isomorphism in $D(\\mathcal A)$ by step 2, so $u$ is an isomorphism and $u^{-1}$ also commutes with $1-s$. Apply (TR3) of [def-weil-triangulated-category] to the rotated triangles with the pair $(u^{-1},u^{-1})$ on the two product terms: it gives $\\phi:K\\to C_t(K)$ with $p_V\\circ\\phi=u^{-1}\\circ c$ and compatible third maps, i.e. a morphism of Roos triangles $(\\phi,u^{-1},u^{-1})$. By [lemma-weil-pbc-r-lim-levelwise-isomorphism], applied to the levelwise isomorphisms $a_m^{-1}$, $\\phi$ is an isomorphism, so $(\\phi,u^{-1},u^{-1})$ is an isomorphism of the two Roos triangles. The $m$-th component of $u\\circ p_V\\circ\\phi=c$ reads $a_m\\circ\\mathrm{pr}_m\\circ p_V\\circ\\phi=$ the quotient map $K\\to U_m$, which is the projection equation of the statement. The natural evaluation isomorphism supplied by the strict-limit theorem transports its triangle to the actual Koszul levels using a product isomorphism. The generic private Roos comparison proves both triangle equations for the same isomorphism; projecting the first equation gives the prescribed components.",
    "uses": [
     "def-weil-derived-limit",
     "def-weil-triangulated-category",
@@ -62,14 +63,18 @@
   "def-weil-derived-limit",
   "def-weil-inverse-system",
   "def-weil-triangulated-category",
+  "lem-pur-kflat-tensor-quasiiso-independent",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-tower-category-levelwise-abelian",
   "lemma-weil-pbc-r-lim-levelwise-isomorphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-19",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok, together with the principal regular-element calculation from algebraization.tex Tag 0A0E"
+  "place": "Tag 0941, lemma-derived-limit-is-ok, together with the principal regular-element calculation from algebraization.tex Tag 0A0E",
+  "note": "Stage-3 complete Lean proof: regular augmentation, independent-universe K-flat tensor transport, strict-tower localization, product transport and Roos triangle comparison are proved. The separate tensor transport module is also proved, with no new holes."
  },
  "mathlib_match": null,
  "status": "split",
@@ -221,5 +226,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Returned H3/H4/H12 repair: actual canonical strict t/id and quotient towers; recorded independent-coefficient K-flatness and canonical sheaf tensor; total right derived strict limit selected by its universal property from the repaired dependency; component equations through e.inv and the connecting equation for the same constructed phi. The unsupported saved statement_change is withdrawn and the current main statement is retained verbatim. Tensor order Q_m tensor P is the symmetric model of P tensor Q_m. Timeout repair of e2328281005d: use the exact augmentation naturality theorem directly and restrict the tower comparison simplification to the explicit ofOpSequence successor-map rewrite, avoiding broad simp over cone/tensor tower data."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261019T034402-L-427636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
