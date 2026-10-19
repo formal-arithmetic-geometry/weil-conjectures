@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+ "kind": "statement",
+ "title": "Bounded fixed-module complexes with constructible sheaf origins have derived origin",
+ "statement": "Let X be any scheme and Lambda a finite commutative ring. Let K be a bounded derived complex of fixed Lambda-module sheaves on the small pro-etale site [def-weil-pbc-proetale-modules]. Assume that for each integer n there is a globally constructible etale Lambda-module sheaf F_n [def-weil-pbc-etale-constructible-sheaf] with nu* F_n isomorphic to H^n(K) [def-weil-derived-cohomology-sheaves]. Then K is isomorphic to nu* L for an etale derived complex L that is bounded and has globally constructible cohomology [def-weil-pbc-constructible-complexes].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AL, lemma-compare-constructible-derived; Tag 099V, lemma-compare-derived"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof": [
+  {
+   "text": "The bounded constructible etale objects form a triangulated subcategory. Their image under exact inverse image is triangulated as well: lift arrows between origins by the bounded-below Hom bijection, take a distinguished cone, and compare its image cone using a morphism of triangles. Shifts and a zero object stay in the image.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing bounded devissage theorem DerivedCategory.prop_of_bounded to that triangulated image. The proof is the finite truncation induction: split off an extreme cohomology sheaf, use the cohomology long exact sequence to shorten the interval, and use triangulated closure. The base case is the shifted single complex of the sole nonzero cohomology. A single complex on nu* F_n is the inverse image of the single complex on F_n by exact single-complex compatibility. This proves the claimed origin, including acyclic complexes.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sf-derived-truncation-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-concentrated-single"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Existing source-library theorem with a complete proof body, registered by N3; no new Lean declaration or hole. Its dependencies retain their existing proof obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived complex whose cohomology lies in the essential image of a fully faithful exact functor lies in its essential image",
+   "results": "8 hits: DerivedCategory.instEssSurjCochainComplexIntQ, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-18",
+   "verdict": "No complete Mathlib comparison. Local rg found the existing proved library boundedConstructible_of_homology and the derived Hom bijection; reuse them."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"IsTriangulated\"",
+   "results": "1 hits: CategoryTheory.ObjectProperty.instIsTriangulatedEssImageOfIsTriangulatedOfFull",
+   "date": "2026-10-18",
+   "verdict": "No complete Mathlib comparison. Local rg found the existing proved library boundedConstructible_of_homology and the derived Hom bijection; reuse them."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible_of_homology|prop_of_bounded",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No complete Mathlib comparison. Local rg found the existing proved library boundedConstructible_of_homology and the derived Hom bijection; reuse them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded proetale complex with constructible etale-origin cohomology has bounded constructible etale origin",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Scheme.Etale, HomologicalComplex.instHasFiniteLimits, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-18",
+   "verdict": "No complete Mathlib comparison. Local rg found the existing proved library boundedConstructible_of_homology and the derived Hom bijection; reuse them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingConstructibleDerivedOrigin",
+  "date": "2026-10-18",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+   "place": "Reuse of the existing fixed-module derived comparison in the intrinsic constant-ring presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_of_homology",
+  "statement": "theorem boundedConstructible_of_homology\n    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}\n    (hK : _root_.DerivedCategory.TStructure.t.bounded K)\n    (hH : ∀ n, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧\n      Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅\n        (_root_.DerivedCategory.homologyFunctor _ n).obj K)) :\n    boundedConstructible (ModuleCat.{u + 1} Λ) X K",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261019T005351-L-2758695",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261019T005351-L-2758695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

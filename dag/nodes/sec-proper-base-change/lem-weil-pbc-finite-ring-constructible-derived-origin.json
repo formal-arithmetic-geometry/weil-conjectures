@@ -27,112 +27,64 @@
  ],
  "proof": [
   {
-   "text": "Put $F=\\nu_X^*$. A finite ring has finitely many ideals, so ascending chains stabilize and $B$ is Noetherian. The sheaf comparison [lem-weil-pbc-finite-ring-constructible-sheaf-origin] supplies preservation and reflection of constructibility and an etale origin for every intrinsically constructible sheaf. Throughout, constructibility means the global finite-stratification notions stated by the two definition nodes, not an identification of these notions with affine-local constructibility on arbitrary schemes.",
-   "uses": [
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible; global finite-stratification form"
-   }
-  },
-  {
-   "text": "By [prop-weil-pbc-site-comparison-finite-level], $F$ is exact on module sheaves. For a representing complex, exactness preserves kernels, images and their quotients, giving $\\mathcal H^i(F L)\\cong F\\mathcal H^i(L)$ by [def-weil-derived-cohomology-sheaves]. By [lem-sf-exact-functor-derived-triangulated], the termwise derived functor commutes with shifts and preserves distinguished triangles. The sheaf equivalence therefore sends every bounded constructible etale complex to an intrinsically constructible pro-etale complex in the same interval. By [thm-weil-pbc-site-comparison], this derived functor is fully faithful on $D^+$, hence also on the full bounded constructible subcategory.",
-   "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-derived-cohomology-sheaves",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, lemma-compare-constructible-derived; lemma-compare-derived"
-   }
-  },
-  {
-   "text": "Let $K$ have intrinsically constructible cohomology vanishing outside $[a,b]$. If all its cohomology is zero (in particular if $a>b$), a representing complex is acyclic and $0\\to K$ is a quasi-isomorphism, so $K\\cong0=F(0)$ in the localization defining the derived category [def-weil-pbc-proetale-modules]. Otherwise $a\\leq b$. Induct on the nonnegative integer $b-a$, with the claim that $K\\cong F L$ for a bounded constructible etale $L$ in $[a,b]$. For $a=b$, [lem-sf-derived-concentrated-single] identifies $K\\cong\\mathcal H^a(K)[-a]$. Choose a constructible etale sheaf $G$ with $FG\\cong\\mathcal H^a(K)$ by the sheaf comparison. Then $L=G[-a]$ has the required cohomology, and the shift and single-complex compatibility of [lem-sf-exact-functor-derived-triangulated] gives $F L\\cong K$.",
+   "text": "Factor the specified intrinsic inverse image as fixed-module inverse image C followed by intrinsic realization R. The realization is an exact equivalence. Its sheafification counit gives R(U(M)) isomorphic to M for restriction U to constant scalars. Full faithfulness of R then gives U(R(G)) isomorphic to G. The restriction constructibility comparison identifies intrinsic constructibility of R(G) with fixed-module constructibility of G, retaining the global finite partitions. The etale constructibility comparison likewise identifies the source predicates.",
    "uses": [
     "def-weil-pbc-proetale-modules",
-    "lem-sf-derived-concentrated-single",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, bounded truncation induction; derived.tex Tag 08J5 single-degree case"
-   }
+   "elementary": false
   },
   {
-   "text": "For $a<b$, take the distinguished truncation triangle $K_-\\to K\\to K_+\\xrightarrow{\\delta}K_-[1]$ supplied by [lem-sf-derived-truncation-triangle], with $\\mathcal H^n(K_-)=0$ for $n\\geq b$ and $\\mathcal H^n(K_+)=0$ for $n<b$. Apply [lem-sf-derived-homology-long-exact]. For $n<b$, the adjacent groups $\\mathcal H^{n-1}(K_+)$ and $\\mathcal H^n(K_+)$ are zero, so $\\mathcal H^n(K_-)\\to\\mathcal H^n(K)$ is an isomorphism. For $n\\geq b$, the adjacent groups $\\mathcal H^n(K_-)$ and $\\mathcal H^{n+1}(K_-)$ are zero, so $\\mathcal H^n(K)\\to\\mathcal H^n(K_+)$ is an isomorphism. Consequently $K_-$ and $K_+$ have constructible cohomology in $[a,b-1]$ and $[b,b]$, respectively. The induction hypothesis and the base case give etale origins $L_-$ and $L_+$ with these same bounds, with chosen isomorphisms $F L_-\\cong K_-$ and $F L_+\\cong K_+$.",
+   "text": "Every source object is bounded below. Restrict the existing fixed-module derived Hom bijection to this full subcategory to obtain fullness and faithfulness. Compose with the derived realization equivalence and transport across mapDerivedCategoryCompIso.",
    "uses": [
-    "lem-sf-derived-truncation-triangle",
-    "lem-sf-derived-homology-long-exact"
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL; derived.tex Tags 08J5 (remark-truncation-distinguished-triangle), 05RS (lemma-cohomology-homological)"
-   }
+   "elementary": false
   },
   {
-   "text": "Using the chosen origins and the shift isomorphism of [lem-sf-exact-functor-derived-triangulated], view $\\delta$ as a morphism $F L_+\\to F(L_-[1])$. Both source objects $L_+$ and $L_-[1]$ are bounded below. Full faithfulness [thm-weil-pbc-site-comparison] therefore lifts it uniquely to $d:L_+\\to L_-[1]$. Apply TR1 of [def-weil-triangulated-category] to $-d[-1]:L_+[-1]\\to L_-$, obtaining a distinguished triangle $L_+[-1]\\xrightarrow{-d[-1]}L_-\\to H\\to L_+$. Its rotation by TR2 is $L_-\\to H\\to L_+\\xrightarrow{d}L_-[1]$, since the new last arrow is $-(-d[-1])[1]=d$. Its image under $F$ is distinguished by [lem-sf-exact-functor-derived-triangulated]. Transport its outer terms along the chosen isomorphisms and rotate twice; both it and the twice-rotated truncation triangle now begin with $K_+\\xrightarrow{\\delta}K_-[1]$. TR3, applied to the identity on these first two terms, produces a morphism of distinguished triangles. These two components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes the third component $F H[1]\\to K[1]$ an isomorphism. Inverse shift gives $F H\\cong K$.",
+   "text": "Use the finite-level comparison theorem for exactness of C, retaining the comparison-morphism unit step. Exact cohomology comparison identifies H^i(F(L)) with F(H^i(L)). Fixed-module comparison preserves constructibility, and realization preserves the intrinsic predicate by step 1. Isomorphism invariance then proves that any object in the specified essential image has constructible cohomology and the same finite cohomological bounds.",
    "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL; derived.tex Tags 0145 (definition-triangulated-category), 014A (lemma-third-isomorphism-triangle), 015F (lemma-right-derived-exact-functor)"
-   }
-  },
-  {
-   "text": "The constructed etale object $H$ is bounded constructible in $[a,b]$. Indeed Step 2 gives $F\\mathcal H^i(H)\\cong\\mathcal H^i(K)$. If $i$ is outside $[a,b]$, apply $\\nu_{X,*}$ to this isomorphism and use the underived unit $\\mathcal H^i(H)\\cong\\nu_{X,*}F\\mathcal H^i(H)$ from [prop-weil-pbc-site-comparison-finite-level] to conclude $\\mathcal H^i(H)=0$. Within the interval, the sheaf equivalence gives a constructible etale $G_i$ with $F G_i\\cong\\mathcal H^i(K)$. The unit makes $F$ fully faithful on all sheaves: its adjunction identifies maps $F A\\to F B$ with maps $A\\to\\nu_{X,*}FB\\cong B$. Thus $F\\mathcal H^i(H)\\cong F G_i$ implies $\\mathcal H^i(H)\\cong G_i$, proving constructibility. This closes the induction and supplies essential surjectivity.",
-   "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL; unit and sheaf equivalence"
-   }
-  },
-  {
-   "text": "For any etale complex $L$, Step 2 gives $\\mathcal H^i(F L)\\cong F\\mathcal H^i(L)$. Vanishing of $\\mathcal H^i(L)$ implies vanishing of its image; conversely vanishing of its image implies vanishing of $\\mathcal H^i(L)$ by the underived unit of [prop-weil-pbc-site-comparison-finite-level]. Hence the property of vanishing outside each interval $[a,b]$ is both preserved and reflected (including the empty-interval zero case). Together with full faithfulness and the induction this proves the stated equivalence and the bounded constructible etale-origin conclusion.",
-   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "def-weil-derived-cohomology-sheaves",
     "prop-weil-pbc-site-comparison-finite-level"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, exact cohomology comparison"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Conversely transfer K to J under the derived realization equivalence. Exactness and faithfulness reflect its cohomological bounds. Step 1 transfers each intrinsic cohomology predicate to fixed-module constructibility. Descend each cohomology sheaf using fixed-module constructible origin. Apply the existing boundedConstructible_of_homology theorem to obtain a bounded constructible etale origin L of J. Convert the etale constructibility predicate, replace separate lower and upper bounds by their minimum and maximum, and compose the comparison and realization isomorphisms to obtain the required origin of K.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any etale complex, exact intrinsic inverse image preserves zero cohomology and faithful intrinsic inverse image reflects zero cohomology. Apply these facts degreewise outside any requested interval, including an empty interval. Faithfulness follows from the underived comparison unit and the realization equivalence.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-proetale-modules",
-  "def-weil-triangulated-category",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AK and 09AL, lemmas lemma-compare-constructible and lemma-compare-constructible-derived"
+  "place": "Tag 09AL and the global finite-stratification form of Tag 09AK; N3 reuses the existing source-library boundedConstructible_of_homology and derived Hom bijection, with an explicit sheafification-counit bridge to the specified intrinsic realization."
  },
  "mathlib_searches": [
   {
@@ -224,5 +176,15 @@
   "by": "Q36",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261019T005351-L-2758695",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
