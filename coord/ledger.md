@@ -16681,3 +16681,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/F2/Sheaf.Paper.WeilTensorProduct (stage 3; reviewer PASS; first push; landing 20261019T002541-L-2151918 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/F3/Sheaf.Paper.CoefficientHeartSmall (stage 3; reviewer PASS; first push; landing 20261019T002542-L-2152031 (interface); batch 20261019T002449; modules 1; new nodes 0; change records: coord/changes/coefficient-heart-small-proof-scope.md)
 - 00:25 L: merged deliver/F3/Sheaf.SecSmoothPurity.ReductionExceptional (stage 3; reviewer PASS; first push; landing 20261019T002542-L-2152217 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/F4/Sheaf.AlgebraicGeometry.EtaleGeometricFibreCompactSections (stage 3; reviewer PASS; first push; landing 20261019T002543-L-2152345 (proof); batch 20261019T002449; modules 1; new nodes 0)

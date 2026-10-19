@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Put $C=V_{\\bar t}$ and $q:C\\to\\operatorname{Spec}\\Omega$. Base change preserves etaleness by [lem-weil-pbc-etale-base-change-finite-limits], separatedness by [lem-weil-pbc-separated-base-change], and quasi-compactness by [lem-weil-pbc-qcqs-morphism-permanence](3). Thus $q$ has all three properties. Since its base is affine, quasi-compactness means that $C$ is quasi-compact. The base $\\operatorname{Spec}\\Omega$ is integral and normal with separably closed function field: its sole local ring and its fraction field are the field $\\Omega$, which is integrally closed and algebraically closed.",
+   "text": "Put C = pullback h t and q = pullback.snd h t. Base-change instances give Etale q, IsSeparated q and QuasiCompact q. An etale morphism is locally quasi-finite, so Mathlib IsFinite.of_locallyQuasiFinite, over the Artinian scheme Spec Omega, proves IsFinite q. This replaces the general normal-base decomposition.",
    "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-separated-base-change",
@@ -34,104 +34,90 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GO (lemma-base-change-etale); schemes.tex Tags 01KU (lemma-separated-permanence), 01K5 (lemma-quasi-compact-preserved-base-change)"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   },
   {
-   "text": "Apply [sbc-lem-etale-over-normal](1) to $q$. Every nonempty open subscheme of $\\operatorname{Spec}\\Omega$ is the whole scheme, so $C$ is a disjoint union of copies $C_j\\cong\\operatorname{Spec}\\Omega$ over $\\Omega$. The component opens cover $C$; quasi-compactness gives a finite subcover, and disjointness implies that these are all the nonempty components. Each $\\Omega$-morphism $\\operatorname{Spec}\\Omega\\to C$ lands in exactly one component and is the inverse of that component's structure isomorphism, since an $\\Omega$-endomorphism of $\\operatorname{Spec}\\Omega$ is the identity. By the fibre-product universal property [def-pc-fibre-product], these morphisms correspond exactly to $I$. Consequently $I$ is finite, and the coproduct of these particular maps, indexed by $I$, is the asserted canonical isomorphism. This also covers $C=\\varnothing$, when $I=\\varnothing$.",
+   "text": "The pullback equivalence identifies I with the geometric fibre of the finite q at the identity; the existing GeometricFiber.finite instance proves I finite. Each canonical lift c(v) is an open immersion, since c(v) followed by the formally unramified q is the identity. Their opens are pairwise disjoint: an intersection lifts c(v′) through c(v), and composition with q forces that lift to be the identity. Every point is covered by GeometricFiber.exists_apply_default_eq. Thus nonempty_isColimit_cofanMk_of and the coproduct universal property prove the canonical Sigma.desc is an isomorphism. Empty fibres are included.",
    "uses": [
-    "sbc-lem-etale-over-normal",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "def-weil-pbc-geometric-fibre",
+    "lem-weil-pbc-finite-geometric-point-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z9 (lemma-normal-scheme-with-alg-closed-function-field), assertion (1)"
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   },
   {
-   "text": "Write $\\iota_{\\bar v}:C_{\\bar v}\\hookrightarrow C$ for these components. By [lem-weil-pbc-etale-sheaf-clopen-product], restriction identifies $G(C)$ with $\\prod_{\\bar v\\in I}(\\iota_{\\bar v}^{-1}G)(C_{\\bar v})$. Apply [lem-weil-pbc-geometric-point-cohomology] to each $C_{\\bar v}\\cong\\operatorname{Spec}\\Omega$: its statement identifies component sections with their geometric germs, including at the identity geometric point. Apply [lem-weil-pbc-inverse-image-stalk-germ] first to $\\iota_{\\bar v}$ and then to $r$. The composite is the canonical isomorphism $\\Phi:G(C)\\xrightarrow{\\sim}\\prod_{\\bar v\\in I}F_{\\bar v}$, whose $\\bar v$-coordinate is the germ of the section at the component point, identified with $F_{\\bar v}$. These identifications are natural in the underlying abelian sheaf. They are $A$-linear: naturality for the endomorphism given by multiplication by each $a\\in A$, together with additivity of restriction and germs, proves scalar compatibility.",
+   "text": "Apply Etale.etaleModuleSection_closedSupport to each section of the pulled-back module sheaf. Its closed support, with the vanishing-ideal reduced induced subscheme, is proper: the subscheme immersion is closed and q is finite, hence proper, so their composite is proper by the existing instances. Therefore every section has proper support and the compactlySupportedSections inclusion is bijective.",
    "uses": [
-    "lem-weil-pbc-etale-sheaf-clopen-product",
-    "lem-weil-pbc-geometric-point-cohomology",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-cbc-etale-module-section-closed-support",
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03QT (theorem-equivalence-sheaves-point), 03QU (lemma-compare-cohomology-point), 03Q1 (lemma-stalk-pullback); finite clopen assembly as in the proof of Tag 0A5B (lemma-constant-smooth-statements)"
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   },
   {
-   "text": "For $s\\in G(C)$, the support is exactly the union of those components where the corresponding coordinate of $\\Phi(s)$ is nonzero. Indeed each component has one underlying point, and [lem-weil-pbc-geometric-point-cohomology] identifies its section with its germ at every geometric point above that point. In particular the support is a finite union of closed components. Each component with its reduced structure is $\\operatorname{Spec}\\Omega$ itself: it is already reduced, so uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] identifies its structure with the reduced induced one. Its structure morphism is the identity and is proper directly from [def-weil-proper-morphism] (identity diagonal, finite type, and all base changes identity). The ambient $C$ is locally of finite type over $\\Omega$, since it is locally the identity by step 2. Therefore [lem-weil-pbc-closed-subset-proper-over-base-union-preimage](1) makes the finite union proper with precisely the reduced-support convention in that node. For empty support the empty morphism is proper directly by the same definition. Thus every section has proper support and $H^0_c(C,G)=G(C)$.",
+   "text": "A scheme finite over Omega is finite discrete (finite_and_discreteTopology_of_isFinite); its residue fields are algebraically closed by Scheme.isAlgClosed_residueField_of_isClosed. The canonical component points give a bijection from I to the points of C. Apply the module-valued Etale.isIso_piLift_toPresheafFiber from ZeroDimensionalCohomology, then the canonical upperStarCompSheafFiberIso and reindex the finite product. The explicit finite direct-sum-to-product map is an isomorphism by DirectSum.addEquivProd. Its coordinate maps equal the component germs by canonical_coordinates. Cancellation proves exactly the stated compact-support restriction map is invertible.",
    "uses": [
-    "lem-weil-pbc-geometric-point-cohomology",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0CYR (lemma-union-closed-proper-over-base); schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme); etale-cohomology.tex Tag 03QU (lemma-compare-cohomology-point)"
-   }
-  },
-  {
-   "text": "For a finite set $I$, every tuple in $\\prod_{\\bar v\\in I}F_{\\bar v}$ has finite support. The inverse of the usual inclusion of the direct sum into the product is explicitly $(m_{\\bar v})\\mapsto\\sum_{\\bar v\\in I}\\operatorname{in}_{\\bar v}(m_{\\bar v})$. The composites are identity by evaluating each coordinate. Compose this $A$-linear identification with $\\Phi$ and the equality in step 4. This gives the claimed isomorphism $H^0_c(C,r^{-1}F)\\cong\\bigoplus_{\\bar v\\in I}F_{\\bar v}$, natural in $F$ since both maps send a morphism of sheaves to its coordinate stalk maps. The product and direct sum over the empty set are both the zero module.",
-   "uses": [],
-   "elementary": true,
-   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Finite-index module algebra after Tags 03QU and 03Q1; agent-written elementary assembly"
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   },
   {
-   "text": "For the generator clause put $P=V\\times_TW$, with projections $p:P\\to V$ and $\\pi:P\\to W$. The morphism $\\pi$ is separated and etale by the same two base-change lemmas as in step 1; $p$ is etale by base change of $W\\to T$. The graph $\\gamma=(t,\\mathrm{id}_W):W\\to P$ is a section of $\\pi$. By [lem-weil-pbc-etale-section-clopen-immersion] it identifies $W$ with an open and closed subscheme $D$ of $P$. Apply the clopen sheaf decomposition [lem-weil-pbc-etale-sheaf-clopen-product] to $P=D\\amalg(P\\setminus D)$ and the sheaf restricted from $F$. The pair consisting of $z$ on $D\\cong W$ and zero on its complement glues uniquely to the specified extension section $\\widetilde z\\in F(P\\xrightarrow{p}V)$. Equivalently this is the sheaf gluing axiom for these two disjoint open objects over $V$, so its restriction along $\\gamma$ is exactly $z$.",
+   "text": "For the extension clause, the graph gamma is an open immersion because its composite with the etale second projection is identity, and a closed immersion because that projection is separated. Glue z and zero on its open complement using Scheme.Etale.existsUnique_of_pairwise_disjoint, specialized to module coefficients. Naturality of toPresheafFiber proves both restriction to z and zero germs off the graph.",
    "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-separated-base-change",
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-etale-sheaf-clopen-product"
+    "lem-weil-pbc-etale-section-clopen-immersion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph-section construction; etale.tex Tag 024T (proposition-properties-sections); schemes.tex Tag 01KT (lemma-section-immersion)"
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   },
   {
-   "text": "The map pulling this section to $C$ is $a=(r,\\bar wq):C\\to P$. At the $\\bar v$-component its pointed image is $(\\bar v,\\bar w):\\operatorname{Spec}\\Omega\\to P$. It lies in $D$ exactly when $\\bar v=t\\bar w$: a point of the graph with second coordinate $\\bar w$ must be $\\gamma\\bar w=(t\\bar w,\\bar w)$. Otherwise it lies in the complementary clopen subscheme and the germ of $\\widetilde z$ there is zero. In the first case, restriction along the morphism of pointed neighbourhoods $\\gamma:(W,\\bar w)\\to(P,(t\\bar w,\\bar w))$ identifies its germ with that of $z$, by the colimit definition [def-weil-pbc-geometric-stalks]. Finally [lem-weil-pbc-inverse-image-stalk-germ], applied to $r$ and the pointed etale neighbourhood $(P,(\\bar v,\\bar w))$ of $\\bar v$ on $V$, identifies the germ of the pulled section with this very germ of $\\widetilde z$. Thus the coordinate formula for $\\Phi$ is the germ of $z$ in the $t\\bar w$ summand and zero in every other summand, as required.",
+   "text": "The private unit_germ lemma proves compatibility for module coefficients by expanding upperStarCompSheafFiberIso, the general-site comap germ identities and Adjunction.unit_leftAdjointUniq_hom_app. pullback_germ applies it to the actual etaleSectionPullbackToGlobal map. On a component v, the pointed image is b(v)=(v,w). If its underlying point lies on the graph, the open-immersion lifting property and the two pullback projections force v=w followed by lift. Thus all other component germs vanish; on this component toPresheafFiber_w_apply and restriction along gamma give the germ of z. The finite-sum lemma canonical_single proves the precise Sigma.ι equality.",
    "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "def-pc-fibre-product",
+    "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1 (lemma-stalk-pullback), direct proof of (3); Tag 0F4L (lemma-shriek-into-star-separated-etale), graph-section construction"
+    "place": "Tags 09Z9, 03Q1 and 0F4Y; existing finite-fibre and module-valued site API, with elementary coordinate assembly"
    }
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
+  "def-weil-pbc-geometric-fibre",
   "def-weil-pbc-geometric-stalks",
   "def-weil-proper-morphism",
-  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-cbc-etale-module-section-closed-support",
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-weil-pbc-geometric-point-cohomology",
-  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-finite-geometric-point-lift",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-weil-pbc-separated-base-change",
-  "sbc-lem-etale-over-normal"
+  "lem-weil-pbc-zero-dimensional-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Assembly of Tags 09Z9, 03QU, 03Q1, 0F4L with coherent.tex Tag 0CYR; explicit finite-component and generator computation"
+  "place": "Tags 09Z9, 03Q1 and 0F4Y; shorter finite-over-field route, direct module-valued stalk and graph-gluing calculations (F4, 2026-10-19)"
  },
  "mathlib_searches": [
   {
@@ -287,12 +273,6 @@
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "sbc-lem-etale-over-normal",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-weil-pbc-geometric-point-cohomology",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
   "lem-weil-pbc-etale-section-clopen-immersion"
  ],
  "reviewed": {
@@ -320,5 +300,15 @@
   "by": "NE",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261019T002543-L-2152345",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
