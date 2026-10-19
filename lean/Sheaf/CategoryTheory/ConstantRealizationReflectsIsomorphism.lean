@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.SiteDerivedConstantModuleFunctor
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero
-import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Constant realization reflects derived isomorphisms on a nonempty pro-étale object
@@ -21,7 +21,6 @@ Source: literature/stacks-project/sites-modules.tex, Tag 093J and Section 03DH
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u wR wS wU
 
@@ -72,6 +71,48 @@ theorem constantRealizationReflectsIsomorphism
           ((siteDerivedConstantModuleFunctor.{u + 1, u, wR, wS}
             (Scheme.ProEt.topology X) R).map f)) →
           IsIso f) := by
-  sorry
+  let F := siteConstantModuleFunctorGeneral (Scheme.ProEt.topology X) R
+  let S := (constantSheaf (Scheme.ProEt.topology X) RingCat.{u + 1}).obj (RingCat.of R)
+  let G := SheafOfModules.overFunctor.{u + 1} S U
+  have : F.Additive := (siteConstantModuleFunctorGeneral_exact.{u + 1, u}
+    (Scheme.ProEt.topology X) R).1
+  have : PreservesFiniteLimits F := (siteConstantModuleFunctorGeneral_exact.{u + 1, u}
+    (Scheme.ProEt.topology X) R).2.1
+  have : PreservesFiniteColimits F := (siteConstantModuleFunctorGeneral_exact.{u + 1, u}
+    (Scheme.ProEt.topology X) R).2.2
+  have : G.Additive := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} S U).1
+  have : PreservesFiniteLimits G :=
+    (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} S U).2.1
+  have : PreservesFiniteColimits G :=
+    (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} S U).2.2
+  have comparison (i : ℤ) :
+      Nonempty ((F.mapDerivedCategory ⋙ G.mapDerivedCategory ⋙
+          DerivedCategory.homologyFunctor _ i) ≅
+        (DerivedCategory.homologyFunctor _ i ⋙ F ⋙ G)) := by
+    exact ⟨Functor.isoWhiskerLeft _ (G.mapDerivedCategoryHomologyFunctorIso i).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (F.mapDerivedCategoryHomologyFunctorIso i).symm _ ≪≫
+      Functor.associator _ _ _⟩
+  refine ⟨comparison, ?_⟩
+  intro C D f hf
+  change IsIso (G.mapDerivedCategory.map (F.mapDerivedCategory.map f)) at hf
+  have := hf
+  apply (DerivedCategory.isIso_iff (ModuleCat.{u + 1} R) f).2
+  intro i
+  let g := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).map f
+  have : IsIso ((F ⋙ G).map g) :=
+    (NatIso.isIso_map_iff (comparison i).some f).1 (by
+      change IsIso ((DerivedCategory.homologyFunctor _ i).map
+        (G.mapDerivedCategory.map (F.mapDerivedCategory.map f)))
+      infer_instance)
+  have hk : IsZero ((F ⋙ G).obj (kernel g)) :=
+    (isZero_kernel_of_mono ((F ⋙ G).map g)).of_iso (PreservesKernel.iso (F ⋙ G) g)
+  have hc : IsZero ((F ⋙ G).obj (cokernel g)) :=
+    (isZero_cokernel_of_epi ((F ⋙ G).map g)).of_iso (PreservesCokernel.iso (F ⋙ G) g)
+  have : Mono g := Preadditive.mono_of_isZero_kernel g
+    ((AlgebraicGeometry.ProEtale.constantRealization_detects_zero X R (kernel g) U).2.2 hk)
+  have : Epi g := Preadditive.epi_of_isZero_cokernel g
+    ((AlgebraicGeometry.ProEtale.constantRealization_detects_zero X R (cokernel g) U).2.2 hc)
+  exact isIso_of_mono_of_epi g
 
 end CategoryTheory

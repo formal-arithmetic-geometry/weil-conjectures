@@ -17,26 +17,25 @@
    }
   },
   {
-   "text": "For a representative complex $K$ and any $i\\in\\mathbf Z$, apply [lem-weil-pbc-exact-functor-complex-cohomology] to the exact functor $F$ of step 1. It gives the canonical comparison $H^i(FK)\\cong F(H^i(K))$, induced by the preserved kernel and image of the differentials and natural in chain maps. The representative comparison in step 1 and the cohomology factorization through $Q$ in [def-weil-abstract-derived-category] consequently give $H^i(c(QK)|_U)\\cong\\underline{H^i(QK)}|_U$. Every derived object has a complex representative, so this constructs the asserted isomorphism on objects in all degrees.",
+   "text": "Apply the existing derived homology comparison CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso from [lem-weil-pbc-exact-functor-bounded-below] separately to constant realization F and slice restriction G, using the exactness instances of step 1. Whisker the inverse comparison for G on the left by F.mapDerivedCategory, then whisker the inverse comparison for F on the right by G, and compose with the functor associators. This gives the asserted natural isomorphism F_D ⋙ G_D ⋙ H^i ≅ H^i ⋙ F ⋙ G for every integer i.",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, kernel and cokernel argument, applied degreewise; derived.tex Tag 015F, lemma-right-derived-exact-functor"
-   }
-  },
-  {
-   "text": "The comparisons in step 2 are natural for all derived morphisms, not only for chain maps: by [def-weil-abstract-derived-category], $D(R)$ is the localization at quasi-isomorphisms. Naturality holds for the image $Q(a)$ of each chain map $a$. For a quasi-isomorphism $s$, both functors in the comparison send $Q(s)$ to an isomorphism, so multiplying its naturality square by these inverses proves naturality for $Q(s)^{-1}$. Composing squares proves naturality for every composite of these generators, hence for every morphism of the localization. This also makes the comparison independent of a chosen representative up to the canonical comparison isomorphisms. In particular $H^i(c(f)|_U)$ corresponds to $F(H^i(f))$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU, definition-unbounded-derived-category, localization at quasi-isomorphisms; agent naturality verification"
+    "place": "Tag 015F, lemma-right-derived-exact-functor; existing source-library derived homology comparison"
+   }
+  },
+  {
+   "text": "The comparison in step 2 is an isomorphism of functors on the derived category, so its naturality applies to every derived morphism f without choosing a representative. If G_D(F_D(f)) is invertible, applying H^i preserves its inverse. NatIso.isIso_map_iff for the comparison then shows that (F ⋙ G)(H^i(f)) is invertible.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; functoriality and naturality of the derived comparison"
    }
   },
   {
@@ -66,8 +65,7 @@
  "proof_deps": [
   "def-sfb-site-derived-constant-module-functor",
   "def-weil-pbc-ringed-derived-restriction",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "lem-sp-exact-functor-preserves-homology",
   "lem-sfb-constant-realization-detects-zero",
   "lem-weil-pbc-unbounded-derived-iso-cohomology"
@@ -75,7 +73,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093J, lemma-constant-exact; derived.tex Tags 015F and 05RT; agent combination with existing nonempty constant-sheaf detection and explicit localization naturality"
+  "place": "Tag 093J and Section 03DH; derived.tex Tags 015F and 05RT. E9 formalization uses the existing source-library derived homology comparison, then kernel/cokernel detection and DerivedCategory.isIso_iff."
  },
  "mathlib_match": null,
  "status": "split",
@@ -220,5 +218,15 @@
   "date": "2026-10-17",
   "branch": "newtargets-dag",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261019T002537-L-2150787",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
