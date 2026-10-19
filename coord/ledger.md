@@ -16900,3 +16900,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/M3/Sheaf.Compactification.NagataSketchClosure (stage 3; reviewer PASS; first push; landing 20261019T034303-L-417701 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/Q5/Sheaf.Paper.FilteredCoefficientTensorBounds (stage 3; reviewer PASS; first push; landing 20261019T034304-L-417854 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/R9/Sheaf.RingTheory.NormalizationLocalizationDimension (stage 3; reviewer PASS; first push; landing 20261019T034305-L-417961 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/S1/Sheaf.Paper.FinitePullbackTensorComparison (stage 3; reviewer PASS; first push; landing 20261019T034306-L-418064 (proof); batch 20261019T034248; modules 1; new nodes 0)

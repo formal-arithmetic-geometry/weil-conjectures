@@ -13,9 +13,41 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma 21.18.4 (Tag 07A4, label lemma-pullback-tensor-product), for the morphism of ringed topoi (X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar levels follow the level-by-level definitions of the operations in def-weil-derived-pullback-tensor-hom"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For pullbackTensorIndependent use the first property of the given flat-term K-flat representative: at these universes the two K-flat predicates are definitionally equal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For pullbackTensorFiniteRepresentative_existsUnique use ObjectProperty.ιOfLE to include flat-term K-flat complexes among all K-flat complexes, and whisker T.comparison with the product inclusion. Set the tensor field to S.tensor. The component equation is reflexive. For uniqueness eliminate the asserted tensor-functor equality, then use isomorphism and natural-transformation extensionality and the prescribed component equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For pullbackTensorFiniteRealization_existsUnique specialize openSquarePullbackModel_existsUnique to the finite coefficient ring at exponent n+1. The constant-ring identifications and the displayed adjunction-unit section equations agree definitionally. The five remaining coherence obligations retain their named theorem statements and their docstring proof plans.",
+   "uses": [
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For pullbackTensorSignedTotal_existsUnique use the existing CochainComplex.Monoidal.braiding with the independent-universe monoidal, additive and coproduct-preserving sheaf tensor instances. Its ι_braiding_hom equation is the signed summand formula. Naturality of the sheafification unit and the braided sheafification functor show that the ordinary sheaf braiding swaps the displayed sheafified pure tensors. Evaluation is additive, so the integer sign passes through evaluation, giving exactly the required generator formula. For uniqueness apply isomorphism extensionality, complex-map extensionality and total-summand extensionality. Cancel the tensor-to-sheafification isomorphism and use the sheafification adjunction; presheaf and tensor-product extensionality reduce the result to equality of the prescribed generator formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-square-exchange",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 07A4; componentwise restriction of the prescribed tensor model and specialization of the existing unit-normalized pullback comparison (S1 stage-3 partial proof). The signed-total proof uses the existing cochain Koszul braiding and its summand formula; sheafification naturality identifies the pure-tensor generators, and the adjunction and total-summand universal properties prove uniqueness."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -135,5 +167,15 @@
   "group": "Q45",
   "result": "fix",
   "note": "Read all 3 modules (Finite 27 decls, Completed 96+3, main 62), both new nodes (the finite node read from commit 03260642e6 because it was missing from the snapshot), deps and Stacks 07A4. Every node clause is in derivedPullbackTensorIso: finite mu for arbitrary ambient inputs (the recorded proEtaleCanonicalTensorComparison, conjugated by unique normalizations); integral (Rlim of the K-flat-fixed system comparison, plus the reduction square and the finite evaluation equation), rational (localization) and common-stage (ofHom at every stage) NatIsos with canonical components; assoc/signed braiding/unit/composition at all four levels; quotient square for every q<=m incl. q=m; integral and rational scalar squares for every L and iota (ramified and identity). No extra hypotheses, Omega in its own universe v, L: Type u forced by the recorded API. No hollow data: each def is a real construction or the choice from an exists-unique statement; calculus choice same as the recorded operations. No duplicate associator/unitor for the completed tensor exists. Signatures verbatim, no doubly owned declaration, lines <=100. Compile: unmodified files passed once at 21.5/46.9/54.8 s, exit 0, no diagnostics (first run: main timed out); with my docstring-fixed main file, main timed out at 60 s in both runs; that file differs only by comment lines; delivery record 40.0 s; borderline under load 90-117 on 80 cores. FIX 1: the completed node's lean.declarations lacked 3 sorry @[instance] theorems (pullbackTensorSequenceBase_continuous, pullbackTensorSequenceDirect_rightAdjoint, pullbackTensorOrdinaryLimit_rightAdjoint): fixes/def-pur-completed-pullback-tensor-comparison.json. FIX 2: main theorem docstring lacked a source place: fixes/DerivedPullbackTensorIso.lean adds the Stacks 07A4 source, docstring only, signature unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261019T034306-L-418064",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11,31 +11,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
-import Sheaf.Paper.NormalizedDVRTower
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
+import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.IntegralScalarExtensionUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.NormalizedDVREffectivity
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Derived pullback and derived tensor comparison
@@ -140,6 +118,11 @@ abbrev CommonStagePullbackTensorComparison
         (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M,
           ((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)
 
+/-- Essential smallness with the site morphism and object sizes retained.
+Source: Stacks 00YW (blueprint: def-pur-finite-pullback-tensor-comparison). -/
+instance (priority := 3000) pullbackTensorSiteSmall (W : Scheme.{u}) :
+    EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+
 section FiniteCanonical
 
 open CategoryTheory.Functor
@@ -172,7 +155,7 @@ theorem pullbackTensorIndependent (W : Scheme.{u})
     @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
       W.ProEt (inferInstance : Category.{u} W.ProEt) (essentiallySmallSelf.{0, u, u + 1} W.ProEt)
       (ProEt.topology W) R P.obj := by
-  sorry
+  exact P.property.1
 
 /-- Restriction of the recorded K-flat model is unique with its component equations.
 Source: Stacks 06YS and 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison).
@@ -191,7 +174,30 @@ theorem pullbackTensorFiniteRepresentative_existsUnique (W : Scheme.{u})
           (T.comparison.hom.app
             (⟨P.obj, pullbackTensorIndependent W R P⟩,
              ⟨Q.obj, pullbackTensorIndependent W R Q⟩)) := by
-  sorry
+  let i := ObjectProperty.ιOfLE
+    (P := proEtaleFlatRepresentatives W R)
+    (P' := CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := ProEt.topology W) (R := R))
+    (fun P hP ↦ pullbackTensorIndependent W R ⟨P, hP⟩)
+  let e := Functor.isoWhiskerLeft (i.prod i)
+    (CoefficientTensorModels.comparison.{u, u + 1, u, u + 2} T)
+  let a : ProEtaleTensorModel W R :=
+    { tensor := S.tensor
+      representative := e }
+  refine ⟨a, ⟨rfl, ?_⟩, ?_⟩
+  · intro P Q
+    rfl
+  · intro b hb
+    rcases b with ⟨tensor, representative⟩
+    rcases hb with ⟨ht, he⟩
+    dsimp at ht
+    subst tensor
+    have hr : representative = a.representative := by
+      apply Iso.ext
+      apply NatTrans.ext
+      funext P
+      exact eq_of_heq (he P.1 P.2)
+    exact congrArg (fun r ↦ ProEtaleTensorModel.mk S.tensor r) hr
 
 /-- The unique restriction of the prescribed finite tensor model.
 Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
@@ -233,7 +239,7 @@ theorem pullbackTensorFiniteRealization_existsUnique {X Y : Scheme.{u}}
             (pullbackTensorCoefficientIso l E f n)).unit.app M).val.app (Opposite.op U) x) =
         ((sfIntrinsicConstantModuleAdjunction f
           (finiteCoefficientRing l E (n + 1))).unit.app M).val.app (Opposite.op U) x := by
-  sorry
+  exact openSquarePullbackModel_existsUnique (finiteCoefficientRing l E (n + 1)) f
 
 /-- The uniquely unit-normalized finite module realization.
 Source: Stacks 00YV, 03D2 (blueprint: def-pur-finite-pullback-tensor-comparison). -/
@@ -447,6 +453,8 @@ variable {C : Type (u + 1)} [Category.{u} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
   (A : Sheaf J CommRingCat.{u + 1})
 
+set_option maxHeartbeats 400000 in
+-- The two sheafification calculations and the signed summand calculation are checked together.
 /-- The signed symmetry is fixed on every pure tensor by (-1)^(pq).
 Source: Stacks 06YS (blueprint: def-pur-finite-pullback-tensor-comparison).
 Proof: swap the two tensor factors in each total summand and multiply by
@@ -464,7 +472,108 @@ theorem pullbackTensorSignedTotal_existsUnique
           J A P Q p q k h U x y) =
         (p*q).negOnePow • coefficientTensorGenerator.{u, u + 1, u}
           J A Q P q p k ((add_comm q p).trans h) U y x := by
-  sorry
+  have sheaf_tensor_braiding
+      {C' : Type (u + 1)} [Category.{u} C']
+      (J : GrothendieckTopology C') [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+      (A : Sheaf J CommRingCat.{u + 1}) (M N : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) :
+      letI := SheafOfModules.isMonoidal_W_independentCoefficients A
+      letI := SheafOfModules.monoidalCategory A
+      letI := SheafOfModules.symmetricCategory A
+      (SheafOfModules.tensorObjIsoSheafification M N).inv ≫ (β_ M N).hom =
+        (PresheafOfModules.sheafification (𝟙 _)).map (β_ M.val N.val).hom ≫
+          (SheafOfModules.tensorObjIsoSheafification N M).inv := by
+    let := SheafOfModules.isMonoidal_W_independentCoefficients A
+    let := SheafOfModules.monoidalCategory A
+    let := SheafOfModules.symmetricCategory A
+    simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_inv, Iso.symm_inv,
+      MonoidalCategory.tensorIso_hom,
+      Functor.Monoidal.μIso_inv]
+    erw [Category.assoc, BraidedCategory.braiding_naturality]
+    erw [← Category.assoc, Functor.map_braiding]
+    simp
+    rfl
+  -- Apply sheafification naturality to the pure tensor sections.
+  have sheaf_tensor_braiding_apply
+      {C' : Type (u + 1)} [Category.{u} C']
+      (J : GrothendieckTopology C') [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+      (A : Sheaf J CommRingCat.{u + 1}) (M N : SheafOfModules.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A))
+      (U : C'ᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
+      letI := SheafOfModules.isMonoidal_W_independentCoefficients A
+      letI := SheafOfModules.monoidalCategory A
+      letI := SheafOfModules.symmetricCategory A
+      (β_ M N).hom.val.app U
+        ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
+          (((PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 _)).unit.app
+            (MonoidalCategoryStruct.tensorObj M.val N.val)).app U (x ⊗ₜ[A.obj.obj U] y))) =
+      (SheafOfModules.tensorObjIsoSheafification N M).inv.val.app U
+        (((PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 _)).unit.app
+          (MonoidalCategoryStruct.tensorObj N.val M.val)).app U (y ⊗ₜ[A.obj.obj U] x)) := by
+    let := SheafOfModules.isMonoidal_W_independentCoefficients A
+    let := SheafOfModules.monoidalCategory A
+    let := SheafOfModules.symmetricCategory A
+    let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A).obj)
+    have hb := congrArg (fun t ↦ t.val.app U
+      ((adj.unit.app (MonoidalCategoryStruct.tensorObj M.val N.val)).app U (x ⊗ₜ[A.obj.obj U] y)))
+        (sheaf_tensor_braiding J A M N)
+    have hn := congrArg (fun t ↦ t.app U (x ⊗ₜ[A.obj.obj U] y))
+      (adj.unit.naturality (β_ M.val N.val).hom)
+    change (adj.unit.app (MonoidalCategoryStruct.tensorObj N.val M.val)).app U
+      (y ⊗ₜ[A.obj.obj U] x) =
+      ((PresheafOfModules.sheafification (𝟙 _)).map (β_ M.val N.val).hom).val.app U
+        ((adj.unit.app (MonoidalCategoryStruct.tensorObj M.val N.val)).app U
+          (x ⊗ₜ[A.obj.obj U] y)) at hn
+    exact hb.trans (congrArg ((SheafOfModules.tensorObjIsoSheafification N M).inv.val.app U)
+      hn.symm)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients A
+  let := SheafOfModules.monoidalCategory A
+  let := SheafOfModules.symmetricCategory A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients A
+  let e := CochainComplex.Monoidal.braiding P Q
+  have he : ∀ (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)
+      (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),
+      (e.hom.f k).val.app U (coefficientTensorGenerator.{u, u + 1, u}
+        J A P Q p q k h U x y) =
+      (p*q).negOnePow • coefficientTensorGenerator.{u, u + 1, u}
+        J A Q P q p k ((add_comm q p).trans h) U y x := by
+    intro p q k h U x y
+    change (e.hom.f k).val.app U
+      ((HomologicalComplex.ιTensorObj P Q p q k h).val.app U _) = _
+    have hb := CochainComplex.Monoidal.ι_braiding_hom (K := P) (L := Q) p q k h
+    have hv := congrArg (fun t ↦ t.val.app U
+      ((SheafOfModules.tensorObjIsoSheafification (P.X p) (Q.X q)).inv.val.app U
+        (((PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 _)).unit.app
+          (MonoidalCategoryStruct.tensorObj (P.X p).val (Q.X q).val)).app U
+            (x ⊗ₜ[A.obj.obj U] y)))) hb
+    change (e.hom.f k).val.app U
+      ((HomologicalComplex.ιTensorObj P Q p q k h).val.app U _) = _ at hv
+    simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply]
+    refine hv.trans ?_
+    change ((((SheafOfModules.forget _) ⋙ (PresheafOfModules.evaluation _ U)).map
+      (((p*q).negOnePow : ℤ) • ((β_ (P.X p) (Q.X q)).hom ≫
+        HomologicalComplex.ιTensorObj Q P q p k ((add_comm q p).trans h)))) _) = _
+    rw [Functor.map_zsmul]
+    change ((p*q).negOnePow : ℤ) • ((HomologicalComplex.ιTensorObj Q P q p k
+      ((add_comm q p).trans h)).val.app U ((β_ (P.X p) (Q.X q)).hom.val.app U _)) = _
+    rw [sheaf_tensor_braiding_apply J A]
+    rfl
+  refine ⟨e, he, ?_⟩
+  · intro b hb
+    apply Iso.ext
+    apply HomologicalComplex.Hom.ext
+    funext k
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification (P.X p) (Q.X q)).inv).1
+    apply (PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 _)).homEquiv _ _ |>.injective
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.MonoidalCategory.tensor_ext
+    intro x y
+    exact (hb p q k hpq U x y).trans (he p q k hpq U x y).symm
 
 /-- The chain-level Koszul braiding, including its prescribed sign.
 Source: Stacks 06YS (blueprint: def-pur-finite-pullback-tensor-comparison). -/
@@ -505,11 +614,6 @@ Source: Stacks 06YS and 06YU (blueprint: def-pur-finite-pullback-tensor-comparis
 def pullbackTensorBraiding :=
   (pullbackTensorBraiding_existsUnique J A S T).exists.choose
 end SignedBraiding
-
-/-- Essential smallness with the site morphism and object sizes retained.
-Source: Stacks 00YW (blueprint: def-pur-finite-pullback-tensor-comparison). -/
-instance (priority := 3000) pullbackTensorSiteSmall (W : Scheme.{u}) :
-    EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
 section FiniteSymmetry
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
