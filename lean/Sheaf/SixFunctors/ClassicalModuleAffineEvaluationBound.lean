@@ -9,6 +9,7 @@ public import Sheaf.SixFunctors.ClassicalDefinition
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.CategoryTheory.ConstantRingModuleSheaves
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import Sheaf.AlgebraicGeometry.EtaleModuleAffineBound
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 
