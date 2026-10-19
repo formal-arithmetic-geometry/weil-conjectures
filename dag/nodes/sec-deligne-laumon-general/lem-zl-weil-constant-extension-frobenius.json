@@ -18,7 +18,11 @@
   "def-weil-scheme-morphism-properties",
   "def-weil-global-geometric-frobenius",
   "def-weil-frobenius-cohomology-transport",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-constant-extension-restriction-local-data",
+  "def-zl-constant-extension-compact-comparison",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -178,5 +182,27 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-9082cdc3a (reviewer sub-agent of L); spot-checked: Added missing citation to def-weil-frobenius-detailed in Step 1, stmt_deps, and proof_deps; corrected DAG is under fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-weil-constant-extension-frobenius.json. Full review is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-19",
+  "module": "Sheaf.Paper.WeilConstantExtensionFrobenius",
+  "declaration": "WeilConjectures.weil_constant_extension_frobenius",
+  "declarations": [
+   "WeilConjectures.weil_constant_extension_frobenius"
+  ],
+  "file": "lean/Sheaf/Paper/WeilConstantExtensionFrobenius.lean",
+  "statement": "theorem weil_constant_extension_frobenius (e : ℕ) (he : 1 ≤ e) (iota : Ω ≃+* ℂ) : (((constantExtensionDatum D e he).geometricFrobenius (constantExtensionModel D e he X₀)).hom ≫ (constantExtensionFiberIso D e he X₀).hom = (constantExtensionFiberIso D e he X₀).hom ≫ localPositivePower (D.geometricFrobenius X₀).hom (e - 1)) ∧ ∃ R : sfCommonStageWeilSheaf D l hl X₀ Ω ⥤ sfCommonStageWeilSheaf (constantExtensionDatum D e he) l hl (constantExtensionModel D e he X₀) Ω, ∃ hR : ConstantExtensionRestrictionSpec D e he X₀ l hl Ω R, ∀ (F : sfCommonStageWeilSheaf D l hl X₀ Ω), HasCommonStageLisseLattice l Ω (D.geometricFiber X₀).left F.obj.carrier → HasCommonStageLisseLattice l Ω ((constantExtensionDatum D e he).geometricFiber (constantExtensionModel D e he X₀)).left (R.obj F).obj.carrier ∧ (∀ (c : Compactification X₀.hom), ∃ C : ConstantExtensionCompactComparison l D hl X₀ e he Ω c, ∀ r : ℤ, (constantExtensionCompactCohomologyComparison l D hl X₀ e he Ω c C R hR F r).hom ≫ globalGeometricFrobeniusQbarOnCohomology (constantExtensionDatum D e he) l hl (constantExtensionModel D e he X₀) Ω (constantExtensionModelCompactification D X₀ e he c) (R.obj F).obj true r = ((End.of (globalGeometricFrobeniusQbarOnCohomology D l hl X₀ Ω c F.obj true r)) ^ e) ≫ (constantExtensionCompactCohomologyComparison l D hl X₀ e he Ω c C R hR F r).hom) ∧ (∀ z : {z : (constantExtensionModel D e he X₀).left // z ∈ closedPoints (constantExtensionModel D e he X₀).left}, ConstantExtensionLocalConjugacy D e he X₀ l hl Ω X₀ F (R.obj F) (constantExtensionClosedImage D e he X₀ z) z (constantExtensionResidueDegree D e he X₀ z.val)) ∧ ∀ w : ℝ, SfIsPunctuallyPureOfWeight D l hl Ω X₀ iota F w → SfIsPunctuallyPureOfWeight (constantExtensionDatum D e he) l hl Ω (constantExtensionModel D e he X₀) iota (R.obj F) w",
+  "existing": false,
+  "note": "Repairs H3/H4: uses the actual recorded global geometric Frobenius for D and for the actual extension datum/model and R.obj F. The comparison is fixed by the integral proper/open map, rationalization, coefficient realization, canonical fibre isomorphism and RestrictionSpec carrier isomorphism. New definition ownership replaces the theorem citation; the TeX statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbbd34cd2",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Re-delivery fixes both 60bb6333 faults. Cohomology clause: both sides use the recorded globalGeometricFrobeniusQbarOnCohomology (extended datum/model/c.baseChange/R.obj F vs the original operator ^e), linked by the canonical ConstantExtensionCompactComparison; its only data field is pinned by normalization to the realized proper/open integral mate, the other fields are true Props, and source_eq was proved by probe (control fails). Ownership: the seven helpers moved to the existing:true def node def-zl-constant-extension-restriction-local-data; no theorem node left in the item's stmt_deps; the new node's theorem citations are genuine .choose uses. All clauses (field, l, Omega/iota, separated finite type, e>=1, fibre identity, theta^[e], lissity, local conjugacy, purity) and edge cases (e=1, empty X0, zero stalks, all r, all compactifications) match the node; lean.statement verbatim. nt_compile --json: comparison 20.6 s, item 3.9 s, clean; only sorry is the main theorem. Advisory: first conjunct repeats constantExtensionFiber_return; Classical.choose of the carrier iso does not change the result; def-weil-compact-support-finite-action missing from dependency closures project-wide; second reading by the same worker."
  }
 }
