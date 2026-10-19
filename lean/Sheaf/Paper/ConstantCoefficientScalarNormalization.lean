@@ -117,6 +117,12 @@ def constantCoefficientConstructibleScalarIso :
         (constantWeilIntegralObject l E D hl Y) ≅ constantWeilIntegralObject l L D hl Y :=
   ObjectProperty.isoMk _ (constantCoefficientIntegralScalarIso l E L ι Y)
 
+private theorem iso_existsUnique_of_source_eq {C : Type*} [Category C]
+    {X X' Z : C} (h : X = X') (e : X' ≅ Z) :
+    ∃! e' : X ≅ Z, HEq e'.hom e.hom := by
+  subst X'
+  exact ⟨e, HEq.rfl, fun e' he' ↦ Iso.ext (eq_of_heq he')⟩
+
 /-- The rational alpha is uniquely the image of the normalized integral beta.
 Source: blueprint order 1869; Bhatt--Scholze, Lemma 6.8.2
 (blueprint: lem-weil-constant-coefficient-objects-constructible).
@@ -130,7 +136,12 @@ theorem constantCoefficientRationalScalarIso_existsUnique :
           (constantWeilRationalObject l E D hl Y) ≅ constantWeilRationalObject l L D hl Y,
       HEq α.hom ((sfRationalConstructibleLocalization l L Y).map
         (constantCoefficientConstructibleScalarIso l E L ι Y D hl).hom) := by
-  sorry
+  apply iso_existsUnique_of_source_eq
+    ((sfRationalScalarExtension_existsUnique l E Y 0
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).exists.choose_spec.2.1
+        (constantWeilRationalObject l E D hl Y))
+    ((sfRationalConstructibleLocalization l L Y).mapIso
+      (constantCoefficientConstructibleScalarIso l E L ι Y D hl))
 
 /-- The canonical scalar isomorphism alpha, normalized before rationalization.
 Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).

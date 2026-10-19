@@ -16976,3 +16976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Y9/Sheaf.Paper.CondensedERealization (stage 3; reviewer PASS; first push; landing 20261019T034406-L-428440 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Y9/Sheaf.Paper.GeoCartierExponentIndependence (stage 3; reviewer PASS; first push; landing 20261019T034407-L-428565 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Y9/Sheaf.RepresentationTheory.ContinuousCoefficientSubquotients (stage 3; reviewer PASS; first push; landing 20261019T034408-L-428663 (interface); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/continuous-coefficient-subquotients.md)
+- 03:44 L: merged deliver/Z5/Sheaf.Paper.ConstantCoefficientScalarNormalization (stage 3; reviewer PASS; first push; landing 20261019T034409-L-428773 (proof); batch 20261019T034248; modules 1; new nodes 0)
