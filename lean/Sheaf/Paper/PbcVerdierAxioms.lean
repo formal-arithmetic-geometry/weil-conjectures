@@ -48,6 +48,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
     [stageTriangulated : ∀ i, IsTriangulated (C i)]
     [transitionExact : ∀ {i j : I} (h : i ≤ j), (S.T h).IsTriangulated]
 
+set_option linter.unusedSectionVars false in
 /-- Finite-stage inclusions preserve the already recorded common-stage addition.
 Source: blueprint order 1540, exact stage inclusion
 (blueprint: thm-weil-pbc-verdier-axioms).
@@ -55,8 +56,14 @@ Proof: both included sums are represented by the transition image of the same
 sum at the original stage. Additivity of the transitions makes this the sum of
 the two included representatives; pairPreadditiveNormalized identifies the classes. -/
 @[instance] theorem qbarStageInclusionAdditive (i : I) : (S.ι i).Additive := by
-  sorry
+  constructor
+  intro X Y f g
+  change PairCategory.mkHom (X := ⟨i, X⟩) (Y := ⟨i, Y⟩) i le_rfl le_rfl
+    ((S.T le_rfl).map (f + g)) = _
+  rw [Functor.map_add]
+  exact ((pairPreadditive_exists S).exists.choose_spec _ _ _ _ _ _ _).1
 
+set_option linter.unusedSectionVars false in
 /-- The actual transition identification commutes with the induced pair shift.
 Source: blueprint order 1540, exact transition identifications
 (blueprint: thm-weil-pbc-verdier-axioms).
@@ -66,7 +73,28 @@ The associator CommShift equation identifies the two resulting arrows at the
 same common stage, so their classes agree. This is precisely NatTrans.CommShift. -/
 @[instance] theorem qbarTransIsoCommShift {i j : I} (h : i ≤ j) :
     NatTrans.CommShift (S.transIso h).hom ℤ := by
-  sorry
+  constructor
+  intro n
+  ext X
+  simp only [Functor.commShiftIso_comp_hom_app, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  change ((S.ι j).map (((S.T h).commShiftIso n).hom.app X) ≫
+    𝟙 _) ≫ (pbcPairShift S n).map ((S.transIso h).hom.app X) =
+    (S.transIso h).hom.app ((shiftFunctor (C i) n).obj X) ≫ 𝟙 _
+  simp only [Category.comp_id]
+  simp only [transIso_hom_app, isoToStage, pbcPairShift]
+  erw [Morphism.functor_map_mkHom, ι_map_eq (le_rfl : j ≤ j),
+    PairCategory.mkHom_comp_mkHom]
+  congr 1
+  change (S.T (le_rfl : j ≤ j)).map (((S.T h).commShiftIso n).hom.app X) ≫
+    (((S.T (le_rfl : j ≤ j)).commShiftIso n).hom.app ((S.T h).obj X) ≫
+      (shiftFunctor (C j) n).map ((S.assoc h le_rfl).hom.app X) ≫
+        ((S.T h).commShiftIso n).inv.app X) =
+    (S.assoc h le_rfl).hom.app ((shiftFunctor (C i) n).obj X)
+  have eq := congrArg (fun f ↦ f ≫ ((S.T h).commShiftIso n).inv.app X)
+    (pbcStageShift_coherence S n h le_rfl X)
+  simpa only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj,
+    Category.comp_id] using eq
 
 /-- The recorded Verdier theorem uniquely fixes the pretriangulation by the
 recorded CommonStageDistinguished predicate. Its data is the specified triangle
@@ -123,6 +151,8 @@ theorem pbcVerdierAxioms :
       ((pbcScalarSystem l Qbar T hDim.out hInv.out).ι E).IsTriangulated) ∧
     ∀ {E F : Padic.FiniteCoefficientFields l Qbar} (h : E ≤ F),
       NatTrans.CommShift ((pbcScalarSystem l Qbar T hDim.out hInv.out).transIso h).hom ℤ := by
-  sorry
+  let S := pbcScalarSystem l Qbar T hDim.out hInv.out
+  have ht := (CategoryTheory.StageSystem.commonStage_verdier_existsUnique S).exists.choose_spec
+  exact ⟨ht.2.1, ht.2.2, fun h ↦ inferInstance⟩
 
 end AlgebraicGeometry.Scheme
