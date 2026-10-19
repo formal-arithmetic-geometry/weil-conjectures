@@ -7,24 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.TowerEvaluationKInjective
-import Mathlib.Algebra.Homology.Functor
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Paper.LocalizeRingedSiteMorphism
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import all Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison
 
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
@@ -79,7 +65,9 @@ theorem betaInvApp_naturality {U' U X' X : Scheme.{u}}
     (M N : Derived B U) (f : M ⟶ N) :
     (G B gU ⋙ J B j').map f ≫ betaInvApp B gU j' j g h N =
       betaInvApp B gU j' j g h M ≫ (J B j ⋙ G B g).map f := by
-  sorry
+  apply (jAdj B j').homEquiv_naturality_right_square
+  exact ((Functor.whiskerRight (jAdj B j).unit (G B gU)) ≫
+    Functor.whiskerLeft (J B j) (squareG B gU j' j g h).inv).naturality f
 
 /-- The inverse comparison as a natural transformation with the specified transpose.
 Source: Stacks, Tag 09AE (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
@@ -149,7 +137,16 @@ theorem squareLift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
     (h : k ≫ p = r ≫ i) :
     IsOpenImmersion (squareLift k r p i h) ∧ IsClosedImmersion (squareLift k r p i h) := by
-  sorry
+  have hopen : IsOpenImmersion (squareLift k r p i h) := by
+    have : IsOpenImmersion (squareLift k r p i h ≫ pullback.fst p i) := by
+      simpa only [squareLift, pullback.lift_fst] using (inferInstance : IsOpenImmersion k)
+    exact IsOpenImmersion.of_comp _ (pullback.fst p i)
+  have hproper : IsProper (squareLift k r p i h) := by
+    have : IsProper (squareLift k r p i h ≫ pullback.snd p i) := by
+      simpa only [squareLift, pullback.lift_snd] using (inferInstance : IsProper r)
+    exact IsProper.of_comp _ (pullback.snd p i)
+  exact ⟨hopen, IsClosedImmersion.of_isPreimmersion _
+    ((squareLift k r p i h).isClosedMap.isClosed_range)⟩
 
 /-- Open part of the clopen factorization. Source: Stacks, Tags 01W6 and 01IQ
 (blueprint: def-cbc-strict-tower-proper-open-arrows). -/
@@ -174,7 +171,59 @@ of the extension presheaf is the original module. This survives sheafification,
 termwise extension to strict towers, and exact localization. -/
 theorem jAdj_unit_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (jAdj B j).unit := by
-  sorry
+  let Uo : X.ProEt := Scheme.ProEt.mk j
+  have : IsOpenImmersion Uo.hom := ‹IsOpenImmersion j›
+  let A := coefficients B X
+  let R₀ := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A
+  let ae := SheafOfModules.extensionSheafAdjunction R₀ Uo
+  have hsub (V : X.ProEt) : Subsingleton (V ⟶ Uo) := by
+    constructor
+    intro f g
+    apply MorphismProperty.Over.Hom.ext
+    apply (cancel_mono j).1
+    exact f.w.trans g.w.symm
+  have hu (M) : IsIso (ae.unit.app M) :=
+    SheafOfModules.extensionSheafAdjunction_unit_isIso R₀ Uo hsub M
+  have : IsIso ae.unit := NatIso.isIso_of_isIso_app _
+  let ff := ae.fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  obtain ⟨q, ⟨hq⟩⟩ := Scheme.proEtale_ringed_open_comparison Uo A
+  let rc := (sheafCompose (Scheme.ProEt.topology U)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso (constantRingIso B j)
+  let e := Scheme.proEtaleScalarEquivalence U rc
+  let extAdj := Scheme.proEtaleRingExtensionAdjunction j A (coefficients B U)
+    (constantRingIso B j)
+  let ee := extAdj.leftAdjointUniq e.symm.toAdjunction
+  let t := e.trans q
+  let P := Scheme.proEtaleModuleInverseImage j A
+  let E := Scheme.proEtaleRingExtension j A (coefficients B U) (constantRingIso B j)
+  let hc : modulePullback B j ⋙ t.functor ≅ SheafOfModules.overFunctor R₀ Uo :=
+    Functor.associator P E (e.functor ⋙ q.functor) ≪≫
+      Functor.isoWhiskerLeft P
+        ((Functor.associator E e.functor q.functor).symm ≪≫
+          Functor.isoWhiskerRight
+            (Functor.isoWhiskerRight ee e.functor ≪≫ e.counitIso) q.functor ≪≫
+          Functor.leftUnitor q.functor) ≪≫ hq
+  let hr : modulePullback B j ≅ SheafOfModules.overFunctor R₀ Uo ⋙ t.inverse :=
+    (Functor.rightUnitor _).symm ≪≫ Functor.isoWhiskerLeft _ t.unitIso ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight hc t.inverse
+  let a := (t.toAdjunction.comp ae).ofNatIsoRight hr.symm
+  let jf := (Functor.FullyFaithful.ofFullyFaithful (t.functor ⋙ _)).ofIso
+    ((moduleJAdj B j).leftAdjointUniq a).symm
+  have := jf.full
+  have := jf.faithful
+  have : IsIso (moduleJAdj B j).unit := inferInstance
+  let towerAdj :=  (moduleJAdj B j).whiskerRight ℕᵒᵖ
+  have ht (M) : IsIso (towerAdj.unit.app M) := by
+    dsimp only [towerAdj, Adjunction.whiskerRight]
+    infer_instance
+  have : IsIso towerAdj.unit := NatIso.isIso_of_isIso_app _
+  exact (jAdj B j).isIso_unit_of_iso
+    ((Functor.mapDerivedCategoryCompIso (towerJ B j) (towerPullback B j)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso towerAdj.unit).symm ≪≫
+      Functor.mapDerivedCategoryIdIso (Towers B U))
 
 /-- The canonical map from open extension to direct image is the counit mate of the
 inverse open unit. Source: Stacks, Tags 03DI and 09AE

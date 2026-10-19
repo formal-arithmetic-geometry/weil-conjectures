@@ -16,9 +16,69 @@
   "document": "literature/stacks-project/more-etale.tex",
   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), 0F7F (lemma-shriek-proper-and-open-base-change), open-immersion cases; derived strict-tower and pro-etale refinement of these statements, with the mate construction of sites-cohomology.tex Tag 07A7 (remark-base-change) and proetale.tex Tag 09AE (definition-extension-zero). The source states the etale result; the tower realization, finite-evaluation normalization and pro-etale extension are additional assertions to be proved, not quotations from the source.; strict-tower proof steps introducing these operations."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Naturality of betaInvApp is the naturality square transported by the open adjunction Hom equivalence. Apply Adjunction.homEquiv_naturality_right_square to the natural transformation obtained by whiskering the open unit and the inverse squareG. This proves betaInvApp_naturality without a separate geometric base-change assertion. The cartesian invertibility and finite evaluation assertions remain the existing named obligations betaInv_isIso and beta_evaluation.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let s be the canonical pullback lift. Its composite with the first projection is k, so IsOpenImmersion.of_comp proves that s is open. Its composite with the second projection is r, and that projection is separated because it is a base change of the proper map p. IsProper.of_comp therefore makes s proper. Its image is closed by properness, and IsClosedImmersion.of_isPreimmersion turns the open immersion with closed image into a closed immersion. This proves squareLift_clopen, including the empty-open case.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For j:U to X, regard j as an open object Uo of X.ProEt. Every test object has at most one arrow to Uo, by cancellation of the mono j. The proved localized extensionSheafAdjunction_unit_isIso from ProEtaleRingedOpenClosed makes the localized extension fully faithful. Use proEtale_ringed_open_comparison and the scalar equivalence for constantRingIso to identify modulePullback with localized restriction followed by the inverse equivalence. Uniqueness of left adjoints transports full faithfulness to the chosen moduleJ. Thus its particular adjunction unit is invertible.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the module open adjunction by the strict tower index. Its unit is pointwise invertible, so it is a natural isomorphism. Exact localization maps this unit isomorphism and the composition and identity functor isomorphisms to an isomorphism J composed with G to the identity. Adjunction.isIso_unit_of_iso proves invertibility of the unit of the specified jAdj, without changing its normalization. This completes jAdj_unit_isIso.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The already specified openToR map is the counit mate of the inverse open unit. Its clopen invertibility remains the existing named obligation openToR_isIso: split each pro-etale test object over the clopen image and its open complement; both functors give the original module on the first piece and zero on the second, and the specified map is identity on the first piece. With this obligation and the cartesian comparison above, retain the existing pi, alpha, gamma and exchange constructions by their stated functor compositions and adjunction mates.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE, localized open extension and its unit; the geometric clopen-lift argument also uses Tags 01W6 and 01IQ. J9 stage-3 partial proof: naturality, the clopen lift, and the open unit are proved in Lean; the three explicitly identified existing obligations are retained."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -291,5 +351,15 @@
   "group": "N4",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, docstrings, canonical constructions, report sections, and full six-file scompile verification passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T005308-L-2749585",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
