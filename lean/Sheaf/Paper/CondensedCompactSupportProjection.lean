@@ -171,7 +171,9 @@ Mod.extendScalarsId. Transport finite-limit preservation along that isomorphism.
 theorem identityScalar_flat (Λ₀ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] (W : Scheme.{u}) :
     PreservesFiniteLimits (Mod.extendScalars (coefficientMap (𝟙 Λ₀) W)) := by
-  sorry
+  exact preservesFiniteLimits_of_natIso
+    (Mod.extendScalarsIsoOfEq (coefficientMap_id (Λ := Λ₀) W) ≪≫
+      Mod.extendScalarsId).symm
 
 attribute [instance] identityScalar_flat
 
