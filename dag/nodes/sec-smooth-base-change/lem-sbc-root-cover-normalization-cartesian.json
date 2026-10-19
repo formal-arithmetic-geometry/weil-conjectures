@@ -98,13 +98,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootCoverNormalizationCartesian.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RootCoverNormalizationCartesian.lean",
   "declaration": "AlgebraicGeometry.Scheme.root_cover_normalization_cartesian",
   "statement": "theorem root_cover_normalization_cartesian\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (H B : CommRingCat.{u}) [Algebra H B] (g : H)\n    [(Ideal.span {g}).IsPrime] [IsLocalization.AtPrime B (Ideal.span {g})]\n    [IsDomain B] [IsDiscreteValuationRing B]\n    (hpi : Irreducible (algebraMap H B g))\n    (ψ : Spec H ⟶ L)\n    (k : Spec (CommRingCat.of (FractionRing B)) ⟶ U)\n    (hk : k ≫ i = Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n      Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ)\n    (hbranch : IsPullback k (𝟙 _) i\n      (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫\n        Spec.map (CommRingCat.ofHom (algebraMap H B)) ≫ ψ))\n    (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))\n    (ρ : T.P ⟶ W.P) (hT : IsPullback ρ T.π W.π k)\n    (hrootloc :\n      let F := (Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g\n      let F0 := F.map (algebraMap H B)\n      let γ := AdjoinRoot.map (algebraMap H B) F F0 dvd_rfl\n      let := γ.toAlgebra\n      IsLocalization ((Ideal.span {g}).primeCompl.map (AdjoinRoot.of F)) (AdjoinRoot F0)) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ∀ (hN : IsLocallyNoetherian N),\n    let := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ ψ)\n    ∀ (hp : IsFinite p),\n    let := hp\n    let a := p ≫ V.ι\n    Etale p →\n    let pi := algebraMap H B g\n    let A0 := AdjoinRoot\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)\n    let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))\n    let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a0 := pullback.snd (T.π ≫ j0) q0\n    let γ := AdjoinRoot.map (algebraMap H B)\n      ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n      ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi) (by simp [pi])\n    ∀ (hqc : QuasiCompact a0) (hqs : QuasiSeparated a0),\n      letI := hqc\n      letI := hqs\n      ∃ c : a0.normalization ⟶ a.normalization,\n        IsPullback c a0.fromNormalization a.fromNormalization\n          (Spec.map (CommRingCat.ofHom γ))",
   "branch": "sheaf-dag",
   "by": "C2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.RootCoverNormalizationCartesian; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

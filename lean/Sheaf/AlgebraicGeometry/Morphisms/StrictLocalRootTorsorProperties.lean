@@ -4,14 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants
+public import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootDomainEtale
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # The connected torsor properties of a strict local root cover

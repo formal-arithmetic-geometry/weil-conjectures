@@ -6,7 +6,7 @@ Authors: SHEAF group Q41
 module
 
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Sheaf.AlgebraicGeometry.LogRegularPair
 public import Sheaf.RingTheory.ExcellentRing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization

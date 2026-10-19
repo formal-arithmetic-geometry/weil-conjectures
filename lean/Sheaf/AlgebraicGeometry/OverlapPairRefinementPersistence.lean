@@ -5,9 +5,9 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
+public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 import Sheaf.AlgebraicGeometry.OverlapPairSquareChartTransport
-import Sheaf.AlgebraicGeometry.OverlapIteratedComparisonRefinement
+import WeilConjectures.AlgebraicGeometry.OverlapIteratedComparisonRefinement
 
 /-! # A step of persistent pairwise overlap lifting
 

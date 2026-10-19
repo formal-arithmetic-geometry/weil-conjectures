@@ -96,13 +96,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DvrGaloisComponentsStalkFactor.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DvrGaloisComponentsStalkFactor.lean",
   "declaration": "AlgebraicGeometry.Scheme.dvr_galois_components_stalk_factor",
   "statement": "theorem dvr_galois_components_stalk_factor\n    (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)\n    (r : ℕ) (E : Fin r → Type u) [∀ i, Field (E i)]\n    [∀ i, Algebra (FractionRing B) (E i)]\n    (hE : ∀ i, FiniteDimensional (FractionRing B) (E i) ∧\n      IsGalois (FractionRing B) (E i))\n    (X : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of (FractionRing B)))\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap (FractionRing B) (E i)))) = p) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap B A))\n    let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))\n    let a := pullback.snd (p ≫ j) q\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    ∀ (x : a.normalization),\n      (a.fromNormalization x).asIdeal = Ideal.span\n        {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} →\n    letI : ∀ i, Algebra B (E i) := fun i ↦\n      ((algebraMap (FractionRing B) (E i)).comp\n        (algebraMap B (FractionRing B))).toAlgebra\n    ∃ (i : Fin r) (P : Ideal (E i ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E i ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E i ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    ∃ (Q : Ideal S) (hQ : Q.IsPrime),\n    letI := hQ\n    Q.comap (algebraMap A S) = Ideal.span\n      {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} ∧\n    ∃ (epsilon : Localization.AtPrime Q ≃+* a.normalization.presheaf.stalk x),\n      ∀ s : A, epsilon (algebraMap S (Localization.AtPrime Q) (algebraMap A S s)) =\n        (a.fromNormalization.stalkMap x).hom\n          (StructureSheaf.toStalk A (a.fromNormalization x) s)",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkFactor; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

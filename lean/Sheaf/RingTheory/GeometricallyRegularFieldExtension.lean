@@ -16,7 +16,7 @@ import Mathlib.Algebra.Field.Shrink
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import WeilConjectures.RingTheory.RegularRingFaithfullyFlatDescent
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Geometric regularity under finitely generated field extensions

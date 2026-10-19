@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
 import Mathlib.Algebra.Field.Shrink
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Geometric regularity ascends along smooth algebra maps

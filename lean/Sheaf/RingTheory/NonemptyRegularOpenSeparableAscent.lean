@@ -15,7 +15,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Ideal
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.GenericSmoothDomain
 
 /-!

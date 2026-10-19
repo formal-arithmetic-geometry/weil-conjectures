@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteFlatStalk
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
-import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
 
 /-!
 # Extending finite etale covers across a regular codimension-two boundary

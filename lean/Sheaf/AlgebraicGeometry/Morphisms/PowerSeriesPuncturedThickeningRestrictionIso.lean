@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesThickeningBoundaryDepth
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesThickeningBoundaryDepth
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! Categorical form of the finite thickening restriction comparison.

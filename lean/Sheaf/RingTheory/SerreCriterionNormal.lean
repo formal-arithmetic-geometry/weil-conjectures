@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.SerreConditions
+public import WeilConjectures.RingTheory.SerreConditions
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.NormalLocalDepthTwo
 import WeilConjectures.RingTheory.IntegralTotalFractionLocalDenominator

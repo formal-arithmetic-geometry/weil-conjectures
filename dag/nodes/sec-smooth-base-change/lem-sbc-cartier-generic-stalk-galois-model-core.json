@@ -115,13 +115,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierGenericStalkGaloisModelCore.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/CartierGenericStalkGaloisModelCore.lean",
   "declaration": "AlgebraicGeometry.Scheme.cartier_generic_stalk_galois_model_core",
   "statement": "theorem cartier_generic_stalk_galois_model_core\n    {N U P : Scheme.{u}} [IsLocallyNoetherian N]\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]\n    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),\n      letI := hdom\n      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →\n      ∀ (x : a.normalization), a.fromNormalization x = j η →\n        ∃ (S : CommRingCat.{u}) (T : Subgroup G)\n          (alg : Algebra (N.presheaf.stalk (j η)) S),\n          letI := alg\n          ∃ (act : MulSemiringAction T S),\n          letI := act\n          ∃ (hS : IsDomain S),\n          letI := hS\n          ∃ (hinj : Function.Injective (algebraMap (N.presheaf.stalk (j η)) S)),\n          letI : Module.IsTorsionFree (N.presheaf.stalk (j η)) S :=\n            Module.isTorsionFree_iff_algebraMap_injective.mpr hinj\n          letI := FractionRing.liftAlgebra (N.presheaf.stalk (j η)) (FractionRing S)\n          letI := IsFractionRing.mulSemiringAction T S (FractionRing S)\n          Module.Finite (N.presheaf.stalk (j η)) S ∧\n          IsGaloisGroup T (FractionRing (N.presheaf.stalk (j η))) (FractionRing S) ∧\n          ∃ (q₀ : Ideal S) (hq₀ : q₀.IsPrime),\n            letI := hq₀\n            letI := Localization.AtPrime.algebraOfLiesOver\n              (q₀.under (N.presheaf.stalk (j η))) q₀\n            letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra\n            ∃ (e : N.residueField (a.fromNormalization x) ≃+*\n                (q₀.under (N.presheaf.stalk (j η))).ResidueField)\n              (f : a.normalization.residueField x ≃+* q₀.ResidueField),\n              (algebraMap (q₀.under (N.presheaf.stalk (j η))).ResidueField\n                q₀.ResidueField).comp e.toRingHom =\n                f.toRingHom.comp (algebraMap (N.residueField (a.fromNormalization x))\n                  (a.normalization.residueField x))",
   "branch": "sheaf-dag",
   "by": "B4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModelCore; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

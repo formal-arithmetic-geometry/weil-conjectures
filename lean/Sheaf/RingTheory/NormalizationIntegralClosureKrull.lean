@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.InjectivePiLocalizationAssociatedPrimes
-import Sheaf.RingTheory.IntegralClosureFiniteNormalProduct
+import WeilConjectures.RingTheory.IntegralClosureFiniteNormalProduct
 import Sheaf.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.KrullAkizukiNoetherian
 import Sheaf.RingTheory.NagataOfCompleteLocal

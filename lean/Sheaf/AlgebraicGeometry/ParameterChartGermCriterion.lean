@@ -24,7 +24,7 @@ import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
 import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 import WeilConjectures.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.RingTheory.MiracleFlatness
+import WeilConjectures.RingTheory.MiracleFlatness
 import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
 

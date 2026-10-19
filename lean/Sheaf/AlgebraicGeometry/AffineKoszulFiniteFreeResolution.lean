@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.AffineQuotientRestrictedIso
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 

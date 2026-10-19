@@ -6,7 +6,7 @@ Authors: SHEAF group Q60
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Fiber

@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.RegularityRkGoesUp
+import WeilConjectures.RingTheory.RegularityRkGoesUp
 import Sheaf.RingTheory.SerreCriterionNormal
 import Sheaf.RingTheory.SerreSkGoesUp
 

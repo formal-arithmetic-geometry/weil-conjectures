@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait
+import WeilConjectures.AlgebraicGeometry.NoetherianSpecializationTrait
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
 import WeilConjectures.AlgebraicGeometry.SmoothTraitSectionComponents
 

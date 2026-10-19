@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-!
 # Completeness of power series over a complete base

@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.RingTheory.SerreConditions
+public import WeilConjectures.RingTheory.SerreConditions
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 import Mathlib.Algebra.Module.LocalizedModule.Submodule

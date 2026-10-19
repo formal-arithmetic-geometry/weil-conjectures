@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
 import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.PresentationFittingIdeal
 import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
 import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular

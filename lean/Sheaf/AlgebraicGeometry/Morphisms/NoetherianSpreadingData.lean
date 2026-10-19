@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit
-import Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent
 
 /-!
 # Noetherian approximation data for spreading a finite torsor

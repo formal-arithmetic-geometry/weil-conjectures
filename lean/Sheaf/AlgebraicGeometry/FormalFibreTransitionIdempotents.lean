@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents
+import WeilConjectures.AlgebraicGeometry.NilpotentBaseChangeIdempotents
 
 /-! # One-step lifting of infinitesimal-fibre idempotents -/
 

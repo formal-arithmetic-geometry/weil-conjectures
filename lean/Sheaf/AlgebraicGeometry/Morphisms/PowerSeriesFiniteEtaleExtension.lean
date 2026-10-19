@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.MvPowerSeriesFlat
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.MvPowerSeriesFlat
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesDepthTwoBaseChange
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleDescentNearClosedPoint

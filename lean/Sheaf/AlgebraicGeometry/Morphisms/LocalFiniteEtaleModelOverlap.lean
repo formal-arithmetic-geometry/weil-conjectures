@@ -14,7 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkFiniteEtaleModel
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading
 
 /-!
 # Local extension with an overlap comparison

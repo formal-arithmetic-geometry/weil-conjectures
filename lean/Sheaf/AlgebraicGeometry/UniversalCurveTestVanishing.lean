@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 import Sheaf.AlgebraicGeometry.CyclicHigherDirectImageLocalVanishing
 

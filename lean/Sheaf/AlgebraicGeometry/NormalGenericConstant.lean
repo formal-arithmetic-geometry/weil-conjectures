@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison

@@ -18,12 +18,12 @@ import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.RingTheory.LocalRing.Module
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Sheaf.RingTheory.SmoothFibreRegularLocal
+import WeilConjectures.RingTheory.SmoothFibreRegularLocal
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.Etale.LocalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.RingTheory.MiracleFlatness
+import WeilConjectures.RingTheory.MiracleFlatness
 import Sheaf.RingTheory.FlatOfFlatClosedFiber
 import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
 import Sheaf.AlgebraicGeometry.SmoothPairRegularEquations

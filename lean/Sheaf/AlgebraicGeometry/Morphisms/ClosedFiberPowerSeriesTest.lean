@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothSectionPowerSeriesChart
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 
 /-!
 # A flat power-series test through a closed boundary point

@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
+public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 
 /-! # Transport of pair squares through chart refinements

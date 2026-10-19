@@ -110,13 +110,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionStalkSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionStalkSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictionStalkSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictionStalkSquare.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestriction_stalk_square",
   "statement": "theorem openRestriction_stalk_square\n    {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens)\n    (M : X.Modules) (N : X'.Modules) (Z : (pullback k U.ι : Scheme.{u}).Modules)\n    (a : M ⟶ (Scheme.Modules.pushforward k).obj N)\n    (b : (Scheme.Modules.restrictFunctor U.ι).obj M ⟶\n      (Scheme.Modules.pushforward (pullback.snd k U.ι)).obj Z)\n    (c : (Scheme.Modules.restrictFunctor (pullback.fst k U.ι)).obj N ⟶ Z)\n    (h : a ≫ (Scheme.Modules.pushforward k).map\n        ((Scheme.Modules.restrictAdjunction (pullback.fst k U.ι)).unit.app N) ≫\n        (Scheme.Modules.pushforward (pullback.fst k U.ι) ⋙\n          Scheme.Modules.pushforward k).map c =\n      (Scheme.Modules.restrictAdjunction U.ι).unit.app M ≫\n        (Scheme.Modules.pushforward U.ι).map b ≫\n        (Scheme.Modules.pushforwardComp (pullback.snd k U.ι) U.ι ≪≫\n          Scheme.Modules.pushforwardCongr pullback.condition.symm).hom.app Z ≫\n        (Scheme.Modules.pushforwardComp (pullback.fst k U.ι) k ≪≫\n          Scheme.Modules.pushforwardCongr rfl).inv.app Z)\n    (z0 : (pullback k U.ι : Scheme.{u})) :\n    let z := pullback.fst k U.ι z0\n    let q := pullback.snd k U.ι\n    let L0 := RingedSpace.moduleStalkFunctor (pullback k U.ι).toRingedSpace z0\n    let F0 := forget₂ (ModuleCat.{u} ((pullback k U.ι).presheaf.stalk z0)) AddCommGrpCat.{u}\n    let hp : k z = U.ι (q z0) :=\n      congrArg (fun d : pullback k U.ι ⟶ X ↦ d z0) pullback.condition\n    (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (k z)).map\n        (Scheme.Modules.Hom.mapPresheaf a) ≫\n      N.presheaf.stalkPushforward AddCommGrpCat.{u} k.base z ≫\n      (Scheme.Modules.restrictStalkNatIso (pullback.fst k U.ι) z0).inv.app N ≫\n      F0.map (L0.map c) =\n    (M.presheaf.stalkCongr (.of_eq hp)).hom ≫\n      (Scheme.Modules.restrictStalkNatIso U.ι (q z0)).inv.app M ≫\n      (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (q z0)).map\n        (Scheme.Modules.Hom.mapPresheaf b) ≫\n      Z.presheaf.stalkPushforward AddCommGrpCat.{u} q.base z0",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OpenRestrictionStalkSquare; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

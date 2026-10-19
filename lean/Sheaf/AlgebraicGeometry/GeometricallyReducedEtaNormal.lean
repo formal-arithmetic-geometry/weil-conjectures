@@ -17,11 +17,11 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
-import Sheaf.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
 import WeilConjectures.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.SerreCriterionReduced
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced

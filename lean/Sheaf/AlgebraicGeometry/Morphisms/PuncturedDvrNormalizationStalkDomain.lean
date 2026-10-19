@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.Algebra.Module.Torsion.Free
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
+import WeilConjectures.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat

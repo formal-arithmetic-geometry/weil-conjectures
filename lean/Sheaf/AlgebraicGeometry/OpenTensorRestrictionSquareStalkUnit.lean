@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.OpenRestrictedTensorComplexIso
-import Sheaf.AlgebraicGeometry.OpenRestrictionStalkSquare
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionStalkSquare
 
 /-! # Open restriction of the tensor-pullback adjunction unit
 

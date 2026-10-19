@@ -5,7 +5,7 @@ Authors: SHEAF group Q25
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Sheaf.RingTheory.GRing
 public import Mathlib.AlgebraicGeometry.Scheme

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AdmissibleFiniteSchemeQuotient
 public import Sheaf.AlgebraicGeometry.NodalGeometricFibres
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.AlgebraicGeometry.PrimeToEllAlterationTopology
 public import Sheaf.RingTheory.ExcellentRing

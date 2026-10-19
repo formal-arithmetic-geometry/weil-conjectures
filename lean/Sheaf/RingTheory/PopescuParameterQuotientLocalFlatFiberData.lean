@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.Smooth.Basic
 import Sheaf.FieldTheory.SeparableIndSmoothTransport
 import WeilConjectures.RingTheory.FlatLocalizedQuotient
 import WeilConjectures.RingTheory.PopescuParameterQuotientResidueEquivs
-import Sheaf.RingTheory.FlatOverRegular
+import WeilConjectures.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 

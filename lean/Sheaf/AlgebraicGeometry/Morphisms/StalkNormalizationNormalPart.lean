@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Sheaf.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
+import WeilConjectures.AlgebraicGeometry.Morphisms.RelativeNormalizationNormalStalks
 
 @[expose] public section
 universe u

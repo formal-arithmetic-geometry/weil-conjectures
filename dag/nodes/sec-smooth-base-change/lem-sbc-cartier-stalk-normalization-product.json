@@ -121,13 +121,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierStalkNormalizationProduct.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/CartierStalkNormalizationProduct.lean",
   "declaration": "AlgebraicGeometry.Scheme.cartier_stalk_normalization_product",
   "statement": "theorem cartier_stalk_normalization_product\n    {N U P : Scheme.{u}} [IsLocallyNoetherian N]\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]\n    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),\n      letI := hdom\n      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →\n      let R := N.presheaf.stalk (j η)\n      ∃ (n : ℕ) (E : Fin n → Type u) (hE : ∀ i, Field (E i))\n        (aE : ∀ i, Algebra (FractionRing R) (E i)),\n        letI := hE\n        letI := aE\n        letI (i : Fin n) : Algebra R (E i) :=\n          ((algebraMap (FractionRing R) (E i)).comp\n            (algebraMap R (FractionRing R))).toAlgebra\n        ∃ (T : Fin n → Subgroup G) (act : ∀ i, MulSemiringAction (T i) (E i)),\n          letI := act\n          (∀ i, IsGaloisGroup (T i) (FractionRing R) (E i)) ∧\n          (∀ i, Module.Finite R (integralClosure R (E i))) ∧\n          ∃ e : pullback a.fromNormalization (N.fromSpecStalk (j η)) ≅\n              ∐ fun i : Fin n ↦ Spec (CommRingCat.of (integralClosure R (E i))),\n            e.hom ≫ Sigma.desc (fun i : Fin n ↦\n              Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R (E i))))) =\n              pullback.snd a.fromNormalization (N.fromSpecStalk (j η))",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.CartierStalkNormalizationProduct; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

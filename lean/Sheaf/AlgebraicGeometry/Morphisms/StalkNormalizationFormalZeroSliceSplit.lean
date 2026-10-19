@@ -16,7 +16,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSplit
+import WeilConjectures.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSplit
 
 /-! # Splitting the zero slice of the fixed formal test
 

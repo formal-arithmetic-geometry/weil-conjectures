@@ -30,7 +30,7 @@ import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.RegularSequenceConormal
 import WeilConjectures.RingTheory.SmoothConormalSequenceExact
 import Mathlib.RingTheory.TensorProduct.Quotient

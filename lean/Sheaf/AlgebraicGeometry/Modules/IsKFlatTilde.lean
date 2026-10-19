@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import Sheaf.AlgebraicGeometry.Modules.TildeStalkTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.TildeStalkTensorComparison
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 

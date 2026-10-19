@@ -14,7 +14,7 @@ import Sheaf.AlgebraicGeometry.LogFanChartBlowup
 import Mathlib.NumberTheory.Cyclotomic.Basic
 import Mathlib.RingTheory.Localization.Defs
 import Sheaf.GroupTheory.SharpConeLatticeIntersection
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.GroupTheory.DivisibleUnitLatticeExtension
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.AlgebraicGeometry.FineLogStalkChartSpreading

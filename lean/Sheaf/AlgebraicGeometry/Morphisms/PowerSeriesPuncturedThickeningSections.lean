@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction
 import Mathlib.RingTheory.AdicCompletion.Completeness
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-!
 # Compatible sections of punctured power-series thickenings

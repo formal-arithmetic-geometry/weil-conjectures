@@ -18,10 +18,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdjoinRoot
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
-import Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDenseOpen
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! Tame charts with the trait divisor equation. 

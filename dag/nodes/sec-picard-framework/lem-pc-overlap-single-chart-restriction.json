@@ -92,8 +92,8 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction",
-  "file": "lean/Sheaf/AlgebraicGeometry/OverlapSingleChartRestriction.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OverlapSingleChartRestriction",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OverlapSingleChartRestriction.lean",
   "declaration": "AlgebraicGeometry.overlap_single_chart_restriction",
   "declarations": [
    "AlgebraicGeometry.overlapCanonicalChartComparison",
@@ -103,7 +103,8 @@
   "statement": "theorem overlap_single_chart_restriction {X Y Z H K : Scheme.{u}}\n    (U : X.OpenCover.{u}) (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)\n    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)\n    (d : U.I₀) (ν : H ⟶ Z) (hd : H ⟶ (U.pullback₁ t).X d)\n    (hν : hd ≫ (U.pullback₁ t).f d = ν)\n    (r : K ⟶ ((U.pullback₁ q).pullback₁ p).X d) (z : K ⟶ H) (k : K ⟶ Z)\n    (hr : r ≫ ((U.pullback₁ q).pullback₁ p).f d = k)\n    (hz : z ≫ hd = r ≫ overlapIteratedChartHom U q p t h d)\n    (hzk : z ≫ ν = k) (S : H.Modules)\n    (τ : S ≅ (Scheme.Modules.pullback hd).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d))) :\n    let ξ := overlapRestrictionIso (overlapIteratedChartHom U q p t h d) z hd r hz\n      ((Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d)) _ S\n      (overlapCanonicalChartComparison U q p t h N d) τ\n    ξ.hom ≫ (Scheme.Modules.pullback r).map\n        (overlapIteratedComparison U q p t h N M e d).hom ≫\n        (pullbackCompOfEq r (((U.pullback₁ q).pullback₁ p).f d) k hr M).hom =\n      (Scheme.Modules.pullback z).map\n        (τ ≪≫ (Scheme.Modules.pullback hd).mapIso (e d) ≪≫\n          pullbackCompOfEq hd ((U.pullback₁ t).f d) ν hν M).hom ≫\n        (pullbackCompOfEq z ν k hzk M).hom",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OverlapSingleChartRestriction; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

@@ -101,13 +101,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartierGenericStalkGaloisModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/CartierGenericStalkGaloisModel.lean",
   "declaration": "AlgebraicGeometry.Scheme.cartier_generic_stalk_galois_model",
   "statement": "theorem cartier_generic_stalk_galois_model\n    {N U P : Scheme.{u}} [IsLocallyNoetherian N]\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (V : N.Opens) (κ : V.toScheme ⟶ U) (p : P ⟶ V.toScheme) [IsFinite p]\n    (r : P ⟶ W.P) (hpb : IsPullback r p W.π κ) :\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∀ (hdom : IsDomain (N.presheaf.stalk (j η))),\n      letI := hdom\n      IsDiscreteValuationRing (N.presheaf.stalk (j η)) →\n      ∀ (x : a.normalization), a.fromNormalization x = j η →\n        ∃ (S : CommRingCat.{u}) (T : Subgroup G)\n          (alg : Algebra (N.presheaf.stalk (j η)) S),\n          letI := alg\n          ∃ (act : MulSemiringAction T S),\n          letI := act\n          IsDomain (N.presheaf.stalk (j η)) ∧ IsDomain S ∧\n          Module.Finite (N.presheaf.stalk (j η)) S ∧\n          Module.Flat (N.presheaf.stalk (j η)) S ∧\n          IsGaloisGroup T (N.presheaf.stalk (j η)) S ∧\n          ∃ (q₀ : Ideal S), q₀.IsPrime ∧\n            (letI := (a.fromNormalization.residueFieldMap x).hom.toAlgebra\n             Module.finrank (N.residueField (a.fromNormalization x))\n               (a.normalization.residueField x)) = q₀.inertiaDeg (N.presheaf.stalk (j η))",
   "branch": "sheaf-dag",
   "by": "P1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.CartierGenericStalkGaloisModel; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

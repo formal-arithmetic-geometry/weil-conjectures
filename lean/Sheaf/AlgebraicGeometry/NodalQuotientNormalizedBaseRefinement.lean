@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AdmissibleFiniteSchemeQuotient
 public import Sheaf.AlgebraicGeometry.NodalGeometricFibres
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
 public import Sheaf.AlgebraicGeometry.PrimeToEllAlterationTopology
 public import Sheaf.RingTheory.ExcellentRing
@@ -20,7 +20,7 @@ public import Sheaf.AlgebraicGeometry.DominantReducedPart
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.JapaneseDomain
-import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import Sheaf.RingTheory.RegularRingNormal
 import Sheaf.RingTheory.EtaleNormalRing
 import Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen
@@ -28,7 +28,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleClopenRestrictionRank
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationDominantLift
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import Mathlib.AlgebraicGeometry.Morphisms.Basic
 import Sheaf.SixFunctors.TraceFormula.ProjectiveNodalFamilyGeometry
 import Mathlib.AlgebraicGeometry.Morphisms.Proper

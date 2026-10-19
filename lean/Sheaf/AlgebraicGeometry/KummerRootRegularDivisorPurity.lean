@@ -23,7 +23,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.RepresentationTheory.ProcyclicTwoTerm
-import Sheaf.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient

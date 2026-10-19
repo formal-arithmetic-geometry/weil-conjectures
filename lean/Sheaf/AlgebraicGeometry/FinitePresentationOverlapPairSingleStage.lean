@@ -5,11 +5,11 @@ Authors: SHEAF group G4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
+public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum
-import Sheaf.AlgebraicGeometry.OverlapPairModelTransport
+import WeilConjectures.AlgebraicGeometry.OverlapPairModelTransport
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 

@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 import Sheaf.AlgebraicGeometry.AffineKoszulHomComplexIso
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine coordinates for the sheafified Koszul Hom complex

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicChartModel
-import Sheaf.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 
 /-!
 # Cyclic orbit charts for a cover split by a root extension

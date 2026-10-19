@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Regular.SMul
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothTraitAffineGenericOpen
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisPuncturedRootChart
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! Punctured Kummer charts before normality. -/

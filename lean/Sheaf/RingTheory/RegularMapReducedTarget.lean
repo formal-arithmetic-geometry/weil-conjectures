@@ -12,7 +12,7 @@ import Mathlib.Algebra.Field.ULift
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Spectrum.Maximal.Localization
 import Sheaf.RingTheory.SerreCriterionReduced
-import Sheaf.RingTheory.RegularityRkGoesUp
+import WeilConjectures.RingTheory.RegularityRkGoesUp
 import Sheaf.RingTheory.SerreSkGoesUp
 
 /-!

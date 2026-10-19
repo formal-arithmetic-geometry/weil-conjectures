@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AbelianVariety.GeometricJacobianGaloisActi
 import Sheaf.AlgebraicGeometry.AbelianVariety.FrobeniusFixedTateModules
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 import WeilConjectures.AlgebraicGeometry.Picard.Jacobian

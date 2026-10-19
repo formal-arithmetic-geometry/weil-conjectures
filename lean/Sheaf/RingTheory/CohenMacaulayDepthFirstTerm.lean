@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.RingTheory.DepthInSES
+import WeilConjectures.RingTheory.DepthInSES
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Regular.Flat

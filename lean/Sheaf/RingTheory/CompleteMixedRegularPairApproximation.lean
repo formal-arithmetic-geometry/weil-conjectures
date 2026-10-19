@@ -24,7 +24,7 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.CompleteLocalExcellent
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.ExcellentRing
@@ -34,7 +34,7 @@ import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Sheaf.RingTheory.FilteredColimitFiniteData
-import Sheaf.RingTheory.SmoothFibreRegularLocal
+import WeilConjectures.RingTheory.SmoothFibreRegularLocal
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.FiniteType

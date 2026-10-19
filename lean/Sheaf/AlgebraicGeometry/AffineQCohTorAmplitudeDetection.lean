@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction
 import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 
 /-! # Quasi-coherent tests on an affine scheme
 

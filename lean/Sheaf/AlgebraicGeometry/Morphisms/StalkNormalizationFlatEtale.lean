@@ -14,8 +14,8 @@ public import Mathlib.AlgebraicGeometry.Normalization
 
 public import WeilConjectures.RingTheory.Depth
 
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
 
 /-!
 # Purity turns flatness of a depth-two normalization into etaleness

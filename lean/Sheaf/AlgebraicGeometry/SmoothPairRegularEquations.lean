@@ -15,7 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.FinitePresentation
-import Sheaf.RingTheory.SmoothFibreRegularLocal
+import WeilConjectures.RingTheory.SmoothFibreRegularLocal
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Mathlib.RingTheory.Flat.Equalizer

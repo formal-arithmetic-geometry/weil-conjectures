@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkBaseChange
 import WeilConjectures.AlgebraicGeometry.Morphisms.StalkGenericOpenPullback
 

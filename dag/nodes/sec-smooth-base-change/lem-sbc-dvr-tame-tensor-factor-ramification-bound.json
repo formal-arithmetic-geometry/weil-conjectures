@@ -106,13 +106,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.DvrTameTensorFactorRamificationBound",
-  "file": "lean/Sheaf/RingTheory/DvrTameTensorFactorRamificationBound.lean",
+  "module": "WeilConjectures.RingTheory.DvrTameTensorFactorRamificationBound",
+  "file": "lean/WeilConjectures/RingTheory/DvrTameTensorFactorRamificationBound.lean",
   "declaration": "RingTheory.dvr_tame_tensor_factor_ramificationIdx_le",
   "statement": "theorem dvr_tame_tensor_factor_ramificationIdx_le\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (n : ℕ) (hnpos : 0 < n) (r : ℕ) (hrpos : 0 < r) (hr : IsUnit (r : B))\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    [Algebra B A] [Module.Finite B A]\n    (hindex : (IsLocalRing.maximalIdeal B).map (algebraMap B A) =\n      IsLocalRing.maximalIdeal A ^ n)\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (hE : FiniteDimensional (FractionRing B) E ∧ Algebra.IsSeparable (FractionRing B) E) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    let C := integralClosure B E\n    Module.Finite B C →\n    (∀ (R : Ideal C) (hR : R.IsPrime),\n      letI := hR\n      R.comap (algebraMap B C) = IsLocalRing.maximalIdeal B →\n        R.ramificationIdx B ∣ r ∧ R.inertiaDeg B ∣ r) →\n    let D := E ⊗[B] A\n    ∀ (P : Ideal D) (hP : P.IsMaximal),\n    let := hP\n    let F := D ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom\n    letI := alpha.toAlgebra\n    Function.Injective alpha →\n    let S := integralClosure A F\n    Module.Finite A S →\n    ∀ (Q : Ideal S) (hQ : Q.IsPrime),\n    let := hQ\n    Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →\n      Q.ramificationIdx A ≤ r / Nat.gcd r n",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.DvrTameTensorFactorRamificationBound; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

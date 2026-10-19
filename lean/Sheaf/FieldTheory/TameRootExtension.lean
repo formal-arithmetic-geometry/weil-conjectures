@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.KummerExtension
 public import Mathlib.RingTheory.RamificationInertia.Ramification
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
 import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
 import Mathlib.RingTheory.Polynomial.GaussLemma

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.RingTheory.Depth
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
-import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFlat
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularLocalSurfaceDepthTwoFlat
 
 /-!
 # A finite flat model in regular local dimension two

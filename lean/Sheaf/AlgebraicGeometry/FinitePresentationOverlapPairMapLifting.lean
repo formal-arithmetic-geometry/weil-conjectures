@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.LocalOverlapTransitions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
-public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
+public import WeilConjectures.AlgebraicGeometry.OverlapPairCanonicalComparisons
 import Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairSingleStage
 import Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence
 

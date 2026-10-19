@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoCoherentModuleExtension
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison
 import Mathlib.RingTheory.Finiteness.Basic
 
 /-! # Coherence and depth of the canonical boundary pushforward algebra

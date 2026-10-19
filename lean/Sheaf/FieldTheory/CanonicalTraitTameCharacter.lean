@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.GroupTheory.Index
 import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.FieldTheory.FiniteDVRTameInertia
 import Sheaf.FieldTheory.FiniteTameCharacterTower
 import Sheaf.GroupTheory.InfiniteTameInverseLimit

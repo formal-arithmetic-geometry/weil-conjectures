@@ -5,7 +5,7 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.RingTheory.SerreConditions
+public import WeilConjectures.RingTheory.SerreConditions
 import Mathlib.RingTheory.LocalProperties.Reduced
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 

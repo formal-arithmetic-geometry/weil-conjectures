@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalDimensionTwoPuncturedFlatModel
-import Sheaf.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatQuasiFiniteDepthPurity
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedEtaleLifting
 
 /-!

@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.SectionComponentPullback
 import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
-import Sheaf.AlgebraicGeometry.NoetherianSpecializationTrait
+import WeilConjectures.AlgebraicGeometry.NoetherianSpecializationTrait
 import WeilConjectures.AlgebraicGeometry.ConnectedGenericFibreTrait
 
 /-!

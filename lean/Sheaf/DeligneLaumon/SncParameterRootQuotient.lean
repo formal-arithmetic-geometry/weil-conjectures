@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.ResidueField
@@ -25,14 +25,14 @@ import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import Sheaf.AlgebraicGeometry.RegularBoundaryDivisorialChart
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineFpIsoIndEtaleDescent
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.RingTheory.StrictHenselizationCotangentDimension
 import Sheaf.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.ColimitCategoryFpAlgebras
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
 import Sheaf.AlgebraicGeometry.SncRootPuncturedTorsorSplitting

@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.RingTheory.FlatOverRegular
+import WeilConjectures.RingTheory.FlatOverRegular
 import Sheaf.RingTheory.DifferentialCoordinatesCotangentIndependent
 import Sheaf.RingTheory.GeometricallyRegularH1Injective
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence

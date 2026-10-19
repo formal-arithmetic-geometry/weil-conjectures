@@ -5,7 +5,7 @@ Authors: SHEAF group NQ
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Sheaf.AlgebraicGeometry.AdmissibleFiniteSchemeQuotient
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.AlgebraicGeometry.Noetherian

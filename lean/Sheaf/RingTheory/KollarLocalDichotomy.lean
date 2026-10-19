@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 public import WeilConjectures.RingTheory.Depth
-import Sheaf.RingTheory.DepthInSES
+import WeilConjectures.RingTheory.DepthInSES
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 import Mathlib.RingTheory.HopkinsLevitzki
 import Mathlib.Algebra.Ring.ULift

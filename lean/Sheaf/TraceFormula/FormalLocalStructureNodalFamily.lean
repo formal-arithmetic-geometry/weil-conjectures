@@ -17,7 +17,7 @@ public import Mathlib.Topology.JacobsonSpace
 
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.MvPowerSeriesQuotientKernel
+import WeilConjectures.RingTheory.MvPowerSeriesQuotientKernel
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
@@ -31,7 +31,7 @@ import Sheaf.RingTheory.LocalCompletionQuotient
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.LocalRing.Module
 import Sheaf.RingTheory.PowerSeriesAdicEvaluation
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
 import Mathlib.RingTheory.MvPowerSeries.Inverse
 import Mathlib.RingTheory.MvPowerSeries.Equiv

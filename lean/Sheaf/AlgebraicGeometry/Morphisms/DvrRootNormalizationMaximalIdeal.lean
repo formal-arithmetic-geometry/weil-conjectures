@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 
-import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
+import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
 import Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootCotangent
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Nakayama

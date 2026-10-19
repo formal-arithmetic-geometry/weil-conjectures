@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import Sheaf.AlgebraicGeometry.AffineRestrictedHomologySupport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.RingTheory.Spectrum.Prime.Module

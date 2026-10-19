@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteModel
 /-!

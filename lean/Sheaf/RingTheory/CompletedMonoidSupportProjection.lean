@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-!
 # Completed lattice monoids and supported power series

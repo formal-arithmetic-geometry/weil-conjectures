@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.RingTheory.PolynomialAppendClosedFibreParameters
 import Mathlib.RingTheory.TensorProduct.Quotient
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.FlatOverRegular
+import WeilConjectures.RingTheory.FlatOverRegular
 
 /-!
 # Flatness of the polynomial-append closed-fibre map

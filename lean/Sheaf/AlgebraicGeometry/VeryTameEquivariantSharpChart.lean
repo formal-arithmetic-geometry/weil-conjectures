@@ -12,7 +12,7 @@ public import Mathlib.Algebra.MonoidAlgebra.Basic
 public import Mathlib.RingTheory.RootsOfUnity.Basic
 import Sheaf.TraceFormula.FsFaceSharpening
 import Sheaf.AlgebraicGeometry.FineLogStalkChartSpreading
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
 import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup

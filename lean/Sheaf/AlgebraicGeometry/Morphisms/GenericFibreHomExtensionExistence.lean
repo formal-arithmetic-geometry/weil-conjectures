@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometry
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 /-!
 # Existence of extensions of generic-fibre morphisms
 

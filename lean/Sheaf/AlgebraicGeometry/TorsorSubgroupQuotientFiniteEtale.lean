@@ -5,7 +5,7 @@ Authors: SHEAF group Q35
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import Mathlib.GroupTheory.Index
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic

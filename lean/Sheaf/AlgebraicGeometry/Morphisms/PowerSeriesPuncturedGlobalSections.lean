@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFormalApproximation
-import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGermDetection
+import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGermDetection
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.Filtration
 

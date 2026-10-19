@@ -143,14 +143,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "module": "Sheaf.RingTheory.FlatLocalDepthReduction",
-  "file": "lean/Sheaf/RingTheory/FlatLocalDepthReduction.lean",
+  "module": "WeilConjectures.RingTheory.FlatLocalDepthReduction",
+  "file": "lean/WeilConjectures/RingTheory/FlatLocalDepthReduction.lean",
   "declaration": "IsLocalRing.exists_depth_reducing_flat_local_quotients",
   "statement": "theorem exists_depth_reducing_flat_local_quotients {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S] (φ : R →+* S) [IsLocalHom φ] (hflat : φ.Flat) [IsLocalRing (S ⧸ (maximalIdeal R).map φ)] (hpos : 0 < depth (R := R) R + depth (R := S ⧸ (maximalIdeal R).map φ) (S ⧸ (maximalIdeal R).map φ)) : ∃ (J : Ideal R) (K : Ideal S) (hJ : J ≤ maximalIdeal R) (hK : K ≤ maximalIdeal S), letI : Nontrivial (R ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hJ) letI : Nontrivial (S ⧸ K) := Ideal.Quotient.nontrivial_iff.mpr (ne_top_of_le_ne_top (maximalIdeal.isMaximal S).ne_top hK) letI : IsLocalRing (R ⧸ J) := IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective letI : IsLocalRing (S ⧸ K) := IsLocalRing.of_surjective' (Ideal.Quotient.mk K) Ideal.Quotient.mk_surjective ∃ (ψ : (R ⧸ J) →+* (S ⧸ K)) (hψ : IsLocalHom ψ), ψ.Flat ∧ ∃ hF : IsLocalRing ((S ⧸ K) ⧸ (maximalIdeal (R ⧸ J)).map ψ), letI := hF ψ.comp (Ideal.Quotient.mk J) = (Ideal.Quotient.mk K).comp φ ∧ depth (R := S) S = depth (R := S ⧸ K) (S ⧸ K) + 1 ∧ depth (R := R) R + depth (R := S ⧸ (maximalIdeal R).map φ) (S ⧸ (maximalIdeal R).map φ) = (depth (R := R ⧸ J) (R ⧸ J) + depth (R := (S ⧸ K) ⧸ (maximalIdeal (R ⧸ J)).map ψ) ((S ⧸ K) ⧸ (maximalIdeal (R ⧸ J)).map ψ)) + 1",
   "branch": "sheaf-dag",
   "by": "M2",
   "date": "2026-10-12",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FlatLocalDepthReduction; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

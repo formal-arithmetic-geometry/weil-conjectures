@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

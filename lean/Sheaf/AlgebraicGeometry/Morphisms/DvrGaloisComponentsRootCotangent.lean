@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Limits
 import Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsStalkPrincipal
-import Sheaf.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootNotSquare
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrGaloisComponentsRootNotSquare
 import WeilConjectures.RingTheory.PrincipalCotangentSpan
 
 /-! # The first-order tame root calculation for Galois field components

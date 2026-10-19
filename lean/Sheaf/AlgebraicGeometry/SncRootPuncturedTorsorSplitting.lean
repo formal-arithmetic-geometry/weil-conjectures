@@ -7,14 +7,14 @@ module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.RingTheory.IsRegularSystemOfParameters
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
-import Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictLocalRootsOfUnity
+import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.FieldTorsorGaloisComponents
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra
@@ -24,11 +24,11 @@ import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.StrictlyHenselianQuotient
 import WeilConjectures.RingTheory.RegularPrincipalPrimeLocalizationDvr
-import Sheaf.RingTheory.DvrGaloisNormalizationRamificationDvd
-import Sheaf.RingTheory.DvrTameTensorFactorUnramified
+import WeilConjectures.RingTheory.DvrGaloisNormalizationRamificationDvd
+import WeilConjectures.RingTheory.DvrTameTensorFactorUnramified
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
 import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStrictHenselianAlgebraEtaleSection
 
 /-!
 # Splitting punctured torsors after simultaneous parameter roots

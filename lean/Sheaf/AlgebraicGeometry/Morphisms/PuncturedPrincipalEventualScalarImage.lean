@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import WeilConjectures.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
 import Sheaf.AlgebraicGeometry.Morphisms.DepthThreePunctureHOne
 import Sheaf.AlgebraicGeometry.Morphisms.PrincipalThickeningSectionsLift
 

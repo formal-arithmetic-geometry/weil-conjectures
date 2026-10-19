@@ -14,7 +14,7 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Kaehler.Polynomial
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-! # Continuous differentials of a formal power-series ring
 

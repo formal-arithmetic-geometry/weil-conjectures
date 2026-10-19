@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.Ideal.GoingDown
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 

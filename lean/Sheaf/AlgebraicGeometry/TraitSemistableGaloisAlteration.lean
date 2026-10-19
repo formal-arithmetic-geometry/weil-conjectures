@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 public import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
 public import Sheaf.AlgebraicGeometry.IsRegularScheme
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

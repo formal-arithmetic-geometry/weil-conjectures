@@ -20,7 +20,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import WeilConjectures.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
 import WeilConjectures.FieldTheory.GenericSeparableAlgebraSplitting
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.JapaneseDomain

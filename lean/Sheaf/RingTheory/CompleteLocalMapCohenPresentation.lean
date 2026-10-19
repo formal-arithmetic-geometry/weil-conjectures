@@ -16,7 +16,7 @@ import Sheaf.RingTheory.CohenPowerSeriesParameterExtension
 import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.Algebra.Ring.ULift
 import Mathlib.Algebra.CharP.Algebra
-import Sheaf.RingTheory.FlatOverRegular
+import WeilConjectures.RingTheory.FlatOverRegular
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!

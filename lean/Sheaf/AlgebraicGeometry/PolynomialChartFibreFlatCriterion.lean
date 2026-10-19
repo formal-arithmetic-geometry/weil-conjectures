@@ -14,8 +14,8 @@ public import WeilConjectures.RingTheory.Depth
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra
-import Sheaf.RingTheory.MiracleFlatness
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.MiracleFlatness
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom

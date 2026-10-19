@@ -10,7 +10,7 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientComplexSquare
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology

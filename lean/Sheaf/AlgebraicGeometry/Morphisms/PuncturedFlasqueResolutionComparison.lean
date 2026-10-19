@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Sheaf.AlgebraicGeometry.Morphisms.PuncturedTildeSectionsComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.PuncturedTildeSectionsComparison
 import Sheaf.AlgebraicGeometry.Morphisms.InjectiveModuleTildeFlasque
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic

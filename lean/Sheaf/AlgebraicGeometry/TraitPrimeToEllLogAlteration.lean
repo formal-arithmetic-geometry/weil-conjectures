@@ -24,7 +24,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
-import Sheaf.AlgebraicGeometry.NormalScheme
+import WeilConjectures.AlgebraicGeometry.NormalScheme
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
 import Sheaf.RingTheory.CompleteLocalExcellent

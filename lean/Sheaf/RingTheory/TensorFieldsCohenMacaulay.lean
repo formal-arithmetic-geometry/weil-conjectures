@@ -25,7 +25,7 @@ import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Sheaf.RingTheory.FlatModuleAtPrime
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.Ideal.GoingUp
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 
 /-!

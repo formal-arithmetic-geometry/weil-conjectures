@@ -100,13 +100,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OverlapModelChartFactorization",
-  "file": "lean/Sheaf/AlgebraicGeometry/OverlapModelChartFactorization.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OverlapModelChartFactorization",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OverlapModelChartFactorization.lean",
   "declaration": "AlgebraicGeometry.overlap_model_chart_factorization",
   "statement": "theorem overlap_model_chart_factorization\n    {H₀ Hₖ H K L A B C D : Scheme.{u}}\n    (q₀ : Hₖ ⟶ H₀) (p₀ : H ⟶ Hₖ) (t₀ : H ⟶ H₀) (h₀ : p₀ ≫ q₀ = t₀)\n    (r₀ : H₀ ⟶ A) (d : K ⟶ Hₖ) (s : K ⟶ B) (u : B ⟶ A)\n    (hk : (d ≫ q₀) ≫ r₀ = s ≫ u)\n    (v : H ⟶ C) (u' : C ⟶ A) (k : H ⟶ A)\n    (htr : t₀ ≫ r₀ = k) (hvu : v ≫ u' = k)\n    (z : L ⟶ H) (l : L ⟶ K) (hz : z ≫ p₀ = l ≫ d)\n    (r : L ⟶ D) (w : D ⟶ B) (δ : D ⟶ C)\n    (hl : l ≫ s = r ≫ w) (hδ : δ ≫ u' = w ≫ u) (hzv : z ≫ v = r ≫ δ)\n    (N : A.Modules) :\n    let F := (Scheme.Modules.pullback r₀).obj N\n    let σ := Scheme.Modules.tensorPullbackCompositionIso p₀ q₀ t₀ h₀\n    let E := Functor.isoWhiskerRight (overlapAdjunctionComparison p₀)\n        (Scheme.Modules.pullback z) ≪≫\n      Scheme.Modules.pullbackComp z p₀ ≪≫ Scheme.Modules.pullbackCongr hz ≪≫\n      (Scheme.Modules.pullbackComp l d).symm\n    let τ := overlapDirectModelComparison t₀ r₀ k v u' htr hvu N\n    let ξ := (Scheme.Modules.pullback z).mapIso τ ≪≫\n      pullbackCompOfEq z v (r ≫ δ) hzv ((Scheme.Modules.pullback u').obj N) ≪≫\n      ((Scheme.Modules.pullbackComp r δ).app _).symm ≪≫\n      (Scheme.Modules.pullback r).mapIso\n        ((Scheme.Modules.pullbackComp w u).app N ≪≫\n          (Scheme.Modules.pullbackCongr hδ.symm).app N ≪≫\n          ((Scheme.Modules.pullbackComp δ u').app N).symm).symm\n    let s' := overlapStageModelComparison d q₀ r₀ s u hk N\n    let β := pullbackCompOfEq l s (r ≫ w) hl ((Scheme.Modules.pullback u).obj N) ≪≫\n      ((Scheme.Modules.pullbackComp r w).app _).symm\n    ξ = (Scheme.Modules.pullback z).mapIso (σ.app F) ≪≫\n      E.app ((Scheme.Modules.tensorPullback q₀).obj F) ≪≫\n      (Scheme.Modules.pullback l).mapIso s' ≪≫ β",
   "branch": "sheaf-dag",
   "by": "T1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OverlapModelChartFactorization; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

@@ -6,7 +6,7 @@ Authors: SHEAF group NS
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale

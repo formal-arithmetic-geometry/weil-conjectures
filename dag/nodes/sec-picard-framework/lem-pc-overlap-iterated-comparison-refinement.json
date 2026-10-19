@@ -116,13 +116,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OverlapIteratedComparisonRefinement",
-  "file": "lean/Sheaf/AlgebraicGeometry/OverlapIteratedComparisonRefinement.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OverlapIteratedComparisonRefinement",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OverlapIteratedComparisonRefinement.lean",
   "declaration": "AlgebraicGeometry.overlap_iterated_comparison_refinement",
   "statement": "theorem overlap_iterated_comparison_refinement\n    {X Y Y' Z : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (q' : Y' ⟶ X)\n    (p : Z ⟶ Y) (p' : Z ⟶ Y') (t : Z ⟶ X)\n    (h : p ≫ q = t) (h' : p' ≫ q' = t)\n    (N : (a : U.I₀) → (U.X a).Modules) (M : Z.Modules)\n    (e : ∀ a, (Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f a)).obj M)\n    (ρ : ∀ d, (U.pullback₁ q').X d ⟶ (U.pullback₁ q).X d)\n    (hρ : ∀ d, ρ d ≫ U.pullbackHom q d = U.pullbackHom q' d)\n    (δ : ∀ d, ((U.pullback₁ q').pullback₁ p').X d ⟶\n      ((U.pullback₁ q).pullback₁ p).X d)\n    (hδf : ∀ d, δ d ≫ ((U.pullback₁ q).pullback₁ p).f d =\n      ((U.pullback₁ q').pullback₁ p').f d)\n    (hδv : ∀ d, δ d ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p d =\n      Scheme.Cover.pullbackHom (U.pullback₁ q') p' d ≫ ρ d) :\n    overlapIteratedComparison U q' p' t h' N M e =\n    let V := U.pullback₁ q\n    let V' := U.pullback₁ q'\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    let c := fun d ↦ pullbackCompOfEq (ρ d) (U.pullbackHom q d)\n      (U.pullbackHom q' d) (hρ d) (N d)\n    let ε := overlapIteratedComparison U q p t h N M e\n    (fun d ↦ (Scheme.Modules.pullback (Scheme.Cover.pullbackHom V' p' d)).mapIso\n        (c d).symm ≪≫\n      pullbackCompOfEq (Scheme.Cover.pullbackHom V' p' d) (ρ d)\n        (δ d ≫ Scheme.Cover.pullbackHom V p d) (hδv d).symm (A d) ≪≫\n      (pullbackCompOfEq (δ d) (Scheme.Cover.pullbackHom V p d)\n        (δ d ≫ Scheme.Cover.pullbackHom V p d) rfl (A d)).symm ≪≫\n      (Scheme.Modules.pullback (δ d)).mapIso (ε d) ≪≫\n      pullbackCompOfEq (δ d) ((V.pullback₁ p).f d)\n        ((V'.pullback₁ p').f d) (hδf d) M)",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OverlapIteratedComparisonRefinement; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

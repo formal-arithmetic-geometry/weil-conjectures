@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.MvPowerSeries.Trunc
 public import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.RingTheory.AdicCompletion.RingHom
 import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Sheaf.RingTheory.PowerSeriesCombinedIdealCoefficients
+import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
 
 /-!
 # Universal property of power series over an adically complete ring

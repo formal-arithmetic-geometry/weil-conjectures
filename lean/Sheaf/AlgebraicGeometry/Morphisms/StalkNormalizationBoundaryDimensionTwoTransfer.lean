@@ -1,6 +1,6 @@
 module
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.RingTheory.KrullDimension.GoingDown
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
-import Sheaf.AlgebraicGeometry.Morphisms.GenericOpenFiniteEtaleModel
+import WeilConjectures.AlgebraicGeometry.Morphisms.GenericOpenFiniteEtaleModel
 import Sheaf.AlgebraicGeometry.Morphisms.EnlargeOpenFiniteEtaleModel
 
 /-!

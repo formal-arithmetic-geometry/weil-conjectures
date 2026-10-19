@@ -18,7 +18,7 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import WeilConjectures.Mathlib.Algebra.Module.Torsion
 import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.AlgebraicGeometry.TildePreservesFiniteLimits
+import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!

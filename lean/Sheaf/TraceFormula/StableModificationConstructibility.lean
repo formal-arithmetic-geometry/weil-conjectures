@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatFibreEtaleNeighbourhoods
 import Sheaf.AlgebraicGeometry.SmoothAtPointFibreCriterion
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
@@ -19,7 +19,6 @@ import Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.TraceFormula.ContractedComponentGenericData
 import Sheaf.TraceFormula.NodalOpenLocus
 /-! # Constructibility of semistable and stable geometric fibres

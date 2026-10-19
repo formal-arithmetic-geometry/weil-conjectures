@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso
 
 /-!

@@ -14,7 +14,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
 import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Smooth algebras over normal rings

@@ -27,7 +27,7 @@ import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.RingHom.Etale
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.RingTheory.RegularRingSmoothAscent
 import Mathlib.RingTheory.Smooth.Flat
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra

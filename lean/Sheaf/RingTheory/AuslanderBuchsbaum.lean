@@ -15,11 +15,11 @@ import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.AlgebraicGeometry.ExactFreeComplexLastMinors
-import Sheaf.RingTheory.DepthInSES
+import WeilConjectures.RingTheory.DepthInSES
 import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
 import Mathlib.RingTheory.Regular.ProjectiveDimension
 import Sheaf.RingTheory.CohenMacaulayDepthFirstTerm
-import Sheaf.RingTheory.DepthExt
+import WeilConjectures.RingTheory.DepthExt
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 

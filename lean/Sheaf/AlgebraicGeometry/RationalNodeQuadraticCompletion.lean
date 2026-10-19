@@ -21,7 +21,7 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.RingTheory.PresentationFittingIdeal
 import Sheaf.TraceFormula.FormalJacobianQuadraticCriterion
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import WeilConjectures.RingTheory.Depth
 import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
 

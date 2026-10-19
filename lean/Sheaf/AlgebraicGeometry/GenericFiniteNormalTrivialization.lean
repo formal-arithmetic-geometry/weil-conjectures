@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.AlgebraicGeometry.NormalScheme
+import WeilConjectures.AlgebraicGeometry.NormalScheme
 import Sheaf.RingTheory.JapaneseDomain
 import Sheaf.RingTheory.NagataRing
 import Mathlib.AlgebraicGeometry.Morphisms.Proper

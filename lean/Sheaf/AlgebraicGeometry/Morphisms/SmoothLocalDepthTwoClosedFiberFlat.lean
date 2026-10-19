@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.ClosedFiberPowerSeriesTest
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesTestFiniteExtensionFlat
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Mathlib.RingTheory.MvPowerSeries.Equiv
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 
 /-!
 # Formal flatness at a closed boundary point of the closed fibre

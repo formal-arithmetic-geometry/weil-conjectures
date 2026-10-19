@@ -97,13 +97,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/ReducedArtinianTensorNormalizationCharts.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/ReducedArtinianTensorNormalizationCharts.lean",
   "declaration": "AlgebraicGeometry.Scheme.reduced_artinian_tensor_normalization_charts",
   "statement": "theorem reduced_artinian_tensor_normalization_charts\n    (B A : CommRingCat.{u}) [Algebra B A]\n    (r : ℕ) (E : Fin r → Type u) [∀ i, CommRing (E i)] [∀ i, Algebra B (E i)]\n    (hD : ∀ i, IsArtinianRing (E i ⊗[B] A) ∧ _root_.IsReduced (E i ⊗[B] A))\n    (X : Scheme.{u}) (p : X ⟶ Spec B)\n    (e : X ≅ ∐ fun i : Fin r ↦ Spec (CommRingCat.of (E i)))\n    (he : e.hom ≫ Sigma.desc (fun i : Fin r ↦\n      Spec.map (CommRingCat.ofHom (algebraMap B (E i)))) = p) :\n    let a := pullback.snd p (Spec.map (CommRingCat.ofHom (algebraMap B A)))\n    ∀ (hqc : QuasiCompact a) (hqs : QuasiSeparated a),\n    letI := hqc\n    letI := hqs\n    ∀ x : a.normalization,\n    ∃ (i : Fin r) (P : Ideal (E i ⊗[B] A)) (hP : P.IsMaximal),\n    letI := hP\n    let F := (E i ⊗[B] A) ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] E i ⊗[B] A).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    ∃ c : Spec (CommRingCat.of S) ⟶ a.normalization,\n      IsOpenImmersion c ∧\n      c ≫ a.fromNormalization = Spec.map (CommRingCat.ofHom (algebraMap A S)) ∧\n      x ∈ Set.range c",
   "branch": "sheaf-dag",
   "by": "N2",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.ReducedArtinianTensorNormalizationCharts; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

@@ -6,7 +6,7 @@ Authors: SHEAF group Q40
 module
 
 public import Sheaf.AlgebraicGeometry.StrictNormalCrossingsBoundary
-public import Sheaf.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import Sheaf.AlgebraicGeometry.FSLogSmoothEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoFiniteFlat
-import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
 
 /-!
 # Etaleness of a depth-two finite extension over a smooth local base

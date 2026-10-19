@@ -12,8 +12,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import WeilConjectures.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.Morphisms.AffineLocallyFreeModelCore
-import Sheaf.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
-import Sheaf.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDepthTwoBoundaryProperty
+import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDoubleDualRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 

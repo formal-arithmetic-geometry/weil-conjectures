@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import WeilConjectures.RingTheory.Depth
 public import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
+import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoPunctureGlobalSections
 import Sheaf.AlgebraicGeometry.Morphisms.PuncturedPrincipalCompletionComparison
 import WeilConjectures.RingTheory.CompleteLocalSubideal
 

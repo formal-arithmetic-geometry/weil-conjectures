@@ -85,13 +85,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DepthTwoHartogsAlgebraComparison.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/DepthTwoHartogsAlgebraComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.depth_two_hartogs_algebra_comparison",
   "statement": "theorem depth_two_hartogs_algebra_comparison\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens)\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) (N : L.Modules)\n    (hqc : N.IsQuasicoherent)\n    (hsections : ∀ V : L.Opens, IsAffineOpen V →\n      Module.Finite (L.presheaf.obj (op V)) (N.val.obj (op V)))\n    (hdepth : ∀ y : L, y ∉ U →\n      ∃ hfinite : Module.Finite (L.presheaf.stalk y)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y),\n        letI := hfinite\n        (2 : ℕ∞) ≤ IsLocalRing.depth (R := L.presheaf.stalk y)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)) :\n    let g := f ≫ U.ι\n    let B : L.CommAlgebraSheaf := Under.mk\n      (⟨g.c⟩ : L.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} g.base).obj X.sheaf)\n    Nonempty (Modules.restrict N U.ι ≅ Modules.restrict B.toModule U.ι) →\n    Nonempty (N ≅ B.toModule) ∧\n      ∀ y : L,\n        letI : Algebra (L.presheaf.stalk y)\n            ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj) :=\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).map B.hom.hom).hom.toAlgebra\n        Nonempty ((TopCat.Presheaf.stalk (C := Ab.{u}) (X := L) N.val.presheaf y)\n          ≃ₗ[L.presheaf.stalk y]\n          ((TopCat.Presheaf.stalkFunctor CommRingCat y).obj B.right.obj))",
   "branch": "sheaf-dag",
   "by": "M3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraComparison; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

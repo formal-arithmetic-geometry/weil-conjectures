@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.Morphisms.DvrRootNormalizationMaximalIdeal
-import Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationDvrComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationDvrComparison
 import WeilConjectures.AlgebraicGeometry.Morphisms.NormalizationStalkRegularBasicOpen
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 

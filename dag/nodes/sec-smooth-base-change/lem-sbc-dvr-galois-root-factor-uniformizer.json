@@ -111,13 +111,14 @@
  "unit": "sk-prop-input-spreading",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.DvrGaloisRootFactorUniformizer",
-  "file": "lean/Sheaf/RingTheory/DvrGaloisRootFactorUniformizer.lean",
+  "module": "WeilConjectures.RingTheory.DvrGaloisRootFactorUniformizer",
+  "file": "lean/WeilConjectures/RingTheory/DvrGaloisRootFactorUniformizer.lean",
   "declaration": "RingTheory.dvr_galois_root_factor_uniformizer",
   "statement": "theorem dvr_galois_root_factor_uniformizer\n    (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]\n    (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)\n    (hn : IsUnit (n : B))\n    (E : Type u) [Field E] [Algebra (FractionRing B) E]\n    (hE : FiniteDimensional (FractionRing B) E ∧\n      IsGalois (FractionRing B) E ∧ Module.finrank (FractionRing B) E ∣ n) :\n    letI : Algebra B E :=\n      ((algebraMap (FractionRing B) E).comp (algebraMap B (FractionRing B))).toAlgebra\n    let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)\n    let D := E ⊗[B] A\n    ∀ (P : Ideal D) (hP : P.IsMaximal),\n    letI := hP\n    let F := D ⧸ P\n    let alpha : A →+* F := (Ideal.Quotient.mk P).comp\n      (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom\n    letI := alpha.toAlgebra\n    let S := integralClosure A F\n    ∀ (Q : Ideal S) (hQ : Q.IsPrime),\n    letI := hQ\n    Q.comap (algebraMap A S) = Ideal.span\n      {AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)} →\n    let t := algebraMap S (Localization.AtPrime Q)\n      (algebraMap A S\n        (AdjoinRoot.root ((Polynomial.X : Polynomial B) ^ n - Polynomial.C pi)))\n    IsLocalRing.maximalIdeal (Localization.AtPrime Q) = Ideal.span {t}",
   "branch": "sheaf-dag",
   "by": "V3",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.DvrGaloisRootFactorUniformizer; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-14",

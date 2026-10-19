@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.ArtinianCoefficientEnlargement
 import Sheaf.RingTheory.EssentiallySmoothComp
 import WeilConjectures.RingTheory.RegularSequencePowers
-import Sheaf.AlgebraicGeometry.Ogoma
+import WeilConjectures.AlgebraicGeometry.Ogoma
 import WeilConjectures.RingTheory.PopescuLocalizedCoefficientRelation
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Localization.Integer

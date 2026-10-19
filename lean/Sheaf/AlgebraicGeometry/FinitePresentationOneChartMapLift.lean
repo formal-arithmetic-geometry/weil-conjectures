@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 import Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLiftAtStage
-import Sheaf.AlgebraicGeometry.OpenCoverMapLiftTransport
+import WeilConjectures.AlgebraicGeometry.OpenCoverMapLiftTransport
 
 /-! # Eventual lifting of a map on one affine chart
 Source: Stacks Project, Limits Tag 01ZR and Algebra Tag 05N7 (2).

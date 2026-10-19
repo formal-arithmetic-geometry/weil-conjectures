@@ -10,7 +10,7 @@ import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalPuncturedEtalePurity
 import Sheaf.AlgebraicGeometry.Morphisms.LocalPurityDepthTwoFiniteFlatStalk
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
-import Sheaf.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
+import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
 
 /-!
 # Finite etale model across a regular codimension-two boundary

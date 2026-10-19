@@ -16,7 +16,7 @@ import Mathlib.RingTheory.PrincipalIdealDomain
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Sheaf.RingTheory.FlatLocalDepthFormula
+import WeilConjectures.RingTheory.FlatLocalDepthFormula
 import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 import Mathlib.RingTheory.Flat.Basic

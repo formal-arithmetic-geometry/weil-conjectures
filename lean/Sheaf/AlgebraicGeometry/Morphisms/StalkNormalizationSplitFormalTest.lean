@@ -18,7 +18,7 @@ public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart
+import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothSectionCompletionChart
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalSplit
 
 /-!
