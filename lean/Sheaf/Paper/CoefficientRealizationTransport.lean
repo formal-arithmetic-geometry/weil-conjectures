@@ -194,6 +194,147 @@ def CoefficientRealizationArrow.intertwines
     (a : CoefficientRealizationArrow x y) : Prop :=
   T.map a.map₀ ≫ y.comparison.hom = x.comparison.hom ≫ a.map₁
 
+section FormalTransport
+
+variable {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂}
+  [Category.{v₀} C₀] [Category.{v₁} C₁] [Category.{v₂} C₂]
+
+/-- Pasting two comparison squares, in Lean's left-to-right composition order.
+Source: blueprint, prop-sf-pf-coherence, finite pasting calculation
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: expand functoriality on the composite; substitute the second square and then
+the first, reassociating at each step. This proves the finite-string calculation by
+iteration, including the two complete base-change routes. -/
+theorem coefficientRealizationTransport_comp
+    {T : C₀ ⥤ C₁} {x y z : CoefficientRealizationObject T}
+    (a : CoefficientRealizationArrow x y) (b : CoefficientRealizationArrow y z)
+    (ha : a.intertwines) (hb : b.intertwines) :
+    T.map (a.map₀ ≫ b.map₀) ≫ z.comparison.hom =
+      x.comparison.hom ≫ (a.map₁ ≫ b.map₁) := by
+  change T.map a.map₀ ≫ y.comparison.hom = x.comparison.hom ≫ a.map₁ at ha
+  change T.map b.map₀ ≫ z.comparison.hom = y.comparison.hom ≫ b.map₁ at hb
+  rw [T.map_comp, Category.assoc, hb, ← Category.assoc, ha, Category.assoc]
+
+/-- Whiskering an intertwined arrow by any operation with its supplied natural comparison.
+Source: blueprint, prop-sf-pf-coherence, whiskered composites
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: apply the target operation to the original comparison equation and paste the
+naturality square of c at the source arrow. The comparisons at both endpoints are
+exactly those of CoefficientRealizationObject.map. -/
+theorem coefficientRealizationTransport_map
+    {D₀ : Type u₂} {D₁ : Type u₃} [Category.{v₂} D₀] [Category.{v₃} D₁]
+    {T : C₀ ⥤ C₁} {S : D₀ ⥤ D₁} (F₀ : C₀ ⥤ D₀) (F₁ : C₁ ⥤ D₁)
+    (c : F₀ ⋙ S ≅ T ⋙ F₁) {x y : CoefficientRealizationObject T}
+    (a : CoefficientRealizationArrow x y) (ha : a.intertwines) :
+    S.map (F₀.map a.map₀) ≫ (y.map F₀ F₁ c).comparison.hom =
+      (x.map F₀ F₁ c).comparison.hom ≫ F₁.map a.map₁ := by
+  change T.map a.map₀ ≫ y.comparison.hom = x.comparison.hom ≫ a.map₁ at ha
+  change S.map (F₀.map a.map₀) ≫
+      (c.hom.app y.obj₀ ≫ F₁.map y.comparison.hom) =
+    (c.hom.app x.obj₀ ≫ F₁.map x.comparison.hom) ≫ F₁.map a.map₁
+  have hc := c.hom.naturality a.map₀
+  change S.map (F₀.map a.map₀) ≫ c.hom.app y.obj₀ =
+    c.hom.app x.obj₀ ≫ F₁.map (T.map a.map₀) at hc
+  rw [← Category.assoc, hc, Category.assoc, ← F₁.map_comp,
+    ha, F₁.map_comp, Category.assoc]
+
+/-- Tensor whiskering, including tensoring with an identity in either input.
+Source: blueprint, prop-sf-pf-coherence, tensor naturality and complete routes
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: paste the naturality squares of the tensor comparison in its two variables,
+then substitute the two given arrow comparison equations. Identity arrows are included
+by taking either arrow to be the identity. Finite pasting with the preceding statements
+handles the specified pullback/tensor base-change routes. -/
+theorem coefficientRealizationTransport_tensor
+    {T : C₀ ⥤ C₁} (B₀ : C₀ ⥤ C₀ ⥤ C₀) (B₁ : C₁ ⥤ C₁ ⥤ C₁)
+    (c : (Functor.postcompose₂.obj T).obj B₀ ≅
+      (((Functor.whiskeringLeft₂ C₁).obj T).obj T).obj B₁)
+    {x x' y y' : CoefficientRealizationObject T}
+    (a : CoefficientRealizationArrow x x') (b : CoefficientRealizationArrow y y')
+    (ha : a.intertwines) (hb : b.intertwines) :
+    T.map ((B₀.map a.map₀).app y.obj₀ ≫ (B₀.obj x'.obj₀).map b.map₀) ≫
+        (x'.tensor B₀ B₁ c y').comparison.hom =
+      (x.tensor B₀ B₁ c y).comparison.hom ≫
+        ((B₁.map a.map₁).app y.obj₁ ≫ (B₁.obj x'.obj₁).map b.map₁) := by
+  change T.map a.map₀ ≫ x'.comparison.hom = x.comparison.hom ≫ a.map₁ at ha
+  change T.map b.map₀ ≫ y'.comparison.hom = y.comparison.hom ≫ b.map₁ at hb
+  have hc₁ := congrArg (fun t => t.app y.obj₀) (c.hom.naturality a.map₀)
+  have hc₂ := (c.hom.app x'.obj₀).naturality b.map₀
+  change T.map ((B₀.map a.map₀).app y.obj₀) ≫ (c.hom.app x'.obj₀).app y.obj₀ =
+    (c.hom.app x.obj₀).app y.obj₀ ≫
+      (B₁.map (T.map a.map₀)).app (T.obj y.obj₀) at hc₁
+  change T.map ((B₀.obj x'.obj₀).map b.map₀) ≫ (c.hom.app x'.obj₀).app y'.obj₀ =
+    (c.hom.app x'.obj₀).app y.obj₀ ≫
+      (B₁.obj (T.obj x'.obj₀)).map (T.map b.map₀) at hc₂
+  dsimp only [CoefficientRealizationObject.tensor, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.app_hom]
+  simp only [T.map_comp, Category.assoc]
+  rw [← Category.assoc _ _ ((B₁.map x'.comparison.hom).app _ ≫ _), hc₂]
+  simp only [Category.assoc]
+  rw [← Category.assoc _ _ ((B₁.obj (T.obj x'.obj₀)).map _ ≫ _), hc₁]
+  simp only [Category.assoc]
+  rw [(B₁.map x'.comparison.hom).naturality_assoc]
+  rw [← Category.assoc ((B₁.map (T.map a.map₀)).app _) _ _,
+    ← NatTrans.comp_app, ← B₁.map_comp, ha, B₁.map_comp, NatTrans.comp_app]
+  rw [← (B₁.obj x'.obj₁).map_comp, hb, (B₁.obj x'.obj₁).map_comp]
+  simp only [Category.assoc]
+  rw [(B₁.map a.map₁).naturality_assoc]
+
+/-- Successive comparisons with the specified composition cocycle.
+Source: blueprint, prop-sf-pf-coherence, successive comparison functors
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: apply S to the first comparison equation and paste the second one. The endpoint
+comparisons are S(b) followed by c; substitute the two supplied composition cocycles.
+The same calculation applies to refinement comparisons when their primitive squares
+intertwine: first apply the main theorem to those data and then paste the results.
+No refinement comparison or compatibility is asserted to exist. -/
+theorem coefficientRealizationTransport_successive
+    (T : C₀ ⥤ C₁) (S : C₁ ⥤ C₂)
+    {X₀ Y₀ : C₀} {X₁ Y₁ : C₁} {X₂ Y₂ : C₂}
+    (bs : T.obj X₀ ≅ X₁) (bt : T.obj Y₀ ≅ Y₁)
+    (cs : S.obj X₁ ≅ X₂) (ct : S.obj Y₁ ≅ Y₂)
+    (ds : (T ⋙ S).obj X₀ ≅ X₂) (dt : (T ⋙ S).obj Y₀ ≅ Y₂)
+    (sourceCocycle : ds.hom = S.map bs.hom ≫ cs.hom)
+    (targetCocycle : dt.hom = S.map bt.hom ≫ ct.hom)
+    (m₀ : X₀ ⟶ Y₀) (m₁ : X₁ ⟶ Y₁) (m₂ : X₂ ⟶ Y₂)
+    (hT : T.map m₀ ≫ bt.hom = bs.hom ≫ m₁)
+    (hS : S.map m₁ ≫ ct.hom = cs.hom ≫ m₂) :
+    (T ⋙ S).map m₀ ≫ dt.hom = ds.hom ≫ m₂ := by
+  change S.map (T.map m₀) ≫ dt.hom = ds.hom ≫ m₂
+  rw [sourceCocycle, targetCocycle, ← Category.assoc, ← S.map_comp, hT,
+    S.map_comp, Category.assoc, hS, Category.assoc]
+
+/-- Identity transport with the required identity normalization.
+Source: blueprint, prop-sf-pf-coherence, identity comparison cocycle
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: substitute the identity comparison cocycles at both endpoints; identity
+functoriality and the category identity laws give the equation. -/
+theorem coefficientRealizationTransport_identity
+    {X Y : C₀} (bs : X ≅ X) (bt : Y ≅ Y)
+    (hs : bs = Iso.refl X) (ht : bt = Iso.refl Y) (m : X ⟶ Y) :
+    (𝟭 C₀).map m ≫ bt.hom = bs.hom ≫ m := by
+  subst bs
+  subst bt
+  simp
+
+/-- Forward transport of equality for two displayed composites with common endpoints.
+Source: blueprint, prop-sf-pf-coherence, final equality-transport sentence
+(blueprint: lem-sf-pf-coefficient-realization-transport).
+Proof: functoriality sends u₀ = v₀ to equal images. The two intertwining equations
+then give source.hom followed by u₁ equal to source.hom followed by v₁. Cancel the
+source isomorphism. Neither faithfulness nor invertibility of the displayed maps is used. -/
+theorem coefficientRealizationTransport_eq_of_eq
+    {T : C₀ ⥤ C₁} {X₀ Y₀ : C₀} {X₁ Y₁ : C₁}
+    (source : T.obj X₀ ≅ X₁) (target : T.obj Y₀ ≅ Y₁)
+    (u₀ v₀ : X₀ ⟶ Y₀) (u₁ v₁ : X₁ ⟶ Y₁)
+    (hu : T.map u₀ ≫ target.hom = source.hom ≫ u₁)
+    (hv : T.map v₀ ≫ target.hom = source.hom ≫ v₁)
+    (h : u₀ = v₀) : u₁ = v₁ := by
+  apply (cancel_epi source.hom).mp
+  exact hu.symm.trans ((congrArg (fun f => T.map f ≫ target.hom) h).trans hv)
+
+end FormalTransport
+
 section Systems
 
 variable {D₀ : Fin 6 → Type u₀} {D₁ : Fin 6 → Type u₁}
@@ -486,113 +627,109 @@ theorem coefficientRealizationTransport
       (∀ m, (d.exchange m).intertwines) ∧
       (∀ k n, (d.projection k n).intertwines) ∧
       (∀ k, (d.compactExchange k).intertwines) := by
-  sorry
+  have hpi : ∀ m n, (d.pi m n).intertwines := by
+    intro m n
+    let q := d.properPullObj n
+    let b : CoefficientRealizationArrow
+        (d.tensorBarObj (d.properPullObj (d.properPushObj m)) q)
+        (d.tensorBarObj m q) :=
+      ⟨(d.system₀.tensorBar.map (d.counit m).map₀).app q.obj₀,
+        (d.system₁.tensorBar.map (d.counit m).map₁).app q.obj₁⟩
+    have hb : b.intertwines := by
+      have hi : (CoefficientRealizationArrow.mk (𝟙 q.obj₀) (𝟙 q.obj₁)).intertwines := by
+        simp [CoefficientRealizationArrow.intertwines]
+      simpa only [CoefficientRealizationArrow.intertwines, b,
+        CoefficientRealizationTransportData.tensorBarObj, Functor.map_id, Category.comp_id] using
+        coefficientRealizationTransport_tensor d.system₀.tensorBar d.system₁.tensorBar
+          d.tensorBar (d.counit m) ⟨𝟙 q.obj₀, 𝟙 q.obj₁⟩ (h.counit m) hi
+    let a := d.mu (d.properPushObj m) n
+    let c : CoefficientRealizationArrow _ _ :=
+      ⟨a.map₀ ≫ b.map₀, a.map₁ ≫ b.map₁⟩
+    have hc : c.intertwines := coefficientRealizationTransport_comp a b
+      (h.mu (d.properPushObj m) n) hb
+    have hm := coefficientRealizationTransport_map d.system₀.properPush
+      d.system₁.properPush d.properPush c hc
+    have hp := coefficientRealizationTransport_comp
+      (d.unit (d.tensorYObj (d.properPushObj m) n))
+      (show CoefficientRealizationArrow
+        (d.properPushObj (d.properPullObj (d.tensorYObj (d.properPushObj m) n)))
+        (d.properPushObj (d.tensorBarObj m q)) from
+          ⟨d.system₀.properPush.map c.map₀, d.system₁.properPush.map c.map₁⟩)
+      (h.unit _) hm
+    simpa only [CoefficientRealizationArrow.intertwines, CoefficientRealizationTransportData.pi,
+      Adjunction.rightAdjointProjectionMap_app_app, Adjunction.homEquiv_unit,
+      CoefficientRealizationTransportData.unit, CoefficientRealizationTransportData.counit,
+      CoefficientRealizationTransportData.mu, c, a, b, q, Category.assoc,
+      CoefficientRealizationTransportData.tensorYObj,
+      CoefficientRealizationTransportData.properPushObj,
+      CoefficientRealizationTransportData.properPullObj,
+      CoefficientRealizationObject.map, CoefficientRealizationObject.tensor] using hp
+  have hex : ∀ m, (d.exchange m).intertwines := by
+    intro m
+    let a := d.theta (d.properPushObj m)
+    let b : CoefficientRealizationArrow
+        (d.compactifyingHorizontalObj (d.properPullObj (d.properPushObj m)))
+        (d.compactifyingHorizontalObj m) :=
+      ⟨d.system₀.compactifyingHorizontal.map (d.counit m).map₀,
+        d.system₁.compactifyingHorizontal.map (d.counit m).map₁⟩
+    have hb : b.intertwines := coefficientRealizationTransport_map
+      d.system₀.compactifyingHorizontal d.system₁.compactifyingHorizontal
+      d.compactifyingHorizontal (d.counit m) (h.counit m)
+    let c : CoefficientRealizationArrow _ _ :=
+      ⟨a.map₀ ≫ b.map₀, a.map₁ ≫ b.map₁⟩
+    have hc : c.intertwines := coefficientRealizationTransport_comp a b
+      (h.theta (d.properPushObj m)) hb
+    have hm := coefficientRealizationTransport_map d.system₀.properPush'
+      d.system₁.properPush' d.properPush' c hc
+    have hp := coefficientRealizationTransport_comp
+      (d.unit' (d.horizontalObj (d.properPushObj m)))
+      (show CoefficientRealizationArrow
+        (d.properPush'Obj (d.properPull'Obj (d.horizontalObj (d.properPushObj m))))
+        (d.properPush'Obj (d.compactifyingHorizontalObj m)) from
+          ⟨d.system₀.properPush'.map c.map₀, d.system₁.properPush'.map c.map₁⟩)
+      (h.unit' _) hm
+    simpa only [CoefficientRealizationArrow.intertwines,
+      CoefficientRealizationTransportData.exchange, mateEquiv, Equiv.coe_fn_mk,
+      NatTrans.comp_app, Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+      Functor.comp_map, Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp,
+      Functor.map_comp, Functor.map_id, Category.assoc,
+      CoefficientRealizationTransportData.unit', CoefficientRealizationTransportData.counit,
+      CoefficientRealizationTransportData.theta, TwoSquare.mk, TwoSquare.natTrans, c, a, b,
+      Functor.comp_obj, Functor.id_obj, CoefficientRealizationTransportData.horizontalObj,
+      CoefficientRealizationTransportData.properPushObj,
+      CoefficientRealizationObject.map] using hp
+  refine ⟨hpi, hex, ?_, ?_⟩
+  · intro k n
+    have hm := coefficientRealizationTransport_map d.system₀.properPush
+      d.system₁.properPush d.properPush (d.gamma k n) (h.gamma k n)
+    have hp := coefficientRealizationTransport_comp (d.pi (d.openExtensionObj k) n)
+      (show CoefficientRealizationArrow
+        (d.properPushObj (d.tensorBarObj (d.openExtensionObj k) (d.properPullObj n)))
+        (d.properPushObj (d.openExtensionObj (d.tensorXObj k (d.pullObj n)))) from
+          ⟨d.system₀.properPush.map (d.gamma k n).map₀,
+            d.system₁.properPush.map (d.gamma k n).map₁⟩) (hpi _ _) hm
+    exact hp
+  · intro k
+    have hm := coefficientRealizationTransport_map d.system₀.properPush'
+      d.system₁.properPush' d.properPush' (d.beta k) (h.beta k)
+    have hp := coefficientRealizationTransport_comp (d.exchange (d.openExtensionObj k))
+      (show CoefficientRealizationArrow
+        (d.properPush'Obj (d.compactifyingHorizontalObj (d.openExtensionObj k)))
+        (d.properPush'Obj (d.openExtension'Obj (d.horizontal'Obj k))) from
+          ⟨d.system₀.properPush'.map (d.beta k).map₀,
+            d.system₁.properPush'.map (d.beta k).map₁⟩) (hex _) hm
+    simpa only [CoefficientRealizationArrow.intertwines,
+      CoefficientRealizationTransportData.compactExchange,
+      compactificationExchangeFromTransportData, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.id_comp, Category.comp_id, CoefficientRealizationTransportData.exchange,
+      CoefficientRealizationTransportData.beta,
+      CoefficientRealizationTransportData.openExtensionObj,
+      CoefficientRealizationObject.map] using hp
 
 end Systems
-
-section FormalTransport
-
-variable {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂}
-  [Category.{v₀} C₀] [Category.{v₁} C₁] [Category.{v₂} C₂]
-
-/-- Pasting two comparison squares, in Lean's left-to-right composition order.
-Source: blueprint, prop-sf-pf-coherence, finite pasting calculation
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: expand functoriality on the composite; substitute the second square and then
-the first, reassociating at each step. This proves the finite-string calculation by
-iteration, including the two complete base-change routes. -/
-theorem coefficientRealizationTransport_comp
-    {T : C₀ ⥤ C₁} {x y z : CoefficientRealizationObject T}
-    (a : CoefficientRealizationArrow x y) (b : CoefficientRealizationArrow y z)
-    (ha : a.intertwines) (hb : b.intertwines) :
-    T.map (a.map₀ ≫ b.map₀) ≫ z.comparison.hom =
-      x.comparison.hom ≫ (a.map₁ ≫ b.map₁) := by
-  sorry
-
-/-- Whiskering an intertwined arrow by any operation with its supplied natural comparison.
-Source: blueprint, prop-sf-pf-coherence, whiskered composites
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: apply the target operation to the original comparison equation and paste the
-naturality square of c at the source arrow. The comparisons at both endpoints are
-exactly those of CoefficientRealizationObject.map. -/
-theorem coefficientRealizationTransport_map
-    {D₀ : Type u₂} {D₁ : Type u₃} [Category.{v₂} D₀] [Category.{v₃} D₁]
-    {T : C₀ ⥤ C₁} {S : D₀ ⥤ D₁} (F₀ : C₀ ⥤ D₀) (F₁ : C₁ ⥤ D₁)
-    (c : F₀ ⋙ S ≅ T ⋙ F₁) {x y : CoefficientRealizationObject T}
-    (a : CoefficientRealizationArrow x y) (ha : a.intertwines) :
-    S.map (F₀.map a.map₀) ≫ (y.map F₀ F₁ c).comparison.hom =
-      (x.map F₀ F₁ c).comparison.hom ≫ F₁.map a.map₁ := by
-  sorry
-
-/-- Tensor whiskering, including tensoring with an identity in either input.
-Source: blueprint, prop-sf-pf-coherence, tensor naturality and complete routes
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: paste the naturality squares of the tensor comparison in its two variables,
-then substitute the two given arrow comparison equations. Identity arrows are included
-by taking either arrow to be the identity. Finite pasting with the preceding statements
-handles the specified pullback/tensor base-change routes. -/
-theorem coefficientRealizationTransport_tensor
-    {T : C₀ ⥤ C₁} (B₀ : C₀ ⥤ C₀ ⥤ C₀) (B₁ : C₁ ⥤ C₁ ⥤ C₁)
-    (c : (Functor.postcompose₂.obj T).obj B₀ ≅
-      (((Functor.whiskeringLeft₂ C₁).obj T).obj T).obj B₁)
-    {x x' y y' : CoefficientRealizationObject T}
-    (a : CoefficientRealizationArrow x x') (b : CoefficientRealizationArrow y y')
-    (ha : a.intertwines) (hb : b.intertwines) :
-    T.map ((B₀.map a.map₀).app y.obj₀ ≫ (B₀.obj x'.obj₀).map b.map₀) ≫
-        (x'.tensor B₀ B₁ c y').comparison.hom =
-      (x.tensor B₀ B₁ c y).comparison.hom ≫
-        ((B₁.map a.map₁).app y.obj₁ ≫ (B₁.obj x'.obj₁).map b.map₁) := by
-  sorry
-
-/-- Successive comparisons with the specified composition cocycle.
-Source: blueprint, prop-sf-pf-coherence, successive comparison functors
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: apply S to the first comparison equation and paste the second one. The endpoint
-comparisons are S(b) followed by c; substitute the two supplied composition cocycles.
-The same calculation applies to refinement comparisons when their primitive squares
-intertwine: first apply the main theorem to those data and then paste the results.
-No refinement comparison or compatibility is asserted to exist. -/
-theorem coefficientRealizationTransport_successive
-    (T : C₀ ⥤ C₁) (S : C₁ ⥤ C₂)
-    {X₀ Y₀ : C₀} {X₁ Y₁ : C₁} {X₂ Y₂ : C₂}
-    (bs : T.obj X₀ ≅ X₁) (bt : T.obj Y₀ ≅ Y₁)
-    (cs : S.obj X₁ ≅ X₂) (ct : S.obj Y₁ ≅ Y₂)
-    (ds : (T ⋙ S).obj X₀ ≅ X₂) (dt : (T ⋙ S).obj Y₀ ≅ Y₂)
-    (sourceCocycle : ds.hom = S.map bs.hom ≫ cs.hom)
-    (targetCocycle : dt.hom = S.map bt.hom ≫ ct.hom)
-    (m₀ : X₀ ⟶ Y₀) (m₁ : X₁ ⟶ Y₁) (m₂ : X₂ ⟶ Y₂)
-    (hT : T.map m₀ ≫ bt.hom = bs.hom ≫ m₁)
-    (hS : S.map m₁ ≫ ct.hom = cs.hom ≫ m₂) :
-    (T ⋙ S).map m₀ ≫ dt.hom = ds.hom ≫ m₂ := by
-  sorry
-
-/-- Identity transport with the required identity normalization.
-Source: blueprint, prop-sf-pf-coherence, identity comparison cocycle
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: substitute the identity comparison cocycles at both endpoints; identity
-functoriality and the category identity laws give the equation. -/
-theorem coefficientRealizationTransport_identity
-    {X Y : C₀} (bs : X ≅ X) (bt : Y ≅ Y)
-    (hs : bs = Iso.refl X) (ht : bt = Iso.refl Y) (m : X ⟶ Y) :
-    (𝟭 C₀).map m ≫ bt.hom = bs.hom ≫ m := by
-  sorry
-
-/-- Forward transport of equality for two displayed composites with common endpoints.
-Source: blueprint, prop-sf-pf-coherence, final equality-transport sentence
-(blueprint: lem-sf-pf-coefficient-realization-transport).
-Proof: functoriality sends u₀ = v₀ to equal images. The two intertwining equations
-then give source.hom followed by u₁ equal to source.hom followed by v₁. Cancel the
-source isomorphism. Neither faithfulness nor invertibility of the displayed maps is used. -/
-theorem coefficientRealizationTransport_eq_of_eq
-    {T : C₀ ⥤ C₁} {X₀ Y₀ : C₀} {X₁ Y₁ : C₁}
-    (source : T.obj X₀ ≅ X₁) (target : T.obj Y₀ ≅ Y₁)
-    (u₀ v₀ : X₀ ⟶ Y₀) (u₁ v₁ : X₁ ⟶ Y₁)
-    (hu : T.map u₀ ≫ target.hom = source.hom ≫ u₁)
-    (hv : T.map v₀ ≫ target.hom = source.hom ≫ v₁)
-    (h : u₀ = v₀) : u₁ = v₁ := by
-  sorry
-
-end FormalTransport
 
 /-- A finite composable string of the displayed arrows after their chosen whiskerings.
 The endpoints are the actual compared objects, so intermediate comparisons agree.
@@ -653,7 +790,10 @@ theorem coefficientRealizationTransport_path
     {T : C₀ ⥤ C₁} {x y : CoefficientRealizationObject T}
     (p : CoefficientRealizationPath x y) (h : p.compatible) :
     T.map p.map₀ ≫ y.comparison.hom = x.comparison.hom ≫ p.map₁ := by
-  sorry
+  induction p with
+  | nil x => simp [CoefficientRealizationPath.map₀, CoefficientRealizationPath.map₁]
+  | cons a p ih =>
+    exact coefficientRealizationTransport_comp a ⟨p.map₀, p.map₁⟩ h.1 (ih h.2)
 
 end CategoryTheory
 
