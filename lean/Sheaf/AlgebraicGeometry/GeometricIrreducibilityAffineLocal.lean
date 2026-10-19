@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Over
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Mathlib.Topology.Sets.OpenCover
 
 /-!
 # Affine-local geometric irreducibility
@@ -61,6 +62,51 @@ theorem geometricallyIrreducible_affineLocal
     (GeometricallyIrreducible (X ↘ Spec (.of k)) →
       ∀ (V : X.Opens), (V : Set X).Nonempty →
         GeometricallyIrreducible (V.ι ≫ X ↘ Spec (.of k))) := by
-  sorry
+  have hopen (h : GeometricallyIrreducible (X ↘ Spec (.of k)))
+      (V : X.Opens) (hV : (V : Set X).Nonempty) :
+      GeometricallyIrreducible (V.ι ≫ X ↘ Spec (.of k)) := by
+    have : GeometricallyIrreducible (X ↘ Spec (.of k)) := h
+    have : Nonempty V := hV.to_subtype
+    infer_instance
+  refine ⟨⟨?_, ?_⟩, hopen⟩
+  · intro h U hU hne
+    have : GeometricallyIrreducible (X ↘ Spec (.of k)) := h
+    obtain ⟨x, hx⟩ := hne
+    have : Nonempty (Spec Γ(X, U)) := ⟨hU.isoSpec.hom ⟨x, hx⟩⟩
+    infer_instance
+  · intro h
+    refine ⟨fun K _ y Z fst snd hpb ↦ ?_⟩
+    have : Surjective y := inferInstance
+    have : Surjective fst := MorphismProperty.of_isPullback hpb.flip ‹Surjective y›
+    have : Nonempty Z := ⟨(fst.surjective (Nonempty.some inferInstance)).choose⟩
+    let I := {U : X.Opens // IsAffineOpen U ∧ (U : Set X).Nonempty}
+    let W : I → Z.Opens := fun i ↦ fst ⁻¹ᵁ i.1
+    have hW (i : I) : IsPreirreducible (W i : Set Z) := by
+      change IsPreirreducible (fst ⁻¹' (i.1 : Set X))
+      have : GeometricallyIrreducible (i.2.1.fromSpec ≫ X ↘ Spec (.of k)) :=
+        h i.1 i.2.1 i.2.2
+      have : IrreducibleSpace ↥(Limits.pullback i.2.1.fromSpec fst) :=
+        GeometricallyIrreducible.geometrically_irreducibleSpace y
+          (Limits.pullback.fst _ _) (Limits.pullback.snd _ _ ≫ snd)
+          ((IsPullback.of_hasPullback _ _).paste_vert hpb)
+      simpa only [Set.image_univ, Scheme.Pullback.range_snd, i.2.1.range_fromSpec] using
+        (IrreducibleSpace.isIrreducible_univ ↥(Limits.pullback i.2.1.fromSpec fst)).2.image
+          (Limits.pullback.snd i.2.1.fromSpec fst)
+          (Limits.pullback.snd i.2.1.fromSpec fst).continuous.continuousOn
+    have hinter : Pairwise (fun i j ↦ ¬ Disjoint (W i) (W j)) := by
+      intro i j _
+      rw [← TopologicalSpace.Opens.coe_disjoint, Set.not_disjoint_iff_nonempty_inter]
+      obtain ⟨x, hxi, hxj⟩ := nonempty_preirreducible_inter
+        i.1.isOpen j.1.isOpen i.2.2 j.2.2
+      obtain ⟨z, rfl⟩ := fst.surjective x
+      exact ⟨z, hxi, hxj⟩
+    have hcover : (Set.univ : Set Z) ⊆ ⋃ i, (W i : Set Z) := by
+      intro z _
+      obtain ⟨U, hU, hzU, _⟩ :=
+        exists_isAffineOpen_mem_and_subset (X := X) (x := fst z) (U := ⊤) trivial
+      exact Set.mem_iUnion.mpr ⟨⟨U, hU, ⟨fst z, hzU⟩⟩, hzU⟩
+    have : PreirreducibleSpace Z :=
+      ⟨IsPreirreducible.of_subset_iUnion hinter hW isOpen_univ hcover⟩
+    exact ⟨‹Nonempty Z›⟩
 
 end AlgebraicGeometry
