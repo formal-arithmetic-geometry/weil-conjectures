@@ -1,5 +1,0 @@
-module
-
-public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.DegreeExact
-public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded

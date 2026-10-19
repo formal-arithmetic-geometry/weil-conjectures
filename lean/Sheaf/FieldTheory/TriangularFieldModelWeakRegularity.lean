@@ -1,6 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.TriangularFieldModelWeakRegularity
-public import WeilConjectures.FieldTheory.TriangularFieldModelEquations
-public import Mathlib.Algebra.Polynomial.Monic
-public import Mathlib.RingTheory.Regular.RegularSequence

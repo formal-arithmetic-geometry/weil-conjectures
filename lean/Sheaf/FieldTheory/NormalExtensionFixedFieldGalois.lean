@@ -1,4 +1,0 @@
-module
-
-public import WeilConjectures.FieldTheory.NormalExtensionFixedFieldGalois
-public import Mathlib.FieldTheory.Galois.Basic
