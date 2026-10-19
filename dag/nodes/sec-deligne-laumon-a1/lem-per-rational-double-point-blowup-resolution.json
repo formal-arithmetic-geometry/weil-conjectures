@@ -20,9 +20,144 @@
   "def-weil-proper-morphism",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $\\operatorname{Spec}R$ is regular away from its closed point. Indeed a nonmaximal prime has height at most one. Its localization is normal: if $z$ is integral over $R_{\\mathfrak p}$, clear finitely many denominators in a monic equation to make $sz$ integral over $R$ for some $s\\notin\\mathfrak p$, so $z\\in R_{\\mathfrak p}$. At height zero the localization is a field; at height one it is a DVR by the cited theorem, hence its maximal ideal is principal and it is regular by the definition. If $R$ is regular, take the empty tower; the identity is proper by the definition and induces the identity on function fields. Otherwise start the point-blowup procedure at its singular closed point.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "def-weil-regular-scheme",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Situation 0BGC preceding Tag 0BGE: reduction to the nonregular case."
+   }
+  },
+  {
+   "text": "For every singular local ring encountered, apply the one-blowup conic-structure theorem. Its local closed-point rings are normal Nagata Gorenstein domains of dimension two with normal completion; they are local essentially finite-type birational extensions of that ring. The rational-propagation theorem therefore makes each of them rational. Thus the same hypotheses are available at every later singular point. The exceptional fibre has a nonzero quadratic tangent polynomial $q$. Call its local singularity type I if $q$ is not a nonzero scalar times a square, and type II otherwise. This distinction is invariant under a change of generators and multiplication of $q$ by a nonzero scalar, so it is a well-defined case distinction.",
+   "uses": [
+    "lem-per-rdp-blowup-conic-structure",
+    "lem-per-rational-singularity-birational-propagation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, discussion after Situation 0BGC and definition of cases I and II."
+   }
+  },
+  {
+   "text": "Start at any type-I singularity. The nonsquare-transition theorem gives at most one singular point after blowing it up; if present it is rational over the same residue field and is still type I. Choose a good generator $u$ at the initial ring. The same theorem says that its image cuts out the exceptional divisor at the next singular point and remains good there. Induction therefore keeps this single element $u$, and all residue-field maps are isomorphisms, as long as the singular branch continues. An infinite branch would satisfy the fixed-parameter chain criterion and hence contain a regular center, a contradiction. Thus every type-I branch has finite length.",
+   "uses": [
+    "lem-per-rdp-nonsquare-conic-transition",
+    "lem-per-fixed-parameter-blowup-chain-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, Resolution in case I, good-coordinate and termination paragraphs."
+   }
+  },
+  {
+   "text": "At a type-II singularity the double-line transition puts every singular successor in the zero set of a nonzero homogeneous cubic on the exceptional line. Its irreducible homogeneous factors give at most three closed points. A type-II successor is a multiple factor. There cannot be two such factors, since their squared factors would have total degree at least four. Its degree is one, since twice its degree is at most three. Thus there is at most one type-II successor, with unchanged residue field. An infinite singular branch cannot enter type I by Step 3, so it would consist entirely of type-II points with unchanged residue fields. We now rule this out by a finite chart calculation followed by induction.",
+   "uses": [
+    "lem-per-rdp-double-line-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, case II, nonzero cubic and multiple-zero argument; setup of the repaired termination proof."
+   }
+  },
+  {
+   "text": "Assume such an infinite type-II branch. At its first ring choose minimal generators $u_0,v_0,w_0$ with initial relation $W_0^2$; then $w_0^2\\in\\mathfrak m_0^3$. Its next type-II point is rational and lies in either the $u_0$- or $v_0$-chart. Interchange them if necessary. Part (1) of the finite chart lemma supplies generators $u,v,w$ of the next local ring with the exact relation $w^2=uF$, $F\\in\\mathfrak m^2$, and initial relation $W^2$. Applying the double-line transition to this relation gives a NONZERO binary cubic $H=U(aV^2+bUV+cU^2)$. Here the coefficients are residues in the common residue field; the $U^2V$ and $U^3$ terms must be retained. The conic-structure theorem supplies the associated graded hypotheses at both rings. The normality hypotheses needed for nonvanishing are those propagated in Step 2.",
+   "uses": [
+    "lem-per-rdp-blowup-conic-structure",
+    "lem-per-rdp-double-line-transition",
+    "lem-per-rdp-double-line-tail-persistence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent repair of the case-II transition preceding Tag 0BGE: finite chart lemma (1), with the source cubic nonvanishing."
+   }
+  },
+  {
+   "text": "We can reach the following condition after at most one more type-II transition: generators $u,v,w$ with $w^2=uF$, $F\\in\\mathfrak m^2$, and binary cubic $U(aV^2+bUV+cU^2)$ with $a\\ne0$. If already $a\\ne0$, nothing is needed. Otherwise $H=U^2(bV+cU)$, so its only multiple closed zero is $[0:1]$ (also when $b=0$, since then $c\\ne0$). The next point on our branch is that point by the double-line transition. Part (3) of the finite chart lemma gives $z^2=vrL$, $L\\in\\mathfrak m'$, and $H'=VR(bR+eV)$. If $b\\ne0$, use $v$ as new $u$, $r$ as new $v$, and $F'=rL$; the required coefficient is $b$. If $b=0$, the double-line transition at this next normal local ring gives $H'\\ne0$, so $e\\ne0$. Use $r$ as new $u$, $v$ as new $v$, and $F'=vL$ instead. In both choices $F'\\in(\\mathfrak m')^2$. These are finite polynomial and degree arguments, with no assumption of eventual persistence.",
+   "uses": [
+    "lem-per-rdp-double-line-transition",
+    "lem-per-rdp-double-line-tail-persistence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent repair of the final case preceding Tag 0BGE: finite chart lemma (3), including the triple-root parameter switch."
+   }
+  },
+  {
+   "text": "Restart the branch at a ring with the condition of Step 6. Since $a\\ne0$, the zero $U=0$ of $H=U(aV^2+bUV+cU^2)$ is simple. Thus the next type-II point, being a multiple zero, lies in the $u$-chart. Part (2) of the finite chart lemma shows that this SAME element $u$ defines the new exceptional divisor and gives generators with $w'^2=uF'$, $F'\\in(\\mathfrak m')^2$, and new cubic $U(aT^2+b'UT+c'U^2)$. In particular its required coefficient remains nonzero. Induct on the number of subsequent blowups: the base is Step 6, and this calculation is the induction step. Every new exceptional ideal is generated by the image of the original $u$, and every residue-field map is an isomorphism by Step 4. Step 2 gives a normal two-dimensional Noetherian local domain with normal completion at the restarted ring. The fixed-parameter obstruction now forces a regular center in this infinite branch, a contradiction. This proves termination in case II in all residue characteristics. No completion of a square by division by $2$ is used.",
+   "uses": [
+    "lem-per-rdp-double-line-transition",
+    "lem-per-rdp-double-line-tail-persistence",
+    "lem-per-fixed-parameter-blowup-chain-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent repair of Tag 0BGE final case: induction using the finite cubic-coefficient invariant and Tags 0BG2/0BG3/0BG5/0BG6."
+   }
+  },
+  {
+   "text": "The rooted tree whose vertices are singular points and whose children are their singular successors under point blowup has finite branching by the two transition theorems and no infinite branch by Steps 3 and 7. It is finite: if it had infinitely many vertices, one of the finitely many children of its root would have infinitely many descendants; repeating this choice would produce an infinite branch. Blow up its vertices in parent-before-child order. This local procedure is realized on the current global scheme: on an affine neighbourhood with center ideal $I$, the cited chart cover is $B[I/f]$; after localization at the center it becomes $B_{\\mathfrak p}[IB_{\\mathfrak p}/f]$, since localization commutes with the sums and products defining these subalgebras. The complement theorem says that every other point is unchanged. Thus successive centers give exactly the prescribed local rings, with identity steps inserted over distinct centers. Every intermediate scheme is integral and normal: normality on the new exceptional fibre comes from the conic-structure theorem, elsewhere from the unchanged open; the charts $B[I/f]\\subset\\operatorname{Frac}B$ are domains with the same dense generic point. Nonclosed local rings of this normal two-dimensional scheme are fields or DVRs as in Step 1. Hence all singular points are the finitely many remaining closed vertices, each with the hypotheses verified in Step 2. They lie over the original closed point. When the finite tree is exhausted every local ring is regular, so the endpoint is regular.",
+   "uses": [
+    "lem-per-rdp-nonsquare-conic-transition",
+    "lem-per-rdp-double-line-transition",
+    "lem-per-rdp-blowup-conic-structure",
+    "prop-nagata-affine-blowup-chart-cover",
+    "thm-nagata-global-blowup-complement",
+    "lem-sc-normal-dim1-dvr",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, assembling the two cases into the finite point-blowup sequence; affine-chart localization and finite-tree argument written out."
+   }
+  },
+  {
+   "text": "Each center is a reduced closed point of a Noetherian scheme, so its ideal is of finite type. The global properness theorem for blowups applies at each stage, and properness is preserved under composition. Each arrow is an isomorphism away from its center and has integral source, as checked in Step 8. In particular it identifies the generic point and its local field with those of its target. Composing these identifications gives the asserted isomorphism of function fields for the whole proper tower.",
+   "uses": [
+    "thm-nagata-global-blowup-proper",
+    "lem-weil-pbc-proper-composition",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, conclusion; properness and birationality of ordinary point blowups made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "lem-per-fixed-parameter-blowup-chain-obstruction",
+  "lem-per-rational-singularity-birational-propagation",
+  "lem-per-rdp-blowup-conic-structure",
+  "lem-per-rdp-double-line-tail-persistence",
+  "lem-per-rdp-double-line-transition",
+  "lem-per-rdp-nonsquare-conic-transition",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-proper-composition",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BGE, case I and case II. Replaces both false special-cubic-form assertions by a finite chart calculation preserving a nonzero UV^2 coefficient after one possible parameter switch; induction and the original fixed-parameter arc obstruction prove termination."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +196,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -88,5 +223,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rational-double-point-blowup-resolution",
+  "worker": "stage1",
+  "summary": "Repair: correct the good-coordinate restriction by allowing scalar zero. Replace the unsupported infinite-tail assertion by finite chart formulas for w^2=uF and cubic U(aV^2+bUV+cU^2). The item proves a nonzero UV^2 coefficient is reached after at most one further transition, then preserves it inductively. This supplies genuine case-II termination, including characteristic 2, without the false special-form persistence. The item statement is unchanged.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve Step 1 through the inherited potential-dualizing/surface-resolution ancestry; realizes the complete 0BGE input of 0BGN, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Normal codimension-one local rings are regular; a generic local-algebra tool, not an alternate resolution route."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "The explicit affine charts permit localization at each center and verify integrality; the unit has no separate blowup calculus."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Point blowups leave the complement of the center unchanged; needed for assembling independent branches."
+   },
+   {
+    "node": "thm-nagata-global-blowup-proper",
+    "why": "Properness of the ordinary blowup is a generic geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Properness of the composite is a generic geometric tool."
+   }
+  ],
+  "source_error": "STATEMENT-DISPUTED: both case-II special-form assertions preceding 0BGE fail on D6: w^2+uv^2+u^5 has the special form, but its u-chart successor z^2+uy^2+u^3 has three distinct cubic factors over C. The quartic coefficients contribute cubic U^2V and U^3 after blowing up. The replacement keeps those terms and permits one coordinate switch. The earlier unsupported infinite-tail lemma has been replaced by finite chart identities. The case-I good restriction must exclude zero as a scalar square, as A3 xy=z^4 with u=x shows."
+ },
+ "tool_uses": [
+  "lem-sc-normal-dim1-dvr",
+  "prop-nagata-affine-blowup-chart-cover",
+  "thm-nagata-global-blowup-complement",
+  "thm-nagata-global-blowup-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-7f4eb52d3",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-7f4eb52d3 (reviewer sub-agent of L); spot-checked: Re-delivery after RETURN 3c75a251. By sha256, three nodes are unchanged from that delivery: conic-structure, double-line-transition and fixed-parameter-obstruction; I re-read their statements. Three files changed: the item, nonsquare-transition and tail-persistence. Read resolve.tex 2586-2700 (0BG2/0BG3) and 3328-3510 (case I, good coordinate, case II with footnote, final case, 0BGE). Both return points are repaired. E2: goodness is now 'not a scalar times a square, zero allowed', which matches the source. On A3 xy=z^4, u=x is not good and u=z is good, with the singular successor in the z-chart. D1/D4/E7: the infinite-tail node is replaced by finite chart formulas, which I checked by explicit substitution. (1) u-chart: z^2=uP, and P is not a unit by embedding dimension 3. q' is proportional to Z^2-U*lin(P), a scalar square with no T^2 term, so it equals (Z+dU)^2. With omega=z+delta*u we get F' in m'^2. (2) A double root gives the quadratic a(V-lambda*U)^2 in every characteristic. Zero-residue coefficients lie in m_S S'=uS', so H'=U(aT^2+b'UT+c'U^2) with the same a and the same u. (3) v-chart: z^2=vrG, lin G=bR+eV+dZ, so H'=VR(bR+eV). This works in characteristic 2 and mixed characteristic. The item now carries a genuine case-II termination: Step 6 makes at most one parameter switch to v or r, and the induction in Step 7 (base Step 6, step part (2)) feeds the fixed-parameter obstruction (0BG2/0BG3). Recomputed E8 (u-chart cubic -U^3, then the switch to r with e!=0) and D6. Steps 1-4, 8 and 9 are correct; all steps are under 2000 characters; the tool_uses are generic and accepted; no SGA. rg found no duplicate for 0BGE, binary cubic, rational double point or doubled line. FIX (B2/E2): the tail-persistence statement stated the successor's form (gr = k[T]/(q') with q' a scalar square, chart generators generating n') as a fact. Read that way it is false: w^2=u(v^2+uw) gives a type-I successor with tangent quadratic Z(Z-U). I rewrote these conditions as explicit hypotheses of each assertion, statement field only, in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-rdp-double-line-tail-persistence.json.; 1 file(s) fixed by the reviewer"
  }
 }
