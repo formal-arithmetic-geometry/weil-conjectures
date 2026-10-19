@@ -1,6 +1,6 @@
 # Work queue
 
-797 items; claim with `tools/claim.py next <group> [--stage N]`.
+795 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (3)
 
@@ -10,7 +10,7 @@
 | `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
 | `lem-trf-regular-hilbert-coefficient-data` | - | none |
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (27)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -34,7 +34,6 @@
 | `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
-| `lem-sfb-constructible-cocone-obj` | 1 | state | 0 |
 | `lem-sp-tower-p1-arbitrary-base-integrals` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
@@ -45,7 +44,7 @@
 
 Not open yet: 300 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (766)
+## Stage 3: modules to prove (765)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -339,7 +338,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CommonStageCalculus` | 6 | 8 | proof | 2 |
 | `Sheaf.Paper.CompactSupportFiniteFieldIndependence` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CompleteProetale` | 6 | 1 | proof | 2 |
-| `Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPresentationTransport` | 6 | 7 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedExchangeCoherence` | 6 | 9 | proof | 2 |
