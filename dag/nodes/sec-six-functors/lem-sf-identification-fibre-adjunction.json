@@ -152,5 +152,28 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-4db75af2d (reviewer sub-agent of L); spot-checked: Read the item and parent sk-thm-sf-identification in full (12 steps; item cited only in Step 7, alpha_P^1=alpha_C^1). Read the unit (uses sk-lem-sf-twist-interchange, sk-thm-sf-global-duality, sk-thm-sf-tensor-hom) and the main-20261015 sk-thm-sf-identification.proof.md. The item gives the details behind the source clause that the adjoint of beta_K is the duality isomorphism, read through the point fibre. Also read the statements of def-sf-datum (blueprint_update irrelevant), lem-weil-point-fibre-equivalence, lem-sf-point-fibre-derived-tensor (canonical, natural in M,N, unit-preserving, coherent at all four stages) and lem-pod-closed-uncurry-laws (Mathlib Basic.lean:175/180/194). Step 1 checked: functoriality plus naturality of t in the second variable gives F(1⊗Φ)∘t_{P,Q}^{-1}=t_{P,H}^{-1}∘(1⊗FΦ); then the alpha equation and bifunctoriality give beta=ev∘(1⊗alpha FΦ). Step 2 checked: the evaluation clause gives uncurry(psi)=beta, and uncurry∘curry=id with uncurry injective gives curry(beta)=psi. A_{E,n} is non-regular, but the adjunction is taken in D(Λ), which is closed monoidal; FP is perfect, so the Hom-sets agree. Edge cases P=0, Q=0, b=0, P=Q=Λ_s with multiplication, shifts, field stages: all consistent. No duplicate (checked lem-coef-closed-adjunction-naturality, lem-coef-monoidal-square-hom-transport, lem-pod-point-duality-coefficient-compatibility). No new nodes, no SGA. Batch-5 check: lem-pod-closed-uncurry-laws is a status-mathlib leaf with no proof_deps, closure only def-sfb-monoidal-category, the generic closed-monoidal curry/uncurry laws. It is part of neither the trace formula nor Poincaré duality, nor of their proofs; its unit is the item's own. Accepted, not a RETURN. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors/lem-sf-identification-fibre-adjunction.json (only proof texts and split_report changed). (1) B4: both steps had a literal backslash-n, display math closed by an escaped dollar, and alpha/beta outside math mode; rewritten, with the curry/uncurry deduction written out and an overclaimed coherence sentence removed. (2) C8/route: lem-sf-point-fibre-derived-tensor is unit sk-thm-sf-kunneth-relative, not in the route closure, and is not a leaf; the report wrongly said no tool use was needed. Added split_report.tool_uses for it; I accept that tool use (only naturality of t is used, the item's own statement is phrased with that t, and no route node supplies the point-fibre monoidal comparison).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IdentificationFibreAdjunction",
+  "declaration": "WeilConjectures.identificationFibreAdjunction",
+  "declarations": [
+   "WeilConjectures.PointPairingAdjunctionTransport",
+   "WeilConjectures.identificationFibreAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/IdentificationFibreAdjunction.lean",
+  "statement": "theorem identificationFibreAdjunction (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Omega : Type u) [Field Omega] [Algebra ℚ_[l] Omega] [IsAlgClosure ℚ_[l] Omega] (S : PointFibreDerivedTensorSystem D l hl Omega) (_canonical : PointFibreDerivedTensorCanonical D l hl Omega S) : (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (m : ℕ), PointPairingAdjunctionTransport (S.finite E m)) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], PointPairingAdjunctionTransport (S.integral E)) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], PointPairingAdjunctionTransport (S.rational E)) ∧ PointPairingAdjunctionTransport S.qbar",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-73c416467"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73c416467",
+  "group": "NN",
+  "result": "fix",
+  "note": "Statement correct. The four stages are S.finite (exponent m+1), S.integral, S.rational and S.qbar of a canonical PointFibreDerivedTensorSystem. μIso.hom = t⁻¹ and εIso.inv = u. The theorem holds for any right adjoint of P ⊗ - (the def-sf-datum internal Hom is one, so it is the node's case or more general, never an extra assumption) and is not vacuous on the point categories. alpha is fixed by its evaluation equation. The conclusion curry(β) = F(curry b) ≫ alpha.hom is exactly β♯ = α∘F(Φ). Target ihom is the genuine DerivedCategory.monoidalClosed. A probe proving the general transport compiled clean, so the statement is true. lean.statement is verbatim; only the item's lean field changed; no new nodes, (B) or (C) changes; no duplicate; docstrings carry source, blueprint tag and proof steps; the theorem is sorry only. H9 fault: public imports Sheaf.Paper.SixFunctorDatum and Sheaf.Paper.PointFibreEquivalence are not in the import closure (walk over 10,937 modules), nothing from either is used, and the file compiles clean without them. SixFunctorDatum is the import the worker blamed for the 60 s timeout. fixes/IdentificationFibreAdjunction.lean removes exactly those two lines; statement and record are unchanged. nt_compile at load 260-390: delivered 59.2 s clean / timeout / 32.6 s clean; fixed 44.6 s and 18.3 s clean."
  }
 }
