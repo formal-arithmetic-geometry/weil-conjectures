@@ -15,11 +15,12 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
-import Sheaf.CategoryTheory.StrictRoosComparison
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Homology.RoosCoordinatesQuasiIso
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Mathlib.CategoryTheory.Localization.CalculusOfFractions
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
@@ -371,20 +372,195 @@ def roosMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
     (fun i => biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)))
     (roosMap_comm B ι a)
 
+private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
+    (a : P ⟶ P') :
+    augmentation B ι P ≫ roosMap B ι a = a ≫ augmentation B ι P' := by
+  ext i : 1
+  change biprod.lift ((unitProduct B ι P).f i) 0 ≫
+    biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)) =
+      a.f i ≫ biprod.lift ((unitProduct B ι P').f i) 0
+  apply biprod.hom_ext
+  · simp only [Category.assoc, biprod.map_fst, biprod.lift_fst_assoc, biprod.lift_fst]
+    have h : unitProduct B ι P ≫ productMap B ι a = a ≫ unitProduct B ι P' := by
+      apply Pi.hom_ext
+      intro n
+      simp only [unitProduct, productMap, Category.assoc, Pi.map_π, Pi.lift_π_assoc,
+        Pi.lift_π]
+      exact ((NatTrans.mapHomologicalComplex
+        (tensorUnit (ι.app (op n))) (.up ℤ)).naturality a).symm
+    exact congrArg (fun f ↦ f.f i) h
+  · simp
+
+omit [HasCountableProducts (Modules R)] in
+open MonoidalCategory in
+private theorem categorical_kflat (P : CochainComplex (Modules R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) :
+    (HomologicalComplex.quasiIso (Modules R) (.up ℤ)).kFlat P := by
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic]
+  intro N hN
+  obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+  rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+  have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
+    (CochainComplex.mapBifunctor N P (curriedTensor _))).2 (hP N hN)
+  refine ⟨?_, hr⟩
+  exact (HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr
+
+set_option maxHeartbeats 400000 in
+-- Elaborating the tensor square and single-complex comparison needs extra heartbeats.
+omit [HasCountableProducts (Modules R)] in
+open MonoidalCategory in
+private theorem level_quasiIso {P P' : CochainComplex (Modules R) ℤ}
+    (hP : P.IsKFlatIndependentCoefficients) (hP' : P'.IsKFlatIndependentCoefficients)
+    (a : P ⟶ P') (ha : QuasiIso a) (n : ℕ) : QuasiIso ((level B ι n).map a) := by
+  classical
+  let N := (HomologicalComplex.single (Modules R) (.up ℤ) 0).obj (levelModule B ι n)
+  obtain ⟨K, q, hK, _, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) N
+  let W := HomologicalComplex.quasiIso (Modules R) (.up ℤ)
+  have hPcat := categorical_kflat P hP
+  have hP'cat := categorical_kflat P' hP'
+  have hKcat := categorical_kflat K hK
+  have ht : QuasiIso (a ▷ N) := by
+    have hq' : W q := hq
+    have ha' : W a := ha
+    have htop := hKcat.whiskerRight ha'
+    have hleft := hPcat.whiskerLeft hq'
+    have hright := hP'cat.whiskerLeft hq'
+    have hcomp := W.comp_mem _ _ htop hright
+    rw [← MonoidalCategory.whisker_exchange a q] at hcomp
+    exact (W.precomp_iff _ _ hleft).1 hcomp
+  let F := curriedTensor (Modules R)
+  let e (L : CochainComplex (Modules R) ℤ) :=
+    CochainComplex.mapBifunctorSingle₂Iso F (levelModule B ι n) L ≪≫
+      (NatIso.mapHomologicalComplex
+        (siteSheafTensorRightIso R (levelModule B ι n)).symm (.up ℤ)).app L
+  change QuasiIso (HomologicalComplex.mapBifunctorMap a (𝟙 N) F (.up ℤ)) at ht
+  apply (quasiIso_iff_of_arrow_mk_iso
+    (HomologicalComplex.mapBifunctorMap a (𝟙 N) F (.up ℤ)) ((level B ι n).map a)
+    (Arrow.isoMk (e P) (e P') ?_)).1 ht
+  change (e P).hom ≫ ((level B ι n).map a) =
+    HomologicalComplex.mapBifunctorMap a (𝟙 N) F (.up ℤ) ≫ (e P').hom
+  dsimp only [e, Iso.trans_hom]
+  rw [← Category.assoc, CochainComplex.mapBifunctorSingle₂Iso_hom_naturality]
+  simp only [Category.assoc]
+  exact congrArg (fun t ↦ (CochainComplex.mapBifunctorSingle₂Iso F
+    (levelModule B ι n) P).hom ≫ t)
+    ((NatIso.mapHomologicalComplex
+      (siteSheafTensorRightIso R (levelModule B ι n)).symm (.up ℤ)).hom.naturality a).symm
+
+/-- The strict Roos map preserves quasi-isomorphisms between the specified representatives.
+Source: Stacks Tags 06YT and 08TC (blueprint: lem-pe-kflat-roos-representative-invariance).
+The tensor square gives a quasi-isomorphism at every tower level. Exact countable
+products and the generic Roos coordinate comparison give the asserted quasi-isomorphism. -/
+private theorem roosMap_quasiIso_of_kflat
+    [HasExactLimitsOfShape (Discrete ℕ) (Modules R)]
+    [HasDerivedCategory.{w} (Modules R)]
+    (P P' : CochainComplex (Modules R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P')
+    (_hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X i))
+    (_hflat' : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P'.X i)) :
+    ∀ (a : P ⟶ P'), QuasiIso a → QuasiIso (roosMap B ι a) := by
+  intro a ha
+  have hlevel (n : ℕ) : QuasiIso ((level B ι n).map a) := level_quasiIso B ι hP hP' a ha n
+  let f := Discrete.natTrans (F := Discrete.functor (fun n : ℕ ↦ (level B ι n).obj P))
+    (G := Discrete.functor (fun n : ℕ ↦ (level B ι n).obj P'))
+    (fun n ↦ (level B ι n.as).map a)
+  have (n : Discrete ℕ) : QuasiIso (f.app n) := hlevel n.as
+  have hp : QuasiIso (productMap B ι a) := HomologicalComplex.quasiIso_limMap f
+  exact CochainComplex.quasiIso_of_roos_coordinates
+    (product B ι P) (product B ι P') (roos B ι P) (roos B ι P')
+    (oneSubShift B ι P) (oneSubShift B ι P')
+    (fun _ ↦ Iso.refl _) (fun _ ↦ Iso.refl _)
+    (by intro i; simp only [Iso.refl_hom, Category.comp_id, Category.id_comp,
+      roos, CochainComplex.of_d, roosD])
+    (by intro i; simp only [Iso.refl_hom, Category.comp_id, Category.id_comp,
+      roos, CochainComplex.of_d, roosD])
+    (productMap B ι a) (roosMap B ι a) (by intro i; rfl) hp
+
+/-- Derived Roos objects attached to derived-isomorphic representatives admit an
+augmentation-compatible isomorphism.
+Source: Stacks Tags 05RT, 06YS and 08TC (blueprint: lem-pe-kflat-roos-representative-invariance).
+A common K-flat roof and the strict naturality equation produce the displayed equality. -/
+private theorem exists_derived_roos_comparison
+    [HasExactLimitsOfShape (Discrete ℕ) (Modules R)]
+    [HasDerivedCategory.{w} (Modules R)]
+    (P P' : CochainComplex (Modules R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P')
+    (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X i))
+    (hflat' : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P'.X i)) :
+    ∀ (e : DerivedCategory.Q.{w}.obj P ≅ DerivedCategory.Q.obj P'),
+      ∃ v : DerivedCategory.Q.{w}.obj (roos B ι P) ≅ DerivedCategory.Q.obj (roos B ι P'),
+        DerivedCategory.Q.map (augmentation B ι P) ≫ v.hom =
+          e.hom ≫ DerivedCategory.Q.map (augmentation B ι P') := by
+  classical
+  intro e
+  obtain ⟨Z, t, ht, f, he⟩ := DerivedCategory.right_fac e.hom
+  let := ht
+  have ht' : QuasiIso t := (DerivedCategory.isIso_Q_map_iff_quasiIso _ t).1 ht
+  have hf : IsIso (DerivedCategory.Q.map f) := by
+    have hh : DerivedCategory.Q.map f = DerivedCategory.Q.map t ≫ e.hom := by
+      rw [he, IsIso.hom_inv_id_assoc]
+    rw [hh]
+    infer_instance
+  have hf' : QuasiIso f := (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).1 hf
+  obtain ⟨W, q, hW, hflatW, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) Z
+  have hflatW' : ∀ i, IsFlatOnSite (R := R) (W.X i) := by
+    intro i
+    exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (W.X i)).symm
+      (hflatW i)
+  let := ht'
+  let := hf'
+  let := hq
+  let u := q ≫ t
+  let b := q ≫ f
+  have hu : QuasiIso u := inferInstance
+  have hb : QuasiIso b := inferInstance
+  have hLu := roosMap_quasiIso_of_kflat B ι W P hW hP hflatW' hflat u hu
+  have hLb := roosMap_quasiIso_of_kflat B ι W P' hW hP' hflatW' hflat' b hb
+  let := hLu
+  let := hLb
+  let v := (asIso (DerivedCategory.Q.map (roosMap B ι u))).symm ≪≫
+    asIso (DerivedCategory.Q.map (roosMap B ι b))
+  refine ⟨v, ?_⟩
+  have hnu := congrArg DerivedCategory.Q.map (augmentation_naturality B ι u)
+  have hnb := congrArg DerivedCategory.Q.map (augmentation_naturality B ι b)
+  simp only [Functor.map_comp] at hnu hnb
+  have hroof : DerivedCategory.Q.map u ≫ e.hom = DerivedCategory.Q.map b := by
+    dsimp only [u, b]
+    rw [Functor.map_comp, Functor.map_comp, Category.assoc, he,
+      IsIso.hom_inv_id_assoc]
+  apply (cancel_epi (DerivedCategory.Q.map u)).1
+  change DerivedCategory.Q.map u ≫
+      (DerivedCategory.Q.map (augmentation B ι P) ≫
+        (inv (DerivedCategory.Q.map (roosMap B ι u)) ≫
+          DerivedCategory.Q.map (roosMap B ι b))) = _
+  calc
+    _ = DerivedCategory.Q.map (augmentation B ι W) ≫
+        DerivedCategory.Q.map (roosMap B ι b) := by
+      rw [← Category.assoc, ← hnu]
+      simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+    _ = DerivedCategory.Q.map b ≫ DerivedCategory.Q.map (augmentation B ι P') := hnb
+    _ = _ := by rw [← hroof, Category.assoc]
+
+
 /-- Strict and derived invariance of the augmented scalar-extension Roos complex.
 Source: Stacks Tags 06YS, 06YT, 06YY and 08TC
 (blueprint: lem-pe-kflat-roos-representative-invariance).
 
 Proof:
-1. The ringed-site change-of-rings K-flat quasi-isomorphism lemma gives a tensor B_n
-   quasi-isomorphism at every level. Restricting scalars preserves cohomology.
-   No algebra map is assumed flat or surjective. Tensor naturality gives the
-   strict equality L(a) eta_P = eta_P' a.
-2. The tower category is abelian levelwise. Apply lem-weil-strict-roos-comparison
-   to the resulting tower quasi-isomorphism. The signed interchange (x,y) to
-   (-y,x) identifies our complex with Cone(1-s)[-1], compatibly with its maps;
-   hence L(a) is a quasi-isomorphism. Equivalently, exact products preserve
-   levelwise quasi-isomorphisms, and the cone long exact sequence finishes.
+1. Resolve each coefficient module in degree zero by a K-flat complex. The tensor
+   square and two-out-of-three show that tensoring a quasi-isomorphism between
+   K-flat complexes with that coefficient module remains a quasi-isomorphism.
+   The single-complex tensor comparison identifies this with the level map.
+   Tensor-unit naturality gives the strict augmentation equation.
+2. Exact countable products preserve these level quasi-isomorphisms. The generic
+   Roos coordinate comparison, proved from degreewise split short exact sequences
+   with outer terms V[-1] and V, shows that the diagonal Roos map is a
+   quasi-isomorphism.
 3. Given e, use lem-pc-right-fraction-representation and
    lem-pc-quasi-isomorphisms-multiplicative-system to represent it by a roof
    Z to P, Z to P'. Both arrows are quasi-isomorphisms. Resolve Z by a K-flat
@@ -412,6 +588,27 @@ theorem representativeInvariance
           e.hom ≫ DerivedCategory.Q.map (augmentation B ι P')) ∧
     (Nonempty (DerivedCategory.Q.{w}.obj P ≅ DerivedCategory.Q.obj P') →
       (QuasiIso (augmentation B ι P) ↔ QuasiIso (augmentation B ι P'))) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro a ha
+    refine ⟨roosMap_quasiIso_of_kflat B ι P P' hP hP' hflat hflat' a ha, ?_⟩
+    exact augmentation_naturality B ι a
+  · exact exists_derived_roos_comparison B ι P P' hP hP' hflat hflat'
+  · rintro ⟨e⟩
+    obtain ⟨v, hv⟩ := exists_derived_roos_comparison B ι P P' hP hP' hflat hflat' e
+    rw [← DerivedCategory.isIso_Q_map_iff_quasiIso,
+      ← DerivedCategory.isIso_Q_map_iff_quasiIso]
+    constructor
+    · intro h
+      let := h
+      have : IsIso (e.hom ≫ DerivedCategory.Q.map (augmentation B ι P')) := by
+        rw [← hv]
+        infer_instance
+      exact IsIso.of_isIso_comp_left e.hom _
+    · intro h
+      let := h
+      have : IsIso (DerivedCategory.Q.map (augmentation B ι P) ≫ v.hom) := by
+        rw [hv]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ v.hom
 
 end SheafOfModules.KFlatRoos

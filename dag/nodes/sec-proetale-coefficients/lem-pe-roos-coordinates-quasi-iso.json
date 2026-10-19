@@ -1,0 +1,114 @@
+{
+ "id": "lem-pe-roos-coordinates-quasi-iso",
+ "kind": "statement",
+ "title": "Diagonal quasi-isomorphisms of Roos coordinate complexes",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $V,V^{\\prime},L,L^{\\prime}$ be cochain complexes [def-weil-abstract-derived-category], and $s:V\\to V$, $s^{\\prime}:V^{\\prime}\\to V^{\\prime}$ chain endomorphisms. Suppose specified isomorphisms identify $L^i=V^i\\oplus V^{i-1}$ and $L^{\\prime i}=V^{\\prime i}\\oplus V^{\\prime i-1}$ with differential $(x,y)\\mapsto(dx,sx-dy)$ in both cases. If $a:V\\to V^{\\prime}$ is a quasi-isomorphism and a chain map $f:L\\to L^{\\prime}$ acts in these coordinates by $(a^i,a^{i-1})$, then $f$ is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC, definition-derived-limit: mapping fiber model; elementary mapping-cone comparison expanded by D9"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Include V shifted by minus one as the second coordinate and project L onto the first coordinate. The displayed differential makes these chain maps and gives a short exact sequence split in each degree. Do the same for the primed data. The coordinate formula on f supplies a morphism of these short exact sequences, with outer arrows a shifted by minus one and a. Shift preserves quasi-isomorphisms, so the two outer arrows are quasi-isomorphisms. Apply the five lemma to the long exact homology sequences, equivalently HomologicalComplex.HomologySequence.quasiIso_τ₂ from the source library, to conclude that f is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D9",
+  "date": "2026-10-19",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC, elementary mapping-fiber comparison using the degreewise split sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal chain map of two mapping fiber complexes with differential dx, sx minus dy is a quasi-isomorphism if its map on the unshifted complexes is a quasi-isomorphism",
+   "results": "QuasiIso shift iff and HomologySequence.quasiIso_τ₃; no coordinate lemma. Read source-library BicomplexColumns.lean quasiIso_τ₂, which applies once the coordinate short exact sequences have been constructed.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"map\"",
+   "results": "Generic ShortComplex preservation and quasi-isomorphism lemmas; no Roos coordinate result.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_of_roos_coordinates|Roos|roos|quasiIso_τ₂",
+   "results": "Search tool returned zero hits; local rg found the general source-library HomologySequence.quasiIso_τ₂ and strict Roos model, but neither has the arbitrary coordinate signature. Blueprint search Roos returned 21 nodes, none states this generic coordinate comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The shifted mapping fiber of a commuting square of quasi-isomorphisms is a quasi-isomorphism",
+   "results": "Generic shifted quasi-isomorphism, composition, and ShortComplex quasi-isomorphism results. No lemma for the explicit coordinate complex.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance",
+  "date": "2026-10-19",
+  "group": "D9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-pe-derived-completion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-pe-derived-completion",
+   "place": "Completeness display: independence of the explicit augmented tensor-reduction Roos model from its K-flat representative",
+   "via": [
+    "lem-pe-kflat-roos-representative-invariance"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RoosCoordinatesQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/RoosCoordinatesQuasiIso.lean",
+  "declaration": "CochainComplex.quasiIso_of_roos_coordinates",
+  "statement": "theorem quasiIso_of_roos_coordinates\n    {A : Type u} [Category.{v} A] [Abelian A]\n    (V V' L L' : CochainComplex A ℤ) (s : V ⟶ V) (s' : V' ⟶ V')\n    (e : ∀ i : ℤ, L.X i ≅ V.X i ⊞ V.X (i - 1))\n    (e' : ∀ i : ℤ, L'.X i ≅ V'.X i ⊞ V'.X (i - 1))\n    (hd : ∀ i : ℤ, L.d i (i + 1) ≫ (e (i + 1)).hom =\n      (e i).hom ≫ biprod.lift (biprod.fst ≫ V.d i (i + 1))\n        (biprod.fst ≫ s.f i ≫\n          eqToHom (congrArg V.X (Int.add_sub_cancel i 1).symm) -\n          biprod.snd ≫ V.d (i - 1) ((i + 1) - 1)))\n    (hd' : ∀ i : ℤ, L'.d i (i + 1) ≫ (e' (i + 1)).hom =\n      (e' i).hom ≫ biprod.lift (biprod.fst ≫ V'.d i (i + 1))\n        (biprod.fst ≫ s'.f i ≫\n          eqToHom (congrArg V'.X (Int.add_sub_cancel i 1).symm) -\n          biprod.snd ≫ V'.d (i - 1) ((i + 1) - 1)))\n    (a : V ⟶ V') (f : L ⟶ L')\n    (hf : ∀ i : ℤ, f.f i ≫ (e' i).hom =\n      (e i).hom ≫ biprod.map (a.f i) (a.f (i - 1)))\n    (ha : QuasiIso a) : QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261019T093336-L-2297557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261019T093336-L-2297557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
