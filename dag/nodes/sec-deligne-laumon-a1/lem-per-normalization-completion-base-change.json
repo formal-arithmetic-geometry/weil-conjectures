@@ -17,9 +17,164 @@
   "def-weil-pbc-normal-ring",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine cover of $X$ by opens $\\operatorname{Spec}B$ with $B$ a finite-type $A$-algebra, as supplied by local finite type, and work on one such open, and put $C=B\\otimes_A\\widehat A$, $I=\\mathfrak mB$. The affine fibre-product formula gives the corresponding open $\\operatorname{Spec}C\\subset Y$. The completion $\\widehat A$ is Noetherian and local, its maximal ideal is $\\mathfrak m\\widehat A$, and it is complete: apply module-completion completeness to $M=A$, noting that $\\mathfrak m^n\\widehat A=(\\mathfrak m\\widehat A)^n$. Thus the complete-local Nagata theorem makes $\\widehat A$ Nagata. Local completion is faithfully flat, so its base change $B\\to C$ is faithfully flat. Both $B$ and $C$ are Noetherian by finite-type Noetherianity. Moreover $B/I\\cong C/IC$, by tensoring the completion residue-field isomorphism with $B$. The special fibre in this chart is exactly $V(IC)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), first two paragraphs: affine reduction, faithful flatness, and the complete-local Nagata input"
+   }
+  },
+  {
+   "text": "Write $\\nu:\\operatorname{Spec}C^{\\nu}\\to\\operatorname{Spec}C$ for normalization. It is finite for the following explicit reason. The quotient $C_{\\mathrm{red}}$ is Noetherian by finite-type Noetherianity (a quotient is generated as an algebra by its unit). Apply the affine-chart description to $(\\operatorname{Spec}C)_{\\mathrm{red}}$: normalization does not change on removing nilpotents by its componentwise definition. Thus $C^{\\nu}=\\prod_{j=1}^r\\overline{C/\\mathfrak q_j}$, where $\\mathfrak q_j$ are the finitely many minimal primes and the bars are integral closures in the respective fraction fields. Each domain $C/\\mathfrak q_j$ is finite type over the Nagata ring $\\widehat A$, hence N-2 by the universally-Japanese theorem. Taking the degree-one extension of its fraction field makes each displayed integral closure a finite $C/\\mathfrak q_j$-module. Its finitely many generators also generate over $C$, and the union of these generators, inserted in the factors, generates their finite product. Thus $C^{\\nu}$ is finite over $C$. By the normalization-properties node it is normal and $C\\to C^{\\nu}$ is an isomorphism over the assumed normal open $\\operatorname{Spec}C\\setminus V(IC)$.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "def-weil-pbc-japanese-domain",
+    "lem-per-componentwise-normalization-properties",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), second paragraph: finiteness of the normalization of Y and its triviality off the special fibre"
+   }
+  },
+  {
+   "text": "Choose generators $f_1,\\ldots,f_t$ of $I$; they exist because $B$ is Noetherian. On each $D(f_i)$ the map $C_{f_i}\\to(C^{\\nu})_{f_i}$ is an isomorphism. Form the finite-algebra gluing datum with prime algebra $E^{\\prime}=C^{\\nu}$, chart algebra $E_i=B_{f_i}$, transition $(C^{\\nu})_{f_i}\\cong C_{f_i}=B_{f_i}\\otimes_B C$, and the usual identifications $(B_{f_i})_{f_j}\\cong(B_{f_j})_{f_i}$. The overlap and cocycle identities are the equalities $x/(f_i^a f_j^b)=x/(f_j^b f_i^a)$ and their three-denominator versions; the prime transitions are the inverses of the same structural isomorphism $C\\to C^{\\nu}$ after localization, so satisfy those identities too. The hypotheses for finite-algebra formal gluing are now verified: $B\\to C$ is flat, $B/I\\cong C/IC$, $C^{\\nu}$ is finite, and each chart algebra is generated as a module by $1$. It gives a finite $B$-algebra $D$ and compatible algebra isomorphisms $D\\otimes_B C\\cong C^{\\nu}$ and $D_{f_i}\\cong B_{f_i}$. Hence $\\operatorname{Spec}D\\to\\operatorname{Spec}B$ is finite and is an isomorphism away from $V(I)$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-formal-glueing-data",
+    "lem-per-formal-glueing-finite-algebras",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), second paragraph: formal gluing, with the algebra structure and finite-module condition made explicit"
+   }
+  },
+  {
+   "text": "The base-change map $D\\to D\\otimes_B C$ is faithfully flat. Its target is the normal ring $C^{\\nu}$, so normality descent makes $D$ normal. This uses the ring version, not the narrower field-extension descent statement. Since a finite algebra is finite type (its module generators also generate it as an algebra), finite-type Noetherianity makes $D$ Noetherian. Thus $Z=\\operatorname{Spec}D$ is normal and locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-per-faithfully-flat-normal-ring-descent",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), last paragraph: normality of the algebraized finite scheme"
+   }
+  },
+  {
+   "text": "Every minimal prime $\\mathfrak t$ of $D$ contracts to a minimal prime of $B$. Indeed faithful flatness of $D\\to C^{\\nu}$ gives a prime above $\\mathfrak t$; choose a minimal prime $\\mathfrak u$ inside it. Its contraction is still $\\mathfrak t$, by minimality of $\\mathfrak t$. The normalization-properties node says that $\\mathfrak u\\cap C$ is minimal in $C$. A minimal prime under a flat map contracts to a minimal prime: if a strictly smaller prime existed below its contraction, going down would give a strictly smaller prime upstairs. Apply this to $B\\to C$. This proves the claim even for components wholly inside the special fibre.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-per-componentwise-normalization-properties",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), last sentence: verification of the component-dominance needed to identify X prime with normalization"
+   }
+  },
+  {
+   "text": "Fix a minimal prime $\\mathfrak p$ of $B$. Faithful flatness gives a prime of $C$ over it; a minimal prime $\\mathfrak q$ contained in that prime still contracts to $\\mathfrak p$. Put $K=\\kappa(\\mathfrak p)$, $L=\\kappa(\\mathfrak q)$ and $E=D\\otimes_B K$. These are fields $K\\subseteq L$ and a finite $K$-algebra $E$. The generic-fibre assertion for normalization gives, as $L$-algebras, $E\\otimes_K L=D\\otimes_B L\\cong C^{\\nu}\\otimes_C L\\cong L$. Therefore the unit map $K\\to E$ is an isomorphism: after tensoring with the field extension $L/K$ it is an isomorphism, and a nonzero kernel or cokernel would remain nonzero on scalar extension, as is seen from a vector-space basis. Thus $E=K$. Primes of this fibre are precisely primes of $D$ over $\\mathfrak p$, so there is exactly one, with residue field $K$. It is minimal: a minimal prime beneath it contracts to a minimal prime of $B$ by the previous step, necessarily $\\mathfrak p$, and uniqueness forces equality. Together with the preceding step this proves a bijection of generic points and isomorphisms of their residue fields.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-per-componentwise-normalization-properties",
+    "def-weil-residue-field",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), last sentence: missing generic-field check in the identification with normalization"
+   }
+  },
+  {
+   "text": "The finite morphism $Z\\to\\operatorname{Spec}B$ is integral, $Z$ is normal and locally Noetherian, and the previous two steps prove exactly the generic-point and residue-field hypotheses of normalization recognition. Consequently the recognition clause gives a unique isomorphism $Z\\cong(\\operatorname{Spec}B)^\\nu$ over $\\operatorname{Spec}B$. It follows that this normalization is finite and that its base change is $\\operatorname{Spec}C^{\\nu}$, with the prescribed structural map to $\\operatorname{Spec}C$. No reducedness of $B$ has been assumed: recognition applies to the reductions at the generic points.",
+   "uses": [
+    "lem-per-componentwise-normalization-properties",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), last sentence: identification of X prime as normalization"
+   }
+  },
+  {
+   "text": "Finally normalization restricts to normalization on open subschemes. Therefore the finite normalization maps just obtained on affine opens of $X$ are restrictions of $X^\\nu\\to X$, proving its finiteness since finiteness is local on the target. The comparison isomorphisms on the corresponding opens of $Y$ agree on overlaps: each identifies the componentwise normalization and is the identity on its generic residue fields; the uniqueness in normalization recognition makes the two overlap identifications equal. The maps therefore glue: their underlying continuous maps agree on an open cover, and the maps of structure sheaves glue section by section by the sheaf axiom; their inverse maps glue in the same way. This gives an isomorphism $X^\\nu\\times_{\\operatorname{Spec}A}\\operatorname{Spec}\\widehat A\\cong Y^\\nu$ over $Y$.",
+   "uses": [
+    "lem-per-componentwise-normalization-properties",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG9 (lemma-normalization-completion), first sentence and final conclusion: gluing the affine comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-reduced-normalization",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "def-weil-pbc-japanese-domain",
+  "lem-per-componentwise-normalization-properties",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formal-glueing-data",
+  "lem-per-formal-glueing-finite-algebras",
+  "def-weil-finite-integral-morphism",
+  "lem-per-faithfully-flat-normal-ring-descent",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-local-on-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BG9 (lemma-normalization-completion), proof; the final identification is expanded using Tags 035Q and 0H7D."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +203,31 @@
    "results": "Mathlib/AlgebraicGeometry/Normalization.lean:15-24, 377-390; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:203-222; no completion-normalization theorem",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-18T23:20:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no hits; these results do not state the node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization commutes with completion for a finite type scheme over a Noetherian local ring when the completed scheme is normal off the closed fibre",
+   "results": "{\"t\": \"2026-10-18T23:20:40Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization commutes with completion for a finite type scheme over a Noetherian local ring when the completed scheme is normal off the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"be120cc4feb9ec01\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.normalization.hom_ext; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc; AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; these results do not state the node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme of finite type over a Noetherian local ring has finite normalization commuting with completion if the completed scheme is normal away from the special fibre",
+   "results": "{\"t\": \"2026-10-18T23:20:45Z\", \"tool\": \"leansearch\", \"query\": \"A scheme of finite type over a Noetherian local ring has finite normalization commuting with completion if the completed scheme is normal away from the special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\"], \"digest\": \"b4e04af9a1357ca4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso; these results do not state the node"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normalized-blowup-completion-descent",
@@ -78,5 +254,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normalization-completion-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. The formal-gluing proof is expanded into eight steps, including component dominance and generic-residue-field verification in the final normalization identification. Reuses the finite-algebra gluing node, Nagata tools, completion tools and affine normalization charts. Two general supporting nodes are stated and searched; neither repeats completion base change or finiteness of this normalization.",
+  "blueprint": "Realizes the normalization-completion input to lem-per-normalized-blowup-completion-descent, on the recorded Artin-Gabber affine-curve / surface-resolution branch. The affine generic-field argument supplies the details hidden by the final sentence of Tag 0BG9; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the completed coefficient ring in step 1; no result in the perverse-sheaf unit supplies this commutative-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Nagata property of the completed local coefficient ring in step 1, needed for finite integral closures in step 2; a generic ring-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-universally-japanese",
+    "why": "Finite integral closures for finite-type domain algebras over the Nagata completion in step 2; this does not replace a unit-level perverse-sheaf argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Prime correspondence and residue-field identification in a ring-map fibre in step 6; a generic affine algebra tool, absent from this perverse-sheaf unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NR-2cf4e72e9",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-2cf4e72e9 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement, Stacks resolve.tex 0BG9, algebra.tex 033G and morphisms.tex 035Q/035K/0H7D/035P. The item statement matches 0BG9 hypothesis by hypothesis and is not weakened; the live item is still unsplit and no parallel node exists. Step 1: Â is complete via module-completion with M=A and m^nÂ=(mÂ)^n, so Â is Nagata; B→C is faithfully flat and B/mB≅C/mC. Step 2: finiteness of C^ν via affine charts on C_red plus N-2 from universally Japanese; normal and an isomorphism off V(IC) by clauses (1) and (2). Step 3: all hypotheses of lem-per-formal-glueing-finite-algebras checked (flat, R/K≅S/KS, E' and E_i finite, algebra isomorphisms satisfying cocycle conditions). Step 4: normality of D via 033G descent along D→C^ν. Steps 5-6: minimal primes of D correspond bijectively to minimal primes of B, via going-down, faithful flatness of K→L and the fibre-ring node (E=K); this also covers components inside the special fibre, which the source skips. Step 7: recognition clause. Step 8: gluing by the uniqueness clause and finite-local-on-target. New nodes: faithfully-flat-normal-ring-descent is exactly 033G, absent from Mathlib, and only specialized by the existing field-extension node. componentwise-normalization-properties is true in all clauses: (3) is 035Q(3) on reductions plus 0H7D, with uniqueness from Z reduced and Noetherian; I tested the empty scheme, xy=0 and dual numbers. It is not a duplicate of lem-sc-normalization-*, the affine charts, relative-normalization or excellent-preparation nodes, and it does not restate the item. The four tool_uses (adic-completion-noetherian, complete-local-nagata, nagata-universally-japanese, fibre-ring-primes-residue-fields) are generic algebra tools and accepted. No SGA. Advisory: the new nodes lack lean_audit/merged_into keys, like their sibling nodes."
  }
 }
