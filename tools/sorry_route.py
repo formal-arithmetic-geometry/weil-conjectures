@@ -10,7 +10,13 @@ of the batch; a sorry the targets import but do not use is not on the route.
 
 The scratch file is a plain Lean file, not a `module`: a `module` file sees neither the private part nor the
 non-exposed bodies of what it imports, so the walk found nothing and printed nothing (sorry-route.json was empty from
-2026-10-16 to 2026-10-17 and the batch tags fell back to the import closure). A plain file imports the full .olean.
+2026-10-16 to 2026-10-17 and the batch tags fell back to the import closure). 2026-10-20 (b69): it imports only `Lean`;
+importing the target failed for every target from 2026-10-19 17:24 (the twin modules Sheaf.X / WeilConjectures.X of the
+upstream sync declare the same names; a plain file loads both). The walk reads the project modules' compiled data
+itself (tools/sorry_route.lean, `SorryRoute.run`) and resolves a twin name within the importing module's closure.
+`commit` in the output is the commit of the published build the walk read; consumers treat as changed since the
+route (changed_since) the modules whose source differs from that commit (git), not those with a newer mtime: the
+upstream sync rewrote every file and 4397 modules counted as changed.
 
 Assumed results (the human, 2026-10-17): the Lean declarations a batch assumes (coord/assumed.tsv, tools/assumed.py; batch 5
 assumes Poincare duality and the Lefschetz trace formula) are axioms of that batch's walk: not descended into, and their
@@ -40,7 +46,7 @@ import hashlib, json, os, pathlib, re, subprocess, sys, time
 R = pathlib.Path(__file__).resolve().parent.parent
 SB = R / "lean" / ".sandbox" / "_sheaf"; SB.mkdir(parents=True, exist_ok=True)
 LIB = (R / "tools" / "sorry_route.lean").read_text()
-body = LIB[LIB.index("open Lean Meta"):]
+body = LIB[LIB.index("namespace SorryRoute"):]
 sys.path.insert(0, str(R / "tools"))
 import assumed  # noqa: E402
 
@@ -85,38 +91,37 @@ def walk(mod, stops=(), stop_mods=()):
     if stop_mods:
         tag += "_O" + hashlib.sha1("\n".join(stop_mods).encode()).hexdigest()[:8]
     f = SB / f"SorryRoute_{mod.replace('.', '_')}{tag}.lean"
-    stoplist = "[" + ", ".join(json.dumps(x) for x in stops) + "].map String.toName"
-    mods = declaring(mod)
-    names = ", ".join(f"`{m}" for m in mods)
-    extra, stoparg = "", f"({stoplist})"
-    if stop_mods:   # every constant of the stop modules that are loaded is a stop (not entered, not reported)
-        extra = (f"  let smis := [{', '.join(f'`{m}' for m in stop_mods)}].filterMap env.getModuleIdx?\n"
-                 f"  let sdecls := env.constants.map₁.toList.filterMap fun (n, _) =>\n"
-                 f"    if (env.getModuleIdxFor? n).any smis.contains then some n else none\n"
-                 f"  IO.println s!\"STOPDECLS {{smis.length}} {{sdecls.length}}\"\n")
-        stoparg = f"(({stoplist}) ++ sdecls)"
-    f.write_text(f"import Lean\nimport {mod}\n{body}\n#eval show MetaM Unit from do\n"
-                 f"  let env ← getEnv\n"
-                 f"  let mis := [{names}].filterMap env.getModuleIdx?\n"
-                 f"  if mis.length != {len(mods)} then throwError \"target modules not loaded\"\n"
-                 f"  let decls := env.constants.map₁.toList.filterMap fun (n, _) =>\n"
-                 f"    if (env.getModuleIdxFor? n).any mis.contains && !n.isInternalDetail then some n else none\n"
-                 f"  IO.println s!\"TARGETDECLS {{decls.length}}\"\n"
-                 + extra +
-                 f"  for (d, m) in (← sorryRoute decls {stoparg}) do IO.println s!\"ROUTE {{m}} {{d}}\"\n")
+    arr = lambda xs: "#[" + ", ".join(f"{json.dumps(x)}.toName" for x in xs) + "]"  # noqa: E731
+    # 2026-10-20 (b69): no `import {mod}` (the twin modules collide in one environment); the walk reads the .oleans
+    # of the target's project closure itself. Every constant of a loaded stop module is a stop (not entered, not reported).
+    f.write_text(f"import Lean\nopen Lean\n\n{body}\n#eval SorryRoute.run {arr(declaring(mod))} {arr(stops)} {arr(stop_mods)}\n")
     env = dict(os.environ, SHEAF_FILE_TIMEOUT="900")
     r = subprocess.run(["tools/lean_file.sh", str(f.relative_to(R))], cwd=R, env=env, capture_output=True, text=True,
                        timeout=1200)
     out = r.stdout + r.stderr
     nd = re.search(r"^TARGETDECLS (\d+)$", out, re.M)
     if r.returncode or not nd or int(nd.group(1)) == 0:
-        print(f"{mod}: walk failed (rc {r.returncode}): " + out.strip()[-600:], file=sys.stderr)
+        print(f"{mod}: walk failed (rc {r.returncode}): " + out.strip()[-3000:], file=sys.stderr)
         return None
     f.unlink(missing_ok=True)
     res = {}
     for m, d in re.findall(r"^ROUTE (\S+) (\S+)$", out, re.M):
         res.setdefault(m, set()).add(d)
     return res
+
+
+_COMMITS = {}   # route time -> commit of the build it read (changed_since)
+
+
+def build_commit():
+    """The commit of the published build whose .oleans the walk reads (local/builds/published.json), else HEAD."""
+    try:
+        c = json.loads((R / "local/builds/published.json").read_text()).get("commit")
+        if c: return c
+    except (OSError, ValueError):
+        pass
+    r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=R, capture_output=True, text=True)
+    return r.stdout.strip() or None
 
 
 def load():
@@ -128,12 +133,31 @@ def load():
         return None
     if not d.get("ok") or "batches" not in d:
         return None
-    return {"t": d["t"], "batches": {k: set(v) for k, v in d["batches"].items()}, "route": set(d["route"])}
+    _COMMITS[d["t"]] = d.get("commit")
+    return {"t": d["t"], "commit": d.get("commit"), "batches": {k: set(v) for k, v in d["batches"].items()}, "route": set(d["route"])}
 
 
 def changed_since(t, modules):
     """Modules whose source changed after the route was computed: a landing may have added a sorry the route does not
-    know yet (a split); consumers keep them until the next refresh (~/cc1/sorry-route-loop.sh after each green build)."""
+    know yet (a split); consumers keep them until the next refresh (~/cc1/sorry-route-loop.sh after each green build).
+    2026-10-20 (b69): "changed" means the source differs (git) from the commit of the build the route read; the file
+    mtime is used only for a route without a recorded commit (the upstream sync rewrote every file's mtime)."""
+    commit = _COMMITS.get(t)
+    if commit is None:
+        try:
+            d = json.loads((R / "local" / "sorry-route.json").read_text())
+            if d.get("t") == t: commit = d.get("commit")
+        except (OSError, ValueError):
+            pass
+    if commit:
+        r = subprocess.run(["git", "diff", "--name-only", "--no-renames", commit, "--", "lean"], cwd=R,
+                           capture_output=True, text=True)
+        u = subprocess.run(["git", "ls-files", "--others", "--exclude-standard", "--", "lean"], cwd=R,
+                           capture_output=True, text=True)
+        if r.returncode == 0:
+            paths = {p[len("lean/"):-len(".lean")].replace("/", ".") for p in (r.stdout + u.stdout).split()
+                     if p.startswith("lean/") and p.endswith(".lean")}
+            return set(modules) & paths
     out = set()
     for m in modules:
         p = R / "lean" / (m.replace(".", "/") + ".lean")
@@ -164,6 +188,7 @@ def main():
     if sys.argv[1:2] == ["--check"]:
         return check(int(sys.argv[2]), sys.argv[3:])
     ns = [int(a) for a in sys.argv[1:]] or open_batches()
+    commit = build_commit()   # before the walks: a build published meanwhile is newer than what they read
     route, batches, tgt, failed = {}, {}, {}, []
     walks = {}   # (module, assumptions) -> walk; tgt keeps the walks without assumptions
     assumed_by = {}
@@ -221,7 +246,7 @@ def main():
         if not bad:
             own[f"batch{n}"] = o
     srt = lambda d: {m: sorted(v) for m, v in sorted(d.items())}  # noqa: E731
-    out = {"t": time.time(), "ok": not failed, "failed": failed, "route": srt(route),
+    out = {"t": time.time(), "commit": commit, "ok": not failed, "failed": failed, "route": srt(route),
            "batches": {k: srt(v) for k, v in batches.items()}, "targets": {k: srt(v) for k, v in tgt.items()},
            "assumed": assumed_by, "own": {k: srt(v) for k, v in own.items()}, "own_failed": own_failed}
     (R / "local").mkdir(exist_ok=True)
