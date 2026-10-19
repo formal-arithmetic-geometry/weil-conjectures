@@ -26,102 +26,88 @@
  ],
  "proof": [
   {
-   "text": "First make the multiplication-tower condition concrete. Products of $A$-modules are exact: kernels and images are checked coordinatewise, and a tuple of elements in images has a tuple of preimages by choice. By [lem-weil-derived-limit-existence], products in $D(A)$ are termwise products and multiplication-tower derived limits exist. For any module $L$ and $f\\in A$, [def-weil-derived-limit] gives a triangle $T\\to(\\prod_{n\\geq1}L)[0]\\xrightarrow{\\Delta_f}(\\prod_{n\\geq1}L)[0]\\to T[1]$, where $\\Delta_f((a_n))=(a_n-fa_{n+1})$. By [lem-sf-derived-homology-long-exact], $H^0(T)=\\ker\\Delta_f$, $H^1(T)=\\operatorname{coker}\\Delta_f$, and all other cohomology vanishes. By [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to $0\\to T$, $T=0$ exactly when $\\Delta_f$ is bijective. Thus [def-weil-point-derived-complete-module-complex] says that $L$ is derived $I$-complete exactly when $\\Delta_f$ is bijective for every $f\\in I$. In particular, in a derived-complete module there is no nonzero sequence $(a_n)$ with $a_n=fa_{n+1}$.",
+   "text": "Products of modules are exact, verified by the forgetful functor to abelian groups. Apply [lem-weil-derived-limit-existence] to obtain countable products in D(A) preserved by every cohomology functor. For f in I, complete 1-s on the constant multiplication tower on M[0] to a Roos triangle [def-weil-derived-limit]. The first vertex is zero by [def-weil-point-derived-complete-module-complex], hence 1-s is an isomorphism by the distinguished-triangle zero-vertex criterion. Apply H^0, use H^0(M[0]) = M, and identify products of modules with sequences. Naturality identifies the resulting map with Delta_f(a)_n = a_n - f a_(n+1), so Delta_f is bijective. Only this direction of the criterion is needed.",
    "uses": [
     "lem-weil-derived-limit-existence",
     "def-weil-derived-limit",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
     "def-weil-point-derived-complete-module-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09BA, lemma-derived-complete-finite, use of derived completeness; multiplication-tower computation underlying Tag 091P, lemma-hom-from-Af"
+    "place": "Tag 09BA and Tag 091P, multiplication-tower computation"
    }
   },
   {
-   "text": "We will use cokernel closure, proved directly from step 1. Let $u:L\\to N$ be an $A$-linear map between derived $I$-complete modules, put $P=\\prod_{n\\geq1}L$, $Q=\\prod_{n\\geq1}N$, and let $U:P\\to Q$ act coordinatewise by $u$. For each $f\\in I$, the bijections $\\Delta_{f,L}$ and $\\Delta_{f,N}$ satisfy $\\Delta_{f,N}U=U\\Delta_{f,L}$, hence also $\\Delta_{f,N}^{-1}U=U\\Delta_{f,L}^{-1}$. Therefore both $\\Delta_{f,N}$ and its inverse preserve $U(P)$ and induce inverse maps on $Q/U(P)\\cong\\prod_{n\\geq1}(N/u(L))$; this canonical identification follows by coordinatewise lifting of quotient classes and the coordinatewise kernel calculation. The induced map is $\\Delta_{f,N/u(L)}$, so step 1 proves that $N/u(L)$ is derived $I$-complete.",
+   "text": "For a linear map g:X -> M where Delta_f is bijective on X and M, Delta_f is bijective on range(g): injectivity follows from M; for surjectivity lift a range-valued sequence to X, solve there, and apply g. If N is a submodule of M and Delta_f is bijective on both N and M, it is bijective on M/N. Surjectivity follows by lifting a sequence and solving in M. For injectivity, lift a kernel sequence to x in the product of M. Delta_f(x) lies in the product of N; solve it there to obtain y. Then Delta_f(x-y)=0, so x=y and the quotient sequence is zero.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091U, lemma-serre-subcategory, cokernel assertion of part (1), here verified directly using the multiplication-tower criterion of step 1"
+    "place": "Tag 091U, cokernel closure via the sequence criterion"
    }
   },
   {
-   "text": "For every finite integer $t\\geq0$, put $F=A^t$ with coordinatewise operations. It is ordinarily complete and separated: the canonical map $F\\to\\varprojlim_kF/I^kF$ is the product of $t$ copies of the assumed isomorphism $A\\to\\varprojlim_kA/I^k$ [def-weil-pbc-adic-completion]. Fix $f\\in I$. For a sequence $(b_n)$ in $F$, define $a_n\\in F$ by the compatible residues $a_n\\bmod I^kF=\\sum_{j=0}^{k-1}f^jb_{n+j}\\bmod I^kF$; compatibility holds since the added summand lies in $I^kF$. The equation $a_n-fa_{n+1}=b_n$ holds modulo every $I^kF$ and hence in $F$. Conversely $a_n=fa_{n+1}$ implies $a_n=f^ka_{n+k}\\in I^kF$ for every $k$, so $a_n=0$. Therefore $\\Delta_f$ is bijective and step 1 proves that $F$ is derived $I$-complete. This also covers $t=0$.",
+   "text": "For any ordinarily I-adically complete module N [def-weil-pbc-adic-completion] and f in I, Delta_f is bijective. The partial sums S(n,k)=sum_{j<k} f^j b_(n+j) are Cauchy since their tails belong to I^k N. Their limits a_n satisfy a_n-fa_(n+1)=b_n, using S(n,k+1)=b_n+f S(n+1,k) and separatedness. A kernel sequence satisfies a_n=f^k a_(n+k) for every k, so separatedness makes it zero.",
    "uses": [
     "def-weil-pbc-adic-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09BA, lemma-derived-complete-finite, finite free source over a complete ring; explicit geometric-series verification of Tag 091R, lemma-complete-derived-complete"
+    "place": "Tag 091R, lemma-complete-derived-complete, geometric-series argument"
    }
   },
   {
-   "text": "Choose $x_1,\\ldots,x_t\\in M$ whose residue classes generate $M/IM$, using the hypothesis and [def-weil-finitely-generated-module]. Define $q:F=A^t\\to M$ by $q(a_1,\\ldots,a_t)=\\sum_j a_jx_j$ and put $C=M/q(F)$. The source is derived complete by step 3 and the target by hypothesis; hence the cokernel argument of step 2 makes $C$ derived $I$-complete. For every $m\\in M$ the residue-generation assumption gives $m=\\sum_j a_jx_j+z$ with $z\\in IM$ (lift the residue coefficients to $A$). Consequently every class in $C$ lies in $IC$, so $C/IC=0$.",
-   "uses": [
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
+   "text": "Prove sequence Nakayama by induction on a finite set s of ideal generators. Assume Delta_f is bijective for every f in I and span(s) M=M. If s is empty then M=0. Otherwise choose f in s, put N=range(f:M -> M), and quotient by N. Step 2 gives the sequence conditions on M/N. The remaining generators span M/N because f acts as zero, so induction gives M/N=0. Thus multiplication by f on M is surjective. For m in M recursively choose preimages a_0=m and f a_(n+1)=a_n. Injectivity of Delta_f implies this sequence is zero, hence m=0.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09BA, lemma-derived-complete-finite, choice of residue generators and the cokernel of q"
+    "place": "Tag 09B9, lemma-derived-complete-zero, successive quotient argument"
    }
   },
   {
-   "text": "By [def-weil-pbc-noetherian-ring], choose generators $f_1,\\ldots,f_r$ of $I$, allowing $r=0$ when $I=0$. Define $C_0=C$ and $C_j=C/(f_1,\\ldots,f_j)C$ for $1\\leq j\\leq r$. Each $C_j$ is the cokernel of multiplication by $f_j$ on $C_{j-1}$, so induction using step 2 proves that every $C_j$ is derived $I$-complete. The equality $C=IC$ of step 4 gives $C_r=0$.",
+   "text": "Restrict the finite residue module from A/I to A using finiteness of A/I over A. Lift its finite generators to M and let N be their A-span [def-weil-finitely-generated-module]. Their images span M/IM, hence N+IM=M. The ring is ordinarily complete [def-weil-pbc-adically-complete-ring], so [lem-weil-pbc-finite-module-complete-over-complete-noetherian] makes the finite module N complete. Step 3 gives its sequence conditions; steps 1 and 2 give those on M/N. The residue-generation equality gives I(M/N)=M/N. Choose a finite generating set of I by [def-weil-pbc-noetherian-ring] and apply step 4. Thus M/N=0, N=M, and M is finite.",
    "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
     "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09B9, lemma-derived-complete-zero, proof by successive quotients; used in Tag 09BA"
+    "place": "Tag 09BA, residue-generator construction, specialized to A complete"
    }
   },
   {
-   "text": "Prove $C_j=0$ by descending induction from $j=r$ to $j=0$. If $C_j=0$ and $j\\geq1$, then $C_{j-1}/f_jC_{j-1}=0$, so multiplication by $f_j$ on $C_{j-1}$ is surjective. If $a_1\\neq0$ were in $C_{j-1}$, recursively choose $a_{n+1}$ with $f_ja_{n+1}=a_n$; this gives a nonzero element of $\\ker\\Delta_{f_j}$, contradicting step 1 since $C_{j-1}$ is derived complete and $f_j\\in I$. Hence $C_{j-1}=0$. Thus $C=0$, including the case $r=0$, where the initial equality $C_r=0$ already says this. The map $q$ is surjective, so the chosen $x_1,\\ldots,x_t$ generate $M$ over $A$ by [def-weil-finitely-generated-module].",
+   "text": "Apply [lem-weil-pbc-finite-module-complete-over-complete-noetherian] once more to the now finite module M over the complete Noetherian ring A. The equivalence between ordinary completeness and bijectivity of AdicCompletion.of identifies its conclusion with the canonical compatible-residue map asserted in the statement.",
    "uses": [
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09B9, lemma-derived-complete-zero, compatible-sequence contradiction, completing the finite-generation argument of Tag 09BA"
-   }
-  },
-  {
-   "text": "The ring $A$ is Noetherian by hypothesis and is $I$-adically complete in the sense of [def-weil-pbc-adically-complete-ring], since this is exactly the canonical-map assumption. Step 6 proves that $M$ is finite. Apply [lem-weil-pbc-finite-module-complete-over-complete-noetherian] with $(R,J,N)=(A,I,M)$. Its conclusion is precisely that $M\\to\\varprojlim_{n\\geq1}M/I^nM$, $m\\mapsto(m\\bmod I^nM)_n$, is bijective. This is an $A$-linear map to compatible sequences with coordinatewise operations, so its bijectivity is the asserted module isomorphism.",
-   "uses": [
-    "def-weil-pbc-adically-complete-ring",
-    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "def-weil-pbc-adic-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09BA, lemma-derived-complete-finite, final completeness conclusion; existing finite-module completion theorem"
+    "place": "Tag 09BA, final completeness conclusion"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-derived-limit-existence",
   "def-weil-derived-limit",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "def-weil-point-derived-complete-module-complex",
   "def-weil-pbc-adic-completion",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-weil-pbc-noetherian-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09BA, lemma-derived-complete-finite, specialized to A already complete; Tag 091U, lemma-serre-subcategory, cokernel closure expanded in elementary step 2; Tag 09B9, lemma-derived-complete-zero, expanded in steps 5-6"
+  "place": "Tags 09BA, 09B9, 091R and 091U; Z5 Lean proof specializes the source to a complete ring, uses the finite span of residue lifts instead of a finite free source, and obtains the sequence condition directly from invertibility in the Roos triangle."
  },
  "mathlib_searches": [
   {
@@ -286,8 +272,6 @@
  },
  "tool_uses": [
   "lem-weil-derived-limit-existence",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
  ],
  "reviewed": {
@@ -315,5 +299,15 @@
   "by": "Q28",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T034410-L-429021",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
