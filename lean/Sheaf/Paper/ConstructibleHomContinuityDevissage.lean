@@ -201,7 +201,28 @@ theorem constructibleHomContinuity_of_lisseGenerators
             ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj Λ) j).obj L)))) :
     constantModelBoundedConstructible (coefficientHeartRingObj Λ) X ≤
       complexHomContinuityLocus _ D := by
-  sorry
+  let P := complexHomContinuityLocus _ D
+  obtain ⟨hs, hi, he, _⟩ :=
+    constructibleHomContinuity_devissage (coefficientHeartRingObj Λ) X D
+  let : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ hi _ _ e h⟩
+  let : P.IsStableUnderShift ℤ :=
+    { isStableUnderShiftBy := fun n ↦ ⟨fun C h ↦ hs C n h⟩ }
+  let : IsNoetherian X := {}
+  intro C hC
+  obtain ⟨N, F, hlast, hF⟩ := (coefficientHeart_generation ℓ Λ hΛ X C).mp hC
+  have hmem : ∀ r, P (F r) := by
+    intro r
+    induction r using WellFoundedLT.induction with
+    | ind r ih =>
+      rcases hF r with ⟨S, a, ha, L, n, hL, ⟨e⟩⟩ | ⟨i, j, hir, hjr, n, f, g, h, hT⟩
+      · let : IsImmersion a := ha
+        let : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+        have hgen := hG S a.image a.toImage a.imageι L hL
+        exact hi _ _ e.symm (hs _ n hgen)
+      · have hcone := he _ (Pretriangulated.rot_of_distTriang _ hT) (ih j hjr)
+          (hs _ 1 (ih i hir))
+        exact (P.prop_shift_iff_of_isStableUnderShift (F r) n).mp hcone
+  exact hlast ▸ hmem (Fin.last N)
 
 end AlgebraicGeometry.ProEtale
 
