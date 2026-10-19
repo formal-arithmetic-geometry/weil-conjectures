@@ -25,80 +25,55 @@
  ],
  "proof": [
   {
-   "text": "Put $E_T=\\nu_T^*$ and let $\\alpha_T:E_TQ_T\\xrightarrow{\\sim}\\mathrm{id}$ be the chosen equivalence counit. For $M'\\in\\Dctf(X,A)$ and $N'\\in\\Dctf(Y,A)$ set $M=Q_XM'$ and $N=Q_YN'$. All objects used below are bounded, since the stated functors have the indicated $\\Dctf$ domains and codomains. The full faithfulness in [thm-weil-pbc-site-comparison], the assumed étale adjunction and the given $c_f$ give bijections\n$$\\Hom(M',E_XGN)\\simeq\\Hom(E_XM,E_XGN)\\simeq\\Hom(M,GN)\\simeq\\Hom(Rf^{\\mathrm{ét}}_!M,N)\\simeq\\Hom(E_YRf^{\\mathrm{ét}}_!M,E_YN)\\simeq\\Hom(Rf_!M',N').$$\nThe first map precomposes with $\\alpha_X(M')$; the last sends $h$ to $\\alpha_Y(N')\\circ h\\circ c_f(M)^{-1}\\circ Rf_!(\\alpha_X(M')^{-1})$. Each is natural: representing $u':M'_1\\to M'_2$ by $E_XQ_Xu'$ commutes with $\\alpha_X$ by its naturality, and representing $v':N'_1\\to N'_2$ by $E_YQ_Yv'$ commutes with $\\alpha_Y$. The two full-faithfulness bijections commute with composition; the other squares are precisely naturality of the étale adjunction and $c_f$. Thus the inverse of this chain is a natural adjunction Hom bijection for $Rf_!\\dashv E_XGQ_Y$.",
-   "uses": [
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Proof, first paragraph"
-   }
-  },
-  {
-   "text": "The counit is the image of $\\mathrm{id}_{G^{\\mathrm{pro}}N'}$ under the preceding chain. Using the equivalence triangle identities at $GQ_YN'$ yields\n$$\\varepsilon^{\\mathrm{pro}}_{N'}=\\alpha_Y(N')\\circ E_Y(\\varepsilon^{\\mathrm{ét}}_{Q_YN'})\\circ c_f(GQ_YN')^{-1}:Rf_!G^{\\mathrm{pro}}N'\\longrightarrow N'.$$\nFor $N'=E_YN$, identify $Q_YE_YN$ with $N$ using the inverse equivalence unit. The equivalence triangle identity and naturality of $\\varepsilon^{\\mathrm{ét}}$ and $c_f$ reduce the formula to\n$$\\varepsilon^{\\mathrm{pro}}_{E_YN}=E_Y(\\varepsilon^{\\mathrm{ét}}_N)\\circ c_f(GN)^{-1}.$$\nFor completeness, a natural Hom bijection gives its unit by transposing $\\mathrm{id}_{Rf_!M'}$ and its counit by transposing $\\mathrm{id}_{G^{\\mathrm{pro}}N'}$ in the opposite direction. Naturality implies that composing these two maps in either triangle transposes an identity to itself, so bijectivity gives the two triangle identities. This is the elementary Hom-bijection definition of adjunction, with the stated counit.",
+   "text": "Compose the supplied etale adjunction with eY.toAdjunction. Compose on the source with eX.symm.toAdjunction and transport the left functor along the natural isomorphism built from cf and eX.counitIso. Mathlib Adjunction.comp and ofNatIsoLeft construct the requested pro-etale adjunction. No additional full-faithfulness theorem is needed because the equivalences are explicit hypotheses.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Proof, first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "Check the coefficient identification before invoking Brown restriction. By [lem-weil-pbc-finite-discrete-condensed-ring-constant] the finite discrete ring $\\underline A$ is the sheafified constant ring on profinite sets. Apply [lem-weil-pbc-finite-discrete-scheme-ring-constant] with $B=A$: its input is exactly the preceding ring isomorphism, and it identifies $p_T^*\\underline A$ with the sheafified constant ring on $T_{\\mathrm{proét}}$. The ring in [def-weil-pbc-proetale-modules] is the same constant ring: a continuous function $\\pi_0(|U|)\\to A$ has finitely many clopen fibres, whose inverse images form a disjoint open cover of $U$, on each member of which it is constant. Equal constant functions have equal values on every nonempty member; on the empty object the empty cover applies. Thus sheafifying the constant-presheaf map to this function presheaf gives an isomorphism of rings. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal modules over this ring are ordinary module sheaves with the identical underlying abelian sheaf. Applying this equivalence and its inverse degreewise preserves kernels, cokernels and hence quasi-isomorphisms; the inverse functors and their isomorphisms descend through localization. This is the termwise derived equivalence stipulated in [sk-prop-sf-rf-shriek-preservation]. Its coefficient conventions therefore agree with the item.",
+   "text": "Expand ofNatIsoLeft_counit and comp_counit_app. Naturality of cf.inv and the inverse triangle identity of eX cancel the source-equivalence factors. At eY(N), counit_app_functor, naturality of the etale counit and naturality of cf.inv give exactly the displayed formula.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the finite-value bounded constructibility predicate with the source finite-stalk predicate using lem-weil-pbc-constructible-etale-module-sheaf-comparison and the equivalence between interval vanishing and t-boundedness. Mapping this equivalence through comparisonUpperStar identifies proEtaleProperty with the source constructibleFiniteTor. Its shift lemma proves shift stability of the generators. The Tor predicates coincide definitionally.",
    "uses": [
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-prop-sf-rf-shriek-preservation"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Proof, second paragraph: restriction theorem and counit-compatible uniqueness; the ambient comparison-class formula is not needed for the item."
-   }
+   "elementary": true
   },
   {
-   "text": "The hypotheses of [sk-prop-sf-existence] hold: $p>0$, $\\ell\\ne p$, separated finite-type $k$-schemes and morphism, finite commutative $\\ell$-primary $A$, and the fixed compactification. It gives $Rf_!\\dashv f^!$ on the localizing closures, using the coefficient identification of Step 3. The first two conclusions of [sk-prop-sf-rf-shriek-preservation] say that this $f^!$ preserves $\\Dctf$ and that the adjunction restricts there. In detail, [sk-def-localizing-closure] makes each closure a full ambient subcategory containing $\\Dctf$. For $M',N'$ in the latter full subcategories the ambient Hom sets and the Brown Hom sets are identical. The restricted bijection thus has exactly the original Brown counit. Write $J=f^!|_{\\Dctf}$.",
+   "text": "Given the Brown adjunction on localizing closures, transpose the counit of the already transported adjunction to a map alpha from its generator-valued right adjoint into the Brown right-adjoint value. On Hom from each shifted generator, naturality identifies composition with alpha with the composite of the two adjunction Hom bijections and the fully faithful inclusion Hom bijections. This is bijective. Complete alpha to a distinguished triangle. Its cone lies in the localizing closure, and Hom exactness, together with surjectivity in the original degree and injectivity after shifting, makes all maps from shifted generators to the cone zero. To see that such a cone is zero, put B equal to the right orthogonal of the shift closure of the generators and R equal to the left orthogonal of B. Mathlib orthogonal instances show R triangulated and replete; colimit.hom_ext proves closure under all existing coproducts. R contains the generators, hence the cone. The cone is also in B, so its identity is zero. Thus alpha is an isomorphism, and repleteness gives hJ. This replaces the separate geometric preservation theorem with a direct argument from the two supplied adjunctions.",
    "uses": [
-    "sk-prop-sf-existence",
-    "sk-prop-sf-rf-shriek-preservation",
     "sk-def-localizing-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Proof, second paragraph: restriction theorem and counit-compatible uniqueness; the ambient comparison-class formula is not needed for the item."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [det-sp-unique-right-adjoint] to the functor $F=Rf_!$ and its two right adjoints $G^{\\mathrm{pro}}$ (Steps 1–2) and $J$ (Step 4). The component $\\gamma_{N'}:G^{\\mathrm{pro}}N'\\to JN'$ is the $J$-transpose of $\\varepsilon^{\\mathrm{pro}}_{N'}$ and satisfies\n$$\\varepsilon^{\\mathrm{Brown}}_{N'}\\circ Rf_!(\\gamma_{N'})=\\varepsilon^{\\mathrm{pro}}_{N'}.$$\nThe cited statement makes these components natural, invertible and uniquely determined by this equation. This proves the unique counit-preserving identification with the Brown restriction.",
+   "text": "The two toLocalizing inclusions are fully faithful ιOfLE functors. The lower-shriek and right-adjoint squares commute definitionally. Apply Adjunction.restrictFullyFaithful. Its map_restrictFullyFaithful_counit_app identifies the restricted counit with exactly the Brown ambient counit.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply rightAdjointUniq to the transported adjunction and the restricted Brown adjunction. Its hom_app_counit equation, mapped through the full inclusion, is the desired ambient equation. Conversely injectivity of the inverse restricted Brown Hom equivalence forces any counit-compatible isomorphism to equal this one, componentwise.",
    "uses": [
     "det-sp-unique-right-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-    "place": "Proof, second paragraph: restriction theorem and counit-compatible uniqueness; the ambient comparison-class formula is not needed for the item."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-prop-sf-rf-shriek-preservation",
-  "sk-prop-sf-existence",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "sk-def-localizing-closure",
   "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/det-sp-et-proet-adjunction-transfer.proof.md",
-  "place": "Both proof paragraphs; explicit natural Hom chain, counit, finite-discrete coefficient identifications and Brown restriction."
+  "place": "Both proof paragraphs: adjunction transfer, counit and Brown identification. Brown generator preservation is proved directly by comparing the two supplied adjunctions and detecting the comparison on shifted generators; Mathlib triangulated orthogonals and Hom exactness supply the categorical tools.",
+  "group": "V5",
+  "date": "2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -406,5 +381,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Uses the ordinary constant-ring module-sheaf presentation, canonically equivalent to both the continuous-function coefficient module category and the finite-discrete internal module-object category. The exact finite-value etale constructibility predicate is used, not the different generic finitely-generated-stalk predicate. The comparison forward functors are constrained to the recorded termwise inverse images, and cf is constrained to the canonical proper-mate/open-extension compact-support comparison for the same chosen compactification. The Brown clause quantifies over its adjunction on the recorded localizing closure in this ordinary coefficient presentation, concludes finite-Tor constructible preservation, and gives the unique ambient counit-compatible natural isomorphism. No statement correction or missing mathematical notion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261019T034326-L-421448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

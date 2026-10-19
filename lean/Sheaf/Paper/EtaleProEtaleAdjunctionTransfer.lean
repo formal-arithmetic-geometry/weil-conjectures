@@ -13,13 +13,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.Paper.FiniteDiscreteCondensedRing
-import Sheaf.Paper.FiniteDiscreteSchemeRing
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
-import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Mathlib.CategoryTheory.Triangulated.Orthogonal
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 
 /-! # Transfer of finite-coefficient adjunctions
 
@@ -131,6 +128,177 @@ def brownRestriction {X Y : Scheme.{u}}
   (proEtaleProperty A X).lift
     (toLocalizing A Y ⋙ J ⋙ (CategoryTheory.localizingClosure (proEtaleProperty A X)).ι) h
 
+/-- Orthogonality to every shifted generator detects zero in its localizing closure.
+The left orthogonal of the right orthogonal of the shift closure is localizing,
+contains the generators, and hence contains the object being tested. -/
+private theorem isZero_of_generator_vanishing
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) (K : C) (hK : localizingClosure P K)
+    (hz : ∀ M, P M → ∀ n : ℤ, ∀ g : M⟦n⟧ ⟶ K, g = 0) : IsZero K := by
+  let B := (P.shiftClosure ℤ).rightOrthogonal
+  let R := B.leftOrthogonal
+  have hR : IsLocalizingSubcategory R := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I F hF hgen
+    let _ := hF
+    change R (colimit F)
+    intro Z g hZ
+    apply colimit.hom_ext
+    intro i
+    rw [comp_zero]
+    exact hgen i.as (colimit.ι F i ≫ g) hZ
+  have hPR : P ≤ R := by
+    intro M hM N g hN
+    exact hN g (P.le_shiftClosure _ hM)
+  have hBK : B K := by
+    intro M g hM
+    obtain ⟨L, n, e, hL⟩ := hM
+    apply (cancel_epi e.inv).1
+    simpa using hz L hL n (e.inv ≫ g)
+  exact (IsZero.iff_id_eq_zero K).2 (hK R hR hPR (𝟙 K) hBK)
+
+/-- A map between objects of the localizing closure is an isomorphism when every
+shifted generator sees a bijection. Its cone lies in the closure and is orthogonal
+to the shifted generators by the exact Hom sequence. -/
+private theorem isIso_of_generator_bijective
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) {H Y : C} (c : H ⟶ Y)
+    (hH : localizingClosure P H) (hY : localizingClosure P Y)
+    (hbij : ∀ (M : C), P M → ∀ m : ℤ,
+      Function.Bijective (fun a : M⟦m⟧ ⟶ H ↦ a ≫ c)) : IsIso c := by
+  have hbijshift (M : C) (hM : P M) (m n : ℤ) :
+      Function.Injective (fun a : M⟦m⟧ ⟶ H⟦n⟧ ↦ a ≫ c⟦n⟧') := by
+    let K := M⟦m⟧
+    let adj := (shiftEquiv' C (-n) n (neg_add_cancel n)).toAdjunction
+    let e : M⟦m + -n⟧ ≅ K⟦-n⟧ := (shiftFunctorAdd C m (-n)).app M
+    have hinj (a b : K⟦-n⟧ ⟶ H) (hab : a ≫ c = b ≫ c) : a = b := by
+      apply (cancel_epi e.hom).mp
+      apply (hbij M hM (m + -n)).1
+      simpa only [Category.assoc] using congrArg (fun k ↦ e.hom ≫ k) hab
+    intro a b hab
+    apply (adj.homEquiv K H).symm.injective
+    apply hinj
+    have hh := congrArg (adj.homEquiv K Y).symm hab
+    change (adj.homEquiv K Y).symm
+      (a ≫ (shiftEquiv' C (-n) n (neg_add_cancel n)).inverse.map c) =
+      (adj.homEquiv K Y).symm
+        (b ≫ (shiftEquiv' C (-n) n (neg_add_cancel n)).inverse.map c) at hh
+    rw [adj.homEquiv_naturality_right_symm,
+      adj.homEquiv_naturality_right_symm] at hh
+    exact hh
+  obtain ⟨D, d, δ, hd⟩ := Pretriangulated.distinguished_cocone_triangle c
+  have hD : localizingClosure P D := by
+    intro Q hQ hPQ
+    let _ := hQ.1
+    let _ := hQ.2.1
+    exact Q.ext_of_isTriangulatedClosed₃ _ hd (hH Q hQ hPQ) (hY Q hQ hPQ)
+  have hz : IsZero D := isZero_of_generator_vanishing P D hD (by
+    intro M hM m a
+    have hδ : a ≫ δ = 0 := by
+      apply hbijshift M hM m 1
+      have hzero := Pretriangulated.comp_distTriang_mor_zero₃₁ _ hd
+      change δ ≫ c⟦(1 : ℤ)⟧' = 0 at hzero
+      simp only [Category.assoc, hzero, comp_zero, zero_comp]
+    obtain ⟨b, hb⟩ := Pretriangulated.Triangle.coyoneda_exact₃ _ hd a hδ
+    obtain ⟨b', hb'⟩ := (hbij M hM m).2 b
+    have hcd : c ≫ d = 0 := Pretriangulated.comp_distTriang_mor_zero₁₂ _ hd
+    change a = b ≫ d at hb
+    rw [hb, ← hb', Category.assoc, hcd, comp_zero])
+  exact (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hd).mp hz
+
+/-- Compare the two adjoints by transposing the small counit under the large
+adjunction. Naturality identifies composition with this map with the composite
+of the two Hom equivalences. Shifted generators therefore detect an isomorphism. -/
+private theorem rightAdjoint_preserves_generators
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {D : Type u} [Category D] [HasZeroObject D] [HasShift D ℤ]
+    [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    [P.IsStableUnderShift ℤ] [P.IsClosedUnderIsomorphisms]
+    (F : C ⥤ D) (hF : ∀ M, P M → Q (F.obj M))
+    (hLoc : ∀ M, localizingClosure P M → localizingClosure Q (F.obj M))
+    (G : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adSmall : Q.lift (P.ι ⋙ F) (fun M ↦ hF M.obj M.property) ⊣ G)
+    (J : (localizingClosure Q).FullSubcategory ⥤ (localizingClosure P).FullSubcategory)
+    (adBig : (localizingClosure Q).lift ((localizingClosure P).ι ⋙ F)
+      (fun M ↦ hLoc M.obj M.property) ⊣ J)
+    (N : Q.FullSubcategory) :
+    P (J.obj ((ObjectProperty.ιOfLE
+      (fun M hM _R _hR hgen ↦ hgen M hM)).obj N)).obj := by
+  let iP : P.FullSubcategory ⥤ (localizingClosure P).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun M hM _R _hR hgen ↦ hgen M hM)
+  let iQ : Q.FullSubcategory ⥤ (localizingClosure Q).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun M hM _R _hR hgen ↦ hgen M hM)
+  let V := G.obj N
+  let α : (iP.obj V) ⟶ J.obj (iQ.obj N) :=
+    adBig.homEquiv _ _ (iQ.map (adSmall.counit.app N))
+  have hi : IsIso α.hom := isIso_of_generator_bijective P α.hom (iP.obj V).property
+    (J.obj (iQ.obj N)).property (by
+      intro K hK n
+      let M : P.FullSubcategory := ⟨K⟦n⟧, P.le_shift n K hK⟩
+      let e : (K⟦n⟧ ⟶ V.obj) ≃ (K⟦n⟧ ⟶ (J.obj (iQ.obj N)).obj) :=
+        (P.fullyFaithfulι.homEquiv (X := M) (Y := V)).symm |>.trans
+          ((adSmall.homEquiv M N).symm |>.trans
+            ((ObjectProperty.fullyFaithfulιOfLE _).homEquiv |>.trans
+              (adBig.homEquiv (iP.obj M) (iQ.obj N) |>.trans
+                ((localizingClosure P).fullyFaithfulι.homEquiv))))
+      have he (g : K⟦n⟧ ⟶ V.obj) : e g = g ≫ α.hom := by
+        change (adBig.homEquiv (iP.obj M) (iQ.obj N) (iQ.map
+          ((adSmall.homEquiv M N).symm (ObjectProperty.homMk g)))).hom = _
+        rw [Adjunction.homEquiv_counit]
+        exact congrArg (fun f ↦ f.hom)
+          (adBig.homEquiv_naturality_left (iP.map (ObjectProperty.homMk (X := M) (Y := V) g))
+            (iQ.map (adSmall.counit.app N)))
+      have heq : (fun g : K⟦n⟧ ⟶ V.obj ↦ g ≫ α.hom) = e :=
+        funext (fun g ↦ (he g).symm)
+      change Function.Bijective (fun g : K⟦n⟧ ⟶ V.obj ↦ g ≫ α.hom)
+      rw [heq]
+      exact e.bijective)
+  let _ := hi
+  exact P.prop_of_iso (asIso α.hom) V.property
+
+private theorem boundedConstructible_iff (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    Etale.DerivedCategory.isBoundedConstructible A T K ↔
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) T K := by
+  constructor
+  · rintro ⟨hc, a, b, hab, hz⟩
+    refine ⟨(DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).1
+      ⟨a, b, ?_, ?_⟩, fun i ↦
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc i)⟩
+    · exact (DerivedCategory.isGE_iff K a).2 (fun i hi ↦ hz i (Or.inl hi))
+    · exact (DerivedCategory.isLE_iff K b).2 (fun i hi ↦ hz i (Or.inr hi))
+  · intro h
+    obtain ⟨a, b, ha, hb⟩ :=
+      (DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).2 h.1
+    refine ⟨fun i ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (h.2 i),
+      min a b, b, min_le_right _ _, ?_⟩
+    intro i hi
+    rcases hi with hi | hi
+    · exact (DerivedCategory.isGE_iff K a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (DerivedCategory.isLE_iff K b).1 hb i hi
+
+private theorem proEtaleProperty_iff (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) :
+    ProEtale.AdjunctionTransfer.proEtaleProperty A T K ↔
+      ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) T K := by
+  constructor
+  · rintro ⟨⟨L, hL, e⟩, hTor⟩
+    exact ⟨⟨L, (boundedConstructible_iff A T L).1 hL, e⟩, hTor⟩
+  · rintro ⟨⟨L, hL, e⟩, hTor⟩
+    exact ⟨⟨L, (boundedConstructible_iff A T L).2 hL, e⟩, hTor⟩
+
+private theorem proEtaleProperty_stableUnderShift
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :
+    (ProEtale.AdjunctionTransfer.proEtaleProperty A T).IsStableUnderShift ℤ := by
+  refine ⟨fun n ↦ ⟨fun K hK ↦ ?_⟩⟩
+  exact (proEtaleProperty_iff A T _).2
+    (ProEtale.DerivedCategory.constructibleFiniteTor.shift ((proEtaleProperty_iff A T K).1 hK) n)
+
 /-- Transfer the etale adjunction with its prescribed counit, and identify it uniquely
 with the restriction of the Brown adjoint. The equivalence equalities ensure that the
 forward functors are the actual restricted comparison inverse images. The equation
@@ -153,15 +321,17 @@ Proof:
    by E_Y(epsilon_et at Q_Y N'), followed by the equivalence counit at N'. At E_Y N,
    the equivalence triangle identity gives the displayed formula using the inverse
    equivalence unit at N. The Hom equivalence gives both adjunction triangle identities.
-3. Identify finite discrete condensed coefficients with constant ring sheaves using
-   lem-weil-pbc-finite-discrete-condensed-ring-constant and
-   lem-weil-pbc-finite-discrete-scheme-ring-constant. The clopen-fibre argument identifies
-   these with def-weil-pbc-proetale-modules, including empty objects. The section-action
-   equivalence def-weil-pbc-internal-abelian-sheaf-module-equivalence is exact termwise,
-   so identifies the ordinary derived categories with the module-object categories.
-4. sk-prop-sf-existence supplies the Brown adjunction on the localizing closures.
-   sk-prop-sf-rf-shriek-preservation makes its right adjoint preserve Dctf and restricts
-   the adjunction. Fullness of both inclusions retains exactly the Brown counit.
+3. The source comparison of finite-value and finite-stalk constructibility identifies
+   the generator property with the source's constructibleFiniteTor, so it is stable
+   under shifts. Given a Brown adjunction, transpose the transported small counit
+   to obtain a map from the small right-adjoint value to the Brown value. On Hom
+   from every shifted generator, this is the composite of the two adjunction
+   bijections. Its cone belongs to the localizing closure and is right orthogonal
+   to all shifted generators, hence zero: the left orthogonal of that right
+   orthogonal is localizing and contains the generators. Thus the comparison is
+   an isomorphism and Brown preserves the generators.
+4. Restrict the supplied Brown adjunction along the fully faithful inclusions.
+   Fullness of both inclusions retains exactly the Brown counit.
 5. det-sp-unique-right-adjoint transposes the two counits to mutually inverse natural
    transformations. Injectivity of the Brown Hom equivalence proves uniqueness of
    the counit-preserving isomorphism, with precisely the displayed ambient equation. -/
@@ -218,6 +388,92 @@ theorem etaleProEtaleAdjunctionTransfer
                   ((γ.hom.app N).hom) ≫
                 (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom =
               (adjPro.counit.app N).hom) := by
-  sorry
+  classical
+  let e := eX
+  let ac : (etaleLowerShriek A c hEt) ⋙ eY.functor ⊣ eY.inverse ⋙ G :=
+    adjEt.comp eY.toAdjunction
+  let j : e.inverse ⋙ ((etaleLowerShriek A c hEt) ⋙ eY.functor) ≅
+      proEtaleLowerShriek A c hPro :=
+    Functor.isoWhiskerLeft e.inverse cf ≪≫
+      (Functor.associator e.inverse e.functor (proEtaleLowerShriek A c hPro)).symm ≪≫
+      Functor.isoWhiskerRight e.counitIso (proEtaleLowerShriek A c hPro) ≪≫
+      Functor.leftUnitor (proEtaleLowerShriek A c hPro)
+  let adjPro : proEtaleLowerShriek A c hPro ⊣
+      eY.inverse ⋙ G ⋙ eX.functor :=
+    (e.symm.toAdjunction.comp ac).ofNatIsoLeft j
+  refine ⟨adjPro, ?_, ?_⟩
+  · intro N
+    rw [Adjunction.ofNatIsoLeft_counit]
+    change j.inv.app (eX.functor.obj (G.obj (eY.inverse.obj (eY.functor.obj N)))) ≫
+      (e.symm.toAdjunction.comp ac).counit.app (eY.functor.obj N) = _
+    rw [Adjunction.comp_counit_app]
+    change j.inv.app _ ≫
+      ((etaleLowerShriek A c hEt) ⋙ eY.functor).map (e.unitIso.inv.app _) ≫
+      ac.counit.app (eY.functor.obj N) = _
+    dsimp [j]
+    simp only [Category.id_comp, Category.comp_id, Category.assoc]
+    change (proEtaleLowerShriek A c hPro).map (e.counitIso.inv.app _) ≫
+      cf.inv.app _ ≫ ((etaleLowerShriek A c hEt) ⋙ eY.functor).map
+        (e.unitIso.inv.app _) ≫ ac.counit.app _ = _
+    rw [← cf.inv.naturality_assoc]
+    simp only [Functor.comp_map]
+    rw [← Functor.map_comp_assoc]
+    simp only [e, Equivalence.counitIso_functor_comp, Functor.id_obj]
+    rw [(proEtaleLowerShriek A c hPro).map_id, Category.id_comp]
+    dsimp [ac]
+    rw [Adjunction.comp_counit_app]
+    change cf.inv.app _ ≫ eY.functor.map (adjEt.counit.app _) ≫
+      eY.counitIso.hom.app (eY.functor.obj N) = _
+    rw [eY.counit_app_functor]
+    rw [← eY.functor.map_comp]
+    have hn := adjEt.counit.naturality (eY.unitIso.inv.app N)
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    erw [← hn]
+    rw [eY.functor.map_comp]
+    erw [← cf.inv.naturality_assoc]
+    rfl
+  · intro hLoc J adjBrown
+    have hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory,
+        proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj) := by
+      have : (proEtaleProperty A X).IsStableUnderShift ℤ := proEtaleProperty_stableUnderShift A X
+      exact rightAdjoint_preserves_generators (proEtaleProperty A X) (proEtaleProperty A Y)
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
+        hPro hLoc (eY.inverse ⋙ G ⋙ eX.functor) adjPro J adjBrown
+    let commL : toLocalizing A X ⋙ localizingLowerShriek A c hLoc ≅
+        proEtaleLowerShriek A c hPro ⋙ toLocalizing A Y := Iso.refl _
+    let commR : toLocalizing A Y ⋙ J ≅ brownRestriction A J hJ ⋙ toLocalizing A X :=
+      Iso.refl _
+    let adjSmall : proEtaleLowerShriek A c hPro ⊣ brownRestriction A J hJ :=
+      adjBrown.restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulιOfLE _)
+        (ObjectProperty.fullyFaithfulιOfLE _) commL commR
+    have hc (N : (proEtaleProperty A Y).FullSubcategory) :
+        (adjSmall.counit.app N).hom =
+          (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom := by
+      have hh := adjBrown.map_restrictFullyFaithful_counit_app
+        (ObjectProperty.fullyFaithfulιOfLE _)
+        (ObjectProperty.fullyFaithfulιOfLE _) commL commR N
+      change (toLocalizing A Y).map (adjSmall.counit.app N) =
+        𝟙 _ ≫ (localizingLowerShriek A c hLoc).map (𝟙 _) ≫
+          adjBrown.counit.app ((toLocalizing A Y).obj N) at hh
+      rw [(localizingLowerShriek A c hLoc).map_id] at hh
+      simp only [Category.id_comp] at hh
+      exact congrArg (fun g ↦ g.hom) hh
+    refine ⟨hJ, adjPro.rightAdjointUniq adjSmall, ?_, ?_⟩
+    · intro N
+      rw [← hc]
+      exact congrArg (fun g ↦ g.hom)
+        (adjPro.rightAdjointUniq_hom_app_counit adjSmall N)
+    · intro γ hγ
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      apply (adjSmall.homEquiv _ _).symm.injective
+      rw [Adjunction.homEquiv_symm_rightAdjointUniq_hom_app]
+      apply (proEtaleProperty A Y).ι.map_injective
+      change (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+        ((γ.hom.app N).hom) ≫ (adjSmall.counit.app N).hom = _
+      rw [hc]
+      exact hγ N
 
 end AlgebraicGeometry.ProEtale.AdjunctionTransfer
