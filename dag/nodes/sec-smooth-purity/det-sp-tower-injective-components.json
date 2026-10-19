@@ -89,12 +89,12 @@
    }
   },
   {
-   "text": "By exactness of evaluation in [det-sp-coefficient-towers-abelian], $C_n\\to I_n^\\cdot$ is a quasi-isomorphism and $I_n^\\cdot$ has the same lower bound as the tower resolution. Each term is $g_*$-acyclic by step 5. Apply [src-right-derived-functor-plus-acyclic-unit] to the additive left exact finite-level functor $g_*$ of [def-weil-pbc-proetale-operations]: it identifies $g_*I_n^\\cdot$ with $R^+g_*I_n^\\cdot$, hence with $R^+g_*C_n$. The module categories are abelian with enough injectives by step 1. This bounded-below derived functor agrees with the ordinary derived direct image in the statement: a bounded-below complex of injectives is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so its image computes both constructions. The isomorphism uses the derived unit, and is natural.",
+   "text": "By exactness of evaluation in [det-sp-coefficient-towers-abelian], the evaluated injective tower complex is bounded below. Each term is finite-level direct-image acyclic by step 5. Apply [src-right-derived-functor-plus-acyclic-unit] to obtain invertibility of the specified finite-level derived unit. Exact evaluation itself has invertible derived unit by [src-sbc-exact-functor-plus-unit]. For an arbitrary supplied resolution isomorphism, compose the finite-level unit, the image of the exact evaluation unit, and the derived image of the inverse resolution isomorphism. Each factor is invertible; asIso of this precise composite proves the required normalized resolution computation.",
    "uses": [
     "det-sp-coefficient-towers-abelian",
     "src-right-derived-functor-plus-acyclic-unit",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-bounded-below-injectives-kinjective"
+    "src-sbc-exact-functor-plus-unit"
    ],
    "elementary": false,
    "source": {
@@ -103,11 +103,12 @@
    }
   },
   {
-   "text": "The levelwise tower direct image defined in the statement is additive and left exact: both properties are checked at each level, using the section formula of [def-weil-pbc-proetale-operations] and the levelwise kernels of [det-sp-coefficient-towers-abelian]. Its source has enough injectives by step 1. Clause (2) of [lem-weil-pbc-right-derived-plus-injective] therefore represents $Rg_{*,\\bullet}C_\\bullet$ by $g_{*,\\bullet}I_\\bullet^\\cdot$. Exact evaluation gives its level-$n$ representative $g_*I_n^\\cdot$. Step 6 identifies this complex with $Rg_{*,\\mathcal O_E/\\ell^n}C_n$, proving the displayed isomorphism. The comparison is the one induced by the underived evaluation identity and the derived units. Their naturality, and the uniqueness clause (3) of the same right-derived-functor node, make it independent of the injective resolution and natural in $C_\\bullet$.",
+   "text": "For the concrete product-site tower pushforward, coefficient naturality follows from the sheafification adjunction, assembled by NatTrans.ofOpSequence and uncurrying. Continuous sheaf pushforward preserves the vertical sheaf condition. Finite limits of module presheaves are pointwise; the vertical sheaf condition is closed under them because limits of sheaves are sheaves. Thus the full-subcategory inclusion preserves finite limits. Pointwise scalar restriction proves that presheaf pushforward preserves them, and reflection by the target full-subcategory inclusion proves that tower pushforward does too. Additivity follows from finite-product preservation. The section normalizations in [det-sp-coefficient-towers-abelian] identify the two underived evaluation section modules. Their restriction and morphism normalizations show that the identity on sections assembles into a natural linear isomorphism. Sectionwise faithfulness gives its uniqueness. The levelwise tower direct image defined in the statement is additive and left exact: both properties are checked at each level, using the section formula of [def-weil-pbc-proetale-operations] and the levelwise kernels of [det-sp-coefficient-towers-abelian]. Its source has enough injectives by step 1. Clause (2) of [lem-weil-pbc-right-derived-plus-injective] therefore represents $Rg_{*,\\bullet}C_\\bullet$ by $g_{*,\\bullet}I_\\bullet^\\cdot$. Exact evaluation gives its level-$n$ representative $g_*I_n^\\cdot$. Step 6 identifies this complex with $Rg_{*,\\mathcal O_E/\\ell^n}C_n$, proving the displayed isomorphism. The comparison is the one induced by the underived evaluation identity and the derived units. Their naturality, and the uniqueness clause (3) of the same right-derived-functor node, make it independent of the injective resolution and natural in $C_\\bullet$. In Lean, the composite tower-push/evaluation unit is invertible on injective complexes because the tower-push unit is invertible there and exact evaluation has an invertible unit everywhere, by [src-sbc-exact-functor-plus-unit]. For evaluation followed by finite-level push, step 5 and the acyclic composition theorem give the other right derived functor. Transport along the underived homotopy comparison using rightDerivedNatIso. Its unit equation gives the displayed compatibility, and rightDerived_ext gives uniqueness. The right-derived uniqueness argument is proved first as a private lemma for abstract abelian categories and then instantiated, so kernel checking does not repeatedly unfold the concrete tower categories.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "det-sp-coefficient-towers-abelian",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-sbc-exact-functor-plus-unit"
    ],
    "elementary": false,
    "source": {
@@ -127,17 +128,17 @@
   "det-sp-tower-evaluation-adjoint",
   "lem-sc-injective-module-abelian-acyclic-zariski",
   "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
   "sk-def-sp-coefficient-towers",
-  "src-right-derived-functor-plus-acyclic-unit"
+  "src-right-derived-functor-plus-acyclic-unit",
+  "src-sbc-exact-functor-plus-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
-  "place": "All three paragraphs, with Stacks 03FD and 015E supplying the cited general tools and elementary finite-product/sheaf-exactness details written out"
+  "place": "All three paragraphs, with Stacks 03FD and 015E supplying the cited general tools and elementary finite-product/sheaf-exactness details written out; X8 stage 3 formalization: direct D+ acyclic-unit and exact-unit computations, and uniqueness of the composite right derived functors; no separate K-injectivity argument is needed by these D+ declarations. X8 continuation also proves pointwise finite-limit preservation and the unique identity-on-sections underived evaluation comparison from the published section, restriction and morphism normalizations. The final derived uniqueness proof is factored through a fully proved private generic lemma for efficient kernel checking."
  },
  "mathlib_searches": [
   {
@@ -320,8 +321,7 @@
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sc-injective-module-abelian-acyclic-zariski",
   "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-weil-pbc-bounded-below-injectives-kinjective"
+  "src-right-derived-functor-plus-acyclic-unit"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -393,5 +393,15 @@
   "group": "Q96",
   "result": "pass",
   "note": "Read node, 8 stmt_deps and their Lean records, full module, report, side-clone declarations (SpCoefficientTowersAbelian HEq normalizations, systemLevel/systemRestriction, rightAcyclic, coefficientProEtaleModuleDirectImage). Every clause matches: Fin(r+1) retract onto restricted injective J_n (paper levels 1..r+1), section and g_*-acyclicity via Functor.rightAcyclic (def-sp-acyclic record), real product-site tower pushforward via canonical constant-section ring map, D+ rightDerivedFunctorPlus with unit-pinned resolution computation and a unique unit-compatible natural comparison (checked true). No added hypotheses or universe restriction; witnesses dT/dS are published inhabited data. No hollow defs, all theorems sorry, docstrings with source/blueprint tag, lines <=100. Node differs only in lean and stmt_deps (+landed def-weil-proetale-inverse-image, permitted); lean.statement verbatim. nt_compile --json exit 0, 21.5 s, no errors/warnings (negative control fails as expected). Non-blocking notes: second-reading section is the post-10-17 stub; the def-weil-proetale-inverse-image record could list the universe-independent coefficientProEtaleModuleDirectImage."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261019T034351-L-425863",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
