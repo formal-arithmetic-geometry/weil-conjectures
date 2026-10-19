@@ -661,7 +661,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedPullbackUnitTower` | - | 3 | proof | 3 |
 | `Sheaf.Paper.CompletedStalkFrobeniusReduction` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompositeIntegrationCounit` | - | 6 | proof | 3 |
-| `Sheaf.Paper.CondensedCompactSupportProjection` | - | 9 | proof | 3 |
+| `Sheaf.Paper.CondensedCompactSupportProjection` | - | 8 | proof | 3 |
 | `Sheaf.Paper.DerivedAutomorphismHomEvaluation` | - | 44 | proof | 3 |
 | `Sheaf.Paper.FilteredCoefficientTensorBounds` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteProjectionActionLaws` | - | 8 | proof | 3 |
