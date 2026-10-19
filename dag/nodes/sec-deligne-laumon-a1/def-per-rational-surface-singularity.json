@@ -2,7 +2,7 @@
  "id": "def-per-rational-surface-singularity",
  "kind": "definition",
  "title": "Rational surface singularities and bounded modification genus",
- "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian normal Nagata local domain of Krull dimension $2$ [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], [def-weil-pbc-nagata-ring], [def-weil-pbc-krull-dimension-ring]. A normal modification of $\\operatorname{Spec}R$ is a proper morphism $g:Z\\to\\operatorname{Spec}R$ with $Z$ integral and normal, inducing an isomorphism of function fields [def-weil-affine-spectrum], [def-weil-proper-morphism], [def-pc-integral-scheme], [def-sc-function-field]. Say that $R$ defines a rational singularity if $H^1(Z_{\\rm Zar},\\mathcal O_Z)=0$ for every such modification [def-sc-zariski-cohomology]. Say that reduction to rational singularities is possible for $R$ if there exists an integer $b\\geq0$ such that $\\operatorname{length}_R H^1(Z_{\\rm Zar},\\mathcal O_Z)\\leq b$ for every such modification, with module length as in [def-weil-pbc-module-length].",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian normal Nagata local domain of Krull dimension $2$ [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], [def-weil-pbc-nagata-ring], [def-weil-pbc-krull-dimension-ring]. A normal modification of $\\operatorname{Spec}R$ is a proper morphism $g:Z\\to\\operatorname{Spec}R$ with $Z$ integral and normal, inducing an isomorphism of function fields [def-weil-affine-spectrum], [def-weil-proper-morphism], [def-pc-integral-scheme], [def-sc-function-field]. Say that $R$ defines a rational singularity if $H^1(Z_{\\rm Zar},\\mathcal O_Z)=0$ for every such modification [def-sc-zariski-cohomology]. Say that reduction to rational singularities is possible for $R$ if there exists an integer $b\\geq0$ such that $\\operatorname{length}_R H^1(Z_{\\rm Zar},\\mathcal O_Z)\\leq b$ for every such modification, with module length as in [def-weil-pbc-module-length]. Here $\\mathfrak m$ is the unique maximal ideal of $R$, and an integral domain is a nonzero commutative ring with no zero divisors. Normality of $Z$ means that every local ring $\\mathcal O_{Z,z}$ is a normal domain, namely integrally closed in its field of fractions [def-weil-pbc-normal-ring]. The $R$-module structure on $H^1(Z_{\\rm Zar},\\mathcal O_Z)$ is induced by the multiplication endomorphisms of $\\mathcal O_Z$ coming from $g$ and elements of $R$.",
  "source": {
   "document": "literature/stacks-project/resolve.tex",
   "place": "Tag 0B4N, resolve-definition-reduce-to-rational; modification convention recalled at the start of section-rational."
@@ -23,6 +23,34 @@
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "rational singularity definition via H^1 of every normal modification",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsIntegral; AlgebraicGeometry.IsReduced; Algebra.smoothLocus; AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.isReduced_of_isIntegral; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced. None states rational surface singularities.",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern integral/reduced schemes, normalization, or smooth loci and do not state the definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded length H^1 structure sheaf normal proper birational modifications",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Hom.normalization; normalizationDiagram; toNormalization; instQuasiCompactToNormalization; instIsIntegralHomFromNormalization; instIsDominantToNormalization; fromNormalization; instIsIntegralNormalization. None states bounded cohomology lengths.",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization declarations do not state the surface-singularity boundedness definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rational\" \"singularity\"",
+   "results": "[loogle] OK 0 hit(s); diagnostic: Function expected at \"rational\" but this term has type String.",
+   "date": "2026-10-19",
+   "verdict": "query error: malformed Loogle pattern; not evidence of absence. Retained for provenance; subsequent valid Loogle search recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.{0,20}singular|normal modification [Mathlib]",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: no matching Mathlib source text"
+  },
   {
    "tool": "leanfinder",
    "query": "A normal local surface singularity is rational if every normal proper birational model has vanishing first structure sheaf cohomology",
@@ -57,10 +85,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.{0,20}singular|normal modification",
+   "results": "0 hits: none",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern formal smoothness and cotangent cohomology, structure-sheaf sections, or proper integral group schemes, not rational surface singularities or bounded modification genus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "rational singularities defined by vanishing first structure sheaf cohomology on every normal modification of a two dimensional normal Nagata local domain",
+   "results": "8 hits: Algebra.FormallySmooth.subsingleton_h1Cotangent; Algebra.FormallySmooth.iff_subsingleton_and_projective; AlgebraicGeometry.structureSheafInType; AlgebraicGeometry.StructureSheaf.IsFraction; Algebra.formallyEtale_iff; Algebra.FormallySmooth.mk; Algebra.FormallySmooth.casesOn; Algebra.IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern formal smoothness and cotangent cohomology, structure-sheaf sections, or proper integral group schemes, not rational surface singularities or bounded modification genus"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNormal, AlgebraicGeometry.IsProper",
+   "results": "0 hits: none; loogle: unknown identifier 'AlgebraicGeometry.IsNormal'",
+   "date": "2026-10-19",
+   "verdict": "query error: unknown identifier; not evidence of absence; subsequent valid pattern recorded"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProper",
+   "results": "1 hits: AlgebraicGeometry.isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern formal smoothness and cotangent cohomology, structure-sheaf sections, or proper integral group schemes, not rational surface singularities or bounded modification genus"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-normal-surface-resolution",
@@ -87,5 +143,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "def-per-rational-surface-singularity",
+  "worker": "stage1",
+  "summary": "Verified Stacks Tag 0B4N and its modification convention, retained both defining conditions and all ten existing notion dependencies, and made the local/domain/normal-scheme conventions and the cohomology R-action explicit inline. Preserved the earlier attempt and current repository search history, supplemented LeanSearch and valid Loogle searches, and recorded earlier query errors accurately. No new nodes or matching Mathlib declaration.",
+  "blueprint": "Inherited surface-resolution ancestry through lem-per-complete-normal-surface-resolution is preserved. Current main-20261015 ancestor lem-per-artin-gabber-affine-curve and chapter/unit records were read; this is an auxiliary definition from Stacks 0B4N, not a realization of that entire theorem. Whole-blueprint searches for rational singularity, bounded modification, and 0B4N return no equivalent definition; same_as remains empty.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-fd4bb8dd4",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-fd4bb8dd4 (reviewer sub-agent of L); spot-checked: Definition-only split, no new nodes, no fixes. Stacks resolve.tex Tag 0B4N (tags line 14006, def at lines 1795-1810) and the modification convention at section-vanishing (lines 1358-1364) match the node hypothesis by hypothesis. The local normal Nagata 2-dim domain matches; the explicit Noetherian adds nothing because def-weil-pbc-nagata-ring already includes it. A normal modification is proper with Z integral and normal and induces an isomorphism of function fields, which is birational for integral schemes. Condition (1) is H^1(Z,O_Z)=0 for every normal modification. Condition (2) is one uniform integer bound b>=0 on length_R H^1, and module-length allows infinity, so infinite lengths are excluded. Compared with live, only clarifying sentences were appended to the statement (maximal ideal, domain convention, normality of Z as normal local rings, R-action via g^#). stmt_deps, source and blueprint are unchanged, and the live item is still unsplit. I read all 10 dependency statements; def-sc-function-field explicitly covers any integral scheme (k(X)=O_{X,eta}). Edge cases: the identity modification has H^1=0, so the class is nonempty; b=0 reduces (2) to (1); the regular local case is well-posed. Grep of the snapshot DAG found no duplicate definition. The Mathlib searches cover all three kinds, with the malformed Loogle queries honestly flagged as query errors. No SGA source and no tool_uses."
  }
 }
