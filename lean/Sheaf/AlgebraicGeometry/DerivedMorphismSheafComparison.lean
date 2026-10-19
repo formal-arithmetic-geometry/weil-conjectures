@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 /-!
 # Canonical comparison and evaluation of derived morphism sheaves
 
@@ -62,7 +63,10 @@ therefore applies to the postcomposition functor. -/
 theorem comparisonSlice_continuous (V : X.Etale) :
     (Over.post (toProEt X)).IsContinuous (X.smallEtaleTopology.over V)
       ((ProEt.topology X).over ((toProEt X).obj V)) := by
-  sorry
+  have : RepresentablyFlat (Over.post (X := V) (toProEt X)) :=
+    flat_of_preservesFiniteLimits _
+  exact Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+    ((CoverPreserving.of_isContinuous (toProEt X) _ _).overPost V)
 
 attribute [instance] comparisonSlice_continuous
 
@@ -123,7 +127,11 @@ finite limits. The same calculation applies to module-valued sheaves since the f
 comparison is computed on their underlying sheaves. -/
 theorem comparisonSliceUpperStar_preservesFiniteLimits (V : X.Etale) :
     PreservesFiniteLimits (comparisonSliceUpperStar X B V) := by
-  sorry
+  have : RepresentablyFlat (Over.post (X := V) (toProEt X)) :=
+    flat_of_preservesFiniteLimits _
+  exact Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback
+    (Over.post (toProEt X)) (ModuleCat.{u + 1} B) (X.smallEtaleTopology.over V)
+      ((ProEt.topology X).over ((toProEt X).obj V))
 
 attribute [instance] comparisonSliceUpperStar_preservesFiniteLimits
 
@@ -140,6 +148,15 @@ noncomputable def comparisonSliceBaseMap (V : X.Etale)
   ((comparisonSliceAdjunction X B V).homEquiv _ _).symm
     ((X.smallEtaleTopology.overPullback (ModuleCat.{u + 1} B) V).map
       ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).unit.app M))
+
+private noncomputable def comparisonStarIso (V : X.Etale) :
+    Over.star V ⋙ Over.post (toProEt X) ≅
+      toProEt X ⋙ Over.star ((toProEt X).obj V) :=
+  NatIso.ofComponents (fun W ↦ Over.isoMk (asIso (prodComparison (toProEt X) V W))
+    (by simp [Over.post, Over.star_obj_hom])) (by
+      intro W Z f
+      ext
+      simpa using prodComparison_natural (toProEt X) (𝟙 V) f)
 
 /-- The specified canonical slice base-change map is invertible and natural in the module sheaf.
 
@@ -163,7 +180,62 @@ theorem comparisonSliceBaseMap_properties (V : X.Etale) :
         ((ProEt.topology X).overPullback (ModuleCat.{u + 1} B)
           ((toProEt X).obj V)).map
           ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).map f)) := by
-  sorry
+  let rV := (Over.forgetAdjStar V).sheafPushforwardContinuous
+    (E := ModuleCat.{u + 1} B) (X.smallEtaleTopology.over V) X.smallEtaleTopology
+  let rU := (Over.forgetAdjStar ((toProEt X).obj V)).sheafPushforwardContinuous
+    (E := ModuleCat.{u + 1} B)
+    ((ProEt.topology X).over ((toProEt X).obj V)) (ProEt.topology X)
+  have : (toProEt X ⋙ Over.star ((toProEt X).obj V)).IsContinuous
+      X.smallEtaleTopology ((ProEt.topology X).over ((toProEt X).obj V)) :=
+    Functor.isContinuous_comp _ _ _ (ProEt.topology X) _
+  let eR :=
+    Functor.sheafPushforwardContinuousComp' (comparisonStarIso X V)
+      (ModuleCat.{u + 1} B) X.smallEtaleTopology
+      (X.smallEtaleTopology.over V)
+      ((ProEt.topology X).over ((toProEt X).obj V)) ≪≫
+    (Functor.sheafPushforwardContinuousComp (toProEt X)
+      (Over.star ((toProEt X).obj V)) (ModuleCat.{u + 1} B)
+      X.smallEtaleTopology (ProEt.topology X)
+      ((ProEt.topology X).over ((toProEt X).obj V))).symm
+  let adj₁ := (rV.comp (comparisonSliceAdjunction X B V)).ofNatIsoRight eR
+  let adj₂ := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).comp rU
+  let e := Adjunction.leftAdjointUniq adj₁ adj₂
+  have he (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      e.hom.app M = comparisonSliceBaseMap X B V M := by
+    apply (adj₁.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    change adj₂.unit.app M =
+      ((rV.comp (comparisonSliceAdjunction X B V)).ofNatIsoRight eR).homEquiv _ _
+        (comparisonSliceBaseMap X B V M)
+    rw [Adjunction.homEquiv_ofNatIsoRight_apply]
+    change adj₂.unit.app M =
+      rV.homEquiv _ _
+        ((comparisonSliceAdjunction X B V).homEquiv _ _
+          (comparisonSliceBaseMap X B V M)) ≫ eR.hom.app _
+    rw [comparisonSliceBaseMap, Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+    dsimp only [adj₂]
+    rw [Adjunction.comp_unit_app]
+    ext W : 3
+    let η := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).unit.app M
+    let N := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).obj M
+    change η.hom.app W ≫ N.obj.map (prod.snd :
+        (toProEt X).obj V ⨯ (toProEt X).obj W.unop ⟶ _).op =
+      (M.obj.map (prod.snd : V ⨯ W.unop ⟶ _).op ≫
+        η.hom.app (op (V ⨯ W.unop))) ≫
+          N.obj.map (inv (prodComparison (toProEt X) V W.unop)).op
+    have hn : M.obj.map (prod.snd : V ⨯ W.unop ⟶ W.unop).op ≫
+        η.hom.app (op (V ⨯ W.unop)) =
+      η.hom.app W ≫ N.obj.map ((toProEt X).map prod.snd).op :=
+        η.hom.naturality (prod.snd : V ⨯ W.unop ⟶ W.unop).op
+    rw [hn]
+    simp only [Category.assoc, ← Functor.map_comp, ← op_comp]
+    rw [inv_prodComparison_map_snd]
+  constructor
+  · intro M
+    rw [← he M]
+    infer_instance
+  · intro M N f
+    simpa only [he, Functor.comp_map] using e.hom.naturality f
 
 /-- The natural isomorphism formed from the specified invertible slice base-change map.
 
@@ -550,7 +622,31 @@ theorem comparisonRestrictScalarsMap_properties (φ : B →+* B') :
       comparisonRestrictScalarsMap X B φ M ≫
         (Sheaf.restrictScalars (ProEt.topology X) φ).map
           ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B') X).map f)) := by
-  sorry
+  let adj₁ := (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).comp
+    (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X)
+  let adj₂ := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B') X).comp
+    (Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) φ)
+  let e := Adjunction.leftAdjointUniq adj₁ adj₂
+  have he (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B')) :
+      e.hom.app M = comparisonRestrictScalarsMap X B φ M := by
+    apply (adj₁.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    change adj₂.unit.app M =
+      (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).homEquiv _ _
+        ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).homEquiv _ _
+          (comparisonRestrictScalarsMap X B φ M))
+    rw [comparisonRestrictScalarsMap, Equiv.apply_symm_apply,
+      Adjunction.homEquiv_unit]
+    dsimp only [adj₂]
+    rw [Adjunction.comp_unit_app]
+    exact (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).unit.naturality
+      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B') X).unit.app M)
+  constructor
+  · intro M
+    rw [← he M]
+    infer_instance
+  · intro M N f
+    simpa only [he, Functor.comp_map] using e.hom.naturality f
 
 /-- The canonical scalar-restriction comparison isomorphism on module sheaves.
 
