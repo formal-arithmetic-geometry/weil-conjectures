@@ -13,19 +13,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.ComparisonTorInterval
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Exceptional adjunction transport from etale to pro-etale sheaves
@@ -81,6 +71,82 @@ def exceptionalTransportImage (A : Type (u + 1)) [CommRing A] [Finite A]
     (E : (exceptionalTransportProEtaleObjects A Y).FullSubcategory ⥤
       Etale.DerivedCategoryModule A Y) :=
   E ⋙ R ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+
+private theorem exceptionalTransportEtale_plus
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (K : Etale.DerivedCategoryModule A T) (hK : exceptionalTransportEtaleObjects A T K) :
+    _root_.DerivedCategory.TStructure.t.plus K := by
+  obtain ⟨a, b, hab, h⟩ := hK.1.2
+  exact ⟨a, (_root_.DerivedCategory.isGE_iff K a).2 (fun i hi ↦ h i (Or.inl hi))⟩
+
+private theorem exceptionalTransport_object_comparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (T : Scheme.{u}) [IsNoetherian T] :
+    exceptionalTransportProEtaleObjects A T =
+      (exceptionalTransportEtaleObjects A T).map
+        (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory := by
+  let N := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  have hc := exceptionalTransport_constructible_comparison A T
+  funext K
+  apply propext
+  constructor
+  · rintro ⟨hbd, hcs, a, b, hab, ht⟩
+    have hbc : (Etale.DerivedCategory.isBoundedConstructible A T).map N K :=
+      (congrFun hc K).mp ⟨hbd, hcs⟩
+    obtain ⟨H, hH, ⟨e⟩⟩ := hbc
+    have ht' : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) T a b (N.obj H) :=
+      (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e.symm ht
+    refine ⟨H, ⟨hH, a, b, hab, ?_⟩, ⟨e⟩⟩
+    exact Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr
+      ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b H).mp ht')
+  · rintro ⟨H, ⟨hH, a, b, hab, ht⟩, ⟨e⟩⟩
+    have hbc : (Etale.DerivedCategory.isBoundedConstructible A T).map N K :=
+      ⟨H, hH, ⟨e⟩⟩
+    obtain ⟨hbd, hcs⟩ := (congrFun hc K).mpr hbc
+    refine ⟨hbd, hcs, a, b, hab, ?_⟩
+    exact (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e
+      ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b H).mpr
+        (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp ht))
+
+private theorem exceptionalTransport_functorial_origins
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) [IsNoetherian T] :
+    ∃ E : (exceptionalTransportProEtaleObjects A T).FullSubcategory ⥤
+        Etale.DerivedCategoryModule A T,
+    ∃ _α : E ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ≅
+        (exceptionalTransportProEtaleObjects A T).ι,
+      ∀ K, exceptionalTransportEtaleObjects A T (E.obj K) := by
+  classical
+  let P := exceptionalTransportEtaleObjects A T
+  let Q := exceptionalTransportProEtaleObjects A T
+  let N := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  have h : Q = P.map N := exceptionalTransport_object_comparison A T
+  let F := P.ι ⋙ N
+  have hF (K : P.FullSubcategory) : Q (F.obj K) := by
+    rw [h]
+    exact ObjectProperty.prop_map_obj P N K.property
+  let H := Q.lift F hF
+  have hbij (K L : P.FullSubcategory) : Function.Bijective
+      (fun v : K ⟶ L ↦ H.map v) := by
+    constructor
+    · intro v w hvw
+      apply ObjectProperty.hom_ext
+      exact (bijective_comparisonUpperStar_mapDerivedCategory_map _ _
+        (exceptionalTransportEtale_plus A T L.obj L.property)).1
+          (congrArg (fun z ↦ z.hom) hvw)
+    · intro v
+      obtain ⟨w, hw⟩ := (bijective_comparisonUpperStar_mapDerivedCategory_map _ _
+        (exceptionalTransportEtale_plus A T L.obj L.property)).2 v.hom
+      exact ⟨ObjectProperty.homMk w, Q.hom_ext hw⟩
+  have : H.Full := ⟨fun v ↦ (hbij _ _).surjective v⟩
+  have : H.Faithful := ⟨fun hvw ↦ (hbij _ _).injective hvw⟩
+  have : H.EssSurj := ⟨fun K ↦ by
+    have hK : (P.map N) K.obj := (congrFun h K.obj).mp K.property
+    obtain ⟨L, hL, ⟨e⟩⟩ := hK
+    exact ⟨⟨L, hL⟩, ⟨Q.isoMk e⟩⟩⟩
+  have : H.IsEquivalence := {}
+  let e := H.asEquivalence
+  refine ⟨e.inverse ⋙ P.ι, ?_, fun K ↦ (e.inverse.obj K).property⟩
+  exact Functor.isoWhiskerRight e.counitIso Q.ι
 
 /-- Exceptional adjunction transport for one fixed compactification, including functorial
 etale origins and the transported ordinary counit. Naturality in `K` is expressed by the
@@ -156,6 +222,84 @@ theorem etale_proEtale_exceptional_transport
                 (exceptionalTransportImage A R E).obj K ↦
               (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map h ≫
                 t.app K) := by
-  sorry
+  classical
+  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType s
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (f ≫ s)
+  let β := (rightDerivedLowerShriekOfCompactificationComparisonIso
+    (ModuleCat.{u + 1} A) c).symm
+  obtain ⟨E, α, hEY⟩ := exceptionalTransport_functorial_origins A Y
+  have hEX (K) : exceptionalTransportProEtaleObjects A X
+      ((exceptionalTransportImage A R E).obj K) := by
+    change exceptionalTransportProEtaleObjects A X
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+        (R.obj (E.obj K)))
+    rw [exceptionalTransport_object_comparison A X]
+    exact ObjectProperty.prop_map_obj _ _ (_hR _ (hEY K))
+  have hE (K) := exceptionalTransportEtale_plus A Y (E.obj K) (hEY K)
+  have hRE (K) := exceptionalTransportEtale_plus A X (R.obj (E.obj K)) (_hR _ (hEY K))
+  let P := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  let Q := (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory
+  let F := Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
+  let G := rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c
+  let t : exceptionalTransportImage A R E ⋙ G ⟶
+      (exceptionalTransportProEtaleObjects A Y).ι :=
+    { app := fun K ↦ β.inv.app ⟨R.obj (E.obj K), hRE K⟩ ≫
+        Q.map (adj.counit.app (E.obj K)) ≫ α.hom.app K
+      naturality := by
+        intro K L v
+        have hb := β.inv.naturality
+          (ObjectProperty.homMk (R.map (E.map v)) :
+            (⟨R.obj (E.obj K), hRE K⟩ : _root_.DerivedCategory.Plus _) ⟶
+              ⟨R.obj (E.obj L), hRE L⟩)
+        have hc := congrArg Q.map (adj.counit.naturality (E.map v))
+        change G.map (P.map (R.map (E.map v))) ≫
+            β.inv.app ⟨R.obj (E.obj L), hRE L⟩ =
+          β.inv.app ⟨R.obj (E.obj K), hRE K⟩ ≫
+            Q.map (F.map (R.map (E.map v))) at hb
+        have hc' : Q.map (F.map (R.map (E.map v))) ≫
+            Q.map (adj.counit.app (E.obj L)) =
+          Q.map (adj.counit.app (E.obj K)) ≫ Q.map (E.map v) := by
+          simpa only [F, Functor.map_comp, Functor.comp_map, Functor.id_map] using hc
+        change G.map (P.map (R.map (E.map v))) ≫ _ = _
+        have ha : Q.map (E.map v) ≫ α.hom.app L = α.hom.app K ≫ v.hom :=
+          α.hom.naturality v
+        rw [← Category.assoc, ← Category.assoc, hb, Category.assoc,
+          Category.assoc, ← Category.assoc (Q.map _), hc', Category.assoc,
+          Category.assoc, ha]
+        simp only [Category.assoc, ObjectProperty.ι_map] }
+  refine ⟨β, E, α, hEY, hEX, t, ?_, ?_⟩
+  · intro K
+    exact ⟨hRE K, rfl⟩
+  · intro K M
+    let eP : (M.obj ⟶ R.obj (E.obj K)) ≃
+        (P.obj M.obj ⟶ P.obj (R.obj (E.obj K))) :=
+      Equiv.ofBijective _
+        (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (hRE K))
+    let eQ : (F.obj M.obj ⟶ E.obj K) ≃
+        (Q.obj (F.obj M.obj) ⟶ Q.obj (E.obj K)) :=
+      Equiv.ofBijective _
+        (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ (hE K))
+    let e : (P.obj M.obj ⟶ P.obj (R.obj (E.obj K))) ≃
+        (G.obj (P.obj M.obj) ⟶ K.obj) :=
+      eP.symm.trans ((adj.homEquiv M.obj (E.obj K)).symm.trans
+        (eQ.trans (((β.app M).homFromEquiv).trans
+          ((α.app K).homToEquiv))))
+    have he (h : P.obj M.obj ⟶ P.obj (R.obj (E.obj K))) :
+        e h = G.map h ≫ t.app K := by
+      obtain ⟨u, rfl⟩ := eP.surjective h
+      have hb := β.inv.naturality
+        (ObjectProperty.homMk u : M ⟶ ⟨R.obj (E.obj K), hRE K⟩)
+      change G.map (P.map u) ≫ β.inv.app ⟨R.obj (E.obj K), hRE K⟩ =
+        β.inv.app M ≫ Q.map (F.map u) at hb
+      simp only [e, Equiv.trans_apply, Equiv.symm_apply_apply]
+      dsimp [eQ, eP, Iso.homFromEquiv, Iso.homToEquiv, Equiv.ofBijective, Equiv.coe_fn_mk]
+      change (β.inv.app M ≫ Q.map ((adj.homEquiv _ _).symm u)) ≫ α.hom.app K = _
+      rw [Adjunction.homEquiv_counit, Functor.map_comp]
+      simpa only [Category.assoc, t, F] using congrArg
+        (fun z ↦ z ≫ Q.map (adj.counit.app (E.obj K)) ≫ α.hom.app K) hb.symm
+    change Function.Bijective (fun h ↦ G.map h ≫ t.app K)
+    have heq : (fun h ↦ G.map h ≫ t.app K) = e := funext (fun h ↦ (he h).symm)
+    rw [heq]
+    exact e.bijective
 
 end AlgebraicGeometry.ProEtale

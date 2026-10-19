@@ -1,0 +1,136 @@
+{
+ "id": "new-etale-proetale-exceptional-object-comparison",
+ "kind": "statement",
+ "title": "Intrinsic bounded constructible objects are comparison images",
+ "statement": "Let $A$ be a finite commutative ring and $T$ a Noetherian scheme. In the ordinary derived categories of fixed-coefficient module sheaves [def-weil-pbc-derived-categories; def-weil-pbc-proetale-modules], a pro-etale complex $K$ is bounded and every cohomology sheaf [def-weil-derived-cohomology-sheaves] is constructible on a global finite partition [def-weil-proetale-constructible-sheaf] if and only if there is a bounded constructible etale complex $H$ [def-weil-pbc-constructible-complexes] and an isomorphism $\\nu_T^*H\\cong K$, where $\\nu_T^*$ is the comparison pullback [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Final restriction paragraph, Steps 1 and 2; intermediate object-comparison statement needed by exceptional transport."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-model comparison lemmas to identify fixed-module constructibility with the existing finite-constant locally constructible pro-etale predicate, including the empty-scheme case. Translate the recorded etale module constructibility predicate to the source constructible-sheaf predicate and translate boundedness between the explicit integer interval and the canonical bounded t-structure.",
+   "uses": [
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing bounded constructible comparison theorem to each pro-etale cohomology sheaf, obtain an etale origin for the bounded complex, and use exact comparison homology isomorphisms to prove the converse and transport constructibility.",
+   "uses": [
+    "sk-thm-pe-constructible-comparison",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "sk-thm-pe-constructible-comparison",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T7",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Final restriction paragraph, object comparison used by transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|IsConstructibleProEtaleFixedModuleSheaf|comparisonUpperStar",
+   "date": "2026-10-19",
+   "results": "The logged Mathlib search returned zero hits. Separate source-library reads found boundedConstructible_of_homology, exists_isConstructibleSheaf_iso_comparisonUpperStar_obj and the finite-model interfaces, which the proof uses.",
+   "verdict": "No exact Mathlib match found; use the existing source declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intrinsic bounded constructible pro-etale finite module complexes are etale comparison images",
+   "date": "2026-10-19",
+   "results": "8 hits, including AlgebraicGeometry.IsEtale.of_comp and Algebra.Etale.comp.",
+   "verdict": "No hit identifies the intrinsic constructible derived category; use source comparison and finite-model interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.map",
+   "date": "2026-10-19",
+   "results": "ObjectProperty.map, prop_map_obj, prop_map_iff, Functor.essImage_ι_comp.",
+   "verdict": "Used the essential image property API; it does not prove the geometric comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded constructible etale proetale comparison derived category finite coefficients",
+   "date": "2026-10-19",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; AlgebraicGeometry.Scheme.etaleTopology; Algebra.Etale.mk; AlgebraicGeometry.Scheme.smallEtaleTopology.",
+   "verdict": "The bounded-representative theorem and site definitions do not identify the constructible comparison image; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalTransport",
+  "date": "2026-10-19",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Final restriction paragraph: bounded constructible object comparison needed for Steps 1 and 2 of the explicit exceptional-transport argument.",
+   "via": [
+    "lem-sf-etale-proetale-exceptional-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalObjectComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProEtaleExceptionalObjectComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exceptionalTransport_constructible_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exceptionalTransport_constructible_comparison"
+  ],
+  "statement": "theorem exceptionalTransport_constructible_comparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (T : Scheme.{u}) [IsNoetherian T] :\n    (fun K ↦ _root_.DerivedCategory.TStructure.t.bounded K ∧\n      ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf T A\n        ((_root_.DerivedCategory.homologyFunctor _ i).obj K)) =\n    (Etale.DerivedCategory.isBoundedConstructible A T).map\n      (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261019T005429-L-2769979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261019T005429-L-2769979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
