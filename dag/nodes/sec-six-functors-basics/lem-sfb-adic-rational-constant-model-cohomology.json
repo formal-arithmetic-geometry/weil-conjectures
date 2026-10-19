@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-adic-rational-constant-model-cohomology",
+ "kind": "statement",
+ "title": "Rational geometric preservation on the fixed-size constant-model hull",
+ "statement": "Fix a prime ell, a finite continuous extension of Q_ell or the finite-subextension-valued algebraic closure Lambda, and a field k of prime characteristic different from ell. Let g:Z -> Y be proper between separated finite-type k-schemes. Form the ordinary localizing hulls of constantModelBoundedConstructible using coproduct indices in universe u+1. Suppose h states that ambient Rg_* preserves these hulls, and let G be any right adjoint of precisely its full-subcategory lift. For every bounded constant-model constructible K on Y and integer n, H^n(G(K)) has finite constant local models on a finite constructible stratification. No integral coefficient is covered by this statement.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Part (2), rational restriction bullet"
+ },
+ "proof": [
+  {
+   "text": "Embed a finite continuous coefficient field E into the fixed algebraic closure using IsAlgClosed.lift. Its fieldRange is finite dimensional, and equivFieldRange.toLinearEquiv.toContinuousLinearEquiv gives the continuous algebra isomorphism. Postcomposition and ULift.ringEquiv give the actual condensed ring isomorphism. The algebraic-closure case retains padicAlgClRingObj and uses its identity isomorphism.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-coefficient-normalization",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localizingClosure_ctf_equals_bc with this coefficient isomorphism. The finite-Tor generators equal bounded constant-model constructible objects. localizingClosure_exists gives coproducts and repleteness. maps_localizingClosureProEtale applied to the identity gives the large-to-small inclusion; lift small index types to obtain the reverse inclusion. Thus hull_eq identifies the fixed u+1 hull with localizingClosureProEtale.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-def-localizing-closure-existence",
+    "det-proper-image-localizing-principle",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose Compactification.ofIsProper for g. Its open part is the identity and is quasi-compact, so this is a boundary compactification. The adjunction for extension by zero along the identity and upperStarId identifies that functor with the identity. Its derived isomorphism identifies the actual compact-support composite with ambient Rg_*. Transfer the supplied preservation and adjunction through the full hull inclusions using Adjunction.restrictFullyFaithful.",
+   "uses": [
+    "sk-def-nagata-sketch-data",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rationalRestrictionGlue to this compactification and this transported supplied adjunction, with the same finite-intermediate-field or finite-subextension-valued coefficient isomorphism. Its hG conclusion gives bounded constant-model constructibility of G(K); take the cohomology component in each degree. No new right adjoint or coefficient data is selected from an unproved mere existence statement.",
+   "uses": [
+    "det-thm-restriction-glue",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-lattice-coefficient-normalization",
+  "sk-def-sfb-qlbar-condensed",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
+  "det-proper-image-localizing-principle",
+  "sk-def-localizing-closure",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-thm-restriction-glue",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Completed C8 Lean proof: finite field image normalization, fixed-size hull comparison, proper identity compactification, supplied-adjunction restriction, and rationalRestrictionGlue"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of exceptional inverse image for rational and integral condensed adic sheaves and equivalence with finite constant local models",
+   "results": "Only generic condensed discrete/locally constant sheaf results, including CondensedMod.isDiscrete_tfae and Condensed.ofSheafProfinite; no geometric preservation or adic comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible modules with continuous p-adic or integral coefficients admit finite constant local models on noetherian strata",
+   "results": "Module.isLocallyConstant_rankAtStalk, Profinite.NobelingProof.Nobeling_aux, and generic finite-type sheaf generators; no theorem for internal pro-etale module objects.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*constructible|constructible.*rightAdjoint|IsConstantModelConstructible",
+   "results": "msearch Mathlib source grep returned zero hits. Repository rg found CondensedConstantConstructibility, RationalExceptionalRestriction and IntegralExceptionalRestriction; their interfaces differ as detailed in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Geometric restriction proof, coefficient comparisons and rational/integral bullets",
+   "via": [
+    "lem-sfb-adic-localizing-exceptional-cohomology",
+    "lem-sfb-adic-localizing-exceptional-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicRationalConstantModelCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicRationalConstantModelCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_rational_constantModel_rightAdjoint_homology_constructible",
+  "statement": "theorem ellAdic_rational_constantModel_rightAdjoint_homology_constructible\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {Z Y : Over (Spec (.of k))}\n    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]\n    (g : Z ⟶ Y) [IsProper g.left]\n    (hΛ : IsRationalEllAdicCoefficient ℓ Λ inferInstance)\n    (h : ∀ K, localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ Z.left) K →\n      localizingClosureOfSize.{u + 1} (constantModelBoundedConstructible Λ Y.left)\n        ((R((g.left)_*⟦Λ⟧)).obj K))\n    (G : (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible Λ Y.left)).FullSubcategory ⥤\n      (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible Λ Z.left)).FullSubcategory)\n    (adj : (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible Λ Y.left)).lift\n      ((localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible Λ Z.left)).ι ⋙ R((g.left)_*⟦Λ⟧))\n      (fun K ↦ h K.obj K.property) ⊣ G)\n    (K : (constantModelBoundedConstructible Λ Y.left).FullSubcategory) :\n    ∀ n : ℤ, IsConstantModelConstructible Λ Z.left\n      ((DerivedCategory.homologyFunctor _ n).obj\n        (G.obj ((ObjectProperty.ιOfLE (constantModel_le_localizingClosure Λ Y.left)).obj\n          K)).obj)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261019T093317-L-2293756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261019T093317-L-2293756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

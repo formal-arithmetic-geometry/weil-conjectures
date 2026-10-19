@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-adic-integral-constant-model-cohomology",
+ "kind": "statement",
+ "title": "Integral geometric preservation on the fixed-size constant-model hull",
+ "statement": "Fix prime ell and a finite extension E of Q_ell embedded in its fixed algebraic closure, with its induced integral condensed coefficient Lambda = padicIntegersRingObj ell E. Over a field k of prime characteristic different from ell, let g:Z -> Y be proper between separated finite-type k-schemes. On the ordinary u+1-indexed localizing hulls of bounded finite-constant-model constructible complexes, assume h records preservation by ambient Rg_*, and let G be a right adjoint to exactly that lifted functor. For each bounded finite-constant-model constructible K on Y, every H^n(G(K)) has finite constant local models on a finite stratification. This statement concerns only integral coefficients.",
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-adic-coefficient-certificate",
+  "lem-sfb-adic-rational-constant-model-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Part (2), integral restriction bullet"
+ },
+ "proof": [
+  {
+   "text": "For a finite intermediate field, use localizingClosure_ctf_equals_bc to identify the finite-Tor generators with bounded constant-model constructible objects. Reuse the proved hull_eq comparison, giving equality of the u+1 hull with IntegralCompactSupport.localizing. The identity compactification is quasi-compact on its open part and its actual derived compact-support functor is ambient Rg_*, by the proved properIdentityPushforwardIso.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "lem-sfb-adic-rational-constant-model-cohomology",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer preservation and the supplied adjunction through the full inclusions using Adjunction.restrictFullyFaithful. Apply integralRestrictionGlue to that precise adjunction; its hG conclusion proves bounded constructibility. Taking its degree n cohomology proves integral_image_cohomology for the image-field case.",
+   "uses": [
+    "det-thm-int-restriction-glue",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the arbitrary embedded field E, take the fieldRange of its specified algebra embedding. equivFieldRange restricts to a ring equivalence of valuation rings: their defining embedded norms agree definitionally. The restricted equivalence is isometric. Postcomposition on continuous maps constructs a natural condensed ring isomorphism, with its actual specified multiplication.",
+   "uses": [
+    "lem-sfb-adic-integral-constructible-constant-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved scalar-comap helpers transport finite scalar presentations and constant local models. On derived categories, comap_roundtrip constructs the coefficient equivalence. maps_localizingClosure transports the fixed-size hull, and its inverse plus repleteness gives an equivalence of hulls. derivedComapLowerStarIso identifies the actual ambient pushforwards after coefficient comap; restriction of the supplied adjunction yields the image-field adjunction. Apply integral_image_cohomology to the inverse-comapped K. The hull equivalence counits and the homology-comap isomorphism transport its constructibility back to the original G(K), including torsion and all cohomological degrees.",
+   "uses": [
+    "lem-sfb-adic-integral-constructible-constant-comparison",
+    "det-def-localizing-closure-existence",
+    "det-proper-image-localizing-principle",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-localizing-closure-ctf-equals-bc",
+  "lem-sfb-adic-rational-constant-model-cohomology",
+  "sk-def-nagata-sketch-data",
+  "det-thm-int-restriction-glue",
+  "sk-def-sfb-constructible",
+  "lem-sfb-adic-integral-constructible-constant-comparison",
+  "det-def-localizing-closure-existence",
+  "det-proper-image-localizing-principle",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Completed C8 Lean proof: integralRestrictionGlue on the proper identity compactification, explicit valuation-ring image normalization, coefficient-derived hull equivalence, and counit/homology transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructibility of exceptional inverse image for rational and integral condensed adic sheaves and equivalence with finite constant local models",
+   "results": "Only generic condensed discrete/locally constant sheaf results, including CondensedMod.isDiscrete_tfae and Condensed.ofSheafProfinite; no geometric preservation or adic comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible modules with continuous p-adic or integral coefficients admit finite constant local models on noetherian strata",
+   "results": "Module.isLocallyConstant_rankAtStalk, Profinite.NobelingProof.Nobeling_aux, and generic finite-type sheaf generators; no theorem for internal pro-etale module objects.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*constructible|constructible.*rightAdjoint|IsConstantModelConstructible",
+   "results": "msearch Mathlib source grep returned zero hits. Repository rg found CondensedConstantConstructibility, RationalExceptionalRestriction and IntegralExceptionalRestriction; their interfaces differ as detailed in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "C8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Geometric restriction proof, coefficient comparisons and rational/integral bullets",
+   "via": [
+    "lem-sfb-adic-localizing-exceptional-cohomology",
+    "lem-sfb-adic-localizing-exceptional-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicIntegralConstantModelCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicIntegralConstantModelCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ellAdic_integral_constantModel_rightAdjoint_homology_constructible",
+  "statement": "theorem ellAdic_integral_constantModel_rightAdjoint_homology_constructible\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]\n    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]\n    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {Z Y : Over (Spec (.of k))}\n    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]\n    (g : Z ⟶ Y) [IsProper g.left]\n    (h : ∀ K, localizingClosureOfSize.{u + 1}\n      (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Z.left) K →\n      localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Y.left)\n        ((R((g.left)_*⟦(Profinite.padicIntegersRingObj ℓ E)⟧)).obj K))\n    (G : (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible\n          (Profinite.padicIntegersRingObj ℓ E) Y.left)).FullSubcategory ⥤\n      (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible\n          (Profinite.padicIntegersRingObj ℓ E) Z.left)).FullSubcategory)\n    (adj : (localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Y.left)).lift\n      ((localizingClosureOfSize.{u + 1}\n        (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Z.left)).ι ⋙\n          R((g.left)_*⟦Profinite.padicIntegersRingObj ℓ E⟧))\n      (fun K ↦ h K.obj K.property) ⊣ G)\n    (K : (constantModelBoundedConstructible\n      (Profinite.padicIntegersRingObj ℓ E) Y.left).FullSubcategory) :\n    ∀ n : ℤ, IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) Z.left\n      ((DerivedCategory.homologyFunctor _ n).obj\n        (G.obj ((ObjectProperty.ιOfLE (constantModel_le_localizingClosure\n          (Profinite.padicIntegersRingObj ℓ E) Y.left)).obj\n          K)).obj)",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261019T093317-L-2293756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261019T093317-L-2293756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
