@@ -17,9 +17,86 @@
   "def-pur-kinjective-complex",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex $C$ representing $E$. The open-subset sites of $X$ and $Y$ are small in the stipulated universe. Apply the functorial resolution theorem on these two sites: put $I=I_X(C)$, $B=f_*I$, and let $r:B\\to J=I_Y(B)$ be the resolution map on $Y$. The direct-image construction identifies $QB$ with $Rf_*E$, and $QJ$ with the same object through $Qr$. For every open $V\\subseteq Y$, the definitions therefore compute the two groups in the desired comparison as $H^q(\\Gamma(f^{-1}V,I))$ and $H^q(\\Gamma(V,J))$. Termwise, $\\Gamma(f^{-1}V,I)=\\Gamma(V,B)$, including its differential. Hence evaluation of the single map $r$ gives comparison maps $c_V:\\Gamma(f^{-1}V,I)\\to\\Gamma(V,J)$ for all $V$ simultaneously.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section cohomology-section-unbounded; Tag 0D5W (lemma-Leray-unbounded), K-injective model of its comparison"
+   }
+  },
+  {
+   "text": "Fix $V$, put $U=f^{-1}V$, and let $f_V:(U,\\mathcal O_X|_U)\\to(V,\\mathcal O_Y|_V)$ be the restricted morphism. Restriction to an open preserves K-injectivity, so both $I|_U$ and $J|_V$ are K-injective. The open-restriction adjunction theorem says that restriction is exact. It therefore preserves the kernels and images defining cohomology and takes the quasi-isomorphism $r$ to the quasi-isomorphism $r|_V:B|_V\\to J|_V$. Thus $J|_V$ is a K-injective resolution of $B|_V$. Directly from the section formula for direct image, $B|_V=(f_V)_*(I|_U)$: at an open $W\\subseteq V$ both sides are $I(f^{-1}W)$, with the same scalar action and restrictions.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BS (lemma-restrict-K-injective-to-open); Tag 08FE (lemma-restrict-direct-image-open), sectionwise identity in its proof"
+   }
+  },
+  {
+   "text": "Let $P_V$ be the one-point ringed space with ring $\\mathcal O_Y(V)$, and let $a_V:V\\to P_V$ have structure map $\\mathcal O_Y(V)\\to\\mathcal O_Y(W)$ on an open $W$ given by restriction. A module sheaf on $P_V$ is just its module of sections on the point (its value on the empty open is zero); under this identification $(a_V)_*$ is $\\Gamma(V,-)$. Apply direct-image K-injective acyclicity to the composable ringed-space maps $f_V$ and $a_V$, with K-injective input $I|_U$. It says that the right-derived unit at $(f_V)_*(I|_U)=B|_V$ is invertible. Write $\\eta$ for that unit. Naturality gives $\\eta_{J|_V}\\,Q\\Gamma(V,r|_V)=R\\Gamma(V,Q(r|_V))\\,\\eta_{B|_V}$. The factor $\\eta_{J|_V}$ is invertible by K-injectivity, and $R\\Gamma(V,Q(r|_V))$ is invertible because $r|_V$ is a quasi-isomorphism. Thus invertibility of $\\eta_{B|_V}$ implies invertibility of $Q\\Gamma(V,r|_V)$. Consequently $c_V$ induces an isomorphism on every cohomology group. Forgetting the $\\mathcal O_Y(V)$-module structure gives the same isomorphism of abelian groups, since module kernels and images have the usual underlying abelian groups. This is the local Leray comparison.",
+   "uses": [
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5W (lemma-Leray-unbounded), reduction to a one-point ringed space; Tag 0D5X (lemma-unbounded-describe-higher-direct-images), first sentence of proof"
+   }
+  },
+  {
+   "text": "For $W\\subseteq V$ the square with horizontal maps $c_V,c_W$ and vertical restriction maps commutes: both composites are $\\Gamma(V,B)\\to\\Gamma(W,J)$, first restricting and applying $r$, in the two orders. Functorial resolutions make the analogous square commute for every chain map $C\\to C^{\\prime}$. To descend this natural transformation to $D(\\mathcal O_X)$, let $s:C\\to C^{\\prime}$ be a quasi-isomorphism. Naturality of $C\\to I_X(C)$ and two-out-of-three imply that $I_X(s)$ is a quasi-isomorphism between K-injectives, hence a homotopy equivalence by the K-injective Hom lemma. Applying the additive functors $f_*$ and evaluation preserves its homotopy inverse and homotopies. Also $J(s)$ is a quasi-isomorphism by naturality of $r$, hence again a homotopy equivalence. Both presheaf cohomology functors thus invert $s$, and their commuting squares descend through localization. This proves naturality in $E$. The K-injective Hom bijection also shows independence of resolution choices: the unique homotopy classes representing the derived identity give comparison homotopy equivalences, and the corresponding squares commute up to homotopy; evaluation and cohomology remove that homotopy. Thus $H^q(c_V)$ gives the claimed canonical isomorphism of presheaves, natural in $E$ and compatible with all restrictions.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5W (lemma-Leray-unbounded), natural comparison; Tag 0D5X (lemma-unbounded-describe-higher-direct-images); comparison of K-injective models uses derived.tex Tag 070I (lemma-K-injective)"
+   }
+  },
+  {
+   "text": "Apply the existing ringed-space sheafification-cohomology theorem to $(Y,\\mathcal O_Y)$, $K=Rf_*E$ and the arbitrary integer $q$. Its cohomology presheaf is exactly $V\\mapsto H^q(V,Rf_*E)$ by its K-injective definition. Its natural sheafification is the underlying abelian cohomology sheaf $\\mathcal H^q(Rf_*E)$. Sheafifying the presheaf isomorphism just constructed identifies the sheafification of $V\\mapsto H^q(f^{-1}V,E)$ with that same sheaf. Naturality follows by composing the natural isomorphisms; restriction compatibility is already a property of the maps of presheaves. The argument used only small open-subset sites and unbounded K-injective resolutions; no scheme or finiteness hypothesis and no bound on $q$ was used.",
+   "uses": [
+    "lem-pc-ringed-space-sheafification-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ (lemma-sheafification-cohomology); Tag 0D5X (lemma-unbounded-describe-higher-direct-images), final sentence of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "lem-pc-ringed-space-sheafification-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5W and 0D5X, with Tag 0BKJ; the local Leray comparison is expanded on a single functorial K-injective comparison to prove the restriction and derived-morphism naturality explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +146,59 @@
    "results": "{\"t\": \"2026-10-17T23:53:23Z\", \"tool\": \"grep\", \"query\": \"rightDerived|cohomologyPresheaf|sheafif\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"d5a11da7bec2d5fb\"}",
    "date": "2026-10-18",
    "verdict": "no match: underived module pushforward and nonnegative cohomology of individual abelian sheaves do not give the unbounded ringed-space comparison; read SheafCohomology/Basic.lean lines 56-86 and ModuleCat/Sheaf/PushforwardContinuous.lean lines 39-49"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|rightDerived|sheafification",
+   "results": "{\"t\": \"2026-10-18T23:05:24Z\", \"tool\": \"grep\", \"query\": \"cohomologyPresheaf|rightDerived|sheafification\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"ec35eb47dbe2392a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-18T23:05:25Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a derived pushforward of an unbounded complex of module sheaves on a ringed space equals local hypercohomology followed by sheafification",
+   "results": "{\"t\": \"2026-10-18T23:05:25Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of a derived pushforward of an unbounded complex of module sheaves on a ringed space equals local hypercohomology followed by sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"PresheafOfModules.sheafify\", \"PresheafOfModules.toSheafify\", \"SheafOfModules.pushforward_obj_val\", \"PresheafOfModules.sheafification\", \"PresheafOfModules.sheafifyMap\"], \"digest\": \"7ea307630b201fe3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived direct image on ringed spaces cohomology is the sheafification of hypercohomology over inverse images of opens",
+   "results": "{\"t\": \"2026-10-18T23:05:26Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded derived direct image on ringed spaces cohomology is the sheafification of hypercohomology over inverse images of opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sheafificationCompPullback\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"SheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"4e56fad45af7a8db\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived|cohomologyPresheaf|sheafification",
+   "results": "{\"t\": \"2026-10-18T23:05:44Z\", \"tool\": \"grep\", \"query\": \"rightDerived|cohomologyPresheaf|sheafification\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"2e7142ceff215455\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyPresheaf\"",
+   "results": "{\"t\": \"2026-10-18T23:05:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"cohomologyPresheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\"], \"digest\": \"485552ea358de5c5\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every integer q hypercohomology on f inverse V agrees naturally with hypercohomology of Rf star E on V for unbounded complexes on ringed spaces",
+   "results": "{\"t\": \"2026-10-18T23:05:47Z\", \"tool\": \"leanfinder\", \"query\": \"For every integer q hypercohomology on f inverse V agrees naturally with hypercohomology of Rf star E on V for unbounded complexes on ringed spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.op_comp_isSheaf_of_preservesOneHypercovers\", \"DerivedCategory.homologyFunctorFactorsh\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"CochainComplex.ConnectData.homologyIsoPos\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"DerivedCategory.homologyFunctorFactors\", \"CochainComplex.liftCycles_shift_homologyπ\"], \"digest\": \"a322fa17db682775\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:56-86 (nonnegative Ext cohomology of single sheaves) and Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:39-49 (underived pushforward); these do not state the unbounded ringed-space comparison or its sheafification."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-basis-local-ext-sheaf",
@@ -104,5 +230,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-unbounded-direct-image-section-presheaf",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied the local Leray comparison using existing K-injective direct-image acyclicity, proved naturality with one global functorial resolution map, and applied the existing ringed-space sheafification-cohomology theorem. No new nodes or Mathlib leaves. Rechecked project-source attachment candidates and Mathlib under two phrasings; no exact completed declaration or Mathlib match.",
+  "blueprint": "Supporting BBD descent component inherited from the ancestor lem-trf-local-term-locality via lem-trf-derived-basis-local-ext-sheaf: Tag 0D66 part (2), first-sentence invocation of Tag 0D5X. Steps 1-4 realize its local Leray comparison and step 5 realizes its sheafification identification. This is a general ringed-space tool below the fixed unit route, not a replacement of the contracting-correspondence argument.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of functorial unbounded K-injective resolutions on small ringed sites, a generic resolution tool not stated by this trace-formula unit."
+   },
+   {
+    "node": "lem-sc-derived-k-injective-restrict-open",
+    "why": "Restriction to an open preserves K-injectivity, a generic ringed-space tool needed for local Leray and not supplied by this unit."
+   },
+   {
+    "node": "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+    "why": "A direct image of a K-injective has invertible right-derived unit for any subsequent ringed-space direct image; specializes to sections on the one-point ringed target without any flatness hypothesis."
+   },
+   {
+    "node": "lem-pc-ringed-space-sheafification-cohomology",
+    "why": "General natural sheafification of local hypercohomology on any ringed space, applied on Y to Rf_*E; this trace-formula unit has no such general statement."
+   },
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Exactness of restriction to an open ensures that the restricted global resolution remains a quasi-isomorphism; this generic ringed-space property is not supplied by the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic",
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-d9f0e0b74",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d9f0e0b74 (reviewer sub-agent of L); spot-checked: I read Stacks cohomology.tex 0D5X/0D5W/08FE/0BKJ (lines 7880-7960). The item's statement, stmt_deps, source and blueprint fields are byte-identical to the live unsplit node, and the old mathlib_searches are kept as a prefix. The statement matches 0D5X: arbitrary ringed spaces, unbounded D, all integers q. Steps: S1 builds one sheaf map r: f_*I_X(C) -> I_Y(f_*I_X(C)) from functorial K-injective resolutions; Gamma(f^-1V, I) = Gamma(V, f_*I) holds by the def-pc direct-image section formula. S2 uses the restriction-K-injective and exactness-of-restriction statements, and B|_V = (f_V)_*(I|_U) is elementary (08FE). S3 follows the 0D5W singleton-space route: lem-pc-ringed-space-direct-image-kinjective-acyclic (any ringed-space maps, unbounded I, no flatness) gives eta at B|_V invertible, and the written naturality square, with eta invertible on the K-injective J|_V, shows Gamma(V,r) is a quasi-isomorphism. S4 gives restriction and derived naturality through the K-injective homotopy-equivalence consequence and the localization universal property. S5 uses lem-pc-ringed-space-sheafification-cohomology with K=QB; its presheaf is exactly V -> H^q(Gamma(V, I_Y(B))). Edge cases checked: V empty (zero ring point), f=id, negative q, non-flat maps; the proof never claims f_*I is K-injective. Duplicate check: the 0D5X/0D5W hits in the DAG are scheme, qcqs/QCoh or pro-etale bounded-below variants only. There are no new nodes and no cycle. I accept the five declared generic ringed-space tool_uses; no SGA is cited."
  }
 }
