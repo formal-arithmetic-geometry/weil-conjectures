@@ -218,4 +218,36 @@ theorem divisor_class (P : PurityFiniteSetting.{u}) {B T D : Scheme.{u}}
         P.DivisorAdditive T C ∧ P.DivisorChern (v ≫ b) C i hI := by
   sorry
 
+/-- The relative construction exists uniquely for every Cartier divisor on T.
+Source: lem-pur-divisor-class, second paragraph (blueprint: lem-pur-divisor-class).
+Proof: for each Cartier immersion apply ordinary_supported_kummer at ell^n and A.
+Its SupportedKummerBoundary specifies the frame torsor of the dual Cartier ideal,
+with the canonical frame off the divisor sent to zero. Its uniqueness gives a
+unique Ext class. Take its canonical Ext.hom as the Hom realization. Ext.hom is
+injective, and HEq with that realization determines homClassOf, so these classes
+assemble to a unique DivisorEtaleClasses. No smoothness is needed. -/
+theorem existsUnique_generalDivisorEtaleClasses (P : PurityFiniteSetting.{u})
+    (T : Scheme.{u}) (a : T ⟶ Spec (.of P.field.k))
+    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] :
+    ∃! C : P.DivisorEtaleClasses T, P.DivisorEtaleNormalized T a C := by
+  sorry
+
+/-- The unique normalized etale family, retaining the relative trivialization.
+Source: lem-pur-divisor-class, general construction (blueprint: lem-pur-divisor-class).
+-/
+def generalDivisorEtaleClasses (P : PurityFiniteSetting.{u})
+    (T : Scheme.{u}) (a : T ⟶ Spec (.of P.field.k))
+    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : P.DivisorEtaleClasses T :=
+  (P.existsUnique_generalDivisorEtaleClasses T a).choose
+
+/-- The general divisor class in the recorded supported-Hom realization.
+This is the existing divisorProEtale construction on the uniquely normalized family.
+Source: lem-pur-divisor-class, general construction (blueprint: lem-pur-divisor-class).
+-/
+def generalDivisorClass (P : PurityFiniteSetting.{u}) {D T : Scheme.{u}}
+    (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a]
+    [QuasiCompact a] (i : D ⟶ T) [IsClosedImmersion i]
+    (hI : i.ker.IsInvertible) : P.FunctorialCupH true i 2 1 :=
+  P.divisorProEtale i ((P.generalDivisorEtaleClasses T a).homClassOf i hI)
+
 end WeilConjectures.PurityFiniteSetting

@@ -5,7 +5,7 @@ Authors: SHEAF group Q67
 -/
 module
 
-public import Sheaf.Paper.PurityFrameClass
+public import Sheaf.Paper.PurityFrameKummer
 public import Sheaf.Paper.PurityFiniteSetting
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.SupportLongExact
@@ -110,8 +110,35 @@ def functorialCupConstant (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme
 
 /-- The published comparison inverse image, with its actual exact structure.
 Source: Stacks 099R (blueprint: lem-pur-supported-cup-functoriality). -/
-abbrev functorialCupComparisonFunctor (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :=
+def functorialCupComparisonFunctor (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    P.functorialCupSheaves false X ⥤ P.functorialCupSheaves true X :=
   ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X
+
+/-- Additivity of the same exact site comparison, with selected-site endpoints.
+Source: finite site comparison (blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupComparisonFunctor_additive (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) : (P.functorialCupComparisonFunctor X).Additive :=
+  inferInstanceAs ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).Additive)
+
+/-- Left exactness of the same canonical comparison.
+Source: finite site comparison (blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupComparisonFunctor_limits (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) : PreservesFiniteLimits (P.functorialCupComparisonFunctor X) :=
+  inferInstanceAs (PreservesFiniteLimits
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X))
+
+/-- Right exactness of the same canonical comparison.
+Source: finite site comparison (blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupComparisonFunctor_colimits (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) : PreservesFiniteColimits (P.functorialCupComparisonFunctor X) :=
+  inferInstanceAs (PreservesFiniteColimits
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X))
+
+/-- The existing strong monoidal structure of the canonical site comparison.
+Source: finite site comparison (blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupComparisonFunctor_monoidal (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) : (P.functorialCupComparisonFunctor X).Monoidal :=
+  inferInstanceAs ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).Monoidal)
 
 /-- The signed finite Tate sheaf at the actual annihilator ell^n. Source: the
 arbitrary-index Kummer prescription in def-pur-frame-class
@@ -486,6 +513,53 @@ def functorialCupExtHom {B : Type c} [Category.{v} B] [Abelian B]
     (DerivedCategory.singleFunctor B 0).obj F ⟶
       ((DerivedCategory.singleFunctor B 0).obj G)⟦(1 : ℤ)⟧ := x.hom
 
+/-- Transport an Ext class along equality of its target before specializing coefficients.
+Source: def-pur-frame-class, identical signed Kummer targets
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupExtTarget {B : Type c} [Category.{v} B] [Abelian B] [HasExt.{w} B]
+    {F G H : B} (h : G = H) (x : Abelian.Ext F G 1) : Abelian.Ext F H 1 :=
+  h ▸ x
+
+/-- The frame twist is the identical signed etale coefficient line.
+Source: def-pur-frame-class, degree-one Kummer target
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: unfold frameTwistEtale and functorialCupTwist at the etale site; both
+are the same finiteEtaleTateSheaf with the same annihilation proof. -/
+theorem functorialCupFrameTwistEtale_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    P.frameTwistEtale X 1 = P.functorialCupTwist false X 1 := by
+  sorry
+
+/-- The frame twist is the identical signed pro-etale coefficient line.
+Source: def-pur-frame-class, comparison of the Kummer target
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: both frameTwist and functorialCupTwist on the pro-etale site are the
+same exact comparison inverse image of the etale signed finite coefficient line. -/
+theorem functorialCupFrameTwist_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    P.frameTwist X 1 = P.functorialCupTwist true X 1 := by
+  sorry
+
+/-- The published Kummer Ext class, selected before passing to derived Hom.
+Source: the arbitrary-index Kummer prescription
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupKummerExt (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u})
+    (aX : X ⟶ Spec (.of P.field.k)) (v : Γ(X, ⊤)ˣ) :
+    Abelian.Ext (P.functorialCupConstant pro X) (P.functorialCupTwist pro X 1) 1 :=
+  match pro with
+  | false => functorialCupExtTarget (P.functorialCupFrameTwistEtale_eq X)
+      (P.frameKummerEtale X aX v)
+  | true => functorialCupExtTarget (P.functorialCupFrameTwist_eq X) (P.frameKummer X aX v)
+
+/-- The identity direct-image unitor of the actual supported coefficient source.
+Source: the full-support normalization
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupFullSupportIso (P : PurityFiniteSetting.{u}) (pro : Bool)
+    (X : Scheme.{u}) :
+    P.functorialCupSource pro (𝟙 X) ≅ P.functorialCupConstant pro X :=
+  match pro with
+  | false => (Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).app
+      (P.constantEtale X)
+  | true => (ProEtale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).app (P.constant X)
+
 /-- The concrete published Kummer class in the full-support Hom model. The direct
 image along the identity is identified by its canonical unitor.
 Source: def-pur-frame-class, arbitrary-index Kummer prescription
@@ -493,21 +567,9 @@ Source: def-pur-frame-class, arbitrary-index Kummer prescription
 def functorialCupKummer (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u})
     (aX : X ⟶ Spec (.of P.field.k)) (v : Γ(X, ⊤)ˣ) :
     P.FunctorialCupH pro (𝟙 X) 1 1 :=
-  match pro with
-  | false =>
-      letI : HasDerivedCategory.{u + 1} (P.functorialCupSheaves false X) :=
-        P.functorialCupHasDerived false X
-      (P.functorialCupSingle false X).map
-      ((Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app
-        (P.constantEtale X)) ≫ functorialCupExtHom (hD := P.functorialCupHasDerived false X)
-        (P.frameKummerEtale X aX v)
-  | true =>
-      letI : HasDerivedCategory.{u + 1} (P.functorialCupSheaves true X) :=
-        P.functorialCupHasDerived true X
-      (P.functorialCupSingle true X).map
-      ((ProEtale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app
-        (P.constant X)) ≫ functorialCupExtHom (hD := P.functorialCupHasDerived true X)
-        (P.frameKummer X aX v)
+  (P.functorialCupSingle pro X).map (P.functorialCupFullSupportIso pro X).hom ≫
+    functorialCupExtHom (hD := P.functorialCupHasDerived pro X)
+      (P.functorialCupKummerExt pro X aX v)
 
 
 /-- Scalar linearity of fixed-ring module sheaves, with the existing action.
@@ -853,6 +915,25 @@ structure FunctorialCupLocalizationLaws (P : PurityFiniteSetting.{u}) (pro : Boo
       P.functorialCupBoundary pro j a r (P.functorialCupOpenPullback pro i j v g sq aX a r α)
 
 
+/-- Map a degree-zero shifted Hom by an exact functor, using its canonical
+single and shift comparisons before specializing the site categories.
+Source: finite site comparison, Stacks 099W
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupExactHom {B D : Type c} [Category.{v} B] [Category.{v} D]
+    [Abelian B] [Abelian D] [hB : HasDerivedCategory.{w} B]
+    [hD : HasDerivedCategory.{w} D] (F : B ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {S T : B} (a : ℤ)
+    (α : (DerivedCategory.singleFunctor B 0).obj S ⟶
+      ((DerivedCategory.singleFunctor B 0).obj T)⟦a⟧) :
+    (DerivedCategory.singleFunctor D 0).obj (F.obj S) ⟶
+      ((DerivedCategory.singleFunctor D 0).obj (F.obj T))⟦a⟧ :=
+  (F.mapDerivedCategorySingleFunctor 0).inv.app S ≫
+    F.mapDerivedCategory.map α ≫
+    (F.mapDerivedCategory.commShiftIso a).hom.app
+      ((DerivedCategory.singleFunctor B 0).obj T) ≫
+    ((F.mapDerivedCategorySingleFunctor 0).hom.app T)⟦a⟧'
+
 /-- Closed sources are canonically identified by the site comparison, normalized
 on local constants. Source: Stacks 099V, 099W; proof Step 6
 (blueprint: lem-pur-supported-cup-functoriality).
@@ -870,6 +951,28 @@ theorem functorialCupComparisonSource_existsUnique (P : PurityFiniteSetting.{u})
           (P.functorialCupRestriction false i) ≫ b.hom = P.functorialCupRestriction true i := by
   sorry
 
+/-- The comparison target of the signed twist is its defining pro-etale sheaf.
+Source: finite coefficient twist comparison, Stacks 099W
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: unfold the two selected twists and the comparison functor. Both sides
+are exact comparison inverse image of the same signed finite etale Tate sheaf. -/
+theorem functorialCupComparisonTwist_eq (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) (r : ℤ) :
+    (P.functorialCupComparisonFunctor X).obj (P.functorialCupTwist false X r) =
+      P.functorialCupTwist true X r := by
+  sorry
+
+/-- The comparison target of the coefficient unit is its defining pro-etale constant.
+Source: finite coefficient comparison, Stacks 099W
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: unfold the constant sheaves and comparison functor; the pro-etale
+coefficient unit was defined as comparison inverse image of the etale unit. -/
+theorem functorialCupComparisonConstant_eq (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) :
+    (P.functorialCupComparisonFunctor X).obj (P.functorialCupConstant false X) =
+      P.functorialCupConstant true X := by
+  sorry
+
 /-- Canonical comparison on the supported Hom groups. The finite twist on the
 pro-etale site is the exact inverse image of the identical etale twist.
 Source: Stacks 09B1, supported functoriality Step 7
@@ -878,25 +981,21 @@ def functorialCupCompare (P : PurityFiniteSetting.{u})
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
     (α : P.FunctorialCupH false i a r) : P.FunctorialCupH true i a r :=
   (P.functorialCupSingle true X).map (P.functorialCupComparisonSource_existsUnique i).choose.inv ≫
-    ((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).inv.app
-      (P.functorialCupSource false i) ≫
-    (P.functorialCupComparisonFunctor X).mapDerivedCategory.map α ≫
-    ((P.functorialCupComparisonFunctor X).mapDerivedCategory.commShiftIso a).hom.app
-        ((P.functorialCupSingle false X).obj (P.functorialCupTwist false X r)) ≫
-    (((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).hom.app
-      (P.functorialCupTwist false X r))⟦a⟧'
+    functorialCupExactHom (hB := P.functorialCupHasDerived false X)
+      (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X) a α ≫
+    ((P.functorialCupSingle true X).map
+      (eqToHom (P.functorialCupComparisonTwist_eq X r)))⟦a⟧'
 
 /-- Ordinary site comparison in the identical degree-zero and shift conventions.
 Source: Stacks 099W (blueprint: lem-pur-supported-cup-functoriality). -/
 def functorialCupOrdinaryCompare (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a r : ℤ)
     (α : P.FunctorialCupOrdinaryH false X a r) : P.FunctorialCupOrdinaryH true X a r :=
-  ((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).inv.app
-      (P.functorialCupConstant false X) ≫
-    (P.functorialCupComparisonFunctor X).mapDerivedCategory.map α ≫
-    ((P.functorialCupComparisonFunctor X).mapDerivedCategory.commShiftIso a).hom.app
-        ((P.functorialCupSingle false X).obj (P.functorialCupTwist false X r)) ≫
-    (((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).hom.app
-      (P.functorialCupTwist false X r))⟦a⟧'
+  (P.functorialCupSingle true X).map
+      (eqToHom (P.functorialCupComparisonConstant_eq X).symm) ≫
+  functorialCupExactHom (hB := P.functorialCupHasDerived false X)
+    (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X) a α ≫
+    ((P.functorialCupSingle true X).map
+      (eqToHom (P.functorialCupComparisonTwist_eq X r)))⟦a⟧'
 
 /-- Open comparison preserves the actual extension-by-zero counit.
 Source: Stacks 099V, proof Step 7; lem-cbc-proetale-extension-zero-comparison
@@ -919,13 +1018,10 @@ def functorialCupOpenCompare (P : PurityFiniteSetting.{u})
     {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
     (α : P.FunctorialCupOpenH false i a r) : P.FunctorialCupOpenH true i a r :=
   (P.functorialCupSingle true X).map (P.functorialCupComparisonOpen_existsUnique i).choose.inv ≫
-    ((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).inv.app
-      (P.functorialCupOpenSource false i) ≫
-    (P.functorialCupComparisonFunctor X).mapDerivedCategory.map α ≫
-    ((P.functorialCupComparisonFunctor X).mapDerivedCategory.commShiftIso a).hom.app
-        ((P.functorialCupSingle false X).obj (P.functorialCupTwist false X r)) ≫
-    (((P.functorialCupComparisonFunctor X).mapDerivedCategorySingleFunctor 0).hom.app
-      (P.functorialCupTwist false X r))⟦a⟧'
+    functorialCupExactHom (hB := P.functorialCupHasDerived false X)
+      (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X) a α ≫
+    ((P.functorialCupSingle true X).map
+      (eqToHom (P.functorialCupComparisonTwist_eq X r)))⟦a⟧'
 
 /-- The `supported_bijective` clause of `FunctorialCupComparisonLaws`.
 Named to share its kernel type.
@@ -1107,3 +1203,4 @@ theorem supportedCupFunctoriality (P : PurityFiniteSetting.{u}) :
   sorry
 
 end WeilConjectures.PurityFiniteSetting
+
