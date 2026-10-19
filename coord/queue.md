@@ -1,11 +1,11 @@
 # Work queue
 
-684 items; claim with `tools/claim.py next <group> [--stage N]`.
+681 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (34)
+## Stage 2: nodes to state (31)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -18,7 +18,6 @@
 | `thm-sf-kunneth-relative` | 1 | state | 37 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
-| `thm-sf-dual-base-change` | 1 | state | 18 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
@@ -30,12 +29,10 @@
 | `lem-sf-identification-coefficient-transport` | 1 | state | 1 |
 | `lem-sf-integral-compactification-comparison-bridge` | 1 | state | 1 |
 | `det-sp-p1-trace` | 1 | state | 0 |
-| `lem-a1-lisse-sections-stalk-evaluation` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-pur-finite-adjoint-mate-compatibility` | 1 | state | 0 |
 | `lem-pur-weil-basechange-semilinear-pasting` | 1 | state | 0 |
 | `lem-pur-weil-semilinear-exchange-reindexing` | 1 | state | 0 |
-| `lem-sf-hom-finite-projective` | 1 | state | 0 |
 | `lem-sf-proper-product-counit-transpose` | 1 | state | 0 |
 | `lem-sp-tower-p1-arbitrary-base-integrals` | 1 | state | 0 |
 | `lem-trf-finite-horizontal-shriek-mate` | 1 | state | 0 |
