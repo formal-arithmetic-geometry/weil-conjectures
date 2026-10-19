@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sfb-derived-restrict-levelwise",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Derived restriction of scalars is termwise",
@@ -13,30 +13,116 @@
   "place": "node def-sfb-derived-restrict-levelwise, order 1628"
  },
  "stmt_deps": [
-  "lem-sfb-extend-scalars-kflat"
+  "lem-sfb-extend-scalars-kflat",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
-   "text": "Kernels and cokernels of module objects are computed on the underlying objects, both for\n$\\mathcal R$- and for $\\mathcal S$-modules, so $\\operatorname{Res}_\\varphi$ preserves finite\nlimits and finite colimits, i.e. it is exact [sk-def-sfb-change-of-scalars]. The right\nderived functor of an exact functor is the termwise functor\n[sk-def-sfb-derived-categories].",
+   "text": "Put $\\mathcal A=\\Mod_{\\mathcal S}(\\mathcal C)$, $\\mathcal B=\\Mod_{\\mathcal R}(\\mathcal C)$ and $F=\\operatorname{Res}_\\varphi$. The ambient hypotheses are those of [lem-sfb-extend-scalars-kflat]: $\\mathcal C$ is closed symmetric monoidal Grothendieck abelian, tensor is additive in each variable, and $\\mathcal R,\\mathcal S$ are commutative ring objects. Apply [lem-sfb-modobj-grothendieck] separately to $\\mathcal S$ and $\\mathcal R$. Thus $\\mathcal A$ and $\\mathcal B$ are Grothendieck abelian; in particular they are abelian. Apply [lem-sfb-grothendieck-k-injective] to $\\mathcal A$: every cochain complex of $\\mathcal S$-modules has a monomorphic quasi-isomorphism to a K-injective complex. This supplies the resolution hypothesis needed for right derivation, without using the K-flat preservation conclusion of the context lemma.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-derived-categories"
+    "lem-sfb-extend-scalars-kflat",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-grothendieck-k-injective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.proof.md",
+    "place": "First sentence: verify the abelian source and target and the right-derived existence hypotheses."
+   }
+  },
+  {
+   "text": "Closedness means that $X\\otimes-$ has a right adjoint for every $X$. The left-adjoint colimit theorem [lem-weil-pbc-left-adjoint-preserves-colimits] therefore gives preservation of all existing small colimits by $X\\otimes-$. Symmetry gives a natural isomorphism $-\\otimes X\\cong X\\otimes-$; the same colimit universal property is preserved under this isomorphism, so tensoring on either side preserves colimits. The Grothendieck category $\\mathcal C$ has equalizers and coequalizers. Hence the hypotheses of clauses 2 and 3 of [sk-def-sfb-change-of-scalars] hold: it is braided and closed, $\\mathcal R$ is commutative, and both tensor functors preserve colimits. Its clause 4 now applies because $\\mathcal C$ is abelian and tensor is additive in each variable. It states exactly that $F=\\operatorname{Res}_\\varphi$ is exact, preserving finite limits and finite colimits. Its clause 1 identifies $F$ as the unchanged underlying-object and underlying-arrow functor with action restricted through $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.proof.md",
+    "place": "First sentence: exactness of restriction from the change-of-scalars node, with its hypotheses checked."
+   }
+  },
+  {
+   "text": "By step 2, $F$ preserves finite colimits between the abelian categories $\\mathcal A,\\mathcal B$. Thus [lem-sfb-preserving-colimits-additive] gives $F(f+g)=F(f)+F(g)$ for every pair of parallel module morphisms. Together with the K-injective resolutions of step 1, this is precisely the additivity and resolution input of [def-sfb-right-derived-functor], so $RF:D(\\mathcal A)\\to D(\\mathcal B)$ is defined. All complexes and derived categories here are unbounded; no boundedness or flatness of $\\mathcal S$ over $\\mathcal R$ is required.",
+   "uses": [
+    "lem-sfb-preserving-colimits-additive",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.proof.md",
+    "place": "Second sentence: check the additive-functor hypotheses of the exact right-derived comparison."
+   }
+  },
+  {
+   "text": "Apply [def-sfb-right-derived-exact] to this $F$, using step 3 for its right-derived existence hypotheses and step 2 for exactness. It gives the canonical isomorphism $RF\\cong D(F)$. By the statement of that node, $D(F)$ is induced by applying $F$ termwise; and clause 1 of [sk-def-sfb-change-of-scalars] identifies this with restriction of the action through $\\varphi$ in every degree and on every differential and complex morphism. Substituting $\\mathcal A=\\Mod_{\\mathcal S}$ and $\\mathcal B=\\Mod_{\\mathcal R}$ gives exactly the asserted canonical isomorphism $R(\\operatorname{Res}_\\varphi)\\cong D(\\operatorname{Res}_\\varphi)$ between the stated unbounded derived categories.",
+   "uses": [
+    "def-sfb-right-derived-exact",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.proof.md",
+    "place": "Second sentence: specialize the canonical exact-functor comparison to restriction of scalars."
+   }
   }
  ],
  "proof_deps": [
+  "lem-sfb-extend-scalars-kflat",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-derived-categories"
+  "lem-sfb-preserving-colimits-additive",
+  "def-sfb-right-derived-functor",
+  "def-sfb-right-derived-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-extension-of-scalars/def-sfb-derived-restrict-levelwise.proof.md",
+  "place": "Both sentences, expanded using the existing module-category, K-injective-resolution, additivity and exact-derived comparison nodes."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total right derived functor of an exact restriction of scalars functor is termwise restriction",
+   "results": "CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.totalLeftDerived, ModuleCat.restrictScalars, ModuleCat.instIsRightAdjointRestrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, RingCat.moduleCatRestrictScalarsPseudofunctor, ModuleCat.RestrictScalars.obj' Generic total derived constructions and ordinary ring-module restriction do not supply this module-object comparison.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of restriction of scalars for module objects equals termwise restriction because restriction is exact",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapExactFunctor_smul, ModuleCat.preservesLimit_restrictScalars, ModuleCat.preservesColimit_restrictScalars, ModuleCat.restrictScalarsId, ModuleCat.instIsRightAdjointRestrictScalars, DerivedCategory.instLinearCochainComplexIntQ, PresheafOfModules.restrictScalarsCompToPresheaf Hits concern ordinary modules or induced exact derived functors; none states the comparison for arbitrary module objects and total right derivation.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory'",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorIsoMapDerivedCategory|rightDerivedComap|preservesFiniteLimits_comap",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact additive functor between abelian categories the induced unbounded derived category functor is canonically its total right derived functor",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory Hits concern ordinary modules or induced exact derived functors; none states the comparison for arbitrary module objects and total right derivation.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -125,5 +211,20 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "def-sfb-derived-restrict-levelwise",
+  "worker": "stage1",
+  "summary": "Preserved the imported statement, its complete ambient hypotheses and all audit/import metadata. Replaced the two broad proof citations with four explicit steps: module-category and K-injective existence, checked exactness, additivity/right-derivation, and the canonical exact-functor comparison. Reused every ingredient from existing nodes; no new nodes. The context K-flat lemma is used only for its hypotheses, not its preservation conclusion.",
+  "blueprint": "The first blueprint proof sentence is realized by steps 1 and 2 (abelian module categories and exactness of restriction); the second sentence by steps 3 and 4 (right-derived existence and canonical identification with the termwise functor). Whole-blueprint searches for exact functor and restriction of scalars found no distinct node with exactly this full module-object specialization; same_as is empty."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-59eaab5f6",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-59eaab5f6 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement. The statement matches main-20261015 def-sfb-derived-restrict-levelwise.md (order 1628) exactly, and no new nodes are added. Step 1: hypotheses come from the lem-sfb-extend-scalars-kflat setting. lem-sfb-modobj-grothendieck (exact hypothesis match) is applied to R and S, and lem-sfb-grothendieck-k-injective to Mod_S; its K-injective notion is the same as def-sfb-right-derived-functor's. Step 2: closed plus Mathlib leaf 0038 means X⊗- preserves colimits, symmetry moves this to -⊗X, and abelian C has (co)equalizers. That covers the hypotheses of clauses 2 and 3 of sk-def-sfb-change-of-scalars, and clause 4 then states exactness of Res_φ outright. Step 3: Mathlib leaf lem-sfb-preserving-colimits-additive (010N) gives additivity, so the def-sfb-right-derived-functor input holds. Step 4 cites only the statement of def-sfb-right-derived-exact (canonical RF≅D(F), termwise), and clause 1 identifies termwise F with restriction. Route: all cited nodes are in the unit closure (via sk-def-sfb-derived-categories, change-of-scalars and sk-prop-sfb-module-category); the off-unit node is a Mathlib leaf, so no tool_uses entry is needed. Graph walk finds no cycle. No SGA. Added stmt_deps are the R/D notions. The slopmaster2 decl is rests_on_sorry, so the split is appropriate. Edge cases checked: φ=id, S=0, Z→Z/2 (no flatness needed), unbounded complexes. No fixes written."
  }
 }
