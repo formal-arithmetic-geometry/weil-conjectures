@@ -1,0 +1,103 @@
+{
+ "id": "lem-sp-direct-image-tensor-pullback-localization",
+ "kind": "statement",
+ "title": "Normalized adjunction mates commute with comparison squares",
+ "statement": "Let A,B,C,D and A',B',C',D' be categories, with functors Q_A:A→A', Q_B:B→B', Q_C:C→C', Q_D:D→D'. Let L:A→C, R:B→A, H:B→D, S:D→C have corresponding functors L',R',H',S' between the primed categories. Specify natural isomorphisms l:Q_A⋙L'≅L⋙Q_C, r:Q_B⋙R'≅R⋙Q_A, h:Q_B⋙H'≅H⋙Q_D, s:Q_D⋙S'≅S⋙Q_C, and adjunctions E⊣R', F⊣S'. Let b_K:L(R(K))→S(H(K)) be arrows and β:R'⋙L'→H'⋙S' a natural transformation. Fix P∈A, EP∈B, FP∈D, arrows u:P→R(EP), v:L(P)→S(FP), e:E(Q_A(P))→Q_B(EP), d:F(Q_C(L(P)))→Q_D(FP), and g:H(EP)→FP. Assume η_E≫R'(e)≫r_EP=Q_A(u), η_F≫S'(d)≫s_FP=Q_C(v), β_(Q_B EP)≫S'(h_EP)≫s_(H EP)=L'(r_EP)≫l_(R EP)≫Q_C(b_EP), and L(u)≫b_EP≫S(g)=v. If θ:E⋙H'≅L'⋙F has inverse equal to the mate of β under the two adjunctions, then L'(R'(e)≫r_EP)≫l_(R EP)≫Q_C(b_EP≫S(g)) equals β_(E(Q_A P))≫S'(θ_(Q_A P)≫F(l_P)≫d)≫s_FP. All compositions use the displayed functors and the units of the specified adjunctions; no localization or exactness assumptions are necessary.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Step 1, transport the ordinary balanced mate through the universal scalar-derived counits"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Transpose θ inverse followed by H′(e), h, and Q_D(g) under F⊣S′. The inverse-mate unit identity unit_mateEquiv_symm moves the source unit across β. Naturality of β and s, the comparison-square hypothesis, and naturality of l turn this transpose into Q_C(L(u)≫b_EP≫S(g)). Use the ordinary unit equation and target unit normalization. Injectivity of the Hom equivalence and cancellation of s yield θ inverse≫H′(e)≫h≫Q_D(g)=F(l_P)≫d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Substitute this equality into the asserted square. Cancel θ followed by its inverse. Naturality of β and s and the comparison-square hypothesis give the result, using functoriality and associativity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Step 1: formal mate transport used to identify the localized ordinary scalar comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A mate of a natural transformation commutes with localization under normalized adjunction units and functor comparison isomorphisms",
+   "results": "8 hits: localization_unit_app, derived adjunction and unit/counit constructions, unit_mateEquiv. They supply unit identities but not the comparison square proved here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "One hit, CategoryTheory.unit_mateEquiv_symm in Mathlib.CategoryTheory.Adjunction.Mates; used to prove the transport formula.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*localization|localization.*mateEquiv",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DirectImageChangeRingTranspose",
+  "date": "2026-10-19",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-direct-image-change-ring-transpose",
+   "place": "Step 1 localization square",
+   "via": [
+    "lem-sp-direct-image-tensor-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImageTensorPullbackLocalization",
+  "declaration": "directImageChangeRing_tensorNormalization_localization",
+  "file": "lean/Sheaf/Paper/DirectImageTensorPullbackLocalization.lean",
+  "statement": "theorem directImageChangeRing_tensorNormalization_localization\n    {A B C D AD BD CD DD : Type*}\n    [Category A] [Category B] [Category C] [Category D]\n    [Category AD] [Category BD] [Category CD] [Category DD]\n    (QA : A ⥤ AD) (QB : B ⥤ BD) (QC : C ⥤ CD) (QD : D ⥤ DD)\n    (L : A ⥤ C) (R : B ⥤ A) (H : B ⥤ D) (S : D ⥤ C)\n    (Ld : AD ⥤ CD) (Rd : BD ⥤ AD) (Hd : BD ⥤ DD) (Sd : DD ⥤ CD)\n    (E : AD ⥤ BD) (F : CD ⥤ DD) (a : E ⊣ Rd) (a' : F ⊣ Sd)\n    (l : QA ⋙ Ld ≅ L ⋙ QC) (r : QB ⋙ Rd ≅ R ⋙ QA)\n    (h : QB ⋙ Hd ≅ H ⋙ QD) (s : QD ⋙ Sd ≅ S ⋙ QC)\n    (b : ∀ K, L.obj (R.obj K) ⟶ S.obj (H.obj K)) (bd : Rd ⋙ Ld ⟶ Hd ⋙ Sd)\n    (P : A) (EP : B) (FP : D)\n    (u : P ⟶ R.obj EP) (v : L.obj P ⟶ S.obj FP)\n    (e : E.obj (QA.obj P) ⟶ QB.obj EP)\n    (d : F.obj (QC.obj (L.obj P)) ⟶ QD.obj FP)\n    (hu : a.unit.app (QA.obj P) ≫ Rd.map e ≫ r.hom.app EP = QA.map u)\n    (hv : a'.unit.app (QC.obj (L.obj P)) ≫ Sd.map d ≫ s.hom.app FP = QC.map v)\n    (hb : bd.app (QB.obj EP) ≫ Sd.map (h.hom.app EP) ≫ s.hom.app (H.obj EP) =\n      Ld.map (r.hom.app EP) ≫ l.hom.app (R.obj EP) ≫ QC.map (b EP))\n    (g : H.obj EP ⟶ FP)\n    (hg : L.map u ≫ b EP ≫ S.map g = v)\n    (θ : E ⋙ Hd ≅ Ld ⋙ F)\n    (hθ : θ.inv = ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ bd)).natTrans) :\n    Ld.map (Rd.map e ≫ r.hom.app EP) ≫ l.hom.app (R.obj EP) ≫\n        QC.map (b EP ≫ S.map g) =\n      bd.app (E.obj (QA.obj P)) ≫\n        Sd.map (θ.hom.app (QA.obj P) ≫ F.map (l.hom.app P) ≫ d) ≫ s.hom.app FP",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T192753-L-1865806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T192753-L-1865806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

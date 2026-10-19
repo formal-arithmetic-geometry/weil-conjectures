@@ -18,71 +18,44 @@
  ],
  "proof": [
   {
-   "text": "Put $L_R=p_R^*$ and $R_R=Rp_{*,R}$ for $R=A,B$. Apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $u=p$, $R_T=A_T$ and $S_T=B_T$. Its coefficient-square hypothesis holds: the identifications $c_A,c_B$ of [prop-weil-pbc-proetale-constant-ring-map] preserve constant sections, so both composites $p^{-1}A_Y\\to B_{\\bar X}$ send each locally constant $a$ to its image in $B$. They therefore agree as sheaf maps. Denote the supplied inverse-image comparison by $b:r_{\\bar X}L_B\\simeq L_Ar_Y$ and retain the specified direct-image comparison $d:r_YR_B\\simeq R_Ar_{\\bar X}$. In particular the cited adjunct identity applies on the ordinary unbounded categories in the statement.",
+   "text": "Use the flat K-flat representative normalization theorem for the first conjunct. Its comparison is precisely the concrete b inverse followed by restricted theta used in the definition of tau.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "lem-sp-direct-image-tensor-pullback-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $\\theta_K:L_BT_YK\\simeq T_{\\bar X}L_AK$ for the coefficient/pullback identification in the definition of $\\gamma$. Under $r_TT_TK=K\\otimes_A^{\\mathbf L}B_T$ its underlying comparison is\n$$r_{\\bar X}(\\theta_K)\\circ b_{T_YK}^{-1}=\\tau_K,$$\nwhere $\\tau_K:L_A(K\\otimes_A^{\\mathbf L}B_Y)\\simeq L_AK\\otimes_A^{\\mathbf L}B_{\\bar X}$ is the tensor-pullback comparison. Here is the normalization check. Identified-coefficient module pullback is inverse image with transported action [def-weil-pbc-proetale-operations]; $b$ forgets the $B$-action in that same inverse image. For an $A_Y$-module complex $P$, the ordinary coefficient/pullback comparison is the balanced map $p^{-1}(P\\otimes_A B_Y)\\to p^{-1}P\\otimes_A B_{\\bar X}$ sending an inverse-image pure tensor of $x$ and $s$ to $p^{-1}x\\otimes c_B(p^{-1}s)$. Forgetting the action gives exactly the ordinary tensor comparison; the tensor/sheafification definition [def-pur-sheaf-tensor-product] makes equality on these local generators equality of sheaf maps. Apply this in every degree to a flat K-flat representative $P$ of $K$. Scalar extension is computed this way by [det-sp-scalar-extension-functor]; pullback preserves such representatives by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For the underlying tensor comparison one may also resolve $B_Y$; its augmentation to $B_Y$ gives the same map by the displayed pure-tensor equation and naturality. Localization and inversion of these quasi-isomorphisms preserve the equation, with independence of representatives by [lem-weil-pbc-site-derived-tensor-descent]. Thus the identity holds for every unbounded $K$.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-pur-sheaf-tensor-product",
-    "det-sp-scalar-extension-functor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
-   }
-  },
-  {
-   "text": "Set $K=R_AN$ and $t_N=T_{\\bar X}(\\varepsilon^A_N)\\circ\\theta_{R_AN}:L_BT_YR_AN\\to T_{\\bar X}N$. By definition its $B$-adjunct is $\\gamma_N$. The precise adjunct clause of [lem-weil-pbc-ring-sheaf-change-adjunction], applied with $M=T_YR_AN$ and target $T_{\\bar X}N$, says that the $A$-adjunct of $r_{\\bar X}(t_N)\\circ b_{T_YR_AN}^{-1}$ is $d_{T_{\\bar X}N}\\circ r_Y(\\gamma_N)$. Expanding $t_N$ and using Step 2 gives\n$$r_{\\bar X}(t_N)\\circ b_{T_YR_AN}^{-1}=(\\varepsilon^A_N\\otimes_A^{\\mathbf L}1_{B_{\\bar X}})\\circ\\tau_{R_AN},$$\nsince extension sends a morphism $v$ to $v\\otimes^{\\mathbf L}1_B$ [det-sp-scalar-extension-functor]. The adjunction bijection is injective, so the displayed restricted map equals the projection map defined by this transpose. This proves the asserted identity without a projection-formula invertibility claim.",
+   "text": "Apply the exact adjunct clause of the ring-sheaf change-adjunction theorem to theta followed by scalar extension of the A-counit. The coefficient square commutes by naturality of the constant inverse-image map. Invert the Hom equivalence and expand functor composition to obtain the asserted A-transpose.",
    "uses": [
     "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "prop-weil-pbc-proetale-constant-ring-map",
     "det-sp-scalar-extension-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
-   }
+   "elementary": true
   },
   {
-   "text": "For a morphism $v:N\\to N'$, counit naturality gives $v\\circ\\varepsilon^A_N=\\varepsilon^A_{N'}\\circ L_AR_A(v)$ [def-weil-pbc-proetale-operations]. Tensor it with $1_{B_{\\bar X}}$ and use the naturality of $\\tau$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. If $h_N=(\\varepsilon^A_N\\otimes^{\\mathbf L}1_B)\\circ\\tau_{R_AN}$, the resulting equation is\n$$(v\\otimes^{\\mathbf L}1_B)\\circ h_N=h_{N'}\\circ L_A(R_A(v)\\otimes^{\\mathbf L}1_B).$$\nTranspose this equation through $L_A\\dashv R_A$; the Hom bijection is natural in both variables by [def-weil-pbc-proetale-operations]. It says exactly that the projection maps, and hence the maps identified in Step 3, are natural in $N$. All comparisons above were on the unbounded categories; no step used flatness of $B$ over $A$ or boundedness of $N$.",
+   "text": "Apply naturality of the adjunction Hom equivalence to theta followed by the scalar-extended counit. Naturality of theta and of the A-counit gives naturality of gamma. Map this identity through restriction and apply naturality of the specified direct-image comparison d. This is the last conjunct.",
    "uses": [
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "det-sp-scalar-extension-functor",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-    "place": "Step 1, normalization of the proper coefficient map and its etale comparison"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sp-direct-image-tensor-pullback-normalization",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-pbc-proetale-operations",
-  "def-pur-sheaf-tensor-product",
   "det-sp-scalar-extension-functor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-  "place": "Step 1 (counit-tensor definition), expanded using Stacks Tags 0D6D, 0D6E, 07A6 and 07A4"
+  "place": "Step 1, with the representative normalization isolated and the adjunction and naturality calculations proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -276,5 +249,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Repair of returned immutable head 50b93579b361 (H3/H6): retain the concrete b inverse followed by r(theta), and add the Step-2 conjunct IsDirectImageChangeRingTensorPullbackNormalized. It asserts on every flat-term K-flat representative the actual sheafified pure-tensor formula, using the constant coefficient comparison via its adjoint ring-section map, and the localization square relating that chain map to this concrete tau through the published scalar-derived counits and exact quotient factorizations. The remaining conjuncts assert the restricted A-transpose and naturality. Thus the projection map is canonically normalized independently of the mate definition. All original hypotheses and categories are retained; no dependency repair or source-statement change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T192753-L-1865806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
