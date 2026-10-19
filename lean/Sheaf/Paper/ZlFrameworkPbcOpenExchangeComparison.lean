@@ -42,6 +42,8 @@ import Sheaf.Paper.QcqsCompactSupportRealization
 import Sheaf.Paper.RationalCoefficientCategoryComparison
 import Sheaf.Paper.SfWeilSheafComplex
 
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
+
 /-! # Framework and PBC open exchange comparison
 Source: thm-cbc-qbar.proof.md, common-stage descent
 (blueprint: lem-zl-framework-pbc-open-exchange-comparison).
@@ -309,7 +311,22 @@ theorem fixedPairSupportComparison
       CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso aX.symm ⋙
         CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso e',
       ∀ K, (t.hom.app K).hom.f = b.hom.app K.carrier := by
-  sorry
+  let hα : Functor.whiskerRight b.hom ψY ≫
+      (Endofunctor.IsoAlgebra.compCommIso aX.symm e').hom =
+      (Endofunctor.IsoAlgebra.compCommIso e aY.symm).hom ≫
+        Functor.whiskerLeft φX b.hom := by
+    ext K
+    dsimp [Endofunctor.IsoAlgebra.compCommIso]
+    apply (cancel_epi (aY.hom.app (F.obj K))).1
+    simpa [Category.assoc, ← G.map_comp] using
+      congrArg (fun z ↦ z ≫ G.map (aX.inv.app K)) (_h K)
+  refine ⟨Endofunctor.IsoAlgebra.mapOfNatIsoCompIso e aY.symm ≪≫
+      Endofunctor.IsoAlgebra.mapOfNatIsoIsoOfIso b hα ≪≫
+      (Endofunctor.IsoAlgebra.mapOfNatIsoCompIso aX.symm e').symm, ?_⟩
+  intro K
+  change (𝟙 _) ≫ (b.hom.app K.carrier ≫ 𝟙 _) = _
+  simp
+
 
 
 /-- Comparison squares paste with the canonical functor associators. Applied to two
@@ -366,6 +383,40 @@ theorem pastedExchangeComparison
       ((Functor.associator G Q T).inv ≫ Functor.whiskerRight e' T ≫
         (Functor.associator Q' G' T).hom ≫ Functor.whiskerLeft Q' d' ≫
         (Functor.associator Q' T' G'').inv) := by
-  sorry
+  intro K
+  have h₁ := _first K
+  have h₂ := _second (P'.obj K)
+  dsimp [Comparisons.source, Comparisons.target] at h₁ h₂ ⊢
+  simp only [Functor.map_comp, Category.id_comp, Category.comp_id] at h₁ h₂ ⊢
+  simp only [Category.assoc] at h₁ h₂ ⊢
+  calc
+    _ = D.a.hom.app (P.obj (F.obj K)) ≫
+        T.map (C.a.hom.app (F.obj K) ≫ Q.map (C.b.hom.app K) ≫
+          e'.app (JX.obj K)) ≫ d'.app (Q'.obj (JX.obj K)) := by
+      simp [Functor.map_comp, Category.assoc]
+    _ = D.a.hom.app (P.obj (F.obj K)) ≫
+        T.map (JV.map (e.app K) ≫ C.b'.hom.app (P'.obj K) ≫
+          G'.map (C.a'.hom.app K)) ≫ d'.app (Q'.obj (JX.obj K)) := by rw [h₁]
+    _ = JZ.map (R.map (e.app K)) ≫ D.a.hom.app (F'.obj (P'.obj K)) ≫
+        T.map (C.b'.hom.app (P'.obj K)) ≫ T.map (G'.map (C.a'.hom.app K)) ≫
+          d'.app (Q'.obj (JX.obj K)) := by
+      simp only [Functor.map_comp, Category.assoc]
+      have hn := D.a.hom.naturality (e.app K)
+      dsimp at hn
+      rw [← reassoc_of% hn]
+    _ = JZ.map (R.map (e.app K)) ≫ D.a.hom.app (F'.obj (P'.obj K)) ≫
+        T.map (D.b.hom.app (P'.obj K)) ≫ d'.app (JU.obj (P'.obj K)) ≫
+          G''.map (T'.map (C.a'.hom.app K)) := by
+      rw [_middle]
+      have hn := d'.naturality (C.a'.hom.app K)
+      dsimp at hn
+      rw [hn]
+    _ = JZ.map (R.map (e.app K)) ≫ JZ.map (d.app (P'.obj K)) ≫
+        D.b'.hom.app (R'.obj (P'.obj K)) ≫ G''.map (D.a'.hom.app (P'.obj K)) ≫
+          G''.map (T'.map (C.a'.hom.app K)) := by
+      have h₂' := congrArg (fun z ↦ z ≫ G''.map (T'.map (C.a'.hom.app K))) h₂
+      simp only [Category.assoc] at h₂'
+      rw [h₂']
+    _ = _ := by simp
 
 end WeilConjectures.ZlExchange
