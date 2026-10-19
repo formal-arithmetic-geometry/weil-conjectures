@@ -21,111 +21,84 @@
  ],
  "proof": [
   {
-   "text": "The standing setting [sk-def-sfb-dc-setting] makes $Y$ separated and of finite type over $k$, so $Y$ is qcqs by [lem-weil-pbc-qcqs-over-affine]. Properness of $p$ includes separatedness and finite type by [def-weil-proper-morphism]. Thus the compactification-comparison statements below apply. The factorization $c_0=(X\\xrightarrow{\\mathrm{id}_X}X\\xrightarrow{p}Y)$ is a compactification in [sk-def-nagata-sketch-data]: the identity is an open immersion and is quasi-compact because the inverse image of any affine open is that same affine open; its proper part is the given $p$.",
+   "text": "Use Compactification.ofIsProper p.left for the identity compactification c0 = (id_X,p). Its open immersion is the identity, hence quasi-compact, and its proper part is p. This is the compactification of [def-nagata-compactification] with the given [def-weil-proper-morphism] hypothesis.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-qcqs-over-affine",
-    "def-weil-proper-morphism",
-    "sk-def-nagata-sketch-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "Paragraph (1): the identity compactification; geometric hypotheses made explicit"
-   }
-  },
-  {
-   "text": "For the identity open immersion the localization functor in [def-sfb-finite-extension-by-zero] is the identity. Left Kan extension along the identity returns the original presheaf (at each object its defining comma category has that object with its identity as a terminal object), and sheafification of an already given sheaf returns that sheaf. Hence $\\mathrm{id}^{\\Ab}_!\\cong\\mathrm{id}$. The same Kan-extension calculation in [def-sfb-finite-upper-star], using the projection $V\\times_X X\\cong V$, identifies $\\mathrm{id}^*_{\\Ab}$ with the identity. Write $F=\\pi_X^*$ and $R=(\\pi_X)_*$. For $h_1=\\mathrm{id}_X$ and $h_2=\\pi_X$, let $\\delta:R\\circ(\\mathrm{id}_X)_*\\xrightarrow{\\sim}R$ be the forward pushforward comparison of [def-sfb-finite-lower-star-comp]. Its fibre-product projection becomes the identity under $V\\times_X X\\cong V$. The revised definition [def-sfb-finite-upper-star-comp] makes $c:F\\xrightarrow{\\sim}(\\mathrm{id}_X)^*_{\\Ab}F$ the conjugate of this forward $\\delta$, with the direction reversed by taking mates. To check its component explicitly, use $F\\dashv R$ and $(\\mathrm{id}_X)^*_{\\Ab}\\dashv(\\mathrm{id}_X)_*$ from [def-sfb-finite-upper-lower-star-adjunction]. Under the Kan-extension identification, the latter is the identity adjunction with identity unit and counit. Thus the composite adjunction of [def-weil-pbc-composite-adjunction] has the same unit $\\eta$ as $F\\dashv R$. The inverse-mate formula of [def-weil-pbc-adjunction-mate], with both intervening functors identities, gives\n$$c_A=\\varepsilon_{F A}\\circ F(\\eta_A)=\\mathrm{id}_{F A},$$\nwhere the first equality also uses $\\delta=\\mathrm{id}$ under the projection identifications and the second is the triangle identity for $F\\dashv R$. Consequently the inverse comparison $c^{-1}:(\\mathrm{id}_X)^*_{\\Ab}\\pi_X^*\\to\\pi_X^*$ is the identity as well. In the module-object definition [def-sfb-module-open-lower-shriek], $\\alpha_{\\mathrm{id}}$ is, by [sk-def-sfb-coefficient-morphisms] and [sk-def-sfb-pullback-from-point-comp], the component of the identity pullback-composition comparison and hence the identity under the identity pullback identification, so restriction of scalars changes nothing. The projection-formula map is the transpose of the unit map specified in [lem-sfb-open-projection-formula]. For the identity localization the Kan-extension unit at $M$ is $\\mathrm{id}_M$, so this transpose and its inverse are $\\mathrm{id}_{\\Lambda_X\\otimes M}$ under the identifications above. The action formula of [def-sfb-module-linear-open-lower-shriek] therefore reads $\\Lambda_X\\otimes M\\to M$, the original action. Thus $\\mathrm{id}_!\\cong\\mathrm{id}$ also on module objects, naturally in $M$. Applying this identification in each degree gives $D(\\mathrm{id}_!)\\cong\\mathrm{id}$; the termwise interpretation is precisely [sk-def-sfb-module-derived-lower-shriek]. Consequently the candidate for $c_0$ is $Rp_*D(\\mathrm{id}_!)\\cong Rp_*$.",
-   "uses": [
-    "def-sfb-finite-extension-by-zero",
-    "def-sfb-module-open-lower-shriek",
-    "def-sfb-module-linear-open-lower-shriek",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-module-derived-lower-shriek",
-    "def-sfb-finite-upper-star",
-    "def-sfb-finite-upper-star-comp",
-    "def-sfb-finite-lower-star-comp",
-    "lem-sfb-open-projection-formula",
-    "def-sfb-finite-upper-lower-star-adjunction",
-    "def-weil-pbc-composite-adjunction",
-    "def-weil-pbc-adjunction-mate"
+    "def-nagata-compactification",
+    "def-weil-proper-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "Paragraph (1): identity extension by zero on sheaves, module actions and complexes; compositor direction as corrected in the current reviewed def-sfb-finite-upper-star-comp"
+    "place": "Paragraph (1): identity compactification"
    }
   },
   {
-   "text": "By [det-sf-comp-coherence-single], applied to $c_0$, its ambient candidate $Rp_*D(\\mathrm{id}_!)$ restricts to a functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$. The localizing subcategories, formed with small coproducts in the fixed universe, are closed under isomorphisms by [det-def-localizing-closure-existence] (2), so step 2 identifies this functor with the restriction of the ambient $Rp_*$. Let $c$ be the compactification used for $Rp_!$ in [sk-thm-existence] (2). The comparison $\\phi_{c_0,c}$ of [det-sf-comp-coherence-cocycle], followed by the identification of step 2, gives a natural isomorphism $\\alpha:Rp_!\\xrightarrow{\\sim}Rp_*|_{\\Loc(\\Dctf(X,\\Lambda))}$. The current single-candidate statement explicitly fixes the positive-characteristic standing field, separated finite-type $k$-schemes and the finite or condensed $\\ell$-adic coefficient stages. These hypotheses are exactly the standing setting and admissibility assumed here; its compactification and qcqs hypotheses, and those of the cocycle statement, hold by step 1, and their statements apply to every admissible coefficient stage on the indicated localizing categories. This proves clause (1).",
+   "text": "For the module pullback of [def-sfb-module-upper-star], the existing proved source-library isomorphism CondensedRing.upperStarId identifies pullback along id_X with the identity. Transport the module adjunction of [def-sfb-module-open-lower-shriek-adjunction] along this isomorphism. Both extension by zero along id_X and the identity functor are now left adjoint to the identity, so Adjunction.leftAdjointUniq identifies them. Apply Functor.mapDerivedCategoryNatIso and mapDerivedCategoryIdIso, then whisker by Rp_* and use the left unitor. By [sk-def-sfb-module-derived-lower-shriek] this gives the ambient candidate for c0 isomorphic to Rp_*.",
    "uses": [
-    "det-sf-comp-coherence-single",
-    "det-def-localizing-closure-existence",
-    "sk-thm-existence",
-    "det-sf-comp-coherence-cocycle"
+    "def-sfb-module-upper-star",
+    "def-sfb-module-open-lower-shriek-adjunction",
+    "sk-def-sfb-module-derived-lower-shriek"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "Paragraph (1): compactification independence on the localizing categories"
+    "place": "Paragraph (1): identity extension by zero, using existing module identity and adjunction APIs"
    }
   },
   {
-   "text": "By [sk-thm-existence] (2), $Rp_!K\\in\\Dctf(Y,\\Lambda)$ whenever $K\\in\\Dctf(X,\\Lambda)$. The component $\\alpha_K$ of step 3 identifies this object with $Rp_*K$. The full subcategory $\\Dctf$ is replete by [det-def-sfb-constructible-tor-amplitude], so $Rp_*K\\in\\Dctf(Y,\\Lambda)$. By [sk-thm-existence] (4), $p^!L\\in\\Dctf(X,\\Lambda)$ for every $L\\in\\Dctf(Y,\\Lambda)$. These two preservation statements make both restrictions into functors on the full subcategories.",
+   "text": "Apply [sk-thm-existence] with the original standing hypotheses. Its comparison clause gives the chosen lower shriek, followed by the ambient inclusion, isomorphic to the ambient candidate for every compactification. Specialize to c0 and compose with step 2, obtaining beta. The lower shriek membership proof supplied by the caller and beta give preservation of the localizing hull: by [sk-def-localizing-closure], membership is tested in every replete localizing property, and each such property transports membership through beta. Lift the components of beta through the full inclusion to obtain the required natural isomorphism alpha. No separate application of the single-candidate theorem or the coherence cocycle is needed, since their comparison consequence is already a clause of sk-thm-existence.",
    "uses": [
     "sk-thm-existence",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Paragraph (1): compactification comparison and replete localizing hulls"
+   }
+  },
+  {
+   "text": "The same witness of [sk-thm-existence] gives preservation of Dctf by lower shriek, and a Brown right adjoint Gprime preserving Dctf. Use beta and isomorphism invariance from [det-def-sfb-constructible-tor-amplitude] to prove preservation of Dctf by Rp_*. Membership witnesses h and the witness in sk-thm-existence are propositionally irrelevant, so the two restricted lower-shriek functors agree. The Mathlib leaf [det-sp-unique-right-adjoint], implemented by Adjunction.rightAdjointUniq, identifies Gprime with the supplied G; map its components through the ambient inclusion and transport Dctf membership through these isomorphisms. This proves preservation by the specified G.",
+   "uses": [
+    "sk-thm-existence",
+    "det-def-sfb-constructible-tor-amplitude",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+    "place": "Paragraph (2): preservation of both functors and uniqueness of right adjoints"
+   }
+  },
+  {
+   "text": "Take hSX and hSY from [sk-thm-existence]. Lift the ambient Rp_* restriction to Dctf using step 4, and lift the composite of the Dctf-to-localizing inclusion, G and the ambient inclusion using preservation by G. By the definitions of ObjectProperty.lift the two required equalities through the full inclusions are reflexive. Whisker alpha with the source Dctf inclusion; the right-adjoint restriction comparison is the identity. Apply Adjunction.restrictFullyFaithful to the supplied adjunction using ObjectProperty.fullyFaithfulιOfLE for both inclusions. This constructs the restricted adjunction on the actual ambient Hom sets described in [sk-def-localizing-closure] and [det-def-sfb-constructible-tor-amplitude].",
+   "uses": [
+    "sk-thm-existence",
+    "sk-def-localizing-closure",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "Paragraph (2), first two sentences: preservation and restriction of both functors"
-   }
-  },
-  {
-   "text": "Put $\\mathcal T_T=\\Loc(\\Dctf(T,\\Lambda))$ for $T=X,Y$, with small coproducts taken in the fixed indexing universe. The current definition [sk-def-localizing-closure] makes $\\mathcal T_T$ the full subcategory of $D(\\Mod_{\\Lambda_T})$ on the objects belonging to every full replete triangulated subcategory that contains $\\Dctf(T,\\Lambda)$ and is closed under all small ambient coproducts. Each object of $\\Dctf(T,\\Lambda)$ belongs to every subcategory in that intersection, hence belongs to $\\mathcal T_T$. The fullness asserted by this definition and the fullness of $\\Dctf(T,\\Lambda)$ in [det-def-sfb-constructible-tor-amplitude] show that their inclusion is fully faithful: for two $\\Dctf$ objects, both Hom sets are the ambient derived Hom set. No derived-completeness condition is imposed on the hull. For $K\\in\\Dctf(X,\\Lambda)$ and $L\\in\\Dctf(Y,\\Lambda)$, the restrictions of step 4 give the bijection\n$$\n\\Hom_{\\Dctf(Y,\\Lambda)}(Rp_*K,L)\n\\xrightarrow{\\ u\\mapsto u\\circ\\alpha_K\\ }\n\\Hom_{\\mathcal T_Y}(Rp_!K,L)\n\\xrightarrow{\\ \\Phi_{K,L}\\ }\n\\Hom_{\\mathcal T_X}(K,p^!L)\n=\\Hom_{\\Dctf(X,\\Lambda)}(K,p^!L),\n$$\nwhere $\\Phi$ is the adjunction bijection of [sk-thm-existence] (3). Its inverse sends $v$ to $\\Phi_{K,L}^{-1}(v)\\circ\\alpha_K^{-1}$. The first map is natural in $K$ because $\\alpha$ is a natural transformation and in $L$ by associativity of composition; the second is natural by the given adjunction. Their composite is therefore the adjunction required in clause (2). Explicitly, if $\\eta,\\epsilon$ are the unit and counit of $Rp_!\\dashv p^!$, the transported unit is $p^!(\\alpha_K)\\circ\\eta_K$ and the transported counit is $\\epsilon_L\\circ\\alpha_{p^!L}^{-1}$. These have source and target in the small full subcategories by step 4. They are the restricted unit and counit after the identification $Rp_!\\cong Rp_*$, rather than a literal equality of the two left adjoints.",
-   "uses": [
-    "sk-def-localizing-closure",
-    "det-def-sfb-constructible-tor-amplitude",
-    "sk-thm-existence"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-    "place": "Paragraph (2): explicit natural Hom bijection and transported unit/counit; current intersection definition of the localizing hull"
+    "place": "Paragraph (2): explicit full-subcategory restrictions and adjunction"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-dc-setting",
-  "lem-weil-pbc-qcqs-over-affine",
+  "def-nagata-compactification",
   "def-weil-proper-morphism",
-  "sk-def-nagata-sketch-data",
-  "def-sfb-finite-extension-by-zero",
-  "def-sfb-module-open-lower-shriek",
-  "def-sfb-module-linear-open-lower-shriek",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-pullback-from-point-comp",
+  "def-sfb-module-upper-star",
+  "def-sfb-module-open-lower-shriek-adjunction",
   "sk-def-sfb-module-derived-lower-shriek",
-  "def-sfb-finite-upper-star",
-  "def-sfb-finite-upper-star-comp",
-  "def-sfb-finite-lower-star-comp",
-  "lem-sfb-open-projection-formula",
-  "def-sfb-finite-upper-lower-star-adjunction",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-adjunction-mate",
-  "det-sf-comp-coherence-single",
-  "det-def-localizing-closure-existence",
   "sk-thm-existence",
-  "det-sf-comp-coherence-cocycle",
+  "sk-def-localizing-closure",
   "det-def-sfb-constructible-tor-amplitude",
-  "sk-def-localizing-closure"
+  "det-sp-unique-right-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
-  "place": "Paragraphs (1) and (2), expanded at the identity compactification and the natural adjunction bijection"
+  "place": "Paragraphs (1) and (2), formalized by P2 using the source-library identity pullback, uniqueness of left adjoints, and the compactification-comparison clause of sk-thm-existence; unit route unchanged"
  },
  "mathlib_searches": [
   {
@@ -274,9 +247,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-qcqs-over-affine"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -314,5 +285,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Clause-by-clause check against the node and the recorded Lean of sk-thm-existence (exceptionalInverseImage_exists: same Λ/ℓ/k/X/Y binders, localizingLowerShriek on compactificationOverField, h is membership only, G-adjunction form), localizingClosureProEtale, ConstantModelConstructibleFiniteTor, compactificationOverField and IsProper. Clause 1 is Nonempty(Rp_! ≅ lift of ι⋙R((p.left)_*⟦Λ⟧)) with ∃hStar for Loc preservation; R(g_*) is the same functor as inside rightDerivedLowerShriekOfCompactification. Clause 2 states Dctf preservation plus F₀/G₀ fixed by functor equalities through the full inclusions, and Nonempty(F₀ ⊣ G₀). Arbitrary right adjoint G is equivalent to the Brown adjoint (unique up to iso, Dctf replete). No extra hypotheses or universe restrictions; edge cases covered. lean.statement verbatim, one sorry, docstrings with source/blueprint and proof steps 1-5, both report sections present, only the lean record changed, first delivery of this item. All four nt_compile --json runs at load 123-138 stopped before the delivered file on base side-module 60 s timeouts (SfAlgebraicallyClosedCoefficients, GeneralAlgebraicallyClosedCoefficients, DerivedPullbackTensorHom twice); none is touched by the delivery, so judged from the delivery's clean 4.7 s/5.2 s compile and the signatures checked in the side clone. Maintainer: retry landing at lower load if it times out."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-0749e",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261019T005356-L-2760846",
+  "kind": "proof",
+  "note": "independent cc review: delivered ProperExceptionalRestriction.lean (signature/public imports byte-identical to live, proof body only) and node proof/proof_deps/proof_origin/tool_uses vs live clone; unit sk-cor-existence-ii realized empty so BoundaryRefinement drop bypasses nothing; item + sole importer compile clean; axioms only sorryAx from sorry'd exceptionalInverseImage_exists/constantModelConstructibleFiniteTor_wellDefined"
  }
 }

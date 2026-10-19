@@ -16805,3 +16805,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/P2/Sheaf.CategoryTheory.MultivariableDerivedCalculus (stage 3; reviewer PASS; first push; landing 20261019T005355-L-2760207 (interface); batch 20261019T005255; modules 1; new nodes 0; change records: coord/changes/P2-multivariable-private-product-helpers.md)
 - 00:53 L: merged deliver/P2/Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint (stage 3; reviewer PASS; first push; landing 20261019T005355-L-2760488 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/P2/Sheaf.Paper.NoetherianEtaleSectionSpecialization (stage 3; reviewer PASS; first push; landing 20261019T005356-L-2760667 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:53 L: merged deliver/P2/Sheaf.Paper.ProperExceptionalRestriction (stage 3; reviewer PASS; first push; landing 20261019T005356-L-2760846 (proof); batch 20261019T005255; modules 1; new nodes 0)

@@ -10,21 +10,8 @@ public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.ConstantModelTorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.Restrict
-import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.Paper.CompactificationLocalizing
-import Sheaf.Paper.CompactificationCoherenceCocycle
-import Sheaf.Paper.LocalizingClosureExistence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Projection
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Restriction of the Brown adjoint for a proper morphism
@@ -139,6 +126,63 @@ theorem proper_exceptional_restriction
             fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι =
           ObjectProperty.ιOfLE hSY ⋙ G ⋙ (localizingClosureProEtale Λ X.left).ι ∧
         Nonempty (F₀ ⊣ G₀) := by
-  sorry
+  classical
+  let SX := constantModelBoundedConstructible Λ X.left ⊓
+    fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  let SY := constantModelBoundedConstructible Λ Y.left ⊓
+    fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  let LX := localizingClosureProEtale Λ X.left
+  let LY := localizingClosureProEtale Λ Y.left
+  have := (constantModelConstructibleFiniteTor_wellDefined Λ X.left).2.1
+  have := (constantModelConstructibleFiniteTor_wellDefined Λ X.left).2.2.2.1
+  have := (constantModelConstructibleFiniteTor_wellDefined Λ Y.left).2.1
+  have := (constantModelConstructibleFiniteTor_wellDefined Λ Y.left).2.2.2.1
+  have : LY.IsClosedUnderIsomorphisms := by
+    constructor
+    intro K L e hK P hP hS
+    have := hP.2.1
+    exact P.prop_of_iso e (hK P hP hS)
+  obtain ⟨_, _, hSX, hSY, _, _, _, hex⟩ :=
+    exceptionalInverseImage_exists Λ ℓ k p _hΛ
+  obtain ⟨_, _, _, _, hF, hcomp, ⟨G', _, _, hnon, hpres⟩, _⟩ := hex
+  obtain ⟨adj'⟩ := hnon
+  let eShriek : openImmersionLowerShriek Λ (𝟙 X.left) ≅ 𝟭 _ :=
+    ((openImmersionLowerShriekUpperStarAdjunction Λ (𝟙 X.left)).ofNatIsoRight
+      (upperStarId Λ X.left)).leftAdjointUniq Adjunction.id
+  let eId : (openImmersionLowerShriek Λ (𝟙 X.left)).mapDerivedCategory ≅ 𝟭 _ :=
+    Functor.mapDerivedCategoryNatIso eShriek ≪≫ Functor.mapDerivedCategoryIdIso _
+  let ec : rightDerivedLowerShriekOfCompactification Λ
+      (Compactification.ofIsProper p.left) ≅ R((p.left)_*⟦Λ⟧) :=
+    Functor.isoWhiskerRight eId _ ≪≫ Functor.leftUnitor _
+  obtain ⟨bc⟩ := hcomp (Compactification.ofIsProper p.left)
+  let beta : localizingLowerShriek Λ (compactificationOverField p) h ⋙ LY.ι ≅
+      LX.ι ⋙ R((p.left)_*⟦Λ⟧) :=
+    bc ≪≫ Functor.isoWhiskerLeft LX.ι ec
+  have hStar : ∀ K, LX K → LY ((R((p.left)_*⟦Λ⟧)).obj K) := by
+    intro K hK
+    exact LY.prop_of_iso (beta.app ⟨K, hK⟩) (h K hK)
+  let FStar := LY.lift (LX.ι ⋙ R((p.left)_*⟦Λ⟧)) (fun K ↦ hStar K.obj K.property)
+  let alpha : localizingLowerShriek Λ (compactificationOverField p) h ≅ FStar :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk LY (beta.app K)) (by
+      intro K L f
+      apply ObjectProperty.hom_ext
+      exact beta.hom.naturality f)
+  have hRp : ∀ K : ConstantModelConstructibleFiniteTor Λ X.left,
+      SY ((R((p.left)_*⟦Λ⟧)).obj K.obj) := by
+    intro K
+    exact SY.prop_of_iso (beta.app ((ObjectProperty.ιOfLE hSX).obj K))
+      (hF ((ObjectProperty.ιOfLE hSX).obj K) K.property)
+  let eg : G' ≅ G := adj'.rightAdjointUniq _adj
+  have hGpres : ∀ K : ConstantModelConstructibleFiniteTor Λ Y.left,
+      SX (G.obj ((ObjectProperty.ιOfLE hSY).obj K)).obj := by
+    intro K
+    exact SX.prop_of_iso (LX.ι.mapIso (eg.app ((ObjectProperty.ιOfLE hSY).obj K)))
+      (hpres ((ObjectProperty.ιOfLE hSY).obj K) K.property)
+  let F₀ := SY.lift (SX.ι ⋙ R((p.left)_*⟦Λ⟧)) hRp
+  let G₀ := SX.lift (ObjectProperty.ιOfLE hSY ⋙ G ⋙ LX.ι) hGpres
+  refine ⟨hStar, ⟨alpha⟩, hRp, hSY, F₀, G₀, rfl, rfl, ⟨?_⟩⟩
+  exact _adj.restrictFullyFaithful (ObjectProperty.fullyFaithfulιOfLE hSX)
+    (ObjectProperty.fullyFaithfulιOfLE hSY)
+    (Functor.isoWhiskerLeft (ObjectProperty.ιOfLE hSX) alpha) (Iso.refl _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
