@@ -18,9 +18,110 @@
   "lem-weil-pbc-spec-module-tilde-sections",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $M_n=M/I^nM$ and $\\mathcal F_n=\\widetilde{M_n}|_U$. The tilde sheaf is quasi-coherent. Finite generators of $M$ (respectively $M_n$) generate its localizations, hence the associated sheaf is of finite type. The scheme $U$, and every open $V\\subseteq U$, is locally Noetherian. Thus [pqf-lem-coherent-ft-locnoeth] makes these restrictions coherent. On $D(f)\\subseteq U$, localization gives $M_f/I^nM_f\\cong(M/I^nM)_f$: the quotient sends $m/f^k$ to $\\bar m/f^k$; its kernel consists of fractions with a power of $f$ times the numerator in $I^nM$, exactly $I^nM_f$. The identification commutes with further localization and reduction in $n$, so it sheafifies to $\\mathcal F/I^n\\mathcal F\\cong\\mathcal F_n$ and restricts to any $V$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, preliminary identification of coherent reductions; coherence criterion Tag 01XZ"
+   }
+  },
+  {
+   "text": "Let $\\Lambda_A$ and $\\Lambda_U$ denote the intrinsic derived-completion reflections on the one-point ringed site $(pt,A)$ and on $(U,\\mathcal O_U)$ with ideals $I$ and $I\\mathcal O_U$. Apply [lem-weil-pbc-constant-completion-equivalence] on the one-point site: its quotient/Koszul unit comparison identifies $\\Lambda_A L$ with $L^{\\wedge_I}=R\\varprojlim_n(L\\otimes_A^{\\mathbf L}A/I^n)$ for every $L\\in D(A)$. Apply [lem-weil-pbc-ringed-pushforward-completion] to the structure morphism $(U,\\mathcal O_U)\\to(pt,A)$; the resulting unit-normalized isomorphism gives $(R\\Gamma(U,\\mathcal F))^{\\wedge_I}\\cong R\\Gamma(U,\\Lambda_U\\mathcal F)$. Since $A$ is Noetherian, $I$ is finitely generated and $I\\mathcal O_U$ is a finite-type quasi-coherent ideal. The coherent-sheaf clause of [lem-per-derived-completion-pseudocoherent] and Step 1 identify $\\Lambda_U\\mathcal F$ with $R\\varprojlim_n\\mathcal F_n$. The comparisons carry the completion unit to the quotient maps, so the composite to the $n$th projection is induced by $M\\to M_n$.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-pushforward-completion",
+    "lem-per-derived-completion-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, first displayed equality: Tag 0BLX is the structure-morphism case of Tag 0A0G; Tag 0A0K identifies the coherent-sheaf model. The module model is the one-point specialization of the existing constant-completion comparison."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-ringed-space-rgamma-derived-limit] to the tower $\\mathcal F_n$ on the ringed space $U$. For every integer $i$ its Milnor sequence, after Step 2, is $$0\\to R^1\\varprojlim_n H^{i-1}(U,\\mathcal F_n)\\to H^i((R\\Gamma(U,\\mathcal F))^{\\wedge_I})\\to\\varprojlim_n H^i(U,\\mathcal F_n)\\to0.$$ The right map is induced by the projections of the chosen derived-functor limit model. In particular its composite with the completion map has the reduction coordinates computed in Step 2.",
+   "uses": [
+    "lem-pc-ringed-space-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, Milnor sequence via Tag 0D60"
+   }
+  },
+  {
+   "text": "For $j>0$, the coherent-sheaf clause of [lem-per-punctured-cohomology-ml] applied to $\\mathcal F_n$ makes $(H^j(U,\\mathcal F_n))_n$ Mittag-Leffler. For $j<0$ it is the zero tower by the negative-cohomology convention. It remains to verify degree zero; no arbitrary-tower degree-zero assertion is being used.",
+   "uses": [
+    "lem-per-punctured-cohomology-ml"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, last paragraph, positive-degree case from Tag 0DX1"
+   }
+  },
+  {
+   "text": "For $j=0$, take degree-zero cohomology of the natural localization triangle [lem-per-affine-support-cech-localization] with $K=\\mathfrak m$ and $L=M_n[0]$. Since $H^1(M_n[0])=0$, it gives a natural exact sequence $M_n\\to B_n\\xrightarrow{p_n} C_n\\to0$, where $B_n=H^0(U,\\mathcal F_n)$ and $C_n=H^1_{\\mathfrak m}(M_n)$. Put $Q_n=\\operatorname{im}(M_n\\to B_n)$. All maps $Q_m\\to Q_n$ for $m\\geq n$ are surjective, since $M_m\\to M_n$ is surjective. Consequently $\\operatorname{im}(B_m\\to B_n)=p_n^{-1}(\\operatorname{im}(C_m\\to C_n))$: lift a preimage in $C_m$ to $B_m$, then correct its image by an element of $Q_m$ lifting the difference in $Q_n$. The first clause of [lem-per-punctured-cohomology-ml] makes the images in $C_n$ stabilize. The displayed equality makes the images in $B_n$ stabilize. Thus the degree-zero tower is Mittag-Leffler.",
+   "uses": [
+    "lem-per-affine-support-cech-localization",
+    "lem-per-punctured-cohomology-ml"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, degree-zero detail of its last paragraph, from Tag 0DX1 (1) and the localization triangle underlying Tag 0DWR (2)"
+   }
+  },
+  {
+   "text": "For every integer $i$, Steps 4 and 5 show that $(H^{i-1}(U,\\mathcal F_n))_n$ is Mittag-Leffler. Apply [lem-per-mittag-leffler-derived-limit-acyclic] to kill the left term of Step 3. The resulting right-map isomorphism is the asserted one. Naturality in $M$ follows by applying the functorial comparisons to the commuting reduction maps of a homomorphism $M\\to M'$. Its composite with the completion map has the specified coordinates by Step 3.",
+   "uses": [
+    "lem-per-mittag-leffler-derived-limit-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI, last paragraph; Tag 07KW (3)"
+   }
+  },
+  {
+   "text": "For any open $V\\subseteq U$, repeat Step 2 with the structure morphism $(V,\\mathcal O_V)\\to(pt,A)$, using [lem-weil-pbc-constant-completion-equivalence], [lem-weil-pbc-ringed-pushforward-completion], and [lem-per-derived-completion-pseudocoherent]. Apply [lem-pc-ringed-space-rgamma-derived-limit] in degree zero to $\\mathcal F_n|_V$. Its left term $R^1\\varprojlim_n H^{-1}(V,\\mathcal F_n|_V)$ is zero, so its right map gives the required isomorphism, with the same reduction coordinates. For $V'\\subseteq V$, the sheaf completion comparisons commute with restriction. The remaining square comparing completed sections with sections of the completed sheaf commutes by the reflection property: its target $R\\Gamma(V',\\Lambda_{V'}\\mathcal F|_{V'})$ is derived complete over $A$ by the ringed-pushforward theorem, and after precomposition with the completion unit both arrows are restriction followed by the sheaf completion unit. Uniqueness of factorization through the left-adjoint reflection makes these arrows equal. The Milnor right maps commute with restriction since their $n$th coordinates are the projection maps. This proves the required inverse-limit restriction square, naturality in $M$, and the completion-to-reduction assertion. For $V=U$ it is exactly the right map of Step 3 in degree zero.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-pushforward-completion",
+    "lem-per-derived-completion-pseudocoherent",
+    "lem-pc-ringed-space-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0DXI argument on an open V in degree zero, using Tags 0BLX, 0A0K, and 0D60"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-rgamma-derived-limit",
+  "lem-per-affine-support-cech-localization",
+  "lem-per-derived-completion-pseudocoherent",
+  "lem-per-mittag-leffler-derived-limit-acyclic",
+  "lem-per-punctured-cohomology-ml",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXI, lemma-compare-with-derived-completion, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,12 +142,12 @@
    "query": "AdicCompletion, Sheaf",
    "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Sheaf'\n",
    "date": "2026-10-19",
-   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+   "verdict": "query rejected: unknown identifier Sheaf; the later valid CategoryTheory.Sheaf query is used instead"
   },
   {
    "tool": "grep",
    "query": "derived.*complet|complet.*cohomolog|Mittag.*Leffler",
-   "results": "[grep] OK 0 hit(s)\n",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Exactness.lean\", \"line\": \"27\", \"text\": \"All results are proven directly without using Mittag-Leffler systems.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"21\", \"text\": \"* `F.IsMittagLeffler` states that the functor `F` satisfies the Mittag-Leffler\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"26\", \"text\": \"  cofiltered, then it is Mittag-Leffler if `F` is, see `IsMittagLeffler.toPreimages`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"34\", \"text\": \"* `isMittagLeffler_of_exists_finite_range` shows that if `J` is cofiltered and for all `j`,\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"36\", \"text\": \"  `F` is Mittag-Leffler.\"}\n  {\"file\": \"Mathlib/CategoryTheory/CofilteredSystem.lean\", \"line\": \"37\", \"text\": \"* `surjective_toEventualRanges` shows that if `F` is Mittag-Leffler, then `F.toEventualRanges`\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"24\", \"text\": \"as well as the infinite sum representation of cotangent (also known as the Mittag-Leffler\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"69\", \"text\": \"section MittagLeffler\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Cotangent.lean\", \"line\": \"239\", \"text\": \"end MittagLeffler\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
   },
@@ -66,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-formal-punctured-idempotent-algebraization",
@@ -78,7 +179,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: Identification of completed punctured-spectrum cohomology with infinitesimal-neighborhood cohomology, 0DXI in the proof of 0DXQ underlying 0DXR.",
+   "place": "Current blueprint proof Step 3, duality symmetry of the middle perverse t-structure: the potential-dualizing construction reached through the recorded ancestry; the formal-sections comparison used before the punctured-spectrum idempotent argument, specifically the identification of completed punctured-spectrum cohomology with infinitesimal-neighborhood cohomology (Tag 0DXI and its inputs 0BLX, 0A0K, 0D60 and 0DX1).",
    "via": [
     "lem-per-formal-punctured-idempotent-algebraization",
     "lem-per-complete-local-connectedness-bound",
@@ -93,5 +194,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctured-derived-completion-sections",
+  "worker": "stage1",
+  "summary": "Repaired the interrupted split and unlogged searches, preserving the imported statement. Reused the existing ringed-pushforward completion theorem, its constant-coefficient one-point quotient model, the natural affine-support triangle, coherence criterion and Milnor sequence. Three statement-only helpers supply the Noetherian structure-sheaf completion model, exact Tag 0DX1 ML inputs, and general ML limit acyclicity. Seven steps include the missing degree-zero image stabilization using the surjective quotient tower. Searches, source hypotheses and citation statements were reread.",
+  "blueprint": "Supports the current main-20261015 ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality symmetry), through the existing potential-dualizing ancestry. Locally realizes the 0DXI formal-sections comparison in the parent lem-per-formal-punctured-idempotent-algebraization; the proof route is unchanged. The saved Step 1 description belongs to older blueprint wording and has been updated.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-rgamma-derived-limit",
+    "why": "Generic ringed-space Milnor sequence (0D60), explicitly used by 0DXI."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic finite-type quasi-coherent criterion for coherence (01XZ), verifying the coherent-sheaf input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pushforward-completion",
+    "why": "Generic completion/direct-image theorem (0A0G), specialized to the structure morphism to (pt,A), exactly the proof of 0BLX used by 0DXI."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Noetherian constant-coefficient completion/Koszul quotient model and its unit, specialized to the one-point site to identify the module completion reflection with the item quotient tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-rgamma-derived-limit",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-a9436b5d5",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-a9436b5d5 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and the Stacks sources: 0DXI with its proof, 0DX1, 0A0K (1)-(5) with its proof, and 07KW. The item statement is unchanged on this base: the open-V clause came from N7's FIX. The seven steps follow the 0DXI route. Step 2 uses 0A0G through lem-weil-pbc-ringed-pushforward-completion on (U,O_U)->(pt,A), the one-point quotient model, and the new 0A0K node with the coherent quotients from Step 1. Step 3 is the 0D60 Milnor sequence. Step 4 uses 0DX1(2) for j>0. Step 5 handles degree 0, which the source does not: 0DXI kills R^1lim H^0 using 0DX1, but 0DX1 covers only positive degrees. The step uses the localization triangle for K=m, the surjective images Q_n, and the equality im(B_m->B_n)=p_n^{-1}(im(C_m->C_n)); I checked that equality, and with 0DX1(1) it gives ML. Step 6 applies ML acyclicity. Step 7 is correct for V because H^{-1}=0, and the restriction square commutes by the reflection's universal property. The worker's counterexample to degree-0 ML for arbitrary towers is correct: k[[x,y]] with transitions given by x. The false clause was removed from the helper. The new nodes are 0A0K(1),(3),(4) with the 0A0F restriction compatibility, exactly 0DX1(1),(2), and 07KW(3). All three are true and none restates the item. The 07KW node generalizes the surjective-only lem-pc-tower-surjective-lim-acyclic and the finite-group lem-weil-pbc-mittag-leffler, so it is not a duplicate. Grep found no other node for 0A0K, 0DX1 or ML acyclicity. Small cases pass: A a field, M=0, I=0, I=A, negative degrees, V empty. No SGA source is used. I accept the four generic tool_uses (0D60, 01XZ, 0A0G, the one-point completion model). No fixes."
  }
 }
