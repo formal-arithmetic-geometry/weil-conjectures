@@ -26,86 +26,41 @@
  ],
  "proof": [
   {
-   "text": "For every finite Galois subextension $L/F$ in $F^{\\mathrm{sep}}$, let $B_L$ be the integral closure of $R$ in $L$. By [lem-exc-finite-dvr-tame-inertia], $B_L$ is finite over $R$, and its localizations at maximal ideals are DVRs with residue fields finite over $k$. Apply [lem-weil-pbc-finite-over-henselian-local-product] to $R\\to B_L$. Discard any zero factors in the product decomposition. Since $B_L$ is a nonzero domain, at least one factor remains, and two remaining factors would give a nontrivial idempotent. Thus exactly one factor remains. Thus $B_L$ is local, hence itself a DVR; its residue field equals $k$ because $k$ is algebraically closed. Every $F$-automorphism stabilizes its unique maximal ideal and acts identically on that residue field, so $D_L=I_L=G_L=\\operatorname{Gal}(L/F)$. The finite inertia lemma gives $P_L\\triangleleft G_L$, a finite $p$-group, and a surjective uniformizer character $\\chi_L:G_L\\to\\mu_{n_L}(k)$ with kernel $P_L$, where $e_L=q_Ln_L$, $q_L$ is a power of $p$ and $n_L$ is prime to $p$.",
+   "text": "Because the residue field is algebraically closed, R is strictly henselian. Apply [lem-per-trait-tame-algebra] with the algebraic closure of the chosen separable closure as its coefficient field. The residue characteristic exponent is p since p is prime and CharP(k,p). Retain its continuous surjective tame character t and its finite continuous quotient assertion for ker(t), and its compatible primitive-root family in the coefficient field.",
    "uses": [
-    "lem-exc-finite-dvr-tame-inertia",
-    "lem-weil-pbc-finite-over-henselian-local-product"
+    "lem-per-trait-tame-algebra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tags 0BUA (lemma-structure-decomposition), finite-level setup, and 0BUB (lemma-structure-decomposition-separable-closure); more-algebra.tex Tags 09E8, 09EE and algebra.tex Tag 04GH"
-   }
+   "elementary": false
   },
   {
-   "text": "For $M\\supseteq L$ finite Galois over $F$, let $\\mathfrak n_M$ be the unique maximal ideal of $B_M$. By Step 1, $\\mathfrak n_M$ contracts to the maximal ideal of $R$. Hence the quotient $B_L/(\\mathfrak n_M\\cap B_L)$ is a finite-dimensional domain over $k$, so it is a field: multiplication by any nonzero element is injective and hence surjective. Thus $\\mathfrak n_M\\cap B_L$ is maximal and equals the unique maximal ideal of $B_L$. Apply [lem-exc-finite-tame-character-tower]. Restriction is surjective on $G_M\\to G_L$ and $P_M\\to P_L$, and $n_L\\mid n_M$. Replace the raw character by $\\chi_{L,\\mathrm{can}}=\\chi_L^{q_L}$; the tower lemma gives\n$$\\chi_{L,\\mathrm{can}}(\\sigma|_L)=\\chi_{M,\\mathrm{can}}(\\sigma)^{n_M/n_L}.$$\nThus the exact sequences $1\\to P_L\\to G_L\\to\\mu_{n_L}(k)\\to1$ form an inverse system with surjective transitions on kernels, middle groups and quotients. The identity and composition laws on $G_L$ and $P_L$ are those of restriction. On the root groups, an identity inclusion has exponent $n_L/n_L=1$, and for $N\\supseteq M\\supseteq L$ the composite power exponent is $(n_N/n_M)(n_M/n_L)=n_N/n_L$, proving the same laws there. The indexing set is the set of finite Galois subfields in the fixed set $F^{\\mathrm{sep}}$, ordered by inclusion; its nonemptiness and directedness are supplied by [lem-exc-galois-krull-finite-limit] (the bottom field and finite Galois composita).",
-   "uses": [
-    "lem-exc-finite-tame-character-tower",
-    "lem-exc-galois-krull-finite-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BUA (lemma-structure-decomposition), finite-system and canonical-character diagrams; more-algebra.tex Tags 0BU7 and 0BU8"
-   }
-  },
-  {
-   "text": "Choose a uniformizer $\\pi$ of $R$. For each positive integer $m$ prime to $p$, [lem-exc-tame-root-extension] supplies a cyclic Galois field $L_m=F(\\pi^{1/m})$ of degree and ramification index $m$, embedded in $F^{\\mathrm{sep}}$. Consequently $n_{L_m}=m$. In particular every positive integer prime to $p$ occurs among the tame indices, not merely as an order bounded by a tame index. The same lemma also supplies the henselian lifting of the roots of unity required by the blueprint.",
-   "uses": [
-    "lem-exc-tame-root-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BUB (lemma-structure-decomposition-separable-closure), uniformizer splitting-field paragraph; blueprint lem-exc-dvr-galois.proof.md, tame-level realization"
-   }
-  },
-  {
-   "text": "Apply [lem-exc-infinite-tame-inverse-limit] to the exact inverse system in Step 2, with $I_L=G_L$ and $C_L=\\mu_{n_L}(k)$. All its groups are finite, each $P_L$ is a $p$-group, and every transition is surjective by Step 2. Identify $G$ topologically with $\\varprojlim_LG_L$ using [lem-exc-galois-krull-finite-limit] for the Galois extension $F^{\\mathrm{sep}}/F$. We obtain a continuous surjection $G\\to C=\\varprojlim_L\\mu_{n_L}(k)$ with kernel $P=\\varprojlim_LP_L$, closed and normal in $G$, a topological isomorphism $G/P\\cong C$, and the assertion that every finite continuous quotient of $P$ has $p$-power order.",
-   "uses": [
-    "lem-exc-infinite-tame-inverse-limit",
-    "lem-exc-galois-krull-finite-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BUA (lemma-structure-decomposition), inverse-limit exactness paragraph; fields.tex Tag 0BU2 (lemma-infinite-galois-limit)"
-   }
-  },
-  {
-   "text": "Here the limit $C$ is the full prime-to-$p$ root limit $T=\\varprojlim_{(m,p)=1}\\mu_m(k)$. Explicitly, a compatible family $(z_m)_m$ in $T$ maps to $(z_{n_L})_L$ in $C$. Conversely, for $(c_L)_L\\in C$ and an order $m$ choose any finite Galois $L$ with $m\\mid n_L$ (Step 3 gives one with equality) and set $z_m=c_L^{n_L/m}$. Given two choices, a common finite Galois overfield and the transition formula of Step 2 show that these expressions agree. For $m\\mid m'$, choose a common overfield for the two choices and compute $z_{m'}^{m'/m}=z_m$. Both constructions are homomorphisms, inverse to each other: recovering a coordinate $c_L$ permits choosing that very $L$ at order $n_L$. Each output coordinate depends on a single input coordinate through a power map between finite discrete groups; both maps are therefore continuous in the inverse-limit topologies.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BUB (lemma-structure-decomposition-separable-closure), cofinality of the tame indices; explicit two-sided coordinate identification"
-   }
-  },
-  {
-   "text": "Use [lem-exc-tame-roots-product] to choose compatible primitive roots in $k$ and a topological-group isomorphism $T\\cong\\prod_{r\\ne p}(\\mathbf Z_r,+)$. Compose it with the continuous surjection of Step 4 and the coordinate isomorphism of Step 5. This gives $\\theta$ with the same closed normal kernel $P$ and the required topological quotient. The finite-quotient assertion is already furnished by Step 4. The last identification uses the permitted choice of primitive roots, so it asserts no canonical trivialization of the Tate twist.",
+   "text": "Choose a compatible primitive-root family in k by [lem-exc-tame-roots-product]. For each positive m prime to p identify the m-th root groups in the two fields by sending the a-th power of the first primitive root to the a-th power of the second. Mathlib IsPrimitiveRoot.zmodEquivZPowers gives these finite group equivalences. Compatibility of the chosen roots makes the equivalences commute with the power transitions: write an arbitrary coordinate as a power of the primitive root and commute the two exponents. Apply the equivalences coordinatewise to root-limit families. The reverse coordinate equivalences are inverse, and both maps are continuous because each output coordinate depends only on its corresponding discrete input coordinate. This constructs a topological group equivalence b between the two root limits, without any field map between the coefficient field and k.",
    "uses": [
     "lem-exc-tame-roots-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BUB tame root limit; fields.tex Tag 09HW (section-roots-of-1) and algebra.tex Tag 00DT (lemma-chinese-remainder), via the compatible-root product lemma"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Compose b with the residue-field root-limit equivalence c of [lem-exc-tame-roots-product], and put theta=(c composed with b) composed with t. It is continuous and surjective. Injectivity of c composed with b gives ker(theta)=ker(t). The product of the adic integers is Hausdorff; therefore this kernel P is closed. As the kernel of a homomorphism it is normal. The finite continuous quotients of P have p-power order by the assertion retained in Step 1.",
+   "uses": [
+    "lem-exc-tame-roots-product",
+    "lem-per-trait-tame-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The first isomorphism theorem and ker(theta)=P give an algebraic equivalence G/P to the adic product, agreeing with theta on every quotient representative. The quotient-map universal property makes it continuous. The Krull Galois group is compact, hence its quotient is compact, and the adic product is Hausdorff. A continuous bijection from a compact space to a Hausdorff space is a homeomorphism. This supplies exactly the required continuous multiplicative equivalence and its projection identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-finite-dvr-tame-inertia",
-  "lem-weil-pbc-finite-over-henselian-local-product",
-  "lem-exc-finite-tame-character-tower",
-  "lem-exc-galois-krull-finite-limit",
-  "lem-exc-tame-root-extension",
-  "lem-exc-infinite-tame-inverse-limit",
+  "lem-per-trait-tame-algebra",
   "lem-exc-tame-roots-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tags 0BUA (lemma-structure-decomposition) and 0BUB (lemma-structure-decomposition-separable-closure), with the finite-character scaling of more-algebra.tex Tags 0BU7, 0BU8 and the compatible-root product identification."
+  "place": "Tag 0BUB, lemma-structure-decomposition-separable-closure; reuse of the existing canonical tame-character declaration for the same sequence, with an explicit compatible-primitive-root change of coefficient field and the compact-to-Hausdorff quotient argument. Written by E5, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -244,7 +199,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-over-henselian-local-product",
   "lem-per-trait-tame-algebra"
  ],
  "reviewed": {
@@ -284,5 +238,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261019T154006-L-3024588",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
