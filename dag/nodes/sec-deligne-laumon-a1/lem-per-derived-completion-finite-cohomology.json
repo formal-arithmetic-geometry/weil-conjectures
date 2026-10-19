@@ -14,9 +14,97 @@
   "def-pc-kflat-complex",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First let $K\\in D(A)$ have finite cohomology and $H^i(K)=0$ for $i>m$. By [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion], $K$ is pseudo-coherent. Apply [lem-pc-pseudo-coherent-bounded-finite-free-model] with $b=m$ to obtain $P^\\bullet\\to K$, a quasi-isomorphism with each $P^j$ finite free and $P^j=0$ for $j>m$. In particular this applies to $K=\\tau_{\\leq m}L$: good truncation [def-kun-truncations] preserves $H^j(L)$ for $j\\leq m$ and kills the remaining cohomology.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06 (lemma-derived-completion-pseudo-coherent), first two proof sentences; Tags 066E and 064U"
+   }
+  },
+  {
+   "text": "Finite free modules are flat: tensoring with $A^{\\oplus t}$ is taking $t$ copies, so it preserves exact sequences. Thus [lem-pc-module-bounded-flat-kflat] makes $P^\\bullet$ K-flat, and its strict tower $T_n=P^\\bullet/I^nP^\\bullet$ represents all the derived quotients and their quotient transitions. The maps $T_{n+1}^j\\to T_n^j$ are surjective. Apply [lem-weil-pbc-surjective-module-complex-tower-limit] with the constant ring tower $A_n=A$, so its limit ring is $A$. It computes the limit as the complex $\\widehat P^j=\\lim_nP^j/I^nP^j$. The comparison to the stipulated mapping fibre is the chain map sending a compatible family to that family in the unshifted product coordinate and zero in the other coordinate. Degreewise $1-s$ is surjective: given $(y_n)$ choose $x_1=0$ and recursively lift $x_n-y_n$ to $x_{n+1}$. Its kernel is precisely the compatible families. Hence this inclusion of the kernel into its mapping fibre is a quasi-isomorphism. We therefore obtain $F_I(K)\\simeq\\widehat P^\\bullet$ compatibly with the quotient projections and with the map from $P^\\bullet$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-surjective-module-complex-tower-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06, quotient tower and termwise inverse limit; Tag 091D (lemma-compute-Rlim-modules), clauses (3),(5)"
+   }
+  },
+  {
+   "text": "Put $Z^q=\\ker(d:P^q\\to P^{q+1})$ and $B^q=\\operatorname{im}(d:P^{q-1}\\to P^q)$. Both are finite by [lem-weil-pbc-noetherian-submodule-finite]. Apply [lem-weil-pbc-completion-exact-finite-modules] to\n$$0\\to Z^q\\to P^q\\to B^{q+1}\\to0,\\qquad 0\\to B^q\\to Z^q\\to H^q(P)\\to0.$$\nAll their terms are finite. Completion of $B^{q+1}\\hookrightarrow P^{q+1}$ is injective, by applying the same node to its quotient sequence (the quotient is finite because it is a quotient of $P^{q+1}$). Since the completed differential factors as the completed surjection onto $B^{q+1}$ followed by that injection, its kernel is $\\widehat Z^q$. Applying this in degree $q-1$, its image is $\\widehat B^q\\subseteq\\widehat Z^q$. The second completed sequence therefore gives\n$$H^q(\\widehat P^\\bullet)=\\widehat Z^q/\\widehat B^q\\cong\\widehat{H^q(P)}=\\varprojlim_nH^q(K)/I^nH^q(K).$$\nThis calculation needs only the three adjacent terms, so there is no lower boundedness assumption on $P^\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06, exactness of completion on finite modules; Algebra Tag 00MB (lemma-completion-flat), clause (2)"
+   }
+  },
+  {
+   "text": "The comparison just constructed is natural, including the unit. Indeed, for a chain map $u:P\\to P'$ the maps on $Z^q$, $B^q$ and $H^q$ commute with the inclusions and quotient maps in step 3. Completion applies to a map componentwise on the residue classes, so the two completed exact sequences and their quotient identifications commute with $u$. A chain homotopy also completes termwise, preserving $u-v=dh+hd$. By [lem-pc-ring-derived-map-representative], any derived morphism between these bounded-above free models is represented by a chain map, uniquely up to homotopy; thus these identifications are independent of models and natural for morphisms of bounded-above finite-cohomology objects. For a cycle $z\\in Z^q$, the map $P\\to\\widehat P$ sends $z$ to $(z\\bmod I^nP^q)_n$. In the quotient $\\widehat Z^q/\\widehat B^q$ its image is the image of $z$ under $Z^q\\to\\widehat Z^q\\to\\widehat{H^q(P)}$, which is $([z]\\bmod I^nH^q(P))_n$. This proves precisely the claimed description of $H^q(\\eta_K)$ for bounded-above $K$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06, natural cycle-and-boundary identification in the finite-free-resolution proof; explicit quotient-unit tracking"
+   }
+  },
+  {
+   "text": "Now allow $L$ to be unbounded. By [def-weil-pbc-noetherian-ring], choose finitely many generators $a_1,\\ldots,a_r$ of $I$. Fix $q$ and choose $m\\geq q+r$. The natural map $i_m:\\tau_{\\leq m}L\\to L$ is an isomorphism on $H^i$ for $i<m+1$ and injective on $H^{m+1}$, since its source in that degree is zero [def-kun-truncations]. Apply [lem-per-noetherian-completion-low-degree-bound] with $b=m+1$. It gives an isomorphism $H^q(F_I(i_m))$, since $q<m+1-r$. Compose its inverse with the isomorphism of steps 1--4 for $\\tau_{\\leq m}L$ and the canonical identification $H^q(\\tau_{\\leq m}L)=H^q(L)$. This gives the asserted isomorphism. Increasing $m$ does not change it: the inclusion between upper truncations and $i_m$ compose to the later $i_{m'}$, and step 4 gives the corresponding commuting square. For a morphism $L\\to L'$, take the same $m$ on both sides and apply this square to the functorial truncation map; this proves naturality. Naturality of the quotient units gives $F_I(i_m)\\eta_{\\tau_{\\leq m}L}=\\eta_Li_m$, so the unit description from step 4 passes to $L$ as well.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-kun-truncations",
+    "lem-per-noetherian-completion-low-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06, final proof sentence; Tag 0AAJ (lemma-derived-completion-finite-cohomological-dimension), clause (2), via Tag 0922"
+   }
+  },
+  {
+   "text": "Finally put $L=N[0]$. Its only nonzero cohomology is the finite module $N$ in degree zero. The result already proved makes $F_I(N[0])$ have zero cohomology in every other degree and degree-zero cohomology $\\widehat N=\\lim_nN/I^nN$. The good-truncation zigzag\n$$F_I(N[0])\\longleftarrow\\tau_{\\leq0}F_I(N[0])\\longrightarrow H^0(F_I(N[0]))[0]$$\nconsists of quasi-isomorphisms: on cohomology both maps are the identity in degree zero and between zero modules otherwise [def-kun-truncations]. It gives the natural derived isomorphism with $\\widehat N[0]$. The same zigzag for the source $N[0]$ shows that the induced map is $H^0(\\eta_{N[0]})[0]$, hence the ordinary completion map found in steps 4--5.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A06, specialization to a finite module in degree zero; good truncations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "def-kun-truncations",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-noetherian-completion-low-degree-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A06, finite-free-resolution proof and passage through upper truncations; quotient-tower identification Tag 0922."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +140,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"AdicCompletion.sumEquivOfFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {ι : Type u_6} →\\n        (M : ι → Type u_7) →\\n          [inst_1 : (i : ι) → AddCommGroup (M i)] →\\n            [inst_2 : (i : ι) → Module R (M i)] →\\n              [Fintype ι] →\\n                [DecidableEq ι] →\\n                  (Dire\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, a finite index type $ \\\\iota $, and a family of $ R $-modules $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $, this constructs a linear equivalence between the $ I $-adic comp\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"CochainComplex.cm5b.instQuasiIsoIntP\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ}, QuasiIso (CochainComplex.cm5b.p K L)\", \"doc\": \"The projection morphism $ p $ from the mapping cone of the identity morphism on an injective cochain complex $ I K $ (with zero differentials) and a cochain complex $ L $ to $ L $ is a quasi-isomorphi\"}\n  {\"name\": \"groupCohomologyIsoExt\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) → (n : ℕ) → groupCohomology A n ≅ ((Ext k (Rep k G) n).obj (Opposite.op (Rep.trivial k G k))).obj A\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ k $-representation $ A $ of $ G $, the $ n $-th group cohomology module $ H^n(G, A) $ is isomorphic to the $ n $-th extension group $ \\\\text{Ext}^n_\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: AdicCompletion.map_exact and ofTensorProductEquivOfFiniteNoetherian describe ordinary completion, and give no cohomology comparison for the derived quotient tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived ideal adic completion of an unbounded complex with finite cohomology over a Noetherian ring",
+   "results": "8 hits: AdicCompletion.map_exact, localCohomology.isoSelfLERadical, AdicCompletion.flat_of_isNoetherian, AdicCompletion.map_injective, localCohomology, IsAdicComplete, localCohomology.diagram, AdicCompletion.",
+   "date": "2026-10-19",
+   "verdict": "no match: these ordinary completion declarations do not state cohomology of the derived quotient tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, DerivedCategory",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match: these ordinary completion declarations do not state cohomology of the derived quotient tower."
+  },
+  {
+   "tool": "grep",
+   "query": "complet.*[Hh]omology|[Hh]omology.*complet|derived.*completion",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match: these ordinary completion declarations do not state cohomology of the derived quotient tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived I-adic completion commutes with cohomology of complexes with finite cohomology over a Noetherian ring",
+   "results": "8 hits, all ordinary AdicCompletion declarations, including AdicCompletion.map_exact; none describes a derived completion functor.",
+   "date": "2026-10-19",
+   "verdict": "no match: these ordinary completion declarations do not state cohomology of the derived quotient tower."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completed-affine-localization-diagram",
@@ -83,5 +199,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-derived-completion-finite-cohomology",
+  "worker": "stage1",
+  "summary": "Split Tag 0A06 using existing finite-free, K-flat, surjective tower, finite-submodule and exact-completion nodes. Added only the general low-degree completion bound needed to pass from upper truncations to an unbounded complex. Tracked naturality and the quotient unit without altering the statement.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: The two localization triangles and their comparison in the proof of 0DXQ underlying the formal-sections application in the first half of 0ECR. Specific input: The unchanged middle term M in the completed localization triangle of 0DXQ, using finite-module completeness. The finite-module completion input is proved via Tag 0A06, including the unbounded strengthening already stated in this node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic commutative-algebra or complex-theoretic input to the Tag 0A06 completion proof; the perverse-curve unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "why": "Generic commutative-algebra or complex-theoretic input to the Tag 0A06 completion proof; the perverse-curve unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic commutative-algebra or complex-theoretic input to the Tag 0A06 completion proof; the perverse-curve unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "why": "Generic commutative-algebra or complex-theoretic input to the Tag 0A06 completion proof; the perverse-curve unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-surjective-module-complex-tower-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-9fe81b75b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-9fe81b75b (reviewer sub-agent of L); spot-checked: Read all of the item and the new node against Stacks more-algebra Tag 0A06 (l.27264), Tag 0AAJ clause (2) (l.26508) and Tag 0922 (l.27218). Item statement: same hypotheses as 0A06 (Noetherian A, any I, all H^n finite), not weakened; it adds the unit/naturality claim and the N[0] corollary. New node lem-per-noetherian-completion-low-degree-bound = 0AAJ(2) shifted by b (iso for i<b, injective at b gives iso for i<b-r, injective at b-r), applied to the quotient-tower model through 0922, Noetherian hypothesis kept. I re-derived it from the cone and Koszul degree range and tested r=0/I=0 and I=A: it holds. It is generic, needs no finiteness, is not a clause of the item, and no existing DAG node states it (grep for 0AAJ/0A06/0922/finite-cd: the hits are Koszul pro-zero nodes and local diagram/sections nodes). Report's 0AAJ proof typo (i<r should be i<-r) is correct; the statement is unaffected. Steps: 1 is 066E plus the finite-free model with b=m. 2 is flat => K-flat, P/I^nP, and the surjective tower node with constant ring tower; the kernel-to-fibre qis is written out. 3: 00IK and 00MB give ker=Z^, im=B^, H^q=H^q(P)^ with no lower bound; I checked the factorization. 4: naturality via the derived-map representative leaf, and the unit is traced on cycles. 5: m>=q+r and b=m+1 give q<m+1-r; endpoint checked; independence of m and naturality by functorial truncation. 6: elementary zigzag. Accepted tool_uses: 066E, the finite-free model, bounded-flat K-flat and the surjective tower limit, all generic algebra. No SGA, no cycle. One cosmetic point, unchanged: the new node has no lean_audit field instead of {none, none}."
  }
 }
