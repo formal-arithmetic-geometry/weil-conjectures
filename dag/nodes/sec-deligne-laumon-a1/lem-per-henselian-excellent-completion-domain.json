@@ -1,0 +1,86 @@
+{
+ "id": "lem-per-henselian-excellent-completion-domain",
+ "kind": "statement",
+ "title": "Completion of an excellent henselian local domain is a domain",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative excellent henselian Noetherian local ring [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-noetherian-ring]. Assume that $A$ is an integral domain, meaning that $1\\ne0$ and a product of two nonzero elements is nonzero. Then its maximal-ideal-adic completion $\\widehat A=\\varprojlim_{n\\geq1}A/\\mathfrak m^n$ [def-weil-pbc-adic-completion] is an integral domain.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose I Corollary 6.3(ii), printed p.14, final sentence; explicitly invoked at the start of the proof of III Proposition 3.1, printed p.37."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The maximal ideal completion of an excellent henselian Noetherian local integral domain is an integral domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.isDomain\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (K : Type u₁) [inst : Field K] (v : Valuation K NNReal) (O : Type u₂) [inst_1 : CommRing O] [inst_2 : Algebra O K],\\n  v.Integers O → ∀ (p : ℕ) [inst : Fact (Nat.Prime p)] [inst_3 : Fact ¬IsUnit ↑p], IsDomain (PreTilt O p)\", \"doc\": \"For a commutative ring $ O $ and prime $ p $, the pretilt $ \\\\mathrm{PreTilt}(O, p) $ (defined as the perfection of $ O/(p) $ consisting of sequences $ (f_n) $ with $ f_n = f_{n+1}^p $) has no zero div\"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of elements with valuation less than or equal to 1, is a discret\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"isLocalRing_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R], IsLocalRing R\", \"doc\": \"If a commutative ring $ R $ is adic complete with respect to a maximal ideal $ \\\\mathfrak{m} $, then $ R $ is a local ring.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                Algebra R ↥(IsDed\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $ and a height one prime ideal $ v $, the adic completion integers of $ K $ at $ v $ form an $ R $-algebra. This structure equips the valuation subr\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern Hensel lifting, complete rings being henselian, valuation completions or integral closures; none proves integrality of completion for an arbitrary excellent henselian domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Analytic irreducibility of a henselian excellent local domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassFactorization\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A}, (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → ∃ f h, g.IsWeierstrassFactorization f h\", \"doc\": \"For a local ring $ A $ and a power series $ g $ over $ A $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal of $ A $) is non-zero, the\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisor\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → [IsLocalRing A] → Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition in a local ring $ A $ if the coefficient of $ X^{\\\\operatorname{ord}(g)} $ in the quotient ring $ A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m}\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern Hensel lifting, complete rings being henselian, valuation completions or integral closures; none proves integrality of completion for an arbitrary excellent henselian domain."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsDomain\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern Hensel lifting, complete rings being henselian, valuation completions or integral closures; none proves integrality of completion for an arbitrary excellent henselian domain."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xcellent|[Aa]nalytically[Ii]rreducible|[Uu]nibranch",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/InvariantForm.lean\", \"line\": \"32\", \"text\": \"We follow the short and excellent paper [dieudonne1953].\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern Hensel lifting, complete rings being henselian, valuation completions or integral closures; none proves integrality of completion for an arbitrary excellent henselian domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a henselian excellent local domain remains an integral domain",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] (I : Ideal R) [IsAdicComplete I R] : HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R},\\n  I ≤ ⊥.jacobson →\\n    (∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : R),\\n            Polynomial.eval a₀ f ∈ I →\\n              IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) →\\n                ∃ a, f.IsRoot\", \"doc\": \"Let $R$ be a commutative ring and $I$ be an ideal of $R$. If $I$ is contained in the Jacobson radical of $R$, and for every monic polynomial $f \\\\in R[X]$ and every element $a_0 \\\\in R$ such that $f(a_0\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}\n  {\"name\": \"completeIntegralClosure_eq_integralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral\", \"type\": \"[IsNoetherianRing R] [IsDomain R] [IsFractionRing R S] : completeIntegralClosure R S = integralClosure R S\", \"doc\": \"Given a Noetherian domain $ R $ and its fraction ring $ S $, the complete integral closure of $ R $ in $ S $ (the subalgebra of elements almost integral over $ R $) coincides with the integral closure\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Ring.instIsDomainNormalClosure\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": IsDomain T\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $ forms an integral domain under the operations inherited from $ E $. This means it contains no zero divisors, satisfying the domain pro\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern Hensel lifting, complete rings being henselian, valuation completions or integral closures; none proves integrality of completion for an arbitrary excellent henselian domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-alteration-cover-approximation",
+  "date": "2026-10-19",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 finiteness/duality branch, through III Proposition 6.2 and its III Proposition 3.1 approximation input: Expose I Corollary 6.3(ii), printed p.14, final sentence; explicitly invoked at the start of the proof of III Proposition 3.1, printed p.37.",
+   "via": [
+    "lem-per-alteration-cover-approximation",
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

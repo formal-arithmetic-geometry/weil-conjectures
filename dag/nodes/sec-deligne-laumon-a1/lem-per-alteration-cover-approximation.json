@@ -16,9 +16,148 @@
   "def-weil-irreducible-components",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The completion $\\widehat A$ is a domain by [lem-per-henselian-excellent-completion-domain]. It is Noetherian and complete for $\\mathfrak m\\widehat A$ by [lem-weil-pbc-completion-noetherian-quotient-noetherian] (the ideal $\\mathfrak m$ is finitely generated and $A/\\mathfrak m$ is a field), and is local with that maximal ideal by [lem-weil-pbc-local-completion-local-ring]. Thus it is excellent by [lem-per-complete-local-excellence]. Invertibility of $\\ell$ persists under a ring map. Apply [lem-per-alteration-cover-proper-normal-form] over $\\widehat S$: obtain a proper surjection $p:P\\to\\widehat S$ with $P$ integral, of function-field degree $\\delta>0$ prime to $\\ell$, a finite completely decomposed separated etale family $v_j:V_j\\to P$, and maps $h_j:V_j\\to X_{i(j)}$ over $\\widehat S$. These schemes are finite type over $\\widehat S$.",
+   "uses": [
+    "lem-per-henselian-excellent-completion-domain",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-per-complete-local-excellence",
+    "lem-per-alteration-cover-proper-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1, p.37 opening observation and p.38 standard refinement; I 6.3(ii); II 3.2.1"
+   }
+  },
+  {
+   "text": "All finite type schemes over the Noetherian bases in this argument are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Their structure maps are locally of finite presentation by [pqf-lem-lft-fp-locnoeth]; finite type also supplies quasi-compactness. Thus they are of finite presentation, even when the given $X_i$ are not separated. Apply the object part of [thm-pd-spreading-out] to $P$ and the finitely many $V_j$, keeping the prescribed models of the $X_i$. Increase the index to a common stage. Apply [lem-weil-pbc-finite-diagram-lift-of-models] to descend all $v_j,h_j$ and their relations over the base, with these fixed object models. By [lem-weil-pbc-eventually-proper] increase the stage so $p_\\alpha:P_\\alpha\\to S_\\alpha$ is proper. By [lem-per-nisnevich-cover-limit-descent] increase it again so $(v_{j,\\alpha})_j$ is completely decomposed etale. These properties hold at every later stage: properness is preserved by base change [lem-weil-pbc-proper-fp-permanence], and the Nisnevich node explicitly gives the later-stage assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-lft-fp-locnoeth",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-diagram-lift-of-models",
+    "lem-weil-pbc-eventually-proper",
+    "lem-per-nisnevich-cover-limit-descent",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III section 2, p.36; III 3.1 and Lemma 3.1.1, p.38"
+   }
+  },
+  {
+   "text": "Write $\\widehat K=\\operatorname{Frac}\\widehat A$. Each $X_i$ is an object of $\\operatorname{alt}/\\widehat S$, so condition (i) of [lem-per-generic-fibre-finiteness-criterion] holds and its generic fibre is finite over $\\widehat K$. For $P$: its generic point maps to the generic point of $\\widehat S$ because $p$ is surjective and that image generalizes every image point, and $\\kappa(P)/\\widehat K$ has degree $\\delta$, so the same node makes $P_{\\widehat\\eta}$ finite. A point of $P_{\\widehat\\eta}$ has all its generizations in this finite discrete fibre, so it is the generic point of $P$; on an affine open its ring is a localization of a domain, hence $P_{\\widehat\\eta}=\\operatorname{Spec}\\kappa(P)$. Put $d_T$ the dimension of the finite algebra of $T_{\\widehat\\eta}$ for $T$ in the list $P,X_i$; thus $d_P=\\delta$, and $d_{X_i}=0$ for empty members. View $\\operatorname{Spec}\\widehat K$ as the limit of the principal opens $D(b)$, $b\\ne0$. Apply [lem-weil-pbc-descend-finite-locally-free] to the finite-presentation $T\\to\\widehat S$: over some $D(a_T)$, $a_T\\ne0$, it is finite locally free of degree $d_T$ (at the limit, a finite algebra over a field is free of its dimension). Enlarge the stage until every $a_T$ lies in $A_\\alpha$; the rings $(A_\\alpha)_{a_T}$ have direct limit $\\widehat A_{a_T}$, and a second application of [lem-weil-pbc-descend-finite-locally-free] to these localized models makes every $T_\\alpha\\vert_{D(a_T)}$ finite locally free of degree $d_T$ at one common stage.",
+   "uses": [
+    "lem-per-generic-fibre-finiteness-criterion",
+    "lem-weil-pbc-descend-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(i), pp.37--38: preserve finiteness and generic rank on principal opens; EGA permanence there, expressed by Stacks 06AC"
+   }
+  },
+  {
+   "text": "Fix such a common stage $\\alpha_1\\geq\\alpha_0$. For each of the finitely many nonzero $a_T\\in\\widehat A$, choose $N_T\\geq1$ for which its coordinate in $A/\\mathfrak m^{N_T}$ is nonzero. Such a coordinate exists because the completion consists of compatible sequences [def-weil-pbc-adic-completion]. Set $N_0=\\max_TN_T$. If $\\alpha\\geq\\alpha_1$, $N\\geq N_0$, and $u$ is as in the statement, the two values of $a_T\\in A_\\alpha$ have the same image in $A/\\mathfrak m^{N_T}$: their difference belongs to $\\mathfrak m^N\\widehat A$, which maps to zero in this quotient. Consequently $u(a_T)\\ne0$ in $A$. The same witnesses and bound work for every later $\\alpha$ by restricting $u$ to $A_{\\alpha_1}$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(i), pp.37--38, choosing n so a is nonzero modulo the corresponding power"
+   }
+  },
+  {
+   "text": "Write $K=\\operatorname{Frac}A$. The generic-point map $\\operatorname{Spec}K\\to S_\\alpha$ induced by $u$ lies in every $D(a_T)$. Therefore the generic fibre of $T_u$ is finite and has coordinate-algebra dimension $d_T$: by [def-pc-finite-locally-free] its fibre at the image point has dimension $d_T$ over that point's residue field; extending this field to $K$ tensors a basis and keeps its dimension. Finiteness is equally explicit: that fibre is the spectrum of a finite-dimensional algebra, and after extension it is the spectrum of the tensor algebra. This proves finite generic fibres for all $X_{i,u}$ and for $P_u$, with $\\dim_K\\Gamma((P_u)_\\eta,\\mathcal O)=\\delta$. Properness of $P_\\alpha$ gives properness of $P_u$ by [lem-weil-pbc-proper-fp-permanence].",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(i),(iii), pp.37--38: generic fibre ranks after specialization"
+   }
+  },
+  {
+   "text": "Let $B=\\Gamma((P_u)_\\eta,\\mathcal O)$; it is a finite-dimensional commutative $K$-algebra of dimension $\\delta$. Choose a composition series as a $B$-module by repeatedly taking a proper submodule of maximal $K$-dimension; dimensions strictly decrease. Each simple quotient is $B/\\mathfrak q$ for a maximal ideal $\\mathfrak q$: a nonzero vector generates a simple module and its annihilator is maximal. Additivity of dimension gives $\\delta=\\sum_a[B/\\mathfrak q_a:K]$, with repetitions permitted. Since $\\ell\\nmid\\delta$, at least one summand has degree prime to $\\ell$. The corresponding point of the finite generic fibre gives an irreducible component of $P_u$ dominating $S$; it is a component because all points of that generic fibre are minimal as well as maximal. In $(P_u)^{\\mathrm{dom}}$ its residue field remains $B/\\mathfrak q_a$. The dominant-parts node gives that $(P_u)^{\\mathrm{dom}}$ is reduced, finite type, and has all generic residue extensions finite. It is a closed subscheme of $P_u$, hence proper over $S$ by [lem-weil-pbc-proper-fp-permanence]. Its proper image is closed [def-weil-proper-morphism] and contains the generic point of the integral $S$, so it is surjective. Thus it is a proper surjective maximally $\\ell'$-finite object and a singleton covering by [def-per-prime-to-ell-alteration-topology].",
+   "uses": [
+    "lem-per-finite-generic-dominant-parts",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(iii), p.38, selecting a prime-to-ell component after approximation; generic Artinian algebra dimension argument written out"
+   }
+  },
+  {
+   "text": "The specialized family $V_{j,u}\\to P_u$ is etale by [lem-weil-pbc-etale-covering-base-change], applied to the completely decomposed family at stage $\\alpha$. It is completely decomposed: for $p_u\\mapsto p_\\alpha$, a residue-preserving point above $p_\\alpha$ pulls back to a $\\kappa(p_u)$-rational point because $\\kappa(p_\\alpha)\\otimes_{\\kappa(p_\\alpha)}\\kappa(p_u)=\\kappa(p_u)$. By [lem-per-finite-generic-dominant-parts], applied to $T=P_u$, every $V_{j,u}$ has finite generic fibre, so (same node) every $V_{j,u}^{\\mathrm{dom}}$ is an object of $\\operatorname{alt}/S$, and the base-changed family $(V_{j,u}\\times_{P_u}P_u^{\\mathrm{dom}}\\to P_u^{\\mathrm{dom}})_j$ is completely decomposed; it is etale by [lem-weil-pbc-etale-covering-base-change]. By the etale clause of [lem-per-dominant-part-coreflection] (for integral $S$ its $X_{\\mathrm{md}}$ is $X^{\\mathrm{dom}}$), this family is $(V_{j,u}^{\\mathrm{dom}}\\to P_u^{\\mathrm{dom}})_j$ with the functorial restrictions of $v_{j,u}$. A completely decomposed etale family is $\\ell'$-decomposed (degree one), so it covers by [def-per-prime-to-ell-alteration-topology]. Compose it with the proper singleton covering in Step 6, using [lem-per-alteration-cover-calculus], to obtain a covering family $(V_{j,u}^{\\mathrm{dom}}\\to S)_j$ of $S$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-per-finite-generic-dominant-parts",
+    "lem-per-dominant-part-coreflection",
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(iii) and Lemma 3.1.1, p.38: the Nisnevich leg after specialization and dominant reduction"
+   }
+  },
+  {
+   "text": "The specialized maps $h_{j,u}:V_{j,u}\\to X_{i(j),u}$ are morphisms of finite type $S$-schemes, so the functoriality of $X\\mapsto X_{\\mathrm{md}}$ in [lem-per-dominant-part-coreflection] restricts them to $S$-maps $V_{j,u}^{\\mathrm{dom}}\\to X_{i(j),u}^{\\mathrm{dom}}$. Every $X_{i,u}$ has finite generic fibre by Step 5, so [lem-per-finite-generic-dominant-parts] makes each target an object of $\\operatorname{alt}/S$. The covering of Step 7 therefore refines the family of these targets; its generated covering sieve is contained in their generated sieve. Upward closure of covering sieves, part of [def-per-prime-to-ell-alteration-topology], proves that $(X_{i,u}^{\\mathrm{dom}}\\to S)_i$ covers. Empty members contribute no maps from nonempty schemes and may be omitted. The threshold and index were chosen before $\\alpha,N,u$, so all required quantifiers hold.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-per-finite-generic-dominant-parts",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III 3.1(iii), p.38, functorial diagram and covering refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-henselian-excellent-completion-domain",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-per-complete-local-excellence",
+  "lem-per-alteration-cover-proper-normal-form",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-eventually-proper",
+  "lem-per-nisnevich-cover-limit-descent",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "def-weil-pbc-adic-completion",
+  "def-pc-finite-locally-free",
+  "lem-per-finite-generic-dominant-parts",
+  "def-weil-proper-morphism",
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-per-alteration-cover-calculus",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "lem-per-dominant-part-coreflection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Proposition 3.1(i),(iii) and Lemma 3.1.1, pp.37--38; II Theorem 3.2.1; fixed-model descent of III section 2, p.36."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +186,45 @@
    "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}",
    "date": "2026-10-19",
    "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to ell alteration coverings over a henselian excellent local completion persist under sufficiently close algebraic approximation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PreTilt.exists_smodEq_untiltAux\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  ∃ y, ∀ (n : ℕ), x.untiltAux n ≡ y [SMOD Ideal.span {↑p} ^ n • ⊤]\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, there exists an element $ y $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $ y $ modul\"}\n  {\"name\": \"PreTilt.untiltAux_smodEq_untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsPrecomplete (Ideal.span {↑p}) O] (x : PreTilt O p) (n : ℕ),\\n  x.untiltAux n ≡ x.untiltFun [SMOD Ideal.span {↑p} ^ n]\", \"doc\": \"For any element $x$ in the pretilt $\\\\mathrm{PreTilt}(O, p)$ and natural number $n$, the auxiliary untilt function value $x.\\\\text{untiltAux}(n)$ is congruent to the untilt function value $x.\\\\text{until\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"PreTilt.untiltFun\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"{O : Type u_1} →\\n  [inst : CommRing O] →\\n    {p : ℕ} → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsPrecomplete (Ideal.span {↑p}) O] → PreTilt O p → O\", \"doc\": \"The function maps each element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $ to an element $ y \\\\in O $ such that for all natural numbers $ n $, the value $ \\\\text{untiltAux}(x, n) $ is congruent to $\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Hensel lifting, ordinary morphism-property descent and approximation of maps at inverse limits do not give alteration-cover approximation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich covering and proper generically finite morphisms descend from completion with prime to ell generic degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Hensel lifting, ordinary morphism-property descent and approximation of maps at inverse limits do not give alteration-cover approximation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: Hensel lifting, ordinary morphism-property descent and approximation of maps at inverse limits do not give alteration-cover approximation."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|Nisnevich|genericallyFinite",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"39\", \"text\": \"but this dissymmetry allows the example of Nisnevich distinguished\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"line\": \"40\", \"text\": \"squares in the case of the Nisnevich topology on schemes (in which case\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Hensel lifting, ordinary morphism-property descent and approximation of maps at inverse limits do not give alteration-cover approximation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Approximation of alteration coverings over excellent henselian local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R},\\n  I ≤ ⊥.jacobson →\\n    (∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : R),\\n            Polynomial.eval a₀ f ∈ I →\\n              IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) →\\n                ∃ a, f.IsRoot\", \"doc\": \"Let $R$ be a commutative ring and $I$ be an ideal of $R$. If $I$ is contained in the Jacobson radical of $R$, and for every monic polynomial $f \\\\in R[X]$ and every element $a_0 \\\\in R$ such that $f(a_0\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [toIsLocalRing : IsLocalRing R],\\n  (∀ (f : Polynomial R),\\n      f.Monic →\\n        ∀ (a₀ : R),\\n          Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n            IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) →\\n              ∃ a, f.IsRoot a ∧ a - a₀ \", \"doc\": \"A commutative local ring $ R $ is Henselian if for every monic polynomial $ f \\\\in R[X] $, whenever $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $ (the maximal ideal) and $ f'(a_0) $ is a unit in \"}",
+   "date": "2026-10-19",
+   "verdict": "no match: Hensel lifting, ordinary morphism-property descent and approximation of maps at inverse limits do not give alteration-cover approximation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-complete-local-descent",
@@ -77,5 +251,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-cover-approximation",
+  "worker": "stage1",
+  "summary": "Read ILO III 3.1(i),(iii) and 3.1.1, pp.37--38, and I 6.3(ii), p.14. Kept the fixed-model statement unchanged. Split the argument into proper/Nisnevich refinement, finite-diagram descent, two finite-rank limit descents, explicit nonvanishing thresholds, generic degree arithmetic, dominant reduction and covering refinement. Three new statement-only nodes isolate completion integrality, Nisnevich-cover limit descent and dominant-parts functoriality. Reused all existing general descent and covering nodes, searched every new statement by two phrasings and with four search kinds, and checked every cited statement.",
+  "blueprint": "Realizes ancestor lem-per-artin-gabber-affine-curve Step 3 finiteness/duality branch via III 6.2: III 3.1(i) is Steps 3--5; III 3.1(iii) and 3.1.1 are Steps 1--2 and 6--8. The unit/chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Object descent for the auxiliary finite-presentation schemes in ILO III section 2; this generic limits theorem does not replace the uniformization route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-diagram-lift-of-models",
+    "why": "Descends the auxiliary arrows over the fixed model of the original family; object descent alone does not give these arrows."
+   },
+   {
+    "node": "lem-weil-pbc-eventually-proper",
+    "why": "Descends properness of the auxiliary alteration, as required explicitly in III 3.1."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Preserves the finite generic ranks on principal opens in III 3.1(i), both over the completion and at a model stage."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic Noetherian, finite-presentation, completion or morphism-permanence tool needed for the finite-model approximation argument of III 3.1; no node of the unit gives this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "pqf-lem-lft-fp-locnoeth",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-eventually-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-8f7f6616a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-8f7f6616a (reviewer sub-agent of L); spot-checked: Read ILO III 3.1(i),(iii) and Lemma 3.1.1 (pp.37-38), I 6.3(ii) (p.14) and II 1.2.5-1.2.6 (pp.25-26), with every cited node statement. The item statement is unchanged and follows ILO's proof: Â is a domain; proper/Nisnevich standard form from II 3.2.1; generic finite-free locus over D(a); the threshold argument u(a_T)≠0; the weighted residue-degree sum for δ prime to ℓ; dominant reduction and refinement. Steps 1, 2 and 4-6 check against the cited statements, including the hypotheses of proper-normal-form (excellent complete Â) and 06AC (both applications). Fault 1 (C1/C4): Step 3 asserted with no citation that the generic fibres of P and X_i are finite and that d_P=δ. Fixed: it now cites lem-per-generic-fibre-finiteness-criterion and proves P_η=Spec κ(P). Fault 2 (C5): the new lem-per-finite-generic-dominant-parts restated the functoriality and the étale identification V_md≅V×_T T_md of the existing lem-per-dominant-part-coreflection (ILO II 1.2.5); the report's not-duplicates section missed that node. Fixed: the node is narrowed to its new clauses (T^dom is an alt object when T_η is finite; étale V_j have finite generic fibre; complete decomposition survives restriction), and Steps 7-8 cite coreflection. The other two new nodes are true and not duplicates: the completion-domain node is I 6.3(ii) (the normal-completion node needs normality); the Nisnevich node is III 3.1.1 (etale-finite-data-descent only handles étale objects over the base). Batch-5 flags: complete-local-excellence→trf UC/CM algebra; proper-normal-form→0AB1, flattening, ML and G-ring trf nodes; cover-calculus→finite-residue-point-closed-in-fibre. All are generic algebra or geometry, not steps of the trace formula or Poincaré duality, so accepted. Declared tool_uses are accepted. No SGA. Fixed files are under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  }
 }
