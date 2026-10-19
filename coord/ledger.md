@@ -17518,3 +17518,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:41 L: merged deliver/NJ/fix-lem-exchanges (stage 2; reviewer PASS; parallel immutable checks)
 - 18:58 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 709c90f1a4c8: Byte-identical re-delivery (sha256 787e4e0b, same as ~30 RETURNed N7)
 - 19:13 L: merged deliver/ND/lem-sp-tower-p1-arbitrary-base-integrals (stage 2; reviewer PASS; parallel immutable checks)
+- 19:14 L: merged deliver/Q08/thm-sf-pf-proetale (stage 2; reviewer PASS; parallel immutable checks)
