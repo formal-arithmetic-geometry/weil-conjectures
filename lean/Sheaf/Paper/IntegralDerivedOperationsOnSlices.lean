@@ -156,6 +156,108 @@ def generator (n : ℕ) (M : Mod l E X U) (V : (Site X U)ᵒᵖ)
       (SheafOfModules.changeOfRingsPresheaf (projection l E X U n) M).presheaf).app V
         (s ⊗ₜ[(ring l E X U).obj.obj V, ((projection l E X U n).hom.app V).hom] x))
 
+private def unitPresheaf (n : ℕ) (M : Mod l E X U) :
+    M.val ⟶ (PresheafOfModules.restrictScalars
+      ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        (projection l E X U n)).hom).obj
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+        (projection l E X U n) M) where
+  app V := (ModuleCat.extendRestrictScalarsAdj
+    ((projection l E X U n).hom.app V).hom).unit.app (M.val.obj V)
+  naturality {V W} f := by
+    apply ModuleCat.hom_ext
+    ext x
+    change (1 : (finite l E X U n).obj.obj W) ⊗ₜ[(ring l E X U).obj.obj W,
+      ((projection l E X U n).hom.app W).hom] (show M.val.obj W from M.val.map f x) =
+      SheafOfModules.changeOfRingsMap.{t, t + 1, max u (t + 1)} (projection l E X U n) M f
+        ((1 : (finite l E X U n).obj.obj V) ⊗ₜ[(ring l E X U).obj.obj V,
+          ((projection l E X U n).hom.app V).hom] x)
+    have he := ((SheafOfModules.exists_changeOfRingsMap.{t, t + 1, max u (t + 1)}
+      (projection l E X U n) M f).choose_spec 1 x).symm
+    simp only [map_one] at he
+    convert he using 1 <;> rfl
+
+private def unitModule (n : ℕ) (M : Mod l E X U) :
+    M ⟶ (SheafOfModules.restrictScalars
+      ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        (projection l E X U n))).obj ((reduction l E X U n).obj M) where
+  val := unitPresheaf l E X U n M ≫
+    (PresheafOfModules.restrictScalars
+      ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        (projection l E X U n)).hom).map
+      ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)}
+        (R := (sheafCompose _
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+            (finite l E X U n)) (𝟙 _)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (projection l E X U n) M)) ≫
+    ((SheafOfModules.restrictScalars
+      ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        (projection l E X U n))).map
+      (eqToHom ((reductionWitness l E X U n).choose_spec.choose M).symm)).val
+
+private theorem unitModule_apply (n : ℕ) (M : Mod l E X U)
+    (V : (Site X U)ᵒᵖ) (x : M.val.obj V) :
+    (unitModule l E X U n M).val.app V x = generator l E X U n M V 1 x := by
+  rfl
+
+private theorem generator_map (n : ℕ) {M N : Mod l E X U} (a : M ⟶ N)
+    (V : (Site X U)ᵒᵖ) (s : (finite l E X U n).obj.obj V) (x : M.val.obj V) :
+    ((reduction l E X U n).map a).val.app V (generator l E X U n M V s x) =
+      generator l E X U n N V s (a.val.app V x) := by
+  let h : ∀ M : Mod l E X U, (reduction l E X U n).obj M =
+      SheafOfModules.changeOfRings (projection l E X U n) M :=
+    (reductionWitness l E X U n).choose_spec.choose
+  have hm : (reduction l E X U n).map a = eqToHom (h M) ≫
+      SheafOfModules.changeOfRingsHom (projection l E X U n) M a ≫ eqToHom (h N).symm :=
+    (reductionWitness l E X U n).choose_spec.choose_spec.choose a
+  change ((eqToHom (h M).symm ≫ (reduction l E X U n).map a).val.app V)
+      ((toSheafify (topology X U)
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+          (projection l E X U n) M).presheaf).app V
+          (s ⊗ₜ[(ring l E X U).obj.obj V,
+            ((projection l E X U n).hom.app V).hom] x)) = _
+  rw [hm]
+  simp only [eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+  change ((eqToHom (h N).symm).val.app V)
+      ((SheafOfModules.changeOfRingsHom.{t, t + 1, max u (t + 1)}
+        (projection l E X U n) M a).val.app V
+        ((toSheafify (topology X U)
+          (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+          (projection l E X U n) M).presheaf).app V
+            (s ⊗ₜ[(ring l E X U).obj.obj V,
+              ((projection l E X U n).hom.app V).hom] x))) = _
+  congr 1
+  let k : SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (projection l E X U n) M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (projection l E X U n) N :=
+    { app := fun V ↦ (ModuleCat.extendScalars
+        ((projection l E X U n).hom.app V).hom).map (a.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality.{t, t + 1, max u (t + 1)}
+        (projection l E X U n) M a }
+  have hn := CategoryTheory.toSheafify_naturality (topology X U)
+    ((PresheafOfModules.toPresheaf _).map k)
+  have he := ConcreteCategory.congr_hom (NatTrans.congr_app hn V)
+    (s ⊗ₜ[(ring l E X U).obj.obj V,
+      ((projection l E X U n).hom.app V).hom] x)
+  change _ = _ at he
+  convert he.symm using 1 <;> rfl
+
+private def moduleUnit (n : ℕ) :
+    𝟭 (Mod l E X U) ⟶ reduction l E X U n ⋙
+      SheafOfModules.restrictScalars
+        ((sheafCompose _
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+            (projection l E X U n)) where
+  app M := unitModule l E X U n M
+  naturality {M N} a := by
+    ext V x
+    change (unitModule l E X U n N).val.app V (a.val.app V x) =
+      ((reduction l E X U n).map a).val.app V
+        ((unitModule l E X U n M).val.app V x)
+    rw [unitModule_apply, unitModule_apply, generator_map]
+
+private def levelUnit (n : ℕ) : 𝟭 (Cx l E X U) ⟶ level l E X U n :=
+  NatTrans.mapHomologicalComplex (moduleUnit l E X U n) (.up ℤ)
+
 /-- The coefficient reduction, forgetting commutativity only. Source: Stacks 03EK
 (blueprint: def-pur-integral-derived-operations). -/
 def rho (n : ℕ) :
@@ -200,7 +302,35 @@ theorem augmentation_existsUnique :
       ∀ (P : Cx l E X U) (n : ℕ) (i : ℤ) (V : (Site X U)ᵒᵖ) (x : (P.X i).val.obj V),
         (((γ.app P).app (op n)).f i).val.app V x =
           generator l E X U n (P.X i) V 1 x := by
-  sorry
+  let γ : (Functor.const ℕᵒᵖ : Cx l E X U ⥤ (ℕᵒᵖ ⥤ Cx l E X U)) ⟶
+      tower l E X U :=
+    { app := fun P ↦ NatTrans.ofOpSequence
+        (fun n ↦ (levelUnit l E X U n).app P)
+        (fun n ↦ by
+          change 𝟙 P ≫ _ = _ ≫ _
+          rw [Category.id_comp]
+          change (levelUnit l E X U n).app P =
+            (levelUnit l E X U (n + 1)).app P ≫
+              ((Functor.ofOpSequence (transition l E X U)).map
+                (homOfLE (Nat.le_succ n)).op).app P
+          rw [Functor.ofOpSequence_map_homOfLE_succ]
+          ext i V x
+          change generator l E X U n (P.X i) V 1 x =
+            (((transition l E X U n).app P).f i).val.app V
+              (generator l E X U (n + 1) (P.X i) V 1 x)
+          have hn := (transition_existsUnique l E X U n).exists.choose_spec P i V 1 x
+          simp only [map_one] at hn
+          convert hn.symm using 1 <;> rfl)
+      naturality := fun {P Q} f ↦ by
+        apply NatTrans.ext
+        funext n
+        exact (levelUnit l E X U n.unop).naturality f }
+  refine ⟨γ, ?_, ?_⟩
+  · intro P n i V x
+    rfl
+  · intro γ' hγ'
+    ext P n i V x
+    exact hγ' P n.unop i V x
 
 /-- The canonical reduction augmentation. Source: Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-pur-integral-derived-operations). -/
@@ -270,7 +400,18 @@ theorem roosUnit_condition (P : Cx l E X U) :
           towerTransitionEndomorphism
             (K := fun n : ℕ ↦ ((tower l E X U).obj P).obj (op n))
             (integralOperationsTowerStep ((tower l E X U).obj P))) = 0 := by
-  sorry
+  have h : productAugmentation l E X U P ≫
+      towerTransitionEndomorphism
+        (K := fun n : ℕ ↦ ((tower l E X U).obj P).obj (op n))
+        (integralOperationsTowerStep ((tower l E X U).obj P)) = 0 := by
+    apply Pi.hom_ext
+    intro n
+    have hn := ((augmentation l E X U).app P).naturality
+      (homOfLE (Nat.le_succ n)).op
+    simpa [productAugmentation, towerTransitionEndomorphism, towerProductShift,
+      integralOperationsTowerStep, Category.assoc] using sub_eq_zero.mpr hn
+  rw [h]
+  simp
 
 /-- The prescribed quotient unit is the explicit chain map (c,0) into Cone(1-s)[-1].
 Source: Stacks 08TC (blueprint: def-pur-integral-derived-operations). -/
