@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.Currying
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.Paper.CompletedIntegralFiniteQuotientHomExt
 
 /-!
 # Coefficient towers for smooth purity
@@ -35,6 +37,8 @@ identities and composition are componentwise.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe t u
 
@@ -119,6 +123,54 @@ abbrev spCoefficientTransitionType (n : ℕ)
     (N : ringedSiteModules.{max u (t + 1)} (spCoefficientRing l E T n)) :=
   M ⟶ (SheafOfModules.restrictScalars (spCoefficientReduction l E T n)).obj N
 
+private theorem spEllIdeal_eq_uniformizer_pow :
+    ∃ e : ℕ, 1 ≤ e ∧ spEllIdeal l E =
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ e := by
+  have hfactor : ∃ e : ℕ, 1 ≤ e ∧
+      ∃ v : (Padic.coefficientExtensionIntegers l E)ˣ,
+        (l : Padic.coefficientExtensionIntegers l E) =
+          v * Padic.coefficientExtensionUniformizer l E ^ e := by
+    let O := Padic.coefficientExtensionIntegers l E
+    let π := Padic.coefficientExtensionUniformizer l E
+    have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    let : IsDiscreteValuationRing O := h.2.2.2.2.2.2.2.1
+    have hgen : Ideal.span ({π} : Set O) = Padic.coefficientExtensionMaximalIdeal l E :=
+      h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+    have hm : Padic.coefficientExtensionMaximalIdeal l E = IsLocalRing.maximalIdeal O :=
+      IsLocalRing.eq_maximalIdeal h.2.2.2.2.1
+    have hπ : Irreducible π :=
+      (IsDiscreteValuationRing.irreducible_iff_uniformizer π).2 (hm.symm.trans hgen.symm)
+    have hl0 : (l : O) ≠ 0 := by
+      intro heq
+      have heq' : (l : E) = 0 := congrArg (fun x : O ↦ (x : E)) heq
+      have hq : (l : ℚ_[l]) ≠ 0 := Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero
+      exact hq ((algebraMap ℚ_[l] E).injective (by simpa only [map_natCast, map_zero]
+        using heq'))
+    obtain ⟨e, v, hv⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hl0 hπ
+    refine ⟨e, ?_, v, hv⟩
+    have hval : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+      have hext := spectralNorm_extends (K := ℚ_[l]) (L := E) (l : ℚ_[l])
+      change spectralNorm ℚ_[l] E (l : E) < 1
+      simpa only [map_natCast] using hext.trans_lt (Padic.norm_p_lt_one (p := l))
+    have hnu : ¬ IsUnit (l : O) := by
+      intro hu
+      exact (ne_of_lt hval) ((h.2.2.1 (l : O)).mp hu)
+    by_contra he
+    have he0 : e = 0 := by omega
+    apply hnu
+    rw [hv, he0, pow_zero, mul_one]
+    exact v.isUnit
+  obtain ⟨e, hepos, v, hv⟩ := hfactor
+  refine ⟨e, hepos, ?_⟩
+  have hell : spEllIdeal l E =
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ e := by
+    unfold spEllIdeal
+    rw [hv, Ideal.span_singleton_mul_left_unit v.isUnit, Ideal.span_singleton_pow]
+  exact hell
+
 /-- The ell-power and chosen uniformizer-power ideals are cofinal.
 Source: blueprint, first sentence (blueprint: sk-def-sp-coefficient-towers).
 
@@ -130,7 +182,25 @@ case is the unit ideal and requires no exception. -/
 theorem sp_coefficient_ideals_cofinal :
     (∀ n : ℕ, ∃ m : ℕ, spEllIdeal l E ^ m ≤ Padic.coefficientExtensionIdeal l E n) ∧
     (∀ n : ℕ, ∃ m : ℕ, Padic.coefficientExtensionIdeal l E m ≤ spEllIdeal l E ^ n) := by
-  sorry
+  obtain ⟨e, hepos, hell⟩ := spEllIdeal_eq_uniformizer_pow l E
+  change Ideal.span ({(l : Padic.coefficientExtensionIntegers l E)} :
+    Set (Padic.coefficientExtensionIntegers l E)) = _ at hell
+  constructor
+  · intro n
+    refine ⟨n, ?_⟩
+    change Ideal.span ({(l : Padic.coefficientExtensionIntegers l E)} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ n ≤
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ n
+    rw [hell, ← pow_mul]
+    exact Ideal.pow_le_pow_right (Nat.le_mul_of_pos_left n hepos)
+  · intro n
+    refine ⟨e * n, ?_⟩
+    change Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ (e * n) ≤
+      Ideal.span ({(l : Padic.coefficientExtensionIntegers l E)} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ n
+    rw [hell, ← pow_mul]
 
 /-- The constant-scalar quotient into R_(n+1), induced by the quotient of O_E.
 This fixes the normalization of the completed-coefficient comparison.
@@ -144,6 +214,122 @@ def spCoefficientConstantQuotient (n : ℕ) :
         (ULift.ringEquiv.symm.toRingHom.comp
           ((Ideal.Quotient.mk (spEllIdeal l E ^ (n + 1))).comp
             ULift.ringEquiv.toRingHom))))
+
+private def spQuotientRings :
+    Ideal (Padic.coefficientExtensionIntegers l E) ⥤ CommRingCat.{max u (t + 1)} where
+  obj I := CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E ⧸ I))
+  map f := CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+    ((Ideal.Quotient.factor (leOfHom f)).comp ULift.ringEquiv.toRingHom))
+  map_id I := by
+    ext x
+    rcases x with ⟨x⟩
+    induction x using Quotient.inductionOn with
+    | h x => rfl
+  map_comp f g := by
+    ext x
+    rcases x with ⟨x⟩
+    induction x using Quotient.inductionOn with
+    | h x => rfl
+
+private def spIdealTower
+    (I : Ideal (Padic.coefficientExtensionIntegers l E)) :
+    ℕᵒᵖ ⥤ Ideal (Padic.coefficientExtensionIntegers l E) where
+  obj n := I ^ (n.unop + 1)
+  map f := homOfLE (Ideal.pow_le_pow_right (Nat.add_le_add_right (leOfHom f.unop) 1))
+
+private def spQuotientSheaves :
+    Ideal (Padic.coefficientExtensionIntegers l E) ⥤
+      Sheaf (Scheme.ProEt.topology T) RingCat.{max u (t + 1)} :=
+  spQuotientRings.{t, u} l E ⋙ constantSheaf _ _ ⋙ sheafCompose _ (forget₂ CommRingCat _)
+
+private def spEllTowerIso :
+    spCoefficientRings l E T ≅ spIdealTower l E (spEllIdeal l E) ⋙
+      spQuotientSheaves l E T :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun f ↦ by
+    let h : spCoefficientRings l E T ⟶ spIdealTower l E (spEllIdeal l E) ⋙
+        spQuotientSheaves l E T :=
+      NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+        simp only [spCoefficientRings, Functor.ofOpSequence_map_homOfLE_succ,
+          Functor.comp_map, Category.comp_id, Category.id_comp]
+        rfl)
+    exact h.naturality f)
+
+private def spUniformizerTowerIso :
+    WeilConjectures.integralCoefficientSheafSystem l E T ≅
+      spIdealTower l E (Ideal.span {Padic.coefficientExtensionUniformizer l E}) ⋙
+        spQuotientSheaves l E T :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun f ↦ by
+    let h : WeilConjectures.integralCoefficientSheafSystem l E T ⟶
+        spIdealTower l E (Ideal.span {Padic.coefficientExtensionUniformizer l E}) ⋙
+          spQuotientSheaves l E T :=
+      NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+        simp only [WeilConjectures.integralCoefficientSheafSystem,
+          Functor.ofOpSequence_map_homOfLE_succ,
+          Functor.comp_map, Category.comp_id, Category.id_comp]
+        rfl)
+    exact h.naturality f)
+
+private theorem spCompletedLimit_exists :
+    ∃ e : WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E T ≅
+        limit (spCoefficientRings l E T),
+      ∀ n : ℕ,
+        WeilConjectures.integralConstantToCompletionOfUniverses l E T ≫ e.hom ≫
+          limit.π (spCoefficientRings l E T) (op n) =
+            spCoefficientConstantQuotient l E T n := by
+  obtain ⟨e, he, hell⟩ := spEllIdeal_eq_uniformizer_pow l E
+  let a : ℕ → ℕ := fun n ↦ e * (n + 1) - 1
+  have ha : Monotone a := by
+    intro i j hij
+    exact Nat.sub_le_sub_right (Nat.mul_le_mul_left e (Nat.add_le_add_right hij 1)) 1
+  have haFinal : ha.functor.Final := (ha.final_functor_iff).2 (fun n ↦ by
+    refine ⟨n, ?_⟩
+    dsimp [a]
+    have h := Nat.le_mul_of_pos_left (n + 1) he
+    omega)
+  let K := ha.functor.op
+  let : K.Initial := inferInstance
+  let J := Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+    Set (Padic.coefficientExtensionIntegers l E))
+  have hpow (n : ℕᵒᵖ) : J ^ (a n.unop + 1) = spEllIdeal l E ^ (n.unop + 1) := by
+    dsimp [a]
+    have hpos : 1 ≤ e * (n.unop + 1) :=
+      (Nat.succ_le_succ (Nat.zero_le n.unop)).trans
+        (Nat.le_mul_of_pos_left (n.unop + 1) he)
+    rw [Nat.sub_add_cancel hpos, hell, ← pow_mul]
+  let i : K ⋙ spIdealTower l E J ≅ spIdealTower l E (spEllIdeal l E) :=
+    NatIso.ofComponents (fun n ↦ eqToIso (hpow n)) (by intros; apply Subsingleton.elim)
+  let q := spQuotientSheaves l E T
+  let aIso : K ⋙ WeilConjectures.integralCoefficientSheafSystem l E T ≅
+      spCoefficientRings l E T :=
+    Functor.isoWhiskerLeft K (spUniformizerTowerIso l E T) ≪≫
+      (Functor.associator K (spIdealTower l E J) q).symm ≪≫
+      Functor.isoWhiskerRight i q ≪≫ (spEllTowerIso l E T).symm
+  refine ⟨(Functor.Initial.limitIso K _).symm ≪≫ HasLimit.isoOfNatIso aIso, ?_⟩
+  intro n
+  change WeilConjectures.integralConstantToCompletionOfUniverses l E T ≫
+    (limit.pre (WeilConjectures.integralCoefficientSheafSystem l E T) K ≫
+      (HasLimit.isoOfNatIso aIso).hom) ≫ limit.π (spCoefficientRings l E T) (op n) = _
+  simp only [Category.assoc, HasLimit.isoOfNatIso_hom_π,
+    limit.pre_π_assoc]
+  rw [← Category.assoc]
+  change (limit.lift _ (WeilConjectures.integralConstantConeOfUniverses l E T) ≫
+    limit.π _ (K.obj (op n))) ≫ aIso.hom.app (op n) = _
+  rw [limit.lift_π]
+  change WeilConjectures.integralConstantQuotientOfUniverses l E T (a n) ≫
+    q.map (eqToHom (hpow (op n))) = spCoefficientConstantQuotient l E T n
+  have hscalar (I J : Ideal (Padic.coefficientExtensionIntegers l E)) (h : I = J) :
+      (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        ((constantSheaf _ CommRingCat.{max u (t + 1)}).map
+          (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+            ((Ideal.Quotient.mk I).comp ULift.ringEquiv.toRingHom)))) ≫
+          q.map (eqToHom h) =
+      (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        ((constantSheaf _ CommRingCat.{max u (t + 1)}).map
+          (CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+            ((Ideal.Quotient.mk J).comp ULift.ringEquiv.toRingHom)))) := by
+    subst J
+    simp [q, spQuotientSheaves, spQuotientRings]
+  exact hscalar _ _ (hpow (op n))
 
 /-- The completed coefficient sheaf is also the limit of the ell-power constant sheaves.
 It is the existing uniformizer-power completion, whose identification with the pullback
@@ -172,6 +358,22 @@ theorem sp_completed_coefficient_limit :
         WeilConjectures.integralConstantToCompletionOfUniverses l E T ≫ e.hom ≫
           limit.π (spCoefficientRings l E T) (op n) =
             spCoefficientConstantQuotient l E T n := by
-  sorry
+  obtain ⟨e, he⟩ := spCompletedLimit_exists l E T
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  apply Iso.ext
+  apply limit.hom_ext
+  intro n
+  rcases n with ⟨n⟩
+  obtain ⟨k, hk⟩ := (sp_coefficient_ideals_cofinal l E).2 (n + 1)
+  have hI : ∃ k : ℕ, Padic.coefficientExtensionIdeal l E (k + 1) ≤
+      spEllIdeal l E ^ (n + 1) := by
+    refine ⟨k, le_trans ?_ hk⟩
+    exact Ideal.pow_le_pow_right (Nat.le_succ k)
+  exact completedIntegralFiniteQuotientHom_ext l E T
+    (spEllIdeal l E ^ (n + 1)) hI
+    (d.hom ≫ limit.π _ (op n)) (e.hom ≫ limit.π _ (op n))
+    (by simpa only [Category.assoc, spCoefficientConstantQuotient, Functor.comp_map] using hd n)
+    (by simpa only [Category.assoc, spCoefficientConstantQuotient, Functor.comp_map] using he n)
 
 end AlgebraicGeometry.ProEtale
