@@ -599,7 +599,27 @@ theorem rationalTwistCommutation_naturality (l : ℕ) [Fact l.Prime] (E : Type u
       (rationalTwistCommutationComponent l E g m L).hom =
     (rationalTwistCommutationComponent l E g m K).hom ≫
       (sfRationalTwistingFunctor l E X m).map ((rationalDerivedPullback l E g).map a) := by
-  sorry
+  obtain ⟨e, he⟩ := (derivedPullbackTensorIso l E g 0
+    (AlgebraicClosure (Padic l))).2.2.2.2.2.2.1
+  have h := e.hom.naturality
+    (Prod.mkHom a (𝟙 (sfRationalTwistingCoefficient l E X m)))
+  simp only [Functor.comp_map, Functor.prod_map] at h
+  have heh := fun M N ↦ congrArg Iso.hom (he M N)
+  change ∀ M N, e.hom.app (M, N) = _ at heh
+  rw [heh, heh] at h
+  change (rationalDerivedPullback l E g).map
+      ((rationalDerivedTensor l E X).map (Prod.mkHom a (𝟙 _))) ≫ _ = _
+  dsimp only [rationalTwistCommutationComponent, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.prod_hom, Iso.refl_hom]
+  rw [← Category.assoc, h, Category.assoc]
+  rw [Category.assoc]
+  apply congrArg (fun b ↦
+    (canonicalRationalPullbackTensor l E g K (sfRationalTwistingCoefficient l E X m)).hom ≫ b)
+  change (rationalDerivedTensor l E X).map _ ≫ (rationalDerivedTensor l E X).map _ =
+    (rationalDerivedTensor l E X).map _ ≫ (rationalDerivedTensor l E X).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  apply congrArg (fun b ↦ (rationalDerivedTensor l E X).map b)
+  ext <;> simp
 
 /-- The prescribed comparison as a natural isomorphism.
 Source: definition clause 5
@@ -643,7 +663,28 @@ theorem commonTwistCommutation_naturality (l : ℕ) [Fact l.Prime]
       (commonTwistCommutationComponent l Ω g m L).hom =
     (commonTwistCommutationComponent l Ω g m K).hom ≫
       (sfQbarTwistingFunctor l X Ω m).map ((commonStageDerivedPullback l Ω g).map a) := by
-  sorry
+  obtain ⟨e, he⟩ := (derivedPullbackTensorIso l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
+      (Padic.finiteCoefficientBase l Ω)) g 0 Ω).2.2.2.2.2.2.2.1
+  have h := e.hom.naturality
+    (Prod.mkHom a (𝟙 (sfQbarTwistingCoefficient l X Ω m)))
+  simp only [Functor.comp_map, Functor.prod_map] at h
+  have heh := fun M N ↦ congrArg Iso.hom (he M N)
+  change ∀ M N, e.hom.app (M, N) = _ at heh
+  rw [heh, heh] at h
+  change (commonStageDerivedPullback l Ω g).map
+      ((commonStageDerivedTensor l Ω X).map (Prod.mkHom a (𝟙 _))) ≫ _ = _
+  dsimp only [commonTwistCommutationComponent, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.prod_hom, Iso.refl_hom]
+  rw [← Category.assoc, h, Category.assoc]
+  rw [Category.assoc]
+  apply congrArg (fun b ↦
+    (canonicalCommonStagePullbackTensor l Ω g K (sfQbarTwistingCoefficient l X Ω m)).hom ≫ b)
+  change (commonStageDerivedTensor l Ω X).map _ ≫ (commonStageDerivedTensor l Ω X).map _ =
+    (commonStageDerivedTensor l Ω X).map _ ≫ (commonStageDerivedTensor l Ω X).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  apply congrArg (fun b ↦ (commonStageDerivedTensor l Ω X).map b)
+  ext <;> simp
 
 /-- The common-stage tensor commutation, with its actual normalized components.
 Source: definition clause 5
@@ -728,7 +769,24 @@ theorem rationalWeilLine_heart (D : FiniteFieldDatum.{u})
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m : ℤ) :
     sfRationalHeartProperty l E (D.geometricFiber Y₀).left
       ((sfWeilForget D l hl Y₀ E).obj (rationalWeilLine D l hl Y₀ E m)) := by
-  sorry
+  let : ∀ x : (D.geometricFiber Y₀).left,
+      Invertible (l : (D.geometricFiber Y₀).left.residueField x) :=
+    fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x
+  change sfRationalHeartProperty l E (D.geometricFiber Y₀).left
+    (sfRationalTwistingCoefficient l E (D.geometricFiber Y₀).left m)
+  constructor
+  all_goals
+    refine ⟨sfIntegralTwistingCoefficient l E (D.geometricFiber Y₀).left m,
+      ?_, ⟨Iso.refl _⟩⟩
+    intro i hi
+    change IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((DerivedCategory.singleFunctor _ 0).obj _))
+    simp at hi
+    have hi0 : i ≠ 0 := by omega
+    exact (HomologicalComplex.isZero_single_obj_homology _ _ _ _ hi0).of_iso
+      ((DerivedCategory.homologyFunctor _ i).mapIso
+        ((DerivedCategory.singleFunctorIsoCompQ _ 0).app _) ≪≫
+        (DerivedCategory.homologyFunctorFactors _ i).app _)
 
 /-- The coefficient Weil sheaf, in the project's recorded heart subcategory.
 Source: definition clause 4
@@ -752,7 +810,17 @@ theorem commonWeilLine_heart (D : FiniteFieldDatum.{u})
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (m : ℤ) :
     sfCommonStageHeartProperty l (D.geometricFiber Y₀).left Ω
       ((sfCommonStageWeilForget D l hl Y₀ Ω).obj (commonWeilLine D l hl Y₀ Ω m)) := by
-  sorry
+  let : ∀ x : (D.geometricFiber Y₀).left,
+      Invertible (l : (D.geometricFiber Y₀).left.residueField x) :=
+    fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x
+  have h := rationalWeilLine_heart D l hl Y₀
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
+      (Padic.finiteCoefficientBase l Ω)) m
+  change sfRationalHeartProperty _ _ _
+    (sfRationalTwistingCoefficient _ _ _ _) at h
+  constructor
+  · exact ⟨Padic.finiteCoefficientBase l Ω, _, h.1, ⟨Iso.refl _⟩⟩
+  · exact ⟨Padic.finiteCoefficientBase l Ω, _, h.2, ⟨Iso.refl _⟩⟩
 
 /-- The same coefficient Weil sheaf in the actual common-stage heart subcategory.
 Source: definition clause 4

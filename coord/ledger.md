@@ -16835,3 +16835,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/R1/Sheaf.Paper.QbarTwistCommonStage (stage 3; reviewer PASS; first push; landing 20261019T005410-L-2764158 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R2/Sheaf.Paper.ProEtaleProjectionFormulaArrows (stage 3; reviewer PASS; first push; landing 20261019T005410-L-2764268 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R3/Sheaf.Paper.DerivedInternalHomFilteredColimit (stage 3; reviewer PASS; first push; landing 20261019T005411-L-2764395 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/R3/Sheaf.Paper.FrobeniusCoefficientTwistsCanonical (stage 3; reviewer PASS; first push; landing 20261019T005411-L-2764497 (proof); batch 20261019T005255; modules 1; new nodes 0)
