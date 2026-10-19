@@ -10,20 +10,18 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.CategoryTheory.TruncationTriangle
+import Sheaf.Algebra.Homology.DerivedScalarTruncationContinuity
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import WeilConjectures.CategoryTheory.TruncationTriangle
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Single
 import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.FlatTruncationTower
-import Sheaf.Algebra.Homology.FilteredColimitsTensor
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import WeilConjectures.CategoryTheory.TruncationTriangle
+import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 /-!
 # Cohomological bounds for derived extension of ring-sheaf scalars
@@ -73,6 +71,87 @@ noncomputable def ringedDerivedScalarExtension
       DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S)) :=
   ((derivedChangeOfRingsIndependentCoefficients φ).choose_spec.choose_spec.choose_spec.choose_spec
     |>.2.2).choose
+
+private theorem bounded_kflat_model
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify J AddCommGrpCat.{r}]
+    (R : Sheaf J CommRingCat.{r})
+    (G : CochainComplex (SheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J R)) ℤ)
+    (a : ℤ) [G.IsStrictlyLE a] :
+    ∃ (P : CochainComplex (SheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J R)) ℤ) (p : P ⟶ G),
+      P.IsStrictlyLE a ∧ P.IsKFlatIndependentCoefficients ∧ QuasiIso p := by
+  let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := tensorPreadditive R
+  have (M : A) : PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft M) := by
+    have := tensorLeft_preservesColimits_independentCoefficients R M
+    exact preservesColimitsOfSize_shrink (MonoidalCategory.tensorLeft M)
+  have (M : A) : PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight M) :=
+    preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A,
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := by infer_instance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A,
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by infer_instance
+  have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ A,
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := by infer_instance
+  let := hasFunctorialFlatResolution_kfi R
+  let Λ := (Classical.arbitrary (Abelian.LeftResolution
+    (ObjectProperty.flat.ι : _ ⥤ A))).reduced
+  let K : CochainComplex.Minus A := ⟨G, a, inferInstance⟩
+  have : (Λ.bicomplexFunctor.obj G).HasTotal (.up ℤ) :=
+    HomologicalComplex₂.hasTotal_of_isStrictlyLE _ a 0
+  let P := ((ObjectProperty.flat.ι : _ ⥤ A).mapHomologicalComplex (.up ℤ)).obj
+    ((Λ.bicomplexFunctor.obj G).total (.up ℤ))
+  have hb : CochainComplex.IsStrictlyLE P a := by
+    dsimp [P]
+    infer_instance
+  have hf (i : ℤ) : IsFlatOnSite (J := J) (R := R) (P.X i) := by
+    exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (P.X i)).symm
+      (((Λ.bicomplexFunctor.obj G).total (.up ℤ)).X i).property.2
+  exact ⟨P, Λ.totalπ K, hb,
+    isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite R P a hf, inferInstance⟩
+
+private theorem finite_lower_bound
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
+    (G : CochainComplex A ℤ) (a : ℤ) [G.IsGE a]
+    (hlayer : ∀ q : ℤ, a ≤ q →
+      (F.obj (DerivedCategory.Q.obj
+        ((CochainComplex.singleFunctor A q).obj (G.homology q)))).IsGE a) :
+    ∀ b : ℤ, (F.obj (DerivedCategory.Q.obj (G.truncLE b))).IsGE a := by
+  have hzero (b : ℤ) (hb : b < a) :
+      IsZero (DerivedCategory.Q.obj (G.truncLE b)) := by
+    have : (G.truncLE b).IsGE a :=
+      (((DerivedCategory.truncation_triangle A b).2.2 G a).2 inferInstance).2.1
+    rw [IsZero.iff_id_eq_zero]
+    exact DerivedCategory.TStructure.t.zero (𝟙 _) b a hb
+  have key (n : ℕ) :
+      (F.obj (DerivedCategory.Q.obj (G.truncLE (a + n - 1)))).IsGE a := by
+    induction n with
+    | zero =>
+      have hz := F.map_isZero (hzero (a - 1) (by omega))
+      simpa using DerivedCategory.TStructure.t.isGE_of_isZero hz a
+    | succ n ih =>
+      obtain ⟨i, j, _, _, k, hk, _⟩ :=
+        (DerivedCategory.truncation_triangle A (a + n)).1 G
+      have htri := F.map_distinguished _ hk
+      have h := DerivedCategory.TStructure.t.isGE₂ _ htri a ih (hlayer _ (by omega))
+      convert h using 1
+      congr 3
+      omega
+  intro b
+  by_cases hb : b < a
+  · exact DerivedCategory.TStructure.t.isGE_of_isZero (F.map_isZero (hzero b hb)) a
+  · have hn : a + ((b + 1 - a).toNat : ℤ) - 1 = b := by omega
+    simpa only [hn] using key (b + 1 - a).toNat
 
 /-- Derived extension of scalars preserves an upper cohomological bound. It also preserves
 any lower bound when the cohomology sheaves in the retained range have zero higher Tor.
@@ -142,6 +221,101 @@ theorem ringedTensorCohomologicalBounds
                   (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)) q).obj
                     M)))))) →
       ((ringedDerivedScalarExtension φ).obj M).IsGE a) := by
-  sorry
+  let h := derivedChangeOfRingsIndependentCoefficients φ
+  let E := h.choose
+  let hobj := h.choose_spec.choose
+  let hadd := h.choose_spec.choose_spec.choose_spec.choose
+  let hrest := h.choose_spec.choose_spec.choose_spec.choose_spec
+  let F := hrest.2.2.choose
+  let ε := hrest.2.2.choose_spec.choose
+  have hspec := hrest.2.2.choose_spec.choose_spec
+  have : E.Additive := hadd
+  obtain ⟨hshift, htri⟩ := hspec.2.1
+  let := hshift
+  have : F.IsTriangulated := htri
+  change (∀ M, M.IsLE a → (F.obj M).IsLE a) ∧ _
+  constructor
+  · intro M hM
+    obtain ⟨G, hG, ⟨eG⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isLE M a
+    obtain ⟨P, p, hb, hk, hp⟩ := bounded_kflat_model R G a
+    have : QuasiIso p := hp
+    have : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
+      hspec.2.2 P hk
+    let e₁ : F.obj (DerivedCategory.Q.obj P) ≅
+        DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P) :=
+      F.mapIso ((DerivedCategory.quotientCompQhIso _).symm.app P) ≪≫
+        asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≪≫
+        DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
+        (DerivedCategory.quotientCompQhIso _).app _
+    have : CochainComplex.IsStrictlyLE ((E.mapHomologicalComplex (.up ℤ)).obj P) a := by
+      rw [CochainComplex.isStrictlyLE_iff]
+      intro i hi
+      exact E.map_isZero (P.isZero_of_isStrictlyLE a i hi)
+    have : (DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P)).IsLE a :=
+      inferInstance
+    have : (F.obj (DerivedCategory.Q.obj P)).IsLE a :=
+      DerivedCategory.TStructure.t.isLE_of_iso e₁.symm a
+    exact DerivedCategory.TStructure.t.isLE_of_iso
+      (F.mapIso (asIso (DerivedCategory.Q.map p) ≪≫ eG.symm)) a
+  · intro M hM hTor
+    let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
+    let B := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S)
+    let G := DerivedCategory.Q.objPreimage M
+    let eG : DerivedCategory.Q.obj G ≅ M := DerivedCategory.Q.objObjPreimageIso M
+    have : G.IsGE a := by
+      rw [← DerivedCategory.isGE_Q_obj_iff]
+      exact DerivedCategory.TStructure.t.isGE_of_iso eG.symm a
+    have hsingle₀ (q : ℤ) (hq : a ≤ q) :
+        (F.obj (DerivedCategory.Q.obj
+          ((CochainComplex.singleFunctor A 0).obj (G.homology q)))).IsGE 0 := by
+      rw [DerivedCategory.isGE_iff]
+      intro i hi
+      let p := (-i).toNat
+      have hp : 0 < p := by dsimp [p]; omega
+      have hip : -(p : ℤ) = i := by dsimp [p]; omega
+      have hz := hTor q hq p hp
+      rw [hip] at hz
+      let eH : G.homology q ≅ (DerivedCategory.homologyFunctor A q).obj M :=
+        ((DerivedCategory.homologyFunctorFactors A q).app G).symm ≪≫
+          (DerivedCategory.homologyFunctor A q).mapIso eG
+      exact hz.of_iso ((DerivedCategory.homologyFunctor B i).mapIso
+        (F.mapIso (DerivedCategory.Q.mapIso
+          ((CochainComplex.singleFunctor A 0).mapIso eH))))
+    have hlayer (q : ℤ) (hq : a ≤ q) :
+        (F.obj (DerivedCategory.Q.obj
+          ((CochainComplex.singleFunctor A q).obj (G.homology q)))).IsGE a := by
+      have : DerivedCategory.TStructure.t.IsGE
+          (F.obj ((CochainComplex.singleFunctor A 0 ⋙ DerivedCategory.Q).obj
+            (G.homology q))) 0 := hsingle₀ q hq
+      have : (F.obj ((DerivedCategory.singleFunctor A 0).obj (G.homology q))).IsGE 0 :=
+        DerivedCategory.TStructure.t.isGE_of_iso
+          (F.mapIso ((DerivedCategory.singleFunctorIsoCompQ A 0).app _).symm) 0
+      have : DerivedCategory.TStructure.t.IsGE
+          ((F.obj ((DerivedCategory.singleFunctor A 0).obj (G.homology q)))⟦-q⟧) q :=
+        DerivedCategory.TStructure.t.isGE_shift _ 0 (-q) q (by omega)
+      let e : (F.obj ((DerivedCategory.singleFunctor A 0).obj (G.homology q)))⟦-q⟧ ≅
+          F.obj ((DerivedCategory.singleFunctor A q).obj (G.homology q)) :=
+        (F.commShiftIso (-q)).symm.app _ ≪≫
+          F.mapIso (((DerivedCategory.singleFunctors A).shiftIso (-q) q 0 (by omega)).app
+            (G.homology q))
+      have : (F.obj ((DerivedCategory.singleFunctor A q).obj (G.homology q))).IsGE q :=
+        DerivedCategory.TStructure.t.isGE_of_iso e q
+      have : (F.obj (DerivedCategory.Q.obj
+          ((CochainComplex.singleFunctor A q).obj (G.homology q)))).IsGE q :=
+        DerivedCategory.TStructure.t.isGE_of_iso
+          (F.mapIso ((DerivedCategory.singleFunctorIsoCompQ A q).app _)) q
+      exact DerivedCategory.TStructure.t.isGE_of_ge _ a q hq
+    have hfinite := finite_lower_bound F G a hlayer
+    suffices (F.obj (DerivedCategory.Q.obj G)).IsGE a from
+      DerivedCategory.TStructure.t.isGE_of_iso (F.mapIso eG) a
+    apply derivedScalar_lower_bound_of_truncations φ E hobj
+      h.choose_spec.choose_spec.choose F ?_ G a hfinite
+    intro P hk
+    have : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
+      hspec.2.2 P hk
+    exact ⟨F.mapIso ((DerivedCategory.quotientCompQhIso _).symm.app P) ≪≫
+      asIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≪≫
+      DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
+      (DerivedCategory.quotientCompQhIso _).app _⟩
 
 end SheafOfModules

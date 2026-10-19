@@ -5,6 +5,7 @@ Authors: SHEAF group NF
 -/
 module
 
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
@@ -458,7 +459,10 @@ private noncomputable def tensorSheafificationIso_kfi
     Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _
       (Functor.Monoidal.commTensorRight a F)
 
-private theorem hasFunctorialFlatResolution_kfi : Abelian.HasFunctorialFlatResolution A := by
+/-- The canonical free-presheaf cover gives functorial categorical flat resolutions.
+Source: Stacks Project, Tag 03EW; used for the independent-coefficient K-flat resolution
+(blueprint: lem-pc-kflat-resolution). -/
+theorem hasFunctorialFlatResolution_kfi : Abelian.HasFunctorialFlatResolution A := by
   let a := PresheafOfModules.sheafification.{r} (𝟙 (O).obj)
   let V := SheafOfModules.forget.{r} O ⋙ PresheafOfModules.restrictScalars (𝟙 (O).obj)
   let U := PresheafOfModules.toPresheaf.{r} (O).obj ⋙

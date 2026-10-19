@@ -254,6 +254,33 @@ private noncomputable def tensorAdjunction
           Equiv.apply_symm_apply]
       homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
 
+/-- Extension of scalars, specified on both objects and maps, preserves colimits.
+Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EP.
+The tensor/restriction adjunction gives preservation for its tensor functor;
+the two specifications give a natural isomorphism to E.
+(blueprint: lem-weil-pbc-ringed-topos-pullback-filtered-colimits). -/
+theorem preservesColimits_specifiedChangeOfRings
+    {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]
+    {K : GrothendieckTopology D} {A S : Sheaf K CommRingCat.{w}} (c : A ⟶ S)
+    (E : SheafOfModules.{w} ((sheafCompose K
+        (forget₂ CommRingCat.{w} RingCat.{w})).obj A) ⥤
+      SheafOfModules.{w} ((sheafCompose K
+        (forget₂ CommRingCat.{w} RingCat.{w})).obj S))
+    (hobj : ∀ M, E.obj M = changeOfRings.{vD, uD, w} c M)
+    (hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hobj M) ≫
+      changeOfRingsHom.{vD, uD, w} c M f ≫ eqToHom (hobj N).symm) :
+    PreservesColimitsOfSize.{0, 0} E := by
+  have : PreservesColimitsOfSize.{0, 0} (tensorFunctor c) :=
+    (tensorAdjunction c).leftAdjoint_preservesColimits
+  let e : tensorFunctor c ≅ E := NatIso.ofComponents
+    (fun M ↦ eqToIso (hobj M).symm) (by
+      intro M N f
+      change changeOfRingsHom c M f ≫ eqToHom (hobj N).symm =
+        eqToHom (hobj M).symm ≫ E.map f
+      rw [hmap]
+      simp)
+  exact preservesColimits_of_natIso e
+
 /-- The specified algebraic module pullback preserves coefficient-sized filtered colimits.
 Source: Stacks Project, Modules on Sites, Tag 03D7,
 lemma-adjoint-pullback-pushforward-modules, and Tag 03EP.
