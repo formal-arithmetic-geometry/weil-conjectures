@@ -84,6 +84,26 @@ The uniqueness clause of the source colimit identifies the two morphisms.
 theorem schemeUniverseLiftMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     schemeUniverseLiftMap.{u, v} (f ≫ g) =
       schemeUniverseLiftMap.{u, v} f ≫ schemeUniverseLiftMap.{u, v} g := by
-  sorry
+  let := schemeUniverseDiagram_hasColimit.{u, v} X
+  let := schemeUniverseDiagram_hasColimit.{u, v} Y
+  let := schemeUniverseDiagram_hasColimit.{u, v} Z
+  apply colimit.hom_ext
+  intro j
+  simp only [schemeUniverseLiftMap, colimit.ι_desc,
+    colimit.ι_desc_assoc, Cocone.whisker_ι, Functor.whiskerLeft_app]
+  change colimit.ι (schemeUniverseDiagram Z) ((CostructuredArrow.map (f ≫ g)).obj j) =
+    colimit.ι (schemeUniverseDiagram Y) ((CostructuredArrow.map f).obj j) ≫ _
+  rw [colimit.ι_desc]
+  dsimp only [Cocone.whisker_ι, Functor.whiskerLeft_app]
+  let e : (CostructuredArrow.map (f ≫ g)).obj j ⟶
+      (CostructuredArrow.map g).obj ((CostructuredArrow.map f).obj j) :=
+    CostructuredArrow.homMk (𝟙 j.left) (by simp [Category.assoc])
+  have he : (schemeUniverseDiagram.{u, v} Z).map e = 𝟙 _ := by
+    change Scheme.Spec.map (schemeCoordinateRingLift.{u, v}.map (𝟙 _)).op = _
+    simp
+    rfl
+  have h := colimit.w (schemeUniverseDiagram.{u, v} Z) e
+  rw [he, Category.id_comp] at h
+  exact h.symm
 
 end AlgebraicGeometry
