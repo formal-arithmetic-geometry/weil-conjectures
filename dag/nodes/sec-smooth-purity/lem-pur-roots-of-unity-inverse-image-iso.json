@@ -25,85 +25,37 @@
  ],
  "proof": [
   {
-   "text": "Write $\\beta^f_M:\\mu_{M,Y}\\to f_*\\mu_{M,X}$ for the map whose adjoint is $c^f_{\\mu_M}$. Put $k=N'/N$, an integer since $N\\mid N'$. For every $V\\to Y$ and $v\\in\\mu_{N',Y}(V)$ the ring map on global sections gives\n$$\\beta^f_N(V)(v^k)=\\mathrm{pr}_V^\\sharp(v^k)=\\bigl(\\mathrm{pr}_V^\\sharp v\\bigr)^k.$$\nThese are sections of $\\mu_{N,X}(X\\times_YV)$: their $N$-th powers are $1$, since $kN=N'$. Thus equality on all sections gives the sheaf-map identity\n$$f_*(t^X_{N',N})\\circ\\beta^f_{N'}=\\beta^f_N\\circ t^Y_{N',N}.$$\nHere the restrictions and the transition maps are exactly those in the two roots-of-unity definitions, not transitions of constant sheaves.",
+   "text": "For each section, the chosen roots-section equivalence satisfies its inclusion normalization. Evaluate kernel.lift_ι to identify the transition with the (N'/N)-th power. The chosen direct-image root map satisfies its projection formula. Pullback of functions commutes with powers, giving the direct-image transition square. Transpose it by Adjunction.homEquiv_naturality_right_square. NatTrans.ofOpSequence constructs the tower map from the consecutive-power squares. These calculations are the proved private lemmas roots_sections_inclusion, roots_transition_inclusion, roots_transition_value, roots_direct_formula, roots_direct_transition, roots_inverse_transition and roots_tower_map.",
    "uses": [
     "def-pur-roots-of-unity-inverse-image",
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-proetale-structure-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PK, section-kummer, opening definition of the functor mu_n; elementary power calculation for the comparison defined in def-pur-roots-of-unity-inverse-image"
-   }
-  },
-  {
-   "text": "The adjunction $L=f^{-1}\\dashv R=f_*$ sends a map $a:L\\mathcal F\\to\\mathcal G$ to $R(a)\\circ\\eta_{\\mathcal F}$. For $a=t^X_{N',N}\\circ c^f_{\\mu_{N'}}$ its image is $R(t^X_{N',N})\\circ\\beta^f_{N'}$. For $b=c^f_{\\mu_N}\\circ L(t^Y_{N',N})$ its image is $\\beta^f_N\\circ t^Y_{N',N}$, because $RL(t^Y_{N',N})\\circ\\eta_{\\mu_{N',Y}}=\\eta_{\\mu_{N,Y}}\\circ t^Y_{N',N}$. Step 1 equates these images, so injectivity of the adjunction bijection gives clause 1. Taking $N=\\ell^r$ and $N'=\\ell^{r+1}$ makes each square of the two inverse systems commute; hence these comparisons form the asserted morphism of inverse systems.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pur-roots-of-unity-inverse-image",
-    "def-pur-roots-of-unity-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WX, lemma-adjoint-sheaves; naturality and injectivity of the defining adjunction, applied to step 1"
-   }
-  },
-  {
-   "text": "For clause 2 put $R_Y=(\\mathbf Z/N\\mathbf Z)_Y$, $R_X=(\\mathbf Z/N\\mathbf Z)_X$, $A=f^{-1}R_Y$, $H=f^{-1}\\mu_{N,Y}$, and $G=\\mu_{N,X}$. The inverse-image construction supplies the stated $A$-module structure on $H$. Apply the constant-ring comparison proposition to the finite discrete commutative ring $\\mathbf Z/N\\mathbf Z$: it says exactly that the structure map $c=c^f_{\\mathbf Z/N}:A\\to R_X$ used here is an isomorphism. Let $q=c^{-1}$. Give $H$ an $R_X$-action by $b\\star h=q(b)\\cdot h$. The ring-map and module axioms verify the module axioms for $\\star$, and restriction compatibility follows from that of $q$ and the original action. Since $q$ is unital, for every integer $m$ the constant class $\\overline m$ acts by $q(\\overline m)=m1_A$, hence by $mh$ in the underlying abelian group. In particular $Nh=0$, because $\\overline N=0$. These statements hold over every object, including the empty object and when $N=1$.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-pur-roots-of-unity-sheaf",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf, and proetale.tex Tag 09A5, section-morphism; constant-ring comparison is the existing proposition, while restriction of scalars is checked explicitly"
-   }
-  },
-  {
-   "text": "The torsion-sheaf lemma (1) identifies the $R_X$-module structure $\\star$ from step 3 with the unique constant-coefficient structure on the $N$-torsion abelian sheaf $H$, because its constant sections act by integer representatives. The same lemma identifies the module structure on $G$ from the roots-of-unity definition. The comparison $c^f_{\\mu_N}:H\\to G$ is already a morphism of abelian sheaves by its definition, so part (2) of that lemma makes it $R_X$-linear for $\\star$. For local sections $a\\in A(U)$ and $h\\in H(U)$ substitute $b=c(a)$ and use $q(c(a))=a$ to obtain\n$$c^f_{\\mu_N}(a\\cdot h)=c^f_{\\mu_N}(c(a)\\star h)=c(a)\\cdot c^f_{\\mu_N}(h).$$\nThis proves clause 2 for all local sections of the inverse-image ring, rather than only the constant ones.",
-   "uses": [
-    "lem-pur-torsion-sheaf-constant-module",
-    "def-pur-roots-of-unity-sheaf",
-    "def-pur-roots-of-unity-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; application of clauses (1) and (2) of lem-pur-torsion-sheaf-constant-module to the transported action"
-   }
-  },
-  {
-   "text": "Now assume $f$ is an isomorphism. The site-isomorphism lemma (1) says that $\\Phi_f(U\\xrightarrow{u}X)=(U\\xrightarrow{fu}Y)$ is a covering-preserving equivalence and describes inverse image by this change of structure map. To fix its canonical normalization, use the comma-category construction of inverse image. For $U\\to X$ let $V_0=(U\\xrightarrow{fu}Y)$ and $\\gamma=(u,\\mathrm{id}_U):U\\to X\\times_Y V_0$. The pair $(V_0,\\gamma)$ is initial in $\\mathcal I_U$: for $(V,\\phi)$ the unique possible map $V_0\\to V$ is $h=\\mathrm{pr}_V\\phi$, and $(\\mathrm{id}_X\\times_Yh)\\gamma=\\phi$ because both projections agree. Uniqueness follows by composing this equality with $\\mathrm{pr}_V$. Thus it is terminal in $\\mathcal I_U^{\\mathrm{op}}$. Explicitly the maps $\\mathcal F(V)\\xrightarrow{\\mathcal F(h)}\\mathcal F(V_0)$ form a cocone, and its map from the colimit is inverse to the coprojection from $\\mathcal F(V_0)$: one composite is the identity at $V_0$, and the other is the identity on every coprojection by the cocone relation. This identifies $u_{f,p}\\mathcal F(U)$ with $\\mathcal F(V_0)$, naturally in $U$. For a covering $\\{U_i\\to U\\}$ over $X$, the covering $\\{\\Phi_f(U_i)\\to\\Phi_f(U)\\}$ over $Y$ has the same underlying schemes and overlap schemes. Thus a matching family for $U\\mapsto\\mathcal F(\\Phi_f(U))$ is exactly a matching family for $\\mathcal F$ on that covering; its unique gluing proves that this presheaf is a sheaf. The sheafification universal property therefore leaves it unchanged. This is precisely the canonical identification in clause 3.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism, with sites.tex Tag 00WX, lemma-adjoint-sheaves; elementary computation of the comma category for the equivalence in lem-weil-proetale-isomorphism-inverse-image (1)"
-   }
-  },
-  {
-   "text": "For an arbitrary $(V,\\phi)$ the presheaf map adjoint to $\\beta^f_N$ sends the coprojection of $v\\in\\mu_{N,Y}(V)$ to $\\phi^\\sharp(\\mathrm{pr}_V^\\sharp v)$. Indeed, for an arrow $a:(V,\\phi)\\to(V^{\\prime},\\phi^{\\prime})$ of $\\mathcal I_U$ we have $\\phi^{\\prime}=(\\mathrm{id}_X\\times_Ya)\\phi$, so for $v^{\\prime}\\in\\mu_{N,Y}(V^{\\prime})$ functoriality gives $\\phi^{\\prime\\sharp}\\mathrm{pr}_{V^{\\prime}}^\\sharp(v^{\\prime})=\\phi^\\sharp\\mathrm{pr}_V^\\sharp(a^\\sharp v^{\\prime})$, the required cocone relation. Restriction along $b:U^{\\prime}\\to U$ gives $(\\phi b)^\\sharp\\mathrm{pr}_V^\\sharp(v)=b^\\sharp\\phi^\\sharp\\mathrm{pr}_V^\\sharp(v)$, proving naturality in $U$. On $U=X\\times_YV$, $\\phi=\\mathrm{id}$ the formula recovers $\\beta^f_N(V)$; this verifies its adjunction characterization. They extend uniquely through sheafification. At the distinguished pair $(V_0,\\gamma)$ of step 5, this value is\n$$\\gamma^\\sharp\\mathrm{pr}_{V_0}^\\sharp(v)=(\\mathrm{pr}_{V_0}\\gamma)^\\sharp(v)=v,$$\nsince $\\mathrm{pr}_{V_0}\\gamma=\\mathrm{id}_U$. The coprojection at this pair is the inverse of the identification in step 5, so $c^f_{\\mu_N}(U)$ is the identity on $\\{v\\in\\Gamma(U,\\mathcal O_U)^\\times:v^N=1\\}$ under that identification. These identities are natural in $U$ and give inverse sheaf morphisms; hence $c^f_{\\mu_N}$ is an isomorphism of abelian sheaves. This proves every assertion of clause 3 without choosing a root of unity or assuming that $N$ is invertible on $X$.",
-   "uses": [
-    "def-pur-roots-of-unity-inverse-image",
-    "def-weil-proetale-inverse-image",
     "def-pur-roots-of-unity-sheaf",
     "def-pur-proetale-structure-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "First prove that the actual inverse-image abelian sheaf F is killed by N. Direct image is additive sectionwise, so its left adjoint is additive by Adjunction.left_adjoint_additive. Apply it to N times the identity equals zero and evaluate on sections. The canonical constant Z/N comparison c is invertible: use finiteCoefficientInverseImageMap_constant and the invertibility of both finiteCoefficientConstantComparison maps and finiteCoefficientInverseImageMap. Pull the canonical torsionSheafModuleStructure on F back along c to construct the required action on the fixed inverse-image groups. Restrictions are semilinear by naturality of c. For the unit clause, form the direct image of this action and restrict scalars along the actual RingCat adjunction unit. Any such restricted action is normalized on integer constants because ring maps preserve integer casts and Int.cast_smul_eq_zsmul holds for every module. Apply torsionSheaf_hom_linear on Y to the AddCommGrpCat unit. For uniqueness, restrict any proposed action along c inverse. The same integer-cast argument and its restriction hypothesis make this a normalized constant Z/N action. Uniqueness in existsUnique_constantZModSheafModuleStructure identifies it with the canonical action; evaluate at c(a), cancel c followed by its inverse, and use Module.ext' and function extensionality. This proves existsUnique_proEtaleRootsOfUnityInverseImageAction without a new hole. For the root comparison, restrict its given source action along c inverse, prove the same normalization and N-torsion, and apply torsionSheaf_hom_linear on X. Evaluate at c(a) and cancel the inverse composite to obtain semilinearity for every local scalar. The calculation needs only restriction compatibility, so the unit normalization is not additionally used for this last clause.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-torsion-sheaf-constant-module",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PK, section-kummer, functorial definition of mu_n; sites.tex Tag 00WX, lemma-adjoint-sheaves; explicit adjunct and identity-projection calculation"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For an isomorphism f, use the inverse of the recorded comma-normalized inverse-image identification. Its specification expresses it as the unit followed by restriction along the distinguished comma arrow. The adjunction unit followed by the root comparison is the direct-image root map. Naturality of the comparison and the inclusion give the restriction formula on root values. The direct-image projection formula and pullback.lift_fst show that this root value is unchanged. The two roots-section equivalences are injective, so this proves identity on roots under the recorded identification. Their bijectivity makes every component of the comparison bijective. ConcreteCategory.isIso_iff_bijective, NatIso.isIso_of_isIso_app and reflection by sheafToPresheaf prove that the sheaf comparison is an isomorphism. No positivity or invertibility of N is used in these private lemmas.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-roots-of-unity-inverse-image",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-proetale-structure-sheaf",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -112,15 +64,15 @@
   "def-pur-proetale-structure-sheaf",
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-sheaf-of-modules-category",
   "lem-pur-torsion-sheaf-constant-module",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03PK (etale-cohomology-section-kummer), combined with sites.tex Tags 00WX (sites-lemma-adjoint-sheaves), 0H7J (sites-example-constant-sheaf), 00YV (sites-proposition-functoriality-algebraic-structures-topoi), proetale.tex Tag 09A5 (proetale-section-morphism), and sites-modules.tex Tag 03CY (sites-modules-lemma-sheafification-presheaf-modules). Original compatibility proof written by NM. Second reader read the local TeX, tag-label index, original blueprint and Deligne (2.2), pp. 280-281, under /home/ubuntu/weil-launcher-nt/literature; see report."
+  "group": "M2",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY; sites.tex Tags 00YV and 0H7J; complete Lean proof of all clauses. The normalized-action construction uses the existing canonical constant action and coefficient comparison; inverse-image N-torsion follows from additivity of a left adjoint. The transition and isomorphism calculations follow the original plan."
  },
  "mathlib_searches": [
   {
@@ -288,5 +240,15 @@
   "group": "N3",
   "result": "pass",
   "note": "Statement, dependencies, docstrings, edge cases, source alignment, and all three per-file scompile checks passed; no fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T034303-L-417517",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
