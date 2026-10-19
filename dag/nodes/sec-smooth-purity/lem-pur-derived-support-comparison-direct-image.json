@@ -24,138 +24,131 @@
  ],
  "proof": [
   {
-   "text": "Put $U=T\\setminus C$. Write $\\mathcal A_\\tau(T)=\\operatorname{Mod}(T_\\tau,A)$ and $Q$ for localization of complexes. The comparison adjunction of [def-weil-pbc-site-comparison-morphism] acts on these ordinary constant-$A$ modules. Its inverse image is exact: on underlying abelian sheaves this is [lem-weil-pbc-site-pullback-abelian-exact]; kernels and cokernels of module sheaves carry the induced $A$-actions, so their underlying abelian sheaves compute these kernels and cokernels. Thus exactness is detected after forgetting the action. On small site representatives, [prop-pur-kinjective-resolutions-exist] provides K-injective resolutions for both topologies. The kernel-of-restriction functors of [def-pur-support-cohomology] are additive: a map acts by restriction of its section map to the kernel. Additive functors preserve chain homotopies and mapping cones (finite sums with the signed differential). Consequently [lem-weil-pbc-kinjective-total-derived] applies to their termwise functors followed by $Q$, giving the stated unbounded support functors; the same applies to $\\nu_{T,*}$. This explicitly extends the bounded-below convention of the support definition, rather than assuming that definition already supplies an unbounded theorem.",
+   "text": "Use the existing additive kernel-of-restriction functors and the literal direct-image identities on fixed-coefficient sheaves. The public source imports provide Grothendieck-abelian K-injective resolutions and unbounded right derived functors directly; no transport through ringed-site module categories is needed. Exact comparison inverse image makes its right adjoint preserve K-injectives. Apply the existing canonical rightDerivedFunctorCompIso' to nu_* followed by supported sections, and likewise to final-object evaluation, obtaining b and g.",
    "uses": [
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-sheaf-of-modules-category",
-    "prop-pur-kinjective-resolutions-exist",
     "def-pur-support-cohomology",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined); sites-cohomology.tex Section 07A5; proetale.tex Section 099R (section-comparison)"
-   }
-  },
-  {
-   "text": "Choose a K-injective representative $J$ of $N$. Since $\\nu_T^*$ is exact and left adjoint to $\\nu_{T,*}$, [lem-weil-pbc-right-adjoint-preserves-kinjective] implies that $\\nu_{T,*}J$ is K-injective on $T_{\\mathrm{et}}$. Hence $R\\nu_{T,*}N$ is represented by $\\nu_{T,*}J$, and its etale support functor may be computed using that very representative, without resolving again [lem-weil-pbc-kinjective-total-derived]. By the explicit direct-image definition [def-weil-pbc-site-comparison-morphism], in every degree $(\\nu_{T,*}J)(T)=J(T)$ and $(\\nu_{T,*}J)(U)=J(U)$, and the restriction arrows are the same arrows of $J$. Therefore\n$$\\Gamma_C(T_{\\mathrm{et}},\\nu_{T,*}J)=\\ker(J(T)\\to J(U))=\\Gamma_C(T_{\\mathrm{proet}},J)$$\nas complexes of $A$-modules, with identical differentials. Localizing the identity on this complex defines $b_{C,N}$ and proves both its invertibility and its required normalization.",
-   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-pur-support-cohomology"
+    "lem-fin-kinjective-derived-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070Y (lemma-K-injective-defined); proetale.tex Section 099R, direct image is restriction"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "For a morphism $N\\to N'$ and K-injective representatives $J,J'$, [lem-weil-pbc-kinjective-hom-derived] represents it by a unique homotopy class of chain maps $f:J\\to J'$. Applying either side of the kernel identity in Step 2 gives the same map on kernels, since $(\\nu_*f)(T)=f(T)$ and $(\\nu_*f)(U)=f(U)$. Additivity implies that a chain homotopy restricts to a chain homotopy on these kernels: its degree maps are sheaf morphisms and thus commute with restriction. Hence the equality is independent of the chosen chain map. Changing K-injective representatives gives a homotopy equivalence by the same cited lemma, and the equality commutes with it. This proves independence of representative and naturality of $b$, with the canonical derived-functor resolution identifications.",
+   "text": "The composite right-derived-functor unit satisfies its defining factorization through the composition isomorphism. Pass from the homotopy-category unit to the complex-level supportResolutionUnit using quotientCompQhIso naturality. This proves the kernel and final-object normalization equations, in fact for every complex. Naturality follows from the canonical derived constructions, with no choice of new representatives.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-pur-support-cohomology"
+    "lem-fin-kinjective-derived-composition"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective), Hom bijection; application of the literal kernel identity"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "Let $j:V\\hookrightarrow T$ be any open immersion, and put $U_V=U\\cap V$. On the etale site use [lem-weil-pbc-etale-site-localization-open] and [lem-weil-pbc-etale-inverse-image-restriction]; on the pro-etale site use [lem-weil-proetale-weakly-etale-localization] and [lem-sfb-proetale-object-inverse-image-restriction]. Thus $j_\\tau^*$ is restriction to the slice over $V$, with constant coefficient rings canonically identified. In the etale case the abelian restriction isomorphism respects the $A$-actions because it is natural for each scalar endomorphism, so it applies to the module sheaves as well. By [lem-pur-kinjective-restrict-localized], $J|_V$ and $(\\nu_{T,*}J)|_V$ are K-injective. For every etale object $W\\to V$,\n$$((\\nu_{T,*}J)|_V)(W)=J(W)=(\\nu_{V,*}(J|_V))(W),$$\nwith identical restrictions and scalar actions. This identity therefore computes the canonical derived restriction identification\n$$\\rho_N:j_{\\mathrm{et}}^*R\\nu_{T,*}N\\xrightarrow{\\sim}R\\nu_{V,*}j_{\\mathrm{proet}}^*N.$$\nNo quasi-compactness of $V$, boundedness of $N$, or etale-origin hypothesis was used.",
+   "text": "The two underived kernel inclusions commute with the literal direct-image identities. Right-derived natural-transformation functoriality and uniqueness of factorization through the composite derived unit therefore give the forgetting-supports square.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
+    "def-pur-support-cohomology",
+    "lem-fin-kinjective-derived-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
+   }
+  },
+  {
+   "text": "Open restriction on each site has an exact extension-by-zero left adjoint, by the existing etale and finite-coefficient pro-etale source constructions. Thus restriction preserves K-injectives by adjunction, and is itself exact since it also has a right adjoint. Identify it with inverse image using the existing source restriction isomorphisms. Combining the two canonical composition isomorphisms with the literal direct-image restriction identity and the exact-functor derived comparison constructs rho and proves its resolution-unit equation. This replaces the generic ringed-site localization argument.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-sfb-finite-extension-by-zero-adjunction",
+    "lem-sfb-finite-extension-by-zero-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "lem-pur-kinjective-restrict-localized",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-fin-kinjective-derived-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI (lemma-restrict-K-injective-to-open); sites.tex Section 00XZ (section-localize); restriction along the etale/pro-etale inclusion"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "Forgetting supports on $J$ is the inclusion $\\ker(J(T)\\to J(U))\\hookrightarrow J(T)$. Restriction to $V$ is the map\n$$\\ker(J(T)\\to J(U))\\longrightarrow\\ker(J(V)\\to J(U_V)),\\qquad s\\longmapsto s|_V.$$\nIt lands in the indicated kernel since $s|_{U_V}=(s|_U)|_{U_V}=0$. By Step 4 the displayed kernels also compute both support functors after open restriction. Step 2 identifies the etale and pro-etale complexes and all the arrows here by identities. Thus the forgetting-supports and open-restriction squares commute degree by degree, and hence in the derived category. Naturality and independence of resolution follow from Step 3 applied to these same section and kernel maps. Successive open restrictions use $s|_{V'}=(s|_V)|_{V'}$ for $V'\\subset V$, so the identifications are coherent under further restriction as well.",
+   "text": "Construct the two ordinary open-support maps by the kernel universal property: restrict a supported section from T to V. The complement of the pulled-back support maps to the complement of the original support, as follows from the range of the second pullback projection. Functoriality of sections and the kernel equation show that the restriction factors through the new kernel. Kernel.lift_ι gives the section equations, naturality follows after cancelling the kernel inclusion, and the etale/pro-etale square is the same kernel map on both sides.",
    "uses": [
     "def-pur-support-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-    "place": "Paragraph 4: compatibility with localization diagrams, expanded as a kernel calculation"
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "We record the unit compatibility before deriving. Let $a:j_{\\mathrm{proet}}^*\\nu_T^*\\xrightarrow{\\sim}\\nu_V^*j_{\\mathrm{et}}^*$ be the inverse of [lem-weil-pbc-comparison-pullback] for $j$, and let $c:j_{\\mathrm{et}}^*\\nu_{T,*}\\xrightarrow{\\sim}\\nu_{V,*}j_{\\mathrm{proet}}^*$ be the sectionwise identity of Step 4, $((\\nu_{T,*}G)|_V)(W)=G(W)=(\\nu_{V,*}(G|_V))(W)$ for etale $W\\to V$. These are exactly the maps $a$ and $c$ of [lem-pur-comparison-pullback-open-unit], whose restriction identifications are those used in Step 4. That lemma gives, for every etale module sheaf $F$ on $T$,\n$$\\nu_{V,*}(a_F)\\,c_{\\nu_T^*F}\\,j_{\\mathrm{et}}^*(\\eta^T_F)=\\eta^V_{j_{\\mathrm{et}}^*F}.$$\nAll maps in it are morphisms of module sheaves, so this is an equality for the specified module adjunctions, not only for sets. Naturality of $a$ and $c$ in their arguments is part of the cited statements.",
+   "text": "Derive the ordinary open-support maps using rightDerivedFunctorNatTrans, the composition isomorphism, and the exact-restriction comparison. Their resolution-unit equations follow from the corresponding three defining factorization equations. To prove the open square, test it on K-injective representatives, which suffice by the K-injective description of derived categories. Cancel the invertible resolution-unit maps, use the b, rho, and open-map normalization equations, and apply resolution-unit naturality. Both composites reduce to the complex-level image of the ordinary square from the previous step.",
    "uses": [
-    "lem-pur-comparison-pullback-open-unit",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-fin-kinjective-derived-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WX (lemma-adjoint-sheaves) for the comparison adjunction; the open-restriction unit normalization is the statement of lem-pur-comparison-pullback-open-unit"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "The exact functors $\\nu^*$ and open restriction descend termwise to unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. The derived adjunction $\\nu_T^*\\dashv R\\nu_{T,*}$ is the bijection, natural in both variables, for $M=QP$ and $N=QJ$ with $J$ K-injective:\n$$\\operatorname{Hom}_D(\\nu_T^*M,N)=\\operatorname{Hom}_K(\\nu_T^*P,J)=\\operatorname{Hom}_K(P,\\nu_{T,*}J)=\\operatorname{Hom}_D(M,R\\nu_{T,*}N).$$\nThe outer equalities are [lem-weil-pbc-kinjective-hom-derived], as $\\nu_T^*P$ represents $\\nu_T^*M$ and $\\nu_{T,*}J$ is K-injective representing $R\\nu_{T,*}N$ (Step 2); the middle one is the degreewise underived adjunction, which preserves homotopies by additivity. This is the canonical adjunction of [lem-pc-derived-adjoint-functors]: $\\nu_T^*$ preserves quasi-isomorphisms, so its pro-system is constant; K-injective resolutions are cofinal among quasi-isomorphisms out of a complex, with unique homotopy classes of maps under it by [lem-weil-pbc-kinjective-hom-derived], so the ind-system of $\\nu_{T,*}$ has value $\\nu_{T,*}J$ and the colimit bijection reduces to the chain displayed. Choose a K-injective resolution $r:\\nu_T^*P\\to J$. Under the chain, $Qr$ corresponds to the class of\n$$P\\xrightarrow{\\eta^T_P}\\nu_{T,*}\\nu_T^*P\\xrightarrow{\\nu_{T,*}r}\\nu_{T,*}J,$$\nthe derived unit at $M$ after the identification $Qr$. By Step 4, $J|_V$ is K-injective and $r'=r|_V\\circ a_P^{-1}:\\nu_V^*(P|_V)\\to J|_V$ is a resolution. Step 6 and naturality of $c$ give\n$$\\nu_{V,*}(r')\\eta^V_{P|_V}=\\nu_{V,*}(r|_V)c_{\\nu_T^*P}j_{\\mathrm{et}}^*(\\eta^T_P).$$\nThese represent the two restricted derived units, so $\\rho$ intertwines them under $a$, for arbitrary unbounded $M$.",
+   "text": "The specified underived open-pullback comparison satisfies comparisonPullbackOpenUnit. The canonical derived adjunction is the existing mapDerivedCategoryRightDerivedAdjunction, built from Adjunction.derived. Its derivedη_fac_app equation expresses its unit on a complex as the underived unit followed by the right-derived resolution unit and the inverse exact-functor factorization. Test the desired natural-transformation equality on K-injective representatives, apply the rho normalization, exact-functor composition factorization, and the underived unit equation, then cancel the exact-comparison factors. This gives the requested unit square for all unbounded derived objects.",
    "uses": [
+    "lem-pur-comparison-pullback-open-unit",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sc-derived-adjunction-from-underived",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-pc-derived-adjoint-functors",
     "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 015F (lemma-right-derived-exact-functor), 070K (lemma-enough-K-injectives-implies), 09T4 (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective); explicit adjunct of the resolution map"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   },
   {
-   "text": "Finally take $C=T$. The complement is empty, and a sheaf of $A$-modules has zero sections over the empty scheme by the sheaf axiom for the empty covering. Hence the kernel in Step 2 is simply $J(T)$. The same K-injective representatives compute $R\\Gamma(T_{\\mathrm{et}},R\\nu_{T,*}N)$ and $R\\Gamma(T_{\\mathrm{proet}},N)$ by [lem-weil-pbc-kinjective-total-derived]. On them $b_{T,N}$ is the identity $(\\nu_{T,*}J)(T)=J(T)$, which is precisely the final-object comparison, with the same normalization as the comparison for general $C$.",
+   "text": "At full support, the complement of the identity immersion is empty. The existing empty-cover sheaf condition makes sections over this complement terminal and hence zero in ModuleCat. Consequently both kernel inclusions are isomorphisms by kernel.ι_of_zero. Their derived transformations are isomorphisms, and the forgetting-supports square already proved identifies b with the final-object comparison g.",
    "uses": [
-    "def-pur-support-cohomology",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-kinjective-total-derived"
+    "def-pur-support-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Section 099R (section-comparison), direct-image restriction at the final object; derived.tex Tag 070Y"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Paragraph 4; expanded using the canonical source derived-functor and open-adjunction APIs."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "def-weil-sheaf-of-modules-category",
-  "prop-pur-kinjective-resolutions-exist",
   "def-pur-support-cohomology",
-  "lem-weil-pbc-kinjective-total-derived",
+  "def-weil-pbc-site-comparison-morphism",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-etale-site-localization-open",
+  "lem-fin-kinjective-derived-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-sfb-finite-extension-by-zero-adjunction",
+  "lem-sfb-finite-extension-by-zero-exact",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
   "lem-pur-comparison-pullback-open-unit",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-pc-derived-adjoint-functors"
+  "lem-sc-derived-adjunction-from-underived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Paragraph 4; expanded using Stacks Tags 08BJ, 08FI, 070I, 070K, 070Y, 09T5 and the explicit comparison adjunction."
+  "place": "Paragraph 4; C5 proof via source K-injective composition, exact extension-by-zero adjunctions, and canonical derived-unit factorization."
  },
  "mathlib_searches": [
   {
@@ -292,14 +285,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-pc-derived-adjoint-functors"
+  "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -342,7 +329,11 @@
    "AlgebraicGeometry.ProEtale.supportOpenPullback",
    "AlgebraicGeometry.ProEtale.supportDerivedOpenPullback",
    "AlgebraicGeometry.ProEtale.DerivedSupportDirectImageComparison",
-   "AlgebraicGeometry.ProEtale.derivedSupportDirectImageComparison"
+   "AlgebraicGeometry.ProEtale.derivedSupportDirectImageComparison",
+   "AlgebraicGeometry.ProEtale.supportCompositionNormalization",
+   "AlgebraicGeometry.ProEtale.supportCoefficientOpenPullback",
+   "AlgebraicGeometry.ProEtale.supportDerivedCoefficientOpenPullback",
+   "AlgebraicGeometry.ProEtale.supportRestrictionSquare"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedSupportDirectImageComparison.lean",
   "statement": "theorem derivedSupportDirectImageComparison [Finite A] : Nonempty (DerivedSupportDirectImageComparison A)",
@@ -350,5 +341,15 @@
   "by": "Q15",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-36bd6",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261019T231050-L-544822",
+  "kind": "interface",
+  "note": "independent cc review: delivered DerivedSupportDirectImageComparison.lean vs clones/live; old field equations vs new fields and old vs new bodies by rfl in a scratch module; node lem-pur-derived-support-comparison-direct-image proof_deps vs used declarations; unit sk-prop-a1-kummer realized (empty) vs removed imports; direct importers SupportSiteComparison and SupportedBottomGluing compiled against the delivered olean"
  }
 }
