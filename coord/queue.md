@@ -1,6 +1,6 @@
 # Work queue
 
-966 items; claim with `tools/claim.py next <group> [--stage N]`.
+960 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (3)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 300 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up), 2 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (935)
+## Stage 3: modules to prove (929)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -107,7 +107,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportedKummerScalarSource` | 5 | 1 | proof | route |
-| `Sheaf.DeligneLaumon.SmoothAffineFrontierStratification` | 5 | 1 | proof | route |
 | `Sheaf.Paper.AdicHeartIntrinsicFibres` | 5 | 1 | proof | route |
 | `Sheaf.Paper.CanonicalOriginCompactSupportComposition` | 5 | 4 | proof | route |
 | `Sheaf.Paper.CompactSupportReductionTower` | 5 | 1 | proof | route |
@@ -308,7 +307,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FiniteEtaleProEtaleLocalizationComparison` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.HigherDirectImagesLimits` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct` | 9 | 7 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportQuotientProduct` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel` | 9 | 7 | proof | route |
 | `Sheaf.Paper.BoundedBelowCtfReflection` | 9 | 1 | proof | route |
@@ -451,7 +449,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AmbientCompleteCoefficientCategories` | 6 | 11 | proof | 2 |
 | `Sheaf.Paper.BoundaryProEtaleQCompatibility` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | 6 | 11 | proof | 2 |
-| `Sheaf.Paper.CoefficientHeartClosure` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CoefficientHeartFiltration` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CompactSupportFiniteFieldIndependence` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | 6 | 1 | proof | 2 |
@@ -600,7 +597,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedMapReduction` | 7 | 3 | proof | 3 |
 | `Sheaf.Paper.CompletedProjectionCoherence` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.EtaleCompactScalarCoherence` | 7 | 6 | proof | 3 |
-| `Sheaf.Paper.EtaleLocalMonodromyRealization` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteClosedShriek` | 7 | 8 | proof | 3 |
 | `Sheaf.Paper.FiniteCoefficientSiteChainTensor` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteEtaleDescent` | 7 | 1 | proof | 3 |
@@ -732,6 +728,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CoefficientTowerShriekCalculus` | - | 1 | proof | 4 |
 | `Sheaf.Paper.ConstructibleHomComparison` | - | 1 | proof | 4 |
+| `Sheaf.Paper.EtaleLocalMonodromyRealization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeCompactSupportComposition` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeProjectionExchange` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteRingCompactSupportProjection` | - | 1 | proof | 4 |
@@ -757,7 +754,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.TateInverseLimitBaseChange` | 6 | 12 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison` | 7 | 2 | proof | 5 |
 | `Sheaf.Paper.IntegralCompactSupportCoefficientData` | 7 | 7 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.ConormalSequenceSmoothImmersion` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison` | 8 | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteReductionReconstructionCompleted` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.DerivedSupportDirectImageComparison` | 9 | 1 | proof | 5 |
@@ -771,11 +767,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RepresentationTheory.DvrGalois` | 9 | 1 | proof | 5 |
 | `Sheaf.SixFunctors.EtaleHomComplexPullback` | 9 | 7 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange` | - | 1 | proof | 5 |
-| `Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback` | - | 2 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.LisseSplitHomFlatConstructible` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability` | - | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.DerivedCategory.FrameDualMate` | - | 1 | proof | 5 |
-| `Sheaf.Paper.CoefficientRealizationTransport` | - | 8 | proof | 5 |
 | `Sheaf.Paper.CompactProductProperSupportCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.Paper.DirectImageCtfOpenTor` | - | 1 | proof | 5 |
 | `Sheaf.Paper.EtaleIsoDescent` | - | 1 | proof | 5 |
