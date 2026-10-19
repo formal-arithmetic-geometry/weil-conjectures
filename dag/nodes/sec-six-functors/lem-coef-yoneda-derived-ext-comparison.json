@@ -29,151 +29,67 @@
  ],
  "proof": [
   {
-   "text": "For an extension $E$, let $C_E$ be the complex with $V$ in degree $-i$, $E_{i-1},\\ldots,E_0$ in degrees $-i+1,\\ldots,0$, and zero elsewhere. Its augmentation $s_E:C_E\\to U[0]$ is a quasi-isomorphism: exactness gives $H^r(C_E)=0$ for $r\\ne0$ and $H^0(C_E)=U$. Projection onto the term $V$ defines a chain map $f_E:C_E\\to V[i]$. Set $\\delta(E)=Q(f_E)Q(s_E)^{-1}$, using [def-pc-ext] and [def-weil-abstract-derived-category]. A morphism of extensions fixing both endpoints induces $g:C_E\\to C_{E^{\\prime}}$ with $s_{E^{\\prime}}g=s_E$ and $f_{E^{\\prime}}g=f_E$; $g$ is a quasi-isomorphism by its cohomology maps. Thus $\\delta$ is invariant under every generator, and hence every zigzag, of the stated equivalence relation.",
+   "text": "Construct the signed class using actual successive cokernel cuts, and prove the degree-one split-zero criterion by the contravariant Ext exact sequence.",
    "uses": [
-    "def-pc-ext",
-    "def-weil-abstract-derived-category"
+    "def-coef-yoneda-recursive-class"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, construction immediately before the lemma and invariance paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Given $\\xi:U[0]\\to V[i]$, apply [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation] in $K(\\mathcal A)$ to write $\\xi=Q(f)Q(s)^{-1}$, where $s:L\\to U[0]$ is a quasi-isomorphism and $f:L\\to V[i]$ is a chain map. Replace $L$ by the complex $T$ with $T^r=L^r$ for $r<0$, $T^0=\\ker d_L^0$, and $T^r=0$ for $r>0$, restricting the incoming differential. The inclusion $T\\to L$ retains cohomology in degrees $r\\le0$ and kills it for $r>0$, by the kernel/image formula of [def-weil-abstract-derived-category]. Since $H^r(L)=0$ for $r\\ne0$, this inclusion is a quasi-isomorphism. Rename $T$ as $L$ and restrict $s,f$. Now $L$ is zero above degree zero, $H^0(s)$ identifies $H^0(L)$ with $U$, and all negative cohomology of $L$ vanishes.",
+   "text": "Naturality makes the concrete class invariant under endpoint-fixed arrows; induction on EqvGen makes it invariant under zigzags. Quot.lift gives the map on classes.",
    "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation",
-    "def-weil-abstract-derived-category"
+    "lem-coef-yoneda-class-naturality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, proof paragraph 1: roof and upper truncation"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $K=\\operatorname{im}(d_L^{-i}:L^{-i}\\to L^{-i+1})$. Since $H^{-i}(L)=0$, the kernel of $L^{-i}\\twoheadrightarrow K$ is $\\operatorname{im}d_L^{-i-1}$. The chain-map equation $f^{-i}d_L^{-i-1}=0$ therefore gives a unique $\\bar f:K\\to V$ with $\\bar f d_L^{-i}=f^{-i}$. Form $P=L^{-i+1}\\amalg_K V$. In the cokernel description this is $\\operatorname{coker}((d_L^{-i},-f^{-i}):L^{-i}\\to L^{-i+1}\\oplus V)$: the map onto $K$ is epic, so these two presentations impose exactly the same relation. Apply [lem-weil-pbc-pushout-short-exact-sequence] to $0\\to K\\to L^{-i+1}\\to L^{-i+1}/K\\to0$ and $\\bar f$. It gives $0\\to V\\to P\\to L^{-i+1}/K\\to0$. Negative cohomology vanishing identifies $L^{-i+1}/K$ with the image of the next differential when $i>1$, and with $U$ via $s^0$ when $i=1$. Splicing with the remaining terms of $L$ gives an exact extension $E(L,s,f):0\\to V\\to P\\to L^{-i+2}\\to\\cdots\\to L^0\\xrightarrow{s^0}U\\to0$. For $i=1$ this means just $0\\to V\\to P\\to U\\to0$, with no extra copy of $L^0$.",
+   "text": "Surjectivity and equality detection make the quotient map bijective. Transport the abelian group structure along Equiv.ofBijective, so no arbitrary existence witness is used to define the comparison.",
    "uses": [
-    "def-sp-abelian",
-    "lem-weil-pbc-pushout-short-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, proof paragraph 1: the quotient construction; Homology Tags 05PJ and 08N4 for its pushout exactness"
-   }
-  },
-  {
-   "text": "There is a chain map $h:L\\to C_{E(L,s,f)}$: in degree $-i$ it is $f^{-i}$, in degree $-i+1$ it is the canonical map $L^{-i+1}\\to P$, in higher retained degrees it is the identity, and below degree $-i$ it is zero. The sole new chain-map equation is $[d_L^{-i}x,0]=[0,f^{-i}x]$ in $P$; the equation below it is $f^{-i}d_L^{-i-1}=0$. Here the displayed notation describes the two morphisms into the cokernel, not elements of an arbitrary abelian category. Thus $f_Eh=f$, $s_Eh=s$. On cohomology $h$ is an isomorphism, since both augmentations are quasi-isomorphisms. Consequently $\\delta(E(L,s,f))=Q(f)Q(s)^{-1}=\\xi$. This proves surjectivity.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, proof paragraph 1: verification that the constructed extension has the prescribed class"
-   }
-  },
-  {
-   "text": "If $\\delta(E)=\\delta(E^{\\prime})$, [lem-pc-right-fraction-common-refinement], applied in the homotopy category with the multiplicative system of [lem-pc-quasi-isomorphisms-multiplicative-system], gives a complex $L$ and chain maps $a:L\\to C_E$, $b:L\\to C_{E^{\\prime}}$ for which $s_Ea=s_{E^{\\prime}}b$ and $f_Ea=f_{E^{\\prime}}b$ hold up to chain homotopy, with the common denominator a quasi-isomorphism. Upper-truncate $L$ as in step 2. The first equality is now strict: a homotopy from $L$ into $U[0]$ has its only possible component $L^1\\to U$, which is zero. Write $f_Ea-f_{E^{\\prime}}b=h d_L^{-i}$ in degree $-i$, where $h:L^{-i+1}\\to V$ is the only possible homotopy component into $V[i]$. Regard $h$ also as a degree $-1$ map $k:L\\to C_{E^{\\prime}}$ with sole component $k^{-i+1}=h$ landing in $C_{E^{\\prime}}^{-i}=V$. Replace $b$ by $b+d_{C_{E^{\\prime}}}k+kd_L$. This is a homotopic chain map, it leaves $s_{E^{\\prime}}b$ unchanged since $s_{E^{\\prime}}k=0$, and it changes $f_{E^{\\prime}}b$ by $hd_L^{-i}$. Both endpoint equations are therefore strict after replacement. The common augmentation $s=s_Ea=s_{E^{\\prime}}b$ remains a quasi-isomorphism.",
-   "uses": [
-    "lem-pc-right-fraction-common-refinement",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, proof paragraph 2: common refinement; explicit homotopy correction supplying the strict equations"
-   }
-  },
-  {
-   "text": "Let $f=f_Ea=f_{E^{\\prime}}b$ after the correction, and apply the construction of step 3 to $(L,s,f)$ to obtain $E^{\\prime\\prime}$. The map from its first middle term $P$ to $E_{i-1}$ is induced by $(a^{-i+1},j_E):L^{-i+1}\\oplus V\\to E_{i-1}$, where $j_E:V\\to E_{i-1}$ is the injection. This kills $(d_L^{-i},-f^{-i})$ because $a^{-i+1}d_L^{-i}=j_Ea^{-i}=j_Ef^{-i}$. In all later middle degrees use $a$; on $V,U$ use the identity. The chain-map and augmentation equations verify every square. The same formula with $b,j_{E^{\\prime}}$ gives a morphism $E^{\\prime\\prime}\\to E^{\\prime}$. Thus equal derived classes have a common extension mapping to both, in particular they are equivalent by the stated zigzag relation. Together with steps 1 and 4 this proves a bijection of classes with derived Ext.",
-   "uses": [
-    "def-sp-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, lemma-yoneda-extension, final sentence of proof: the omitted morphisms of extensions, explicitly constructed"
-   }
-  },
-  {
-   "text": "For $u:U^{\\prime}\\to U$, pull back the last epimorphism $E_0\\to U$ and retain the earlier terms, with their maps into the pullback; this gives $u^*E$. For $v:V\\to V^{\\prime}$, push out the first monomorphism $V\\to E_{i-1}$ and retain the later terms; this gives $v_*E$. Exactness for the pushout follows by applying [lem-weil-pbc-pushout-short-exact-sequence] to the initial short exact sequence ending in $E_{i-1}/V$. For the pullback, apply that same statement in $\\mathcal A^{\\mathrm{op}}$ to the short exact sequence $0\\to U^{\\mathrm{op}}\\to E_0^{\\mathrm{op}}\\to (\\ker(E_0\\to U))^{\\mathrm{op}}\\to0$ and $u^{\\mathrm{op}}$. This is allowed because reversing kernels and cokernels, monos and epis in the axioms of [def-sp-abelian] makes $\\mathcal A^{\\mathrm{op}}$ abelian. Reversing the resulting sequence gives $0\\to\\ker(E_0\\to U)\\to E_0\\times_UU^{\\prime}\\to U^{\\prime}\\to0$. At $i=1$ these are the full short exact extensions. Finite direct sums of extensions are exact, since kernels and images of a block-diagonal pair are the corresponding finite direct sums by their universal properties.",
-   "uses": [
-    "def-sp-abelian",
-    "lem-weil-pbc-pushout-short-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology Tag 010I, section-extensions, pullback/pushout constructions after Definition 010K; Tags 05PJ, 08N3, 08N4"
-   }
-  },
-  {
-   "text": "The natural map $g:C_{u^*E}\\to C_E$ satisfies $s_Eg=u[0]s_{u^*E}$ and $f_Eg=f_{u^*E}$. Inverting the augmentations in the derived category gives $\\delta(u^*E)=\\delta(E)Q(u[0])$. The natural map $t:C_E\\to C_{v_*E}$ satisfies $s_{v_*E}t=s_E$ and $f_{v_*E}t=v[i]f_E$, giving $\\delta(v_*E)=Q(v[0])[i]\\delta(E)$. For a direct sum of two extensions, the two maps $s,f$ are block diagonal, so $\\delta(E\\oplus F)=\\delta(E)\\oplus\\delta(F)$. These formulas use precisely the functorial maps in [def-pc-ext]. They also show that pullback, pushout and direct sum descend to classes, because two outputs with the same displayed derived class are equivalent by step 6. Identity and composition laws on classes follow from the same formulas and the bijection. Hence the comparison is natural in both variables.",
-   "uses": [
-    "def-pc-ext",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU, functoriality of the class construction; Homology Tag 010I, pullback and pushout functoriality"
-   }
-  },
-  {
-   "text": "By step 8 the Baer construction $\\Sigma_{V*}\\Delta_U^*(E\\oplus F)$ has class $\\Sigma_V[i](\\delta(E)\\oplus\\delta(F))\\Delta_U=\\delta(E)+\\delta(F)$, the biproduct formula for addition in the additive category of [def-pc-ext]. Thus Baer addition is well defined and the bijection respects it. The inverse operation is pushout along $-1_V$, by the same formula. A representative of zero is the split extension if $i=1$; if $i>1$, take $E_{i-1}=V$, $E_0=U$, all intervening terms zero, endpoint maps identities and all middle differentials zero. For $i>1$ its numerator $f_E$ is null-homotopic using $1_V:C_E^{-i+1}\\to V$; for $i=1$ use the projection $V\\oplus U\\to V$. Consequently the bijection transports the abelian group laws of derived Ext to the stated Baer operation and is an isomorphism of abelian groups.",
-   "uses": [
+    "lem-coef-yoneda-class-classification",
     "def-pc-ext"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XV, lemma-ext-1; Homology Tag 010I, Baer sum construction; same block-diagonal calculation in every degree"
-   }
+   "elementary": true
   },
   {
-   "text": "In degree one a splitting gives a retraction $r:E_0\\to V$ of the injection $j:V\\to E_0$, so $f_E:C_E\\to V[1]$ is null-homotopic with homotopy $r$ and $\\delta(E)=0$. Conversely step 6 makes a zero-class short exact extension equivalent to the split extension. Each morphism $m:E_0\\to E_0^{\\prime}$ of short exact extensions fixing endpoints is an isomorphism: if $k=\\ker m$, then $qk=q^{\\prime}mk=0$, so $k=ja$ and $j^{\\prime}a=mja=0$, forcing $k=0$; if $c=\\operatorname{coker}m$, then $cj^{\\prime}=cmj=0$, so $c=bq^{\\prime}$ and $0=cm=bq$, forcing $c=0$. An arrow with zero kernel and cokernel is invertible by the abelian-category axioms [def-sp-abelian]. Every zigzag therefore consists of isomorphisms, and splitting carries across their inverses. Hence the zero class consists exactly of split short exact sequences.",
+   "text": "The degree-one normalization is the defining equation. The signed splice identity supplies the splice normalization; naturality is inherited from the concrete class.",
    "uses": [
-    "def-sp-abelian",
+    "lem-coef-yoneda-class-splice",
+    "lem-coef-yoneda-class-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For BaerSum data, apply naturality to the two product projections, the diagonal pullback map, and the addition pushout map. Bilinearity and the diagonal-projection identities give delta(G)=delta(E)+delta(F). Injectivity of the quotient comparison proves the Baer field. The geometric construction exists by the separate exact-sequence result.",
+   "uses": [
+    "lem-coef-yoneda-class-naturality",
+    "lem-coef-yoneda-baer-existence",
     "def-pc-ext"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XV, lemma-ext-1; split-zero consequence with the kernel/cokernel check written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Finally suppose $V$ is injective. Apply its defining extension property [def-sp-injective-resolutions] to the monomorphism $j:V\\to E_{i-1}$ and $1_V$ to obtain $r:E_{i-1}\\to V$ with $rj=1_V$. The degree $-1$ map from $C_E$ to $V[i]$ with sole component $r:C_E^{-i+1}\\to V$ is a null-homotopy of $f_E$: in degree $-i$ its product with the differential is $rj=1_V$, and in every other degree the homotopy formula is zero. Thus $\\delta(E)=0$ for every extension. Surjectivity from step 4 makes every element of $\\operatorname{Ext}^i(U,V)$ zero for every $i>0$. No existence of injective resolutions or enough-injectives hypothesis is used.",
+   "text": "Use the proved degree-one zero criterion. For injective vanishing, specialize Mathlib CategoryTheory.Abelian.Ext.subsingleton_of_injective U V n (EnoughInjectives.lean:110); this result itself assumes only that V is injective, not enough injectives.",
    "uses": [
+    "def-coef-yoneda-recursive-class",
     "def-sp-injective-resolutions",
     "def-pc-ext"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XU and the injective-object definition: split the first monomorphism and null-homotope the numerator"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-coef-yoneda-recursive-class",
+  "lem-coef-yoneda-class-naturality",
+  "lem-coef-yoneda-class-classification",
   "def-pc-ext",
-  "def-weil-abstract-derived-category",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-right-fraction-representation",
-  "def-sp-abelian",
-  "lem-weil-pbc-pushout-short-exact-sequence",
-  "lem-pc-right-fraction-common-refinement",
+  "lem-coef-yoneda-class-splice",
+  "lem-coef-yoneda-baer-existence",
   "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 06XU, lemma-yoneda-extension, including explicit completion of the omitted common-refinement argument; Tag 06XV and homology.tex section-extensions (010I) for degree one and Baer operations"
+  "place": "Tags 06XU and 06XV, first-image-cut recursive presentation; Homology Section 010I for Baer operations. Formal assembly by C2 from explicit naturality, classification, splice and geometric existence statements."
  },
  "mathlib_searches": [
   {
@@ -234,9 +150,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-pushout-short-exact-sequence"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -257,16 +171,6 @@
   "module": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
   "declaration": "CategoryTheory.nonempty_yonedaDerivedExtComparison",
   "declarations": [
-   "CategoryTheory.YonedaExtension",
-   "CategoryTheory.YonedaExtension.leftMap",
-   "CategoryTheory.YonedaExtension.rightMap",
-   "CategoryTheory.YonedaExtension.Related",
-   "CategoryTheory.YonedaExtension.Equivalent",
-   "CategoryTheory.YonedaExtension.Classes",
-   "CategoryTheory.YonedaExtension.classOf",
-   "CategoryTheory.YonedaExtension.IsSplit",
-   "CategoryTheory.YonedaExtension.Splice",
-   "CategoryTheory.YonedaExtension.BaerSum",
    "CategoryTheory.YonedaDerivedExtComparison",
    "CategoryTheory.nonempty_yonedaDerivedExtComparison"
   ],
@@ -289,5 +193,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
  }
 }

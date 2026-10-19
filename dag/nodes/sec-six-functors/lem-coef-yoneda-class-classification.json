@@ -1,0 +1,161 @@
+{
+ "id": "lem-coef-yoneda-class-classification",
+ "kind": "statement",
+ "title": "Surjectivity and equality detection of the concrete class",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with derived Ext [def-pc-ext], $V,U\\in\\mathcal A$, and $n\\ge0$. Every element of $\\operatorname{Ext}^{n+1}(U,V)$ is the concrete class [def-coef-yoneda-recursive-class] of a degree-$n+1$ exact extension [def-coef-yoneda-extension-data]. Two such extensions with equal concrete class are connected by a finite zigzag of endpoint-fixed sequence maps.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU, lemma-yoneda-extension, both proof paragraphs; signed first-image-cut computation"
+ },
+ "stmt_deps": [
+  "def-coef-yoneda-extension-data",
+  "def-coef-yoneda-recursive-class",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Efface a positive Ext class by a monomorphism of its second argument. Mathlib DerivedCategory.left_fac_of_isStrictlyGE (Fractions.lean:91) represents the class by a left fraction whose target complex is zero below minus its degree. The quasi-isomorphism from the single complex identifies the second argument with its lowest homology, which injects into that lowest term. Projection to the lowest term kills the original class because the source single complex has zero object there. This uses the left calculus of fractions, not common right-fraction refinements.",
+   "uses": [
+    "def-pc-ext",
+    "def-weil-abstract-derived-category",
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For surjectivity use the covariant Ext exact sequence of the effacing monomorphism and its actual cokernel (Mathlib Ext.covariant_sequence_exact₁). In degree one its degree-zero lift is an actual morphism; pull back the cokernel short exact sequence along this morphism. In higher degree represent the lower-degree lift inductively and splice it with the cokernel short exact sequence. The signed splice formula and the square of the integer sign give exactly the original class.",
+   "uses": [
+    "def-pc-ext",
+    "lem-coef-yoneda-baer-existence",
+    "lem-coef-yoneda-class-naturality",
+    "lem-coef-yoneda-class-splice"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree one equality of endpoint-normalized short exact classes yields a short-complex morphism with the specified isomorphisms on endpoints. Ext.covariant_sequence_exact₃ first lifts the map on right endpoints to a middle map. Its induced map on left endpoints may differ from the specified map; Ext.contravariant_sequence_exact₁ lifts that difference through the first injection, and subtracting the corresponding composite corrects the middle map. The resulting sequence morphism fixes both endpoints.",
+   "uses": [
+    "def-pc-ext",
+    "def-coef-yoneda-recursive-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In higher degree push out the two first injections along each other to obtain a common monomorphism with source V. Push out each actual cokernel tail to the cokernel of this common monomorphism, then splice; related_to_splice gives endpoint-fixed maps from the original sequences. Naturality gives equality of the classes of these splices.",
+   "uses": [
+    "def-coef-yoneda-recursive-class",
+    "lem-coef-yoneda-baer-existence",
+    "lem-coef-yoneda-class-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two splices with a common head, cancel the signed splice factor. Ext.covariant_sequence_exact₃ lifts the difference of the tail classes to Ext with values in the middle object. Efface that lift by a monomorphism, form the new short exact head, and descend its cokernel map. Pushing both tails along this cokernel map makes their classes equal. The induction hypothesis yields a tail zigzag. Splice every arrow of that zigzag, using actual splice extensions at intermediate vertices; the induced maps of heads and tails and the two comparison maps give a zigzag between the original extensions.",
+   "uses": [
+    "def-pc-ext",
+    "lem-coef-yoneda-class-splice",
+    "lem-coef-yoneda-baer-existence",
+    "lem-coef-yoneda-class-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ext",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-coef-yoneda-baer-existence",
+  "lem-coef-yoneda-class-naturality",
+  "lem-coef-yoneda-class-splice",
+  "def-coef-yoneda-recursive-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C2",
+  "date": "2026-10-19",
+  "based_on": {
+   "document": "literature/stacks-project/derived.tex",
+   "place": "Tag 06XU, lemma-yoneda-extension, both proof paragraphs; signed first-image-cut computation"
+  },
+  "note": "Dimension shifting by effaceable Ext classes, using Mathlib left fractions and Ext exact sequences; explicit finite-extension splices and zigzags replace common right-fraction refinements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda exact sequences extensions equivalent to derived Ext in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda|extClass",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda extension derived class invariant under endpoint fixed maps and bijective on classes",
+   "results": "CategoryTheory.Functor.RepresentableBy.toIso, CategoryTheory.yonedaLemma, CategoryTheory.hom_ext_yoneda, CategoryTheory.yonedaEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.Yoneda.yoneda_full, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Identification of Yoneda Ext with the Ext used for dimension shifting.; Tag 06XU, lemma-yoneda-extension, both proof paragraphs; signed first-image-cut computation",
+   "via": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.YonedaClassClassification",
+  "file": "lean/Sheaf/CategoryTheory/YonedaClassClassification.lean",
+  "declaration": "CategoryTheory.YonedaExtension.derivedClass_classification",
+  "statement": "theorem derivedClass_classification (V U : A) (n : ℕ) :\n    Function.Surjective (derivedClass (A := A) (V := V) (U := U) n) ∧\n    ∀ E F : YonedaExtension A V U (n + 1),\n      E.derivedClass n = F.derivedClass n → E.Equivalent F",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "id": "def-coef-yoneda-recursive-class",
+ "kind": "definition",
+ "title": "Cokernel cuts and the concrete signed extension class",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with derived Ext [def-pc-ext]. For a positive-degree extension [def-coef-yoneda-extension-data], its head is the short exact sequence formed by its first injection and its cokernel projection. For degree at least two, its tail replaces the first two objects by that cokernel and uses the descended next differential. This is an extension of degree one less. Its concrete derived class in degree one is minus its short exact connecting class, conjugated by the endpoint isomorphisms. In degree $n+2$ the class is $(-1)^n$ times the composite of the tail class, the head connecting class, and the first endpoint identification. These are real constructions using successive cokernels. Maps of extensions induce maps of the heads and tails.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XU and 06XV, cutting at the first image and Yoneda composition"
+ },
+ "stmt_deps": [
+  "def-coef-yoneda-extension-data",
+  "def-sp-abelian",
+  "def-pc-ext"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XU and 06XV, cutting at the first image and Yoneda composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda exact sequences extensions equivalent to derived Ext in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda|extClass",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda extension derived class invariant under endpoint fixed maps and bijective on classes",
+   "results": "CategoryTheory.Functor.RepresentableBy.toIso, CategoryTheory.yonedaLemma, CategoryTheory.hom_ext_yoneda, CategoryTheory.yonedaEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.Yoneda.yoneda_full, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Identification of Yoneda Ext with the Ext used for dimension shifting.; Tags 06XU and 06XV, cutting at the first image and Yoneda composition",
+   "via": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.YonedaExtensionClass",
+  "file": "lean/Sheaf/CategoryTheory/YonedaExtensionClass.lean",
+  "declaration": "CategoryTheory.YonedaExtension.derivedClass",
+  "statement": "def derivedClass [HasExt.{w} A] {V U : A} :\n    (n : ℕ) → YonedaExtension A V U (n + 1) → Ext U V (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

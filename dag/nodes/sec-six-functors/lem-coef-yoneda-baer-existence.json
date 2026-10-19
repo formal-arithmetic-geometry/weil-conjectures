@@ -1,0 +1,137 @@
+{
+ "id": "lem-coef-yoneda-baer-existence",
+ "kind": "statement",
+ "title": "Existence of the geometric Baer-sum construction",
+ "statement": "In any abelian category $\\mathcal A$ [def-sp-abelian], for $n\\ge0$ and two degree-$n+1$ exact extensions $E,F$ of $U$ by $V$ [def-coef-yoneda-extension-data], there exists a degree-$n+1$ exact extension $G$ and Baer-sum data: a termwise product extension, its pullback along the diagonal of $U$, and the pushout along addition on $V$, with all endpoint equations, product universal properties, pullback and pushout squares, and unchanged-middle-term isomorphisms specified by YonedaExtension.BaerSum.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology Section 010I, Baer sum construction; Tags 05PJ, 08N3 and 08N4"
+ },
+ "stmt_deps": [
+  "def-coef-yoneda-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the termwise binary product with endpoint product isomorphisms. For every consecutive pair, refine a generalized element first along the exactness witness for E, then along that for F, and pair the two lifts. Product maps preserve monomorphisms and epimorphisms. The projections have the specified endpoint maps and pointwise product universal properties.",
+   "uses": [
+    "def-coef-yoneda-extension-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct pullback of the final epimorphism along any map of right endpoints by induction on the degree. In degree one use the actual pullback and its universal property; exactness follows by lifting a generalized element through the old exact pair and comparing both projections. In higher degree cut at the actual first cokernel, pull back the shorter tail inductively, and reattach the original first two terms. Exactness follows from the epic cokernel projection, the monic first tail arrow and the unchanged later pairs. The resulting comparison is the identity on both reattached terms.",
+   "uses": [
+    "def-coef-yoneda-recursive-class"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Push out the first monomorphism along any map of left endpoints. Construct the following arrow with pushout.desc. Apply the short-exact pushout theorem to the first arrow and its cokernel; compose its resulting cokernel map with the monic cokernel-desc map of the original exact pair. Exactness at the next term follows up to refinements using the old exact pair and pushout.inr; later pairs are unchanged. The final arrow remains epic by the commuting square and its isomorphic final component.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the product construction, then the pullback construction with the diagonal of U, then the pushout construction with addition on V. Package their comparison maps, endpoint equations, universal properties and unchanged-middle isomorphisms into BaerSum.",
+   "uses": [
+    "def-coef-yoneda-extension-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-yoneda-extension-data",
+  "def-coef-yoneda-recursive-class",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C2",
+  "date": "2026-10-19",
+  "based_on": {
+   "document": "literature/stacks-project/homology.tex",
+   "place": "Homology Section 010I, Baer sum construction; Tags 05PJ, 08N3 and 08N4"
+  },
+  "note": "Concrete finite-sequence proof using actual products, pullbacks and pushouts, with induction through actual cokernel tails."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda exact sequences extensions equivalent to derived Ext in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda|extClass",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda extension derived class invariant under endpoint fixed maps and bijective on classes",
+   "results": "CategoryTheory.Functor.RepresentableBy.toIso, CategoryTheory.yonedaLemma, CategoryTheory.hom_ext_yoneda, CategoryTheory.yonedaEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.Yoneda.yoneda_full, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Identification of Yoneda Ext with the Ext used for dimension shifting.; Homology Section 010I, Baer sum construction; Tags 05PJ, 08N3 and 08N4",
+   "via": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.YonedaBaerExistence",
+  "file": "lean/Sheaf/CategoryTheory/YonedaBaerExistence.lean",
+  "declaration": "CategoryTheory.YonedaExtension.baerSum_exists",
+  "statement": "theorem baerSum_exists (V U : A) (n : ℕ) (E F : YonedaExtension A V U (n + 1)) :\n    ∃ G : YonedaExtension A V U (n + 1), BaerSum E F G",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

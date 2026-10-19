@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-yoneda-class-splice",
+ "kind": "statement",
+ "title": "The signed splice identity for the concrete class",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with derived Ext [def-pc-ext]. Let $n\\ge0$, let $S$ be a short exact complex, let $F$ be a degree-$n+1$ extension of $U$ by $S.X_3$, and let $E$ be a degree-$n+2$ extension of $U$ by $S.X_1$, with splice data [def-coef-yoneda-extension-data] identifying $E$ with the splice of $S$ and $F$. The concrete classes [def-coef-yoneda-recursive-class] satisfy $\\delta(E)=(-1)^n(\\delta(F)\\mathbin{\\mathrm{comp}}\\operatorname{extClass}(S))$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XU and 06XV, Yoneda composition and the shifted positive-projection sign"
+ },
+ "stmt_deps": [
+  "def-coef-yoneda-extension-data",
+  "def-coef-yoneda-recursive-class",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Descend firstIso.hom followed by the actual cokernel projection through the epimorphism S.g, obtaining q. Form a morphism S to E.head with components leftIso.inv, firstIso.hom, q. The splice square gives a morphism F.sequence to E.tail.sequence with components F.leftIso.hom followed by q and tailIso.hom. Its endpoint maps are q and the identity of U. Apply derivedClass_naturality to this morphism and extClass_naturality to the head morphism. Unfold the recursive class, reassociate Ext composition, and cancel the inverse endpoint isomorphisms. The factor (-1)^n is the common defining sign.",
+   "uses": [
+    "def-coef-yoneda-recursive-class",
+    "lem-coef-yoneda-class-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-yoneda-recursive-class",
+  "lem-coef-yoneda-class-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XU and 06XV, Yoneda composition and the shifted positive-projection sign"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda exact sequences extensions equivalent to derived Ext in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda|extClass",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda extension derived class invariant under endpoint fixed maps and bijective on classes",
+   "results": "CategoryTheory.Functor.RepresentableBy.toIso, CategoryTheory.yonedaLemma, CategoryTheory.hom_ext_yoneda, CategoryTheory.yonedaEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.Yoneda.yoneda_full, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Identification of Yoneda Ext with the Ext used for dimension shifting.; Tags 06XU and 06XV, Yoneda composition and the shifted positive-projection sign",
+   "via": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.YonedaClassSplice",
+  "file": "lean/Sheaf/CategoryTheory/YonedaClassSplice.lean",
+  "declaration": "CategoryTheory.YonedaExtension.derivedClass_splice",
+  "statement": "theorem derivedClass_splice (U : A) (n : ℕ) (S : ShortComplex A) (hS : S.ShortExact)\n    (F : YonedaExtension A S.X₃ U (n + 1))\n    (E : YonedaExtension A S.X₁ U (n + 2)) (s : Splice S F E) :\n    E.derivedClass (n + 1) =\n      (-1 : ℤ) ^ n • ((F.derivedClass n).comp hS.extClass (by omega))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

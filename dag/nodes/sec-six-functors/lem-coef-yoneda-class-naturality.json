@@ -1,0 +1,111 @@
+{
+ "id": "lem-coef-yoneda-class-naturality",
+ "kind": "statement",
+ "title": "Naturality of the concrete extension class",
+ "statement": "For every abelian category $\\mathcal A$ [def-sp-abelian] with derived Ext [def-pc-ext], every $n\\ge0$, and every map $\\phi:E\\to F$ of degree-$n+1$ extensions [def-coef-yoneda-extension-data], the classes of [def-coef-yoneda-recursive-class] satisfy $\\delta(E)\\circ \\phi_V=\\phi_U\\circ\\delta(F)$, where both endpoint maps use the specified endpoint isomorphisms. In Lean composition order this is Ext.comp of the class with Ext.mk₀ of the left map, equal to Ext.mk₀ of the right map composed with the second class.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU, functoriality of the class construction"
+ },
+ "stmt_deps": [
+  "def-coef-yoneda-extension-data",
+  "def-coef-yoneda-recursive-class",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "in degree one apply naturality of the short exact connecting class and\ncancel the two endpoint isomorphisms. For the induction step, a map of sequences\ninduces a map on their first cokernels. This gives a morphism of the canonical\nshort exact heads and a morphism of the smaller-degree tails. Apply the induction\nhypothesis to the tails and extClass_naturality to the heads. Associativity of Ext\ncomposition moves the induced cokernel map from one side of the composition to\nthe other. The common integer sign commutes with both compositions. Cancel the\nendpoint isomorphisms, giving the displayed equation. All cuts use actual\ncokernels, so the argument applies in every abelian category with HasExt, without\nan enough-injectives assumption.",
+   "uses": [
+    "def-coef-yoneda-recursive-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-yoneda-recursive-class"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU, functoriality of the class construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda exact sequences extensions equivalent to derived Ext in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext, CategoryTheory.HasExt.standard",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "grep",
+   "query": "Yoneda|extClass",
+   "results": "Mathlib/Tactic/Translate/ToAdditive.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictSegal.lean, Mathlib/AlgebraicTopology/Quasicategory/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Yoneda extension derived class invariant under endpoint fixed maps and bijective on classes",
+   "results": "CategoryTheory.Functor.RepresentableBy.toIso, CategoryTheory.yonedaLemma, CategoryTheory.hom_ext_yoneda, CategoryTheory.yonedaEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.isIso_of_yoneda_map_bijective, CategoryTheory.Yoneda.yoneda_full, CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+   "date": "2026-10-18",
+   "verdict": "No exact result for concrete finite exact sequences modulo endpoint-fixed zigzags. Mathlib extClass and derived Ext supply the degree-one and composition API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.YonedaDerivedExtComparison",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2, derived coefficient adjunction before the displayed derived inverse limit; Identification of Yoneda Ext with the Ext used for dimension shifting.; Tag 06XU, functoriality of the class construction",
+   "via": [
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-coef-hereditary-cotorsion-complex-lift",
+    "lem-coef-flat-complex-cotorsion-pairs",
+    "lem-coef-sheaf-flat-model",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.YonedaClassNaturality",
+  "file": "lean/Sheaf/CategoryTheory/YonedaClassNaturality.lean",
+  "declaration": "CategoryTheory.YonedaExtension.derivedClass_naturality",
+  "statement": "theorem derivedClass_naturality (V U V' U' : A) (n : ℕ)\n    (E : YonedaExtension A V U (n + 1)) (F : YonedaExtension A V' U' (n + 1))\n    (φ : E.sequence ⟶ F.sequence) :\n    (E.derivedClass n).comp (Ext.mk₀ (E.leftMap F φ)) (add_zero _) =\n      (Ext.mk₀ (E.rightMap F φ)).comp (F.derivedClass n) (zero_add _)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-7b3b3",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261019T112439-L-3940783",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 6 new proved modules vs node lem-coef-yoneda-derived-ext-comparison and stage-2 structure; moved YonedaExtension block byte-identical vs live clone; 7 modules + 4 direct importers compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}
