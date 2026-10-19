@@ -16956,3 +16956,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/X6/Sheaf.Paper.RefinementCoefficientMate (stage 3; reviewer PASS; first push; landing 20261019T034349-L-425527 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/X8/Sheaf.Paper.PurInverseImageCompatibleFreeTower (stage 3; reviewer PASS; first push; landing 20261019T034350-L-425630 (interface); batch 20261019T034248; modules 2; new nodes 1)
 - 03:43 L: merged deliver/X8/Sheaf.Paper.SmoothPurityTowerInjectiveComponents (stage 3; reviewer PASS; first push; landing 20261019T034351-L-425863 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/X9/Sheaf.Paper.UniformConstructibleExt (stage 3; reviewer PASS; first push; landing 20261019T034351-L-425989 (proof); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/X9-uniform-constructible-ext-partial.md)

@@ -54,80 +54,68 @@
  ],
  "proof": [
   {
-   "text": "Use the global finite-field datum and the coefficient-stage list of [sk-def-sf-setting], with $X$ separated and of finite type over that finite field or its algebraic closure. Only these standing data are used here; the finite-stage étale conventions in that definition are not an identification of the rational pro-étale coefficient categories. This is a standing scheme in the precise sense of [sk-def-sfb-dc-setting], since the field has characteristic $p\\ne\\ell$. For a locally closed $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$, with $i$ closed and $u$ open, let $j:X\\setminus Z\\hookrightarrow X$ and put $c_a=\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+2$. The base field has finite $\\ell$-cohomological dimension by [sk-lem-base-field-cd]. Finiteness for $S$ and $j$ follows from the finite-type bound in [sk-def-cd] (Stacks Tag 0F10). Thus $\\max(0,c_a)$ is a finite nonnegative integer. Empty strata can be omitted.",
+   "text": "Partial Lean proof, existence clause: the base is finite or algebraically closed up to field isomorphism. The base-field cohomological-dimension theorem and the finite-type absolute and relative bounds make every refined source cutoff finite. A finite supremum of these cutoffs is finite, including the empty supremum zero. The separate theorem uniformConstructibleExt_cutoff also proves finiteness of the original displayed open-closed expression, without claiming vanishing at that expression.",
    "uses": [
     "sk-lem-base-field-cd",
-    "sk-def-cd",
-    "sk-def-sf-setting",
-    "sk-def-sfb-dc-setting"
+    "sk-def-cd"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "opening paragraph: finiteness of the two cohomological dimensions"
+    "place": "opening paragraph: target and source filtrations and finite cohomological dimensions"
    }
   },
   {
-   "text": "Fix such an $a$ and a lisse $\\Lambda_S$-module $L$. Apply [det-uniform-constructible-ext-rational] with these $a,L$ and an arbitrary locally closed $b:T\\hookrightarrow X$ and lisse $\\Lambda_T$-module $M$. Its displayed conclusion is $\\Ext^q_\\Lambda(a_!L,b_!M)=0$ for $q>c_a$, for both $\\Lambda=E$ and $\\Qlb$. Use the uniform assertion in that statement: $c_a$ does not depend on $b$ or $M$. The finite stratifications in that lemma are the preparation for its stratum calculation; the formula there is written for these $a_!L,b_!M$. In particular this use does not assume a global integral lattice in an arbitrary lisse rational sheaf. The integral inputs identify the two extra degrees in the stated estimate: [det-uniform-constructible-ext-torsion](2) has cutoff $\\operatorname{cd}_\\ell(j)+\\operatorname{cd}_\\ell(S)+1$, and [det-uniform-constructible-ext-integral] has cutoff $c_a$. Here $X$ is a standing scheme by Step 1, $\\Lambda=E$ or $\\Qlb$ is admissible, and $i:Z\\hookrightarrow X$ is closed with open complement $j$, so the hypotheses of [sk-lem-formal-closed-support] hold. Its support fiber formula in part (1) and the limit compatibility in [sk-lem-formal-closed-support-ii] are the support and inverse-limit constructions occurring in this calculation; the torsion and integral estimates are taken from their statements, not reconstructed from unstated completeness assertions.",
+   "text": "For a locally closed lisse source, factor its immersion through its scheme-theoretic image and apply the repaired rational stratum estimate. Use its fixed source refinement and its maximum cutoff, independent of the target. Convert this finite WithTop natural cutoff to a natural number. No source-model global lattice is assumed.",
    "uses": [
-    "det-uniform-constructible-ext-rational",
-    "det-uniform-constructible-ext-torsion",
-    "det-uniform-constructible-ext-integral",
-    "sk-lem-formal-closed-support",
-    "sk-lem-formal-closed-support-ii"
+    "det-uniform-constructible-ext-rational"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "Lattices; Torsion targets; Integral targets; Inverting pi_E; The case Lambda=Qlb (the existing rational stratum lemma packages the last two passages)"
+    "place": "opening paragraph: target and source filtrations and finite cohomological dimensions"
    }
   },
   {
-   "text": "Keep $a,L$ fixed and let $N$ be any constructible target. By [sk-lem-coefficient-heart](1,3), choose a finite filtration $0=N_0\\subset\\cdots\\subset N_r=N$ by sheaves, with $G_t=N_t/N_{t-1}=b_{t,!}M_t$ and all inclusions and quotient maps exact in the ambient module category. Induct on $t$ on the assertion that $\\Ext^q_\\Lambda(a_!L,N_t)=0$ for every $q>\\max(0,c_a)$. For $t=0$ this is additivity of Ext, as defined in [def-pc-ext]. At the induction step [lem-sc-abelian-ext-covariant-exact], in the abelian category of all $\\Lambda_X$-module sheaves, gives the exact segment $\\Ext^q(a_!L,N_{t-1})\\to\\Ext^q(a_!L,N_t)\\to\\Ext^q(a_!L,G_t)$. Both end groups vanish, the first by induction and the second by Step 2, so the middle group is zero. Thus the same bound works for all $N$, independently of the length and strata of its filtration. These are Ext groups in the ambient derived category, by [def-pc-ext], not Ext groups formed in the constructible heart.",
+   "text": "Fix a degree above that cutoff. The coefficient-heart filtration writes each target as finite extensions of locally closed lisse pieces. Covariant Ext exactness and zero-object vanishing prove the same bound for every constructible target. Then fix the source filtration, take the finite maximum of its natural bounds, and use contravariant Ext exactness to prove uniformConstructibleExt_exists. Isomorphisms of quotients are handled by composition with degree-zero Ext classes; bottom and top subobjects are transported by their canonical isomorphisms.",
    "uses": [
     "sk-lem-coefficient-heart",
     "lem-sc-abelian-ext-covariant-exact",
-    "def-pc-ext"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "opening paragraph: finite filtration of the target and its common bound"
-   }
-  },
-  {
-   "text": "Now take $C\\in\\Cons(X,\\Lambda)$ and fix once and for all a filtration $0=C_0\\subset\\cdots\\subset C_m=C$ from [sk-lem-coefficient-heart](3), with $C_s/C_{s-1}=a_{s,!}L_s$. Set $d_C=\\max(\\{0\\}\\cup\\{\\max(0,c_{a_s}):1\\le s\\le m\\})$. This is finite by Step 1, depends on the chosen filtration of $C$ alone, and is nonnegative. For every constructible $N$ and $q>d_C$, induct on $s$. The base $C_0=0$ has zero Ext by additivity [def-pc-ext]. For the short exact sequence $0\\to C_{s-1}\\to C_s\\to a_{s,!}L_s\\to0$, [lem-coef-ext-contravariant-six-term] gives $\\Ext^q(a_{s,!}L_s,N)\\to\\Ext^q(C_s,N)\\to\\Ext^q(C_{s-1},N)$. Step 3 and the induction hypothesis kill the end groups, hence $\\Ext^q(C_s,N)=0$. At $s=m$ this proves the claim, simultaneously for every $N$. For $C=0$ the empty filtration gives $d_C=0$. If $C=a_!L$, omit this last source filtration and apply Step 3 directly: its cutoff is the stated $c_a$ (with a nonnegative bound chosen if the source is zero).",
-   "uses": [
-    "sk-lem-coefficient-heart",
     "lem-coef-ext-contravariant-six-term",
     "def-pc-ext"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-    "place": "opening paragraph: finite filtration of the source, maximum of the finitely many bounds; statement: the single-stratum bound"
+    "place": "opening paragraph: target and source filtrations and finite cohomological dimensions"
+   }
+  },
+  {
+   "text": "UNRESOLVED / STATEMENT-DISPUTED: the second clause asks for the original unrefined cutoff for every lisse rational source. The repaired rational lemma only gives a refined maximum in general, and gives the original cutoff conditional on a global integral lattice in its fixed source model. That hypothesis is absent here. The inequality from the refined maximum to the original cutoff is not supplied and the rational node records it as invalid in general. The Lean theorem uniformConstructibleExt remains sorry with its original statement unchanged; this is a partial delivery, not a proof or decomposition of that theorem.",
+   "uses": [
+    "det-uniform-constructible-ext-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "opening paragraph: target and source filtrations and finite cohomological dimensions"
    }
   }
  ],
  "proof_deps": [
   "def-pc-ext",
-  "det-uniform-constructible-ext-integral",
   "det-uniform-constructible-ext-rational",
-  "det-uniform-constructible-ext-torsion",
   "lem-coef-ext-contravariant-six-term",
   "lem-sc-abelian-ext-covariant-exact",
   "sk-def-cd",
-  "sk-def-sf-setting",
-  "sk-def-sfb-dc-setting",
   "sk-lem-base-field-cd",
-  "sk-lem-coefficient-heart",
-  "sk-lem-formal-closed-support",
-  "sk-lem-formal-closed-support-ii"
+  "sk-lem-coefficient-heart"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
-  "place": "opening filtration argument; stratum calculation via the existing detail statements"
+  "place": "opening paragraph: target and source filtrations and finite cohomological dimensions",
+  "note": "X9 partial stage-3 proof: existence and cutoff finiteness compiled; original explicit-cutoff clause disputed and unproved."
  },
  "mathlib_searches": [
   {
@@ -266,7 +254,12 @@
   "branch": "newtargets-dag",
   "by": "Q11",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt_exists",
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt_cutoff",
+   "AlgebraicGeometry.ProEtale.uniformConstructibleExt"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -275,5 +268,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Read node, blueprint _section/proof and det-* lemmas, all 8 stmt_deps with their Lean (cohomologicalDimension/relativeCohomologicalDimension, ConstantModelConstructible, condensedRingObj, Abelian.Ext, FiniteFieldDatum, coefficientHeart/IsLisseCoefficientModule (finite free locally), formalClosedSupportAssertions, compactificationOverField). Lean matches clause by clause: Λ=E⊂Q̄ℓ finite or Q̄ℓ as in coefficientHeart; X separated finite type over F_q or its closure per proof step 1 (needed for finite cd); ∀C ∃d:ℕ ∀N ∀q>d Subsingleton of ambient Ext; second conjunct gives the exact finite cutoff cd(j)+cd(S)+2 for i_*v_!L with range i = complement of range j; the extra qcqs binders hold automatically on Noetherian X. Edge cases (C=0, N=0, empty X/S, extreme factorizations, L=0, q=d) and universes checked. No definitions, proof only sorry, docstrings carry source/blueprint and proof plan, lean.statement matches the file exactly, node diff is lean-only, report has both sections. nt_compile --json reproduced clean (exit 0, 12.0 s); probe gives axioms propext/sorryAx/Classical.choice/Quot.sound. No findings; second reading is a disclosed self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261019T034351-L-425989",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
