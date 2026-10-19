@@ -1,0 +1,120 @@
+{
+ "id": "lem-trf-proetale-sheaf-equivalence-zariski-local",
+ "kind": "statement",
+ "title": "Direct-image equivalence is local on the target",
+ "statement": "For a scheme morphism r:X→Y and an open cover U_i→Y, suppose the actual direct image on set-valued pro-etale sheaves is an equivalence for each pullback X×_Y U_i→U_i. Then the actual direct image for r is an equivalence.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AB, immediate reduction to affine targets; sites.tex Tag 03CF"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For the square over each open, the square isomorphism of direct images has an invertible mate along the localization adjunctions, by weakly etale base change. Its second mate along the vertical inverse/direct-image adjunctions is invertible: the iterated-mate formula identifies it with the conjugate of the square isomorphism. The unit and counit mate identities express the restrictions of the global unit and counit as composites of these invertible maps and the local unit/counit. Thus both restricted components are isomorphisms.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-coef-adjunction-equivalence-counit-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open cover and its base change are jointly surjective weakly etale covers. Restriction to these opens detects isomorphisms, so the global unit and counit are isomorphisms. Their adjunction is consequently an equivalence, and its right adjoint is an equivalence.",
+   "uses": [
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-coef-adjunction-equivalence-counit-iso",
+  "lem-sfb-sheaf-cover-local-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AB, immediate reduction to affine targets; sites.tex Tag 03CF; categorical realization by J4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isEquivalence.*(lowerStar|sheafPushforward)|[Uu]niversal[Hh]omeomorph",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean. Types read: generic site equivalences require a dense-subsite hypothesis; no universal-homeomorphism pro-etale theorem for sets. The pinned source etale equivalence and dense affine basis are used below.",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic tools used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDenseSubsite\"",
+   "results": "12 hits: CategoryTheory.Functor.IsDenseSubsite, CategoryTheory.Functor.IsDenseSubsite.isCoverDense, CategoryTheory.Functor.IsDenseSubsite.isCoverDense', CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful, CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful', CategoryTheory.Functor.IsDenseSubsite.isLocallyFull, CategoryTheory.Functor.IsDenseSubsite.isLocallyFull', CategoryTheory.Functor.IsDenseSubsite.coverPreserving. Types read: generic site equivalences require a dense-subsite hypothesis; no universal-homeomorphism pro-etale theorem for sets. The pinned source etale equivalence and dense affine basis are used below.",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic tools used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universal homeomorphism induces an equivalence on affine ind etale schemes and on pro etale sheaves of sets",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, RingHom.Etale.respectsIso, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.homEquiv_symm_apply, Algebra.Etale.of_equiv, StandardEtalePresentation.mapEquiv. Types read: generic site equivalences require a dense-subsite hypothesis; no universal-homeomorphism pro-etale theorem for sets. The pinned source etale equivalence and dense affine basis are used below.",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal homeomorphism induces an equivalence of categories of proetale sheaves of sets",
+   "results": "8 hits: TopCat.Presheaf.presheafEquivOfIso, TopCat.Presheaf.presheafEquivOfIso_functor_obj_map, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, TopCat.Presheaf.presheafEquivOfIso_functor_map_app, TopCat.Presheaf.presheafEquivOfIso_functor_obj_obj, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_map. Types read: generic site equivalences require a dense-subsite hypothesis; no universal-homeomorphism pro-etale theorem for sets. The pinned source etale equivalence and dense affine basis are used below.",
+   "date": "2026-10-19",
+   "verdict": "no exact match; generic tools used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSheafTopologicalInvariance",
+  "date": "2026-10-19",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-proetale-topological-invariance",
+   "place": "Tag 09AB, immediate reduction to affine targets; sites.tex Tag 03CF",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-topology",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSheafEquivalenceZariskiLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSheafEquivalenceZariskiLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSheafDirectImage_isEquivalence_of_openCover",
+  "statement": "theorem proEtaleSheafDirectImage_isEquivalence_of_openCover {X Y : Scheme.{u}}\n    (r : X ⟶ Y) (U : Y.OpenCover)\n    (hU : ∀ i : U.I₀,\n      (proEtaleSheafDirectImage (pullback.snd r (U.f i))\n        (Type (u + 1))).IsEquivalence) :\n    (proEtaleSheafDirectImage r (Type (u + 1))).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261019T002622-L-2164718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261019T002622-L-2164718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
