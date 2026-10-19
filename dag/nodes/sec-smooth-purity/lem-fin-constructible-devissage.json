@@ -25,80 +25,83 @@
  ],
  "proof": [
   {
-   "text": "We prove the assertion simultaneously for all finite-type $k$-schemes by induction on dimension, which is finite by [lem-kun-dimension-finite-type]; the empty scheme is the initial case, with $m=0$. For nonempty $X$, apply [fin2-lem-lisse-dense-open] to obtain an open immersion $j:U\\hookrightarrow X$ such that $L=j^{-1}F$ is lisse and the closed complement $i:Z\\hookrightarrow X$ has $\\dim Z<\\dim X$. The complement $Z$ is again finite type over $k$: intersect a finite affine finite-type cover $\\operatorname{Spec}B$ of $X$ with $Z$ to obtain the quotient algebras $B/I$. The coefficient convention is inherited by $Z$, since the image of an invertible $N$ is invertible in every quotient.",
+   "text": "Finite type over the field makes X Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Let P on module sheaves on X mean being isomorphic to the canonical closure extension of a lisse sheaf on a locally closed constructible stratum. P is invariant under isomorphism by composing the witness isomorphisms. Work in its finite-filtration closure. Prove simultaneously for every closed immersion i:Z→X and every constructible G on Z that i_*G belongs to this closure, by Noetherian induction on the closed set range(i). For empty Z the sheaf and its pushforward are zero. The finite-value and finite-stalk constructibility predicates agree by [lem-weil-pbc-constructible-etale-module-sheaf-comparison].",
    "uses": [
-    "lem-kun-dimension-finite-type",
-    "fin2-lem-lisse-dense-open"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-    "place": "Proof, first paragraph"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-constructible-devissage.proof.md",
+    "place": "Dense lisse open, open-closed exact sequence, closed pushforward and inverse-image filtration paragraphs"
    }
   },
   {
-   "text": "For the complementary open and closed immersions, [lem-weil-pbc-open-closed-short-exact] gives the exact sequence\n$$0\\longrightarrow j_!j^{-1}F\\longrightarrow F\\longrightarrow i_*i^{-1}F\\longrightarrow0.$$",
+   "text": "Choose a dense lisse open V in Z by [prop-constructible-generic-constancy]. Apply [lem-weil-pbc-open-closed-short-exact] for V and its reduced closed complement, and push the sequence to X. This pushforward is exact by [lemma-weil-pbc-finite-direct-image-exact], since a closed immersion is finite. The restriction to the complement is constructible by [prop-constructible-pullback]. Its composite closed immersion into X has strictly smaller image: density gives a point in V when Z is nonempty, and injectivity of i prevents that point from lying in the image of the complement. Induction and the composition isomorphism of [def-weil-pbc-direct-image] put the third term in the finite-filtration closure.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-    "place": "Proof, second paragraph"
-   }
-  },
-  {
-   "text": "The inverse image $i^{-1}F$ is constructible on $Z$ by [prop-constructible-pullback], applied in the category of $\\Lambda$-module sheaves. Apply the induction hypothesis to obtain $0=H_0\\subset\\cdots\\subset H_t=i^{-1}F$ on $Z$, with quotients $(b_s)_*(v_s)_!M_s$, where $v_s:T_s\\hookrightarrow C_s$ is open into the closure of its stratum and $b_s:C_s\\hookrightarrow Z$ is closed. The statement of [lem-cbc-open-closed-recollement] explicitly asserts that direct image of a closed immersion is exact for the finite ring $\\Lambda$. Thus $G_s=i_*H_s$ is a filtration $0=G_0\\subset\\cdots\\subset G_t=i_*i^{-1}F$, and $G_s/G_{s-1}\\cong i_*(b_s)_*(v_s)_!M_s$.",
-   "uses": [
+    "prop-constructible-generic-constancy",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
     "prop-constructible-pullback",
-    "lem-cbc-open-closed-recollement"
+    "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-    "place": "Proof, third paragraph"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-constructible-devissage.proof.md",
+    "place": "Dense lisse open, open-closed exact sequence, closed pushforward and inverse-image filtration paragraphs"
    }
   },
   {
-   "text": "We check the locally closed extension notation for these quotients and for $A=j_!L$. For the strata of $Z$, the composite $i b_s:C_s\\hookrightarrow X$ is closed: on affine opens the corresponding surjective ring maps compose to a surjective map [def-weil-closed-immersion]. It is the closure of $T_s$ in $X$, since the kernel defining this closure is the inverse image in $\\mathcal O_X$ of the kernel defining $C_s$ in $\\mathcal O_Z$. By the section formula [def-weil-pbc-direct-image], $i_*(b_s)_*Q=(i b_s)_*Q$: on $W\\to X$ both have value $Q(W\\times_X C_s)$, with the same restrictions and coefficient actions. Hence every quotient from step 3 has the required form. For the first stratum $U$, let $a:C\\hookrightarrow X$ be its closure, $u:U\\hookrightarrow C$ its open inclusion, and $w:V=X\\setminus C\\hookrightarrow X$. Here $C\\times_X U=U$, since the kernel defining $C$ restricts to zero on $U$. Apply [lem-cbc-extension-zero-base-change], using its finite-module clause concentrated in degree zero, first along $w$ and then along $a$: since $V\\times_XU$ is empty, $w^{-1}A=0$ (the only module sheaf on the empty site is zero); and $a^{-1}A\\cong u_!L$. The short exact sequence [lem-weil-pbc-open-closed-short-exact] for the pair $(V,C)$ applied to $A$ therefore gives $A\\cong a_*a^{-1}A\\cong a_*u_!L$, which is precisely the closure convention in the statement. This argument does not assume that the open supplied in step 1 is dense in every component. The initial stratum $U$ is open in $X$, and a stratum locally closed in the closed subscheme $Z$ is locally closed in $X$: if it is $O\\cap D$ in $Z$, write $O=Z\\cap O_X$ with $O_X$ open and $D$ closed in $X$. All these locally closed subsets are constructible because $X$ is finite type over a field, hence Noetherian, as recorded in [def-weil-constructible-subset].",
+   "text": "For c=V.ι≫i, quasi-compactness and immersion give an open immersion c.toImage. The kernel inequality i.ker≤c.ker gives a unique factor q:c.image→Z of the closed immersion c.imageι through i; q is closed and c.toImage≫q=V.ι, checked after the monomorphism i. For any factorization j=a≫q with j,a open and q closed, the square with identity on the source is cartesian. Extension-by-zero base change [lem-cbc-extension-zero-base-change] identifies q^*j_!L with a_!L. The unit j_!L→q_*q^*j_!L is an isomorphism: its restriction to q is an isomorphism by the closed counit and the triangle identity; on the complementary open both objects vanish, by [lemma-openclosed-vanishing-lowershriek] and [lemma-openclosed-vanishing-lowerstar]. Joint conservativity of these restrictions then applies. Thus j_!L≅q_*a_!L. Push this isomorphism along i and use composition of direct images to obtain i_*V_!L≅c.imageι_*c.toImage_!L. The image of c is locally closed and therefore constructible in Noetherian X. This makes the first term a P-object.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-pbc-direct-image",
     "lem-cbc-extension-zero-base-change",
-    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-openclosed-vanishing-lowershriek",
+    "lemma-openclosed-vanishing-lowerstar",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-etale-sheaf-jointly-surjective-conservative",
     "def-weil-constructible-subset"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-    "place": "Proof, final paragraph: identification of the pushed quotients with extension by zero; closure comparison written out using extension-by-zero base change (Stacks lemma-shriek-base-change) and Tag 095L (lemma-ses-associated-to-open)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-constructible-devissage.proof.md",
+    "place": "Dense lisse open, open-closed exact sequence, closed pushforward and inverse-image filtration paragraphs"
    }
   },
   {
-   "text": "Let $q:F\\twoheadrightarrow i_*i^{-1}F$ be the epimorphism of step 2, whose kernel is $A=j_!L$. Set $F_0=0$ and $F_{s+1}=q^{-1}(G_s)$ for $0\\le s\\le t$. Then $F_1=A$, $F_{t+1}=F$, and $F_1/F_0=A$. For $1\\le s\\le t$, restriction of the epimorphism $q$ to the inverse image $q^{-1}(G_s)$ is an epimorphism onto $G_s$; its composite onto $G_s/G_{s-1}$ has kernel $q^{-1}(G_{s-1})=F_s$. The cokernel universal property in an abelian category therefore gives $F_{s+1}/F_s\\cong G_s/G_{s-1}$. Step 4 identifies all these factors with extensions from lisse sheaves on locally closed constructible subschemes of $X$, so $m=t+1$ works. If $t=0$, this is just $0\\subset A=F$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Combine the two outer terms by extension closure of the finite-filtration closure. The source-library ObjectProperty.filtrationClosure constructs this by inverse images under the quotient epimorphism, exactly as in the source. Take i=id_X and transport by lowerStarId. The proved subobject_filtration_of_closure helper in [lem-pc-s3-finite-filtration-refinement] converts this closure membership into a monotone finite chain of subobjects with bottom zero, top F and consecutive cokernels satisfying P. Unpack P for each quotient. This yields precisely the stated witnesses and covers empty schemes and zero-length filtrations.",
+   "uses": [
+    "lem-pc-s3-finite-filtration-refinement"
+   ],
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-    "place": "Proof, final paragraph: take inverse images under the quotient and prepend the open term; abelian subquotient argument written out"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-constructible-devissage.proof.md",
+    "place": "Dense lisse open, open-closed exact sequence, closed pushforward and inverse-image filtration paragraphs"
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-dimension-finite-type",
-  "fin2-lem-lisse-dense-open",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "prop-constructible-generic-constancy",
   "lem-weil-pbc-open-closed-short-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
   "prop-constructible-pullback",
-  "lem-cbc-open-closed-recollement",
-  "def-weil-closed-immersion",
   "def-weil-pbc-direct-image",
+  "def-weil-closed-immersion",
   "lem-cbc-extension-zero-base-change",
-  "def-weil-constructible-subset"
+  "lemma-openclosed-vanishing-lowershriek",
+  "lemma-openclosed-vanishing-lowerstar",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "def-weil-constructible-subset",
+  "lem-pc-s3-finite-filtration-refinement"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-constructible-devissage.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-constructible-devissage.proof.md",
+  "place": "Proof implemented by C5 with Noetherian induction on closed supports and the existing finite-filtration closure API; 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -227,5 +230,15 @@
   "by": "Q08",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261019T093307-L-2290319",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
