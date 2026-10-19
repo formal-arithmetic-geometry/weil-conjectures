@@ -30,9 +30,48 @@
   "lem-weil-derived-limit-products-core",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The exterior power of the diagonal generator map commutes with Koszul contraction. Its zeroth exterior power fixes the coefficient unit. The total-tensor summand formula and naturality of the right unitor show that the tensor units are compatible with the tower transitions. By the product universal property their composite with one minus shift is zero, proving completedKoszulLift_relation with zero homotopy. The tensor-unit differential, transition and naturality calculations are proved abstractly in an additive monoidal category, then specialized, so no change to the concrete tensor definitions is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The cohomologically reindexed Koszul complex is bounded above by zero and its terms are projective exterior powers, hence flat. Apply the module bounded-above flat K-flat criterion, then the constant-realization K-flat clause and preservation of K-flatness by ordinary coefficient extension. Tensoring a quasi-isomorphism with the resulting complex is a quasi-isomorphism, by the tensor/mapping-cone isomorphism.",
+   "uses": [
+    "lem-sfb-constant-realization-derived-scalar-extension",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the tensor maps, their product maps, and the arrow functor of minus one-minus-shift. Exact countable products imply exact discrete-natural limits, so the limit of the tensor quasi-isomorphisms is a quasi-isomorphism. The morphism of mapping-cone distinguished triangles and the two-out-of-three lemma show that its mapping-cone map is a quasi-isomorphism. Shifting by minus one gives the explicit mapping-fiber functor.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the tensor units gives naturality of the product unit. Compute the zero-homotopy cocone lift on each term using the cocone biproduct identity. Naturality of the cone map then proves naturality of completedKoszulUnitComplex. Localize the fiber functor and this natural transformation by Localization.lift and Localization.liftNatTrans. The canonical factorization isomorphism cancels its inverse to give exactly the required equation for the descended unit.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-realization-derived-scalar-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-intrinsic-completion.md",
+  "place": "Explicit Koszul mapping-fiber construction and descent paragraph, order 1247; Lean proof by M3 follows the existing declaration docstrings, using Mathlib localization and the source-library mapping-cone and exact-limit APIs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -187,24 +226,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "M5",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261019T005344-L-2756547",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.completedIntrinsicCompletion_descends",
-   "AlgebraicGeometry.Scheme.completedKoszulConstant_additive",
-   "AlgebraicGeometry.Scheme.completedKoszulLift_relation",
-   "AlgebraicGeometry.Scheme.completedKoszulOne_exists",
-   "AlgebraicGeometry.Scheme.completedKoszulSheafUnitZero_closed",
-   "AlgebraicGeometry.Scheme.completedKoszulTensorUnitComponent_comm",
-   "AlgebraicGeometry.Scheme.completedKoszulTransition_comm"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.completedIntrinsicCompletion_descends",
-   "AlgebraicGeometry.Scheme.completedKoszulLift_relation"
-  ]
+  "landing": "20261019T192804-L-1868170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
