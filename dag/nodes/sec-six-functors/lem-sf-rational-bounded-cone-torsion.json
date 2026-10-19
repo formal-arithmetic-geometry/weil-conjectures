@@ -14,11 +14,11 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $\\pi=\\varpi_E$, $r=\\pi^N$, and $\\mathcal A=\\operatorname{Sh}(X_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,X})$. By the completed-coefficient definition, $\\mathcal A$ is the abelian category of modules over the completed sheaf, and $C$ belongs to its derived category through the full inclusion defining $D^b_c(X,A)$. The constant compatible sections of $A/\\pi^n$ define $A\\to\\widehat{\\mathcal O}_{E,X}$, so $a\\in A$ acts on a module sheaf morphism sectionwise by $(af)(s)=a f(s)$. Module linearity gives $(ag)f=a(gf)=g(af)$, making $\\mathcal A$ $A$-linear. Apply the linear-abelian-derived-category lemma: $D(\\mathcal A)$ and its shifts are $A$-linear, and localization from complexes is $A$-linear. Thus the scalar action used below is the termwise scalar action on any representative complex, and it commutes with every derived morphism.",
+   "text": "Put A = O_E, pi = uniformizer and r = pi^N. Use the canonical constant-section Linear A structure on the ambient derived category and the inherited full-subcategory structure from lem-weil-integral-constructible-linear. The proof uses only bilinearity of composition for this particular structure: no identification with a separately induced Linear structure on complexes or cohomology is needed. Choose a complex K and an isomorphism Q(K) ≅ C by essential surjectivity of the derived localization. Scalar endomorphisms commute with all morphisms by bilinearity, so their vanishing on cohomology transports across this isomorphism.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
+    "lem-weil-integral-constructible-linear",
     "def-weil-derived-complete-integral-detailed",
-    "lem-weil-linear-abelian-derived-category",
+    "def-weil-abstract-derived-category",
     "def-weil-linear-category"
    ],
    "elementary": false,
@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "Choose a complex representing $C$ and put $K_q=\\tau_{\\leq q}C$ in the ambient $D(\\mathcal A)$ for $u-1\\leq q\\leq v$. The truncation-cohomology lemma says that $H^i(K_q)=H^i(C)$ for $i\\leq q$ and is zero for $i>q$. Consequently all cohomology of $K_{u-1}$ vanishes: for $i\\leq u-1$ use the assumed lower bound, and for $i>u-1$ use the truncation calculation. The map from its representing complex to the zero complex is therefore a quasi-isomorphism, so $K_{u-1}\\simeq0$ by the definition of the derived category. Likewise the inclusion $K_v\\to C$ is a quasi-isomorphism: it is an isomorphism on cohomology in degrees $i\\leq v$, and both cohomologies vanish for $i>v$. Hence $K_v\\simeq C$. All these truncations are taken in $D(\\mathcal A)$; no closure assertion for the integral constructible subcategory is needed.",
+   "text": "Put K_q = Q(tau_{≤q} K). The cohomology of K_q maps isomorphically to that of Q(K) in degrees d≤q, and vanishes in degrees d>q. Consequently K_{a-1} is both ≤a-1 and ≥a in the standard t-structure, so is zero. The same calculations and the assumed upper bound show K_b→Q(K) is an isomorphism on every cohomology object, hence an isomorphism. These truncations are ambient; no constructibility assertion is required.",
    "uses": [
     "lem-weil-pbc-truncation-cohomology",
     "def-weil-abstract-derived-category"
@@ -40,10 +40,12 @@
    }
   },
   {
-   "text": "For each $u\\leq q\\leq v$, the successive-truncation-triangle lemma gives a distinguished triangle $K_{q-1}\\xrightarrow{i_q}K_q\\xrightarrow{j_q}S_q\\to K_{q-1}[1]$, where $S_q=H^q(C)[-q]$ is represented by the complex with $H^q(C)$ as its only nonzero term, in degree $q$. The assumption $rH^q(C)=0$ says that $r\\operatorname{id}$ on that complex is the zero cochain map. By the scalar linearity of localization established in step 1, $r\\operatorname{id}_{S_q}=0$ in $D(\\mathcal A)$.",
+   "text": "Use the distinguished successive-truncation triangle K_{q-1}→K_q→S_q→K_{q-1}[1], with S_q the single object H^q(K) in degree q. The map H^q(K_q)→H^q(QK) is an isomorphism; naturality of the scalar endomorphism and cancellation show H^q(r id_{K_q})=0. The long exact cohomology sequence makes H^q(K_q)→H^q(S_q) epi, since H^{q+1}(K_{q-1})=0. Naturality and epi cancellation therefore give H^q(r id_{S_q})=0. Fullness of the single functor and its natural isomorphism with the identity after H^q imply that H^q detects zero morphisms between single objects, so r id_{S_q}=0. The generic fully faithful single-functor Mathlib instances apply at arbitrary degree (the degree-zero assertion recorded by lem-weil-pbc-derived-single-fully-faithful shifted to q). This avoids assuming that the chosen ambient scalar structure equals a separately induced structure.",
    "uses": [
     "lem-weil-pbc-truncation-triangle",
-    "lem-weil-linear-abelian-derived-category"
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-abstract-derived-category",
+    "def-weil-linear-category"
    ],
    "elementary": false,
    "source": {
@@ -52,7 +54,7 @@
    }
   },
   {
-   "text": "Induct on the integer $q$ from $u-1$ to $v$, with claim $r^{q-u+1}\\operatorname{id}_{K_q}=0$. The base exponent is zero and $K_{u-1}\\simeq0$ by step 2, so its identity is zero. For the successor $q\\geq u$, put $s=r^{q-u}$; the induction hypothesis is $s\\operatorname{id}_{K_{q-1}}=0$. Bilinearity gives $(s\\operatorname{id}_{K_q})\\circ i_q=i_q\\circ(s\\operatorname{id}_{K_{q-1}})=0$. Apply clause (i) of Hom-out-of-triangle exactness to the triangle in step 3, with $W=K_q$ and $a=s\\operatorname{id}_{K_q}$. It supplies $h:S_q\\to K_q$ with $s\\operatorname{id}_{K_q}=h\\circ j_q$. Multiply by $r$ and use bilinearity and step 3: $r^{q-u+1}\\operatorname{id}_{K_q}=r(h\\circ j_q)=h\\circ(r\\operatorname{id}_{S_q})\\circ j_q=0$. This proves the successor and the induction.",
+   "text": "Induct on n≥0 with K_{a-1+n}, proving r^n id=0. The base is the zero object K_{a-1}. In the successor q=a+n, the induction hypothesis kills r^n id_{K_{q-1}}. Bilinearity shows i_q ≫ (r^n id_{K_q})=0. Hom-out-of-triangle exactness factors r^n id_{K_q} as j_q ≫ f. Multiply by r: r f = (r id_{S_q}) ≫ f = 0 by step 3, so r^{n+1} id_{K_q}=0.",
    "uses": [
     "lem-weil-pbc-hom-out-of-triangle-exact",
     "def-weil-linear-category"
@@ -64,7 +66,7 @@
    }
   },
   {
-   "text": "At $q=v$, step 4 gives $r^{v-u+1}\\operatorname{id}_{K_v}=0$. If $e:K_v\\xrightarrow{\\sim}C$ is the isomorphism of step 2, bilinearity gives $r^{v-u+1}\\operatorname{id}_C=e\\circ(r^{v-u+1}\\operatorname{id}_{K_v})\\circ e^{-1}=0$. Multiplying by $r$ yields $r^{v-u+2}\\operatorname{id}_C=0$, which is exactly $\\pi^{N(v-u+2)}\\operatorname{id}_C=0$. Both exponents are nonnegative since $u\\leq v$ and $N\\geq0$. The full inclusion defining $D^b_c(X,A)$ identifies its endomorphisms of $C$ with the ambient ones, and by the integral-linearity lemma the $\\mathcal O_E$-module structure of $D^b_c(X,A)$ is the restriction of the ambient one through the same constant-section map $\\mathcal O_E\\to\\Gamma(X_{\\mathrm{proet}},\\widehat{\\mathcal O}_{E,X})$ used in step 1, so this is also zero in its integral Hom $\\mathcal O_E$-module.",
+   "text": "Set n=(b-a+1).toNat; since a≤b, a-1+n=b. Step 4 kills r^n id_{K_b}. Conjugate through K_b≅Q(K)≅C using bilinearity, and multiply once more by r. Since (b-a+2).toNat=n+1 and (pi^N)^k=pi^(N*k), obtain the stated ambient identity. The integral constructible inclusion is full and its scalar action is inherited, so the same identity holds in End(C) in that subcategory.",
    "uses": [
     "def-weil-linear-category",
     "def-weil-derived-complete-integral-detailed",
@@ -77,7 +79,7 @@
    }
   },
   {
-   "text": "Let $m=N(v-u+2)$. By the rationalization definition, whose $\\mathcal O_E$-linear structure on $D^b_c(X,A)$ is that of the integral-linearity lemma (step 5), the identity of the rational image of $C$ is $\\operatorname{id}_C\\otimes1$ in $\\operatorname{End}_{D^b_c(X,A)}(C)\\otimes_AE$. The scalar-localization formula and the tensor balancing relation give $\\operatorname{id}_C\\otimes1=(\\pi^m\\operatorname{id}_C)\\otimes\\pi^{-m}=0$, using step 5; for $m=0$ the same equality uses $\\pi^0=1$. An object with zero identity is a zero object: every map out of it is $f\\circ\\operatorname{id}=0$, and every map into it is $\\operatorname{id}\\circ g=0$. Its rational image is therefore isomorphic to zero, as asserted.",
+   "text": "Let m=N*(b-a+2).toNat. The actual raw localized identity is 1 tensor id_C in Localization.Away(pi) tensor_A End(C). Put z=invSelf(pi)^m. The defining localization identity gives pi^m • z=1, including m=0. Tensor balancing gives 1 tensor id_C = (pi^m • z) tensor id_C = z tensor (pi^m • id_C)=0 by step 5. The zero-identity criterion then makes the localized image a zero object. No coefficient-field identification is needed.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-linear-scalar-localization",
@@ -91,22 +93,21 @@
   }
  ],
  "proof_deps": [
-  "def-weil-completed-integral-coefficients",
+  "lem-weil-integral-constructible-linear",
   "def-weil-derived-complete-integral-detailed",
-  "lem-weil-linear-abelian-derived-category",
+  "def-weil-abstract-derived-category",
   "def-weil-linear-category",
   "lem-weil-pbc-truncation-cohomology",
-  "def-weil-abstract-derived-category",
   "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-derived-single-fully-faithful",
   "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-integral-constructible-linear",
   "def-weil-rationalization-karoubi",
   "def-weil-linear-scalar-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Agent-written finite truncation induction, using Tags 08J5 (remark-truncation-distinguished-triangle), 0149 (lemma-representable-homological), 05RU (definition-unbounded-derived-category), and homology.tex Tag 0118 (section-truncations); rationalization as in the cited blueprint definition."
+  "place": "B3 Lean implementation of the same finite successive-truncation induction (Tags 08J5 and 0149), with single-object detection by Tag 06XS / Mathlib FullyFaithful.lean, homology bounds from homology.tex Tag 0118, and direct tensor balancing in the recorded raw scalar localization. No new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -259,5 +260,15 @@
   "by": "Q135",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T093254-L-2287490",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
