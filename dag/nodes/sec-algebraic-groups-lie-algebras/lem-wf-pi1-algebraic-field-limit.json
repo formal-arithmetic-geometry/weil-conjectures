@@ -20,56 +20,27 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be the set of finite intermediate fields of $L/K$, ordered by inclusion. It is a set since its elements are subsets of $L$, and is nonempty since $K\\in I$. The finite-subextension presentation of [lem-kun-algebraic-separable-smooth] makes it directed: any two finite subextensions lie in a finite subextension. Write $G_E=\\pi_1(X_E,\\bar x_E)$ and $G_L=\\pi_1(X_L,\\bar x)$. The hypotheses on $K,L,X_0$ are exactly those of [lem-wf-finite-etale-field-limit-descent], so its object and morphism descent assertions apply to this system. No normality or Galois hypothesis on $L/K$ is needed.",
+   "text": "Use the recorded finite-etale fibre functors directly. IsFundamentalGroup identifies each group model with its natural automorphisms via toAut_bijective and with its topological automorphism group via toAutHomeo. Finite intermediate fields have common finite upper bounds by the finite-dimensional compositum instance. No passage to finite locally constant sheaves is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
+   }
+  },
+  {
+   "text": "Construct transition fibre isomorphisms from pullbackFiberIso and the composition equation for fieldExtensionBaseMap. Their pointwise first-projection equation is immediate. Pullback pasting and naturality of the G_L action imply compatibility of the coordinate fundamentalGroupMaps. Thus the product-coordinate homomorphism R takes values in the stated infimum of equalizer subgroups and is continuous coordinatewise.",
    "uses": [
-    "lem-kun-algebraic-separable-smooth",
-    "lem-wf-finite-etale-field-limit-descent"
+    "lem-galois-pi1-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   },
   {
-   "text": "For $Y=X_L$ or $X_E$, use $F_Y(P)=|P_{\\bar x_Y}|$ on finite etale covers. By [thm-galois-lc-etale] the equivalence between finite etale covers and finite locally constant sheaves respects these fibre functors. Thus [def-galois-fibre-functor] identifies $G_Y$ with $\\operatorname{Aut}(F_Y)$, with the topology of evaluation on finite-cover fibres. Indeed an isomorphism of objects conjugates their evaluation coordinates by a fixed fibre bijection, and every object on either side of the equivalence is isomorphic to one in its image. The two families of evaluation coordinates therefore induce the same topology; one may throughout choose small skeletons, as in that definition.",
-   "uses": [
-    "thm-galois-lc-etale",
-    "def-galois-fibre-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
-   }
-  },
-  {
-   "text": "For $E\\subseteq E'$ let $t_{E',E}:G_{E'}\\to G_E$, and let $r_E:G_L\\to G_E$, be the continuous homomorphisms of [lem-galois-pi1-functoriality]. Its bijections $\\tau_P$ identify fibres of pullbacks with the original fibres by composing with the first projection. For an iterated pullback these identifications compose: both send a geometric point to its composite with the projections to the original cover. Consequently $t_{E'',E}=t_{E',E}\\circ t_{E'',E'}$ and $r_E=t_{E',E}\\circ r_{E'}$, since the actions agree on every finite-cover fibre. The map $R:g\\mapsto(r_E(g))_E$ therefore takes values in the subgroup $H$ of compatible families from the statement, is a group homomorphism, and is continuous: all its product coordinates are continuous, and $H$ has the subspace topology.",
-   "uses": [
-    "lem-galois-pi1-functoriality",
-    "def-galois-fibre-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
-   }
-  },
-  {
-   "text": "The map $R$ is injective. Suppose $r_E(g)=1$ for every $E$. For any finite etale $P\\to X_L$, clause (1) of [lem-wf-finite-etale-field-limit-descent] supplies $P_E\\to X_E$ and an isomorphism $\\alpha:(P_E)_L\\xrightarrow{\\sim}P$. Under the fibre bijection of [lem-galois-pi1-functoriality], $g$ acts on $F_L((P_E)_L)$ as $r_E(g)$ acts on $F_E(P_E)$, hence trivially. Naturality for $\\alpha$ makes its action on $F_L(P)$ trivial too. As this holds for every $P$, $g$ is the identity natural automorphism.",
-   "uses": [
-    "lem-wf-finite-etale-field-limit-descent",
-    "lem-galois-pi1-functoriality",
-    "def-galois-fibre-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
-   }
-  },
-  {
-   "text": "Fix $a=(a_E)_E\\in H$. For a finite etale $P\\to X_L$, choose $E,P_E,\\alpha$ as in descent clause (1). Write $\\tau_{E,P_E}:F_L((P_E)_L)\\to F_E(P_E)$ for the fibre bijection of [lem-galois-pi1-functoriality], and put $b=F_L(\\alpha)\\circ\\tau_{E,P_E}^{-1}$. Define the candidate permutation on $F_L(P)$ by $A_P=b\\circ(a_E)_{P_E}\\circ b^{-1}$. It is a permutation, since each factor is a bijection. This gives actual permutations on the given fibres; their independence of the model and their naturality are verified next.",
+   "text": "If R(g)=1, descend each cover P to a finite intermediate field using object descent. fundamentalGroupMap_smul shows g acts trivially on that pullback. Naturality along the model isomorphism gives trivial action on P. The non_trivial axiom of IsFundamentalGroup gives g=1.",
    "uses": [
     "lem-wf-finite-etale-field-limit-descent",
     "lem-galois-pi1-functoriality"
@@ -77,22 +48,22 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   },
   {
-   "text": "Enlarging a chosen model from $E$ to $E'\\supseteq E$ does not change $A_P$. Indeed compatibility gives $t_{E',E}(a_{E'})=a_E$. The action identity of [lem-galois-pi1-functoriality], applied to $P_E$, says that the permutation of $a_{E'}$ on the fibre of $(P_E)_{E'}$ is carried by $\\tau$ to $(a_E)_{P_E}$. The fibre bijection $b'$ for the enlarged model is the composite of $b$ with this same $\\tau$, by the projection formula checked in step 3. Substituting into $b'(a_{E'})_{(P_E)_{E'}}(b')^{-1}$ gives exactly $b(a_E)_{P_E}b^{-1}$.",
+   "text": "For a compatible family a, conjugate the natural automorphism given by its E-coordinate along pullbackFiberIso, giving an automorphism A_E of the pulled-back fibre functor. The projection identity for a pullback-pasting comparison e and fundamentalGroupMap_smul imply e intertwines A_E and A_Eprime. This applies also to the comparison isomorphisms furnished by morphism descent, whose projection equations are part of its statement.",
    "uses": [
     "lem-galois-pi1-functoriality"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   },
   {
-   "text": "The permutation is independent of all choices. Suppose also $\\beta:(Q_{E'})_L\\xrightarrow{\\sim}P$. Move both models to a common finite field $J$ by step 1; step 6 preserves their candidate permutations. Apply clause (2) of [lem-wf-finite-etale-field-limit-descent] to the morphism $\\beta^{-1}\\alpha:(P_J)_L\\to(Q_J)_L$. At some $J'\\supseteq J$ it is the pullback of a morphism $u:P_{J'}\\to Q_{J'}$. Let $b_P:F_{J'}(P_{J'})\\to F_L(P)$ and $b_Q:F_{J'}(Q_{J'})\\to F_L(P)$ be the two fibre identifications. The natural fibre bijections of [lem-galois-pi1-functoriality] give $F_{J'}(u)=b_Q^{-1}b_P$. Naturality of $a_{J'}$ gives $(a_{J'})_{Q_{J'}}F_{J'}(u)=F_{J'}(u)(a_{J'})_{P_{J'}}$. Substitution yields $b_P(a_{J'})_{P_{J'}}b_P^{-1}=b_Q(a_{J'})_{Q_{J'}}b_Q^{-1}$. Only a morphism $u$ is needed: we never assume that the descended morphism is an isomorphism of covers.",
+   "text": "A morphism between models over one field descends after enlargement. Its descended naturality equation transports along the comparison isomorphisms, so A_E commutes with every morphism between its limit models. Models over distinct fields are compared at their finite compositum using canonical pullback-pasting isomorphisms. Hence every morphism between any two limit models intertwines their component automorphisms.",
    "uses": [
     "lem-wf-finite-etale-field-limit-descent",
     "lem-galois-pi1-functoriality"
@@ -100,58 +71,39 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   },
   {
-   "text": "For any morphism $v:P\\to Q$ over $X_L$, choose models of both objects at a common field, and use descent clause (2) again to descend the morphism between these models after enlarging the field. Denote it by $v_J:P_J\\to Q_J$, with fibre identifications $b_P,b_Q$. Naturality of the pullback-fibre identifications in [lem-galois-pi1-functoriality] says $F_L(v)b_P=b_QF_J(v_J)$. The naturality equation for $a_J$ now gives $A_QF_L(v)=F_L(v)A_P$ after multiplying by $b_P^{-1}$ and $b_Q$. Thus $(A_P)_P$ is a natural automorphism $T(a)$ of $F_L$, hence an element of $G_L$ by step 2. Invertibility is objectwise; alternatively the same construction for $(a_E^{-1})_E$ gives its inverse.",
+   "text": "Choose a descended model for each cover P. Conjugate A_E by the fibre of the model isomorphism to get an automorphism of F(P). The previous all-models naturality equation, applied to the comparison morphism between any chosen pair, proves naturality. Applied to a comparison with an already descended object it proves the expected component formula. toAut_bijective supplies the corresponding g in G_L; fundamentalGroupMap_smul and that component formula give R(g)=a. Together with injectivity this makes R a group isomorphism.",
    "uses": [
     "lem-wf-finite-etale-field-limit-descent",
-    "lem-galois-pi1-functoriality",
-    "def-galois-fibre-functor"
+    "lem-galois-pi1-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   },
   {
-   "text": "For $P_E$ over $X_E$, compute $T(a)$ on $(P_E)_L$ using that very model and its identity isomorphism. Its action is $\\tau_{E,P_E}^{-1}(a_E)_{P_E}\\tau_{E,P_E}$; the action characterization of [lem-galois-pi1-functoriality] therefore gives $r_E(T(a))=a_E$ on every cover fibre. Hence $R(T(a))=a$. For $g\\in G_L$, either the same formula gives $T(R(g))_P=g_P$ for every descended model, or injectivity from step 4 gives $T(R(g))=g$. Since $R$ is a homomorphism, it is now a group isomorphism with inverse $T$.",
-   "uses": [
-    "lem-galois-pi1-functoriality",
-    "def-galois-fibre-functor"
-   ],
+   "text": "Each G_E is Hausdorff because toAutHomeo identifies it with the Hausdorff automorphism group of its finite-etale fibre functor. The product and its compatible-family subgroup are Hausdorff. A continuous bijection from compact G_L to that subgroup is a homeomorphism. Its forward map is definitionally R, so the required coordinate equation holds by reflexivity.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
-   }
-  },
-  {
-   "text": "Finally $T$ is continuous. For each fixed finite cover $P$ over $X_L$, fix once a model $E,P_E,\\alpha$ supplied by descent clause (1). Its evaluation coordinate $a\\mapsto T(a)_P$ is the composite $H\\to G_E\\to\\operatorname{Aut}(F_E(P_E))\\to\\operatorname{Aut}(F_L(P))$. The first map is the product coordinate restricted to $H$, the second is the evaluation map for the topology of [def-galois-fibre-functor], and the last is conjugation by the fixed bijection $b$ of step 5 between finite discrete sets. All are continuous. The evaluation topology of step 2 then makes $T$ continuous. Together with continuity of $R$ in step 3 this proves the asserted topological group isomorphism, with precisely the specified projection components and transition maps.",
-   "uses": [
-    "lem-wf-finite-etale-field-limit-descent",
-    "def-galois-fibre-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 0BTV, label lemma-limit, second assertion; explicit fibre-functor argument for the sentence The second statement is formal given the statement on categories"
+    "place": "Tag 0BTV, label lemma-limit, second assertion (fundamental group of a connected qcqs affine-transition inverse limit), specialized to the constant-field system X_E; X_L is its limit because L is the union of its finite intermediate fields."
    }
   }
  ],
  "proof_deps": [
-  "lem-kun-algebraic-separable-smooth",
   "lem-wf-finite-etale-field-limit-descent",
-  "thm-galois-lc-etale",
-  "def-galois-fibre-functor",
   "lem-galois-pi1-functoriality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0BTV, label lemma-limit, explicit expansion of its formal second assertion using the existing finite-etale descent node; no new geometric descent theorem"
+  "place": "Tag 0BTV, lemma-limit, second assertion: direct finite-etale fibre-functor descent argument; inverse continuity follows from compact-to-Hausdorff continuous bijectivity. Formalized by W2 on 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -317,5 +269,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The limit is the infimum of equalizer subgroups of the product, with inherited subtype topology. The existential transition fibre isomorphisms are uniquely specified on every point by their projection equation, so their fundamentalGroupMaps are the canonical transition maps. The last equation specifies the canonical limit map on every coordinate. Small fundamental-group models use the established IsFundamentalGroup interface."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261019T122644-L-481082",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
