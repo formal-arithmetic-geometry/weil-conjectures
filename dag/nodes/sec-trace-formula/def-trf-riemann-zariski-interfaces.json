@@ -1,0 +1,156 @@
+{
+ "id": "def-trf-riemann-zariski-interfaces",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The generic-scheme, model, compatible-point, and centred-valuation interfaces used to state the Riemann–Zariski refinement item; Temkin §3.2, pp. 15–17.",
+   "via": [
+    "lem-trf-qcqs-separable-riemann-zariski-refinement",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Riemann–Zariski point space, correspondence and lift predicates",
+ "statement": "Let $T$ be a scheme, let $L$ be a field, and let $\\eta:\\operatorname{Spec}L\\to T$ be a specified morphism [def-weil-affine-spectrum]. Use the generic $L$-schemes, $L$-models, $L$-quasi-models, model morphisms, centred valuation points and the push map of [def-trf-riemann-zariski-generic-models]; their generic schemes are integral [def-pc-integral-scheme], models are proper [def-weil-proper-morphism] and quasi-models separated, locally of finite type and quasi-compact [def-weil-finite-type-morphism].\nEvery model has its underlying quasi-model, with the same generic factorization.\nThe Riemann--Zariski point type $\\operatorname{Point}(T,L,\\eta)$ is the subtype\nof families of points, one on every model, compatible with all model morphisms;\nits topology is the infimum of the induced topologies of the model projections.\nEach generic scheme has a canonical field homomorphism from its function field\ninto $L$, induced by its generic map on the stalk at the generic point, and it is *finite separable over* a field map $K\\to L$ when there is a finite separable field map $K\\to k(X)$ whose composite with that canonical map\nis the given map.\n`Corresponds` relates a compatible point family to a centred valuation point $(V,c)$ when,\nfor every model, there is a morphism from $\\operatorname{Spec}V$ to that model\ncommuting with both structure maps and sending the closed point to the chosen\nmodel point. `LiftsTo` says the same existence condition for a quasi-model, without the closed-point condition.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "§3.2 opening definitions and Corollary 3.2.5, printed pp. 15–16"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-trf-riemann-zariski-generic-models"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "generic scheme model quasi-model valuation point compatible points Riemann Zariski definitions",
+   "results": "8 hits, all general scheme constructors or properness results; no matching Riemann–Zariski interface.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generic scheme proper model quasi-model compatible point family valuation point correspondence",
+   "results": "8 hits, all valuative-criterion or properness declarations; no existing GenericScheme, Model, QuasiModel, Point, or ValuationPoint interface.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GenericScheme, Model, QuasiModel, ValuationPoint, Corresponds",
+   "results": "0 hits; loogle reports unknown identifier GenericScheme.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RiemannZariski|GenericScheme|ValuationPoint in Mathlib/AlgebraicGeometry",
+   "results": "0 hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "GenericScheme|ValuationPoint|RiemannZariski in /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "No Riemann–Zariski declarations in the upstream WeilConjectures source.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "GenericScheme|ValuationPoint|RiemannZariski in /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "Exact declarations occur in lean/Sheaf/AlgebraicGeometry/RiemannZariskiFiniteRefinement.lean; this existing module is recorded below.",
+   "date": "2026-10-19",
+   "verdict": "match"
+  },
+  {
+   "tool": "rg",
+   "query": "def-trf-riemann-zariski-interfaces in dag/nodes",
+   "results": "No existing DAG node.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "rg",
+   "query": "RiemannZariski.(GenericScheme|Model|QuasiModel|ModelHom|ValuationPoint|Point|Corresponds|LiftsTo) in /home/ubuntu/weil-newtargets/dag/nodes",
+   "results": "def-trf-riemann-zariski-generic-models (Q111, landed 2026-10-19) already owns GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint and ValuationPoint.push in the same module; no definition node owns Model.toQuasiModel, Point, pointTopologicalSpace, fieldEmbedding, IsFiniteSeparableOver, Corresponds or LiftsTo (only the theorem node lem-trf-riemann-zariski-finite-refinement lists them).",
+   "date": "2026-10-19",
+   "verdict": "partial match: cite def-trf-riemann-zariski-generic-models for the six landed notions; this node records only the remaining seven."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-qcqs-separable-riemann-zariski-refinement",
+  "date": "2026-10-19",
+  "group": "Q13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement",
+  "declaration": "AlgebraicGeometry.RiemannZariski.Point",
+  "declarations": [
+   "AlgebraicGeometry.RiemannZariski.Model.toQuasiModel",
+   "AlgebraicGeometry.RiemannZariski.Point",
+   "AlgebraicGeometry.RiemannZariski.pointTopologicalSpace",
+   "AlgebraicGeometry.RiemannZariski.GenericScheme.fieldEmbedding",
+   "AlgebraicGeometry.RiemannZariski.GenericScheme.IsFiniteSeparableOver",
+   "AlgebraicGeometry.RiemannZariski.Corresponds",
+   "AlgebraicGeometry.RiemannZariski.ValuationPoint.LiftsTo"
+  ],
+  "statement": "def Point (T : Scheme.{u}) (L : Type u) [Field L] (η : Spec (.of L) ⟶ T)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "The existing public module defines the unrestricted model-to-quasi-model map, compatible-point type and its initial topology, function-field embedding, finite-separable predicate, valuation correspondence and lift predicate used by this item. GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint and ValuationPoint.push of the same module are owned by the landed def-trf-riemann-zariski-generic-models (cited in stmt_deps) and are not repeated here. The FiniteRefinement structure and finite_refinement theorem are not recorded or used. Narrowed by the stage-2 reviewer (re-applied on head a1bb8de988ec, whose base contains def-trf-riemann-zariski-generic-models) to avoid a second owner of Q111's landed declarations."
+ },
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1bb8de98",
+  "group": "Q13",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1bb8de98",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Head a1bb8de988ec is a rebase of e43f160175b0 with no content change (item .lean sha256 2b68e978 in all three heads; item node, new node and report byte-identical). e43f's FIX was refused at landing because def-trf-riemann-zariski-generic-models was not on its base (Q111 merged 00:36, base 00:30); this base (00:55) contains it. H12/H4: delivered def-trf-riemann-zariski-interfaces still lists 6 declarations owned by Q111's landed generic-models (GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint, push). FIX re-applies fixes/def-trf-riemann-zariski-interfaces.json: narrowed to the 7 unowned declarations (toQuasiModel, Point, pointTopologicalSpace, fieldEmbedding, IsFiniteSeparableOver, Corresponds, LiftsTo); declaration=Point with verbatim signature; stmt_deps + generic-models; TeX matches the Lean bodies; check_existing/check_record/check_new_node clean; live dag has no other owner of the seven. Item re-read: integral qcqs + IsSepClosure only; all clauses present incl. S0 iff; edge cases empty I/S0, unbounded height; 14-step docstring, sorry only; nt_compile --json exit 0, 15.7 s, no warnings. Advisory: generic-models is reached only transitively from the item."
+ }
+}

@@ -172,5 +172,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-d64fd51c0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and the Stacks sources in restricted.tex: 0AKJ (existence proof for A=C), 0ALQ(1), 0AJU(3), 0AJP, 0AJQ(1)(3), 0AJR, 0GAE and 0ALM including its snake-lemma proof. lem-per-etale-away-completed-cotangent-torsion states 0ALQ(1)+0AJU(3) for a finite type S over any Noetherian base; 'every presentation' is justified by 0GAE. Edge cases I=0, I=A and k[t][x]/(tx,x^2) hold. lem-per-completed-cotangent-transitivity states 0ALM with the C' hypotheses and 0GAE written out, and its leftmost term is H^-1 of the tensored complex. Step 1: the torsion node, Noetherian J and the mathlib leaf lem-weil-pbc-adic-completion-mod-ideal give the transitivity hypotheses. Step 2 (elementary): sigma∘i=id. Step 3: the zero-variable presentations of C over R (kernel 0) and over B (kernel K) are allowed; a zero H^-1(L_{C/R}) gives an injective C-linear map from K/K^2 to C⊗_B H^0. Step 4 (elementary): scalars agree because sigma(a_B)=a_C, and pure tensors generate, so J^c kills K/K^2. There is no cycle, no SGA citation and no route departure. Neither new node restates the item. lem-per-completed-etale-jacobian-torsion (finite E over a complete A) is the special case S=E of the new torsion node and does not duplicate it. Maintainer note: that node may cite the new one when it is split. Blueprint search for 'naive cotangent' and 'rig-etale' finds no node, and searches of all three kinds are recorded. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedRetractionConormalTorsion",
+  "declaration": "AdicCompletion.exists_pow_annihilates_completed_retraction_conormal",
+  "file": "lean/Sheaf/RingTheory/CompletedRetractionConormalTorsion.lean",
+  "statement": "theorem exists_pow_annihilates_completed_retraction_conormal (R : Type u) [CommRing R] [IsNoetherianRing R] (J : Ideal R) (S : Type u) [CommRing S] [Algebra R S] (hS : RingHom.FiniteType (algebraMap R S)) (hetale : Etale (Spec.map (CommRingCat.ofHom (algebraMap R S)) ∣_ ⟨(PrimeSpectrum.zeroLocus (J : Set R))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (J : Set R)).isOpen_compl⟩)) (σ : AdicCompletion (J.map (algebraMap R S)) S →ₐ[R] AdicCompletion J R) : ∃ c : ℕ, ∀ r ∈ J ^ c, ∀ x : (RingHom.ker σ.toRingHom).Cotangent, algebraMap R (AdicCompletion (J.map (algebraMap R S)) S) r • x = 0",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fec4a766c",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Q65 fec4a766: the AdicCompletion.exists_pow_annihilates_completed_retraction_conormal statement matches the node clause by clause (Noetherian R, ideal J, RingHom.FiniteType, Etale of the restriction over the complement of zeroLocus J, AdicCompletion J R and of J.map, R-algebra retraction σ, Ideal.Cotangent of ker σ, ∃ c ∀ r ∈ J^c, algebraMap r • x = 0). The R-algebra encoding of σ is equivalent to the node's completed-base-algebra maps since R is Noetherian, and matches Stacks 0AKJ and the consumers' forms. Only the item's lean field changed; the stmt_dep node files are identical to live; the statement field matches the file verbatim; docstrings are complete; lines ≤ 91 characters; the two plain imports are allowed by brief rule 7. The nt_compile --json per-file compile is clean (3.1 s). No findings."
  }
 }

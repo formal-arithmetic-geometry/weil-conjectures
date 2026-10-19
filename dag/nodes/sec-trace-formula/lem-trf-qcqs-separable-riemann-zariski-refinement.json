@@ -320,7 +320,8 @@
   "def-kun-separably-closed",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-trf-riemann-zariski-interfaces"
  ],
  "blueprint": {
   "from": {
@@ -499,5 +500,27 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-b1e8bf912 (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps and the full statements of all 27 cited nodes plus its stmt_deps; none is merged. I checked the Stacks sources 01T1, 01KU, 01J3, 01W5, 01W3, 01W4, 0A2Z, 094L, 00IA, 052K and 01T3. Temkin is not in literature/ (WANTED was reported), so I checked the mathematics directly and the agent-written proof origin is correct. The statement is unchanged and there are no new nodes. The steps are correct. Step 1: subfields of a separable L/F are separable, and they are finite because finitely generated. Step 3: on an affine chart the generic closure has ideal p, the kernel to L, and is proper by closed-immersion-proper (c). Step 4: refinements are unique through the equalizer, a pullback of the closed diagonal whose ideal is 0 in an integral source. Step 5: refinements are proper by proper-to-separated-target, hence spectral, and the spectral-limit node applies. Steps 6-8: R_x is a directed union of local rings; the P^1 charts give f or f^{-1} in R_x; valuation-intersection with K=L gives V=R_x. Steps 9-11: Nagata applies (separated, finite type, qcqs base); Step 10 checks separatedness of the composite through A->AxUA->AxSA; open images are p^{-1}(U) by the generalization argument; continuity uses the closure in BxSU. Step 12: the projections q_i are proper, and W_i is quasi-compact over the quasi-compact U_i. Step 13: proper lifting identifies RZ_L(W_i) with RZ_L(U_i). Step 14: domination plus extension to L, then uniqueness of the lift into the compactification of U_i, gives y in W_i. Reading RZ_L(S_0) as p_S^{-1}(S_0) is consistent and matches what the parent step 5 uses. Edge cases checked: empty family, S=Spec F, empty or non-quasi-compact S_0, infinite height. Duplicates: lem-trf-riemann-zariski-finite-refinement needs finite type over Z and finite height, and the birational, local-colimit and common-cover nodes state different results; there is no circularity. All 27 tool_uses are accepted as generic black-box inputs; the unit sk-i-curve-zero supplies none of them. Fix: Steps 4 and 12 cited Stacks Tag 01W2 (proper-local-on-the-base) for proper base change, which is 01W4. I corrected both source places in fixes/dag/nodes/sec-trace-formula/lem-trf-qcqs-separable-riemann-zariski-refinement.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsSeparableRiemannZariskiRefinement",
+  "declaration": "AlgebraicGeometry.RiemannZariski.qcqs_separable_refinement",
+  "declarations": [
+   "AlgebraicGeometry.RiemannZariski.separableGenericMap",
+   "AlgebraicGeometry.RiemannZariski.qcqs_separable_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsSeparableRiemannZariskiRefinement.lean",
+  "statement": "theorem qcqs_separable_refinement (S : Scheme.{u}) [IsIntegral S] [CompactSpace S] [QuasiSeparatedSpace S] (L : Type u) [Field L] [Algebra S.functionField L] [IsSepClosure S.functionField L] : (∀ U : QuasiModel S L (separableGenericMap S L), U.toGenericScheme.IsFiniteSeparableOver (algebraMap S.functionField L)) ∧ CompactSpace (Point S L (separableGenericMap S L)) ∧ ∃ e : Point S L (separableGenericMap S L) ≃ ValuationPoint S L (separableGenericMap S L), (∀ x, Corresponds x (e x)) ∧ ∃ (eU : ∀ U : QuasiModel S L (separableGenericMap S L), Point U.X L U.generic ≃ ValuationPoint U.X L U.generic) (j : ∀ U : QuasiModel S L (separableGenericMap S L), Point U.X L U.generic → Point S L (separableGenericMap S L)), (∀ U x, Corresponds x (eU U x)) ∧ (∀ U, IsOpenEmbedding (j U)) ∧ (∀ U x, e (j U x) = ValuationPoint.push U (eU U x)) ∧ (∀ U x, x ∈ Set.range (j U) ↔ (e x).LiftsTo U) ∧ (∀ M : Model S L (separableGenericMap S L), ∃ h : Point M.X L M.generic ≃ₜ Point S L (separableGenericMap S L), ∀ x, h x = j M.toQuasiModel x) ∧ (∀ (I : Type w) [Finite I] (U : I → QuasiModel S L (separableGenericMap S L)), ∃ (M : Model S L (separableGenericMap S L)) (W : I → QuasiModel S L (separableGenericMap S L)) (a : ∀ i : I, (W i).X ⟶ M.X) (q : ∀ i : I, (W i).X ⟶ (U i).X), (∀ i : I, IsOpenImmersion (a i) ∧ CompactSpace (W i).X ∧ IsProper (q i) ∧ IsDominant (q i)) ∧ (∀ i : I, a i ≫ M.map = (W i).map ∧ q i ≫ (U i).map = (W i).map) ∧ (∀ i : I, (W i).generic ≫ a i = M.generic ∧ (W i).generic ≫ q i = (U i).generic) ∧ (∀ i : I, Set.range (j (W i)) = Set.range (j (U i))) ∧ ((∀ x, ∃ i : I, x ∈ Set.range (j (U i))) → ∀ y : M.X, ∃ i : I, y ∈ Set.range (a i)) ∧ (∀ (J : Set I) (S₀ : S.Opens), (∀ i : I, i ∈ J → ∃ g : (U i).X ⟶ S₀.toScheme, g ≫ S₀.ι = (U i).map) → (∀ v : ValuationPoint S L (separableGenericMap S L), (∃ c : Spec (.of v.V) ⟶ S₀.toScheme, c ≫ S₀.ι = v.centre) → ∃ i : I, i ∈ J ∧ v.LiftsTo (U i)) → ∀ y : M.X, (∃ i : I, i ∈ J ∧ y ∈ Set.range (a i)) ↔ M.map y ∈ S₀))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1bb8de98",
+  "group": "Q13",
+  "result": "fix",
+  "note": "Head a1bb8de988ec is a rebase of e43f160175b0 with no content change (item .lean sha256 2b68e978 in all three heads; item node, new node and report byte-identical). e43f's FIX was refused at landing because def-trf-riemann-zariski-generic-models was not on its base (Q111 merged 00:36, base 00:30); this base (00:55) contains it. H12/H4: delivered def-trf-riemann-zariski-interfaces still lists 6 declarations owned by Q111's landed generic-models (GenericScheme, Model, QuasiModel, ModelHom, ValuationPoint, push). FIX re-applies fixes/def-trf-riemann-zariski-interfaces.json: narrowed to the 7 unowned declarations (toQuasiModel, Point, pointTopologicalSpace, fieldEmbedding, IsFiniteSeparableOver, Corresponds, LiftsTo); declaration=Point with verbatim signature; stmt_deps + generic-models; TeX matches the Lean bodies; check_existing/check_record/check_new_node clean; live dag has no other owner of the seven. Item re-read: integral qcqs + IsSepClosure only; all clauses present incl. S0 iff; edge cases empty I/S0, unbounded height; 14-step docstring, sorry only; nt_compile --json exit 0, 15.7 s, no warnings. Advisory: generic-models is reached only transitively from the item."
  }
 }
