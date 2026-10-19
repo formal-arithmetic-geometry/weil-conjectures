@@ -22,169 +22,75 @@
  ],
  "proof": [
   {
-   "text": "Write $\\Lambda$ for the finite commutative coefficient ring (as in the constructibility convention). The field is Noetherian, since its only ideals are zero and the whole field. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; in particular it is quasi-compact. In an affine finite-type chart $\\operatorname{Spec}A$ of $X$, the principal opens $D(f)$ contained in $V$ cover its intersection with $V$. Their rings $A_f=A[t]/(ft-1)$ are finite-type algebras over the field. Quasi-compactness of $V$ selects finitely many such opens, proving that $V$ is of finite type over the field. Choose a finite etale surjective $p:P\\to V$ and finite modules trivializing $p^*L$ on its connected components by [fin2-lem-lisse-trivialized-finite-etale]. A finite algebra is of finite type (its module generators also generate it as an algebra), so $P$ is of finite type over the field and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-fin-etale-normal-components] to $P\\to V$: write $P=\\coprod_{a=1}^r P_a$ with $P_a$ nonempty open-and-closed normal integral schemes. They are the connected components, so $p^*L|_{P_a}\\cong\\underline{M_a}$ for finite $\\Lambda$-modules $M_a$. The restrictions $p_a:P_a\\to V$ remain finite etale: on an affine base, restriction to an open-and-closed component is passage to an idempotent factor of the finite algebra.",
+   "text": "The finite-type, quasi-compact structure map to the spectrum of the field makes X Noetherian (LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace). The generic point of X lies in the nonempty open V, so lift X.fromSpecFunctionField through k, obtaining t: Spec k(X) -> V with t k = X.fromSpecFunctionField. Pullback preserves finite local constancy, and the trivial stratification makes F=t^*L constructible. Convert to IsConstructibleEtaleModuleSheaf and use constructible_field_finite_separable_constant to obtain a finite separable E/k(X), a finite coefficient module M, and pi^*F isomorphic to M_E.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "fin2-lem-lisse-trivialized-finite-etale",
-    "lem-fin-etale-normal-components"
+    "lem-weil-pbc-constructible-field-finite-separable-constant",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, first paragraph: choose the trivializing cover and its components"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $L_{\\mathrm{ab}}$ denote the underlying abelian sheaf. By [lem-weil-pbc-module-direct-image-left-exact](1) and [lem-weil-pbc-module-abelian-inverse-image-comparison], the underlying morphism of the module adjunction unit $L\\to p_*p^*L$ is the abelian adjunction unit, using its canonical inverse-image comparison. For a geometric point $\\bar v$ of $V$, [lemma-weil-pbc-finite-stalk-formula] identifies its target with $\\prod_{\\bar z\\in P_{\\bar v}}(p^{-1}L_{\\mathrm{ab}})_{\\bar z}$. The germ compatibility in [lem-weil-pbc-inverse-image-stalk-germ] identifies every component of the unit with the identity on $(L_{\\mathrm{ab}})_{\\bar v}$. Hence the stalk map is $m\\mapsto(m)_{\\bar z}$. The fibre is nonempty because $p$ is surjective, so this map is injective. By [lem-weil-pbc-geometric-stalks-detect-mono] the underlying abelian unit is monic. It is therefore also monic as a module morphism: equality of module morphisms can be tested after forgetting the action.",
+   "text": "Set h=pi t: Spec E -> V. Transpose h^*L isomorphic to M_E under h^* adjoint to h_* to obtain phi:L -> h_*M_E. Its pullback composed with the counit equals the trivializing isomorphism, hence is monic on any geometric stalk of Spec E. Naturality of Etale.upperStarCompSheafFiberIso transports this monicity to the stalk of phi over the generic point of V. Apply the module-valued source-library generic-kernel theorem Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf (the module version of lem-weil-pbc-lisse-generic-kernel). Thus phi is mono.",
    "uses": [
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-abelian-inverse-image-comparison",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-geometric-stalks-detect-mono"
+    "lem-weil-pbc-lisse-generic-kernel",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, first paragraph: the adjunction unit is a stalkwise diagonal injection"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $p_a$ is surjective. Indeed its nonempty image is open by [lem-weil-pbc-etale-morphism-open-map] and closed by [lem-weil-pbc-finite-closed-map-finite-fibres]; the nonempty open $V$ of the integral $X$ is irreducible, so its only nonempty open-and-closed subset is $V$. Put $K=k(X)=k(V)$. The generic fibre of $p_a$ is a nonzero finite-dimensional domain over $K$: over a nonempty affine $\\operatorname{Spec}B\\subseteq V$, write its inverse image as $\\operatorname{Spec}D$. This inverse image is nonempty by surjectivity and is an open of the integral $P_a$, so $D$ is a domain. The ring map $B\\to D$ is injective: surjectivity on spectra implies its kernel is contained in every prime ideal of $B$, hence in the nilradical; $B$ is a domain because $V$ is integral, so this nilradical is zero. Also $D$ is finite over $B$. Thus $(B\\setminus\\{0\\})^{-1}D$ is a nonzero finite-dimensional domain over $K=\\operatorname{Frac}B$. Every nonzero element of a finite-dimensional domain over a field is invertible, because multiplication by it is an injective endomorphism of a finite-dimensional vector space and hence surjective. Thus this generic fibre is the field $K_a=k(P_a)$ and $K_a/K$ is finite.",
-   "uses": [
-    "lem-weil-pbc-etale-morphism-open-map",
-    "lem-weil-pbc-finite-closed-map-finite-fibres"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: the function fields used to extend the connected covers"
-   }
-  },
-  {
-   "text": "Let $g_a:Y_a\\to X$ be the normalization in $K_a$ of [def-fin-normalization-extension]. By [lem-fin-normalization-extends-cover] its restriction over $V$ is $p_a:P_a\\to V$; hence $P_a=g_a^{-1}(V)$ is a nonempty open subscheme of $Y_a$, with inclusion $v_a$, and $g_av_a=kp_a$. The finite-extension hypothesis needed by [lem-fin-normalization-extension-finite] holds by step 3, so $g_a$ is finite. To justify normality independently of the proof of the cover-extension node, first $X$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Apply [lem-weil-pbc-normalization-in-residue-field-extension] at its generic point with residue field $K$ and extension $K_a$: its specified normalization is normal integral with function field $K_a$, and is the same normalization just defined (both have the integral closure of each affine coordinate ring in $K_a$). Finally $Y_a$ is of finite type over the field, since $g_a$ is finite, so [lem-weil-pbc-finite-type-over-noetherian] makes $Y_a$ Noetherian.",
+   "text": "Construct Y=X.normalizationIn E with nu:Y -> X, and g:Spec E -> Y the canonical generic map. The map nu is finite by Scheme.isFinite_fromNormalizationIn. Its local rings are integrally closed by Scheme.Hom.isIntegrallyClosed_stalk_normalization, since E is a field. Scheme.exists_iso_toNormalization_normalizationIn identifies g, up to an isomorphism of field spectra, with Y.fromSpecFunctionField. Thus the constant generic-unit theorem gives M_Y isomorphic to g_*M_E; transport the unit using Etale.isIso_unit_app_comp and identify pullbacks of constants with constants.",
    "uses": [
     "def-fin-normalization-extension",
-    "lem-fin-normalization-extends-cover",
     "lem-fin-normalization-extension-finite",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-normalization-in-residue-field-extension",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-normalization-normal-stalks",
+    "lem-sbc-normalization-generic-field",
+    "lem-weil-pbc-normal-constant-generic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: extend each component by finite normal integral normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-fin-normal-constant-open-image] to the Noetherian normal integral $Y_a$, its nonempty open $v_a:P_a\\hookrightarrow Y_a$, and the finite module $M_a$. It gives $v_{a,*}\\underline{M_a}\\cong\\underline{M_a}_{Y_a}$. The section formula of [def-weil-pbc-direct-image] then gives $(kp_a)_*\\underline{M_a}\\cong g_{a,*}\\underline{M_a}_{Y_a}$: both compositions of direct images evaluate on an etale object by successive fibre products, canonically the fibre product with the composite map. All maps respect $\\Lambda$-actions. Applying the left-exact functor $k_*$ of [lem-weil-pbc-module-direct-image-left-exact] to step 2 and using the sheaf axiom on the finite disjoint union $P=\\coprod_aP_a$ now gives a monomorphism\n$$k_*L\\lhook\\joinrel\\longrightarrow\\prod_a g_{a,*}\\underline{M_a}_{Y_a}.$$\nFor the disjoint union $Y=\\coprod_aY_a$, define $E$ on an etale object $W\\to Y$ by $E(W)=\\prod_a\\underline{M_a}_{Y_a}(W\\times_Y Y_a)$, with componentwise restriction and module operations. Each component satisfies the sheaf condition, so this formula defines a module sheaf; restricting to $Y_a$ gives $\\underline{M_a}$, since the other fibre products are empty and a module sheaf has zero sections on the empty scheme. Let $g:Y\\to X$ restrict to $g_a$. On every etale object, sections on this disjoint union are the corresponding finite product, so the right hand side is $g_*E$. The morphism $g$ is finite: above an affine $\\operatorname{Spec}B\\subseteq X$ it is the spectrum of the finite product of the finite $B$-algebras for the $g_a$; embed each component algebra's finite module generating set in its factor, with zero in all other factors; the union of these embedded sets generates the product as a $B$-module.",
+   "text": "Push phi forward by k_*; this preserves monomorphisms because it preserves finite limits. The equalities h k=f=g nu and the direct-image composition isomorphisms identify k_* h_*M_E with nu_* g_*M_E and hence with nu_*M_Y. Their composite gives a monomorphism psi:k_*L -> nu_*M_Y.",
    "uses": [
-    "lem-fin-normal-constant-open-image",
     "def-weil-pbc-direct-image",
     "lem-weil-pbc-module-direct-image-left-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: constant open image, composition, and the finite product of finite direct images"
-   }
+   "elementary": false
   },
   {
-   "text": "The finite clopen partition $Y=\\coprod_aY_a$ and the componentwise constant finite module restrictions define the sheaf $E$ in step 5. The new node [lem-fin-normal-clopen-constructible-module] states that this partition is a constructibility stratification, so $E$ is constructible.",
-   "uses": [
-    "lem-fin-normal-clopen-constructible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
-   }
-  },
-  {
-   "text": "The clopen etale cover $\\{Y_a\\to Y\\}$ and the finite constant module restrictions of step 5 satisfy (1) of [lem-weil-pbc-finite-locally-constant-module-values]. Its last assertion identifies every algebraically closed module stalk of $E$ with the corresponding finite $M_a$. The Mathlib leaf [lem-fin-normal-underlying-stalk-finite] identifies its underlying set with the set-sheaf stalk; hence those set stalks are finite.",
+   "text": "The finite module M is finitely generated, and the geometric stalk of the constant sheaf M_Y is M, by sheafFiberConstantSheafIso. Hence M_Y is finite locally constant and therefore constructible for the trivial stratification. Apply the source-library module theorem Scheme.IsConstructibleSheaf.lowerStar_of_isFinite to nu and M_Y (the finite-ring specialization of finite constructible module pushforward), and convert its conclusion with isConstructibleEtaleModuleSheaf_iff. The constructible-subobject theorem applied to psi gives the desired constructibility of k_*L.",
    "uses": [
     "lem-weil-pbc-finite-locally-constant-module-values",
-    "lem-fin-normal-underlying-stalk-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
-   }
-  },
-  {
-   "text": "Apply [lem-galois-finite-stalks-comparison] to the underlying set sheaf of $E$, whose algebraically closed stalks are finite by step 7. Its set stalks are therefore finite at every separably closed point. The bijection at these points supplied by [lem-fin-normal-underlying-stalk-finite] transfers this finiteness to the underlying sets of the module stalks, as required by the next theorem.",
-   "uses": [
-    "lem-galois-finite-stalks-comparison",
-    "lem-fin-normal-underlying-stalk-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
-   }
-  },
-  {
-   "text": "The morphism $g:Y\\to X$ is finite by step 5. By step 6, $E$ is constructible in the coefficient-category sense [def-constructible-constructible], and by step 8 all its separably closed module stalks are finite. The target $X$ is Noetherian by step 1. Thus [lem-weil-pbc-finite-pushforward-finite-stalk-module] applies and gives constructibility of $g_*E$ in the coefficient-category sense [def-constructible-constructible]. Since $\\Lambda$ is finite, [lem-weil-pbc-constructible-etale-module-sheaf-comparison] converts this into constructibility of $g_*E$ in the sense of [def-weil-pbc-etale-constructible-sheaf], the hypothesis of the subobject theorem used in step 10.",
-   "uses": [
-    "def-constructible-constructible",
     "lem-weil-pbc-finite-pushforward-finite-stalk-module",
     "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
-    "def-weil-pbc-etale-constructible-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, second paragraph: constructibility of the finite direct images; module-valued version"
-   }
-  },
-  {
-   "text": "The monomorphism $k_*L\\hookrightarrow g_*E$ from step 5 has constructible target by step 9. Apply [lem-weil-pbc-constructible-subobjects-noetherian], with the Noetherian scheme $X$ and the given finite commutative ring $\\Lambda$, to conclude that $k_*L$ is constructible.",
-   "uses": [
     "lem-weil-pbc-constructible-subobjects-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-    "place": "Proof, final sentence: apply the Noetherian subobject theorem"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-constructible",
   "def-fin-normalization-extension",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "fin2-lem-lisse-trivialized-finite-etale",
-  "lem-fin-etale-normal-components",
-  "lem-fin-normal-clopen-constructible-module",
-  "lem-fin-normal-constant-open-image",
-  "lem-fin-normal-underlying-stalk-finite",
-  "lem-fin-normalization-extends-cover",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
   "lem-fin-normalization-extension-finite",
-  "lem-galois-finite-stalks-comparison",
+  "lem-sbc-normalization-generic-field",
   "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
   "lem-weil-pbc-constructible-subobjects-noetherian",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
   "lem-weil-pbc-finite-locally-constant-module-values",
   "lem-weil-pbc-finite-pushforward-finite-stalk-module",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-geometric-stalks-detect-mono",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-lisse-generic-kernel",
   "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lemma-weil-pbc-finite-stalk-formula"
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-normalization-normal-stalks"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.md",
-  "place": "Proof, both paragraphs; expanded hypotheses, unit compatibility, and module-valued finite-pushforward argument"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-fin-normal-open-lisse-image.proof.md",
+  "place": "C5: shorter generic-field variant of the finite-normalization, constant-image, finite-pushforward and subobject argument. Generic trivialization uses the existing Stacks 09Z6 field lemma; generic injectivity uses the existing lisse generic-kernel theorem."
  },
  "mathlib_searches": [
   {
@@ -381,22 +287,11 @@
   ]
  },
  "tool_uses": [
-  "lem-fin-etale-normal-components",
   "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
   "lem-fin-normalization-extension-finite",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
   "lem-weil-pbc-finite-locally-constant-module-values",
   "lem-weil-pbc-finite-pushforward-finite-stalk-module",
   "lem-weil-pbc-constructible-subobjects-noetherian",
-  "lem-galois-finite-stalks-comparison",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "reviewed": {
@@ -424,5 +319,15 @@
   "by": "Q44",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261019T093308-L-2290672",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

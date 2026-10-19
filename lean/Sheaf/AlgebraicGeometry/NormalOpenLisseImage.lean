@@ -13,33 +13,13 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
-import Sheaf.AlgebraicGeometry.EtaleNormalComponents
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
-import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule
-import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.FiniteNormalClopenConstructibleModule
-import Sheaf.AlgebraicGeometry.LisseTrivializedFiniteEtale
-import Sheaf.AlgebraicGeometry.NormalConstantOpenImage
-import Sheaf.AlgebraicGeometry.NormalizationExtendsCover
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
+import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import WeilConjectures.ConstructibleSheaf.FiniteMorphism
+import WeilConjectures.ConstructibleSheaf.FinitePushforward
+import WeilConjectures.ConstructibleSheaf.Monoidal
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Constructibility of the direct image from a normal open
@@ -55,6 +35,52 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem mono_generic_transpose
+    {S : Scheme.{u}} [IsIntegral S] {E : Type u} [Field E]
+    (h : Spec (.of E) ⟶ S) (hh : ∀ x, h x = genericPoint S)
+    {Λ : Type (u + 1)} [CommRing Λ]
+    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsLocallyConstantSheaf L]
+    (B : Sheaf (Spec (.of E)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (e : (Etale.upperStar (ModuleCat.{u + 1} Λ) h).obj L ≅ B) :
+    Mono ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).homEquiv L B
+      e.hom) := by
+  let adj := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h
+  let t : L ⟶ (Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj B :=
+    adj.homEquiv L B e.hom
+  let w := (Spec (.of E)).algClosurePoint (IsLocalRing.closedPoint E)
+  let d : Etale.upperStar (ModuleCat.{u + 1} Λ) h ⋙
+      (pointSmallEtale w).sheafFiber (A := ModuleCat.{u + 1} Λ) ≅
+      (pointSmallEtale (w ≫ h)).sheafFiber (A := ModuleCat.{u + 1} Λ) :=
+    Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) h w
+  have ht : (Etale.upperStar (ModuleCat.{u + 1} Λ) h).map t ≫ adj.counit.app B =
+      e.hom := (adj.homEquiv L B).symm_apply_apply e.hom
+  have hmono : Mono (((pointSmallEtale w).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) h).map t)) := by
+    have he := congrArg ((pointSmallEtale w).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map ht
+    rw [Functor.map_comp] at he
+    exact mono_of_mono_fac he
+  have heq : ((pointSmallEtale (w ≫ h)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map t =
+      d.inv.app L ≫ ((pointSmallEtale w).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) h).map t) ≫
+            d.hom.app ((Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj B) := by
+    rw [← cancel_epi (d.hom.app L)]
+    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc, Functor.comp_map] using
+      (d.hom.naturality t).symm
+  have : Mono (((pointSmallEtale (w ≫ h)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).map t) := by
+    have hi : Mono (d.inv.app L) := mono_of_mono_fac (d.inv_hom_id_app L)
+    have hj : Mono (d.hom.app ((Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj B)) :=
+      mono_of_mono_fac (d.hom_inv_id_app _)
+    rw [heq]
+    exact mono_comp _ _
+  exact Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf (Λ := Λ) (w ≫ h)
+    (fun x ↦ hh (w x)) t this
 
 /-- A finite locally constant module sheaf on a nonempty normal open of an integral scheme
 of finite type over a field has constructible direct image. The coefficient ring is finite
@@ -113,6 +139,117 @@ theorem isConstructibleEtaleModuleSheaf_lowerStar_of_normal_open
     (L : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsFiniteLocallyConstantSheaf L] :
     IsConstructibleEtaleModuleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) k).obj L) := by
-  sorry
+  classical
+  have : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))
+      __ := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K)) }
+  let := hV.1
+  have hη : genericPoint X ∈ Set.range k := by
+    rw [← genericPoint_eq_of_isOpenImmersion k]
+    exact Set.mem_range_self _
+  have hr : Set.range X.fromSpecFunctionField ⊆ Set.range k := by
+    rintro _ ⟨x, rfl⟩
+    have hx : x = IsLocalRing.closedPoint X.functionField :=
+      (inferInstance : Subsingleton (Spec (.of X.functionField))).elim _ _
+    subst x
+    simpa only [fromSpecFunctionField, fromSpecStalk_closedPoint] using hη
+  let t : Spec (.of X.functionField) ⟶ V :=
+    IsOpenImmersion.lift k X.fromSpecFunctionField hr
+  have ht : t ≫ k = X.fromSpecFunctionField := IsOpenImmersion.lift_fac _ _ _
+  let F := (Etale.upperStar (ModuleCat.{u + 1} Λ) t).obj L
+  have : IsFiniteLocallyConstantSheaf F := IsFiniteLocallyConstantSheaf.upperStar t L
+  have hF : IsConstructibleEtaleModuleSheaf F :=
+    (isConstructibleEtaleModuleSheaf_iff F).mpr
+      (IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance)
+  obtain ⟨E, hE, hAlg, hfin, _, M, hM, ⟨e⟩⟩ :=
+    constructible_field_finite_separable_constant X.functionField Λ F hF
+  let := hE
+  let := hAlg
+  let := hfin
+  let := hM
+  let π := Spec.map (CommRingCat.ofHom (algebraMap X.functionField E))
+  let h := π ≫ t
+  let f := X.fromSpecOfAlgebraFunctionField E
+  let Y := X.normalizationIn E
+  let ν := X.fromNormalizationIn E
+  let g := f.toNormalization
+  have hhk : h ≫ k = f := by simp only [h, Category.assoc, ht]; rfl
+  have hgv : g ≫ ν = f := f.toNormalization_fromNormalization
+  have : IsFinite ν := X.isFinite_fromNormalizationIn E (X ↘ Spec (.of K))
+  let MY := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  let ME := (constantSheaf (Spec (.of E)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  have hn : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y) := by
+    apply f.isIntegrallyClosed_stalk_normalization
+    intro x
+    have hx : x = IsLocalRing.closedPoint E := Subsingleton.elim _ _
+    subst x
+    exact IsIntegrallyClosed.of_equiv
+      (stalkClosedPointIso (.of E)).commRingCatIsoToRingEquiv.symm
+  obtain ⟨eg, heg⟩ := X.exists_iso_toNormalization_normalizationIn E
+  have hu0 := (Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed Λ hn M).1
+  let := hu0
+  have hu : IsIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app MY) := by
+    change IsIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (X.fromSpecOfAlgebraFunctionField E).toNormalization).unit.app MY)
+    rw [← heg]
+    exact Etale.isIso_unit_app_comp (ModuleCat.{u + 1} Λ) eg.hom Y.fromSpecFunctionField MY
+  let := hu
+  let egc : MY ≅ (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).obj ME :=
+    asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app MY) ≪≫
+      (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).mapIso
+        ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) g).app M)
+  let eh : (Etale.upperStar (ModuleCat.{u + 1} Λ) h).obj L ≅ ME :=
+    (Etale.upperStarComp (ModuleCat.{u + 1} Λ) π t).app L ≪≫ e
+  let φ : L ⟶ (Etale.lowerStar (ModuleCat.{u + 1} Λ) h).obj ME :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).homEquiv L ME eh.hom
+  have hhη : ∀ x, h x = genericPoint V := by
+    intro x
+    apply k.isOpenEmbedding.injective
+    rw [genericPoint_eq_of_isOpenImmersion k]
+    change (h ≫ k) x = genericPoint X
+    rw [hhk]
+    have hx : x = IsLocalRing.closedPoint E := Subsingleton.elim _ _
+    subst x
+    change X.fromSpecFunctionField (π (IsLocalRing.closedPoint E)) = genericPoint X
+    have hp : π (IsLocalRing.closedPoint E) = IsLocalRing.closedPoint X.functionField :=
+      (inferInstance : Subsingleton (Spec (.of X.functionField))).elim _ _
+    rw [hp]
+    exact fromSpecStalk_closedPoint
+  have : Mono φ := mono_generic_transpose (Λ := Λ) h hhη L ME eh
+  let ψ : (Etale.lowerStar (ModuleCat.{u + 1} Λ) k).obj L ⟶
+      (Etale.lowerStar (ModuleCat.{u + 1} Λ) ν).obj MY :=
+    (Etale.lowerStar (ModuleCat.{u + 1} Λ) k).map φ ≫
+      ((Etale.lowerStarComp (ModuleCat.{u + 1} Λ) h k f hhk.symm).app ME).hom ≫
+      ((Etale.lowerStarComp (ModuleCat.{u + 1} Λ) g ν f hgv.symm).app ME).inv ≫
+      (Etale.lowerStar (ModuleCat.{u + 1} Λ) ν).map egc.inv
+  have hmφ : Mono ((Etale.lowerStar (ModuleCat.{u + 1} Λ) k).map φ) := by
+    infer_instance
+  have : Mono ψ := by
+    dsimp only [ψ]
+    have h₁ : Mono
+        ((Etale.lowerStarComp (ModuleCat.{u + 1} Λ) h k f hhk.symm).app ME).hom := by
+      infer_instance
+    have h₂ : Mono
+        ((Etale.lowerStarComp (ModuleCat.{u + 1} Λ) g ν f hgv.symm).app ME).inv := by
+      infer_instance
+    have h₃ : Mono ((Etale.lowerStar (ModuleCat.{u + 1} Λ) ν).map egc.inv) := by
+      infer_instance
+    exact mono_comp _ _
+  have : Module.Finite Λ M := Module.Finite.of_finite
+  have : IsFiniteSheaf MY := by
+    refine ⟨fun Ω _ _ s ↦ ?_⟩
+    have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+      CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    exact ((ModuleCat.isFinitelyGenerated_iff M).2 inferInstance).of_iso
+      ((pointSmallEtale s).sheafFiberConstantSheafIso M).symm
+  have : IsLocallyConstantSheaf MY :=
+    (Sheaf.isConstant_of_iso Y.smallEtaleTopology (Iso.refl MY)).isLocallyConstantSheaf
+  have : IsFiniteLocallyConstantSheaf MY := ⟨⟩
+  have : IsConstructibleSheaf MY :=
+    IsFiniteLocallyConstantSheaf.isConstructibleSheaf inferInstance
+  have hpush := IsConstructibleSheaf.lowerStar_of_isFinite ν MY
+  exact isConstructibleEtaleModuleSheaf_of_mono_noetherian ψ
+    ((isConstructibleEtaleModuleSheaf_iff _).mpr hpush)
 
 end AlgebraicGeometry.Scheme
