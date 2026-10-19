@@ -35,9 +35,40 @@
   "def-weil-frobenius-coefficient-twists",
   "lem-pur-twist-frobenius-scalar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The quotient arithmetic needs only divisibility: the uniformizer to the ENat.toNat of its multiplicity divides ell by pow_dvd_of_le_emultiplicity and ENat.natCast_toNat_le_self. Raise this divisibility to n/e and use e*(n/e)=n. Ideal.span_singleton_pow and Ideal.Quotient.eq_zero_iff_mem make the exponent zero in the quotient, and ULift.up transports the equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Forgetting module scalars is additive sectionwise. Use the existing sheaf coinduction adjunction to obtain finite colimits and the extension/restriction scalar adjunction over the integers to obtain finite limits. The coefficient forgetful/coinduction adjunction also gives preservation of sheafification by the Mathlib adjunction theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the degree-zero comparison, use the constant-sheaf/terminal-evaluation adjunction in module and abelian sheaves. Evaluation at 1 identifies Hom_A(A,M) and Hom_Z(ULift Z,M); naturality of constantCommuteCompose and constantSheafAdj_counit_w identify this bijection with precomposition by integerToConstant. Embed F into an injective I and take its cokernel Q. The two Ext long exact sequences give right-exact rows Hom(X,I) to Hom(X,Q) to Ext^1(X,F) and Hom(Z,U I) to Hom(Z,U Q) to Ext^1(Z,U F). Underlying abelian acyclicity gives the last zero term in the second row, via the proved SheafCohomologyRightDerived comparison. Exact-functor mapping commutes with Ext composition and the extension class, so these rows commute with the canonical comparison. Apply the right-exact short five lemma, using degree-zero bijectivity, to obtain moduleClassToAbelian_bijective.",
+   "uses": [
+    "lem-weil-pbc-etale-module-injective-forget-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Recover characteristic p of k0 from its cardinality p^a using charP_of_card_eq_prime_pow, and transfer characteristic to k by the injective algebra map. Since ell is a distinct prime its cast is nonzero and hence a unit in k. Map that unit to global sections via GammaSpecIso and the structure morphism, then take its Kummer-level power; map it to each stalk via the top-open germ.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-module-injective-forget-acyclic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/_section.md",
+  "place": "finite coefficient conventions; quotient arithmetic, scalar adjunctions, degree-one acyclic Ext comparison, and coefficient-prime invertibility",
+  "group": "A3",
+  "date": "2026-10-19"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -209,5 +240,15 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-dc9ca707e (reviewer sub-agent of L); spot-checked: I read the whole item against main-20261015 def-pur-conventions (order 2233), its unit sk-def-purity-conv and all 21 cited statements. Four checks: the integral category has a single interval for all reductions; rationalization and the Qlbar stage add no Karoubi completion; Rf_!, Rf^! and Ex/PF are used on exactly their stated domains (separated finite-type k-morphisms, S=Spec k, no ambient datum); twists are defined for every m with duals at m<0, and the Frobenius scalar q^{-m} holds for all m in Z. No cycle: a graph traversal from all 21 dependencies never reaches the item. The omega_{Y,Lambda} restriction to separated finite-type Y is forced by the domain of def-weil-exceptional-inverse-image and matches the unit and def-trf-dualizing-complex. Every citer that uses omega_X takes a_X separated and of finite type, so this is not a weakening. Two repairable faults, fixed in fixes/dag/nodes/sec-smooth-purity/def-pur-conventions.json. (1) E6, two meanings: the twist paragraph cited def-coefficient-twists-detailed for K(m) but then made the integral tensor the completed R-lim tensor of def-weil-derived-pullback-tensor-hom. That is a different construction, and no node proves the two agree. The sentence now uses the twist node's tensor product over the completed sheaf, formed on integral representatives at E and Qlbar. (2) The tool_uses entry for lem-pur-twist-frobenius-scalar was removed: that lemma is in the item's own unit and a definition has no proof steps. No tool_uses accepted. No new nodes and none dropped. Small cases checked: n=1, m=0, m<0, d=0, Y=Spec k, Y empty, a non-separated Y, and an infinite disjoint union of points.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T093239-L-2284168",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
