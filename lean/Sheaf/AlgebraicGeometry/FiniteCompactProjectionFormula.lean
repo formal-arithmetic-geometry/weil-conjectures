@@ -23,55 +23,12 @@ public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Compactification.Noetherian
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection
-import Sheaf.Paper.EtaleKFlatCriteria
-import Sheaf.Paper.PbcActualScalarPullback
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import Sheaf.EtaleCohomology.SepClosedFieldVanishing
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
-import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
-import Sheaf.Paper.GeometricStalkPerfect
-import Sheaf.Paper.ProjectionMateExact
-import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
-import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization
-import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.ExchangeProjectionSuppliedDomains
-import Sheaf.Paper.FiniteCoefficientFlatModel
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SixFunctors.OpenTensorNormalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-!
 # Finite-coefficient compact-support projection formula
@@ -117,6 +74,75 @@ instance finiteCompactProjectionCoefficient_discrete
     (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) :
     DiscreteTopology (Padic.coefficientExtensionRing l E n) := ⟨rfl⟩
+
+-- Prioritize finiteness when checking noetherianity of the quotient coefficients.
+attribute [local instance 2000] isNoetherian_of_finite
+
+private theorem finiteCompactProjection_etale
+    (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
+    {f : X ⟶ Y} (c : Compactification f)
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :
+    IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app K).app L) := by
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite A c.g
+  rw [projectionMapOfCompactification_app_app]
+  infer_instance
+
+private noncomputable def finiteCompactProjection_originIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    [TopologicalSpace A] [DiscreteTopology A] (T : Scheme.{u})
+    (Kp : ProEtale.FiniteCoefficientDerivedCategoryPlus T A)
+    (w : Scheme.EtaleOriginWitness T A Kp) :
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj w.L.obj ≅
+      (ProEtale.finiteCoefficientRealization T A).mapDerivedCategory.asEquivalence.inverse.obj
+        Kp.obj := by
+  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let R := ProEtale.finiteCoefficientRealization T A
+  let e := R.mapDerivedCategory.asEquivalence
+  exact e.unitIso.app _ ≪≫ e.inverse.mapIso
+    ((Functor.mapDerivedCategoryCompIso C R).symm.app w.L.obj ≪≫
+      _root_.DerivedCategory.Plus.ι.mapIso w.alpha)
+
+private theorem finiteCompactProjection_proEtale
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    [TopologicalSpace A] [DiscreteTopology A] {X Y : Scheme.{u}}
+    {f : X ⟶ Y} (c : Compactification f)
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y)
+    (hK : _root_.DerivedCategory.TStructure.t.bounded K)
+    (hTor : ∃ a b : ℤ, DerivedCategory.hasTorAmplitudeIn A Y a b L)
+    (Kp : ProEtale.FiniteCoefficientDerivedCategoryPlus X A)
+    (Lp : ProEtale.FiniteCoefficientDerivedCategoryPlus Y A)
+    (wx : Scheme.EtaleOriginWitness X A Kp)
+    (wy : Scheme.EtaleOriginWitness Y A Lp) (hx : wx.L.obj ≅ K) (hy : wy.L.obj ≅ L) :
+    IsIso (((ProEtale.projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app
+      ((ProEtale.finiteCoefficientRealization X A).mapDerivedCategory.asEquivalence.inverse.obj
+        Kp.obj)).app
+      ((ProEtale.finiteCoefficientRealization Y A).mapDerivedCategory.asEquivalence.inverse.obj
+        Lp.obj)) := by
+  let Cx := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X
+  let Cy := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Y
+  let ex := Cx.mapDerivedCategory.mapIso hx.symm ≪≫
+    finiteCompactProjection_originIso A X Kp wx
+  let ey := Cy.mapDerivedCategory.mapIso hy.symm ≪≫
+    finiteCompactProjection_originIso A Y Lp wy
+  obtain ⟨a, b, hLt⟩ := hTor
+  have hLt' : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) Y a b L := by
+    intro F
+    rw [_root_.DerivedCategory.homologyConcentratedIn_iff]
+    exact ⟨(_root_.DerivedCategory.isGE_iff _ a).2
+        (fun q hq ↦ hLt F q (.inl hq)),
+      (_root_.DerivedCategory.isLE_iff _ b).2 (fun q hq ↦ hLt F q (.inr hq))⟩
+  have hM :=
+    (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).bounded_mapDerivedCategory_obj hK
+  have hML := plus_derivedTensor_leftDerivedUpperStar c.g hM hLt'
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite A c.g
+  exact ProEtale.hasProjectionFormulaOfCompactification_of_comparison
+    (A := ModuleCat.{u + 1} A) (K₀ := K) (L₀ := L) c ex ey hK hML inferInstance
+
+-- Keep the quotient Ring instance aligned with the generic CommRing helpers.
+attribute [local instance 2000] CommRing.toRing
+
+attribute [local irreducible] projectionMapOfCompactification
+  ProEtale.projectionMapOfCompactification
 
 /-- The finite-coefficient projection formula on the small etale site and on every
 specified pro-etale realization. No Tor-amplitude hypothesis is imposed on `K`, and
@@ -335,6 +361,15 @@ theorem isIso_finiteCompactProjection
         (((ProEtale.finiteCoefficientRealization Y
           (Padic.coefficientExtensionRing l E n)).mapDerivedCategory.asEquivalence.inverse).obj
             Lp.obj)) := by
-  sorry
+  constructor
+  · exact finiteCompactProjection_etale (Padic.coefficientExtensionRing l E n) c K L
+  · intro Kp Lp wx wy hx hy
+    have hKb : _root_.DerivedCategory.TStructure.t.bounded K := by
+      obtain ⟨a, b, _, h⟩ := _hK.2
+      exact ⟨⟨a, (_root_.DerivedCategory.isGE_iff K a).2
+        (fun q hq ↦ h q (.inl hq))⟩,
+        ⟨b, (_root_.DerivedCategory.isLE_iff K b).2 (fun q hq ↦ h q (.inr hq))⟩⟩
+    exact finiteCompactProjection_proEtale (Padic.coefficientExtensionRing l E n)
+      c K L hKb _hTor Kp Lp wx wy hx hy
 
 end AlgebraicGeometry.Etale
