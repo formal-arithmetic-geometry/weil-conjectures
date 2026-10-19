@@ -16639,3 +16639,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/C8/Sheaf.AlgebraicGeometry.ProEtale.HypercoverComplex (stage 3; reviewer PASS; first push; landing 20261019T002519-L-2145648 (interface); batch 20261019T002449; modules 2; new nodes 0; change records: coord/changes/C8-hypercover-ring-universe.md)
 - 00:25 L: merged deliver/C8/Sheaf.Paper.SfRationalizationKaroubi (stage 3; reviewer PASS; first push; landing 20261019T002520-L-2145840 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/C9/Sheaf.AlgebraicGeometry.ProEtale.HypercoverExistence (stage 3; reviewer PASS; first push; landing 20261019T002520-L-2146027 (interface); batch 20261019T002449; modules 8; new nodes 7)
+- 00:25 L: merged deliver/C9/Sheaf.Paper.SfScalarExtensionComposition (stage 3; reviewer PASS; first push; landing 20261019T002521-L-2146211 (proof); batch 20261019T002449; modules 1; new nodes 0)

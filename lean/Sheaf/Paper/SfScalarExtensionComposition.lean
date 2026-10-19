@@ -13,14 +13,6 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 public import Sheaf.Paper.ScalarExtensionComposition
 
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Composition of intrinsic rational scalar extensions
 
@@ -50,6 +42,78 @@ universe u
 open CategoryTheory
 
 namespace WeilConjectures
+
+private theorem map_heq {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {X X' Y Y' : C} (hX : X = X') (hY : Y = Y')
+    {f : X ⟶ Y} {g : X' ⟶ Y'} (h : HEq f g) : HEq (F.map f) (F.map g) := by
+  cases hX
+  cases hY
+  cases h
+  rfl
+
+private theorem localizedIso
+    {R : Type*} [CommRing R] {S : Type*} [CommRing S]
+    {C : Type*} [Category C] [Preadditive C] [Linear R C]
+    {D : Type*} [Category D] [Preadditive D] [Linear S D]
+    (t : R) (v : S) (ψ : Localization.Away t → Localization.Away v)
+    (F₀ G₀ : C ⥤ D) (e : F₀ ≅ G₀)
+    (F G : ScalarLocalization R C t ⥤ ScalarLocalization S D v)
+    [F.Additive] [G.Additive]
+    (hF : ∀ K, F.obj K = ⟨F₀.obj K.obj⟩)
+    (hG : ∀ K, G.obj K = ⟨G₀.obj K.obj⟩)
+    (mF : ∀ (K K' : C) (f : K ⟶ K') (a : Localization.Away t),
+      HEq (F.map (a ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := t) K ⟶ ⟨K'⟩))
+        (ψ a ⊗ₜ[S] F₀.map f : ScalarLocalization.mk (R := S) (p := v) (F₀.obj K) ⟶
+          ⟨F₀.obj K'⟩))
+    (mG : ∀ (K K' : C) (f : K ⟶ K') (a : Localization.Away t),
+      HEq (G.map (a ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := t) K ⟶ ⟨K'⟩))
+        (ψ a ⊗ₜ[S] G₀.map f : ScalarLocalization.mk (R := S) (p := v) (G₀.obj K) ⟶
+          ⟨G₀.obj K'⟩)) :
+    ∃! a : F ≅ G, ∀ K, HEq (a.hom.app K)
+      ((ScalarLocalization.localization S D v).map (e.hom.app K.obj)) := by
+  let c (K : ScalarLocalization R C t) : F.obj K ≅ G.obj K :=
+    eqToIso (hF K) ≪≫ (ScalarLocalization.localization S D v).mapIso (e.app K.obj) ≪≫
+      (eqToIso (hG K)).symm
+  have hc (K) : HEq (c K).hom
+      ((ScalarLocalization.localization S D v).map (e.hom.app K.obj)) := by
+    simp [c]
+  have hn {K K' : ScalarLocalization R C t} (f : K ⟶ K') :
+      F.map f ≫ (c K').hom = (c K).hom ≫ G.map f := by
+    obtain ⟨K⟩ := K
+    obtain ⟨K'⟩ := K'
+    induction f using TensorProduct.induction_on with
+    | zero => simp
+    | add f g hf hg =>
+      rw [F.map_add, G.map_add, Preadditive.add_comp, Preadditive.comp_add, hf, hg]
+    | tmul a f =>
+      rw [(conj_eqToHom_iff_heq _ _ (hF ⟨K⟩) (hF ⟨K'⟩)).mpr (mF K K' f a),
+        (conj_eqToHom_iff_heq _ _ (hG ⟨K⟩) (hG ⟨K'⟩)).mpr (mG K K' f a)]
+      dsimp [c]
+      simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+      have he : ScalarLocalization.composition S D v _ _ _
+            ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K') (ψ a ⊗ₜ[S] F₀.map f) =
+          ScalarLocalization.composition S D v _ _ _
+            (ψ a ⊗ₜ[S] G₀.map f) ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K) := by
+        simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
+        rw [e.hom.naturality f]
+      have he' :
+          @CategoryStruct.comp (ScalarLocalization S D v) _
+            ⟨F₀.obj K⟩ ⟨F₀.obj K'⟩ ⟨G₀.obj K'⟩
+            (ψ a ⊗ₜ[S] F₀.map f) ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K') =
+          @CategoryStruct.comp (ScalarLocalization S D v) _
+            ⟨F₀.obj K⟩ ⟨G₀.obj K⟩ ⟨G₀.obj K'⟩
+            ((1 : Localization.Away v) ⊗ₜ[S] e.hom.app K) (ψ a ⊗ₜ[S] G₀.map f) := he
+      simpa only [ScalarLocalization.localization, Category.assoc] using
+        congrArg (fun z :
+          (⟨F₀.obj K⟩ : ScalarLocalization S D v) ⟶ ⟨G₀.obj K'⟩ ↦
+            eqToHom (hF ⟨K⟩) ≫ z ≫ eqToHom (hG ⟨K'⟩).symm) he'
+  let a : F ≅ G := NatIso.ofComponents c (fun f ↦ hn f)
+  refine ⟨a, hc, ?_⟩
+  intro a' ha'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  exact eq_of_heq ((ha' K).trans (hc K).symm)
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -111,7 +175,39 @@ theorem sfIntegralScalarComp_existsUnique :
               ((sfIntegralOrdinaryComparison l E L ι Y).inv.app K) ≫
             (integralOrdinaryDerivedScalarComp l E L ι Y M j).hom.app K.obj ≫
             (sfIntegralOrdinaryComparison l E M (j.comp ι) Y).hom.app K := by
-  sorry
+  let c := sfIntegralOrdinaryComparison l E L ι Y
+  let d := sfIntegralOrdinaryComparison l L M j Y
+  let e := sfIntegralOrdinaryComparison l E M (j.comp ι) Y
+  let F := sfConstructibleIntegralScalarExtension p l hl E L ι Y
+  let G := sfConstructibleIntegralScalarExtension p l hl L M j Y
+  let H := sfConstructibleIntegralScalarExtension p l hl E M (j.comp ι) Y
+  let A := integralOrdinaryDerivedScalar l L M j Y
+  let b : (F ⋙ G) ⋙ (sfIntegralConstructible l M Y).ι ≅
+      H ⋙ (sfIntegralConstructible l M Y).ι :=
+    Functor.isoWhiskerLeft F d.symm ≪≫
+      (Functor.associator F (sfIntegralConstructible l L Y).ι A).symm ≪≫
+      Functor.isoWhiskerRight c.symm A ≪≫
+      Functor.associator (sfIntegralConstructible l E Y).ι
+        (integralOrdinaryDerivedScalar l E L ι Y) A ≪≫
+      Functor.isoWhiskerLeft (sfIntegralConstructible l E Y).ι
+        (integralOrdinaryDerivedScalarComp l E L ι Y M j) ≪≫ e
+  let a : F ⋙ G ≅ H := NatIso.ofComponents
+    (fun K ↦ { hom := ⟨b.hom.app K⟩, inv := ⟨b.inv.app K⟩,
+               hom_inv_id := by ext; exact b.hom_inv_id_app K
+               inv_hom_id := by ext; exact b.inv_hom_id_app K })
+    (by intro K K' f; ext; exact b.hom.naturality f)
+  refine ⟨a, ?_, ?_⟩
+  · intro K
+    dsimp [a, b, c, d, e, F, A]
+    simp only [Category.id_comp]
+  · intro a' ha'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    ext
+    exact (ha' K).trans (by
+      dsimp [a, b, c, d, e, F, A]
+      simp only [Category.id_comp])
 
 /-- The intrinsic completed integral associator with its fixed tensor normalization.
 Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
@@ -132,7 +228,25 @@ theorem sfIntegralScalarUnit_existsUnique :
         (a.hom.app K).hom =
           (sfIntegralOrdinaryComparison l E E (AlgHom.id (Padic l) E) Y).inv.app K ≫
             (integralOrdinaryDerivedScalarUnit l E Y).hom.app K.obj := by
-  sorry
+  let b := (sfIntegralOrdinaryComparison l E E (AlgHom.id (Padic l) E) Y).symm ≪≫
+    Functor.isoWhiskerLeft (sfIntegralConstructible l E Y).ι
+      (integralOrdinaryDerivedScalarUnit l E Y) ≪≫
+    Functor.rightUnitor (sfIntegralConstructible l E Y).ι
+  let a : sfConstructibleIntegralScalarExtension p l hl E E (AlgHom.id (Padic l) E) Y ≅
+      𝟭 (sfIntegralConstructibleCategory l E Y) := NatIso.ofComponents
+    (fun K ↦ { hom := ⟨b.hom.app K⟩, inv := ⟨b.inv.app K⟩,
+               hom_inv_id := by ext; exact b.hom_inv_id_app K
+               inv_hom_id := by ext; exact b.inv_hom_id_app K })
+    (by intro K K' f; ext; exact b.hom.naturality f)
+  refine ⟨a, ?_, ?_⟩
+  · intro K
+    simp [a, b]
+  · intro a' ha'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    ext
+    exact (ha' K).trans (by simp [a, b])
 
 /-- The normalized intrinsic integral unit.
 Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
@@ -158,7 +272,35 @@ theorem sfRationalScalarComp_existsUnique :
         HEq (a.hom.app K)
           ((sfRationalConstructibleLocalization l M Y).map
             ((sfIntegralScalarComp l E L ι Y p hl M j).hom.app K.obj)) := by
-  sorry
+  let F₀ := sfConstructibleIntegralScalarExtension p l hl E L ι Y
+  let G₀ := sfConstructibleIntegralScalarExtension p l hl L M j Y
+  let H₀ := sfConstructibleIntegralScalarExtension p l hl E M (j.comp ι) Y
+  let F := sfRationalScalarExtension l E Y p hl L ι
+  let G := sfRationalScalarExtension l L Y p hl M j
+  let H := sfRationalScalarExtension l E Y p hl M (j.comp ι)
+  have hF := (sfRationalScalarExtension_existsUnique l E Y p hl L ι).exists.choose_spec
+  have hG := (sfRationalScalarExtension_existsUnique l L Y p hl M j).exists.choose_spec
+  have hH := (sfRationalScalarExtension_existsUnique l E Y p hl M
+    (j.comp ι)).exists.choose_spec
+  let ψ a := (sfRationalCoefficientEquiv l M).symm
+    ((j.comp ι) (sfRationalCoefficientEquiv l E a))
+  apply localizedIso
+    (Padic.coefficientExtensionUniformizer l E) (Padic.coefficientExtensionUniformizer l M)
+    ψ (F₀ ⋙ G₀) H₀ (sfIntegralScalarComp l E L ι Y p hl M j) (F ⋙ G) H
+  · intro K
+    exact (hG.2.1 (F.obj K)).trans
+      (congrArg (fun X : sfRationalConstructibleCategory l L Y ↦
+        (⟨G₀.obj X.obj⟩ : sfRationalConstructibleCategory l M Y)) (hF.2.1 K))
+  · exact hH.2.1
+  · intro K K' f a
+    have hm := map_heq G (hF.2.1 ⟨K⟩) (hF.2.1 ⟨K'⟩) (hF.2.2 K K' f a)
+    have hn := hG.2.2 (F₀.obj K) (F₀.obj K') (F₀.map f)
+      ((sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E a)))
+    exact hm.trans (by
+      simpa only [ψ, AlgEquiv.apply_symm_apply, AlgHom.comp_apply,
+        sfRationalConstructibleLocalization, ScalarLocalization.localization,
+        sfRationalScalarExtension, F₀, G₀, G, Functor.comp_obj, Functor.comp_map] using hn)
+  · exact hH.2.2
 
 /-- Canonical composition for the currently recorded rational scalar extensions.
 Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
@@ -181,7 +323,24 @@ theorem sfRationalScalarUnit_existsUnique :
         HEq (a.hom.app K)
           ((sfRationalConstructibleLocalization l E Y).map
             ((sfIntegralScalarUnit l E Y p hl).hom.app K.obj)) := by
-  sorry
+  let F := sfRationalScalarExtension l E Y p hl E (AlgHom.id (Padic l) E)
+  let F₀ := sfConstructibleIntegralScalarExtension p l hl E E
+    (AlgHom.id (Padic l) E) Y
+  have hobj := (sfRationalScalarExtension_existsUnique l E Y p hl E
+    (AlgHom.id (Padic l) E)).exists.choose_spec.2.1
+  have hmap := (sfRationalScalarExtension_existsUnique l E Y p hl E
+    (AlgHom.id (Padic l) E)).exists.choose_spec.2.2
+  apply localizedIso
+    (Padic.coefficientExtensionUniformizer l E) (Padic.coefficientExtensionUniformizer l E)
+    id F₀ (𝟭 _) (sfIntegralScalarUnit l E Y p hl) F (𝟭 _)
+    hobj (fun _ ↦ rfl)
+  · intro K K' f a
+    simpa only [F, F₀, id_eq, AlgHom.id_apply, AlgEquiv.symm_apply_apply,
+      sfRationalConstructibleLocalization, ScalarLocalization.localization,
+      sfRationalScalarExtension]
+      using hmap K K' f a
+  · intro K K' f a
+    rfl
 
 /-- The rational identity comparison, retaining the completeness-unit normalization.
 Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
