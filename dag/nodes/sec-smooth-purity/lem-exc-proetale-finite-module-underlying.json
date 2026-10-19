@@ -1,0 +1,129 @@
+{
+ "id": "lem-exc-proetale-finite-module-underlying",
+ "kind": "statement",
+ "title": "Unit-normalized abelian comparison for finite-ring module inverse image",
+ "statement": "Let f : X → Y be any scheme morphism and C a finite discrete ring, not necessarily commutative. The specified transported-action functor finiteCoefficientModulePullback f C, after forgetting to abelian sheaves, is naturally isomorphic to abelian inverse image after forgetting on Y. The comparison sends the actual small-model module Kan-extension unit section at every N, W and m to the actual abelian inverse-image adjunction unit section. This includes the empty scheme and the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3, lemma-pullback-module and lemma-adjoint-push-pull-modules; AsSmall transport of the canonical unit, adapting the existing ProEtaleModelRingPresentation proof to RingCat."
+ },
+ "stmt_deps": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Transport the RingCat inverse-image adjunction through the strict AsSmall sheaf equivalences. Its unit is the original ring unit precomposed by AsSmall.down. Compare this adjunction with the model-site ring inverse image by uniqueness of left adjoints. Commute forgetting rings past left Kan extension and sheafification using sheafPullbackForgetIso and its unit equation. This gives a set inverse-image presentation of finiteCoefficientModelRingUnit. No commutative-ring structure is used.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply inverseImage_underlying_unit_of_ring_presentation on the model sites. The model base-change functor preserves finite limits, hence is representably flat. The ring presentation therefore identifies the actual module pullback with abelian inverse image and identifies their units.",
+   "uses": [
+    "lem-weil-pbc-module-inverse-image-unit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the comparison by module transport to the model and abelian transport back. Compare the model abelian adjunction with the original one using leftAdjointUniq. Its unit equation, followed by the module unit equation, is the required section formula. The final scalar restriction along the inverse coefficient isomorphism changes no abelian sheaf or map.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-module-inverse-image-unit-comparison",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D3; explicit noncommutative version of the existing model-ring and abelian comparison proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback sheaves modules underlying abelian sheaf inverse image adjunction restriction scalars",
+   "results": "SheafOfModules.pullbackIso, pullbackPushforwardAdjunction and PullbackConstruction.adjunction give generic module adjunctions, but no comparison for the specified pro-etale finite-ring transported action.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing project module-unit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "Generic module adjunction and its formulas on free-module units; no abelian comparison for arbitrary finite noncommutative rings.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*toSheaf|toSheaf.*pullback",
+   "results": "The project has ModuleInverseImageUnitComparison and ProEtaleModuleInverseImageUnderlying. The former works for arbitrary ring sheaves; the latter public pro-etale specialization assumes CommRingCat. Adapt the specialization privately to RingCat.",
+   "date": "2026-10-18",
+   "verdict": "Use the general unit comparison; the required finite-ring specialization is new."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying abelian sheaf of inverse image of a module sheaf is abelian inverse image compatibly with the adjunction unit",
+   "results": "PullbackConstruction.adjunction, pushforwardPushforwardAdj, pullbackPushforwardAdjunction and unitToPushforwardObjUnit; no exact unit-normalized abelian comparison for the specified finite-ring transported pullback.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The general project module-unit comparison is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison",
+  "date": "2026-10-18",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-proetale-finite-scalar-unit-comparison",
+   "place": "Proof step 2: identify the actual small-model module unit with abelian inverse image.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleUnderlying",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteModuleUnderlying.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientModuleUnderlying_exists",
+  "statement": "theorem finiteCoefficientModuleUnderlying_exists\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (C : Type (u + 1))\n    [Ring C] [Finite C] [TopologicalSpace C] [DiscreteTopology C] :\n    ∃ e : finiteCoefficientModulePullback f C ⋙\n        SheafOfModules.toSheaf (finiteCoefficientRingSheaf X C) ≅\n      SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y C) ⋙\n        proEtaleSheafInverseImage f AddCommGrpCat.{u + 1},\n      ∀ (N : FiniteCoefficientModules Y C) (W : Y.ProEtᵒᵖ) (m : N.val.obj W),\n        (e.hom.app N).hom.app ((proEtaleBaseChange f).op.obj W)\n          ((((SheafOfModules.pullbackPushforwardAdjunction\n            (finiteCoefficientModelRingUnit f C)).unit.app\n            ((proEtaleModuleToModel (finiteCoefficientRingSheaf Y C)).obj N)).val.app\n              (AsSmall.up.op.obj W)) m) =\n        ((proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).unit.app\n          ((SheafOfModules.toSheaf (finiteCoefficientRingSheaf Y C)).obj N)).hom.app W m",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T005305-L-2749043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261019T005305-L-2749043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
