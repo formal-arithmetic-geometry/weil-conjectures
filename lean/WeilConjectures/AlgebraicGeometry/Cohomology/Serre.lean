@@ -27,7 +27,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-!
