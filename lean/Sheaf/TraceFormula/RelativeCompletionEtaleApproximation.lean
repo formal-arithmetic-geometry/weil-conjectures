@@ -28,7 +28,7 @@ import Sheaf.RingTheory.CompleteLocalGRing
 import WeilConjectures.RingTheory.GRingCompletionRegular
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.PopescuSmoothing
+import WeilConjectures.RingTheory.PopescuSmoothing
 import WeilConjectures.RingTheory.RegularComposition
 
 /-! # Relative étale approximation from an isomorphism of completed local rings

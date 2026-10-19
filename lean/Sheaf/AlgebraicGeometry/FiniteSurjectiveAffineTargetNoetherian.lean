@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage
 import Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes
 import Sheaf.Paper.FiniteSurjectiveCoherentGenericSupport
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.SerreCriterionAffineness
+import WeilConjectures.AlgebraicGeometry.SerreCriterionAffineness
 import Sheaf.Paper.PQFCohomology
 
 /-!

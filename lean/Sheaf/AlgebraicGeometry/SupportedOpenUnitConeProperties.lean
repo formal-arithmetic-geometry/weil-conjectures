@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 import Sheaf.AlgebraicGeometry.SupportedOpenUnitImageProperties
 import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 

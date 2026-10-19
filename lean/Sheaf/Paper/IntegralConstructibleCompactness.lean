@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingClosureExistence
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 public import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
@@ -21,7 +21,7 @@ import Sheaf.Paper.IntegralIndLowerTail
 import Sheaf.Paper.IntegralWindowCoproductComparison
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.CompactObjectsThick
+import WeilConjectures.CategoryTheory.CompactObjectsThick
 import Mathlib.CategoryTheory.Triangulated.Yoneda
 import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty

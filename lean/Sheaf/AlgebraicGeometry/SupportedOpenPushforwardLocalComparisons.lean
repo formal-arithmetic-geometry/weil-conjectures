@@ -4,7 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
-import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.Algebra.Category.Grp.Zero

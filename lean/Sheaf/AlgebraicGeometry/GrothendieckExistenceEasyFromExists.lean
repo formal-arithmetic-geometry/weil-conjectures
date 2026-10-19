@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.FiniteIffFormalGlueing
-import Sheaf.RingTheory.FormalGlueingIsogeny
+import WeilConjectures.RingTheory.FormalGlueingIsogeny
 import WeilConjectures.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

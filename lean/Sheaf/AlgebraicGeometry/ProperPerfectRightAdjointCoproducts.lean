@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.AlgebraicGeometry.ProperPerfectCompactTests
-import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
+import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts

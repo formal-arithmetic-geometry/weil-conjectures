@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 

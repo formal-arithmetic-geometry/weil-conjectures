@@ -9,7 +9,7 @@ public import WeilConjectures.Topology.OpenModuleCohomology
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.Topology.PointwiseTruncationLimitExists
+import WeilConjectures.Topology.PointwiseTruncationLimitExists
 import Sheaf.Topology.PointwiseTruncationLimitIsIso
 
 /-! # Pointwise bounds and the derived limit of lower truncations

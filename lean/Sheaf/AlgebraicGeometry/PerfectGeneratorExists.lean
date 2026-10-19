@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 
 /-! # Existence of a single perfect generator

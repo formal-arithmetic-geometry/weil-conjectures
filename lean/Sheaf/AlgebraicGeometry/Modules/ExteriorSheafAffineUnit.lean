@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import WeilConjectures.AlgebraicGeometry.AffineLocalizingPresheafSheafification
-import Sheaf.LinearAlgebra.ExteriorPowerLocalization
+import WeilConjectures.LinearAlgebra.ExteriorPowerLocalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The exterior sheafification unit on an affine open

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
-import Sheaf.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
+import WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
 
 /-! # Pointwise pseudo-coherent localization on an affine open
 

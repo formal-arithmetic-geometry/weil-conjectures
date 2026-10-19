@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.Derivation.Basic
 
 import WeilConjectures.RingTheory.FiniteSubalgebraFractionField
 import WeilConjectures.RingTheory.FormalFiberDerivationExtension
-import Sheaf.RingTheory.Derivation.DetectNonPthPower
+import WeilConjectures.RingTheory.Derivation.DetectNonPthPower
 import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization

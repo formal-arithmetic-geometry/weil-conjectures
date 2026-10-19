@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import all Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 import all WeilConjectures.AlgebraicGeometry.PerfectCommonAffineModels
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Abelian

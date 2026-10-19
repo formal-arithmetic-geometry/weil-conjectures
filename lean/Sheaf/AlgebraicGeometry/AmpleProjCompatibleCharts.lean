@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.AlgebraicGeometry.SectionRingSingleQuotientChart
+import WeilConjectures.AlgebraicGeometry.SectionRingSingleQuotientChart
 import Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlap
 
 /-! # Compatible local quotient morphisms for the section ring

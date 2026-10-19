@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftProperties
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-! Exact structures required by the two generation arguments. Choose the

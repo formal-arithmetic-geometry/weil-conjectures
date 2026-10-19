@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.AdjoinSingletonAssociatedLocalization
+import WeilConjectures.RingTheory.AdjoinSingletonAssociatedLocalization
 import WeilConjectures.RingTheory.AdjoinQuotientSurjective
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.FiniteOverNagata

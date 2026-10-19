@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction
-import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Affine supported zero detection

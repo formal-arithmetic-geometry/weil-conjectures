@@ -4,11 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Mathlib.CategoryTheory.Category.Preorder
-import Sheaf.CategoryTheory.CompactHomHocolim
+import WeilConjectures.CategoryTheory.CompactHomHocolim
 import all Sheaf.CategoryTheory.BrownStageSequence
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products

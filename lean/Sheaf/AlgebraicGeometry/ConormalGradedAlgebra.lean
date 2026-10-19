@@ -42,7 +42,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Mathlib.AlgebraicGeometry.StructureSheaf
 import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.Topology.StalkDirectSums
+import WeilConjectures.Topology.StalkDirectSums
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic

@@ -12,7 +12,7 @@ public import Mathlib.Topology.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine
 import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Perfect generators with support
 

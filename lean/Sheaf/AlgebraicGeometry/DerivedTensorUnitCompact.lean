@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 import WeilConjectures.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux

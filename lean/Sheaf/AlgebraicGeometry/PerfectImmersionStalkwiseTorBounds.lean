@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution
+import WeilConjectures.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory

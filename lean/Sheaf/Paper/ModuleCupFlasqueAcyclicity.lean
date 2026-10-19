@@ -9,7 +9,7 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
-import Sheaf.Topology.FlasqueZariskiAcyclic
+import WeilConjectures.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Flasque module sheaves are acyclic for module global sections

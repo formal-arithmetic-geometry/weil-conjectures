@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
 import WeilConjectures.AlgebraicGeometry.SmoothDiagonalRegularGenerators
 import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
-import Sheaf.AlgebraicGeometry.SmoothDiagonalIdealConormalRank
+import WeilConjectures.AlgebraicGeometry.SmoothDiagonalIdealConormalRank
 import Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison
 
 /-! # The dualizing object of a smooth diagonal in constant rank

@@ -10,7 +10,7 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives
 import Sheaf.CategoryTheory.FilteredHomologyCoupleComputations
-import Sheaf.CategoryTheory.DerivedCoupleExact
+import WeilConjectures.CategoryTheory.DerivedCoupleExact
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import all WeilConjectures.CategoryTheory.FiniteCycleDerivedComparison
 

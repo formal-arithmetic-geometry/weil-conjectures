@@ -151,13 +151,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.CategoryTheory.CompactGeneratorTelescopeIso",
-  "file": "lean/Sheaf/CategoryTheory/CompactGeneratorTelescopeIso.lean",
+  "module": "WeilConjectures.CategoryTheory.CompactGeneratorTelescopeIso",
+  "file": "lean/WeilConjectures/CategoryTheory/CompactGeneratorTelescopeIso.lean",
   "declaration": "CategoryTheory.compactGenerator_telescope_isIso",
   "statement": "theorem compactGenerator_telescope_isIso\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{max w v} C]\n    {I : Type (max w v)} (E : I → C)\n    (hcompact : ∀ i : I, IsCompactObject (E i))\n    (hgenerate : IsTriangulatedGeneratingFamily E)\n    (Y : C) (X : ℕ → C) (t : ∀ n : ℕ, X n ⟶ X (n + 1))\n    (f : ∀ n : ℕ, X n ⟶ Y)\n    (hstart : ∀ (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ Y),\n      ∃ a : (E i)⟦m⟧ ⟶ X 0, a ≫ f 0 = g)\n    (hkill : ∀ (n : ℕ) (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ X n),\n      g ≫ f n = 0 → g ≫ t n = 0)\n    (H : C)\n    (q : (∐ fun n : ULift.{max w v} ℕ => X n.down) ⟶ H)\n    (r : H ⟶ (∐ fun n : ULift.{max w v} ℕ => X n.down)⟦(1 : ℤ)⟧)\n    (hT : Triangle.mk\n      (𝟙 (∐ fun n : ULift.{max w v} ℕ => X n.down) -\n        Sigma.desc (fun n : ULift.{max w v} ℕ =>\n          t n.down ≫ Sigma.ι (fun k : ULift.{max w v} ℕ => X k.down)\n            ⟨n.down + 1⟩)) q r ∈ distTriang C)\n    (c : H ⟶ Y)\n    (hstage : ∀ n : ℕ,\n      Sigma.ι (fun k : ULift.{max w v} ℕ => X k.down) ⟨n⟩ ≫ q ≫ c = f n) :\n    IsIso c",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.CategoryTheory.CompactGeneratorTelescopeIso retired; now WeilConjectures.CategoryTheory.CompactGeneratorTelescopeIso."
  },
  "reviewed": {
   "date": "2026-10-12",

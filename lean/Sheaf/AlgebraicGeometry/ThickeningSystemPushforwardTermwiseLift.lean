@@ -1,6 +1,6 @@
 module
 
-public import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
+public import WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforward
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient

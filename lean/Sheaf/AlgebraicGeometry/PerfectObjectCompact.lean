@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 import Sheaf.AlgebraicGeometry.DerivedTensorUnitCompact
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
 

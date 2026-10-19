@@ -6,7 +6,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.CategoryTheory.CompactlyGenerated
+public import WeilConjectures.CategoryTheory.CompactlyGenerated
 import Sheaf.CategoryTheory.DerivedModuleRankOneProperties
 
 /-! # Compact generation of the derived category of modules

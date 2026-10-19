@@ -38,7 +38,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.DensePoints
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology
-import Sheaf.AlgebraicGeometry.SectionBoundaryExact
+import WeilConjectures.AlgebraicGeometry.SectionBoundaryExact
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 import Sheaf.AlgebraicGeometry.AmpleIffNormalizedComponentDegreePos
 import Sheaf.TraceFormula.GenericFibrePointsSmooth

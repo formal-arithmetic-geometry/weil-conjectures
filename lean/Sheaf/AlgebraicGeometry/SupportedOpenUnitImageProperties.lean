@@ -10,7 +10,7 @@ public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.Grp.Zero

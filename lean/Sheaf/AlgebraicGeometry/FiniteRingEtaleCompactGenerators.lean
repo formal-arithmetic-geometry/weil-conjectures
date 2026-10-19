@@ -13,11 +13,11 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 import Sheaf.SixFunctors.FlatModel
-import Sheaf.CategoryTheory.CompactObjectsThick
+import WeilConjectures.CategoryTheory.CompactObjectsThick
 import Sheaf.Paper.PurEtaleLisseStratumCompact
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.AlgebraicGeometry.AffineEtaleFreeDetection

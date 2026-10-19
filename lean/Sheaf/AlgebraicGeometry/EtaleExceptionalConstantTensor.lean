@@ -50,7 +50,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
+import WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
 import Sheaf.Paper.ProjectionMateExact

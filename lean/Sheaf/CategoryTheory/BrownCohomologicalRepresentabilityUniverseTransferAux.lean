@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.CategoryTheory.CompactlyGenerated
+public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
-import Sheaf.CategoryTheory.CompactGenerationEquivalence
+import WeilConjectures.CategoryTheory.CompactGenerationEquivalence
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 import Mathlib.Algebra.Category.Grp.Ulift
 

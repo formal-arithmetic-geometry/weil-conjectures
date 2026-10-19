@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct
+import WeilConjectures.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct
 import Sheaf.CategoryTheory.BoundedBelowCoproductFiltration
 
 /-! # Local surjectivity of the lower-truncated coproduct comparison

@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.AffineSupportPoweredGenerators
 import WeilConjectures.AlgebraicGeometry.AffineBinomialProjectorCone
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Affine perfect support extension
 

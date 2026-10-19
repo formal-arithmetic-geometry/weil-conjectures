@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.GrothendieckDerivedCompactLocalizationModel
 public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-public import Sheaf.CategoryTheory.CompactlyGenerated
+public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Sheaf.CategoryTheory.AlphaCompactObject

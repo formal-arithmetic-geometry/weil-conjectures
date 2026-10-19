@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Structure and restriction comparisons for a spectrum presentation

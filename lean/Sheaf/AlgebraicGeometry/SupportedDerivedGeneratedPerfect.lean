@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 
 /-! # Building supported derived objects from a perfect complex
 

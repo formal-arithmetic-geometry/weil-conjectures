@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

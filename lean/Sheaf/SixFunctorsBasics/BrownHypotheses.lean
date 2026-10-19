@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Small

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap
-import Sheaf.AlgebraicGeometry.SupportedRelativeOpenGluing
+import WeilConjectures.AlgebraicGeometry.SupportedRelativeOpenGluing
 
 /-! # Supported perfect gluing on the union with an affine open
 

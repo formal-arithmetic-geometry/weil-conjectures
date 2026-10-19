@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 import Mathlib.CategoryTheory.Abelian.Refinements
-import Sheaf.CategoryTheory.DerivedCoupleExact
+import WeilConjectures.CategoryTheory.DerivedCoupleExact
 import Sheaf.CategoryTheory.FiniteCycleDerivedComparison
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits

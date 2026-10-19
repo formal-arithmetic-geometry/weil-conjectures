@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AsSubring
 import WeilConjectures.RingTheory.IsN1OfFiniteDomainExtension
 import WeilConjectures.RingTheory.IsN1OfIsAnalyticallyUnramified
-import Sheaf.RingTheory.IsN1OfLocalCharacterization
+import WeilConjectures.RingTheory.IsN1OfLocalCharacterization
 import Sheaf.RingTheory.AdjoinSingletonLocalUnramified
 import WeilConjectures.RingTheory.AdjoinSingletonMaximalFiniteCover
 

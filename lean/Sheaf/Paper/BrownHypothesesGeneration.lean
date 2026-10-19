@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.LocalizingClosureExistence
-public import Sheaf.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.CompactObject
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

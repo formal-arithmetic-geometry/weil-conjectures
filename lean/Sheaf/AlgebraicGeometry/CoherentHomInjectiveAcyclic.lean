@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
-import Sheaf.Topology.FlasqueZariskiAcyclic
+import WeilConjectures.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
 

@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 import Sheaf.AlgebraicGeometry.FiniteEtaleCompletionStage
-import Sheaf.RingTheory.HenselianApproximationAlgHom
+import WeilConjectures.RingTheory.HenselianApproximationAlgHom
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!

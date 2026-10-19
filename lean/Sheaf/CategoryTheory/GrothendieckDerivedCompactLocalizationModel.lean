@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import Sheaf.CategoryTheory.CompactlyGenerated
+public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation

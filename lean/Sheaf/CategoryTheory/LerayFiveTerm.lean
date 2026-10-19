@@ -6,11 +6,10 @@ module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.CategoryTheory.ExactCouple
+import WeilConjectures.CategoryTheory.ExactCouple
 import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.Algebra.Homology.ExactCouple.Basic
 import WeilConjectures.CategoryTheory.Abelian.Filtration
-import WeilConjectures.CategoryTheory.ExactCouple
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.CategoryTheory.PBCFiltration
 
