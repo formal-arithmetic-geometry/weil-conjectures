@@ -17037,3 +17037,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/N5/lem-per-integral-chart-logification-thickening (reviewer RETURN: L: independent stage-2 immutable head 8fbdd796cf5b: Lean maths correct: return points (1)-(5) of 51b134d0 and the H4 Eta)
 - 03:58 L: returned deliver/Q152/lem-per-galois-epp-reduced-fibre-cover (reviewer RETURN: L: independent stage-2 immutable head 9900c58bac7d: Item lem-per-galois-epp-reduced-fibre-cover is itself in the 2026-10)
 - 03:58 L: returned deliver/Q88/lem-per-relative-ample-absolute-twist (reviewer RETURN: L: independent stage-2 immutable head e9a50cadc55f: F1 (route pivot, human decision 2026-10-19): the item itself is in s)
+- 03:58 L: returned deliver/Q40/lem-per-regular-model-completion (reviewer RETURN: L: independent stage-2 immutable head ede3020f6122: stage-2 checks: (c) lean/Sheaf/AlgebraicGeometry/RegularModelComplet)
