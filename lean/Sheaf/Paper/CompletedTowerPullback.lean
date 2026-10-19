@@ -12,7 +12,7 @@ public import Sheaf.Paper.IntrinsicCompletion
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 

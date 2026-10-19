@@ -52,7 +52,7 @@ import Sheaf.AlgebraicGeometry.SupportRestrictionTriangle
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution
 import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness

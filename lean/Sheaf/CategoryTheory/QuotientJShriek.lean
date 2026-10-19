@@ -9,10 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # The canonical extension-by-zero generator epimorphism

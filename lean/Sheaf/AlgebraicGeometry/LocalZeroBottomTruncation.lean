@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.HomTensorDegreewise
 import Sheaf.Algebra.Homology.HomTensorComparisonNaturality
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Naturality of the canonical map to the sheaf tensor product

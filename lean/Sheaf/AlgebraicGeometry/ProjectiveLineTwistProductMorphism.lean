@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-! # The pointwise multiplication morphism of twists
 

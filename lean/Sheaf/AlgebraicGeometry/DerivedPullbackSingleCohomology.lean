@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.DerivedSingleOpenLocus
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Pullback cohomology on a locus with one locally free cohomology sheaf
 

@@ -9,7 +9,7 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 public import Mathlib.Algebra.Homology.ShortComplex.Basic
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
-public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.CategoryTheory.Sites.LocallyInjective
 import Mathlib.CategoryTheory.Abelian.Exact

@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Topology.InverseImageModule
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Topology.Sheaves.Functors
@@ -33,7 +33,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Conservativity of base change to a separable closure

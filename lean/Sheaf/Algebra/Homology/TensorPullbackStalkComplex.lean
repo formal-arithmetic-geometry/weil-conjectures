@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Topology.InverseImageModule
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
 import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport

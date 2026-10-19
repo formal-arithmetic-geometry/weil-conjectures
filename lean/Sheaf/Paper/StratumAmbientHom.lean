@@ -41,7 +41,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 

@@ -21,7 +21,7 @@ public import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 public import Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing

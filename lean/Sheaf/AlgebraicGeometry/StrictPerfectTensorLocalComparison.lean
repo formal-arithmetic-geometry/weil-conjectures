@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.AlgebraicGeometry.LocalizedOpenKFlatTensorRestriction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import all Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction

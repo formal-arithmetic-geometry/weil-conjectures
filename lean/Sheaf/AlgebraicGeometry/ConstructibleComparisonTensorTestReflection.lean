@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleComparisonModuleExact
 import Sheaf.CategoryTheory.ContinuousRingedToposModuleDirectImage
 import all Sheaf.CategoryTheory.RingedToposKFlatPullback
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Reflection of one coefficient-model tensor test

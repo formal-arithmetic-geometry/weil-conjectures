@@ -19,13 +19,13 @@ public import Sheaf.Paper.IntrinsicCoefficientTwists
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.BifunctorShift
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat

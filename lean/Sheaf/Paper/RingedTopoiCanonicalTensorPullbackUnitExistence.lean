@@ -6,13 +6,13 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Sheaf.Paper.RingedTopoiTensorComparisonData
 public import Mathlib.Algebra.Homology.BifunctorShift
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
 import Mathlib.CategoryTheory.Limits.Types.Products

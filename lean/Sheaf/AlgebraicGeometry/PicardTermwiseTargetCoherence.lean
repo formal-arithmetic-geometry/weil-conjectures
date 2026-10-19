@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 

@@ -4,7 +4,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 @[expose] public section
 set_option autoImplicit false

@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.DerivedResidueUnitBetti
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import all Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

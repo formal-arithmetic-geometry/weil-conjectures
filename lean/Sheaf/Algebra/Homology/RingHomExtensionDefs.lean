@@ -6,7 +6,7 @@ Authors: SHEAF group Q1, SHEAF group T3
 module
 
 public import Sheaf.Algebra.Homology.HomComplex
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 
 /-! # Shared definitions for scalar extension of ring-site Hom complexes

@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic
 import Sheaf.Algebra.Homology.FilteredColimitsTensor

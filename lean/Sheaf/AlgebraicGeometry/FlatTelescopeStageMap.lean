@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 

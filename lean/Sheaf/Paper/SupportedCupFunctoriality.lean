@@ -17,7 +17,7 @@ import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.Paper.SupportedCup
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure

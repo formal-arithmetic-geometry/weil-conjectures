@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Iso
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Mathlib.CategoryTheory.Limits.HasLimits
@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
 /-!

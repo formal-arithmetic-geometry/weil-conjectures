@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FieldScalarPresheafPullbackExists
 public import Mathlib.CategoryTheory.Functor.EpiMono
-import Sheaf.Algebra.Category.ModuleCat.PresheafPullbackEvaluation
+import WeilConjectures.Algebra.Category.ModuleCat.PresheafPullbackEvaluation
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Exactness of extension from a constant field presheaf

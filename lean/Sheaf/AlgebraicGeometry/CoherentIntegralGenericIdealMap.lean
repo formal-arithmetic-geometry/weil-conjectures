@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealConstruction
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMono
 

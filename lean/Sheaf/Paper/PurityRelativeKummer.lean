@@ -53,7 +53,7 @@ import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
 import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.Paper.KunBcMapOnCohomology
 import WeilConjectures.SixFunctors.BaseChange.Square
@@ -87,7 +87,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit

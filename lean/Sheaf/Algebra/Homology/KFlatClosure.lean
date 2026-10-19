@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 import Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree

@@ -31,7 +31,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import WeilConjectures.Compactification.NagataCompactification

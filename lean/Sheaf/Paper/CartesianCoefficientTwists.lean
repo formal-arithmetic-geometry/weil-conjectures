@@ -24,7 +24,7 @@ import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 import Sheaf.Paper.TateTwistLocallyFree
 import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 import Sheaf.AlgebraicGeometry.ProEtaleCoefficientComparisonsPullback
-import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Paper.PurInverseImageCompatibleFreeTower
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale

@@ -9,10 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import Sheaf.CategoryTheory.RightDerivedExactComposite
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom

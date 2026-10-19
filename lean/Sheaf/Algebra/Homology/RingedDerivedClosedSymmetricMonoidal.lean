@@ -15,7 +15,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.Monoidal.Category
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality

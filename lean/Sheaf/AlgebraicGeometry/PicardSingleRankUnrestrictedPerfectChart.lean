@@ -21,7 +21,7 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 import Mathlib.CategoryTheory.Monoidal.Preadditive
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Perfect charts for one direct-image rank condition

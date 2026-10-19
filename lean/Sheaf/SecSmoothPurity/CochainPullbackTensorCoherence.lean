@@ -10,12 +10,11 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DivisorModule
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.DivisorModuleLocal
 import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 

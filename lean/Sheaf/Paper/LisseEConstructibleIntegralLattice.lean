@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import Sheaf.AlgebraicGeometry.LisseLatticeEtaleLocal
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
@@ -37,7 +37,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Algebra.Homology.HomComplex
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective

@@ -10,7 +10,7 @@ import Sheaf.Paper.ModuleCupCosimplicialAW
 public import Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.Embedding.IsSupported
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Flasque augmented resolutions with an Alexander–Whitney pairing
 

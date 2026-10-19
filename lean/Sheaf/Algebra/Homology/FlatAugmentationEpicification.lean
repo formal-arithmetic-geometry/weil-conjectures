@@ -5,14 +5,14 @@ Authors: SHEAF group V2
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Mathlib.Algebra.Homology.HomologicalComplexBiprod
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 

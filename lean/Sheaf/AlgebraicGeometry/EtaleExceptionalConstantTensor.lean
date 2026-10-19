@@ -25,7 +25,6 @@ import Sheaf.AlgebraicGeometry.DimensionExtension
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
@@ -46,7 +45,7 @@ import Mathlib.Topology.Defs.Filter
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness

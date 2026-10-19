@@ -7,7 +7,7 @@ module
 
 public import Sheaf.Paper.RingedSiteIdeal
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Paper.ExtendedLocalizationCech
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Paper.FlatExtendedCechComparison

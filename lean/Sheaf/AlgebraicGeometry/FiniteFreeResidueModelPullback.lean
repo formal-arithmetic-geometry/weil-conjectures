@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat

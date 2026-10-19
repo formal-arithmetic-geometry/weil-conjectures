@@ -6,13 +6,13 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 import all Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
 import WeilConjectures.AlgebraicGeometry.QuasicoherentSheafHom
 import Sheaf.AlgebraicGeometry.QuasicoherentOpenSectionIdealExtension
-import Sheaf.AlgebraicGeometry.TensorHomRestrictionScalar
+import WeilConjectures.AlgebraicGeometry.TensorHomRestrictionScalar
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 
 /-! # Tensor extension of a coherent local morphism
