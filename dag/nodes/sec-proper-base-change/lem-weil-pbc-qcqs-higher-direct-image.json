@@ -34,76 +34,54 @@
  ],
  "proof": [
   {
-   "text": "For a sheaf $F$ choose a K-injective resolution $F[0]\\to I^\\bullet$; for a bounded-below complex $K$ choose a K-injective resolution $K\\to I^\\bullet$. Such resolutions exist and any two are chain-homotopy equivalent by [prop-weil-pbc-kinjective-resolutions-exist]; the formula $Ru_*K=u_*I^\\bullet$ is part of the definition of the derived direct image [def-weil-pbc-direct-image], with the complexes and their cohomology interpreted in [def-weil-pbc-derived-categories] and [def-weil-pbc-kinjective-resolutions]. Thus $R^qu_*F$ is the $q$-th cohomology sheaf of $u_*I^\\bullet$ in the degree-zero case, and the same complex computes $Ru_*K$ in every degree.",
+   "text": "Apply the proved higherDirectImageSheafifiedPresheaf to f, F and q. Its presheaf, including the derived restriction maps, is exactly the first clause. The qcqs hypotheses are harmless specializations of its arbitrary-morphism statement.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the given K-injective I put C = lowerStar(f)(I) and L = sheafToPresheaf(C). The definition of lowerStar identifies L with precomposition of the underlying presheaf complex of I along etale base change. Precomposition is exact since limits and colimits of presheaves are pointwise. Apply ShortComplex.mapHomologyIso to this precomposition functor, identifying the displayed presheaf with H^q(L), naturally in every restriction map.",
+   "uses": [
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-kinjective-resolutions"
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Let $W\\to V$ be etale and put $j:W\\times_VU\\to U$. By etale base change [lem-weil-pbc-etale-base-change-finite-limits], $j$ is etale and the restriction of $I^\\bullet$ to $W\\times_VU$ is the inverse-image/restriction of $I^\\bullet$. This restriction is exact on abelian sheaves by the sectionwise description of etale restriction [lem-weil-pbc-etale-inverse-image-restriction] and exactness of limits and colimits of sheaves [lem-weil-pbc-sheafification-exact]. The exact left adjoint $j_!$ is the extension by zero [def-weil-pbc-etale-sum-extension], and [lem-weil-pbc-etale-restriction-injectives] gives this adjunction; hence [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that $j^{-1}I^\\bullet$ is K-injective. Therefore $F|_{W\\times_VU}\\to j^{-1}I^\\bullet$ is a K-injective resolution.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-sheafification-exact",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By the definition of etale cohomology [def-weil-pbc-etale-cohomology] and resolution independence [prop-weil-pbc-cohomology-resolution-independent], the degree-$q$ cohomology of the section complex is\n$$\nH^q\\bigl(\\Gamma(W\\times_VU,j^{-1}I^\\bullet)\\bigr)=H^q(W\\times_VU,F|).\n$$\nThe direct-image formula [def-weil-pbc-direct-image] identifies the complex of sections of $u_*I^\\bullet$ over $W$ with $I^\\bullet(W\\times_VU)$, and the restriction maps in $W$ are the corresponding maps of fibre products. Thus the presheaf $W\\mapsto H^q((u_*I^\\bullet)(W))$ is the presheaf $W\\mapsto H^q(W\\times_VU,F|)$ in the degree-zero case, and the same statement with hypercohomology holds for $K$.",
-   "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-cohomology-resolution-independent",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For any complex of sheaves $C^\\bullet$ on $V_{\\Et}$, its underlying presheaf has sectionwise cohomology $W\\mapsto H^q(C^\\bullet(W))$. Sheafification is exact and commutes with this cohomology by [lem-weil-pbc-sheafification-exact] and the exact-functor cohomology lemma [lem-weil-pbc-exact-functor-complex-cohomology]. Applying this to $C^\\bullet=u_*I^\\bullet$ gives a canonical isomorphism between the sheaf $\\mathcal H^q(u_*I^\\bullet)$ and the sheafification of $W\\mapsto H^q((u_*I^\\bullet)(W))$.",
+   "text": "Apply ShortComplex.mapHomologyIso to exact presheafToSheaf and the short complex L.sc(q). The sheafification counit sheafificationNatIso, mapped termwise, identifies sheafification(L) with C. Taking homology gives sheafification(H^q(L)) isomorphic to H^q(C).",
    "uses": [
     "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Combining the first step with the preceding two steps identifies $R^qu_*F=\\mathcal H^q(Ru_*F)$ with the sheafification of $W\\mapsto H^q(W\\times_VU,F|)$. For $K\\in\\Dplus(U_{\\Et})$, the first step gives $Ru_*K=u_*I^\\bullet$ and the same sectionwise and sheafification calculation in every degree identifies $\\mathcal H^q(Ru_*K)$ with the sheafification of $W\\mapsto H^q(W\\times_VU,K|)$, which is the asserted derived description.",
+   "text": "The source-library Functor.rightDerivedFunctorObjQIso I is the K-injective computation of derived direct image: Rf_*(Q I) is isomorphic to Q(C). Invert it and transport along the supplied Q I isomorphic to K.obj. Compose with the inverse of rightDerivedFunctorPlusCompatibility at K. Apply DerivedCategory.homologyFunctor, preceded by the inverse of homologyFunctorFactors at C. Compose with the preceding sheafification isomorphism to obtain the second clause for every integer q. No resolution is chosen, no strict lower bound on I is assumed, and no restriction-preserves-K-injectives result is needed.",
    "uses": [
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-pbc-derived-categories",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-kinjective-resolutions",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-sheafification-exact",
-  "def-weil-pbc-etale-sum-extension",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-cohomology-resolution-independent",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-pbc-derived-categories",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lem-weil-pbc-qcqs-higher-direct-image.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tags 072W and 00WJ; source-library KInjective and PlusCompatibility",
+  "place": "D5 Lean proof, 2026-10-19: existing ordinary-sheaf formula and exact sheafification of the K-injective pushforward"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -152,9 +130,7 @@
   "summary": "Split the imported proof into explicit resolution, etale restriction, sectionwise cohomology, exact sheafification, and conclusion steps. The proof uses existing closed or Mathlib-leaf nodes for etale base change, restriction with exact extension by zero, preservation of K-injectives, sheafification exactness, exact-functor cohomology, and resolution independence; no duplicate node was needed. Added the missing sheafification statement dependency and recorded the two matching slopmaster2 declarations, which remain sorry-containing and have module-valued statements stronger than the abelian-sheaf wording here.",
   "blueprint": "The five steps realize the blueprint proof paragraph: the first step is the K-injective-resolution and derived-direct-image setup; steps two and three expand the restriction and section calculation; step four realizes the Tag 00WJ exact-sheafification argument; step five applies the same calculation to bounded-below complexes."
  },
- "tool_uses": [
-  "prop-weil-pbc-kinjective-resolutions-exist"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -182,5 +158,15 @@
   "group": "C1",
   "result": "fix",
   "note": "u qcqs = [QuasiCompact f][QuasiSeparated f]; F : Sheaf U_Et Ab, q:N; R^q u_*F = Plus.homology q of rightDerivedLowerStarPlus (F[0]); presheaf W -> H^q(W x_V U,F) in landed higherDirectImageSheafifiedPresheaf form, sheafified by presheafToSheaf; D+ clause: all K, any K-injective I with Q I = K, all q:Z, sheafified sectionwise H^q(I(W x_V U)) = H^q(Ru_*K); extra Q(u_*I)=Ru_*K clause (definition formula, not in node) removed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T093329-L-2296168",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

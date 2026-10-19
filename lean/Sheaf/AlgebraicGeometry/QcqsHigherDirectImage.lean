@@ -8,16 +8,9 @@ module
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Higher direct images for quasi-compact quasi-separated morphisms
@@ -52,26 +45,17 @@ Source: blueprint `sec-proper-base-change/sk-thm-iff`,
 (blueprint: lem-weil-pbc-qcqs-higher-direct-image); Stacks Project, Lemma 59.51.6 (03Q8).
 
 Proof:
-1. Choose a K-injective resolution of `F[0]` or of `K`
-   (prop-weil-pbc-kinjective-resolutions-exist). Derived direct image is represented by
-   its direct image, independently of the resolution (def-weil-pbc-direct-image,
-   def-weil-pbc-derived-categories, def-weil-pbc-kinjective-resolutions).
-2. For `W` étale over `V`, the projection `W ×_V U → U` is étale
-   (lem-weil-pbc-etale-base-change-finite-limits). Restriction is exact
-   (lem-weil-pbc-etale-inverse-image-restriction, lem-weil-pbc-sheafification-exact).
-   Its exact left adjoint is extension by zero (def-weil-pbc-etale-sum-extension,
-   lem-weil-pbc-etale-restriction-injectives), so restriction preserves K-injectives
-   (lem-weil-pbc-right-adjoint-preserves-kinjective; Stacks 08BJ).
-3. Therefore the section complex on `W ×_V U` computes its cohomology with the restricted
-   coefficients (def-weil-pbc-etale-cohomology,
-   prop-weil-pbc-cohomology-resolution-independent). The direct-image formula identifies
-   these sections and restriction maps with those of the direct-image complex.
-4. Exact sheafification commutes with cohomology
-   (lem-weil-pbc-sheafification-exact, lem-weil-pbc-exact-functor-complex-cohomology,
-   def-weil-pbc-sheafification; Stacks 00WJ). Hence its sectionwise cohomology presheaf
-   sheafifies to the cohomology sheaf of the direct-image complex.
-5. Combine the resolution formula and this sheafification comparison, first for `F[0]`
-   in nonnegative degrees, then for `K` in every integer degree. -/
+1. The ordinary-sheaf clause is the proved
+   `AlgebraicGeometry.higherDirectImageSheafifiedPresheaf`, specialized to `f`.
+2. Put `C = f_* I` and let `L` be its underlying presheaf complex. Exact precomposition
+   along etale base change identifies the presheaf in the second clause with `H^q(L)`.
+3. Exact sheafification commutes with homology. Its counit identifies the sheafification
+   of `L` with `C`, giving the sheafification of that presheaf as `H^q(C)`.
+4. `Functor.rightDerivedFunctorObjQIso` computes the unbounded right derived functor
+   on the given K-injective `I`. Transport along `Q(I) ≅ K.obj` and then along
+   `Functor.rightDerivedFunctorPlusCompatibility`. Applying homology identifies
+   `H^q(C)` with the bounded-below derived direct-image homology in the conclusion.
+No strict bound or termwise injectivity of `I` is used. -/
 theorem qcqs_higherDirectImage {U V : Scheme.{u}} (f : U ⟶ V)
     [QuasiCompact f] [QuasiSeparated f] :
     (∀ (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ),
@@ -108,6 +92,35 @@ theorem qcqs_higherDirectImage {U V : Scheme.{u}} (f : U ⟶ V)
           (DerivedCategory.Plus.homologyFunctor
             (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj
               ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj K)) := by
-  sorry
+  constructor
+  · intro F q
+    exact ⟨AlgebraicGeometry.higherDirectImageSheafifiedPresheaf f F q⟩
+  · intro K I hI ⟨e⟩ q
+    have : I.IsKInjective := hI
+    let F := lowerStar AddCommGrpCat.{u + 1} f
+    let ι := sheafToPresheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}
+    let a := presheafToSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}
+    let b := (MorphismProperty.Over.pullback @Etale ⊤ f).op
+    let B := (Functor.whiskeringLeft V.Etaleᵒᵖ U.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj b
+    let J :=
+      ((sheafToPresheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+        (.up ℤ)).obj I
+    let C := (F.mapHomologicalComplex (.up ℤ)).obj I
+    let L := (ι.mapHomologicalComplex (.up ℤ)).obj C
+    let eP : b ⋙ J.homology q ≅ L.homology q :=
+      ((J.sc q).mapHomologyIso B).symm
+    let eC : (a.mapHomologicalComplex (.up ℤ)).obj L ≅ C :=
+      (Functor.mapHomologicalComplexCompIso
+        (sheafificationNatIso V.smallEtaleTopology AddCommGrpCat.{u + 1}).symm
+        (.up ℤ)).app C ≪≫
+        (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app C
+    let eD : DerivedCategory.Q.obj C ≅
+        (F.rightDerivedFunctorPlus.obj K).obj :=
+      (F.rightDerivedFunctorObjQIso I).symm ≪≫ F.rightDerivedFunctor.mapIso e ≪≫
+        (F.rightDerivedFunctorPlusCompatibility.app K).symm
+    exact ⟨a.mapIso eP ≪≫ ((L.sc q).mapHomologyIso a).symm ≪≫
+      (HomologicalComplex.homologyFunctor _ (.up ℤ) q).mapIso eC ≪≫
+      ((DerivedCategory.homologyFunctorFactors _ q).app C).symm ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso eD⟩
 
 end AlgebraicGeometry.Etale
