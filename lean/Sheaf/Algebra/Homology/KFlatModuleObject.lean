@@ -13,17 +13,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Tensor
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.Monoidal.ModuleEqualizerInternalHom
+import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
 import Sheaf.CategoryTheory.DerivedCategory.KFlatDerivability
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
 # K-flat complexes of module objects on the pro-étale site
@@ -104,6 +96,28 @@ theorem exists_functorial_kFlatModuleObject_resolution (X : Scheme.{u})
       (q : Q ⟶ 𝟭 _),
       ∀ M : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) R.X) ℤ,
         IsKFlatModuleObjectResolution X R (q.app M) := by
-  sorry
+  classical
+  let B := Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) R.X
+  let : Zero (CochainComplex B ℤ) := HasZeroObject.zero' _
+  have : Abelian.HasFunctorialFlatResolution B := inferInstance
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ B) :=
+    Classical.choice (inferInstance : Abelian.HasFunctorialFlatResolution B)
+  obtain ⟨Q, q, hQ, hq, _⟩ := kFlat_derivability
+    (Λ.F ⋙ ObjectProperty.flat.ι) Λ.π (fun M ↦ (Λ.F.obj M).property)
+    (fun M ↦ Λ.epi_π_app M)
+  refine ⟨Q, q, fun M ↦ ⟨?_, ?_⟩⟩
+  · intro N hN
+    let T := ((MonoidalCategory.curriedTensor B).map₂CochainComplex).obj (Q.obj M)
+    have hz : (0 : CochainComplex B ℤ).Acyclic :=
+      HomologicalComplex.acyclic_of_isZero _ (isZero_zero _)
+    have hs : QuasiIso (0 : N ⟶ 0) :=
+      ⟨fun i ↦ (quasiIsoAt_iff_exactAt' _ i (hz i)).2 (hN i)⟩
+    have ht : QuasiIso (HomologicalComplex.tensorHom (𝟙 (Q.obj M)) (0 : N ⟶ 0)) :=
+      (hQ M).1 _ hs
+    have htzero : (HomologicalComplex.tensorObj (Q.obj M) (0 : CochainComplex B ℤ)).Acyclic :=
+      HomologicalComplex.acyclic_of_isZero _ (T.map_isZero (isZero_zero _))
+    intro i
+    exact (quasiIsoAt_iff_exactAt' _ i (htzero i)).1 (ht.quasiIsoAt i)
+  · exact hq M
 
 end AlgebraicGeometry.ProEtale

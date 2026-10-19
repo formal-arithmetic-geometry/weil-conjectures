@@ -16807,3 +16807,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/P2/Sheaf.Paper.NoetherianEtaleSectionSpecialization (stage 3; reviewer PASS; first push; landing 20261019T005356-L-2760667 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/P2/Sheaf.Paper.ProperExceptionalRestriction (stage 3; reviewer PASS; first push; landing 20261019T005356-L-2760846 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/P4/Sheaf.Paper.IntegralScalarExtensionWellDefined (stage 3; reviewer PASS; first push; landing 20261019T005357-L-2761013 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:53 L: merged deliver/P5/Sheaf.Algebra.Homology.KFlatModuleObject (stage 3; reviewer PASS; first push; landing 20261019T005357-L-2761167 (proof); batch 20261019T005255; modules 1; new nodes 0)

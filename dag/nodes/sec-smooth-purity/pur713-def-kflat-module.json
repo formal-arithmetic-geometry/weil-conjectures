@@ -21,21 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Start with $\\mathsf{Ab}$, viewed as $\\mathbf Z$-modules: [lem-weil-pbc-ring-modules-grothendieck-abelian] gives its Grothendieck abelian structure, and [sk-def-sfb-sheaf-tensor] specifies its closed symmetric tensor $\\otimes_{\\mathbf Z}$. It has a functorial flat cover: for an abelian group $A$, take the free abelian group $F(A)=\\bigoplus_{a\\in A}\\mathbf Z[a]$ [def-weil-pbc-free-module], and send $[a]$ to $a$. For $f:A\\to B$ send $[a]$ to $[f(a)]$; identities, composition, and naturality of the augmentation hold on these generators. The augmentation is surjective since $a$ is the image of $[a]$. Each $F(A)$ is flat by [lem-weil-pbc-projective-module-flat], whose last sentence includes free modules. Thus this is a functor with flat values and a natural epimorphism to the identity.",
-   "uses": [
-    "lem-weil-pbc-ring-modules-grothendieck-abelian",
-    "sk-def-sfb-sheaf-tensor",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-projective-module-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
-    "place": "The categories of the table; explicit free cover supplying its coefficient-category hypothesis"
-   }
-  },
-  {
-   "text": "Use the small skeleton in [def-weil-pbc-proetale-site], in the larger universe specified there, so its indexing category is essentially small relative to the abelian-group values. Apply [lem-weil-pbc-sheaf-tensor-closed] with $\\mathcal A=\\mathsf{Ab}$: $\\mathcal C=\\mathsf{Sh}(X_{\\Proet},\\mathsf{Ab})$ is Grothendieck abelian and closed symmetric monoidal, its tensor is additive in each variable, and each tensor functor preserves all small colimits. The tensor is the sheafified $\\otimes_{\\mathbf Z}$, not a pointwise tensor asserted to be already a sheaf. Apply [lem-sfb-sheaf-functorial-flat-resolution] to the free cover of step 1. All its coefficient hypotheses were checked there, so $\\mathcal C$ has a functorial flat cover.",
+   "text": "Use the existing abelian-group closed symmetric monoidal structure and its flat separator Z, hence its functorial flat cover (WeilConjectures.CategoryTheory.RingObjects.Ab). The essentially small pro-etale site then inherits the Grothendieck abelian closed sheaf tensor and functorial flat cover. These are the existing source instances, with the stated u+1 coefficient universe.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "lem-weil-pbc-sheaf-tensor-closed",
@@ -43,85 +29,67 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/sk-def-sfb-derived-categories.proof.md",
-    "place": "The categories of the table, first three sentences"
+    "document": "lean/WeilConjectures/CategoryTheory/RingObjects/Ab.lean",
+    "place": "isSeparator_tensorUnit and HasFunctorialFlatResolution instance; sheaf transfer in GrothendieckAbelian/Monoidal/FlatResolution.lean"
    }
   },
   {
-   "text": "The commutativity of $\\mathcal R$ and step 2 allow [lem-sfb-modobj-grothendieck] and [def-sfb-modobj-internal-hom] to apply. Thus $\\mathcal B$ is Grothendieck abelian, and $M\\otimes_{\\mathcal R}-$ has the stated internal-Hom right adjoint. Symmetry is supplied by [def-sfb-modobj-symmetric-tensor]. These use the same balanced coequalizer as [pur713-def-relative-tensor]: both arrows are the two module actions, and that node states that the action induced through $N$ agrees with the action induced through $M$. The identity on the unbalanced tensor therefore induces inverse maps between the two coequalizers, by their universal properties. In particular no replacement of the relative tensor is being assumed. By [lem-weil-pbc-left-adjoint-preserves-colimits], each fixed-factor relative tensor preserves all small colimits (use symmetry for the other side). It is additive: it preserves zero and binary coproducts; in an abelian category these are biproducts, with projections determined by identities and zero maps. It consequently preserves the diagonal and codiagonal and hence the formula $f+g=\\nabla(f\\oplus g)\\Delta$.",
+   "text": "For the commutative ring object R, apply the existing Mod Grothendieck abelian, closed symmetric relative-tensor and functorial-flat-resolution instances. The closedness of the recorded relative tensor gives colimit preservation in each factor, and its monoidal preadditivity is the existing module-object instance. Thus B = Mod(Sh(X_proet,Ab),R) satisfies all hypotheses of kFlat_derivability. Its flat cover is free R-module on a flat cover of the underlying abelian sheaf, followed by the action.",
    "uses": [
     "lem-sfb-modobj-grothendieck",
     "def-sfb-modobj-internal-hom",
-    "def-sfb-modobj-symmetric-tensor",
     "pur713-def-relative-tensor",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/def-sfb-modobj-internal-hom.proof.md",
-    "place": "Closed module tensor; Grothendieck structure from lem-sfb-modobj-grothendieck.proof.md; elementary comparison of the two specified coequalizers"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-modobj-flat-resolutions] to $\\mathcal C$ and $\\mathcal R$. Step 2 supplies all its ambient hypotheses, including the functorial flat cover. It supplies a functorial flat cover in $\\mathcal B$, explicitly $M\\mapsto\\mathcal R\\otimes F_{\\mathcal C}(M)$ with augmentation $\\gamma_M\\circ(1\\otimes\\pi_M)$. Here $M$ inside $F_{\\mathcal C}$ denotes its underlying abelian sheaf. The cited statement asserts both flatness for the relative tensor and that the augmentation is a natural epimorphism; neither property is inferred merely from the definition of flatness.",
-   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-sfb-modobj-flat-resolutions"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-category/lem-sfb-modobj-flat-resolutions.proof.md",
-    "place": "Free modules on the functorial flat cover, and the natural epimorphism"
+    "document": "lean/WeilConjectures/CategoryTheory/ModuleObjects/GrothendieckAbelian.lean",
+    "place": "monoidalClosed, Grothendieck abelian instance and hasFunctorialFlatResolution; module relative tensor and preadditivity from its public imports"
    }
   },
   {
-   "text": "The direct sums in the displayed total tensor exist because $\\mathcal B$ is Grothendieck abelian [lem-sfb-modobj-grothendieck], and so has small colimits. The differentials and maps are defined on each summand by the displayed formula, using the additive tensor from step 3. On a $(p,q)$ summand, the square of the differential has pure terms $d_P^{p+1}d_P^p\\otimes1$ and $1\\otimes d_N^{q+1}d_N^q$, both zero by [def-weil-abstract-derived-category]; the mixed terms have coefficients $(-1)^p$ and $(-1)^{p+1}$ and cancel. Tensoring cochain maps degreewise commutes with this differential, and identities and composition hold on each summand. This gives exactly the direct-sum total tensor used in [def-sfb-preserves-kflat-quasi-iso].",
+   "text": "Choose the already constructed flat cover LeftResolution Lambda from HasFunctorialFlatResolution B. Apply kFlat_derivability to its underlying endofunctor, augmentation, flatness certificates and epi components. Obtain Q and q : Q => id with IsKFlatForTotalTensor values and quasi-isomorphic augmentation components. This choice occurs only inside an existence proof; it defines no object of the library from an unproved existence theorem.",
    "uses": [
-    "lem-sfb-modobj-grothendieck",
+    "lem-sfb-kflat-derivability",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/DerivedCategory/KFlatDerivability.lean",
+    "place": "CategoryTheory.kFlat_derivability, first two conclusions"
+   }
+  },
+  {
+   "text": "For acyclic N, the zero map N -> 0 is a quasi-isomorphism: quasiIsoAt_iff_exactAt' identifies this degreewise with exactness of N because the zero complex is exact. The left half of hQ(M) makes tensorHom (identity Q(M)) (N -> 0) a quasi-isomorphism. The binary total-tensor functor T = ((curriedTensor B).map2CochainComplex).obj (Q.obj M) is additive, by the proved source bifunctor API, hence maps the zero complex to a zero object. Its target is therefore acyclic. Applying quasiIsoAt_iff_exactAt' in every degree now proves the source tensorObj (Q.obj M) N acyclic, exactly IsKFlatModuleObject X R (Q.obj M). Pair this with hq(M). This uses only binary total tensors, with no monoidal structure on complexes.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "def-sfb-preserves-kflat-quasi-iso"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-categories/def-sfb-preserves-kflat-quasi-iso.md",
-    "place": "Direct-sum total tensor convention, with explicit differential-square verification"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-kflat-derivability] to $\\mathcal B$. Step 3 supplies its Grothendieck abelian and additive monoidal structure and preservation of all small colimits by either tensor functor; step 4 supplies its functorial flat cover. The cited statement gives a functor $Q$ on the category of unbounded cochain complexes and a natural quasi-isomorphism $q:Q\\Rightarrow\\mathrm{id}$ with two-sided K-flat values in the sense of [def-sfb-preserves-kflat-quasi-iso]. To check precisely the one-sided acyclic-test definition in this item, take acyclic $N$. Then $N\\to0$ is a quasi-isomorphism, since in each degree its cohomology map is $0\\to0$ [def-weil-abstract-derived-category]. Tensoring it with $Q(M)$ is a quasi-isomorphism. Its target is zero: relative tensor preserves the initial object by step 3, and all summands of the total tensor with the zero complex are zero. Hence $H^n(Q(M)\\otimes_{\\mathcal R}N)=0$ for every $n$. Thus each $q_M$ is a K-flat resolution in exactly the asserted sense. The functor and naturality are on complexes, as required, with no claim of a functorial choice on the homotopy category.",
-   "uses": [
-    "lem-sfb-kflat-derivability",
-    "def-sfb-preserves-kflat-quasi-iso",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-    "place": "First three sentences, with hypotheses supplied in steps 1–4 and the acyclic-test consequence expanded"
+    "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/Bifunctor.lean",
+    "place": "Additivity of map2HomologicalComplex in its second input; Mathlib.Algebra.Homology.QuasiIso.quasiIsoAt_iff_exactAt' and HomologicalComplex.acyclic_of_isZero"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-free-module",
-  "lem-weil-pbc-projective-module-flat",
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-sheaf-functorial-flat-resolution",
   "lem-sfb-modobj-grothendieck",
   "def-sfb-modobj-internal-hom",
-  "def-sfb-modobj-symmetric-tensor",
   "pur713-def-relative-tensor",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-sfb-modobj-flat-resolutions",
-  "def-weil-abstract-derived-category",
+  "lem-sfb-kflat-derivability",
   "def-sfb-preserves-kflat-quasi-iso",
-  "lem-sfb-kflat-derivability"
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-coefficient-towers/pur713-def-kflat-module.md",
-  "place": "Definition paragraph; its final functorial existence assertion expanded with the existing sheaf/module-object and abstract K-flat machinery of sec-proetale-coefficients. The direct-sum convention agrees with Stacks Tag 06YN (sites-cohomology-definition-K-flat)."
+  "place": "Functorial existence clause, instantiated from the stated generic kFlat_derivability theorem and the already proved source flat-cover instances. The final acyclic-test conversion tensors N -> 0 using the additive binary total-tensor functor and transfers exactness degreewise along the resulting quasi-isomorphism."
  },
  "mathlib_searches": [
   {
@@ -253,5 +221,15 @@
   "group": "Q47",
   "result": "pass",
   "note": "Matched every clause of the node and source (order 2484): arbitrary R : CommMon over Sheaf (ProEt.topology X) AddCommGrpCat.{u+1} with sheafified tensor over Z; recorded Mod and Mod.monoidalCategory; HomologicalComplex.tensorObj direct-sum total tensor with signs 1 and (-1)^p; one-sided acyclic test with P on the left; resolution = K-flat and QuasiIso for P->M; functorial existence with Q and q : Q => id. No extra hypotheses or universe equality; edge cases (empty X, R=0, zero or unbounded complexes, char 2) covered. Not a duplicate: FromJoel MorphismProperty.kFlat is two-sided quasi-iso preservation and a separate DAG node. nt_compile.py on the local overlay: module clean in 2.7 s; probe confirmed the instances, rfl unfolding, and sorry only in the theorem. Record statement verbatim; docstrings present; proof-plan imports allowed. Minor, non-blocking: the second reading is a disclosed self-check; one docstring citation sits under step 2 instead of step 1."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T005357-L-2761167",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
