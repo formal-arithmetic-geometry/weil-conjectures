@@ -205,7 +205,32 @@ theorem evaluation_mate
           r₂.map (η.hom.app B) =
         γ.hom.app (R₁.obj B) ≫ g.map (A₁.right.hom.app B) ≫
           (mateEquiv level₁ level₂ a).app (F₁.obj B) := by
-  sorry
+  intro B
+  apply (level₂.homEquiv _ _).symm.injective
+  change l₂.map _ ≫ level₂.counit.app _ = l₂.map _ ≫ level₂.counit.app _
+  simp only [Functor.map_comp, Category.assoc]
+  apply (cancel_epi (A₂.left.hom.app (G.obj (R₁.obj B)))).1
+  have hleft := A₂.left.hom.naturality ((mateEquiv adj₁ adj₂ α).app B)
+  dsimp only [Functor.comp_map] at hleft
+  rw [← reassoc_of% hleft]
+  have hcounit := level₂.counit.naturality (η.hom.app B)
+  dsimp only [Functor.comp_map, Functor.id_map] at hcounit
+  rw [hcounit]
+  dsimp only [Functor.comp_obj]
+  rw [reassoc_of% (A₂.counit (H.obj B))]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← F₂.map_comp_assoc, mateEquiv_counit]
+  rw [F₂.map_comp, Category.assoc]
+  have hη := η.hom.naturality (adj₁.counit.app B)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hη
+  rw [hη]
+  rw [mateEquiv_counit]
+  have ha := a.naturality (A₁.right.hom.app B)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at ha
+  rw [reassoc_of% ha]
+  rw [← reassoc_of% (compatible (R₁.obj B))]
+  rw [← h.map_comp, A₁.counit]
+  rw [← h.map_comp, Iso.hom_inv_id_app_assoc]
 
 end CategoricalEvaluation
 end WeilConjectures.SemilinearSections
