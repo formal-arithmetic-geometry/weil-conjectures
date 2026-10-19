@@ -38,11 +38,11 @@
    }
   },
   {
-   "text": "Let $T_n=T\\otimes_R B_n$, $a_n=a\\otimes1$, $b_n=b\\otimes1$. By clause (1) of [lem-pur-derived-change-of-rings], $a_n,b_n$ are quasi-isomorphisms. Their restrictions to $R$ give isomorphisms by [def-weil-integral-derived-restriction-of-scalars]. The canonical comparison of clause (2) is $\\theta_n=[b_n][a_n]^{-1}$: explicitly, apply [lem-pur-left-derived-from-kflat-class] to the additive termwise change-of-rings functor followed by localization, whose K-flat computations are supplied by the change-of-rings node. Its natural comparison $\\varepsilon$ is invertible at $T,P,P'$, so $[a_n]\\varepsilon_T=\\varepsilon_P L\\pi_n^*([a])$ and $[b_n]\\varepsilon_T=\\varepsilon_{P'}L\\pi_n^*([b])$. Write $L=L\\pi_n^*$ and $c_q=\\varepsilon_P L([q])^{-1}:L(K)\\to P_n$, $c_{q'}=\\varepsilon_{P'} L([q'])^{-1}:L(K)\\to P'_n$ for the computations of clause (2). By definition $\\theta_n=c_{q'}c_q^{-1}$. The roof equality gives $L([q'])^{-1}L([q])=L([b])L([a])^{-1}$, hence $\\theta_n=\\varepsilon_{P'}L([b])L([a])^{-1}\\varepsilon_P^{-1}=[b_n]\\varepsilon_T\\varepsilon_T^{-1}[a_n]^{-1}=[b_n][a_n]^{-1}$ by the two displayed naturality equalities. Termwise change of rings is additive, commutes with shifts and the direct-sum cone differential, and sends a chain homotopy $h$ to $h\\otimes1$, so the homotopy-category functor used here is the one in the cited change-of-rings construction.",
+   "text": "Let $F_n$ be termwise change of rings and put $T_n=F_n(T)$, $a_n=F_n(a)$, $b_n=F_n(b)$. Clause (1) of [lem-pur-derived-change-of-rings] makes $a_n,b_n$ quasi-isomorphisms. The published scalar-reduction witness [def-weil-integral-derived-reduction] already supplies its universal derived pair $(L_n,\\varepsilon_n)$ and invertible K-flat computations. Whisker the counit with the quotient comparison to express it naturally on complexes. Naturality gives $[a_n]\\varepsilon_T=\\varepsilon_P L_n([a])$ and $[b_n]\\varepsilon_T=\\varepsilon_{P\\prime}L_n([b])$. The resolution computations are $c_q=\\varepsilon_P L_n([q])^{-1}$ and $c_{q\\prime}=\\varepsilon_{P\\prime}L_n([q\\prime])^{-1}$, with $\\theta_n=c_{q\\prime}c_q^{-1}$. Substitute these formulas into naturality and use $[q][a]=[q\\prime][b]$ to get $\\theta_n[a_n]=[b_n]$. Apply exact derived restriction and use its canonical localization factorization [def-weil-integral-derived-restriction-of-scalars]. Naturality of that factorization transports the identity to the actual restricted complexes. All coefficient and site universes stay independent.",
    "uses": [
     "lem-pur-derived-change-of-rings",
     "def-weil-integral-derived-restriction-of-scalars",
-    "lem-pur-left-derived-from-kflat-class"
+    "def-weil-integral-derived-reduction"
    ],
    "elementary": false,
    "source": {
@@ -51,9 +51,10 @@
    }
   },
   {
-   "text": "Write $\\gamma^T_n:T\\to T_n$, $z\\mapsto z\\otimes1$. The tensor definition [def-pur-sheaf-tensor-product] gives $a_n\\gamma^T_n=\\gamma_n a$ and $b_n\\gamma^T_n=\\gamma'_n b$: both sides send a local section $z$ to $a(z)\\otimes1$, respectively $b(z)\\otimes1$; sheafifying these equalities and applying localization preserves them. Put $\\alpha_n=\\operatorname{Res}_n([a_n])$, $\\beta_n=\\operatorname{Res}_n([b_n])$. Then $\\operatorname{Res}_n(\\theta_n)=\\beta_n\\alpha_n^{-1}$. Because $[a]^{-1}[q]^{-1}=([q][a])^{-1}=([q'][b])^{-1}=[b]^{-1}[q']^{-1}$, we obtain $\\beta_n\\alpha_n^{-1}[\\gamma_n][q]^{-1}=\\beta_n[\\gamma^T_n][a]^{-1}[q]^{-1}=[\\gamma'_n][q']^{-1}$. This proves clause (1).",
+   "text": "Write $\\gamma^T_n:T\\to T_n$, $z\\mapsto z\\otimes1$. The tensor definition [def-pur-sheaf-tensor-product] gives $a_n\\gamma^T_n=\\gamma_n a$ and $b_n\\gamma^T_n=\\gamma'_n b$: both sides send a local section $z$ to $a(z)\\otimes1$, respectively $b(z)\\otimes1$; sheafifying these equalities and applying localization preserves them. Put $\\alpha_n=\\operatorname{Res}_n([a_n])$, $\\beta_n=\\operatorname{Res}_n([b_n])$. Then $\\operatorname{Res}_n(\\theta_n)=\\beta_n\\alpha_n^{-1}$. Because $[a]^{-1}[q]^{-1}=([q][a])^{-1}=([q'][b])^{-1}=[b]^{-1}[q']^{-1}$, we obtain $\\beta_n\\alpha_n^{-1}[\\gamma_n][q]^{-1}=\\beta_n[\\gamma^T_n][a]^{-1}[q]^{-1}=[\\gamma'_n][q']^{-1}$. This proves clause (1). Construct the chain unit directly from the normalized ordinary scalar-extension/restriction adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction]. Its naturality gives these chain-map identities without unfolding the inverse-limit coefficient ring. The normalization proves unrestrictedTowerUnit_condition; uniqueness identifies the construction with the originally specified unit.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": true,
    "source": {
@@ -62,7 +63,7 @@
    }
   },
   {
-   "text": "Let $\\tau^T_n=1_T\\otimes\\rho_n$. Pure-tensor functoriality [def-pur-sheaf-tensor-product] gives $a_n\\tau^T_n=\\tau_n a_{n+1}$ and $b_n\\tau^T_n=\\tau'_n b_{n+1}$: on $z\\otimes c$ the first two sides are $a(z)\\otimes\\rho_n(c)$, and the second two are $b(z)\\otimes\\rho_n(c)$. They are $R$-linear because $\\pi_n=\\rho_n\\pi_{n+1}$, commute with differentials, and remain equal after sheafification and localization. Thus $\\alpha_n^{-1}[\\tau_n]=[\\tau^T_n]\\alpha_{n+1}^{-1}$ and $\\beta_n[\\tau^T_n]=[\\tau'_n]\\beta_{n+1}$, so $\\operatorname{Res}_n(\\theta_n)[\\tau_n]=\\beta_n\\alpha_n^{-1}[\\tau_n]=[\\tau'_n]\\beta_{n+1}\\alpha_{n+1}^{-1}=[\\tau'_n]\\operatorname{Res}_{n+1}(\\theta_{n+1})$. This proves clause (2). Each component is invertible, so these equations give the claimed tower isomorphism; rearranging them gives compatibility of the inverse components as well.",
+   "text": "Let $\\tau^T_n=1_T\\otimes\\rho_n$. Pure-tensor functoriality [def-pur-sheaf-tensor-product] gives $a_n\\tau^T_n=\\tau_n a_{n+1}$ and $b_n\\tau^T_n=\\tau'_n b_{n+1}$: on $z\\otimes c$ the first two sides are $a(z)\\otimes\\rho_n(c)$, and the second two are $b(z)\\otimes\\rho_n(c)$. They are $R$-linear because $\\pi_n=\\rho_n\\pi_{n+1}$, commute with differentials, and remain equal after sheafification and localization. Thus $\\alpha_n^{-1}[\\tau_n]=[\\tau^T_n]\\alpha_{n+1}^{-1}$ and $\\beta_n[\\tau^T_n]=[\\tau'_n]\\beta_{n+1}$, so $\\operatorname{Res}_n(\\theta_n)[\\tau_n]=\\beta_n\\alpha_n^{-1}[\\tau_n]=[\\tau'_n]\\beta_{n+1}\\alpha_{n+1}^{-1}=[\\tau'_n]\\operatorname{Res}_{n+1}(\\theta_{n+1})$. This proves clause (2). Each component is invertible, so these equations give the claimed tower isomorphism; rearranging them gives compatibility of the inverse components as well. The pre-localization unrestrictedIntegralTransition is already a natural transformation on complexes by its defining type, so apply its naturality to a and b, localize and cancel the reduced quasi-isomorphism a.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
@@ -75,16 +76,17 @@
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
+  "def-weil-integral-derived-reduction",
   "def-weil-integral-derived-restriction-of-scalars",
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pur-quasi-isos-saturated-triangulated"
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS/06YT/06YY and derived.tex Tags 05RT/06XN supply the common K-flat roof and computations; explicit unit/reduction naturality calculations expand Bhatt-Scholze p.24 Definition 3.5.2."
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 06YS/06YY and 05RT: common K-flat roof, natural universal derived counit, normalized ordinary adjunction unit, and naturality of the published transition. The Lean proof uses the already published universal scalar-reduction witness rather than reconstructing it."
  },
  "mathlib_searches": [
   {
@@ -251,6 +253,8 @@
    "WeilConjectures.unrestrictedTowerUnitCondition",
    "WeilConjectures.unrestrictedTowerMaps_existUnique",
    "WeilConjectures.unrestrictedTowerUnit",
+   "WeilConjectures.unrestrictedTowerUnit_condition",
+   "WeilConjectures.unrestrictedTowerUnit_eq_chosen",
    "WeilConjectures.unrestrictedTowerTransition",
    "WeilConjectures.unrestrictedTowerAugmentationIso",
    "WeilConjectures.unrestrictedReductionTowerWellDefined"
@@ -263,5 +267,15 @@
   "existing": false,
   "note": "§1(B): the recorded comparison requires an auxiliary FiniteFieldDatum absent from the consumer. This module states the identical canonical resolution comparison and augmented-tower invariance over the already published unrestricted completed sheaf and scalarReductionExtension. Site and coefficient universes remain independent. All comparison maps are defined through the universal derived scalar-extension counit; units and transitions are uniquely characterized on sheafified pure tensors. The original declaration is not duplicated.",
   "fixed_by": "NT-stage2-cc-94c5afc59"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261019T093532-L-2323649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

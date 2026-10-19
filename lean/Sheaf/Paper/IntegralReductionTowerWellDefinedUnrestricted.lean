@@ -8,10 +8,8 @@ module
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Sheaf.Paper.IntegralReductionTowerUnrestricted
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum
 
@@ -44,6 +42,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 
 namespace WeilConjectures
+
+attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
+  unrestrictedIntegralReductionExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
@@ -108,7 +109,8 @@ theorem unrestrictedTowerCounit_isIso (n : ℕ)
       (R := completedIntegralCommRingSheafUnrestricted l E Y) P) :
     IsIso ((scalarReductionCounit l E Y n).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
-  sorry
+  simpa only [scalarReductionCounit] using
+    ((scalarReductionDerivedExistence l E Y n).choose_spec.choose_spec.2.2 P hP)
 
 /-- The canonical computation by a resolution, expressed using complexes rather than
 homotopy representatives. Both transports are the standard quotient comparison.
@@ -191,14 +193,58 @@ theorem unrestrictedTowerMaps_existUnique
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
     ∃! γ : ∀ n : ℕ, P ⟶ unrestrictedTowerComplex l E Y n P,
       unrestrictedTowerUnitCondition l E Y P γ := by
-  sorry
+  classical
+  let γ : ∀ n : ℕ, P ⟶ unrestrictedTowerComplex l E Y n P := fun n ↦
+    { f := fun i ↦ (scalarReductionExtension_adjunction l E Y n).choose.unit.app (P.X i)
+      comm' := fun i j _ ↦
+        ((scalarReductionExtension_adjunction l E Y n).choose.unit.naturality
+          (P.d i j)).symm }
+  have hγ : unrestrictedTowerUnitCondition l E Y P γ := by
+    intro n i U x
+    change ((scalarReductionExtension_adjunction l E Y n).choose.unit.app
+      (P.X i)).val.app U x = _
+    rw [(scalarReductionExtension_adjunction l E Y n).choose_spec]
+    rfl
+  refine ⟨γ, hγ, ?_⟩
+  intro γ' hγ'
+  funext n
+  ext i U x
+  exact (hγ' n i U x).trans (hγ n i U x).symm
 
 /-- The chain-level unit x ↦ x⊗1, determined uniquely by its sectionwise formula.
 Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
 noncomputable def unrestrictedTowerUnit
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) (n : ℕ) :
     P ⟶ unrestrictedTowerComplex l E Y n P :=
-  (unrestrictedTowerMaps_existUnique l E Y P).exists.choose n
+  { f := fun i ↦ (scalarReductionExtension_adjunction l E Y n).choose.unit.app (P.X i)
+    comm' := fun i j _ ↦
+      ((scalarReductionExtension_adjunction l E Y n).choose.unit.naturality
+        (P.d i j)).symm }
+
+/-- The constructed unit has the prescribed sectionwise pure-tensor formula.
+Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined).
+Proof: the unit of the scalar-extension adjunction sends x to 1 tensor x;
+the chain map is defined degreewise by exactly that unit. -/
+theorem unrestrictedTowerUnit_condition
+    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
+    unrestrictedTowerUnitCondition l E Y P (unrestrictedTowerUnit l E Y P) := by
+  intro n i U x
+  change ((scalarReductionExtension_adjunction l E Y n).choose.unit.app
+    (P.X i)).val.app U x = _
+  rw [(scalarReductionExtension_adjunction l E Y n).choose_spec]
+  rfl
+
+/-- The explicit unit is the formerly selected unique family, so changing the
+construction does not change any augmented tower.
+Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined).
+Proof: both families satisfy the sectionwise formula; apply uniqueness. -/
+theorem unrestrictedTowerUnit_eq_chosen
+    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
+    unrestrictedTowerUnit l E Y P =
+      (unrestrictedTowerMaps_existUnique l E Y P).exists.choose := by
+  exact (unrestrictedTowerMaps_existUnique l E Y P).unique
+    (unrestrictedTowerUnit_condition l E Y P)
+    (unrestrictedTowerMaps_existUnique l E Y P).exists.choose_spec
 
 /-- The chain-level reduction id⊗ρ: the published canonical transition of
 def-weil-integral-reduction-tower, uniquely determined on sheafified pure tensors
@@ -220,6 +266,206 @@ noncomputable def unrestrictedTowerAugmentationIso
     DerivedCategory.Q.obj P ≅ DerivedCategory.Q.obj K :=
   letI : QuasiIso q := hq.1
   asIso (DerivedCategory.Q.map q)
+
+
+private noncomputable def towerCounit (n : ℕ) :
+    DerivedCategory.Q ⋙ scalarReductionDerivedExtension l E Y n ⟶
+      (scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+  (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso _).symm _).hom ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) (scalarReductionCounit l E Y n) ≫
+    (Functor.associator _ _ _).inv ≫
+    (Functor.isoWhiskerRight
+      ((scalarReductionExtension l E Y n).mapHomotopyCategoryFactors (.up ℤ)) _).hom ≫
+    (Functor.associator _ _ _).hom ≫
+    (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso _)).hom
+
+private theorem towerCounit_app (n : ℕ)
+    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
+    (towerCounit l E Y n).app P =
+      (scalarReductionDerivedExtension l E Y n).map
+        ((DerivedCategory.quotientCompQhIso _).app P).inv ≫
+      (scalarReductionCounit l E Y n).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+      DerivedCategory.Qh.map
+        (((scalarReductionExtension l E Y n).mapHomotopyCategoryFactors (.up ℤ)).app P).hom ≫
+      ((DerivedCategory.quotientCompQhIso _).app
+        (unrestrictedTowerFiniteComplex l E Y n P)).hom := by
+  simp [towerCounit]
+
+attribute [local irreducible] towerCounit
+
+private theorem towerCounit_isIso (n : ℕ)
+    (P : CochainComplex (scalarReductionSource l E Y) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) P) :
+    IsIso ((towerCounit l E Y n).app P) := by
+  let := unrestrictedTowerCounit_isIso l E Y n P hP
+  rw [towerCounit_app]
+  infer_instance
+
+private theorem towerResolution_hom (n : ℕ)
+    {P K : CochainComplex (scalarReductionSource l E Y) ℤ} (q : P ⟶ K)
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) q) :
+    (scalarReductionDerivedExtension l E Y n).map (DerivedCategory.Q.map q) ≫
+      (unrestrictedTowerResolutionIso l E Y n q hq).hom =
+        (towerCounit l E Y n).app P := by
+  let : QuasiIso q := hq.1
+  rw [towerCounit_app]
+  simp [unrestrictedTowerResolutionIso]
+
+attribute [local irreducible] unrestrictedTowerResolutionIso
+
+private theorem towerFinite_roof (n : ℕ)
+    {T P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
+    (a : T ⟶ P) (b : T ⟶ P') (q : P ⟶ K) (q' : P' ⟶ K)
+    (hT : CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) T)
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) q)
+    (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) q')
+    (h : DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q =
+      DerivedCategory.Q.map b ≫ DerivedCategory.Q.map q') :
+    DerivedCategory.Q.map
+        (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).map a) ≫
+      (unrestrictedTowerFiniteComparison l E Y n q q' hq hq').hom =
+    DerivedCategory.Q.map
+      (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).map b) := by
+  let := towerCounit_isIso l E Y n T hT
+  apply (cancel_epi ((towerCounit l E Y n).app T)).1
+  change _ ≫ (_ ≫ _) = _
+  have ha := (towerCounit l E Y n).naturality a
+  change _ = _ ≫ DerivedCategory.Q.map _ at ha
+  rw [← Category.assoc, ← ha]
+  rw [← towerResolution_hom l E Y n q hq]
+  simp only [unrestrictedTowerFiniteComparison, Iso.trans_hom, Iso.symm_hom,
+    Category.assoc, Iso.hom_inv_id_assoc]
+  simp only [Functor.comp_map]
+  rw [← Functor.map_comp_assoc, h, Functor.map_comp_assoc, towerResolution_hom]
+  exact (towerCounit l E Y n).naturality b
+
+attribute [local irreducible] unrestrictedTowerFiniteComparison
+
+private noncomputable abbrev towerFunctor (n : ℕ) :=
+  (scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ) ⋙
+    (scalarReductionRestriction l E Y n).mapHomologicalComplex (.up ℤ)
+
+attribute [local irreducible] unrestrictedTowerUnit
+
+private theorem towerUnit_naturality (n : ℕ)
+    {P P' : CochainComplex (scalarReductionSource l E Y) ℤ} (a : P ⟶ P') :
+    a ≫ unrestrictedTowerUnit l E Y P' n =
+      unrestrictedTowerUnit l E Y P n ≫ (towerFunctor l E Y n).map a := by
+  unfold unrestrictedTowerUnit
+  ext i : 1
+  change a.f i ≫ (scalarReductionExtension_adjunction l E Y n).choose.unit.app (P'.X i) =
+    (scalarReductionExtension_adjunction l E Y n).choose.unit.app (P.X i) ≫
+      (scalarReductionRestriction l E Y n).map
+        ((scalarReductionExtension l E Y n).map (a.f i))
+  simpa only [Functor.comp_map, Functor.id_map] using
+    (scalarReductionExtension_adjunction l E Y n).choose.unit.naturality (a.f i)
+
+private theorem towerRoof
+    {P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
+    (q : P ⟶ K) (q' : P' ⟶ K) (hq : QuasiIso q) (hq' : QuasiIso q') :
+    ∃ (T : CochainComplex (scalarReductionSource l E Y) ℤ)
+      (a : T ⟶ P) (b : T ⟶ P'),
+      CochainComplex.IsKFlatIndependentCoefficients
+        (R := completedIntegralCommRingSheafUnrestricted l E Y) T ∧
+      QuasiIso a ∧ QuasiIso b ∧
+        DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q =
+          DerivedCategory.Q.map b ≫ DerivedCategory.Q.map q' := by
+  let : QuasiIso q := hq
+  let : QuasiIso q' := hq'
+  let H := HomotopyCategory.quotient (scalarReductionSource l E Y) (.up ℤ)
+  let W := HomotopyCategory.quasiIso (scalarReductionSource l E Y) (.up ℤ)
+  let : W.HasRightCalculusOfFractions :=
+    (HomotopyCategory.quasiIso_saturated_triangulated (scalarReductionSource l E Y)).2.1
+  obtain ⟨z, hz⟩ :=
+    (MorphismProperty.LeftFraction.mk (H.map q) (H.map q')
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff q').2 hq')).exists_rightFraction
+  obtain ⟨V, hV⟩ := HomotopyCategory.quotient_obj_surjective z.X'
+  obtain ⟨a₀, ha₀⟩ := H.map_surjective (eqToHom hV ≫ z.s)
+  obtain ⟨b₀, hb₀⟩ := H.map_surjective (eqToHom hV ≫ z.f)
+  have ha₀q : QuasiIso a₀ :=
+    (HomotopyCategory.quotient_map_mem_quasiIso_iff a₀).1 (by
+      rw [ha₀]
+      exact W.comp_mem _ _ (MorphismProperty.of_isIso W _) z.hs)
+  have hab : H.map (a₀ ≫ q) = H.map (b₀ ≫ q') := by
+    simpa only [Functor.map_comp, ha₀, hb₀, Category.assoc] using
+      congrArg (fun f ↦ eqToHom hV ≫ f) hz
+  have hb₀q : QuasiIso b₀ := by
+    have := ha₀q
+    have : QuasiIso (a₀ ≫ q) := inferInstance
+    have : QuasiIso (b₀ ≫ q') :=
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff _).1
+        (hab ▸ (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 this)
+    exact quasiIso_of_comp_right b₀ q'
+  have := ha₀q
+  have := hb₀q
+  obtain ⟨T, r, hT, _, hr, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) V
+  have := hr
+  refine ⟨T, r ≫ a₀, r ≫ b₀, hT, inferInstance, inferInstance, ?_⟩
+  have heq : H.map ((r ≫ a₀) ≫ q) = H.map ((r ≫ b₀) ≫ q') := by
+    simpa only [Functor.map_comp, Category.assoc] using congrArg (H.map r ≫ ·) hab
+  have hh := congrArg (DerivedCategory.Qh.map) heq
+  apply (cancel_epi ((DerivedCategory.quotientCompQhIso _).hom.app T)).1
+  simpa only [← Functor.map_comp, ← DerivedCategory.quotientCompQhIso_hom_naturality] using
+    congrArg (· ≫ (DerivedCategory.quotientCompQhIso _).hom.app K) hh
+
+private theorem towerComparison_roof (n : ℕ)
+    {T P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
+    (a : T ⟶ P) (b : T ⟶ P') (q : P ⟶ K) (q' : P' ⟶ K)
+    (hT : CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) T)
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) q)
+    (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) q')
+    (h : DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q =
+      DerivedCategory.Q.map b ≫ DerivedCategory.Q.map q') :
+    DerivedCategory.Q.map ((towerFunctor l E Y n).map a) ≫
+      (unrestrictedTowerComparison l E Y n q q' hq hq').hom =
+    DerivedCategory.Q.map ((towerFunctor l E Y n).map b) := by
+  let F := scalarReductionExtension l E Y n
+  let R := scalarReductionRestriction l E Y n
+  let e := R.mapDerivedCategoryFactors
+  apply (cancel_epi (e.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj T))).1
+  have ha := e.hom.naturality ((F.mapHomologicalComplex (.up ℤ)).map a)
+  have hb := e.hom.naturality ((F.mapHomologicalComplex (.up ℤ)).map b)
+  simp only [Functor.comp_map] at ha hb
+  dsimp only [towerFunctor, Functor.comp_map]
+  rw [← Category.assoc, ← ha]
+  dsimp only [F, R, e] at *
+  simp only [unrestrictedTowerComparison, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_inv, Iso.app_hom, unrestrictedTowerFiniteComplex, Category.assoc,
+    Iso.hom_inv_id_app_assoc]
+  rw [← Functor.map_comp_assoc, towerFinite_roof l E Y n a b q q' hT hq hq' h]
+  exact hb
+
+private theorem towerReduction_quasiIso (n : ℕ)
+    {T P : CochainComplex (scalarReductionSource l E Y) ℤ} (a : T ⟶ P)
+    (hT : CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) T)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedIntegralCommRingSheafUnrestricted l E Y) P)
+    (ha : QuasiIso a) :
+    QuasiIso ((towerFunctor l E Y n).map a) := by
+  have hfinite : QuasiIso
+      (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).map a) := by
+    simpa only [scalarReductionExtension] using
+      ((scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose_spec.1
+        a hT hP ha)
+  change QuasiIso (((scalarReductionRestriction l E Y n).mapHomologicalComplex (.up ℤ)).map
+    (((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).map a))
+  infer_instance
+
+attribute [local irreducible] unrestrictedTowerComparison
 
 /-- The finite canonical comparisons give an isomorphism of the two augmented towers.
 The unit and transition maps are the unique maps with the specified pure-tensor formulas.
@@ -268,6 +514,74 @@ theorem unrestrictedReductionTowerWellDefined
         (unrestrictedTowerComparison l E Y n q q' hq hq').hom =
       (unrestrictedTowerComparison l E Y (n + 1) q q' hq hq').hom ≫
         DerivedCategory.Q.map (unrestrictedTowerTransition l E Y P' n)) := by
-  sorry
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  classical
+  let : QuasiIso q := hq.1
+  let : QuasiIso q' := hq'.1
+  obtain ⟨T, a, b, hT, ha, hb, h⟩ := towerRoof l E Y q q' hq.1 hq'.1
+  let : QuasiIso a := ha
+  let : QuasiIso b := hb
+  have hc (n : ℕ) := towerComparison_roof l E Y n a b q q' hT hq hq' h
+  have hu (n : ℕ) {A B : CochainComplex (scalarReductionSource l E Y) ℤ}
+      (f : A ⟶ B) :
+      DerivedCategory.Q.map f ≫ DerivedCategory.Q.map (unrestrictedTowerUnit l E Y B n) =
+        DerivedCategory.Q.map (unrestrictedTowerUnit l E Y A n) ≫
+          DerivedCategory.Q.map ((towerFunctor l E Y n).map f) := by
+    simpa only [Functor.map_comp] using
+      congrArg (DerivedCategory.Q.map) (towerUnit_naturality l E Y n f)
+  have ht (n : ℕ) {A B : CochainComplex (scalarReductionSource l E Y) ℤ}
+      (f : A ⟶ B) :
+      DerivedCategory.Q.map ((towerFunctor l E Y (n + 1)).map f) ≫
+          DerivedCategory.Q.map (unrestrictedTowerTransition l E Y B n) =
+        DerivedCategory.Q.map (unrestrictedTowerTransition l E Y A n) ≫
+          DerivedCategory.Q.map ((towerFunctor l E Y n).map f) := by
+    have heq := (unrestrictedIntegralTransition l E Y n).naturality f
+    have hQ := congrArg
+      (fun g : unrestrictedTowerComplex l E Y (n + 1) A ⟶
+          unrestrictedTowerComplex l E Y n B ↦ DerivedCategory.Q.map g) heq
+    dsimp only [towerFunctor, unrestrictedIntegralComplexFunctor,
+      unrestrictedIntegralFiniteComplex, unrestrictedTowerTransition,
+      scalarReductionExtension, unrestrictedIntegralReductionFunctor,
+      scalarReductionExistence, unrestrictedIntegralReductionExistence] at hQ ⊢
+    simpa only [Functor.map_comp] using hQ
+  constructor
+  · intro n
+    apply (cancel_epi (DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q)).1
+    change (DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q) ≫
+        (inv (DerivedCategory.Q.map q) ≫ _ ≫ _) =
+      (DerivedCategory.Q.map a ≫ DerivedCategory.Q.map q) ≫
+        (inv (DerivedCategory.Q.map q') ≫ _)
+    calc
+      _ = DerivedCategory.Q.map a ≫
+          DerivedCategory.Q.map (unrestrictedTowerUnit l E Y P n) ≫
+            (unrestrictedTowerComparison l E Y n q q' hq hq').hom := by simp [Category.assoc]
+      _ = DerivedCategory.Q.map (unrestrictedTowerUnit l E Y T n) ≫
+          (DerivedCategory.Q.map ((towerFunctor l E Y n).map a) ≫
+            (unrestrictedTowerComparison l E Y n q q' hq hq').hom) := by
+          rw [← Category.assoc, hu, Category.assoc]
+      _ = DerivedCategory.Q.map (unrestrictedTowerUnit l E Y T n) ≫
+          DerivedCategory.Q.map ((towerFunctor l E Y n).map b) := by
+          rw [hc]
+      _ = DerivedCategory.Q.map b ≫
+          DerivedCategory.Q.map (unrestrictedTowerUnit l E Y P' n) := (hu n b).symm
+      _ = _ := by rw [h]; simp [Category.assoc]
+  · intro n
+    have := towerReduction_quasiIso l E Y (n + 1) a hT hq.2 ha
+    apply (cancel_epi
+      (DerivedCategory.Q.map ((towerFunctor l E Y (n + 1)).map a))).1
+    calc
+      _ = DerivedCategory.Q.map (unrestrictedTowerTransition l E Y T n) ≫
+          (DerivedCategory.Q.map ((towerFunctor l E Y n).map a) ≫
+            (unrestrictedTowerComparison l E Y n q q' hq hq').hom) := by
+          rw [← Category.assoc, ht, Category.assoc]
+      _ = DerivedCategory.Q.map (unrestrictedTowerTransition l E Y T n) ≫
+          DerivedCategory.Q.map ((towerFunctor l E Y n).map b) := by
+          rw [hc]
+      _ = DerivedCategory.Q.map ((towerFunctor l E Y (n + 1)).map b) ≫
+          DerivedCategory.Q.map (unrestrictedTowerTransition l E Y P' n) := (ht n b).symm
+      _ = _ := by rw [← Category.assoc, hc]
 
 end WeilConjectures

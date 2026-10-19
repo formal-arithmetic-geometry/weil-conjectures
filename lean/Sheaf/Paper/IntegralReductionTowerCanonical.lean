@@ -92,7 +92,7 @@ theorem canonicalIntegralReductionTowerMap_naturality
       unrestrictedTowerUnit l E Y P (n + 1) ≫ unrestrictedTowerTransition l E Y P n =
         unrestrictedTowerUnit l E Y P n := by
     have hunit : unrestrictedTowerUnitCondition l E Y P (unrestrictedTowerUnit l E Y P) :=
-      (unrestrictedTowerMaps_existUnique l E Y P).exists.choose_spec
+      unrestrictedTowerUnit_condition l E Y P
     ext a U x
     change (((unrestrictedTowerTransition l E Y P n).f a).val.app U)
         ((((unrestrictedTowerUnit l E Y P (n + 1)).f a).val.app U) x) =
