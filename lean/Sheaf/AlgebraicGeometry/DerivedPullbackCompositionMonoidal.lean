@@ -6,15 +6,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Sheaf.AlgebraicGeometry.PullbackConstantModule
-import Sheaf.CategoryTheory.Sites.InverseImageBilinearAdjunction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 
 universe u
 
@@ -25,33 +19,40 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+private theorem derivedPullbackCompositionTensor
+    (A : Type*) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    {X Y Z : Scheme.{u}} (uMap : Y ⟶ X) (vMap : Z ⟶ Y)
+    [(uMap)^*[A].PreservesFlat] [(vMap)^*[A].PreservesFlat]
+    [((vMap ≫ uMap))^*[A].PreservesFlat]
+    (M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A vMap uMap (vMap ≫ uMap) rfl).hom.app
+        (((derivedTensor A X).obj M).obj N) ≫
+      (vMap)^*[A].leftDerivedFunctor.map
+        ((leftDerivedUpperStarTensorIso A uMap M N).hom) ≫
+      (leftDerivedUpperStarTensorIso A vMap
+        ((uMap)^*[A].leftDerivedFunctor.obj M)
+        ((uMap)^*[A].leftDerivedFunctor.obj N)).hom =
+    (leftDerivedUpperStarTensorIso A (vMap ≫ uMap) M N).hom ≫
+      ((leftDerivedUpperStarComp A vMap uMap (vMap ≫ uMap) rfl).hom.app M ⊗ₘ
+        (leftDerivedUpperStarComp A vMap uMap (vMap ≫ uMap) rfl).hom.app N) := by
+  simpa only [leftDerivedUpperStarTensorIso_hom, derivedTensor, curriedTensor_obj_obj,
+    leftDerivedUpperStarDerivedTensor, Functor.postcompose₂_obj_obj_obj_obj, Functor.comp_obj] using
+    (leftDerivedUpperStarTensorComparison_comp A vMap uMap (vMap ≫ uMap) rfl M N).symm
+
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 /-- Canonical derived étale inverse-image composition is monoidal.
 
 (blueprint: lem-kun-derived-pullback-composition-monoidal)
 
-This is the statement node `lem-kun-derived-pullback-composition-monoidal`.
-The proof follows its seven recorded steps.  First choose K-flat representatives with
-flat terms and use `def-kun-derived-tensor`,
-`lem-weil-pbc-site-derived-tensor-descent`, `prop-weil-pbc-inverse-image-modules-exact`,
-and `lem-weil-pbc-exact-functor-derived-factorization` to reduce to termwise maps.
-Second, apply the bilinear-adjunction construction of
-`lem-sfb-site-inverse-image-bilinear-adjunction` to the tensor comparison and use the
-unit-normalized composition map of
-`lem-weil-pbc-inverse-image-composition-module-linear`; the two composites agree on
-each total-tensor summand with the same Koszul signs.  Third descend this equality
-through the K-flat equivalence, using `lem-kun-inverse-image-monoidal` and
-`def-kun-derived-tensor`, which gives the displayed tensor equation and its naturality.
-Fourth apply the same calculation to the constant complex, using
-`lem-kun-pullback-constant` and the unit normalization to obtain the constant-sheaf
-comparison equation.  Fifth evaluate the comparison on the left and right unit
-constraints from `lem-kun-tensor-unit`; the bilinear adjunction and the constant
-comparison identify both displayed unit equations, and descent gives them for every
-object.  Sixth, for three morphisms, use the fibre-product coherence in
-`def-pc-fibre-product`, the pasted-unit identity of
-`lem-cat-right-adjoint-composition`, and the uniqueness clause of
-`lem-weil-pbc-inverse-image-composition` to identify the two normalized composites;
-inverting gives the final associativity equation.  Finally all maps are canonical
-natural transformations, so naturality passes through localization. -/
+Specialize the source library's tensor-composition and unit-composition coherence,
+rewrite its tensor comparisons and unit comparisons as the canonical isomorphisms,
+and use its left and right unitor equations. The final clause is the existing
+componentwise associativity of the derived inverse-image composition isomorphism.
+The tensor calculation is first made at a general coefficient category to keep the
+monoidal instance in `derivedTensor` fixed before specializing to modules. -/
 theorem canonicalDerivedPullbackCompositionMonoidal
     (Λ : Type (u + 1)) [CommRing Λ]
     {X Y Z T : Scheme.{u}}
@@ -103,7 +104,25 @@ theorem canonicalDerivedPullbackCompositionMonoidal
           (tMap ≫ vMap) rfl).hom.app
           ((uMap)^*[ModuleCat.{u + 1} Λ].leftDerivedFunctor.obj K))
     := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact derivedPullbackCompositionTensor (ModuleCat.{u + 1} Λ) uMap vMap M N
+  · have h := leftDerivedUpperStarComp_hom_app_unit
+      (ModuleCat.{u + 1} Λ) vMap uMap (vMap ≫ uMap) rfl
+    simpa only [leftDerivedUpperStarOplaxMonoidal_η] using h
+  · intro V V' w K
+    simpa only [leftDerivedUpperStarTensorIso_hom, tensorHom_id,
+      derivedTensorLeftUnitor] using
+      (leftDerivedUpperStarTensorComparison_leftUnitor_hom
+        (ModuleCat.{u + 1} Λ) w K).symm
+  · intro V V' w K
+    simpa only [leftDerivedUpperStarTensorIso_hom, id_tensorHom,
+      derivedTensorRightUnitor] using
+      (leftDerivedUpperStarTensorComparison_rightUnitor_hom
+        (ModuleCat.{u + 1} Λ) w K).symm
+  · intro K
+    exact leftDerivedUpperStarComp_assoc'_app (ModuleCat.{u + 1} Λ)
+      tMap vMap uMap (tMap ≫ vMap) (vMap ≫ uMap) (tMap ≫ vMap ≫ uMap)
+      rfl rfl (by simp) K
 
 end AlgebraicGeometry.Etale
 

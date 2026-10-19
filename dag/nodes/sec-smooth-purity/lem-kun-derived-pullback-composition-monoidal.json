@@ -22,130 +22,57 @@
  ],
  "proof": [
   {
-   "text": "Choose K-flat representatives with flat terms for the derived objects, and represent derived tensor products by their total tensor complexes. The termwise exact inverse-image functors carry these representatives and quasi-isomorphisms to the corresponding derived functors. By the K-flat tensor-descent equivalence, an equality of the natural transformations in the statement is determined by its restriction to these representatives; hence it suffices to perform the following calculations termwise on complexes of module sheaves.",
+   "text": "Use the already proved source-library tensor-composition equation leftDerivedUpperStarTensorComparison_comp, with g1=v, g2=u and g12=v composed with u. Reverse that equality and rewrite leftDerivedUpperStarTensorIso_hom. The helper derivedPullbackCompositionTensor performs this conversion at a general coefficient category, using derivedTensor and curriedTensor_obj_obj, before specializing to ModuleCat Lambda. This proves the first conjunct without repeating the K-flat descent argument already present in the source-library theorem.",
    "uses": [
     "def-kun-derived-tensor",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 0G7D and 06YU (K-flat resolutions, flat-term localization and derived tensor); Tag 06YY (exact inverse-image factorization)"
-   }
-  },
-  {
-   "text": "Work termwise with sheaves of $\\Lambda$-modules. For a morphism $w:V\\to V'$ and module sheaves $A,B$ on $V'_{\\Et}$, the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on K-flat flat-term complexes has as constituents the isomorphisms $\\kappa_w:w^{-1}A\\otimes_\\Lambda w^{-1}B\\to w^{-1}(A\\otimes_\\Lambda B)$ (inverse to $\\delta^w$; the module pullback is $w^{-1}$ by [prop-weil-pbc-inverse-image-modules-exact] (1),(2)), defined through the chain $\\mathrm{Hom}(w^{-1}(A\\otimes B),H)=\\mathrm{Hom}(A\\otimes B,w_*H)=\\mathrm{Bilin}(A\\times B,w_*H)=\\mathrm{Bilin}(w^{-1}A\\times w^{-1}B,H)=\\mathrm{Hom}(w^{-1}A\\otimes w^{-1}B,H)$, whose third bijection is $\\Theta_w(\\beta)=w_*(\\beta)\\circ(\\eta_{w,A}\\times\\eta_{w,B})$ of [lem-sfb-site-inverse-image-bilinear-adjunction]. Thus, with $\\tau$ the universal bilinear maps and $\\varphi^\\flat=w_*(\\varphi)\\circ\\eta_w$ the adjoint of $\\varphi:w^{-1}(A\\otimes B)\\to H$: $\\Theta_w(\\varphi\\circ\\kappa_w\\circ\\tau)=\\varphi^\\flat\\circ\\tau$ (*). Since $\\Theta$ is injective and maps out of a tensor product are determined by their composite with $\\tau$, the two maps $c_{u,v,A\\otimes B}\\circ v^{-1}(\\kappa_u)\\circ\\kappa_v$ and $\\kappa_{uv}\\circ(c_{u,v,A}\\otimes c_{u,v,B})$ from $v^{-1}u^{-1}A\\otimes v^{-1}u^{-1}B$ to $(uv)^{-1}(A\\otimes B)$ agree once, for every $H$ on $Z$ and every $\\varphi:(uv)^{-1}(A\\otimes B)\\to H$, the bilinear maps obtained by composing with $\\varphi$ and $\\tau$ have the same image under $\\Theta_u\\circ\\Theta_v$. Applying (*) for $v$ and then for $u$, with naturality of $\\eta_v$, the first gives $u_*v_*(\\varphi\\circ c_{u,v})\\circ u_*\\eta_{v,u^{-1}}\\circ\\eta_u\\circ\\tau$. Applying $\\Theta_u\\Theta_v$ to $\\varphi\\circ\\kappa_{uv}\\circ\\tau\\circ(c\\times c)$ gives $u_*v_*(\\varphi\\circ\\kappa_{uv}\\circ\\tau)\\circ(u_*v_*(c)u_*\\eta_vu^{-1}\\eta_u\\times\\text{same})$. By the normalization of $c_{u,v}$ in [lem-weil-pbc-inverse-image-composition-module-linear], $u_*v_*(c_{u,v})\\circ u_*\\eta_vu^{-1}\\circ\\eta_u=d_{u,v}\\circ\\eta_{uv}$; by naturality of $d_{u,v}$ (and its compatibility with products, being sectionwise) both expressions become $d_{u,v}\\circ\\varphi^\\flat_{uv}\\circ\\tau$, the second by (*) for $uv$. Hence the tensor-composition square commutes on every pair of module sheaves, naturally in $A,B$. Applied to the terms $P^p,Q^q$ of K-flat flat-term complexes, it holds on every summand of the total tensor complexes (on which [def-kun-derived-tensor] computes $\\otimes^L$), the Koszul signs being the same on both sides because all maps are applied summandwise.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "def-kun-derived-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-site-inverse-image-bilinear-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, the chain of bijections in its proof (third equality); Tag 03D8, lemma-push-pull-composition-modules; sites-cohomology.tex Tag 07A4 (constituents of the derived comparison)"
-   }
-  },
-  {
-   "text": "Passing the termwise equality of step 2 through the K-flat tensor-descent equivalence of step 1 gives, for arbitrary M,N, exactly\n$$\\delta^v_{u^{-1}M,u^{-1}N}\\circ v^{-1}(\\delta^u_{M,N})\\circ\\gamma_{u,v,M\\otimes^L N}=(\\gamma_{u,v,M}\\otimes^L\\gamma_{u,v,N})\\circ\\delta^{uv}_{M,N}.$$ \nThe equality is natural in M and N because every comparison used in the termwise calculation is natural.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-inverse-image-composition-module-linear"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.proof.md",
-    "place": "Canonical tensor and composition identifications in the double-adjoint calculation; extracted tensor-composition coherence"
-   }
-  },
-  {
-   "text": "The constant sheaf $\\underline\\Lambda$ is flat and K-flat (tensoring with it is the identity up to the unit constraint), so it lies in the class of step 1 and the unit equation is the image under the localization of the degree-0 equation of module maps $\\varepsilon_v\\circ v^{-1}(\\varepsilon_u)=\\varepsilon_{uv}\\circ c_{u,v,\\underline\\Lambda}:v^{-1}u^{-1}\\Lambda_X\\to\\Lambda_Z$, where $\\varepsilon_w$ is the canonical comparison of [lem-kun-pullback-constant], i.e. the map $c:w^{-1}\\Lambda\\to\\Lambda$ of [prop-weil-pbc-inverse-image-modules-exact] (1), adjoint to $\\gamma_w:\\Lambda\\to w_*\\Lambda$ induced by the constant sections. Two maps out of $v^{-1}u^{-1}\\Lambda_X$ are equal iff their adjoints $\\Lambda_X\\to u_*v_*\\Lambda_Z$ under the composite adjunction (unit $u_*\\eta_vu^{-1}\\circ\\eta_u$) are equal. By naturality of $\\eta_v$, the adjoint of the left side is $u_*(\\gamma_v)\\circ\\gamma_u$. By the normalization of $c_{u,v}$ in [lem-weil-pbc-inverse-image-composition-module-linear] and naturality of $d_{u,v}$, the adjoint of the right side is $d_{u,v}\\circ(uv)_*(\\varepsilon_{uv})\\circ\\eta_{uv}=d_{u,v}\\circ\\gamma_{uv}$. Both send the constant section $\\lambda$ over $W$ to the constant section $\\lambda$ of $\\Lambda_Z$ over $(W\\times_XY)\\times_YZ$ ($d_{u,v}$ is restriction along a canonical isomorphism, which preserves constant sections), and a map out of the constant sheaf is determined by the images of constant sections (universal property of sheafification). Inverting $c$ gives $\\varepsilon_v\\circ v^{-1}(\\varepsilon_u)\\circ\\gamma_{u,v,\\underline\\Lambda}=\\varepsilon_{uv}$ in the derived category.",
-   "uses": [
-    "lem-kun-pullback-constant",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D8, lemma-push-pull-composition-modules (composition of pullbacks conjugate to that of pushforwards), applied to the constant sheaf; constant sheaves via sites.tex Example 0H7J"
-   }
-  },
-  {
-   "text": "Let $w:V\\to V'$, $A$ a module sheaf on $V'_{\\Et}$, $l_A:\\Lambda\\otimes A\\to A$ the left unit constraint, $\\lambda\\otimes a\\mapsto\\lambda a$. Using (*) of step 2: $\\Theta_w(w^{-1}(l_A)\\circ\\kappa_w\\circ\\tau)=w_*w^{-1}(l_A)\\circ\\eta_{w,\\Lambda\\otimes A}\\circ\\tau=\\eta_{w,A}\\circ l_A\\circ\\tau$ by naturality of $\\eta_w$, i.e. $(\\lambda,a)\\mapsto\\eta_{w,A}(\\lambda a)$; and $\\Theta_w(l_{w^{-1}A}\\circ(\\varepsilon_w\\otimes1)\\circ\\tau)=w_*(\\text{action})\\circ(\\gamma_w\\times\\eta_{w,A})$, i.e. $(\\lambda,a)\\mapsto\\gamma_w(\\lambda)\\cdot\\eta_{w,A}(a)$, the module structure of $w_*w^{-1}A$ being through $\\gamma_w$ by [prop-weil-pbc-inverse-image-modules-exact] (3). The unit $\\eta_{w,A}$ is $\\Lambda$-linear (it is the unit of the module adjunction, same reference), so the two bilinear maps agree; by injectivity of $\\Theta_w$, $w^{-1}(l_A)\\circ\\kappa_w=l_{w^{-1}A}\\circ(\\varepsilon_w\\otimes1)$, i.e. $w^{-1}(l_A)=l_{w^{-1}A}\\circ(\\varepsilon_w\\otimes1)\\circ\\delta^w_{\\Lambda,A}$. The right unit constraint is the same computation with the factors exchanged. Applied termwise to a K-flat flat-term representative $P$ of $M$ (with $\\underline\\Lambda\\otimes P$ the total tensor complex computing $\\underline\\Lambda\\otimes^LM$ by [def-kun-derived-tensor], $\\underline\\Lambda$ being K-flat with flat terms), these are the representatives of the unit constraints of [lem-kun-tensor-unit] and of the comparison of [lem-kun-inverse-image-monoidal]; localizing gives\n$$w^{-1}(l_M)=l_{w^{-1}M}\\circ(\\varepsilon_w\\otimes^L1)\\circ\\delta^w_{\\underline\\Lambda,M},\\qquad w^{-1}(r_M)=r_{w^{-1}M}\\circ(1\\otimes^L\\varepsilon_w)\\circ\\delta^w_{M,\\underline\\Lambda},$$\nfor every $M$ by step 1, naturally in $M$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-kun-inverse-image-monoidal",
-    "lem-kun-pullback-constant",
-    "lem-kun-tensor-unit",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-kun-derived-tensor",
-    "lem-sfb-site-inverse-image-bilinear-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, chain of bijections in its proof, evaluated on the unit; sites-cohomology.tex Tag 07A4"
-   }
-  },
-  {
-   "text": "Let $t:T\\to Z$ be a third morphism. The isomorphisms of [lem-weil-pbc-inverse-image-composition] (1) satisfy $u_*(d_{v,t})\\circ d_{u,vt}=d_{u,v}t_*\\circ d_{uv,t}:(uvt)_*\\to u_*v_*t_*$: on sections over $W$ both are restriction along an isomorphism of $T$-schemes $((W\\times_XY)\\times_YZ)\\times_ZT\\to W\\times_XT$ compatible with the projections to $W$ and $T$, and such an isomorphism is unique [def-pc-fibre-product]; call this map $D$. Both composites $\\alpha_1=c_{uv,t}\\circ t^{-1}(c_{u,v})$ and $\\alpha_2=c_{u,vt}\\circ c_{v,t}u^{-1}$ (isomorphisms $t^{-1}v^{-1}u^{-1}\\to(uvt)^{-1}$ of module functors) satisfy $u_*v_*t_*(\\alpha_i)\\circ E=D\\circ\\eta_{uvt}$, where $E=u_*v_*\\eta_tv^{-1}u^{-1}\\circ u_*\\eta_vu^{-1}\\circ\\eta_u$ is the unit of the threefold composite adjunction, which is the pasted unit by [lem-cat-right-adjoint-composition]: for $\\alpha_1$ apply the normalization of $c_{u,v}$, then naturality of $\\eta_t$ and of $d_{u,v}$, then the normalization of $c_{uv,t}$; for $\\alpha_2$ apply the normalization of $c_{v,t}$ (whiskered by $u^{-1}$ and $u_*$), then that of $c_{u,vt}$ [lem-weil-pbc-inverse-image-composition-module-linear]. A transformation $\\alpha$ with this property is unique: by adjunction $\\alpha_G$ is the map whose adjoint under the threefold composite adjunction is $D\\circ\\eta_{uvt,G}$ (the Yoneda uniqueness of [lem-weil-pbc-inverse-image-composition] (2)). Hence $\\alpha_1=\\alpha_2$; inverting, $t^{-1}c_{u,v}^{-1}$ composed with $c_{uv,t}^{-1}$ equals $c_{v,t}^{-1}u^{-1}$ composed with $c_{u,vt}^{-1}$. Applying this termwise and descending by step 1 yields\n$$t^{-1}\\gamma_{u,v}\\circ\\gamma_{uv,t}=(\\gamma_{v,t}u^{-1})\\circ\\gamma_{u,vt}.$$",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-cat-right-adjoint-composition",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB, lemma-composition-morphisms; categories.tex Tag 0DV0, lemma-compose-counits"
-   }
-  },
-  {
-   "text": "All calculations use only the canonical associators and identity identifications of the total tensor complexes, so no additional symmetry or choice enters. The naturality of the module comparisons, the tensor comparison, the constant-sheaf comparison and the unit constraints passes through the localization, proving the final naturality assertion and completing all clauses of the statement.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-kun-pullback-constant",
-    "lem-kun-inverse-image-monoidal",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-kun-inverse-image-monoidal"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.proof.md",
-    "place": "Proof conclusion: the canonical comparisons are natural and the induced map is the identity"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarMonoidal/Comp.lean",
+    "place": "leftDerivedUpperStarTensorComparison_comp; UpperStarMonoidal/Comparison.lean, leftDerivedUpperStarTensorIso_hom"
+   }
+  },
+  {
+   "text": "Apply leftDerivedUpperStarComp_hom_app_unit to v and u. Rewrite the three oplax unit comparisons using leftDerivedUpperStarOplaxMonoidal_eta (the declaration whose suffix is the Greek eta). This gives exactly the constant-unit composition equation for leftDerivedUpperStarUnitIso.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarMonoidal/CompUnit.lean",
+    "place": "leftDerivedUpperStarComp_hom_app_unit; LowerShriekProjectionMonoidal.lean, leftDerivedUpperStarOplaxMonoidal_η"
+   }
+  },
+  {
+   "text": "For each w and K, reverse leftDerivedUpperStarTensorComparison_leftUnitor_hom and leftDerivedUpperStarTensorComparison_rightUnitor_hom. Rewrite the tensor comparison as leftDerivedUpperStarTensorIso_hom, tensoring with the identity as whiskering, and derivedTensorLeftUnitor or derivedTensorRightUnitor as the respective monoidal unitor. These are precisely the third and fourth conjuncts.",
+   "uses": [
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarMonoidal/Unit.lean",
+    "place": "leftDerivedUpperStarTensorComparison_leftUnitor_hom; LowerShriekProjectionMonoidal.lean, leftDerivedUpperStarTensorComparison_rightUnitor_hom; TensorStructure.lean"
+   }
+  },
+  {
+   "text": "For the final conjunct apply the already proved component associativity theorem leftDerivedUpperStarComp_assoc'_app to t, v, u, the composites t composed with v and v composed with u, and t composed with v composed with u. The composite equalities are reflexivity or category associativity. Assemble these five equations using conjunction introduction. All component maps are those in the unchanged statement; no new choice or alternative comparison is introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompCoherence.lean",
+    "place": "leftDerivedUpperStarComp_assoc'_app"
    }
   }
  ],
  "proof_deps": [
   "def-kun-derived-tensor",
-  "def-pc-fibre-product",
-  "lem-cat-right-adjoint-composition",
   "lem-kun-inverse-image-monoidal",
-  "lem-kun-pullback-constant",
-  "lem-kun-tensor-unit",
-  "lem-sfb-site-inverse-image-bilinear-adjunction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-kun-tensor-unit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-bc-kunneth-compat.proof.md",
-  "place": "Expanded representative-level proof of the tensor, unit, and composition coherence used in the Kunneth compatibility calculation"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarMonoidal/Comp.lean",
+  "place": "E4: specialize existing proved tensor-composition, unit-composition, left/right-unitor and threefold-composition coherence in Comp.lean, CompUnit.lean, Unit.lean, LowerShriekProjectionMonoidal.lean and UpperStarCompCoherence.lean; no representative-level argument is repeated."
  },
  "mathlib_searches": [
   {
@@ -245,5 +172,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Full clause-by-clause review passed; dependencies and canonical étale declarations match, edge cases and universes checked, and scompile.py server compilation succeeded."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261019T002532-L-2149520",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
