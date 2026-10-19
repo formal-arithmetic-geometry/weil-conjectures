@@ -70,7 +70,22 @@ theorem proEtaleConstantRingUnit_locallyBijectiveOfUniverses (Y : Scheme.{t}) (A
       (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
         ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, u} A))))
         (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})) := by
-  sorry
+  let : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
+  let : (ProEt.topology Y).WEqualsLocallyBijective CommRingCat.{max u (t + 1)} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
+  constructor
+  · apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
+    change Presheaf.IsLocallyInjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, u} A))))
+        (CategoryTheory.forget CommRingCat.{max u (t + 1)}))
+    infer_instance
+  · apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
+    change Presheaf.IsLocallySurjective (ProEt.topology Y)
+      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, u} A))))
+        (CategoryTheory.forget CommRingCat.{max u (t + 1)}))
+    infer_instance
 
 /-- The constant module sheaf, sheafifying the constant module presheaf together
 with the constant coefficient ring. Scalar multiplication is the sheafified original
@@ -108,7 +123,12 @@ theorem proEtaleConstantRingUnit_over_locallyBijectiveOfUniverses (Y : Scheme.{t
         (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
           ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, u} A))))
           (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)}))) := by
-  sorry
+  have := (proEtaleConstantRingUnit_locallyBijectiveOfUniverses Y A).1
+  have := (proEtaleConstantRingUnit_locallyBijectiveOfUniverses Y A).2
+  exact ⟨Presheaf.isLocallyInjective_whisker ((ProEt.topology Y).over U)
+    (ProEt.topology Y) (Over.forget U) _,
+    Presheaf.isLocallySurjective_whisker ((ProEt.topology Y).over U)
+      (ProEt.topology Y) (Over.forget U) _⟩
 
 /-- The constant module sheaf on the localized site, formed by sheafification over
 the restricted coefficient ring. Source: Bhatt--Scholze 7.3.1(1), module version
