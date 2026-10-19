@@ -18,126 +18,43 @@
  ],
  "proof": [
   {
-   "text": "Write $Q_Y,Q_X$ for localization, $v=f^*$ and $u=f_*$ on module sheaves. The module adjunction $v\\dashv u$ is supplied by [lem-weil-pbc-ringed-topoi-module-adjunction], and [lem-weil-pbc-termwise-adjunction-homotopy] supplies its termwise homotopy-category adjunction. Denote its Hom bijection by $T$, so $T(t)=u(t)\\circ\\eta^0_P$ for $t:vP\\to I$. For every integer $n$, $v(P[n])=(vP)[n]$ and $u(I[n])=(uI)[n]$: an additive functor carries $(-1)^n d$ to $(-1)^n$ times the image differential. The degree-$r$ component of the termwise unit at $P[n]$ is $\\eta^0_{P^{r+n}}$, the same as that of $\\eta^0_P[n]$. Consequently $T(t[n])=T(t)[n]$, including in homotopy classes.",
+   "text": "Use the right Kan extension universal property in hL. For arbitrary Q, F, LF and comparison alpha, postcomposing LF with a right adjoint S preserves the equality test for transformations into LF: transpose each transformation through T adjoint S, use the right Kan extension equality test, and transpose back. Naturality of the counit identifies the tested composites with gamma followed by S(alpha). This is the proved private helper rightKan_postadjoint_ext; no resolution choices are required.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply that equality test also after postcomposition by each shift equivalence. If alpha and the image (Q tau) followed by S(alpha) commute with shifts, compare the two sides of the shift square of tau after the test. Precompose with H of the invertible shift comparison of Q. Naturality of tau moves that comparison to the target; the shift squares of the image and of S(alpha) identify the composites. Cancel the comparison. The private helper rightKan_postadjoint_commShift formalizes this argument for every integer.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let ah be the termwise homotopy adjunction induced by adj0. Its unit commutes with shifts: on complexes this is the degreewise underived unit, and the identity descends through the homotopy quotient. The existing source-library instance commShift_mapHomotopyCategory_unit supplies this fact. Specialize the given normalization to M, Fh(M), and the identity map. The homEquiv unit formula yields eta(Q M) followed by R(alpha_M) equal to Q(eta0_M) followed by beta_(Fh M).",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; termwise shift calculation expanded here"
-   }
+   "elementary": false
   },
   {
-   "text": "Shifting preserves the resolution classes. For K-flat $P$ and any acyclic $E$, the map $\\operatorname{Tot}(E\\otimes P[n])\\to\\operatorname{Tot}(E\\otimes P)[n]$ multiplies the summand $E^i\\otimes P^{j+n}$ by $(-1)^{ni}$. In the first differential the signs agree because $(-1)^{n(i+1)}=(-1)^n(-1)^{ni}$; in the second differential both sides have sign $(-1)^{ni+i+n}$. This is an isomorphism, so the target and source are acyclic simultaneously. The definitions [def-pc-kflat-complex, def-pc-tensor-complex-sheaves] thus give K-flatness of $P[n]$; flatness of its terms is just reindexing. K-injective resolutions shift by [lem-weil-pbc-kinjective-shift]. Since $H^r(C[n])=H^{r+n}(C)$, shifted quasi-isomorphisms are quasi-isomorphisms. Localization commutes with these shifts by [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-kinjective-shift",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 06YL, definition-K-flat; explicit tensor signs; derived.tex Definition 070H and shift convention"
-   }
-  },
-  {
-   "text": "Let $\\alpha_P:LQ_YP\\to Q_XvP$ be the canonical left-derived comparison and $\\beta_I:Q_YuI\\to RQ_XI$ the right-derived comparison. The first is invertible for K-flat $P$ with flat terms by [lem-weil-pbc-ringed-topoi-derived-pullback]; the second is invertible for K-injective $I$ by [def-sfb-right-derived-functor]. Write $\\ell_A:L(A[n])\\to (LA)[n]$ and $r_B:R(B[n])\\to(RB)[n]$ for the comparisons in the item, with $n$ fixed. In the localization/termwise identifications of Steps 1–2 their defining equations on these representatives are\n$$\\alpha_P[n]\\circ\\ell_{Q_YP}=\\alpha_{P[n]},\\qquad r_{Q_XI}\\circ\\beta_{I[n]}=\\beta_I[n].$$\nThese equations also hold if $P,I$ differ from the chosen resolutions. Indeed, for a chosen resolution $p:P'\\to P$, naturality gives $Q_Xv(p)\\alpha_{P'}=\\alpha_P LQ_Y(p)$; both comparisons and $LQ_Y(p)$ are invertible. Apply this equality to $p[n]$ and cancel the same isomorphisms to obtain the first equation. For $I$, compare the chosen resolution $I\\to I'$ with the identity resolution of $I$. It is a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived], so naturality of $\\beta$, and then of its shifted version, gives the second equation by cancellation. Thus these are the specified resolution comparisons.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "def-sfb-right-derived-functor",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; Section 07A5; derived.tex Tag 070I; resolution-comparison equations expanded here"
-   }
-  },
-  {
-   "text": "Let $\\Phi_{A,B}:\\operatorname{Hom}(LA,B)\\to\\operatorname{Hom}(A,RB)$ be the canonical derived adjunction $L\\dashv R$. Apply [lem-pc-pre-derived-adjoint-functors-general] to $G=v,F=u$, with $M=P,K=I$ and both denominator morphisms identities. The cone leg is $\\alpha_P$, the cocone leg is $\\beta_I$. These legs represent the essentially constant systems of [lem-pc-derived-adjoint-functors]. For quasi-isomorphisms $t:P'\\to M$ put $u_t=\\alpha_{P'}L(Q_Yt)^{-1}$, a cone by naturality of $\\alpha$; take $t_0:P_0\\to M$ K-flat with flat terms [lem-pc-kflat-resolution] and $\\rho=L(Q_Yt_0)\\alpha_{P_0}^{-1}$, so $\\rho u_{t_0}=1$. Given $t$, cofilteredness and a further such resolution give $t_k:P_k\\to M$ with $P_k$ K-flat with flat terms and $a:P_k\\to P_0$, $b:P_k\\to P'$ over $M$; naturality of $\\alpha$ and invertibility of $\\alpha_{P_0},\\alpha_{P_k}$ give $u_t\\rho\\,Q_Xv(a)=Q_Xv(b)$, the transition map. Dually $p_s=R(Q_Xs)^{-1}\\beta_J$ for $s:I'\\to J$ is a representing cocone, using a K-injective resolution [prop-pur-kinjective-resolutions-exist]. At identity indices the legs are $\\alpha_P,\\beta_I$. The cited pre-derived node's normalization formula says, for a homotopy map $g:P\\to uI$, that $\\Phi^{-1}(\\beta_I Q_Yg)=Q_X(T^{-1}g)\\alpha_P$. Taking $g=T(t)$ gives\n$$\\Phi_{Q_YP,Q_XI}(Q_X(t)\\circ\\alpha_P)=\\beta_I\\circ Q_Y(T(t)).\\tag{*}$$\nThis formula covers every $a:LQ_YP\\to Q_XI$: $a\\alpha_P^{-1}$ has the form $Q_X(t)$ by the Hom bijection into K-injective $I$ of [lem-weil-pbc-kinjective-hom-derived], with $t:vP\\to I$ a homotopy class. Invertibility of $\\alpha_P$ is provided by [lem-weil-pbc-ringed-topoi-derived-pullback], and of $\\beta_I$ by [def-sfb-right-derived-functor]. No K-projectivity of $P$ or K-injectivity of $uI$ is used.",
-   "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "def-sfb-right-derived-functor",
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0FND and 0DVC, canonical representative formula in lemma-pre-derived-adjoint-functors-general; Tag 09T5; Tag 070I"
-   }
-  },
-  {
-   "text": "For $A=Q_YP$, $B=Q_XI$ and $a=Q_X(t)\\alpha_P$, Step 3 gives $a[n]\\ell_A=Q_X(t[n])\\alpha_{P[n]}$. Formula $(*)$ for the shifted representatives, which are still in the resolution classes by Step 2, and $T(t[n])=T(t)[n]$ give\n$$\\begin{aligned}\n\\Phi_{A[n],B[n]}(a[n]\\ell_A)&=\\beta_{I[n]}Q_Y(T(t[n]))\\\\\n&=r_B^{-1}\\beta_I[n]Q_Y(T(t))[n]\\\\\n&=r_B^{-1}\\bigl(\\Phi_{A,B}(a)\\bigr)[n].\n\\end{aligned}$$\nThe second equality is precisely the right-hand comparison equation of Step 3. Every $a$ has the representation used here by Step 4, so this proves the displayed identity for all morphisms between these representatives.",
+   "text": "Express that equality as equality of natural transformations. Its right side is a composite of the localized termwise unit, beta whiskered by Fh, and canonical associators and unitors; each commutes with shifts. Apply the preceding universal-property helper with Q=Qh, LF=L, S=R, T=L, tau=eta, using hL, to prove that the derived unit commutes with all integer shifts. This proves CompatibilityUnit for the fixed comparisons. The right-derived universal property and resolution invertibility are unnecessary because the normalized beta is already an input. The proved private helper normalized_unit_commShift carries out this composition argument before specialization to sheaf-module categories, avoiding expansion of their large types during elaboration.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND representative formula; explicit shifted calculation from Steps 1–4 (agent expansion)"
-   }
+   "elementary": true
   },
   {
-   "text": "Every $A\\in D(R_Y)$ is isomorphic to $Q_YP$ for K-flat $P$ with flat terms by [lem-pc-kflat-resolution] and localization [def-weil-abstract-derived-category]. Every $B\\in D(R_X)$ is isomorphic to $Q_XI$ for K-injective $I$ by [prop-pur-kinjective-resolutions-exist]. Choose $h:Q_YP\\xrightarrow{\\sim}A$ and $k:Q_XI\\xrightarrow{\\sim}B$. For $a:LA\\to B$ put $a'=k^{-1}aL(h)$. Bifunctoriality of the adjunction gives $\\Phi(a')=R(k^{-1})\\Phi(a)h$. Naturality of $\\ell$ gives $a'[n]\\ell_{Q_YP}=k^{-1}[n](a[n]\\ell_A)L(h[n])$; naturality of $r$ gives $r_{Q_XI}^{-1}R(k^{-1})[n]=R(k^{-1}[n])r_B^{-1}$. Substitute these into Step 5 and cancel the precomposition by $h[n]$ and postcomposition by $R(k^{-1}[n])$. Hence, for all $A,B,a$,\n$$\\Phi_{A[n],B[n]}(a[n]\\ell_A)=r_B^{-1}\\bigl(\\Phi_{A,B}(a)\\bigr)[n].\\tag{**}$$\nThe only transport here is the displayed naturality equalities and cancellation of isomorphisms; it imposes no boundedness on either complex.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS and Section 07A5; derived.tex Tag 0DVC bifunctoriality; explicit isomorphism cancellation"
-   }
-  },
-  {
-   "text": "In $(**)$ set $B=LA$ and $a=1_{LA}$. The definition of an adjunction Hom bijection gives $\\Phi_{A,LA}(1)=\\eta_A$ and $\\Phi_{A[n],(LA)[n]}(\\ell_A)=R(\\ell_A)\\eta_{A[n]}$. Thus\n$$r_{LA}\\circ R(\\ell_A)\\circ\\eta_{A[n]}=\\eta_A[n].$$\nThis is exactly compatibility with the unit as defined in [lem-weil-pbc-adjunction-shift-compatibility-unique]. The proof worked for each integer $n$, rather than only positive shifts.",
+   "text": "Apply compatibilityCounit_of_compatibilityUnit to obtain counit compatibility for every integer. Apply compatibilityUnit_unique_right to any other right comparison satisfying the unit equation to obtain equality with the fixed comparison, without any extra coherence hypothesis.",
    "uses": [
     "lem-weil-pbc-adjunction-shift-compatibility-unique"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8D, lemma-adjoint-is-exact; unit specialization of the explicit Hom calculation"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-adjunction-shift-compatibility-unique] (i) to the unit equality of Step 7. This gives, for every $B$,\n$$\\varepsilon_{B[n]}=\\varepsilon_B[n]\\circ\\ell_{RB}\\circ L(r_B).$$\nIts clause (ii) gives uniqueness of $r$ for the fixed $\\ell$, and identifies the inverse explicitly as\n$$r_B^{-1}=R(\\varepsilon_B[n])\\circ R(\\ell_{RB})\\circ\\eta_{(RB)[n]}.$$\nThe comparisons here are the canonical ones identified in Step 3. Existence of a compatible $r$ is Step 7, so for each $n$ the resolution comparison $r$ is the unique one compatible with the unit and $\\ell$. This proves both shift compatibility clauses and the claimed uniqueness; no coherence of $\\ell$ across different $n$ is used.",
-   "uses": [
-    "lem-weil-pbc-adjunction-shift-compatibility-unique"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8D, lemma-adjoint-is-exact; abstract unit/counit and uniqueness clauses recorded in the cited Mathlib leaf"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-kinjective-shift",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "def-sfb-right-derived-functor",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-adjunction-shift-compatibility-unique"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-  "place": "Tags 07A6 and 0FND/0DVC give the canonical adjunction; the comparison with resolution shifts is expanded explicitly, followed by Tag 0A8D and the existing Mathlib uniqueness leaf."
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex; Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+  "place": "Tags 07A6, 0DVC and 0A8D; shorter formal argument from the right Kan extension universal property, the given normalization and the source-library termwise unit shift instance."
  },
  "mathlib_searches": [
   {
@@ -269,11 +186,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -300,5 +213,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "Every node clause matches the Lean. Sites, rings, morphism of topoi, structure map and module pullback use the ringedTopoiDerivedPullback interface with site universes independent (EssentiallySmall.{r}, as the dependency node allows). G with adj0 : F ⊣ G stands for f_*. L and R are given by IsLeft/RightDerivedFunctor with alpha/beta in the right directions. The normalization hypothesis is verbatim the last clause of exists_derived_adjunction_of_essentially_constant with the functor names swapped. The shift comparisons are fixed by NatTrans.CommShift of alpha and beta (node Step 3); they exist and are unique, so the hypotheses describe the canonical ones and are not vacuous. Conclusion: CompatibilityUnit and CompatibilityCounit for all n, plus uniqueness of R's comparison among all natural isos per n, matching clauses (i)-(ii) of the compatibility-unique leaf. Edge cases: n=0 and n<0, zero ring, empty sites, non-flat c; 7 universes bound and independent. Stacks 0A8D (derived.tex l.2290) and 07A6 (sites-cohomology.tex l.3990) checked. No duplicate in side/slopmaster2/Mathlib. Node JSON differs from live only by the lean record; lean.statement equals the file signature exactly. Docstrings carry source, blueprint tag and 8 proof steps; no definitions, only proof is sorry. nt_compile --json: exit 0, no errors or warnings, 6.1 s; axioms propext/sorryAx/choice/Quot.sound."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T005349-L-2757960",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
