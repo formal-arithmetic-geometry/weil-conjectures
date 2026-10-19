@@ -31,105 +31,70 @@
  ],
  "proof": [
   {
-   "text": "Put $K=Rp_{X,*}C$. Take $N_0=\\ell^r$. The finite coefficient convention [sbc-def-coefficient-conventions] holds on $X$ and $Y$: $N_0 A=0$, and $\\ell$ is a nonzero element of $k$, hence a unit, whose image stays a unit on every $k$-scheme. The morphism $p_X$ is proper between finite-type $k$-schemes, exactly the hypotheses of [lem-fin-proper-bounded-constructible]. Since $C\\in\\Dbc(X_{\\mathrm{et}},A)$, that lemma gives $K\\in\\Dbc(Y_{\\mathrm{et}},A)$.",
+   "text": "Take the coefficient exponent ell^r. The prime ell is nonzero in the characteristic-p field because p differs from ell. Its power is a unit, and remains a unit after mapping global sections to X and Y. Thus the smooth-base-change coefficient conventions hold on both schemes. Apply the bounded constructible proper-direct-image theorem to C.",
    "uses": [
     "sbc-def-coefficient-conventions",
     "lem-fin-proper-bounded-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
-    "place": "Constructibility paragraph; Stacks Tag 0GL0 (more-etale-theorem-constructible-shriek) applies in the standing finite-type setting"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix an arbitrary $A$-module $N$, with no finite generation or flatness assumption, and let $N_Y$ be its constant sheaf [def-kun-constant-sheaf]. Exactness of constant-coefficient module inverse image [prop-weil-pbc-inverse-image-modules-exact] identifies $Lp_X^*N_Y$ with the degree-zero sheaf $p_X^{-1}N_Y$. Thus $B_N=C\\otimes_A^{\\mathbf L}p_X^{-1}N_Y$ has cohomology only in $[a,b]$, by the definition [def-kun-tor-amplitude]. Apply [lem-etale-proper-projection-formula-finite] with $M=C$ and its second argument $N_Y[0]$. Its ring and properness hypotheses hold and it imposes no boundedness or Tor hypothesis on $N_Y$. It gives\n$$K\\otimes_A^{\\mathbf L}N_Y\\simeq Rp_{X,*}B_N.$$\nThis is the proper projection formula (Stacks Tag 0F0G); Tag 0F12 alone states a formula for global sections and is not directly a relative pushforward theorem.",
+   "text": "For every geometric fibre and every A-module sheaf G on it, its underlying abelian sheaf is killed sectionwise by ell^r: rewrite ell^r times a section as (ell^r times 1_A) acting on that section. Apply the assumed fibre cohomology bound. The module/abelian cohomology comparison and faithfulness of forgetting coefficients give vanishing of module-valued cohomology above d. Global sections over Spec of the algebraically closed field are an exact equivalence. The Leray isomorphism therefore identifies this vanishing with vanishing of the homology sheaves of the fibre derived direct image of G[0].",
    "uses": [
-    "def-kun-constant-sheaf",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-kun-leray-unbdd"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a sheaf F on X and q>d, apply proper base change with torsion coefficient ring A to the algebraic-closure point at every point of Y. Finiteness of A gives additive torsion of A. Exact inverse image commutes with homology, and its derived functor takes F[0] to the pulled-back sheaf in degree zero. The bounded-below/total/classical right-derived comparisons identify the pulled-back R^q f_* F with fibre cohomology, which vanishes by the preceding step. Geometric-point inverse images detect zero module sheaves. Hence R^q f_* F=0 for all sheaves F and q>d.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
     "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given any module sheaf M on Y, put B=C tensor^L f^{-1}M[0]. Exact inverse image identifies Lf^*(M[0]) with (f^{-1}M)[0], so the input Tor-amplitude hypothesis puts B in [a,b]. Left t-exactness of right derivation gives Rf_*B in degrees at least a. Apply the proved general derived upper-amplitude theorem to the classical cohomological-dimension bound from the preceding step: Rf_*B lies in degrees at most b+d. This theorem uses dimension shifting on cycles and packages the same finite cohomological-amplitude consequence as the hypercohomology argument.",
+   "uses": [
     "def-kun-tor-amplitude",
-    "lem-etale-proper-projection-formula-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0F0G (lemma-projection-formula-proper-mod-n) and 0F12 (lemma-pull-out-constant-mod-n); realizes the first sentence of the blueprint Stalks of tensor products paragraph"
-   }
-  },
-  {
-   "text": "Fix $\\bar y:P=\\operatorname{Spec}\\Omega\\to Y$, let $i:X_{\\bar y}\\to X$ and $p_{\\bar y}:X_{\\bar y}\\to P$ be the fibre projections. Apply [det-properbasechange-modules] to $B_N$ and this Cartesian square. The complex is bounded below by step 2 and all its cohomology sheaves are annihilated by $\\ell^r$, so the required underlying torsion condition holds. It gives\n$$\\bar y^{-1}Rp_{X,*}B_N\\simeq Rp_{\\bar y,*}i^{-1}B_N.$$\nBy [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], the fibre complex $E=i^{-1}B_N$ still has cohomology only in $[a,b]$. By [lem-weil-pbc-geometric-point-pullback-stalk], sections on $P_{\\mathrm{et}}$ are an exact equivalence with $A$-modules, and sections of $\\bar y^{-1}G$ equal $G_{\\bar y}$ naturally (apply its abelian statement to the underlying sheaf and retain the action). Applying this exact functor termwise identifies the left side with $(Rp_{X,*}B_N)_{\\bar y}$ and the right side with $R\\Gamma(X_{\\bar y},E)$: choose a bounded below K-injective representative $I$ of $E$ using [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. The equality $\\Gamma(P,p_{\\bar y,*}I)=\\Gamma(X_{\\bar y},I)$ computes the right side, since the exact equivalence $\\Gamma(P,-)$ preserves quasi-isomorphisms. Hence\n$$(K\\otimes_A^{\\mathbf L}N_Y)_{\\bar y}\\simeq R\\Gamma(X_{\\bar y},E).$$",
-   "uses": [
-    "det-properbasechange-modules",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative"
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-etale-derived-functor-upper-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
-    "place": "Stalks of tensor products paragraph: proper base change and fibre formula; Stacks Tags 095T, 03Q1 (lemma-stalk-pullback), 04JQ (lemma-equivalence-abelian-sheaves-point)"
-   }
+   "elementary": false
   },
   {
-   "text": "Here are all hypotheses and the vanishing argument for the fibre hypercohomology sequence. The categories of $A$-module sheaves on $X_{\\bar y}$ and $P$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. The direct image $v=p_{\\bar y,*}$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. These module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and [lem-weil-pbc-dplus-injective-representative] supplies a bounded below K-injective complex representing $E$, so [thm-sp-truncation-e2] applies to $v$ and that complex. Its $E_2$-page, finite exhaustive separated abutment filtrations, and the exact point-section equivalence of step 3 give\n$$E_2^{s,t}=H^s(X_{\\bar y},\\mathcal H^t(E))\\Longrightarrow H^{s+t}(X_{\\bar y},E).$$\nFor the module-valued $H^s$ in this formula, [lem-weil-pbc-etale-module-cohomology-forget] identifies its underlying group with abelian sheaf cohomology. Each $\\mathcal H^t(E)$ is killed by $\\ell^r$, so the stated $\\ell$-cohomological bound makes this zero for $s>d$. It is also zero for $s<0$ by the spectral sequence theorem and for $t\\notin[a,b]$ by step 3. Therefore $E_2^{s,t}=0$ outside the rectangle $0\\le s\\le d$, $a\\le t\\le b$. Zero entries remain zero on later pages, since the next page is a kernel modulo an image. If $n\\notin[a,b+d]$, all entries on $s+t=n$ are zero, so all associated graded objects of the finite abutment filtration of $H^n(X_{\\bar y},E)$ are zero. Successively $F^j/F^{j+1}=0$ makes $F^j=F^{j+1}$; start at the zero end of the finite filtration and reach the exhaustive end. Thus $H^n(X_{\\bar y},E)=0$. This proves the constant-module tensor bound at every geometric stalk without assuming constructibility of $N$ or $E$.",
+   "text": "The finite-coefficient proper projection formula gives (Rf_*C) tensor^L M[0] isomorphic to Rf_*B for every M, with no finiteness or flatness assumption on M. Transport the preceding interval vanishing through this isomorphism to obtain the output Tor-amplitude predicate. Combine it with bounded constructibility from the first step. This tests arbitrary sheaves directly, using the available full relative projection formula, rather than reducing them to constant-module tensors.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "thm-sp-truncation-e2",
-    "lem-weil-pbc-etale-module-cohomology-forget"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015J (lemma-two-ss-complex-functor), E2 page and finite convergence; realizes the final two sentences of the blueprint Stalks of tensor products paragraph"
-   }
-  },
-  {
-   "text": "Let $M$ be any sheaf of $A$-modules on $Y_{\\mathrm{et}}$ and let $\\bar y$ be a geometric point. By [lem-sfb-etale-derived-tensor-stalk],\n$$(K\\otimes_A^{\\mathbf L}M)_{\\bar y}\\simeq K_{\\bar y}\\otimes_A^{\\mathbf L}M_{\\bar y}.$$\nPut $N=M_{\\bar y}$. By [lem-weil-pbc-constant-sheaf-geometric-stalk] the canonical map $N\\to(N_Y)_{\\bar y}$ is an isomorphism; it is $A$-linear because constant sections and germ maps preserve the action. Applying [lem-sfb-etale-derived-tensor-stalk] again identifies this derived tensor with $(K\\otimes_A^{\\mathbf L}N_Y)_{\\bar y}$. Steps 3-4 show that it has zero cohomology outside $[a,b+d]$. The geometric-point equivalence [lem-weil-pbc-geometric-point-pullback-stalk] and exact inverse image [prop-weil-pbc-inverse-image-modules-exact], together with [lem-weil-pbc-exact-functor-complex-cohomology], identify its cohomology with the stalks of $\\mathcal H^n(K\\otimes_A^{\\mathbf L}M)$. For $n$ outside that interval, [lemma-weil-pbc-geometric-stalk-conservative] applied to the underlying abelian sheaf's map to zero makes this cohomology sheaf zero. Since $M$ was arbitrary, [def-kun-tor-amplitude] gives Tor amplitude $[a,b+d]$ for $K$. Together with step 1, this proves the conclusion.",
-   "uses": [
-    "lem-sfb-etale-derived-tensor-stalk",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-etale-proper-projection-formula-finite",
     "def-kun-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
-    "place": "From constant modules to all sheaves; derived stalk tensor is now the separate 0DEN lemma, constant-sheaf stalk uses the existing 03PT lemma"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "sbc-def-coefficient-conventions",
   "lem-fin-proper-bounded-constructible",
-  "def-kun-constant-sheaf",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-kun-tor-amplitude",
-  "lem-etale-proper-projection-formula-finite",
-  "det-properbasechange-modules",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "thm-sp-truncation-e2",
   "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-sfb-etale-derived-tensor-stalk",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-kun-leray-unbdd",
+  "thm-weil-pbc-bounded-below",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-kun-tor-amplitude",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-proper-projection-formula-finite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-tor.proof.md",
-  "place": "All three paragraphs: constructibility, constant-module projection and geometric-fibre bound, then stalkwise testing against arbitrary sheaves; detailed with Stacks 0F0G, 015J and 07A4."
+  "place": "Constructibility and stalkwise cohomological-dimension argument; uses the full relative proper projection formula (Stacks 0F0G) and the proved general derived upper-amplitude theorem (Stacks 07K7(4)(c)) to test arbitrary sheaves directly."
  },
  "mathlib_searches": [
   {
@@ -270,18 +235,10 @@
   "lem-fin-proper-bounded-constructible",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-etale-proper-projection-formula-finite",
-  "det-properbasechange-modules",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "thm-sp-truncation-e2",
   "lem-weil-pbc-etale-module-cohomology-forget",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -320,5 +277,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Every hypothesis and both conclusion clauses match the node and sk-def-sfb-dc-setting: ℓ prime; char p>0, p≠ℓ; X, Y separated of finite type over k; f a proper k-morphism (IsOver); A finite with ℓ^r·A=0, r≥1; fibre bound hd over all geometric points Spec Ω→Y and all sectionwise ℓ-power-torsion abelian sheaves on pullback f y, using the recorded Etale.cohomology spelling; C with isBoundedConstructible and hasTorAmplitudeIn a b; conclusion isBoundedConstructible ∧ hasTorAmplitudeIn a (b+d). Universes follow the recorded convention (u, coefficients u+1). rightDerivedLowerStar (unbounded total derived functor, sibling of the recorded rightDerivedLowerStarPlus) is accepted: the node asks for the total derived direct image, C is bounded, and the landed proof dependencies (lem-fin-proper-bounded-constructible, the projection formula) use the same functor. Edge cases admitted: empty schemes, zero ring, zero complex, a=b, d=0, ℓ=2. Node differs only in lean; lean.statement is verbatim in the file. Docstrings carry source and blueprint tags and the five-step proof; sorry only; no definitions; no pro-etale substitute. nt_compile.py on the snapshot: rc=0, item 3.3 s, no errors or warnings. Minor, non-blocking: stale stage-1 tool_uses entry lem-weil-pbc-ringed-topoi-derived-tensor-pullback."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261019T002618-L-2160703",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

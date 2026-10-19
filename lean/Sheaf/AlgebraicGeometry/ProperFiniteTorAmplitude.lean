@@ -14,24 +14,14 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import Mathlib.Algebra.Homology.Additive
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-import Sheaf.SixFunctors.ProperBaseChangeModules
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import Sheaf.AlgebraicGeometry.GeometricPointPullbackStalk
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.CategoryTheory.RightDerivedFunctorUpperBound
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # Proper direct image preserves finite Tor amplitude
@@ -57,39 +47,28 @@ namespace AlgebraicGeometry.Etale
 with upper Tor bound increased by a bound for the geometric fibres' ℓ-cohomological dimensions.
 Source: blueprint `sec-six-functors-basics/sk-prop-ctf-finite-proper/`
 `sk-prop-ctf-finite-proper-tor.md` (blueprint: det-ctf-finite-proper-tor).
-
-Proof plan:
-1. The coefficient convention holds for N = ℓ^r on both schemes because p ≠ ℓ.
-   Apply lem-fin-proper-bounded-constructible to obtain bounded constructibility of Rp_*C.
-2. For any A-module N, inverse image of its constant sheaf is exact
-   (prop-weil-pbc-inverse-image-modules-exact). The input Tor interval bounds
-   C ⊗ᴸ p⁻¹N_Y. The proper projection formula
-   (lem-etale-proper-projection-formula-finite, Stacks 0F0G) identifies its direct image
-   with Rp_*C ⊗ᴸ N_Y, without finiteness or flatness assumptions on N.
-3. Apply det-properbasechange-modules to this bounded-below complex at each geometric
-   point. Exact inverse image preserves its interval. The exact geometric-point section
-   equivalence identifies the stalk with derived global sections of the fibre complex
-   (lem-weil-pbc-geometric-point-pullback-stalk). Choose a bounded-below K-injective
-   representative using lem-weil-pbc-module-sheaves-enough-injectives and
-   lem-weil-pbc-dplus-injective-representative to compute this identification.
-4. Module sheaves are Grothendieck abelian and direct image is additive and left exact
-   (lem-weil-pbc-module-sheaves-grothendieck-abelian,
-   lem-weil-pbc-module-direct-image-left-exact). Apply thm-sp-truncation-e2 to the fibre
-   complex. Its E₂ page is H^s(X_y, H^t(E)); underlying module cohomology agrees with
-   abelian cohomology by lem-weil-pbc-etale-module-cohomology-forget. Since ℓ^r kills
-   these sheaves, the fibre bound and the input interval confine E₂ to
-   0 ≤ s ≤ d, a ≤ t ≤ b. Subsequent pages vanish outside that rectangle. For a total
-   degree outside [a,b+d], every graded piece of the finite exhaustive separated
-   abutment filtration vanishes. Successively identifying adjacent filtration steps,
-   from the zero end to the exhaustive end, makes the abutment zero.
-5. For an arbitrary module sheaf M on Y and a geometric point y, use
-   lem-sfb-etale-derived-tensor-stalk to identify the stalk of Rp_*C ⊗ᴸ M with
-   (Rp_*C)_y ⊗ᴸ M_y. Take N = M_y; lem-weil-pbc-constant-sheaf-geometric-stalk
-   identifies N with (N_Y)_y. Steps 3-4 give the required vanishing. Exact pullback and
-   lem-weil-pbc-exact-functor-complex-cohomology identify these with stalks of the
-   cohomology sheaves. Geometric-stalk conservativity
-   (lemma-weil-pbc-geometric-stalk-conservative) makes those sheaves zero. This is
-   def-kun-tor-amplitude for the output interval. -/
+Proof:
+1. The prime ℓ is nonzero in the characteristic-p field k. Thus ℓ^r is a unit
+   on both schemes, and the coefficient convention for ℓ^r holds. Apply
+   `isBoundedConstructible_rightDerivedLowerStar_of_proper` to C.
+2. Every A-module sheaf on a geometric fibre is killed sectionwise by ℓ^r.
+   The assumed fibre cohomology bound and the module/abelian cohomology comparison
+   give vanishing of module-valued cohomology above d. On the algebraically closed
+   point, global sections are an exact equivalence. The Leray isomorphism therefore
+   identifies this with vanishing of the fibre direct image's homology sheaves.
+3. Proper base change for the finite, hence additively torsion, ring A identifies
+   the geometric pullbacks of R^q f_*F with these fibre cohomology sheaves.
+   Exact pullback commutes with homology; the total, bounded-below and classical
+   derived functors agree on sheaves in degree zero. Geometric pullbacks detect
+   zero sheaves, so every R^q f_*F vanishes for q>d.
+4. For an arbitrary module sheaf M on Y, put B=C ⊗ᴸ (f⁻¹M)[0]. The input Tor
+   interval puts B in [a,b]. Left t-exactness gives the lower bound a for Rf_*B.
+   `Functor.isLE_rightDerivedFunctor_obj_of_dimension`, proved by dimension
+   shifting on cycles (Stacks 07K7(4)(c)), gives its upper bound b+d.
+5. Exact inverse image identifies Lf^*(M[0]) with (f⁻¹M)[0]. The full relative
+   proper projection formula (Stacks 0F0G) identifies Rf_*B with Rf_*C ⊗ᴸ M[0].
+   Transporting the bounds through this isomorphism for every M proves the output
+   Tor interval. This argument permits nonflat and infinitely generated M. -/
 theorem isBoundedConstructible_hasTorAmplitudeIn_rightDerivedLowerStar_of_proper
     (ℓ p : ℕ) (hℓ : ℓ.Prime) (hp : 0 < p) (hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [CharP k p]
@@ -115,6 +94,118 @@ theorem isBoundedConstructible_hasTorAmplitudeIn_rightDerivedLowerStar_of_proper
       ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj C) ∧
     DerivedCategory.hasTorAmplitudeIn A Y a (b + (d : ℤ))
       ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj C) := by
-  sorry
+  classical
+  have _ := hp
+  have _ := hab
+  obtain ⟨r, hr, hAr⟩ := hA
+  have hAr' : (ℓ ^ r : A) = 0 := by simpa using hAr
+  have hchar : (ℓ : k) ≠ 0 :=
+    CharP.cast_ne_zero_of_ne_of_prime k hℓ hpℓ
+  have hcoeff (T : Scheme.{u}) (t : T ⟶ Spec (.of k)) :
+      IsSmoothBaseChangeCoefficients (ℓ ^ r) A T := by
+    refine ⟨pow_pos hℓ.pos r, inferInstance, by simpa using hAr', ?_⟩
+    have hu : IsUnit (ℓ ^ r : Γ(Spec (.of k), ⊤)) := by
+      simpa using (hchar.isUnit.pow r).map (Scheme.ΓSpecIso (.of k)).inv.hom
+    simpa using hu.map t.appTop.hom
+  refine ⟨isBoundedConstructible_rightDerivedLowerStar_of_proper A (ℓ ^ r)
+    (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) f (by simp)
+    (hcoeff X (X ↘ Spec (.of k))) (hcoeff Y (Y ↘ Spec (.of k))) C hC, ?_⟩
+  have hdim : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (q : ℕ), d < q → IsZero (((lowerStar (ModuleCat.{u + 1} A) f).rightDerived q).obj F) := by
+    intro F q hq
+    have hfiber (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+        (y : Spec (.of Ω) ⟶ Y)
+        (G : Sheaf (pullback f y).smallEtaleTopology (ModuleCat.{u + 1} A)) :
+        IsZero ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+          ((rightDerivedLowerStar (ModuleCat.{u + 1} A) (pullback.snd f y)).obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) := by
+      let U := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
+      let S := sheafCompose (pullback f y).smallEtaleTopology U
+      have htors : ∀ (V : (pullback f y).Etale) (s : (S.obj G).obj.obj (op V)),
+          ∃ n : ℕ, (ℓ ^ n) • s = 0 := by
+        intro V s
+        refine ⟨r, ?_⟩
+        let s' : G.obj.obj (op V) := s
+        change (ℓ ^ r) • s' = 0
+        rw [← one_smul A s', ← smul_assoc, hAr, zero_smul]
+      have hab := hd Ω y (S.obj G) htors (q : ℤ) (by exact_mod_cast hq)
+      obtain ⟨eforget⟩ := Scheme.nonempty_etaleModuleCohomology_forgetIso (pullback f y) A q
+      have hmod : IsZero ((cohomology (ModuleCat.{u + 1} A) (pullback f y) (q : ℤ)).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) := by
+        have hz : IsZero (U.obj
+            ((cohomology (ModuleCat.{u + 1} A) (pullback f y) (q : ℤ)).obj
+              ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
+          hab.of_iso (eforget.app G)
+        rw [IsZero.iff_id_eq_zero] at hz ⊢
+        exact U.map_injective (by simpa using hz)
+      let Γ := Sheaf.Γ (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} A)
+      let : ((sheafSections (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+          (op (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))))).IsEquivalence :=
+        ((Scheme.geometricPoint_pullback_stalk Ω).2.2.2.1 A).1
+      let : Γ.IsEquivalence := Functor.isEquivalence_of_iso
+        (Sheaf.ΓNatIsoSheafSections (Spec (.of Ω)).smallEtaleTopology
+          (ModuleCat.{u + 1} A)
+          (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _)).symm
+      let E := (_root_.DerivedCategory.singleFunctor _ 0).obj G
+      let L := (rightDerivedLowerStar (ModuleCat.{u + 1} A) (pullback.snd f y)).obj E
+      let e := Γ.rightDerivedFunctorIsoMapDerivedCategory.symm.app L ≪≫
+        (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+          (ModuleCat.{u + 1} A) (pullback.snd f y)).app E
+      exact Γ.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+        (hmod.of_iso ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso e))
+    refine isZero_of_forall_isZero_upperStar_algClosurePoint A _ fun t ↦ ?_
+    let x := Y.algClosurePoint t
+    let sq := IsPullback.of_hasPullback f x
+    have := isIso_baseChange_of_isProper_of_isAddTorsion_ring A
+      (fun z ↦ isOfFinAddOrder_of_finite z) sq
+    rw [baseChange_eq_derivedBaseChangeMapPlus] at this
+    let G := (upperStar (ModuleCat.{u + 1} A) (pullback.fst f x)).obj F
+    have hvan := hfiber _ x G
+    let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
+    let v := lowerStar (ModuleCat.{u + 1} A) f
+    let v' := lowerStar (ModuleCat.{u + 1} A) (pullback.snd f x)
+    let u := upperStar (ModuleCat.{u + 1} A) x
+    let u' := upperStar (ModuleCat.{u + 1} A) (pullback.fst f x)
+    refine IsZero.of_iso hvan
+      (u.mapIso (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm ≪≫
+        (u.mapDerivedCategoryPlusHomologyFunctorIso q).app
+          (v.rightDerivedFunctorPlus.obj K) ≪≫
+        (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+          (asIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} A) sq.toCommSq).app K)) ≪≫
+        (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+          (v'.rightDerivedFunctorPlus.mapIso
+            ((u'.mapDerivedCategoryPlusSingleFunctor 0).app F)) ≪≫
+        v'.homologyRightDerivedFunctorPlusObjSingleFunctorIso G q ≪≫
+        (v'.homologyRightDerivedFunctorObjSingleFunctorIso G q).symm)
+  intro M q hq
+  let B := ((derivedTensor (ModuleCat.{u + 1} A) X).obj C).obj
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj
+      ((upperStar (ModuleCat.{u + 1} A) f).obj M))
+  have hB : ∀ i : ℤ, i < a ∨ b < i →
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj B) :=
+    hCab ((upperStar (ModuleCat.{u + 1} A) f).obj M)
+  have : B.IsGE a := (_root_.DerivedCategory.isGE_iff B a).2
+    (fun i hi ↦ hB i (Or.inl hi))
+  have : B.IsLE b := (_root_.DerivedCategory.isLE_iff B b).2
+    (fun i hi ↦ hB i (Or.inr hi))
+  have hlo : ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj B).IsGE a :=
+    Functor.isGE_rightDerivedFunctor_obj _ _ _
+  have hhi : ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj B).IsLE
+      (b + (d : ℤ)) :=
+    Functor.isLE_rightDerivedFunctor_obj_of_dimension _ d hdim B b inferInstance
+  have hz : IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj B)) := by
+    rcases hq with hq | hq
+    · exact (_root_.DerivedCategory.isGE_iff _ a).1 hlo q hq
+    · exact (_root_.DerivedCategory.isLE_iff _ (b + (d : ℤ))).1 hhi q hq
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite A f
+  let e := asIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) f).app C).app
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj M))
+  let e' := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj M) ≪≫
+    ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategorySingleFunctor 0).app M
+  exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+    (e ≪≫ (rightDerivedLowerStar (ModuleCat.{u + 1} A) f).mapIso
+      (((derivedTensor (ModuleCat.{u + 1} A) X).obj C).mapIso e')))
 
 end AlgebraicGeometry.Etale
