@@ -1,262 +1,250 @@
 {
-  "id": "lem-zl-condensed-cover-restriction-conservative",
-  "kind": "statement",
-  "chapter": "sec-zeta-weil",
-  "unit": "sk-prop-smooth-proper-purity",
-  "title": "Joint conservativity of pro-etale restriction for condensed coefficient complexes",
-  "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X$ be a scheme [def-pc-scheme], and let $\\{u_i:U_i\\to X\\}_{i\\in I}$ be a pro-etale covering family of $X$ in $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. With $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and $D(T,\\Lambda)=D(T_{\\mathrm{proet}},\\Lambda_T)$ the ordinary unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], let $u_i^*=Lu_i^*:D(X,\\Lambda)\\to D(U_i,\\Lambda)$ be the derived module inverse image of [def-weil-pbc-proetale-operations] for the coefficient identification $\\alpha_{u_i}:u_i^{-1}\\Lambda_X\\xrightarrow{\\sim}\\Lambda_{U_i}$ of [sk-def-sfb-coefficient-morphisms]; under the identification $(U_i)_{\\mathrm{proet}}\\simeq X_{\\mathrm{proet}}/U_i$ of [lem-weil-proetale-weakly-etale-localization] and $u_i^{-1}G\\cong G|_{U_i}$ of [lem-sfb-proetale-object-inverse-image-restriction] it is restriction $K\\mapsto K|_{U_i}$. Then the functors $u_i^*$ are jointly conservative: a morphism in $D(X,\\Lambda)$ is an isomorphism if and only if each $u_i^*$ carries it to an isomorphism. Equivalently, $K|_{U_i}=0$ for all $i$ implies $K=0$.",
-  "source": {
+ "id": "lem-zl-condensed-cover-restriction-conservative",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Joint conservativity of pro-etale restriction for condensed coefficient complexes",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X$ be a scheme [def-pc-scheme], and let $\\{u_i:U_i\\to X\\}_{i\\in I}$ be a pro-etale covering family of $X$ in $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. With $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and $D(T,\\Lambda)=D(T_{\\mathrm{proet}},\\Lambda_T)$ the ordinary unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], let $u_i^*=Lu_i^*:D(X,\\Lambda)\\to D(U_i,\\Lambda)$ be the derived module inverse image of [def-weil-pbc-proetale-operations] for the coefficient identification $\\alpha_{u_i}:u_i^{-1}\\Lambda_X\\xrightarrow{\\sim}\\Lambda_{U_i}$ of [sk-def-sfb-coefficient-morphisms]; under the identification $(U_i)_{\\mathrm{proet}}\\simeq X_{\\mathrm{proet}}/U_i$ of [lem-weil-proetale-weakly-etale-localization] and $u_i^{-1}G\\cong G|_{U_i}$ of [lem-sfb-proetale-object-inverse-image-restriction] it is restriction $K\\mapsto K|_{U_i}$. Then the functors $u_i^*$ are jointly conservative: a morphism in $D(X,\\Lambda)$ is an isomorphism if and only if each $u_i^*$ carries it to an isomorphism. Equivalently, $K|_{U_i}=0$ for all $i$ implies $K=0$.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For each cover arrow u_i, weak etaleness follows from Scheme.proetalePrecoverage_le_precoverage_weaklyEtale applied to the cover membership. The published ProEtale.upperStarIsoLocalizationRestriction identifies inverse image on abelian sheaves with localization restriction by uniqueness of left adjoints. The published ProEtale.isIso_of_isIso_localizationRestriction applies to this same arbitrary pro-etale cover: its proof uses the base-changed covering sieve and the objectwise local isomorphism criterion. Thus these abelian-sheaf inverse images jointly reflect isomorphisms, without the separate slice-equivalence or constant-coefficient statements.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
     "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+   }
   },
-  "stmt_deps": [
-    "sk-def-sfb-condensed-ring",
-    "def-pc-scheme",
-    "def-weil-pbc-proetale-site",
-    "sk-def-sfb-pulled-back-coefficients",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
+  {
+   "text": "The exact module pullback of def-weil-pbc-proetale-operations is mapMod of abelian-sheaf inverse image followed by extension along the coefficient isomorphism condensedPullbackHom of sk-def-sfb-coefficient-morphisms. Whisker Mod.extendScalarsIsoComapInv with mapMod to replace this extension by restriction along the inverse coefficient map. If every module pullback of a is invertible, the natural isomorphism and the module forgetful functor show that every abelian-sheaf inverse image of a.hom is invertible. Apply Step 1. The forgetful functor Mod.forget reflects isomorphisms, so a itself is invertible; linearity of the inverse is supplied by this existing instance.",
+   "uses": [
     "def-weil-pbc-proetale-operations",
     "sk-def-sfb-coefficient-morphisms",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-proetale-object-inverse-image-restriction"
-  ],
-  "proof": [
-    {
-      "text": "Put $\\mathcal C=X_{\\mathrm{proet}}$ and $\\mathcal O=\\Lambda_X$. For each $i$, clause (1) of [lem-weil-proetale-weakly-etale-localization] identifies $(U_i)_{\\mathrm{proet}}$ with $\\mathcal C/U_i$. Clause 1 of [lem-sfb-proetale-object-inverse-image-restriction] identifies $u_i^{-1}G$ naturally with $G|_{U_i}$ for every abelian sheaf and every ring sheaf $G$. In particular, compose $u_i^{-1}\\mathcal O\\cong\\mathcal O|_{U_i}$ with the ring isomorphism $\\alpha_{u_i}$ of [sk-def-sfb-coefficient-morphisms] to identify $\\mathcal O|_{U_i}$ with $\\Lambda_{U_i}$. By [def-weil-pbc-proetale-operations], the module inverse image is exact, and extension along this ring isomorphism just transports the action: $m\\otimes r\\mapsto\\alpha_{u_i}^{-1}(r)m$ has inverse $m\\mapsto m\\otimes1$. Thus $u_i^*$ on module sheaves is exact slice restriction with this coefficient identification, and $Lu_i^*$ is its termwise functor on the unbounded derived categories. The constant-ring clauses of the localization and inverse-image lemmas are not used.",
-      "uses": [
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-sfb-proetale-object-inverse-image-restriction",
-        "sk-def-sfb-coefficient-morphisms",
-        "def-weil-pbc-proetale-operations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-        "place": "Section 3, paragraph beginning If f:Y -> X is any morphism of schemes; Lemma 4.5 proof, the functor j*"
-      }
-    },
-    {
-      "text": "For every object $V\\to X$ of $\\mathcal C$, clause 1 of [det-pe-topos-functoriality-site] says that $\\{V\\times_X U_i\\to V\\}_i$ is a covering. Each domain admits its projection to $U_i$. Therefore the sieve of arrows $W\\to V$ whose domain admits a morphism to some $U_i$ contains a covering family and is a covering sieve. This is exactly the covering hypothesis in [lem-sfb-sheaf-cover-local-isomorphism]. The site and index family are taken in the common universe of [def-weil-pbc-proetale-site], so this is a small-site application.",
-      "uses": [
-        "det-pe-topos-functoriality-site",
-        "lem-sfb-sheaf-cover-local-isomorphism",
-        "def-weil-pbc-proetale-site"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-        "place": "Lemma 4.5 proof, conservativity; base change of the covering to every site object"
-      }
-    },
-    {
-      "text": "Let $a:M\\to N$ be a morphism of $\\mathcal O$-module sheaves whose restrictions to all $U_i$ are isomorphisms. Forget the actions and apply [lem-sfb-sheaf-cover-local-isomorphism] with value category abelian groups and the covering condition of Step 2. It gives an inverse $b:N\\to M$ of the underlying abelian-sheaf map. This inverse is $\\mathcal O$-linear: for every object $V$, $r\\in\\mathcal O(V)$ and $y\\in N(V)$, $a_V(b_V(ry))=ry=a_V(r b_V(y))$, so injectivity of $a_V$ gives $b_V(ry)=r b_V(y)$. By the definition of module morphisms in [def-weil-sheaf-of-modules-category], $b$ is a module morphism and $a$ is an isomorphism of module sheaves.",
-      "uses": [
-        "lem-sfb-sheaf-cover-local-isomorphism",
-        "def-weil-sheaf-of-modules-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 04TQ, lemma-glue-maps; cover-local isomorphism criterion as stated by lem-sfb-sheaf-cover-local-isomorphism"
-      }
-    },
-    {
-      "text": "Write $r_i$ for the exact module restriction of Step 1. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to obtain $H^n(r_i C)\\cong r_i H^n(C)$ naturally in every cochain complex $C$, for every integer $n$. These isomorphisms descend to the derived categories: cohomology and termwise exact restriction invert quasi-isomorphisms, and the two composites are the factorizations through the localization of [def-weil-abstract-derived-category]. Naturality holds for images of chain maps by the cited lemma; it also holds for inverses of quasi-isomorphisms by inverting the same naturality square, hence for their composites, which generate the localization. Consequently, for any derived morphism $f:K\\to L$, the map $H^n(u_i^*f)$ is identified with $r_i(H^n(f))$.",
-      "uses": [
-        "lem-weil-pbc-exact-functor-complex-cohomology",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 010N, lemma-exact-functor; degreewise homology comparison, followed by the defining localization of the derived category"
-      }
-    },
-    {
-      "text": "Suppose every $u_i^*f$ is invertible. For every integer $n$, its cohomology $H^n(u_i^*f)$ is invertible, since cohomology is a functor. Step 4 then says that all restrictions $r_i(H^n(f))$ are invertible. Apply Step 3 to the module-sheaf morphism $H^n(f)$: it is invertible for every $n$. The unbounded criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied to the abelian category of $\\Lambda_X$-module sheaves, now gives that $f$ is invertible. Conversely every functor $u_i^*$ preserves inverses, so invertibility of $f$ implies invertibility of all $u_i^*f$.",
-      "uses": [
-        "lem-weil-pbc-unbounded-derived-iso-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 05RT, lemma-acyclic; the equivalent cohomology criterion of DerivedCategory.isIso_iff"
-      }
-    },
-    {
-      "text": "If $K|_{U_i}=0$ for every $i$, apply Step 5 to the unique morphism $K\\to0$. Exact additive restriction preserves the zero object, so every restriction of this morphism is an isomorphism between zero objects. Hence $K\\to0$ is an isomorphism and $K=0$. This argument includes the empty cover of the empty scheme: Step 2 still supplies a covering sieve at every object, and the sheaf condition forces the only section group on the empty object to be zero. No boundedness of complexes or quasi-compactness of $X$ was assumed.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-        "place": "Lemma 4.5 proof, conservativity, expressed as detection of zero objects"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "sk-def-sfb-coefficient-morphisms",
-    "def-weil-pbc-proetale-operations",
-    "det-pe-topos-functoriality-site",
-    "lem-sfb-sheaf-cover-local-isomorphism",
-    "def-weil-pbc-proetale-site",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Section 3 and Lemma 4.5 proof; explicit arbitrary-cover cohomology argument using Stacks 04TQ, 010N and 05RT"
+    "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Restrictions of derived module sheaves along a jointly covering pro-etale family are jointly conservative",
-      "results": "generic etale and affine-site declarations; no exact derived pro-etale condensed-module conservativity theorem",
-      "date": "2026-10-18",
-      "verdict": "no match: generic site and etale results do not state the theorem"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.isIso_of_coversTop",
-      "results": "CategoryTheory.Sheaf.isIso_of_coversTop, Mathlib/CategoryTheory/Sites/LocalProperties.lean:35",
-      "date": "2026-10-18",
-      "verdict": "generalization only: detects isomorphisms of category-valued sheaves, not derived module restrictions"
-    },
-    {
-      "tool": "grep",
-      "query": "isIso_of_coversTop|CoversTop",
-      "results": "CategoryTheory/Sites/LocalProperties.lean:35,68,70; CategoryTheory/Sites/CoversTop/Basic.lean:41",
-      "date": "2026-10-18",
-      "verdict": "generalization only: no derived-module statement"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A pro-etale covering family is jointly conservative on derived categories of sheaves of modules",
-      "results": "generic sheaf and etale declarations; no exact theorem",
-      "date": "2026-10-18",
-      "verdict": "no match: no exact derived pro-etale statement"
-    },
-    {
-      "tool": "grep",
-      "query": "isIso_iff|mapDerivedCategoryHomologyFunctorIso|isIso_of_coversTop",
-      "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived restriction of module sheaves along a covering family detects isomorphisms",
-      "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; CategoryTheory.Functor.IsCoverDense.Types.sheafIso; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget; AlgebraicGeometry.Scheme.Modules.restrict; SheafOfModules.restrictScalars",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.DerivedCategory.isIso_iff",
-      "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory.isIso_iff'",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Restrictions along a covering family of a ringed site are jointly conservative on the unbounded derived category of module sheaves",
-      "results": "SheafOfModules.QuasicoherentData.coversTop; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms; CategoryTheory.GrothendieckTopology.instPreservesSheafification_1; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.SheafOfTypes.balanced",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "grep",
-      "query": "isIso_of_coversTop|mapDerivedCategoryHomologyFunctorIso",
-      "results": "Mathlib/CategoryTheory/Sites/LocalProperties.lean; Mathlib/CategoryTheory/Sites/LocalProperties.lean",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory.isIso_iff",
-      "results": "DerivedCategory.isIso_iff",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An exact functor on abelian categories commutes with cohomology and conservative restrictions of sheaves detect derived isomorphisms",
-      "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory",
-      "date": "2026-10-18",
-      "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-zl-condensed-lisse-proetale-locality",
-    "date": "2026-10-18",
-    "group": "Q36"
+  {
+   "text": "For every degree n, Functor.mapDerivedCategoryHomologyFunctorIso identifies H^n(-) followed by the exact module pullback with its induced derived functor followed by H^n(-). This is the published localization descent of the natural exact-functor homology comparison of lem-weil-pbc-exact-functor-complex-cohomology, so its naturality applies to arbitrary derived morphisms, not only images of chain maps.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+   }
   },
-  "blueprint": {
-    "from": {
-      "node": "prop-zl-smooth-proper-relative-purity",
-      "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: the locality argument behind the continuous-coefficient lisse assertion in Section 3 and Lemma 4.5.",
-      "via": [
-        "lem-zl-condensed-lisse-proetale-locality"
-      ]
-    },
-    "same_as": [],
-    "is": null
+  {
+   "text": "If all derived restrictions of f are isomorphisms, Step 3 and preservation of isomorphisms by homology show that every module restriction of H^n(f) is invertible. Step 2 shows H^n(f) is invertible for each n. Apply DerivedCategory.isIso_iff, the unbounded cohomology criterion of lem-weil-pbc-unbounded-derived-iso-cohomology. Conversely each derived restriction is a functor and preserves isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+   }
   },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-zl-condensed-cover-restriction-conservative",
-    "worker": "stage1",
-    "summary": "Proved the covering-family form by identifying exact module inverse image with slice restriction for the actual condensed coefficient ring, applying the existing cover-local sheaf criterion, descending the natural exact-functor cohomology comparison, and applying the existing unbounded derived isomorphism criterion. No statement change and no new nodes.",
-    "blueprint": [
-      "prop-zl-smooth-proper-relative-purity, proof paragraph beginning The field-stage projection formula, as refined by lem-zl-condensed-lisse-proetale-locality Step 3: conservativity of the local coefficient restrictions."
-    ],
-    "tool_uses": [
-      {
-        "node": "lem-sfb-proetale-object-inverse-image-restriction",
-        "why": "Clause 1 identifies inverse image of arbitrary ring and abelian sheaves with slice restriction; this is site infrastructure needed by the coefficient locality argument."
-      },
-      {
-        "node": "det-pe-topos-functoriality-site",
-        "why": "Clause 1 provides base change of a covering family at every site object, the hypothesis of the general cover-local sheaf criterion."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sfb-proetale-object-inverse-image-restriction",
-    "det-pe-topos-functoriality-site"
-  ],
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-cc-N1-9373feb6c",
-    "group": "N1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-9373feb6c (reviewer sub-agent of L); spot-checked: I read the whole item: statement, six steps, every cited node's statement and the parent's citing step. Source: HRS 2305.18131 §3 (Λ_X=p_X^{-1}Λ; f^* exact) and the Lemma 4.5 proof, which asserts j^* is conservative for a w-contractible affine cover. The item's statement for arbitrary covering families, with the actual condensed coefficients, is true and stronger than that sentence, and the split proves it. Step 1: clause (1) of the localization lemma, clause 1 of the inverse-image restriction lemma (which holds for any ring sheaf), the ring isomorphism α (sfb Lan pullback, whose pointwise formula is the colimit over I_U in def-weil-proetale-inverse-image), and the exactness and scalar transport of def-weil-pbc-proetale-operations. No constant-ring clause is used. Step 2: clause 1 of det-pe-topos-functoriality-site gives the base-changed covering, which is the CoversTop hypothesis of Sheaf.isIso_of_coversTop (I read LocalProperties.lean:35). Step 3: the cancellation proving the inverse linear is correct. Step 4: the exact-functor cohomology isomorphism is natural in chain maps and descends through the localization Q (Q(s) and Q(s)^{-1} generate it). Step 5: DerivedCategory.isIso_iff covers all n and the unbounded category. Step 6 is elementary. Edge cases: empty X, empty family on nonempty X (not a covering), infinite families, Λ=0, unbounded complexes. No duplicate in the DAG or blueprint: the étale cover-detects-iso, Noetherian stratum detection, w-contractible sections and finite stalk-conservative nodes all differ. I accept both declared tool_uses (lem-sfb-proetale-object-inverse-image-restriction and det-pe-topos-functoriality-site) as generic site infrastructure. No SGA is cited. No changes were made."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-590242b79",
-    "group": "NM",
-    "result": "pass",
-    "note": "Clause-by-clause match: Λ is Profinite.CondensedRing.{u} with IsCommMonObj; X is any Scheme.{u}; the cover is Scheme.Cover.{v} proetalePrecoverage X (weakly etale, surjective; empty and infinite families allowed, free index universe); the inverse image is CondensedRing.upperStar Λ.X (𝒰.f i) |>.mapDerivedCategory, extension along the actual condensedPullbackHom iso, identified with the derived inverse image by leftDerivedUpperStarIsoMapDerivedCategory; the conclusion is the IsIso iff over all derived morphisms plus the IsZero detection, as in the node. No extra hypotheses; the shared u for Λ and X comes from the recorded condensedRingObj interface. The Mod-over-ring-object encoding is the published upstream framework encoding and matches the consumer condensed_dualizable_iff_proetale_cover exactly; no duplicate found by rg over side and slopmaster2. Edge cases checked: empty cover of the empty scheme, Λ=0, unbounded complexes. No defs, proof is sorry, docstrings give source place, blueprint id and the six proof steps, lines <=100, the lean.statement field is verbatim in the file, the node changed only in lean, both report sections present (the second-reading section is the accepted 2026-10-17 placeholder). nt_compile --json of the snapshot module is clean: 15.8 s, exit 0, no errors or warnings."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative",
-    "declaration": "AlgebraicGeometry.ProEtale.condensed_cover_restriction_conservative",
-    "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoverRestrictionConservative.lean",
-    "statement": "theorem condensed_cover_restriction_conservative (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X) : (∀ (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (f : K ⟶ L), IsIso f ↔ ∀ i : 𝒰.I₀, IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map f)) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)), (∀ i : 𝒰.I₀, IsZero ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.obj K)) → IsZero K)",
-    "branch": "newtargets-dag",
-    "by": "NM",
-    "date": "2026-10-18",
-    "existing": false
+  {
+   "text": "If every derived restriction of K is zero, each restriction of the zero morphism K -> 0 is an isomorphism between zero objects: the restriction is additive and preserves zero objects. Apply Step 4 to this morphism and transport the zero-object property along the resulting isomorphism. Empty covering families on the empty scheme and the zero coefficient ring are included; no nonemptiness, finiteness, boundedness, or quasi-compactness assumption was introduced.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof: restriction to a w-contractible affine cover is conservative; the sheaf descent argument gives the stated covering-family form"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS Section 3 and Lemma 4.5; existing library localization conservativity, scalar-extension comparison, exact-functor derived homology comparison, and Mathlib DerivedCategory.isIso_iff. Lean proof by J2, 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restrictions of derived module sheaves along a jointly covering pro-etale family are jointly conservative",
+   "results": "generic etale and affine-site declarations; no exact derived pro-etale condensed-module conservativity theorem",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site and etale results do not state the theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isIso_of_coversTop",
+   "results": "CategoryTheory.Sheaf.isIso_of_coversTop, Mathlib/CategoryTheory/Sites/LocalProperties.lean:35",
+   "date": "2026-10-18",
+   "verdict": "generalization only: detects isomorphisms of category-valued sheaves, not derived module restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_coversTop|CoversTop",
+   "results": "CategoryTheory/Sites/LocalProperties.lean:35,68,70; CategoryTheory/Sites/CoversTop/Basic.lean:41",
+   "date": "2026-10-18",
+   "verdict": "generalization only: no derived-module statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pro-etale covering family is jointly conservative on derived categories of sheaves of modules",
+   "results": "generic sheaf and etale declarations; no exact theorem",
+   "date": "2026-10-18",
+   "verdict": "no match: no exact derived pro-etale statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff|mapDerivedCategoryHomologyFunctorIso|isIso_of_coversTop",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction of module sheaves along a covering family detects isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf; CategoryTheory.Functor.IsCoverDense.Types.sheafIso; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget; AlgebraicGeometry.Scheme.Modules.restrict; SheafOfModules.restrictScalars",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory.isIso_iff",
+   "results": "loogle: unknown identifier 'CategoryTheory.DerivedCategory.isIso_iff'",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrictions along a covering family of a ringed site are jointly conservative on the unbounded derived category of module sheaves",
+   "results": "SheafOfModules.QuasicoherentData.coversTop; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.GrothendieckTopology.instPreservesSheafificationForgetOfPreservesLimitsOfHasColimitsOfShapeOfPreservesColimitsOfShapeOppositeCoverOfHasLimitsOfShapeWalkingMulticospanOfReflectsIsomorphisms; CategoryTheory.GrothendieckTopology.instPreservesSheafification_1; CategoryTheory.Sheaf.instIsGrothendieckAbelian; CategoryTheory.SheafOfTypes.balanced",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_coversTop|mapDerivedCategoryHomologyFunctorIso",
+   "results": "Mathlib/CategoryTheory/Sites/LocalProperties.lean; Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "DerivedCategory.isIso_iff",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on abelian categories commutes with cohomology and conservative restrictions of sheaves detect derived isomorphisms",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.exact_tfae; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: hits supply generic sheaf or exact-functor ingredients only; the scheme/coefficient and derived comparisons require the split above"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-condensed-lisse-proetale-locality",
+  "date": "2026-10-18",
+  "group": "Q36"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: the locality argument behind the continuous-coefficient lisse assertion in Section 3 and Lemma 4.5.",
+   "via": [
+    "lem-zl-condensed-lisse-proetale-locality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-condensed-cover-restriction-conservative",
+  "worker": "stage1",
+  "summary": "Proved the covering-family form by identifying exact module inverse image with slice restriction for the actual condensed coefficient ring, applying the existing cover-local sheaf criterion, descending the natural exact-functor cohomology comparison, and applying the existing unbounded derived isomorphism criterion. No statement change and no new nodes.",
+  "blueprint": [
+   "prop-zl-smooth-proper-relative-purity, proof paragraph beginning The field-stage projection formula, as refined by lem-zl-condensed-lisse-proetale-locality Step 3: conservativity of the local coefficient restrictions."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Clause 1 identifies inverse image of arbitrary ring and abelian sheaves with slice restriction; this is site infrastructure needed by the coefficient locality argument."
+   },
+   {
+    "node": "det-pe-topos-functoriality-site",
+    "why": "Clause 1 provides base change of a covering family at every site object, the hypothesis of the general cover-local sheaf criterion."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N1-9373feb6c",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-9373feb6c (reviewer sub-agent of L); spot-checked: I read the whole item: statement, six steps, every cited node's statement and the parent's citing step. Source: HRS 2305.18131 §3 (Λ_X=p_X^{-1}Λ; f^* exact) and the Lemma 4.5 proof, which asserts j^* is conservative for a w-contractible affine cover. The item's statement for arbitrary covering families, with the actual condensed coefficients, is true and stronger than that sentence, and the split proves it. Step 1: clause (1) of the localization lemma, clause 1 of the inverse-image restriction lemma (which holds for any ring sheaf), the ring isomorphism α (sfb Lan pullback, whose pointwise formula is the colimit over I_U in def-weil-proetale-inverse-image), and the exactness and scalar transport of def-weil-pbc-proetale-operations. No constant-ring clause is used. Step 2: clause 1 of det-pe-topos-functoriality-site gives the base-changed covering, which is the CoversTop hypothesis of Sheaf.isIso_of_coversTop (I read LocalProperties.lean:35). Step 3: the cancellation proving the inverse linear is correct. Step 4: the exact-functor cohomology isomorphism is natural in chain maps and descends through the localization Q (Q(s) and Q(s)^{-1} generate it). Step 5: DerivedCategory.isIso_iff covers all n and the unbounded category. Step 6 is elementary. Edge cases: empty X, empty family on nonempty X (not a covering), infinite families, Λ=0, unbounded complexes. No duplicate in the DAG or blueprint: the étale cover-detects-iso, Noetherian stratum detection, w-contractible sections and finite stalk-conservative nodes all differ. I accept both declared tool_uses (lem-sfb-proetale-object-inverse-image-restriction and det-pe-topos-functoriality-site) as generic site infrastructure. No SGA is cited. No changes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-590242b79",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match: Λ is Profinite.CondensedRing.{u} with IsCommMonObj; X is any Scheme.{u}; the cover is Scheme.Cover.{v} proetalePrecoverage X (weakly etale, surjective; empty and infinite families allowed, free index universe); the inverse image is CondensedRing.upperStar Λ.X (𝒰.f i) |>.mapDerivedCategory, extension along the actual condensedPullbackHom iso, identified with the derived inverse image by leftDerivedUpperStarIsoMapDerivedCategory; the conclusion is the IsIso iff over all derived morphisms plus the IsZero detection, as in the node. No extra hypotheses; the shared u for Λ and X comes from the recorded condensedRingObj interface. The Mod-over-ring-object encoding is the published upstream framework encoding and matches the consumer condensed_dualizable_iff_proetale_cover exactly; no duplicate found by rg over side and slopmaster2. Edge cases checked: empty cover of the empty scheme, Λ=0, unbounded complexes. No defs, proof is sorry, docstrings give source place, blueprint id and the six proof steps, lines <=100, the lean.statement field is verbatim in the file, the node changed only in lean, both report sections present (the second-reading section is the accepted 2026-10-17 placeholder). nt_compile --json of the snapshot module is clean: 15.8 s, exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_cover_restriction_conservative",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoverRestrictionConservative.lean",
+  "statement": "theorem condensed_cover_restriction_conservative (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X) : (∀ (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (f : K ⟶ L), IsIso f ↔ ∀ i : 𝒰.I₀, IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map f)) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)), (∀ i : 𝒰.I₀, IsZero ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.obj K)) → IsZero K)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261019T192751-L-1865355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
