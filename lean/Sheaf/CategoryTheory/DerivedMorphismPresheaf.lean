@@ -14,6 +14,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+
 /-!
 # Derived morphism presheaves on localized sites
 
@@ -26,6 +28,193 @@ Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites,
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 set_option autoImplicit false
+section ExactFunctors
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+  [F.Additive] [G.Additive] [H.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+private noncomputable def exactComp (e : H ≅ F ⋙ G) :
+    H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
+  Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G
+
+@[reassoc]
+private lemma exactComp_fac (e : H ≅ F ⋙ G)
+    (P : HomotopyCategory C (.up ℤ)) :
+    (exactComp F G H e).hom.app (DerivedCategory.Qh.obj P) ≫
+      G.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app P) ≫
+      G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj P) =
+    H.mapDerivedCategoryFactorsh.hom.app P ≫
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app P) := by
+  have hcomp := Functor.mapDerivedCategoryCompIso_fach F G P
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at hcomp
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hcomp
+  simp only [exactComp, Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  rw [hcomp, Functor.mapDerivedCategoryNatIso_fach]
+
+end ExactFunctors
+
+section ExactAssociativity
+
+variable {C₀ C₁ C₂ C₃ : Type*}
+  [Category C₀] [Category C₁] [Category C₂] [Category C₃]
+  [Abelian C₀] [Abelian C₁] [Abelian C₂] [Abelian C₃]
+  [HasDerivedCategory C₀] [HasDerivedCategory C₁]
+  [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+  (H : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (F : C₂ ⥤ C₃)
+  (GH : C₀ ⥤ C₂) (FG : C₁ ⥤ C₃) (FGH : C₀ ⥤ C₃)
+  [H.Additive] [G.Additive] [F.Additive] [GH.Additive] [FG.Additive] [FGH.Additive]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits GH] [PreservesFiniteColimits GH]
+  [PreservesFiniteLimits FG] [PreservesFiniteColimits FG]
+  [PreservesFiniteLimits FGH] [PreservesFiniteColimits FGH]
+
+private lemma exactComp_assoc
+    (e : GH ≅ H ⋙ G) (d : FG ≅ G ⋙ F)
+    (a : FGH ≅ GH ⋙ F) (b : FGH ≅ H ⋙ FG)
+    (hcoh : a.hom ≫ Functor.whiskerRight e.hom F =
+      b.hom ≫ Functor.whiskerLeft H d.hom) :
+    (exactComp GH F FGH a).hom ≫
+      Functor.whiskerRight (exactComp H G GH e).hom F.mapDerivedCategory =
+    (exactComp H FG FGH b).hom ≫
+      Functor.whiskerLeft H.mapDerivedCategory (exactComp G F FG d).hom := by
+  refine Localization.natTrans_ext DerivedCategory.Qh
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (fun P => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [← cancel_mono (F.mapDerivedCategory.map
+      (G.mapDerivedCategory.map
+        (H.mapDerivedCategoryFactorsh.hom.app P)) ≫
+    F.mapDerivedCategory.map
+      (G.mapDerivedCategoryFactorsh.hom.app
+        ((H.mapHomotopyCategory (.up ℤ)).obj P)) ≫
+    F.mapDerivedCategoryFactorsh.hom.app
+      ((G.mapHomotopyCategory (.up ℤ)).obj
+        ((H.mapHomotopyCategory (.up ℤ)).obj P)))]
+  have u₁ := exactComp_fac H G GH e P
+  have u₂ := exactComp_fac GH F FGH a P
+  have u₃ := exactComp_fac G F FG d
+    ((H.mapHomotopyCategory (.up ℤ)).obj P)
+  have u₄ := exactComp_fac H FG FGH b P
+  have n₁ := F.mapDerivedCategoryFactorsh.hom.naturality
+    ((NatTrans.mapHomotopyCategory
+      e.hom (.up ℤ)).app P)
+  have n₂ := (exactComp G F FG d).hom.naturality
+    (H.mapDerivedCategoryFactorsh.hom.app P)
+  simp only [Functor.comp_map, Functor.comp_obj] at n₁ n₂
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  erw [u₁, Functor.map_comp_assoc, n₁,
+    reassoc_of% u₂, ← reassoc_of% n₂, u₃, reassoc_of% u₄,
+    ← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  congr 1
+  obtain ⟨Q, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  change (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient _ (.up ℤ)).map _ =
+    (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient _ (.up ℤ)).map _
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  ext n : 1
+  exact NatTrans.congr_app hcoh (Q.X n)
+
+end ExactAssociativity
+
+private lemma conjugate_id {C : Type*} [Category C]
+    (F : C ⥤ C) (e : F ≅ 𝟭 C) {X Y : C}
+    (p : X ≅ F.obj X) (q : Y ≅ F.obj Y)
+    (hp : p.hom ≫ e.hom.app X = 𝟙 X) (hq : q.hom ≫ e.hom.app Y = 𝟙 Y)
+    (a : X ⟶ Y) : p.hom ≫ F.map a ≫ q.inv = a := by
+  have he : q.inv = e.hom.app Y := by
+    rw [← cancel_epi q.hom, Iso.hom_inv_id, hq]
+  have hn := e.hom.naturality a
+  simp only [Functor.id_map] at hn
+  rw [he, hn, ← Category.assoc, hp, Category.id_comp]
+
+private lemma conjugate_comp
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : D ⥤ E) (G : C ⥤ D) (H : C ⥤ E) (e : H ≅ G ⋙ F)
+    {K L : C} {P Q : D} {A B : E}
+    (p : A ≅ F.obj P) (q : P ≅ G.obj K) (r : A ≅ H.obj K)
+    (p' : B ≅ F.obj Q) (q' : Q ≅ G.obj L) (r' : B ≅ H.obj L)
+    (hK : p.hom ≫ F.map q.hom = r.hom ≫ e.hom.app K)
+    (hL : p'.hom ≫ F.map q'.hom = r'.hom ≫ e.hom.app L) (a : K ⟶ L) :
+    r.hom ≫ H.map a ≫ r'.inv =
+      p.hom ≫ F.map (q.hom ≫ G.map a ≫ q'.inv) ≫ p'.inv := by
+  rw [← cancel_mono (p'.hom ≫ F.map q'.hom)]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc]
+  rw [hL, Iso.inv_hom_id_assoc]
+  rw [← Functor.map_comp, Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [e.hom.naturality, ← Category.assoc, ← hK, Category.assoc]
+  rfl
+
+section ExactIdentity
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  (F : C ⥤ D) (J : D ⥤ D)
+  [F.Additive] [J.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+
+private noncomputable def exactId (j : J ≅ 𝟭 D) :
+    J.mapDerivedCategory ≅ 𝟭 (DerivedCategory D) :=
+  Functor.mapDerivedCategoryNatIso j ≪≫ Functor.mapDerivedCategoryIdIso D
+
+private lemma exactId_fac (j : J ≅ 𝟭 D) (P : HomotopyCategory D (.up ℤ)) :
+    (exactId J j).hom.app (DerivedCategory.Qh.obj P) =
+      J.mapDerivedCategoryFactorsh.hom.app P ≫ DerivedCategory.Qh.map
+        ((NatTrans.mapHomotopyCategory j.hom (.up ℤ)).app P ≫
+          (Functor.mapHomotopyCategoryIdIso D (.up ℤ)).hom.app P) := by
+  have hid := NatTrans.congr_app (congrArg Iso.hom
+    (Functor.mapDerivedCategoryIdIso_factorsh D)) P
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hid
+  erw [Category.comp_id, Category.comp_id] at hid
+  simp only [exactId, Iso.trans_hom, NatTrans.comp_app, hid, Functor.map_comp]
+  rw [Functor.mapDerivedCategoryNatIso_fach_assoc]
+
+private lemma exactComp_unit (j : J ≅ 𝟭 D) (e : F ≅ F ⋙ J)
+    (hcoh : e.hom ≫ Functor.whiskerLeft F j.hom = F.rightUnitor.inv) :
+    (exactComp F J F e).hom ≫
+      Functor.whiskerLeft F.mapDerivedCategory (exactId J j).hom =
+        F.mapDerivedCategory.rightUnitor.inv := by
+  refine Localization.natTrans_ext DerivedCategory.Qh
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (fun P => ?_)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_inv_app]
+  have hn := (exactId J j).hom.naturality (F.mapDerivedCategoryFactorsh.hom.app P)
+  simp only [Functor.id_map, Functor.comp_obj] at hn
+  rw [← cancel_mono (F.mapDerivedCategoryFactorsh.hom.app P),
+    Category.assoc, ← hn, exactId_fac, exactComp_fac_assoc]
+  rw [← Functor.map_comp]
+  have hu : (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app P ≫
+      (NatTrans.mapHomotopyCategory j.hom (.up ℤ)).app
+        ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫
+      (Functor.mapHomotopyCategoryIdIso D (.up ℤ)).hom.app
+        ((F.mapHomotopyCategory (.up ℤ)).obj P) = 𝟙 _ := by
+    rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
+    erw [Category.comp_id]
+    obtain ⟨Q, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+    change (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient _ (.up ℤ)).map _ = 𝟙 _
+    rw [← Functor.map_comp, ← (HomotopyCategory.quotient _ (.up ℤ)).map_id]
+    congr 1
+    ext n : 1
+    exact NatTrans.congr_app hcoh (Q.X n)
+  erw [hu, CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+
+end ExactIdentity
+
+
 namespace CategoryTheory
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 variable (J : GrothendieckTopology C) (B : Type (u + 1)) [CommRing B]
@@ -64,7 +253,11 @@ preserves colimits. Apply this to constant-coefficient module sheaves; finite co
 these colimits. -/
 theorem derivedSliceMap_preservesFiniteColimits {U V : C} (f : V ⟶ U) :
     PreservesFiniteColimits (J.overMapPullback (ModuleCat.{u + 1} B) f) := by
-  sorry
+  have : PreservesColimitsOfSize.{0, 0}
+      (J.overMapPullback (ModuleCat.{u + 1} B) f) :=
+    ((Over.map f).sheafAdjunctionCocontinuous
+    (ModuleCat.{u + 1} B) (J.over V) (J.over U)).leftAdjoint_preservesColimits
+  exact PreservesColimitsOfSize.preservesFiniteColimits _
 
 attribute [instance] derivedSliceMap_preservesFiniteColimits
 
@@ -122,6 +315,64 @@ noncomputable def derivedLocalIsoRestriction {U V : C} (f : V ⟶ U)
   ((derivedSliceMapIso J B f).app A).symm ≪≫ (derivedSliceMap J B f).mapIso a ≪≫
     (derivedSliceMapIso J B f).app D
 
+private theorem derivedSliceMapIso_symm {U V : C} (f : V ⟶ U) :
+    (derivedSliceMapIso J B f).symm = exactComp
+      (J.overPullback (ModuleCat.{u + 1} B) U)
+      (J.overMapPullback (ModuleCat.{u + 1} B) f)
+      (J.overPullback (ModuleCat.{u + 1} B) V)
+      (sliceRestrictionMapIso J B f).symm := by
+  apply Iso.ext
+  simp only [derivedSliceMapIso, exactComp, Iso.symm_hom, Iso.trans_inv,
+    Iso.trans_hom, Iso.symm_inv,
+    Functor.mapDerivedCategoryNatIso_symm]
+
+private noncomputable def sliceMapDerivedId (U : C) :=
+  exactId (J.overMapPullback (ModuleCat.{u + 1} B) (𝟙 U))
+    (J.overMapPullbackId (ModuleCat.{u + 1} B) U)
+
+private theorem sliceMapDerived_unit (U : C)
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))) :
+    (derivedSliceMapIso J B (𝟙 U)).inv.app K ≫
+      (sliceMapDerivedId J B U).hom.app ((derivedSliceRestriction J B U).obj K) = 𝟙 _ := by
+  rw [← Iso.symm_hom, derivedSliceMapIso_symm]
+  exact congr_app (exactComp_unit (J.overPullback (ModuleCat.{u + 1} B) U)
+    (J.overMapPullback (ModuleCat.{u + 1} B) (𝟙 U))
+    (J.overMapPullbackId (ModuleCat.{u + 1} B) U)
+    (sliceRestrictionMapIso J B (𝟙 U)).symm (by
+      ext F Z x
+      dsimp [sliceRestrictionMapIso]
+      simp
+      rfl)) K
+
+private noncomputable def sliceMapDerivedComp {U V W : C} (f : V ⟶ U) (g : W ⟶ V) :=
+  exactComp (J.overMapPullback (ModuleCat.{u + 1} B) f)
+    (J.overMapPullback (ModuleCat.{u + 1} B) g)
+    (J.overMapPullback (ModuleCat.{u + 1} B) (g ≫ f))
+    (J.overMapPullbackComp (ModuleCat.{u + 1} B) g f).symm
+
+private theorem sliceMapDerived_assoc {U V W : C} (f : V ⟶ U) (g : W ⟶ V)
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))) :
+    (derivedSliceMapIso J B g).inv.app K ≫
+      (derivedSliceMap J B g).map ((derivedSliceMapIso J B f).inv.app K) =
+      (derivedSliceMapIso J B (g ≫ f)).inv.app K ≫
+        (sliceMapDerivedComp J B f g).hom.app ((derivedSliceRestriction J B U).obj K) := by
+  simp only [← Iso.symm_hom, derivedSliceMapIso_symm]
+  exact congr_app (exactComp_assoc
+    (J.overPullback (ModuleCat.{u + 1} B) U)
+    (J.overMapPullback (ModuleCat.{u + 1} B) f)
+    (J.overMapPullback (ModuleCat.{u + 1} B) g)
+    (J.overPullback (ModuleCat.{u + 1} B) V)
+    (J.overMapPullback (ModuleCat.{u + 1} B) (g ≫ f))
+    (J.overPullback (ModuleCat.{u + 1} B) W)
+    (sliceRestrictionMapIso J B f).symm
+    (J.overMapPullbackComp (ModuleCat.{u + 1} B) g f).symm
+    (sliceRestrictionMapIso J B g).symm
+    (sliceRestrictionMapIso J B (g ≫ f)).symm (by
+      ext F Z x
+      dsimp [sliceRestrictionMapIso]
+      simp
+      rfl)) K
+
 /-- The restriction maps on derived Hom sets satisfy the identity and composition laws.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
@@ -141,7 +392,22 @@ theorem derivedLocalHomRestriction_laws :
         (derivedSliceRestriction J B U).obj D),
       derivedLocalHomRestriction J B A D g (derivedLocalHomRestriction J B A D f a) =
         derivedLocalHomRestriction J B A D (g ≫ f) a) := by
-  sorry
+  constructor
+  · intro U a
+    exact conjugate_id (derivedSliceMap J B (𝟙 U)) (sliceMapDerivedId J B U)
+      ((derivedSliceMapIso J B (𝟙 U)).app A).symm
+      ((derivedSliceMapIso J B (𝟙 U)).app D).symm
+      (sliceMapDerived_unit J B U A) (sliceMapDerived_unit J B U D) a
+  · intro U V W f g a
+    exact (conjugate_comp (derivedSliceMap J B g) (derivedSliceMap J B f)
+      (derivedSliceMap J B (g ≫ f)) (sliceMapDerivedComp J B f g)
+      ((derivedSliceMapIso J B g).app A).symm
+      ((derivedSliceMapIso J B f).app A).symm
+      ((derivedSliceMapIso J B (g ≫ f)).app A).symm
+      ((derivedSliceMapIso J B g).app D).symm
+      ((derivedSliceMapIso J B f).app D).symm
+      ((derivedSliceMapIso J B (g ≫ f)).app D).symm
+      (sliceMapDerived_assoc J B f g A) (sliceMapDerived_assoc J B f g D) a).symm
 
 /-- The restriction maps on derived isomorphisms satisfy the identity and composition laws.
 
@@ -160,7 +426,13 @@ theorem derivedLocalIsoRestriction_laws :
         (derivedSliceRestriction J B U).obj D),
       derivedLocalIsoRestriction J B A D g (derivedLocalIsoRestriction J B A D f a) =
         derivedLocalIsoRestriction J B A D (g ≫ f) a) := by
-  sorry
+  constructor
+  · intro U a
+    apply Iso.ext
+    exact (derivedLocalHomRestriction_laws J B A D).1 U a.hom
+  · intro U V W f g a
+    apply Iso.ext
+    exact (derivedLocalHomRestriction_laws J B A D).2 U V W f g a.hom
 
 /-- The presheaf of actual derived morphisms on localized sites, not underived module Hom.
 
@@ -221,6 +493,189 @@ noncomputable def sheafPairSection [HasWeakSheafify J (Type (u + 1))]
     (evaluation Cᵒᵖ (Type (u + 1))).obj (op U)) F G)
     ((Types.binaryProductIso _ _).inv (s, t))
 
+omit [EssentiallySmall.{u + 1} C] in
+private theorem pairSection_fst [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C)
+    (s : F.obj.obj (op U)) (t : G.obj.obj (op U)) :
+    (prod.fst : F ⨯ G ⟶ F).hom.app (op U) (sheafPairSection J F G U s t) = s := by
+  unfold sheafPairSection
+  change ((sheafToPresheaf J (Type (u + 1)) ⋙
+    (evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.fst) _ = s
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_fst,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_fst]
+  rfl
+
+omit [EssentiallySmall.{u + 1} C] in
+private theorem pairSection_snd [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C)
+    (s : F.obj.obj (op U)) (t : G.obj.obj (op U)) :
+    (prod.snd : F ⨯ G ⟶ G).hom.app (op U) (sheafPairSection J F G U s t) = t := by
+  unfold sheafPairSection
+  change ((sheafToPresheaf J (Type (u + 1)) ⋙
+    (evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.snd) _ = t
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_snd,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_snd]
+  rfl
+
+omit [EssentiallySmall.{u + 1} C] in
+private theorem pairSection_ext [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C) (x y : (F ⨯ G).obj.obj (op U))
+    (h₁ : (prod.fst : F ⨯ G ⟶ F).hom.app (op U) x =
+      (prod.fst : F ⨯ G ⟶ F).hom.app (op U) y)
+    (h₂ : (prod.snd : F ⨯ G ⟶ G).hom.app (op U) x =
+      (prod.snd : F ⨯ G ⟶ G).hom.app (op U) y) : x = y := by
+  let E := sheafToPresheaf J (Type (u + 1)) ⋙
+    (evaluation Cᵒᵖ (Type (u + 1))).obj (op U)
+  apply (ConcreteCategory.bijective_of_isIso (prodComparison E F G)).injective
+  apply (ConcreteCategory.bijective_of_isIso
+    (Types.binaryProductIso (E.obj F) (E.obj G)).hom).injective
+  apply _root_.Prod.ext
+  · have ht : prodComparison E F G ≫
+        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
+        (↾_root_.Prod.fst : (E.obj F × E.obj G) ⟶ E.obj F) = E.map prod.fst := by
+      rw [Types.binaryProductIso_hom_comp_fst, prodComparison_fst]
+    change (E.map prod.fst) x = (E.map prod.fst) y at h₁
+    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
+      (ConcreteCategory.congr_hom ht x).trans
+        (h₁.trans (ConcreteCategory.congr_hom ht y).symm)
+  · have ht : prodComparison E F G ≫
+        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
+        (↾_root_.Prod.snd : (E.obj F × E.obj G) ⟶ E.obj G) = E.map prod.snd := by
+      rw [Types.binaryProductIso_hom_comp_snd, prodComparison_snd]
+    change (E.map prod.snd) x = (E.map prod.snd) y at h₂
+    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
+      (ConcreteCategory.congr_hom ht x).trans
+        (h₂.trans (ConcreteCategory.congr_hom ht y).symm)
+
+
+omit [EssentiallySmall.{u + 1} C] in
+private theorem binary_extension [HasSheafify J (Type (u + 1))]
+    (P Q R : Cᵒᵖ ⥤ Type (u + 1)) (c : P ⨯ Q ⟶ R) :
+    ∃! m : (presheafToSheaf J (Type (u + 1))).obj P ⨯
+        (presheafToSheaf J (Type (u + 1))).obj Q ⟶
+        (presheafToSheaf J (Type (u + 1))).obj R,
+      ∀ (U : C) (z : (P ⨯ Q).obj (op U)),
+        m.hom.app (op U)
+          (sheafPairSection J _ _ U
+            ((toSheafify J P).app (op U) ((prod.fst : P ⨯ Q ⟶ P).app (op U) z))
+            ((toSheafify J Q).app (op U) ((prod.snd : P ⨯ Q ⟶ Q).app (op U) z))) =
+          (toSheafify J R).app (op U) (c.app (op U) z) := by
+  let F := presheafToSheaf J (Type (u + 1))
+  let V := sheafToPresheaf J (Type (u + 1))
+  let t := prodComparison F P Q
+  let k := toSheafify J (P ⨯ Q) ≫ V.map t
+  have hk (U : C) (z : (P ⨯ Q).obj (op U)) :
+      k.app (op U) z = sheafPairSection J _ _ U
+        ((toSheafify J P).app (op U) ((prod.fst : P ⨯ Q ⟶ P).app (op U) z))
+        ((toSheafify J Q).app (op U) ((prod.snd : P ⨯ Q ⟶ Q).app (op U) z)) := by
+    apply pairSection_ext
+    · rw [pairSection_fst]
+      have ht : k ≫ V.map (prod.fst : F.obj P ⨯ F.obj Q ⟶ F.obj P) =
+          (prod.fst : P ⨯ Q ⟶ P) ≫ toSheafify J P := by
+        dsimp only [k, t]
+        rw [Category.assoc, ← V.map_comp, prodComparison_fst]
+        exact (toSheafify_naturality J _).symm
+      exact ConcreteCategory.congr_hom (congr_app ht (op U)) z
+    · rw [pairSection_snd]
+      have ht : k ≫ V.map (prod.snd : F.obj P ⨯ F.obj Q ⟶ F.obj Q) =
+          (prod.snd : P ⨯ Q ⟶ Q) ≫ toSheafify J Q := by
+        dsimp only [k, t]
+        rw [Category.assoc, ← V.map_comp, prodComparison_snd]
+        exact (toSheafify_naturality J _).symm
+      exact ConcreteCategory.congr_hom (congr_app ht (op U)) z
+  let m := inv t ≫ F.map c
+  have hm : k ≫ V.map m = c ≫ toSheafify J R := by
+    dsimp only [k, m]
+    rw [Category.assoc, ← V.map_comp, IsIso.hom_inv_id_assoc]
+    exact (toSheafify_naturality J c).symm
+  refine ⟨m, ?_, ?_⟩
+  · intro U z
+    rw [← hk]
+    exact ConcreteCategory.congr_hom (congr_app hm (op U)) z
+  · intro n hn
+    have hn' : k ≫ V.map n = c ≫ toSheafify J R := by
+      apply NatTrans.ext
+      funext U
+      apply ConcreteCategory.hom_ext
+      intro z
+      change n.hom.app U (k.app U z) = (toSheafify J R).app U (c.app U z)
+      rw [hk U.unop]
+      exact hn U.unop z
+    apply (cancel_epi t).mp
+    apply V.map_injective
+    apply sheafify_hom_ext _ _ _ ((F.obj R).property)
+    simpa only [Functor.map_comp, ← Category.assoc] using hn'.trans hm.symm
+
+private noncomputable def presheafPairSection
+    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
+    (s : P.obj (op U)) (t : Q.obj (op U)) : (P ⨯ Q).obj (op U) :=
+  inv (prodComparison ((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)) P Q)
+    ((Types.binaryProductIso _ _).inv (s, t))
+
+omit [EssentiallySmall.{u + 1} C] in
+private theorem presheafPairSection_fst
+    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
+    (s : P.obj (op U)) (t : Q.obj (op U)) :
+    (prod.fst : P ⨯ Q ⟶ P).app (op U) (presheafPairSection P Q U s t) = s := by
+  unfold presheafPairSection
+  change (((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.fst) _ = s
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_fst,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_fst]
+  rfl
+
+omit [EssentiallySmall.{u + 1} C] in
+private theorem presheafPairSection_snd
+    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
+    (s : P.obj (op U)) (t : Q.obj (op U)) :
+    (prod.snd : P ⨯ Q ⟶ Q).app (op U) (presheafPairSection P Q U s t) = t := by
+  unfold presheafPairSection
+  change (((evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.snd) _ = t
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_snd,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_snd]
+  rfl
+
+private theorem derivedLocalHomRestriction_comp
+    (G : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))) {U V : C} (h : V ⟶ U)
+    (a : (derivedSliceRestriction J B U).obj A ⟶
+      (derivedSliceRestriction J B U).obj D)
+    (b : (derivedSliceRestriction J B U).obj D ⟶
+      (derivedSliceRestriction J B U).obj G) :
+    derivedLocalHomRestriction J B A G h (a ≫ b) =
+      derivedLocalHomRestriction J B A D h a ≫ derivedLocalHomRestriction J B D G h b := by
+  simp only [derivedLocalHomRestriction, Functor.map_comp, Category.assoc,
+    Iso.hom_inv_id_app_assoc]
+
+private noncomputable def derivedHomCompPresheaf
+    (G : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))) :
+    derivedLocalHomPresheaf J B A D ⨯ derivedLocalHomPresheaf J B D G ⟶
+      derivedLocalHomPresheaf J B A G where
+  app U := ↾fun z ↦ (prod.fst : derivedLocalHomPresheaf J B A D ⨯
+      derivedLocalHomPresheaf J B D G ⟶ _).app U z ≫
+    (prod.snd : derivedLocalHomPresheaf J B A D ⨯
+      derivedLocalHomPresheaf J B D G ⟶ _).app U z
+  naturality U V h := by
+    apply ConcreteCategory.hom_ext
+    intro z
+    simp only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply]
+    erw [NatTrans.naturality_apply, NatTrans.naturality_apply]
+    exact (derivedLocalHomRestriction_comp J B A D G h.unop _ _).symm
+
+private noncomputable def derivedIsoCompPresheaf
+    (G : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))) :
+    derivedLocalIsoPresheaf J B A D ⨯ derivedLocalIsoPresheaf J B D G ⟶
+      derivedLocalIsoPresheaf J B A G where
+  app U := ↾fun z ↦ (prod.fst : derivedLocalIsoPresheaf J B A D ⨯
+      derivedLocalIsoPresheaf J B D G ⟶ _).app U z ≪≫
+    (prod.snd : derivedLocalIsoPresheaf J B A D ⨯
+      derivedLocalIsoPresheaf J B D G ⟶ _).app U z
+  naturality U V h := by
+    apply ConcreteCategory.hom_ext
+    intro z
+    simp only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply]
+    erw [NatTrans.naturality_apply, NatTrans.naturality_apply]
+    apply Iso.ext
+    exact (derivedLocalHomRestriction_comp J B A D G h.unop _ _).symm
+
 /-- Composition has a unique extension to the sheafified derived Hom presheaves.
 
 Source: Stacks Project, Sites and Sheaves, localized sites; Cohomology on Sites, Tags 0946 and
@@ -245,7 +700,18 @@ theorem derivedLocalHomSheafComp_exists [HasSheafify J (Type (u + 1))]
             ((toSheafify J (derivedLocalHomPresheaf J B A D)).app (op U) f)
             ((toSheafify J (derivedLocalHomPresheaf J B D G)).app (op U) g)) =
         (toSheafify J (derivedLocalHomPresheaf J B A G)).app (op U) (f ≫ g) := by
-  sorry
+  obtain ⟨m, hm, hu⟩ := binary_extension J
+    (derivedLocalHomPresheaf J B A D) (derivedLocalHomPresheaf J B D G)
+    (derivedLocalHomPresheaf J B A G) (derivedHomCompPresheaf J B A D G)
+  refine ⟨m, ?_, ?_⟩
+  · intro U f g
+    have h := hm U (presheafPairSection _ _ U f g)
+    simpa only [derivedHomCompPresheaf, TypeCat.ofHom_apply,
+      presheafPairSection_fst, presheafPairSection_snd] using h
+  · intro n hn
+    apply hu n
+    intro U z
+    exact hn U _ _
 
 /-- Composition on sheafified derived Hom, determined uniquely by composition on local morphisms.
 
@@ -279,7 +745,18 @@ theorem derivedLocalIsoSheafComp_exists [HasSheafify J (Type (u + 1))]
             ((toSheafify J (derivedLocalIsoPresheaf J B A D)).app (op U) f)
             ((toSheafify J (derivedLocalIsoPresheaf J B D G)).app (op U) g)) =
         (toSheafify J (derivedLocalIsoPresheaf J B A G)).app (op U) (f ≪≫ g) := by
-  sorry
+  obtain ⟨m, hm, hu⟩ := binary_extension J
+    (derivedLocalIsoPresheaf J B A D) (derivedLocalIsoPresheaf J B D G)
+    (derivedLocalIsoPresheaf J B A G) (derivedIsoCompPresheaf J B A D G)
+  refine ⟨m, ?_, ?_⟩
+  · intro U f g
+    have h := hm U (presheafPairSection _ _ U f g)
+    simpa only [derivedIsoCompPresheaf, TypeCat.ofHom_apply,
+      presheafPairSection_fst, presheafPairSection_snd] using h
+  · intro n hn
+    apply hu n
+    intro U z
+    exact hn U _ _
 
 /-- Composition on sheafified derived Isom, determined uniquely by local composition.
 
@@ -313,7 +790,12 @@ theorem derivedLocalHomPresheafMap_natural
       derivedLocalHomRestriction J B A' D' h
         ((derivedSliceRestriction J B U).map f ≫ a ≫
           (derivedSliceRestriction J B U).map g) := by
-  sorry
+  dsimp only [derivedLocalHomRestriction]
+  simp only [Functor.map_comp, Category.assoc]
+  have hf := (derivedSliceMapIso J B h).inv.naturality f
+  have hg := (derivedSliceMapIso J B h).hom.naturality g
+  dsimp only [Functor.comp_map] at hf hg
+  rw [reassoc_of% hf, hg]
 
 /-- The map on local derived Hom presheaves induced by precomposition and postcomposition.
 
