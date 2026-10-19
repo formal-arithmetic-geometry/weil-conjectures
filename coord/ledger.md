@@ -17245,7 +17245,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/K6/Sheaf.Paper.RationalizationIdempotentComplete (stage 3; reviewer PASS; first push; landing 20261019T093517-L-2320630 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K7/Sheaf.Paper.SfPreservationClass (stage 3; reviewer PASS; first push; landing 20261019T093518-L-2320956 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K7/Sheaf.RepresentationTheory.CoinducedContinuousAcyclic (stage 3; reviewer PASS; first push; landing 20261019T093519-L-2321351 (proof); batch 20261019T093237; modules 1; new nodes 0)
-- 09:35 L: merged deliver/K7/Sheaf.SixFunctors.FlatModel (stage 3; reviewer PASS; first push; landing 20261019T093521-L-2321721 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K9/Sheaf.AlgebraicGeometry.FiniteFpProEtalePushforwardExact (stage 3; reviewer PASS; first push; landing 20261019T093522-L-2321879 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K9/Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor (stage 3; reviewer PASS; first push; landing 20261019T093523-L-2322193 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/K9-continuous-cochains-private-construction.md)
 - 09:35 L: merged deliver/M1/Sheaf.AlgebraicGeometry.SupportCohomology (stage 3; reviewer PASS; first push; landing 20261019T093524-L-2322439 (proof); batch 20261019T093237; modules 1; new nodes 0)
@@ -17285,3 +17284,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:04 L: returned deliver/NA/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and Steps 1-7), all 4 new nodes, the citers resolution-invariant-calculus (Steps 2/3/5/6/7) a)
 - 10:11 L: returned deliver/J9/Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian (reviewer RETURN: (reviewer C-68423, head 684239cf4) B9 (blueprint references): dag/nodes/sec-proetale-coefficients/lem-pe-constructible-c)
 - 10:12 L: returned deliver/NN/fix-cor-verdier-exchange (reviewer RETURN: L: independent stage-2 immutable head 2f2560c1e463: H2: stmt_dep sk-thm-sf-verdier-exchange supplies only plain definiti)
+
+- 18:13 L: batch 20261019T093237: K7/Sheaf.SixFunctors.FlatModel taken out (own fault, red build)
