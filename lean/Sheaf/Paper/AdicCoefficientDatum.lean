@@ -18,6 +18,9 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
@@ -180,7 +183,53 @@ theorem finiteRingComparison_exists (T : Scheme.{u}) (Λ : Type (u + 1))
       IsIso f ∧
         Functor.whiskerRight (toSheafify (ProEt.topology T) (functionPresheaf T Λ))
           (forget₂ CommRingCat RingCat) ≫ f.hom = finiteRingUnit T Λ := by
-  sorry
+  let J := ProEt.topology T
+  let F := forget₂ CommRingCat.{u + 1} RingCat.{u + 1}
+  let P := functionPresheaf T Λ
+  let η := Functor.whiskerRight (toSheafify J P) F
+  have hηi : Presheaf.IsLocallyInjective J η :=
+    (Presheaf.isLocallyInjective_forget_iff J η).1
+      (inferInstanceAs (Presheaf.IsLocallyInjective J
+        (Functor.whiskerRight (toSheafify J P) (CategoryTheory.forget CommRingCat.{u + 1}))))
+  have hηs : Presheaf.IsLocallySurjective J η :=
+    (Presheaf.isLocallySurjective_iff_whisker_forget J η).2
+      (inferInstanceAs (Presheaf.IsLocallySurjective J
+        (Functor.whiskerRight (toSheafify J P) (CategoryTheory.forget CommRingCat.{u + 1}))))
+  let g : finiteRingPresentation T Λ ⟶ (adicLisseForget T).obj (coefficientRing T Λ) :=
+    (sheafComposeNatTrans J F (sheafificationAdjunction J CommRingCat.{u + 1})
+      (sheafificationAdjunction J RingCat.{u + 1})).app P
+  have hg : toSheafify J (P ⋙ F) ≫ g.hom = η :=
+    sheafComposeNatTrans_fac J F (sheafificationAdjunction J CommRingCat.{u + 1})
+      (sheafificationAdjunction J RingCat.{u + 1}) P
+  have : Presheaf.IsLocallyInjective J (toSheafify J (P ⋙ F) ≫ g.hom) :=
+    hg.symm ▸ hηi
+  have : Presheaf.IsLocallySurjective J (toSheafify J (P ⋙ F) ≫ g.hom) :=
+    hg.symm ▸ hηs
+  have : Sheaf.IsLocallyInjective g :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective
+      J (toSheafify J (P ⋙ F)) g.hom
+  have : Sheaf.IsLocallySurjective g :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J (P ⋙ F)) g.hom
+  have : IsIso g := (Sheaf.isLocallyBijective_iff_isIso g).1 ⟨inferInstance, inferInstance⟩
+  have he : η ≫ (inv g).hom = finiteRingUnit T Λ := by
+    rw [← hg, Category.assoc]
+    change toSheafify J (P ⋙ F) ≫ (g ≫ inv g).hom = _
+    rw [IsIso.hom_inv_id]
+    exact Category.comp_id _
+  refine ⟨inv g, ⟨inferInstance, he⟩, ?_⟩
+  intro f hf
+  apply (cancel_epi g).1
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext J _ _ (finiteRingPresentation T Λ).property
+  change toSheafify J (P ⋙ F) ≫ (g.hom ≫ f.hom) =
+    toSheafify J (P ⋙ F) ≫ (g.hom ≫ (inv g).hom)
+  calc
+    _ = η ≫ f.hom := (Category.assoc _ _ _).symm.trans
+      (congrArg (fun k ↦ k ≫ f.hom) hg)
+    _ = finiteRingUnit T Λ := hf.2
+    _ = η ≫ (inv g).hom := he.symm
+    _ = _ := (congrArg (fun k ↦ k ≫ (inv g).hom) hg).symm.trans
+      (Category.assoc _ _ _)
 
 /-- Canonical identification with the existing RingCat coefficient sheaf, retaining its unit.
 Source: blueprint, Tag 09BT (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -218,7 +267,7 @@ Proof: quotient induction identifies the quotient map with the identity. Postcom
 is then identity on component functions, and sheafification preserves identities. -/
 theorem reductionCoefficientMap_id (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (a : ℕ) : reductionCoefficientMap T d a a (le_refl a) = 𝟙 _ := by
-  sorry
+  exact (AdicCoefficients.ringSystem T d.ideal d.quotientFinite).map_id (op a)
 
 /-- Quotient coefficient maps satisfy the quotient cocycle.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
@@ -228,7 +277,8 @@ theorem reductionCoefficientMap_comp (T : Scheme.{t}) {A : Type (t + 1)} [CommRi
     (d : AdicCoefficientDatum A) (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :
     reductionCoefficientMap T d c b hbc ≫ reductionCoefficientMap T d b a hab =
       reductionCoefficientMap T d c a (hab.trans hbc) := by
-  sorry
+  exact ((AdicCoefficients.ringSystem T d.ideal d.quotientFinite).map_comp
+    (homOfLE hbc).op (homOfLE hab).op).symm
 
 /-- The strict diagram of all positive quotient coefficient sheaves.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -291,7 +341,27 @@ levelwise by lem-weil-tower-category-levelwise-abelian. -/
 theorem reductionTower_isGrothendieckAbelian (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :
     IsGrothendieckAbelian.{t + 1} (reductionTowerCategory T B) := by
-  sorry
+  let B' := ((AsSmall.down : proEtaleSiteModel T ⥤ T.ProEt).sheafPushforwardContinuous
+    RingCat.{t + 1} (proEtaleModelTopology T) (ProEt.topology T)).obj B
+  let : (AsSmall.equiv.{t, t + 1, t + 1} (C := T.ProEt)).functor.IsContinuous
+      (ProEt.topology T) (proEtaleModelTopology T) := proEtaleModelUp_isContinuous T
+  let : (AsSmall.equiv.{t, t + 1, t + 1} (C := T.ProEt)).inverse.IsContinuous
+      (proEtaleModelTopology T) (ProEt.topology T) := by
+    change AsSmall.down.IsContinuous (proEtaleModelTopology T) (ProEt.topology T)
+    infer_instance
+  let e : SheafOfModules.{t + 1} B' ≌ SheafOfModules.{t + 1} B :=
+    SheafOfModules.pushforwardPushforwardEquivalence
+      (AsSmall.equiv.{t, t + 1, t + 1} (C := T.ProEt)) (𝟙 B) (𝟙 B')
+      (by ext U; dsimp [AsSmall.equiv]; erw [B'.obj.map_id]; rfl)
+      (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
+  have : IsGrothendieckAbelian.{t + 1}
+      (AsSmall.{t + 1} ℕᵒᵖ ⥤ ringedSiteModules.{t + 1} B') :=
+    smallModuleDiagrams_isGrothendieckAbelian (proEtaleModelTopology T) B'
+      (AsSmall.{t + 1} ℕᵒᵖ)
+  let eJ : ℕᵒᵖ ≌ AsSmall.{t + 1} ℕᵒᵖ := AsSmall.equiv
+  have : IsGrothendieckAbelian.{t + 1} (ℕᵒᵖ ⥤ ringedSiteModules.{t + 1} B') :=
+    IsGrothendieckAbelian.of_equivalence (Equivalence.congrLeft eJ.symm)
+  exact IsGrothendieckAbelian.of_equivalence (Equivalence.congrRight e)
 
 /-- Exact evaluation of a strict inverse sequence at the positive exponent n+1.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -448,7 +518,8 @@ theorem completedReductionTowerMap_naturality (T : Scheme.{t}) {A : Type (t + 1)
         (completedReductionLevel T d n).map f =
       (completedReductionLevel T d (n + 1)).map f ≫
         (completedReductionModuleTower T d N).map (homOfLE (Nat.le_succ n)).op := by
-  sorry
+  simpa only [completedReductionModuleTower, Functor.ofOpSequence_map_homOfLE_succ] using
+    ((completedReductionTransition T d (n + 1) n (Nat.le_succ n)).naturality f).symm
 
 /-- The ordinary tower construction on module morphisms.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -470,7 +541,14 @@ is equality of their components, so their composite level functors prove additiv
 theorem completedReductionModuleTowerFunctor_additive (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     (completedReductionModuleTowerFunctor T d).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply NatTrans.ext
+  funext n
+  have : (completedReductionLevel T d n.unop).Additive := by
+    unfold completedReductionLevel reductionRestrict
+    infer_instance
+  exact (completedReductionLevel T d n.unop).map_add (f := f) (g := g)
 
 /-- Apply the additive tower construction to terms and differentials. This gives actual
 complexes in the tower category, not merely towers of derived objects.
@@ -520,7 +598,63 @@ theorem completedReductionTower_exists (T : Scheme.{t}) {A : Type (t + 1)} [Comm
           (reductionModuleRing T (completedReductionCoefficient T d))))
       (ε : DerivedCategory.Qh ⋙ LF ⟶ completedReductionHomotopyFunctor T d),
       IsCompletedReductionTowerPair T d LF ε := by
-  sorry
+  let C := reductionModules T (completedReductionCoefficient T d)
+  let D := reductionTowerCategory T (reductionModuleRing T (completedReductionCoefficient T d))
+  let H := HomotopyCategory.quotient C (.up ℤ)
+  let F := (completedReductionModuleTowerFunctor T d).mapHomotopyCategory (.up ℤ) ⋙
+    DerivedCategory.Qh
+  let S : Set (HomotopyCategory C (.up ℤ)) :=
+    {X | ∃ P : CochainComplex C ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := completedReductionCoefficient T d) P ∧
+        H.obj P = X}
+  have hres (X : HomotopyCategory C (.up ℤ)) :
+      ∃ (X' : HomotopyCategory C (.up ℤ)) (s : X' ⟶ X),
+        X' ∈ S ∧ HomotopyCategory.quasiIso C (.up ℤ) s := by
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedReductionCoefficient T d) G
+    exact ⟨H.obj P, H.map s, ⟨P, hP, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hinv (X Y : HomotopyCategory C (.up ℤ)) (s : X ⟶ Y)
+      (hX : X ∈ S) (hY : Y ∈ S) (hs : HomotopyCategory.quasiIso C (.up ℤ) s) :
+      IsIso (F.map s) := by
+    obtain ⟨P, hP, rfl⟩ := hX
+    obtain ⟨Q, hQ, rfl⟩ := hY
+    obtain ⟨a, rfl⟩ := H.map_surjective s
+    have ha := (HomotopyCategory.quotient_map_mem_quasiIso_iff a).1 hs
+    have hlevel (n : ℕ) : QuasiIso
+        (((reductionTowerEvaluation T
+          (reductionModuleRing T (completedReductionCoefficient T d)) n).mapHomologicalComplex
+            (.up ℤ)).map ((completedReductionComplexTowerFunctor T d).map a)) := by
+      let φ := completedReductionProjection T d n
+      let V := SheafOfModules.toSheaf.{t + 1}
+        (reductionModuleRing T (completedReductionCoefficient T d))
+      have : PreservesFiniteLimits (reductionRestrict T φ ⋙ V) :=
+        inferInstanceAs (PreservesFiniteLimits
+          (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T (reductionCoefficient T d n))))
+      have : PreservesFiniteColimits (reductionRestrict T φ ⋙ V) :=
+        inferInstanceAs (PreservesFiniteColimits
+          (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T (reductionCoefficient T d n))))
+      have : PreservesFiniteLimits (reductionRestrict T φ) :=
+        preservesFiniteLimits_of_reflects_of_preserves _ V
+      have : PreservesFiniteColimits (reductionRestrict T φ) :=
+        preservesFiniteColimits_of_reflects_of_preserves _ V
+      have : QuasiIso (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a) :=
+        (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.1
+          a hP hQ ha
+      exact inferInstanceAs (QuasiIso
+        (((reductionRestrict T φ).mapHomologicalComplex (.up ℤ)).map
+          (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a)))
+    have hEa : QuasiIso ((completedReductionComplexTowerFunctor T d).map a) :=
+      (HomologicalComplex.quasiIso_iff_evaluation _).2 (fun n ↦ hlevel n.unop)
+    dsimp only [F, completedReductionHomotopyFunctor, Functor.comp_map,
+      Functor.mapHomotopyCategory_map]
+    apply Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso D (.up ℤ))
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hEa
+  obtain ⟨_, LF, ε, hLF, htri, hcompute⟩ :=
+    Functor.leftDerived_from_resolvingClass C (DerivedCategory D) F S hres hinv
+  exact ⟨LF, ε, hLF, htri, fun P hP ↦ hcompute (H.obj P) ⟨P, hP, rfl⟩⟩
 
 /-- K↦K_bullet is the canonical left derived functor, with its universal comparison.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -565,7 +699,7 @@ theorem reductionBalance_exists (T : Scheme.{t})
           (reductionTensorSection T ψ ((reductionChange T φ).obj (P.X p)) V s
             (reductionTensorSection T φ (P.X p) V r x)) =
           reductionTensorSection T χ (P.X p) V (s * ψ.hom.app V r) x := by
-  sorry
+  exact completedAdicBalance_exists T φ ψ χ _h P
 
 /-- The canonical balancing map, selected from its unique local tensor formula.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -593,7 +727,7 @@ theorem completedReductionProjection_comp (T : Scheme.{t}) {A : Type (t + 1)} [C
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     completedReductionProjection T d b ≫ reductionCoefficientMap T d b a h =
       completedReductionProjection T d a := by
-  sorry
+  exact limit.w (reductionCoefficientSystem T d) (homOfLE h).op
 
 /-- The quotient normalization on a K-flat computation is the localization of balancing.
 The same map is defined for any ordinary complex; K-flatness makes it compute derived
@@ -646,7 +780,7 @@ theorem completedTowerEvaluationStep_naturality (T : Scheme.{t})
     {M N : reductionTowerCategory T B} (f : M ⟶ N) :
     f.app (op (n + 1)) ≫ N.map (homOfLE (Nat.le_succ n)).op =
       M.map (homOfLE (Nat.le_succ n)).op ≫ f.app (op n) := by
-  sorry
+  exact (f.naturality (homOfLE (Nat.le_succ n)).op).symm
 
 /-- The natural transformation between consecutive exact evaluation functors.
 Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -724,7 +858,11 @@ action. The same holds for finite products and the zero object, giving finite li
 theorem reductionRestrict_preservesFiniteLimits (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     PreservesFiniteLimits (reductionRestrict T φ) := by
-  sorry
+  let F := SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T R)
+  have : PreservesFiniteLimits (reductionRestrict T φ ⋙ F) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T S)))
+  exact preservesFiniteLimits_of_reflects_of_preserves (reductionRestrict T φ) F
 
 
 /-- Restriction of coefficients preserves cokernels and finite direct sums.
@@ -736,7 +874,11 @@ sums are unchanged. This identifies the cokernel and finite-colimit universal pr
 theorem reductionRestrict_preservesFiniteColimits (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     PreservesFiniteColimits (reductionRestrict T φ) := by
-  sorry
+  let F := SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T R)
+  have : PreservesFiniteColimits (reductionRestrict T φ ⋙ F) :=
+    inferInstanceAs (PreservesFiniteColimits
+      (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T S)))
+  exact preservesFiniteColimits_of_reflects_of_preserves (reductionRestrict T φ) F
 
 
 /-- Scalar restriction is additive on the unchanged underlying abelian sheaf.
@@ -807,7 +949,7 @@ and take the invertibility conjunct. -/
 theorem completedReductionDerivedNormalization_isIso (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     IsIso (completedReductionDerivedNormalization T d b a h) := by
-  sorry
+  exact (completedReductionDerivedNormalization_exists T d b a h).choose_spec.1.1
 
 /-- The universal counit of the reduction tower, selected together with its left derived
 functor and hence determining all resolution comparisons.
@@ -837,7 +979,7 @@ theorem completedReductionTower_properties (T : Scheme.{t})
         CochainComplex.IsKFlatIndependentCoefficients (R := completedReductionCoefficient T d) P →
           IsIso ((coherenceReductionTowerCounit T d).app
             ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
-  sorry
+  exact (completedReductionTower_exists T d).choose_spec.choose_spec
 
 /-- The tower counit on a complex, using canonical localization factorizations.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -905,7 +1047,7 @@ and take the invertibility conjunct. -/
 theorem completedReductionEvaluation_isIso (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     IsIso (completedReductionEvaluation T d n) := by
-  sorry
+  exact (completedReductionEvaluation_exists T d n).choose_spec.1.1
 
 /-- The quotient ring tower, indexed by the positive exponent n+1.
 Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
