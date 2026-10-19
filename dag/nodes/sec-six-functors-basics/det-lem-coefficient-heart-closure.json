@@ -30,139 +30,83 @@
  ],
  "proof": [
   {
-   "text": "*Local models over a field and extensions.* For $\\Lambda=E$ or $\\Qlb$, $\\Lambda(*)$ is a field. A finitely presented scalar module $P$ has a finite basis, hence $P\\cong\\Lambda(*)^r$ and $\\Lambda_U\\otimes_{\\Lambda(*)}P\\cong\\Lambda_U^r$. Conversely take $P=\\Lambda(*)^r$. Thus [det-def-sfb-constructible-local-model] gives exactly pro-étale local finite freeness. In the asserted short exact sequence, [sk-prop-sfb-cartesian-coefficients](1) identifies the inverse-image coefficient ring with the ring on the source. Its final assertion identifies module pullback canonically naturally with the lift of exact inverse image whose action is transported along that ring isomorphism. Thus restriction preserves the short exact sequence. Only the untwisted assertion is used; it imposes no invertibility hypothesis on $\\ell$. Choose a common pro-étale cover trivializing $F'$ and $F''$. The underlying abelian-sheaf category is abelian by [lem-weil-pbc-site-sheaves-enough-injectives], and its tensor is additive and preserves colimits by [sk-def-sfb-sheaf-tensor], so the hypotheses of the module-cokernel statement hold. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective], applied to the underlying abelian sheaves (module cokernels are computed there by [lem-sfb-modobj-cokernels]), each of the finitely many basis sections of $F''$ lifts after a covering refinement; successive refinements lift them all. Sending the basis to these lifts defines a $\\Lambda$-linear section $s$ of $F\\to F''$. If $i:F'\\to F$ and $p:F\\to F''$ are the sequence maps, $(a,b)\\mapsto i(a)+s(b)$ has inverse $f\\mapsto(i^{-1}(f-s(p(f))),p(f))$, since $\\ker p=\\operatorname{im}i$. Therefore $F$ is locally a direct sum of two finite free modules. This proves extension closure, including rank zero.",
+   "text": "Compare the two coefficient pullback conventions by Mod.extendScalarsIsoComapInv. A lisse module is locally finitely presented because a finite free module is the cokernel of a zero map. Conversely finite_lf and algcl_lf in CondensedConstructibleSerre apply the existing finite-field and bounded-image algebraic-closure local-triviality theorems. Transport their free local models back along the coefficient isomorphism. This proves lisse iff locally finitely presented on every topologically Noetherian scheme. A finite free local model is a finite constant local model: pull a finite free condensed module back from the point and use preservation of finite biproducts. Rank zero is included.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-modobj-cokernels",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "def-sfb-lisse-coefficient-module",
+    "sk-def-sfb-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-    "place": "Local models over a field; proof of (1)"
+    "place": "Local models, extensions and globalization; reuse of the existing local finite-presentation proof"
    }
   },
   {
-   "text": "First take $\\Lambda=E$. By [def-sfb-subfield-coefficient-ring], $E_S=p_S^*C(-,E)$. The canonical ring-sheaf isomorphism of [lem-weil-pbc-condensed-field-continuous-realization] identifies it with the continuous-function ring of [def-weil-pbc-lisse-lattice-coefficients]. Transport along this isomorphism preserves finite free local models, since it sends the standard basis to the standard basis. Apply [lem-sfb-etale-local-monodromy-realization] to the finite diagram $F\\xrightarrow{\\phi}G$. On each connected qcqs topologically Noetherian member $T$ of its etale covering, the diagram is $J_T(V)\\xrightarrow{J_T(h)}J_T(W)$ for an equivariant map of continuous finite-dimensional $E$-representations. These are the continuous-function coefficients of Bhatt–Scholze, not discrete coefficient sheaves.",
+   "text": "Apply the existing generic lfp_serre_of_locally_free helper from CondensedConstructibleSerre to the local-freeness criterion and freeEpiLocalSplitting. Its proof presents the cokernel, then the image and kernel using local splittings of epimorphisms onto free modules, and splits extensions after locally lifting the quotient basis. Transfer the three assertions through lisse iff locally finitely presented. Isomorphism invariance transfers canonical kernels and cokernels to arbitrary limiting cones and colimiting cocones, giving the ObjectProperty closure classes.",
    "uses": [
-    "def-sfb-subfield-coefficient-ring",
-    "lem-weil-pbc-condensed-field-continuous-realization",
-    "def-weil-pbc-lisse-lattice-coefficients",
-    "lem-sfb-etale-local-monodromy-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(1),(4),(6) and Corollary 6.8.5, integral-monodromy reduction; HRS Example 3.1 for coefficient realization"
-   }
-  },
-  {
-   "text": "By [lem-sfb-continuous-representation-subquotients], $K=\\ker h$, $I=h(V)$ and $Q=W/I$ are continuous representations, and $0\\to K\\to V\\to I\\to0$ and $0\\to I\\to W\\to Q\\to0$ are underlying-exact sequences of representations. The ambient exactness assertion of [lem-sfb-etale-local-monodromy-realization] applies to both. Thus $J_T(V)\\to J_T(I)$ is epic, $J_T(I)\\to J_T(W)$ is monic, and $J_T(Q)$ is the ambient cokernel of their composite $J_T(h)$. This composite is the restricted $\\phi$. By the untwisted clause (1) and final assertion of [sk-prop-sfb-cartesian-coefficients], module restriction to $T$ is canonically isomorphic to exact inverse image, so it identifies the ambient cokernel with $(\\operatorname{coker}\\phi)|_T$. As $J_T(Q)$ is lisse, its finite-free covers, composed with the etale cover, prove that $\\operatorname{coker}\\phi$ is lisse on $S$. No invertibility of $\\ell$ or additional stratification is used.",
-   "uses": [
-    "lem-sfb-continuous-representation-subquotients",
-    "lem-sfb-etale-local-monodromy-realization",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 6.8.5, representation cokernel and exact restriction"
-   }
-  },
-  {
-   "text": "Now take $\\Lambda=\\Qlb$ in the fixed algebraic closure. Use the coefficient and locality conventions stated in [det-lem-coefficient-finite-descent-lisse]: pulled-back condensed rings, ordinary relative tensor product, and finite-subextension-valued sections for $\\QbarS$. A topologically Noetherian $S$ is qcqs, because every open subset is quasi-compact, including $S$ and intersections of affine opens. Clause (1) of that node therefore supplies lisse models $F_{E_1}$ and $G_{E_2}$ with specified scalar-extension isomorphisms to $F,G$. Take the compositum $E_0$ inside the fixed closure. It is finite over $\\mathbf Q_\\ell$: if $a_i$ and $b_j$ span the two fields, the products $a_i b_j$ span their compositum.",
-   "uses": [
-    "det-lem-coefficient-finite-descent-lisse"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(3),(4); finite-stage object descent in blueprint paragraph (2)"
-   }
-  },
-  {
-   "text": "Extend these models to $E_0$. A finite local basis remains a finite local basis after tensoring: $B\\otimes_A A^r\\cong B^r$, by $b\\otimes(a_i)\\mapsto(ba_i)$ with inverse $(b_i)\\mapsto\\sum_i b_i\\otimes e_i$. The tensor comparisons of [lem-weil-pbc-condensed-flat-coefficient-calculus] identify their further extensions to $\\QbarS$ with the original $F,G$; its rings are exactly the pulled-back $E_S$ and finite-subextension-valued $\\QbarS$ here, and its hypothesis on $S$ is only topological Noetherianity. Transport $\\phi$ through these specified isomorphisms. Clause (2) of [det-lem-coefficient-finite-descent-lisse] gives a representative $(E,\\phi_E)$ in the Hom colimit for a finite $E\\supseteq E_0$. Its transition maps are scalar extension, so $(\\phi_E)_{\\Qlb}$ is this actual transported morphism, not merely a map between isomorphic objects. The same local-basis calculation makes $F_E,G_E$ lisse. On degree-zero modules the cited termwise computation identifies its derived tensor comparisons with these ordinary tensor comparisons.",
-   "uses": [
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "det-lem-coefficient-finite-descent-lisse"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.4(3),(4); finite-stage morphism descent with tensor comparisons"
-   }
-  },
-  {
-   "text": "The finite-$E$ case proved above makes $C_E=\\operatorname{coker}\\phi_E$ lisse. By [sk-def-sfb-change-of-scalars](2), extension of scalars is a left adjoint and preserves cokernels. Its braided, colimit-preserving tensor hypotheses hold for abelian sheaves by [sk-def-sfb-sheaf-tensor]; $E_S$ is commutative. Hence $\\operatorname{coker}\\phi\\cong\\QbarS\\otimes_{E_S}C_E$. The local-basis isomorphism of the preceding step makes this lisse, including rank zero. The coefficient system is precisely $\\QbarS\\cong\\varinjlim_E E_S$ of [sk-prop-sfb-qlbar-colimit-x]. This passage uses neither the sheaf of all valuation-continuous $\\Qlb$-valued functions nor preservation of kernels by scalar extension.",
-   "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-prop-sfb-qlbar-colimit-x"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Proposition 6.8.4(3),(4); blueprint paragraph (2), cokernel after finite descent"
-   }
-  },
-  {
-   "text": "*Kernels by finite-free duality.* On the chosen small pro-étale site, [lem-weil-pbc-ring-sheaves-grothendieck] applied to the constant ring sheaf $\\mathbf Z$ makes the underlying abelian-sheaf category Grothendieck abelian: a sheaf of abelian groups has the unique $\\mathbf Z$-action given by integer multiples, and every additive map respects it. Together with the closed symmetric monoidal tensor of [sk-def-sfb-sheaf-tensor], this verifies the hypotheses of [def-sfb-modobj-internal-hom]. For either coefficient choice put $R=\\Lambda_S$ and $P^\\vee=\\mathcal Hom_R(P,R)$ as in [def-sfb-modobj-internal-hom]. For lisse $F,G$, a local finite basis and its dual identify $F^\\vee,G^\\vee$ with finite free sheaves; these identifications also verify compatibility with restriction. The already proved cokernel assertions apply to $\\phi^\\vee:G^\\vee\\to F^\\vee$, so $D=\\operatorname{coker}\\phi^\\vee$ is lisse. Evaluation sends a section $v\\in\\ker\\phi$ to the functional on $D$ induced by $\\lambda\\mapsto\\lambda(v)$: it annihilates the transpose image because $\\mu(\\phi(v))=0$ for every local section $\\mu$ of $G^\\vee$. Conversely, for a local $R$-linear functional $a:D\\to R$, take a finite basis $e_1,\\dots,e_n$ of $F$, its dual basis $e_1^*,\\dots,e_n^*$, and set $v=\\sum_i a([e_i^*])e_i$. Evaluating on $\\sum_i b_i e_i^*$ gives $\\sum_i b_i a([e_i^*])$, so this recovers the functional on $F^\\vee$. Since it kills the image of $\\phi^\\vee$, every dual coordinate of $\\phi(v)$ is zero and $v\\in\\ker\\phi$. The two operations are inverse. They agree on overlaps and commute with restriction because their characterization by evaluation is independent of basis. Thus $\\ker\\phi\\cong D^\\vee$. A finite local dual basis of $D$ proves $D^\\vee$ lisse, including rank zero. This establishes the kernel assertion for $E$ and $\\Qlb$ without another local-freeness tool.",
-   "uses": [
-    "def-sfb-modobj-internal-hom",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-proetale-free-epi-local-splitting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-    "place": "Paragraph (2); explicit elementary evaluation calculation after the cokernel assertion"
+    "place": "Local models, extensions and globalization; reuse of the existing local finite-presentation proof"
    }
   },
   {
-   "text": "*Globalization and the abelian category.* Given constructible $F,G$ with a morphism $\\phi:F\\to G$, use [det-lem-coefficient-heart-common-stratification](1),(2) to find a finite stratification on which $F,G$ are lisse. For an extension, instead adapt the common stratification to the two constructible end terms $F',F''$; no lisseness of the middle term is assumed. Each locally closed stratum has Noetherian underlying space. By part (3) of that node, restriction is exact, so $(\\ker\\phi)|_S\\cong\\ker(\\phi|_S)$, $(\\operatorname{coker}\\phi)|_S\\cong\\operatorname{coker}(\\phi|_S)$ and the restricted extension sequence is exact. The preceding steps and [sk-def-sfb-constructible] therefore prove all three global closure assertions. They also prove the finite-stratification characterization in the statement, since local finite freeness is exactly the finite constant local model of step 1. The underlying abelian-sheaf category is abelian by [lem-weil-pbc-site-sheaves-enough-injectives], and its tensor is additive and preserves finite colimits by [sk-def-sfb-sheaf-tensor]. Hence [lem-sfb-modobj-abelian] makes the ambient module category abelian. The full constructible subcategory contains zero and finite direct sums (use $0\\to F\\to F\\oplus G\\to G\\to0$). Fullness gives the ambient kernel and cokernel their universal properties in this subcategory. Their iterates give its image and coimage, and the ambient coimage-to-image isomorphism and its inverse belong to the full subcategory. It is consequently abelian. Its kernels and cokernels are the ambient ones, so the inclusion is exact.",
+   "text": "On a Noetherian scheme the qcqs branch of IsConstantModelConstructible applies. Prove that its finite constant stratified models are equivalent to IsConstructibleModuleObject. In the forward direction use HasFiniteConstantLocalModel.isLocallyFinitelyPresented and transport the stratum coefficient isomorphism. In the reverse direction each stratum has Noetherian underlying space because its immersion is an embedding; apply the lisse criterion and the finite-free constant model construction of step 1. No Noetherianity of arbitrary covering schemes is assumed.",
    "uses": [
-    "det-lem-coefficient-heart-common-stratification",
     "sk-def-sfb-constructible",
-    "lem-sfb-modobj-abelian",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "sk-def-sfb-sheaf-tensor"
+    "det-def-sfb-constructible-local-model",
+    "def-sfb-lisse-coefficient-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
-    "place": "Globalization"
+    "place": "Local models, extensions and globalization; reuse of the existing local finite-presentation proof"
+   }
+  },
+  {
+   "text": "Use condensed_constructible_serre_of_locally_free with the same local-freeness criterion and basis-lifting lemma. The existing generic proof intersects the stratifications of the two objects, uses exact inverse image along the strata and the local closure result of step 2. Transfer its conclusions through step 3 to the constant-model constructibility predicate. Prove isomorphism invariance by mapping the presentation isomorphisms and prove zero constructible using the one-stratum identity stratification and the cokernel of an identity on a rank-zero free module.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-proetale-free-epi-local-splitting",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Local models, extensions and globalization; reuse of the existing local finite-presentation proof"
+   }
+  },
+  {
+   "text": "Extension closure gives closure under binary biproducts; their product isomorphisms and zero give finite product closure. Apply Mathlib ObjectProperty abelian-subcategory construction. Its kernel and cokernel preservation lemmas and the additive-functor finite-limit and finite-colimit criteria make the inclusion exact. Finally forget the constructibility-of-subsets field of Scheme.Stratification to obtain FiniteLocallyClosedStratification. Conversely on a Noetherian space every locally closed subset is constructible, so Scheme.Stratification.ofNoetherianSpace restores that field. The local lisse criterion identifies the two formulations, including empty strata and the empty scheme. The Lean argument is conditional on an abstract coefficient ring and its local-freeness criterion; the original theorem applies this proved conditional result directly, then supplies finite_lf or algcl_lf. This avoids a concrete coefficient alias and its costly definitional comparisons without changing any underlying construction.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+    "place": "Local models, extensions and globalization; reuse of the existing local finite-presentation proof"
    }
   }
  ],
  "proof_deps": [
-  "det-def-sfb-constructible-local-model",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-modobj-cokernels",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "sk-def-sfb-sheaf-tensor",
-  "def-sfb-subfield-coefficient-ring",
-  "lem-weil-pbc-condensed-field-continuous-realization",
-  "def-weil-pbc-lisse-lattice-coefficients",
-  "lem-sfb-etale-local-monodromy-realization",
-  "lem-sfb-continuous-representation-subquotients",
-  "det-lem-coefficient-finite-descent-lisse",
-  "lem-weil-pbc-condensed-flat-coefficient-calculus",
-  "sk-def-sfb-change-of-scalars",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "def-sfb-modobj-internal-hom",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "det-lem-coefficient-heart-common-stratification",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "def-sfb-lisse-coefficient-module",
   "sk-def-sfb-constructible",
-  "lem-sfb-modobj-abelian"
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-proetale-free-epi-local-splitting",
+  "det-def-sfb-constructible-local-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4 and Corollary 6.8.5, expanded along the main-20261015 unit route; extensions, kernel duality and globalization written out."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-closure.proof.md",
+  "place": "U5: existing local finite-presentation/local-freeness and generic Serre helpers, followed by Mathlib abelian-subcategory and exact-inclusion constructions; unchanged unit-level common-stratification and basis-lifting argument."
  },
  "mathlib_searches": [
   {
@@ -360,14 +304,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-condensed-field-continuous-realization",
-  "def-weil-pbc-lisse-lattice-coefficients",
-  "det-lem-coefficient-finite-descent-lisse",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-condensed-flat-coefficient-calculus"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -405,5 +342,15 @@
   "by": "Q17",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T160421-L-3355771",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
