@@ -7,11 +7,8 @@ module
 
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.NumberTheory.Padics.CoefficientExtension
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 
 /-! # Integral derived reduction
 
@@ -151,7 +148,38 @@ the original quotient section on the chosen cover. This is local surjectivity. -
 theorem integralDerivedReductionProjection_locallySurjective :
     Presheaf.IsLocallySurjective (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (completedIntegralCoefficientProjection l E Y D hl n).hom := by
-  sorry
+  let J := AlgebraicGeometry.Scheme.ProEt.topology Y
+  let B := CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))
+  let η := toSheafify J ((Functor.const (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ).obj B)
+  have : J.WEqualsLocallyBijective CommRingCat.{max u (t + 1)} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
+  have : Presheaf.IsLocallySurjective J η := by infer_instance
+  refine ⟨fun {U} s ↦ J.superset_covering ?_ (Presheaf.imageSieve_mem J η s)⟩
+  intro V f hf
+  obtain ⟨x, hx⟩ := hf
+  obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective x.down
+  have hxa : x = ULift.up ((Ideal.Quotient.mk _) a) := ULift.ext _ _ ha.symm
+  subst x
+  let A := CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))
+  let b := (toSheafify J ((Functor.const (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ).obj A)).app
+    (Opposite.op V) (ULift.up a)
+  refine ⟨(integralConstantToCompletionOfUniverses l E Y).hom.app (Opposite.op V) b, ?_⟩
+  have hπ := CategoryTheory.Limits.limit.lift_π
+    (integralConstantConeOfUniverses l E Y) (Opposite.op n)
+  have hb := congrArg (fun f ↦ f.hom.app (Opposite.op V) b) hπ
+  change (completedIntegralCoefficientProjection l E Y D hl n).hom.app (Opposite.op V)
+    ((integralConstantToCompletionOfUniverses l E Y).hom.app (Opposite.op V) b) = _
+  change (completedIntegralCoefficientProjection l E Y D hl n).hom.app (Opposite.op V)
+    ((integralConstantToCompletionOfUniverses l E Y).hom.app (Opposite.op V) b) = _ at hb
+  rw [hb]
+  change ((integralConstantQuotientOfUniverses l E Y n).hom.app (Opposite.op V)) b = _
+  let q : A ⟶ B := CommRingCat.ofHom
+    ((ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).symm.toRingHom.comp
+      ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))).comp
+        (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))
+  have hn := congrArg (fun f ↦ (f.app (Opposite.op V)).hom (ULift.up a))
+    (toSheafify_naturality J ((Functor.const (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ).map q))
+  exact hn.symm.trans hx
 
 /-- The derived reduction is exact: it admits a shift comparison making it a
 triangulated functor. Source: Stacks, Tag 06YY
@@ -163,7 +191,7 @@ are the same module categories, with commutativity retained in their ring data. 
 theorem integralDerivedReduction_exact :
     ∃ (_ : (integralDerivedReduction l E Y D hl n).CommShift ℤ),
       (integralDerivedReduction l E Y D hl n).IsTriangulated := by
-  sorry
+  exact (integralReductionDerivedExistence l E Y D hl n).choose_spec.choose_spec.2.1
 
 /-- The universal counit computes reduction on every K-flat complex.
 Source: Stacks, Tag 06YY (blueprint: def-weil-integral-derived-reduction).
@@ -179,7 +207,7 @@ theorem integralDerivedReduction_counit_isIso
       (R := completedIntegralCommRingSheaf l E Y D hl) P) :
     IsIso ((integralDerivedReductionCounit l E Y D hl n).app
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  exact (integralReductionDerivedExistence l E Y D hl n).choose_spec.choose_spec.2.2 P hP
 
 /-- The canonical computation on a K-flat representative is the counit isomorphism.
 For a resolution P → G, precompose this with the inverse of the image of P → G.
