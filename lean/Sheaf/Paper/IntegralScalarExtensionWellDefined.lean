@@ -69,7 +69,18 @@ spectral absolute value on E (lem-weil-l-adic-extension-absolute-value). -/
 theorem integralScalar_absoluteValue (x : E) :
     Padic.coefficientExtensionAbsoluteValue l L (ι x) =
       Padic.coefficientExtensionAbsoluteValue l E x := by
-  sorry
+  let f : AbsoluteValue E ℝ :=
+    (Padic.coefficientExtensionAbsoluteValue l L).comp ι.toRingHom.injective
+  have hf : ∀ a : ℚ_[l], f (algebraMap (ℚ_[l]) E a) = ‖a‖ := by
+    intro a
+    change Padic.coefficientExtensionAbsoluteValue l L
+      (ι (algebraMap (ℚ_[l]) E a)) = ‖a‖
+    rw [ι.commutes]
+    exact spectralNorm_extends a
+  calc
+    Padic.coefficientExtensionAbsoluteValue l L (ι x) = spectralNorm (ℚ_[l]) E x :=
+      spectralNorm_unique_field_norm_ext hf x
+    _ = Padic.coefficientExtensionAbsoluteValue l E x := rfl
 
 /-- The field inclusion maps integers to integers, in independent site/coefficient sizes.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
@@ -80,7 +91,15 @@ Apply this characterization to hx and to ι x. -/
 theorem integralScalar_integer_mem (x : E)
     (hx : x ∈ Padic.coefficientExtensionIntegers l E) :
     ι x ∈ Padic.coefficientExtensionIntegers l L := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
+  have hL := (Padic.extension_integers_dvr l L
+    (Padic.coefficientExtensionAbsoluteValue l L)
+    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec.1 (ι x)
+  apply hL.mpr
+  rw [integralScalar_absoluteValue l E L ι x]
+  exact hE.mp hx
 
 /-- The actual restriction of the field inclusion to the recorded valuation subrings.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
@@ -102,7 +121,38 @@ theorem integralScalar_quotient_kernel (n : ℕ)
     (hx : x ∈ Padic.coefficientExtensionIdeal l E (n + 1)) :
     (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (n + 1)))
       (integralScalarIntegerInclusion l E L ι x) = 0 := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hL := (Padic.extension_integers_dvr l L
+    (Padic.coefficientExtensionAbsoluteValue l L)
+    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  have hgenE : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    hE.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hgenL : Ideal.span {Padic.coefficientExtensionUniformizer l L} =
+      Padic.coefficientExtensionMaximalIdeal l L :=
+    hL.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hπE : Padic.coefficientExtensionUniformizer l E ∈
+      Padic.coefficientExtensionMaximalIdeal l E := by
+    rw [← hgenE]
+    exact Ideal.mem_span_singleton_self _
+  have hπL : integralScalarIntegerInclusion l E L ι
+      (Padic.coefficientExtensionUniformizer l E) ∈
+      Padic.coefficientExtensionMaximalIdeal l L := by
+    apply (hL.2.1 _).mpr
+    change Padic.coefficientExtensionAbsoluteValue l L
+      (ι (Padic.coefficientExtensionUniformizer l E)) < 1
+    rw [integralScalar_absoluteValue l E L ι]
+    exact (hE.2.1 _).mp hπE
+  rw [← hgenL, Ideal.mem_span_singleton] at hπL
+  rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+    Ideal.mem_span_singleton] at hx
+  apply Ideal.Quotient.eq_zero_iff_mem.mpr
+  rw [Padic.coefficientExtensionIdeal, Ideal.span_singleton_pow,
+    Ideal.mem_span_singleton]
+  exact (pow_dvd_pow_of_dvd hπL (n + 1)).trans (by
+    simpa only [map_pow] using map_dvd (integralScalarIntegerInclusion l E L ι) hx)
 
 /-- The canonical quotient map induced by inclusion of integer rings.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
@@ -125,7 +175,10 @@ theorem integralScalarQuotientMap_transition (n : ℕ) :
         (integralScalarQuotientMap l E L ι (n + 1)) =
       (integralScalarQuotientMap l E L ι n).comp
         (Padic.coefficientExtensionTransition l E (n + 1)) := by
-  sorry
+  apply RingHom.ext
+  intro x
+  induction x using Quotient.inductionOn' with
+  | h x => rfl
 
 variable (Y : AlgebraicGeometry.Scheme.{t})
 
@@ -278,7 +331,49 @@ theorem integralScalarConstant_existsUnique (U : Y.ProEtᵒᵖ)
       ∀ n : ℕ,
         ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U) s =
           integralScalarFiniteConstant l E Y n U a := by
-  sorry
+  let b : (integralConstantRingOfUniverses l E Y).obj.obj U :=
+    ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj
+        (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U)
+      (ULift.up a)
+  let s := (integralConstantToCompletionOfUniverses l E Y).hom.app U b
+  have hs : ∀ n : ℕ,
+      ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U) s =
+        integralScalarFiniteConstant l E Y n U a := by
+    intro n
+    have hπ := congrArg (fun f ↦ f.hom.app U)
+      (limit.lift_π (integralConstantConeOfUniverses l E Y) (op n))
+    have hcomp :
+        (integralConstantToCompletionOfUniverses l E Y).hom.app U ≫
+            (limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U =
+          ((integralConstantConeOfUniverses l E Y).π.app (op n)).hom.app U := by
+      change (limit.lift (integralCoefficientSheafSystem l E Y)
+          (integralConstantConeOfUniverses l E Y)).hom.app U ≫
+          (limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U = _
+      exact hπ
+    have hb := congrArg (fun f ↦ f.hom b) hcomp
+    change ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U).hom
+      (((integralConstantToCompletionOfUniverses l E Y).hom.app U).hom b) = _ at hb
+    change ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U).hom
+      (((integralConstantToCompletionOfUniverses l E Y).hom.app U).hom b) = _
+    refine hb.trans ?_
+    let q := CommRingCat.ofHom
+      ((ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).symm.toRingHom.comp
+        ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))).comp
+          (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))
+    have hn := congrArg (fun f ↦ (f.app U).hom (ULift.up a))
+      (toSheafify_naturality (AlgebraicGeometry.Scheme.ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).map q))
+    exact hn.symm
+  refine ⟨s, hs, ?_⟩
+  intro s' hs'
+  let h₁ := isLimitOfPreserves
+    (sheafToPresheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat)
+    (limit.isLimit (integralCoefficientSheafSystem l E Y))
+  let h₂ := isLimitOfPreserves ((evaluation _ _).obj U) h₁
+  apply Concrete.isLimit_ext _ h₂
+  intro n
+  exact (hs' n.unop).trans (hs n.unop).symm
 
 /-- The unique constant global section, restricted to the site object U.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
@@ -287,6 +382,41 @@ noncomputable def integralScalarConstant (U : Y.ProEtᵒᵖ)
     (a : Padic.coefficientExtensionIntegers l E) :
     (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U :=
   (integralScalarConstant_existsUnique l E Y U a).exists.choose
+
+private theorem integralScalarConstant_naturality {U V : Y.ProEtᵒᵖ}
+    (f : U ⟶ V) (a : Padic.coefficientExtensionIntegers l E) :
+    (completedIntegralCoefficientSheafUnrestricted l E Y).obj.map f
+      (integralScalarConstant l E Y U a) = integralScalarConstant l E Y V a := by
+  let h₁ := isLimitOfPreserves
+    (sheafToPresheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat)
+    (limit.isLimit (integralCoefficientSheafSystem l E Y))
+  let h₂ := isLimitOfPreserves ((evaluation _ _).obj V) h₁
+  apply Concrete.isLimit_ext _ h₂
+  intro n
+  change ((limit.π (integralCoefficientSheafSystem l E Y) n).hom.app V)
+      ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.map f
+        (integralScalarConstant l E Y U a)) =
+    ((limit.π (integralCoefficientSheafSystem l E Y) n).hom.app V)
+      (integralScalarConstant l E Y V a)
+  have hn := congrArg (fun k ↦ k.hom (integralScalarConstant l E Y U a))
+    ((limit.π (integralCoefficientSheafSystem l E Y) n).hom.naturality f)
+  change ((limit.π (integralCoefficientSheafSystem l E Y) n).hom.app V)
+      ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.map f
+        (integralScalarConstant l E Y U a)) =
+      (integralCoefficientSheaf l E Y n.unop).obj.map f
+        (((limit.π (integralCoefficientSheafSystem l E Y) n).hom.app U)
+          (integralScalarConstant l E Y U a)) at hn
+  rw [hn]
+  erw [(integralScalarConstant_existsUnique l E Y U a).exists.choose_spec n.unop,
+    (integralScalarConstant_existsUnique l E Y V a).exists.choose_spec n.unop]
+  have h := congrArg
+    (fun k ↦ k.hom
+      (ULift.up ((Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n.unop + 1))) a)))
+    ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      ((Functor.const Y.ProEtᵒᵖ).obj
+        (CommRingCat.of
+          (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n.unop + 1)))))).naturality f)
+  exact h.symm
 
 /-- Multiplication by the constant section is a uniquely specified natural chain map.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
@@ -301,7 +431,52 @@ theorem integralScalarChainAction_existsUnique (a : Padic.coefficientExtensionIn
       ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) (U : Y.ProEtᵒᵖ)
         (x : (P.X i).val.obj U),
         ((σ.app P).f i).val.app U x = integralScalarConstant l E Y U a • x := by
-  sorry
+  let μ : ∀ M : integralTowerModules l E Y, M ⟶ M := fun M ↦
+    { val :=
+        { app := fun U ↦ by
+            let : CommRing ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U) :=
+              inferInstanceAs
+                (CommRing ((completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U))
+            exact ModuleCat.ofHom
+              { toFun := fun x ↦ integralScalarConstant l E Y U a • x
+                map_add' := smul_add _
+                map_smul' := fun r x ↦ smul_comm _ r x }
+          naturality := by
+            intro U V f
+            ext x
+            change integralScalarConstant l E Y V a • M.val.map f x =
+              M.val.map f (integralScalarConstant l E Y U a • x)
+            rw [M.val.map_smul, integralScalarConstant_naturality l E Y f a] } }
+  have hμ : ∀ {M N : integralTowerModules l E Y} (f : M ⟶ N),
+      f ≫ μ N = μ M ≫ f := by
+    intro M N f
+    ext U x
+    exact ((f.val.app U).hom.map_smul (integralScalarConstant l E Y U a) x).symm
+  let σ : 𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) ⟶
+      𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) :=
+    { app := fun P ↦
+        { f := fun i ↦ μ (P.X i)
+          comm' := fun i j _ ↦ (hμ (P.d i j)).symm }
+      naturality := by
+        intro P Q f
+        apply HomologicalComplex.hom_ext
+        intro i
+        exact hμ (f.f i) }
+  refine ⟨σ, ?_, ?_⟩
+  · intro P i U x
+    rfl
+  · intro σ' hσ'
+    apply NatTrans.ext
+    funext P
+    apply HomologicalComplex.hom_ext
+    intro i
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    exact hσ' P i U x
 
 /-- The actual constant-section scalar endomorphism of the identity on complexes.
 Source: Bhatt--Scholze, Proposition 6.8.14(1); Stacks Tags 06YT and 08TC
