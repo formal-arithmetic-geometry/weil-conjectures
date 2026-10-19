@@ -11,13 +11,10 @@ public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.PointedEtaleSmallFiltered
-import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Sheaf.RingTheory.FieldsExcellent
-import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.StrictHenselizationPresentationIn
 
 /-!
 # Excellence of strict local rings of finite-type field algebras
@@ -97,6 +94,40 @@ theorem isExcellent_localizationAtPrime_strictHenselization
     IsExcellent (Localization.AtPrime p) ∧ IsExcellent C ∧
       (∀ I : Ideal C, IsExcellent (C ⧸ I)) ∧ IsNoetherianRing C ∧
         IsNoetherianRing (C ⧸ nilradical C) := by
-  sorry
+  classical
+  have hL : IsExcellent (Localization.AtPrime p) :=
+    (isExcellent_finiteType_localization (R := k) (A := B)
+      (isExcellent_of_field k) p.primeCompl).1
+  have : IsNoetherianRing (Localization.AtPrime p) := hL.1.1
+  have hnoeth : IsNoetherianRing C :=
+    (Algebra.isNoetherianRing_iff_isStrictHenselization
+      (Localization.AtPrime p) K C hC).mp inferInstance
+  have hind : Algebra.IndEtale (Localization.AtPrime p) C := by
+    let P : CategoryTheory.ObjectProperty
+        (CategoryTheory.Over (CommAlgCat.of (Localization.AtPrime p) K)) :=
+      fun X ↦ Algebra.Etale (Localization.AtPrime p) X.left
+    obtain ⟨c, ⟨hc⟩, ⟨e⟩⟩ := hC
+    obtain ⟨hsmall, hfiltered⟩ :=
+      Algebra.pointedEtale_small_filtered (Localization.AtPrime p) K
+    let : CategoryTheory.EssentiallySmall.{v} P.FullSubcategory := hsmall
+    let : CategoryTheory.IsFiltered P.FullSubcategory := hfiltered
+    let E := CategoryTheory.equivSmallModel.{v} P.FullSubcategory
+    let : CategoryTheory.IsFiltered (CategoryTheory.SmallModel.{v} P.FullSubcategory) :=
+      CategoryTheory.IsFiltered.of_equivalence E
+    let pres : CategoryTheory.Limits.ColimitPresentation P.FullSubcategory c.pt :=
+      ⟨_, c.ι, hc⟩
+    refine ⟨CategoryTheory.SmallModel.{v} P.FullSubcategory, inferInstance, inferInstance,
+      (pres.reindex E.inverse).ofIso e, ?_⟩
+    intro i
+    exact (E.inverse.obj i).property
+  have hweak : (algebraMap (Localization.AtPrime p) C).WeaklyEtale :=
+    RingHom.indEtale_principalZariski_stability.2.2.2.2.2.2.1
+      (Localization.AtPrime p) C _
+      ((RingHom.IndEtale.algebraMap_iff (Localization.AtPrime p) C).mpr hind)
+  have hexc : IsExcellent C :=
+    RingHom.isExcellent_of_weaklyEtale (algebraMap (Localization.AtPrime p) C) hL hweak
+  have hquot (I : Ideal C) : IsExcellent (C ⧸ I) :=
+    (isExcellent_finiteType_localization (R := C) (A := C ⧸ I) hexc ⊥).2
+  exact ⟨hL, hexc, hquot, hnoeth, (hquot (nilradical C)).1.1⟩
 
 end
