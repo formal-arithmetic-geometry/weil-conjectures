@@ -10,7 +10,7 @@
  ],
  "proof": [
   {
-   "text": "Put $P(U)=R(U)\\otimes_{R'(U)}F(U)$, with restrictions induced by those of $R$, $R'$ and $F$. By [def-pur-sheaf-tensor-product], the target $T=R\\otimes_{R'}F$ is the module sheafification $P^\\#$; denote its canonical map by $\\theta:P\\to T$. By [def-weil-presheaf-modules-sheafification], $\\theta$ is additive and $R'$-linear. Define $u_U(m)=\\theta_U(1\\otimes m)$. Tensor additivity and balancing give $1\\otimes(am)=q(a)\\otimes m=a(1\\otimes m)$ for $a\\in R'(U)$, so $u_U$ is $R'(U)$-linear for the specified restricted action. Restrictions send $1\\otimes m$ to $1\\otimes m|_V$, since restriction maps of rings preserve $1$. Thus the $u_U$ form exactly the asserted morphism of module sheaves [def-weil-sheaf-of-modules-category].",
+   "text": "Use the existing sectionwise scalar-extension unit m ↦ 1 ⊗ m and module-sheafification unit. The pure-tensor characterization Classical.choose_spec (exists_changeOfRingsMap q F f) shows that tensor restrictions take 1 ⊗ m to 1 ⊗ res(m), because ring restrictions preserve 1. Extensionality of linear maps proves integralTensorQuotientPresheafUnit_naturality and hence constructs the specified canonical morphism.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification",
@@ -19,55 +19,31 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EK (section-tensor-product) and 03CY (lemma-sheafification-presheaf-modules): tensor construction and its unit"
+    "place": "Tags 03EK and 03CY: tensor restrictions and sheafification unit"
    }
   },
   {
-   "text": "Fix an object $U$ and $t\\in T(U)$. The underlying abelian sheaf of the module sheafification $P^\\#$ is the abelian sheafification, by [def-weil-presheaf-modules-sheafification]. Apply [lem-pc-sites-sheafification-underlying-sets] to this abelian presheaf: the underlying map $|\\theta|$ is also set sheafification, with the same unit. Now [lem-weil-pbc-site-sheafification-sections-local] gives a covering $\\{U_i\\to U\\}$ and $x_i\\in P(U_i)$ such that $t|_{U_i}=\\theta_{U_i}(x_i)$. Its universe hypothesis holds because the site is small in the coefficient universe; one can regard the site and its arrows in that common universe. No hypothesis of enough points is used.",
+   "text": "First prove that the presheaf unit is locally surjective, by TensorProduct.induction_on applied to the property that its image sieve is covering. For zero, every restriction has preimage zero, so the image sieve contains the top sieve. For r ⊗ m, the image sieve of r under q is covering by the hypothesis hq. If f belongs to that sieve, choose a coefficient lift a with q(a)=res(r). The section a • res(m) maps to q(a) ⊗ res(m) = res(r) ⊗ res(m), by linearity of the unit and TensorProduct balancing. The pure-tensor restriction formula identifies the latter tensor with res(r ⊗ m). Thus the image sieve of r ⊗ m contains this covering sieve. For a sum x+y, intersect the covering image sieves given by induction. Along an arrow of the intersection, add its two preimages; additivity gives a preimage of res(x+y). GrothendieckTopology.intersection_covering and superset_covering conclude the induction. This includes zero tensors, zero modules, zero rings and empty coverings.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, tensor additivity and balancing; sites.tex Tag 00Z5, intersections and supersieves of covering sieves"
+   }
+  },
+  {
+   "text": "On underlying abelian presheaves the second factor of the specified unit is definitionally CategoryTheory.toSheafify J (changeOfRingsPresheaf q F).presheaf. Mathlib supplies local surjectivity directly as (J.W_toSheafify _).isLocallySurjective, using the WEqualsLocallyBijective assumption already in the statement. Compose this with the locally surjective presheaf unit using Presheaf.isLocallySurjective_comp. The resulting local surjectivity is also Sheaf.IsLocallySurjective for the image of the unit under SheafOfModules.toSheaf. Mathlib Sheaf.epi_of_isLocallySurjective makes that image epic, and the faithful functor toSheaf reflects epimorphisms via epi_of_epi_map. These are the two required conclusions.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YR (section-sheaves-algebraic-structures), clause (gamma), and Tag 00WK (lemma-sections-sheafification), first assertion"
-   }
-  },
-  {
-   "text": "On each $U_i$ write $x_i=\\sum_{j=1}^{n_i}r_{ij}\\otimes m_{ij}$ with $r_{ij}\\in R(U_i)$ and $m_{ij}\\in F(U_i)$. This is the elementary presentation of the sectionwise tensor product in [def-pur-sheaf-tensor-product]: its additive group is generated by the symbols $r\\otimes m$ modulo the additive and balanced relations, so every element is a finite integral combination of these symbols, and integral coefficients can be absorbed into the second factor. The case $n_i=0$ is the zero tensor and already has lift $0\\in F(U_i)$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), sectionwise algebraic tensor product and its defining additive and balanced relations"
-   }
-  },
-  {
-   "text": "Fix $i$. Use local surjectivity of $q$ to lift $r_{i1}$ on a covering of $U_i$. On each member restrict the remaining $r_{ij}$ and use local surjectivity again to lift $r_{i2}$, retaining the restricted first lift. Induct on $j\\leq n_i$. The composite families are coverings by the transitivity axiom of [def-weil-pbc-sites-and-cohomology]. Thus on a covering $\\{V_{i\\alpha}\\to U_i\\}$ all coefficients lift simultaneously to $a_{ij\\alpha}\\in R'(V_{i\\alpha})$. On each member set $m_{i\\alpha}=\\sum_j a_{ij\\alpha}(m_{ij}|_{V_{i\\alpha}})$. The balanced and additive relations of [def-pur-sheaf-tensor-product] give $1\\otimes m_{i\\alpha}=\\sum_jq(a_{ij\\alpha})\\otimes(m_{ij}|_{V_{i\\alpha}})=x_i|_{V_{i\\alpha}}$. Applying $\\theta$ yields $u(m_{i\\alpha})=t|_{V_{i\\alpha}}$. Compose with the covering of step 2. This proves local surjectivity of $u$. When $n_i=0$, use the identity covering and lift $0$; an empty covering imposes no further condition.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), balancing; sites.tex Tag 00VH (definition-site), transitivity of coverings; explicit argument supplying the quotient step omitted in Bhatt-Scholze Proposition 6.8.4(1)"
-   }
-  },
-  {
-   "text": "To prove the categorical epimorphism assertion directly, take two morphisms $b,c:T\\to G$ of $R'$-module sheaves with $b\\circ u=c\\circ u$. For $t\\in T(U)$, use the covering and lifts from step 4. Naturality gives $b_U(t)|_{V_{i\\alpha}}=b_{V_{i\\alpha}}(u(m_{i\\alpha}))=c_{V_{i\\alpha}}(u(m_{i\\alpha}))=c_U(t)|_{V_{i\\alpha}}$. The uniqueness clause of the sheaf axiom in [def-weil-pbc-sites-and-cohomology] implies $b_U(t)=c_U(t)$. This applies also to an empty covering, when the section set of $G$ on that object has only one element. Since this holds for every $U,t$, the component maps, and hence the module morphisms [def-weil-sheaf-of-modules-category], are equal. This is right cancellation, so $u$ is epic in the required category.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VM and 00VR (sheaf axiom): uniqueness of a section from a covering; the right-cancellation argument is written out"
+    "place": "Tags 00WK and 00VM/00VR, local representatives and separatedness; implemented by Mathlib CategoryTheory.Sites.LocallyBijective and LocallySurjective"
    }
   }
  ],
@@ -75,14 +51,12 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.4(1), p.59, whose proof is left to the reader: supplies its reduction-transition epimorphism using Stacks Tags 03CY, 03EK, 00YR, and 00WK. The coefficient-lifting and cancellation arguments are written out."
+  "place": "Proposition 6.8.4(1), p.59, omitted quotient argument; B2 formalizes coefficient lifting using tensor induction and Mathlib image-sieve and sheafification APIs, following Stacks 03EK, 03CY, 00WK and 00Z5."
  },
  "mathlib_match": null,
  "status": "split",
@@ -257,10 +231,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-pc-sites-sheafification-underlying-sets"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -292,5 +263,15 @@
    "SheafOfModules.integralTensorQuotientUnit",
    "SheafOfModules.integral_tensor_quotient_epimorphism"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261019T002504-L-2140983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

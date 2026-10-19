@@ -1,11 +1,6 @@
 module
 
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-public import Mathlib.CategoryTheory.Sites.EpiMono
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-!
 # Tensor quotient epimorphism
@@ -49,7 +44,15 @@ theorem integralTensorQuotientPresheafUnit_naturality
         ((PresheafOfModules.restrictScalars
           ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map q).hom).obj
             (changeOfRingsPresheaf q F)).map f := by
-  sorry
+  apply ModuleCat.hom_ext
+  ext m
+  change (1 : R.obj.obj V) ⊗ₜ[R₀.obj.obj V, (q.hom.app V).hom] F.val.map f m =
+    changeOfRingsMap q F f ((1 : R.obj.obj U) ⊗ₜ[R₀.obj.obj U, (q.hom.app U).hom] m)
+  rw [show changeOfRingsMap q F f
+      ((1 : R.obj.obj U) ⊗ₜ[R₀.obj.obj U, (q.hom.app U).hom] m) =
+      R.obj.map f 1 ⊗ₜ[R₀.obj.obj V, (q.hom.app V).hom] F.val.map f m from
+    Classical.choose_spec (exists_changeOfRingsMap q F f) 1 m]
+  rw [map_one]
 
 /-- The sectionwise unit into the tensor presheaf, with components `m ↦ 1 ⊗ m`.
 Source: Stacks, Modules on Sites, Tag 03EK
@@ -103,6 +106,56 @@ theorem integral_tensor_quotient_epimorphism
           ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R₀).obj).map
           (integralTensorQuotientUnit q F).val) ∧
       Epi (integralTensorQuotientUnit q F) := by
-  sorry
+  let a := ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map q).hom
+  let η := integralTensorQuotientPresheafUnit q F
+  have hu : PresheafOfModules.IsLocallySurjective J η := by
+    constructor
+    intro U t
+    induction t using TensorProduct.induction_on with
+    | zero =>
+      apply J.superset_covering (S := ⊤) ?_ (J.top_mem U)
+      intro V f _
+      refine ⟨0, ?_⟩
+      change (η.app _).hom 0 = (changeOfRingsPresheaf q F).map f.op 0
+      rw [map_zero, map_zero]
+    | tmul r m =>
+      apply J.superset_covering ?_ (Presheaf.imageSieve_mem J a r)
+      rintro V f ⟨r', hr'⟩
+      refine ⟨r' • (show F.val.obj (Opposite.op V) from F.val.map f.op m), ?_⟩
+      change (η.app _).hom (r' • (show F.val.obj (Opposite.op V) from F.val.map f.op m)) =
+        changeOfRingsMap q F f.op (r ⊗ₜ[R₀.obj.obj _, (q.hom.app _).hom] m)
+      rw [(η.app _).hom.map_smul]
+      rw [show changeOfRingsMap q F f.op
+          (r ⊗ₜ[R₀.obj.obj _, (q.hom.app _).hom] m) =
+          R.obj.map f.op r ⊗ₜ[R₀.obj.obj _, (q.hom.app _).hom] F.val.map f.op m from
+        Classical.choose_spec (exists_changeOfRingsMap q F f.op) r m]
+      change (q.hom.app (Opposite.op V) r') •
+        ((1 : R.obj.obj (Opposite.op V)) ⊗ₜ[R₀.obj.obj (Opposite.op V),
+          (q.hom.app (Opposite.op V)).hom]
+          (show F.val.obj (Opposite.op V) from F.val.map f.op m)) = _
+      rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
+      exact congrArg (fun s ↦ s ⊗ₜ[R₀.obj.obj (Opposite.op V),
+        (q.hom.app (Opposite.op V)).hom]
+        (show F.val.obj (Opposite.op V) from F.val.map f.op m)) hr'
+    | add x y hx hy =>
+      apply J.superset_covering ?_ (J.intersection_covering hx hy)
+      rintro V f ⟨⟨m, hm⟩, ⟨n, hn⟩⟩
+      refine ⟨m + n, ?_⟩
+      change (η.app _).hom (m + n) = (changeOfRingsPresheaf q F).map f.op (x + y)
+      rw [map_add, map_add]
+      exact congrArg₂ (· + ·) hm hn
+  have h : PresheafOfModules.IsLocallySurjective J (integralTensorQuotientUnit q F).val := by
+    change Presheaf.IsLocallySurjective J
+      ((PresheafOfModules.toPresheaf _).map η ≫
+        CategoryTheory.toSheafify J (changeOfRingsPresheaf q F).presheaf)
+    have hθ : Presheaf.IsLocallySurjective J
+        (CategoryTheory.toSheafify J (changeOfRingsPresheaf q F).presheaf) :=
+      (J.W_toSheafify (changeOfRingsPresheaf q F).presheaf).isLocallySurjective
+    exact Presheaf.isLocallySurjective_comp J _ _
+  refine ⟨h, ?_⟩
+  have : Sheaf.IsLocallySurjective ((toSheaf _).map (integralTensorQuotientUnit q F)) := h
+  have : Epi ((toSheaf _).map (integralTensorQuotientUnit q F)) :=
+    Sheaf.epi_of_isLocallySurjective _
+  exact (toSheaf _).epi_of_epi_map inferInstance
 
 end SheafOfModules
