@@ -36,16 +36,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.AlgebraicGeometry.FiniteOpenClosedRecollement
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicOpenUnit
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+
 /-!
 # The ordinary derived open-closed adjunctions
 
@@ -102,7 +95,11 @@ theorem proEtaleOpenClosedAdjunctions
       (ModuleCat.{u + 1} A) j).unit ∧
     IsIso (AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} A) i).counit := by
-  sorry
+  constructor
+  · exact Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
+  · have := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).preservesKInjectiveComplexes
+    exact Adjunction.counit_isIso_of_R_fully_faithful _
 
 end ProEtale
 
@@ -124,6 +121,6 @@ theorem ordinaryDerivedOpenClosedAdjunctions
     IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction
       (ModuleCat.{u + 1} A) j).unit ∧
     IsIso (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).counit := by
-  sorry
+  constructor <;> infer_instance
 
 end AlgebraicGeometry.Etale

@@ -22,108 +22,54 @@
  ],
  "proof": [
   {
-   "text": "Work at the finite constant coefficient stage $A=A_{E,n}$ of [def-weil-open-closed-recollement], in the categories $\\mathcal A_T=\\operatorname{Mod}(A_T)$ on the small pro-etale sites, for $T=X,U,Z$. The module pullback and direct image, with the constant-coefficient structure identification, are those of [def-weil-pbc-proetale-operations]. Its explicit module-adjunction calculation identifies $\\operatorname{Hom}_{\\mathcal A_Z}(i^*F,G)$ with $\\operatorname{Hom}_{\\mathcal A_X}(F,i_*G)$: an underlying abelian map is linear if and only if its adjoint is linear, and the tensor change along the coefficient-ring isomorphism identifies the stated pullback with inverse image. Thus we use this specified sheaf adjunction $i^*\\dashv i_*$. By [prop-weil-pbc-proetale-constant-exact], both $i^*$ and $j^*$ are exact. The sheaf adjunction $j_!\\dashv j^*$ is [lem-weil-extension-by-zero-adjunction], and $j_!$ is exact by [lem-weil-extension-by-zero-exact]. All these functors are additive: inverse image and extension by zero act additively on morphisms, and direct image acts sectionwise. In the following steps the same notation on complexes means application in every degree.",
+   "text": "For fixed module coefficients, the existing canonical open sheaf adjunction has invertible unit, by full faithfulness of extension by zero. Apply CategoryTheory.Adjunction.isIso_mapDerivedCategoryAdjunction_unit to this exact adjunction. By the definition of ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction, this is precisely the required pro-etale derived unit. The ordinary-etale version is already provided by Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit. These statements apply on the entire unbounded derived category.",
    "uses": [
-    "def-weil-open-closed-recollement",
-    "def-weil-pbc-proetale-operations",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); proetale.tex Tag 09AE (definition-extension-zero)"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-exact-functor-derived-factorization], the exact functors $j_!$, $j^*$ and $i^*$ carry quasi-isomorphisms to quasi-isomorphisms and induce the stipulated termwise functors on the ordinary unbounded derived categories. Write $Q_T$ for localization of the homotopy category of $\\mathcal A_T$. Apply [lem-weil-pbc-termwise-adjunction-homotopy] to the open sheaf adjunction of step 1. It gives termwise unit $\\eta^j_C:C\\to j^*j_!C$ and counit $\\varepsilon^j_B:j_!j^*B\\to B$ on homotopy categories, satisfying the two triangle identities. By [lem-weil-pbc-localization-universal-property] (2), the natural transformations $Q_U\\eta^j$ and $Q_X\\varepsilon^j$ descend to natural transformations between the induced derived functors, using their termwise factorization isomorphisms. Their triangle composites equal the identity after precomposition with $Q_U$ or $Q_X$, respectively, because the corresponding equality holds already on homotopy categories. Part (3) of that same localization statement makes these equalities hold on the derived categories. These descended maps therefore give $j_!\\dashv j^*$ on $D(\\mathcal A_U),D(\\mathcal A_X)$, with precisely the termwise unit and counit under the factorization isomorphisms.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), together with the termwise adjunction in Tag 08BJ and the localization universal property; explicit descent argument supplied by the worker"
-   }
-  },
-  {
-   "text": "For every complex $C$ on $U$, the component $\\eta^j_C:C\\to j^*j_!C$ is an isomorphism in every degree by [lem-exc-proetale-open-unit]. The degreewise inverses form a chain map: from $d\\eta=\\eta d$ multiply by the adjacent inverses to get $\\eta^{-1}d=d\\eta^{-1}$. Thus $\\eta^j_C$ is an isomorphism of complexes, and its image under $Q_U$ is an isomorphism. Step 2 identifies this image with the derived unit at $Q_UC$. Every derived object has such a representative, so the natural transformation $\\operatorname{id}\\to j^*j_!$ is an isomorphism on the entire ambient derived category.",
-   "uses": [
-    "lem-exc-proetale-open-unit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BN (lemma-open-immersion), applied termwise to the named adjunction unit"
-   }
-  },
-  {
-   "text": "The small-site hypothesis in [prop-pur-kinjective-resolutions-exist] applies to $Z_{\\mathrm{proet}}$ with its sheaf of commutative rings $A_Z$. Hence for any complex $M$ on $Z$ choose a K-injective resolution $q:M\\to J$ in the category of all $A_Z$-modules. By [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to the additive sheaf adjunction $i^*\\dashv i_*$ of step 1 with exact left adjoint, $i_*J$ is K-injective on $X$. Use the functorial resolution construction $C\\to I(C)$ in [def-weil-pbc-proetale-operations] for the derived direct image. For every K-injective $J$, its resolution map $a_J:J\\to I(J)$ is a quasi-isomorphism between K-injectives, hence a homotopy equivalence by [lem-weil-pbc-kinjective-hom-derived]. Additive $i_*$ preserves its homotopy inverse. Consequently\n$$\n \\chi_J=Q_X(i_*a_J):Q_X(i_*J)\\xrightarrow{\\sim}Ri_*(Q_ZJ)\n$$\nis the canonical computation isomorphism. It is natural for maps of K-injective complexes, because $a$ is a natural transformation. Thus $Ri_*(Q_ZM)$ is represented by $i_*J$ under $Q_Z(q)$ and $\\chi_J$. This uses the K-injective resolution construction, not exactness of the underived $i_*$. Both the resolution and its image may be unbounded and need not be constructible term by term.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); sites-cohomology.tex Tag 07A5 (section-unbounded); injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)"
-   }
-  },
-  {
-   "text": "For a complex $N$ on $X$ and a K-injective complex $J$ on $Z$ as in step 4, compose the bijections\n$$\n\\begin{aligned}\n\\operatorname{Hom}_{D(\\mathcal A_X)}(Q_XN,Ri_*(Q_ZJ))\n&\\cong\\operatorname{Hom}_{D(\\mathcal A_X)}(Q_XN,Q_X(i_*J))\\\\\n&\\cong\\operatorname{Hom}_{K(\\mathcal A_X)}(N,i_*J)\\\\\n&\\cong\\operatorname{Hom}_{K(\\mathcal A_Z)}(i^*N,J)\\\\\n&\\cong\\operatorname{Hom}_{D(\\mathcal A_Z)}(i^*(Q_XN),Q_ZJ).\n\\end{aligned}\n$$\nThe first identification is postcomposition by $\\chi_J^{-1}$ from step 4. The second and fourth are [lem-weil-pbc-kinjective-hom-derived], since both target complexes are K-injective. The middle bijection is the inverse of the termwise Hom bijection in [lem-weil-pbc-termwise-adjunction-homotopy]. All are natural for homotopy classes of chain maps in $N$ and between K-injective $J$'s. Naturality in arbitrary derived morphisms of $Q_XN$ follows by naturality for chain maps and their inverted quasi-isomorphisms, equivalently [lem-weil-pbc-localization-universal-property] (2). Every morphism between $Q_ZJ$ and $Q_ZJ'$ is a unique homotopy class of maps $J\\to J'$ by [lem-weil-pbc-kinjective-hom-derived]; the derived image satisfies $Ri_*(Q_Zh)\\circ\\chi_J=\\chi_{J\\prime}\\circ Q_X(i_*h)$. Indeed, the functorial resolution in [def-weil-pbc-proetale-operations] gives $I(h)\\circ a_J=a_{J\\prime}\\circ h$; applying $Q_Xi_*$ gives exactly this equality. Thus, under the $\\chi$ comparisons, the derived image is the class of the termwise $i_*$-image. A comparison between two K-injective representatives of the same derived object is consequently a homotopy equivalence and remains one after additive $i_*$. This proves independence of representatives and naturality in the second derived variable. Every object on $Z$ has such a representative by step 4. Inverting the displayed bifunctorial bijection and applying [lem-weil-pbc-adjunction-of-natural-bijection] gives $i^*\\dashv Ri_*$, including its unit, counit and triangle identities.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective), the Hom adjunction in Tag 08BJ (lemma-adjoint-preserve-K-injectives); categories.tex Definition 0037 (definition-adjoint); naturality and representative comparison written out"
-   }
-  },
-  {
-   "text": "Write $F=i^*:D(\\mathcal A_X)\\to D(\\mathcal A_Z)$ for the derived pullback, $R=Ri_*$, and $\\alpha_N:F(Q_XN)\\xrightarrow{\\sim}Q_Z(i^*N)$ for the exact-factorization isomorphism of [lem-weil-pbc-exact-functor-derived-factorization]. Denote the counit constructed in step 5 by $e:FR\\to\\operatorname{id}$ and the sheaf counit by $\\varepsilon^i$. For a K-injective complex $J$ on $Z$, the inverse Hom transpose of $\\chi_J:Q_X(i_*J)\\to R(Q_ZJ)$ is $Q_Z(\\varepsilon^i_J)\\circ\\alpha_{i_*J}$: the first bijection of step 5 takes $\\chi_J$ to the identity of $Q_X(i_*J)$, the K-injective Hom bijection takes this to the identity homotopy class, and [lem-weil-pbc-termwise-adjunction-homotopy] takes that identity to $\\varepsilon^i_J$. By the inverse-transpose formula in [lem-weil-pbc-adjunction-of-natural-bijection], this says precisely\n$$\n e_{Q_ZJ}\\circ F(\\chi_J)=Q_Z(\\varepsilon^i_J)\\circ\\alpha_{i_*J},\\qquad\n e_{Q_ZJ}=Q_Z(\\varepsilon^i_J)\\circ\\alpha_{i_*J}\\circ F(\\chi_J)^{-1}.\n$$\nBy [lem-exc-proetale-closed-fully-faithful], every component $\\varepsilon^i_{J^r}:i^*i_*J^r\\to J^r$ is an isomorphism of module sheaves over the same finite constant ring. Write $s^r=(\\varepsilon^i_{J^r})^{-1}$. The chain-map identity $d_J^r\\varepsilon^i_{J^r}=\\varepsilon^i_{J^{r+1}}d_{i^*i_*J}^r$ implies $s^{r+1}d_J^r=d_{i^*i_*J}^rs^r$ by multiplication on the left and right by the inverses. Hence the $s^r$ form an inverse chain map, so $Q_Z(\\varepsilon^i_J)$ and therefore $e_{Q_ZJ}$ are isomorphisms. For any complex $M$ choose $q:M\\to J$ as in step 4 and put $t=Q_Zq$. Naturality gives $e_{Q_ZM}=t^{-1}\\circ e_{Q_ZJ}\\circ FR(t)$, a composite of isomorphisms. Every derived object has a complex representative, proving the asserted closed counit on the entire ambient unbounded category without a quasi-compactness or constructibility assumption.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-exc-proetale-closed-fully-faithful",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AA (lemma-closed-immersion); derived.tex Tag 08BJ for the Hom transpose; degreewise calculation of the named derived counit"
+    "place": "Tag 09BN, followed by the exact derived-adjunction construction in WeilConjectures.CategoryTheory.DerivedCategory.Adjunction"
+   }
+  },
+  {
+   "text": "Closed pro-etale direct image is full and faithful by lem-exc-proetale-closed-fully-faithful. Its exact left adjoint is the specified inverse image, so Adjunction.preservesKInjectiveComplexes makes closed direct image preserve K-injective complexes. The generic full_rightDerivedFunctor and faithful_rightDerivedFunctor instances then make its total right derived functor full and faithful. Apply Adjunction.counit_isIso_of_R_fully_faithful to the exact canonical derivedUpperStarLowerStarAdjunction appearing in the statement. This proves invertibility of that adjunction's actual counit without changing adjunctions or using exactness of underived closed direct image.",
+   "uses": [
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-exc-kinjective-derived-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ and 070I; generic right-derived full faithfulness as implemented in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful"
+   }
+  },
+  {
+   "text": "For the ordinary-etale clause, closed direct image is full and faithful by the existing Etale closed-immersion instances. The existing Etale.preservesKInjectiveComplexes_lowerStar instance and the same generic right-derived full-faithfulness instances give full faithfulness of its right derived functor. Thus its canonical mapDerivedUpperStarLowerStarAdjunction has invertible counit. Combine this with the existing ordinary-etale open unit by conjunction introduction. The complementarity hypothesis is retained verbatim but neither clause needs it.",
+   "uses": [
+    "lem-exc-kinjective-derived-fully-faithful",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ and the fully faithful right-adjoint criterion; ordinary-etale site calculation in WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-open-closed-recollement",
-  "def-weil-pbc-proetale-operations",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-exact",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-exc-proetale-open-unit",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-exc-proetale-closed-fully-faithful",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-exc-proetale-closed-fully-faithful"
+  "lem-exc-kinjective-derived-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-weil-open-closed-recollement-adjunctions.md",
-  "place": "Both paragraphs of ## Proof, expanded using Stacks 03D7, 03DI, 03DJ, 09BN, 09AA, 07A5, 079P, 08BJ and 070I. The descent of the open adjunction and the explicit derived counit calculation are supplied by the worker."
+  "place": "H4, 2026-10-19: use existing exact derived-adjunction unit and K-injective right-derived full faithfulness instead of rebuilding localization descent and Hom transposes. All original signatures and the unit route are preserved."
  },
  "mathlib_searches": [
   {
@@ -294,8 +240,6 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
   "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "reviewed": {
@@ -330,5 +274,15 @@
   "group": "Q24",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) def-amb-p1-trace (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261019T002617-L-2160233",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
