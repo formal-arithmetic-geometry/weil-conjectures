@@ -11,9 +11,67 @@
   "def-per-algebraic-normalized-dualizing",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I=\\ker f$. Since $B\\ne0$, $I$ is proper and $I\\subseteq\\mathfrak m$. The element $1_B$ generates $B$ as an $A$-module: every $b$ is $f(a)1_B$. For an ideal $J\\subseteq B$, choose finite ideal generators of $f^{-1}J$ in $A$; their images generate $J$ by surjectivity. Thus $B$ is Noetherian by [def-weil-pbc-noetherian-ring]. The ideal $\\mathfrak n=f(\\mathfrak m)$ is proper: if $f(a)=1$ with $a\\in\\mathfrak m$, then $1-a\\in I\\subseteq\\mathfrak m$, a contradiction. Every $b\\notin\\mathfrak n$ lifts to $a\\notin\\mathfrak m$, which is a unit, so $b$ is a unit. Hence $B$ is local with maximal ideal $\\mathfrak n$. The map $a+\\mathfrak m\\mapsto f(a)+\\mathfrak n$ identifies $k=A/\\mathfrak m$ with $B/\\mathfrak n$: it is surjective, and if $f(a)=f(m)$ for $m\\in\\mathfrak m$, then $a-m\\in I\\subseteq\\mathfrak m$, so $a\\in\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7N, lemma-normalized-quotient, verification that a nonzero quotient is a finite local map as required by Tag 0AX1."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-map-dualizing-transfer] to $A\\to B$ and $L=\\omega$. Step 1 supplies Noetherianity of $B$ and finiteness of $B$ over $A$. The definition [def-per-algebraic-normalized-dualizing] supplies finite cohomology, a bounded injective representative, and the scalar-action isomorphism for $\\omega$. The transfer theorem gives precisely these three properties for $\\omega_B=R\\operatorname{Hom}_A(B[0],\\omega)$, with action $(b\\varphi)(x)=\\varphi(bx)$. Consequently $\\omega_B$ is an algebraic dualizing complex over $B$. It remains to check its normalization.",
+   "uses": [
+    "lem-trf-finite-map-dualizing-transfer",
+    "def-per-algebraic-normalized-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX1, lemma-normalized-finite, first sentence of proof, invoking Tag 0AX0, lemma-dualizing-finite."
+   }
+  },
+  {
+   "text": "Let $U:D(B)\\to D(A)$ be restriction of scalars, and put $T=R\\operatorname{Hom}_B(k[0],\\omega_B)$, using the residue-field identification of Step 1. Apply the natural derived-Hom isomorphism of [lem-trf-algebraic-shriek-derived-hom-adjunction] with $P=A$, its target ring $B$, $X=k[0]$, and $Y=\\omega$. Its coinduced object $C(Y)$ is exactly $\\omega_B$, including the prescribed $B$-action. It gives $UT\\cong R\\operatorname{Hom}_A(k[0],\\omega)\\cong k[0]$ in $D(A)$; the second isomorphism is normalization in [def-per-algebraic-normalized-dualizing]. The first comparison is evaluation at $1$, represented by $h\\mapsto(x\\mapsto h(x)(1))$, with inverse $g\\mapsto(x\\mapsto[b\\mapsto g(bx)])$. Thus the comparison uses restriction of scalars and the indicated coinduction, not derived tensor with $B$.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "def-per-algebraic-normalized-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX1, lemma-normalized-finite, displayed derived-Hom computation; Tag 0A70, lemma-right-adjoint, and Tag 0A71, lemma-RHom-ext."
+   }
+  },
+  {
+   "text": "Restriction of scalars keeps the underlying groups, kernels and images of a complex unchanged, so Step 3 gives $H^j(T)=0$ for $j\\ne0$ and an $A$-linear isomorphism $\\alpha:H^0(T)\\to k$. This is $B$-linear: given $b=f(a)$ and $v\\in H^0(T)$, one has $\\alpha(bv)=\\alpha(av)=a\\alpha(v)=b\\alpha(v)$, and every $b$ has such a lift. Apply [lem-sf-derived-concentrated-single] in the abelian category of $B$-modules, with $r=0$, to obtain $T\\cong H^0(T)[0]\\cong k[0]$ in $D(B)$. By [def-per-algebraic-normalized-dualizing], this is the required normalization of the dualizing complex established in Step 2.",
+   "uses": [
+    "lem-sf-derived-concentrated-single",
+    "def-per-algebraic-normalized-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0AX1, lemma-normalized-finite, final normalization argument, specialized to the identical residue field in Tag 0A7N; the concentration implication uses derived.tex Tag 08J5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-finite-map-dualizing-transfer",
+  "def-per-algebraic-normalized-dualizing",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-sf-derived-concentrated-single"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7N (lemma-normalized-quotient), expanding the proof of Tag 0AX1 (lemma-normalized-finite) with Tag 0AX0 and the derived restriction/coinduction adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +107,45 @@
    "results": "8 hits; top=['IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing', 'tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain', 'IsLocalRing.finite_quotient_iff', 'instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing', 'IsLocalRing.subsingleton_cotangentSpace_iff', 'IsLocalRing.finrank_cotangentSpace_eq_zero_iff', 'IsDiscreteValuationRing.TFAE', 'IsLocalRing.finrank_cotangentSpace_le_one_iff']; note=; digest=7bc66acadd8147f2",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom along a quotient of Noetherian local rings preserves a normalized dualizing complex",
+   "results": "8 hits; top=['localCohomology.isoSelfLERadical', 'localCohomology.diagram', 'Module.supportDim_le_supportDim_quotSMulTop_succ', 'localCohomology', 'localCohomology.ofSelfLERadical', 'localCohomology.isoOfSameRadical', 'IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing', 'Ext']; note=; digest=c9f97289dd3b5480",
+   "date": "2026-10-19",
+   "verdict": "no match: returned local cohomology, support dimension, ordinary Ext and derived-functor constructions do not state preservation of normalized algebraic dualizing complexes under quotient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Ext",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: returned local cohomology, support dimension, ordinary Ext and derived-functor constructions do not state preservation of normalized algebraic dualizing complexes under quotient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*dualiz|dualiz.*quotient",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: returned local cohomology, support dimension, ordinary Ext and derived-functor constructions do not state preservation of normalized algebraic dualizing complexes under quotient maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom along a surjection preserves normalized dualizing complexes",
+   "results": "8 hits; top=['map_derivedSeries_eq', 'CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology', 'HasDerivedCategory.standard', 'CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf', 'CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'CategoryTheory.Functor.mapDerivedCategory', 'DerivedCategory.instEssSurjCochainComplexIntQ', 'DerivedCategory.instEssSurjHomotopyCategoryIntUpQh']; note=; digest=cc32ff5e3344957c",
+   "date": "2026-10-19",
+   "verdict": "no match: returned local cohomology, support dimension, ordinary Ext and derived-functor constructions do not state preservation of normalized algebraic dualizing complexes under quotient maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient ring inherits Grothendieck local duality from its normalized dualizing complex",
+   "results": "8 hits; top=['localCohomology.isoSelfLERadical', 'Module.supportDim_le_supportDim_quotSMulTop_succ', 'Module.supportDim_quotient_eq_ringKrullDim', 'localCohomology.diagram', 'localCohomology', 'localCohomology.ofSelfLERadical', 'exact_of_isLocalized_maximal', 'localCohomology.ringModIdeals']; note=; digest=a4017b047a2fa247",
+   "date": "2026-10-19",
+   "verdict": "no match: returned local cohomology, support dimension, ordinary Ext and derived-functor constructions do not state preservation of normalized algebraic dualizing complexes under quotient maps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-algebraic-dualizing-generic-degree",
@@ -81,5 +174,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-algebraic-dualizing-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 0A7N and expanded its 0AX1 argument using existing finite-map dualizing transfer and internal derived-Hom adjunction nodes. Proved the elementary quotient, local-ring and residue-field identifications explicitly, and checked the B-linearity of the normalization. No new nodes, no changed statement, and no Lean attachment. Repeated the item Mathlib search under Q138 with two phrasings and retained the inherited searches.",
+  "blueprint": "Supports the inherited from.place: the use of normalized quotient dualizing complexes in Tag 0A7V, in the algebraic local-cohomology input below lem-per-artin-gabber-affine-curve. The four steps expand the quotient input without changing the ancestor/unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-map-dualizing-transfer",
+    "why": "Generic algebraic dualizing transfer under a finite ring map (Stacks 0AX0); the perverse-curve unit does not provide this commutative-algebra tool."
+   },
+   {
+    "node": "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "why": "Generic ordinary-module internal derived-Hom adjunction for restriction and coinduction (Stacks 0A70/0A71), used only to compute Hom from the common residue field; no node of the perverse-curve unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-map-dualizing-transfer",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-47366e072",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-47366e072 (reviewer sub-agent of L); spot-checked: I read Stacks dualizing.tex 0A7N, 0AX1, 0AX0 and 0A7M; the item statement matches 0A7N (B≠0 only makes 'local' meaningful). Step 1 is elementary and correct: B is a Noetherian local quotient, finite over A via 1_B, I ⊆ m, and A/m ≅ B/f(m). Step 2: every hypothesis of lem-trf-finite-map-dualizing-transfer is exactly clauses (i)–(iii) of def-per-algebraic-normalized-dualizing, and its conclusion gives that ω_B is dualizing. Step 3: Θ of lem-trf-algebraic-shriek-derived-hom-adjunction with X=k[0], Y=ω, and C(ω)=ω_B (same action, B commutative) gives U RHom_B(k,ω_B) ≅ RHom_A(k,ω) ≅ k[0]. Step 4: B-linearity of the H^0 iso is checked by lifting, then lem-sf-derived-concentrated-single in Mod(B) gives the normalization. Small cases B=A, B=k, k[[t]]→k and k[t]/t²→k are all consistent. No new nodes and no cycle. The only duplicate candidates are the cited 0AX0 node and scheme-level sec-picard-framework finite-duality nodes, which are not normalized local statements. Batch-5 flags: the closures of both lem-trf-finite-map-dualizing-transfer and lem-trf-algebraic-shriek-derived-hom-adjunction contain only generic module-derived-category algebra (0A66, 0A69, 0A70/0A71, 0D0C, 0G4H) and no trace-formula or Poincaré-duality step, sk-thm-trace-transport or batch-4 target, so both are accepted. I accept the declared tool_uses for both as generic commutative-algebra tools. No changes."
  }
 }
