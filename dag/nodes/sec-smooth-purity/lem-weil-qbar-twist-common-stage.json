@@ -19,100 +19,34 @@
  ],
  "proof": [
   {
-   "text": "Write $B_{F/E}$ for the transitions and $a_{G/F,E,C}:B_{G/F}B_{F/E}C\\xrightarrow{\\sim}B_{G/E}C$ for their canonical composition maps [lem-weil-scalar-extension-composition]. Suppress only the canonical identity-extension unitors. For a fixed common stage $F$, put $X=B_{F/E}C$, $Y=B_{F/E'}C'$ and $b_C=\\beta_{F/E,C}$, $b_{C'}=\\beta_{F/E',C'}$. The supplied natural comparisons of [lem-weil-integral-twist-derived-scalar] are used after the rationalization [def-weil-rationalization-karoubi], exactly as assumed in the statement. Define\n$$t_F(f)=b_{C'}^{-1}\\circ T_{F,m}(f)\\circ b_C.$$\nIts source is $B_{F/E}(T_{E,m}C)$ and its target is $B_{F/E'}(T_{E',m}C')$, so it represents a morphism between the asserted image objects. Naturality of each comparison holds for the rationalized morphisms as part of the hypotheses; no construction with an infinite coefficient ring is being used.",
-   "uses": [
-    "lem-weil-scalar-extension-composition",
-    "lem-weil-integral-twist-derived-scalar",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: typing the representative formula"
-   }
-  },
-  {
-   "text": "Fix $F\\subset G$ and abbreviate $B=B_{G/F}$, $T=T_{G,m}$, $a_C=a_{G/F,E,C}$, $a_{TC}=a_{G/F,E,T_{E,m}C}$ and $d_C=\\beta_{G/E,C}$. The tower equation of [lem-weil-integral-twist-scalar-coherence], after rationalization, is\n$$T(a_C)\\circ\\beta_{G/F,X}\\circ B(b_C)=d_C\\circ a_{TC}.$$\nConsequently\n$$B(b_C)\\circ a_{TC}^{-1}=\\beta_{G/F,X}^{-1}\\circ T(a_C)^{-1}\\circ d_C,$$\nand, for the target object,\n$$a_{TC'}\\circ B(b_{C'}^{-1})=d_{C'}^{-1}\\circ T(a_{C'})\\circ\\beta_{G/F,Y}.$$\nThese equalities follow by composing the tower equation with the displayed inverse isomorphisms on the indicated sides. They apply to $m$ and also to $-m$.",
-   "uses": [
-    "lem-weil-integral-twist-scalar-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: tower equations with endpoints retained"
-   }
-  },
-  {
-   "text": "In the Hom system of [def-weil-algebraically-closed-coefficients], the enlargement of $f$ is $f^G=a_{C'}\\circ B(f)\\circ a_C^{-1}$. The enlargement of $t_F(f)$ is $a_{TC'}\\circ B(t_F(f))\\circ a_{TC}^{-1}$. Substitute the two equalities of Step 2 and use naturality\n$$\\beta_{G/F,Y}\\circ B(T_{F,m}(f))=T(B(f))\\circ\\beta_{G/F,X}$$\nof [lem-weil-integral-twist-derived-scalar]. The adjacent inverse factors cancel, giving\n$$a_{TC'}B(t_F(f))a_{TC}^{-1}=d_{C'}^{-1}T(a_{C'})T(B(f))T(a_C)^{-1}d_C=t_G(f^G).$$\nThus twisting commutes with every enlargement. If two representatives at different stages determine the same class, the cited definition says that their enlargements agree at one further finite common stage. Apply this equality there to see that their twisted representatives also agree. This proves independence of representatives, including arbitrary enlargements.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-weil-integral-twist-derived-scalar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: representative independence by an explicit transport equality"
-   }
-  },
-  {
-   "text": "At a common stage $F$, an identity is represented by $\\mathrm{id}_{B_{F/E}C}$, and $t_F(\\mathrm{id})=b_C^{-1}\\mathrm{id}\\,b_C=\\mathrm{id}$. For composable representatives, enlarge both to a common $F$, as allowed by [def-weil-algebraically-closed-coefficients], and write $b_C,b_{C'},b_{C''}$ for the three comparisons. Then\n$$t_F(g)\\circ t_F(f)=b_{C''}^{-1}T_{F,m}(g)b_{C'}b_{C'}^{-1}T_{F,m}(f)b_C=b_{C''}^{-1}T_{F,m}(g\\circ f)b_C=t_F(g\\circ f).$$\nStep 3 makes this calculation independent of that enlargement. This defines $T_m$ as a functor. Running the same construction with $-m$ defines $T_{-m}$.",
+   "text": "Bundle T_s and b_s as a StageSystem.Morphism F_s on the stage system of [def-weil-algebraically-closed-coefficients]; its coh field is exactly the supplied tower hypothesis. Use the already proved upstream StageSystem.Morphism.functor, whose mapAt formula is b_source.hom followed by T_s(f) followed by b_target.inv. Its quotient construction and tr_mapAt lemma establish independence under enlargement and both functor laws. The requested object equality and representative HEq are definitional equalities.",
    "uses": [
     "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: identity and composition at a common finite stage"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $e_{E,C}:T_{E,-m}T_{E,m}C\\xrightarrow{\\sim}C$ denote the assumed natural line-evaluation inverse identity. For $E\\subset F$ define the comparison for this composite by\n$$\\gamma_{F/E,C}=T_{F,-m}(\\beta^{m}_{F/E,C})\\circ\\beta^{-m}_{F/E,T_{E,m}C}.$$\nIts source is $B_{F/E}(T_{E,-m}T_{E,m}C)$ and its target is $T_{F,-m}T_{F,m}(B_{F/E}C)$. Evaluation compatibility, assumed in the statement using [lem-weil-integral-twist-base-change], says precisely\n$$e_{F,B_{F/E}C}\\circ\\gamma_{F/E,C}=B_{F/E}(e_{E,C}).$$\nIndeed, the two paths tensor $C$ with the two opposite twist lines, extend coefficients, and evaluate the two line factors; the cited compatibility with evaluation equates these paths. The rationalization of [def-weil-rationalization-karoubi] preserves this equality, since it preserves composition and identities. Interchanging $m$ and $-m$ gives the same equation for the other assumed evaluation $e'_{E,C}:T_{E,m}T_{E,-m}C\\xrightarrow{\\sim}C$.",
-   "uses": [
-    "lem-weil-integral-twist-base-change",
-    "def-weil-rationalization-karoubi"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: evaluation compatibility for the composite twist"
-   }
-  },
-  {
-   "text": "For each $(E,C)$ take the common-stage class of $e_{E,C}$. Its enlargement to $F$ is represented by $B_{F/E}(e_{E,C})=e_{F,X}\\gamma_{F/E,C}$ by Step 5. Expanding twice the representative formula of Step 1 shows that $T_{-m}T_m([F,f])$ is represented by\n$$\\gamma_{F/E',C'}^{-1}\\circ T_{F,-m}T_{F,m}(f)\\circ\\gamma_{F/E,C}.$$\nMultiplying this expression on the left by $B_{F/E'}(e_{E',C'})$ gives\n$$e_{F,Y}T_{F,-m}T_{F,m}(f)\\gamma_{F/E,C}=f\\,e_{F,X}\\gamma_{F/E,C}=f\\,B_{F/E}(e_{E,C}),$$\nby naturality of the assumed finite-stage $e_F$. This is the required naturality square on common-stage classes [def-weil-algebraically-closed-coefficients]. Every component is invertible: the class of $e_{E,C}^{-1}$ is its inverse, since their composites are identities already at stage $E$. Hence $T_{-m}T_m\\cong\\mathrm{id}$. Using $e'$ and reversing the two signs in the displayed computation gives $T_mT_{-m}\\cong\\mathrm{id}$.",
+   "text": "For each sign form the morphism of stage systems F_s.comp F_not_s. Its comparison is b_not_s at T_s(C), followed by T_not_s(b_s at C). The finite evaluation homomorphisms e_s,E.hom give a StageSystem.Morphism.Hom from this composite to the identity morphism: unfolding comp and id reduces its comm square to the symmetric supplied evaluation-compatibility equation. Thus StageSystem.Morphism.descNatTrans gives the evaluation on the pair category. Its components are the stage-inclusion images of the finite evaluation components.",
    "uses": [
     "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: descent and naturality of both inverse identities"
-   }
+   "elementary": true
   },
   {
-   "text": "The object $\\Qlb(m)$ of [def-coefficient-twists-detailed] is represented by $E(m)=T_{E,m}(E_S)$, and $\\Qlb(-m)$ by $E(-m)$. At this finite stage the assumed line evaluations identify both ordered tensor products $E(m)\\otimes_E^L E(-m)$ and $E(-m)\\otimes_E^L E(m)$ with the coefficient unit $E_S$. Step 5 proves that these evaluations commute with scalar extension. Their classes are therefore the two inverse tensor identifications in the common-stage interpretation of the cited definition. This proves the asserted invertibility of $\\Qlb(m)$, with inverse $\\Qlb(-m)$.",
+   "text": "Each e_s,E is a natural isomorphism, so the proved StageSystem.Morphism.isIso_descNatTrans makes the descended evaluation invertible. Compose the inverse of functorCompIso, asIso of the descended evaluation, and functorIdIso to obtain U_s followed by U_not_s isomorphic to the identity. The composition and identity comparison components are identities, so simplification leaves precisely the stated stage-inclusion image of e_s,E at each pair. This works for both signs at once, including repeated stages and m=0; all tensor normalization assumptions are preserved in the unchanged statement.",
    "uses": [
-    "def-coefficient-twists-detailed"
+    "def-weil-algebraically-closed-coefficients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-    "place": "Final sentence, common finite stages: invertibility of the common-stage twist line"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-scalar-extension-composition",
-  "lem-weil-integral-twist-derived-scalar",
-  "def-weil-rationalization-karoubi",
-  "lem-weil-integral-twist-scalar-coherence",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-weil-integral-twist-base-change",
-  "def-coefficient-twists-detailed"
+  "def-weil-algebraically-closed-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
-  "place": "Final sentence; explicit conjugation, transport, composition and evaluation-descent calculations under the stated finite-stage hypotheses."
+  "place": "Final sentence; specializes the already proved generic StageSystem.Morphism quotient-functor and natural-transformation descent in WeilConjectures.CategoryTheory.StageSystem.Functor to the supplied coherent twist and evaluation data."
  },
  "mathlib_searches": [
   {
@@ -225,9 +159,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-scalar-extension-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -258,5 +190,15 @@
   "by": "Q25",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-ade21",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261019T005410-L-2764158",
+  "kind": "proof",
+  "note": "independent cc review: qbar_twist_common_stage proof (StageSystem.Morphism functor/descNatTrans/functorCompIso/functorIdIso specialization) against node lem-weil-qbar-twist-common-stage statement and new proof steps; unit sk-prop-sf-existence realized empty; importer TwistPreservesFiniteness compiled"
  }
 }

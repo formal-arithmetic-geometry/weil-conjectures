@@ -16832,3 +16832,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:54 L: merged deliver/Q9/Sheaf.Paper.SfIntegralConstructibleTriangulated (stage 3; reviewer PASS; first push; landing 20261019T005408-L-2763732 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R1/Sheaf.Paper.CompletedOpenExchangeTransport (stage 3; reviewer PASS; first push; landing 20261019T005409-L-2763900 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:54 L: merged deliver/R1/Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses (stage 3; reviewer PASS; first push; landing 20261019T005409-L-2764010 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:54 L: merged deliver/R1/Sheaf.Paper.QbarTwistCommonStage (stage 3; reviewer PASS; first push; landing 20261019T005410-L-2764158 (proof); batch 20261019T005255; modules 1; new nodes 0)

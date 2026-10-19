@@ -10,10 +10,7 @@ public import Sheaf.Paper.IntegralTwistDerivedScalarCanonical
 public import Sheaf.Paper.IntegralTwistScalarCoherence
 public import Sheaf.Paper.PbcCoefficientTwists
 public import Sheaf.CategoryTheory.StageSystemFunctorDescent
-import Sheaf.Paper.SfScalarExtensionComposition
-import Sheaf.Paper.IntegralTwistBaseChange
-import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
-import Sheaf.Paper.SfRationalizationKaroubi
+import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Tate twists descend through common finite coefficient stages
 
@@ -145,6 +142,30 @@ theorem qbar_twist_common_stage (m : ℤ)
         ∀ (s : Bool) (P : Pair l Ω S),
           HEq ((ε s).hom.app P)
             (((stageSystem l Ω S).ι P.stage).map ((e s P.stage).hom.app P.obj)) := by
-  sorry
+  -- The generic quotient descent uses exactly the supplied tower equation.
+  let F : Bool → (stageSystem l Ω S).Morphism (stageSystem l Ω S) := fun s ↦
+    { Φ := T s, β := b s, coh := _htower s }
+  -- Evaluation compatibility is the transformation square for the composite family.
+  let τ : ∀ s : Bool, (F s |>.comp (F (!s))).Hom
+      (StageSystem.Morphism.id (stageSystem l Ω S)) := fun s ↦
+    { τ := fun E ↦ (e s E).hom
+      comm := fun h C ↦ by
+        simpa [F, StageSystem.Morphism.comp, StageSystem.Morphism.id] using
+          (_heval s _ _ h C).symm }
+  have hτ (s : Bool) : IsIso (StageSystem.Morphism.descNatTrans (τ s)) :=
+    StageSystem.Morphism.isIso_descNatTrans (τ s) (fun E ↦ by dsimp [τ]; infer_instance)
+  -- Compare descent of composition and identity with the descended evaluation.
+  let ε : ∀ s : Bool, (F s).functor ⋙ (F (!s)).functor ≅ 𝟭 (Pair l Ω S) := fun s ↦
+    (StageSystem.Morphism.functorCompIso (F s) (F (!s))).symm ≪≫
+      asIso (StageSystem.Morphism.descNatTrans (τ s)) ≪≫
+        StageSystem.Morphism.functorIdIso
+  refine ⟨fun s ↦ (F s).functor, ?_, ?_, ε, ?_⟩
+  · intro s P
+    rfl
+  · intro s P Q E hP hQ f
+    rfl
+  · intro s P
+    apply heq_of_eq
+    simp [ε, StageSystem.Morphism.descNatTrans_app, τ]
 
 end WeilConjectures
