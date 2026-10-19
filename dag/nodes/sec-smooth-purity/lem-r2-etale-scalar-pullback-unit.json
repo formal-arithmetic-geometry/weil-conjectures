@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7: derived pullback and its tensor/scalar adjunction normalization."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7: derived pullback and its tensor/scalar adjunction normalization."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactSupportCoefficientChange",
+  "date": "2026-10-19",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-r2-etale-scalar-mate-normalization",
+   "place": "Etale scalar/pullback comparison preserves scalar-adjunction units",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarPullbackUnit",
+  "file": "lean/Sheaf/Paper/EtaleScalarPullbackUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarPullbackUnit",
+  "statement": "theorem scalarPullbackUnit\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategoryModule A Y) :\n    L(upperStar (ModuleCat.{u + 1} A) f).map\n        ((Adjunction.ofIsRightAdjoint\n          (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ)).unit.app K) ≫\n      (scalarRestrictionPullbackIso φ f).hom.app ((scalarExtension φ Y).obj K) ≫\n        (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).map\n          ((scalarPullbackIso φ f).hom.app K) =\n      (Adjunction.ofIsRightAdjoint\n        (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)).unit.app\n          (L(upperStar (ModuleCat.{u + 1} A) f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-19"
+ },
+ "id": "lem-r2-etale-scalar-pullback-unit",
+ "title": "Etale scalar/pullback comparison preserves scalar-adjunction units",
+ "statement": "For an arbitrary homomorphism φ:A→B of commutative rings and arbitrary scheme morphism f:X→Y, let S_T⊣U_T be the specified derived scalar extension adjunction [lem-pur-derived-change-of-rings]. Let a:Lf_A U_Y≅U_X Lf_B be the canonical exact restriction/pullback square [lem-sbc-canonical-restrict-scalars-functor-comparisons], and lambda:Lf_B S_Y≅S_X Lf_A the comparison normalized on K-flat representatives [lem-pur-etale-scalar-mate-projection]. For every K∈D(Y,A), Lf_A(unit_Y,K) followed by a at S_Y K followed by U_X(lambda_K) is unit_X,Lf_A K. No boundedness or coefficient-flatness is imposed.",
+ "stmt_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof": [
+  {
+   "text": "Represent K by a flat-term K-flat complex P. Use the representative normalization of lambda, and the definition of the scalar representative map as the adjunct of the ordinary scalar unit.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the representative equation through the X scalar adjunction. The geometric resolving comparison is the exact derived counit followed by its homotopy-quotient comparison. The exact derived-adjunction factorization identifies the transpose with the ordinary scalar/pullback square. Its isomorphism is the composite-adjunction conjugate, so its unit identity follows from the triangle identities.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the invertible resolving comparisons. This proves the unit equality at Q(P). Naturality transports the equality along the representative isomorphism to every K.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unit_mateEquiv|scalarPullbackUnit",
+   "results": "['Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Adjunction/Mates.lean', 'Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean']",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "results": "['CategoryTheory.iterated_mateEquiv_conjugateEquiv']",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of rings pullback comparison is the adjunction mate of restriction of scalars and therefore preserves scalar adjunction units",
+   "results": "['ModuleCat.ExtendRestrictScalarsAdj.unit_app', 'ModuleCat.ExtendRestrictScalarsAdj.unit', 'ModuleCat.ExtendRestrictScalarsAdj.Unit.map', 'ModuleCat.homEquiv_extendScalarsComp', \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit', 'ModuleCat.extendRestrictScalarsAdj', 'ModuleCat.instIsRightAdjointRestrictScalars']",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar extension pullback comparison preserves adjunction unit",
+   "results": "['CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app', 'CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app', 'CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_unit_app', 'CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app', 'SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit', 'CategoryTheory.PullbackShift.adjunction_unit', 'CategoryTheory.Adjunction.ext', 'CategoryTheory.Functor.instIsIsoAppUnitLanAdjunctionOfHasPointwiseLeftKanExtension']",
+   "date": "2026-10-19",
+   "verdict": "No derived sheaf coefficient comparison found. The hits concern ordinary scalar adjunctions or unrelated pullback units; use the recorded derived-functor and mate interfaces."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35de6",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261019T231317-L-572627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35de6",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261019T231317-L-572627",
+  "kind": "interface",
+  "note": "independent cc review: item proofs + 3 new modules vs live clone and unit sk-prop-sf-trace-perfectness (realized empty; removed ProEtaleSiteComparisonFiniteLevel is a step of sk-prop-pe-comparison-morphism, still imported elsewhere); 10 direct importers compiled against delivery; new sorry scalarPullbackUnit checked against scalarPullbackIso K-flat normalization"
+ }
+}

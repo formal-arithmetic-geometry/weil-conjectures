@@ -1,0 +1,134 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 07A7 and 0D6J: derived adjunction construction and compatibility of restriction with direct image."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 07A7 and 0D6J: derived adjunction construction and compatibility of restriction with direct image."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactSupportCoefficientChange",
+  "date": "2026-10-19",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-r2-proper-coefficient-universal",
+   "place": "Bounded normalization of the etale scalar mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarMateNormalization",
+  "file": "lean/Sheaf/Paper/EtaleScalarMateNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarMatePlusNormalization",
+  "statement": "theorem scalarMatePlusNormalization\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (∀ N : _root_.DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)),\n      IsIso ((scalarRestrictionDirectImageMap φ f).app N.obj)) ∧\n    (∀ (K : _root_.DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))\n      (M : _root_.DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n      (η : K ⟶ (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj M),\n      (Adjunction.ofIsRightAdjoint\n        (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ)).unit.app\n          (R(lowerStar (ModuleCat.{u + 1} A) f).obj K.obj) ≫\n        (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).map\n          ((scalarMate φ f).app K.obj ≫\n            R(lowerStar (ModuleCat.{u + 1} B) f).map\n              (((Adjunction.ofIsRightAdjoint\n                (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)).homEquiv\n                  K.obj M.obj).symm η.hom)) =\n        (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlusCompatibility.inv.app K ≫\n          (((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus.map η ≫\n            (asIso (rightDerivedLowerStarRestrictScalars φ f)).inv.app M).hom) ≫\n          (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ).map\n            ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorPlusCompatibility.hom.app\n              M))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-19"
+ },
+ "id": "lem-r2-etale-scalar-mate-normalization",
+ "title": "Bounded normalization of the etale scalar mate",
+ "statement": "For an arbitrary map of commutative rings φ:A→B and arbitrary scheme morphism f:X→Y, use the actual scalar extension adjunction S_T⊣U_T and canonical scalar/pullback isomorphism lambda [lem-pur-etale-scalar-mate-projection]. Let beta:S_Y Rf_A→Rf_B S_X be its geometric mate and delta:U_Y Rf_B→Rf_A U_X the mate of the canonical exact restriction/pullback square [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Then delta_N is invertible for every N∈D⁺(X,B). For K∈D⁺(X,A), M∈D⁺(X,B), eta:K→U_X M, and c:S_X K→M its scalar-adjoint transpose, unit_Y followed by U_Y(beta_K followed by Rf_B(c)) equals Rf_A(eta) followed by the inverse canonical D+ restriction/direct-image comparison, after the standard inclusion isomorphisms. This is the equality displayed verbatim in lean.statement. No finiteness, properness or Noetherian hypothesis is imposed.",
+ "stmt_deps": [
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Transport the ambient restriction mate along the exact-versus-left-derived inverse-image isomorphisms. The formula for mates under a left-adjoint isomorphism identifies it with the mate of the exact derived square.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the full-subcategory restriction formula for the derived adjunction counit. The bounded restriction-adjunction counit identity, naturality of the exact inverse-image square, and injectivity of the geometric adjunction transpose identify delta_N with U_Y of the inverse D+ inclusion comparison, then the bounded restriction comparison, then the A inclusion comparison. Each factor is invertible.",
+   "uses": [
+    "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose unit_Y followed by restriction of beta and delta through the A-geometric adjunction. Apply the two mate counit equations and naturality of the restriction square. The scalar-pullback unit equality replaces the middle factors by the X scalar unit. Naturality of that unit and of the A-geometric counit give Rf_A of the X scalar unit.",
+   "uses": [
+    "lem-r2-etale-scalar-pullback-unit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of delta moves Rf_B(c) across it. The scalar adjunction transpose equation gives eta. Substitute the bounded formula from step 2 and cancel the invertible comparison. Naturality of the right-derived D+ inclusion isomorphism gives the displayed normalized formula.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities",
+  "lem-r2-etale-scalar-pullback-unit"
+ ],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarMate|scalarPullbackIso",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "['CategoryTheory.unit_mateEquiv_symm']",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar extension mate commutes with scalar adjunction unit and derived restriction of scalars on bounded below etale sheaf complexes",
+   "results": "['ModuleCat.homEquiv_extendScalarsComp', 'ModuleCat.ExtendRestrictScalarsAdj.unit_app', 'ModuleCat.ExtendRestrictScalarsAdj.unit', 'ModuleCat.ExtendRestrictScalarsAdj.Unit.map', 'SheafOfModules.pushforwardSections_unitHomEquiv', 'ModuleCat.ExtendRestrictScalarsAdj.counit_app', 'ModuleCat.ExtendRestrictScalarsAdj.counit', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map']",
+   "date": "2026-10-19",
+   "verdict": "No matching complete statement; use the named adjunction and derived-functor interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "geometric mate of scalar extension agrees with bounded below restriction of scalars adjunction comparison",
+   "results": "['ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply', 'ModuleCat.ExtendRestrictScalarsAdj.homEquiv', 'RestrictScalars', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars', 'ModuleCat.extendRestrictScalarsAdj', 'ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars']",
+   "date": "2026-10-19",
+   "verdict": "No derived sheaf coefficient comparison found. The hits concern ordinary scalar adjunctions or unrelated pullback units; use the recorded derived-functor and mate interfaces."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35de6",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261019T231317-L-572627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-35de6",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261019T231317-L-572627",
+  "kind": "interface",
+  "note": "independent cc review: item proofs + 3 new modules vs live clone and unit sk-prop-sf-trace-perfectness (realized empty; removed ProEtaleSiteComparisonFiniteLevel is a step of sk-prop-pe-comparison-morphism, still imported elsewhere); 10 direct importers compiled against delivery; new sorry scalarPullbackUnit checked against scalarPullbackIso K-flat normalization"
+ }
+}
