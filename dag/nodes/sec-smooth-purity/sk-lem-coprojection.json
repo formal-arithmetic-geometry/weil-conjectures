@@ -25,145 +25,90 @@
  ],
  "proof": [
   {
-   "text": "Work on the small representatives fixed in the statement. For each scheme $T$, apply [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-pc-sheaf-modules-tensor-closed] to the constant commutative ring sheaf $\\Lambda_T$. Its module category is Grothendieck abelian and has an additive closed symmetric monoidal tensor. The functorial flat cover of [lem-pc-sites-modules-functorial-flat-cover] meets the functorial-flat-resolution hypothesis of [lem-sfb-derived-monoidal]. Hence its derived tensor has natural associativity and unit isomorphisms. It is the K-flat tensor used in the statement, since both constructions are computed by the same K-flat total tensor. Its unit is $\\Lambda_T$ in degree zero, with the two unit isomorphisms of [lem-kun-tensor-unit].",
+   "text": "Use the existing K-flat derived monoidal structure and the two inverse tensor isomorphisms to obtain the inverse tensor adjunctions. The proved generic Adjunction.tensorRightCompIsoOfTensorIso packages their composition with a given adjunction and uniqueness of right adjoints. This is the source Hom/Yoneda calculation, uniformly over the ambient derived category.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-sites-modules-functorial-flat-cover",
     "lem-sfb-derived-monoidal",
-    "lem-kun-tensor-unit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Hom calculation, the two uses of invertibility: ambient tensor structure needed to reassociate tensor inverses."
-   }
-  },
-  {
-   "text": "Choose a two-sided inverse $M$ of $L$ as in the statement. Put $T_L(E)=E\\otimes^L L$ and $T_M(E)=E\\otimes^L M$. The composites are naturally isomorphic to the identity: $(E\\otimes^L L)\\otimes^L M\\cong E\\otimes^L(L\\otimes^L M)\\cong E\\otimes^L\\Lambda_X\\cong E$, and the same composite with $L,M$ reversed. Apply [lem-weil-pbc-quasi-inverse-adjoint] to these two natural isomorphisms. Thus tensoring by $M$ is left adjoint to tensoring by $L$, and in particular $\\operatorname{Hom}(P,K\\otimes^L L)\\cong\\operatorname{Hom}(P\\otimes^L M,K)$ naturally in $P,K$. No boundedness of $M$ is required.",
-   "uses": [
+    "lem-kun-tensor-unit",
     "lem-weil-pbc-quasi-inverse-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Hom calculation, second line: moving the invertible factor from target to source."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   },
   {
-   "text": "By [prop-weil-pbc-inverse-image-modules-exact] the constant-coefficient inverse image is exact and carries the coefficient unit to the coefficient unit. By [lem-weil-pbc-exact-functor-derived-functor] its left derived functor is represented termwise. For any scheme morphism $u:U\\to V$, [lem-kun-inverse-image-monoidal] gives $Lu^*(E\\otimes^L F)\\cong Lu^*E\\otimes^L Lu^*F$. Pulling back each of the two inverse isomorphisms therefore gives $Lu^*L\\otimes^L Lu^*M\\cong\\Lambda_U$ and $Lu^*M\\otimes^L Lu^*L\\cong\\Lambda_U$. Repeating Step 2 on $U$ gives the natural Hom transfer for the inverse pair $Lu^*L,Lu^*M$.",
+   "text": "The derived inverse image is strong monoidal, by leftDerivedUpperStarMonoidal. Consequently the two inverse identities pull back and supply the inverse tensor adjunction on Z used by the generic helper.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-kun-inverse-image-monoidal",
-    "lem-weil-pbc-quasi-inverse-adjoint"
+    "lem-kun-inverse-image-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Hom calculation, final line: the restriction of an invertible factor is invertible."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   },
   {
-   "text": "The closed immersion $i$ is proper by [lem-weil-pbc-closed-immersion-proper](a). Since $\\Lambda$ is finite and commutative, [lem-etale-proper-projection-formula-finite-objectwise] applies on the ordinary unbounded small-etale categories: for every $A$ on $Z$ it gives the projection isomorphism $Ri_*A\\otimes^L M\\cong Ri_*(A\\otimes^L Li^*M)$. Its map and naturality are those of [def-kun-projection-formula-map], where $Ri_*$ is the total right derived functor computed on K-injective resolutions [lem-weil-pbc-kinjective-total-derived]. The closed-immersion adjunction of [lem-exc-closed-ambient] is stated for the direct image $i_*$ applied termwise. These two functors agree: $i$ is finite by [lem-weil-pbc-closed-immersion-finite], so $i_*$ is exact on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact], hence exact on $\\Lambda$-module sheaves, whose kernels and cokernels are computed on the underlying abelian sheaves [def-weil-sheaf-of-modules-category]. By [lem-weil-pbc-exact-functor-derived-functor] the termwise functor is then a right derived functor of $Q\\circ i_*$, and every complex computes $Ri_*$; uniqueness of the derived functor (the universal property in [lem-weil-pbc-kinjective-total-derived]) gives a natural isomorphism $i_*\\cong Ri_*$ on $D(Z_{\\Et},\\Lambda)$. Transporting the adjunction along it gives $Ri_*\\dashv Ri^!$ on these categories. These inputs require neither a Noetherian hypothesis nor a global cohomological-dimension bound.",
+   "text": "A closed immersion is proper. finite_projection_iso assembles the canonical proper projection maps into an isomorphism of bifunctors. Flip its two arguments and evaluate at the inverse object M; this gives the natural isomorphism Ri*(-) tensor M ≅ Ri*(- tensor Li*M). The existing closed ambient adjoint theorem is already stated for the actual total derived direct image, so Adjunction.ofIsLeftAdjoint supplies precisely Ri* ⊣ Ri!. Apply the generic helper and evaluate at K. No boundedness or constructibility assertion about intermediate objects is required.",
    "uses": [
     "lem-weil-pbc-closed-immersion-proper",
     "lem-etale-proper-projection-formula-finite-objectwise",
     "def-kun-projection-formula-map",
-    "lem-exc-closed-ambient",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-exc-closed-ambient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Hom calculation, first, third and fourth lines: closed direct image adjunction and its projection formula."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   },
   {
-   "text": "For every $A\\in D(Z_{\\Et},\\Lambda)$, use the adjunction from Step 4, the inverse-tensor adjunction from Step 2, the inverse of the projection isomorphism from Step 4, the same closed adjunction again, and Step 3. The resulting bijection is\n$$\\begin{aligned}\\operatorname{Hom}_Z(A,Ri^!(K\\otimes^L L))&\\cong\\operatorname{Hom}_X(Ri_*A,K\\otimes^L L)\\\\&\\cong\\operatorname{Hom}_X(Ri_*A\\otimes^L M,K)\\\\&\\cong\\operatorname{Hom}_X(Ri_*(A\\otimes^L Li^*M),K)\\\\&\\cong\\operatorname{Hom}_Z(A\\otimes^L Li^*M,Ri^!K)\\\\&\\cong\\operatorname{Hom}_Z(A,Ri^!K\\otimes^L Li^*L).\\end{aligned}$$\nEvery arrow is natural in $A$ and $K$: the adjunction Hom bijections are natural, the projection isomorphism is natural in $A$, and the inverse tensor adjunctions were constructed from natural tensor isomorphisms. We test against the entire ambient category, so no claim that $Ri^!K$ remains bounded constructible is needed.",
+   "text": "For the base specialization, DerivedCategory.isInvertible.leftDerivedUpperStar pulls the inverse pair of B back along f. Apply the ambient co-projection and tensor its result with the inverse of leftDerivedUpperStarComp.app B to identify Li*Lf*B with L(i ≫ f)*B.",
    "uses": [
-    "lem-exc-closed-ambient",
-    "lem-weil-pbc-quasi-inverse-adjoint",
-    "lem-etale-proper-projection-formula-finite-objectwise",
-    "def-kun-projection-formula-map"
+    "lem-kun-inverse-image-monoidal",
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "The complete five-line Hom calculation, now testing against arbitrary ambient objects."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   },
   {
-   "text": "The preceding bijections give an isomorphism between the represented presheaves of the two displayed objects on $D(Z_{\\Et},\\Lambda)$. By [lem-galois-yoneda-fully-faithful], this natural transformation and its inverse come from morphisms between the objects; their composites induce identity transformations, hence are identity morphisms by the injectivity in that statement. This proves the asserted object isomorphism, natural in $K$. In fact the argument proved it for arbitrary ambient $K$ and every ambient invertible $L$, which permits all the specializations below even if their intermediate objects have not separately been shown to belong to $D^b_{ctf}$.",
+   "text": "For the Tate specialization, the supplied inverse identities show twist X m invertible. Its shift by 2*m is invertible by DerivedCategory.isInvertible.shift, using derivedTensorShiftIso. Apply ambient co-projection to that shifted factor. The tensor commShiftIso identifies the input with (K tensor twist X m)[2*m]; the inverse-image commShiftIso and twistPullback identify the restricted shifted factor with (twist Z m)[2*m]; the tensor commShiftIso gives the desired shifted output.",
    "uses": [
-    "lem-galois-yoneda-fully-faithful"
+    "def-kun-derived-tensor",
+    "lem-kun-inverse-image-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "After the displayed calculation: Yoneda gives the asserted isomorphism."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   },
   {
-   "text": "For a morphism $f:X\\to Y$ and an invertible $B$ on $Y$, Step 3 makes $Lf^*B$ invertible. Apply Step 6 with this factor. The inverse-image composition isomorphism of [lem-weil-pbc-inverse-image-composition](2) is compatible with the constant coefficient actions. For each $a\\in\\Lambda$, multiplication by $a$ is an endomorphism of the underlying abelian sheaf, and naturality of that composition isomorphism makes it commute with multiplication by $a$. The coefficient-ring identification of [prop-weil-pbc-inverse-image-modules-exact](1)-(2) identifies these endomorphisms with the restricted module actions. Sections of the constant ring sheaf are locally constant, so locally they have such a constant value $a$; compatibility with every local scalar then follows by restriction and the sheaf axiom. Thus the comparison is an isomorphism of module sheaves. Applying it in each cochain degree gives the same isomorphism on derived categories, since these inverse images are exact and represented termwise by [lem-weil-pbc-exact-functor-derived-functor]. It identifies $Li^*Lf^*B$ with $L(f\\circ i)^*B$, giving the base-pullback formula.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Statement, base-pullback specialization; inverse-image composition identification written out."
-   }
-  },
-  {
-   "text": "The Tate twist datum gives inverse pairs $\\Lambda_X(m),\\Lambda_X(-m)$ and their pullback identifications. Their shifts by $2m,-2m$ are again inverse: in the total tensor, reindexing the summands identifies $E[r]\\otimes^L F[s]$ with $(E\\otimes^L F)[r+s]$, with the sign $(-1)^{sp}$ on the summand of first shifted degree $p$. Here $r,s$ are even, so the signs are all $1$ and the differentials agree directly. The same even-shift reindexing identifies $K\\otimes^L\\Lambda_X(m)[2m]$ with $K(m)[2m]$. Termwise inverse image commutes with these shifts and restricts this factor to $\\Lambda_Z(m)[2m]$. Substitute it into Step 6 to obtain $Ri^!(K(m)[2m])\\cong(Ri^!K)(m)[2m]$.",
-   "uses": [
-    "def-kun-derived-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Statement, Tate-twist specialization, with the even-shift tensor reindexing."
-   }
-  },
-  {
-   "text": "Let $f$ be separated, so its diagonal $\\Delta:X\\hookrightarrow W=X\\times_YX$ is a closed immersion by [def-weil-proper-morphism]. Put $L_j=Lp_j^*\\omega_f$ for $j=1,2$. Step 3 makes both $L_j$ invertible from the assumed invertibility of $\\omega_f$; no smooth-purity theorem is used. Apply the ambient result of Step 6 first to $K=L_1,L=L_2$. Insert the unit isomorphism $L_1\\cong\\Lambda_W\\otimes^L L_1$ from [lem-kun-tensor-unit], apply Step 6 again with $K=\\Lambda_W,L=L_1$, and tensor that second isomorphism with $L\\Delta^*L_2$. The composite is precisely\n$$R\\Delta^!(L_1\\otimes^L L_2)\\cong(R\\Delta^!\\Lambda_W\\otimes^L L\\Delta^*L_1)\\otimes^L L\\Delta^*L_2,$$\nwhich is the claimed diagonal identity, with the displayed parenthesization.",
+   "text": "For separated f its diagonal is closed. Both projected omega factors are invertible by monoidal pullback. Insert the inverse left unitor in the first factor and apply ambient co-projection twice, first to (unit tensor L₁) tensor L₂ and then to unit tensor L₁. Tensoring the second resulting isomorphism with the restriction of L₂ gives exactly the stated left-associated threefold tensor.",
    "uses": [
     "def-weil-proper-morphism",
+    "lem-kun-inverse-image-monoidal",
     "lem-kun-tensor-unit"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-    "place": "Final sentence of proof: applying the co-projection twice on the product."
+    "place": "Hom comparison and specializations, implemented by the existing derived tensor and adjunction APIs."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-modules-functorial-flat-cover",
   "lem-sfb-derived-monoidal",
   "lem-kun-tensor-unit",
   "lem-weil-pbc-quasi-inverse-adjoint",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-kun-inverse-image-monoidal",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-etale-proper-projection-formula-finite-objectwise",
   "def-kun-projection-formula-map",
   "lem-exc-closed-ambient",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-sheaf-of-modules-category",
-  "lem-galois-yoneda-fully-faithful",
   "lem-weil-pbc-inverse-image-composition",
   "def-kun-derived-tensor",
   "def-weil-proper-morphism"
@@ -171,7 +116,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-coprojection/sk-lem-coprojection.proof.md",
-  "place": "Five-line Hom comparison, Yoneda, and two-factor specialization; expanded formally with the existing ordinary-etale tool nodes."
+  "place": "B5 stage-3 proof: source inverse-tensor adjunction/projection argument via tensorRightCompIsoOfTensorIso, followed by composition, shift, and diagonal specializations. The closed ambient adjunction already targets R(lowerStar)."
  },
  "mathlib_searches": [
   {
@@ -415,25 +360,15 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-modules-functorial-flat-cover",
   "lem-sfb-derived-monoidal",
   "lem-kun-tensor-unit",
   "lem-weil-pbc-quasi-inverse-adjoint",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-kun-inverse-image-monoidal",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-etale-proper-projection-formula-finite-objectwise",
   "def-kun-projection-formula-map",
   "lem-exc-closed-ambient",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-kinjective-total-derived",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -461,5 +396,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Four conjuncts state every displayed formula of the node. Uses the recorded isBoundedConstructible and hasTorAmplitudeIn, and the right adjoint of the derived closed direct image from lem-exc-closed-ambient. The formal twist datum is unbundled into its objects, two-sided inverse identifications and pullback identifications exactly as specified by the node; the current upstream HasTateTwist only guarantees these properties under HasInvertibleExponent and is therefore not the formal all-scheme datum of this node. Existing upstream Coprojection declarations use a different constructibility predicate and the compactification-based right adjoint of R i_!, so they cannot be attached as exact matches to this node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261019T093255-L-2287644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

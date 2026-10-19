@@ -13,23 +13,13 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.FlatCoverFunctor
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 import Sheaf.AlgebraicGeometry.ProjectionFormulaFiniteObjectwise
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Adjunction.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.CategoryTheory.Yoneda
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
+import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
+import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 
 /-!
 # Co-projection on ordinary small etale derived categories
@@ -51,10 +41,51 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+section General
+
+universe v
+
+variable (A : Type v) [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+  [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+
+attribute [local instance] Sheaf.monoidalCategory
+
+private noncomputable def coprojectionOfProjection [UpperStarPreservesFlat A]
+    {Z X : Scheme.{u}} (i : Z ⟶ X)
+    (G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤
+      _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (adj : R(lowerStar A i) ⊣ G)
+    (L M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (e : ((derivedTensor A X).obj M).obj L ≅ 𝟙_ _)
+    (e' : ((derivedTensor A X).obj L).obj M ≅ 𝟙_ _)
+    [IsIso (rightDerivedLowerStarProjectionMap A i)] :
+    derivedTensorRight A X L ⋙ G ≅
+      G ⋙ derivedTensorRight A Z ((L(upperStar A i)).obj L) := by
+  letI := leftDerivedUpperStarMonoidal A i
+  exact adj.tensorRightCompIsoOfTensorIso (L(upperStar A i)) e e'
+    (asIso (((flipFunctor _ _ _).map (rightDerivedLowerStarProjectionMap A i)).app M))
+
+end General
+
+private theorem ambientCoprojection
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+    (K L : DerivedCategoryModule Λ X) (hL : DerivedCategory.isInvertible Λ X L) :
+    Nonempty ((R(lowerStar (ModuleCat.{u + 1} Λ) i)).rightAdjoint.obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj L) ≅
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj
+        ((R(lowerStar (ModuleCat.{u + 1} Λ) i)).rightAdjoint.obj K)).obj
+          ((L(upperStar (ModuleCat.{u + 1} Λ) i)).obj L)) := by
+  obtain ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hL
+  have := finite_projection_iso Λ i
+  exact ⟨(coprojectionOfProjection (ModuleCat.{u + 1} Λ) i _
+    (Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} Λ) i))) L M e e').app K⟩
 
 /-- Co-projection and its three specializations on ordinary unbounded derived categories.
 Source: blueprint main-20261015, sec-smooth-purity/sk-lem-coprojection/_section.md
@@ -157,6 +188,43 @@ theorem closedImmersion_coprojection
                 ((L(upperStar (ModuleCat.{u + 1} Λ) (pullback.diagonal f))).obj
                   ((L(upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f f))).obj omega)))).obj
           ((L(upperStar (ModuleCat.{u + 1} Λ) (pullback.diagonal f))).obj
-            ((L(upperStar (ModuleCat.{u + 1} Λ) (pullback.snd f f))).obj omega)))) := sorry
+            ((L(upperStar (ModuleCat.{u + 1} Λ) (pullback.snd f f))).obj omega)))) := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro Z X i _ K L _ _ _ _ hL
+    exact ambientCoprojection Λ i K L hL
+  · intro Z X Y i _ f K B _ _ hB
+    obtain ⟨e⟩ := ambientCoprojection Λ i K _ (hB.leftDerivedUpperStar f)
+    exact ⟨e ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).mapIso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i f).app B).symm⟩
+  · intro Z X i _ K m _ _
+    have ht : DerivedCategory.isInvertible Λ X (twist X m) :=
+      ⟨twist X (-m), _twistInverse X m⟩
+    obtain ⟨e⟩ := ambientCoprojection Λ i K ((twist X m)⟦2 * m⟧) (ht.shift (2 * m))
+    obtain ⟨et⟩ := _twistPullback i m
+    exact ⟨(R(lowerStar (ModuleCat.{u + 1} Λ) i)).rightAdjoint.mapIso
+        ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).commShiftIso
+          (2 * m)).app (twist X m)).symm ≪≫ e ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).mapIso
+        (((L(upperStar (ModuleCat.{u + 1} Λ) i)).commShiftIso (2 * m)).app _ ≪≫
+          (shiftFunctor _ (2 * m)).mapIso et) ≪≫
+      (((derivedTensor (ModuleCat.{u + 1} Λ) Z).obj _).commShiftIso
+        (2 * m)).app _⟩
+  · intro X Y f _ omega homega
+    let i : X ⟶ pullback f f := pullback.diagonal f
+    let L₁ : DerivedCategoryModule Λ (pullback f f) :=
+      (L(upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f f))).obj omega
+    let L₂ : DerivedCategoryModule Λ (pullback f f) :=
+      (L(upperStar (ModuleCat.{u + 1} Λ) (pullback.snd f f))).obj omega
+    obtain ⟨e₁⟩ := ambientCoprojection Λ i (constantComplex Λ (pullback f f)) L₁
+      (homega.leftDerivedUpperStar (pullback.fst f f))
+    obtain ⟨e₂⟩ := ambientCoprojection Λ i
+      (((derivedTensor (ModuleCat.{u + 1} Λ) (pullback f f)).obj
+        (constantComplex Λ (pullback f f))).obj L₁) L₂
+      (homega.leftDerivedUpperStar (pullback.snd f f))
+    exact ⟨(R(lowerStar (ModuleCat.{u + 1} Λ) i)).rightAdjoint.mapIso
+        (((derivedTensor (ModuleCat.{u + 1} Λ) (pullback f f)).mapIso
+          (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) (pullback f f) L₁).symm).app L₂) ≪≫
+      e₂ ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso e₁).app _⟩
 
 end AlgebraicGeometry.Etale
