@@ -10,11 +10,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
 # Open pro-etale pullback evaluation and its specified adjunction unit
@@ -52,6 +50,52 @@ noncomputable def proEtaleOpenSectionProjection {U X : Scheme.{u}}
     (proEtaleOpenComposition j).obj ((proEtaleBaseChange j).obj V) ⟶ V :=
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
     (inferInstance : WeaklyEtale j) trivial).counit.app V
+
+private noncomputable def openRingComparison {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] (A : Type u) [CommRing A] :
+    (proEtaleConstantRing U A).obj ≅
+      (proEtaleOpenComposition j).op ⋙ (proEtaleConstantRing X A).obj := by
+  let G := proEtaleOpenComposition j
+  have : G.IsContinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : G.IsCocontinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  exact (sheafToPresheaf _ _).mapIso
+    ((G.pushforwardContinuousSheafificationCompatibility CommRingCat.{u + 1}
+      (ProEt.topology U) (ProEt.topology X)).app
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+
+private theorem openRingComparison_constant {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] (A : Type u) [CommRing A]
+    (W : U.ProEt) (a : ULift.{u + 1, u} A) :
+    ((openRingComparison j A).hom.app (op W))
+        ((toSheafify (ProEt.topology U)
+          ((Functor.const U.ProEtᵒᵖ).obj
+            (CommRingCat.of (ULift.{u + 1, u} A)))).app (op W) a) =
+      (toSheafify (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj
+          (CommRingCat.of (ULift.{u + 1, u} A)))).app
+            (op ((proEtaleOpenComposition j).obj W)) a := by
+  let G := proEtaleOpenComposition j
+  have : G.IsContinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : G.IsCocontinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  exact congrArg (fun f ↦ (f.app (op W)) a)
+    (G.toSheafify_pullbackSheafificationCompatibility CommRingCat.{u + 1}
+      (ProEt.topology U) (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A))))
+
+private theorem ringDirectImage_constant {U X : Scheme.{u}}
+    (j : U ⟶ X) (A : Type u) [CommRing A] :
+    proEtaleRingDirectImageMap j (proEtaleConstantRing X A) (proEtaleConstantRing U A)
+        (proEtaleConstantRingComparison j A) = proEtaleCoefficientDirectImageMap j A := by
+  change (proEtaleSheafAdjunction j CommRingCat.{u + 1}).homEquiv _ _
+    (proEtaleCoefficientInverseImageMap j A) = _
+  change (proEtaleSheafAdjunction j CommRingCat.{u + 1}).homEquiv _ _
+    (((proEtaleSheafAdjunction j CommRingCat.{u + 1}).homEquiv _ _).symm
+      (proEtaleCoefficientDirectImageMap j A)) = _
+  exact Equiv.apply_symm_apply _ _
 
 /-- Open inverse image is evaluation on the same scheme over the ambient base,
 with both naturalities, coefficient linearity and the specified unit normalization.
@@ -124,6 +168,105 @@ theorem proEtaleOpenUnitEvaluation {U X : Scheme.{u}} (j : U ⟶ X)
           rho M ((proEtaleBaseChange j).obj V)
               (((proEtaleConstantRingAdjunction A j).unit.app M).val.app (op V) m) =
             M.val.map (proEtaleOpenSectionProjection j V).op m) := by
-  sorry
+  let F := proEtaleOpenComposition j
+  let G := proEtaleBaseChange j
+  have : F.IsContinuous (ProEt.topology U) (ProEt.topology X) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
+  let adj : F ⊣ G := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j
+    (inferInstance : WeaklyEtale j) trivial
+  let R := proEtaleConstantRing X A
+  let S := proEtaleConstantRing U A
+  let d := openRingComparison j A
+  let φ : ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S) ⟶
+      (F.sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology U) (ProEt.topology X)).obj
+          ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) :=
+    ⟨Functor.whiskerRight d.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let ψ : ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) ⟶
+      (G.sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology X) (ProEt.topology U)).obj
+          ((sheafCompose (ProEt.topology U) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S) :=
+    ⟨Functor.whiskerRight
+      (proEtaleRingDirectImageMap j R S (proEtaleConstantRingComparison j A)).hom
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  let ηX := toSheafify (ProEt.topology X)
+    ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
+  let ηU := toSheafify (ProEt.topology U)
+    ((Functor.const U.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
+  have hψ : ηX ≫ (proEtaleCoefficientDirectImageMap j A).hom =
+      Functor.whiskerLeft G.op ηU := by
+    exact toSheafify_sheafifyLift (ProEt.topology X) _ _
+  have H₁c : Functor.whiskerRight (NatTrans.op adj.counit) R.obj =
+      (proEtaleCoefficientDirectImageMap j A).hom ≫ G.op.whiskerLeft d.hom := by
+    apply sheafify_hom_ext (ProEt.topology X) _ _
+      ((G.sheafPushforwardContinuous CommRingCat.{u + 1}
+        (ProEt.topology X) (ProEt.topology U)).obj
+          ((F.sheafPushforwardContinuous CommRingCat.{u + 1}
+            (ProEt.topology U) (ProEt.topology X)).obj R)).property
+    apply NatTrans.ext
+    funext V
+    ext a
+    change R.obj.map (adj.counit.app V.unop).op (ηX.app V a) =
+      d.hom.app (op (G.obj V.unop))
+        ((proEtaleCoefficientDirectImageMap j A).hom.app V (ηX.app V a))
+    rw [show (proEtaleCoefficientDirectImageMap j A).hom.app V (ηX.app V a) =
+      ηU.app (op (G.obj V.unop)) a from congrArg (fun f ↦ f.app V a) hψ]
+    rw [openRingComparison_constant]
+    exact (congrArg (fun f ↦ f a) (ηX.naturality (adj.counit.app V.unop).op)).symm
+  have H₂c : d.hom ≫ F.op.whiskerLeft (proEtaleCoefficientDirectImageMap j A).hom ≫
+      Functor.whiskerRight (NatTrans.op adj.unit) S.obj = 𝟙 S.obj := by
+    apply sheafify_hom_ext (ProEt.topology U) _ _ S.property
+    apply NatTrans.ext
+    funext W
+    ext a
+    change S.obj.map (adj.unit.app W.unop).op
+      ((proEtaleCoefficientDirectImageMap j A).hom.app (op (F.obj W.unop))
+        (d.hom.app W (ηU.app W a))) = ηU.app W a
+    rw [openRingComparison_constant]
+    rw [show (proEtaleCoefficientDirectImageMap j A).hom.app (op (F.obj W.unop))
+      (ηX.app (op (F.obj W.unop)) a) = ηU.app (op (G.obj (F.obj W.unop))) a from
+        congrArg (fun f ↦ f.app (op (F.obj W.unop)) a) hψ]
+    exact (congrArg (fun f ↦ f a) (ηU.naturality (adj.unit.app W.unop).op)).symm
+  have H₁ : Functor.whiskerRight (NatTrans.op adj.counit)
+      ((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj =
+          ψ.hom ≫ G.op.whiskerLeft φ.hom := by
+    dsimp only [ψ]
+    rw [ringDirectImage_constant]
+    exact congrArg (fun f ↦ Functor.whiskerRight f
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) H₁c
+  have H₂ : φ.hom ≫ F.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op adj.unit)
+        ((sheafCompose (ProEt.topology U)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj = 𝟙 _ := by
+    dsimp only [ψ]
+    rw [ringDirectImage_constant]
+    exact congrArg (fun f ↦ Functor.whiskerRight f
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) H₂c
+  let radj := SheafOfModules.pushforwardPushforwardAdj adj φ ψ H₁ H₂
+  let e := (proEtaleConstantRingAdjunction A j).leftAdjointUniq radj
+  refine ⟨d, openRingComparison_constant j A, ?_⟩
+  let rho : ∀ (M : proEtaleRingModules X R) (W : U.ProEt),
+      ((proEtaleConstantRingPullback A j).obj M).val.obj (op W) ≃+
+        M.val.obj (op (F.obj W)) := fun M W ↦
+    { toFun := ((e.app M).hom.val.app (op W))
+      invFun := ((e.app M).inv.val.app (op W))
+      left_inv := by
+        intro m
+        exact congrArg (fun f ↦ f.val.app (op W) m) (e.app M).hom_inv_id
+      right_inv := by
+        intro m
+        exact congrArg (fun f ↦ f.val.app (op W) m) (e.app M).inv_hom_id
+      map_add' := map_add _ }
+  refine ⟨rho, ?_, ?_, ?_, ?_⟩
+  · intro M W r m
+    exact (((e.app M).hom.val.app (op W)).hom.map_smul r m)
+  · intro M W W' b m
+    exact PresheafOfModules.naturality_apply (e.app M).hom.val b.op m
+  · intro M N h W m
+    exact congrArg (fun f ↦ f.val.app (op W) m) (e.hom.naturality h)
+  · intro M V m
+    exact congrArg (fun f ↦ f.val.app (op V) m)
+      ((proEtaleConstantRingAdjunction A j).unit_leftAdjointUniq_hom_app radj M)
 
 end AlgebraicGeometry.Scheme
