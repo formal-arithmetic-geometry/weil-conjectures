@@ -27,46 +27,34 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-chow-affine-immersion] with $Y=\\operatorname{Spec}K$ and $U=X$. It supplies a finite number $n$ of algebra generators, the closed immersion $e:X\\hookrightarrow\\mathbf A^n_K$ induced by the corresponding polynomial-algebra surjection, and its composite immersion $j:X\\hookrightarrow\\mathbf P^n_K$ through the standard open $D_+(x_0)=\\mathbf A^n_K$. All these maps are over $K$.",
-   "uses": [
-    "lem-chow-affine-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
-    "place": "Proof, first sentence: polynomial presentation and the standard affine chart; compare Stacks Tag 0200, proof step 3"
-   }
-  },
-  {
-   "text": "The finite-type hypothesis makes $X\\to\\operatorname{Spec}K$ quasi-compact by [def-weil-finite-type-morphism]; taking the preimage of the entire affine base shows that $X$ is quasi-compact. The base $\\operatorname{Spec}K$ is affine by [def-weil-affine-spectrum]. Thus [lem-chow-closed-model] applies to the immersion $j$ of step 1. Set $\\bar X=\\operatorname{SIm}(j)$, the scheme-theoretic closure in $\\mathbf P^n_K$ supplied by the closed-model statement. The cited closed-model statement gives the factorization $X\\xrightarrow{a}\\bar X\\xrightarrow{i}\\mathbf P^n_K$, with $a$ a scheme-theoretically dense open immersion, $i$ a closed immersion, and $\\bar X\\to\\operatorname{Spec}K$ proper. Its structure morphism is the composite with the projective-space projection, so $a$ is over $K$. Properness of $\\bar X\\to\\operatorname{Spec}K$ includes separatedness by [def-weil-proper-morphism]. In the commutative triangle $X\\xrightarrow{a}\\bar X\\to\\operatorname{Spec}K$, the source structure map is of finite type and $a$ is an open immersion. Therefore [lemma-nagata-open-immersion-qc-over-separated-target] makes $a$ quasi-compact, checking the hypothesis of the density definition used in step 3.",
+   "text": "Use exists_finset_closure_range_appTop_union_eq_top for the affine finite-type structure map to obtain a finite set s of global sections generating the coordinate ring over the base. Put n = Option s and i = none. The function on {k : n // k ≠ i} given by some a ↦ a has range exactly s, also when s is empty. AffineSpace.isClosedImmersion_homOfVector gives the closed immersion e, and AffineSpace.homOfVector_over gives its compatibility with the structure map. Compose e with the inverse standard chart isomorphism and the open inclusion to define j; it is an immersion. This directly implements the polynomial presentation in the source, without the more general exists_isImmersion_projectiveSpace interface, which does not retain e.",
    "uses": [
     "def-weil-finite-type-morphism",
-    "def-weil-affine-spectrum",
-    "lem-chow-closed-model",
-    "def-weil-proper-morphism",
-    "lemma-nagata-open-immersion-qc-over-separated-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01RG, lemma-quasi-compact-immersion; Tag 01WC, lemma-locally-projective-proper; blueprint proof, closure sentence"
-   }
-  },
-  {
-   "text": "The scheme-theoretic density in step 2 means that $\\mathcal O_{\\bar X}\\to a_*\\mathcal O_X$ is injective, as specified in [def-nagata-scheme-theoretically-dense-open]. This implies topological density directly: if the complement of the closure of $a(X)$ were nonempty, choose a nonempty affine open $W=\\operatorname{Spec}A$ inside that complement, using the local affine description of schemes [def-pc-scheme]. Then $a^{-1}(W)=\\varnothing$, so injectivity on sections would give an injective map $A=\\Gamma(W,\\mathcal O_{\\bar X})\\to\\Gamma(\\varnothing,\\mathcal O_X)=0$. Hence $A=0$, whose spectrum is empty by [def-weil-affine-spectrum], contradicting the choice of $W$. Thus $a(X)$ is dense in $\\bar X$. This is also the topological-density conclusion of Stacks Tag 01RG, proved here rather than assumed from a definition.",
-   "uses": [
-    "def-nagata-scheme-theoretically-dense-open",
-    "def-pc-scheme",
-    "def-weil-affine-spectrum"
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01RG, lemma-quasi-compact-immersion, final assertion (elementary implication from the supplied sheaf injection)"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
+    "place": "Proof, first two sentences: finite generators, polynomial presentation, and the standard affine chart"
    }
   },
   {
-   "text": "The closed immersion $i:\\bar X\\hookrightarrow\\mathbf P^n_K$ of step 2, followed by its structural projection to $\\operatorname{Spec}K$, is exactly the finite-projective-space embedding required by [def-kun-projective]. Consequently $\\bar X$ is projective over $K$. Its properness was supplied in step 2; by [def-weil-proper-morphism], properness includes finite type. In particular $\\bar X$ is of finite type over the same field $K$, as needed for the dimension assertion.",
+   "text": "The affine scheme X is quasi-compact, and finite projective space over Spec K is separated and therefore quasi-separated. Thus quasiCompact_of_compactSpace makes j quasi-compact. Apply [lemma-nagata-immersion-open-in-scheme-image] to j: Mathlib supplies IsOpenImmersion j.toImage and IsDominant j.toImage. The latter gives DenseRange j.toImage directly. The image inclusion j.imageι is a closed immersion by construction. No separate sheaf-injectivity argument or quasi-compactness proof for j.toImage is needed.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-proper-morphism",
+    "lemma-nagata-immersion-open-in-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RG, lemma-quasi-compact-immersion; Mathlib Morphisms/Immersion.lean:259 and IdealSheaf/Subscheme.lean:720"
+   }
+  },
+  {
+   "text": "Equip j.image with the K-structure morphism j.imageι followed by the projective-space projection. The closed immersion j.imageι itself witnesses IsHProjective for this map, using the finite coordinate type n. An H-projective morphism is proper, so this structure map is locally of finite type and quasi-compact.",
    "uses": [
     "def-kun-projective",
     "def-weil-proper-morphism"
@@ -74,37 +62,35 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
-    "place": "Proof, closed-subscheme hence projective sentence; Stacks Tag 01W1, definition-proper"
+    "place": "Proof, closed subscheme hence projective sentence"
    }
   },
   {
-   "text": "Apply the dense-open clause of [lem-kun-dimension-extension] to the finite-type $K$-scheme $\\bar X$ from step 4 and the open immersion $a:X\\hookrightarrow\\bar X$ from step 2, whose topological density was proved in step 3. It gives $\\kundim X=\\kundim\\bar X$. Reversing this equality proves the last clause of the item. Together with the construction and projectivity above this proves every assertion, including the indicated choice of the scheme-theoretic closure.",
+   "text": "Apply the dense-open clause of [lem-kun-dimension-extension] to j.toImage into the finite-type K-scheme j.image, and reverse the equality. This gives topologicalKrullDim j.image = topologicalKrullDim X. All constructions and the dimension theorem include empty schemes, and n has the distinguished element none even when the generator set is empty.",
    "uses": [
     "lem-kun-dimension-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0A21, lemma-dimension-locally-algebraic, items (3) and (8); blueprint proof, final dimension sentence"
+    "place": "Tag 0A21, lemma-dimension-locally-algebraic, items (3) and (8)"
    }
   }
  ],
  "proof_deps": [
-  "lem-chow-affine-immersion",
   "def-weil-finite-type-morphism",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
   "def-weil-affine-spectrum",
-  "lem-chow-closed-model",
   "def-weil-proper-morphism",
-  "lemma-nagata-open-immersion-qc-over-separated-target",
-  "def-nagata-scheme-theoretically-dense-open",
-  "def-pc-scheme",
+  "lemma-nagata-immersion-open-in-scheme-image",
   "def-kun-projective",
   "lem-kun-dimension-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-compactification-affine.md",
-  "place": "Proof paragraph, with closure facts checked against Stacks Tags 01RG and 01WC and dimension checked against Tag 0A21"
+  "place": "Proof paragraph, implemented directly with finite affine generators, Mathlib quasi-compact immersion/image instances (Stacks 01RG), H-projectivity, and the dense-open clause of lem-kun-dimension-extension (Stacks 0A21); C3, 2026-10-20"
  },
  "mathlib_searches": [
   {
@@ -246,5 +232,15 @@
   "group": "Q30",
   "result": "pass",
   "note": "Wrote review.md. All hypotheses, conclusion clauses, dependencies, source constructions, universes, edge cases, docstrings, and verbatim statement checked. Immutable module compiled cleanly through scompile.py; no repairs needed or branch changes made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261019T231047-L-544354",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

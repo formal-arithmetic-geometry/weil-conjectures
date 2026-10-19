@@ -11,10 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
-import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.DimensionExtension
 
 /-!
@@ -74,6 +72,37 @@ theorem exists_affine_projective_compactification (K : Type u) [Field K]
       IsOpenImmersion j.toImage ∧ DenseRange j.toImage ∧
       IsHProjective (j.imageι ≫ ℙ(n; Spec (.of K)) ↘ Spec (.of K)) ∧
       topologicalKrullDim j.image = topologicalKrullDim X := by
-  sorry
+  classical
+  obtain ⟨s, hs⟩ := exists_finset_closure_range_appTop_union_eq_top (X ↘ Spec (.of K))
+  let n := Option s
+  let i : n := none
+  let v : {k : n // k ≠ i} → Γ(X, ⊤) := fun a ↦ a.val.elim 0 Subtype.val
+  have hv : Set.range v = (s : Set Γ(X, ⊤)) := by
+    ext x
+    constructor
+    · rintro ⟨⟨a, ha⟩, rfl⟩
+      cases a with
+      | none => exact (ha rfl).elim
+      | some b => exact b.property
+    · intro hx
+      exact ⟨⟨some ⟨x, hx⟩, Option.some_ne_none _⟩, rfl⟩
+  let e := AffineSpace.homOfVector (X ↘ Spec (.of K)) v
+  have he : IsClosedImmersion e :=
+    AffineSpace.isClosedImmersion_homOfVector _ _ (by rw [hv]; exact hs)
+  let j := e ≫ (ProjectiveSpace.standardOpenIso n (Spec (.of K)) i).inv ≫
+    (ProjectiveSpace.standardOpen n (Spec (.of K)) i).ι
+  have : IsImmersion j := by dsimp [j]; infer_instance
+  have : QuasiSeparatedSpace ℙ(n; Spec (.of K)) :=
+    quasiSeparatedSpace_of_quasiSeparated (ℙ(n; Spec (.of K)) ↘ Spec (.of K))
+  have : QuasiCompact j := inferInstance
+  have hp : IsHProjective (j.imageι ≫ ℙ(n; Spec (.of K)) ↘ Spec (.of K)) :=
+    ⟨n, inferInstance, j.imageι, inferInstance, rfl⟩
+  let : j.image.Over (Spec (.of K)) :=
+    ⟨j.imageι ≫ ℙ(n; Spec (.of K)) ↘ Spec (.of K)⟩
+  have : IsHProjective (j.image ↘ Spec (.of K)) := hp
+  refine ⟨n, inferInstance, i, e, j, he, AffineSpace.homOfVector_over _ _, rfl,
+    inferInstance, j.toImage.denseRange, hp, ?_⟩
+  exact ((topologicalKrullDim_fieldExtension_and_denseOpen (K := K) (X := j.image)).2
+    X j.toImage j.toImage.denseRange).symm
 
 end AlgebraicGeometry
