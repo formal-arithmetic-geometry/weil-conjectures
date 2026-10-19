@@ -17,9 +17,138 @@
   "def-nagata-effective-cartier-ideal",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $p\\in T$, put $\\ell_p=\\operatorname{length}_{\\mathcal O_{X,p}}(\\mathcal O_{X,p}/\\mathcal I_p)$. The quotient is cyclic and its support in the spectrum of the stalk is contained in the maximal ideal: its other points correspond to proper generizations of $p$, which cannot belong to the finite set of closed points $T$. The finite-length criterion [lem-sc-generic-stalk-finite-length] applies when this quotient is nonzero; a zero quotient has length zero. Thus $N=\\sum_{p\\in T}\\ell_p$ is a natural number. Prove the assertion simultaneously for all the stated triples $(X,T,\\mathcal I)$ by strong induction on $N$.",
+   "uses": [
+    "lem-sc-generic-stalk-finite-length",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, first paragraph: finite colengths and induction on their sum."
+   }
+  },
+  {
+   "text": "If $N=0$, every quotient stalk at $T$ is zero (a nonzero module has the strict submodule chain $0\\subsetneq M$). Every stalk outside $T$ is zero by hypothesis. Hence $\\mathcal I=\\mathcal O_X$. Its generator $1$ is a nonzerodivisor, so the length-zero sequence satisfies the effective Cartier and invertibility conclusions.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "def-nagata-effective-cartier-ideal",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, first paragraph: the zero case."
+   }
+  },
+  {
+   "text": "If $N>0$, choose $p\\in T$ with $\\ell_p>0$ and blow up its reduced closed subscheme, writing $b:X'\\to X$. The centre ideal is of finite type because $X$ is Noetherian. By [lemma-nagata-blowup-proper] the morphism is proper, hence of finite type, so [lem-weil-pbc-finite-type-over-noetherian] makes $X'$ Noetherian. By [thm-nagata-blowup-principalizes-center], the extended centre ideal $\\mathcal L\\subseteq\\mathcal O_{X'}$ is effective Cartier. It cuts out the scheme-theoretic fibre $E=b^{-1}(p)$, and [thm-nagata-global-blowup-complement] identifies $X'\\setminus E$ with $X\\setminus\\{p\\}$.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, second paragraph: blow up one point; preliminary discussion before the lemma."
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{X,p}$ and $I=\\mathcal I_p$. The morphism $\\operatorname{Spec}A\\to X$ is flat by [lem-sbc-canonical-stalk-spectrum-flat]. Flat base change of blowups [thm-nagata-blowup-flat-base-change] therefore identifies $Y=X'\\times_X\\operatorname{Spec}A$ with $\\operatorname{Bl}_{\\mathfrak m_A}(\\operatorname{Spec}A)$; the pulled-back reduced centre is cut out by $\\mathfrak m_A$. The exceptional fibre $E_Y$ is identified with $E$, since both are the base change to $\\operatorname{Spec}\\kappa(p)$. Apply [lem-per-local-surface-maximal-blowup-geometry] to $A$: $E_Y$ is a projective line, and its closed points have regular local rings of dimension $2$ on $Y$.",
+   "uses": [
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-per-local-surface-maximal-blowup-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, cartesian square and its exceptional divisors; local regularity input from Tag 0AGR."
+   }
+  },
+  {
+   "text": "The ideal $I$ is proper because $\\ell_p>0$, and its quotient has finite length by step 1. Apply [lem-per-local-surface-weak-transform-colength-drop]. It gives $d\\geq1$, $I\\mathcal O_Y\\subseteq\\mathcal O_Y(-dE_Y)$ and the residual ideal $\\mathcal J_Y=I\\mathcal O_Y(dE_Y)$. Its quotient is supported on finitely many closed points $S\\subset E_Y$, with total local length strictly less than $\\ell_p$.",
+   "uses": [
+    "lem-per-local-surface-weak-transform-colength-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, application of Tag 0AGT to the chosen stalk ideal."
+   }
+  },
+  {
+   "text": "Here is the global ideal inclusion omitted in the source. Choose an affine neighbourhood $\\operatorname{Spec}R$ of $p$, with prime $\\mathfrak m$, and an affine open $\\operatorname{Spec}B\\subset b^{-1}(\\operatorname{Spec}R)$. For a point $q\\in E$ in this open, with prime $Q\\subset B$, one has $Q\\cap R=\\mathfrak m$. Set $W=R\\setminus\\mathfrak m$. The corresponding affine base change is $\\operatorname{Spec}(W^{-1}B)$, and $B_Q\\cong(W^{-1}B)_{W^{-1}Q}$: every element of $W$ is already a unit in $B_Q$, and both maps send a fraction to the same fraction. The extended ideals of $\\mathcal I$ and of the centre agree under this identification. Thus the local inclusion of step 5 gives $\\mathcal I\\mathcal O_{X',q}\\subseteq\\mathcal L_q^d$ at every $q\\in E$. Off $E$ the right side is the unit ideal. Stalkwise inclusion gives $\\mathcal I\\mathcal O_{X'}\\subseteq\\mathcal L^d$. Locally choose a nonzerodivisor generator $e$ for $\\mathcal L$ and set $\\mathcal J=e^{-d}(\\mathcal I\\mathcal O_{X'})\\subseteq\\mathcal O_{X'}$. Changing $e$ by a unit changes this ideal by that unit's inverse $d$th power, so the local ideals agree and glue. They are quasi-coherent, and $\\mathcal I\\mathcal O_{X'}=\\mathcal L^d\\mathcal J$.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, the inclusion marked \"some details omitted\" and the definition of the residual ideal."
+   }
+  },
+  {
+   "text": "The stalk identifications of step 6 identify $\\mathcal J$ on $E$ with $\\mathcal J_Y$, and preserve the lengths of its stalk quotients. Off $E$ the factor $\\mathcal L$ is the unit ideal, so $\\mathcal J$ agrees with $\\mathcal I$ under $X'\\setminus E\\cong X\\setminus\\{p\\}$. Let $T'$ consist of the points corresponding to $S$ and the unique lifts of $T\\setminus\\{p\\}$. These are closed in $X'$: the first set is closed in the closed fibre $E$, and each of the other points is the entire fibre over its closed image. Their local rings are regular of dimension $2$, by steps 4 and 6 on $E$ and the complement isomorphism elsewhere. The quotient $\\mathcal O_{X'}/\\mathcal J$ is supported in $T'$, and $$\\sum_{q\\in T'}\\operatorname{length}_{\\mathcal O_{X',q}}(\\mathcal O_{X',q}/\\mathcal J_q)<\\ell_p+\\sum_{t\\in T\\setminus\\{p\\}}\\ell_t=N.$$ This uses the unweighted local-length inequality of step 5, so no equality of residue fields is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, finite residual support and decrease of the sum of lengths."
+   }
+  },
+  {
+   "text": "Apply the strong induction hypothesis to $(X',T',\\mathcal J)$, which satisfies every hypothesis by steps 3 and 7 and has strictly smaller invariant. It gives a finite tower $h:Z\\to X'$ of blowups at reduced closed points over $T'$ such that $\\mathcal J\\mathcal O_Z$ is effective Cartier. Every point of $T'$ maps into $T$. Prepending $b$ therefore gives a finite tower whose centres all map into the original $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, last paragraph: induction for the residual ideal."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-cartier-total-transform-blowup] successively along the finite tower $h$ to the effective Cartier ideal $\\mathcal L$. Its extension $\\mathcal L\\mathcal O_Z$ remains effective Cartier. Extension of the identity in step 6 yields $$\\mathcal I\\mathcal O_Z=(\\mathcal L\\mathcal O_Z)^d(\\mathcal J\\mathcal O_Z).$$ Locally the right side is generated by $a^dc$, where $a$ and $c$ are nonzerodivisors. If $a^dcx=0$, repeated cancellation gives $x=0$. Thus $\\mathcal I\\mathcal O_Z$ is effective Cartier; multiplication by $a^dc$ identifies its local module with $\\mathcal O_Z$, so it is invertible. This closes the induction.",
+   "uses": [
+    "lemma-nagata-cartier-total-transform-blowup",
+    "def-nagata-effective-cartier-ideal",
+    "def-sc-invertible-module",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AHH, proof, last paragraph; divisors.tex Tag 0809 (divisors-lemma-blow-up-pullback-effective-Cartier); the product calculation is the elementary proof of Tag 01WU (divisors-lemma-sum-effective-Cartier-divisors)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-length",
+  "def-weil-proper-morphism",
+  "lem-per-local-surface-maximal-blowup-geometry",
+  "lem-per-local-surface-weak-transform-colength-drop",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0AHH (resolve-lemma-make-ideal-principal), with its stalk-localization detail written out; local inputs Tags 0AGQ, 0AGR and 0AGT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +177,17 @@
    "results": "Mathlib grep returned 0 hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowing.up|quadratic.?transform|colength",
+   "results": "Read the 0 returned hits: . Source grep restricted to Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not state this blowup result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-embedded-surface-curve-resolution",
@@ -63,7 +199,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BIC (resolve-lemma-embedded-resolution), including the hypotheses and the blow-up induction",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BIC (resolve-lemma-embedded-resolution), including the hypotheses and the blow-up induction; the point-ideal principalization input is realized by the strong induction of Stacks Tag 0AHH.",
    "via": [
     "lem-per-embedded-surface-curve-resolution",
     "lem-per-surface-resolution-supported-presentation",
@@ -77,5 +213,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-surface-point-ideal-principalization",
+  "worker": "stage1",
+  "summary": "Nine-step strong induction on the total stalk colength following Stacks 0AHH. Two local statement-only inputs isolate regular maximal-ideal blowup geometry and the one-blowup weak-transform colength drop. The global inclusion and local-ring/length comparison omitted in the source are written out using localization; the final Cartier product is proved directly. The statement is unchanged.",
+  "blueprint": "Realizes the inherited ILO XVII 3.4.1 embedded-resolution input to lem-per-artin-gabber-affine-curve: in Stacks 0BIC, finite residual ideals are principalized by the point-blowup induction of 0AHH. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Generic finite-module length criterion over a Noetherian local ring; needed to define the induction invariant, with no corresponding node in this unit."
+   },
+   {
+    "node": "lem-sbc-canonical-stalk-spectrum-flat",
+    "why": "Generic flatness of Spec of a scheme stalk, used only to apply flat base change of blowups; it does not invoke any smooth-base-change argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-generic-stalk-finite-length",
+  "lem-sbc-canonical-stalk-spectrum-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-228126e6e",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-228126e6e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, together with Stacks resolve.tex 0AGQ/0AGR/0AGT/0AHH, divisors lemma-flat-base-change-blowing-up and lemma-blow-up-pullback-effective-Cartier, and algebra lemma-support-point. The item statement matches 0AHH and is unchanged. The induction is a strong induction on the total stalk colength over all triples. Step 1: the zero quotient is handled separately and support at a closed point follows from closedness. Steps 3-5: every hypothesis of the cited Nagata nodes, the stalk-flatness node and the new children holds. Step 6 writes out the inclusion 0AHH omits ('details omitted') by an elementary localization B_Q≅(W^{-1}B)_{W^{-1}Q}; J is glued independently of the generator. Step 7: T' is finite, its points are closed with regular 2-dimensional stalks, and the inequality is the unweighted one. Step 9: the total transform stays effective Cartier and a^d c is a nonzerodivisor. The geometry child (0AGQ(1)+0AGR, dimension 2 at closed points via the regular-mod-x argument, no excellence needed) and the colength child (0AGT, finite length equivalent to m^n⊆I⊆m) are true; I tested them on I=m and I=(x,y^2) over k[x,y]_(x,y). Neither restates the item. lem-per-surface-point-blowup-geometry needs an excellent global surface with an ample sheaf, so it is not a one-line specialization; no other duplicates. There is no cycle (the closure of 231 nodes does not reach the item). The off-unit Nagata nodes are Lean-closed or Mathlib leaves, and the two declared tool uses (lem-sc-generic-stalk-finite-length, lem-sbc-canonical-stalk-spectrum-flat) are generic and accepted. No SGA source is used. No changes."
  }
 }
