@@ -9,6 +9,7 @@ public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import Mathlib.CategoryTheory.Sites.Equivalence
 
 /-!
 # Geometric operations for varying constant coefficient rings
@@ -99,7 +100,23 @@ coordinate is unchanged, so the vertical-slice criterion proves continuity. -/
 theorem baseChange_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (baseChange f).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
-  sorry
+  have : RepresentablyFlat (Scheme.proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
+  have : RepresentablyFlat (baseChange f) := by
+    constructor
+    intro U
+    exact IsCofiltered.of_equivalence
+      (StructuredArrow.prodEquivalence U.1 U.2 (𝟭 ℕ) (Scheme.proEtaleBaseChange f)).symm
+  apply Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+  constructor
+  intro U S hS
+  change (S.functorPushforward (baseChange f)).functorPullback (Prod.sectR U.1 X.ProEt) ∈
+    Scheme.ProEt.topology X ((Scheme.proEtaleBaseChange f).obj U.2)
+  apply (Scheme.ProEt.topology X).superset_covering _
+    ((Scheme.proEtaleBaseChangeCoverPreserving f).cover_preserve hS)
+  intro V a ha
+  obtain ⟨W, g, h, hg, rfl⟩ := ha
+  exact ⟨(U.1, W), Prod.mkHom (𝟙 U.1) g, Prod.mkHom (𝟙 U.1) h, hg, by
+    ext <;> simp [baseChange]⟩
 
 attribute [instance] baseChange_continuous
 
@@ -116,6 +133,26 @@ def ringMapApp {X Y : Scheme.{u}} (f : X ⟶ Y) (U : (ℕ × Y.ProEt)ᵒᵖ) :
     ((Scheme.proEtaleConstantDirectImageMap.{u, u + 2} f CommRingCat.{u + 1} (R U.unop.1)).hom.app
       (op U.unop.2))
 
+private theorem constantMap_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
+    (constantSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).map a ≫
+        Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} B =
+      Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A ≫
+        (Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).map
+          ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map a) := by
+  apply ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+    ((Functor.const Y.ProEtᵒᵖ).obj A) _).injective
+  change ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+    _ _) ((presheafToSheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).map
+      ((Functor.const Y.ProEtᵒᵖ).map a) ≫ _) = _
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [Scheme.proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext U
+  exact congrArg (fun t ↦ t.app ((Scheme.proEtaleBaseChange f).op.obj U))
+    ((toSheafification (Scheme.ProEt.topology X) CommRingCat.{u + 1}).naturality
+      ((Functor.const X.ProEtᵒᵖ).map a))
+
 /-- Naturality includes the horizontal, possibly nonflat, coefficient maps.
 Source: Stacks 00YV; Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
 Proof: for vertical arrows use naturality of the constant-section map on the site;
@@ -130,7 +167,23 @@ theorem ringMapApp_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology X))
           (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
             (coefficientTransition R φ X))).obj.map ((baseChange f).op.map a) := by
-  sorry
+  let δ : rings (Scheme.ProEt.topology Y) (coefficients R Y)
+      (coefficientTransition R φ Y) ⟶
+      rings (Scheme.ProEt.topology X) (coefficients R X)
+        (coefficientTransition R φ X) ⋙
+          Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1} :=
+    NatTrans.ofOpSequence
+      (fun n ↦ Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (R n))
+      (by
+        intro n
+        dsimp only [rings, Functor.comp_map]
+        simp only [Functor.ofOpSequence_map_homOfLE_succ]
+        exact constantMap_naturality f (φ n))
+  let ε := Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := Y.ProEt)).functor
+    (Functor.uncurry.map
+      (Functor.whiskerRight δ (sheafToPresheaf (Scheme.ProEt.topology Y)
+        CommRingCat.{u + 1})))
+  exact (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).congr_map (ε.naturality a)
 
 /-- The real ring-sheaf map defining direct image on semilinear systems.
 Source: Stacks 03DA; Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
@@ -151,6 +204,52 @@ Source: Stacks 03DA; Zheng 4.1 (blueprint: def-sp-varying-ring-operations). -/
 def push {X Y : Scheme.{u}} (f : X ⟶ Y) : Modules R φ X ⥤ Modules R φ Y :=
   SheafOfModules.pushforward (ringMap R φ f)
 
+private abbrev modelTopology (X : Scheme.{u}) :=
+  (AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).inducedTopology
+    (coefficientSequenceTopology (Scheme.ProEt.topology X))
+
+private abbrev sequenceRing (X : Scheme.{u}) :=
+  ring.{u + 1, u, u + 1} (coefficientSequenceTopology (Scheme.ProEt.topology X))
+    (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
+      (coefficientTransition R φ X))
+
+private theorem sequenceRing_map_vertical (X : Scheme.{u}) (n : ℕ)
+    {U V : X.ProEt} (a : U ⟶ V) :
+    (sequenceRing R φ X).obj.map (Prod.mkHom (𝟙 n) a).op =
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map
+        ((coefficients R X n).obj.map a.op) := by
+  change (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map
+    (((rings (Scheme.ProEt.topology X) (coefficients R X)
+      (coefficientTransition R φ X)).map (𝟙 (op n))).hom.app (op V) ≫
+        (coefficients R X n).obj.map a.op) = _
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
+private def sequenceModelEquivalence (X : Scheme.{u}) :
+    SheafOfModules.{u + 1}
+      (((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
+         RingCat.{u + 1} (modelTopology X)
+          (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (sequenceRing R φ X)) ≌
+      Modules R φ X := by
+  let A := sequenceRing R φ X
+  let B := ((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
+     RingCat.{u + 1} (modelTopology X)
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj A
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
+      (coefficientSequenceTopology (Scheme.ProEt.topology X)) (modelTopology X) :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))
+      ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.inducedTopology
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))))
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.IsContinuous
+      (modelTopology X) (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
+    change AsSmall.down.IsContinuous (modelTopology X)
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))
+    infer_instance
+  exact SheafOfModules.pushforwardPushforwardEquivalence
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)) (𝟙 A) (𝟙 B)
+    (by ext U; dsimp [AsSmall.equiv]; erw [B.obj.map_id]; rfl)
+    (by ext U; dsimp [AsSmall.equiv]; erw [A.obj.map_id]; rfl)
+
 /-- Existence of inverse image as the left adjoint of the actual section functor.
 Source: Stacks 03EK; Zheng 4.1 (blueprint: def-sp-varying-ring-operations).
 Proof: form inverse image on the product site and extend scalars along ringMap.
@@ -158,7 +257,42 @@ Constant sheaves pull back to the same constants, compatibly with φ. Thus this
 module pullback is the componentwise inverse image and has the usual adjunction. -/
 theorem push_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).IsRightAdjoint := by
-  sorry
+  let JX := coefficientSequenceTopology (Scheme.ProEt.topology X)
+  let JY := coefficientSequenceTopology (Scheme.ProEt.topology Y)
+  have : (AsSmall.up : ℕ × X.ProEt ⥤ AsSmall.{u + 1} (ℕ × X.ProEt)).IsContinuous
+      JX (modelTopology X) :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).functor.IsContinuous
+       JX ((AsSmall.equiv.{u, u + 1, u + 1} (C := ℕ × X.ProEt)).inverse.inducedTopology JX))
+  let F : AsSmall.{u + 1} (ℕ × Y.ProEt) ⥤ AsSmall.{u + 1} (ℕ × X.ProEt) :=
+    AsSmall.down ⋙ baseChange f ⋙ AsSmall.up
+  have := Functor.isContinuous_comp (baseChange f)
+    (AsSmall.up : ℕ × X.ProEt ⥤ AsSmall.{u + 1} (ℕ × X.ProEt))
+    JY JX (modelTopology X)
+  have : F.IsContinuous (modelTopology Y) (modelTopology X) :=
+    Functor.isContinuous_comp AsSmall.down (baseChange f ⋙ AsSmall.up)
+      (modelTopology Y) JY (modelTopology X)
+  let SX := ((AsSmall.down : AsSmall.{u + 1} (ℕ × X.ProEt) ⥤ ℕ × X.ProEt).sheafPushforwardContinuous
+     RingCat.{u + 1} (modelTopology X) JX).obj (sequenceRing R φ X)
+  let SY := ((AsSmall.down : AsSmall.{u + 1} (ℕ × Y.ProEt) ⥤ ℕ × Y.ProEt).sheafPushforwardContinuous
+     RingCat.{u + 1} (modelTopology Y) JY).obj (sequenceRing R φ Y)
+  let a : SY ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1}
+      (modelTopology Y) (modelTopology X)).obj SX :=
+    ⟨Functor.whiskerLeft AsSmall.down.op (ringMap R φ f).hom⟩
+  let eX := sequenceModelEquivalence R φ X
+  let eY := sequenceModelEquivalence R φ Y
+  let adj := eY.symm.toAdjunction.comp
+    ((SheafOfModules.pullbackPushforwardAdjunction a).comp eX.toAdjunction)
+  refine (adj.ofNatIsoRight ?_).isRightAdjoint
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+    dsimp only [eX, eY, sequenceModelEquivalence]
+    exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
+  · intro M N b
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    rfl
+
 
 attribute [instance] push_isRightAdjoint
 
@@ -187,7 +321,10 @@ Proof: continuous module pushforward preserves the underlying maps and their
 pointwise sums. Extensionality on all sections gives additivity. -/
 theorem push_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (push R φ f).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  ext U x
+  rfl
 
 attribute [instance] push_additive
 
@@ -213,7 +350,13 @@ Apply the recorded Grothendieck abelianness and K-injective resolution theorem t
 that ringed site. This does not assert that evaluation preserves K-injectives. -/
 theorem modules_kInjective (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (Modules R φ X) := by
-  sorry
+  let :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u,
+        u + 1}
+    (coefficientSequenceTopology (Scheme.ProEt.topology X))
+    (systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology X) (coefficients R X)
+      (coefficientTransition R φ X))).1
+  infer_instance
 
 attribute [instance] modules_kInjective
 
@@ -233,6 +376,50 @@ def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : G R φ f ⊣ P R φ f :=
   (moduleAdj R φ f).mapDerivedCategoryRightDerivedAdjunction
 
 
+private theorem constantMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (A : CommRingCat.{u + 1}) :
+    Scheme.proEtaleConstantDirectImageMap g CommRingCat.{u + 1} A ≫
+      (Scheme.proEtaleSheafDirectImage g CommRingCat.{u + 1}).map
+        (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A) ≫
+      (Functor.sheafPushforwardContinuousComp'
+        (eFG := (MorphismProperty.Over.pullbackComp
+          (P := @WeaklyEtale) (Q := ⊤) f g).symm)
+        CommRingCat.{u + 1} (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y)
+          (Scheme.ProEt.topology X)).hom.app (coefficients (fun _ ↦ A) X 0) =
+      Scheme.proEtaleConstantDirectImageMap (f ≫ g) CommRingCat.{u + 1} A := by
+  apply ((sheafificationAdjunction (Scheme.ProEt.topology Z) CommRingCat.{u + 1}).homEquiv
+    ((Functor.const Z.ProEtᵒᵖ).obj A) _).injective
+  rw [Adjunction.homEquiv_naturality_right]
+  simp only [Scheme.proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext U
+  have hf := Equiv.apply_symm_apply
+    ((sheafificationAdjunction (Scheme.ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+      ((Functor.const Y.ProEtᵒᵖ).obj A)
+      ((Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
+        ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj A)))
+    (Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op
+      (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+  have hfU := congrArg (fun t ↦ t.app ((Scheme.proEtaleBaseChange g).op.obj U)) hf
+  change (toSheafify (Scheme.ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+      ((Scheme.proEtaleBaseChange g).op.obj U) ≫
+    (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A).hom.app
+      ((Scheme.proEtaleBaseChange g).op.obj U) = _ at hfU
+  change ((toSheafify (Scheme.ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app
+      ((Scheme.proEtaleBaseChange g).op.obj U) ≫
+    (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} A).hom.app
+      ((Scheme.proEtaleBaseChange g).op.obj U)) ≫
+        ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj A).obj.map
+          ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).hom.app
+            U.unop).op = _
+  rw [hfU]
+  erw [Equiv.apply_symm_apply]
+  have hn := (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).naturality
+    ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).hom.app U.unop).op
+  change 𝟙 A ≫ _ = _ at hn
+  rw [Category.id_comp] at hn
+  exact hn.symm
+
 /-- Ordinary direct-image composition is fixed on every section and coefficient index.
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations).
 Proof: restriction along the canonical fibre-product pasting isomorphism is linear,
@@ -245,7 +432,55 @@ theorem modulePComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
         (d.hom.app N).val.app (op (n, U)) x =
           N.val.map (Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackComp f g).hom.app U)).op x := by
-  sorry
+  have := Functor.isContinuous_comp (baseChange g) (baseChange f)
+    (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+    (coefficientSequenceTopology (Scheme.ProEt.topology Y))
+    (coefficientSequenceTopology (Scheme.ProEt.topology X))
+  let e : baseChange (f ≫ g) ≅ baseChange g ⋙ baseChange f :=
+    NatIso.prod (Iso.refl (𝟭 ℕ)) (MorphismProperty.Over.pullbackComp f g)
+  let a : sequenceRing R φ Z ⟶
+      ((baseChange g ⋙ baseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))).obj (sequenceRing R φ X) :=
+    ringMap R φ g ≫ ((baseChange g).sheafPushforwardContinuous RingCat.{u + 1}
+    (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+    (coefficientSequenceTopology (Scheme.ProEt.topology Y))).map (ringMap R φ f)
+  have h : a ≫ (Functor.sheafPushforwardContinuousNatTrans e.hom RingCat.{u + 1}
+      (coefficientSequenceTopology (Scheme.ProEt.topology Z))
+      (coefficientSequenceTopology (Scheme.ProEt.topology X))).app (sequenceRing R φ X) =
+      ringMap R φ (f ≫ g) := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    change ringMapApp R g U ≫
+      ringMapApp R f (op (U.unop.1, (Scheme.proEtaleBaseChange g).obj U.unop.2)) ≫
+        (sequenceRing R φ X).obj.map
+          (Prod.mkHom (𝟙 U.unop.1)
+            ((MorphismProperty.Over.pullbackComp f g).hom.app U.unop.2)).op = _
+    rw [sequenceRing_map_vertical]
+    exact (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).congr_map
+      (congrArg (fun t ↦ t.hom.app (op U.unop.2))
+        (constantMap_comp f g (R U.unop.1)))
+  let d : push R φ f ⋙ push R φ g ≅ push R φ (f ≫ g) :=
+    SheafOfModules.pushforwardComp (ringMap R φ g) (ringMap R φ f) ≪≫
+      SheafOfModules.pushforwardNatIso a e ≪≫ SheafOfModules.pushforwardCongr h
+  have hd : ∀ (N : Modules R φ X) (n : ℕ) (U : Z.ProEt)
+      (x : ((push R φ f ⋙ push R φ g).obj N).val.obj (op (n, U))),
+      (d.hom.app N).val.app (op (n, U)) x =
+        N.val.map (Prod.mkHom (𝟙 n)
+          ((MorphismProperty.Over.pullbackComp f g).hom.app U)).op x := by
+    intros
+    rfl
+  refine ⟨d, hd, ?_⟩
+  intro d' hd'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact (hd' N U.unop.1 U.unop.2 x).trans (hd N U.unop.1 U.unop.2 x).symm
 
 /-- The section-normalized compositor for ordinary direct image.
 Source: Stacks 0D6D (blueprint: def-sp-varying-ring-operations). -/
@@ -284,7 +519,70 @@ theorem modulePId_existsUnique (X : Scheme.{u}) :
         (d.hom.app N).val.app (op (n, U)) x =
           N.val.map (Prod.mkHom (𝟙 n)
             ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app U)).op x := by
-  sorry
+  let e : baseChange (𝟙 X) ≅ 𝟭 (ℕ × X.ProEt) :=
+    NatIso.prod (Iso.refl (𝟭 ℕ)) (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X)
+  have h : ringMap R φ (𝟙 X) ≫
+      (Functor.sheafPushforwardContinuousNatTrans e.inv RingCat.{u + 1}
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))
+        (coefficientSequenceTopology (Scheme.ProEt.topology X))).app (sequenceRing R φ X) =
+      𝟙 (sequenceRing R φ X) := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    have hc : Scheme.proEtaleConstantDirectImageMap (𝟙 X) CommRingCat.{u + 1}
+          (R U.unop.1) ≫
+        (Functor.sheafPushforwardContinuousId'
+          (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X) CommRingCat.{u + 1}
+            (Scheme.ProEt.topology X)).hom.app (coefficients R X U.unop.1) =
+        𝟙 (coefficients R X U.unop.1) := by
+      apply ((sheafificationAdjunction (Scheme.ProEt.topology X) CommRingCat.{u + 1}).homEquiv
+         ((Functor.const X.ProEtᵒᵖ).obj (R U.unop.1)) _).injective
+      rw [Adjunction.homEquiv_naturality_right]
+      simp only [Scheme.proEtaleConstantDirectImageMap, Equiv.apply_symm_apply]
+      apply NatTrans.ext
+      funext V
+      change (toSheafify (Scheme.ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (R U.unop.1))).app
+          ((Scheme.proEtaleBaseChange (𝟙 X)).op.obj V) ≫
+          (coefficients R X U.unop.1).obj.map
+            ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).op = _
+      have hn := (toSheafify (Scheme.ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (R U.unop.1))).naturality
+          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app V.unop).op
+      change 𝟙 (R U.unop.1) ≫ _ = _ at hn
+      rw [Category.id_comp] at hn
+      rw [Adjunction.homEquiv_unit]
+      change _ = (toSheafify (Scheme.ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (R U.unop.1))).app V ≫ 𝟙 _
+      rw [Category.comp_id]
+      exact hn.symm
+    change ringMapApp R (𝟙 X) U ≫
+      (sequenceRing R φ X).obj.map
+        (Prod.mkHom (𝟙 U.unop.1)
+          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app U.unop.2)).op = _
+    rw [sequenceRing_map_vertical]
+    exact (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).congr_map
+      (congrArg (fun t ↦ t.hom.app (op U.unop.2)) hc)
+  let d : push R φ (𝟙 X) ≅ 𝟭 (Modules R φ X) :=
+    SheafOfModules.pushforwardNatIso (ringMap R φ (𝟙 X)) e.symm ≪≫
+      SheafOfModules.pushforwardCongr h ≪≫ SheafOfModules.pushforwardId _
+  have hd : ∀ (N : Modules R φ X) (n : ℕ) (U : X.ProEt)
+      (x : ((push R φ (𝟙 X)).obj N).val.obj (op (n, U))),
+      (d.hom.app N).val.app (op (n, U)) x =
+        N.val.map (Prod.mkHom (𝟙 n)
+          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app U)).op x := by
+    intros
+    rfl
+  refine ⟨d, hd, ?_⟩
+  intro d' hd'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact (hd' N U.unop.1 U.unop.2 x).trans (hd N U.unop.1 U.unop.2 x).symm
 
 /-- The uniquely normalized ordinary identity comparison.
 Source: Stacks 07A7 (blueprint: def-sp-varying-ring-operations). -/
