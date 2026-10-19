@@ -5,17 +5,9 @@ Authors: SHEAF group Q23
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-public import Sheaf.Paper.ComparisonPullbackExact
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 set_option autoImplicit false
 
@@ -42,34 +34,12 @@ injective resolution, is represented by the ordinary termwise unit followed by
 that resolution. Source: literature/stacks-project/derived.tex, Lemma Tags 0DVC
 and 09T5 (blueprint: lem-pur-comparison-unit-injective-model).
 
-Proof, following the five steps of the node:
-1. Put `L = finiteCoefficientComparison T Λ` and `R = finiteCoefficientDirectImage T Λ`.
-   Exactness of `L` gives its termwise derived functor. Bounded below injective complexes
-   are K-injective (lem-weil-pbc-bounded-below-injectives-kinjective), and `R` preserves
-   K-injectivity (lem-weil-pbc-right-adjoint-preserves-kinjective). The module category
-   is Grothendieck abelian (prop-pur-kinjective-resolutions-exist), hence has enough
-   injectives (lem-sp-grothendieck-enough-injectives). Thus the canonical right-derived
-   comparison is invertible on `J` by lem-weil-pbc-right-derived-plus-injective.
-2. For a bounded below injective target `I`, compute derived Hom by homotopy Hom
-   (lem-weil-pbc-kinjective-hom-derived). The termwise adjunction
-   (lem-weil-pbc-termwise-adjunction-homotopy) sends a map `f : L P ⟶ I` to the ordinary
-   unit followed by `R(f)`. This formula is natural in both variables.
-3. For any bounded below target `N`, choose an injective resolution `r : N ⟶ I`
-   (lem-sc-bounded-below-injective-resolution). Compose the preceding Hom bijection
-   with the isomorphism given by the inverse of `R` derived applied to `Qr`, followed
-   on the right by the right-derived comparison at `I`. For another resolution,
-   the unique homotopy comparison between injective targets and naturality of the
-   right-derived comparison identify the formulas. This proves independence of the
-   resolution and naturality, hence gives the canonical adjunction of
-   thm-weil-pbc-site-comparison with its specified comparison transformation.
-4. The derived unit is the transpose of the identity of the derived inverse image.
-   Evaluate this transpose with the given resolution `j`. Its homotopy representative
-   is `j`, and its ordinary transpose is the termwise unit followed by `R(j)`.
-   Multiplication by the derived image of `Qj` gives the displayed equality.
-5. Localization makes `Qj` invertible, so its image under the derived direct image
-   is invertible. The comparison at `J` is invertible by step 1. Cancelling these
-   isomorphisms identifies the ordinary complex map with the derived unit, under
-   exactly the identification in the node. -/
+Proof: apply the normalization formula `Adjunction.derivedPlus_unit_app_fac` for
+this specified derived adjunction. Postcompose with the derived image of `j` and
+use naturality of the right-derived comparison to obtain the displayed equality.
+Localization inverts the quasi-isomorphism `j`, proving the first isomorphism
+clause. The comparison is invertible on the termwise injective complex `J`,
+proving the second clause. -/
 theorem comparisonUnitInjectiveModel
     (M : CochainComplex.Plus
       (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -107,6 +77,39 @@ theorem comparisonUnitInjectiveModel
         (finiteCoefficientDirectImage T Λ).rightDerivedFunctorPlusUnit.app
           (((HomotopyCategory.Plus.quotient
               (FiniteCoefficientModules T Λ)).obj J)) := by
-  sorry
+  let L := finiteCoefficientComparison T Λ
+  let R := finiteCoefficientDirectImage T Λ
+  let A := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let B := FiniteCoefficientModules T Λ
+  let K : HomotopyCategory.Plus A := (HomotopyCategory.Plus.quotient A).obj M
+  let qj : L.mapHomotopyCategoryPlus.obj K ⟶
+      (HomotopyCategory.Plus.quotient B).obj J :=
+    (HomotopyCategory.Plus.quotient B).map j
+  have hqj : IsIso (DerivedCategory.Plus.Qh.map qj) := by
+    apply Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso B) _
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hj
+  have hfirst : IsIso
+      (R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K ≫
+        DerivedCategory.Plus.Qh.map qj)) := by
+    have : IsIso (L.mapDerivedCategoryPlusFactorsh.hom.app K) := inferInstance
+    infer_instance
+  have hsecond : IsIso
+      (R.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj J)) := by
+    let : ∀ i : ℤ, Injective (J.obj.X i) := hJ
+    infer_instance
+  refine ⟨hfirst, hsecond, ?_⟩
+  change (finiteCoefficientComparisonAdjunction T Λ).derivedPlus.unit.app
+      (DerivedCategory.Plus.Qh.obj K) ≫
+      R.rightDerivedFunctorPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K ≫
+        DerivedCategory.Plus.Qh.map qj) =
+    DerivedCategory.Plus.Qh.map
+      ((finiteCoefficientComparisonAdjunction T Λ).mapHomotopyCategoryPlus.unit.app K ≫
+        R.mapHomotopyCategoryPlus.map qj) ≫
+      R.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj J)
+  have hfac := (finiteCoefficientComparisonAdjunction T Λ).derivedPlus_unit_app_fac K
+  have hnat := R.rightDerivedFunctorPlusUnit.naturality qj
+  dsimp only [Functor.comp_map] at hnat
+  rw [Functor.map_comp, ← Category.assoc, hfac, Category.assoc, ← hnat,
+    ← Category.assoc, ← Functor.map_comp]
 
 end AlgebraicGeometry.ProEtale

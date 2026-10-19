@@ -30,92 +30,43 @@
  },
  "proof": [
   {
-   "text": "Put $L=\\nu_T^*$, $R=\\nu_{T,*}$ and $\\mathbf R R=R\\nu_{T,*}$. These act on the two abelian module categories in the statement, with their specified constant coefficients. The site adjunction is additive, and $L$ is exact by [lem-sf-comparison-pullback-exact]. Thus $L$ acts termwise on $D^+$, preserving quasi-isomorphisms and lower bounds. For any bounded-below injective complex $I$ in $\\mathcal B$, [lem-weil-pbc-bounded-below-injectives-kinjective] makes $I$ K-injective, and [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $RI$ K-injective. Both remain bounded below. The pro-etale coefficient ring sheaf is a sheaf of commutative rings on a small site, so $\\mathcal B$ is a Grothendieck abelian category by [prop-pur-kinjective-resolutions-exist] and has enough injectives by [lem-sp-grothendieck-enough-injectives]; this is the hypothesis of [lem-weil-pbc-right-derived-plus-injective] for $v=R$. The natural comparison $\\alpha_I:Q(RI)\\to\\mathbf R R(QI)$ is therefore defined and invertible by clause (2) of that lemma.",
+   "text": "Use the specified categories and exact comparison functor L = nu_T^* with right adjoint R = nu_{T,*}. The actual finiteCoefficientDerivedComparisonAdjunction is defined as (finiteCoefficientComparisonAdjunction T Λ).derivedPlus. The enough-injectives instance on the pro-etale coefficient modules is supplied by the canonical coefficient equivalence in that interface. Apply [lem-trf-bounded-below-derived-adjunction], specifically derivedPlus_unit_app_fac, at the homotopy image P of M. It gives etaD_(QP) followed by RR(phi_P) = Q(eta0_P) followed by alpha_(LP). This uses the specified adjunction and its specified comparison, rather than identifying arbitrary adjunction structures.",
    "uses": [
     "def-weil-pbc-derived-categories",
     "def-weil-pbc-proetale-modules",
     "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit bounded-below Hom calculation"
-   }
-  },
-  {
-   "text": "For a bounded-below complex $P$ in $\\mathcal A$ and an $I$ as in step 1, use [lem-weil-pbc-kinjective-hom-derived] at $I$ and $RI$, and the explicit Hom bijection of [lem-weil-pbc-termwise-adjunction-homotopy]. Their composite is\n$$\\operatorname{Hom}_{D^+(\\mathcal B)}(QLP,QI)\\cong\\operatorname{Hom}_{K^+(\\mathcal B)}(LP,I)\\cong\\operatorname{Hom}_{K^+(\\mathcal A)}(P,RI)\\cong\\operatorname{Hom}_{D^+(\\mathcal A)}(QP,QRI).$$\nExplicitly, the unique homotopy class $[f]$ with $Q[f]=h$ is sent to $Q[Rf\\circ\\eta^0_P]$. Each factor is bijective. Naturality in a chain map $a:P'\\to P$ follows from $RL(a)\\eta^0_{P'}=\\eta^0_Pa$; naturality in a map $k:I\\to I'$ follows from $R(kf)=Rk\\,Rf$. The termwise adjunction lemma guarantees that these expressions depend only on homotopy classes.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit bounded-below Hom calculation"
-   }
-  },
-  {
-   "text": "For any bounded-below $N$ in $\\mathcal B$, take a bounded-below injective resolution $r:N\\to I$ using [lem-sc-bounded-below-injective-resolution], on the small ringed pro-etale site. Put $e_r=\\mathbf R R(Qr)^{-1}\\alpha_I$. Postcomposition by $Qr$, the bijection in step 2, and postcomposition by $e_r$ give the derived transpose to $\\mathbf R R(QN)$. Check its normalization and independence explicitly. For another resolution $r':N'\\to I'$ and $b:QN\\to QN'$, [lem-weil-pbc-kinjective-hom-derived] gives a unique homotopy class $k:I\\to I'$ with $Qk=Qr'\\,b\\,(Qr)^{-1}$. Naturality of the comparison in [lem-weil-pbc-right-derived-plus-injective] says\n$$\\alpha_{I'}Q(Rk)=\\mathbf R R(Qk)\\alpha_I,$$\nso $e_{r'}Q(Rk)=\\mathbf R R(b)e_r$. Together with step 2 this proves target naturality; setting $b=1$ proves independence of resolution. Source naturality holds first on homotopy morphisms by step 2 and then on their inverses at quasi-isomorphisms, since $L$ preserves those; these generate the localized morphisms. Thus these are the natural Hom bijections obtained by deriving the given termwise adjunction with the specified comparison $\\alpha$, namely the canonical derived adjunction in the statement. This calculates its Hom bijection, rather than deducing a normalization from full faithfulness alone.",
-   "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit bounded-below Hom calculation"
-   }
-  },
-  {
-   "text": "The unit of an adjunction is the transpose of the identity of its left-adjoint image. Apply the explicit derived transpose from steps 2–3 at $P=M$, $N=LM$, with the given resolution $r=j$. The identity of $QLM$ is first sent to $Qj$, whose unique homotopy lift is $[j]$. Its termwise transpose is $[Rj\\circ\\eta^0_M]$, by [lem-weil-pbc-termwise-adjunction-homotopy]. Hence the unit $\\eta^D$ of the canonical derived adjunction named in [thm-weil-pbc-site-comparison] satisfies\n$$\\eta^D_{QM}=\\mathbf R R(Qj)^{-1}\\alpha_J\\,Q(Rj\\circ\\eta^0_M).$$\nMultiplying on the left by $\\mathbf R R(Qj)$ gives precisely\n$$\\mathbf R R(Qj)\\circ\\eta^D_{QM}=\\alpha_J\\circ Q\\bigl(R(j)\\circ\\eta^0_M\\bigr).$$\nHere $L(QM)=Q(LM)$ is the termwise exact-functor identification fixed in the statement; no extra comparison is silently inserted.",
-   "uses": [
-    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-trf-bounded-below-derived-adjunction",
     "thm-weil-pbc-site-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit bounded-below Hom calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Because $j$ is a quasi-isomorphism, $Qj$ is invertible by the definition of localization, and a functor sends an inverse to an inverse. Thus $\\mathbf R R(Qj)$ is invertible. Since $J$ is bounded below with injective terms, clause (2) of [lem-weil-pbc-right-derived-plus-injective] makes $\\alpha_J$ invertible. Therefore $e_j=\\mathbf R R(Qj)^{-1}\\alpha_J$ is the displayed isomorphism in the statement, and the equality in step 4 says exactly that the complex map $Rj\\circ\\eta^0_M$ represents the derived unit under $e_j$.",
+   "text": "Apply naturality of the right-derived comparison of [lem-weil-pbc-right-derived-plus-injective] to the homotopy image qj of j: alpha_(LP) followed by RR(Qqj) = Q(Rqj) followed by alpha_J. Postcompose the equality of step 1 with RR(Qqj), substitute this naturality equality, use preservation of composition by Q and RR, and reassociate. This is precisely the equality in the statement, including the exact-functor factorization phi_P.",
    "uses": [
     "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective), and 08BJ (lemma-adjoint-preserve-K-injectives); explicit bounded-below Hom calculation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Since j is a quasi-isomorphism, localization inverts its homotopy image qj. The factorization phi_P is an isomorphism; compositions and functor images of isomorphisms are isomorphisms. This proves the first clause. Every term of J is injective by hJ, so clause (2) of [lem-weil-pbc-right-derived-plus-injective] makes alpha_J invertible, proving the second clause. These clauses together with step 2 prove the result.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-trf-bounded-below-derived-adjunction",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-pur-kinjective-resolutions-exist",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit bounded-below specialization of the Hom construction in Tags 0DVC and 09T5, using Tags 070I and 08BJ; canonical unit evaluated at the identity"
+  "place": "Tags 0DVC and 09T5; shorter implementation using the existing normalized bounded-below derived adjunction (lem-trf-bounded-below-derived-adjunction) and naturality of its right-derived comparison. Group V3, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -203,9 +154,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-sc-bounded-below-injective-resolution",
   "thm-weil-pbc-site-comparison"
  ],
  "reviewed": {
@@ -233,5 +181,15 @@
   "by": "Q23",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-9c12a",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261019T112554-L-3956558",
+  "kind": "interface",
+  "note": "independent cc review: delivered proof of comparisonUnitInjectiveModel (derivedPlus_unit_app_fac + rightDerivedFunctorPlusUnit naturality) against the unchanged signature and node lem-pur-comparison-unit-injective-model; removed imports against both direct importers (compiled) and the unit sk-prop-a1-kummer's empty realized list"
  }
 }
