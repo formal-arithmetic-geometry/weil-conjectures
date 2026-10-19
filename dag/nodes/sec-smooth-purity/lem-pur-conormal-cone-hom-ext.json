@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-conormal-cone-hom-ext",
+ "kind": "statement",
+ "title": "Degree-one uniqueness for maps to conormal spectra",
+ "status": "split",
+ "statement": "Let $s:S\\hookrightarrow V$ be a closed immersion [def-pur-normal-bundle], let $p:Y\\to S$ be affine, and let $e:\\operatorname{gr}_{\\mathcal I}(\\mathcal O_V)\\simeq p_*\\mathcal O_Y$ be an $\\mathcal O_S$-algebra isomorphism [lem-pur-conormal-graded-algebra, lem-weil-pbc-affine-morphism-relative-spec]. For any scheme $T$ and $t:T\\to S$, let $f,g:T\\to Y$ satisfy $p\\circ f=t=p\\circ g$. If on every affine open $U\\subseteq V$ their pullbacks agree on $e$ applied to each degree-one ideal section class over $s^{-1}(U)$, then $f=g$.",
+ "stmt_deps": [
+  "def-pur-normal-bundle",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+ },
+ "proof": [
+  {
+   "text": "Compose e with the two sheaf pullbacks to t_*O_T. Apply degree-one conormal algebra uniqueness to identify the algebra maps. Over each affine open of S, Y is affine and Gamma-Spec identifies maps with section ring homomorphisms. The inverse images cover T; scheme hom-ext glues the equalities.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra-hom-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-algebra-hom-ext"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "agent",
+  "note": "Lean expansion of the homogeneous representative argument in the item docstring.",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extended Rees algebra modulo t is isomorphic to the associated graded algebra of an ideal",
+   "results": "8 hits: reesAlgebra; adjoin_monomial_eq_reesAlgebra; Ideal.powQuotPowSuccEquivMapMkPowSuccPow; no normalized comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring homomorphisms from the associated graded algebra of an ideal are determined by their values on degree one and degree zero",
+   "results": "8 hits, including DirectSum.ofZeroRingHom and DirectSum.liftRingHom; these concern all graded pieces, not degree-one generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.associatedGraded",
+   "results": "0 hits: unknown identifier 'Ideal.associatedGraded'",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|associatedGraded",
+   "results": "0 hits in logged msearch. Direct source rg found AssociatedGradedFiniteType, whose ideal-product induction is reused without finite generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothCanonicalInterfaces",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Homogeneous cone identification and uniqueness of the degree-one normalization.",
+   "via": [
+    "def-pur-finite-smooth-canonical-interfaces"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalConeHomExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalConeHomExt.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.conormalCone_hom_ext",
+  "statement": "theorem conormalCone_hom_ext {V S T Y : Scheme.{u}} (s : S ⟶ V) [IsClosedImmersion s]\n    (p : Y ⟶ S) [IsAffineHom p]\n    (e : (ConormalGradedAlgebra.presentation s).algebra ≅\n      Under.mk (⟨p.c⟩ : S.sheaf ⟶\n        (TopCat.Sheaf.pushforward CommRingCat.{u} p.base).obj Y.sheaf))\n    (t : T ⟶ S) (f g : T ⟶ Y) (hf : f ≫ p = t) (hg : g ≫ p = t)\n    (h : ∀ (U : V.affineOpens)\n      (b : (ConormalGradedAlgebra.power s 1).val.obj (Opposite.op U.1)),\n      (f.appLE (p ⁻¹ᵁ (s ⁻¹ᵁ U.1)) (t ⁻¹ᵁ (s ⁻¹ᵁ U.1))\n        (by rw [← Scheme.Hom.comp_preimage f p, hf]))\n          (e.hom.right.hom.app (Opposite.op (s ⁻¹ᵁ U.1))\n            (ConormalGradedAlgebra.homogeneousClass s\n              (ConormalGradedAlgebra.presentation s).algebra\n              (ConormalGradedAlgebra.presentation s).inclusion 1 U.1 b)) =\n      (g.appLE (p ⁻¹ᵁ (s ⁻¹ᵁ U.1)) (t ⁻¹ᵁ (s ⁻¹ᵁ U.1))\n        (by rw [← Scheme.Hom.comp_preimage g p, hg]))\n          (e.hom.right.hom.app (Opposite.op (s ⁻¹ᵁ U.1))\n            (ConormalGradedAlgebra.homogeneousClass s\n              (ConormalGradedAlgebra.presentation s).algebra\n              (ConormalGradedAlgebra.presentation s).inclusion 1 U.1 b))) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
+ }
+}

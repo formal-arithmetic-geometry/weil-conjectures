@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-conormal-zero-section-pullback",
+ "kind": "statement",
+ "title": "The relative-Spec conormal zero section pulls back by augmentation",
+ "status": "split",
+ "statement": "Let $s:S\\hookrightarrow V$ be a closed immersion. Let $G_s$ be the conormal algebra, $\\epsilon:G_s\\to\\mathcal O_S$ its augmentation, $p:C_s\\to S$ its relative spectrum and $z:S\\to C_s$ the section induced contravariantly by $\\epsilon$ [def-pur-normal-bundle]. Let $c:G_s\\simeq p_*\\mathcal O_{C_s}$ be the canonical counit identification [def-pur-rees-cone-normalization]. For every open $U\\subseteq S$, the composite $G_s(U)\\xrightarrow{c_U}\\Gamma(p^{-1}U,\\mathcal O_{C_s})\\xrightarrow{z^\\sharp}\\Gamma(U,\\mathcal O_S)$ is $\\epsilon_U$.",
+ "stmt_deps": [
+  "def-pur-normal-bundle",
+  "def-pur-rees-cone-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01LX, the relative-Spec anti-equivalence, together with divisors.tex definition-conormal-sheaf (0630) and the degree-zero augmentation."
+ },
+ "proof": [
+  {
+   "text": "The chosen anti-equivalence sends the defined section to the counit followed by augmentationToBase, by map_preimage. Apply its morphism-on-sections formula and cancel the inverse counit defining the canonical algebra identification. At the base end, the under-category triangle identifies the transported structural map with the identity. Object equality transports cancel, leaving the augmentation map on every open.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-asd-vector-bundle-zero-section",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01LX, the relative-Spec anti-equivalence, together with divisors.tex definition-conormal-sheaf (0630) and the degree-zero augmentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-asd-vector-bundle-zero-section",
+  "lem-pur-conormal-graded-algebra"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "agent",
+  "date": "2026-10-19",
+  "note": "Categorical proof from map_preimage, counit cancellation and the sectionwise morphism formula; equality transports are canceled explicitly.",
+  "group": "K3"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "augmentation.*pullback|zeroSection.*appLE|coneAlgebraIso",
+   "results": "{\"t\": \"2026-10-19T00:04:27Z\", \"tool\": \"grep\", \"query\": \"augmentation.*pullback|zeroSection.*appLE|coneAlgebraIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The section of a relative spectrum induced by an augmentation pulls back functions by that augmentation under the counit algebra isomorphism",
+   "results": "{\"t\": \"2026-10-19T00:04:28Z\", \"tool\": \"leansearch\", \"query\": \"The section of a relative spectrum induced by an augmentation pulls back functions by that augmentation under the counit algebra isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Spec.map\", \"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"AlgebraicGeometry.Spec.preimage_map\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit_app\"], \"digest\": \"df68fe536301cc61\"}",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_preimage",
+   "results": "{\"t\": \"2026-10-19T00:04:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_preimage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_preimage\"], \"digest\": \"6cd434ec731b7fcb\"}",
+   "date": "2026-10-19",
+   "verdict": "map_preimage is used, but does not itself give the sectionwise augmentation compatibility"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothCanonicalInterfaces",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Homogeneous cone identification and uniqueness of the degree-one normalization.",
+   "via": [
+    "def-pur-finite-smooth-canonical-interfaces"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalConeZeroSectionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalConeZeroSectionPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.coneZeroSection_app",
+  "statement": "theorem coneZeroSection_app {V S : Scheme.{u}} (s : S ⟶ V)\n    [IsClosedImmersion s] (U : S.Opens) :\n    (coneAlgebraIso s).hom.right.hom.app (op U) ≫\n      (PurityNormalBundle.zeroSection s).appLE (PurityNormalBundle.projection s ⁻¹ᵁ U) U\n        (by rw [← Scheme.Hom.comp_preimage, (PurityNormalBundle.zeroSection_spec s).1]; simp) =\n      (ConormalGradedAlgebra.augmentation s).right.hom.app (op U)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
+ }
+}

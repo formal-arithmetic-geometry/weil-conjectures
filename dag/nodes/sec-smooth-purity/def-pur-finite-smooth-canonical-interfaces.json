@@ -17,9 +17,46 @@
    "lem-pur-finite-smooth-adjunction-general-base"
   ]
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take a projection- and augmentation-compatible normalized isomorphism supplied by the existence theorem.",
+   "uses": [
+    "lem-pur-rees-cone-normalized-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two normalized comparisons, evaluate their degree-one pullbacks on every Rees affine chart. Both equal a/t modulo t. The chart section map is invertible over the corresponding ambient affine open, so their pullbacks agree before chart restriction.",
+   "uses": [
+    "def-pur-normal-bundle",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply conormalCone_hom_ext with the relative-Spec counit algebra isomorphism; equality of the underlying scheme morphisms gives equality of isomorphisms.",
+   "uses": [
+    "lem-pur-conormal-cone-hom-ext",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rees-cone-normalized-existence",
+  "def-pur-normal-bundle",
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-conormal-cone-hom-ext",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "K3",
+  "date": "2026-10-19",
+  "note": "Formal uniqueness from degree-one detection, retaining a separately stated normalized existence input."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -138,9 +175,6 @@
   "date": "2026-10-18",
   "existing": false,
   "declarations": [
-   "AlgebraicGeometry.Etale.FiniteSmoothPurity.coneAlgebraIso",
-   "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeChart",
-   "AlgebraicGeometry.Etale.FiniteSmoothPurity.ReesConeNormalized",
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison_existsUnique",
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison",
    "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison_spec"
@@ -162,5 +196,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Re-delivery after the 68ed RETURN (H2: theorem stmt_deps supplying only plain defs). All five Lean modules are byte-identical to 68ed, whose content was accepted at 7b61. Two new existing:true def nodes, def-pur-finite-ring-section-data and def-pur-finite-smooth-comparison-coordinates, record the unchanged owner modules. Their lean.statement fields match the live source verbatim. Every owner-module declaration the delivered Lean uses is listed. The item, canonical-maps and adjunction-data cite the new nodes in place of the two theorems; the theorems stay in proof_deps. Compared with live, the item adds no theorem stmt_dep. Citations equal stmt_deps, there is no cycle, and the statement_change archive equals live. nt_compile --json on all five files: rc 0, no errors or warnings, 3.8-17.4 s each. Advisory: bundleAdjoint uses vectorBundlePurityAdjunction, whose owning node is not cited by the new record (inherited)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
  }
 }

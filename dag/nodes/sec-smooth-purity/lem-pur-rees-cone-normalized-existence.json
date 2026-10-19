@@ -1,0 +1,171 @@
+{
+ "id": "lem-pur-rees-cone-normalized-existence",
+ "kind": "statement",
+ "title": "Homogeneous-normalized Rees cone comparison exists",
+ "status": "split",
+ "statement": "For any closed immersion $s:S\\hookrightarrow V$, there exists an isomorphism $q$ from the extended-Rees zero fibre to the relative-Spec conormal cone satisfying $\\operatorname{ReesConeNormalized}(s,q)$ [def-pur-rees-cone-normalization]. This asserts existence only; no uniqueness is asserted.",
+ "stmt_deps": [
+  "def-pur-rees-cone-normalization"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+ },
+ "proof": [
+  {
+   "text": "On each ambient affine chart compose the conormal presentation chart with the proved homogeneous Rees/associated-graded isomorphism. Direct-sum and ideal-quotient induction on homogeneous representatives prove naturality for affine basic-open maps.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-pur-rees-associated-graded-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  },
+  {
+   "text": "Inverse images of ambient affine opens form a cover-dense and locally full basis on the closed subscheme. The basis sheaf-isomorphism theorem extends the chart isomorphisms. Constants show compatibility with the structure algebra. The affine-morphism/relative-Spec anti-equivalence then gives the scheme isomorphism and its pullback formula.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-asd-vector-bundle-zero-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  },
+  {
+   "text": "Pulling a degree-one representative along the Rees zero section gives zero: transfer to the quotient-spec chart, apply normalConeToQuotient, and use extendedReesAlgebraToPolynomial_C_mul_T_neg_one. The relative-Spec zero section is induced by the conormal augmentation, so its degree-one pullback is zero as well. The proved degree-one morphism-detection theorem identifies the two sections.",
+   "uses": [
+    "def-pur-normal-bundle",
+    "lem-pur-conormal-cone-hom-ext",
+    "lem-pur-conormal-graded-algebra",
+    "lem-pur-conormal-zero-section-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  },
+  {
+   "text": "The pullback of the constructed isomorphism cancels the conormal relative-Spec counit. Restrict to the Rees chart and cancel sectionsIso to obtain precisely the required a/t modulo t formula.",
+   "uses": [
+    "def-pur-rees-cone-normalization",
+    "lem-pur-rees-associated-graded-chart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-rees-associated-graded-chart",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-normal-bundle",
+  "lem-pur-conormal-cone-hom-ext",
+  "lem-pur-conormal-zero-section-pullback",
+  "def-pur-rees-cone-normalization"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "agent",
+  "date": "2026-10-19",
+  "note": "The affine Rees chart is explicitly constructed; sheaf descent, the anti-equivalence, augmentation comparison, and the required representative formula are written in Lean.",
+  "group": "K3"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extended Rees algebra modulo t is isomorphic to the associated graded algebra of an ideal",
+   "results": "8 hits: reesAlgebra; adjoin_monomial_eq_reesAlgebra; Ideal.powQuotPowSuccEquivMapMkPowSuccPow; no normalized comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring homomorphisms from the associated graded algebra of an ideal are determined by their values on degree one and degree zero",
+   "results": "8 hits, including DirectSum.ofZeroRingHom and DirectSum.liftRingHom; these concern all graded pieces, not degree-one generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.associatedGraded",
+   "results": "0 hits: unknown identifier 'Ideal.associatedGraded'",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|associatedGraded",
+   "results": "0 hits in logged msearch. Direct source rg found AssociatedGradedFiniteType, whose ideal-product induction is reused without finite generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothCanonicalInterfaces",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Homogeneous cone identification and uniqueness of the degree-one normalization.",
+   "via": [
+    "def-pur-finite-smooth-canonical-interfaces"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReesConeNormalizedExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReesConeNormalizedExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison_exists",
+  "statement": "theorem reesConeComparison_exists {V S : Scheme.{u}} (s : S ⟶ V)\n    [IsClosedImmersion s] :\n    ∃ q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s,\n      ReesConeNormalized s q",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
+ }
+}

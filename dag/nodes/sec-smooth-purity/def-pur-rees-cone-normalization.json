@@ -1,0 +1,114 @@
+{
+ "id": "def-pur-rees-cone-normalization",
+ "kind": "definition",
+ "title": "Degree-one normalized comparison predicate",
+ "status": "split",
+ "statement": "For a closed immersion $s:S\\hookrightarrow V$ [def-pur-normal-bundle], identify the conormal algebra with the direct image of functions on its relative spectrum by the affine-morphism equivalence counit [lem-pur-conormal-graded-algebra, lem-weil-pbc-affine-morphism-relative-spec, def-asd-vector-bundle-zero-section]. For a cone isomorphism $q$, define $\\operatorname{ReesConeNormalized}(s,q)$ to require equality of the projections and augmentation sections and that on every ambient affine chart its pullback sends every degree-one ideal class of $a$ to $a/t$ modulo $t$. The chart maps are the existing extended-Rees gluing colimit legs.",
+ "stmt_deps": [
+  "def-pur-normal-bundle",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-asd-vector-bundle-zero-section"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extended Rees algebra modulo t is isomorphic to the associated graded algebra of an ideal",
+   "results": "8 hits: reesAlgebra; adjoin_monomial_eq_reesAlgebra; Ideal.powQuotPowSuccEquivMapMkPowSuccPow; no normalized comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring homomorphisms from the associated graded algebra of an ideal are determined by their values on degree one and degree zero",
+   "results": "8 hits, including DirectSum.ofZeroRingHom and DirectSum.liftRingHom; these concern all graded pieces, not degree-one generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.associatedGraded",
+   "results": "0 hits: unknown identifier 'Ideal.associatedGraded'",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|associatedGraded",
+   "results": "0 hits in logged msearch. Direct source rg found AssociatedGradedFiniteType, whose ideal-product induction is reused without finite generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothCanonicalInterfaces",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Homogeneous cone identification and uniqueness of the degree-one normalization.",
+   "via": [
+    "def-pur-finite-smooth-canonical-interfaces"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReesConeNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReesConeNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.ReesConeNormalized",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.coneAlgebraIso",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeChart",
+   "AlgebraicGeometry.Etale.FiniteSmoothPurity.ReesConeNormalized"
+  ],
+  "statement": "def ReesConeNormalized {V S : Scheme.{u}} (s : S ⟶ V) [IsClosedImmersion s]\n    (q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19",
+  "note": "Existing definitions relocated verbatim from the assigned module; they remain publicly re-exported there."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
+ }
+}

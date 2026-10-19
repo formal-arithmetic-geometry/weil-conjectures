@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-conormal-graded-algebra-hom-ext",
+ "kind": "statement",
+ "title": "Degree-one uniqueness for conormal algebra morphisms",
+ "status": "split",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion and let $G$ be its conormal graded algebra [lem-pur-conormal-graded-algebra]. For any sheaf $B$ of commutative $\\mathcal O_Z$-algebras, two $\\mathcal O_Z$-algebra maps $f,g:G\\to B$ are equal if for every affine open $U\\subseteq X$ they agree on the degree-one classes of all sections of the ideal-power module $\\mathcal I^1$ on $U$. No Noetherian, regularity or finite generation assumption is made.",
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+ },
+ "proof": [
+  {
+   "text": "On each ambient affine chart use the presentation affineChart and powerIdentification to represent every homogeneous class by an ideal-power section. The structure-algebra condition identifies degree zero. Induct on n, using ideal-product membership induction for I^(n+1)=I^n I, to identify every degree. Additive direct-sum induction identifies the ring maps. Inverse images of ambient affine opens form a basis on the closed subscheme, so sheaf-morphism uniqueness proves equality globally.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_i=t u_i, and the general associated-graded representative calculation, Stacks 0630, 0632 and 01LX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-algebra"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "agent",
+  "note": "Lean expansion of the homogeneous representative argument in the item docstring.",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extended Rees algebra modulo t is isomorphic to the associated graded algebra of an ideal",
+   "results": "8 hits: reesAlgebra; adjoin_monomial_eq_reesAlgebra; Ideal.powQuotPowSuccEquivMapMkPowSuccPow; no normalized comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring homomorphisms from the associated graded algebra of an ideal are determined by their values on degree one and degree zero",
+   "results": "8 hits, including DirectSum.ofZeroRingHom and DirectSum.liftRingHom; these concern all graded pieces, not degree-one generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.associatedGraded",
+   "results": "0 hits: unknown identifier 'Ideal.associatedGraded'",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedRees|associatedGraded",
+   "results": "0 hits in logged msearch. Direct source rg found AssociatedGradedFiniteType, whose ideal-product induction is reused without finite generation.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothCanonicalInterfaces",
+  "date": "2026-10-19",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Homogeneous cone identification and uniqueness of the degree-one normalization.",
+   "via": [
+    "def-pur-finite-smooth-canonical-interfaces"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalGradedAlgebraHomExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalGradedAlgebraHomExt.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.hom_ext_degree_one",
+  "statement": "theorem hom_ext_degree_one {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    {B : Z.CommAlgebraSheaf} (f g : (presentation i).algebra ⟶ B)\n    (h : ∀ (U : X.affineOpens) (a : (power i 1).val.obj (op U.1)),\n      f.right.hom.app (op (i ⁻¹ᵁ U.1))\n          (homogeneousClass i (presentation i).algebra (presentation i).inclusion 1 U.1 a) =\n        g.right.hom.app (op (i ⁻¹ᵁ U.1))\n          (homogeneousClass i (presentation i).algebra (presentation i).inclusion 1 U.1 a)) :\n    f = g",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-100a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261019T192801-L-1867479",
+  "kind": "interface",
+  "note": "independent cc review: reesConeComparison_existsUnique proof and 5 new proved helper modules vs node def-pur-finite-smooth-canonical-interfaces; 3 relocated defs diffed verbatim against live item module; importer FiniteSmoothPurityMaps compiled against the delivery; axioms checked (sorryAx only via base-era presentation and purityNormalProjection)"
+ }
+}
