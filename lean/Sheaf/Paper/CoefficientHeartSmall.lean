@@ -9,22 +9,12 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.EssentiallySmall
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import WeilConjectures.CategoryTheory.ModuleObjects.Free
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.Paper.LatticeSheafBasic
-import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
-import Sheaf.Paper.CartesianCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
+import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import Mathlib.CategoryTheory.ObjectProperty.Small
+import Sheaf.Paper.ProfinitePointPullback
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 /-!
 # Essential smallness of the constructible coefficient heart
 
@@ -43,64 +33,242 @@ the ambient category of sheaves can have object universe `u + 2`.
 
 set_option autoImplicit false
 
-universe u
+universe u v w z
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem boundedByMonos {C : Type u} [Category.{v} C]
+    [LocallySmall.{w} C] [WellPowered.{w} C]
+    (P : ObjectProperty C) {I : Type z} [Small.{w} I] (H : I → C)
+    (h : ∀ M, P M → ∃ i, ∃ f : M ⟶ H i, Mono f) :
+    ObjectProperty.EssentiallySmall.{w} P := by
+  let Q (i : I) : ObjectProperty C :=
+    (MonoOver.forget (H i) ⋙ Over.forget (H i)).essImage
+  have hQ (i : I) : ObjectProperty.EssentiallySmall.{w} (Q i) := by
+    dsimp only [Q]
+    infer_instance
+  have (i : I) : ObjectProperty.EssentiallySmall.{w} (Q i) := hQ i
+  have : ObjectProperty.EssentiallySmall.{w} (⨆ i, Q i) := inferInstance
+  apply ObjectProperty.EssentiallySmall.of_le (Q := ⨆ i, Q i)
+  intro M hM
+  obtain ⟨i, f, hf⟩ := h M hM
+  have := hf
+  apply (le_iSup Q i) M
+  exact ⟨MonoOver.mk f, ⟨Iso.refl M⟩⟩
+
+universe u' v'
+private theorem smallFromRestrictions {C : Type u} [Category.{v} C]
+    [LocallySmall.{w} C] [WellPowered.{w} C] [HasProducts.{z} C]
+    (I : Type z) [Small.{w} I] (D : I → Type u') [∀ i, Category.{v'} (D i)]
+    (L : ∀ i, C ⥤ D i) (R : ∀ i, D i ⥤ C) (adj : ∀ i, L i ⊣ R i)
+    (P : ∀ i, ObjectProperty (D i))
+    (hP : ∀ i, ObjectProperty.EssentiallySmall.{w} (P i))
+    (detect : ∀ {M N : C} (f : M ⟶ N), (∀ i, Mono ((L i).map f)) → Mono f) :
+    ObjectProperty.EssentiallySmall.{w} (fun M ↦ ∀ i, P i ((L i).obj M)) := by
+  classical
+  have (i : I) := hP i
+  choose Q hQ hPQ using fun i ↦
+    ObjectProperty.EssentiallySmall.exists_small_le' (P i)
+  let J := ∀ i, Shrink.{w} (Subtype (Q i))
+  let H (j : J) : C := ∏ᶜ fun i ↦
+    (R i).obj ((equivShrink (Subtype (Q i))).symm (j i)).val
+  apply boundedByMonos _ H
+  intro M hM
+  choose Y hY e using fun i ↦ hPQ i _ (hM i)
+  let j : J := fun i ↦ equivShrink (Subtype (Q i)) ⟨Y i, hY i⟩
+  let iso (i : I) : (L i).obj M ≅
+      ((equivShrink (Subtype (Q i))).symm (j i)).val := by
+    simpa only [j, Equiv.symm_apply_apply] using (e i).some
+  let t : M ⟶ H j := Pi.lift fun i ↦ (adj i).homEquiv _ _ (iso i).hom
+  refine ⟨j, t, detect t fun i ↦ ?_⟩
+  have fac : (L i).map t ≫
+      ((L i).map (Pi.π _ i) ≫ (adj i).counit.app _) = (iso i).hom := by
+    rw [← Category.assoc, ← Functor.map_comp, Pi.lift_π]
+    exact ((adj i).homEquiv_symm_apply _ _ _).symm.trans
+      (((adj i).homEquiv _ _).symm_apply_apply (iso i).hom)
+  exact mono_of_mono_fac fac
+
+private theorem coverReflectsIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (f : M ⟶ N) (h : ∀ i, IsIso ((CondensedRing.upperStar Λ (U.f i)).map f)) :
+    IsIso f := by
+  have : ∀ i, WeaklyEtale (U.f i) :=
+    (Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).mp U.mem₀.2 |>.2
+  have : IsIso f.hom := by
+    apply isIso_of_isIso_localizationRestriction Ab.{u + 1} f.hom U.f U.mem₀
+    intro i
+    have := h i
+    have h1 : IsIso ((upperStar Ab.{u+1} (U.f i)).map f.hom) := by
+      apply (NatIso.isIso_map_iff (profinitePointModuleForgetPullbackIso Λ (U.f i)) f).mp
+      exact inferInstanceAs (IsIso ((Mod.forget _).map
+        ((CondensedRing.upperStar Λ (U.f i)).map f)))
+    exact (NatIso.isIso_map_iff (upperStarIsoLocalizationRestriction
+      Ab.{u+1} (U.f i) inferInstance) f.hom).mp h1
+  have : IsIso ((Mod.forget _).map f) := ‹IsIso f.hom›
+  exact isIso_of_reflects_iso f (Mod.forget _)
+
+private theorem coverReflectsMono
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (f : M ⟶ N) (h : ∀ i, Mono ((CondensedRing.upperStar Λ (U.f i)).map f)) :
+    Mono f := by
+  let := HasZeroObject.zero'
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u+1}) (condensedRingObj Λ X))
+  have : IsIso (0 : kernel f ⟶ 0) := by
+    apply coverReflectsIso Λ U
+    intro i
+    let L := CondensedRing.upperStar Λ (U.f i)
+    have := h i
+    have hz : IsZero (kernel (L.map f)) := isZero_kernel_of_mono _
+    have hsrc : IsZero (L.obj (kernel f)) := hz.of_iso (PreservesKernel.iso L f)
+    have htgt : IsZero (L.obj 0) := L.map_isZero (isZero_zero _)
+    exact isIso_of_source_target_iso_zero _ hsrc.isoZero htgt.isoZero
+  have hz : IsZero (kernel f) := (isZero_zero _).of_iso (asIso (0 : kernel f ⟶ 0))
+  exact Abelian.mono_of_kernel_ι_eq_zero f (hz.eq_of_src _ _)
+
+open CategoryTheory.MonoidalCategory
+private theorem finitelyPresentedSmall {C : Type u} [Category.{v} C]
+    [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
+    [LocallySmall.{w} C] (R : C) [MonObj R]
+    [PreservesFiniteColimits (tensorLeft R)] :
+    ObjectProperty.EssentiallySmall.{w} (Mod.IsFinitelyPresented R) := by
+  classical
+  have : LocallySmall.{w} (Mod C R) := locallySmall_of_faithful (Mod.forget R)
+  let I := Σ n m : ℕ, Shrink.{w} (Mod.finiteFree R m ⟶ Mod.finiteFree R n)
+  let model (i : I) : Mod C R :=
+    cokernel ((equivShrink (Mod.finiteFree R i.2.1 ⟶ Mod.finiteFree R i.1)).symm i.2.2)
+  refine ⟨ObjectProperty.ofObj model, inferInstance, ?_⟩
+  intro M hM
+  obtain ⟨n, m, f, e⟩ := hM
+  exact ⟨model ⟨n, m, equivShrink _ f⟩, ⟨(⟨n, m, equivShrink _ f⟩ : I)⟩, by
+    simpa only [model, Equiv.symm_apply_apply] using e⟩
+
+private theorem constantLocalModelsSmall
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    ObjectProperty.EssentiallySmall.{u + 1} (HasFiniteConstantLocalModel Λ X) := by
+  classical
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u+1}) (condensedRingObj Λ X)
+  have : HasLimitsOfSize.{u, u} C := hasLimitsOfSizeShrink.{u, u, u+1, u+1} C
+  let P (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X) : ObjectProperty C :=
+    fun M ↦ ∀ i : U.I₀, ObjectProperty.map (Mod.IsFinitelyPresented Λ)
+      ((upperStarFromPoint (U.X i)).mapMod Λ)
+        ((CondensedRing.upperStar Λ (U.f i)).obj M)
+  have hP (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X) :
+      ObjectProperty.EssentiallySmall.{u+1} (P U) := by
+    have := finitelyPresentedSmall.{u + 2, u + 1, u + 1} Λ
+    apply smallFromRestrictions U.I₀
+      (fun i ↦ Mod (Sheaf (Scheme.ProEt.topology (U.X i)) Ab.{u+1})
+        (condensedRingObj Λ (U.X i)))
+      (fun i ↦ CondensedRing.upperStar Λ (U.f i))
+      (fun i ↦ CondensedRing.lowerStar Λ (U.f i))
+      (fun i ↦ CondensedRing.upperStarLowerStarAdjunction Λ (U.f i))
+      (fun i ↦ ObjectProperty.map (Mod.IsFinitelyPresented Λ)
+        ((upperStarFromPoint (U.X i)).mapMod Λ))
+    · intro i
+      infer_instance
+    · intro M N f hf
+      exact coverReflectsMono Λ U f hf
+  have (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X) := hP U
+  apply ObjectProperty.EssentiallySmall.of_le
+    (Q := ⨆ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, P U)
+  intro M hM
+  obtain ⟨U, hU⟩ := hM
+  apply (le_iSup P U) M
+  intro i
+  obtain ⟨N, hN, ⟨e⟩⟩ := hU i
+  exact ⟨N, hN, ⟨e.symm⟩⟩
+
+private theorem stratifiedModelsSmall
+    (A : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj A] [IsCommMonObj A]
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] :
+    ObjectProperty.EssentiallySmall.{u+1}
+      (IsFiniteConstantStratified A X) := by
+  classical
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u+1}) (condensedRingObj A X)
+  let P (S : Scheme.Stratification X) : ObjectProperty C := fun M ↦
+    ∀ i : Fin S.n, HasFiniteConstantLocalModel A (S.domain i)
+      ((CondensedRing.upperStar A (S.immersion i)).obj M)
+  have hP (S : Scheme.Stratification X) :
+      ObjectProperty.EssentiallySmall.{u+1} (P S) := by
+    have : HasLimitsOfSize.{0, 0} C := hasLimitsOfSizeShrink.{0, 0, u+1, u+1} C
+    exact smallFromRestrictions (Fin S.n)
+      (fun i ↦ Mod (Sheaf (Scheme.ProEt.topology (S.domain i)) Ab.{u+1})
+        (condensedRingObj A (S.domain i)))
+      (fun i ↦ CondensedRing.upperStar A (S.immersion i))
+      (fun i ↦ CondensedRing.lowerStar A (S.immersion i))
+      (fun i ↦ CondensedRing.upperStarLowerStarAdjunction A (S.immersion i))
+      (fun i ↦ HasFiniteConstantLocalModel A (S.domain i))
+      (fun i ↦ constantLocalModelsSmall A (S.domain i))
+      (by
+        intro M N f hf
+        apply Preadditive.mono_of_cancel_zero
+        intro Z g hg
+        apply Mod.hom_ext
+        have : IsNoetherian X := {}
+        have : ∀ i : Fin S.n, TopologicalSpace.NoetherianSpace (S.domain i) :=
+          fun i ↦ (S.immersion i).isEmbedding.noetherianSpace
+        have : ∀ i : Fin S.n, QuasiCompact (S.immersion i) := fun i ↦ inferInstance
+        apply abDetectMaps S.immersion
+        · intro x
+          obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+            (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
+          exact ⟨i, (S.range_immersion i).symm ▸ hi⟩
+        · intro i
+          let L := CondensedRing.upperStar A (S.immersion i)
+          have := hf i
+          have hzero : L.map g = 0 := by
+            apply zero_of_comp_mono (L.map f)
+            rw [← L.map_comp, hg, L.map_zero]
+          have he := (profinitePointModuleForgetPullbackIso A (S.immersion i)).hom.naturality g
+          change (L.map g).hom ≫ _ = _ ≫
+            (upperStar Ab.{u + 1} (S.immersion i)).map g.hom at he
+          rw [hzero, Mod.zero_hom, zero_comp] at he
+          exact (cancel_epi
+            ((profinitePointModuleForgetPullbackIso A (S.immersion i)).hom.app Z)).mp
+              (he.symm.trans (comp_zero).symm))
+  have (S : Scheme.Stratification X) := hP S
+  apply ObjectProperty.EssentiallySmall.of_le
+    (Q := ⨆ S : Scheme.Stratification X, P S)
+  intro M hM
+  obtain ⟨S, hS⟩ := hM
+  exact (le_iSup P S) M hS
 
 /-- The constructible heart for a finite subextension E of Qbar_l, or for Qbar_l itself,
 has a set of isomorphism classes in the fixed larger universe.
 Source: blueprint sk-lem-coefficient-heart-small and its proof, with the nine-step
 DAG refinement (blueprint: det-lem-coefficient-heart-small).
 
-Proof plan:
-1. Use def-weil-pbc-internal-abelian-sheaf-module-equivalence, with the monoidal
-sheafification of sk-def-sfb-sheaf-tensor, to work with sectionwise modules without
-changing the pulled-back coefficient ring, sections, or restriction maps.
-2. By def-weil-size-convention the bounded schemes and morphisms form a set in the
-larger universe. Finite lists of locally closed immersions over X form a set; select
-those with disjoint constructible images covering X (def-constructible-stratification).
-3. The scalar ring of either condensed coefficient is the corresponding field, by
-def-sfb-padic-subfield-condensed-ring and sk-def-sfb-qlbar-condensed. A finitely
-presented scalar module has finitely many generators (def-sfb-finitely-presented-module).
-Choose a basis by lem-weil-pbc-vector-space-free. The union of the finite supports of
-these generators is finite and spans; independence shows that it is the whole basis.
-Thus the scalar module is free of some finite rank, including rank zero.
-4. Local Noetherianity gives quasi-separatedness
-(lem-weil-pbc-locally-noetherian-quasi-separated). Together with quasi-compactness,
-sk-def-sfb-constructible gives a finite adapted stratification. Sheafify coordinate
-maps (def-weil-pbc-sheafification), then use lem-weil-pbc-lattice-free-scalar-extension
-to identify each scalar model with a finite free coefficient sheaf. Refinement preserves
-this by det-lem-coefficient-heart-common-stratification (2).
-5. For a site object U over a stratum S, lem-weil-proetale-weakly-etale-localization (1)
-identifies U_proet with the slice S_proet/U. In the indexing category for inverse image
-(def-weil-proetale-inverse-image), (T,id) is initial, so the opposite colimit is M(T).
-Slice coverings are unchanged, so this is already a sheaf. The same calculation applies
-to the ring and its action. sk-prop-sfb-cartesian-coefficients therefore identifies a
-trivialization with the original finite free section modules over every T over U.
-6. On a fixed small site choose a trivializing cover, removing repeated objects. Its
-indices form a subset of the site objects; the cover need not be finite. Record its
-ranks and the mutually inverse transition matrices on overlaps, with the cocycle on
-triple overlaps and identity only after restriction to the diagonal of a self-overlap.
-These data form a set of codes. Different ranks and empty overlaps are allowed.
-7. For a code c, define its model on V as the compatible families of sections in the
-free modules on V times_S U_i, with componentwise restrictions and scalar action.
-The coefficient sheaf axiom glues these families uniquely
-(def-weil-pbc-sites-and-cohomology). The sheaf axiom on the pulled-back cover identifies
-any sheaf producing c with this explicit model (def-weil-sheaf-of-modules-category).
-8. Fix the finitely many stratum models L_a and put H = product_a a_* L_a.
-The adjunction units (sk-def-sfb-module-pushforward-pullback) and the chosen restriction
-isomorphisms give F to H. Its kernel restricts to zero on every stratum: exact pullback
-(sk-prop-sfb-cartesian-coefficients) and the triangle identity show this. Detection on
-strata (det-lem-coefficient-heart-common-stratification (3)) makes the kernel zero.
-Thus F embeds in this fixed H.
-9. Subsheaves of H are determined by subsets of its sections at each site object,
-with inherited operations and restrictions (def-weil-sheaf-of-modules-category). They
-form a subset of a product of power sets, hence a set in the larger universe. Take the
-union over the set of stratifications and finite tuples of codes, retain constructible
-models, and quotient by isomorphism. This gives the required set of representatives.
-For empty X the stratum detection gives F = 0; empty strata and rank zero are allowed. -/
+Proof:
+Finite presentations over the coefficient on the point form an essentially small
+property: encode a presentation by two natural numbers and a morphism between the
+corresponding finite free modules, and take its cokernel. Functorial images of this
+property remain essentially small.
+
+For a fixed cover, choose small representatives of the local models. Adjunction
+transposes their restriction isomorphisms into a map to the product of their direct
+images. Each restriction of this map is monic by the counit equation, so the map
+itself is monic. Cover restrictions jointly detect this by localization of abelian
+sheaves and the coefficient-forgetful comparison. The module category is well-powered,
+so subobjects of these small families of products form an essentially small property.
+Taking the small union over covers proves smallness of finite constant local models.
+
+Repeat this argument over a fixed finite stratification. Joint detection for the
+actual quasi-compact stratum immersions is the abelian section-detection argument
+`abDetectMaps`; the coefficient-forgetful comparison transfers it to module maps.
+Noetherianity makes the immersions quasi-compact. Finally take the small union over
+stratifications and use the qcqs branch of the constructibility definition. Empty
+covers, empty strata, the empty scheme, and rank-zero presentations are included.
+The argument works for every commutative condensed coefficient ring. -/
 theorem coefficientHeart_essentiallySmall (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
@@ -113,6 +281,20 @@ theorem coefficientHeart_essentiallySmall (ℓ : ℕ) [Fact ℓ.Prime]
       (ConstantModelConstructible
         ((sheafCompose (coherentTopology Profinite.{u})
           (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) := by
-  sorry
+  let A := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ
+  have hsmall : ObjectProperty.EssentiallySmall.{u + 1}
+      (IsFiniteConstantStratified A X) := stratifiedModelsSmall A X
+  let : ObjectProperty.EssentiallySmall.{u + 1}
+      (IsFiniteConstantStratified A X) := hsmall
+  have hprop : ObjectProperty.EssentiallySmall.{u + 1}
+      (IsConstantModelConstructible A X) := by
+    rw [show IsConstantModelConstructible A X = IsFiniteConstantStratified A X by
+      funext M
+      exact if_pos ⟨inferInstance, inferInstance⟩]
+    exact hsmall
+  let : ObjectProperty.EssentiallySmall.{u + 1}
+      (IsConstantModelConstructible A X) := hprop
+  cases hΛ <;> infer_instance
 
 end AlgebraicGeometry.ProEtale
