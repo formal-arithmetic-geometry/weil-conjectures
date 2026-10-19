@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.Paper.ExchangeIdentityPasting
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 
 /-!
 # Further base change of the derived exchange map
@@ -155,8 +156,50 @@ theorem kun_bc_base_change
         (pullback.snd f' u₀)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map
           ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}
             (pullback.fst f' u₀) g').inv.app K) := by
-  sorry
+  have h := derivedExchange_identity_pasting.{u}.2.1
+    (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
+    (IsPullback.of_hasPullback f' u₀)
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id] using NatTrans.congr_app h K
 
+private lemma derivedBaseChangeMapPlus_paste_horiz_app_eq
+    {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X}
+    {f'' : X'' ⟶ Y''} {f' : X' ⟶ Y'} {f : X ⟶ Y}
+    {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
+    (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g'' f'' f' h)
+    (r : X'' ⟶ X) (hr : r = g'' ≫ g')
+    (k : Y'' ⟶ Y) (hk : k = h ≫ g) (sq : CommSq r f'' f k)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app K =
+      (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} h g k hk).hom.app
+          ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj K) ≫
+        (h)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.map
+          ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₁).app K) ≫
+        (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₂).app
+          ((g')^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.obj K) ≫
+        (f'')_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.map
+          ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} g'' g' r hr).inv.app K) := by
+  subst r
+  subst k
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id] using NatTrans.congr_app
+      (derivedBaseChangeMapPlus_paste_horiz AddCommGrpCat.{u + 1} sq₁ sq₂ sq) K
+
+private lemma cancel_pasting_comparisons
+    {C D : Type*} [Category C] [Category D] (F : D ⥤ C)
+    {U V W P R : C} {L M N : D}
+    (c : U ≅ V) (e : U ≅ W) (d : L ≅ M) (t : L ≅ N)
+    (p : V ⟶ P) (q : P ⟶ F.obj M) (r : W ⟶ R) (s : R ⟶ F.obj N)
+    (h : c.hom ≫ p ≫ q ≫ F.map d.inv = e.hom ≫ r ≫ s ≫ F.map t.inv) :
+    p ≫ q ≫ F.map (d.inv ≫ t.hom) = (c.inv ≫ e.hom ≫ r) ≫ s := by
+  have hc := congrArg (fun z ↦ c.inv ≫ z ≫ F.map t.hom) h
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, ← F.map_comp,
+    Iso.inv_hom_id, F.map_id, Category.comp_id] using hc
+
+set_option maxHeartbeats 800000 in
+-- Elaborating the two pasting equations involves several concrete derived functors.
 /-- Clause (2): the four-corner base-change diagram commutes with both comparison arrows.
 Source: blueprint lem-kun-bc-base-change; Stacks Project, Remark 0E47
 (blueprint: lem-kun-bc-base-change).
@@ -181,7 +224,32 @@ theorem kun_bc_base_change_cube
       (kunBaseChangeLeft f g w K) (kunBaseChangeRight sq w K)
       ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (kunBaseChangedSquare sq w)).app
         ((pullback.fst f w)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.obj K)) := by
-  sorry
+  let outer : CommSq (pullback.fst (f' ≫ g) w ≫ g')
+      (kunBaseChangeRightMap f' g w) f (pullback.fst g w ≫ g) :=
+    ⟨by rw [Category.assoc, sq.w, ← Category.assoc,
+      (kunBaseChangeComparisonSquare f' g w).w, Category.assoc]⟩
+  have h₁ := derivedBaseChangeMapPlus_paste_horiz_app_eq sq.toCommSq
+    (kunBaseChangeComparisonSquare f' g w) _ rfl _ rfl outer K
+  have h₂ := derivedBaseChangeMapPlus_paste_horiz_app_eq
+    (IsPullback.of_hasPullback f w).toCommSq (kunBaseChangedSquare sq w)
+    _ (pullback.lift_fst _ _ _).symm _ (pullback.condition (f := g) (g := w)) outer K
+  have h := h₁.symm.trans h₂
+  have hc := cancel_pasting_comparisons
+    (kunBaseChangeRightMap f' g w)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus
+    ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} (pullback.fst g w) g).app
+      ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj K))
+    ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} (pullback.snd g w) w
+      (pullback.fst g w ≫ g) (pullback.condition (f := g) (g := w))).app
+      ((f)_*[AddCommGrpCat.{u + 1}].rightDerivedFunctorPlus.obj K))
+    ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1}
+      (pullback.fst (f' ≫ g) w) g').app K)
+    ((upperStarCompDerivedPlus AddCommGrpCat.{u + 1} (kunBaseChangeTopMap sq w)
+      (pullback.fst f w) (pullback.fst (f' ≫ g) w ≫ g')
+      (pullback.lift_fst _ _ _).symm).app K) _ _ _ _ h
+  constructor
+  simpa only [kunBaseChangeLeft, kunBaseChangeRight, kunBaseChangeSourceIso,
+    kunBaseChangeTargetIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Iso.app_hom, Iso.app_inv, Category.assoc] using hc
 
 /-- The conditional identification in clause (2), when both vertical comparisons are isos.
 Source: blueprint lem-kun-bc-base-change, final paragraph
@@ -202,6 +270,8 @@ theorem kun_bc_base_change_identification
         (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (kunBaseChangedSquare sq w)).app
           ((pullback.fst f w)^*[AddCommGrpCat.{u + 1}].mapDerivedCategoryPlus.obj K) ≫
         inv (kunBaseChangeRight sq w K) := by
-  sorry
+  apply (cancel_mono (kunBaseChangeRight sq w K)).1
+  simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using
+    (kun_bc_base_change_cube sq w K).w
 
 end AlgebraicGeometry.Etale
