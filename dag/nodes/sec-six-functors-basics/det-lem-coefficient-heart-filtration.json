@@ -18,67 +18,49 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical coefficient isomorphisms of [sk-prop-sfb-cartesian-coefficients] (1) throughout: inverse-image coefficient rings are the specified $\\Lambda_T$, and module pullback is exact inverse image. Every open subscheme of $X$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open immersion between such schemes is quasi-compact: its preimage over an affine open is again an open subscheme of a Noetherian scheme. Thus [det-sf-open-closed-sequence-ring-sheaf] applies on $X$ and every $V_k$. Its clause (3) makes the counit $F_k=v_{k!}v_k^*F\\to F$ a monomorphism. For $w:V_{k-1}\\hookrightarrow V_k$, clause (1) and the pure-open composition isomorphism of [lem-sfb-locally-closed-extension-coherence] give\n$$F_{k-1}\\simeq v_{k!}w_!w^*v_k^*F\\longrightarrow v_{k!}v_k^*F=F_k\\longrightarrow F.$$\nThis composite is the counit for $v_{k-1}$: under its open adjunction, both it and that counit restrict to the identity on $v_{k-1}^*F$. Here the composition comparison restricts to the identity by the normalization in the cited coherence statement. Hence these are inclusions of subsheaves over $F$. Extension from the empty open is zero (the left adjoint from the zero module category), and extension along the identity is the identity. Therefore $F_0=0$ and $F_m=F$.",
+   "text": "Use the already proved monic condensed open counit and zero/identity endpoint lemmas in ContinuousConstructibleIntegralGluing. From hV the first open is empty, the last is all of X, and adjacent prefix opens are nested. Compose the two actual open adjunctions and use Adjunction.exists_iso_counit_app with upperStarComp to factor their counits over F. Hence their image subobjects are nested. A module on the empty scheme is zero, giving the bottom endpoint, and the full-open counit is invertible, giving the top endpoint.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-weil-pbc-continuous-constructible-integral-gluing"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "First paragraph: coefficient identifications, counit subobjects, nested opens and endpoints."
+    "document": "lean/Sheaf/Paper/ContinuousConstructibleIntegralGluing.lean",
+    "place": "mono_condensed_counit, iso_condensed_counit, module_zero_of_empty, and stratification_mem"
    }
   },
   {
-   "text": "Fix $1\\leq k\\leq m$, put $G=v_k^*F$, and let $c:S_k\\hookrightarrow V_k$ be the closed complement of $w:V_{k-1}\\hookrightarrow V_k$. Clause (3) of [det-sf-open-closed-sequence-ring-sheaf] gives\n$$0\\to w_!w^*G\\to G\\to c_*c^*G\\to0.$$\nApply the exact functor $v_{k!}$ from clause (1). Using the composition and counit identifications established in step 1 and $c^*G=F|_{S_k}$, obtain\n$$0\\to F_{k-1}\\to F_k\\to v_{k!}c_*(F|_{S_k})\\to0.$$\nThe first map is the inclusion over $F$ from step 1, so its cokernel is precisely the subsheaf quotient $F_k/F_{k-1}$. All qcqs and quasi-compact-open hypotheses are those checked in step 1.",
+   "text": "Partition disjointness and hV identify the difference of adjacent prefix opens with the designated stratum. Factor its immersion through the larger open and prove the factor is closed from its range. The proved condensed open_cokernel_zero and supported_unit identify the local localization cokernel with closed direct image of its closed restriction; closed_cokernel_iso identifies this restriction with the original module restriction. Apply coefficientHeart_filtration_core only to compare this closed-then-open extension with the scheme-theoretic-image extension. Subobject.cokernelOfLEMkIso and preservation of cokernels by outer open extension identify the original quotient with the local cokernel. Explicit imageSubobject_mono equalities transport between image and represented subobjects.",
    "uses": [
-    "det-sf-open-closed-sequence-ring-sheaf"
+    "lem-weil-pbc-continuous-constructible-integral-gluing",
+    "new-det-lem-coefficient-heart-filtration-core"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Second paragraph: localization on V_k and exact open extension."
+    "document": "lean/Sheaf/Paper/CoefficientHeartFiltration.lean",
+    "place": "coefficientHeart_localQuotient and the quotient branch of coefficientHeart_filtration"
    }
   },
   {
-   "text": "The immersion $a_k:S_k\\hookrightarrow X$ has the closed-then-open factorization $a_k=v_k\\circ c$ and the open-then-closed factorization $a_k=i\\circ u$ through its closure, as in the statement. Apply [lem-sfb-locally-closed-extension-coherence] with $R=\\Lambda_X$. It gives, on module sheaves, the canonical factorization comparison\n$$v_{k!}c_*\\simeq i_*u_!=a_{k!}.$$\nIts hypotheses are exactly that $X$ is Noetherian and $R$ is a commutative ring sheaf; it is not restricted to finite constant coefficients. The inverse-image rings are identified with $\\Lambda_{S_k}$ and the other prescribed coefficients by step 1. Substituting this comparison into step 2 yields $F_k/F_{k-1}\\simeq a_{k!}(F|_{S_k})$. This invokes the existing general comparison theorem rather than identifying sheaves merely from their restrictions.",
+   "text": "Apply the lisse restriction clause of coefficientHeart_commonStratification to R as both the original and refined stratification. Identity containment supplies the refinement witnesses. The adaptedness hypothesis makes every restriction lisse; pair this with the quotient isomorphism.",
    "uses": [
-    "lem-sfb-locally-closed-extension-coherence"
+    "det-lem-coefficient-heart-common-stratification"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Second paragraph: the asserted equality v_k! c_* = a_k!, made precise by the existing factorization-comparison theorem."
-   }
-  },
-  {
-   "text": "By the adapted-stratification hypothesis and the constructible/lisse characterization in [det-lem-coefficient-heart-closure], each $F|_{S_k}$ is lisse. The filtration terms are constructible too. Indeed clause (1) of [det-sf-open-closed-sequence-ring-sheaf] gives $v_k^*F_k\\simeq v_k^*F$, so their restrictions to earlier strata are those of $F$. Let $z:Z\\hookrightarrow X$ be the closed complement of $v_k$. In clause (3) applied to $M=v_{k!}N$, the counit $v_{k!}v_k^*v_{k!}N\\to v_{k!}N$ is an isomorphism: its inverse is $v_{k!}$ of the unit, by clause (1) and the triangle identity. Thus $z_*z^*v_{k!}N=0$, and applying $z^*$ and clause (2) gives $z^*v_{k!}N=0$. Every later stratum factors through $Z$ as a locally closed subscheme, so $F_k$ restricts to zero there. Hence $F_k$ is lisse on each stratum (zero has rank zero), and the cited characterization proves constructibility. The inclusions may be equal, for example when $F=0$; no strictness is claimed.",
-   "uses": [
-    "det-lem-coefficient-heart-closure",
-    "det-sf-open-closed-sequence-ring-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Last sentence: lisseness on the adapted strata; verification that the filtration belongs to Cons."
+    "document": "lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean",
+    "place": "coefficientHeart_commonStratification"
    }
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-lem-coefficient-heart-closure"
+  "lem-weil-pbc-continuous-constructible-integral-gluing",
+  "new-det-lem-coefficient-heart-filtration-core",
+  "det-lem-coefficient-heart-common-stratification"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-  "place": "First and second proof paragraphs, using the existing arbitrary-ring localization and locally closed factorization-comparison statements."
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CoefficientHeartFiltration.lean",
+  "place": "Monic counits, endpoints and nesting from the existing open-adjunction API; local quotient via condensed localization and the proved mixed-factorization comparison; lisseness from common stratification."
  },
  "mathlib_searches": [
   {
@@ -206,10 +188,6 @@
   ]
  },
  "tool_uses": [
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "sk-prop-sfb-cartesian-coefficients",
   "lem-sfb-locally-closed-extension-coherence"
  ],
  "reviewed": {
@@ -258,5 +236,15 @@
   "by": "N7",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261019T192816-L-1870547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

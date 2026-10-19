@@ -1,0 +1,152 @@
+{
+ "id": "new-det-lem-coefficient-heart-filtration-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-heart-filtration",
+   "place": "Second proof paragraph: localization on V_k and comparison v_k! c_* = a_k!."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Mixed factorization comparison for locally closed extensions",
+ "statement": "Let Λ be a commutative condensed ring, X a Noetherian scheme, i : S ⟶ T a closed immersion, v : T ⟶ X an open immersion, and a : S ⟶ X an immersion with i ≫ v = a. Then the closed-then-open extension lowerStar Λ i ⋙ openImmersionLowerShriek Λ v is naturally isomorphic to extension by zero into the scheme-theoretic image openImmersionLowerShriek Λ a.toImage followed by lowerStar Λ a.imageι.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.md",
+  "place": "localization and successive quotient clauses of det-lem-coefficient-heart-filtration"
+ },
+ "stmt_deps": [
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star"
+ ],
+ "proof": [
+  {
+   "text": "Reconstruct the section-ring sheaf for each scheme. The uniquely normalized cartesian coefficient isomorphism has direct-image adjunct equal on each section to condensedPushforwardHom. By uniqueness this is the coefficient map used by InternalModuleOperations. Therefore the two actual sectionwise direct-image functors agree; uniqueness of left adjoints compares their inverse images and open extensions.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The abstract composite-adjunction identity expresses the adjunct of the composite coefficient identification as the composite of the two adjuncts followed by the site pullback-pasting comparison. Evaluate that identity on sections. The composition law condensedPushforwardHom_comp identifies it with the adjunct for the composite scheme morphism. Uniqueness of spCoefficientIso then proves equality of the coefficient identifications, hence equality of the bundled composite coefficient immersions.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All immersion sources, including the scheme-theoretic image, are Noetherian. Obtain a normalized locally closed extension system from locallyClosedExtensionCoherence. Its closedOpenFactorization and openClosedFactorization, together with equality of the composite coefficient immersions from hfac and a.toImage_imageι, compare the closed-then-open and open-then-closed composites on section modules. Whisker with the fixed section-module equivalences and the previously proved direct-image and open-extension comparisons, then cancel the fully faithful target equivalence. This gives the displayed natural isomorphism, including for empty sources and zero modules.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/CoefficientHeartFiltrationCore.lean",
+  "place": "Proved coefficient-adjunct composition, normalized factorization comparison, and transport through section-module equivalences."
+ },
+ "status": "split",
+ "merged_into": null,
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartFiltrationCore",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_filtration_core",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientHeart_filtration_core"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHeartFiltrationCore.lean",
+  "statement": "theorem coefficientHeart_filtration_core {X : Scheme.{u}} [IsNoetherian X] {S T : Scheme.{u}}\n    (i : S ⟶ T) [IsClosedImmersion i] (v : T ⟶ X) [IsOpenImmersion v]\n    (a : S ⟶ X) (ha : IsImmersion a) (hfac : i ≫ v = a) :\n    letI : IsImmersion a := ha\n    letI : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace\n    Nonempty (CondensedRing.lowerStar Λ i ⋙ CondensedRing.openImmersionLowerShriek Λ v ≅\n      CondensedRing.openImmersionLowerShriek Λ a.toImage ⋙\n        CondensedRing.lowerStar Λ a.imageι)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientHeartFiltration",
+  "date": "2026-10-19",
+  "group": "P4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of extension by zero from two nested open subschemes is the extension by zero of its restriction to the complementary locally closed stratum",
+   "results": "Eight hits: scheme basic-open restriction and lifting lemmas; no sheaf quotient theorem.",
+   "date": "2026-10-19",
+   "verdict": "No local quotient comparison for pro-etale condensed module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernel\", \"Subobject\"",
+   "results": "ModuleCat.cokernel_π_imageSubobject_ext; an elementwise cokernel lemma, not localization.",
+   "date": "2026-10-19",
+   "verdict": "No local quotient comparison for pro-etale condensed module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelOfLEMkIso|open.*cokernel|cokernel.*open",
+   "results": "Mathlib/CategoryTheory/Abelian/DiagramLemmas/KernelCokernelComp.lean:196 only. Source library has Subobject.cokernelOfLEMkIso, used in the parent proof for the separate subobject bookkeeping.",
+   "date": "2026-10-19",
+   "verdict": "No local quotient comparison for pro-etale condensed module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cokernel of extension by zero from an open subscheme is the direct image of restriction to the complementary closed subscheme",
+   "results": "Eight hits: general cokernel and biproduct cokernel isomorphisms; no sheaf localization comparison.",
+   "date": "2026-10-19",
+   "verdict": "No matching pro-etale localization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of extension by zero along an open immersion and direct image along a closed immersion is independent of the factorization of a locally closed immersion",
+   "results": "Eight hits, all geometric immersion-lift or image-restriction identities; none compares the sheaf functors.",
+   "date": "2026-10-19",
+   "verdict": "No direct Mathlib mixed-factorization comparison; use the existing locallyClosedExtensionCoherence declaration and coefficient transport."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261019T192816-L-1870547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261019T192816-L-1870547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
