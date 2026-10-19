@@ -15,11 +15,16 @@ public import Sheaf.Paper.StrictPerfectPackageOnSite
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 import Sheaf.Paper.ProjectionMateExact
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
 import Sheaf.Paper.ProjectionFormulaTotalization
 import Sheaf.Paper.RingedProjectionRestriction
 public import Sheaf.Paper.CompletedConstantSheafReduction
 import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-!
 # Perfect projection formula for completed coefficient reductions
@@ -82,7 +87,21 @@ theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map
         (limit.π (adicLisseRingSystem Y d.ideal) n) ≫
       (proEtaleConstantComparison f).app (CommRingCat.of (A ⧸ d.ideal ^ (n.unop + 1)))) ≫
-      (adicLisseRingSystem X d.ideal).map a := sorry
+      (adicLisseRingSystem X d.ideal).map a := by
+  let c : adicLisseRingSystem Y d.ideal ⋙
+      proEtaleSheafInverseImage f CommRingCat.{u + 1} ⟶
+        adicLisseRingSystem X d.ideal :=
+    NatTrans.ofOpSequence
+      (fun n ↦ (proEtaleConstantComparison f).app
+        (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))
+      (fun n ↦ by
+        simpa only [Functor.comp_map, adicLisseRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] using
+          (proEtaleConstantComparison f).naturality
+            (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+  change 𝟙 _ ≫ _ ≫ c.app m = (_ ≫ c.app n) ≫ _
+  rw [Category.id_comp, Category.assoc, ← c.naturality]
+  rw [Functor.comp_map, ← Category.assoc, ← Functor.map_comp, limit.w]
 
 /-- The actual inverse-limit comparison, characterized by its quotient projections.
 Source: blueprint order 1275, coefficient identification
@@ -105,7 +124,40 @@ Proof: apply profinite-coefficient inverse image to the quotient ring system.
 The cone projection equations identify its canonical map with coefficientMap.
 The function-sheaf and constant-sheaf presentations agree by the recorded finite
 coefficient comparisons, naturally in every quotient transition. -/
-theorem coefficientMap_isIso : IsIso (coefficientMap d f) := sorry
+theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
+  let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} :=
+    Functor.ofOpSequence (X := fun n ↦ CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
+      (fun n ↦ CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
+  let c (T : Scheme.{u}) : proEtaleCoefficientTower T Q ⟶ adicLisseRingSystem T d.ideal :=
+    NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
+      intro n
+      simp only [proEtaleCoefficientTower, Functor.comp_map, Q, adicLisseRingSystem,
+        Functor.ofOpSequence_map_homOfLE_succ, Category.comp_id, Category.id_comp])
+  have hc (T : Scheme.{u}) : IsIso (c T) := by
+    have : ∀ n, IsIso ((c T).app n) := fun _ ↦ inferInstanceAs (IsIso (𝟙 _))
+    exact NatIso.isIso_of_isIso_app _
+  have : ∀ n : ℕᵒᵖ, Finite (Q.obj n) := fun n ↦ d.quotientFinite n.unop
+  have hp := proEtale_profinite_coefficient_inverse_image Q
+  have := hp.2.1 X Y f
+  have := hc X
+  have := hc Y
+  have he : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limMap (c Y)) ≫
+      coefficientMap d f = proEtaleProfiniteComparison f Q ≫ limMap (c X) := by
+    apply limit.hom_ext
+    intro n
+    simp only [Category.assoc, coefficientMap, limit.lift_π,
+      limMap_π]
+    change _ ≫ _ ≫ _ = _
+    rw [← Category.assoc, ← Functor.map_comp, limMap_π]
+    simp only [c, NatTrans.ofOpSequence_app, Category.comp_id]
+    exact (hp.2.2.1 X Y f n).symm
+  have : IsIso ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limMap (c Y)) ≫
+      coefficientMap d f) := by
+    rw [he]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limMap (c Y)))
+    (coefficientMap d f)
 
 /-- The canonical coefficient identification; only its invertibility is postponed.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -166,6 +218,55 @@ theorem perfect_projection_formula :
       SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) P →
         locus d f aY aX K P) := sorry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem moduleUnit_existsUnique
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S) :
+    ∃! j : (proEtaleRingModulePullback f R S c).obj
+        (SheafOfModules.unit ((adicLisseForget Y).obj R)) ≅
+          SheafOfModules.unit ((adicLisseForget X).obj S),
+      ∀ (U : Y.ProEtᵒᵖ) (r : R.obj.obj U),
+        ((proEtaleRingModuleAdjunction f R S c).homEquiv
+          _ _ j.hom).val.app U r =
+        (proEtaleRingDirectImageMap f R S c).hom.app U r := by
+  let adj := proEtaleRingModuleAdjunction f R S c
+  let φ : (adicLisseForget Y).obj R ⟶
+      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).obj
+          ((adicLisseForget X).obj S) :=
+    ⟨Functor.whiskerRight
+      (proEtaleRingDirectImageMap f R S c).hom
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  have : (SheafOfModules.pushforward.{u + 1} φ).IsRightAdjoint := adj.isRightAdjoint
+  let adj' := SheafOfModules.pullbackPushforwardAdjunction.{u + 1} φ
+  let e := adj.leftAdjointUniq adj'
+  let j := e.app (SheafOfModules.unit ((adicLisseForget Y).obj R)) ≪≫
+    asIso (SheafOfModules.pullbackObjUnitToUnit φ)
+  have hj : adj.homEquiv _ _ j.hom = SheafOfModules.unitToPushforwardObjUnit φ := by
+    change adj.homEquiv _ _ (e.hom.app _ ≫ _) = _
+    rw [adj.homEquiv_naturality_right]
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    change adj'.homEquiv _ _ (SheafOfModules.pullbackObjUnitToUnit φ) = _
+    exact SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit φ
+  refine ⟨j, ?_, ?_⟩
+  · intro U r
+    exact congrArg (fun z ↦ z.val.app U r) hj
+  · intro j' hj'
+    apply Iso.ext
+    apply (adj.homEquiv _ _).injective
+    rw [hj]
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro r
+    exact hj' U r
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical module pullback comparison is fixed by the constant-section adjunct.
 Source: blueprint order 1275, proof step 5
 (blueprint: lemma-weil-pbc-perfect-projection-formula).
@@ -185,7 +286,80 @@ theorem quotientPullback_existsUnique (n : ℕ) :
           (adicLisseConstantRing Y (A ⧸ d.ideal ^ (n + 1))) ≫
           (proEtaleSheafDirectImage f CommRingCat.{u + 1}).map
             ((proEtaleConstantComparison f).app
-              (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))).hom.app U) x := sorry
+              (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))).hom.app U) x := by
+  let RY := adicLisseConstantRing Y (A ⧸ d.ideal ^ (n + 1))
+  let RX := adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1))
+  have : IsIso ((proEtaleConstantComparison f).app
+      (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) := by
+    let Q := (Functor.const ℕᵒᵖ).obj (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))
+    have : ∀ i : ℕᵒᵖ, Finite (Q.obj i) := fun _ ↦ d.quotientFinite n
+    exact (proEtale_profinite_coefficient_inverse_image Q).1 X Y f (op n)
+  let c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RY ≅ RX :=
+    asIso ((proEtaleConstantComparison f).app
+      (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))
+  let aY : ring d Y ⟶ RY := limit.π (adicLisseRingSystem Y d.ideal) (op n)
+  let aX : ring d X ⟶ RX := limit.π (adicLisseRingSystem X d.ideal) (op n)
+  have hc : (coefficients d f).hom ≫ aX =
+      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aY ≫ c.hom :=
+    limit.lift_π _ (op n)
+  let resY := proEtaleRingRestrictScalars aY
+  let resX := proEtaleRingRestrictScalars aX
+  let adj := proEtaleRingModuleAdjunction f (ring d Y) (ring d X) (coefficients d f)
+  let adj' := proEtaleRingModuleAdjunction f RY RX c
+  let cmp := proEtaleRingRestrictionDirectImage f (ring d Y) RY (ring d X) RX
+    aY aX (coefficients d f) c hc
+  let t := proEtaleRingRestrictionPullbackInv f (ring d Y) RY (ring d X) RX
+    aY aX (coefficients d f) c hc
+  have : IsIso t := proEtaleRingRestrictionPullbackInv_isIso
+    f (ring d Y) RY (ring d X) RX aY aX (coefficients d f) c hc
+  obtain ⟨j, hj, _⟩ := moduleUnit_existsUnique f RY RX c
+  let M := SheafOfModules.unit ((adicLisseForget Y).obj RY)
+  let e : (proEtaleRingModulePullback f (ring d Y) (ring d X)
+      (coefficients d f)).obj (CompletedConstantReduction.residue Y d.ideal n) ≅
+        CompletedConstantReduction.residue X d.ideal n :=
+    (asIso t).app M ≪≫ resX.mapIso j
+  have he : adj.homEquiv _ _ e.hom =
+      resY.map (adj'.homEquiv _ _ j.hom) ≫
+        cmp.hom.app (SheafOfModules.unit ((adicLisseForget X).obj RX)) := by
+    have ht : t.app M = (adj.homEquiv _ _).symm
+        (resY.map (adj'.unit.app M) ≫
+          cmp.hom.app ((proEtaleRingModulePullback f RY RX c).obj M)) := by
+      change _ = (proEtaleRingModulePullback f (ring d Y) (ring d X)
+        (coefficients d f)).map (_ ≫ _) ≫ _
+      simp only [Functor.map_comp, Category.assoc]
+      rfl
+    change adj.homEquiv _ _ (t.app M ≫ resX.map j.hom) = _
+    rw [adj.homEquiv_naturality_right, ht]
+    erw [Equiv.apply_symm_apply]
+    have hn := cmp.hom.naturality j.hom
+    dsimp only [Functor.comp_map] at hn
+    rw [Category.assoc, ← hn]
+    simp only [← Category.assoc, Adjunction.homEquiv_unit]
+    rw [resY.map_comp]
+  have he' : ∀ (U : Y.ProEtᵒᵖ)
+      (x : (adicLisseConstantRing Y (A ⧸ d.ideal ^ (n + 1))).obj.obj U),
+      (adj.homEquiv _ _ e.hom).val.app U x =
+        (proEtaleRingDirectImageMap f RY RX c).hom.app U x := by
+    intro U x
+    rw [he]
+    change (cmp.hom.app (SheafOfModules.unit ((adicLisseForget X).obj RX))).val.app U
+      ((adj'.homEquiv _ _ j.hom).val.app U x) = _
+    erw [(Classical.choose_spec
+      (proEtaleRingRestrictionDirectImage_existsUnique f (ring d Y) RY (ring d X) RX
+        aY aX (coefficients d f) c hc)).1]
+    exact hj U x
+  refine ⟨e, he', ?_⟩
+  intro e' he''
+  apply Iso.ext
+  apply (adj.homEquiv _ _).injective
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact (he'' U x).trans (he' U x).symm
+
 
 /-- Pull back the quotient module by its uniquely normalized module comparison.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -215,6 +389,76 @@ def reductionMap (n : ℕ) :
     (directImage d f).map
       (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientDerivedPullback d f n).hom))
 
+/-- Chosen representatives for evaluating the signed-totalization inverse at a quotient.
+The maps represent the fixed K and the fixed quotient, rather than new derived objects.
+Source: blueprint order 1275, proof steps 5--6
+(blueprint: lemma-weil-pbc-perfect-projection-formula). -/
+structure Resolution (n : ℕ) where
+  injective : CochainComplex (modules d X) ℤ
+  isKInjective : injective.IsKInjective
+  representsK : K ≅ DerivedCategory.Q.obj injective
+  coefficient : CochainComplex (modules d Y) ℤ
+  bounded : ∃ l r : ℤ, ∀ i : ℤ, i < l ∨ r < i → IsZero (coefficient.X i)
+  package : SheafOfModules.StrictPerfectCoefficientPackageOnSite
+    ((adicLisseForget Y).obj (ring d Y)) coefficient
+  representsQuotient : DerivedCategory.Q.obj coefficient ≅ quotient d Y n
+
+/-- Every quotient admits the representatives used in the totalization comparison.
+Source: blueprint order 1275, proof steps 5--6
+(blueprint: lemma-weil-pbc-perfect-projection-formula).
+Proof: take a K-injective representative of K in all module sheaves. Perfectness of
+the quotient over A gives a bounded finite-projective A-resolution. Termwise constant
+sheafification followed by completed scalar extension gives the coefficient complex;
+completed-constant-sheaf-reduction supplies its augmentation quasi-isomorphism and
+finite-free retracts. Localize the augmentation to obtain representsQuotient. -/
+theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K n) := by
+  classical
+  have : IsNoetherianRing A := d.noetherian
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  obtain ⟨I, hI, ⟨eI⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+  obtain ⟨F, a, b, ha, hb, hF, ⟨eF⟩⟩ := d.quotientPerfect (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
+  have := ha
+  have := hb
+  have (i : ℤ) : Module.Projective A (F.X i) := (hF i).1
+  have (i : ℤ) : Projective (F.X i) := inferInstance
+  let Q := (CochainComplex.singleFunctor (ModuleCat.{u + 1} A) 0).obj
+    (ModuleCat.of A (A ⧸ d.ideal ^ (n + 1)))
+  obtain ⟨q, hq⟩ := DerivedCategory.Q_map_surjective_of_projective F Q b eF.inv
+  have : IsIso (DerivedCategory.Q.map q) := by rw [hq]; infer_instance
+  have hq' : QuasiIso q :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso (ModuleCat.{u + 1} A) q).mp inferInstance
+  have hbound : ∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i) := by
+    intro i hi
+    rcases hi with hi | hi
+    · exact F.isZero_of_isStrictlyGE a i hi
+    · exact F.isZero_of_isStrictlyLE b i hi
+  obtain ⟨hred, hret, hbounded⟩ :=
+    (CompletedConstantReduction.completed_constant_sheaf_reduction Y d.ideal).2.2.2
+      n F q a b hq' (fun i ↦ ⟨(hF i).2, (hF i).1⟩) hbound
+  let C := ((completedAdicChange Y
+    (CompletedConstantReduction.base Y d.ideal)).mapHomologicalComplex
+    (.up ℤ)).obj ((CompletedConstantReduction.constantComplex Y A).obj F)
+  have : HasFiniteBiproducts (modules d Y) := HasFiniteBiproducts.of_hasFiniteProducts
+  choose N i p hip using hret
+  let e (j : ℤ) := biproductIso (fun _ : Fin (N j) ↦
+    SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y)))
+  let pkg : SheafOfModules.StrictPerfectCoefficientPackageOnSite
+      ((adicLisseForget Y).obj (ring d Y)) C :=
+    { N := N
+      i := fun j ↦ i j ≫ (e j).inv
+      p := fun j ↦ (e j).hom ≫ p j
+      splitting := fun j ↦ by
+        simp only [Category.assoc, Iso.inv_hom_id_assoc, hip]
+        rfl }
+  let q' := CompletedConstantReduction.reductionComplex Y d.ideal n
+    ((CompletedConstantReduction.constantComplex Y A).obj F)
+    (CompletedConstantReduction.constantAugmentation Y d.ideal n F q)
+  have : QuasiIso q' := hred
+  let eq : DerivedCategory.Q.obj C ≅ quotient d Y n :=
+    asIso (DerivedCategory.Q.map q')
+  exact ⟨⟨I, hI, eI, C, ⟨a, b, hbounded⟩, pkg, eq⟩⟩
+
+
 /-- Every positive quotient is site-perfect and its canonical projection map is invertible.
 Source: Stacks 0944 and 093M; blueprint order 1275, proof step 5
 (blueprint: lemma-weil-pbc-perfect-projection-formula).
@@ -225,7 +469,51 @@ site-perfect. Apply perfect_projection_formula and compose with the direct image
 of the canonical quotient pullback isomorphism. This is exactly the displayed map. -/
 theorem reductionMap_isIso (n : ℕ) :
     SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) (quotient d Y n) ∧
-      IsIso (reductionMap d f aY aX K n) := sorry
+      IsIso (reductionMap d f aY aX K n) := by
+  obtain ⟨r⟩ := resolution_exists d (X := X) (Y := Y) K n
+  have hperfect : SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) (quotient d Y n) := by
+    refine ⟨r.coefficient, ?_, ⟨r.representsQuotient.symm⟩⟩
+    intro V
+    refine ⟨⊤, (ProEt.topology Y).top_mem V, ?_⟩
+    intro U g _
+    let L := SheafOfModules.overFunctor ((adicLisseForget Y).obj (ring d Y)) U
+    have : PreservesFiniteLimits L := by
+      let T := SheafOfModules.forget.{u + 1}
+        (((adicLisseForget Y).obj (ring d Y)).over U) ⋙
+          PresheafOfModules.toPresheaf (((adicLisseForget Y).obj (ring d Y)).over U).obj
+      have : PreservesFiniteLimits (L ⋙ T) := by
+        change PreservesFiniteLimits
+          ((SheafOfModules.forget.{u + 1} ((adicLisseForget Y).obj (ring d Y)) ⋙
+            PresheafOfModules.toPresheaf ((adicLisseForget Y).obj (ring d Y)).obj) ⋙
+              (Functor.whiskeringLeft _ _ _).obj (Over.forget U).op)
+        infer_instance
+      exact preservesFiniteLimits_of_reflects_of_preserves L T
+    let e (m : ℕ) :
+        L.obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))) ≅
+          ∏ᶜ fun _ : Fin m ↦
+            SheafOfModules.unit (((adicLisseForget Y).obj (ring d Y)).over U) :=
+      PreservesProduct.iso L _
+    let pkg : SheafOfModules.StrictPerfectCoefficientPackageOnSite
+        (((adicLisseForget Y).obj (ring d Y)).over U)
+        ((L.mapHomologicalComplex (.up ℤ)).obj r.coefficient) :=
+      { N := r.package.N
+        i := fun i ↦ L.map (r.package.i i) ≫ (e (r.package.N i)).hom
+        p := fun i ↦ (e (r.package.N i)).inv ≫ L.map (r.package.p i)
+        splitting := fun i ↦ by
+          simp only [Category.assoc, Iso.hom_inv_id_assoc, ← L.map_comp,
+            r.package.splitting, L.map_id]
+          rfl }
+    refine ⟨(L.mapHomologicalComplex (.up ℤ)).obj r.coefficient, ?_, ⟨pkg⟩, 𝟙 _, ?_⟩
+    · obtain ⟨a, b, hab⟩ := r.bounded
+      exact ⟨a, b, fun i hi ↦ L.map_isZero (hab i hi)⟩
+    · infer_instance
+  refine ⟨hperfect, ?_⟩
+  have : IsIso (projection d f aY aX K (quotient d Y n)) :=
+    (perfect_projection_formula d f aY aX K).2.2.2 _ hperfect
+  change IsIso (projection d f aY aX K (quotient d Y n) ≫
+    (directImage d f).map
+      (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n))).hom)
+  infer_instance
 
 /-- The specified pi_n as an isomorphism, with the original projection map as its hom.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -251,7 +539,38 @@ theorem quotientModuleMap_existsUnique (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m
       ∀ (U : T.ProEtᵒᵖ)
         (x : (adicLisseConstantRing T (A ⧸ d.ideal ^ (m + 1))).obj.obj U),
         q.val.app U x =
-          ((adicLisseRingSystem T d.ideal).map (homOfLE h).op).hom.app U x := sorry
+        ((adicLisseRingSystem T d.ideal).map (homOfLE h).op).hom.app U x := by
+  let q := (adicLisseRingSystem T d.ideal).map (homOfLE h).op
+  let φ : (CompletedConstantReduction.residue T d.ideal m).val.presheaf ⟶
+      (CompletedConstantReduction.residue T d.ideal n).val.presheaf :=
+    Functor.whiskerRight q.hom
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
+        forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})
+  let qm : CompletedConstantReduction.residue T d.ideal m ⟶
+      CompletedConstantReduction.residue T d.ideal n :=
+    ⟨PresheafOfModules.homMk φ (by
+      intro U r x
+      change (adicLisseConstantRing T (A ⧸ d.ideal ^ (m + 1))).obj.obj U at x
+      change q.hom.app U
+          ((show (adicLisseConstantRing T (A ⧸ d.ideal ^ (m + 1))).obj.obj U from
+            (limit.π (adicLisseRingSystem T d.ideal) (op m)).hom.app U r) * x) =
+        (show (adicLisseConstantRing T (A ⧸ d.ideal ^ (n + 1))).obj.obj U from
+          (limit.π (adicLisseRingSystem T d.ideal) (op n)).hom.app U r) *
+            (show (adicLisseConstantRing T (A ⧸ d.ideal ^ (n + 1))).obj.obj U from
+              q.hom.app U x)
+      rw [map_mul]
+      congr 1
+      exact congrArg (fun z ↦ z.hom.app U r)
+        (limit.w (adicLisseRingSystem T d.ideal) (homOfLE h).op))⟩
+  refine ⟨qm, fun _ _ ↦ rfl, ?_⟩
+  intro qm' hqm'
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  exact hqm' U x
 
 /-- The quotient tower map retains its uniquely specified sectionwise quotient formula.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -264,6 +583,8 @@ def quotientMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
     quotient d T m ⟶ quotient d T n :=
   (DerivedCategory.singleFunctor (modules d T) 0).map (quotientModuleMap d T n m h)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Quotient pullback comparisons commute with every quotient tower map.
 Source: blueprint order 1275, proof steps 5 and 6
 (blueprint: lemma-weil-pbc-perfect-projection-formula).
@@ -272,7 +593,77 @@ profinite-coefficient inverse-image naturality. The unique module comparisons an
 exact termwise pullback preserve this equality in the derived category. -/
 theorem quotientDerivedPullback_naturality (n m : ℕ) (h : n ≤ m) :
     (pullback d f).map (quotientMap d Y n m h) ≫ (quotientDerivedPullback d f n).hom =
-      (quotientDerivedPullback d f m).hom ≫ quotientMap d X n m h := sorry
+      (quotientDerivedPullback d f m).hom ≫ quotientMap d X n m h := by
+  let L := proEtaleRingModulePullback f (ring d Y) (ring d X) (coefficients d f)
+  let adj := proEtaleRingModuleAdjunction f (ring d Y) (ring d X) (coefficients d f)
+  let adjR := proEtaleSheafAdjunction f CommRingCat.{u + 1}
+  let c : adicLisseRingSystem Y d.ideal ⋙
+      proEtaleSheafInverseImage f CommRingCat.{u + 1} ⟶
+        adicLisseRingSystem X d.ideal :=
+    NatTrans.ofOpSequence
+      (fun n ↦ (proEtaleConstantComparison f).app
+        (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))
+      (fun n ↦ by
+        simpa only [Functor.comp_map, adicLisseRingSystem,
+          Functor.ofOpSequence_map_homOfLE_succ] using
+          (proEtaleConstantComparison f).naturality
+            (CommRingCat.ofHom (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+  have hr := congrArg (adjR.homEquiv _ _) (c.naturality (homOfLE h).op)
+  simp only [Functor.comp_map, adjR.homEquiv_naturality_left,
+    adjR.homEquiv_naturality_right] at hr
+  have hm : L.map (quotientModuleMap d Y n m h) ≫ (quotientPullback d f n).hom =
+      (quotientPullback d f m).hom ≫ quotientModuleMap d X n m h := by
+    apply (adj.homEquiv _ _).injective
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change (adj.homEquiv _ _ (quotientPullback d f n).hom).val.app U
+        ((quotientModuleMap d Y n m h).val.app U x) =
+      (quotientModuleMap d X n m h).val.app ((proEtaleBaseChange f).op.obj U)
+        ((adj.homEquiv _ _ (quotientPullback d f m).hom).val.app U x)
+    dsimp only [quotientModuleMap, quotientPullback, adj]
+    rw [(quotientModuleMap_existsUnique d Y n m h).exists.choose_spec,
+      (quotientPullback_existsUnique d f n).exists.choose_spec,
+      (quotientPullback_existsUnique d f m).exists.choose_spec,
+      (quotientModuleMap_existsUnique d X n m h).exists.choose_spec]
+    exact congrArg (fun z ↦ z.hom.app U x) hr
+  have hn := (L.mapDerivedCategorySingleFunctor 0).hom.naturality
+    (quotientModuleMap d Y n m h)
+  change (pullback d f).map (quotientMap d Y n m h) ≫
+      (L.mapDerivedCategorySingleFunctor 0).hom.app _ ≫
+        (DerivedCategory.singleFunctor (modules d X) 0).map (quotientPullback d f n).hom =
+    ((L.mapDerivedCategorySingleFunctor 0).hom.app _ ≫
+      (DerivedCategory.singleFunctor (modules d X) 0).map (quotientPullback d f m).hom) ≫ _
+  dsimp only [Functor.comp_map] at hn
+  dsimp only [pullback, proEtaleRingDerivedPullback, quotientMap]
+  rw [← Category.assoc, hn]
+  simp only [Category.assoc, ← Functor.map_comp, hm]
+
+
+private theorem inverse_square {C : Type*} [Category C]
+    {S S' T T' : C} (p : S ⟶ T) (p' : S' ⟶ T')
+    [IsIso p] [IsIso p'] (a : S ⟶ S') (b : T ⟶ T')
+    (h : p ≫ b = a ≫ p') : inv p ≫ a = b ≫ inv p' := by
+  apply (cancel_mono p').1
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [← h, IsIso.inv_hom_id_assoc]
+
+private theorem projection_naturality {P Q : derived d Y} (q : P ⟶ Q) :
+    aY.tensor.map (Prod.mkHom (𝟙 ((directImage d f).obj K)) q) ≫
+        projection d f aY aX K Q =
+      projection d f aY aX K P ≫
+        (directImage d f).map
+          (aX.tensor.map (Prod.mkHom (𝟙 K) ((pullback d f).map q))) := by
+  exact (((proEtaleRingDerivedAdjunction f (ring d Y) (ring d X)
+    (coefficients d f)).rightAdjointProjectionMap
+    (T_C := Functor.curry.obj aX.tensor) (T_D := Functor.curry.obj aY.tensor)
+    (Functor.curry.map (proEtaleCanonicalTensorComparison f (ring d Y) (ring d X)
+      (coefficients d f) aY aX).hom ≫
+        (Functor.curryObjProdComp (pullback d f) (pullback d f) aX.tensor).hom)).app K).naturality q
 
 /-- Both the forward maps and their unique inverses commute with the whole quotient tower.
 Source: blueprint order 1275, proof step 6
@@ -289,7 +680,23 @@ theorem tower_compatibility (n m : ℕ) (h : n ≤ m) :
     inverse d f aY aX K m ≫
       aY.tensor.map (Prod.mkHom (𝟙 ((directImage d f).obj K)) (quotientMap d Y n m h)) =
     (directImage d f).map (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientMap d X n m h))) ≫
-      inverse d f aY aX K n := sorry
+      inverse d f aY aX K n := by
+  have hnat := projection_naturality d f aY aX K (quotientMap d Y n m h)
+  have hs := congrArg (fun z ↦ z ≫ (directImage d f).map
+    (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientDerivedPullback d f n).hom))) hnat
+  simp only [Category.assoc, ← Functor.map_comp, prod_comp,
+    Category.comp_id] at hs
+  rw [quotientDerivedPullback_naturality d f n m h] at hs
+  have hf : reductionMap d f aY aX K m ≫
+      (directImage d f).map (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientMap d X n m h))) =
+    aY.tensor.map (Prod.mkHom (𝟙 ((directImage d f).obj K)) (quotientMap d Y n m h)) ≫
+      reductionMap d f aY aX K n := by
+    simpa only [reductionMap, Category.assoc, ← Functor.map_comp, prod_comp,
+      Category.id_comp, Category.comp_id] using hs.symm
+  refine ⟨hf, ?_⟩
+  have := (reductionMap_isIso d f aY aX K m).2
+  have := (reductionMap_isIso d f aY aX K n).2
+  exact inverse_square _ _ _ _ hf
 
 /-- The maps and inverses commute with coefficient-linear operators, also between objects.
 Source: blueprint order 1275, proof step 6 and order 1274, paragraph 1
@@ -307,7 +714,26 @@ theorem operator_compatibility (K' : derived d X) (q : K ⟶ K') (n : ℕ) :
     inverse d f aY aX K n ≫
       aY.tensor.map (Prod.mkHom ((directImage d f).map q) (𝟙 (quotient d Y n))) =
     (directImage d f).map (aX.tensor.map (Prod.mkHom q (𝟙 (quotient d X n)))) ≫
-      inverse d f aY aX K' n := sorry
+      inverse d f aY aX K' n := by
+  have h : reductionMap d f aY aX K n ≫
+      (directImage d f).map (aX.tensor.map (Prod.mkHom q (𝟙 (quotient d X n)))) =
+    aY.tensor.map (Prod.mkHom ((directImage d f).map q) (𝟙 (quotient d Y n))) ≫
+      reductionMap d f aY aX K' n := by
+    have hnat := derivedProjectionFormulaMate_naturality (pullback d f) (directImage d f)
+      (proEtaleRingDerivedAdjunction f (ring d Y) (ring d X) (coefficients d f))
+      aY.tensor aX.tensor
+      (proEtaleCanonicalTensorComparison f (ring d Y) (ring d X) (coefficients d f) aY aX)
+      K K' (quotient d Y n) q
+    change projection d f aY aX K (quotient d Y n) ≫ _ =
+      _ ≫ projection d f aY aX K' (quotient d Y n) at hnat
+    simpa only [reductionMap, Category.assoc, ← Functor.map_comp, prod_comp,
+      Category.id_comp, Category.comp_id] using
+      congrArg (fun z ↦ z ≫ (directImage d f).map
+        (aX.tensor.map (Prod.mkHom (𝟙 K') (quotientDerivedPullback d f n).hom))) hnat
+  refine ⟨h, ?_⟩
+  have := (reductionMap_isIso d f aY aX K n).2
+  have := (reductionMap_isIso d f aY aX K' n).2
+  exact inverse_square _ _ _ _ h
 
 /-- The canonical mixed representative square, for any flat K-flat second factor.
 Source: Stacks 07A4 and blueprint order 1275, proof step 6
@@ -326,7 +752,8 @@ theorem mixed_existsUnique (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRi
         a.tensor.map (Prod.mkHom (DerivedCategory.Q.map p) (𝟙 (DerivedCategory.Q.obj F))) ≫
           e.hom = a.representative.inv.app (⟨P, hP⟩, ⟨F, hF⟩) ≫
             DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap p (𝟙 F)
-              (proEtaleOrdinaryTensor T R) (ComplexShape.up ℤ)) := sorry
+              (proEtaleOrdinaryTensor T R) (ComplexShape.up ℤ)) := by
+  exact proEtaleMixedTensor_existsUnique R a I F hF
 
 /-- The mixed comparison is determined by every resolution square, with no arbitrary choice.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -335,6 +762,8 @@ def mixed (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
     (hF : proEtaleFlatRepresentatives T R F) :=
   (mixed_existsUnique T R a I F hF).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary unit comparison is fixed by the ring map adjoint to the coefficients.
 Source: blueprint order 1275, proof step 2; Stacks 03EL
 (blueprint: lemma-weil-pbc-perfect-projection-formula).
@@ -349,8 +778,8 @@ theorem ordinaryUnit_existsUnique :
       ∀ (U : Y.ProEtᵒᵖ) (r : (ring d Y).obj.obj U),
         ((proEtaleRingModuleAdjunction f (ring d Y) (ring d X) (coefficients d f)).homEquiv
           _ _ j.hom).val.app U r =
-        (proEtaleRingDirectImageMap f (ring d Y) (ring d X) (coefficients d f)).hom.app U r :=
-  sorry
+        (proEtaleRingDirectImageMap f (ring d Y) (ring d X) (coefficients d f)).hom.app U r := by
+  exact moduleUnit_existsUnique f (ring d Y) (ring d X) (coefficients d f)
 
 /-- The canonically normalized ordinary unit comparison.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -387,29 +816,6 @@ theorem ordinaryUnit_coherence (M : modules d Y) :
     (proEtaleRingModulePullback f (ring d Y) (ring d X) (coefficients d f)).map
       (ordinaryRightUnit Y (ring d Y) M).hom := sorry
 
-/-- Chosen representatives for evaluating the signed-totalization inverse at a quotient.
-The maps represent the fixed K and the fixed quotient, rather than new derived objects.
-Source: blueprint order 1275, proof steps 5--6
-(blueprint: lemma-weil-pbc-perfect-projection-formula). -/
-structure Resolution (n : ℕ) where
-  injective : CochainComplex (modules d X) ℤ
-  isKInjective : injective.IsKInjective
-  representsK : K ≅ DerivedCategory.Q.obj injective
-  coefficient : CochainComplex (modules d Y) ℤ
-  bounded : ∃ l r : ℤ, ∀ i : ℤ, i < l ∨ r < i → IsZero (coefficient.X i)
-  package : SheafOfModules.StrictPerfectCoefficientPackageOnSite
-    ((adicLisseForget Y).obj (ring d Y)) coefficient
-  representsQuotient : DerivedCategory.Q.obj coefficient ≅ quotient d Y n
-
-/-- Every quotient admits the representatives used in the totalization comparison.
-Source: blueprint order 1275, proof steps 5--6
-(blueprint: lemma-weil-pbc-perfect-projection-formula).
-Proof: take a K-injective representative of K in all module sheaves. Perfectness of
-the quotient over A gives a bounded finite-projective A-resolution. Termwise constant
-sheafification followed by completed scalar extension gives the coefficient complex;
-completed-constant-sheaf-reduction supplies its augmentation quasi-isomorphism and
-finite-free retracts. Localize the augmentation to obtain representsQuotient. -/
-theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K n) := sorry
 
 variable {n : ℕ} (r : Resolution d (X := X) (Y := Y) K n)
 
@@ -456,7 +862,26 @@ flat complexes are K-flat. Apply canonical tensor pullback's preservation theore
 for the pullback representative. Both statements include zero terms and rank zero. -/
 theorem Resolution.flat : proEtaleFlatRepresentatives Y (ring d Y) r.coefficient ∧
     proEtaleFlatRepresentatives X (ring d X)
-      (((ordinaryPull d f).mapHomologicalComplex (.up ℤ)).obj r.coefficient) := sorry
+      (((ordinaryPull d f).mapHomologicalComplex (.up ℤ)).obj r.coefficient) := by
+  refine ⟨proEtaleStrictPerfect_flat (ring d Y) r.coefficient r.package r.bounded, ?_⟩
+  let L := ordinaryPull d f
+  let e (m : ℕ) :
+      L.obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))) ≅
+        ∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget X).obj (ring d X)) :=
+    PreservesProduct.iso L _ ≪≫ Pi.mapIso (fun _ ↦ ordinaryUnit d f)
+  let P : SheafOfModules.StrictPerfectCoefficientPackageOnSite
+      ((adicLisseForget X).obj (ring d X))
+      ((L.mapHomologicalComplex (.up ℤ)).obj r.coefficient) :=
+    { N := r.package.N
+      i := fun i ↦ L.map (r.package.i i) ≫ (e (r.package.N i)).hom
+      p := fun i ↦ (e (r.package.N i)).inv ≫ L.map (r.package.p i)
+      splitting := fun i ↦ by
+        simp only [Category.assoc, Iso.hom_inv_id_assoc, ← L.map_comp, r.package.splitting,
+          L.map_id]
+        rfl }
+  apply proEtaleStrictPerfect_flat (ring d X) _ P
+  obtain ⟨l, h, hb⟩ := r.bounded
+  exact ⟨l, h, fun i hi ↦ L.map_isZero (hb i hi)⟩
 
 /-- The actual total tensor complex on X used in the finite-total calculation.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -471,7 +896,12 @@ is K-injective. Source: blueprint order 1275, definition 1264
 Proof: dualize the bounded finite-free retract package. Tensor with it identifies
 with Hom from its bounded dual. The dual is K-flat, so Hom into a K-injective is
 K-injective. This is the split-perfect-tensor-K-injective lemma. -/
-theorem Resolution.targetComplex_isKInjective : (r.targetComplex d f K).IsKInjective := sorry
+theorem Resolution.targetComplex_isKInjective : (r.targetComplex d f K).IsKInjective := by
+  let := SheafOfModules.monoidalCategory (ring d Y)
+  let := SheafOfModules.monoidalCategory (ring d X)
+  exact tensorAdjunctionTotal_target_isKInjective (ordinaryPull d f) (ordinaryUnit d f)
+    r.injective r.isKInjective r.coefficient r.bounded
+    r.package.N r.package.i r.package.p r.package.splitting
 
 /-- The normalized K-injective model of the actual derived direct image of K.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -536,6 +966,47 @@ theorem totalization_compatibility :
         (r.sourceModel d f aY K).inv := sorry
 
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem coefficientMap_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
+    coefficientMap d (f ≫ g) =
+      (proEtaleRingInverseImageComp f g).hom.app (ring d Z) ≫
+        (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (coefficientMap d g) ≫
+          coefficientMap d f := by
+  apply limit.hom_ext
+  intro n
+  have hπ (V W : Scheme.{u}) (k : V ⟶ W) :
+      coefficientMap d k ≫ limit.π (adicLisseRingSystem V d.ideal) n =
+        (proEtaleSheafInverseImage k CommRingCat.{u + 1}).map
+          (limit.π (adicLisseRingSystem W d.ideal) n) ≫
+            (proEtaleConstantComparison k).app
+              (CommRingCat.of (A ⧸ d.ideal ^ (n.unop + 1))) :=
+    limit.lift_π _ n
+  have : Finite (A ⧸ d.ideal ^ (n.unop + 1)) := d.quotientFinite n.unop
+  let Q := (Functor.const ℕᵒᵖ).obj (CommRingCat.of (A ⧸ d.ideal ^ (n.unop + 1)))
+  have : ∀ i : ℕᵒᵖ, Finite (Q.obj i) := fun _ ↦ d.quotientFinite n.unop
+  obtain ⟨_, _, _, _, _, _, _, _, _, hc, _⟩ :=
+    proEtale_profinite_coefficient_inverse_image Q
+  have hc' := hc X Y Z f g n
+  dsimp only [Q, proEtaleCoefficientTower, Functor.comp_obj,
+    Functor.const_obj_obj] at hc'
+  rw [hπ, hc']
+  rw [← Category.assoc, ← Category.assoc]
+  have hn := (proEtaleRingInverseImageComp f g).hom.naturality
+    (limit.π (adicLisseRingSystem Z d.ideal) n)
+  erw [hn]
+  simp only [Functor.comp_map, Category.assoc]
+  rw [hπ X Y f]
+  conv_rhs => rw [← Functor.map_comp_assoc, hπ Y Z g, Functor.map_comp]
+  simp only [Category.assoc]
+
+private theorem coefficients_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
+    proEtaleRingCompositeCoefficients f g (ring d Z) (ring d Y) (ring d X)
+      (coefficients d g) (coefficients d f) = coefficients d (f ≫ g) := by
+  apply Iso.ext
+  exact (coefficientMap_comp d f g).symm
+
+
 section BaseChange
 
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {g : Y' ⟶ Y}
@@ -554,7 +1025,13 @@ theorem coefficients_square (sq : ChosenCartesianSquare g' f' f g) : HEq
     (proEtaleRingCompositeCoefficients g' f (ring d Y) (ring d X) (ring d X')
       (coefficients d f) (coefficients d g'))
     (proEtaleRingCompositeCoefficients f' g (ring d Y) (ring d Y') (ring d X')
-      (coefficients d g) (coefficients d f')) := sorry
+      (coefficients d g) (coefficients d f')) := by
+  rw [coefficients_comp, coefficients_comp]
+  have h := sq.w
+  generalize g' ≫ f = k₁ at h ⊢
+  generalize f' ≫ g = k₂ at h ⊢
+  cases h
+  rfl
 
 /-- The actual base-change morphism, with the canonical completed coefficient coherence.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
@@ -626,6 +1103,14 @@ theorem identityCompactification_compatibility [IsProper f] (n : ℕ) :
         (aX.tensor.map (Prod.mkHom (𝟙 K) (quotientDerivedPullback d f n).inv)) ≫
       IdentityProjectionCompactification.backward f (ring d Y) (ring d X)
         (coefficients d f) aY aX K (quotient d Y n)
-        (reductionMap_isIso d f aY aX K n).1 := sorry
+        (reductionMap_isIso d f aY aX K n).1 := by
+  have : IsIso (projection d f aY aX K (quotient d Y n)) :=
+    (perfect_projection_formula d f aY aX K).2.2.2 _
+      (reductionMap_isIso d f aY aX K n).1
+  constructor
+  · simp [reductionMap, IdentityProjectionCompactification.forward,
+      IdentityProjectionCompactification.theta, projection]
+  · simp [inverse, reductionIso, reductionMap, IdentityProjectionCompactification.backward,
+      IdentityProjectionCompactification.rho, projection, ← Functor.map_comp, prod_comp]
 
 end AlgebraicGeometry.Scheme.PerfectProjection

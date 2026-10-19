@@ -1,354 +1,391 @@
 {
-  "id": "lemma-weil-pbc-perfect-projection-formula",
-  "blueprint": {
-    "is": "lemma-weil-pbc-perfect-projection-formula",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Perfect projection formula for reductions",
-  "statement": "Let $X,Y$ be schemes, $f:X\\to Y$ a morphism, and $(A,I)$ the adic datum of [def-weil-pbc-adic-coefficient-datum], with $A$ commutative Noetherian, $P_n=A/I^n$ finite as a set and perfect in $D(A)$ [def-pc-perfect-ring-complex]. Put $A_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$ and use the ordinary, uncompleted derived categories of $A_T$-module sheaves. The coefficient identification $f^{-1}A_Y\\cong A_X$ is the canonical one of [lem-weil-pbc-profinite-coefficient-inverse-image]; use the operations of [def-weil-pbc-proetale-operations] and their K-flat derived tensor [lem-weil-pbc-ringed-projection-mate-exact]. Fix $K\\in D(X_{\\mathrm{proet}},A)$. The full isomorphism locus of the map $\\pi_{f,K,P}$ [def-weil-pbc-projection-formula-map], for $P\\in D(Y_{\\mathrm{proet}},A)$, is a thick triangulated subcategory containing every finite free coefficient sheaf $A_Y^{\\oplus m}$. It contains every site-perfect complex [def-weil-pbc-strict-perfect-coefficient-package]: here site-perfect means locally on the site isomorphic to a bounded complex whose terms are direct summands of finite free coefficient sheaves, with bounds allowed to depend on the covering object. For every $n\\geq1$ the canonical pullback comparison $Lf^*(P_n)_Y\\cong(P_n)_X$ identifies the projection map with an isomorphism\n$$\\pi_n:(Rf_*K)\\otimes^L_{A_Y}(P_n)_Y\\xrightarrow{\\sim}Rf_*K_n,\\qquad K_n=K\\otimes^L_{A_X}(P_n)_X.$$\nIts inverse $\\rho_n$ agrees with the signed-totalization inverse for a finite-projective resolution of $P_n$. These maps and inverses are independent of the chosen resolution and commute with quotient tower maps, compatible coefficient endomorphisms, and base change in the projection-formula square of [lemma-weil-pbc-projection-formula-base-change-naturality]. For proper $f$, they also agree with the identity-compactification formula [lemma-weil-pbc-projection-formula-identity-compactification]. ",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md",
-    "place": "node lemma-weil-pbc-perfect-projection-formula, order 1275",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0944"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0657"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-pc-perfect-ring-complex",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-pbc-projection-formula-map",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "lemma-weil-pbc-projection-formula-identity-compactification",
-    "def-weil-pbc-strict-perfect-coefficient-package"
-  ],
-  "proof": [
-    {
-      "text": "Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to the finite rings $P_n$ from [def-weil-pbc-adic-coefficient-datum]. Their constant sheaves are $(P_n)_T$, as also identified in [lem-weil-pbc-completed-constant-sheaf-reduction]. Thus the operations' required coefficient identification $f^{-1}A_Y\\cong A_X$ is supplied; it is compatible with every quotient projection. In this coefficient setting the projection map is the adjoint of the counit tensored with pullback by [def-weil-pbc-projection-formula-map]. The tensor and adjunction in [lem-weil-pbc-ringed-projection-mate-exact] are the ordinary ringed-topos operations, hence specialize to precisely these operations, rather than to completed tensor or completed pullback.",
-      "uses": [
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-weil-pbc-completed-constant-sheaf-reduction",
-        "def-weil-pbc-projection-formula-map",
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0B56 (equation-projection-formula-map); coefficient identification supplied separately"
-      }
-    },
-    {
-      "text": "At $P=A_Y$, [lem-weil-pbc-ringed-projection-mate-exact] identifies the projection mate with $1_{Rf_*K}$. Both functors in its statement are additive, since they are exact, so the map on $A_Y^{\\oplus m}$ is the direct sum of $m$ identities, including $m=0$. This proves the finite-free base case with the actual tensor unit $A_Y$, not the discrete constant sheaf $\\underline A$.",
-      "uses": [
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944 (lemma-projection-formula), tensor-unit base case"
-      }
-    },
-    {
-      "text": "Use [lem-weil-pbc-ringed-projection-mate-exact] for the two exact functors in the $P$ variable and their shift-compatible natural transformation. The displayed shift equation proves invariance of the isomorphism locus under integer shifts. On any distinguished triangle it gives a morphism of distinguished triangles, including the connecting arrow; [lem-sf-triangle-morphism-iso] then proves closure under the third vertex whenever two vertices belong to the locus. For a retract $Q\\xrightarrow{i}P\\xrightarrow{r}Q$, $ri=1$, an inverse to $\\pi_Q:F(Q)\\to G(Q)$ is $F(r)\\pi_P^{-1}G(i)$. Naturality gives both composites equal to the identity, so the locus is closed under retracts. Together with the zero case this proves that it is thick triangulated.",
-      "uses": [
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "lem-sf-triangle-morphism-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944 (lemma-projection-formula), finite summands and stupid truncations"
-      }
-    },
-    {
-      "text": "Let $P$ be site-perfect. For each object $V$ choose a covering $V_i\\to V$ on which $P$ has a bounded finite-projective representative. Apply [lem-weil-pbc-ringed-projection-restriction] to identify each restricted projection map with the corresponding map for the localized morphism $f_{V_i}$. The exactness and unit statements of [lem-weil-pbc-ringed-projection-mate-exact] apply to these ringed topoi as well. Each term of the representative is a retract of a finite free coefficient sheaf, so step 3's explicit retract calculation gives the projection isomorphism on that term and all its shifts. The stupid truncations of a bounded representative are connected by degreewise split short exact sequences whose quotients are its single shifted terms; [lem-weil-pbc-degreewise-split-derived-triangle] gives the distinguished triangles. Induction on the number of nonzero degrees using [lem-sf-triangle-morphism-iso] proves the projection isomorphism on the representative. Finally local detection in the restriction lemma proves it for $P$. Each induction is finite on its own covering object; no uniform bound or global thick-generation claim is used.",
-      "uses": [
-        "lem-weil-pbc-ringed-projection-restriction",
-        "lem-weil-pbc-ringed-projection-mate-exact",
-        "lem-weil-pbc-degreewise-split-derived-triangle",
-        "lem-sf-triangle-morphism-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944 (lemma-projection-formula), first locality sentence and subsequent truncation argument; 08G5 (definition-perfect)"
-      }
-    },
-    {
-      "text": "Fix $n$. By [def-pc-perfect-ring-complex] and [def-weil-pbc-adic-coefficient-datum], choose a bounded finite-projective $A$-complex $F_n^\\bullet$ representing $P_n$ in degree zero. [lem-weil-pbc-completed-constant-sheaf-reduction] identifies $A_T\\otimes_{\\underline A}\\underline{F_n^\\bullet}$ with $(P_n)_T$ for $T=X,Y$; each term is a retract of a finite sum of $A_T$. Thus $(P_n)_Y$ is site-perfect. The level-$n$ comparison $c_{f,n}:f^{-1}(P_n)_Y\\cong(P_n)_X$ is supplied directly by [lem-weil-pbc-profinite-coefficient-inverse-image]. Its displayed projection compatibility\n$$\\pi_{X,n}c_f=c_{f,n}f^{-1}\\pi_{Y,n}$$\nshows that $c_{f,n}$ is linear for the coefficient identification $c_f:f^{-1}A_Y\\cong A_X$; no morphism from the full quotient tower to a constant tower is needed. Exactness of identified-coefficient pullback in [def-weil-pbc-proetale-operations] then gives $Lf^*(P_n)_Y\\cong(P_n)_X$. Step 4 now proves $\\pi_n$, whose target is $Rf_*K_n$ by the definition of $K_n$.",
-      "uses": [
-        "def-pc-perfect-ring-complex",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-weil-pbc-completed-constant-sheaf-reduction",
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "def-weil-pbc-proetale-operations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0944 (lemma-projection-formula), finite-perfect application; sites-modules.tex 093M (lemma-completion-flat)"
-      }
-    },
-    {
-      "text": "The resolutions in step 5 are global finite-projective packages over $A_T$. [lemma-weil-pbc-projection-formula-totalization] supplies mutually inverse total arrows on such a complex, so its $\\rho_n$ equals $\\pi_n^{-1}$. The projection mate is defined independently of a resolution, and uniqueness of an inverse proves resolution independence for $\\rho_n$. Naturality in $P$ of [lem-weil-pbc-ringed-projection-mate-exact], applied to $(P_{n+1})_Y\\to(P_n)_Y$, gives the quotient squares, and [lemma-weil-pbc-projection-formula-base-change-naturality] gives the coefficient-operator and base-change squares. All are for the same canonical projection mate, and the coefficient comparisons of step 5 commute with the quotient maps because they are induced by the same constant-ring maps and the projections in [lem-weil-pbc-profinite-coefficient-inverse-image]. Equivalently, once a forward square commutes, multiplying it by the two inverse maps gives the reversed square; no base-change isomorphism is required for this reasoning. For proper $f$ use [lemma-weil-pbc-projection-formula-identity-compactification] to identify the formula and inverse with the identity-compactification ones. This restores the compatibility clauses of the master's first statement, not just its Detailed form.",
-      "uses": [
-        "lemma-weil-pbc-projection-formula-totalization",
-        "lemma-weil-pbc-projection-formula-base-change-naturality",
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "lemma-weil-pbc-projection-formula-identity-compactification",
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "0B56; remark-compatible-with-diagram after 0944; master blueprint first proof"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lemma-weil-pbc-perfect-projection-formula",
+ "blueprint": {
+  "is": "lemma-weil-pbc-perfect-projection-formula",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Perfect projection formula for reductions",
+ "statement": "Let $X,Y$ be schemes, $f:X\\to Y$ a morphism, and $(A,I)$ the adic datum of [def-weil-pbc-adic-coefficient-datum], with $A$ commutative Noetherian, $P_n=A/I^n$ finite as a set and perfect in $D(A)$ [def-pc-perfect-ring-complex]. Put $A_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$ and use the ordinary, uncompleted derived categories of $A_T$-module sheaves. The coefficient identification $f^{-1}A_Y\\cong A_X$ is the canonical one of [lem-weil-pbc-profinite-coefficient-inverse-image]; use the operations of [def-weil-pbc-proetale-operations] and their K-flat derived tensor [lem-weil-pbc-ringed-projection-mate-exact]. Fix $K\\in D(X_{\\mathrm{proet}},A)$. The full isomorphism locus of the map $\\pi_{f,K,P}$ [def-weil-pbc-projection-formula-map], for $P\\in D(Y_{\\mathrm{proet}},A)$, is a thick triangulated subcategory containing every finite free coefficient sheaf $A_Y^{\\oplus m}$. It contains every site-perfect complex [def-weil-pbc-strict-perfect-coefficient-package]: here site-perfect means locally on the site isomorphic to a bounded complex whose terms are direct summands of finite free coefficient sheaves, with bounds allowed to depend on the covering object. For every $n\\geq1$ the canonical pullback comparison $Lf^*(P_n)_Y\\cong(P_n)_X$ identifies the projection map with an isomorphism\n$$\\pi_n:(Rf_*K)\\otimes^L_{A_Y}(P_n)_Y\\xrightarrow{\\sim}Rf_*K_n,\\qquad K_n=K\\otimes^L_{A_X}(P_n)_X.$$\nIts inverse $\\rho_n$ agrees with the signed-totalization inverse for a finite-projective resolution of $P_n$. These maps and inverses are independent of the chosen resolution and commute with quotient tower maps, compatible coefficient endomorphisms, and base change in the projection-formula square of [lemma-weil-pbc-projection-formula-base-change-naturality]. For proper $f$, they also agree with the identity-compactification formula [lemma-weil-pbc-projection-formula-identity-compactification]. ",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md",
+  "place": "node lemma-weil-pbc-perfect-projection-formula, order 1275",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0944"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0657"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-projection-formula-map",
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "lemma-weil-pbc-projection-formula-identity-compactification",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-profinite-coefficient-inverse-image] to the finite rings $P_n$ from [def-weil-pbc-adic-coefficient-datum]. Their constant sheaves are $(P_n)_T$, as also identified in [lem-weil-pbc-completed-constant-sheaf-reduction]. Thus the operations' required coefficient identification $f^{-1}A_Y\\cong A_X$ is supplied; it is compatible with every quotient projection. In this coefficient setting the projection map is the adjoint of the counit tensored with pullback by [def-weil-pbc-projection-formula-map]. The tensor and adjunction in [lem-weil-pbc-ringed-projection-mate-exact] are the ordinary ringed-topos operations, hence specialize to precisely these operations, rather than to completed tensor or completed pullback.",
+   "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-pbc-adic-coefficient-datum",
     "lem-weil-pbc-completed-constant-sheaf-reduction",
     "def-weil-pbc-projection-formula-map",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0B56 (equation-projection-formula-map); coefficient identification supplied separately"
+   }
+  },
+  {
+   "text": "At $P=A_Y$, [lem-weil-pbc-ringed-projection-mate-exact] identifies the projection mate with $1_{Rf_*K}$. Both functors in its statement are additive, since they are exact, so the map on $A_Y^{\\oplus m}$ is the direct sum of $m$ identities, including $m=0$. This proves the finite-free base case with the actual tensor unit $A_Y$, not the discrete constant sheaf $\\underline A$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944 (lemma-projection-formula), tensor-unit base case"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-ringed-projection-mate-exact] for the two exact functors in the $P$ variable and their shift-compatible natural transformation. The displayed shift equation proves invariance of the isomorphism locus under integer shifts. On any distinguished triangle it gives a morphism of distinguished triangles, including the connecting arrow; [lem-sf-triangle-morphism-iso] then proves closure under the third vertex whenever two vertices belong to the locus. For a retract $Q\\xrightarrow{i}P\\xrightarrow{r}Q$, $ri=1$, an inverse to $\\pi_Q:F(Q)\\to G(Q)$ is $F(r)\\pi_P^{-1}G(i)$. Naturality gives both composites equal to the identity, so the locus is closed under retracts. Together with the zero case this proves that it is thick triangulated.",
+   "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-triangle-morphism-iso",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944 (lemma-projection-formula), finite summands and stupid truncations"
+   }
+  },
+  {
+   "text": "Let $P$ be site-perfect. For each object $V$ choose a covering $V_i\\to V$ on which $P$ has a bounded finite-projective representative. Apply [lem-weil-pbc-ringed-projection-restriction] to identify each restricted projection map with the corresponding map for the localized morphism $f_{V_i}$. The exactness and unit statements of [lem-weil-pbc-ringed-projection-mate-exact] apply to these ringed topoi as well. Each term of the representative is a retract of a finite free coefficient sheaf, so step 3's explicit retract calculation gives the projection isomorphism on that term and all its shifts. The stupid truncations of a bounded representative are connected by degreewise split short exact sequences whose quotients are its single shifted terms; [lem-weil-pbc-degreewise-split-derived-triangle] gives the distinguished triangles. Induction on the number of nonzero degrees using [lem-sf-triangle-morphism-iso] proves the projection isomorphism on the representative. Finally local detection in the restriction lemma proves it for $P$. Each induction is finite on its own covering object; no uniform bound or global thick-generation claim is used.",
+   "uses": [
     "lem-weil-pbc-ringed-projection-restriction",
+    "lem-weil-pbc-ringed-projection-mate-exact",
     "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944 (lemma-projection-formula), first locality sentence and subsequent truncation argument; 08G5 (definition-perfect)"
+   }
+  },
+  {
+   "text": "Fix $n$. By [def-pc-perfect-ring-complex] and [def-weil-pbc-adic-coefficient-datum], choose a bounded finite-projective $A$-complex $F_n^\\bullet$ representing $P_n$ in degree zero. [lem-weil-pbc-completed-constant-sheaf-reduction] identifies $A_T\\otimes_{\\underline A}\\underline{F_n^\\bullet}$ with $(P_n)_T$ for $T=X,Y$; each term is a retract of a finite sum of $A_T$. Thus $(P_n)_Y$ is site-perfect. The level-$n$ comparison $c_{f,n}:f^{-1}(P_n)_Y\\cong(P_n)_X$ is supplied directly by [lem-weil-pbc-profinite-coefficient-inverse-image]. Its displayed projection compatibility\n$$\\pi_{X,n}c_f=c_{f,n}f^{-1}\\pi_{Y,n}$$\nshows that $c_{f,n}$ is linear for the coefficient identification $c_f:f^{-1}A_Y\\cong A_X$; no morphism from the full quotient tower to a constant tower is needed. Exactness of identified-coefficient pullback in [def-weil-pbc-proetale-operations] then gives $Lf^*(P_n)_Y\\cong(P_n)_X$. Step 4 now proves $\\pi_n$, whose target is $Rf_*K_n$ by the definition of $K_n$.",
+   "uses": [
     "def-pc-perfect-ring-complex",
-    "def-weil-pbc-proetale-operations",
-    "lemma-weil-pbc-projection-formula-totalization",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "lemma-weil-pbc-projection-formula-identity-compactification"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md",
-    "place": "Both proofs, repaired using locality of Stacks 0944 and separate coefficient/exactness lemmas"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "thick triangulated subcategory of objects satisfying the projection formula contains finite free modules and perfect complexes",
-      "results": "8 hits: ['DerivedCategory.TStructure.t', 'DerivedCategory.IsGE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.IsLE', 'DerivedCategory.instIsGEObjSingleFunctor', 'DerivedCategory.instIsLEObjSingleFunctor', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isLE']; ",
-      "date": "2026-10-14",
-      "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Perfect complex on a ringed topos satisfies projection formula; isomorphism locus is a thick triangulated subcategory",
-      "results": "8 hits: ['DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isLE', 'DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE', 'DerivedCategory.instIsGEObjSingleFunctor', 'DerivedCategory.TStructure.t', 'DerivedCategory.instIsLEObjSingleFunctor', 'DerivedCategory.IsGE']; ",
-      "date": "2026-10-14",
-      "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"projectionFormula\"",
-      "results": "0 hits: []; ",
-      "date": "2026-10-14",
-      "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
-    },
-    {
-      "tool": "grep",
-      "query": "projectionFormula|projection_formula",
-      "results": "0 hits: []; ",
-      "date": "2026-10-14",
-      "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
-    },
-    {
-      "tool": "leansearch",
-      "query": "thick triangulated subcategory generated by finite free modules gives projection formula for perfect complexes",
-      "results": "0 hits: []; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1275,
-  "blueprint_uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-complete-coefficient-datum",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-projection-formula-map",
-    "lemma-weil-pbc-projection-formula-base-change-naturality",
-    "lemma-weil-pbc-projection-formula-identity-compactification",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0944 (lemma-projection-formula), finite-perfect application; sites-modules.tex 093M (lemma-completion-flat)"
+   }
+  },
+  {
+   "text": "The resolutions in step 5 are global finite-projective packages over $A_T$. [lemma-weil-pbc-projection-formula-totalization] supplies mutually inverse total arrows on such a complex, so its $\\rho_n$ equals $\\pi_n^{-1}$. The projection mate is defined independently of a resolution, and uniqueness of an inverse proves resolution independence for $\\rho_n$. Naturality in $P$ of [lem-weil-pbc-ringed-projection-mate-exact], applied to $(P_{n+1})_Y\\to(P_n)_Y$, gives the quotient squares, and [lemma-weil-pbc-projection-formula-base-change-naturality] gives the coefficient-operator and base-change squares. All are for the same canonical projection mate, and the coefficient comparisons of step 5 commute with the quotient maps because they are induced by the same constant-ring maps and the projections in [lem-weil-pbc-profinite-coefficient-inverse-image]. Equivalently, once a forward square commutes, multiplying it by the two inverse maps gives the reversed square; no base-change isomorphism is required for this reasoning. For proper $f$ use [lemma-weil-pbc-projection-formula-identity-compactification] to identify the formula and inverse with the identity-compactification ones. This restores the compatibility clauses of the master's first statement, not just its Detailed form.",
+   "uses": [
     "lemma-weil-pbc-projection-formula-totalization",
-    "lemma-weil-pbc-projection-formula-tower-compatibility"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-complete-coefficient-datum",
     "lemma-weil-pbc-projection-formula-base-change-naturality",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
     "lemma-weil-pbc-projection-formula-identity-compactification",
-    "lemma-weil-pbc-projection-formula-totalization",
-    "lemma-weil-pbc-projection-formula-tower-compatibility"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "For every $n$ there is a natural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
-      "proof": "Choose a strict-perfect package $F_n^\\bullet\\to P_n$. Signed totalization\ngives inverse arrows\n\n$$\n(Rf_*K)\\otimes^LF_n^\\bullet\n\\mathrel{\\substack{\\xrightarrow{\\ \\pi_n\\ }\\\\[-2pt]\n\\xleftarrow[\\ \\rho_n\\ ]{}}}\nRf_*(K\\otimes^LLf^*F_n^\\bullet).\n$$\n\nBecause $P_n$ is constant, $Lf^*P_n=P_n$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lemma-weil-pbc-perfect-projection-formula",
-    "worker": "stage1",
-    "summary": "Repaired all returned faults: localized perfect-complex argument, completed coefficient flat resolutions, representable finite-limit coefficient pullback, and exact shift-compatible projection mate. Restored master inverse and compatibility scope; two smaller statement-only nodes, no claim of global thick generation or condensed-category comparison. The imported global-thick identification is STATEMENT-DISPUTED; the report gives its disconnected-site counterexample and the local replacement.",
-    "blueprint": "Detailed form: finite-free base case, thick closure, every perfect object, reductions. First statement/proof: inverse, independence, tower/operator/base-change and identity-compactification compatibility.",
-    "tool_uses": [
-      {
-        "node": "lem-sf-triangle-morphism-iso",
-        "why": "General two-out-of-three for a morphism of distinguished triangles; no same-unit node supplies this exact three-vertex assertion."
-      },
-      {
-        "node": "lem-weil-pbc-degreewise-split-derived-triangle",
-        "why": "General distinguished triangle for a degreewise split sequence of complexes, used for the stupid truncations; this is a homological tool, not a replacement of the unit route."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sf-triangle-morphism-iso",
-    "lem-weil-pbc-degreewise-split-derived-triangle"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NC-282c19db5",
-    "group": "NC",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-282c19db5 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. Three repairable faults found: both new nodes lacked required created.by/date provenance, and step 5 incorrectly asserted a full quotient-tower morphism to the constant P_n tower, undefined for levels m<n. Corrected whole JSON files are under fixes/dag/nodes/sec-proper-base-change/, and review.md records source, hypothesis, edge-case, route, and step checks.; 3 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Paper.PerfectProjectionFormula",
-    "declaration": "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.PerfectProjection.ring",
-      "AlgebraicGeometry.Scheme.PerfectProjection.modules",
-      "AlgebraicGeometry.Scheme.PerfectProjection.derived",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotient",
-      "AlgebraicGeometry.Scheme.PerfectProjection.coefficientCone_naturality",
-      "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap",
-      "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap_isIso",
-      "AlgebraicGeometry.Scheme.PerfectProjection.coefficients",
-      "AlgebraicGeometry.Scheme.PerfectProjection.pullback",
-      "AlgebraicGeometry.Scheme.PerfectProjection.directImage",
-      "AlgebraicGeometry.Scheme.PerfectProjection.projection",
-      "AlgebraicGeometry.Scheme.PerfectProjection.locus",
-      "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback",
-      "AlgebraicGeometry.Scheme.PerfectProjection.reduction",
-      "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap",
-      "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap_isIso",
-      "AlgebraicGeometry.Scheme.PerfectProjection.reductionIso",
-      "AlgebraicGeometry.Scheme.PerfectProjection.inverse",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientMap",
-      "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback_naturality",
-      "AlgebraicGeometry.Scheme.PerfectProjection.tower_compatibility",
-      "AlgebraicGeometry.Scheme.PerfectProjection.operator_compatibility",
-      "AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique",
-      "AlgebraicGeometry.Scheme.PerfectProjection.mixed",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryRightUnit",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryTensorHom",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution",
-      "AlgebraicGeometry.Scheme.PerfectProjection.resolution_exists",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPull",
-      "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPush",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.total",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.totalInverse",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.flat",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex_isKInjective",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.pushModel",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.sourceModel",
-      "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetModel",
-      "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility",
-      "AlgebraicGeometry.Scheme.PerfectProjection.coefficients_square",
-      "AlgebraicGeometry.Scheme.PerfectProjection.exchange",
-      "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeSource",
-      "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeTarget",
-      "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
-      "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility"
-    ],
-    "statement": "theorem perfect_projection_formula : (locus d f aY aX K).IsTriangulated ∧ (locus d f aY aX K).IsStableUnderRetracts ∧ (∀ m : ℕ, locus d f aY aX K ((DerivedCategory.singleFunctor (modules d Y) 0).obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))))) ∧ (∀ P : derived d Y, SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) P → locus d f aY aX K P)",
-    "branch": "newtargets-dag",
-    "by": "N2",
-    "date": "2026-10-16",
-    "existing": false,
-    "file": "lean/Sheaf/Paper/PerfectProjectionFormula.lean",
-    "note": "The module states every clause of this node across the listed declarations: thick locus, finite free and site-perfect coefficients; canonical quotient pullback and reduction isomorphisms; totalization and resolution independence; tower, operator, base-change and identity-compactification compatibility. All helper constructions retain their prescribed section or representative characterizations. Positive exponent n+1 includes every n≥1."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-46a940cf0",
-    "group": "N2",
-    "result": "pass",
-    "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For fixed $f$ and $K$, the full subcategory of objects $P$ for which\n$\\pi_{f,K,P}$ of [def-weil-pbc-projection-formula-map] is an isomorphism is a\nthick triangulated subcategory containing every finite free $A$-module. In\nparticular, it contains every perfect complex, and for every $n$ there is a\nnatural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
-    "proof": [
-      {
-        "text": "For $P=A$ the map $\\pi_{f,K,A}$ of\n[def-weil-pbc-projection-formula-map] is the canonical tensor identity, an\nisomorphism; for a finite free $P=A^m$ it is the direct sum of finitely many\nof these, so every finite free $A$-module lies in the full subcategory. The\nsubcategory is triangulated-thick: it is closed under shifts ($Lf^*$, $Rf_*$\nand tensor are exact triangulated by\n[def-weil-pbc-proetale-operations] and commute with the shift comparisons),\nunder cones (applying $u:P_1\\to P_2$ to the projection-formula maps makes the\ncones of the $\\pi$'s fit into a distinguished triangle, and the\ntwo-out-of-three property gives the claim), and under direct summands (an\nidempotent splitting of $P$ gives one of the isomorphism). Hence it contains\nevery perfect complex, i.e. every object of the thick triangulated\nsubcategory generated by the finite free modules, and in particular every\n$P_n$'s finite free resolution in the sense of\n[def-weil-pbc-adic-coefficient-datum], giving the displayed isomorphism\n$(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*K_n$.",
-        "uses": [
-          "def-weil-pbc-projection-formula-map",
-          "def-weil-pbc-proetale-operations",
-          "def-weil-pbc-adic-coefficient-datum"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Choose a strict-perfect package $F_n^\\bullet\\to P_n$. Signed totalization\ngives inverse arrows\n\n$$\n(Rf_*K)\\otimes^LF_n^\\bullet\n\\mathrel{\\substack{\\xrightarrow{\\ \\pi_n\\ }\\\\[-2pt]\n\\xleftarrow[\\ \\rho_n\\ ]{}}}\nRf_*(K\\otimes^LLf^*F_n^\\bullet).\n$$",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "Because $P_n$ is constant, $Lf^*P_n=P_n$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0B56; remark-compatible-with-diagram after 0944; master blueprint first proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "def-weil-pbc-projection-formula-map",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-proetale-operations",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "lemma-weil-pbc-projection-formula-identity-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.md",
+  "place": "Both proofs, repaired using locality of Stacks 0944 and separate coefficient/exactness lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "thick triangulated subcategory of objects satisfying the projection formula contains finite free modules and perfect complexes",
+   "results": "8 hits: ['DerivedCategory.TStructure.t', 'DerivedCategory.IsGE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.IsLE', 'DerivedCategory.instIsGEObjSingleFunctor', 'DerivedCategory.instIsLEObjSingleFunctor', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isLE']; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex on a ringed topos satisfies projection formula; isomorphism locus is a thick triangulated subcategory",
+   "results": "8 hits: ['DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isLE', 'DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE', 'DerivedCategory.instIsGEObjSingleFunctor', 'DerivedCategory.TStructure.t', 'DerivedCategory.instIsLEObjSingleFunctor', 'DerivedCategory.IsGE']; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits: []; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula",
+   "results": "0 hits: []; ",
+   "date": "2026-10-14",
+   "verdict": "no match for the derived ringed-site projection formula; the hits do not identify the canonical mate or completed coefficient reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "thick triangulated subcategory generated by finite free modules gives projection formula for perfect complexes",
+   "results": "0 hits: []; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1275,
+ "blueprint_uses": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-formula-map",
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "lemma-weil-pbc-projection-formula-identity-compactification",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "lemma-weil-pbc-projection-formula-tower-compatibility"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "lemma-weil-pbc-projection-formula-base-change-naturality",
+  "lemma-weil-pbc-projection-formula-identity-compactification",
+  "lemma-weil-pbc-projection-formula-totalization",
+  "lemma-weil-pbc-projection-formula-tower-compatibility"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For every $n$ there is a natural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
+   "proof": "Choose a strict-perfect package $F_n^\\bullet\\to P_n$. Signed totalization\ngives inverse arrows\n\n$$\n(Rf_*K)\\otimes^LF_n^\\bullet\n\\mathrel{\\substack{\\xrightarrow{\\ \\pi_n\\ }\\\\[-2pt]\n\\xleftarrow[\\ \\rho_n\\ ]{}}}\nRf_*(K\\otimes^LLf^*F_n^\\bullet).\n$$\n\nBecause $P_n$ is constant, $Lf^*P_n=P_n$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-perfect-projection-formula",
+  "worker": "stage1",
+  "summary": "Repaired all returned faults: localized perfect-complex argument, completed coefficient flat resolutions, representable finite-limit coefficient pullback, and exact shift-compatible projection mate. Restored master inverse and compatibility scope; two smaller statement-only nodes, no claim of global thick generation or condensed-category comparison. The imported global-thick identification is STATEMENT-DISPUTED; the report gives its disconnected-site counterexample and the local replacement.",
+  "blueprint": "Detailed form: finite-free base case, thick closure, every perfect object, reductions. First statement/proof: inverse, independence, tower/operator/base-change and identity-compactification compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "General two-out-of-three for a morphism of distinguished triangles; no same-unit node supplies this exact three-vertex assertion."
+   },
+   {
+    "node": "lem-weil-pbc-degreewise-split-derived-triangle",
+    "why": "General distinguished triangle for a degreewise split sequence of complexes, used for the stupid truncations; this is a homological tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-degreewise-split-derived-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-282c19db5",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-282c19db5 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. Three repairable faults found: both new nodes lacked required created.by/date provenance, and step 5 incorrectly asserted a full quotient-tower morphism to the constant P_n tower, undefined for levels m<n. Corrected whole JSON files are under fixes/dag/nodes/sec-proper-base-change/, and review.md records source, hypothesis, edge-case, route, and step checks.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerfectProjectionFormula",
+  "declaration": "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.PerfectProjection.ring",
+   "AlgebraicGeometry.Scheme.PerfectProjection.modules",
+   "AlgebraicGeometry.Scheme.PerfectProjection.derived",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotient",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientCone_naturality",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap_isIso",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficients",
+   "AlgebraicGeometry.Scheme.PerfectProjection.pullback",
+   "AlgebraicGeometry.Scheme.PerfectProjection.directImage",
+   "AlgebraicGeometry.Scheme.PerfectProjection.projection",
+   "AlgebraicGeometry.Scheme.PerfectProjection.locus",
+   "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback",
+   "AlgebraicGeometry.Scheme.PerfectProjection.reduction",
+   "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap",
+   "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap_isIso",
+   "AlgebraicGeometry.Scheme.PerfectProjection.reductionIso",
+   "AlgebraicGeometry.Scheme.PerfectProjection.inverse",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientMap",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback_naturality",
+   "AlgebraicGeometry.Scheme.PerfectProjection.tower_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.operator_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.mixed",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryRightUnit",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryTensorHom",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution",
+   "AlgebraicGeometry.Scheme.PerfectProjection.resolution_exists",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPull",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryPush",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.total",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.totalInverse",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.flat",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex_isKInjective",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.pushModel",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.sourceModel",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetModel",
+   "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficients_square",
+   "AlgebraicGeometry.Scheme.PerfectProjection.exchange",
+   "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeSource",
+   "AlgebraicGeometry.Scheme.PerfectProjection.baseChangeTarget",
+   "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility"
+  ],
+  "statement": "theorem perfect_projection_formula : (locus d f aY aX K).IsTriangulated ∧ (locus d f aY aX K).IsStableUnderRetracts ∧ (∀ m : ℕ, locus d f aY aX K ((DerivedCategory.singleFunctor (modules d Y) 0).obj (∏ᶜ fun _ : Fin m ↦ SheafOfModules.unit ((adicLisseForget Y).obj (ring d Y))))) ∧ (∀ P : derived d Y, SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) P → locus d f aY aX K P)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-16",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/PerfectProjectionFormula.lean",
+  "note": "The module states every clause of this node across the listed declarations: thick locus, finite free and site-perfect coefficients; canonical quotient pullback and reduction isomorphisms; totalization and resolution independence; tower, operator, base-change and identity-compactification compatibility. All helper constructions retain their prescribed section or representative characterizations. Positive exponent n+1 includes every n≥1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-46a940cf0",
+  "group": "N2",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, dependencies, canonical constructions, universes, edge cases, signatures, report sections, and pilot gates. All three immutable modules passed scompile.py without diagnostics. No fixes needed; branch unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For fixed $f$ and $K$, the full subcategory of objects $P$ for which\n$\\pi_{f,K,P}$ of [def-weil-pbc-projection-formula-map] is an isomorphism is a\nthick triangulated subcategory containing every finite free $A$-module. In\nparticular, it contains every perfect complex, and for every $n$ there is a\nnatural isomorphism\n\n$$\n(Rf_*K)\\otimes^L_\\Lambda\\Lambda/I^n\n\\xrightarrow[\\pi_n]{\\sim}Rf_*K_n\n$$\n\nwhose inverse is $\\rho_n$. The families $(\\pi_n)$ and $(\\rho_n)$ commute\nwith the reduction tower, compatible coefficient endomorphisms, and base\nchange.",
+  "proof": [
+   {
+    "text": "For $P=A$ the map $\\pi_{f,K,A}$ of\n[def-weil-pbc-projection-formula-map] is the canonical tensor identity, an\nisomorphism; for a finite free $P=A^m$ it is the direct sum of finitely many\nof these, so every finite free $A$-module lies in the full subcategory. The\nsubcategory is triangulated-thick: it is closed under shifts ($Lf^*$, $Rf_*$\nand tensor are exact triangulated by\n[def-weil-pbc-proetale-operations] and commute with the shift comparisons),\nunder cones (applying $u:P_1\\to P_2$ to the projection-formula maps makes the\ncones of the $\\pi$'s fit into a distinguished triangle, and the\ntwo-out-of-three property gives the claim), and under direct summands (an\nidempotent splitting of $P$ gives one of the isomorphism). Hence it contains\nevery perfect complex, i.e. every object of the thick triangulated\nsubcategory generated by the finite free modules, and in particular every\n$P_n$'s finite free resolution in the sense of\n[def-weil-pbc-adic-coefficient-datum], giving the displayed isomorphism\n$(Rf_*K)\\otimes_A^LP_n\\xrightarrow{\\sim}Rf_*K_n$.",
+    "uses": [
+     "def-weil-pbc-projection-formula-map",
+     "def-weil-pbc-proetale-operations",
+     "def-weil-pbc-adic-coefficient-datum"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Choose a strict-perfect package $F_n^\\bullet\\to P_n$. Signed totalization\ngives inverse arrows\n\n$$\n(Rf_*K)\\otimes^LF_n^\\bullet\n\\mathrel{\\substack{\\xrightarrow{\\ \\pi_n\\ }\\\\[-2pt]\n\\xleftarrow[\\ \\rho_n\\ ]{}}}\nRf_*(K\\otimes^LLf^*F_n^\\bullet).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Because $P_n$ is constant, $Lf^*P_n=P_n$, and the target is $Rf_*K_n$.\nThe identity-compactification lemma shows that this is also the open/proper\ncompactification composite for proper $f$. The totalization lemma gives\n$\\rho_n\\pi_n=1$ and $\\pi_n\\rho_n=1$. Uniqueness of an inverse makes the map\nindependent of the strict-perfect package. Tower, operator, and base-change\ncompatibility are exactly the preceding two lemmas. This expands the\nfinite-projective argument located at Tag `0944`.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T002456-L-2138898",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.flat",
+   "AlgebraicGeometry.Scheme.PerfectProjection.Resolution.targetComplex_isKInjective",
+   "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientCone_naturality",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficientMap_isIso",
+   "AlgebraicGeometry.Scheme.PerfectProjection.coefficients_square",
+   "AlgebraicGeometry.Scheme.PerfectProjection.identityCompactification_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.operator_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientDerivedPullback_naturality",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique",
+   "AlgebraicGeometry.Scheme.PerfectProjection.reductionMap_isIso",
+   "AlgebraicGeometry.Scheme.PerfectProjection.resolution_exists",
+   "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.tower_compatibility"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.PerfectProjection.baseChange_compatibility",
+   "AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_coherence",
+   "AlgebraicGeometry.Scheme.PerfectProjection.perfect_projection_formula",
+   "AlgebraicGeometry.Scheme.PerfectProjection.totalization_compatibility"
+  ]
+ }
 }
