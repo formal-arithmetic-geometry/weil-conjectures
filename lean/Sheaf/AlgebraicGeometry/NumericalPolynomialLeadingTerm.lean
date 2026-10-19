@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
 import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
 import Sheaf.RingTheory.LengthOfSupportAtMaximalIdeal
 import Sheaf.Topology.ClosedImmersionPushforwardCohomology
-import Sheaf.Topology.ClosedImmersionPushforwardExact
+import WeilConjectures.Topology.ClosedImmersionPushforwardExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 

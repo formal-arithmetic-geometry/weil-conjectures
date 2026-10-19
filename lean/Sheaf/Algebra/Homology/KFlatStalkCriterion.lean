@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkTensorComplex
-import Sheaf.Topology.SkyscraperComplex
+import WeilConjectures.Topology.SkyscraperComplex
 
 /-!
 # K-flatness detected on stalks

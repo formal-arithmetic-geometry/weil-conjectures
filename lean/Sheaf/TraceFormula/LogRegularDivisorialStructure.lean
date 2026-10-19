@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationCompletionNoetherian
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint

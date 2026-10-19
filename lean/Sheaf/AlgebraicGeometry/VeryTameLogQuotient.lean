@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.VeryTameFSLogAction
 public import Sheaf.AlgebraicGeometry.KummerLogMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import Sheaf.AlgebraicGeometry.InvertibleKummerChartLogRegular

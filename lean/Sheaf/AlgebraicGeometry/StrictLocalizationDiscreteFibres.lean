@@ -13,7 +13,7 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizatio
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import WeilConjectures.RingTheory.FilteredEtaleFiberStructure
 import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
 import Mathlib.RingTheory.LocalRing.ResidueField.Fiber

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import WeilConjectures.AlgebraicGeometry.ProjGradedModuleChartGluing
 import Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent
 import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
-import Sheaf.Topology.SheafOfModulesFromIndexedBasis
+import WeilConjectures.Topology.SheafOfModulesFromIndexedBasis
 
 /-!
 # ProjGradedModuleSheafExtension

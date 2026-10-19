@@ -17,7 +17,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import Sheaf.AlgebraicGeometry.UnramifiedOverFieldLocalCriterion
-import Sheaf.RingTheory.SmoothLocalCompleteIntersection
+import WeilConjectures.RingTheory.SmoothLocalCompleteIntersection
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
 import Sheaf.AlgebraicGeometry.NodalPointLocalCriterion

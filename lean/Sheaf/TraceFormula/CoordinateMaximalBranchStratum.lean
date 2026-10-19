@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import WeilConjectures.RingTheory.Etale.LocalDimension
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 

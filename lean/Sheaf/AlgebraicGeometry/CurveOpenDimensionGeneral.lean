@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import WeilConjectures.RingTheory.QuotientHenselianPair

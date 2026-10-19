@@ -25,9 +25,9 @@ public import Mathlib.FieldTheory.SeparableClosure
 
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
-import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.CompletionDimension
 import WeilConjectures.RingTheory.CompletionRegularLocal

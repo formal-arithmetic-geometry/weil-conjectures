@@ -16,10 +16,10 @@ import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
-import Sheaf.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 
 /-!
 # Log regularity for invertible Kummer charts

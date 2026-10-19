@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 public import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.SpectralObjectBottomFiltration
-import Sheaf.Topology.TopologicalLeraySpectralObjectAugmentation
+import WeilConjectures.Topology.TopologicalLeraySpectralObjectAugmentation
 
 /-! # Cartan--Eilenberg Leray construction on cocycles -/
 

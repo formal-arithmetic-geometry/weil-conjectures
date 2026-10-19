@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.IsTensorProduct
 public import Mathlib.Algebra.Category.Ring.Colimits
-import Sheaf.RingTheory.TensorModelAlgebraStage
+import WeilConjectures.RingTheory.TensorModelAlgebraStage
 import Sheaf.RingTheory.TensorModelPushoutBaseChange
 
 /-! # Descending the algebra part of a tensor model

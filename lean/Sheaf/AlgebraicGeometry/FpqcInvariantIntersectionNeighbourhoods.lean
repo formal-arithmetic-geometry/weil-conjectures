@@ -17,7 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.AlgebraicGeometry.DescentOrbitSaturated
-import Sheaf.Topology.SpectralGeneralizations
+import WeilConjectures.Topology.SpectralGeneralizations
 
 /-!
 # Invariant neighbourhoods inside intersections of quasi-compact opens

@@ -20,7 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples

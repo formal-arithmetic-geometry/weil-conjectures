@@ -15,8 +15,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf
 import Sheaf.AlgebraicGeometry.QuasiFiniteFlatWeightedTrace
-import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.TraceFormula.DerivedSectionsFinitePushforwardModules
 import Sheaf.TraceFormula.FiniteBaseStrictLocalization

@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Topology.RingedModuleSkyscraper
+import WeilConjectures.Topology.RingedModuleSkyscraper
 
 /-!
 # Stalks of flat sheaves of modules

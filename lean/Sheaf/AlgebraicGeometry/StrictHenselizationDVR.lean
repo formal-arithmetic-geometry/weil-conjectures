@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationDimension
-import Sheaf.RingTheory.StrictHenselizationNoetherian
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization

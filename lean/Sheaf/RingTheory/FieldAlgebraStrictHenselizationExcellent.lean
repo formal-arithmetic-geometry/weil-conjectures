@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.RingTheory.IsStrictHenselization
 public import WeilConjectures.RingTheory.GRing
 public import Sheaf.RingTheory.ExcellentRing
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale

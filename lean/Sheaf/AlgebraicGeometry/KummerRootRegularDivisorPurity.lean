@@ -28,7 +28,7 @@ import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Sheaf.TraceFormula.FiniteBaseStrictLocalization

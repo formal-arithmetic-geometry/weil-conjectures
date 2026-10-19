@@ -11,7 +11,7 @@ public import Mathlib.Algebra.MonoidAlgebra.Basic
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
-import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationCompletionNoetherian
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.TorFlatBaseChange
 import WeilConjectures.RingTheory.AdicCompletionNoetherian

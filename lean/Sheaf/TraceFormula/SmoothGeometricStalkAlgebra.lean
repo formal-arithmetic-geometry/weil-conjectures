@@ -15,7 +15,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
@@ -26,10 +26,10 @@ import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.RingTheory.PolynomialOriginRegularLocal
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Flat.Stability

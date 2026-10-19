@@ -14,8 +14,8 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.PointCount
 import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula

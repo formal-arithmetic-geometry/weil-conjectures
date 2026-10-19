@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
-import Sheaf.RingTheory.SmoothLocalCompleteIntersection
+import WeilConjectures.RingTheory.SmoothLocalCompleteIntersection
 import WeilConjectures.RingTheory.SmoothFibreLocalizedPresentationJacobian
 import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
 

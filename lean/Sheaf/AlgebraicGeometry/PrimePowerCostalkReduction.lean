@@ -31,7 +31,7 @@ public import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction
 import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives

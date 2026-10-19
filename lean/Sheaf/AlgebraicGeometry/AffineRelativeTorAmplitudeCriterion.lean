@@ -16,8 +16,8 @@ import WeilConjectures.AlgebraicGeometry.InverseImageStructureStalkIso
 import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
-import Sheaf.Topology.RingedModuleSkyscraper
-import Sheaf.Topology.SkyscraperComplexStalk
+import WeilConjectures.Topology.RingedModuleSkyscraper
+import WeilConjectures.Topology.SkyscraperComplexStalk
 import WeilConjectures.Topology.InverseImageStalk
 import Sheaf.Algebra.Homology.RelativeTorAmplitudeLocalization
 import WeilConjectures.Topology.InverseImageModule

@@ -20,7 +20,7 @@ import Sheaf.RingTheory.StrictHenselizationPresentationIn
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Sheaf.Topology.RingedModuleSkyscraper
+public import WeilConjectures.Topology.RingedModuleSkyscraper
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import Sheaf.CategoryTheory.RingedSiteModules
 

@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 
-import Sheaf.Topology.SpectralClosedClopenDecompositionLift
+import WeilConjectures.Topology.SpectralClosedClopenDecompositionLift
 import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 
 /-!

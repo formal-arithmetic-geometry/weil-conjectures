@@ -83,13 +83,14 @@
  "unit": "sk-thm-curveestimate",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.TopologicalInducedCohomologyCocycle",
-  "file": "lean/Sheaf/Topology/TopologicalInducedCohomologyCocycle.lean",
+  "module": "WeilConjectures.Topology.TopologicalInducedCohomologyCocycle",
+  "file": "lean/WeilConjectures/Topology/TopologicalInducedCohomologyCocycle.lean",
   "declaration": "CategoryTheory.exists_topological_induced_cohomology_cocycle",
   "statement": "theorem exists_topological_induced_cohomology_cocycle\n    {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]\n    (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙\n      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))\n    (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙\n      (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)) :\n    ∃ edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,\n      ∃ a : (presheafToSheaf (Opens.grothendieckTopology X)\n        AddCommGrpCat.{u}).obj\n        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n      (TopCat.Sheaf.pushforwardAb f).obj\n        ((presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)),\n      (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)),\n        a.hom.app (op U)\n          ((toSheafify (Opens.grothendieckTopology X)\n            (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app\n              (op U) (FreeAbelianGroup.of h)) =\n          (toSheafify (Opens.grothendieckTopology Z)\n            (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app\n              (op ((Opens.map f).obj U))\n              (FreeAbelianGroup.of ((Opens.map f).map h ≫\n                eqToHom (Opens.map_top f)))) ∧\n      (∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})\n        (I : InjectiveResolution F)\n        (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F))\n        (φ : J.cocomplex ⟶\n          ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex)\n        (_hφ : J.ι.f 0 ≫ φ.f 0 =\n          (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ)\n        (s : (presheafToSheaf (Opens.grothendieckTopology X)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n            J.cocomplex.X p)\n        (hs : s ≫ J.cocomplex.d p (p + 1) = 0)\n        (z : (presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶\n            I.cocomplex.X p)\n        (hz : z ≫ I.cocomplex.d p (p + 1) = 0)\n        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),\n        (eqToHom (congrArg (fun Q ↦ Q.obj F) (hZ p)))\n          ((edge p).app F\n            ((eqToHom (congrArg (fun Q ↦ Q.obj\n              ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)\n              (J.extMk s (p + 1) rfl hs))) =\n            I.extMk z (p + 1) rfl hz)",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.TopologicalInducedCohomologyCocycle; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

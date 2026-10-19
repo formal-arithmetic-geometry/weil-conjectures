@@ -11,7 +11,7 @@ public import Mathlib.Topology.Compactness.Compact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-import Sheaf.Topology.TopologicalFilteredCohomology
+import WeilConjectures.Topology.TopologicalFilteredCohomology
 import Sheaf.Topology.AbelianSheafFiniteGenerationExhaustion
 import Sheaf.Topology.AbelianIntegerExtensionMono
 

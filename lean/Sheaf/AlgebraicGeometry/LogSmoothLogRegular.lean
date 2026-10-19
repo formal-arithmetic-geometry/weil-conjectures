@@ -13,7 +13,7 @@ import Sheaf.AlgebraicGeometry.FsChartFreeFactorization
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.TraceFormula.SmoothGeometricStalkAlgebra
 import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
 import Sheaf.RingTheory.FormalMonoidRingDimension
@@ -21,8 +21,8 @@ import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import WeilConjectures.RingTheory.CompletionDimension
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
-import Sheaf.RingTheory.StrictHenselizationRegular
-import Sheaf.RingTheory.StrictHenselizationDimension
+import WeilConjectures.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationDimension
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.TraceFormula.LogRegularDivisorialStructure
 import Sheaf.AlgebraicGeometry.LogRegularPair

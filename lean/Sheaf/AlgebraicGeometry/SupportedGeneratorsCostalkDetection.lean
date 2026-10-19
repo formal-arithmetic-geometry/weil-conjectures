@@ -28,7 +28,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal

@@ -16,8 +16,8 @@ import Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates
 import WeilConjectures.RingTheory.DimensionAtPointLocalRingTrdeg
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
-import Sheaf.RingTheory.StrictHenselizationCotangentDimension
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationCotangentDimension
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!

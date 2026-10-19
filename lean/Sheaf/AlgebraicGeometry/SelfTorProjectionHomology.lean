@@ -6,7 +6,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
 import Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise
-import Sheaf.Topology.ClosedImmersionPushforwardExact
+import WeilConjectures.Topology.ClosedImmersionPushforwardExact
 
 @[expose] public section
 set_option autoImplicit false

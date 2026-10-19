@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.Topology.TopologicalInducedCohomologyCocycle
+import WeilConjectures.Topology.TopologicalInducedCohomologyCocycle
 import Sheaf.Topology.TopologicalLerayBottomRealization
 
 /-! # Leray spectral sequence for a continuous map of spaces

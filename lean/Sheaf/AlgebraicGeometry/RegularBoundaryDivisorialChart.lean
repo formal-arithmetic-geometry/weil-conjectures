@@ -15,8 +15,8 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.StrictHenselizationCotangentDimension
-import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.RingTheory.StrictHenselizationCotangentDimension
+import WeilConjectures.RingTheory.StrictHenselizationRegular
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.RegularLocalRing.Defs

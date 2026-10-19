@@ -12,7 +12,7 @@ public import WeilConjectures.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import all Sheaf.RingTheory.SyntomicEquationCountComparisonCore
 import Sheaf.RingTheory.SyntomicCodimensionLocalKernelGenerators
-import Sheaf.RingTheory.SyntomicEquationCountComparisonDimension
+import WeilConjectures.RingTheory.SyntomicEquationCountComparisonDimension
 
 /-!
 # An equation-count comparison quotient at a syntomic prime

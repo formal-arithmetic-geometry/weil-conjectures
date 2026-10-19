@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.GeometricImmediateCatenary
 import Sheaf.AlgebraicGeometry.StrictLocalizationDiscreteFibres
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.AlgebraicGeometry.Properties
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Localization.Submodule

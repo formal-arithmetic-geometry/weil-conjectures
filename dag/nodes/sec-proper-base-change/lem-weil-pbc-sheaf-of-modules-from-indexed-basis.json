@@ -97,13 +97,14 @@
  "unit": "sk-thm-reduction",
  "lean": {
   "existing": false,
-  "module": "Sheaf.Topology.SheafOfModulesFromIndexedBasis",
-  "file": "lean/Sheaf/Topology/SheafOfModulesFromIndexedBasis.lean",
+  "module": "WeilConjectures.Topology.SheafOfModulesFromIndexedBasis",
+  "file": "lean/WeilConjectures/Topology/SheafOfModulesFromIndexedBasis.lean",
   "declaration": "TopologicalSpace.Opens.exists_sheafOfModules_from_indexed_basis",
   "statement": "theorem exists_sheafOfModules_from_indexed_basis (X : TopCat.{u}) (I : Type u) (U : I → Opens X) (hB : IsBasis (Set.range U)) (cap : I → I → I) (hcap : ∀ i j, U (cap i j) = U i ⊓ U j) (hrefine : ∀ (i : I) (J : Type u) (V : J → I), (⨆ j, U (V j)) = U i → ∃ (n : ℕ) (W : Fin n → I), (⨆ k, U (W k)) = U i ∧ ∀ k, ∃ j, U (W k) ≤ U (V j)) (R : TopCat.Sheaf RingCat.{u} X) (Q : ∀ i : I, ModuleCat.{u} (R.obj.obj (op (U i)))) (r : ∀ (i j : I), U j ≤ U i → Q i →+ Q j) (rid : ∀ (i : I) (s : Q i), r i i le_rfl s = s) (rcomp : ∀ (i j k : I) (hji : U j ≤ U i) (hkj : U k ≤ U j) (s : Q i), r j k hkj (r i j hji s) = r i k (hkj.trans hji) s) (rsmul : ∀ (i j : I) (h : U j ≤ U i) (a : R.obj.obj (op (U i))) (s : Q i), r i j h (a • s) = R.obj.map (homOfLE h).op a • r i j h s) (hglue : ∀ (i : I) (n : ℕ) (V : Fin n → I) (hV : ∀ j, U (V j) ≤ U i), (⨆ j, U (V j)) = U i → ∀ s : ∀ j, Q (V j), (∀ j k, r (V j) (cap (V j) (V k)) (by rw [hcap]; exact inf_le_left) (s j) = r (V k) (cap (V j) (V k)) (by rw [hcap]; exact inf_le_right) (s k)) → ∃! t : Q i, ∀ j, r i (V j) (hV j) t = s j) : ∃ (E : SheafOfModules.{u} R) (iota : ∀ i : I, E.val.obj (op (U i)) ≃ₗ[R.obj.obj (op (U i))] Q i), (∀ (i j : I) (h : U j ≤ U i) (s : E.val.obj (op (U i))), iota j (E.val.map (homOfLE h).op s) = r i j h (iota i s)) ∧ (∀ (G : SheafOfModules.{u} R) (psi : ∀ i : I, Q i →ₗ[R.obj.obj (op (U i))] G.val.obj (op (U i))), (∀ (i j : I) (h : U j ≤ U i) (s : Q i), psi j (r i j h s) = G.val.map (homOfLE h).op (psi i s)) → (∃! phi : E ⟶ G, ∀ (i : I) (s : E.val.obj (op (U i))), phi.val.app (op (U i)) s = psi i (iota i s)) ∧ (∀ (phi : E ⟶ G), (∀ (i : I) (s : E.val.obj (op (U i))), phi.val.app (op (U i)) s = psi i (iota i s)) → (∀ i : I, Function.Bijective (psi i)) → IsIso phi))",
   "branch": "sheaf-dag",
   "by": "Q2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.Topology.SheafOfModulesFromIndexedBasis; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

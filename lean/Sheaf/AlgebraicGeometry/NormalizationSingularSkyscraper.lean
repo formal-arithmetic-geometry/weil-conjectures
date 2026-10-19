@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ReducedNormalization
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Sheaf.Topology.RingedModuleSkyscraper
+public import WeilConjectures.Topology.RingedModuleSkyscraper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

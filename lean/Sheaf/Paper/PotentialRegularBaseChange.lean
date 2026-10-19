@@ -37,7 +37,7 @@ import Sheaf.AlgebraicGeometry.RegularEtaleDirectImageBaseChange
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import Mathlib.RingTheory.Localization.Submodule
-import Sheaf.RingTheory.StrictHenselizationNoetherian
+import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
