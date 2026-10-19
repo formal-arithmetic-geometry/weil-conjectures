@@ -22,9 +22,131 @@
   "def-nagata-global-blowup",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The complete-local excellence theorem makes $C$ excellent. Write $B=S^{-1}D$ for a finite type $C$-algebra $D$. Excellence is preserved by finite type extension and localization, so $B$ is excellent and therefore Nagata. Its given normality, dimension and vanishing hypothesis now say precisely that $B$ defines a rational singularity: the normal modifications in that definition are exactly the integral normal proper models inducing the given isomorphism of function fields. The cohomology is the same Zariski cohomology, by the topological-cohomology convention in the statement.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-quasi-excellent-nagata",
+    "def-per-rational-surface-singularity",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGM, proof, complete-local permanence paragraph; more-algebra.tex Tags 07QW, 07QU and 07QV; Tag 0B4N, definition-reduce-to-rational."
+   }
+  },
+  {
+   "text": "Apply the rational-to-Gorenstein blowup theorem with $R=B$ and complete base $C$. Its Nagata and rationality hypotheses were checked in Step 1. Obtain a finite ordinary tower $X_n\\to\\cdots\\to X_0=\\operatorname{Spec}B$ at singular closed points over the closed point of the base. Its intermediate schemes are integral and normal, its endpoint $X=X_n$ has Gorenstein local rings, and its composite is proper and identifies function fields. Each individual arrow is proper as well: the reduced ideal of a closed point on a Noetherian scheme is a finite-type quasi-coherent ideal, so the blowup-proper theorem applies, inductively. At the start $\\operatorname{Spec}B$ is Noetherian, and after each proper (hence finite type) arrow the finite-type-over-Noetherian theorem keeps it Noetherian.",
+   "uses": [
+    "lem-per-rational-surface-gorenstein-blowups",
+    "lemma-nagata-blowup-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV, lemma-rational-to-gorenstein; dualizing.tex Tag 0BFR supplies the specialization already in the cited theorem; divisors.tex, blowup properness."
+   }
+  },
+  {
+   "text": "The endpoint $X$ is finite type over the excellent ring $B$. Finite-type/localization stability of excellence therefore makes $X$ excellent on every affine chart. Step 2 gives Noetherianity, integrality and normality. Apply the closed-dominant dimension theorem to the proper birational map $X\\to\\operatorname{Spec}B$: its function-field extension has transcendence degree zero, so $\\dim X=\\dim B=2$. The excellent-normal-surface local-data theorem now applies. Its singular set is a finite set of closed points $\\{x_1,\\ldots,x_t\\}$, and $R_i=\\mathcal O_{X,x_i}$ is an excellent Noetherian normal local domain of dimension two with normal maximal-ideal-adic completion. Each $R_i$ is Nagata by quasi-excellent-implies-Nagata.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-closed-dominant-dimension",
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-exc-quasi-excellent-nagata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGM, proof after lemma-rational-to-gorenstein; more-algebra.tex Tags 07QU and 0C23; excellent normal surface finiteness."
+   }
+  },
+  {
+   "text": "For each $i$, the proper map $X\\to\\operatorname{Spec}B$ sends the closed singleton $\\{x_i\\}$ to a closed singleton. Since $B$ is local, that image is its unique closed point. Thus $B\\to R_i$ is a local homomorphism. The function-field identification of Step 2 embeds both rings in the same field and makes this map injective. Choose an affine neighbourhood $\\operatorname{Spec}E$ of $x_i$ in the finite-type $B$-scheme $X$. Then $E$ is a finite type $B$-algebra and the affine-stalk theorem identifies $R_i=E_{\\mathfrak q_i}$, proving essential finite type. The fraction field of this stalk is the function field of the integral scheme $X$, hence is $\\operatorname{Frac}B$. Apply rationality propagation to $B\\subseteq R_i$: Step 1 supplies rationality and the normal Nagata dimension-two base; Step 3 supplies the normal dimension-two target. Consequently every $R_i$ is rational.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-sc-function-field",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-per-rational-singularity-birational-propagation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG0, lemma-rational-propagates, applied in the last paragraph of the proof of Tag 0BGM."
+   }
+  },
+  {
+   "text": "Every $R_i$ is Gorenstein by Step 2. Steps 3 and 4 also give normality, the Nagata property, dimension two, rationality and normal completion. These are exactly the hypotheses of the rational-double-point resolution theorem. Apply it to obtain a finite ordinary tower $T_{i,m_i}\\to\\cdots\\to T_{i,0}=\\operatorname{Spec}R_i$ at singular reduced closed points over its closed point, with integral normal intermediate schemes and regular endpoint. There is no choice to make when $t=0$.",
+   "uses": [
+    "lem-per-rational-double-point-blowup-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGE, lemma-resolve-rational-double-points; final paragraph of Tag 0BGM."
+   }
+  },
+  {
+   "text": "Apply ordinary-point-blowup globalization to the normal integral Noetherian scheme $X$, its distinct singular closed points $x_i$, and the towers of Step 5. This gives $W=Z_N\\to\\cdots\\to Z_0=X$, a finite tower of proper ordinary blowups with integral normal Noetherian intermediate schemes. Its centers are singular reduced closed points. Over $X\\setminus\\{x_i\\}$ every intermediate scheme is unchanged; over $x_i$ the endpoint local rings are identified with those of $T_{i,m_i}$. For $t=0$ it gives the identity tower.",
+   "uses": [
+    "lem-per-local-ordinary-point-blowups-globalize"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFY, lemma-equivalence-sequence-blowups, converse; the same gluing used twice in Tag 0BGM."
+   }
+  },
+  {
+   "text": "Every point of $W$ over $X\\setminus\\{x_i\\}$ has the unchanged regular local ring, since the $x_i$ are exactly the singular points of $X$. Every point over some $x_i$ has the local ring of its corresponding point on the regular scheme $T_{i,m_i}$. Thus all local rings of $W$ are regular. Step 6 gives Noetherianity, so the local-ring characterization of a regular scheme makes $W$ regular.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Conclusion of Tag 0BGM, using regularity local on the source; properties.tex Tag 02IT."
+   }
+  },
+  {
+   "text": "Concatenate the first ordinary tower and the tower of Step 6. All its schemes are integral and normal and all its arrows are proper. The second tower is supported over the $x_i$, which map to the closed point of $\\operatorname{Spec}B$ by Step 4; the first already had that support. Consequently every center is a singular reduced closed point lying over the closed point of $\\operatorname{Spec}B$. The endpoint is regular by Step 7. Both finite lengths may be zero, so the conclusion includes the zero-length case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGM, rational-singularity subcase: concatenating the Gorenstein and rational-double-point stages."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "def-per-rational-surface-singularity",
+  "def-sc-topological-abelian-cohomology",
+  "lem-per-rational-surface-gorenstein-blowups",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-trf-closed-dominant-dimension",
+  "lem-per-excellent-normal-surface-local-data",
+  "def-sc-function-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-per-rational-singularity-birational-propagation",
+  "lem-per-rational-double-point-blowup-resolution",
+  "lem-per-local-ordinary-point-blowups-globalize",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BGM, last two paragraphs, restricted to the rational local surface B, using Tags 0BBV, 0BG0, 0BGE and 0BFY."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +182,45 @@
    "results": "8 hits; WeierstrassCurve.exists_isMinimal, AlgebraicGeometry.Scheme.Hom.normalization, WeierstrassCurve.reduction, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, WeierstrassCurve.minimal; ; logged digest b9e860db094448f3",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these concern relative normalization, ordinary adic completion, rational maps, smooth/cotangent charts or Weierstrass nonsingularity, and do not assert this surface theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.?singular|resolve.*double|resolution.*singular",
+   "results": "{\"t\": \"2026-10-18T23:27:29Z\", \"tool\": \"grep\", \"query\": \"rational.?singular|resolve.*double|resolution.*singular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures were read; they concern smoothness, normalization, discrete valuation rings or elliptic curves, not resolution of rational local surface singularities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolution of rational surface singularities by successive point blowups with normal intermediate schemes",
+   "results": "{\"t\": \"2026-10-18T23:27:29Z\", \"tool\": \"leansearch\", \"query\": \"Resolution of rational surface singularities by successive point blowups with normal intermediate schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\"], \"digest\": \"3aebe53e9a2ec852\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures were read; they concern smoothness, normalization, discrete valuation rings or elliptic curves, not resolution of rational local surface singularities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singular\", \"blow\"",
+   "results": "{\"t\": \"2026-10-18T23:27:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"singular\\\", \\\"blow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures were read; they concern smoothness, normalization, discrete valuation rings or elliptic curves, not resolution of rational local surface singularities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational normal two dimensional local domains essentially of finite type over a complete local ring are resolved by ordinary blowups at singular closed points",
+   "results": "{\"t\": \"2026-10-18T23:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"Rational normal two dimensional local domains essentially of finite type over a complete local ring are resolved by ordinary blowups at singular closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsSmoothAt\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"WeierstrassCurve.reduction\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\"], \"digest\": \"22c5d56ec9c5e597\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures were read; they concern smoothness, normalization, discrete valuation rings or elliptic curves, not resolution of rational local surface singularities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An excellent rational normal local surface singularity admits a regular model obtained by a finite sequence of point blowups",
+   "results": "{\"t\": \"2026-10-18T23:32:38Z\", \"tool\": \"leanfinder\", \"query\": \"An excellent rational normal local surface singularity admits a regular model obtained by a finite sequence of point blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"WeierstrassCurve.IsMinimal\"], \"digest\": \"c744763f49197924\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures were read; they concern smoothness, normalization, discrete valuation rings or elliptic curves, not resolution of rational local surface singularities"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-normalized-refinement",
@@ -90,5 +247,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rational-surface-point-blowup-resolution",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0BGM rational-singularity stages, reusing the existing Gorenstein, propagation, double-point and excellence nodes. Added only the generic ordinary point-blowup globalization lemma, because the existing globalization node guarantees normalized blowups only. Verified every hypothesis, center support, ordinary versus normalized distinction and empty/zero-length cases. No statement change.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BGM, resolve-lemma-existence-implies-existence-by-normalized-blowing-ups; normalized blowups are resolve-definition-normalized-blowup (Tag 0BBS). Supporting Tag 0BGM proof: the rational-to-Gorenstein stage and the subsequent rational-double-point stage, restricted to one rational local surface.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic excellence, affine-stalk, dimension or blowup geometry input to the local surface-resolution argument; it replaces no step of the perverse-curve unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-closed-dominant-dimension",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-896264b79",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-896264b79 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full against resolve.tex: the 0BFV–0BFZ modification section, 0BBV, 0BG0, 0BGE and the full proof of 0BGM. The item statement and stmt_deps are byte-identical to the base, so no target is weakened. Step 1: 07QW, 07QU and 07QV make B excellent and Nagata, and the item's H^1 hypothesis is exactly the normal-modification quantifier of def-per-rational-surface-singularity, with Zariski cohomology identified via def-sc-topological-abelian-cohomology. Step 2: every hypothesis of the 0BBV Gorenstein node holds; each arrow is proper by blowup properness and each stage stays Noetherian by finite type over Noetherian. Step 3: 02JX gives dim X = 2 because the map is closed with transcendence degree 0; the excellent-normal-surface node then gives finitely many closed singular points with normal completions. Using excellence here instead of a dominating resolution is legitimate. Step 4: 0BG0 applies once the local injective essentially-finite-type extension with equal fraction fields is checked, which the step does via the affine-stalk node. Step 5: 0BGE gets all its hypotheses, including the normal completion. Steps 6–8: gluing, a regularity check point by point and concatenation, all correct. The new node lem-per-local-ordinary-point-blowups-globalize (0BFY converse with 0BFX) is true: blowing up commutes with the flat base change to the local scheme, local rings agree by localization, and normality and singularity of centres carry over. Its dimension-0 edge case (the blowup of a field at its point is empty) is excluded by the integrality hypothesis. It is not a duplicate: lem-per-local-normalized-blowups-globalize (0BFZ) gives normalized blowups and endpoint comparisons only, and grep for 0BFV–0BFZ and for the modifications lemmas found no other match. It is not a restated clause of the item, and there is no cycle. Batch-5: the closure of lem-per-complete-local-excellence reaches only commutative-algebra trf nodes (universally catenary, CM, fraction degree). lem-trf-closed-dominant-dimension is the generic 02JX dimension formula. Neither is part of the trace formula or Poincaré duality, so both are accepted. I accept the declared tool_uses as generic; no SGA source is used. Minor point: that affine opens of a finite-type scheme have finite-type coordinate rings (01T2) is used as a definitional unfolding. No fixes."
  }
 }
