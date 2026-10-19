@@ -17098,3 +17098,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:58 L: returned deliver/Q09/lem-coef-tower-natural-currying (reviewer RETURN: L: independent stage-2 immutable head deb24dad4ac9: H3: the main theorem concludes a fresh ∃ M : CoefCurryingModels whos)
 - 06:00 L: merged deliver/Q49/lem-per-finite-coefficient-dual-constructible (reviewer FIX; after a return; new nodes: 0)
 - 06:04 L: returned deliver/O4/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: Read the item (statement and 9 steps), all 5 new nodes, both citers (resolution-invariant-calculus Steps 2/3/5/6/7; smoo)
+- 06:04 L: returned deliver/NU/thm-pur-regular-immersion-purity (reviewer RETURN: L: independent stage-2 immutable head 964596d17a6f: H2/H13: item and all 4 new def nodes (class-data, exterior-class, si)
