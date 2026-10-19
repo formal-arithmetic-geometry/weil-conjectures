@@ -52,6 +52,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 |---|---|---|---|---|
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 6 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
+| `Sheaf.Paper.IntegralConstantModelHeart` | 8 | 1 | repair | route |
+| `Sheaf.Paper.PurityDiagonalBaseChangeCompared` | 6 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 4 | 1 | disputed | route |
 | `Sheaf.Paper.ProjectionFormulaCompactified` | 5 | 3 | disputed | route |
 | `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction` | 8 | 3 | disputed | route |
@@ -190,7 +192,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.NonrationalLocalizingLowerShriekComposition` | 6 | 1 | proof | route |
 | `Sheaf.Paper.PointSectionsFiniteness` | 6 | 1 | proof | route |
 | `Sheaf.Paper.ProEtaleSectionModuleFunctors` | 6 | 3 | proof | route |
-| `Sheaf.Paper.PurityDiagonalBaseChangeCompared` | 6 | 1 | proof | route |
 | `Sheaf.Paper.SbcCompletedOperations` | 6 | 15 | proof | route |
 | `Sheaf.Paper.SfBidualityClass` | 6 | 1 | proof | route |
 | `Sheaf.Paper.SfLocalizationAllStages` | 6 | 3 | proof | route |
@@ -285,7 +286,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FinitePointInternalHomEvaluation` | 8 | 1 | proof | route |
 | `Sheaf.Paper.FrobeniusCoefficientReductionCoherence` | 8 | 8 | proof | route |
 | `Sheaf.Paper.IntegralComparisonSequenceSystems` | 8 | 7 | proof | route |
-| `Sheaf.Paper.IntegralConstantModelHeart` | 8 | 1 | proof | route |
 | `Sheaf.Paper.IntegralHeartLocalModel` | 8 | 9 | proof | route |
 | `Sheaf.Paper.IntegralLocalizingProperBaseChange` | 8 | 1 | proof | route |
 | `Sheaf.Paper.IntegralPullbackResolutionMatching` | 8 | 1 | proof | route |
