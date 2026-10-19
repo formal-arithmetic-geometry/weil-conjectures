@@ -16,7 +16,17 @@
   "def-weil-integral-rational-qbar-compact-support",
   "lem-per-continuous-rational-derived-realization",
   "lem-per-adic-heart-pullback-fibres",
-  "def-weil-algebraically-closed-coefficients"
+  "def-weil-algebraically-closed-coefficients",
+  "def-a1-finite-adic-compactification-section-data",
+  "def-a1-common-adic-section-data",
+  "def-a1-common-adic-open-section-data",
+  "def-a1-common-adic-compactification-section-data",
+  "def-a1-adic-section-canonical-models",
+  "def-a1-finite-adic-section-realization-core",
+  "def-a1-finite-adic-image-normalization",
+  "def-a1-finite-adic-ordinary-section-data",
+  "def-a1-finite-adic-open-section-data",
+  "def-a1-finite-adic-proper-section-data"
  ],
  "proof": [
   {
@@ -365,5 +375,26 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-3cccbbb8d (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 9 steps and the split_report with its 15 tool_uses. The delivery has no new nodes and leaves the statement and stmt_deps unchanged. I also read the unit sk-l-dl-a1-endpoints and the chapter record, and checked the statement of every cited node against the use made of it. Main checks: step 1 (lem-sf-integral-open-reduction-comparison: strict r_j, completeness and d_j, with j quasi-compact and K complete; the Noetherian and finite-dimension hypotheses come from the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian and from lem-fin-finite-type-fibre-dimension-bound over Spec k); step 2 (γ of lem-sf-open-tensor-normalization with N=E_T, and the J formula); step 3 (the rational clause of sk-lem-sf-open-ctf uses the same standard pairs as def-weil-constructible-heart); step 4 (the ringed open-closed identities, and the fibres via lem-per-adic-heart-pullback-fibres for j and i with Z_red); step 5 (with the compactification (j,b), the defining tower is the strict reduction tower of e_jK, and lem-pur-completed-coefficient-pushforward-comparison gives Rb_*(e_jK)); step 6 (Fib_s 1_s = E, E[0] K-projective, checked); steps 7-8 (the adjunction identified by lem-a1-rational-direct-image-realization, then the compositor; restriction formula checked); step 9 (scalar and common-stage descent through lem-pur-ordinary-adjunction-scalar-compatibility and lem-weil-point-sections-scalar-extension). Sources checked: Bhatt-Scholze Prop. 6.8.11(3), 6.8.14(1),(2) and Rem. 6.8.15; Milne LEC Def. 18.1 and Prop. 18.2-18.3, pp. 119-121. Small cases checked: U empty, U=T, F=0, T disconnected, ramified L/E. The rg search found no duplicate; lem-a1-degree-zero-compact-support-sections is narrower. No SGA is cited. I accept the declared tool_uses: they are generic tools and none replaces a step of the endpoint unit. One fault, repaired in fixes/: under C1/C4, the step 5 text cited [prop-weil-pbc-direct-image-limits], which is not in its uses or in proof_deps and is an off-unit node with no tool_use declared. I replaced it with [lem-pur-completed-coefficient-pushforward-comparison], which is already in uses and states the comparison the step needs. I also corrected the tool_use 'why' for lem-fin-finite-type-fibre-dimension-bound, which wrongly called it a coefficient comparison. No drop_nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicCompactificationSectionRealization",
+  "declaration": "WeilConjectures.adicCompactificationSectionRealization",
+  "declarations": [
+   "WeilConjectures.adicCompactificationSectionRealization"
+  ],
+  "file": "lean/Sheaf/Paper/AdicCompactificationSectionRealization.lean",
+  "statement": "theorem adicCompactificationSectionRealization : ∃ F : AdicCompactificationSections.FiniteFamily D l hl, Nonempty (AdicCompactificationSections.CommonFamily D l hl Ω F)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-728d94c9f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after the 0bda8c757340 RETURN. The full snapshot diff shows exactly the requested repair: GaloisLisseRepresentationData.lean and def-a1-galois-lisse-representation-data-interface are removed, along with their item stmt_dep and report paragraph. All 11 other Lean files and the 10 new def-node records are byte-identical to the previous head, which was confirmed correct in substance: ordinary_hom pinned via direct_image homEquiv, point.hom and unit_pull_normalized; compact_obj = rationalCompactCohomology at compactification D j with CompactPointNormalized; comparison pinned by comparison_derived_map to Rb_* of the adjunct of realizedOpenInverseUnit plus derivedPushCompositor, so the restriction formula is a real claim. Not in the route-pivot drop list. The item differs from live only in lean and in +10 stmt_deps. The 9 dep records are identical to live. No namespace or module clash in live; the landed Q75 citer uses its own helpers. All 11 lean.statement fields are verbatim, declarations present, blueprint docstrings present. A single sorry, in the theorem. nt_compile --json on all 11 files: rc=0, no errors or warnings (3.6-27.7 s, load about 70). Advisories retained: common-scalar freedom of the open unit (the restriction equation is invariant), Nonempty inside fibres, the second reading is a self-check."
  }
 }
