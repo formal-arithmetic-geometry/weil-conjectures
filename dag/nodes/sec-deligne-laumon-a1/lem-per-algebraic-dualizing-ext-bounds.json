@@ -14,9 +14,150 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every finite $A$-module $T$, write $D^i(T)=H^iR\\operatorname{Hom}_A(T[0],\\omega)$. Each $D^i(T)$ is finite: apply coherent derived-Hom preservation with $K=T[0]$ and $L=\\omega$. The first has finite cohomology, while the defining conditions on the dualizing complex give finite cohomology and a bounded injective representative for the second. This checks the finiteness hypothesis needed in every later application of Nakayama.",
+   "uses": [
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "def-per-algebraic-normalized-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H (lemma-finite-ext-into-bounded-injective), applied in Tag 0A7U."
+   }
+  },
+  {
+   "text": "Fix a bounded injective representative $J$ of $\\omega$. It is K-injective by the bounded-below injective-complex lemma, so $R\\operatorname{Hom}_A(T[0],\\omega)$ is represented by $\\operatorname{Hom}_A(T,J^\\bullet)$. For a short exact sequence $0\\to U\\to V\\to W\\to0$, injectivity of each $J^n$ makes $0\\to\\operatorname{Hom}_A(W,J^\\bullet)\\to\\operatorname{Hom}_A(V,J^\\bullet)\\to\\operatorname{Hom}_A(U,J^\\bullet)\\to0$ degreewise exact: restriction is surjective by injectivity, and a map vanishing on $U$ factors uniquely through $W$. The cochain long-exact-sequence lemma therefore gives $\\cdots\\to D^i(W)\\to D^i(V)\\to D^i(U)\\to D^{i+1}(W)\\to\\cdots$. If $U\\to V$ is multiplication by $f$ on a module $T$, the map $D^i(T)\\to D^i(T)$ is multiplication by $f$, since $\\varphi(ft)=f\\varphi(t)$ in every Hom term. Also $D^i(0)=0$, because its Hom complex is zero.",
+   "uses": [
+    "def-per-algebraic-normalized-dualizing",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "First handle any finite-length module $T$. Its simple filtration has successive factors isomorphic to $\\kappa=A/\\mathfrak m$: for a nonzero vector $v$ in a simple module, $Av$ is the whole module and its annihilator is maximal, hence equals $\\mathfrak m$ in this local ring. Normalization gives $D^i(\\kappa)=0$ for $i\\ne0$ and $D^0(\\kappa)\\cong\\kappa$. Induct along the finite simple filtration, starting with zero. Step 2 makes all nonzero-degree groups vanish at each extension, and in degree zero gives a short exact sequence whose two ends are the degree-zero groups of the factors. Thus $D^i(T)=0$ for $i\\ne0$; moreover $D^0(T)$ has a finite filtration with factors $\\kappa$. For a prime $\\mathfrak q\\ne\\mathfrak m$, choose $a\\in\\mathfrak m\\setminus\\mathfrak q$: its invertibility at $\\mathfrak q$ and its zero action on $\\kappa$ give $\\kappa_{\\mathfrak q}=0$. Exactness of localization applied to the filtration shows $D^0(T)_{\\mathfrak q}=0$. Consequently its support has dimension at most zero.",
+   "uses": [
+    "lem-weil-pbc-finite-length-module-simple-filtration",
+    "def-per-algebraic-normalized-dualizing",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7Q (lemma-dualizing-finite-length), first sentence of proof: induction on length; only concentration and support are needed."
+   }
+  },
+  {
+   "text": "We prove the two bounds simultaneously by strong induction on the finite integer $d=\\dim\\operatorname{Supp}(M)$ for nonzero finite modules. The zero-module assertion was proved in Step 2. For $d=0$, the finite-module support criterion makes $\\operatorname{Supp}(M)=V(\\operatorname{Ann}(M))$ stable under specialization. Every nonzero finite module has $\\mathfrak m$ in its support: a proper annihilator is contained in the unique maximal ideal. If any different prime $\\mathfrak q$ were in the support, $\\mathfrak q\\subsetneq\\mathfrak m$ would be a chain of length one in it. Hence the support is $\\{\\mathfrak m\\}$. The finite-length criterion applies, and Step 3 gives both assertions. Now fix $d>0$ and assume both assertions for every nonzero finite module of support dimension less than $d$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "lem-sc-generic-stalk-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "First consider any nonzero finite module $T$ of support dimension $d$ which admits a nonzerodivisor $f\\in\\mathfrak m$. Set $Q=T/fT$. It is finite as a quotient, and nonzero by Nakayama, since $(f)\\subseteq\\mathfrak m$ is in the Jacobson radical. The support-dimension equality for a nonzerodivisor gives $\\dim\\operatorname{Supp}(Q)=d-1$, so the induction hypothesis applies to $Q$. The short exact sequence $0\\to T\\xrightarrow{f}T\\to Q\\to0$ gives, by Step 2, $\\cdots\\to D^i(Q)\\to D^i(T)\\xrightarrow{f}D^i(T)\\to D^{i+1}(Q)\\to\\cdots$. Hence $D^i(T)/fD^i(T)$ injects into $D^{i+1}(Q)$. For $i<-d$ or $i\\ge0$, $D^{i+1}(Q)=0$: its degree is respectively less than $-(d-1)$ or greater than zero. Nakayama, using Step 1, gives $D^i(T)=0$ in these degrees. This is slightly stronger than assertion (1) for such $T$.",
+   "uses": [
+    "lem-weil-pbc-support-dimension-quotient-element-equality",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "For the support bound in this regular-element case, only $-d\\le i\\le-1$ remains. Put $P=D^i(T)$, a finite module by Step 1. Exactness of localization applied to the injection in Step 5 shows $\\operatorname{Supp}(P/fP)\\subseteq\\operatorname{Supp}(D^{i+1}(Q))$. If $P=0$ there is nothing to prove. Otherwise Nakayama gives $P/fP\\ne0$, and the one-equation support bound and the induction hypothesis give $\\dim\\operatorname{Supp}(P)\\le\\dim\\operatorname{Supp}(P/fP)+1\\le-(i+1)+1=-i$. The middle inequality follows directly from inclusion of supports and the chain definition of dimension. Together with Step 5 this proves both bounds for every module of dimension $d$ admitting such an $f$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-support-dimension-quotient-element-bound",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "For the original $M$, let $N=\\{x\\in M:\\mathfrak m^n x=0\\text{ for some }n\\ge1\\}$ and $M'=M/N$. The set $N$ is a submodule: powers of an ideal form a decreasing sequence, so one common larger power kills any finite sum and all scalar multiples. It is finite by the Noetherian submodule lemma. Choosing finitely many generators of $N$ and a maximum of their annihilating exponents gives $\\mathfrak m^rN=0$ for some $r\\ge1$. Thus for $\\mathfrak q\\ne\\mathfrak m$, an element of $\\mathfrak m\\setminus\\mathfrak q$ has a power annihilating $N$ and is invertible at $\\mathfrak q$, so $N_{\\mathfrak q}=0$. If $N\\ne0$, its support is contained in $\\{\\mathfrak m\\}$ and the finite-length criterion applies. Step 3 (also valid for $N=0$) therefore shows that $D^i(N)=0$ for $i\\ne0$ and $\\operatorname{Supp}(D^0(N))\\subseteq\\{\\mathfrak m\\}$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sc-generic-stalk-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "Localization of $0\\to N\\to M\\to M'\\to0$ is exact, and Step 7 gives $M_{\\mathfrak q}\\cong M'_{\\mathfrak q}$ for $\\mathfrak q\\ne\\mathfrak m$. Since $d>0$, the support of $M$ is not contained in $\\{\\mathfrak m\\}$; hence $M'\\ne0$. The quotient $M'$ is finite, and its annihilator is proper, so the finite-module support criterion puts $\\mathfrak m$ in its support as well. Thus $\\operatorname{Supp}(M')=\\operatorname{Supp}(M)$ and its dimension is $d$. The ideal $\\mathfrak m$ is finitely generated by Noetherianity. The quotient-by-power-torsion lemma gives $M'[\\mathfrak m]=0$, so no nonzero vector of $M'$ has annihilator $\\mathfrak m$. Apply the nonzerodivisor-existence lemma to $M'$ to obtain $f\\in\\mathfrak m$ injective on $M'$. Steps 5 and 6 therefore prove both bounds for $M'$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  },
+  {
+   "text": "The sequence of Step 2 for $0\\to N\\to M\\to M'\\to0$ contains $D^i(M')\\to D^i(M)\\to D^i(N)$. If $i<-d$ or $i>0$, both outside groups vanish by Steps 7 and 8; thus $D^i(M)=0$, proving (1). Exactness after localization gives $\\operatorname{Supp}(D^i(M))\\subseteq\\operatorname{Supp}(D^i(M'))\\cup\\operatorname{Supp}(D^i(N))$. For $i\\ne0$ the second support is empty, so the dimension bound for $M'$ proves (2). For $i=0$, the first support has dimension at most zero and is closed by finiteness (Step 1) and the support criterion; in a local spectrum such a closed set is contained in $\\{\\mathfrak m\\}$, by the chain argument of Step 4. The second support is also contained there by Step 7. Hence $\\dim\\operatorname{Supp}(D^0(M))\\le0$. This completes the induction and both clauses, with empty supports assigned dimension $-\\infty$ throughout.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-finite-module-support-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "def-per-algebraic-normalized-dualizing",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-support-dimension-quotient-element-equality",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-support-dimension-quotient-element-bound",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7U (lemma-sitting-in-degrees), parts (1) and (2); the zero-module case is stated explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +193,45 @@
    "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLT.mk', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", 'CategoryTheory.HasProjectiveDimensionLT.mk', 'CategoryTheory.HasInjectiveDimensionLT.subsingleton', 'CategoryTheory.HasProjectiveDimensionLT.subsingleton', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'CategoryTheory.hasProjectiveDimensionLT_iff']; note=; digest=ab14ac977939ea20",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary linear duality, Ext vanishing for projectives or injectives, support dimension, quotient rings, or derived-category constructions; none states the normalized algebraic dualizing-complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over a Noetherian local ring with normalized dualizing complex, Ext vanishes outside degrees minus support dimension to zero and its degree i support has dimension at most minus i",
+   "results": "{\"t\": \"2026-10-19T00:25:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module over a Noetherian local ring with normalized dualizing complex, Ext vanishes outside degrees minus support dimension to zero and its degree i support has dimension at most minus i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim\", \"Module.supportDim_le_ringKrullDim\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.HasInjectiveDimensionLT.mk\"], \"digest\": \"2408fff3e77d5b72\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: supportDim lemmas concern arbitrary module support; Ext dimension lemmas concern objects of abelian categories. None states normalized algebraic dualizing-complex bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.supportDim, Ext",
+   "results": "{\"t\": \"2026-10-19T00:25:28Z\", \"tool\": \"loogle\", \"query\": \"Module.supportDim, Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: supportDim lemmas concern arbitrary module support; Ext dimension lemmas concern objects of abelian categories. None states normalized algebraic dualizing-complex bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext into a normalized dualizing complex over a Noetherian local ring has bounded support dimension",
+   "results": "{\"t\": \"2026-10-19T00:25:33Z\", \"tool\": \"leansearch\", \"query\": \"Ext into a normalized dualizing complex over a Noetherian local ring has bounded support dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim\", \"Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson\", \"Module.supportDim_le_of_injective\", \"Module.supportDim_le_ringKrullDim\", \"Module.supportDim_le_of_surjective\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"Module.supportDim_quotient_eq_ringKrullDim\", \"Module.supportDim_eq_of_equiv\"], \"digest\": \"2e4cd3dee03d7a0a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: supportDim lemmas concern arbitrary module support; Ext dimension lemmas concern objects of abelian categories. None states normalized algebraic dualizing-complex bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|supportDim.*Ext|Ext.*supportDim",
+   "results": "{\"t\": \"2026-10-19T00:25:39Z\", \"tool\": \"grep\", \"query\": \"dualizing|supportDim.*Ext|Ext.*supportDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"Mathlib/Tactic/Translate/ToDual.lean\", \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Category/Cat/Op.lean\"], \"digest\": \"7ec2dbe915eee89f\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: supportDim lemmas concern arbitrary module support; Ext dimension lemmas concern objects of abelian categories. None states normalized algebraic dualizing-complex bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized dualizing complexes give dimension bounds on the cohomology of the derived dual of a finite module",
+   "results": "{\"t\": \"2026-10-19T00:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized dualizing complexes give dimension bounds on the cohomology of the derived dual of a finite module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.supportDim_le_ringKrullDim\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"CategoryTheory.hasProjectiveDimensionLT_iff\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\"], \"digest\": \"71b1bb53ca341b7e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: supportDim lemmas concern arbitrary module support; Ext dimension lemmas concern objects of abelian categories. None states normalized algebraic dualizing-complex bounds."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-algebraic-dualizing-generic-degree",
@@ -84,5 +260,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-algebraic-dualizing-ext-bounds",
+  "worker": "stage1",
+  "summary": "Expanded the induction of Stacks Tag 0A7U, parts (1) and (2), retaining the statement and its explicit zero-module convention. Reused all supporting DAG nodes: coherent RHom finiteness, cochain exactness, finite-length filtration, regular-element dimension bounds, Nakayama, and removal of maximal-ideal power torsion. Derived the required finite-length special case directly from normalization, avoiding the stronger Matlis comparison. No new nodes or Lean changes.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXE (lemma-cd-maximal), the top-degree nonvanishing assertion. Supporting input in Tag 0DXE: the final invocation of generic nonvanishing for a top-dimensional minimal prime. Supporting input in the proof of Tag 0A7V: the invocation of lemma-sitting-in-degrees parts (1) and (2) after replacing A by A/p^n.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coherent-rhom-finite-injective-dimension",
+    "why": "Step 1 needs finite Ext modules over the algebraic local ring to apply Nakayama; this general coherent-RHom lemma is not provided by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "Step 3 uses a composition filtration of an algebraic finite-length module; no perverse-unit statement supplies this module-theoretic tool."
+   },
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Steps 4 and 7 use the algebraic finite-module criterion for support at the closed point; the perverse unit does not replace it."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+    "why": "Step 8 removes maximal-ideal torsion by the general finite-ideal module lemma; this does not replace a perverse-unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "why": "Step 8 chooses a module nonzerodivisor after removing maximal-ideal torsion; this generic commutative-algebra tool is absent from the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coherent-rhom-finite-injective-dimension",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-quotient-by-power-torsion-no-torsion",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-e9302bbd1",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e9302bbd1 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 0A7U (dualizing.tex:3015) and its proof, and all 18 cited statements. The item keeps clauses (1) and (2) word for word, plus the M=0 case; it leaves out (3), the depth clause, which the citer does not use. The statement, stmt_deps and source are the same as the live unsplit node. All nine steps hold. Step 1: coherent-RHom finiteness applies to K=T[0] and L=omega, using the bounded-injective and finite-cohomology clauses of the definition. Step 2: J is K-injective, so RHom is Hom(T,J), with a degreewise exact sequence and a long exact sequence. Step 3: the finite-length case follows from normalization and the simple filtration, without Matlis duality. Step 4: the d=0 base uses Supp=V(Ann) and the 00L5 criterion. Step 5: a nonzerodivisor f gives dim Supp(T/fT)=d-1 (0B52 equality, option 2); Nakayama and the degree check give D^i=0 for i<-d and for i>=0 (D^0=0 is correct when depth>0). Step 6: the 0B52 bound needs no nonzerodivisor on Ext. Steps 7-9: M[m^inf] is killed by m^r and supported at m; 05EB and 00LL give f on M'; the Ext sequence finishes both clauses. Small cases check out: k[[t]] with omega=A[1] and M=A, k, A+k; a field; M=0. No duplicate (only the item and its citer carry 0A7U), no cycle, no SGA. Batch-5 flag on lem-trf-coherent-rhom-finite-injective-dimension: accepted. It is general algebra (Stacks 0G4H) that neither assumption gives. Its own closure reaches only two other trf algebra nodes (0D0C, 0G20) and no trace-transport, Poincare-duality or batch-4 node. The five other-unit algebra tools in split_report.tool_uses are accepted. No changes."
  }
 }
