@@ -11,14 +11,12 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.GroupTheory.MonoidLocalization.Away
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Defs
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness
-import Sheaf.RingTheory.LocalizationOfRegularRing
 import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
-import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Mathlib.RingTheory.Localization.Away.AdjoinRoot
+import Mathlib.RingTheory.Localization.LocalizationLocalization
+import Mathlib.RingTheory.Localization.Module
+import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 
 /-!
 # A nonempty regular open descends along a finite type inclusion of domains
@@ -74,13 +72,13 @@ Proof, following the seven steps of the node:
    No finiteness of the free basis over $A$ is asserted or needed.
    Uses: lem-pur-noetherian-algebra-module-generic-freeness.
 
-4. By localization of a regular ring, the ring $T=B_a$ is regular, since $B$ is regular by step
-   2. It is nonzero: the image of $a$ in $B$ is nonzero by the injectivity from step 1, and the
-   domain zero-fraction criterion prevents $1/1=0$ in $B_a$. Choose a basis $(e_i)_{i\in I}$ for
-   the free $A$-module $T$ supplied in step 3. Its index set $I$ is nonempty, since the module
-   with empty basis is zero. This checks the faithfulness issue which would fail for a zero free
-   module.
-   Uses: lem-weil-pbc-localization-of-regular-ring, def-weil-ring-localization-away, def-weil-
+4. For each prime of $T=B_a$, Mathlib's localization-of-localization isomorphism identifies
+   its local ring with the local ring of $B$ at the contracted prime. Thus $T$ is regular,
+   because $B$ is regular by step 2. It is nonzero: the image of $a$ in $B$ is nonzero by
+   injectivity, and localization of a domain away from a nonzero element is a domain. Hence
+   the free $A$-module $T$ supplied in step 3 has nonempty basis index set. This checks the
+   faithfulness issue which would fail for a zero free module.
+   Uses: lem-weil-pbc-localization-of-localization, def-weil-ring-localization-away, def-weil-
    pbc-free-module.
 
 5. Here is the elementary basis calculation giving faithful flatness, rather than inferring it
@@ -123,6 +121,67 @@ theorem exists_nonempty_regular_open_of_finiteType
       ∀ q ∈ V, IsRegularLocalRing (Localization.AtPrime q.asIdeal)) :
     ∃ U : Set (PrimeSpectrum R), IsOpen U ∧ U.Nonempty ∧
       ∀ p ∈ U, IsRegularLocalRing (Localization.AtPrime p.asIdeal) := by
-  sorry
+  classical
+  let : Algebra R S := f.toAlgebra
+  have : Algebra.FiniteType R S := hft
+  obtain ⟨V, hV, ⟨q₀, hq₀⟩, hreg⟩ := hS
+  obtain ⟨_, ⟨g, rfl⟩, hqg, hgV⟩ :=
+    PrimeSpectrum.isTopologicalBasis_basic_opens.isOpen_iff.mp hV q₀ hq₀
+  have hg : g ≠ 0 := by
+    intro h
+    exact (PrimeSpectrum.mem_basicOpen g q₀).mp hqg (h ▸ q₀.asIdeal.zero_mem)
+  let B := Localization.Away g
+  have : IsDomain B := Localization.Away.isDomain hg
+  have : Algebra.FiniteType R B := inferInstance
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing R B
+  have hinjB : Function.Injective (algebraMap R B) := by
+    change Function.Injective ((algebraMap S B).comp f)
+    exact (IsLocalization.injective B
+      (powers_le_nonZeroDivisors_of_noZeroDivisors hg)).comp hinj
+  have : IsRegularRing B := by
+    apply isRegularRing_iff.mpr
+    intro P hP
+    let q := PrimeSpectrum.comap (algebraMap S B) ⟨P, hP⟩
+    have hq : q ∈ (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum S)) := by
+      rw [← PrimeSpectrum.localization_away_comap_range B g]
+      exact ⟨⟨P, hP⟩, rfl⟩
+    have hlocal := hreg q (hgV hq)
+    change IsRegularLocalRing
+      (Localization.AtPrime (P.comap (algebraMap S B))) at hlocal
+    exact IsRegularLocalRing.of_ringEquiv
+      (IsLocalization.localizationLocalizationAtPrimeIsoLocalization (.powers g) P).toRingEquiv
+  obtain ⟨a, ha, hfree⟩ := Module.noetherian_algebra_module_generic_freeness R B B
+  let A := Localization.Away a
+  let T := Localization.Away (algebraMap R B a)
+  have haB : algebraMap R B a ≠ 0 := by
+    intro h
+    exact ha (hinjB (h.trans (map_zero _).symm))
+  have : IsDomain T := Localization.Away.isDomain haB
+  let : Algebra A T := localizationAlgebra (.powers a) B
+  have : IsScalarTower R A T := isScalarTower_localizationAlgebra (.powers a) B
+  have : IsLocalizedModule (.powers a) (IsScalarTower.toAlgHom R B T).toLinearMap :=
+    inferInstance
+  have : Module.Free A (LocalizedModule.Away a B) := hfree
+  have : Module.Free A T := Module.Free.of_equiv
+    ((IsLocalizedModule.iso (.powers a)
+      (IsScalarTower.toAlgHom R B T).toLinearMap).extendScalarsOfIsLocalization (.powers a) A)
+  have : Module.FaithfullyFlat A T := inferInstance
+  have : IsRegularRing T := by
+    apply isRegularRing_iff.mpr
+    intro P hP
+    exact IsRegularLocalRing.of_ringEquiv
+      (IsLocalization.localizationLocalizationAtPrimeIsoLocalization
+        (.powers (algebraMap R B a)) P).toRingEquiv
+  have : IsRegularRing A := IsRegularRing.of_faithfullyFlat A T
+  refine ⟨PrimeSpectrum.basicOpen a, PrimeSpectrum.isOpen_basicOpen, ?_, ?_⟩
+  · refine ⟨⟨⊥, Ideal.isPrime_bot⟩, ?_⟩
+    exact ha
+  · intro p hp
+    rw [← PrimeSpectrum.localization_away_comap_range A a] at hp
+    obtain ⟨P, hP⟩ := hp
+    subst p
+    exact IsRegularLocalRing.of_ringEquiv
+      (IsLocalization.localizationLocalizationAtPrimeIsoLocalization
+        (.powers a) P.asIdeal).toRingEquiv.symm
 
 end RingHom
