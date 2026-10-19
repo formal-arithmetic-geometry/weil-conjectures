@@ -19,9 +19,75 @@
   "sk-def-sfb-module-lower-shriek",
   "def-pd-section-module-operations-data"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Direct image preserves binary products and zero maps, so Mathlib gives additivity. The specified module adjunction then gives additivity of pullback. Both pullback and open extension preserve finite colimits because they are the specified left adjoints; open extension is additive by its adjunction to the already additive pullback.",
+   "uses": [
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the existing finite-limit preservation of internal pullback and internal open extension through the two iff clauses of internal_module_operations_transport. The exact section equivalence preserves kernels and cokernels, hence homology.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "def-sfb-module-upper-star",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct a lax structure on internal direct image as the right-adjoint mate of the existing strong scalar-extension pullback. On underlying sheaves, the extension unit followed by the scalar-extension/restriction isomorphism is the identity. Naturality of the extension adjunction, the mapMod tensor projection formula and the comap tensor projection formula therefore identify the pullback tensor comparison on balanced generators. Identify the underlying module counit with the ambient sheaf counit using the Hom bijection. Transpose the generator formula: the resulting direct-image tensor map commutes with the relative tensor projection. The monoidal underlying-presheaf comparison for continuous direct image then gives the specified local pure-tensor formula. Such tensor maps are uniquely determined by pure tensors and the coequalizer projection; the induced monoid multiplication on the image of the unit determines the lax unit by MonObj.ext. This proves unique existence of the internal normalized structure. The lax/oplax equivalence for the specified adjunction identifies its mate with the original strong pullback, proving invertibility of both its tensor and unit maps.",
+   "uses": [
+    "def-sfb-module-upper-star",
+    "def-sfb-finite-lower-star-lax-monoidal",
+    "def-sfb-modobj-relative-tensor",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since the coefficient morphism is invertible, identify scalar extension in internal pullback with restriction along its inverse. Apply inverseImageModule_preservesFlat to the actual ambient inverse image and this coefficient isomorphism, then transport flatness across extendScalarsIsoComapInv.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use internal_section_tensor_comparison for the ordinary tensor and unit isomorphisms and their specified formulas. Maps out of the section tensor are determined on pure tensors: precompose with tensorObjIsoSheafification.inv, use the sheafification Hom bijection, and apply sectionwise module tensor extensionality. Precomposing two candidate ordinary tensor isomorphisms with the inverse of the supplied comparison reduces uniqueness to this extensionality. Scalar-section extensionality proves unit uniqueness.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the signed total comparison provided by internal_section_tensor_comparison and identify each of its ordinary tensor components with ordinaryTensorComparison using the just-proved uniqueness. For uniqueness of the total comparison, work degreewise. The original total-degree summand inclusions are jointly epimorphic by mapBifunctor.hom_ext. A full, faithful, essentially surjective functor preserves such a family: move the common target into its essential image, use fullness on both maps, then faithfulness and the original joint epimorphy. Apply this to the section equivalence and the inclusions indexed by pairs p+q=n. The two prescribed summand formulas therefore imply equality of chain maps and of the isomorphisms.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Three remaining obligations retain the original ringed-module construction plan: construct its balanced local direct-image lax pairing and prove coherence and uniqueness, then prove invertibility of the tensor and unit maps of its specified adjunction mate. The analogous internal-module obligations are proved in this delivery.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-module-operations-data",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-module-upper-star",
+  "sk-def-sfb-module-lower-shriek",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-modobj-relative-tensor",
+  "new-proetale-inverse-image-module-flat",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "proof_origin": "B6 stage-3 Lean proof, 2026-10-19. Fifteen original obligations are proved from existing declarations and private proved helpers, with no new holes. Three original ordinary ringed normalized lax/oplax obligations remain.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -162,5 +228,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after RETURN (e3bb1be5). F1 fixed: derivedAdjunction is now ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft (pullback.leftDerivedFunctorIsoMapDerivedCategory), the canonical derived ringed adjunction (Adjunction.lean:173), so derived_homEquiv has content and projection is the α of lem-weil-pbc-ringed-projection-mate-exact. F2 fixed: new def node def-pd-section-module-operations-data (module SectionModuleOperationsData, 17 transparent abbrevs, 0 sorry, only def stmt_deps) replaces the two theorem nodes in the stmt_deps of the item and def-pd-proetale-section-module-functors; the theorems are now proof_deps. Aliasing rather than moving is accepted (no landed module rewritten, no duplicate construction). F3 fixed: clause-by-clause second reading. §1(C) statement_change only makes the canonical ringed adjunction explicit (Stacks 07A6/0B56); citers lem-pd-condensed-proper-projection-formula and det-thm-sf-pf-adic-projection checked, holds:true correct. All five modules compile clean with nt_compile --json (9.6/22.4/25.0/32.4/22.3 s). lean.statement verbatim for all five nodes; all declarations present; no sorry in definition bodies; docstrings with source and blueprint tags; no extra assumptions or universe restrictions. Minor: conjugatePullIso and conjugatePushIso are now unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261019T002508-L-2141718",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
