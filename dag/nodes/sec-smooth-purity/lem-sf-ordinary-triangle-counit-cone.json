@@ -12,86 +12,54 @@
  ],
  "proof": [
   {
-   "text": "Write $A=i_*i^!K$ and $B=j_*j^*K$. For arbitrary $P\\in\\mathcal T_Z$, $Q\\in\\mathcal T_U$ and $m\\in\\mathbf Z$, the adjunction $j^*\\dashv j_*$ gives $\\operatorname{Hom}(i_*P[m],j_*Q)\\cong\\operatorname{Hom}(j^*i_*P[m],Q)=0$, because $j^*i_*=0$ and the functors are exact. The triangle identity for $j^*\\dashv j_*$ identifies the adjunct of $u\\circ e:A\\to B$ with the composite through $j^*A=j^*i_*i^!K=0$, so $u\\circ e=0$.",
-   "uses": [],
+   "text": "Register the componentwise invertible counits as invertible natural transformations. By [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful], adjLeft makes iStar fully faithful. If jStar(M) is zero, jBang(jStar(M)) is zero; in the given ordinary distinguished triangle the second map adjLeft.unit.app M is therefore invertible (Mathlib Triangle.isZero₁_iff_isIso₂). Its inverse identifies M with iStar(iLeft(M)), proving the essential-image hypothesis required by the source recollement theorem.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful"
+   ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
-    "place": "Step 3, The prescribed Hom(-,K) comparison"
-   }
-  },
-  {
-   "text": "By (TR1) in [def-weil-triangulated-category], complete the exceptional counit $e:A\\to K$ to a distinguished triangle $A\\xrightarrow{e}K\\xrightarrow{v}C\\xrightarrow{w}A[1]$.",
-   "uses": [
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
-    "place": "Step 3, The prescribed Hom(-,K) comparison"
-   }
-  },
-  {
-   "text": "Apply exactness of $\\operatorname{Hom}(-,B)$ to this triangle, using [lem-weil-pbc-hom-out-of-triangle-exact]. Since $u e=0$, there is $\\beta:C\\to B$ with $\\beta v=u$. If $\\beta'$ is another such map, $(\\beta-\\beta')v=0$, so the same exactness gives $\\beta-\\beta'=h w$ for some $h:A[1]\\to B$. The orthogonality in Step 1 makes $h=0$, proving uniqueness.",
-   "uses": [
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
-    "place": "Step 3, The prescribed Hom(-,K) comparison"
-   }
-  },
-  {
-   "text": "Closed orthogonality of $C$ and $B$. Let $Q\\in\\mathcal T_Z$. The bijection $\\operatorname{Hom}(Q,i^!K)\\to\\operatorname{Hom}(i_*Q,K)$ of $i_*\\dashv i^!$ is $g\\mapsto e\\circ i_*g$, and $g\\mapsto i_*g$ is bijective by [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful] for $i^*\\dashv i_*$ with invertible counit; hence $e\\circ-:\\operatorname{Hom}(i_*Q,A)\\to\\operatorname{Hom}(i_*Q,K)$ is bijective for every $Q$. Applying the inverse shift and $i_*(Q[-1])\\cong(i_*Q)[-1]$, also $e[1]\\circ-:\\operatorname{Hom}(i_*Q,A[1])\\to\\operatorname{Hom}(i_*Q,K[1])$ is injective. Let $f:i_*Q\\to C$. The twice-rotated triangle $C\\xrightarrow wA[1]\\xrightarrow{-e[1]}K[1]$ (TR2) has zero composite by [lem-weil-pbc-hom-into-triangle-exact](i), so $e[1]\\circ(wf)=0$ and $wf=0$. By (ii) of that node for the rotated triangle $K\\xrightarrow vC\\xrightarrow wA[1]$, $f=vb$ with $b:i_*Q\\to K$; write $b=eh$; then $f=veh=0$ by (i). So $\\operatorname{Hom}(i_*Q,C)=0$, and $\\operatorname{Hom}(i_*Q,B)=0$ by Step 1, for all $Q$ (all shifts included, as $i_*P[m]\\cong i_*(P[m])$). Now let $X$ be any object with $\\operatorname{Hom}(i_*Q,X)=0$ for all $Q$, and $M\\in\\mathcal T$ with its triangle $j_!j^*M\\xrightarrow{c}M\\xrightarrow{\\iota}i_*i^*M\\xrightarrow{\\delta}$. If $fc=0$ then $f=g\\iota$ with $g\\in\\operatorname{Hom}(i_*i^*M,X)=0$ by [lem-weil-pbc-hom-out-of-triangle-exact](i). The triangle $(i_*i^*M)[-1]\\xrightarrow{-\\delta[-1]}j_!j^*M\\xrightarrow cM\\xrightarrow\\iota i_*i^*M$ is distinguished by TR2 of [def-weil-triangulated-category], its rotation being the given one; for $a:j_!j^*M\\to X$, $a\\circ(-\\delta[-1])\\in\\operatorname{Hom}(i_*(i^*M[-1]),X)=0$, so $a=fc$ by (i). Thus $f\\mapsto fc$ is a bijection $\\operatorname{Hom}(M,X)\\to\\operatorname{Hom}(j_!j^*M,X)$, natural in $X$.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-prop-sf-localization.proof.md",
-    "place": "Existence, second and third paragraphs: apply $Lj^*$ and $Ri^!$ to the counit triangle and use $Ri^!C=0$, $Lj^*u$ invertible"
+    "place": "Existence: objects killed by open restriction lie in the closed essential image; formal recollement and comparison of counit cones"
    }
   },
   {
-   "text": "Reduction to the open side. For $X\\in\\{C,B\\}$ compose the bijection of the previous step with the bijection $\\operatorname{Hom}(j_!j^*M,X)\\cong\\operatorname{Hom}(j^*M,j^*X)$ of $j_!\\dashv j^*$; both are natural in $X$, so under them $\\beta\\circ-:\\operatorname{Hom}(M,C)\\to\\operatorname{Hom}(M,B)$ becomes $j^*\\beta\\circ-:\\operatorname{Hom}(j^*M,j^*C)\\to\\operatorname{Hom}(j^*M,j^*B)$. It suffices that $j^*\\beta$ is invertible. The exact functor $j^*$ carries the cone triangle to a distinguished triangle $j^*A\\to j^*K\\xrightarrow{j^*v}j^*C\\to(j^*A)[1]$ with $j^*A=j^*i_*i^!K=0$ and so $(j^*A)[1]=0$. For every $W\\in\\mathcal T_U$, [lem-weil-pbc-hom-into-triangle-exact](ii), applied to this triangle and to its rotation (TR2), makes $j^*v\\circ-:\\operatorname{Hom}(W,j^*K)\\to\\operatorname{Hom}(W,j^*C)$ injective and surjective, so $j^*v$ is an isomorphism by [lem-coef-joyal-homset-iso-detection]. The triangle identity of $j^*\\dashv j_*$ gives $\\varepsilon_{j^*K}\\circ j^*u=1$ with $\\varepsilon:j^*j_*\\to1$ invertible, so $j^*u$ is invertible. From $j^*\\beta\\circ j^*v=j^*u$, $j^*\\beta$ is an isomorphism, hence $\\operatorname{Hom}(M,\\beta)$ is bijective for every $M\\in\\mathcal T$.",
+   "text": "Apply the already proved source declaration CategoryTheory.Pretriangulated.Recollement.exists_distTriang_counit_unit to adjOpen, adjRight, full faithfulness, hDisjoint and the essential-image implication just proved. It supplies a distinguished triangle with precisely adjRight.counit.app K and adjOpen.unit.app K as its first two arrows. Its existing proof completes the open unit, places its fibre in the closed essential image, and identifies the fibre map with the exceptional counit through the adjunction Hom bijection and full faithfulness. Its Hom exactness uses [lem-weil-pbc-hom-into-triangle-exact] and [lem-weil-pbc-hom-out-of-triangle-exact]. Compare the given completion with this triangle by Mathlib isoTriangleOfIso₁₂, using identity isomorphisms on the first two objects. The third component beta is an isomorphism, and its second commutative square gives v ≫ beta = adjOpen.unit.app K.",
    "uses": [
     "def-weil-triangulated-category",
     "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-coef-joyal-homset-iso-detection"
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-prop-sf-localization.proof.md",
-    "place": "Existence, second and third paragraphs: apply $Lj^*$ and $Ri^!$ to the counit triangle and use $Ri^!C=0$, $Lj^*u$ invertible"
+    "place": "Existence: objects killed by open restriction lie in the closed essential image; formal recollement and comparison of counit cones"
    }
   },
   {
-   "text": "The bijectivity of $\\operatorname{Hom}(M,\\beta)$ for every object $M$ implies that $\\beta$ is an isomorphism by the Yoneda Hom-set criterion [lem-coef-joyal-homset-iso-detection]. Thus the unique comparison $\\beta:C\\to j_*j^*K$ is invertible and satisfies $\\beta v=u$, as required.",
+   "text": "The proved source declaration Recollement.subsingleton_hom_shift gives Hom((iStar P)[m], jRight Q) subsingleton: the open adjunction identifies it with Hom(jStar((iStar P)[m]), Q), and CommShift identifies the source with (jStar(iStar P))[m], which is zero by hDisjoint. Apply this with P = iRight K, Q = jStar K and m = 1. If v ≫ beta′ = v ≫ beta, [lem-weil-pbc-hom-out-of-triangle-exact] factors beta′ - beta through the connecting arrow with a map from (iStar(iRight K))[1] to jRight(jStar K), which is zero. The existing source helper Triangle.cancel_mor₂_of_subsingleton implements this and proves uniqueness.",
    "uses": [
-    "lem-coef-joyal-homset-iso-detection"
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
-    "place": "Step 3, The prescribed Hom(-,K) comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-prop-sf-localization.proof.md",
+    "place": "Existence: objects killed by open restriction lie in the closed essential image; formal recollement and comparison of counit cones"
    }
   }
  ],
  "proof_deps": [
   "def-weil-triangulated-category",
-  "lem-coef-joyal-homset-iso-detection",
   "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
   "lem-weil-pbc-hom-into-triangle-exact",
   "lem-weil-pbc-hom-out-of-triangle-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
-  "place": "Step 3, The prescribed Hom(-,K) comparison"
+  "group": "W7",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-prop-sf-localization.proof.md",
+  "place": "Existence: objects killed by open restriction lie in the closed essential image; formal recollement and comparison of counit cones"
  },
  "mathlib_searches": [
   {
@@ -183,5 +151,15 @@
   "group": "Q58",
   "result": "fix",
   "note": "Statement checked clause by clause against the node: exact functors via CommShift+IsTriangulated, four adjunctions in the right directions, hClosed/hOpen counit isos, objectwise j^*i_*=0, ordinary triangle from the jBang counit and adjLeft unit with existential δ; for every completion of the adjRight counit there is a β with v≫β=u that is unique and IsIso; Subsingleton Hom((i_*P)⟦m⟧, j_*Q). Nothing assumed beyond the node, universes unrestricted, lean.statement verbatim, statement true (edge cases K=0, T_U trivial, T_Z trivial). H4: no Mathlib match; the side clone's Recollement.lean has different hypotheses and conclusions, so a new module is right (its subsingleton_hom_shift equals the second clause; the worker report's 'rg found nothing' is inaccurate). Delivered file compiles clean via nt_compile --json; the wrapper reports errors (control tested). H8 fix: complete replacement fixes/lean/Sheaf/CategoryTheory/OrdinaryTriangleCounitCone.lean adds the source place to the module and theorem docstrings and writes out the six proof steps; signature byte-identical; fixed file compiles clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261019T112610-L-3960675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
