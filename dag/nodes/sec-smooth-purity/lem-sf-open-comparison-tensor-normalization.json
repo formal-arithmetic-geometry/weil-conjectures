@@ -22,101 +22,58 @@
  ],
  "proof": [
   {
-   "text": "Write $N=F\\otimes_A rB$ and $M=dC_UF\\otimes_A C_XB$. The etale open adjunction is [lem-weil-pbc-extension-by-zero-adjunction]. On the pro-etale site, [lem-weil-proetale-weakly-etale-localization] identifies the open with the localized site and its constant ring, so [lem-pur-site-restriction-module-adjunction-exact] gives $d\\dashv s$. For any $h:C_XeN\\to M$ put\n$$\\Psi(h)=s(h)\\circ a_{eN}\\circ C_U(\\eta^e_N):C_UN\\to sM.$$\nThe unit equation of [lem-sf-open-comparison-unit-normalization] gives\n$$\\Psi(h)=s(h\\circ c_N^{-1})\\circ\\eta^d_{C_UN}.$$\nThus $\\Psi$ is injective: precomposition with the isomorphism $c_N^{-1}$ is a bijection and the subsequent formula is the Hom bijection of $d\\dashv s$. In particular equality of the two proposed maps can be checked by this formula; no faithfulness of $s$ on all sheaves is asserted.",
+   "text": "For monoidal functors T and R and a monoidal natural transformation a, precompose with the invertible lax tensor map of T. The monoidality equation for a and the inverse identities for lax and oplax tensor maps give a_(V tensor W) delta_R = delta_T (a_V tensor a_W). Apply this to the inverse canonical comparisonUpperStarCompUpperStarIso, which is monoidal by the proved source-library instance isMonoidal_comparisonUpperStarCompUpperStarIso_hom. Expand the canonical localization transports defining the restriction tensor maps and openComparisonRestrictionIso. Naturality of the two localization isomorphisms, their inverse identities and the displayed monoidality equation prove the restriction tensor coherence square. This replaces the generic ringed-module pure-pairing route by the existing monoidal API.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-open-comparison-unit-normalization"
+    "lem-weil-pbc-comparison-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison: common-right-adjoint argument; module open adjunction: sites-modules.tex Tag 03DI, lemma-extension-by-zero"
+    "place": "Tag 09AF, label lemma-jshriek-comparison, proof by the common right adjoint; agent refinement recording tensor compatibility of the etale/pro-etale open-extension comparison"
    }
   },
   {
-   "text": "Let $\\rho^e_{V,W}:r(V\\otimes_AW)\\xrightarrow{\\sim}rV\\otimes_A rW$ and $\\rho^d_{H,J}:s(H\\otimes_AJ)\\xrightarrow{\\sim}sH\\otimes_A sJ$ be the restriction-tensor maps. These and $t^T$ are the canonical module pullback comparisons of [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. The constant-ring identification [lem-sf-comparison-pullback-exact](1) identifies $C_T$ with its algebraic inverse image. Applied to these inverse images, [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] fixes their values on transported pure tensors. For the canonical comparison $a$ of [lem-weil-pbc-comparison-pullback] this gives\n$$\\rho^d_{C_XV,C_XW}\\circ s(t^X_{V,W})\\circ a_{V\\otimes_AW}\n=(a_V\\otimes a_W)\\circ t^U_{rV,rW}\\circ C_U(\\rho^e_{V,W}).\\tag{*}$$\nHere is the elementary verification, to avoid assuming a tensor-coherence clause in the pullback-comparison node. On underlying set sheaves, naturality of $a$ with the two product projections says $a_{V\\times W}=a_V\\times a_W$ through the finite-product identifications. Naturality with the universal pure pairing $V\\times W\\to V\\otimes_AW$ then says that both sides of (*) send a transported pure pair $(x,y)$ to $a_V(x)\\otimes a_W(y)$. The scalar maps agree on the constant ring $A$, so this is an equality of balanced pairings. Pure pairings determine linear tensor maps by [def-weil-pbc-ringed-tensor-section-calculus]. This proves (*) without a sectionwise description of arbitrary sections of a sheafified tensor.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Tag 03EK, section-tensor-product: universal bilinear pairing; comparison is the canonical underlying inverse-image isomorphism"
-   }
-  },
-  {
-   "text": "Denote the left-hand side in the statement by $L$. By the definition of $\\kappa^e$ as the transpose of the unit tensored with the identity,\n$$\\rho^e_{eF,B}\\circ r(\\kappa^e_{F,B})\\circ\\eta^e_N=\\eta^e_F\\otimes1_{rB}.$$\nNaturality of $a$ with $\\kappa^e$ gives\n$$\\Psi(L)=s(c_F\\otimes1)\\circ s(t^X_{eF,B})\\circ a_{eF\\otimes_AB}\\circ C_U\\bigl(r(\\kappa^e_{F,B})\\circ\\eta^e_N\\bigr).$$\nApply (*) of step 2 to $(eF,B)$, and use naturality of $\\rho^d$ with $c_F\\otimes1$ and of $t^U$ with $\\eta^e_F\\otimes1$. The displayed defining equation for $\\kappa^e$ reduces this to\n$$\\rho^d_{dC_UF,C_XB}\\circ\\Psi(L)\n=\\bigl((s(c_F)\\circ a_{eF}\\circ C_U(\\eta^e_F))\\otimes a_B\\bigr)\\circ t^U_{F,rB}.$$\nThe parenthesized first factor is exactly $\\eta^d_{C_UF}$ by [lem-sf-open-comparison-unit-normalization]. Thus the resulting map is $(\\eta^d_{C_UF}\\otimes a_B)\\circ t^U_{F,rB}$. All equalities here are substitutions and naturality of the named maps; none uses that a projection map is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-sf-open-comparison-unit-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison, expanded unit-mate calculation with Tag 03EL, lemma-tensor-product-pullback"
-   }
-  },
-  {
-   "text": "Put $q=(1\\otimes a_B)\\circ t^U_{F,rB}:C_UN\\to C_UF\\otimes_A sC_XB$ and denote the right-hand side in the statement by $R$. The unit equation of [lem-sf-open-comparison-unit-normalization], now at $N$, and naturality of $\\eta^d$ with $q$ give\n$$\\begin{aligned}\n\\Psi(R)&=s(\\kappa^d)\\circ sd(q)\\circ s(c_N)\\circ a_{eN}\\circ C_U(\\eta^e_N)\\\\\n&=s(\\kappa^d)\\circ sd(q)\\circ\\eta^d_{C_UN}\\\\\n&=s(\\kappa^d)\\circ\\eta^d_{C_UF\\otimes_A sC_XB}\\circ q.\n\\end{aligned}$$\nUnder $d\\dashv s$ the defining unit prescription for $\\kappa^d$ says precisely\n$$\\rho^d_{dC_UF,C_XB}\\circ s(\\kappa^d)\\circ\\eta^d_{C_UF\\otimes_A sC_XB}=\\eta^d_{C_UF}\\otimes1_{sC_XB}.$$\nConsequently $\\rho^d_{dC_UF,C_XB}\\circ\\Psi(R)=(\\eta^d_{C_UF}\\otimes a_B)\\circ t^U_{F,rB}$, the same map obtained in step 3. The pro-etale open adjunction and its unit are those supplied in step 1, not a stalkwise substitute.",
+   "text": "Put N = F tensor rB. By the open unit normalization, the pro-etale transpose of c_N inverse followed by h is C(eta_N) followed by a_(eN) then s(h). Apply this to the left composite. Naturality of the transported restriction tensor map moves s(c_F tensor identity) to the right. Naturality of a and the restriction tensor coherence square move C(r(kappa_e)) next to C(eta_N). The defining transpose equation for kappa_e identifies eta_N r(kappa_e) rho_e with eta_F tensor identity. Naturality of the oplax tensor comparison and unit normalization at F give t_U followed by eta_(C F) tensor a_B.",
    "uses": [
     "lem-sf-open-comparison-unit-normalization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison: comparison by adjunction, with the pro-etale unit and tensor adjoint written explicitly"
+    "place": "Tag 09AF, label lemma-jshriek-comparison, proof by the common right adjoint; agent refinement recording tensor compatibility of the etale/pro-etale open-extension comparison"
    }
   },
   {
-   "text": "Steps 3 and 4 give $\\rho^d\\Psi(L)=\\rho^d\\Psi(R)$. Cancel the isomorphism $\\rho^d$; injectivity of the Hom bijection $\\Psi$ from step 1 then gives $L=R$. This proves the displayed equality with exactly the source and target stated in the item.",
+   "text": "Precompose both proposed maps with c_N inverse, apply the pro-etale open Hom bijection and postcompose with rho_d. For the right composite cancel the extension comparison, use homEquiv_naturality_left and Equiv.apply_symm_apply for the defining kappa_d transpose, and use tensor interchange. Its image is t_U followed by eta_(C F) tensor a_B, the same as the preceding step. Cancel rho_d, use injectivity of the Hom bijection and cancel c_N inverse.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison: uniqueness through adjunction; final cancellation"
+    "place": "Tag 09AF, label lemma-jshriek-comparison, proof by the common right adjoint; agent refinement recording tensor compatibility of the etale/pro-etale open-extension comparison"
    }
   },
   {
-   "text": "Finally let $f:F\\to F'$ and $b:B\\to B'$. The naturality square for the etale unit, tensored with $r(b)$, gives equality of the transposes of the two candidate naturality composites for $\\kappa^e$, hence equality of the composites by the etale Hom bijection. The same argument with the pro-etale unit and $s(b)$ proves naturality of $\\kappa^d$. The maps $a,c,t^T$ are natural by [lem-weil-pbc-comparison-pullback], [lem-sf-open-comparison-unit-normalization], and [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Composition and tensoring of these commuting squares proves that $L$ and $R$ are natural in both $F$ and $B$, completing the naturality clause.",
+   "text": "Prove naturality of the etale restriction tensor comparison from the localization isomorphism naturality and OplaxMonoidal.delta_natural. Transpose both kappa_e naturality composites using the etale open adjunction, cancel rho_e, and use naturality of its unit and tensor interchange. Apply comparison and compose with delta_natural and naturality of c to obtain simultaneous naturality of the left composite.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-open-comparison-unit-normalization",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero, and Tag 03EL, lemma-tensor-product-pullback: natural Hom and tensor comparisons; proetale.tex Tag 09AF"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, label lemma-jshriek-comparison, proof by the common right adjoint; agent refinement recording tensor compatibility of the etale/pro-etale open-extension comparison"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-open-comparison-unit-normalization",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-ringed-tensor-section-calculus"
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AF, lemma-jshriek-comparison, common-right-adjoint argument refined by the ordinary module tensor comparison (sites-modules.tex Tag 03EL) and explicit open-unit transpose calculation"
+  "place": "Tag 09AF common-right-adjoint argument and Tag 03EL tensor compatibility; Lean uses the source-library monoidal comparison instance and explicit unit-transpose calculations."
  },
  "mathlib_searches": [
   {
@@ -253,11 +210,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
@@ -296,5 +248,15 @@
   "group": "Q115",
   "result": "fix",
   "note": "Wrote review.md and complete replacements under fixes/. Mathematics and verbatim signature match the node; repaired H8 documentation and H9 imports/local instance activation. Original and final modules compile cleanly through scompile.py. Branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261019T002630-L-2169383",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
