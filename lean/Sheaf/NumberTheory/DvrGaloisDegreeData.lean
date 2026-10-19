@@ -12,18 +12,6 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.LinearAlgebra.Determinant
-import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
-import Sheaf.RingTheory.DvrNormValuationSum
 
 /-!
 # Global degree data for a finite Galois extension of a DVR
@@ -119,6 +107,84 @@ theorem dvr_galois_degree_data
           Ideal.ramificationIdx q.1 A = e ∧
             Ideal.inertiaDeg q.1 A = f) ∧
         Module.finrank K L = g * e * f) := by
-  sorry
+  classical
+  let : IsIntegrallyClosed A := inferInstance
+  let : Module.Finite A B := IsIntegralClosure.finite A K L B
+  let : IsDedekindDomain B := IsIntegralClosure.isDedekindDomain A K L B
+  let : IsFractionRing B L :=
+    IsIntegralClosure.isFractionRing_of_finite_extension A K L B
+  let : Algebra.IsIntegral A B := IsIntegralClosure.isIntegral_algebra A L
+  have : IsTorsionFree A L := .trans_faithfulSMul A K L
+  let : IsTorsionFree A B := IsIntegralClosure.isTorsionFree A L
+  let : MulSemiringAction (Gal(L / K)) B :=
+    IsIntegralClosure.MulSemiringAction A K L B
+  let : IsGaloisGroup (Gal(L / K)) A B :=
+    IsGaloisGroup.of_isFractionRing _ _ _ K L
+  let p := IsLocalRing.maximalIdeal A
+  have hp : p ≠ ⊥ := IsDiscreteValuationRing.not_a_field A
+  have hmax (q : Ideal B) : q.IsMaximal ↔ q ∈ p.primesOver B := by
+    constructor
+    · intro hq
+      let := hq
+      refine ⟨hq.isPrime, ⟨?_⟩⟩
+      exact (IsLocalRing.eq_maximalIdeal (inferInstance : (q.under A).IsMaximal)).symm
+    · exact Ideal.isMaximal_of_mem_primesOver
+  have hlocal (q : p.primesOver B) :
+      IsDiscreteValuationRing (Localization.AtPrime q.1) ∧
+      IsLocalHom (algebraMap A (Localization.AtPrime q.1)) := by
+    have hq0 : q.1 ≠ ⊥ := Ideal.ne_bot_of_mem_primesOver hp q.2
+    refine ⟨IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain B
+      hq0 _, ?_⟩
+    apply ((IsLocalRing.local_hom_TFAE _).out 4 0).mp
+    rw [IsScalarTower.algebraMap_eq A B (Localization.AtPrime q.1), ← Ideal.comap_comap]
+    change ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)).under B).under A = p
+    exact congrArg (Ideal.under A)
+      (IsLocalization.AtPrime.under_maximalIdeal (Localization.AtPrime q.1) q.1) |>.trans
+        (Ideal.over_def q.1 p).symm
+  refine ⟨IsDedekindDomain.primesOver_finite p B, ?_, hmax, ?_, hlocal, ?_, ?_⟩
+  · obtain ⟨q⟩ := (inferInstance : Nonempty (p.primesOver B))
+    exact ⟨q.1, q.2⟩
+  · change MulAction.IsPretransitive (Gal(L / K)) (p.primesOver B)
+    infer_instance
+  · intro πA hπ q tq ht
+    have := (hlocal q).1
+    have := (hlocal q).2
+    have hinj : Function.Injective (algebraMap A (Localization.AtPrime q.1)) := by
+      rw [IsScalarTower.algebraMap_eq A B (Localization.AtPrime q.1)]
+      exact (IsLocalization.injective (Localization.AtPrime q.1)
+        q.1.primeCompl_le_nonZeroDivisors).comp (FaithfulSMul.algebraMap_injective A B)
+    obtain ⟨n, u, hu⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
+      (by simpa only [map_zero] using hinj.ne hπ.ne_zero) ht
+    have hn : 0 < n := by
+      apply Nat.pos_of_ne_zero
+      intro hn
+      have hu' : IsUnit (algebraMap A (Localization.AtPrime q.1) πA) := by
+        rw [hu, hn, pow_zero, mul_one]
+        exact u.isUnit
+      exact hπ.not_isUnit (isUnit_of_map_unit _ _ hu')
+    have hideal : p.map (algebraMap A (Localization.AtPrime q.1)) =
+        IsLocalRing.maximalIdeal (Localization.AtPrime q.1) ^ n := by
+      calc
+        p.map (algebraMap A (Localization.AtPrime q.1)) =
+            (Ideal.span {πA}).map (algebraMap A (Localization.AtPrime q.1)) :=
+          congrArg (Ideal.map (algebraMap A (Localization.AtPrime q.1))) hπ.maximalIdeal_eq
+        _ = Ideal.span {(u : Localization.AtPrime q.1) * tq ^ n} := by
+          rw [Ideal.map_span, Set.image_singleton, hu]
+        _ = IsLocalRing.maximalIdeal (Localization.AtPrime q.1) ^ n := by
+          rw [Ideal.span_singleton_mul_left_unit u.isUnit, ht.maximalIdeal_eq,
+            Ideal.span_singleton_pow]
+    have he : q.1.ramificationIdx A = n := by
+      rw [Ideal.ramificationIdx_eq p q.1, hideal,
+        IsDiscreteValuationRing.length_quotient_pow_maximalIdeal, ENat.toNat_natCast]
+    exact ⟨n, q.1.inertiaDeg A, hn, q.1.inertiaDeg_pos A, u, hu, he.symm, rfl⟩
+  · refine ⟨p.ramificationIdxIn B, p.inertiaDegIn B, (p.primesOver B).ncard,
+      Nat.pos_of_ne_zero (Ideal.ramificationIdxIn_ne_zero (G := Gal(L / K))),
+      Nat.pos_of_ne_zero (Ideal.inertiaDegIn_ne_zero (G := Gal(L / K))), rfl, ?_, ?_⟩
+    · intro q
+      exact ⟨(Ideal.ramificationIdxIn_eq_ramificationIdx p q.1 (Gal(L / K))).symm,
+        (Ideal.inertiaDegIn_eq_inertiaDeg p q.1 (Gal(L / K))).symm⟩
+    · rw [mul_assoc,
+        Ideal.ncard_primesOver_mul_ramificationIdxIn_mul_inertiaDegIn p B (Gal(L / K))]
+      exact (IsGalois.card_aut_eq_finrank K L).symm
 
 end NumberTheory
