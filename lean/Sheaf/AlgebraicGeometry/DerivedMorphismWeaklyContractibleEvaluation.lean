@@ -11,42 +11,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
-import Sheaf.RingTheory.RingPseudoCoherent
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
-import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
-import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.CategoryTheory.DerivedMorphismPresheaf
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse
+import Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom
+import Sheaf.AlgebraicGeometry.DerivedScalarExtensionLocalSystems
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Derived morphism sheaves on weakly contractible pro-etale affines
@@ -69,7 +38,199 @@ private theorem transpose_unit {C D : Type*} [Category C] [Category D]
     adj.unit.app P ≫ G.map ((adj.homEquiv P Q).symm f) = f := by
   exact (adj.homEquiv P Q).apply_symm_apply f
 
+private theorem pairSection_fst {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C)
+    (s : F.obj.obj (op U)) (t : G.obj.obj (op U)) :
+    (prod.fst : F ⨯ G ⟶ F).hom.app (op U) (sheafPairSection J F G U s t) = s := by
+  unfold sheafPairSection
+  change ((sheafToPresheaf J (Type (u + 1)) ⋙
+    (CategoryTheory.evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.fst) _ = s
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_fst,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_fst]
+  rfl
+
+private theorem pairSection_snd {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C)
+    (s : F.obj.obj (op U)) (t : G.obj.obj (op U)) :
+    (prod.snd : F ⨯ G ⟶ G).hom.app (op U) (sheafPairSection J F G U s t) = t := by
+  unfold sheafPairSection
+  change ((sheafToPresheaf J (Type (u + 1)) ⋙
+    (CategoryTheory.evaluation Cᵒᵖ (Type (u + 1))).obj (op U)).map prod.snd) _ = t
+  rw [← ConcreteCategory.comp_apply, inv_prodComparison_map_snd,
+    ← ConcreteCategory.comp_apply, Types.binaryProductIso_inv_comp_snd]
+  rfl
+
+private theorem pairSection_ext {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type (u + 1))]
+    (F G : Sheaf J (Type (u + 1))) (U : C) (x y : (F ⨯ G).obj.obj (op U))
+    (h₁ : (prod.fst : F ⨯ G ⟶ F).hom.app (op U) x =
+      (prod.fst : F ⨯ G ⟶ F).hom.app (op U) y)
+    (h₂ : (prod.snd : F ⨯ G ⟶ G).hom.app (op U) x =
+      (prod.snd : F ⨯ G ⟶ G).hom.app (op U) y) : x = y := by
+  let E := sheafToPresheaf J (Type (u + 1)) ⋙
+    (CategoryTheory.evaluation Cᵒᵖ (Type (u + 1))).obj (op U)
+  apply (ConcreteCategory.bijective_of_isIso (prodComparison E F G)).injective
+  apply (ConcreteCategory.bijective_of_isIso
+    (Types.binaryProductIso (E.obj F) (E.obj G)).hom).injective
+  apply _root_.Prod.ext
+  · have ht : prodComparison E F G ≫
+        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
+        (↾_root_.Prod.fst : (E.obj F × E.obj G) ⟶ E.obj F) = E.map prod.fst := by
+      rw [Types.binaryProductIso_hom_comp_fst, prodComparison_fst]
+    change (E.map prod.fst) x = (E.map prod.fst) y at h₁
+    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
+      (ConcreteCategory.congr_hom ht x).trans
+        (h₁.trans (ConcreteCategory.congr_hom ht y).symm)
+  · have ht : prodComparison E F G ≫
+        (Types.binaryProductIso (E.obj F) (E.obj G)).hom ≫
+        (↾_root_.Prod.snd : (E.obj F × E.obj G) ⟶ E.obj G) = E.map prod.snd := by
+      rw [Types.binaryProductIso_hom_comp_snd, prodComparison_snd]
+    change (E.map prod.snd) x = (E.map prod.snd) y at h₂
+    simpa only [ConcreteCategory.comp_apply, TypeCat.ofHom_apply] using
+      (ConcreteCategory.congr_hom ht x).trans
+        (h₂.trans (ConcreteCategory.congr_hom ht y).symm)
+
+
+private theorem pairSection_map {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) [HasWeakSheafify J (Type (u + 1))]
+    {F G H K : Sheaf J (Type (u + 1))} (f : F ⟶ H) (g : G ⟶ K)
+    (U : C) (s : F.obj.obj (op U)) (t : G.obj.obj (op U)) :
+    (prod.map f g).hom.app (op U) (sheafPairSection J F G U s t) =
+      sheafPairSection J H K U (f.hom.app (op U) s) (g.hom.app (op U) t) := by
+  apply pairSection_ext
+  · rw [pairSection_fst]
+    change ((prod.map f g ≫ prod.fst).hom.app (op U)) _ = _
+    rw [prod.map_fst]
+    exact congrArg (f.hom.app (op U)) (pairSection_fst J F G U s t)
+  · rw [pairSection_snd]
+    change ((prod.map f g ≫ prod.snd).hom.app (op U)) _ = _
+    rw [prod.map_snd]
+    exact congrArg (g.hom.app (op U)) (pairSection_snd J F G U s t)
+
+private theorem sheaf_binary_ext {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) [HasSheafify J (Type (u + 1))]
+    (P Q : Cᵒᵖ ⥤ Type (u + 1)) (H : Sheaf J (Type (u + 1)))
+    (f g : (presheafToSheaf J (Type (u + 1))).obj P ⨯
+      (presheafToSheaf J (Type (u + 1))).obj Q ⟶ H)
+    (h : ∀ (U : C) (s : P.obj (op U)) (t : Q.obj (op U)),
+      f.hom.app (op U) (sheafPairSection J _ _ U
+        ((toSheafify J P).app (op U) s) ((toSheafify J Q).app (op U) t)) =
+      g.hom.app (op U) (sheafPairSection J _ _ U
+        ((toSheafify J P).app (op U) s) ((toSheafify J Q).app (op U) t))) : f = g := by
+  let F := presheafToSheaf J (Type (u + 1))
+  let V := sheafToPresheaf J (Type (u + 1))
+  let k := toSheafify J (P ⨯ Q) ≫ V.map (prodComparison F P Q)
+  have hk (U : C) (z : (P ⨯ Q).obj (op U)) :
+      k.app (op U) z = sheafPairSection J _ _ U
+        ((toSheafify J P).app (op U) ((prod.fst : P ⨯ Q ⟶ P).app (op U) z))
+        ((toSheafify J Q).app (op U) ((prod.snd : P ⨯ Q ⟶ Q).app (op U) z)) := by
+    apply pairSection_ext
+    · rw [pairSection_fst]
+      have ht : k ≫ V.map (prod.fst : F.obj P ⨯ F.obj Q ⟶ F.obj P) =
+          (prod.fst : P ⨯ Q ⟶ P) ≫ toSheafify J P := by
+        dsimp only [k]
+        rw [Category.assoc, ← V.map_comp, prodComparison_fst]
+        exact (toSheafify_naturality J _).symm
+      exact ConcreteCategory.congr_hom (congr_app ht (op U)) z
+    · rw [pairSection_snd]
+      have ht : k ≫ V.map (prod.snd : F.obj P ⨯ F.obj Q ⟶ F.obj Q) =
+          (prod.snd : P ⨯ Q ⟶ Q) ≫ toSheafify J Q := by
+        dsimp only [k]
+        rw [Category.assoc, ← V.map_comp, prodComparison_snd]
+        exact (toSheafify_naturality J _).symm
+      exact ConcreteCategory.congr_hom (congr_app ht (op U)) z
+  apply (cancel_epi (prodComparison F P Q)).mp
+  apply V.map_injective
+  apply sheafify_hom_ext J _ _ H.property
+  ext U z
+  change f.hom.app U (k.app U z) = g.hom.app U (k.app U z)
+  rw [hk U.unop]
+  exact h U.unop _ _
+
 variable (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
+
+private theorem comparison_pair
+    (S T : Sheaf X.smallEtaleTopology (Type (u + 1))) (V : X.Etale)
+    (s : S.obj.obj (op V)) (t : T.obj.obj (op V)) :
+    (prodComparison (comparisonSetUpperStar X) S T).hom.app (op ((toProEt X).obj V))
+        (((proEtaleSiteComparison X).unit.app (S ⨯ T)).hom.app (op V)
+          (sheafPairSection X.smallEtaleTopology S T V s t)) =
+      sheafPairSection (ProEt.topology X) _ _ ((toProEt X).obj V)
+        (((proEtaleSiteComparison X).unit.app S).hom.app (op V) s)
+        (((proEtaleSiteComparison X).unit.app T).hom.app (op V) t) := by
+  apply pairSection_ext
+  · rw [pairSection_fst]
+    have hp := (proEtaleSiteComparison X).unit.naturality (prod.fst : S ⨯ T ⟶ S)
+    have h := congrArg (fun k ↦ k.hom.app (op V)
+      (sheafPairSection X.smallEtaleTopology S T V s t)) hp
+    change _ = ((comparisonSetUpperStar X).map prod.fst).hom.app
+      (op ((toProEt X).obj V)) _ at h
+    rw [← prodComparison_fst (comparisonSetUpperStar X) S T] at h
+    change ((proEtaleSiteComparison X).unit.app S).hom.app (op V)
+        ((prod.fst : S ⨯ T ⟶ S).hom.app (op V)
+          (sheafPairSection X.smallEtaleTopology S T V s t)) = _ at h
+    rw [pairSection_fst] at h
+    exact h.symm
+  · rw [pairSection_snd]
+    have hp := (proEtaleSiteComparison X).unit.naturality (prod.snd : S ⨯ T ⟶ T)
+    have h := congrArg (fun k ↦ k.hom.app (op V)
+      (sheafPairSection X.smallEtaleTopology S T V s t)) hp
+    change _ = ((comparisonSetUpperStar X).map prod.snd).hom.app
+      (op ((toProEt X).obj V)) _ at h
+    rw [← prodComparison_snd (comparisonSetUpperStar X) S T] at h
+    change ((proEtaleSiteComparison X).unit.app T).hom.app (op V)
+        ((prod.snd : S ⨯ T ⟶ T).hom.app (op V)
+          (sheafPairSection X.smallEtaleTopology S T V s t)) = _ at h
+    rw [pairSection_snd] at h
+    exact h.symm
+
+private theorem comparisonHom_generator
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (V : X.Etale)
+    (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ⟶
+      (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
+    (derivedHomSheafComparison X B A D).hom.app (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalHomSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+        ((toSheafify X.smallEtaleTopology
+          (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f)) =
+      derivedComparisonHomUnit X B A D V f := by
+  have hc := transpose_unit (proEtaleSiteComparison X)
+    (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
+      (derivedComparisonHomPresheafMap X B A D))
+  have hs := transpose_unit (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Q := ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+      X.smallEtaleTopology (ProEt.topology X)).obj (derivedComparisonHomTarget X B A D))
+    (derivedComparisonHomPresheafMap X B A D)
+  exact (congrArg (fun k ↦ k.hom.app (op V)
+    ((toSheafify X.smallEtaleTopology
+      (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f)) hc).trans
+    (congrArg (fun k ↦ k.app (op V) f) hs)
+
+private theorem comparisonIso_generator
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (V : X.Etale)
+    (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ≅
+      (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
+    (derivedIsoSheafComparison X B A D).hom.app (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalIsoSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+        ((toSheafify X.smallEtaleTopology
+          (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f)) =
+      derivedComparisonIsoUnit X B A D V f := by
+  have hc := transpose_unit (proEtaleSiteComparison X)
+    (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
+      (derivedComparisonIsoPresheafMap X B A D))
+  have hs := transpose_unit (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Q := ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+      X.smallEtaleTopology (ProEt.topology X)).obj (derivedComparisonIsoTarget X B A D))
+    (derivedComparisonIsoPresheafMap X B A D)
+  exact (congrArg (fun k ↦ k.hom.app (op V)
+    ((toSheafify X.smallEtaleTopology
+      (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f)) hc).trans
+    (congrArg (fun k ↦ k.app (op V) f) hs)
 
 /-- The constant etale sheaf complex, obtained by applying the exact constant-sheaf functor to the
 derived category.
@@ -79,6 +240,27 @@ and 09BE; the blueprint amplification proof, finite-source extension.
 (blueprint: lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation) -/
 noncomputable abbrev constantDerivedEtale :=
   (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).mapDerivedCategory
+
+private theorem constant_finite_etale (M : ModuleCat.{u + 1} B) [Module.Finite B M] :
+    IsFiniteLocallyConstantSheaf
+      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).obj M) where
+  toIsLocallyConstantSheaf := by
+    have : ∀ (V : X.Etale) (P : (Over V)ᵒᵖ ⥤ ModuleCat.{u + 1} B),
+        (Over.forget V).op.HasPointwiseRightKanExtension P := by
+      intro V P Y
+      have : EssentiallySmall.{u + 1} (StructuredArrow Y (Over.forget V).op) :=
+        essentiallySmallSelf.{0} _
+      have : HasLimitsOfShape (StructuredArrow Y (Over.forget V).op)
+          (ModuleCat.{u + 1} B) := hasLimitsOfShape_of_essentiallySmall.{u + 1} _ _
+      exact HasLimitsOfShape.has_limit _
+    exact (Sheaf.isConstant_of_iso _ (Iso.refl _)).isLocallyConstantSheaf
+  toIsFiniteSheaf := ⟨fun Ω _ _ s ↦ by
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget (ModuleCat.{u + 1} B)) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    have : LocallySmall.{u} X.Etale := locallySmall_self _
+    exact ((ModuleCat.isFinitelyGenerated_iff M).2 inferInstance).of_iso
+      ((pointSmallEtale s).sheafFiberConstantSheafIso M).symm⟩
 
 /-- The canonical derived Hom and Isom evaluation maps are bijective for a bounded finite source and
 a bounded finite locally constant etale target. Finite module cohomology does not mean
@@ -206,7 +388,35 @@ theorem derivedMorphism_weaklyContractible_evaluation [Finite B]
         (derivedHomEvaluation X B ((constantDerivedEtale X B).obj E) K U hU) ∧
       Function.Bijective
         (derivedIsoEvaluation X B ((constantDerivedEtale X B).obj E) K U hU) := by
-  sorry
+  let A := (constantDerivedEtale X B).obj E
+  have hA : (DerivedCategory.TStructure.t
+      (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).bounded A :=
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).bounded_mapDerivedCategory_obj hE
+  have hAf (n : ℤ) : IsFiniteLocallyConstantSheaf
+      ((DerivedCategory.homologyFunctor
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj A) := by
+    have := hEf n
+    have := constant_finite_etale X B
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} B) n).obj E)
+    let e : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)).obj
+        ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} B) n).obj E) ≅
+        (DerivedCategory.homologyFunctor
+          (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj A :=
+      (Functor.mapDerivedCategoryHomologyFunctorIso
+        (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).app E
+    exact IsFiniteLocallyConstantSheaf.of_iso e
+  have hAD := derivedHomSheafComparison_isIso_lisse X B A K hA hAf hK.1
+  have hDA := derivedHomSheafComparison_isIso_lisse X B K A hK hKf hA.1
+  have hAA := derivedHomSheafComparison_isIso_lisse X B A A hA hAf hA.1
+  have hDD := derivedHomSheafComparison_isIso_lisse X B K K hK hKf hK.1
+  have := derivedIsoSheafComparison_isIso_of_hom X B A K hAD hDA hAA hDD
+  constructor
+  · exact (Equiv.ofBijective (proEtaleDerivedHomUnit X B A K U)
+      (proEtaleDerivedUnits_bijective X B A K U hU).1).symm.bijective.comp
+        (ConcreteCategory.bijective_of_isIso ((derivedHomSheafComparison X B A K).hom.app (op U)))
+  · exact (Equiv.ofBijective (proEtaleDerivedIsoUnit X B A K U)
+      (proEtaleDerivedUnits_bijective X B A K U hU).2).symm.bijective.comp
+        (ConcreteCategory.bijective_of_isIso ((derivedIsoSheafComparison X B A K).hom.app (op U)))
 
 variable (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
 
@@ -413,6 +623,67 @@ theorem derivedMorphism_evaluation_restriction
                   ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)))
               g.op (derivedIsoEvaluation X B A D U hU s)).symm))
 
+private theorem comparisonHom_comp
+    (G : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
+    (comparisonSetUpperStar X).map
+        (derivedLocalHomSheafComp X.smallEtaleTopology B A D G) ≫
+        derivedHomSheafComparison X B A G =
+      prodComparison (comparisonSetUpperStar X)
+          (derivedLocalHomSheaf X.smallEtaleTopology B A D)
+          (derivedLocalHomSheaf X.smallEtaleTopology B D G) ≫
+        prod.map (derivedHomSheafComparison X B A D) (derivedHomSheafComparison X B D G) ≫
+          derivedLocalHomSheafComp (ProEt.topology X) B
+            ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+            ((derivedComparison X B).obj G) := by
+  apply ((proEtaleSiteComparison X).homEquiv _ _).injective
+  apply sheaf_binary_ext X.smallEtaleTopology
+    (derivedLocalHomPresheaf X.smallEtaleTopology B A D)
+    (derivedLocalHomPresheaf X.smallEtaleTopology B D G)
+  intro V f g
+  let sf := (toSheafify X.smallEtaleTopology
+    (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f
+  let sg := (toSheafify X.smallEtaleTopology
+    (derivedLocalHomPresheaf X.smallEtaleTopology B D G)).app (op V) g
+  have hn := (proEtaleSiteComparison X).unit.naturality
+    (derivedLocalHomSheafComp X.smallEtaleTopology B A D G)
+  have hn' := congrArg (fun k ↦ k.hom.app (op V)
+    (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) hn
+  change (derivedHomSheafComparison X B A G).hom.app (op ((toProEt X).obj V))
+      (((comparisonSetUpperStar X).map
+        (derivedLocalHomSheafComp X.smallEtaleTopology B A D G)).hom.app
+        (op ((toProEt X).obj V))
+        (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+          (sheafPairSection X.smallEtaleTopology _ _ V sf sg))) = _
+  change ((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+      ((derivedLocalHomSheafComp X.smallEtaleTopology B A D G).hom.app (op V)
+        (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) =
+    ((comparisonSetUpperStar X).map
+      (derivedLocalHomSheafComp X.smallEtaleTopology B A D G)).hom.app
+      (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+        (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) at hn'
+  rw [← hn']
+  erw [(derivedLocalHomSheafComp_exists X.smallEtaleTopology B A D G).choose_spec.1]
+  erw [comparisonHom_generator]
+  change derivedComparisonHomUnit X B A G V (f ≫ g) =
+    (derivedLocalHomSheafComp (ProEt.topology X) B _ _ _).hom.app
+      (op ((toProEt X).obj V))
+      ((prod.map (derivedHomSheafComparison X B A D)
+        (derivedHomSheafComparison X B D G)).hom.app (op ((toProEt X).obj V))
+        ((prodComparison (comparisonSetUpperStar X) _ _).hom.app
+          (op ((toProEt X).obj V))
+          (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+            (sheafPairSection X.smallEtaleTopology _ _ V sf sg))))
+  erw [comparison_pair, pairSection_map]
+  dsimp only [sf, sg]
+  erw [comparisonHom_generator, comparisonHom_generator]
+  unfold derivedComparisonHomUnit
+  erw [(derivedLocalHomSheafComp_exists (ProEt.topology X) B
+    ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+    ((derivedComparison X B).obj G)).choose_spec.1]
+  congr 1
+  simp [derivedComparisonLocalHom, Functor.map_comp, Category.assoc]
+
 /-- Evaluation preserves composition of derived Hom-sheaf sections whenever their arguments match.
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; Cohomology on Sites, Tags 0946
@@ -434,7 +705,37 @@ theorem derivedMorphism_evaluation_composition
       (derivedLocalHomSheaf X.smallEtaleTopology B D G)).obj.obj (op U)) :
     derivedHomEvaluation X B A G U hU (pulledbackDerivedHomComp X B A D G U s t) =
       derivedHomEvaluation X B A D U hU s ≫ derivedHomEvaluation X B D G U hU t := by
-  sorry
+  apply (proEtaleDerivedUnits_bijective X B A G U hU).1.1
+  rw [homEvaluation_unit]
+  have hc := congrArg (fun k ↦ k.hom.app (op U)
+    ((inv (prodComparison (comparisonSetUpperStar X)
+      (derivedLocalHomSheaf X.smallEtaleTopology B A D)
+      (derivedLocalHomSheaf X.smallEtaleTopology B D G))).hom.app (op U)
+        (sheafPairSection (ProEt.topology X) _ _ U s t)))
+    (comparisonHom_comp X B A D G)
+  change (derivedHomSheafComparison X B A G).hom.app (op U)
+      (pulledbackDerivedHomComp X B A D G U s t) = _ at hc
+  rw [hc]
+  change (derivedLocalHomSheafComp (ProEt.topology X) B _ _ _).hom.app (op U)
+      ((prod.map (derivedHomSheafComparison X B A D)
+        (derivedHomSheafComparison X B D G)).hom.app (op U)
+        ((prodComparison (comparisonSetUpperStar X) _ _).hom.app (op U)
+          ((inv (prodComparison (comparisonSetUpperStar X) _ _)).hom.app (op U)
+            (sheafPairSection (ProEt.topology X) _ _ U s t)))) = _
+  have hi : (prodComparison (comparisonSetUpperStar X)
+      (derivedLocalHomSheaf X.smallEtaleTopology B A D)
+      (derivedLocalHomSheaf X.smallEtaleTopology B D G)).hom.app (op U)
+      ((inv (prodComparison (comparisonSetUpperStar X) _ _)).hom.app (op U)
+        (sheafPairSection (ProEt.topology X) _ _ U s t)) =
+      sheafPairSection (ProEt.topology X) _ _ U s t := by
+    exact congrArg (fun k ↦ k.hom.app (op U)
+      (sheafPairSection (ProEt.topology X) _ _ U s t))
+      (IsIso.inv_hom_id (prodComparison (comparisonSetUpperStar X) _ _))
+  rw [hi, pairSection_map, ← homEvaluation_unit X B A D U hU s,
+    ← homEvaluation_unit X B D G U hU t]
+  exact (derivedLocalHomSheafComp_exists (ProEt.topology X) B
+    ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+    ((derivedComparison X B).obj G)).choose_spec.1 U _ _
 
 private theorem comparisonLocalHom_natural
     (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
@@ -574,6 +875,68 @@ theorem derivedMorphism_evaluation_identity
         simp)) (Iso.refl _)]
     simp [derivedLocalIsoRestriction, derivedComparisonLocalIso]
 
+private theorem comparisonIso_comp
+    (G : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
+    (comparisonSetUpperStar X).map
+        (derivedLocalIsoSheafComp X.smallEtaleTopology B A D G) ≫
+        derivedIsoSheafComparison X B A G =
+      prodComparison (comparisonSetUpperStar X)
+          (derivedLocalIsoSheaf X.smallEtaleTopology B A D)
+          (derivedLocalIsoSheaf X.smallEtaleTopology B D G) ≫
+        prod.map (derivedIsoSheafComparison X B A D) (derivedIsoSheafComparison X B D G) ≫
+          derivedLocalIsoSheafComp (ProEt.topology X) B
+            ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+            ((derivedComparison X B).obj G) := by
+  apply ((proEtaleSiteComparison X).homEquiv _ _).injective
+  apply sheaf_binary_ext X.smallEtaleTopology
+    (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)
+    (derivedLocalIsoPresheaf X.smallEtaleTopology B D G)
+  intro V f g
+  let sf := (toSheafify X.smallEtaleTopology
+    (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f
+  let sg := (toSheafify X.smallEtaleTopology
+    (derivedLocalIsoPresheaf X.smallEtaleTopology B D G)).app (op V) g
+  have hn := (proEtaleSiteComparison X).unit.naturality
+    (derivedLocalIsoSheafComp X.smallEtaleTopology B A D G)
+  have hn' := congrArg (fun k ↦ k.hom.app (op V)
+    (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) hn
+  change (derivedIsoSheafComparison X B A G).hom.app (op ((toProEt X).obj V))
+      (((comparisonSetUpperStar X).map
+        (derivedLocalIsoSheafComp X.smallEtaleTopology B A D G)).hom.app
+        (op ((toProEt X).obj V))
+        (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+          (sheafPairSection X.smallEtaleTopology _ _ V sf sg))) = _
+  change ((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+      ((derivedLocalIsoSheafComp X.smallEtaleTopology B A D G).hom.app (op V)
+        (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) =
+    ((comparisonSetUpperStar X).map
+      (derivedLocalIsoSheafComp X.smallEtaleTopology B A D G)).hom.app
+      (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+        (sheafPairSection X.smallEtaleTopology _ _ V sf sg)) at hn'
+  rw [← hn']
+  erw [(derivedLocalIsoSheafComp_exists X.smallEtaleTopology B A D G).choose_spec.1]
+  erw [comparisonIso_generator]
+  change derivedComparisonIsoUnit X B A G V (f ≪≫ g) =
+    (derivedLocalIsoSheafComp (ProEt.topology X) B _ _ _).hom.app
+      (op ((toProEt X).obj V))
+      ((prod.map (derivedIsoSheafComparison X B A D)
+        (derivedIsoSheafComparison X B D G)).hom.app (op ((toProEt X).obj V))
+        ((prodComparison (comparisonSetUpperStar X) _ _).hom.app
+          (op ((toProEt X).obj V))
+          (((proEtaleSiteComparison X).unit.app _).hom.app (op V)
+            (sheafPairSection X.smallEtaleTopology _ _ V sf sg))))
+  erw [comparison_pair, pairSection_map]
+  dsimp only [sf, sg]
+  erw [comparisonIso_generator, comparisonIso_generator]
+  unfold derivedComparisonIsoUnit
+  erw [(derivedLocalIsoSheafComp_exists (ProEt.topology X) B
+    ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+    ((derivedComparison X B).obj G)).choose_spec.1]
+  congr 1
+  apply Iso.ext
+  simp [derivedComparisonLocalIso]
+
 /-- Evaluation preserves composition on derived Isom-sheaf sections.
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; Cohomology on Sites, Tags 0946
@@ -594,7 +957,37 @@ theorem derivedMorphism_isoEvaluation_composition
       (derivedLocalIsoSheaf X.smallEtaleTopology B D G)).obj.obj (op U)) :
     derivedIsoEvaluation X B A G U hU (pulledbackDerivedIsoComp X B A D G U s t) =
       derivedIsoEvaluation X B A D U hU s ≪≫ derivedIsoEvaluation X B D G U hU t := by
-  sorry
+  apply (proEtaleDerivedUnits_bijective X B A G U hU).2.1
+  rw [isoEvaluation_unit]
+  have hc := congrArg (fun k ↦ k.hom.app (op U)
+    ((inv (prodComparison (comparisonSetUpperStar X)
+      (derivedLocalIsoSheaf X.smallEtaleTopology B A D)
+      (derivedLocalIsoSheaf X.smallEtaleTopology B D G))).hom.app (op U)
+        (sheafPairSection (ProEt.topology X) _ _ U s t)))
+    (comparisonIso_comp X B A D G)
+  change (derivedIsoSheafComparison X B A G).hom.app (op U)
+      (pulledbackDerivedIsoComp X B A D G U s t) = _ at hc
+  rw [hc]
+  change (derivedLocalIsoSheafComp (ProEt.topology X) B _ _ _).hom.app (op U)
+      ((prod.map (derivedIsoSheafComparison X B A D)
+        (derivedIsoSheafComparison X B D G)).hom.app (op U)
+        ((prodComparison (comparisonSetUpperStar X) _ _).hom.app (op U)
+          ((inv (prodComparison (comparisonSetUpperStar X) _ _)).hom.app (op U)
+            (sheafPairSection (ProEt.topology X) _ _ U s t)))) = _
+  have hi : (prodComparison (comparisonSetUpperStar X)
+      (derivedLocalIsoSheaf X.smallEtaleTopology B A D)
+      (derivedLocalIsoSheaf X.smallEtaleTopology B D G)).hom.app (op U)
+      ((inv (prodComparison (comparisonSetUpperStar X) _ _)).hom.app (op U)
+        (sheafPairSection (ProEt.topology X) _ _ U s t)) =
+      sheafPairSection (ProEt.topology X) _ _ U s t := by
+    exact congrArg (fun k ↦ k.hom.app (op U)
+      (sheafPairSection (ProEt.topology X) _ _ U s t))
+      (IsIso.inv_hom_id (prodComparison (comparisonSetUpperStar X) _ _))
+  rw [hi, pairSection_map, ← isoEvaluation_unit X B A D U hU s,
+    ← isoEvaluation_unit X B D G U hU t]
+  exact (derivedLocalIsoSheafComp_exists (ProEt.topology X) B
+    ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)
+    ((derivedComparison X B).obj G)).choose_spec.1 U _ _
 
 private theorem comparisonLocalIso_natural
     (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
@@ -714,6 +1107,249 @@ noncomputable def scalarEvaluationTransport
 
 variable (X B)
 
+private theorem comparisonHom_scalar
+    {B' : Type (u + 1)} [CommRing B']
+    (T : DerivedLocalFunctor X.smallEtaleTopology B B')
+    (S : DerivedLocalFunctor (ProEt.topology X) B B')
+    (c : derivedComparison X B ⋙ S.globalFunctor ≅
+      T.globalFunctor ⋙ derivedComparison X B')
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (h : ∀ (V : X.Etale)
+      (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ⟶
+        (derivedSliceRestriction X.smallEtaleTopology B V).obj D),
+      derivedComparisonLocalHom X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) V
+          ((T.homPresheafMap A D).app (op V) f) =
+        (S.homPresheafMap ((derivedComparison X B).obj A)
+            ((derivedComparison X B).obj D) ≫
+          derivedLocalHomPresheafMap (c.inv.app A) (c.hom.app D)).app
+            (op ((toProEt X).obj V)) (derivedComparisonLocalHom X B A D V f)) :
+    (comparisonSetUpperStar X).map (T.homSheafMap A D) ≫
+        derivedHomSheafComparison X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedHomSheafComparison X B A D ≫
+        S.homSheafMap ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) ≫
+          derivedLocalHomSheafMap (c.inv.app A) (c.hom.app D) := by
+  let p := S.homPresheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalHomPresheafMap (c.inv.app A) (c.hom.app D)
+  let θ := S.homSheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalHomSheafMap (c.inv.app A) (c.hom.app D)
+  let R := (toProEt X).sheafPushforwardContinuous (Type (u + 1))
+    X.smallEtaleTopology (ProEt.topology X)
+  have hp : T.homPresheafMap A D ≫
+        derivedComparisonHomPresheafMap X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedComparisonHomPresheafMap X B A D ≫ (R.map θ).hom := by
+    ext V f
+    change derivedComparisonHomUnit X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D)
+        V.unop ((T.homPresheafMap A D).app V f) =
+      θ.hom.app (op ((toProEt X).obj V.unop))
+        (derivedComparisonHomUnit X B A D V.unop f)
+    have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality p
+    have hn' := congrArg (fun k ↦ k.app (op ((toProEt X).obj V.unop))
+      (derivedComparisonLocalHom X B A D V.unop f)) hn
+    have ht : (presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p = θ := by
+      exact Functor.map_comp _ _ _
+    change _ = ((presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p).hom.app
+      (op ((toProEt X).obj V.unop)) _ at hn'
+    rw [ht] at hn'
+    exact (congrArg
+      ((toSheafify (ProEt.topology X)
+        (derivedLocalHomPresheaf (ProEt.topology X) B'
+          ((derivedComparison X B').obj (T.globalFunctor.obj A))
+          ((derivedComparison X B').obj (T.globalFunctor.obj D)))).app
+            (op ((toProEt X).obj V.unop))) (h V.unop f)).trans hn'
+  have hs := Adjunction.homEquiv_naturality_right_square
+    (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Y := R.obj (derivedComparisonHomTarget X B A D))
+    (Y' := R.obj (derivedComparisonHomTarget X B'
+      (T.globalFunctor.obj A) (T.globalFunctor.obj D)))
+    (T.homPresheafMap A D) _ _ (R.map θ) hp
+  exact (proEtaleSiteComparison X).homEquiv_naturality_right_square
+    (Y := derivedComparisonHomTarget X B A D)
+    (Y' := derivedComparisonHomTarget X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D))
+    (T.homSheafMap A D) _ _ θ hs
+
+private theorem comparisonIso_scalar
+    {B' : Type (u + 1)} [CommRing B']
+    (T : DerivedLocalFunctor X.smallEtaleTopology B B')
+    (S : DerivedLocalFunctor (ProEt.topology X) B B')
+    (c : derivedComparison X B ⋙ S.globalFunctor ≅
+      T.globalFunctor ⋙ derivedComparison X B')
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (h : ∀ (V : X.Etale)
+      (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ≅
+        (derivedSliceRestriction X.smallEtaleTopology B V).obj D),
+      derivedComparisonLocalIso X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) V
+          ((T.isoPresheafMap A D).app (op V) f) =
+        (S.isoPresheafMap ((derivedComparison X B).obj A)
+            ((derivedComparison X B).obj D) ≫
+          derivedLocalIsoPresheafMap (c.app A).symm (c.app D)).app
+            (op ((toProEt X).obj V)) (derivedComparisonLocalIso X B A D V f)) :
+    (comparisonSetUpperStar X).map (T.isoSheafMap A D) ≫
+        derivedIsoSheafComparison X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedIsoSheafComparison X B A D ≫
+        S.isoSheafMap ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) ≫
+          derivedLocalIsoSheafMap (c.app A).symm (c.app D) := by
+  let p := S.isoPresheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalIsoPresheafMap (c.app A).symm (c.app D)
+  let θ := S.isoSheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalIsoSheafMap (c.app A).symm (c.app D)
+  let R := (toProEt X).sheafPushforwardContinuous (Type (u + 1))
+    X.smallEtaleTopology (ProEt.topology X)
+  have hp : T.isoPresheafMap A D ≫
+        derivedComparisonIsoPresheafMap X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedComparisonIsoPresheafMap X B A D ≫ (R.map θ).hom := by
+    ext V f
+    change derivedComparisonIsoUnit X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D)
+        V.unop ((T.isoPresheafMap A D).app V f) =
+      θ.hom.app (op ((toProEt X).obj V.unop))
+        (derivedComparisonIsoUnit X B A D V.unop f)
+    have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality p
+    have hn' := congrArg (fun k ↦ k.app (op ((toProEt X).obj V.unop))
+      (derivedComparisonLocalIso X B A D V.unop f)) hn
+    have ht : (presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p = θ := by
+      exact Functor.map_comp _ _ _
+    change _ = ((presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p).hom.app
+      (op ((toProEt X).obj V.unop)) _ at hn'
+    rw [ht] at hn'
+    exact (congrArg
+      ((toSheafify (ProEt.topology X)
+        (derivedLocalIsoPresheaf (ProEt.topology X) B'
+          ((derivedComparison X B').obj (T.globalFunctor.obj A))
+          ((derivedComparison X B').obj (T.globalFunctor.obj D)))).app
+            (op ((toProEt X).obj V.unop))) (h V.unop f)).trans hn'
+  have hs := Adjunction.homEquiv_naturality_right_square
+    (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Y := R.obj (derivedComparisonIsoTarget X B A D))
+    (Y' := R.obj (derivedComparisonIsoTarget X B'
+      (T.globalFunctor.obj A) (T.globalFunctor.obj D)))
+    (T.isoPresheafMap A D) _ _ (R.map θ) hp
+  exact (proEtaleSiteComparison X).homEquiv_naturality_right_square
+    (Y := derivedComparisonIsoTarget X B A D)
+    (Y' := derivedComparisonIsoTarget X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D))
+    (T.isoSheafMap A D) _ _ θ hs
+
+private theorem homEvaluation_scalar
+    {B' : Type (u + 1)} [CommRing B']
+    (T : DerivedLocalFunctor X.smallEtaleTopology B B')
+    (S : DerivedLocalFunctor (ProEt.topology X) B B')
+    (c : derivedComparison X B ⋙ S.globalFunctor ≅
+      T.globalFunctor ⋙ derivedComparison X B')
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (h : (comparisonSetUpperStar X).map (T.homSheafMap A D) ≫
+        derivedHomSheafComparison X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedHomSheafComparison X B A D ≫
+        S.homSheafMap ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) ≫
+          derivedLocalHomSheafMap (c.inv.app A) (c.hom.app D))
+    (U : X.ProEt) [IsAffine U.left]
+    (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
+    (s : ((comparisonSetUpperStar X).obj
+      (derivedLocalHomSheaf X.smallEtaleTopology B A D)).obj.obj (op U)) :
+    derivedHomEvaluation X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) U hU
+        (((comparisonSetUpperStar X).map (T.homSheafMap A D)).hom.app (op U) s) =
+      (scalarEvaluationTransport T S c A U).inv ≫
+        (S.localFunctor U).map (derivedHomEvaluation X B A D U hU s) ≫
+          (scalarEvaluationTransport T S c D U).hom := by
+  apply (proEtaleDerivedUnits_bijective X B' (T.globalFunctor.obj A)
+    (T.globalFunctor.obj D) U hU).1.1
+  let p := S.homPresheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalHomPresheafMap (c.inv.app A) (c.hom.app D)
+  let θ := S.homSheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalHomSheafMap (c.inv.app A) (c.hom.app D)
+  have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality p
+  have ht : (presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p = θ :=
+    Functor.map_comp _ _ _
+  have hn' := congrArg (fun k ↦ k.app (op U)
+    (derivedHomEvaluation X B A D U hU s)) hn
+  change _ = ((presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p).hom.app
+    (op U) _ at hn'
+  rw [ht] at hn'
+  have hp : p.app (op U) (derivedHomEvaluation X B A D U hU s) =
+      (scalarEvaluationTransport T S c A U).inv ≫
+        (S.localFunctor U).map (derivedHomEvaluation X B A D U hU s) ≫
+          (scalarEvaluationTransport T S c D U).hom := by
+    simp only [p, NatTrans.comp_app, types_comp_apply, DerivedLocalFunctor.homPresheafMap,
+      derivedLocalHomPresheafMap, scalarEvaluationTransport, Iso.trans_inv, Iso.trans_hom,
+      Functor.mapIso_inv, Functor.mapIso_hom, Category.assoc]
+    dsimp
+    simp only [Category.assoc]
+  change (toSheafify (ProEt.topology X)
+      (derivedLocalHomPresheaf (ProEt.topology X) B'
+        ((derivedComparison X B').obj (T.globalFunctor.obj A))
+        ((derivedComparison X B').obj (T.globalFunctor.obj D)))).app (op U)
+      (p.app (op U) (derivedHomEvaluation X B A D U hU s)) =
+    θ.hom.app (op U)
+      (proEtaleDerivedHomUnit X B A D U (derivedHomEvaluation X B A D U hU s)) at hn'
+  rw [hp] at hn'
+  exact (homEvaluation_unit X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) U hU _).trans
+    ((congrArg (fun k ↦ k.hom.app (op U) s) h).trans
+      ((congrArg (θ.hom.app (op U)) (homEvaluation_unit X B A D U hU s).symm).trans
+        hn'.symm))
+
+private theorem isoEvaluation_scalar
+    {B' : Type (u + 1)} [CommRing B']
+    (T : DerivedLocalFunctor X.smallEtaleTopology B B')
+    (S : DerivedLocalFunctor (ProEt.topology X) B B')
+    (c : derivedComparison X B ⋙ S.globalFunctor ≅
+      T.globalFunctor ⋙ derivedComparison X B')
+    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (h : (comparisonSetUpperStar X).map (T.isoSheafMap A D) ≫
+        derivedIsoSheafComparison X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) =
+      derivedIsoSheafComparison X B A D ≫
+        S.isoSheafMap ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) ≫
+          derivedLocalIsoSheafMap (c.app A).symm (c.app D))
+    (U : X.ProEt) [IsAffine U.left]
+    (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
+    (s : ((comparisonSetUpperStar X).obj
+      (derivedLocalIsoSheaf X.smallEtaleTopology B A D)).obj.obj (op U)) :
+    derivedIsoEvaluation X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) U hU
+        (((comparisonSetUpperStar X).map (T.isoSheafMap A D)).hom.app (op U) s) =
+      (scalarEvaluationTransport T S c A U).symm ≪≫
+        (S.localFunctor U).mapIso (derivedIsoEvaluation X B A D U hU s) ≪≫
+          scalarEvaluationTransport T S c D U := by
+  apply (proEtaleDerivedUnits_bijective X B' (T.globalFunctor.obj A)
+    (T.globalFunctor.obj D) U hU).2.1
+  let p := S.isoPresheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalIsoPresheafMap (c.app A).symm (c.app D)
+  let θ := S.isoSheafMap ((derivedComparison X B).obj A)
+    ((derivedComparison X B).obj D) ≫
+      derivedLocalIsoSheafMap (c.app A).symm (c.app D)
+  have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality p
+  have ht : (presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p = θ :=
+    Functor.map_comp _ _ _
+  have hn' := congrArg (fun k ↦ k.app (op U)
+    (derivedIsoEvaluation X B A D U hU s)) hn
+  change _ = ((presheafToSheaf (ProEt.topology X) (Type (u + 1))).map p).hom.app
+    (op U) _ at hn'
+  rw [ht] at hn'
+  have hp : p.app (op U) (derivedIsoEvaluation X B A D U hU s) =
+      (scalarEvaluationTransport T S c A U).symm ≪≫
+        (S.localFunctor U).mapIso (derivedIsoEvaluation X B A D U hU s) ≪≫
+          scalarEvaluationTransport T S c D U := by
+    apply Iso.ext
+    simp only [p, NatTrans.comp_app, types_comp_apply, DerivedLocalFunctor.isoPresheafMap,
+      derivedLocalIsoPresheafMap, scalarEvaluationTransport, Iso.trans_inv, Iso.trans_hom,
+      Iso.symm_hom, Functor.mapIso_inv, Functor.mapIso_hom, Category.assoc]
+    dsimp
+    simp only [Category.assoc]
+  change (toSheafify (ProEt.topology X)
+      (derivedLocalIsoPresheaf (ProEt.topology X) B'
+        ((derivedComparison X B').obj (T.globalFunctor.obj A))
+        ((derivedComparison X B').obj (T.globalFunctor.obj D)))).app (op U)
+      (p.app (op U) (derivedIsoEvaluation X B A D U hU s)) =
+    θ.hom.app (op U)
+      (proEtaleDerivedIsoUnit X B A D U (derivedIsoEvaluation X B A D U hU s)) at hn'
+  rw [hp] at hn'
+  exact (isoEvaluation_unit X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) U hU _).trans
+    ((congrArg (fun k ↦ k.hom.app (op U) s) h).trans
+      ((congrArg (θ.hom.app (op U)) (isoEvaluation_unit X B A D U hU s).symm).trans
+        hn'.symm))
+
 /-- Derived scalar extension commutes with the evaluation maps. Tensor functors are specified as
 left adjoints to the existing derived restriction-of-scalars functors, globally and on every
 slice. The three unit equations fix the slice and comparison isomorphisms as the canonical
@@ -792,6 +1428,18 @@ theorem derivedMorphism_evaluation_scalarExtension [Finite B]
             (scalarEvaluationTransport T S c A U).symm ≪≫
               (S.localFunctor U).mapIso (derivedIsoEvaluation X B A D U hU s) ≪≫
                 scalarEvaluationTransport T S c D U)) := by
-  sorry
+  obtain ⟨T, S, c, aT, aS, aTL, aSL, hT, hS, hc, hl⟩ :=
+    derivedScalarExtension_localSystems X B B' φ
+  refine ⟨T, S, c, aT, aS, aTL, aSL, hT, hS, hc, ?_⟩
+  intro A D U _ hU
+  constructor
+  · exact homEvaluation_scalar X B T S c A D
+      (comparisonHom_scalar X B T S c A D (hl A D)) U hU
+  · apply isoEvaluation_scalar X B T S c A D
+      (comparisonIso_scalar X B T S c A D ?_) U hU
+    intro V f
+    apply Iso.ext
+    exact hl A D V f.hom
+
 
 end AlgebraicGeometry.Scheme

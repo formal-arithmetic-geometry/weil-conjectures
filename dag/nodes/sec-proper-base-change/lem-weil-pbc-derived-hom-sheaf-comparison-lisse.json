@@ -1,0 +1,201 @@
+{
+ "id": "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), passage from etale-origin finite derived local models to actual isomorphisms; Canonical Hom-sheaf comparison for a bounded finite locally constant source",
+   "via": [
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical Hom-sheaf comparison for a bounded finite locally constant source",
+ "statement": "Let X be a scheme, B a finite commutative ring, and A,D objects of the derived category of etale B-module sheaves. Assume A is bounded and all its cohomology sheaves are finite locally constant [def-constructible-locally-constant]; assume D is bounded below [def-sbc-standard-tstructure-derived-category]. Then the canonical map derivedHomSheafComparison of [def-weil-pbc-derived-morphism-sheaf-comparison] from the pro-etale inverse image of the sheafification of actual local etale derived Hom to the sheafification of actual local pro-etale derived Hom of the pulled-back objects is an isomorphism. No perfectness or finite Tor-amplitude assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JI and 08JA, bounded-free RHom and its derived sections; Tag 094G, derived local constancy; finite-source extension in the parent evaluation node, steps 1-5 and 7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-constructible-locally-constant",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The question is etale local. By finite-ring derived local constancy, locally the bounded source A is a constant bounded complex with finite coefficient modules. The finite ring is Noetherian. The cohomology criterion gives a bounded-above finite-free representative P for that coefficient complex. The bounded-below target D has a representative N zero below a. Exact constant sheaves and exact restriction preserve these representatives.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 094G, 066E (more-algebra.tex), 08JI; original evaluation node steps 1, 2 and 7"
+   }
+  },
+  {
+   "text": "For P zero above b, the bounded-free RHom model in degree n uses only indices a-n <= i <= b. Hom from the finite free P^i is a finite power of the corresponding term of N. Exact comparison inverse image preserves these finite powers, the matrix differential and cohomology. Thus pullback of RHom agrees with RHom of the pulled-back objects, compatibly with all slices.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "On each slice, the global-sections formula for RHom identifies actual derived maps with H^0 of derived sections. A K-injective representative remains K-injective on slices. Exact module sheafification of the sectionwise kernel-image quotient identifies the sheafified presheaf with H^0 of RHom. Exact inverse image identifies the two H^0 sheaves by the preceding model.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U; original evaluation node step 4"
+   }
+  },
+  {
+   "text": "The comparison just constructed is the specified canonical map, not only some isomorphism. Check after the sheafification and inverse-image adjunctions on each actual local derived map. Represent it by a chain map into a K-injective resolution. Both maps send its class to the pullback chain-map class, followed by the target resolution. Thus the canonical map is invertible locally, and hence globally; naturality gives agreement on overlaps.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "def-weil-pbc-sheafification",
+    "lem-pur-rhom-global-sections",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JI and 08JA; original evaluation node step 5 and descent in step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-sheafification",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JI and 08JA, bounded-free RHom and its derived sections; Tag 094G, derived local constancy; finite-source extension in the parent evaluation node, steps 1-5 and 7; canonical-map and coherence assembly as written in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image commutes with derived Hom sheaves from bounded above finite free complexes to bounded below sheaf complexes",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*mapping.*sheav|constant_derived.*[Hh]om",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheafified derived Hom for bounded finite locally constant complexes is the derived Hom sheaf after pro-etale inverse image",
+   "results": "8 hits: SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of sheafified derived Hom under etale to proetale inverse image for bounded finite locally constant complexes",
+   "results": "8 hits: PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.GrothendieckTopology.sheafifyLift.congr_simp, CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift, SheafOfModules.sheafificationCompPullback, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, CategoryTheory.sheafHom, PresheafOfModules.sheafifyHomEquiv",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation",
+  "date": "2026-10-20",
+  "group": "G7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedHomSheafComparisonLisse.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedHomSheafComparison_isIso_lisse",
+  "statement": "theorem derivedHomSheafComparison_isIso_lisse\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]\n    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hA : (DerivedCategory.TStructure.t\n      (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).bounded A)\n    (hAf : ∀ n : ℤ, IsFiniteLocallyConstantSheaf\n      ((DerivedCategory.homologyFunctor\n        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) n).obj A))\n    (hD : (DerivedCategory.TStructure.t\n      (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).plus D) :\n    IsIso (derivedHomSheafComparison X B A D)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "independent cc review: item derivedMorphism_* proofs vs node lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation (only proof fields changed); new sorry statements lisse Hom comparison and scalar local systems vs their nodes and Stacks 08JI/094G/06YY; importer CompatibleFiniteDerivedTrivializations compiled against delivered modules"
+ }
+}

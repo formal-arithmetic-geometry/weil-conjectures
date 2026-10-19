@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-derived-scalar-extension-local-systems",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), passage from etale-origin finite derived local models to actual isomorphisms; Coherent localized derived scalar extension and comparison",
+   "via": [
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coherent localized derived scalar extension and comparison",
+ "statement": "Let X be a scheme and phi:B -> Bprime a homomorphism of arbitrary commutative rings. There exist coherent localized derived functors T on the etale site and S on the pro-etale site [def-weil-pbc-derived-morphism-presheaves], whose global and slice functors are left adjoints to the actual derived restriction-of-scalars functors. There is a comparison isomorphism nu^* followed by S.global isomorphic to T.global followed by nu^* [def-weil-pbc-derived-morphism-sheaf-comparison]. Its mate is normalized by the comparison unit equation; the local comparisons are normalized by both slice unit equations. For every actual etale-local derived map f, comparison after T maps f to the same map as S after comparison, conjugated by the global comparison and slice isomorphisms. The precise three unit equations and actual-local-map equation are the attached Lean statement. No finite ring, boundedness or Tor-dimension assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-weil-pbc-derived-morphism-sheaf-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct global and slice extension-of-scalars functors by resolving with K-flat flat-term complexes and applying sheafified tensor extension. The derived adjunction to exact restriction of scalars follows from the ordinary tensor-restriction adjunction. This works for arbitrary commutative rings and all unbounded complexes.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-presheaves",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0G7E, derived pullback on K-flat flat-term representatives"
+   }
+  },
+  {
+   "text": "Restriction to a slice and comparison inverse image preserve K-flat flat-term complexes. The ordinary balancing maps of tensor extension therefore compute the derived comparisons. On pure tensors they send a section to the same restricted or pulled-back tensor; the reverse balancing map is the inverse. Composition of pullbacks gives all coherence identities. These maps define the restrictionIso fields and hom_naturality and iso_naturality of both DerivedLocalFunctor structures. Fix each comparison as the adjunction transpose of the restricted global unit followed by the inverse canonical restriction-of-scalars comparison. Its naturality follows from unit naturality; the inverse law of the hom equivalence gives the slice unit equation. On flat resolutions this same mate is the balancing isomorphism, so the chosen canonical mate is invertible.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-presheaves",
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 0D6D and 07A4"
+   }
+  },
+  {
+   "text": "The ordinary unit is m -> 1 tensor m. Its equality under each balancing map gives the two slice unit equations and the global comparison unit equation. Both routes on an actual localized derived morphism use its tensor-extension chain map and the same balancing comparisons. The chain-map equality descends to the final displayed Hom-presheaf equality. Functors carry isomorphisms to inverse pairs, so this suffices for both Hom and Isom consumers. To identify the derived units with the chain-level ones, compose the derived unit with restriction of the left-derived counit: the derived-adjunction factorization formula gives the localized ordinary unit followed by the exact restriction localization comparison. Mates paste compatibly for successive restrictions, which proves that the conjugated actual-map squares use precisely the displayed canonical maps.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-presheaves",
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 0D6D; unit-normalized naturality of the balancing comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived-base-change), 0G7E (pullback-K-flat), 0D6D (derived-pullback-composition), 07A4 (pullback-tensor-product); localized construction part of the parent evaluation node step 10; canonical-map and coherence assembly as written in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves commutes with localization to slice sites and with inverse image, canonically via adjunction mates",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Adjunction.derivedη_fac_app, SheafOfModules.sheafificationCompPullback, CategoryTheory.sheafComposeNatIso, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjoint.*[Rr]estrict|[Ee]xtendScalars.*[Ss]lice",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars on sheaves of modules is left adjoint to derived restriction of scalars",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, ModuleCat.extendRestrictScalarsAdj",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of modules commutes with restriction to a slice site and comparison inverse image, with adjunction units",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient extension of sheaves commutes with slice restriction and etale proetale comparison with coherent adjunction units",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derivedη_fac_app_assoc, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.derivedη, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.constantSheafAdj_counit_app",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation",
+  "date": "2026-10-20",
+  "group": "G7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedScalarExtensionLocalSystems",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedScalarExtensionLocalSystems.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedScalarExtension_localSystems",
+  "statement": "theorem derivedScalarExtension_localSystems\n    (B' : Type (u + 1)) [CommRing B'] (φ : B →+* B') :\n    ∃ T : DerivedLocalFunctor X.smallEtaleTopology B B',\n    ∃ S : DerivedLocalFunctor (ProEt.topology X) B B',\n    ∃ c : derivedComparison X B ⋙ S.globalFunctor ≅\n      T.globalFunctor ⋙ derivedComparison X B',\n      ∃ aT : T.globalFunctor ⊣ Sheaf.derivedRestrictScalars X.smallEtaleTopology φ,\n      ∃ aS : S.globalFunctor ⊣ Sheaf.derivedRestrictScalars (ProEt.topology X) φ,\n      ∃ aTL : ∀ V : X.Etale, T.localFunctor V ⊣\n        Sheaf.derivedRestrictScalars (X.smallEtaleTopology.over V) φ,\n      ∃ aSL : ∀ U : X.ProEt, S.localFunctor U ⊣\n        Sheaf.derivedRestrictScalars ((ProEt.topology X).over U) φ,\n      (∀ (A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n        (V : X.Etale),\n        (aTL V).unit.app ((derivedSliceRestriction X.smallEtaleTopology B V).obj A) ≫\n            (Sheaf.derivedRestrictScalars (X.smallEtaleTopology.over V) φ).map\n              ((T.restrictionIso V).hom.app A) ≫\n            (sliceRestrictScalarsIso X.smallEtaleTopology B φ V).hom.app\n              (T.globalFunctor.obj A) =\n          (derivedSliceRestriction X.smallEtaleTopology B V).map (aT.unit.app A)) ∧\n      (∀ (A : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B)))\n        (U : X.ProEt),\n        (aSL U).unit.app ((derivedSliceRestriction (ProEt.topology X) B U).obj A) ≫\n            (Sheaf.derivedRestrictScalars ((ProEt.topology X).over U) φ).map\n              ((S.restrictionIso U).hom.app A) ≫\n            (sliceRestrictScalarsIso (ProEt.topology X) B φ U).hom.app\n              (S.globalFunctor.obj A) =\n          (derivedSliceRestriction (ProEt.topology X) B U).map (aS.unit.app A)) ∧\n      (∀ A : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)),\n        aS.unit.app ((derivedComparison X B).obj A) ≫\n            (Sheaf.derivedRestrictScalars (ProEt.topology X) φ).map (c.hom.app A) =\n          (derivedComparison X B).map (aT.unit.app A) ≫\n            (comparisonRestrictScalarsIso X B φ).hom.app (T.globalFunctor.obj A)) ∧\n      (∀ (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n        (V : X.Etale)\n        (f : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ⟶\n          (derivedSliceRestriction X.smallEtaleTopology B V).obj D),\n        derivedComparisonLocalHom X B' (T.globalFunctor.obj A) (T.globalFunctor.obj D) V\n            ((T.homPresheafMap A D).app (op V) f) =\n          (S.homPresheafMap ((derivedComparison X B).obj A)\n              ((derivedComparison X B).obj D) ≫\n            derivedLocalHomPresheafMap (c.inv.app A) (c.hom.app D)).app\n              (op ((toProEt X).obj V)) (derivedComparisonLocalHom X B A D V f))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "independent cc review: item derivedMorphism_* proofs vs node lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation (only proof fields changed); new sorry statements lisse Hom comparison and scalar local systems vs their nodes and Stacks 08JI/094G/06YY; importer CompatibleFiniteDerivedTrivializations compiled against delivered modules"
+ }
+}

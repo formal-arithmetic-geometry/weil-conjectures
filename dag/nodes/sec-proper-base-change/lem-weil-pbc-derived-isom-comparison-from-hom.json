@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-derived-isom-comparison-from-hom",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Amplification proof (c), passage from etale-origin finite derived local models to actual isomorphisms; Four Hom comparisons imply Isom comparison",
+   "via": [
+    "lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation",
+    "lem-weil-pbc-compatible-finite-derived-trivializations",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Four Hom comparisons imply Isom comparison",
+ "statement": "Let X be a scheme, B any commutative ring, and A,D any objects of the derived category of etale B-module sheaves. Suppose each of the four canonical Hom-sheaf comparison maps of [def-weil-pbc-derived-morphism-sheaf-comparison] for (A,D), (D,A), (A,A), (D,D) is an isomorphism. Then the canonical Isom-sheaf comparison map for (A,D) is an isomorphism. The sheaves are the sheafifications of actual local derived maps and isomorphisms [def-weil-pbc-derived-morphism-presheaves]. No boundedness, finiteness or weak contractibility is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WJ (sites.tex), left exactness of set sheafification; finite-limit inverse-pair argument in parent evaluation node step 9. This new lemma is fully proved in Lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "def-weil-pbc-derived-morphism-presheaves"
+ ],
+ "proof": [
+  {
+   "text": "For any site and two derived objects A,D, form the presheaf of pairs in Hom(A,D) times Hom(D,A). The two arrows to Hom(A,A) times Hom(D,D) are (f,g) -> (fg,gf) and the identity pair. Isom(A,D) is their equalizer. The Lean construction rawPair_limit explicitly supplies its universal lift and proves uniqueness by the forward map. Restriction preserves the compositions and identities.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-presheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary inverse-pair equalizer, implemented on actual local derived maps"
+   }
+  },
+  {
+   "text": "Sheafification and geometric inverse image preserve the equalizer and the two binary products. The four canonical Hom comparison maps yield the maps between these products. Their squares commute with the relation and identity arrows: check on presheaf classes via the two adjunctions; product_generator proves that a pulled-back pair is precisely the class of the pair of pulled-back maps. Pullback preserves composition and identity.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison",
+    "def-weil-pbc-derived-morphism-presheaves",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ (sites.tex); canonical-map finite-limit assembly"
+   }
+  },
+  {
+   "text": "The canonical Isom comparison commutes with both projections: the first is the forward-map comparison; the second is the inverse-map comparison. The product maps are isomorphisms because all four Hom maps are. Between the two limit forks the induced equalizer map is an isomorphism: use the inverse product map to lift the target equalizer into the source equalizer, then uniqueness proves both inverse equations. The private fork_comparison_isIso implements this argument.",
+   "uses": [
+    "def-weil-pbc-derived-morphism-sheaf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Universal property of an equalizer and uniqueness of inverses"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-morphism-presheaves",
+  "def-weil-pbc-derived-morphism-sheaf-comparison",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WJ (sites.tex), left exactness of set sheafification; finite-limit inverse-pair argument in parent evaluation node step 9. This new lemma is fully proved in Lean.; canonical-map and coherence assembly as written in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "prodComparison|sheafify_hom_ext",
+   "results": "25 hits: Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLimit\", \"Fork\"",
+   "results": "12 hits: CategoryTheory.Limits.isLimitIdFork, CategoryTheory.Limits.mono_of_isLimit_fork, CategoryTheory.Limits.Fork.IsLimit.mono, CategoryTheory.Limits.splitMonoOfIdempotentOfIsLimitFork, CategoryTheory.Limits.Fork.IsLimit.lift, CategoryTheory.Limits.Fork.IsLimit.homIso, CategoryTheory.Limits.Fork.IsLimit.lift_ι', CategoryTheory.Limits.Fork.IsLimit.lift_ι",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite limit preserving functors take the sheaf of inverse pairs to isomorphisms if the four Hom comparison maps are isomorphisms",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.diagramCompIso, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.Presheaf.isSheaf_iff_isSheaf_comp, CategoryTheory.Presheaf.isSheafForIsSheafFor', CategoryTheory.Presieve.isSheafFor_of_preservesProduct, CategoryTheory.Presieve.isSheafFor_iff_preservesProduct, CategoryTheory.Functor.IsCoverDense.sheafIso, TopCat.Presheaf.SheafConditionEqualizerProducts.fork.isoOfIso",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of isomorphisms is the finite limit of four Hom sheaves and is preserved by a left exact functor",
+   "results": "8 hits: CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafReflectorSheafToPresheaf, CategoryTheory.sheafHom'Iso",
+   "date": "2026-10-19",
+   "verdict": "No exact match. General sheafification, finite-limit, derived-adjunction and underived tensor APIs are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMorphismWeaklyContractibleEvaluation",
+  "date": "2026-10-20",
+  "group": "G7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedIsomSheafComparisonFromHom.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derivedIsoSheafComparison_isIso_of_hom",
+  "statement": "theorem derivedIsoSheafComparison_isIso_of_hom\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]\n    (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (hAD : IsIso (derivedHomSheafComparison X B A D))\n    (hDA : IsIso (derivedHomSheafComparison X B D A))\n    (hAA : IsIso (derivedHomSheafComparison X B A A))\n    (hDD : IsIso (derivedHomSheafComparison X B D D)) :\n    IsIso (derivedIsoSheafComparison X B A D)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-54794",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261019T192743-L-1863090",
+  "kind": "interface",
+  "note": "independent cc review: item derivedMorphism_* proofs vs node lem-weil-pbc-derived-isomorphism-sheaf-wcontractible-evaluation (only proof fields changed); new sorry statements lisse Hom comparison and scalar local systems vs their nodes and Stacks 08JI/094G/06YY; importer CompatibleFiniteDerivedTrivializations compiled against delivered modules"
+ }
+}
