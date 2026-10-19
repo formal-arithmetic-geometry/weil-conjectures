@@ -23,22 +23,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Mathlib.Algebra.Category.ModuleCat.Ulift
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.Paper.SiteRestrictionInjectives
-import Sheaf.RingTheory.IndEtaleStability
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Pro-etale restriction preserves injectives
@@ -161,6 +145,59 @@ theorem proEtale_restriction_injectives (X : Scheme.{u}) (W : X.ProEt)
           Functor.rightDerivedFunctorCompUnit
             (ProEtale.localizationRestriction (ModuleCat.{u + 1} Λ) W.hom W.prop)
             (ProEtale.globalSectionsFunctor (ModuleCat.{u + 1} Λ) W.left)) := by
-  sorry
+  -- The concrete slice equivalence already fixes every underlying scheme and arrow.
+  have hs := Scheme.ProEt.sliceDense X W
+  let e := Scheme.ProEt.sliceEquiv X W
+  have he : ∃ e : Over W ≌ W.left.ProEt,
+      (∀ T : Over W, (e.functor.obj T).left = T.left.left) ∧
+      (∀ T : Over W, HEq (e.functor.obj T).hom T.hom.left) ∧
+      (∀ (T T' : Over W) (f : T ⟶ T'), HEq (e.functor.map f).left f.left.left) ∧
+      (∀ V : W.left.ProEt, (e.inverse.obj V).left.left = V.left) ∧
+      (∀ V : W.left.ProEt, HEq (e.inverse.obj V).hom.left V.hom) ∧
+      (∀ (V V' : W.left.ProEt) (f : V ⟶ V'), HEq (e.inverse.map f).left.left f.left) ∧
+      (∀ (V : W.left.ProEt) (S : Sieve V),
+        S ∈ Scheme.ProEt.topology W.left V ↔
+          S.functorPushforward e.inverse ∈ (Scheme.ProEt.topology X).over W
+            (e.inverse.obj V)) := by
+    refine ⟨e, (fun _ ↦ rfl), (fun _ ↦ HEq.rfl), (fun _ _ _ ↦ HEq.rfl),
+      (fun _ ↦ rfl), (fun _ ↦ HEq.rfl), (fun _ _ _ ↦ HEq.rfl), ?_⟩
+    intro V S
+    exact (e.inverse.functorPushforward_mem_iff
+      (Scheme.ProEt.topology W.left) ((Scheme.ProEt.topology X).over W)).symm
+  -- Work directly with module-valued sheaves, including noncommutative coefficients.
+  let A := ModuleCat.{u + 1} Λ
+  let F := ProEtale.localizationRestriction A W.hom W.prop
+  let G := ProEtale.globalSectionsFunctor A W.left
+  let J := MorphismProperty.Over.map ⊤ W.prop
+  have hJ : J.IsContinuous (Scheme.ProEt.topology W.left) (Scheme.ProEt.topology X) :=
+    Scheme.ProEt.isContinuous_overMap W.prop
+  have hFa : F.Additive := proEtaleLocalizationRestriction_additive W.hom W.prop Λ
+  let L := Functor.sheafPullbackConstruction.sheafPullback J A
+    (Scheme.ProEt.topology W.left) (Scheme.ProEt.topology X)
+  let adj : L ⊣ F := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous J A
+    (Scheme.ProEt.topology W.left) (Scheme.ProEt.topology X)
+  have hF : PreservesFiniteLimits F := by
+    dsimp [F, ProEtale.localizationRestriction]
+    infer_instance
+  have hFc : PreservesFiniteColimits F := by
+    have := (ProEtale.localizationRestrictionLowerStarAdjunction A W.hom W.prop).isLeftAdjoint
+    exact inferInstance
+  -- This Kan extension is a sum over lifts; no monomorphism assumption is needed.
+  have hlan := SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian A
+    (P := @WeaklyEtale) W.prop
+  have hL : PreservesFiniteLimits L :=
+    comp_preservesFiniteLimits (sheafToPresheaf _ A) (J.op.lan ⋙ presheafToSheaf _ A)
+  have hLa : L.Additive := adj.left_adjoint_additive
+  have hLc := adj.isLeftAdjoint
+  have hK : F.PreservesKInjectiveComplexes := adj.preservesKInjectiveComplexes
+  refine ⟨he, hF, hFc, ?_, ?_⟩
+  · intro I hI
+    exact Functor.PreservesInjectiveObjects.injective_obj (F := F) hI
+  · -- Derive the sectionwise comparison and use the unbounded composition theorem.
+    refine ⟨Functor.rightDerivedFunctorNatIso (proEtaleLocalizationSectionsIso W Λ) ≪≫
+      Functor.rightDerivedFunctorCompIso F G, ?_⟩
+    simp only [Iso.trans_hom, Functor.whiskerLeft_comp, ← Category.assoc]
+    simp [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans,
+      Functor.rightDerivedFunctorCompIso, Functor.rightDerivedUnique, F, G, A]
 
 end AlgebraicGeometry
