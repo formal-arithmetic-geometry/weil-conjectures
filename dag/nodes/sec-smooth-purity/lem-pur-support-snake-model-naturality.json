@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-support-snake-model-naturality",
+ "kind": "statement",
+ "title": "Transport of all localization squares through short exact cochain models",
+ "statement": "Let D be an abelian category. A SupportHomologyRow consists of three integer-indexed objects and arrows f^q:R1^q→R2^q, g^q:R2^q→R3^q and δ^q:R3^q→R1^(q+1). A model is a short exact sequence of cochain complexes with homology isomorphisms identifying f, g and δ with its homology maps and snake boundary. Given two such rows and specified graded comparison maps c1,c2,c3, suppose a morphism of their models induces those three maps under the isomorphisms. Then f c2=c1 f′, g c3=c2 g′ and δ c1=c3 δ′ in every integer degree, with no extra sign.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "homology.tex Tags 0117 and 08N7, cochain long exact sequence and naturality of the snake boundary; explicit transport through chosen homology model isomorphisms."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose the desired f and g equations on the left with the appropriate source model isomorphism. Substitute the model transport equations. Functoriality of homology turns the two cochain commutation equations into the required homology equations. Substitute the target model transport equations and cancel the isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the boundary square use the same transport calculation, replacing homology functoriality with the snake-boundary naturality equation for the given morphism of short exact complexes. Both boundaries are the same Mathlib ShortExact.δ convention, so this introduces no sign. Cancel the source third homology isomorphism.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "homology.tex Tags 0117 and 08N7, cochain long exact sequence and naturality of the snake boundary; explicit transport through chosen homology model isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of connecting morphism in long exact sequence of cohomology induced by morphism of short exact cochain complexes",
+   "results": "{\"t\": \"2026-10-19T01:03:20Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of connecting morphism in long exact sequence of cohomology induced by morphism of short exact cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.δ_naturality\", \"HomologicalComplex.HomologySequence.δ_naturality_assoc\", \"CategoryTheory.ShortComplex.SnakeInput.naturality_δ_assoc\", \"CategoryTheory.ShortComplex.SnakeInput.naturality_δ\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"groupCohomology.δ_apply\", \"HomologicalComplex.HomologySequence.mapComposableArrows₅\"], \"digest\": \"a5cd29c5d21ba020\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib supplies HomologySequence.δ_naturality. The new result packages the three cochain transport equations and cancels the prescribed model isomorphisms; it adds no new homological input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"δ_naturality\"",
+   "results": "{\"t\": \"2026-10-19T01:04:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"δ_naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.δ_naturality\", \"CategoryTheory.δ_naturalityᵣ\", \"CategoryTheory.δ_naturalityₗ\", \"CategoryTheory.δ_naturality_assoc\", \"CategoryTheory.δ_naturalityᵣ_assoc\", \"CategoryTheory.δ_naturalityₗ_assoc\", \"CategoryTheory.Functor.homologySequenceδ_naturality\", \"CategoryTheory.Functor.homologySequenceδ_naturality_assoc\"], \"digest\": \"88945daf124018d0\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib supplies HomologySequence.δ_naturality. The new result packages the three cochain transport equations and cancels the prescribed model isomorphisms; it adds no new homological input."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*restriction|normalized.*boundary|δ_naturality",
+   "results": "{\"t\": \"2026-10-19T01:06:40Z\", \"tool\": \"grep\", \"query\": \"injective.*restriction|normalized.*boundary|δ_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/SpectralObject.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/Data/Set/Operations.lean\", \"Mathlib/AlgebraicTopology/ExtraDegeneracy.lean\"], \"digest\": \"ec42d3d44c19960c\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib supplies HomologySequence.δ_naturality. The new result packages the three cochain transport equations and cancels the prescribed model isomorphisms; it adds no new homological input."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below right derived kernel of restriction has a localization long exact sequence whose boundary is the snake boundary on injective complexes",
+   "results": "{\"t\": \"2026-10-19T01:50:19Z\", \"tool\": \"leansearch\", \"query\": \"A bounded below right derived kernel of restriction has a localization long exact sequence whose boundary is the snake boundary on injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SnakeLemma.exact_δ_right\", \"SnakeLemma.exact_δ'_right\", \"SnakeLemma.exact_δ'_left\", \"CategoryTheory.kernelCokernelCompSequence.snakeInput\", \"CategoryTheory.ShortComplex.SnakeInput.L₁'_exact\", \"CategoryTheory.Functor.IsRightDerivedFunctor.mk\", \"CategoryTheory.kernelCokernelCompSequence.snakeInput_L₀_f\", \"CategoryTheory.ShortComplex.SnakeInput.L₀'_exact\"], \"digest\": \"372550abdfd1401b\"}",
+   "date": "2026-10-19",
+   "verdict": "Mathlib supplies HomologySequence.δ_naturality. The new result packages the three cochain transport equations and cancels the prescribed model isomorphisms; it adds no new homological input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportComparisonBoundary",
+  "date": "2026-10-19",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-local-calculation",
+   "place": "Current main-20261015 proof, final sentence: 'The pro-etale form is the comparison [thm-weil-pbc-site-comparison]'; the displayed support-boundary compatibility, realized through lem-pur-support-comparison-boundary.",
+   "via": [
+    "lem-pur-support-comparison-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportComparisonSnakeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportComparisonSnakeModel.lean",
+  "declaration": "AlgebraicGeometry.SupportComparisonSnakeModel.δ_naturality",
+  "declarations": [
+   "AlgebraicGeometry.SupportHomologyRow",
+   "AlgebraicGeometry.SupportHomologyRowModel",
+   "AlgebraicGeometry.SupportComparisonSnakeModel",
+   "AlgebraicGeometry.SupportComparisonSnakeModel.f_naturality",
+   "AlgebraicGeometry.SupportComparisonSnakeModel.g_naturality",
+   "AlgebraicGeometry.SupportComparisonSnakeModel.δ_naturality"
+  ],
+  "statement": "theorem δ_naturality (q : ℤ) : R.δ q ≫ c₁ (q + 1) = c₃ q ≫ R'.δ q",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-5d468",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T192642-L-1850879",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-5d468",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T192642-L-1850879",
+  "kind": "interface",
+  "note": "independent cc review: delivered item theorem vs live statement (byte-identical); moved defs vs live bodies (verbatim); 5 modules + 3 direct importers compiled vs delivery .lbuild; axioms (sorryAx only via upstream sorried supportComparisonUnit_existsUnique)"
+ }
+}
