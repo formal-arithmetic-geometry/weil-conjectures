@@ -28,7 +28,9 @@
   "def-kun-topological-krull-dimension",
   "def-sbc-smooth-morphisms",
   "def-pc-geometrically-irreducible",
-  "def-trf-strict-normal-crossings-boundary"
+  "def-trf-strict-normal-crossings-boundary",
+  "def-per-marked-split-nodal-tower",
+  "def-per-monomial-trait-model"
  ],
  "proof": [
   {
@@ -321,5 +323,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-365940ab1 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps), the new node lem-per-split-nodal-relative-resolution-charts, every cited statement, ILO X 2.2 proof pp.149-150, X 2.5 with its proof p.153 and VI 1.9 (1.a) pp.70-71. Statement change: the split condition now requires smooth components, and the boundary uses def-trf-strict-normal-crossings-boundary. It is named in the report with a counterexample, and it matches what ILO X 2.5 claims (H1-equivariant strict snc divisor, strict semistable pair), which is what the induction needs. Counterexample checked: y^2z=x^3+x^2z+pi z^3 has a regular total space (f = -pi mod m^2), and its self-nodal special fibre cannot be made strict snc by point blowups (Stacks 0C5R). My own d=2 conifold test, xy=uv=pi, shows the weak split hypothesis fails for this route. Steps checked: S1 complete local ring is excellent, invariant stated with base case; S2 projective base change, flat/fp via tensor, smooth via lifting, fibres keep split smooth components; S3 flat over an integral base with integral generic fibre gives integral C_i, p_i birational; S4 every hypothesis of the new node checked, and the boundary identity follows from the recursive B_i; S5 j<=r gives (prod t_k)uv=pi, j>r is horizontal, etale by base change and composition; S6 projective composition and dense-open birationality. New node: B1-B7 OK; small cases checked (E empty, uv=t, uv=t^2, uv=t1t2, G-strictness excludes swapped branches); not a duplicate of lem-trf-nodal-pair-projective-resolution (field, no group), lem-trf-log-regular-desingularization, lem-trf-normal-crossings-strictification or lem-per-log-regular-projective-log-resolution; not a clause of the parent. Batch 5: all four flagged citations accepted. def-trf-strict-normal-crossings-boundary is a general definition; lem-per-complete-local-excellence is commutative algebra (route to lem-trf-regular-ring-universally-catenary); lem-trf-space-chartwise-etale-permanence is generic etale permanence; lem-trf-h-projective-composition is Stacks 01WE. Their closures contain no trace-formula or Poincare theorem node and no assumption leaf. No SGA. MAINTAINER NOTE: the landed citer lem-per-trait-semistable-galois-alteration Step 4 gets its tower from lem-per-trait-marked-nodal-alteration (unsplit), whose split condition lacks smooth components. That node needs 'smooth and' added, as its de Jong/Vidal 4.4.3 source requires; otherwise that citer step has an unmet hypothesis. The node is outside this delivery, so I did not edit it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MarkedNodalTowerSemistableModification",
+  "declaration": "AlgebraicGeometry.exists_markedNodalTower_semistableModification",
+  "file": "lean/Sheaf/AlgebraicGeometry/MarkedNodalTowerSemistableModification.lean",
+  "statement": "theorem exists_markedNodalTower_semistableModification (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [IsStrictlyHenselianLocalRing R] [CharZero (FractionRing R)] (hchar : ∃ p : ℕ, p.Prime ∧ CharP (IsLocalRing.ResidueField R) p) (G : Type v) [Group G] [Finite G] (d : ℕ) (hd : 1 ≤ d) (N : MarkedSplitNodalTower (Spec R) {IsLocalRing.closedPoint R} G d) : ∃ (Z : Scheme.{u}) (h : Z ⟶ N.Y (Fin.last d)) (ρ : G →* Aut Z), IsIntegral Z ∧ IsRegularScheme Z ∧ IsHProjective h ∧ IsHProjective (h ≫ N.toBase (Fin.last d)) ∧ (∀ g : G, (ρ g).hom ≫ h = h ≫ (N.action (Fin.last d) g).hom) ∧ (∃ U : (N.Y (Fin.last d)).Opens, Dense (U : Set (N.Y (Fin.last d))) ∧ IsIso (h ∣_ U)) ∧ (∃ π : R, Irreducible π ∧ ∀ z : Z, ∃ (n r : ℕ) (_ : 1 ≤ r) (_ : r ≤ n) (V : Z.Etale) (c : V.left ⟶ Spec (.of (monomialTraitAlgebra R π n (fun i ↦ if i.val < r then 1 else 0)))), z ∈ Set.range V.hom ∧ Etale c ∧ c ≫ Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n (fun i ↦ if i.val < r then 1 else 0))) = V.hom ≫ h ≫ N.toBase (Fin.last d)) ∧ ∃ E : Z.IdealSheafData, IsStrictNormalCrossingsBoundary E ∧ (E.support : Set Z) = h ⁻¹' (N.boundary (Fin.last d) : Set (N.Y (Fin.last d)))",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5359a149f",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Node differs from live only in lean + 2 added def stmt_deps (new def-per-marked-split-nodal-tower, landed def-per-monomial-trait-model); 25 other nodes byte-identical; both Lean files new, no dep-module edits. Every item clause matches: DVR/complete/strictly henselian/mixed char, d>=1, finite G : Type v; output integral+regular Z, IsHProjective h and over T, equivariant ρ : G →* Aut Z, dense-open IsIso birationality, étale charts over T to monomialTraitAlgebra with exponents 1 for i<r (1<=r<=n), SNC E (radical) with support h⁻¹B_d. New MarkedSplitNodalTower: all node fields real (strict split smooth geom-irreducible reduced components + rational nodes, disjoint sections in smoothLocus, exact boundary recursion, smooth off boundary, equivariance, stabilizer fixes components/nodes/legs); no live duplicate (multipointed/semistable curve nodes are single curves; Q17 has no tower). nt_compile --json clean 2.5 s/2.2 s; lean.statement verbatim; sorry only; docstrings with source, blueprint and 6 steps. Advisory: inline nodal fields instead of IsProjectiveNodalCurve/HasNodalGeometricFibres; missing reduced-subscheme/irreducible-components stmt_deps on the def node and trait/strictly-henselian on the item (base-era); unused proof-dep imports; stage-1 note on lem-per-trait-marked-nodal-alteration still stands."
  }
 }

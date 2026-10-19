@@ -220,5 +220,24 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-a07b702f9 (reviewer sub-agent of L); spot-checked: I read the whole item. It has 7 steps and no new nodes; the statement is unchanged from base, and dropping the unused stmt_dep def-pc-field-extension is correct. I checked each step by hand. Step 1: if {0} is open (ambient value group bounded), the topology is discrete and V={c} works; otherwise small nonzero t exist for every bound, and R is local and henselian as assumed. Steps 2-3: the bounds on A_j, θ_j and β are correct, using the ultrametric inequality on finite sums; zero multipliers and empty sums are harmless. Step 4: h_0∈𝔪, h_1−1∈𝔪, h_j∈𝔪 for j≥2, and the leading coefficient t^{n−1}/e is nonzero, so h̄=X. Step 5: Q=h(1)^{-1}Y^n h(1+1/Y) is monic in R[Y] with Q̄=Y^{n−1}(Y+1) and Q̄'(−1)=(−1)^{n−1}≠0. Step 6: this applies the monic statement (i)⇒(ii) of lem-weil-pbc-henselian-local-root-lifting with every hypothesis met; that statement is monic-only while Stacks 04GG(2) is for arbitrary f, which is why the reciprocal trick is needed. Step 7: b=a+tz lies in U because v(b−a)>δ>γ, and g'(b)=e·h'(z) with h'(z)≡1 mod 𝔪, so b is a simple root. Edge cases checked: n=1, a=0, z=0, g=f, residue characteristic 2, higher rank and non-cofinal ambient group. The citer lem-per-dense-henselian-field-etale-comparison Step 3 uses exactly this statement. Sources: ILO XX 4.4 p.374 only cites Bourbaki AC VI §8 ex. 12 and 14a, so proof_origin agent and the WANTED for Bourbaki are right; I read Stacks lemma-characterize-henselian. No duplicate in the DAG: lem-per-henselian-krasner-neighbourhood is a different statement. No SGA anywhere. Accepted tool use: the generic local root-lifting criterion lem-weil-pbc-henselian-local-root-lifting (unit sk-thm-p1) as a black box; the unit route is unchanged. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.HenselianSimpleRootStability",
+  "declaration": "Valued.exists_open_coefficients_simple_root",
+  "file": "lean/Sheaf/FieldTheory/HenselianSimpleRootStability.lean",
+  "statement": "theorem exists_open_coefficients_simple_root (F : Type u) [Field F] (Γ₀ : Type v) [LinearOrderedCommGroupWithZero Γ₀] [vF : Valued F Γ₀] [vF.v.IsNontrivial] [HenselianLocalRing vF.v.integer] (n : ℕ) (hn : 1 ≤ n) (c : Fin n → F) (a : F) (ha : (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (c i) * Polynomial.X ^ (i : ℕ)).eval a = 0) (hda : (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (c i) * Polynomial.X ^ (i : ℕ)).derivative.eval a ≠ 0) (U : Set F) (hU : IsOpen U) (haU : a ∈ U) : ∃ V : Set (Fin n → F), IsOpen V ∧ c ∈ V ∧ ∀ d ∈ V, ∃ b ∈ U, (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (d i) * Polynomial.X ^ (i : ℕ)).eval b = 0 ∧ (Polynomial.X ^ n + ∑ i : Fin n, Polynomial.C (d i) * Polynomial.X ^ (i : ℕ)).derivative.eval b ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5cf603a08"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cf603a08",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Valued F Γ₀ (independent universes), v.IsNontrivial, HenselianLocalRing v.integer, explicit monic Xⁿ+Σ C(c i)Xⁱ with 1≤n, simple root via derivative, ∀ open U∋a ∃ open V∋c in the Pi topology, ∀ d∈V ∃ b∈U simple root. No stronger hypotheses (no completeness or rank). Mathlib's intrinsic ValueGroup₀ topology drops only the node's trivial discrete case, accepted. Statement verbatim, sorry only, docstrings carry source, blueprint and 7 steps, lines ≤95, no definitions, no duplicate. Node differs from live only in lean. Proof checked, true. FIX F1: proof-dep import Sheaf.RingTheory.HenselianLocalRootLifting is a retired re-export shim in live; replaced by the recorded WeilConjectures.RingTheory.HenselianLocalRootLifting in fixes/HenselianSimpleRootStability.lean (only line 11 changed). nt_compile --json: delivered clean 2.0 s, broken control errors, fixed file clean 2.0 s, both imports together clean."
  }
 }
