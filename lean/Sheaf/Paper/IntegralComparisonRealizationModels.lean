@@ -14,6 +14,9 @@ public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.CategoryTheory.DiagramSiteTopology
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Realization of integral pullback comparisons
@@ -42,12 +45,460 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open scoped ChangeOfRings
 
+namespace IntegralComparisonModelProof
+
+universe j c hj hc r w
+
+private def constantRing (J : Type j) (C : Type c) [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r}) :
+    Sheaf (verticalDiagramSiteTopology J C K) RingCat.{r} where
+  obj := (CategoryTheory.Prod.snd J C).op ⋙ O.obj
+  property := by
+    apply (verticalDiagramSite_isSheaf_iff J C K _).2
+    intro j
+    exact O.property
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Restriction of a product module to a vertical component. -/
+private noncomputable def diagramSiteModuleComponent
+    (J : Type j) (C : Type c) [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (F : ringedSiteModules.{r} (constantRing J C K O)) (j : Jᵒᵖ) :
+    ringedSiteModules.{r} O where
+  val := PresheafOfModules.pushforward₀Obj (Prod.sectR j.unop C)
+    (constantRing J C K O).obj F.val
+  isSheaf := (verticalDiagramSite_isSheaf_iff J C K F.val.presheaf).1 F.isSheaf j.unop
+
+set_option backward.isDefEq.respectTransparency false in
+set_option linter.unnecessarySimpa false in
+/-- Horizontal structure map on the component modules. -/
+private noncomputable def diagramSiteModuleArrow
+    {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (F : ringedSiteModules.{r} (constantRing J C K O))
+    {j k : Jᵒᵖ} (a : j ⟶ k) :
+    diagramSiteModuleComponent J C K O F j ⟶ diagramSiteModuleComponent J C K O F k where
+  val :=
+    { app U := ModuleCat.ofHom
+        { toFun := F.val.map (Prod.mkHom a.unop (𝟙 U.unop)).op
+          map_add' := map_add _
+          map_smul' := by
+            intro r x
+            have H := F.val.map_smul (Prod.mkHom a.unop (𝟙 U.unop)).op r x
+            simpa [constantRing, CategoryTheory.Prod.snd] using H }
+      naturality := by
+        intro U V f
+        ext x
+        simp only [ModuleCat.hom_comp, LinearMap.coe_comp, Function.comp_apply]
+        change F.val.map (Prod.mkHom a.unop (𝟙 V.unop)).op
+          (F.val.map ((Prod.sectR j.unop C).op.map f) x) =
+          F.val.map ((Prod.sectR k.unop C).op.map f)
+            (F.val.map (Prod.mkHom a.unop (𝟙 U.unop)).op x)
+        have H : ((Prod.sectR j.unop C).op.map f) ≫
+            (Prod.mkHom a.unop (𝟙 V.unop)).op =
+            (Prod.mkHom a.unop (𝟙 U.unop)).op ≫ (Prod.sectR k.unop C).op.map f := by
+          apply Quiver.Hom.unop_inj
+          ext <;> simp
+        have HH := F.val.presheaf.congr_map H
+        rw [Functor.map_comp, Functor.map_comp] at HH
+        exact ConcreteCategory.congr_hom HH x }
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The functor restricting module sheaves to component modules. -/
+private noncomputable def diagramSiteModuleCurry
+    (J : Type j) (C : Type c) [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r}) :
+    ringedSiteModules.{r} (constantRing J C K O) ⥤ Jᵒᵖ ⥤ ringedSiteModules.{r} O where
+  obj F :=
+    { obj j := diagramSiteModuleComponent J C K O F j
+      map a := diagramSiteModuleArrow K O F a
+      map_id j := by
+        ext U x
+        change F.val.map (𝟙 (op (j.unop, U.unop))) x = x
+        simp
+      map_comp {j k l} a b := by
+        ext U x
+        change F.val.map (Prod.mkHom (a ≫ b).unop (𝟙 U.unop)).op x =
+          F.val.map (Prod.mkHom b.unop (𝟙 U.unop)).op
+            (F.val.map (Prod.mkHom a.unop (𝟙 U.unop)).op x)
+        rw [← F.val.map_comp_apply]
+        apply F.val.congr_map_apply
+        apply Quiver.Hom.unop_inj
+        ext <;> simp }
+  map f :=
+    { app j :=
+        { val :=
+            { app U := f.val.app ((Prod.sectR j.unop C).op.obj U)
+              naturality a := f.val.naturality ((Prod.sectR j.unop C).op.map a) } }
+      naturality := by
+        intro j k a
+        ext U x
+        exact (PresheafOfModules.naturality_apply f.val (Prod.mkHom a.unop (𝟙 U.unop)).op x) }
+  map_id F := by ext j U x; rfl
+  map_comp f g := by ext j U x; rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Assembly of presheaf modules along the two product coordinates. -/
+private noncomputable def diagramSiteModuleUncurryVal
+    {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (F : Jᵒᵖ ⥤ ringedSiteModules.{r} O) :
+    PresheafOfModules.{r} (constantRing J C K O).obj where
+  obj X := (F.obj (op X.unop.1)).val.obj (op X.unop.2)
+  map {X Y} f := (F.map f.unop.1.op).val.app (op X.unop.2) ≫
+    (F.obj (op Y.unop.1)).val.map f.unop.2.op
+  map_id X := by
+    ext x
+    simp [constantRing, CategoryTheory.Prod.snd]
+  map_comp {X Y Z} f g := by
+    ext x
+    change (F.obj (op Z.unop.1)).val.map (f.unop.2.op ≫ g.unop.2.op)
+      (((F.map (f.unop.1.op ≫ g.unop.1.op)).val.app (op X.unop.2)) x) =
+      (F.obj (op Z.unop.1)).val.map g.unop.2.op
+        (((F.map g.unop.1.op).val.app (op Y.unop.2))
+          ((F.obj (op Y.unop.1)).val.map f.unop.2.op
+            (((F.map f.unop.1.op).val.app (op X.unop.2)) x)))
+    rw [F.map_comp]
+    change (F.obj (op Z.unop.1)).val.map (f.unop.2.op ≫ g.unop.2.op)
+      (((F.map g.unop.1.op).val.app (op X.unop.2))
+        (((F.map f.unop.1.op).val.app (op X.unop.2)) x)) = _
+    rw [PresheafOfModules.naturality_apply (F.map g.unop.1.op).val]
+    exact (F.obj (op Z.unop.1)).val.map_comp_apply _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Assembly of a diagram of module sheaves to a sheaf on the product site. -/
+private noncomputable def diagramSiteModuleUncurryObj
+    {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (F : Jᵒᵖ ⥤ ringedSiteModules.{r} O) :
+    ringedSiteModules.{r} (constantRing J C K O) where
+  val := diagramSiteModuleUncurryVal K O F
+  isSheaf := by
+    apply (verticalDiagramSite_isSheaf_iff J C K _).2
+    intro j
+    let e : (Prod.sectR j C).op ⋙ (diagramSiteModuleUncurryVal K O F).presheaf ≅
+        (F.obj (op j)).val.presheaf :=
+      NatIso.ofComponents (fun U ↦ Iso.refl _) (by
+        intro U V f
+        ext x
+        change (F.obj (op j)).val.map f
+          (((F.map (𝟙 (op j))).val.app U) x) = (F.obj (op j)).val.map f x
+        simp)
+    exact (Presheaf.isSheaf_of_iso_iff e).2 (F.obj (op j)).isSheaf
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Assembly is functorial on module morphisms. -/
+private noncomputable def diagramSiteModuleUncurry
+    (J : Type j) (C : Type c) [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r}) :
+    (Jᵒᵖ ⥤ ringedSiteModules.{r} O) ⥤ ringedSiteModules.{r} (constantRing J C K O) where
+  obj F := diagramSiteModuleUncurryObj K O F
+  map {F G} f :=
+    { val :=
+        { app X := (f.app (op X.unop.1)).val.app (op X.unop.2)
+          naturality := by
+            intro X Y a
+            ext x
+            change ((f.app (op Y.unop.1)).val.app (op Y.unop.2))
+              (((F.obj (op Y.unop.1)).val.map a.unop.2.op)
+                (((F.map a.unop.1.op).val.app (op X.unop.2)) x)) =
+              ((G.obj (op Y.unop.1)).val.map a.unop.2.op)
+                (((G.map a.unop.1.op).val.app (op X.unop.2))
+                  (((f.app (op X.unop.1)).val.app (op X.unop.2)) x))
+            rw [PresheafOfModules.naturality_apply (f.app (op Y.unop.1)).val]
+            have H := congrArg (fun t ↦ t.val.app (op X.unop.2))
+              (f.naturality a.unop.1.op)
+            exact congrArg ((G.obj (op Y.unop.1)).val.map a.unop.2.op)
+              (ConcreteCategory.congr_hom H x) } }
+  map_id F := by ext X x; rfl
+  map_comp f g := by ext X x; rfl
+
+/-- A module-sheaf isomorphism from an isomorphism of its module presheaves. -/
+private def diagramSiteModuleIso {C : Type c} [Category.{hc} C] {K : GrothendieckTopology C}
+    {O : Sheaf K RingCat.{r}} {F G : ringedSiteModules.{r} O}
+    (e : F.val ≅ G.val) : F ≅ G where
+  hom := ⟨e.hom⟩
+  inv := ⟨e.inv⟩
+  hom_inv_id := SheafOfModules.hom_ext e.hom_inv_id
+  inv_hom_id := SheafOfModules.hom_ext e.inv_hom_id
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The explicit equivalence for modules on the vertical product site. -/
+private noncomputable def diagramSiteModuleEquivalence
+    (J : Type j) (C : Type c) [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r}) :
+    ringedSiteModules.{r} (constantRing J C K O) ≌ (Jᵒᵖ ⥤ ringedSiteModules.{r} O) where
+  functor := diagramSiteModuleCurry J C K O
+  inverse := diagramSiteModuleUncurry J C K O
+  unitIso := NatIso.ofComponents (fun F ↦ diagramSiteModuleIso
+    (PresheafOfModules.isoMk (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      ext x
+      change F.val.map f x = F.val.map (Prod.mkHom (𝟙 Y.unop.1) f.unop.2).op
+        (F.val.map (Prod.mkHom f.unop.1 (𝟙 X.unop.2)).op x)
+      have H : f = (Prod.mkHom f.unop.1 (𝟙 X.unop.2)).op ≫
+          (Prod.mkHom (𝟙 Y.unop.1) f.unop.2).op := by
+        apply Quiver.Hom.unop_inj
+        ext <;> simp
+      exact (F.val.congr_map_apply H x).trans (F.val.map_comp_apply _ _ x)))) (by
+    intro F G f
+    ext X x
+    rfl)
+  counitIso := NatIso.ofComponents (fun F ↦ NatIso.ofComponents
+    (fun j ↦ diagramSiteModuleIso (PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by
+      intro U V f
+      ext x
+      change (F.obj j).val.map f (((F.map (𝟙 j)).val.app U) x) =
+        (F.obj j).val.map f x
+      simp))) (by
+      intro j k a
+      ext U x
+      change (F.obj k).val.map (𝟙 U) (((F.map a).val.app U) x) =
+        ((F.map a).val.app U) x
+      simp)) (by
+    intro F G f
+    ext j U x
+    rfl)
+  functor_unitIso_comp F := by
+    ext j U x
+    rfl
+
+
+private def diagramSiteRingSlice
+    {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (R : Sheaf (verticalDiagramSiteTopology J C K) RingCat.{r})
+    (φ : constantRing J C K O ⟶ R) (j : J)
+    [(Prod.sectR j C).IsContinuous K (verticalDiagramSiteTopology J C K)] :
+    O ⟶ ((Prod.sectR j C).sheafPushforwardContinuous RingCat K
+      (verticalDiagramSiteTopology J C K)).obj R where
+  hom :=
+    { app U := φ.hom.app (op (j, U.unop))
+      naturality {_U _V} f := φ.hom.naturality ((Prod.sectR j C).op.map f) }
+
+private theorem moduleSheaf_ext
+    {C : Type c} [Category.{hc} C] {K : GrothendieckTopology C}
+    {O : Sheaf K RingCat.{r}} (M N : SheafOfModules.{w} O)
+    (hobj : ∀ U : Cᵒᵖ, M.val.obj U = N.val.obj U)
+    (hmap : ∀ (U V : Cᵒᵖ) (f : U ⟶ V), HEq (M.val.map f) (N.val.map f)) : M = N := by
+  cases M with | mk M hm =>
+    cases N with | mk N hn =>
+      congr 1
+      cases M with | mk mo mm mi mc =>
+        cases N with | mk no nm ni nc =>
+          have ho : mo = no := funext hobj
+          cases ho
+          have hh : @mm = @nm := by
+            funext U V f
+            exact eq_of_heq (hmap U V f)
+          cases hh
+          rfl
+
+
+private theorem diagramSiteModuleCurry_restrict_obj
+    {J : Type j} {C : Type c} [Category.{hj} J] [Category.{hc} C]
+    (K : GrothendieckTopology C) (O : Sheaf K RingCat.{r})
+    (R : Sheaf (verticalDiagramSiteTopology J C K) RingCat.{r})
+    (φ : constantRing J C K O ⟶ R) (j : J)
+    [(Prod.sectR j C).IsContinuous K (verticalDiagramSiteTopology J C K)]
+    (M : SheafOfModules.{r} R) :
+    ((diagramSiteModuleCurry J C K O).obj
+      ((SheafOfModules.restrictScalars φ).obj M)).obj (op j) =
+      (SheafOfModules.pushforward (diagramSiteRingSlice K O R φ j)).obj M := by
+  apply moduleSheaf_ext
+  · intro U
+    rfl
+  · intro U V f
+    rfl
+
+private theorem pushforward_restrict_obj
+    {C : Type c} [Category.{hc} C] {D : Type j} [Category.{hj} D]
+    {K : GrothendieckTopology C} {L : GrothendieckTopology D}
+    {F : C ⥤ D} [F.IsContinuous K L]
+    {A B : Sheaf K RingCat.{r}} {R : Sheaf L RingCat.{r}}
+    (p : A ⟶ B) (φ : B ⟶ (F.sheafPushforwardContinuous RingCat K L).obj R)
+    (M : SheafOfModules.{r} R) :
+    (SheafOfModules.pushforward (p ≫ φ)).obj M =
+      (SheafOfModules.restrictScalars p).obj ((SheafOfModules.pushforward φ).obj M) := by
+  rfl
+
+
+private theorem restriction_exact
+    {C : Type c} [Category.{hc} C] {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify J AddCommGrpCat.{r}]
+    {O S : Sheaf J CommRingCat.{r}} (φ : O ⟶ S) :
+    PreservesFiniteLimits (SheafOfModules.restrictScalars.{r}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)) ∧
+    PreservesFiniteColimits (SheafOfModules.restrictScalars.{r}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)) := by
+  let R := SheafOfModules.restrictScalars.{r}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  let A := SheafOfModules.derivedChangeRingIndependentCoefficients J O
+  let B := SheafOfModules.derivedChangeRingIndependentCoefficients J S
+  have : PreservesFiniteLimits (R ⋙ SheafOfModules.toSheaf A) :=
+    inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf B))
+  have : PreservesFiniteColimits (R ⋙ SheafOfModules.toSheaf A) :=
+    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf B))
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf A),
+    preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf A)⟩
+
+private theorem derivedRestriction_isRightAdjoint
+    {C : Type c} [Category.{hc} C] [EssentiallySmall.{r} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify J AddCommGrpCat.{r}]
+    {O S : Sheaf J CommRingCat.{r}} (φ : O ⟶ S)
+    [HasDerivedCategory.{w} (SheafOfModules.{r}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients J O))]
+    [HasDerivedCategory.{w} (SheafOfModules.{r}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients J S))] :
+    let := (restriction_exact φ).1
+    let := (restriction_exact φ).2
+    ((SheafOfModules.restrictScalars.{r}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapDerivedCategory).IsRightAdjoint :=
+    by
+  let R := SheafOfModules.restrictScalars.{r}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  let := (restriction_exact φ).1
+  let := (restriction_exact φ).2
+  obtain ⟨_, _, h⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+  obtain ⟨T, ho, hm, hT, _, _, LF, ε, hLF, _⟩ :=
+    SheafOfModules.derivedChangeOfRingsIndependentCoefficients φ
+  let := hT
+  obtain ⟨_, _, hd⟩ := h T ho hm
+  obtain ⟨d, _⟩ := hd LF ε hLF
+  exact d.isRightAdjoint
+
+end IntegralComparisonModelProof
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
 variable (X : Scheme.{t})
+
+private def integralComparisonConstantSequenceRing :
+    Sheaf (coefficientSequenceTopology (ProEt.topology X))
+      CommRingCat.{max u (t + 1)} where
+  obj := (CategoryTheory.Prod.snd ℕ X.ProEt).op ⋙
+    (completedIntegralCommRingSheafUnrestricted l E X).obj
+  property := by
+    apply (verticalDiagramSite_isSheaf_iff ℕ X.ProEt (ProEt.topology X) _).2
+    intro n
+    exact (completedIntegralCommRingSheafUnrestricted l E X).property
+
+private def integralComparisonProjectionDiagram :
+    (Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E X) ⟶
+      coefficientSequenceCommRingSystem l E X :=
+  NatTrans.ofOpSequence (completedIntegralCommRingProjectionUnrestricted l E X) (by
+    intro n
+    simp only [Functor.const_obj_map, coefficientSequenceCommRingSystem,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)}).map_injective
+    apply RingCat.hom_ext
+    apply RingHom.ext
+    intro x
+    have hw := congrArg (fun v ↦ (v.hom.app U).hom x)
+      (limit.w (integralCoefficientSheafSystem l E X)
+        (homOfLE (Nat.le_succ n)).op)
+    simp only [integralCoefficientSheafSystem,
+      Functor.ofOpSequence_map_homOfLE_succ] at hw
+    convert hw.symm using 1 <;> rfl)
+
+
+private def integralComparisonSequenceProjection :
+    integralComparisonConstantSequenceRing l E X ⟶ coefficientSequenceCommRingSheaf l E X where
+  hom := Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := X.ProEt)).functor
+    (Functor.uncurry.map (Functor.whiskerRight (integralComparisonProjectionDiagram l E X)
+      (sheafToPresheaf (ProEt.topology X) CommRingCat.{max u (t + 1)})))
+
+private def integralComparisonCoefficientCurry :
+    SheafOfModules.{max u (t + 1)}
+      ((sheafCompose (coefficientSequenceTopology (ProEt.topology X))
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+        (integralComparisonConstantSequenceRing l E X)) ≌
+      (ℕᵒᵖ ⥤ scalarReductionSource l E X) :=
+  IntegralComparisonModelProof.diagramSiteModuleEquivalence ℕ X.ProEt (ProEt.topology X)
+    (SheafOfModules.derivedChangeRingIndependentCoefficients (ProEt.topology X)
+      (completedIntegralCommRingSheafUnrestricted l E X))
+
+private def integralComparisonRestrictionToConstant :=
+  SheafOfModules.restrictScalars.{max u (t + 1)}
+    ((sheafCompose (coefficientSequenceTopology (ProEt.topology X))
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+      (integralComparisonSequenceProjection l E X))
+
+private def integralComparisonRestrictionCurried :=
+  integralComparisonRestrictionToConstant l E X ⋙
+    (integralComparisonCoefficientCurry l E X).functor
+
+private theorem integralComparisonVerticalSliceContinuous (n : ℕ) :
+    (Prod.sectR n X.ProEt).IsContinuous (ProEt.topology X)
+      (verticalDiagramSiteTopology ℕ X.ProEt (ProEt.topology X)) :=
+  coefficientSequenceEvaluationContinuous X n
+
+attribute [local instance] integralComparisonVerticalSliceContinuous
+
+private theorem integralComparisonSliceProjection_eq (n : ℕ) :
+    IntegralComparisonModelProof.diagramSiteRingSlice (ProEt.topology X)
+      (SheafOfModules.derivedChangeRingIndependentCoefficients (ProEt.topology X)
+        (completedIntegralCommRingSheafUnrestricted l E X)) _
+      ((sheafCompose (coefficientSequenceTopology (ProEt.topology X))
+        (forget₂ CommRingCat RingCat)).map (integralComparisonSequenceProjection l E X)) n =
+      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).map
+        (completedIntegralCommRingProjectionUnrestricted l E X n)) ≫
+      eqToHom (coefficientSequenceEvaluationRing_eq l E X n).symm := by
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  have he : (eqToHom (coefficientSequenceEvaluationRing_eq l E X n).symm).hom.app U =
+      𝟙 _ := by
+    rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+    rfl
+  change _ = _ ≫ (eqToHom (coefficientSequenceEvaluationRing_eq l E X n).symm).hom.app U
+  rw [he, Category.comp_id]
+  rfl
+
+private theorem integralComparisonRestrictionCurried_obj
+    (M : coefficientSequenceModules l E X) (n : ℕ) :
+    ((integralComparisonRestrictionCurried l E X).obj M).obj (op n) =
+      (scalarReductionRestriction l E X n).obj
+        ((coefficientSequenceEvaluation l E X n).obj M) := by
+  let O := SheafOfModules.derivedChangeRingIndependentCoefficients (ProEt.topology X)
+    (completedIntegralCommRingSheafUnrestricted l E X)
+  let R := (sheafCompose (coefficientSequenceTopology (ProEt.topology X))
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
+      (coefficientSequenceCommRingSheaf l E X)
+  let φ := (sheafCompose (coefficientSequenceTopology (ProEt.topology X))
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+      (integralComparisonSequenceProjection l E X)
+  have h := IntegralComparisonModelProof.diagramSiteModuleCurry_restrict_obj
+    (ProEt.topology X) O R φ n M
+  refine h.trans ?_
+  change (SheafOfModules.pushforward
+    (IntegralComparisonModelProof.diagramSiteRingSlice (ProEt.topology X) O R φ n)).obj M = _
+  exact (congrArg (fun p ↦ (SheafOfModules.pushforward p).obj M)
+    (integralComparisonSliceProjection_eq l E X n)).trans
+      (IntegralComparisonModelProof.pushforward_restrict_obj _ _ M)
+
+
+
+private theorem integralComparisonRestrictionCurried_eq :
+    integralComparisonRestrictionCurried l E X = coefficientSequenceRestriction l E X := by
+  apply (coefficientSequenceRestriction_exists l E X).unique ?_
+    ((coefficientSequenceRestriction_exists l E X).exists.choose_spec)
+  refine ⟨integralComparisonRestrictionCurried_obj l E X, ?_, ?_⟩
+  · intro M m n h V
+    rfl
+  · intro M N f n V
+    rfl
 
 /-- The exact constant tower functor, on ordinary derived categories.
 Source: Stacks 0941
@@ -177,7 +628,32 @@ restriction is exact. The right functor is precisely the recorded derived
 coefficientSequenceRestriction, with its unchanged section maps. -/
 theorem integralComparisonSystemRestriction_isRightAdjoint :
     (coefficientSequenceDerivedRestriction l E X).IsRightAdjoint := by
-  sorry
+  let J := coefficientSequenceTopology (ProEt.topology X)
+  let O := integralComparisonConstantSequenceRing l E X
+  let S := coefficientSequenceCommRingSheaf l E X
+  let φ := integralComparisonSequenceProjection l E X
+  let R := integralComparisonRestrictionToConstant l E X
+  let e := integralComparisonCoefficientCurry l E X
+  let : EssentiallySmall.{max u (t + 1)} (ℕ × X.ProEt) := essentiallySmallSelf _
+  let : HasDerivedCategory (SheafOfModules.{max u (t + 1)}
+      ((sheafCompose J
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj O)) :=
+    HasDerivedCategory.standard _
+  let : R.Additive := inferInstanceAs (SheafOfModules.restrictScalars _).Additive
+  let : PreservesFiniteLimits R :=
+    (IntegralComparisonModelProof.restriction_exact φ).1
+  let : PreservesFiniteColimits R :=
+    (IntegralComparisonModelProof.restriction_exact φ).2
+  let : R.mapDerivedCategory.IsRightAdjoint :=
+    IntegralComparisonModelProof.derivedRestriction_isRightAdjoint φ
+  let : e.functor.Additive := Functor.additive_of_preserves_binary_products _
+  let : e.functor.mapDerivedCategory.IsRightAdjoint := inferInstance
+  let : (R.mapDerivedCategory ⋙ e.functor.mapDerivedCategory).IsRightAdjoint := inferInstance
+  let q : R ⋙ e.functor ≅ coefficientSequenceRestriction l E X :=
+    eqToIso (integralComparisonRestrictionCurried_eq l E X)
+  exact Functor.isRightAdjoint_of_iso
+    ((Functor.mapDerivedCategoryCompIso R e.functor).symm ≪≫
+      Functor.mapDerivedCategoryNatIso q)
 
 /-- The actual whole-system extension/restriction adjunction.
 Source: Stacks 06YY (blueprint: def-trf-integral-comparison-realization-models). -/
