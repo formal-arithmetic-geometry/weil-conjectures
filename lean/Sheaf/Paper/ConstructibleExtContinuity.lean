@@ -13,14 +13,12 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Category.Grp.Colimits
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.AlgebraicGeometry.ConstructibleExtContinuityStratum
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Paper.ConstructibleHomContinuityDevissage
+import Sheaf.AlgebraicGeometry.ConstructibleExtContinuityStratum
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-!
 # Continuity of Ext from constructible complexes
@@ -102,6 +100,71 @@ def IsExtContinuityGenerated (X : Scheme.{u}) (N : Set ℤ)
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) : Prop :=
   ∃ n : ℕ, (extContinuityShiftedStrata Λ X N).extensionProductIter n C
 
+private theorem continuity_of_locus
+    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    {I : Type w} [SmallCategory I]
+    (C : DerivedCategory A) (K : I ⥤ CochainComplex A ℤ) [HasColimit K]
+    (c : Cocone K) (hc : IsColimit c)
+    (hC : complexHomContinuityLocus A K C) (q : ℤ) :
+    IsIso (extContinuityComparison C K c q) := by
+  have hp : IsIso (colimit.post K (extContinuityTestFunctor C q)) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr (hC q)
+  have hd : IsIso (colimit.desc K c) := by
+    change IsIso ((colimit.isColimit K).coconePointUniqueUpToIso hc).hom
+    infer_instance
+  unfold extContinuityComparison
+  rw [← colimit.post_desc]
+  infer_instance
+
+private theorem continuity_admissible
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj R)]
+    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+      R = Profinite.padicAlgClCondensedRing ℓ ∨ R = Profinite.padicIntegersCondensedRing ℓ E) :
+    CondensedRing.IsAdmissibleCoefficient (coefficientHeartRingObj R) := by
+  refine ⟨ℓ, inferInstance, ?_⟩
+  rcases hR with rfl | rfl | rfl
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+  · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
+
+private theorem continuity_stratum_locus
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj R)]
+    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨
+      R = Profinite.padicAlgClCondensedRing ℓ ∨ R = Profinite.padicIntegersCondensedRing ℓ E)
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    (K : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)) ℤ)
+    (b : ℤ) (hb : ∀ (i : I) (r : ℤ), r < b → IsZero ((K.obj i).X r))
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X))
+    (hM : IsExtContinuityStratum (coefficientHeartRingObj R) X M) :
+    complexHomContinuityLocus _ K ((DerivedCategory.singleFunctor _ 0).obj M) := by
+  obtain ⟨S, Z, j, i, hj, hi, L, hL, ⟨e⟩⟩ := hM
+  have : IsNoetherian X := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace Z := i.isClosedEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace S := j.isOpenEmbedding.isInducing.noetherianSpace
+  let V : X.Opens := ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hij : Set.range i.base = (Set.range V.ι.base)ᶜ := by simp [V]
+  have hgen : complexHomContinuityLocus _ K
+      ((DerivedCategory.singleFunctor _ 0).obj
+        ((CondensedRing.lowerStar (coefficientHeartRingObj R) i).obj
+          ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj R) j).obj L))) := by
+    intro q
+    have hstr := CondensedRing.constructibleExtContinuityStratum (coefficientHeartRingObj R)
+      i V.ι j hij (continuity_admissible ℓ E R hR) L hL K b hb q
+    change Function.Bijective (colimit.post K
+      (extContinuityTestFunctor ((DerivedCategory.singleFunctor _ 0).obj
+        ((CondensedRing.lowerStar (coefficientHeartRingObj R) i).obj
+          ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj R) j).obj L))) q))
+    exact (ConcreteCategory.isIso_iff_bijective _).mp hstr
+  exact (constructibleHomContinuity_devissage (coefficientHeartRingObj R) X K).2.1
+    _ _ ((DerivedCategory.singleFunctor _ 0).mapIso e).symm hgen
+
 /-- Continuity for finite extensions and shifts of locally closed lisse generators.
 Source: blueprint sk-lem-constructible-ext-continuity, displayed comparison
 (blueprint: sk-lem-constructible-ext-continuity).
@@ -137,7 +200,22 @@ theorem constructible_ext_continuity
     (b : ℤ) (hb : ∀ (i : I) (r : ℤ), r < b → IsZero ((K.obj i).X r))
     (c : Cocone K) (hc : IsColimit c) (q : ℤ) :
     IsIso (extContinuityComparison C K c q) := by
-  sorry
+  let G : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (coefficientHeartRingObj R) X))) :=
+    fun D ↦ ∃ M, IsExtContinuityStratum (coefficientHeartRingObj R) X M ∧
+      D = (DerivedCategory.singleFunctor _ 0).obj M
+  have hG : G ≤ complexHomContinuityLocus _ K := by
+    rintro D ⟨M, hM, rfl⟩
+    exact continuity_stratum_locus ℓ E R hR X K b hb M hM
+  have hshift : extContinuityShiftedStrata (coefficientHeartRingObj R) X Set.univ ≤
+      G.shiftClosure ℤ := by
+    rintro D ⟨M, hM, k, _, ⟨e⟩⟩
+    exact ⟨_, k, e, M, hM, rfl⟩
+  obtain ⟨n, hn⟩ := hC
+  have hD := (constructibleHomContinuity_devissage (coefficientHeartRingObj R) X K).2.2.2
+    G hG n C (ObjectProperty.monotone_extensionProductIter hshift n C hn)
+  exact continuity_of_locus C K c hc hD q
 
 /-- Every bounded constructible complex with field coefficients has the generator
 hypothesis of continuity. Constructibility here means finite constant scalar models.
@@ -159,7 +237,137 @@ theorem bounded_constructible_ext_generated
       (condensedRingObj (coefficientHeartRingObj R) X)))
     (hC : constantModelBoundedConstructible (coefficientHeartRingObj R) X C) :
     IsExtContinuityGenerated (coefficientHeartRingObj R) X Set.univ C := by
-  sorry
+  have : IsNoetherian X := ⟨⟩
+  have hR' : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
+      FiniteDimensional ℚ_[ℓ] E ∧ R = Profinite.padicSubfieldCondensedRing ℓ E) ∨
+      R = Profinite.padicAlgClCondensedRing ℓ := by
+    rcases hR with hR | hR
+    · exact Or.inl ⟨E.1, E.2, hR⟩
+    · exact Or.inr hR
+  let H : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (coefficientHeartRingObj R) X))) :=
+    fun D ↦ ∃ M, IsExtContinuityStratum (coefficientHeartRingObj R) X M ∧
+      D = (DerivedCategory.singleFunctor _ 0).obj M
+  have hG : extContinuityShiftedStrata (coefficientHeartRingObj R) X Set.univ =
+      H.shiftClosure ℤ := by
+    ext D
+    constructor
+    · rintro ⟨M, hM, k, _, ⟨e⟩⟩
+      exact ⟨_, k, e, M, hM, rfl⟩
+    · rintro ⟨_, k, e, M, hM, rfl⟩
+      exact ⟨M, hM, k, Set.mem_univ k, ⟨e⟩⟩
+  let G := H.shiftClosure ℤ
+  let P : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (coefficientHeartRingObj R) X))) :=
+    fun D ↦ ∃ n : ℕ, G.extensionProductIter n D
+  have hGn (n : ℕ) : (G.extensionProductIter n).IsClosedUnderIsomorphisms := by
+    cases n with
+    | zero => change G.IsClosedUnderIsomorphisms; infer_instance
+    | succ n => rw [ObjectProperty.extensionProductIter_succ]; infer_instance
+  have : P.IsClosedUnderIsomorphisms := ⟨by
+    rintro D D' e ⟨n, hn⟩
+    have := hGn n
+    exact ⟨n, (G.extensionProductIter n).prop_of_iso e hn⟩⟩
+  have : P.IsStableUnderShift ℤ :=
+    { isStableUnderShiftBy := fun k ↦ ⟨by
+        rintro D ⟨n, hn⟩
+        exact ⟨n, (G.extensionProductIter n).le_shift k D hn⟩⟩ }
+  have : P.IsTriangulatedClosed₂ := .mk' (by
+    rintro T hT ⟨n, hn⟩ ⟨m, hm⟩
+    refine ⟨n + 1 + m, ?_⟩
+    rw [ObjectProperty.extensionProductIter_add G rfl]
+    exact ⟨T.obj₁, T.obj₃, T.mor₁, T.mor₂, T.mor₃, hT, hn, hm⟩)
+  obtain ⟨N, F, hlast, hF⟩ := (coefficientHeart_generation ℓ R hR' X C).mp hC
+  have hPF (r : Fin (N + 1)) : P (F r) := by
+    induction r using WellFoundedLT.induction with
+    | ind r ih =>
+      rcases hF r with ⟨S, a, ha, L, n, hL, ⟨e⟩⟩ | ⟨i, j, hi, hj, n, f, g, h, ht⟩
+      · have : IsImmersion a := ha
+        have : TopologicalSpace.NoetherianSpace S := a.isEmbedding.isInducing.noetherianSpace
+        refine ⟨0, ?_⟩
+        change H.shiftClosure ℤ (F r)
+        refine ⟨_, n, e, _, ?_, rfl⟩
+        exact ⟨S, a.image, a.toImage, a.imageι, inferInstance, inferInstance,
+          L, hL, ⟨Iso.refl _⟩⟩
+      · have ht' : P ((F r)⟦n⟧) :=
+          P.ext_of_isTriangulatedClosed₂ _
+            (Pretriangulated.rot_of_distTriang _ ht) (ih j hj)
+            (P.le_shift (1 : ℤ) _ (ih i hi))
+        exact (P.prop_shift_iff_of_isStableUnderShift (F r) n).mp ht'
+  change ∃ n, (extContinuityShiftedStrata (coefficientHeartRingObj R) X Set.univ
+    ).extensionProductIter n C
+  rw [hG, ← hlast]
+  exact hPF (Fin.last N)
+
+private theorem constant_model_of_iso
+    {X : Scheme.{u}}
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (e : M ≅ N) (hM : IsConstantModelConstructible Λ X M) :
+    IsConstantModelConstructible Λ X N := by
+  have hlocal {Y : Scheme.{u}}
+      {A B : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)}
+      (e : A ≅ B) (hA : HasFiniteConstantLocalModel Λ Y A) :
+      HasFiniteConstantLocalModel Λ Y B := by
+    obtain ⟨𝒰, h𝒰⟩ := hA
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨P, hP, ⟨eP⟩⟩ := h𝒰 i
+    exact ⟨P, hP, ⟨(CondensedRing.upperStar Λ (𝒰.f i)).mapIso e.symm ≪≫ eP⟩⟩
+  have hstr {Y : Scheme.{u}}
+      {A B : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)}
+      (e : A ≅ B) (hA : IsFiniteConstantStratified Λ Y A) :
+      IsFiniteConstantStratified Λ Y B := by
+    obtain ⟨S, hS⟩ := hA
+    exact ⟨S, fun a ↦ hlocal ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e)
+      (hS a)⟩
+  classical
+  unfold IsConstantModelConstructible at hM ⊢
+  split at hM
+  · rename_i h
+    rw [if_pos h]
+    exact hstr e hM
+  · rename_i h
+    rw [if_neg h]
+    exact fun U hU ↦ hstr ((CondensedRing.upperStar Λ U.ι).mapIso e) (hM U hU)
+
+private theorem constant_model_of_isZero
+    (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsZero M) : IsConstantModelConstructible Λ X M := by
+  have hlocal (Y : Scheme.{u})
+      (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (hN : IsZero N) : HasFiniteConstantLocalModel Λ Y N := by
+    refine ⟨.singleton (𝟙 Y) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
+    refine ⟨HasZeroObject.zero.choose, ?_, ⟨?_⟩⟩
+    · exact ⟨0, 0, 𝟙 _, ⟨(isZero_zero _).iso (isZero_cokernel_of_epi (𝟙 _))⟩⟩
+    · have : PreservesColimitsOfSize.{0, 0} pointUpperStar.{u} :=
+        pointUpperStarLowerStarAdjunction.leftAdjoint_preservesColimits
+      have : PreservesFiniteColimits (upperStarFromPoint Y) := by
+        unfold upperStarFromPoint
+        infer_instance
+      exact ((CondensedRing.upperStar Λ _).map_isZero hN).iso
+        (((upperStarFromPoint Y).mapMod Λ).map_isZero (isZero_zero _))
+  have hstr (Y : Scheme.{u})
+      (N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+      (hN : IsZero N) : IsFiniteConstantStratified Λ Y N := by
+    let S : Scheme.Stratification Y :=
+      { n := 1
+        stratum := fun _ ↦ Set.univ
+        isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
+        isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
+        iUnion_stratum_eq_univ := Set.iUnion_const _
+        pairwise_disjoint_stratum := fun i j hij ↦ (hij (Subsingleton.elim i j)).elim
+        domain := fun _ ↦ Y
+        immersion := fun _ ↦ 𝟙 Y
+        range_immersion := fun _ ↦ Set.range_id' }
+    exact ⟨S, fun a ↦ hlocal _ _
+      ((CondensedRing.upperStar Λ (S.immersion a)).map_isZero hN)⟩
+  classical
+  unfold IsConstantModelConstructible
+  split
+  · exact hstr X M hM
+  · exact fun U _ ↦ hstr _ _ ((CondensedRing.upperStar Λ U.ι).map_isZero hM)
 
 /-- In particular all integer Ext functors from a constructible field-coefficient
 sheaf commute with filtered colimits of module objects.
@@ -189,7 +397,29 @@ theorem constructible_sheaf_ext_continuity
       (((DerivedCategory.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
         preadditiveCoyoneda.obj
           (op ((DerivedCategory.singleFunctor _ 0).obj C))).mapCocone c))) := by
-  sorry
+  let C' := (DerivedCategory.singleFunctor _ 0).obj C
+  have hC' : constantModelBoundedConstructible (coefficientHeartRingObj R) X C' := by
+    refine ⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩
+    by_cases hn : n = 0
+    · subst n
+      exact constant_model_of_iso _
+        ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app C).symm hC
+    · apply constant_model_of_isZero
+      rcases lt_or_gt_of_ne hn with hn | hn
+      · exact DerivedCategory.isZero_of_isGE _ 0 n hn
+      · exact DerivedCategory.isZero_of_isLE _ 0 n hn
+  let K := M ⋙ CochainComplex.singleFunctor _ 0
+  have hK : ∀ (i : I) (r : ℤ), r < 0 → IsZero ((K.obj i).X r) := by
+    intro i r hr
+    exact HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (M.obj i) r (ne_of_lt hr)
+  have : PreservesColimit M (CochainComplex.singleFunctor _ 0) := by
+    change PreservesColimit M (HomologicalComplex.single _ (.up ℤ) 0)
+    infer_instance
+  have hmain := constructible_ext_continuity ℓ E R (hR.imp_right Or.inl) X C'
+    (bounded_constructible_ext_generated ℓ E R hR X C' hC') K 0 hK
+    ((CochainComplex.singleFunctor _ 0).mapCocone c)
+    (isColimitOfPreserves (CochainComplex.singleFunctor _ 0) hc) q
+  exact hmain
 
 /-- Integral finite extensions of the unshifted a_!L satisfy the main hypothesis.
 Requiring the degree-zero C to be an iterated triangle extension of degree-zero
@@ -210,6 +440,10 @@ theorem integral_finite_extension_ext_generated
       ((DerivedCategory.singleFunctor _ 0).obj C)) :
     IsExtContinuityGenerated (Profinite.padicIntegersRingObj ℓ E) X Set.univ
       ((DerivedCategory.singleFunctor _ 0).obj C) := by
-  sorry
+  obtain ⟨n, hn⟩ := hC
+  refine ⟨n, ObjectProperty.monotone_extensionProductIter ?_ n _ hn⟩
+  intro D hD
+  obtain ⟨M, hM, k, hk, e⟩ := hD
+  exact ⟨M, hM, k, Set.mem_univ k, e⟩
 
 end AlgebraicGeometry.ProEtale

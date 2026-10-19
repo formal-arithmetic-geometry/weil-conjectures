@@ -28,81 +28,70 @@
  ],
  "proof": [
   {
-   "text": "For the fixed filtered diagram let $\\mathcal C$ consist of the objects $D$ whose comparison $\\alpha_D^q$ is bijective for every $q$. For a distinguished triangle $D'\\to D\\to D''\\to D'[1]$, [lem-weil-pbc-hom-out-of-triangle-exact], applied to its rotations, gives the natural exact five-term segment\n$$\n\\operatorname{Hom}(D',K_i[q-1])\\to\\operatorname{Hom}(D'',K_i[q])\\to\\operatorname{Hom}(D,K_i[q])\\to\\operatorname{Hom}(D',K_i[q])\\to\\operatorname{Hom}(D'',K_i[q+1]).\n$$\nTaking the filtered colimit leaves this segment exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Compare it with the segment for $K$: if $D',D''\\in\\mathcal C$, all four outer vertical maps are isomorphisms, so [lem-weil-pbc-five-lemma] makes $\\alpha_D^q$ an isomorphism. For shifts, the natural identities $\\operatorname{Hom}(D[n],K_i[q])=\\operatorname{Hom}(D,K_i[q - n])$ identify the comparison for $D[n]$ with that for $D$ in degree $q-n$. Precomposition with an isomorphism $D\\simeq D_0$ identifies the two comparison maps. Also $0\\in\\mathcal C$, since both groups vanish. Thus $\\mathcal C$ is closed under extensions, shifts and isomorphisms; rotating the cone triangle $A\\to B\\to\\operatorname{Cone}(f)\\to A[1]$ shows that it is closed under cones of morphisms between its objects.",
+   "text": "For the fixed complex diagram use constructibleHomContinuity_devissage: the all-degree comparison locus is closed under shifts, isomorphisms and finite extensions. Its triangle argument is the same filtered-colimit five-lemma route as the unit. Apply its finite extension closure after mapping shifted stratum generators into the shift closure of unshifted generators.",
    "uses": [
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "Proof, first paragraph: reduction by extensions and shifts"
-   }
-  },
-  {
-   "text": "For a generator $a_!L$, $X$ is quasi-compact by the Noetherian definition and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open $W\\subseteq X$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The image of the immersion $a$ over any affine open of $X$ is locally closed, hence closed in an open subset of $X$; that open subset is compact, so the image is compact. Since an immersion is a homeomorphism onto its image, $a$ is quasi-compact. Apply [lem-pqf-qc-immersion-open-closed-factor] to choose $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$ with $i$ closed and $u$ open. Thus the open complement $V=X\\setminus Z$ is quasi-compact and its immersion $j$ is quasi-compact: the inverse image of any affine open of $X$ is again an open of $X$. Every open of $Z$ is $Z\\cap W$ for an open $W\\subseteq X$ and is closed in that compact $W$, hence quasi-compact. In particular the inverse image under $u$ of each affine open of $Z$ is quasi-compact, so $u$ is quasi-compact. Our three coefficient rings are among the admissible rings in [det-lem-constructible-ext-continuity-stratum]; $L$ is finite locally free and the diagram has the same common lower bound $b$. That node therefore gives exactly the canonical comparison isomorphism for $a_!L$ in every degree.",
-   "uses": [
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-pqf-qc-immersion-open-closed-factor",
-    "det-lem-constructible-ext-continuity-stratum"
+    "det-lem-constructible-ext-continuity-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "Proof, second paragraph, stratum calculation"
+    "place": "node sk-lem-constructible-ext-continuity, order 1515"
    }
   },
   {
-   "text": "Inducting on the finite expression of $C$ now proves the displayed comparison: the generator case is step 2, and each shift, isomorphism, or extension is handled by step 1. This induction is finite by the hypothesis on $C$.",
-   "uses": [],
-   "elementary": true,
+   "text": "For an open-then-closed stratum factorization, Noetherian embedding instances make the source and closed factor topologically Noetherian and their open immersions quasi-compact. Take the complement of the closed image and apply constructibleExtContinuityStratum. Transport along the generator isomorphism using devissage. The admissible coefficient witness is explicit for all three coefficient choices. Finally colimit.post_desc transfers the canonical-colimit comparison to the supplied colimit cocone.",
+   "uses": [
+    "det-lem-constructible-ext-continuity-stratum",
+    "det-lem-constructible-ext-continuity-devissage"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "Proof, first paragraph, finite dévissage"
+    "place": "node sk-lem-constructible-ext-continuity, order 1515"
    }
   },
   {
-   "text": "When $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$, [det-cor-coefficient-heart-ii-generation] applies with precisely our Noetherian hypothesis on $X$: every bounded constructible $C$ is obtained by finitely many cones from $a_!L[n]$, where lisse means the finite locally free condition in our statement. The generator comparison is step 2; the shift, cone and isomorphism closure in step 1, followed by induction on that finite sequence, gives the comparison for $C$. The same finite sequence expresses $C$ by extensions and shifts, since a cone triangle rotates to $B\\to\\operatorname{Cone}(A\\to B)\\to A[1]\\to B[1]$. For a constructible sheaf in degree zero, [sk-def-sfb-bounded-constructible] places it in the bounded constructible category. A diagram of sheaves in degree zero has common lower bound $b=0$ and its termwise colimit is the sheaf colimit in degree zero; by the definition of $\\operatorname{Ext}^q$ in the statement the comparison is exactly the asserted Ext colimit isomorphism.",
+   "text": "For bounded field-coefficient complexes apply coefficientHeart_generation. The class of finite iterated extensions of the shift closure of unshifted strata is replete and stable under shifts. Combining extension lengths n and m gives length n+1+m by extensionProductIter_add. Induct on the finite ordered witness: a locally closed generator uses its canonical open-to-image and closed-image factorization; a cone uses the rotated distinguished triangle, followed by undoing its shift.",
    "uses": [
-    "det-cor-coefficient-heart-ii-generation",
+    "det-cor-coefficient-heart-ii-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
+    "place": "node sk-lem-constructible-ext-continuity, order 1515"
+   }
+  },
+  {
+   "text": "For a constructible sheaf, its degree-zero complex is bounded constructible: its zero-degree homology is the given sheaf up to the standard single/homology isomorphism, and other homology objects vanish. Isomorphisms transport the actual finite constant models; zero uses the identity cover, zero presentation and one-stratum stratification. Apply bounded generation and the main theorem to the diagram of degree-zero complexes with lower bound zero. The single-complex functor preserves its colimit, so the comparison is definitionally the stated sheaf comparison.",
+   "uses": [
     "sk-def-sfb-bounded-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "Statement, clause 1; constructible generation"
+    "place": "node sk-lem-constructible-ext-continuity, order 1515"
    }
   },
   {
-   "text": "For $\\Lambda=\\underline{\\mathcal O}_E$, choose the given finite extension filtration $0=C_0\\subset\\cdots\\subset C_m=C$, with $C_k/C_{k-1}=a_{k!}L_{0,k}$. The base $C_0=0$ belongs to $\\mathcal C$ by step 1, each quotient belongs by step 2, and [lem-sf-derived-ses-triangle] turns each short exact sequence into a triangle $C_{k-1}\\to C_k\\to a_{k!}L_{0,k}\\to C_{k-1}[1]$ in the derived category. The extension argument of step 1, inductively for $k=1,\\ldots,m$, gives the integral clause.",
-   "uses": [
-    "lem-sf-derived-ses-triangle"
-   ],
+   "text": "The integral hypothesis already is a finite derived-extension expression with allowed shifts {0}. Monotonicity of extensionProductIter enlarges the allowed shifts from {0} to all integers.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-    "place": "Statement, clause 2"
+    "place": "node sk-lem-constructible-ext-continuity, order 1515"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-pqf-qc-immersion-open-closed-factor",
+  "det-lem-constructible-ext-continuity-devissage",
   "det-lem-constructible-ext-continuity-stratum",
   "det-cor-coefficient-heart-ii-generation",
-  "sk-def-sfb-bounded-constructible",
-  "lem-sf-derived-ses-triangle"
+  "sk-def-sfb-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-constructible-ext-continuity/_section.md",
-  "place": "Proof paragraphs: explicit cohomological dévissage, existing stratum continuity, and the Noetherian constructible-generation detail of clause 1"
+  "place": "U8 Lean proof: existing devissage and stratum continuity, finite-cone generation converted by extensionProductIter_add and rotation, degree-zero colimit specialization, and shift-set monotonicity."
  },
  "mathlib_searches": [
   {
@@ -249,5 +238,15 @@
   "group": "Q59",
   "result": "pass",
   "note": "Wrote review.md. Checked all clauses, dependencies, exact declarations, sources, universes, edge cases, reuse, docstrings and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes (54.6 s and 16.2 s). No corrections or repository changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261019T034317-L-419907",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
