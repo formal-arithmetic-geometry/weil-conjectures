@@ -131,7 +131,7 @@ theorem rationalExceptional_preserves_constructibleFiniteTor
   have hadmissible : IsLocalizingAdmissibleCoefficient ℓ Λ := by
     rcases _hΛ with hE | hQ
     · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, hE⟩)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr hQ))))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl hQ)))))
   have hF := (compactification_localizing Λ ℓ k f c hadmissible).2.2.2
   have hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
       (constantModelBoundedConstructible Λ Y K.obj ∧

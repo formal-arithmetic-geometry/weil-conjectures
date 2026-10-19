@@ -161,7 +161,7 @@
    "CategoryTheory.IsLocalizingSubcategoryOfSize",
    "CategoryTheory.localizingClosureOfSize"
   ],
-  "note": "§1(B): the recorded module defines the localizing closure but exports no predicate for the admissible coefficient convention in the first paragraph of this node. The repair module retains the original closure definitions textually and supplies the missing coefficient predicate, using existing continuous-map condensed ring constructions and isomorphisms of ring objects. It includes all six stated coefficient cases, with all continuous functions into the algebraic closure for the indicated topology, rather than the different finite-subextension-valued upstream algebraic-closure object. The original generic closure definitions keep their prior signatures and meaning; only the independently indexed variants and the u+1 pro-etale specialization are added. Q90 repair of returned head 51d356940bbc: retain the Q89 module, declaration, file and coefficient signature, adding the closure declarations. The original IsLocalizingSubcategory and localizingClosure keep their exact old object-universe indexing; independently sized variants IsLocalizingSubcategoryOfSize and localizingClosureOfSize supply the fixed indexing universe required by det-proper-image-localizing-principle. localizingClosureProEtale now explicitly uses u+1 instead of u+2; these give the same closure by the locally u+1-small derived-category size argument (a larger existing coproduct has only u+1-small nonzero support). All statement/proof citers are audited in the report. The closure declarations are co-located with the retained coefficient declaration in the same module, preserving Q89's record and the one-file-per-node gate.",
+  "note": "A4 stage-3 repair: add the missing finite-subextension-valued Profinite.padicAlgClRingObj coefficient required by rational localizing composition. Retain all original clauses, including continuousMapRingObj (PadicAlgCl ell), as a distinct compatibility case for existing continuous-coefficient interfaces. These two rings are not identified. The localizing-closure definitions, generators, universe indexing and predicate signature are unchanged. The rationalExceptional_preserves_constructibleFiniteTor signature is unchanged; its continuous-coefficient proof only gains the extra Or.inl constructor.",
   "fixed_by": "NT-stage2-cc-e11afae0a"
  },
  "reviewed_lean": {
@@ -171,5 +171,15 @@
   "group": "Q90",
   "result": "fix",
   "note": "Mathematics correct: every clause of maps_localizingClosure matches the node (independent universes, one free sum-index universe w, ObjectProperty generators, CommShift+IsTriangulated, PreservesColimitsOfShape (Discrete I), canonical lift exact and sum-preserving as conclusions); the pro-etale specialization uses the recorded DerivedCategory (homs u+1) and Dctf; sorry-only, docstrings and record verbatim. Blocking mechanical fault: delivered LocalizingAdmissibleCoefficients drops the import of Sheaf.Paper.LocalizingClosure and redeclares IsLocalizingSubcategory/localizingClosure/localizingClosureProEtale, which that unchanged file still declares; RestrictionLocal fails with 'environment already contains CategoryTheory.IsLocalizingSubcategory' (5 importers affected) and two pro-etale closure definitions (u+1/u+2) result. Fix: LAC restored to main plus only IsLocalizingSubcategoryOfSize/localizingClosureOfSize with docstrings (OfSize.{u} = localizingClosure by rfl); item statements textually unchanged, specialization now uses the recorded localizingClosureProEtale with the size identification in its docstring proof; report gets a fix section. nt_compile --json: fixed pair rc 0; with unchanged RestrictionLocal, BrownHypotheses, UnboundedBaseChangeExtension rc 0. Dependency-record note is stale (the fix tool cannot edit it)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-fee23",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T154003-L-3023734",
+  "kind": "interface",
+  "note": "independent cc review: item exists_localizingLowerShriekComposition (unchanged signature, now proved via proved model lemma + cocycle transport) against node lem-sfb-localizing-lower-shriek-composition; IsLocalizingAdmissibleCoefficient disjunct addition against change record A4-localizing-admissible-qbar and sk-def-sfb-qlbar-condensed; 51 importers/users compiled clean against the delivered set"
  }
 }
