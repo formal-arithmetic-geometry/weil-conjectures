@@ -12,16 +12,10 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.Paper.PbcCompletedPullbackActual
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Sheaf.Algebra.Homology.SheafRingDerivedHomComparison
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 /-!
 # The normalized derived coefficient adjunction on a ringed site
 
@@ -52,6 +46,65 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
   {O O' : Sheaf J CommRingCat.{r}}
+
+omit [EssentiallySmall.{r} C] in
+set_option backward.isDefEq.respectTransparency false in
+private theorem coefficientPresentation_eq
+    (φ : O ⟶ O')
+    (E₀ E : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O) ⥤
+      SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))
+    (h₀ : ∀ M, E₀.obj M = changeOfRings φ M)
+    (h : ∀ M, E.obj M = changeOfRings φ M)
+    (hm₀ : ∀ {M N} (f : M ⟶ N), E₀.map f =
+      eqToHom (h₀ M) ≫ changeOfRingsHom φ M f ≫ eqToHom (h₀ N).symm)
+    (hm : ∀ {M N} (f : M ⟶ N), E.map f =
+      eqToHom (h M) ≫ changeOfRingsHom φ M f ≫ eqToHom (h N).symm) : E₀ = E := by
+  refine CategoryTheory.Functor.ext (fun M ↦ (h₀ M).trans (h M).symm) ?_
+  intro M N f
+  rw [hm₀, hm]
+  simp
+
+private theorem coefficientDerived_computes
+    (φ : O ⟶ O')
+    [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O))]
+    [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))]
+    (E : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O) ⥤
+      SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))
+    (h : ∀ M, E.obj M = changeOfRings φ M)
+    (hm : ∀ {M N} (f : M ⟶ N), E.map f =
+      eqToHom (h M) ≫ changeOfRingsHom φ M f ≫ eqToHom (h N).symm)
+    [E.Additive]
+    (LF : DerivedCategory (SheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J O)) ⥤
+      DerivedCategory (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O')))
+    (ε : DerivedCategory.Qh ⋙ LF ⟶
+      E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
+    (hLF : LF.IsLeftDerivedFunctor ε
+      (HomotopyCategory.quasiIso (SheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J O)) (ComplexShape.up ℤ)))
+    (P : CochainComplex (SheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J O)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := O) P) :
+    IsIso (ε.app ((HomotopyCategory.quotient _ _).obj P)) := by
+  obtain ⟨E₀, h₀, hm₀, hadd₀, _, _, LF₀, ε₀, hLF₀, _, hc₀⟩ :=
+    derivedChangeOfRingsIndependentCoefficients φ
+  have he : E₀ = E := coefficientPresentation_eq φ E₀ E h₀ h hm₀ hm
+  subst E₀
+  let := hLF
+  let := hLF₀
+  let i := Functor.leftDerivedUnique LF₀ LF ε ε₀
+    (HomotopyCategory.quasiIso (SheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J O)) (ComplexShape.up ℤ))
+  have hc := hc₀ P hP
+  have hi := Functor.leftDerivedNatTrans_app LF LF₀ ε ε₀
+    (HomotopyCategory.quasiIso (SheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J O)) (ComplexShape.up ℤ))
+    (𝟙 (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh))
+    ((HomotopyCategory.quotient _ _).obj P)
+  change i.hom.app _ ≫ ε₀.app _ = ε.app _ ≫ _ at hi
+  simp only [NatTrans.id_app, Category.comp_id] at hi
+  rw [← hi]
+  infer_instance
 
 /-- Restriction is exact and derived change of rings is its left adjoint, normalized by
 `x ↦ x ⊗ 1` and `x ⊗ a ↦ a g(x)`. The tensor convention in the existing change-of-rings
@@ -159,6 +212,47 @@ theorem sheafRingDerivedCoefficientAdjunction (φ : O ⟶ O')
                     ε.app ((HomotopyCategory.quotient _ _).obj P) ≫
                     DerivedCategory.Qh.map
                       (((a.mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv _ _).symm g) := by
-  sorry
+  classical
+  obtain ⟨hl, hc, ho⟩ := sheafRingCoefficientOrdinaryAdjunction φ
+  refine ⟨hl, hc, ?_⟩
+  intro E h hm hadd
+  obtain ⟨a, ha⟩ := ho E h hm
+  refine ⟨a, ha, ?_⟩
+  intro LF ε hLF
+  obtain ⟨d, hd⟩ := sheafRingDerivedHomComparison φ E h hm a LF ε hLF
+  refine ⟨d, ?_⟩
+  intro P hP hflat
+  let M := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P
+  let F := restrictScalars
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
+  let ah := a.mapHomotopyCategory (ComplexShape.up ℤ)
+  refine ⟨coefficientDerived_computes φ E h hm LF ε hLF P hP, ?_, ?_⟩
+  · have hu := hd M ((E.mapHomotopyCategory (ComplexShape.up ℤ)).obj M) (𝟙 _)
+    change d.unit.app (DerivedCategory.Qh.obj M) ≫
+      F.mapDerivedCategory.map (ε.app M ≫ DerivedCategory.Qh.map (𝟙 _)) = _ at hu
+    have hu' := congrArg
+      (fun t ↦ t ≫ F.mapDerivedCategoryFactorsh.hom.app
+        ((E.mapHomotopyCategory (ComplexShape.up ℤ)).obj M)) hu
+    simpa [F, M, Adjunction.homEquiv_unit] using hu'
+  · intro H g
+    have ht := hd M H ((ah.homEquiv M H).symm g)
+    rw [Equiv.apply_symm_apply] at ht
+    have ht' : (d.homEquiv _ _).symm
+        (DerivedCategory.Qh.map g ≫ F.mapDerivedCategoryFactorsh.inv.app H) =
+        ε.app M ≫ DerivedCategory.Qh.map ((ah.homEquiv M H).symm g) := by
+      exact (Equiv.symm_apply_eq _).2 ht.symm
+    refine ⟨ht', ?_⟩
+    intro hg
+    let q := DerivedCategory.Qh.map g ≫ F.mapDerivedCategoryFactorsh.inv.app H
+    have : IsIso q := by dsimp [q]; infer_instance
+    have hn : LF.map q ≫ d.counit.app (DerivedCategory.Qh.obj H) =
+        ε.app M ≫ DerivedCategory.Qh.map ((ah.homEquiv M H).symm g) := by
+      rw [← ht']
+      rfl
+    calc
+      d.counit.app (DerivedCategory.Qh.obj H) =
+          inv (LF.map q) ≫ (LF.map q ≫ d.counit.app (DerivedCategory.Qh.obj H)) := by
+            simp only [IsIso.inv_hom_id_assoc]
+      _ = _ := by rw [hn]
 
 end SheafOfModules

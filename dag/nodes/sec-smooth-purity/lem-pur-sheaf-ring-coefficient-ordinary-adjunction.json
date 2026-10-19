@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+ "kind": "statement",
+ "title": "Exact restriction and normalized ordinary scalar-extension adjunction on a general ringed site",
+ "statement": "For a site C with the sheafification hypotheses of [def-weil-sheaf-of-modules-category], a morphism phi:O -> O' of commutative ring sheaves, and the module categories of [def-weil-sheaf-of-modules-category], restriction of scalars [def-pc-sheaf-restrict-scalars] preserves finite limits and finite colimits. For every additive functor E presenting the sheafified scalar extension [def-pur-sheaf-tensor-product] on objects and maps, there exists an adjunction a:E ⊣ Res_phi such that its Hom correspondence sends f to the section map x |-> f(eta(1 tensor x)), where eta is the sheafification unit. Site, ring and module universes are independent exactly as in the parent theorem.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03DA; parent lem-pur-sheaf-ring-derived-coefficient-adjunction, Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the private SameSiteAdjunction construction of Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction, which already works at independent site universes: compose the sectionwise extension/restriction Hom equivalence with the module sheafification adjunction. Pure-tensor naturality gives naturality in both variables. The prescribed map equation identifies E naturally with this tensor functor, so transport the adjunction along that isomorphism. The transported Hom map on eqToHom(h M) followed by f reduces to the sectionwise evaluation formula by cancellation of equality transports.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction followed by toSheaf is definitionally toSheaf for the source ring. The forgetful toSheaf functor preserves finite limits and finite colimits and reflects them; the latter colimit instance is the proved source-library sheafification result. Hence restriction preserves both by preservesFiniteLimits_of_reflects_of_preserves and its colimit analogue.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03DA; parent lem-pur-sheaf-ring-derived-coefficient-adjunction, Steps 1–2; reuse of the existing private SameSiteAdjunction proof in Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction and the source-library toSheaf colimit API"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of extension of scalars on a ringed site is left adjoint to exact restriction of scalars",
+   "results": "ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.sheafificationAdjunction",
+   "date": "2026-10-19",
+   "verdict": "The sectionwise and sheafification APIs are available; no theorem found combining them for arbitrary ringed sites and arbitrary prescribed E."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between additive functors with exact right adjoint induces a derived adjunction with normalized unit and counit",
+   "results": "CategoryTheory.Adjunction.derived; derived_unit; derived_counit",
+   "date": "2026-10-19",
+   "verdict": "The abstract construction requires absolute derived-functor hypotheses; the site-specific resolution and normalization glue remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "CategoryTheory.Adjunction.derived; derived_unit; derived_counit",
+   "date": "2026-10-19",
+   "verdict": "No direct site-specific match."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(preserves|adj)|changeOfRings.*(adj|homEquiv)",
+   "results": "WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction.exists_changeOfRingsAdjunction; Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings",
+   "date": "2026-10-19",
+   "verdict": "Existing sheafified scalar-extension adjunction is on topological spaces. General-site restriction exists, but exactness instances are absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction",
+  "date": "2026-10-19",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Steps 1–2 of lem-pur-sheaf-ring-derived-coefficient-adjunction: Exact restriction and normalized ordinary scalar-extension adjunction on a general ringed site",
+   "via": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-coefficient-system-derived-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction",
+  "file": "lean/Sheaf/Algebra/Homology/SheafRingCoefficientOrdinaryAdjunction.lean",
+  "declaration": "SheafOfModules.sheafRingCoefficientOrdinaryAdjunction",
+  "statement": "theorem sheafRingCoefficientOrdinaryAdjunction (φ : O ⟶ O') :\n    ∃ (_ : PreservesFiniteLimits (restrictScalars.{r}\n                    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)))\n      (_ : PreservesFiniteColimits (restrictScalars.{r}\n                    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ))),\n    ∀ (E : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O) ⥤\n        SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))\n      (h : ∀ M, E.obj M = changeOfRings φ M),\n      (∀ {M N} (f : M ⟶ N), E.map f =\n        eqToHom (h M) ≫ changeOfRingsHom φ M f ≫ eqToHom (h N).symm) →\n      ∀ [E.Additive], ∃ a : E ⊣ restrictScalars\n          ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ),\n        (∀ (M : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O))\n          (N : SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))\n          (f : changeOfRings φ M ⟶ N) (U : Cᵒᵖ) (x : M.val.obj U),\n          (a.homEquiv M N (eqToHom (h M) ≫ f)).val.app U x =\n            f.val.app U\n              ((CategoryTheory.toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U\n                ((1 : O'.obj.obj U) ⊗ₜ[O.obj.obj U, (φ.hom.app U).hom] x)))",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261019T093600-L-2330040",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261019T093600-L-2330040",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
