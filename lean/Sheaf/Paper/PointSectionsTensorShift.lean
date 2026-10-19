@@ -6,14 +6,7 @@ Authors: SHEAF group Q76
 module
 
 public import Sheaf.Paper.PointSectionsScalarExtension
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.Paper.EtaleDerivedScalarTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.PointProEtaleSectionsExact
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # The canonical sections-tensor comparison commutes with shifts
 
@@ -191,6 +184,44 @@ theorem pointSectionsTensorShift
               (IntermediateField.inclusion hEL)).hom.app P ≫
             DerivedCategory.Q.map ((pointSectionsTensorComplex D.k l E L
               (IntermediateField.inclusion hEL)).hom.app P)) := by
-  sorry
+  let : (completedDerivedScalarExtension.{u, u} l E L
+      (IntermediateField.inclusion hEL) (Spec (.of D.k))).CommShift ℤ :=
+    pointCompletedScalarCommShift D.k l E L (IntermediateField.inclusion hEL)
+  have hδ : NatTrans.CommShift
+      (pointOrdinaryDerivedComparison D.k l E L (IntermediateField.inclusion hEL)).inv ℤ := by
+    simpa only [Iso.symm_hom] using Functor.CommShift.ofIso_compatibility
+      (pointOrdinaryDerivedComparison D.k l E L (IntermediateField.inclusion hEL)).symm ℤ
+  have hθ : NatTrans.CommShift
+      (pointDerivedSectionsTensor D.k l E L (IntermediateField.inclusion hEL)).hom ℤ := by
+    dsimp only [pointDerivedSectionsTensor, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerRight_hom]
+    infer_instance
+  constructor
+  · intro m
+    exact NatTrans.shift_app_comm _ m K.obj
+  · intro P _hP _hflat e
+    refine ⟨?_, ?_, ?_⟩
+    · intro r b a
+      exact (pointSectionsTensor_existsUnique D.k l E L
+        (IntermediateField.inclusion hEL)).exists.choose_spec (P.X r) b a
+    · intro m
+      change ((pointSectionsTensorSource D.k l E L
+        (IntermediateField.inclusion hEL)).mapCochainComplexShiftIso m).hom.app P ≫
+          ((NatTrans.mapHomologicalComplex
+            (pointSectionsTensor D.k l E L (IntermediateField.inclusion hEL)).hom
+            (.up ℤ)).app P)⟦m⟧' = _
+      exact NatTrans.shift_app_comm _ m P
+    · erw [(pointDerivedSectionsTensor D.k l E L
+          (IntermediateField.inclusion hEL)).hom.naturality_assoc e.hom,
+        ← Functor.map_comp_assoc, e.hom_inv_id]
+      simp only [CategoryTheory.Functor.map_id]
+      dsimp only [pointDerivedSectionsTensor, pointSectionsTensorSourceFactors,
+        pointSectionsTensorTargetFactors, Iso.trans_hom, Iso.symm_hom,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+      simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+        CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc]
+      congr 1
+      exact Functor.mapDerivedCategoryNatIso_fac _ P
 
 end WeilConjectures

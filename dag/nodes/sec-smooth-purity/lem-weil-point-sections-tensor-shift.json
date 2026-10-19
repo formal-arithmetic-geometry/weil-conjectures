@@ -28,57 +28,46 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution $P\\to K$ with flat terms using [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], the ordinary complex $P\\otimes_{R_E}R_L$ represents $K\\otimes^L_{R_E}R_L$. The sections-tensor comparison in [lem-weil-point-sections-scalar-extension] is, on this representative, the degreewise balanced map $\\Gamma(s,P^r)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,P^r\\otimes_{R_E}R_L)$ sending $a\\otimes b$ to the sectionwise tensor $a\\otimes b_s$. The definition [def-pur-sheaf-tensor-product] makes this map well-defined after sheafification, and the same formula commutes with differentials, so it is a chain map.",
+   "text": "Use the canonical balanced natural isomorphism pointSectionsTensor from [lem-weil-point-sections-scalar-extension]. Its chosen specification gives the pure-tensor formula in degree r of every complex, with no K-flatness or flat-term hypothesis needed for this clause.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-point-sections-scalar-extension",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-point-sections-scalar-extension"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), together with the explicit sectionwise tensor construction"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section tensor-product (Tag 03EK); the balanced formula already recorded in pointSectionsTensor_existsUnique."
    }
   },
   {
-   "text": "For an integer $m$, the degree-$r$ term of $P[m]$ is $P^{r+m}$, and its differential is the usual shifted differential with the common sign. The degree-$r$ component of the map constructed in Step 1 for $P[m]$ is therefore exactly the component for $P$ in degree $r+m$, followed by the standard termwise shift identification; the coefficient $b_s$ has degree zero, so no additional Koszul sign occurs. Both sides multiply the differential by the same shift sign, hence $\\theta_{P[m]}=\\theta_P[m]$ as chain maps. For $m=0$ this is the identity, and reindexing twice shows that the comparison for successive shifts is the composite of the comparisons for the two shifts. The exact-sections result [lem-weil-point-proetale-sections-exact] supplies the stated termwise section shift identification.",
+   "text": "The proved source-library instances CategoryTheory.NatTrans.commShift_mapHomologicalComplex, CategoryTheory.Functor.commShift_mapDerivedCategoryNatIso_hom and CategoryTheory.Functor.commShift_mapDerivedCategoryCompIso_hom show that the termwise comparison and the exact-functor composition comparisons commute with integer shifts. Functor.CommShift.ofIso_compatibility makes the inverse ordinary derived comparison commute with the shift transported independently of theta. Whiskering and composing these compatibilities proves the displayed derived shift square and the chain-level square. Zero and addition coherence are those of the existing CommShift structures.",
    "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-point-sections-scalar-extension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final display proof: the sections-tensor comparison is degreewise and shift-compatible"
+    "place": "Point sections-tensor shift argument, implemented using the existing exact-functor localization comparisons."
    }
   },
   {
-   "text": "The map of Step 1 is natural for chain maps because it is defined by the tensor formula on every degree. Sections preserve quasi-isomorphisms by [lem-weil-point-proetale-sections-exact], and $-\\otimes_{\\mathcal O_E}\\mathcal O_L$ preserves quasi-isomorphisms of module complexes because $\\mathcal O_L$ is a finitely generated torsion-free, hence finite free, module over the discrete valuation ring $\\mathcal O_E$; while [lem-pur-derived-change-of-rings] identifies the K-flat model with the derived change-of-rings functor and makes the comparison independent of the chosen K-flat resolution. Any two resolutions $P\\to K$, $P'\\to K$ of [lem-pc-kflat-resolution] are surjective in every degree, so the termwise fibre product $P\\times_KP'$ maps to $P$ and to $P'$ by quasi-isomorphisms (their kernels $\\ker(P'\\to K)$, $\\ker(P\\to K)$ are acyclic), and a K-flat resolution $Q\\to P\\times_KP'$ gives quasi-isomorphisms $Q\\to P$, $Q\\to P'$ over $K$. Thus, for a quasi-isomorphism between two such resolutions, the square formed by the two degreewise comparisons commutes and its horizontal maps become invertible in the derived category. Applying the square to a roof $K\\xleftarrow{q}H\\xrightarrow{f}J$ and inverting the maps induced by $q$ gives the natural derived comparison for $f q^{-1}$. The chain-level shift equality of Step 2 consequently descends to $\\theta_{K[m]}=\\theta_K[m]$ in $D(\\mathcal O_L)$, and the same argument applies to every integer $m$ and to successive shifts.",
+   "text": "For any representative isomorphism e, naturality of pointDerivedSectionsTensor moves e.hom across the comparison. Functoriality and e.hom followed by e.inv equal to the identity cancel its transport. Expand the source and target factorization isomorphisms and the definition of pointDerivedSectionsTensor. Cancel the ordinary derived comparison and its inverse, followed by the target composition comparison and its inverse. The remaining identity is precisely Functor.mapDerivedCategoryNatIso_fac applied to pointSectionsTensor and P. This proves the representative formula for every complex and every e, hence in particular for all K-flat flat-term representatives, independently of the choice.",
    "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution",
     "lem-weil-point-sections-scalar-extension"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final display proof: descent of the degreewise comparison to the derived category and shift compatibility"
+    "place": "Point sections-tensor shift argument, implemented using the existing exact-functor localization comparisons."
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-point-proetale-sections-exact",
   "lem-weil-point-sections-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-  "place": "Final display proof: degreewise sections-tensor map, integer-shift compatibility, and descent to the derived comparison"
+  "place": "Point sections-tensor shift argument, implemented using the existing exact-functor localization comparisons."
  },
  "mathlib_searches": [
   {
@@ -152,9 +141,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-point-sections-scalar-extension",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings"
+  "lem-weil-point-sections-scalar-extension"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -192,5 +179,15 @@
   "group": "Q76",
   "result": "pass",
   "note": "Read the node, all 11 dependency records, the module, report and node diff (only lean added), and the dependency Lean (PointSectionsScalarExtension, FiniteFreeCompletedScalarComparison, the generic derived change-of-rings interface, FlatOnSite, sfIntegralConstructible, the K-flat resolution lemma). Every hypothesis matches the node with nothing stronger: K in the recorded sfIntegralConstructible, completed coefficient sheaves on Scheme.ProEt, no universe equality. Theta is the recorded pointDerivedSectionsTensor. The target shift is the standard termwise shift carried through the uniquely fixed pointOrdinaryDerivedComparison; it is independent of theta, and upstream has no competing instance. Conjunct 2 covers every K-flat flat-term P and every iso e: the degree-r formula b(x)a -> sheaf tensor with constant section, the chain-level mapCochainComplexShiftIso square, and descent independent of resolution. Edge cases m=0, successive shifts, K=0, E=L, K=R_E[0], unbounded P all fine. Statement verbatim; 9 declarations match the file; docstrings carry source and blueprint; the only proof is sorry; nothing hollow; no name collisions. Second-reading section is the standard post-2026-10-17 note, accepted as policy. nt_compile.py: two 60 s timeouts at load ~200-220 on 80 cores, then 14.2 s and 22.3 s, rc 0, no errors or warnings. Observations only: the new public CommShift instance could clash with a future one on the same functor; IsFlatOnSite is the same notion as the resolution lemma's monoidal tensorRight exactness."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-25f21",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261019T005401-L-2762049",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointSectionsTensorShift.lean vs live (imports + sorry body only), node vs live (proof fields only), unit sk-def-sf-admissible realized (empty) and import closure (removed public imports still reached via PointSectionsScalarExtension); compiled item + direct importer PointFibreEquivalence; axioms: sorryAx only from PointSectionsScalarExtension holes"
  }
 }
