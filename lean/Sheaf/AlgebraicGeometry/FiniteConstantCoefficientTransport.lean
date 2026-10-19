@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Sheaf.Paper.EtaleOriginWitness
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Normalized finite coefficient and etale-origin transport
@@ -50,7 +50,7 @@ The resulting comparison preserves the sheafification unit. -/
 theorem constantRingForget_preservesSheafification (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).PreservesSheafification
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
-  sorry
+  exact GrothendieckTopology.instPreservesSheafification _ _
 
 /-- The canonical coefficient map sends a scalar to its constant function after φ.
 Source: Stacks, Tags 03DA and 099R
@@ -85,7 +85,23 @@ theorem finiteRestriction_exact (X : Scheme.{u}) (Λ : Type (u + 1))
     (finiteRestriction B X Λ φ).Additive ∧
       PreservesFiniteLimits (finiteRestriction B X Λ φ) ∧
         PreservesFiniteColimits (finiteRestriction B X Λ φ) := by
-  sorry
+  let R := (sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B X)
+  let S := finiteCoefficientRingSheaf X Λ
+  let F := finiteRestriction B X Λ φ
+  have he : F ⋙ SheafOfModules.toSheaf.{u + 1} R ≅ SheafOfModules.toSheaf.{u + 1} S := Iso.refl _
+  have : PreservesFiniteLimits F := by
+    have : PreservesFiniteLimits (F ⋙ SheafOfModules.toSheaf.{u + 1} R) :=
+      preservesFiniteLimits_of_natIso he.symm
+    exact preservesFiniteLimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{u + 1} R)
+  have : ReflectsFiniteColimits (SheafOfModules.toSheaf.{u + 1} R) :=
+    { reflects := fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+  have : PreservesFiniteColimits F := by
+    have : PreservesFiniteColimits (F ⋙ SheafOfModules.toSheaf.{u + 1} R) :=
+      preservesFiniteColimits_of_natIso he.symm
+    exact preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{u + 1} R)
+  exact ⟨inferInstanceAs (SheafOfModules.restrictScalars (finiteScalarMap B X Λ φ)).Additive,
+    inferInstance, inferInstance⟩
 
 /-- Additivity of scalar restriction. Source: Stacks, Tag 03DA
 (blueprint: def-cbc-finite-constant-coefficient-transport). -/
@@ -148,7 +164,26 @@ theorem cUnderlying_existsUnique (X : Scheme.{u}) (Λ : Type (u + 1))
         (e.hom.app F).hom.app U
           ((toSheafify (Scheme.ProEt.topology X)
             ((finiteCoefficientModulePresheaf X.ProEt Λ).obj F.obj).presheaf).app U m) = m := by
-  sorry
+  let J := Scheme.ProEt.topology X
+  let D := sheafCompose J (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
+  let adj := sheafificationAdjunction J AddCommGrpCat.{u + 1}
+  let e : C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅ D :=
+    NatIso.ofComponents (fun F ↦ asIso (adj.counit.app (D.obj F)))
+      (fun f ↦ adj.counit.naturality (D.map f))
+  have he (F : Sheaf J (ModuleCat.{u + 1} Λ)) :
+      toSheafify J (D.obj F).obj ≫ (e.hom.app F).hom = 𝟙 _ :=
+    adj.right_triangle_components (D.obj F)
+  refine ⟨e, ?_, ?_⟩
+  · intro F U m
+    exact ConcreteCategory.congr_hom (congr_app (he F) U) m
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext F
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext J _ _ (D.obj F).property
+    ext U m
+    exact (he' F U m).trans (ConcreteCategory.congr_hom (congr_app (he F) U) m).symm
 
 /-- The specified underlying-sheaf identification, fixed on all unit sections.
 Source: Stacks, Tag 03DA
@@ -158,6 +193,122 @@ noncomputable def cUnderlying (X : Scheme.{u}) (Λ : Type (u + 1))
     C B X Λ φ ⋙ SheafOfModules.toSheaf _ ≅
       sheafCompose (Scheme.ProEt.topology X) (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat) :=
   Classical.choose (cUnderlying_existsUnique B X Λ φ)
+
+private theorem finiteScalarMap_unit (X : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
+    Functor.whiskerRight
+        (toSheafify (Scheme.ProEt.topology X)
+          ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of B)))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫
+      (finiteScalarMap B X Λ φ).hom =
+    (Functor.const X.ProEtᵒᵖ).map (RingCat.ofHom φ) ≫ finiteCoefficientScalarMap X Λ := by
+  change _ ≫ ((constantCommuteCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).hom.app (CommRingCat.of B)).hom ≫
+    sheafifyMap (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).map (RingCat.ofHom φ)) ≫
+    (((sheafificationAdjunction (Scheme.ProEt.topology X) RingCat.{u + 1}).homEquiv
+      _ _).symm (finiteCoefficientScalarMap X Λ)).hom = _
+  rw [constantCommuteCompose_hom_app_hom]
+  simp only [← Category.assoc, sheafComposeIso_inv_fac]
+  have hc : (constComp X.ProEtᵒᵖ (CommRingCat.of B)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).hom = 𝟙 _ := rfl
+  rw [hc, sheafifyMap_id, Category.comp_id, ← toSheafify_naturality, Category.assoc]
+  congr 1
+  exact Equiv.apply_symm_apply
+    ((sheafificationAdjunction (Scheme.ProEt.topology X) RingCat.{u + 1}).homEquiv _ _)
+    (finiteCoefficientScalarMap X Λ)
+
+private noncomputable abbrev scalarUnit (X : Scheme.{u}) :=
+  Functor.whiskerRight
+    (toSheafify (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of B)))
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+
+private theorem scalarUnit_surjective (X : Scheme.{u}) :
+    Presheaf.IsLocallySurjective (Scheme.ProEt.topology X) (scalarUnit B X) := by
+  rw [Presheaf.isLocallySurjective_iff_whisker_forget]
+  change Presheaf.IsLocallySurjective (Scheme.ProEt.topology X)
+    (Functor.whiskerRight (toSheafify (Scheme.ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of B))) (forget CommRingCat.{u + 1}))
+  infer_instance
+
+private theorem cUnderlying_inv_unit (X : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+    ((cUnderlying B X Λ φ).inv.app F).hom =
+      toSheafify (Scheme.ProEt.topology X)
+        ((finiteCoefficientModulePresheaf X.ProEt Λ).obj F.obj).presheaf := by
+  apply (cancel_mono ((cUnderlying B X Λ φ).hom.app F).hom).mp
+  ext U m
+  exact (ConcreteCategory.congr_hom
+    (congr_app (congrArg (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B X Λ φ).inv_hom_id_app F)) U) m).trans
+      ((Classical.choose_spec (cUnderlying_existsUnique B X Λ φ)).1 F U m).symm
+
+private theorem cUnderlying_unit_smul (X : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) (U : X.ProEtᵒᵖ)
+    (b : B) (m : F.obj.obj U) :
+    ((cUnderlying B X Λ φ).inv.app F).hom.app U (φ b • m) =
+      HSMul.hSMul (β := ((C B X Λ φ).obj F).val.obj U)
+        ((scalarUnit B X).app U b) (((cUnderlying B X Λ φ).inv.app F).hom.app U m) := by
+  rw [cUnderlying_inv_unit]
+  have h := (((PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (finiteCoefficientScalarMap X Λ)).unit.app
+      ((finiteCoefficientModulePresheaf X.ProEt Λ).obj F.obj)).app U).hom.map_smul (φ b) m
+  have hs := ConcreteCategory.congr_hom (congr_app (finiteScalarMap_unit B X Λ φ) U) b
+  change (finiteScalarMap B X Λ φ).hom.app U ((scalarUnit B X).app U b) =
+    (finiteCoefficientScalarMap X Λ).app U (φ b) at hs
+  change _ = HSMul.hSMul (β := ((finiteCoefficientRealization X Λ).obj F).val.obj U)
+    ((finiteScalarMap B X Λ φ).hom.app U ((scalarUnit B X).app U b)) _
+  rw [hs]
+  exact h
+
+private theorem cUnderlying_hom_smul (X : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ)
+    (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) (U : X.ProEtᵒᵖ)
+    (b : B) (m : ((C B X Λ φ).obj F).val.obj U) :
+    ((cUnderlying B X Λ φ).hom.app F).hom.app U ((scalarUnit B X).app U b • m) =
+      HSMul.hSMul (β := F.obj.obj U) (φ b)
+        (((cUnderlying B X Λ φ).hom.app F).hom.app U m) := by
+  apply (ConcreteCategory.bijective_of_isIso
+    (((cUnderlying B X Λ φ).inv.app F).hom.app U)).1
+  have hi (n : ((C B X Λ φ).obj F).val.obj U) :
+      ((cUnderlying B X Λ φ).inv.app F).hom.app U
+        (((cUnderlying B X Λ φ).hom.app F).hom.app U n) = n :=
+    ConcreteCategory.congr_hom (congr_app
+      (congrArg (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B X Λ φ).hom_inv_id_app F)) U) n
+  rw [cUnderlying_unit_smul, hi, hi]
+
+private theorem moduleDirectImage_scalarUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Modules B X) (U : Y.ProEtᵒᵖ) (b : B)
+    (m : M.val.obj ((Scheme.proEtaleBaseChange f).op.obj U)) :
+    HSMul.hSMul (β := ((moduleDirectImage B f).obj M).val.obj U)
+      ((scalarUnit B Y).app U b) m =
+    (scalarUnit B X).app ((Scheme.proEtaleBaseChange f).op.obj U) b • m := by
+  have hρ : Scheme.proEtaleRingDirectImageMap f (coefficients B Y)
+      (coefficients B X) (constantRingIso B f) =
+      Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of B) := by
+    exact ((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+  have hn := Equiv.apply_symm_apply
+    ((sheafificationAdjunction (Scheme.ProEt.topology Y)
+    CommRingCat.{u + 1}).homEquiv
+      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of B))
+      ((Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj (coefficients B X)))
+      (Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op
+        (toSheafify (Scheme.ProEt.topology X)
+          ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of B))))
+  change _ ≫ (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
+    (CommRingCat.of B)).hom = _ at hn
+  have hu := ConcreteCategory.congr_hom (congr_app hn U) b
+  change HSMul.hSMul (β := M.val.obj ((Scheme.proEtaleBaseChange f).op.obj U))
+    ((Scheme.proEtaleRingDirectImageMap f (coefficients B Y)
+      (coefficients B X) (constantRingIso B f)).hom.app U
+      ((toSheafify (Scheme.ProEt.topology Y)
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of B))).app U b)) m = _
+  rw [hρ]
+  exact congrArg (fun r ↦ r • m) hu
 
 /-- Direct image commutes with this scalar realization by identity on sections.
 Source: Stacks, Tag 0D6E
@@ -178,7 +329,69 @@ theorem cDirect_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) (Λ : Type (u + 1)
             ((Scheme.proEtaleBaseChange f).op.obj U) ((e.hom.app F).val.app U m) =
           ((cUnderlying B Y Λ φ).hom.app
             ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).hom.app U m := by
-  sorry
+  let L := ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f ⋙ C B Y Λ φ
+  let R := C B X Λ φ ⋙ moduleDirectImage B f
+  let T := SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients B Y))
+  let a : L ⋙ T ≅ R ⋙ T :=
+    isoWhiskerLeft (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f) (cUnderlying B Y Λ φ) ≪≫
+      isoWhiskerRight (cUnderlying B X Λ φ).symm (ProEtale.lowerStar AddCommGrpCat.{u + 1} f)
+  have : Presheaf.IsLocallySurjective (Scheme.ProEt.topology Y) (scalarUnit B Y) :=
+    scalarUnit_surjective B Y
+  let g (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+      L.obj F ⟶ R.obj F :=
+    ⟨(PresheafOfModules.restrictHomEquivOfIsLocallySurjective
+      (scalarUnit B Y) (R.obj F).isSheaf).symm
+      (PresheafOfModules.homMk (a.hom.app F).hom (fun U b m ↦ by
+        change ((cUnderlying B X Λ φ).inv.app F).hom.app
+            ((Scheme.proEtaleBaseChange f).op.obj U)
+            (((cUnderlying B Y Λ φ).hom.app
+              ((ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).hom.app U
+                ((scalarUnit B Y).app U b • (show (L.obj F).val.obj U from m))) = _
+        rw [cUnderlying_hom_smul, cUnderlying_unit_smul]
+        exact (moduleDirectImage_scalarUnit B f ((C B X Λ φ).obj F) U b _).symm))⟩
+  have hg (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+      T.map (g F) = a.hom.app F := rfl
+  let t : L ⟶ R :=
+    { app := g
+      naturality := fun {F G} h ↦ by
+        apply T.map_injective
+        simp only [Functor.map_comp, hg]
+        exact a.hom.naturality h }
+  have ht (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+      IsIso (t.app F) := by
+    have : IsIso (T.map (t.app F)) := by
+      change IsIso (T.map (g F))
+      rw [hg]
+      infer_instance
+    exact isIso_of_reflects_iso _ T
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  refine ⟨asIso t, ?_, ?_⟩
+  · intro F U m
+    change ((cUnderlying B X Λ φ).hom.app F).hom.app
+      ((Scheme.proEtaleBaseChange f).op.obj U) ((t.app F).val.app U m) = _
+    have he := ConcreteCategory.congr_hom (congr_app
+      (congrArg (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).map
+        ((cUnderlying B X Λ φ).inv_hom_id_app F))
+          ((Scheme.proEtaleBaseChange f).op.obj U))
+    exact he _
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext F
+    apply T.map_injective
+    apply Sheaf.hom_ext
+    ext U m
+    apply (ConcreteCategory.bijective_of_isIso
+      (((cUnderlying B X Λ φ).hom.app F).hom.app
+        ((Scheme.proEtaleBaseChange f).op.obj U))).1
+    exact (he F U m).trans (by
+      have h := ConcreteCategory.congr_hom (congr_app
+        (congrArg (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).map
+          ((cUnderlying B X Λ φ).inv_hom_id_app F))
+            ((Scheme.proEtaleBaseChange f).op.obj U))
+      exact (h _).symm)
 
 /-- The canonical sectionwise scalar/direct-image comparison.
 Source: Stacks, Tag 0D6E
@@ -281,7 +494,8 @@ theorem hOpen_isIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     IsIso (hOpen B j Λ φ) := by
-  sorry
+  dsimp only [hOpen]
+  infer_instance
 
 /-- The comparison functor is additive and exact.
 Source: Stacks, Tags 03DA and 099R
@@ -292,7 +506,8 @@ theorem h_exact (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : B →+* Λ) :
     (H B X Λ φ).Additive ∧ PreservesFiniteLimits (H B X Λ φ) ∧
       PreservesFiniteColimits (H B X Λ φ) := by
-  sorry
+  dsimp only [H, C]
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity of H. Source: Stacks, Tag 099R
 (blueprint: def-cbc-finite-constant-coefficient-transport). -/
