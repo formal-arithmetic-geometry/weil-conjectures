@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-constant-to-continuous-scalar-flat",
+ "kind": "statement",
+ "title": "Continuous coefficients are flat over discrete constant PID scalars",
+ "statement": "Let A be a topological commutative principal ideal domain. On the coherent site of profinite sets, let underline A be the sheafified discrete constant ring and B the ring of continuous A-valued functions [sk-def-sfb-condensed-ring, def-weil-pbc-constant-sheaf]. The canonical ring map underline A → B, characterized by sending each scalar to its constant continuous function under the sheafification adjunction, is flat: extension of internal module scalars along it preserves finite limits [def-sfb-modobj-relative-tensor].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FC (lemma-flat-eq); Tags 093J, 03EI and tensor product; PID torsion-free flatness criterion in Mathlib/RingTheory/Flat/TorsionFree.lean."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the canonical sheafification unit as a section ring homomorphism from A, transporting its monoid structure along the composite constant-sheaf functor. The adjunction-mate equation for phi identifies its action on the restricted continuous coefficient module with ordinary pointwise scalar multiplication.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Continuous A-valued functions on every profinite test object form a torsion-free A-module: a nonzero scalar killing a function kills each value in the domain A. Over the PID A this module is flat, including on the empty test object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the length of a finite family of sections of the sheafified constant ring. Local surjectivity of the sheafification unit and intersection of covering sieves provide one common covering sieve on which every coefficient lifts to A. Restrict a finite module relation to such a cover and apply the ordinary equational criterion for the flat A-module of continuous functions. Apply the section ring homomorphism to its finite factorization matrix. The scalar-action calculation from step 1 verifies the two required equations, so the local equational criterion makes the section module flat.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport section-module flatness to internal flatness with flat_iff_sectionModule. The canonical extendForgetTensorIso identifies extension of scalars followed by the exact forgetful functor with tensoring by the restricted regular module followed by forgetful. Tensoring preserves finite limits by internal flatness, and forgetful reflects them. Hence extension of scalars preserves finite limits.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-relative-tensor",
+  "lem-c2-internal-section-module-flatness",
+  "lem-weil-pbc-site-flat-equational-criterion-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08FC (local equational criterion); section Tensor product; Mathlib/RingTheory/Flat/TorsionFree.lean. Explicit local lifting and relation factorization proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous functions to a principal ideal domain are flat over the constant sheaf of scalars",
+   "results": "RingHom.Flat; Module.Flat.finsupp; continuousSubmodule; AlgebraicGeometry.Flat.iff_flat_stalkMap; RingHom.Flat.propertyIsLocal; CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf. No theorem for this internal extension of scalars.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous functions to a principal ideal domain are flat over the constant sheaf of scalars",
+   "results": "Module.Flat.of_free; Module.flat_of_isLocalized_maximal; CompHausLike.LocallyConstantModule.functor. None gives the internal scalar-extension flatness comparison.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsPrincipalIdealRing",
+   "results": "Submodule.finrank_span_eq_finrank_span only; no internal sheaf scalar-extension theorem.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_iff_torsionFree|flat.*torsionFree|torsionFree.*flat",
+   "results": "Mathlib/RingTheory/Flat/TorsionFree.lean: Module.Flat instances for torsion-free modules over Dedekind domains. The sheafification and internal-module transport remains necessary.",
+   "date": "2026-10-19",
+   "verdict": "scalar criterion found, no complete sheaf comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteConstantModelResolution",
+  "date": "2026-10-19",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Integral/rational model argument: flatness needed for the finite scalar resolution in lem-sfb-finite-constant-model-two-term-free-resolution.",
+   "via": [
+    "lem-sfb-finite-constant-model-two-term-free-resolution",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantToContinuousScalarFlat",
+  "file": "lean/Sheaf/Paper/ConstantToContinuousScalarFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteConstantModel.constantToContinuous_preservesFiniteLimits",
+  "statement": "theorem constantToContinuous_preservesFiniteLimits\n    (A : Type u) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]\n    [TopologicalSpace A] [IsTopologicalRing A]\n    [IsCommMonObj ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj\n      (AddCommGrpCat.of (ULift.{u + 1} A)))]\n    (φ : (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj\n      (AddCommGrpCat.of (ULift.{u + 1} A)) ⟶ Profinite.continuousCoefficientRingObj A)\n    [IsMonHom φ]\n    (hφ : ∀ (S : Profinite.{u}ᵒᵖ) (a : ULift.{u + 1} A),\n      (((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv\n        _ _ φ).app S) a = ULift.up (ContinuousMap.const S.unop a.down)) :\n    PreservesFiniteLimits (Mod.extendScalars φ)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034327-L-421700",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261019T034327-L-421700",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
