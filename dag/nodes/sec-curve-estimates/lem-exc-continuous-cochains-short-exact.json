@@ -1,145 +1,154 @@
 {
-  "id": "lem-exc-continuous-cochains-short-exact",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-exc-continuous-cohomology",
-      "place": "The final clause 'Equivalently it is computed by the complex of continuous inhomogeneous cochains': exactness needed to compare its cohomology with derived invariants",
-      "via": [
-        "lem-exc-cochains-derived-invariants"
-      ]
-    },
-    "same_as": []
+ "id": "lem-exc-continuous-cochains-short-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "The final clause 'Equivalently it is computed by the complex of continuous inhomogeneous cochains': exactness needed to compare its cohomology with derived invariants",
+   "via": [
+    "lem-exc-cochains-derived-invariants"
+   ]
   },
-  "kind": "statement",
-  "title": "Continuous cochains preserve short exact sequences of discrete modules",
-  "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $0\\to M'\\to M\\to M''\\to0$ a short exact sequence in the abelian category of left $A$-modules with continuous $A$-linear $G$-action [lem-exc-discrete-modules-abelian]. Give these modules the discrete topology. For every $n\\geq0$, the sequence $0\\to\\operatorname{Cont}(G^n,M')\\to\\operatorname{Cont}(G^n,M)\\to\\operatorname{Cont}(G^n,M'')\\to0$ is exact. The maps commute with the inhomogeneous group-cochain differentials, namely $d^0m(g)=gm-m$ and, for $n\\geq1$, $d^nf(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jf(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n)$; hence they form a short exact sequence of cochain complexes of $A$-modules.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuous cochains preserve short exact sequences of discrete modules",
+ "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $0\\to M'\\to M\\to M''\\to0$ a short exact sequence in the abelian category of left $A$-modules with continuous $A$-linear $G$-action [lem-exc-discrete-modules-abelian]. Give these modules the discrete topology. For every $n\\geq0$, the sequence $0\\to\\operatorname{Cont}(G^n,M')\\to\\operatorname{Cont}(G^n,M)\\to\\operatorname{Cont}(G^n,M'')\\to0$ is exact. The maps commute with the inhomogeneous group-cochain differentials, namely $d^0m(g)=gm-m$ and, for $n\\geq1$, $d^nf(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jf(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n)$; hence they form a short exact sequence of cochain complexes of $A$-modules.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph beginning 'However, a short exact sequence of discrete G-modules'"
+ },
+ "stmt_deps": [
+  "lem-exc-discrete-modules-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved abelian-structure and underlying-module exactness theorem [lem-exc-discrete-modules-abelian-structure], without its sibling's enough-injectives assertion. The forgetful functor preserves finite limits and colimits, hence monos and epis. Postcomposition with the injection is injective pointwise. For a cochain killed by the surjection choose a preimage of each value in the coefficient kernel, extend this choice by zero outside the kernel, and postcompose; the choice is continuous between discrete spaces. For surjectivity, postcompose with a set-theoretic right inverse of the coefficient surjection, again continuous between discrete spaces. These arguments include degree zero.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian-structure"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph beginning 'However, a short exact sequence of discrete G-modules'"
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph beginning 'However, a short exact sequence of discrete G-modules'; the pointwise lifting argument is supplied here"
+   }
   },
-  "stmt_deps": [
-    "lem-exc-discrete-modules-abelian"
-  ],
-  "proof": [
-    {
-      "text": "Write $i:M'\\to M$ and $p:M\\to M''$. Exactness in [lem-exc-discrete-modules-abelian] is exactness of the underlying $A$-modules. For each $n$, postcomposition with $i$ is injective. If $p\\circ f=0$ for a continuous $f:G^n\\to M$, then every $f(x)$ lies in $i(M')$; the unique pointwise preimage $f':G^n\\to M'$ is continuous because $M'$ and $M$ are discrete and the inverse image of each singleton under $f'$ is an inverse image under $f$ of a singleton in $M$. Thus the image of postcomposition with $i$ is the kernel of postcomposition with $p$. Choose a set-theoretic section $s:M''\\to M$ of the surjection $p$. Both modules are discrete, so $s$ is continuous; for any continuous $h:G^n\\to M''$, the map $s\\circ h$ is a continuous lift. Hence postcomposition with $p$ is surjective. For $n=0$, $G^0$ is a singleton and this is the original exact sequence.",
-      "uses": [
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph beginning 'However, a short exact sequence of discrete G-modules'; the pointwise lifting argument is supplied here"
-      }
-    },
-    {
-      "text": "The displayed formula defines a continuous $A$-linear differential: each projection, adjacent multiplication map $G^{n+1}\\to G^n$, and the action map $G\\times M\\to M$ is continuous, and finite sums are continuous into the discrete module. The identity $d^{n+1}d^n=0$ follows by expanding the two alternating sums: terms joining disjoint adjacent pairs occur twice with opposite signs, as do the action term paired with joining the first pair and the final omission term paired with joining the last pair; the remaining double-action terms cancel by $(g_1g_2)m=g_1(g_2m)$. In degree zero, the two terms from $d^1(d^0m)$ cancel directly. Thus these are cochain complexes.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed inhomogeneous differential; the cancellation check is supplied here"
-      }
-    },
-    {
-      "text": "For either equivariant $A$-linear map $u=i,p$, applying $u$ to every term in the formula for $d^nf$ gives the corresponding term of $d^n(u\\circ f)$: $u(gm)=g u(m)$ handles the first term, and additivity handles the alternating sum and last term. The degree-zero formula has the same property. Therefore the degreewise maps of Step 1 are morphisms of the complexes of Step 2 and their composite is zero. Extend these nonnegative complexes by zero in negative degrees. Their degreewise sequences are short exact in every integer degree, so the criterion [lem-weil-pbc-cochain-complexes-degreewise-exact] makes the resulting sequence short exact as complexes; restricting back to nonnegative degrees gives the asserted cochain-complex sequence.",
-      "uses": [
-        "lem-weil-pbc-cochain-complexes-degreewise-exact",
-        "lem-exc-discrete-modules-abelian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed differential and paragraph on short exact sequences of discrete G-modules; degreewise criterion is Mathlib's HomologicalComplex.shortExact_iff_degreewise_shortExact"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-exc-discrete-modules-abelian",
+  {
+   "text": "Construct the continuous A-linear differential by the displayed formula. The action term is continuous by the open-stabilizer criterion for a discrete action, and every other term is a continuous precomposition followed by multiplication by an integer. To prove square-zero, forget to the integer-linear representation, lift the integers, group, and coefficient carrier to their common universe, and compare pointwise with Mathlib's inhomogeneousCochains.d. Fin.contractNth commutes with taking ULift.down. Apply groupCohomology.inhomogeneousCochains.d_comp_d and evaluate at lifts of the original arguments. This proves square-zero in all degrees, including zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed inhomogeneous differential; the cancellation check is supplied here"
+   }
+  },
+  {
+   "text": "Postcomposition with either equivariant A-linear coefficient map commutes with the action term by equivariance, and with the signed sum by additivity and preservation of integer multiples. Thus the explicit cochain maps commute with the differentials; their composite is zero by the coefficient short-complex relation. Apply the degreewise short-exactness criterion [lem-weil-pbc-cochain-complexes-degreewise-exact] directly for the shape up Nat, using the pointwise injectivity, kernel-image equality and surjectivity from step 1. Identity linear coordinates give precisely the required formulas. No extension to integer degrees is needed.",
+   "uses": [
     "lem-weil-pbc-cochain-complexes-degreewise-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology: assertion and differential are in the source; the degreewise lifting and cancellation details are supplied by the agent"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "continuous cochains of profinite group on discrete modules form cohomological delta functor",
-      "results": "HTTP 500 from LeanSearch on 2026-10-10.",
-      "date": "2026-10-10",
-      "verdict": "service unavailable; no match established"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Short exact sequence of discrete modules with continuous profinite group action gives short exact sequence of continuous cochain complexes",
-      "results": "groupCohomology.map_cochainsFunctor_shortExact in Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence, for abstract group representations and all set-theoretic cochains.",
-      "date": "2026-10-10",
-      "verdict": "no match: abstract group cochains do not impose continuity"
-    },
-    {
-      "tool": "grep",
-      "query": "rg 'cochainsFunctor_shortExact|ShortExact.*continuous' Mathlib/RepresentationTheory/Homological/{ContCohomology,GroupCohomology}",
-      "results": "GroupCohomology/LongExactSequence.lean:50 has map_cochainsFunctor_shortExact for abstract representations; ContCohomology has no corresponding exactness declaration.",
-      "date": "2026-10-10",
-      "verdict": "no exact continuous-cochain match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-exc-cochains-derived-invariants",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-exc-continuous-cochains-short-exact",
-    "worker": "stage1",
-    "summary": "Expanded the Stacks 0DVG assertion into degreewise exactness via a continuous set-theoretic lift, continuity and square-zero of the inhomogeneous differential, and compatibility with equivariant maps followed by the existing Mathlib degreewise-exactness leaf. The statement was retained and no new nodes were needed.",
-    "blueprint": "Realizes the final continuous-inhomogeneous-cochains clause of def-exc-continuous-cohomology: exactness required by its comparison with derived invariants.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ccs",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccs (reviewer sub-agent of L); spot-checked: Source: Stacks 0DVG (etale-cohomology.tex, section-continuous-group-cohomology, lines 9005-9044): the displayed inhomogeneous differential (n>=1 and n=0 gm-m) agrees term by term and sign by sign with the node's statement, and the paragraph at line 9041 asserts the short exactness of continuous-cochain complexes for discrete G-modules; the node's specialization (profinite G, finite ring A, open stabilizers = continuous action on discrete module) is a special case, finiteness of A unused. Statement unchanged; only proof fields and split_report added. Step 1 rests on the clause of lem-exc-discrete-modules-abelian that exactness is underlying A-module exactness; injectivity, kernel = image (pointwise preimage is continuous because preimages of singletons are preimages under f of singletons) and surjectivity (a set-theoretic section of a map of discrete spaces is continuous) checked. Step 2 elementary: continuity of d^n f (action map GxM->M continuous with open stabilizers and M discrete) and d^2=0 by the standard cancellation, checked. Step 3: equivariance and additivity give chain maps; degreewise short exactness plus lem-weil-pbc-cochain-complexes-degreewise-exact (existing Mathlib leaf, off-unit generic tool, statement read; Mathlib HomologicalComplexAbelian.lean:70 shortExact_iff_degreewise_shortExact verified, valid for any shape) gives short exactness of complexes. Small cases: G trivial (degree 0 = original sequence), M'=0, M''=0. Blueprint search 'continuous cochains short exact' via tools/blueprint_refs.py: 0 matches, same_as [] consistent. 14:40-14:41 UTC"
-  },
-  "lean": {
-    "module": "Sheaf.RepresentationTheory.ContinuousCochainsShortExact",
-    "declaration": "Rep.continuousCochains_shortExact",
-    "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainsShortExact.lean",
-    "statement": "theorem continuousCochains_shortExact (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (S : ShortComplex (DiscreteContinuousRep.{v, u, w} A G)) : S.ShortExact → let X : Fin 3 → DiscreteContinuousRep.{v, u, w} A G := ![S.X₁, S.X₂, S.X₃] letI : ∀ j : Fin 3, TopologicalSpace (X j).obj.V := fun _ ↦ ⊥ letI : ∀ j : Fin 3, DiscreteTopology (X j).obj.V := fun _ ↦ ⟨rfl⟩ letI : ∀ j : Fin 3, ContinuousConstSMul A (X j).obj.V := fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩ ∃ (K : Fin 3 → CochainComplex (ModuleCat.{max u w} A) ℕ) (e : ∀ (j : Fin 3) (n : ℕ), (K j).X n ≃ₗ[A] C((Fin n → G), (X j).obj.V)) (i : K 0 ⟶ K 1) (p : K 1 ⟶ K 2) (hip : i ≫ p = 0), (ShortComplex.mk i p hip).ShortExact ∧ (∀ n : ℕ, Function.Injective (i.f n) ∧ Set.range (i.f n) = {x | p.f n x = 0} ∧ Function.Surjective (p.f n)) ∧ (∀ (n : ℕ) (f : (K 0).X n) (g : Fin n → G), e 1 n (i.f n f) g = S.f.hom.hom (e 0 n f g)) ∧ (∀ (n : ℕ) (f : (K 1).X n) (g : Fin n → G), e 2 n (p.f n f) g = S.g.hom.hom (e 1 n f g)) ∧ (∀ (j : Fin 3) (n : ℕ) (f : (K j).X n) (g : Fin (n + 1) → G), e j (n + 1) ((K j).d n (n + 1) f) g = (X j).obj.ρ (g 0) (e j n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e j n f (Fin.contractNth k (· * ·) g))",
-    "branch": "sheaf-dag",
-    "by": "C1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-ccs1027",
-    "group": "C1",
-    "result": "pass",
-    "note": "profinite G (Group/Top/IsTopGroup/Compact/T2/TotDisc), finite Ring A, S.ShortExact in landed Rep.DiscreteContinuousRep; discrete topology on V; e: K_j^n ≃ₗ C(Fin n→G,V); i,p = postcomposition; degreewise inj/ker=im/surj; d via ρ(g0) + Σ(-1)^(k+1) contractNth (k=n drops last), n=0 gives gm-m; ShortExact of complexes in ModuleCat A; no record for def-exc-continuous-cohomology, Mathlib ContCohomology homogeneous so no H4"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, displayed differential and paragraph on short exact sequences of discrete G-modules; degreewise criterion is Mathlib's HomologicalComplex.shortExact_iff_degreewise_shortExact"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian-structure",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, displayed differential and paragraph on short exact sequences. M5 formalizes pointwise lifting and naturality, and uses Mathlib's algebraic inhomogeneous differential square-zero theorem through universe lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous cochains of profinite group on discrete modules form cohomological delta functor",
+   "results": "HTTP 500 from LeanSearch on 2026-10-10.",
+   "date": "2026-10-10",
+   "verdict": "service unavailable; no match established"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequence of discrete modules with continuous profinite group action gives short exact sequence of continuous cochain complexes",
+   "results": "groupCohomology.map_cochainsFunctor_shortExact in Mathlib.RepresentationTheory.Homological.GroupCohomology.LongExactSequence, for abstract group representations and all set-theoretic cochains.",
+   "date": "2026-10-10",
+   "verdict": "no match: abstract group cochains do not impose continuity"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'cochainsFunctor_shortExact|ShortExact.*continuous' Mathlib/RepresentationTheory/Homological/{ContCohomology,GroupCohomology}",
+   "results": "GroupCohomology/LongExactSequence.lean:50 has map_cochainsFunctor_shortExact for abstract representations; ContCohomology has no corresponding exactness declaration.",
+   "date": "2026-10-10",
+   "verdict": "no exact continuous-cochain match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-exc-cochains-derived-invariants",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-continuous-cochains-short-exact",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 0DVG assertion into degreewise exactness via a continuous set-theoretic lift, continuity and square-zero of the inhomogeneous differential, and compatibility with equivariant maps followed by the existing Mathlib degreewise-exactness leaf. The statement was retained and no new nodes were needed.",
+  "blueprint": "Realizes the final continuous-inhomogeneous-cochains clause of def-exc-continuous-cohomology: exactness required by its comparison with derived invariants.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccs",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccs (reviewer sub-agent of L); spot-checked: Source: Stacks 0DVG (etale-cohomology.tex, section-continuous-group-cohomology, lines 9005-9044): the displayed inhomogeneous differential (n>=1 and n=0 gm-m) agrees term by term and sign by sign with the node's statement, and the paragraph at line 9041 asserts the short exactness of continuous-cochain complexes for discrete G-modules; the node's specialization (profinite G, finite ring A, open stabilizers = continuous action on discrete module) is a special case, finiteness of A unused. Statement unchanged; only proof fields and split_report added. Step 1 rests on the clause of lem-exc-discrete-modules-abelian that exactness is underlying A-module exactness; injectivity, kernel = image (pointwise preimage is continuous because preimages of singletons are preimages under f of singletons) and surjectivity (a set-theoretic section of a map of discrete spaces is continuous) checked. Step 2 elementary: continuity of d^n f (action map GxM->M continuous with open stabilizers and M discrete) and d^2=0 by the standard cancellation, checked. Step 3: equivariance and additivity give chain maps; degreewise short exactness plus lem-weil-pbc-cochain-complexes-degreewise-exact (existing Mathlib leaf, off-unit generic tool, statement read; Mathlib HomologicalComplexAbelian.lean:70 shortExact_iff_degreewise_shortExact verified, valid for any shape) gives short exactness of complexes. Small cases: G trivial (degree 0 = original sequence), M'=0, M''=0. Blueprint search 'continuous cochains short exact' via tools/blueprint_refs.py: 0 matches, same_as [] consistent. 14:40-14:41 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainsShortExact",
+  "declaration": "Rep.continuousCochains_shortExact",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainsShortExact.lean",
+  "statement": "theorem continuousCochains_shortExact (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (S : ShortComplex (DiscreteContinuousRep.{v, u, w} A G)) : S.ShortExact → let X : Fin 3 → DiscreteContinuousRep.{v, u, w} A G := ![S.X₁, S.X₂, S.X₃] letI : ∀ j : Fin 3, TopologicalSpace (X j).obj.V := fun _ ↦ ⊥ letI : ∀ j : Fin 3, DiscreteTopology (X j).obj.V := fun _ ↦ ⟨rfl⟩ letI : ∀ j : Fin 3, ContinuousConstSMul A (X j).obj.V := fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩ ∃ (K : Fin 3 → CochainComplex (ModuleCat.{max u w} A) ℕ) (e : ∀ (j : Fin 3) (n : ℕ), (K j).X n ≃ₗ[A] C((Fin n → G), (X j).obj.V)) (i : K 0 ⟶ K 1) (p : K 1 ⟶ K 2) (hip : i ≫ p = 0), (ShortComplex.mk i p hip).ShortExact ∧ (∀ n : ℕ, Function.Injective (i.f n) ∧ Set.range (i.f n) = {x | p.f n x = 0} ∧ Function.Surjective (p.f n)) ∧ (∀ (n : ℕ) (f : (K 0).X n) (g : Fin n → G), e 1 n (i.f n f) g = S.f.hom.hom (e 0 n f g)) ∧ (∀ (n : ℕ) (f : (K 1).X n) (g : Fin n → G), e 2 n (p.f n f) g = S.g.hom.hom (e 1 n f g)) ∧ (∀ (j : Fin 3) (n : ℕ) (f : (K j).X n) (g : Fin (n + 1) → G), e j (n + 1) ((K j).d n (n + 1) f) g = (X j).obj.ρ (g 0) (e j n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e j n f (Fin.contractNth k (· * ·) g))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccs1027",
+  "group": "C1",
+  "result": "pass",
+  "note": "profinite G (Group/Top/IsTopGroup/Compact/T2/TotDisc), finite Ring A, S.ShortExact in landed Rep.DiscreteContinuousRep; discrete topology on V; e: K_j^n ≃ₗ C(Fin n→G,V); i,p = postcomposition; degreewise inj/ker=im/surj; d via ρ(g0) + Σ(-1)^(k+1) contractNth (k=n drops last), n=0 gives gm-m; ShortExact of complexes in ModuleCat A; no record for def-exc-continuous-cohomology, Mathlib ContCohomology homogeneous so no H4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261019T112457-L-3943889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
