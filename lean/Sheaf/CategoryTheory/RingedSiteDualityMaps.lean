@@ -81,7 +81,14 @@ theorem ringedSiteDualEvaluation_naturality (P : D) {N N' : D} (f : N ⟶ N') :
     S.tensor.map (Prod.mkHom f (𝟙 (H.obj (op P, O)))) ≫
         ringedSiteDualEvaluation S O u P N' =
       ringedSiteDualEvaluation S O u P N ≫ H.map (Prod.mkHom (𝟙 (op P)) f) := by
-  sorry
+  let _ := S.monoidal
+  unfold ringedSiteDualEvaluation WeilConjectures.CoefficientClosedStructure.transpose
+  apply (S.adjunction P).homEquiv_naturality_left_square
+  dsimp [WeilConjectures.CoefficientClosedStructure.tensor]
+  simp only [Category.assoc]
+  simp only [tensorHom_id, id_tensorHom,
+    associator_naturality_left_assoc, ← whisker_exchange_assoc,
+    rightUnitor_naturality]
 
 /-- Evaluation as a natural transformation, with the specified canonical components.
 Source: Stacks 08JD (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -89,6 +96,36 @@ def ringedSiteDualEvaluationNatTrans (P : D) :
     ringedSiteDualTensor S O P ⟶ Prod.sectR (op P) D ⋙ H where
   app N := ringedSiteDualEvaluation S O u P N
   naturality _ _ f := ringedSiteDualEvaluation_naturality S O u P f
+
+private theorem ringedSiteTranspose_left {T T' P Q : D} (f : T' ⟶ T)
+    (g : S.tensor.obj (T, P) ⟶ Q) :
+    S.transpose T' P Q (S.tensor.map (Prod.mkHom f (𝟙 P)) ≫ g) =
+      f ≫ S.transpose T P Q g := by
+  let _ := S.monoidal
+  dsimp only [WeilConjectures.CoefficientClosedStructure.transpose,
+    WeilConjectures.CoefficientClosedStructure.tensor, MonoidalCategory.tensor]
+  rw [tensorHom_id]
+  exact (S.adjunction P).homEquiv_naturality_left f g
+
+private theorem ringedSiteTranspose_source (T : D) {P P' Q : D} (f : P' ⟶ P)
+    (g : S.tensor.obj (T, P) ⟶ Q) :
+    S.transpose T P' Q (S.tensor.map (Prod.mkHom (𝟙 T) f) ≫ g) =
+      S.transpose T P Q g ≫ H.map (Prod.mkHom f.op (𝟙 Q)) := by
+  let _ := S.monoidal
+  apply (S.transpose T P' Q).symm.injective
+  rw [Equiv.symm_apply_apply]
+  change _ = (tensorRight P').map
+    (S.transpose T P Q g ≫ H.map (Prod.mkHom f.op (𝟙 Q))) ≫ S.evaluation P' Q
+  rw [Functor.map_comp, Category.assoc]
+  change _ = (S.transpose T P Q g ▷ P') ≫
+    (H.map (Prod.mkHom f.op (𝟙 Q)) ▷ P') ≫ S.evaluation P' Q
+  rw [show (H.map (Prod.mkHom f.op (𝟙 Q)) ▷ P') ≫ S.evaluation P' Q =
+    (H.obj (op P, Q) ◁ f) ≫ S.evaluation P Q from S.evaluation_naturality P P' Q f]
+  rw [← Category.assoc, ← whisker_exchange, Category.assoc]
+  change _ = (T ◁ f) ≫ (S.transpose T P Q).symm (S.transpose T P Q g)
+  rw [Equiv.symm_apply_apply]
+  simp only [WeilConjectures.CoefficientClosedStructure.tensor, tensor_map,
+    id_tensorHom]
 
 /-- Naturality of signed bidual evaluation in the source complex.
 Source: Stacks 0A97 (blueprint: lem-sfb-ringed-site-duality-maps).
@@ -98,7 +135,18 @@ theorem ringedSiteBidual_naturality {P P' : D} (f : P ⟶ P') :
     f ≫ ringedSiteBidual S s O P' =
       ringedSiteBidual S s O P ≫ H.map
         (Prod.mkHom (H.map (Prod.mkHom f.op (𝟙 O))).op (𝟙 O)) := by
-  sorry
+  let _ := S.monoidal
+  let _ := s
+  unfold ringedSiteBidual
+  rw [← ringedSiteTranspose_left]
+  rw [← ringedSiteTranspose_source]
+  congr 1
+  dsimp [WeilConjectures.CoefficientClosedStructure.tensor]
+  simp only [id_tensorHom, tensorHom_id,
+    BraidedCategory.braiding_naturality_left_assoc,
+    BraidedCategory.braiding_naturality_right_assoc]
+  congr 1
+  exact (S.evaluation_naturality P' P O f).symm
 
 /-- Evaluation is contravariantly natural in the first argument too.
 Source: Stacks 08JD, 0A98 (blueprint: lem-sfb-ringed-site-duality-maps).
@@ -107,7 +155,19 @@ theorem ringedSiteDualEvaluation_source_naturality {P P' : D} (f : P' ⟶ P) (N 
     S.tensor.map (Prod.mkHom (𝟙 N) (H.map (Prod.mkHom f.op (𝟙 O)))) ≫
         ringedSiteDualEvaluation S O u P' N =
       ringedSiteDualEvaluation S O u P N ≫ H.map (Prod.mkHom f.op (𝟙 N)) := by
-  sorry
+  let _ := S.monoidal
+  unfold ringedSiteDualEvaluation
+  rw [← ringedSiteTranspose_left]
+  rw [← ringedSiteTranspose_source]
+  congr 1
+  dsimp [WeilConjectures.CoefficientClosedStructure.tensor]
+  simp only [id_tensorHom, tensorHom_id,
+    associator_naturality_middle_assoc, associator_naturality_right_assoc]
+  have ev : (H.map (Prod.mkHom f.op (𝟙 O)) ▷ P') ≫ S.evaluation P' O =
+      (H.obj (op P, O) ◁ f) ≫ S.evaluation P O := S.evaluation_naturality P P' O f
+  rw [← whiskerLeft_comp_assoc, ev]
+  simp only [whiskerLeft_comp, Category.assoc]
+
 /-- The canonical comparison with dual tensor the target, in the node's order.
 Source: Stacks 08JE, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps). -/
 def ringedSiteDualEvaluationLeft (P N : D) :
@@ -121,7 +181,14 @@ theorem ringedSiteDualEvaluationLeft_naturality (P : D) {N N' : D} (f : N ⟶ N'
     S.tensor.map (Prod.mkHom (𝟙 (H.obj (op P, O))) f) ≫
         ringedSiteDualEvaluationLeft S s O u P N' =
       ringedSiteDualEvaluationLeft S s O u P N ≫ H.map (Prod.mkHom (𝟙 (op P)) f) := by
-  sorry
+  let _ := S.monoidal
+  let _ := s
+  change (𝟙 _ ⊗ₘ f) ≫ (β_ _ _).hom ≫ _ = ((β_ _ _).hom ≫ _) ≫ _
+  rw [BraidedCategory.braiding_naturality_assoc]
+  simpa only [WeilConjectures.CoefficientClosedStructure.tensor, tensor_map,
+    Category.assoc] using
+    congrArg ((β_ (H.obj (op P, O)) N).hom ≫ ·)
+      (ringedSiteDualEvaluation_naturality S O u P f)
 
 /-- The node's actual canonical comparison as a natural transformation.
 Source: Stacks 08JE, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -295,7 +362,9 @@ theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModu
     (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)
       ((ringedSiteHomAugmentation.{c, v, r} J R).app F))) :
     IsIso (ringedSiteOrdinaryHomComparison.{c, v, r, w} J R E F) := by
-  sorry
+  let _ := h
+  unfold ringedSiteOrdinaryHomComparison
+  infer_instance
 
 /-- The specified comparison iso when ordinary Hom computes derived Hom.
 Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps). -/
@@ -464,7 +533,16 @@ theorem ringedSiteDualityRestriction_preservesZero (U : C) :
     (SheafOfModules.overFunctor.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
         U).PreservesZeroMorphisms := by
-  sorry
+  classical
+  have hSheaf : HasSheafify J AddCommGrpCat.{max c v r} := inferInstance
+  have hW : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} := inferInstance
+  have hDerived : HasDerivedCategory.{w} (SheafOfModules.{max c v r}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :=
+    inferInstance
+  constructor
+  intro X Y
+  ext V x
+  rfl
 
 /-- Forgetting commutativity commutes with slice restriction as sheaves of rings.
 Source: Stacks 03DJ (blueprint: lem-sfb-ringed-site-duality-maps).
@@ -475,7 +553,12 @@ theorem ringedSiteDualityRestrictionCoefficient_eq (U : C) :
     (sheafCompose (J.over U)
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj (R.over U) =
     ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U := by
-  sorry
+  have hSheaf : HasSheafify J AddCommGrpCat.{max c v r} := inferInstance
+  have hW : J.WEqualsLocallyBijective AddCommGrpCat.{max c v r} := inferInstance
+  have hDerived : HasDerivedCategory.{w} (SheafOfModules.{max c v r}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) :=
+    inferInstance
+  rfl
 
 /-- The actual termwise restriction functor on complexes.
 Source: Stacks 03DJ, 08FI (blueprint: lem-sfb-ringed-site-duality-maps). -/
