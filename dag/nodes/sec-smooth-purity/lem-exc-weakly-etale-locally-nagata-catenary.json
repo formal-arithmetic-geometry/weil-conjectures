@@ -70,12 +70,10 @@
    }
   },
   {
-   "text": "For any weakly etale map $R\\to S$, distinct comparable primes of $S$ have distinct contractions to $R$. Indeed, base change to the residue field $k=\\kappa(\\mathfrak p)=\\operatorname{Frac}(R/\\mathfrak p)$ identifies primes over $\\mathfrak p$ with primes of $F=S\\otimes_R k$ (first quotient by $\\mathfrak pS$, then invert $R\\setminus\\mathfrak p$). The weakly etale field lemma says that every singly generated $k$-subalgebra of $F$ is finite etale, hence finite dimensional: linear dependence of $1,x,x^2,\\ldots$ makes each $x$ algebraic over $k$. Each prime quotient of $F$ is therefore an algebraic domain over $k$, hence a field: for a nonzero $x$, an algebraic equation of least degree has nonzero constant coefficient, and solving it expresses $x^{-1}$ as a polynomial in $x$. Thus all primes of $F$ are maximal, so comparable primes in a fibre coincide.",
+   "text": "For a weakly etale R-algebra S, fix two comparable primes with the same contraction p. Mathlib PrimeSpectrum.preimageOrderIsoFiber identifies them with comparable primes of p.Fiber S = kappa(p) tensor_R S. Base change preserves weak etaleness. Since a field is absolutely flat, Ring.AbsolutelyFlat.of_flat_lmul' and Ring.AbsolutelyFlat.tfae in the proved source module WeilConjectures.RingTheory.ProEtale.WeakDimension show that this fibre has Krull dimension at most zero. Every prime is maximal, so the two fibre primes coincide. The order isomorphism then identifies the original primes. Thus strict inclusions contract strictly. This avoids the separate weakly-etale-field theorem and any finiteness or algebraicity argument.",
    "uses": [
     "lem-exc-weakly-etale-ring-base-change-composition",
-    "lem-weil-pbc-weak-etale-field",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "def-weil-pbc-localization-at-prime"
    ],
    "elementary": true,
    "source": {
@@ -84,13 +82,13 @@
    }
   },
   {
-   "text": "We will use the following elementary consequence of universal catenarity. If $H$ is universally catenary and $T\\subset H$ is multiplicative, every polynomial ring $(T^{-1}H)[Y_1,\\ldots,Y_m]$ is $T^{-1}(H[Y_1,\\ldots,Y_m])$, by sending each coefficient fraction $a/t$ to the same fraction and fixing the variables; a common denominator for the finitely many coefficients gives the inverse. The cited localization prime correspondence preserves every interval between its endpoint primes: every intervening prime is disjoint from $T$ because it is contained in the upper endpoint. Thus these polynomial localizations are catenary, since $H[Y_1,\\ldots,Y_m]$ is catenary. Quotient prime intervals are also unchanged, since every prime between two primes containing an ideal $J$ contains $J$; every finite type algebra over $T^{-1}H$ is such a polynomial quotient. Consequently $T^{-1}H$ is universally catenary. The same finite type argument shows that every quotient of a universally catenary ring is universally catenary; Noetherianity of these rings follows by contracting ideals and extending their finite generators, and by lifting quotient ideals.",
+   "text": "Catenarity descends along any surjective ring map: inverse image is an order embedding of ideals, and every prime between two inverse images contains the kernel and hence is the inverse image of its image prime. Catenarity also passes to localizations: Mathlib IsLocalization.orderIsoOfPrime identifies prime ideals with the primes disjoint from the multiplicative set, and every prime between two such primes is disjoint because it is contained in the upper one. In each case contraction preserves strict prime chains, endpoints, lengths and saturation, giving both the chain-length bound and equality of saturated-chain lengths directly from IsCatenaryRing. For an essentially finite type R-algebra S, Mathlib Algebra.EssFiniteType.subalgebra and submonoid present it as a localization of a finite type R-subalgebra. If R is universally catenary that finite type subalgebra is catenary, hence so is S. Finite type algebras over an essentially finite type algebra are essentially finite type over R by composition; this proves universal catenarity for a Noetherian essentially finite type algebra. When the algebra and base have different universes, a polynomial presentation makes the algebra Small in the base universe; Shrink.algEquiv transports catenarity through the surjective equivalence. Thus the same-universe quantifier in IsUniversallyCatenary loses no cases.",
    "uses": [
     "def-exc-excellent-ring",
     "def-weil-pbc-finite-type-algebra",
     "def-weil-polynomial-ring",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "def-weil-pbc-noetherian-ring"
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-primes-of-localization"
    ],
    "elementary": true,
    "source": {
@@ -99,11 +97,10 @@
    }
   },
   {
-   "text": "Let $\\mathfrak Q\\subsetneq\\mathfrak Q^{\\prime}$ be consecutive primes in a saturated chain of $S$, and put $\\mathfrak p=\\mathfrak Q\\cap R$, $\\mathfrak p^{\\prime}=\\mathfrak Q^{\\prime}\\cap R$. Step 4 gives $\\mathfrak p\\subsetneq\\mathfrak p^{\\prime}$. Set $C=R_{\\mathfrak p^{\\prime}}/\\mathfrak pR_{\\mathfrak p^{\\prime}}\\cong(R/\\mathfrak p)_{\\mathfrak p^{\\prime}/\\mathfrak p}$ and $D=S_{\\mathfrak Q^{\\prime}}/\\mathfrak pS_{\\mathfrak Q^{\\prime}}$. By step 3, $R_{\\mathfrak p^{\\prime}}$ is Nagata; its quotient $C$ is Nagata by finite-over-Nagata permanence. It is a local domain by the displayed quotient-localization isomorphism. It is universally catenary by the quotient and localization arguments of step 5 applied to $R$. Its normalization in its fraction field is finite by the Nagata and Japanese definitions, taking the trivial finite field extension. Base change $R\\to S$ along $R\\to C$ to get $C\\to C\\otimes_R S=(S\\otimes_R R_{\\mathfrak p^{\\prime}})/\\mathfrak p(S\\otimes_R R_{\\mathfrak p^{\\prime}})$; send $(r/s)\\otimes b$ to $f(r)b/f(s)$ and then localize at the prime induced by $\\mathfrak Q^{\\prime}$. This gives exactly $D$, since all $s\\in R\\setminus\\mathfrak p^{\\prime}$ have image outside $\\mathfrak Q^{\\prime}$ and the final denominators are precisely those outside that prime. Base-change stability and weak etaleness of localization therefore give a local weakly etale map $C\\to D$: the maximal ideals are the images of $\\mathfrak p^{\\prime}$ and $\\mathfrak Q^{\\prime}$, and their contraction equality is exactly $\\mathfrak Q^{\\prime}\\cap R=\\mathfrak p^{\\prime}$. The target is Noetherian local: localizing preserves finite generation of ideals as in step 1, and taking a quotient preserves it by lifting an ideal.",
+   "text": "For consecutive primes P < Q of S let p and q be their contractions to R. Localize to Rprime = R_q and Sprime = S_Q using Localization.localRingHom. Composition with localization preserves weak etaleness, and a compatible tensor equivalence over a localization of the base proves weak etaleness over Rprime, in mixed universes as well. Let a = p Rprime, c = P Sprime and b = a Sprime. The localization ideal order embedding proves that a and c are prime, their contractions are p and P, and c contracts to a; therefore b is contained in c. Set C = Rprime/a, D = Sprime/b. C is a Noetherian local domain and D a Noetherian local ring, with nontriviality following from b being contained in the prime c. The tensor-quotient equivalence Algebra.TensorProduct.quotIdealMapEquivQuotTensor makes C to D a base change of Rprime to Sprime, hence weakly etale. It is local since both the localized map and the quotient maps reflect units. Essential finite type permanence from step 5 makes C universally catenary. The Nagata hypothesis at q directly gives that C is Japanese; isN1_of_isN2 therefore supplies the finite normalization of C needed by the local component dimension theorem.",
    "uses": [
     "lem-exc-weakly-etale-ring-base-change-composition",
     "lem-weil-pbc-localization-ring-weakly-etale",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
     "lem-weil-pbc-finite-over-nagata-nagata",
     "def-weil-pbc-nagata-ring",
     "def-weil-pbc-japanese-domain",
@@ -116,7 +113,7 @@
    }
   },
   {
-   "text": "The prime $P=\\mathfrak QS_{\\mathfrak Q^{\\prime}}/\\mathfrak pS_{\\mathfrak Q^{\\prime}}$ is minimal in $D$. A prime of $D$ contained in $P$ corresponds to a prime $\\mathfrak T\\subseteq\\mathfrak Q$ of $S$ containing $\\mathfrak pS$; its contraction is both contained in and contains $\\mathfrak p$, hence equals $\\mathfrak p$. Step 4 forces $\\mathfrak T=\\mathfrak Q$. Prime correspondence also identifies $D/P$ with $S_{\\mathfrak Q^{\\prime}}/\\mathfrak QS_{\\mathfrak Q^{\\prime}}$: it has exactly the two primes coming from $\\mathfrak Q$ and $\\mathfrak Q^{\\prime}$, so its Krull dimension is $1$. Apply the local component dimension lemma to the map $C\\to D$ prepared in step 6 and the minimal prime $P$. It gives $\\dim C=1$. Primes of $C$ correspond to primes of $R$ between $\\mathfrak p$ and $\\mathfrak p^{\\prime}$; an intermediate prime would give a chain of length $2$, contradicting $\\dim C=1$. Thus the contracted adjacent primes are consecutive.",
+   "text": "Let J be the image of c in D. Quotient ideal correspondence makes J prime and its contraction to C zero. If a prime K were strictly below J, step 4 applied to C to D would give a prime strictly below zero in C. Hence J is minimal. The localization prime correspondence transfers the original adjacency of P < Q to the absence of a prime strictly between c and the maximal ideal of Sprime. In Sprime/c, every nonzero prime therefore contracts to the maximal ideal and is maximal, giving Ring.KrullDimLE 1. Apply lem-exc-weakly-etale-local-component-dimension to C to D and J: dim(D/J) = dim C. DoubleQuot.quotQuotEquivQuotOfLE identifies D/J with Sprime/c, so dim C is at most one. An intermediate prime between p and q would localize to a prime strictly between a and the maximal ideal of Rprime; its image in C would be a nonzero nonmaximal prime, contradicting Ring.KrullDimLE 1. Thus contractions of adjacent primes are adjacent. The proof needs only a dimension upper bound, not a separate proof that the dimension is exactly one.",
    "uses": [
     "lem-exc-weakly-etale-local-component-dimension",
     "lem-weil-pbc-primes-of-localization",
@@ -129,7 +126,7 @@
    }
   },
   {
-   "text": "For fixed endpoints $\\mathfrak Q_0\\subseteq\\mathfrak Q_1$ in $S$, contraction sends every finite strict chain between them to a strict chain of the same length in $R$ by step 4. Catenarity of $R$ therefore bounds all these lengths. A finite chain can be refined to a saturated chain by inserting primes; the bound makes this process terminate. Steps 6–7 show that every saturated chain contracts to a saturated chain with the same fixed contracted endpoints. All those chains have the same length because $R$ is catenary. Hence $S$ is catenary. Equal endpoints have only the length-zero chain. If $S$ has no primes the assertion is vacuous.",
+   "text": "For each interval of prime ideals of S, compose a finite prime chain with contraction. Step 4 preserves strictness and length, and steps 6 and 7 preserve saturation. Applying the chain bound and saturated-chain equality for the contracted endpoints in R gives both clauses of IsCatenaryRing S directly. No choice of maximal refinements is needed. Empty spectra and chains of length zero are covered by the same quantified argument.",
    "uses": [
     "def-exc-excellent-ring"
    ],
@@ -166,18 +163,15 @@
   "lem-exc-weakly-etale-ring-base-change-composition",
   "lem-weil-pbc-finite-over-nagata-nagata",
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
   "lem-weil-pbc-localization-ring-weakly-etale",
   "lem-weil-pbc-nagata-localization",
   "lem-weil-pbc-polynomial-nagata",
-  "lem-weil-pbc-primes-of-localization",
-  "lem-weil-pbc-weak-etale-field"
+  "lem-weil-pbc-primes-of-localization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Greco (1976), Theorem 5.3(iii), read online at https://scispace.com/pdf/two-theorems-on-excellent-rings-2lc74dyy3w.pdf",
-  "place": "Expanded argument from printed pp. 146–148. Local literature copy is WANTED; all elementary fraction and chain details are written here."
+  "document": "Greco (1976), Theorem 5.3(iii), with Lemma 5.5; the existing nine-step DAG argument and compiled Lean implementation by M9",
+  "place": "Printed pp. 146–147. The localized component argument is unchanged. Fibre incomparability uses the proved source absolutely-flat API; elementary quotient/localization chain arguments use Mathlib order correspondences and essentially finite type presentations. All helper proofs and the original theorem compile without new sorry."
  },
  "mathlib_searches": [
   {
@@ -321,9 +315,7 @@
   "lem-weil-pbc-finite-over-nagata-nagata",
   "lem-weil-pbc-localization-ring-weakly-etale",
   "lem-weil-pbc-nagata-localization",
-  "lem-weil-pbc-polynomial-nagata",
-  "lem-weil-pbc-weak-etale-field",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
+  "lem-weil-pbc-polynomial-nagata"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -362,5 +354,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261019T112500-L-3944576",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
