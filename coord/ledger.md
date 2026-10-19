@@ -17228,3 +17228,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/J5/Sheaf.Paper.PullbackTorAmplitude (stage 3; reviewer PASS; first push; landing 20261019T093454-L-2315553 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/J5/Sheaf.Paper.RootOfUnityModulus (stage 3; reviewer PASS; first push; landing 20261019T093455-L-2315765 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/J6/Sheaf.AlgebraicGeometry.ModuleSheafCoproductLocalSupport (stage 3; reviewer PASS; first push; landing 20261019T093457-L-2315971 (interface); batch 20261019T093237; modules 2; new nodes 1)
+- 09:34 L: merged deliver/J7/Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant (stage 3; reviewer PASS; first push; landing 20261019T093458-L-2316167 (interface); batch 20261019T093237; modules 1; new nodes 0; change records: coord/changes/J7-proEtalePullbackLocallyConstant-imports.md)
