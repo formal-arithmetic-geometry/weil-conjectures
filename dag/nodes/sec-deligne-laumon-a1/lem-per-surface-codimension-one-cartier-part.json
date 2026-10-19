@@ -258,5 +258,23 @@
   "group": "Q48",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-2923592ea (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-regular-prime-divisor-local-equations, every cited statement and the parent's Step 1, the only citer. I checked them against Stacks 0AGA, 0AG9 and the full proof of 0AGB in divisors.tex, and the first paragraph of 0BIB in resolve.tex. The item's statement is unchanged and is the regular case of 0AGB with the 0BIB factorization: X integral and Z ≠ X put η outside Z, so Z is nowhere dense. The new node is true and not a duplicate. It comes from 0AGA (a height-one prime of a regular local ring, which is a UFD, is principal) and 0AG9 (A_(f) is a DVR), and its A_(f) and prime-element clauses appear verbatim in 0AGB. The existing 0AG0 and 0AFT nodes are only algebraic and lem-sc-divisor-module-local only covers curves. Steps 1–7 check out. Step 1: η is outside Z, and the Noetherian topology, sobriety and reduced-induced citations do what the step claims. Step 2: the DVR exponents follow from the every-ideal-principal definition and the unit-times-power leaf, with the ideal nonzero and proper. Step 3: the product of Cartier ideals is Cartier. Step 4: this is 0AGB's prime-power division argument written out in full. Step 5: J = (I:L) is quasi-coherent of finite type and I = LJ. Step 6: J is the unit ideal at η, at codimension-one points and off Z, using the chain formula. Step 7: T is closed, consists of codimension-2 closed points and is finite. I tested x(x,y), x²y³, (x,y)², Z = ∅, V(px−1) in Z_p[x] and a 2-dimensional regular local ring with Z the closed point. I accept the four declared generic tool uses. The item is still unsplit on live and the route lock is respected. Advisories: the report mentions a citations.json that is not in the delivery, and whoever later splits the new node can cite the 0AG0 and 0AFT nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurfaceCodimensionOneCartierPart",
+  "declaration": "AlgebraicGeometry.exists_surface_codimension_one_cartier_part",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurfaceCodimensionOneCartierPart.lean",
+  "statement": "theorem exists_surface_codimension_one_cartier_part (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hRegular : IsRegularScheme X) (hDim : topologicalKrullDim X = 2) (Z : X.IdealSheafData) (hZ : Z ≠ ⊥) : ∃ L J : X.IdealSheafData, L.IsInvertible ∧ J.toModules.IsQuasiCoherentFiniteType ∧ Z = L * J ∧ Set.Finite (J.support : Set X) ∧ (∀ x ∈ J.support, IsClosed ({x} : Set X) ∧ ringKrullDim (X.presheaf.stalk x) = 2) ∧ (J.support : Set X) ⊆ Z.support",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e2e4edba",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: IsIntegral, IsNoetherian, IsRegularScheme (IsLocallyNoetherian ∧ IsRegular) and topologicalKrullDim X = 2. Z : IdealSheafData with Z ≠ ⊥; Mathlib support_bot = ⊤, so ⊥ is the zero ideal and Z ≠ ⊥ means Z ≠ X, with Z = ⊤ (empty) allowed. L.IsInvertible (regular principal on affine neighbourhoods) is exactly the def-nagata-effective-cartier-ideal blueprint_update. J.toModules.IsQuasiCoherentFiniteType follows the live pqf-def-coherent record. Z = L * J is Mathlib's affine-wise ideal product. J.support is the zero locus, i.e. Supp(O_X/J); it is finite, consists of closed points with ringKrullDim of the stalk = 2, and lies in Z.support. Quantifier order matches the node, one explicit universe, statement field verbatim. Edge cases checked: Z = ⊤, Z Cartier, Z punctual, L = ⊤, T empty, regular local base. Snapshot dependency records are identical to live; the item change is lean-only. No duplicate declaration (grep of side Sheaf/WeilConjectures for 0AGB/0BIB, CartierPart, IsInvertible with ideal products). Proof imports present; source and blueprint docstrings carry the seven steps; sorry only. nt_compile --json on the snapshot: 2.1 s, exit 0, clean. Advisory: the 'Second reading by Q69' section is an admitted author self-check, not an independent reading; this review supplies the independent reading."
  }
 }

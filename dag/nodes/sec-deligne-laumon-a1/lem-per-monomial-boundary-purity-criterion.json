@@ -15,7 +15,9 @@
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-per-punctual-purity",
+  "def-per-monomial-trait-model"
  ],
  "proof": [
   {
@@ -227,5 +229,30 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-628b7dbe1 (reviewer sub-agent of L); spot-checked: PASS: the split is sound, has no new nodes and needs no fixes. Statement, stmt_deps and source are byte-identical to the Q36-created node. Source check: it matches ILO XVI Lemme 3.5.13(iv), printed p.251, whose proof uses affine-space divisors, the special-fibre cover, the generic fibre and Prop 3.2.3. The steps: (1) V and U=D(pi) are Noetherian and regular. (2) B/(T_i)=k[T_j, j≠i] by explicit inverse maps because a_i>0, so H_i is smooth hence regular, with codimension 1; T_i is a nonzerodivisor since (pi,T_i) has height 2 in R[T]. (3) The prime-field purity node applies to H_i and to U, because R[1/pi]=Frac R by the dim-1 chain argument; this avoids needing an exponent invertible in the generic field. (4) The prime cover of the special fibre by the positive-exponent H_i is correct. (5) and (6) use both directions of the two-of-three criterion (ILO 3.2.3) with c=1, and the normalization is the same as the class-calculus Kummer class. Edge cases n=1, (1,0,...,0), and exponents divisible by p or ell work. No duplicate: the semistable, primitive-geometry and 3.5.5 nodes differ. The closures of the cited nodes do not contain the item, and the proof does not use 3.5.6, so there is no monomial-node cycle. Batch-5 flags accepted: the cited nodes are absolute purity, which neither assumed statement gives and neither proof uses. lem-trf-regular-sequence-dimension-formula is Mathlib-level commutative algebra and lem-trf-bounded-below-derived-adjunction is a generic derived adjunction. The other reached trf/pod nodes are also generic (open-square exchange, topological invariance, t-exact truncation, section deformation/translation and Frobenius-open-square), as accepted before for Q35 and Q64. Accepted tool uses: lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-open-subscheme-noetherian, sbc-lem-affine-space-smooth."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonomialBoundaryPurityCriterion",
+  "declaration": "AlgebraicGeometry.Etale.monomial_boundary_purity_criterion",
+  "declarations": [
+   "AlgebraicGeometry.Etale.monomialBoundaryAlgebra",
+   "AlgebraicGeometry.Etale.monomialBoundaryInclusion",
+   "AlgebraicGeometry.Etale.monomialBoundaryInclusion_isClosedImmersion",
+   "AlgebraicGeometry.Etale.monomial_boundary_purity_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonomialBoundaryPurityCriterion.lean",
+  "statement": "theorem monomial_boundary_purity_criterion (ℓ : ℕ) (hℓ : ℓ.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (hℓR : IsUnit (ℓ : R)) (n : ℕ) (hn : 1 ≤ n) (a : Fin n → ℕ) (ha : ∃ i, a i ≠ 0) (hregular : IsRegularScheme (Spec (.of (monomialTraitAlgebra R π n a)))) : IsPunctuallyPure ℓ hℓ (Spec (.of (monomialTraitAlgebra R π n a))) ↔ ∀ (i : Fin n), 0 < a i → ∃ (hreg : IsStalkRegularClosedImmersion (monomialBoundaryInclusion R π n a i) 1) (hunit : IsUnit ((ℓ ^ 1 : ℕ) : Γ(Spec (.of (monomialTraitAlgebra R π n a)), ⊤))), IsIso (punctualPurityClassMap ℓ hℓ (monomialBoundaryInclusion R π n a i) 1 hreg hunit)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Reuses def-per-punctual-purity: IsPunctuallyPure and punctualPurityClassMap in the ordinary small-etale D+ category. The literal monomial algebra is owned by def-per-monomial-trait-model, whose existing declarations remain in RegularLogSmoothMonomialChart. Coordinate divisors are the actual quotient by the coordinate image. No dependency module is republished."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54b9b5e31",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after the fbf5 RETURN; all three faults fixed. (1) Punctual purity is no longer redefined: it uses IsPunctuallyPure/punctualPurityClassMap, with def-per-punctual-purity in stmt_deps. (2) The chart-theorem stmt_dep is replaced by def-per-monomial-trait-model. (3) The EtaleFiniteTwistPullback re-push, the lem-asd record rewrite and its stmt_dep are gone. Only lean and stmt_deps differ from the live node; lean.statement is verbatim; one sorry. Clauses match: Noetherian local domain with dim 1 and maximal ideal (π), ℓ a unit, n>=1, exponents not all zero, IsRegularScheme V, H_i = B/(mk X_i) with a real closed-immersion instance, iff over a_i>0 at c=1. The existential hreg/hunit witnesses always hold (T_i is a nonzerodivisor since R and B are CM and (T_i,π) has height 2), so the RHS is exactly the node's. Edge cases n=1, zero exponents and d=0 points are fine; universes u/u+1. No duplicate. nt_compile timed out twice at load ~90 on the unpublished dep RegularImmersionClassCalculus (57 s CPU). lcompile.run_set(timeout=560) with side copies (stale published EtaleFiniteTwistPullback 46.7 s, RegularImmersionClassCalculus 77.3 s, PunctualPurity 45 s): item 7.7 s, rc 0, no messages; a degree-2 control fails as expected. Advisory: IsStalkRegularClosedImmersion is reached only via the class-calculus stmt_dep, as in def-per-punctual-purity. Maintainer: land at lower load or after the deps are published."
  }
 }

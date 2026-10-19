@@ -2,7 +2,7 @@
  "id": "lem-per-punctual-purity-proper-degree-descent",
  "kind": "statement",
  "title": "Descent of punctual purity along proper invertible-degree maps",
- "statement": "For a prime $\\ell$ and $A=\\mathbf F_\\ell$, use ordinary small-etale derived categories and Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. If $W$ is a regular Noetherian scheme with $\\ell$ invertible [def-weil-regular-scheme], say that $W$ is punctually pure at $w\\in W$ when, for $W_w=\\operatorname{Spec}\\mathcal O_{W,w}$, $d_w=\\dim\\mathcal O_{W,w}$ and its closed-point inclusion $j_w:\\operatorname{Spec}\\kappa(w)\\hookrightarrow W_w$, the Kummer fundamental-class map\n$$A_{\\kappa(w)}\\longrightarrow j_w^!A_{W_w}(d_w)[2d_w]$$\nof [lem-per-regular-immersion-class-calculus] is an isomorphism. Say that $W$ is punctually pure when this holds at every point. Local rings and residue fields are as in [def-weil-residue-field], affine spectra as in [def-weil-affine-spectrum], and dimension as in [def-weil-pbc-krull-dimension-ring].\n\nA trait here is $S=\\operatorname{Spec}R$ for a discrete valuation ring: a Noetherian local domain of dimension one whose maximal ideal is principal. A complete strictly henselian trait has $R$ complete for its maximal-ideal topology and henselian with separably closed residue field (henselian means that every simple root over the residue field of a monic polynomial over $R$ lifts to a root over $R$). Mixed characteristic means that $\\operatorname{Frac}R$ has characteristic zero and the residue field has positive characteristic.\n\nLet $S$ be a complete strictly henselian mixed-characteristic trait on which $\\ell$ is invertible. Let $f:V\\to W$ be a proper dominant $S$-morphism of integral regular schemes of finite type and quasi-projective over $S$ [def-weil-proper-morphism, def-pc-integral-scheme, def-weil-finite-type-morphism]. Quasi-projective means admitting a locally closed immersion into a finite-dimensional projective space over $S$. Suppose that $f$ is generically finite etale of positive degree $d$ not divisible by $\\ell$, meaning finite etale of degree $d$ over a nonempty open subscheme of $W$. If $V$ is punctually pure, then $W$ is punctually pure. No flatness hypothesis on $f$ is imposed.",
+ "statement": "For a prime $\\ell$ and $A=\\mathbf F_\\ell$, use ordinary small-etale derived categories and Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. Use punctual purity of regular Noetherian schemes with $\\ell$ invertible as in [def-per-punctual-purity], with regularity as in [def-weil-regular-scheme] and the canonical Kummer classes of [lem-per-regular-immersion-class-calculus]. Local rings and residue fields are as in [def-weil-residue-field], affine spectra as in [def-weil-affine-spectrum], and dimension as in [def-weil-pbc-krull-dimension-ring].\n\nA trait here is $S=\\operatorname{Spec}R$ for a discrete valuation ring: a Noetherian local domain of dimension one whose maximal ideal is principal. A complete strictly henselian trait has $R$ complete for its maximal-ideal topology and henselian with separably closed residue field (henselian means that every simple root over the residue field of a monic polynomial over $R$ lifts to a root over $R$). Mixed characteristic means that $\\operatorname{Frac}R$ has characteristic zero and the residue field has positive characteristic.\n\nLet $S$ be a complete strictly henselian mixed-characteristic trait on which $\\ell$ is invertible. Let $f:V\\to W$ be a proper dominant $S$-morphism of integral regular schemes of finite type and quasi-projective over $S$ [def-weil-proper-morphism, def-pc-integral-scheme, def-weil-finite-type-morphism]. Quasi-projective means admitting a locally closed immersion into a finite-dimensional projective space over $S$. Suppose that $f$ is generically finite etale of positive degree $d$ not divisible by $\\ell$, meaning finite etale of degree $d$ over a nonempty open subscheme of $W$. If $V$ is punctually pure, then $W$ is punctually pure. No flatness hypothesis on $f$ is imposed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVI, Proposition 3.5.7 and proof, Lemmas 3.5.8--3.5.10, printed pp.249--250: the Gysin comparison is a retract of its proper direct image since the two degree composites are multiplication by d. Restricted to the complete mixed-characteristic traits used in section 3.7."
@@ -18,7 +18,8 @@
   "def-weil-proper-morphism",
   "def-pc-integral-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -265,5 +266,58 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0225a2887 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Item statement and stmt_deps are byte-identical to base (Q53 snapshot), so no target is weakened. The 7 steps follow ILO XVI 3.5.7-3.5.10. Steps 1/7 use the class node and the 3.5.5 criterion. Step 2 builds a_M from the 3.5.8 tensor/projection construction (proper f, identity-open compactification). I recomputed the step-3 squares and the step-6 inverse by hand. Step 4 restricts to U through the amb open-exchange and projection nodes plus finite-etale ambidexterity. Step 5 uses End(K_W)=A. All four new nodes are true, unsplit and statement-only, and none is a duplicate. lem-per-prepurity-lci-classes is ILO 2.5.4-2.5.12, which does not use purity; it differs from lem-per-regular-gysin-calculus and lem-per-absolute-gysin-purity, which assert isomorphisms and reach the item, so citing them would close a cycle. lem-per-trait-relative-class-criterion is ILO 3.5.5; on the closed fibre it reduces to purity of the trait (3.5.1). lem-per-trait-dualizing-scalar-restriction (ILO 3.5.9 biduality) differs from the potential-dualizing nodes, which need a pinned complex. lem-per-finite-etale-derived-ambidexterity (ILO 3.5.10, Stacks 03SE/04HN) overlaps lem-weil-pbc-finite-etale-trace-degree only on the termwise degree identity. I checked edge cases: closed point with e=-1, d=0 or 1 sheets, ell dividing d, disconnected T. No cycles. No SGA in any delivered file. The five amb compact-support tool_uses are accepted as generic formalism. Batch-5 flags: every flagged reached node (lem-trf-finite-ring-section-deformation, lem-trf-bounded-below-derived-adjunction, lem-pod-lisse-module-sheaves-as-module-objects) is already in the batch-5 closure without this delivery, which adds only its 4 new nodes. All are generic (DNC smooth orientation, abstract derived adjunction, Stacks 0DV5 lisse module objects), not steps of the trace formula or Poincare duality, so all accepted. Advisory: harmless over-cited def-weil-proper-morphism in two new nodes; future splits should cite lem-per-regular-lci-geometric-calculus and lem-weil-pbc-finite-etale-trace-degree."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PunctualPurityProperDegreeDescent",
+  "declaration": "AlgebraicGeometry.Etale.punctual_purity_of_proper_primeToDegree",
+  "declarations": [
+   "AlgebraicGeometry.Etale.punctual_purity_of_proper_primeToDegree"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PunctualPurityProperDegreeDescent.lean",
+  "statement": "theorem punctual_purity_of_proper_primeToDegree (ℓ : ℕ) (hℓ : ℓ.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [CharZero (FractionRing R)] (hres : 0 < ringChar (IsLocalRing.ResidueField R)) (hℓR : IsUnit (ℓ : R)) {V W : Scheme.{u}} [V.Over (Spec (.of R))] [W.Over (Spec (.of R))] [IsIntegral V] [IsIntegral W] (hV : IsRegularScheme V) (hW : IsRegularScheme W) [LocallyOfFiniteType (V ↘ Spec (.of R))] [QuasiCompact (V ↘ Spec (.of R))] [LocallyOfFiniteType (W ↘ Spec (.of R))] [QuasiCompact (W ↘ Spec (.of R))] (hVqp : ∃ (N : Type u) (_ : Finite N) (i : V ⟶ ℙ(N; Spec (.of R))), IsImmersion i ∧ i ≫ (ℙ(N; Spec (.of R)) ↘ Spec (.of R)) = V ↘ Spec (.of R)) (hWqp : ∃ (N : Type u) (_ : Finite N) (i : W ⟶ ℙ(N; Spec (.of R))), IsImmersion i ∧ i ≫ (ℙ(N; Spec (.of R)) ↘ Spec (.of R)) = W ↘ Spec (.of R)) (f : V ⟶ W) [f.IsOver (Spec (.of R))] [IsProper f] [IsDominant f] (d : ℕ) (hd : 0 < d) (hprime : ¬ ℓ ∣ d) (hgeneric : ∃ U : W.Opens, Nonempty U ∧ IsFinite (f ∣_ U) ∧ Etale (f ∣_ U) ∧ (f ∣_ U).IsFiniteLocallyFreeOfDegree d) (hpure : IsPunctuallyPure ℓ hℓ V) : IsPunctuallyPure ℓ hℓ W",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the existing AlgebraicGeometry.Etale.IsPunctuallyPure from Sheaf.AlgebraicGeometry.PunctualPurity for both hypothesis and conclusion. The four duplicate purity helpers were deleted; the source-based statement_change adds the owning definition node without altering the geometric conditions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97c337531",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery after H4/H12 RETURN of 17e7204e: all 5 requested changes done (statement_change citing def-per-punctual-purity with all keys, stmt_dep added, PunctualPurity imported, 4 duplicate helpers deleted, hpure/conclusion use IsPunctuallyPure). All other hypotheses byte-identical to the previously accepted rendering and checked clause by clause (DVR, IsAdicComplete, IsStrictlyHenselianLocalRing, mixed char, ℓ unit, integral/regular, finite type, quasi-projective immersion, proper/dominant/over S, d>0, ℓ∤d, nonempty finite-étale degree-d open). The correction does not change the mathematics; no cycle; only citer lem-per-gabber-regular-pair-purity (proof dep) holds. Non-public imports = recorded proof_dep modules. nt_compile --json: first run timed out (60 s) on base dep RegularImmersionClassCalculus under load ~100; second run rc 0, no warnings, delivered file 3.9 s. Advisory: IsFiniteLocallyFreeOfDegree owner not in stmt_deps (accepted before); second reading is author-only; landing may need a retry at lower load because of that dep.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "Q31 stage 2",
+  "old_statement": "For a prime $\\ell$ and $A=\\mathbf F_\\ell$, use ordinary small-etale derived categories and Tate twists [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. If $W$ is a regular Noetherian scheme with $\\ell$ invertible [def-weil-regular-scheme], say that $W$ is punctually pure at $w\\in W$ when, for $W_w=\\operatorname{Spec}\\mathcal O_{W,w}$, $d_w=\\dim\\mathcal O_{W,w}$ and its closed-point inclusion $j_w:\\operatorname{Spec}\\kappa(w)\\hookrightarrow W_w$, the Kummer fundamental-class map\n$$A_{\\kappa(w)}\\longrightarrow j_w^!A_{W_w}(d_w)[2d_w]$$\nof [lem-per-regular-immersion-class-calculus] is an isomorphism. Say that $W$ is punctually pure when this holds at every point. Local rings and residue fields are as in [def-weil-residue-field], affine spectra as in [def-weil-affine-spectrum], and dimension as in [def-weil-pbc-krull-dimension-ring].\n\nA trait here is $S=\\operatorname{Spec}R$ for a discrete valuation ring: a Noetherian local domain of dimension one whose maximal ideal is principal. A complete strictly henselian trait has $R$ complete for its maximal-ideal topology and henselian with separably closed residue field (henselian means that every simple root over the residue field of a monic polynomial over $R$ lifts to a root over $R$). Mixed characteristic means that $\\operatorname{Frac}R$ has characteristic zero and the residue field has positive characteristic.\n\nLet $S$ be a complete strictly henselian mixed-characteristic trait on which $\\ell$ is invertible. Let $f:V\\to W$ be a proper dominant $S$-morphism of integral regular schemes of finite type and quasi-projective over $S$ [def-weil-proper-morphism, def-pc-integral-scheme, def-weil-finite-type-morphism]. Quasi-projective means admitting a locally closed immersion into a finite-dimensional projective space over $S$. Suppose that $f$ is generically finite etale of positive degree $d$ not divisible by $\\ell$, meaning finite etale of degree $d$ over a nonempty open subscheme of $W$. If $V$ is punctually pure, then $W$ is punctually pure. No flatness hypothesis on $f$ is imposed.",
+  "what": "The statement introduced punctual purity inline although def-per-punctual-purity already owns ILO XVI 3.2.1--3.2.2. Its delivered Yoneda helpers duplicated the same transpose-isomorphism notion with a non-definitional predicate, preventing direct composition with other punctual-purity results. Replace the inline definition by a reference to the existing definition node, add that statement dependency, and use its IsPunctuallyPure predicate. No geometric hypothesis or mathematical purity condition changes.",
+  "source": {
+   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+   "place": "Expose XVI, Definitions 3.2.1--3.2.2, printed p.244, and Proposition 3.5.7 with Lemmas 3.5.8--3.5.10, printed pp.249--250; the trait specialization is section 3.7."
+  },
+  "citers": [
+   {
+    "id": "lem-per-gabber-regular-pair-purity",
+    "holds": true,
+    "note": "Step 4 still descends punctual purity from the alteration; the hypothesis and conclusion now use the same canonical IsPunctuallyPure predicate as smooth ascent and log-smooth trait purity, with all geometric hypotheses unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-regular-scheme",
+   "def-weil-pbc-derived-categories",
+   "def-asd-finite-etale-tate-twist",
+   "lem-per-regular-immersion-class-calculus",
+   "def-weil-residue-field",
+   "def-weil-affine-spectrum",
+   "def-weil-pbc-krull-dimension-ring",
+   "def-weil-proper-morphism",
+   "def-pc-integral-scheme",
+   "def-weil-finite-type-morphism",
+   "def-weil-etale-morphism"
+  ]
  }
 }

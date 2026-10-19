@@ -258,5 +258,24 @@
   "group": "Q148",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-91fa2ab0b (reviewer sub-agent of L); spot-checked: Read ILO II Prop. 1.1.7 (printed p. 24) with 1.1.1–1.1.2. The item states the same equivalence: Noetherian base, finite type, maximally dominant, numbering swapped. It adds no hypothesis, and its fibre clause is the base change of the finite restriction, which is what the parent alteration-cover-calculus Step 1 uses. Each step's citations match their statements. Step 1 gets X Noetherian, finitely many components and a quasi-separated f from 01T6, 0BA8, 01IS, 01OY and the qcqs node (1). Step 2 shows by maximality and uniqueness of generic points that f(ξ)=s, then the 01TE node makes ξ closed in X_s, so the fibre points are maximal points and finite in number. Step 3: the 02NW node's hypotheses (qc, qs, locally finite type, Noetherian target, finite generic fibres) all hold. Step 4 (elementary) shows every generic point lies in V. Step 5 uses 01WL base change. Step 6: B/q is a finite-dimensional domain and so a field, and 01JT with κ(x)⊗_k k=κ(x) identifies the residue fields. I tested empty X, open immersions, a non-maximally-dominant disjoint union, A^1 over a field, a nilpotent thickening, inseparable extensions and the doubled-origin line. No duplicate exists: the 02NW and 02ML nodes are spreading tools, and blueprint lem-fin-projective-generically-finite assumes a projective morphism over a domain. There are no new nodes, no cycle and no SGA citation. Batch-5 flag lem-trf-finite-residue-point-closed-in-fibre: it is Stacks 01TE, generic scheme theory. Its 80-node closure contains no sec-trace-formula, sec-poincare-duality, unit or assumption node, so it is outside both assumed results and is accepted. The tool_uses 01TE, 02NW and 01JT are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreFinitenessCriterion",
+  "declaration": "AlgebraicGeometry.generic_fibre_finiteness_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreFinitenessCriterion.lean",
+  "statement": "theorem generic_fibre_finiteness_criterion (f : X ⟶ S) [IsNoetherian S] [LocallyOfFiniteType f] [QuasiCompact f] (hdom : ∀ ⦃C : Set X⦄ ⦃x : X⦄, C ∈ irreducibleComponents X → IsGenericPoint x C → ∃ D : Set S, D ∈ irreducibleComponents S ∧ IsGenericPoint (f x) D) : (( (∀ ⦃C : Set X⦄ ⦃x : X⦄, C ∈ irreducibleComponents X → IsGenericPoint x C → letI := (f.residueFieldMap x).hom.toAlgebra; Module.Finite (S.residueField (f x)) (X.residueField x)) ↔ ∃ V : S.Opens, Dense (V : Set S) ∧ IsFinite (f ∣_ V)) ∧ (( (∀ ⦃C : Set X⦄ ⦃x : X⦄, C ∈ irreducibleComponents X → IsGenericPoint x C → letI := (f.residueFieldMap x).hom.toAlgebra; Module.Finite (S.residueField (f x)) (X.residueField x)) ∨ (∃ V : S.Opens, Dense (V : Set S) ∧ IsFinite (f ∣_ V))) → ∀ ⦃D : Set S⦄ ⦃s : S⦄, D ∈ irreducibleComponents S → IsGenericPoint s D → IsFinite (f.fiberToSpecResidueField s)))",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-19",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-47e68a1a6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47e68a1a6",
+  "group": "NV",
+  "result": "fix",
+  "note": "Statement matches node and ILO II 1.1.7 clause by clause: IsNoetherian S; LocallyOfFiniteType+QuasiCompact; hdom = maximal dominance via irreducibleComponents/IsGenericPoint; (i) Module.Finite with residueFieldMap toAlgebra; (ii) ∃ V dense with IsFinite (f ∣_ V); either ⇒ IsFinite fiberToSpecResidueField at component generic points of S. No extra hypotheses, universes ok, edge cases (empty, reducible, nonreduced, inseparable, nonseparated) ok, lean.statement verbatim, all 11 dep records used, no duplicate (side generic-finiteness decls are quasi-finite spreading tools). H8 faults fixed in fixes/lean/Sheaf/AlgebraicGeometry/GenericFibreFinitenessCriterion.lean: module docstring lacked (blueprint: id); theorem docstring lacked the node's proof steps (added the six steps with cited nodes and Stacks tags). Signature byte-identical. nt_compile --json: delivered and fixed both clean (exit 0, 1.9 s); broken control fails with Unknown identifier."
  }
 }

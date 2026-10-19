@@ -263,5 +263,28 @@
   "group": "Q07",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-916db6d86 (reviewer sub-agent of L); spot-checked: Read Stacks 0BI7 (resolve.tex 4109-4175) in full; the item statement matches it hypothesis by hypothesis, with primes restored in m_q(Y',E) and m_q(Y',Z'). I read all 8 steps against the cited statements, base and main-20261015 blueprint_update. The DVR route is regular dim-1 → normal (lem-weil-pbc-regular-local-dim-one-iff-normal, accepted tool_use) → lem-sc-normal-dim1-dvr. The ideal of p is invertible in both definition versions. The strict transform is the blowup of Y (thm-nagata-strict-transform-is-blowup) and the invertible centre gives an isomorphism (cor-nagata-blowup-cartier-iso). JR ≠ 0 because ker(A→B_{m/I}) = I. lem-weil-pbc-dim-le-one-principal-quotient-finite-length is an exact leaf for finite length. psi is well defined and factors through Y' scheme-theoretically via the kernel ideal. f/t lies in L. The length drop is proved by chains through R/(b) ≅ τR/(a) inside R/(a). Small cases checked: transverse (m=1, conditional case empty), y-x^r, nonreduced (y,x^r), X=Y. The delivery has no new nodes and no duplicates; the grep finds only the citer and a sibling with a different statement. No SGA. One C3/C4 fault, fixed: step 5 took the global blowup over U to be the affine local model from definitions alone. That identification is prop-nagata-global-blowup-cover-independent (BU clauses 2-3), which the parent proof of thm-nagata-blowup-principalizes-center cites for exactly this, so step 5 now cites it. Step 6 now also cites lemma-nagata-extended-ideal-affine-chart (the ideal of E on the chart is mC) and lemma-nagata-chart-extended-ideal-principal (mC=(t)). proof_deps is the union of the step uses; the statement is unchanged and every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveIntersectionBlowupDecrease",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.curve_intersection_blowup_decrease",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IdealSheafData.localIntersectionMultiplicity",
+   "AlgebraicGeometry.Scheme.IdealSheafData.curve_intersection_blowup_decrease"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveIntersectionBlowupDecrease.lean",
+  "statement": "theorem curve_intersection_blowup_decrease {X : Scheme.{u}} [IsLocallyNoetherian X] (Y Z : X.IdealSheafData) [IsIntegral Y.subscheme] (hDim : topologicalKrullDim Y.subscheme = 1) (p : Y.subscheme) (hp : IsClosed ({Y.subschemeι p} : Set X)) (hpZ : Y.subschemeι p ∈ Z.support) [IsRegularLocalRing (Y.subscheme.presheaf.stalk p)] (η : Y.subscheme) (hη : IsGenericPoint η Set.univ) (hηZ : Y.subschemeι η ∉ Z.support) (C : X.IdealSheafData) (hC : C = vanishingIdeal ⟨{Y.subschemeι p}, hp⟩) : 0 < localIntersectionMultiplicity Y Z (Y.subschemeι p) ∧ localIntersectionMultiplicity Y Z (Y.subschemeι p) < ⊤ ∧ IsIso (strictTransformToSource Y.subschemeι C.blowupMap C.support.compl) ∧ ∃ q : C.blowup, ((strictTransformMap Y.subschemeι C.blowupMap C.support.compl).ker.support : Set C.blowup) ∩ ((C.comap C.blowupMap).support : Set C.blowup) = {q} ∧ localIntersectionMultiplicity (strictTransformMap Y.subschemeι C.blowupMap C.support.compl).ker (C.comap C.blowupMap) q = 1 ∧ (q ∈ (strictTransformMap Z.subschemeι C.blowupMap C.support.compl).ker.support → localIntersectionMultiplicity (strictTransformMap Y.subschemeι C.blowupMap C.support.compl).ker (strictTransformMap Z.subschemeι C.blowupMap C.support.compl).ker q < localIntersectionMultiplicity Y Z (Y.subschemeι p))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "The localIntersectionMultiplicity helper constructs precisely the length defined in the item, using the sum of the section ideals mapped to the stalk. The centre parameter C is constrained by equality to the canonical reduced closed-point vanishing ideal."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71853d96f",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BI7 and the node clause by clause: locally Noetherian X; closed Y,Z as IdealSheafData; integral Y with topologicalKrullDim 1; p closed, in Z; regular stalk; generic point not in Z; centre pinned to the reduced point ideal (vanishingIdeal). Conclusions: 0<m<⊤, IsIso strictTransformToSource, unique q in supp Y'∩E with m_q(Y',E)=1, and the conditional strict decrease. Strict transforms are kernels of the canonical strict-transform closed immersions; E is C.comap blowupMap. localIntersectionMultiplicity is a genuine length of stalk modulo the stalk ideal of I⊔J (ideal_sup is rfl), with no duplicate in Mathlib, the project Lean or the DAG. Only the lean record changed; statement verbatim; docstrings complete; proof-dep imports correct. nt_compile --json clean in 2.4 s. Advisory only: lem-sc-normal-dim1-dvr module not imported explicitly."
  }
 }

@@ -242,5 +242,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-228126e6e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, together with Stacks resolve.tex 0AGQ/0AGR/0AGT/0AHH, divisors lemma-flat-base-change-blowing-up and lemma-blow-up-pullback-effective-Cartier, and algebra lemma-support-point. The item statement matches 0AHH and is unchanged. The induction is a strong induction on the total stalk colength over all triples. Step 1: the zero quotient is handled separately and support at a closed point follows from closedness. Steps 3-5: every hypothesis of the cited Nagata nodes, the stalk-flatness node and the new children holds. Step 6 writes out the inclusion 0AHH omits ('details omitted') by an elementary localization B_Q≅(W^{-1}B)_{W^{-1}Q}; J is glued independently of the generator. Step 7: T' is finite, its points are closed with regular 2-dimensional stalks, and the inequality is the unweighted one. Step 9: the total transform stays effective Cartier and a^d c is a nonzerodivisor. The geometry child (0AGQ(1)+0AGR, dimension 2 at closed points via the regular-mod-x argument, no excellence needed) and the colength child (0AGT, finite length equivalent to m^n⊆I⊆m) are true; I tested them on I=m and I=(x,y^2) over k[x,y]_(x,y). Neither restates the item. lem-per-surface-point-blowup-geometry needs an excellent global surface with an ample sheaf, so it is not a one-line specialization; no other duplicates. There is no cycle (the closure of 231 nodes does not reach the item). The off-unit Nagata nodes are Lean-closed or Mathlib leaves, and the two declared tool uses (lem-sc-generic-stalk-finite-length, lem-sbc-canonical-stalk-spectrum-flat) are generic and accepted. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SurfacePointIdealPrincipalization",
+  "declaration": "AlgebraicGeometry.exists_surface_point_ideal_principalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/SurfacePointIdealPrincipalization.lean",
+  "statement": "theorem exists_surface_point_ideal_principalization (X : Scheme.{u}) [IsNoetherian X] (T : Set X) (hT : T.Finite) (hclosed : ∀ p ∈ T, IsClosed ({p} : Set X)) (hregular : ∀ p ∈ T, IsRegularLocalRing (X.presheaf.stalk p)) (hdim : ∀ p ∈ T, ringKrullDim (X.presheaf.stalk p) = 2) (I : X.IdealSheafData) (hsupport : (I.support : Set X) ⊆ T) : ∃ (n : ℕ) (Y : Fin (n + 1) → Scheme.{u}) (e0 : Y 0 ≅ X) (b : ∀ i : Fin n, Y i.succ ⟶ Y i.castSucc) (a : ∀ i, Y i ⟶ X), a 0 = e0.hom ∧ (∀ i : Fin n, b i ≫ a i.castSucc = a i.succ) ∧ (∀ i : Fin n, ∃ (p : Y i.castSucc) (hp : IsClosed ({p} : Set (Y i.castSucc))), a i.castSucc p ∈ T ∧ ∃ e : Y i.succ ≅ (Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup, e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowupMap = b i) ∧ (I.comap (a (Fin.last n))).IsInvertible ∧ Scheme.Modules.IsInvertible (I.comap (a (Fin.last n))).toModules",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a592044cd",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Clause-by-clause vs Stacks 0AHH and the node: IsNoetherian X; T finite, closed, IsRegularLocalRing stalk with ringKrullDim=2; I : IdealSheafData with support (zero locus = Supp O_X/I) ⊆ T; tower Y : Fin (n+1) with e0 : Y 0 ≅ X, composites a pinned by a 0 = e0.hom and b≫a = a; each b i is iso-over the canonical blowupMap of vanishingIdeal {p} (reduced closed point) with a p ∈ T; conclusion (I.comap a_last).IsInvertible (affine-local regular principal = effective Cartier) ∧ Modules.IsInvertible of the same ideal's toModules. n=0, T=∅, empty X OK; no extra hypotheses, single universe u. Declarations read (Invertible, IsRegularPrincipal, comap, support, vanishingIdeal, blowup/blowupMap). Node diff only lean; statement verbatim; docstrings with source and blueprint plus 9-step plan; sorry only; no new defs. nt_compile --json clean 2.2 s, broken control fails, #check binders as expected. Advisory: OrdinaryBlowupTower (trf def node) is a related tower structure, not citable here; CoherentFiniteType import redundant (serves the pqf-def-coherent stmt_dep)."
  }
 }

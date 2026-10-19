@@ -14,7 +14,8 @@
   "lem-per-regular-immersion-class-calculus",
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -212,5 +213,27 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-6e53d985f (reviewer sub-agent of L); spot-checked: I read the full item and all six new nodes against ILO XVI pp.245-251 (Prop. 3.4.3, 3.4.5, Cor. 3.5.6, Def. 3.5.11, Prop. 3.5.12 with its proof, Lemma 3.5.13(i)-(vi) and footnotes viii-ix). The item statement is unchanged and matches 3.5.12. Step 1: g = gcd of the nonzero exponents, auxiliary trait R_g = R[u]/(u^g - pi); I checked the isomorphism on generators. gcd(b) = 1, so the primitive node applies; this fixes the inseparable (p) case in characteristic p. Step 2: zero exponents give A^r over V(a); smoothness from the Lean-closed sbc node, then the ascent node (3.5.6), whose finite-type and regular hypotheses hold. Step 3: semistable node plus the boundary criterion give V(1,...,1), and the root trait R_d gives V(d,...,d). Step 4: the map T_i -> U_i^{q_i} is finite free with a monomial basis of rank prod q_i, prime to ell; the reduced preimage of H_i is V(U_i); descent (3.4.3) and the criterion finish. Step 5: Kummer root (3.4.5) with f = T_1, prime-field purity of D and D' (both kappa(s)[T_2..]), two-of-three along D, and pointwise etale locality on the surjective etale complement cover; this is more careful than the source. Step 6: the induction on the sum of ell-valuations is properly set up. All six new nodes are true and match their source places: the primitive node (Eisenstein domain, pi not in m^2, Jacobian check), 3.4.3, 3.4.5 (V(U) = reduced preimage, extra clauses true), 3.5.6, 3.5.13(iv) (special fibre inside the union of the H_i, generic fibre pure by prime-field purity), and the semistable pair form, equivalent via the criterion to the Illusie 2004 / Rapoport-Zink input. They are statement-only and self-contained, cited ids exist, blueprint.from and via are set, and all three search kinds are recorded. No duplicates in the DAG (existing nodes cover 3.2.3, 3.2.5, 3.5.5, 3.5.7 and etale locality only), no restated clause, no cycle, no SGA. I accept the declared tool uses: principal-ideal DVR, root algebra, the finite-free flatness Mathlib leaf, and the Lean-closed affine-space smoothness. Batch-5 flags: all three cited nodes reach only generic sec-trace-formula/pod infrastructure, namely the D+ adjunction for an exact left adjoint, the closed-immersion strict-localisation fibre product, and site, topos and projective-bundle geometry. None is part of the trace formula or Poincare duality. regular-immersion-class-calculus only defines the Kummer class and was already a stmt_dep of the item. All accepted. Advisory for the maintainer: Illusie 2004 and Rapoport-Zink are not in literature/; the later split of lem-per-semistable-coordinate-divisor-purity will need them as WANTED. The primitive node lists krull-dimension in stmt_deps without a bracket citation (it is used implicitly by 'dimension one')."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonomialTraitPunctualPurity",
+  "declaration": "AlgebraicGeometry.Etale.monomial_trait_punctual_purity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.monomialTraitRing",
+   "AlgebraicGeometry.Etale.monomial_trait_punctual_purity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonomialTraitPunctualPurity.lean",
+  "statement": "theorem monomial_trait_punctual_purity (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (ℓ : ℕ) (hℓ : ℓ.Prime) (hunit : IsUnit (ℓ : R)) (n : ℕ) (hn : 1 ≤ n) (e : Fin n → ℕ) (he : ∃ i, e i ≠ 0) : ∃ (_hN : IsNoetherian (Spec (.of (monomialTraitRing R π n e)))), IsRegularScheme (Spec (.of (monomialTraitRing R π n e))) ∧ IsPunctuallyPure ℓ hℓ (Spec (.of (monomialTraitRing R π n e)))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da39aed6b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery fixes both earlier faults: uses the landed IsPunctuallyPure (def-per-punctual-purity added to stmt_deps) and contains no dependency module or rewritten record. Node record differs from live only in lean and that stmt_dep; other node files identical to live. Every clause matches ILO XVI 3.5.11-3.5.13: trait (Noetherian local domain, ringKrullDim 1, maximal ideal = span{π}), ℓ prime and unit in R, n≥1, exponents not all zero with zero exponents kept; conclusions Noetherian, IsRegularScheme, IsPunctuallyPure at every point; no extra assumptions or universe restriction. Compile: normal 60 s limit timed out on dependency RegularImmersionClassCalculus at load 108; with a 560 s limit, RICC 71.9 s, PunctualPurity 42.5 s, item 4.5 s, rc 0, no warnings. Advisories: monomialTraitRing is a reducible duplicate of AlgebraicGeometry.monomialTraitAlgebra, owned by theorem node lem-per-regular-log-smooth-monomial-chart (a later def node should own one); four landed proof-dep modules not imported (H9)."
  }
 }
