@@ -17113,3 +17113,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:14 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 6785dead2d2a: Byte-identical re-delivery (module sha256 787e4e0b, node record unch)
 - 08:18 L: returned deliver/Q01/lem-pur-condensed-exceptional-reconstruction (reviewer RETURN: L: independent stage-2 immutable head a4039ebb5e64: Re-delivery a4039ebb is byte-identical to the RETURNed c217af02 in t)
 - 08:19 L: merged deliver/NA/lem-pur-finite-free-compact-composition (stage 2; reviewer PASS; parallel immutable checks)
+- 08:22 L: merged deliver/NF/lem-pur-finite-free-projection-exchange (stage 2; reviewer PASS; parallel immutable checks)

@@ -452,5 +452,52 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-4d2f4fbde (reviewer sub-agent of L); spot-checked: Read all ten steps, cited statements, sources, and unit/chapter route. Repaired missing Nagata citation and flat-model site scope using existing origin/Tor comparisons; statements unchanged. Checked actual B-linear projection/exchange maps, refinement independence, ramified and zero/open/proper cases. Review and corrected whole JSON written under the review directory.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeProjectionExchange",
+  "declaration": "WeilConjectures.FiniteFreeProjectionExchange.finite_free_projection_exchange",
+  "declarations": [
+   "WeilConjectures.FiniteFreeProjectionExchange.pull",
+   "WeilConjectures.FiniteFreeProjectionExchange.scalarPull",
+   "WeilConjectures.FiniteFreeProjectionExchange.openExtension",
+   "WeilConjectures.FiniteFreeProjectionExchange.scalarOpen",
+   "WeilConjectures.FiniteFreeProjectionExchange.support",
+   "WeilConjectures.FiniteFreeProjectionExchange.comparison",
+   "WeilConjectures.FiniteFreeProjectionExchange.projection",
+   "WeilConjectures.FiniteFreeProjectionExchange.exchange",
+   "WeilConjectures.FiniteFreeProjectionExchange.TensorFamily",
+   "WeilConjectures.FiniteFreeProjectionExchange.tensorMap",
+   "WeilConjectures.FiniteFreeProjectionExchange.tensorPullTarget",
+   "WeilConjectures.FiniteFreeProjectionExchange.ProjectionEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.ExchangeEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.properProjection",
+   "WeilConjectures.FiniteFreeProjectionExchange.properExchange",
+   "WeilConjectures.FiniteFreeProjectionExchange.ProperProjectionEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.ProperExchangeEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.openProjection",
+   "WeilConjectures.FiniteFreeProjectionExchange.openExchange",
+   "WeilConjectures.FiniteFreeProjectionExchange.OpenProjectionEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.OpenExchangeEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.origin",
+   "WeilConjectures.FiniteFreeProjectionExchange.refinement",
+   "WeilConjectures.FiniteFreeProjectionExchange.RefinementEquation",
+   "WeilConjectures.FiniteFreeProjectionExchange.extensionArrow",
+   "WeilConjectures.FiniteFreeProjectionExchange.finite_free_projection_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeProjectionExchange.lean",
+  "statement": "theorem finite_free_projection_exchange (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (t : FiniteCoefficientAdjoints.Stage l E) : ∀ pro : Bool, ∃ μ : TensorFamily pro (extensionArrow t).ringMap, ∀ (X Y : Scheme.{u}) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f], (∀ (c : Compactification f) (M : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X), Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X M → IsIso (comparison pro (extensionArrow t).ringMap c M)) ∧ (∀ (c : Compactification f) (M N : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X) (_hM : Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X M) (_hN : Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X N) (r : M ⟶ N), (Sites.scalar pro (extensionArrow t).ringMap Y).map ((support pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring c).map r) ≫ comparison pro (extensionArrow t).ringMap c N = comparison pro (extensionArrow t).ringMap c M ≫ (support pro t.ring c).map ((Sites.scalar pro (extensionArrow t).ringMap X).map r)) ∧ (∀ (c d : Compactification f) (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (FiniteCoefficientAdjoints.baseStage t.exponent).ring))) (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} t.ring))) (e : (origin pro t.ring X).obj N ≅ (Sites.scalar pro (extensionArrow t).ringMap X).obj ((origin pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X).obj M)), Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X ((origin pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X).obj M) → RefinementEquation pro (extensionArrow t).ringMap c d M N e) ∧ (∀ (c : Compactification f) (M : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X) (K : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring Y), Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X M → Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring Y K → ProjectionEquation pro (extensionArrow t).ringMap μ c M K) ∧ (∀ (M : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X) (K : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring Y), Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X M → Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring Y K → (IsProper f → ProperProjectionEquation pro (extensionArrow t).ringMap μ f M K) ∧ (∀ [IsOpenImmersion f], OpenProjectionEquation pro (extensionArrow t).ringMap μ f M K)) ∧ (∀ (X' Y' : Scheme.{u}) [X'.Over (Spec (.of D.k))] [Y'.Over (Spec (.of D.k))] [IsSeparated (X' ↘ Spec (.of D.k))] [IsSeparated (Y' ↘ Spec (.of D.k))] [LocallyOfFiniteType (X' ↘ Spec (.of D.k))] [QuasiCompact (X' ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of D.k))] [QuasiCompact (Y' ↘ Spec (.of D.k))] (a : X' ⟶ X) (b : X' ⟶ Y') (g : Y' ⟶ Y) [a.IsOver (Spec (.of D.k))] [b.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] (sq : IsPullback a b f g) (M : Sites.D pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X), Sites.Ctf pro (FiniteCoefficientAdjoints.baseStage t.exponent).ring X M → (∀ c : Compactification f, ExchangeEquation pro (extensionArrow t).ringMap sq c M) ∧ (IsProper f → ProperExchangeEquation pro (extensionArrow t).ringMap sq M) ∧ (∀ [IsOpenImmersion f] [IsOpenImmersion b], OpenExchangeEquation pro (extensionArrow t).ringMap sq M))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Both small sites use the recorded fixed-module realization. The comparison is the published B-linear proper counit mate followed by unit-normalized open balancing. The theorem includes naturality, invertibility on the finite-Tor constructible domain, both compact-support equations, all four constituent equations, and canonical compactification/refinement independence on every bounded-below origin and its isomorphic scalar representative. NormalizedTensor fixes balancing on cochain representatives."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7f270272",
+  "group": "NF",
+  "result": "pass",
+  "note": "Node vs Lean matched clause by clause: A=O_E/ϖ_E^n, B=O_L/ϖ_E^n O_L via Stage/baseStage/extensionArrow (n:ℕ+, ramified allowed); both sites via pro:Bool with Sites.Ctf; comparison = Sites.direct (counit-pinned ∃! choose) then Rp_* of the canonical open balancing (étale openIso, pro-étale leftAdjointUniq), no arbitrary map; IsIso, naturality, RefinementEquation for any two compactifications, Projection/Exchange equations and the four constituent equations with correct orientations; ∃μ TensorFamily is fixed by NormalizedTensor (HEq to published étale tensorIso / representative balancing as in landed lem-coef-finite-free-extension), not an unnormalized existential. Edge cases E=L, n=1, ramified e, empty schemes, identity refinements, arbitrary g covered; no extra hypotheses; universes as in deps. No hollow defs, one sorry theorem with 10-step docstring, source/blueprint docstrings, statement verbatim, all 15 dep records identical to side-live. nt_compile --json clean in 16.7 s at load ~68. Advisories: unbounded vs D+ étale exchange decl (same construction); pre-existing compactSupportMap/scalarMate vs finiteCoefficientDirectImageMap duplication."
  }
 }
