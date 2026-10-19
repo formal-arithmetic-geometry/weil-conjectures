@@ -1,0 +1,107 @@
+{
+ "id": "lem-sfb-finite-ring-injective-abelian-acyclic",
+ "kind": "statement",
+ "title": "Finite-ring injective module sheaves are abelian-cohomology acyclic",
+ "statement": "Let C be a category with a Grothendieck topology J, with abelian sheafification, Ext, and enough injectives for abelian sheaves in a common coefficient universe containing its morphisms. Let A be a finite commutative ring in that universe, and assume forgetting A-module structure sends sheaves to abelian sheaves. If I is an injective sheaf of A-modules, then for every natural n the underlying abelian sheaf has zero global cohomology in degree n+1. No finiteness is required of the sections of I.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-injective-object"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/SheafCohomologyModules.lean",
+  "place": "subsingleton_H_forget₂_of_injective, lines 189-210; finite-ring coinduction proof of the comparison used in Stacks Tag 03FD."
+ },
+ "proof": [
+  {
+   "text": "Embed the underlying abelian sheaf in an injective abelian sheaf B. Coinduction gives a monomorphism from I to Hom_Z(A,B), which splits by injectivity of I. Decompose the finite additive group of A into finitely many cyclic prime-power groups. The underlying coinduced sheaf is consequently a finite sum of retracts of the corresponding torsion kernels of B. These torsion kernels are acyclic by the injective torsion-kernel theorem. The identity of the underlying I factors as a finite sum through these acyclic sheaves, so applying positive cohomology gives zero. This argument is already a complete Lean proof in the attached source declaration.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "source library",
+  "document": "lean/WeilConjectures/CategoryTheory/Sites/SheafCohomologyModules.lean",
+  "place": "Complete proof of subsingleton_H_forget₂_of_injective via subsingleton_H_forget₂_coinduce_of_injective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Underlying abelian sheaf of an injective sheaf of modules over a finite commutative ring has vanishing positive cohomology",
+   "results": "{\"t\": \"2026-10-18T22:27:47Z\", \"tool\": \"leansearch\", \"query\": \"Underlying abelian sheaf of an injective sheaf of modules over a finite commutative ring has vanishing positive cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"SheafOfModules.toSheaf\", \"SheafOfModules.mk.inj\", \"SheafOfModules.Hom.mk.injEq\", \"CategoryTheory.sheafIsAbelian\", \"SheafOfModules.toSheaf_obj_val\", \"AddCommGrpCat.enoughInjectives\", \"SheafOfModules.instAbelian\"], \"digest\": \"675a90fdc6d9a449\"}",
+   "date": "2026-10-19",
+   "verdict": "The eight returned signatures concern the definition of sheaf cohomology, forgetting module structure, constructors, and abelian or enough-injectives instances. None asserts acyclicity after forgetting scalars; the exact existing source theorem is attached instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying abelian sheaf of an injective sheaf of modules over a finite ring has zero positive cohomology",
+   "results": "{\"t\": \"2026-10-18T20:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"The underlying abelian sheaf of an injective sheaf of modules over a finite ring has zero positive cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Sheaf.H\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.IsKInjective\"], \"digest\": \"8dce482f785b5525\"}",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; existing source declaration found by direct search in lean/WeilConjectures/CategoryTheory/Sites/SheafCohomologyModules.lean, lines 189-210."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Injective",
+   "results": "{\"t\": \"2026-10-18T20:48:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.H, CategoryTheory.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat\"], \"digest\": \"0128cac2e6bb1b2f\"}",
+   "date": "2026-10-19",
+   "verdict": "The Mathlib match assumes the underlying abelian sheaf itself is injective. Our injectivity hypothesis is in the category of module-valued sheaves; forgetting scalars need not preserve injectivity. The existing source theorem proves the needed finite-ring acyclicity without that stronger assumption."
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_forget₂_of_injective|injective.*finite.*acyclic",
+   "results": "{\"t\": \"2026-10-18T20:30:03Z\", \"tool\": \"grep\", \"query\": \"subsingleton_H_forget₂_of_injective|injective.*finite.*acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "No Mathlib match; existing source declaration found by direct search in lean/WeilConjectures/CategoryTheory/Sites/SheafCohomologyModules.lean, lines 189-210."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleModuleAffineBound",
+  "date": "2026-10-19",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "Step 1: “By [sk-prop-pe-unbounded-classical], $\\nu_X^*$ is exact, fully faithful and preserves sums on the unbounded categories.” More precisely: the fixed-degree-truncation sheaf-bound input in det-pe-unbounded-classical-unit.",
+   "via": [
+    "lem-sfb-unbounded-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules",
+  "declaration": "CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective",
+  "statement": "theorem subsingleton_H_forget₂_of_injective [EnoughInjectives (Sheaf J AddCommGrpCat.{max w v})]\n    (Λ : Type (max w v)) [CommRing Λ] [Finite Λ]\n    [J.HasSheafCompose (forget₂ (ModuleCat.{max w v} Λ) AddCommGrpCat.{max w v})]\n    (I : Sheaf J (ModuleCat.{max w v} Λ)) [Injective I] (n : ℕ) :\n    Subsingleton\n      (H ((sheafCompose J (forget₂ (ModuleCat.{max w v} Λ) AddCommGrpCat)).obj I) (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261019T005429-L-2769772",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261019T005429-L-2769772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
