@@ -9,6 +9,8 @@ public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.Monoidal
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Canonical closed tensor-Hom models on a ringed site
@@ -165,7 +167,34 @@ theorem coefficientTotalTensor_isKFlat
     (hQ : CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v u} (J := J) (R := A) Q) :
     CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v u} (J := J) (R := A)
       ((coefficientTotalTensor.{u, c, v} J A).obj (P, Q)) := by
-  sorry
+  let := SheafOfModules.isMonoidal_W_independentCoefficients A
+  let := SheafOfModules.monoidalCategory A
+  let := SheafOfModules.symmetricCategory A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients A
+  let M := SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)
+  have (X : M) : PreservesColimitsOfSize.{max c v u, max c v u} (tensorLeft X) :=
+    SheafOfModules.tensorLeft_preservesColimits_independentCoefficients A X
+  have (X : M) : PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
+    preservesColimitsOfSize_shrink (tensorLeft X)
+  have (X : M) : PreservesColimitsOfSize.{0, 0} (tensorRight X) :=
+    preservesColimits_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y)
+        (fun f ↦ BraidedCategory.braiding_naturality_right X f))
+  have (X : M) : (tensorLeft X).Additive :=
+    SheafOfModules.tensorLeft_additive_independent A X
+  have (X : M) : (tensorRight X).Additive :=
+    Functor.additive_of_iso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y)
+        (fun f ↦ BraidedCategory.braiding_naturality_right X f))
+  let : MonoidalPreadditive M :=
+    { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
+      zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
+      whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
+      add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
+  intro F hF i
+  exact (hQ _ (hP F hF) i).of_iso (HomologicalComplex.associator F P Q)
 
 end TensorRepresentatives
 
