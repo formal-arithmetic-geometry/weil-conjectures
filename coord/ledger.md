@@ -17768,3 +17768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:21 L: returned deliver/V7/Sheaf.Paper.FiniteComparisonLocalizing (reviewer RETURN: (reviewer C-fe2b9, head fe2b9e71d) Point 5 (import form): lean/Sheaf/Paper/FiniteComparisonLocalizing.lean line 8: repla)
 - 23:22 L: merged deliver/O3/thm-sf-dual-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 23:25 L: returned deliver/G9/Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange (reviewer RETURN: (reviewer C-8a933, head 8a9330643) H10 (does not compile): lean/Sheaf/AlgebraicGeometry/ClassicalProEtaleEncoding.lean:2)
+- 23:35 L: merged deliver/NR/lem-a1-lisse-sections-stalk-evaluation (stage 2; reviewer PASS; parallel immutable checks)

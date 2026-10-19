@@ -1,0 +1,131 @@
+{
+ "id": "def-a1-lisse-section-evaluation",
+ "kind": "definition",
+ "title": "Canonical evaluation of ordinary common-stage sections at a geometric point",
+ "status": "split",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne p$, a separated finite-type $k_0$-scheme $Y_0$, its geometric fibre $Y$, and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ as in [def-weil-finite-field-fiber]. For a common-stage Weil complex $K$ of [def-weil-weil-sheaf-complex], a compactification presentation $c_0$, and a $k$-point $z:\\operatorname{Spec}k\\to Y$, define $\\operatorname{ev}_z:H^0(Y,K)\\to H^0(K_{\\bar z})$, with source the ordinary cohomology module underlying [def-weil-global-geometric-frobenius] and target the stalk of [def-weil-local-frobenius-trace]. At the literal finite coefficient stage, construct the integral germ by the inverse pullback identity comparison, the equality $z a_Y=1$, the pullback composition comparison of [lem-trf-integral-pullback-comparison-realization], and pullback of the ordinary direct-image adjunction counit. The counit is the realization comparison followed by the whole-system counit and the inverse completeness unit. Rationalize that germ and take $H^0$, using the recorded coefficient cohomology [def-weil-coefficient-cohomology-modules]. Extend scalars to $\\Omega$ and use the recorded source and stalk comparisons. The scalar-size comparison between the lifted coefficient module functor of [lem-weil-frobenius-cohomology-transport-iso] and ordinary scalar extension is the unique natural isomorphism sending $\\operatorname{up}(a)\\otimes\\operatorname{up}(m)$ to $a\\otimes m$. Cohomology and tensor-tower comparisons are those of [lem-weil-cohomology-commutes-scalar-extension]. This defines the evaluation on all complexes, including identity coefficient embeddings and zero objects.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-local-frobenius-trace",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-coefficient-cohomology-modules",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-cohomology-commutes-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+  "place": "Second paragraph, evaluation of a section in a geometric stalk; Deligne, Weil II (1.1.7), (1.1.10)-(1.1.14), pp. 150-153; system adjunction realization: Stacks Tags 07A7 and 0941."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "FiniteDimensional, LinearMap.ker",
+   "results": "LinearMap.isUnit_iff_ker_eq_bot; LinearMap.ker_eq_bot_iff_range_eq_top; LinearMap.ker_comp_eq_of_commute_of_disjoint_ker; LinearMap.comap_eq_sup_ker_of_disjoint; LinearMap.ker_noncommProd_eq_of_supIndep_ker; LinearMap.ker_ne_bot_of_finrank_lt; LinearMap.ker_eq_bot_iff_range_eq_top_of_finrank_eq_finrank; Module.End.exists_ker_pow_eq_ker_pow_succ",
+   "date": "2026-10-19",
+   "verdict": "No canonical ordinary common-stage section-to-stalk evaluation or normalized scalar-size comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|globalSections.*frobenius|stalk.*frobenius",
+   "results": "no hits",
+   "date": "2026-10-19",
+   "verdict": "No canonical ordinary common-stage section-to-stalk evaluation or normalized scalar-size comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a lisse sheaf inject into a finite product of closed point stalks and evaluation intertwines Frobenius powers",
+   "results": "AlgebraicGeometry.Scheme.Γevaluation; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgHom.IsArithFrobAt.restrict_injective; AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; AlgebraicGeometry.stalkMap_injective_of_isAffine; AlgebraicGeometry.spread_out_of_isGermInjective; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.exists_lift_of_germInjective",
+   "date": "2026-10-19",
+   "verdict": "No canonical ordinary common-stage section-to-stalk evaluation or normalized scalar-size comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical evaluation of ordinary cohomology sections in a geometric stalk via the pullback direct image adjunction counit",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; CategoryTheory.ChosenPullbacksAlong.fst'; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CompHausLike.LocallyConstant.counit; TopCat.Presheaf.germ_stalkPullbackHom; StalkSkyscraperPresheafAdjunctionAuxs.counit; TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv",
+   "date": "2026-10-19",
+   "verdict": "No canonical ordinary common-stage section-to-stalk evaluation or normalized scalar-size comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg rationalGerm|integralGerm|integralCounit|stalk.*globalSections in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search section evaluation; rg in dag/nodes",
+   "results": "ProperSectionsSemilinearGerms requires properness; upstream WeilSheaf/Stalk uses another coefficient model. No general common-stage germ node. Blueprint search: 0 matches.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate of the required ordinary finite-type germ in this coefficient category."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-lisse-sections-stalk-evaluation",
+  "date": "2026-10-19",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-geometric-coinvariants-pure",
+   "place": "Proof, second paragraph: comparison of global or constant sections with a closed-point stalk and its degree-power Frobenius; finiteness needed for the generalized statement in the current snapshot",
+   "via": [
+    "lem-a1-lisse-sections-stalk-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-endpoints",
+ "lean": {
+  "module": "Sheaf.Paper.A1LisseSectionEvaluation",
+  "declaration": "WeilConjectures.A1SectionEvaluation.evaluation",
+  "declarations": [
+   "WeilConjectures.A1SectionEvaluation.coefficientModulesIso_existsUnique",
+   "WeilConjectures.A1SectionEvaluation.coefficientModulesIso",
+   "WeilConjectures.A1SectionEvaluation.coefficientCohomologyIso",
+   "WeilConjectures.A1SectionEvaluation.integralImage",
+   "WeilConjectures.A1SectionEvaluation.integralCounit",
+   "WeilConjectures.A1SectionEvaluation.integralGerm",
+   "WeilConjectures.A1SectionEvaluation.rationalGerm",
+   "WeilConjectures.A1SectionEvaluation.sections",
+   "WeilConjectures.A1SectionEvaluation.stalkTarget",
+   "WeilConjectures.A1SectionEvaluation.stalkPullbackIso",
+   "WeilConjectures.A1SectionEvaluation.stalkFibreIso",
+   "WeilConjectures.A1SectionEvaluation.stalkScalarIso",
+   "WeilConjectures.A1SectionEvaluation.stalkIso",
+   "WeilConjectures.A1SectionEvaluation.evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/A1LisseSectionEvaluation.lean",
+  "statement": "def evaluation (c₀ : Compactification Y₀.hom) (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (z : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) (hz : z ≫ (D.geometricFiber Y₀).hom = 𝟙 _) : @Quiver.Hom (ModuleCat.{u} Ω) inferInstance (sections D l hl Y₀ Ω c₀ K) (localQbarStalk l Ω D hl Y₀ K z)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec7a2d626",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec7a2d626",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean clause: setup and separated finite-type Y0; lisse Weil sheaf as sfCommonStageWeilSheaf + IsCommonStageLisse (same rendering as landed dual_stalk_frobenius); A = published ordinary H^0 with T = globalGeometricFrobeniusQbarOnCohomology false 0; exists m, closed points with repeats and residue-embedding lifts, injective evaluation; FiniteDimensional; IsIso T; ev(T^d a) = localQbarClosedFrobeniusStalk(ev a) with d = localClosedPointDegree. Edge cases: empty scheme gives m=0, rank 0 allowed, repeated lifts allowed. New def node def-a1-lisse-section-evaluation: evaluation = degree-0 cohomology of the localized actual counit germ, a non-proper generalization of landed ProperSemilinearGerms.integralGerm (not reusable, it assumes IsProper), using the same comparisons choice and integralPullbackComposition.choose as LocalFrobeniusTrace; the one chosen map is the .choose of a true existsUnique pinned on pure tensors; not hollow; new-node fields OK. Item changed only lean/stmt_deps (adds the new node and landed def-real-common-stage-lisse, which is used); recorded statements verbatim; dependency records identical to live; not dropped; no duplicate. Compile: first nt_compile timed out at load 167, lcompile run_set (560 s limit) clean 42.1/6.3 s, second nt_compile exit 0 clean 26.3/6.3 s; only the 2 expected sorrys. Advisory: Second reading is the author's own pass; LisseIntegralSmallCoefficients public import unused by the statement; retry landing at lower load if 60 s is hit."
+ }
+}

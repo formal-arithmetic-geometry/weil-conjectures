@@ -15,7 +15,9 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-weil-sheaf-complex",
   "def-weil-global-geometric-frobenius",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-a1-lisse-section-evaluation",
+  "def-real-common-stage-lisse"
  ],
  "proof": [
   {
@@ -341,5 +343,26 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-80d6d59ff (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 steps after the fix. There are no new nodes and the statement is unchanged. I read every cited node's statement, the parent proof's second paragraph (main-20261015; same route) and Weil II (1.1.7) and (1.1.12)-(1.1.13) on pp. 151-153; no SGA source is used. Steps 1-2 hold: Noetherian space gives finitely many clopen components, and each has a closed point lying over a closed point of Y0. Repeated closed points with different lifts are allowed. Step 4 (finite dimension) is fine. The induction for the iterate theta^[r] is correct, T is invertible by transport-iso(3), and the final evaluation matches the defining composite of F_y with the return g^d z = z h^d. Small cases checked: the empty scheme, Spec F_q, Spec F_{q^2} (two lifts, T swaps them, T^2 = F_y) and rank 0. Three repairs, all by citing existing nodes. (1) C3/C4: step 3 applied cor-galois-lisse-representations to the Weil II inverse-system model while the Frobenius steps use the D^b_c heart object, and the two models were identified silently. Added a bridge citing lem-per-lisse-completed-system-comparison and lem-tw-lisse-rational-realization: same sections and the same fibres lim (G_n)_x. (2) E5: the old step 5 said 'after transposition' with no identification of H^0(Y,G) with Hom(1,G). The new step 5 gives it from the Fib_s equivalence with Fib_s(1)=Omega (def-weil-ordinary-compact-cohomology), the adjunction La*-|Ra* with its triangle identities (fix-prop-adjunctions(1)) and the unit identification of lem-tw. (3) C1: the effect of iota on sections was not stated. The same new step 5 states it: naturality from lem-weil-frobenius-point-transport-natural(2), and iota(1)=1 by def-weil-frobenius-point-transport. Later steps are renumbered and proof_deps updated; all steps are under 2000 characters and no cycle is created. Batch-5 check: the closure of the two targets is identical with and without this item's proof (16744 nodes), and the fix adds 0 nodes. cor-galois-lisse-representations is the foundational lisse fibre equivalence, not Poincare duality, and was already in the base closure: accepted. lem-weil-frobenius-point-transport-natural reaches lem-weil-isomorphism-derived-pullback-comparison-normalization, a generic normalization of pullback along a scheme isomorphism that sits in sec-trace-formula only by location, is not a step of the trace formula, and was already in the base closure: accepted. Off-unit generic tools for the maintainer's tool_uses: lem-per-lisse-completed-system-comparison, fix-prop-adjunctions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.A1LisseSectionsStalkEvaluation",
+  "declaration": "WeilConjectures.a1LisseSectionsStalkEvaluation",
+  "declarations": [
+   "WeilConjectures.a1LisseSectionsStalkEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/A1LisseSectionsStalkEvaluation.lean",
+  "statement": "theorem a1LisseSectionsStalkEvaluation (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (c₀ : Compactification Y₀.hom) (G : sfCommonStageWeilSheaf D l hl Y₀ Ω) (_hG : @IsCommonStageLisse l _ Ω _ _ _ (D.geometricFiber Y₀).left (sfWeilPrimeInvertible D l hl Y₀) G.obj.carrier) : (∃ (m : ℕ) (y : Fin m → {y : Y₀.left // y ∈ closedPoints Y₀.left}) (ι : ∀ i : Fin m, Y₀.left.residueField (y i).val →+* D.k) (hι : ∀ i : Fin m, (ι i).comp (Y₀.hom.residueFieldAlgebraMap (y i).val) = algebraMap D.k₀ D.k), Function.Injective (fun a : A1SectionEvaluation.sections D l hl Y₀ Ω c₀ G.obj ↦ fun i : Fin m ↦ A1SectionEvaluation.evaluation D l hl Y₀ Ω c₀ G.obj (localClosedPoint D Y₀ (y i) (ι i) (hι i)) (pullback.lift_snd _ _ _) a)) ∧ FiniteDimensional Ω (A1SectionEvaluation.sections D l hl Y₀ Ω c₀ G.obj) ∧ IsIso (globalGeometricFrobeniusQbarOnCohomology D l hl Y₀ Ω c₀ G.obj false 0) ∧ (∀ (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (ι : Y₀.left.residueField y.val →+* D.k) (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k) (a : A1SectionEvaluation.sections D l hl Y₀ Ω c₀ G.obj), A1SectionEvaluation.evaluation D l hl Y₀ Ω c₀ G.obj (localClosedPoint D Y₀ y ι hι) (pullback.lift_snd _ _ _) (((globalGeometricFrobeniusQbarOnCohomology D l hl Y₀ Ω c₀ G.obj false 0).hom ^ localClosedPointDegree D Y₀ y) a) = localQbarClosedFrobeniusStalk l Ω D hl Y₀ G.obj y ι hι (A1SectionEvaluation.evaluation D l hl Y₀ Ω c₀ G.obj (localClosedPoint D Y₀ y ι hι) (pullback.lift_snd _ _ _) a))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec7a2d626",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every node clause has a matching Lean clause: setup and separated finite-type Y0; lisse Weil sheaf as sfCommonStageWeilSheaf + IsCommonStageLisse (same rendering as landed dual_stalk_frobenius); A = published ordinary H^0 with T = globalGeometricFrobeniusQbarOnCohomology false 0; exists m, closed points with repeats and residue-embedding lifts, injective evaluation; FiniteDimensional; IsIso T; ev(T^d a) = localQbarClosedFrobeniusStalk(ev a) with d = localClosedPointDegree. Edge cases: empty scheme gives m=0, rank 0 allowed, repeated lifts allowed. New def node def-a1-lisse-section-evaluation: evaluation = degree-0 cohomology of the localized actual counit germ, a non-proper generalization of landed ProperSemilinearGerms.integralGerm (not reusable, it assumes IsProper), using the same comparisons choice and integralPullbackComposition.choose as LocalFrobeniusTrace; the one chosen map is the .choose of a true existsUnique pinned on pure tensors; not hollow; new-node fields OK. Item changed only lean/stmt_deps (adds the new node and landed def-real-common-stage-lisse, which is used); recorded statements verbatim; dependency records identical to live; not dropped; no duplicate. Compile: first nt_compile timed out at load 167, lcompile run_set (560 s limit) clean 42.1/6.3 s, second nt_compile exit 0 clean 26.3/6.3 s; only the 2 expected sorrys. Advisory: Second reading is the author's own pass; LisseIntegralSmallCoefficients public import unused by the statement; retry landing at lower load if 60 s is hit."
  }
 }
