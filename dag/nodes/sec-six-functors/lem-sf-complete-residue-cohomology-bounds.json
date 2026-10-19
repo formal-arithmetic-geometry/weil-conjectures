@@ -40,113 +40,70 @@
  ],
  "proof": [
   {
-   "text": "Write $C_n=(R/\\varpi^n)_X$ with its $B_X$-module structure given by the $n$-th projection, and $K_n=K\\otimes^L_{B_X}C_n$, viewed over $B_X$ by restriction of scalars. In the Tor-amplitude hypothesis take $V=X$ and $N=k_X$. The unit identity $K_1\\otimes^L_{k_X}k_X\\cong K_1$ follows on a K-flat representative from $P\\otimes_{k_X}k_X=P$. Hence $H^j(K_1)=0$ outside $[a,b]$. This is just the defining test of [def-weil-proetale-tor-amplitude], with derived tensor as in [def-weil-derived-tensor].",
+   "text": "Test residue Tor amplitude at the identity site object and the tensor unit. A K-flat resolution and the right unitor show that Tor amplitude implies the cohomology interval. The adjunction for identity pullback identifies the restricted residue object with the original residue reduction. The canonical K-flat reduction comparison and exact restriction of scalars transport this vanishing to level zero of the reduction tower supplied by completeness.",
    "uses": [
     "def-weil-proetale-tor-amplitude",
-    "def-weil-derived-tensor"
+    "def-weil-derived-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-integral-reduction-tower-well-defined"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude: test against the coefficient sheaf itself"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a representative of $K$ and a single K-flat resolution $P^\\bullet$ with flat $B_X$-module terms by [lem-pc-kflat-resolution]. For every $n\\geq1$, [lem-pur-derived-change-of-rings] identifies $P_n^\\bullet=P^\\bullet\\otimes_{B_X}C_n$ with $K_n$. Use the actual chain maps $1_P\\otimes(C_{n+1}\\to C_n)$ as its strict transition maps. These are the canonical quotient transitions in the completeness hypothesis, because the same resolution computes every reduction and every quotient map.",
+   "text": "The resolution in the definition of completeness is K-flat but may not have flat terms. Choose a second, flat-term K-flat resolution of its same representative. Apply lem-sf-integral-reduction-flat-filtration to this flat-term complex, and localize its short exact sequence to a distinguished triangle. Transport the three vertices back to the original tower using integralTowerComparison. The transition-compatibility clause of integralReductionTowerWellDefined identifies the second arrow with the actual canonical transition of the original tower.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings"
+    "lem-sf-integral-reduction-flat-filtration",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-weil-pbc-complex-ses-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change (identity underlying topos)"
-   }
+   "elementary": false
   },
   {
-   "text": "For every $n\\geq1$ the coefficient sequence $0\\to k_X\\xrightarrow{u_n}C_{n+1}\\to C_n\\to0$, where $u_n(\\bar r)=\\varpi^n r\\bmod\\varpi^{n+1}$, is short exact as a sequence of $B_X$-modules. Indeed, $R$ is a DVR with nonzero uniformizer by [def-weil-l-adic-coefficient-extension]: cancellation of $\\varpi^n$ shows that $u_n$ is well defined and injective, and its image is exactly the kernel of the quotient map, which is surjective. By the constant-sheaf construction [def-weil-pbc-constant-sheaf], sections locally come from elements of the coefficient modules and equality can be checked after a covering refinement; therefore the same kernel calculation and local lifts prove exactness of the sheaf sequence. The maps are $B_X$-linear: for a local section $z$ of $B_X$, its components satisfy $z_{n+1}\\bmod\\varpi=z_1$, so $z_{n+1}\\varpi^n r=\\varpi^n z_1r$ modulo $\\varpi^{n+1}$, checked locally where the finite coefficient sections are constant.",
+   "text": "Induction using the exact middle homology segment of these triangles proves the same cohomology interval at every tower level. At the top degree b, the next residue homology in degree b+1 vanishes, so the long exact sequence makes each canonical transition on H^b epimorphic.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0942, lemma-bounded, proof: the coefficient ideal-quotient filtration, specialized to the principal DVR ideal"
-   }
-  },
-  {
-   "text": "Each $P^j$ is flat, so tensoring the short exact coefficient sequence of Step 3 with $P^j$ preserves exactness, precisely the definition in [def-pc-flat-sheaf-modules]. Thus $0\\to P_1^\\bullet\\to P_{n+1}^\\bullet\\to P_n^\\bullet\\to0$ is a degreewise short exact sequence of complexes. Apply [lem-weil-pbc-complex-ses-triangle] in the abelian category of $B_X$-module sheaves to get the distinguished triangle $K_1\\to K_{n+1}\\to K_n\\to K_1[1]$. Its second arrow is the canonical transition from Step 2, not an independently chosen isomorphism between reductions. By [lem-sf-derived-homology-long-exact], for every $j$ its cohomology sequence contains $H^j(K_1)\\to H^j(K_{n+1})\\to H^j(K_n)\\to H^{j+1}(K_1)$.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-complex-ses-triangle",
     "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, lemma-derived-canonical-delta-functor; Tag 05RS, cohomology of distinguished triangles"
-   }
+   "elementary": false
   },
   {
-   "text": "Induct on $n\\geq1$ to prove $H^j(K_n)=0$ for all $j\\notin[a,b]$. The base $n=1$ is Step 1. For the induction step, the exact segment in Step 4 has $H^j(K_1)=H^j(K_n)=0$ for such $j$, forcing $H^j(K_{n+1})=0$. At $j=b$, its next term is $H^{b+1}(K_1)=0$, so the same segment proves that every canonical transition $H^b(K_{n+1})\\to H^b(K_n)$ is an epimorphism. This proves both assertions for the entire fixed tower.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of (1),(2): uniform bounds and surjectivity in the top degree; the DVR induction expands Tag 0942"
-   }
-  },
-  {
-   "text": "Apply [det-pe-milnor-sequence] to the strict tower $P_n^\\bullet$ of $B_X$-module complexes on the small pro-etale site, with $T$ built from the termwise product complex $\\prod_nP_n^\\bullet$. It gives $0\\to R^1\\varprojlim_n H^{j-1}(K_n)\\to H^j(R\\varprojlim_n P_n^\\bullet)\\to\\varprojlim_n H^j(K_n)\\to0$ for every $j$, where $R\\varprojlim_nP_n^\\bullet=\\operatorname{Cone}(1-T)[-1]$; shifting the initial index from $0$ to $1$ only renames the tower. This cone is a derived limit of the tower $(K_n)$ in $D(\\operatorname{Mod}(B_X))$ in the sense of [def-weil-derived-limit]. Indeed, by [det-pe-products-derived] the termwise product $\\prod_nP_n^\\bullet$, with the images of its termwise projections, is a product of the $K_n$ in $D(\\operatorname{Mod}(B_X))$; since the localization functor preserves composites and differences, $\\mathrm{pr}_n\\circ Q(1-T)=\\mathrm{pr}_n-Q(t_n)\\circ\\mathrm{pr}_{n+1}$, so $Q(1-T)$ is the transition endomorphism $1-s$ of the tower with its canonical transitions from Step 2. The cone triangle $\\prod_nP_n^\\bullet\\xrightarrow{1-T}\\prod_nP_n^\\bullet\\to\\operatorname{Cone}(1-T)\\to(\\prod_nP_n^\\bullet)[1]$ is distinguished by [def-weil-abstract-derived-category], and since (TR2) of [def-weil-triangulated-category] is an equivalence, the triangle $\\operatorname{Cone}(1-T)[-1]\\xrightarrow{-\\delta[-1]}\\prod_nP_n^\\bullet\\xrightarrow{1-T}\\prod_nP_n^\\bullet\\to\\operatorname{Cone}(1-T)$, whose rotation is the cone triangle (with $\\delta$ its third arrow), is distinguished; it is a Roos triangle. Completeness supplies $K$ as a derived limit of this same canonical tower. By clause 1 of [lem-weil-derived-limit-existence], any two derived limits of a fixed tower are isomorphic; hence $H^j(K)\\cong H^j(\\operatorname{Cone}(1-T)[-1])$, the Milnor middle term. No canonical choice of that isomorphism is needed for vanishing.",
+   "text": "Exact countable products on pro-etale module sheaves give CountableAB4Star. The countable-products clause of lem-weil-derived-limit-existence gives derived products and preservation of countable products by each homology functor. A product of zero homologies is zero, by the product universal property. Apply homology directly to the distinguished Roos triangle already present in the completeness hypothesis.",
    "uses": [
-    "det-pe-milnor-sequence",
-    "det-pe-products-derived",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
+    "det-pe-products-exact",
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-complete",
     "def-weil-derived-limit",
-    "lem-weil-derived-limit-existence"
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5) and (7); derived.tex Tag 08TC, definition-derived-limit and following uniqueness discussion"
-   }
+   "elementary": false
   },
   {
-   "text": "For $j<a$ both towers in the outer terms of the Milnor sequence are zero by Step 5, as are both towers for $j>b+1$. Their limits and first derived limits are zero (equivalently their defining product kernels and cokernels are zero). At the remaining degree $j=b+1$, the right-hand tower is zero, and the left-hand term is $R^1\\varprojlim_n H^b(K_n)$. The transitions of this latter tower are epimorphisms by Step 5, so [det-pe-milnor-epimorphic], applied with ring sheaf $\\mathcal R=B_X$, makes that term zero as well. Exactness therefore gives $H^j(K)=0$ in every degree outside $[a,b]$.",
+   "text": "For j outside [a,b], the product homology at j vanishes. At degree j-1 it also vanishes unless j-1=b. In that boundary case compare the homology of 1-shift with the 1-shift endomorphism on the homology tower via the product-comparison isomorphism. The epimorphic-tower clause of det-pe-milnor-epimorphic makes this endomorphism epic. In all cases the exact Roos homology sequence implies H^j(K)=0. This uses no separately chosen cone model or uniqueness isomorphism of limits.",
    "uses": [
-    "det-pe-milnor-epimorphic"
+    "det-pe-milnor-epimorphic",
+    "lem-sf-derived-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0947, proposition-enough-weakly-contractibles, (6),(7), and proof; proetale.tex Tag 09C2, proof of (1)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-proetale-tor-amplitude",
   "def-weil-derived-tensor",
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-constant-sheaf",
-  "def-pc-flat-sheaf-modules",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-sf-integral-reduction-flat-filtration",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-sf-derived-homology-long-exact",
-  "det-pe-milnor-sequence",
-  "det-pe-products-derived",
-  "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "def-weil-derived-limit",
+  "det-pe-products-exact",
   "lem-weil-derived-limit-existence",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit",
   "det-pe-milnor-epimorphic"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of (1),(2), specialized to a DVR; ideal-filtration induction of sites-cohomology.tex Tag 0942 and Milnor sequence of Tag 0947, with the coefficient sheaf B_X throughout"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942 filtration and Tag 0947 exact products and epimorphic towers, applied directly to the defining Roos triangle; proetale.tex Tag 09C2(1),(2)"
  },
  "mathlib_searches": [
   {
@@ -311,10 +268,8 @@
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-sf-derived-homology-long-exact",
-  "det-pe-milnor-sequence",
   "lem-weil-derived-limit-existence",
-  "det-pe-milnor-epimorphic",
-  "det-pe-products-derived"
+  "det-pe-milnor-epimorphic"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -353,5 +308,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T231358-L-579991",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

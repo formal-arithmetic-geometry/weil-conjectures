@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-integral-reduction-flat-filtration",
+ "kind": "statement",
+ "title": "Successive integral reductions of a flat-term complex form a short exact sequence",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its recorded valuation ring $R$ and nonzero uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and a scheme $X$. Let $B_X=\\varprojlim_{n\\ge0}(R/\\varpi^{n+1})_X$ be the completed coefficient sheaf [def-weil-completed-integral-coefficients]. Let $P^\\bullet$ be any cochain complex of $B_X$-module sheaves whose terms are flat, meaning that tensoring with each term preserves finite limits and finite colimits [def-pc-flat-sheaf-modules]. Write $P_n^\\bullet=\\operatorname{Res}_{B_X}(P^\\bullet\\otimes_{B_X}(R/\\varpi^{n+1})_X)$ for the termwise sheafified change of rings, and $t_n:P_{n+1}^\\bullet\\to P_n^\\bullet$ for the canonical transition sending $s\\otimes x$ to $\\rho_n(s)\\otimes x$ [lem-weil-integral-reduction-tower-well-defined]. For every $n\\ge0$ there exists a chain map $i_n:P_0^\\bullet\\to P_{n+1}^\\bullet$ such that $0\\to P_0^\\bullet\\xrightarrow{i_n}P_{n+1}^\\bullet\\xrightarrow{t_n}P_n^\\bullet\\to0$ is short exact. No K-flatness, boundedness, completeness, Tor-amplitude or quasi-compactness hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942, lemma-bounded, proof of (1): successive ideal-quotient triangles, specialized to a principal DVR ideal and a flat-term representative; derived.tex Tag 0152"
+ },
+ "proof": [
+  {
+   "text": "Put $C_n=R/\\varpi^{n+1}$. Multiplication by $\\varpi^{n+1}$ defines an injective R-linear map $C_0\\to C_{n+1}$. It is well defined because changing a representative by $\\varpi r$ changes its image by $\\varpi^{n+2}r$. Injectivity follows by cancellation of the nonzero $\\varpi^{n+1}$ in the domain R. Its image is exactly the kernel of the canonical surjective quotient $C_{n+1}\\to C_n$, by representatives and divisibility by $\\varpi^{n+1}$. This gives a short exact coefficient sequence.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pass to constant module sheaves. Exactness of sheafification preserves this sequence. Restrict the coefficient actions via the projections from $B_X$. The injection is $B_X$-linear: locally represent the finite quotient sections by constants; compatibility of the limit projections says that the higher component reduces to the first component modulo $\\varpi$. Their difference times $\\varpi^{n+1}$ is zero modulo $\\varpi^{n+2}$. The quotient is $B_X$-linear by compatibility of the consecutive projections. This proves the short exact sequence in $B_X$-module sheaves.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor with each flat term of P. Exactness of this tensor functor gives short exact sequences in every degree. Functoriality with respect to the differential makes the maps into chain maps. The balancing isomorphism between restricted extension of scalars and tensor with the restricted coefficient module is induced on pure tensors by identity; it and its inverse respect sheafification. Under these isomorphisms the quotient map is exactly $t_n$, since it sends $s\\otimes x$ to $\\rho_n(s)\\otimes x$. The uniqueness clause of integralTowerMaps_existUnique identifies this map with the recorded integralTowerTransition. Short exactness of complexes is degreewise short exactness.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-integral-reduction-tower-well-defined"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0942 proof of lemma-bounded, with the elementary DVR filtration and the recorded canonical transition formulas made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ss]hort[Ee]xact|[Ss]hort[Ee]xact.*quotient",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No direct match. Flat tensor exactness for ordinary modules does not construct the intrinsic completed-coefficient sheaf sequence or identify its canonical change-of-rings transitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"mapHomologicalComplex\"",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No direct match. Flat tensor exactness for ordinary modules does not construct the intrinsic completed-coefficient sheaf sequence or identify its canonical change-of-rings transitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring the successive uniformizer quotient short exact sequence with a complex of flat sheaves of modules gives a short exact sequence of reduced complexes",
+   "results": "['Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'Module.Flat.rTensor_exact', 'Module.Flat.lTensor_exact', \"Module.Flat.iff_rTensor_exact'\", 'Module.FaithfullyFlat.rTensor_exact_iff_exact']",
+   "date": "2026-10-19",
+   "verdict": "No direct match. Flat tensor exactness for ordinary modules does not construct the intrinsic completed-coefficient sheaf sequence or identify its canonical change-of-rings transitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat complex tensored with the exact sequence of successive powers of a uniformizer gives a short exact sequence of complexes of sheaves of modules",
+   "results": "['Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_exact', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', \"Module.Flat.iff_rTensor_exact'\", 'Module.Flat.rTensor_exact', 'Module.Flat.lTensor_shortComplex_exact', 'Module.Flat.iff_lTensor_exact', 'Module.Flat.iff_rTensor_exact']",
+   "date": "2026-10-19",
+   "verdict": "No direct match. Flat tensor exactness for ordinary modules does not construct the intrinsic completed-coefficient sheaf sequence or identify its canonical change-of-rings transitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteResidueCohomologyBounds",
+  "date": "2026-10-19",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Supporting boundedness input for the residue-basis induction (Stacks 09C2(1),(2)). The coefficient short exact sequence used in steps 3 and 4 of lem-sf-complete-residue-cohomology-bounds.",
+   "via": [
+    "lem-sf-complete-residue-cohomology-bounds",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionFlatFiltration",
+  "file": "lean/Sheaf/Paper/IntegralReductionFlatFiltration.lean",
+  "declaration": "WeilConjectures.integralReductionFlatFiltration",
+  "statement": "theorem integralReductionFlatFiltration\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : AlgebraicGeometry.Scheme.{u}) (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) :\n    letI := integralCoefficientAbSheafify.{u, u} X\n    letI := integralCoefficientAbLocallyBijective.{u, u} X\n    ∀ (P : CochainComplex (completedIntegralModuleSheaves.{0, u, u} l E X D hl) ℤ)\n    (hflat : ∀ j : ℤ, exactFunctor _ _\n      (@MonoidalCategory.tensorRight _ _\n        (SheafOfModules.monoidalCategory.{u, u + 1, u + 1}\n          (completedIntegralCommRingSheaf.{0, u, u} l E X D hl))\n        (P.X j))) (n : ℕ),\n    ∃ i : integralTowerComplex.{0, u, u} l E X D hl 0 P ⟶\n        integralTowerComplex.{0, u, u} l E X D hl (n + 1) P,\n      ∃ w : i ≫ integralTowerTransition.{0, u, u} l E X D hl P n = 0,\n        (ShortComplex.mk i (integralTowerTransition.{0, u, u} l E X D hl P n) w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T231358-L-579991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T231358-L-579991",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
