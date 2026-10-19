@@ -11,7 +11,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.RepresentationTheory.DiscreteContinuousInjectives
+import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+import Mathlib.Data.Countable.Small
+import Sheaf.RepresentationTheory.OpenStabilizerAdjunction
+import Sheaf.RepresentationTheory.RepresentationLiftedGroupAlgebraEquivalence
 import Sheaf.RepresentationTheory.DiscreteRep
 
 /-!
@@ -54,10 +57,11 @@ stabilizers they had in the source. The module cokernel inherits the action and 
 class has an open stabilizer containing that of a representative. Thus the zero object,
 finite biproducts, kernels and cokernels come from modules; exactness is detected there.
 Normality of monos and epis then gives the abelian structure
-(`lem-exc-discrete-modules-abelian-structure`, `def-sp-abelian`). By the functorial
-injective embedding theorem for discrete actions
-(`lem-exc-discrete-modules-abelian-injective-embeddings`), every object embeds into
-an injective, giving enough injectives (`def-sp-injective-resolutions`).
+(`lem-exc-discrete-modules-abelian-structure`, `def-sp-abelian`). The group ring is
+small in the carrier universe because the coefficient ring is finite and that universe
+contains the group. Its module category has enough injectives. The representation/group-ring
+equivalence and the open-stabilizer right adjoint transfer enough injectives to discrete
+actions, as in Stacks Tag 04JF (`def-sp-injective-resolutions`).
 
 Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP;
 injectives.tex, Tag 04JF (blueprint: lem-exc-discrete-modules-abelian). -/
@@ -65,8 +69,28 @@ theorem discreteModules_abelian
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (A : Type v) [Ring A] [Finite A] :
-    ∃ (h : Abelian (Rep.DiscreteContinuousRep.{v, u, w} A G)),
-      discreteModuleActionProperties.{u, v, w} A G h := by
-  sorry
+    ∃ (h : Abelian (Rep.DiscreteContinuousRep.{v, u, max u w} A G)),
+      discreteModuleActionProperties.{u, v, max u w} A G h := by
+  obtain ⟨h, ha, hl, hc, he⟩ := Rep.discreteRep_abelian_structure.{v, u, max u w} A G
+  let := h
+  let F := ObjectProperty.ι (fun X : Rep.{max u w} A G ↦
+    ∀ m : X.V, IsOpen {g : G | X.ρ g m = m}) ⋙
+    forget₂ (Rep.{max u w} A G) (ModuleCat.{max u w} A)
+  let : F.Additive := ha
+  let : Small.{max u w} G := small_max G
+  let : Small.{max u w} (MonoidAlgebra (ULift.{max u w} A) G) :=
+    small_of_injective (DFunLike.coe_injective.comp MonoidAlgebra.coeff_injective)
+  obtain ⟨E⟩ := Rep.representation_liftedGroupAlgebra_equivalence_anyUniverse.{v, u,
+    max u w, max u w} A G
+  let : EnoughInjectives (Rep.{max u w} A G) := E.enoughInjectives_iff.mpr inferInstance
+  obtain ⟨_, hfaithful, hmono, U, adj, _⟩ :=
+    ModuleCat.openStabilizerAdjunction.{v, u, max u w} A G
+  let V := ModuleCat.forgetDiscreteGModule.{v, u, max u w} A G
+  let : V.Faithful := hfaithful
+  let : V.PreservesMonomorphisms := ⟨fun f _ ↦ hmono f inferInstance⟩
+  let : EnoughInjectives (Rep.DiscreteContinuousRep.{v, u, max u w} A G) :=
+    EnoughInjectives.of_adjunction adj
+  exact ⟨h, inferInstance, inferInstance, hl, hc, he⟩
 
 end CategoryTheory
+

@@ -18,7 +18,7 @@ Source: Stacks Project, Injectives, Section G-modules, immediately before Tag 04
 
 @[expose] public section
 
-universe u v w
+universe u v w t
 
 open CategoryTheory
 
@@ -26,15 +26,15 @@ namespace Rep
 
 -- Extend the commuting coefficient and group actions to the group ring.
 private noncomputable def actionAdd
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) :
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) :
     G →* AddMonoid.End X where
   toFun g := (X.ρ g).toAddMonoidHom
   map_one' := by ext x; exact LinearMap.congr_fun X.ρ.map_one x
   map_mul' g h := by ext x; exact LinearMap.congr_fun (X.ρ.map_mul g h) x
 
 private noncomputable def liftedAction
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) :
-    MonoidAlgebra (ULift.{w} R) G →+* AddMonoid.End X :=
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) :
+    MonoidAlgebra (ULift.{t} R) G →+* AddMonoid.End X :=
   MonoidAlgebra.liftNCRingHom
     ((Module.toAddMonoidEnd R X).comp ULift.ringEquiv.toRingHom) (actionAdd X)
     (fun a g ↦ by
@@ -42,24 +42,24 @@ private noncomputable def liftedAction
       exact ((X.ρ g).map_smul a.down x).symm)
 
 private noncomputable def liftedObj
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) :
-    ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G) :=
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) :
+    ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G) :=
   letI := Module.compHom X (liftedAction X)
   ModuleCat.of _ X
 
 private lemma lifted_single
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) (g : G)
-    (a : ULift.{w} R) (x : X) :
-    (MonoidAlgebra.single g a) • (show liftedObj X from x) = a.down • X.ρ g x := by
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) (g : G)
+    (a : ULift.{t} R) (x : X) :
+    (MonoidAlgebra.single g a) • (show liftedObj.{u, v, w, t} X from x) = a.down • X.ρ g x := by
   change liftedAction X (MonoidAlgebra.single g a) x = _
   unfold liftedAction
   rw [MonoidAlgebra.liftNCRingHom_single]
   rfl
 
 private noncomputable def liftedMap
-    {R : Type u} [Ring R] {G : Type v} [Group G] {X Y : Rep.{max u v w} R G} (f : X ⟶ Y) :
-    liftedObj X ⟶ liftedObj Y :=
-  ModuleCat.ofHom (X := liftedObj X) (Y := liftedObj Y) {
+    {R : Type u} [Ring R] {G : Type v} [Group G] {X Y : Rep.{w} R G} (f : X ⟶ Y) :
+    liftedObj.{u, v, w, t} X ⟶ liftedObj Y :=
+  ModuleCat.ofHom (X := liftedObj.{u, v, w, t} X) (Y := liftedObj Y) {
     toFun := fun x ↦ f.hom x
     map_add' := fun x y ↦ f.hom.map_add x y
     map_smul' := by
@@ -77,8 +77,8 @@ private noncomputable def liftedMap
   }
 
 private noncomputable def liftedFunctor
-    {R : Type u} [Ring R] {G : Type v} [Group G] : Rep.{max u v w} R G ⥤
-    ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G) where
+    {R : Type u} [Ring R] {G : Type v} [Group G] : Rep.{w} R G ⥤
+    ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G) where
   obj := liftedObj
   map := liftedMap
   map_id X := by ext x; rfl
@@ -86,48 +86,48 @@ private noncomputable def liftedFunctor
 
 -- Restrict scalars to coefficients and recover the group action from basis elements.
 private noncomputable def coeffInclusion
-    {R : Type u} [Ring R] {G : Type v} [Group G] : R →+* MonoidAlgebra (ULift.{w} R) G :=
+    {R : Type u} [Ring R] {G : Type v} [Group G] : R →+* MonoidAlgebra (ULift.{t} R) G :=
   MonoidAlgebra.singleOneRingHom.comp ULift.ringEquiv.symm.toRingHom
 
 private noncomputable abbrev restrictedObj
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    (M : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)) :
-    ModuleCat.{max u v w} R :=
+    (M : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)) :
+    ModuleCat.{w} R :=
   (ModuleCat.restrictScalars (coeffInclusion (R := R) (G := G))).obj M
 
 private noncomputable def restrictedAction
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    (M : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)) :
+    (M : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)) :
     Representation R G (restrictedObj M) where
   toFun g := {
-    toFun := fun x ↦ MonoidAlgebra.single g (1 : ULift.{w} R) • (show M from x)
+    toFun := fun x ↦ MonoidAlgebra.single g (1 : ULift.{t} R) • (show M from x)
     map_add' := fun x y ↦ smul_add _ x y
     map_smul' := by
       intro r x
-      change MonoidAlgebra.single g (1 : ULift.{w} R) •
+      change MonoidAlgebra.single g (1 : ULift.{t} R) •
         (coeffInclusion (G := G) r • (show M from x)) =
-        coeffInclusion (G := G) r • (MonoidAlgebra.single g (1 : ULift.{w} R) • (show M from x))
+        coeffInclusion (G := G) r • (MonoidAlgebra.single g (1 : ULift.{t} R) • (show M from x))
       simp [coeffInclusion, ← mul_smul, MonoidAlgebra.single_mul_single]
   }
   map_one' := by
     ext x
-    change MonoidAlgebra.single (1 : G) (1 : ULift.{w} R) • (show M from x) = x
+    change MonoidAlgebra.single (1 : G) (1 : ULift.{t} R) • (show M from x) = x
     simp [← MonoidAlgebra.one_def]
   map_mul' g h := by
     ext x
-    change MonoidAlgebra.single (g * h) (1 : ULift.{w} R) • (show M from x) =
-      MonoidAlgebra.single g (1 : ULift.{w} R) •
-        (MonoidAlgebra.single h (1 : ULift.{w} R) • (show M from x))
+    change MonoidAlgebra.single (g * h) (1 : ULift.{t} R) • (show M from x) =
+      MonoidAlgebra.single g (1 : ULift.{t} R) •
+        (MonoidAlgebra.single h (1 : ULift.{t} R) • (show M from x))
     simp [← mul_smul, MonoidAlgebra.single_mul_single]
 
 private noncomputable def restrictedRep
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    (M : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)) :
-    Rep.{max u v w} R G := Rep.of (restrictedAction M)
+    (M : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)) :
+    Rep.{w} R G := Rep.of (restrictedAction M)
 
 private noncomputable def restrictedMap
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    {M N : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)} (f : M ⟶ N) :
+    {M N : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)} (f : M ⟶ N) :
     restrictedRep M ⟶ restrictedRep N :=
   Rep.ofHom {
     toFun := fun x ↦ f.hom x
@@ -140,7 +140,7 @@ private noncomputable def restrictedMap
 
 private noncomputable def restrictedFunctor
     {R : Type u} [Ring R] {G : Type v} [Group G] :
-    ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G) ⥤ Rep.{max u v w} R G where
+    ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G) ⥤ Rep.{w} R G where
   obj := restrictedRep
   map := restrictedMap
   map_id M := by ext x; rfl
@@ -148,36 +148,36 @@ private noncomputable def restrictedFunctor
 
 -- Both composites have the original actions, so their comparison maps are identities.
 private lemma recovered_scalar
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) (r : R) (x : X) :
-    r • (show restrictedRep (liftedObj X) from x) = r • x := by
-  change MonoidAlgebra.single (1 : G) (ULift.up r : ULift.{w} R) •
-    (show liftedObj X from x) = r • x
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) (r : R) (x : X) :
+    r • (show restrictedRep (liftedObj.{u, v, w, t} X) from x) = r • x := by
+  change MonoidAlgebra.single (1 : G) (ULift.up r : ULift.{t} R) •
+    (show liftedObj.{u, v, w, t} X from x) = r • x
   rw [lifted_single]
   simp
 
 private lemma recovered_group
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) (g : G) (x : X) :
-    (restrictedRep (liftedObj X)).ρ g x = X.ρ g x := by
-  change MonoidAlgebra.single g (1 : ULift.{w} R) • (show liftedObj X from x) = _
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) (g : G) (x : X) :
+    (restrictedRep (liftedObj.{u, v, w, t} X)).ρ g x = X.ρ g x := by
+  change MonoidAlgebra.single g (1 : ULift.{t} R) • (show liftedObj.{u, v, w, t} X from x) = _
   rw [lifted_single]
   simp
 
 private noncomputable def liftedUnit
-    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{max u v w} R G) :
-    X ≅ restrictedRep (liftedObj X) :=
+    {R : Type u} [Ring R] {G : Type v} [Group G] (X : Rep.{w} R G) :
+    X ≅ restrictedRep (liftedObj.{u, v, w, t} X) :=
   Rep.mkIso <| Representation.Equiv.mk {
     toFun := fun x ↦ x
     invFun := fun x ↦ x
     left_inv := fun _ ↦ rfl
     right_inv := fun _ ↦ rfl
     map_add' := fun _ _ ↦ rfl
-    map_smul' := fun r x ↦ (recovered_scalar X r x).symm
-  } (fun g ↦ by ext x; exact (recovered_group X g x).symm)
+    map_smul' := fun r x ↦ (recovered_scalar.{u, v, w, t} X r x).symm
+  } (fun g ↦ by ext x; exact (recovered_group.{u, v, w, t} X g x).symm)
 
 private lemma recovered_algebra
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    (M : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G))
-    (a : MonoidAlgebra (ULift.{w} R) G) (x : M) :
+    (M : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G))
+    (a : MonoidAlgebra (ULift.{t} R) G) (x : M) :
     a • (show liftedObj (restrictedRep M) from x) = a • x := by
   induction a using MonoidAlgebra.induction_linear with
   | zero => simp
@@ -186,15 +186,15 @@ private lemma recovered_algebra
     change liftedAction (restrictedRep M) (MonoidAlgebra.single g r) x = _
     unfold liftedAction
     rw [MonoidAlgebra.liftNCRingHom_single]
-    change MonoidAlgebra.single (1 : G) (ULift.up r.down : ULift.{w} R) •
-      (MonoidAlgebra.single g (1 : ULift.{w} R) • x) = MonoidAlgebra.single g r • x
+    change MonoidAlgebra.single (1 : G) (ULift.up r.down : ULift.{t} R) •
+      (MonoidAlgebra.single g (1 : ULift.{t} R) • x) = MonoidAlgebra.single g r • x
     simp [← mul_smul, MonoidAlgebra.single_mul_single]
 
 private noncomputable def liftedCounit
     {R : Type u} [Ring R] {G : Type v} [Group G]
-    (M : ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)) :
+    (M : ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)) :
     liftedObj (restrictedRep M) ≅ M :=
-  LinearEquiv.toModuleIso (R := MonoidAlgebra (ULift.{w} R) G)
+  LinearEquiv.toModuleIso (R := MonoidAlgebra (ULift.{t} R) G)
     (X₁ := liftedObj (restrictedRep M)) (X₂ := M) {
     toFun := fun x ↦ (show M from x)
     invFun := fun x ↦ (show liftedObj (restrictedRep M) from x)
@@ -203,6 +203,25 @@ private noncomputable def liftedCounit
     map_add' := fun _ _ ↦ rfl
     map_smul' := fun a x ↦ recovered_algebra M a x
   }
+
+/-- The representation/group-ring equivalence does not change the carrier universe.
+The group ring acts by finite sums of coefficient multiples of translates, and restriction
+recovers the original actions. The identity maps give the unit and counit, exactly as in
+the lifted equivalence below. No size assumption is needed for an equivalence; size is
+needed only when applying an existence theorem for injective modules.
+
+Source: Stacks Project, Injectives, Section G-modules, immediately before Tag 04JF
+(blueprint: lem-exc-rg-representation-lifted-group-algebra-equivalence). -/
+theorem representation_liftedGroupAlgebra_equivalence_anyUniverse
+    (R : Type u) [Ring R] (G : Type v) [Group G] :
+    Nonempty (Rep.{w} R G ≌ ModuleCat.{w} (MonoidAlgebra (ULift.{t} R) G)) := by
+  exact ⟨{
+    functor := liftedFunctor
+    inverse := restrictedFunctor
+    unitIso := NatIso.ofComponents (liftedUnit.{u, v, w, t}) (by intro X Y f; ext x; rfl)
+    counitIso := NatIso.ofComponents liftedCounit (by intro X Y f; ext x; rfl)
+    functor_unitIso_comp X := by ext x; rfl
+  }⟩
 
 /-- (blueprint: lem-exc-rg-representation-lifted-group-algebra-equivalence)
 Source: Stacks Project, Injectives, Section G-modules, immediately before Tag 04JF:
@@ -227,12 +246,6 @@ theorem representation_liftedGroupAlgebra_equivalence
     (R : Type u) [Ring R] (G : Type v) [Group G] :
     Nonempty (Rep.{max u v w} R G ≌
       ModuleCat.{max u v w} (MonoidAlgebra (ULift.{w} R) G)) := by
-  exact ⟨{
-    functor := liftedFunctor
-    inverse := restrictedFunctor
-    unitIso := NatIso.ofComponents liftedUnit (by intro X Y f; ext x; rfl)
-    counitIso := NatIso.ofComponents liftedCounit (by intro X Y f; ext x; rfl)
-    functor_unitIso_comp X := by ext x; rfl
-  }⟩
+  exact representation_liftedGroupAlgebra_equivalence_anyUniverse.{u, v, max u v w, w} R G
 
 end Rep
