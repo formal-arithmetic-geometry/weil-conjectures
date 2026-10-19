@@ -26,47 +26,47 @@
  ],
  "proof": [
   {
-   "text": "For the closed–open pair $(i,j)$, the cited support-localization result gives the right adjunction $i_*\\dashv Ri^!_0$ on bounded-below derived categories and its canonical counit. Thus, for every bounded-below etale-origin $T$, its adjunction bijection is the stated natural map $a_T:\\operatorname{Hom}(T,B_0)\\xrightarrow{\\sim}\\operatorname{Hom}(i_*T,K)$, and the support counit is $\\epsilon_0=a_{B_0}(1_{B_0})$. The quasi-compactness hypothesis needed there is exactly the hypothesis on $j$ in the item.",
+   "text": "Use the supplied support adjunction S ⊣ R₀. For B₀ = R₀(K), intrinsic bounded constructibility gives a finite set of nonzero cohomology degrees. Finite lower and upper bounds give a closed integer interval containing them, including when that set is empty. Apply the essential-image criterion of lem-weil-pbc-finite-ring-constructible-derived-origin to its canonical constant-scalar realization. The resulting etale complex is bounded below. The exact realization equivalence is fully faithful on derived categories, so lift its comparison isomorphism to the fixed-module category. This proves that B₀ is bounded below of etale origin, rather than assuming that conclusion.",
    "uses": [
-    "lem-pur-support-localization-triangle"
+    "lem-pur-support-localization-triangle",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-proetale-modules"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-support-localization-triangle.md",
-    "place": "Proof, second paragraph: the supported-kernel adjunction and its derived bounded-below form"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, bounded constructible derived comparison, together with the canonical constant-scalar realization interface."
    }
   },
   {
-   "text": "Use $c=(\\mathrm{id}_Z,i)$. By [lem-weil-pbc-closed-immersion-proper], $i$ is proper, hence separated and finite type, so this is a compactification in [def-weil-compactifications-refinements]. By [lem-kun-dimension-finite-type], choose an integer $d\\geq0$ bounding $\\dim Z$ (also for empty $Z$); this meets the dimension hypothesis of [thm-sf-ambient-adjoint-class]. By [def-compact-support-direct-image-detailed], $P_c=Ri_*\\mathrm{id}_!$. Extension by zero along the identity is the identity, and $i_*$ is exact by [lem-pur-support-localization-triangle], so $P_c=i_*$ as the termwise induced derived functor. Clause (2) of [thm-sf-ambient-adjoint-class], with its source object $T$ bounded below of etale origin and its target object $K\\in D^+(X_{\\mathrm{proet}},A)$, supplies a natural bijection $\\operatorname{Hom}(i_*T,K)\\cong\\operatorname{Hom}(T,\\nu_Z^*i_c^\\times R\\nu_{X,*}K)$. Its inverse is exactly $e_T$. The same clause gives bounded-below typing for $B$; the statement places both representing objects in the etale-origin subcategory, allowing $\\epsilon=e_B(1_B)$.",
+   "text": "Use c=(id_Z,i), since a closed immersion is proper. The existing closedSupportCompactIso, constructed from the identity extension-by-zero adjunction and exact derived closed direct image, identifies compact support with S in the ordinary derived category. Apply specifiedExceptionalEtale_boundedBelow at this same compactification to Rν_* K and its specified ordinary etale right adjoint. Its inverse image is therefore bounded below of etale origin, giving the asserted property of B. Use the supplied FixedComparisonClassAdjunction for its natural Hom equivalences; its finite-amplitude bound is already encapsulated in the cited specified boundedness theorem, so no dimension is chosen here.",
    "uses": [
     "thm-sf-ambient-adjoint-class",
     "lem-weil-pbc-closed-immersion-proper",
     "def-weil-compactifications-refinements",
-    "lem-kun-dimension-finite-type",
     "def-compact-support-direct-image-detailed",
     "lem-pur-support-localization-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Proof, first paragraph: the bounded-below etale-origin Hom bijection for the compactification adjoint"
+    "place": "First paragraph: finite-amplitude boundedness of the etale adjoint and natural comparison Hom chain; Stacks Tag 09BM for exact closed direct image."
    }
   },
   {
-   "text": "Restrict to the full subcategory of bounded-below etale-origin objects of $D(Z_{\\mathrm{proet}},A)$ and the contravariant Hom functor $T\\mapsto\\operatorname{Hom}(i_*T,K)$. Steps 1 and 2 give two natural representations of this functor by $B_0$ and $B$. Apply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] to the opposite of this full subcategory and the natural bijections $e_T^{-1}a_T$. Equivalently, Yoneda (Categories, Tag 001P) gives the unique morphism $\\phi_K:B_0\\to B$ satisfying $e_T(\\phi_K\\circ f)=a_T(f)$ for every $T$ and $f:T\\to B_0$. Applying the same argument to the inverse natural transformation gives $\\psi:B\\to B_0$; naturality at $T=B_0$ and $T=B$ shows $\\psi\\circ\\phi_K=1_{B_0}$ and $\\phi_K\\circ\\psi=1_B$, so $\\phi_K$ is an isomorphism. This uses the explicitly assumed etale-origin hypotheses on both representing objects.",
+   "text": "Compose the support Hom bijection, the fully faithful D+ inclusion, precomposition with closedSupportCompactIso.hom, the exceptional Hom bijection and the inverse D+ inclusion. This gives natural equivalences e_T: Hom(T,B₀) ≃ Hom(T,B) on the full class of bounded-below etale-origin inputs. Construct φ=e_B₀(id) and ψ=e_B⁻¹(id). Naturality applied to φ and ψ gives both inverse equations, and naturality applied to f gives f ≫ φ=e_T(f). Unpack this equality to the required relation with closedSupportCompactIso.inv. For uniqueness, retain an etale antecedent of B₀ from step 1, specialize any other normalized isomorphism to T=B₀ and f=id, and cancel the compact-support isomorphism and the injective inverse exceptional Hom bijection. This is the direct identity-evaluation proof of Yoneda uniqueness, without constructing a separate co-Yoneda natural isomorphism.",
    "uses": [
     "lem-pur-support-localization-triangle",
-    "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+    "thm-sf-ambient-adjoint-class"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 001P, lemma-yoneda; uniqueness of a morphism representing a natural Hom transformation"
+    "place": "Tag 001P, lemma-yoneda: evaluation at the identities and naturality."
    }
   },
   {
-   "text": "Evaluate the defining relation at $T=B_0$ and $f=1_{B_0}$. By Step 1 its right-hand side is $a_{B_0}(1_{B_0})=\\epsilon_0$. Naturality of the relative-adjunction bijection in Step 2 identifies the left-hand side with $e_{B_0}(\\phi_K)=e_B(1_B)\\circ i_*\\phi_K=\\epsilon\\circ i_*\\phi_K$. Hence $\\epsilon\\circ i_*\\phi_K=\\epsilon_0$, as required.",
+   "text": "Naturality of the exceptional Hom bijection gives e_B₀⁻¹(φ)=F(φ) ≫ e_B⁻¹(id). Naturality of closedSupportCompactIso.inv changes S(φ) ≫ q_B⁻¹ into q_B₀⁻¹ ≫ F(φ). Substitute the preceding equation and then specialize the normalization from step 3 to T=B₀ and f=id. Full faithfulness sends preimage(id) to id, and the support adjunction sends id to its counit. The result is exactly the final counit equation.",
    "uses": [
     "lem-pur-support-localization-triangle",
     "thm-sf-ambient-adjoint-class"
@@ -74,23 +74,23 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-    "place": "Proof, first paragraph: naturality of the relative adjunction and its counit"
+    "place": "First paragraph: naturality of the relative adjunction."
    }
   }
  ],
  "proof_deps": [
   "lem-pur-support-localization-triangle",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-proetale-modules",
   "thm-sf-ambient-adjoint-class",
   "lem-weil-pbc-closed-immersion-proper",
   "def-weil-compactifications-refinements",
-  "lem-kun-dimension-finite-type",
-  "def-compact-support-direct-image-detailed",
-  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+  "def-compact-support-direct-image-detailed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-  "place": "Agent-written comparison of the two cited adjunctions, following the agent-written blueprint and Stacks Tag 001P; no independent human-authored source for this complete comparison is claimed."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "A9 Lean proof: finite-ring constructible origin, the specified exceptional boundedness theorem, and direct identity evaluation of the natural Hom bijections as in Stacks Tag 001P. No independent human-authored source for the full comparison is claimed."
  },
  "mathlib_searches": [
   {
@@ -203,5 +203,15 @@
   "date": "2026-10-17",
   "existing": false,
   "fixed_by": "NT-stage2-cc-be6774e33"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261019T034251-L-415326",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
