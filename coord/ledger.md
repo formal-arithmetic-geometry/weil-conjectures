@@ -16945,3 +16945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/W6/Sheaf.Paper.FiniteProjectiveTensorProducts (stage 3; reviewer PASS; first push; landing 20261019T034340-L-424058 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/W6/Sheaf.Paper.FormalClosedSupportIILimits (stage 3; reviewer PASS; first push; landing 20261019T034341-L-424170 (interface); batch 20261019T034248; modules 2; new nodes 1)
 - 03:43 L: merged deliver/W7/Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage (stage 3; reviewer PASS; first push; landing 20261019T034342-L-424276 (interface); batch 20261019T034248; modules 2; new nodes 0; change records: coord/changes/sitePullbackAbelianUnderlyingUniverses.md)
+- 03:43 L: merged deliver/W8/Sheaf.Paper.IndHeartCanonicalPresentation (stage 3; reviewer PASS; first push; landing 20261019T034343-L-424408 (proof); batch 20261019T034248; modules 1; new nodes 0)

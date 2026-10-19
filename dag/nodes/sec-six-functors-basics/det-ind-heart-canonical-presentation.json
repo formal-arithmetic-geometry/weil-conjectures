@@ -25,33 +25,20 @@
  ],
  "proof": [
   {
-   "text": "First verify the hypotheses of the cited sheaf results. A field is Noetherian, since its only ideals are zero and itself, and its spectrum consists of one point, hence is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X\\to\\operatorname{Spec}k$: $X$ is Noetherian. Thus the standing-scheme hypothesis in [sk-lem-coefficient-heart] and the Noetherian hypothesis in [det-ind-heart-full-faithfulness] hold with precisely the condensed coefficients and internal-module category in the statement. For essential smallness, part (2) of [sk-lem-coefficient-heart] gives a set of representatives $C$ of constructible objects. By [def-weil-size-convention] the site is small in the enlarged universe. A sheaf map is a family of section maps satisfying equations, hence its collection is a set in that universe. For each representative $C$, the maps $C\\to B$ therefore form a set. Their union gives a set of representatives of $J(B)$; its Hom sets are subsets of sheaf Hom sets. This proves essential smallness. For each constructible $C$ choose an isomorphism $u:C\\to C_0$ to its representative; $(C,c)$ is isomorphic over $B$ to $(C_0,c u^{-1})$. Restriction of cocones to these representatives and extension along these isomorphisms are inverse, so all colimit arguments may use the resulting small full subcategory.",
+   "text": "Finite type over the spectrum of the field k gives a locally Noetherian and quasi-compact X by [lem-weil-pbc-finite-type-over-noetherian]. Apply [det-lem-coefficient-heart-small] for each of the two canonical condensed coefficient rings. The constructible full subcategory is essentially small, and its costructured-arrow category over B is essentially small by Mathlib CostructuredArrow.essentiallySmall, since ambient module morphisms lie in universe u+1.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-lem-coefficient-heart",
-    "det-ind-heart-full-faithfulness",
+    "det-lem-coefficient-heart-small",
     "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
-    "place": "First paragraph; standing hypotheses verified using Stacks 01T6 (lemma-finite-type-noetherian)"
+    "place": "Essential smallness paragraph"
    }
   },
   {
-   "text": "The zero sheaf is constructible: take the zero finitely presented scalar module in the local-model definition [sk-def-sfb-constructible]. Hence $(0,0\\to B)$ makes $J(B)$ nonempty. Given $(C_1,c_1)$ and $(C_2,c_2)$, the split exact sequence $0\\to C_1\\to C_1\\oplus C_2\\to C_2\\to0$ and extension closure in [sk-lem-coefficient-heart](1) show that $C_1\\oplus C_2$ is constructible; the map with components $c_1,c_2$ gives a common successor in $J(B)$. For parallel $g,h:(C_1,c_1)\\rightrightarrows(C_2,c_2)$, one has $c_2(g-h)=0$. The cokernel universal property gives a factorization of $c_2$ through $q:C_2\\to\\operatorname{coker}(g-h)$. The cokernel is constructible by the same closure clause, and $qg=qh$. Thus this quotient is an equalizing successor in $J(B)$, proving filteredness.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "sk-lem-coefficient-heart"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
-    "place": "Filtered paragraph"
-   }
-  },
-  {
-   "text": "Part (2) of [det-ind-heart-full-faithfulness] gives a small filtered constructible diagram with colimit isomorphic to $B$; compose its cocone legs with that isomorphism to get a presentation cocone with vertex $B$. Now fix any such presentation, indexed by $I$, with legs $c_i:C_i\\to B$, and let $F(i)=(C_i,c_i)$. For this presentation, enlarge the small full subcategory of step 1 by all the objects $F(i)$. Since $I$ is small this subcategory remains small and still meets every isomorphism class of $J(B)$, and $F$ now lands in it. Apply the criterion and the colimit comparison below to this small subcategory; extension of cocones as in step 1 recovers the colimit over $J(B)$. The objectwise argument below also applies to every object of the original $J(B)$ and proves finality there. For $j=(C,c)\\in J(B)$, part (1) of that same node identifies $\\varinjlim_i\\operatorname{Hom}_{\\mathcal M}(C,C_i)$ with $\\operatorname{Hom}_{\\mathcal M}(C,B)$. Surjectivity gives $s:C\\to C_i$ with $c_i s=c$, so $j\\to F(i)$ exists. For two maps $s,s':j\\to F(i)$ their images coincide in that Hom colimit. The elementary set-colimit calculation is as follows: take the disjoint union of the Hom sets modulo the transition relations. Equality is a finite zigzag of those relations. Filteredness supplies a cocone on its finite index diagram (combine the finitely many objects, then equalize the finitely many resulting parallel arrows), so the representatives agree after maps to a common stage. If those two maps out of $i$ differ, equalize them once more. Thus a single $t:i\\to i'$ satisfies $C(t)s=C(t)s'$. Apply [lem-weil-pbc-initial-functor-cofiltered-criterion](1) to $\\mathcal A=I^{\\mathrm{op}}$, $\\mathcal B=J(B)^{\\mathrm{op}}$, and $H=F^{\\mathrm{op}}$: the two conditions just proved become exactly its conditions (i) and (ii). Hence $H$ is initial and $F$ is final. This establishes cofinality for every presentation, not only the chosen one.",
+   "text": "Fix any small filtered constructible presentation of B. Clause (1) of [det-ind-heart-full-faithfulness] makes every constructible domain finitely presentable. Mathlib IsFinitelyPresentable.exists_hom_of_isColimit factors every constructible map to B through a presentation stage. IsFinitelyPresentable.exists_eq_of_isColimit makes two factorizations equal after two transition arrows; filtered equalization of those arrows gives one transition identifying the factorizations. Apply the filtered finality criterion of [lem-weil-pbc-initial-functor-cofiltered-criterion], in its dual form Functor.final_iff_of_isFiltered. This proves finality for every presentation.",
    "uses": [
     "det-ind-heart-full-faithfulness",
     "lem-weil-pbc-initial-functor-cofiltered-criterion"
@@ -59,11 +46,23 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
-    "place": "Cofinality paragraph; Stacks 04E6 (definition-cofinal), via the existing dual criterion"
+    "place": "Cofinality paragraph"
    }
   },
   {
-   "text": "Let $G:J(B)\\to\\mathcal M$ be the tautological functor $(C,c)\\mapsto C$. Use the colimit-existence and comparison clause of [lem-weil-pbc-initial-functor-cofiltered-criterion](1) with $H=F^{\\mathrm{op}}$ and $M=G$. It says that the colimit of $G$ exists if and only if the colimit of $GF$ exists, and that its canonical comparison is an isomorphism. The latter colimit exists and is $B$ by the presentation in step 3. In particular the comparison $a:B\\to\\varinjlim G$ satisfies $a c_i=\\iota_{F(i)}$. The cocone with legs $c:C\\to B$ induces $b:\\varinjlim G\\to B$ by [def-weil-pbc-category-colimit], and $ba c_i=c_i$ for all $i$. The colimit uniqueness for the presentation yields $ba=1_B$, so $b=a^{-1}$. Consequently $B$, with precisely its tautological legs $c$, is the claimed colimit. No existence of the colimit over $J(B)$ was assumed.",
+   "text": "The hypothesis that B lies in ObjectProperty.ind already supplies a small filtered constructible presentation, by [det-ind-heart-full-faithfulness] and the definition of IndCons. Its presentation functor is final by the preceding argument. Therefore J(B) is filtered by Mathlib IsFiltered.of_final. This proves the filteredness conclusion without needing constructible closure under direct sums or cokernels.",
+   "uses": [
+    "det-ind-heart-full-faithfulness",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
+    "place": "Filtered and Cofinality paragraphs; derive filteredness from the final presentation"
+   }
+  },
+  {
+   "text": "Whisker the canonical tautological cocone with that presentation functor. The whiskered cocone is isomorphic to the presentation cocone by the identity on B, since its legs are the specified presentation legs. Transfer its IsColimit proof along Functor.Final.isColimitWhiskerEquiv, using [lem-weil-pbc-initial-functor-cofiltered-criterion] and [def-weil-pbc-category-colimit]. This constructs the colimit proof directly for the tautological cocone and hence proves density at B, without assuming existence of another chosen colimit.",
    "uses": [
     "lem-weil-pbc-initial-functor-cofiltered-criterion",
     "def-weil-pbc-category-colimit"
@@ -71,23 +70,22 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
-    "place": "Colimit paragraph; Stacks 04E7 (lemma-cofinal) and 002F (definition-colimit)"
+    "place": "Colimit paragraph"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "sk-lem-coefficient-heart",
-  "det-ind-heart-full-faithfulness",
+  "det-lem-coefficient-heart-small",
   "def-weil-size-convention",
-  "sk-def-sfb-constructible",
+  "det-ind-heart-full-faithfulness",
   "lem-weil-pbc-initial-functor-cofiltered-criterion",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.md",
-  "place": "## Proof"
+  "by": "W8",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-canonical-presentation.proof.md",
+  "place": "Essential smallness, Cofinality and Colimit paragraphs; filteredness follows from the final presentation"
  },
  "mathlib_searches": [
   {
@@ -235,5 +233,15 @@
   "group": "NP",
   "result": "pass",
   "note": "Wrote review.md. All hypotheses, conclusions, dependency interfaces, universes, edge cases, docstrings and the verbatim statement match. Snapshot compilation passed cleanly through scompile.py. No route-pivot conflicts or required fixes; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261019T034343-L-424408",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
