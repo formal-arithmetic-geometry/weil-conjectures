@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Fix the tensorator convention $\\mu^V_{X,Y}:VX\\otimes VY\\to V(X\\otimes Y)$. Put $H=H_{\\mathcal C_A}(K,M)$. For any of the functors $V$ in the question its defining transpose says\n$$\\mathrm{ev}_{VK,VM}\\circ(v_V\\otimes1_{VK})=V(\\mathrm{ev}_{K,M})\\circ\\mu^V_{H(K,M),K}.\\tag{E}$$\nEquality of maps into an internal Hom can therefore be checked after evaluation. The cited uncurry laws use $K\\otimes T$, whereas the question uses $T\\otimes K$; precompose their evaluations with the specified symmetry $T\\otimes K\\cong K\\otimes T$. Cancellation and precomposition naturality remain the stated uncurry laws. In particular they apply to (E). All later reassociations mean the specified associators, with their naturality and the monoidal-functor associativity axiom, not an assumption that the categories are strict.",
+   "text": "Identify the evaluation-defined comparison with Functor.LaxMonoidal.ihomComparison by ihomComparison_app_eq_curry in WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic. Its composite-functor equation ihomComparison_comp_app follows by inverse transposition: evaluation of the composite comparison is the image of evaluation preceded by the composite tensorator. These are the specified monoidal tensorators, with the K tensor T convention of Mathlib.",
    "uses": [
     "lem-pod-closed-uncurry-laws",
     "def-sfb-monoidal-category"
@@ -25,21 +25,11 @@
    }
   },
   {
-   "text": "Make the suppressed identification by $h$ explicit. Put $P=U_BF$, $Q=GU_A$, and define $r_h:H(PK,PM)\\to H(QK,QM)$ by $r_h=H(h_K^{-1},h_M)$. By the natural adjunction defining $H$, it is characterized by\n$$\\mathrm{ev}_{QK,QM}\\circ(r_h\\otimes h_K)=h_M\\circ\\mathrm{ev}_{PK,PM}.\\tag{H}$$\nIndeed precomposing the right-hand side by $1\\otimes h_K^{-1}$ and transposing gives exactly $H(h_K^{-1},h_M)$. Its inverse is $H(h_K,h_M^{-1})$, by functoriality. Thus the first asserted identity, without suppressed endpoints, is\n$$v_G\\circ G\\beta_A\\circ h_H=r_h\\circ\\beta_B\\circ U_Bv_F.\\tag{S}$$",
-   "uses": [
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
-    "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation"
-   }
-  },
-  {
-   "text": "Evaluate the left side of (S) after tensoring with $h_K$. Twice applying (E), first to $G$ and then to $U_A$, and using naturality of $\\mu^G$, gives\n$$\\begin{aligned}\n\\mathrm{ev}_{QK,QM}\\circ((v_G\\circ G\\beta_A\\circ h_H)\\otimes h_K)\n&=G(U_A\\mathrm{ev}_{K,M})\\circ G(\\mu^{U_A}_{H,K})\\circ\\mu^G_{U_AH,U_AK}\\circ(h_H\\otimes h_K)\\\\\n&=Q(\\mathrm{ev}_{K,M})\\circ\\mu^Q_{H,K}\\circ(h_H\\otimes h_K).\n\\end{aligned}$$\nThe last equality is the definition $\\mu^Q=G(\\mu^{U_A})\\circ\\mu^G$ of the composite tensorator. This uses no invertibility of an internal-Hom comparison.",
+   "text": "For a monoidal natural isomorphism e : V ≅ W, apply ihomComparison_app_comp_map_app to e.inv, precompose with e.hom at the internal Hom, and postcompose with internal Hom applied to e.hom at the second variable. The inverse pairs cancel. The remaining endpoint map is exactly internalHomTransport e = H(e.inv,e.hom). Apply this equation to h and expand both composite comparisons to obtain the square identity.",
    "uses": [
     "lem-pod-closed-uncurry-laws",
-    "def-sfb-monoidal-category"
+    "def-sfb-monoidal-category",
+    "def-nagata-category"
    ],
    "elementary": true,
    "source": {
@@ -48,19 +38,7 @@
    }
   },
   {
-   "text": "Using (H), followed by (E) for $U_B$ and for $F$, the evaluation of the right side of (S), on the same tensor product, is\n$$\\begin{aligned}\n\\mathrm{ev}_{QK,QM}\\circ((r_h\\circ\\beta_B\\circ U_Bv_F)\\otimes h_K)\n&=h_M\\circ P(\\mathrm{ev}_{K,M})\\circ U_B(\\mu^F_{H,K})\\circ\\mu^{U_B}_{FH,FK}\\\\\n&=h_M\\circ P(\\mathrm{ev}_{K,M})\\circ\\mu^P_{H,K}\\\\\n&=Q(\\mathrm{ev}_{K,M})\\circ h_{H\\otimes K}\\circ\\mu^P_{H,K}\\\\\n&=Q(\\mathrm{ev}_{K,M})\\circ\\mu^Q_{H,K}\\circ(h_H\\otimes h_K).\n\\end{aligned}$$\nThe third line is naturality of $h$ at evaluation; the fourth is precisely its monoidality. These agree with step 3. Since $h_K$ is invertible, cancel $1\\otimes h_K$ and use the injectivity of inverse transposition to obtain (S). This proves the first formula with the claimed identifications.",
-   "uses": [
-    "lem-pod-closed-uncurry-laws",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
-    "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation"
-   }
-  },
-  {
-   "text": "If $\\beta_A$ and $\\beta_B$ are invertible, compose (S) on the right with $h_H^{-1}\\circ G(\\beta_A^{-1})$. Functoriality gives $G\\beta_A\\circ G(\\beta_A^{-1})=1$, so\n$$v_G=r_h\\circ\\beta_B\\circ U_B(v_F)\\circ h_H^{-1}\\circ G(\\beta_A^{-1}).$$\nSuppressing the isomorphism $r_h$ is exactly the second displayed formula of the statement. If $v_F$ is invertible, each factor in this expression is invertible: a functor sends an inverse to an inverse. Their reversed composite is an inverse of $v_G$. This does not deduce invertibility of $v_F$ from that of the two $\\beta$ maps.",
+   "text": "Precompose the square identity with G of the inverse of the UA comparison, followed by h.inv at the internal Hom. Cancel h.inv followed by h.hom and G of the inverse comparison followed by G of the comparison. The resulting equation is precisely the stated conjugation formula. This needs only the given invertibility of the UA comparison; retaining the other stated guard leaves the signature unchanged.",
    "uses": [
     "def-nagata-category"
    ],
@@ -71,18 +49,7 @@
    }
   },
   {
-   "text": "For $a:K'\\to K$ and $b:M\\to M'$, evaluate the two sides of the naturality equation\n$$H(Va,Vb)\\circ v_{V;K,M}=v_{V;K',M'}\\circ V(H(a,b)).\\tag{N}$$\nAfter evaluation and insertion of $1\\otimes Va$ where required, both pairings are\n$$V\\bigl(b\\circ\\mathrm{ev}_{K,M}\\circ(1\\otimes a)\\bigr)\\circ\\mu^V_{H(K,M),K'}.$$\nThis follows by (E), naturality of $\\mu^V$, and the defining transpose of $H(a,b)$; injectivity proves (N). Applied to $V=U_A,U_B$, it also proves naturality of $\\beta$. Naturality of $h$ and functoriality of $H$ make $r_h$ natural. Thus inserting the formula of step 5 into either side of (N) for $G$ carries the naturality equation for $F$ to that equation on the corresponding image pairs. No fullness or essential surjectivity of $U_A$ or $U_B$ is used.",
-   "uses": [
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
-    "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation"
-   }
-  },
-  {
-   "text": "Let $t:T\\to H(K,M)$ and $e=\\mathrm{ev}_{K,M}\\circ(t\\otimes1_K):T\\otimes K\\to M$. From (E) and tensorator naturality one obtains\n$$\\mathrm{ev}_{VK,VM}\\circ((v_V\\circ Vt)\\otimes1_{VK})=V(e)\\circ\\mu^V_{T,K}.\\tag{T}$$\nConsequently $v_V\\circ Vt$ is exactly the transpose of $V(e)\\circ\\mu^V_{T,K}$. This is preservation of tensor–Hom transposes; setting $t=1$ recovers evaluation compatibility. To see the transport in the square, substitute (S) into (T) for $G$ and precompose its first factor by $h_T$. Naturality gives $h_H\\circ P(t)=Q(t)\\circ h_T$; monoidality gives $h_{T\\otimes K}\\circ\\mu^P_{T,K}=\\mu^Q_{T,K}\\circ(h_T\\otimes h_K)$. Hence both transported pairings equal $h_M\\circ P(e)\\circ\\mu^P_{T,K}$ by (H). This explicitly carries the evaluation and transpose identities for $F$ through the square.",
+   "text": "Prove the four comparison laws for any strong monoidal functor V, so the asserted implication from the F laws to the G laws follows without using its antecedent. Naturality in the second variable is naturality of ihomComparison; naturality in the first is map_pre_app_comp_ihomComparison_app. The evaluation equation is uncurry_curry. For the transpose equation, move V.map t inside curry by naturality of curry, expand uncurry, and use tensorator naturality.",
    "uses": [
     "lem-pod-closed-uncurry-laws",
     "def-sfb-monoidal-category"
@@ -94,7 +61,7 @@
    }
   },
   {
-   "text": "For three objects $K,L,M$ let $c:H(L,M)\\otimes H(K,L)\\to H(K,M)$ denote internal-Hom composition. Its defining inverse transpose is the pairing which first evaluates $H(K,L)\\otimes K$ and then $H(L,M)\\otimes L$. For any $V$, evaluate the proposed compatibility\n$$v_{V;K,M}\\circ V(c)\\circ\\mu^V_{H(L,M),H(K,L)}\n=c'\\circ(v_{V;L,M}\\otimes v_{V;K,L}).\\tag{C}$$\nHere $c'$ is composition for $VK,VL,VM$. By (E), the inverse transpose of the left side is $V$ of those two successive evaluations, preceded by the three-factor tensorator. The right side has inverse transpose\n$$\\mathrm{ev}_{VL,VM}\\circ(v_{V;L,M}\\otimes1)\\circ(1\\otimes\\mathrm{ev}_{VK,VL})\\circ(1\\otimes v_{V;K,L}\\otimes1).$$\nTwice (E) changes this to the same $V$ of the two evaluations. The monoidal associativity axiom identifies the two three-factor tensorators. Inverse transposition proves (C).",
+   "text": "For internal-Hom composition, precompose both proposed maps with the invertible tensorator on H(K,L) and H(L,M), cancelling its inverse on the right. Apply inverse transposition. Expand internal-Hom composition as the transpose of successive evaluations. Monoidal associativity and naturality move the tensorators across the inner evaluation. On the right, associator naturality and whisker exchange move each comparison next to its evaluation; replace each comparison followed by evaluation with the tensorator followed by V of evaluation. The two sides are the same composite. Thus uncurry injectivity proves the composition law for arbitrary V, including G on the required pairs.",
    "uses": [
     "lem-pod-closed-uncurry-laws",
     "def-sfb-monoidal-category"
@@ -106,10 +73,11 @@
    }
   },
   {
-   "text": "The identifications $r_h$ preserve the composition pairings: substitute (H) for the inner evaluation and then for the outer evaluation. The intervening $h_L^{-1}\\circ h_L$ cancels, leaving $h_M$ after the two $P$-evaluations and $h_K^{-1}$ on their input. This is the inverse transpose defining $H(h_K^{-1},h_M)$ on the composite. The same two-evaluation calculation, with (C) for $U_A,U_B$, shows that $\\beta_A,\\beta_B$ respect composition, with their tensorators. Therefore substitute step 5 in both sides of (C) for $G$: the invertible $\\beta$ factors and the $r_h$ factors convert that equation into $U_B$ of (C) for $F$. The tensorators used in this substitution match by the monoidality of $h$. This is transport of the specified internal-Hom composition law, rather than an assertion about any unspecified comparison.",
+   "text": "For the successive coefficient clause, apply the monoidal-isomorphism equation of step 2 to gComp at UA K and UA M, and expand the comparison of G followed by GBC using step 1. Precompose with GAC of the UA comparison. Naturality of gComp at that comparison moves it past gComp.hom and gives exactly the stated endpoint-aware equation. The specified conclusion thus holds directly for these evaluation-defined comparisons, independently of the F composition and square coherence antecedents.",
    "uses": [
     "lem-pod-closed-uncurry-laws",
-    "def-sfb-monoidal-category"
+    "def-sfb-monoidal-category",
+    "def-nagata-category"
    ],
    "elementary": true,
    "source": {
@@ -118,21 +86,8 @@
    }
   },
   {
-   "text": "For successive functors $V:\\mathcal C\\to\\mathcal D$ and $W:\\mathcal D\\to\\mathcal E$, evaluate $v_W\\circ W(v_V)$. Formula (E) twice and naturality of $\\mu^W$ give\n$$\\mathrm{ev}\\circ((v_W\\circ Wv_V)\\otimes1)=WV(\\mathrm{ev})\\circ W(\\mu^V)\\circ\\mu^W=WV(\\mathrm{ev})\\circ\\mu^{WV}.$$\nThe defining inverse transpose of $v_{WV}$ is the last expression, so\n$$v_{WV;K,M}=v_{W;VK,VM}\\circ W(v_{V;K,M}).\\tag{P}$$\nFor the identity functor with its identity tensorator, (E) reads $\\mathrm{ev}\\circ(v_{\\mathrm{id}}\\otimes1)=\\mathrm{ev}$, so $v_{\\mathrm{id}}=1$. Under a specified monoidal composite isomorphism $V'\\cong WV$, steps 2–4 with the other two functors identities identify $v_{V'}$ with this same formula through that isomorphism. Thus (P) applies to the specified composite identifications in the question.",
+   "text": "For the identity comparison, apply uncurry injectivity. Its defining tensorator is the identity; uncurry_curry gives evaluation, as does uncurry of the identity map. Hence the identity comparison is the identity.",
    "uses": [
-    "lem-pod-closed-uncurry-laws",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
-    "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation"
-   }
-  },
-  {
-   "text": "For completeness write the transport of (P) itself. At a pair $(K,M)$ write $\\beta_A=\\beta_{A;K,M}$ and $\\beta_B=\\beta_{B;F_{A,B}K,F_{A,B}M}$, with the analogous $\\beta_C$. Temporarily express all endpoints through the specified $h$ and composite identifications, so step 5 reads $v_{G_{A,B}}=\\beta_B\\,U_B(v_{F_{A,B}})\\,G_{A,B}(\\beta_A^{-1})$. Then substitution gives\n$$\\begin{aligned}\nv_{G_{B,C}}\\circ G_{B,C}(v_{G_{A,B}})\n&=\\beta_C\\circ U_C(v_{F_{B,C}})\\circ G_{B,C}(\\beta_B^{-1}\\circ\\beta_B)\\\\\n&\\qquad\\circ G_{B,C}U_B(v_{F_{A,B}})\\circ G_{B,C}G_{A,B}(\\beta_A^{-1})\\\\\n&=\\beta_C\\circ U_C\\bigl(v_{F_{B,C}}\\circ F_{B,C}(v_{F_{A,B}})\\bigr)\\circ G_{A,C}(\\beta_A^{-1})\\\\\n&=v_{G_{A,C}}.\n\\end{aligned}$$\nThe second equality cancels the displayed inverse pair. When the $h$ maps are restored, moving them past $v_{F_{A,B}}$ uses precisely\n$$G_{B,C}U_B(a)\\circ h_{B,C;X}=h_{B,C;Y}\\circ U_CF_{B,C}(a),\\quad a:X\\to Y,$$\nwith $a=v_{F_{A,B}}$. The remaining $h$ factors combine by the hypothesized coherence $h_{A,C}=G_{B,C}(h_{A,B})\\circ h_{B,C}F_{A,B}$, under the specified composite comparisons; the induced $H(h_K^{-1},h_M)$ factors combine by functoriality of $H$. Thus the endpoint identifications used in the calculation are exactly the supplied ones. The last equality uses the assumed $F$ composition equation and step 5 for $A\\to C$. For identities the same substitution gives $\\beta_A\\circ1\\circ\\beta_A^{-1}=1$, under the supplied identity comparisons. This proves the requested identity and composition transport on all the required pairs.",
-   "uses": [
-    "def-nagata-category",
     "lem-pod-closed-uncurry-laws",
     "def-sfb-monoidal-category"
    ],
@@ -151,7 +106,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
-  "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation"
+  "place": "Final paragraph: evaluation, associativity and uniqueness of transpose, and final site-comparison sentence; explicit categorical calculation; V3 Lean proof using the existing proved comparison API and direct universal comparison laws"
  },
  "mathlib_searches": [
   {
@@ -292,5 +247,15 @@
   "group": "N8",
   "result": "fix",
   "note": "Delivered SuccessiveCoefficientHomTransport lacks the node's 'monoidal composite identifications': fComp/gComp are bare isos while FAC/GAC carry independent Braided structures, making conjunct 4 false (counterexample: ModuleCat ℚ, identity functors, FAC=GAC=𝟭 with μ=2•𝟙, ε=½•𝟙, all isos identity; conclusion 2•𝟙=𝟙). Fix adds [NatTrans.IsMonoidal fComp.hom] [NatTrans.IsMonoidal gComp.hom], the node's assumed F composition equation as hypothesis _hFComp, and Source lines on two docstrings; theorem signature/lean.statement unchanged. Checked internalHomComparison=curry(μ≫V ev), internalHomTransport=H(h_K⁻¹,h_M), square identity (S), conjugation with exact two IsIso guards, the four laws (types and truth), coherence equation, identity clause, universes, no hollow defs, sorry only, Mathlib search (expComparison is cartesian only). Delivered and fixed files both compile without errors via nt_compile.py --json; axioms propext, sorryAx, Classical.choice, Quot.sound."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261019T112554-L-3956771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
