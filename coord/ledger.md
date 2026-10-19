@@ -17621,3 +17621,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:47 L: returned deliver/NP/lem-pur-finite-adjoint-mate-compatibility (reviewer RETURN: L: independent stage-2 immutable head 281b10d770e1: H2/theorem stmt_dep: lem-pur-exceptional-coefficient-comparison is c)
 - 22:49 L: merged deliver/NG/det-sp-tower-p1-adjunction (stage 2; reviewer PASS; parallel immutable checks)
 - 23:03 L: returned deliver/Q03/lem-sf-integral-compactification-comparison-bridge (reviewer RETURN: L: independent stage-2 immutable head 494c4ff8bd68: file-only compilation failed: private overlay Sheaf.SixFunctors.Inte)
+- 23:10 L: returned deliver/B7/Sheaf.Paper.TorsionLimitSheafCompleteness (reviewer RETURN: (the landing tools, head 8a70b7834) the delivery did not land: lean/Sheaf/Paper/TorsionLimitSheafCompleteness.lean chang)
