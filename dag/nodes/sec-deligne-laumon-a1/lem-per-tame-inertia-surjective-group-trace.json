@@ -10,9 +10,95 @@
  "stmt_deps": [
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $h\\in G$, left multiplication $g\\mapsto hg$ permutes $G$, so $h(T(r))=T(r)$. Thus $T$ takes values in $A$. For $a\\in A$, $T(ar)=aT(r)$, and $T(r+r^\\prime)=T(r)+T(r^\\prime)$. Consequently $J=T(R)$ is an ideal of $A$. It suffices to show that $J$ is contained in no maximal ideal of $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRH, lemma-base-change-invariants: fixed-ring notation; elementary group-sum calculation supplied by the worker."
+   }
+  },
+  {
+   "text": "For each $r\\in R$, the monic polynomial $P_r(X)=\\prod_{g\\in G}(X-g(r))$ has coefficients in $A$: applying any $h\\in G$ just permutes its factors. Since the identity factor vanishes at $r$, $P_r(r)=0$. Hence the inclusion $A\\hookrightarrow R$ is integral, meaning that each element of $R$ satisfies a monic polynomial over $A$. No finite-generation assumption is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRI, lemma-one-orbit, first two sentences of the proof (orbit polynomial)."
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$ of $A$. The inclusion $A\\hookrightarrow R$ is injective and integral by Step 2. Lying over gives a prime $\\mathfrak p$ of $R$ with $\\mathfrak p\\cap A=\\mathfrak m$. The prime-over-maximal lemma then makes $\\mathfrak p$ maximal. Every ideal $g(\\mathfrak p)$ is maximal because $g$ is an automorphism; the set $\\mathcal O=\\{g(\\mathfrak p):g\\in G\\}$ is finite.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GQ, lemma-integral-overring-surjective, and Tag 00GS, lemma-integral-over-field, part (3)."
+   }
+  },
+  {
+   "text": "Put $k=R/\\mathfrak p$. For $s\\notin\\mathfrak p$, maximality gives $\\mathfrak p+(s)=R$, hence $us+v=1$ for some $u\\in R$ and $v\\in\\mathfrak p$; thus $\\bar u$ is the inverse of $\\bar s$. Consequently $k$ is a field and agrees canonically with $\\kappa(\\mathfrak p)$: the localization formula sends $r/s$ to $\\bar r\\,\\bar s^{-1}$, and its inverse sends $\\bar r$ to the class of $r/1$. These maps are inverse because $s\\notin\\mathfrak p$ has nonzero, hence invertible, image in $k$. Put $D=\\{g:g(\\mathfrak p)=\\mathfrak p\\}$ and let $H$ be the image of $D$ in $\\operatorname{Aut}(k)$. This is a nonempty finite set of distinct automorphisms. The kernel of $D\\to H$ is exactly $I_{\\mathfrak p}$ under the displayed identification. For each $\\sigma\\in H$, choose a lift $d\\in D$; its entire fiber is the coset $dI_{\\mathfrak p}$, since two lifts differ by an element of the kernel. Thus every fiber has $|I_{\\mathfrak p}|$ elements.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRJ, lemma-one-orbit-geometric: decomposition group and residue-field notation; the maximal-residue identification and kernel-coset count are written out here."
+   }
+  },
+  {
+   "text": "Apply independence of multiplicative characters with $M$ the multiplicative monoid of $k$, $L=k$, and the finite list of distinct maps $\\sigma\\in H$. They are monoid homomorphisms because they are field automorphisms. Their sum cannot be the zero function: otherwise the relation with every coefficient equal to $1$ contradicts independence, since $H$ contains the identity and $1\\ne0$ in $k$. Choose $b\\in k$ such that $u=\\sum_{\\sigma\\in H}\\sigma(b)\\ne0$.",
+   "uses": [
+    "lem-per-monoid-characters-linear-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0CKL, lemma-independence-characters, applied to the residue-field automorphisms with all coefficients 1."
+   }
+  },
+  {
+   "text": "The distinct maximal ideals in $\\mathcal O$ are pairwise comaximal: if $\\mathfrak q\\ne\\mathfrak q^\\prime$, choose $x\\in\\mathfrak q^\\prime\\setminus\\mathfrak q$; maximality of $\\mathfrak q$ gives $\\mathfrak q+(x)=R$, so $\\mathfrak q+\\mathfrak q^\\prime=R$. The Chinese remainder isomorphism, composed with the surjective quotient map from $R$, provides $r\\in R$ whose residue at $\\mathfrak p$ is $b$ and whose residue at every other ideal of $\\mathcal O$ is zero. If $g\\notin D$, then $g^{-1}(\\mathfrak p)\\in\\mathcal O\\setminus\\{\\mathfrak p\\}$, so $r\\in g^{-1}(\\mathfrak p)$ and $g(r)\\in\\mathfrak p$. If $g\\in D$, the residue of $g(r)$ is the induced automorphism applied to $b$. Reducing the group sum modulo $\\mathfrak p$ and counting the fibers from Step 4 gives $\\overline{T(r)}=\\sum_{g\\in D}\\bar g(b)=|I_{\\mathfrak p}|\\sum_{\\sigma\\in H}\\sigma(b)=|I_{\\mathfrak p}|u\\ne0$. The last inequality uses precisely the assumed invertibility of $|I_{\\mathfrak p}|$ and Step 5. Hence $T(r)\\notin\\mathfrak p$, and since $T(r)\\in A$ and $\\mathfrak p\\cap A=\\mathfrak m$, we have $T(r)\\notin\\mathfrak m$.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT, lemma-chinese-remainder, parts (1)--(2); compare Tag 0BRJ in more-algebra.tex, first paragraph and choice of an element supported at one maximal ideal. Trace calculation supplied by the worker."
+   }
+  },
+  {
+   "text": "Step 6 applies to every maximal ideal $\\mathfrak m$ of $A$, so no such ideal contains $J$. If $J\\ne A$, the proper-ideal maximal-ideal lemma would give a maximal ideal containing $J$, a contradiction. Therefore $J=A$. In particular $1=T(a)$ for some $a\\in R$, and then every $c\\in A$ equals $T(ca)$ by $A$-linearity. Conversely surjectivity gives a preimage of $1$. This also handles the zero ring: there $J=A$ and $T(0)=0=1$, with no maximal ideals to consider.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, part (2) and proof of part (8): every proper ideal lies in a maximal ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "def-weil-pbc-localization-at-prime",
+  "lem-per-monoid-characters-linear-independent",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Orbit-polynomial integrality from Tag 0BRI and the CRT-supported residue construction in Tag 0BRJ, combined with Fields Tag 0CKL; direct global ideal argument supplied by Q28."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +127,45 @@
    "results": "{\"t\": \"2026-10-18T22:49:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite group acting on a commutative ring, invertible inertia group orders at every prime imply surjectivity of the group trace to invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"FixedPoints.toAlgAut_surjective\", \"IsArithFrobAt.exists_of_isInvariant\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Algebra.normalizedTrace_surjective\", \"IsArithFrobAt.arithFrobAt\", \"Algebra.trace_surjective\"], \"digest\": \"57fec3142e06c608\"}",
    "date": "2026-10-19",
    "verdict": "no match: inertia/stabilizer homomorphisms and separable field traces do not assert surjectivity of the group trace for an arbitrary ring with tame inertia."
+  },
+  {
+   "tool": "grep",
+   "query": "inertia|trace.*surject|surject.*trace",
+   "results": "{\"t\": \"2026-10-18T23:14:41Z\", \"tool\": \"grep\", \"query\": \"inertia|trace.*surject|surject.*trace\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Frobenius.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\"], \"digest\": \"4220a535f9b3ce44\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern inertia subgroups, Frobenius, stabilizer maps or separable field traces, not this group trace on an arbitrary commutative ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is an element of group trace one when every inertia group has order invertible in its residue field",
+   "results": "{\"t\": \"2026-10-18T23:14:41Z\", \"tool\": \"leansearch\", \"query\": \"There is an element of group trace one when every inertia group has order invertible in its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDegIn_ne_zero\", \"Ideal.card_inertia_eq_ramificationIdxIn\", \"Ideal.inertiaDeg_eq_of_isGaloisGroup\", \"groupCohomology.H1ofAutOnUnitsUnique\", \"AddSubgroup.inertia\", \"ValuationSubring.inertiaSubgroup\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"FractionalIdeal.trace_mem_dual_one\"], \"digest\": \"4cd052f7b0e2eb17\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern inertia subgroups, Frobenius, stabilizer maps or separable field traces, not this group trace on an arbitrary commutative ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-18T23:14:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieModule.traceForm_lieInvariant\", \"SlashInvariantForm.trace\", \"SlashInvariantForm.coe_trace\"], \"digest\": \"e7d1aaf5baedf5bf\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern inertia subgroups, Frobenius, stabilizer maps or separable field traces, not this group trace on an arbitrary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group ring action tame inertia orders imply surjectivity of the sum of group automorphisms to the fixed ring",
+   "results": "{\"t\": \"2026-10-18T23:14:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group ring action tame inertia orders imply surjectivity of the sum of group automorphisms to the fixed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.toAlgAut_surjective\", \"IsFractionRing.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"IsArithFrobAt.exists_of_isInvariant\", \"FixedPoints.toAlgHom_bijective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"6a9d10915eb0b5d6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern inertia subgroups, Frobenius, stabilizer maps or separable field traces, not this group trace on an arbitrary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring with finite automorphism group action, does invertibility of each inertia order give a unit in the image of the transfer sum",
+   "results": "{\"t\": \"2026-10-18T23:16:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative ring with finite automorphism group action, does invertibility of each inertia order give a unit in the image of the transfer sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"arithFrobAt\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"IsArithFrobAt.exists_of_isInvariant\", \"Ideal.ncard_primesOver_mul_ncard_primesOver\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Ideal.isPretransitive_of_isGalois\"], \"digest\": \"38b451865f2552c3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern inertia subgroups, Frobenius, stabilizer maps or separable field traces, not this group trace on an arbitrary commutative ring."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tame-admissible-scheme-quotient",
@@ -72,5 +193,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-inertia-surjective-group-trace",
+  "worker": "stage1",
+  "summary": "Proved trace surjectivity without Noetherian or finite-type assumptions using orbit-polynomial integrality, a maximal ideal lying over each maximal invariant ideal, finite-orbit CRT, and independence of distinct residue-field automorphisms. Added one Mathlib leaf for multiplicative-character independence and reused four existing algebra leaves plus the existing residue-field definition. The statement is unchanged.",
+  "blueprint": "Realizes the tame admissible underlying scheme quotient algebra input along the recorded ancestor path from lem-per-artin-gabber-affine-curve Step 3. It supplies the trace-one element used in the tame quotient argument; no unit or chapter route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-e7c3dbeca",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-e7c3dbeca (reviewer sub-agent of L); spot-checked: I read all seven steps, the new node and the six cited statements in full, and checked the sources; no fixes were written. The item's statement is unchanged and true with no finiteness hypotheses. I checked it on these cases: F_2×F_2 with the swap; F_4 with Frobenius; F_2[t] with t↦t+1 (T(t)=1); a trivial action; and the zero ring. Step 2: the orbit polynomial makes R integral over A, as in the proof of Stacks 0BRI. Step 3: the integral lying-over lemma (Mathlib RingHom.IsIntegral.comap_surjective) and the prime-over-maximal lemma give a maximal p over m, with no Noetherian assumption. Step 4 writes out R/p ≅ κ(p), shows the kernel of D→Aut(k) is I_p, and counts fibres as I_p-cosets. Step 5 applies character independence with all coefficients 1 to get Σσ(b)≠0. Step 6: CRT over the distinct comaximal orbit ideals, then T(r) mod p = |I_p|·u ≠ 0, so T(r) is not in m. Step 7 uses Ideal.exists_le_maximal. Every cited node is a Mathlib leaf or definition, so there is no cycle, no route issue and no tool_uses. The new node lem-per-monoid-characters-linear-independent matches Stacks 0CKL (fields.tex:1459) and is a one-line specialization of linearIndependent_monoidHom (Basic.lean:498-499, tagged @[stacks 0CKL]). It has all three kinds of search and correct blueprint.from/via fields. A DAG-wide scan found no duplicate, and it does not restate any clause of the item. No SGA source is used. The parent lem-per-tame-admissible-scheme-quotient, step 1, uses the statement as written. Maintainer note: the existing node lem-pc-crt-ideal-quotient-product cites Tag 00U3, which is algebra-lemma-etale-over-field; the correct tag is 00DT (algebra-lemma-chinese-remainder). That node is not owned by this split, so I did not edit it."
  }
 }
