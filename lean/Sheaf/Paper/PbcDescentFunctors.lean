@@ -13,7 +13,6 @@ import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.FiniteStagePairCategory
 import Sheaf.Paper.CommonStageCalculus
 import Sheaf.Paper.PbcCommonStageCones
-import Sheaf.Paper.IntrinsicQbarCategory
 
 /-!
 # Descent of scalar-compatible exact functors
@@ -133,7 +132,203 @@ def DescentSpec (F : StageSystem.Morphism S S') : Prop :=
         StageSystem.Morphism.descNatTrans (τ.comp τ') =
           StageSystem.Morphism.descNatTrans τ ≫ StageSystem.Morphism.descNatTrans τ')
 
+omit [HasZeroObject S.PairCategory] [HasZeroObject S'.PairCategory]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ n : ℤ, (shiftFunctor S'.PairCategory n).Additive]
+  [Pretriangulated S.PairCategory] [Pretriangulated S'.PairCategory]
+  [HasShift S.PairCategory ℤ] [HasShift S'.PairCategory ℤ] in
+set_option backward.isDefEq.respectTransparency false in
+private theorem additive_of_stage
+    [∀ i, Preadditive (C i)] [∀ i, Preadditive (D i)]
+    (F : StageSystem.Morphism S S') (hΦ : ∀ i, (F.Φ i).Additive)
+    (hS : S.PairPreadditiveNormalized (inferInstance : Preadditive S.PairCategory))
+    (hS' : S'.PairPreadditiveNormalized (inferInstance : Preadditive S'.PairCategory)) :
+    F.functor.Additive := by
+  constructor
+  intro K L f g
+  obtain ⟨M, _, hK, hL, hK', hL', u, v, rfl, rfl⟩ :=
+    PairCategory.exists_common_stage f g K.stage
+  rw [← (hS K L M hK hL u v).1]
+  rw [F.functor_map_mkHom, F.functor_map_mkHom, F.functor_map_mkHom]
+  have := hΦ M
+  calc
+    _ = PairCategory.mkHom (X := F.functor.obj K) (Y := F.functor.obj L)
+        M hK hL (F.mapAt u + F.mapAt v) := by
+      apply congrArg (PairCategory.mkHom (X := F.functor.obj K)
+        (Y := F.functor.obj L) M hK hL)
+      simp only [mapAt, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp]
+    _ = _ := (hS' _ _ M hK hL _ _).1
+
+section StageShift
+variable [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S'.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S.assoc h h').hom ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S'.assoc h h').hom ℤ]
+  (F : StageSystem.Morphism S S') [∀ i, (F.Φ i).CommShift ℤ]
+  (hβ : ∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (F.β h).hom ℤ)
+
+private def shiftHom (n : ℤ) : Hom
+    ((pbcStageShift S n).comp F) (F.comp (pbcStageShift S' n)) where
+  τ i := ((F.Φ i).commShiftIso n).hom
+  comm {i j} h K := by
+    have := hβ h
+    simpa [Morphism.comp, pbcStageShift, Functor.commShiftIso_comp_hom_app,
+      Category.assoc] using (NatTrans.shift_app_comm (F.β h).hom n K)
+
+private def shiftIso (n : ℤ) :
+    (pbcPairShift S n) ⋙ F.functor ≅ F.functor ⋙ (pbcPairShift S' n) :=
+  (functorCompIso (pbcStageShift S n) F).symm ≪≫
+    NatIso.ofComponents
+      (F := ((pbcStageShift S n).comp F).functor)
+      (G := (F.comp (pbcStageShift S' n)).functor)
+      (fun K ↦ (S'.ι K.stage).mapIso (((F.Φ K.stage).commShiftIso n).app K.obj))
+      (fun f ↦ (descNatTrans (shiftHom F hβ n)).naturality f) ≪≫
+    functorCompIso F (pbcStageShift S' n)
+
+end StageShift
+
 end Morphism
+
+section ExactShift
+variable {I : Type w} [Preorder I] [IsDirectedOrder I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)]
+  {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+  {S : StageSystem C} {S' : StageSystem D}
+  [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S'.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S.assoc h h').hom ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S'.assoc h h').hom ℤ]
+  (F : StageSystem.Morphism S S') [∀ i, (F.Φ i).CommShift ℤ]
+  (hβ : ∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (F.β h).hom ℤ)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem shiftIso_hom_app (n : ℤ) (K : S.PairCategory) :
+    (Morphism.shiftIso F hβ n).hom.app K =
+      (S'.ι K.stage).map (((F.Φ K.stage).commShiftIso n).hom.app K.obj) := by
+  simp only [Morphism.shiftIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Morphism.functorCompIso_inv_app, Morphism.functorCompIso_hom_app,
+    NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.app_hom,
+    Category.comp_id]
+  erw [Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+@[instance_reducible] private def descendedCommShift : F.functor.CommShift ℤ where
+  commShiftIso := Morphism.shiftIso F hβ
+  commShiftIso_zero := by
+    ext K
+    simp only [shiftIso_hom_app, Functor.CommShift.isoZero_hom_app]
+    change (S'.ι K.stage).map (((F.Φ K.stage).commShiftIso (0 : ℤ)).hom.app K.obj) =
+      F.functor.map ((S.ι K.stage).map
+        ((shiftFunctorZero (C K.stage) ℤ).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        ((shiftFunctorZero (D K.stage) ℤ).inv.app ((F.Φ K.stage).obj K.obj))
+    erw [Morphism.functor_map_ι]
+    simpa only [Functor.CommShift.isoZero_hom_app, Functor.map_comp] using
+      congrArg ((S'.ι K.stage).map)
+      (congr_app (congrArg Iso.hom ((F.Φ K.stage).commShiftIso_zero ℤ)) K.obj)
+  commShiftIso_add n m := by
+    ext K
+    simp only [Functor.CommShift.isoAdd_hom_app, shiftIso_hom_app]
+    change (S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso (n + m)).hom.app K.obj) =
+      F.functor.map ((S.ι K.stage).map
+        ((shiftFunctorAdd (C K.stage) n m).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso m).hom.app ((shiftFunctor (C K.stage) n).obj K.obj)) ≫
+      (pbcPairShift S' m).map ((S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso n).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        ((shiftFunctorAdd (D K.stage) n m).inv.app ((F.Φ K.stage).obj K.obj))
+    erw [Morphism.functor_map_ι]
+    erw [(pbcStageShift S' m).functor_map_ι]
+    simpa only [Functor.CommShift.isoAdd_hom_app, Functor.map_comp, pbcStageShift] using
+      congrArg ((S'.ι K.stage).map)
+      (congr_app (congrArg Iso.hom ((F.Φ K.stage).commShiftIso_add n m)) K.obj)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem inclusionComp_commShift (i : I) :
+    letI := descendedCommShift F hβ
+    NatTrans.CommShift (F.ιCompFunctorIso i).hom ℤ := by
+  let _ := descendedCommShift F hβ
+  constructor
+  intro n
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.commShiftIso_comp_hom_app, Category.assoc]
+  change F.functor.map (𝟙 _) ≫ (Morphism.shiftIso F hβ n).hom.app ((S.ι i).obj K) ≫
+      (shiftFunctor S'.PairCategory n).map (𝟙 _) =
+    𝟙 _ ≫ ((S'.ι i).map (((F.Φ i).commShiftIso n).hom.app K) ≫ 𝟙 _)
+  simp only [shiftIso_hom_app, Functor.map_id, Category.id_comp]
+  erw [Category.comp_id]
+
+
+variable [Nonempty I]
+  [∀ i, Preadditive (C i)] [∀ i, Preadditive (D i)]
+  [∀ {i j : I} (h : i ≤ j), (S.T h).Additive]
+  [∀ {i j : I} (h : i ≤ j), (S'.T h).Additive]
+  [∀ i, HasZeroObject (C i)] [∀ i, HasZeroObject (D i)]
+  [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]
+  [∀ i, ∀ n : ℤ, (shiftFunctor (D i) n).Additive]
+  [∀ i, Pretriangulated (C i)] [∀ i, Pretriangulated (D i)]
+  [Pretriangulated S.PairCategory] [Pretriangulated S'.PairCategory]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem triangulated_of_stage
+    (hΦ : ∀ i, (F.Φ i).IsTriangulated)
+    (hι : ∀ i, (S'.ι i).IsTriangulated)
+    (hdist : ∀ U : Pretriangulated.Triangle S.PairCategory,
+      U ∈ distTriang S.PairCategory → CommonStageDistinguished S U) :
+    letI := descendedCommShift F hβ
+    F.functor.IsTriangulated := by
+  let _ := descendedCommShift F hβ
+  constructor
+  intro U hU
+  obtain ⟨i, V, hV, ⟨e⟩⟩ := hdist U hU
+  have := hΦ i
+  have := hι i
+  have := inclusionComp_commShift F hβ i
+  have : (S.ι i ⋙ F.functor).IsTriangulated :=
+    Functor.isTriangulated_of_iso (F.ιCompFunctorIso i).symm
+  exact Pretriangulated.isomorphic_distinguished _
+    ((S.ι i ⋙ F.functor).map_distinguished V hV) _
+    (F.functor.mapTriangle.mapIso e ≪≫
+      (Functor.mapTriangleCompIso (S.ι i) F.functor).symm.app V)
+
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem canonicalDescent
+    (A : CoherentExactMorphism S S')
+    (hS : S.PairPreadditiveNormalized (inferInstance : Preadditive S.PairCategory))
+    (hS' : S'.PairPreadditiveNormalized (inferInstance : Preadditive S'.PairCategory))
+    (hι : ∀ i, (S'.ι i).IsTriangulated)
+    (hdist : ∀ U : Pretriangulated.Triangle S.PairCategory,
+      U ∈ distTriang S.PairCategory → CommonStageDistinguished S U) :
+    Morphism.DescentSpec A.base := by
+  let _ := A.commShift
+  refine ⟨⟨Morphism.additive_of_stage A.base A.additive hS hS',
+    ⟨descendedCommShift A.base (fun {_ _} h ↦ A.betaCommShift h), ?_⟩⟩,
+    ?_, ?_, ?_, ?_, ?_⟩
+  · exact triangulated_of_stage A.base (fun {_ _} h ↦ A.betaCommShift h)
+      A.triangulated hι hdist
+  · intro K L M hK hL u
+    exact A.base.functor_map_mkHom hK hL u
+  · intro G H τ K
+    exact Morphism.descNatTrans_app τ K
+  · intro G H τ τ' h
+    ext K
+    exact congrArg ((S'.ι K.stage).map) (h K.stage K.obj)
+  · exact Morphism.descNatTrans_id
+  · intro G H J τ τ'
+    exact Morphism.descNatTrans_comp τ τ'
+
+
+end ExactShift
 
 end CategoryTheory.StageSystem
 
@@ -171,7 +366,13 @@ four distinct systems and their composite exchange. -/
 theorem pbcDescentFunctors
     (F : StageSystem.CoherentExactMorphism
       (pbcScalarSystem l Ω T dT.out iT.out) (pbcScalarSystem l Ω S dS.out iS.out)) :
-    StageSystem.Morphism.DescentSpec F.base := sorry
+    StageSystem.Morphism.DescentSpec F.base := by
+  exact StageSystem.canonicalDescent F
+    (commonStageCalculus l Ω T dT.out iT.out).operations
+    (commonStageCalculus l Ω S dS.out iS.out).operations
+    (pbcVerdierAxioms l Ω S).2.1
+    (fun U hU ↦ ((StageSystem.commonStage_verdier_existsUnique
+      (pbcScalarSystem l Ω T dT.out iT.out)).exists.choose_spec.1 U).1 hU)
 
 end AlgebraicGeometry.Scheme
 
