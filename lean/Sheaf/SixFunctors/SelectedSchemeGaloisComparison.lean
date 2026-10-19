@@ -7,18 +7,7 @@ module
 
 public import Sheaf.SixFunctors.SchemeGaloisComparison
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite
-import Sheaf.AlgebraicGeometry.FrobeniusFactorization
-import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.Paper.FiniteFieldFiber
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
-import Sheaf.SixFunctors.SchemeFrobenius
-import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # The specified scheme/Galois comparison at finite coefficient level
@@ -75,7 +64,51 @@ The field k has characteristic p and l differs from p, so l, and therefore l^r, 
 in k. This supplies exactly the annihilator required by schemeGaloisComparison. -/
 theorem comparisonCoefficientAnnihilator (T : TraceFormulaCoefficientConventions.{u}) :
     ∃ n : ℕ, IsUnit (n : T.datum.k) ∧ ∀ a : T.coefficientRing, n • a = 0 := by
-  sorry
+  classical
+  let l := T.coefficients.l
+  let E := T.coefficientField
+  let O := Padic.coefficientExtensionIntegers l E
+  have h := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hm : ∀ x : O, x ∈ Padic.coefficientExtensionMaximalIdeal l E ↔
+      Padic.coefficientExtensionAbsoluteValue l E (x : E) < 1 := h.2.1
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} : Set O) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hlm : (l : O) ∈ Padic.coefficientExtensionMaximalIdeal l E := by
+    apply (hm _).mpr
+    change spectralNorm (Padic l) E (l : E) < 1
+    have he := spectralNorm_extends (K := Padic l) (L := E) (l : Padic l)
+    simpa only [map_natCast] using he.trans_lt (Padic.norm_p_lt_one (p := l))
+  have hpow : ((l : O) ^ T.level) ∈ Padic.coefficientExtensionIdeal l E T.level := by
+    change (l : O) ^ T.level ∈ Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set O) ^ T.level
+    rw [hgen]
+    exact Ideal.pow_mem_pow hlm T.level
+  have hzero : ((l ^ T.level : ℕ) : T.coefficientRing) = 0 := by
+    change ((l ^ T.level : ℕ) : O ⧸ Padic.coefficientExtensionIdeal l E T.level) = 0
+    rw [← map_natCast (Ideal.Quotient.mk _) (l ^ T.level)]
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    simpa only [Nat.cast_pow] using hpow
+  let _ : Fintype T.datum.k₀ := Fintype.ofFinite T.datum.k₀
+  have hc : Fintype.card T.datum.k₀ = T.datum.p ^ T.datum.a := by
+    simpa only [Nat.card_eq_fintype_card] using
+      T.datum.card_base.trans T.datum.cardinality_eq
+  have _ : Fact T.datum.p.Prime := ⟨T.datum.prime⟩
+  have _ : CharP T.datum.k₀ T.datum.p := charP_of_card_eq_prime_pow hc
+  have _ : CharP T.datum.k T.datum.p :=
+    charP_of_injective_algebraMap' T.datum.k₀ T.datum.p
+  have hl : (l : T.datum.k) ≠ 0 := by
+    intro hz
+    have hd := (CharP.cast_eq_zero_iff T.datum.k T.datum.p l).mp hz
+    exact T.coefficients.different
+      ((Nat.prime_dvd_prime_iff_eq T.datum.prime (Fact.out : l.Prime)).mp hd).symm
+  refine ⟨l ^ T.level, ?_, ?_⟩
+  · rw [Nat.cast_pow]
+    exact (isUnit_iff_ne_zero.mpr hl).pow T.level
+  · intro a
+    rw [nsmul_eq_mul, hzero, zero_mul]
 
 /-- The actual positive-iterate comparison, selected together with all of its defining
 normalizations from the existing comparison theorem. Relative Frobenius fixes r by its

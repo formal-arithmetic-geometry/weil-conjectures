@@ -133,6 +133,20 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
     "place": "second paragraph, multiplicative iterate and addition of exponents"
    }
+  },
+  {
+   "text": "For the finite-level specialization in SelectedSchemeGaloisComparison, put l = T.coefficients.l, E = T.coefficientField and N = T.level. The spectral absolute value restricts to the p-adic norm, so |l|_E = |l|_l < 1. Extract from Padic.extension_integers_dvr the maximal-ideal membership characterization and the equality span {uniformizer} = maximal ideal. Consequently l belongs to that ideal and l^N belongs to its N-th power by Ideal.pow_mem_pow. Its image in the coefficient quotient is zero; nsmul_eq_mul then shows that the integer l^N annihilates every coefficient. The finite base field has characteristic p because its cardinality is p^a; injectivity of its algebra map gives characteristic p in k. Since l and p are distinct primes, p does not divide l, so the cast of l in k is nonzero, hence a unit. Its N-th power is therefore a unit as required. Apply the existing normalized comparison theorem to this annihilator; the selected iterate family and all its normalizations remain those of the preceding eight steps.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-trf-coefficient-conventions.md",
+    "place": "A = O_E / uniformizer^n with l different from p; the elementary annihilator verification for the comparison hypothesis"
+   }
   }
  ],
  "proof_deps": [
@@ -153,12 +167,15 @@
   "lem-weil-pbc-localization-universal-property",
   "lem-pc-kflat-resolution",
   "lem-trf-absolute-frobenius-site",
-  "lem-pur-frobenius-trivialization-pullback"
+  "lem-pur-frobenius-trivialization-pullback",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
-  "place": "Both paragraphs, with explicit composition coherence and multiplicative-iterate calculation"
+  "place": "Both paragraphs, with explicit composition coherence and multiplicative-iterate calculation; finite-level specialization: P6, 2026-10-19, using the recorded DVR and Mathlib spectralNorm_extends, Padic.norm_p_lt_one, Ideal.pow_mem_pow, Ideal.Quotient.eq_zero_iff_mem and characteristic/cardinality lemmas"
  },
  "mathlib_searches": [
   {
@@ -363,5 +380,15 @@
    "WeilConjectures.TraceFormulaCoefficientConventions.selectedSchemeGaloisComparison"
   ],
   "note": "§1(B): The recorded theorem supplies nested existential comparisons with projection, section-unit and factorization normalizations, but exposes no selected comparison and requires its annihilator hypothesis separately. This module publicly reexports that full theorem, supplies the finite-coefficient annihilator specialization and selects its same normalized iterate family; no arbitrary comparison is chosen."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-4e17c",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T112509-L-3947666",
+  "kind": "proof",
+  "note": "independent cc review: delivered SelectedSchemeGaloisComparison.lean and node prop-trf-scheme-galois-comparison vs live clone; #print axioms of comparisonCoefficientAnnihilator (no sorryAx) in a sandbox with the delivered module; 10 direct importers compiled against it"
  }
 }
