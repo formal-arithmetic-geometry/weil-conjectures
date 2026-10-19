@@ -17023,3 +17023,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q04/lem-per-admissible-modification-fujiwara-valuative-local (reviewer RETURN: I return this delivery because the item itself was dropped in the 2026-10-19 route pivot. It is at line 1393 of side coo)
 - 03:58 L: returned deliver/Q158/lem-per-ind-etale-alteration-object-degree-descent (reviewer RETURN: Route-pivot RETURN (rule F, dropped route). In the side coord/route-pivot-dropped.txt section '2026-10-19 artin-gabber',)
 - 03:58 L: returned deliver/Q57/lem-per-tame-monomial-generic-kummer-algebra (reviewer RETURN: The item lem-per-tame-monomial-generic-kummer-algebra is itself dropped. It is at line 1948 of clones/side-live/coord/ro)
+- 03:58 L: returned deliver/O3/lem-per-finite-point-fp-gluing (reviewer RETURN: Route fault, not a fault in the maths. The item lem-per-finite-point-fp-gluing is listed itself in the '# section 2026-1)
