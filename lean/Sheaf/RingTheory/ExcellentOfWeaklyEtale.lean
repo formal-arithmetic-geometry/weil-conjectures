@@ -58,6 +58,13 @@ Proof:
 theorem isExcellent_of_weaklyEtale {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (f : R →+* S) (hR : IsExcellent R) [IsNoetherianRing S]
     (hf : f.WeaklyEtale) : IsExcellent S := by
-  sorry
+  have : IsNoetherianRing R := hR.1.1
+  have hNagata := isNagataRing_of_isQuasiExcellent R hR.1
+  have hLocallyNagata := (isNagataRing_localization R (⊤ : Submonoid R) hNagata).2.1
+  have hGRing := isGRing_of_weaklyEtale f hf hR.1.2.1
+  have hJTwo := (isNagataRing_and_jTwo_of_weaklyEtale f hf hNagata hR.1.2.2).2
+  have hCatenary :=
+    (isUniversallyCatenary_and_locallyNagata_of_weaklyEtale f hf hLocallyNagata hR.2).1
+  exact ⟨⟨inferInstance, hGRing, hJTwo⟩, hCatenary⟩
 
 end RingHom
