@@ -1,6 +1,6 @@
 # Work queue
 
-1109 items; claim with `tools/claim.py next <group> [--stage N]`.
+1108 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -15,23 +15,23 @@
 | `def-sf-datum` | 1 | state | 91 |
 | `sk-d-six` | 1 | state | 42 |
 | `sk-def-sp-trace` | 2 | state | 2 |
-| `det-sp-tower-classes` | 1 | state | 1 |
 | `lem-coef-finite-exceptional` | 1 | state | 117 |
 | `fix-cor-verdier-exchange` | 2 | state | 105 |
 | `fix-lem-exchanges` | 1 | state | 87 |
-| `fix-prop-projection-formula` | 1 | state | 72 |
+| `fix-prop-projection-formula` | 1 | state | 71 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `det-prop-diagonal-tower-trace` | 1 | state | 3 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
-| `lem-coef-completed-tensor-hom-transpose` | 2 | state | 2 |
 | `fix-lem-tensor-adjunction` | 1 | state | 1 |
 | `cor-coef-verdier-weil-equivariance` | 1 | state | 0 |
 | `det-sp-p1-trace` | 1 | state | 0 |
+| `det-sp-tower-p1-adjunction` | 1 | state | 0 |
+| `lem-coef-rational-retract-evaluation` | 1 | state | 0 |
+| `lem-coef-rational-scalar-transpose-compatibility` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
 | `lem-pur-flag-local-comparison` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
@@ -42,9 +42,9 @@
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 304 nodes that below a finished node, not needed, 120 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 304 nodes that below a finished node, not needed, 117 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1079)
+## Stage 3: modules to prove (1078)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -586,6 +586,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.AdicSectionClosedSupport` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 33 | proof | 2 |
 | `Sheaf.Paper.CompletedStalkReparametrizationCoherence` | - | 8 | proof | 2 |
+| `Sheaf.Paper.CompletedTensorHomTranspose` | - | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedNakayama` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FibreFunctorBasepointTransport` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FieldTorAmplitude` | - | 1 | proof | 2 |
@@ -710,6 +711,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedStalkFrobeniusReduction` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompositeIntegrationCounit` | - | 6 | proof | 3 |
 | `Sheaf.Paper.CondensedCompactSupportProjection` | - | 9 | proof | 3 |
+| `Sheaf.Paper.DerivedAutomorphismHomEvaluation` | - | 44 | proof | 3 |
 | `Sheaf.Paper.FieldStageOrdinaryRealization` | - | 8 | proof | 3 |
 | `Sheaf.Paper.FilteredCoefficientTensorBounds` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteProjectionActionLaws` | - | 8 | proof | 3 |
@@ -971,9 +973,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.CompletedTensorShiftRight` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurityFramePrincipalBoundary` | 8 | 2 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection` | 9 | 3 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.GeoCartierCycleClass` | 10 | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest` | 10 | 1 | proof | 7 |
-| `Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition` | 10 | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology` | 10 | 1 | proof | 7 |
 | `Sheaf.FieldTheory.SeparableQuotientProduct` | 10 | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.DivisorTorsorBoundarySigns` | 11 | 1 | proof | 7 |
@@ -1002,7 +1002,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProEtaleCompositionTowerNormalization` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle` | 9 | 13 | proof | 8 |
 | `Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible` | 11 | 1 | proof | 8 |
-| `Sheaf.SixFunctors.GeoCartierCoeffExtension` | 11 | 1 | proof | 8 |
 | `Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion` | 12 | 1 | proof | 8 |
 | `Sheaf.AlgebraicGeometry.SmoothPairRegularEquations` | 12 | 1 | proof | 8 |
 | `Sheaf.CategoryTheory.BoundedInjectiveFibreDescent` | 12 | 5 | proof | 8 |
@@ -1130,7 +1129,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (32)
+## Stage 3: waiting for statements of dependencies (33)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1162,6 +1161,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.DegreeZeroCompactSupportSections` | - | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
+| `Sheaf.Paper.FiniteUniversalSmoothTrace` | - | 1 | `lem-pur-vector-integration-site-comparison` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
 | `Sheaf.Paper.LocalizedTopChern` | - | 9 | `lem-pur-flag-local-comparison` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
