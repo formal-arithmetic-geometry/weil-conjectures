@@ -17245,3 +17245,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/K6/Sheaf.Paper.RationalizationIdempotentComplete (stage 3; reviewer PASS; first push; landing 20261019T093517-L-2320630 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K7/Sheaf.Paper.SfPreservationClass (stage 3; reviewer PASS; first push; landing 20261019T093518-L-2320956 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/K7/Sheaf.RepresentationTheory.CoinducedContinuousAcyclic (stage 3; reviewer PASS; first push; landing 20261019T093519-L-2321351 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:35 L: merged deliver/K7/Sheaf.SixFunctors.FlatModel (stage 3; reviewer PASS; first push; landing 20261019T093521-L-2321721 (proof); batch 20261019T093237; modules 1; new nodes 0)
