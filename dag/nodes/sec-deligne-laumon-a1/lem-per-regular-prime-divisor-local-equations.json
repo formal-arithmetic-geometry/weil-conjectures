@@ -19,9 +19,137 @@
   "def-sc-discrete-valuation-ring",
   "def-sc-generic-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in D$. By [def-weil-regular-scheme] choose a Noetherian affine neighborhood $U=\\operatorname{Spec}R$ of $x$. Since $X$ is integral, $R$ is a domain by [def-pc-integral-scheme]. By [def-weil-closed-immersion] and [def-sbc-closed-immersion-ideal-sheaf], $D\\cap U=\\operatorname{Spec}(R/J)$ and $\\mathcal I_D|_U=\\widetilde J$. This open of the integral scheme $D$ is nonempty, so $R/J$ is a domain and $J$ is prime. Its zero prime corresponds to $\\xi$: the generic point belongs to every nonempty open, since its closure is $D$ [def-sc-generic-point]. Write $\\mathfrak q\\supseteq J$ for $x$. By [lem-weil-pbc-affine-open-stalk-localization] and [lem-weil-pbc-spec-tilde-stalk-localization], $A=\\mathcal O_{X,x}=R_{\\mathfrak q}$, $\\mathcal I_{D,x}=JR_{\\mathfrak q}=:\\mathfrak p$, and $\\mathcal O_{X,\\xi}=R_J$. The last ideal $\\mathfrak p$ is prime: $A/\\mathfrak p=(R/J)_{\\mathfrak q/J}$, a nonzero domain, by the fraction formulas.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-pc-integral-scheme",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sc-generic-point",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA (lemma-weil-divisor-is-cartier-UFD), proof opening; affine stalk descriptions in Schemes Tag 01HV (lemma-spec-sheaves)."
+   }
+  },
+  {
+   "text": "The generization homomorphism $A=R_{\\mathfrak q}\\to R_J$ sends $a/s$ to $a/s$. The complement of $\\mathfrak p=JR_{\\mathfrak q}$ consists precisely of fractions $b/t$ with $b\\notin J$. Consequently [def-weil-pbc-localization-at-prime] gives an isomorphism $A_{\\mathfrak p}\\to R_J$ by $(a/s)/(b/t)\\mapsto at/(sb)$, with inverse $a/b\\mapsto(a/1)/(b/1)$. All denominators displayed avoid the relevant prime; the fraction equality relation verifies that the formulas are well defined and inverse. Both maps agree with the germ maps on $R$, so this identifies the canonical generization map, rather than an arbitrary ring isomorphism. In particular $\\dim A_{\\mathfrak p}=1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA, prime corresponding to the generic point; Tag 0AGB (lemma-codim-1-part), second proof paragraph: the generic local ring is A_(f)."
+   }
+  },
+  {
+   "text": "The ring $A$ is a domain: a product of two fractions over the domain $R$ is zero only if one numerator is zero. Prime ideals of $A_{\\mathfrak p}$ correspond to prime ideals $P\\subseteq\\mathfrak p$ of $A$: extension consists of fractions with numerator in $P$, and contraction recovers $P$, since denominators lie outside $\\mathfrak p$, hence outside $P$. These operations preserve strict inclusions. Thus $\\dim A_{\\mathfrak p}=1$ [def-weil-pbc-krull-dimension-ring] says that $\\mathfrak p\\ne0$ (otherwise $A_{\\mathfrak p}$ is the fraction field) and no prime lies strictly between $0$ and $\\mathfrak p$. This is the height-one condition in [lem-trf-ufd-height-one].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-trf-ufd-height-one"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA, proof: dimension one of A_p means p has height one."
+   }
+  },
+  {
+   "text": "By [def-weil-regular-scheme], $A$ is regular local and Noetherian. Choose generators of its maximal ideal of length $\\dim A$, a regular system of parameters by [def-weil-pbc-regular-system-of-parameters]. Apply [lem-trf-regular-local-ufd-boundary-factorization] with the empty selected sublist ($r=0$) to obtain that $A$ is a unique factorization domain. Since $\\mathfrak p$ is a height-one prime, [lem-trf-ufd-height-one] yields $\\mathfrak p=(f)$ for some $f\\in A$. This $f$ is nonzero, because $\\mathfrak p\\ne0$, and is a nonunit, because $\\mathfrak p$ is proper. If $f\\mid ab$, then $ab\\in\\mathfrak p$, hence $a\\in\\mathfrak p$ or $b\\in\\mathfrak p$; equivalently $f\\mid a$ or $f\\mid b$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-ufd-height-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA, proof using height-one primes in a UFD; final paragraph of Tag 0AGB invokes More on Algebra Tag 0AG0 (lemma-regular-local-UFD)."
+   }
+  },
+  {
+   "text": "To pass from the stalk equation to an open equation, write $f=a/s$ with $a\\in J$ and $s\\notin\\mathfrak q$, since $f\\in J R_{\\mathfrak q}$. By [def-weil-pbc-noetherian-ring], choose $J=(a_1,\\ldots,a_n)$. As $J R_{\\mathfrak q}=(a)$, write $a_i/1=(b_i/t_i)(a/1)$ with $t_i\\notin\\mathfrak q$. The fraction equality relation gives $u_i\\notin\\mathfrak q$ with $u_i(t_i a_i-b_i a)=0$ in $R$. Set $h=\\prod_i u_i t_i\\notin\\mathfrak q$. In $R_h$ every $a_i$ belongs to $(a)$, while $a\\in J$ gives the reverse inclusion; thus $J R_h=(a)$. Also $a\\ne0$ since $f\\ne0$. The fraction formula in a domain shows that multiplication by $a$ is injective in $R_h$. By [lem-weil-pbc-affine-ideals-closed-subscheme](0), $U_h$ is affine with coordinate ring $R_h$; by [def-sbc-closed-immersion-ideal-sheaf] its divisor ideal has sections $J R_h=(a)$. We have obtained the required nonzerodivisor equation on a neighborhood of $x$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AG8 (lemma-effective-Cartier-in-points), proof of (1), with the explicit equality-annihilators included; for (2), integrality makes the nonzero equation a nonzerodivisor."
+   }
+  },
+  {
+   "text": "Repeat Step 5 at each $x\\in D$. For $y\\in X\\setminus D$, take an affine open neighborhood contained in $X\\setminus D$; there the ideal is the whole structure sheaf, generated by the nonzerodivisor $1$, since its quotient defines the empty closed subscheme [def-sbc-closed-immersion-ideal-sheaf]. Together these neighborhoods form an open cover on which $\\mathcal I_D$ is generated by a nonzerodivisor. This is exactly an effective Cartier ideal [def-nagata-effective-cartier-ideal].",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AG8, conclusion of (2), and Tag 0AGA, final sentence."
+   }
+  },
+  {
+   "text": "For the arbitrary generator in the statement, let $g\\in A$ satisfy $(g)=\\mathcal I_{D,x}=\\mathfrak p$. The same direct argument as in Step 4 shows that $g\\ne0$, $g$ is a nonunit, and $g\\mid ab$ implies $g\\mid a$ or $g\\mid b$, since $\\mathfrak p$ is a proper nonzero prime ideal. Step 2 now reads $\\mathcal O_{X,\\xi}=A_{(g)}$ through the canonical generization map. Its maximal ideal is $(g)A_{(g)}$ by [def-weil-pbc-localization-at-prime]. Thus the conclusion holds for every generator, not only the one selected in Step 4.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGB, second proof paragraph, local equations f_i and the identification O_i=A_(f_i)."
+   }
+  },
+  {
+   "text": "Finally $\\mathcal O_{X,\\xi}$ is regular local by [def-weil-regular-scheme], and has dimension one by hypothesis. Apply [lem-sc-regular-dim1-dvr] to conclude that it is a discrete valuation ring. Step 7 identifies its maximal ideal with the ideal generated by the image of every chosen local equation $g$. By the definition of uniformizer in [def-sc-discrete-valuation-ring], that image is a uniformizer. This also applies at $x=\\xi$; no global Noetherian or dimension bound on $X$ was used.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AG9 (lemma-integral-effective-Cartier-divisor-dvr), proof and Algebra Tag 00PD (lemma-characterize-dvr), condition (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-generic-point",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-trf-ufd-height-one",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-nagata-effective-cartier-ideal",
+  "lem-sc-regular-dim1-dvr",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0AGA (lemma-weil-divisor-is-cartier-UFD), 0AG8 (lemma-effective-Cartier-in-points), 0AG9 (lemma-integral-effective-Cartier-divisor-dvr), and the second proof paragraph of 0AGB (lemma-codim-1-part)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +178,45 @@
    "results": "8 hits: IsDiscreteValuationRing.TFAE, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.instFieldCarrierFunctionField, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral",
    "date": "2026-10-19",
    "verdict": "no match: the returned localization, domain, and DVR facts do not prove the Cartier assertion for a prime divisor of a regular scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|locally.?factorial|prime.divisor",
+   "results": "0 hits:  (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state local principality of prime divisors on regular schemes, together with the canonical stalk identification and uniformizer clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime divisors on a regular scheme are effective Cartier divisors",
+   "results": "8 hits: Ideal.finite_factors, PrimeSpectrum.isPrime, Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, IsDedekindDomain.HeightOneSpectrum.isPrime, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.IsAffineOpen.primeIdealOf, AlgebraicGeometry.StructureSheaf.Localizations, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state local principality of prime divisors on regular schemes, together with the canonical stalk identification and uniformizer clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Cartier\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state local principality of prime divisors on regular schemes, together with the canonical stalk identification and uniformizer clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral codimension one closed subscheme of a regular locally Noetherian scheme is locally cut out by a prime element and has a generic discrete valuation ring",
+   "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.irreducibleSpace_of_isIntegral",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state local principality of prime divisors on regular schemes, together with the canonical stalk identification and uniformizer clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a locally factorial scheme every prime divisor is locally principal, and localizing at its defining prime gives a discrete valuation ring",
+   "results": "8 hits: IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation, IsDedekindDomain.isDedekindDomainDvr, Localization.AtPrime.isDedekindDomain, IsDiscreteValuationRing.TFAE, IsDiscreteValuationRing, IsLocalization.AtPrime.isDedekindDomain",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits do not state local principality of prime divisors on regular schemes, together with the canonical stalk identification and uniformizer clause"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-codimension-one-cartier-part",
@@ -80,5 +243,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-prime-divisor-local-equations",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement using existing regular-local UFD, height-one-prime, affine-stalk, and dimension-one DVR nodes. Wrote the canonical double-localization maps and finite-generator denominator argument explicitly. No new nodes.",
+  "blueprint": "The inherited ancestry to lem-per-artin-gabber-affine-curve through surface resolution is retained: this realizes the local prime equations and generic DVR input to the codimension-one construction in Stacks 0AGB, used by the embedded-resolution reduction. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "The empty selected parameter sublist supplies the regular-local UFD theorem needed in Stacks 0AGA; it is a generic commutative algebra tool and no node in this unit supplies it."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Regular local dimension one implies DVR, a generic commutative algebra tool for the generic divisor stalk, not a replacement of the perverse or resolution route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-sc-regular-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-1ba098505",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-1ba098505 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the cited statements and against Stacks divisors.tex 0AG8 (l.2939), 0AG9 (l.3006), 0AGA (l.3056) and the second proof paragraph of 0AGB (l.3076). The statement keeps the source's hypotheses. 0AG9's global Noetherian hypothesis is avoided by using regular + dim 1 => DVR at xi (lem-sc-regular-dim1-dvr), which is right because X is only locally Noetherian. Step 4: lem-trf-regular-local-ufd-boundary-factorization with r=0 (its statement allows r>=0) gives that A is a UFD, then lem-trf-ufd-height-one gives p=(f). Step 5 spreads the stalk equation to an open with the annihilators u_i correctly accounted for, and gets a nonzerodivisor because R_h is a domain. Step 6 matches def-nagata-effective-cartier-ideal and its blueprint_update form. Step 7 covers every generator g; Step 8 shows the image of g is a uniformizer. Edge cases checked: x=xi; D=X impossible; Spec k[u,v] with D=V(u); nonreduced D excluded; points off D. There are no new nodes, and the duplicate search found no existing node stating the item (lem-sbc-regular-cartier-generic-stalk-dvr overlaps only the DVR clause and assumes Cartier). Accepted tool_uses: lem-trf-regular-local-ufd-boundary-factorization and lem-sc-regular-dim1-dvr, both generic algebra. Batch-5 check: lem-trf-ufd-height-one is a Mathlib leaf (Stacks 0AFT) with empty proof_deps. The full closure of lem-trf-regular-local-ufd-boundary-factorization (322 nodes) contains only commutative algebra, K0/Pic and basic sheaf nodes, with no trace-formula, Poincare-duality, sk-thm-trace-transport or assumption node. Both citations are outside the assumed statements, so both are accepted. Advisory: lem-sc-regular-dim1-dvr cites Tag 00DV where 00PD is meant (this delivery does not own that node). No fixes."
  }
 }
