@@ -37,3 +37,14 @@ L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports
 ## lem-trf-elementary-semistable-chart-globalization (2026-10-19 04:02 UTC, branch head 3668b7bcb7)
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## lem-pur-finite-universal-smooth-trace (2026-10-19 09:58 UTC, branch head bdf3c9ea93)
+
+L: independent stage-2 immutable head bdf3c9ea9367: file-only compilation failed: private overlay Sheaf.Paper.FiniteFreeCoefficientExtension
+
+[35.9 s]
+preliminary Sheaf.Paper.FiniteFreeCoefficientExtension
+
+[35.9 s]
+sandbox Sheaf.Stage2.Sandbox0
+timeout after 60 s: the fault is usually a definition that is expensive to unfold, not the limit
