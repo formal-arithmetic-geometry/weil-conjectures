@@ -14,6 +14,7 @@ public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Mathlib.RingTheory.Ideal.Quotient.Index
 import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
 import Sheaf.Paper.EtaleUnboundedRestrictionComparison
@@ -157,7 +158,45 @@ unit balls. The image of t is nonzero of absolute value less than one. The upper
 writes it as a unit times v^e, e positive. Its nth power ideal is (v)^(en), whose
 quotient is finite by lem-weil-valued-dvr-finite-quotients. -/
 @[instance] theorem stageFinite (s : Stage l E) : Finite s.ring := by
-  sorry
+  have hE := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hF := (Padic.extension_integers_dvr l s.field
+    (Padic.coefficientExtensionAbsoluteValue l s.field)
+    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec
+  rcases hE with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hrE, hgenE, _⟩
+  have hπE : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
+    exact ((hrE.choose_spec.2.2 _).mp hgenE.choose_spec).1
+  have hparam : s.parameter ≠ 0 := by
+    intro hz
+    apply hπE
+    apply Subtype.ext
+    apply s.inclusion.injective
+    change s.inclusion (Padic.coefficientExtensionUniformizer l E : E) = s.inclusion 0
+    exact (congrArg Subtype.val hz).trans (map_zero s.inclusion).symm
+  rcases hF with ⟨_, _, _, _, _, _, _, hDVR, _, _, _, hfinite, _, hgenF, _⟩
+  have : IsDiscreteValuationRing s.integers := hDVR
+  have hπF : Ideal.span ({Padic.coefficientExtensionUniformizer l s.field} :
+      Set s.integers) = Padic.coefficientExtensionMaximalIdeal l s.field :=
+    hgenF.choose_spec
+  have hmax := (Padic.extension_integers_dvr l s.field
+    (Padic.coefficientExtensionAbsoluteValue l s.field)
+    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec.2.2.2.2.1
+  have hirr : Irreducible (Padic.coefficientExtensionUniformizer l s.field) := by
+    apply (IsDiscreteValuationRing.irreducible_iff_uniformizer _).mpr
+    rw [hπF]
+    exact (IsLocalRing.eq_maximalIdeal hmax).symm
+  have hideal : s.ideal ≠ ⊥ := by
+    rw [Stage.ideal, Ideal.span_singleton_pow]
+    exact mt Ideal.span_singleton_eq_bot.mp (pow_ne_zero _ hparam)
+  obtain ⟨n, hn⟩ := IsDiscreteValuationRing.ideal_eq_span_pow_irreducible hideal hirr
+  have : Finite (s.integers ⧸ Ideal.span
+      ({Padic.coefficientExtensionUniformizer l s.field} : Set s.integers)) := by
+    rw [hπF]
+    exact hfinite
+  change Finite (s.integers ⧸ s.ideal)
+  rw [hn, ← Ideal.span_singleton_pow]
+  exact Ideal.finite_quotient_pow (Submodule.fg_span_singleton _) n
 
 /-- A coefficient arrow retains its actual field embedding and exponent inequality.
 These are exactly composites of a quotient and a finite-free extension.
@@ -176,7 +215,13 @@ parameter. Functoriality of principal ideals and powers sends (t^m) into (t^n)
 when n <= m. This is also valid for equal levels and identity embeddings. -/
 theorem Arrow.ideal_le {s t : Stage l E} (a : Arrow s t) :
     s.ideal ≤ t.ideal.comap (strictEtaleIntegerMap l a.embedding) := by
-  sorry
+  have hparam : strictEtaleIntegerMap l a.embedding s.parameter = t.parameter := by
+    apply Subtype.ext
+    change a.embedding (s.inclusion _) = t.inclusion _
+    exact DFunLike.congr_fun a.over_base _
+  apply Ideal.map_le_iff_le_comap.mp
+  simp only [Stage.ideal, Ideal.map_pow, Ideal.map_span, Set.image_singleton, hparam]
+  exact Ideal.pow_le_pow_right a.level
 
 /-- The canonical coefficient homomorphism is induced on the actual quotient rings.
 Source: blueprint field-extension towers
@@ -238,7 +283,7 @@ existence theorem to this same compactification and these finite coefficients. -
 theorem etaleLeftAdjoint (A : Type (u + 1)) [CommRing A] [Finite A]
     [IsNoetherian X] [IsNoetherian Y] (c : Compactification f) :
     (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).IsLeftAdjoint := by
-  sorry
+  exact Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification A c
 
 /-- The etale exceptional functor for the same compactification, fixed by its adjunction.
 Source: thm-amb-etale-exceptional-adjoint
@@ -404,7 +449,16 @@ map, since both have the same inclusion in the field. The quotient map is then t
 identity on every quotient generator; surjectivity of the quotient map gives equality. -/
 theorem Arrow.ringMap_id {s : Stage l E} (a : Arrow s s)
     (h : a.embedding = AlgHom.id (Padic l) s.field) : a.ringMap = RingHom.id s.ring := by
-  sorry
+  apply RingHom.ext
+  intro x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  change Ideal.Quotient.mk s.ideal (strictEtaleIntegerMap l a.embedding x) =
+    Ideal.Quotient.mk s.ideal x
+  congr 1
+  apply Subtype.ext
+  change a.embedding (x : s.field) = (x : s.field)
+  rw [h]
+  rfl
 
 /-- Quotient coefficient maps preserve composition, including mixed coefficient changes.
 Source: blueprint coefficient towers; node proof step 14
@@ -416,7 +470,17 @@ that equality. Quotient generators are surjective, giving equality of ring homom
 theorem Arrow.ringMap_comp {s t v : Stage l E} (a : Arrow s t) (b : Arrow t v)
     (ab : Arrow s v) (h : ab.embedding = b.embedding.comp a.embedding) :
     ab.ringMap = b.ringMap.comp a.ringMap := by
-  sorry
+  apply RingHom.ext
+  intro x
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+  change Ideal.Quotient.mk v.ideal (strictEtaleIntegerMap l ab.embedding x) =
+    Ideal.Quotient.mk v.ideal
+      (strictEtaleIntegerMap l b.embedding (strictEtaleIntegerMap l a.embedding x))
+  congr 1
+  apply Subtype.ext
+  change ab.embedding (x : s.field) = b.embedding (a.embedding (x : s.field))
+  rw [h]
+  rfl
 
 /-- The finite exceptional coefficient system. Every coherence below is a componentwise
 identity for specified natural transformations, hence equivalently an equality of those
@@ -506,7 +570,11 @@ These two facts are the two fields of IsNoetherian T. -/
 theorem finiteTypeNoetherian (k : Type u) [Field k] (T : Scheme.{u})
     [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
     [QuasiCompact (T ↘ Spec (.of k))] : IsNoetherian T := by
-  sorry
+  have : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of k))
+  have : CompactSpace T :=
+    QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
+  exact ⟨⟩
 
 /-- A k-morphism between the schemes in the statement has the morphism properties
 used by compact support, without additional hypotheses on that morphism.
@@ -522,7 +590,16 @@ theorem finiteTypeMorphismProperties (k : Type u) [Field k] {X Y : Scheme.{u}}
     [IsSeparated (Y ↘ Spec (.of k))]
     (f : X ⟶ Y) [f.IsOver (Spec (.of k))] :
     IsSeparated f ∧ LocallyOfFiniteType f ∧ QuasiCompact f := by
-  sorry
+  have hcomp : f ≫ (Y ↘ Spec (.of k)) = (X ↘ Spec (.of k)) := by
+    simp
+  have : IsSeparated (f ≫ (Y ↘ Spec (.of k))) := by rw [hcomp]; infer_instance
+  have : LocallyOfFiniteType (f ≫ (Y ↘ Spec (.of k))) := by
+    rw [hcomp]
+    infer_instance
+  have : IsNoetherian X := finiteTypeNoetherian k X
+  have : IsNoetherian Y := finiteTypeNoetherian k Y
+  exact ⟨IsSeparated.of_comp f (Y ↘ Spec (.of k)),
+    locallyOfFiniteType_of_comp f (Y ↘ Spec (.of k)), inferInstance⟩
 
 /-- The system over separated finite-type k-schemes, installing only the Noetherian
 instances implied by those hypotheses. Source: blueprint finite operations
