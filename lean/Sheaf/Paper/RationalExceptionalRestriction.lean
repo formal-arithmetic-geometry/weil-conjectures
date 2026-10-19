@@ -9,23 +9,12 @@ public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.Paper.CompactificationLocalizing
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
-import Mathlib.CategoryTheory.Adjunction.Restrict
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.AffineSpace
-import Mathlib.Topology.Constructible
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.Paper.AffineSpaceRationalInduction
-import Sheaf.Paper.ClosedAdjointConstructibleYoneda
-import Sheaf.Paper.ClosedSupportConstructible
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.LocalizingAdmissibleCoefficients
-import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.RationalRestrictionGlue
-import Sheaf.Paper.RestrictionLocal
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.CompactificationLocalizing
+import Sheaf.Paper.ContinuousQbarExceptionalPreservation
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Rational exceptional inverse image preserves constructibility
@@ -72,37 +61,29 @@ Source: blueprint main-20261015, sk-thm-restriction, statement and proof
 (blueprint: sk-thm-restriction).
 
 Proof:
-1. Finite type over the field gives finite affine covers. Separatedness implies
-   quasi-separatedness, so the schemes and the affine charts are qcqs. Apply
-   det-def-localizing-closure-ctf-equals-bc to identify Dctf with Dbc and their closures.
-2. On each affine chart U over an affine V, choose generators of its finite-type
-   coordinate algebra. Evaluation from the polynomial algebra is surjective,
-   giving a closed immersion i : U -> A^d_V and f u = v p i. The charts cover X.
-   This uses def-weil-finite-type-morphism, def-weil-closed-immersion and
-   def-sbc-affine-space; the dimension may vary with the chart.
-3. Apply det-thm-restriction-local to these maps to get u^* f^! = i^! p^! v^*.
-4. Exact open restriction preserves the cohomological bounds and restricts the
-   finite constant local models of sk-def-sfb-constructible. Thus v^* K is Dbc.
-   By det-cor-affine-space-rational-induction, p^! v^* K is Dbc as well.
-5. By det-prop-closed-adjoint-constructible-support its supported sections on U
-   are Dbc; det-prop-closed-adjoint-constructible-yoneda identifies these with
-   i^! p^! v^* K. Hence u^* f^! K is Dbc on every chart.
-6. Apply det-thm-restriction-glue. Take the minimum and maximum of the finitely
-   many local bounds. Refine the finite constructible locally closed partitions
-   on the charts to one partition of X. Affine opens are retrocompact in the
-   quasi-separated X, so their constructible subsets stay constructible in X
-   (def-weil-constructible-subset and lem-weil-pbc-qcqs-morphism-permanence).
-   Restrict the finite constant local models to each refined piece. This proves
-   global bounded constructibility; for empty X the zero category gives it directly.
-7. Returning through the equality in step 1 proves the first conjunct. In the
-   chosen compactification f = r j, j is quasi-compact by qcqs permanence.
-   det-sf-comp-coherence-single gives preservation of Dctf by Rr_* j_!, hence
-   the lower shriek also restricts. Both restrictions have the same ambient maps.
-8. Every property in the intersection defining sk-def-localizing-closure contains
-   Dctf, so constantModelFiniteTorToLocalizing is the full inclusion into that
-   closure. Restrict the Hom equivalences of sk-prop-sf-existence to the two full
-   Dctf subcategories. Bijectivity and naturality are unchanged; equivalently
-   apply Adjunction.restrictFullyFaithful. This gives the final adjunction.
+1. Finite type and separatedness over the field make X and Y qcqs. Each of the
+   original coefficient alternatives is admissible in sk-def-localizing-closure.
+   Apply det-sf-comp-coherence-single to the given boundary compactification:
+   its actual lower shriek preserves bounded constructible finite-Tor objects.
+2. Split the original coefficient alternatives. For a finite extension E,
+   det-thm-restriction-glue proves bounded constructibility of the supplied G K.
+   Its geometric argument uses affine factorizations, affine-space purity,
+   closed support and finite-cover gluing. The predicate equality of
+   det-def-localizing-closure-ctf-equals-bc on X supplies finite Tor amplitude.
+   Both invocations use only their finite-extension alternatives.
+3. For C(-, Qbar_ell), apply
+   lem-sfb-continuous-qbar-exceptional-preservation with the same f, c, h, G and
+   supplied adjunction. This isolates the geometric preservation component for
+   this coefficient; no identification with the finite-subextension-valued ring
+   is asserted. The lemma follows the unit's same affine-factorization,
+   affine-space-purity, closed-support and finite-cover route.
+4. Every property in the intersection defining sk-def-localizing-closure contains
+   Dctf, giving its full inclusion constantModelFiniteTorToLocalizing. Use the
+   preservation statements to lift the two original functors to Dctf. The
+   equalities after these full inclusions hold by reflexivity, including maps.
+   Apply Adjunction.restrictFullyFaithful to the supplied adjunction. Its Hom
+   equivalences therefore give the restricted adjunction without choosing any
+   new ambient functor or changing the original coefficient hypothesis.
 -/
 theorem rationalExceptional_preserves_constructibleFiniteTor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -139,7 +120,72 @@ theorem rationalExceptional_preserves_constructibleFiniteTor
       G₀ ⋙ constantModelFiniteTorToLocalizing Λ X =
         constantModelFiniteTorToLocalizing Λ Y ⋙ G ∧
       Nonempty (F₀ ⊣ G₀) := by
-  sorry
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated
+    (X ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated
+    (Y ↘ Spec (.of k))
+  have hadmissible : IsLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases _hΛ with hE | hQ
+    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, hE⟩)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr hQ))))
+  have hF := (compactification_localizing Λ ℓ k f c hadmissible).2.2.2
+  have hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
+      (constantModelBoundedConstructible Λ Y K.obj ∧
+        DerivedCategory.finiteTorAmplitude _ K.obj) →
+      constantModelBoundedConstructible Λ X (G.obj K).obj ∧
+        DerivedCategory.finiteTorAmplitude _ (G.obj K).obj := by
+    rcases _hΛ with hE | hQ
+    · have hcoeff :
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+          (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+            Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+            Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) :=
+        Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩))
+      have hEqX := (localizingClosure_ctf_equals_bc ℓ X Λ hcoeff).1.2.2.1
+      have hcoeff' : Nonempty (Mon.mk Λ ≅ Mon.mk
+          ((sheafCompose (coherentTopology Profinite.{u})
+            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+              (Profinite.padicSubfieldCondensedRing ℓ E.1))) ∨
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := Or.inl hE
+      obtain ⟨_, _, _, hGbc, _⟩ :=
+        (rationalRestrictionGlue.{u, u} Λ ℓ E.1 hcoeff' k (ringChar k)
+          (Fact.out : ringChar k ≠ ℓ) f c h G _adj).2
+      intro K hK
+      exact (congrFun hEqX _).mpr (hGbc K hK.1)
+    · exact continuousQbarExceptional_preserves_constructibleFiniteTor
+        Λ ℓ k f hQ c h G _adj
+  refine ⟨hG, ?_⟩
+  let F₀ : ConstantModelConstructibleFiniteTor Λ X ⥤
+      ConstantModelConstructibleFiniteTor Λ Y :=
+    (constantModelBoundedConstructible Λ Y ⊓
+      DerivedCategory.finiteTorAmplitude _).lift
+      ((constantModelBoundedConstructible Λ X ⊓
+        DerivedCategory.finiteTorAmplitude _).ι ⋙
+          rightDerivedLowerShriekOfCompactification Λ c.obj.obj)
+      (fun K ↦ hF K.obj K.property)
+  let G₀ : ConstantModelConstructibleFiniteTor Λ Y ⥤
+      ConstantModelConstructibleFiniteTor Λ X :=
+    (constantModelBoundedConstructible Λ X ⊓
+      DerivedCategory.finiteTorAmplitude _).lift
+      (constantModelFiniteTorToLocalizing Λ Y ⋙ G ⋙
+        (localizingClosureProEtale Λ X).ι)
+      (fun K ↦ hG ((constantModelFiniteTorToLocalizing Λ Y).obj K) K.property)
+  have eF : F₀ ⋙ constantModelFiniteTorToLocalizing Λ Y =
+      constantModelFiniteTorToLocalizing Λ X ⋙ localizingLowerShriek Λ c.obj.obj h := by
+    rfl
+  have eG : G₀ ⋙ constantModelFiniteTorToLocalizing Λ X =
+      constantModelFiniteTorToLocalizing Λ Y ⋙ G := by
+    rfl
+  refine ⟨F₀, G₀, eF, eG, ⟨?_⟩⟩
+  exact _adj.restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulιOfLE _) (ObjectProperty.fullyFaithfulιOfLE _)
+    (eqToIso eF.symm) (eqToIso eG.symm)
 
 end CondensedRing
 

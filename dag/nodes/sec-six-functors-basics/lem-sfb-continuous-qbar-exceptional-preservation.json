@@ -1,0 +1,159 @@
+{
+ "id": "lem-sfb-continuous-qbar-exceptional-preservation",
+ "kind": "statement",
+ "title": "Exceptional preservation for all-continuous algebraic-closure coefficients",
+ "statement": "Fix a prime ell and a field k of positive prime characteristic p different from ell. Let X,Y be separated finite-type k-schemes and f:X -> Y a separated finite-type k-morphism [sk-def-sfb-dc-setting, def-weil-finite-type-morphism, def-weil-proper-morphism]. Let Lambda be a commutative condensed ring isomorphic, as a ring object, to S |-> C(S,Qbar_ell), with ALL continuous maps for the induced ell-adic topology [sk-def-localizing-closure]. In the ordinary unbounded derived categories with the pulled-back coefficients, let Loc(Dctf) be the localizing closures [sk-def-localizing-closure] of the bounded constructible finite-Tor objects [sk-def-sfb-constructible]. Fix a boundary compactification c of f and a proof h that its actual compactification lower shriek preserves those closures. For any right adjoint G to that restricted lower shriek and any supplied adjunction [sk-prop-sf-existence], G sends Dctf(Y,Lambda) into Dctf(X,Lambda). This assertion only states preservation, without constructing functor restrictions or a restricted adjunction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+  "place": "First two paragraphs, affine factorization and local exceptional preservation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-prop-sf-existence",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite affine chart factorizations used in unit sk-thm-restriction. Using composition and open-restriction adjunctions and uniqueness of right adjoints, identify u^* G with i^! p^! v^*. This is the same geometric argument as det-thm-restriction-local, but it must be performed for the present all-continuous-map coefficient; that node is only a template, since its existing Lean Qbar disjunct differs.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "sk-prop-sf-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+   }
+  },
+  {
+   "text": "For this same coefficient, compute the affine-space exceptional inverse image by the rational purity calculation and compute the closed exceptional inverse image by the support fiber. Pullback of finite scalar models, the locally free Tate line and the finite bounds on the open direct image give bounded constructibility and finite Tor bounds on each chart. These coefficient-specific purity and open-image calculations are the unresolved mathematical work here; the existing finite-subextension-valued interfaces do not supply them. The source route is retained rather than asserting an isomorphism of coefficient rings.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+   }
+  },
+  {
+   "text": "Exact open restriction commutes with cohomology and derived tensor. Minima and maxima over the finite chart cover give uniform cohomological and Tor bounds; vanishing on the cover detects global vanishing. A finite common refinement of the local constructible stratifications supplies the same finite scalar models on each nonempty stratum. For empty X, use the empty-cover sheaf axiom instead of extrema. This proves the stated preservation for the supplied G, and scalar transport along the supplied ring isomorphism gives the general Lambda formulation.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+    "place": "The affine-factorization and finite-cover arguments in the first two paragraphs, and the restricted Hom bijection in the last paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space",
+  "sk-prop-sf-existence",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction.proof.md",
+  "place": "First two paragraphs, expanded for all-continuous-map Qbar coefficient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image of a bounded constructible complex for sheaves of modules over continuous algebraic closure coefficients",
+   "results": "SheafOfModules.pullback; SheafOfModules.pushforwardNatIso_inv; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.Modules.inv_app; Topology.IsConstructible.preimage; ClosedSubmodule.comap; ClosedSubmodule.coe_comap; Topology.IsConstructible.preimage_of_isClosedEmbedding",
+   "date": "2026-10-19",
+   "verdict": "no match: generic category or constructible-subset facts, not coefficient-module exceptional preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous algebraic closure Q_l coefficient exceptional inverse image bounded constructible finite Tor preservation",
+   "results": "ChevalleyThm.chevalley_polynomialC; BDeRhamPlus; BDeRham; ChevalleyThm.chevalley_mvPolynomialC; chevalley_mvPolynomial_mvPolynomial; Profinite.NobelingProof.succ_exact; AlgebraicGeometry.exists_map_preimage_le_map_preimage; Profinite.NobelingProof.CC_exact",
+   "date": "2026-10-19",
+   "verdict": "no match: generic category or constructible-subset facts, not coefficient-module exceptional preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|continuousMapRingObj",
+   "results": "",
+   "date": "2026-10-19",
+   "verdict": "no match: generic category or constructible-subset facts, not coefficient-module exceptional preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "rg continuousMapRingObj (PadicAlgCl in lean/Sheaf and lean/WeilConjectures; finiteTorAmplitude in Mathlib",
+   "results": "No continuous-Qbar exceptional preservation theorem. The coefficient-specific rational interfaces in RestrictionLocal, AffineSpaceRationalInduction, RationalClosedSupportConstructible and LocalizingClosureCtfEqualsBc instead use padicAlgClRingObj. Mathlib supplies only general adjunction restriction.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalExceptionalRestriction",
+  "date": "2026-10-19",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-restriction",
+   "place": "First two proof paragraphs, affine factorization and local exceptional preservation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousQbarExceptionalPreservation",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousQbarExceptional_preserves_constructibleFiniteTor",
+  "file": "lean/Sheaf/Paper/ContinuousQbarExceptionalPreservation.lean",
+  "statement": "theorem continuousQbarExceptional_preserves_constructibleFiniteTor (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) (c : Compactification.BoundaryCompactification f) (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, (constantModelBoundedConstructible Λ Y K.obj ∧ DerivedCategory.finiteTorAmplitude _ K.obj) → constantModelBoundedConstructible Λ X (G.obj K).obj ∧ DerivedCategory.finiteTorAmplitude _ (G.obj K).obj",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-restriction",
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T005338-L-2754886",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261019T005338-L-2754886",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
