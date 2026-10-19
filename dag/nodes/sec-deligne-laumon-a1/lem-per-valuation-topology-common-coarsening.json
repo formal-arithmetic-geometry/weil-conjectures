@@ -208,5 +208,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-e74eba6dc (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full, and checked each against def-trf-valuation-ring, the only citation (Stacks 00I9/00IB: domain with fraction field K, x or x^-1 in A). The statement is the classical dependence criterion: two nontrivial valuations give the same topology iff a valuation ring U, a proper subring of K, contains both rings. It is true in arbitrary rank and was kept unchanged. Steps: (1) each V_i is a proper zero-neighbourhood, using nontriviality and surjectivity; (2) the bound aV_2 ⊆ V_1 with v_2(a)=δ+ε_2, where recentring a basis ball containing 0 is one implicit ultrametric line; (3) the ring S of finite mixed sums is proper because aS ⊆ V_1; (4) S contains V_1, so the cited definition makes it a valuation ring; (5) t not in U forces v_i(u) > v_i(t) for every u in U; (6) choosing v_i(b)=γ−v_i(t)+ε_i gives the ball inclusions B_j(v_j b) ⊆ bU ⊆ B_i(γ). All steps are correct and genuinely elementary, and no step assumes an Archimedean value group. Small cases checked: equal valuations; the t-adic and lexicographic (t,u) valuations on k((u))((t)), where U=V_1; the p-adic and q-adic valuations on Q, where Z_(p)Z_(q)=Q and the topologies differ; the trivial valuation is excluded. Source: ILO XX 4.4, printed p.374, mentions valuation topologies and Bourbaki VI §8 only, so proof_origin=agent is honest; no SGA is used. There are no new nodes. An rg search of the DAG found only the henselian-coarsening, algebraic-coarsening-correspondence and dense-henselian comparison nodes, and none of them is a duplicate. There are no off-unit uses and no cycle. The citer lem-per-henselian-finite-extension-topology (Steps 3 and 4) uses both directions with the hypotheses satisfied. Minor: the report claims lean_audit fields were added, but the node has none; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.ValuationTopologyCommonCoarsening",
+  "declaration": "AddValuation.topology_eq_iff_exists_common_proper_coarsening",
+  "file": "lean/Sheaf/FieldTheory/ValuationTopologyCommonCoarsening.lean",
+  "statement": "theorem topology_eq_iff_exists_common_proper_coarsening (K : Type u) [Field K] (Γ₁ : Type v) [AddCommGroup Γ₁] [LinearOrder Γ₁] [IsOrderedAddMonoid Γ₁] (Γ₂ : Type w) [AddCommGroup Γ₂] [LinearOrder Γ₂] [IsOrderedAddMonoid Γ₂] (v₁ : AddValuation K (WithTop Γ₁)) (v₂ : AddValuation K (WithTop Γ₂)) [v₁.toValuation.IsNontrivial] [v₂.toValuation.IsNontrivial] (h₁ : ∀ γ : Γ₁, ∃ x : Kˣ, v₁ (x : K) = (γ : WithTop Γ₁)) (h₂ : ∀ γ : Γ₂, ∃ x : Kˣ, v₂ (x : K) = (γ : WithTop Γ₂)) : v₁.toValuation.subgroups_basis.topology = v₂.toValuation.subgroups_basis.topology ↔ ∃ U : ValuationSubring K, U ≠ ⊤ ∧ v₁.toValuation.valuationSubring ≤ U ∧ v₂.toValuation.valuationSubring ≤ U",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3fe7136a",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Every clause matches the node: AddValuation K (WithTop Γᵢ) with value groups in independent universes; IsNontrivial; surjectivity onto Γᵢ from Kˣ; Vᵢ = toValuation.valuationSubring; topology = Mathlib subgroups_basis.topology (strict balls over the value group, which hᵢ makes equal to Γᵢ); equality of topologies ↔ ∃ U : ValuationSubring K, U ≠ ⊤, V₁ ≤ U, V₂ ≤ U. No extra hypotheses, proof is sorry only, docstrings carry the source place, the blueprint id and all six proof steps. lean.statement matches the file exactly; the node differs from live only in lean; live lean is null (no race); no existing Mathlib or project declaration found. nt_compile --json: 4.7 s, exit 0, no errors or warnings; a broken-copy control reports its error. Advisory: the multiplicative-Valuation citer lem-per-henselian-finite-extension-topology will need the Valuation/AddValuation conversion at stage 3."
  }
 }
