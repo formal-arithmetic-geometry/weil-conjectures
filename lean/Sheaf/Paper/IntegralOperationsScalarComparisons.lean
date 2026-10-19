@@ -7,27 +7,10 @@ module
 
 public import Sheaf.Paper.IntegralOperationsScalarExtension
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.CompactSupportRoosCofinality
-import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.StrictRoosComparison
+
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.DerivedCompleteKoszulReconstruction
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.IntegralDerivedOperationsOnSlices
-import Sheaf.Paper.IntegralScalarExtensionUniverses
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.WeilCompletedTensorReflector
 
 /-! # Normalized integral scalar comparisons
 
@@ -45,7 +28,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
-universe u a b a' b'
+universe u a b a' b' v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
@@ -55,6 +38,48 @@ abbrev scalarRoosBoundary {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
     (integralOperationsTowerStep C)
+
+section ScalarRoos
+
+open CochainComplex CochainComplex.HomComplex
+
+private theorem scalarCocone_relation
+    {A : Type a} [Category.{b} A] [Abelian A]
+    {K L : CochainComplex A ℤ} (φ : K ⟶ L) :
+    δ (-1) 0 (mappingCocone.snd φ) + Cochain.ofHom (mappingCocone.fst φ ≫ φ) = 0 := by
+  simp only [mappingCocone.snd, Cochain.δ_leftShift (mappingCone.snd φ) (-1) (-1) 0 rfl 1 rfl,
+    mappingCone.δ_snd]
+  simp [mappingCocone.fst, Cochain.leftShift_neg,
+    Cochain.leftShift_comp_zero_cochain, Cochain.ofHom_comp]
+
+
+private def scalarAdditiveCoconeMap
+    {A : Type a} [Category.{b} A] [Abelian A]
+    {B : Type a'} [Category.{b'} B] [Abelian B]
+    (F : A ⥤ B) [F.Additive] {K L : CochainComplex A ℤ} (φ : K ⟶ L) :
+    (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (mappingCocone φ) ⟶
+      mappingCocone ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map φ) := by
+  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  refine mappingCocone.lift (G.map φ) (G.map (mappingCocone.fst φ))
+    ((mappingCocone.snd φ).map F) ?_
+  have h := congrArg (fun z ↦ z.map F) (scalarCocone_relation φ)
+  simpa only [Cochain.map_add, Cochain.map_zero, Cochain.map_ofHom, ← δ_map,
+    Functor.map_comp] using h
+
+
+private def scalarCoconeSquareMap
+    {A : Type a} [Category.{b} A] [Abelian A]
+    {K L K' L' : CochainComplex A ℤ} (φ : K ⟶ L) (ψ : K' ⟶ L')
+    (a : K ⟶ K') (b : L ⟶ L') (w : φ ≫ b = a ≫ ψ) :
+    mappingCocone φ ⟶ mappingCocone ψ := by
+  refine mappingCocone.lift ψ (mappingCocone.fst φ ≫ a)
+    ((mappingCocone.snd φ).comp (Cochain.ofHom b) (add_zero _)) ?_
+  have hδ : δ (-1) 0 (mappingCocone.snd φ) =
+      -Cochain.ofHom (mappingCocone.fst φ ≫ φ) := eq_neg_of_add_eq_zero_left
+        (scalarCocone_relation φ)
+  rw [δ_comp_ofHom, hδ]
+  simp only [Cochain.neg_comp, ← Cochain.ofHom_comp]
+  rw [Category.assoc, w, ← Category.assoc, neg_add_cancel]
 
 /-- An additive functor maps the Roos cocone to the Roos cocone of its tower.
 Both coordinates, including the shifted coordinate, are prescribed, so no cone
@@ -84,7 +109,88 @@ theorem scalarRoosMap_existsUnique
             (C.obj (op n))) n).f j =
         F.map ((CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i j h ≫
           (Pi.π (fun n ↦ C.obj (op n)) n).f j)) := by
-  sorry
+  dsimp only [integralOperationsRoos]
+  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let pc : G.obj (∏ᶜ (fun n ↦ C.obj (op n))) ⟶
+      ∏ᶜ (fun n ↦ G.obj (C.obj (op n))) :=
+    Pi.lift (fun n ↦ G.map (Pi.π (fun n ↦ C.obj (op n)) n))
+  have w : G.map (scalarRoosBoundary C) ≫ pc =
+      pc ≫ scalarRoosBoundary (C ⋙ G) := by
+    apply Pi.hom_ext
+    intro n
+    have hC := (towerTransitionEndomorphism_eq_iff
+      (integralOperationsTowerStep C) (scalarRoosBoundary C)).mp rfl n
+    have hG := (towerTransitionEndomorphism_eq_iff
+      (integralOperationsTowerStep (C ⋙ G)) (scalarRoosBoundary (C ⋙ G))).mp rfl n
+    simp only [Category.assoc]
+    rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n,
+      ← G.map_comp, hC, G.map_sub, G.map_comp]
+    dsimp only [Functor.comp_obj] at hG
+    erw [hG]
+    simp only [Preadditive.comp_sub, ← Category.assoc, pc, Pi.lift_π]
+    rfl
+  let α := scalarAdditiveCoconeMap F (scalarRoosBoundary C) ≫
+    scalarCoconeSquareMap (G.map (scalarRoosBoundary C)) (scalarRoosBoundary (C ⋙ G)) pc pc w
+  have hα : (∀ n : ℕ, α ≫ CochainComplex.mappingCocone.fst
+          (scalarRoosBoundary (C ⋙ F.mapHomologicalComplex (ComplexShape.up ℤ))) ≫
+          Pi.π (fun n ↦ (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (C.obj (op n))) n =
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map
+          (CochainComplex.mappingCocone.fst (scalarRoosBoundary C) ≫
+            Pi.π (fun n ↦ C.obj (op n)) n)) ∧
+      (∀ (i j : ℤ) (h : i + -1 = j) (n : ℕ), α.f i ≫
+          (CochainComplex.mappingCocone.snd
+            (scalarRoosBoundary (C ⋙ F.mapHomologicalComplex (ComplexShape.up ℤ)))).v i j h ≫
+          (Pi.π (fun n ↦ (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+            (C.obj (op n))) n).f j =
+        F.map ((CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i j h ≫
+          (Pi.π (fun n ↦ C.obj (op n)) n).f j)) := by
+    constructor
+    · intro n
+      dsimp only [α, scalarAdditiveCoconeMap, scalarCoconeSquareMap, G]
+      simp only [Category.assoc, mappingCocone.lift_fst_assoc]
+      change _ ≫ pc ≫ Pi.π _ n = _
+      rw [show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n]
+      exact (G.map_comp _ _).symm
+    · intro i j h n
+      dsimp only [α, scalarAdditiveCoconeMap, scalarCoconeSquareMap, G]
+      simp only [HomologicalComplex.comp_f, Category.assoc,
+        mappingCocone.lift_f_snd_v_assoc]
+      rw [Cochain.comp_v _ _ (add_zero (-1)) i j j h (add_zero j)]
+      simp only [Cochain.ofHom_v, Category.assoc]
+      rw [mappingCocone.lift_f_snd_v_assoc]
+      simp only [Cochain.map_v]
+      have hpc := congrArg (fun z ↦ z.f j)
+        (show pc ≫ Pi.π _ n = G.map (Pi.π _ n) from Pi.lift_π _ n)
+      change pc.f j ≫ (Pi.π (fun n ↦ G.obj (C.obj (op n))) n).f j =
+          F.map ((Pi.π (fun n ↦ C.obj (op n)) n).f j) at hpc
+      rw [hpc, ← F.map_comp]
+  refine ⟨α, hα, ?_⟩
+  intro β hβ
+  have hf : β ≫ mappingCocone.fst (scalarRoosBoundary (C ⋙ G)) =
+      α ≫ mappingCocone.fst (scalarRoosBoundary (C ⋙ G)) := by
+    apply Pi.hom_ext
+    intro n
+    simpa only [Category.assoc] using! (hβ.1 n).trans (hα.1 n).symm
+  have hs (i j : ℤ) (h : i + -1 = j) :
+      β.f i ≫ (mappingCocone.snd (scalarRoosBoundary (C ⋙ G))).v i j h =
+        α.f i ≫ (mappingCocone.snd (scalarRoosBoundary (C ⋙ G))).v i j h := by
+    apply (isLimitOfHasProductOfPreservesLimit
+      (HomologicalComplex.eval B (ComplexShape.up ℤ) j)
+      (fun n ↦ G.obj (C.obj (op n)))).hom_ext
+    rintro ⟨n⟩
+    simpa only [Category.assoc] using! (hβ.2 i j h n).trans (hα.2 i j h n).symm
+  ext i
+  have hfi := congrArg (fun z ↦ z.f i) hf
+  change β.f i ≫ _ = α.f i ≫ _ at hfi
+  have hid := mappingCocone.id_X (scalarRoosBoundary (C ⋙ G)) i (i - 1) (by omega)
+  have hβid := congrArg (fun z ↦ β.f i ≫ z) hid
+  have hαid := congrArg (fun z ↦ α.f i ≫ z) hid
+  simp only [Preadditive.comp_add, ← Category.assoc, Category.comp_id] at hβid hαid
+  rw [hfi, hs i (i - 1) (by omega)] at hβid
+  exact (Category.comp_id (β.f i)).symm.trans (hβid.symm.trans hαid)
+
+end ScalarRoos
+
 
 /-- The Roos map with its two prescribed coordinates.
 Source: Stacks 08TC (blueprint: lem-pur-integral-operations-scalar-extension). -/
@@ -250,17 +356,69 @@ def scalarTensorChain (W : AlgebraicGeometry.Scheme.{u})
 
 /-- Finite free ordinary coefficient extension preserves the good representatives.
 Source: Stacks 06YU, 07A4 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: use the finite free integer-ring extension on sections and exact
-sheafification. The ordinary tensor associator identifies tensoring an acyclic
-test with the extended complex with restriction of that test tensored with the
-original complex. This proves K-flatness; ordinary flat base change proves flatness
-of each term. This argument imposes no equality of site object and arrow sizes. -/
+Proof: the object and morphism formulas of integralOrdinaryScalarWitness give
+an isomorphism with the concrete changeOfRingsComplex. Convert flatness on the site
+to exactness of tensorRight and apply changeOfRings_isKFlat_of_flat_terms. Tensoring
+the comparison isomorphism transports K-flatness; its degree components transport
+flatness. This general change-of-rings argument needs no finite-free basis and
+imposes no equality of site object and arrow sizes. -/
 theorem scalarGood (W : AlgebraicGeometry.Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
     integralOperationsGoodComplex l L W
       (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj P.obj) := by
-  sorry
+  let : EssentiallySmall.{u+1} W.ProEt := essentiallySmallSelf.{0} _
+  let R := completedIntegralCommRingSheafUnrestricted.{u, u} l E W
+  let S := completedIntegralCommRingSheafUnrestricted.{u, u} l L W
+  let φ := integralCompletedScalarMap l E L ι W
+  let F := integralOrdinaryScalar l E L ι W
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{u+1, u, u+1} R
+  let := SheafOfModules.isMonoidal_W_independentCoefficients.{u+1, u, u+1} S
+  let : MonoidalCategory (integralTowerModules l E W) :=
+    SheafOfModules.monoidalCategory.{u, u+1, u+1} R
+  let : MonoidalCategory (integralTowerModules l L W) :=
+    SheafOfModules.monoidalCategory.{u, u+1, u+1} S
+  have ho := (integralOrdinaryScalarWitness l E L ι W).choose_spec.choose
+  let e : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P.obj ≅
+      SheafOfModules.changeOfRingsComplex.{u+1, u} φ P.obj :=
+    HomologicalComplex.Hom.isoOfComponents (fun i ↦ eqToIso (ho (P.obj.X i))) (by
+      intro i j hij
+      symm
+      change F.map (P.obj.d i j) ≫ eqToHom (ho (P.obj.X j)) =
+        eqToHom (ho (P.obj.X i)) ≫
+          SheafOfModules.changeOfRingsHom φ (P.obj.X i) (P.obj.d i j)
+      erw [(integralOrdinaryScalarWitness l E L ι W).choose_spec.choose_spec.choose
+        (P.obj.d i j)]
+      simp
+      rfl)
+  have hflat (i : ℤ) : exactFunctor _ _
+      (@MonoidalCategory.tensorRight _ _
+        (SheafOfModules.monoidalCategory.{u, u+1, u+1} R) (P.obj.X i)) :=
+    (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso.{u+1, u, u+1} R (P.obj.X i))
+      (P.property.2 i)
+  have h := SheafOfModules.changeOfRings_isKFlat_of_flat_terms.{u+1, u}
+    φ P.obj P.property.1 hflat
+  constructor
+  · let : (MonoidalCategory.curriedTensor
+        (integralTowerModules l L W)).PreservesZeroMorphisms :=
+      SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
+    let : ∀ M : integralTowerModules l L W,
+        ((MonoidalCategory.curriedTensor _).obj M).PreservesZeroMorphisms :=
+      SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
+    intro A hA i
+    let T := ((MonoidalCategory.curriedTensor
+      (integralTowerModules l L W)).map₂HomologicalComplex
+        (.up ℤ) (.up ℤ) (.up ℤ)).obj A
+    exact (h.1 A hA i).of_iso (T.mapIso e).symm
+  · intro i
+    let ei := (HomologicalComplex.eval _ _ i).mapIso e
+    have hi := (exactFunctor _ _).prop_of_iso
+      ((MonoidalCategory.curriedTensor (integralTowerModules l L W)).flip.mapIso ei).symm
+      (h.2 i)
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso.{u+1, u, u+1} S
+        (((F.mapHomologicalComplex (.up ℤ)).obj P.obj).X i)).symm hi
 
 /-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain.
 Source: Stacks 07A4, 099N (blueprint: lem-pur-integral-operations-scalar-extension).
@@ -533,6 +691,85 @@ def scalarHomCompleteInputs (W : AlgebraicGeometry.Scheme.{u})
   scalarHomCompleted l E L ι W M N hM hN (scalarInternalHom_complete l E W M N hN)
 
 
+private theorem scalarEvaluation_naturality
+    {D : Type a} [Category.{v} D] {H : Dᵒᵖ × D ⥤ D}
+    (S : CoefficientClosedStructure H) (P Q P' Q' : D)
+    (f : P' ⟶ P) (g : Q ⟶ Q') :
+    S.tensor.map (Prod.mkHom (H.map (Prod.mkHom f.op g)) (𝟙 P')) ≫
+        S.evaluation P' Q' =
+      S.tensor.map (Prod.mkHom (𝟙 _) f) ≫ S.evaluation P Q ≫ g := by
+  let := S.monoidal
+  have he : S.tensor.map (Prod.mkHom (H.map (Prod.mkHom f.op (𝟙 Q))) (𝟙 P')) ≫
+      S.evaluation P' Q = S.tensor.map (Prod.mkHom (𝟙 _) f) ≫ S.evaluation P Q := by
+    simpa [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation] using
+      S.evaluation_naturality P P' Q f
+  have hg : S.tensor.map (Prod.mkHom (H.map (Prod.mkHom (𝟙 (op P')) g)) (𝟙 P')) ≫
+      S.evaluation P' Q' = S.evaluation P' Q ≫ g := by
+    simpa [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation] using
+      (S.adjunction P').counit.naturality g
+  have hh : H.map (Prod.mkHom f.op g) =
+      H.map (Prod.mkHom f.op (𝟙 Q)) ≫ H.map (Prod.mkHom (𝟙 (op P')) g) := by
+    rw [← H.map_comp]
+    congr 1
+    ext <;> simp
+  rw [hh]
+  have ht : Prod.mkHom
+      (H.map (Prod.mkHom f.op (𝟙 Q)) ≫ H.map (Prod.mkHom (𝟙 (op P')) g)) (𝟙 P') =
+      Prod.mkHom (H.map (Prod.mkHom f.op (𝟙 Q))) (𝟙 P') ≫
+        Prod.mkHom (H.map (Prod.mkHom (𝟙 (op P')) g)) (𝟙 P') := by
+    ext <;> simp
+  rw [ht, S.tensor.map_comp, Category.assoc, hg, ← Category.assoc, he]
+  exact Category.assoc _ _ _
+
+private theorem scalarBaseChangeHom_naturality
+    {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
+    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor)
+    (P Q P' Q' : A) (f : P' ⟶ P) (g : Q ⟶ Q') :
+    F.map (HA.map (Prod.mkHom f.op g)) ≫ coefficientBaseChangeHom SA SB F μ P' Q' =
+      coefficientBaseChangeHom SA SB F μ P Q ≫
+        HB.map (Prod.mkHom (F.map f).op (F.map g)) := by
+  let := SB.monoidal
+  have hu (T P Q : B) (h : T ⟶ HB.obj (op P, Q)) :
+      (SB.transpose T P Q).symm h =
+        SB.tensor.map (Prod.mkHom h (𝟙 P)) ≫ SB.evaluation P Q := by
+    simpa [CoefficientClosedStructure.transpose, CoefficientClosedStructure.tensor,
+      CoefficientClosedStructure.evaluation] using! (SB.adjunction P).homEquiv_counit T Q h
+  apply (SB.transpose _ (F.obj P') (F.obj Q')).symm.injective
+  rw [hu, hu]
+  have tc {U V Z R : B} (a : U ⟶ V) (b : V ⟶ Z) :
+      SB.tensor.map (Prod.mkHom (a ≫ b) (𝟙 R)) =
+        SB.tensor.map (Prod.mkHom a (𝟙 R)) ≫ SB.tensor.map (Prod.mkHom b (𝟙 R)) := by
+    rw [← SB.tensor.map_comp]
+    congr 1
+    ext <;> simp
+  simp only [tc, Category.assoc]
+  rw [scalarEvaluation_naturality SB _ _ _ _ (F.map f) (F.map g)]
+  have beta (U V : A) :
+      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ U V) (𝟙 (F.obj U))) ≫
+        SB.evaluation (F.obj U) (F.obj V) =
+          μ.inv.app (HA.obj (op U, V), U) ≫ F.map (SA.evaluation U V) := by
+    rw [← hu, coefficientBaseChangeHom, Equiv.symm_apply_apply]
+  rw [beta]
+  have hn := μ.inv.naturality (Prod.mkHom (HA.map (Prod.mkHom f.op g)) (𝟙 P'))
+  have hn' := μ.inv.naturality (Prod.mkHom (𝟙 (HA.obj (op P, Q))) f)
+  dsimp only [Functor.comp_map, Functor.prod_map] at hn hn'
+  erw [F.map_id] at hn
+  erw [F.map_id] at hn'
+  rw [← Category.assoc, hn, Category.assoc, ← F.map_comp, scalarEvaluation_naturality SA]
+  rw [F.map_comp, F.map_comp]
+  have ht : SB.tensor.map
+      (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P'))) ≫
+      SB.tensor.map (Prod.mkHom (𝟙 _) (F.map f)) =
+    SB.tensor.map (Prod.mkHom (𝟙 _) (F.map f)) ≫
+      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P))) := by
+    rw [← SB.tensor.map_comp, ← SB.tensor.map_comp]
+    congr 1
+    ext <;> simp
+  rw [reassoc_of% ht, reassoc_of% beta P Q, ← reassoc_of% hn']
+
+
 /-- Naturality of the evaluation-defined ordinary Hom comparison in both variables.
 Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension).
 Proof: uncurry both sides. Tensor-comparison naturality and evaluation naturality
@@ -548,7 +785,9 @@ theorem scalarHomOrdinary_naturality (W : AlgebraicGeometry.Scheme.{u})
         (integralDerivedInternalHom l L W).map (CategoryTheory.Prod.mkHom
           ((integralOrdinaryDerivedScalar l E L ι W).map a).op
           ((integralOrdinaryDerivedScalar l E L ι W).map b)) := by
-  sorry
+  exact scalarBaseChangeHom_naturality (scalarIntegralClosed l E W)
+    (scalarIntegralClosed l L W) (integralOrdinaryDerivedScalar l E L ι W)
+    (scalarClosedTensor l E L ι W) M N M' N' a b
 
 /-- The prescribed comparisons commute with coefficient towers before completion.
 Conjugation by scalarCompletion gives the completed tower identities, with the

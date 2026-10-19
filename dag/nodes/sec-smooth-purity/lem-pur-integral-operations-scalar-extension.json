@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "The derived-completeness hypothesis on $K$ gives the specified Roos triangle [def-weil-derived-complete]. Step 2 shows that the canonical quotient maps $[R_W\\xrightarrow{t^n}R_W]\\to(A/t^nA)_W$ are quasi-isomorphisms, so $t$ is injective on $R_W$ and these quotients are its quotient sheaves. Choose a K-flat representative by [lem-pc-kflat-resolution] and apply [lem-pur-derived-complete-koszul-reconstruction]: it identifies the strict towers in their derived category and gives an isomorphism $K\\cong C_RK$ respecting the quotient projections. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] provides the second Roos triangle required for this comparison.",
+   "text": "The derived-completeness hypothesis on $K$ gives the specified Roos triangle [def-weil-derived-complete]. Step 2 shows that the canonical quotient maps $[R_W\\xrightarrow{t^n}R_W]\\to(A/t^nA)_W$ are quasi-isomorphisms, so $t$ is injective on $R_W$ and these quotients are its quotient sheaves. Choose a K-flat representative by [lem-pc-kflat-resolution] and apply [lem-pur-derived-complete-koszul-reconstruction]: it identifies the strict towers in their derived category and gives an isomorphism $K\\cong C_RK$ respecting the quotient projections. The strict-tower homotopy-limit theorem [lem-weil-pbc-ringed-strict-tower-homotopy-limit] provides the second Roos triangle required for this comparison. For scalarRoosMap_existsUnique, construct the comparison for any additive functor directly by mappingCocone.lift: map the source cocone to the cocone of the mapped boundary, then use the product comparison square to reach the target cocone. The boundary square follows after every product projection. The two diagonal coordinate equations and the cocone degreewise biproduct identity give uniqueness; no preservation of infinite products is required for the existence of this comparison map.",
    "uses": [
     "def-weil-derived-complete",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
@@ -116,12 +116,14 @@
    }
   },
   {
-   "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Let $F_R$ and $F_S$ be the ambient derived module pullbacks for $f$, with coefficient maps $f^{-1}R_Y\\to R_X$ and $f^{-1}S_Y\\to S_X$. These maps are induced by the finite quotient maps and their limits; no assertion $f^{-1}R_Y=R_X$ is needed. The completed definitions [def-pur-integral-derived-operations] give $Lf_E^*K=C_R F_RK$ and $Lf_L^*T_YK=C_S F_ST_YK$. To check these equalities on towers, the quotient model from Step 2 identifies $F_RP\\otimes_{R_X}(A/t^nA)_X$ with $f^{-1}(P\\otimes_{R_Y}(A/t^nA)_Y)$; finite constant coefficient inverse image is exact by [prop-weil-pbc-proetale-constant-exact]. K-flatness of ambient pullbacks is supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The coefficient description $S_W=R_W\\otimes_A B$ gives the ordinary comparison $T_XF_RP\\cong F_S T_YP$: termwise both are $S_X\\otimes_{f^{-1}R_Y}f^{-1}P$, using $f^{-1}(P\\otimes_{R_Y}S_Y)=f^{-1}P\\otimes_{f^{-1}R_Y}f^{-1}S_Y$ and cancelling $f^{-1}S_Y$ in the next tensor. In a basis this is the finite-sum comparison, and it is independent of that basis. Apply Step 7 to $F_RK$, and use that $C_RF_RK$ is complete by Step 5. This gives $T_X Lf_E^*K\\cong C_S T_XF_RK\\cong C_S F_ST_YK=Lf_L^*T_YK$, the first claimed isomorphism.",
+   "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Let $F_R$ and $F_S$ be the ambient derived module pullbacks for $f$, with coefficient maps $f^{-1}R_Y\\to R_X$ and $f^{-1}S_Y\\to S_X$. These maps are induced by the finite quotient maps and their limits; no assertion $f^{-1}R_Y=R_X$ is needed. The completed definitions [def-pur-integral-derived-operations] give $Lf_E^*K=C_R F_RK$ and $Lf_L^*T_YK=C_S F_ST_YK$. To check these equalities on towers, the quotient model from Step 2 identifies $F_RP\\otimes_{R_X}(A/t^nA)_X$ with $f^{-1}(P\\otimes_{R_Y}(A/t^nA)_Y)$; finite constant coefficient inverse image is exact by [prop-weil-pbc-proetale-constant-exact]. K-flatness of ambient pullbacks is supplied by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The coefficient description $S_W=R_W\\otimes_A B$ gives the ordinary comparison $T_XF_RP\\cong F_S T_YP$: termwise both are $S_X\\otimes_{f^{-1}R_Y}f^{-1}P$, using $f^{-1}(P\\otimes_{R_Y}S_Y)=f^{-1}P\\otimes_{f^{-1}R_Y}f^{-1}S_Y$ and cancelling $f^{-1}S_Y$ in the next tensor. In a basis this is the finite-sum comparison, and it is independent of that basis. Apply Step 7 to $F_RK$, and use that $C_RF_RK$ is complete by Step 5. This gives $T_X Lf_E^*K\\cong C_S T_XF_RK\\cong C_S F_ST_YK=Lf_L^*T_YK$, the first claimed isomorphism. The preservation of good representatives (scalarGood) uses the general coefficient-change theorem [lem-pur-kflat-change-of-rings], which does not need finite freeness. The object and morphism formulas of integralOrdinaryScalarWitness give a degreewise isomorphism to changeOfRingsComplex. Convert IsFlatOnSite to exactness of the canonical tensorRight using [lem-weil-pbc-independent-sheaf-tensor-colimits], apply changeOfRings_isKFlat_of_flat_terms, and transport both K-flatness and termwise flatness back along that isomorphism.",
    "uses": [
     "lem-pc-kflat-resolution",
     "def-pur-integral-derived-operations",
     "prop-weil-pbc-proetale-constant-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -168,7 +170,7 @@
    }
   },
   {
-   "text": "All comparisons above come from strict-tower maps, tensor universal maps, and evaluation, so they are natural in their inputs. For $E\\subset L\\subset L'$, write $S'_W=\\widehat{\\mathcal O}_{L',W}$. Repeat Steps 1--2 and the scalar-extension construction of Step 7 for both inclusions. The integral composition map is induced by $(P\\otimes_{R_W}S_W)\\otimes_{S_W}S'_W\\to P\\otimes_{R_W}S'_W$, $(p\\otimes s)\\otimes s'\\mapsto p\\otimes ss'$, and the completion comparisons. The two pullback routes both send a local tensor $a\\otimes(p\\otimes s)\\otimes s'$ to $a\\otimes p\\otimes ss'$. The two tensor routes both send $(m\\otimes s)\\otimes(n\\otimes t')\\otimes u'$ to $(m\\otimes n)\\otimes st'u'$ after the appropriate ring embeddings. For internal Hom, uncurry the two routes using the termwise adjunction in Step 11: both send $(h\\otimes s\\otimes s',m\\otimes t')$ to $h(m)\\otimes ss't'$ in $N\\otimes S'_W$. These equalities hold on sheaf tensors because local pure tensors generate, and commute with differentials, quotients, transition maps, products and cones. Thus they remain equal in the derived categories and after completion. The generator formulas define the maps; the bases were used only to prove they are invertible. For $L=E$, scalar extension is $C_R$ and its canonical comparison with the identity on complete objects is the completion unit of [lem-weil-pbc-ringed-koszul-completion-reflector]; under this identification all three formulas are identities. This proves the identity clause in its usual categorical sense (the originally displayed functor is a product-cone construction, not literally the identity on representatives). No rational-composition statement is used to infer integral coherence.",
+   "text": "All comparisons above come from strict-tower maps, tensor universal maps, and evaluation, so they are natural in their inputs. For $E\\subset L\\subset L'$, write $S'_W=\\widehat{\\mathcal O}_{L',W}$. Repeat Steps 1--2 and the scalar-extension construction of Step 7 for both inclusions. The integral composition map is induced by $(P\\otimes_{R_W}S_W)\\otimes_{S_W}S'_W\\to P\\otimes_{R_W}S'_W$, $(p\\otimes s)\\otimes s'\\mapsto p\\otimes ss'$, and the completion comparisons. The two pullback routes both send a local tensor $a\\otimes(p\\otimes s)\\otimes s'$ to $a\\otimes p\\otimes ss'$. The two tensor routes both send $(m\\otimes s)\\otimes(n\\otimes t')\\otimes u'$ to $(m\\otimes n)\\otimes st'u'$ after the appropriate ring embeddings. For internal Hom, uncurry the two routes using the termwise adjunction in Step 11: both send $(h\\otimes s\\otimes s',m\\otimes t')$ to $h(m)\\otimes ss't'$ in $N\\otimes S'_W$. These equalities hold on sheaf tensors because local pure tensors generate, and commute with differentials, quotients, transition maps, products and cones. Thus they remain equal in the derived categories and after completion. The generator formulas define the maps; the bases were used only to prove they are invertible. For $L=E$, scalar extension is $C_R$ and its canonical comparison with the identity on complete objects is the completion unit of [lem-weil-pbc-ringed-koszul-completion-reflector]; under this identification all three formulas are identities. This proves the identity clause in its usual categorical sense (the originally displayed functor is a product-cone construction, not literally the identity on representatives). No rational-composition statement is used to infer integral coherence. In Lean, scalarHomOrdinary_naturality is proved for arbitrary coefficient closed structures and any functor with a tensor comparison: uncurry both sides, use the inverse tensor-comparison naturality squares, and apply evaluation naturality in both variables. Injectivity of the transpose equivalence then proves the desired equation without any finite-free or completeness argument.",
    "uses": [
     "lem-weil-pbc-ringed-koszul-completion-reflector"
    ],
@@ -202,12 +204,15 @@
   "lem-weil-pbc-ringed-derived-complete-elements-ideal",
   "def-pur-derived-internal-hom",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-kinjective-restrict-localized"
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral/common-stage clause; finite-free extension argument written here using the cited Stacks ringed-site results and Bhatt--Scholze §§3.4--3.5"
+  "place": "Integral/common-stage clause; finite-free extension argument written here using the cited Stacks ringed-site results and Bhatt--Scholze §§3.4--3.5",
+  "note": "Y3, 2026-10-19: partial Lean proof closes the additive Roos comparison, preservation of good representatives by general change of rings, and evaluation-defined Hom naturality. The other proof steps remain obligations; no new statements or holes are introduced."
  },
  "mathlib_searches": [
   {
@@ -464,5 +469,15 @@
   "from_unit": "sk-def-sf-operations",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261019T034354-L-426362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
