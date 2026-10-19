@@ -16,9 +16,54 @@
   "sk-def-sfb-derived-tensor-hom",
   "def-sfb-modobj-relative-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The existing coproduct and tensor-colimit-preservation instances give both graded tensors, both signed cochain totals, both triple comparison properties and quadruple extensionality. These are the generic Mathlib graded-object and total-complex instance constructions, specialized to the internal and section module categories of [def-pd-proetale-section-module-functors] and the relative tensor [def-sfb-modobj-relative-tensor].",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold derivedFunctor to the exact section equivalence functor mapped to derived categories, and apply Functor.isEquivalence_mapDerivedCategory. The section module category already has K-injective resolutions by its Grothendieck abelian instance. No resolution or equivalence is chosen from a bare existence assertion.",
+   "uses": [
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the natural ordinary tensor comparison of [lem-pe-internal-section-tensor-comparison] to identify right tensor by E(M) with E inverse, right tensor by M, and E. Exactness of an equivalence and flatness of M make this composite exact. Symmetry identifies left tensor with right tensor, so E(M) is flat. Conjugate an existing internal functorial flat cover by E inverse and E; its augmentation is the image of the internal augmentation followed by the equivalence counit. Functors that are equivalences preserve epimorphisms, so this is a functorial flat cover on the section module category.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write E for the derived equivalence and B for the existing internal derived tensor of [sk-def-sfb-derived-tensor-hom]. Whisker the product of E.unitIso with itself by B followed by E.functor. This gives the required tensor comparison. Its component formula is definitionally the normalization in the statement. Equality of the normalized components implies equality of the natural transformations by function extensionality and of the isomorphisms by Iso.ext.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the functor-level totalTensor object. The resulting object is definitionally the same CochainComplex.mapBifunctor signed total; reflexivity proves totalTensor_obj. All definitions and their localization maps retain their existing bodies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-sfb-modobj-relative-tensor",
+  "lem-pe-internal-section-tensor-comparison",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "U6 Lean proof of the existing construction lemmas: Tags 06YN and 06YU for sum-total tensor and flat resolutions; derived.tex Tags 05RU and 070H for localization and K-injective resolutions. The flat-cover transport and normalization proof are written out in Lean."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -163,5 +208,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after RETURN (e3bb1be5). F1 fixed: derivedAdjunction is now ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft (pullback.leftDerivedFunctorIsoMapDerivedCategory), the canonical derived ringed adjunction (Adjunction.lean:173), so derived_homEquiv has content and projection is the α of lem-weil-pbc-ringed-projection-mate-exact. F2 fixed: new def node def-pd-section-module-operations-data (module SectionModuleOperationsData, 17 transparent abbrevs, 0 sorry, only def stmt_deps) replaces the two theorem nodes in the stmt_deps of the item and def-pd-proetale-section-module-functors; the theorems are now proof_deps. Aliasing rather than moving is accepted (no landed module rewritten, no duplicate construction). F3 fixed: clause-by-clause second reading. §1(C) statement_change only makes the canonical ringed adjunction explicit (Stacks 07A6/0B56); citers lem-pd-condensed-proper-projection-formula and det-thm-sf-pf-adic-projection checked, holds:true correct. All five modules compile clean with nt_compile --json (9.6/22.4/25.0/32.4/22.3 s). lean.statement verbatim for all five nodes; all declarations present; no sorry in definition bodies; docstrings with source and blueprint tags; no extra assumptions or universe restrictions. Minor: conjugatePullIso and conjugatePushIso are now unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261019T034315-L-419687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

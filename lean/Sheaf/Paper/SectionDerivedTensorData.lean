@@ -21,29 +21,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Sheaf.Paper.ProjectionMateExact
 
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Sheaf.Paper.RingedTopoiTensorComparisonData
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Mathlib.CategoryTheory.Monoidal.Functor
-import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
-import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.SheafTensor
 
 /-! # Canonical derived section-module tensor data
 
@@ -93,7 +70,8 @@ Proof: the degree-n index consists of pairs of integers with sum n, hence is
 countable. The internal Grothendieck module category has this coproduct. -/
 @[instance] theorem internal_hasGradedTensor (X : Scheme.{u})
     (P Q : GradedObject ℤ (internalModules Λ X)) : GradedObject.HasTensor P Q := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Countable coproducts supply the section-module graded tensor in every degree.
 Source: Stacks 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -101,7 +79,8 @@ Proof: use the coproduct over integer pairs of fixed total degree, whose existen
 transfers through the fixed section-module equivalence. -/
 @[instance] theorem section_hasGradedTensor (X : Scheme.{u})
     (P Q : GradedObject ℤ (modules Λ X)) : GradedObject.HasTensor P Q := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- The internal signed sum-total of two unbounded cochain complexes exists.
 Source: Stacks 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -110,7 +89,8 @@ The two differential components, with the sign on the second, give its total. -/
 @[instance] theorem internal_hasCochainTotal (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     CochainComplex.HasMapBifunctor P Q (curriedTensor (internalModules Λ X)) := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- The section-module signed sum-total of two unbounded cochain complexes exists.
 Source: Stacks 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -119,7 +99,7 @@ the standard signed differential is the one of the existing total construction. 
 @[instance] theorem section_hasCochainTotal (X : Scheme.{u})
     (P Q : CochainComplex (modules Λ X) ℤ) :
     CochainComplex.HasMapBifunctor P Q (curriedTensor (modules Λ X)) := by
-  sorry
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -130,7 +110,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem internal_goodTensorLeft (X : Scheme.{u})
     (P Q S : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q S := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -141,7 +122,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem internal_goodTensorRight (X : Scheme.{u})
     (P Q S : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q S := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -152,7 +134,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem internal_quadrupleTensorExt (X : Scheme.{u})
     (P Q S T : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q S T := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -163,7 +146,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem section_goodTensorLeft (X : Scheme.{u})
     (P Q S : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q S := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -174,7 +158,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem section_goodTensorRight (X : Scheme.{u})
     (P Q S : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q S := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
@@ -185,7 +170,8 @@ comparison universal properties of the existing graded tensor construction. -/
 @[instance] theorem section_quadrupleTensorExt (X : Scheme.{u})
     (P Q S T : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q S T := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- The existing internal total derived pullback, with its category arguments fixed.
 Source: Stacks 07A6 (blueprint: def-pd-section-derived-tensor-data). -/
@@ -222,7 +208,8 @@ Proof: localize the inverse and the original unit and counit; exactness preserve
 quasi-isomorphisms, so the two triangle identities survive localization. -/
 @[instance] theorem derivedFunctor_isEquivalence (X : Scheme.{u}) :
     (derivedFunctor Λ X).IsEquivalence := by
-  sorry
+  change (equivalence Λ X).functor.mapDerivedCategory.IsEquivalence
+  infer_instance
 
 /-- The induced derived equivalence, with the fixed localization functor as forward functor.
 Source: Stacks 05RU (blueprint: def-pd-section-derived-tensor-data). -/
@@ -245,7 +232,8 @@ when its underlying linear maps give that same null-homotopy on the other. Trans
 the functorial internal K-injective resolution through the equivalence. -/
 @[instance] theorem section_hasKInjectiveResolutions (X : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (modules Λ X) := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  infer_instance
 
 /-- Functorial flat resolutions transfer through the fixed exact tensor equivalence.
 Source: Stacks 03EK and 06YU (blueprint: def-pd-section-derived-tensor-data).
@@ -255,7 +243,41 @@ internal_section_tensor_comparison preserves flat objects and exactness, hence
 preserves the flatness and epimorphism requirements of this resolution. -/
 @[instance] theorem section_hasFunctorialFlatResolutions (X : Scheme.{u}) :
     Abelian.HasFunctorialFlatResolution (modules Λ X) := by
-  sorry
+  have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
+  classical
+  let E := equivalence Λ X
+  obtain ⟨_, e, _, _, _, hn, _⟩ :=
+    InternalAbelianSheafModule.internal_section_tensor_comparison
+      (Scheme.ProEt.topology X) (condensedRingObj Λ X)
+  have hflat (M : internalModules Λ X) (hM : ObjectProperty.flat M) :
+      ObjectProperty.flat (E.functor.obj M) := by
+    let i : E.functor ⋙ tensorRight (E.functor.obj M) ≅ tensorRight M ⋙ E.functor :=
+      NatIso.ofComponents (fun N ↦ (e N M).symm) (by
+        intro N N' f
+        dsimp
+        rw [← cancel_epi (e N M).hom, ← cancel_mono (e N' M).hom]
+        simpa using (hn N N' M M f (𝟙 M)).symm)
+    let j : tensorRight (E.functor.obj M) ≅ E.inverse ⋙ tensorRight M ⋙ E.functor :=
+      (Functor.leftUnitor _).symm ≪≫
+        Functor.isoWhiskerRight E.counitIso.symm _ ≪≫
+        Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft E.inverse i
+    have := hM.tensorRight.preservesFiniteLimits
+    have := hM.tensorRight.preservesFiniteColimits
+    have hright : exactFunctor _ _ (tensorRight (E.functor.obj M)) :=
+      (exactFunctor _ _).prop_of_iso j.symm
+        ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩)
+    exact ⟨(exactFunctor _ _).prop_of_iso
+      (BraidedCategory.tensorLeftIsoTensorRight (E.functor.obj M)).symm hright, hright⟩
+  obtain ⟨L⟩ := (inferInstance : Abelian.HasFunctorialFlatResolution (internalModules Λ X))
+  let T := E.inverse ⋙ L.F ⋙ ObjectProperty.flat.ι ⋙ E.functor
+  let π : T ⟶ 𝟭 (modules Λ X) :=
+    Functor.whiskerLeft E.inverse (Functor.whiskerRight L.π E.functor) ≫ E.counitIso.hom
+  refine ⟨{ F := ObjectProperty.lift _ T (fun M ↦ hflat _ (L.F.obj (E.inverse.obj M)).property)
+            π := π
+            epi_π_app := ?_ }⟩
+  intro M
+  dsimp [π]
+  infer_instance
 
 /-- Actual K-injective derived ringed-site direct image.
 Source: Stacks 07A6 (blueprint: def-pd-section-derived-tensor-data). -/
@@ -295,7 +317,18 @@ theorem tensorComparison_existsUnique (X : Scheme.{u}) :
                 ((derivedEquivalence Λ X).inverse.obj (((derivedEquivalence Λ X).functor).obj
       M))).map
                   ((derivedEquivalence Λ X).unitIso.hom.app N)) := by
-  sorry
+  let E := derivedEquivalence Λ X
+  let B := Functor.uncurry.obj (CondensedRing.derivedTensor Λ X)
+  let t : B ⋙ E.functor ≅ E.functor.prod E.functor ⋙ tensor Λ X :=
+    Functor.isoWhiskerRight (NatIso.prod E.unitIso E.unitIso) (B ⋙ E.functor)
+  refine ⟨t, ?_, ?_⟩
+  · intro M N
+    rfl
+  · intro s hs
+    apply Iso.ext
+    apply NatTrans.ext
+    funext ⟨M, N⟩
+    exact hs M N
 
 /-- The tensor comparison selected by its unique equivalence-unit normalization.
 Source: Stacks 06YU (blueprint: def-pd-section-derived-tensor-data). -/
@@ -319,7 +352,7 @@ is exactly the total complex mapBifunctor with the up-integer total shape. -/
 theorem totalTensor_obj (X : Scheme.{u}) (P Q : CochainComplex (modules Λ X) ℤ) :
     (totalTensor Λ X).obj (P, Q) =
       CochainComplex.mapBifunctor P Q (curriedTensor (modules Λ X)) := by
-  sorry
+  rfl
 
 /-- The specified localization comparison of the fixed termwise section equivalence.
 Source: Stacks 05RU and 06YU (blueprint: def-pd-section-derived-tensor-data). -/
