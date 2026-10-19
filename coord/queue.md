@@ -2,13 +2,10 @@
 
 765 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (1)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `lem-sf-constructible-exceptional-coefficient-coherence` | - | none |
 
-## Stage 2: nodes to state (39)
+## Stage 2: nodes to state (37)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,9 +24,7 @@
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
-| `thm-sf-global-duality` | 1 | state | 2 |
 | `prop-sf-pf-coherence` | 2 | state | 2 |
-| `prop-sf-pf-reduction` | 2 | state | 2 |
 | `cor-sf-duality-pullback` | 1 | state | 1 |
 | `fix-lem-tensor-adjunction` | 1 | state | 1 |
 | `lem-coef-cartesian-section-adjoint-mates` | 1 | state | 1 |
@@ -54,7 +49,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 92 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (725)
+## Stage 3: modules to prove (728)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -141,6 +136,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralReductionTowerUnrestricted` | 7 | 1 | proof | route |
 | `Sheaf.Paper.IntegralTensorProduct` | 7 | 1 | proof | route |
 | `Sheaf.Paper.PointSectionsDerivedReduction` | 7 | 1 | proof | route |
+| `Sheaf.Paper.PurityRelativeKummer` | 7 | 1 | proof | route |
 | `Sheaf.Paper.SupportedHomPullback` | 7 | 1 | proof | route |
 | `Sheaf.RingTheory.PseudoCoherentInverseRingReconstructionModels` | 7 | 1 | proof | route |
 | `Sheaf.SecSmoothPurity.ProperSupportFibreRestrictionCompatibility` | 7 | 1 | proof | route |
@@ -426,6 +422,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SupportedCupFunctoriality` | 11 | 13 | proof | 2 |
 | `Sheaf.SixFunctors.IntegralCompactificationSystemRealization` | 11 | 1 | proof | 2 |
 | `Sheaf.SixFunctors.SchemeGeometricFrobenius` | 11 | 3 | proof | 2 |
+| `Sheaf.AlgebraicGeometry.CondensedModulePullbackExact` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CompactSupportCondensedRealization` | - | 33 | proof | 2 |
 | `Sheaf.Paper.CompletedTensorHomTranspose` | - | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedNakayama` | - | 1 | proof | 2 |
@@ -502,7 +499,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | proof | 3 |
 | `Sheaf.Paper.PurityGysinStructure` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.PurityRankOneLocalCalculation` | 7 | 1 | proof | 3 |
-| `Sheaf.Paper.PurityRelativeKummer` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.RationalStalkExact` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.ResidueLisseProjectiveModels` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.RingedPushforwardCompletion` | 7 | 1 | proof | 3 |
@@ -692,8 +688,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleIsoDescent` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteForwardProductSymmetry` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FrobeniusPullbackComparisonCoherence` | - | 1 | proof | 5 |
+| `Sheaf.Paper.GlobalVerdierDuality` | - | 1 | proof | 5 |
 | `Sheaf.Paper.IteratedWeilCocycle` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PointCompletedEvaluation` | - | 3 | proof | 5 |
+| `Sheaf.Paper.ProjectionFiniteReduction` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PurReductionLimitShiftAdjunction` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SystemClopenTensorCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SystemTensorMateArrows` | - | 10 | proof | 5 |
