@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q30
+Authors: SHEAF groups Q30 and G3
 -/
 module
 
@@ -14,9 +14,10 @@ public import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.KFlat
+import all Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
+import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-! # Completed pullback on the published completed-coefficient categories
@@ -34,6 +35,121 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.ProEtale
+private theorem commShift_ext
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ] {F : C ⥤ D}
+    (s t : F.CommShift ℤ)
+    (h : ∀ n : ℤ, Functor.commShiftIso F (self := s) n =
+      Functor.commShiftIso F (self := t) n) : s = t := by
+  cases s
+  cases t
+  congr
+  funext n
+  exact h n
+
+-- The comparison determines the shift structure by Kan uniqueness, degree by degree.
+private theorem rightKanShift_unique
+    {C : Type*} [Category* C] [HasShift C ℤ]
+    {D : Type*} [Category* D] [HasShift D ℤ]
+    {E : Type*} [Category* E] [HasShift E ℤ]
+    (F : C ⥤ E) [F.CommShift ℤ] (Q : C ⥤ D) [Q.CommShift ℤ]
+    (LF : D ⥤ E) (α : Q ⋙ LF ⟶ F) [LF.IsRightKanExtension α]
+    (s t : LF.CommShift ℤ)
+    (hs : letI := s; NatTrans.CommShift α ℤ)
+    (ht : letI := t; NatTrans.CommShift α ℤ) : s = t := by
+  have square (q : LF.CommShift ℤ) (hq : letI := q; NatTrans.CommShift α ℤ)
+      (n : ℤ) (X : C) :
+      LF.map ((Q.commShiftIso n).hom.app X) ≫
+          (Functor.commShiftIso LF (self := q) n).hom.app (Q.obj X) ≫
+            (shiftFunctor E n).map (α.app X) =
+        α.app ((shiftFunctor C n).obj X) ≫ (F.commShiftIso n).hom.app X := by
+    let := q
+    have := hq
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm α n X
+  have he (n : ℤ) : Functor.commShiftIso LF (self := s) n =
+      Functor.commShiftIso LF (self := t) n := by
+    let H := shiftFunctor E n
+    let P := Functor.RightExtension.postcompose₂ Q F H
+    let : IsIso (𝟙 (F ⋙ H)) := inferInstance
+    let : P.IsEquivalence := by
+      dsimp [P, Functor.RightExtension.postcompose₂]
+      let a : ((Functor.whiskeringRight D E E).obj H) ⋙
+          (Functor.whiskeringLeft C D E).obj Q ⟶
+          (Functor.whiskeringLeft C D E).obj Q ⋙
+            ((Functor.whiskeringRight C E E).obj H) :=
+        { app G := (Functor.associator Q G H).inv }
+      let : IsIso a := by apply NatIso.isIso_of_isIso_app
+      exact CostructuredArrow.isEquivalenceMap₂ a (𝟙 _)
+    let γ := (Functor.associator Q LF H).inv ≫ whiskerRight α H
+    have : (LF ⋙ H).IsRightKanExtension γ := by
+      constructor
+      refine ⟨IsTerminal.ofIso
+        (IsTerminal.isTerminalObj P _ (LF.isUniversalOfIsRightKanExtension α)) ?_⟩
+      exact Functor.RightExtension.postcompose₂ObjMkIso H α
+    apply Iso.ext
+    apply (LF ⋙ H).hom_ext_of_isRightKanExtension γ
+    ext X
+    simp only [γ, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp]
+    apply (cancel_epi (LF.map ((Q.commShiftIso n).hom.app X))).1
+    simpa only [Category.assoc] using (square s hs n X).trans (square t ht n X).symm
+  exact commShift_ext s t he
+
+-- Transport the unit along the K-injective equivalence, then detect it on resolutions.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem actualRightDerivedUnitShift
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] : NatTrans.CommShift F.rightDerivedFunctorUnit ℤ := by
+  let inj := ObjectProperty.ι (HomotopyCategory.subcategoryAcyclic C).rightOrthogonal
+  let E := HomotopyCategory.KInjectives.equivalence C
+  let G := inj ⋙ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  have hI : NatTrans.CommShift F.rightDerivedFunctorIsoKInjectives.inv ℤ :=
+    Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorIsoKInjectives.symm ℤ
+  have hinv (Y : DerivedCategory C) :
+      F.rightDerivedFunctorIsoKInjectives.inv.app Y =
+        F.rightDerivedFunctorUnit.app (inj.obj (E.inverse.obj Y)) ≫
+          F.rightDerivedFunctor.map (E.counit.app Y) := by
+    simp [Functor.rightDerivedFunctorIsoKInjectives, inj, E]
+  have hE : E.CommShift ℤ := by infer_instance
+  have hU : NatTrans.CommShift E.unitIso.hom ℤ := by infer_instance
+  have heq : whiskerLeft inj F.rightDerivedFunctorUnit =
+      (leftUnitor G).inv ≫ whiskerRight E.unitIso.hom G ≫
+        (associator E.functor E.inverse G).hom ≫
+        whiskerLeft E.functor F.rightDerivedFunctorIsoKInjectives.inv ≫
+        (associator inj DerivedCategory.Qh F.rightDerivedFunctor).hom := by
+    ext X
+    simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+      associator_hom_app, leftUnitor_inv_app, Category.id_comp, hinv]
+    simp only [Category.assoc]
+    erw [Category.id_comp, Category.comp_id]
+    have h := F.rightDerivedFunctorUnit.naturality (inj.map (E.unit.app X))
+    dsimp only [Functor.comp_map, Functor.comp_obj] at h
+    change _ = (F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
+      (inj.map (E.unit.app X)) ≫ _
+    erw [reassoc_of% h]
+    rw [← CategoryTheory.Functor.map_comp]
+    change _ = _ ≫ F.rightDerivedFunctor.map
+      (E.functor.map (E.unit.app X) ≫ E.counit.app (E.functor.obj X))
+    erw [E.functor_unit_comp]
+    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have : NatTrans.CommShift (whiskerLeft inj F.rightDerivedFunctorUnit) ℤ := by
+    rw [heq]
+    infer_instance
+  refine NatTrans.CommShift.of_whiskerLeft _ inj (fun K ↦ ?_)
+  obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+  obtain ⟨I, hI, i, hi, _⟩ := CategoryTheory.Abelian.HasKInjectiveResolutions.exists_isKInjective P
+  have := hI
+  have := hi
+  refine ⟨HomotopyCategory.KInjectives.mk I,
+    (HomotopyCategory.quotient C (.up ℤ)).map i, ?_⟩
+  change IsIso (F.rightDerivedFunctor.map (DerivedCategory.Q.map i))
+  infer_instance
+
 namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A)
@@ -89,7 +205,50 @@ theorem pbcActualModuleAdjunction_exists :
     ∃! adj : pbcActualModulePull g d ⊣ pbcActualModulePush g d,
       ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt) (x : M.val.obj (op U)),
         (adj.unit.app M).val.app (op U) x = pbcActualModuleUnitSection g d M U x := by
-  sorry
+  let : (proEtaleModelBaseChange g).IsContinuous
+      (proEtaleModelTopology Y) (proEtaleModelTopology X) :=
+    proEtaleModelBaseChange_isContinuous g
+  let : (AsSmall.up : Y.ProEt ⥤ proEtaleSiteModel Y).IsContinuous
+      (ProEt.topology Y) (proEtaleModelTopology Y) := proEtaleModelUp_isContinuous Y
+  let : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsContinuous
+      (ProEt.topology X) (proEtaleModelTopology X) := proEtaleModelUp_isContinuous X
+  let R := pbcAdicCompletion Y d
+  let φ := completedCoefficientMap g d
+  obtain ⟨adjS, hadjS⟩ :=
+    SheafOfModules.ScalarReductionProof.tensorAdjunction_of_identifications φ
+      (reductionChange X φ) (reductionChangeExistence X φ).choose_spec.choose
+      (reductionChangeExistence X φ).choose_spec.choose_spec.choose
+  let adj := (canonicalAdjunction g R).comp adjS
+  let e : SheafOfModules.restrictScalars ((sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ) ⋙
+      AlgebraicGeometry.Scheme.T g R ≅
+      pbcActualModulePush g d := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+      exact PresheafOfModules.isoMk (fun U ↦ Iso.refl _) (by intros; rfl)
+    · intro M N a
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro U
+      rfl
+  let a : pbcActualModulePull g d ⊣ pbcActualModulePush g d := adj.ofNatIsoRight e
+  have ha : ∀ (M : pbcModules Y (pbcAdicCompletion Y d)) (U : Y.ProEt)
+      (x : M.val.obj (op U)),
+      (a.unit.app M).val.app (op U) x = pbcActualModuleUnitSection g d M U x := by
+    intro M U x
+    change ((adjS.unit.app ((proEtaleModuleInverseImage g R).obj M)).val.app
+      (op ((proEtaleBaseChange g).obj U))
+        (((canonicalAdjunction g R).unit.app M).val.app (op U) x)) = _
+    rw [canonicalUnit_sections, hadjS]
+    rfl
+  refine ⟨a, ha, ?_⟩
+  intro a' ha'
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  ext U x
+  exact (ha' M U.unop x).trans (ha M U.unop x).symm
 
 /-- The actual module adjunction, with the inverse-image tensor unit retained.
 Source: Stacks 03D2 and 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -101,7 +260,7 @@ Proof: sectionwise direct image preserves sums of maps. Sheafified inverse image
 and its scalar tensor are additive, by their ordinary module construction. -/
 theorem pbcActualModuleOperations_additive :
     (pbcActualModulePull g d).Additive ∧ (pbcActualModulePush g d).Additive := by
-  sorry
+  exact ⟨completedModulePullback_additive g d, completedModuleDirectImage_additive g d⟩
 
 /-- Additivity of the specified module pullback.
 Source: 03D7 (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -115,15 +274,15 @@ instance pbcActualModulePush_additive : (pbcActualModulePush g d).Additive :=
 
 /-- K-flat resolving complexes define the actual total left derived pullback.
 Source: 099N, 0D6D (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: use the one-object case of diagram-kflat-replacements, with flat terms.
-Module inverse image and tensor preserve quasi-isomorphisms between these resolving
-objects. Apply left-derived-from-kflat-class; it gives the universal derived
-counit, invertible on that resolving class. No site universes are identified. -/
+Proof: completedOrdinaryPullback_exists already supplies a universal left derived
+pair for this exact module functor. Its universal pair witnesses the required
+HasLeftDerivedFunctor instance; no second resolution construction is needed. -/
 @[instance] theorem pbcActualPull_hasLeftDerived :
     ((pbcActualModulePull g d).mapHomotopyCategory (.up ℤ) ⋙
       DerivedCategory.Qh).HasLeftDerivedFunctor
         (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  sorry
+  have h := (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
+  exact @Functor.HasLeftDerivedFunctor.mk' _ _ _ _ _ _ _ _ _ _ _ _ h
 
 /-- The published ordinary total derived pullback with its fixed resolving pair.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -159,12 +318,14 @@ def pbcActualPushUnit :
 
 /-- Universality of the named ordinary left derived pair.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
-Proof: unfold its totalLeftDerived and counit; the universal Kan-extension
-construction gives IsLeftDerivedFunctor. -/
+Proof: unfold the named functor and counit. They are the universal pair selected
+from completedOrdinaryPullback_exists, whose first property is the assertion. -/
 @[instance] theorem pbcActualPullUniversal :
     (pbcActualDerivedPull g d).IsLeftDerivedFunctor (pbcActualPullCounit g d)
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  sorry
+  unfold pbcActualDerivedPull completedOrdinaryPullback pbcActualPullCounit
+    completedOrdinaryPullbackCounit
+  exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
 
 /-- Universality of the named ordinary right derived pair.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
@@ -174,7 +335,8 @@ construction gives IsRightDerivedFunctor. -/
     (pbcActualDerivedPush g d).IsRightDerivedFunctor
       (pbcActualPushUnit g d)
         (HomotopyCategory.quasiIso (pbcModules X (pbcAdicCompletion X d)) (.up ℤ)) := by
-  sorry
+  dsimp [pbcActualDerivedPush, pbcActualPushUnit]
+  infer_instance
 
 /-- The resolving left derived pair remains universal after the indicated direct image.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
@@ -187,7 +349,78 @@ invertible. This gives the stated universal left derived pair. -/
       ((Functor.associator _ _ _).inv ≫
         whiskerRight (pbcActualPullCounit g d) (pbcActualDerivedPush g d))
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  sorry
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+  let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat.{u + 1} Y
+  let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+      u + 1, u + 2, u + 1} _
+  let C := pbcModules Y (pbcAdicCompletion Y d)
+  let W := HomotopyCategory.quasiIso C (.up ℤ)
+  let B := ((pbcActualModulePull g d).mapHomotopyCategory (.up ℤ) ⋙
+    DerivedCategory.Qh) ⋙ pbcActualDerivedPush g d
+  let L := pbcActualDerivedPull g d ⋙ pbcActualDerivedPush g d
+  let α : DerivedCategory.Qh ⋙ L ⟶ B :=
+    (Functor.associator _ _ _).inv ≫
+      whiskerRight (pbcActualPullCounit g d) (pbcActualDerivedPush g d)
+  let P : Set (HomotopyCategory C (.up ℤ)) :=
+    { Z | IsIso ((pbcActualPullCounit g d).app Z) }
+  have hres (Z : HomotopyCategory C (.up ℤ)) :
+      ∃ (Z' : HomotopyCategory C (.up ℤ)) (s : Z' ⟶ Z), Z' ∈ P ∧ W s := by
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective Z
+    obtain ⟨K', s, hK', _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
+        (C := Y.ProEt) (J := ProEt.topology Y) (R := pbcAdicCompletion Y d) K
+    refine ⟨_, (HomotopyCategory.quotient C (.up ℤ)).map s, ?_,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+    change IsIso ((pbcActualPullCounit g d).app
+      ((HomotopyCategory.quotient C (.up ℤ)).obj K'))
+    unfold pbcActualPullCounit completedOrdinaryPullbackCounit completedOrdinaryPullback
+    exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.2 K' hK'
+  have hcompute (Z : HomotopyCategory C (.up ℤ)) (hZ : Z ∈ P) : IsIso (α.app Z) := by
+    have : IsIso ((pbcActualPullCounit g d).app Z) := hZ
+    change IsIso (𝟙 _ ≫ (pbcActualDerivedPush g d).map
+      ((pbcActualPullCounit g d).app Z))
+    rw [Category.id_comp]
+    infer_instance
+  have hinv (Z Z' : HomotopyCategory C (.up ℤ)) (s : Z ⟶ Z')
+      (hZ : Z ∈ P) (hZ' : Z' ∈ P) (hs : W s) : IsIso (B.map s) := by
+    have := hcompute Z hZ
+    have := hcompute Z' hZ'
+    have : IsIso (DerivedCategory.Qh.map s) :=
+      Localization.inverts DerivedCategory.Qh W s hs
+    have heq : B.map s = inv (α.app Z) ≫ L.map (DerivedCategory.Qh.map s) ≫ α.app Z' := by
+      apply (cancel_epi (α.app Z)).1
+      simpa only [Functor.comp_map, Category.assoc, IsIso.hom_inv_id_assoc] using
+        (α.naturality s).symm
+    rw [heq]
+    infer_instance
+  obtain ⟨_, L', ε, hL', _, hε⟩ :=
+    Functor.leftDerived_from_resolvingClass C (DerivedCategory (pbcModules Y
+      (pbcAdicCompletion Y d))) B P hres hinv
+  have := hL'
+  let δ := L'.leftDerivedLift ε W L α
+  have hδ (Z : HomotopyCategory C (.up ℤ)) (hZ : Z ∈ P) :
+      IsIso (δ.app (DerivedCategory.Qh.obj Z)) := by
+    have := hε Z hZ
+    have := hcompute Z hZ
+    have heq : δ.app (DerivedCategory.Qh.obj Z) = α.app Z ≫ inv (ε.app Z) := by
+      apply (cancel_mono (ε.app Z)).1
+      simp [δ]
+    rw [heq]
+    infer_instance
+  have : IsIso δ := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    have := Localization.essSurj (DerivedCategory.Qh (C := C)) W
+    let Z := (DerivedCategory.Qh (C := C)).objPreimage K
+    obtain ⟨Z', s, hZ', hs⟩ := hres Z
+    have : IsIso (DerivedCategory.Qh.map s) :=
+      Localization.inverts DerivedCategory.Qh W s hs
+    let e : DerivedCategory.Qh.obj Z' ≅ K := asIso (DerivedCategory.Qh.map s) ≪≫
+      (DerivedCategory.Qh (C := C)).objObjPreimageIso K
+    exact (NatTrans.isIso_app_iff_of_iso δ e).1 (hδ Z' hZ')
+  exact (L'.isLeftDerivedFunctor_iff_isIso_leftDerivedLift ε W L α).2 this
 
 /-- The resolving right derived pair remains universal after the indicated pullback.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
@@ -200,7 +433,16 @@ invertible. This gives the stated universal right derived pair. -/
       (whiskerRight (pbcActualPushUnit g d) (pbcActualDerivedPull g d) ≫
         (Functor.associator _ _ _).hom)
       (HomotopyCategory.quasiIso (pbcModules X (pbcAdicCompletion X d)) (.up ℤ)) := by
-  sorry
+  apply (HomotopyCategory.KInjectives.localizerMorphism_derives _).isRightDerivedFunctor_of_isIso
+  intro I
+  obtain ⟨I, hI, rfl⟩ := I.mk_surjective
+  have : I.IsKInjective := hI
+  have : IsIso ((pbcActualModulePush g d).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ _).obj I)) := inferInstance
+  change IsIso ((pbcActualDerivedPull g d).map
+    ((pbcActualModulePush g d).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ _).obj I)) ≫ 𝟙 _)
+  infer_instance
 
 /-- The derived adjunction obtained from the actual module adjunction and its
 universal derived counit/unit. Source: Stacks Tag 099N
@@ -212,6 +454,7 @@ def pbcActualDerivedAdjunction :
       (HomotopyCategory.quasiIso (pbcModules X (pbcAdicCompletion X d)) (.up ℤ))
       (pbcActualPullCounit g d) (pbcActualPushUnit g d)
 
+set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 Proof: the additive ordinary functor commutes with termwise shifts. Its universal
@@ -222,13 +465,20 @@ theorem pbcActualPullShift_exists :
     ∃! q : (pbcActualDerivedPull g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPull g d).CommShift ℤ] ↦
         NatTrans.CommShift (pbcActualPullCounit g d) ℤ) (qInst := q) := by
-  sorry
+  have hkan := Functor.IsLeftDerivedFunctor.isRightKanExtension
+    (pbcActualDerivedPull g d) (pbcActualPullCounit g d)
+    (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
+  have := hkan
+  obtain ⟨q, hq⟩ := Functor.rightKanExtension_coherentShift _ DerivedCategory.Qh
+    (pbcActualDerivedPull g d) (pbcActualPullCounit g d) hkan
+  exact ⟨q, hq, fun q' hq' ↦ rightKanShift_unique _ _ _ _ q' q hq' hq⟩
 
 /-- The canonical shift structure, normalized by the universal derived comparison.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
 instance pbcActualPullShift : (pbcActualDerivedPull g d).CommShift ℤ :=
   (pbcActualPullShift_exists g d).exists.choose
 
+set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 Proof: the additive ordinary functor commutes with termwise shifts. Its universal
@@ -239,7 +489,55 @@ theorem pbcActualPushShift_exists :
     ∃! q : (pbcActualDerivedPush g d).CommShift ℤ,
       (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
         NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (qInst := q) := by
-  sorry
+  let F := pbcActualModulePush g d
+  let q : (pbcActualDerivedPush g d).CommShift ℤ :=
+    inferInstanceAs (F.rightDerivedFunctor.CommShift ℤ)
+  have hq : (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
+      NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (qInst := q) :=
+    actualRightDerivedUnitShift F
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  have square (s : (pbcActualDerivedPush g d).CommShift ℤ)
+      (hs : letI := s; NatTrans.CommShift (pbcActualPushUnit g d) ℤ)
+      (n : ℤ) (I : HomotopyCategory (pbcModules X (pbcAdicCompletion X d)) (.up ℤ)) :
+      (((pbcActualModulePush g d).mapHomotopyCategory (.up ℤ) ⋙
+          DerivedCategory.Qh).commShiftIso n).hom.app I ≫
+          (shiftFunctor _ n).map ((pbcActualPushUnit g d).app I) =
+        (pbcActualPushUnit g d).app (I⟦n⟧) ≫
+          (pbcActualDerivedPush g d).map ((DerivedCategory.Qh.commShiftIso n).hom.app I) ≫
+          (Functor.commShiftIso (pbcActualDerivedPush g d) (self := s) n).hom.app
+            (DerivedCategory.Qh.obj I) := by
+    let := s
+    have := hs
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      NatTrans.shift_app_comm (pbcActualPushUnit g d) n I
+  have he (n : ℤ) : Functor.commShiftIso (pbcActualDerivedPush g d) (self := q') n =
+      Functor.commShiftIso (pbcActualDerivedPush g d) (self := q) n := by
+    apply Iso.ext
+    ext K
+    obtain ⟨I, hI, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+    have := hI
+    let e := e ≪≫ ((DerivedCategory.quotientCompQhIso _).app I).symm
+    have hi : ((Functor.commShiftIso (pbcActualDerivedPush g d) (self := q') n)).hom.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I)) =
+        ((Functor.commShiftIso (pbcActualDerivedPush g d) (self := q) n)).hom.app
+          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I)) := by
+      let Ih := (HomotopyCategory.quotient _ _).obj I
+      have hshift : IsIso ((pbcActualPushUnit g d).app (Ih⟦n⟧)) := by
+        apply (NatTrans.isIso_app_iff_of_iso (pbcActualPushUnit g d)
+          (((HomotopyCategory.quotient _ _).commShiftIso n).app I)).1
+        change IsIso (F.rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ _).obj (I⟦n⟧)))
+        infer_instance
+      apply (cancel_epi ((pbcActualPushUnit g d).app (Ih⟦n⟧) ≫
+        (pbcActualDerivedPush g d).map ((DerivedCategory.Qh.commShiftIso n).hom.app Ih))).1
+      simpa only [Category.assoc] using
+        (square q' hq' n Ih).symm.trans (square q hq n Ih)
+    apply (cancel_mono ((pbcActualDerivedPush g d ⋙ shiftFunctor _ n).map e.hom)).1
+    rw [← (Functor.commShiftIso (pbcActualDerivedPush g d) (self := q') n).hom.naturality,
+      ← (Functor.commShiftIso (pbcActualDerivedPush g d) (self := q) n).hom.naturality]
+    exact congrArg (fun a ↦ (shiftFunctor _ n ⋙ pbcActualDerivedPush g d).map e.hom ≫ a) hi
+  exact commShift_ext _ _ he
 
 /-- The canonical shift structure, normalized by the universal derived comparison.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction). -/
@@ -292,7 +590,8 @@ Proof: its left adjoint has values in that full subcategory by construction.
 Composing with the inclusion retains the same membership witness. -/
 theorem pbcActualCompletedPull_isComplete (K : PbcCompletedDerived Y d) :
     PbcIsIntrinsicallyComplete X d ((pbcActualCompletedPull g d).obj K) := by
-  sorry
+  exact ((ObjectProperty.ι (PbcIsIntrinsicallyComplete X d)).leftAdjoint.obj
+    ((pbcActualDerivedPull g d).obj K)).property
 
 /-- Completion has the unique shift comparison commuting with its actual unit.
 Source: Stacks 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
