@@ -17,9 +17,154 @@
   "def-weil-global-geometric-frobenius",
   "def-weil-local-frobenius-trace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pod-separated-finite-type-base-change], $Y$ is separated and of finite type over $k$. A field is Noetherian, so $\\operatorname{Spec}k$ is Noetherian and [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] its underlying space is Noetherian: a strictly descending chain of closed sets would have no minimal member, contrary to that statement. Apply [lem-sfb-noetherian-connected-components-open] to obtain finitely many nonempty open connected components $C_1,\\ldots,C_m$. Their complements are unions of the other open components, so each is also closed. Give each its open subscheme structure. Each $C_i$ is locally Noetherian by restriction to affine opens, quasi-compact because closed in $Y$, and separated by restriction of the diagonal. It is of finite type over $k$: its open immersion is locally of finite type and its source is quasi-compact. Thus each $C_i$ is Noetherian, separated, connected, and has $\\ell$ invertible.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF, 04ME, 0052; finite-type/local-Noetherian input: morphisms.tex, Tags 01T4 and 01T6"
+   }
+  },
+  {
+   "text": "For each $C_i$, choose a closed point $z_i$ by [lem-sc-quasi-compact-kolmogorov-closed-point], since the underlying space of a scheme is Kolmogorov and $C_i$ is nonempty and quasi-compact. By [lem-kun-closed-point-field](a), $\\kappa(z_i)$ is finite over the algebraically closed field $k$, hence equals $k$. This gives a $k$-point $\\bar y_i:\\operatorname{Spec}k\\to C_i\\subset Y$. If $y_i$ is its image in $Y_0$, the residue-field injection $\\kappa(y_i)\\hookrightarrow k$ makes $\\kappa(y_i)$ algebraic over $k_0$. Its transcendence degree is zero, so [lem-kun-closed-point-field](a), now on the finite-type $k_0$-scheme $Y_0$, says that $y_i$ is closed. This chooses the required family; different $C_i$ may project to the same $y_i$. For $Y=\\varnothing$ choose the empty family.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005E, lemma-quasi-compact-closed-point; residue fields: blueprint lem-kun-closed-point-field, clause (a)"
+   }
+  },
+  {
+   "text": "Both models of $\\mathcal G$ are used, and they agree at a common finite stage $E$: by [lem-per-lisse-completed-system-comparison] the adic system $(\\mathcal G_n)$ of [def-pod-lisse-l-adic-sheaves] gives the lisse $E_Y$-module $(\\varprojlim_n\\nu_Y^*\\mathcal G_n)[1/\\varpi]$, fully faithfully on the rationalized lisse category and compatibly with module pullback, and by [lem-tw-lisse-rational-realization] this is the realization of the underlying lisse object of the heart, with units, pullbacks and point fibres $\\operatorname{Fib}_s(L\\bar x^*-)$ identified with $E_Y$, module pullback and sections at $s$. Sections at $s$ of $\\bar x^*\\varprojlim_n\\nu^*\\mathcal G_n$ are $\\varprojlim_n(\\mathcal G_n)_{\\bar x}$, so the fibres agree with those of [def-pod-lisse-l-adic-sheaves], and $A$ is the same in both models. On $C_i$ the fibre functor at $\\bar y_i$ is faithful by [cor-galois-lisse-representations](2). Its hypotheses hold by step 1: $C_i$ is connected, Noetherian, separated, and $\\ell$ is invertible. A section $a_i$ of $\\mathcal G|_{C_i}$ is the morphism $u_{a_i}:\\underline\\Omega_{C_i}\\to\\mathcal G|_{C_i}$ sending $1$ to $a_i$. The unit is lisse and its fibre is $\\Omega$, by that same tensor equivalence. If $a_i$ evaluates to zero at $\\bar y_i$, the fibre of $u_{a_i}$ sends $1$ to zero and is the zero linear map. Faithfulness implies $u_{a_i}=0$, hence $a_i=0$. A section of $Y$ whose evaluations all vanish therefore vanishes on every member of the open covering $(C_i)$ and is zero by the sheaf axiom. Applying this to the difference of two sections proves injectivity of the displayed evaluation map.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-tw-lisse-rational-realization",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.6), p. 150, fibre equivalence; agent application of its faithfulness to morphisms from the unit"
+   }
+  },
+  {
+   "text": "The fibres $\\mathcal G_{\\bar y_i}$ are finite-dimensional by the $\\overline{\\mathbf Q}_\\ell$ clause of [cor-galois-lisse-representations](2). Thus the finite product in step 3 has dimension $N=\\sum_i\\dim_\\Omega\\mathcal G_{\\bar y_i}$. An injective linear map carries linearly independent vectors to linearly independent vectors, so $A$ has dimension at most $N$. For the empty family this says $A=0$.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.6), p. 150; elementary finite-dimensional linear algebra"
+   }
+  },
+  {
+   "text": "Sections as unit morphisms, and the point transport on them. On sections: $\\operatorname{Fib}_s$ is an equivalence with $\\operatorname{Fib}_s(\\mathbf 1_s)=\\Omega$ [def-weil-ordinary-compact-cohomology], so $\\mathrm H^0\\operatorname{Fib}_s(N)=\\operatorname{Hom}(\\mathbf 1_s,N)$; transposing along $La_Y^*\\dashv Ra_{Y*}$ with its triangle identities [fix-prop-adjunctions](1), and the unit identification $La_Y^*\\mathbf 1_s\\cong\\mathbf 1_Y$ of [lem-tw-lisse-rational-realization], gives $H^0(Y,\\mathcal G)=\\operatorname{Hom}(\\mathbf 1_Y,\\mathcal G)=A$ (step 3). For $w:\\mathbf 1_s\\to N$, naturality [lem-weil-frobenius-point-transport-natural](2) gives $\\iota_N(w(1))=\\operatorname{Fib}_s(Lg_s^*w)(\\iota_{\\mathbf 1_s}(1))$, and $\\iota_{\\mathbf 1_s}(1)=1$ since restriction and insertion in [def-weil-frobenius-point-transport] keep the constant section; so on $H^0$, $\\iota$ is $w\\mapsto Lg_s^*w$ composed with the unit comparison. Steps 6 and 9 use these two identifications.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "fix-prop-adjunctions",
+    "lem-tw-lisse-rational-realization",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7) and (1.1.12), pp. 151-152: fibre at the geometric point of Spec k and sections; reviewer repair making the H^0 and point-transport identifications explicit"
+   }
+  },
+  {
+   "text": "Write $g=g_Y$, $h=g_s$, $P=g^*$ on lisse sheaves, and $\\theta:P\\mathcal G\\xrightarrow{\\sim}\\mathcal G$. We use actual section pullback, including its unit comparison: for $v:\\underline\\Omega_Y\\to\\mathcal G$, write $P(v)$ for $P(v)\\circ(\\underline\\Omega_Y\\xrightarrow{\\sim}P\\underline\\Omega_Y)$. By step 5, the ordinary transport $\\tau$ of [def-weil-frobenius-cohomology-transport] sends the section $v$ to this section $P(v)$. Here is the adjunction calculation specifying the map: substitute the unit--square-comparison--counit formula of [def-weil-frobenius-square-exchange](1) into $\\operatorname{Fib}_s(\\operatorname{FrEx}_{Y,*})\\iota$; after transposition, the adjacent unit and counit cancel by the triangular identity, leaving pullback of $v$ along $g$ and the constant-unit comparison. This calculation is an identity of the specified derived system maps, by the mate-pasting assertion of [lem-coef-semilinear-derived-sections]; it is not an inference from equality of all finite reductions. For lisse objects, [lem-tw-lisse-rational-realization] identifies these pullbacks, units, tensors and point transports with the ordinary module-sheaf maps, compatibly with composition and coefficient extension. Localizing the same system identity and passing to a common finite coefficient-field stage therefore gives it at $\\Omega$. Finally [def-weil-global-geometric-frobenius] gives the concrete formula $T(v)=\\theta\\circ P(v)$.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-frobenius-square-exchange",
+    "lem-coef-semilinear-derived-sections",
+    "lem-tw-lisse-rational-realization",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10), pp. 151-152, and (1.1.14), p. 153; agent expansion of transport on a section using the specified exchange mate"
+   }
+  },
+  {
+   "text": "Iterate the formula of step 6. With the canonical composition identifications, put $\\theta^{[1]}=\\theta$ and $\\theta^{[r+1]}=\\theta^{[r]}\\circ(g^r)^*\\theta$, as in [def-weil-local-frobenius-trace]. Then\n$$T^r(v)=\\theta^{[r]}\\circ(g^r)^*v\\quad(r\\ge1).$$\nFor $r=1$ this is step 6. For the induction step, compose the expression for $T^r$ with the expression for $T$ and use functoriality of pullback:\n$$\\theta^{[r]}(g^r)^*(\\theta\\,g^*v)=\\theta^{[r]}(g^r)^*\\theta\\,(g^{r+1})^*v=\\theta^{[r+1]}(g^{r+1})^*v.$$\nThe unit comparisons are preserved by composition by [lem-tw-lisse-rational-realization]. This calculation takes place at a common field stage for the finitely many morphisms involved; it does not require a lattice preserved by $\\theta$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10), pp. 151-152; iterated Weil structure as in def-weil-local-frobenius-trace"
+   }
+  },
+  {
+   "text": "The transport $\\tau_{\\mathcal G}$ is an isomorphism by [lem-weil-frobenius-cohomology-transport-iso](3), at $\\Lambda=\\Omega$. The Weil structure $\\theta$ is an isomorphism; applying ordinary cohomology to it preserves invertibility. Hence [def-weil-global-geometric-frobenius] expresses $T$ on $H^0=\\Gamma(Y,\\mathcal G)$ as a composite of two linear isomorphisms. This proves that $T$ is an automorphism, also when $A=0$.",
+   "uses": [
+    "lem-weil-frobenius-cohomology-transport-iso",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10) and (1.1.14), pp. 151-153; invertibility of the two factors of the specified global operator"
+   }
+  },
+  {
+   "text": "Fix any closed $y$, its chosen lift $z=\\bar y$, and $d=[\\kappa(y):k_0]\\ge1$. In the notation of [def-weil-local-frobenius-trace], $g^dz=zh^d$. Put $N=z^*\\mathcal G$ and let $b:(h^d)^*N\\xrightarrow{\\sim}z^*(g^d)^*\\mathcal G$ be the composition comparison associated to this equality. Evaluating a section $v$ means applying $z^*v$ to $1$ in the constant point fibre. The point transport $I^{[d]}$ sends this $1$ to $1$: each restriction and inverse-image insertion in [def-weil-frobenius-point-transport] preserves the constant unit section. Naturality of the point transport [lem-weil-frobenius-point-transport-natural](2), iterated $d$ times, consequently gives\n$$\\operatorname{ev}_z^{(g^d)^*\\mathcal G}((g^d)^*v)=\\operatorname{Fib}_s(b)I_N^{[d]}(\\operatorname{ev}_z^{\\mathcal G}(v)).$$\nIndeed both sides are the fibre of $(zh^d)^*v=(g^dz)^*v$ applied to the transported $1$; the composition and point-fibre identifications are precisely those preserved by [lem-tw-lisse-rational-realization]. Now evaluate step 7, using that evaluation of $\\theta^{[d]}\\circ(g^d)^*v$ is $\\operatorname{Fib}_s(z^*\\theta^{[d]})$ applied to the left side. The result is\n$$\\operatorname{ev}_z(T^dv)=\\operatorname{Fib}_s(z^*\\theta^{[d]})\\operatorname{Fib}_s(b)I_N^{[d]}(\\operatorname{ev}_z(v))=F_y(\\operatorname{ev}_z(v)),$$\nwhere the last equality is exactly the defining composite of $F_y$ in [def-weil-local-frobenius-trace]. This uses the semilinear return $g^dz=zh^d$, not $g^dz=z$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)-(1.1.10) and (1.1.13), pp. 150-153; agent calculation with the specified local return and point transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "cor-galois-lisse-representations",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-square-exchange",
+  "lem-coef-semilinear-derived-sections",
+  "lem-tw-lisse-rational-realization",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-frobenius-point-transport",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-per-lisse-completed-system-comparison",
+  "def-weil-ordinary-compact-cohomology",
+  "fix-prop-adjunctions",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/lem-a1-geometric-coinvariants-pure.proof.md",
+  "place": "Second paragraph: closed-point degree-power Frobenius comparison; finite-component argument and explicit section evaluation supplied by NR from Deligne (1.1.6)-(1.1.14) and the cited generic tools"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +214,45 @@
    "results": "Mathlib/Topology/Sheaves/CommRingCat.lean; Mathlib/Topology/Sheaves/Sheaf.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Geometry/RingedSpace/Basic.lean; Mathlib/Geometry/RingedSpace/SheafedSpace.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
    "date": "2026-10-19",
    "verdict": "no match: the hits do not state lisse adic global-section detection together with local Frobenius-power compatibility, or purity of Weil-sheaf coinvariants"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|globalSections.*frobenius|stalk.*frobenius",
+   "results": "no hits",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these hits states finite closed-point detection for lisse adic sections together with the degree-normalized Weil Frobenius identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Mono",
+   "results": "CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono; CategoryTheory.presheaf_mono_of_mono; CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono; CategoryTheory.instMonoFunctorOppositeHomFullSubcategoryIsSheafOfHasWeakSheafifyOfSheaf; CategoryTheory.instMonoSheafTypeImageι; CategoryTheory.Sheaf.mono_of_isLocallyInjective; CategoryTheory.Sheaf.mono_of_injective; SheafOfModules.Submodule.instMonoι",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these hits states finite closed-point detection for lisse adic sections together with the degree-normalized Weil Frobenius identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a lisse adic sheaf on a finite type scheme inject into a finite product of stalks and intertwine local Frobenius powers",
+   "results": "AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.stalkMap_injective_of_isAffine; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.spread_out_of_isGermInjective'; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgHom.IsArithFrobAt.restrict_injective; AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these hits states finite closed-point detection for lisse adic sections together with the degree-normalized Weil Frobenius identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a locally constant sheaf on a connected scheme inject into a geometric stalk",
+   "results": "TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective; AlgebraicGeometry.StructureSheaf.exists_const; CategoryTheory.Sheaf.Γ; CategoryTheory.constantSheafΓAdj; AlgebraicGeometry.StructureSheaf.res_const'; CategoryTheory.HasGlobalSectionsFunctor; AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply; AlgebraicGeometry.germ_injective_of_isIntegral",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these hits states finite closed-point detection for lisse adic sections together with the degree-normalized Weil Frobenius identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant finite dimensional sheaf has finite dimensional sections on a noetherian scheme and sections are determined by one stalk per connected component",
+   "results": "CompHausLike.LocallyConstantModule.functor; Module.isLocallyConstant_rankAtStalk; Module.isLocallyConstant_rankAtStalk_freeLocus; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.IsFiniteType; CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf; LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf; CompHausLike.LocallyConstant.presheaf_ext",
+   "date": "2026-10-19",
+   "verdict": "no match: none of these hits states finite closed-point detection for lisse adic sections together with the degree-normalized Weil Frobenius identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-geometric-coinvariants-pure",
@@ -87,5 +267,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-a1-lisse-sections-stalk-evaluation",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including repeated closed points with different lifts. Proved finite detection using one geometric point per connected component and faithfulness of the existing lisse fibre equivalence. Expanded the global exchange mate on sections, its iterates, and evaluation with the semilinear return; reused existing system-calculus and lisse-realization tools, without new nodes or an integral Weil-stable lattice.",
+  "blueprint": "Realizes the closed-point Frobenius comparison of the second paragraph of lem-a1-geometric-coinvariants-pure.proof.md; finite detection supplies the generalized finite-type statement used by its reviewed parent.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Preserves the stated separated finite-type hypotheses on the geometric fibre; generic scheme permanence, no cohomological route replacement."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic topology of Noetherian spaces needed for finite stalk detection."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic existence of a closed point on each quasi-compact component."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic residue-field criterion for the selected geometric points to project to closed points."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Foundational faithful fibre equivalence and finite-dimensional lisse stalks; the unit has no more specific replacement."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Identifies the specified rationalized pullbacks and point transports with lisse module-sheaf maps; generic coefficient normalization."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic adjunction-mate and composition identities on whole derived systems; needed before rationalization, not a cohomological route."
+   },
+   {
+    "node": "lem-weil-frobenius-cohomology-transport-iso",
+    "why": "Invertibility of the already specified ordinary Frobenius transport."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the specified point transport applied to the section morphism."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity needed to select finitely many components."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic scheme-to-topological Noetherianity; no change to the weight argument of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-kun-closed-point-field",
+  "cor-galois-lisse-representations",
+  "lem-tw-lisse-rational-realization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NR-80d6d59ff",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-80d6d59ff (reviewer sub-agent of L); spot-checked: Read the item in full, all 9 steps after the fix. There are no new nodes and the statement is unchanged. I read every cited node's statement, the parent proof's second paragraph (main-20261015; same route) and Weil II (1.1.7) and (1.1.12)-(1.1.13) on pp. 151-153; no SGA source is used. Steps 1-2 hold: Noetherian space gives finitely many clopen components, and each has a closed point lying over a closed point of Y0. Repeated closed points with different lifts are allowed. Step 4 (finite dimension) is fine. The induction for the iterate theta^[r] is correct, T is invertible by transport-iso(3), and the final evaluation matches the defining composite of F_y with the return g^d z = z h^d. Small cases checked: the empty scheme, Spec F_q, Spec F_{q^2} (two lifts, T swaps them, T^2 = F_y) and rank 0. Three repairs, all by citing existing nodes. (1) C3/C4: step 3 applied cor-galois-lisse-representations to the Weil II inverse-system model while the Frobenius steps use the D^b_c heart object, and the two models were identified silently. Added a bridge citing lem-per-lisse-completed-system-comparison and lem-tw-lisse-rational-realization: same sections and the same fibres lim (G_n)_x. (2) E5: the old step 5 said 'after transposition' with no identification of H^0(Y,G) with Hom(1,G). The new step 5 gives it from the Fib_s equivalence with Fib_s(1)=Omega (def-weil-ordinary-compact-cohomology), the adjunction La*-|Ra* with its triangle identities (fix-prop-adjunctions(1)) and the unit identification of lem-tw. (3) C1: the effect of iota on sections was not stated. The same new step 5 states it: naturality from lem-weil-frobenius-point-transport-natural(2), and iota(1)=1 by def-weil-frobenius-point-transport. Later steps are renumbered and proof_deps updated; all steps are under 2000 characters and no cycle is created. Batch-5 check: the closure of the two targets is identical with and without this item's proof (16744 nodes), and the fix adds 0 nodes. cor-galois-lisse-representations is the foundational lisse fibre equivalence, not Poincare duality, and was already in the base closure: accepted. lem-weil-frobenius-point-transport-natural reaches lem-weil-isomorphism-derived-pullback-comparison-normalization, a generic normalization of pullback along a scheme isomorphism that sits in sec-trace-formula only by location, is not a step of the trace formula, and was already in the base closure: accepted. Off-unit generic tools for the maintainer's tool_uses: lem-per-lisse-completed-system-comparison, fix-prop-adjunctions.; 1 file(s) fixed by the reviewer"
  }
 }
