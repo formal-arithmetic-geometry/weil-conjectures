@@ -5,6 +5,7 @@ Authors: SHEAF groups NE and Q24
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
@@ -228,31 +229,8 @@ equalities of natural transformations. The square is the specified one, includin
 its commutativity transport; it is not replaced by an arbitrary isomorphism.
 Source: blueprint, lem-weil-pbc-comparison-pullback, proof steps 1--4;
 Stacks, Tags 00WX and 0B65 (blueprint: lem-weil-pbc-comparison-pullback). -/
-def cbcComparisonPullbackCoherent : Prop :=
-  (∀ (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology D),
-    (cbcComparisonCoefficientPullbackIso D (𝟙 X)).hom.app F ≫
-        (cbcProEtaleComparisonId D X).hom.app ((cbcComparisonCoefficientPullback D X).obj F) =
-      (cbcComparisonCoefficientPullback D X).map ((cbcEtaleComparisonId D X).hom.app F)) ∧
-  (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z)
-      (F : Sheaf Z.smallEtaleTopology D),
-    (cbcComparisonCoefficientPullback D X).map ((cbcEtaleComparisonComp D f g).hom.app F) ≫
-        (cbcComparisonCoefficientPullbackIso D f).hom.app ((cbcEtaleComparisonPullback D g).obj F) ≫
-        (cbcProEtaleComparisonPullback D f).map
-          ((cbcComparisonCoefficientPullbackIso D g).hom.app F) =
-      (cbcComparisonCoefficientPullbackIso D (f ≫ g)).hom.app F ≫
-        (cbcProEtaleComparisonComp D f g).hom.app ((cbcComparisonCoefficientPullback D Z).obj F)) ∧
-  (∀ (X' X Y' Y : Scheme.{u}) (g' : X' ⟶ X) (f' : X' ⟶ Y')
-      (f : X ⟶ Y) (g : Y' ⟶ Y) (sq : ChosenCartesianSquare g' f' f g)
-      (F : Sheaf Y.smallEtaleTopology D),
-    (cbcComparisonCoefficientPullbackIso D f').hom.app ((cbcEtaleComparisonPullback D g).obj F) ≫
-        (cbcProEtaleComparisonPullback D f').map
-          ((cbcComparisonCoefficientPullbackIso D g).hom.app F) ≫
-        (cbcProEtaleComparisonSquare D sq).hom.app ((cbcComparisonCoefficientPullback D Y).obj F) =
-      (cbcComparisonCoefficientPullback D X').map ((cbcEtaleComparisonSquare D sq).hom.app F) ≫
-        (cbcComparisonCoefficientPullbackIso D g').hom.app
-          ((cbcEtaleComparisonPullback D f).obj F) ≫
-        (cbcProEtaleComparisonPullback D g').map
-          ((cbcComparisonCoefficientPullbackIso D f).hom.app F))
+abbrev cbcComparisonPullbackCoherent : Prop :=
+  ComparisonPullbackCoherent D
 
 /-- The canonical isomorphism `ν_U^* u⁻¹ ≅ u⁻¹ ν_V^*` is coherent for sets, abelian
 sheaves and sheaves of modules over every finite discrete ring.
@@ -282,7 +260,9 @@ theorem cbcComparison_pullback_coherent :
       cbcComparisonPullbackCoherent AddCommGrpCat.{u + 1} ∧
       ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],
         cbcComparisonPullbackCoherent (ModuleCat.{u + 1} Λ) := by
-  sorry
+  refine ⟨comparison_pullback_coherent.1, comparison_pullback_coherent.2.1, ?_⟩
+  intro Λ _ _
+  exact comparison_pullback_coherent.2.2 Λ
 
 end ProEtale
 end AlgebraicGeometry
