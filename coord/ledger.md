@@ -17528,3 +17528,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:22 L: returned deliver/NO/fix-lem-tensor-adjunction (reviewer RETURN: L: independent stage-2 immutable head 75b285a280b1: H3 (F1′): the projection is now pinned only at integral stages (Core)
 - 19:26 L: returned deliver/A4/Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase (reviewer RETURN: (the landing tools, head 54da2eda9) the delivery did not land: lean/Sheaf/Paper/FiniteSmoothAdjunctionGeneralBase.lean: )
 - 19:26 L: returned deliver/A8/Sheaf.CategoryTheory.LocalizedModuleExactIndependent (reviewer RETURN: (the landing tools, head 68709dfb6) the delivery did not land: lean/Sheaf/CategoryTheory/LocalizedModuleExactIndependent)
+- 19:26 L: returned deliver/E2/Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit (reviewer RETURN: (the landing tools, head 33fa043da) the delivery did not land: lean/Sheaf/CategoryTheory/RingedStrictTowerHomotopyLimit.)
