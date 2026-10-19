@@ -17446,3 +17446,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 22:34 L: batch 20261019T142202 dependency take-out
 - 14:40 L: merged deliver/A8/Sheaf.Paper.SfLocalizationAllStages (stage 3; reviewer PASS; first push; landing 20261019T144014-L-2345990 (proof); batch 20261019T144009; modules 1; new nodes 0)
+- 14:40 L: merged deliver/F2/Sheaf.Paper.IntegralTensorShriek (stage 3; reviewer PASS; first push; landing 20261019T144017-L-2347163 (interface); batch 20261019T144009; modules 1; new nodes 0; change records: coord/changes/F2-integral-tensor-shriek-local-elaboration.md)
