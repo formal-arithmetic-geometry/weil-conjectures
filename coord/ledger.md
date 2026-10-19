@@ -17263,3 +17263,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: merged deliver/P9/Sheaf.Paper.ExtensionZeroStratifiedPerfect (stage 3; reviewer PASS; first push; landing 20261019T093542-L-2325850 (interface); batch 20261019T093237; modules 2; new nodes 1; change records: coord/changes/P9-extension-zero-proof-elaboration-options.md)
 - 09:35 L: merged deliver/Q1/Sheaf.Paper.SmoothExceptionalPreservation (stage 3; reviewer PASS; first push; landing 20261019T093544-L-2326207 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:35 L: merged deliver/Q5/Sheaf.RingTheory.JZeroFiniteTypeDomainDescent (stage 3; reviewer PASS; first push; landing 20261019T093545-L-2326477 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:35 L: merged deliver/Q7/Sheaf.RingTheory.NonemptyRegularOpenSeparableAscent (stage 3; reviewer PASS; first push; landing 20261019T093546-L-2326756 (proof); batch 20261019T093237; modules 1; new nodes 0)

@@ -30,91 +30,77 @@
  ],
  "proof": [
   {
-   "text": "Choose $\\mathfrak p_0\\in U$. By the Zariski topology in [def-weil-affine-spectrum], the complement of $U$ is $V(I)$ for an ideal $I\\subseteq R$. Some $f\\in I$ is not in $\\mathfrak p_0$, so $f\\ne0$ and $\\mathfrak p_0\\in D(f)\\subseteq U$: a prime not containing $f$ cannot contain $I$. Write $A=R_f$ and $B=S_{\\varphi(f)}$, where $\\varphi:R\\to S$ is the given injection. Both are the subrings of $K$ and $F$ consisting respectively of $r/f^n$ and $s/\\varphi(f)^n$. Nonzero denominators exist because $f\\ne0$ and $\\varphi$ is injective.",
+   "text": "Choose p in U and a basic open D(f) containing p and contained in U, using the basic-open basis of [def-weil-affine-spectrum]. Then f is nonzero. Put A = R_f. It is Noetherian by [lem-weil-pbc-localization-noetherian]. Every prime P of A contracts to p in D(f), since f is a unit in A. The localization of A at P is the localization of R at p by [lem-weil-pbc-localization-of-localization] and [def-weil-pbc-localization-at-prime]. Its regular localness follows from U. Thus A is regular by the ring clause of [def-weil-regular-scheme].",
    "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof: replacement of the base by a principal localization."
-   }
-  },
-  {
-   "text": "The ring $A$ is Noetherian by [lem-weil-pbc-localization-noetherian], applied to the multiplicative set of powers of $f$. By [lem-weil-pbc-principal-localization-open-immersion], its spectrum identifies with $D(f)$. For a prime $\\mathfrak P\\subset A$, let $\\mathfrak p$ be its contraction to $R$, so $f\\notin\\mathfrak p$ and $\\mathfrak p\\in U$. The local rings $A_{\\mathfrak P}$ and $R_{\\mathfrak p}$ are canonically isomorphic: the fraction map sends $(r/f^i)/(u/f^j)$ to $rf^j/(uf^i)$, and its inverse sends $r/u$ to $(r/1)/(u/1)$; Here $u/f^j\\notin\\mathfrak P$ exactly when $u\\notin\\mathfrak p$, since $f$ is a unit in $A$, so $uf^i\\notin\\mathfrak p$. Both maps respect the fraction equivalence from [def-weil-pbc-localization-at-prime]: equality is equality after cross multiplication in the common fraction field $K$. Each composite preserves the numerator and denominator of every fraction, hence is the identity. Hence every $A_{\\mathfrak P}$ is regular local by the hypothesis on $U$, and $A$ is a regular ring by [def-weil-regular-scheme].",
-   "uses": [
+    "def-weil-affine-spectrum",
     "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-localization-of-localization",
     "def-weil-pbc-localization-at-prime",
     "def-weil-regular-scheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof; the regularity of the principal localization is expanded."
+    "place": "Tag 07PB, lemma-J-0-goes-up; J-0 expanded using Tag 07P7, definition-J; separable field extension is Tag 030O, definition-separable-field-extension in algebra.tex."
    }
   },
   {
-   "text": "The localized map $A\\to B$, $r/f^n\\mapsto\\varphi(r)/\\varphi(f)^n$, is injective since both rings embed in $F$ through the original injection. They remain nonzero domains. If $s_1,\\ldots,s_m$ generate $S$ over $R$, their images generate $B$ over $A$: write $s/\\varphi(f)^n$ by expressing $s$ as a polynomial in the $s_i$ and dividing each coefficient by $f^n$. Thus $A\\to B$ is finite type by [def-weil-pbc-finite-type-algebra]. Its fraction field embedding is the original $K\\to F$: one inclusion follows from $R\\subseteq A\\subseteq K$ and $S\\subseteq B\\subseteq F$, and every element of $K$ or $F$ is already a ratio of elements of $R$ or $S$. Therefore the fraction field extension for $A\\to B$ is separable by the given hypothesis, with no perfection assumption.",
+   "text": "Apply [lem-exc-generic-smooth-domain] directly to the original map R to S and its given separable fraction-field embedding. Obtain g nonzero such that C = S_g is smooth over R. Set T = C_image(f). Then T is smooth over R by [lem-weil-pbc-smooth-ring-map-principal-localization].",
    "uses": [
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, first sentence of proof; the unchanged domain, finite-type and separable-fraction-field hypotheses after localization."
-   }
-  },
-  {
-   "text": "Apply [lem-exc-generic-smooth-domain] to $A\\to B$. Step 3 verifies injectivity, finite type, the domain assumptions and the separable fraction field extension. We obtain $h\\in B$, $h\\ne0$, for which $A\\to T=B_h$ is smooth.",
-   "uses": [
-    "lem-exc-generic-smooth-domain"
+    "lem-exc-generic-smooth-domain",
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, second and third sentences of proof; the cited generic-smoothness input is Algebra Tag 07ND, lemma-smooth-at-generic-point."
+    "place": "Tag 07PB, lemma-J-0-goes-up; J-0 expanded using Tag 07P7, definition-J; separable field extension is Tag 030O, definition-separable-field-extension in algebra.tex."
    }
   },
   {
-   "text": "The base $A$ is a regular ring by step 2 and $A\\to T$ is smooth by step 4. Hence [lem-weil-pbc-regular-ring-smooth-ascent] makes $T$ a regular ring. In particular each of its local rings at prime ideals is regular local.",
+   "text": "The image of f is a unit in T, so the map from R factors through A. Formal smoothness over R implies formal smoothness over A: a lift of an R-algebra homomorphism necessarily respects the inverse of f, hence commutes with A. This is Mathlib Algebra.FormallySmooth.localization_base. Finite algebra generators over R remain generators over A by [def-weil-pbc-finite-type-algebra]. Since A is Noetherian, [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives finite presentation over A. By the formal-smoothness and finite-presentation characterization in [def-weil-pbc-smooth-ring-map], T is smooth over A. Apply [lem-weil-pbc-regular-ring-smooth-ascent] to obtain regularity of T.",
    "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-smooth-ring-map",
     "lem-weil-pbc-regular-ring-smooth-ascent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, final sentence of proof, using Algebra Tag 07NF, lemma-regular-goes-up."
+    "place": "Tag 07PB, lemma-J-0-goes-up; J-0 expanded using Tag 07P7, definition-J; separable field extension is Tag 030O, definition-separable-field-extension in algebra.tex."
    }
   },
   {
-   "text": "Write $h=s/\\varphi(f)^n$ with $s\\in S$. Since $h\\ne0$ in the domain $B$, $s\\ne0$. Put $a=\\varphi(f)s\\ne0$. The ring $T=(S_{\\varphi(f)})_{s/\\varphi(f)^n}$ is canonically $S_a$: in $T$, $\\varphi(f)$ and $h$ are units, hence so are $s=h\\varphi(f)^n$ and $a$; in $S_a$, both $\\varphi(f)$ and $s$ are units, with inverses $s/a$ and $\\varphi(f)/a$, so $h$ is a unit as well. The fraction maps fixing $S$ in the two directions are inverse since all fractions are built from $S$ and these inverses. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}T$ identifies with $V=D(a)\\subseteq\\operatorname{Spec}S$. This is nonempty since the prime $(0)$ of the domain $S$ does not contain $a$. For $\\mathfrak q\\in V$, localization of $S_a$ at the corresponding prime equals $S_{\\mathfrak q}$: the maps are $(u/a^i)/(v/a^j)\\mapsto ua^j/(va^i)$ and $u/v\\mapsto(u/1)/(v/1)$, where $v/a^j$ avoids the corresponding prime exactly when $v\\notin\\mathfrak q$. Since $a\\notin\\mathfrak q$, $va^i$ is then an allowed denominator. Cross multiplication in $F$ verifies that the maps respect the fraction equivalence [def-weil-pbc-localization-at-prime], and each composite fixes both $S$ and all inverted denominators, so fixes every fraction. Thus step 5 and [def-weil-regular-scheme] make every $S_{\\mathfrak q}$ for $\\mathfrak q\\in V$ regular local, as required.",
+   "text": "Put a = image(f) times g, nonzero by injectivity and the domain hypothesis. By [lem-weil-pbc-localization-of-localization], T is a localization of S at powers of a (Mathlib IsLocalization.Away.mul). Take the basic open D(a), which contains the zero prime and hence is nonempty. Given q in D(a), powers of a avoid q. The extended prime Q in T contracts to q; localizing T at Q is also localization of S at q by [lem-weil-pbc-localization-of-localization] and [def-weil-pbc-localization-at-prime]. Uniqueness of localization supplies T_Q isomorphic to S_q. The former is regular local by [def-weil-regular-scheme] and regularity of T, hence so is the latter.",
    "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-localization-of-localization",
     "def-weil-pbc-localization-at-prime",
     "def-weil-regular-scheme"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07PB, lemma-J-0-goes-up, conclusion after the two principal localizations; Tag 07P7, definition-J, expansion of J-0."
+    "place": "Tag 07PB, lemma-J-0-goes-up; J-0 expanded using Tag 07P7, definition-J; separable field extension is Tag 030O, definition-separable-field-extension in algebra.tex."
    }
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
   "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-of-localization",
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme",
-  "def-weil-pbc-finite-type-algebra",
   "lem-exc-generic-smooth-domain",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-weil-pbc-smooth-ring-map",
   "lem-weil-pbc-regular-ring-smooth-ascent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07PB, lemma-J-0-goes-up, proof; the principal localization and local-ring identifications are written out."
+  "place": "Tag 07PB, lemma-J-0-goes-up, proof, with its two principal localizations reordered: first apply generic smoothness over R, then localize the smooth algebra and factor its base through R_f. This avoids transport of separability between fraction fields; all localization and regularity identifications are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -271,5 +257,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261019T093546-L-2326756",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
