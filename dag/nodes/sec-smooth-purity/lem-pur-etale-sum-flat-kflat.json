@@ -24,62 +24,24 @@
  ],
  "proof": [
   {
-   "text": "To prove flatness, let 0 \\to G' \\to G \\to G'' \\to 0 be a short exact sequence of A-module sheaves on X. The canonical projection isomorphisms of [lem-pur-etale-sheaf-projection-map] identify the tensor of this sequence with u_{\\Sigma!}(F\\otimes_Au^*(-)) term by term. The inverse-image functor u^*=u^{-1} is exact by [prop-weil-pbc-inverse-image-modules-exact], so the sequence after u^* is exact; tensoring it with F is exact by the definition of flatness [def-pc-flat-sheaf-modules]. Finally u_{\\Sigma!} is exact on sheaves of modules over the constant ring A by [lem-weil-pbc-etale-restriction-injectives] (u is etale). The definition of flatness tests G\\mapsto G\\otimes_A u_{\\Sigma!}F; the symmetry isomorphism G\\otimes_A u_{\\Sigma!}F\\cong u_{\\Sigma!}F\\otimes_A G, natural in G, and likewise u^*G\\otimes_AF\\cong F\\otimes_Au^*G, move between the two orders, and a sequence naturally isomorphic to an exact one is exact. Therefore tensoring with u_{\\Sigma!}F preserves this short exact sequence, and hence u_{\\Sigma!}F is flat.",
+   "text": "Apply flat-sheaf preservation to the first conjunct and unbounded K-flat preservation to the second. For the third conjunct apply K-flat preservation again and the degreewise flat-term lemma. The three original functors and the entire theorem signature remain unchanged.",
    "uses": [
-    "lem-pur-etale-sheaf-projection-map",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-etale-restriction-injectives"
+    "lem-pur-etale-sum-flat-aux",
+    "lem-pur-etale-sum-kflat-aux",
+    "lem-pur-etale-sum-flat-terms-aux"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF, lemma-f-shriek-projection, pure-tensor construction and stalkwise isomorphism"
-   }
-  },
-  {
-   "text": "Let B be any acyclic complex of A-module sheaves on X. Exactness of u^*=u^{-1} implies that u^*B is acyclic: in each degree it preserves the kernels and images defining the cohomology sheaf, so the induced homology sheaves remain zero. By [lem-pur-etale-sum-tensor-totalization], the canonical totalization isomorphism gives\\n$$\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_A B)\\cong u_{\\Sigma!}\\operatorname{Tot}(P\\otimes_Au^*B).$$\\nThe definition [def-pc-kflat-complex] puts the acyclic complex in the first factor. For complexes K, L the signed symmetry x\\otimes y\\mapsto(-1)^{pq}y\\otimes x on K^p\\otimes_AL^q is an isomorphism of complexes \\operatorname{Tot}(K\\otimes_AL)\\cong\\operatorname{Tot}(L\\otimes_AK): with d(x\\otimes y)=dx\\otimes y+(-1)^px\\otimes dy both composites send x\\otimes y to (-1)^{pq}(dy\\otimes x+(-1)^qy\\otimes dx). Hence the K-flatness of P makes \\operatorname{Tot}(P\\otimes_Au^*B)\\cong\\operatorname{Tot}(u^*B\\otimes_AP) acyclic, and exactness of u_{\\Sigma!} on module sheaves [lem-weil-pbc-etale-restriction-injectives], applied degreewise, commutes with taking cohomology sheaves and so preserves that acyclicity. Thus \\operatorname{Tot}(B\\otimes_Au_{\\Sigma!}P)\\cong\\operatorname{Tot}((u_{\\Sigma!}P)\\otimes_AB) is acyclic for every acyclic B, which is exactly that u_{\\Sigma!}P is K-flat.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pur-etale-sum-tensor-totalization",
-    "def-pc-kflat-complex",
-    "lem-weil-pbc-etale-restriction-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF, lemma-f-shriek-projection, together with the definition of K-flatness; unbounded totalization is the agent expansion recorded in the item source"
-   }
-  },
-  {
-   "text": "The degreewise extension of P has term (u_{\\Sigma!}P)^n=u_{\\Sigma!}(P^n) by the definition of the degreewise sum extension. If every P^n is flat, applying the flat-sheaf argument of the first step to each P^n shows that every u_{\\Sigma!}(P^n) is flat. Combining this with the K-flatness proved in the second step gives the final assertion that u_{\\Sigma!}P is K-flat with flat terms.",
-   "uses": [
-    "def-weil-pbc-etale-sum-extension",
-    "lem-pur-etale-sheaf-projection-map",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-etale-restriction-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF, projection construction; degreewise extension and the definition of flat terms"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "def-weil-pbc-etale-sum-extension",
-  "lem-pur-etale-sheaf-projection-map",
-  "lem-pur-etale-sum-tensor-totalization",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-pur-etale-sum-flat-aux",
+  "lem-pur-etale-sum-kflat-aux",
+  "lem-pur-etale-sum-flat-terms-aux"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKF (lemma-f-shriek-projection), with the item source explicitly recording the unbounded K-flat expansion"
+  "place": "Tag 0GKF and the previously recorded unbounded expansion, organized into flatness, acyclic tensor tests, and termwise preservation."
  },
  "mathlib_searches": [
   {
@@ -163,10 +125,11 @@
    "AlgebraicGeometry.Scheme.etaleSumFlatModuleRealization",
    "AlgebraicGeometry.Scheme.etaleSumFlatComplexRealization",
    "AlgebraicGeometry.Scheme.etaleSumFlatComplexExtension",
+   "AlgebraicGeometry.Scheme.etaleSum_preserves_flat_terms_aux",
    "AlgebraicGeometry.Scheme.etaleSum_preserves_flat_kflat"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumFlatKFlat.lean",
-  "statement": "theorem etaleSum_preserves_flat_kflat {U X : Scheme.{u}} (f : U ⟶ X) [hf : Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (A : Type (u + 1)) [CommRing A] : (∀ F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A), SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization U A).obj F) → SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization X A).obj ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) f hf).obj F))) ∧ (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization U A).obj P) → CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization X A).obj ((etaleSumFlatComplexExtension f hf A).obj P))) ∧ (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization U A).obj P) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R := (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization U A).obj (P.X n))) → CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatComplexRealization X A).obj ((etaleSumFlatComplexExtension f hf A).obj P)) ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)) ((etaleSumFlatModuleRealization X A).obj (((etaleSumFlatComplexExtension f hf A).obj P).X n)))",
+  "statement": "theorem etaleSum_preserves_flat_kflat {U X : Scheme.{u}} (f : U ⟶ X)\n    [hf : Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (A : Type (u + 1)) [CommRing A] :\n    (∀ F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A),\n      SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R :=\n        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatModuleRealization U A).obj F) →\n      SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R :=\n        (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatModuleRealization X A).obj\n          ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) f hf).obj F))) ∧\n    (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R :=\n        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatComplexRealization U A).obj P) →\n      CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R :=\n        (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatComplexRealization X A).obj\n          ((etaleSumFlatComplexExtension f hf A).obj P))) ∧\n    (∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R :=\n        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatComplexRealization U A).obj P) →\n      (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R :=\n        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatModuleRealization U A).obj (P.X n))) →\n      CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R :=\n        (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatComplexRealization X A).obj\n          ((etaleSumFlatComplexExtension f hf A).obj P)) ∧\n      ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R :=\n        (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))\n        ((etaleSumFlatModuleRealization X A).obj\n          (((etaleSumFlatComplexExtension f hf A).obj P).X n)))",
   "branch": "newtargets-dag",
   "by": "N1",
   "date": "2026-10-17",
@@ -179,5 +142,15 @@
   "group": "N1",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, edge cases, canonical constructions, report sections, and side-overlay compilation all checked successfully."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T122547-L-466825",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

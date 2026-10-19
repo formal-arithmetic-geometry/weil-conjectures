@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-etale-constant-module-tensor",
+ "kind": "statement",
+ "title": "Constant-coefficient realization commutes naturally with right tensor",
+ "statement": "Let T be a scheme and A a commutative ring. Let E be the canonical realization from sheaves valued in A-modules to module sheaves over the constant commutative ring sheaf, using constant-scalar extension and canonical coefficient-ring transport [lem-weil-pbc-etale-constant-ring-module-equivalence, lem-pur-site-constant-module-hom]. For every A-module sheaf F, there is a natural isomorphism E followed by the sheafified right tensor with E(F) to right tensor with F followed by E [def-pur-sheaf-tensor-product]. It is natural in the variable module sheaf; no flatness or morphism of schemes is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03EK, 093I and 03CV; the tensor universal property together with the constant-scalar extension equivalence."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pur-site-constant-module-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Encode constant-scalar module-valued presheaves as modules over the constant ring presheaf. The encoding identifies sectionwise tensors by the identity on pure tensors. The canonical locally bijective coefficient-ring map identifies module sheafification with constant-scalar realization: the map is the identity on underlying abelian sheaves, and the sheafification counit is invertible. Apply the natural module sheafification tensor comparison of lem-sf-proetale-sheafification-tensor-comparison in both factors. Compose it with the monoidal comparison and invertible counit of ordinary module-valued sheafification. This gives a natural tensor comparison in both factors; fixing the second factor gives the stated right-tensor comparison.",
+   "uses": [
+    "lem-sf-proetale-sheafification-tensor-comparison",
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-pur-site-constant-module-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-sheafification-tensor-comparison",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pur-site-constant-module-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03EK, 093I and 03CV; the tensor universal property together with the constant-scalar extension equivalence.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*[Tt]ensor|[Tt]ensor.*constant",
+   "results": "{\"t\": \"2026-10-18T22:53:21Z\", \"tool\": \"grep\", \"query\": \"constant.*[Tt]ensor|[Tt]ensor.*constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean\", \"Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean\", \"Mathlib/RingTheory/PiTensorProduct.lean\", \"Mathlib/RingTheory/TensorProduct/Pi.lean\"], \"digest\": \"cecb3113fc1a5775\"}",
+   "date": "2026-10-19",
+   "verdict": "No specialized constant-scalar tensor comparison. Generic monoidal commTensorRight requires a monoidal realization, which is exactly the missing construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commTensorRight\"",
+   "results": "{\"t\": \"2026-10-18T22:53:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"commTensorRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.commTensorRight\", \"CategoryTheory.Functor.Monoidal.commTensorRight_hom_app\", \"CategoryTheory.Functor.Monoidal.commTensorRight_inv_app\"], \"digest\": \"1e8b4cee57cb8456\"}",
+   "date": "2026-10-19",
+   "verdict": "No specialized constant-scalar tensor comparison. Generic monoidal commTensorRight requires a monoidal realization, which is exactly the missing construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant coefficient realization functor from module valued sheaves to modules over the constant ring sheaf preserves tensor products naturally",
+   "results": "{\"t\": \"2026-10-18T22:53:24Z\", \"tool\": \"leanfinder\", \"query\": \"The constant coefficient realization functor from module valued sheaves to modules over the constant ring sheaf preserves tensor products naturally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Monoidal.tensorObj\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.Monoidal.tensorObj_obj\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.monoidalCategory\", \"PresheafOfModules.monoidalCategoryStruct\"], \"digest\": \"e2b70e5dbf633d75\"}",
+   "date": "2026-10-19",
+   "verdict": "No specialized constant-scalar tensor comparison. Generic monoidal commTensorRight requires a monoidal realization, which is exactly the missing construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness is preserved by the equivalence between sheaves of modules and sheaves with constant scalar action",
+   "results": "{\"t\": \"2026-10-18T20:22:32Z\", \"tool\": \"leansearch\", \"query\": \"Flatness is preserved by the equivalence between sheaves of modules and sheaves with constant scalar action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_linearEquiv\", \"Module.Flat.of_isLocalizedModule\", \"Module.Flat.shrink\", \"Module.Flat.iff_flat_tensorProduct\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.isBaseChange\", \"CategoryTheory.RepresentablyFlat.of_iso\", \"Module.FaithfullyFlat.of_linearEquiv\"], \"digest\": \"27e1249ccec7f942\"}",
+   "date": "2026-10-19",
+   "verdict": "No specialized comparison; these results concern flatness of ordinary modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat",
+  "date": "2026-10-19",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-co-smooth-etale-locality",
+   "place": "Expanded proof sentence: sum extension preserves flatness and K-flatness, by exact inverse image and the tensor comparison.",
+   "via": [
+    "lem-pur-etale-sum-flat-kflat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleConstantModuleTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantModuleTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleConstantModule_tensorRight_comparison",
+  "statement": "theorem etaleConstantModule_tensorRight_comparison (T : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A]\n    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :\n    Nonempty (etaleSumTensorTestRealization T A ⋙\n      SheafOfModules.siteSheafTensorRight.{_, _, _, u + 1} (J := T.smallEtaleTopology)\n        (A := (constantSheaf T.smallEtaleTopology CommRingCat.{u + 1}).obj\n          (CommRingCat.of A)) ((etaleSumTensorTestRealization T A).obj F) ≅\n      tensorRight F ⋙ etaleSumTensorTestRealization T A)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-19",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleConstantModule_tensor_comparison",
+   "AlgebraicGeometry.Scheme.etaleConstantModule_tensorRight_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T122547-L-466825",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T122547-L-466825",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

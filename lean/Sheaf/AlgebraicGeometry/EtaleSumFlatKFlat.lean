@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group N1
+Authors: SHEAF groups N1 and H6
 -/
 module
 
@@ -13,11 +13,10 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleSumPreservesFlat
+import Sheaf.AlgebraicGeometry.EtaleSumPreservesKFlat
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
-import Sheaf.Paper.EtaleSumTensorTotalization
 /-!
 # Étale sum extension preserves flatness and K-flatness
 
@@ -77,6 +76,29 @@ def etaleSumFlatComplexExtension {U X : Scheme.{u}} (f : U ⟶ X) (hf : Etale f)
       CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ :=
   letI := (Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f hf).isLeftAdjoint
   (Etale.etaleLowerShriek (ModuleCat.{u + 1} A) f hf).mapHomologicalComplex (ComplexShape.up ℤ)
+
+/-- Étale sum extension preserves flat terms.
+Source: Tag 0GKF (blueprint: lem-pur-etale-sum-flat-terms-aux).
+
+For each degree n, apply the flatness component to P.X n. The degree-n term of the
+mapHomologicalComplex extension is definitionally the sum extension of that term,
+so the resulting family of flatness proofs is exactly the required conclusion. -/
+theorem etaleSum_preserves_flat_terms_aux {U X : Scheme.{u}} (f : U ⟶ X)
+    [hf : Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (A : Type (u + 1)) [CommRing A] :
+    ∀ P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (J := U.smallEtaleTopology) (R :=
+        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))
+        ((etaleSumFlatComplexRealization U A).obj P) →
+      (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := U.smallEtaleTopology) (R :=
+        (constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))
+        ((etaleSumFlatModuleRealization U A).obj (P.X n))) →
+      ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R :=
+        (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))
+        ((etaleSumFlatModuleRealization X A).obj
+          (((etaleSumFlatComplexExtension f hf A).obj P).X n)) := by
+  intro P _ hflat n
+  exact etaleSum_preserves_flat_aux f A (P.X n) (hflat n)
 
 /-- Étale sum extension preserves flat sheaves, arbitrary unbounded K-flat complexes,
 and K-flat complexes with flat terms. Flatness uses exact sheaf tensor; K-flatness uses
@@ -138,6 +160,13 @@ theorem etaleSum_preserves_flat_kflat {U X : Scheme.{u}} (f : U ⟶ X)
         (constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))
         ((etaleSumFlatModuleRealization X A).obj
           (((etaleSumFlatComplexExtension f hf A).obj P).X n))) := by
-  sorry
+  constructor
+  · exact etaleSum_preserves_flat_aux f A
+  constructor
+  · exact etaleSum_preserves_kflat_aux f A
+  · intro P hP hflat
+    refine ⟨etaleSum_preserves_kflat_aux f A P hP, ?_⟩
+    exact etaleSum_preserves_flat_terms_aux f A P hP hflat
+
 
 end AlgebraicGeometry.Scheme
