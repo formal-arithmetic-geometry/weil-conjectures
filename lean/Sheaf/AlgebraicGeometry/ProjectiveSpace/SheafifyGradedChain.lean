@@ -5,7 +5,6 @@ Authors: SHEAF group U1
 -/
 module
 
-public import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 
