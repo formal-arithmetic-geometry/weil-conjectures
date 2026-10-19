@@ -27,6 +27,7 @@ import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.Localization.BaseChange
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-!
 # Localization and geometric inverse image
@@ -379,7 +380,32 @@ theorem localizationInverseImage_comp
     δ.hom ≫ Functor.whiskerRight κ.hom (scalarLocalization A r) =
       Functor.whiskerLeft (scalarLocalization R t) κ.hom ≫
         Functor.whiskerRight β.hom b.modules ≫ Functor.whiskerLeft a.modules γ.hom := by
-  sorry
+  let ζ : scalarLocalization R t ⋙ c.modules ≅ c.modules ⋙ scalarLocalization A r :=
+    Functor.isoWhiskerLeft (scalarLocalization R t) κ ≪≫
+      Functor.isoWhiskerRight β b.modules ≪≫ Functor.isoWhiskerLeft a.modules γ ≪≫
+        (Functor.isoWhiskerRight κ (scalarLocalization A r)).symm
+  have hζ : Functor.whiskerRight (scalarLocalizationUnit R t) c.modules ≫ ζ.hom =
+      Functor.whiskerLeft c.modules (scalarLocalizationUnit A r) := by
+    apply NatTrans.ext
+    funext M
+    have hβ := congr_app _hβ M
+    have hγ := congr_app _hγ (a.modules.obj M)
+    simp only [NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app] at hβ hγ
+    dsimp [ζ]
+    rw [← Category.assoc, κ.hom.naturality, Category.assoc]
+    simp only [Functor.comp_map]
+    rw [← b.modules.map_comp_assoc, hβ, reassoc_of% hγ]
+    rw [← (scalarLocalizationUnit A r).naturality]
+    simp
+  have he : δ = ζ :=
+    (existsUnique_localizationInverseImage (L ⋙ L') (V' ⋙ V) (_adj.comp _adj')
+      R A c t r _hc).unique _hδ hζ
+  rw [he]
+  dsimp [ζ]
+  apply NatTrans.ext
+  funext M
+  simp [← Functor.map_comp]
 
 /-- The identity inverse-image comparison is the identity under its canonical
 identification. The equation is an equality of natural transformations.
@@ -402,7 +428,26 @@ theorem localizationInverseImage_id
       Functor.whiskerLeft a.modules (scalarLocalizationUnit R t)) :
     β.hom ≫ Functor.whiskerRight κ.hom (scalarLocalization R t) =
       Functor.whiskerLeft (scalarLocalization R t) κ.hom := by
-  sorry
+  let ζ : scalarLocalization R t ⋙ a.modules ≅ a.modules ⋙ scalarLocalization R t :=
+    Functor.isoWhiskerLeft (scalarLocalization R t) κ ≪≫
+      (Functor.isoWhiskerRight κ (scalarLocalization R t)).symm
+  have hζ : Functor.whiskerRight (scalarLocalizationUnit R t) a.modules ≫ ζ.hom =
+      Functor.whiskerLeft a.modules (scalarLocalizationUnit R t) := by
+    apply NatTrans.ext
+    funext M
+    dsimp [ζ]
+    rw [← Category.assoc, κ.hom.naturality]
+    simp only [Functor.id_map]
+    rw [Category.assoc, ← (scalarLocalizationUnit R t).naturality]
+    simp
+  have he : β = ζ :=
+    (existsUnique_localizationInverseImage (𝟭 _) (𝟭 _) Adjunction.id
+      R R a t t _ht).unique _hβ hζ
+  rw [he]
+  dsimp [ζ]
+  apply NatTrans.ext
+  funext M
+  simp [← Functor.map_comp]
 
 /-- Descent of the module comparison through ordinary unbounded derived localization.
 The two outer isomorphisms are the canonical termwise composition comparisons.
@@ -453,7 +498,40 @@ theorem localizationComparisonDerived_comp
         Functor.whiskerRight (localizationComparisonDerived P Q I β).hom
           G.mapDerivedCategory ≫
         Functor.whiskerLeft I.mapDerivedCategory (localizationComparisonDerived Q T G γ).hom := by
-  sorry
+  have hδ' : δ = Functor.isoWhiskerRight β G ≪≫ Functor.isoWhiskerLeft I γ :=
+    Iso.ext _hδ
+  rw [hδ']
+  simp only [localizationComparisonDerived, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapDerivedCategoryNatIso_trans, Category.assoc]
+  erw [← Functor.mapDerivedCategoryCompIso_assoc I G T,
+    reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft I γ)]
+  have hc : (Functor.mapDerivedCategoryCompIso I (Q ⋙ G)).hom =
+      (Functor.mapDerivedCategoryCompIso (I ⋙ Q) G).hom ≫
+        Functor.whiskerRight (Functor.mapDerivedCategoryCompIso I Q).hom
+          G.mapDerivedCategory ≫
+        Functor.whiskerLeft I.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Q G).inv := by
+    rw [← cancel_mono (Functor.whiskerLeft I.mapDerivedCategory
+      (Functor.mapDerivedCategoryCompIso Q G).hom)]
+    simp only [Category.assoc, ← Functor.whiskerLeft_comp, Iso.inv_hom_id]
+    erw [Functor.whiskerLeft_id, Category.comp_id]
+    exact Functor.mapDerivedCategoryCompIso_assoc I Q G
+  rw [hc]
+  simp only [Category.assoc]
+  erw [reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight β G)]
+  simp only [Functor.whiskerRight_comp, Functor.whiskerLeft_comp, Category.assoc]
+  have hp : (Functor.mapDerivedCategoryCompIso P (I ⋙ G)).inv ≫
+      (Functor.mapDerivedCategoryCompIso (P ⋙ I) G).hom =
+        Functor.whiskerLeft P.mapDerivedCategory (Functor.mapDerivedCategoryCompIso I G).hom ≫
+          Functor.whiskerRight (Functor.mapDerivedCategoryCompIso P I).inv
+            G.mapDerivedCategory := by
+    rw [← cancel_epi (Functor.mapDerivedCategoryCompIso P (I ⋙ G)).hom,
+      ← cancel_mono (Functor.whiskerRight (Functor.mapDerivedCategoryCompIso P I).hom
+        G.mapDerivedCategory)]
+    simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    simp only [Category.assoc, ← Functor.whiskerRight_comp, Iso.inv_hom_id]
+    erw [Functor.whiskerRight_id, Category.comp_id]
+    exact (Functor.mapDerivedCategoryCompIso_assoc P I G).symm
+  rw [reassoc_of% hp]
 
 /-- The identity comparison also descends with the canonical derived identity
 identification, as an equation of natural transformations.
@@ -470,7 +548,15 @@ theorem localizationComparisonDerived_id
     (localizationComparisonDerived P P (𝟭 A) β).hom ≫
         Functor.whiskerRight (Functor.mapDerivedCategoryIdIso A).hom P.mapDerivedCategory =
       Functor.whiskerLeft P.mapDerivedCategory (Functor.mapDerivedCategoryIdIso A).hom := by
-  sorry
+  have he : β = Iso.refl P := Iso.ext _hβ
+  rw [he]
+  dsimp [localizationComparisonDerived]
+  rw [Functor.mapDerivedCategoryNatIso_refl (F := P)]
+  erw [Category.id_comp, Category.assoc,
+    Functor.mapDerivedCategoryCompIso_id_comp, Category.comp_id]
+  rw [← cancel_epi (Functor.mapDerivedCategoryCompIso P (𝟭 A)).hom]
+  erw [Iso.hom_inv_id, Functor.mapDerivedCategoryCompIso_comp_id]
+  rfl
 
 /-- Compatibility with a specified identification of the inverse-image coefficient ring.
 The presentation `b` is reinterpretation along `e`; its underlying inverse image is the
@@ -520,7 +606,8 @@ theorem localizationInverseImage_coefficient
     δ.hom ≫ Functor.whiskerRight κ.hom (scalarLocalization A r) =
       Functor.whiskerLeft (scalarLocalization R t) κ.hom ≫
         Functor.whiskerRight β.hom b.modules ≫ Functor.whiskerLeft a.modules γ.hom := by
-  sorry
+  exact localizationInverseImage_comp L V _adj (𝟭 _) (𝟭 _) (Adjunction.id)
+    R S A a b c κ t s r _hs _hr _hc β γ δ _hβ _hγ _hδ
 
 /-- Descent of a localization unit to the ordinary unbounded derived category, using
 its actual termwise chain map and the localization universal property.
