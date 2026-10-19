@@ -17019,3 +17019,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q72/lem-per-trait-affine-line-support-estimate (reviewer RETURN: Route-pivot fault (F, rule 3 of the 2026-10-19 route decision). The item lem-per-trait-affine-line-support-estimate is i)
 - 03:58 L: returned deliver/Q39/lem-per-singular-curve-point-blowup-step (reviewer RETURN: F / route pivot of 2026-10-19. The item lem-per-singular-curve-point-blowup-step is itself on the drop list (side coord/)
 - 03:58 L: returned deliver/Q82/lem-per-rational-point-blowup-normality (reviewer RETURN: Route-pivot drop; the maths itself is sound. The item lem-per-rational-point-blowup-normality is itself listed in clones)
+- 03:58 L: returned deliver/Q45/lem-per-projective-bundle-relative-ample (reviewer RETURN: Returned because the item was dropped by the human's route decision, not for a mathematical fault. The item lem-per-proj)
