@@ -27,9 +27,58 @@
   "def-trf-admissibility",
   "def-compact-support-direct-image-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For trfGraphOrigin, discard the finite-Tor conjunct. The finite set of nonzero intrinsic cohomology degrees is bounded above and below, giving boundedness. Transport this through the exact canonical scalar equivalence. Its homology comparison, followed by intrinsicRealization_restriction and proEtaleModuleRestriction_constructible_iff, makes every fixed-scalar cohomology sheaf constructible. Apply the fixed-module bounded-constructible origin theorem and then boundedConstructible.plusEtaleOrigin. This works for zero objects and empty schemes without needing l different from the characteristic.",
+   "uses": [
+    "lem-sf-intrinsic-realization-origin-comparison",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For trfGraphIdentityBoundedBelow, use the canonical compactification instance and quasi-compactness of X over Spec k to obtain CompactSpace X. The finite-coefficient ordinary etale upper-shriek bounded-below instance then applies to the identity.",
+   "uses": [
+    "lem-etale-upper-shriek-quasicompact-bounded-below",
+    "def-trf-correspondence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the published exceptional Hom equivalence to the full bounded-below etale-origin category, obtaining its actual adjunction. The canonical originCompactSupportId identifies its left functor with the identity, so that left functor is an equivalence and the adjunction unit is invertible. The transpose of the identity comparison is the unit followed by the right functor applied to that comparison, hence is invertible. Applying the full-subcategory inclusion and unfolding mkOfHomEquiv identifies this transpose exactly with trfGraphIdentityMap; no arbitrary adjunction or identity comparison is used.",
+   "uses": [
+    "def-trf-admissibility",
+    "def-weil-exceptional-inverse-image",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The graph data retain C=X, c1=id, c2=h and coefficient v followed by the proved identity exceptional isomorphism. Its toProduct map is definitionally trfFixedGraphMap, including proof irrelevance of the commuting-square proof. Thus the two fixed schemes are the identical chosen pullback, and trfGraphCorrespondence_fixedScheme is rfl. This preserves the full scheme structure for arbitrary h and v.",
+   "uses": [
+    "def-trf-correspondence",
+    "def-trf-fixed-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-intrinsic-realization-origin-comparison",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
+  "def-trf-correspondence",
+  "def-trf-admissibility",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-comp-composition",
+  "def-trf-fixed-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-trf-graph-correspondence.md",
+  "place": "Graph definition and fixed-scheme sentence; proof by A3, 2026-10-19, using the recorded canonical identity comparison and the published exceptional Hom equivalence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -180,5 +229,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The main entry point uses the exact recorded coefficient conventions and their geometric fibre; the positive level is reindexed as level-1. The helpers give the same construction for arbitrary separated finite-type k-schemes in the correspondence dependency, construct the canonical identity exceptional map by transposing the published compact-support identity comparison under the specified exceptional Hom equivalence, and expose its invertibility and the fixed-scheme equality. No arbitrary adjunction or identity comparison is assumed. All postponed theorems are named typing/identity-comparison/fixed-scheme obligations of this definition, with proof docstrings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261019T093240-L-2284547",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

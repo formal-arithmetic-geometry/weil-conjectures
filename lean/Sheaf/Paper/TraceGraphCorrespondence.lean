@@ -6,6 +6,9 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Paper.TraceFixedScheme
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import Sheaf.Paper.IntrinsicRealizationOriginComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-!
 # Graph cohomological correspondences
@@ -32,6 +35,7 @@ variable (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   (K : (trfFiniteTorFixed l E n X.left).FullSubcategory)
 
+set_option linter.unusedSectionVars false in
 /-- The etale-origin witness needed to read the constructible identity adjunction.
 Source: blueprint def-trf-graph-correspondence, `K ∈ Dᵇ_ctf`
 (blueprint: def-trf-graph-correspondence).
@@ -44,8 +48,43 @@ theorem trfGraphOrigin :
     ProEtale.DerivedCategory.plusEtaleOrigin
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))
       X.left K.obj := by
-  sorry
+  let B := Padic.coefficientExtensionRing l E (n + 1)
+  let R := ProEtale.finiteCoefficientIntrinsicRealization X.left B
+  let J := (sfIntrinsicDerivedEquivalence X.left B).functor.obj K.obj
+  have hJ := K.property.1
+  change Set.Finite {i : ℤ | ¬ IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj J)} ∧
+    (∀ i, IsConstructibleProEtaleModuleSheaf X.left B
+      ((_root_.DerivedCategory.homologyFunctor _ i).obj J)) at hJ
+  obtain ⟨a, ha⟩ := hJ.1.bddBelow
+  obtain ⟨b, hb⟩ := hJ.1.bddAbove
+  have hbounded : _root_.DerivedCategory.TStructure.t.bounded J := by
+    constructor
+    · refine ⟨a, (_root_.DerivedCategory.isGE_iff J a).mpr ?_⟩
+      intro i hi
+      by_contra hn
+      exact (not_le_of_gt hi) (ha hn)
+    · refine ⟨b, (_root_.DerivedCategory.isLE_iff J b).mpr ?_⟩
+      intro i hi
+      by_contra hn
+      exact (not_le_of_gt hi) (hb hn)
+  have hKbounded : _root_.DerivedCategory.TStructure.t.bounded K.obj :=
+    _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso
+      ((sfIntrinsicDerivedEquivalence X.left B).unitIso.app K.obj).symm
+      ((sfIntrinsicModuleEquivalence X.left B).inverse.bounded_mapDerivedCategory_obj hbounded)
+  apply ProEtale.DerivedCategory.boundedConstructible.plusEtaleOrigin
+  apply ProEtale.DerivedCategory.boundedConstructible_of_homology (ULift.{u + 1, u} B) hKbounded
+  intro i
+  obtain ⟨e⟩ := ProEtale.intrinsicRealization_restriction X.left B
+  let H := (_root_.DerivedCategory.homologyFunctor _ i).obj K.obj
+  have eH : R.obj H ≅ (_root_.DerivedCategory.homologyFunctor _ i).obj J :=
+    (R.mapDerivedCategoryHomologyFunctorIso i).app K.obj
+  have hc := (proEtaleModuleRestriction_constructible_iff X.left B _).mp (hJ.2 i)
+  exact ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj
+    (ULift.{u + 1, u} B)
+    (ProEtale.isConstructible_of_iso
+      ((proEtaleModuleRestriction X.left B).mapIso eH.symm ≪≫ e.app H) hc)
 
+set_option linter.unusedSectionVars false in
 /-- The ordinary etale identity exceptional functor preserves bounded below objects.
 This supplies the identity case of the constructible adjunction without assuming an
 ambient pro-etale adjoint. Source: blueprint def-trf-graph-correspondence, identity unit
@@ -60,7 +99,10 @@ theorem trfGraphIdentityBoundedBelow :
     Etale.HasBoundedBelowUpperShriek
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))
       (𝟙 X.left) := by
-  sorry
+  let := trfCorrespondenceCompactifiable F X X (𝟙 X)
+  let : CompactSpace X.left :=
+    @QuasiCompact.compactSpace_of_compactSpace _ _ X.hom inferInstance inferInstance
+  infer_instance
 
 /-- The identity exceptional unit transported along `R(id)_! ≅ id`. We transpose the
 canonical compact-support identity map using the published exceptional Hom equivalence,
@@ -93,7 +135,29 @@ category. Its transpose identifies the right adjoint of the identity with the id
 The two triangle identities give inverse maps. The forward map is precisely the transpose
 of the compact-support identity comparison, which defines `trfGraphIdentityMap`. -/
 theorem isIso_trfGraphIdentityMap : IsIso (trfGraphIdentityMap F l E n X K) := by
-  sorry
+  let A := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))
+  let := trfCorrespondenceCompactifiable F X X (𝟙 X)
+  let := trfGraphIdentityBoundedBelow F l E n X
+  let P := ProEtale.DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X.left
+  let L := ProEtale.originCompactSupport A (𝟙 X.left)
+  let R := P.lift (P.ι ⋙ ProEtale.rightDerivedUpperShriek
+    (ModuleCat.{u + 1} A) (𝟙 X.left))
+    (fun M ↦ ProEtale.plusEtaleOrigin_rightDerivedUpperShriek_obj (𝟙 X.left) M.property.plus)
+  let adj : L ⊣ R := ProEtale.rightDerivedUpperShriekAdjunction (𝟙 X.left) P P
+    (fun _ h ↦ h) (fun _ h ↦ h.plus)
+    (fun _ h ↦ h.rightDerivedLowerShriek_obj (𝟙 X.left))
+    (fun _ h ↦ ProEtale.plusEtaleOrigin_rightDerivedUpperShriek_obj (𝟙 X.left) h.plus)
+  let α := ProEtale.originCompactSupportId A X.left
+  have : L.IsEquivalence := Functor.isEquivalence_of_iso α.symm
+  let M : P.FullSubcategory := ⟨K.obj, trfGraphOrigin F l E n X K⟩
+  have hunit : IsIso (adj.unit.app M) := inferInstance
+  have hi : IsIso (adj.homEquiv M M (α.hom.app M)) := by
+    rw [adj.homEquiv_unit]
+    infer_instance
+  have hm := (P.ι).map_isIso (adj.homEquiv M M (α.hom.app M))
+  dsimp only [adj] at hm
+  rw [ProEtale.rightDerivedUpperShriekAdjunction, Adjunction.mkOfHomEquiv_homEquiv] at hm
+  exact hm
 
 /-- The canonical identity exceptional identification; only its invertibility proof is
 postponed, and its forward map has already been constructed.
@@ -134,7 +198,7 @@ theorem trfGraphCorrespondence_fixedScheme (h : X ⟶ X)
       h.left).leftDerivedFunctor).obj K.obj ⟶ K.obj) :
     (trfGraphCorrespondence F l E n hl X K h v).fixedScheme =
       trfEndomorphismFixedScheme X h := by
-  sorry
+  rfl
 
 /-- Separation in the bundled over-scheme presentation of the recorded geometric fibre.
 Source: blueprint def-trf-graph-correspondence, X in the conventions
