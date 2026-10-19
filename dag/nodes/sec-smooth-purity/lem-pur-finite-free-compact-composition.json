@@ -22,7 +22,13 @@
   "lem-coef-finite-direct-image",
   "def-exchange-projection",
   "lem-amb-etale-compact-comparisons",
-  "thm-sf-comp-composition"
+  "thm-sf-comp-composition",
+  "def-coef-finite-coefficient-stages",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-chosen-compactification-compositors",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-sf-refinement-comparison-isomorphism"
  ],
  "proof": [
   {
@@ -302,5 +308,36 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-7e256aaff (reviewer sub-agent of L); spot-checked: Read in full: the item (statement and 8 steps), every cited statement, the unit sk-thm-purity-transport and the main-20261015 transport proof (Steps 1 and 3; the steps are agent-written). The statement is true and not weakened. B=A_{L,en} is free of rank [L:E] over A. Both equations type-check. Small cases checked: L=E, empty X, identity maps, proper-only and open-only compositions, w=id. Three faults repaired. (1) C4, Step 2: c_h was attributed to def-exchange-projection, B-linearity was not argued, and it pointed to Step 7 instead of Step 8. (2) E5, Step 3: the refinement comparison was misdescribed; it is Rp_*(alpha_u) followed by the composition identification. I re-derived the identity from lem-sf-proper-open-coefficient-refinement, naturality of chi_p and the composition identity of lem-coef-finite-direct-image. (3) E1/C3, Step 5: the mate normalization in lem-amb-unbounded-proper-open-interchange holds only for cartesian squares, and alpha is built from gamma_Q of lem-cbc-proper-open-interchange-coherence. Now shown: the square pb=vp_Y is cartesian, the two maps have the same representative on D^+, and the L_{i,B} typo is fixed. Editorial edits: a clause justifying the open-composition square in Step 4; the Step 6 subscript typo S_{\\bar X} corrected to S_{\\bar Y}; the redundant citation of the unsplit sibling lem-pur-finite-free-projection-exchange removed (its statement repeats this item's refinement clauses, so it risks a future cycle); proof_origin.by set to agent. Batch 5: lem-amb-unbounded-proper-open-interchange and lem-sf-proper-open-comparison-site-normalization (and the added lem-cbc-proper-open-interchange-coherence) are compact-support construction infrastructure. Their closures meet the Poincare-duality chapter only in five general sk-lem-finite nodes (scalar extension, lisse sheaves as module objects, local constancy, base change of separated finite-type maps). None of these is Poincare duality or a step of its proof, and the closures reach nothing in the trace-formula chapter, so I accepted them. No cycle. Accepted tool_uses: lem-coef-finite-free-extension, lem-coef-finite-direct-image, lem-sf-proper-open-coefficient-refinement, lem-trf-open-ctf, cor-sf-direct-image-ctf-nonproper, cor-sf-direct-image-ctf-proetale, lem-sf-comparison-open-tensor-coherence. For the maintainer: lem-coef-finite-free-compact-composition (Q28, created 2026-10-18) duplicates this item (created 2026-10-17) on the pro-etale realization and should be merged into it, or have its coefficient-system clause split off.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeCompactSupportComposition",
+  "declaration": "AlgebraicGeometry.FiniteFreeCompactSupport.finite_free_compactSupport_composition",
+  "declarations": [
+   "AlgebraicGeometry.FiniteFreeCompactSupport.realization",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.support",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.coefficientMap",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.etaleComposition",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.compositionReal",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.composition",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.etaleRefinement",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.refinement",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.SiteCompatibility",
+   "AlgebraicGeometry.FiniteFreeCompactSupport.finite_free_compactSupport_composition"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeCompactSupportComposition.lean",
+  "statement": "theorem finite_free_compactSupport_composition (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) (t : Stage l E) (a : Arrow (baseStage n) t) (_level : t.exponent = n) (pro : Bool) {X Y Z : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) (K : Sites.D pro (baseStage (l := l) (E := E) n).ring X) (_hK : Sites.Ctf pro (baseStage (l := l) (E := E) n).ring X K) : (∀ (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (baseStage (l := l) (E := E) n).ring))), Sites.Ctf false (baseStage (l := l) (E := E) n).ring X L.obj → ∀ (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} t.ring))) (γ : N.obj ≅ (Sites.scalar false a.ringMap X).obj L.obj), SiteCompatibility a.ringMap c L N γ) ∧ IsIso (coefficientMap pro a.ringMap c K) ∧ (∀ (K' : Sites.D pro (baseStage (l := l) (E := E) n).ring X), Sites.Ctf pro (baseStage (l := l) (E := E) n).ring X K' → ∀ v : K ⟶ K', (Sites.scalar pro a.ringMap Y).map ((support pro _ c).map v) ≫ coefficientMap pro a.ringMap c K' = coefficientMap pro a.ringMap c K ≫ (support pro t.ring c).map ((Sites.scalar pro a.ringMap X).map v)) ∧ (∃ (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (baseStage (l := l) (E := E) n).ring))), Nonempty ((realization pro _ X).obj L.obj ≅ K)) ∧ (∃ (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} t.ring))), Nonempty ((realization pro _ X).obj N.obj ≅ (Sites.scalar pro a.ringMap X).obj K)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (baseStage (l := l) (E := E) n).ring))) (α : (realization pro _ X).obj L.obj ≅ K) (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} t.ring))) (β : (realization pro _ X).obj N.obj ≅ (Sites.scalar pro a.ringMap X).obj K), (Sites.scalar pro a.ringMap Z).map (composition pro _ c d e L α) ≫ coefficientMap pro a.ringMap e K = coefficientMap pro a.ringMap d ((support pro _ c).obj K) ≫ (support pro t.ring d).map (coefficientMap pro a.ringMap c K) ≫ composition pro t.ring c d e N β ∧ ∀ (c' : Compactification f) (r : c'.Refinement c), (Sites.scalar pro a.ringMap Y).map (refinement pro _ r L α) ≫ coefficientMap pro a.ringMap c K = coefficientMap pro a.ringMap c' K ≫ refinement pro t.ring r N β)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Repair of returned head 0606f675dfda, H2: statement dependencies now cite the concrete definition owners and the actual restriction-of-scalars isomorphism theorem. The Lean theorem and all helper constructions are unchanged; imports directly expose the construction modules. No theorem is added as a prerequisite solely for plain definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d4db7c34",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 0606f675dfda (H2). Lean byte-identical except imports (+CompactSupportRestrictionOfScalars, used for compactSupportRestrictionIso; site-comparison import made public); item changes only stmt_deps/lean.note, exactly the prescribed swap (def-coef-finite-coefficient-stages, def-per-exceptional-coefficient-maps, new def-pur-chosen-compactification-compositors, lem-sf-compact-support-restriction-of-scalars, def-sf-compact-support-site-comparison-construction). Mechanical finding: compactSupportRestrictionIso is asIso of the lem-sf-compact-support-restriction-of-scalars theorems, a theorem-constructed object, PASS on that point. New existing:true def node on unchanged CompactSupportSiteCoherence owns 3 plain compositors (no .choose, no other def owner); fields OK, statement verbatim; its theorem cites (lem-amb-etale-compact-comparisons, thm-sf-comp-composition) own the canonical isos used, accepted. Dep copies identical to live; statement clauses/edge cases unchanged from prior reading. nt_compile --json clean, 8.5 s. Advisories: live restriction-of-scalars record now names intrinsicCompactSupportRestriction while the item uses compactSupportRestrictionIso; compositor uses compactExchangeTransportComparison wrapper of the cited site comparison."
  }
 }
