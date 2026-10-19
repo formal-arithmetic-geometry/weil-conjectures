@@ -16765,3 +16765,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/K5/Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage (stage 3; reviewer PASS; first push; landing 20261019T005314-L-2750908 (interface); batch 20261019T005255; modules 3; new nodes 2)
 - 00:53 L: merged deliver/K5/Sheaf.Paper.IntegralUniformCoefficient (stage 3; reviewer PASS; first push; landing 20261019T005314-L-2751011 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/K6/Sheaf.AlgebraicGeometry.ProEtaleSupportedKernelComplex (stage 3; reviewer PASS; first push; landing 20261019T005334-L-2754017 (interface); batch 20261019T005255; modules 2; new nodes 1)
+- 00:53 L: merged deliver/K6/Sheaf.AlgebraicGeometry.TorsorComparisonGlue (stage 3; reviewer PASS; first push; landing 20261019T005335-L-2754129 (proof); batch 20261019T005255; modules 1; new nodes 0)

@@ -20,123 +20,60 @@
  ],
  "proof": [
   {
-   "text": "First fix the restriction identifications used throughout. By [lem-weil-pbc-etale-site-localization-open], for any etale morphism $W\\to X$ (in particular any open subscheme) the slice $X_{\\Et}/W$ is $W_{\\Et}$ as a site, not just at the level of abelian sheaves. Part (1) of [lem-weil-proetale-weakly-etale-localization] identifies $X_{\\Proet}/W$ with $W_{\\Proet}$ and their set sheaves. The inclusion in [def-weil-pbc-site-comparison-morphism] views every etale object as weakly etale, so both site-identification hypotheses hold. Apply [lem-weil-pbc-slice-site-localization] to the continuous inclusion defining $\\nu_X$ in [def-weil-pbc-site-comparison-morphism]. On the localized sites the inclusion is exactly the inclusion defining $\\nu_W$. Hence there is a natural isomorphism $r_{W,F}:(\\nu_X^*F)|_W\\xrightarrow{\\sim}\\nu_W^*(F|_W)$. Use these canonical identifications on all overlaps. For composable etale maps $Z\\to W\\to X$, denote this isomorphism by $r^X_{W,F}$. Under the sectionwise relocalization identifications, $r^X_{Z,F}=r^W_{Z,F|_W}\\circ(r^X_{W,F})|_Z$. Indeed, the inclusion and forgetful slice functors commute on objects and arrows; the two comparison maps are adjunction mates of that same commuting composite square, so the adjunction bijection makes them equal. The isomorphisms preserve finite products since both routes are finite-limit-preserving inverse images; thus they identify the restricted group actions. Restricting a torsor gives a torsor: simple transitivity and a local section can be checked on the same objects and covering families of these slice sites.",
+   "text": "The family of all pro-etale objects equipped with a section of T covers every object, by the local nonemptiness axiom of a comparison torsor. On each member the map g to g times the restricted section is a natural isomorphism from the restricted comparison group sheaf to the restricted T: every component is bijective by simple transitivity.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-slice-site-localization",
-    "def-weil-pbc-site-comparison-morphism"
+    "def-pe-comparison-torsor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CF, lemma-localize-morphism; slice-site identifications as in the cited nodes"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose a set-indexed affine open cover $X=\\bigcup_aX_a$ (no quasi-compactness or quasi-separatedness is required). An open cover is a cover in both sites by [sk-def-pe-site] and [def-weil-pbc-etale-site]. By step 1 the restriction of $T$ is a $\\nu_{X_a}^*(G_0|_{X_a})$-torsor. Apply [det-pe-torsor-comparison-affine] to each affine scheme $X_a$: obtain a $G_0|_{X_a}$-torsor $T_{0,a}$, an equivariant isomorphism $\\alpha_a:\\nu_{X_a}^*T_{0,a}\\xrightarrow{\\sim}T|_{X_a}$, and an affine etale surjection $W_a\\to X_a$ with $T_{0,a}(W_a)\\ne\\varnothing$. The same argument includes $X=\\varnothing$, using an empty affine cover.",
+   "text": "For a weakly etale site object U, structure-map composition is left adjoint to base change on sites. The induced adjunction on restriction functors identifies pro-etale inverse image along U with sectionwise restriction, by uniqueness of left adjoints. Compose this isomorphism with the canonical etale/pro-etale inverse-image comparison. Therefore restriction of the comparison group sheaf is the comparison inverse image of the etale pullback of its underlying group sheaf.",
    "uses": [
-    "sk-def-pe-site",
-    "def-weil-pbc-etale-site",
-    "det-pe-torsor-comparison-affine"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099X, lemma-compare-cohomology-nonabelian, reduction to an affine base; blueprint proof paragraph 1"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $X_{ab}=X_a\\cap X_b$. Under step 1 the map $\\beta_{ab}=\\alpha_b^{-1}\\circ\\alpha_a$ is an isomorphism from $\\nu_{X_{ab}}^*(T_{0,a}|_{X_{ab}})$ to $\\nu_{X_{ab}}^*(T_{0,b}|_{X_{ab}})$. Full faithfulness in [det-pe-classical-sheaves-unit], applied to the scheme $X_{ab}$, gives a unique sheaf map $\\phi_{ab}$ with $\\nu^*\\phi_{ab}=\\beta_{ab}$. Lift $\\beta_{ab}^{-1}$ as well; faithfulness applied to their two composites proves that $\\phi_{ab}$ is invertible. Write $m_a,m_b$ for the restricted actions. Since $\\beta_{ab}$ is equivariant, the pullbacks of $\\phi_{ab}\\circ m_a$ and $m_b\\circ(\\mathrm{id}_{G_0}\\times\\phi_{ab})$ agree. The finite-product preservation in [def-weil-pbc-site-comparison-morphism] identifies their domains, and faithfulness makes the two maps equal. Thus $\\phi_{ab}$ is equivariant. On $X_{abc}$, cancellation gives $\\beta_{bc}\\beta_{ab}=\\alpha_c^{-1}\\alpha_a=\\beta_{ac}$; faithfulness on this scheme gives $\\phi_{bc}\\phi_{ab}=\\phi_{ac}$. Likewise $\\phi_{aa}=\\mathrm{id}$. None of these overlaps is assumed affine.",
+   "text": "Thus T is locally classical on the covering from step 1. Apply the general locally-classical descent theorem to obtain an etale set-sheaf model. The essential-image characterization makes T classical and makes its comparison counit invertible. This uses a general sheaf-gluing tool inside the gluing node; it does not change the torsor unit statement or its other proof nodes.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "det-pe-classical-sheaves-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take S to be the comparison direct image of T. Define the action on S sectionwise using the comparison unit for the group and the original action. Naturality of the unit and its product comparison give the unit, multiplication and restriction laws; its invertibility and simple transitivity give bijectivity. The map from T to the terminal sheaf is epic by local nonemptiness. The invertible counit and terminal comparison identify it with the comparison pullback of the analogous map for S. Faithfulness reflects this epimorphism, and local surjectivity of epimorphisms of set sheaves gives local nonemptiness of S. Naturality and the adjunction triangle show that the counit is equivariant, yielding the constructed etale torsor and ModelIso.",
+   "uses": [
+    "def-pe-comparison-torsor",
+    "det-pe-classical-sheaves-unit",
+    "det-pe-classical-sheaves-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Full faithfulness lifts the quotient of two model isomorphisms uniquely to an etale sheaf isomorphism. Naturality of the product comparison reflects its equivariance, and faithfulness proves uniqueness with the specified model maps. Finally the family of all etale objects with a section of the constructed torsor is jointly surjective, as the nonempty sieve covers the identity etale object. Transport each section by the unit and model isomorphism; simple transitivity gives its natural equivariant trivialization on the whole slice.",
    "uses": [
     "det-pe-classical-sheaves-unit",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-glue.md",
-    "place": "Proof paragraph 2, descent and identities of the transition maps; full faithfulness is Stacks Tag 099T"
-   }
-  },
-  {
-   "text": "Apply [lem-pe-site-sheaf-gluing] to the covering $\\{X_a\\to X\\}$ of $X_{\\Et}$ and the sheaves $T_{0,a}$ with the isomorphisms $\\phi_{ab}$ from step 3. The small sites and the set-indexed cover fit the universe convention in that lemma. Since $X$ is final in its small etale site, the slice over $X$ is the original site. Using the site identifications fixed in step 1, the lemma gives a sheaf of sets $T_0$ on $X_{\\Et}$ and isomorphisms $e_a:T_0|_{X_a}\\xrightarrow{\\sim}T_{0,a}$ satisfying $\\phi_{ab}e_a=e_b$ on every overlap.",
-   "uses": [
-    "lem-pe-site-sheaf-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, lemma-glue-sheaves; blueprint proof paragraph 2"
-   }
-  },
-  {
-   "text": "Define the action on $T_0$ explicitly. For an etale $V\\to X$, $g\\in G_0(V)$ and $t\\in T_0(V)$, set $V_a=V\\times_XX_a$. The sections $e_a^{-1}(g|_{V_a}\\cdot e_a(t|_{V_a}))$ agree on $V_a\\times_VV_b$, by the equivariance of $\\phi_{ab}$ and $\\phi_{ab}e_a=e_b$. The sheaf axiom [def-weil-pbc-etale-sheaf-of-sets] gives a unique section $g\\cdot t$ on $V$. Restriction, the identity law and associativity hold because they hold on every $V_a$ and the same uniqueness applies. For $t,t'\\in T_0(V)$, the local torsor structures give a unique $g_a\\in G_0(V_a)$ sending $t|_{V_a}$ to $t'|_{V_a}$. Freeness makes these agree on overlaps; the sheaf axiom for $G_0$ glues them to a unique $g\\in G_0(V)$. Finally the chosen sections over the etale surjections $W_a\\to X_a$ of step 2 give local sections of $T_0$ on a jointly surjective etale family over $X$, and on every test object after base change. These are precisely simple transitivity and local nonemptiness in [def-constructible-torsor], so $T_0$ is a $G_0$-torsor.",
-   "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "def-constructible-torsor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, componentwise structures; elementary sheaf-axiom argument, with the map-gluing formula of Tag 04TQ"
-   }
-  },
-  {
-   "text": "The local maps $A_a=\\alpha_a\\circ\\nu_{X_a}^*(e_a)\\circ r_{X_a,T_0}$ are equivariant isomorphisms $(\\nu_X^*T_0)|_{X_a}\\to T|_{X_a}$. On $X_{ab}$ the equations $\\nu^*\\phi_{ab}=\\alpha_b^{-1}\\alpha_a$ and $\\phi_{ab}e_a=e_b$ give $A_b=A_a$; naturality of $r$ from step 1 makes these equations equations between the actual restricted maps. For a pro-etale object $V\\to X$ and $s\\in(\\nu_X^*T_0)(V)$, apply $A_a$ to $s|_{V\\times_XX_a}$ and glue the resulting compatible sections of $T$ over the open cover of $V$. The sheaf axiom [def-weil-pbc-sites-and-cohomology] makes this a unique section $\\alpha_V(s)$, natural in $V$. For a morphism $h:V^{\\prime}\\to V$, both $h^*\\alpha_V(s)$ and $\\alpha_{V^{\\prime}}(h^*s)$ restrict over $V^{\\prime}\\times_XX_a$ to $A_a(h^*s)$ by naturality of $A_a$; uniqueness of gluing proves naturality of $\\alpha$. Define $B_V(t)$ for $t\\in T(V)$ to be the unique section of $(\\nu_X^*T_0)(V)$ whose restriction over $V\\times_XX_a$ is $A_a^{-1}(t|_{V\\times_XX_a})$. These local sections agree because $A_a=A_b$ on overlaps. Restriction of $B_V(t)$ along $h$ and $B_{V^{\\prime}}(h^*t)$ have equal local restrictions, so $B$ is a sheaf map. The restrictions of $B\\alpha$ and $\\alpha B$ are $A_a^{-1}A_a$ and $A_aA_a^{-1}$ respectively; the sheaf axiom makes both composites identities. For local sections $g,s$, the sections $\\alpha(gs)$ and $g\\alpha(s)$ restrict to $A_a(gs)=gA_a(s)$, so they are equal by uniqueness of gluing. Thus $\\alpha:\\nu_X^*T_0\\xrightarrow{\\sim}T$ is an isomorphism of torsors. This uses the fact in [sk-def-pe-site] that every open cover is a pro-etale cover, with no finiteness requirement on the affine cover of $X$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "sk-def-pe-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps, explicit application of its sectionwise formula; blueprint proof paragraph 2"
-   }
-  },
-  {
-   "text": "Uniqueness concerns the pair $(T_0,\\alpha)$. If $(T'_0,\\alpha')$ is another such pair, full faithfulness in [det-pe-classical-sheaves-unit] on $X$ gives a unique $f:T_0\\to T'_0$ with $\\nu_X^*f=(\\alpha')^{-1}\\alpha$. Its inverse is the unique lift of $\\alpha^{-1}\\alpha'$, as verified by faithfulness. The equivariance equation for $f$ follows by applying faithfulness to the two maps out of $G_0\\times T_0$; their pullbacks are equal because $(\\alpha')^{-1}\\alpha$ is equivariant and [def-weil-pbc-site-comparison-morphism] preserves finite products. Hence $f$ is the unique torsor isomorphism satisfying $\\alpha'\\circ\\nu_X^*f=\\alpha$. This is the asserted uniqueness up to unique isomorphism, with the specified comparison to $T$ included.",
-   "uses": [
-    "det-pe-classical-sheaves-unit",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-glue.md",
-    "place": "Proof paragraph 2, uniqueness; explicit fully faithful lift on torsor maps"
-   }
-  },
-  {
-   "text": "By [det-pe-classical-sheaves-image], the isomorphism $T\\cong\\nu_X^*T_0$ makes $T$ classical. The composites $W_a\\to X_a\\to X$ from step 2 are etale and jointly surjective, so they form an etale covering by [def-weil-pbc-etale-site]. A chosen section of $T_{0,a}(W_a)$ trivializes $T_0$ there: $g\\mapsto g\\cdot s_a$ is an isomorphism by simple transitivity, also on every further test object. Pulling this isomorphism back and using step 1 and $\\alpha$ from step 6 trivializes $T$ on $W_a$. Thus the asserted etale trivializing covering is an actual covering of $X$, not just a collection of local covers.",
-   "uses": [
-    "det-pe-classical-sheaves-image",
+    "def-pe-comparison-torsor",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-glue.md",
-    "place": "Proof paragraph 3; Stacks Tag 099X, etale local triviality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-slice-site-localization",
+  "def-pe-comparison-torsor",
   "def-weil-pbc-site-comparison-morphism",
-  "sk-def-pe-site",
-  "def-weil-pbc-etale-site",
-  "det-pe-torsor-comparison-affine",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "det-pe-classical-sheaves-image",
   "det-pe-classical-sheaves-unit",
-  "lem-pe-site-sheaf-gluing",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-constructible-torsor",
-  "def-weil-pbc-sites-and-cohomology",
-  "det-pe-classical-sheaves-image"
+  "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-torsor-comparison/sk-lem-pe-torsor-comparison-glue.md",
-  "place": "Proof paragraphs 1–3 as recorded in the imported node; explicit localization and gluing details from Stacks Tags 03CF, 04TR and 04TQ, preserving the Tag 099X affine-to-global route"
+  "place": "Gluing and uniqueness, using the generic locally-classical descent tool (Bhatt--Scholze Lemma 5.1.4) in place of repeating its sheaf gluing; explicit action descent by the comparison adjunction."
  },
  "mathlib_searches": [
   {
@@ -253,16 +190,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-slice-site-localization",
   "def-weil-pbc-site-comparison-morphism",
-  "sk-def-pe-site",
   "def-weil-pbc-etale-site",
   "det-pe-classical-sheaves-unit",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-constructible-torsor",
-  "def-weil-pbc-sites-and-cohomology",
   "det-pe-classical-sheaves-image"
  ],
  "reviewed": {
@@ -305,5 +235,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Read the node, 4 stmt_deps (3 identical to the side clone, plus the new def-pe-comparison-torsor), both Lean modules, NonabelianTorsor, proEtaleSiteComparison, IsClassical and proEtaleClassicalSheavesUnit. Every clause matches: arbitrary X; G0 in GrpCat.{u+1} with noncommutative groups allowed; ComparisonTorsor is the 03AH torsor under the canonical L(m0)∘c⁻¹ and L(e0)∘c∅⁻¹ structure on the recorded original-site sheafPullback; there exist T0 (NonabelianTorsor) and an equivariant ModelIso; uniqueness is ∃! of an equivariant iso compatible with α,α' (pair uniqueness, step 7); IsClassical T.sheaf; a jointly surjective X.Etale family with natural, equivariant pro-étale Trivializations. No extra hypotheses; universes bound; empty X, empty sections and trivial group all covered. New node is non-duplicate (side tree has only étale/additive/scheme torsors), its 12 declarations are real data with source and blueprint docstrings, and the record fields are complete. Item has a single sorry theorem whose docstring carries all 8 steps; lean.statement is verbatim; the report has both required sections. nt_compile.py --json on both files: rc 0, 3.6 s and 2.0 s. Observation only: it uses the publicly exported original-site comparison rather than the AsSmall model; this is the same inverse image, and the classical-sheaves-unit proof dependency is stated on it."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-a75f7",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261019T005335-L-2754129",
+  "kind": "proof",
+  "note": "independent cc review: delivered TorsorComparisonGlue.lean (sorry closed, signature unchanged, 11 private helpers, plain imports) compiled alone and with both live importers; axioms checked; node proof/proof_deps matched to the imports; unit realized empty so no unit route bypassed"
  }
 }

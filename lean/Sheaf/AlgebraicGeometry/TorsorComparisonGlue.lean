@@ -7,16 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleComparisonTorsor
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.SliceSiteLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
-import Sheaf.CategoryTheory.PeSiteSheafGluing
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.AlgebraicGeometry.ProEtaleTorsorComparisonAffine
-import Sheaf.CategoryTheory.Sites.ConstructibleTorsor
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover
+import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 
 /-! # Gluing the etale models of a torsor
 
@@ -34,6 +29,396 @@ universe u
 open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
+
+private noncomputable def comparisonUnit {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale) :
+    F.obj.obj (Opposite.op U) →
+      ((comparisonSets X).obj F).obj.obj (Opposite.op ((Scheme.toProEt X).obj U)) :=
+  ((Scheme.proEtaleSiteComparison X).unit.app F).hom.app (Opposite.op U)
+
+private theorem comparison_unit_product {X : Scheme.{u}}
+    (F H : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale)
+    (s : F.obj.obj (Opposite.op U)) (t : H.obj.obj (Opposite.op U)) :
+    (comparisonProduct F H).hom.hom.app (Opposite.op ((Scheme.toProEt X).obj U))
+        (comparisonUnit (F ⊗ H) U (s, t)) =
+      (comparisonUnit F U s, comparisonUnit H U t) := by
+  apply Prod.ext
+  · have hn := congrArg (fun k ↦ k.hom.app (Opposite.op U) (s, t))
+      ((Scheme.proEtaleSiteComparison X).unit.naturality
+        (CartesianMonoidalCategory.fst F H))
+    exact hn.symm
+  · have hn := congrArg (fun k ↦ k.hom.app (Opposite.op U) (s, t))
+      ((Scheme.proEtaleSiteComparison X).unit.naturality
+        (CartesianMonoidalCategory.snd F H))
+    exact hn.symm
+
+private theorem comparison_unit_mul {X : Scheme.{u}}
+    (G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}) (U : X.Etale)
+    (g h : G₀.obj.obj (Opposite.op U)) :
+    comparisonUnit (groupSets G₀) U (g * h) =
+      (comparisonMultiplication G₀).hom.app (Opposite.op ((Scheme.toProEt X).obj U))
+        (comparisonUnit (groupSets G₀) U g, comparisonUnit (groupSets G₀) U h) := by
+  have hn := congrArg (fun k ↦ k.hom.app (Opposite.op U) (g, h))
+    ((Scheme.proEtaleSiteComparison X).unit.naturality (groupMultiplication G₀))
+  have hp := comparison_unit_product (groupSets G₀) (groupSets G₀) U g h
+  have hi := congrArg (fun k ↦ k.hom.app
+      (Opposite.op ((Scheme.toProEt X).obj U))
+      (comparisonUnit (groupSets G₀ ⊗ groupSets G₀) U (g, h)))
+    (comparisonProduct (groupSets G₀) (groupSets G₀)).hom_inv_id
+  change (comparisonProduct (groupSets G₀) (groupSets G₀)).inv.hom.app
+      (Opposite.op ((Scheme.toProEt X).obj U))
+      ((comparisonProduct (groupSets G₀) (groupSets G₀)).hom.hom.app
+        (Opposite.op ((Scheme.toProEt X).obj U))
+        (comparisonUnit (groupSets G₀ ⊗ groupSets G₀) U (g, h))) =
+    comparisonUnit (groupSets G₀ ⊗ groupSets G₀) U (g, h) at hi
+  rw [hp] at hi
+  exact hn.trans (congrArg
+    (((comparisonSets X).map (groupMultiplication G₀)).hom.app
+      (Opposite.op ((Scheme.toProEt X).obj U))) hi.symm)
+
+private theorem comparison_unit_one {X : Scheme.{u}}
+    (G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}) (U : X.Etale) :
+    comparisonUnit (groupSets G₀) U (1 : G₀.obj.obj (Opposite.op U)) =
+      (comparisonIdentity G₀).hom.app
+        (Opposite.op ((Scheme.toProEt X).obj U)) PUnit.unit := by
+  have := Scheme.preservesFiniteLimits_proEtaleSiteComparison X
+  have hn := congrArg (fun k ↦ k.hom.app (Opposite.op U) PUnit.unit)
+    ((Scheme.proEtaleSiteComparison X).unit.naturality (groupIdentity G₀))
+  have ht : comparisonUnit (𝟙_ (Sheaf X.smallEtaleTopology (Type (u + 1)))) U PUnit.unit =
+      (CartesianMonoidalCategory.preservesTerminalIso (comparisonSets X)).inv.hom.app
+        (Opposite.op ((Scheme.toProEt X).obj U)) PUnit.unit := by
+    apply (ConcreteCategory.bijective_of_isIso
+      ((CartesianMonoidalCategory.preservesTerminalIso (comparisonSets X)).hom.hom.app
+        (Opposite.op ((Scheme.toProEt X).obj U)))).injective
+    exact @Subsingleton.elim PUnit _ _ _
+  exact hn.trans (congrArg
+    (((comparisonSets X).map (groupIdentity G₀)).hom.app
+      (Opposite.op ((Scheme.toProEt X).obj U))) ht)
+
+private theorem model_of_classical {X : Scheme.{u}}
+    {G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}} (T : ComparisonTorsor G₀)
+    (hc : IsClassical T.sheaf) :
+    ∃ P : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀,
+      Nonempty (ComparisonTorsor.ModelIso P T) := by
+  classical
+  let L := comparisonSets X
+  let R := (Scheme.toProEt X).sheafPushforwardContinuous
+    (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)
+  let S := R.obj T.sheaf
+  let a (U : X.Etaleᵒᵖ) (g : G₀.obj.obj U) (t : S.obj.obj U) :=
+    T.action.hom.app ((Scheme.toProEt X).op.obj U)
+      (comparisonUnit (groupSets G₀) U.unop g, t)
+  have : IsIso ((Scheme.proEtaleSiteComparison X).counit.app T.sheaf) :=
+    (Scheme.proEtaleClassicalSheavesImage X T.sheaf).2.mp hc
+  let ε := asIso ((Scheme.proEtaleSiteComparison X).counit.app T.sheaf)
+  have hfinite := Scheme.preservesFiniteLimits_proEtaleSiteComparison X
+  have hbij := (Scheme.proEtaleClassicalSheavesUnit X).2
+  have : L.Faithful := ⟨fun h ↦ (hbij _ _).1 h⟩
+  have hnempty (U : X.Etale) : CategoryTheory.Sheaf.nonemptySieve S.obj U ∈
+      X.smallEtaleTopology U := by
+    let q := CartesianMonoidalCategory.toUnit S
+    let qT := CartesianMonoidalCategory.toUnit T.sheaf
+    have : CategoryTheory.Sheaf.IsLocallySurjective qT := by
+      constructor
+      intro V t
+      apply (Scheme.ProEt.topology X).superset_covering _ (T.nonemptySieve_mem V)
+      intro W f hf
+      obtain ⟨s⟩ := hf
+      exact ⟨s, @Subsingleton.elim PUnit _ _ _⟩
+    have : Epi qT := inferInstance
+    let c := CartesianMonoidalCategory.preservesTerminalIso L
+    have hq : L.map q ≫ c.hom = ε.hom ≫ qT :=
+      CartesianMonoidalCategory.toUnit_unique _ _
+    have : Epi (L.map q ≫ c.hom) := hq.symm ▸ inferInstance
+    have : Epi (L.map q) := (epi_comp_iff_of_isIso (L.map q) c.hom).1 inferInstance
+    have : Epi q := ⟨fun f g h ↦ by
+      apply L.map_injective
+      apply (cancel_epi (L.map q)).1
+      simpa only [← L.map_comp] using congrArg L.map h⟩
+    have : CategoryTheory.Sheaf.IsLocallySurjective q :=
+      (CategoryTheory.Sheaf.isLocallySurjective_iff_epi q).2 inferInstance
+    apply X.smallEtaleTopology.superset_covering _
+      (Presheaf.imageSieve_mem X.smallEtaleTopology q.hom
+        (show (𝟙_ (Sheaf X.smallEtaleTopology (Type (u + 1)))).obj.obj
+          (Opposite.op U) from PUnit.unit))
+    intro V f hf
+    obtain ⟨t, _⟩ := hf
+    exact ⟨t⟩
+  let P : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀ :=
+    { sheaf := S
+      act := a
+      one_act := fun U t ↦ by
+        dsimp [a]
+        rw [comparison_unit_one]
+        exact T.one_act _ t
+      mul_act := fun U g h t ↦ by
+        dsimp [a]
+        rw [comparison_unit_mul]
+        exact T.mul_act _ _ _ t
+      map_act := fun {U V} f g t ↦ by
+        have hη := ((Scheme.proEtaleSiteComparison X).unit.app
+          (groupSets G₀)).hom.naturality_apply f g
+        have hn := T.action.hom.naturality_apply ((Scheme.toProEt X).op.map f)
+          (show (((comparisonSets X).obj (groupSets G₀)) ⊗ T.sheaf).obj.obj
+            ((Scheme.toProEt X).op.obj U) from
+            (comparisonUnit (groupSets G₀) U.unop g, t))
+        change T.action.hom.app ((Scheme.toProEt X).op.obj V)
+            (((comparisonSets X).obj (groupSets G₀)).obj.map
+              ((Scheme.toProEt X).op.map f) (comparisonUnit (groupSets G₀) U.unop g),
+                T.sheaf.obj.map ((Scheme.toProEt X).op.map f) t) = _ at hn
+        change comparisonUnit (groupSets G₀) V.unop ((G₀.obj.map f).hom g) =
+          ((comparisonSets X).obj (groupSets G₀)).obj.map
+            ((Scheme.toProEt X).op.map f) (comparisonUnit (groupSets G₀) U.unop g) at hη
+        exact hn.symm.trans (congrArg
+          (fun z ↦ T.action.hom.app ((Scheme.toProEt X).op.obj V)
+            (z, T.sheaf.obj.map ((Scheme.toProEt X).op.map f) t)) hη.symm)
+      bijective_act := fun U t ↦ by
+        have := (Scheme.proEtaleClassicalSheavesUnit X).1 (groupSets G₀)
+        exact (T.bijective_act ((Scheme.toProEt X).op.obj U) t).comp
+          (ConcreteCategory.bijective_of_isIso
+            (((Scheme.proEtaleSiteComparison X).unit.app (groupSets G₀)).hom.app U))
+      nonemptySieve_mem := hnempty }
+  refine ⟨P, ⟨⟨ε, ?_⟩⟩⟩
+  apply (cancel_epi (comparisonProduct (groupSets G₀) S).hom).1
+  simp only [comparisonTorsorAction, ← Category.assoc]
+  rw [show (comparisonProduct (groupSets G₀) S).hom ≫
+      (comparisonProduct (groupSets G₀) P.sheaf).inv = 𝟙 _ from
+    (comparisonProduct (groupSets G₀) S).hom_inv_id, Category.id_comp]
+  apply ((Scheme.proEtaleSiteComparison X).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit]
+  ext U p
+  obtain ⟨g, t⟩ := p
+  have htri (s : S.obj.obj U) :
+      ε.hom.hom.app ((Scheme.toProEt X).op.obj U)
+        (comparisonUnit S U.unop s) = s := by
+    have h := congrArg (fun k ↦ k.hom.app U s)
+      ((Scheme.proEtaleSiteComparison X).right_triangle_components T.sheaf)
+    exact h
+  have hnat := congrArg (fun k ↦ k.hom.app U (g, t))
+    ((Scheme.proEtaleSiteComparison X).unit.naturality (etaleTorsorAction P)).symm
+  change ((L.map (etaleTorsorAction P)).hom.app ((Scheme.toProEt X).op.obj U)
+      (comparisonUnit (groupSets G₀ ⊗ S) U.unop (g, t))) =
+        comparisonUnit S U.unop (a U g t) at hnat
+  have hp := comparison_unit_product (groupSets G₀) S U.unop g t
+  change ε.hom.hom.app ((Scheme.toProEt X).op.obj U)
+      ((L.map (etaleTorsorAction P)).hom.app ((Scheme.toProEt X).op.obj U)
+        (comparisonUnit (groupSets G₀ ⊗ S) U.unop (g, t))) = _
+  rw [hnat, htri]
+  change a U g t = T.action.hom.app ((Scheme.toProEt X).op.obj U)
+    ((𝟙 _ ⊗ₘ ε.hom).hom.app ((Scheme.toProEt X).op.obj U)
+      ((comparisonProduct (groupSets G₀) S).hom.hom.app ((Scheme.toProEt X).op.obj U)
+        (comparisonUnit (groupSets G₀ ⊗ S) U.unop (g, t))))
+  erw [hp]
+  change a U g t = T.action.hom.app ((Scheme.toProEt X).op.obj U)
+    (comparisonUnit (groupSets G₀) U.unop g,
+      ε.hom.hom.app ((Scheme.toProEt X).op.obj U) (comparisonUnit S U.unop t))
+  rw [htri]
+
+
+private theorem trivialization_of_section {X : Scheme.{u}}
+    {G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}} (T : ComparisonTorsor G₀)
+    (U : X.ProEt) (s : T.sheaf.obj.obj (Opposite.op U)) :
+    Nonempty (ComparisonTorsor.Trivialization T U) := by
+  classical
+  let e (V : X.ProEt) (f : V ⟶ U) :=
+    Equiv.ofBijective
+      (fun a ↦ T.action.hom.app (Opposite.op V) (a, T.sheaf.obj.map f.op s))
+      (T.bijective_act (Opposite.op V) (T.sheaf.obj.map f.op s))
+  refine ⟨{ equiv := fun V f ↦ (e V f).symm, natural := ?_, equivariant := ?_ }⟩
+  · intro V W f g t
+    apply (e W (g ≫ f)).injective
+    rw [Equiv.apply_symm_apply]
+    let p : (((comparisonSets X).obj (groupSets G₀)) ⊗ T.sheaf).obj.obj
+        (Opposite.op V) := ((e V f).symm t, T.sheaf.obj.map f.op s)
+    have hn := ConcreteCategory.congr_hom (T.action.hom.naturality g.op) p
+    change T.action.hom.app (Opposite.op W)
+        (((comparisonSets X).obj (groupSets G₀)).obj.map g.op ((e V f).symm t),
+          T.sheaf.obj.map g.op (T.sheaf.obj.map f.op s)) =
+      T.sheaf.obj.map g.op (e V f ((e V f).symm t)) at hn
+    change T.sheaf.obj.map g.op t = T.action.hom.app (Opposite.op W)
+      (((comparisonSets X).obj (groupSets G₀)).obj.map g.op ((e V f).symm t),
+        T.sheaf.obj.map (g ≫ f).op s)
+    simpa only [Equiv.apply_symm_apply, op_comp, Functor.map_comp,
+      ConcreteCategory.comp_apply] using hn.symm
+  · intro V f a t
+    apply (e V f).injective
+    rw [Equiv.apply_symm_apply]
+    change T.action.hom.app (Opposite.op V) (a, t) =
+      T.action.hom.app (Opposite.op V)
+        ((comparisonMultiplication G₀).hom.app (Opposite.op V) (a, (e V f).symm t),
+          T.sheaf.obj.map f.op s)
+    rw [T.mul_act]
+    change _ = T.action.hom.app (Opposite.op V) (a, e V f ((e V f).symm t))
+    rw [Equiv.apply_symm_apply]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem model_etale_cover {X : Scheme.{u}}
+    {G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}} (T : ComparisonTorsor G₀)
+    (P : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀)
+    (α : ComparisonTorsor.ModelIso P T) :
+    ∃ (I : Type (u + 1)) (U : I → X.Etale),
+      (∀ x : X, ∃ (i : I) (y : (U i).left), (U i).hom y = x) ∧
+      ∀ i : I, Nonempty (ComparisonTorsor.Trivialization T ((Scheme.toProEt X).obj (U i))) := by
+  classical
+  let I := {V : X.Etale // Nonempty (P.sheaf.obj.obj (Opposite.op V))}
+  refine ⟨I, Subtype.val, ?_, ?_⟩
+  · let W := Scheme.Etale.mk (𝟙 X)
+    have hs := P.nonemptySieve_mem W
+    change _ ∈ X.smallGrothendieckTopology (P := @Etale) W at hs
+    rw [Scheme.smallGrothendieckTopology_eq_toGrothendieck_smallPretopology X le_rfl] at hs
+    intro x
+    obtain ⟨V, f, y, hf, _, hy⟩ :=
+      (Scheme.mem_toGrothendieck_smallPretopology W _).1 hs x
+    refine ⟨⟨V, hf⟩, y, ?_⟩
+    have hw := f.w
+    change f.left ≫ 𝟙 X = V.hom at hw
+    have hw' : f.left = V.hom := (Category.comp_id _).symm.trans hw
+    change V.hom y = x
+    exact hw' ▸ hy
+  · intro i
+    obtain ⟨s⟩ := i.property
+    apply trivialization_of_section T
+    exact α.iso.hom.hom.app (Opposite.op ((Scheme.toProEt X).obj i.val))
+      (((Scheme.proEtaleSiteComparison X).unit.app P.sheaf).hom.app (Opposite.op i.val) s)
+
+private theorem modelIso_unique {X : Scheme.{u}}
+    {G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}} (T : ComparisonTorsor G₀)
+    (P Q : CategoryTheory.Sheaf.NonabelianTorsor.{u, u + 1, u + 1} X G₀)
+    (α : ComparisonTorsor.ModelIso P T) (β : ComparisonTorsor.ModelIso Q T) :
+    ∃! e : P.sheaf ≅ Q.sheaf,
+      etaleTorsorAction P ≫ e.hom =
+        (𝟙 (groupSets G₀) ⊗ₘ e.hom) ≫ etaleTorsorAction Q ∧
+      (comparisonSets X).map e.hom ≫ β.iso.hom = α.iso.hom := by
+  classical
+  let F := comparisonSets X
+  have := Scheme.preservesFiniteLimits_proEtaleSiteComparison X
+  have hbij := (Scheme.proEtaleClassicalSheavesUnit X).2
+  have : F.Faithful := ⟨fun h ↦ (hbij _ _).1 h⟩
+  have : F.Full := ⟨fun h ↦ (hbij _ _).2 h⟩
+  let e := F.preimageIso (α.iso ≪≫ β.iso.symm)
+  have he : F.map e.hom = α.iso.hom ≫ β.iso.inv := by
+    simp [e]
+  have heβ : F.map e.hom ≫ β.iso.hom = α.iso.hom := by
+    simp [he]
+  refine ⟨e, ⟨?_, heβ⟩, ?_⟩
+  · apply F.map_injective
+    apply (cancel_epi (comparisonProduct (groupSets G₀) P.sheaf).inv).1
+    simp only [Functor.map_comp]
+    change comparisonTorsorAction P ≫ F.map e.hom = _
+    rw [he]
+    have hb := β.equivariant
+    have ha := α.equivariant
+    have hn := CartesianMonoidalCategory.prodComparison_inv_natural
+      F (𝟙 (groupSets G₀)) e.hom
+    have hi (H : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+        inv (CartesianMonoidalCategory.prodComparison F (groupSets G₀) H) =
+          (comparisonProduct (groupSets G₀) H).inv := by
+      apply (cancel_mono (comparisonProduct (groupSets G₀) H).hom).1
+      change inv (CartesianMonoidalCategory.prodComparison F (groupSets G₀) H) ≫
+          CartesianMonoidalCategory.prodComparison F (groupSets G₀) H =
+        (comparisonProduct (groupSets G₀) H).inv ≫
+          (comparisonProduct (groupSets G₀) H).hom
+      rw [IsIso.inv_hom_id, Iso.inv_hom_id]
+    rw [hi P.sheaf, hi Q.sheaf] at hn
+    change (comparisonProduct (groupSets G₀) P.sheaf).inv ≫
+        F.map (𝟙 (groupSets G₀) ⊗ₘ e.hom) =
+      (F.map (𝟙 (groupSets G₀)) ⊗ₘ F.map e.hom) ≫
+        (comparisonProduct (groupSets G₀) Q.sheaf).inv at hn
+    rw [← Category.assoc _ (F.map (𝟙 (groupSets G₀) ⊗ₘ e.hom)), hn]
+    rw [F.map_id]
+    simp only [Category.assoc]
+    change comparisonTorsorAction P ≫ α.iso.hom ≫ β.iso.inv =
+      (𝟙 _ ⊗ₘ F.map e.hom) ≫ comparisonTorsorAction Q
+    apply (cancel_mono β.iso.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [← Category.assoc, ha, Category.assoc, hb, ← Category.assoc,
+      MonoidalCategory.tensorHom_comp_tensorHom]
+    simp only [Category.id_comp, heβ]
+  · intro e' he'
+    apply Iso.ext
+    apply F.map_injective
+    apply (cancel_mono β.iso.hom).1
+    exact he'.2.trans heβ.symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+private noncomputable def restrictionPullbackIso (X : Scheme.{u}) (U : X.ProEt) :
+    proEtaleComparisonPullback (Type (u + 1)) U.hom ≅
+      Scheme.proEtaleSetRestriction X U := by
+  letI hMap := Scheme.ProEt.isContinuous_overMap U.prop
+  letI hPull := Scheme.ProEt.isContinuous_overPullback U.hom
+  let adj : (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤ U.prop) ⊣
+      MorphismProperty.Over.pullback @WeaklyEtale ⊤ U.hom :=
+    MorphismProperty.Over.mapPullbackAdj (@WeaklyEtale) ⊤ U.hom U.prop _root_.trivial
+  exact (proEtaleComparisonAdjunction (Type (u + 1)) U.hom).leftAdjointUniq
+    (@Adjunction.sheafPushforwardContinuous _ _ _ _ _ _ _ _ adj
+      (Scheme.ProEt.topology U.left) (Scheme.ProEt.topology X) hMap hPull)
+
+private noncomputable def classicalRestrictionIso (X : Scheme.{u}) (U : X.ProEt) :
+    comparisonSets X ⋙ Scheme.proEtaleSetRestriction X U ≅
+      etaleComparisonPullback (Type (u + 1)) U.hom ⋙ comparisonSets U.left :=
+  (Functor.isoWhiskerLeft _ (restrictionPullbackIso X U)).symm ≪≫
+    (comparisonCoefficientPullbackIso (Type (u + 1)) U.hom).symm
+
+private theorem classical_of_torsor {X : Scheme.{u}}
+    {G₀ : Sheaf X.smallEtaleTopology GrpCat.{u + 1}} (T : ComparisonTorsor G₀) :
+    IsClassical T.sheaf := by
+  classical
+  let I := {U : X.ProEt // Nonempty (T.sheaf.obj.obj (Opposite.op U))}
+  let U : I → X.ProEt := Subtype.val
+  have hcover : (Scheme.ProEt.topology X).CoversTop U := by
+    intro V
+    apply (Scheme.ProEt.topology X).superset_covering _ (T.nonemptySieve_mem V)
+    intro W f hf
+    exact ⟨⟨W, hf⟩, ⟨𝟙 W⟩⟩
+  have hlocal : Scheme.IsProEtaleLocallyClassical X T.sheaf := by
+    refine ⟨I, U, hcover, fun i ↦ ?_⟩
+    obtain ⟨s⟩ := i.property
+    let R := Scheme.proEtaleSetRestriction X (U i)
+    let k := MorphismProperty.Over.map (P := @WeaklyEtale) ⊤ (U i).prop
+    let sec (V : (U i).left.ProEt) :=
+      T.sheaf.obj.map
+        (show k.obj V ⟶ U i from MorphismProperty.Over.homMk V.hom (by rfl)).op s
+    let f : R.obj ((comparisonSets X).obj (groupSets G₀)) ⟶ R.obj T.sheaf :=
+      ⟨{ app := fun V ↦ TypeCat.ofHom (fun g ↦
+            T.action.hom.app (Opposite.op (k.obj V.unop)) (g, sec V.unop))
+         naturality := by
+           intro V W h
+           ext g
+           have hn := T.action.hom.naturality_apply (k.op.map h)
+             (show (((comparisonSets X).obj (groupSets G₀)) ⊗ T.sheaf).obj.obj
+               (k.op.obj V) from (g, sec V.unop))
+           symm
+           change T.sheaf.obj.map (k.op.map h)
+               (T.action.hom.app (Opposite.op (k.obj V.unop)) (g, sec V.unop)) =
+             T.action.hom.app (Opposite.op (k.obj W.unop))
+               (((comparisonSets X).obj (groupSets G₀)).obj.map (k.op.map h) g,
+                 sec W.unop)
+           erw [← hn]
+           congr 1
+           apply Prod.ext
+           · rfl
+           · change T.sheaf.obj.map (k.op.map h) (sec V.unop) = sec W.unop
+             dsimp only [sec]
+             erw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+             congr 2
+             apply congrArg T.sheaf.obj.map
+             apply Quiver.Hom.unop_inj
+             apply MorphismProperty.Over.Hom.ext
+             exact h.unop.w }⟩
+    have hf (V : (U i).left.ProEtᵒᵖ) : IsIso (f.hom.app V) := by
+      apply (isIso_iff_bijective _).2
+      exact T.bijective_act _ _
+    have : IsIso f.hom := NatIso.isIso_of_isIso_app _
+    have : IsIso ((sheafToPresheaf (Scheme.ProEt.topology (U i).left)
+        (Type (u + 1))).map f) := by
+      change IsIso f.hom
+      infer_instance
+    have : IsIso f := isIso_of_reflects_iso f
+      (sheafToPresheaf (Scheme.ProEt.topology (U i).left) (Type (u + 1)))
+    refine ⟨(etaleComparisonPullback (Type (u + 1)) (U i).hom).obj (groupSets G₀), ?_⟩
+    exact ⟨(asIso f).symm ≪≫ (classicalRestrictionIso X (U i)).app (groupSets G₀)⟩
+  apply (Scheme.proEtaleClassicalSheavesImage X T.sheaf).1.mp
+  exact (Scheme.proEtale_locallyClassical_etaleCover X T.sheaf).1 hlocal
 
 /-- Every torsor under the inverse image of an etale group sheaf descends to an etale
 torsor. The model together with its specified comparison is unique up to unique equivariant
@@ -153,6 +538,9 @@ theorem torsorComparisonGlue (X : Scheme.{u})
     ∃ (I : Type (u + 1)) (U : I → X.Etale),
       (∀ x : X, ∃ (i : I) (y : (U i).left), (U i).hom y = x) ∧
       ∀ i : I, Nonempty (ComparisonTorsor.Trivialization T ((Scheme.toProEt X).obj (U i))) := by
-  sorry
+  have hc : IsClassical T.sheaf := classical_of_torsor T
+  obtain ⟨P, ⟨α⟩⟩ := model_of_classical T hc
+  exact ⟨⟨P, α, fun Q β ↦ modelIso_unique T P Q α β⟩,
+    hc, model_etale_cover T P α⟩
 
 end AlgebraicGeometry.ProEtale
