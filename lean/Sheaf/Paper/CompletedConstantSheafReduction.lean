@@ -92,6 +92,126 @@ def residue (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : 
       (SheafOfModules.unit ((adicLisseForget T).obj
         (adicLisseConstantRing T (A ⧸ I ^ (n + 1)))))
 
+private theorem tensorRestriction_tmul
+    (T : Scheme.{u})
+    {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S) (M : SheafOfModules.{u + 1}
+      ((adicLisseForget T).obj A))
+    {X Y : T.ProEtᵒᵖ} (i : X ⟶ Y) (s : S.obj.obj X) (m : M.val.obj X) :
+    (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map i
+      (s ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m) =
+      S.obj.map i s ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom] M.val.map i m :=
+  Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap.{u, u + 1, u + 1} c M i) s m
+
+private noncomputable def tensorToRestriction
+    (T : Scheme.{u})
+    {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S)
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A)) (H : SheafOfModules.{u + 1}
+      ((adicLisseForget T).obj S))
+    (f : SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val) : M ⟶
+      (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj H where
+  val :=
+    { app := fun W ↦ ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars.{u + 1, u + 1,
+      u + 1}
+        (c.hom.app W).hom (f.app W)
+      naturality := by
+        intro X Y i
+        ext m
+        change f.app Y ((1 : S.obj.obj Y) ⊗ₜ[A.obj.obj Y, (c.hom.app Y).hom]
+          M.val.map i m) = H.val.map i (f.app X
+            ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
+        have h := PresheafOfModules.naturality_apply f i
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)
+        rw [tensorRestriction_tmul T, map_one] at h
+        exact h }
+
+private noncomputable def restrictionToTensor
+    (T : Scheme.{u})
+    {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S)
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A)) (H : SheafOfModules.{u + 1}
+      ((adicLisseForget T).obj S))
+    (g : M ⟶ (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj H) :
+      SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val where
+  app W := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+    (c.hom.app W).hom (g.val.app W)
+  naturality := by
+    intro X Y i
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    have h := PresheafOfModules.naturality_apply g.val i m
+    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+      (c.hom.app Y).hom (g.val.app Y)
+        ((SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M).map i
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m)) =
+      H.val.map i (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u
+        + 1}
+        (c.hom.app X).hom (g.val.app X)
+          ((1 : S.obj.obj X) ⊗ₜ[A.obj.obj X, (c.hom.app X).hom] m))
+    rw [tensorRestriction_tmul T, map_one]
+    have atOne (W : T.ProEtᵒᵖ) (n : M.val.obj W) :
+        ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{u + 1, u + 1, u + 1}
+          (c.hom.app W).hom (g.val.app W)
+            ((1 : S.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] n) = g.val.app W n := by
+      exact congrArg (fun f : M.val.obj W ⟶
+        (ModuleCat.restrictScalars (c.hom.app W).hom).obj (H.val.obj W) ↦ f n)
+        ((ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1} (c.hom.app
+          W).hom).apply_symm_apply
+          (g.val.app W))
+    rw [atOne, atOne]
+    exact h
+
+private noncomputable def tensorPresheafHomEquiv
+    (T : Scheme.{u})
+    {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S)
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A)) (H : SheafOfModules.{u + 1}
+      ((adicLisseForget T).obj S)) :
+    (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c M ⟶ H.val) ≃
+      (M ⟶ (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj H) where
+  toFun := tensorToRestriction T c M H
+  invFun := restrictionToTensor T c M H
+  left_inv f := by
+    ext W : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1} (c.hom.app
+      W).hom).symm_apply_apply
+      (f.app W)
+  right_inv g := by
+    apply SheafOfModules.hom_ext
+    ext W : 1
+    exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv.{u + 1, u + 1, u + 1} (c.hom.app
+      W).hom).apply_symm_apply
+      (g.val.app W)
+
+private noncomputable def tensorHomEquiv
+    (T : Scheme.{u})
+    {A S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (c : A ⟶ S)
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj A)) (H : SheafOfModules.{u + 1}
+      ((adicLisseForget T).obj S)) :
+    (SheafOfModules.changeOfRings.{u, u + 1, u + 1} c M ⟶ H) ≃ (M ⟶
+      (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj H) :=
+  ((PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 ((adicLisseForget T).obj
+    S).obj)).homEquiv _ _).trans
+    (tensorPresheafHomEquiv T c M H)
+
+private theorem tensorHomEquiv_tmul (T : Scheme.{u})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj R))
+    (H : SheafOfModules.{u + 1} ((adicLisseForget T).obj S))
+    (f : SheafOfModules.changeOfRings.{u, u + 1, u + 1} φ M ⟶ H)
+    (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    f.val.app U ((toSheafify (ProEt.topology T)
+      (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M).presheaf).app U
+        (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)) =
+      s • (@id (H.val.obj U) ((tensorHomEquiv T φ M H f).val.app U m)) := by
+  let k := PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (𝟙 ((adicLisseForget T).obj S).obj) f
+  change k.app U (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m) =
+    s • k.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
+  let k' : (ModuleCat.extendScalars (φ.hom.app U).hom).obj (M.val.obj U) ⟶
+      H.val.obj U := k.app U
+  have hh := k'.hom.map_smul s
+    ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
+  rw [ModuleCat.ExtendScalars.smul_tmul, mul_one] at hh
+  exact hh
+
 /-- The reduction map is uniquely determined on local tensor generators by projection
 and multiplication. Source: Stacks Tag 093M
 (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
@@ -113,7 +233,124 @@ theorem reduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
               ((limit.π (adicLisseRingSystem T I) (op n)).hom.app U b) *
               @id ((adicLisseConstantRing T (A ⧸ I ^ (n + 1))).obj.obj U)
                 ((adicLisseConstantUnit T (A ⧸ I ^ (n + 1))).app U x) := by
-  sorry
+  let Q := A ⧸ I ^ (n + 1)
+  let M := (adicLisseConstantModules T A).obj (ModuleCat.of A Q)
+  let N := (SheafOfModules.restrictScalars ((adicLisseForget T).map (base T I))).obj
+    (residue T I n)
+  let P : PresheafOfModules.{u + 1}
+      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
+    (siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
+    PresheafOfModules.pushforward₀
+      ((Functor.const T.ProEt).obj (Discrete.mk (ULift.up ())))
+      ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))).obj
+        (ModuleCat.of A Q)
+  let g₀ : P ⟶
+      (PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val :=
+    { app := fun U ↦ ModuleCat.ofHom
+        (Y := ((PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val).obj U)
+        { toFun := fun (x : Q) ↦ (adicLisseConstantUnit T Q).app U x
+          map_add' := fun (x y : Q) ↦ map_add ((adicLisseConstantUnit T Q).app U).hom x y
+          map_smul' := by
+            intro a x
+            have hb : base T I ≫ limit.π (adicLisseRingSystem T I) (op n) =
+                (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+                  (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))) :=
+              (base_exists T I).choose_spec.1 n
+            change (adicLisseConstantUnit T Q).app U (a • x) =
+              @id ((adicLisseConstantRing T Q).obj.obj U)
+                ((limit.π (adicLisseRingSystem T I) (op n)).hom.app U
+                  ((base T I).hom.app U ((adicLisseConstantUnit T A).app U a))) *
+                    @id ((adicLisseConstantRing T Q).obj.obj U)
+                      ((adicLisseConstantUnit T Q).app U x)
+            have h := congrArg (fun k ↦ (k.hom.app U) ((adicLisseConstantUnit T A).app U a)) hb
+            change (limit.π (adicLisseRingSystem T I) (op n)).hom.app U
+                ((base T I).hom.app U ((adicLisseConstantUnit T A).app U a)) = _ at h
+            dsimp only [id_eq]
+            rw [h]
+            have hn := toSheafify_naturality (ProEt.topology T)
+              ((Functor.const T.ProEtᵒᵖ).map
+                (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+            have hn' := congrArg (fun k ↦ (k.app U).hom (show A from a)) hn
+            change (adicLisseConstantUnit T Q).app U
+                ((Ideal.Quotient.mk (I ^ (n + 1))) a) =
+              ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+                (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))).hom.app U
+                  ((adicLisseConstantUnit T A).app U a) at hn'
+            erw [← hn']
+            change (adicLisseConstantUnit T Q).app U
+                ((show A from a) • (show Q from x)) = _
+            change (adicLisseConstantUnit T Q).app U
+                ((Ideal.Quotient.mk (I ^ (n + 1))) a * (show Q from x)) = _
+            exact
+              (map_mul ((adicLisseConstantUnit T Q).app U).hom
+                ((Ideal.Quotient.mk (I ^ (n + 1))) a) (show Q from x)) }
+      naturality := by
+        intro U V f
+        ext x
+        change (adicLisseConstantUnit T Q).app V (show Q from x) =
+          (adicLisseRing T Q).obj.map f ((adicLisseConstantUnit T Q).app U x)
+        exact ConcreteCategory.congr_hom
+          ((adicLisseConstantUnit T Q).naturality f) x }
+  let g : M ⟶ N := (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (adicLisseConstantUnit T A) (P := P) (F := N)).symm g₀
+  let h := (completedAdicChangeData T (base T I)).choose_spec.choose M
+  let r₀ := (tensorHomEquiv T (base T I) M (residue T I n)).symm g
+  let r := eqToHom h ≫ r₀
+  have hc : eqToHom h.symm ≫ r = r₀ := by simp [r]
+  refine ⟨r, ?_, ?_⟩
+  · intro U b x
+    change (eqToHom h.symm ≫ r).val.app U
+      ((toSheafify (ProEt.topology T)
+        (SheafOfModules.changeOfRingsPresheaf (base T I) M).presheaf).app U
+          (b ⊗ₜ[(adicLisseConstantRing T A).obj.obj U, ((base T I).hom.app U).hom]
+            ((toSheafify (ProEt.topology T) P.presheaf).app U x))) = _
+    rw [hc]
+    refine (tensorHomEquiv_tmul T (base T I) M (residue T I n) r₀ U b
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)).trans ?_
+    have he : tensorHomEquiv T (base T I) M (residue T I n) r₀ = g :=
+      (tensorHomEquiv T (base T I) M (residue T I n)).apply_symm_apply g
+    rw [he]
+    have hg₀ : PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) g = g₀ :=
+      (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) (P := P) (F := N)).apply_symm_apply g₀
+    have hg := congrArg (fun (k : P ⟶
+      (PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val) ↦
+        (k.app U).hom x) hg₀
+    change g.val.app U ((toSheafify (ProEt.topology T) P.presheaf).app U x) =
+      (adicLisseConstantUnit T Q).app U x at hg
+    rw [hg]
+    rfl
+  · intro s hs
+    apply (cancel_epi (eqToHom h.symm)).mp
+    rw [hc]
+    apply (tensorHomEquiv T (base T I) M (residue T I n)).injective
+    have he : tensorHomEquiv T (base T I) M (residue T I n) r₀ = g :=
+      (tensorHomEquiv T (base T I) M (residue T I n)).apply_symm_apply g
+    refine Eq.trans ?_ he.symm
+    apply (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+      (adicLisseConstantUnit T A) (P := P) (F := N)).injective
+    have hg : PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) g = g₀ :=
+      (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) (P := P) (F := N)).apply_symm_apply g₀
+    refine Eq.trans ?_ hg.symm
+    ext U x
+    have ht := tensorHomEquiv_tmul T (base T I) M (residue T I n)
+      (eqToHom h.symm ≫ s) U 1
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)
+    have hx := hs U 1 (show Q from x)
+    simp only [one_smul] at ht
+    change (tensorHomEquiv T (base T I) M (residue T I n)
+      (eqToHom h.symm ≫ s)).val.app U
+        ((toSheafify (ProEt.topology T) P.presheaf).app U x) =
+          (adicLisseConstantUnit T Q).app U x
+    refine ht.symm.trans ?_
+    change s.val.app U (tensorSection T (base T I) M U 1
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)) = _
+    simp only [map_one, id_eq, one_mul] at hx
+    convert hx using 1
+    rfl
 
 /-- The ordinary canonical reduction map, fixed by its formula in `reduction_exists`.
 Source: Stacks Tag 093M (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
@@ -284,7 +521,136 @@ theorem finiteReduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
               ((systemComparison T I hf).app (op n)).hom.app U
                 (@id ((adicLisseConstantRing T (A ⧸ I ^ (n + 1))).obj.obj U)
                   ((adicLisseConstantUnit T (A ⧸ I ^ (n + 1))).app U x)) := by
-  sorry
+  let Q := A ⧸ I ^ (n + 1)
+  let H := (ringSystem T I hf).obj (op n)
+  let d : adicLisseConstantRing T Q ⟶ H := (systemComparison T I hf).app (op n)
+  let c := base T I ≫ completedComparison T I hf
+  let e (U : T.ProEtᵒᵖ) : Q →+* H.obj.obj U :=
+    (d.hom.app U).hom.comp ((adicLisseConstantUnit T Q).app U).hom
+  let M := (adicLisseConstantModules T A).obj (ModuleCat.of A Q)
+  let N := (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj
+    (finiteResidue T I hf n)
+  let P : PresheafOfModules.{u + 1}
+      ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
+    (siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
+    PresheafOfModules.pushforward₀
+      ((Functor.const T.ProEt).obj (Discrete.mk (ULift.up ())))
+      ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))).obj
+        (ModuleCat.of A Q)
+  let g₀ : P ⟶
+      (PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val :=
+    { app := fun U ↦ ModuleCat.ofHom
+        (Y := ((PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val).obj U)
+        { toFun := fun (x : Q) ↦ (e U) x
+          map_add' := fun (x y : Q) ↦ map_add (e U) x y
+          map_smul' := by
+            intro a x
+            have hb : c ≫ limit.π (ringSystem T I hf) (op n) =
+                (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+                  (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))) ≫ d := by
+              change (base T I ≫ limMap (systemComparison T I hf)) ≫ _ = _
+              rw [Category.assoc, limMap_π, ← Category.assoc]
+              exact congrArg (fun z ↦ z ≫ d) ((base_exists T I).choose_spec.1 n)
+            change (e U) (a • x) =
+              @id (H.obj.obj U)
+                ((limit.π (ringSystem T I hf) (op n)).hom.app U
+                  (c.hom.app U ((adicLisseConstantUnit T A).app U a))) *
+                    @id (H.obj.obj U)
+                      ((e U) x)
+            have h := congrArg (fun k ↦ (k.hom.app U) ((adicLisseConstantUnit T A).app U a)) hb
+            change (limit.π (ringSystem T I hf) (op n)).hom.app U
+                (c.hom.app U ((adicLisseConstantUnit T A).app U a)) = _ at h
+            dsimp only [id_eq]
+            rw [h]
+            have hn := toSheafify_naturality (ProEt.topology T)
+              ((Functor.const T.ProEtᵒᵖ).map
+                (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+            have hn' := congrArg (fun k ↦ (k.app U).hom (show A from a)) hn
+            change (adicLisseConstantUnit T Q).app U
+                ((Ideal.Quotient.mk (I ^ (n + 1))) a) =
+              ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+                (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))).hom.app U
+                  ((adicLisseConstantUnit T A).app U a) at hn'
+            change e U (a • x) = (d.hom.app U).hom
+              (((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+                (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))).hom.app U
+                  ((adicLisseConstantUnit T A).app U a)) * e U x
+            rw [← hn']
+            change e U ((Ideal.Quotient.mk (I ^ (n + 1))) a * (show Q from x)) = _
+            exact map_mul (e U) ((Ideal.Quotient.mk (I ^ (n + 1))) a) x }
+      naturality := by
+        intro U V f
+        ext x
+        change e V (show Q from x) = H.obj.map f (e U x)
+        change (d.hom.app V) ((adicLisseConstantUnit T Q).app V x) =
+          H.obj.map f ((d.hom.app U) ((adicLisseConstantUnit T Q).app U x))
+        have hu := ConcreteCategory.congr_hom
+          ((adicLisseConstantUnit T Q).naturality f) x
+        change (adicLisseConstantUnit T Q).app V (show Q from x) =
+          (adicLisseRing T Q).obj.map f ((adicLisseConstantUnit T Q).app U x) at hu
+        rw [hu]
+        exact NatTrans.naturality_apply d.hom f
+          ((adicLisseConstantUnit T Q).app U x) }
+  let g : M ⟶ N := (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (adicLisseConstantUnit T A) (P := P) (F := N)).symm g₀
+  let h := (completedAdicChangeData T c).choose_spec.choose M
+  let r₀ := (tensorHomEquiv T c M (finiteResidue T I hf n)).symm g
+  let r := eqToHom h ≫ r₀
+  have hc : eqToHom h.symm ≫ r = r₀ := by simp [r]
+  refine ⟨r, ?_, ?_⟩
+  · intro U b x
+    change (eqToHom h.symm ≫ r).val.app U
+      ((toSheafify (ProEt.topology T)
+        (SheafOfModules.changeOfRingsPresheaf c M).presheaf).app U
+          (b ⊗ₜ[(adicLisseConstantRing T A).obj.obj U, (c.hom.app U).hom]
+            ((toSheafify (ProEt.topology T) P.presheaf).app U x))) = _
+    rw [hc]
+    refine (tensorHomEquiv_tmul T c M (finiteResidue T I hf n) r₀ U b
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)).trans ?_
+    have he : tensorHomEquiv T c M (finiteResidue T I hf n) r₀ = g :=
+      (tensorHomEquiv T c M (finiteResidue T I hf n)).apply_symm_apply g
+    rw [he]
+    have hg₀ : PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) g = g₀ :=
+      (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) (P := P) (F := N)).apply_symm_apply g₀
+    have hg := congrArg (fun (k : P ⟶
+      (PresheafOfModules.restrictScalars (adicLisseConstantUnit T A)).obj N.val) ↦
+        (k.app U).hom x) hg₀
+    change g.val.app U ((toSheafify (ProEt.topology T) P.presheaf).app U x) =
+      (e U) x at hg
+    rw [hg]
+    rfl
+  · intro s hs
+    apply (cancel_epi (eqToHom h.symm)).mp
+    rw [hc]
+    apply (tensorHomEquiv T c M (finiteResidue T I hf n)).injective
+    have he : tensorHomEquiv T c M (finiteResidue T I hf n) r₀ = g :=
+      (tensorHomEquiv T c M (finiteResidue T I hf n)).apply_symm_apply g
+    refine Eq.trans ?_ he.symm
+    apply (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+      (adicLisseConstantUnit T A) (P := P) (F := N)).injective
+    have hg : PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) g = g₀ :=
+      (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+        (adicLisseConstantUnit T A) (P := P) (F := N)).apply_symm_apply g₀
+    refine Eq.trans ?_ hg.symm
+    ext U x
+    have ht := tensorHomEquiv_tmul T c M (finiteResidue T I hf n)
+      (eqToHom h.symm ≫ s) U 1
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)
+    have hx := hs U 1 (show Q from x)
+    simp only [one_smul] at ht
+    change (tensorHomEquiv T c M (finiteResidue T I hf n)
+      (eqToHom h.symm ≫ s)).val.app U
+        ((toSheafify (ProEt.topology T) P.presheaf).app U x) =
+          (e U) x
+    refine ht.symm.trans ?_
+    change s.val.app U (tensorSection T c M U 1
+      ((toSheafify (ProEt.topology T) P.presheaf).app U x)) = _
+    simp only [map_one, id_eq, one_mul] at hx
+    convert hx using 1 <;> rfl
+
 
 /-- The finite-coefficient reduction map, specified uniquely on tensor generators.
 Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
