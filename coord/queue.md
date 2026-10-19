@@ -1,25 +1,25 @@
 # Work queue
 
-1002 items; claim with `tools/claim.py next <group> [--stage N]`.
+1003 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (5)
+## Stage 1: nodes to split (6)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `thm-sfb-constructible-cocone-two-colimit` | - | rests_on_sorry |
+| `lem-sfb-constructible-cocone-hom-inj` | - | sorry_here |
+| `lem-sfb-constructible-cocone-hom-surj` | - | sorry_here |
 | `lem-zl-mixed-punctual-cutoff` | - | closed_part |
-| `lem-a1-geometric-coinvariants-pure` | - | closed_part |
+| `lem-a1-lisse-sections-stalk-evaluation` | - | none |
 | `lem-fd-stalk-formula` | - | rests_on_sorry |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (29)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sf-datum` | 1 | state | 91 |
 | `sk-d-six` | 1 | state | 42 |
 | `sk-def-sp-trace` | 2 | state | 2 |
-| `def-sfb-derived-extend-levelwise-adjunction` | 2 | state | 0 |
 | `lem-coef-finite-exceptional` | 1 | state | 117 |
 | `fix-cor-verdier-exchange` | 2 | state | 105 |
 | `fix-lem-exchanges` | 1 | state | 87 |
@@ -35,10 +35,10 @@
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `det-sp-tower-p1-adjunction` | 1 | state | 0 |
 | `lem-coef-rational-retract-evaluation` | 1 | state | 0 |
-| `lem-coef-rational-scalar-transpose-compatibility` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-sf-proper-open-tensor-compatibility` | 1 | state | 0 |
+| `lem-sfb-constructible-cocone-obj` | 1 | state | 0 |
 | `lem-wf-constant-twist-coefficient-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
@@ -46,9 +46,9 @@
 | `lem-coef-finite-free-compact-composition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 295 nodes that below a finished node, not needed, 123 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 295 nodes that below a finished node, not needed, 3 nodes that wait for stage 1 (statement downstream not grounded), 123 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (968)
+## Stage 3: modules to prove (969)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -676,6 +676,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PurAdicScalarExtensionTorBound` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PurLisseMorphismRigidity` | - | 1 | proof | 3 |
 | `Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus` | - | 3 | proof | 3 |
+| `Sheaf.Paper.RationalScalarTransposeCompatibility` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RingedCoefficientProjectionCocycle` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RingedRefinementCoefficientSquare` | - | 1 | proof | 3 |
 | `Sheaf.Paper.SemilinearCompactSupportCoefficientTransport` | - | 13 | proof | 3 |
