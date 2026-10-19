@@ -9,14 +9,7 @@ public import Sheaf.SixFunctors.IntegralLocalizingCompactSupport
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.Paper.LocalizingAdmissibleCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 
 /-!
 # The integral Brown exceptional adjoint
@@ -111,6 +104,37 @@ def brownAdjointAssertions (c : Compactification.BoundaryCompactification f) : P
           (_comm := s))
       (_triX := hX) (_triY := hY)
 
+private theorem ambientCounitComparison
+    {C D : Type*} [Category* C] [Category* D]
+    (P P' : ObjectProperty C) (Q Q' : ObjectProperty D)
+    (F : C ⥤ D) (eP : P = P') (eQ : Q = Q')
+    (h : ∀ K, P' K → Q' (F.obj K))
+    (G : Q'.FullSubcategory ⥤ P'.FullSubcategory)
+    (adj : Q'.lift (P'.ι ⋙ F) (fun K ↦ h K.obj K.property) ⊣ G)
+    (h' : ∀ K, P K → Q (F.obj K))
+    (J : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adjJ : Q.lift (P.ι ⋙ F) (fun K ↦ h' K.obj K.property) ⊣ J) :
+    ∃! e : G ⋙ P'.ι ≅ ObjectProperty.ιOfLE (le_of_eq eQ.symm) ⋙ J ⋙ P.ι,
+      ∀ N, F.map (e.hom.app N) ≫
+          Q.ι.map (adjJ.counit.app ((ObjectProperty.ιOfLE (le_of_eq eQ.symm)).obj N)) =
+        Q'.ι.map (adj.counit.app N) := by
+  subst P'
+  subst Q'
+  let e := adj.rightAdjointUniq adjJ
+  refine ⟨Functor.isoWhiskerRight e P.ι, ?_, ?_⟩
+  · intro N
+    exact congrArg (fun t ↦ t.hom) (adj.rightAdjointUniq_hom_app_counit adjJ N)
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    have hn : ObjectProperty.homMk (e'.hom.app N) = e.hom.app N := by
+      apply (adjJ.homEquiv (G.obj N) N).symm.injective
+      apply ObjectProperty.hom_ext
+      exact (he' N).trans
+        (congrArg (fun t ↦ t.hom) (adj.rightAdjointUniq_hom_app_counit adjJ N)).symm
+    exact congrArg (fun t ↦ t.hom) hn
+
 /-- The integral compact-support functor has an exact right adjoint, with natural
 Hom equivalences and unique counit-compatible comparisons, including comparison
 with the general Brown adjoint for the same condensed integral coefficient.
@@ -150,6 +174,46 @@ theorem exists_integralBrownAdjoint (ℓ : ℕ) [Fact ℓ.Prime]
     [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
     (c : Compactification.BoundaryCompactification f) :
     brownAdjointAssertions (Profinite.padicIntegersRingObj ℓ E.val) c := by
-  sorry
+  let Λ := Profinite.padicIntegersRingObj ℓ E.val
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  let : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated (X ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+  have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ :=
+    Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
+  have closure_eq (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z] :
+      localizingClosureProEtale Λ Z = localizing Λ Z := by
+    exact (localizingClosure_ctf_equals_bc ℓ Z Λ
+      (Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩)))).1.2.2.2.1
+  have eX := closure_eq X
+  have eY := closure_eq Y
+  let Data (P : ObjectProperty (Ambient Λ X)) (Q : ObjectProperty (Ambient Λ Y)) : Prop :=
+    ∃ (h : ∀ K, P K → Q ((image Λ c.obj.obj).obj K))
+      (hX : P.IsTriangulated) (hY : Q.IsTriangulated),
+      (fun [_triX : P.IsTriangulated] [_triY : Q.IsTriangulated] ↦
+        ∃ G : Q.FullSubcategory ⥤ P.FullSubcategory,
+          ∃ s : G.CommShift ℤ,
+            (fun [_comm : G.CommShift ℤ] ↦
+              G.IsTriangulated ∧
+              ∃ adj : Q.lift (P.ι ⋙ image Λ c.obj.obj) (fun K ↦ h K.obj K.property) ⊣ G,
+                ∀ (J : Q.FullSubcategory ⥤ P.FullSubcategory)
+                  (adjJ : Q.lift (P.ι ⋙ image Λ c.obj.obj)
+                    (fun K ↦ h K.obj K.property) ⊣ J),
+                  ∃! e : G ≅ J, ∀ N,
+                    (Q.lift (P.ι ⋙ image Λ c.obj.obj) (fun K ↦ h K.obj K.property)).map
+                      (e.hom.app N) ≫ adjJ.counit.app N = adj.counit.app N)
+              (_comm := s)) (_triX := hX) (_triY := hY)
+  have data : Data (localizingClosureProEtale Λ X) (localizingClosureProEtale Λ Y) := by
+    obtain ⟨h, hX, hY, _, _, _, _, G, s, hG, _, adj, unique⟩ :=
+      exists_localizingExceptionalAdjoint Λ ℓ k f c hΛ
+    exact ⟨h, hX, hY, G, s, hG, adj, unique⟩
+  rw [eX, eY] at data
+  obtain ⟨h, hX, hY, G, s, hG, adj, unique⟩ := data
+  refine ⟨eX, eY, h, hX, hY, G, s, hG, adj, unique, ?_⟩
+  intro hctf J adjJ
+  exact ambientCounitComparison
+    (localizingClosureProEtale Λ X) (localizing Λ X)
+    (localizingClosureProEtale Λ Y) (localizing Λ Y)
+    (image Λ c.obj.obj) eX eY h G adj hctf J adjJ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport
