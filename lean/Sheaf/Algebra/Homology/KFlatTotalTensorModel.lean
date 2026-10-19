@@ -8,8 +8,15 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.Algebra.Homology.Monoidal
+import Mathlib.CategoryTheory.GradedObject.Monoidal
+import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-!
@@ -93,6 +100,107 @@ def total : CochainComplex (Modules R) ℤ × CochainComplex (Modules R) ℤ ⥤
     CochainComplex (Modules R) ℤ :=
   Functor.uncurry.obj ((tensor R).map₂CochainComplex)
 
+private theorem total_map_f
+    {P P' Q Q' : CochainComplex (Modules R) ℤ} (f : P ⟶ P') (g : Q ⟶ Q') (i : ℤ) :
+    let := monoidal R
+    ((total R).map (Prod.mkHom f g)).f i =
+      GradedObject.Monoidal.tensorHom f.f g.f i := by
+  let := monoidal R
+  apply GradedObject.Monoidal.tensorObj_ext
+  intro p q hpq
+  rw [GradedObject.Monoidal.ι_tensorHom]
+  change CochainComplex.ιMapBifunctor P Q (tensor R) p q i hpq ≫ _ = _
+  simp only [total, Functor.uncurry_obj_map,
+    Functor.map₂CochainComplex, Functor.map₂HomologicalComplex,
+    HomologicalComplex.comp_f,
+    HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorMap,
+    HomologicalComplex.id_f]
+  simp [tensor, MonoidalCategory.tensorHom_def]
+  rfl
+
+private theorem flat_coproductOnSite {I : Type} (F : I → Modules R)
+    (hF : ∀ i, SheafOfModules.IsFlatOnSite (J := J) (R := R) (F i)) :
+    SheafOfModules.IsFlatOnSite (J := J) (R := R) (∐ F) := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := monoidal R
+  let := SheafOfModules.symmetricCategory R
+  have (M : Modules R) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
+    have := SheafOfModules.tensorLeft_preservesColimits_independentCoefficients R M
+    exact preservesColimitsOfSize_shrink (tensorLeft M)
+  have (M : Modules R) : PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
+    preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  have (i : I) : PreservesFiniteLimits (tensorLeft (F i)) :=
+    (SheafOfModules.flat_to_cat R (F i) (hF i)).1.1
+  let : HasSheafify J AddCommGrpCat.{r} := smallSiteHasSheafify (J := J)
+  let : HasWeakSheafify J AddCommGrpCat.{r} := HasSheafify.isRightAdjoint
+  have : HasColimitsOfShape (Discrete I) AddCommGrpCat.{r} := inferInstance
+  have : HasColimitsOfShape (Discrete I) (Sheaf J AddCommGrpCat.{r}) :=
+    ⟨fun D ↦ HasColimit.mk ⟨
+      Sheaf.sheafifyCocone (colimit.cocone (D ⋙ sheafToPresheaf J AddCommGrpCat.{r})),
+      Sheaf.isColimitSheafifyCocone _ (colimit.isColimit _)⟩⟩
+  have : HasExactColimitsOfShape (Discrete I) (Sheaf J AddCommGrpCat.{r}) :=
+    CategoryTheory.Sheaf.hasExactColimitsOfShape J
+  have : HasExactColimitsOfShape (Discrete I) (Modules R) :=
+    HasExactColimitsOfShape.domain_of_functor (Discrete I) (SheafOfModules.toSheaf.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+  have : PreservesColimit (Discrete.functor F) (curriedTensor (Modules R)) :=
+    MonoidalCategory.Limits.preservesCoLimit_curriedTensor _
+  let e : tensorLeft (∐ F) ≅ (Discrete.functor F ⋙ curriedTensor (Modules R)).flip ⋙ colim :=
+    preservesColimitIso (curriedTensor (Modules R)) (Discrete.functor F) ≪≫
+      colimitIsoFlipCompColim _
+  have : PreservesFiniteLimits ((Discrete.functor F ⋙ curriedTensor (Modules R)).flip) :=
+    preservesFiniteLimits_of_evaluation _ (fun j ↦
+      inferInstanceAs (PreservesFiniteLimits (tensorLeft (F j.as))))
+  have : PreservesFiniteLimits (tensorLeft (∐ F)) := preservesFiniteLimits_of_natIso e.symm
+  have hr : exactFunctor _ _ (tensorRight (∐ F)) :=
+    ⟨preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight (∐ F)),
+      (inferInstance : PreservesFiniteColimits (tensorRight (∐ F)))⟩
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R (∐ F)).symm hr
+
+private theorem totalFlat
+    (P Q : CochainComplex (Modules R) ℤ)
+    (hP : ∀ p, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X p))
+    (hQ : ∀ q, SheafOfModules.IsFlatOnSite (J := J) (R := R) (Q.X q)) :
+    ∀ i, SheafOfModules.IsFlatOnSite (J := J) (R := R) (((total R).obj (P, Q)).X i) := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := monoidal R
+  have hf (p q : ℤ) : SheafOfModules.IsFlatOnSite (J := J) (R := R)
+      ((tensor R).obj (P.X p) |>.obj (Q.X q)) := by
+    have h : ObjectProperty.flat (P.X p ⊗ Q.X q) :=
+      ObjectProperty.prop_tensor (SheafOfModules.flat_to_cat R _ (hP p))
+        (SheafOfModules.flat_to_cat R _ (hQ q))
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R _).symm h.2
+  intro i
+  change SheafOfModules.IsFlatOnSite (J := J) (R := R)
+    (∐ fun pq : {pq : ℤ × ℤ // pq.1 + pq.2 = i} ↦
+      ((tensor R).obj (P.X pq.val.1)).obj (Q.X pq.val.2))
+  exact flat_coproductOnSite R _ (fun pq ↦ hf pq.val.1 pq.val.2)
+
+private theorem derivedComparison
+    [HasDerivedCategory.{w} (Modules R)]
+    (P Q : CochainComplex (Modules R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) Q)
+    (hPflat : ∀ p : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X p))
+    (hQflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (Q.X q)) :
+    Nonempty (DerivedCategory.Q.obj ((total R).obj (P, Q)) ≅
+      (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R).obj
+          (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) := by
+  let h := SheafOfModules.site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0}
+    J R
+  let S := h.choose
+  have hS := h.choose_spec.1
+  let B := h.choose_spec.2.2.1.choose
+  let c := h.choose_spec.2.2.1.choose_spec.1.some
+  let d := h.choose_spec.2.2.1.choose_spec.2.choose_spec.some
+  let p : S.FullSubcategory := ⟨(HomotopyCategory.quotient _ _).obj P,
+    (hS _).2 ⟨hP, hPflat⟩⟩
+  let q : S.FullSubcategory := ⟨(HomotopyCategory.quotient _ _).obj Q,
+    (hS _).2 ⟨hQ, hQflat⟩⟩
+  exact ⟨(DerivedCategory.Qh.mapIso (c.app (P, Q))).symm ≪≫ d.app (p, q)⟩
+
 /-- The total tensor of flat-term K-flat complexes is again a flat-term K-flat complex,
 with its natural, summandwise inverse-associator chain isomorphism and its derived model.
 All complexes are integer-indexed without any boundedness restriction. The termwise
@@ -157,6 +265,59 @@ theorem kFlat_total_tensor_model
     Nonempty (DerivedCategory.Q.obj ((total R).obj (P, Q)) ≅
       (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R).obj
           (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) := by
-  sorry
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := monoidal R
+  let := SheafOfModules.tensorPreadditive R
+  have (M : Modules R) : PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
+    have := SheafOfModules.tensorLeft_preservesColimits_independentCoefficients R M
+    exact preservesColimitsOfSize_shrink (tensorLeft M)
+  have (M : Modules R) : PreservesColimitsOfSize.{0, 0} (tensorRight M) := by
+    let := SheafOfModules.symmetricCategory R
+    exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  let α := fun H : CochainComplex (Modules R) ℤ ↦
+    (HomologicalComplex.associator H P Q).symm
+  refine ⟨?_, ?_, ⟨α, ?_, ?_⟩, derivedComparison R P Q _hP _hQ _hPflat _hQflat⟩
+  · intro H hH
+    exact fun i ↦ (_hQ _ (_hP H hH) i).of_iso (α H).symm
+  · exact totalFlat R P Q _hPflat _hQflat
+  · intro H a p q b c i hpq ha hap hb
+    have h : a + p + q = i := by omega
+    change (H.X a ◁ GradedObject.Monoidal.ιTensorObj P.X Q.X p q c hpq) ≫
+      GradedObject.Monoidal.ιTensorObj H.X (GradedObject.Monoidal.tensorObj P.X Q.X) a c i ha ≫
+        (GradedObject.Monoidal.associator H.X P.X Q.X).inv i =
+      (α_ (H.X a) (P.X p) (Q.X q)).inv ≫
+        (GradedObject.Monoidal.ιTensorObj H.X P.X a p b hap ▷ Q.X q) ≫
+          GradedObject.Monoidal.ιTensorObj
+            (GradedObject.Monoidal.tensorObj H.X P.X) Q.X b q i hb
+    rw [← GradedObject.Monoidal.ιTensorObj₃_eq_assoc H.X P.X Q.X a p q i h c hpq,
+      GradedObject.Monoidal.ιTensorObj₃_associator_inv,
+      GradedObject.Monoidal.ιTensorObj₃'_eq H.X P.X Q.X a p q i h b hap]
+  · intro H H' f
+    ext i : 1
+    have hff : ((total R).map (Prod.mkHom f (𝟙 P))).f =
+        GradedObject.Monoidal.tensorHom f.f (𝟙 P.X) := by
+      funext j
+      exact total_map_f R f (𝟙 P) j
+    simp only [HomologicalComplex.comp_f, total_map_f]
+    rw [hff]
+    change GradedObject.Monoidal.tensorHom f.f (𝟙 (GradedObject.Monoidal.tensorObj P.X Q.X)) i ≫
+      (GradedObject.Monoidal.associator H'.X P.X Q.X).inv i =
+        (GradedObject.Monoidal.associator H.X P.X Q.X).inv i ≫
+          GradedObject.Monoidal.tensorHom (GradedObject.Monoidal.tensorHom f.f (𝟙 P.X)) (𝟙 Q.X) i
+    have h := GradedObject.Monoidal.associator_naturality f.f (𝟙 P.X) (𝟙 Q.X)
+    have hi := congrFun h i
+    change GradedObject.Monoidal.tensorHom
+        (GradedObject.Monoidal.tensorHom f.f (𝟙 P.X)) (𝟙 Q.X) i ≫
+          (GradedObject.Monoidal.associator H'.X P.X Q.X).hom i =
+      (GradedObject.Monoidal.associator H.X P.X Q.X).hom i ≫
+        GradedObject.Monoidal.tensorHom f.f
+          (GradedObject.Monoidal.tensorHom (𝟙 P.X) (𝟙 Q.X)) i at hi
+    rw [GradedObject.Monoidal.id_tensorHom_id] at hi
+    symm
+    simpa only [Category.assoc,
+      Iso.inv_hom_id_eval_assoc, Iso.hom_inv_id_eval,
+      Category.comp_id, Category.id_comp, GradedObject.Monoidal.id_tensorHom_id] using
+      congrArg (fun t ↦ (GradedObject.Monoidal.associator H.X P.X Q.X).inv i ≫ t ≫
+        (GradedObject.Monoidal.associator H'.X P.X Q.X).inv i) hi
 
 end SheafOfModules.KFlatTotalTensorModel
