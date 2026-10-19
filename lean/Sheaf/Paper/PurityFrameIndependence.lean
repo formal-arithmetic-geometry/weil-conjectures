@@ -6,12 +6,8 @@ Authors: SHEAF group Q64
 module
 
 public import Sheaf.Paper.PurityFrameClass
-import Mathlib.AlgebraicGeometry.Sites.Etale
-import Sheaf.RingTheory.LocalGeneratingTuples
-import Sheaf.AlgebraicGeometry.SupportLongExact
-import Sheaf.Paper.SupportedAffineLineHomotopy
-import Sheaf.Paper.RelativeSupportBottomDescent
-import Sheaf.Paper.SupportedCupFunctoriality
+import Sheaf.Paper.FrameLocalGeneratorChains
+import Sheaf.Paper.FrameClassLocalEquality
 
 /-!
 # Independence of the concrete frame class
@@ -37,6 +33,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 open AlgebraicGeometry.ProEtale
 
 namespace WeilConjectures.PurityFiniteSetting
+
+attribute [local irreducible] frameBoundaryProduct frameClass
 
 /-- Read the concrete class of a frame in cohomology supported on the fixed
 scheme-theoretic pullback `Z ×_V U`. The isomorphism is the canonical comparison
@@ -112,6 +110,22 @@ theorem frameClass_independent (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}
       { U := U, e := e, etale := inferInstance, f := f, toZ := tf, isPullback := hf } =
     P.frameClassOnPullback b v i c hcodim
       { U := U, e := e, etale := inferInstance, f := g, toZ := tg, isPullback := hg } := by
-  sorry
+  have hlocal : P.FrameBoundaryProductsLocallyHEq U (e ≫ v ≫ b) c f g := by
+    intro x
+    obtain ⟨W, hxW, _, hchain⟩ :=
+      exists_frame_local_generator_chain i e c f g tf tg hf hg x
+    refine ⟨W, hxW, ?_⟩
+    have hall : ∀ {s t : Fin c → Γ(W.toScheme, ⊤)},
+        Relation.ReflTransGen FrameElementaryMove s t →
+        HEq (P.frameBoundaryProduct W.toScheme (W.ι ≫ e ≫ v ≫ b) c s)
+          (P.frameBoundaryProduct W.toScheme (W.ι ≫ e ≫ v ≫ b) c t) := by
+      intro s t h
+      induction h with
+      | refl => exact HEq.rfl
+      | tail h hstep ih =>
+        exact ih.trans (P.frameBoundaryProduct_elementary W.toScheme
+          (W.ι ≫ e ≫ v ≫ b) c _ _ hstep)
+    exact hall hchain
+  exact P.frameClass_eq_of_locally_heq b v i c hcodim U e f g tf tg hf hg hlocal
 
 end WeilConjectures.PurityFiniteSetting

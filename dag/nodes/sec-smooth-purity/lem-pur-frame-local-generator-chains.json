@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-frame-local-generator-chains",
+ "kind": "statement",
+ "title": "Spreading a stalkwise elementary generator chain",
+ "statement": "Let i:Z -> V be a closed immersion, e:U -> V etale, and let f,g be two length-c tuples of global functions on U whose zero subscheme squares are pullbacks of i along e. For every point x of U there exists an affine open neighbourhood W such that the restrictions of f and g to W are related by the reflexive transitive closure of unit scalings, swaps of distinct entries, and shears. This is the algebraic/geometric local chain statement only, with no cohomological assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Local-ring reduction and spreading of elementary operations; corrected parent step 2."
+ },
+ "stmt_deps": [
+  "def-pur-frame-class",
+  "lem-pur-frame-elementary-moves"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open N containing x. Pull back both given squares to N and apply the source-library span_eq_of_isPullback_zeroLocusSubschemeι to identify the generated ideals. Send this equality to the stalk via the germ ring homomorphism. The ideal is a finite module, and the two tuples span it. Apply exists_elementary_generating_tuple_change over the local stalk ring and forget the matrix witnesses, obtaining the reflexive transitive chain.",
+   "uses": [
+    "lem-pur-local-generating-tuples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a finite family of germs simultaneously to sections after shrinking, by finite-set induction and exists_le_germ_eq. Likewise shrink until a finite family of equal-germ sections is equal using germ_eq. For one elementary move lift its coefficient; for a unit shrink further using isUnit_res_of_isUnit_germ. The resulting elementary move has the desired endpoint germs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on reflexive transitive chains using reflexivity, singleton edges and transitivity. At a transitive join restrict both representatives to their intersection and shrink until their middle tuples agree, then concatenate the restricted chains. Finally shrink until the outer endpoint sections equal the restrictions of the original f and g. Choose an affine subopen and transport its sections with topIso. Restriction ring maps preserve all three operations. The empty tuple gives the reflexive case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-local-generating-tuples"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A4",
+  "date": "2026-10-20",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Local-ring reduction and spreading of elementary operations; corrected parent step 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frameClass|frameBoundaryProduct|elementary.*tuple",
+   "results": "2 hits: Mathlib/ModelTheory/ElementarySubstructures.lean, Mathlib/ModelTheory/ElementarySubstructures.lean. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.zeroLocusSubscheme",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry.Scheme.zeroLocusSubscheme'",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supported Kummer boundary product of a regular sequence is invariant under elementary changes of its generators",
+   "results": "8 hits: RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing, RingTheory.Sequence.IsWeaklyRegular.prototype_perm, RingTheory.Sequence.IsRegular.ndrecIterModByRegular, IsLocalRing.isRegular_of_perm, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsWeaklyRegular.cons', RingTheory.Sequence.IsWeaklyRegular.recIterModByRegularWithRing. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two tuples generating the same ideal in a scheme are locally connected by elementary changes of generators",
+   "results": "8 hits: AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, RingHom.locally_of_exists, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"germ\", \"exists\"",
+   "results": "11 hits: TopCat.Presheaf.exists_germ_eq, TopCat.Presheaf.exists_mem_germ_eq_of_isBasis, TopCat.Presheaf.exists_le_germ_eq, Filter.Germ.instExistsAddOfLE, Filter.Germ.instExistsMulOfLE, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.exists_isUnit_germ_eq, AlgebraicGeometry.Scheme.exists_germ_injective. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_le_germ_eq|germ_eq|isUnit_res_of_isUnit_germ",
+   "results": "25 hits: Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/Sheafify.lean, Mathlib/Topology/Sheaves/LocallySurjective.lean, Mathlib/Topology/Sheaves/LocallySurjective.lean, Mathlib/Topology/Sheaves/LocallySurjective.lean. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product of Kummer classes with support is invariant under an elementary shear of its defining functions",
+   "results": "8 hits: SlashInvariantForm.slash_action_eqn'', ModularForm.prod_slash, SlashInvariantForm.slash_action_eq', MeasurableEquiv.shearSubRight, MeasurableEquiv.shearDivRight, MeasurableEquiv.shearAddRight, Equiv.prodShear_symm_apply, Equiv.prodShear_apply. ",
+   "date": "2026-10-19",
+   "verdict": "No exact statement; the germ representation and unit shrinking ingredients are used in the local chain proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFrameIndependence",
+  "date": "2026-10-20",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Local-ring reduction and spreading of elementary operations; corrected parent step 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrameLocalGeneratorChains",
+  "file": "lean/Sheaf/Paper/FrameLocalGeneratorChains.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.exists_frame_local_generator_chain",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.exists_frame_local_generator_chain"
+  ],
+  "statement": "theorem exists_frame_local_generator_chain {V Z U : Scheme.{u}}\n    (i : Z ⟶ V) [IsClosedImmersion i] (e : U ⟶ V) [Etale e] (c : ℕ)\n    (f g : Fin c → Γ(U, ⊤))\n    (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z)\n    (tg : U.zeroLocusSubscheme (Set.range g) ⟶ Z)\n    (hf : IsPullback tf (U.zeroLocusSubschemeι (Set.range f)) i e)\n    (hg : IsPullback tg (U.zeroLocusSubschemeι (Set.range g)) i e)\n    (x : U) :\n    ∃ W : U.Opens, x ∈ W ∧ IsAffineOpen W ∧\n      Relation.ReflTransGen FrameElementaryMove\n        (fun k ↦ W.ι.appTop (f k)) (fun k ↦ W.ι.appTop (g k))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T231027-L-540341",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T231027-L-540341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

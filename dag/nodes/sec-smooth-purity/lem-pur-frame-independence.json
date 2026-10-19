@@ -17,109 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Work with two length-$c$ frames $f,g$ on the same etale neighborhood $U$, generating the same ideal $I$ of $Z_U$. This is the meaning of frame independence; for frames on different etale neighborhoods compare their restrictions on the fibre product over $V$, which is an object of the small etale site by [def-weil-pbc-etale-site]. Use exactly the individual-boundary, ordered-product construction of [def-pur-frame-class]. If $c=0$, both classes are the specified empty product $1$ in $H^0(U,A)$, so they agree. Henceforth $c>0$.",
+   "text": "Apply the local equality criterion [lem-pur-frame-class-local-equality] to the original frame classes on their fixed pullback support. It suffices to prove the local heterogeneous equality of their boundary products at each point.",
    "uses": [
-    "def-pur-frame-class",
-    "def-weil-pbc-etale-site"
+    "lem-pur-frame-class-local-equality"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "First sentence; specify the equality and the empty-frame case."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-relative-support-bottom-descent] directly to the displayed frame data $(V,B,Z,U,c)$, with $r=c$, to test equality of our degree-$2c$ supported classes on an etale cover; a Zariski cover suffices. At any point $x\\in U$, the germs of $f,g$ generate the same finite module $I_x$ over the local ring $\\mathcal O_{U,x}$. By [lem-pur-local-generating-tuples], a finite succession of permutations, unit multiples and shears transforms these germs into one another. This finite succession spreads to an affine open neighborhood $N$ of $x$ in $U$ (no finiteness hypothesis on $V$ or $B$ is used or needed): represent every coefficient and unit inverse as a section on a neighborhood; the finitely many equalities hold after shrinking because equality in a stalk means equality on a smaller neighborhood. $N\\to U\\to V$ is etale, so each intermediate tuple is again a frame on $N$. On that neighborhood every operation is invertible, preserves the generated ideal, and transforms the actual sections $f$ into $g$. Thus it remains to check these three operations on an open neighborhood. The pullback and boundary/product compatibilities of [lem-pur-supported-cup-functoriality] identify the restriction of each frame class with the same construction on that neighborhood. No strictly henselian local scheme is treated as an etale neighborhood, and no general Smith normal form is used.",
+   "text": "At each point apply [lem-pur-frame-local-generator-chains] to obtain an affine open neighbourhood and a finite elementary chain between the restricted tuples.",
    "uses": [
-    "def-pur-frame-class",
-    "lem-pur-relative-support-bottom-descent",
-    "lem-pur-local-generating-tuples",
-    "lem-pur-supported-cup-functoriality"
+    "lem-pur-frame-local-generator-chains"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "Local-ring reduction, matrix paragraph, and local equality test; gaps repaired explicitly."
-   }
+   "elementary": false
   },
   {
-   "text": "For a unit multiple $f_i'=u f_i$, the divisor $D_i$ and its complement $W_i$ are unchanged. By [lem-pur-supported-cup-functoriality], $\\kappa_{W_i}(u f_i)=\\kappa_{W_i}(u)+\\kappa_{W_i}(f_i)$ and $\\kappa_{W_i}(u)$ is the restriction of $\\kappa_U(u)$. Exactness of [thm-pur-with-support-exactness] shows that its boundary in $H^2_{D_i}(U,A(1))$ is zero. Additivity of that boundary therefore leaves $\\alpha_i$ unchanged, and hence leaves its ordered product with the other factors, the class of [def-pur-frame-class], unchanged.",
+   "text": "Induct on this reflexive transitive chain. Reflexivity is HEq.rfl; append an edge using [lem-pur-frame-elementary-moves] and HEq.trans. Supply the resulting local equality to the criterion. The original frameClassOnPullback definition is unchanged and unfolds to its conclusion.",
    "uses": [
-    "lem-pur-supported-cup-functoriality",
-    "thm-pur-with-support-exactness",
-    "def-pur-frame-class"
+    "lem-pur-frame-elementary-moves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "'Unit multiples': Kummer additivity and exactness for the individual support."
-   }
-  },
-  {
-   "text": "For an adjacent transposition, the corresponding supported factors in [def-pur-frame-class] both have cohomological degree $2$ and twist $1$. Associativity and graded symmetry in [lem-pur-supported-cup-functoriality] give sign $(-1)^{2\\cdot2}=1$, after the canonical support-intersection and twist identifications. For the twists: $A(1)$ is locally free of rank one over $A$ (as recorded in [def-pur-frame-class]), and on a cover where $A(1)\\cong A$ with local generator $e$ the swap sends $ae\\otimes be\\mapsto be\\otimes ae=ab\\,e\\otimes e$, so the swap of two adjacent factors of $A(1)^{\\otimes c}$ is the identity and the identification with $A(c)$ is unaffected. The supports $D_i\\times_UD_{i+1}$ and $D_{i+1}\\times_UD_i$ are the same closed subscheme of $U$. Thus the class is unchanged. Every permutation is a succession of adjacent transpositions (move the entry in the first desired position to the front, then repeat on the remaining list), so all permutations preserve the class.",
-   "uses": [
-    "def-pur-frame-class",
-    "lem-pur-supported-cup-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "'Permutations': supported graded commutativity, not a bare Kunneth symmetry."
-   }
-  },
-  {
-   "text": "For the shear $f_i'=f_i+a f_j$, where $i\\ne j$, put $T=\\mathbf A^1_U$ with projection $p$ and coordinate $t$. The tuple $F(t)$ obtained by replacing $f_i$ by $f_i+t a f_j$ has ideal $I\\mathcal O_T$: containment in one direction is immediate, and in the other direction recover $f_i$ by subtracting $t a f_j$. Its common zero scheme is therefore $Z_T=p^{-1}Z_U$. Construct $\\eta\\in H^{2c}_{Z_T}(T,A(c))$ by the same explicit formula as [def-pur-frame-class]: on the complement of each individual zero scheme take the Kummer class of that function, its localization boundary, then the ordered supported product. This formula is available for functions on $T$ by [lem-pur-supported-cup-functoriality] and [thm-pur-with-support-exactness]. We do not assert that $T\\to V$ is etale or call it an etale frame. Pullback along the zero and unit sections, using those same compatibility laws, gives respectively $s_0^*\\eta=\\operatorname{cl}(f)$ and $s_1^*\\eta=\\operatorname{cl}(f')$.",
-   "uses": [
-    "def-pur-frame-class",
-    "lem-pur-supported-cup-functoriality",
-    "thm-pur-with-support-exactness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "'Elementary shears': interpolation tuple, its fixed total support, and endpoint naturality."
-   }
-  },
-  {
-   "text": "Apply [lem-pur-supported-affine-line-homotopy] to $(U,Z_U)$ in degree $2c$ and twist $c$. Write $\\eta=p^*\\xi$ using its canonical isomorphism. Since $p s_0=p s_1=\\mathrm{id}_U$, pullback composition from [lem-pur-supported-cup-functoriality] gives $s_0^*\\eta=\\xi=s_1^*\\eta$. Combined with step 5 this proves shear invariance. This uses projection invariance of supported cohomology, not a claim that a global cohomology group is a constant sheaf on $\\mathbf A^1_U$.",
-   "uses": [
-    "lem-pur-supported-affine-line-homotopy",
-    "lem-pur-supported-cup-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "Shear paragraph: replace the false constant-sheaf inference by projection invariance and its inverse sections."
-   }
-  },
-  {
-   "text": "On each of the neighborhoods from step 2, successively apply steps 3--6 along the finite sequence of generator changes to obtain equality of the two frame classes. By [lem-pur-relative-support-bottom-descent] these local equalities give equality in $H^{2c}_{Z_U}(U,A(c))$. In the comparison of different neighborhoods from step 1, the common fibre product is an etale object by [def-weil-pbc-etale-site] and its pulled-back tuples define the pulled-back frame classes by [lem-pur-supported-cup-functoriality]. The equality just proved applies there as well. Thus the class depends only on the defining ideal, with the canonical etale-restriction interpretation of [def-pur-frame-class].",
-   "uses": [
-    "lem-pur-relative-support-bottom-descent",
-    "lem-pur-supported-cup-functoriality",
-    "def-pur-frame-class",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-    "place": "Final two sentences: compose the local operations and descend equality."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-frame-class",
-  "def-weil-pbc-etale-site",
-  "lem-pur-relative-support-bottom-descent",
-  "lem-pur-local-generating-tuples",
-  "lem-pur-supported-cup-functoriality",
-  "thm-pur-with-support-exactness",
-  "lem-pur-supported-affine-line-homotopy"
+  "lem-pur-frame-class-local-equality",
+  "lem-pur-frame-local-generator-chains",
+  "lem-pur-frame-elementary-moves"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "A4",
+  "date": "2026-10-20",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
-  "place": "Entire proof, following its local-generator/unit/permutation/shear route, with the Smith-form and constant-sheaf inferences repaired; auxiliary local-to-global descent made explicit."
+  "place": "Seven-step corrected route factored into local generator chains (proved), elementary cohomological invariance, and local equality descent. Parent combines these by actual chain induction; no unit route is bypassed."
  },
  "mathlib_searches": [
   {
@@ -223,5 +152,15 @@
   "by": "Q64",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T231027-L-540341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
