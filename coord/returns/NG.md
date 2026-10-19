@@ -34,3 +34,6 @@ L: independent stage-2 immutable head 01fd606bf525: Commit 01fd606 is a stage-1 
 
 L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports/NG/lem-wf-curve-kummer-jacobian-tate-module.md: a stage-2 fix is only DIR/<basename of a module>.lean (CurveKummerJacobianTateModule.lean), DIR/lem-wf-curve-kummer-jacobian-tate-module.lean-record.json, DIR/lem-wf-curve-kummer-jacobian-tate-module.statement-change.json, DIR/<new node id>.json (no new node), DIR/lem-wf-curve-kummer-jacobian-tate-module.report.md or a new module DIR/lean/Sheaf/<Topic>/<Name>.lean
 
+## lem-trf-elementary-semistable-chart-globalization (2026-10-19 04:02 UTC, branch head 3668b7bcb7)
+
+L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
