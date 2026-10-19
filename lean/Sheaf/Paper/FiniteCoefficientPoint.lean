@@ -12,6 +12,10 @@ public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 public import Sheaf.Paper.PointFdQbarCategory
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+import Mathlib.Algebra.Category.ModuleCat.Descent
+import Mathlib.RingTheory.Flat.Localization
+
 /-!
 # The four coefficient fibre functors at the geometric point
 
@@ -65,7 +69,15 @@ theorem pointFibreModuleLift_exact (F : Type u) [Field F] :
     (pointFibreModuleLift F).Additive ∧
       PreservesFiniteLimits (pointFibreModuleLift F) ∧
       PreservesFiniteColimits (pointFibreModuleLift F) := by
-  sorry
+  let h₁ : PreservesFiniteLimits (ModuleCat.uliftFunctor.{u + 1, u} F) := inferInstance
+  let h₂ : PreservesFiniteColimits (ModuleCat.uliftFunctor.{u + 1, u} F) := inferInstance
+  let h₃ : PreservesFiniteLimits
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u}
+        (ULift.ringEquiv : ULift.{u + 1, u} F ≃+* F).toRingHom) := inferInstance
+  let h₄ : PreservesFiniteColimits
+      (ModuleCat.restrictScalars.{u + 1, u + 1, u}
+        (ULift.ringEquiv : ULift.{u + 1, u} F ≃+* F).toRingHom) := inferInstance
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity of the explicit universe lift.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -131,7 +143,22 @@ the composite preserves finite limits and finite colimits. -/
 theorem pointFibreFinite_exact (A : Type u) [CommRing A] :
     PreservesFiniteLimits (pointFiniteSections D.k A) ∧
       PreservesFiniteColimits (pointFiniteSections D.k A) := by
-  sorry
+  let A' := (constantSheaf.{u, u + 1, u + 1, u + 2}
+    (Scheme.ProEt.topology (Spec (.of D.k))) CommRingCat.{u + 1}).obj
+      (CommRingCat.of (ULift.{u + 1, u} A))
+  let : IsAlgClosed D.k := pointFibreBaseIsAlgClosed D
+  let : PreservesFiniteLimits (pointModuleSections D.k A') :=
+    ((point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A').1
+  let : PreservesFiniteColimits (pointModuleSections D.k A') :=
+    ((point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A').2.1
+  change
+    PreservesFiniteLimits
+        (pointModuleSections D.k A' ⋙
+          ModuleCat.restrictScalars (pointConstantSectionMap D.k A)) ∧
+      PreservesFiniteColimits
+        (pointModuleSections D.k A' ⋙
+          ModuleCat.restrictScalars (pointConstantSectionMap D.k A))
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Kernel preservation for exact point sections.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -154,7 +181,20 @@ these rings and tensor without altering the actions, kernels or cokernels. -/
 theorem pointFibreIntegral_exact :
     PreservesFiniteLimits (pointIntegralSections l E D.k) ∧
       PreservesFiniteColimits (pointIntegralSections l E D.k) := by
-  sorry
+  let : IsAlgClosed D.k := pointFibreBaseIsAlgClosed D
+  let A := completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))
+  let : PreservesFiniteLimits (pointModuleSections D.k A) :=
+    ((point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A).1
+  let : PreservesFiniteColimits (pointModuleSections D.k A) :=
+    ((point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A).2.1
+  change
+    PreservesFiniteLimits
+        (pointModuleSections D.k A ⋙
+          ModuleCat.restrictScalars (pointIntegralSectionMap l E D.k)) ∧
+      PreservesFiniteColimits
+        (pointModuleSections D.k A ⋙
+          ModuleCat.restrictScalars (pointIntegralSectionMap l E D.k))
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Flatness of the lifted fraction-field coefficient map.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point).
@@ -165,7 +205,22 @@ theorem pointFibreFraction_exact :
         (pointIntegralToField l E)) ∧
       PreservesFiniteColimits (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
         (pointIntegralToField l E)) := by
-  sorry
+  have hloc : IsLocalization.Away (Padic.coefficientExtensionUniformizer l E) E :=
+    (Padic.coefficientExtension_localization_uniformizer.{u, u} l E).1
+  have hflat : (algebraMap (Padic.coefficientExtensionIntegers l E) E).Flat :=
+    RingHom.flat_algebraMap_iff.mpr
+      (IsLocalization.flat E (Submonoid.powers (Padic.coefficientExtensionUniformizer l E)))
+  have hf : (pointIntegralToField l E).Flat :=
+    ((RingHom.Flat.of_bijective
+      (ULift.ringEquiv : ULift.{u + 1, u}
+        (Padic.coefficientExtensionIntegers l E) ≃+*
+          Padic.coefficientExtensionIntegers l E).bijective).comp hflat).comp
+      (RingHom.Flat.of_bijective
+        (ULift.ringEquiv : ULift.{u + 1, u} E ≃+* E).symm.bijective)
+  refine ⟨ModuleCat.preservesFiniteLimits_extendScalars_of_flat hf, ?_⟩
+  let := (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
+    (pointIntegralToField l E)).leftAdjoint_preservesColimits
+  infer_instance
 
 /-- Kernel preservation for completed-coefficient evaluation.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -321,7 +376,7 @@ on underlying additive groups and on maps. It preserves kernels and cokernels. -
 theorem pointFibreCoefficientDown_exact (F : Type u) [Field F] :
     PreservesFiniteLimits (pointFibreCoefficientDown F) ∧
       PreservesFiniteColimits (pointFibreCoefficientDown F) := by
-  sorry
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Exactness at kernels for coefficient identification.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -344,7 +399,26 @@ theorem pointFibreLiftDown_existsUnique (F : Type u) [Field F] :
     ∃! e : pointFibreModuleLift F ⋙ pointFibreCoefficientDown F ≅
         ModuleCat.uliftFunctor.{u + 1, u} F,
       ∀ (M : ModuleCat.{u} F) (x : M), e.hom.app M (ULift.up x) = ULift.up x := by
-  sorry
+  let e : pointFibreModuleLift F ⋙ pointFibreCoefficientDown F ≅
+      ModuleCat.uliftFunctor.{u + 1, u} F :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _
+        ((ModuleCat.restrictScalarsComp' _ _ _
+          (ULift.ringEquiv : ULift.{u + 1, u} F ≃+* F).toRingHom_comp_symm_toRingHom.symm).symm
+          ≪≫ ModuleCat.restrictScalarsId F) ≪≫
+      Functor.rightUnitor _
+  refine ⟨e, ?_, ?_⟩
+  · intro M x
+    rfl
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    obtain ⟨x⟩ := x
+    exact he' M x
 
 /-- The normalized cancellation of the two coefficient identifications in D(F).
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
@@ -533,7 +607,9 @@ theorem pointStageCoefficientSquare (F G : Padic.FiniteCoefficientFields l Ω) (
         (AlgebraicallyClosedCoefficients.coefficientInclusion.{u} l Ω F G h).toRingHom =
       (IntermediateField.inclusion h).toRingHom.comp
         (Shrink.algEquiv ℚ_[l] F.val).toRingHom := by
-  sorry
+  have : IsAlgClosure ℚ_[l] Ω := inferInstance
+  ext x
+  simp [AlgebraicallyClosedCoefficients.coefficientInclusion]
 
 /-- The coefficient-square comparison, made from the canonical tensor tower isomorphisms.
 Source: blueprint order 1509 (blueprint: def-weil-finite-coefficient-point). -/
