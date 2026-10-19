@@ -21,52 +21,39 @@
  ],
  "proof": [
   {
-   "text": "By the definition of the raw binary comparison $\\Theta$ in the statement, built on the candidates $F_{(j,u)}=Ru_*Dj_!$ of [def-amb-etale-compact-support], each binary comparison is obtained by applying the outer proper derived direct image to the corresponding proper/open interchange map of [lem-amb-unbounded-proper-open-interchange], whiskering by the inner degreewise open extension, and inserting the canonical direct-image and open-extension composition isomorphisms. The relevant squares are read off from the factorizations: for $(g,f)$ the interchange $Dd_!Rm_*\\to Rr_*Da_!$ is that of $Q_A$; for $(h,g)$ the interchange $Di_!Rq_*\\to Rs_*Dk_!$ is that of $Q_C$; for $(h,gf)$, with $gf=(qr)(al)$ (using $dm=ra$), the interchange $Di_!R(qr)_*\\to R(sp)_*Db_!$ belongs to the square with top $b$, left $qr$, right $sp$, bottom $i$, which is $Q_B$ stacked over $Q_C$; for $(hg,f)$, with $hg=(ts)(kd)$ (using $iq=sk$), the interchange $D(kd)_!Rm_*\\to Rp_*D(ba)_!$ belongs to the square with top $ba$, left $m$, right $p$, bottom $kd$, which is $Q_A$ placed left of $Q_B$. The composition isomorphisms identify the source of both iterated comparisons with $Rt_*Di_!Rq_*Dd_!Rm_*Dl_!$ (no composite occurs there) and the target $F_{hgf}$ with $Rt_*Rs_*Rp_*Db_!Da_!Dl_!$. The two routes produce the latter identification through different parenthesizations; they agree. For the open factors, $D(bal)_!\\cong Db_!Da_!Dl_!$ is independent of the parenthesization by the three-fold compatibility clause of [lem-cbc-extension-zero-composition], applied degreewise. For the proper factors, let $I$ be K-injective on $\\overline X$, choose K-injective resolutions $p_*I\\to J$ and $s_*J\\to K$, and a K-injective resolution $(sp)_*I\\to J'$. By the normalization in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], $(Rt_*\\kappa_{s,p})\\circ\\kappa_{t,sp}$ is represented by $t_*$ of $(sp)_*I\\to J'\\to K$, where $J'\\to K$ is the homotopy class representing $\\kappa_{s,p}$ [lem-weil-pbc-kinjective-hom-derived], hence by $t_*$ of $(sp)_*I=s_*p_*I\\to s_*J\\to K$; and $(\\kappa_{t,s}Rp_*)\\circ\\kappa_{ts,p}$ is represented by $(ts)_*p_*I\\to t_*s_*J\\to t_*K$, the same map. So $R(tsp)_*\\cong Rt_*Rs_*Rp_*$ is the same along both routes, and $L$ and $R$ below are taken with the same structural identifications.",
+   "text": "Name the complete original normalization predicate and project its existence from lem-amb-unbounded-proper-open-interchange. This changes only sharing in the selector, not its value (the new selector is definitionally equal to the original). Unfold the raw binary comparison into its component formula. Cancel the target composition isomorphisms using naturality. For the first route, apply vertical pasting of lem-amb-unbounded-proper-open-interchange, then cancel the direct-image comparison and the open-extension comparison. The remaining maps are precisely A, C, B, in the displayed order.",
    "uses": [
     "def-amb-etale-compact-support",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, lemma-pseudo-functor proof: identification of the four comparison maps with squares A, C, A+B, and B+C"
-   }
-  },
-  {
-   "text": "Apply the vertical and horizontal pasting identities for the specified interchange maps. With the structural composition isomorphisms suppressed as in the statement, vertical pasting gives $\\Gamma_{Q_B+Q_C}=(R s_*\\mathsf B)\\circ(\\mathsf C R r_*)$, while horizontal pasting gives $\\Gamma_{Q_A+Q_B}=(\\mathsf B D a_!)\\circ(D k_!\\mathsf A)$. Whiskering these equations by the remaining open extensions and proper direct images, and then composing with the first square map, expands the first parenthesization to the displayed composite $L$ and the second parenthesization to the displayed composite $R$.",
-   "uses": [
     "lem-amb-unbounded-proper-open-interchange"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, lemma-pseudo-functor proof: Lemmas 0F7C and 0F7D give the vertical and horizontal pasting formulas"
+    "place": "Tag 0F7K, label lemma-pseudo-functor, proof: identification of the four comparison maps with squares A, C, A+B, B+C; expansion using Tags 0F7C and 0F7D."
    }
   },
   {
-   "text": "The preceding calculations are equalities of the specified raw comparison morphisms after the stated structural identifications. They establish the two expansion identities requested in the statement; they do not compare $L$ with $R$ and do not invoke compactification independence or an associativity assertion.",
-   "uses": [],
-   "elementary": true,
+   "text": "For the second route, apply horizontal pasting of [lem-amb-unbounded-proper-open-interchange]. Cancel the intermediate open comparison. Move the proper-composition comparison past the A and B maps by naturality. The remaining suffix is the purely structural loop [lem-amb-derived-compact-support-composition-coherence], so it is the identity. The remaining maps are C, A, B.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-amb-derived-compact-support-composition-coherence"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7K, conclusion of the fixed-staircase expansion"
+    "place": "Tag 0F7K, label lemma-pseudo-functor, proof: identification of the four comparison maps with squares A, C, A+B, B+C; expansion using Tags 0F7C and 0F7D."
    }
   }
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
   "lem-amb-unbounded-proper-open-interchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-cbc-extension-zero-composition",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-amb-derived-compact-support-composition-coherence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F7K, lemma-pseudo-functor proof"
+  "place": "Tag 0F7K, proof of lemma-pseudo-functor; Lean calculation by T8"
  },
  "mathlib_searches": [
   {
@@ -167,6 +154,8 @@
   "module": "Sheaf.Paper.CompactSupportStaircaseExpansion",
   "declaration": "AlgebraicGeometry.Etale.compactSupportStaircaseExpansion",
   "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportStaircaseInterchange_exists",
+   "AlgebraicGeometry.Etale.compactSupportStaircaseInterchangeNormalization",
    "AlgebraicGeometry.Etale.compactSupportStaircaseInterchange",
    "AlgebraicGeometry.Etale.compactSupportRawBinaryComparison",
    "AlgebraicGeometry.Etale.compactSupportStaircaseTargetIso",
@@ -187,5 +176,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Statement, dependencies, source alignment, helper constructions, edge cases, docstrings, and compiler evidence all checked; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261019T112538-L-3953653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
