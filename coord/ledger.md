@@ -17290,3 +17290,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:40 L: merged deliver/NL/lem-coef-completed-tensor-hom-transpose (stage 2; reviewer PASS; parallel immutable checks)
 - 10:43 L: merged deliver/NG/lem-pur-finite-universal-smooth-trace (stage 2; reviewer FIX; parallel immutable checks)
 - 11:08 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 29e81d2f25dc: Compiles (nt_compile --json 19.9 s) but the statement is wrong in su)
+- 11:24 L: returned deliver/C7/Sheaf.Paper.SfRationalLocalGlobalPowerTorsion (reviewer RETURN: (the landing tools, head da5005885) the delivery did not land: lean/Sheaf/Paper/SfRationalLocalGlobalPowerTorsion.lean: )
