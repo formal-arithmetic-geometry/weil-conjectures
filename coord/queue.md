@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (23)
+## Stage 2: nodes to state (22)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,7 +27,6 @@
 | `det-sp-p1-trace` | 1 | state | 0 |
 | `lem-a1-adic-compactification-section-realization` | 1 | state | 0 |
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
-| `lem-pur-finite-free-projection-exchange` | 1 | state | 0 |
 | `lem-pur-finite-universal-smooth-trace` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
@@ -38,7 +37,7 @@
 
 Not open yet: 304 nodes that below a finished node, not needed, 131 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1222)
+## Stage 3: modules to prove (1223)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -992,6 +991,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.DetThmSfCtfStabilityInternalHom` | - | 1 | proof | 5 |
 | `Sheaf.Paper.DirectImageCtfOpenTor` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteForwardProductSymmetry` | - | 1 | proof | 5 |
+| `Sheaf.Paper.FiniteFreeProjectionExchange` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PointCompletedEvaluation` | - | 3 | proof | 5 |
 | `Sheaf.Paper.PointDerivedHomEvaluation` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PointSectionsReconstruction` | - | 1 | proof | 5 |
