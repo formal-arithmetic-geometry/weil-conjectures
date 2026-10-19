@@ -1,0 +1,159 @@
+{
+ "id": "lem-pur-etale-closed-right-adjoint-coproducts",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: finite-level compact generators control coefficient-system adjoints; Step 4: closed-support comparison and coproducts for the closed right adjoint",
+   "via": [
+    "lem-pur-etale-lisse-stratum-compact",
+    "lem-pur-etale-finite-ring-compact-generators",
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coproducts for the derived closed right adjoint",
+ "statement": "Let C be a finite commutative ring, k an algebraically closed field, and f : X → Spec k a finite-type morphism [def-weil-finite-type-morphism]. For a closed immersion g : Z → X [def-weil-closed-immersion], the canonical right adjoint [lem-exc-closed-ambient] of the ordinary unbounded derived direct image [def-weil-pbc-direct-image] on C-module sheaves [def-weil-pbc-etale-sheaves] preserves coproducts indexed by every type in the chosen indexing universe, including the empty family.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.4, Lemma 6.4.4 and the last paragraph of Proposition 6.4.8, printed pp. 48–49; closed-support argument in step 4 of lem-pur-etale-lisse-stratum-compact."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-exc-closed-ambient",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Establish that the canonical open complement is quasi-compact and quasi-separated and apply finite-type separably-closed étale cohomological dimension to its derived direct image.",
+   "uses": [
+    "lem-etale-finite-type-sep-closed-derived-dimension",
+    "lem-etale-qcqs-finite-dimension-derived-coproducts",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Use the natural closed-support distinguished triangles and the fully proved generic triangleCoproducts and preservesCoproducts_of_triangle helpers. The first helper constructs coproducts of distinguished triangles by the opposite of productTriangle; the second compares that coproduct with the triangle of the coproduct object. The identity and complementary-open components are invertible, so the closed-support component is invertible by the triangulated two-out-of-three lemma.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-exc-closed-ambient",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 3,
+   "text": "The identity and complementary-open terms are isomorphisms; the first term is therefore an isomorphism, and full faithfulness of closed direct image reflects this to the right-adjoint comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-etale-finite-type-sep-closed-derived-dimension",
+  "lem-etale-qcqs-finite-dimension-derived-coproducts",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "D5",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Step 4: closed-support comparison and coproducts for the closed right adjoint; fully proved from the existing source-library declarations and generic helpers in the module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint to closed direct image of etale sheaves preserves coproducts via the closed support localization triangle",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\"], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result for this etale right adjoint; use the closed-support triangle and generic triangulated coproduct calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesColimitsOfShape\"",
+   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.Limits.PreservesColimitsOfShape\", \"CategoryTheory.Limits.preservesColimitsOfShape_subsingleton\", \"CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape\", \"CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit\", \"CategoryTheory.Limits.preservesColimitsOfShape_of_equiv\", \"CategoryTheory.Limits.PreservesColimitsOfShape.mk\", \"CategoryTheory.Limits.preservesColimitsOfShape_of_natIso\", \"CategoryTheory.Limits.preservesColimitsOfShape_iff_of_natIso\"], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result for this etale right adjoint; use the closed-support triangle and generic triangulated coproduct calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*Coproduct|rightAdjoint.*Coproduct|internalHom.*[Cc]oproduct",
+   "results": "{\"hits\": 8, \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/AlgebraicGeometry/LimitsOver.lean\"], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result for this etale right adjoint; use the closed-support triangle and generic triangulated coproduct calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint to closed direct image of etale sheaves preserves coproducts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this defines an adjunction where the sheaf pullback functor (left adjoint) $ \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.CoverLifting\", \"type\": \": G.sheafPushforwardContinuous A J K ⊣ G.sheafPushforwardCocontinuous A J K\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an adjunction between the continuous sheaf pushforward functor $ G_*\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteCoproducts D] : HasFiniteCoproducts (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ has finite coproducts, then the category of sheaves on a site (with respect to a Grothendieck topology $J$) with values in $\\\\mathcal{D}$ also has finite coproducts.\"}\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : pullback A f ⊣ pushforward A f\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No matching specialized theorem; the proof combines existing source-library statements and the generic categorical argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurEtaleLisseStratumCompact",
+  "date": "2026-10-19",
+  "group": "D5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.PurEtaleClosedRightAdjointCoproducts",
+  "declaration": "AlgebraicGeometry.Etale.preservesCoproducts_closedRightAdjoint",
+  "file": "lean/Sheaf/Paper/PurEtaleClosedRightAdjointCoproducts.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "statement": "theorem preservesCoproducts_closedRightAdjoint\n    {k : Type u} [Field k] [IsAlgClosed k]\n    (C : Type (u + 1)) [CommRing C] [Finite C]\n    {X Z : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g]\n    (f : X ⟶ Spec (CommRingCat.of k))\n    [LocallyOfFiniteType f] [QuasiCompact f] (I : Type (u + 1)) :\n    PreservesColimitsOfShape (Discrete I)\n      (R(lowerStar (ModuleCat.{u + 1} C) g)).rightAdjoint",
+  "by": "D5",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T034254-L-416121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T034254-L-416121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -36,142 +36,73 @@
  ],
  "proof": [
   {
-   "text": "Put $W=X\\setminus g(Z)$ and write $q:W\\hookrightarrow X$ for its open inclusion. A finite affine cover $X=\\bigcup_r\\operatorname{Spec}B_r$ with each $B_r$ a finite-type $k$-algebra pulls back along the closed immersion to the finite affine cover $Z=\\bigcup_r\\operatorname{Spec}(B_r/I_r)$. The images of finite algebra generators of $B_r$ generate $B_r/I_r$, so $Z$ is finite type over $k$. Finite type over the Noetherian scheme $\\operatorname{Spec}k$ makes $X$ and $Z$ Noetherian. Hence their open subschemes $V,W$ are Noetherian and all four schemes are quasi-separated. The morphism-permanence lemma makes the open inclusions $j,q$ quasi-compact. They are therefore finite type by the quasi-compact-open lemma, so $V,W$ are finite type over $k$ as well: for a composite of finite-type affine algebra maps, the generators of the first algebra together with the generators of the second generate the composite. The same permanence lemma makes the structure map $a:V\\to\\operatorname{Spec}k$ qcqs and makes $q$ quasi-separated. No separatedness is used.",
+   "step": 1,
+   "text": "Prove compact_of_homEquiv from the defining direct-sum Hom comparison: the direct sum of additive Hom equivalences, the compact source comparison, and the coproduct comparison of the right adjoint are bijective. Naturality identifies their composite with the target comparison. Specialize to additive adjunctions and isomorphisms.",
    "uses": [
-    "def-weil-closed-immersion",
+    "def-pc-compact-object"
+   ],
+   "elementary": true
+  },
+  {
+   "step": 2,
+   "text": "Finite type over the field makes X Noetherian; closed and open strata inherit local Noetherianness and the open stratum is Noetherian as a topological space, hence compact. The structure map of V is finite type. Derived module and sheaf categories have coproducts. The constant-sheaf/derived-global-sections adjunction transports compactness of the degree-zero free rank-one module to the tensor unit on V, since derived global sections preserves coproducts by finite cohomological dimension.",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-qc-open-immersion-finite-type",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.4 hypothesis and Example 6.4.1, printed p. 48; elementary affine quotient calculation"
-   }
-  },
-  {
-   "text": "For every scheme in the argument its category of ordinary $C$-module sheaves is Grothendieck abelian. Thus arbitrary coproducts in the unbounded derived categories are represented by termwise coproducts. They are exact: direct sums of sheaves are exact, so cohomology of a termwise sum is the sum of cohomologies; also the cone formula $\\operatorname{Cone}(f)^n=B^n\\oplus A^{n+1}$ shows that sums of cone triangles are cone triangles. Exact inverse image is a left adjoint on module sheaves. Consequently it preserves termwise sums and quasi-isomorphisms, hence derived coproducts. These observations apply in particular to $g^*,j^*,q^*$ and every etale slice restriction used below.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-kun-grothendieck-derived-coproducts",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9 (lemma-derived-products), (1)-(2); termwise cone calculation"
-   }
-  },
-  {
-   "text": "The additive group of $C$ is torsion and $k$ is separably closed. Apply the finite-type separably-closed derived-dimension theorem separately to $q:W\\to X$ and $a:V\\to\\operatorname{Spec}k$. With the qcqs checks of step 1, the unbounded coproduct theorem therefore gives that $Rq_*$ and $Ra_*$ preserve arbitrary coproducts. Over the algebraically closed field $k$, the natural constant-sheaf isomorphism identifies sections with the identity geometric stalk; apply it to the underlying sets and their module operations. Thus sections on $(\\operatorname{Spec}k)_{\\mathrm{et}}$ are exact and preserve sums, the latter also following because constant sheaf and sections are inverse equivalences. Termwise sections therefore identify $R\\Gamma(V,-)$ with sections of $Ra_*$, so $R\\Gamma(V,-)$ preserves arbitrary coproducts. Only separate finite bounds for these two maps are required; no unproved uniform bound over all etale objects is asserted.",
-   "uses": [
+    "lem-grothendieck-derived-has-coproducts",
+    "new-stage3-derived-module-rank-one-compact",
     "lem-etale-finite-type-sep-closed-derived-dimension",
-    "lem-etale-qcqs-finite-dimension-derived-coproducts",
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-etale-qcqs-finite-dimension-derived-coproducts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.4.5 proof, printed p. 48: finite cohomological dimension gives preservation for unbounded complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $Rg^!$ be the right adjoint of closed direct image. The closed direct image is exact by [lem-cbc-open-closed-recollement], so its termwise functor on unbounded complexes is $Rg_*=g_*$. Thus the closed counit from [prop-weil-open-closed-recollement-adjunctions] gives $g^*g_*\\cong\\mathrm{id}$ in these categories. Its natural closed-support triangle is $g_*Rg^!K\\to K\\to Rq_*q^*K\\to(g_*Rg^!K)[1]$. Compare the direct sum of these triangles for $K_i$ with the triangle for $\\bigoplus_iK_i$. Steps 2 and 3 make the middle and third comparison maps isomorphisms, so the first is an isomorphism too. Applying $g^*$ to the first comparison and using $g^*g_*\\cong\\mathrm{id}$ now proves that $Rg^!$ commutes with coproducts. In particular $B=j^*Rg^!$ commutes with coproducts. The use of the triangle and closed counit is on the ordinary unbounded etale categories, not on a constructible or pro-etale category.",
+   "step": 3,
+   "text": "The proved lisse dualizability theorem supplies a dual for L[0]. In a braided monoidal category the duality gives the adjunction tensorLeft L[0] ⊣ tensorLeft D; swapping the pairing also makes tensorLeft D a left adjoint, so it preserves coproducts. The generic compact_of_adjunction helper transports compactness of the unit to L[0] tensor the unit, and the right unitor identifies this with L[0]. This uses the explicit tensor dual rather than specializing the large closed derived internal-Hom definition.",
    "uses": [
-    "lem-exc-closed-ambient",
-    "lem-exc-closed-support-triangle",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-cbc-open-closed-recollement"
+    "lem-pur-etale-lisse-dualizable"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle), unbounded module form supplied by lem-exc-closed-support-triangle; Tag 04CA for supported sheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "On any nonempty member of an etale trivializing cover of $V$, $L$ has constant value a finite $C$-module $P$. Its value is a geometric stalk, hence flat. Take a surjection $C^n\\to P$ using the finite set of elements of $P$ as generators. Its kernel is a finite set, since $C^n$ is finite, so its elements form a finite set of relations. Thus $P$ is finitely presented. The finitely-presented-flat theorem makes $P$ projective. The projective lifting property applied to $C^n\\to P$ and $\\mathrm{id}_P$ gives a section, so $P$ is a retract of $C^n$. The associated constant sheaf is likewise a retract of $C_V^n$ on that cover member (constant sheafification preserves finite products and the splitting identities). For the empty cover member the assertion is vacuous.",
+   "step": 4,
+   "text": "The canonical derived open extension/restriction adjunction transports compactness through j_!, because restriction is itself a left adjoint and preserves coproducts. The canonical closed direct-image/right-adjoint adjunction then transports compactness through Rg_*, using the proved closed-right-adjoint coproduct theorem.",
    "uses": [
-    "def-constructible-locally-constant",
-    "lem-weil-pbc-finitely-presented-flat-module-projective",
-    "def-weil-pbc-projective-module",
-    "def-weil-pbc-strict-perfect-coefficient-package"
+    "lem-pur-etale-closed-right-adjoint-coproducts",
+    "lem-exc-closed-ambient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00NX (lemma-finite-projective), (1) implies (2) implies (3); finite-set presentation written explicitly"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $H_L(N)=R\\mathcal Hom_C(L,N)$ on $V_{\\mathrm{et}}$. The canonical comparison $\\bigoplus_i H_L(N_i)\\to H_L(\\bigoplus_iN_i)$ can be tested after the trivializing restrictions of step 5: derived internal Hom commutes with slice restriction, and restriction commutes with sums by step 2. On such a slice $L$ is a retract of the finite free constant sheaf $C^n$. From the defining Hom complex into a K-injective resolution, $R\\mathcal Hom_C(C,N)\\cong N$ (a module map out of the unit is determined by the image of $1$), so $R\\mathcal Hom_C(C^n,N)\\cong N^n$. The comparison for $N^n$ is an isomorphism because finite products are finite sums. To spell out the retract, let $u:L\\to C^n$ and $v:C^n\\to L$ satisfy $vu=\\mathrm{id}_L$, and put $S_L=\\bigoplus_i H_L(N_i)$ and $T_L=H_L(\\bigoplus_iN_i)$. Contravariance gives maps $S(v):S_L\\to S_{C^n}$ and $S(u):S_{C^n}\\to S_L$ whose composite is the identity, and maps $T(v),T(u)$ with the same property. If $\\alpha_L:S_L\\to T_L$ is the canonical comparison, naturality shows that $S(u)\\alpha_{C^n}^{-1}T(v)$ is a two-sided inverse to $\\alpha_L$. Exact geometric stalks commute with cohomology; every geometric point lies under a trivializing etale neighbourhood, so the conservative stalk criterion applied to every cohomology sheaf proves the original comparison is an isomorphism. This is a statement about internal Hom; it does not assume that compactness itself descends just from conservative restriction.",
+   "step": 5,
+   "text": "Closed direct image is exact. Its right-derived functor is thus canonically isomorphic to its termwise derived functor. The single-functor comparison isomorphisms for the exact open and closed functors identify the result with (g_* j_! L)[0]. Transport compactness along this explicit composite isomorphism.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-pur-derived-internal-hom",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 08J7, Hom-complex construction; finite retract calculation as in Bhatt-Scholze Lemma 6.4.6"
-   }
-  },
-  {
-   "text": "Apply the open adjunction to $j:V\\hookrightarrow Z$ with its reduced closed complement in $Z$. The two derived adjunctions $g_*\\dashv Rg^!$ and $j_!\\dashv j^*$, followed by the global derived-internal-Hom formula, give naturally in every unbounded $K$:\n$$\\operatorname{Hom}_X(g_*j_!L,K)\\cong\\operatorname{Hom}_V(L,j^*Rg^!K)\\cong H^0 R\\Gamma(V,H_L(BK)).$$\nThe functors $B$, $H_L$ and $R\\Gamma(V,-)$ preserve coproducts by steps 4, 6 and 3. Finally $H^0$ commutes with direct sums of complexes of $C$-modules: cycles and boundaries of a finitely supported tuple are the tuples of cycles and boundaries, so the quotient is the sum of the cohomology modules. Hence this natural identification carries the canonical comparison in the statement to an isomorphism. The definition of compact object proves the conclusion, including an empty family. This calculation uses the factorization $V\\xrightarrow{j}Z\\xrightarrow{g}X$ exactly as given; no unsupported change of factorization is needed.",
-   "uses": [
-    "lem-exc-closed-ambient",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "lem-pur-rhom-global-sections",
-    "def-pc-compact-object",
-    "lem-kun-grothendieck-derived-coproducts",
-    "lem-weil-pbc-ring-modules-grothendieck-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JA (lemma-section-RHom-over-U); Bhatt-Scholze Lemmas 6.4.4-6.4.6 and Proposition 6.4.8, adjoint form of their compactness argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-constructible-locally-constant",
   "def-pc-compact-object",
-  "def-pur-derived-internal-hom",
   "def-weil-closed-immersion",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-projective-module",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-cbc-open-closed-recollement",
   "lem-etale-finite-type-sep-closed-derived-dimension",
   "lem-etale-qcqs-finite-dimension-derived-coproducts",
   "lem-exc-closed-ambient",
-  "lem-exc-closed-support-triangle",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-pur-rhom-global-sections",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-pur-etale-closed-right-adjoint-coproducts",
+  "lem-pur-etale-lisse-dualizable",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-qc-open-immersion-finite-type",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-open-closed-recollement-adjunctions",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "new-stage3-derived-module-rank-one-compact"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "D5",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.4 pp. 48-49, adjoint version of the open/closed compactness argument; auxiliary Stacks sources specified in the steps."
+  "place": "Section 6.4, adjoint compactness argument. Lean uses the canonical constant-sheaf/global-sections, tensor-dual, open-extension/restriction and closed adjunctions. Both auxiliary theorems are proved. The direct tensor-dual argument avoids expensive expansion of the concrete derived internal-Hom definition; no definition or existing statement is changed."
  },
  "mathlib_searches": [
   {
@@ -362,27 +293,17 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-open-closed-recollement",
   "lem-etale-finite-type-sep-closed-derived-dimension",
   "lem-etale-qcqs-finite-dimension-derived-coproducts",
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-pur-rhom-global-sections",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-qc-open-immersion-finite-type",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-open-closed-recollement-adjunctions",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -422,5 +343,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T034254-L-416121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

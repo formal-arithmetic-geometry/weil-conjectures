@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-etale-lisse-dualizable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph of def-weil-exceptional-inverse-image: finite-level compact generators control coefficient-system adjoints; Steps 5-6: finite locally constant flat sheaves have finite projective local values and therefore duals.",
+   "via": [
+    "lem-pur-etale-lisse-stratum-compact",
+    "lem-pur-etale-finite-ring-compact-generators",
+    "lem-pur-etale-exceptional-constant-tensor",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived dualizability of lisse flat sheaves",
+ "statement": "Let V be a scheme [def-pc-scheme] and C a finite commutative ring. Let L be a finite locally constant sheaf [def-constructible-locally-constant] of C-modules on the small etale site [def-weil-pbc-etale-site], with flat geometric stalks [def-weil-pbc-geometric-stalks]. Then L placed in degree zero is dualizable for the derived tensor product [def-weil-derived-pullback-tensor-hom] in the ordinary unbounded derived category [def-weil-pbc-derived-categories]. Here dualizable means that there is a right dual D with coevaluation from the tensor unit to L tensor D and evaluation from D tensor L to the unit, satisfying both triangle identities.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.4, Example 6.4.1 and Lemma 6.4.6, printed pp. 48–49; finite locally constant flat modules are locally finite projective, so their degree-zero complexes have duals."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use flat_iff_forall_flat_sheafFiber_obj and the canonical ulift stalk isomorphism to obtain flatness of L. The proved source-library exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf supplies the internal dual of L. It is established by trivializing the sheaf, using finite presentation and flatness to obtain finite projective modules, and testing the internal-Hom comparison on geometric stalks.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "The source-library theorem DerivedCategory.isDualizable_Q_obj carries the duality of a bounded complex with dualizable terms to its localization. Apply it to the single complex at L in degree zero: the term at zero is canonically isomorphic to L, and all other terms are zero and hence dualizable. Transport along DerivedCategory.singleFunctorIsoCompQ.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "D5",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Steps 5-6: finite locally constant flat sheaves have finite projective local values and hence are dualizable. The proof uses the existing source-library lisse duality and bounded-complex duality theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom out of a dualizable object preserves coproducts by its tensor dual",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.InternallyProjective\", \"CategoryTheory.isInternallyProjective\", \"CategoryTheory.instPreservesColimitsTensorLeft\", \"CategoryTheory.closedOfHasLeftDual\", \"CategoryTheory.InternallyProjective.preserves_epi\", \"CategoryTheory.Exponentiable\", \"CategoryTheory.ihom.instIsLeftAdjointTensorLeft\", \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\"], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result; use the proved source-library duality and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDualizable\"",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result; use the proved source-library duality and adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDualizable|ihomIsoTensorLeft",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib result; use the proved source-library duality and adjunction APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant flat sheaf in degree zero is dualizable in the derived category",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"[(constantSheaf J D).Faithful] [(constantSheaf J D).Full] (F : Sheaf J D) {T : C} (hT : IsTerminal T) :\\n  IsConstant J F ↔ (IsIso <| (constantSheafAdj J D hT).counit.app F)\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$ with a terminal object $T$, a sheaf $F$ with values in a category $\\\\mathcal{D}$ is constant if and only if the counit of the adjunction be\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"(F : Sheaf J D) [IsConstant J F] : (constantSheaf J D).essImage F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$ is constant with respect to a Grothendieck topology $ J $, then $ F $ is isomorphic to the constant sheaf associate\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_iso\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{F : Sheaf J D} {X : D} (i : F ≅ (constantSheaf J D).obj X) : IsConstant J F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is isomorphic to the constant sheaf associated with an object $ X \\\\in\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.HasWeakSheafify J D}\\n  {F : CategoryTheory.Sheaf J D} [self : CategoryTheory.Sheaf.IsConstant J F],\\n  (\", \"doc\": \"Any constant sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$, equipped with a Grothendieck topology $J$, is isomorphic to the image of some object in $\\\\mathcal{D}$ under the constan\"}\n  {\"name\": \"CategoryTheory.constantSheaf\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \": D ⥤ Sheaf J D\", \"doc\": \"The constant sheaf functor is constructed by composing the constant functor from the opposite category $\\\\mathcal{C}^\\\\text{op}$ to a category $\\\\mathcal{D}$ with the sheafification functor that turns pr\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) [L.Faithful] [L.Full]\\n  (F : Sheaf J D) : IsConstant J F ↔ IsIso (adj.counit.app F)\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, $\\\\mathcal{D}$ a category, and $T \\\\in \\\\mathcal{C}$ a terminal object. For an adjunction $L \\\\dashv (\\\\text{SheafSections}(J, \\\\mathcal{D})\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No matching specialized theorem; the proof combines existing source-library statements and the generic categorical argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurEtaleLisseStratumCompact",
+  "date": "2026-10-19",
+  "group": "D5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Paper.PurEtaleLisseDualizable",
+  "declaration": "AlgebraicGeometry.Etale.isDualizable_singleFunctor_lisseFlat",
+  "file": "lean/Sheaf/Paper/PurEtaleLisseDualizable.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "statement": "theorem isDualizable_singleFunctor_lisseFlat\n    {C : Type (u + 1)} [CommRing C] [Finite C]\n    {V : Scheme.{u}} (L : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C))\n    [Scheme.IsFiniteLocallyConstantSheaf L]\n    (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n      (s : Spec (CommRingCat.of Ω) ⟶ V),\n      ObjectProperty.flat ((Scheme.pointSmallEtale s).sheafFiber.obj L)) :\n    IsDualizable ((DerivedCategory.singleFunctor\n      (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).obj L)",
+  "by": "D5",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T034254-L-416121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261019T034254-L-416121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
