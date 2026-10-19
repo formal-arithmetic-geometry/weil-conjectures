@@ -8,13 +8,6 @@ module
 public import Sheaf.Paper.CompletedAdicIntrinsicCompletion
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
-import Sheaf.Algebra.Homology.KFlatClosure
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.Paper.IntrinsicCompletionCompleted
 import Sheaf.Paper.KoszulReconstruction
 
 /-! # Levelwise isomorphisms and complete cones
@@ -95,6 +88,73 @@ theorem completedAdic_levelwise_isomorphism_cones
       IsCompletedAdicDerivedComplete T d r a ha C →
       IsCompletedAdicDerivedComplete T d r a ha D →
       (∀ n : ℕ, IsIso ((completedAdicFiniteReduction T d n).map u)) → IsIso u) := by
-  sorry
+  have tower_iso : ∀ (M N : DerivedCategory (CompletedAdicTowers T d)) (u : M ⟶ N),
+      (∀ n, IsIso ((completedAdicEvaluation T d n).map u)) → IsIso u := by
+    intro M N u hu
+    let C := CompletedAdicTowers T d
+    let q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
+    have := Localization.essSurj_mapArrow (DerivedCategory.Qh (C := C))
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    let g := (DerivedCategory.Qh (C := C)).mapArrow.objPreimage (Arrow.mk u)
+    let f := q.mapArrow.objPreimage g
+    let e : Arrow.mk (DerivedCategory.Q.map f.hom) ≅ Arrow.mk u :=
+      (((Functor.mapArrowFunctor _ _).mapIso (DerivedCategory.quotientCompQhIso C)).app f).symm ≪≫
+        DerivedCategory.Qh.mapArrow.mapIso (q.mapArrow.objObjPreimageIso g) ≪≫
+        DerivedCategory.Qh.mapArrow.objObjPreimageIso (Arrow.mk u)
+    apply ((MorphismProperty.isomorphisms _).arrow_iso_iff e).1
+    change IsIso (DerivedCategory.Q.map f.hom)
+    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
+    rw [HomologicalComplex.quasiIso_iff_evaluation]
+    intro n
+    let E := (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules T d)).obj n
+    have h : IsIso (E.mapDerivedCategory.map (DerivedCategory.Q.map f.hom)) := by
+      have hn := hu n.unop
+      exact ((MorphismProperty.isomorphisms _).arrow_iso_iff
+        (E.mapDerivedCategory.mapArrow.mapIso e)).2 hn
+    have h' := (NatIso.isIso_map_iff E.mapDerivedCategoryFactors f.hom).1 h
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).1 h'
+  have tower_zero : ∀ M : DerivedCategory (CompletedAdicTowers T d),
+      (∀ n, IsZero ((completedAdicEvaluation T d n).obj M)) → IsZero M := by
+    intro M hM
+    apply ((isIsoZero_iff_source_target_isZero M M).1 ?_).1
+    apply tower_iso M M 0
+    intro n
+    change IsIso (((CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules T d)).obj
+      (Opposite.op n)).mapDerivedCategory.map 0)
+    rw [Functor.map_zero]
+    exact (isIsoZero_iff_source_target_isZero _ _).2 ⟨hM n, hM n⟩
+  have complete_unit : ∀ K : DerivedCategory (CompletedAdicModules T d),
+      IsCompletedAdicDerivedComplete T d r a ha K →
+        IsIso ((reconstructionCompletionUnit T d).app K) := by
+    intro K hK
+    rcases reconstructionKoszulIntrinsicComparison T d r a K with ⟨j, hj⟩
+    have hcomp : IsIso ((reconstructionKoszulDerivedUnit T d r a).app K ≫ j.hom) := by
+      rw [hj]
+      exact hK
+    have hκ : IsIso ((reconstructionKoszulDerivedUnit T d r a).app K) :=
+      IsIso.of_isIso_comp_right _ j.hom
+    rcases koszulReconstruction T d r a ha with ⟨c, _, hc⟩
+    exact hc K hκ
+  refine ⟨?_, ?_, ?_⟩
+  · intro M N u hu
+    have h := tower_iso M N u hu
+    exact ⟨h, fun RF _ _ ↦ RF.map_isIso u⟩
+  · intro C hC hred
+    have hzero : IsZero ((completedAdicReduction T d).obj C) :=
+      tower_zero _ hred
+    have hunit := complete_unit C hC
+    exact ((reconstructionRlim T d).map_isZero hzero).of_iso
+      (asIso ((reconstructionCompletionUnit T d).app C))
+  · intro C D u hC hD hu
+    have hred := tower_iso _ _ ((completedAdicReduction T d).map u) hu
+    have hCunit := complete_unit C hC
+    have hDunit := complete_unit D hD
+    have hcomp : IsIso (u ≫ (reconstructionCompletionUnit T d).app D) := by
+      change IsIso ((𝟭 _).map u ≫ (reconstructionCompletionUnit T d).app D)
+      rw [(reconstructionCompletionUnit T d).naturality u]
+      change IsIso ((reconstructionCompletionUnit T d).app C ≫
+        (reconstructionRlim T d).map ((completedAdicReduction T d).map u))
+      infer_instance
+    exact IsIso.of_isIso_comp_right u ((reconstructionCompletionUnit T d).app D)
 
 end AlgebraicGeometry.Scheme
