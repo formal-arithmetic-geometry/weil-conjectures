@@ -3,46 +3,157 @@
  "blueprint": {
   "is": "lem-fd-stalk-formula",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Stalks of the transform are fibre integrals",
- "statement": "Let $S=\\operatorname{Spec}k$, $V\\cong\\mathbf A^r_k$, let $\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ be a geometric point of $V^\\vee$ with $\\Omega$ algebraically closed, and let $K\\in D^b_c(V,E)$. Write $V_{\\bar\\xi}=(V\\times_kV^\\vee)\\times_{p_2,V^\\vee}\\bar\\xi=V\\times_k\\Omega$ for the fibre of $p_2$ over $\\bar\\xi$ (it is $V_{\\bar k}$ when $\\bar\\xi$ is a $\\bar k$-point of $V^\\vee$; for $\\bar\\xi$ over a non-closed point it is the affine $r$-space over $\\Omega\\supset\\kappa(\\bar\\xi)$). Then\n\n$$\n(\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\cong H^*_c\\bigl(V_{\\bar\\xi},\\,K|_{V_{\\bar\\xi}}\\otimes^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr)[r],\n$$\n\nwhere $\\langle x,\\xi\\rangle:V_{\\bar\\xi}\\to\\mathbf A^1$ is the pairing with the point $\\xi$.",
+ "statement": "Use the Fourier coefficient datum of [def-fourier-set]: distinct primes $p,\\ell$, the base field $k$ of characteristic $p$, and a finite extension $E/\\mathbf Q_\\ell$ containing the values of the fixed additive character $\\psi$. For every noetherian finite-dimensional scheme $T$ with $\\ell$ invertible, use the adic category $D^b_c(T,E)$ of [def-weil-pbc-rational-category]; its integral objects agree with [def-weil-derived-complete-integral-detailed] by [lem-weil-pbc-integral-stratified-perfect-characterization]. Use the completed and rational pullback and tensor operations of [def-weil-derived-pullback-tensor-hom]. For a separated finite-type morphism $f:X\\to Y$ of such schemes with a chosen compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{P}Y$ ($j$ a quasi-compact open immersion, $P$ proper), the adic compact-support direct image is $Rf_!=RP_*j_!$ of [def-weil-pbc-projection-compactification] on the completed integral categories, an exact $\\mathcal O_E$-linear functor between them by [lem-cbc-integral-compact-support-uniform-restriction], extended $E$-linearly to $D^b_c(-,E)$ by [prop-weil-pbc-rational-transport].\n\nLet $S=\\operatorname{Spec}k$, $V\\cong\\mathbf A^r_k$ with $r\\geq0$, $V^\\vee$ its dual, $W=V\\times_kV^\\vee$, and $p_1,p_2$ the projections. Let $b:W\\to\\mathbf A^1_k$ be evaluation. Interpret the Artin--Schreier kernel of [def-fd-kernel] adically using [def-fd-adic-fourier-realization], and write $\\mathcal L_\\psi$ for the corresponding rank-one $E$-object on $\\mathbf A^1_k$. In this coefficient convention the transform means the integral-transform formula of [def-fd-transform] with these adic operations:\n$$\n\\operatorname{FT}_\\psi(K)=Rp_{2!}(Lp_1^*K\\otimes_E^L Lb^*\\mathcal L_\\psi)[r],\\qquad K\\in D^b_c(V,E).\n$$\nHere $Rp_{2!}$ is computed with a fixed compactification $W\\xrightarrow{j}\\overline W\\xrightarrow{P}V^\\vee$ of $p_2$; one exists by [thm-nagata-compactification], and $j$ is quasi-compact because $\\overline W$ is noetherian.\nLet $g=\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ be any geometric point with $\\Omega$ algebraically closed. Put $V_{\\bar\\xi}=W\\times_{p_2,V^\\vee}\\operatorname{Spec}\\Omega=V\\times_k\\Omega$, let $a:V_{\\bar\\xi}\\to V$ and $q:V_{\\bar\\xi}\\to\\operatorname{Spec}\\Omega$ be the projections, and let $b_\\xi(x)=\\langle x,\\xi\\rangle$. Thus $V_{\\bar\\xi}\\cong\\mathbf A^r_\\Omega$, including when the image of $\\bar\\xi$ is non-closed. Set $K|_{V_{\\bar\\xi}}=La^*K$ and $\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}=Lb_\\xi^*\\mathcal L_\\psi$.\n\nFor an adic object on $\\operatorname{Spec}\\Omega$, write $\\Gamma_{\\Omega,E}$ for termwise pro-etale sections of an integral representative followed by $-\\otimes_{\\mathcal O_E}E$, with the scalar-linear action on rational morphisms. Define the geometric derived stalk by $M_{\\bar\\xi}=\\Gamma_{\\Omega,E}Lg^*M$ (the adic interpretation of [lem-kun-stalk-as-pullback]) and $R\\Gamma_c(V_{\\bar\\xi},N)=\\Gamma_{\\Omega,E}Rq_!N$, with $Rq_!$ computed by the base change of that compactification along $g$; put $H^j_c=H^jR\\Gamma_c$. Then there is a canonical isomorphism, natural in $K$, of complexes of $E$-vector spaces\n$$\n(\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\cong R\\Gamma_c\\bigl(V_{\\bar\\xi},K|_{V_{\\bar\\xi}}\\otimes_E^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr)[r].\n$$\nIn particular for every integer $i$,\n$$\nH^i\\bigl((\\operatorname{FT}_\\psi(K))_{\\bar\\xi}\\bigr)\\cong H^{i+r}_c\\bigl(V_{\\bar\\xi},K|_{V_{\\bar\\xi}}\\otimes_E^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}\\bigr).\n$$\nThe source's $H_c^*(\\cdots)[r]$ denotes this compact-support complex and its degreewise formula.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
   "place": "node lem-fd-stalk-formula, order 2699"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-fourier-set",
+  "def-weil-pbc-rational-category",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-fd-kernel",
+  "def-fd-adic-fourier-realization",
+  "def-fd-transform",
+  "lem-kun-stalk-as-pullback",
+  "def-weil-pbc-projection-compactification",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "prop-weil-pbc-rational-transport",
+  "thm-nagata-compactification"
+ ],
  "proof": [
   {
-   "text": "Form the cartesian square with $g=\\bar\\xi:\\operatorname{Spec}\\Omega\\to V^\\vee$ and $p_2:V\\times_kV^\\vee\\to V^\\vee$. Its base change $p_2':V_{\\bar\\xi}\\to\\operatorname{Spec}\\Omega$ is the structure morphism of $V_{\\bar\\xi}\\cong\\mathbf A^r_\\Omega$, and $g':V_{\\bar\\xi}\\to V\\times_kV^\\vee$ is $(\\mathrm{pr}_V,\\bar\\xi)$. The stalk at $\\bar\\xi$ of a complex on $V^\\vee$ is its inverse image along $g$, so the compact-support base change of [thm-cbc-finite-extension] at the $E$-stage (or of [thm-cbc-qbar] in the $\\overline{\\mathbf Q}_\\ell$-form of the coefficient category of [def-weil-pbc-qbar-category]), applied to this square and to $p_1^*K\\otimes^L\\mathcal K_\\psi\\in D^b_c(V\\times_kV^\\vee,E)$, gives\n\n$$\n\\bigl(Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr)_{\\bar\\xi}\n=Lg^*Rp_{2!}(p_1^*K\\otimes^L\\mathcal K_\\psi)\n\\cong Rp'_{2!}\\,Lg'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\n=R\\Gamma_c\\bigl(V_{\\bar\\xi},\\,g'^*(p_1^*K\\otimes^L\\mathcal K_\\psi)\\bigr).\n$$",
+   "text": "Let $h:V_{\\bar\\xi}\\to W$ be $(a,g\\circ q)$. A map into $W\\times_{V^\\vee}\\operatorname{Spec}\\Omega$ is a pair $(x,t)$ with the dual coordinate forced to be $g(t)$, so this fibre product is $V\\times_k\\Omega$, and $p_1h=a$, $p_2h=gq$, $bh=b_\\xi$. In coordinates $p_2$ is the affine-space projection, hence separated and finite type. The spectrum of a field is Noetherian of dimension zero (its only prime is zero). Apply [lem-cbc-compactification-geometry-fibre-bound] over $\\operatorname{Spec}k$ to $V,V^\\vee,W$, and over $\\operatorname{Spec}\\Omega$ to $V_{\\bar\\xi}$: all four corners of the square are Noetherian and finite-dimensional, and $\\ell$ is a unit because $\\ell\\ne p$. By [thm-nagata-compactification], $p_2$ has a compactification, since $V^\\vee$ is affine, hence quasi-compact and quasi-separated. Use [def-cbc-compact-support-square] to base change that compactification along $g$. This gives precisely a square to which compact-support base change applies; $g$ need not be finite type or smooth.",
    "uses": [
-    "thm-cbc-finite-extension",
-    "thm-cbc-qbar",
-    "def-weil-pbc-qbar-category"
+    "lem-cbc-compactification-geometry-fibre-bound",
+    "thm-nagata-compactification",
+    "def-cbc-compact-support-square"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "Opening sentence: form the geometric-fibre Cartesian square; verify the compact-support hypotheses"
+   }
   },
   {
-   "text": "Here $g'^*p_1^*K=K|_{V_{\\bar\\xi}}$, and $g'^*\\mathcal K_\\psi=g'^*b^*\\mathcal L_\\psi$ is the Artin–Schreier sheaf of the function $b\\circ g'=\\langle x,\\xi\\rangle$ on $V_{\\bar\\xi}$, because the base change of the twist is the twist by the base-changed function ([def-fd-kernel]): the inverse image of $\\mathcal L_{\\psi,f}$ along a morphism $h$ is $\\mathcal L_{\\psi,f\\circ h}$, the Artin–Schreier covering being compatible with base change. With the shift $[r]$ of [def-fd-transform], this is the displayed formula. (The base change used is the proper, compact-support one along $\\bar\\xi\\to V^\\vee$, not smooth base change. If one passes instead through the strict henselization $\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$, the kernel on $V\\times_k\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{V^\\vee,\\bar\\xi}$ is $\\mathcal L_{\\psi(\\langle x,\\xi_{\\mathrm{univ}}\\rangle)}$ for the tautological point $\\xi_{\\mathrm{univ}}$, not the pullback of $\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}$ from $V_{\\bar\\xi}$, and the passage to the closed fibre is again this compact-support base change.)",
+   "text": "By [def-weil-pbc-rational-category], $K$ is represented by an integral object $K_0$; no new lattice-existence assertion is needed, since raw rationalization keeps the objects. The integral constructible categories used in the pullback/tensor package and in compact-support base change coincide by [lem-weil-pbc-integral-stratified-perfect-characterization], with the same completed coefficient sheaf and finite-reduction functors. The integral Artin--Schreier realization [def-fd-adic-fourier-realization] on the noetherian characteristic-$p$ scheme $\\mathbf A^1_k$ supplies the lattice $\\mathcal L_{\\psi,0}\\in D^b_c(\\mathbf A^1_k,\\mathcal O_E)$ of $\\mathcal L_\\psi$, a rank-one object in degree zero: its defining finite etale torsor trivializes it as the completed free rank-one sheaf. Clause (1) of [lem-pur-integral-operations-preserve-constructible], applied to $b$ and to $p_1$, gives the kernel lattice $\\mathcal K_{\\psi,0}=Lb^*\\mathcal L_{\\psi,0}$ and $Lp_1^*K_0$ in $D^b_c(W,\\mathcal O_E)$; clause (2) gives $Lp_1^*K_0\\widehat\\otimes^L\\mathcal K_{\\psi,0}\\in D^b_c(W,\\mathcal O_E)$. By the rational-level definition in [def-weil-derived-pullback-tensor-hom], the latter represents $F=Lp_1^*K\\otimes_E^L\\mathcal K_\\psi$. Hence $F\\in D^b_c(W,E)$ in exactly the category required by the base-change theorem, including its compatible finite-reduction etale-origin witnesses.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-fd-adic-fourier-realization",
+    "lem-pur-integral-operations-preserve-constructible",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "First displayed formula: the integrand belongs to the finite E-stage constructible adic category"
+   }
+  },
+  {
+   "text": "Apply [thm-cbc-finite-extension] with $X=W$, $Y=V^\\vee$, $X'=V_{\\bar\\xi}$, $Y'=\\operatorname{Spec}\\Omega$, $f=p_2$, $f'=q$, $g'=h$, input $F$ from Step 2, and the compactification of $p_2$ fixed in the statement with its base change, which is the compactification computing $Rq_!$. Step 1 verifies the scheme and compactification hypotheses (no hypothesis on $g$). Its compact supports are those of the statement; its pullbacks are the strict-tower completed pullbacks $Lg^*_{\\mathrm{comp}},Lh^*_{\\mathrm{comp}}$ of [def-weil-pbc-completed-pullback], rationalized. It yields the natural isomorphism $Lg^*_{\\mathrm{comp}}Rp_{2!}F\\xrightarrow{\\sim}Rq_!Lh^*_{\\mathrm{comp}}F$ in $D^b_c(\\operatorname{Spec}\\Omega,E)$.\nTo return to the pullbacks of [def-weil-derived-pullback-tensor-hom] used in the statement, apply [lem-a1-integral-pullback-completed-comparison] to the integral representatives $F_0$ on $W$ and $RP_*j_!F_0$ on $V^\\vee$. The latter lies in the integral category of [def-weil-pbc-bounded-constructible-complete] by [lem-cbc-integral-compact-support-uniform-restriction]; objects of that category are derived complete in the sense of [def-weil-derived-complete-integral-detailed] by [lem-weil-pbc-integral-stratified-perfect-characterization]. This gives natural isomorphisms $\\gamma_h:Lh^*F_0\\xrightarrow{\\sim}Lh^*_{\\mathrm{comp}}F_0$ and $\\gamma_g:Lg^*Rp_{2!}F_0\\xrightarrow{\\sim}Lg^*_{\\mathrm{comp}}Rp_{2!}F_0$. In the raw rationalization [def-weil-pbc-rational-category] the components $\\gamma\\otimes1$ are isomorphisms with inverses $\\gamma^{-1}\\otimes1$, and tensoring the integral naturality equations with $c\\in E$ gives naturality for rational morphisms $u\\otimes c$. Hence\n$$Lg^*Rp_{2!}F\\xrightarrow{\\gamma_g}Lg^*_{\\mathrm{comp}}Rp_{2!}F\\xrightarrow{\\sim}Rq_!Lh^*_{\\mathrm{comp}}F\\xrightarrow{Rq_!(\\gamma_h^{-1})}Rq_!Lh^*F,$$\nnatural in $K$. No algebraically closed coefficient field is needed.",
+   "uses": [
+    "thm-cbc-finite-extension",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-rational-category",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "First displayed formula: compact-support base change along the geometric point"
+   }
+  },
+  {
+   "text": "The kernel description [def-fd-kernel], interpreted through the integral realization fixed in the statement, is $\\mathcal K_\\psi=Lb^*\\mathcal L_\\psi$. Use [lem-pod-integral-pullback-composition] on integral representatives and then [prop-weil-pbc-rational-transport] to rationalize its composition isomorphisms and their inverses. Since $p_1h=a$ and $bh=b_\\xi$ from Step 1, these give\n$$Lh^*Lp_1^*K\\cong La^*K=K|_{V_{\\bar\\xi}},\\qquad\nLh^*\\mathcal K_\\psi\\cong L(bh)^*\\mathcal L_\\psi=Lb_\\xi^*\\mathcal L_\\psi=\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}.$$\nThe kernel integral lattice exists by Step 2. These are composition comparisons for the actual completed pullbacks; the last equality is the definition of the sheaf attached to the pulled-back function. The formula remains valid for a geometric point above a non-closed point because $h$ and $b_\\xi$ were defined over its actual field $\\Omega$.",
    "uses": [
     "def-fd-kernel",
-    "def-fd-transform"
+    "lem-pod-integral-pullback-composition",
+    "prop-weil-pbc-rational-transport"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "Second paragraph: identify restriction of K and of the pairing kernel"
+   }
+  },
+  {
+   "text": "Apply the $\\Lambda=E$ clause of [lem-pur-derived-pullback-tensor-iso] to $h$ and the two bounded constructible inputs $Lp_1^*K,\\mathcal K_\\psi$. Its hypotheses hold by Step 2 and the invertibility check in Step 1. It gives\n$$Lh^*F\\cong Lh^*Lp_1^*K\\otimes_E^L Lh^*\\mathcal K_\\psi.$$\nSubstituting the two isomorphisms of Step 4 identifies this naturally with $N=K|_{V_{\\bar\\xi}}\\otimes_E^L\\mathcal L_{\\psi(\\langle x,\\xi\\rangle)}$. The theorem is applied to completed/rational coefficients, where it asserts the comparison in $D^b_c$, with no unsupported inference from an underived discrete tensor product.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "Second paragraph: expand pullback of the derived tensor integrand"
+   }
+  },
+  {
+   "text": "For the pullback of [def-weil-derived-pullback-tensor-hom], the shift comparison $Lg^*(M[r])\\cong(Lg^*M)[r]$ is the termwise identification on K-flat representatives; by [lem-a1-integral-pullback-completed-comparison] it corresponds under $\\gamma_g$ to the completed shift isomorphism of [lem-cbc-completed-pullback-triangles], and it rationalizes by [prop-weil-pbc-rational-transport]. With the transform formula explicitly fixed in the statement (the normalization [r] of [def-fd-transform]), combine Steps 3 and 5 to obtain\n$$Lg^*\\operatorname{FT}_\\psi(K)=Lg^*(Rp_{2!}F[r])\\cong (Lg^*Rp_{2!}F)[r]\\cong (Rq_!Lh^*F)[r]\\cong Rq_!N[r].$$\nApply $\\Gamma_{\\Omega,E}$ to this isomorphism. By [lem-weil-point-proetale-sections-exact], termwise sections on the pro-etale site of the algebraically closed field $\\Omega$ descend to derived categories and commute with shifts. The subsequent scalar extension to $E$ is flat localization and commutes with shifts termwise; on a rational morphism $u\\otimes c$ the action is $c(\\Gamma(u)\\otimes1)$, whose balancing and composition equations follow from scalar linearity. Thus this evaluation gives $\\Gamma_{\\Omega,E}Lg^*\\operatorname{FT}_\\psi(K)\\cong\\Gamma_{\\Omega,E}Rq_!N[r]$, exactly the derived stalk/compact-support formula with the meanings specified in the statement, in accordance with [lem-kun-stalk-as-pullback].",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-cbc-completed-pullback-triangles",
+    "prop-weil-pbc-rational-transport",
+    "def-fd-transform",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-kun-stalk-as-pullback",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "Final sentence: insert the shift and identify the geometric stalk with compactly supported fibre cohomology"
+   }
+  },
+  {
+   "text": "Taking $H^i$ in Step 6 gives $H^i((\\operatorname{FT}_\\psi(K))_{\\bar\\xi})\\cong H^i(R\\Gamma_c(V_{\\bar\\xi},N)[r])=H_c^{i+r}(V_{\\bar\\xi},N)$: for the cochain shift, $(C[r])^i=C^{i+r}$ and the differential is multiplied by $(-1)^r$, which leaves its kernel and image unchanged. This is precisely the degreewise interpretation of the source's $H_c^*$ notation. Every factor used is natural in $K$, so the resulting isomorphisms are natural as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+    "place": "Final sentence: take cohomology with the cochain shift convention"
+   }
   }
  ],
  "proof_deps": [
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "thm-nagata-compactification",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-fd-adic-fourier-realization",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-derived-pullback-tensor-hom",
   "thm-cbc-finite-extension",
-  "thm-cbc-qbar",
-  "def-weil-pbc-qbar-category",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
   "def-fd-kernel",
-  "def-fd-transform"
+  "lem-pod-integral-pullback-composition",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-completed-pullback-triangles",
+  "def-fd-transform",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-kun-stalk-as-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-stalk/lem-fd-stalk-formula.proof.md",
+  "place": "Entire proof; seven-step expansion with explicit adic coefficient domains, tensor/composition comparisons, and derived versus degreewise cohomology"
  },
  "mathlib_searches": [
   {
@@ -50,10 +161,59 @@
    "query": "AlgebraicGeometry.Etale.fourierTransformStalkIso",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "fourier.*stalk|stalk.*fourier|FourierDeligne|artinSchreierSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourier\", \"stalk\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk formula for Fourier Deligne transform with l adic coefficients",
+   "results": "8 hits: TopCat.Presheaf.stalk, FourierTransform.fourierₗ_apply, TopCat.stalkToFiber, TopCat.Presheaf.stalkFunctor_obj, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper, instIsLeftAdjointPresheafStalkFunctor, AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, TopCat.Presheaf.stalkPushforward.id",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of the Fourier Deligne transform of a constructible l adic complex is compactly supported cohomology of the geometric fibre with the exponential sheaf twist",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafStonean, topCatToSheafCompHausLike, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves, topCatToSheafCompHausLike_map_val_app, CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|lowerShriek|LowerShriek|fourierTransform",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", CategoryTheory.IsIso",
+   "results": "6 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support base change identifies inverse image to a geometric point of a derived lower shriek with derived sections with compact support on the fibre",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardSections_coe, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-19",
+   "verdict": "no match: none states the geometric Fourier--Deligne stalk formula with adic coefficients"
   }
  ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -175,5 +335,79 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry); Lean refresh 7d675a26 (L): moved from WeilConjectures.FourierTransform.Properties:216"
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-fd-stalk-formula",
+  "worker": "stage1",
+  "summary": "Seven steps, no new nodes. Clarified the adic transform independently of the current discrete-coefficient definition and replaced the ambiguous H_c^* expression with RΓ_c and its degreewise consequence. Verified the geometry and integrand domain, applied the E-stage compact-support exchange, cited completed pullback composition and tensor comparisons, then commuted shifts and evaluated at the actual geometric point. No closed-proof attachment matches all coefficients, ranks and geometric points. Maintainer-reader FIX (2026-10-19): the statement's compact support is now the completed Rp_*j_! of the unit's base-change theorem (thm-cbc-finite-extension), and Step 3 converts that theorem's strict-tower completed pullbacks to the statement's pullbacks by lem-a1-integral-pullback-completed-comparison; Step 2 obtains the kernel lattice as Lb^* of the realized line on A^1_k.",
+  "blueprint": "Steps 1–3 realize the first paragraph Cartesian square and E-stage compact-support exchange. Steps 4–5 realize restriction of the kernel and derived tensor integrand. Steps 6–7 realize the final shift and cohomology sentence. No smooth-base-change route is substituted.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Supplies the Noetherian and finite-dimensional corner hypotheses of the unit compact-support base-change step, including the arbitrary geometric-point field."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Supplies a compactification of the separated finite-type projection used by the unit base-change theorem."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two integral constructible coefficient presentations with their finite-reduction witnesses before applying the E-stage compact-support theorem."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Checks the bounded constructible domain of the unit integrand, using the actual completed pullback and tensor operations."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Supplies composition isomorphisms for the completed integral pullbacks in the kernel and restriction calculations."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Carries the integral composition and shift comparisons to the finite coefficient field E."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Supplies the non-elementary rational derived tensor pullback comparison implicit in the unit integrand calculation."
+   },
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Supplies the completed pullback shift comparison used when inserting the transform normalization."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Makes coefficient-complex evaluation and its shift comparison valid over the arbitrary algebraically closed field Omega."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Identifies geometric stalk notation with inverse image to the geometric point as used explicitly by the unit."
+   },
+   {
+    "node": "lem-a1-integral-pullback-completed-comparison",
+    "why": "Identifies the framework completed pullback of the statement with the strict-tower completed pullback in which thm-cbc-finite-extension is stated, including the shift normalization; no node of the unit or of sk-prop-sf-cbc compares the two pullbacks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pod-integral-pullback-composition",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-kun-stalk-as-pullback",
+  "lem-a1-integral-pullback-completed-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-N0-cffcc098e",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-cffcc098e (reviewer sub-agent of L); spot-checked: FIX after a full read: the item, every cited node statement, all 9 proof steps of thm-cbc-finite-extension, the main-20261015 blueprint item, proof and unit, and Laumon (1.2.1.1) on p.141. Statement: making the adic transform explicit and replacing H_c^*[r] by RΓ_c[r] plus H^i=H_c^{i+r} is faithful and weakens nothing (g arbitrary, Ω any algebraically closed field, r>=0, K any object). Tested on r=0, K=0, δ_0 (gives E[1]), the constant sheaf (gives δ_0(-1)[-1]) and a generic geometric point. Fault 1 (C4/E6): the delivered statement fixed the framework operations, i.e. the pullback of def-weil-derived-pullback-tensor-hom and the compact support of def-weil-integral-rational-qbar-compact-support. Step 3 applied thm-cbc-finite-extension, which is stated for a different pullback (def-weil-pbc-completed-pullback) and for completed Rp_*j_!. No DAG node compares the two compact-support functors over an arbitrary field Ω. Repair: the statement's compact support is now RP_*j_! (def-weil-pbc-projection-compactification), exact by lem-cbc-integral-compact-support-uniform-restriction (on route, sk-prop-sf-cbc) and rationalized by prop-weil-pbc-rational-transport, with a fixed Nagata compactification and its base change. Step 3 converts the pullbacks with γ_g and γ_h^{-1} of lem-a1-integral-pullback-completed-comparison, added as a tool use. Step 6 now cites the same lemma for the matching shift comparisons. Fault 2 (minor): Step 2 took the kernel lattice as the realization on W, while the statement defines K_ψ=Lb^*L_ψ. It now takes L_{ψ,0} on A^1_k from def-fd-adic-fourier-realization and Lb^* by clause (1) of lem-pur-integral-operations-preserve-constructible. Steps 1, 4, 5 and 7 were checked and are correct. There are no new nodes, no cycle (closures checked) and no SGA. review_split passes on the patched copy. Maintainer note: the reviewed sibling lem-fd-base-change mixes the two pullbacks in the same way.; 1 file(s) fixed by the reviewer"
  }
 }

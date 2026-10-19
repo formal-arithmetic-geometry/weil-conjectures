@@ -17443,3 +17443,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:22 L: merged deliver/K8/Sheaf.Paper.CondensedCompactSupportProjection (stage 3; reviewer PASS; first push; landing 20261019T142209-L-1929190 (proof); batch 20261019T142202; modules 1; new nodes 0)
 - 14:24 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head e3895d8cd33a: Byte-identical re-delivery (sha256 787e4e0b, same as 24 earlier retu)
 - 14:26 L: merged deliver/NX/lem-zl-mixed-punctual-cutoff (reviewer FIX; first push; new nodes: 1)
+- 14:26 L: merged deliver/N0/lem-fd-stalk-formula (reviewer FIX; first push; new nodes: 0)
