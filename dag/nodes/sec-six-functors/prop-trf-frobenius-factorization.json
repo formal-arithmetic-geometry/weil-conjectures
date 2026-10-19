@@ -22,7 +22,36 @@
  ],
  "proof": [
   {
-   "text": "Take the affine charts $U_0=\\operatorname{Spec}A_0$ of $X_0$ and their geometric base changes $U=\\operatorname{Spec}(A_0\\otimes_{k_0}k)$, on which [def-trf-scheme-frobenius] gives the affine incarnations of $\\Phi$ and $g_\\sigma$. These charts cover $X$ and are preserved by both maps: $g_\\sigma$ lies over the identity of $X_0$, while $\\Phi_0$ is identity on the underlying space by [def-weil-absolute-frobenius-scheme]. On $B=A_0\\otimes_{k_0}k$ write their ring maps as $P(u\\otimes b)=u^q\\otimes b$ and $S(u\\otimes b)=u\\otimes b^q$. Induction gives $P^m(u\\otimes b)=u^{q^m}\\otimes b$ and $S^m(u\\otimes b)=u\\otimes b^{q^m}$: for $m=0$ both are identities; composing once more replaces the exponent $q^m$ by $q^m q=q^{m+1}$.",
+   "text": "Absolute Frobenius is natural in every scheme morphism: use Scheme.Hom.ext, its identity underlying map, and map_pow on each section ring. The same extensionality proves F_(n+r) = F_n followed by F_r and F_0 = identity, since x^(p^(n+r)) = (x^(p^r))^(p^n). Induction gives F_(a*m) = (F_a)^m. These sectionwise arguments also apply to zero rings and nonreduced schemes.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-ring-frobenius",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+    "place": "Both factor maps and their composites; implemented by their defining pullback projections instead of an affine-cover tensor calculation."
+   }
+  },
+  {
+   "text": "Let sigma be the inverse of geometric field Frobenius. Its definition identifies it with arithmetic field Frobenius, x maps to x^q. By ext_to_Spec and GammaSpecIso naturality, the absolute p^a-power Frobenius on Spec k equals Spec(sigma): on global sections the equality is map_pow and p^a=q=card(k_0). Use the relativeFrobenius_projections and galoisMap_projections equations: P fixes the second projection and acts by model Frobenius on the first; S fixes the first projection and acts by Spec(sigma) on the second. Naturality from step 1 gives precisely the two projections of absolute F_a. The universal property pullback.hom_ext therefore proves F_a=P followed by S and F_a=S followed by P, hence P and S commute.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-trf-scheme-frobenius",
+    "def-weil-relative-frobenius-geometric-fiber",
+    "def-weil-frobenius-detailed",
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
+    "place": "Both factor maps and their composites; implemented by their defining pullback projections instead of an affine-cover tensor calculation."
+   }
+  },
+  {
+   "text": "Raise each one-step factorization to the m-th power. Since P and S commute, Commute.mul_pow gives (PS)^m=P^m S^m in both orders. Step 1 identifies the left side with absolute F_(a*m), and schemeFrobeniusIterate is by definition P^m. Translate End multiplication back into categorical composition to obtain exactly both conjuncts of the statement, with all original hypotheses retained.",
    "uses": [
     "def-trf-scheme-frobenius",
     "def-weil-absolute-frobenius-scheme"
@@ -30,49 +59,24 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
-    "place": "Proof, affine incarnations on the two factors; expanded iteration and chart restriction. Absolute Frobenius is Stacks tag 03SM (varieties.tex, definition-absolute-frobenius)."
-   }
-  },
-  {
-   "text": "On a pure tensor the two ring-map composites satisfy\n$$S^mP^m(u\\otimes b)=u^{q^m}\\otimes b^{q^m}=P^mS^m(u\\otimes b).$$\nThis is also $(u\\otimes b)^{q^m}$, since multiplication in the tensor-product algebra multiplies the two factors. The $q^m=p^{am}$ power map $H$ on $B$ is a ring homomorphism by [def-weil-ring-frobenius]. The formulas for $P,S$ used here are those of [def-trf-scheme-frobenius]. Every tensor is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product] (a scalar multiplying a pure tensor is absorbed in its first factor). Additivity therefore gives, for $t=\\sum_i u_i\\otimes b_i$,\n$$S^mP^m(t)=\\sum_i u_i^{q^m}\\otimes b_i^{q^m}=H(t)=P^mS^m(t).$$\nThus the two composites equal $H$ on the entire ring, including its nilpotent elements.",
-   "uses": [
-    "def-trf-scheme-frobenius",
-    "def-weil-ring-frobenius",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
-    "place": "Proof, composition in either order; expanded pure-tensor and finite-sum computation. Stacks tag 03SM (varieties.tex, definition-absolute-frobenius) for the power map."
-   }
-  },
-  {
-   "text": "The absolute $q^m$-power Frobenius restricts on $U$ to $\\operatorname{Spec}(H)$ by [def-weil-absolute-frobenius-scheme]. Contravariance and uniqueness in [def-weil-affine-spectrum] turn Step 2 into equality of its restriction with both $g_\\sigma^m\\circ\\Phi^m$ and $\\Phi^m\\circ g_\\sigma^m$ on $U$. This proves the global equality: the underlying continuous maps agree on the covering charts, hence at every point; their maps on structure sheaves then agree locally on those charts, so agree on any open by the uniqueness clause of the sheaf axiom. These are exactly the two data of a scheme morphism in [def-weil-locally-ringed-space-morphism]. The maps are over $k_0$ by their construction in [def-trf-scheme-frobenius], so the same equalities hold as $k_0$-scheme morphisms.",
-   "uses": [
-    "def-weil-absolute-frobenius-scheme",
-    "def-weil-affine-spectrum",
-    "def-weil-locally-ringed-space-morphism",
-    "def-trf-scheme-frobenius"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
-    "place": "Proof, final equality of morphisms from affine incarnations. Affine uniqueness: Stacks tag 01I1 (schemes.tex, lemma-morphism-into-affine); morphism data: tags 0091 (sheaves.tex, definition-ringed-space) and 01HB (schemes.tex, definition-locally-ringed-space)."
+    "place": "Both factor maps and their composites; implemented by their defining pullback projections instead of an affine-cover tensor calculation."
    }
   }
  ],
  "proof_deps": [
-  "def-trf-scheme-frobenius",
   "def-weil-absolute-frobenius-scheme",
   "def-weil-ring-frobenius",
-  "def-weil-pbc-module-tensor-product",
-  "def-weil-affine-spectrum",
-  "def-weil-locally-ringed-space-morphism"
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-finite-field-fiber",
+  "def-trf-scheme-frobenius",
+  "def-weil-relative-frobenius-geometric-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-affine-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-frobenius-factorization.proof.md",
-  "place": "Complete affine proof, expanded from the sole paragraph of the current blueprint proof; supporting definitions checked against Stacks tags 03SM, 01I1, 0091 and 01HB."
+  "place": "B6 stage-3 proof, 2026-10-19: the blueprint factorization via naturality and the universal property of the geometric fibre pullback; sectionwise iteration and commuting powers. No unit statement or unit proof step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -206,5 +210,15 @@
   "by": "Q159",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261019T093256-L-2287842",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
