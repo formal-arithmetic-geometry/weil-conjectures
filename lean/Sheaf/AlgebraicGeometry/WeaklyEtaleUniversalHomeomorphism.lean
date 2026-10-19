@@ -14,11 +14,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
-import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
@@ -85,6 +81,25 @@ theorem isIso_of_weaklyEtale_of_universalHomeomorphism
     {V W : Scheme.{u}} (f : V ⟶ W) [WeaklyEtale f]
     (hf : (topologically IsHomeomorph).universally f) :
     IsIso f := by
-  sorry
+  have hhomeo : IsHomeomorph f := hf _ _ _ .of_id_snd
+  have : Surjective f := ⟨hhomeo.surjective⟩
+  have : UniversallyInjective f :=
+    ⟨fun _ _ _ _ _ h ↦ (hf _ _ _ h).injective⟩
+  have : IsAffineHom f :=
+    isAffineHom_of_isInducing f hhomeo.isInducing hhomeo.isClosedEmbedding.isClosed_range
+  have : Surjective (pullback.diagonal f) := (UniversallyInjective.iff_diagonal f).mp ‹_›
+  -- The separated diagonal is a flat, surjective, quasi-compact monomorphism.
+  have : IsIso (pullback.diagonal f) := by
+    apply MorphismProperty.of_pullback_fst_of_descendsAlong
+      (P := isomorphisms Scheme.{u}) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)
+      (f := pullback.diagonal f) (g := pullback.diagonal f)
+    · exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
+    · exact inferInstanceAs <| IsIso (pullback.fst (pullback.diagonal f) (pullback.diagonal f))
+  -- An invertible diagonal makes f monic, so the same descent argument applies.
+  have : Mono f := (pullback.isIso_diagonal_iff f).mp ‹_›
+  apply MorphismProperty.of_pullback_fst_of_descendsAlong
+    (P := isomorphisms Scheme.{u}) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) (f := f) (g := f)
+  · exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
+  · exact inferInstanceAs <| IsIso (pullback.fst f f)
 
 end AlgebraicGeometry
