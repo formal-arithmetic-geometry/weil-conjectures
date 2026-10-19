@@ -1,0 +1,181 @@
+{
+ "id": "lem-sfb-constant-model-closed-projection",
+ "kind": "statement",
+ "title": "ConstantModelClosedProjection",
+ "statement": "Let $\\Lambda$ be a commutative condensed coefficient ring [sk-def-sfb-pulled-back-coefficients], and let $i:Z\\to X$ be a closed immersion of Noetherian schemes [def-weil-closed-immersion]. For arbitrary $L\\in D(Z,\\Lambda)$ and $M\\in D(X,\\Lambda)$ there is an isomorphism $(Ri_*L)\\otimes^{\\mathbf L}M\\simeq Ri_*(L\\otimes^{\\mathbf L}i^*M)$, with categories and tensor as in [sk-def-sfb-derived-categories, sk-def-sfb-derived-tensor-hom]. No boundedness or constructibility is assumed.",
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 10"
+ },
+ "proof": [
+  {
+   "text": "Take the open complement of the closed immersion i and apply the closed projection clause of openClosedInternalHomFormulas. This supplies the formula for exact termwise i* and supportPullback. Transport the left tensor factor along rightDerivedFunctorIsoMapDerivedCategory, and the right tensor factor along supportPullbackIsoUpperStar mapped to the derived category. Transport the resulting exact direct image back along the inverse derived comparison. Composition gives the claimed isomorphism for arbitrary unbounded objects, including empty supports and zero inputs.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 10, existing closed projection clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-open-closed-internal-hom-formulas"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 10; N1 Lean realization 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
+   "results": "none (grep root AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
+   "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro.?etale|pro.?étale).*(construct|tensor)|construct.*(pro.?etale|pro.?étale)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a locally closed immersion projection formula derived tensor of sheaves of modules",
+   "results": "Function.ExtendByZero.linearMap; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; ContinuousLinearMap.extend_zero; AlgebraicGeometry.RingedSpace.res_zero; dualTensorHom_prodMap_zero; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; KaehlerDifferential.mulActionBaseChange_smul_zero",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability of constructible integral adic sheaves under inverse image tensor and extension by zero for locally closed immersions",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def tensorObj|def HasTensor",
+   "results": "none (grep root Algebra/Homology/Monoidal.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian",
+   "results": "328; 333; 334; 338; 340 (grep root RingTheory/AdicCompletion/AsTensorProduct.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictFunctor|def restrictAdjunction",
+   "results": "348; 416; 425; 453; 459 (grep root AlgebraicGeometry/Modules/Sheaf.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "180; 192 (grep root Algebra/Homology/DerivedCategory/TStructure.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsOperations",
+  "date": "2026-10-19",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "parent proof step 10",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantModelClosedProjection",
+  "file": "lean/Sheaf/Paper/ConstantModelClosedProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constantModel_closed_projection",
+  "statement": "theorem constantModel_closed_projection\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {Z X : Scheme.{u}}\n    [IsNoetherian Z] [IsNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i]\n    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})\n      (condensedRingObj Λ Z)))\n    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X))) :\n    Nonempty ((((derivedTensor Λ X).obj\n      ((lowerStar Λ i).rightDerivedFunctor.obj L)).obj M) ≅\n      (lowerStar Λ i).rightDerivedFunctor.obj\n        (((derivedTensor Λ Z).obj L).obj ((upperStar Λ i).mapDerivedCategory.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

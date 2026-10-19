@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-constant-model-immersion-images",
+ "kind": "statement",
+ "title": "ConstantModelImmersionImages",
+ "statement": "Let $\\Lambda$ be a commutative ring object of condensed abelian groups. For an open immersion $j:U\\to X$ of Noetherian schemes, $j_!$ takes finite constant scalar constructible $\\Lambda_U$-module sheaves to such $\\Lambda_X$-module sheaves. For a closed immersion $i:Z\\to X$ of Noetherian schemes the same holds for $i_*$. Constructibility and coefficients are [sk-def-sfb-constructible, sk-def-sfb-pulled-back-coefficients]; these are the actual sheaf functors of [sk-def-sfb-module-lower-shriek, sk-def-sfb-module-pushforward-pullback].",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 3"
+ },
+ "proof": [
+  {
+   "text": "For zero modules use the cokernel of the identity on a rank-one free scalar module as a finitely presented zero scalar model. Every additive pullback sends zero to zero. Hence a zero sheaf has a finite constant local model on every cover. Transport existing local models through restriction isomorphisms.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 3, zero models"
+   }
+  },
+  {
+   "text": "For an open immersion j:U -> X choose its complementary closed immersion i:Z -> X. Concatenate the witnessing stratification on U with the one-stratum stratification on Z, obtaining a finite stratification of X. The open restriction of j!F identifies with F by the open unit. Its closed restriction vanishes: use the two adjunctions, j* i*=0, and injectivity of the adjunction Hom equivalence to show the identity of i* j!F is zero. Thus original models on U and zero models on Z witness constructibility of j!F.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 3, open immersion"
+   }
+  },
+  {
+   "text": "For a closed immersion i:Z -> X concatenate the witnessing stratification on Z with the complementary open stratum. The closed restriction of i*F identifies with F by the closed counit, obtained from the abelian pro-etale counit. The complementary open restriction is zero by mixed restriction vanishing. Original models and zero models therefore witness constructibility of i*F. The same constructions cover empty loci and zero sheaves.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 3, closed immersion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-proetale-abelian-closed-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 3; N1 Lean realization 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
+   "results": "none (grep root AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
+   "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro.?etale|pro.?étale).*(construct|tensor)|construct.*(pro.?etale|pro.?étale)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a locally closed immersion projection formula derived tensor of sheaves of modules",
+   "results": "Function.ExtendByZero.linearMap; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; ContinuousLinearMap.extend_zero; AlgebraicGeometry.RingedSpace.res_zero; dualTensorHom_prodMap_zero; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; KaehlerDifferential.mulActionBaseChange_smul_zero",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\"",
+   "results": "Topology.IsConstructible; Topology.IsLocallyConstructible; Topology.IsConstructible.univ; Topology.IsLocallyConstructible.univ; Topology.IsConstructible.empty; Topology.IsLocallyConstructible.empty; Topology.IsConstructible.isLocallyConstructible; IsRetrocompact.isConstructible",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stability of constructible integral adic sheaves under inverse image tensor and extension by zero for locally closed immersions",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def tensorObj|def HasTensor",
+   "results": "none (grep root Algebra/Homology/Monoidal.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProductEquivOfFiniteNoetherian",
+   "results": "328; 333; 334; 338; 340 (grep root RingTheory/AdicCompletion/AsTensorProduct.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictFunctor|def restrictAdjunction",
+   "results": "348; 416; 425; 453; 459 (grep root AlgebraicGeometry/Modules/Sheaf.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "180; 192 (grep root Algebra/Homology/DerivedCategory/TStructure.lean)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsOperations",
+  "date": "2026-10-19",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "parent proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantModelImmersionImages",
+  "file": "lean/Sheaf/Paper/ConstantModelImmersionImages.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constantModel_immersion_images",
+  "statement": "theorem constantModel_immersion_images\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] :\n    (∀ {U X : Scheme.{u}} [IsNoetherian U] [IsNoetherian X]\n      (j : U ⟶ X) [IsOpenImmersion j]\n      (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)),\n      IsConstantModelConstructible Λ U M →\n      IsConstantModelConstructible Λ X ((openImmersionLowerShriek Λ j).obj M)) ∧\n    (∀ {Z X : Scheme.{u}} [IsNoetherian Z] [IsNoetherian X]\n      (i : Z ⟶ X) [IsClosedImmersion i]\n      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)),\n      IsConstantModelConstructible Λ Z M →\n      IsConstantModelConstructible Λ X ((lowerStar Λ i).obj M))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

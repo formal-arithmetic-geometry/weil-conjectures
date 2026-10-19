@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-integral-models-tensor-closure",
+ "kind": "statement",
+ "title": "IntegralModelsTensorClosure",
+ "statement": "For a finite subextension E of the l-adic algebraic closure and a Noetherian scheme X, the ambient uncompleted relative derived tensor of two bounded complexes with finite constant scalar constructible cohomology again has bounded finite constant scalar constructible cohomology. Here constructibility and bounded constructibility mean [sk-def-sfb-constructible, sk-def-sfb-bounded-constructible], and the tensor is [sk-def-sfb-derived-tensor-hom].",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 8, using the separate degree-zero calculation"
+ },
+ "proof": [
+  {
+   "text": "Let P be the object property of sheaves having finite constant scalar constructible models. Transport models along isomorphisms. The zero sheaf has the zero finite presentation on every stratum. The integral weak Serre theorem gives closure of P under kernels, cokernels and extensions. The homology-property API then makes Q = bounded intersect homologyProperty P a triangulated, isomorphism-closed property.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 8, triangulated closure"
+   }
+  },
+  {
+   "text": "The degree-zero sheaf tensor calculation supplies Q(F[0] tensor G[0]) for every pair F,G satisfying P. Fix G. Derived tensor by G[0] is triangulated, with its canonical shift comparison. Apply the existing DerivedCategory.prop_of_bounded to the inverse image of Q under this functor: all single sheaves satisfy the property, so every bounded K with P-cohomology does. Fix K and apply the same theorem in the second variable to M. This proves Q(K tensor M). This is precisely two finite truncation inductions, including the zero and single-degree cases; no local splitting of arbitrary complexes is used. In Lean carry out the two inductions and the weak Serre transport in a private lemma for an arbitrary abelian monoidal category, then specialize it to the coefficient module category using the integral heart-closure and sheaf-tensor theorems. Transport the sheaf case and the conclusion along the explicit equality between the coefficient derivedTensor and curriedTensor; this is equality transport, with no change of tensor structure.",
+   "uses": [
+    "lem-sfb-integral-models-sheaf-tensor",
+    "sk-def-sfb-derived-tensor-hom",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent proof step 8, two finite truncation inductions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-constant-model-heart-closure",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "lem-sfb-integral-models-sheaf-tensor",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof step 8, using the separate degree-zero calculation; N1 Lean realization 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
+   "results": "none (grep root AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
+   "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsOperations",
+  "date": "2026-10-19",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "parent proof step 8, using the separate degree-zero calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelsTensorClosure",
+  "file": "lean/Sheaf/Paper/IntegralModelsTensorClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralModels_tensor_closure",
+  "statement": "theorem integralModels_tensor_closure (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsNoetherian X]\n    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)))\n    (hK : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X K)\n    (hM : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X M) :\n    constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X\n      (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj M)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

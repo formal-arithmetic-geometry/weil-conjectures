@@ -1,0 +1,172 @@
+{
+ "id": "lem-sfb-integral-models-sheaf-tensor",
+ "kind": "statement",
+ "title": "IntegralModelsSheafTensor",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite subextension of the fixed algebraic closure, and $X$ a Noetherian scheme. Put $A=\\mathcal O_E$ and let $A_X$ be its pulled-back condensed coefficient ring [sk-def-sfb-pulled-back-coefficients]. For two $A_X$-module sheaves $F,G$ with finite constant scalar constructible models [sk-def-sfb-constructible], their degree-zero derived objects satisfy $F[0]\\otimes^{\\mathbf L}_{A_X}G[0]\\in D^b_c(X,A)$ [sk-def-sfb-bounded-constructible, sk-def-sfb-derived-tensor-hom]. The tensor is the ambient uncompleted relative tensor.",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent proof steps 4--7 (degree-zero sheaf calculation)"
+ },
+ "proof": [
+  {
+   "text": "Use the coefficient isomorphism of the integral constant-model heart closure module to compare the finite-subextension coefficient ring with the universe-lifted integral condensed ring. Transport modules along this ring isomorphism. The integral local-finite-presentation/constant-model comparison identifies constant-model constructibility with stratified local finite presentation, in both directions.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent steps 4--7: coefficient and model comparison"
+   }
+  },
+  {
+   "text": "Take the common finite refinement of the two witnessing stratifications using common_lfp_stratification from the condensed constructible Serre module. Transport local finite presentation from raw inverse-image coefficients to Cartesian coefficient pullback. Exact monoidal inverse image identifies the pullback of the tensor of the two degree-zero sheaves with the tensor of their two degree-zero pullbacks. On each stratum apply lfp_tensor_single: the tensor has no cohomology below -1 and its cohomology is locally finitely presented. In Lean first perform this argument for an arbitrary ell-adic finiteness coefficient on a Noetherian scheme in a private helper, then specialize. Use the explicit leftDerivedUpperStarTensorIso and exact functor comparison rather than synthesizing the monoidal tensorator.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-sfb-lfp-tensor-single",
+    "sk-def-sfb-derived-tensor-hom",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent steps 4--7: existing local tensor calculation"
+   }
+  },
+  {
+   "text": "Commute homology with exact inverse image. The finite family of stratum immersions is jointly surjective. Apply abDetectMaps from the abelian closed-support module to the identity of a module whose stratum pullbacks vanish; it is zero, so the module is zero. Apply this to tensor homology below -1. General right t-exactness of derived tensor gives vanishing above 0. The common stratification and the locally finitely presented homology on its strata give constructibility in every degree. Transport this through the coefficient/model equivalence to conclude bounded constant-model constructibility, with bounds [-1,0].",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+    "place": "parent step 7: descent of bounds and cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-sfb-lfp-tensor-single",
+  "sk-def-sfb-derived-tensor-hom",
+  "new-proetale-derived-module-pullback-monoidal",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "sk-def-sfb-bounded-constructible",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
+  "place": "parent steps 4--7, realized via existing local finite presentation tensor calculation and integral constant-model comparison; N1 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pullback)|((tensor|pullback).*constructible)",
+   "results": "none (grep root AlgebraicGeometry)",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of bounded constructible integral l-adic complexes is bounded constructible",
+   "results": "HomologicalComplex.tensorObj; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.HasTensor; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; TensorProduct.directLimitRight; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"tensor\"",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme inverse image derived tensor product and extension by zero preserve bounded constructible complexes with integral l-adic coefficients",
+   "results": "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; localCohomology.diagram; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"constructible\"",
+   "results": "No hits (msearch.py). Existing library lfp_tensor_single and integralLfpConstantModelComparison supply the shorter route.",
+   "date": "2026-10-19",
+   "verdict": "Use the library local calculation and coefficient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsOperations",
+  "date": "2026-10-19",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-operations",
+   "place": "parent proof steps 4--7 (degree-zero sheaf calculation)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralModelsSheafTensor",
+  "file": "lean/Sheaf/Paper/IntegralModelsSheafTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralModels_sheaf_tensor",
+  "statement": "theorem integralModels_sheaf_tensor (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsNoetherian X]\n    (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))\n    (hF : IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X F)\n    (hG : IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X G) :\n    constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X\n      (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj\n        ((DerivedCategory.singleFunctor _ 0).obj F)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj G))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261019T192808-L-1868905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
