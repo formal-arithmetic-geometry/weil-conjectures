@@ -22,77 +22,40 @@
  ],
  "proof": [
   {
-   "text": "Work in the sheaf-value universe of [def-weil-size-convention]. By [def-weil-pbc-sites-and-cohomology](3), write $u:\\mathcal C\\to\\mathcal D$ for the continuous functor defining $f$. Then $R$ is restriction along $u$, so it preserves finite products: on each object $U$, $R(A\\times B)(U)=A(uU)\\times B(uU)=(RA\\times RB)(U)$, and $R(*)$ has singleton sections. Write $\\rho_{A,B}:R(A\\times B)\\to RA\\times RB$ for this identification and $\\lambda_{A,B}:L(A\\times B)\\to LA\\times LB$ for the canonical comparison, which is invertible by the assumed finite-limit preservation. By [lem-weil-pbc-sheaf-algebraic-structures-objects], abelian sheaves are precisely abelian group objects in sheaves of sets, with the sectionwise operations. Thus [lem-weil-pbc-adjunction-lifts-abelian-group-objects] applies to the set adjunction $L\\dashv R$. It supplies the group structures $+_{LA}=L(+_A)\\lambda_{A,A}^{-1}$ and $+_{RH}=R(+_H)\\rho_{H,H}^{-1}$, and says that $\\eta_A$ and $\\varepsilon_H:L(RH)\\to H$ are additive. These are the induced abelian functors and unit specified in the item by [def-weil-pbc-sites-and-cohomology](3).",
-   "uses": [
-    "def-weil-size-convention",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: use Sites Section 00YR, Proposition 00YV(2), proposition-functoriality-algebraic-structures-topoi, for the algebraic structures and lifted adjunction."
-   }
-  },
-  {
-   "text": "First ignore all group laws. The ordinary set adjunction and $\\lambda_{F,G}$ give inverse bijections on all underlying sheaf maps\n$$\\Phi(\\beta)=R(\\beta\\lambda_{F,G})\\eta_{F\\times G},\\qquad J(b)=\\varepsilon_H L(b)\\lambda_{F,G}^{-1}.$$\nNaturality of $\\eta$ with the two projections gives\n$$\\rho_{LF,LG}R(\\lambda_{F,G})\\eta_{F\\times G}=\\eta_F\\times\\eta_G,$$\nsince composing either side with each projection gives respectively $\\eta_F\\mathrm{pr}_1$ and $\\eta_G\\mathrm{pr}_2$. Therefore $\\Phi(\\beta)=R(\\beta)\\rho_{LF,LG}^{-1}(\\eta_F\\times\\eta_G)$, which is exactly the formula required in the item. The inverse formula is the counit formula for the same adjunction, not a new choice of a bijection.",
+   "text": "Construct the transpose explicitly by evaluating a bilinear map at the two canonical abelian adjunction unit sections. Unit naturality gives compatibility with restrictions; additivity of each unit and separate additivity of beta give the two additivity laws.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: ordinary set adjunction, with the product and two-unit normalization written out."
-   }
+   "elementary": true
   },
   {
-   "text": "If $\\beta$ is separately additive, so is $\\Phi(\\beta)$. Indeed, for sections $x,x'\\in F(U)$ and $y\\in G(U)$ its value at $(x+x',y)$ is\n$$\\beta_{uU}\\bigl(\\eta_F(x)+\\eta_F(x'),\\eta_G(y)\\bigr)=\\beta_{uU}\\bigl(\\eta_F(x),\\eta_G(y)\\bigr)+\\beta_{uU}\\bigl(\\eta_F(x'),\\eta_G(y)\\bigr).$$\nHere the component of each $\\eta$ is evaluated at $U$, and step 1 gives its additivity. For $y'\\in G(U)$ the other additivity equation is\n$$\\Phi(\\beta)_U(x,y+y')=\\beta_{uU}\\bigl(\\eta_F(x),\\eta_G(y)+\\eta_G(y')\\bigr)=\\beta_{uU}\\bigl(\\eta_F(x),\\eta_G(y)\\bigr)+\\beta_{uU}\\bigl(\\eta_F(x),\\eta_G(y')\\bigr).$$ The operations on $RH(U)=H(uU)$ are exactly these operations by restriction. Additivity also implies preservation of zero by cancellation, and preservation of negatives by applying additivity to $x+(-x)$ (respectively $y+(-y)$).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: forward preservation of separate additivity, expanded on sections."
-   }
+   "text": "Use [lem-sfb-site-inverse-image-multimap-universal] with two inputs. Its uniqueness makes restriction to unit sections injective. For a bilinear map on the source, existence provides a natural two-input map beta on the inverse images.",
+   "uses": [
+    "lem-sfb-site-inverse-image-multimap-universal"
+   ],
+   "elementary": false
   },
   {
-   "text": "Conversely let $b:F\\times G\\to RH$ be separately additive and put $\\widetilde b=L(b)\\lambda_{F,G}^{-1}:LF\\times LG\\to L(RH)$. Express its first additivity law before applying $L$ as an equality of sheaf maps from $F\\times F\\times G$:\n$$b\\langle +_F\\langle p_1,p_2\\rangle,p_3\\rangle=+_{RH}\\langle b\\langle p_1,p_3\\rangle,b\\langle p_2,p_3\\rangle\\rangle.$$\nApply $L$ to this equality. Identify $L(F\\times F\\times G)$ with $LF\\times LF\\times LG$ by its three projection maps, and identify each binary product by $\\lambda$. Functoriality preserves composition; for any $q:S\\to A$ and $r:S\\to B$ the identity\n$$\\lambda_{A,B}L\\langle q,r\\rangle=\\langle Lq,Lr\\rangle$$\nfollows by composing with each projection, giving $Lq$ and $Lr$. This identity applies to every pairing in the displayed additivity equation. The operation $L(+_F)$ becomes $+_{LF}$ and $L(+_{RH})$ becomes $+_{L(RH)}$ by step 1. Consequently the resulting equality is\n$$\\widetilde b\\langle +_{LF}\\langle p_1,p_2\\rangle,p_3\\rangle=+_{L(RH)}\\langle\\widetilde b\\langle p_1,p_3\\rangle,\\widetilde b\\langle p_2,p_3\\rangle\\rangle.$$\nFor the other variable apply $L$ to the analogous equality on $F\\times G\\times G$,\n$$b\\langle p_1,+_G\\langle p_2,p_3\\rangle\\rangle=+_{RH}\\langle b\\langle p_1,p_2\\rangle,b\\langle p_1,p_3\\rangle\\rangle.$$\nUsing $L(+_G)\\lambda_{G,G}^{-1}=+_{LG}$ and the pairing identity just proved gives explicitly\n$$\\widetilde b\\langle p_1,+_{LG}\\langle p_2,p_3\\rangle\\rangle=+_{L(RH)}\\langle\\widetilde b\\langle p_1,p_2\\rangle,\\widetilde b\\langle p_1,p_3\\rangle\\rangle,$$\nnow on $LF\\times LG\\times LG$. These equalities of sheaf maps give the claimed identities on every object's sections. Zero and negative identities again follow by cancellation. This calculation uses only finite products and the structure-map formulas of step 1.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: inverse direction: explicitly transport the two additivity equations by the finite-product comparison."
-   }
+   "text": "To prove beta additive in the first variable, compare the natural three-input maps beta(x1+x2,y) and beta(x1,y)+beta(x2,y). Their restrictions to unit tuples agree because the units are additive and b is additive. Uniqueness for the family (F,F,G) makes them equal. Repeat with (F,G,G) for the second variable. This gives a bilinear inverse and hence surjectivity. All tuple transports and additivity equations are proved explicitly in Lean.",
+   "uses": [
+    "lem-sfb-site-inverse-image-multimap-universal"
+   ],
+   "elementary": false
   },
   {
-   "text": "The counit $\\varepsilon_H:L(RH)\\to H$ is an abelian-sheaf morphism by the lifted-adjunction statement used in step 1. Postcomposing either additivity equality of step 4 with $\\varepsilon_H$, and using $\\varepsilon_H+_{L(RH)}=+_H(\\varepsilon_H\\times\\varepsilon_H)$, proves that $J(b)=\\varepsilon_H\\widetilde b$ is separately additive. Thus the mutually inverse bijections $\\Phi,J$ of step 2 both restrict to the subsets of bilinear maps. In particular their restrictions are inverse: if $t=\\beta\\lambda_{F,G}$, then $\\varepsilon_H LR(t)L\\eta_{F\\times G}=t\\varepsilon_{L(F\\times G)}L\\eta_{F\\times G}=t$; and for $b$ the other composite is $R\\varepsilon_H RL(b)\\eta_{F\\times G}=R\\varepsilon_H\\eta_{RH}b=b$. These are counit naturality and the two adjunction triangle identities, with the $\\lambda$ and $\\lambda^{-1}$ factors cancelling.",
+   "text": "The stated two-unit normalization holds by definition of the transpose. Evaluate the assumed sectionwise naturality equation at unit sections, and use unit naturality for the two source morphisms, to obtain the required naturality in both inputs and the output.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: counit additivity and the two inverse identities."
-   }
-  },
-  {
-   "text": "Finally let $a:F'\\to F$, $c:G'\\to G$ and $h:H\\to H'$ be abelian-sheaf morphisms. Functoriality of $R$, the componentwise description of $\\rho$, and unit naturality $RL(a)\\eta_{F'}=\\eta_F a$ and $RL(c)\\eta_{G'}=\\eta_G c$ give\n$$\\Phi_{F',G',H'}\\bigl(h\\beta(La\\times Lc)\\bigr)=R(h)\\Phi_{F,G,H}(\\beta)(a\\times c).$$\nAll these compositions preserve separate additivity because $a,c,h$ and their induced images are additive. This is precisely naturality, contravariantly in $F,G$ and covariantly in $H$. Together with steps 2 and 5 it proves the required natural bijection with its specified two-unit formula.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, third equality: naturality in the two inputs and the output, directly from the specified formula."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-size-convention",
-  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+  "lem-sfb-site-inverse-image-multimap-universal"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, lemma-tensor-product-pullback, third equality; the source calls this straightforward. Steps 2–6 supply the missing product-comparison and additivity argument, using Sites Proposition 00YV(2)."
+  "place": "Tag 03EL, third equality. The finite-product underlying-set adjunction is factored into the fully proved multimap universal property; additivity is reflected using its three-input uniqueness."
  },
  "mathlib_searches": [
   {
@@ -252,9 +215,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -298,5 +259,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261019T002509-L-2142139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

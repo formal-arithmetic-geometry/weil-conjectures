@@ -1,0 +1,132 @@
+{
+ "id": "lem-sfb-site-inverse-image-multimap-universal",
+ "kind": "statement",
+ "title": "Universality of inverse-image units for natural maps with finitely many inputs",
+ "statement": "Let C,D be sites as in [def-weil-pbc-sites-and-cohomology], with all sheaf values in the common universe of [def-weil-size-convention]. Let u:C → D be continuous, let its set-valued inverse image preserve finite limits, and use the canonical abelian inverse-image/direct-image adjunction. For a finite family (F_i) of abelian sheaves on C, an abelian sheaf H on D, and a natural map b from the sectionwise product of the F_i to u_*H (without additivity requirements), there is a unique natural map beta from the sectionwise product of the u^*F_i to H such that beta at u(U), evaluated on the tuple of unit images of x_i, equals b at U evaluated on x_i, for every U and every tuple x_i. The empty finite family is included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR and Proposition 00YV(2), compatible underlying-set adjunction; finite-product form used in sites-modules.tex Tag 03EL, third equality of lemma-tensor-product-pullback."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Identify abelian sheaves on both sites with internal commutative group objects using [lem-weil-pbc-sheaf-algebraic-structures-abelian-component]. Restriction computes products sectionwise, so its canonical product comparisons are identities. The sectionwise operation formulas identify its commutative-group lift with abelian direct image.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the set-valued adjunction by [lem-weil-pbc-adjunction-lifts-abelian-group-objects]. Restrict the lifted adjunction through the fully faithful equivalences, and identify its left adjoint with the chosen abelian inverse image by uniqueness of left adjoints. Naturality of the forgetful identifications and the hom-equivalence formula show that the resulting comparison intertwines the actual abelian unit with the set unit. Thus precomposition with the forgotten abelian unit is bijective on all underlying sheaf maps, with arbitrary set-valued target.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite family of abelian sheaves form its categorical product. Evaluation followed by forgetting preserves finite limits; the canonical product comparison and the product in Type give an equivalence between product sections and tuples of sections. Naturality of the projections gives its compatibility with restrictions. Consequently natural section multimaps are equivalent to underlying-set sheaf morphisms from this product.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Abelian direct image is additive sectionwise. Its left adjoint is additive by the adjunction, hence preserves finite products. Precompose with this product comparison, apply the one-input underlying-set hom bijection of step 2 to the product, and use step 3 in both directions. This composite is bijective. The unit naturality equation for each product projection shows that its value on a tuple is evaluation on the tuple of individual unit images. Apply surjectivity for existence and injectivity for uniqueness. This also covers zero inputs, since all product arguments include the terminal object.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
+  "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV(2); underlying-set adjunction, uniqueness of left adjoints, and finite products. The normalized comparison proof adapts the existing etaleInverseImageAbelianLift_hom argument to arbitrary sites and independent universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving inverse image of sheaves commutes with forgetting abelian group objects and its unit is universal for underlying sheaf maps",
+   "results": "Eight hits, including Sheaf.instHasFiniteProducts, Sheaf.cartesianMonoidalCategory, and sheafToPresheaf_μ. No normalized finite-input universal property.",
+   "date": "2026-10-19",
+   "verdict": "Use finite-product and group-object APIs; no exact existing theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "Eleven hits including piComparison, piComparison_comp_π, PreservesProduct.iso, inv_piComparison_comp_map_π.",
+   "date": "2026-10-19",
+   "verdict": "The product comparison API supplies the projection equations used in the proof, not the sheaf unit universal property."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback|multimap.*adjunction",
+   "results": "One Mathlib hit in Topology/Sheaves/Functors.lean:155. Local library search also found SitePullbackAbelianUnderlying and EtaleInverseImageAbelianLiftHom.",
+   "date": "2026-10-19",
+   "verdict": "The site comparison has smaller universes and no unit equation; adapt the proved etale hom comparison instead. The finite-input result is new and fully proved."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of an abelian sheaf has the same underlying sheaf of sets as the set inverse image, and the adjunction units agree",
+   "results": "Eight hits: SheafOfModules.PullbackConstruction.adjunction, pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, Sheaf.adjunction_unit_app_val, isIso_sheafificationAdjunction_counit, toSheafification, Equivalence.sheafCongr.inverse_map_val_app, SheafOfModules.pullbackIso, instIsIsoPullbackObjUnitToUnitOfFinal.",
+   "date": "2026-10-19",
+   "verdict": "These supply module or sheafification adjunctions, not the underlying abelian unit comparison for independent site universes. Use Adjunction.mapCommGrp and uniqueness of left adjoints as proved in the new module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InverseImageBilinearAdjunction",
+  "date": "2026-10-19",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-site-inverse-image-bilinear-adjunction",
+   "place": "Underlying-set adjunction and finite-product part of steps 1, 2 and 4.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-pullback-from-point",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.InverseImageUnderlyingAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/Sites/InverseImageUnderlyingAdjunction.lean",
+  "declaration": "CategoryTheory.site_inverse_image_multimap_universal",
+  "declarations": [
+   "CategoryTheory.SiteSectionMultimap",
+   "CategoryTheory.site_inverse_image_multimap_universal"
+  ],
+  "statement": "theorem site_inverse_image_multimap_universal\n    {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D) (u : C ⥤ D)\n    [u.IsContinuous J K]\n    [(u.sheafPushforwardContinuous AddCommGrpCat.{max u₁ v₁ u₂ v₂ w} J K).IsRightAdjoint]\n    [PreservesFiniteLimits (u.sheafPullback (Type (max u₁ v₁ u₂ v₂ w)) J K)]\n    {n : ℕ} (F : Fin n → Sheaf J AddCommGrpCat.{max u₁ v₁ u₂ v₂ w})\n    (H : Sheaf K AddCommGrpCat.{max u₁ v₁ u₂ v₂ w})\n    (b : SiteSectionMultimap F\n      ((u.sheafPushforwardContinuous AddCommGrpCat.{max u₁ v₁ u₂ v₂ w} J K).obj H)) :\n    ∃! β : SiteSectionMultimap\n        (fun i ↦ (u.sheafPullback AddCommGrpCat.{max u₁ v₁ u₂ v₂ w} J K).obj (F i)) H,\n      ∀ (U : C) (x : ∀ i, (F i).obj.obj (Opposite.op U)),\n        β.app (u.obj U) (fun i ↦\n          (((u.sheafAdjunctionContinuous AddCommGrpCat.{max u₁ v₁ u₂ v₂ w} J K).unit.app\n            (F i)).hom.app (Opposite.op U)) (x i)) = b.app U x",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261019T002509-L-2142139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261019T002509-L-2142139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
