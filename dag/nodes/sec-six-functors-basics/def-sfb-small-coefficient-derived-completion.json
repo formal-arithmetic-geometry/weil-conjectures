@@ -15,9 +15,45 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
   "place": "canonical reduction comparison and normalized towers, using finite-dimensional smallness in the integral-heart coefficient setting"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The pulled-back regular module has definitionally the same action as the regular module of the pulled-back ring, giving pullback_regular by reflexivity. For each finite quotient, the quotient map from the integers is an open quotient map; its composite with the consecutive transition is the smaller quotient map. The quotient universal property therefore gives continuous_transition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The composite of the coefficient reduction with the consecutive quotient transition equals the smaller reduction pointwise on continuous functions. Ring morphisms preserve multiplication, so the reduction and transition maps commute with the integral scalar actions. This proves coefficient_linearity and, after applying inverse image, quotient_transition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In roosD_sq project to the two biproduct factors. The first coordinate vanishes by d squared equals zero. In the second coordinate expand both subtractions, use that oneSubShift is a chain map and d squared equals zero, and identify the two surviving terms by transport along the degree equality. Their difference is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The quotient units are compatible with consecutive transitions because the reductions factor through the quotients. Tensoring and applying the cochain-complex functor preserves this identity. Product extensionality then gives unitProduct composed with oneSubShift equals zero. Project the augmentation chain-map equation to its two coordinates: the first is the chain-map equation for unitProduct, and the second is the just-proved zero composite. This proves augmentation_comm.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the derived extension/termwise restriction adjunction [def-sfb-derived-extend-levelwise-adjunction], the hom equivalence sends a morphism f to unit followed by restriction of f (Mathlib Adjunction.homEquiv_unit). By the definition of derivedStep, its inverse image under this equivalence is exactly the component of reductionComp. That component is invertible because reductionComp is a natural isomorphism. Thus every consecutive comparison is invertible, proving derivedReduction_isNormalized.",
+   "uses": [
+    "def-sfb-derived-extend-levelwise-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-extend-levelwise-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A9",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-pe-derived-completion/_section.md",
+  "place": "canonical reduction comparison and normalized towers; explicit Lean calculations for the small coefficient presentation"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -164,5 +200,15 @@
   "group": "NA",
   "result": "fix",
   "note": "Item statement correct clause by clause: recorded completed coefficients; IsConstantModelConstructible C; any stratification and stratum a; pro-etale cover with a finite N per chart via integralHeartRealization; dual = derivedHom(K, unit); ExactPairing gives ev/coev and both triangles; torAmplitudeIn [-1,0] and [0,1] over all module sheaves; residue example finiteModule S 0 (= O/pi) dual is iso to itself shifted by -1, i.e. degree 1. No extra hypotheses, universes independent, docstrings and verbatim statement OK. Compile with live dep texts in the overlay: rc 0, item 3.7 s (deps 53.0 s and 7.5 s); compiling the item alone fails only on the missing published IntegralHeartLocalModel.olean. Mechanical fault: the delivery re-pushes landed IntegralHeartLocalModel and SmallCoefficientDerivedCompletion (live text plus a trailing blank line) and rewrites by/note of records det-lem-int-integral-heart-local-model and def-sfb-small-coefficient-derived-completion from Q06 to NA (no declaration change). FIX: fixes/ holds the exact live texts of both modules (sha256 = live). Maintainer: --revert-nodes for those two records to keep the live attribution."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261019T002502-L-2140297",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

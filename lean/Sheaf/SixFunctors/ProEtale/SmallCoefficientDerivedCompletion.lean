@@ -15,24 +15,6 @@ public import Mathlib.RingTheory.Finiteness.Small
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import Sheaf.CategoryTheory.SheafTensorStructure
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Mathlib.CategoryTheory.Monoidal.Mod
-import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
-import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
-import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Paper.ProfinitePointPullback
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 
 /-!
 # Derived completion with an independent finite-extension universe
@@ -153,7 +135,7 @@ theorem pullback_regular (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) =
       Mod.regular (condensedRingObj (integerRing l E) X) := by
-  sorry
+  rfl
 
 /-- The normalized regular-module comparison.
 Source: tensor unit normalization (blueprint: def-sfb-small-coefficient-derived-completion). -/
@@ -210,7 +192,9 @@ so the quotient universal property proves continuity. -/
 theorem continuous_transition (n : ℕ) :
     @Continuous _ _ (finiteTopology l E (n + 2)) (finiteTopology l E (n + 1))
       (Padic.coefficientExtensionTransition l (Coefficients.field l E) (n + 1)) := by
-  sorry
+  exact (QuotientRing.isOpenQuotientMap_mk
+    (Padic.coefficientExtensionIdeal l (Coefficients.field l E) (n + 2))).isQuotientMap
+      |>.continuous_iff.mpr continuous_quot_mk
 
 /-- Continuous postcomposition with the specified quotient transition.
 Source: blueprint, canonical transitions (blueprint: def-sfb-small-coefficient-derived-completion).
@@ -240,6 +224,12 @@ Source: blueprint, canonical transitions (blueprint: def-sfb-small-coefficient-d
 abbrev transition (X : Scheme.{u}) (n : ℕ) : finiteRing l E X (n + 1) ⟶
     finiteRing l E X n := (upperStarFromPoint X).map (transitionRing l E n)
 
+private theorem reduction_transition (n : ℕ) :
+    Coefficients.reductionRing.{u} l E (n + 2) ≫ transitionRing l E n =
+      Coefficients.reductionRing.{u} l E (n + 1) := by
+  ext S x
+  rfl
+
 /-- Quotient and transition maps preserve the scalar action on the regular module.
 Source: blueprint, construction of the reduction cone
 (blueprint: def-sfb-small-coefficient-derived-completion).
@@ -255,7 +245,19 @@ theorem coefficient_linearity :
         transitionRing l E n =
       Coefficients.integerRing.{u} l E ◁ transitionRing l E n ≫
         Mod.act (Coefficients.quotientModule.{u} l E (n + 1)).X) := by
-  sorry
+  constructor
+  · intro n
+    change μ[Coefficients.integerRing.{u} l E] ≫ _ =
+      _ ≫ Coefficients.reductionRing.{u} l E (n + 1) ▷ _ ≫
+        μ[Coefficients.quotientRing.{u} l E (n + 1)]
+    rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc]
+  · intro n
+    change (Coefficients.reductionRing.{u} l E (n + 2) ▷ _ ≫
+      μ[Coefficients.quotientRing.{u} l E (n + 2)]) ≫ _ =
+      _ ≫ Coefficients.reductionRing.{u} l E (n + 1) ▷ _ ≫
+        μ[Coefficients.quotientRing.{u} l E (n + 1)]
+    rw [Category.assoc, IsMonHom.mul_hom, MonoidalCategory.tensorHom_def, Category.assoc,
+      whisker_exchange_assoc, ← comp_whiskerRight_assoc, reduction_transition]
 
 /-- The actual unit quotient map as an integral-module morphism on the point.
 Source: blueprint, unit of the reduction cone (blueprint:
@@ -284,6 +286,13 @@ def finiteUnit (X : Scheme.{u}) (n : ℕ) : 𝟙_ (Modules l E X) ⟶ finiteModu
   (Coefficients.regularPullbackIso.{u} l E X).inv ≫
     (Coefficients.pullback.{u} l E X).map (quotientUnit l E n)
 
+private theorem finiteUnit_step (X : Scheme.{u}) (n : ℕ) :
+    finiteUnit l E X (n + 1) ≫
+      (Coefficients.pullback.{u} l E X).map (quotientStep l E n) = finiteUnit l E X n := by
+  unfold finiteUnit
+  rw [Category.assoc, ← Functor.map_comp]
+  congr 1
+
 /-- Ordinary tensor reduction of a complex, used only on K-flat representatives.
 Source: blueprint, K-flat construction of reductions
 (blueprint: def-sfb-small-coefficient-derived-completion). -/
@@ -308,6 +317,16 @@ def levelUnit (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) (n : ℕ
   (NatTrans.mapHomologicalComplex
     ((rightUnitorNatIso (Modules l E X)).inv ≫
       (tensoringRight (Modules l E X)).map (finiteUnit l E X n)) (.up ℤ)).app P
+
+private theorem levelUnit_step (X : Scheme.{u})
+    (P : CochainComplex (Modules l E X) ℤ) (n : ℕ) :
+    levelUnit l E X P (n + 1) ≫ levelStep l E X P n = levelUnit l E X P n := by
+  apply HomologicalComplex.Hom.ext
+  funext i
+  change ((ρ_ (P.X i)).inv ≫ P.X i ◁ finiteUnit l E X (n + 1)) ≫
+    P.X i ◁ (Coefficients.pullback.{u} l E X).map (quotientStep l E n) =
+      (ρ_ (P.X i)).inv ≫ P.X i ◁ finiteUnit l E X n
+  rw [Category.assoc, ← MonoidalCategory.whiskerLeft_comp, finiteUnit_step]
 
 /-- The termwise product of the strict reduction tower of P.
 Source: blueprint, Roos model (blueprint: def-sfb-small-coefficient-derived-completion). -/
@@ -343,7 +362,22 @@ theorem roosD_sq (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
     (P : CochainComplex (SmallAdicCompletion.Modules l E X) ℤ) (i : ℤ) :
     roosD l E X P i ≫ roosD l E X P (i + 1) = 0 := by
-  sorry
+  dsimp only [roosD, roosX]
+  apply biprod.hom_ext
+  · simp [Category.assoc]
+  · simp only [Category.assoc, biprod.lift_snd, Preadditive.comp_sub,
+      biprod.lift_fst_assoc, biprod.lift_snd_assoc, Preadditive.sub_comp,
+      add_sub_cancel_right, ComplexShape.up_Rel, HomologicalComplex.eqToHom_comp_d,
+      HomologicalComplex.Hom.comm, HomologicalComplex.d_comp_d, comp_zero, sub_zero,
+      zero_comp]
+    have transport (j k : ℤ) (h : j = k) :
+        (product l E X P).d i j ≫ (oneSubShift l E X P).f j ≫
+            eqToHom (congrArg (product l E X P).X h) =
+          (product l E X P).d i k ≫ (oneSubShift l E X P).f k := by
+      subst k
+      simp
+    rw [transport _ _ (by omega)]
+    exact sub_self _
 
 /-- The explicit homotopy inverse limit of the strict derived reductions of a K-flat P.
 Source: Stacks 08TC, blueprint Roos model (blueprint: def-sfb-small-coefficient-derived-completion).
@@ -358,6 +392,16 @@ def-sfb-small-coefficient-derived-completion). -/
 def unitProduct (X : Scheme.{u}) (P : CochainComplex (Modules l E X) ℤ) :
     P ⟶ product l E X P := Pi.lift (levelUnit l E X P)
 
+private theorem unitProduct_oneSubShift (X : Scheme.{u})
+    (P : CochainComplex (Modules l E X) ℤ) :
+    unitProduct l E X P ≫ oneSubShift l E X P = 0 := by
+  unfold oneSubShift towerTransitionEndomorphism
+  rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero]
+  apply Pi.hom_ext
+  intro n
+  simp only [Category.assoc, towerProductShift, unitProduct, Pi.lift_π, Pi.lift_π_assoc]
+  exact (levelUnit_step l E X P n).symm
+
 /-- The map with coordinates (unit,0) is a chain map.
 Source: blueprint, canonical reduction comparison (blueprint:
 def-sfb-small-coefficient-derived-completion).
@@ -368,7 +412,15 @@ theorem augmentation_comm (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]
     (P : CochainComplex (SmallAdicCompletion.Modules l E X) ℤ) (i : ℤ) :
     biprod.lift ((unitProduct l E X P).f i) 0 ≫ (roos l E X P).d i (i + 1) =
       P.d i (i + 1) ≫ biprod.lift ((unitProduct l E X P).f (i + 1)) 0 := by
-  sorry
+  dsimp only [roos]
+  rw [CochainComplex.of_d]
+  dsimp only [roosD]
+  apply biprod.hom_ext
+  · simp [Category.assoc]
+  · have h := congrArg (fun f ↦ f.f i) (unitProduct_oneSubShift l E X P)
+    simpa [Category.assoc, Preadditive.comp_sub] using
+      congrArg (fun f ↦ f ≫
+        eqToHom (congrArg (product l E X P).X (Int.add_sub_cancel i 1).symm)) h
 
 /-- The canonical completion comparison, with the specified zero shifted-product component.
 Source: blueprint, canonical reduction comparison (blueprint:
@@ -410,7 +462,8 @@ This identity holds pointwise on continuous functions, and inverse image preserv
 theorem quotient_transition (l : ℕ) [Fact l.Prime] (E : Type v) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (n : ℕ) :
     quotient l E X (n + 1) ≫ transition l E X n = quotient l E X n := by
-  sorry
+  rw [quotient, transition, ← Functor.map_comp]
+  exact congrArg (upperStarFromPoint X).map (reduction_transition l E n)
 
 /-- The derived category over the positive finite coefficient level n+1.
 Source: blueprint, normalized complexes (blueprint: def-sfb-small-coefficient-derived-completion).
@@ -481,6 +534,13 @@ def IsNormalized (M : ∀ n : ℕ, FiniteDerived l E X n)
     (((Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n)).homEquiv
       (M (n + 1)) (M n)).symm (t n))
 
+private theorem isIso_mate_unit {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {A : C} {B : D}
+    (f : F.obj A ⟶ B) [IsIso f] :
+    IsIso ((adj.homEquiv A B).symm (adj.unit.app A ≫ G.map f)) := by
+  rw [← adj.homEquiv_unit, Equiv.symm_apply_apply]
+  infer_instance
+
 /-- The derived reduction tower is normalized with its specified transitions.
 Source: blueprint, derived reduction identities (blueprint:
 def-sfb-small-coefficient-derived-completion).
@@ -497,6 +557,9 @@ theorem derivedReduction_isNormalized (l : ℕ) [Fact l.Prime] (E : Type v) [Fie
     (K : DerivedCategory (SmallAdicCompletion.Modules l E X)) :
     IsNormalized l E X (fun n ↦ (derivedReduction l E X n).obj K)
       (derivedStep l E X K) := by
-  sorry
+  intro n
+  exact isIso_mate_unit
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n))
+    ((reductionComp l E X n).hom.app K)
 
 end AlgebraicGeometry.ProEtale.SmallAdicCompletion
