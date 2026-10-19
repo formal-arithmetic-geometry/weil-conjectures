@@ -80,6 +80,13 @@ namespace WeilConjectures
 -- Residue fields only occur in hypotheses; avoid unfolding them during instance search.
 attribute [local irreducible] Scheme.residueField
 
+private theorem existsUnique_iso_of_eq {C : Type*} [Category* C]
+    {A B A' B' : C} (hA : A = A') (hB : B = B') (e : A' ≅ B') :
+    ∃! d : A ≅ B, HEq d.hom e.hom := by
+  subst A'
+  subst B'
+  exact ⟨e, HEq.rfl, fun d hd ↦ Iso.ext (eq_of_heq hd)⟩
+
 section HigherCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -115,7 +122,19 @@ theorem pullbackTensorRationalComposition_existsUnique {X Y Z : Scheme.{u}}
         _ X Y f hX hY)).obj M),
       HEq e.hom ((sfRationalConstructibleLocalization l E Z).map
         (((@pullbackTensorIntegralComposition l _ E _ _ _ X Y Z f h hX hY hZ)).hom.app M.obj)) := by
-  sorry
+  apply existsUnique_iso_of_eq
+    ((rationalDerivedPullback_existsUnique l E (h ≫ f)).exists.choose_spec.2.1 M)
+    ?_
+    ((sfRationalConstructibleLocalization l E Z).mapIso
+      ((pullbackTensorIntegralComposition l E f h).app M.obj))
+  have hf (K) : (rationalDerivedPullback l E f).obj K =
+      ⟨(constructibleIntegralPullback l E f).obj K.obj⟩ :=
+    (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.2.1 K
+  have hh (K) : (rationalDerivedPullback l E h).obj K =
+      ⟨(constructibleIntegralPullback l E h).obj K.obj⟩ :=
+    (rationalDerivedPullback_existsUnique l E h).exists.choose_spec.2.1 K
+  rw [hh, hf]
+  rfl
 
 /-- Rationalization of the finite-reduction-normalized integral composition.
 Source: Stacks 07A4, 0941; blueprint coefficient conventions
@@ -350,7 +369,16 @@ theorem pullbackTensorRationalAssociator_existsUnique (W : Scheme.{u})
         hW)).obj (N,P)),
       HEq e.hom ((sfRationalConstructibleLocalization l E W).map
         ((@pullbackTensorIntegralAssociator l _ E _ _ _ W hW) M.obj N.obj P.obj).hom) := by
-  sorry
+  have hT (MN) : (rationalDerivedTensor l E W).obj MN =
+      ⟨(constructibleIntegralTensor l E W).obj (MN.1.obj,MN.2.obj)⟩ :=
+    (rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 MN
+  apply existsUnique_iso_of_eq ?_ ?_
+    ((sfRationalConstructibleLocalization l E W).mapIso
+      (pullbackTensorIntegralAssociator l E W M.obj N.obj P.obj))
+  · rw [hT, hT]
+    rfl
+  · rw [hT, hT]
+    rfl
 
 /-- The localized integral associator.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
@@ -404,7 +432,11 @@ theorem pullbackTensorRationalBraiding_existsUnique (W : Scheme.{u})
       ((@rationalDerivedTensor l _ E _ _ _ W hW)).obj (N,M),
       HEq e.hom ((sfRationalConstructibleLocalization l E W).map
         ((@pullbackTensorIntegralBraiding l _ E _ _ _ W hW) M.obj N.obj).hom) := by
-  sorry
+  apply existsUnique_iso_of_eq
+    ((rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 (M,N))
+    ((rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1 (N,M))
+    ((sfRationalConstructibleLocalization l E W).mapIso
+      (pullbackTensorIntegralBraiding l E W M.obj N.obj))
 
 /-- The localized integral braiding.
 Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
@@ -608,7 +640,11 @@ theorem pullbackTensorRationalLeftUnitor_existsUnique (W : Scheme.{u})
       W hW),M) ≅ M,
       HEq e.hom ((sfRationalConstructibleLocalization l E W).map
         ((@pullbackTensorIntegralLeftUnitor l _ E _ _ _ W hW) M.obj).hom) := by
-  sorry
+  apply existsUnique_iso_of_eq
+    ((rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1
+      (pullbackTensorRationalUnit l E W,M)) rfl
+    ((sfRationalConstructibleLocalization l E W).mapIso
+      (pullbackTensorIntegralLeftUnitor l E W M.obj))
 
 /-- The localized completed left unitor.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
@@ -658,7 +694,11 @@ theorem pullbackTensorRationalRightUnitor_existsUnique (W : Scheme.{u})
       _ W hW)) ≅ M,
       HEq e.hom ((sfRationalConstructibleLocalization l E W).map
         ((@pullbackTensorIntegralRightUnitor l _ E _ _ _ W hW) M.obj).hom) := by
-  sorry
+  apply existsUnique_iso_of_eq
+    ((rationalDerivedTensor_existsUnique l E W).exists.choose_spec.1
+      (M,pullbackTensorRationalUnit l E W)) rfl
+    ((sfRationalConstructibleLocalization l E W).mapIso
+      (pullbackTensorIntegralRightUnitor l E W M.obj))
 
 /-- The localized completed right unitor.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
