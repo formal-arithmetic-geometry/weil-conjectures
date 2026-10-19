@@ -5,21 +5,13 @@ Authors: SHEAF group NU
 -/
 module
 
-public import Sheaf.Algebra.Homology.KFlat
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-public import Sheaf.CategoryTheory.AlgebraicInverseImage
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Sheaf.Paper.RingedTopoiTensorComparisonData
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-public import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
-import Mathlib.CategoryTheory.Limits.Types.Products
-import Mathlib.CategoryTheory.Adjunction.FullyFaithful
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
-import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
+/-! # Uniqueness of the normalized tensor-pullback unit
+
+Source: Stacks Project, Modules on Sites, Tag 03EL.
+(blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback-unit-uniqueness).
+-/
 
 @[expose] public section
 universe u v u' v'
@@ -38,6 +30,8 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
       L.obj M = changeOfRings c (I.modules.obj M))
 open scoped ChangeOfRings
 
+-- The hmap parameter is retained for compatibility; uniqueness is purely monoidal.
+set_option linter.unusedVariables false in
 /--
 The proof cancels the tensor comparison and uses the tensor universal property to identify maps.
 Source: Stacks Project, Modules on Sites, Tag 03EL.
@@ -68,6 +62,23 @@ theorem canonicalRingedTensorComparison_unit_unique
           (monoidalCategory S).tensorHom (𝟙 (L.obj M)) j'.hom ≫
             ((monoidalCategory S).rightUnitor (L.obj M)).hom =
           L.map (((monoidalCategory R).rightUnitor M).hom) ) → j = j' := by
-  sorry
+  let := monoidalCategory S
+  intro j j' hj hj'
+  have h := (hj (SheafOfModules.unit
+    ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).trans
+      (hj' (SheafOfModules.unit
+        ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).symm
+  rw [cancel_epi, cancel_mono] at h
+  apply Iso.ext
+  apply (tensor_left_iff j.hom j'.hom).mp
+  change (𝟙 (SheafOfModules.unit
+    ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ⊗ₘ j.hom) =
+    (𝟙 (SheafOfModules.unit
+      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ⊗ₘ j'.hom)
+  have h' := congrArg
+    (fun f ↦ (j.inv ⊗ₘ 𝟙 _) ≫ f ≫ (j.hom ⊗ₘ 𝟙 _)) h
+  simpa only [tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id,
+    j.inv_hom_id] using h'
 
 end SheafOfModules
+
