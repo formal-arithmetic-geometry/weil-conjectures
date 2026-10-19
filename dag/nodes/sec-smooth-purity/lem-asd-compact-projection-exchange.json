@@ -26,101 +26,38 @@
  ],
  "proof": [
   {
-   "text": "Fix the compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$ used in the statement and its specified base change $(j',p')$, and write $a:\\overline X'\\to\\overline X$ and $u=v_X$. All tensors below are ordinary derived tensors over $A$. First put the coefficient on the right: let $P_f(M,Q):Rf_!M\\otimes Q\\to Rf_!(M\\otimes f^*Q)$ be the composite $Rp_*(\\gamma_{j;M,p^*Q})\\circ\\pi_{p;j_!M,Q}$, where $\\pi$ is the adjunct-of-counit projection and $\\gamma$ is the open tensor comparison. Write $e_E:v^*Rp_*E\\to Rp'_*a^*E$ for proper exchange, and $\\beta_M:a^*j_!M\\to j'_!u^*M$ for open base change. Unfolding the compactification-defined exchange gives $b_M=Rp'_*(\\beta_M)\\circ e_{j_!M}$. These are definitions of the two composites, without asserting invertibility of $e$ or $\\pi$.",
+   "text": "Use the existing upstream projectionMap_rightDerivedLowerShriekBaseChangeMap for the right-coefficient projection map. It carries out the proper/open compactification pasting of old steps 1–5 with the actual chosen-compactification exchange. No new ringed-topos comparison is needed.",
    "uses": [
-    "def-amb-etale-compact-support",
-    "def-kun-projection-formula-map",
-    "sbc-def-base-change-map",
-    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-    "lem-pur-etale-open-derived-tensor"
+    "def-amb-etale-compact-support"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "equation-projection-formula-map and lemma-j-shriek-and-tensor; compactification composite as specified in the item"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the square $(p,p',v,a)$ of the constant-$A$ small etale ringed topoi, with $E=j_!M$ and coefficient $Q$. The structural-ring maps are the canonical identifications of inverse images of the constant ring. Its proper exchange is exactly $e$: the transpose in [sbc-def-base-change-map] is the pulled-back counit preceded by the pullback-square isomorphism, which is also the mate defining $e$ in the cited coherence lemma. If $\\theta:p'^*v^*Q\\xrightarrow{\\sim}a^*p^*Q$ and $d_E=(1\\otimes\\theta^{-1})t_a:a^*(E\\otimes p^*Q)\\xrightarrow{\\sim}a^*E\\otimes p'^*v^*Q$, the cited identity reads\n$$Rp'_*(d_E)\\,e_{E\\otimes p^*Q}\\,v^*(\\pi_{p;E,Q})=\\pi_{p';a^*E,v^*Q}(e_E\\otimes1)t_v.$$\nThe lemma applies to arbitrary unbounded $E,Q$ and to arbitrary commutative ringed squares, so no base-change isomorphism theorem or coefficient restriction is being assumed here.",
+   "text": "Expand the coefficient-first map as source symmetry, right-coefficient projection, and direct image of the target symmetry. Naturality of the compact exchange moves the target symmetry through exchange. Apply lem-asd-derived-pullback-symmetry to g′, and naturality of tensor symmetry at the inverse pullback-square comparison, to obtain the right-coefficient target comparison followed by the final symmetry. Functoriality combines these maps under Rf′!.",
    "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "sbc-def-base-change-map"
+    "lem-asd-derived-pullback-symmetry",
+    "lem-kun-tensor-sym"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, remark-compatible-with-diagram: the proper-factor square"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-asd-open-projection-exchange] to $(j,j',a,u)$, $E=M$ and $N=p^*Q$. Set $O=M\\otimes f^*Q$. Insert $j^*p^*=f^*$ and $j'^*p'^*=f'^*$ in its formula. The pullback-composition/tensor coherence of [lem-kun-derived-pullback-composition-monoidal] identifies its $c_{p^*Q}$, followed by $j'^*(\\theta^{-1})$, with the composite $u^*f^*Q\\cong f'^*v^*Q$. After identifying tensor pullbacks, its conclusion is precisely\n$$\\widetilde\\beta_O\\,a^*(\\gamma_{j;M,p^*Q})=\\gamma_{j';u^*M,p'^*v^*Q}(\\beta_M\\otimes1)d_E,$$\nwhere $\\widetilde\\beta_O$ denotes $\\beta_O$ followed by $j'_!$ of the tensor and square comparisons $u^*O\\cong u^*M\\otimes f'^*v^*Q$. This equation supplies the open factor; it is not inferred just from existence of the two open isomorphisms.",
+   "text": "Substitute the upstream right-coefficient equality. Apply lem-asd-derived-pullback-symmetry to g on Q and Rf!M. Naturality of symmetry at b_M changes b_M tensor identity into identity tensor b_M. Associativity gives exactly the coefficient-first statement.",
    "uses": [
-    "lem-asd-open-projection-exchange",
-    "lem-kun-derived-pullback-composition-monoidal"
+    "lem-asd-derived-pullback-symmetry",
+    "lem-kun-tensor-sym"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor, and Tag 03S6, lemma-shriek-base-change: their open-factor compatibility, extracted as lem-asd-open-projection-exchange"
-   }
-  },
-  {
-   "text": "Naturality of proper exchange at the actual morphism $\\gamma=\\gamma_{j;M,p^*Q}:E\\otimes p^*Q\\to j_!O$ gives\n$$e_{j_!O}\\,v^*Rp_*(\\gamma)=Rp'_*a^*(\\gamma)\\,e_{E\\otimes p^*Q}.$$\nExpand $b_Ov^*P_f$ using step 1, use this naturality equation, and then substitute the open-factor identity of step 3. The resulting composite is\n$$Rp'_*(\\gamma')\\,Rp'_*(\\beta_M\\otimes1)\\,Rp'_*(d_E)\\,e_{E\\otimes p^*Q}\\,v^*(\\pi_p),$$\nwhere $\\gamma'=\\gamma_{j';u^*M,p'^*v^*Q}$ and the target comparison is the one defining $\\widetilde\\beta_O$. This is only functoriality of $Rp'_*$, associativity of composition and naturality of the already cited transformations.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-asd-open-projection-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "remark-compatible-with-diagram: naturality and pasting of the two factor squares"
-   }
-  },
-  {
-   "text": "Replace $Rp'_*(d_E)e_{E\\otimes p^*Q}v^*\\pi_p$ in step 4 by the right side of step 2. Naturality in its first argument of the counit-defined projection of [lem-weil-pbc-ringed-projection-mate-exact], applied to $\\beta_M:a^*E\\to j'_!u^*M$, gives\n$$Rp'_*(\\beta_M\\otimes1)\\,\\pi_{p';a^*E,v^*Q}=\\pi_{p';j'_!u^*M,v^*Q}(Rp'_*(\\beta_M)\\otimes1).$$\nThus the preceding composite becomes $P_{f'}(u^*M,v^*Q)(b_M\\otimes1)t_v$. We have proved the right-coefficient version of the desired equality, with exactly the specified exchange, since $Rp'_*(\\beta_M)e_E=b_M$. Only naturality and substitution in the displayed equations are used in this step.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "equation-projection-formula-map and remark-compatible-with-diagram: final naturality square"
-   }
-  },
-  {
-   "text": "Return to the coefficient-first convention of the item. By [lem-amb-proper-coproducts-projection] its proper map is $Rp_*(\\sigma)\\pi_p\\sigma$, where $\\sigma$ is tensor symmetry. The open map in this convention is likewise $j_!(\\sigma)\\gamma_j\\sigma$. Hence the adjacent two symmetries on $j_!M\\otimes p^*Q$ cancel, and the compactification composite is\n$$\\Pi_{f,Q,M}=Rf_!(\\sigma_{M,f^*Q})\\,P_f(M,Q)\\,\\sigma_{Q,Rf_!M}.$$\nUse naturality of the symmetry [lem-kun-tensor-sym] and of the comparisons already used above to conjugate the equality of step 5 by these symmetries. The canonical pullback/tensor comparison commutes with this swap: on the signed total tensor representatives it leaves bidegree $(r,s)$ and the scalar $(-1)^{rs}$ unchanged. The outside swaps therefore turn $b_M\\otimes1$ into $1\\otimes b_M$ and turn $P_f,P_{f'}$ into $\\Pi_f,\\Pi_{f'}$. This gives exactly the displayed equation of the item, with its stated source and target identifications. The argument uses no boundedness or constructibility and does not invert the proper exchange or proper projection.",
-   "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-tensor-sym",
-    "lem-kun-inverse-image-monoidal",
-    "lem-pur-etale-open-derived-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "ordinary tensor symmetry convention; equation-projection-formula-map and lemma-j-shriek-and-tensor"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
-  "def-kun-projection-formula-map",
-  "sbc-def-base-change-map",
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-asd-open-projection-exchange",
-  "lem-kun-derived-pullback-composition-monoidal",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-amb-proper-coproducts-projection",
-  "lem-kun-tensor-sym",
-  "lem-kun-inverse-image-monoidal"
+  "lem-asd-derived-pullback-symmetry",
+  "lem-kun-tensor-sym"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E48, remark-compatible-with-diagram, combined with the open tensor/base-change factor at Tags 0GL1, 0E8I and 03S6. Explicit pasting argument follows the factorization in the read-only project LowerShriekProjectionBaseChange.lean."
+  "place": "Tag 0E48, remark-compatible-with-diagram; reuse of upstream projectionMap_rightDerivedLowerShriekBaseChangeMap and explicit symmetry conjugation, W4 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -244,15 +181,7 @@
   ]
  },
  "tool_uses": [
-  "sbc-def-base-change-map",
-  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
-  "def-kun-projection-formula-map",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-kun-derived-pullback-composition-monoidal",
-  "lem-kun-tensor-sym",
-  "lem-kun-inverse-image-monoidal",
-  "lem-pur-etale-open-derived-tensor"
+  "lem-kun-tensor-sym"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -285,5 +214,15 @@
   "group": "Q50",
   "result": "fix",
   "note": "The delivered existing:true record projectionMap_rightDerivedLowerShriekBaseChangeMap is proved upstream and its record is verbatim. Its projectionMap and exchange-map construction match the node, its hypotheses are no stronger than the node's, and edge cases (zero ring, empty schemes, unbounded objects) are covered. But it states the right-coefficient square (Rf_!M⊗Q, Ex_!⊗1), which is step 5 of the node's proof. The node states the coefficient-first Π of lem-amb-proper-coproducts-projection with 1⊗b_M (H3). Fix: new module Sheaf.AlgebraicGeometry.CompactProjectionExchange. compactProjectionMapCoeffFirst = σ ≫ projectionMap ≫ Rf_!(σ) using derivedTensorSymmetry. compactProjectionMapCoeffFirst_baseChangeMap states the node's equation with the upstream exchange and identifications; proof is sorry and the docstring carries all six steps. Also a lean-record.json (existing:false, statement verbatim) and the report with an added 'Maintainer review fix' section. nt_compile.py: clean, no errors, all variables bound."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261019T112607-L-3960195",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

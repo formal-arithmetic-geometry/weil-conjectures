@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 
 /-!
 # The canonical symmetry of the etale derived tensor product
@@ -43,11 +44,45 @@ noncomputable def canonicalBraidingNatIso
     [F.IsLocalization W] [W.ContainsIdentities] [F.HasDerivedMonoidalCategory W] :
     bifunctor F W ≅ (bifunctor F W).flip :=
   NatIso.ofComponents (fun K ↦
-    NatIso.ofComponents (fun L ↦ braiding' F W K L)
+    NatIso.ofComponents (fun L ↦
+      { hom := ((braidingNatTrans F W).app L).app K
+        inv := ((braidingInvNatTrans F W).app K).app L
+        hom_inv_id :=
+          congr_app (congr_app (braidingNatTrans_comp_braidingInvNatTrans F W) K) L
+        inv_hom_id :=
+          congr_app (congr_app (braidingInvNatTrans_comp_braidingNatTrans F W) L) K })
       (fun f ↦ braiding_naturality_right F W K f))
     (fun f ↦ NatTrans.ext (funext (fun L ↦ braiding_naturality_left F W f L)))
 
 end CategoryTheory.DerivedMonoidal
+
+namespace DerivedCategory
+
+open MonoidalCategory
+
+variable (C : Type u') [Category.{u + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{u + 1} C] [HasDerivedCategory.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
+  [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+
+/-- The canonical signed symmetry, packaged before specialization to sheaves.
+Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym). -/
+noncomputable def canonicalTensorSymmetry :
+    curriedTensor (DerivedCategory C) ≅ (curriedTensor (DerivedCategory C)).flip :=
+  letI : BraidedCategory (DerivedCategory C) := by
+    first
+    | exact braidedCategory' C
+    | exact braidedCategory C
+  BraidedCategory.curriedBraidingNatIso (DerivedCategory C)
+
+/-- The generic wrapper agrees with the original localization construction.
+Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym). -/
+lemma canonicalTensorSymmetry_eq :
+    canonicalTensorSymmetry C =
+      DerivedMonoidal.canonicalBraidingNatIso Qh (HomotopyCategory.quasiIso C (.up ℤ)) := by
+  rfl
+
+end DerivedCategory
 
 namespace AlgebraicGeometry.Etale
 
@@ -56,7 +91,7 @@ Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym).
 
 Construction: the homotopy-category braiding is the signed swap in bidegree `(p,q)`, with
 sign `(-1)^(p*q)`. Descend that braiding through the K-flat localization using
-`DerivedMonoidal.braiding'`, and assemble its natural isomorphism of curried bifunctors.
+`DerivedMonoidal.braidingNatTrans`, and assemble its natural isomorphism of curried bifunctors.
 The characterization `DerivedMonoidal.braiding_hom_μ` identifies the descended map on K-flat
 representatives with precisely that signed swap. -/
 noncomputable def derivedTensorSymmetry
@@ -64,7 +99,6 @@ noncomputable def derivedTensorSymmetry
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
     [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
     (T : Scheme.{u}) : derivedTensor A T ≅ (derivedTensor A T).flip :=
-  DerivedMonoidal.canonicalBraidingNatIso DerivedCategory.Qh
-    (HomotopyCategory.quasiIso (Sheaf T.smallEtaleTopology A) (ComplexShape.up ℤ))
+  DerivedCategory.canonicalTensorSymmetry (Sheaf T.smallEtaleTopology A)
 
 end AlgebraicGeometry.Etale

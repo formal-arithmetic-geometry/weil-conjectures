@@ -1,0 +1,108 @@
+{
+ "id": "lem-asd-derived-pullback-symmetry",
+ "kind": "statement",
+ "title": "Derived pullback preserves canonical tensor symmetry",
+ "statement": "Let Λ be a commutative ring, g : X → Y a morphism of schemes, and K,M arbitrary objects of the ordinary unbounded derived category of Λ-module sheaves on the small etale site of Y [def-weil-pbc-derived-categories]. Write σ for the canonical signed symmetry [lem-kun-tensor-sym] and t_g for the canonical derived tensor comparison [lem-kun-inverse-image-monoidal]. Then Lg*(σ_{K,M}) followed by t_g(M,K) equals t_g(K,M) followed by σ_{Lg*K,Lg*M}. No boundedness, finiteness, or constructibility hypotheses are imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-kun-tensor-sym",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06YU, symmetry of derived tensor; symmetry-conjugation step 6 of lem-asd-compact-projection-exchange"
+ },
+ "proof": [
+  {
+   "text": "Use DerivedCategory.canonicalTensorSymmetry to package the existing derived braiding before specializing to the sheaf category. Its equality with the original localization construction is reflexive; the generic package selects the named derived braided instance, with the current braidedCategory' name and the prior braidedCategory name as an elaboration fallback for the published build. The localization package spells out the existing braiding isomorphism fields, avoiding dependency on renamed wrapper constants. The upstream leftDerivedUpperStar_map_braiding_hom_δ now specializes directly to the stated equation: its comonoidal delta is leftDerivedUpperStarTensorComparison. No new derived compatibility assumption is needed.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-tensor-sym",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06YU; direct specialization of leftDerivedUpperStar_map_braiding_hom_δ through the generic canonicalTensorSymmetry wrapper, W4 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical signed symmetry of derived tensor commutes with the derived pullback tensor comparison",
+   "results": "pullbackSymmetry; TensorProduct.gradedComm; no etale derived comparison theorem",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A braided monoidal functor preserves braiding, tensor comparison commutes with symmetry",
+   "results": "CategoryTheory.Functor.map_braiding, Functor.Braided.braided, Functor.LaxBraided.braided",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical identities only; construction-specific identification remains."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_rightDerivedLowerShriekBaseChangeMap|leftDerivedUpperStar_map_braiding_hom_δ",
+   "results": "0 hits in Mathlib (the source-library theorem was found by separate local rg).",
+   "date": "2026-10-18",
+   "verdict": "No exact etale derived symmetry comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompactProjectionExchange",
+  "date": "2026-10-18",
+  "group": "W4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-generic-direct-image",
+   "place": "Final paragraph: naturality of internal adjunction; via compact projection/exchange step 6",
+   "via": [
+    "lem-asd-compact-projection-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorSymmetry.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedPullback_tensorSymmetry",
+  "statement": "theorem derivedPullback_tensorSymmetry\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (K M : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    L((g)^*[ModuleCat.{u + 1} Λ]).map\n        (((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) Y).hom.app K).app M) ≫\n      ((leftDerivedUpperStarTensorComparison _ g).app M).app K =\n    ((leftDerivedUpperStarTensorComparison _ g).app K).app M ≫\n      ((derivedTensorSymmetry (ModuleCat.{u + 1} Λ) X).hom.app\n        (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)).app\n          (L((g)^*[ModuleCat.{u + 1} Λ]).obj M)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261019T112607-L-3960195",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261019T112607-L-3960195",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
