@@ -20,13 +20,10 @@ public import Sheaf.Paper.FiniteTorAmplitudeProEtaleModule
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.Paper.IntrinsicRealizationOriginComparison
-import Sheaf.Paper.ProEtaleConstantModuleConstructibility
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.CharP.CharAndCard
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Bounded-below reflection of finite-Tor constructibility
@@ -98,67 +95,6 @@ theorem finiteCoefficient_boundedBelow_ctf_reflection
           (Padic.finite_coefficientExtensionRing l E n hn)) T C ∧
     Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b C := by
-  classical
-  let B := Padic.coefficientExtensionRing l E n
-  have : Finite B := Padic.finite_coefficientExtensionRing l E n hn
-  have : Finite (ULift.{u + 1, u} B) := Finite.of_equiv B Equiv.ulift.symm
-  let ν := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) T
-  let F := ProEtale.finiteCoefficientIntrinsicComparison T B
-  let R := Scheme.proEtaleModuleRestriction T B
-  have : R.PreservesZeroMorphisms := ⟨by intros; rfl⟩
-  let H := DerivedCategory.homologyFunctor
-    (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
-  let H' := DerivedCategory.homologyFunctor
-    (Scheme.proEtaleRingModules T (Scheme.proEtaleConstantRing T B))
-  let K := (ProEtale.finiteCoefficientIntrinsicDerivedComparison T B).obj C
-  obtain ⟨eR⟩ := ProEtale.intrinsicRealization_restriction T B
-  have eH (i : ℤ) : F.obj ((H i).obj C) ≅ (H' i).obj K :=
-    (F.mapDerivedCategoryHomologyFunctorIso i).app C
-  have e (i : ℤ) : ν.obj ((H i).obj C) ≅ R.obj ((H' i).obj K) :=
-    (eR.app (ν.obj ((H i).obj C))).symm ≪≫ R.mapIso (eH i)
-  have hfinite : Set.Finite {i : ℤ | ¬ Limits.IsZero ((H' i).obj K)} :=
-    _hConstructible.1
-  have hzero (i : ℤ) (hi : Limits.IsZero ((H' i).obj K)) :
-      Limits.IsZero ((H i).obj C) := by
-    have hz : Limits.IsZero (ν.obj ((H i).obj C)) := (R.map_isZero hi).of_iso (e i)
-    apply (Limits.IsZero.iff_id_eq_zero _).mpr
-    apply ν.map_injective
-    rw [ν.map_id, ν.map_zero]
-    exact hz.eq_of_src _ _
-  constructor
-  · constructor
-    · intro i
-      have hc := (Scheme.proEtaleModuleRestriction_constructible_iff T B _).mp
-        (_hConstructible.2 i)
-      have hc' := ProEtale.isConstructible_of_iso (e i).symm hc
-      obtain ⟨G, hG, ⟨eG⟩⟩ :=
-        ProEtale.exists_isConstructibleSheaf_iso_comparisonUpperStar_obj
-          (ULift.{u + 1, u} B) hc'
-      have : Scheme.IsConstructibleSheaf G := hG
-      apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
-      exact Scheme.IsConstructibleSheaf.of_iso (ν.preimageIso eG)
-    · obtain ⟨c, hc⟩ := hfinite.bddBelow
-      obtain ⟨d, hd⟩ := hfinite.bddAbove
-      refine ⟨min c d, max c d, le_trans (min_le_left _ _) (le_max_left _ _), ?_⟩
-      intro i hi
-      apply hzero i
-      by_contra hz
-      rcases hi with hi | hi
-      · exact (not_lt_of_ge (le_trans (min_le_left c d) (hc hz))) hi
-      · exact (not_lt_of_ge (le_trans (hd hz) (le_max_right c d))) hi
-  · let : Fintype D.k₀ := Fintype.ofFinite D.k₀
-    have : Fact D.p.Prime := ⟨D.prime⟩
-    have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
-      (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
-    have hunit : IsUnit (l : D.k₀) :=
-      (CharP.cast_ne_zero_of_ne_of_prime D.k₀ (Fact.out : l.Prime) _hlp.symm).isUnit
-    let f := (T ↘ Spec (CommRingCat.of D.k)) ≫
-      Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
-    have hunitT (x : T) : IsUnit (l : T.residueField x) := by
-      simpa only [map_natCast] using hunit.map
-        ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫ f.appTop ≫ T.Γevaluation x).hom
-    let : ∀ x : T, Invertible (l : T.residueField x) := fun x ↦ (hunitT x).invertible
-    exact finiteCoefficient_comparison_reflects_torAmplitude D l _hlp E n hn T a b C
-      _hPlus K _hConstructible _hTor (Iso.refl _)
+  sorry
 
 end AlgebraicGeometry

@@ -10,9 +10,19 @@ public import Sheaf.Paper.ConstructibleCompleteBaseChange
 public import Sheaf.Paper.PbcRationalCategory
 public import Sheaf.Paper.PbcRationalTransport
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import Sheaf.Paper.CompletedOpenExchangeTransport
-import Sheaf.Paper.CompletedExchangeCoherence
-import Sheaf.Paper.PbcActualRingedExchange
+import Sheaf.Paper.CompletedPullback
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.CategoryTheory.ScalarLocalization
+import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
+import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-! # Proper base change over a finite extension
 
@@ -143,116 +153,6 @@ theorem finiteExtension_properBaseChange
         (hLg ⟨((pbcPadicCoefficientDatum l E).push f).obj K.obj.obj, hRf K.obj⟩)
         (hRf' ⟨((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj.obj,
           hLg' K.obj⟩)) := by
-  classical
-  let d := pbcPadicCoefficientDatum l E
-  have hAnn : (l : Padic.coefficientExtensionRing l E 1) = 0 := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-    have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
-        Set (Padic.coefficientExtensionIntegers l E)) =
-        Padic.coefficientExtensionMaximalIdeal l E :=
-      h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
-    change Ideal.Quotient.mk _ (l : Padic.coefficientExtensionIntegers l E) = 0
-    apply Ideal.Quotient.eq_zero_iff_mem.mpr
-    change (l : Padic.coefficientExtensionIntegers l E) ∈
-      Ideal.span {Padic.coefficientExtensionUniformizer l E} ^ 1
-    rw [pow_one, hgen]
-    apply (h.2.1 _).mpr
-    have he := spectralNorm_extends (K := ℚ_[l]) (L := E) (l : ℚ_[l])
-    change spectralNorm ℚ_[l] E (l : E) < 1
-    simpa only [map_natCast] using he.trans_lt (Padic.norm_p_lt_one (p := l))
-  have hId (T : Scheme.{u}) (K : PbcBoundedConstructibleComplete T d) :
-      (d.completedPull (𝟙 T)).obj K.obj ≅ K.obj := by
-    let J : ObjectProperty.FullSubcategory (PbcIsIntrinsicallyComplete T d) := ⟨K.obj, K.property.1⟩
-    exact ((cbcDatumActualStrictTransport d (𝟙 T)).app K.obj).symm ≪≫
-      ((pbcActualCompletedPullback_tower d (𝟙 T)).exists.choose.app J) ≪≫
-      (pbcActualCompletedPullIdIso d T).app J
-  have hIsoX := pbcUniformComplete_isTriangulated X l E _dimX _hlX
-  have hIsoY := pbcUniformComplete_isTriangulated Y l E _dimY _hlY
-  have hIsoX' := pbcUniformComplete_isTriangulated X' l E _dimX' _hlX'
-  have hIsoY' := pbcUniformComplete_isTriangulated Y' l E _dimY' _hlY'
-  have := hIsoX.1
-  have := hIsoY.1
-  have := hIsoX'.1
-  have := hIsoY'.1
-  have := hIsoX.2
-  have := hIsoY.2
-  have := hIsoX'.2
-  have := hIsoY'.2
-  have hFibres' : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
-      (y : Spec (.of Ω) ⟶ Y'),
-      topologicalKrullDim (pullback f' y : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
-    intro Ω _ _ y
-    have hs := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
-    have ht := ((IsPullback.of_hasPullback f' y).flip.paste_vert hs.flip).flip
-    let i := ht.isoPullback
-    rw [IsHomeomorph.topologicalKrullDim_eq _ i.hom.homeomorph.isHomeomorph]
-    exact _hFibres Ω (y ≫ g)
-  have hPush {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]
-      (h : S ⟶ T) [IsProper h]
-      (hdS : ∃ n : ℕ, topologicalKrullDim S ≤ (n : WithBot ℕ∞))
-      (hdT : ∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))
-      (hlS : IsUnit (l : Γ(S, ⊤))) (hlT : IsUnit (l : Γ(T, ⊤)))
-      (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T),
-        topologicalKrullDim (pullback h y : Scheme.{u}) ≤ (e : WithBot ℕ∞))
-      (K : PbcBoundedConstructibleComplete S d) :
-      PbcIsBoundedConstructibleComplete T d ((d.push h).obj K.obj) := by
-    let sqh : ChosenCartesianSquare (𝟙 S) h h (𝟙 T) :=
-      { w := by simp
-        isoPullback := (asIso (pullback.fst h (𝟙 T))).symm
-        hom_fst := by simp
-        hom_snd := by simp }
-    have H := constructibleComplete_properBaseChange l E sqh hdS hdT hdS hdT
-      l (Fact.out : l.Prime).pos hAnn hlS hlT hlS hlT e hf
-    have := H.1
-    have := H.2.1
-    obtain ⟨_, hG, _⟩ := H.2.2
-    have := (pbcUniformComplete_isTriangulated T l E hdT hlT).1
-    exact ObjectProperty.prop_of_iso _ ((d.push h).mapIso (hId S K)) (hG K)
-  have hPull {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]
-      (h : S ⟶ T)
-      (hdS : ∃ n : ℕ, topologicalKrullDim S ≤ (n : WithBot ℕ∞))
-      (hdT : ∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))
-      (hlS : IsUnit (l : Γ(S, ⊤))) (hlT : IsUnit (l : Γ(T, ⊤)))
-      (K : PbcBoundedConstructibleComplete T d) :
-      PbcIsBoundedConstructibleComplete S d ((d.completedPull h).obj K.obj) := by
-    let sqh : ChosenCartesianSquare h (𝟙 S) (𝟙 T) h :=
-      { w := by simp
-        isoPullback := (asIso (pullback.snd (𝟙 T) h)).symm
-        hom_fst := by simp
-        hom_snd := by simp }
-    have hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ T),
-        topologicalKrullDim (pullback (𝟙 T) y : Scheme.{u}) ≤ (0 : WithBot ℕ∞) := by
-      intro Ω _ _ y
-      rw [IsHomeomorph.topologicalKrullDim_eq _
-        (asIso (pullback.snd (𝟙 T) y)).hom.homeomorph.isHomeomorph]
-      exact topologicalKrullDim_zero_of_discreteTopology _
-    have H := constructibleComplete_properBaseChange l E sqh hdT hdT hdS hdS
-      l (Fact.out : l.Prime).pos hAnn hlT hlT hlS hlS 0 hf
-    have := H.1
-    have := H.2.1
-    obtain ⟨hF, _, _⟩ := H.2.2
-    have := (pbcUniformComplete_isTriangulated S l E hdS hlS).1
-    exact ObjectProperty.prop_of_iso _
-      ((d.completedPull h).mapIso ((d.pushId T).app K.obj)) (hF K)
-  let hRf := hPush f _dimX _dimY _hlX _hlY _hFibres
-  let hRf' := hPush f' _dimX' _dimY' _hlX' _hlY' hFibres'
-  let hLg := hPull g _dimY' _dimY _hlY' _hlY
-  let hLg' := hPull g' _dimX' _dimX _hlX' _hlX
-  refine ⟨hRf, hRf', hLg, hLg', ?_⟩
-  intro K
-  have H := constructibleComplete_properBaseChange l E sq _dimX _dimY _dimX' _dimY'
-    l (Fact.out : l.Prime).pos hAnn _hlX _hlY _hlX' _hlY' e _hFibres
-  obtain ⟨hF, hG, sF, sG, _, _, η, _, hη⟩ := H.2.2
-  have hi : IsIso (constructibleCompleteExchangeComponent sq d K.obj.obj) := by
-    rw [← hη K.obj]
-    infer_instance
-  have : IsIso (ObjectProperty.homMk
-      (constructibleCompleteExchangeComponent sq d K.obj.obj)
-      (X := ⟨_, hLg ⟨_, hRf K.obj⟩⟩) (Y := ⟨_, hRf' ⟨_, hLg' K.obj⟩⟩)) := by
-    exact (ObjectProperty.isIso_hom_iff _).mp hi
-  unfold finiteExtensionRationalExchangeComponent
-  infer_instance
+  sorry
 
 end AlgebraicGeometry.Scheme

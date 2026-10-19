@@ -12,7 +12,7 @@ public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 import Sheaf.WeilSheaf.AdicFiniteCoefficientBound
-import WeilConjectures.WeilSheaf.CohomologyGeometricConjugacy
+import Sheaf.WeilSheaf.CohomologyGeometricConjugacy
 import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 

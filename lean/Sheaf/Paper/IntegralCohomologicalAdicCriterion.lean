@@ -11,8 +11,16 @@ public import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
 public import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
-import Sheaf.Paper.IntegralCohomologicalAdicCriterionBridge
-import Sheaf.Paper.IntegralCohomologicalAdicCriterionAdicBridge
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.ConstantModuleSectionProperties
 
 /-!
 # The integral cohomological adic criterion
@@ -106,7 +114,6 @@ theorem integral_cohomological_adic_criterion (l : ℕ) [Fact l.Prime]
         (ProEtale.IntegralConstantCompletion.ideal l E)
         ((DerivedCategory.homologyFunctor _ q).obj K)) ↔
       IsSfbAdicConstructible X (ProEtale.IntegralConstantCompletion.ideal l E) K := by
-  have hbridge := integral_completed_constant_iff_stratified_perfect l E X K
-  exact hbridge.trans (integral_stratified_perfect_iff_adic_constructible l E X K)
+  sorry
 
 end AlgebraicGeometry.Scheme

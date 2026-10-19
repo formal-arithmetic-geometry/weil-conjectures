@@ -1,225 +1,277 @@
 {
- "id": "thm-weil-pbc-finite-extension",
- "blueprint": {
-  "is": "thm-weil-pbc-finite-extension",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Proper base change over a finite extension",
- "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with $A=\\mathcal O_E$, uniformizer $\\varpi$, and $I=(\\varpi)$, using [def-weil-pbc-adic-coefficient-datum]. Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square] of noetherian finite-dimensional schemes $X,Y,X',Y'$ on which $\\ell$ is invertible. Assume $f$ and $f'$ are proper and that the geometric fibers of $f$ have dimension at most some $e\\geq0$, as in [cor-weil-pbc-constructible-complete]. Use the raw rational categories $\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of [def-weil-pbc-rational-category]. Denote by $Rf_*,Rf'_*,Lg^*,Lg'^*$ the rational extensions, as in [prop-weil-pbc-rational-transport], of the integral direct images and completed pullbacks in that corollary. The specified rational exchange is the extension of its completed integral exchange. For every $K\\in\\Dbc(X,E)$ its component is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',E).\n$$\n",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
-  "place": "node thm-weil-pbc-finite-extension, order 1357"
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-cartesian-square",
-  "cor-weil-pbc-constructible-complete",
-  "def-weil-pbc-rational-category",
-  "prop-weil-pbc-rational-transport"
- ],
- "proof": [
-  {
-   "text": "The raw rational category has the same objects as the integral category. The spectral absolute value of the integer l is its p-adic norm, which is less than one. The DVR characterization of the maximal ideal and its chosen uniformizer show that l lies in (varpi); hence l annihilates the first coefficient quotient. Use N = l as the positive annihilator in the integral corollary.",
-   "uses": [
+  "id": "thm-weil-pbc-finite-extension",
+  "blueprint": {
+    "is": "thm-weil-pbc-finite-extension",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Proper base change over a finite extension",
+  "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with $A=\\mathcal O_E$, uniformizer $\\varpi$, and $I=(\\varpi)$, using [def-weil-pbc-adic-coefficient-datum]. Let $\\square=(f,f',g,g',\\alpha)$ be a cartesian square [def-weil-pbc-cartesian-square] of noetherian finite-dimensional schemes $X,Y,X',Y'$ on which $\\ell$ is invertible. Assume $f$ and $f'$ are proper and that the geometric fibers of $f$ have dimension at most some $e\\geq0$, as in [cor-weil-pbc-constructible-complete]. Use the raw rational categories $\\Dbc(T,E)=\\Dbc(T_{\\Proet},A)[1/\\varpi]$ of [def-weil-pbc-rational-category]. Denote by $Rf_*,Rf'_*,Lg^*,Lg'^*$ the rational extensions, as in [prop-weil-pbc-rational-transport], of the integral direct images and completed pullbacks in that corollary. The specified rational exchange is the extension of its completed integral exchange. For every $K\\in\\Dbc(X,E)$ its component is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',E).\n$$\n",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.md",
+    "place": "node thm-weil-pbc-finite-extension, order 1357"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-cartesian-square",
+    "cor-weil-pbc-constructible-complete",
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-rational-transport"
+  ],
+  "proof": [
+    {
+      "text": "By [def-weil-pbc-rational-category], the raw rational category has exactly the objects of the integral category. Write the given $K$ as the rational image of its integral object $K_0$; no existence theorem for lattices is needed. By [def-weil-l-adic-numbers], $|\\ell|_\\ell=\\ell^{-1}<1$. By [def-weil-l-adic-coefficient-extension], the absolute value on $E$ restricts to this absolute value and $\\mathfrak m_E=(\\varpi)$. Consequently $\\ell\\in I$ and $\\ell(A/I)=0$. Thus $N=\\ell$ is a positive annihilator of $A/I$ invertible on all four schemes.",
+      "uses": [
+        "def-weil-pbc-rational-category",
+        "def-weil-l-adic-numbers",
+        "def-weil-l-adic-coefficient-extension"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "Apply [cor-weil-pbc-constructible-complete] to the given square and $K_0$. Its four noetherian finite-dimensional hypotheses, the properness of $f,f'$, and the geometric fiber bound $e$ are hypotheses of the item; its invertible annihilator is provided by step 1. It gives the specified integral natural isomorphism $\\eta: Lg^*_{\\mathrm{comp}}Rf_*\\Rightarrow Rf'_*Lg'^*_{\\mathrm{comp}}$ on the integral constructible categories. In particular both values at $K_0$ lie in the integral category on $Y'$.",
+      "uses": [
+        "cor-weil-pbc-constructible-complete"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "For the auxiliary squares below, identify identity operations first. Ordinary direct image along an identity map is the identity on module sheaves and on complexes, hence its derived functor is naturally the identity. By [def-weil-pbc-completed-pullback], along an identity the coefficient map $c_{\\mathrm{id}}$ is the identity, so completed identity pullback is $\\operatorname{Rlim}$ of the reduction tower $K_\\bullet$, and its comparison $K\\to\\operatorname{Rlim}K_\\bullet$ is the quotient-tower completion unit. Derived completeness in [def-weil-pbc-intrinsic-completion] means that the Koszul unit $\\eta_K$ is invertible. By [lem-weil-pbc-constant-completion-equivalence], for the completed coefficient sheaf the Koszul completion and $\\operatorname{Rlim}_n(K\\otimes^L_{A_T}(P_n)_T)$ are canonically isomorphic respecting the units. Hence the quotient-tower unit is an isomorphism on derived-complete objects, and completed identity pullback is naturally the identity on each integral constructible category. These identifications respect shifts and triangles: for ordinary identity this is termwise equality, and the completion unit is induced by the quotient-tower maps, which commute with the shifts of complexes.",
+      "uses": [
+        "def-weil-pbc-completed-pullback",
+        "def-weil-pbc-intrinsic-completion",
+        "lem-weil-pbc-constant-completion-equivalence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "Check preservation and exactness of the four individual operations, rather than assuming these from preservation by the original composites. For $h=f$ and $h=f'$, apply [cor-weil-pbc-constructible-complete] to the square whose two vertical arrows are $h$ and whose horizontal arrows are identities. After step 3 its triangulated composites are naturally $Rh_*$, giving the required restriction and exactness. The fiber bound for $f'$ is $e$: for a geometric point $y':\\operatorname{Spec}\\Omega\\to Y'$, the chosen cartesian identification [def-weil-pbc-cartesian-square] identifies its fiber with $X\\times_Y\\operatorname{Spec}\\Omega$ for the geometric point $gy'$. For $h=g$ and $h=g'$, use instead the square with vertical identities and both horizontal arrows $h$. The corollary's composites are now naturally $Lh^*_{\\mathrm{comp}}$, so these also restrict and are exact. The vertical identities are proper with geometric fibers of dimension zero. Every auxiliary corner is one of the original schemes, and $N=\\ell$ is still an invertible annihilator. Thus the corollary applies in all four cases.",
+      "uses": [
+        "cor-weil-pbc-constructible-complete",
+        "def-weil-pbc-cartesian-square"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "Check scalar actions in the actual constructions. For $a\\in A$, ordinary module direct image sends multiplication by $a$ to multiplication by its image in the target coefficient action, hence to multiplication by the same constant $a$. In [def-weil-pbc-adic-coefficient-datum] the reduction tensor and its tower maps do so as well: $(au)\\otimes1=a(u\\otimes1)$. In [def-weil-pbc-completed-pullback] the coefficient map is induced by the quotient projections, so it sends every constant $a$ to that same constant; inverse image and the subsequent extension of scalars therefore preserve these scalar maps. Ordinary inverse limit multiplies a compatible family componentwise, so it too preserves scalar maps. All these termwise operations are additive and preserve shifts and cone complexes, since a cone uses just two summands and the given differential. Finally [lem-weil-linear-abelian-derived-category] makes localization of module complexes $A$-linear, so the same scalar equalities hold after passing to the ambient derived categories.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "def-weil-pbc-completed-pullback",
+        "lem-weil-linear-abelian-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "For the left derived reduction and tower-pullback constructions of [def-weil-pbc-adic-coefficient-datum] and [def-weil-pbc-completed-pullback], use their resolving-class comparison from [lem-pur-left-derived-from-kflat-class]. Write it as $\\varepsilon_P:LF(QP)\\xrightarrow{\\sim}F(P)$ for a complex $P$ in the prescribed K-flat class. Naturality at $a\\,\\mathrm{id}_P$, and step 5, give\n$$\\varepsilon_P LF(Q(a\\,\\mathrm{id}_P))=F(a\\,\\mathrm{id}_P)\\varepsilon_P=a\\varepsilon_P.$$\nBy the $A$-linearity of $Q$ in [lem-weil-linear-abelian-derived-category] and invertibility of $\\varepsilon_P$, $LF(a\\,\\mathrm{id}_{QP})=a\\,\\mathrm{id}_{LF(QP)}$. Every input is isomorphic to some $QP$, using the resolving-class quasi-isomorphism. Conjugating by its image under $LF$ gives the same equality on every input. Therefore, for every morphism $u:C\\to D$, $LF(au)=LF((a\\,\\mathrm{id}_D)u)=a LF(u)$. The cited resolving-class theorem also makes $LF$ exact, hence additive. This proves the required $A$-linearity without assuming a scalar-linear choice of resolutions or that arbitrary morphisms lift to maps between arbitrary K-flat complexes.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "def-weil-pbc-completed-pullback",
+        "lem-pur-left-derived-from-kflat-class",
+        "lem-weil-linear-abelian-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "For right derived direct image and inverse limit use [lem-weil-pbc-kinjective-total-derived]: the natural comparison $\\rho_J:F(J)\\xrightarrow{\\sim}RF(QJ)$ is invertible on a K-injective representative $J$. The termwise functors are exact on homotopy categories by the cone calculation in step 5; their K-injective constructions are the integral direct image and the inverse limit of [prop-weil-pbc-rlim-functoriality]. Naturality at $a\\,\\mathrm{id}_J$ gives\n$$RF(Q(a\\,\\mathrm{id}_J))\\rho_J=\\rho_J F(a\\,\\mathrm{id}_J)=a\\rho_J.$$\nUsing [lem-weil-linear-abelian-derived-category], cancellation gives $RF(a\\,\\mathrm{id}_{QJ})=a\\,\\mathrm{id}_{RF(QJ)}$. Every input is isomorphic to such a $QJ$; conjugation gives the same identity there, and $RF(au)=RF((a\\,\\mathrm{id})u)=aRF(u)$. Additivity of direct image on the constructible categories is supplied by step 4, and additivity of derived inverse limit by its cited triangulated-functor statement. The reduction and pullback constructions in step 6, followed by this $A$-linear derived inverse limit, give $A$-linear completed pullbacks. Hence all four exact restricted functors of step 4 are $A$-linear.",
+      "uses": [
+        "lem-weil-pbc-kinjective-total-derived",
+        "prop-weil-pbc-rlim-functoriality",
+        "lem-weil-linear-abelian-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "Apply [prop-weil-pbc-rational-transport] to these four exact $A$-linear integral functors and the specified exchange $\\eta$ from step 2. It gives their rational extensions and the natural exchange with component $\\eta_{K_0}\\otimes1$. The extension of a composite agrees with the composite of the extensions: on objects they agree, and on a pure tensor $u\\otimes b$ both give $F(G(u))\\otimes b$; equality follows on all morphisms by linearity. Thus this is precisely the rational exchange specified in the item, rather than merely an unspecified isomorphism between its endpoints.",
+      "uses": [
+        "prop-weil-pbc-rational-transport"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    },
+    {
+      "text": "Set $v=\\eta_{K_0}^{-1}$ in the integral category on $Y'$. Composition and identities in [def-weil-linear-scalar-localization] give\n$$(v\\otimes1)(\\eta_{K_0}\\otimes1)=(v\\eta_{K_0})\\otimes1=\\mathrm{id}\\otimes1,$$\nand likewise $(\\eta_{K_0}\\otimes1)(v\\otimes1)=\\mathrm{id}\\otimes1$. Hence $v\\otimes1$ is an inverse to the specified rational exchange. Step 1 covers every rational object, including zero and objects annihilated by a power of $\\varpi$.",
+      "uses": [
+        "def-weil-linear-scalar-localization"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+        "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-rational-category",
     "def-weil-l-adic-numbers",
-    "def-weil-l-adic-coefficient-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
-    "place": "Integral exchange followed by rationalization; identity-square preservation checks from the previous detailed plan"
-   }
-  },
-  {
-   "text": "Use the unit-normalized comparison cbcDatumActualStrictTransport, the unique strict-tower/completion-reflector comparison pbcActualCompletedPullback_tower, and pbcActualCompletedPullIdIso to identify completed identity pullback with the input on intrinsically complete objects. Ordinary identity direct image has the normalized isomorphism AdicCoefficientDatum.pushId. The uniform complete predicate is closed under ambient isomorphisms.",
-   "uses": [
-    "lem-cbc-completed-extension-zero-comparison",
+    "def-weil-l-adic-coefficient-extension",
+    "cor-weil-pbc-constructible-complete",
     "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-ambient-ringed-exchange",
-    "lemma-weil-pbc-completed-exchange-coherence",
-    "lem-weil-pbc-uniform-complete-triangulated"
-   ],
-   "elementary": false,
-   "source": {
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-kinjective-total-derived",
+    "prop-weil-pbc-rlim-functoriality",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-linear-scalar-localization"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
-    "place": "Integral exchange followed by rationalization; identity-square preservation checks from the previous detailed plan"
-   }
+    "place": "Proof, integral exchange followed by rationalization; expanded scalar and identity checks"
   },
-  {
-   "text": "For each proper map f or f-prime apply the integral corollary to the square with that map on both vertical sides and identity horizontal arrows. Transport membership along the completed identity comparison to obtain preservation by direct image. Pasting the given Cartesian square with the fiber square at y identifies the fiber of f-prime at y with the fiber of f at y composed with g; invariance of topological Krull dimension under isomorphism therefore supplies the same bound e. For g and g-prime apply the corollary to the square with vertical identities and both horizontal arrows equal to that map. The identity fibers are spectra of fields, with discrete topology and dimension at most zero. Transport membership along direct-image identity. All auxiliary corners and annihilator hypotheses are inherited from the given ones.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Proper base change for bounded constructible derived categories with finite extension of l-adic rational coefficients",
+      "results": "Condensed.profiniteSolid; CondensedMod.IsSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; Condensed.instAB4CondensedMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; Condensed.instAB4StarCondensedMod",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "proper.*base.?change|base.?change.*proper",
+      "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/Small.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Proper base change for rational l-adic constructible complexes",
+      "results": "0 hits | service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"baseChange\", CategoryTheory.IsIso",
+      "results": "CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.isIso_lanBaseChange_app; CategoryTheory.TwoSquare.isIso_ranBaseChange_app; CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff; CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The exchange map for derived pushforward along a proper morphism and pullback is an isomorphism after inverting a uniformizer",
+      "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Cover.pushforwardIso_f; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardNatIso_inv",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "constructible.*base.?change|base.?change.*constructible",
+      "results": "0 hits",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 1357,
+  "blueprint_uses": [
     "cor-weil-pbc-constructible-complete",
     "def-weil-pbc-cartesian-square",
-    "lemma-weil-pbc-completed-exchange-coherence",
-    "lem-weil-pbc-uniform-complete-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
-    "place": "Integral exchange followed by rationalization; identity-square preservation checks from the previous detailed plan"
-   }
-  },
-  {
-   "text": "Apply the integral corollary to the original square and the underlying integral object. Its natural isomorphism has ambient component exactly constructibleCompleteExchangeComponent, so that component is invertible. The inclusion of the full constructible complete subcategory reflects isomorphisms; thus the same component is invertible with the membership witnesses just constructed. The defined finiteExtensionRationalExchangeComponent is its image under the actual rationalization functor, and every functor preserves isomorphisms. This proves the specified component is invertible for every raw rational object, including zero and uniformizer-power-torsion objects. No extension of functors or new scalar-linearity theorem is needed for the existing Lean conclusion.",
-   "uses": [
-    "cor-weil-pbc-constructible-complete",
-    "def-weil-pbc-rational-category",
-    "def-weil-linear-scalar-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
-    "place": "Integral exchange followed by rationalization; identity-square preservation checks from the previous detailed plan"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-rational-category",
-  "def-weil-l-adic-numbers",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-cbc-completed-extension-zero-comparison",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-ambient-ringed-exchange",
-  "lemma-weil-pbc-completed-exchange-coherence",
-  "lem-weil-pbc-uniform-complete-triangulated",
-  "cor-weil-pbc-constructible-complete",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-linear-scalar-localization"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
-  "place": "Integral exchange followed by rationalization; identity-square preservation checks from the previous detailed plan"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Proper base change for bounded constructible derived categories with finite extension of l-adic rational coefficients",
-   "results": "Condensed.profiniteSolid; CondensedMod.IsSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; Condensed.instAB4CondensedMod; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; Condensed.instAB4StarCondensedMod",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "proper.*base.?change|base.?change.*proper",
-   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/Small.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Proper base change for rational l-adic constructible complexes",
-   "results": "0 hits | service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"baseChange\", CategoryTheory.IsIso",
-   "results": "CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact; CategoryTheory.TwoSquare.isIso_lanBaseChange_app; CategoryTheory.TwoSquare.isIso_ranBaseChange_app; CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff; CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The exchange map for derived pushforward along a proper morphism and pullback is an isomorphism after inverting a uniformizer",
-   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; AlgebraicGeometry.Scheme.Cover.pushforwardIso_f; AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardNatIso_inv",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "constructible.*base.?change|base.?change.*constructible",
-   "results": "0 hits",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 1357,
- "blueprint_uses": [
-  "cor-weil-pbc-constructible-complete",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions",
-  "prop-weil-pbc-rational-transport"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "thm-weil-pbc-finite-extension",
-  "worker": "stage1",
-  "summary": "Retained the current statement, historical citations and searches. Replaced the earlier long combined step by explicit checks of identity operations, four auxiliary squares, scalar maps through the left/right derived comparisons, and rational transport. Uses existing DAG statements only; no new nodes. The integral operations and raw rationalization remain distinct from condensed coefficient targets.",
-  "blueprint": "Realizes the current main-20261015 proof file: the integral representative, integral completed exchange, and extension to raw rationalization; writes its inverse explicitly. The source sentence on independence/coherence is not a further clause of this item.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-left-derived-from-kflat-class",
-    "why": "Its resolving-class comparison isomorphism and naturality give the scalar-identity computation for the left derived constructions already used by the coefficient and completed-pullback definitions; this generic construction theorem is not another route to proper base change."
-   }
-  ]
- },
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q07-8046db0ab",
-  "group": "Q07",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-8046db0ab (reviewer sub-agent of L); spot-checked: Verdict FIX, one repaired citation; I read every step and every cited statement in full. The delivery creates no new nodes and leaves the raw-rational statement unchanged. That statement keeps the corollary's hypotheses (four noetherian finite-dimensional schemes, l invertible, f and f' proper, fibre bound e) and is not identified with a condensed coefficient category. The proof follows the blueprint's route in main-20261015 thm-weil-pbc-finite-extension.proof.md: cor-weil-pbc-constructible-complete, then prop-weil-pbc-rational-transport. Steps checked: step 1 gets l in (varpi) from |l|_E=1/l<1, for ramified and unramified E. Step 4's four auxiliary squares are correct: identity arrows are proper with 0-dimensional fibres, and the fibre of f' over y' is identified with the fibre of f over g y' through alpha. Steps 6 and 7 prove O_E-linearity by naturality of the derived-functor comparison at a*id, then cancellation and conjugation; this is correct. Steps 8 and 9 are correct: the extension of a composite is the composite of the extensions, and (v tensor 1) is an explicit inverse. Small cases tested: identity square, e=0, E=Q_l, ramified E, K=0, and K killed by a power of varpi. Fault repaired (C4): step 3 cited def-weil-pbc-intrinsic-completion for invertibility of the quotient-tower completion unit K->Rlim K_bullet. That definition uses the Koszul unit and explicitly leaves the Koszul-versus-quotient-tower comparison out. The missing statement is the last paragraph of lem-weil-pbc-constant-completion-equivalence (same unit), so I added it to step 3 uses and proof_deps, rewrote step 3 and set elementary=false. Accepted tool use: lem-pur-left-derived-from-kflat-class (sk-def-sf-operations), a generic derived-functor construction already used by the unit's own definitions, which replaces no step of the route. rg duplicate search over dag/nodes found no node that duplicates the item or the linearity calculations. Stacks proetale.tex lemma-naive-completion (099M), lemma-pushforward-Noetherian-case (099N) and theorem-proper-base-change (09C9) were checked as context. No SGA is used. Corrected node: fixes/dag/nodes/sec-proper-base-change/thm-weil-pbc-finite-extension.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-3ad0cf5cf",
-  "group": "ND",
-  "result": "pass",
-  "note": "Statement, dependencies, docstrings, edge cases, canonical helper, report sections, and compiler evidence all checked; no findings."
- },
- "lean": {
-  "module": "Sheaf.Paper.FiniteExtensionProperBaseChange",
-  "declaration": "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.finiteExtensionRationalExchangeComponent",
-   "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange"
+    "def-weil-pbc-scheme-conventions",
+    "prop-weil-pbc-rational-transport"
   ],
-  "file": "lean/Sheaf/Paper/FiniteExtensionProperBaseChange.lean",
-  "statement": "theorem finiteExtension_properBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) [IsProper f] [IsProper f'] (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlY : IsUnit (l : Γ(Y, ⊤))) (_hlX' : IsUnit (l : Γ(X', ⊤))) (_hlY' : IsUnit (l : Γ(Y', ⊤))) (e : ℕ) (_hFibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ∃ (hRf : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y l E (((pbcPadicCoefficientDatum l E).push f).obj K.obj)) (hRf' : ∀ K : PbcBoundedConstructibleComplete X' (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).push f').obj K.obj)) (hLg : ∀ K : PbcBoundedConstructibleComplete Y (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).completedPull g).obj K.obj)) (hLg' : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete X' l E (((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj)), ∀ K : PbcRationalCategory X (pbcPadicCoefficientDatum l E) (Padic.coefficientExtensionUniformizer l E), IsIso (finiteExtensionRationalExchangeComponent l E sq K (hLg ⟨((pbcPadicCoefficientDatum l E).push f).obj K.obj.obj, hRf K.obj⟩) (hRf' ⟨((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj.obj, hLg' K.obj⟩))",
-  "branch": "newtargets-dag",
-  "by": "ND",
-  "date": "2026-10-16",
-  "existing": false
- },
- "tool_uses": [],
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "C-99e1f",
-  "group": "N3",
-  "result": "pass",
-  "landing": "20261019T112503-L-3945725",
-  "kind": "proof",
-  "note": "independent cc review: delivered FiniteExtensionProperBaseChange.lean vs clones/live (only imports + sorry→proof body); node diff (proof/proof_deps/proof_origin + allowed tool_uses removal) vs used decls' blueprint attributions; unit sk-thm-properbasechange realized vs removed CoefficientExtensionFinite; item + 3 direct importers compiled against delivered module; #print axioms"
- }
+  "uses_not_cited": [
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "thm-weil-pbc-finite-extension",
+    "worker": "stage1",
+    "summary": "Retained the current statement, historical citations and searches. Replaced the earlier long combined step by explicit checks of identity operations, four auxiliary squares, scalar maps through the left/right derived comparisons, and rational transport. Uses existing DAG statements only; no new nodes. The integral operations and raw rationalization remain distinct from condensed coefficient targets.",
+    "blueprint": "Realizes the current main-20261015 proof file: the integral representative, integral completed exchange, and extension to raw rationalization; writes its inverse explicitly. The source sentence on independence/coherence is not a further clause of this item.",
+    "tool_uses": [
+      {
+        "node": "lem-pur-left-derived-from-kflat-class",
+        "why": "Its resolving-class comparison isomorphism and naturality give the scalar-identity computation for the left derived constructions already used by the coefficient and completed-pullback definitions; this generic construction theorem is not another route to proper base change."
+      }
+    ]
+  },
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q07-8046db0ab",
+    "group": "Q07",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-8046db0ab (reviewer sub-agent of L); spot-checked: Verdict FIX, one repaired citation; I read every step and every cited statement in full. The delivery creates no new nodes and leaves the raw-rational statement unchanged. That statement keeps the corollary's hypotheses (four noetherian finite-dimensional schemes, l invertible, f and f' proper, fibre bound e) and is not identified with a condensed coefficient category. The proof follows the blueprint's route in main-20261015 thm-weil-pbc-finite-extension.proof.md: cor-weil-pbc-constructible-complete, then prop-weil-pbc-rational-transport. Steps checked: step 1 gets l in (varpi) from |l|_E=1/l<1, for ramified and unramified E. Step 4's four auxiliary squares are correct: identity arrows are proper with 0-dimensional fibres, and the fibre of f' over y' is identified with the fibre of f over g y' through alpha. Steps 6 and 7 prove O_E-linearity by naturality of the derived-functor comparison at a*id, then cancellation and conjugation; this is correct. Steps 8 and 9 are correct: the extension of a composite is the composite of the extensions, and (v tensor 1) is an explicit inverse. Small cases tested: identity square, e=0, E=Q_l, ramified E, K=0, and K killed by a power of varpi. Fault repaired (C4): step 3 cited def-weil-pbc-intrinsic-completion for invertibility of the quotient-tower completion unit K->Rlim K_bullet. That definition uses the Koszul unit and explicitly leaves the Koszul-versus-quotient-tower comparison out. The missing statement is the last paragraph of lem-weil-pbc-constant-completion-equivalence (same unit), so I added it to step 3 uses and proof_deps, rewrote step 3 and set elementary=false. Accepted tool use: lem-pur-left-derived-from-kflat-class (sk-def-sf-operations), a generic derived-functor construction already used by the unit's own definitions, which replaces no step of the route. rg duplicate search over dag/nodes found no node that duplicates the item or the linearity calculations. Stacks proetale.tex lemma-naive-completion (099M), lemma-pushforward-Noetherian-case (099N) and theorem-proper-base-change (09C9) were checked as context. No SGA is used. Corrected node: fixes/dag/nodes/sec-proper-base-change/thm-weil-pbc-finite-extension.json; full checks are in review.md.; 1 file(s) fixed by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-3ad0cf5cf",
+    "group": "ND",
+    "result": "pass",
+    "note": "Statement, dependencies, docstrings, edge cases, canonical helper, report sections, and compiler evidence all checked; no findings."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.FiniteExtensionProperBaseChange",
+    "declaration": "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.finiteExtensionRationalExchangeComponent",
+      "AlgebraicGeometry.Scheme.finiteExtension_properBaseChange"
+    ],
+    "file": "lean/Sheaf/Paper/FiniteExtensionProperBaseChange.lean",
+    "statement": "theorem finiteExtension_properBaseChange (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y'] (_dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞)) (_dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞)) (_dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) [IsProper f] [IsProper f'] (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlY : IsUnit (l : Γ(Y, ⊤))) (_hlX' : IsUnit (l : Γ(X', ⊤))) (_hlY' : IsUnit (l : Γ(Y', ⊤))) (e : ℕ) (_hFibres : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y), topologicalKrullDim (pullback f y : Scheme.{u}) ≤ (e : WithBot ℕ∞)) : ∃ (hRf : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y l E (((pbcPadicCoefficientDatum l E).push f).obj K.obj)) (hRf' : ∀ K : PbcBoundedConstructibleComplete X' (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).push f').obj K.obj)) (hLg : ∀ K : PbcBoundedConstructibleComplete Y (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete Y' l E (((pbcPadicCoefficientDatum l E).completedPull g).obj K.obj)) (hLg' : ∀ K : PbcBoundedConstructibleComplete X (pbcPadicCoefficientDatum l E), IsPbcBoundedConstructibleComplete X' l E (((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj)), ∀ K : PbcRationalCategory X (pbcPadicCoefficientDatum l E) (Padic.coefficientExtensionUniformizer l E), IsIso (finiteExtensionRationalExchangeComponent l E sq K (hLg ⟨((pbcPadicCoefficientDatum l E).push f).obj K.obj.obj, hRf K.obj⟩) (hRf' ⟨((pbcPadicCoefficientDatum l E).completedPull g').obj K.obj.obj, hLg' K.obj⟩))",
+    "branch": "newtargets-dag",
+    "by": "ND",
+    "date": "2026-10-16",
+    "existing": false
+  },
+  "tool_uses": [
+    "lem-pur-left-derived-from-kflat-class"
+  ]
 }

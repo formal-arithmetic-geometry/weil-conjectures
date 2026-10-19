@@ -57,14 +57,6 @@ theorem finite_stage_karoubian
         (pbcUniformizer l E))).IsEquivalence ∧
         (toKaroubi (PbcRationalCategory T (pbcIntegralDatum l E)
           (pbcUniformizer l E))).IsTriangulated := by
-  obtain ⟨tE, _, hBounded, _, _, _, _⟩ :=
-    pbc_localized_tstructure T l E
-  have ht : ∀ X : PbcRationalCategory T (pbcIntegralDatum l E)
-      (pbcUniformizer l E), tE.bounded X := by
-    intro X
-    rw [hBounded]
-    trivial
-  exact ⟨tE.isIdempotentComplete_of_bounded ht,
-    tE.isEquivalence_toKaroubi_and_isTriangulated_of_bounded ht⟩
+  sorry
 
 end AlgebraicGeometry.Scheme

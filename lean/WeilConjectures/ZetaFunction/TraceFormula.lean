@@ -12,7 +12,6 @@ public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.ZetaSeries
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.WeilSheaf.LowerShriekOperations
 
 /-!
 # The Grothendieck–Lefschetz trace formula and point counts
@@ -78,8 +77,8 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComple
     ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
         ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) =
       ∑ᶠ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
-        K.traceFunction m y := by
-  exact K.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction (by omega)
+        K.traceFunction m y :=
+  sorry
 
 end Separated
 

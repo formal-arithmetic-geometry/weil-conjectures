@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.Paper.AdicPurityTwistReduction
 public import Sheaf.Paper.ExceptionalFiniteSupportRealization
+public import Sheaf.Paper.IntegralOperationsPreserveConstructible
+public import Sheaf.Paper.NormalizedDVREffectivity
 /-! # Adic reconstruction of the specified finite smooth-purity comparisons
 Source: blueprint thm-pur-adic-reconstruction, current main-20261015 snapshot.
 The source is integral pullback followed by the actual coefficient twist and shift.
@@ -81,17 +83,7 @@ in the field k. The structure map on global sections preserves units, including 
 the empty scheme. -/
 theorem purAdicCoefficientUnit (W : Scheme.{u}) [W.Over (Spec (.of D.k))] :
     IsUnit (C.l : Γ(W, ⊤)) := by
-  classical
-  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  have : Fact D.p.Prime := ⟨D.prime⟩
-  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
-    (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
-  have hunit : IsUnit (C.l : D.k₀) :=
-    (CharP.cast_ne_zero_of_ne_of_prime D.k₀ (Fact.out : C.l.Prime) C.different.symm).isUnit
-  let f := (W ↘ Spec (.of D.k)) ≫
-    Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
-  simpa only [map_natCast] using hunit.map
-    ((Scheme.ΓSpecIso (CommRingCat.of D.k₀)).inv ≫ f.appTop).hom
+  sorry
 
 /-- The same coefficient prime is a unit in every residue field.
 Source: blueprint purity conventions (blueprint: def-pur-adic-purity-objects).
@@ -99,8 +91,7 @@ Proof: map its unit in k first to the stalk at x, and then to the residue field.
 The structure map and residue quotient are unital ring maps and preserve units. -/
 theorem purAdicResidueUnit (W : Scheme.{u}) [W.Over (Spec (.of D.k))] (x : W) :
     IsUnit (C.l : W.residueField x) := by
-  simpa only [map_natCast] using
-    (purAdicCoefficientUnit D C W).map (W.Γevaluation x).hom
+  sorry
 
 /-- The inverse of the coefficient prime, uniquely determined in each residue field.
 Source: blueprint purity conventions (blueprint: def-pur-adic-purity-objects). -/
@@ -121,9 +112,7 @@ theorem purAdicReductionFiniteTor (W : Scheme.{u})
     (hK : finiteTorConstructibleIntegral C.l E W K) (n : ℕ) :
     finiteTorConstructible C.l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) W
       ((scalarReductionDerivedExtension C.l E W n).obj K) := by
-  obtain ⟨_, a, b, hab, hred⟩ := hK.1
-  obtain ⟨c, e, _, htor⟩ := hK.2
-  exact ⟨(hred n).1, c, e, htor n⟩
+  sorry
 
 variable {X Y : Scheme.{u}}
   [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

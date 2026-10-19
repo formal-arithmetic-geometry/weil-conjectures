@@ -8,7 +8,6 @@ module
 public import Sheaf.Paper.FourCorners
 public import Sheaf.Paper.CompletedRlimFunctor
 public import Sheaf.Paper.IntrinsicCompletion
-public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.Paper.CompletedTowerPullback
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
@@ -73,24 +72,24 @@ Source: blueprint completed base-change map, input paragraph and canonical quoti
 def AdicCoefficientDatum.TowerComplete (T : Scheme.{t}) (K : d.derived T) : Prop :=
   IsIso (d.completionUnit T K)
 
-/-- The quotient-tower unit and the published intrinsic Koszul predicate give the
-same complete inputs. The latter retains only existential proof witnesses for a
-finite generating list and a complex over the constant-quotient presentation.
+/-- The quotient-tower unit and the intrinsic Koszul unit give the same complete inputs.
 Source: blueprint completed pullback, last paragraph and its constant-completion comparison
 (blueprint: def-weil-pbc-completed-pullback).
-Proof: the normalized completed-ring comparison identifies the two coefficient
-presentations, their finite projections, and their quotient augmentations. Its
-exact scalar transport preserves the strict derived inverse limit. The Noetherian
-Koszul-to-quotient comparison identifies the intrinsic fiber and its unit with
-that quotient completion and its canonical unit. Thus an intrinsic completion
-witness makes the quotient unit invertible. Conversely finite generation supplies
-a generating list; a complex representative of the scalar-transported object and
-the same unit comparison give an intrinsic witness from an invertible quotient
-unit. All comparisons preserve units, including for the empty list, zero ring,
-and empty scheme. No constructibility or uniform cohomological bound is used. -/
+Proof: restrict along the constant-to-completed coefficient map. The finite quotient
+comparisons commute with all quotient transitions and with the quotient augmentation.
+Restriction preserves the specified strict derived limits. The Noetherian Koszul-to-
+quotient comparison identifies the completion objects and their units; it also commutes
+with scalar restriction. The constant-completion equivalence reflects invertibility,
+so the quotient unit is invertible exactly when every generating-list Koszul unit is.
+Finite generation supplies generating lists, and change of generators preserves this
+unit condition. This is a comparison of the two specified units, not their definition. -/
 theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
     (K : d.derived T) :
-    d.TowerComplete T K ↔ PbcIsIntrinsicallyComplete T d K := by
+    d.TowerComplete T K ↔
+      ∀ (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal),
+        ∀ (C : CochainComplex (reductionModules T (d.completedRing T)) ℤ)
+          (e : DerivedCategory.Q.obj C ≅ K),
+          IsDerivedCompleteIntrinsic T d r a ha K C e := by
   sorry
 
 /-- Apply actual module pullback to every level and transition of a strict tower.
@@ -108,8 +107,7 @@ ringed pullback at every level and the pointwise kernels and cokernels of towers
 theorem AdicCoefficientDatum.towerModulePull_exact {U V : Scheme.{t}} (f : U ⟶ V) :
     PreservesFiniteLimits (d.towerModulePull f) ∧
       PreservesFiniteColimits (d.towerModulePull f) := by
-  exact ⟨{ preservesFiniteLimits := fun _ _ _ ↦ inferInstance },
-    { preservesFiniteColimits := fun _ _ _ ↦ inferInstance }⟩
+  sorry
 
 /-- Exact tower pullback preserves finite limits.
 Source: blueprint completed pullback (blueprint: def-weil-pbc-completed-pullback). -/

@@ -1,301 +1,301 @@
 {
- "id": "lem-weil-pbc-levelwise-isomorphism-cones",
- "blueprint": {
-  "is": "lem-weil-pbc-levelwise-isomorphism-cones",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Levelwise isomorphisms and complete cones",
- "statement": "Fix the adic coefficient datum [def-weil-pbc-adic-coefficient-datum] on $T_{\\Proet}$, with $A_T=\\varprojlim_n(P_n)_T$ and $P_n=A/I^n$. All derived categories of coefficients below are categories of $A_T$-module sheaves, and every finite reduction means $K\\otimes^L_{A_T}(P_n)_T$, regarded as an $A_T$-module object by restriction of scalars. Derived completeness means that the Koszul completion map of [def-weil-pbc-intrinsic-completion] is an isomorphism.\n\nA morphism in $D(\\operatorname{Tow}_A(T))$ whose evaluation at every $n$ is an isomorphism is itself an isomorphism and remains an isomorphism after $\\Rlim$. If a derived complete object $C$ satisfies $C\\otimes^L_{A_T}(P_n)_T=0$ for every $n$, then $C=0$. Consequently a morphism between derived complete objects is an isomorphism once every finite reduction is an isomorphism.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-levelwise-isomorphism-cones.md",
-  "place": "node lem-weil-pbc-levelwise-isomorphism-cones, order 1253",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099M"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099Q"
-   },
-   {
-    "document": "Stacks Project",
-    "place": "Tag 099P"
-   }
-  ]
- },
- "stmt_deps": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-intrinsic-completion",
-  "def-weil-pbc-derived-inverse-limit"
- ],
- "proof": [
-  {
-   "text": "Represent a morphism u in the derived tower category, up to isomorphism in the arrow category, by Q(f) for a cochain map f. The localization Qh of the homotopy category is essentially surjective on arrows by the calculus of fractions, and the homotopy quotient is full and essentially surjective. For each tower index n, transport the assumed invertibility of ev_n(u) across this arrow isomorphism. The natural factorization of exact derived evaluation identifies ev_n(Q(f)) with Q(ev_n(f)). Derived localization reflects quasi-isomorphisms on cochain maps, so every ev_n(f) is a quasi-isomorphism. HomologicalComplex.quasiIso_iff_evaluation makes f a quasi-isomorphism, hence Q(f), and therefore u, is invertible.",
-   "uses": [
+  "id": "lem-weil-pbc-levelwise-isomorphism-cones",
+  "blueprint": {
+    "is": "lem-weil-pbc-levelwise-isomorphism-cones",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Levelwise isomorphisms and complete cones",
+  "statement": "Fix the adic coefficient datum [def-weil-pbc-adic-coefficient-datum] on $T_{\\Proet}$, with $A_T=\\varprojlim_n(P_n)_T$ and $P_n=A/I^n$. All derived categories of coefficients below are categories of $A_T$-module sheaves, and every finite reduction means $K\\otimes^L_{A_T}(P_n)_T$, regarded as an $A_T$-module object by restriction of scalars. Derived completeness means that the Koszul completion map of [def-weil-pbc-intrinsic-completion] is an isomorphism.\n\nA morphism in $D(\\operatorname{Tow}_A(T))$ whose evaluation at every $n$ is an isomorphism is itself an isomorphism and remains an isomorphism after $\\Rlim$. If a derived complete object $C$ satisfies $C\\otimes^L_{A_T}(P_n)_T=0$ for every $n$, then $C=0$. Consequently a morphism between derived complete objects is an isomorphism once every finite reduction is an isomorphism.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-levelwise-isomorphism-cones.md",
+    "place": "node lem-weil-pbc-levelwise-isomorphism-cones, order 1253",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099M"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099Q"
+      },
+      {
+        "document": "Stacks Project",
+        "place": "Tag 099P"
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-derived-inverse-limit"
+  ],
+  "proof": [
+    {
+      "text": "First suppose $E_\\bullet\\in D(\\operatorname{Tow}_A(T))$ has zero evaluation at every level. By [lem-weil-tower-category-levelwise-abelian], evaluation computes kernels and cokernels levelwise. Its termwise derived extension [lem-sf-exact-functor-derived-triangulated] therefore satisfies $\\operatorname{ev}_nH^j(E_\\bullet)=H^j(\\operatorname{ev}_nE_\\bullet)=0$. A tower all of whose objects are zero is a zero object: the unique component maps to and from the zero tower commute with transitions and are inverse. Thus all $H^j(E_\\bullet)$ vanish. For any complex representing $E_\\bullet$, the map from the zero complex is a quasi-isomorphism, hence becomes an isomorphism in the localization [def-weil-abstract-derived-category]. Therefore $E_\\bullet=0$.",
+      "uses": [
+        "lem-weil-tower-category-levelwise-abelian",
+        "lem-sf-exact-functor-derived-triangulated",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+        "place": "First sentence: joint conservativity; zero-object calculation"
+      }
+    },
+    {
+      "text": "Let $u:M_\\bullet\\to N_\\bullet$ have invertible evaluations. Complete it to a distinguished triangle $(M_\\bullet,N_\\bullet,E_\\bullet)$ using TR1 [def-weil-triangulated-category] in the derived category [def-weil-abstract-derived-category]. Exact evaluation, extended as a triangulated functor by [lem-sf-exact-functor-derived-triangulated], gives a distinguished triangle at every $n$. By TR3 map the identity triangle on $M_n$ to this triangle, with first two components $1_{M_n},u_n$. The third component $0\\to E_n$ is an isomorphism by [lem-sf-triangle-morphism-iso], so $E_n=0$. Step 1 gives $E_\\bullet=0$. Apply TR3 again from the identity triangle on $M_\\bullet$ to the original triangle; its first and third components $1_{M_\\bullet},0\\to E_\\bullet$ are isomorphisms. The same triangle lemma makes the middle component $u$ an isomorphism.",
+      "uses": [
+        "def-weil-triangulated-category",
+        "def-weil-abstract-derived-category",
+        "lem-sf-exact-functor-derived-triangulated",
+        "lem-sf-triangle-morphism-iso"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+        "place": "First sentence: conservative derived evaluations, using cone triangles"
+      }
+    },
+    {
+      "text": "The functor $\\Rlim$ of [prop-weil-pbc-rlim-functoriality] takes an inverse $v$ of the morphism $u$ from step 2 to an inverse: $\\Rlim(v)\\Rlim(u)=\\Rlim(vu)=1$ and $\\Rlim(u)\\Rlim(v)=1$. It also takes zero objects to zero objects. Indeed it is additive, so the identity of its value on zero is both the identity (functoriality) and the zero endomorphism (additivity). This proves preservation of the isomorphism after $\\Rlim$.",
+      "uses": [
+        "prop-weil-pbc-rlim-functoriality"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+        "place": "First sentence: the functorial derived inverse limit"
+      }
+    },
+    {
+      "text": "Let $C$ be derived complete in the sense of [def-weil-pbc-intrinsic-completion]. The strict derived quotient tower $C_\\bullet$ of [def-weil-pbc-adic-coefficient-datum] evaluates to $C\\otimes^L_{A_T}(P_n)_T$, with restriction of scalars to $A_T$. If these objects all vanish, step 1 makes $C_\\bullet$ zero, and step 3 makes $\\Rlim C_\\bullet$ zero. All hypotheses of [prop-weil-pbc-koszul-reconstruction] are those of the fixed adic datum, including Noetherianity and finite perfect quotients. Its last assertion supplies the isomorphism $\\operatorname{comp}_C:C\\xrightarrow{\\sim}\\Rlim C_\\bullet$, because the intrinsic Koszul completion map is an isomorphism. Hence $C=0$.",
+      "uses": [
+        "def-weil-pbc-intrinsic-completion",
+        "def-weil-pbc-adic-coefficient-datum",
+        "prop-weil-pbc-koszul-reconstruction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+        "place": "Second sentence: reconstruction and vanishing of the quotient tower"
+      }
+    },
+    {
+      "text": "Finally let $u:C\\to D$ have complete source and target, and suppose each finite reduction of $u$ is invertible. The derived reduction-tower functor of [def-weil-pbc-adic-coefficient-datum] gives $u_\\bullet:C_\\bullet\\to D_\\bullet$ with exactly these evaluations. Steps 2 and 3 make $\\Rlim(u_\\bullet)$ invertible. By [prop-weil-pbc-koszul-reconstruction], $\\operatorname{comp}_K=c_K\\kappa_K$ is invertible for $K=C,D$. Its naturality gives $\\operatorname{comp}_D u=\\Rlim(u_\\bullet)\\operatorname{comp}_C$: the $c_K$ form the stated functorial isomorphism, and $\\kappa$ is natural because its maps on representatives are induced by the fixed degree-zero inclusions $A_T[0]\\to Q_m$ [def-weil-pbc-intrinsic-completion]. These inclusions commute with each complex map, hence also with inverses of quasi-isomorphisms in the localization. Thus $u=\\operatorname{comp}_D^{-1}\\Rlim(u_\\bullet)\\operatorname{comp}_C$ is a composite of isomorphisms. This establishes the final clause.",
+      "uses": [
+        "def-weil-pbc-adic-coefficient-datum",
+        "prop-weil-pbc-koszul-reconstruction",
+        "def-weil-pbc-intrinsic-completion"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+        "place": "Final sentence: finite-reduction criterion, directly by natural reconstruction"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-abstract-derived-category",
     "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-    "place": "First sentence: joint conservativity; zero-object calculation"
-   }
-  },
-  {
-   "text": "Apply the preceding argument to the zero endomorphism of a derived tower whose evaluations are zero. Evaluation is additive, and a zero morphism between zero objects is invertible. Consequently the zero endomorphism of the tower is invertible, which makes the tower a zero object. Any functor RF, in particular every specified universal realization of derived inverse limit, preserves an isomorphism by mapping its inverse.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-    "place": "First sentence: joint conservativity; zero-object calculation"
-   }
-  },
-  {
-   "text": "For an intrinsically complete object K, use reconstructionKoszulIntrinsicComparison to identify its intrinsic unit with the functorial Koszul unit followed by an isomorphism. Cancellation gives invertibility of the functorial Koszul unit. The last clause of koszulReconstruction then gives invertibility of the natural quotient reconstruction unit comp_K.",
-   "uses": [
     "def-weil-pbc-intrinsic-completion",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-    "place": "Second sentence: reconstruction and vanishing of the quotient tower"
-   }
-  },
-  {
-   "text": "If all finite reductions of a complete object C are zero, its strict reduction tower is zero by step 2. The additive reconstructionRlim functor carries that tower to a zero object. The invertible quotient reconstruction unit from step 3 identifies C with this zero object, proving C is zero.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-    "place": "Second sentence: reconstruction and vanishing of the quotient tower"
-   }
-  },
-  {
-   "text": "For u between complete C and D with invertible finite reductions, apply step 1 to its strict reduction-tower map. Its image under reconstructionRlim is invertible. Both quotient reconstruction units are invertible by step 3. Naturality identifies u followed by the unit at D with the unit at C followed by this invertible image. Cancel the unit at D to prove u invertible. No completeness-of-cones or tensor-cone calculation is needed.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-    "place": "Final sentence: finite-reduction criterion, directly by natural reconstruction"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-tower-category-levelwise-abelian",
-  "prop-weil-pbc-koszul-reconstruction"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
-  "place": "S8: direct localization/quasi-isomorphism proof of conservativity and the source final natural reconstruction argument; Mathlib Localization.essSurj_mapArrow, HomologicalComplex.quasiIso_iff_evaluation, DerivedCategory.isIso_Q_map_iff_quasiIso, and Functor.mapDerivedCategoryFactors."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "morphism in a tower category whose evaluations are isomorphisms; derived complete object with all finite reductions zero is zero",
-   "results": "8 generic homological zero lemmas; no exact tower theorem",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.IsIso, derived limit, cone",
-   "results": "0 hits; Unknown identifier `derived`",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep 'isIso₁_of_isIso₂₃|Rlim|derived complete' CategoryTheory",
-   "results": "generic limit-closure declarations; no exact theorem",
-   "date": "2026-10-14",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "levelwise isomorphism derived inverse limit",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "derivedTensor|derived.*[Tt]ensor|tensor.*[Tt]riangulated",
-   "results": "7 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived tensor product on a ringed site preserves distinguished triangles",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For any ringed site derived tensor product with a fixed complex is an exact triangulated functor on the unbounded derived category",
-   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Tor', CategoryTheory.Tor, DerivedCategory.instIsTriangulated, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsTriangulated\", \"tensor\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "K flat resolutions of sheaves of modules over a sheaf of commutative rings define tensor preserving mapping cone triangles",
-   "results": "8 hits: CategoryTheory.Tor_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact",
-   "date": "2026-10-14",
-   "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\", \"IsIso\"",
-   "results": "5 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff",
-   "date": "2026-10-17",
-   "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A morphism of derived inverse towers is an isomorphism if all evaluations are isomorphisms; a derived complete sheaf complex vanishes if all reductions modulo powers of an ideal vanish",
-   "results": "8 hits: localCohomology.isoSelfLERadical, CategoryTheory.instIsIsoToRightDerivedZero', localCohomology, localCohomology.isoOfFinal, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
-   "date": "2026-10-17",
-   "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
-  },
-  {
-   "tool": "grep",
-   "query": "derivedComplete|derivedCompletion|IsAdicComplete|isIso_iff",
-   "results": "11 hits: Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/ShortComplex/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean",
-   "date": "2026-10-17",
-   "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
-  },
-  {
-   "tool": "leansearch",
-   "query": "A derived complete sheaf complex is zero if all its derived reductions modulo powers of the ideal are zero",
-   "results": "8 hits: IsAdicComplete.bot, AdicCompletion.val_zero, PowerSeries.IsWeierstrassDivisorAt.mod_zero, HomologicalComplex.acyclic_of_isZero, DerivedCategory.instHasZeroObject, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, HomologicalComplex.zero, CategoryTheory.ShortComplex.Exact.mk",
-   "date": "2026-10-17",
-   "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Derived adic completion is conservative on complete complexes: an arrow inducing isomorphisms after tensoring with every quotient ring is invertible",
-   "results": "8 hits: AdicCompletion.map_exact, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
-   "date": "2026-10-17",
-   "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1253,
- "blueprint_uses": [
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
-  "prop-weil-pbc-koszul-reconstruction",
-  "prop-weil-pbc-rlim-functoriality"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-weil-pbc-levelwise-isomorphism-cones",
-  "worker": "stage1",
-  "summary": "Verified all three clauses in the completed A_T coefficient category. Expanded joint conservativity via levelwise cohomology and cone triangles, explicitly citing TR1/TR3. Replaced the obsolete functorial K-flat representative argument and unnecessary completion-exactness detour by naturality of the existing reconstruction isomorphism. No new nodes or statement changes.",
-  "blueprint": "Current main-20261015 proof, first sentence: steps 1–3; reconstruction/vanishing sentence: step 4; final finite-reduction conclusion: step 5 via the natural reconstruction square. This is a node-level formal argument with the same reconstruction route.",
-  "tool_uses": []
- },
- "tool_uses": [],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-N3-60789de9d",
-  "group": "N3",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-60789de9d (reviewer sub-agent of L); spot-checked: Read the full item, all 9 cited nodes, the reconstruction proof, the ringed strict-tower R lim node and the blueprint source in master (order 1253) and main-20261015 (order 1321). The statement is unchanged from the blueprint and uses completed A_T coefficients throughout; it does not identify them with constant coefficients. The delivery creates no new nodes. Step 1: zero evaluations imply zero via the levelwise-abelian Mathlib leaf. Step 2: I checked both TR3 morphisms by hand: (1,u_n) gives E_n=0, then (1, 0→E) gives u invertible by isIso₂_of_isIso₁₃. Step 3 is plain functoriality and additivity of the triangulated Rlim. Step 4: the datum identifies the evaluations with the restricted reductions, and reconstruction's last sentence gives C≅Rlim C_•=0. Step 5: I checked the naturality square comp_D u=Rlim(u_•)comp_C from functorial c and natural κ (fixed ι_m). This replaces the blueprint's cone-closure sentence with a less demanding argument on the same unit and reconstruction route; I accept it. All other citations are same-unit nodes or Mathlib leaves, so split_report.tool_uses=[] is correct and I accept no tool_uses. Edge cases checked: I=A, r=0 with I=0, and Z_p[1/p], which shows completeness is needed. proof_deps equals the union of uses, and the item cannot reach itself, so there is no cycle. For the maintainer: (1) the stale merged tool_uses [lem-pur-derived-change-of-rings, lem-pc-kflat-resolution, lem-pc-kflat-cone-direct-sum] are no longer used and should be cleared. (2) Reconstruction defines completeness with its own κ into the K-injective R lim, while this item and the landed sibling lem-weil-pbc-finite-reduction-reconstruction use η of def-weil-pbc-intrinsic-completion. The two agree via a chain-level comparison; this convention predates the delivery, and the maintainer may want reconstruction to state it. No fixes written."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-dc41775f2",
-  "group": "Q39",
-  "result": "pass",
-  "note": "Reviewed all immutable modules, nodes, dependencies, sources, and report sections. Statements, constructions, universes, and edge cases match; all three modules compile cleanly through scompile.py’s local side overlay. Full findings recorded in review.md; no fixes required."
- },
- "lean": {
-  "module": "Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones",
-  "declaration": "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones"
+    "def-weil-triangulated-category",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-tower-category-levelwise-abelian",
+    "prop-weil-pbc-koszul-reconstruction",
+    "prop-weil-pbc-rlim-functoriality"
   ],
-  "file": "lean/Sheaf/Paper/CompletedAdicLevelwiseIsomorphismCones.lean",
-  "statement": "theorem completedAdic_levelwise_isomorphism_cones (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : (∀ (M N : DerivedCategory (CompletedAdicTowers T d)) (u : M ⟶ N), (∀ n : ℕ, IsIso ((completedAdicEvaluation T d n).map u)) → IsIso u ∧ ∀ (RF : DerivedCategory (CompletedAdicTowers T d) ⥤ DerivedCategory (CompletedAdicModules T d)) (η : (lim : CompletedAdicTowers T d ⥤ CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (CompletedAdicTowers T d) (ComplexShape.up ℤ)) → IsIso (RF.map u)) ∧ (∀ C : DerivedCategory (CompletedAdicModules T d), IsCompletedAdicDerivedComplete T d r a ha C → (∀ n : ℕ, IsZero ((completedAdicFiniteReduction T d n).obj C)) → IsZero C) ∧ (∀ (C D : DerivedCategory (CompletedAdicModules T d)) (u : C ⟶ D), IsCompletedAdicDerivedComplete T d r a ha C → IsCompletedAdicDerivedComplete T d r a ha D → (∀ n : ℕ, IsIso ((completedAdicFiniteReduction T d n).map u)) → IsIso u)",
-  "branch": "newtargets-dag",
-  "by": "Q39",
-  "date": "2026-10-15",
-  "existing": false
- },
- "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "A morphism in $D(\\operatorname{Tow}_{A}(T))$ whose evaluation at every $n$ is\nan isomorphism is itself an isomorphism and remains an isomorphism after\n$\\Rlim$. If a derived complete object $C$ satisfies $C\\otimes_A^LP_n=0$ for\nevery $n$, then $C=0$. Consequently a morphism between derived complete\nobjects is an isomorphism once every finite reduction is an isomorphism.",
-  "proof": [
-   {
-    "text": "The evaluation functors of [def-weil-pbc-derived-inverse-limit] are jointly\nconservative on the tower category, and $\\Rlim$ is a triangulated functor ([prop-weil-pbc-rlim-functoriality]), so\nthe first assertion holds. For a derived complete $C$,\n[prop-weil-pbc-koszul-reconstruction] identifies $C$ with $\\Rlim C_\\bullet$,\nand the vanishing of every finite reduction kills the tower $C_\\bullet$\nlevelwise, hence $C=0$; the cone of a morphism between derived complete\nobjects is again derived complete, so the last assertion follows from the\nsecond.",
-    "uses": [
-     "def-weil-pbc-derived-inverse-limit",
-     "prop-weil-pbc-rlim-functoriality",
-     "prop-weil-pbc-koszul-reconstruction"
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/lem-weil-pbc-levelwise-isomorphism-cones.proof.md",
+    "place": "Entire current proof; expanded conservativity and naturality arguments"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "morphism in a tower category whose evaluations are isomorphisms; derived complete object with all finite reductions zero is zero",
+      "results": "8 generic homological zero lemmas; no exact tower theorem",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.IsIso, derived limit, cone",
+      "results": "0 hits; Unknown identifier `derived`",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep 'isIso₁_of_isIso₂₃|Rlim|derived complete' CategoryTheory",
+      "results": "generic limit-closure declarations; no exact theorem",
+      "date": "2026-10-14",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "levelwise isomorphism derived inverse limit",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "derivedTensor|derived.*[Tt]ensor|tensor.*[Tt]riangulated",
+      "results": "7 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived tensor product on a ringed site preserves distinguished triangles",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For any ringed site derived tensor product with a fixed complex is an exact triangulated functor on the unbounded derived category",
+      "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Tor', CategoryTheory.Tor, DerivedCategory.instIsTriangulated, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.mapDerivedCategory, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"IsTriangulated\", \"tensor\"",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "K flat resolutions of sheaves of modules over a sheaf of commutative rings define tensor preserving mapping cone triangles",
+      "results": "8 hits: CategoryTheory.Tor_obj, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact",
+      "date": "2026-10-14",
+      "verdict": "no match: hits do not state the completed sheaf coefficient conservativity and completeness criterion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"DerivedCategory\", \"IsIso\"",
+      "results": "5 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff",
+      "date": "2026-10-17",
+      "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A morphism of derived inverse towers is an isomorphism if all evaluations are isomorphisms; a derived complete sheaf complex vanishes if all reductions modulo powers of an ideal vanish",
+      "results": "8 hits: localCohomology.isoSelfLERadical, CategoryTheory.instIsIsoToRightDerivedZero', localCohomology, localCohomology.isoOfFinal, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+      "date": "2026-10-17",
+      "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
+    },
+    {
+      "tool": "grep",
+      "query": "derivedComplete|derivedCompletion|IsAdicComplete|isIso_iff",
+      "results": "11 hits: Mathlib/Algebra/Homology/Functor.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/ShortComplex/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/SpectralObject/Basic.lean",
+      "date": "2026-10-17",
+      "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
+    },
+    {
+      "tool": "leansearch",
+      "query": "A derived complete sheaf complex is zero if all its derived reductions modulo powers of the ideal are zero",
+      "results": "8 hits: IsAdicComplete.bot, AdicCompletion.val_zero, PowerSeries.IsWeierstrassDivisorAt.mod_zero, HomologicalComplex.acyclic_of_isZero, DerivedCategory.instHasZeroObject, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, HomologicalComplex.zero, CategoryTheory.ShortComplex.Exact.mk",
+      "date": "2026-10-17",
+      "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Derived adic completion is conservative on complete complexes: an arrow inducing isomorphisms after tensoring with every quotient ring is invertible",
+      "results": "8 hits: AdicCompletion.map_exact, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+      "date": "2026-10-17",
+      "verdict": "no match for all clauses in the completed-coefficient sheaf derived category; generic ingredients or ordinary module completion only"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1253,
+  "blueprint_uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-derived-inverse-limit",
+    "prop-weil-pbc-koszul-reconstruction",
+    "prop-weil-pbc-rlim-functoriality"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-weil-pbc-levelwise-isomorphism-cones",
+    "worker": "stage1",
+    "summary": "Verified all three clauses in the completed A_T coefficient category. Expanded joint conservativity via levelwise cohomology and cone triangles, explicitly citing TR1/TR3. Replaced the obsolete functorial K-flat representative argument and unnecessary completion-exactness detour by naturality of the existing reconstruction isomorphism. No new nodes or statement changes.",
+    "blueprint": "Current main-20261015 proof, first sentence: steps 1–3; reconstruction/vanishing sentence: step 4; final finite-reduction conclusion: step 5 via the natural reconstruction square. This is a node-level formal argument with the same reconstruction route.",
+    "tool_uses": []
+  },
+  "tool_uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-cone-direct-sum"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-N3-60789de9d",
+    "group": "N3",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-60789de9d (reviewer sub-agent of L); spot-checked: Read the full item, all 9 cited nodes, the reconstruction proof, the ringed strict-tower R lim node and the blueprint source in master (order 1253) and main-20261015 (order 1321). The statement is unchanged from the blueprint and uses completed A_T coefficients throughout; it does not identify them with constant coefficients. The delivery creates no new nodes. Step 1: zero evaluations imply zero via the levelwise-abelian Mathlib leaf. Step 2: I checked both TR3 morphisms by hand: (1,u_n) gives E_n=0, then (1, 0→E) gives u invertible by isIso₂_of_isIso₁₃. Step 3 is plain functoriality and additivity of the triangulated Rlim. Step 4: the datum identifies the evaluations with the restricted reductions, and reconstruction's last sentence gives C≅Rlim C_•=0. Step 5: I checked the naturality square comp_D u=Rlim(u_•)comp_C from functorial c and natural κ (fixed ι_m). This replaces the blueprint's cone-closure sentence with a less demanding argument on the same unit and reconstruction route; I accept it. All other citations are same-unit nodes or Mathlib leaves, so split_report.tool_uses=[] is correct and I accept no tool_uses. Edge cases checked: I=A, r=0 with I=0, and Z_p[1/p], which shows completeness is needed. proof_deps equals the union of uses, and the item cannot reach itself, so there is no cycle. For the maintainer: (1) the stale merged tool_uses [lem-pur-derived-change-of-rings, lem-pc-kflat-resolution, lem-pc-kflat-cone-direct-sum] are no longer used and should be cleared. (2) Reconstruction defines completeness with its own κ into the K-injective R lim, while this item and the landed sibling lem-weil-pbc-finite-reduction-reconstruction use η of def-weil-pbc-intrinsic-completion. The two agree via a chain-level comparison; this convention predates the delivery, and the maintainer may want reconstruction to state it. No fixes written."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-dc41775f2",
+    "group": "Q39",
+    "result": "pass",
+    "note": "Reviewed all immutable modules, nodes, dependencies, sources, and report sections. Statements, constructions, universes, and edge cases match; all three modules compile cleanly through scompile.py’s local side overlay. Full findings recorded in review.md; no fixes required."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones",
+    "declaration": "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.completedAdic_levelwise_isomorphism_cones"
     ],
-    "elementary": false
-   }
-  ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S8",
-  "result": "pass",
-  "landing": "20261019T112528-L-3950707",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "file": "lean/Sheaf/Paper/CompletedAdicLevelwiseIsomorphismCones.lean",
+    "statement": "theorem completedAdic_levelwise_isomorphism_cones (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) : (∀ (M N : DerivedCategory (CompletedAdicTowers T d)) (u : M ⟶ N), (∀ n : ℕ, IsIso ((completedAdicEvaluation T d n).map u)) → IsIso u ∧ ∀ (RF : DerivedCategory (CompletedAdicTowers T d) ⥤ DerivedCategory (CompletedAdicModules T d)) (η : (lim : CompletedAdicTowers T d ⥤ CompletedAdicModules T d).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF), RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (CompletedAdicTowers T d) (ComplexShape.up ℤ)) → IsIso (RF.map u)) ∧ (∀ C : DerivedCategory (CompletedAdicModules T d), IsCompletedAdicDerivedComplete T d r a ha C → (∀ n : ℕ, IsZero ((completedAdicFiniteReduction T d n).obj C)) → IsZero C) ∧ (∀ (C D : DerivedCategory (CompletedAdicModules T d)) (u : C ⟶ D), IsCompletedAdicDerivedComplete T d r a ha C → IsCompletedAdicDerivedComplete T d r a ha D → (∀ n : ℕ, IsIso ((completedAdicFiniteReduction T d n).map u)) → IsIso u)",
+    "branch": "newtargets-dag",
+    "by": "Q39",
+    "date": "2026-10-15",
+    "existing": false
+  },
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "A morphism in $D(\\operatorname{Tow}_{A}(T))$ whose evaluation at every $n$ is\nan isomorphism is itself an isomorphism and remains an isomorphism after\n$\\Rlim$. If a derived complete object $C$ satisfies $C\\otimes_A^LP_n=0$ for\nevery $n$, then $C=0$. Consequently a morphism between derived complete\nobjects is an isomorphism once every finite reduction is an isomorphism.",
+    "proof": [
+      {
+        "text": "The evaluation functors of [def-weil-pbc-derived-inverse-limit] are jointly\nconservative on the tower category, and $\\Rlim$ is a triangulated functor ([prop-weil-pbc-rlim-functoriality]), so\nthe first assertion holds. For a derived complete $C$,\n[prop-weil-pbc-koszul-reconstruction] identifies $C$ with $\\Rlim C_\\bullet$,\nand the vanishing of every finite reduction kills the tower $C_\\bullet$\nlevelwise, hence $C=0$; the cone of a morphism between derived complete\nobjects is again derived complete, so the last assertion follows from the\nsecond.",
+        "uses": [
+          "def-weil-pbc-derived-inverse-limit",
+          "prop-weil-pbc-rlim-functoriality",
+          "prop-weil-pbc-koszul-reconstruction"
+        ],
+        "elementary": false
+      }
+    ],
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  }
 }

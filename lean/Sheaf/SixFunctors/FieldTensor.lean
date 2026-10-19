@@ -11,10 +11,20 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 
-import Sheaf.SixFunctors.ConstructibleCoefficientTransport
-import Sheaf.Paper.FiniteCoefficientDescentTwoColimit
-import Sheaf.Paper.ConstantModelTorAmplitude
+import Sheaf.Topology.ProfiniteCondensedRing
+import Sheaf.Algebra.Homology.KFlat
+import Mathlib.Algebra.Homology.Bifunctor
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.SixFunctors.IntTensorProjection
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Paper.CoefficientHeart
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Tensor closure of rational localizing categories
@@ -25,51 +35,15 @@ Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 
 @[expose] public section
 
-attribute [local irreducible] DerivedCategory.monoidalClosed
-  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
-
 set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits MonoidalCategory
+open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 open AlgebraicGeometry Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-private theorem inverseImage_localizing
-    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    (P : ObjectProperty C) (hP : IsLocalizingSubcategory P) (F : C ⥤ C)
-    [F.CommShift ℤ] [F.IsTriangulated] [F.IsLeftAdjoint] :
-    IsLocalizingSubcategory (P.inverseImage F) := by
-  let := hP.1
-  let := hP.2.1
-  refine ⟨inferInstance, inferInstance, ?_⟩
-  intro I G hG hmem
-  let := hG
-  exact P.prop_of_iso (preservesColimitIso F G).symm
-    (hP.2.2 (G ⋙ F) inferInstance hmem)
-
-private theorem tensor_transport
-    {Λ Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj Λ] [IsCommMonObj Λ] [MonObj Γ] [IsCommMonObj Γ]
-    (i : Mon.mk Γ ≅ Mon.mk Λ) (X : Scheme.{u})
-    (hΓ : ∀ K M, constantModelBoundedConstructible Γ X K →
-      constantModelBoundedConstructible Γ X M →
-      constantModelBoundedConstructible Γ X (K ⊗ M)) :
-    ∀ K M, constantModelBoundedConstructible Λ X K →
-      constantModelBoundedConstructible Λ X M →
-      constantModelBoundedConstructible Λ X (K ⊗ M) := by
-  obtain ⟨e, he, hm⟩ := constructibleCoefficientTransport Λ Γ i.symm X
-  let := he
-  let := (constantModelConstructibleFiniteTor_wellDefined Γ X).2.1
-  intro K M hK hM
-  apply (hm _).mp
-  have h := hΓ _ _ ((hm K).mpr hK) ((hm M).mpr hM)
-  exact (constantModelBoundedConstructible Γ X).prop_of_iso
-    (Functor.Monoidal.μIso e.functor K M) h
 
 /-- The bounded constructible rational coefficient category is closed under derived tensor,
 and its localizing closure is closed under derived tensor.
@@ -134,62 +108,6 @@ theorem tensorClosureRational
       CategoryTheory.localizingClosure
           (constantModelBoundedConstructible Λ X)
             (((derivedTensor Λ X).obj A).obj B)) := by
-  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
-  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
-  let : IsNoetherian X := ⟨⟩
-  let D := DerivedCategory
-    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
-  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
-  let : BraidedCategory D := Classical.choice (DerivedCategory.nonempty_braidedCategory C)
-  let (K : D) : ((derivedTensor Λ X).obj K).CommShift ℤ :=
-    DerivedCategory.commShiftTensorLeft C K
-  let (K : D) : ((derivedTensor Λ X).flip.obj K).CommShift ℤ :=
-    DerivedCategory.commShiftTensorRight C K
-  let (K : D) : ((derivedTensor Λ X).obj K).IsTriangulated :=
-    DerivedCategory.isTriangulated_tensorLeft C K
-  let (K : D) : ((derivedTensor Λ X).flip.obj K).IsTriangulated :=
-    DerivedCategory.isTriangulated_tensorRight C K
-  let P : ObjectProperty D := constantModelBoundedConstructible Λ X
-  let : X.Over (Spec (.of k)) := ⟨aX⟩
-  let : LocallyOfFiniteType (X ↘ Spec (.of k)) := inferInstanceAs (LocallyOfFiniteType aX)
-  let : QuasiCompact (X ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact aX)
-  let : IsSeparated (X ↘ Spec (.of k)) := inferInstanceAs (IsSeparated aX)
-  let : Fact (ringChar k ≠ ℓ) := ⟨by simpa only [ringChar.eq k p] using hpl⟩
-  have hdescent := finiteCoefficientDescentTwoColimit k p ℓ hp hpl X
-  have hbounded : ∀ K M, P K → P M → P (((derivedTensor Λ X).obj K).obj M) := by
-    have canonical (Γ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-        [MonObj Γ] [IsCommMonObj Γ] [IsEllAdicFinitenessCoefficient ℓ Γ]
-        (heq : constantModelBoundedConstructible Γ X =
-          boundedConstructible (condensedRingObj Γ X)) :
-        ∀ K M, constantModelBoundedConstructible Γ X K →
-          constantModelBoundedConstructible Γ X M →
-          constantModelBoundedConstructible Γ X (K ⊗ M) := by
-      rw [heq]
-      let : (boundedConstructible (condensedRingObj Γ X)).IsMonoidal :=
-        isMonoidal_boundedConstructible Γ (Over.mk aX)
-      exact fun K M hK hM ↦ ObjectProperty.prop_tensor hK hM
-    rcases hΛ with hfinite | hclosure
-    · obtain ⟨E, ⟨i⟩⟩ := hfinite
-      exact tensor_transport i.symm X
-        (canonical (Profinite.continuousMapRingObj E) (hdescent.2.2.2.1 E).1)
-    · obtain ⟨i⟩ := hclosure
-      exact tensor_transport i.symm X
-        (canonical (Profinite.padicAlgClRingObj ℓ) hdescent.2.2.2.2.1.1)
-  let R := localizingClosure P
-  have hR := (localizingClosure_exists Λ X P).2.2.2.1
-  have hcontains : P ≤ R := (localizingClosure_exists Λ X P).2.2.2.2.1
-  have hright : ∀ A B, R A → P B → R (((derivedTensor Λ X).obj A).obj B) := by
-    intro A B hA hB
-    have hleft : ((derivedTensor Λ X).flip.obj B).IsLeftAdjoint := by
-      exact Functor.isLeftAdjoint_of_iso
-        (CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight B)
-    exact hA _ (inverseImage_localizing R hR ((derivedTensor Λ X).flip.obj B))
-      (fun K hK ↦ hcontains _ (hbounded K B hK hB))
-  refine ⟨hbounded, ?_⟩
-  intro A B hA hB
-  have hleft : ((derivedTensor Λ X).obj A).IsLeftAdjoint :=
-    (derivedTensorHomAdjunction Λ A).isLeftAdjoint
-  exact hB _ (inverseImage_localizing R hR ((derivedTensor Λ X).obj A))
-    (fun M hM ↦ hright A M hA hM)
+  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

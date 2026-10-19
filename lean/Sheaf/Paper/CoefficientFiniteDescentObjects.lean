@@ -8,8 +8,17 @@ module
 public import Sheaf.Paper.ConstantModelTorAmplitude
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Paper.ConstantModelBoundedConstructibleComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.CoefficientFiniteDescentHom
+import Sheaf.Paper.CoefficientFiniteDescentLisse
+import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Paper.CoefficientHeartTriangulated
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import Sheaf.SixFunctors.ScalarSixPullback
 
 /-!
@@ -93,38 +102,6 @@ theorem coefficient_finite_descent_objects
           ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ∧
         Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj
           ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj)) :=
-  by
-    let : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-    obtain ⟨hQ, hE⟩ := constantModelBoundedConstructible_eq_boundedConstructible
-      k p ℓ _hp _hpℓ X
-    constructor
-    · intro K
-      have hK : boundedConstructible (padicAlgClRingObj X ℓ) K.obj := by
-        rw [← hQ]
-        exact K.property
-      obtain ⟨E, K_E, ⟨e⟩⟩ :=
-        constructibleCocone_essSurjObj X ℓ ⟨K.obj, hK⟩
-      refine ⟨E, ⟨K_E.obj, ?_⟩, ?_⟩
-      · exact (congrArg (fun P ↦ P K_E.obj) (hE E)).mpr K_E.property
-      · let e' := (boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e
-        change (derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj at e'
-        exact ⟨e'⟩
-    · intro K E K_E hK
-      have hK' : boundedConstructible (padicSubfieldRingObj X ℓ E) K_E.obj :=
-        (congrArg (fun P ↦ P K_E.obj) (hE E)).mp K_E.property
-      intro F h
-      have hKF := boundedConstructible_derivedExtendScalarsSubfield_obj X ℓ h K_E.obj hK'
-      have hKF' : constantModelBoundedConstructible
-          (Profinite.continuousMapRingObj F) X
-          ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) := by
-        have hEq := congrArg
-          (fun P : ObjectProperty
-              (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-                (padicSubfieldRingObj X ℓ F))) ↦
-            P ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj)) (hE F)
-        exact hEq.mpr hKF
-      refine ⟨hKF', ?_⟩
-      obtain ⟨e⟩ := hK
-      exact ⟨(derivedExtendScalarsCompIso X ℓ h).app K_E.obj ≪≫ e⟩
+  sorry
 
 end AlgebraicGeometry.ProEtale

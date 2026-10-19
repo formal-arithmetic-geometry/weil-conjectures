@@ -23,8 +23,25 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.Compactification.Affine
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientLeftComparison
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientRightComparison
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Compactification.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.CompactifiableOverField
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.Paper.RingedTopoiDerivedTensorPullback
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Affine-space ambient adjunction
@@ -100,9 +117,6 @@ theorem nonempty_affineSpaceAmbientAdjunction (N : ℕ) (hN : 0 < N)
             ((DerivedCategory.singleFunctor _ 0).obj
               (Scheme.finiteEtaleTateTwist (AffineSpace (ULift.{u} (Fin d)) S) N A hA d))) ⋙
           shiftFunctor _ (2 * (d : ℤ))) := by
-  obtain ⟨adj⟩ := nonempty_ambientTowerAdjunction N hN A hA S hS d
-  obtain ⟨left⟩ := nonempty_ambientTowerLeftComparison A S d
-  obtain ⟨right⟩ := nonempty_ambientTowerRightComparison N hN A hA S hS d
-  exact ⟨(adj.ofNatIsoLeft left).ofNatIsoRight right⟩
+  sorry
 
 end AlgebraicGeometry.Etale

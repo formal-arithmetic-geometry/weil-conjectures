@@ -1,326 +1,314 @@
 {
- "id": "lem-sfb-proetale-tor-local-global",
- "kind": "statement",
- "title": "Local and global finite Tor dimension on a quasi-compact pro-étale site",
- "statement": "Let $X$ be a quasi-compact scheme, meaning that every open cover of its underlying space has a finite subcover [def-pc-scheme, def-weil-pbc-quasi-compact-scheme], and let $A$ be a commutative ring. Work on a small skeleton of $X_{\\mathrm{proét}}$ with its pro-étale topology [def-weil-pbc-proetale-site], with the constant ring sheaf $A_X$ [def-weil-pbc-constant-sheaf]. Let $M\\in D(\\operatorname{Mod}(A_X))$, the unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For a site object $U$, write $M|_U$ for derived restriction to the slice ringed site $(X_{\\mathrm{proét}}/U,A_X|_U)$ [def-weil-pbc-ringed-derived-restriction, def-pur-localized-ringed-site]. Derived tensor and its cohomology use [def-weil-proetale-tor-amplitude, def-weil-derived-cohomology-sheaves]. The following are equivalent:\n\n1. There are integers $a\\leq b$ such that, for every degree-zero $A_X$-module sheaf $N$, one has $H^q(M\\otimes^L_{A_X}N)=0$ for $q\\notin[a,b]$.\n2. For every site object $U$ there is a covering $\\{U_i\\to U\\}$ and integers $a_i\\leq b_i$ such that, for every degree-zero $A_X|_{U_i}$-module sheaf $N_i$ on the slice site, one has $H^q(M|_{U_i}\\otimes^L_{A_X|_{U_i}}N_i)=0$ for $q\\notin[a_i,b_i]$.\n\nNo boundedness, constructibility, Noetherian, or completeness hypothesis is imposed on $M$, $A$, or $X$ beyond quasi-compactness of $X$.",
- "source": {
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C2, lemma-describe-constructible-complexes, proof: making local finite Tor dimension uniform on quasi-compact X; the local-to-global argument applies to arbitrary constant coefficient module complexes. Local finite Tor dimension is Tag 08FZ, definition-tor-amplitude, in sites-cohomology.tex."
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-pur-localized-ringed-site",
-  "def-weil-proetale-tor-amplitude",
-  "def-weil-derived-cohomology-sheaves"
- ],
- "proof": [
-  {
-   "text": "Compare the representative Tor test with the localized tensor. For a quasi-isomorphism f:F→P between K-flat complexes, its cone is acyclic and K-flat. Tensor of this cone with every complex is acyclic; signed symmetry and the tensor-cone comparison therefore make Tot(f tensor id_D) a quasi-isomorphism for every D. Resolve any K-flat representative P by a flat-term K-flat F. The first-variable representative calculation of wfSiteDerivedTensor computes tensor using F; invert the displayed quasi-isomorphism to obtain the same computation using P. The localization homology factorization identifies the resulting cohomology with ordinary complex homology. Conversely resolve a representative of an arbitrary derived M to obtain a K-flat representative. These comparisons prove coefficientModelTorAmplitude_iff_localizedTensor with exactly the same interval and arbitrary degree-zero module tests.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-cone-direct-sum",
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "def-wf-tensor-product",
-    "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 06YT: K-flat resolutions, invariance, and computation of derived tensor; Tag 08FZ."
-   }
+  "id": "lem-sfb-proetale-tor-local-global",
+  "kind": "statement",
+  "title": "Local and global finite Tor dimension on a quasi-compact pro-étale site",
+  "statement": "Let $X$ be a quasi-compact scheme, meaning that every open cover of its underlying space has a finite subcover [def-pc-scheme, def-weil-pbc-quasi-compact-scheme], and let $A$ be a commutative ring. Work on a small skeleton of $X_{\\mathrm{proét}}$ with its pro-étale topology [def-weil-pbc-proetale-site], with the constant ring sheaf $A_X$ [def-weil-pbc-constant-sheaf]. Let $M\\in D(\\operatorname{Mod}(A_X))$, the unbounded derived category of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For a site object $U$, write $M|_U$ for derived restriction to the slice ringed site $(X_{\\mathrm{proét}}/U,A_X|_U)$ [def-weil-pbc-ringed-derived-restriction, def-pur-localized-ringed-site]. Derived tensor and its cohomology use [def-weil-proetale-tor-amplitude, def-weil-derived-cohomology-sheaves]. The following are equivalent:\n\n1. There are integers $a\\leq b$ such that, for every degree-zero $A_X$-module sheaf $N$, one has $H^q(M\\otimes^L_{A_X}N)=0$ for $q\\notin[a,b]$.\n2. For every site object $U$ there is a covering $\\{U_i\\to U\\}$ and integers $a_i\\leq b_i$ such that, for every degree-zero $A_X|_{U_i}$-module sheaf $N_i$ on the slice site, one has $H^q(M|_{U_i}\\otimes^L_{A_X|_{U_i}}N_i)=0$ for $q\\notin[a_i,b_i]$.\n\nNo boundedness, constructibility, Noetherian, or completeness hypothesis is imposed on $M$, $A$, or $X$ beyond quasi-compactness of $X$.",
+  "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof: making local finite Tor dimension uniform on quasi-compact X; the local-to-global argument applies to arbitrary constant coefficient module complexes. Local finite Tor dimension is Tag 08FZ, definition-tor-amplitude, in sites-cohomology.tex."
   },
-  {
-   "text": "Given a global interval [a,b], use the preceding comparison, apply siteTorIntervalRestriction to every slice, and compare its representative-based restriction to coefficientModelSliceRestriction. For the latter comparison use the exact module restriction functor F: the inverse of mapDerivedCategoryFactors on Q.objPreimage M followed by F.mapDerivedCategory applied to Q.objObjPreimageIso M. Transport the localized tensor and cohomology through this isomorphism, then apply the reverse representative comparison. Thus the same interval works on every slice against all slice modules. The maximal presieve on every U is covering and satisfies the local condition.",
-   "uses": [
-    "lem-sf-site-tor-interval-restriction",
-    "def-weil-pbc-ringed-derived-restriction",
-    "def-weil-pbc-ringed-site-derived-restriction",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08H5, lemma-tor-amplitude-pullback, and Tags 03DH/08JB: exact slice restriction."
-   }
-  },
-  {
-   "text": "For the converse cover X by finitely many affine opens. On each affine apply the local hypothesis. Transport its covering sieve from the coefficient-sized model to X.ProEt by AsSmall.down; a covering sieve contains a generating pro-etale covering family. On this affine target select finitely many affine opens in members of that family whose images cover the target. Each selected cover member factors through a member of the original presieve. Retain those original presieve members, with their given intervals: their arrows need not be affine. The finite affine refinements certify that the retained family covers. Compose over the finite affine open cover of X, transport back to the small model, and use the terminal-object characterization of CoversTop. Reindex the finite sum of finite index sets by Fin n. This is the proved helper coefficientProEtale_exists_finite_cover; no quasi-separatedness is used.",
-   "uses": [
+  "stmt_deps": [
     "def-pc-scheme",
     "def-weil-pbc-quasi-compact-scheme",
-    "sk-def-pe-site",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 0989, 098B and 098C: affine-target finite refinements, Zariski coverings, and composition."
-   }
-  },
-  {
-   "text": "Choose the interval [a_i,b_i] on each of the finitely many retained original local objects V_i. Finite.bddBelow_range and Finite.bddAbove_range provide lo≤a_i and b_i≤hi. The interval [min(lo,0),max(hi,0)] is ordered and contains all chosen intervals. If the finite family is empty, the inserted zero still makes an ordered interval. A degree outside this interval lies outside every [a_i,b_i]. Unlike passing to the affine refinements, retaining the original presieve members requires no further restriction or relocalization of their Tor intervals.",
-   "uses": [
-    "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof: uniform Tor bounds on quasi-compact X."
-   }
-  },
-  {
-   "text": "Fix any global K-flat representative P of M, any global module N and an integer q outside the common interval. Exact restriction to V_i preserves K-flatness. Its derived factorization sends the given Q(P)≅M to Q(P|V_i)≅M|V_i. The local interval therefore kills the homology of Tot((P|V_i) tensor (N|V_i)[0]). The natural module tensor restriction comparison, after identifying total tensor with a degree-zero second argument with the termwise tensor-right functor, identifies that complex with the restriction of Tot(P tensor N[0]). Exact restriction commutes with homology by ShortComplex.mapHomologyIso. Thus the q-th global Tor-test homology sheaf restricts to zero on every V_i. This is coefficientModelTorAmplitude_restricted_test_isZero and requires only restrictions of global N, never extensions of arbitrary slice test modules.",
-   "uses": [
-    "lem-sfb-ringed-site-restriction-kflat",
-    "lem-weil-pbc-slice-tensor-natural",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
     "def-weil-pbc-ringed-derived-restriction",
-    "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E8K, 07A4 and 08FZ: K-flat restriction, tensor restriction and Tor vanishing."
-   }
-  },
-  {
-   "text": "A module sheaf F that restricts to zero on a CoversTop family is zero. To prove its identity morphism equals zero, apply the faithful underlying-sheaf functor and test on sections over every object T. The covering sieve Sieve.ofObjects V on T consists of arrows W→T with some W→V_i. Evaluate the equality id=0 for F|V_i on that slice object to obtain id=0 on F(W). The sheaf hom_ext axiom for this covering makes id=0 on F(T). This includes an empty covering family. Apply this to every Tor-test homology sheaf from the preceding step; all representatives and global modules were arbitrary, so the chosen common interval proves global Tor amplitude.",
-   "uses": [
     "def-pur-localized-ringed-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-proetale-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VH and 00VR: covering sieves and uniqueness in the sheaf condition."
-   }
-  }
- ],
- "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-cone-direct-sum",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "def-wf-tensor-product",
-  "def-weil-proetale-tor-amplitude",
-  "lem-sf-site-tor-interval-restriction",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-weil-pbc-ringed-site-derived-restriction",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-pc-scheme",
-  "def-weil-pbc-quasi-compact-scheme",
-  "sk-def-pe-site",
-  "lem-sfb-ringed-site-restriction-kflat",
-  "lem-weil-pbc-slice-tensor-natural",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-pur-localized-ringed-site"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C2, lemma-describe-constructible-complexes, uniform Tor interval sentence; implemented using original presieve members selected by finite affine refinements (Tags 0989, 098B, 098C), representative comparison (Tags 06YS, 06YT), restriction (08H5, 0E8K), and sheaf uniqueness (00VR).",
-  "group": "U7",
-  "date": "2026-10-19"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "finite Tor amplitude is local on a finite covering of a Noetherian ringed site and local bounds globalize",
-   "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "leansearch",
-   "query": "local finite Tor dimension on a covering implies a global finite Tor amplitude for a complex of sheaves on a Noetherian site",
-   "results": "SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation.recOn; SheafOfModules.LocalGeneratorsData.coversTop; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "loogle",
-   "query": "TorAmplitude",
-   "results": "No hits; loogle: unknown identifier 'TorAmplitude'",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"amplitude\"",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A constructible complex of sheaves on the proetale site of a Noetherian scheme with finite constant coefficients locally has finite Tor dimension if and only if it has finite Tor amplitude globally",
-   "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "grep",
-   "query": "tor.?amplitude|finite.?[Tt]or|[Tt]or[Dd]imension|locally.*flat",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a quasi-compact scheme the complex of constant ring module sheaves on the proetale site locally has finite Tor dimension if and only if it has finite Tor amplitude globally",
-   "results": "CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; SheafOfModules.IsFiniteType; AlgebraicGeometry.locallyQuasiFinite_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Tor\", \"Sheaf\"",
-   "results": "CategoryTheory.OverPresheafAux.yonedaCollectionFunctor; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda; CategoryTheory.Presheaf.functorToRepresentables; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
-   "date": "2026-10-17",
-   "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A complex of sheaves on the proetale site of a quasi-compact scheme has finite Tor amplitude if it locally has finite Tor dimension",
-   "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
-   "date": "2026-10-17",
-   "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
-  },
-  {
-   "tool": "grep",
-   "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
-   "results": "No hits",
-   "date": "2026-10-17",
-   "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Tor\", \"Sheaf\"",
-   "results": "CategoryTheory.OverPresheafAux.yonedaCollectionFunctor; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda; CategoryTheory.Presheaf.functorToRepresentables; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
-   "date": "2026-10-17",
-   "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Local finite Tor dimension of sheaf complexes on a quasi-compact proetale site gives uniform global Tor amplitude bounds",
-   "results": "SheafOfModules.hasLimitsOfSize; CategoryTheory.projectiveDimension_ne_top_iff; SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.IsFinitePresentation.mk; CategoryTheory.instHasProjectiveDimensionLTBiprod; SheafOfModules.hasLimit; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation",
-   "date": "2026-10-17",
-   "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Finite Tor amplitude bounds for module sheaves can be checked locally on a finite covering family of a ringed site",
-   "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFiniteType.exists_localGeneratorsData",
-   "date": "2026-10-17",
-   "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "det-lem-integral-models-stacks",
-  "date": "2026-10-17",
-  "group": "Q34"
- },
- "chapter": "sec-six-functors-basics",
- "unit": "sk-lem-integral-models",
- "blueprint": {
-  "from": {
-   "node": "det-lem-integral-models-stacks",
-   "place": "Proof of det-lem-integral-models-stacks: identification of local finite Tor dimension in Stacks 09C1 with a global finite Tor interval; expanded uniformity sentence in Stacks 09C2.",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-sfb-proetale-tor-local-global",
-  "worker": "stage1",
-  "summary": "Preserved the arbitrary constant-coefficient statement. Proved both implications using the existing ringed-site Tor restriction theorem, exact restriction and derived tensor comparison. Uniformized bounds on finite affine refinements and proved global vanishing directly from the sheaf axiom, including the empty scheme. No new nodes.",
-  "blueprint": "Realizes det-lem-integral-models-stacks, proof step identifying locally finite Tor dimension of the first residue reduction with a single global Tor interval, expanding the uniformity sentence of Stacks 09C2 on the integral-models route.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Its arbitrary-ringed-topos tensor comparison specializes to localization; the integral-models unit does not supply this general tensor identity."
-   },
-   {
-    "node": "lem-sf-site-tor-interval-restriction",
-    "why": "Its arbitrary-ringed-site statement preserves a fixed interval against every slice module, for both global-to-local and refinement; the unit gives no such general restriction theorem."
-   },
-   {
-    "node": "sk-def-pe-site",
-    "why": "The pro-etale topology, including finite affine refinement for affine targets and Zariski covers, supplies the covering facts used to uniformize bounds without a Noetherian hypothesis."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Its K-flat flat-term model of the ringed-site derived tensor identifies the tensor of the cited Tor restriction theorem with the Tor-amplitude tensor of the statement; the integral-models unit gives no tensor convention of its own."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sf-site-tor-interval-restriction",
-  "sk-def-pe-site"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q05-29f5cda58",
-  "group": "Q05",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-29f5cda58 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one item, no new nodes. The statement matches Stacks 08FZ: (1) is clause (2) of the definition and (2) is clause (3) (sites-cohomology.tex l.12377-12394). The equivalence is the uniformity sentence in the proof of Stacks 09C2 (proetale.tex l.5803-5807). Hypotheses are the same as the source (quasi-compact X only). The coefficient ring is the constant A_X with ordinary derived tensor, and there is no base-change morphism. Checked on small cases: empty X, M=0, the zero ring, a finite disjoint union, and an infinite disjoint union, which shows quasi-compactness is needed. Steps 1, 3, 5 and 6 are correct. Step 3 gets the finite covering from the affine-target refinement of sk-def-pe-site plus the composition axiom, with no quasi-separatedness. Steps 5-6 use base change and the equalizer axiom and also work for empty X. Treating localization as a morphism of topoi matches existing reviewed nodes. Repair (C4): steps 2 and 4 applied lem-sf-site-tor-interval-restriction, whose E|_U is def-weil-pbc-ringed-site-derived-restriction with the K-flat flat-term tensor, as if it were the item's restriction def-weil-pbc-ringed-derived-restriction with the tensor of def-weil-proetale-tor-amplitude. I added the identification of the two, the missing uses, and recomputed proof_deps. lem-weil-pbc-site-derived-tensor-descent is added as a declared tool use. No duplicates found: lem-pc-quasi-compact-finite-tor-dimension is the O_X/Zariski analogue, and lem-sf-finite-cover-ctf-locality and lem-sfb-local-model-tor-bound-descent have stronger hypotheses. Batch-5 check: the flagged reach to def-pod-ring-scalar-extension runs only through the stale stmt_dep def-wf-tensor-product of the existing node lem-sf-site-tor-interval-restriction; its statement never uses that node. Without that entry its closure has 226 nodes and none in sec-trace-formula or sec-poincare-duality. Its proof is a generic ringed-site argument and no step of the trace formula or Poincare duality, and def-pod-ring-scalar-extension is a general definition. So the citation is outside both assumed statements and is kept; the maintainer should remove that stale stmt_dep. No SGA is used. Accepted tool uses: lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sf-site-tor-interval-restriction, sk-def-pe-site and lem-weil-pbc-site-derived-tensor-descent.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorLocalGlobal",
-  "declaration": "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally",
-  "declarations": [
-   "CategoryTheory.coefficientModelSliceRestriction",
-   "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally"
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-cohomology-sheaves"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorLocalGlobal.lean",
-  "statement": "theorem hasFiniteCoefficientProEtaleTorAmplitude_iff_locally (X : Scheme.{u}) [CompactSpace X] (A : Type (max v (u + 1))) [CommRing A] (M : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A)) : HasFiniteCoefficientProEtaleTorAmplitude X A M ↔ ∀ U : coefficientProEtaleSiteModel.{u, v} X, ∃ S : Presieve U, Sieve.generate S ∈ coefficientProEtaleModelTopology.{u, v} X U ∧ ∀ (V : coefficientProEtaleSiteModel.{u, v} X) (f : V ⟶ U), S f → ∃ a b : ℤ, HasCoefficientModelTorAmplitude ((ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A).over V) ((coefficientModelSliceRestriction (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A) V).obj M) a b",
-  "branch": "newtargets-dag",
-  "by": "Q44",
-  "date": "2026-10-17",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-54acb4012",
-  "group": "Q44",
-  "result": "pass",
-  "note": "Node diff adds only lean; lean.statement matches the file exactly. Clause check against the node and Stacks 08FZ/09C2: CompactSpace X; A : Type (max v (u+1)) CommRing with an independent universe; recorded AsSmall X.ProEt model and topology; constant ring sheaf; unbounded M in ConstantCompletion.D; (1) = recorded HasFiniteCoefficientProEtaleTorAmplitude (a<=b, every K-flat representative, every module); (2) = for every U a presieve with covering generated sieve, and for each member its own interval, HasCoefficientModelTorAmplitude on (constant).over V against all slice modules, with M restricted by the recorded ringedDerivedRestrictionSized. Helper coefficientModelSliceRestriction has real data and is not a duplicate. Universes u v w bound, autoImplicit false. Edge cases: empty X, M=0, zero ring, a=b. Docstrings with source and blueprint plus the six-step proof; only one sorry; lines <=100; report sections present. nt_compile.py --json: ProEtaleTorLocalGlobal.lean 12.5 s, exit 0, no diagnostics; a probe confirmed the tool reports errors. No findings."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U7",
-  "result": "pass",
-  "landing": "20261019T112549-L-3955856",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "First record the restriction calculation needed below. For a site object $V$, the localization morphism $j_V$ has coefficient map the identity on $A_X|_V$, so its module pullback is exactly restriction [def-pur-localized-ringed-site]. This functor is exact by [lem-pur-site-restriction-module-adjunction-exact]; hence its derived pullback is termwise restriction, the functor of [def-weil-pbc-ringed-derived-restriction]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to this ringed localization and the objects $M,N[0]$, where $N$ is an arbitrary global module sheaf. It gives $(M\\otimes^L_{A_X}N)|_V\\simeq M|_V\\otimes^L_{A_X|_V}N|_V$. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to the same exact restriction gives\n$$H^q(M\\otimes^L_{A_X}N)|_V\\cong H^q(M|_V\\otimes^L_{A_X|_V}N|_V).$$\nThe tensor comparison is for arbitrary unbounded derived objects and arbitrary ring sheaves; the cohomology comparison is for every integer $q$. Thus neither comparison requires constructibility or boundedness.",
+      "uses": [
+        "def-pur-localized-ringed-site",
+        "lem-pur-site-restriction-module-adjunction-exact",
+        "def-weil-pbc-ringed-derived-restriction",
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "lem-weil-pbc-exact-functor-complex-cohomology"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4, lemma-pullback-tensor-product, specialized to the localization morphism of Modules on Sites Tag 04IX (definition-localize-ringed-site); exact restriction and its degreewise cohomology comparison."
+      }
+    },
+    {
+      "text": "Assume (1), with interval $[a,b]$. For every site object $U$, apply [lem-sf-site-tor-interval-restriction] with $\\mathcal O=A_X$ and $E=M$. It gives the same Tor interval for $M|_U$, tested against every module sheaf on the slice, including those not obtained by restricting a global module. The singleton identity covering $\\{U\\xrightarrow{1}U\\}$ therefore satisfies (2). Identity families are coverings by [def-weil-pbc-sites-and-cohomology]. The restriction $E|_U$ of the cited theorem is [def-weil-pbc-ringed-site-derived-restriction], termwise restriction of a chosen representative followed by $Q_U$; the restriction $M|_U$ of the statement is [def-weil-pbc-ringed-derived-restriction], the functor induced on derived categories by the same exact termwise restriction. Both send $Q(C)$ to an object isomorphic to $Q_U(C|_U)$ for every complex $C$, so $M|_U$ and the cited $E|_U$ are isomorphic. Likewise the derived tensor of [def-weil-proetale-tor-amplitude], formed from any K-flat resolution, agrees up to isomorphism with the K-flat flat-term model of [lem-weil-pbc-site-derived-tensor-descent], since a K-flat flat-term resolution is in particular K-flat. Vanishing of cohomology sheaves is invariant under isomorphism.",
+      "uses": [
+        "lem-sf-site-tor-interval-restriction",
+        "def-weil-pbc-sites-and-cohomology",
+        "def-weil-pbc-ringed-site-derived-restriction",
+        "def-weil-pbc-ringed-derived-restriction",
+        "lem-weil-pbc-site-derived-tensor-descent",
+        "def-weil-proetale-tor-amplitude"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08H5, lemma-tor-amplitude-pullback, specialized to ringed localization; Tag 08FZ, definition-tor-amplitude."
+      }
+    },
+    {
+      "text": "Assume (2). A scheme is covered by affine open subschemes [def-pc-scheme], and quasi-compactness [def-weil-pbc-quasi-compact-scheme] selects a finite affine open cover $X=\\bigcup_{\\alpha=1}^t W_\\alpha$. These are site objects, and this Zariski cover is a pro-étale cover by [sk-def-pe-site]. For each $W_\\alpha$, apply (2) to obtain a covering $\\{Z_{\\alpha i}\\to W_\\alpha\\}_i$ and intervals $[a_{\\alpha i},b_{\\alpha i}]$ for the restrictions of $M$. By the affine-target clause of [sk-def-pe-site], this covering refines to a finite affine covering $\\{V_{\\alpha j}\\to W_\\alpha\\}_{j=1}^{m_\\alpha}$, each map factoring through some $Z_{\\alpha,i(\\alpha,j)}$. Composing these coverings with $\\{W_\\alpha\\to X\\}$ gives a finite covering $\\{V_{\\alpha j}\\to X\\}$ by the composition axiom of [def-weil-pbc-sites-and-cohomology]. All objects and covers are taken in the chosen small site, up to its skeleton equivalences. No quasi-separatedness of $X$ is needed: finite refinement is used separately over each affine target.",
+      "uses": [
+        "def-pc-scheme",
+        "def-weil-pbc-quasi-compact-scheme",
+        "sk-def-pe-site",
+        "def-weil-pbc-sites-and-cohomology"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/proetale.tex",
+        "place": "Tag 0989, definition-fpqc-covering; affine-target finite refinement as stated by sk-def-pe-site; Tag 098B, lemma-etale-proetale; Tag 098C, lemma-proetale, composition of covering families."
+      }
+    },
+    {
+      "text": "For each selected pair $(\\alpha,j)$, restrict the Tor interval on $Z_{\\alpha,i(\\alpha,j)}$ further to $V_{\\alpha j}$ using [lem-sf-site-tor-interval-restriction], now on the ringed site $X_{\\mathrm{proét}}/Z_{\\alpha,i(\\alpha,j)}$. The relocalization identity in [def-pur-localized-ringed-site] identifies this twice restricted object with $M|_{V_{\\alpha j}}$ and its coefficient ring with $A_X|_{V_{\\alpha j}}$. Thus its Tor amplitude lies in $[a_{\\alpha,i(\\alpha,j)},b_{\\alpha,i(\\alpha,j)}]$, with arbitrary slice modules as tests. Define\n$$a=\\min\\bigl(\\{0\\}\\cup\\{a_{\\alpha,i(\\alpha,j)}\\}_{\\alpha,j}\\bigr),\\qquad b=\\max\\bigl(\\{0\\}\\cup\\{b_{\\alpha,i(\\alpha,j)}\\}_{\\alpha,j}\\bigr).$$\nThese are finite nonempty sets of integers. Then $a\\leq0\\leq b$, and every selected local Tor interval is contained in $[a,b]$. The inserted zero also handles the empty cover of the empty scheme. The identification of the cited derived restriction and tensor with those of the statement is the one made in step 2.",
+      "uses": [
+        "lem-sf-site-tor-interval-restriction",
+        "def-pur-localized-ringed-site",
+        "def-weil-pbc-ringed-site-derived-restriction",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08H5, lemma-tor-amplitude-pullback; relocalization is Sites Tag 03EH, lemma-relocalize."
+      }
+    },
+    {
+      "text": "Let $N$ be any degree-zero global $A_X$-module sheaf, and let $q\\notin[a,b]$. Put $F=H^q(M\\otimes^L_{A_X}N)$. Step 1 identifies $F|_{V_{\\alpha j}}$ with $H^q(M|_{V_{\\alpha j}}\\otimes^L N|_{V_{\\alpha j}})$. The latter vanishes by step 4: $N|_{V_{\\alpha j}}$ is an allowed slice module and $q$ lies outside its selected local interval. Consequently $F$ restricts to zero on every member of the finite covering of step 3. This implication uses only the displayed restriction calculation and the defining vanishing condition, with no extension or descent of slice test modules required.",
+      "uses": [
+        "def-pur-localized-ringed-site",
+        "def-weil-proetale-tor-amplitude"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08FZ, definition-tor-amplitude, applied after the explicit comparison of step 1."
+      }
+    },
+    {
+      "text": "To conclude $F=0$, take any site object $T$. Base change of the covering from step 3 gives a covering $\\{T\\times_X V_{\\alpha j}\\to T\\}$. By the sectionwise rule for localized sheaves [def-pur-localized-ringed-site], $F(T\\times_X V_{\\alpha j})=0$ since each such object maps to $V_{\\alpha j}$. The sheaf equalizer axiom in [def-weil-pbc-sites-and-cohomology] makes $F(T)\\to\\prod_{\\alpha,j}F(T\\times_X V_{\\alpha j})$ injective; its target is the zero group, hence $F(T)=0$. This holds for all $T$, so $F=0$. When $X$ is empty, the same argument uses the empty covering and its empty product, the zero group. Since $N$ and $q\\notin[a,b]$ were arbitrary, (1) follows, completing the equivalence.",
+      "uses": [
+        "def-pur-localized-ringed-site",
+        "def-weil-pbc-sites-and-cohomology"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites.tex",
+        "place": "Definitions 00VH (definition-site: base change and composition of coverings), 00VR (definition-sheaf: equalizer axiom); applied to the underlying abelian sheaf."
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pur-localized-ringed-site",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sf-site-tor-interval-restriction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-ringed-site-derived-restriction",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-proetale-tor-amplitude",
+    "def-pc-scheme",
+    "def-weil-pbc-quasi-compact-scheme",
+    "sk-def-pe-site"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C2, lemma-describe-constructible-complexes, uniform Tor interval sentence; explicit finite-affine-cover argument using Tags 0989, 098B, 098C and ringed-site Tags 08FZ, 08H5, 07A4."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "finite Tor amplitude is local on a finite covering of a Noetherian ringed site and local bounds globalize",
+      "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "leansearch",
+      "query": "local finite Tor dimension on a covering implies a global finite Tor amplitude for a complex of sheaves on a Noetherian site",
+      "results": "SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.IsFinitePresentation.recOn; SheafOfModules.LocalGeneratorsData.coversTop; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "loogle",
+      "query": "TorAmplitude",
+      "results": "No hits; loogle: unknown identifier 'TorAmplitude'",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"amplitude\"",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A constructible complex of sheaves on the proetale site of a Noetherian scheme with finite constant coefficients locally has finite Tor dimension if and only if it has finite Tor amplitude globally",
+      "results": "SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "grep",
+      "query": "tor.?amplitude|finite.?[Tt]or|[Tt]or[Dd]imension|locally.*flat",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For a quasi-compact scheme the complex of constant ring module sheaves on the proetale site locally has finite Tor dimension if and only if it has finite Tor amplitude globally",
+      "results": "CategoryTheory.isZero_Tor_succ_of_projective; CategoryTheory.isZero_Tor'_succ_of_projective; AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; SheafOfModules.IsFiniteType; AlgebraicGeometry.locallyQuasiFinite_iff; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Tor\", \"Sheaf\"",
+      "results": "CategoryTheory.OverPresheafAux.yonedaCollectionFunctor; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda; CategoryTheory.Presheaf.functorToRepresentables; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+      "date": "2026-10-17",
+      "verdict": "no match: hits do not state local-to-global finite Tor amplitude for pro-étale module complexes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A complex of sheaves on the proetale site of a quasi-compact scheme has finite Tor amplitude if it locally has finite Tor dimension",
+      "results": "SheafOfModules.IsFinitePresentation; SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+      "date": "2026-10-17",
+      "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
+    },
+    {
+      "tool": "grep",
+      "query": "torAmplitude|tor_amplitude|finite.tor.dimension|TorAmplitude",
+      "results": "No hits",
+      "date": "2026-10-17",
+      "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Tor\", \"Sheaf\"",
+      "results": "CategoryTheory.OverPresheafAux.yonedaCollectionFunctor; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_obj; CategoryTheory.OverPresheafAux.yonedaCollectionFunctor_map; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompYoneda; CategoryTheory.CostructuredArrow.overEquivPresheafCostructuredArrow_functor_map_toOverCompCoyoneda; CategoryTheory.Presheaf.functorToRepresentables; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeUliftYonedaUliftYonedaMap; CategoryTheory.Presheaf.instIsLeftKanExtensionOppositeObjFunctorTypeYonedaYonedaMap",
+      "date": "2026-10-17",
+      "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Local finite Tor dimension of sheaf complexes on a quasi-compact proetale site gives uniform global Tor amplitude bounds",
+      "results": "SheafOfModules.hasLimitsOfSize; CategoryTheory.projectiveDimension_ne_top_iff; SheafOfModules.Finite.hasFiniteLimits; SheafOfModules.IsFinitePresentation.mk; CategoryTheory.instHasProjectiveDimensionLTBiprod; SheafOfModules.hasLimit; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation",
+      "date": "2026-10-17",
+      "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Finite Tor amplitude bounds for module sheaves can be checked locally on a finite covering family of a ringed site",
+      "results": "SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; SheafOfModules.IsFiniteType; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+      "date": "2026-10-17",
+      "verdict": "no match: returned finite presentation, projective dimension, or presheaf/Yoneda results do not give local-to-global Tor bounds on a pro-etale ringed site"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "det-lem-integral-models-stacks",
+    "date": "2026-10-17",
+    "group": "Q34"
+  },
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-lem-integral-models",
+  "blueprint": {
+    "from": {
+      "node": "det-lem-integral-models-stacks",
+      "place": "Proof of det-lem-integral-models-stacks: identification of local finite Tor dimension in Stacks 09C1 with a global finite Tor interval; expanded uniformity sentence in Stacks 09C2.",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-sfb-proetale-tor-local-global",
+    "worker": "stage1",
+    "summary": "Preserved the arbitrary constant-coefficient statement. Proved both implications using the existing ringed-site Tor restriction theorem, exact restriction and derived tensor comparison. Uniformized bounds on finite affine refinements and proved global vanishing directly from the sheaf axiom, including the empty scheme. No new nodes.",
+    "blueprint": "Realizes det-lem-integral-models-stacks, proof step identifying locally finite Tor dimension of the first residue reduction with a single global Tor interval, expanding the uniformity sentence of Stacks 09C2 on the integral-models route.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "why": "Its arbitrary-ringed-topos tensor comparison specializes to localization; the integral-models unit does not supply this general tensor identity."
+      },
+      {
+        "node": "lem-sf-site-tor-interval-restriction",
+        "why": "Its arbitrary-ringed-site statement preserves a fixed interval against every slice module, for both global-to-local and refinement; the unit gives no such general restriction theorem."
+      },
+      {
+        "node": "sk-def-pe-site",
+        "why": "The pro-etale topology, including finite affine refinement for affine targets and Zariski covers, supplies the covering facts used to uniformize bounds without a Noetherian hypothesis."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Its K-flat flat-term model of the ringed-site derived tensor identifies the tensor of the cited Tor restriction theorem with the Tor-amplitude tensor of the statement; the integral-models unit gives no tensor convention of its own."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-site-tor-interval-restriction",
+    "sk-def-pe-site",
+    "lem-weil-pbc-site-derived-tensor-descent"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q05-29f5cda58",
+    "group": "Q05",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-29f5cda58 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one item, no new nodes. The statement matches Stacks 08FZ: (1) is clause (2) of the definition and (2) is clause (3) (sites-cohomology.tex l.12377-12394). The equivalence is the uniformity sentence in the proof of Stacks 09C2 (proetale.tex l.5803-5807). Hypotheses are the same as the source (quasi-compact X only). The coefficient ring is the constant A_X with ordinary derived tensor, and there is no base-change morphism. Checked on small cases: empty X, M=0, the zero ring, a finite disjoint union, and an infinite disjoint union, which shows quasi-compactness is needed. Steps 1, 3, 5 and 6 are correct. Step 3 gets the finite covering from the affine-target refinement of sk-def-pe-site plus the composition axiom, with no quasi-separatedness. Steps 5-6 use base change and the equalizer axiom and also work for empty X. Treating localization as a morphism of topoi matches existing reviewed nodes. Repair (C4): steps 2 and 4 applied lem-sf-site-tor-interval-restriction, whose E|_U is def-weil-pbc-ringed-site-derived-restriction with the K-flat flat-term tensor, as if it were the item's restriction def-weil-pbc-ringed-derived-restriction with the tensor of def-weil-proetale-tor-amplitude. I added the identification of the two, the missing uses, and recomputed proof_deps. lem-weil-pbc-site-derived-tensor-descent is added as a declared tool use. No duplicates found: lem-pc-quasi-compact-finite-tor-dimension is the O_X/Zariski analogue, and lem-sf-finite-cover-ctf-locality and lem-sfb-local-model-tor-bound-descent have stronger hypotheses. Batch-5 check: the flagged reach to def-pod-ring-scalar-extension runs only through the stale stmt_dep def-wf-tensor-product of the existing node lem-sf-site-tor-interval-restriction; its statement never uses that node. Without that entry its closure has 226 nodes and none in sec-trace-formula or sec-poincare-duality. Its proof is a generic ringed-site argument and no step of the trace formula or Poincare duality, and def-pod-ring-scalar-extension is a general definition. So the citation is outside both assumed statements and is kept; the maintainer should remove that stale stmt_dep. No SGA is used. Accepted tool uses: lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sf-site-tor-interval-restriction, sk-def-pe-site and lem-weil-pbc-site-derived-tensor-descent.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProEtaleTorLocalGlobal",
+    "declaration": "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally",
+    "declarations": [
+      "CategoryTheory.coefficientModelSliceRestriction",
+      "AlgebraicGeometry.Scheme.hasFiniteCoefficientProEtaleTorAmplitude_iff_locally"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleTorLocalGlobal.lean",
+    "statement": "theorem hasFiniteCoefficientProEtaleTorAmplitude_iff_locally (X : Scheme.{u}) [CompactSpace X] (A : Type (max v (u + 1))) [CommRing A] (M : ConstantCompletion.D (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A)) : HasFiniteCoefficientProEtaleTorAmplitude X A M ↔ ∀ U : coefficientProEtaleSiteModel.{u, v} X, ∃ S : Presieve U, Sieve.generate S ∈ coefficientProEtaleModelTopology.{u, v} X U ∧ ∀ (V : coefficientProEtaleSiteModel.{u, v} X) (f : V ⟶ U), S f → ∃ a b : ℤ, HasCoefficientModelTorAmplitude ((ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A).over V) ((coefficientModelSliceRestriction (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A) V).obj M) a b",
+    "branch": "newtargets-dag",
+    "by": "Q44",
+    "date": "2026-10-17",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-54acb4012",
+    "group": "Q44",
+    "result": "pass",
+    "note": "Node diff adds only lean; lean.statement matches the file exactly. Clause check against the node and Stacks 08FZ/09C2: CompactSpace X; A : Type (max v (u+1)) CommRing with an independent universe; recorded AsSmall X.ProEt model and topology; constant ring sheaf; unbounded M in ConstantCompletion.D; (1) = recorded HasFiniteCoefficientProEtaleTorAmplitude (a<=b, every K-flat representative, every module); (2) = for every U a presieve with covering generated sieve, and for each member its own interval, HasCoefficientModelTorAmplitude on (constant).over V against all slice modules, with M restricted by the recorded ringedDerivedRestrictionSized. Helper coefficientModelSliceRestriction has real data and is not a duplicate. Universes u v w bound, autoImplicit false. Edge cases: empty X, M=0, zero ring, a=b. Docstrings with source and blueprint plus the six-step proof; only one sorry; lines <=100; report sections present. nt_compile.py --json: ProEtaleTorLocalGlobal.lean 12.5 s, exit 0, no diagnostics; a probe confirmed the tool reports errors. No findings."
+  }
 }

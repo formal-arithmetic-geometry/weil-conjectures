@@ -1,299 +1,285 @@
 {
- "id": "prop-every-iterate-trace",
- "blueprint": {
-  "is": "prop-every-iterate-trace",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Every-iterate Grothendieck–Lefschetz identity",
- "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$. Choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$, and a\nseparated finite-type\n$k_0$-scheme $Y_0$, and\n$Y=Y_0\\times_{k_0}k$. Let\n$K\\in D^b_{c,\\mathrm W}(Y,E)$ be a\nWeil complex, let\n$F$ be its global\ngeometric-Frobenius action on\ncompactly supported\ncohomology. For every\ninteger $n\\geq1$ and each point $x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$. The local operators\n$F_x^{(n)}$ and the stalk complexes\n$K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$, using the\nderived pullback; these are the\nlocal Frobenius and stalk\nconstructions; their alternating traces are independent of the choices.\nThe sets $Y_0(\\mathbf F_{q^n})$ and their cardinalities $N_n(Y_0)$ use the\npoint-count convention.\nFor every such $n$, one has\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(\\operatorname{For}K)_{\\bar x}\\bigr)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,K)\\bigr).\n$$\n\nBoth sums are finite. For the constant\nWeil sheaf $E_Y$, each local\nalternating trace is $1$, so\n\n$$\nN_n(Y_0)=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,E)\\bigr).\n$$\n\nIf $Y_0$ is proper,\ncompactly supported\ncohomology may be replaced by\nordinary cohomology. In\nparticular, let $X_0/\\Fq$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, put\n$X=X_0\\times_{\\Fq}k$, let $(\\Ql)_X$ be its constant\nWeil sheaf, and let $F_X$ be the\nglobal geometric Frobenius\non $H^i(X,\\Ql)$ for every $i\\in\\mathbf Z$. Put\n$V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, using the\nsmooth-proper\ncohomological family. Then\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\Tr(F_{i,\\ell}^n\\mid V_{i,\\ell}).\n$$",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.md",
-  "place": "node prop-every-iterate-trace, order 2881"
- },
- "stmt_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-point-counts-zeta",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-smooth-proper-cohomological-family",
-  "def-weil-weil-sheaf-complex",
-  "def-weil-local-frobenius-trace",
-  "def-weil-constant-weil-structure",
-  "def-weil-endomorphism-trace",
-  "def-weil-l-adic-coefficient-extension"
- ],
- "proof": [
-  {
-   "text": "Fix $n\\geq1$. By [lem-weil-point-counts-finite](1), $P=Y_0(\\mathbf F_{q^n})$ is finite. By [prop-cohomological-finiteness], the $E$-spaces $H_c^i(Y,K)$ are finite-dimensional and vanish outside a finite interval, and their geometric Frobenius is an automorphism. By [def-weil-local-frobenius-trace], the stalk cohomology spaces are the bounded finite-dimensional cohomology of $C_{\\bar x}=\\operatorname{Fib}_s(L\\bar x^*\\operatorname{For}K)$, and the local alternating trace is precisely the displayed sum over $j$. Thus every trace exists; the global sum is finite, and the local sums, over finitely many points each with bounded stalk cohomology, are finite.",
-   "uses": [
-    "lem-weil-point-counts-finite",
-    "prop-cohomological-finiteness",
-    "def-weil-local-frobenius-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
+  "id": "prop-every-iterate-trace",
+  "blueprint": {
+    "is": "prop-every-iterate-trace",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "Use [lem-zl-general-condensed-weil-realization] to realize the finite-stage E-Weil datum K as a model-Frobenius Weil object in the bounded constructible condensed Qbar_l coefficient category. The node supplies the compact-support and fixed-stalk comparison isomorphisms, intertwines the model globalOperator and stalkFrobenius with the scalar extensions of F^n and F_x^(n), and identifies the model-Frobenius fixed points with Y_0(F_{q^n}). By step 1 and the final clause of that comparison, the fixed-point set is finite and the condensed global and stalk objects have right duals. Therefore all hypotheses of [nt-assume-trace-formula] hold, and it gives equality of the categorical global trace with the finite sum of categorical stalk traces in D^b_c(s)[[Qbar_l]]. We use the assumption only for this categorical identity; it does not itself identify categorical traces with alternating cohomology traces.",
-   "uses": [
-    "lem-zl-general-condensed-weil-realization",
-    "nt-assume-trace-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
+  "kind": "statement",
+  "title": "Every-iterate Grothendieck–Lefschetz identity",
+  "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$. Choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$, and a\nseparated finite-type\n$k_0$-scheme $Y_0$, and\n$Y=Y_0\\times_{k_0}k$. Let\n$K\\in D^b_{c,\\mathrm W}(Y,E)$ be a\nWeil complex, let\n$F$ be its global\ngeometric-Frobenius action on\ncompactly supported\ncohomology. For every\ninteger $n\\geq1$ and each point $x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$. The local operators\n$F_x^{(n)}$ and the stalk complexes\n$K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$, using the\nderived pullback; these are the\nlocal Frobenius and stalk\nconstructions; their alternating traces are independent of the choices.\nThe sets $Y_0(\\mathbf F_{q^n})$ and their cardinalities $N_n(Y_0)$ use the\npoint-count convention.\nFor every such $n$, one has\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(\\operatorname{For}K)_{\\bar x}\\bigr)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,K)\\bigr).\n$$\n\nBoth sums are finite. For the constant\nWeil sheaf $E_Y$, each local\nalternating trace is $1$, so\n\n$$\nN_n(Y_0)=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,E)\\bigr).\n$$\n\nIf $Y_0$ is proper,\ncompactly supported\ncohomology may be replaced by\nordinary cohomology. In\nparticular, let $X_0/\\Fq$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, put\n$X=X_0\\times_{\\Fq}k$, let $(\\Ql)_X$ be its constant\nWeil sheaf, and let $F_X$ be the\nglobal geometric Frobenius\non $H^i(X,\\Ql)$ for every $i\\in\\mathbf Z$. Put\n$V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, using the\nsmooth-proper\ncohomological family. Then\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\Tr(F_{i,\\ell}^n\\mid V_{i,\\ell}).\n$$",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.md",
+    "place": "node prop-every-iterate-trace, order 2881"
   },
-  {
-   "text": "Transport the categorical equality of step 2 through the comparison isomorphisms of [lem-zl-general-condensed-weil-realization]. Clause 3 of [lem-zl-condensed-point-supertrace] says that the categorical trace of each realized global or stalk operator is the image under the injective coefficient map $E\\to\\operatorname{End}(\\Qlb_s)$ of the corresponding alternating E-valued cohomological trace; its finite-dimensional hypotheses are exactly those established in step 1. The comparison node intertwines powers of the actual operators, so the categorical equality is the image under the same coefficient map of the two finite E-valued sums displayed in the statement. Injectivity gives the asserted E-valued identity after identifying End(Qbar_l_s) with Qbar_l. No representative-independence or trace-formula theorem is used in this transport.",
-   "uses": [
-    "lem-zl-general-condensed-weil-realization",
-    "lem-zl-condensed-point-supertrace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
-  },
-  {
-   "text": "Steps 2 and 3 give equality of the images of the two finite $E$-valued sums under the injective coefficient map $\\epsilon_E$ of [lem-zl-condensed-point-supertrace] (cited in step 3). Its kernel is zero, so their difference is zero already in $E$. This proves the first identity. Steps 2 and 3 hold for every selection of geometric points $\\bar x$ over the $x\\in P$, since the stalk comparison of [lem-zl-general-condensed-weil-realization] is stated for every geometric point over $x$. This proves independence of the local alternating traces from the choices: compare two selections differing only at a fixed $x\\in P$; both total sums equal the same global trace, and cancelling the other finitely many summands gives equality of the traces at $x$. Any two choices at $x$ can be compared this way. If $P$ is empty there are no local choices and the formula says that the global alternating trace is zero.",
-   "uses": [
-    "lem-zl-condensed-point-supertrace",
-    "lem-zl-general-condensed-weil-realization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
-  },
-  {
-   "text": "For the canonical constant Weil sheaf $E_Y$, the local complex is $E[0]$. The construction in [def-weil-constant-weil-structure] sends every constant section $a$ to that same section; the restrictions and insertions defining [def-weil-frobenius-point-transport] also retain $a$. In the composite of [def-weil-local-frobenius-trace], each point transport followed by the constant Weil comparison therefore acts as $a\\mapsto a$; repeating this $n$ times still gives the identity. These computations hold for the constant reductions, their completed integral unit, and its rationalization defining $E_Y$. Thus the only nonzero stalk cohomology is $E$ in degree zero and $F_x^{(n)}=1$. Its matrix is $(1)$, whose trace is $1$ by [def-weil-endomorphism-trace]. Substituting in step 4 makes the left side $\\sum_{x\\in P}1=\\#P=N_n(Y_0)$ by [def-weil-point-counts-zeta], giving the second identity.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-point-counts-zeta",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace",
     "def-weil-constant-weil-structure",
+    "def-weil-endomorphism-trace",
+    "def-weil-l-adic-coefficient-extension"
+  ],
+  "proof": [
+    {
+      "text": "Fix $n\\geq1$. By [lem-weil-point-counts-finite](1), $P=Y_0(\\mathbf F_{q^n})$ is finite. By [prop-cohomological-finiteness], the $E$-spaces $H_c^i(Y,K)$ are finite-dimensional and vanish outside a finite interval, and their geometric Frobenius is an automorphism. By [def-weil-local-frobenius-trace], the stalk cohomology spaces are the bounded finite-dimensional cohomology of $C_{\\bar x}=\\operatorname{Fib}_s(L\\bar x^*\\operatorname{For}K)$, and the local alternating trace is precisely the displayed sum over $j$. Thus every trace exists; the global sum is finite, and the local sums, over finitely many points each with bounded stalk cohomology, are finite.",
+      "uses": [
+        "lem-weil-point-counts-finite",
+        "prop-cohomological-finiteness",
+        "def-weil-local-frobenius-trace"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "Use [lem-zl-general-condensed-weil-realization] to realize the finite-stage E-Weil datum K as a model-Frobenius Weil object in the bounded constructible condensed Qbar_l coefficient category. The node supplies the compact-support and fixed-stalk comparison isomorphisms, intertwines the model globalOperator and stalkFrobenius with the scalar extensions of F^n and F_x^(n), and identifies the model-Frobenius fixed points with Y_0(F_{q^n}). By step 1 and the final clause of that comparison, the fixed-point set is finite and the condensed global and stalk objects have right duals. Therefore all hypotheses of [nt-assume-trace-formula] hold, and it gives equality of the categorical global trace with the finite sum of categorical stalk traces in D^b_c(s)[[Qbar_l]]. We use the assumption only for this categorical identity; it does not itself identify categorical traces with alternating cohomology traces.",
+      "uses": [
+        "lem-zl-general-condensed-weil-realization",
+        "nt-assume-trace-formula"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "Transport the categorical equality of step 2 through the comparison isomorphisms of [lem-zl-general-condensed-weil-realization]. Clause 3 of [lem-zl-condensed-point-supertrace] says that the categorical trace of each realized global or stalk operator is the image under the injective coefficient map $E\\to\\operatorname{End}(\\Qlb_s)$ of the corresponding alternating E-valued cohomological trace; its finite-dimensional hypotheses are exactly those established in step 1. The comparison node intertwines powers of the actual operators, so the categorical equality is the image under the same coefficient map of the two finite E-valued sums displayed in the statement. Injectivity gives the asserted E-valued identity after identifying End(Qbar_l_s) with Qbar_l. No representative-independence or trace-formula theorem is used in this transport.",
+      "uses": [
+        "lem-zl-general-condensed-weil-realization",
+        "lem-zl-condensed-point-supertrace"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "Steps 2 and 3 give equality of the images of the two finite $E$-valued sums under the injective coefficient map $\\epsilon_E$ of [lem-zl-condensed-point-supertrace] (cited in step 3). Its kernel is zero, so their difference is zero already in $E$. This proves the first identity. Steps 2 and 3 hold for every selection of geometric points $\\bar x$ over the $x\\in P$, since the stalk comparison of [lem-zl-general-condensed-weil-realization] is stated for every geometric point over $x$. This proves independence of the local alternating traces from the choices: compare two selections differing only at a fixed $x\\in P$; both total sums equal the same global trace, and cancelling the other finitely many summands gives equality of the traces at $x$. Any two choices at $x$ can be compared this way. If $P$ is empty there are no local choices and the formula says that the global alternating trace is zero.",
+      "uses": [
+        "lem-zl-condensed-point-supertrace",
+        "lem-zl-general-condensed-weil-realization"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "For the canonical constant Weil sheaf $E_Y$, the local complex is $E[0]$. The construction in [def-weil-constant-weil-structure] sends every constant section $a$ to that same section; the restrictions and insertions defining [def-weil-frobenius-point-transport] also retain $a$. In the composite of [def-weil-local-frobenius-trace], each point transport followed by the constant Weil comparison therefore acts as $a\\mapsto a$; repeating this $n$ times still gives the identity. These computations hold for the constant reductions, their completed integral unit, and its rationalization defining $E_Y$. Thus the only nonzero stalk cohomology is $E$ in degree zero and $F_x^{(n)}=1$. Its matrix is $(1)$, whose trace is $1$ by [def-weil-endomorphism-trace]. Substituting in step 4 makes the left side $\\sum_{x\\in P}1=\\#P=N_n(Y_0)$ by [def-weil-point-counts-zeta], giving the second identity.",
+      "uses": [
+        "def-weil-constant-weil-structure",
+        "def-weil-frobenius-point-transport",
+        "def-weil-local-frobenius-trace",
+        "def-weil-endomorphism-trace",
+        "def-weil-point-counts-zeta"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "If $Y_0$ is proper, [prop-cohomological-finiteness] gives a Frobenius-equivariant canonical isomorphism $u_i:H_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$. From $u_iF_c=Fu_i$, induction on $n$ gives $u_iF_c^n=F^nu_i$. These are conjugate finite-dimensional operators, so their traces agree by the basis-independent matrix trace of [def-weil-endomorphism-trace]. Replacing each summand in step 4 (and in its constant-sheaf specialization) gives the asserted ordinary-cohomology version.",
+      "uses": [
+        "prop-cohomological-finiteness",
+        "def-weil-endomorphism-trace"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    },
+    {
+      "text": "Finally take $Y_0=X_0$, $E=\\Ql$ and the canonical constant sheaf. Step 6 applies because $X_0$ is proper. Under exactly the smooth, proper, geometrically connected, pure-dimension-$d$ hypotheses in the statement, [prop-cohomological-finiteness] gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. The trace on the zero space is zero (the empty sum of diagonal coefficients in [def-weil-endomorphism-trace]); discard these terms. [def-weil-smooth-proper-cohomological-family] defines $V_{i,\\ell}=H^i(X,\\Ql)$ and $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, so the remaining sum is exactly $\\sum_{i=0}^{2d}(-1)^i\\operatorname{Tr}(F_{i,\\ell}^n\\mid V_{i,\\ell})$. This proves the last formula, including $d=0$.",
+      "uses": [
+        "prop-cohomological-finiteness",
+        "def-weil-endomorphism-trace",
+        "def-weil-smooth-proper-cohomological-family"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+        "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-constant-weil-structure",
+    "def-weil-endomorphism-trace",
     "def-weil-frobenius-point-transport",
     "def-weil-local-frobenius-trace",
-    "def-weil-endomorphism-trace",
-    "def-weil-point-counts-zeta"
-   ],
-   "elementary": true,
-   "source": {
+    "def-weil-point-counts-zeta",
+    "def-weil-smooth-proper-cohomological-family",
+    "lem-weil-point-counts-finite",
+    "lem-zl-condensed-point-supertrace",
+    "lem-zl-general-condensed-weil-realization",
+    "nt-assume-trace-formula",
+    "prop-cohomological-finiteness"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
+    "place": "Complete expansion of the blueprint proof, using the existing trace interface and explicit finite-stage descent"
   },
-  {
-   "text": "If $Y_0$ is proper, [prop-cohomological-finiteness] gives a Frobenius-equivariant canonical isomorphism $u_i:H_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$. From $u_iF_c=Fu_i$, induction on $n$ gives $u_iF_c^n=F^nu_i$. These are conjugate finite-dimensional operators, so their traces agree by the basis-independent matrix trace of [def-weil-endomorphism-trace]. Replacing each summand in step 4 (and in its constant-sheaf specialization) gives the asserted ordinary-cohomology version.",
-   "uses": [
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "Lefschetz|Grothendieck.*trace|Frobenius.*trace|trace.*Frobenius",
+      "results": "6 hits: Mathlib/FieldTheory/AxGrothendieck.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+      "date": "2026-10-17",
+      "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Alternating traces of powers of Frobenius on compactly supported cohomology equal sums of local stalk traces over finite field rational points",
+      "results": "8 hits: Matrix.trace_sum, FiniteField.trace_pow_card, FiniteField.algebraMap_trace_eq_sum_pow, trace_eq_sum_automorphisms, trace_eq_sum_embeddings_gen, FiniteField.frobeniusAlgHom, FiniteField.coe_frobeniusAlgHom, trace_eq_sum_embeddings",
+      "date": "2026-10-17",
+      "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Frobenius\", \"trace\"",
+      "results": "0 hits: ",
+      "date": "2026-10-17",
+      "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Grothendieck Lefschetz trace formula for every iterate of Frobenius on compactly supported l-adic cohomology and point counts over finite fields",
+      "results": "8 hits: IsArithFrobAt.arithFrobAt, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, arithFrobAt, FiniteField.trace_pow_card, Perfection.coeff_iterate_frobenius, Perfection.coeff_iterate_frobenius', FiniteField.frobeniusAlgHom_apply, FiniteField.algebraMap_trace_eq_sum_pow",
+      "date": "2026-10-17",
+      "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Number of rational points of a scheme over a finite field is the alternating sum of traces on etale cohomology",
+      "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsFinite.recOn, Projectivization.card_of_finrank, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+      "date": "2026-10-17",
+      "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "theorem",
+  "blueprint_order": 2881,
+  "blueprint_uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-local-frobenius-trace",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-point-counts-zeta",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-weil-sheaf-complex",
     "prop-cohomological-finiteness",
-    "def-weil-endomorphism-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
+    "thm-weil-grothendieck-lefschetz-trace"
+  ],
+  "blueprint_tags": [
+    "latex:proposition"
+  ],
+  "uses_not_cited": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-finite-field-fiber",
+    "def-weil-geometric-hypotheses",
+    "def-weil-global-geometric-frobenius",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-point-counts-zeta",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-smooth-proper-cohomological-family",
+    "def-weil-weil-sheaf-complex"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "text": "Finally take $Y_0=X_0$, $E=\\Ql$ and the canonical constant sheaf. Step 6 applies because $X_0$ is proper. Under exactly the smooth, proper, geometrically connected, pure-dimension-$d$ hypotheses in the statement, [prop-cohomological-finiteness] gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. The trace on the zero space is zero (the empty sum of diagonal coefficients in [def-weil-endomorphism-trace]); discard these terms. [def-weil-smooth-proper-cohomological-family] defines $V_{i,\\ell}=H^i(X,\\Ql)$ and $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, so the remaining sum is exactly $\\sum_{i=0}^{2d}(-1)^i\\operatorname{Tr}(F_{i,\\ell}^n\\mid V_{i,\\ell})$. This proves the last formula, including $d=0$.",
-   "uses": [
-    "prop-cohomological-finiteness",
-    "def-weil-endomorphism-trace",
-    "def-weil-smooth-proper-cohomological-family"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-    "place": "Proof, the local-trace, trace-identity, constant-sheaf and proper-specialization sentences"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-constant-weil-structure",
-  "def-weil-endomorphism-trace",
-  "def-weil-frobenius-point-transport",
-  "def-weil-local-frobenius-trace",
-  "def-weil-point-counts-zeta",
-  "def-weil-smooth-proper-cohomological-family",
-  "lem-weil-point-counts-finite",
-  "lem-zl-condensed-point-supertrace",
-  "lem-zl-general-condensed-weil-realization",
-  "nt-assume-trace-formula",
-  "prop-cohomological-finiteness"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
-  "place": "Complete expansion of the blueprint proof, using the existing trace interface and explicit finite-stage descent"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "Lefschetz|Grothendieck.*trace|Frobenius.*trace|trace.*Frobenius",
-   "results": "6 hits: Mathlib/FieldTheory/AxGrothendieck.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean, Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
-   "date": "2026-10-17",
-   "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Alternating traces of powers of Frobenius on compactly supported cohomology equal sums of local stalk traces over finite field rational points",
-   "results": "8 hits: Matrix.trace_sum, FiniteField.trace_pow_card, FiniteField.algebraMap_trace_eq_sum_pow, trace_eq_sum_automorphisms, trace_eq_sum_embeddings_gen, FiniteField.frobeniusAlgHom, FiniteField.coe_frobeniusAlgHom, trace_eq_sum_embeddings",
-   "date": "2026-10-17",
-   "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"Frobenius\", \"trace\"",
-   "results": "0 hits: ",
-   "date": "2026-10-17",
-   "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Grothendieck Lefschetz trace formula for every iterate of Frobenius on compactly supported l-adic cohomology and point counts over finite fields",
-   "results": "8 hits: IsArithFrobAt.arithFrobAt, FiniteField.coe_frobeniusAlgEquivOfAlgebraic_iterate, arithFrobAt, FiniteField.trace_pow_card, Perfection.coeff_iterate_frobenius, Perfection.coeff_iterate_frobenius', FiniteField.frobeniusAlgHom_apply, FiniteField.algebraMap_trace_eq_sum_pow",
-   "date": "2026-10-17",
-   "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Number of rational points of a scheme over a finite field is the alternating sum of traces on etale cohomology",
-   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsFinite.recOn, Projectivization.card_of_finrank, AlgebraicGeometry.finite_appTop_of_universallyClosed",
-   "date": "2026-10-17",
-   "verdict": "no match: finite-field ring Frobenius, field traces, etale scheme definitions and the model-theoretic Lefschetz principle do not state the cohomological trace identity"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "theorem",
- "blueprint_order": 2881,
- "blueprint_uses": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-local-frobenius-trace",
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-point-counts-zeta",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-smooth-proper-cohomological-family",
-  "def-weil-weil-sheaf-complex",
-  "prop-cohomological-finiteness",
-  "thm-weil-grothendieck-lefschetz-trace"
- ],
- "blueprint_tags": [
-  "latex:proposition"
- ],
- "uses_not_cited": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-field-fiber",
-  "def-weil-geometric-hypotheses",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-point-counts-zeta",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-smooth-proper-cohomological-family",
-  "def-weil-weil-sheaf-complex"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-zeta-weil",
- "unit": "sk-thm-tracetodeterminant",
- "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$. Choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$, and a\nseparated finite-type\n$k_0$-scheme $Y_0$, and\n$Y=Y_0\\times_{k_0}k$. Let\n$K\\in D^b_{c,\\mathrm W}(Y,E)$ be a\nWeil complex, let\n$F$ be its global\ngeometric-Frobenius action on\ncompactly supported\ncohomology. For every\ninteger $n\\geq1$ and each point $x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$. Let\n$F_x^{(n)}$ be the local Frobenius operators and\n$K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$ the stalk complexes, formed with\nthe derived pullback; their alternating traces are independent of the\nchoices.\nThe sets $Y_0(\\mathbf F_{q^n})$ and their cardinalities $N_n(Y_0)$ use the\npoint-count convention.\nFor every such $n$, one has\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(\\operatorname{For}K)_{\\bar x}\\bigr)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,K)\\bigr).\n$$\n\nBoth sums are finite. For the constant\nWeil sheaf $E_Y$, each local\nalternating trace is $1$, so\n\n$$\nN_n(Y_0)=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,E)\\bigr).\n$$\n\nIf $Y_0$ is proper,\ncompactly supported\ncohomology may be replaced by\nordinary cohomology. In\nparticular, let $X_0/\\Fq$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, put\n$X=X_0\\times_{\\Fq}k$, let $(\\Ql)_X$ be its constant\nWeil sheaf, and let $F_X$ be the\nglobal geometric Frobenius\non $H^i(X,\\Ql)$ for every $i\\in\\mathbf Z$. Put\n$V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, using the\nsmooth-proper\ncohomological family. Then\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\Tr(F_{i,\\ell}^n\\mid V_{i,\\ell}).\n$$",
-  "proof": [
-   {
-    "text": "The local alternating trace is the one defined in\n[def-weil-local-frobenius-trace].\nThe trace identity and its constant-sheaf and proper-specialization clauses\nare supplied by [thm-weil-grothendieck-lefschetz-trace]; finiteness and\nthe Frobenius action are [prop-cohomological-finiteness]. Thus the\ndisplayed formulae follow.",
-    "uses": [
-     "def-weil-local-frobenius-trace",
-     "thm-weil-grothendieck-lefschetz-trace",
-     "prop-cohomological-finiteness"
+  "chapter": "sec-zeta-weil",
+  "unit": "sk-thm-tracetodeterminant",
+  "blueprint_update": {
+    "snapshot": "main-20261015",
+    "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$. Choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$, and a\nseparated finite-type\n$k_0$-scheme $Y_0$, and\n$Y=Y_0\\times_{k_0}k$. Let\n$K\\in D^b_{c,\\mathrm W}(Y,E)$ be a\nWeil complex, let\n$F$ be its global\ngeometric-Frobenius action on\ncompactly supported\ncohomology. For every\ninteger $n\\geq1$ and each point $x\\in Y_0(\\mathbf F_{q^n})$, choose a\ngeometric point\n$\\bar x\\to Y$ over $x$. Let\n$F_x^{(n)}$ be the local Frobenius operators and\n$K_{\\bar x}=L\\bar x^*\\operatorname{For}(K)$ the stalk complexes, formed with\nthe derived pullback; their alternating traces are independent of the\nchoices.\nThe sets $Y_0(\\mathbf F_{q^n})$ and their cardinalities $N_n(Y_0)$ use the\npoint-count convention.\nFor every such $n$, one has\n\n$$\n\\sum_{x\\in Y_0(\\mathbf F_{q^n})}\\sum_{j\\in\\mathbf Z}(-1)^j\n\\Tr\\bigl(F_x^{(n)}\\mid\n\\mathcal H^j(\\operatorname{For}K)_{\\bar x}\\bigr)\n=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,K)\\bigr).\n$$\n\nBoth sums are finite. For the constant\nWeil sheaf $E_Y$, each local\nalternating trace is $1$, so\n\n$$\nN_n(Y_0)=\\sum_{i\\in\\mathbf Z}(-1)^i\n\\Tr\\bigl(F^n\\mid H_c^i(Y,E)\\bigr).\n$$\n\nIf $Y_0$ is proper,\ncompactly supported\ncohomology may be replaced by\nordinary cohomology. In\nparticular, let $X_0/\\Fq$ be\nsmooth, proper, geometrically\nconnected of pure dimension $d\\in\\mathbf Z_{\\geq0}$, put\n$X=X_0\\times_{\\Fq}k$, let $(\\Ql)_X$ be its constant\nWeil sheaf, and let $F_X$ be the\nglobal geometric Frobenius\non $H^i(X,\\Ql)$ for every $i\\in\\mathbf Z$. Put\n$V_{i,\\ell}=H^i(X,\\Ql)$, $F_{i,\\ell}=F_X|_{V_{i,\\ell}}$, using the\nsmooth-proper\ncohomological family. Then\n\n$$\nN_n(X_0)=\\sum_{i=0}^{2d}(-1)^i\n\\Tr(F_{i,\\ell}^n\\mid V_{i,\\ell}).\n$$",
+    "proof": [
+      {
+        "text": "The local alternating trace is the one defined in\n[def-weil-local-frobenius-trace].\nThe trace identity and its constant-sheaf and proper-specialization clauses\nare supplied by [thm-weil-grothendieck-lefschetz-trace]; finiteness and\nthe Frobenius action are [prop-cohomological-finiteness]. Thus the\ndisplayed formulae follow.",
+        "uses": [
+          "def-weil-local-frobenius-trace",
+          "thm-weil-grothendieck-lefschetz-trace",
+          "prop-cohomological-finiteness"
+        ],
+        "elementary": false
+      }
     ],
-    "elementary": false
-   }
-  ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
- },
- "split_report": {
-  "date": "2026-10-18",
-  "item": "prop-every-iterate-trace",
-  "worker": "stage1",
-  "summary": "Repair: replaced the circular imported Qbar trace theorem and the trace-transport citation with the batch-5 categorical trace assumption plus an explicit new coefficient/operator comparison node. The new node realizes finite-stage E-Weil complexes in the condensed Qbar_l category, identifies fixed points, and intertwines global and stalk Frobenius powers; the existing condensed point-supertrace node then performs the categorical-to-alternating trace conversion. The statement and the remaining five steps are preserved.",
-  "blueprint": "Steps 1 and 7 realize the finiteness sentence; repaired steps 2--3 apply the batch-5 condensed trace assumption through lem-zl-general-condensed-weil-realization and convert its categorical traces via lem-zl-condensed-point-supertrace; step 4 is injective descent and choice independence; step 5 realizes the constant-sheaf clause; step 6 gives proper specialization and step 7 gives degree truncation.",
+    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  },
+  "split_report": {
+    "date": "2026-10-18",
+    "item": "prop-every-iterate-trace",
+    "worker": "stage1",
+    "summary": "Repair: replaced the circular imported Qbar trace theorem and the trace-transport citation with the batch-5 categorical trace assumption plus an explicit new coefficient/operator comparison node. The new node realizes finite-stage E-Weil complexes in the condensed Qbar_l category, identifies fixed points, and intertwines global and stalk Frobenius powers; the existing condensed point-supertrace node then performs the categorical-to-alternating trace conversion. The statement and the remaining five steps are preserved.",
+    "blueprint": "Steps 1 and 7 realize the finiteness sentence; repaired steps 2--3 apply the batch-5 condensed trace assumption through lem-zl-general-condensed-weil-realization and convert its categorical traces via lem-zl-condensed-point-supertrace; step 4 is injective descent and choice independence; step 5 realizes the constant-sheaf clause; step 6 gives proper specialization and step 7 gives degree truncation.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-point-counts-finite",
+        "why": "Generic finiteness of finite-field rational points, used only to justify finite sums; it replaces no trace-formula step."
+      },
+      {
+        "node": "prop-cohomological-finiteness",
+        "why": "Generic cohomology finiteness, proper equivariance and degree vanishing, exactly as the item blueprint requires."
+      },
+      {
+        "node": "lem-zl-condensed-point-supertrace",
+        "why": "Statement of unit sk-thm-rationality used as a black box in step 3: the right dual of an object isomorphic to a finite-matrix realization and its categorical trace as the image of the alternating E-trace under the injective map E -> End(U_s). nt-assume-trace-formula excludes this conversion and no node of sk-thm-tracetodeterminant gives it."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-weil-point-counts-finite",
-    "why": "Generic finiteness of finite-field rational points, used only to justify finite sums; it replaces no trace-formula step."
-   },
-   {
-    "node": "prop-cohomological-finiteness",
-    "why": "Generic cohomology finiteness, proper equivariance and degree vanishing, exactly as the item blueprint requires."
-   },
-   {
-    "node": "lem-zl-condensed-point-supertrace",
-    "why": "Statement of unit sk-thm-rationality used as a black box in step 3: the right dual of an object isomorphic to a finite-matrix realization and its categorical trace as the image of the alternating E-trace under the injective map E -> End(U_s). nt-assume-trace-formula excludes this conversion and no node of sk-thm-tracetodeterminant gives it."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-point-counts-finite",
-  "prop-cohomological-finiteness",
-  "lem-zl-condensed-point-supertrace"
- ],
- "reviewed": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-cc-Q42-cd1a6f8dd",
-  "group": "Q42",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-cd1a6f8dd (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the new node lem-zl-general-condensed-weil-realization, every cited statement, the blueprint proof main-20261015/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md and the unit route. Batch-5 check: I accept all three listed citations. lem-zl-condensed-point-supertrace is point-level linear algebra: right duals of objects isomorphic to finite-matrix realizations, and the categorical trace equals the injective image of the alternating E-trace. nt-assume-trace-formula explicitly excludes this conversion and treats dualizability as a hypothesis. The flagged closure node lem-trf-exact-pairing-iso-transport is the generic Mathlib leaf CategoryTheory.exactPairingCongr, not a step of the trace formula. lem-zl-point-realization-coefficient-comparison is a pure coefficient comparison over a point. thm-trf-frobenius-fixed-points (sec-six-functors) is scheme-theoretic. The categorical identity comes only from nt-assume-trace-formula, whose hypotheses I checked in step 2: separated, quasi-compact, model Frobenius, finite fixed points, right duals. Steps 1, 3, 5, 6 and 7 are verified against prop-cohomological-finiteness, def-weil-local-frobenius-trace, def-weil-constant-weil-structure and def-weil-smooth-proper-cohomological-family, with d=0 and the empty case covered. The new node is true as an unsplit obligation. It generalizes the constant-case pair lem-zl-assumed-trace-determinant-bridge and lem-zl-condensed-global-frobenius-comparison to arbitrary K, which the item needs; it states no trace identity, so it is neither a duplicate nor a restatement. Three repairs, written as whole files in fixes/dag/nodes/sec-zeta-weil/: (1) E5 gap in step 4. The item allows any geometric point over x, but the new node only compared stalks at the points from the fixed inclusion, so the cancellation argument for choice independence was unsupported. The node's stalk comparison now covers every geometric point over x (formed by def-weil-local-frobenius-trace, which applies since g^n x̄ = x̄ g_s^n). Step 4 now says why steps 2-3 hold for every selection, names ε_E, and lists its uses. (2) C8: added a split_report.tool_uses entry for the off-route lem-zl-condensed-point-supertrace (unit sk-thm-rationality). (3) Citations in the new node: F now cites def-weil-global-geometric-frobenius, def-weil-local-frobenius-trace is added to stmt_deps, a proof hint is removed, and the source is repointed from sk-thm-rationality.proof.md (which is about Hankel rationality) to the item's blueprint proof sentence, marked agent-formulated. Accepted tool uses: lem-weil-point-counts-finite, prop-cohomological-finiteness, lem-zl-condensed-point-supertrace.; 2 file(s) fixed by the reviewer"
- },
- "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.ZetaFunction.TraceFormula",
-  "declaration": "AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology",
-  "declarations": [
-   "AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology"
+    "lem-weil-point-counts-finite",
+    "prop-cohomological-finiteness",
+    "lem-zl-condensed-point-supertrace"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.TraceFormula: the blueprint item prop-every-iterate-trace's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "X5",
-  "result": "pass",
-  "landing": "20261019T112620-L-3962075",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq"
-  ],
-  "sorry_after": []
- }
+  "reviewed": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-cc-Q42-cd1a6f8dd",
+    "group": "Q42",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-cd1a6f8dd (reviewer sub-agent of L); spot-checked: Read in full: the item, all 7 steps, the new node lem-zl-general-condensed-weil-realization, every cited statement, the blueprint proof main-20261015/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md and the unit route. Batch-5 check: I accept all three listed citations. lem-zl-condensed-point-supertrace is point-level linear algebra: right duals of objects isomorphic to finite-matrix realizations, and the categorical trace equals the injective image of the alternating E-trace. nt-assume-trace-formula explicitly excludes this conversion and treats dualizability as a hypothesis. The flagged closure node lem-trf-exact-pairing-iso-transport is the generic Mathlib leaf CategoryTheory.exactPairingCongr, not a step of the trace formula. lem-zl-point-realization-coefficient-comparison is a pure coefficient comparison over a point. thm-trf-frobenius-fixed-points (sec-six-functors) is scheme-theoretic. The categorical identity comes only from nt-assume-trace-formula, whose hypotheses I checked in step 2: separated, quasi-compact, model Frobenius, finite fixed points, right duals. Steps 1, 3, 5, 6 and 7 are verified against prop-cohomological-finiteness, def-weil-local-frobenius-trace, def-weil-constant-weil-structure and def-weil-smooth-proper-cohomological-family, with d=0 and the empty case covered. The new node is true as an unsplit obligation. It generalizes the constant-case pair lem-zl-assumed-trace-determinant-bridge and lem-zl-condensed-global-frobenius-comparison to arbitrary K, which the item needs; it states no trace identity, so it is neither a duplicate nor a restatement. Three repairs, written as whole files in fixes/dag/nodes/sec-zeta-weil/: (1) E5 gap in step 4. The item allows any geometric point over x, but the new node only compared stalks at the points from the fixed inclusion, so the cancellation argument for choice independence was unsupported. The node's stalk comparison now covers every geometric point over x (formed by def-weil-local-frobenius-trace, which applies since g^n x̄ = x̄ g_s^n). Step 4 now says why steps 2-3 hold for every selection, names ε_E, and lists its uses. (2) C8: added a split_report.tool_uses entry for the off-route lem-zl-condensed-point-supertrace (unit sk-thm-rationality). (3) Citations in the new node: F now cites def-weil-global-geometric-frobenius, def-weil-local-frobenius-trace is added to stmt_deps, a proof hint is removed, and the source is repointed from sk-thm-rationality.proof.md (which is about Hankel rationality) to the item's blueprint proof sentence, marked agent-formulated. Accepted tool uses: lem-weil-point-counts-finite, prop-cohomological-finiteness, lem-zl-condensed-point-supertrace.; 2 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "branch": "master",
+    "existing": true,
+    "module": "WeilConjectures.ZetaFunction.TraceFormula",
+    "declaration": "AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology",
+    "declarations": [
+      "AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology"
+    ],
+    "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.TraceFormula: the blueprint item prop-every-iterate-trace's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  }
 }

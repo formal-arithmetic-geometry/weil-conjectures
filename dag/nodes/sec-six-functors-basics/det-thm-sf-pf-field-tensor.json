@@ -1,243 +1,325 @@
 {
- "id": "det-thm-sf-pf-field-tensor",
- "blueprint": {
-  "is": "det-thm-sf-pf-field-tensor",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Tensor closure of the rational localizing categories",
- "statement": "Work in the standing scheme setting of [sk-def-sfb-dc-setting], with $X$ a scheme in that setting. Let $E/\\mathbf Q_\\ell$ be a finite subextension of the fixed $\\Qlb$. Let $\\Lambda=E$ or $\\Qlb$, using the condensed rings of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], respectively. In particular the latter uses continuous sections with image in a single finite subextension. The notation $\\Loc(\\Dbc(X,\\Lambda))$ means the smallest full replete triangulated subcategory of the ambient unbounded derived category $D(X_{\\mathrm{proét}},\\Lambda)$ containing $\\Dbc(X,\\Lambda)$ and closed under its small coproducts, as in [det-def-localizing-closure-existence].\n\n1. $\\Dbc(X,\\Lambda)$ is closed under $\\otimes^{\\mathbf L}$ in\n   $D(X_{\\mathrm{proét}},\\Lambda)$.\n2. For $A,B\\in\\Loc(\\Dbc(X,\\Lambda))$, the derived tensor product\n   $A\\otimes^{\\mathbf L}B$, formed in $D(X_{\\mathrm{proét}},\\Lambda)$, lies in\n   $\\Loc(\\Dbc(X,\\Lambda))$.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md",
-  "place": "node det-thm-sf-pf-field-tensor, order None"
- },
- "stmt_deps": [
-  "sk-def-sfb-dc-setting",
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-qlbar-condensed",
-  "sk-def-sfb-constructible",
-  "det-def-localizing-closure-existence",
-  "sk-def-sfb-derived-tensor-hom"
- ],
- "proof": [
-  {
-   "text": "For canonical finite-extension and finite-subextension-valued algebraic-closure coefficients, clause (4) of finiteCoefficientDescentTwoColimit identifies finite-constant-model bounded constructibility with the upstream boundedConstructible predicate. Apply isMonoidal_boundedConstructible, specializing the scheme structure to aX and using ringChar k = p. This gives bounded tensor closure for each canonical coefficient.",
-   "uses": [
-    "sk-thm-sfb-qlbar-two-colimit",
-    "lem-sfb-dc-tensor-preserves"
-   ],
-   "elementary": false
+  "id": "det-thm-sf-pf-field-tensor",
+  "blueprint": {
+    "is": "det-thm-sf-pf-field-tensor",
+    "from": null,
+    "same_as": []
   },
-  {
-   "text": "For each allowed coefficient presentation, constructibleCoefficientTransport gives a strong monoidal derived equivalence preserving and reflecting finite-constant-model bounded constructibility. Apply canonical closure to the images of K and M, transport along the monoidal tensor comparison, and reflect membership. Repleteness comes from constantModelConstructibleFiniteTor_wellDefined. This proves clause (1) without changing either constructibility predicate.",
-   "uses": [
-    "lem-sf-constructible-coefficient-transport",
-    "det-def-sfb-constructible-tor-amplitude"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Tensor closure of the rational localizing categories",
+  "statement": "Work in the standing scheme setting of [sk-def-sfb-dc-setting], with $X$ a scheme in that setting. Let $E/\\mathbf Q_\\ell$ be a finite subextension of the fixed $\\Qlb$. Let $\\Lambda=E$ or $\\Qlb$, using the condensed rings of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed], respectively. In particular the latter uses continuous sections with image in a single finite subextension. The notation $\\Loc(\\Dbc(X,\\Lambda))$ means the smallest full replete triangulated subcategory of the ambient unbounded derived category $D(X_{\\mathrm{proét}},\\Lambda)$ containing $\\Dbc(X,\\Lambda)$ and closed under its small coproducts, as in [det-def-localizing-closure-existence].\n\n1. $\\Dbc(X,\\Lambda)$ is closed under $\\otimes^{\\mathbf L}$ in\n   $D(X_{\\mathrm{proét}},\\Lambda)$.\n2. For $A,B\\in\\Loc(\\Dbc(X,\\Lambda))$, the derived tensor product\n   $A\\otimes^{\\mathbf L}B$, formed in $D(X_{\\mathrm{proét}},\\Lambda)$, lies in\n   $\\Loc(\\Dbc(X,\\Lambda))$.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.md",
+    "place": "node det-thm-sf-pf-field-tensor, order None"
   },
-  {
-   "text": "Put R = Loc(Dbc). The inverse image of a localizing property by an exact left adjoint is localizing: shifts and triangles give triangulatedness, isomorphisms give repleteness, and preservesColimitIso identifies each image of an existing coproduct with the corresponding coproduct. Derived tensor is exact in either variable. The tensor-Hom adjunction gives the left adjoint for left tensor, and braiding gives it for right tensor.",
-   "uses": [
+  "stmt_deps": [
+    "sk-def-sfb-dc-setting",
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-constructible",
     "det-def-localizing-closure-existence",
-    "lem-sc-source-kflat-tensor-left-triangulated",
     "sk-def-sfb-derived-tensor-hom"
-   ],
-   "elementary": false
+  ],
+  "proof": [
+    {
+      "text": "Write $D=D(\\Mod_{\\Lambda_X})$. The Layer B clause of [sk-def-sfb-derived-tensor-hom] computes relative derived tensor by K-flat replacement and gives its internal-Hom right adjoint. Fix a K-flat representative $P$ of one factor. The total tensor formula [def-pc-tensor-complex-sheaves] sends a cone triangle of a complex map $f$ to a cone triangle: $\\operatorname{Tot}(\\operatorname{Cone}(f)\\otimes P)\\cong\\operatorname{Cone}(\\operatorname{Tot}(f\\otimes P))$, and sends shifts to shifts, using the usual signed shift identification. This follows by distributing over the two summands of the cone and using $d(x\\otimes y)=dx\\otimes y+(-1)^{\\deg x}x\\otimes dy$. The definition of K-flatness [def-pc-kflat-complex] says this construction sends acyclic complexes to acyclic complexes. It therefore respects quasi-isomorphisms, since their cones are acyclic, and descends to $D$. Distinguished triangles in $D$ are the images, up to isomorphism, of those cone triangles [def-weil-abstract-derived-category]. Equivalently, [lem-sc-source-kflat-tensor-left-triangulated] applies to this additive total tensor and its K-flat derivability structure: the K-flat representative gives a derived tensor functor preserving shifts and distinguished triangles. Hence tensoring is exact in either variable. The ambient small coproducts exist by [det-def-localizing-closure-existence](1). Tensor also preserves them: for arbitrary $Z$, its adjunction gives $\\Hom(K\\otimes^{\\mathbf L}\\bigoplus_i A_i,Z)=\\Hom(\\bigoplus_i A_i,\\RHom_{\\Lambda_X}(K,Z))=\\prod_i\\Hom(K\\otimes^{\\mathbf L}A_i,Z)$, naturally, which is precisely the universal property of the coproduct with its canonical inclusions. The symmetry is represented on total tensors by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ for $x$ of degree $p$ and $y$ of degree $q$; the displayed differential shows this is an inverse pair of chain maps. It gives coproduct preservation in the other variable as well.",
+      "uses": [
+        "sk-def-sfb-derived-tensor-hom",
+        "def-pc-tensor-complex-sheaves",
+        "def-pc-kflat-complex",
+        "def-weil-abstract-derived-category",
+        "det-def-localizing-closure-existence",
+        "lem-sc-source-kflat-tensor-left-triangulated"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1) exactness and proof (2) direct-sum preservation, with the K-flat cone calculation expanded; Stacks Tags 06YN and 06YM (lemma-derived-tor-exact), derived Tag 05RU"
+      }
+    },
+    {
+      "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: its only ideals are $0$ and $k$, and its space has one point. Applying [lem-weil-pbc-finite-type-over-noetherian] to the structure map shows that the standing scheme $X$ is Noetherian; thus [det-cor-coefficient-heart-ii-generation] applies to $X$. Put $\\mathcal G=\\{a_!L[n]\\}$ as in that statement. The category $\\Dbc(X,\\Lambda)$ is triangulated by [det-cor-coefficient-heart-ii-triangulated]. To reduce to pairs of generators, first fix $G\\in\\mathcal G$ and assume $G\\otimes^{\\mathbf L}H\\in\\Dbc$ for every $H\\in\\mathcal G$. Induction on the finite cone witness for $N\\in\\Dbc$, using step 1 and triangulated closure, then gives $G\\otimes^{\\mathbf L}N\\in\\Dbc$. Now fix this arbitrary $N$ and induct on the finite cone witness for $K$ to get $K\\otimes^{\\mathbf L}N\\in\\Dbc$. Shifts of either generator shift the tensor product, so it remains to prove the assertion for $a_!L$ and $b_!M$ with $L,M$ lisse in degree zero. The zero object is included by the generation converse (rank zero).",
+      "uses": [
+        "det-cor-coefficient-heart-ii-generation",
+        "det-cor-coefficient-heart-ii-triangulated",
+        "lem-weil-pbc-finite-type-over-noetherian"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1), reduction to locally closed lisse generators, with both finite-cone inductions explicit"
+      }
+    },
+    {
+      "text": "Let $g:Y\\to X$ be a morphism between standing schemes. Factor $b=i\\circ u:T\\hookrightarrow Z\\hookrightarrow X$, with $u$ open, $i$ closed and $b_!=i_*u_!$ [sk-lem-coefficient-heart]. Put $Z_Y=Z\\times_XY$, $T_Y=T\\times_XY$, with projections $g_Z,g_T$ and immersions $i_Y,u_Y$. All these schemes are Noetherian by step 2 and [lem-weil-pbc-finite-type-over-noetherian]: closed subschemes and these base changes have finite type over $k$, and their opens are quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. They are qcqs, and every open morphism used here is quasi-compact since its inverse image in an affine open is an open of a Noetherian scheme. The coefficient rings are the inverse images required by the ringed statements, and $g^*$ is exact, by [sk-prop-sfb-cartesian-coefficients]. Apply clause (4) of [det-sf-open-closed-sequence-ring-sheaf] successively to $i$ and $u$:\n$$g^*b_!=g^*i_*u_!\\simeq i_{Y*}g_Z^*u_!\\simeq i_{Y*}u_{Y!}g_T^*.$$\nUse the factorization-independence clause of [lem-sfb-locally-closed-extension-coherence], for the Noetherian scheme $Y$ and ring $\\Lambda_Y$, to identify $i_{Y*}u_{Y!}$ with $b_{Y!}$. This clause explicitly permits an open-then-closed factorization; it does not require $Z_Y$ to be the closure of $T_Y$. Exactness in the cited statements makes the identities hold termwise on unbounded derived categories. For $g=a:S\\hookrightarrow X$, put $W=S\\times_XT$, $c:W\\hookrightarrow S$, $d:W\\to T$. The resulting identity is $a^*b_!M\\simeq c_!d^*M$.",
+      "uses": [
+        "sk-lem-coefficient-heart",
+        "lem-weil-pbc-finite-type-over-noetherian",
+        "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+        "sk-prop-sfb-cartesian-coefficients",
+        "det-sf-open-closed-sequence-ring-sheaf",
+        "lem-sfb-locally-closed-extension-coherence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1), sentence “base change for extension by zero gives ...”; ringed open-closed calculus, Stacks Tags 09AA, 09BM, 09BN, 09AH; factorization comparison derived from the same open-closed sequence"
+      }
+    },
+    {
+      "text": "Apply [det-lem-int-tensor-projection] to $a$, with the second factor $b_!M$, and substitute step 3. Apply it once more to $c$, using the symmetric monoidal structure of the derived tensor [sk-def-sfb-derived-tensor-hom] to exchange the two factors. This gives the typed calculation\n$$a_!L\\otimes^{\\mathbf L}b_!M\\simeq a_!(L\\otimes^{\\mathbf L}a^*b_!M)\\simeq a_!(L\\otimes^{\\mathbf L}c_!d^*M)\\simeq a_!c_!(c^*L\\otimes^{\\mathbf L}d^*M).$$\nBoth applications allow every commutative condensed ring and arbitrary complexes, so no properness or additional finite-Tor hypothesis is needed. We keep the composite $a_!c_!$ in this formula and verify its constructibility below, without presupposing a composition isomorphism for locally closed shriek.",
+      "uses": [
+        "det-lem-int-tensor-projection",
+        "sk-def-sfb-derived-tensor-hom"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1), the two applications of the locally closed projection formula"
+      }
+    },
+    {
+      "text": "By [sk-lem-coefficient-heart], lisse means pro-étale locally finite free over the coefficient sheaf. Pulling a trivializing cover back to $W$ gives finite free models for $c^*L,d^*M$, with the correct coefficient rings by [sk-prop-sfb-cartesian-coefficients]. On a common trivializing cover their tensor is $\\Lambda_W^r\\otimes_{\\Lambda_W}\\Lambda_W^s=\\Lambda_W^{rs}$. A finite free sheaf is flat because tensoring with it is a finite direct sum of the identity functor. For a short exact sequence of module sheaves, restrict to the trivializing cover. The tensor sequence there is a finite direct sum of the restricted sequence and is exact. Its kernel and cokernel obstructions vanish on that covering and hence are zero sheaves, so the original tensor sequence is exact. Thus the locally free sheaves are flat; in particular tensoring any acyclic complex with either gives an acyclic complex. They are therefore K-flat in degree zero by [def-pc-kflat-complex]. The K-flat convention [sk-def-sfb-derived-tensor-hom] computes $c^*L\\otimes^{\\mathbf L}d^*M$ by its underived tensor, a lisse sheaf $N$ in degree zero.",
+      "uses": [
+        "sk-lem-coefficient-heart",
+        "sk-prop-sfb-cartesian-coefficients",
+        "def-pc-kflat-complex",
+        "sk-def-sfb-derived-tensor-hom"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1), tensor of two lisse sheaves is lisse and underived"
+      }
+    },
+    {
+      "text": "We check that the sheaf $F=a_!c_!N$ of steps 4–5 is constructible, using only open-closed restrictions. Write $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$ and $c=k\\circ v:W\\hookrightarrow V\\hookrightarrow S$, with $u,v$ open and $i,k$ closed, using the locally closed factorizations in [sk-lem-coefficient-heart]. Then $F=i_*u_!k_*v_!N$ is in degree zero, since all four functors are exact [sk-lem-coefficient-heart]. Use the restriction identities and base-change clause of [det-sf-open-closed-sequence-ring-sheaf]. On $S$ they identify $F|_S=k_*v_!N$, on $V$ they identify this with $v_!N$, and on $W$ with $N$. On $X\\setminus Z$ and $S\\setminus V$ the corresponding closed direct image restricts to zero. On $Z\\setminus S$ and $V\\setminus W$ the open extension restricts to zero: in the base-change formula for an open extension, the pulled-back open is empty, so its extension is the zero sheaf. Hence the five disjoint pieces\n$$X\\setminus Z,\\quad Z\\setminus S,\\quad S\\setminus V,\\quad V\\setminus W,\\quad W$$\ncarry restrictions $0,0,0,0,N$ respectively. They cover $X$ and are locally closed in $X$ (closed or open inside the preceding locally closed piece); empty pieces are omitted. Every piece is constructible since $X$ is Noetherian. This is a finite stratification of the kind in [sk-def-sfb-constructible], on which all restrictions are lisse, including rank-zero sheaves. The criterion [sk-lem-coefficient-heart] makes $F$ constructible; the definition of $\\Dbc$ in [sk-def-sfb-constructible] puts this degree-zero sheaf in $\\Dbc(X,\\Lambda)$. Step 4 and then the two inductions of step 2 prove clause (1).",
+      "uses": [
+        "sk-lem-coefficient-heart",
+        "det-sf-open-closed-sequence-ring-sheaf",
+        "sk-def-sfb-constructible"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (1), final constructibility assertion, with explicit restrictions in place of an uncited shriek-composition law; Stacks Tags 09AA, 09BN, 09AH"
+      }
+    },
+    {
+      "text": "Let $\\mathcal L=\\Loc(\\Dbc(X,\\Lambda))$. Apply [det-def-localizing-closure-existence](2) with our precise condensed ring $\\Lambda$ and the class $\\mathcal S=\\Dbc(X,\\Lambda)$. It supplies this full replete triangulated subcategory in the ambient unbounded category and its closure under small coproducts and minimality. Fix $B\\in\\Dbc$. In the ambient $D$, let $\\mathcal C_B$ be the full replete subcategory on those $A$ with $A\\otimes^{\\mathbf L}B\\in\\mathcal L$. Since $\\mathcal L$ is triangulated and closed under small coproducts, step 1 shows that $\\mathcal C_B$ is also triangulated and closed under small coproducts: tensor sends shifts, triangles and coproducts to the corresponding operations in $\\mathcal L$. Clause (1) puts all of $\\Dbc$ in $\\mathcal C_B$. The defining minimality of $\\mathcal L$ therefore gives $\\mathcal L\\subseteq\\mathcal C_B$. Thus $A\\otimes^{\\mathbf L}B\\in\\mathcal L$ for every $A\\in\\mathcal L$ and $B\\in\\Dbc$.",
+      "uses": [
+        "det-def-localizing-closure-existence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (2), first localizing-subcategory argument"
+      }
+    },
+    {
+      "text": "Now fix any $A\\in\\mathcal L$ and let $\\mathcal E_A$ be the full replete subcategory of the ambient $D$ on objects $B$ with $A\\otimes^{\\mathbf L}B\\in\\mathcal L$. Again step 1 gives closure under shifts, triangles and small coproducts. Step 7 shows that $\\mathcal E_A$ contains $\\Dbc$. The same minimality in [det-def-localizing-closure-existence](2) gives $\\mathcal L\\subseteq\\mathcal E_A$. This is clause (2), for arbitrary $A,B\\in\\mathcal L$, with the tensor and every coproduct formed in the ambient derived category.",
+      "uses": [
+        "det-def-localizing-closure-existence"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+        "place": "Proof (2), second localizing-subcategory argument"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "det-cor-coefficient-heart-ii-generation",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "det-def-localizing-closure-existence",
+    "det-lem-int-tensor-projection",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-sc-source-kflat-tensor-left-triangulated",
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-lem-coefficient-heart",
+    "sk-prop-sfb-cartesian-coefficients"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1)–(2), with explicit K-flat cone calculation, open-closed base change and cited factorization independence, and five-piece constructibility argument"
   },
-  {
-   "text": "Fix B in Dbc. Clause (1) and the inclusion Dbc ≤ R show that the localizing inverse image under right tensoring with B contains Dbc. The defining intersection minimality of localizingClosure gives R ≤ this inverse image. Now fix A in R. The first argument shows that the inverse image under left tensoring with A contains Dbc. Apply the same minimality to obtain closure for all B in R, proving clause (2).",
-   "uses": [
-    "det-def-localizing-closure-existence"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "det-def-localizing-closure-existence",
-  "det-def-sfb-constructible-tor-amplitude",
-  "lem-sc-source-kflat-tensor-left-triangulated",
-  "lem-sf-constructible-coefficient-transport",
-  "lem-sfb-dc-tensor-preserves",
-  "sk-def-sfb-derived-tensor-hom",
-  "sk-thm-sfb-qlbar-two-colimit"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
-  "place": "Proof (1), existing bounded tensor closure after the proved rational constructibility comparison and coefficient transport; proof (2), both localizing minimality arguments."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "constructible|lisse|localizing.*tensor",
-   "results": "25 hits: Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; full Mathlib root",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "constructible|lisse|localizing.*tensor",
+      "results": "25 hits: Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean; full Mathlib root",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "loogle",
+      "query": "DerivedCategory, \"tensor\"",
+      "results": "0 hits: ; full Mathlib root",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Closure of bounded constructible E coefficient pro-etale complexes and their localizing closure under derived tensor",
+      "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Topology.IsConstructible, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Algebra.FormallyEtale.instTensorProduct, DerivedCategory.instEssSurjCochainComplexIntQ, LightCondensed, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, LightCondensed.instMonoidalClosedLightCondMod; full Mathlib root",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Bounded constructible rational pro-etale complexes and the localizing subcategory they generate are closed under derived tensor product",
+      "results": "8 hits: CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor_map, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor'_map_app; full Mathlib root",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "grep",
+      "query": "constructible|lisse|localizing.*tensor",
+      "results": "0 hits: ; Mathlib subdirectory Algebra/Homology",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A localizing subcategory generated by a tensor closed triangulated subcategory is closed under a coproduct preserving derived tensor bifunctor",
+      "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization', CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; full Mathlib root",
+      "date": "2026-10-16",
+      "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The tensor bifunctor of a triangulated category preserves coproducts, and the localizing closure of a class stable under tensor is stable under tensor",
+      "results": "{\"t\": \"2026-10-16T16:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor bifunctor of a triangulated category preserves coproducts, and the localizing closure of a class stable under tensor is stable under tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.ObjectProperty.instIsMultiplicativeTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\"], \"digest\": \"79cbae594f3428cc\"}",
+      "date": "2026-10-16",
+      "verdict": "no match: the inspected hits concern monoidal localization, triangulated quotient categories, stochastic localizing sequences, or ring/module localization; none states constructible pro-etale tensor stability or closure of a tensor-stable generating class."
+    },
+    {
+      "tool": "grep",
+      "query": "LocalizingSubcategory|localizing|IsLocalizing",
+      "results": "{\"t\": \"2026-10-16T16:58:29Z\", \"tool\": \"grep\", \"query\": \"LocalizingSubcategory|localizing|IsLocalizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\"], \"digest\": \"45bf0d5d88eac1d1\"}",
+      "date": "2026-10-16",
+      "verdict": "no match: the inspected hits concern monoidal localization, triangulated quotient categories, stochastic localizing sequences, or ring/module localization; none states constructible pro-etale tensor stability or closure of a tensor-stable generating class."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": null,
+  "blueprint_uses": [
+    "sk-cor-coefficient-heart-ii",
+    "sk-lem-integral-models"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_snapshot": "main-20261015",
+  "chapter": "sec-six-functors-basics",
+  "unit": "sk-thm-sf-pf-field",
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "det-thm-sf-pf-field-tensor",
+    "worker": "stage1",
+    "summary": "Reaudited the inherited eight-step proof against the current blueprint and delivery checklist. No new nodes are needed: all substantive inputs already exist in the DAG. Added the existing K-flat derived-tensor exactness statement to the exactness step and the existing locally closed extension coherence statement to the base-change step, so the long arguments cite the precise facts they use. Verified the standing scheme hypotheses, finite coefficient field E versus the finite-stage Q̅ℓ coefficient, Noetherian consequences, quasi-compact open hypotheses, coefficient pullback, lisse flatness, generator inductions, and the two minimality arguments. No Lean declaration states this item. Repaired the dedicated return for step 3 by replacing its inline closure/factorization comparison with an explicit application of the existing factorization-independence theorem; retained the two open-closed base-change applications and all hypothesis checks. No new nodes are required. Every non-elementary step is now shorter than 2000 characters.",
+    "blueprint": "Steps 1–8 realize the blueprint proof: derived tensor exactness/coproducts; reduction to locally closed lisse generators; extension-by-zero base change; two projection-formula applications; lisse tensor and K-flatness; explicit five-piece constructibility; first localizing minimality argument; second localizing minimality argument.",
+    "tool_uses": [
+      {
+        "node": "det-cor-coefficient-heart-ii-generation",
+        "why": "Finite-cone generation and locally closed lisse generators are the generation input for the unit route."
+      },
+      {
+        "node": "det-cor-coefficient-heart-ii-triangulated",
+        "why": "Triangulated closure of Dbc is needed for both finite-cone inductions."
+      },
+      {
+        "node": "sk-lem-coefficient-heart",
+        "why": "Lisse characterization and exact locally closed extension by zero are used in generator and constructibility steps."
+      },
+      {
+        "node": "det-sf-open-closed-sequence-ring-sheaf",
+        "why": "Ringed open-closed restriction, exactness, and base-change identities are used in the extension-by-zero calculation."
+      },
+      {
+        "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+        "why": "Noetherian open subschemes verify quasi-compactness of all open complements."
+      },
+      {
+        "node": "det-lem-int-tensor-projection",
+        "why": "The two locally closed projection-formula isomorphisms are used in the generator tensor calculation."
+      },
+      {
+        "node": "lem-weil-pbc-finite-type-over-noetherian",
+        "why": "Finite type over the field verifies Noetherian hypotheses."
+      },
+      {
+        "node": "det-def-localizing-closure-existence",
+        "why": "Provides ambient coproducts, localizing closure, and its minimality."
+      },
+      {
+        "node": "lem-sfb-locally-closed-extension-coherence",
+        "why": "Supplies normalized factorization independence and composition for locally closed extension by zero."
+      }
+    ]
   },
-  {
-   "tool": "loogle",
-   "query": "DerivedCategory, \"tensor\"",
-   "results": "0 hits: ; full Mathlib root",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Closure of bounded constructible E coefficient pro-etale complexes and their localizing closure under derived tensor",
-   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Topology.IsConstructible, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, Algebra.FormallyEtale.instTensorProduct, DerivedCategory.instEssSurjCochainComplexIntQ, LightCondensed, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, LightCondensed.instMonoidalClosedLightCondMod; full Mathlib root",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Bounded constructible rational pro-etale complexes and the localizing subcategory they generate are closed under derived tensor product",
-   "results": "8 hits: CategoryTheory.Tor_obj, CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor', CategoryTheory.Tor_map, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor'_map_app; full Mathlib root",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
-  },
-  {
-   "tool": "grep",
-   "query": "constructible|lisse|localizing.*tensor",
-   "results": "0 hits: ; Mathlib subdirectory Algebra/Homology",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A localizing subcategory generated by a tensor closed triangulated subcategory is closed under a coproduct preserving derived tensor bifunctor",
-   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization', CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; full Mathlib root",
-   "date": "2026-10-16",
-   "verdict": "no match: the returned declarations do not state rational pro-etale constructible tensor closure or tensor closure of its localizing category"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The tensor bifunctor of a triangulated category preserves coproducts, and the localizing closure of a class stable under tensor is stable under tensor",
-   "results": "{\"t\": \"2026-10-16T16:58:10Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor bifunctor of a triangulated category preserves coproducts, and the localizing closure of a class stable under tensor is stable under tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.tensorBifunctor\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.ObjectProperty.instIsMultiplicativeTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\"], \"digest\": \"79cbae594f3428cc\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: the inspected hits concern monoidal localization, triangulated quotient categories, stochastic localizing sequences, or ring/module localization; none states constructible pro-etale tensor stability or closure of a tensor-stable generating class."
-  },
-  {
-   "tool": "grep",
-   "query": "LocalizingSubcategory|localizing|IsLocalizing",
-   "results": "{\"t\": \"2026-10-16T16:58:29Z\", \"tool\": \"grep\", \"query\": \"LocalizingSubcategory|localizing|IsLocalizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\"], \"digest\": \"45bf0d5d88eac1d1\"}",
-   "date": "2026-10-16",
-   "verdict": "no match: the inspected hits concern monoidal localization, triangulated quotient categories, stochastic localizing sequences, or ring/module localization; none states constructible pro-etale tensor stability or closure of a tensor-stable generating class."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "unreachable"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": null,
- "blueprint_uses": [
-  "sk-cor-coefficient-heart-ii",
-  "sk-lem-integral-models"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_snapshot": "main-20261015",
- "chapter": "sec-six-functors-basics",
- "unit": "sk-thm-sf-pf-field",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "det-thm-sf-pf-field-tensor",
-  "worker": "stage1",
-  "summary": "Reaudited the inherited eight-step proof against the current blueprint and delivery checklist. No new nodes are needed: all substantive inputs already exist in the DAG. Added the existing K-flat derived-tensor exactness statement to the exactness step and the existing locally closed extension coherence statement to the base-change step, so the long arguments cite the precise facts they use. Verified the standing scheme hypotheses, finite coefficient field E versus the finite-stage Q̅ℓ coefficient, Noetherian consequences, quasi-compact open hypotheses, coefficient pullback, lisse flatness, generator inductions, and the two minimality arguments. No Lean declaration states this item. Repaired the dedicated return for step 3 by replacing its inline closure/factorization comparison with an explicit application of the existing factorization-independence theorem; retained the two open-closed base-change applications and all hypothesis checks. No new nodes are required. Every non-elementary step is now shorter than 2000 characters.",
-  "blueprint": "Steps 1–8 realize the blueprint proof: derived tensor exactness/coproducts; reduction to locally closed lisse generators; extension-by-zero base change; two projection-formula applications; lisse tensor and K-flatness; explicit five-piece constructibility; first localizing minimality argument; second localizing minimality argument.",
   "tool_uses": [
-   {
-    "node": "det-cor-coefficient-heart-ii-generation",
-    "why": "Finite-cone generation and locally closed lisse generators are the generation input for the unit route."
-   },
-   {
-    "node": "det-cor-coefficient-heart-ii-triangulated",
-    "why": "Triangulated closure of Dbc is needed for both finite-cone inductions."
-   },
-   {
-    "node": "sk-lem-coefficient-heart",
-    "why": "Lisse characterization and exact locally closed extension by zero are used in generator and constructibility steps."
-   },
-   {
-    "node": "det-sf-open-closed-sequence-ring-sheaf",
-    "why": "Ringed open-closed restriction, exactness, and base-change identities are used in the extension-by-zero calculation."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Noetherian open subschemes verify quasi-compactness of all open complements."
-   },
-   {
-    "node": "det-lem-int-tensor-projection",
-    "why": "The two locally closed projection-formula isomorphisms are used in the generator tensor calculation."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Finite type over the field verifies Noetherian hypotheses."
-   },
-   {
-    "node": "det-def-localizing-closure-existence",
-    "why": "Provides ambient coproducts, localizing closure, and its minimality."
-   },
-   {
-    "node": "lem-sfb-locally-closed-extension-coherence",
-    "why": "Supplies normalized factorization independence and composition for locally closed extension by zero."
-   }
-  ]
- },
- "tool_uses": [
-  "det-def-localizing-closure-existence"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-NM-afb9670ac",
-  "group": "NM",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-afb9670ac (reviewer sub-agent of L); spot-checked: Read the item in full: its 8 steps, all 22 cited statements, the main-20261015 blueprint statement and proof, and the unit record. The statement matches the blueprint's two clauses. The added context is the standing setting, E a finite subextension, Q̄_ℓ as the finite-stage condensed ring, and Loc as in det-def-localizing-closure-existence(2); none of it weakens the target. Step 1: K-flat cone calculation, Koszul symmetry checked as a chain map, coproducts via the RHom adjunction. Step 2: X is Noetherian through finite type over Spec k; both finite-cone inductions are set up correctly. Step 3 (the repaired step, now 1509 characters): the qcqs and quasi-compact-open hypotheses of det-sf-open-closed-sequence-ring-sheaf(4) are checked; lem-sfb-locally-closed-extension-coherence covers the case where Z_Y is not the closure of T_Y; the result is a^*b_!M≃c_!d^*M. Step 4: det-lem-int-tensor-projection applied to a on X and to c on the standing scheme S, with a_!c_! kept and no shriek-composition law assumed. Step 5: lisse⊗lisse is lisse and flat, hence K-flat in degree 0, so the tensor is underived. Step 6: five pieces with restrictions 0,0,0,0,N form a stratification in the sense of def-constructible-stratification; constructible via sk-lem-coefficient-heart. Steps 7–8: localizing minimality as in blueprint proof (2). Edge cases: Spec k, empty strata, rank zero, identity immersions, E versus Q̄_ℓ. No new nodes and no duplicate (det-lem-int-tensor-product is the O_E version). The item is not reachable from its own dependencies, so there is no cycle, and no SGA is cited. For the maintainer: lem-sc-source-kflat-tensor-left-triangulated and sk-prop-sfb-cartesian-coefficients are off-route but undeclared; both are acceptable generic tools. The stale top-level tool_uses entry lemma-nagata-scheme-theoretic-closure-minimal is no longer cited. Step 3's source.place wording is out of date. No changes made."
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "det-cor-coefficient-heart-ii-generation",
+    "det-cor-coefficient-heart-ii-triangulated",
+    "sk-lem-coefficient-heart",
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "det-lem-int-tensor-projection",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "det-def-localizing-closure-existence",
+    "lemma-nagata-scheme-theoretic-closure-minimal",
+    "lem-sfb-locally-closed-extension-coherence"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-NM-afb9670ac",
+    "group": "NM",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-afb9670ac (reviewer sub-agent of L); spot-checked: Read the item in full: its 8 steps, all 22 cited statements, the main-20261015 blueprint statement and proof, and the unit record. The statement matches the blueprint's two clauses. The added context is the standing setting, E a finite subextension, Q̄_ℓ as the finite-stage condensed ring, and Loc as in det-def-localizing-closure-existence(2); none of it weakens the target. Step 1: K-flat cone calculation, Koszul symmetry checked as a chain map, coproducts via the RHom adjunction. Step 2: X is Noetherian through finite type over Spec k; both finite-cone inductions are set up correctly. Step 3 (the repaired step, now 1509 characters): the qcqs and quasi-compact-open hypotheses of det-sf-open-closed-sequence-ring-sheaf(4) are checked; lem-sfb-locally-closed-extension-coherence covers the case where Z_Y is not the closure of T_Y; the result is a^*b_!M≃c_!d^*M. Step 4: det-lem-int-tensor-projection applied to a on X and to c on the standing scheme S, with a_!c_! kept and no shriek-composition law assumed. Step 5: lisse⊗lisse is lisse and flat, hence K-flat in degree 0, so the tensor is underived. Step 6: five pieces with restrictions 0,0,0,0,N form a stratification in the sense of def-constructible-stratification; constructible via sk-lem-coefficient-heart. Steps 7–8: localizing minimality as in blueprint proof (2). Edge cases: Spec k, empty strata, rank zero, identity immersions, E versus Q̄_ℓ. No new nodes and no duplicate (det-lem-int-tensor-product is the O_E version). The item is not reachable from its own dependencies, so there is no cycle, and no SGA is cited. For the maintainer: lem-sc-source-kflat-tensor-left-triangulated and sk-prop-sfb-cartesian-coefficients are off-route but undeclared; both are acceptable generic tools. The stale top-level tool_uses entry lemma-nagata-scheme-theoretic-closure-minimal is no longer cited. Step 3's source.place wording is out of date. No changes made."
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "lean": {
+    "module": "Sheaf.SixFunctors.FieldTensor",
+    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tensorClosureRational",
+    "file": "lean/Sheaf/SixFunctors/FieldTensor.lean",
+    "statement": "theorem tensorClosureRational (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : (∀ (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), constantModelBoundedConstructible Λ X K → constantModelBoundedConstructible Λ X M → constantModelBoundedConstructible Λ X (((derivedTensor Λ X).obj K).obj M)) ∧ (∀ (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) A → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) B → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) (((derivedTensor Λ X).obj A).obj B))",
+    "branch": "newtargets-dag",
+    "by": "Q44",
+    "date": "2026-10-18",
+    "existing": false,
+    "note": "Maintainer FIX (cc second reader, 2026-10-18): the coefficient hypothesis hΛ is stated as an isomorphism of monoid objects, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) or Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)), as in the landed rational items (e.g. RationalRestrictionGlue, BrownHypothesesSmall). The delivered equality Λ = ... of underlying Ab-sheaves left the independent [MonObj Λ] instance unconstrained, so the theorem ranged over arbitrary ring structures on the abelian sheaf of E or Q̄_ℓ. The statement's docstring now carries the node's eight proof steps.",
+    "fixed_by": "NT-stage2-cc-b86d5a6d7"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-b86d5a6d7",
+    "group": "Q44",
+    "result": "fix",
+    "note": "Read node, blueprint source (two clauses, Λ=E or Q̄ℓ), all 6 stmt_deps and their declarations (continuousMapRingObj, padicAlgClRingObj, constantModelBoundedConstructible, CategoryTheory.localizingClosure, CondensedRing.derivedTensor), module, report. Setting binders, Dbc, ambient derived tensor, both clauses, quantifier order, edge cases (empty X, zero, E=Q_ℓ, Q̄ℓ finite-stage ring, empty coproducts) and universes (single u, pp.universes probe) correct; lean.statement verbatim; no defs, sorry only. F1 (H3): hΛ was an equality of underlying Ab-sheaves with an independent [MonObj Λ], so the ring structure was unconstrained; fixed to Nonempty (Mon.mk Λ ≅ Mon.mk …) for E and Q̄ℓ (landed convention). F2 (H8): docstring now carries the node's 8 proof steps. F3 (H11): thin second reading; maintainer section appended to report. Delivered (12.0 s) and fixed (20.6 s) files compile clean via nt_compile --json. Fixes: FieldTensor.lean, det-thm-sf-pf-field-tensor.lean-record.json, det-thm-sf-pf-field-tensor.report.md."
   }
- },
- "lean": {
-  "module": "Sheaf.SixFunctors.FieldTensor",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tensorClosureRational",
-  "file": "lean/Sheaf/SixFunctors/FieldTensor.lean",
-  "statement": "theorem tensorClosureRational (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : (∀ (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), constantModelBoundedConstructible Λ X K → constantModelBoundedConstructible Λ X M → constantModelBoundedConstructible Λ X (((derivedTensor Λ X).obj K).obj M)) ∧ (∀ (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) A → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) B → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) (((derivedTensor Λ X).obj A).obj B))",
-  "branch": "newtargets-dag",
-  "by": "Q44",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Maintainer FIX (cc second reader, 2026-10-18): the coefficient hypothesis hΛ is stated as an isomorphism of monoid objects, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) or Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)), as in the landed rational items (e.g. RationalRestrictionGlue, BrownHypothesesSmall). The delivered equality Λ = ... of underlying Ab-sheaves left the independent [MonObj Λ] instance unconstrained, so the theorem ranged over arbitrary ring structures on the abelian sheaf of E or Q̄_ℓ. The statement's docstring now carries the node's eight proof steps.",
-  "fixed_by": "NT-stage2-cc-b86d5a6d7"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-b86d5a6d7",
-  "group": "Q44",
-  "result": "fix",
-  "note": "Read node, blueprint source (two clauses, Λ=E or Q̄ℓ), all 6 stmt_deps and their declarations (continuousMapRingObj, padicAlgClRingObj, constantModelBoundedConstructible, CategoryTheory.localizingClosure, CondensedRing.derivedTensor), module, report. Setting binders, Dbc, ambient derived tensor, both clauses, quantifier order, edge cases (empty X, zero, E=Q_ℓ, Q̄ℓ finite-stage ring, empty coproducts) and universes (single u, pp.universes probe) correct; lean.statement verbatim; no defs, sorry only. F1 (H3): hΛ was an equality of underlying Ab-sheaves with an independent [MonObj Λ], so the ring structure was unconstrained; fixed to Nonempty (Mon.mk Λ ≅ Mon.mk …) for E and Q̄ℓ (landed convention). F2 (H8): docstring now carries the node's 8 proof steps. F3 (H11): thin second reading; maintainer section appended to report. Delivered (12.0 s) and fixed (20.6 s) files compile clean via nt_compile --json. Fixes: FieldTensor.lean, det-thm-sf-pf-field-tensor.lean-record.json, det-thm-sf-pf-field-tensor.report.md."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N1",
-  "result": "pass",
-  "landing": "20261019T112501-L-3944951",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

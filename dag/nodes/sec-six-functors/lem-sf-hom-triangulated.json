@@ -1,230 +1,220 @@
 {
- "id": "lem-sf-hom-triangulated",
- "blueprint": {
-  "is": "lem-sf-hom-triangulated",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Exactness of the internal Hom in each variable",
- "statement": "Let $A$ be a commutative ring, let $X$ be a scheme and let\n$K',K,K'',M,M',M''$ be complexes of $A$-modules on $X_{\\Et}$. If\n$K'\\to K\\to K''\\to K'[1]$ and $M'\\to M\\to M''\\to M'[1]$ are\ndistinguished triangles of $D(X_{\\Et},A)$, then the sequences\n\n$$\nR\\mathcal Hom_A(K'',M)\\to R\\mathcal Hom_A(K,M)\\to R\\mathcal Hom_A(K',M)\n\\to R\\mathcal Hom_A(K'',M)[1],\n$$\n\n$$\nR\\mathcal Hom_A(K,M')\\to R\\mathcal Hom_A(K,M)\\to R\\mathcal Hom_A(K,M'')\n\\to R\\mathcal Hom_A(K,M')[1]\n$$\n\nare distinguished triangles. Here $X_{\\Et}$ is the small étale site\n[def-weil-pbc-etale-site], with the universe and small-skeleton convention\n[def-weil-size-convention]; $A_X$ is its constant sheaf of commutative\nrings and $D(X_{\\Et},A)=D(\\operatorname{Mod}(A_X))$\n[def-weil-pbc-derived-categories]. The internal Hom is that of the ringed\nsite $(X_{\\Et},A_X)$ [def-pur-derived-internal-hom], computed by a\nK-injective resolution of the second variable. The arrows use the\nbifunctor's usual shift and sign identifications.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-triangulated.md",
-  "place": "node lem-sf-hom-triangulated, order 2081"
- },
- "stmt_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-size-convention",
-  "def-weil-pbc-derived-categories",
-  "def-pur-derived-internal-hom"
- ],
- "proof": [
-  {
-   "text": "Work directly on the recorded small etale site, whose object universe is u+1 and morphism universe is u [def-weil-pbc-etale-site, def-weil-size-convention]. Set R to the constant commutative ring sheaf A_X. The category in the statement is exactly its full module derived category [def-weil-pbc-derived-categories]. Use the existing independent-universe derivedInternalHomOfUniverses [def-pur-derived-internal-hom], without a change of site or coefficient category.",
-   "uses": [
+  "id": "lem-sf-hom-triangulated",
+  "blueprint": {
+    "is": "lem-sf-hom-triangulated",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Exactness of the internal Hom in each variable",
+  "statement": "Let $A$ be a commutative ring, let $X$ be a scheme and let\n$K',K,K'',M,M',M''$ be complexes of $A$-modules on $X_{\\Et}$. If\n$K'\\to K\\to K''\\to K'[1]$ and $M'\\to M\\to M''\\to M'[1]$ are\ndistinguished triangles of $D(X_{\\Et},A)$, then the sequences\n\n$$\nR\\mathcal Hom_A(K'',M)\\to R\\mathcal Hom_A(K,M)\\to R\\mathcal Hom_A(K',M)\n\\to R\\mathcal Hom_A(K'',M)[1],\n$$\n\n$$\nR\\mathcal Hom_A(K,M')\\to R\\mathcal Hom_A(K,M)\\to R\\mathcal Hom_A(K,M'')\n\\to R\\mathcal Hom_A(K,M')[1]\n$$\n\nare distinguished triangles. Here $X_{\\Et}$ is the small étale site\n[def-weil-pbc-etale-site], with the universe and small-skeleton convention\n[def-weil-size-convention]; $A_X$ is its constant sheaf of commutative\nrings and $D(X_{\\Et},A)=D(\\operatorname{Mod}(A_X))$\n[def-weil-pbc-derived-categories]. The internal Hom is that of the ringed\nsite $(X_{\\Et},A_X)$ [def-pur-derived-internal-hom], computed by a\nK-injective resolution of the second variable. The arrows use the\nbifunctor's usual shift and sign identifications.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-sf-hom-triangulated.md",
+    "place": "node lem-sf-hom-triangulated, order 2081"
+  },
+  "stmt_deps": [
     "def-weil-pbc-etale-site",
     "def-weil-size-convention",
     "def-weil-pbc-derived-categories",
     "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
-   }
-  },
-  {
-   "text": "Specialize the independent-universe ringedInternalHom_exactOfUniverses [lem-weil-pbc-ringed-internal-hom-exact-restriction] at object universe u+1, morphism universe u, coefficient universe u+1 and derived universe w, with R=A_X. Its second conjunct gives the contravariant triangulated functor for every fixed target M, including the opposite shift and cone signs. This is precisely the first conjunct of the statement.",
-   "uses": [
+  ],
+  "proof": [
+    {
+      "text": "Use the small skeleton of the étale site of $X$ in the chosen larger universe [def-weil-pbc-etale-site, def-weil-size-convention]. Put $\\mathcal O=A_X$. By [def-weil-pbc-derived-categories], $A_X$ is a sheaf of commutative rings and $D(X_{\\Et},A)$ is precisely $D(\\mathcal O)$. The definition [def-pur-derived-internal-hom] identifies $H(L,N)=R\\mathcal Hom_{\\mathcal O}(L,N)$ with the internal Hom in the statement: on representatives it is $\\mathcal Hom^\\bullet(L,I(N))$, with $N\\to I(N)$ a K-injective resolution. Thus the objects and both given triangles have the types required for the ringed-site theorem.",
+      "uses": [
+        "def-weil-pbc-etale-site",
+        "def-weil-size-convention",
+        "def-weil-pbc-derived-categories",
+        "def-pur-derived-internal-hom"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
+      }
+    },
+    {
+      "text": "Apply the first-variable exactness clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction] to $K'\\to K\\to K''\\to K'[1]$, keeping $M$ fixed. That clause is contravariant and includes the shift identification $H(L[1],M)\\cong H(L,M)[-1]$. It gives the reversed distinguished triangle $H(K'',M)\\to H(K,M)\\to H(K',M)\\to H(K'',M)[1]$, with its contravariant triangle signs. Substituting the identification of step 1 gives the first displayed triangle.",
+      "uses": [
+        "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
+      }
+    },
+    {
+      "text": "Apply the second-variable exactness clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction] to $M'\\to M\\to M''\\to M'[1]$, keeping $K$ fixed. Its covariant shift identification $H(K,N[1])\\cong H(K,N)[1]$ gives $H(K,M')\\to H(K,M)\\to H(K,M'')\\to H(K,M')[1]$ as a distinguished triangle, hence the second displayed triangle by step 1. The cited theorem explicitly imposes no boundedness or finite-generation hypotheses, so both applications hold for all the complexes in the statement.",
+      "uses": [
+        "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-etale-site",
+    "def-weil-size-convention",
+    "def-weil-pbc-derived-categories",
+    "def-pur-derived-internal-hom",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
-   }
   },
-  {
-   "text": "The first conjunct of the same specialization [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives the covariant triangulated functor for every fixed source K. This is precisely the second conjunct of the statement. Swap the two conjuncts using And.symm. No boundedness or finite-generation assumption or additional comparison is needed.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-size-convention",
-  "def-weil-pbc-derived-categories",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JC, lemma-RHom-triangulated; construction in Tag 08J7, section-internal-hom"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "derived internal Hom on etale sheaves is triangulated in each variable",
-   "results": "8 generic derived-category structure, triangulated functor and preadditive Yoneda hits (including DerivedCategory.instIsTriangulated); no declaration for derived internal Hom on etale sheaves. See the actual search log retained in report.md.",
-   "date": "2026-10-16",
-   "verdict": "no exact match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "derived internal Hom on etale sheaves is triangulated in each variable",
+      "results": "8 generic derived-category structure, triangulated functor and preadditive Yoneda hits (including DerivedCategory.instIsTriangulated); no declaration for derived internal Hom on etale sheaves. See the actual search log retained in report.md.",
+      "date": "2026-10-16",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex.HomComplex mappingCone",
+      "results": "0 hits; unknown identifier mappingCone.",
+      "date": "2026-10-16",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "HomComplex|mappingCone in Mathlib/Algebra/Homology",
+      "results": "25 hits in Mathlib/Algebra/Homology, including generic HomComplex, KInjective and mapping-cone APIs; none states the sheaf-valued derived internal Hom triangulated theorem.",
+      "date": "2026-10-16",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived internal Hom on etale sheaves is triangulated in each variable",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived internal Hom on a ringed site sends distinguished triangles in both variables to distinguished triangles",
+      "results": "8 hits: DerivedCategory.instIsTriangulated, instPretriangulated, mem_distTriang_iff, instIsTriangulatedHomotopyCategoryIntUpQh and triangleOfSES variants. These give generic derived-category structure, not sheaf-valued derived internal Hom.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"internalHom\", \"IsTriangulated\"",
+      "results": "0 hits.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "internalHom.*(IsTriangulated|[Dd]istinguished)|[Rr]hom|derivedInternalHom",
+      "results": "25 hits, all unrelated substring matches (StarHomClass, congrHom, orderHom); the broad RHom pattern was insufficiently selective.",
+      "date": "2026-10-16",
+      "verdict": "no match; followed by narrower search"
+    },
+    {
+      "tool": "leansearch",
+      "query": "derived internal Hom on a ringed site sends distinguished triangles in both variables to distinguished triangles",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-16",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived sheaf Hom is an exact bifunctor on the unbounded derived category of modules on a site",
+      "results": "8 hits: Ext.mapExactFunctor and variants, Functor.instLinearDerivedCategoryMapDerivedCategory, Ext, Tor, Tor′ and DerivedCategory.instLinear. None states internal-Hom triangle exactness.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "\\bRHom\\b|derivedInternalHom|internalHom.*(IsTriangulated|distinguished)",
+      "results": "0 hits in Mathlib/Algebra (subdirectory argument Algebra).",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"sheafHom\", \"derived\"",
+      "results": "0 hits.",
+      "date": "2026-10-16",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 2081,
+  "blueprint_uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-kinjective-resolutions",
+    "prop-weil-pbc-kinjective-resolutions-exist"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex.HomComplex mappingCone",
-   "results": "0 hits; unknown identifier mappingCone.",
-   "date": "2026-10-16",
-   "verdict": "no exact match"
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-rf-shriek-preservation",
+  "split_report": {
+    "date": "2026-10-16",
+    "item": "lem-sf-hom-triangulated",
+    "worker": "stage1",
+    "summary": "Corrected the imported pro-étale operation reference to the ringed-site derived internal Hom on the stated étale site, preserving all complexes, hypotheses and triangle conclusions. Made the small skeleton and constant coefficient ring explicit. Reused the existing reviewed ringed-site internal-Hom theorem for each variance; no new node or Mathlib leaf is needed. Replaced the stale previous report and checked citations, source, shifts and the absence of a dependency cycle. Repair F1: read the exact archived master blueprint file and verified that its statement and proof match the imported record; the corrected statement preserves the original hypotheses and displayed triangles. Repair F2: the report embeds the complete verbatim citations.json and searches.jsonl because deliver.py does not package those standalone sandbox files.",
+    "blueprint": "The imported proof paragraph beginning Choose a K-injective resolution is realized by step 1 (the same K-injective model) and steps 2–3 (the two cone-exactness conclusions, already proved in the existing generic ringed-site tool). No chapter or unit route is replaced. The exact master blueprint source (archive commit 967897d1c5e775be739997d7e847a9205fae1359) was read on repair and compared word for word with the imported record.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+        "why": "Generic unbounded ringed-site Hom calculus, used only for its exactness and shifts in each variable; no theorem of this unit states this infrastructure. The six-functor unit argument above the item is unchanged."
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "HomComplex|mappingCone in Mathlib/Algebra/Homology",
-   "results": "25 hits in Mathlib/Algebra/Homology, including generic HomComplex, KInjective and mapping-cone APIs; none states the sheaf-valued derived internal Hom triangulated theorem.",
-   "date": "2026-10-16",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived internal Hom on etale sheaves is triangulated in each variable",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived internal Hom on a ringed site sends distinguished triangles in both variables to distinguished triangles",
-   "results": "8 hits: DerivedCategory.instIsTriangulated, instPretriangulated, mem_distTriang_iff, instIsTriangulatedHomotopyCategoryIntUpQh and triangleOfSES variants. These give generic derived-category structure, not sheaf-valued derived internal Hom.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"internalHom\", \"IsTriangulated\"",
-   "results": "0 hits.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "internalHom.*(IsTriangulated|[Dd]istinguished)|[Rr]hom|derivedInternalHom",
-   "results": "25 hits, all unrelated substring matches (StarHomClass, congrHom, orderHom); the broad RHom pattern was insufficiently selective.",
-   "date": "2026-10-16",
-   "verdict": "no match; followed by narrower search"
-  },
-  {
-   "tool": "leansearch",
-   "query": "derived internal Hom on a ringed site sends distinguished triangles in both variables to distinguished triangles",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-16",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived sheaf Hom is an exact bifunctor on the unbounded derived category of modules on a site",
-   "results": "8 hits: Ext.mapExactFunctor and variants, Functor.instLinearDerivedCategoryMapDerivedCategory, Ext, Tor, Tor′ and DerivedCategory.instLinear. None states internal-Hom triangle exactness.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "\\bRHom\\b|derivedInternalHom|internalHom.*(IsTriangulated|distinguished)",
-   "results": "0 hits in Mathlib/Algebra (subdirectory argument Algebra).",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"sheafHom\", \"derived\"",
-   "results": "0 hits.",
-   "date": "2026-10-16",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 2081,
- "blueprint_uses": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-kinjective-resolutions",
-  "prop-weil-pbc-kinjective-resolutions-exist"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation",
- "split_report": {
-  "date": "2026-10-16",
-  "item": "lem-sf-hom-triangulated",
-  "worker": "stage1",
-  "summary": "Corrected the imported pro-étale operation reference to the ringed-site derived internal Hom on the stated étale site, preserving all complexes, hypotheses and triangle conclusions. Made the small skeleton and constant coefficient ring explicit. Reused the existing reviewed ringed-site internal-Hom theorem for each variance; no new node or Mathlib leaf is needed. Replaced the stale previous report and checked citations, source, shifts and the absence of a dependency cycle. Repair F1: read the exact archived master blueprint file and verified that its statement and proof match the imported record; the corrected statement preserves the original hypotheses and displayed triangles. Repair F2: the report embeds the complete verbatim citations.json and searches.jsonl because deliver.py does not package those standalone sandbox files.",
-  "blueprint": "The imported proof paragraph beginning Choose a K-injective resolution is realized by step 1 (the same K-injective model) and steps 2–3 (the two cone-exactness conclusions, already proved in the existing generic ringed-site tool). No chapter or unit route is replaced. The exact master blueprint source (archive commit 967897d1c5e775be739997d7e847a9205fae1359) was read on repair and compared word for word with the imported record.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Generic unbounded ringed-site Hom calculus, used only for its exactness and shifts in each variable; no theorem of this unit states this infrastructure. The six-functor unit argument above the item is unchanged."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
- ],
- "reviewed": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-Codex-Q18-ef53b58dc",
-  "group": "Q18",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-ef53b58dc (reviewer sub-agent of L); spot-checked: Read the full item, report, master source, unit/chapter route, all cited statements, and Stacks Tags 08J7/08JC. Verified both variance clauses, shifts, hypotheses, coefficient/site typing, source inconsistency and its documented correction, edge cases, citations, searches, and acyclicity. Review written to review.md."
- },
- "lean": {
-  "module": "Sheaf.Paper.SfHomTriangulated",
-  "declaration": "AlgebraicGeometry.Etale.sf_internalHom_triangulated",
-  "file": "lean/Sheaf/Paper/SfHomTriangulated.lean",
-  "statement": "theorem sf_internalHom_triangulated (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u + 1} ((sheafCompose X.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))))] : (∀ M, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).IsTriangulated) ∧ (∀ K, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).IsTriangulated)",
-  "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "The two conjuncts express the two image-triangle conclusions using Mathlib Functor.IsTriangulated and CommShift, in the same interface as ringedInternalHom_exact. The first uses the opposite pretriangulated category (negative shift); the second is covariant. The category is written literally as D(Mod(A_X)), as in the node, and the operation is the recorded derivedInternalHomOfUniverses specialized at the constant ring sheaf. Universes: site objects u+1, arrows u, coefficients and modules u+1, localization w. HasDerivedCategory is the structural localization parameter, with no extra mathematical finiteness assumption."
- },
- "reviewed_lean": {
-  "date": "2026-10-16",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-40d892775",
-  "group": "N2",
-  "result": "pass",
-  "note": "Reviewed node, dependencies, source, Lean module, report sections, edge cases, universes, and declarations. scompile.py sandbox and library checks passed; no substantive findings."
- },
- "reviewed_proof": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
-  "result": "pass",
-  "landing": "20261019T112618-L-3961782",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+  ],
+  "reviewed": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-Codex-Q18-ef53b58dc",
+    "group": "Q18",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-ef53b58dc (reviewer sub-agent of L); spot-checked: Read the full item, report, master source, unit/chapter route, all cited statements, and Stacks Tags 08J7/08JC. Verified both variance clauses, shifts, hypotheses, coefficient/site typing, source inconsistency and its documented correction, edge cases, citations, searches, and acyclicity. Review written to review.md."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.SfHomTriangulated",
+    "declaration": "AlgebraicGeometry.Etale.sf_internalHom_triangulated",
+    "file": "lean/Sheaf/Paper/SfHomTriangulated.lean",
+    "statement": "theorem sf_internalHom_triangulated (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u + 1} ((sheafCompose X.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A))))] : (∀ M, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).flip.obj M).IsTriangulated) ∧ (∀ K, ∃ _ : ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).CommShift ℤ, ((Functor.curry.obj (derivedInternalHomOfUniverses.{u + 1, u, u + 1, w} X.smallEtaleTopology ((constantSheaf X.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of A)))).obj (op K)).IsTriangulated)",
+    "branch": "newtargets-dag",
+    "by": "N2",
+    "date": "2026-10-16",
+    "existing": false,
+    "note": "The two conjuncts express the two image-triangle conclusions using Mathlib Functor.IsTriangulated and CommShift, in the same interface as ringedInternalHom_exact. The first uses the opposite pretriangulated category (negative shift); the second is covariant. The category is written literally as D(Mod(A_X)), as in the node, and the operation is the recorded derivedInternalHomOfUniverses specialized at the constant ring sheaf. Universes: site objects u+1, arrows u, coefficients and modules u+1, localization w. HasDerivedCategory is the structural localization parameter, with no extra mathematical finiteness assumption."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-16",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-40d892775",
+    "group": "N2",
+    "result": "pass",
+    "note": "Reviewed node, dependencies, source, Lean module, report sections, edge cases, universes, and declarations. scompile.py sandbox and library checks passed; no substantive findings."
+  }
 }
