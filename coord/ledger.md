@@ -17034,3 +17034,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: returned deliver/Q123/lem-per-finite-type-jacobian-torsion-etale-away (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-per-finite-type-jacobian-torsion-etale-away: lem-p)
 - 03:58 L: returned deliver/Q05/lem-per-separable-stable-modification-flat-pair (reviewer RETURN: L: independent stage-2 immutable head 81b87d969cb0: Item lem-per-separable-stable-modification-flat-pair is in coord/rou)
 - 03:58 L: returned deliver/Q83/lem-per-snc-root-algebra-structure (reviewer RETURN: L: independent stage-2 immutable head 839784a25334: Route pivot 2026-10-19 (side coord/route-pivot-dropped.txt, artin-ga)
+- 03:58 L: returned deliver/N5/lem-per-integral-chart-logification-thickening (reviewer RETURN: L: independent stage-2 immutable head 8fbdd796cf5b: Lean maths correct: return points (1)-(5) of 51b134d0 and the H4 Eta)
