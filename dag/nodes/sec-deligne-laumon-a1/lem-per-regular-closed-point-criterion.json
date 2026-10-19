@@ -11,9 +11,72 @@
   "pqf-def-locnoeth",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $X$ is regular and let $x\\in X$ be a closed point. By the defining condition of [def-weil-regular-scheme], $x$ has an affine open neighbourhood $U$ with $R=\\mathcal O_X(U)$ Noetherian and regular. Let $\\mathfrak p_x\\subset R$ be the prime of $x$. Clause (c) of [lem-weil-pbc-affine-open-stalk-localization] gives a ring isomorphism $R_{\\mathfrak p_x}\\cong\\mathcal O_{X,x}$. Since $R$ is a regular ring, $R_{\\mathfrak p_x}$ is a regular local ring by the definition of a regular ring in [def-weil-regular-scheme]. A ring isomorphism identifies the unique maximal ideals and their generating sets, preserves Noetherianity and Krull dimension, so $\\mathcal O_{X,x}$ is a regular local ring. This proves the forward implication. The step uses only the defining affine-open condition, not the stalkwise reformulation stated in the definition, and not the criterion being proved.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IT, properties-lemma-characterize-regular, proof of (1) iff (3)."
+   }
+  },
+  {
+   "text": "Conversely assume the local rings at all closed points of $X$ are regular local, and fix any $x\\in X$. Apply [lem-per-locally-noetherian-closed-specialization] to the given locally Noetherian scheme to obtain $c\\in\\overline{\\{x\\}}$ with $\\{c\\}$ closed in $X$. Put $A=\\mathcal O_{X,c}$. The hypothesis therefore makes $A$ a regular local ring. No quasi-compactness of $X$ or Jacobson hypothesis is needed.",
+   "uses": [
+    "lem-per-locally-noetherian-closed-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IT, properties-lemma-characterize-regular, proof of (1) iff (3)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-spec-local-ring-canonical-morphism] with $Y=X$, $y=c$ and $A=\\mathcal O_{X,c}$. Its clause (1) says that the image of $a:\\operatorname{Spec}A\\to X$ consists of all generalizations of $c$. Since $c\\in\\overline{\\{x\\}}$, choose $q\\in\\operatorname{Spec}A$ with $a(q)=x$. Clause (2) identifies $\\mathcal O_{X,x}$ with $\\mathcal O_{\\operatorname{Spec}A,q}$. Apply clause (c) of [lem-weil-pbc-affine-open-stalk-localization] to the entire affine scheme $\\operatorname{Spec}A$, whose global sections are $A$ by [def-weil-affine-spectrum]. Writing $\\mathfrak q$ for the prime corresponding to $q$, it identifies the latter stalk with $A_{\\mathfrak q}$. Hence $\\mathcal O_{X,x}\\cong A_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J7, schemes-lemma-specialize-points; canonical morphism 02NA and stalks of spectra in 01HV(6); used in Properties 02IT."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-regular-local-localization], applied to the regular local ring $A$ from Step 2 and the prime $\\mathfrak q$ from Step 3, $A_{\\mathfrak q}$ is regular local. Transport this property along the ring isomorphism in Step 3 to obtain regularity of $\\mathcal O_{X,x}$. A ring isomorphism identifies the unique maximal ideals, their generating sets and prime chains, and preserves Noetherianity. So it preserves the defining equality for a regular local ring [def-weil-regular-scheme]. Since $x$ was arbitrary, every stalk $\\mathcal O_{X,y}$, $y\\in X$, is regular local. Now verify the defining condition of [def-weil-regular-scheme] at an arbitrary $y\\in X$. By [pqf-def-locnoeth] there is an affine open $U\\ni y$ in the given covering with $R=\\mathcal O_X(U)$ Noetherian. Let $\\iota_U:\\operatorname{Spec}R\\to X$ be the open immersion with image $U$. For a prime $\\mathfrak p\\subset R$, put $z=\\iota_U(\\mathfrak p)\\in U$, so $\\mathfrak p_z=\\mathfrak p$ by injectivity. Clause (c) of [lem-weil-pbc-affine-open-stalk-localization] gives $R_{\\mathfrak p}\\cong\\mathcal O_{X,z}$, and the latter is regular local by what was just shown, so $R_{\\mathfrak p}$ is regular local by the same transport. Hence the Noetherian ring $R$ is regular, and $U$ is the required affine open neighbourhood of $y$. Thus $X$ is regular. If $X$ is empty, the condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "def-weil-regular-scheme",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IT, properties-lemma-characterize-regular, proof of (1) iff (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-per-locally-noetherian-closed-specialization",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-regular-local-localization",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 02IT, properties-lemma-characterize-regular, proof of (1) iff (3)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +112,45 @@
    "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; logged digest 0ac4bf9737f83762",
    "date": "2026-10-18",
    "verdict": "no match: returned signatures concern Noetherian schemes, integral/reduced schemes, categorical regular epimorphisms, or unrelated completion/resolution constructions; none gives the asserted regularity criterion or proper-model completion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally Noetherian scheme is regular if all local rings at closed points are regular",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian; digest 496ff5ff58c7a6ec",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern local Noetherianity, reduced or integral schemes, or categorical regular epimorphisms; no regular-scheme closed-point criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*closed|closed.*regular|IsRegular",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; digest 7805957dbdefc6ce; directory AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern local Noetherianity, reduced or integral schemes, or categorical regular epimorphisms; no regular-scheme closed-point criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "regularity of a locally Noetherian scheme is tested on closed point local rings",
+   "results": "8 hits: IsLocalRing.specializes_closedPoint, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology, AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; digest 5a9e1992d0caf991",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern local Noetherianity, reduced or integral schemes, or categorical regular epimorphisms; no regular-scheme closed-point criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is regular if its stalks at closed points are regular local rings and it is locally noetherian",
+   "results": "8 hits: AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; digest 6fc9571a50692107",
+   "date": "2026-10-19",
+   "verdict": "no match: returned signatures concern local Noetherianity, reduced or integral schemes, or categorical regular epimorphisms; no regular-scheme closed-point criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-model-completion",
@@ -80,5 +178,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-closed-point-criterion",
+  "worker": "stage1",
+  "summary": "Prove the forward direction by the existing all-stalks characterization; in the converse choose a globally closed specialization, use the canonical spectrum-of-stalk morphism and its stalk isomorphisms to exhibit each stalk as a prime localization of the closed-point stalk, and apply the existing regular-local localization theorem. One new unsplit node, Stacks 02IL; no changed statement and no Lean attachment. Existing inherited searches retained and actual Q48 logged searches appended. Maintainer-reader fix (2026-10-19): Steps 1 and 4 no longer rely on the stalkwise 'equivalently (02IT)' clause of def-weil-regular-scheme, which is a non-Mathlib theorem by that node's own mathlib_match note. They now argue from the affine-open defining condition, pqf-def-locnoeth's Noetherian affine cover and clause (c) of lem-weil-pbc-affine-open-stalk-localization.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BGM, resolve-lemma-existence-implies-existence-by-normalized-blowing-ups; normalized blowups are resolve-definition-normalized-blowup (Tag 0BBS). Supporting Tag 0BGM proof, first paragraph: passage of the given regular resolution to the normal completion. More precisely: Stacks 0BG6 proof, last sentence, regularity checked at closed points (Properties 02IT).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic scheme-theoretic canonical morphism, image and stalk-isomorphism clauses; the perverse unit does not provide these basic scheme tools."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra localization theorem (0AFS), exactly the algebraic input called for by Properties 02IT; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-956038141",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-956038141 (reviewer sub-agent of L); spot-checked: I read all of the item, the new node, every cited statement, Stacks 02IL (properties.tex 555-588) and 02IT (1141-1161), and the unit. The item is 02IT (1)<=>(3), unchanged and correct. Tested cases: the empty scheme, Spec of a field, Spec k[eps]/eps^2, a DVR, and an infinite disjoint union. New node lem-per-locally-noetherian-closed-specialization is exactly 02IL's third assertion and is true. It is statement-only with the correct tag and blueprint from/via and five real searches. It is not a duplicate: lem-sc-quasi-compact-kolmogorov-closed-point needs quasi-compactness, and the other closed-point nodes differ. It is not a clause of the item. Step 2 uses a globally closed c exactly as the hypothesis requires. Step 3 is correct: canonical-morphism clauses (1) and (2) with the right generalization orientation, then affine-open-stalk-localization (c) on Spec A. Step 4 applies the regular-local-localization clause 1 correctly. I accept both declared tool_uses (sk-thm-p1 generic scheme and algebra tools). One fault, repaired (C4, claim inside a definition): Steps 1 and 4 used the 'equivalently (02IT)' stalkwise clause of def-weil-regular-scheme. That node's own mathlib_match note calls this a non-Mathlib theorem, which left 02IT (1)<=>(2) unproved. I rewrote both steps from the affine-open defining condition, the Noetherian affine cover of pqf-def-locnoeth and clause (c) of the Mathlib leaf lem-weil-pbc-affine-open-stalk-localization, and added pqf-def-locnoeth to proof_deps. The whole item file is under fixes/. No new node was added or dropped. Maintainer note: the 02IT clause inside def-weil-regular-scheme should become its own statement node.; 1 file(s) fixed by the reviewer"
  }
 }

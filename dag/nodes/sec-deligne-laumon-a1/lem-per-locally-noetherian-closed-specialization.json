@@ -1,0 +1,84 @@
+{
+ "id": "lem-per-locally-noetherian-closed-specialization",
+ "kind": "statement",
+ "title": "Every point of a locally Noetherian scheme has a closed specialization",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth]. For every point $x\\in X$ there is a point $c\\in X$ such that $\\{c\\}$ is closed in the underlying topological space of $X$ and $c\\in\\overline{\\{x\\}}$. Thus $x$ specializes to a point closed in $X$, not merely in an affine open neighbourhood. The statement allows the empty scheme, when the assertion for every $x$ is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 02IL, properties-lemma-locally-Noetherian-closed-point, third assertion (every point specializes to a closed point)."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*[Cc]losed|[Cc]losed.*[Ss]pecial|[Ss]pecial.*[Cc]losed",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; digest 0cc375c243560302; directory AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: Stalk.lean:160 uses the closed point of a local-ring spectrum; other hits concern etale points, affine inverse limits and universally closed maps. No global closed specialization theorem for locally Noetherian schemes; Noetherian.lean has none."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every point of a locally Noetherian scheme has a closed specialization",
+   "results": "8 hits: IsLocalRing.specializes_closedPoint, specializes_iff_forall_closed, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.Spec_closedPoint, specializes_iff_closure_subset, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; digest c26f918191fc979b",
+   "date": "2026-10-19",
+   "verdict": "no match: IsLocalRing.specializes_closedPoint only concerns spectra of local rings; other hits define local Noetherianity or specialize the relation of specialization, not global closed-point existence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyNoetherian, Specializes",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point of a locally Noetherian scheme specializes to a closed point",
+   "results": "8 hits: IsLocalRing.specializes_closedPoint, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; digest ad786ae15f36cbbc",
+   "date": "2026-10-19",
+   "verdict": "no match: local-ring spectra, sobriety and local Noetherianity only; no global closed specialization for an arbitrary locally Noetherian scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty closed subset of a locally noetherian scheme contains a point closed in the whole scheme",
+   "results": "8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, nonempty_inter_closedPoints, AlgebraicGeometry.IsLocallyNoetherian, jacobsonSpace_iff_locallyClosed, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsLocallyArtinian; digest 5409a9b04a567514",
+   "date": "2026-10-19",
+   "verdict": "no match: nonempty_inter_closedPoints assumes JacobsonSpace; locally Noetherian schemes need not be Jacobson (e.g. the spectrum of a DVR). Other hits give sobriety or Noetherianity only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-closed-point-criterion",
+  "date": "2026-10-19",
+  "group": "Q48"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BGM, resolve-lemma-existence-implies-existence-by-normalized-blowing-ups; normalized blowups are resolve-definition-normalized-blowup (Tag 0BBS). Supporting Tag 0BGM proof, first paragraph: passage of the given regular resolution to the normal completion. More precisely: Stacks 0BG6 proof, last sentence, regularity checked at closed points (Properties 02IT). Supporting Properties 02IT: existence of a closed specialization (Properties 02IL).",
+   "via": [
+    "lem-per-regular-closed-point-criterion",
+    "lem-per-regular-model-completion",
+    "lem-per-surface-resolution-normalized-refinement",
+    "lem-per-excellent-surface-desingularization",
+    "lem-per-surface-resolution-supported-presentation",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
