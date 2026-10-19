@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-element-presheaf-extension",
+ "kind": "statement",
+ "title": "Direct-sum computation and left exactness of presheaf element extension",
+ "statement": "Let C be a small site with topology J, R a sheaf of rings and A a sheaf of sets, with element projection p and restricted ring R_A as in [lem-weil-pbc-element-module-extension-adjunction]. The presheaf module pullback Q=PresheafOfModules.pullback(identity (R_A).obj) along p preserves finite limits. For every R_A-module sheaf L [def-weil-sheaf-of-modules-category], Q(L.val) is isomorphic as an R-module presheaf to elementDirectSumPresheaf(R,A,L), whose sections at U are the direct sum of L(U,s) over s in A(U), with a summand restricted through the lifted element arrow to the A(v)s summand.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE, 03CY and 03DJ; sites.tex Tag 0791"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the direct-sum presheaf on arbitrary module presheaves using its summand restrictions. A map from it into M is a family of linear maps from L(U,s) into M(U); the lifted element arrows identify the naturality equations with those of a map from L into restriction of M. Define both directions and check the inverse equations on summand inclusions. This gives a left adjoint to presheaf restriction. Uniqueness of left adjoints identifies it with Mathlib presheaf pullback; specializing to a module sheaf gives the direct-sum formula. At each U, the explicit sum functor factors through the diagram of fibre evaluations followed by the discrete colimit functor. Fibre evaluations preserve finite limits, and coproducts of modules preserve finite limits by Mathlib exact coproducts. The coproduct-to-direct-sum isomorphism is natural, as checked on each summand. Therefore evaluation of extension preserves finite limits at every U. Joint reflection of limits by module-presheaf evaluations yields finite-limit preservation of the sum functor; transport across the adjoint uniqueness isomorphism gives it for presheaf pullback. These universal properties include empty fibres and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-element-module-extension-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE, 03CY and 03DJ; sites.tex Tag 0791"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IE, 03CY and 03DJ; sites.tex Tag 0791",
+  "note": "Direct-sum universal-property proof and sectionwise exact coproducts; the source argument is fully proved in Lean without a new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf A, sheaves on the category of elements are equivalent to the slice of sheaves over A; module restriction has an exact left adjoint",
+   "results": "Eight hits, including SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, and PresheafOfModules.sheafificationAdjunction. The canonical extension adjunction is a specialization of Mathlib; no arbitrary-sheaf element-site descent or direct-sum calculation was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionCocontinuous\"",
+   "results": "Five hits in Mathlib.CategoryTheory.Sites.CoverLifting and DenseSubsite.SheafEquiv, including Functor.sheafAdjunctionCocontinuous and its hom-equivalence formulas. These supply the set adjunction, but not the induced ringed module direct image or element-site calculation.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphism|pullbackIso|sheafAdjunctionCocontinuous",
+   "results": "25 hits, including SheafOfModules.pullbackIso in PullbackContinuous.lean:106. Read pullbackPushforwardAdjunction, PullbackConstruction.adjunction, pullbackIso and sheafificationCompPullback at lines 53-129. No element-site direct-sum calculation or general ringed geometric restriction construction was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous and cocontinuous functor of sites induces a geometric morphism whose inverse image is precomposition; extension of module sheaves is the sheafification of module presheaf pullback",
+   "results": "Eight hits, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, PresheafOfModules.sheafification and Functor.sheafAdjunctionContinuous. Mathlib supplies the canonical extension adjunction; no arbitrary-sheaf element-site descent or explicit presheaf direct-sum computation was returned.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
+  "date": "2026-10-18",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "The arbitrary-sheaf localization support for ringed presentation transport: Direct-sum computation and left exactness of presheaf element extension",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ElementModulePresheafExtension",
+  "file": "lean/Sheaf/CategoryTheory/ElementModulePresheafExtension.lean",
+  "declaration": "CategoryTheory.element_module_presheaf_extension",
+  "declarations": [
+   "CategoryTheory.element_module_presheaf_extension_formula",
+   "CategoryTheory.element_module_presheaf_extension"
+  ],
+  "statement": "theorem element_module_presheaf_extension\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :\n    PreservesFiniteLimits (PresheafOfModules.pullback.{u}\n      (F := elementProjection A) (𝟙 (elementRing R A).obj)) ∧\n    (∀ L : ringedSiteModules (elementRing R A),\n      Nonempty ((PresheafOfModules.pullback.{u}\n        (F := elementProjection A) (𝟙 (elementRing R A).obj)).obj L.val ≅\n          elementDirectSumPresheaf R A L))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 4 new modules (compiled clean, axioms propext/choice/Quot.sound) against live clone: moved element-site decls byte-identical, RingedSheafSliceAdjunctionData unchanged, both direct importers (RingedPresentationTransport, OrientedProperFibreExchange) compile; bypassed nodes not in unit realized"
+ }
+}

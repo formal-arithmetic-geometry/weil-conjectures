@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-element-site-descent",
+ "kind": "statement",
+ "title": "Descent and continuity for the element-site presentation",
+ "statement": "Let C be a small site with topology J [def-weil-pbc-sites-and-cohomology] and A a sheaf of sets. Use the element projection p, topology J_A and fibre functor defined in [lem-weil-pbc-element-module-extension-adjunction]. Then J_A equals p.restrictedTopology(J), p is cocontinuous, and there exists an equivalence Sh(J_A) ≃ Sh(J)/A whose inverse after forgetting to presheaves is naturally isomorphic to the fibre functor (F → A) ↦ ((U,s) ↦ {x in F(U) : p(x)=s}). For every sheaf B and map b:B → A, the induced element-site map is continuous.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0791, lemma-localize-topos-site; sites-modules.tex Tag 04J4"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-element-module-extension-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Lift every arrow v:V→U uniquely below (U,s) to (V,A(v)s)→(U,s). Sieves below these objects identify with sieves below U, compatibly with pullback and transitivity. The resulting topology is restrictedTopology, and precomposition preserves sheaves, so Mathlib restrictedTopology_eq_inducedTopology identifies it with J_A. Lift covering sieves to prove cocontinuity. Fibre sections glue uniquely in F; their images agree with s by separatedness of A. Conversely pairs (s,x) glue by first gluing s in A and then x on the lifted element cover. The maps x↦(p(x),x) and fibre evaluation give inverse natural isomorphisms, including all restrictions. A sheaf map B→A carries lifted covering families to lifted covering families and preserves this sheaf gluing condition, giving continuity of the element map. Empty fibres and empty covers satisfy the same sheaf condition.",
+   "uses": [
+    "lem-weil-pbc-element-module-extension-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0791, lemma-localize-topos-site; sites-modules.tex Tag 04J4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-module-extension-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0791, lemma-localize-topos-site; sites-modules.tex Tag 04J4",
+  "note": "Source argument translated into Lean interfaces; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf A, sheaves on the category of elements are equivalent to the slice of sheaves over A; module restriction has an exact left adjoint",
+   "results": "Eight hits, including SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, and PresheafOfModules.sheafificationAdjunction. The canonical extension adjunction is a specialization of Mathlib; no arbitrary-sheaf element-site descent or direct-sum calculation was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionCocontinuous\"",
+   "results": "Five hits in Mathlib.CategoryTheory.Sites.CoverLifting and DenseSubsite.SheafEquiv, including Functor.sheafAdjunctionCocontinuous and its hom-equivalence formulas. These supply the set adjunction, but not the induced ringed module direct image or element-site calculation.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphism|pullbackIso|sheafAdjunctionCocontinuous",
+   "results": "25 hits, including SheafOfModules.pullbackIso in PullbackContinuous.lean:106. Read pullbackPushforwardAdjunction, PullbackConstruction.adjunction, pullbackIso and sheafificationCompPullback at lines 53-129. No element-site direct-sum calculation or general ringed geometric restriction construction was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous and cocontinuous functor of sites induces a geometric morphism whose inverse image is precomposition; extension of module sheaves is the sheafification of module presheaf pullback",
+   "results": "Eight hits, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, PresheafOfModules.sheafification and Functor.sheafAdjunctionContinuous. Mathlib supplies the canonical extension adjunction; no arbitrary-sheaf element-site descent or explicit presheaf direct-sum computation was returned.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
+  "date": "2026-10-18",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "The arbitrary-sheaf localization support for ringed presentation transport: Descent and continuity for the element-site presentation",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ElementSiteDescent",
+  "file": "lean/Sheaf/CategoryTheory/ElementSiteDescent.lean",
+  "declaration": "CategoryTheory.element_site_descent",
+  "declarations": [
+   "CategoryTheory.element_site_descent"
+  ],
+  "statement": "theorem element_site_descent\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (A : Sheaf J (Type u)) :\n    elementTopology A = (elementProjection A).restrictedTopology J ∧\n    Functor.IsCocontinuous (elementProjection A) (elementTopology A) J ∧\n    (∃ e : Sheaf (elementTopology A) (Type u) ≌\n        CostructuredArrow (𝟭 (Sheaf J (Type u))) A,\n      Nonempty (e.inverse ⋙ sheafToPresheaf (elementTopology A) (Type u) ≅\n        elementFibrePresheafFunctor A)) ∧\n    (∀ (B : Sheaf J (Type u)) (b : B ⟶ A),\n      Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 4 new modules (compiled clean, axioms propext/choice/Quot.sound) against live clone: moved element-site decls byte-identical, RingedSheafSliceAdjunctionData unchanged, both direct importers (RingedPresentationTransport, OrientedProperFibreExchange) compile; bypassed nodes not in unit realized"
+ }
+}

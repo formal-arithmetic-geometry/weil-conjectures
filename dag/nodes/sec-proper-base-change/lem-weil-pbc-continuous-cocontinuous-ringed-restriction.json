@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+ "kind": "statement",
+ "title": "Continuous cocontinuous restriction as a ringed geometric inverse image",
+ "statement": "Let (C,J) and (D,K) be small sites in one universe [def-weil-pbc-sites-and-cohomology], F:C→D a continuous cocontinuous functor, and R a sheaf of possibly noncommutative rings on D. Let S be R restricted by F. There is a ringed-topos morphism f:(Sh(J),S)→(Sh(K),R) [def-weil-pbc-ringed-topos-morphism] whose set inverse image is exactly continuous precomposition, whose structural ring map is the identity on every section under that identification, and for which module restriction SheafOfModules.pushforward(identity S) is left adjoint to the induced f.modules. The identity assertion is a heterogeneous equality so that it also specifies the original underlying elements before transport.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IE; sites.tex Tag 00XO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib Functor.sheafAdjunctionCocontinuous to obtain the set adjunction with continuous precomposition as inverse image. Sectionwise limits prove left exactness. Take the structural ring map to be the identity of the restricted ring. The generalized-element ring identities follow by evaluating at F(U). Construct the module direct image by compatible families, defining addition and the R-action coordinatewise; its underlying set sheaf is the same compatible-family direct image. Transposition along the set adjunction takes linear maps to linear maps, since its unit and counit are evaluated coordinatewise and the structural map is identity. Restrict its hom equivalence to obtain the module adjunction. The same evaluation proves additivity, the natural underlying comparison, and the module_linear field, using arbitrary rings rather than commutative rings.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IE; sites.tex Tag 00XO"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IE; sites.tex Tag 00XO",
+  "note": "Source argument translated into Lean interfaces; no change to the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf A, sheaves on the category of elements are equivalent to the slice of sheaves over A; module restriction has an exact left adjoint",
+   "results": "Eight hits, including SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction, and PresheafOfModules.sheafificationAdjunction. The canonical extension adjunction is a specialization of Mathlib; no arbitrary-sheaf element-site descent or direct-sum calculation was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafAdjunctionCocontinuous\"",
+   "results": "Five hits in Mathlib.CategoryTheory.Sites.CoverLifting and DenseSubsite.SheafEquiv, including Functor.sheafAdjunctionCocontinuous and its hom-equivalence formulas. These supply the set adjunction, but not the induced ringed module direct image or element-site calculation.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "RingedToposMorphism|pullbackIso|sheafAdjunctionCocontinuous",
+   "results": "25 hits, including SheafOfModules.pullbackIso in PullbackContinuous.lean:106. Read pullbackPushforwardAdjunction, PullbackConstruction.adjunction, pullbackIso and sheafificationCompPullback at lines 53-129. No element-site direct-sum calculation or general ringed geometric restriction construction was found.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous and cocontinuous functor of sites induces a geometric morphism whose inverse image is precomposition; extension of module sheaves is the sheafification of module presheaf pullback",
+   "results": "Eight hits, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, PresheafOfModules.sheafification and Functor.sheafAdjunctionContinuous. Mathlib supplies the canonical extension adjunction; no arbitrary-sheaf element-site descent or explicit presheaf direct-sum computation was returned.",
+   "date": "2026-10-18",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSheafSliceAdjunction",
+  "date": "2026-10-18",
+  "group": "U3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "The arbitrary-sheaf localization support for ringed presentation transport: Continuous cocontinuous restriction as a ringed geometric inverse image",
+   "via": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ContinuousCocontinuousRingedRestriction",
+  "file": "lean/Sheaf/CategoryTheory/ContinuousCocontinuousRingedRestriction.lean",
+  "declaration": "CategoryTheory.continuous_cocontinuous_ringed_restriction",
+  "declarations": [
+   "CategoryTheory.continuous_cocontinuous_ringed_restriction"
+  ],
+  "statement": "theorem continuous_cocontinuous_ringed_restriction\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (F : C ⥤ D) [Functor.IsContinuous F J K] [Functor.IsCocontinuous F J K]\n    (R : Sheaf K RingCat.{u}) :\n    ∃ f : RingedToposMorphism ((F.sheafPushforwardContinuous RingCat J K).obj R) R,\n      f.inverse = F.sheafPushforwardContinuous (Type u) J K ∧\n      (∀ (U : Cᵒᵖ)\n        (x : (f.inverse.obj ((sheafCompose K (forget RingCat)).obj R)).obj.obj U),\n        HEq (f.ringMap.hom.app U x) x) ∧\n      Nonempty (SheafOfModules.pushforward (F := F)\n        (𝟙 ((F.sheafPushforwardContinuous RingCat J K).obj R)) ⊣ f.modules)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-39026",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T112542-L-3954694",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 4 new modules (compiled clean, axioms propext/choice/Quot.sound) against live clone: moved element-site decls byte-identical, RingedSheafSliceAdjunctionData unchanged, both direct importers (RingedPresentationTransport, OrientedProperFibreExchange) compile; bypassed nodes not in unit realized"
+ }
+}
