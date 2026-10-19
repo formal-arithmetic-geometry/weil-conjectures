@@ -16751,3 +16751,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/J8/Sheaf.AlgebraicGeometry.StrictTowerOpenExtension (stage 3; reviewer PASS; first push; landing 20261019T005307-L-2749379 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/J8/Sheaf.Paper.PointFdQbarCategory (stage 3; reviewer PASS; first push; landing 20261019T005307-L-2749482 (interface); batch 20261019T005255; modules 2; new nodes 1; change records: coord/changes/point-fd-private-helper-scope.md)
 - 00:53 L: merged deliver/J9/Sheaf.AlgebraicGeometry.StrictTowerProperOpenArrows (stage 3; reviewer PASS; first push; landing 20261019T005308-L-2749585 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:53 L: merged deliver/J9/Sheaf.Paper.IntegralConstructibleExt (stage 3; reviewer PASS; first push; landing 20261019T005308-L-2749693 (interface); batch 20261019T005255; modules 2; new nodes 1)

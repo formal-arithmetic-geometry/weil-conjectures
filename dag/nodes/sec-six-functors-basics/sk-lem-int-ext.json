@@ -43,9 +43,17 @@
    }
   },
   {
-   "text": "Fix $C\\in\\Cons(X,\\mathcal O_E)$. The final sentence of [det-lem-int-ext-bound] supplies an integer $d_C$ such that $\\Ext^q(C,N)=0$ for every $q>d_C$ and every $N\\in\\Cons(X,\\mathcal O_E)$. Choose that integer. It depends on $C$ and is independent of $N$, exactly as required in assertion (2).",
+   "text": "Use lem-integral-coefficient-ext-comparison to obtain an additive equivalence F of the two integral module categories preserving constructibility. Apply F.mapDerivedCategory, an equivalence. Its singleFunctor and commShift isomorphisms identify all the Hom groups used below; map_injective and cancellation of those isomorphisms transport Subsingleton back to the original Hom group.",
    "uses": [
-    "det-lem-int-ext-bound"
+    "lem-integral-coefficient-ext-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the general-C conclusion, clause (2), of det-lem-int-ext-bound to F(C). It supplies a natural-number bound d independent of the second constructible sheaf. Choose its integer cast. For any constructible N and q>d, apply that bound to F(N), and pull Subsingleton back through the injective Hom equivalence furnished by lem-integral-coefficient-ext-comparison.",
+   "uses": [
+    "det-lem-int-ext-bound",
+    "lem-integral-coefficient-ext-comparison"
    ],
    "elementary": false,
    "source": {
@@ -56,12 +64,15 @@
  ],
  "proof_deps": [
   "det-lem-int-ext-continuity",
-  "det-lem-int-ext-bound"
+  "det-lem-int-ext-bound",
+  "lem-integral-coefficient-ext-comparison"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "J9",
+  "date": "2026-10-19",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/_section.md",
-  "place": "## Proof"
+  "place": "Assertions (1) and (2), using their existing detail theorems; explicit comparison of coefficient presentations"
  },
  "mathlib_searches": [
   {
@@ -180,5 +191,15 @@
   "by": "N7",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T005308-L-2749693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -12,8 +12,11 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.Paper.IntegralStratumExtBound
+import Mathlib.Algebra.CharP.CharAndCard
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.SixFunctors.IntegralExtHomContinuity
+import Sheaf.Paper.IntegralStratumExtBound
+import Sheaf.Paper.IntegralCoefficientExtComparison
 
 /-!
 # Continuity and boundedness of integral constructible Ext
@@ -53,7 +56,12 @@ fibre sequence, finite Tor amplitude of the dual, and finite cohomological dimen
 bound the Ext groups of each reduction of N. Derived completeness and the Milnor
 sequence add at most one to that bound. Taking a maximum over the finitely many pieces
 gives d_C. Ext in integer degree q is the ambient Hom from C[0] to N[0][q]; its vanishing
-is expressed by Subsingleton on that abelian Hom group. -/
+is expressed by Subsingleton on that abelian Hom group. The existing bound uses spectral
+integral coefficients in the scheme universe. Transport to that presentation using
+`integralCoefficientExtComparison`; its additive equivalence induces a fully faithful
+functor on unbounded derived categories. The singleFunctor and shift comparison
+isomorphisms identify the two shifted Hom groups, so cancellation transports vanishing
+back to the original embedded coefficients. -/
 theorem integralConstructibleExt
     (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ D.p)
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
@@ -81,6 +89,55 @@ theorem integralConstructibleExt
         ∀ q : ℤ, d < q →
           Subsingleton (((DerivedCategory.singleFunctor _ 0).obj C) ⟶
             ((DerivedCategory.singleFunctor _ 0).obj N)⟦q⟧)) := by
-  sorry
+  classical
+  have hchar0 : ringChar D.k₀ = D.p := by
+    let : Fact D.p.Prime := ⟨D.prime⟩
+    let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+    have hc : Fintype.card D.k₀ = D.q := by
+      simpa only [Nat.card_eq_fintype_card] using D.card_base
+    have hcp : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+      (hc.trans D.cardinality_eq)
+    exact ringChar.eq D.k₀ D.p
+  have hchar : ringChar D.k = D.p := by
+    exact (Algebra.ringChar_eq D.k₀ D.k).symm.trans hchar0
+  let : Fact (ringChar D.k).Prime := ⟨hchar ▸ D.prime⟩
+  let : Fact (ringChar D.k ≠ ℓ) := ⟨by
+    rw [hchar]
+    exact Ne.symm _hℓ⟩
+  let Xo : Over (Spec (.of D.k)) := Over.mk (X ↘ Spec (.of D.k))
+  let : LocallyOfFiniteType Xo.hom := by
+    change LocallyOfFiniteType (X ↘ Spec (.of D.k))
+    infer_instance
+  let : QuasiCompact Xo.hom := by
+    change QuasiCompact (X ↘ Spec (.of D.k))
+    infer_instance
+  let : IsSeparated Xo.hom := by
+    change IsSeparated (X ↘ Spec (.of D.k))
+    infer_instance
+  constructor
+  · intro C hC I _ _ K hK q
+    obtain ⟨b, hb⟩ := hK
+    exact CondensedRing.integralExtHomContinuous (k := D.k) (E := E.val)
+      (X := Xo) C hC K b hb q
+  · have : FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val) :=
+      Module.Finite.equiv (ULift.moduleEquiv.symm : E.val ≃ₗ[ℚ_[ℓ]] ULift.{u} E.val)
+    obtain ⟨F, hAdd, hF⟩ := integralCoefficientExtComparison ℓ E X
+    let : F.functor.Additive := hAdd
+    intro C hC
+    obtain ⟨d, hd⟩ :=
+      (CondensedRing.integral_stratum_ext_bound D ℓ _hℓ (ULift.{u} E.val) X).2
+        (F.functor.obj C) (hF C hC)
+    refine ⟨(d : ℤ), ?_⟩
+    intro N hN q hq
+    have hvan := hd (F.functor.obj N) (hF N hN) q hq
+    let eC := (F.functor.mapDerivedCategorySingleFunctor 0).app C
+    let eN := (F.functor.mapDerivedCategory.commShiftIso q).app
+      ((DerivedCategory.singleFunctor _ 0).obj N) ≪≫
+      (shiftFunctor _ q).mapIso ((F.functor.mapDerivedCategorySingleFunctor 0).app N)
+    refine ⟨fun f g ↦ ?_⟩
+    apply F.functor.mapDerivedCategory.map_injective
+    apply (cancel_mono eN.hom).mp
+    apply (cancel_epi eC.inv).mp
+    exact hvan.elim _ _
 
 end AlgebraicGeometry.ProEtale

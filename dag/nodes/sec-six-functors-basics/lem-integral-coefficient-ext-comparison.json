@@ -1,0 +1,136 @@
+{
+ "id": "lem-integral-coefficient-ext-comparison",
+ "kind": "lemma",
+ "title": "Equivalence between embedded and spectral integral coefficient presentations",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-int-ext",
+   "place": "coefficient comparison required to apply det-lem-int-ext-bound"
+  },
+  "same_as": []
+ },
+ "statement": "For any prime ell, finite intermediate field E of PadicAlgCl ell, and scheme X in universe u, the module categories of the pulled-back embedded padicIntegersRingObj and of the spectral integralCoefficientRing on ULift E admit an additive equivalence F preserving IsConstantModelConstructible. The finite-dimensional instance on ULift E is the transported instance. There are no finite-field, finite-type, separatedness or nonempty hypotheses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-bound.md",
+  "place": "integral coefficient convention, identified with sk-def-sf-setting; uniqueness of the extending absolute value and definitions of finite constant models"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-sfb-integral-derived-coefficient-data",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the PadicAlgCl norm to ULift E as an absolute value. Mathlib spectralNorm_unique_field_norm_ext identifies it with the spectral absolute value. The membership characterization in extension_integers_dvr identifies the integer subrings. Construct the ring equivalence by ULift.up and ULift.down. Equality of the metrics (with the neg-add convention on the spectral side) gives a homeomorphism. Postcomposition sectionwise, conjugated by the ULift ring equivalences on section rings, gives an isomorphism of condensed ring sheaves and hence of ring objects.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "def-sfb-integral-derived-coefficient-data",
+    "sk-def-sfb-condensed-ring",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back this coefficient-ring isomorphism to every scheme. Restriction of scalars along it is an additive equivalence of internal module categories, with inverse restriction along its inverse. The equivalence is exact since it is additive between abelian categories.",
+   "uses": [
+    "def-sfb-modobj-restriction-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mod.comapUnitIso and preservation of finite biproducts to identify the transported finite free modules. Apply PreservesCokernel.iso and cokernel.mapIso to transport a finite presentation on the point. The existing comapUpperStarIso and mapModComapIso transport every cover and local-model isomorphism. Keep the original stratification and use these pullback comparisons on each stratum. Split the qcqs conditional; in the other branch apply the same construction after every affine-open pullback. All helper theorems are proved privately in the comparison module.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "def-sfb-integral-derived-coefficient-data",
+  "sk-def-sfb-condensed-ring",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-sfb-modobj-restriction-equivalence",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J9",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-bound.md",
+  "place": "integral coefficient convention, identified with sk-def-sf-setting; uniqueness of the extending absolute value and definitions of finite constant models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*([Ee]quival|[Ii]so)|([Ee]quival|[Ii]so).*constructible",
+   "results": "12 hits: Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Spectral/ConstructibleTopology.lean, Mathlib/Topology/Constructible.lean",
+   "date": "2026-10-19",
+   "verdict": "spectral uniqueness matches the scalar comparison step only; no match for the full coefficient equivalence preserving constant models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm_unique_field_norm_ext\"",
+   "results": "1 hits: spectralNorm_unique_field_norm_ext",
+   "date": "2026-10-19",
+   "verdict": "spectral uniqueness matches the scalar comparison step only; no match for the full coefficient equivalence preserving constant models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of condensed coefficient rings induces equivalence of constructible module categories preserving derived Ext",
+   "results": "8 hits: CondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, CondensedMod.IsSolid, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod, Condensed.profiniteSolid, CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-19",
+   "verdict": "spectral uniqueness matches the scalar comparison step only; no match for the full coefficient equivalence preserving constant models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of condensed coefficient rings induces an additive equivalence of module categories preserving finite presentations and constructible sheaves",
+   "results": "8 hits: ModuleCat.restrictScalarsEquivalenceOfRingEquiv, CondensedMod, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, CategoryTheory.Iso.commRingCatIsoToRingEquiv, fromModuleCatToModuleCatLinearEquivtoModuleCatObj, CondensedMod.isDiscrete_tfae, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁",
+   "date": "2026-10-19",
+   "verdict": "No full match: restriction equivalence is for ordinary ModuleCat; condensed results use a constant discrete scalar ring. The internal-module restriction equivalence is already supplied by the project library and used here; constructibility transport is proved explicitly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralConstructibleExt",
+  "date": "2026-10-19",
+  "group": "J9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCoefficientExtComparison",
+  "file": "lean/Sheaf/Paper/IntegralCoefficientExtComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralCoefficientExtComparison",
+  "statement": "theorem integralCoefficientExtComparison\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] (X : Scheme.{u}) :\n    ∃ F :\n      CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X) ≌\n        CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj (CondensedRing.integralCoefficientRing ℓ (ULift.{u} E.val)) X),\n      F.functor.Additive ∧\n      (∀ C, IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X C →\n        IsConstantModelConstructible\n          (CondensedRing.integralCoefficientRing ℓ (ULift.{u} E.val)) X (F.functor.obj C))",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-19"
+ },
+ "merged_into": null,
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T005308-L-2749693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261019T005308-L-2749693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
