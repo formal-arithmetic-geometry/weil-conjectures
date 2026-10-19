@@ -19,11 +19,9 @@
  ],
  "proof": [
   {
-   "text": "Write $F=i_*^{\\mathrm{et}}$ and $P=i_*^{\\mathrm{pro}}$. The ordinary adjunction $F\\dashv I$ is [lem-exc-closed-ambient]. By [thm-weil-pbc-site-comparison], the site-comparison unit $\\eta_H:H\\to U_PS_PH$ is an isomorphism. $I(\\eta_H)$ is an isomorphism $IH\\to IU_PS_PH$, so the latter ordinary etale object is bounded below as well. Functoriality therefore makes $\\alpha_H=S_ZI(\\eta_H)$ an isomorphism, with target $JS_PH=S_ZIU_PS_PH$ by [def-weil-exceptional-inverse-image]. Its source $S_ZIH$ is bounded below by exact derived pullback [def-sf-comparison-derived-pullback]. Consequently $JS_PH$ is also bounded below and has the etale-origin witness $(IH,\\alpha_H)$. Thus the relative Hom bijection stipulated in the item can be evaluated with source $JS_PH$, which is needed to define its counit. This only uses the stated hypothesis $IH\\in D^+$, not constructibility.",
+   "text": "Use the ordinary adjunction F ⊣ G supplied in the statement; no existence theorem or exceptional coefficient system is chosen. The specified site-comparison unit at H is an isomorphism by [thm-weil-pbc-site-comparison]. Its images under G and S_Z give the isomorphism alpha. The exact comparison pullback preserves bounded-below objects [def-sf-comparison-derived-pullback], so S_Z G H has etale origin; transporting this property along alpha supplies hJ.",
    "uses": [
-    "lem-exc-closed-ambient",
     "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
     "def-sf-comparison-derived-pullback"
    ],
    "elementary": false,
@@ -33,13 +31,11 @@
    }
   },
   {
-   "text": "Let $\\beta_{L,N}:\\operatorname{Hom}(FL,N)\\to\\operatorname{Hom}(L,IN)$ denote the ordinary exceptional adjunction bijection. Unpack the transported bijection of [thm-sf-ambient-adjoint-class] with the identity etale-origin witness for $S_ZL$, as specified in [def-weil-exceptional-inverse-image]. For the identity-open compactification the open-extension comparison is the identity, so the canonical compact-support comparison of [lem-sf-class-compact-support-comparison] is the inverse of the named direct-image mate $\\delta_L$ of [lem-weil-pbc-comparison-direct-image-canonical-mate]. Thus the bijection is the following chain:\n$$\\begin{aligned}\n\\operatorname{Hom}(PS_ZL,S_PH)&\\longrightarrow\\operatorname{Hom}(S_PFL,S_PH)\\\\\ng&\\longmapsto g\\circ\\delta_L,\\\\\n\\operatorname{Hom}(S_PFL,S_PH)&\\longrightarrow\\operatorname{Hom}(FL,U_PS_PH)\\\\\na&\\longmapsto U_P(a)\\circ\\eta_{FL},\\\\\n\\operatorname{Hom}(FL,U_PS_PH)&\\xrightarrow{\\beta_{L,U_PS_PH}}\\operatorname{Hom}(L,IU_PS_PH)\\\\\nb&\\longmapsto\\beta_{L,U_PS_PH}(b),\\\\\n\\operatorname{Hom}(L,IU_PS_PH)&\\xrightarrow{S_Z}\\operatorname{Hom}(S_ZL,JS_PH).\n\\end{aligned}$$\nThe second arrow is the comparison adjunction and the last is full faithfulness [thm-weil-pbc-site-comparison]. Denote the composite by $\\Phi_L$. The ordinary adjoint identification with $I$ is the counit-compatible identification stipulated in the item. The assumed bounded-below domains are exactly those of these specified bijections.",
+   "text": "Compare fixedCompactSupportComparisonIso with compactSupportSiteComparison [thm-sf-ambient-adjoint-class, lem-sf-class-compact-support-comparison]. Expand their definitions, retaining the same canonical proper direct-image mate [lem-weil-pbc-comparison-direct-image-canonical-mate]. The inclusions of D+ carry the exact derived composition and natural-isomorphism comparisons to their ambient versions. Naturality of the inverse right-derived inclusion comparison moves the composite of the three open-extension factors across it in one rewrite. Both sides are then the identical composite. Thus the private component calculation proves equality for every compactification, in particular the identity-open compactification c₀. Substitute this equality in C.homEquiv_normalized; it gives precisely the displayed transported Hom chain with delta inverse as its first factor.",
    "uses": [
     "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
     "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "thm-weil-pbc-site-comparison"
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": false,
    "source": {
@@ -48,10 +44,10 @@
    }
   },
   {
-   "text": "For $f:FL\\to H$ set $g=S_P(f)\\circ\\delta_L^{-1}$. The first arrow of Step 2 gives $g\\circ\\delta_L=S_P(f)$. Naturality of the unit of [thm-weil-pbc-site-comparison] gives\n$$U_PS_P(f)\\circ\\eta_{FL}=\\eta_H\\circ f.$$\nNaturality in the target of the ordinary adjunction [lem-exc-closed-ambient] gives\n$$\\beta_{L,U_PS_PH}(\\eta_H\\circ f)=I(\\eta_H)\\circ\\beta_{L,H}(f)=I(\\eta_H)\\circ\\widehat f.$$\nApplying $S_Z$ and functoriality, the last arrow of Step 2 gives\n$$\\Phi_L(S_P(f)\\circ\\delta_L^{-1})=S_Z(I(\\eta_H))\\circ S_Z(\\widehat f)=\\alpha_H\\circ S_Z(\\widehat f).$$\nThis proves the general adjunct formula by substitution in the defining Hom chain; no exceptional-counit identity is assumed in this calculation.",
+   "text": "For f : F L → H, naturality of the specified comparison unit [thm-weil-pbc-site-comparison] identifies the inverse comparison-adjunction image of f followed by the unit at H with S_P(f). Apply C.homEquiv_normalized and the equality of Step 2. Naturality in the target of the supplied ordinary adjunction gives beta(f followed by eta_H) = beta(f) followed by G(eta_H). Functoriality of S_Z proves the general adjunct formula, without assuming any exceptional-counit equation.",
    "uses": [
     "thm-weil-pbc-site-comparison",
-    "lem-exc-closed-ambient"
+    "thm-sf-ambient-adjoint-class"
    ],
    "elementary": true,
    "source": {
@@ -60,9 +56,8 @@
    }
   },
   {
-   "text": "Set $L=IH$ and $f=e_H$. The defining counit property of $F\\dashv I$ [lem-exc-closed-ambient] is $\\beta_{IH,H}(e_H)=1_{IH}$. Step 3 therefore gives\n$$\\Phi_{IH}(S_P(e_H)\\circ\\delta_{IH}^{-1})=\\alpha_H.$$\nBy definition, the relative counit $E=E_{S_PH}$ has transpose $1_{JS_PH}$ under the stipulated Hom bijection. It is defined because Step 1 supplies a bounded-below etale-origin witness for $JS_PH$. Naturality in the source of [thm-sf-ambient-adjoint-class], applied to $\\alpha_H:S_ZIH\\to JS_PH$, gives\n$$\\Phi_{IH}(E\\circ P(\\alpha_H))=1_{JS_PH}\\circ\\alpha_H=\\alpha_H.$$\nInjectivity of this Hom bijection identifies $E\\circ P(\\alpha_H)$ with $S_P(e_H)\\circ\\delta_{IH}^{-1}$. Precompose with $\\delta_{IH}$ and cancel its inverse to obtain\n$$E_{S_PH}\\circ i_*^{\\mathrm{pro}}(\\alpha_H)\\circ\\delta_{IH}=S_P(e_H).$$\nThe general formula was proved in Step 3, so both clauses follow.",
+   "text": "Define E as the inverse image of the identity under C.homEquiv, using hJ from Step 1. Source naturality of the specified relative Hom equivalence [thm-sf-ambient-adjoint-class] says that the transpose of Fpro(alpha) followed by E is alpha. Apply the general formula of Step 3 at L = G H and f the counit of the supplied ordinary adjunction. The transpose of that counit is the identity, so the resulting transpose is also alpha. Injectivity of C.homEquiv identifies the two morphisms. Precompose by delta and cancel delta followed by its inverse to obtain the required counit identity.",
    "uses": [
-    "lem-exc-closed-ambient",
     "thm-sf-ambient-adjoint-class"
    ],
    "elementary": true,
@@ -74,8 +69,6 @@
  ],
  "proof_deps": [
   "def-sf-comparison-derived-pullback",
-  "def-weil-exceptional-inverse-image",
-  "lem-exc-closed-ambient",
   "lem-sf-class-compact-support-comparison",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "thm-sf-ambient-adjoint-class",
@@ -84,7 +77,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-  "place": "Displayed transported Hom chain, specialized to the closed immersion and expanded using unit naturality; realizes the historical closed-immersion counit extraction of lem-coef-finite-dualizing."
+  "place": "Displayed normalized Hom chain, specialized to the supplied ordinary closed adjunction. The Lean proof includes the equality of the two canonical compact-support comparison constructions, then uses unit naturality, target naturality, source naturality and injectivity to obtain both conclusions."
  },
  "mathlib_searches": [
   {
@@ -193,7 +186,6 @@
   ]
  },
  "tool_uses": [
-  "lem-exc-closed-ambient",
   "thm-weil-pbc-site-comparison",
   "thm-sf-ambient-adjoint-class",
   "lem-sf-class-compact-support-comparison",
@@ -229,5 +221,15 @@
   "group": "Q97",
   "result": "fix",
   "note": "Substantive audit passed. Fixed the item’s private import of CanonicalCompactSupportSiteComparison; the complete replacement under fixes/lean/Sheaf/AlgebraicGeometry compiles cleanly with scompile.py."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261019T231255-L-568336",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
