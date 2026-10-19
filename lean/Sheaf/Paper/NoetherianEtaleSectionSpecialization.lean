@@ -23,41 +23,12 @@ public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-import Mathlib.Topology.Connected.Basic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Mathlib.AlgebraicGeometry.Morphisms.FlatMono
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.Paper.PurityConventions
 
 /-! # Normalized ordinary etale specialization along a smooth section
 
@@ -273,7 +244,132 @@ theorem geometry
       AffineSpace.zeroSection (ULift.{u} (Fin 1)) S ≫ s.deformationSpaceSection ∧
     (ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d ∧
     IsIso (ConormalGradedAlgebra.symmetricComparison s) := by
-  sorry
+  have _ := hn
+  have _ := hS
+  have _ := hV
+  have hD := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have hA : IsLocallyNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    LocallyOfFiniteType.isLocallyNoetherian
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have hAC : CompactSpace (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have hDN : IsLocallyNoetherian s.ker.deformationSpace :=
+    LocallyOfFiniteType.isLocallyNoetherian (Scheme.Hom.deformationSpaceProj g s)
+  have hDC : CompactSpace s.ker.deformationSpace :=
+    QuasiCompact.compactSpace_of_compactSpace (Scheme.Hom.deformationSpaceProj g s)
+  have hqc : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  refine ⟨{}, hD, inferInstance, hqc,
+    Scheme.Hom.isPullback_deformationSpaceOneFibre g s,
+    Scheme.Hom.comp_deformationSpaceOneFibre hs,
+    Scheme.Hom.isPullback_normalConeToDeformationSpace g s,
+    Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace, ?_⟩
+  apply WeilConjectures.PurityConventions.regularNormalBundle s d
+  intro x
+  obtain ⟨U, hx, r, hr, hI⟩ := hregular x
+  have hL : Ideal.ofList (List.ofFn r) = s.ker.ideal U := by
+    simpa only [Ideal.ofList, List.mem_ofFn', Set.ofPred_mem_eq] using hI
+  refine ⟨U, hx, List.ofFn r, List.length_ofFn, ⟨hr, ?_⟩, hL⟩
+  intro htop
+  have htopI : s.ker.ideal U = ⊤ := by
+    rw [← hL]
+    simpa only [Ideal.smul_eq_mul, Ideal.mul_top] using htop.symm
+  have hz := s.ker.mem_support_iff.mp (s.range_subset_ker_support ⟨x, rfl⟩) U
+  have hnunit := (V.mem_zeroLocus_iff _ _).mp hz 1 (htopI ▸ trivial)
+  exact hnunit (by simpa only [Scheme.basicOpen_one] using hx)
+
+private theorem section_line
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y T : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (d : ℕ) [SmoothOfRelativeDimension d f] [HasInvertibleExponent A X]
+    (t : T ⟶ X) :
+    ∃ L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
+      Nonempty (((upperStar (ModuleCat.{u + 1} A) t).leftDerivedFunctor.obj
+        (dualizingComplex (ModuleCat.{u + 1} A) f))⟦-(2 * (d : ℤ))⟧ ≅
+          (_root_.DerivedCategory.singleFunctor _ 0).obj L) ∧
+      ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage T,
+        ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅
+          (constantSheaf (T.smallEtaleTopology.over (cover.etalePrecoverageToEtale i))
+            (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)) := by
+  classical
+  obtain ⟨L₀, hLC₀, hStalk₀, ⟨e₀⟩, _⟩ := exists_dualizingComplex_iso_and_tensor A f d
+  let L := (upperStar (ModuleCat.{u + 1} A) t).obj L₀
+  have hLC : Scheme.IsLocallyConstantSheaf L :=
+    Scheme.IsLocallyConstantSheaf.upperStar t L₀
+  have hStalk : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ T),
+      Nonempty ((Scheme.pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of A A) := by
+    intro Ω _ _ x
+    exact ⟨(upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) t x).app L₀ ≪≫
+      (hStalk₀ Ω (x ≫ t)).some⟩
+  refine ⟨L, ?_, ?_⟩
+  · let P := (upperStar (ModuleCat.{u + 1} A) t).leftDerivedFunctor
+    let e : P.obj (dualizingComplex (ModuleCat.{u + 1} A) f) ≅
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * (d : ℤ))⟧ :=
+      P.mapIso e₀ ≪≫ (P.commShiftIso (2 * (d : ℤ))).app _ ≪≫
+        (shiftFunctor _ (2 * (d : ℤ))).mapIso
+          ((singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} A) t).app L₀)
+    exact ⟨(shiftFunctor _ (-(2 * (d : ℤ)))).mapIso e ≪≫
+      shiftShiftNeg _ (2 * (d : ℤ))⟩
+  · obtain ⟨datum⟩ := hLC.nonempty_locallyConstantDatum
+    let cover : Scheme.Cover.{u} Scheme.etalePrecoverage T :=
+      Scheme.Cover.mkOfCovers (Σ i : datum.cover.I₀, datum.cover.X i)
+        (fun i ↦ datum.cover.X i.1) (fun i ↦ datum.cover.f i.1)
+        (by
+          intro x
+          obtain ⟨i, y, hy⟩ := datum.cover.exists_eq x
+          exact ⟨⟨i, y⟩, y, hy⟩)
+        (fun i ↦ datum.cover.map_prop i.1)
+    refine ⟨cover, ?_⟩
+    intro i
+    let U := datum.cover.etalePrecoverageToEtale i.1
+    have hC := datum.isConstant i.1
+    obtain ⟨M, ⟨eM⟩⟩ := (L.over U).mem_essImage_of_isConstant
+    let x := (datum.cover.X i.1).algClosurePoint i.2
+    let P := upperStar (ModuleCat.{u + 1} A) U.hom
+    let eP : (constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M ≅ P.obj L :=
+      ((Scheme.Etale.overEquiv U).constantSheafSheafCongrIso
+        (T.smallEtaleTopology.over U) U.left.smallEtaleTopology (ModuleCat.{u + 1} A)
+        Over.mkIdTerminal).symm.app M ≪≫
+      (Scheme.Etale.overSheafEquiv U (ModuleCat.{u + 1} A)).functor.mapIso eM ≪≫
+      Scheme.overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} A) U L
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget (ModuleCat.{u + 1} A)) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    let eFree : M ≅ ModuleCat.of A A :=
+      ((Scheme.pointSmallEtale x).sheafFiberConstantSheafIso M).symm ≪≫
+      (Scheme.pointSmallEtale x).sheafFiber.mapIso eP ≪≫
+      (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) U.hom x).app L ≪≫
+      (hStalk _ (x ≫ U.hom)).some
+    exact ⟨eM.symm ≪≫
+      (constantSheaf (T.smallEtaleTopology.over U) (ModuleCat.{u + 1} A)).mapIso eFree⟩
+
+private theorem invertible_exponent (ell n : ℕ) [Fact ell.Prime]
+    (S : Scheme.{u}) (hS : ∀ x : S, IsUnit (ell : S.presheaf.stalk x)) :
+    HasInvertibleExponent (Coeff ell n) S := by
+  refine ⟨ell ^ n, pow_pos (Nat.Prime.pos Fact.out) n, ?_, ?_⟩
+  · apply ULift.ext
+    exact ZMod.natCast_self (ell ^ n)
+  · apply S.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    change IsUnit ((S.presheaf.germ ⊤ x hx).hom _)
+    simpa only [map_pow, map_natCast, Nat.cast_pow] using (hS x).pow n
+
+private theorem isIso_sectionMap
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (d : ℕ) [SmoothOfRelativeDimension d f] [HasInvertibleExponent A X]
+    (f' : X' ⟶ Y') [HasCompactification f'] [QuasiCompact f']
+    (b : Y' ⟶ Y) (v : X' ⟶ X) (sq : IsPullback v f' f b)
+    (s : Y ⟶ X) (s' : Y' ⟶ X') (hs : s' ≫ v = b ≫ s) :
+    IsIso (sectionMap A f f' b v sq s s' hs) := by
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension A f d sq
+  have : IsIso (dualizingComplexBaseChangeMap A sq) := by
+    rw [isIso_dualizingComplexBaseChangeMap_iff]
+    infer_instance
+  unfold sectionMap
+  infer_instance
 
 /-- The two shifted complexes are actual locally constant free rank-one module sheaves;
 the canonical exceptional fibre maps are isomorphisms.
@@ -321,7 +417,28 @@ theorem lines_and_fibres
             (ModuleCat.{u + 1} (Coeff ell n))).obj
               (ModuleCat.of (Coeff ell n) (Coeff ell n)))) ∧
     IsIso (atOne (Coeff ell n) g s hs) ∧ IsIso (atZero (Coeff ell n) g s) := by
-  sorry
+  have _ := hn
+  have _ := hV
+  have _ := hregular
+  have hInv : HasInvertibleExponent (Coeff ell n) S := invertible_exponent ell n S hS
+  have : HasInvertibleExponent (Coeff ell n) V := HasInvertibleExponent.of_hom g
+  have : HasInvertibleExponent (Coeff ell n) s.ker.deformationSpace :=
+    HasInvertibleExponent.of_hom (s.ker.deformationSpaceProj ≫ g)
+  have hD := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  refine ⟨section_line (Coeff ell n) g d s,
+    section_line (Coeff ell n) (Scheme.Hom.deformationSpaceProj g s) d
+      s.deformationSpaceSection, ?_, ?_⟩
+  · exact isIso_sectionMap (Coeff ell n) (Scheme.Hom.deformationSpaceProj g s) d g
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+      (Scheme.Hom.deformationSpaceOneFibre g s)
+      (Scheme.Hom.isPullback_deformationSpaceOneFibre g s) s.deformationSpaceSection s
+      (Scheme.Hom.comp_deformationSpaceOneFibre hs)
+  · exact isIso_sectionMap (Coeff ell n) (Scheme.Hom.deformationSpaceProj g s) d
+      (Scheme.Hom.normalConeProj g s) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)
+      s.ker.normalConeToDeformationSpace
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+      s.deformationSpaceSection s.normalConeZeroSection
+      Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace
 
 /-- Existence and uniqueness of the comparison normalized at one.
 Source: sk-thm-dnc, Local construction and Gluing
@@ -387,7 +504,10 @@ theorem isIso_specialization
           (sectionInvariant (Coeff ell n) g s))
     (hκ : Normalized (Coeff ell n) g s hs κ) :
     IsIso (specialization (Coeff ell n) g s κ) := by
-  sorry
+  have _ := hκ
+  have := (lines_and_fibres ell n hn hS hV d g s hs hregular).2.2.2
+  unfold specialization
+  infer_instance
 
 /-- The zero-fibre maps commute with the fixed Rees base-change map. This is the
 well-definedness condition for the universal-property definition of normalMap.
@@ -408,7 +528,17 @@ theorem normalMap_condition {V S S' : Scheme.{u}} (g : V ⟶ S) (s : S ⟶ V)
     (Scheme.Hom.normalConeProj (pullback.snd g b)
       (Scheme.Hom.baseChangeSection g s hs b) ≫ b) ≫
       AffineSpace.zeroSection (ULift.{u} (Fin 1)) S := by
-  sorry
+  calc
+    _ = (Scheme.Hom.baseChangeSection g s hs b).ker.normalConeToDeformationSpace ≫
+        Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+          (Scheme.Hom.baseChangeSection g s hs b) ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) b := by
+      rw [Category.assoc, sq.w]
+    _ = _ := by
+      rw [← Category.assoc,
+        (Scheme.Hom.isPullback_normalConeToDeformationSpace (pullback.snd g b)
+          (Scheme.Hom.baseChangeSection g s hs b)).w, Category.assoc,
+        AffineSpace.zeroSection_comp_map, ← Category.assoc]
 
 /-- The normal-cone map induced from the canonical Rees map at zero, by the
 universal property of the specified zero-fibre square. Source: sk-thm-dnc, base change
@@ -506,7 +636,61 @@ theorem baseChange_geometry
         (Scheme.Hom.normalConeProj g s) b ∧
       (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection ≫
           normalMap g s hs b sq = b ≫ s.normalConeZeroSection := by
-  sorry
+  have _ := hn
+  have _ := hS
+  have _ := hV
+  have _ := hregular
+  have hs' : IsClosedImmersion (Scheme.Hom.baseChangeSection g s hs b) :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+      (Scheme.Hom.isPullback_baseChangeSection g s hs b).flip inferInstance
+  have hqc : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have hqc' : QuasiCompact (Scheme.Hom.normalConeProj (pullback.snd g b)
+      (Scheme.Hom.baseChangeSection g s hs b)) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b)) inferInstance
+  have sq : IsPullback (deformationMap g s hs b)
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b))
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b) := by
+    apply Scheme.IdealSheafData.isPullback_deformationSpaceMap_proj
+      (pullback.fst g b) s.ker (Scheme.Hom.baseChangeSection g s hs b).ker
+      (Scheme.Hom.map_siteIdeal_ker_le_baseChangeSection g s hs b) _ g _ b
+      (IsPullback.of_hasPullback g b)
+    intro x
+    obtain ⟨U', U, hU, hx, _, H⟩ :=
+      Scheme.Hom.exists_isPushout_extendedReesAlgebraMap_baseChange g s hs b d x
+    exact ⟨U', U, hU, hx, H⟩
+  have hfst : normalMap g s hs b sq ≫ s.ker.normalConeToDeformationSpace =
+      (Scheme.Hom.baseChangeSection g s hs b).ker.normalConeToDeformationSpace ≫
+        deformationMap g s hs b := by
+    exact IsPullback.lift_fst _ _ _ _
+  have hsnd : normalMap g s hs b sq ≫ Scheme.Hom.normalConeProj g s =
+      Scheme.Hom.normalConeProj (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b) ≫ b := by
+    exact IsPullback.lift_snd _ _ _ _
+  refine ⟨hs', hqc, hqc', sq, ?_, ?_⟩
+  · have hp := (Scheme.Hom.isPullback_normalConeToDeformationSpace (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b)).paste_horiz sq
+    rw [AffineSpace.zeroSection_comp_map, ← hfst] at hp
+    exact hp.of_right hsnd (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+  · apply (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).hom_ext
+    · rw [Category.assoc, hfst, ← Category.assoc,
+        Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace,
+        Category.assoc]
+      rw [show (Scheme.Hom.baseChangeSection g s hs b).deformationSpaceSection ≫
+          deformationMap g s hs b = AffineSpace.map _ b ≫ s.deformationSpaceSection from
+        Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection
+          g s hs b, ← Category.assoc, AffineSpace.zeroSection_comp_map]
+      simp only [Category.assoc,
+        Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace]
+    · rw [Category.assoc, hsnd, ← Category.assoc,
+        Scheme.Hom.normalConeZeroSection_normalConeProj
+          (Scheme.Hom.baseChangeSection_snd g s hs b),
+        Category.id_comp, Category.assoc,
+        Scheme.Hom.normalConeZeroSection_normalConeProj hs, Category.comp_id]
 
 /-- Both normalized comparisons commute with arbitrary Noetherian base change under the
 canonical exceptional mates. The first equation is b_F followed by kappa', equal to
