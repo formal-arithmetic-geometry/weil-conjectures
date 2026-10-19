@@ -1,0 +1,109 @@
+{
+ "id": "lem-sfb-integers-coset-basis",
+ "kind": "statement",
+ "title": "Uniformizer cosets form a neighbourhood basis",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite field extension. Use the spectral absolute value, integer ring $\\mathcal O_E$, uniformizer and ideals $I_n=(\\pi_E)^n$ of [def-weil-l-adic-coefficient-extension]. Give $\\mathcal O_E$ the subspace topology of the spectral norm. For every $x\\in\\mathcal O_E$, the sets $\\{y:q_{n+1}(y)=q_{n+1}(x)\\}$ for $n\\in\\mathbf N$ form a neighbourhood basis at $x$, where $q_k$ is reduction modulo $I_k$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+  "place": "Clause 1, presentation of the profinite integer ring; parent lem-sfb-integers-profinite-tower proof step 1."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The chosen uniformizer generates the nonzero maximal ideal, so it is nonzero; membership in the maximal ideal gives its norm less than one. Write r for this positive norm. An element z of the integer ring belongs to the nth ideal power if and only if its norm is at most r^n: expand the principal ideal power; the forward implication uses that the multiplier has norm at most one, and the reverse divides z by the nonzero uniformizer power and uses the integer-ring membership criterion.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality of reductions is equivalent to membership of the difference in the ideal power, so the positive reduction fibre around x is exactly the closed metric ball of radius r^(n+1). Each is a neighbourhood of x since its radius is positive. As r^n tends to zero, every metric neighbourhood contains one of these closed balls. This proves the filter basis.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "D2 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-integral-limit.md",
+  "place": "Clause 1; explicit closed-ball computation from parent step 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compact space is the inverse limit of its finite quotients",
+   "results": "{\"t\": \"2026-10-18T14:25:35Z\", \"tool\": \"leansearch\", \"query\": \"A compact space is the inverse limit of its finite quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.lim\", \"ProfiniteGrp.isIso_toLimit\", \"Profinite.asLimit\", \"DiscreteQuotient.instFiniteQuotientOfCompactSpace\", \"Profinite.asLimitConeIso\", \"Profinite.isoAsLimitConeLift\", \"Quotient.compactSpace\", \"Profinite.isIso_asLimitCone_lift\"], \"digest\": \"cdce8774dccf1d60\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match; metric closed-ball bases are generic ingredients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a compact space into a finite discrete space factors through finitely many coordinates of a product",
+   "results": "{\"t\": \"2026-10-18T14:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map from a compact space into a finite discrete space factors through finitely many coordinates of a product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal\", \"Profinite.NobelingProof.fin_comap_jointlySurjective\", \"LocallyConstant.range_finite\", \"IsLocallyConstant.range_finite\", \"Metric.PiNatEmbed.toPiNatHomeo_apply_ofPiNat\", \"exists_nat_bool_continuous_surjective_of_compact\", \"Profinite.indexFunctor\", \"CompactT2.Projective\"], \"digest\": \"e4ceca6653b83cc0\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match; metric closed-ball bases are generic ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "nhds_basis_closedBall|exists_pow_lt_of_lt_one|isOpen_maximalIdeal_pow",
+   "results": "{\"t\": \"2026-10-18T14:44:35Z\", \"tool\": \"grep\", \"query\": \"nhds_basis_closedBall|exists_pow_lt_of_lt_one|isOpen_maximalIdeal_pow\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"Mathlib/Topology/MetricSpace/PiNat.lean\", \"Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean\", \"Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean\", \"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\", \"Mathlib/Topology/Algebra/Ring/Compact.lean\"], \"digest\": \"ec4340762d9b2109\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match; metric closed-ball bases are generic ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.NumberTheory.Padics.IntegersProfiniteTower",
+  "date": "2026-10-18",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+   "place": "Clause 1: the profinite set of integers is the limit of its positive finite quotients.",
+   "via": [
+    "lem-sfb-integers-profinite-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-qlbar-colimit-x",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.NumberTheory.Padics.IntegersCosetBasis",
+  "file": "lean/Sheaf/NumberTheory/Padics/IntegersCosetBasis.lean",
+  "declaration": "Padic.coefficientExtension_integers_coset_basis",
+  "statement": "theorem coefficientExtension_integers_coset_basis (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :\n    letI := spectralNorm.normedField (Padic l) E\n    ∀ x : coefficientExtensionIntegers l E,\n      (𝓝 x).HasBasis (fun _ : ℕ ↦ True) (fun n ↦\n        {y | Ideal.Quotient.mk (coefficientExtensionIdeal l E (n + 1)) y =\n          Ideal.Quotient.mk (coefficientExtensionIdeal l E (n + 1)) x})",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T002521-L-2146390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261019T002521-L-2146390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
