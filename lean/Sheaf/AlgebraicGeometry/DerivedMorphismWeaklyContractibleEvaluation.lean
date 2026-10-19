@@ -63,6 +63,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 set_option autoImplicit false
 namespace AlgebraicGeometry.Scheme
 
+private theorem transpose_unit {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) {P : C} {Q : D}
+    (f : P ⟶ G.obj Q) :
+    adj.unit.app P ≫ G.map ((adj.homEquiv P Q).symm f) = f := by
+  exact (adj.homEquiv P Q).apply_symm_apply f
+
 variable (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
 
 /-- The constant etale sheaf complex, obtained by applying the exact constant-sheaf functor to the
@@ -232,7 +238,125 @@ theorem derivedMorphism_evaluation_extends_local
         derivedLocalIsoRestriction (ProEt.topology X) B
           ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) g
             (derivedComparisonLocalIso X B A D V f)) := by
-  sorry
+  constructor
+  · intro V g f
+    apply (Equiv.ofBijective (proEtaleDerivedHomUnit X B A D U)
+      (proEtaleDerivedUnits_bijective X B A D U hU).1).symm_apply_eq.mpr
+    have hc := transpose_unit (proEtaleSiteComparison X)
+      (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
+        (derivedComparisonHomPresheafMap X B A D))
+    have hs := transpose_unit (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+      (Q := ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).obj (derivedComparisonHomTarget X B A D))
+      (derivedComparisonHomPresheafMap X B A D)
+    change (derivedHomSheafComparison X B A D).hom.app (op U)
+      (pulledbackEtaleLocalHom X B A D V f U g) =
+        proEtaleDerivedHomUnit X B A D U
+          (derivedLocalHomRestriction (ProEt.topology X) B
+            ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) g
+              (derivedComparisonLocalHom X B A D V f))
+    have hn := (derivedHomSheafComparison X B A D).hom.naturality g.op
+    have hn' := congrArg (fun k ↦ k
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalHomSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+          ((toSheafify X.smallEtaleTopology
+            (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f))) hn
+    change (derivedHomSheafComparison X B A D).hom.app (op U)
+      (pulledbackEtaleLocalHom X B A D V f U g) = _ at hn'
+    have hc' := congrArg (fun k ↦ k.hom.app (op V)
+      ((toSheafify X.smallEtaleTopology
+        (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f)) hc
+    have hs' := congrArg (fun k ↦ k.app (op V) f) hs
+    change (derivedHomSheafComparison X B A D).hom.app (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalHomSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+          ((toSheafify X.smallEtaleTopology
+            (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f)) = _ at hc'
+    change (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv
+      (derivedLocalHomPresheaf X.smallEtaleTopology B A D)
+      (((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).obj
+          (derivedComparisonHomTarget X B A D))).symm
+            (derivedComparisonHomPresheafMap X B A D)).hom.app (op V)
+        ((toSheafify X.smallEtaleTopology
+          (derivedLocalHomPresheaf X.smallEtaleTopology B A D)).app (op V) f) =
+            derivedComparisonHomUnit X B A D V f at hs'
+    exact hn'.trans ((congrArg
+      ((derivedComparisonHomTarget X B A D).obj.map g.op) (hc'.trans hs')).trans
+        (NatTrans.naturality_apply
+          (toSheafify (ProEt.topology X)
+            (derivedLocalHomPresheaf (ProEt.topology X) B
+              ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)))
+          g.op (derivedComparisonLocalHom X B A D V f)).symm)
+  · intro V g f
+    apply (Equiv.ofBijective (proEtaleDerivedIsoUnit X B A D U)
+      (proEtaleDerivedUnits_bijective X B A D U hU).2).symm_apply_eq.mpr
+    have hc := transpose_unit (proEtaleSiteComparison X)
+      (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv _ _).symm
+        (derivedComparisonIsoPresheafMap X B A D))
+    have hs := transpose_unit (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+      (Q := ((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).obj (derivedComparisonIsoTarget X B A D))
+      (derivedComparisonIsoPresheafMap X B A D)
+    change (derivedIsoSheafComparison X B A D).hom.app (op U)
+      (pulledbackEtaleLocalIso X B A D V f U g) =
+        proEtaleDerivedIsoUnit X B A D U
+          (derivedLocalIsoRestriction (ProEt.topology X) B
+            ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) g
+              (derivedComparisonLocalIso X B A D V f))
+    have hn := (derivedIsoSheafComparison X B A D).hom.naturality g.op
+    have hn' := congrArg (fun k ↦ k
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalIsoSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+          ((toSheafify X.smallEtaleTopology
+            (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f))) hn
+    change (derivedIsoSheafComparison X B A D).hom.app (op U)
+      (pulledbackEtaleLocalIso X B A D V f U g) = _ at hn'
+    have hc' := congrArg (fun k ↦ k.hom.app (op V)
+      ((toSheafify X.smallEtaleTopology
+        (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f)) hc
+    have hs' := congrArg (fun k ↦ k.app (op V) f) hs
+    change (derivedIsoSheafComparison X B A D).hom.app (op ((toProEt X).obj V))
+      (((proEtaleSiteComparison X).unit.app
+        (derivedLocalIsoSheaf X.smallEtaleTopology B A D)).hom.app (op V)
+          ((toSheafify X.smallEtaleTopology
+            (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f)) = _ at hc'
+    change (((sheafificationAdjunction X.smallEtaleTopology (Type (u + 1))).homEquiv
+      (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)
+      (((toProEt X).sheafPushforwardContinuous (Type (u + 1))
+        X.smallEtaleTopology (ProEt.topology X)).obj
+          (derivedComparisonIsoTarget X B A D))).symm
+            (derivedComparisonIsoPresheafMap X B A D)).hom.app (op V)
+        ((toSheafify X.smallEtaleTopology
+          (derivedLocalIsoPresheaf X.smallEtaleTopology B A D)).app (op V) f) =
+            derivedComparisonIsoUnit X B A D V f at hs'
+    exact hn'.trans ((congrArg
+      ((derivedComparisonIsoTarget X B A D).obj.map g.op) (hc'.trans hs')).trans
+        (NatTrans.naturality_apply
+          (toSheafify (ProEt.topology X)
+            (derivedLocalIsoPresheaf (ProEt.topology X) B
+              ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)))
+          g.op (derivedComparisonLocalIso X B A D V f)).symm)
+
+private theorem homEvaluation_unit
+    (U : X.ProEt) [IsAffine U.left]
+    (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
+    (s : ((comparisonSetUpperStar X).obj
+      (derivedLocalHomSheaf X.smallEtaleTopology B A D)).obj.obj (op U)) :
+    proEtaleDerivedHomUnit X B A D U (derivedHomEvaluation X B A D U hU s) =
+      (derivedHomSheafComparison X B A D).hom.app (op U) s := by
+  exact (Equiv.ofBijective (proEtaleDerivedHomUnit X B A D U)
+    (proEtaleDerivedUnits_bijective X B A D U hU).1).apply_symm_apply _
+
+private theorem isoEvaluation_unit
+    (U : X.ProEt) [IsAffine U.left]
+    (hU : (ProEt.topology X).IsWeaklyContractible.{u + 1} U)
+    (s : ((comparisonSetUpperStar X).obj
+      (derivedLocalIsoSheaf X.smallEtaleTopology B A D)).obj.obj (op U)) :
+    proEtaleDerivedIsoUnit X B A D U (derivedIsoEvaluation X B A D U hU s) =
+      (derivedIsoSheafComparison X B A D).hom.app (op U) s := by
+  exact (Equiv.ofBijective (proEtaleDerivedIsoUnit X B A D U)
+    (proEtaleDerivedUnits_bijective X B A D U hU).2).apply_symm_apply _
 
 /-- Both evaluation maps commute with restriction between affine weakly contractible pro-etale
 objects.
@@ -265,7 +389,29 @@ theorem derivedMorphism_evaluation_restriction
         derivedLocalIsoRestriction (ProEt.topology X) B
           ((derivedComparison X B).obj A) ((derivedComparison X B).obj D) g
             (derivedIsoEvaluation X B A D U hU s)) := by
-  sorry
+  constructor
+  · intro s
+    apply (proEtaleDerivedUnits_bijective X B A D V hV).1.1
+    exact (homEvaluation_unit X B A D V hV _).trans
+      ((NatTrans.naturality_apply (derivedHomSheafComparison X B A D).hom g.op s).trans
+        ((congrArg ((derivedComparisonHomTarget X B A D).obj.map g.op)
+          (homEvaluation_unit X B A D U hU s).symm).trans
+            (NatTrans.naturality_apply
+              (toSheafify (ProEt.topology X)
+                (derivedLocalHomPresheaf (ProEt.topology X) B
+                  ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)))
+              g.op (derivedHomEvaluation X B A D U hU s)).symm))
+  · intro s
+    apply (proEtaleDerivedUnits_bijective X B A D V hV).2.1
+    exact (isoEvaluation_unit X B A D V hV _).trans
+      ((NatTrans.naturality_apply (derivedIsoSheafComparison X B A D).hom g.op s).trans
+        ((congrArg ((derivedComparisonIsoTarget X B A D).obj.map g.op)
+          (isoEvaluation_unit X B A D U hU s).symm).trans
+            (NatTrans.naturality_apply
+              (toSheafify (ProEt.topology X)
+                (derivedLocalIsoPresheaf (ProEt.topology X) B
+                  ((derivedComparison X B).obj A) ((derivedComparison X B).obj D)))
+              g.op (derivedIsoEvaluation X B A D U hU s)).symm))
 
 /-- Evaluation preserves composition of derived Hom-sheaf sections whenever their arguments match.
 
@@ -289,6 +435,68 @@ theorem derivedMorphism_evaluation_composition
     derivedHomEvaluation X B A G U hU (pulledbackDerivedHomComp X B A D G U s t) =
       derivedHomEvaluation X B A D U hU s ≫ derivedHomEvaluation X B D G U hU t := by
   sorry
+
+private theorem comparisonLocalHom_natural
+    (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (f : A' ⟶ A) (g : D ⟶ D') (V : X.Etale)
+    (a : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ⟶
+      (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
+    derivedComparisonLocalHom X B A' D' V
+      ((derivedSliceRestriction X.smallEtaleTopology B V).map f ≫ a ≫
+        (derivedSliceRestriction X.smallEtaleTopology B V).map g) =
+      (derivedSliceRestriction (ProEt.topology X) B ((toProEt X).obj V)).map
+        ((derivedComparison X B).map f) ≫ derivedComparisonLocalHom X B A D V a ≫
+      (derivedSliceRestriction (ProEt.topology X) B ((toProEt X).obj V)).map
+        ((derivedComparison X B).map g) := by
+  simp only [derivedComparisonLocalHom, Functor.map_comp, Category.assoc]
+  have hf := (derivedComparisonSliceIso X B V).inv.naturality f
+  have hg := (derivedComparisonSliceIso X B V).hom.naturality g
+  dsimp only [Functor.comp_map] at hf hg
+  rw [← Category.assoc, ← Category.assoc, ← hf]
+  simp only [Category.assoc]
+  rw [hg]
+
+private theorem comparisonHom_natural
+    (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (f : A' ⟶ A) (g : D ⟶ D') :
+    (comparisonSetUpperStar X).map (derivedLocalHomSheafMap f g) ≫
+        derivedHomSheafComparison X B A' D' =
+      derivedHomSheafComparison X B A D ≫
+        derivedLocalHomSheafMap ((derivedComparison X B).map f)
+          ((derivedComparison X B).map g) := by
+  let θ := derivedLocalHomSheafMap ((derivedComparison X B).map f)
+    ((derivedComparison X B).map g)
+  let R := (toProEt X).sheafPushforwardContinuous (Type (u + 1))
+    X.smallEtaleTopology (ProEt.topology X)
+  have hp : derivedLocalHomPresheafMap f g ≫ derivedComparisonHomPresheafMap X B A' D' =
+      derivedComparisonHomPresheafMap X B A D ≫ (R.map θ).hom := by
+    ext V a
+    change derivedComparisonHomUnit X B A' D' V.unop
+      ((derivedSliceRestriction X.smallEtaleTopology B V.unop).map f ≫ a ≫
+        (derivedSliceRestriction X.smallEtaleTopology B V.unop).map g) =
+      θ.hom.app (op ((toProEt X).obj V.unop)) (derivedComparisonHomUnit X B A D V.unop a)
+    have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality
+      (derivedLocalHomPresheafMap ((derivedComparison X B).map f)
+        ((derivedComparison X B).map g))
+    have hn' := congrArg (fun k ↦ k.app (op ((toProEt X).obj V.unop))
+      (derivedComparisonLocalHom X B A D V.unop a)) hn
+    exact (congrArg
+      ((toSheafify (ProEt.topology X)
+        (derivedLocalHomPresheaf (ProEt.topology X) B
+          ((derivedComparison X B).obj A') ((derivedComparison X B).obj D'))).app
+            (op ((toProEt X).obj V.unop)))
+      (comparisonLocalHom_natural X B A D A' D' f g V.unop a)).trans hn'
+  have hs := Adjunction.homEquiv_naturality_right_square
+    (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Y := R.obj (derivedComparisonHomTarget X B A D))
+    (Y' := R.obj (derivedComparisonHomTarget X B A' D'))
+    (derivedLocalHomPresheafMap f g)
+      (derivedComparisonHomPresheafMap X B A' D')
+      (derivedComparisonHomPresheafMap X B A D) (R.map θ) hp
+  exact (proEtaleSiteComparison X).homEquiv_naturality_right_square
+    (Y := derivedComparisonHomTarget X B A D)
+    (Y' := derivedComparisonHomTarget X B A' D')
+    (derivedLocalHomSheafMap f g) _ _ θ hs
 
 /-- Evaluation is natural in both derived arguments, contravariantly in the first and covariantly in
 the second.
@@ -315,7 +523,18 @@ theorem derivedMorphism_evaluation_natural
         derivedHomEvaluation X B A D U hU s ≫
           (derivedSliceRestriction (ProEt.topology X) B U).map
             ((derivedComparison X B).map g) := by
-  sorry
+  apply (proEtaleDerivedUnits_bijective X B A' D' U hU).1.1
+  have hc := congrArg (fun k ↦ k.hom.app (op U) s)
+    (comparisonHom_natural X B A D A' D' f g)
+  have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality
+    (derivedLocalHomPresheafMap ((derivedComparison X B).map f)
+      ((derivedComparison X B).map g))
+  have hn' := congrArg (fun k ↦ k.app (op U) (derivedHomEvaluation X B A D U hU s)) hn
+  exact (homEvaluation_unit X B A' D' U hU _).trans
+    (hc.trans ((congrArg
+      ((derivedLocalHomSheafMap ((derivedComparison X B).map f)
+        ((derivedComparison X B).map g)).hom.app (op U))
+      (homEvaluation_unit X B A D U hU s).symm).trans hn'.symm))
 
 /-- Evaluation preserves both the identity morphism and the identity isomorphism.
 
@@ -332,7 +551,28 @@ theorem derivedMorphism_evaluation_identity
     derivedHomEvaluation X B A A U hU (pulledbackDerivedIdentity X B A U) = 𝟙 _ ∧
       derivedIsoEvaluation X B A A U hU (pulledbackDerivedIsoIdentity X B A U) =
         Iso.refl _ := by
-  sorry
+  have h := derivedMorphism_evaluation_extends_local (X := X) (B := B) A A U hU
+  constructor
+  · rw [show pulledbackDerivedIdentity X B A U =
+        pulledbackEtaleLocalHom X B A A (Scheme.Etale.mk (𝟙 X)) (𝟙 _) U
+          (MorphismProperty.Over.homMk U.hom (by
+            change U.hom ≫ 𝟙 X = U.hom
+            simp)) by rfl]
+    rw [h.1 (Scheme.Etale.mk (𝟙 X))
+      (MorphismProperty.Over.homMk U.hom (by
+        change U.hom ≫ 𝟙 X = U.hom
+        simp)) (𝟙 _)]
+    simp [derivedLocalHomRestriction, derivedComparisonLocalHom]
+  · rw [show pulledbackDerivedIsoIdentity X B A U =
+        pulledbackEtaleLocalIso X B A A (Scheme.Etale.mk (𝟙 X)) (Iso.refl _) U
+          (MorphismProperty.Over.homMk U.hom (by
+            change U.hom ≫ 𝟙 X = U.hom
+            simp)) by rfl]
+    rw [h.2 (Scheme.Etale.mk (𝟙 X))
+      (MorphismProperty.Over.homMk U.hom (by
+        change U.hom ≫ 𝟙 X = U.hom
+        simp)) (Iso.refl _)]
+    simp [derivedLocalIsoRestriction, derivedComparisonLocalIso]
 
 /-- Evaluation preserves composition on derived Isom-sheaf sections.
 
@@ -356,6 +596,63 @@ theorem derivedMorphism_isoEvaluation_composition
       derivedIsoEvaluation X B A D U hU s ≪≫ derivedIsoEvaluation X B D G U hU t := by
   sorry
 
+private theorem comparisonLocalIso_natural
+    (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (f : A' ≅ A) (g : D ≅ D') (V : X.Etale)
+    (a : (derivedSliceRestriction X.smallEtaleTopology B V).obj A ≅
+      (derivedSliceRestriction X.smallEtaleTopology B V).obj D) :
+    derivedComparisonLocalIso X B A' D' V
+      ((derivedSliceRestriction X.smallEtaleTopology B V).mapIso f ≪≫ a ≪≫
+        (derivedSliceRestriction X.smallEtaleTopology B V).mapIso g) =
+      (derivedSliceRestriction (ProEt.topology X) B ((toProEt X).obj V)).mapIso
+        ((derivedComparison X B).mapIso f) ≪≫ derivedComparisonLocalIso X B A D V a ≪≫
+      (derivedSliceRestriction (ProEt.topology X) B ((toProEt X).obj V)).mapIso
+        ((derivedComparison X B).mapIso g) := by
+  apply Iso.ext
+  exact comparisonLocalHom_natural X B A D A' D' f.hom g.hom V a.hom
+
+private theorem comparisonIso_natural
+    (A' D' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))
+    (f : A' ≅ A) (g : D ≅ D') :
+    (comparisonSetUpperStar X).map (derivedLocalIsoSheafMap f g) ≫
+        derivedIsoSheafComparison X B A' D' =
+      derivedIsoSheafComparison X B A D ≫
+        derivedLocalIsoSheafMap ((derivedComparison X B).mapIso f)
+          ((derivedComparison X B).mapIso g) := by
+  let θ := derivedLocalIsoSheafMap ((derivedComparison X B).mapIso f)
+    ((derivedComparison X B).mapIso g)
+  let R := (toProEt X).sheafPushforwardContinuous (Type (u + 1))
+    X.smallEtaleTopology (ProEt.topology X)
+  have hp : derivedLocalIsoPresheafMap f g ≫ derivedComparisonIsoPresheafMap X B A' D' =
+      derivedComparisonIsoPresheafMap X B A D ≫ (R.map θ).hom := by
+    ext V a
+    change derivedComparisonIsoUnit X B A' D' V.unop
+      ((derivedSliceRestriction X.smallEtaleTopology B V.unop).mapIso f ≪≫ a ≪≫
+        (derivedSliceRestriction X.smallEtaleTopology B V.unop).mapIso g) =
+      θ.hom.app (op ((toProEt X).obj V.unop)) (derivedComparisonIsoUnit X B A D V.unop a)
+    have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality
+      (derivedLocalIsoPresheafMap ((derivedComparison X B).mapIso f)
+        ((derivedComparison X B).mapIso g))
+    have hn' := congrArg (fun k ↦ k.app (op ((toProEt X).obj V.unop))
+      (derivedComparisonLocalIso X B A D V.unop a)) hn
+    exact (congrArg
+      ((toSheafify (ProEt.topology X)
+        (derivedLocalIsoPresheaf (ProEt.topology X) B
+          ((derivedComparison X B).obj A') ((derivedComparison X B).obj D'))).app
+            (op ((toProEt X).obj V.unop)))
+      (comparisonLocalIso_natural X B A D A' D' f g V.unop a)).trans hn'
+  have hs := Adjunction.homEquiv_naturality_right_square
+    (sheafificationAdjunction X.smallEtaleTopology (Type (u + 1)))
+    (Y := R.obj (derivedComparisonIsoTarget X B A D))
+    (Y' := R.obj (derivedComparisonIsoTarget X B A' D'))
+    (derivedLocalIsoPresheafMap f g)
+      (derivedComparisonIsoPresheafMap X B A' D')
+      (derivedComparisonIsoPresheafMap X B A D) (R.map θ) hp
+  exact (proEtaleSiteComparison X).homEquiv_naturality_right_square
+    (Y := derivedComparisonIsoTarget X B A D)
+    (Y' := derivedComparisonIsoTarget X B A' D')
+    (derivedLocalIsoSheafMap f g) _ _ θ hs
+
 /-- Evaluation on derived Isom is natural under isomorphisms of its arguments.
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63; Cohomology on Sites, Tags 0946
@@ -378,7 +675,18 @@ theorem derivedMorphism_isoEvaluation_natural
         derivedIsoEvaluation X B A D U hU s ≪≫
           (derivedSliceRestriction (ProEt.topology X) B U).mapIso
             ((derivedComparison X B).mapIso g) := by
-  sorry
+  apply (proEtaleDerivedUnits_bijective X B A' D' U hU).2.1
+  have hc := congrArg (fun k ↦ k.hom.app (op U) s)
+    (comparisonIso_natural X B A D A' D' f g)
+  have hn := (sheafificationAdjunction (ProEt.topology X) (Type (u + 1))).unit.naturality
+    (derivedLocalIsoPresheafMap ((derivedComparison X B).mapIso f)
+      ((derivedComparison X B).mapIso g))
+  have hn' := congrArg (fun k ↦ k.app (op U) (derivedIsoEvaluation X B A D U hU s)) hn
+  exact (isoEvaluation_unit X B A' D' U hU _).trans
+    (hc.trans ((congrArg
+      ((derivedLocalIsoSheafMap ((derivedComparison X B).mapIso f)
+        ((derivedComparison X B).mapIso g)).hom.app (op U))
+      (isoEvaluation_unit X B A D U hU s).symm).trans hn'.symm))
 
 variable {X B}
 
