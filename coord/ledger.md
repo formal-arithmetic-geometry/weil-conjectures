@@ -17196,3 +17196,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion (stage 3; reviewer PASS; first push; landing 20261019T093410-L-2305544 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G2/Sheaf.CategoryTheory.DerivedCategory.PerfectOverDerivedCompleteRing (stage 3; reviewer PASS; first push; landing 20261019T093411-L-2305927 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/G2/Sheaf.CategoryTheory.Galois.GaloisTransitive (stage 3; reviewer PASS; first push; landing 20261019T093412-L-2306541 (proof); batch 20261019T093237; modules 1; new nodes 0)
+- 09:34 L: merged deliver/G3/Sheaf.Paper.IntrinsicQbarCategory (stage 3; reviewer PASS; first push; landing 20261019T093414-L-2307015 (proof); batch 20261019T093237; modules 1; new nodes 0)

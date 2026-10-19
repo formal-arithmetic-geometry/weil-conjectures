@@ -63,6 +63,44 @@ instance intrinsicQbarStageLinear (E : AlgebraicallyClosedCoefficients.Index l �
   comp_smul K L M f a g :=
     Linear.comp_smul K L M f ((intrinsicQbarStageFieldEquiv.{u} l Ω E).symm a) g
 
+private theorem rationalScalar_map_smul
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
+    (ι : E →ₐ[ℚ_[l]] L) (K M : sfRationalConstructibleCategory l E Y)
+    (a : Localization.Away (Padic.coefficientExtensionUniformizer l E)) (f : K ⟶ M) :
+    (sfRationalScalarExtension l E Y 0 (Fact.out : l.Prime).ne_zero L ι).map (a • f) =
+      (sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E a)) •
+        (sfRationalScalarExtension l E Y 0 (Fact.out : l.Prime).ne_zero L ι).map f := by
+  let F := sfRationalScalarExtension l E Y 0 (Fact.out : l.Prime).ne_zero L ι
+  let I := sfConstructibleIntegralScalarExtension 0 l (Fact.out : l.Prime).ne_zero E L ι Y
+  have hs := (sfRationalScalarExtension_existsUnique l E Y 0
+    (Fact.out : l.Prime).ne_zero L ι).exists.choose_spec
+  let : F.Additive := hs.1
+  have hobj (N : sfRationalConstructibleCategory l E Y) : F.obj N = ⟨I.obj N.obj⟩ :=
+    hs.2.1 N
+  have hm (b : Localization.Away (Padic.coefficientExtensionUniformizer l E))
+      (g : K.obj ⟶ M.obj) :
+      F.map (b ⊗ₜ[Padic.coefficientExtensionIntegers l E] g) = eqToHom (hobj K) ≫
+        ((sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E b))
+          ⊗ₜ[Padic.coefficientExtensionIntegers l L] I.map g) ≫ eqToHom (hobj M).symm :=
+    (conj_eqToHom_iff_heq _ _ (hobj K) (hobj M)).2 (hs.2.2 K.obj M.obj g b)
+  have hc (s : Localization.Away (Padic.coefficientExtensionUniformizer l L))
+      (g : (⟨I.obj K.obj⟩ : sfRationalConstructibleCategory l L Y) ⟶ ⟨I.obj M.obj⟩) :
+      eqToHom (hobj K) ≫ (s • g) ≫ eqToHom (hobj M).symm =
+        s • (eqToHom (hobj K) ≫ g ≫ eqToHom (hobj M).symm) := by
+    rw [Linear.smul_comp, Linear.comp_smul]
+  change F.map (a • f) = _ • F.map f
+  induction f using TensorProduct.induction_on with
+  | zero => simp
+  | tmul b g =>
+    rw [TensorProduct.smul_tmul', smul_eq_mul, hm, hm]
+    simp only [map_mul]
+    rw [← smul_eq_mul, ← TensorProduct.smul_tmul']
+    exact hc _ _
+  | add f g hf hg =>
+    change F.map (a • (f + g)) = _ • F.map (f + g)
+    simp only [smul_add, F.map_add, hf, hg]
+
 /-- The literal intrinsic tensor transitions respect the actual coefficient inclusions.
 Source: blueprint scalar-action paragraph
 (blueprint: def-weil-pbc-qbar-category).
@@ -75,7 +113,21 @@ so the same equation holds for the recorded stage system. -/
 theorem intrinsicQbarScalarCompatible :
     StageSystem.QbarScalarCompatible l Ω
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y) := by
-  sorry
+  intro E L h K M a f
+  have hT := (GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique l Ω Y).exists
+    |>.choose_spec.1 E L h
+  rw [hT]
+  change (sfRationalScalarExtension l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y 0
+      (Fact.out : l.Prime).ne_zero
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h)).map
+        ((intrinsicQbarStageFieldEquiv.{u} l Ω E).symm a • f) =
+    (intrinsicQbarStageFieldEquiv.{u} l Ω L).symm (IntermediateField.inclusion h a) • _
+  rw [rationalScalar_map_smul]
+  congr 1
+  simp [intrinsicQbarStageFieldEquiv, AlgebraicallyClosedCoefficients.coefficientInclusion]
+
 
 /-- Multiply the representative after adjoining its scalar to the finite stage.
 This is the existing quotient construction, applied to the intrinsic stage system.
