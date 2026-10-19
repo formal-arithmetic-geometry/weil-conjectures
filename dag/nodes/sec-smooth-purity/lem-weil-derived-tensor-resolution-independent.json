@@ -41,92 +41,85 @@
  ],
  "proof": [
   {
-   "text": "Work in the abelian category of $A_Y$-module sheaves on the small site [def-weil-pbc-proetale-site]. We first prove a more general assertion: any quasi-isomorphism $a:U\\to V$ between K-flat complexes remains a quasi-isomorphism after tensoring with any complex $F$. By [lem-pur-quasi-iso-cone-acyclic], its cone $C=\\operatorname{Cone}(a)$ is acyclic. By the cone clause of [lem-pc-kflat-cone-direct-sum], $C$ is also K-flat. Both cited statements apply to this ringed site, without any boundedness or flatness of terms.",
+   "text": "For a quasi-isomorphism f and a K-flat complex R, the cone of f is acyclic. The definition of K-flatness makes Cone(f) tensor R acyclic. CochainComplex.mapBifunctorMappingCone₁Iso and the cone criterion prove f tensor 1_R is a quasi-isomorphism (private tensor_right_quasiIso). Tensor preadditivity is supplied by the existing SheafOfModules.tensorPreadditive API, and uses no boundedness assumption.",
    "uses": [
-    "def-weil-pbc-proetale-site",
     "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-kflat-cone-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side), cone reformulation using Tag 07A3 (sites-cohomology-lemma-K-flat-two-out-of-three)"
-   }
-  },
-  {
-   "text": "By [lem-pur-acyclic-kflat-tensor-arbitrary], $\\operatorname{Tot}(F\\otimes C)$ is acyclic for arbitrary $F$. By [lem-pc-tensor-mapping-cone-iso] it is the cone, up to a complex isomorphism, of $1_F\\otimes a$. The converse cone criterion [lem-pur-quasi-iso-cone-acyclic] makes this map a quasi-isomorphism. To obtain the order $a\\otimes1_F$, use the explicit signed swap for the total tensor [def-pc-tensor-complex-sheaves]: on the $(p,q)$ summand send $x\\otimes y$ to $(-1)^{pq}y\\otimes x$. Its square is the identity. Comparing the two differential terms gives respectively the signs $(-1)^{pq+q}$ and $(-1)^{pq}$ on both sides, so this is a chain isomorphism. Naturality of the module swap conjugates $1_F\\otimes a$ to $a\\otimes1_F$. Hence both orders preserve quasi-isomorphisms between K-flat sources.",
-   "uses": [
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
     "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT and 06YU; two-factor resolution argument and right-calculus uniqueness"
+   }
+  },
+  {
+   "text": "For a K-flat first factor P and a quasi-isomorphism r, apply K-flatness to Cone(r). The componentwise braiding is an isomorphism of double complexes; totalization followed by HomologicalComplex.mapBifunctorFlipIso gives the signed swap. Thus P tensor Cone(r) is acyclic. CochainComplex.mapBifunctorMappingCone₂Iso and the cone criterion prove 1_P tensor r is a quasi-isomorphism (private tensor_left_quasiIso).",
+   "uses": [
     "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso",
     "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side); tensor signs from Section 06YL (sites-cohomology-section-flat)"
+    "place": "Tags 06YT and 06YU; two-factor resolution argument and right-calculus uniqueness"
    }
   },
   {
-   "text": "Fix $F=K_2$ and write $\\mathsf Q:K(\\operatorname{Mod}(A_Y))\\to D(Y_{\\mathrm{proet}},A)$ for the homotopy-category localization [def-weil-abstract-derived-category]. Tensoring defines a functor from the homotopy category to the derived category: if $h$ is a homotopy in the first factor, the degree $-1$ map $H(x\\otimes y)=h(x)\\otimes y$ satisfies $dH+Hd=(dh+hd)\\otimes1$, because the two terms involving $d_F$ have opposite signs in [def-pc-tensor-complex-sheaves]. For a derived morphism between K-flat complexes $U,V$, use the right calculus [lem-pc-quasi-isomorphisms-multiplicative-system] and [lem-pc-right-fraction-representation] to write it as the roof $U\\xleftarrow{s}M\\xrightarrow{b}V$. Resolve $M$ by $r:R\\to M$ using the general ringed-site theorem [lem-pc-kflat-resolution]. Put $J(f)=\\mathsf Q(f\\otimes1_F)$ and assign the roof the morphism $J(br)J(sr)^{-1}$. The composite $sr$ is a quasi-isomorphism between K-flat complexes, so Step 2 supplies its inverse. For two choices, first replace both roofs by their resolved roofs $U\\xleftarrow{d_i}R_i\\xrightarrow{e_i}V$, where $R_i$ is K-flat, $d_i=s_i r_i$ and $e_i=b_i r_i$. These still represent the original derived arrow since $\\mathsf Q(r_i)$ is invertible. Apply [lem-pc-right-fraction-common-refinement] to these resolved roofs: there are $a_i:T\\to R_i$ with $d_1a_1=d_2a_2$ a quasi-isomorphism and $e_1a_1=e_2a_2$ in the homotopy category. Resolve $T$ by $z:S\\to T$ with $S$ K-flat and put $c_i=a_i z$. Each $c_i$ is a quasi-isomorphism: $H^n(d_i)H^n(c_i)=H^n(d_i c_i)$ and both $H^n(d_i)$ and $H^n(d_i c_i)$ are isomorphisms. Step 2 makes $J(c_i)$ invertible. Functoriality and cancellation give $J(e_i)J(d_i)^{-1}=J(e_i c_i)J(d_i c_i)^{-1}$; the right-hand expressions for $i=1,2$ are equal by the common-refinement equations. This proves equality of the assigned arrows, including independence of every intervening K-flat resolution.",
+   "text": "Choose a K-flat resolution r:R → K₂ by lem-pc-kflat-resolution. For each K-flat resolution q:P → K₁, Steps 1 and 2 make the maps P tensor R → K₁ tensor R and P tensor R → P tensor K₂ quasi-isomorphisms. Localize and invert the second map to obtain e(P,q):Q(P tensor K₂) ≅ Q(K₁ tensor R). Define c(P,P′) = e(P,q) followed by e(P′,q′) inverse. No new definition chooses an arbitrary witness: R is eliminated locally inside the proof of the proposition.",
    "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-tensor",
     "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-right-fraction-representation",
-    "lem-pc-kflat-resolution",
-    "lem-pc-right-fraction-common-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (sites-cohomology-definition-derived-tor), preceding independence paragraph; expanded using derived-lemma-acyclic (05RT), categories-lemma-morphisms-right-localization (04VI), categories-lemma-equality-morphisms-right-localization (04VJ), and the right-fraction equivalence relation preceding categories-lemma-right-localization"
-   }
-  },
-  {
-   "text": "The roof assignment of Step 3 respects identities, using the roof with both legs the identity on a K-flat complex. For composition, take K-flat-middle roofs $U\\xleftarrow{s}R\\xrightarrow{a}V$ and $V\\xleftarrow{t}R'\\xrightarrow{b}W$. The right-calculus axiom [lem-pc-quasi-isomorphisms-multiplicative-system] gives $v:T\\to R$ a quasi-isomorphism and $w:T\\to R'$ with $av=tw$. Resolve $T$ by $z:S\\to T$ with $S$ K-flat using [lem-pc-kflat-resolution]. Write $v_0=vz,w_0=wz$. The composite roof has legs $sv_0,bw_0$. Step 2 inverts $J(s),J(t),J(v_0)$, and $J(a)J(v_0)=J(t)J(w_0)$, since tensor respects composition [def-pc-tensor-complex-sheaves]. Therefore\n$$J(bw_0)J(sv_0)^{-1}=J(b)J(w_0)J(v_0)^{-1}J(s)^{-1}=J(b)J(t)^{-1}J(a)J(s)^{-1}.$$\nThis is exactly the composite of the two assigned arrows; no invertibility of $w_0$ is needed. Thus Step 3 defines a functor on the full subcategory of the derived category represented by K-flat complexes. Its value on a chain map between such complexes is $J(f)$, by using an identity denominator.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-kflat-resolution",
     "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (sites-cohomology-definition-derived-tor), preceding independence paragraph; composition rule preceding categories-lemma-right-localization in categories.tex"
+    "place": "Tags 06YT and 06YU; two-factor resolution argument and right-calculus uniqueness"
    }
   },
   {
-   "text": "In the derived category [def-weil-abstract-derived-category], the given resolution maps specify the isomorphism $u_{q,q'}=\\mathsf Q(q')^{-1}\\mathsf Q(q):\\mathsf Q(P)\\to\\mathsf Q(P')$. Apply the functor of Steps 3-4 to obtain $c_{q,q'}:Q(P\\otimes F)\\to Q(P'\\otimes F)$. It is an isomorphism because the functor sends the inverse of $u_{q,q'}$ to an inverse. Cancelling the resolution isomorphisms gives $u_{q,q}=1$ and $u_{q',q''}u_{q,q'}=u_{q,q''}$; functoriality proves the identity and cocycle laws for $c$. If $q'\\alpha$ is homotopic to $q$, then $H^n(q')H^n(\\alpha)=H^n(q)$ for every $n$, so $\\alpha$ is a quasi-isomorphism by cancellation. Step 2 proves the required chain-level assertion. Moreover $\\mathsf Q(\\alpha)=u_{q,q'}$, and Step 4 identifies its image with $Q(\\alpha\\otimes1_F)$, proving agreement with the canonical comparison. The two total tensor objects are precisely the prescribed models in [def-weil-derived-tensor], so these comparisons prove independence of the chosen resolution.",
+   "text": "For a supplied homotopy α ≫ q′ ~ q, homology and two-out-of-three make α a quasi-isomorphism. Apply Step 1 to α tensor 1_R. The naturality square for r and Step 2 make α tensor 1_K₂ a quasi-isomorphism by two-out-of-three. HomologicalComplex.mapBifunctorMapHomotopy₁ sends the supplied homotopy to a tensor homotopy. DerivedCategory.Q_map_eq_of_homotopy and tensor functoriality give Q(α tensor 1_K₂) followed by e(P′,q′) equal to e(P,q). Cancellation proves agreement of c with the localized tensor map. Cancellation of e and its inverse proves identity and cocycle directly.",
    "uses": [
+    "def-weil-derived-tensor",
     "def-weil-abstract-derived-category",
-    "def-weil-derived-tensor"
+    "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (sites-cohomology-definition-derived-tor) and preceding independence paragraph; explicit canonical comparison and cocycle"
+    "place": "Tags 06YT and 06YU; two-factor resolution argument and right-calculus uniqueness"
+   }
+  },
+  {
+   "text": "For uniqueness, the right-calculus Ore axiom converts the left fraction formed by q and q′ in the homotopy category to a right fraction, giving maps s:M → P and f:M → P′ with s ≫ q homotopic to f ≫ q′ and s a quasi-isomorphism. Homology and two-out-of-three show f is a quasi-isomorphism. Resolve M by a K-flat S and compose to obtain quasi-isomorphisms a:S → P and b:S → P′ with homotopic composites (private common_refinement). For any competing comparison family, agreement fixes its values on a and b. Its cocycle law and cancellation of the comparison from S to P force its value from P to P′ to equal c. This uses only the Ore axiom, not the equality criterion for arbitrary localized fractions.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT and 06YU; two-factor resolution argument and right-calculus uniqueness"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-kflat-cone-direct-sum",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
   "lem-pc-tensor-mapping-cone-iso",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-right-fraction-representation",
   "lem-pc-kflat-resolution",
-  "lem-pc-right-fraction-common-refinement",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "lem-pc-quasi-isomorphisms-multiplicative-system"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side) and 06YU (sites-cohomology-definition-derived-tor); agent expansion of cone and localization-roof arguments. Second reader checked local TeX at /home/ubuntu/weil-launcher-nt/literature/stacks-project/sites-cohomology.tex and categories.tex."
+  "place": "Tags 06YT and 06YU; M9 shorter proof resolving the second factor once, using tensor/cone compatibility and the Ore axiom only for uniqueness. Complete Lean proof, no new obligations."
  },
  "mathlib_searches": [
   {
@@ -295,5 +288,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, all statement dependencies, source mathematics, exact declarations, universes, edge cases, helpers, docstrings, report sections, and verbatim signature. Per-file scompile.py passed in sandbox and library modes without diagnostics. No delivery faults found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261019T005347-L-2757298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
