@@ -9,14 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Sheaf.AlgebraicGeometry.Etale.OpenExtensionZeroEtaleAdjunctionAgreement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.OpenClosed.Complex
 
 /-!
 # Underived canonical open base-change compatibility
@@ -72,7 +64,7 @@ theorem chosenSquareEtaleLowerShriekBaseChangeMate_pullback
     chosenSquareEtaleLowerShriekBaseChangeMate Λ
         (IsPullback.of_hasPullback f j).toCommSq.flip =
       etaleLowerShriekBaseChangeMap Λ f j := by
-  sorry
+  rfl
 
 /-- The module base-change map on a chosen cartesian open square, transported from the
 open-extension map by the canonical open/etale comparison κ.
@@ -113,7 +105,23 @@ theorem chosenSquareEtaleLowerShriekBaseChangeMap_eq_mate
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : CommSq gU j' j g) :
     chosenSquareEtaleLowerShriekBaseChangeMap Λ sq =
       chosenSquareEtaleLowerShriekBaseChangeMate Λ sq := by
-  sorry
+  have hj : openImmersionToEtaleLowerShriek Λ j =
+      𝟙 (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) := by
+    simp only [openImmersionToEtaleLowerShriek, Functor.whiskerRight_id']
+    rfl
+  have hj' : openImmersionToEtaleLowerShriek Λ j' =
+      𝟙 (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j') := by
+    simp only [openImmersionToEtaleLowerShriek, Functor.whiskerRight_id']
+    rfl
+  simp only [chosenSquareEtaleLowerShriekBaseChangeMap, hj, hj', asIso_inv, asIso_hom]
+  apply NatTrans.ext
+  funext F
+  simp only [Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+    NatTrans.id_app, IsIso.inv_id]
+  change 𝟙 _ ≫ (openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app F ≫
+      (upperStar (ModuleCat.{u + 1} Λ) g).map (𝟙 _) =
+    (openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app F
+  simp
 
 /-- The chosen-square transport of the module base-change map is invertible for a
 cartesian open square.  Its proof is the composition of the κ isomorphisms with
@@ -126,7 +134,11 @@ theorem isIso_chosenSquareEtaleLowerShriekBaseChangeMap
     [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : IsPullback gU j' j g) :
     IsIso (chosenSquareEtaleLowerShriekBaseChangeMap Λ sq.toCommSq) := by
-  sorry
+  have := (openImmersionToEtaleLowerShriek_adjunction_agreement Λ j').1
+  have := (openImmersionToEtaleLowerShriek_adjunction_agreement Λ j).1
+  have := isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+  unfold chosenSquareEtaleLowerShriekBaseChangeMap
+  infer_instance
 
 
 /-- For a cartesian open-immersion square, the canonical extension-by-zero comparison
@@ -203,6 +215,37 @@ theorem derivedExtensionZeroBaseChangeUnderivedCompatibility
             (ModuleCat.{u + 1} Λ) j').unit).inv.app
             ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F) =
           𝟙 ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F) := by
-  sorry
+  intro U' U X' X gU j' j g sqdata
+  let : IsOpenImmersion j := sqdata.isOpenImmersion
+  let : IsOpenImmersion j' := sqdata.isOpenImmersion'
+  let sq : IsPullback gU j' j g := IsPullback.of_iso_pullback
+    sqdata.toCommSq sqdata.isoPullback sqdata.hom_fst sqdata.hom_snd
+  have := isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+  have := isIso_chosenSquareEtaleLowerShriekBaseChangeMap Λ sq
+  dsimp only
+  intro F
+  have hmap : chosenSquareEtaleLowerShriekBaseChangeMap Λ
+      sqdata.toChosenCartesianSquare.toCommSq =
+      openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ)
+        sqdata.toChosenCartesianSquare.toCommSq := by
+    exact (chosenSquareEtaleLowerShriekBaseChangeMap_eq_mate Λ _).trans rfl
+  refine ⟨?_, unit_map_openImmersionLowerShriekBaseChangeMap_app _ _ _, ?_⟩
+  · simp only [Iso.app_inv, asIso_inv, NatIso.isIso_inv_app]
+    exact IsIso.inv_eq_inv.mpr (congrArg (fun α ↦ α.app F) hmap).symm
+  · have ht := unit_map_openImmersionLowerShriekBaseChangeMap_app
+      (ModuleCat.{u + 1} Λ) sqdata.toCommSq F
+    rw [← Category.assoc, ← Category.assoc, ← ht]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc]
+    have hc := Iso.hom_inv_id_app
+      (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
+        (ModuleCat.{u + 1} Λ) sq)) F
+    dsimp only [asIso_hom, Functor.comp_obj] at hc
+    rw [hc]
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+    exact Iso.hom_inv_id_app
+      (asIso (openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} Λ) j').unit)
+      ((upperStar (ModuleCat.{u + 1} Λ) gU).obj F)
 
 end AlgebraicGeometry.Etale
