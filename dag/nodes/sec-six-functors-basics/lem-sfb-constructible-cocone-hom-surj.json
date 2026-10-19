@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sfb-constructible-cocone-hom-surj",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "(Hom-surj) for the constructible cocone",
@@ -18,33 +18,202 @@
  ],
  "proof": [
   {
-   "text": "Replacing $E$ and $F$ by a common finite extension containing both (using the transitivity\nisomorphisms of [def-sfb-derived-extend-comp-iso]) we may assume $E=F$. The claim is then the\nsurjectivity in the continuity of the derived hom:\n\n$$\n\\operatorname{colim}_{H\\supseteq E}\\Hom_{D(\\Mod_{H_X})}(T_{E,H}K,T_{E,H}L)\n\\longrightarrow\\Hom_{D(\\Mod_{\\overline{\\mathbf Q}_{\\ell,X}})}(T_{E,\\Qlb}K,T_{E,\\Qlb}L).\n$$",
-   "uses": [],
-   "elementary": false
+   "text": "Write $\\Omega=\\Qlb$. Let $I$ be the poset of finite coefficient fields $H$ containing both $E$ and $F$. This is a small set of subsets of the fixed set $\\Omega$. It is nonempty and directed by finite composita [det-def-sfb-qlbar-condensed-subextensions]. Its inclusion into all finite coefficient fields is final: for any finite $G$, the fields containing $E,F,G$ form a nonempty directed poset, by the same compositum argument. Since $L_F$ is bounded, it is bounded below. Apply [lem-weil-pbc-condensed-coefficient-complex-presentation] with this inclusion and $L_F$. Obtain a diagram $N_H$ of $E_X$-module complexes with a common strict lower bound, a termwise colimit cocone $c$, and isomorphisms $e_H:QN_H\\cong U_{H,E}T_{F,H}L_F$ and $e_\\Omega:Q(c.\\mathrm{pt})\\cong U_{\\Omega,E}T_{F,\\Omega}L_F$, including the stated compatibility with the fixed adjunctions and tensor comparisons.",
+   "uses": [
+    "det-def-sfb-qlbar-condensed-subextensions",
+    "def-sfb-dcons-subfield",
+    "lem-weil-pbc-condensed-coefficient-complex-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraphs 1–2: common finite coefficient extensions and uniformly bounded-below coefficient presentation"
+   }
   },
   {
-   "text": "By the adjunction $T\\dashv D(\\operatorname{Res})$ both sides are homs in $D(\\Mod_{E_X})$ out of\n$K$, into $T_{E,H}L$ resp. into $T_{E,\\Qlb}L$. All extensions of scalars are exact\n([lem-sfb-qlbar-flat]), so $T_{E,\\Qlb}L=\\operatorname{colim}_HT_{E,H}L$ termwise\n([sk-prop-sfb-qlbar-colimit-x]), a filtered colimit of uniformly bounded below complexes.\nSince $X$ is Noetherian, $K$ is a finite iterated extension of shifts of modules that are\nlocally finitely presented on the strata of a finite stratification\n([sk-def-sfb-constructible]); for such modules, and hence for $K$ (five lemma), the derived hom\ninto a filtered colimit of uniformly bounded below complexes is the filtered colimit of the\nderived homs. Hence the map above is bijective, in particular surjective.",
+   "text": "For the diagram and cocone just constructed, write $P(A)$ for the assertion that $\\varinjlim_H\\operatorname{Hom}(A,QN_H[n])\\to\\operatorname{Hom}(A,Q(c.\\mathrm{pt})[n])$ is an isomorphism for every integer $n$, with maps induced by $c$. This is [def-weil-pbc-hom-colimit-property]. For every constructible $E_X$-module sheaf $M$, [lem-weil-pbc-condensed-sheaf-ext-continuity] gives $P(M[0])$. Its hypotheses hold: $X$ is topologically Noetherian, the coefficient field is finite, the index category is small and filtered, and the diagram has the common termwise lower bound from step 1. The vertex $c.\\mathrm{pt}$ is the termwise colimit there: colimits of complexes are termwise, and filtered colimits of $E_X$-module objects are those of the underlying sheaves, since $E_X\\otimes-$ preserves colimits. Consequently $P(M[t])$ holds for every integer $t$, since its comparison at $n$ is the same comparison for $M[0]$ at $n-t$ under the shift isomorphisms. The zero object also satisfies $P$, as all its Hom groups are zero; isomorphic objects satisfy the same property by precomposition.",
    "uses": [
-    "lem-sfb-qlbar-flat",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "sk-def-sfb-constructible"
+    "def-weil-pbc-hom-colimit-property",
+    "lem-weil-pbc-condensed-sheaf-ext-continuity"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraph 2: continuity for constructible sheaves and their shifts"
+   }
+  },
+  {
+   "text": "Every cohomology sheaf of $K_E$ is constructible and $K_E$ has bounded cohomology [def-sfb-dcons-subfield]. Use the finite cone assembly of [lem-sfb-bounded-cohomology-cone-witness], ending in $K_E$. Induct on its ordered list of objects $F_r$. A shifted cohomology sheaf satisfies $P$ by step 2. For a cone clause $F_i\\to F_j\\to F_r[t]\\to F_i[1]$ with $i,j<r$, rotate it to $F_j\\to F_r[t]\\to F_i[1]\\to F_j[1]$. The induction hypothesis and shift invariance give $P(F_j)$ and $P(F_i[1])$; [lem-weil-pbc-hom-colimit-extension] gives $P(F_r[t])$, hence $P(F_r)$. This proves $P(K_E)$. Equivalently this is the finite Postnikov induction in the blueprint's five-lemma sentence: the cited extension lemma supplies the exact-Hom/filtered-colimit/five-lemma argument rather than assuming it from a definition of constructibility.",
+   "uses": [
+    "def-sfb-dcons-subfield",
+    "lem-sfb-bounded-cohomology-cone-witness",
+    "lem-weil-pbc-hom-colimit-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraph 2: finite devissage from shifted constructible sheaves to the bounded complex"
+   }
+  },
+  {
+   "text": "Let $a_\\Omega$ be the fixed adjunction bijection $\\operatorname{Hom}(T_{E,\\Omega}K_E,T_{F,\\Omega}L_F)\\cong\\operatorname{Hom}(K_E,U_{\\Omega,E}T_{F,\\Omega}L_F)$ of [def-weil-pbc-finite-derived-tensor-comparison]. Its functors $T_{E,H}$, $T_{E,\\Omega}$ are those of the cocone, [def-sfb-derived-extend-subfield] and [def-sfb-derived-extend-to-qlbar]: both are total left derived scalar extension along the same inclusions $E_X\\to H_X$, $E_X\\to\\Omega_X$, where $E_X=p_X^*C(-,E)$ and $\\Omega_X=p_X^*\\underline{\\Qlb}$ is the finite-subfield-valued ring of [sk-def-sfb-qlbar-condensed], with the same pullback from the point. Set $v=e_\\Omega^{-1}\\circ a_\\Omega(\\varphi)$. By step 3 at $n=0$, $v$ belongs to the image of $\\varinjlim_H\\operatorname{Hom}(K_E,QN_H)$. Every element of this filtered colimit of abelian groups is represented at one stage: in the direct-sum modulo relations construction an element is a finite sum of stage elements, and directedness moves its finitely many summands to one common stage. Hence for some $H\\in I$ and $u:K_E\\to QN_H$ we have $v=Q(c.\\iota_H)\\circ u$. Let $g$ be the inverse finite adjunction image of $e_H\\circ u$. Thus $g:T_{E,H}K_E\\to T_{F,H}L_F$.",
+   "uses": [
+    "def-weil-pbc-finite-derived-tensor-comparison",
+    "def-sfb-derived-extend-subfield",
+    "def-sfb-derived-extend-to-qlbar",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraphs 1–2: extract a finite-stage representative of the morphism"
+   }
+  },
+  {
+   "text": "Let $\\theta_{E,H}:T_{H,\\Omega}T_{E,H}\\cong T_{E,\\Omega}$ and $\\theta_{F,H}:T_{H,\\Omega}T_{F,H}\\cong T_{F,\\Omega}$ be the fixed tensor comparisons. The compatibility clause of [lem-weil-pbc-condensed-coefficient-complex-presentation], applied to $u$, says precisely\n$$a_\\Omega\\bigl(\\theta_{F,H,L_F}\\circ T_{H,\\Omega}(g)\\circ\\theta_{E,H,K_E}^{-1}\\bigr)=e_\\Omega\\circ Q(c.\\iota_H)\\circ u=a_\\Omega(\\varphi).$$\nInjectivity of the adjunction bijection gives the required equality of morphisms. By [lem-sfb-extend-subfield-constructible], both source and target of $g$ are bounded constructible over $H$. Their full subcategory has the ambient Hom sets [def-sfb-dcons-subfield], so $g$ is a morphism in $D_{\\mathrm{cons}}(X,H)$. The fixed $\\theta$ is the comparison of [def-sfb-derived-extend-comp-iso]: both are the exact-derived composition comparison followed by the derived underived isomorphism $\\operatorname{Ext}_\\psi\\operatorname{Ext}_\\varphi\\cong\\operatorname{Ext}_{\\psi\\varphi}$ and $\\psi\\varphi=\\chi$, for the inclusions $\\varphi:E_X\\to H_X$, $\\psi:H_X\\to\\Omega_X$, $\\chi:E_X\\to\\Omega_X$ (likewise for $F$); the multiplication $c\\otimes(b\\otimes m)\\mapsto cb\\otimes m$ sends the unit $m\\mapsto1\\otimes(1\\otimes m)$ to $m\\mapsto1\\otimes m$, so it is the unique unit-compatible isomorphism of [lem-weil-pbc-conjugate-iso-unit-equation] used there. The cocone comparisons [def-sfb-constructible-extend-comp-iso] are the restrictions of these. With $H\\supset E,F$ from step 1 this is (Hom-surj) for the cocone [def-sfb-constructible-cocone].",
+   "uses": [
+    "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "lem-sfb-extend-subfield-constructible",
+    "def-sfb-dcons-subfield",
+    "def-sfb-constructible-extend-comp-iso",
+    "def-sfb-constructible-cocone",
+    "def-sfb-derived-extend-comp-iso",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+    "place": "Paragraphs 1–2: canonical tensor transitivity and restriction to the constructible full subcategories"
+   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-qlbar-flat",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "sk-def-sfb-constructible"
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "def-sfb-dcons-subfield",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "def-weil-pbc-hom-colimit-property",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-weil-pbc-hom-colimit-extension",
+  "def-weil-pbc-finite-derived-tensor-comparison",
+  "def-sfb-derived-extend-subfield",
+  "def-sfb-derived-extend-to-qlbar",
+  "sk-def-sfb-qlbar-condensed",
+  "lem-sfb-extend-subfield-constructible",
+  "def-sfb-constructible-extend-comp-iso",
+  "def-sfb-constructible-cocone",
+  "def-sfb-derived-extend-comp-iso",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
+  "place": "Full proof; expanded finite cone induction and canonical adjunction compatibility using existing DAG tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hom.*colimit|colimit.*hom",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms",
+   "sub": "Algebra/Homology/DerivedCategory"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleCocone_homSurj|constructible.*(colimit|coefficient)|pro.?etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of bounded constructible complexes over an algebraic closure descend to a finite extension of the coefficient field",
+   "results": "ComplexShape.Embedding.homRestrict.f; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; ComplexShape.Embedding.homEquiv; HomologicalComplex.mapBifunctorDesc; HomologicalComplex.instMonoFOfHasFiniteLimits; NumberField.ComplexEmbedding.lift; HomologicalComplex.restrictionToTruncGE'.f; CochainComplex.ConnectData.map",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"colimit\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from constructible complexes commutes with filtered colimits of uniformly bounded below complexes of sheaves",
+   "results": "SheafOfModules.Presentation.map_π_eq; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; CategoryTheory.plusPlusSheaf_preservesZeroMorphisms; CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue; Condensed.isColimitLocallyConstantPresheaf_desc_apply; CategoryTheory.Sheaf.isColimitSheafifyCocone; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between bounded constructible pro-etale sheaf complexes over the algebraic closure of Q_l descends to a finite coefficient subextension",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; Condensed.profiniteSolid; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension to the algebraic closure of the l-adic numbers induces a surjection from the filtered colimit of Hom sets of bounded constructible complexes over finite coefficient fields",
+   "results": "LightProfinite.surjective_transitionMap; AdicCompletion.surjective_evalₐ; AdicCompletion.evalOneₐ_surjective; surjective_fontaineTheta; LightProfinite.proj_surjective; LightProfinite.surjective_transitionMapLE; AdicCompletion.eval_surjective; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between bounded constructible complexes over finite l-adic coefficient fields after scalar extension to the algebraic closure descends to a common finite coefficient field",
+   "results": "ComplexShape.Embedding.homRestrict_hasLift; ComplexShape.Embedding.liftExtend.f; ComplexShape.Embedding.liftExtend; ComplexShape.Embedding.liftExtend.f_eq; ComplexShape.Embedding.homRestrict_comp_extendMap; ComplexShape.Embedding.fullyFaithfulExtendFunctor; Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor; InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FilteredColimit Hom derived category",
+   "results": "loogle: Unknown identifier `CategoryTheory.FilteredColimit`",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleCocone_homSurj|Hom.*filtered.*colimit",
+   "results": "Mathlib/Algebra/Category/Grp/FilteredColimits.lean; Mathlib/CategoryTheory/Presentable/Finite.lean; Mathlib/Algebra/Category/ModuleCat/Stalk.lean; Mathlib/Algebra/Category/ModuleCat/Stalk.lean; Mathlib/Algebra/Category/Ring/FilteredColimits.lean; Mathlib/Algebra/Category/Ring/FilteredColimits.lean; Mathlib/Algebra/Category/Ring/FilteredColimits.lean; Mathlib/Algebra/Category/Ring/FinitePresentation.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a bounded constructible complex over one finite extension of Q_l to another after extension to Qbar_l is induced at a finite common extension",
+   "results": "ComplexShape.Embedding.homRestrict.f; ComplexShape.Embedding.liftExtend.f; ComplexShape.Embedding.homRestrict.f_eq; ComplexShape.Embedding.liftExtend; ComplexShape.Embedding.liftExtend.congr_simp; ComplexShape.Embedding.liftExtend_f; ComplexShape.Embedding.homEquiv; HomologicalComplex.truncGEMap",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (colimit.desc _) CategoryTheory",
+   "results": "loogle: Unknown identifier `IsIso`",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.*colimit|colimit.*Hom",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/ModelCategory/Lifting.lean; Mathlib/Algebra/Homology/CochainComplexPlus.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms",
+   "sub": "Algebra/Homology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom sets of bounded constructible sheaf complexes commute with filtered colimits of coefficient field extensions",
+   "results": "Condensed.instAB5CondensedMod; Condensed.isColimitLocallyConstantPresheaf_desc_apply; instAbelianCondensedMod; instHasColimitsCondensedMod; SheafOfModules.mapFree; LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat",
+   "date": "2026-10-19",
+   "verdict": "no match: returned results do not state descent of bounded constructible coefficient-field morphisms"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -95,5 +264,59 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-sfb-constructible-cocone-hom-surj",
+  "worker": "stage1",
+  "summary": "Retain the exact statement. Replace the uncited blanket derived-Hom continuity assertion by existing constructible-sheaf continuity, explicit finite cone induction, and the coefficient-complex presentation with its canonical compatibility equation. No new nodes. No attachment claim; current source alone is not evidence of a transitively closed proof. Reviewer FIX (NT maintainer reader): steps 2, 4 and 5 now state explicitly that the termwise colimit, the scalar-extension functors and the tensor comparison of the proper-base-change interface nodes are those of the cocone (def-sfb-derived-extend-subfield/-to-qlbar, def-sfb-derived-extend-comp-iso).",
+  "blueprint": "Paragraph 1: common finite coefficient stages and Hom surjectivity. Paragraph 2: adjunction, termwise coefficient colimit with common lower bound, sheaf continuity, finite cone induction, and finite-stage representative.",
+  "tool_uses": [
+   {
+    "node": "det-def-sfb-qlbar-condensed-subextensions",
+    "why": "Generic Finite subextensions of $\\overline{\\mathbf Q}_\\ell$ form a directed poset; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "why": "Generic Uniformly bounded-below coefficient complex presentation with canonical tensor maps; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   },
+   {
+    "node": "def-weil-pbc-hom-colimit-property",
+    "why": "Generic Continuity of shifted Hom along a specified cocone; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "why": "Generic Derived continuity for a single constructible condensed module sheaf; supplies sheaf continuity with the required topological Noetherian hypothesis."
+   },
+   {
+    "node": "lem-sfb-bounded-cohomology-cone-witness",
+    "why": "Generic Finite cone construction from the cohomology of a bounded derived object; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   },
+   {
+    "node": "lem-weil-pbc-hom-colimit-extension",
+    "why": "Generic Filtered shifted Hom continuity is closed under extensions; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   },
+   {
+    "node": "def-weil-pbc-finite-derived-tensor-comparison",
+    "why": "Generic Canonical finite coefficient derived tensor and adjunction data; supplies the explicit statement used in the proof, without replacing the unit’s coefficient-colimit/adjunction/devissage route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sfb-qlbar-condensed-subextensions",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
+  "def-weil-pbc-hom-colimit-property",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-weil-pbc-hom-colimit-extension",
+  "def-weil-pbc-finite-derived-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-NP-2e0949350",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-2e0949350 (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 blueprint item, its proof and the unit (paragraphs (2), (4) and the cocone paragraph), the full statements of all 11 cited nodes, and the coefficient definitions on both sides. The statement and stmt_deps are unchanged and verbatim from the blueprint. There are no new nodes, the dependency closure (1045 nodes) does not reach the item, and every step is under 2000 characters. Coefficients agree on both sides: E_X = p_X^* C(-,E), the vertex ring is the finite-subfield-valued Qlb_X (not the full continuous-map sheaf), and constructible means locally finitely presented on a finite locally closed stratification. Steps checked: Step 1, the presentation node's hypotheses hold (small filtered index, final functor, E,F ≤ H, L bounded below) and that node asserts no Hom descent. Step 2, the condensed sheaf Ext-continuity lemma needs only a topologically Noetherian X. sk-lem-constructible-ext-continuity needs locally Noetherian and quasi-compact, so replacing it is justified, and the declared tool uses are accepted. Step 3, rotating F_i→F_j→F_r[t] puts the known terms in the outer positions of the extension lemma, and the induction is well founded. Step 4, the one-stage representative and the transpose g are correct. Step 5, the displayed equation matches the Lean compatibility clause of exists_condensed_coefficient_complex_presentation. One fault (E4/E6-type), repaired: steps 4–5 used the functors and tensor comparison θ of def-weil-pbc-finite-derived-tensor-comparison, then claimed without argument that the cocone comparisons (def-sfb-constructible-extend-comp-iso, the restriction of def-sfb-derived-extend-comp-iso) are restrictions of them. The fix identifies the T functors with def-sfb-derived-extend-subfield and def-sfb-derived-extend-to-qlbar (same L(Ext) along the same inclusions, with Omega_X from sk-def-sfb-qlbar-condensed). It identifies θ with def-sfb-derived-extend-comp-iso: the multiplication isomorphism is unit-compatible, hence the unique isomorphism of lem-weil-pbc-conjugate-iso-unit-equation, a Mathlib leaf. Step 2 now also says that c.pt is the termwise sheaf colimit. proof_deps was updated. The Lean source agrees: in TwoColimit.lean lines 214–234 the derivedExtendScalars* declarations are abbreviations of finiteCoefficientDerived*. Edge cases checked: empty X, zero objects, E=F=H, a complex in one degree, and a topologically Noetherian but not locally Noetherian X. Maintainer note: prop-weil-pbc-qbar-condensed-two-colimit restates the whole two-colimit (merge or same_as candidate for thm-sfb-constructible-cocone-two-colimit). Its Lean closure contains constructibleCocone_homSurj, so it must not be cited here (route C7 and a cycle). Review: review.md. Corrected node: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-constructible-cocone-hom-surj.json.; 1 file(s) fixed by the reviewer"
  }
 }
