@@ -223,6 +223,36 @@ def pbcTruncatedTransitionGE (M : AdicTower T d) (m : ℤ) (b a : ℕ) (hab : a 
     ((pbcRestrict (pbcAdicQuotient T d b a hab)).mapDerivedCategoryTruncGEIso (m + 1)).inv.app
       (M.level a)
 
+set_option backward.isDefEq.respectTransparency false in
+private lemma truncLE_restriction_counit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (X : DerivedCategory C) (m : ℤ) :
+    (F.mapDerivedCategoryTruncLEIso m).inv.app X ≫
+        F.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncLEι m).app X) =
+      (DerivedCategory.TStructure.t.truncLEι m).app (F.mapDerivedCategory.obj X) := by
+  have := F.isLE_mapDerivedCategory_obj
+    ((DerivedCategory.TStructure.t.truncLE m).obj X) m
+  apply (cancel_epi ((F.mapDerivedCategoryTruncLEIso m).hom.app X)).mp
+  simp only [Iso.hom_inv_id_app_assoc]
+  exact (DerivedCategory.TStructure.t.liftTruncLE_ι _ m).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma truncGE_restriction_unit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (X : DerivedCategory C) (m : ℤ) :
+    (DerivedCategory.TStructure.t.truncGEπ m).app (F.mapDerivedCategory.obj X) ≫
+        (F.mapDerivedCategoryTruncGEIso m).inv.app X =
+      F.mapDerivedCategory.map ((DerivedCategory.TStructure.t.truncGEπ m).app X) := by
+  have : DerivedCategory.TStructure.t.IsGE
+      ((DerivedCategory.TStructure.t.truncGE m ⋙ F.mapDerivedCategory).obj X) m :=
+    F.isGE_mapDerivedCategory_obj ((DerivedCategory.TStructure.t.truncGE m).obj X) m
+  exact DerivedCategory.TStructure.t.π_descTruncGE _ m
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Unconditional cohomology at the quotient-linear levels, and its naturality for
 the strict transitions. The maps are H of the canonical truncation counit and unit;
 their squares with all semilinear transitions commute before taking cohomology.
@@ -258,8 +288,27 @@ theorem pbc_levelwise_truncation_cohomology (M : AdicTower T d) (m : ℤ) :
             ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level a)) =
         (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level b) ≫
           pbcTruncatedTransitionGE T d M m b a hab := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro n i hi
+    exact DerivedCategory.isIso_homologyFunctor_map_truncLTι_app
+      (M.level n) (m + 1) i (by omega)
+  · intro n i hi
+    exact DerivedCategory.isZero_of_isLE _ m i hi
+  · intro n i hi
+    exact DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app (M.level n) _ i hi
+  · intro n i hi
+    exact DerivedCategory.isZero_of_isGE _ (m + 1) i (by omega)
+  · intro b a hab
+    constructor
+    · dsimp only [pbcTruncatedTransitionLE, pbcDerivedRestrict]
+      rw [Category.assoc, truncLE_restriction_counit]
+      exact ((DerivedCategory.TStructure.t.truncLEι m).naturality _).symm
+    · dsimp only [pbcTruncatedTransitionGE, pbcDerivedRestrict]
+      rw [← Category.assoc, ← NatTrans.naturality]
+      simp only [Functor.id_map, Category.assoc]
+      rw [truncGE_restriction_unit]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Under normalization, the strict transitions are exactly the adjuncts of the new
 normalizations; thus the preceding cohomology identifications are also those of the
 normalized truncation triangles. The AdicTower fields retain their full quotient cocycle.
@@ -281,8 +330,84 @@ theorem pbc_levelwise_truncation_transitions {M : AdicTower T d} {m : ℤ}
         adicTowerSemilinearTransition T d N.upper.level N.upper.normalization b a hab ≫
         (pbcDerivedRestrict (pbcAdicQuotient T d b a hab)).map
           (eqToHom (N.upperLevel a)) = pbcTruncatedTransitionGE T d M m b a hab := by
-  sorry
+  obtain ⟨e, he, _⟩ := _hN b a hab
+  let φ := pbcAdicQuotient T d b a hab
+  let F := pbcDerivedExtend φ
+  let G := pbcDerivedRestrict φ
+  let adj := pbcDerivedScalarAdjunction φ
+  have hLE : F.map ((DerivedCategory.TStructure.t.truncLEι m).app (M.level b)) ≫
+      (M.normalization b a hab).hom =
+      (N.lowerNormalization b a hab).hom ≫
+        (DerivedCategory.TStructure.t.truncLEι m).app (M.level a) := by
+    simpa only [Functor.mapTriangle_obj,
+      CategoryTheory.Triangulated.TStructure.triangleLEGE_obj_mor₁, he.1, he.2.1]
+      using! e.hom.comm₁
+  have hGE : F.map ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level b)) ≫
+      (N.upperNormalization b a hab).hom =
+      (M.normalization b a hab).hom ≫
+        (DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level a) := by
+    simpa only [Functor.mapTriangle_obj,
+      CategoryTheory.Triangulated.TStructure.triangleLEGE_obj_mor₂, he.2.1, he.2.2]
+      using! e.hom.comm₂
+  constructor
+  · have h : adj.unit.app ((DerivedCategory.TStructure.t.truncLE m).obj (M.level b)) ≫
+        G.map (N.lowerNormalization b a hab).hom =
+        pbcTruncatedTransitionLE T d M m b a hab := by
+      apply (cancel_mono
+        (((pbcRestrict φ).mapDerivedCategoryTruncLEIso m).hom.app (M.level a))).mp
+      have : DerivedCategory.TStructure.t.IsLE
+          ((𝟭 (DerivedCategory _)).obj
+            ((DerivedCategory.TStructure.t.truncLE m).obj (M.level b))) m := by
+        dsimp
+        infer_instance
+      apply DerivedCategory.TStructure.t.to_truncLE_obj_ext
+      have hcmp : ((pbcRestrict φ).mapDerivedCategoryTruncLEIso m).hom.app
+            (M.level a) ≫
+          (DerivedCategory.TStructure.t.truncLEι m).app (G.obj (M.level a)) =
+          G.map ((DerivedCategory.TStructure.t.truncLEι m).app (M.level a)) := by
+        apply (cancel_epi
+          (((pbcRestrict φ).mapDerivedCategoryTruncLEIso m).inv.app (M.level a))).mp
+        simp only [Iso.inv_hom_id_app_assoc]
+        exact (truncLE_restriction_counit (pbcRestrict φ) (M.level a) m).symm
+      simp only [pbcTruncatedTransitionLE, φ, Category.assoc,
+        Iso.inv_hom_id_app_assoc]
+      erw [hcmp, ← G.map_comp, ← hLE, G.map_comp]
+      have hn := adj.unit.naturality
+        ((DerivedCategory.TStructure.t.truncLEι m).app (M.level b))
+      dsimp only [Functor.id_map, Functor.comp_map] at hn
+      erw [← Category.assoc, ← hn]
+      simpa only [Functor.id_map, adicTowerSemilinearTransition, adj, G,
+        Category.assoc] using!
+        ((DerivedCategory.TStructure.t.truncLEι m).naturality
+          (adicTowerSemilinearTransition T d M.level M.normalization b a hab)).symm
+    simpa [adicTowerSemilinearTransition, PbcLevelwiseTruncationData.lowerNormalization,
+      φ, F, G, adj, Functor.map_comp, Category.assoc] using h
+  · have h : adj.unit.app
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M.level b)) ≫
+        G.map (N.upperNormalization b a hab).hom =
+        pbcTruncatedTransitionGE T d M m b a hab := by
+      have : DerivedCategory.TStructure.t.IsGE
+          (G.obj ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M.level a)))
+          (m + 1) :=
+        (pbcRestrict φ).isGE_mapDerivedCategory_obj _ _
+      apply DerivedCategory.TStructure.t.from_truncGE_obj_ext
+      simp only [pbcTruncatedTransitionGE]
+      have hn := adj.unit.naturality
+        ((DerivedCategory.TStructure.t.truncGEπ (m + 1)).app (M.level b))
+      dsimp only [Functor.id_map, Functor.comp_map] at hn
+      erw [← Category.assoc, hn]
+      simp only [Category.assoc]
+      erw [← G.map_comp, hGE, G.map_comp]
+      erw [← NatTrans.naturality_assoc]
+      simp only [Functor.id_map]
+      erw [truncGE_restriction_unit]
+      simp only [adicTowerSemilinearTransition, adj, G, Category.assoc, Functor.id_obj]
+      rfl
+    simpa [adicTowerSemilinearTransition, PbcLevelwiseTruncationData.upperNormalization,
+      φ, F, G, adj, Functor.map_comp, Category.assoc] using h
 
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Naturality of both canonical normalizations for maps of the input reduction towers.
 Source: blueprint order 1429, (1)
 (blueprint: prop-weil-pbc-levelwise-truncations).
@@ -306,7 +431,41 @@ theorem pbc_levelwise_truncation_naturality {M M' : AdicTower T d} {m : ℤ}
           (N'.upperNormalization b a hab).hom =
       (N.upperNormalization b a hab).hom ≫
         (DerivedCategory.TStructure.t.truncGE (m + 1)).map (f a) := by
-  sorry
+  obtain ⟨e, he, _⟩ := _hN b a hab
+  obtain ⟨e', he', _⟩ := _hN' b a hab
+  let F := pbcDerivedExtend (pbcAdicQuotient T d b a hab)
+  let Δb := (DerivedCategory.TStructure.t
+    (C := pbcModules T ((pbcAdicRings T d).obj (op b)))).triangleLEGE m (m + 1) rfl
+  let Δa := (DerivedCategory.TStructure.t
+    (C := pbcModules T ((pbcAdicRings T d).obj (op a)))).triangleLEGE m (m + 1) rfl
+  let τ₁ := F.mapTriangle.map (Δb.map (f b)) ≫ e'.hom
+  let τ₂ := e.hom ≫ Δa.map (f a)
+  have hLE : DerivedCategory.TStructure.t.IsLE (F.mapTriangle.obj (Δb.obj (M.level b))).obj₁
+      m := DerivedCategory.TStructure.t.isLE_of_iso (N.lowerNormalization b a hab).symm m
+  have hdist : F.mapTriangle.obj (Δb.obj (M.level b)) ∈ distTriang _ :=
+    CategoryTheory.Pretriangulated.isomorphic_distinguished _
+      (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl (M.level a))
+      _ e
+  have hτ : τ₁ = τ₂ := by
+    refine DerivedCategory.TStructure.t.triangle_map_ext hdist
+      (DerivedCategory.TStructure.t.triangleLEGE_distinguished m (m + 1) rfl (M'.level a))
+      m (m + 1) hLE (by
+        change DerivedCategory.TStructure.t.IsGE
+          ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj (M'.level a)) (m + 1)
+        infer_instance) ?_ (by omega)
+    change F.map (f b) ≫ e'.hom.hom₂ = e.hom.hom₂ ≫ f a
+    rw [he.2.1, he'.2.1]
+    exact _hf b a hab
+  constructor
+  · have h := congrArg (fun τ ↦ τ.hom₁) hτ
+    change F.map ((DerivedCategory.TStructure.t.truncLE m).map (f b)) ≫ e'.hom.hom₁ =
+      e.hom.hom₁ ≫ (DerivedCategory.TStructure.t.truncLE m).map (f a) at h
+    simpa only [he.1, he'.1] using h
+  · have h := congrArg (fun τ ↦ τ.hom₃) hτ
+    change F.map ((DerivedCategory.TStructure.t.truncGE (m + 1)).map (f b)) ≫
+      e'.hom.hom₃ = e.hom.hom₃ ≫
+        (DerivedCategory.TStructure.t.truncGE (m + 1)).map (f a) at h
+    simpa only [he.2.2, he'.2.2] using h
 
 /-- Canonical cohomology of a strict-tower truncation evaluated at any level, without
 (TC). These are precisely H of evaluation of its counit and unit, hence are natural
@@ -330,7 +489,33 @@ theorem pbc_strict_tower_truncation_cohomology
     (∀ (n : ℕ) (i : ℤ), i ≤ m → IsZero ((DerivedCategory.homologyFunctor _ i).obj
       ((pbcTowerEvaluation T (pbcAdicCompletion T d) n).obj
         ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj V)))) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro n i hi
+    let F := (CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules T (pbcAdicCompletion T d))).obj (op n)
+    have : IsIso ((DerivedCategory.homologyFunctor _ i).map
+        ((DerivedCategory.TStructure.t.truncLEι m).app V)) :=
+      DerivedCategory.isIso_homologyFunctor_map_truncLTι_app V (m + 1) i (by omega)
+    exact (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso i) _).mp
+      (by dsimp; infer_instance)
+  · intro n i hi
+    let F := (CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules T (pbcAdicCompletion T d))).obj (op n)
+    have := F.isLE_mapDerivedCategory_obj
+      ((DerivedCategory.TStructure.t.truncLE m).obj V) m
+    exact DerivedCategory.isZero_of_isLE _ m i hi
+  · intro n i hi
+    let F := (CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules T (pbcAdicCompletion T d))).obj (op n)
+    have := DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app V (m + 1) i hi
+    exact (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso i) _).mp
+      (by dsimp; infer_instance)
+  · intro n i hi
+    let F := (CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules T (pbcAdicCompletion T d))).obj (op n)
+    have := F.isGE_mapDerivedCategory_obj
+      ((DerivedCategory.TStructure.t.truncGE (m + 1)).obj V) (m + 1)
+    exact DerivedCategory.isZero_of_isGE _ (m + 1) i (by omega)
 
 /-- The fixed K-flat evaluation comparison for the reduction of one completed object.
 Source: blueprint order 1429, opening paragraph; Stacks Tag 06YY
@@ -452,7 +637,7 @@ theorem pbc_levelwise_truncations
     ∃ N : PbcLevelwiseTruncationData T (pbcIntegralDatum l E)
         (pbcReductionAdicTower T (pbcIntegralDatum l E) K) m,
       PbcIsLevelwiseTruncation T (pbcIntegralDatum l E) N := by
-  sorry
+  exact pbc_adic_levelwise_truncations T (pbcIntegralDatum l E) _ m _hTor
 
 /-- Injectivity of the uniformizer on H^q(K), q≥m+1, suffices for (TC). Injectivity
 is tested on every site's sections, which is precisely monicity of scalar multiplication.
