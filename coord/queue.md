@@ -11,7 +11,7 @@
 | `lem-per-finite-compact-support-fibre-support-bound` | - | none |
 | `lem-trf-hilbert-samuel-local-presentations` | - | none |
 
-## Stage 2: nodes to state (25)
+## Stage 2: nodes to state (24)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,14 +36,13 @@
 | `lem-pur-condensed-exceptional-reconstruction` | 1 | state | 0 |
 | `lem-sf-constant-semilinear-generator-comparison` | 1 | state | 0 |
 | `lem-zl-proper-unit-condensed-realization` | 1 | state | 0 |
-| `lem-zl-weil-constant-extension-frobenius` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
 | `lem-coef-finite-adjunction-transition` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
 Not open yet: 305 nodes that below a finished node, not needed, 2 nodes that wait for stage 1 (statement downstream not grounded), 135 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (1210)
+## Stage 3: modules to prove (1211)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -889,6 +888,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SmoothPurityTowerLevels` | - | 3 | proof | 4 |
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | proof | 4 |
 | `Sheaf.Paper.TraceGraphCorrespondence` | - | 4 | proof | 4 |
+| `Sheaf.Paper.WeilConstantExtensionFrobenius` | - | 1 | proof | 4 |
 | `Sheaf.RingTheory.PowerSeries.ExpSubstHom` | - | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.AdicScalarTraceCoherence` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.ComparisonOpenTensorCoherence` | - | 1 | proof | 4 |
