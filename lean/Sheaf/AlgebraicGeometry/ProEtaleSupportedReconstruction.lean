@@ -1,12 +1,9 @@
 module
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction
-public import Sheaf.AlgebraicGeometry.RingedTopoiModuleAdjunctionRepair
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 
 /-!
 # Normalized reconstruction from two successive support conditions
@@ -30,6 +27,101 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
+
+section AdjunctionAlgebra
+universe u₁ u₂ v₁ v₂
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+variable {L : D ⥤ C} {H : C ⥤ D} (a : L ⊣ H)
+variable {N : C} {M : D} (σ : H.obj N ≅ M)
+private theorem normalized_restrict
+    [IsIso (L.map σ.inv ≫ a.counit.app N)] :
+    H.map (inv (L.map σ.inv ≫ a.counit.app N)) = σ.hom ≫ a.unit.app M := by
+  apply (cancel_mono (H.map (L.map σ.inv ≫ a.counit.app N))).1
+  simp only [← H.map_comp, IsIso.inv_hom_id, H.map_id]
+  rw [H.map_comp]
+  have hu := a.unit.naturality σ.inv
+  dsimp at hu
+  rw [Category.assoc, ← Category.assoc (a.unit.app M), ← hu]
+  simp only [Category.assoc, a.right_triangle_components, Category.comp_id, σ.hom_inv_id]
+  rfl
+
+private theorem normalized_unique
+    [IsIso (L.map σ.inv ≫ a.counit.app N)] (q : N ⟶ L.obj M)
+    (hq : H.map q = σ.hom ≫ a.unit.app M) :
+    q = inv (L.map σ.inv ≫ a.counit.app N) := by
+  apply (cancel_epi (L.map σ.inv ≫ a.counit.app N)).1
+  rw [IsIso.hom_inv_id]
+  calc
+    (L.map σ.inv ≫ a.counit.app N) ≫ q =
+        L.map σ.inv ≫ L.map (H.map q) ≫ a.counit.app (L.obj M) := by
+      have hc := a.counit.naturality q
+      dsimp at hc
+      rw [Category.assoc, hc]
+    _ = L.map (a.unit.app M) ≫ a.counit.app (L.obj M) := by
+      rw [hq, ← L.map_comp_assoc]
+      simp
+    _ = 𝟙 _ := a.left_triangle_components M
+
+private theorem normalized_natural {N' : C} {M' : D}
+    (σ' : H.obj N' ≅ M') (c : N ⟶ N') (b : M ⟶ M')
+    (h : H.map c ≫ σ'.hom = σ.hom ≫ b) :
+    L.map b ≫ (L.map σ'.inv ≫ a.counit.app N') =
+      (L.map σ.inv ≫ a.counit.app N) ≫ c := by
+  have he : b ≫ σ'.inv = σ.inv ≫ H.map c := by
+    apply (cancel_mono σ'.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [h, Iso.inv_hom_id_assoc]
+  rw [← L.map_comp_assoc, he, L.map_comp, Category.assoc]
+  have hc := a.counit.naturality c
+  dsimp at hc
+  rw [hc, Category.assoc]
+
+end AdjunctionAlgebra
+
+private theorem abelian_open_supported_counit {X Z U : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (hij : Set.range j = (Set.range i)ᶜ)
+    (N : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (hi : IsZero ((upperStar Ab.{u + 1} i).obj N)) :
+    IsIso ((openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).counit.app N) := by
+  let F := upperStar Ab.{u + 1} i
+  let G := lowerStar Ab.{u + 1} i
+  let H := upperStar Ab.{u + 1} j
+  let L := openImmersionLowerShriek Ab.{u + 1} j
+  let ai := upperStarLowerStarAdjunction Ab.{u + 1} i
+  let aj := openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j
+  have hz (P : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) :
+      IsZero (H.obj (G.obj P)) :=
+    isZero_upperStar_lowerStar_of_disjoint Ab.{u + 1} i j
+      (compl_eq_iff_isCompl.mp hij.symm).disjoint P
+  have hzi (P : Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) :
+      IsZero (F.obj (L.obj P)) := by
+    apply (IsZero.iff_id_eq_zero _).2
+    apply (ai.homEquiv _ _).injective
+    apply (aj.homEquiv _ _).injective
+    exact (hz _).eq_of_tgt _ _
+  have hdetect (P : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (hp : IsZero (F.obj P)) (hq : IsZero (H.obj P)) : IsZero P := by
+    have : IsIso (ai.unit.app P) := (abelian_closed_support i j hij).2 P hq
+    exact (G.map_isZero hp).of_iso (asIso (ai.unit.app P))
+  have : IsIso aj.unit := aj.unit_isIso_of_L_fully_faithful
+  have hH : IsIso (H.map (aj.counit.app N)) := by
+    have ht := aj.right_triangle_components (Y := N)
+    rw [← IsIso.inv_eq_of_hom_inv_id ht]
+    infer_instance
+  have hF : IsIso (F.map (aj.counit.app N)) :=
+    (hzi _).isIso hi _
+  let f := aj.counit.app N
+  have hker : IsZero (kernel f) := hdetect _
+    ((isZero_kernel_of_mono (F.map f)).of_iso (PreservesKernel.iso F f))
+    ((isZero_kernel_of_mono (H.map f)).of_iso (PreservesKernel.iso H f))
+  have hcoker : IsZero (cokernel f) := hdetect _
+    ((isZero_cokernel_of_epi (F.map f)).of_iso (PreservesCokernel.iso F f))
+    ((isZero_cokernel_of_epi (H.map f)).of_iso (PreservesCokernel.iso H f))
+  have : Mono f := Preadditive.mono_of_isZero_kernel f hker
+  have : Epi f := Preadditive.epi_of_isZero_cokernel f hcoker
+  exact isIso_of_mono_of_epi f
 
 /-- Additive realization of a commutative pro-etale ring sheaf.
 Source: Stacks, Tag 03D1 (blueprint: def-weil-proetale-inverse-image). -/
@@ -113,7 +205,32 @@ theorem supportedLambda_isIso {X Z S B K : Scheme.{u}}
     (hB : IsZero ((ringSheafInverseImage e (supportedRingMon i R).X).obj
       ((supportedClosedPullback i R).obj A))) :
     IsIso (supportedLambda i u R A M σ) := by
-  sorry
+  have _ := hk
+  have _ := hK
+  let : MonObj ((upperStar Ab.{u + 1} i).obj (supportedRingAb R)) :=
+    (supportedRingMon i R).mon
+  have hzero : IsZero ((upperStar Ab.{u + 1} e).obj
+      ((supportedClosedPullback i R).obj A).X) :=
+    (Mod.forget ((upperStar Ab.{u + 1} e).mapMon.obj
+      (supportedRingMon i R)).X).map_isZero hB
+  have hc := abelian_open_supported_counit e u hu
+    ((supportedClosedPullback i R).obj A).X hzero
+  have hlin : IsIso ((ringSheafOpenAdjunction u (supportedRingMon i R).X).counit.app
+      ((supportedClosedPullback i R).obj A)) := by
+    have hh : IsIso ((Mod.forget (supportedRingMon i R).X).map
+        ((ringSheafOpenAdjunction u (supportedRingMon i R).X).counit.app
+          ((supportedClosedPullback i R).obj A))) := by
+      change IsIso (((ringSheafOpenAdjunction u (supportedRingMon i R).X).counit.app
+        ((supportedClosedPullback i R).obj A)).hom)
+      dsimp [ringSheafOpenAdjunction, Adjunction.mapModLeftAdjunction,
+        Adjunction.mkOfHomEquiv, Adjunction.mk', Mod.Hom.mk']
+      rw [Adjunction.homEquiv_counit]
+      simp only [Mod.id_hom']
+      erw [CategoryTheory.Functor.map_id, Category.id_comp]
+      exact hc
+    exact isIso_of_reflects_iso _ (Mod.forget _)
+  dsimp only [supportedLambda]
+  infer_instance
 
 /-- The closed-adjunction transpose of the normalized map.
 Source: Stacks, Tag 0037 (blueprint: lem-sfb-proetale-supported-reconstruction).
@@ -203,6 +320,64 @@ theorem supported_reconstruction
             supportedTheta i e k u hk hu R A M σ hK hB ≫
               (supportedClosedPushforward i R).map
                 ((supportedOpenExtension i u R).map b))) := by
-  sorry
+  have hlambda := supportedLambda_isIso i e k u hk hu R A M σ hK hB
+  have : IsIso (supportedLambda i u R A M σ) := hlambda
+  have : IsIso ((supportedOpenExtension i u R).map σ.inv ≫
+      (ringSheafOpenAdjunction u (supportedRingMon i R).X).counit.app
+        ((supportedClosedPullback i R).obj A)) := hlambda
+  have htheta : IsIso (supportedTheta i e k u hk hu R A M σ hK hB) := by
+    have hzero : IsZero ((upperStar Ab.{u + 1} k).obj A.X) :=
+      (Mod.forget ((upperStar Ab.{u + 1} k).mapMon.obj
+        (Mon.mk (supportedRingAb R))).X).map_isZero hK
+    have hi := (abelian_closed_support i k hk).2 A.X hzero
+    have hi' : IsIso ((ringSheafAdjunction i (supportedRingAb R)).unit.app A) := by
+      have hh : IsIso ((Mod.forget (supportedRingAb R)).map
+          ((ringSheafAdjunction i (supportedRingAb R)).unit.app A)) := by
+        change IsIso (((ringSheafAdjunction i (supportedRingAb R)).unit.app A).hom)
+        rw [Adjunction.mapModAdjunction_unit_app_hom]
+        exact hi
+      exact isIso_of_reflects_iso _ (Mod.forget _)
+    dsimp only [supportedTheta]
+    infer_instance
+  let F := supportedClosedPullback i R
+  let G := supportedClosedPushforward i R
+  let L := supportedOpenExtension i u R
+  let H := supportedOpenPullback i u R
+  let ac := ringSheafAdjunction i (supportedRingAb R)
+  let ao := ringSheafOpenAdjunction u (supportedRingMon i R).X
+  have ht : F.map (supportedTheta i e k u hk hu R A M σ hK hB) ≫
+      ac.counit.app (L.obj M) = inv (supportedLambda i u R A M σ) := by
+    change (ac.homEquiv _ _).symm ((ac.homEquiv _ _)
+      (inv (supportedLambda i u R A M σ))) = _
+    exact (ac.homEquiv _ _).symm_apply_apply _
+  have hr : H.map (inv (supportedLambda i u R A M σ)) =
+      σ.hom ≫ ao.unit.app M := normalized_restrict ao σ
+  refine ⟨hlambda, htheta, ?_, ?_, ?_⟩
+  · rw [← H.map_comp, ht, hr]
+  · intro h he
+    apply (ac.homEquiv _ _).symm.injective
+    change F.map h ≫ ac.counit.app (L.obj M) =
+      F.map (supportedTheta i e k u hk hu R A M σ hK hB) ≫ ac.counit.app (L.obj M)
+    rw [ht]
+    apply normalized_unique ao σ
+    change H.map (F.map h ≫ ac.counit.app (L.obj M)) = _
+    rw [H.map_comp]
+    exact he
+  · intro A' M' σ' hK' hB' a b hab
+    have hn : L.map b ≫ supportedLambda i u R A' M' σ' =
+        supportedLambda i u R A M σ ≫ F.map a :=
+      normalized_natural ao σ σ' (F.map a) b hab
+    refine ⟨hn, ?_⟩
+    have := supportedLambda_isIso i e k u hk hu R A' M' σ' hK' hB'
+    have hn' : F.map a ≫ inv (supportedLambda i u R A' M' σ') =
+        inv (supportedLambda i u R A M σ) ≫ L.map b := by
+      apply (cancel_epi (supportedLambda i u R A M σ)).1
+      simpa only [← Category.assoc, IsIso.hom_inv_id, Category.id_comp,
+        Category.comp_id, Category.assoc, IsIso.hom_inv_id_assoc] using
+        congrArg (fun t ↦ t ≫ inv (supportedLambda i u R A' M' σ')) hn.symm
+    change a ≫ (ac.homEquiv _ _) (inv (supportedLambda i u R A' M' σ')) =
+      (ac.homEquiv _ _) (inv (supportedLambda i u R A M σ)) ≫ G.map (L.map b)
+    rw [← ac.homEquiv_naturality_left, ← ac.homEquiv_naturality_right, hn']
+
 
 end AlgebraicGeometry.ProEtale

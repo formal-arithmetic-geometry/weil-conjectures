@@ -19,87 +19,64 @@
  ],
  "proof": [
   {
-   "text": "Write $F=i^{-1}$, $G=i_*$, $L=u_!$, $H=u^{-1}$ and $N=FA$; thus $\\sigma:HN\\xrightarrow{\\sim}M$. Apply the ringed open–closed theorem to the complementary pair $(i,k)$, over the ring sheaf $R$. Its hypotheses hold because $i$ is closed and $k$ is its quasi-compact open complement. It gives a short exact sequence $0\\to k_!k^{-1}A\\to A\\xrightarrow{\\eta'_{A}}GFA\\to0$, where $\\eta'$ is the unit of the adjunction used in that theorem. The specified adjunction of the statement has the same right adjoint $G$ (with its $R$-action through the ring unit) and a left adjoint isomorphic to $F$ (via $i^{-1}R\\otimes_{i^{-1}R}i^{-1}(-)\\cong i^{-1}$). By the conjugate-isomorphism unit equation with $\\delta=\\mathrm{id}_G$, there is a natural isomorphism $c$ with $\\eta_{i,A}=G(c_A)\\circ\\eta'_A$. So $\\eta_{i,A}$ is an isomorphism once $\\eta'_A$ is. Since $k^{-1}A=0$, its extension by zero is zero (extension by zero is exact). Hence $\\eta'_A$, and therefore $\\eta_{i,A}$, is an isomorphism. Explicitly, in this abelian module category the short exact sequence now makes $\\eta'_A$ a cokernel of $0\\to A$; the identity of $A$ is another such cokernel, so uniqueness of cokernels supplies its two-sided inverse.",
+   "text": "Lift the abelian supported closed unit of lem-weil-pbc-proetale-abelian-closed-support to module objects. The forgetful functor sends the specified module unit to the abelian unit, by mapModAdjunction_unit_app_hom, and reflects isomorphisms. Thus eta_i,A is invertible when k inverse-image of A is zero. This uses the actual specified adjunction directly, so no comparison of independently chosen adjunctions is needed.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-exact-sequence",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open, with the arbitrary-ring-sheaf module formulation of lem-weil-pbc-proetale-ringed-open-closed."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the same ringed open–closed theorem on $Z$ to $(e,u)$ and the coefficient ring $i^{-1}R$; $u$ is precisely the quasi-compact complement of the closed immersion $e$. It gives $0\\to LHN\\xrightarrow{\\varepsilon_{u,N}}N\\to e_*e^{-1}N\\to0$. The hypothesis $e^{-1}N=0$ makes the right-hand term zero (closed direct image is exact). Thus $\\varepsilon_{u,N}$ is an isomorphism: it is a kernel of $N\\to0$, and the identity of $N$ is another such kernel. Functoriality carries the inverse pair $\\sigma,\\sigma^{-1}$ to an inverse pair under $L$. Consequently $\\lambda=\\varepsilon_{u,N}\\circ L(\\sigma^{-1}):LM\\to N$ is an isomorphism.",
+   "text": "Prove the open supported counit first on underlying abelian sheaves. Write F=i*, G=i_*, H=j*, L=j_!. The disjoint-image theorem gives H G=0. Applying the two adjunction Hom equivalences to identities gives F L=0. If F P=H P=0, the supported closed unit P→G F P is invertible by abelian closed support and its target is zero; hence P=0. Exact inverse images therefore jointly detect isomorphisms, by applying this zero detection to kernels and cokernels. The open restriction of the open counit is invertible by the right triangle identity and full faithfulness of L. Its closed restriction is a map between zero objects when F N=0. Joint detection proves that counit invertible. Lift it to modules: mapModLeftAdjunction has exactly this underlying counit, and Mod.forget reflects isomorphisms. Apply this on Z to (e,u) and N=i inverse-image of A. Functoriality sends sigma inverse to an isomorphism, so supportedLambda is invertible. This is the private helper abelian_open_supported_counit and the complete proof of supportedLambda_isIso.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-exact-sequence"
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-sfb-proetale-open-disjoint-direct-image",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open, with the arbitrary-ring-sheaf module formulation of lem-weil-pbc-proetale-ringed-open-closed."
-   }
+   "elementary": false
   },
   {
-   "text": "The transpose formula for $F\\dashv G$ sends $\\lambda^{-1}:FA\\to LM$ to $\\theta=G(\\lambda^{-1})\\circ\\eta_{i,A}$. Steps 1–2 show both factors are isomorphisms, so $\\theta$ is an isomorphism. Its inverse transpose is exactly $\\lambda^{-1}$: naturality of the closed counit and the left triangle identity give $\\varepsilon_{i,LM}\\circ F\\theta=\\lambda^{-1}\\circ\\varepsilon_{i,FA}\\circ F(\\eta_{i,A})=\\lambda^{-1}$. This uses the specified adjunction, rather than an independently chosen identification of $FG$ with the identity.",
+   "text": "The specified supportedTheta is the closed adjunction transpose of lambda inverse. Its two factors are invertible by Steps 1 and 2. Applying the inverse Hom equivalence to this transpose gives exactly F(theta) followed by the specified closed counit equal to lambda inverse. This is ht in the Lean proof.",
    "uses": [
     "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
-   }
+   "elementary": true
   },
   {
-   "text": "For $L\\dashv H$, naturality of the unit at $\\sigma^{-1}:M\\to HN$ and the right triangle identity give $H\\lambda\\circ\\eta_{u,M}=H(\\varepsilon_{u,N})\\circ HL(\\sigma^{-1})\\circ\\eta_{u,M}=H(\\varepsilon_{u,N})\\circ\\eta_{u,HN}\\circ\\sigma^{-1}=\\sigma^{-1}$. Since $H\\lambda$ is invertible, this implies $H(\\lambda^{-1})=\\eta_{u,M}\\circ\\sigma$. Applying $H$ to the last equation of Step 3 yields the required restriction equation $H(\\varepsilon_{i,LM})\\circ HF\\theta=\\eta_{u,M}\\circ\\sigma$.",
+   "text": "For the open adjunction, naturality of its unit at sigma inverse and the right triangle identity give eta_M followed by H(lambda)=sigma inverse. Cancel H(lambda) to obtain H(lambda inverse)=sigma followed by eta_M. Apply H to ht to obtain the displayed restriction equation. This is normalized_restrict, a proved private categorical helper.",
    "uses": [
     "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
-   }
+   "elementary": true
   },
   {
-   "text": "Let $h:A\\to GLM$ be any morphism with that restriction, and let $q=\\varepsilon_{i,LM}\\circ Fh:N\\to LM$ be its inverse transpose. The prescribed restriction says $Hq=\\eta_{u,M}\\circ\\sigma$. Naturality of the open counit and the left triangle identity imply $q\\circ\\lambda=q\\circ\\varepsilon_{u,N}\\circ L(\\sigma^{-1})=\\varepsilon_{u,LM}\\circ L(Hq\\circ\\sigma^{-1})=\\varepsilon_{u,LM}\\circ L(\\eta_{u,M})=\\mathrm{id}_{LM}$. Cancelling the isomorphism $\\lambda$ gives $q=\\lambda^{-1}$. Injectivity of the closed adjunction Hom bijection gives $h=\\theta$. This proves uniqueness among all morphisms.",
+   "text": "Given any h satisfying the restriction equation, put q=F(h) followed by the closed counit. Naturality of the open counit and the left triangle identity give lambda followed by q=id. Cancellation shows q=lambda inverse. Injectivity of the inverse closed Hom equivalence then gives h=theta. The cancellation calculation is normalized_unique.",
    "uses": [
     "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
-   }
+   "elementary": true
   },
   {
-   "text": "Let $a:A\\to A'$ and $b:M\\to M'$ satisfy $b\\circ\\sigma=\\sigma'\\circ HFa$, and put $N'=FA'$. Rearranging gives $HFa\\circ\\sigma^{-1}=(\\sigma')^{-1}\\circ b$. Naturality of the open counit gives $Fa\\circ\\lambda=\\varepsilon_{u,N'}\\circ L(HFa\\circ\\sigma^{-1})=\\lambda'\\circ Lb$. Hence $(\\lambda')^{-1}\\circ Fa=Lb\\circ\\lambda^{-1}$. Naturality of the closed unit now computes $GLb\\circ\\theta=G(Lb\\circ\\lambda^{-1})\\circ\\eta_{i,A}=G((\\lambda')^{-1})\\circ GF(a)\\circ\\eta_{i,A}=G((\\lambda')^{-1})\\circ\\eta_{i,A'}\\circ a=\\theta'\\circ a$. These are the asserted naturality squares for $\\lambda$ and $\\theta$.",
+   "text": "For a commuting pair (a,b), rewrite b followed by sigma prime inverse as sigma inverse followed by H F(a). Naturality of the open counit gives L(b) followed by lambda prime equal to lambda followed by F(a). Cancel both lambda isomorphisms to obtain the inverse square. Left and right naturality of the closed Hom equivalence carry it to the asserted theta square. This is normalized_natural followed by the final proof block.",
    "uses": [
     "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and the following paragraph (transpose formulas); lemma-unit-counit-relations (triangle identities)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "def-weil-pbc-exact-sequence",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-proetale-open-disjoint-direct-image",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
   "lem-weil-pbc-adjunction-of-natural-bijection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AH (lemma-ses-associated-to-open) applied twice, followed by explicit adjunction calculations from categories.tex, Tag 0037 and lemma-unit-counit-relations. Composite proof written by Q56, realizing parent Step 7 and blueprint pullback proof (2)."
+  "place": "Tags 09AA and 09AH, with the shorter direct abelian closed-support and joint-detection argument; categorical normalization, uniqueness and naturality from categories.tex Tag 0037 and lemma-unit-counit-relations. Formalized by K1 on 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -221,9 +198,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proetale-ringed-open-closed"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -281,5 +256,15 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, docstrings, edge cases, canonical pro-etale declarations, and three-file scompile evidence checked; no substantive or mechanical findings.; reverted the delivery's change of existing node(s) def-weil-proetale-inverse-image (--revert-nodes; kept as on newtargets-dag)",
   "statement_corrected": true
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T005309-L-2749800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

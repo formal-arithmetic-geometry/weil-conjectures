@@ -1,0 +1,108 @@
+{
+ "id": "lem-sfb-proetale-open-disjoint-direct-image",
+ "kind": "statement",
+ "title": "Direct image restricts to zero on a disjoint pro-etale open",
+ "statement": "Let i:Z→X be any morphism of schemes [def-pc-scheme] and j:U→X an open immersion [def-weil-open-immersion] whose image is disjoint from that of i. For every sheaf G of abelian groups on Z_proet [def-weil-pbc-proetale-site], j inverse-image of i direct-image of G is zero, for the actual functors of [def-weil-proetale-inverse-image]. No quasi-compactness or closedness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Section on morphisms of pro-etale topoi and open immersions; empty-fibre evaluation, also used in the proof of Tag 09AH. Existing source proof is isZero_upperStar_lowerStar_of_disjoint in FiniteCoefficient/UpperLowerStar/ClosedImmersion.lean."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Open inverse image is canonically restriction to the localized open site. On an object T of U_proet, restriction of i_*G evaluates G on T times_X Z. Disjointness makes that scheme empty. The empty-cover sheaf condition makes its sections a terminal abelian group, hence zero. This proves that the restricted sheaf is zero. Transport along upperStarIsoOpenImmersionRestriction gives the actual inverse-image formulation. This is the existing source theorem isZero_upperStar_lowerStar_of_disjoint, specialized to Ab.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Empty-fibre calculation already formalized in the existing source theorem; K1 attaches its abelian specialization rather than adding a theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restricting a direct image of a sheaf to an open subset disjoint from the image of the morphism gives a zero sheaf",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.RingedSpace.res_zero, CategoryTheory.Sheaf.ΓRes and AlgebraicGeometry.basicOpen_eq_bot_iff. None is the pro-etale disjoint-image theorem; the existing source result was found by local rg and its signature and proof were read.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing source theorem specialized to Ab."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsZero\", \"Sheaf\"",
+   "results": "3 hits: Sheaf.subsingleton_H_of_isZero, Scheme.isZero_ellAdicSheaf_of_isEmpty, TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero. None states the disjoint pro-etale direct-image restriction.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib replacement; existing source declaration matches."
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_upperStar_lowerStar_of_disjoint",
+   "results": "Existing source declaration in WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/ClosedImmersion.lean; it accepts arbitrary Grothendieck abelian coefficient categories, arbitrary i, and disjoint open j. Read the declaration and its proof through openImmersionRestriction and the canonical inverse-image comparison.",
+   "date": "2026-10-18",
+   "verdict": "Exact specialization to Ab."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction",
+  "date": "2026-10-18",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "Proof (2), final composition-compatibility sentence: support reconstruction in the mixed open/closed comparison; orthogonality used to establish the open counit isomorphism.",
+   "via": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-proetale-supported-reconstruction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.ProEtale.isZero_upperStar_lowerStar_of_disjoint",
+  "statement": "lemma isZero_upperStar_lowerStar_of_disjoint (i : Z ⟶ X) (j : U ⟶ X) [IsOpenImmersion j]\n    (hij : Disjoint (Set.range i.base) (Set.range j.base)) (G : Sheaf (ProEt.topology Z) A) :\n    IsZero ((j)^*[A].obj ((i)_*[A].obj G))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-18",
+  "note": "Existing theorem, specialized to Ab; no new Lean declaration or sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T005309-L-2749800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261019T005309-L-2749800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
