@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-hom-complex-sections-cochains-comm-universes",
+ "kind": "lemma",
+ "title": "Section cochain identifications respect the Hom differential with independent coefficient universe",
+ "statement": "For a ringed site [def-pur-localized-ringed-site], commutative ring sheaf R, object U and arbitrary module-sheaf cochain complexes L,I [def-pc-cochain-complex-modules], let S be sections at U of their sheaf Hom complex [def-pur-hom-complex], res restriction to U and π its chosen projections. Suppose additive equivalences e_n from S.X n to external degree-n cochains are given, and each component at p,q with p+n=q and localized W equals the evaluated projection π(L,I,n,p,q) applied to the section. Then for all integers i,j with i+1=j and all x in S.X i, e_j(S.d i j x)=δ i j(e_i x), where δ is Mathlib external Hom differential. No cycles or homology conclusion is assumed or asserted. This universe-general form takes C : Type u with Category v and coefficient/module universe max u v r, for arbitrary r; assume abelian-group sheafification and its locally bijective characterization on the original site. It uses the same sheaves, restriction, Hom complex, differentials, and induced maps as the original source statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Section 21.34, construction and differential of Hom complexes; Tag 0A8Y, Equation 21.34.0.1"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Work with objects in Type u, arrows in Type v, and coefficient rings and modules in Type (max u v r). Use the existing siteAbelianHasSheafify and siteAbelianWEqualsLocallyBijective instances on the slice whenever an abelian or exactness instance is needed. All these instances are proved, and the given base-site instances are retained.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p+j=q, use the differential projection identity of homComplex_projections_exists with q′=p+i and p′=p+1. Evaluate at U and at W, preserving subtraction and integer multiplication. Internal Hom pre- and postcomposition become composition with the restricted complex differentials.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the hypothesized component formulas for e_i and e_j. The external differential formula δ_v uses j.negOnePow on the second summand; from j=i+1 derive j.negOnePow=-i.negOnePow. Thus both component maps agree. Extensionality of module-sheaf morphisms and cochains concludes. At i=0 this is d_I f-f d_L; at i=-1 it is d_I f+f d_L, and zero complexes give zero on both sides.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-sc-hom-complex-projections",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-19",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Section 21.34, construction and differential of Hom complexes; Tag 0A8Y, Equation 21.34.0.1; universe-general adaptation of the existing fully proved specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of abelian groups on an essentially small site and locally bijective maps",
+   "results": "Mathlib provides sheafification, locally bijective criteria, and module sheafification; no independent-universe sheaf Hom comparison.",
+   "date": "2026-10-19",
+   "verdict": "Use the existing Mathlib and library infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom computed by functorial K-injective replacement inverts quasi-isomorphisms and is independent of replacement",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective and localization factorization; no sheaf-valued independent-universe result.",
+   "date": "2026-10-18",
+   "verdict": "General tools used, no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplexFunctor|homComplex_sections|localized_restriction|WEqualsLocallyBijective.ofEssentiallySmall",
+   "results": "The repository has proved specializations in coefficient universe max u v. Their proof chains generalize once coefficients and slice-site sheafification instances are explicit. SiteAbelian instances already exist in Sheaf.CategoryTheory.Sites.RGammaDerivedLimit.",
+   "date": "2026-10-19",
+   "verdict": "Generalize the existing proof, preserving every specialized declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses",
+  "date": "2026-10-19",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-derived-internal-hom",
+   "place": "Independent-universe realization of lem-pur-hom-complex-sections-cochains-comm",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexSectionsCochainsCommOfUniverses",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexSectionsCochainsCommOfUniverses.lean",
+  "declaration": "CategoryTheory.homComplex_sections_cochains_commOfUniverses",
+  "declarations": [
+   "CategoryTheory.homComplex_sections_cochains_commOfUniverses"
+  ],
+  "statement": "theorem homComplex_sections_cochains_commOfUniverses {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] (R : Sheaf J CommRingCat.{max u v r}) (U : C) (L I : CochainComplex (SheafOfModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R)) ℤ) : let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R let E := (SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙ forget₂ (ModuleCat.{max u v r} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ) letI := module_overFunctor_preservesZero R₀ U let res := (SheafOfModules.overFunctor.{max u v r} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ) let S := E.obj (homComplex (R := R) L I) let π := Classical.choose (homComplex_projections_exists.{u, v, max u v r, max u v r} (J := J) (R := R)) ∀ (e : ∀ n : ℤ, S.X n ≃+ CochainComplex.HomComplex.Cochain (res.obj L) (res.obj I) n), (∀ (n : ℤ) (x : S.X n) (p q : ℤ) (hpq : p + n = q) (W : (Over U)ᵒᵖ), ((e n x).v p q hpq).val.app W = (((π L I n p q hpq).val.app (op U)) x).app W) → ∀ (i j : ℤ), i + 1 = j → ∀ x : S.X i, e j (S.d i j x) = CochainComplex.HomComplex.δ i j (e i x)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-19",
+  "note": "Proved universe companion of lem-pur-hom-complex-sections-cochains-comm; the specialized module is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261019T002530-L-2148805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261019T002530-L-2148805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

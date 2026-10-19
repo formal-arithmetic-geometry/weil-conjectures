@@ -28,9 +28,9 @@
  ],
  "proof": [
   {
-   "text": "For a pair (t.op,s) of quasi-isomorphisms, naturality of eta and two-out-of-three show that I(s) is a quasi-isomorphism. Both I-targets are K-injective. Apply quasiIso_homComplex_map to I(s) and t, then DerivedCategory.isIso_Q_map_iff_quasiIso. This proves derivedInternalHom_inverts and permits Localization.lift.",
+   "text": "For a pair (t.op,s) of quasi-isomorphisms, naturality of eta and two-out-of-three show that I(s) is a quasi-isomorphism. Both I-targets are K-injective. Apply quasiIso_homComplex_mapOfUniverses to I(s) and t, then DerivedCategory.isIso_Q_map_iff_quasiIso. This proves derivedInternalHom_inverts and permits Localization.lift.",
    "uses": [
-    "lem-pur-rhom-well-defined",
+    "lem-pur-rhom-well-defined-universes",
     "def-pc-quasi-iso-modules",
     "def-weil-abstract-derived-category"
    ],
@@ -40,7 +40,7 @@
    "text": "Use the source-library functorial K-injective resolution I0 and its map eta0 in the Grothendieck abelian module category. Localization.fac computes the lifted bifunctor on pairs of complexes. For an arbitrary replacement I, compare I0 and I through the composite M ↦ I(I0(M)): eta at I0(M) gives I0(M) to I(I0(M)), while I(eta0 at M) gives I(M) to I(I0(M)). Both are quasi-isomorphisms between K-injective targets, the latter by naturality and two-out-of-three. Applying Hom-complex followed by Q makes both natural transformations isomorphisms. Compose the factorization isomorphism with the first and the inverse of the second to prove derivedInternalHom_comparison.",
    "uses": [
     "def-pur-hom-complex",
-    "lem-pur-rhom-well-defined",
+    "lem-pur-rhom-well-defined-universes",
     "def-weil-abstract-derived-category",
     "def-pc-quasi-iso-modules"
    ],
@@ -49,7 +49,7 @@
   {
    "text": "For a K-injective representative Ic, eta0 at Ic is a quasi-isomorphism between K-injective complexes. Applying Hom(Lc,-) and Q gives an isomorphism from Q Hom(Lc,Ic) to Q Hom(Lc,I0(Ic)). Evaluate the canonical comparison at (op Lc,Ic), compose with the inverse of this isomorphism, and transport along the given representative isomorphisms via derivedInternalHom.mapIso. This proves derivedInternalHom_obj_iso without lifting any morphism from the derived category to a chain map.",
    "uses": [
-    "lem-pur-rhom-well-defined",
+    "lem-pur-rhom-well-defined-universes",
     "def-pur-hom-complex",
     "def-weil-abstract-derived-category"
    ],
@@ -57,17 +57,17 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-rhom-well-defined",
+  "lem-pur-rhom-well-defined-universes",
   "def-pc-quasi-iso-modules",
   "def-weil-abstract-derived-category",
   "def-pur-hom-complex"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P2",
-  "date": "2026-10-12",
+  "group": "E2",
+  "date": "2026-10-19",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 08J7 and Lemma 0A95; natural comparison through the composite resolution written by P2"
+  "place": "Section 08J7 and Lemma 0A95; proved independent-universe chain, localization factorization, and composite-resolution comparisons."
  },
  "mathlib_searches": [
   {
@@ -146,13 +146,13 @@
   "note": "Every object, hypothesis and conclusion clause matches the node, through the recorded declarations: D_T=verdierDual into dualizingComplex=R(aT)^! of the unit; G=rightAdjoint of R(i_*) via the closed-ambient instance; D_Z=RHom into G omega_T; the 4 ctf memberships and D_Z preservation use finiteTorConstructibleEtale; hPF is IsIso of the canonical rightDerivedLowerStarProjectionMap, equivalent to the node's opposite-order PF by two symmetries. q, r_K and alpha were recomputed against node steps 2 and 4. boundaryAlphaHomChain is 7 Equiv factors independent of alpha and matches the displayed chain with the step-1 uncurrying convention. Clauses: IsIso, chain = b >> alpha for all ctf B, contravariant naturality for every admissible K'. No extra hypotheses; universes Scheme.{u}, ModuleCat.{u+1}. Level n+1 covers every n>=1. Edge cases K=0, B=0, Z empty, i=id and signs checked; no pro-etale substitute. Dependency repairs: DualityPairing keeps all old declarations and adds IsEtaleKoszulSymmetry/etaleKoszulSymmetry (HEq-pinned to the Koszul braiding, sorry'd existence theorem, same pattern as the landed bidualityMap); DerivedInternalHomOfUniverses adds only a public import of Etale.Derived.Hom. No hollow definitions; sorry only as the whole proof of two named theorems; docstrings with source and blueprint present; lean.statement verbatim. nt_compile --json of all 3 files: rc 0, no errors (3.7/10.7/13.6 s). Observation, not blocking: the def-weil-finite-tor-amplitude record is rebound to the etale finiteTorConstructibleEtale and drops the pro-etale/integral/field declarations from its list (permitted by section 1(B); flagged for the lead)."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-c4240",
-  "group": "P2",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T095918-L-322426",
+  "landing": "20261019T002530-L-2148805",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four declaration signatures and the unchanged definition against the clone, the three proofs against the node, and import changes against all 24 direct importers; compilation and axiom checks passed."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
