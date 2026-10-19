@@ -37,7 +37,15 @@ Proof: compose the kernel map of a sum with the monic kernel inclusion. Naturali
 this the sum of the two composites. Cancel the inclusion; the same argument handles zero. -/
 theorem supportKernelAdditive {X U : Scheme.{u}} (j : U ⟶ X) :
     (finiteSupportedSections Λ j).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  let ι := finiteSupportedSectionsι Λ j
+  have : Mono (ι.app N) :=
+    inferInstanceAs (Mono (((evaluation _ _).obj N).map
+      (kernel.ι (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit)))
+  apply (cancel_mono (ι.app N)).1
+  rw [Preadditive.add_comp, ι.naturality, ι.naturality, ι.naturality]
+  simp
 
 attribute [instance] supportKernelAdditive
 
@@ -47,7 +55,8 @@ Proof: `finiteClosedUpperShriek` is the composite of the additive supported-kern
 functor and the additive module inverse image; composition preserves sums. -/
 theorem supportShriekAdditive {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X) :
     (finiteClosedUpperShriek Λ s j).Additive := by
-  sorry
+  unfold finiteClosedUpperShriek
+  infer_instance
 
 attribute [instance] supportShriekAdditive
 
@@ -71,7 +80,12 @@ theorem supportModelInclusion_unit_zero
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
     (supportModelInclusion Λ s j hPair).app M ≫
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app M = 0 := by
-  sorry
+  have hz : (finiteSupportedSectionsι Λ j).app M ≫
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app M = 0 :=
+    congrArg (fun α ↦ α.app M)
+      (kernel.condition (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit)
+  dsimp [supportModelInclusion]
+  rw [Category.assoc, hz, comp_zero]
 
 /-- The complex `C(I)=j_*j^*I`, applied termwise. Source: blueprint
 `def-pur-support-triangle` (blueprint: def-pur-support-triangle). -/
