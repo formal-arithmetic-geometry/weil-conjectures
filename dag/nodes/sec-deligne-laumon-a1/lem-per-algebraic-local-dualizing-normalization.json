@@ -11,9 +11,59 @@
   "def-per-algebraic-normalized-dualizing",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\kappa=A/\\mathfrak m$. This is a field since $\\mathfrak m$ is maximal: for $a\\notin\\mathfrak m$, the equality $(a)+\\mathfrak m=A$ supplies an inverse to its residue class. Thus $B$ is Noetherian (its only ideals are $0$ and $B$), and $A\\to B$ is finite since $1$ generates $B$ as an $A$-module. Apply [lem-trf-finite-map-dualizing-transfer] with $L=\\Omega$. The bounded-injective, finite-cohomology, and scalar-action hypotheses are precisely those of [def-per-algebraic-normalized-dualizing]. The resulting $B$-complex $\\Omega_B=R\\operatorname{Hom}_A(B,\\Omega)$ therefore satisfies all three algebraic-dualizing conditions over $B$.",
+   "uses": [
+    "lem-trf-finite-map-dualizing-transfer",
+    "def-per-algebraic-normalized-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7L (lemma-find-function), proof: the derived Hom is dualizing over the residue-field quotient by Tag 0AX0."
+   }
+  },
+  {
+   "text": "Apply [lem-per-algebraic-field-dualizing-shift] to $\\Omega_B$ over the field $B=\\kappa$. It gives $\\Omega_B\\cong\\kappa[s]$ for some integer $s$ in $D(\\kappa)$. Restricting scalars gives the required isomorphism in $D(A)$: the restriction functor leaves the underlying complexes, kernels and images unchanged, hence preserves quasi-isomorphisms and descends to the localization defining the derived categories [def-weil-abstract-derived-category]. Its value on $\\Omega_B$ is precisely $R\\operatorname{Hom}_A(\\kappa[0],\\Omega)$ by the transfer statement.",
+   "uses": [
+    "lem-per-algebraic-field-dualizing-shift",
+    "def-weil-abstract-derived-category",
+    "lem-trf-finite-map-dualizing-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7L (lemma-find-function), proof: dualizing complexes over the residue field are unique up to shifts; Tag 0A7M, opening paragraph."
+   }
+  },
+  {
+   "text": "Use the Hom-complex model of [def-pur-derived-internal-hom]. For a bounded injective representative $I$ of $\\Omega$, [lem-weil-pbc-bounded-below-injectives-kinjective] ensures that $I$ and every shifted bounded injective complex are K-injective, so these Hom complexes compute derived Hom. Now shifting gives the bounded injective representative $I[-s]$ and $H^j(I[-s])=H^{j-s}(I)$, so finiteness is preserved. Since $\\kappa[0]$ is in degree zero, the Hom-complex formula directly gives $\\operatorname{Hom}^{\\bullet}_A(\\kappa[0],I[-s])=\\operatorname{Hom}^{\\bullet}_A(\\kappa[0],I)[-s]$. Thus $R\\operatorname{Hom}_A(\\kappa[0],\\Omega[-s])\\cong\\kappa[s][-s]\\cong\\kappa[0]$. The scalar-action condition is preserved too: simultaneous shifting identifies $\\operatorname{Hom}^{\\bullet}_A(I[t],I[t])$ with $\\operatorname{Hom}^{\\bullet}_A(I,I)$ by reindexing and multiplying a degree-$n$ cochain by $(-1)^{tn}$; the Hom differential formula verifies this is a chain isomorphism, and degree-zero scalar multiplication is unchanged. Set $t=-s$. All three dualizing conditions and the normalization clause of [def-per-algebraic-normalized-dualizing] now hold.",
+   "uses": [
+    "def-per-algebraic-normalized-dualizing",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7M (section-dualizing-local), opening paragraph: normalization is the shift for which RHom from the residue field is concentrated in degree zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-map-dualizing-transfer",
+  "def-per-algebraic-normalized-dualizing",
+  "lem-per-algebraic-field-dualizing-shift",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7L (lemma-find-function) and Tag 0A7M (section-dualizing-local), opening paragraph; the finite-map transfer is recorded as Tag 0AX0."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +99,31 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{a : ℕ} (α : Ext X Y a) : ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (a : ℤ)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, this function maps an element of the Ext group $ \\\\text{Ext}^a(X, Y) $ in degree $ a $ to the hom-set in the derived category between\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom'\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(α : Ext X Y n) :\\n  letI := HasDerivedCategory.standard C\\n  ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, this function maps an element of the Ext group $ \\\\text{Ext}^n(X, Y) $ to the hom-set in the derived category between the $ n $-shift\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{n : ℕ} : Ext.{w} X Y n ≃ ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is equivalent to the hom-set in the derived category between the $ n $-shifted single-term cochain com\"}\n  {\"name\": \"CochainComplex.isStrictlyGE_shift\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) [K.IsStrictlyGE n] (a n' : ℤ) (h : a + n' = n) : (K⟦a⟧).IsStrictlyGE n'\", \"doc\": \"If a cochain complex $ K $ is strictly supported in degrees $ \\\\geq n $, then shifting $ K $ by an integer $ a $ results in a complex $ K[a] $ that is strictly supported in degrees $ \\\\geq n' $, where $\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.rightUnshift_rightShift\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a n' : ℤ) (hn' : n' + a = n) : (γ.rightShift a n' hn').rightUnshift n hn' = γ\", \"doc\": \"For cochain complexes $K$ and $L$ in a preadditive category, an integer $a$, and a cochain $\\\\gamma$ of degree $n'$ in the homomorphism complex $\\\\text{Hom}(K, L[a])$, applying the right unshift operati\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.rightShift\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"(a n' : ℤ) (hn' : n' + a = n) : Cochain K (L⟦a⟧) n'\", \"doc\": \"For cochain complexes $K$ and $L$ in a preadditive category, and integers $a, n', n$ satisfying $n' + a = n$, the right shift operation constructs a cochain of degree $n'$ in the homomorphism complex \"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.rightUnshift\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift\", \"type\": \"{n' a : ℤ} (γ : Cocycle K (L⟦a⟧) n') (n : ℤ) (hn : n' + a = n) : Cocycle K L n\", \"doc\": \"Given cochain complexes $K$ and $L$ in a preadditive category, an integer $a$, and a cocycle $\\\\gamma$ of degree $n'$ in the homomorphism complex $\\\\text{Hom}(K, L[a])$, this constructs a cocycle of deg\"}\n",
    "date": "2026-10-19",
    "verdict": "No match: the returned definitions of Ext, shifts, ordinary duals, cotangent spaces, localization, and Krull dimension do not state this assertion about algebraic normalized dualizing complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize a dualizing complex over a Noetherian local ring by shifting RHom from its residue field",
+   "results": "Returned: IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing, localCohomology.isoSelfLERadical, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsLocalRing.finrank_CotangentSpace_eq_one_iff, IsLocalRing.subsingleton_cotangentSpace_iff, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, IsLocalRing.finrank_cotangentSpace_le_one_iff, DerivedCategory.exists_iso_Q_obj_of_isGE; ; none states the dualizing-complex assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom, DerivedCategory, shift",
+   "results": "Returned: ; loogle: unknown identifier 'RHom'; none states the dualizing-complex assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|semidualizing|Matlis",
+   "results": "Returned: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean; ; none states the dualizing-complex assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-top-nonvanishing",
@@ -80,5 +151,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-algebraic-local-dualizing-normalization",
+  "worker": "stage1",
+  "summary": "Split the normalization argument into finite-map transfer to the residue field, the field case that every algebraic dualizing complex is a shift of the field, and the elementary shift calculation yielding the normalized complex. The item statement and hypotheses are unchanged; the existing finite-map transfer node is cited for the quotient step. The resumed review corrected the sandbox layout and search transcription, and made scalar-action invariance under simultaneous shifts explicit.",
+  "blueprint": "The item realizes the supporting input in the ancestor proof concerning the meaning and normalization of the algebraic dualizing complex obtained from a Cohen presentation (Tag 0DXE support). The three steps correspond respectively to residue-field transfer, field uniqueness up to shift, and the normalization shift calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-map-dualizing-transfer",
+    "why": "Generic commutative-algebra transfer of an algebraic dualizing complex along the finite quotient A to kappa; the perverse unit has no replacement for this ring-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "The general bounded-below injective implies K-injective theorem justifies the concrete Hom-complex calculation in modules; it is a generic derived-category tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-map-dualizing-transfer",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-bad6e98a9",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-bad6e98a9 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-algebraic-field-dualizing-shift and every cited statement in full, against Stacks dualizing.tex 0A7F (l.2702), 0AX0 (l.2808), 0A7L (l.2886) and 0A7M (l.2906). The three steps follow the 0A7L proof: transfer to the residue field, the field case unique up to shift, then normalization by shifting. Step 1: the hypotheses of the 0AX0 transfer node are exactly clauses (i)-(iii) of def-per-algebraic-normalized-dualizing. Step 2: restriction of scalars from D(κ) to D(A) is exact and recovers RHom_A(κ[0],Ω). Step 3: I[-s] is K-injective by the Mathlib leaf; Hom^•(κ[0],I[-s]) = Hom^•(κ,I)[-s]; the (-1)^{tn} reindexing is a chain isomorphism that preserves the scalar action. I checked the sign convention on a DVR (s=-1, A[1] is normalized) and on a field (k[r] gives s=r). The new field node is true: over a field K is a sum of shifted H^j, and End in degree 0 equal to k forces exactly one H^j, of dimension 1. It fails correctly for 0, k⊕k[1] and k^2. It is statement-only, self-contained, has source tags and searches, and is strictly smaller than the item with no cycle. Searching the DAG (0A7F/0A7L/0AX0, 'scalar-action map', 'algebraic dualizing', 'unique up to shift') found no duplicate. Batch-5 flag on lem-trf-finite-map-dualizing-transfer: it is generic 0AX0 commutative algebra, unsplit with empty proof_deps, and its 179-node closure contains no other trf, Poincaré or sk node (the item's 183-node closure neither). It is not part of the trace formula or Poincaré duality, so I accept it. I accept both declared tool uses (the transfer node and the bounded-injective ⇒ K-injective Mathlib leaf). No SGA is used, and the target statement is unchanged. No fixes."
  }
 }
