@@ -29,74 +29,67 @@
  ],
  "proof": [
   {
-   "text": "Fix the compactification $c=(j,p)$ and its pullback $c'=(j',p')$ of [def-cbc-compact-support-square]; $f'$ is separated of finite type and $c'$ is a compactification of it by that definition. $A$ is a finite commutative ring and $f$ is separated of finite type, so [lem-pur-co-smooth-exchange-transport] applies to the square with $u,T,U$ there read as $f,X,Y$ here and $w,u'$ as $u,f'$. Its map $C_{c,L}$ (normalized proper direct-image comparison $b_p$ followed by $Rp_{\\mathrm{proet},*}$ of the extension-by-zero comparison $e_j$) is, by the explicit formula $c_{G,\\mathrm{id}}=b_{p}^{-1}\\circ Rp_{\\mathrm{proet},*}(e_j^{-1})$ in [lem-sf-class-compact-support-comparison], the inverse of that lemma's comparison for the identity witness; this is the $C_{c,N}$ of the statement, and likewise $C_{c',N'}$. Its $a_v,a_w$ are the natural isomorphisms $\\kappa_v,\\kappa_u$ of [lem-weil-pbc-comparison-pullback], and its $E^e_u$ is the exchange $E^e$ of [def-cbc-exchange-map]. Hence $S_N,T_N$ are exactly the lemma's $S_L,T_L$ at $L=N$, and the lemma gives, naturally in $N\\in D^+(X_{\\mathrm{et}},A)$,\n$$T_N\\circ C_{Y'}(E^e_N)=E^p_{C_XN}\\circ S_N.$$",
+   "text": "Use the supplied compactification c and its pullback c.ofIsPullback sq. The normalized source and target paths S and T, and compactExchangeTransportComparison, are the specified isomorphisms of lem-pur-co-smooth-exchange-transport. The finite coefficient instance follows from the positive purity level. All bounded-below inclusions and compact-support compatibility maps are already explicit in the definitions of the item.",
    "uses": [
     "def-cbc-compact-support-square",
     "def-cbc-exchange-map",
-    "lem-pur-co-smooth-exchange-transport",
+    "def-sf-comparison-derived-pullback",
     "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-pur-co-smooth-exchange-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-    "place": "Transport of compact-support base change and transposition: identify the chosen compactification comparisons and the exchange."
+    "place": "Transport of compact-support base change, counits and adjunction transposes; formalized by G4."
    }
   },
   {
-   "text": "By [thm-cbc-finite-torsion] (finite commutative $\\Lambda=A$, $f$ separated of finite type with compactification $c$, $v$ arbitrary, $N\\in D^+(X_{\\mathrm{et}},A)$), $E^e_N$ is an isomorphism, hence so is $C_{Y'}(E^e_N)$. The factors $C_{c,N}$, $C_{c',u^*_{\\mathrm{et}}N}$, $\\kappa_{v,F^e_cN}$, $\\kappa_{u,N}$ are isomorphisms, so $S_N$ and $T_N$ are isomorphisms. By the identity of step 1, $E^p_{C_XN}=T_N\\circ C_{Y'}(E^e_N)\\circ S_N^{-1}$ is a composite of isomorphisms, hence an isomorphism, and\n$$(E^p_{C_XN})^{-1}\\circ T_N=S_N\\circ C_{Y'}(E^e_N)^{-1}=S_N\\circ C_{Y'}\\bigl((E^e_N)^{-1}\\bigr).\\qquad(*)$$",
+   "text": "The finite-torsion base-change theorem makes the etale exchange invertible. Therefore S inverse followed by C(E^e) and T defines mateCounitExchangeIso. Apply the witness clause of compactSupport_exchange_transport to the identity witness: its forward map is precisely the ambient pro-etale exchange. This is mateCounitExchangeIso_hom.",
    "uses": [
     "thm-cbc-finite-torsion",
+    "lem-pur-co-smooth-exchange-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
+    "place": "Transport of compact-support base change, counits and adjunction transposes; formalized by G4."
+   }
+  },
+  {
+   "text": "Expand mateCounitCancelled and mateCounitProCounit. Cancel T with its inverse, expand S, and cancel C_c with its inverse under Lv^*. Naturality of the specified pullback comparison kappa_v at the bounded-below etale counit moves Lv^* C(epsilon) past kappa_v; cancel kappa_v with its inverse. Functoriality then identifies the result with C(w), proving mateCounitCancelled_eq. Naturality of the etale counit follows directly from the supplied adjunction counit and the bounded-below compatibility isomorphism; naturality of the inverse exchange gives mateCounitEtaleComposite_naturality.",
+   "uses": [
     "lem-pur-co-smooth-exchange-transport",
-    "lem-sf-class-compact-support-comparison",
     "lem-weil-pbc-comparison-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-    "place": "Transport of compact-support base change: invertibility of the etale exchange and transported pro-etale exchange."
+    "place": "Transport of compact-support base change, counits and adjunction transposes; formalized by G4."
    }
   },
   {
-   "text": "Domains. $G\\in D^+(Y_{\\mathrm{et}},A)$ and $M=RG$ is bounded below by hypothesis, so $u^*_{\\mathrm{et}}M$ is bounded below (exact inverse image) and $v^*_{\\mathrm{et}}G\\in D^+(Y'_{\\mathrm{et}},A)$. By [def-sf-comparison-derived-pullback] all $C_T$-images are bounded below, and $Lv^*C_YG$, $Lu^*C_XM$ are bounded below via $\\kappa_{v,G},\\kappa_{u,M}$. Hence $N'=u^*_{\\mathrm{et}}M$ with witness $\\kappa_{u,M}:C_{X'}N'\\xrightarrow{\\sim}Lu^*C_XM$ and $L=Lv^*C_YG$ lie in the domain of the class-restricted bijection of [thm-sf-ambient-adjoint-class] for $c'$ (its dimension hypothesis holds since $\\overline X'$ is finite type over $k$, as recorded in the statement), and its formula, as normalized in [def-weil-exceptional-inverse-image] and displayed in the statement, applies. The units $\\eta_{Y'}$ at $F^e_{c'}N'$ and at $v^*_{\\mathrm{et}}G$ are isomorphisms natural in their argument by [thm-weil-pbc-site-comparison]. The map $\\varepsilon^p_G=C_Y(\\varepsilon^e_G)\\circ C_{c,M}^{-1}$ is the pro-etale counit by definition in the statement; no further property of it is used.",
+   "text": "Expand the normalized transported transpose already defined in the statement. Cancel kappa_u with its inverse. The cancellation identity gives T followed by z equal to C(w) followed by kappa_v. Expand the comparison adjunction homEquiv by its unit formula. Unit naturality turns its value into w followed by psi. Naturality of the supplied adjunction homEquiv in the target gives J prime(w followed by psi) = J prime(w) followed by R prime(psi). Apply C_X prime to obtain mateCounitTranspose_eq. No existence theorem for an ordinary or comparison-class adjoint is needed, since the adjunctions and normalized transpose formula are supplied explicitly.",
    "uses": [
-    "def-sf-comparison-derived-pullback",
+    "lem-pur-co-smooth-exchange-transport",
     "lem-weil-pbc-comparison-pullback",
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image",
     "thm-weil-pbc-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-    "place": "The adjunction bijections and counits transport: write the counit formula by transposing the identity."
+    "place": "Transport of compact-support base change, counits and adjunction transposes; formalized by G4."
    }
   },
   {
-   "text": "Identity (1). Take $N=M$ in $(*)$ of step 2 and expand $S_M=Lv^*(C_{c,M})\\circ\\kappa_{v,F^e_cM}$:\n$$\\kappa_{v,G}^{-1}\\,Lv^*(\\varepsilon^p_G)\\,(E^p_{C_XM})^{-1}T_M=\\kappa_{v,G}^{-1}\\,Lv^*\\bigl(C_Y(\\varepsilon^e_G)\\circ C_{c,M}^{-1}\\bigr)\\,Lv^*(C_{c,M})\\,\\kappa_{v,F^e_cM}\\,C_{Y'}\\bigl((E^e_M)^{-1}\\bigr).$$\nFunctoriality of $Lv^*$ cancels $C_{c,M}^{-1}$ against $C_{c,M}$, leaving $\\kappa_{v,G}^{-1}\\,Lv^*C_Y(\\varepsilon^e_G)\\,\\kappa_{v,F^e_cM}$. Naturality of $\\kappa_v:C_{Y'}v^*_{\\mathrm{et}}\\Rightarrow Lv^*C_Y$ [lem-weil-pbc-comparison-pullback] at the arrow $\\varepsilon^e_G:F^e_cM\\to G$ gives $Lv^*C_Y(\\varepsilon^e_G)\\circ\\kappa_{v,F^e_cM}=\\kappa_{v,G}\\circ C_{Y'}(v^*_{\\mathrm{et}}\\varepsilon^e_G)$. Hence the left side equals $C_{Y'}(v^*_{\\mathrm{et}}\\varepsilon^e_G)\\circ C_{Y'}((E^e_M)^{-1})=C_{Y'}\\bigl(v^*_{\\mathrm{et}}\\varepsilon^e_G\\circ(E^e_M)^{-1}\\bigr)$, with source $C_{Y'}F^e_{c'}u^*_{\\mathrm{et}}M$ and target $C_{Y'}v^*_{\\mathrm{et}}G$. Naturality in $G$: every factor is natural in $G$ ($\\varepsilon^e$, $C_{c,-}$, $\\kappa$, $E^e$, $E^p$ by steps 1-2).",
+   "text": "The actual derived comparison unit is invertible at the bounded-below object v^*G, by isIso_derivedComparisonAdjunction_unit_app; kappa_v is an isomorphism and the right comparison functor preserves isomorphisms. Thus psi is invertible. For the three naturality equations, first use etale counit and exchange naturality, then adjunction homEquiv naturality in its source and target. Unit and kappa naturality give psi naturality. Substitute mateCounitTranspose_eq on both sides of the pro-etale naturality square and cancel kappa_u. Combine these equations and exchange identification into the stated conjunction. The argument is categorical and covers empty schemes, zero objects and identity base changes.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
-    "lem-pur-co-smooth-exchange-transport",
-    "thm-cbc-finite-torsion"
+    "thm-weil-pbc-site-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-    "place": "Transport of compact-support base change and transposition: substitute the exchange and counit formulas and cancel comparison maps."
-   }
-  },
-  {
-   "text": "Identity (2). Put $z=Lv^*(\\varepsilon^p_G)\\circ(E^p_{C_XM})^{-1}:F^p_{c'}Lu^*C_XM\\to L$, $w=v^*_{\\mathrm{et}}\\varepsilon^e_G\\circ(E^e_M)^{-1}$, $N'=u^*_{\\mathrm{et}}M$, $\\psi=U_{Y'}(\\kappa_{v,G})\\circ\\eta_{Y',v^*_{\\mathrm{et}}G}:v^*_{\\mathrm{et}}G\\to U_{Y'}L$. By the bijection displayed in the statement (step 3 checks its domain), with witness $\\kappa_{u,M}$,\n$$\\beta^p_G\\circ\\kappa_{u,M}=C_{X'}J'\\bigl(U_{Y'}(z\\circ F^p_{c'}(\\kappa_{u,M})\\circ C_{c',N'})\\circ\\eta_{Y',F^e_{c'}N'}\\bigr)=C_{X'}J'\\bigl(U_{Y'}(z\\circ T_M)\\circ\\eta_{Y',F^e_{c'}N'}\\bigr).$$\nBy identity (1) of step 4, $z\\circ T_M=\\kappa_{v,G}\\circ C_{Y'}(w)$. Naturality of $\\eta_{Y'}$ [thm-weil-pbc-site-comparison] at $w$ gives $U_{Y'}C_{Y'}(w)\\circ\\eta_{Y',F^e_{c'}N'}=\\eta_{Y',v^*_{\\mathrm{et}}G}\\circ w$, so the argument of $J'$ is $\\psi\\circ w$. Naturality of the Hom bijection $J'$ of $F^e_{c'}\\dashv R'$ [thm-amb-etale-exceptional-adjoint] in the second variable gives $J'(\\psi\\circ w)=R'(\\psi)\\circ J'(w)=R'(\\psi)\\circ\\beta^e_G$. Applying the functor $C_{X'}$ yields $\\beta^p_G\\circ\\kappa_{u,M}=C_{X'}R'(\\psi)\\circ C_{X'}(\\beta^e_G)$, which is (2); $\\psi$ is an isomorphism, so this is the stated conjugation. Naturality in $G$ follows from that of every factor. Nothing used a point, a nonempty cover, smoothness of $f$ or invertibility of $\\beta^e,\\beta^p$, so empty schemes, zero $G$ and $v=\\mathrm{id}$ are included.",
-   "uses": [
-    "thm-weil-pbc-site-comparison",
-    "thm-amb-etale-exceptional-adjoint",
-    "thm-sf-ambient-adjoint-class",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-    "place": "Transport of compact-support base change and transposition: identify the two transposes by the transported Hom bijection."
+    "place": "Transport of compact-support base change, counits and adjunction transposes; formalized by G4."
    }
   }
  ],
@@ -104,19 +97,16 @@
   "def-cbc-compact-support-square",
   "def-cbc-exchange-map",
   "def-sf-comparison-derived-pullback",
-  "def-weil-exceptional-inverse-image",
   "lem-pur-co-smooth-exchange-transport",
   "lem-sf-class-compact-support-comparison",
   "lem-weil-pbc-comparison-pullback",
-  "thm-amb-etale-exceptional-adjoint",
   "thm-cbc-finite-torsion",
-  "thm-sf-ambient-adjoint-class",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "G4 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-smb-extraordinary.proof.md",
-  "place": "Whole counit-substitution and mate-cancellation calculation, following the parent blueprint proof."
+  "place": "Explicit exchange and counit cancellation, naturality of the supplied adjunction Hom equivalences, and bounded-below comparison unit; no adjoint existence theorem is used."
  },
  "mathlib_searches": [
   {
@@ -241,5 +231,15 @@
   "by": "Q137",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261019T093415-L-2307478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

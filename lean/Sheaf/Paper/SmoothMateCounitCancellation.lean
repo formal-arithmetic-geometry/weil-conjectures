@@ -12,13 +12,6 @@ public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
-import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
-import WeilConjectures.Compactification.BaseChange
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 
 /-!
 # Counit cancellation and transposition under site comparison
@@ -246,6 +239,241 @@ def mateCounitInputMap
       (R.map (DerivedCategory.Plus.ι.map a)))
 
 
+omit [Finite Λ] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitEtaleCounit_naturality
+    (G H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hG : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj))
+    (hH : _root_.DerivedCategory.TStructure.t.plus (R.obj H.obj)) (a : G ⟶ H) :
+    (Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).map
+        (ObjectProperty.homMk (X := ⟨R.obj G.obj, hG⟩) (Y := ⟨R.obj H.obj, hH⟩)
+          (R.map (DerivedCategory.Plus.ι.map a))) ≫
+      mateCounitEtaleCounit Λ c R adj H hH =
+    mateCounitEtaleCounit Λ c R adj G hG ≫ a := by
+  apply ObjectProperty.hom_ext
+  change DerivedCategory.Plus.ι.map
+      ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).map
+        (ObjectProperty.homMk (X := ⟨R.obj G.obj, hG⟩) (Y := ⟨R.obj H.obj, hH⟩)
+          (R.map (DerivedCategory.Plus.ι.map a)))) ≫ _ = _
+  simp only [mateCounitEtaleCounit, ObjectProperty.FullSubcategory.comp_hom,
+    ObjectProperty.homMk]
+  simp only [Category.assoc]
+  have hn := (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+    (ModuleCat.{u + 1} Λ) c).hom.naturality
+      (ObjectProperty.homMk (X := ⟨R.obj G.obj, hG⟩) (Y := ⟨R.obj H.obj, hH⟩)
+        (R.map (DerivedCategory.Plus.ι.map a)))
+  simp only [Functor.comp_map] at hn
+  rw [← Category.assoc]
+  erw [hn]
+  simpa only [Category.assoc, Functor.comp_obj, Functor.comp_map, Functor.id_obj,
+    Functor.id_map, ObjectProperty.ι_obj, ObjectProperty.ι_map, ObjectProperty.homMk] using
+    congrArg
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} Λ) c).hom.app ⟨R.obj G.obj, hG⟩ ≫ ·)
+    (adj.counit.naturality (DerivedCategory.Plus.ι.map a))
+
+omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitEtaleComposite_naturality
+    (G H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hG : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj))
+    (hH : _root_.DerivedCategory.TStructure.t.plus (R.obj H.obj)) (a : G ⟶ H) :
+    (Etale.rightDerivedLowerShriekOfCompactificationPlus
+        (ModuleCat.{u + 1} Λ) (c.ofIsPullback sq)).map
+        (mateCounitInputMap Λ R (u' := u') G H hG hH a) ≫
+      mateCounitEtaleComposite Λ sq c R adj H hH =
+    mateCounitEtaleComposite Λ sq c R adj G hG ≫
+      (Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.map a := by
+  unfold mateCounitEtaleComposite mateCounitInputMap
+  rw [← Category.assoc]
+  have hn := (asIso (Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap
+    Λ sq c)).inv.naturality
+      (ObjectProperty.homMk (X := ⟨R.obj G.obj, hG⟩) (Y := ⟨R.obj H.obj, hH⟩)
+        (R.map (DerivedCategory.Plus.ι.map a)))
+  simp only [Functor.comp_map] at hn
+  erw [hn]
+  simpa only [Etale.rightDerivedLowerShriekOfCompactificationPlus,
+    Functor.comp_map, Functor.map_comp, Category.assoc] using
+    congrArg
+      ((asIso (Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap
+        Λ sq c)).inv.app ⟨R.obj G.obj, hG⟩ ≫ ·)
+      (congrArg ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.map)
+        (mateCounitEtaleCounit_naturality Λ c R adj G H hG hH a))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitExchangeIso_hom
+    (M : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (mateCounitExchangeIso Λ sq c M).hom =
+      (rightDerivedLowerShriekOfCompactificationBaseChangeMap
+        (ModuleCat.{u + 1} Λ) sq c).app
+          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj M.obj) := by
+  have h := (compactSupport_exchange_transport Λ sq c).2 M _ (Iso.refl _)
+  simpa [mateCounitExchangeIso, compactExchangeTransportAtWitness] using h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitCancelled_eq
+    (G : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hM : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj)) :
+    mateCounitCancelled Λ sq c R adj G hM =
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y').mapDerivedCategory.map
+        (DerivedCategory.Plus.ι.map (mateCounitEtaleComposite Λ sq c R adj G hM)) := by
+  simp only [mateCounitCancelled, mateCounitProComposite, mateCounitExchangeIso,
+    mateCounitProCounit, mateCounitEtaleComposite, Iso.trans_inv, Iso.symm_inv,
+    Functor.mapIso_inv, Iso.app_inv, Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [compactExchangeTransportSource, Iso.trans_hom, Iso.app_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Iso.symm_hom, Functor.associator_inv_app, Category.id_comp, Category.assoc]
+  simp only [Functor.map_comp, Category.assoc, Functor.comp_map]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  have hn := (leftDerivedUpperStarComparisonIso v Λ).hom.naturality
+    (mateCounitEtaleCounit Λ c R adj G hM)
+  simp only [Functor.comp_map] at hn
+  erw [← reassoc_of% hn]
+  simp only [Iso.hom_inv_id_app]
+  simp only [Functor.comp_obj, CategoryTheory.Category.comp_id, asIso_inv,
+    NatIso.isIso_inv_app]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitTranspose_eq
+    (G : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hM : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj)) :
+    (leftDerivedUpperStarComparisonIso u' Λ).hom.app ⟨R.obj G.obj, hM⟩ ≫
+        mateCounitProTranspose Λ sq c R adj R' adj' G hM =
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) X').mapDerivedCategory.map
+          (mateCounitEtaleTranspose Λ sq c R adj R' adj' G hM) ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X').mapDerivedCategory.map
+          (R'.map (mateCounitTargetUnit Λ (v := v) G)) := by
+  have hz : (compactExchangeTransportTarget Λ sq c).hom.app ⟨R.obj G.obj, hM⟩ ≫
+      mateCounitProComposite Λ sq c R adj G hM =
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y').mapDerivedCategory.map
+          (DerivedCategory.Plus.ι.map (mateCounitEtaleComposite Λ sq c R adj G hM)) ≫
+        (leftDerivedUpperStarComparisonIso v Λ).hom.app G := by
+    apply (cancel_mono ((leftDerivedUpperStarComparisonIso v Λ).inv.app G)).mp
+    simpa only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app, Category.comp_id,
+      mateCounitCancelled] using mateCounitCancelled_eq Λ sq c R adj G hM
+  have hc : (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y').homEquiv _ _
+      ((compactExchangeTransportTarget Λ sq c).hom.app ⟨R.obj G.obj, hM⟩ ≫
+        mateCounitProComposite Λ sq c R adj G hM) =
+      DerivedCategory.Plus.ι.map (mateCounitEtaleComposite Λ sq c R adj G hM) ≫
+        mateCounitTargetUnit Λ (v := v) G := by
+    rw [hz, Adjunction.homEquiv_unit]
+    simp only [Functor.map_comp, mateCounitTargetUnit]
+    exact ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y').unit.naturality_assoc
+      (DerivedCategory.Plus.ι.map (mateCounitEtaleComposite Λ sq c R adj G hM)) _).symm
+  simp only [mateCounitProTranspose, Iso.hom_inv_id_app_assoc]
+  rw [← Functor.map_comp]
+  apply congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X').mapDerivedCategory.map)
+  change (adj'.homEquiv _ _) (_ ≫ _) =
+    (adj'.homEquiv _ _) (_ ≫ _) ≫ R'.map _
+  simp only [Functor.comp_obj] at hc ⊢
+  rw [hc, ← Category.assoc]
+  exact adj'.homEquiv_naturality_right _ _
+
+omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitEtaleTranspose_naturality
+    (G H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hG : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj))
+    (hH : _root_.DerivedCategory.TStructure.t.plus (R.obj H.obj)) (a : G ⟶ H) :
+    DerivedCategory.Plus.ι.map (mateCounitInputMap Λ R (u' := u') G H hG hH a) ≫
+      mateCounitEtaleTranspose Λ sq c R adj R' adj' H hH =
+    mateCounitEtaleTranspose Λ sq c R adj R' adj' G hG ≫
+      R'.map (DerivedCategory.Plus.ι.map
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.map a)) := by
+  unfold mateCounitEtaleTranspose
+  apply adj'.homEquiv_naturality_left_square
+  rw [← Category.assoc]
+  have hn := (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+    (ModuleCat.{u + 1} Λ) (c.ofIsPullback sq)).inv.naturality
+      (mateCounitInputMap Λ R (u' := u') G H hG hH a)
+  simp only [Functor.comp_map] at hn
+  erw [hn]
+  simp only [Category.assoc]
+  erw [← Functor.map_comp, mateCounitEtaleComposite_naturality Λ sq c R adj G H hG hH a,
+    Functor.map_comp]
+
+omit [Finite Λ] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitTargetUnit_naturality
+    (G H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (a : G ⟶ H) :
+    DerivedCategory.Plus.ι.map
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.map a) ≫
+      mateCounitTargetUnit Λ (v := v) H =
+    mateCounitTargetUnit Λ (v := v) G ≫
+      (comparisonLowerStar (ModuleCat.{u + 1} Λ) Y').rightDerivedFunctor.map
+        ((upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor.map
+          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategory.map
+            (DerivedCategory.Plus.ι.map a))) := by
+  unfold mateCounitTargetUnit
+  rw [← Category.assoc]
+  have hn := (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y').unit.naturality
+    (DerivedCategory.Plus.ι.map
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.map a))
+  simp only [Functor.id_map, Functor.comp_map] at hn
+  erw [hn]
+  simp only [Category.assoc, ← Functor.map_comp]
+  have hk := (leftDerivedUpperStarComparisonIso v Λ).hom.naturality a
+  simp only [Functor.comp_map] at hk
+  erw [hk]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitProTranspose_naturality
+    (G H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hG : _root_.DerivedCategory.TStructure.t.plus (R.obj G.obj))
+    (hH : _root_.DerivedCategory.TStructure.t.plus (R.obj H.obj)) (a : G ⟶ H) :
+    (upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.map
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+          (R.map (DerivedCategory.Plus.ι.map a))) ≫
+      mateCounitProTranspose Λ sq c R adj R' adj' H hH =
+    mateCounitProTranspose Λ sq c R adj R' adj' G hG ≫
+      ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategory ⋙
+        (upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor ⋙
+        (comparisonLowerStar (ModuleCat.{u + 1} Λ) Y').rightDerivedFunctor ⋙ R' ⋙
+        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X').mapDerivedCategory).map
+          (DerivedCategory.Plus.ι.map a) := by
+  let m : (⟨R.obj G.obj, hG⟩ : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶ ⟨R.obj H.obj, hH⟩ :=
+    ObjectProperty.homMk (R.map (DerivedCategory.Plus.ι.map a))
+  have hk := (leftDerivedUpperStarComparisonIso u' Λ).hom.naturality m
+  simp only [Functor.comp_map] at hk
+  apply (cancel_epi ((leftDerivedUpperStarComparisonIso u' Λ).hom.app
+    ⟨R.obj G.obj, hG⟩)).mp
+  erw [← Category.assoc, ← hk, Category.assoc,
+    mateCounitTranspose_eq Λ sq c R adj R' adj' H hH]
+  simp only [← Category.assoc]
+  rw [mateCounitTranspose_eq Λ sq c R adj R' adj' G hG]
+  simp only [Functor.comp_map]
+  erw [← Functor.map_comp,
+    mateCounitEtaleTranspose_naturality Λ sq c R adj R' adj' G H hG hH a,
+    Functor.map_comp]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [mateCounitTargetUnit_naturality Λ G H a]
+
+omit [Finite Λ] in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem mateCounitTargetUnit_isIso
+    (G : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (mateCounitTargetUnit Λ (v := v) G) := by
+  have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) Y'
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.obj G).obj
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) v).mapDerivedCategoryPlus.obj G).property
+  unfold mateCounitTargetUnit
+  infer_instance
+
 /-- Counit cancellation (1), transpose conjugation (2), and their naturality in G.
 The isomorphism used for the inverse exchange is identified with the actual ambient
 exchange in the first clause. The field and coefficient data are exactly the finite
@@ -353,6 +581,20 @@ theorem smoothMate_counit_cancellation
           (comparisonLowerStar (ModuleCat.{u + 1} P.Coefficient) Y').rightDerivedFunctor ⋙
           R' ⋙ (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X').mapDerivedCategory).map
             (DerivedCategory.Plus.ι.map a)) := by
-  sorry
+  refine ⟨mateCounitExchangeIso_hom P.Coefficient sq c ⟨R.obj G.obj, hM⟩,
+    mateCounitCancelled_eq P.Coefficient sq c R adj G hM,
+    mateCounitTranspose_eq P.Coefficient sq c R adj R' adj' G hM,
+    mateCounitTargetUnit_isIso P.Coefficient G, ?_⟩
+  intro H hH _hR'H a
+  refine ⟨?_,
+    mateCounitEtaleTranspose_naturality P.Coefficient sq c R adj R' adj' G H hM hH a,
+    mateCounitProTranspose_naturality P.Coefficient sq c R adj R' adj' G H hM hH a⟩
+  rw [mateCounitCancelled_eq P.Coefficient sq c R adj H hH,
+    mateCounitCancelled_eq P.Coefficient sq c R adj G hM]
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  simpa only [Functor.map_comp] using congrArg
+    ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y').mapDerivedCategory.map)
+    (congrArg DerivedCategory.Plus.ι.map
+      (mateCounitEtaleComposite_naturality P.Coefficient sq c R adj G H hM hH a))
 
 end AlgebraicGeometry.ProEtale
