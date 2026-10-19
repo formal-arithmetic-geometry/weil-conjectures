@@ -17661,3 +17661,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: merged deliver/C6/Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap (stage 3; reviewer PASS; first push; landing 20261019T231053-L-545379 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/C7/Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction (stage 3; reviewer PASS; first push; landing 20261019T231055-L-545656 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/C7/Sheaf.Paper.KunBaseChange (stage 3; reviewer PASS; first push; landing 20261019T231056-L-545820 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:10 L: merged deliver/C7/Sheaf.Paper.SfRationalLocalGlobalPowerTorsion (stage 3; reviewer PASS; after a return; landing 20261019T231058-L-546040 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/sf-rational-local-global-warning-option.md)
