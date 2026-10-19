@@ -1,0 +1,173 @@
+{
+ "id": "lem-cbc-extension-zero-perfect-model-transport",
+ "kind": "statement",
+ "title": "Transport a single local completed constant model across open extension by zero",
+ "statement": "Let A be a commutative ring with adic coefficient datum d. Let j:U→T be an open immersion, a:S→U any scheme morphism, V an object of the small pro-etale site of S, K an unbounded derived module over the completed coefficient ring on U, and P any unbounded A-complex. An isomorphism on V between the inverse image of K along a and the inverse image of the completed constant realization of P on U induces an isomorphism on that same V between the inverse image of j!K along a followed by j and the inverse image of the completed constant realization of that same P on T. All restrictions have their actual inverse-image completed-ring action.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.1.12(1), Proposition 6.6.11; Stacks Tags 03CB, 09BN"
+ },
+ "proof": [
+  {
+   "text": "Construct the constant-presheaf/global-section Hom equivalence at a terminal pro-etale object. Compose it with module sheafification, completed scalar extension and the normalized coefficient equivalence. This proves integralConstantModule is left adjoint to global sections restricted through exchangeScalar. The constructions and both inverse laws are explicit Lean proofs.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1), Proposition 6.6.11; Stacks Tags 03CB, 09BN"
+   }
+  },
+  {
+   "text": "Apply exchangeScalar_comm and the inverse-image adjunction to prove that the completed scalar direct-image map carries constant sections to the same constant sections. This identifies the global-sections right adjoints after direct image. Base change preserves the terminal pro-etale object. Uniqueness of left adjoints gives integralConstantPullIso; mapDerivedCategoryCompIso and mapDerivedCategoryNatIso give integralConstantDerivedPullIso.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1), Proposition 6.6.11; Stacks Tags 03CB, 09BN"
+   }
+  },
+  {
+   "text": "Compare ringed pullback followed by scalar restriction with the actual module inverse image, by uniqueness of its left adjoint. Derive this comparison using exactness. Construct scalar restriction equivalences on the slice and check that scalar restriction and slice restriction commute definitionally. The exact derived slice restriction agrees with the representative-based integralLocalDerived by its factorization and the localization representative isomorphism. These comparisons give normalizedLocalIso for every morphism, cover member and derived object.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1), Proposition 6.6.11; Stacks Tags 03CB, 09BN"
+   }
+  },
+  {
+   "text": "Use full faithfulness of the exact derived scalar equivalence to reflect the given local-model isomorphism into the normalized completed-coefficient presentation on S. The existing cbcOpenUnit_isIso identifies pullback of the open extension with K; d.pullComp composes pullbacks. Apply exact slice restriction to these isomorphisms and to integralConstantDerivedPullIso. Compose the left comparison, the reflected given model, and the inverse of the constant comparison. Transport back through normalizedLocalIso. This is modelTransportOfConstant, applied to the already proved constant-realization comparison, with the same V and P.",
+   "uses": [
+    "thm-cbc-complete-proetale",
+    "lemma-weil-pbc-completed-exchange-coherence",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1), Proposition 6.6.11; Stacks Tags 03CB, 09BN"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.1.12(1), Proposition 6.6.11; implemented by P9 using explicit global-section adjunctions, normalized scalar compatibility, exact derived scalar equivalences and the published open-unit and pullback-composition comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero preserves stratified perfect complexes and vanishes on the closed complement",
+   "results": "8 hits: HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.isZero_extend_X', HomologicalComplex.isZero_extend_X, HomologicalComplex.instIsStrictlySupportedOfNat, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.IsStrictlySupportedOutside, HomologicalComplex.IsStrictlySupportedOutside.isZero, HomologicalComplex.instIsStrictlySupportedStupidTrunc",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, Functor",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*[Pp]erfect|[Pp]erfect.*stratif",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an extension by zero preserves a constant local module complex model on the open subscheme",
+   "results": "8 hits: Finsupp.supportedEquivFinsupp_symm_apply_coe, Submodule.comap_zero, FractionalIdeal.extended_zero, CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits, AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus, AlgebraicGeometry.Scheme.preimage_zeroLocus, AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_zeroLocus, PrimeSpectrum.preimage_comap_zeroLocus_aux",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtensionZeroStratifiedPerfect",
+  "date": "2026-10-19",
+  "group": "P9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-extension",
+   "place": "Proof, sole paragraph: extension by zero retains the perfect local models on the open; transport of each original model on its unchanged covering member",
+   "via": [
+    "lem-cbc-extension-zero-stratified-perfect",
+    "lem-cbc-integral-compact-support-uniform-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExtensionZeroPerfectModelTransport",
+  "file": "lean/Sheaf/Paper/ExtensionZeroPerfectModelTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbc_extension_zero_perfect_model_transport",
+  "statement": "theorem cbc_extension_zero_perfect_model_transport\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {T U S : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]\n    (a : S ⟶ U) (V : S.ProEt)\n    (K : DerivedCategory (pbcModules U (pbcAdicCompletion U d)))\n    (P : completedConstantDerived (ModuleCat.{u + 1} A))\n    (h : Nonempty (integralLocalDerived a (pbcAdicCompletion U d) V K ≅\n      integralLocalDerived a (pbcAdicCompletion U d) V\n        ((integralConstantDerived U d).obj P))) :\n    Nonempty (integralLocalDerived (a ≫ j) (pbcAdicCompletion T d) V\n        ((cbcDerivedOpenShriek d j inferInstance).obj K) ≅\n      integralLocalDerived (a ≫ j) (pbcAdicCompletion T d) V\n        ((integralConstantDerived T d).obj P))",
+  "branch": "sheaf-dag",
+  "by": "P9",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "lemma-weil-pbc-completed-exchange-coherence",
+  "thm-cbc-complete-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261019T093542-L-2325850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261019T093542-L-2325850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
