@@ -5,7 +5,10 @@ Authors: SHEAF groups NV, D2
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+public import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import Sheaf.NumberTheory.Padics.CoefficientExtension

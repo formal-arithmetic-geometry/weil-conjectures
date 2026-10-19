@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-dc-module-devissage",
+ "kind": "statement",
+ "title": "Finite truncation devissage for module-object complexes",
+ "statement": "Let X be a scheme, R a commutative ring object in abelian sheaves on its pro-etale site, and P an isomorphism-closed triangulated object property in D(Mod_R). If P contains F[0] for every constructible R-module F, then P contains every bounded complex with constructible homology. Bounded constructibility is also invariant under isomorphisms.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), cohomological devissage; lem-sfb-dc-tensor-preserves, step 10"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Transport homology along isomorphisms to get isomorphism invariance and apply the existing DerivedCategory.prop_of_bounded theorem to the constructible module-object property. That generic theorem proves the following induction, without a new induction proof here. Induct on the length m of a cohomological interval [a,a+m-1]. At m=0 the object is zero by the t-structure. For the successor step let b=a+m and use the distinguished truncation triangle tau_<b K -> K -> tau_>=b K. Its third term is concentrated in degree b, hence is H^b(K)[-b], with constructible H^b(K). Its first term has one shorter interval and retains constructible homology: below b compare homology by the truncation triangle, and at or above b use its zero homology. Apply the induction hypothesis, shift stability, and distinguished-triangle closure. Finally choose an interval from boundedness.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3), cohomological devissage; lem-sfb-dc-tensor-preserves, step 10",
+  "note": "Restored the reviewed B2 finite-truncation reduction; D3 repairs the consumer and uses C4’s landed tensor single-sheaf proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A triangulated property containing single complexes contains bounded complexes whose homology satisfies a property",
+   "date": "2026-10-18",
+   "results": "Hits: CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated, HomologicalComplex.locallySmall, HomologicalComplex.truncGE.instHasHomology, HomologicalComplex.instHasHomologyObjSingle, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated, HomologicalComplex.truncGE'.truncGE'_hasHomology, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated subcategory containing constructible sheaves in degree zero contains all bounded complexes with constructible homology",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, CategoryTheory.Triangulated.TStructure.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Triangulated.TStructure.ge, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.Plus.instIsTriangulatedPlusQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pushforward|homology)|isGE.*adjunction|isTriangulated.*bounded",
+   "date": "2026-10-18",
+   "results": "No hits.",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-18",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-restricted-functors",
+   "place": "Finite truncation devissage for module-object complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleDevissage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.prop_of_boundedConstructibleModule",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.prop_of_boundedConstructibleModule",
+   "AlgebraicGeometry.ProEtale.isClosedUnderIsomorphisms_boundedConstructibleModule"
+  ],
+  "statement": "lemma prop_of_boundedConstructibleModule {X : Scheme.{u}}\n    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]\n    (P : ObjectProperty\n      (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)))\n    [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]\n    (hP : ∀ F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R,\n      IsConstructibleModuleObject R F →\n      P ((singleFunctor _ 0).obj F))\n    {K : _root_.DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}\n    (hK : boundedConstructible R K) : P K",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T093325-L-2295338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T093325-L-2295338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

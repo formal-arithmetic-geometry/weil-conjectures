@@ -8,9 +8,9 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -52,6 +52,9 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.Paper.SfIntegralDirectImageConstructible
+
+
+import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
@@ -469,8 +472,11 @@ geometric point of characteristic `3`, `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for
 derived self-tensor of `ℤ/2` is unbounded. -/
 instance isMonoidal_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
-    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
-  sorry
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal := by
+  refine { prop_unit := ?_, prop_tensor := ?_ }
+  · exact boundedConstructible_tensor_unit Λ X
+  · intro K L hK hL
+    exact boundedConstructible_tensor_closure Λ X K L hK hL
 
 /-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
 are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. For a general

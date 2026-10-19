@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-dc-tensor-unit",
+ "kind": "statement",
+ "title": "The coefficient object is bounded constructible",
+ "statement": "In [sk-def-sfb-dc-setting], the tensor unit of the derived category of Λ_X-module objects is bounded constructible for every ell-adic finiteness coefficient Λ.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3); the unit part of the monoidal restricted-functor construction"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Identify the derived tensor unit with the single complex of the ordinary unit using the existing DerivedCategory.singleFunctorObjUnitIso theorem. It is concentrated in degree zero. Its degree-zero homology is the regular module, which is the cokernel of the zero map from the rank-zero to rank-one finite free module on the identity cover of the trivial stratification. In every other degree the homology is zero and admits a rank-zero presentation.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.11(3); the unit part of the monoidal restricted-functor construction",
+  "note": "Restored the reviewed B2 finite-truncation reduction; D3 repairs the consumer and uses C4’s landed tensor single-sheaf proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor unit of a derived category is the single complex of the tensor unit",
+   "date": "2026-10-18",
+   "results": "Hits: HomologicalComplex.tensorUnit, CategoryTheory.SemiCartesianMonoidalCategory.isTerminalTensorUnit, CategoryTheory.MonoidalCategoryStruct.tensorUnit, AugmentedSimplexCategory.tensorUnit, CategoryTheory.Dial.tensorUnitImpl, HomologicalComplex.tensorUnitIso, HomologicalComplex.instHasTensorTensorUnit_1, CategoryTheory.Comon.monoidal_tensorUnit_X",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The monoidal unit of the derived category is the degree zero complex of the tensor unit and has no other homology",
+   "date": "2026-10-18",
+   "results": "Hits: HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.tensorUnitIso, HomologicalComplex.tensorUnit, DerivedCategory.instHasZeroObject, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorXTensorUnit, DerivedCategory.singleFunctors, DerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.Plus.instIsTriangulatedPlusQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pushforward|homology)|isGE.*adjunction|isTriangulated.*bounded",
+   "date": "2026-10-18",
+   "results": "No hits.",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-18",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-restricted-functors",
+   "place": "The coefficient object is bounded constructible",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleTensorPreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_unit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_unit"
+  ],
+  "statement": "theorem boundedConstructible_tensor_unit\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :\n    boundedConstructible (condensedRingObj Λ X.left)\n      (𝟙_ (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n        (condensedRingObj Λ X.left))))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T093325-L-2295338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261019T093325-L-2295338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

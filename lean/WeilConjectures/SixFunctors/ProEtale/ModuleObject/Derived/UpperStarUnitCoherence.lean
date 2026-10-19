@@ -246,7 +246,7 @@ private lemma leftDerivedUpperStarUnitIso_hom_comp_left (f : X ⟶ Y) (g : Y ⟶
 omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [Fact ℓ.Prime] in
+  [Fact ℓ.Prime] in
 private lemma leftDerivedUpperStarComp_hom_app_unit_obj (f : X ⟶ Y) (g : Y ⟶ Z) :
     (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ Dᵇc(Z.left)⟦Λ⟧).obj =
       (leftDerivedUpperStarComp Λ f.left g.left).hom.app (𝟙_ _) :=
