@@ -39,13 +39,16 @@
    }
   },
   {
-   "text": "For $\\Lambda=E$ or $\\Qlb$, the standing schemes $X,Y$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their separated finite-type structure maps to $\\operatorname{Spec}k$. Apply [det-def-localizing-closure-ctf-equals-bc] to each: $\\Dctf=\\Dbc$ and their localizing closures agree. Clause (2) of [det-thm-sfb-proper-base-change-rational] now gives preservation of $\\Dctf$ by $Rp_*$. Clause (3) of [det-ambient-ind-derived-sums] puts $\\Loc(\\Dbc(X,\\Lambda))$ inside $\\Dic(X,\\Lambda)$. For every small family in that localizing closure, [sk-lem-proper-unbounded-window-ii] therefore gives precisely the ambient direct-sum comparison required in Step 1. Both hypotheses follow, so Step 1 supplies the exact sum-preserving restriction in these two cases.",
+   "text": "For $\\Lambda=E$ or $\\Qlb$, the standing schemes $X,Y$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their separated finite-type structure maps to $\\operatorname{Spec}k$. Apply [det-def-localizing-closure-ctf-equals-bc] to each: $\\Dctf=\\Dbc$ and their localizing closures agree. Clause (2) of [det-thm-sfb-proper-base-change-rational] now gives preservation of $\\Dctf$ by $Rp_*$. Clause (3) of [det-ambient-ind-derived-sums] puts $\\Loc(\\Dbc(X,\\Lambda))$ inside $\\Dic(X,\\Lambda)$. For every small family in that localizing closure, [sk-lem-proper-unbounded-window-ii] therefore gives precisely the ambient direct-sum comparison required in Step 1. Both hypotheses follow, so Step 1 supplies the exact sum-preserving restriction in these two cases. The rational finiteness theorem uses locally finite-free constructibility, whereas this node uses finite constant models. The equality clause of [sk-thm-sfb-qlbar-two-colimit] identifies their bounded derived predicates for E and Qbar. Apply this equality on both schemes before and after rational proper pushforward. To pass from Hom-universe sums to the larger existing sums quantified here, use the same nonzero-support argument as Step 1, applied only to the family in Dic. The fibre bound required by the stated coproduct theorem comes from the bound in Step 4.",
    "uses": [
     "lem-weil-pbc-qcqs-over-affine",
     "det-def-localizing-closure-ctf-equals-bc",
     "det-thm-sfb-proper-base-change-rational",
     "det-ambient-ind-derived-sums",
-    "sk-lem-proper-unbounded-window-ii"
+    "sk-lem-proper-unbounded-window-ii",
+    "sk-thm-sfb-qlbar-two-colimit",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-pc-dim-base-change"
    ],
    "elementary": false,
    "source": {
@@ -54,7 +57,7 @@
    }
   },
   {
-   "text": "For a finite commutative $\\ell$-primary ring $A$, clause (1) of [det-ctf-finite-proper-localizing] gives $Rp_*\\Dctf(X,A)\\subseteq\\Dctf(Y,A)$ and an exact sum-preserving restriction on the localizing closures. Because these closures are full and closed under ambient sums, their coproducts are ambient coproducts, so its sum comparison is exactly the second hypothesis of Step 1. Both hypotheses hold for finite $A$. No equality $\\Dctf=\\Dbc$ is needed or asserted for a nonregular finite ring.",
+   "text": "For a finite commutative $\\ell$-primary ring $A$, clause (1) of [det-ctf-finite-proper-localizing] gives $Rp_*\\Dctf(X,A)\\subseteq\\Dctf(Y,A)$ and an exact sum-preserving restriction on the localizing closures. Because these closures are full and closed under ambient sums, their coproducts are ambient coproducts, so its sum comparison is exactly the second hypothesis of Step 1. Both hypotheses hold for finite $A$. No equality $\\Dctf=\\Dbc$ is needed or asserted for a nonregular finite ring. The finite discrete coefficient theorem is indexed by rings in the site universe. Replace A by ULift A, equip it with the discrete topology, and construct the condensed ring isomorphism by its continuous-function section maps. Transport both hypotheses using Step 5. If ell^n kills A, use n+1 to meet the positive-exponent convention, also for the zero ring.",
    "uses": [
     "det-ctf-finite-proper-localizing"
    ],
@@ -65,19 +68,32 @@
    }
   },
   {
-   "text": "For $\\Lambda=\\mathcal O_E$, [lem-weil-pbc-qcqs-over-affine] again makes $X,Y$ qcqs, so [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ on both schemes and identifies their localizing closures. Clause (1) of [det-thm-sfb-proper-base-change-integral] sends $\\Dbc(X,\\mathcal O_E)$ into $\\Dbc(Y,\\mathcal O_E)$, giving the first hypothesis. Properness includes finite type by [def-weil-proper-morphism], and $Y$ is quasi-compact; thus [lem-fin-finite-type-fibre-dimension-bound] supplies a uniform integer $d\\ge0$ bounding the dimensions of all fibres of $p$. Clause (3) of [det-prop-int-compactness-direct-sums] applies with this bound and gives sum preservation on $\\Loc(\\Dbc(X,\\mathcal O_E))$, hence on $\\Loc(\\Dctf(X,\\mathcal O_E))$. These are ambient sums by fullness and ambient sum closure, as in Step 1. This is the second hypothesis, and Step 1 proves the integral restriction. Setting $E=\\mathbf Q_\\ell$ in this step and Step 2 gives the $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ cases respectively.",
+   "text": "For O_E, the standing separated finite-type structure maps give qcqs and Noetherian X,Y. Apply [det-def-localizing-closure-ctf-equals-bc] to identify Dctf with the bounded constant-model constructible predicate and their localizing closures. Properness gives finite type and the quasi-compact target, so [lem-fin-finite-type-fibre-dimension-bound] bounds ordinary fibres. Pullback associativity identifies every geometric fibre with the field extension of the ordinary fibre; [lem-pc-dim-base-change], via its proved field-base-change dimension theorem, preserves its dimension and gives the geometric bound needed by [det-prop-int-compactness-direct-sums]. Its heart clause gives bounded constructible proper image for a constructible sheaf placed in degree zero. By [lem-sfb-integral-constant-model-heart-closure], the constant-model constructible heart is closed under kernels, cokernels, extensions and isomorphisms; it also contains zero, by the one-stratum zero presentation (valid on the empty scheme). Consequently its bounded homology predicate is triangulated. Induct on the length of the cohomological interval of K, using the standard truncation triangle, to deduce bounded constructible preservation for every bounded K. In the one-degree case use the single-functor shift isomorphism; the inverted-interval case is zero. Thus the first hypothesis follows after Dctf=Dbc on Y. The last clause of the same direct-sum theorem gives preservation of Hom-universe coproducts on Loc(Dbc); restrict to the nonzero support of any existing larger coproduct as in Step 1 to obtain exactly the second hypothesis. This uses the already-stated heart assertion of the integral direct-sum theorem, so no separate integral proper-base-change theorem is required here.",
    "uses": [
     "lem-weil-pbc-qcqs-over-affine",
     "det-def-localizing-closure-ctf-equals-bc",
-    "det-thm-sfb-proper-base-change-integral",
     "def-weil-proper-morphism",
     "lem-fin-finite-type-fibre-dimension-bound",
-    "det-prop-int-compactness-direct-sums"
+    "lem-pc-dim-base-change",
+    "det-prop-int-compactness-direct-sums",
+    "lem-sfb-integral-constant-model-heart-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
     "place": "Second paragraph, final sentence: integral case quoted there; explicit bounded-constructible preservation and fibre-bound hypothesis."
+   }
+  },
+  {
+   "text": "Transport along a bundled condensed ring isomorphism e: Lambda ≅ Lambda'. Restriction along its inverse is an additive exact equivalence on module objects and hence on derived categories. [lem-sfb-condensed-coefficient-iso-constructible] carries Dctf to Dctf, and the localizing argument of Step 1 carries its closure to the corresponding closure, since an equivalence preserves all existing sums. [def-sfb-derived-comap-lower-star-iso] commutes the transported proper pushforward with this equivalence; extension along the coefficient isomorphism is exact because it is isomorphic to restriction along the inverse. Apply preservation of Dctf on the primed side, transport back, and use the explicit scalar-restriction roundtrip isomorphism to obtain the unprimed generator assertion. For sums, map a family into the primed closure, apply the primed preservation hypothesis, commute pushforward with the equivalences, and reflect colimits through the target equivalence. For Q_l and Z_l, choose the bottom finite intermediate field of the chosen algebraic closure. Its equivalence with Q_l is isometric by the extending norm. Restrict this ring equivalence to norm-at-most-one elements to identify Z_l with its ring of integers, again isometrically. Continuous functions into these topological ring isomorphisms give the required bundled condensed ring isomorphisms. Apply the rational and integral cases. All isomorphisms have constructed data and inverse equations; no arbitrary witness of an unproved existence statement is used.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "def-sfb-derived-comap-lower-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+    "place": "Coefficient specializations in paragraph 2, made explicit at bundled coefficients and site universes; constructed scalar isomorphisms and standard equivalence transport."
    }
   }
  ],
@@ -87,22 +103,26 @@
   "lem-pc-right-derived-functor-triangulated",
   "sk-def-localizing-closure",
   "lem-weil-pbc-triangulated-functor-restriction",
+  "lem-grothendieck-derived-has-coproducts",
   "lem-weil-pbc-qcqs-over-affine",
   "det-def-localizing-closure-ctf-equals-bc",
   "det-thm-sfb-proper-base-change-rational",
   "det-ambient-ind-derived-sums",
   "sk-lem-proper-unbounded-window-ii",
-  "det-ctf-finite-proper-localizing",
-  "det-thm-sfb-proper-base-change-integral",
-  "def-weil-proper-morphism",
+  "sk-thm-sfb-qlbar-two-colimit",
   "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-pc-dim-base-change",
+  "det-ctf-finite-proper-localizing",
+  "def-weil-proper-morphism",
   "det-prop-int-compactness-direct-sums",
-  "lem-grothendieck-derived-has-coproducts"
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "def-sfb-derived-comap-lower-star-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-  "place": "Both paragraphs; finite and integral cases expanded according to the unit first proof paragraph. Step 1 now records the proved generic coproduct-existence tool and the elementary nonzero-support size argument used by the Lean proof (B4, 2026-10-19); steps 2--4 remain open."
+  "place": "Both paragraphs, with finite and integral quoted cases expanded as in the unit first paragraph. K2, 2026-10-19: complete Lean proof of all coefficient cases, bounded truncation induction from the integral heart clause, geometric fibre bound, and explicit coefficient-isomorphism transport. Existing conditional restriction proof retained."
  },
  "mathlib_searches": [
   {
@@ -243,9 +263,9 @@
   "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261019T002507-L-2141551",
+  "landing": "20261019T192759-L-1867170",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
