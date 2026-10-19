@@ -22,6 +22,8 @@ import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.ProperBaseChangeRational
 import Sheaf.Paper.ProperUnboundedCoproducts
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 
 /-!
 # Proper direct image on localizing categories
@@ -41,9 +43,167 @@ module-object derived category and localizing closure. Coproduct indices have un
 
 set_option autoImplicit false
 
-universe u
+universe u v w u' v'
 
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject CategoryTheory.Obj
+
+-- Existing coproducts have only Hom-universe many nonzero summands.
+private theorem small_coproduct_support
+    {C : Type u} [Category.{v} C] [Preadditive C]
+    {I : Type w} (G : I → C) (t : Cofan G) (ht : IsColimit t) :
+    Small.{v} {i // ¬ IsZero (G i)} := by
+  classical
+  let p (i : I) : t.pt ⟶ G i := ht.desc (Cofan.mk (G i) (Pi.single i (𝟙 (G i))))
+  have hp (i j : I) :
+      t.inj j ≫ p i = Pi.single (M := fun j ↦ G j ⟶ G i) i (𝟙 (G i)) j :=
+    ht.fac (Cofan.mk (G i) (Pi.single i (𝟙 (G i)))) (Discrete.mk j)
+  let q : {i // ¬ IsZero (G i)} → (t.pt ⟶ t.pt) := fun i ↦ p i.val ≫ t.inj i.val
+  apply small_of_injective.{v, v, w} (f := q)
+  intro i j hij
+  apply Subtype.ext
+  by_contra hne
+  have he := congrArg (fun f ↦ t.inj i.val ≫ f ≫ p i.val) hij
+  have hi : t.inj i.val ≫ p i.val = 𝟙 (G i.val) := by simp [hp]
+  have hj : t.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
+  have hid : 𝟙 (G i.val) = 0 := by
+    simpa only [q, ← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
+  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
+
+-- Preservation at the Hom universe implies preservation of every existing coproduct.
+private theorem preserves_large_coproducts
+    {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
+    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
+    (hF : ∀ I : Type v, PreservesColimitsOfShape (Discrete I) F) (I : Type w) :
+    PreservesColimitsOfShape (Discrete I) F := by
+  classical
+  constructor
+  intro K
+  let G : I → C := fun i ↦ K.obj ⟨i⟩
+  suffices h : PreservesColimit (Discrete.functor G) F by
+    let := h
+    exact preservesColimit_of_iso_diagram (K₁ := Discrete.functor G) (K₂ := K)
+      F (Discrete.natIsoFunctor (F := K)).symm
+  constructor
+  intro t ht
+  let t : Cofan G := t
+  have : Small.{v} {i // ¬ IsZero (G i)} := small_coproduct_support G t ht
+  let N := {i // ¬ IsZero (G i)}
+  let B := Shrink.{v} N
+  let e : N ≃ B := equivShrink N
+  let r : B → I := fun b ↦ (e.symm b).val
+  let U : N → C := fun i ↦ G i.val
+  let tN : Cofan U := Cofan.mk t.pt (fun i ↦ t.inj i.val)
+  have htN : IsColimit tN := by
+    refine Cofan.IsColimit.mk tN (fun s ↦ ht.desc (Cofan.mk s.pt
+      (fun i ↦ if hi : ¬ IsZero (G i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
+    · intro s i
+      obtain ⟨i, hi⟩ := i
+      change t.ι.app (Discrete.mk i) ≫ _ = _
+      rw [ht.fac]
+      simp only [Cofan.mk_ι_app, dif_pos hi]
+    · intro s m hm
+      apply ht.hom_ext
+      intro ⟨i⟩
+      rw [ht.fac]
+      by_cases hi : ¬ IsZero (G i)
+      · simpa only [tN, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dif_pos hi]
+          using hm ⟨i, hi⟩
+      · exact (not_not.mp hi).eq_of_src _ _
+  let V : B → C := fun b ↦ U (e.symm b)
+  let tB : Cofan V := Cofan.mk t.pt (fun b ↦ tN.inj (e.symm b))
+  have htB : IsColimit tB :=
+    (Cofan.isColimitEquivOfEquiv e.symm tN) htN
+  let := hF B
+  have hmapped : IsColimit (Cofan.mk (F.obj t.pt) (fun b ↦ F.map (tB.inj b))) :=
+    (Cofan.isColimitMapCoconeEquiv F V tB) (isColimitOfPreserves F htB)
+  refine ⟨(isColimitMapCoconeCofanMkEquiv F G t.inj).symm ?_⟩
+  refine Cofan.IsColimit.mk _
+    (fun s ↦ hmapped.desc (Cofan.mk s.pt (fun b ↦ s.inj (r b)))) ?_ ?_
+  · intro s i
+    by_cases hi : ¬ IsZero (G i)
+    · have hh := hmapped.fac (Cofan.mk s.pt (fun b ↦ s.inj (r b)))
+        (Discrete.mk (e ⟨i, hi⟩))
+      change F.map (t.inj (r (e ⟨i, hi⟩))) ≫ _ = s.inj (r (e ⟨i, hi⟩)) at hh
+      have hr : r (e ⟨i, hi⟩) = i := congrArg Subtype.val (e.symm_apply_apply _)
+      rw [hr] at hh
+      exact hh
+    · exact (F.map_isZero (not_not.mp hi)).eq_of_src _ _
+  · intro s m hm
+    apply hmapped.hom_ext
+    intro ⟨b⟩
+    rw [hmapped.fac]
+    exact hm (r b)
+
+private theorem localizingClosure_isLocalizing
+    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (S : ObjectProperty C) : IsLocalizingSubcategory (localizingClosure S) := by
+  let L := localizingClosure S
+  have hIso : L.IsClosedUnderIsomorphisms := ⟨by
+    intro K K' e hK P hP hS
+    let := hP.2.1
+    exact P.prop_of_iso e (hK P hP hS)⟩
+  let := hIso
+  have hZero : L.ContainsZero := ⟨⟨0, isZero_zero C, by
+    intro P hP hS
+    let := hP.1
+    let := hP.2.1
+    exact P.prop_zero⟩⟩
+  have hShift : L.IsStableUnderShift ℤ := ⟨fun n ↦ ⟨by
+    intro K hK P hP hS
+    let := hP.1
+    exact P.le_shift n K (hK P hP hS)⟩⟩
+  have hTri : L.IsTriangulatedClosed₂ := .mk' (by
+    intro T hT h₁ h₃ P hP hS
+    let := hP.1
+    let := hP.2.1
+    exact P.ext_of_isTriangulatedClosed₂ T hT (h₁ P hP hS) (h₃ P hP hS))
+  refine ⟨?_, hIso, ?_⟩
+  · exact
+      { toContainsZero := hZero
+        toIsStableUnderShift := hShift
+        toIsTriangulatedClosed₂ := hTri }
+  · intro I F hF h
+    change ∀ P, IsLocalizingSubcategory P → (∀ K, S K → P K) → P (colimit F)
+    intro P hP hS
+    exact hP.2.2 F hF (fun i ↦ h i P hP hS)
+
+private theorem localizingClosure_map
+    {C D : Type u} [Category.{v} C] [Category.{v} D]
+    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (S : ObjectProperty C) (T : ObjectProperty D) (F : C ⥤ D)
+    [F.CommShift ℤ] [F.IsTriangulated]
+    (hS : ∀ K, S K → T (F.obj K))
+    (hF : ∀ (I : Type u) (G : Discrete I ⥤ (localizingClosure S).FullSubcategory),
+      PreservesColimit (G ⋙ (localizingClosure S).ι) F) :
+    ∀ K, localizingClosure S K → localizingClosure T (F.obj K) := by
+  let L := localizingClosure S
+  let M := localizingClosure T
+  have hL := localizingClosure_isLocalizing S
+  have hM := localizingClosure_isLocalizing T
+  let := hL.1
+  let := hL.2.1
+  let := hM.1
+  let := hM.2.1
+  let P := L ⊓ M.inverseImage F
+  have hP : IsLocalizingSubcategory P := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I G hG h
+    let := hG
+    have hLG : L (colimit G) := hL.2.2 G hG (fun i ↦ (h i).1)
+    refine ⟨hLG, ?_⟩
+    let G' := L.lift G (fun i ↦ (h i.as).1)
+    have : PreservesColimit G F := hF I G'
+    have hMG : M (colimit (G ⋙ F)) :=
+      hM.2.2 (G ⋙ F) inferInstance (fun i ↦ (h i).2)
+    exact M.prop_of_iso (preservesColimitIso F G).symm hMG
+  intro K hK
+  exact (hK P hP (fun K hK ↦ ⟨fun Q hQ hSQ ↦ hSQ K hK,
+    fun Q hQ hTQ ↦ hTQ _ (hS K hK)⟩)).2
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -115,7 +275,54 @@ theorem proper_image_localizing_proper
       Mon.mk (Profinite.continuousMapRingObj E), Mon.mk (Profinite.padicAlgClRingObj ℓ)])
     {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] :
     ProperLocalizingHypotheses Λ.X p → ProperLocalizingRestriction Λ.X p := by
-  sorry
+  intro h
+  let S := constantModelBoundedConstructible Λ.X X ⊓ fun K ↦
+    DerivedCategory.finiteTorAmplitude _ K
+  let T := constantModelBoundedConstructible Λ.X Y ⊓ fun K ↦
+    DerivedCategory.finiteTorAmplitude _ K
+  let L := localizingClosure S
+  let M := localizingClosure T
+  let F := (lowerStar Λ.X p).rightDerivedFunctor
+  have hL := localizingClosure_isLocalizing S
+  have hM := localizingClosure_isLocalizing T
+  refine ⟨hL.1, hM.1, ?_⟩
+  intro instL instM
+  let := hL.2.1
+  let := hM.2.1
+  have hmap : ∀ K : L.FullSubcategory, M (F.obj K.obj) := fun K ↦
+    localizingClosure_map S T F (fun K hK ↦ h.1 ⟨K, hK⟩) h.2 K.obj K.property
+  refine ⟨hmap, inferInstance, ?_⟩
+  let C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (condensedRingObj Λ.X X)
+  have : HasColimitsOfSize.{u + 1, u + 1} C :=
+    IsGrothendieckAbelian.hasColimits C
+  have : HasCoproducts.{u + 1} C :=
+    fun I ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} C (Discrete I)
+  have : HasCoproducts.{u + 1}
+      (DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ.X X))) := derived_hasCoproducts
+  have hι (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I) L.ι := by
+    have hclosed : L.IsClosedUnderColimitsOfShape (Discrete (ULift.{u + 2} I)) :=
+      .mk' (by
+        rintro K ⟨G, hG⟩
+        exact hL.2.2 G inferInstance (fun i ↦ hG ⟨i⟩))
+    let := hclosed
+    have : L.IsClosedUnderColimitsOfShape (Discrete I) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+        (Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I))
+    let := createsColimitsOfShapeFullSubcategoryInclusion (Discrete I) L
+    infer_instance
+  intro I
+  have : PreservesColimitsOfShape (Discrete I) L.ι :=
+    preserves_large_coproducts L.ι hι I
+  constructor
+  intro G
+  have : PreservesColimit (G ⋙ L.ι) F := h.2 I G
+  have : PreservesColimit G (L.ι ⋙ F) := inferInstance
+  have : PreservesColimit G (M.lift (L.ι ⋙ F) hmap ⋙ M.ι) :=
+    preservesColimit_of_natIso G (M.liftCompιIso (L.ι ⋙ F) hmap).symm
+  exact preservesColimit_of_reflects_of_preserves (M.lift (L.ι ⋙ F) hmap) M.ι
+
 
 /-- In the standing separated finite-type positive-characteristic field setting,
 both hypotheses of proper_image_localizing_proper hold for every admissible coefficient.
