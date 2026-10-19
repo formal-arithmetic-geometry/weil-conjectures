@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-int-closed-complement-finiteness",
+ "kind": "statement",
+ "title": "Integral finiteness for the open-complement term of localization",
+ "statement": "Fix a prime $\\ell$ and a finite intermediate extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. Let $k$ be a field of prime characteristic different from $\\ell$, and let $X$ be a separated finite-type $k$-scheme [sk-def-sfb-dc-setting]. For any closed immersion $i:Z\\hookrightarrow X$ [def-weil-closed-immersion], put $j:U=X\\setminus i(Z)\\hookrightarrow X$. In the ordinary derived category of modules over the pulled-back condensed ring $\\mathcal O_E$ [sk-def-sfb-module-objects], the finite-constant-model bounded constructible class $\\Dbc(X,\\mathcal O_E)$ [sk-def-sfb-constructible] is triangulated [def-weil-triangulated-subcategory], and $Rj_*j^*K$ belongs to that class for every $K$ in it.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "def-weil-triangulated-subcategory"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+  "place": "Localization paragraph, third-term constructibility; DAG steps 1 and 4--6"
+ },
+ "proof": [
+  {
+   "text": "X is Noetherian by local finite type over the field and quasi-compactness. The open complement j is quasi-compact; the composite structure map makes U a separated finite-type k-scheme. These instances include empty schemes and the empty open.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the integral constant-model heart closure theorem in exactly the padicIntegersRingObj coefficient presentation. Construct the zero local model as the cokernel of the identity on rank-zero free modules, on the identity cover and single stratum. Isomorphism invariance transports local models. The general weak Serre homology-property theorem gives triangulation after intersecting with boundedness, exactly generators.",
+   "uses": [
+    "lem-sfb-integral-constant-model-heart-closure",
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "IntegralModelsOperations(1) gives j^*K in the constant-model bounded constructible class. The equality Dctf=Dbc for the actual padicIntegersRingObj coefficient gives finite Tor amplitude. Apply integralOpenDirectImage, the open clause of sk-thm-sf-pf-adic, to this object. Its constructibility conclusion is Rj_*j^*K in generators. All functors are exactly the given upperStar and lowerStar derived functors; no coefficient transport is used.",
+   "uses": [
+    "det-lem-integral-models-operations",
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-thm-sf-pf-adic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "det-lem-integral-models-operations",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "sk-thm-sf-pf-adic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-closed.proof.md",
+  "place": "Localization paragraph, with direct weak Serre triangulation and the existing exact-coefficient open theorem; fully formalized by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Integral bounded constructible proetale complexes form a triangulated subcategory and quasi compact open direct image preserves them",
+   "results": "CategoryTheory.Triangulated.Subcategory; CategoryTheory.ObjectProperty.IsTriangulated; CategoryTheory.ObjectProperty.IsTriangulated.mk; CategoryTheory.ObjectProperty.instIsTriangulatedIsoClosure; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.ObjectProperty.instIsTriangulatedLeftOrthogonalOfIsStableUnderShiftInt; CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated",
+   "date": "2026-10-19",
+   "verdict": "generic triangulated-category API only; no integral proetale open-image finiteness theorem",
+   "digest": "bb48bedc74861e17"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁",
+   "results": "CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₁",
+   "date": "2026-10-19",
+   "verdict": "generic triangulated-category API only; no integral proetale open-image finiteness theorem",
+   "digest": "26ca18e5efbda982"
+  },
+  {
+   "tool": "grep",
+   "query": "constantModelBoundedConstructible.*open",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "generic triangulated-category API only; no integral proetale open-image finiteness theorem",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralRestrictionClosed",
+  "date": "2026-10-19",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-closed",
+   "place": "Localization paragraph: Its third term lies in Dbc; triangulated closure",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralComplementFiniteness",
+  "file": "lean/Sheaf/SixFunctors/IntegralComplementFiniteness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralComplementFiniteness",
+  "statement": "theorem integralComplementFiniteness\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :\n    (generators (Profinite.padicIntegersRingObj ℓ E.val) X).IsTriangulated ∧\n      ∀ K, generators (Profinite.padicIntegersRingObj ℓ E.val) X K →\n        generators (Profinite.padicIntegersRingObj ℓ E.val) X\n          (((upperStar (Profinite.padicIntegersRingObj ℓ E.val)\n            i.openComplement.ι).mapDerivedCategory ⋙\n              (lowerStar (Profinite.padicIntegersRingObj ℓ E.val)\n                i.openComplement.ι).rightDerivedFunctor).obj K)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T034308-L-418551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261019T034308-L-418551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
