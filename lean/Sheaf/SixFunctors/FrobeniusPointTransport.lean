@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison
 public import Sheaf.Paper.IsomorphismDerivedPullback
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Mathlib.Algebra.CharP.CharAndCard
+import Mathlib.Algebra.CharP.Invertible
 
 /-!
 # Point transport along geometric Frobenius
@@ -62,7 +64,20 @@ unequal to p has nonzero image there, so is a unit in the field stalk. -/
 theorem frobeniusPointPrimeUnit (D : FiniteFieldDatum.{u}) (l : ℕ)
     [Fact l.Prime] (_hl : l ≠ D.p) :
     ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).presheaf.stalk x) := by
-  sorry
+  intro x
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hc : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hc
+  have hu : IsUnit (l : D.k₀) := (CharP.isUnit_natCast_iff D.prime).2 (by
+    intro hdiv
+    exact _hl ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 hdiv).symm)
+  have hk : IsUnit (l : D.k) := by
+    simpa only [map_natCast] using hu.map (algebraMap D.k₀ D.k)
+  have h := hk.map
+    (StructureSheaf.toStalk (CommRingCat.of D.k) x).hom
+  simpa only [map_natCast] using h
 
 /-- The same excluded characteristic makes l a unit in the residue fields.
 Source: finite-field datum (blueprint: def-weil-frobenius-point-transport).
@@ -71,7 +86,20 @@ The image of l is nonzero because l and p are distinct primes, hence invertible.
 theorem frobeniusPointPrimeResidueUnit (D : FiniteFieldDatum.{u}) (l : ℕ)
     [Fact l.Prime] (_hl : l ≠ D.p) :
     ∀ x : Spec (.of D.k), IsUnit (l : (Spec (.of D.k)).residueField x) := by
-  sorry
+  intro x
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hc : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hc
+  have hu : IsUnit (l : D.k₀) := (CharP.isUnit_natCast_iff D.prime).2 (by
+    intro hdiv
+    exact _hl ((Nat.prime_dvd_prime_iff_eq D.prime (Fact.out : l.Prime)).1 hdiv).symm)
+  have hk : IsUnit (l : D.k) := by
+    simpa only [map_natCast] using hu.map (algebraMap D.k₀ D.k)
+  have h := hk.map
+    ((StructureSheaf.toStalk (CommRingCat.of D.k) x) ≫ (Spec (.of D.k)).residue x).hom
+  simpa only [map_natCast] using h
 
 /-- The canonical inverse of the residue-field unit; no extra hypothesis on s.
 Source: finite-field datum (blueprint: def-weil-frobenius-point-transport). -/
