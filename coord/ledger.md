@@ -17434,3 +17434,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:43 L: merged deliver/NP/def-sfb-derived-extend-levelwise-adjunction (stage 2; reviewer PASS; parallel immutable checks)
 - 13:46 L: merged deliver/NV/thm-sfb-constructible-cocone-two-colimit (reviewer PASS; first push; new nodes: 0)
 - 13:48 L: merged deliver/NY/lem-a1-geometric-coinvariants-pure (reviewer FIX; first push; new nodes: 1)
+- 13:49 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 7db237a40a4b: H3/H5 RETURN. (1) sfRationalLisseProperty ignores its chart U, so li)
