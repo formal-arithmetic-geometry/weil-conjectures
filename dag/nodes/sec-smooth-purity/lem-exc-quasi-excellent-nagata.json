@@ -36,13 +36,12 @@
    }
   },
   {
-   "text": "By the J-2 clause of [def-exc-excellent-ring], the regular locus $U=\\{\\mathfrak p:S_{\\mathfrak p}\\text{ is regular local}\\}$ is open in $\\operatorname{Spec}S$. Since $S$ is a domain, $S_{(0)}$ consists of all fractions with nonzero denominator and is its fraction field, by [def-weil-pbc-localization-at-prime]. A field is regular local by [lem-weil-pbc-field-regular-ring], so $(0)\\in U$. By the explicit closed-set description in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], write the closed complement as $V(I)=\\{\\mathfrak p:I\\subseteq\\mathfrak p\\}$. Since $(0)\\notin V(I)$, choose $f\\in I$ with $f\\ne0$. If $f\\notin\\mathfrak p$ then $I\\nsubseteq\\mathfrak p$, so $D(f)\\subseteq U$. This gives a nonzero principal open consisting of regular points; it does not assume that $S$ is regular everywhere.",
+   "text": "By the J-2 clause of [def-exc-excellent-ring], the regular locus U in Spec S is open. The localization at the zero prime is the fraction field by [def-weil-pbc-localization-at-prime] and hence regular local by [lem-weil-pbc-field-regular-ring]. Thus the zero prime belongs to U. The basic opens D(f) form a basis for the spectrum topology [def-weil-affine-spectrum]; choose D(f) containing the zero prime and contained in U. Membership of the zero prime says exactly f ≠ 0. In Lean use PrimeSpectrum.isBasis_basic_opens.exists_subset_of_mem_open, avoiding an explicit closed-complement ideal.",
    "uses": [
     "def-exc-excellent-ring",
     "def-weil-pbc-localization-at-prime",
     "lem-weil-pbc-field-regular-ring",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+    "def-weil-affine-spectrum"
    ],
    "elementary": false,
    "source": {
@@ -51,14 +50,15 @@
    }
   },
   {
-   "text": "Put $B=S_f$ using [def-weil-ring-localization-away]. It is Noetherian by [lem-weil-pbc-localization-noetherian]. For a prime $Q$ of $B$, [lem-weil-pbc-localization-spectrum-embedding] gives its contracted prime $\\mathfrak p\\subset S$ with $f\\notin\\mathfrak p$. The local rings $B_Q$ and $S_{\\mathfrak p}$ are isomorphic directly on fractions: $a/u\\mapsto(a/1)/(u/1)$ has inverse $(a/f^n)/(b/f^m)\\mapsto af^m/(bf^n)$. Here $b/f^m\\notin Q$ implies $b\\notin\\mathfrak p$, so the latter denominator is outside $\\mathfrak p$; the fraction equality criteria in [def-weil-pbc-localization-at-prime] and [def-weil-ring-localization-away] verify that both maps are well-defined and inverse. Consequently each $B_Q$ is regular local by step 2. The definition [def-weil-regular-scheme] makes $B$ a regular ring, and [lem-weil-pbc-regular-ring-normal] makes it normal. Thus the nonzero $f$ of step 2 has normal localization $S_f$.",
+   "text": "Put B = S_f using [def-weil-ring-localization-away]. It is Noetherian by [lem-weil-pbc-localization-noetherian]. The spectrum image formula [lem-weil-pbc-localization-spectrum-embedding] puts the contraction p of every prime Q of B in D(f), hence in U. The localization-of-localization identification [lem-weil-pbc-localization-of-localization], implemented by Mathlib IsLocalization.localizationLocalizationAtPrimeIsoLocalization, gives S_p ≃ B_Q. Transport regular localness along this equivalence. This makes B a regular ring by the ring clause of [def-weil-regular-scheme]. Apply [lem-weil-pbc-regular-ring-normal] to obtain exactly the local-domain and integral-closedness hypotheses of the local N-1 criterion.",
    "uses": [
     "def-weil-ring-localization-away",
     "lem-weil-pbc-localization-noetherian",
     "lem-weil-pbc-localization-spectrum-embedding",
     "def-weil-pbc-localization-at-prime",
     "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-ring-normal"
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-localization-of-localization"
    ],
    "elementary": false,
    "source": {
@@ -136,12 +136,12 @@
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-field-regular-ring",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
   "def-weil-ring-localization-away",
   "lem-weil-pbc-localization-noetherian",
   "lem-weil-pbc-localization-spectrum-embedding",
   "def-weil-regular-scheme",
   "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-localization-of-localization",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-exc-regular-map-reduced-target",
   "lem-weil-pbc-analytically-unramified-n1",
@@ -152,7 +152,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07QV, lemma-quasi-excellent-nagata; local literature absent, proof reconstructed using the cited DAG statements and checked against the online Stacks text"
+  "place": "Tag 07QV, lemma-quasi-excellent-nagata, checked in the local source; Algebra Tags 0333 and 0351. F8 formalization follows the existing eight steps, using the basic-open basis and the Mathlib localization-of-localization equivalence."
  },
  "mathlib_searches": [
   {
@@ -331,5 +331,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261019T093406-L-2304463",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

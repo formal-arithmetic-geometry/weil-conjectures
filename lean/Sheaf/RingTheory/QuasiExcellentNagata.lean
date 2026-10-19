@@ -8,18 +8,11 @@ module
 public import Sheaf.RingTheory.ExcellentRing
 public import Sheaf.RingTheory.NagataRing
 import Sheaf.RingTheory.FiniteTypeGRing
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Localization.Submodule
 import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
-import WeilConjectures.RingTheory.AnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
-import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.RegularMapReducedTarget
 import Sheaf.RingTheory.UniversallyJapaneseN1Criterion
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
@@ -81,4 +74,47 @@ Proof:
 -/
 theorem isNagataRing_of_isQuasiExcellent (R : Type u) [CommRing R]
     (hR : IsQuasiExcellent R) : IsNagataRing R := by
-  sorry
+  let : IsNoetherianRing R := hR.1
+  have hJapanese : IsUniversallyJapanese R := by
+    apply isUniversallyJapanese_of_forall_isN1 R
+    intro S _ _ _ _
+    have hG : IsGRing S := isGRing_of_finiteType hR.2.1
+    let : IsNoetherianRing S := hG.1
+    apply isN1_of_local_characterization S (FractionRing S)
+    · let p₀ : PrimeSpectrum S := ⟨⊥, inferInstance⟩
+      have hreg : IsRegularLocalRing (Localization.AtPrime p₀.asIdeal) := by
+        let : IsLocalization (⊥ : Ideal S).primeCompl (FractionRing S) := by
+          rw [Ideal.primeCompl_bot]
+          infer_instance
+        exact IsRegularLocalRing.of_ringEquiv
+          (IsLocalization.algEquiv (⊥ : Ideal S).primeCompl
+            (FractionRing S) (Localization.AtPrime (⊥ : Ideal S))).toRingEquiv
+      obtain ⟨_, ⟨_, ⟨f, rfl⟩, rfl⟩, h₀f, hfU⟩ :=
+        PrimeSpectrum.isBasis_basic_opens.exists_subset_of_mem_open hreg (hR.2.2 S)
+      refine ⟨f, ?_, ?_⟩
+      · simpa [p₀, PrimeSpectrum.mem_basicOpen] using h₀f
+      · have : IsRegularRing (Localization.Away f) := by
+          apply isRegularRing_iff.mpr
+          intro p hp
+          have hpf : PrimeSpectrum.comap (algebraMap S (Localization.Away f))
+              ⟨p, hp⟩ ∈ PrimeSpectrum.basicOpen f := by
+            change PrimeSpectrum.comap (algebraMap S (Localization.Away f))
+              ⟨p, hp⟩ ∈ (↑(PrimeSpectrum.basicOpen f) : Set (PrimeSpectrum S))
+            rw [← PrimeSpectrum.localization_away_comap_range (Localization.Away f) f]
+            exact ⟨⟨p, hp⟩, rfl⟩
+          have : IsRegularLocalRing
+              (Localization.AtPrime (p.comap (algebraMap S (Localization.Away f)))) :=
+            hfU hpf
+          exact IsRegularLocalRing.of_ringEquiv
+            (IsLocalization.localizationLocalizationAtPrimeIsoLocalization
+              (Submonoid.powers f) p).toRingEquiv
+        exact IsRegularRing.isNormalRing (Localization.Away f)
+    · intro m hm
+      let A := Localization.AtPrime m
+      let : IsNoetherianRing A := inferInstance
+      have : IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) :=
+        AdicCompletion.isNoetherianRing _
+      apply isN1_of_isAnalyticallyUnramified A (FractionRing A)
+      exact RingHom.isReduced_of_isRegular
+        (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hG.2 m)
+  exact ⟨hR.1, fun p _ ↦ hJapanese (R ⧸ p)⟩
