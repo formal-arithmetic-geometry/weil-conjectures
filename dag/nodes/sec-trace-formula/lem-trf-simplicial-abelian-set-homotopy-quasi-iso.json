@@ -12,9 +12,66 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a simplicial abelian group $Z$, let $C(Z)_n=Z_n$ with alternating-face differential, and let $FZ$ have $(FZ)_n=\\mathbb Z[Z_n]$, with each simplicial operator sending $[z]$ to the basis vector indexed by the corresponding operator on $z$. The evaluation maps $\\epsilon_Z:FZ\\to Z$, $[z]\\mapsto z$, commute with every simplicial operator; since $f$ is additive, $f\\epsilon_X=\\epsilon_Y Ff$. Use the cited normalization convention $N(Z)_0=Z_0$, $N(Z)_n=\\bigcap_{i=1}^n\\ker d_i$ for $n>0$, with differential $d_0$ in positive degrees. For each $Z=X,Y,FX,FY$, the cited natural chain homotopy equivalence $N(Z)\\to C(Z)$ induces a natural homology isomorphism: if two chain maps differ by $dh+hd$, their values on a cycle differ by the boundary $dh(z)$, so homotopy inverse maps induce inverse homology maps. Thus all comparison squares for $f,Ff,\\epsilon_X,\\epsilon_Y$ commute on homology. In this convention an $n$-cycle for $n>0$ has all its faces zero, while every element in degree zero is a cycle. No homology isomorphism between $FZ$ and $Z$ is asserted.",
+   "uses": [
+    "lem-cbc-normalized-alternating-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), opening paragraph; normalization comparison also Tag 019C (lemma-quasi-isomorphism). We use the opposite-face convention of the cited existing node, with differential d_0."
+   }
+  },
+  {
+   "text": "Apply the cited free-chain homotopy invariance with coefficient ring $\\mathbb Z$ to each elementary homotopy in the finite chains joining $gf$ to $\\mathrm{id}_{UX}$ and $fg$ to $\\mathrm{id}_{UY}$. Each homotopy, in either direction, gives equality of the two induced maps on free-chain homology. Transitivity gives $H_n(C(Fg))H_n(C(Ff))=\\mathrm{id}$ and $H_n(C(Ff))H_n(C(Fg))=\\mathrm{id}$ for all $n\\geq0$. Here $Fg:FY\\to FX$ is defined on generators by $[y]\\mapsto[g(y)]$; it is additive regardless of whether $g$ is additive, and free abelianization preserves composition and identity on generators. Hence $H_n(C(Ff))$ is bijective. The natural comparison of Step 1 makes $H_n(N(Ff))$ bijective as well.",
+   "uses": [
+    "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), first paragraph: homology invertibility after free abelianization; extended along the finite homotopy chains in the statement."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$. To show surjectivity of $H_n(N(f))$, represent a target class $\\eta$ by a normalized cycle $y\\in N(Y)_n$. Put $\\widetilde y=[y]-[0_n]\\in(FY)_n$. If $n>0$, every face is $d_i\\widetilde y=[d_i y]-[0_{n-1}]=0$, so $\\widetilde y$ is a normalized cycle; if $n=0$, no face condition is required. Moreover $\\epsilon_Y(\\widetilde y)=y$. By Step 2 choose $\\alpha\\in H_n(N(FX))$ mapping to the class of $\\widetilde y$. The commutative evaluation square of Step 1 now gives $H_n(N(f))(H_n(N(\\epsilon_X))(\\alpha))=\\eta$. This proves surjectivity without assuming evaluation is a homology isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), second paragraph: lift a normalized cycle by [y]-[0_n]."
+   }
+  },
+  {
+   "text": "For injectivity, represent a kernel class $\\xi\\in H_n(N(X))$ by a normalized cycle $x$. Since its image is zero, there is $y\\in N(Y)_{n+1}$ with $d_0y=f_n(x)$; all $d_i y$ for $1\\leq i\\leq n+1$ vanish. As in Step 3, $\\widetilde x=[x]-[0_n]$ is a normalized cycle lifting $x$. Put $\\widetilde y=[y]-[0_{n+1}]$. Its higher faces vanish because $d_i\\widetilde y=[0_n]-[0_n]=0$ for $i\\geq1$, so it lies in $N(FY)_{n+1}$, and its differential is $d_0\\widetilde y=[f_n(x)]-[0_n]=(Ff)_n(\\widetilde x)$, where $f_n(0_n)=0_n$ uses additivity of $f$. Thus $H_n(N(Ff))$ kills the class of $\\widetilde x$. Its injectivity from Step 2 makes this class zero; applying $H_n(N(\\epsilon_X))$ shows $\\xi=0$. This calculation also works for $n=0$, with $N(Y)_1=\\ker d_1$ and boundary $d_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), third paragraph: lift both the kernel cycle and its target boundary; translated to the d_0 normalization."
+   }
+  },
+  {
+   "text": "Steps 3 and 4 prove that $H_n(N(f))$ is bijective for every $n\\geq0$. By the natural isomorphisms of Step 1 this holds for $H_n(C(f))$. The complexes in the statement satisfy $s(Z)^{-n}=C(Z)_n$, with the same differential, so $H^{-n}(s(f))=H_n(C(f))$. For $r>0$ both cohomology groups are zero because $s(X)^r=s(Y)^r=0$. Therefore $s(f)$ induces an isomorphism on every cohomology group, which is exactly the stated quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2 (lemma-homotopy-equivalence), conclusion, with the nonpositive-cochain reindexing in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2 (lemma-homotopy-equivalence), proof lines 5883--5961"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +107,38 @@
    "results": "8 hits; top=['HomotopyEquiv.toHomologyIso', 'HomotopyEquiv.quasiIsoAt_hom', 'HomotopyEquiv.quasiIsoAt_inv', 'homotopyEquivalences_le_quasiIso', 'HomotopyEquiv.quasiIso_hom', 'HomotopyEquiv.quasiIso_inv', 'HomologicalComplex.homotopyEquivalences', 'HomotopyCategory.quasiIso']; note=; digest=fea4f72dbf71c660. Full results read from the search-*.txt files in this sandbox (first leanfinder output read in tool session 93265).",
    "date": "2026-10-18",
    "verdict": "no match: HomotopyEquiv.quasiIso_hom requires an additive chain homotopy equivalence; the inverse and homotopies here are only maps of simplicial sets. SimplicialObject.Homotopy defines homotopies in a fixed category, and normalization only compares two chain models. Read Homology/QuasiIso.lean:335-360, SimplicialObject/Homotopy.lean:45-65, DoldKan/HomotopyEquivalence.lean:76-86."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of simplicial abelian groups that is a homotopy equivalence on underlying simplicial sets induces a quasi-isomorphism of alternating face complexes",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"homotopyEquivalences_le_quasiIso\", \"HomotopyEquiv.quasiIsoAt_hom\", \"HomotopyEquiv.quasiIso_hom\", \"HomotopyEquiv.quasiIso_inv\", \"HomotopyEquiv.quasiIsoAt_inv\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopyCategory.quasiIso\"], \"digest\": \"266401aa2aa11d8f\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the retained search log and candidate Mathlib sources. Normalization compares N(Z) and C(Z) for the same simplicial abelian group Z; HomotopyEquiv.quasiIso_hom requires an additive chain homotopy equivalence. Neither identifies original abelian-group homology with free abelianization homology or supplies the nonadditive inverse case. The Loogle query reports an unknown identifier, so its empty hits are not independent evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Homotopy, DoldKan, quasiIso",
+   "results": "{\"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialObject.Homotopy'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the retained search log and candidate Mathlib sources. Normalization compares N(Z) and C(Z) for the same simplicial abelian group Z; HomotopyEquiv.quasiIso_hom requires an additive chain homotopy equivalence. Neither identifies original abelian-group homology with free abelianization homology or supplies the nonadditive inverse case. The Loogle query reports an unknown identifier, so its empty hits are not independent evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*quasiIso|DoldKan.*homotopy|free.*simplicial",
+   "results": "{\"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\"], \"digest\": \"fabdd7eef57d0870\", \"sub\": \"AlgebraicTopology\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the retained search log and candidate Mathlib sources. Normalization compares N(Z) and C(Z) for the same simplicial abelian group Z; HomotopyEquiv.quasiIso_hom requires an additive chain homotopy equivalence. Neither identifies original abelian-group homology with free abelianization homology or supplies the nonadditive inverse case. The Loogle query reports an unknown identifier, so its empty hits are not independent evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "simplicial abelian group homotopy equivalence underlying simplicial sets quasi-isomorphism",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"homotopyEquivalences_le_quasiIso\", \"HomotopyCategory.quasiIso\", \"HomotopyCategory.quasiIso.congr_simp\", \"quasiIso_iff\", \"HomologicalComplex.quasiIso\", \"CategoryTheory.ShortComplex.quasiIso_iff\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex\", \"QuasiIso\"], \"digest\": \"dd4500ba73fec1c7\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the retained search log and candidate Mathlib sources. Normalization compares N(Z) and C(Z) for the same simplicial abelian group Z; HomotopyEquiv.quasiIso_hom requires an additive chain homotopy equivalence. Neither identifies original abelian-group homology with free abelianization homology or supplies the nonadditive inverse case. The Loogle query reports an unknown identifier, so its empty hits are not independent evidence of absence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-resolution-coherence",
@@ -65,7 +150,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: underlying set homotopy equivalence implies quasi-isomorphism (Stacks 08P2).",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: direct simplicial abelian-group input, namely the Tag 08P2 statement that an underlying simplicial-set homotopy equivalence induces a quasi-isomorphism on associated alternating-face complexes.",
    "via": [
     "lem-trf-cotangent-resolution-coherence",
     "lem-trf-lci-cotangent-presentation",
@@ -83,5 +168,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "worker": "stage1",
+  "summary": "Repaired the retained split after its initial dry run passed: removed the invalid identification of free-abelian homology with the original abelian-group homology. Followed the actual Stacks 08P2 argument: normalize all four simplicial abelian groups; obtain homology invertibility only for the free map; prove surjectivity and injectivity for the original map by explicit lifts [z]-[0], including the lift of a target boundary. The existing normalization uses kernels of d_1,...,d_n and differential d_0, and every boundary calculation is written in that convention. No new nodes are needed.",
+  "blueprint": "The steps realize the ancestor proof clause identifying the direct simplicial abelian-group input: underlying simplicial-set homotopy equivalence implies quasi-isomorphism (Stacks 08P2), with the normalized/alternating comparison and free-abelian homotopy calculation made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-normalized-alternating-homotopy-equivalence",
+    "why": "Generic normalized-to-alternating chain comparison; the trace-formula unit supplies no Dold--Kan normalization lemma."
+   },
+   {
+    "node": "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy",
+    "why": "Generic free-abelian chain-homotopy invariance for simplicial-set homotopies; the trace-formula unit supplies no simplicial chain-homotopy lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-normalized-alternating-homotopy-equivalence",
+  "lem-weil-pbc-simplicial-homotopy-free-chain-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-883e2c153",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-883e2c153 (reviewer sub-agent of L); spot-checked: I read Stacks 08P2 (simplicial.tex 5884-5961) in full, plus the two cited Mathlib-leaf statements, which are the normalization N into C with the d_0 / ker d_{i≥1} convention, and free-chain homotopy invariance with R=ℤ. The item statement matches 08P2, with the zig-zag homotopy notion written out, no additivity assumed for g, and nothing weakened. Step 1: the evaluation square commutes because f is additive, and the step proves that a homotopy equivalence gives a homology isomorphism. Step 2: each link of the zig-zag gives an equality on homology, and functoriality of F then makes H(N(Ff)) bijective. Step 3: surjectivity via the lift [y]-[0_n], with every face zero in the d_0 convention and degree 0 checked. Step 4: injectivity via the lift [y]-[0_{n+1}], using f(0)=0 and d_0ỹ=Ff(x̃). These follow Stacks paragraphs 2 and 3, correctly adapted from Stacks' opposite-face convention. Step 5: the reindexing H^{-n}=H_n is correct, and positive degrees are zero. Edge cases checked: constant zero (this case is why the old FZ≅Z transport was wrong, and the new proof avoids it), constant A, and non-additive g. Duplicate search: the only 08P2 hits are the item and its citer cotangent-resolution-coherence. The surjective-boundary-lifting node is the converse, and the model-structure node lem-cbc-simplicial-module-model is not a restatement. No new nodes, no SGA, no cycle (both proof deps are leaves), proof_deps equals the union of uses, and every step is under 2000 characters. I accept the two generic tool_uses (normalization and free homotopy invariance). The citations.json named in the report is not in the commit, which is harmless. No changes made."
  }
 }
