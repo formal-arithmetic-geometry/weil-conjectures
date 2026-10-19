@@ -5,10 +5,10 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.LocalMapRecovery
 public import Sheaf.AlgebraicGeometry.LocalMapPullbackFamily
-import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComposition
+import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComposition
 
 /-! # Recovery on an iterated pulled-back cover
 Source: Stacks Project, Tags 01ZR, 0095 and 0096.

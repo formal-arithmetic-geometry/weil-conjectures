@@ -6,7 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
-public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 import Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelPresentation
 import Mathlib.CategoryTheory.Abelian.Exact

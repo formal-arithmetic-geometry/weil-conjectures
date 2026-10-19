@@ -155,13 +155,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero",
-  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechInverseImageDegreeZero.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/CechInverseImageDegreeZero.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechInverseImage_degree_zero",
   "statement": "theorem cechInverseImage_degree_zero\n    {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)\n    (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)\n    (hcover' : iSup V = ⊤)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (x : (TopCat.Sheaf.cechCohomologyFunctor U 0).obj F) :\n    (((TopCat.Sheaf.cechCohomologyZeroIso V hcover').inv ≫\n        (Sheaf.functorHZeroIso.{u} (Opens.grothendieckTopology Y) isTerminalTop).inv).app\n        ((invImage g).obj F))\n      (HomologicalComplex.homologyMap\n        (cechInverseImageCochainMap g U V hinter F ((invImage g).obj F)\n          ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n            F).hom) 0 x) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm F 0\n        ((((TopCat.Sheaf.cechCohomologyZeroIso U hcover).inv ≫\n          (Sheaf.functorHZeroIso.{u} (Opens.grothendieckTopology X) isTerminalTop).inv).app F)\n          x)",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.RingTheory.KoszulBaseChangeIso
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct

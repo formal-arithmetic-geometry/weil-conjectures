@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Descent coherence of the explicit chart tensor-pullback comparisons

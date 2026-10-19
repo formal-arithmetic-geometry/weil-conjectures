@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoherentCoordinateData
 
 /-! # Affine coordinate transport of the localized tensor comparison

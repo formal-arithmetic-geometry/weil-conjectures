@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.CechSheafConstruction
-import Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso
+import WeilConjectures.AlgebraicGeometry.CechSheafLocalQuasiIso
 /-! # The augmented Čech complex of module sheaves
 
 Source: blueprint lem-pc-cech-resolution, proof paragraph 1.

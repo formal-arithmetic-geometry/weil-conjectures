@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackNaturality
 
 /-! # Module-to-abelian comparison for structure-sheaf pullbacks

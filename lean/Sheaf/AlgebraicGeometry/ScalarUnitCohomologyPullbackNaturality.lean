@@ -6,7 +6,7 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyComparisonFamily
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarAbelianPullbackSquare
 import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare

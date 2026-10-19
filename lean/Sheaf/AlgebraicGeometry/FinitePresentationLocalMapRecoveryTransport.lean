@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import Sheaf.AlgebraicGeometry.LocalMapPullbackFamily
 public import Sheaf.AlgebraicGeometry.LocalMapRecovery

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalDescentDatum
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent

@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Subobject.Limits
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent

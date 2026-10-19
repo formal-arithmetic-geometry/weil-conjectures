@@ -21,7 +21,7 @@ import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.DescendedInvertibleNeighbourhood
+import WeilConjectures.AlgebraicGeometry.DescendedInvertibleNeighbourhood
 import Sheaf.AlgebraicGeometry.PicardDirectImageFibreBetti
 import Sheaf.AlgebraicGeometry.ResidueRankModelDifferential
 

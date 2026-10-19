@@ -5,9 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
-public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation
 import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
 import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage

@@ -2,7 +2,7 @@
 module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ
 /-! # Canonical affine spectrum comparison on tensor generators
 

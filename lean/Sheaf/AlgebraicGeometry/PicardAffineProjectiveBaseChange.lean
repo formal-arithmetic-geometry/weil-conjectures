@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.PicardAffineStructureModelTransport
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 

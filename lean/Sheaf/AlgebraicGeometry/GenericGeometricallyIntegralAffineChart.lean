@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.CommonGenericHypersurfaceAffineOpen
+import WeilConjectures.AlgebraicGeometry.CommonGenericHypersurfaceAffineOpen
 import WeilConjectures.AlgebraicGeometry.GenericHypersurfaceGeometricIrreducibilitySpread
 
 /-! # A spreading affine chart of a generically geometrically integral family

@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit
+import WeilConjectures.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit
 import Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
 
 /-! # Constructible approximation for one prime and one pullback -/

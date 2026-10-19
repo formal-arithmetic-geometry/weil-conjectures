@@ -5,7 +5,7 @@ Authors: SHEAF group V2
 -/
 module
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent

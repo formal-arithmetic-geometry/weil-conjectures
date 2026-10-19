@@ -119,14 +119,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-clp0250 (reviewer sub-agent of L); spot-checked: Read Tag 0BCA statement+whole proof and Tag 0BC9; child statement matches 0BC9 (hyp (2) one-directional), no duplicate (grep 0BC*/lift-complex), Mathlib grep 0 hits. FIX more, RETURN less: (1) C1 step 1: K^./IK^. representing K(x)^L R/I was uncited -> cite lem-pc-module-bounded-flat-kflat + lem-pur-derived-change-of-rings (generic tools: K-flatness of bounded-above flat complexes, derived change of rings computed by K-flat complexes); (2) C4 step 4: lem-pc-ring-derived-map-representative gives pi.h = q only up to homotopy, step claimed strict reduction -> added homotopy correction (lift s through surjective pi using K^i projective); (3) step 6 shift slip: cokernel complex Q reduces to E[1], not E -> P^.=Q[-1]; also restored the unchanged pre-delivery statement text (delivery reworded it without E7 note), spelled out 0 in P and uses of (1)-(3) in step 5, deduplicated proof_deps.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ComplexLiftClassProjective",
+  "module": "WeilConjectures.AlgebraicGeometry.ComplexLiftClassProjective",
   "declaration": "AlgebraicGeometry.complex_lift_class_projective",
   "statement": "theorem complex_lift_class_projective (R : Type u) [CommRing R] (I : Ideal R) (Pclass : Set (ModuleCat.{max u v} R)) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (K : DerivedCategory (ModuleCat.{max u v} R)) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (hproj : ∀ P : ModuleCat.{max u v} R, P ∈ Pclass → Projective P) (hclosed : ∀ P₁ P₂ P₁₂ : ModuleCat.{max u v} R, Nonempty (P₁₂ ≅ ModuleCat.of R (P₁ × P₂)) → (P₁ ∈ Pclass ∧ P₁₂ ∈ Pclass ↔ P₁ ∈ Pclass ∧ P₂ ∈ Pclass)) (hsurj : ∀ (P₁ P₂ : ModuleCat.{max u v} R) (f : P₁ ⟶ P₂), P₁ ∈ Pclass → P₂ ∈ Pclass → Function.Surjective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map f) → Function.Surjective f) (hEbound : ∃ b : ℤ, E.IsStrictlyLE b) (hEterms : ∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧ Nonempty (E.X i ≅ (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)) (hK : ∃ K₀ : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, K₀.IsStrictlyLE b) ∧ (∀ i : ℤ, K₀.X i ∈ Pclass) ∧ Nonempty (DerivedCategory.Q.obj K₀ ≅ K) ∧ Nonempty (DerivedCategory.Q.obj (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K₀) ≅ DerivedCategory.Q.obj E)) : ∃ P₀ : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, P₀.IsStrictlyLE b) ∧ (∀ i : ℤ, P₀.X i ∈ Pclass) ∧ Nonempty (DerivedCategory.Q.obj P₀ ≅ K) ∧ Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P₀ ≅ E)",
   "by": "M1",
   "date": "2026-10-11",
   "existing": false,
-  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftClassProjective.lean",
-  "branch": "sheaf-dag"
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ComplexLiftClassProjective.lean",
+  "branch": "sheaf-dag",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ComplexLiftClassProjective; points at its upstream twin."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

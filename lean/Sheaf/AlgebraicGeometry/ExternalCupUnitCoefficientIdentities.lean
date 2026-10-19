@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality
 import Sheaf.AlgebraicGeometry.ScalarCupUnitIdentities
 import Sheaf.AlgebraicGeometry.ScalarUnitClassPullback

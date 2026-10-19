@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Injectivity of the structure-sheaf unit at a nonempty flat fibre
 

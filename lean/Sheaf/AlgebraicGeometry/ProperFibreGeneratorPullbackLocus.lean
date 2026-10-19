@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.Paper.NonvanishingSectionTrivializes
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Proper shrinking around a fibrewise nonvanishing section
 

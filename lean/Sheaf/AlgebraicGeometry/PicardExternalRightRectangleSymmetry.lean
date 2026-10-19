@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalAffineRectangleExact
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import Sheaf.AlgebraicGeometry.ScalarSectionsIsoTransport
 

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.Paper.FiniteStructureAdjointTransitions
 
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

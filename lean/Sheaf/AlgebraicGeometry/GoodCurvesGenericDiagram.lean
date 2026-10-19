@@ -24,7 +24,7 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.EventuallyProper

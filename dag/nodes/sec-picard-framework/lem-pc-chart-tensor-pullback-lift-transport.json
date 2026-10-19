@@ -103,13 +103,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport",
-  "file": "lean/Sheaf/AlgebraicGeometry/ChartTensorPullbackLiftTransport.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ChartTensorPullbackLiftTransport",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ChartTensorPullbackLiftTransport.lean",
   "declaration": "AlgebraicGeometry.chart_tensor_pullback_lift_transport",
   "statement": "theorem chart_tensor_pullback_lift_transport\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)\n    (F G : X.Modules)\n    (φ : (Scheme.Modules.tensorPullback q₀).obj F ⟶\n      (Scheme.Modules.tensorPullback q₀).obj G) :\n      let Uk : Y.OpenCover.{u} := U.pullback₁ q\n      let V : Z.OpenCover.{u} := Uk.pullback₁ p\n      let W : Z.OpenCover.{u} := U.pullback₁ q₀\n      let t₀ := Scheme.Modules.openCoverTensorPullbackComparison q₀ U a\n      let ψ := t₀.hom.app F ≫ (Scheme.Modules.pullback (W.f a)).map φ ≫ t₀.inv.app G\n      ∀ s : (Scheme.Modules.pullback (U.pullbackHom q a)).obj\n          ((Scheme.Modules.pullback (U.f a)).obj F) ⟶\n        (Scheme.Modules.pullback (U.pullbackHom q a)).obj\n          ((Scheme.Modules.pullback (U.f a)).obj G),\n        chartOrdinaryMapRecovery q p q₀ w U a\n          ((Scheme.Modules.pullback (U.f a)).obj F)\n          ((Scheme.Modules.pullback (U.f a)).obj G) ψ s →\n        let tq := Scheme.Modules.openCoverTensorPullbackComparison q U a\n        let r := tq.inv.app F ≫ s ≫ tq.hom.app G\n        let tp := Scheme.Modules.openCoverTensorPullbackComparison p Uk a\n        let e := Scheme.Modules.tensorPullbackCompositionIso p q q₀ w\n        tp.inv.app ((Scheme.Modules.tensorPullback q).obj F) ≫\n            (Scheme.Modules.pullback (Uk.pullbackHom p a)).map r ≫\n            tp.hom.app ((Scheme.Modules.tensorPullback q).obj G) =\n          (Scheme.Modules.pullback (V.f a)).map\n            (e.inv.app F ≫ φ ≫ e.hom.app G)",
   "branch": "sheaf-dag",
   "by": "F4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

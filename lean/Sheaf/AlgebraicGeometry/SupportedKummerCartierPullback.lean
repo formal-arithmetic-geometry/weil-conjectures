@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso
 
 /-!

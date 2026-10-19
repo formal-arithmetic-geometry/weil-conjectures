@@ -13,8 +13,8 @@ public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import all WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperties
-import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Transport of a localized affine structure-image model

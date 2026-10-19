@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C1
 -/
 module
-public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
-import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
+import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
 /-! # Ext transport from an open subscheme to its ambient scheme

@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.Topology.KrullDimension
-public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility

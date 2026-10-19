@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 import WeilConjectures.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 /-!

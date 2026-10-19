@@ -11,7 +11,7 @@ public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.PicardH1ProductInjective
 import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-!
 # Joint H¹ injectivity of the two product slices after residue-field base change

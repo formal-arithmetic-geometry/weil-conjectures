@@ -5,12 +5,12 @@ Authors: SHEAF group J3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Curve.ReductionIdealPowerQuotient
+public import WeilConjectures.AlgebraicGeometry.Curve.ReductionIdealPowerQuotient
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Mathlib.CategoryTheory.Abelian.Exact
 import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization
-import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
+import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion
 
 /-! # Comparison of the multiplicative and additive nilradical-power cokernels
 

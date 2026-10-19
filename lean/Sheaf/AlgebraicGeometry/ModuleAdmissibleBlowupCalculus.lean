@@ -6,7 +6,7 @@ Authors: SHEAF group Q27
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

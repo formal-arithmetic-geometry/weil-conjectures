@@ -101,13 +101,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence",
-  "file": "lean/Sheaf/AlgebraicGeometry/ChartTensorPullbackComparisonCoherence.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ChartTensorPullbackComparisonCoherence.lean",
   "declaration": "AlgebraicGeometry.chart_tensor_pullback_comparison_coherence",
   "statement": "theorem chart_tensor_pullback_comparison_coherence\n    {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)\n    (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀) (F : X.Modules) :\n    let Uk : Y.OpenCover.{u} := U.pullback₁ q\n    let V : Z.OpenCover.{u} := Uk.pullback₁ p\n    let W : Z.OpenCover.{u} := U.pullback₁ q₀\n    ∀ (v : V.X a ⟶ W.X a)\n      (hv₁ : v ≫ W.f a = V.f a)\n      (hv₂ : v ≫ U.pullbackHom q₀ a = Uk.pullbackHom p a ≫ U.pullbackHom q a),\n    ∀ (d : Scheme.Modules.pullback (U.pullbackHom q₀ a) ⋙ Scheme.Modules.pullback v ≅\n        Scheme.Modules.pullback (U.pullbackHom q a) ⋙\n          Scheme.Modules.pullback (Uk.pullbackHom p a)),\n    d = Scheme.Modules.pullbackComp v (U.pullbackHom q₀ a) ≪≫\n      Scheme.Modules.pullbackCongr hv₂ ≪≫\n      (Scheme.Modules.pullbackComp (Uk.pullbackHom p a) (U.pullbackHom q a)).symm →\n    ∀ (b : Scheme.Modules.pullback (W.f a) ⋙ Scheme.Modules.pullback v ≅\n        Scheme.Modules.pullback (V.f a)),\n    b = Scheme.Modules.pullbackComp v (W.f a) ≪≫\n      Scheme.Modules.pullbackCongr hv₁ →\n    let tq := Scheme.Modules.openCoverTensorPullbackComparison q U a\n    let tp := Scheme.Modules.openCoverTensorPullbackComparison p Uk a\n    let t₀ := Scheme.Modules.openCoverTensorPullbackComparison q₀ U a\n    let e := Scheme.Modules.tensorPullbackCompositionIso p q q₀ w\n    (Scheme.Modules.pullback (Uk.pullbackHom p a)).map (tq.hom.app F) ≫\n        tp.hom.app ((Scheme.Modules.tensorPullback q).obj F) =\n      d.inv.app ((Scheme.Modules.pullback (U.f a)).obj F) ≫\n        (Scheme.Modules.pullback v).map (t₀.hom.app F) ≫\n        b.hom.app ((Scheme.Modules.tensorPullback q₀).obj F) ≫\n        (Scheme.Modules.pullback (V.f a)).map (e.hom.app F)",
   "branch": "sheaf-dag",
   "by": "R1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence; points at its upstream twin."
  },
  "proof_deps": [
   "def-pc-fibre-product",

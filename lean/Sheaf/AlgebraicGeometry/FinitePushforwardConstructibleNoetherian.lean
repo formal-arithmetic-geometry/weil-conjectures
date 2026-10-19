@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.GenericFinitePushforward
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
-import Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!

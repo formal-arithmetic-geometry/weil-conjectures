@@ -1,7 +1,7 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.AffineSpectrumTensorGeneratorCoordinates
 @[expose] public section
 set_option autoImplicit false

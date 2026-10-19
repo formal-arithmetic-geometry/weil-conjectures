@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.OverlapConjugateRestriction
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 @[expose] public section
 

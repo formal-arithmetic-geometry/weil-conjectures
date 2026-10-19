@@ -6,7 +6,7 @@ Authors: SHEAF group C4
 module
 
 public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Transition compatibility for adjoints of a module system

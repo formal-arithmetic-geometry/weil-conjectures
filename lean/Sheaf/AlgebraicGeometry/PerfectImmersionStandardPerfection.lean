@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Perfection of closed-immersion pushforward in the standard localization

@@ -2,7 +2,7 @@
 module
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkRingCoordinates
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalStalkComplexIso
 /-! # The canonical affine-spectrum comparison on coefficient-one tensors -/
 

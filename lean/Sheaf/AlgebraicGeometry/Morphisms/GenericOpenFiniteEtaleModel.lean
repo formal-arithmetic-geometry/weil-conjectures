@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
 /-!

@@ -6,7 +6,7 @@ Authors: SHEAF group S4
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Scalar structure coefficient has the original structure-sheaf adjunct
 

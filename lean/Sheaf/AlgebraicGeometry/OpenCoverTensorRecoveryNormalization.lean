@@ -6,8 +6,8 @@ Authors: SHEAF group D2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleRecoveryComparisonIso
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # Normalization of one tensor recovery comparison
 Source: Stacks Project, Tags 0095 and 0096. -/

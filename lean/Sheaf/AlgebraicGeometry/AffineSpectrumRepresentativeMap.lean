@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 
 /-! # Chain-map transport for affine spectrum representatives

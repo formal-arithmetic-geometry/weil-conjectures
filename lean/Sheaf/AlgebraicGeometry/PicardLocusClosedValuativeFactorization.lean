@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality
 import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! The valuative factorization step in the proof of Tag 0BF0. -/
 

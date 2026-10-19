@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve
 
-import Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 import Sheaf.AlgebraicGeometry.ArtinSchreierDataFormulas
 
 @[expose] public section

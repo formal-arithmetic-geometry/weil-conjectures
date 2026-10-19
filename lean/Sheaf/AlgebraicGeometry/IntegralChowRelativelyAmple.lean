@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
-import all Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties
+import all WeilConjectures.AlgebraicGeometry.ChowRelativeAmpleTwistProperties
 
 /-! # Integral Chow modification with relatively ample twist
 

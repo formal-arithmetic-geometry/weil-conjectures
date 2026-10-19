@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
 import Sheaf.AlgebraicGeometry.ClosedImmersionIdealPowerImage
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-!

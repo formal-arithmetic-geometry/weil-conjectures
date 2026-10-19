@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 

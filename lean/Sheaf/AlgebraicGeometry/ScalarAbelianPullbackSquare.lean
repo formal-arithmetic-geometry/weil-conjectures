@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarAbelianExtFactorization
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarForgetPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
 

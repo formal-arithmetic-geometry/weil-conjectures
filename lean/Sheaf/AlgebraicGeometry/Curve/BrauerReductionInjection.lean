@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsEpi
+import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsEpi
 import Sheaf.AlgebraicGeometry.Curve.ReductionUnitsKernelVanishing
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 

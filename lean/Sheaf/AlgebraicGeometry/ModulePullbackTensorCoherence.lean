@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Coherence of the module pullback tensor comparison
 

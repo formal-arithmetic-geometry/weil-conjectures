@@ -13,7 +13,7 @@ import WeilConjectures.RepresentationTheory.SylowModuleFiltration
 import Mathlib.FieldTheory.Galois.Profinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import WeilConjectures.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
+import WeilConjectures.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
 
 @[expose] public section
 set_option autoImplicit false

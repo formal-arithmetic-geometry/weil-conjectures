@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionDoubleComplex
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison

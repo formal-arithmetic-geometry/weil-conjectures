@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
-import Sheaf.AlgebraicGeometry.Curve.RootTrivializationBaseChange
+import WeilConjectures.AlgebraicGeometry.Curve.RootTrivializationBaseChange
 import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 
 /-!

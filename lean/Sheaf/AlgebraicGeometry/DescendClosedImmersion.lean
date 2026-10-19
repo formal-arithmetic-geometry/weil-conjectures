@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendMonomorphism
 
 /-!

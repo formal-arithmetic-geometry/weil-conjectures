@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.AlgebraicGeometry.FiniteConstantAbelianRefinement
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 
 /-!
 # Finite local constancy after forgetting an abelian structure

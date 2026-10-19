@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import Mathlib.CategoryTheory.Subfunctor.Image
 

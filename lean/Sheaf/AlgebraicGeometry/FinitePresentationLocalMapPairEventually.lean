@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import Sheaf.AlgebraicGeometry.LocalOverlapTransitions
 public import WeilConjectures.AlgebraicGeometry.LocalMapPairCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation

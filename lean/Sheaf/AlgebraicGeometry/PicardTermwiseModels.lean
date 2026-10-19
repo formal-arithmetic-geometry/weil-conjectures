@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Termwise Picard models and canonical restriction comparisons
 

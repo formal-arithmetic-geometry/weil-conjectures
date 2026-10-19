@@ -6,7 +6,7 @@ Authors: SHEAF groups U1 and C2
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
-public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.FlatBaseChangeChartUnitIso
 
 /-! # Coefficient h-maps on the affine scalar-extension chart

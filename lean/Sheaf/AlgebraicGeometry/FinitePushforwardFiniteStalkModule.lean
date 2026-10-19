@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 import WeilConjectures.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks
-import Sheaf.AlgebraicGeometry.ConstructibleUnderlyingSetsOfFiniteStalks
+import WeilConjectures.AlgebraicGeometry.ConstructibleUnderlyingSetsOfFiniteStalks
 import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
 
 /-!

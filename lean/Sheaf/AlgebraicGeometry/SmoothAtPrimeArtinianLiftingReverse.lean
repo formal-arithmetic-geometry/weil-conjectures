@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
 
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
-import Sheaf.AlgebraicGeometry.ArtinianLiftingConormalModMaximal
+import WeilConjectures.AlgebraicGeometry.ArtinianLiftingConormalModMaximal
 
 /-!
 # Reverse Artinian lifting criterion

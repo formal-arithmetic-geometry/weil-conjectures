@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 import Sheaf.AlgebraicGeometry.Modules.QuasiAffineLocallyFreeEmbedding
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicPushforwardCoordinates
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 

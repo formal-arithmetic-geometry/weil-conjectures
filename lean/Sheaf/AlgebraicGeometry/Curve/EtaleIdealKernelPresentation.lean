@@ -6,9 +6,9 @@ Authors: SHEAF group T2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
-public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 import Sheaf.AlgebraicGeometry.Curve.EtaleIdealKernelIso
-import Sheaf.AlgebraicGeometry.Curve.EtaleNestedIdealKernel
+import WeilConjectures.AlgebraicGeometry.Curve.EtaleNestedIdealKernel
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsRightExact
 
 /-! # Tensor presentation of the kernel of ideal restriction

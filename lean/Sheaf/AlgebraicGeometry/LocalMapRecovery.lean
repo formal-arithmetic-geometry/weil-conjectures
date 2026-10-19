@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # Recovery of a global morphism by a prescribed local family
 

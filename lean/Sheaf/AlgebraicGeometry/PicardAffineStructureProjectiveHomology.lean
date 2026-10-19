@@ -17,7 +17,7 @@ import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # Picard affine structure projective homology
 

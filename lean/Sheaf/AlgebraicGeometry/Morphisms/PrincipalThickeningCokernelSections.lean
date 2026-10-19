@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.PrincipalQuotientMultiplicationImage
 
 /-! # Principal thickening sections as degree-zero cohomology of the quotient

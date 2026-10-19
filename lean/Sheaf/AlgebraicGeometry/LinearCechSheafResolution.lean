@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.LinearCechSheafConstruction
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso
+import WeilConjectures.AlgebraicGeometry.CechSheafLocalQuasiIso
 
 /-! # Čech sheaf resolution with local scalar compatibility
 

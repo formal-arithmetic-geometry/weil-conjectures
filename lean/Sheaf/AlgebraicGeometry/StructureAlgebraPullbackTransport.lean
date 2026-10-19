@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 

@@ -6,7 +6,7 @@ Authors: SHEAF group R4
 module
 
 public import Sheaf.AlgebraicGeometry.OverlapConjugateRestriction
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.OverlapStageModelRestriction
 
 /-! # The fixed overlap model and its canonical comparison

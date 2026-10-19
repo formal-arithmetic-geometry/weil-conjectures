@@ -5,7 +5,7 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonMap
+public import WeilConjectures.AlgebraicGeometry.CyclicDerivedHomComparisonMap
 import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 import Sheaf.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence
 

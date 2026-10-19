@@ -5,7 +5,7 @@ Authors: SHEAF group F3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 
 /-! # The explicit pulled-back local map family
 

@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.Separable
 public import WeilConjectures.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyOfFinitePresentation
 import Sheaf.FieldTheory.AlgebraicSeparableSmooth

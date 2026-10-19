@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FormalModuleCoverFromLiftedSections
 import Sheaf.AlgebraicGeometry.FormalCompletionExact
 import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
 import Sheaf.AlgebraicGeometry.VanishingProjective
 
 /-!

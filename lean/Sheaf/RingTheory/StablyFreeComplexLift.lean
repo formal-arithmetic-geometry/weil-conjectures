@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Module.StablyFree.Basic
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 import Mathlib.RingTheory.Finiteness.Prod
-import Sheaf.AlgebraicGeometry.ComplexLiftClassProjective
+import WeilConjectures.AlgebraicGeometry.ComplexLiftClassProjective
 import WeilConjectures.RingTheory.StablyFreeModuleLift
 import WeilConjectures.RingTheory.FiniteProjectiveFreeModIdeal
 import WeilConjectures.RingTheory.FiniteModuleSurjectiveModIdeal

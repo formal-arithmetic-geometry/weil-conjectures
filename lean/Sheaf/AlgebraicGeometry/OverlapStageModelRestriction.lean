@@ -6,9 +6,8 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.OverlapConjugateRestriction
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Sheaf.AlgebraicGeometry.OverlapModelChartFactorization
-import Sheaf.AlgebraicGeometry.OverlapBaseChangeFormula
 import Sheaf.AlgebraicGeometry.OverlapBaseChangeFormula
 
 /-! # Restricting a stage morphism through a commutative model diagram

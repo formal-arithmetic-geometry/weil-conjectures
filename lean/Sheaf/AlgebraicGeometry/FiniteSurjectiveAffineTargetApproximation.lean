@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Presentable.Directed
-import Sheaf.AlgebraicGeometry.DescendFinite
+import WeilConjectures.AlgebraicGeometry.DescendFinite
 import WeilConjectures.AlgebraicGeometry.DescendSurjective
 import WeilConjectures.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation

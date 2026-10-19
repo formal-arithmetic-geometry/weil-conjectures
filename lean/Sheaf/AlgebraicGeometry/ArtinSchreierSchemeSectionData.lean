@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 
 @[expose] public section
 

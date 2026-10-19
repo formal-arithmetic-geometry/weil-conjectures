@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
-import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Finite.Exact

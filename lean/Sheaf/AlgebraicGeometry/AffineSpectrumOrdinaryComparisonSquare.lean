@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.IsoPullbackStalkCohomology
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.Algebra.Homology.BaseDerivedTensorRingIsoNaturality
 import Sheaf.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport

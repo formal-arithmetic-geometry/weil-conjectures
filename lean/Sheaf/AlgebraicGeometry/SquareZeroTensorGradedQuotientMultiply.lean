@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitEpi
 import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 @[expose] public section

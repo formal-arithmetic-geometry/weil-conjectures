@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import Sheaf.AlgebraicGeometry.LocalMapPullbackFamily
 public import Sheaf.AlgebraicGeometry.LocalMapRecovery
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapPairEventually

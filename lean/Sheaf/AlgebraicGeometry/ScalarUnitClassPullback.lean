@@ -6,7 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ScalarCohomologyExtCoefficientNaturality
 import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 

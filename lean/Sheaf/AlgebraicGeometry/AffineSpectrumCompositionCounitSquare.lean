@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineSpectrumDerivedCoordinates
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Counit square for affine spectrum pullback composition
 

@@ -6,7 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso

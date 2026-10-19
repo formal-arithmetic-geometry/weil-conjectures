@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Associativity of the canonical tensor pullback comparisons

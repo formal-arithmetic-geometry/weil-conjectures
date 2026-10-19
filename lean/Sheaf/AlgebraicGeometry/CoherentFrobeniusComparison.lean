@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.CoherentPowerComparison
 import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonPullback
 import Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback

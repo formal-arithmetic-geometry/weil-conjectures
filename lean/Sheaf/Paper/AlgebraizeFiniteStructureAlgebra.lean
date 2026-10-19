@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import Sheaf.Paper.FiniteStructureAlgebraLift
 import Sheaf.Paper.FiniteStructureProperSupport
-import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import all Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange

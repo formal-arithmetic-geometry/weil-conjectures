@@ -6,7 +6,7 @@ Authors: SHEAF group Q4
 module
 
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
-public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.EtaleTensorPositiveObjectCohomology
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality

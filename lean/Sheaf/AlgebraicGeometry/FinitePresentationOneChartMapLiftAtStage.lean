@@ -6,10 +6,10 @@ Authors: SHEAF group C4
 module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 import Sheaf.AlgebraicGeometry.AffineChartOrdinaryMapDescent
-import Sheaf.AlgebraicGeometry.ChartTensorPullbackLiftTransport
+import WeilConjectures.AlgebraicGeometry.ChartTensorPullbackLiftTransport
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # A lift at one stage on one affine chart

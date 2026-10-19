@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ClosedStructureTensorProjection
+import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorProjection
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # The ordinary complex projection formula for a closed structure sheaf

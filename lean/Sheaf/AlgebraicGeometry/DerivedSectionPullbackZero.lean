@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
-import Sheaf.AlgebraicGeometry.DerivedSectionSingleUnit
+import WeilConjectures.AlgebraicGeometry.DerivedSectionSingleUnit
 
 /-! # Degree-zero derived section pullback
 

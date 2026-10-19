@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Stalkwise Tor bounds for a perfect closed immersion

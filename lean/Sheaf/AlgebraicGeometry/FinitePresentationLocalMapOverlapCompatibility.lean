@@ -6,11 +6,11 @@ Authors: SHEAF group P2
 module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-public import Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.OpenCoverTensorPullbackComparison
 public import Sheaf.AlgebraicGeometry.LocalMapPullbackFamily
 public import Sheaf.AlgebraicGeometry.LocalMapRecovery
 import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapEquations

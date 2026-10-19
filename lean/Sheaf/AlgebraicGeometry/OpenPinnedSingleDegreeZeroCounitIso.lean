@@ -2,7 +2,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexOpenRestrictionData
-public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Constructed tensor restriction comparisons
 Source: Stacks Project, Tags 08DW and 08HY.

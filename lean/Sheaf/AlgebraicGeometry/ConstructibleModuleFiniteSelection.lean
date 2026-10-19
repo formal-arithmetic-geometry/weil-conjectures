@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
-import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
 
 /-!
 # Finite selection of module-valued geometric stalk tests
