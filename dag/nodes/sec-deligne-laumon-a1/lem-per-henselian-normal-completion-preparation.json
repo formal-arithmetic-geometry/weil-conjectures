@@ -16,41 +16,307 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Identify $R_{\\mathfrak m}=R$, since all denominators outside $\\mathfrak m$ are units. First identify ordinary henselization with the henselization of the pair $(R,\\mathfrak m)$. Write $(C,J)$ for the latter. The pair-henselization theorem gives $J=\\mathfrak mC$, $C/J=R/\\mathfrak m$ and a henselian pair. The henselian factorization criterion puts $J$ in the Jacobson radical. Since $C/J$ is a field, $J$ is the unique maximal ideal of $C$. Thus $C$ is henselian local and $R\\to C$ is local. For a local map $R\\to T$ with $T$ henselian local, the pair universal property gives a unique $R$-map $C\\to T$; it is local because it carries $J=\\mathfrak mC$ into the maximal ideal of $T$. Hence $C$ and $H$ have the same ordinary local universal property. The unique local maps between them compose to the identities by uniqueness, identifying $C=H$, $J=\\mathfrak mH$, and $H/\\mathfrak mH=R/\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-universal-property",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02, lemma-henselization; local comparison by universal properties; algebra.tex Tag 04GG, lemma-characterize-henselian"
+   }
+  },
+  {
+   "text": "The Noetherian pair-henselization theorem applied with $I=\\mathfrak m$ now gives that $H$ is Noetherian, $R\\to H$ is flat, and $\\widehat R\\cong\\widehat H$. It also identifies $H$ with a filtered colimit of etale $R$-algebras. Each such algebra is reduced by etale preservation of reducedness, using the reducedness criterion on affine sections. This implies that $H$ is reduced: if $x^n=0$ in the colimit, represent $x$ at a stage and pass to a later stage at which its $n$th power is zero; reducedness at that stage makes its image, and therefore $x$, zero.",
+   "uses": [
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-pair-henselization",
+    "etale-proposition-etale-reduced",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0AGV (lemma-henselization-Noetherian-pair) and 06DH (lemma-henselization-reduced), filtered-colimit reducedness argument"
+   }
+  },
+  {
+   "text": "Apply invariance of dimension under completion to the two Noetherian local rings $R$ and $H$. The completion isomorphism in Step 2 gives $\\dim R=\\dim\\widehat R=\\dim\\widehat H=\\dim H$.",
+   "uses": [
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-henselization-noetherian-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06LK, lemma-henselization-dimension; alternative completion comparison using more-algebra.tex Tag 07NV, lemma-completion-dimension"
+   }
+  },
+  {
+   "text": "The ordinary henselization map is ind-etale, hence weakly etale. Quasi-excellence of $R$ supplies the G-ring and J-2 properties and, by quasi-excellent implies Nagata, the Nagata property. The weakly etale G-ring ascent theorem and the weakly etale Nagata/J-2 ascent theorem apply to the Noetherian rings $R,H$. They give that $H$ is a G-ring and J-2, hence quasi-excellent. Universal catenarity is proved below, rather than assumed here.",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-exc-excellent-ring",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-exc-weakly-etale-g-ring",
+    "lem-exc-weakly-etale-nagata-j2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I Theorem 8.1(i),(iii) and following henselization paragraph, p.16"
+   }
+  },
+  {
+   "text": "Apply quasi-excellent implies Nagata to $H$. Enumerate its finitely many minimal primes $\\mathfrak p_a$ and set $A_a=H/\\mathfrak p_a$, $K_a=\\operatorname{Frac}(A_a)$ and $B_a$ equal to the integral closure of $A_a$ in $K_a$. The normalization affine-chart theorem identifies the componentwise normalization of $\\operatorname{Spec}H$ with $\\operatorname{Spec}(\\prod_a B_a)$, with structural map $h\\mapsto(h\\bmod\\mathfrak p_a)_a$. By the Nagata definition each $A_a$ is Japanese; taking the degree-one extension $K_a/K_a$ in that definition makes $B_a$ finite over $A_a$, and therefore finite over $H$. The integral-closure theorem makes each $B_a$ a normal domain.",
+   "uses": [
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I Proposition 6.2, p.14; III Proposition 6.2, normalization paragraph, p.44; Stacks Tag 07QV and the affine normalization construction"
+   }
+  },
+  {
+   "text": "Apply finite-over-henselian decomposition to each finite $H$-algebra $B_a$. Since $B_a$ is a nonzero domain, the product can have only one nonzero local factor: two would give an idempotent different from $0$ and $1$. Thus each $B_a$ is henselian local and $H\\to B_a$ is local. A finite module algebra is of finite type, so the finite-type Noetherian and G-ring ascent theorems give that $B_a$ is Noetherian and a G-ring. Normal-domain localization shows it is also a normal ring in the local-at-every-prime sense.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH, lemma-finite-over-henselian; more-algebra.tex Tag 07PV, proposition-finite-type-over-G-ring"
+   }
+  },
+  {
+   "text": "For each $B_a$, its completion is Noetherian and local by the completion theorems. As $B_a$ is a local G-ring, the definition makes $B_a\\to\\widehat B_a$ regular. Its fibres are regular rings, hence normal rings by regular implies normal. Apply flat ascent of normality with normal fibres: the source and target are Noetherian, the map is flat, all its fibres are normal, and its source is normal by Step 6. It follows that $\\widehat B_a$ is a normal ring. A normal local ring is a normal domain: its localization at its maximal ideal is a normal domain by the definition, and that localization is the ring itself since every element outside the maximal ideal is a unit. The completion map is faithfully flat by the local-completion theorem.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C23, lemma-completion-normal-local-ring, proof via normal-fibre ascent; algebra.tex Tag 00MC"
+   }
+  },
+  {
+   "text": "Fix $a$. The quotient $A_a$ is Noetherian local, and $A_a\\hookrightarrow B_a$ is injective and finite; the maximal ideal of $B_a$ contracts to that of $A_a$ by Step 6. The completion $\\widehat A_a$ is flat over $A_a$, so tensoring this injection gives an injection $\\widehat A_a\\hookrightarrow\\widehat A_a\\otimes_{A_a}B_a$ by the definition of flatness. The finite-extension completion theorem identifies the latter ring with $\\widehat B_a$: there is just one prime over the maximal ideal, because $B_a$ is local and integral over $A_a$ (a prime over a maximal ideal in an integral extension is maximal). Consequently $\\widehat A_a$ is a domain, as it embeds in the domain $\\widehat B_a$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I Corollary 6.3(ii), proof, p.14: henselian component normalization and integral completion; finite-extension comparison in Stacks algebra.tex"
+   }
+  },
+  {
+   "text": "Completion of the quotient $H\\twoheadrightarrow A_a$ identifies $\\widehat H/\\mathfrak p_a\\widehat H$ with $\\widehat A_a$. Step 8 shows this is a domain; its spectrum has a single irreducible component, and so is equidimensional. Apply the formal catenarity criterion to $H$: these assertions hold for every minimal prime $\\mathfrak p_a$, and hence $H$ is universally catenary. Together with Step 4 this proves that $H$ is excellent. Each $B_a$ is a finite type $H$-algebra, so excellence of finite type algebras makes each $B_a$ excellent.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-per-ratliff-formal-catenarity",
+    "def-exc-excellent-ring",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose I Corollary 6.3(ii), proof, p.14; XIV Proposition 1.3.2, p.209; Stacks formal catenarity criterion and Tag 07QU"
+   }
+  },
+  {
+   "text": "Now apply excellent-normalization preparation to $X=\\operatorname{Spec}H$. Steps 2 and 9 verify that it is reduced Noetherian excellent. Its normalization is the one identified in Step 5. The cited theorem gives that $\\coprod_a\\operatorname{Spec}B_a\\to\\operatorname{Spec}H$ is finite and surjective and is an isomorphism over a dense open containing every generic point. This uses the already proved excellence, so there is no use of normalization finiteness to assume universal catenarity in Step 9.",
+   "uses": [
+    "lem-per-excellent-normalization-preparation",
+    "lem-per-componentwise-normalization-affine-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, normalization paragraph, p.44; Stacks morphisms.tex Tags 035S, 035Q and 0BAJ"
+   }
+  },
+  {
+   "text": "The map $A_a\\hookrightarrow B_a$ is integral and injective, so $\\dim B_a=\\dim A_a$. The quotient spectrum $\\operatorname{Spec}A_a$ is the closed subspace $V(\\mathfrak p_a)\\subseteq\\operatorname{Spec}H$. Equivalently, lifting a strict chain of primes along the quotient gives a strict chain in $H$; hence $\\dim A_a\\leq\\dim H$. This proves the required bound for every factor, without assuming the components of $H$ have equal dimensions.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OK, lemma-integral-sub-dim-equal, and prime correspondence for a quotient"
+   }
+  },
+  {
+   "text": "For the separately quantified normal excellent Noetherian local domain $B$, apply the same completion argument as in Step 7: excellence supplies the G-ring property; normal-domain localization gives normality at every prime; regular formal fibres are normal by regular implies normal; and the Noetherian flat-normal-fibre ascent theorem gives normality of $\\widehat B$. The completion-locality and Noetherianity theorems apply to $B$, so this normal ring is a local domain by localization at its maximal ideal. Local-completion faithful flatness gives the asserted $B\\to\\widehat B$. No henselian hypothesis on this arbitrary $B$ is used.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C23, lemma-completion-normal-local-ring, and algebra.tex Tag 00MC"
+   }
+  },
+  {
+   "text": "Let $Z\\subseteq\\operatorname{Spec}R$ be nowhere dense and closed. In a Noetherian spectrum this means it contains no minimal prime: irreducible components are the closures of their generic minimal primes. Any nonempty open contains one of these generic points. Conversely, if a closed set contains a component, deleting the other finitely many components exhibits a nonempty ambient open in that closed set. These observations give the equivalence. Flat going down for $R\\to H$ shows that every minimal prime $\\mathfrak q$ of $H$ contracts to a minimal prime of $R$: a strictly smaller prime below its contraction would lift to a prime strictly below $\\mathfrak q$. Thus $Z_H$ contains no minimal prime of $H$, and is nowhere dense. The generic prime $(0)$ of each $B_a$ contracts to $\\mathfrak p_a$ in $H$ by its embedding $H/\\mathfrak p_a\\hookrightarrow B_a$; hence the inverse image $Z_a$ misses that generic point. Being a proper closed subset of an irreducible spectrum it is nowhere dense. Finally apply flat going down to $B_a\\to\\widehat B_a$: its minimal prime contracts to the unique minimal prime $(0)$ of $B_a$. Therefore the closed inverse image of $Z_a$ misses the generic point of $\\operatorname{Spec}\\widehat B_a$ and is nowhere dense as well.",
+   "uses": [
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "III Proposition 6.2, flatness/rare closed subset paragraph, p.44; minimal-prime going-down argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-universal-property",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "etale-proposition-etale-reduced",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "def-exc-excellent-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-weakly-etale-g-ring",
+  "lem-exc-weakly-etale-nagata-j2",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-per-ratliff-formal-catenarity",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-excellent-normalization-preparation",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose I Corollary 6.3(ii), pp.14–16, and III Proposition 6.2, first reductions pp.43–44; expanded with the cited Stacks interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "A reduced quasi excellent local ring has an excellent henselization whose finite normalization is a product of normal henselian local domains with normal completions",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  [IsPrincipalIdealRing R, ValuationRing R, IsDedekindDomain R,\\n      IsIntegrallyClosed R ∧ ∀ (P : Ideal R), P ≠ ⊥ → P.IsPrime → P = IsLocalRing.maximalIdeal R,\\n      Submodule.IsPrincipal (IsL\", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, and an integral domain, the following are equivalent: (1) $ R $ is a principal ideal ring; (2) $ R $ is a valuation ring; (3) $ R $ is a Dedekin\"}",
    "date": "2026-10-19",
-   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+   "verdict": "no match: returned henselian definitions do not state the henselization, normalization and completion preparation."
   },
   {
    "tool": "leansearch",
    "query": "Henselization preserves quasi excellence and dimension and completion of an excellent normal local domain is normal",
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ I →\\n        IsUnit ((Ideal.Quotient.mk I) (Polynomial.eval a₀ (Polynomial.derivative f))) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ I\", \"doc\": \"Let $R$ be a commutative ring that is Henselian with respect to an ideal $I$. For any monic polynomial $f \\\\in R[X]$ and any element $a_0 \\\\in R$, if $f(a_0) \\\\in I$ and the derivative $f'(a_0)$ is a uni\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [toIsLocalRing : IsLocalRing R],\\n  (∀ (f : Polynomial R),\\n      f.Monic →\\n        ∀ (a₀ : R),\\n          Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n            IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) →\\n              ∃ a, f.IsRoot a ∧ a - a₀ \", \"doc\": \"A commutative local ring $ R $ is Henselian if for every monic polynomial $ f \\\\in R[X] $, whenever $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $ (the maximal ideal) and $ f'(a_0) $ is a unit in \"}\n  {\"name\": \"HenselianRing.jac\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} [self : HenselianRing R I], I ≤ ⊥.jacobson\", \"doc\": \"If $ R $ is a commutative ring and $ I $ is an ideal of $ R $ such that $ R $ is Henselian with respect to $ I $, then $ I $ is contained in the Jacobson radical of $ R $. The Jacobson radical here re\"}\n  {\"name\": \"HenselianLocalRing.is_henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R] (f : Polynomial R),\\n  f.Monic →\\n    ∀ (a₀ : R),\\n      Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n        IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) → ∃ a, f.IsRoot a ∧ a - a₀ ∈ IsLocalRing.maximalIdeal R\", \"doc\": \"Let $ R $ be a Henselian local ring with maximal ideal $ \\\\mathfrak{m} $. If $ f $ is a monic polynomial in $ R[X] $, $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $, and the derivative $ f'(a_0) $\"}\n  {\"name\": \"HenselianLocalRing.casesOn\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {motive : HenselianLocalRing R → Sort u} →\\n      (t : HenselianLocalRing R) →\\n        ([toIsLocalRing : IsLocalRing R] →\\n            (is_henselian :\\n                ∀ (f : Polynomial R),\\n                  f.Monic →\\n                    ∀ (a₀ : R),\\n        \", \"doc\": \"Given a Henselian local ring $ R $, this function allows defining a function by cases on the structure of $ R $ by specifying its behavior on the underlying local ring structure and the Henselian prop\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}",
    "date": "2026-10-19",
-   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+   "verdict": "no match: returned henselian definitions do not state the henselization, normalization and completion preparation."
   },
   {
    "tool": "loogle",
    "query": "\"HenselianRing\", \"IsNoetherianRing\"",
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-19",
-   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+   "verdict": "no match: returned henselian definitions do not state the henselization, normalization and completion preparation."
   },
   {
    "tool": "grep",
    "query": "henseli.*excellent|excellent.*henseli|completion.*normal|normal.*completion",
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
-   "verdict": "no match: the returned types concern henselian definitions, ordinary scheme limits, morphism properties, or unrelated approximation; none states this finite marked alteration assertion or specializes to it in one line."
+   "verdict": "no match: returned henselian definitions do not state the henselization, normalization and completion preparation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselization of a reduced quasi excellent local ring is excellent with finite normal henselian branches and normal completions",
+   "results": "{\"t\": \"2026-10-19T00:03:21Z\", \"tool\": \"leanfinder\", \"query\": \"Henselization of a reduced quasi excellent local ring is excellent with finite normal henselian branches and normal completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"Field.henselian\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.TFAE\", \"HenselianRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"fe659a24d1f6f85b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: henselian definitions only; no preparation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-19T00:04:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*excellent|excellent.*hensel|completion.*normal|normal.*completion",
+   "results": "{\"t\": \"2026-10-19T00:04:50Z\", \"tool\": \"grep\", \"query\": \"hensel.*excellent|excellent.*hensel|completion.*normal|normal.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Excellence henselization normalization completion of normal local rings",
+   "results": "{\"t\": \"2026-10-19T00:05:24Z\", \"tool\": \"leansearch\", \"query\": \"Excellence henselization normalization completion of normal local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing.mk\", \"HenselianLocalRing\", \"HenselianRing.is_henselian\", \"HenselianRing\", \"instHenselianRingMaximalIdeal\"], \"digest\": \"ba29759e47829049\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: henselian definitions only; no preparation theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-complete-local-descent",
@@ -77,5 +343,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-normal-completion-preparation",
+  "worker": "stage1",
+  "summary": "Split using existing nodes only. Compare ordinary and pair henselizations by their universal properties; establish quasi-excellence and dimension; construct the finite normal henselian branches; prove their completions normal using normal-fibre ascent; use the completed minimal quotients and the formal catenarity criterion to establish excellence; finish the generic isomorphism, dimension and nowhere-density clauses. No statement changes or new nodes.",
+  "blueprint": "Realizes the normalization and completion preparation in III Proposition 6.2 used by the complete-local uniformization descent, below lem-per-artin-gabber-affine-curve Step 3. The I-6.3 formal-catenarity argument is expanded without assuming H excellent before it is proved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic commutative-algebra or affine-scheme tool used for First identify ordinary henselization with the henselization of the pair $(R,\\mathfrak m)$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-universal-property",
+    "why": "Generic commutative-algebra or affine-scheme tool used for First identify ordinary henselization with the henselization of the pair $(R,\\mathfrak m)$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Generic commutative-algebra or affine-scheme tool used for First identify ordinary henselization with the henselization of the pair $(R,\\mathfrak m)$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The Noetherian pair-henselization theorem applied with $I=\\mathfrak m$ now gives that $H$ is Noetherian, $R\\to H$ is flat, and $\\widehat R\\cong\\widehat H$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The Noetherian pair-henselization theorem applied with $I=\\mathfrak m$ now gives that $H$ is Noetherian, $R\\to H$ is flat, and $\\widehat R\\cong\\widehat H$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Apply invariance of dimension under completion to the two Noetherian local rings $R$ and $H$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-trf-henselization-prime-ind-etale",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The ordinary henselization map is ind-etale, hence weakly etale; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The ordinary henselization map is ind-etale, hence weakly etale; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The ordinary henselization map is ind-etale, hence weakly etale; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-exc-weakly-etale-g-ring",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The ordinary henselization map is ind-etale, hence weakly etale; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-exc-weakly-etale-nagata-j2",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The ordinary henselization map is ind-etale, hence weakly etale; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Apply finite-over-henselian decomposition to each finite $H$-algebra $B_a$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-g-ring",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Apply finite-over-henselian decomposition to each finite $H$-algebra $B_a$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra or affine-scheme tool used for For each $B_a$, its completion is Noetherian and local by the completion theorems; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic commutative-algebra or affine-scheme tool used for For each $B_a$, its completion is Noetherian and local by the completion theorems; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic commutative-algebra or affine-scheme tool used for For each $B_a$, its completion is Noetherian and local by the completion theorems; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Fix $a$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Completion of the quotient $H\\twoheadrightarrow A_a$ identifies $\\widehat H/\\mathfrak p_a\\widehat H$ with $\\widehat A_a$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic commutative-algebra or affine-scheme tool used for Completion of the quotient $H\\twoheadrightarrow A_a$ identifies $\\widehat H/\\mathfrak p_a\\widehat H$ with $\\widehat A_a$; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative-algebra or affine-scheme tool used for The map $A_a\\hookrightarrow B_a$ is integral and injective, so $\\dim B_a=\\dim A_a$; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-universal-property",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-exc-weakly-etale-g-ring",
+  "lem-exc-weakly-etale-nagata-j2",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-type-over-g-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-integral-injective-dimension-equal"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-3beed251f",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-3beed251f (reviewer sub-agent of L); spot-checked: I read the 13 steps in full against every cited statement; there are no new nodes, no cycle, and all 37 proof_deps are used. Source check: ILO I Prop 6.2/Cor 6.3(ii) (p.14: henselian + 2.a) ⇒ excellent, via unibranch ⇒ Â integral ⇒ formal catenarity), Thm 8.1(iii) (Greco, quasi-excellence ascends along absolutely flat maps), and III Prop 6.2 first reductions (pp.43–44). The statement is exactly what those reductions use. H excellent from R only quasi-excellent is correct by I 6.3(ii) with 8.1(iii). Steps: 1, pair henselization identified with the local henselization by the universal property, J=mC is the unique maximal ideal through the Jacobson-radical criterion. 2–3, 0AGV with I=m gives Noetherian, flat and R̂≅Ĥ; reducedness comes from étale stages; dimension from 07NV. 4, the Greco G-ring and Nagata/J-2 nodes apply because both rings are Noetherian. 5–6, B_a is finite by N-2 at L=K, and 04GH plus domain forces a single henselian local factor. 7, 0C22 with all five hypotheses checked, fibres regular hence normal. 8, 07N9 plus 00GS give Â_a⊗B_a≅B̂_a, so Â_a is a domain. 9, 00MA plus Ratliff ⇒ universally catenary ⇒ excellent; 07QU ⇒ B_a excellent; no circularity. 10–13, normalization preparation, 00OK dimension bound, 0C23 for arbitrary B, and the nowhere-density argument by flat going-down and minimal primes. Small cases: a field, the node xy, unequal-dimension components. No duplicate node found by statement and tag grep (06DH, 0C23, 06LK, 0AW6). Batch-5 flags, all accepted as generic commutative algebra outside both assumptions: lem-trf-henselization-prime-ind-etale is 04GN, and its closure contains no trace-formula or Poincaré content; the Ratliff node reaches only def-trf-valuation-ring and CM/catenarity lemmas; the excellent-normalization node reaches only affine-locality-of-excellence lemmas. The 20 tool_uses are accepted as generic interfaces. Advisory: step 9 does not re-cite the finiteness of dim Â_a."
  }
 }
