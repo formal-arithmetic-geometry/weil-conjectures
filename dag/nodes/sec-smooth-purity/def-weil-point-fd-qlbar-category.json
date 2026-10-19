@@ -28,9 +28,46 @@
   "def-weil-directed-colimit-abelian-groups",
   "def-weil-pbc-triangles-with-shift"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every object of PointFdQbar is its finite-field/object pair. Its original stage has exactly that object as image; the identity isomorphism proves EssSurjObj.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-point-fd-morphism-descent] to the underlying realized morphism. Wrap the descended derived morphism in the finite-dimensional full subcategory. The definitions of the stage functor and of its tower comparison identify its image with the desired conjugation, proving HomSurj.",
+   "uses": [
+    "lem-weil-point-fd-morphism-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove faithfulness of actual derived scalar extension directly. Choose a K-linear functional p on L with p(1)=1 (Mathlib Module.Projective.exists_dual_eq_one). The map λ tensor m ↦ p(λ)m naturally retracts the extension/restriction adjunction unit. Apply these transformations termwise to complexes and descend along localization Q, using Localization.liftNatTrans, comp_liftNatTrans and liftNatTrans_id. They remain a natural retraction, so equality after extension and restriction implies equality by naturality and cancellation with the retraction. Functor.mapDerivedCategoryCompIso identifies this functor with the composite of derived extension and restriction. Hence derived extension alone is faithful. In the finite-stage full subcategory equality is already detected at the original stage; apply its reflexive transition functor to equal maps to get HomInj. This proves all three fields of IsFilteredTwoColimit.",
+   "uses": [
+    "def-weil-finite-dimensional-complex-scalar-extension",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For shift stability use the homology shift-sequence isomorphism H^i(C[n]) ≅ H^(n+i)(C). Replace the original finite support s by the finite image of j ↦ j-n. If i is outside this image, n+i lies outside s, so H^i(C[n]) is zero by transport along that isomorphism. Finite dimension transfers along the same module isomorphism.",
+   "uses": [
+    "def-weil-point-fd-complexes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-fd-morphism-descent",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-point-fd-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "The two original theorem docstrings: common-stage Hom characterization and finite support under integer shifts; J8 Lean reduction with a directly proved natural retraction for injectivity."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -211,5 +248,15 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q45-52b4e354b (reviewer sub-agent of L); spot-checked: The construction and coherence checks pass, but the delivered statement dropped the parent source’s inherited global finite-field datum and hypothesis ℓ ≠ p. I restored both and added def-weil-finite-field-fiber to stmt_deps in fixes/dag/nodes/sec-smooth-purity/def-weil-point-fd-qlbar-category.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T005307-L-2749482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

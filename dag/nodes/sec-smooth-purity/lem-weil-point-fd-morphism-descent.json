@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-point-fd-morphism-descent",
+ "kind": "statement",
+ "title": "A derived morphism descends to a common finite coefficient field",
+ "statement": "Fix a prime l, a field Ω algebraically closed over the l-adic field [def-weil-algebraic-closure], and two finite intermediate coefficient fields E and F [def-weil-finite-subextension-directed-set]. Let A in D(E) and B in D(F) have bounded finite-dimensional cohomology [def-weil-point-fd-complexes]. Write T for actual derived scalar extension [def-weil-finite-dimensional-complex-scalar-extension], and c for its canonical tower comparison [lem-weil-derived-field-scalar-extension-tower]. For every f : T_{Ω/E} A → T_{Ω/F} B, there exist a finite coefficient field N containing E and F and g : T_{N/E} A → T_{N/F} B such that f = c_{Ω/N/E,A}^{-1} ≫ T_{Ω/N}(g) ≫ c_{Ω/N/F,B}.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Order 1509, display defining D^b_fd(Qbar) as the finite coefficient 2-colimit; the Hom-surjectivity argument of def-weil-point-fd-qlbar-category."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-point-fd-complexes",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "lem-weil-derived-field-scalar-extension-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use the cohomology-model and Hom-bijection clauses of [lem-trf-field-complex-cohomology-splitting] over E, F and the closure. The finite-support predicate [def-weil-point-fd-complexes] means only finitely many cohomology spaces contribute. Choose finite bases for these spaces. By [lem-weil-cohomology-commutes-scalar-extension] their scalar-extended bases identify the given morphism with finitely many matrices over the closure.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting",
+    "def-weil-point-fd-complexes",
+    "lem-weil-cohomology-commutes-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of the finitely many matrix entries use exhaustion by finite subextensions in [def-weil-finite-subextension-directed-set]. Take the iterated compositum of these fields and E and F, using directedness in the same statement. This gives one finite coefficient field N containing E, F and every matrix entry. An empty family of entries needs only the compositum of E and F.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Regard each matrix as a map between the N-extensions of the chosen E- and F-cohomology spaces. Through the cohomology comparisons of [lem-weil-cohomology-commutes-scalar-extension], this is a family of maps between the cohomology spaces of the N-extended derived objects. Outside the finite support take zero. Surjectivity of the Hom-bijection of [lem-trf-field-complex-cohomology-splitting] over N supplies the derived morphism g.",
+   "uses": [
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology to the stated conjugation of the scalar extension of g. The tensor tower comparison of [lem-weil-derived-field-scalar-extension-tower] and its cohomology compatibility in [lem-weil-cohomology-commutes-scalar-extension] identify each of its matrices with the original matrix of f: on basis vectors the coefficients are just included from N into the closure. Injectivity of the Hom-bijection over the closure in [lem-trf-field-complex-cohomology-splitting] proves the required equality.",
+   "uses": [
+    "lem-weil-derived-field-scalar-extension-tower",
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-field-complex-cohomology-splitting",
+  "def-weil-point-fd-complexes",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-derived-field-scalar-extension-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Order 1509, finite coefficient 2-colimit; J8 formal proof by finite matrix descent and the cohomology Hom-bijection, 2026-10-19."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between bounded finite dimensional derived complexes over subfields of an algebraic closure descend to a common finite field extension",
+   "results": "8 hits: Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor, IntermediateField.Lifts.IsExtendible, Field.Emb.Cardinal.embFunctor, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset, FiniteField.nonempty_algHom_extension, FiniteField.nonempty_algHom_of_finrank_dvd, ComplexShape.Embedding.homRestrict_hasLift, Field.Emb.Cardinal.succEquiv",
+   "date": "2026-10-18",
+   "verdict": "No exact match: the results do not descend derived morphisms between two finite coefficient fields with canonical tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*(descent|descend)|morphism.*finite.*field",
+   "results": "1 hits: Mathlib/NumberTheory/NumberField/InfiniteAdeleRing.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match: the results do not descend derived morphisms between two finite coefficient fields with canonical tower comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"finite\"",
+   "results": "5 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars, Module.FinitePresentation.linearEquivMapExtendScalars_apply, Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply",
+   "date": "2026-10-18",
+   "verdict": "No exact match: the results do not descend derived morphisms between two finite coefficient fields with canonical tower comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of bounded finite dimensional complexes descend along a filtered union of fields",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize, CategoryTheory.MorphismProperty.ind, HomologicalComplex.ab5OfSize, CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms, HomologicalComplex.instHasFiniteLimits, CategoryTheory.Types.instIsStableUnderFilteredColimitsMonomorphismsType, HomologicalComplex.instHasLimit, CategoryTheory.MorphismProperty.IsStableUnderFilteredColimits.mk",
+   "date": "2026-10-18",
+   "verdict": "No exact match: the results do not descend derived morphisms between two finite coefficient fields with canonical tower comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFdQbarCategory",
+  "date": "2026-10-18",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Order 1509, the displayed finite-stage 2-colimit: surjectivity of its common-stage Hom comparison.",
+   "via": [
+    "def-weil-point-fd-qlbar-category"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFdMorphismDescent",
+  "file": "lean/Sheaf/Paper/PointFdMorphismDescent.lean",
+  "declaration": "DerivedCategory.pointFd_morphism_descent",
+  "statement": "theorem pointFd_morphism_descent\n    (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]\n    [IsAlgClosure (Padic l) Ω]\n    (E F : Padic.FiniteCoefficientFields l Ω)\n    (A : DerivedCategory (ModuleCat.{u} E.val))\n    (B : DerivedCategory (ModuleCat.{u} F.val))\n    (hA : pointFiniteDimensional E.val A) (hB : pointFiniteDimensional F.val B)\n    (f : (fieldDerivedScalarExtension (K := E.val) (L := Ω) E.val.subtype).obj A ⟶\n      (fieldDerivedScalarExtension (K := F.val) (L := Ω) F.val.subtype).obj B) :\n    ∃ (N : Padic.FiniteCoefficientFields l Ω) (hE : E ≤ N) (hF : F ≤ N)\n      (g : (fieldDerivedScalarExtension\n          (IntermediateField.inclusion (E := E.val) (F := N.val) hE).toRingHom).obj A ⟶\n        (fieldDerivedScalarExtension\n          (IntermediateField.inclusion (E := F.val) (F := N.val) hF).toRingHom).obj B),\n      f = (fieldScalarTower\n          (IntermediateField.inclusion (E := E.val) (F := N.val) hE).toRingHom\n          N.val.subtype).inv.app A ≫\n        (fieldDerivedScalarExtension (K := N.val) (L := Ω) N.val.subtype).map g ≫\n        (fieldScalarTower\n          (IntermediateField.inclusion (E := F.val) (F := N.val) hF).toRingHom\n          N.val.subtype).hom.app B",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "blueprint": "The common-stage Hom-surjectivity part of the finite coefficient 2-colimit; object surjectivity and Hom-injectivity are proved in the parent module.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "reason": "Only its general field cohomology-model and Hom-bijection clauses are used; it supplies no coefficient-category route or trace result."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T005307-L-2749482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261019T005307-L-2749482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
