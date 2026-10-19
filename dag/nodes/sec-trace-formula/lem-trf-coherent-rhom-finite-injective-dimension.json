@@ -14,9 +14,91 @@
   "def-pur-derived-internal-hom",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded complex $I$ of injective $A$-modules representing $L$, and integers $a\\leq b$ such that $I^q=0$ outside $[a,b]$. Choose any complex $P$ representing $K$. By [lem-weil-pbc-bounded-below-injectives-kinjective], $I$ is K-injective. Thus [def-pur-derived-internal-hom], specialized to the one-object ringed site, computes $R\\operatorname{Hom}_A(QM,L)$ by $\\operatorname{Hom}_A^\\bullet(M,I)$ for every complex $M$, where $Q$ is localization. We use the $A$-module-valued total Hom complex of [def-sc-module-total-hom-complex], so all subsequent maps and cohomology isomorphisms are $A$-linear.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "Fix $i\\in\\mathbf Z$ and put $n=b-i+1$. Let $T=\\tau_{\\leq n}P$ be the subcomplex with $T^q=P^q$ for $q<n$, $T^n=\\ker(d_P^n)$, and zero terms above $n$; put $C=P/T$. By [lem-weil-pbc-truncation-cohomology], $H^q(T)\\cong H^q(K)$ for $q\\leq n$ and $H^q(T)=0$ for $q>n$. Hence all cohomology modules of $T$ are finitely generated. Directly from this quotient, $C^q=0$ for $q<n$. In particular $0\\to T\\to P\\to C\\to0$ is short exact in every degree.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "For $r>b-n$, every factor $\\operatorname{Hom}_A(C^p,I^{p+r})$ is zero: if $p<n$ then $C^p=0$, while if $p\\geq n$ then $p+r>b$ and $I^{p+r}=0$. The formula in [def-sc-module-total-hom-complex] therefore gives $\\operatorname{Hom}_A^r(C,I)=0$ for $r>b-n$. Since $b-n=i-1$, its cohomology in degrees $i$ and $i+1$ is zero.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "Apply total Hom into $I$ to the short exact sequence of Step 2. For each $p,r$, restriction $\\operatorname{Hom}_A(P^p,I^{p+r})\\to\\operatorname{Hom}_A(T^p,I^{p+r})$ is surjective by the extension property defining injectivity in [def-sp-injective-resolutions]; its kernel consists exactly of maps factoring through $C^p$. In a fixed degree $r$, only the finitely many indices $a-r\\leq p\\leq b-r$ can contribute. Taking their product preserves this exactness by choosing one lift per factor. Precomposition commutes with the Hom differential [def-sc-module-total-hom-complex]. Consequently $0\\to\\operatorname{Hom}_A^\\bullet(C,I)\\to\\operatorname{Hom}_A^\\bullet(P,I)\\to\\operatorname{Hom}_A^\\bullet(T,I)\\to0$ is a degreewise short exact sequence of complexes of $A$-modules.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "The long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] applied to Step 4 has the segment $H^i\\operatorname{Hom}_A^\\bullet(C,I)\\to H^i\\operatorname{Hom}_A^\\bullet(P,I)\\to H^i\\operatorname{Hom}_A^\\bullet(T,I)\\to H^{i+1}\\operatorname{Hom}_A^\\bullet(C,I)$. The two outer modules vanish by Step 3, so the middle map is an isomorphism. By Step 1 this identifies $H^iR\\operatorname{Hom}_A(K,L)$ with $H^iR\\operatorname{Hom}_A(QT,L)$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-bounded-above-coherent-rhom] to $QT$ and $L$, with upper bound $u=n$ and lower bound $v=a$. Step 2 verifies bounded-above finitely generated cohomology for $QT$. The chosen representative $I$ verifies $H^q(L)=0$ for $q<a$, and finite generation of all $H^q(L)$ is a hypothesis of the item. The cited lemma makes $H^iR\\operatorname{Hom}_A(QT,L)$ finitely generated. Step 5 transfers finite generation to $H^iR\\operatorname{Hom}_A(K,L)$. Since $i$ was arbitrary, this proves the assertion without a bound on $K$.",
+   "uses": [
+    "lem-trf-bounded-above-coherent-rhom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof: the explicitly stated algebra problem for L in D^+_Coh(A) and K in D^-_Coh(A), with its lower bound v-u from the displayed bounded spectral sequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-sc-module-total-hom-complex",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-trf-bounded-above-coherent-rhom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective; its truncation argument expanded using degreewise Hom exactness and the long exact sequence. The final algebraic coherence input is perfect.tex Tag 0D0C."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +127,52 @@
    "results": "8 hits; top=['CategoryTheory.InjectiveResolution.extEquivCohomologyClass', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE', 'CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk', 'CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective', 'CategoryTheory.InjectiveResolution.extMk', 'CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass', 'CategoryTheory.Abelian.Ext']; subdirectory=; note=; digest=560aa1e01c2a956c",
    "date": "2026-10-18",
    "verdict": "no match: Ext and Hom-complex computation and preservation of homology do not imply finite generation of all derived Hom cohomology for unbounded coherent input."
+  },
+  {
+   "tool": "grep",
+   "query": "HasInjectiveDimension|[Cc]oherent|Module.Finite",
+   "results": "0 hits; top=[]; subdirectory=Algebra/Homology; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom of complexes with finite cohomology over a Noetherian ring is coherent if the second complex has finite injective dimension",
+   "results": "8 hits; top=['CategoryTheory.Functor.rightDerived', 'CategoryTheory.Functor.rightDerivedToHomotopyCategory', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'HasDerivedCategory.standard', 'HasDerivedCategory', 'CochainComplex.HomComplex.instModuleCochain', 'CategoryTheory.IsGrothendieckAbelian.hasExt', 'CochainComplex.HomComplex']; subdirectory=; note=; digest=66df36b87c07d0c0",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasInjectiveDimensionLE, Module.Finite",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring derived Hom from any complex with finitely generated cohomology to a coherent finite injective dimension complex has finitely generated cohomology",
+   "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLE', 'CategoryTheory.HasInjectiveDimensionLT', 'CategoryTheory.HasInjectiveDimensionLT.mk', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CategoryTheory.HasInjectiveDimensionLT.subsingleton', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.injectiveDimension_ne_top_iff', 'CochainComplex.IsKInjective']; subdirectory=; note=; digest=d3676a3a1ade075a",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*[Ff]inite|[Ff]inite.*Ext|[Cc]oherent.*[Hh]om|[Hh]om.*[Cc]oherent",
+   "results": "25 hits; top=['Mathlib/NumberTheory/WellApproximable.lean', 'Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean', 'Mathlib/NumberTheory/Height/Basic.lean', 'Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean', 'Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean', 'Mathlib/NumberTheory/Cyclotomic/Discriminant.lean', 'Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean', 'Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean']; subdirectory=; note=; digest=c9008c672dd87e61",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation of all Ext groups from an unbounded coherent complex into a bounded complex of injective modules over a Noetherian ring",
+   "results": "8 hits; top=['CategoryTheory.HasInjectiveDimensionLT.mk', \"CategoryTheory.HasInjectiveDimensionLT.mk'\", 'CategoryTheory.HasInjectiveDimensionLT.subsingleton', 'CategoryTheory.hasInjectiveDimensionLT_iff', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", 'CategoryTheory.hasExt_of_enoughInjectives', 'CategoryTheory.HasExt.standard', 'CategoryTheory.hasExt_iff_small_ext']; subdirectory=; note=; digest=bf3752d3b481ff19",
+   "date": "2026-10-18",
+   "verdict": "no match: injective dimensions and construction of derived Hom do not assert coherent cohomology for unbounded coherent input. The finite module Ext theorem handles only the heart."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-complete-local-coherent-duality",
@@ -81,5 +205,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-coherent-rhom-finite-injective-dimension",
+  "worker": "stage1",
+  "summary": "Kept the full unbounded-input statement. Wrote the finite-degree truncation argument using a bounded injective representative, proved the Hom-complex bound and degreewise short exactness from definitions, and reused the existing long exact sequence. Added one statement-only algebraic bounded-above/bounded-below coherence input from the proof of Stacks 0D0C. Logged and read Mathlib searches, including ModuleCat.finite_ext, which is not the complex assertion.",
+  "blueprint": "Serves the already recorded auxiliary complete-local coherent-duality input of lem-trf-local-term-locality. Specifically expands the first paragraph of Stacks 0A7C via the full proof of 0G4H: truncation, Ext stabilization, and the final bounded-above coherent-Hom application. No chapter/unit route or realization changes."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-f3e68c91e",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-f3e68c91e (reviewer sub-agent of L); spot-checked: Read all six item steps and the new node in full, together with Stacks 0G4H (whole proof), 0D0C (the algebra problem and its spectral sequences) and the 0A5S definition. The item statement is unchanged and keeps K unbounded. Step 1: bounded injectives are K-injective (Mathlib leaf), so def-pur-derived-internal-hom computes RHom by Hom^•(−,I) on the one-object site. Step 2: τ≤n with n=b−i+1, so C^q=0 for q<n. Step 3: Hom^r(C,I)=0 for r≥i (arithmetic checked). Step 4: degreewise exactness follows from injectivity and is elementary as marked. Step 5: the LES gives the H^i isomorphism. Step 6: the new node applies with u=n and v=a, all hypotheses checked. New node lem-trf-bounded-above-coherent-rhom: the D^-_fg × D^+_fg algebra assertion of 0D0C's proof, with lower bound v−u. It is true; tested on k[−u], k[−v] over a field (bound attained) and Z/2 → Z over Z. It is self-contained, statement-only, strictly smaller than the item (no injective-dimension hypothesis) and not a restated clause. Duplicate scan (0D0C/0G4H tags; Noetherian+Hom+fg statements, including lem-sc-sheaf-ext-coherent, lem-trf-finite-map-dualizing-transfer, lem-trf-semidualizing-rhom-conservative and def-per-algebraic-normalized-dualizing) found no duplicate or generalization. Blueprint from/via/same_as are correct. No cycle, no SGA, no off-unit non-leaf theorem used, so no tool_uses entry is needed."
  }
 }
