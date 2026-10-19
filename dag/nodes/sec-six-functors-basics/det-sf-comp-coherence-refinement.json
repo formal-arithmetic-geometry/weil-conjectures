@@ -30,14 +30,16 @@
  ],
  "proof": [
   {
-   "text": "Exact open operations and the derived adjunction. By [lem-sfb-alpha-iso], the coefficient comparison for every map here is an isomorphism, so module pullback along an immersion is inverse image with its action transported along that isomorphism. Thus [lem-weil-pbc-proetale-immersion-limit-preservation] gives exact $j^*,j'^*,i^*$ whenever $i$ is a closed complementary immersion. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the ring sheaf $\\Lambda_Z$ (and likewise on $Z'$): $j_!$ is exact, $j_!\\dashv j^*$, the open unit is invertible, and $i^*j_!=0$. The module definition [sk-def-sfb-module-lower-shriek] is this same extension by zero: both are left adjoints of the identified pullback, with the same unit normalization. The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] descends to the derived categories: both exact functors preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-functor], and their natural unit and counit descend and still satisfy the two triangle identities. Consequently the displayed adjunction, unit and vanishing hold on the unbounded derived categories, with these exact functors evaluated termwise.",
+   "text": "Exact open operations and the derived adjunction. By [lem-sfb-alpha-iso], the coefficient comparison for every map here is an isomorphism, so module pullback along an immersion is inverse image with its action transported along that isomorphism. Thus [lem-weil-pbc-proetale-immersion-limit-preservation] gives exact $j^*,j'^*,i^*$ whenever $i$ is a closed complementary immersion. Apply [lem-weil-pbc-proetale-ringed-open-closed] to the ring sheaf $\\Lambda_Z$ (and likewise on $Z'$): $j_!$ is exact, $j_!\\dashv j^*$, the open unit is invertible, and $i^*j_!=0$. The module definition [sk-def-sfb-module-lower-shriek] is this same extension by zero: both are left adjoints of the identified pullback, with the same unit normalization. The termwise adjunction of [lem-weil-pbc-termwise-adjunction-homotopy] descends to the derived categories: both exact functors preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-functor], and their natural unit and counit descend and still satisfy the two triangle identities. Consequently the displayed adjunction, unit and vanishing hold on the unbounded derived categories, with these exact functors evaluated termwise. Lean realization: the uniquely normalized module direct-image identity of [lem-weil-pbc-profinite-point-pullback] supplies linearity; faithfulness gives naturality. For the open unit use [lem-sfb-finite-extension-by-zero-fully-faithful], lift its invertible unit to module objects by the faithful forgetful functor, transport through the coefficient isomorphism, and descend the exact adjunction to derived categories.",
    "uses": [
     "lem-sfb-alpha-iso",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
     "lem-weil-pbc-proetale-ringed-open-closed",
     "sk-def-sfb-module-lower-shriek",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
    "elementary": false,
    "source": {
@@ -46,14 +48,18 @@
    }
   },
   {
-   "text": "Construct the open-restriction isomorphism for arbitrary unbounded $K$, without using proper base change on arbitrary complexes. Choose a K-injective resolution $j'_!K\\to I$ by [prop-pur-kinjective-resolutions-exist], on the small pro-étale site in the fixed universe. The module derived direct image of [sk-def-sfb-module-derived-pushpull] is represented by $h_*I$. The site localization [lem-weil-proetale-weakly-etale-localization], clause (1), identifies open restriction with restriction to objects over $X$. For each such object $V\\to X$, the definition [def-sfb-finite-lower-star] gives $(h_*I)(V)=I(V\\times_ZZ')=I(V)$, since $h^{-1}(X)=X$ and $h|_X=\\operatorname{id}$. This equality respects the module action of [def-sfb-module-lower-star], induced by the same cartesian coefficient maps. Hence $j^*h_*I=j'^*I$ as complexes with identified coefficients. The same argument with a K-injective resolution of any $M\\in D(Z',\\Lambda)$ constructs a natural isomorphism $\\rho_h:j^*Rh_*M\\simeq j'^*M$; the present $\\theta$ is its composite with the inverse open unit. Exactness from step 1 gives the quasi-isomorphism $K\\simeq j'^*j'_!K\\to j'^*I$. Moreover [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to the exact left adjoint $j'_!$, says that $j'^*I$ is K-injective. Inverting the preceding quasi-isomorphism defines $\\theta_{h,K}$. The construction is natural in $K$, using a functorial resolution, and in maps between such resolutions; it is therefore independent of the chosen representatives.",
+   "text": "Construct the open-restriction isomorphism for arbitrary unbounded $K$, without using proper base change on arbitrary complexes. Choose a K-injective resolution $j'_!K\\to I$ by [prop-pur-kinjective-resolutions-exist], on the small pro-étale site in the fixed universe. The module derived direct image of [sk-def-sfb-module-derived-pushpull] is represented by $h_*I$. The site localization [lem-weil-proetale-weakly-etale-localization], clause (1), identifies open restriction with restriction to objects over $X$. For each such object $V\\to X$, the definition [def-sfb-finite-lower-star] gives $(h_*I)(V)=I(V\\times_ZZ')=I(V)$, since $h^{-1}(X)=X$ and $h|_X=\\operatorname{id}$. This equality respects the module action of [def-sfb-module-lower-star], induced by the same cartesian coefficient maps. Hence $j^*h_*I=j'^*I$ as complexes with identified coefficients. The same argument with a K-injective resolution of any $M\\in D(Z',\\Lambda)$ constructs a natural isomorphism $\\rho_h:j^*Rh_*M\\simeq j'^*M$; the present $\\theta$ is its composite with the inverse open unit. Exactness from step 1 gives the quasi-isomorphism $K\\simeq j'^*j'_!K\\to j'^*I$. Moreover [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to the exact left adjoint $j'_!$, says that $j'^*I$ is K-injective. Inverting the preceding quasi-isomorphism defines $\\theta_{h,K}$. The construction is natural in $K$, using a functorial resolution, and in maps between such resolutions; it is therefore independent of the chosen representatives. Lean realization: use the cartesian square supplied by the inverse-image-open equality. The proved cartesianDerivedCounit in Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono gives the invertible counit of open extension/restriction on the pullback of an extension by zero, for arbitrary unbounded complexes. Its proof uses abelian cartesian extension-by-zero base change, cartesian coefficient transport, and exact termwise descent. The invertible open unit and this counit make the left-adjoint comparison jprime_! to h^* j_! invertible. Conjugating between j_! composed with h^* and jprime_! gives precisely the specified restriction map. The equality is checked by the naturality of the pullback triangle comparison and the adjunction triangle identity, not by choosing an arbitrary isomorphism of its source and target. The ingredients of this proved cartesian counit are the abelian open base-change comparison from [lem-weil-pbc-coefficient-site-weakly-etale-base-change], the scalar-forgetful comparison from [lem-weil-pbc-profinite-point-pullback], and the fully faithful open extension of [lem-sfb-finite-extension-by-zero-fully-faithful]. The exact derived open adjunction in [lem-weil-pbc-condensed-open-closed-recollement] transports its invertible counit to arbitrary unbounded complexes. The categorical conjugation and its component normalization are proved directly in this module.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "sk-def-sfb-module-derived-pushpull",
     "lem-weil-proetale-weakly-etale-localization",
     "def-sfb-finite-lower-star",
     "def-sfb-module-lower-star",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+    "lem-sfb-finite-extension-by-zero-fully-faithful",
+    "lem-weil-pbc-condensed-open-closed-recollement"
    ],
    "elementary": false,
    "source": {
@@ -169,12 +175,16 @@
   "lem-exc-open-closed-detection",
   "det-sf-determination-localizing",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "sk-def-sfb-module-pushforward-pullback"
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+  "lem-weil-pbc-condensed-open-closed-recollement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
-  "place": "The restriction to X; (1) Uniqueness; (2) Isomorphism; (3) Identity and transitivity. Generic exact-module and K-injective arguments made explicit, following Stacks Tags 09AH, 08BJ, 015F and 0D6E."
+  "place": "The restriction to X; (1) Uniqueness; (2) Isomorphism; (3) Identity and transitivity. Generic exact-module and K-injective arguments made explicit, following Stacks Tags 09AH, 08BJ, 015F and 0D6E. T9 stage-3 realization of steps 1--2: normalized module identity, faithfulness, exact open unit, and the cartesian extension-by-zero counit followed by conjugation of adjunctions. The remaining main theorem retains steps 3--9."
  },
  "mathlib_searches": [
   {
@@ -482,5 +492,15 @@
   "group": "N1",
   "result": "pass",
   "note": "Checked every hypothesis and clause against the node: k, char p>0 with p≠ℓ, the six admissible-coefficient cases, separated finite-type k-schemes, DenseBoundaryCompactification (density, quasi-compactness and boundary equality confirmed by small Lean checks; refinement direction d⟶c gives h:Z'→Z), unbounded module-object D(X). θ is the canonical base-change mate (pullback compositor, Lh*≅D(h*), counit) followed by the inverse open unit; e = homEquiv.symm θ⁻¹. Clause 1 is an iff for every b; clause 2 needs only localizingClosureProEtale; identity and composition hold for any K, with κ oriented R(a≫h)_*≅Ra_*⋙Rh_* and (s≫r).hom = a≫h by rfl. No def has sorry data; the four sorry'd helper theorems are true and are invertibility the node already asserts. Only the lean field of the node changed, its statement is verbatim, its declaration list matches the file; lines ≤100; docstrings carry the source and all 9 proof steps; no universe restriction. nt_compile.py: clean in ~17 s, no diagnostics; axioms propext/sorryAx/choice/Quot.sound. Remarks (non-blocking): refinementLowerStarId is provably equal to the existing profinitePointModuleDirectImageIdentity (same underlying components, uniqueness), kept because citing that lemma node would need a stmt_deps change stage 2 does not allow; the maintainer can add the proof-dependency import of Sheaf.Paper.CompactificationLocalizing after the build."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261019T005432-L-2771241",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

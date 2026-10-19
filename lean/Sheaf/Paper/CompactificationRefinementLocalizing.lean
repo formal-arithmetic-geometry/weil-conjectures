@@ -30,6 +30,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.Triangulated.LocalizingIsoLocus
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.ProfinitePointPullback
+import all Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono
 import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.FiniteProperBaseChange
@@ -57,6 +59,53 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
 
+namespace CategoryTheory
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restrictionMate_isIso
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    {J : A ⥤ B} {U : B ⥤ A} {H : B ⥤ C} {R : C ⥤ B}
+    {J' : A ⥤ C} {U' : C ⥤ A}
+    (a : J ⊣ U) (b : H ⊣ R) (c : J' ⊣ U')
+    (e : U ≅ H ⋙ U') [IsIso a.unit]
+    (hc : ∀ K : A, IsIso (c.counit.app (H.obj (J.obj K)))) :
+    IsIso (Functor.whiskerLeft R e.hom ≫ (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight b.counit U' ≫ (Functor.leftUnitor _).hom) := by
+  let ρ : R ⋙ U ⟶ U' := Functor.whiskerLeft R e.hom ≫
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight b.counit U' ≫
+    (Functor.leftUnitor _).hom
+  have hcomp (K : A) :
+      ((conjugateEquiv (a.comp b) c).symm ρ).app K =
+        J'.map (a.unit.app K ≫ e.hom.app (J.obj K)) ≫
+          c.counit.app (H.obj (J.obj K)) := by
+    have hinner : U.map (b.unit.app (J.obj K)) ≫
+        e.hom.app (R.obj (H.obj (J.obj K))) ≫
+          U'.map (b.counit.app (H.obj (J.obj K))) = e.hom.app (J.obj K) := by
+      have hn := e.hom.naturality (b.unit.app (J.obj K))
+      dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
+      rw [← Category.assoc, hn, Category.assoc]
+      simp only [← U'.map_comp, b.left_triangle_components,
+        Functor.map_id, Category.comp_id]
+    simp only [conjugateEquiv_symm_apply_app, Adjunction.comp_unit_app,
+      ρ, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Functor.whiskerRight_app,
+      Functor.leftUnitor_hom_app, Functor.comp_obj, Category.id_comp,
+      Functor.map_comp, Category.assoc]
+    erw [CategoryTheory.Functor.map_id]
+    simp only [Category.id_comp]
+    simpa only [Functor.map_comp, Category.assoc] using
+      congrArg (fun z ↦ J'.map (a.unit.app K) ≫ J'.map z ≫
+        c.counit.app (H.obj (J.obj K))) hinner
+  have hσ : IsIso ((conjugateEquiv (a.comp b) c).symm ρ) := by
+    have hσapp (K : A) : IsIso (((conjugateEquiv (a.comp b) c).symm ρ).app K) := by
+      rw [hcomp]
+      have := hc K
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  exact conjugateEquiv_symm_of_iso (a.comp b) c ρ
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -74,7 +123,12 @@ theorem refinementLowerStarId_linear (X : Scheme.{u})
         (ProEtale.lowerStarId Ab.{u + 1} X).hom.app M.X =
       (condensedRingObj Λ X) ◁ (ProEtale.lowerStarId Ab.{u + 1} X).hom.app M.X ≫
         Mod.act M.X := by
-  sorry
+  obtain ⟨e, he, _⟩ := existsUnique_profinitePointModuleDirectImageIdentity Λ X
+  have h := Mod.act_hom (e.hom.app M)
+  change _ ≫ (e.hom.app M).hom = _ ◁ (e.hom.app M).hom ≫ _ at h
+  change ∀ M, (e.hom.app M).hom = _ at he
+  rw [he M] at h
+  exact h
 
 /-- The linear identity components are natural.
 Source: blueprint refinement clause (3), canonical identity identifications
@@ -89,7 +143,8 @@ theorem refinementLowerStarId_naturality (X : Scheme.{u})
           (refinementLowerStarId_linear Λ X N)).hom =
       (Mod.isoMk ((ProEtale.lowerStarId Ab.{u + 1} X).app M.X)
           (refinementLowerStarId_linear Λ X M)).hom ≫ v := by
-  sorry
+  apply Mod.hom_ext
+  exact (ProEtale.lowerStarId Ab.{u + 1} X).hom.naturality v.hom
 
 /-- The canonical identity direct-image isomorphism, with its actual abelian-sheaf components.
 Source: blueprint refinement clause (3)
@@ -127,7 +182,43 @@ termwise unit and counit through quasi-isomorphisms; the triangle identities and
 unit descend too. This is the derived adjunction used here. -/
 theorem refinementOpenUnit_isIso {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit := by
-  sorry
+  let a₀ := ProEtale.openImmersionLowerShriekAdjunction Ab.{u + 1} j
+  have : IsIso a₀.unit :=
+    (ProEtale.openImmersionAdjunctionTriple Ab.{u + 1} j).isIso_unit_iff_isIso_counit.mpr
+      (ProEtale.isIso_openImmersionRestrictionLowerStarAdjunction_counit Ab.{u + 1} j)
+  have ff₀ := a₀.fullyFaithfulLOfIsIsoUnit
+  have := ff₀.full
+  have := ff₀.faithful
+  have hu : IsIso (ProEtale.openImmersionLowerShriekUpperStarAdjunction Ab.{u + 1} j).unit :=
+    Adjunction.unit_isIso_of_L_fully_faithful _
+  have hlin : IsIso (linearOpenImmersionLowerShriekAdjunction Λ j).unit := by
+    have hlinapp (M) : IsIso ((linearOpenImmersionLowerShriekAdjunction Λ j).unit.app M) := by
+      have hh : IsIso ((Mod.forget _).map
+          ((linearOpenImmersionLowerShriekAdjunction Λ j).unit.app M)) := by
+        dsimp [linearOpenImmersionLowerShriekAdjunction, Adjunction.mapModLeftAdjunction,
+          Adjunction.mkOfHomEquiv, Adjunction.mk', Mod.forget, Mod.Hom.mk']
+        rw [Adjunction.homEquiv_unit]
+        simp only [Mod.id_hom']
+        erw [CategoryTheory.Functor.map_id, Category.comp_id]
+        infer_instance
+      exact isIso_of_reflects_iso _ (Mod.forget _)
+    exact NatIso.isIso_of_isIso_app _
+  have ff := (linearOpenImmersionLowerShriekAdjunction Λ j).fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have : (Mod.comap (condensedPullbackHom Λ j)).Full :=
+    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.full
+  have : (Mod.comap (condensedPullbackHom Λ j)).Faithful :=
+    (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ j)).fullyFaithfulFunctor.faithful
+  have : (openImmersionLowerShriek Λ j).Full :=
+    inferInstanceAs ((Mod.comap (condensedPullbackHom Λ j)) ⋙
+      linearOpenImmersionLowerShriek Λ j).Full
+  have : (openImmersionLowerShriek Λ j).Faithful :=
+    inferInstanceAs ((Mod.comap (condensedPullbackHom Λ j)) ⋙
+      linearOpenImmersionLowerShriek Λ j).Faithful
+  have := (openImmersionLowerShriekUpperStarAdjunction Λ j).unit_isIso_of_L_fully_faithful
+  exact Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+    (openImmersionLowerShriekUpperStarAdjunction Λ j)
 
 attribute [instance] refinementOpenUnit_isIso
 
@@ -151,6 +242,7 @@ def refinementOpenRestriction {X Y : Scheme.{u}} {f : X ⟶ Y}
       (upperStar Λ d.i).mapDerivedCategory ≫
     (Functor.leftUnitor _).hom
 
+set_option backward.isDefEq.respectTransparency false in
 /-- For a boundary-preserving refinement the specified restriction map is invertible on
 all unbounded complexes; no proper base change for arbitrary complexes is assumed.
 Source: blueprint refinement, The restriction to X, proof step 2
@@ -164,7 +256,28 @@ and is invertible. Functorial resolutions give naturality and independence of I.
 theorem refinementOpenRestriction_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification.BoundaryCompactification f} (r : d ⟶ c) :
     IsIso (refinementOpenRestriction Λ r.hom.hom) := by
-  sorry
+  have sq : IsPullback (𝟙 X) d.obj.obj.i c.obj.obj.i r.hom.hom.hom :=
+    IsOpenImmersion.isPullback _ _ _ _
+      (by simpa only [Category.id_comp] using r.hom.hom.i_hom) r.property
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.i
+  let b := (derivedUpperStarLowerStarAdjunction Λ r.hom.hom.hom).ofNatIsoLeft
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ r.hom.hom.hom)
+  let a' := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ d.obj.obj.i
+  let e := Functor.mapDerivedCategoryNatIso
+      (eqToIso (congrArg (upperStar Λ) r.hom.hom.i_hom.symm) ≪≫
+        upperStarComp Λ d.obj.obj.i r.hom.hom.hom) ≪≫
+    Functor.mapDerivedCategoryCompIso (upperStar Λ r.hom.hom.hom)
+      (upperStar Λ d.obj.obj.i)
+  have : IsIso a.unit := refinementOpenUnit_isIso Λ c.obj.obj.i
+  have hc (K) : IsIso (a'.counit.app
+      ((upperStar Λ r.hom.hom.hom).mapDerivedCategory.obj
+        ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj K))) := by
+    have hbase := cartesianDerivedCounit Λ sq K
+    let eK := (Functor.mapDerivedCategoryCompIso
+      (openImmersionLowerShriek Λ c.obj.obj.i) (upperStar Λ r.hom.hom.hom)).app K
+    exact (NatTrans.isIso_app_iff_of_iso _ eK).mp hbase
+  have hi := CategoryTheory.restrictionMate_isIso a b a' e hc
+  simpa only [refinementOpenRestriction, e, b, Adjunction.ofNatIsoLeft_counit] using hi
 
 /-- The canonical θ_h,K: restriction of Rh*j'!K to X, then the inverse open unit.
 Source: blueprint refinement, displayed θ (blueprint: det-sf-comp-coherence-refinement). -/
