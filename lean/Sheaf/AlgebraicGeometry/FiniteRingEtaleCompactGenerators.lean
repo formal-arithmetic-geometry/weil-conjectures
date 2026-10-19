@@ -16,22 +16,13 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.SixFunctors.FlatModel
-import Sheaf.CategoryTheory.CompactCone
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.CategoryTheory.CompactObjectsThick
 import Sheaf.Paper.PurEtaleLisseStratumCompact
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
+import Sheaf.AlgebraicGeometry.AffineEtaleFreeDetection
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-!
 # Compact generators on finite-type étale sites
@@ -53,40 +44,26 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Bounded constructible finite-Tor complexes on a finite-type scheme over an algebraically
 closed field are compact in the full unbounded étale derived category, and a set of these
 complexes detects isomorphisms. No separatedness is required.
 
 Proof, following the node and Bhatt--Scholze, Section 6.4:
-1. A field is Noetherian, so `lem-weil-pbc-finite-type-over-noetherian` and
-   `lem-weil-pbc-locally-noetherian-quasi-separated` make `T` qcqs.
-   `lem-weil-pbc-module-sheaves-grothendieck-abelian`, `def-weil-size-convention`,
-   `prop-pur-kinjective-resolutions-exist`, `lem-pc-derived-category-locally-small`, and
-   `lem-kun-grothendieck-derived-coproducts` give local smallness and termwise coproducts,
-   including the empty coproduct, in the module-value indexing universe.
-2. `lem-pur-etale-lisse-stratum-compact` makes the extensions of finite locally constant
-   flat sheaves from locally closed strata compact. Closed direct image is exact by
-   `lem-cbc-open-closed-recollement`, and `lem-weil-pbc-exact-functor-derived-functor`
-   identifies its derived and termwise forms used by `sk-lem-sf-flat-model`.
-3. Compact objects are closed under shifts, cones (`lem-sc-compact-cone`), retracts,
-   isomorphisms, and zero. The Noetherian complement of `sk-lem-sf-flat-model` places
-   every bounded constructible finite-Tor complex in the thick subcategory of the
-   preceding stratum objects. This proves the first compactness assertion.
-4. Choose representatives of an affine étale basis using
-   `lem-weil-pbc-affine-etale-essentially-small-cover`. Its free extensions `u_! C[0]`
-   are constructible by `lem-weil-pbc-etale-free-sheaf-constructible` and flat by
-   `lem-pc-sites-modules-j-shriek-flat`. They have Tor amplitude `[0,0]` by the K-flat
-   description in `def-kun-derived-tensor`, hence satisfy the required conditions.
-5. `def-weil-presheaf-modules-sheafification` and
-   `lem-weil-pbc-free-yoneda-presheaf-module` identify maps from these free sheaves with
-   sections. On a K-injective representative `I`, `lem-weil-pbc-kinjective-hom-derived`
-   identifies maps from their shifts with `H^(-n)(I(U))`, naturally in the target.
-6. Represent `h` between K-injectives (`prop-pur-kinjective-resolutions-exist` and
-   `lem-weil-pbc-kinjective-hom-derived`). The assumed bijections give bijections on
-   section cohomology at every affine basis object. Local cocycle representatives and
-   local boundaries then give surjectivity and injectivity on every cohomology sheaf.
-   The representing chain map is a quasi-isomorphism, so `h` is invertible by
-   `def-weil-abstract-derived-category`.
+1. The finite-type assumptions make `T` Noetherian. Grothendieck abelianness gives
+   local smallness, and `derived_hasCoproducts` gives the required coproduct universe.
+2. `compactObjects_isThick` and `etaleThickGeneration` reduce compactness to the
+   finite locally constant flat stratum objects. Flatness passes to geometric fibres
+   through `Point.flat_sheafFiber_obj`; `uliftSheafFiberIso` aligns the universes.
+   `lem-pur-etale-lisse-stratum-compact` proves these generators compact.
+3. Use the actual type `T.AffineEtale` as the index set. The free Yoneda sheaves are
+   constructible and flat by the source library's `isConstructibleSheaf_freeYoneda`
+   and `flat_freeYoneda`. Their single complexes are bounded constructible, using
+   `isConstructibleEtaleModuleSheaf_iff` to compare the constructibility conventions.
+   Their explicit single flat models give Tor amplitude `[0,0]` via
+   `hasTorAmplitudeIn_iff_exists_flatModel`.
+4. `lem-pur-affine-etale-free-detection` supplies only the detection of isomorphisms
+   by this explicit family and its shifts. Combine it with the preceding properties.
 
 Source: Bhatt--Scholze, Section 6.4, Example 6.4.1, Lemmas 6.4.2 and 6.4.5, and
 Proposition 6.4.8; perfect-value constructibility is related to bounded constructibility
@@ -109,8 +86,82 @@ theorem finiteRing_compactGenerators
         (∀ s : S, DerivedCategory.isBoundedConstructible C T (E s) ∧
           ∃ r t : ℤ, r ≤ t ∧ DerivedCategory.hasTorAmplitudeIn C T r t (E s)) ∧
         ∀ (A B : DerivedCategoryModule C T) (h : A ⟶ B),
-          (∀ (s : S) (n : ℤ),
+        (∀ (s : S) (n : ℤ),
             Function.Bijective (fun (φ : (E s)⟦n⟧ ⟶ A) ↦ φ ≫ h)) → IsIso h) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian T := {}
+  have : IsGrothendieckAbelian.{u + 1}
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} C)) := inferInstance
+  have : HasColimitsOfSize.{u + 1, u + 1}
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} C)) :=
+    IsGrothendieckAbelian.hasColimits _
+  let hc : HasCoproducts.{u + 1} (DerivedCategoryModule C T) :=
+    CategoryTheory.derived_hasCoproducts
+  let P : ObjectProperty (DerivedCategoryModule C T) := fun K ↦ IsCompactObject K
+  have hthick := compactObjects_isThick (C := DerivedCategoryModule C T)
+  let : P.IsTriangulated := hthick.1
+  let : P.IsStableUnderRetracts := hthick.2
+  have : P.IsClosedUnderIsomorphisms := inferInstance
+  have hcompact : ∀ K : DerivedCategoryModule C T,
+      DerivedCategory.isBoundedConstructible C T K ∧
+        (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn C T a b K) →
+      IsCompactObject K := by
+    intro K hK
+    apply etaleThickGeneration T C P ?_ K hK.1 hK.2
+    rintro K ⟨str, i, j, hj, L, heq, hL, hflat, ⟨e⟩⟩
+    have := hj
+    have := hL
+    obtain ⟨hc', hcompact⟩ :=
+      isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf
+        (k := k) (C := C) ℓ hℓprime hℓunit hC
+        (X := T) (Z := (str.immersion i).image) (V := str.domain i)
+        (str.immersion i).imageι j f L (by
+          intro Ω _ _ s
+          have : PreservesFilteredColimitsOfSize.{u + 1, u + 1}
+              (CategoryTheory.forget (ModuleCat.{u + 1} C)) := inferInstance
+          have h := GrothendieckTopology.Point.flat_sheafFiber_obj
+            (A := ModuleCat.{u + 1} C) (J := (str.domain i).smallEtaleTopology)
+            ((Scheme.pointSmallEtale s).ulift.{u + 1}) hflat
+          exact ObjectProperty.prop_of_iso
+            (P := ObjectProperty.flat)
+            ((GrothendieckTopology.Point.uliftSheafFiberIso.{u + 1}
+              (Scheme.pointSmallEtale s) (ModuleCat.{u + 1} C)).app L) h)
+    exact P.prop_of_iso e.symm hcompact
+  refine ⟨hc, inferInstance, hcompact, T.AffineEtale,
+    affineEtaleFreeComplex C T, ?_, ?_⟩
+  · intro U
+    let W := (Scheme.AffineEtale.Spec T).obj U
+    have : IsAffine W.left := by
+      change IsAffine ((Scheme.Spec).obj _)
+      infer_instance
+    let F := Sheaf.freeYoneda T.smallEtaleTopology W (ModuleCat.of C C)
+    have hF : Scheme.IsConstructibleSheaf F := isConstructibleSheaf_freeYoneda W
+    have hbc := DerivedCategory.boundedConstructible_singleFunctor_obj F 0
+    change DerivedCategory.isBoundedConstructible C T
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ∧ _
+    constructor
+    · constructor
+      · intro q
+        exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hbc.2 q)
+      · refine ⟨0, 0, le_rfl, fun q hq ↦ ?_⟩
+        rcases hq with hq | hq
+        · exact (_root_.DerivedCategory.isGE_iff _ 0).1 inferInstance q hq
+        · exact (_root_.DerivedCategory.isLE_iff _ 0).1 inferInstance q hq
+    · refine ⟨0, 0, le_rfl, ?_⟩
+      apply (hasTorAmplitudeIn_iff_exists_flatModel C 0 0 le_rfl _ hbc).2
+      refine ⟨(HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F,
+        ⟨fun q hq ↦ ?_, fun q ↦ ?_⟩,
+        ⟨(_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app F⟩⟩
+      · exact HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)
+      · by_cases hq : q = 0
+        · subst hq
+          exact ObjectProperty.prop_of_iso _
+            (HomologicalComplex.singleObjXSelf _ 0 F).symm (flat_freeYoneda W)
+        · exact ObjectProperty.flat_of_isZero
+            (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
+  · intro A B h hh
+    exact isIso_of_affineEtaleFreeComplex C T h hh
 
 end AlgebraicGeometry.Etale

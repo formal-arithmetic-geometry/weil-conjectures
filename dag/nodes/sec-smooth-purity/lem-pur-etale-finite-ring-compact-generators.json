@@ -31,119 +31,78 @@
  ],
  "proof": [
   {
-   "text": "The field $k$ is Noetherian, since its only ideals are $0$ and $k$. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian, hence quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. No diagonal of $T/k$ is used. By [lem-weil-pbc-module-sheaves-grothendieck-abelian], $\\mathcal A=\\operatorname{Mod}(T_{\\mathrm{et}},C)$ is Grothendieck abelian. Use the convention [def-weil-size-convention] that the sites are small in the chosen larger indexing universe. On that small site, [prop-pur-kinjective-resolutions-exist] supplies K-injective resolutions, and [lem-pc-derived-category-locally-small] gives local smallness in the Hom universe of $\\mathcal A$. By [lem-kun-grothendieck-derived-coproducts], arbitrary set-indexed coproducts in $D(\\mathcal A)$ are represented by termwise sums. This includes the empty coproduct.",
+   "text": "A locally finite-type scheme over Spec k is locally Noetherian. Quasi-compactness of its structure map gives CompactSpace T, hence IsNoetherian T. ModuleCat-valued etale sheaves form a Grothendieck abelian category. The existing derived-category instance gives local smallness in u+1. Apply the general derived_hasCoproducts theorem to get coproducts indexed in u+1; no termwise coproduct comparison is required here.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "def-weil-size-convention",
-    "prop-pur-kinjective-resolutions-exist",
     "lem-pc-derived-category-locally-small",
-    "lem-kun-grothendieck-derived-coproducts"
+    "lem-grothendieck-derived-has-coproducts"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.4, qcqs ambient hypothesis; standard derived-category prerequisites supplied by the cited Grothendieck and K-injective statements."
+    "place": "Proposition 6.4.8, first paragraph (printed p. 49); the explicit K-injective local cocycle argument is the expansion in steps 5 and 6 of lem-pur-etale-finite-ring-compact-generators."
    }
   },
   {
-   "text": "For every locally closed stratum $V$ of $T$, let $j:V\\hookrightarrow\\overline V$ be its open immersion into the closure and $g:\\overline V\\hookrightarrow T$ the closed immersion. If $L$ is finite locally constant on $V$ with flat stalks, [lem-pur-etale-lisse-stratum-compact] says exactly that $g_*j_!L$ is compact in the full unbounded ordinary etale derived category. The closed direct image is exact by [lem-cbc-open-closed-recollement]; hence its right derived image agrees with the termwise image by [lem-weil-pbc-exact-functor-derived-functor], and the generators $Rg_*j_!L$ occurring in the Noetherian complement of [sk-lem-sf-flat-model] are these very objects. The lemma on strata applies because $T$ is finite type over the algebraically closed field $k$ and the given coefficient ring is finite and $\\ell$-primary.",
+   "text": "Let P be compact objects. compactObjects_isThick makes P triangulated, retract closed and isomorphism closed. Apply etaleThickGeneration from the Noetherian complement of sk-lem-sf-flat-model. Each generator is a single complex of the ordinary closed pushforward of the open extension of a finite locally constant flat sheaf. A flat sheaf has flat geometric fibres: use the existing source Point.flat_sheafFiber_obj after lifting the point to universe u+1, and transfer back using uliftSheafFiberIso. The stratum compactness theorem applies to exactly this object. Transport along its specified isomorphism. Thick generation therefore proves compactness of every bounded constructible finite-Tor object.",
    "uses": [
-    "lem-pur-etale-lisse-stratum-compact",
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sk-lem-sf-flat-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.4.6 and proof of Proposition 6.4.8, last paragraph, applied to the lisse flat generators of the cited Noetherian devissage."
-   }
-  },
-  {
-   "text": "Compact objects form a thick subcategory here. For shifts, use $\\operatorname{Hom}(P[n],K)=\\operatorname{Hom}(P,K[-n])$; shifts preserve coproducts because they are equivalences. Closure under cones is [lem-sc-compact-cone], with precisely the coproduct universe fixed in step 1. For a retract $P\\xrightarrow{a}Q\\xrightarrow{b}P$ with $ba=1$, the coproduct comparison for $P$ is a retract of that for $Q$, so its inverse is obtained by composing the inclusion, the inverse comparison for $Q$, and the retraction. The zero object is compact, and compactness is invariant under isomorphism. Apply the Noetherian complement of [sk-lem-sf-flat-model], which explicitly applies on the ordinary etale site for every Noetherian scheme and finite commutative coefficient ring: every bounded constructible finite-Tor complex lies in the thick subcategory generated by the $Rg_*j_!L$ of step 2. It is therefore compact. In this application finite Tor amplitude means that some integers $r\\le s$ satisfy $H^i(K\\otimes_C^L N[0])=0$ for every sheaf $N$ of $C$-modules and every $i\\notin[r,s]$; this is precisely the Tor condition specified in the Noetherian complement.",
-   "uses": [
-    "lem-sc-compact-cone",
+    "lem-sc-compact-objects-thick",
     "sk-lem-sf-flat-model",
-    "def-pc-compact-object"
+    "lem-pur-etale-lisse-stratum-compact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.4.8, reverse inclusion, using the existing Noetherian finite-Tor flat-model devissage instead of restating a general compactness theorem."
+    "place": "Proposition 6.4.8, first paragraph (printed p. 49); the explicit K-injective local cocycle argument is the expansion in steps 5 and 6 of lem-pur-etale-finite-ring-compact-generators."
    }
   },
   {
-   "text": "Choose a set $S$ of representatives $u_s:U_s\\to T$ of the affine objects of $T_{\\mathrm{et}}$, using [lem-weil-pbc-affine-etale-essentially-small-cover]; these objects cover every object of the site. Work in the fixed indexing universe containing this small presentation. Put $E_s=u_{s!}C_{U_s}[0]$. Since $T$ and $U_s$ are qcqs, [lem-weil-pbc-etale-free-sheaf-constructible] with $M=C$ makes $E_s$ a constructible sheaf. It is flat by [lem-pc-sites-modules-j-shriek-flat], applied to the constant ring sheaf; the identification with that free extension is part of [lem-weil-pbc-etale-free-sheaf-constructible]. A flat sheaf in degree zero has Tor amplitude $[0,0]$: tensoring an acyclic complex with it remains acyclic, since its exact tensor functor preserves kernels and images. It is consequently K-flat, so its derived tensor with any degree-zero sheaf is the ordinary degree-zero tensor by [def-kun-derived-tensor]. Thus each $E_s$ is bounded constructible of finite Tor amplitude. Apply step 3 to this bounded constructible finite-Tor object to conclude that $E_s$ is compact.",
+   "text": "Take S=T.AffineEtale, a type in u+1, and E_U=affineEtaleFreeComplex C T U. This is the explicit free Yoneda sheaf placed in degree zero. The proved source isConstructibleSheaf_freeYoneda is the affine Noetherian specialization of free-etale-sheaf constructibility; boundedConstructible_singleFunctor_obj gives its cohomological constructibility, which is transported through isConstructibleEtaleModuleSheaf_iff. The standard t-structure shows its cohomology vanishes outside [0,0]. The proved source flat_freeYoneda specializes free_sheaf_flat to C. Its single complex is bounded and termwise flat, including the zero terms. Apply hasTorAmplitudeIn_iff_exists_flatModel to conclude Tor amplitude [0,0].",
    "uses": [
     "lem-weil-pbc-affine-etale-essentially-small-cover",
     "lem-weil-pbc-etale-free-sheaf-constructible",
-    "lem-pc-sites-modules-j-shriek-flat",
-    "def-kun-derived-tensor"
+    "lem-weil-pbc-free-sheaf-flat",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-etale-flat-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.4.5(1) and the coherent generators in the first paragraph of the proof of Proposition 6.4.8; constructibility and flatness supplied by the cited site lemmas."
+    "place": "Proposition 6.4.8, first paragraph (printed p. 49); the explicit K-injective local cocycle argument is the expansion in steps 5 and 6 of lem-pur-etale-finite-ring-compact-generators."
    }
   },
   {
-   "text": "For any module sheaf $F$, the sheafification universal property [def-weil-presheaf-modules-sheafification] and the explicit free Yoneda bijection [lem-weil-pbc-free-yoneda-presheaf-module] give a natural isomorphism $\\operatorname{Hom}_{\\mathcal A}(u_{s!}C_{U_s},F)\\cong F(U_s)$. The identification with the sheafification of the free ring-presheaf module is the $M=C$ clause of [lem-weil-pbc-etale-free-sheaf-constructible]. If $I$ is a K-injective complex representing $K$, [lem-weil-pbc-kinjective-hom-derived] identifies derived morphisms into $QI$ with homotopy classes of chain maps. A chain map from $E_s[n]$ to $I$ is a section of $I^{-n}(U_s)$ killed by the differential; two such maps are homotopic exactly when their sections differ by a boundary in $I^{-n}(U_s)$. Hence $\\operatorname{Hom}_{D(\\mathcal A)}(E_s[n],K)\\cong H^{-n}(I(U_s))$. All identifications are natural in maps of target complexes, because the free Yoneda bijection is natural and both chain-map and homotopy formulas use composition.",
+   "text": "The explicit affine free complexes detect isomorphisms by lem-pur-affine-etale-free-detection. Combine this with the coproduct witness, local smallness, compactness and the generator properties just proved to obtain the exact existential-and-conjunction conclusion.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "lem-weil-pbc-etale-free-sheaf-constructible",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pur-affine-etale-free-detection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.4.8, first paragraph: expand detection by free etale generators, using K-injectives rather than an unmentioned resolution theorem."
-   }
-  },
-  {
-   "text": "Let $h:A\\to B$ satisfy the Hom-bijection hypothesis of the item. Choose K-injective representatives $I_A,I_B$ by [prop-pur-kinjective-resolutions-exist]. By [lem-weil-pbc-kinjective-hom-derived], the morphism $h$ is represented, under these isomorphisms, by a chain map $f:I_A\\to I_B$. Step 5 shows that $H^q(I_A(U_s))\\to H^q(I_B(U_s))$ is bijective for every $s$ and $q$ (put $n=-q$). These sectionwise bijections imply that $H^q(f)$ is an isomorphism of sheaves. Indeed a local section of a cohomology sheaf is locally represented by a cocycle; refine to an affine basis object $U_s$. Surjectivity on $H^q(I(U_s))$ lifts a target cocycle modulo a boundary to a source cocycle, proving local surjectivity on cohomology sheaves. For injectivity, represent a source class locally by a cocycle and, if its image vanishes as a sheaf class, shrink until its image is a boundary; refine once more to an affine basis object. Injectivity on $H^q(I(U_s))$ then makes the source cocycle a boundary there. Thus the kernel sheaf is zero as well. By [def-weil-abstract-derived-category], $f$ is a quasi-isomorphism, so $Qf$, and hence $h$, is invertible. This proves the required morphism-detection assertion for the set $S$ and family just constructed.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.4.8, compact generation: explicit local cocycle and boundary proof of detection on the small affine etale basis."
+    "place": "Proposition 6.4.8, first paragraph (printed p. 49); the explicit K-injective local cocycle argument is the expansion in steps 5 and 6 of lem-pur-etale-finite-ring-compact-generators."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "def-weil-size-convention",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-pc-derived-category-locally-small",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-pur-etale-lisse-stratum-compact",
-  "lem-cbc-open-closed-recollement",
-  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-grothendieck-derived-has-coproducts",
+  "lem-sc-compact-objects-thick",
   "sk-lem-sf-flat-model",
-  "lem-sc-compact-cone",
-  "def-pc-compact-object",
+  "lem-pur-etale-lisse-stratum-compact",
   "lem-weil-pbc-affine-etale-essentially-small-cover",
   "lem-weil-pbc-etale-free-sheaf-constructible",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "def-kun-derived-tensor",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-abstract-derived-category"
+  "lem-weil-pbc-free-sheaf-flat",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-etale-flat-model",
+  "lem-pur-affine-etale-free-detection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Section 6.4, Lemma 6.4.5 and Proposition 6.4.8; expanded using existing Noetherian finite-ring devissage and K-injective section detection."
+  "place": "Section 6.4: stratum compactness and existing thick generation, explicit free affine etale generators with degree-zero flat models; generator detection is proved in lem-pur-affine-etale-free-detection."
  },
  "mathlib_searches": [
   {
@@ -275,20 +234,11 @@
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "prop-pur-kinjective-resolutions-exist",
   "lem-pc-derived-category-locally-small",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-cbc-open-closed-recollement",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "sk-lem-sf-flat-model",
-  "lem-sc-compact-cone",
   "lem-weil-pbc-affine-etale-essentially-small-cover",
-  "lem-weil-pbc-etale-free-sheaf-constructible",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-etale-free-sheaf-constructible"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -316,5 +266,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261019T002606-L-2157414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
