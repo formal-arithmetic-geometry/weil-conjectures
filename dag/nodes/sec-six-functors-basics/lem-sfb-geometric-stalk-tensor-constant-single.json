@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-geometric-stalk-tensor-constant-single",
+ "kind": "statement",
+ "title": "Geometric stalks commute with derived tensor against a constant module",
+ "statement": "For any scheme X, commutative coefficient ring R, geometric point x of X, derived etale module complex L and R-module N, the exact derived geometric stalk of L tensor^L constant(N)[0] is isomorphic in D(R) to the derived stalk of L tensor^L N[0]. No boundedness, finiteness or Noetherian assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Tag 09BI, using Tags 03PT and 07A4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Proof. Apply the existing unbounded derived tensor/stalk comparison\n`AlgebraicGeometry.Etale.exists_derivedTensor_stalk_iso` to L and the degree-zero\nconstant sheaf of N. It gives an isomorphism from the stalk of the derived tensor\nto the tensor of the two derived stalks. The exact-functor comparison\n`mapDerivedCategorySingleFunctor` identifies the second stalk with the degree-zero\ncomplex on the ordinary stalk of the constant sheaf, and\n`sheafFiberConstantSheafIso` identifies that ordinary stalk with N. Tensoring this\nlast composite on the left by the derived stalk of L gives the displayed isomorphism.\nThe cited comparison is unbounded and has no finiteness, boundedness, or\nNoetherian hypotheses, so the edge cases of zero rings and zero modules are included.",
+   "uses": [
+    "lem-sfb-etale-derived-tensor-stalk",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof of Tag 09BI, using Tags 03PT and 07A4; reduced to the existing lem-sfb-etale-derived-tensor-stalk and exact-functor single-complex comparison by Z7, 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact geometric stalk functor commutes with derived tensor product against constant sheaves of modules",
+   "results": "{\"t\": \"2026-10-18T17:03:56Z\", \"tool\": \"leanfinder\", \"query\": \"An exact geometric stalk functor commutes with derived tensor product against constant sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafCommRing.ι_forgetStalk_hom_assoc\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"smoothSheafCommRing.ι_forgetStalk_inv\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"smoothSheafCommRing.ι_forgetStalk_inv_apply\"], \"digest\": \"6117fb5d877737fd\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching derived statement; use the listed existing infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-18T17:03:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafFiber\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ\", \"CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ_assoc\"], \"digest\": \"0ed198d38ebbcd2a\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching derived statement; use the listed existing infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*tensor|tensor.*sheafFiber",
+   "results": "{\"t\": \"2026-10-18T17:04:10Z\", \"tool\": \"grep\", \"query\": \"sheafFiber.*tensor|tensor.*sheafFiber\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\"], \"digest\": \"8556c837fa453f2a\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching derived statement; use the listed existing infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact geometric stalk functor commutes with derived tensor product against constant sheaves of modules",
+   "results": "{\"t\": \"2026-10-18T22:29:38Z\", \"tool\": \"leansearch\", \"query\": \"An exact geometric stalk functor commutes with derived tensor product against constant sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalkFunctor\", \"TopCat.Presheaf.stalk\", \"TopCat.Presheaf.stalk_mono_of_mono\", \"TopCat.Presheaf.stalkFunctor_map_germ_apply'\", \"TopCat.Presheaf.stalkFunctor_map_germ_apply\", \"TopCat.Presheaf.stalkFunctor_map_germ\", \"TopCat.Presheaf.stalkFunctor_obj\", \"CategoryTheory.constantCommuteCompose\"], \"digest\": \"6f4a6a8f6f911401\"}",
+   "date": "2026-10-19",
+   "verdict": "No matching derived theorem. Hits concern ordinary stalks or constant sheaves; retain the existing project derived APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConnectedEtalePerfectConstant",
+  "date": "2026-10-19",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-connected-etale-perfect-constant",
+   "place": "Step 2, stalk and derived tensor comparison"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.GeometricStalkTensorConstantSingle",
+  "file": "lean/Sheaf/SixFunctors/GeometricStalkTensorConstantSingle.lean",
+  "declaration": "AlgebraicGeometry.Etale.geometricStalk_tensor_constant_single",
+  "statement": "theorem geometricStalk_tensor_constant_single\n    (R : Type (u + 1)) [CommRing R] {X : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)\n    (L : _root_.DerivedCategory\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))\n    (N : ModuleCat.{u + 1} R) :\n    let F := (pointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} R)\n    letI : F.Additive := (pointSmallEtale x).sheafFiber_additive\n    Nonempty\n      (F.mapDerivedCategory.obj\n          (((derivedTensor (ModuleCat.{u + 1} R) X).obj L).obj\n            ((_root_.DerivedCategory.singleFunctor _ 0).obj\n              ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj N))) ≅\n        F.mapDerivedCategory.obj L ⊗\n          (_root_.DerivedCategory.singleFunctor (ModuleCat.{u + 1} R) 0).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261019T034416-L-430087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261019T034416-L-430087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
