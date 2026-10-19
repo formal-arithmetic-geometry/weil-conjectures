@@ -1454,6 +1454,44 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
     log(f"batch {b['id']}: conflict fallback done in {time.time() - t0:.1f} s; the next build verifies")
 
 
+def drop_other_writers(b: dict, last: dict, failures: list, log) -> bool:
+    """Merge queue: a failure no delivery of the batch explains, while landings of other writers (U, PI, PR, the
+    maintainer, stage 2) that the build names as possible causes were in it: drop those from the candidate (hard
+    restore, one commit) and let the next build verify. True when something was dropped."""
+    batch_ids = {e['landing'] for e in b['entries']}
+    open_ids = {r['id'] for r in ld.records(ld.REQUESTS)}
+    # only a change that can break the failing module: one of its own modules fails, or it changed an interface
+    ids = sorted({s['id'] for s in last.get('suspects') or [] if s['id'] in open_ids and s['id'] not in batch_ids
+                  and set(s.get('fails') or []) & set(failures)
+                  and (s.get('kind') == 'interface' or set(s.get('fails') or []) & set(s.get('modules') or []))})
+    if not ids:
+        return False
+    t0 = time.time()
+    reason = f"the global build of {str(last.get('commit'))[:10]} failed in {' '.join(failures[:6])}; this change is a possible cause"
+    with md.merge_lock():
+        with ld.tree_lock():
+            dropped, restore_to, notes = ld.drop_plan(ids)
+            lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+            tip = md.git('rev-parse', 'HEAD')
+            recovery.commit_inverse(ROOT, {f"{lean_rel}/{rel}": data for rel, data in restore_to.items()}, tip,
+                                    f"Drop {len(dropped)} landing(s) from the candidate after the red build of batch {b['id']}")
+            ld.drop_close(dropped, reason)
+    by_landing = {e['landing']: e for e in b['entries']}
+    for r in dropped:
+        e = by_landing.get(r['id'])
+        if e is not None and e['state'] == 'landed':
+            e['state'] = 'returned'; e['why'] = 'taken out with ' + ', '.join(r.get('chained') or ids)
+            give_back(e['group'], e['item'], e['head'], reason + '; it changed the same file(s) after a dropped change', log)
+        log(f"batch {b['id']}: DROPPED from the candidate {r['id']} ({r['group']}: {r.get('note', '')[:100]})")
+    for x in notes:
+        MQ_LOG('drop: ' + x)
+    MQ_LOG(f"red build {last.get('time')}: {len(dropped)} landing(s) of other writers dropped, {len(restore_to)} file(s) restored, "
+           f"{time.time() - t0:.1f} s")
+    b['await_recovery'] = True
+    write_json(OPEN, b)
+    return True
+
+
 def closure_fallback(b, last, log, imports=None):
     """Alert and defer all closure-touching deliveries; leave independent work in place."""
     failures = list(last.get('failing') or []) + [c['module'] for c in last.get('batch_checks') or []]
@@ -1560,6 +1598,8 @@ def step(cache: dict, log) -> str:
     b["handled"].append(last.get("time"))
     if last.get("source_fingerprint"):
         b.setdefault("handled_sources", []).append(last["source_fingerprint"])
+    if T['unattributed'] and ld.merge_queue() and drop_other_writers(b, last, T['unattributed'], log):
+        return 'returned'
     if T['unattributed'] or b['round'] >= 4:
         closure_fallback(b, last, log, imports)
         return 'returned'
