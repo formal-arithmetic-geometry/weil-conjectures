@@ -12,46 +12,11 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-import Sheaf.Paper.CompatibleFiniteDerivedTrivializations
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Paper.NilpotentReductionLissity
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Sheaf.RingTheory.RlimPerfectComplete
 
-import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
+import Sheaf.Paper.FinitePerfectAdicRealization
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+
 /-!
 # Perfect local lifting of a lisse residue reduction
 
@@ -191,7 +156,47 @@ theorem residueLisseConstantComparison_exists (X : Scheme.{t}) {A : Type t}
       IsIso φ ∧ ∀ (U : X.ProEtᵒᵖ) (a : completedAdicQuotient d n),
         φ.hom.app U ((koszulConstantUnit X (A ⧸ d.ideal ^ (n + 1))).app U a) =
           (finiteCoefficientScalarMap X (completedAdicQuotient d n)).app U a := by
-  sorry
+  let Q := completedAdicQuotient d n
+  let J := ProEt.topology X
+  let F := (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Q)
+  let R := completedAdicFiniteCommRing X d n
+  let α : F ⟶ R.obj :=
+    { app := fun U ↦
+        letI := completedAdicFiniteCommRingStructure X d n U
+        CommRingCat.ofHom ((finiteCoefficientScalarMap X Q).app U).hom
+      naturality := fun U V f ↦ (forget₂ CommRingCat RingCat).map_injective
+        ((finiteCoefficientScalarMap X Q).naturality f) }
+  let φ : adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ R :=
+    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F R).symm α
+  have hφ : toSheafify J F ≫ φ.hom = α :=
+    ((sheafificationAdjunction J CommRingCat.{t + 1}).homEquiv F R).apply_symm_apply α
+  have hαi : Presheaf.IsLocallyInjective J α := by
+    rw [← Presheaf.isLocallyInjective_forget_iff]
+    change Presheaf.IsLocallyInjective J
+      (Functor.whiskerRight (finiteCoefficientScalarMap X Q) (CategoryTheory.forget RingCat))
+    infer_instance
+  have hαs : Presheaf.IsLocallySurjective J α := by
+    rw [Presheaf.isLocallySurjective_iff_whisker_forget]
+    change Presheaf.IsLocallySurjective J
+      (Functor.whiskerRight (finiteCoefficientScalarMap X Q) (CategoryTheory.forget RingCat))
+    infer_instance
+  have : Presheaf.IsLocallyInjective J (toSheafify J F ≫ φ.hom) := hφ.symm ▸ hαi
+  have : Presheaf.IsLocallySurjective J (toSheafify J F ≫ φ.hom) := hφ.symm ▸ hαs
+  have : Sheaf.IsLocallyInjective φ :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective
+      J (toSheafify J F) φ.hom
+  have : Sheaf.IsLocallySurjective φ :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J F) φ.hom
+  have : IsIso φ := (Sheaf.isLocallyBijective_iff_isIso φ).1 ⟨inferInstance, inferInstance⟩
+  refine ⟨φ, ⟨inferInstance, ?_⟩, ?_⟩
+  · intro U a
+    exact congrArg (fun k : F ⟶ R.obj ↦ (k.app U).hom a) hφ
+  · intro ψ hψ
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext J _ _ R.property
+    refine Eq.trans ?_ hφ.symm
+    ext U a
+    exact hψ.2 U a
 
 /-- The normalized constant-to-component quotient coefficient comparison.
 Source: Stacks Tags 0H7J and 09C6
@@ -200,6 +205,54 @@ def residueLisseConstantComparison (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶ completedAdicFiniteCommRing X d n :=
   (residueLisseConstantComparison_exists X d n).exists.choose
+
+/-- The normalized comparison is invertible, including for the zero quotient ring.
+Source: Stacks Tags 0H7J and 09C6
+(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: take the invertibility conjunct of its defining unique-existence theorem. -/
+private instance residueLisseConstantComparison_isIso (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (d : AdicCoefficientDatum A) (n : ℕ) :
+    IsIso (residueLisseConstantComparison X d n) :=
+  (residueLisseConstantComparison_exists X d n).exists.choose_spec.1
+
+/-- The chosen comparison has the prescribed value on every constant section.
+Source: Stacks Tags 0H7J and 09C6
+(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: take the normalization conjunct of its defining unique-existence theorem. -/
+private theorem residueLisseConstantComparison_apply (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (d : AdicCoefficientDatum A) (n : ℕ) (U : X.ProEtᵒᵖ)
+    (a : completedAdicQuotient d n) :
+    (residueLisseConstantComparison X d n).hom.app U
+        ((koszulConstantUnit X (A ⧸ d.ideal ^ (n + 1))).app U a) =
+      (finiteCoefficientScalarMap X (completedAdicQuotient d n)).app U a :=
+  (residueLisseConstantComparison_exists X d n).exists.choose_spec.2 U a
+
+/-- Fix the coefficient universe when applying the derived reconstruction API.
+Source: Stacks Tag 03DA (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: specialize the existing essentially-small-site instance to universe t+1. -/
+private theorem residueLisseAbLocallyBijective (X : Scheme.{t}) :
+    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+  finitePerfectModelsAbLocallyBijective X
+
+
+attribute [local instance] residueLisseAbLocallyBijective
+
+/-- The actual quotient-completion unit is invertible on an intrinsically complete object.
+Source: Stacks Tag 099M (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: the comparison with the explicit Koszul model identifies its unit with the
+functorial Koszul unit followed by an isomorphism. Cancel that isomorphism and apply
+Koszul reconstruction, which preserves the same normalized unit. -/
+private theorem residueLisse_reconstruction (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A)
+    (ha : Ideal.span (Set.range a) = d.ideal)
+    (M : DerivedCategory (CompletedAdicModules X d))
+    (hM : IsCompletedAdicDerivedComplete X d r a ha M) :
+    IsIso ((reconstructionCompletionUnit X d).app M) := by
+  obtain ⟨j, hj⟩ := reconstructionKoszulIntrinsicComparison X d r a M
+  have : IsIso (completedAdicIntrinsicUnit X d r a M) := hM
+  have hκ : IsIso ((reconstructionKoszulDerivedUnit X d r a).app M) :=
+    IsIso.of_isIso_fac_right hj
+  exact (koszulReconstruction X d r a ha).choose_spec.2 M hκ
 
 /-- Exact sheafification infrastructure on the actual localized small pro-etale site.
 Source: Stacks Tags 03DA and 09C6
@@ -226,6 +279,54 @@ instance residueLisseSliceHasDerivedCategory (X : Scheme.{t})
     HasDerivedCategory (SheafOfModules.{t + 1} (R.over U)) :=
   HasDerivedCategory.standard _
 
+/-- Compare exact derived restriction with the localization representative in the statement.
+Source: Stacks Tags 03DJ and 08JB
+(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: replace the object by the chosen localization representative, then apply the
+canonical factorization of the exact restriction functor through derived localization. -/
+private def residueLisseRestrictionComparison (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
+    (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
+    (ringedDerivedRestrictionGeneral R U).obj M ≅
+      ringedSiteDerivedRestrictionOfUniverses R U M := by
+  let F := SheafOfModules.overFunctor.{t + 1} R U
+  have := (ringedOverFunctor_exactGeneral R U).1
+  have := (ringedOverFunctor_exactGeneral R U).2.1
+  have := (ringedOverFunctor_exactGeneral R U).2.2
+  exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
+
+/-- Transport an isomorphism through the statement's representative-based restriction.
+Source: Stacks Tag 03DJ (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: conjugate the exact derived restriction of the isomorphism by the canonical
+representative comparisons at its endpoints. -/
+private def residueLisseRestrictIso (X : Scheme.{t})
+    (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
+    {M N : DerivedCategory (SheafOfModules.{t + 1} R)} (e : M ≅ N) :
+    ringedSiteDerivedRestrictionOfUniverses R U M ≅
+      ringedSiteDerivedRestrictionOfUniverses R U N :=
+  (residueLisseRestrictionComparison X R U M).symm ≪≫
+    (ringedDerivedRestrictionGeneral R U).mapIso e ≪≫
+      residueLisseRestrictionComparison X R U N
+
+/-- The exact constant functor computes constant complexes termwise.
+Source: Stacks Tags 05RU and 09C6
+(blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
+Proof: use the localization factorization for the composite universe-lift, restriction
+of scalars and constant module sheafification functor. -/
+private def residueLisseConstantComplexComparison (X : Scheme.{t})
+    (B : Type t) [CommRing B] (P : CochainComplex (ModuleCat.{t} B) ℤ) :
+    (residueLisseDerivedConstant X B).obj (DerivedCategory.Q.obj P) ≅
+      DerivedCategory.Q.obj (finiteModelConstantComplex X B P) := by
+  let e := (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom
+  have : (ModuleCat.restrictScalars.{t + 1} e).IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{t + 1, t + 1, t} e).isLeftAdjoint
+  have : (ModuleCat.restrictScalars.{t + 1} e).IsRightAdjoint :=
+    (ModuleCat.extendRestrictScalarsAdj.{t + 1, t + 1, t} e).isRightAdjoint
+  let F := ModuleCat.uliftFunctor.{t + 1, t} B ⋙
+    ModuleCat.restrictScalars.{t + 1} e ⋙ koszulConstantFunctor X B
+  exact F.mapDerivedCategoryFactors.app P
+
 /-- A derived-complete complex whose residue reduction is etale locally a constant
 perfect complex is pro-etale locally the completed realization of a perfect A-complex.
 The sieve on the final object expresses the covering, including an empty covering
@@ -234,34 +335,21 @@ when X is empty. Perfectness is exactly the recorded bounded finite-projective m
 Source: Stacks Project, proetale.tex, Tag 09C6; Bhatt--Scholze, Lemma 6.6.8 and
 Proposition 6.6.11 (blueprint: lem-weil-pbc-residue-lisse-perfect-lift).
 
-Proof plan:
-1. Restrict to the given etale residue-trivializing cover, then to the connected clopen
-   components of Noetherian affine opens. Slice restriction is exact and preserves
-   products, constants and the quotient-completion unit. Use the localization equivalence
-   of lem-weil-proetale-weakly-etale-localization and constant-completion equivalence.
-2. Let [a,b] bound the perfect residue model. Induct on n using the coefficient triangle
-   for I^n/I^(n+1), derived balancing on K-flat resolutions, and the long exact cohomology
-   sequence. Finite locally constant sheaves form a Serre subcategory. Thus every M_n
-   has finite locally constant cohomology in the same [a,b], without assuming M bounded.
-3. Use the one-stratum constructible partition and finite-ring etale derived origin to
-   obtain L_n. Full faithfulness uniquely lifts the datum's normalization isomorphisms;
-   faithfulness gives the quotient cocycles. Nilpotent-reduction lissity makes all
-   cohomology sheaves of L_n finite locally constant on the etale site.
-4. Apply an exact geometric stalk to these same normalizations, retaining their scalar
-   extension units. The stalk tower has the required quotient cocycles. The algebraic
-   perfect inverse-limit reconstruction lemma yields a bounded finite-projective
-   A-complex P with compatible reductions to these stalk complexes.
-5. The finite locally constant isomorphism sheaves have nonempty stalks on the connected
-   neighborhood. Compatible finite derived trivialization yields one pro-etale cover
-   and compatible identifications of all reductions of P with M_n there.
-6. For each projective term of P choose an idempotent on a finite free module. Its finite
-   quotient sheaves have sectionwise surjective transitions. The Roos 1-shift map is
-   sectionwise surjective by recursive lifting. The inverse limit is the same idempotent
-   summand of B_X^r, hence B_X tensor_A P. Exact products and boundedness identify the
-   derived limit with this bounded complex; finite projectivity computes derived tensor.
-   On M the quotient-completion comparison and exact slice restriction identify the
-   right limit with M|U. The compatible tower isomorphism gives the asserted isomorphism.
-   Assemble the connected affine covers; use the empty covering for the empty scheme. -/
+Proof:
+1. Choose bounded finite-projective representatives for the residue witnesses. The
+   exact constant functor's localization comparison identifies their derived constant
+   images with the actual termwise constant complexes.
+2. Apply residuePerfect_finite_quotient_models. The normalized finite coefficient
+   comparisons give its coefficient data. This proves uniform finite-level perfect
+   local models, without using completeness of M.
+3. Apply finitePerfectModels_adic_realization to that finite-level structure. It
+   identifies the derived limit of the specified quotient tower locally with the
+   completed realization of one bounded finite-projective A-complex.
+4. Koszul reconstruction makes the actual quotient-completion unit invertible on M.
+   Exact slice restriction transports this isomorphism to the representative-based
+   restriction in the statement. Compose with step 3 and the constant-complex
+   comparison. Localization of the chosen bounded finite-projective complex is perfect.
+-/
 theorem residue_lisse_perfect_lift (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [IsAdicComplete d.ideal A] (r : ℕ) (a : Fin r → A)
@@ -294,6 +382,36 @@ theorem residue_lisse_perfect_lift (X : Scheme.{t}) [IsLocallyNoetherian X] [Com
                 (completedAdicRing X d) U
                 ((completedAdicDerivedChange X (completedAdicScalar X d)).obj
                   ((residueLisseDerivedConstant X A).obj P))) := by
-  sorry
+  have hφ (n : ℕ) : IsIso (residueLisseConstantComparison X d n) := inferInstance
+  have hnorm : FinitePerfectModelsNormalized X d (residueLisseConstantComparison X d) :=
+    residueLisseConstantComparison_apply X d
+  have hcompat := finitePerfectModels_normalized_compatible X d
+    (residueLisseConstantComparison X d) hnorm
+  have hmodels : HasUniformFinitePerfectModels X d
+      (residueLisseConstantComparison X d) M := by
+    apply residuePerfect_finite_quotient_models X d
+      (residueLisseConstantComparison X d) hφ hcompat M
+    obtain ⟨S, hS, hlocal⟩ := _hresidue
+    refine ⟨S, hS, ?_⟩
+    intro V f hf
+    obtain ⟨P, hP, ⟨e⟩⟩ := hlocal V f hf
+    obtain ⟨K, a, b, haK, hbK, hK, ⟨eK⟩⟩ := hP
+    refine ⟨K, a, b, haK, hbK, hK, ⟨e ≪≫ ?_⟩⟩
+    apply residueLisseRestrictIso X (completedAdicFiniteRing X d 0) ((toProEt X).obj V)
+    apply (completedAdicDerivedChange X (residueLisseConstantComparison X d 0)).mapIso
+    exact (residueLisseDerivedConstant X _).mapIso eK ≪≫
+      residueLisseConstantComplexComparison X _ K
+  obtain ⟨S, hS, hlocal⟩ := finitePerfectModels_adic_realization X d
+    (residueLisseConstantComparison X d) hφ hcompat M hmodels
+  have := residueLisse_reconstruction X d r a ha M _hcomplete
+  refine ⟨S, hS, ?_⟩
+  intro U f hf
+  obtain ⟨P, c, b, hc, hb, hP, ⟨e⟩⟩ := hlocal U f hf
+  refine ⟨DerivedCategory.Q.obj P, ⟨P, c, b, hc, hb, hP, ⟨Iso.refl _⟩⟩, ⟨?_⟩⟩
+  refine residueLisseRestrictIso X (completedAdicRing X d) U
+    (asIso ((reconstructionCompletionUnit X d).app M)) ≪≫ e ≪≫ ?_
+  apply residueLisseRestrictIso X (completedAdicRing X d) U
+  exact (completedAdicDerivedChange X (completedAdicScalar X d)).mapIso
+    (residueLisseConstantComplexComparison X A P).symm
 
 end AlgebraicGeometry.Scheme

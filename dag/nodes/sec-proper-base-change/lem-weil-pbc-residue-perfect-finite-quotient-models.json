@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-pbc-residue-perfect-finite-quotient-models",
+ "kind": "statement",
+ "title": "One-step perfect finite quotient models and uniform propagation",
+ "statement": "Let X be locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], and let (A,I) be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Let M be an arbitrary complex of modules over the completed coefficient sheaf. Identify the constant finite coefficient sheaves with the actual coefficient sheaves by isomorphisms commuting with consecutive quotient maps and the completed scalar projections. Write M_n for the actual derived reduction to A/I^(n+1) [lem-pur-derived-change-of-rings]. Fix an etale chart V and a nonempty interval [a,b]. If M_0 and M_n admit etale local constant finite-projective complex models with terms in [a,b], then M_(n+1) admits such models in the same interval. No completeness of M or compatible trivializations is assumed. Consequently a residue-trivializing cover provides one interval on each chart that works at every finite level, by induction.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes; sites-cohomology.tex Tag 094I, perfect-residue ideal-filtration argument; connected etale perfect constancy."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-projective-module",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Refine the two etale coverings giving the residue and previous-level perfect models to one covering. Restriction on the concrete localized site is exact and further restriction preserves the given isomorphisms. On each chart retain the fixed interval [a,b]; empty charts use empty covers.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "pqf-lem-locnoeth-lft",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the coefficient sequence with kernel I^(n+1)/I^(n+2) by a flat K-flat representative of M. Balancing identifies the first term with the perfect residue complex tensored with this finite A/I-module. The previous-level model supplies the other outer term. The long exact sequence and weak Serre theorem over the finite Noetherian ring A/I^(n+2) give bounded finite locally constant cohomology of the middle term. The coefficient compatibility equations identify these with the actual quotient reductions. The equations themselves follow, for normalized comparisons, by the sheafification universal property and the constant-section formulas.",
+   "uses": [
+    "lem-constructible-constant-exact",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-locally-constant-derived-serre",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the one-stratum constructible presentation and finite-ring derived origin. Bounded-below full faithfulness lifts the given quotient normalizations uniquely, so their cocycles remain the original ones. Nilpotent-reduction lissity gives etale locally constant finite cohomology at every level.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the next-level object with an arbitrary quotient module and use its finite ideal filtration. Each associated quotient is an A/I-module, so balancing with the residue model proves Tor amplitude [a,b]. Connected etale perfect constancy gives local perfect constant models; represent their stalk complexes by finite-projective complexes with terms in [a,b]. Assemble the coverings. For the uniform corollary retain the original residue covering and replace a possibly empty interval by [min a b,b]. Further restriction proves the zero-level case on every smaller chart. Ordinary natural-number induction using the one-step theorem gives every level with this same interval.",
+   "uses": [
+    "lem-sfb-connected-etale-perfect-constant",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-constructible-constant-exact",
+  "lem-pc-kflat-resolution",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-connected-etale-perfect-constant",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-weil-pbc-nilpotent-reduction-lissity",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization",
+  "pqf-lem-locnoeth-lft",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C2, lemma-describe-constructible-complexes; sites-cohomology.tex Tag 094I, perfect-residue ideal-filtration argument; connected etale perfect constancy."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded perfect constant residue complex of a pro-etale complex gives uniformly bounded perfect constant complexes over every finite adic quotient",
+   "results": "8 hits: BDeRham, BDeRhamPlus, PreTilt.exists_smodEq_untiltAux, PreTilt, instCommRingBDeRhamPlus, IsAdicComplete.henselianRing, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top",
+   "date": "2026-10-20",
+   "verdict": "No match: coefficient ring and completion facts do not give finite-level local perfect sheaf models."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsPerfect\"",
+   "results": "0 hits",
+   "date": "2026-10-20",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*locallyConstant|residue.*perfect.*sheaf",
+   "results": "0 hits",
+   "date": "2026-10-20",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect residue models of an adic sheaf complex propagate to perfect constant models over successive nilpotent finite quotients",
+   "results": "8 hits: AdicCompletion, eval, lift, incl, IsAdicComplete.mk_lift, eval_comp_of, ofLinearEquiv, transitionMap_comp_eval_apply. All from Mathlib.RingTheory.AdicCompletion.Basic.",
+   "date": "2026-10-20",
+   "verdict": "No match: ordinary adic completion or discrete condensed sheaves do not state derived local perfect lifting on the pro-etale site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ResidueLissePerfectLift",
+  "date": "2026-10-20",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-residue-lisse-perfect-lift",
+   "place": "Uniform perfect finite quotient models from a perfect residue model"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectQuotientModels",
+  "file": "lean/Sheaf/Paper/FinitePerfectQuotientModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.residuePerfect_quotient_models_succ",
+  "statement": "theorem residuePerfect_quotient_models_succ\n    (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (_hφ : ∀ n : ℕ, IsIso (φ n)) (_hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)\n    (a b : ℤ) (_hab : a ≤ b)\n    (_hresidue : FinitePerfectModelsOn X d φ M 0 V a b) (n : ℕ)\n    (_hprevious : FinitePerfectModelsOn X d φ M n V a b) :\n    FinitePerfectModelsOn X d φ M (n + 1) V a b",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finitePerfectModelsAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsAlgebraHasDerived",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsRingHasDerived",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceAbSheafify",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.finitePerfectModelsSliceHasDerived",
+   "AlgebraicGeometry.Scheme.finiteModelConstantComplex",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsOn",
+   "AlgebraicGeometry.Scheme.HasUniformFinitePerfectModels",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsNormalized",
+   "AlgebraicGeometry.Scheme.FinitePerfectModelsCompatible",
+   "AlgebraicGeometry.Scheme.finitePerfectModels_normalized_compatible",
+   "AlgebraicGeometry.Scheme.residuePerfect_quotient_models_succ",
+   "AlgebraicGeometry.Scheme.residuePerfect_finite_quotient_models"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T192711-L-1856737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261019T192711-L-1856737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
