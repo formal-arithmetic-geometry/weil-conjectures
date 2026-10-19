@@ -17499,3 +17499,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:41 L: merged deliver/NM/lem-sf-proper-open-tensor-compatibility (stage 2; reviewer PASS; parallel immutable checks)
 - 16:43 L: merged deliver/NC/lem-coef-finite-free-compact-composition (stage 2; reviewer FIX; parallel immutable checks)
 - 17:11 L: merged deliver/NL/lem-sfb-constructible-cocone-hom-inj (reviewer FIX; first push; new nodes: 0)
+- 17:14 L: merged deliver/NM/lem-sfb-constructible-cocone-hom-surj (stage 2; reviewer PASS; parallel immutable checks)
