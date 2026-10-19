@@ -26,29 +26,52 @@ sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md, final paragraph
 
 set_option autoImplicit false
 
-universe u
+universe u u₁ u₂ v₁ v₂ w₁ w₂
 
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
+/-- The normalized degree-zero map associated with an ordinary coefficient unit.
+Source: Stacks 07A6 (blueprint: def-asd-ordinary-supported-kummer-scalar). -/
+def exactDerivedScalarUnitMap
+    {C : Type u₁} [Category.{v₁} C] [CategoryTheory.Abelian C]
+    [HasDerivedCategory.{w₁} C]
+    {B : Type u₂} [Category.{v₂} B] [CategoryTheory.Abelian B]
+    [HasDerivedCategory.{w₂} B]
+    (V : B ⥤ C) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    {F : C} {G : B} (η : F ⟶ V.obj G) :
+    (DerivedCategory.singleFunctor C 0).obj F ⟶
+      V.mapDerivedCategory.obj ((DerivedCategory.singleFunctor B 0).obj G) :=
+  (DerivedCategory.singleFunctor C 0).map η ≫
+    (V.mapDerivedCategorySingleFunctor 0).inv.app G
+
+/-- The degree-zero scalar-unit property for an exact functor between abelian categories.
+This keeps the chosen derived-category structures abstract during construction.
+Source: Stacks 07A6 (blueprint: def-asd-ordinary-supported-kummer-scalar). -/
+structure ExactDerivedScalarUnit
+    {C : Type u₁} [Category.{v₁} C] [CategoryTheory.Abelian C]
+    [HasDerivedCategory.{w₁} C]
+    {B : Type u₂} [Category.{v₂} B] [CategoryTheory.Abelian B]
+    [HasDerivedCategory.{w₂} B]
+    (V : B ⥤ C) [V.Additive] [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (F : C) (G : B) (η : F ⟶ V.obj G) : Prop where
+  /-- The derived unit represents maps to every restricted derived object. -/
+  bijective (K : DerivedCategory B) :
+    Function.Bijective (fun f : (DerivedCategory.singleFunctor B 0).obj G ⟶ K ↦
+      exactDerivedScalarUnitMap V η ≫ V.mapDerivedCategory.map f)
+
 /-- The universal-property formulation of a derived scalar-extension unit at F.
 The target is G in degree zero, while test objects K range over the entire unbounded
 derived category. This is derived tensor extension, with no flatness assumption on S.
 Source: Stacks 07A6 (blueprint: def-asd-ordinary-supported-kummer-scalar). -/
-@[irreducible]
-def SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
+abbrev SupportedDerivedScalarUnit {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))
     (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} S))
     (η : F ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) : Prop :=
-  ∀ K : DerivedCategoryModule S T,
-    Function.Bijective (fun f : (DerivedCategory.singleFunctor _ 0).obj G ⟶ K ↦
-      (DerivedCategory.singleFunctor _ 0).map η ≫
-        ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategorySingleFunctor 0).inv.app
-          G ≫
-          (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategory.map f)
+  ExactDerivedScalarUnit (Sheaf.restrictScalars T.smallEtaleTopology φ) F G η
 
 /-- The scalar-extension clause, with the comparison maps fixed on generators.
 Both displayed universal properties refer to the canonical sectionwise scalar maps:

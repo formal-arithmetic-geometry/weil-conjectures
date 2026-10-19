@@ -1,0 +1,112 @@
+{
+ "id": "lem-asd-supported-constant-scalar-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized constant scalar maps",
+ "statement": "Let $i:D\\to T$ be any morphism of schemes, $R,S$ commutative rings and $\\varphi:R\\to S$. Suppose $\\eta_D:R_D\\to\\operatorname{Res}_{\\varphi}S_D$ and $\\eta_T:R_T\\to\\operatorname{Res}_{\\varphi}S_T$ send every constant-presheaf generator $r$ to $\\varphi(r)$. Then $\\eta_T$ followed by the restricted supported constant unit equals the supported constant R-unit followed by $i_*\\eta_D$ and the inverse canonical restriction-of-scalars/pushforward comparison. The supported constant unit is [def-asd-ordinary-supported-kummer-boundary].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-asd-ordinary-supported-kummer-boundary"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN and 06YY, with etale-cohomology.tex Tag 03QP; scalar-extension paragraph of lem-amb-cartier-kummer-map"
+ },
+ "proof": [
+  {
+   "text": "The unit equation for uniqueness of left adjoints shows that the transpose of the constant pullback comparison preserves constant generators at the terminal etale object. Naturality transports the equation to every etale object.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two composites agree on generators: both carry r to the constant section varphi(r) on the pullback object. The universal property of sheafification proves equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit specialization of Tags 06YN and 06YY, with etale-cohomology.tex 03QP; extracted from steps 1-6 of lem-asd-supported-kummer-scalar-source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars of a flat sheaf in degree zero is the ordinary extension of scalars",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.extendRestrictScalarsAdj, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, comonadicExtendScalars, ModuleCat.tildeInModuleCat, Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.FormallyUnramified.flat_of_restrictScalars",
+   "date": "2026-10-19",
+   "verdict": "No exact matching theorem; signatures read against the ordinary etale module-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"hom\"",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact matching theorem; signatures read against the ordinary etale module-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedDerivedScalarUnit|constant.*scalar.*unit|scalar.*constant.*unit",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "No exact matching theorem; signatures read against the ordinary etale module-sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerScalarSource",
+  "date": "2026-10-19",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof second and third paragraphs (supported diagonal Kummer class supplying the projective-line adjunction unit), through the Cartier Kummer map lem-amb-cartier-kummer-map whose proof the item follows; there, last paragraph: “Finally apply derived scalar extension from Z/n to A. Its source is i_*A_D, as seen on stalks”.",
+   "via": [
+    "lem-asd-supported-kummer-scalar-source",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerScalarSourceNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerScalarSourceNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.supported_kummer_scalar_source_naturality",
+  "statement": "theorem supported_kummer_scalar_source_naturality {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S) {D T : Scheme.{u}} (i : D ⟶ T) (ηD : ordinaryFiniteConstant R D ⟶ (Sheaf.restrictScalars D.smallEtaleTopology φ).obj (ordinaryFiniteConstant S D)) (ηT : ordinaryFiniteConstant R T ⟶ (Sheaf.restrictScalars T.smallEtaleTopology φ).obj (ordinaryFiniteConstant S T)) (hD : ∀ (U : D.Etaleᵒᵖ) (r : R), ηD.hom.app U ((toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj (ModuleCat.of R R))).app U r) = (toSheafify D.smallEtaleTopology ((Functor.const D.Etaleᵒᵖ).obj (ModuleCat.of S S))).app U (φ r)) (hT : ∀ (U : T.Etaleᵒᵖ) (r : R), ηT.hom.app U ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of R R))).app U r) = (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of S S))).app U (φ r)) : ηT ≫ (Sheaf.restrictScalars T.smallEtaleTopology φ).map (supportedConstantUnit S i) = supportedConstantUnit R i ≫ (lowerStar (ModuleCat.{u + 1} R) i).map ηD ≫ (lowerStarCompRestrictScalarsIso φ i).inv.app (ordinaryFiniteConstant S D)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-acaf5",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261019T231236-L-565115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-acaf5",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261019T231236-L-565115",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 2 new proved helper nodes + 2 definition repairs (SupportedDerivedScalarUnit as an abbrev of ExactDerivedScalarUnit; coefficientUnitDerived via exactDerivedScalarUnitMap) checked against the old bodies, change records, compiles (560 s at load 225), importers OrdinarySupportedKummerSystem/GeoCartierCycleClass/OrdinarySupportedCartierKummer, #print axioms, DAG closure and import-cycle check"
+ }
+}
