@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
-public import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus

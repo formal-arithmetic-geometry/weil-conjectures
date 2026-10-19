@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
+public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
 public import Mathlib.Algebra.Homology.SingleHomology
 import Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingleAux
 

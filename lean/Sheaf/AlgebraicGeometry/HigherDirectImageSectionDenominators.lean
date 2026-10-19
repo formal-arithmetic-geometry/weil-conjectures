@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 import Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization
-import Sheaf.AlgebraicGeometry.AffineLocalizationSheafification
+import WeilConjectures.AlgebraicGeometry.AffineLocalizationSheafification
 import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Denominator bounds for higher direct image sections

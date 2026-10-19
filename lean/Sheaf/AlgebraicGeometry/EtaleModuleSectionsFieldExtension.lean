@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.FieldTheory.IsSepClosed
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 
 @[expose] public section
 

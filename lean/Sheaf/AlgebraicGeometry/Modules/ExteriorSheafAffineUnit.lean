@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification
+import WeilConjectures.AlgebraicGeometry.AffineLocalizingPresheafSheafification
 import Sheaf.LinearAlgebra.ExteriorPowerLocalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 

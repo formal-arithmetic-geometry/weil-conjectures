@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.Sites.PolynomialGenericStrictLocalizationField
 import WeilConjectures.SixFunctors.OpenClosed.Supported
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
-import Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
 /-! # Higher direct image stalks of an affine-line projection

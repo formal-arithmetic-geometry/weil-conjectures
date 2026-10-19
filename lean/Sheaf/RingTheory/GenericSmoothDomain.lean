@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Smooth.Basic
 public import WeilConjectures.FieldTheory.SeparableExtension
-import all Sheaf.AlgebraicGeometry.GenericLocallyOfFinitePresentation
+import all WeilConjectures.AlgebraicGeometry.GenericLocallyOfFinitePresentation
 import Mathlib.Algebra.Algebra.Shrink
 import Mathlib.RingTheory.Finiteness.Small
 import Mathlib.RingTheory.Smooth.Field

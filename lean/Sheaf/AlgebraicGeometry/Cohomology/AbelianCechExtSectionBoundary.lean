@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstructi
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionInjective
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechExtSectionCycle
-import Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting
+import WeilConjectures.CategoryTheory.Abelian.ExtResolutionDerivedConnecting
 import Mathlib.Algebra.Homology.ConcreteCategory
 import Mathlib.CategoryTheory.Adjunction.Additive
 

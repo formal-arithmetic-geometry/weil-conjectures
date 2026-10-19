@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-public import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
+public import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
 import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtension
 
 /-! # Compatible cocone legs across prime localization -/

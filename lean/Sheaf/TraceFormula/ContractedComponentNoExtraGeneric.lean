@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.AlgebraicGeometry.IsProperOfFieldBaseChange
 import Sheaf.AlgebraicGeometry.GeometricReducednessFromGenericStalks
-import Sheaf.AlgebraicGeometry.GenericFlatness
+import WeilConjectures.AlgebraicGeometry.GenericFlatness
 import Sheaf.AlgebraicGeometry.GenericGeometricIrreducibilityShrink
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import Sheaf.AlgebraicGeometry.GenericConstancyGeometricReducedness

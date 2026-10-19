@@ -8,9 +8,9 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
-import Sheaf.AlgebraicGeometry.AffineHomComparisonLeft
-import Sheaf.AlgebraicGeometry.AffineHomComparisonRight
-import Sheaf.AlgebraicGeometry.AffineHomComparisonRankOne
+import WeilConjectures.AlgebraicGeometry.AffineHomComparisonLeft
+import WeilConjectures.AlgebraicGeometry.AffineHomComparisonRight
+import WeilConjectures.AlgebraicGeometry.AffineHomComparisonRankOne
 
 /-! # Natural affine Hom comparison maps
 

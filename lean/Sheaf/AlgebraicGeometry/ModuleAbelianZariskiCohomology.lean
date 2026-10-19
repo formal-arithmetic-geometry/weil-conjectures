@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation

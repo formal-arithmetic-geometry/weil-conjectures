@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Mathlib.RingTheory.FiniteStability
-import Sheaf.RingTheory.ComparisonMapFiniteStage
-import Sheaf.RingTheory.ComparisonMapBaseChangeSystem
+import WeilConjectures.RingTheory.ComparisonMapFiniteStage
+import WeilConjectures.RingTheory.ComparisonMapBaseChangeSystem
 
 /-! # Descending a comparison map and its filtered pushout system -/
 

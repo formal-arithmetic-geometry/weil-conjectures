@@ -36,7 +36,7 @@ import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.CompletionFiniteExtension
 import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.FiniteMapColimitDescent
+import WeilConjectures.RingTheory.FiniteMapColimitDescent
 import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 import Sheaf.RingTheory.ExcellentRing
 import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization

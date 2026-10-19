@@ -12,7 +12,7 @@ public import Sheaf.AlgebraicGeometry.Dimension
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
-import Sheaf.AlgebraicGeometry.FieldBaseChangeAffineCovers
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
 
 /-!
 # Dimension under field extension and base change

@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Filtered.Basic
-import Sheaf.RingTheory.ComparisonMapFiniteStage
+import WeilConjectures.RingTheory.ComparisonMapFiniteStage
 import WeilConjectures.RingTheory.ComparisonTensorCocones
-import Sheaf.RingTheory.DirectedTensorCoconesColimit
+import WeilConjectures.RingTheory.DirectedTensorCoconesColimit
 import Mathlib.RingTheory.FiniteStability
 import Mathlib.RingTheory.IsTensorProduct
 

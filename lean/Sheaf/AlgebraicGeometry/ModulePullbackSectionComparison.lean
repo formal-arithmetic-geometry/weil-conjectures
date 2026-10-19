@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Forgetting module coefficients in canonical pullback section comparisons

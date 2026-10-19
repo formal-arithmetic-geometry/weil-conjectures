@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
-public import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.AlgebraicGeometry.Coherent

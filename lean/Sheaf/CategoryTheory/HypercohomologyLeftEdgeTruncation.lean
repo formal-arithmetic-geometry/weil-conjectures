@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
+public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
 public import Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison
 
 /-! # Compute the spectral left edge on an object bounded above in its edge degree

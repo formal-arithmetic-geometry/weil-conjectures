@@ -10,7 +10,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 import Sheaf.RingTheory.IntegralOverHenselianPair
 import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 import Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion
 import Sheaf.RingTheory.HenselianPairPrimeConnected

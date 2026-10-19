@@ -101,13 +101,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.ComparisonMapFiniteStage",
-  "file": "lean/Sheaf/RingTheory/ComparisonMapFiniteStage.lean",
+  "module": "WeilConjectures.RingTheory.ComparisonMapFiniteStage",
+  "file": "lean/WeilConjectures/RingTheory/ComparisonMapFiniteStage.lean",
   "declaration": "RingHom.exists_comparison_map_finite_stage",
   "statement": "theorem exists_comparison_map_finite_stage\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{v}) [HasColimit F]\n    (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]\n    [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]\n    (φ₀ : B₀ →ₐ[F.obj i₀] C₀)\n    (P Q : Type y) [CommRing P] [CommRing Q] [Algebra P Q]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    (aP : letI := (colimit.ι F i₀).hom.toAlgebra\n      Algebra P (↥(colimit F) ⊗[F.obj i₀] B₀))\n    (g : letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := aP\n      (↥(colimit F) ⊗[F.obj i₀] B₀) ⊗[P] Q →+* (↥(colimit F) ⊗[F.obj i₀] C₀))\n    (he : letI := (colimit.ι F i₀).hom.toAlgebra\n      letI := aP\n      g.comp\n        (Algebra.TensorProduct.includeLeftRingHom (R := P)\n          (A := ↥(colimit F) ⊗[F.obj i₀] B₀) (B := Q)) =\n        (Algebra.TensorProduct.map (Algebra.ofId ↥(colimit F) ↥(colimit F)) φ₀).toRingHom) :\n    ∃ (i : I) (hi : i₀ ≤ i),\n    letI := (colimit.ι F i₀).hom.toAlgebra\n    letI := (F.map (homOfLE hi)).hom.toAlgebra\n    let αi : F.obj i →ₐ[F.obj i₀] ↥(colimit F) :=\n      { (colimit.ι F i).hom with\n        commutes' := fun s ↦\n          congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s) (colimit.w F (homOfLE hi)) }\n      ∃ (aPi : Algebra P (↥(F.obj i) ⊗[F.obj i₀] B₀)),\n        letI := aPi\n        letI := aP\n        ∃ (μB : (↥(F.obj i) ⊗[F.obj i₀] B₀) →ₐ[P]\n            (↥(colimit F) ⊗[F.obj i₀] B₀)),\n          μB.toRingHom =\n            (Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) B₀)).toRingHom ∧\n          ∃ (ψ : ((↥(F.obj i) ⊗[F.obj i₀] B₀) ⊗[P] Q) →+*\n              (↥(F.obj i) ⊗[F.obj i₀] C₀)),\n            ψ.comp (Algebra.TensorProduct.includeLeftRingHom (R := P)\n                (A := ↥(F.obj i) ⊗[F.obj i₀] B₀) (B := Q)) =\n              (Algebra.TensorProduct.map (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom ∧\n            (Algebra.TensorProduct.map αi (AlgHom.id (F.obj i₀) C₀)).toRingHom.comp ψ =\n              g.comp (Algebra.TensorProduct.map μB (AlgHom.id P Q)).toRingHom",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.ComparisonMapFiniteStage; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

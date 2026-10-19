@@ -6,7 +6,7 @@ Authors: SHEAF group G2
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
-import Sheaf.AlgebraicGeometry.FieldBaseChangeAffineCovers
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import Sheaf.AlgebraicGeometry.RationalPointLocalDimensionBaseChange
 import Sheaf.AlgebraicGeometry.DimensionBaseChange

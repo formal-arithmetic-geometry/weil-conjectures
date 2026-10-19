@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 import Sheaf.AlgebraicGeometry.CoherentHomIdealPowerExtension
 import Sheaf.AlgebraicGeometry.CoherentHomIdealPowerEventuallyZero
 import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
+import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealModule
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections

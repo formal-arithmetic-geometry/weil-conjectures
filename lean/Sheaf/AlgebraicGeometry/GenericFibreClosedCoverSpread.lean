@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Sheaf.AlgebraicGeometry.GenericFlatness
+import WeilConjectures.AlgebraicGeometry.GenericFlatness
 
 /-! # Shrinking near a generic fibre
 

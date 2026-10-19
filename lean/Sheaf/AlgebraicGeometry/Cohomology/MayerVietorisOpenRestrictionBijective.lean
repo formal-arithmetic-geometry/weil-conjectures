@@ -5,7 +5,7 @@ Authors: SHEAF group U1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData
-public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtRestrictionMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisExtRestrictionMap
 import Sheaf.AlgebraicGeometry.Cohomology.OpenImmersionInverseImageInjectives
 import Sheaf.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom
 import Sheaf.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf

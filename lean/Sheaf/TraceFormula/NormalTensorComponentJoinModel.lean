@@ -22,7 +22,7 @@ import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.TraceFormula.EtaleNormalDomainFiniteFactors
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.EtaleNormalRing
-import Sheaf.RingTheory.FilteredColimitNormalRing
+import WeilConjectures.RingTheory.FilteredColimitNormalRing
 import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
 import WeilConjectures.Mathlib.RingTheory.Etale.Weakly

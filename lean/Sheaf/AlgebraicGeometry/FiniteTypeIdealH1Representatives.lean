@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import WeilConjectures.Compactification.FiniteTypeDirected
-import Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram
+import WeilConjectures.AlgebraicGeometry.FiniteTypeIdealDiagram
 import Sheaf.Topology.ModuleCohomologyTopComparison
 import Mathlib.AlgebraicGeometry.Properties
 

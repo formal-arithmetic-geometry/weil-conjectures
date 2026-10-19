@@ -1,7 +1,7 @@
 module
 
-public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
-import Sheaf.CategoryTheory.HypercohomologyLeftEdgeNaturality
+public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdge
+import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeNaturality
 import Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingle
 
 @[expose] public section
