@@ -5,9 +5,7 @@ Authors: SHEAF group Q142
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!

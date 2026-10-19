@@ -10,8 +10,6 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator
 import Sheaf.RingTheory.ModuleLocalizationTowerVanishing
 import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
-import Mathlib.Algebra.Category.ModuleCat.AB
-import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-!
 # Perfect complexes over a derived-complete ring

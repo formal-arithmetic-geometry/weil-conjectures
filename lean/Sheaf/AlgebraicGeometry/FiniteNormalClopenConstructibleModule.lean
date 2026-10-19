@@ -5,11 +5,7 @@ Authors: SHEAF group Q115
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Limits
-public import Mathlib.CategoryTheory.Pi.Basic
-public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf

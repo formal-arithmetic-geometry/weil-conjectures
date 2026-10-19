@@ -5,9 +5,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.CategoryTheory.Endofunctor.Algebra
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-public import Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.ShortExact
 import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 

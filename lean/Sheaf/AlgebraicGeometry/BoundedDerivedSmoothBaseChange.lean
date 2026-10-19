@@ -6,20 +6,9 @@ Authors: SHEAF group N9
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedPlus
-import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-!
 # Bounded derived smooth base change

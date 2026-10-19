@@ -5,14 +5,9 @@ Authors: SHEAF group Q06
 -/
 module
 
-public import Mathlib.Analysis.Complex.Order
-public import Mathlib.Logic.Function.Iterate
-public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.Tensor
 import WeilConjectures.WeilSheaf.StalkTensor
 import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
-import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
-import Sheaf.Paper.AdicLocalCharacteristicFactor
 
 /-!
 # Reality and positivity of tensor powers of a real Weil sheaf

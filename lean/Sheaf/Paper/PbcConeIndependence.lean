@@ -6,7 +6,6 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.PbcCommonStageCones
-import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 /-! # Compatibility and independence of common-stage cone triangles
 

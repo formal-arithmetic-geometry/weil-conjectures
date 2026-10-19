@@ -6,7 +6,6 @@ Authors: SHEAF group Q09
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
-import Mathlib.Analysis.Complex.Basic
 
 /-!
 # Modulus and weight of a root of unity

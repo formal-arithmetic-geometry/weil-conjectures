@@ -6,8 +6,6 @@ Authors: SHEAF group Q108
 module
 
 public import Sheaf.Paper.PurityAffineLineDatum
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Finite-type and Noetherian geometry of the affine-line support pair

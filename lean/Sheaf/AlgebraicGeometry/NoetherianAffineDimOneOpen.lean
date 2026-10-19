@@ -5,14 +5,9 @@ Authors: SHEAF group NN
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
