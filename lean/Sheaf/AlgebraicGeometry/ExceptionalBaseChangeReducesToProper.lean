@@ -6,10 +6,6 @@ module
 public import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
 public import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
-import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Base change for an exceptional right adjoint reduces to the proper part
@@ -47,6 +43,21 @@ noncomputable instance exceptionalCoefficientRing_finite (l : ℕ) [Fact l.Prime
     [FiniteDimensional (Padic l) E] (n : ℕ) :
     Finite (exceptionalCoefficientRing l E n) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.le_add_left 1 n)
+
+private theorem isIso_mate_of_same_left_adjoints
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {L : C ⥤ D} {R S : D ⥤ C} {L' : C' ⥤ D'} {R' S' : D' ⥤ C'}
+    {G : C ⥤ C'} {H : D ⥤ D'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (other : L ⊣ S) (other' : L' ⊣ S')
+    (α : TwoSquare G L L' H) [IsIso (mateEquiv adj adj' α).natTrans] :
+    IsIso (mateEquiv other other' α).natTrans := by
+  have h : (α.whiskerRight (𝟙 L')).whiskerLeft (𝟙 L) = α := by
+    ext X
+    simp [TwoSquare.whiskerRight, TwoSquare.whiskerLeft]
+  rw [← h, conjugateEquiv_mateEquiv_vcomp other adj other',
+    mateEquiv_conjugateEquiv_vcomp adj adj' other']
+  dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.natTrans]
+  infer_instance
 
 /--
 Base change for a separated finite-type morphism is obtained by pasting the
@@ -128,6 +139,38 @@ theorem exceptionalBaseChangeReducesToProper
             Functor.whiskerLeft
               (sfIntrinsicDerivedOpen (exceptionalCoefficientRing l E n) c.i)
               deltaP))).natTrans) := by
-  sorry
+  intro hIso
+  have _ := hsq.w
+  have _ := hbar.w
+  let A := exceptionalCoefficientRing l E n
+  let adjJ := exceptionalOpenAdjunction c.i A
+  let adjJ' := exceptionalOpenAdjunction c'.i A
+  let α := TwoSquare.mk _ _ _ _
+    (sfIntrinsicDerivedSquarePullback A g' c'.i c.i overlineG hopen.w).hom
+  let γ := (mateEquiv adjJ adjJ').symm α
+  let δ := TwoSquare.mk _ _ _ _ deltaP
+  have hP : IsIso (mateEquiv adjP adjP' δ).natTrans := by
+    rw [← hbetaP]
+    exact hIso
+  have hOpen : mateEquiv adjJ adjJ' γ = α := (mateEquiv adjJ adjJ').apply_symm_apply α
+  have hComposite : IsIso
+      (mateEquiv (adjJ.comp adjP) (adjJ'.comp adjP') (TwoSquare.vComp γ δ)).natTrans := by
+    rw [mateEquiv_hcomp, hOpen]
+    dsimp only [TwoSquare.hComp, TwoSquare.natTrans]
+    infer_instance
+  have hAmbient := isIso_mate_of_same_left_adjoints
+    (adjJ.comp adjP) (adjJ'.comp adjP')
+    (ambient.adjunction c) (ambient'.adjunction c') (TwoSquare.vComp γ δ)
+  have hSquare : (TwoSquare.vComp γ δ).natTrans =
+      Functor.whiskerRight γ.natTrans (proEtaleConstantDerivedDirectImage c'.g A) ≫
+        Functor.whiskerLeft (sfIntrinsicDerivedOpen A c.i) deltaP := by
+    ext K
+    simp only [TwoSquare.vComp, NatTrans.comp_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+    rfl
+  rw [show TwoSquare.vComp γ δ = TwoSquare.mk _ _ _ _
+      (Functor.whiskerRight γ.natTrans (proEtaleConstantDerivedDirectImage c'.g A) ≫
+        Functor.whiskerLeft (sfIntrinsicDerivedOpen A c.i) deltaP) from hSquare] at hAmbient
+  exact hAmbient
 
 end AlgebraicGeometry.Scheme
