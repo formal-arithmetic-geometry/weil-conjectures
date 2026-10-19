@@ -55,15 +55,14 @@
    }
   },
   {
-   "text": "Spell out the canonical pro-etale comparison on an object $\\nu_X^*L$. Let\n$$e_i(L):\\nu_{T_i}^*j^{\\mathrm{et}}_{i!}L\\xrightarrow{\\sim}j^{\\mathrm{proet}}_{i!}\\nu_X^*L$$\nbe [lem-cbc-proetale-extension-zero-comparison]. Its sheaf-level natural isomorphism acts termwise on complexes: etale extension by zero preserves quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact], comparison pullback is the termwise derived functor of [def-sf-comparison-derived-pullback], and pro-etale extension by zero is the termwise functor in [def-weil-compact-support-candidate]. Naturality on chain maps descends to roofs because it also holds for the inverses of the quasi-isomorphisms. Put $b_u(M):\\nu_{T_2}^*Ru_{\\mathrm{et},*}M\\xrightarrow{\\sim}Ru_{\\mathrm{proet},*}\\nu_{T_1}^*M$, the natural isomorphism of [prop-weil-pbc-comparison-direct-image], applicable by step 1. Apply the named-map equality in [lem-sf-proper-open-comparison-site-normalization], whose Noetherian, proper and finite-coefficient hypotheses hold by step 1. Composing that equality with $e_2(L)^{-1}$ identifies the canonical comparison of [lem-weil-pbc-proper-open-comparison-proetale] with the transported etale map\n$$a_u(L)=Ru_{\\mathrm{proet},*}(e_1(L))\\,b_u(j^{\\mathrm{et}}_{1!}L)\\,\\nu_{T_2}^*(a^{\\mathrm{et}}_u(L))\\,e_2(L)^{-1}.$$\nIt is an isomorphism by that proper-open lemma. Step 2 and the stated naturality of $e_i$ and $b_u$ show, by substituting a map $h:L\\to L'$ in this displayed composite and cancelling each naturality square, that\n$$Ru_*J_1(\\nu_X^*h)\\,a_u(L)=a_u(L')\\,J_2(\\nu_X^*h).$$\nThus naturality has been proved rather than taken from the unstated properties of the pro-etale lemma.",
+   "text": "Construct the natural isomorphism on bounded-below etale objects directly from the four factors defining properOpenProEtaleIsoPlus in [lem-weil-pbc-proper-open-comparison-proetale]: inverse extension comparison, the etale proper/open natural isomorphism of step 2, the direct-image comparison of [prop-weil-pbc-comparison-direct-image], and extension comparison under proper direct image. All factors are natural. The exact extension comparisons are the termwise derived maps of [lem-cbc-proetale-extension-zero-comparison], using [lem-weil-pbc-extension-by-zero-exact] and [def-sf-comparison-derived-pullback]. Its component is the specified properOpenProEtaleIsoPlus by definition. Whisker with the canonical bounded-below inclusions and the exact-functor and right-derived compatibility isomorphisms. The resulting natural isomorphism has exactly the component properOpenProEtaleIso of [lem-weil-pbc-proper-open-comparison-proetale], again by its definition. Thus its naturality gives the required square in the ambient derived category. No separate site-normalization theorem is needed.",
    "uses": [
     "lem-cbc-proetale-extension-zero-comparison",
     "lem-weil-pbc-extension-by-zero-exact",
     "def-sf-comparison-derived-pullback",
     "def-weil-compact-support-candidate",
     "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-proper-open-comparison-proetale",
-    "lem-sf-proper-open-comparison-site-normalization"
+    "lem-weil-pbc-proper-open-comparison-proetale"
    ],
    "elementary": false,
    "source": {
@@ -98,15 +97,15 @@
    }
   },
   {
-   "text": "We verify the identity and transitivity rather than treating the composition isomorphisms as strict equalities. The identity and composition clauses of [lem-weil-pbc-proper-open-comparison-proetale] say, for refinements $u:c_1\\to c_2$, $v:c_2\\to c_3$ and literal pullbacks, that $a_{vu}=C_{v,u}(J_1)^{-1}\\,Rv_*(a_u)\\,a_v$, with $C_{v,u}(J_1):R(vu)_*J_1\\xrightarrow{\\sim}Rv_*Ru_*J_1$. More simply, after retaining those canonical identifications, inversion gives\n$$\\beta_{vu}=\\beta_v\\,Rv_*(\\beta_u)\\,C_{v,u}(J_1).$$\nHere is the witness calculation explicitly, writing $U=Ru_*$ and $V=Rv_*$. For a fixed $\\eta:\\nu_X^*L\\xrightarrow{\\sim}K$, set $q_i=J_i(\\eta)$ and $\\gamma_u=a_u(L)^{-1}$, so $\\beta_u(K)=q_2\\gamma_u U(q_1^{-1})$, $\\beta_v(K)=q_3\\gamma_v V(q_2^{-1})$ and $\\beta_{vu}(K)=q_3\\gamma_{vu}R(vu)_*(q_1^{-1})$. Substituting the first two expressions gives\n$$\\begin{aligned}\n\\beta_v(K)V(\\beta_u(K))C_{v,u}(J_1K)\n &=q_3\\gamma_vV(\\gamma_u)VU(q_1^{-1})C_{v,u}(J_1K)\\\\\n &=q_3\\gamma_vV(\\gamma_u)C_{v,u}(J_1\\nu_X^*L)R(vu)_*(q_1^{-1})\\\\\n &=q_3\\gamma_{vu}R(vu)_*(q_1^{-1})=\\beta_{vu}(K).\n\\end{aligned}$$\nThe first equality cancels $V(q_2^{-1}q_2)$; the second is naturality of $C_{v,u}$ at $q_1^{-1}$; the third is the literal-pullback composition equation above. For an identity refinement, after the canonical identification $R\\operatorname{id}_*=\\operatorname{id}$, the literal map $a_{\\operatorname{id}}(L)$ is the identity, so $A_{\\operatorname{id}}(K)=q_1\\operatorname{id}q_1^{-1}=\\operatorname{id}$ and $\\beta_{\\operatorname{id}}(K)=\\operatorname{id}$. Now write $P_i=Rp_{i*}$, $U=Ru_*$, $V=Rv_*$ and $p_2=p_3v$. Suppressing object arguments, naturality and associativity of the composition comparisons in [lem-weil-derived-direct-image-composition] give the following calculation:\n$$\\begin{aligned}\nt_vt_u\n &=P_3(\\beta_v)\\,C_{p_3,v}(J_2)\\,P_2(\\beta_u)\\,C_{p_2,u}(J_1)\\\\\n &=P_3(\\beta_v)\\,P_3V(\\beta_u)\\,C_{p_3,v}(UJ_1)\\,C_{p_3v,u}(J_1)\\\\\n &=P_3\\bigl(\\beta_v\\,V(\\beta_u)\\,C_{v,u}(J_1)\\bigr)\\,C_{p_3,vu}(J_1)\n =t_{vu}.\n\\end{aligned}$$\nFor $u=\\operatorname{id}_{c_1}$ we have $p_2=p_1$, $\\beta_u=\\operatorname{id}_{J_1}$ as just computed and $C_{p_1,\\operatorname{id}}=\\operatorname{id}_{P_1}$ under the canonical identity identifications; hence $t_u=P_1(\\operatorname{id}_{J_1})\\operatorname{id}_{P_1J_1}=\\operatorname{id}_{F_1}$. These are equations of natural transformations, since every component equation holds for all witnessed objects by steps 4-5.",
+   "text": "Apply lem-sf-refinement-comparison-witness-comp after deriving Noetherianity of each compactification ambient from its proper map to Y and finite type of Y over the field. This proves the pointwise composition law. Extensionality assembles it to the composition law of the natural isomorphisms. For an identity refinement, composition of that refinement with itself gives theta = theta followed by theta; cancel the invertible theta to obtain theta = identity.",
    "uses": [
-    "lem-weil-pbc-proper-open-comparison-proetale",
-    "lem-weil-derived-direct-image-composition"
+    "lem-sf-refinement-comparison-witness-comp",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
-    "place": "Proof, paragraph 2, last sentence: identity and transitivity, with the associativity and naturality calculation supplied"
+    "place": "Proof paragraph 2, last sentence; detailed proof step 6"
    }
   },
   {
@@ -161,17 +160,17 @@
   "def-weil-compact-support-candidate",
   "prop-weil-pbc-comparison-direct-image",
   "lem-weil-pbc-proper-open-comparison-proetale",
-  "lem-sf-proper-open-comparison-site-normalization",
   "def-sf-etale-origin-subcategory",
   "def-sf-refinement-comparison-isomorphism",
   "thm-weil-pbc-site-comparison",
   "lem-weil-derived-direct-image-composition",
+  "lem-sf-refinement-comparison-witness-comp",
   "prop-compactification-refinement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
-  "place": "Paragraphs 1-4; expanded naturality on the full witnessed domain and the explicit witness/composition and common-refinement calculations. Canonical transported-map identification is the statement of lem-sf-proper-open-comparison-site-normalization."
+  "place": "Paragraphs 1-4, realized by explicit natural transformations and witness transport; objectwise composition isolated in lem-sf-refinement-comparison-witness-comp; common-refinement cancellation uses cofilteredness."
  },
  "mathlib_searches": [
   {
@@ -382,8 +381,7 @@
   "lem-weil-pbc-extension-by-zero-exact",
   "prop-weil-pbc-comparison-direct-image",
   "thm-weil-pbc-site-comparison",
-  "prop-compactification-refinement",
-  "lem-sf-proper-open-comparison-site-normalization"
+  "prop-compactification-refinement"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -453,5 +451,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261019T192729-L-1860631",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

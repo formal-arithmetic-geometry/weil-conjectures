@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-refinement-comparison-witness-comp",
+ "kind": "statement",
+ "title": "Composition of the specified refinement comparison at a retained witness",
+ "statement": "Let Lambda be a finite commutative ring with its discrete topology. For a scheme morphism f:X to Y and compactifications c1,c2,c3 [def-weil-compactifications-refinements], suppose their ambient schemes are Noetherian. Let r:c1 to c2 and s:c2 to c3 be arbitrary refinements, with no Cartesian-square assumption. For any retained bounded-below etale-origin object O [def-sf-etale-origin-subcategory], the fixed-scalar comparison defined in [def-sf-refinement-comparison-isomorphism] satisfies refinementComparisonAtWitness Lambda (r followed by s) O = refinementComparisonAtWitness Lambda r O followed by refinementComparisonAtWitness Lambda s O. This is an objectwise equality of isomorphisms in the ambient derived category of module sheaves on the pro-etale site of Y. It asserts neither naturality in O nor existence of common refinements nor the cocycle law for arbitrary compactifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+  "place": "Proof paragraph 2, last sentence; detailed proof step 6"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-sf-etale-origin-subcategory",
+  "def-sf-refinement-comparison-isomorphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proper/open composition law on the retained bounded-below etale object. Transport it through the canonical bounded-below inclusion comparisons to the ambient derived category. The compositor in that equation is the finiteDirectImageComposition compositor: both are normalized by their right-derived units, so uniqueness of the right-derived extension identifies them.",
+   "uses": [
+    "lem-weil-pbc-proper-open-comparison-proetale",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+    "place": "Proof paragraph 2, last sentence; detailed proof step 6"
+   }
+  },
+  {
+   "text": "Expand refinementProperOpenIso. Denote J_i(alpha) by q_i. In composing the two inverse proper/open maps, the adjacent q_2.hom and q_2.inv cancel after functoriality of the proper direct image. Move q_1.inv through the direct-image compositor using its naturality. The equation from the first step now gives the inverse witnessed proper/open comparison for the composite refinement.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+    "place": "Proof paragraph 2, last sentence; detailed proof step 6"
+   }
+  },
+  {
+   "text": "Expand refinementComparisonAtWitness as direct-image compositor followed by proper image of the inverse witnessed proper/open comparison. Move the first inverse comparison through the second compositor by naturality. Associativity of the direct-image compositors identifies the result with the compositor of the composite refinement followed by the proper image of the composite inverse comparison from the preceding step. Its factorization equalities agree by category associativity and proof irrelevance. This is precisely the asserted equation of isomorphisms.",
+   "uses": [
+    "def-sf-refinement-comparison-isomorphism",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+    "place": "Proof paragraph 2, last sentence; detailed proof step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-open-comparison-proetale",
+  "lem-weil-derived-direct-image-composition",
+  "def-sf-refinement-comparison-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
+  "place": "Proof paragraph 2, last sentence; detailed proof step 6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*CompIso.*assoc",
+   "results": "{\"t\": \"2026-10-18T14:46:00Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctor.*CompIso.*assoc\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified refinement comparison; the hits concern generic derived transformations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorCompIso",
+   "results": "{\"t\": \"2026-10-18T14:46:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerivedFunctorCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctorCompIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified refinement comparison; the hits concern generic derived transformations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphisms for composition of right derived direct image functors satisfy associativity",
+   "results": "{\"t\": \"2026-10-18T14:46:02Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical isomorphisms for composition of right derived direct image functors satisfy associativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.Functor.rightDerived_fac_assoc\", \"CategoryTheory.Functor.rightDerived_fac_app_assoc\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.sheafComposeIso_hom_fac_assoc\"], \"digest\": \"3d3728ff2a91d6b9\"}",
+   "date": "2026-10-18",
+   "verdict": "No match for the specified refinement comparison; the hits concern generic derived transformations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical isomorphisms for composition of right derived direct image functors satisfy associativity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_inv_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Preserves\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {C : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} B] [inst_2 : CategoryTheory.Category.{v_3, u_3} C]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D] (G : CategoryTheory.Functor B D) (F : Catego\", \"doc\": \"Given functors $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, $ G : \\\\mathcal{B} \\\\to \\\\mathcal{D} $, and $ L : \\\\mathcal{A} \\\\to \\\\mathcal{C} $, if $ G $ preserves the right Kan extension of $ F $ along $ L $, then \"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, a natural transformation $ \\\\alpha : F \\\\Rightarrow L \\\\circ RF $ witness\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Func\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $RF, RF', RF'' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $F, F', F'' : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, a localization $L : \\\\mathcal{C} \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"In an abelian category with injective resolutions, the composition of natural transformations between additive functors, when lifted to their right-derived functors mapping to the homotopy category of\"}\n  {\"name\": \"CategoryTheory.ShortComplex.RightHomologyData.rightHomologyIso_hom_comp_homologyIso_inv_assoc\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Homology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (S : CategoryTheory.ShortComplex C) [inst_2 : S.HasHomology] (h : S.RightHomologyData) {Z : C} (h_1 : S.homology ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp h.rightHomologyIso.hom (CategoryT\", \"doc\": \"For a short complex $ S $ in a category with zero morphisms that has homology, and given right homology data $ h $, the composition of the morphism $ h.\\text{rightHomologyIso}.\\text{hom} $ with $ h.\\text\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a natural transformation\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} [inst_5 : F.Add\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the composition of the\"}\n  {\"name\": \"CategoryTheory.Functor.rightKanExtensionCompIsoOfPreserves_inv_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.KanExtension.Preserves\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {C : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} B] [inst_2 : CategoryTheory.Category.{v_3, u_3} C]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D] (G : CategoryTheory.Functor B D) (F : Catego\", \"doc\": \"Given functors $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, $ G : \\\\mathcal{B} \\\\to \\\\mathcal{D} $, and $ L : \\\\mathcal{A} \\\\to \\\\mathcal{C} $, if $ G $ preserves the right Kan extension of $ F $ along $ L $, then \"}\n",
+   "date": "2026-10-19",
+   "verdict": "Eight generic derived-functor and Kan-extension results; none states the specified refinement comparison or witness transport."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationCoherence",
+  "date": "2026-10-18",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-compactification-coherence-detailed",
+   "place": "Proof paragraph 2, transitivity of the refinement transformations; detailed proof step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RefinementComparisonComposition",
+  "file": "lean/Sheaf/Paper/RefinementComparisonComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.refinementComparisonAtWitness_comp",
+  "statement": "theorem refinementComparisonAtWitness_comp\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    [TopologicalSpace Λ] [DiscreteTopology Λ]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c₁ c₂ c₃ : Compactification f}\n    [IsNoetherian c₁.Z] [IsNoetherian c₂.Z] [IsNoetherian c₃.Z]\n    (r : c₁ ⟶ c₂) (s : c₂ ⟶ c₃) (O : EtaleOriginDerivedCategory X Λ) :\n    refinementComparisonAtWitness Λ (r ≫ s) O =\n      refinementComparisonAtWitness Λ r O ≪≫ refinementComparisonAtWitness Λ s O",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261019T192729-L-1860631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261019T192729-L-1860631",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
