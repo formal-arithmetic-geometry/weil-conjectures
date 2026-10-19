@@ -51,6 +51,7 @@ import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import Mathlib.Algebra.Ring.Shrink
 
 /-!
 # Finite-coefficient proper direct image on the localizing categories
@@ -175,6 +176,76 @@ def finiteCoefficientLocalizingProperties
     (∀ i : I, localizingClosureProEtale Λ X (D.obj ⟨i⟩)) →
       PreservesColimit D F)
 
+open scoped CategoryTheory.MonoidalClosed in
+/-- Finite rings in any universe have a small discrete model. Postcomposition with the
+ring equivalence induces an isomorphism of continuous-map ring sheaves, hence of their
+ring objects. The annihilating power of `ℓ` transports along this same equivalence.
+Source: blueprint det-ctf-finite-proper-localizing, proof steps 1 and 16, and
+sk-def-localizing-closure, finite-coefficient convention
+(blueprint: det-ctf-finite-proper-localizing). -/
+private theorem finiteDiscreteCoefficient_admissible
+    (ℓ : ℕ) [Fact ℓ.Prime] (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, 1 ≤ n ∧ (ℓ ^ n : ℕ) • (1 : A) = 0) :
+    IsLocalizingAdmissibleCoefficient ℓ (finiteDiscreteCondensedCoefficient A) := by
+  classical
+  letI : TopologicalSpace A := ⊥
+  letI : DiscreteTopology A := ⟨rfl⟩
+  letI : IsTopologicalRing A := by infer_instance
+  let B := Shrink.{0} A
+  letI : TopologicalSpace B := ⊥
+  letI : DiscreteTopology B := ⟨rfl⟩
+  letI : IsTopologicalRing B := by infer_instance
+  let e : A ≃+* B := (Shrink.ringEquiv.{0} A).symm
+  let h : Profinite.continuousMapRingSheafOfUniverse.{u, u} A ⟶
+      Profinite.continuousMapRingSheaf.{u} B :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.toRingHom.compLeftContinuous S.unop (by fun_prop)).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let v : Profinite.continuousMapRingSheaf.{u} B ⟶
+      Profinite.continuousMapRingSheafOfUniverse.{u, u} A :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.symm.toRingHom.compLeftContinuous S.unop (by fun_prop)).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let E : Profinite.continuousMapRingSheafOfUniverse.{u, u} A ≅
+      Profinite.continuousMapRingSheaf.{u} B :=
+    { hom := h
+      inv := v
+      hom_inv_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.symm_apply_apply _
+      inv_hom_id := by
+        ext S f
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.apply_symm_apply _ }
+  let E' := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso E
+  letI : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+  let eh := presheaf_enrichedHoms_exist
+    (C := Profinite.{u}) (A := Ab.{u + 1})
+  letI : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+    Enriched.FunctorCategory.HasEnrichedHom Ab.{u + 1} F G := eh.1
+  letI : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+    Enriched.FunctorCategory.HasFunctorEnrichedHom Ab.{u + 1} F G := eh.2
+  letI : ((coherentTopology Profinite.{u}).W (A := Ab.{u + 1})).IsMonoidal :=
+    GrothendieckTopology.W.monoidal
+  have hmon : IsMonHom E'.hom := Sheaf.isMonHom_sheafCompose_map _ E.hom
+  refine Or.inl ⟨B, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, ?_, ⟨Mon.mkIso' E'⟩⟩
+  obtain ⟨n, _, hn⟩ := hA
+  refine ⟨n, fun b ↦ ?_⟩
+  have hn' : (ℓ ^ n : ℕ) • (1 : B) = 0 := by
+    simpa only [map_nsmul, map_one, map_zero] using congrArg e hn
+  simpa only [nsmul_eq_mul, mul_one, zero_mul] using congrArg (fun x : B ↦ x * b) hn'
+
 section Setting
 
 variable (ℓ p : ℕ) (hℓ : ℓ.Prime) (hp : 0 < p) (hpℓ : p ≠ ℓ)
@@ -292,7 +363,21 @@ theorem finiteOpenLocalizing (j : X ⟶ Y) [j.IsOver (Spec (.of k))]
       (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory ∧
     (∀ I : Type (u + 2), PreservesColimitsOfShape (Discrete I)
       (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory) := by
-  sorry
+  letI : Fact ℓ.Prime := ⟨hℓ⟩
+  obtain ⟨hctf, _, _, _, hmap, _, _⟩ :=
+    openImmersionLowerShriek_localizing ℓ k p hp hpℓ
+      (finiteDiscreteCondensedCoefficient A) (finiteDiscreteCoefficient_admissible ℓ A hA) j
+  refine ⟨⟨?_, ?_, ?_, ?_⟩, ?_⟩
+  · intro K hK
+    exact hctf ⟨K, hK⟩
+  · intro K hK
+    exact hmap ⟨K, hK⟩
+  · intro T hT _ _ _
+    exact Functor.map_distinguished _ T hT
+  · intro I D _
+    infer_instance
+  · intro I
+    infer_instance
 
 /-- Clause (3), compactification part: for `j` open and `f` proper, `Rf_* ∘ j_!` maps
 Dctf into Dctf and restricts to an exact sum-preserving functor of the closures.
@@ -314,7 +399,24 @@ theorem finiteCompactificationLocalizing
     finiteCoefficientLocalizingProperties (finiteDiscreteCondensedCoefficient A)
       ((j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory ⋙
         (f)_*⟦finiteDiscreteCondensedCoefficient A⟧.rightDerivedFunctor) := by
-  sorry
+  obtain ⟨hj, _⟩ := finiteOpenLocalizing ℓ p hℓ hp hpℓ k A hA j
+  have hf := finiteProperLocalizing ℓ p hℓ hp hpℓ k A hA f
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro K hK
+    exact hf.1 _ (hj.1 K hK)
+  · intro K hK
+    exact hf.2.1 _ (hj.2.1 K hK)
+  · intro T hT h₁ h₂ h₃
+    have hT' := hj.2.2.1 T hT h₁ h₂ h₃
+    have hT'' := hf.2.2.1 _ hT' (hj.2.1 _ h₁) (hj.2.1 _ h₂) (hj.2.1 _ h₃)
+    exact isomorphic_distinguished _ hT'' _
+      ((Functor.mapTriangleCompIso _ _).app T)
+  · intro I D hD
+    have h₁ := hj.2.2.2 I D hD
+    have h₂ := hf.2.2.2 I
+      (D ⋙ (j)_!open⟦finiteDiscreteCondensedCoefficient A⟧.mapDerivedCategory)
+      (fun i ↦ hj.2.1 _ (hD i))
+    infer_instance
 
 end Setting
 

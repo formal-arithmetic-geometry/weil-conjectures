@@ -16934,3 +16934,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/V8/Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit (stage 3; reviewer PASS; first push; landing 20261019T034332-L-422484 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V8/Sheaf.Paper.SfIntegralConstructibleLinear (stage 3; reviewer PASS; first push; landing 20261019T034332-L-422588 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/V9/Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel (stage 3; reviewer PASS; first push; landing 20261019T034333-L-422704 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/V9/Sheaf.Paper.FiniteProperLocalizing (stage 3; reviewer PASS; first push; landing 20261019T034334-L-422872 (proof); batch 20261019T034248; modules 1; new nodes 0)
