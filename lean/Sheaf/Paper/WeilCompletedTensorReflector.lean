@@ -94,6 +94,7 @@ def wfCompletionExtend (M : PbcCompletedDerived X d)
     wfCompletionObj X d r a ha M ⟶ L.obj :=
   Equiv.ofBijective _ ((wfCompletionReflector X d r a ha).2 M L.obj L.property) |>.symm f
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The unique extended maps preserve identities and composition.
 Source: Stacks 099B (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector).
 Proof: compose with the completion unit. Both identity candidates become the same unit;
@@ -110,7 +111,22 @@ theorem wfCompletionMap_laws :
             (f ≫ wfCompletionUnit X d r a ha N) ≫
           wfCompletionExtend X d r a ha N (wfCompleteObj X d r a ha P)
             (g ≫ wfCompletionUnit X d r a ha P) := by
-  sorry
+  have hext (M : PbcCompletedDerived X d) (L : WfCompleteCategory X d r a ha)
+      (f : M ⟶ L.obj) :
+      wfCompletionUnit X d r a ha M ≫ wfCompletionExtend X d r a ha M L f = f := by
+    exact (Equiv.ofBijective _
+      ((wfCompletionReflector X d r a ha).2 M L.obj L.property)).apply_symm_apply f
+  constructor
+  · intro M
+    apply ((wfCompletionReflector X d r a ha).2 M
+      (wfCompletionObj X d r a ha M) ((wfCompletionReflector X d r a ha).1 M)).1
+    simp only [hext, Category.id_comp, Category.comp_id]
+  · intro M N P f g
+    apply ((wfCompletionReflector X d r a ha).2 M
+      (wfCompletionObj X d r a ha P) ((wfCompletionReflector X d r a ha).1 P)).1
+    dsimp only
+    rw [hext, ← Category.assoc, hext, Category.assoc]
+    rw [Category.assoc, hext]
 
 /-- Completion with its canonical morphism action determined by reflection.
 Source: Stacks 099B (blueprint: lem-weil-pbc-ringed-koszul-completion-reflector). -/
