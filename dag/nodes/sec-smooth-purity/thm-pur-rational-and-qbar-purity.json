@@ -383,13 +383,26 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Rational",
-  "declaration": "AlgebraicGeometry.Etale.exists_iso_fromIntegral_realization_twistShiftPullbackLevel",
+  "module": "Sheaf.Paper.RationalSmoothPurityCanonical",
+  "declaration": "WeilConjectures.RationalSmoothPurityCanonical.rationalIso",
   "declarations": [
-   "AlgebraicGeometry.Etale.exists_iso_fromIntegral_realization_twistShiftPullbackLevel"
+   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.commonIso",
+   "WeilConjectures.RationalSmoothPurityCanonical.rationalIso_scalar"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.Smooth.Rational: the blueprint item thm-pur-rational-and-qbar-purity's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "existing": true,
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-19",
+  "note": "Section 1(B): the attached upstream existence of objectwise realization isomorphisms supplies neither the specified trace-normalized family nor the common-stage purity map needed by coherence. The already landed canonical module constructs rationalIso by rationalizing the finite-trace-normalized integral trace transpose, commonIso through actual finite-stage inclusions, and rationalIso_scalar with the counit-preserving exceptional comparisons. Use those exact published constructions; no duplicate construction is introduced.",
+  "statement": "def rationalIso (d : ℕ) [SmoothOfRelativeDimension d f]\n    (K : sfRationalConstructibleCategory P.coefficients.l P.extension Y) :\n    (rationalSource P.coefficients.l P.extension f d).obj K ≅\n      (operation P f c S (.rational (AdicSmoothDualizing.fieldStage P))).G.obj K"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26397542a",
+  "group": "NE",
+  "result": "fix",
+  "note": "7th delivery; F1-F3 of b41005e3 addressed: the trace witnesses are pinned by equality/HEq to rationalIso, commonIso and the actual G/adjunction; composition uses f, g, d, e and c_{g,f} = conjugate mate of sfFieldShriekCompositionRational, with a common-stage ∃!-pinned support compositor; base change has an arbitrary IsPullback and no condition on b; the duplicate def node is gone. Remaining fault, H3: the Qbar trace clause was rfl because descendedSmoothTrace := F(commonIso) ≫ counit (compiler-checked with a control). FIX: new modelSmoothTrace (homEquiv.symm of smallModelIso), and descendedSmoothTrace = F(commonSourceComparison) ≫ q⁻¹ ≫ inclusion(model trace), stated on ⟨fieldIndex (stageSetting P i), K⟩ to avoid the heartbeat timeout from Shrink unfolding; rfl now fails; it holds by q-naturality plus the Comparison.counit field. fixes/: complete module (clean, 23.5 s), lean-record (+modelSmoothTrace, statement verbatim), report. Delivered module compiles clean in 19.1 s. Advisory: BaseChangeClause is a tautology inherited from thm-pur-smooth-base-change-coherence (Iso.hom_inv_id_assoc), and two private imports are unused. H4 clean; docstrings present; rational trace and composition clauses are substantive."
  }
 }
