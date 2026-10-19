@@ -53,6 +53,27 @@ def import_additions(landed, current):
     return added
 
 
+def import_delta(landed, current):
+    """(added, removed) import lines when every later edit of `landed` into `current` only adds or removes import lines
+    (blank lines ignored), else None. 2026-10-19: a later prune of unused imports (tools/prune_imports.py) or an
+    add_proof_imports cycle in a delivery's file made the take-out raise Conflict and the lander looped for hours while
+    live stayed red; such edits are mechanical and are carried over onto the restored text instead."""
+    if landed is None or current is None:
+        return None
+    a, b = landed.decode().splitlines(keepends=True), current.decode().splitlines(keepends=True)
+    added, removed = [], []
+    for op, i, j, k, l in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_opcodes():
+        if op == 'equal':
+            continue
+        for x in a[i:j] + b[k:l]:
+            if x.strip() and not IMPORT.fullmatch(x.strip()):
+                return None
+        added.extend(x for x in b[k:l] if x.strip())
+        removed.extend(x for x in a[i:j] if x.strip())
+    gone = {x.strip() for x in removed} - {x.strip() for x in added}
+    return [x for x in added if x.strip() not in {y.strip() for y in removed}], sorted(gone)
+
+
 def merge_json(before, landed, current):
     """Inverse only fields changed by this landing; preserve independent later audit fields."""
     if current == landed:
@@ -114,7 +135,8 @@ def inverse(root, commits, *, imports_only=False):
             p = root / path
             current = result[path] if path in result else (p.read_bytes() if p.is_file() else None)
             if path.startswith('lean/') and path.endswith('.lean'):
-                additions = import_additions(landed, current)
+                delta = import_delta(landed, current)
+                additions, dropped = delta if delta is not None else (None, [])
                 if current != landed and current != before and additions is None and imports_only:
                     raise Conflict(f'{path}: later substantive change; withdraw the batch')
                 if additions is not None:
@@ -122,6 +144,8 @@ def inverse(root, commits, *, imports_only=False):
                     value = before
                     if value is not None:
                         lines = value.decode().splitlines(keepends=True)
+                        # later import removals (prune) are kept removed
+                        lines = [x for x in lines if x.strip() not in dropped]
                         idx = [i + 1 for i, l in enumerate(lines) if IMPORT.fullmatch(l.strip()) or l.strip() == 'module']
                         at = idx[-1] if idx else 0
                         lines[at:at] = [x for x in additions if x not in lines and

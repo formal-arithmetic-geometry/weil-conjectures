@@ -165,7 +165,7 @@ class ImportCycleTests(unittest.TestCase):
         self.assertEqual(ic.log_cycles(x), [['Sheaf.B','Sheaf.A']])
 
 class SelectiveRecovery(Repo):
-    def run_batch(self, bad=(0,), own=False, deps=(), no_suspect=False, staged=False):
+    def run_batch(self, bad=(0,), own=False, deps=(), no_suspect=False, staged=False, later=None):
         import contextlib, landing as ld
         self.put('lean/Sheaf/Old.lean', 'module\nimport Sheaf.D0\npublic theorem old : True := by exact value0\n')
         for i in range(30):
@@ -181,6 +181,7 @@ class SelectiveRecovery(Repo):
                                 state='landed', modules=[f'Sheaf.D{i}'], kind='interface', reviewer='test', claim=None))
         local=self.root/'local'; builds=local/'builds'
         for d in ('requests','done','backup'): (builds/d).mkdir(parents=True)
+        if later: later()
         for e in entries:
             ld.write_json(builds/'requests'/f"{e['landing']}.json", dict(id=e['landing'],group='G',files=[
                           dict(path=e['item'].replace('.', '/')+'.lean',module=e['item'])]))
@@ -215,7 +216,7 @@ class SelectiveRecovery(Repo):
                 if not bl.OPEN.exists(): break
                 if no_suspect and n==0:
                     self.assertTrue((self.root/'alerts/ALERT').exists())
-            else: self.fail('did not finish')
+            else: self.fail('did not finish: ' + repr(logs)[-3000:])
             closed=bl.read_json(bl.CLOSED/'batch.json')
         return closed,calls,logs
 
@@ -267,6 +268,56 @@ class SelectiveRecovery(Repo):
         self.assertIn('b',br.interface_delta(old,old+'public theorem b : True := by trivial\n'))
         self.assertTrue(br.interface_delta(old,'public import Sheaf.B\n'+old))
         self.assertEqual(br.interface_delta(old,old.replace('sorry','trivial')),[])
+
+class ImportOnlyLaterEdits(Repo):
+    def test_later_import_removal_is_kept(self):
+        # 2026-10-19: a prune of unused imports after the landing made the take-out conflict and the lander loop
+        self.put('lean/Sheaf/A.lean', 'module\nimport Sheaf.B\nimport Sheaf.C\n\npublic theorem A : True := by trivial\n')
+        sha = self.commit('delivery with imports')
+        self.put('lean/Sheaf/A.lean', 'module\nimport Sheaf.C\n\npublic theorem A : True := by trivial\n')
+        self.commit('prune unused imports')
+        prepared = br.inverse(self.root, [sha], imports_only=True)
+        self.assertEqual(prepared['lean/Sheaf/A.lean'].decode(), 'module\n\npublic theorem A : True := by trivial\n')
+        self.assertIsNone(br.import_delta(b'import A\ntheorem x := 1\n', b'import A\ntheorem x := 2\n'))
+        self.assertEqual(br.import_delta(b'import A\nimport B\nx\n', b'import A\nimport C\nx\n'), (['import C\n'], ['import B']))
+
+
+class FailForwardText(unittest.TestCase):
+    def test_proof_sorried_def_restored_statement_unfixable(self):
+        text = ('module\n\ndef f : Nat := 2\n\ntheorem t : f = 1 := by\n  simp [f]\n  rfl\n\n'
+                'theorem s : g = 1 := by\n  rfl\n')
+        old = 'module\n\ndef f : Nat := 1\n\ntheorem t : f = 1 := by\n  sorry\n'
+        errors = [(6, 2, 'simp failed'), (7, 2, 'rfl failed'), (3, 15, 'bad'), (9, 12, 'unknown identifier g')]
+        new, acts, bad = bl.fail_forward_text(text, errors, [('X', old)])
+        self.assertIn('theorem t : f = 1 := by\n  sorry\n\n', new)
+        self.assertIn('def f : Nat := 1\n', new)
+        self.assertIn('theorem s : g = 1', new)      # a statement is never hollowed
+        self.assertEqual(len(acts), 2); self.assertEqual(len(bad), 1)
+        self.assertEqual(bl.fail_forward_text(text, [(1, 0, 'import failed')], [])[2], ['1:0 outside every declaration: import failed'])
+
+
+class FailForwardBatch(SelectiveRecovery):
+    def test_conflicting_take_out_fails_forward_once(self):
+        def later():
+            # a maintainer edit overlapping the delivered proof: the inverse conflicts
+            self.put('lean/Sheaf/D0.lean', 'module\npublic theorem value0 : False := by trivial -- maintainer\n')
+            self.commit('maintainer edit')
+            self.put('local/build.log', '\u2716 [1/2] Building Sheaf.D0 (1s)\n'
+                     'error: Sheaf/D0.lean:2:36: type mismatch\nerror: Lean exited with code 1\n')
+        b, calls, logs = self.run_batch(own=True, later=later)
+        self.assertEqual(calls, ['red', 'green'])
+        e = b['entries'][0]
+        self.assertEqual(e['state'], 'returned'); self.assertTrue(e['fail_forward']['actions'])
+        self.assertEqual((self.root / 'lean/Sheaf/D0.lean').read_text(), 'module\npublic theorem value0 : False := by\n  sorry\n')
+        rec = json.loads((self.root / 'local/builds/done/L0.json').read_text())
+        self.assertEqual(rec['result'], 'reverted'); self.assertEqual(rec['sorry_allowed']['Sheaf.D0'], ['value0'])
+        self.assertIn('repaired in place', (self.root / 'coord/returns/G.md').read_text())
+        self.assertTrue(list((self.root / 'coord/changes').glob('failforward-batch-G-Sheaf.D0.md')))
+        self.assertFalse(list((self.root / 'local/batch/repair').glob('*.json')))   # no stale repair job
+        self.assertTrue(any('FAIL-FORWARD' in str(x) for x in logs))
+        self.assertFalse(any('withdrawn' in str(x) for x in logs))
+        self.assertEqual(sum(x['state'] == 'verified' for x in b['entries']), 29)
+
 
 class IncrementalGraph(Repo):
     def test_cached_graph_updates_external_tip_without_rescan(self):

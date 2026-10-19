@@ -1164,7 +1164,10 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
     try:
         undo_entries(chosen, f"batch {b['id']} dependency take-out", returned=messages, repair_jobs=repair_jobs)
     except recovery.Conflict as x:
-        withdraw(b, 'take-out conflict: ' + str(x), log); return
+        # 2026-10-19: this used to withdraw the whole batch, whose inverse conflicted the same way; the step raised,
+        # nothing was recorded, and the lander retried every two minutes for hours while live stayed red.
+        conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, x, log, imports)
+        return
     for e in suspects:
         e['state'] = 'returned'; e['why'] = messages[key(e)]
         job = repair_jobs.get(key(e))
@@ -1177,6 +1180,230 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
     b['await_recovery'] = True
     b.pop('triage', None)
     write_json(OPEN, b)
+
+
+# ---------------------------------------------------------------- a take-out that conflicts with later edits
+
+ERROR_AT = re.compile(r"^error: (\S+?\.lean):(\d+):(\d+): ?(.*)$", re.M)
+PROOF_KW = ("theorem", "lemma")
+
+
+def conflicting_entries(entries) -> dict:
+    """key -> Conflict message for each entry whose own inverse cannot be prepared on the current tree."""
+    out = {}
+    for e in entries:
+        try:
+            recovery.inverse(ROOT, [e["commit"]])
+        except recovery.Conflict as x:
+            out[key(e)] = str(x)
+    return out
+
+
+def build_errors(modules) -> dict:
+    """module -> [(line, col, message)] of the red build, from Lake's log (local/builds/build.log)."""
+    text = (ld.LOCAL / "build.log").read_text(errors="ignore") if (ld.LOCAL / "build.log").exists() else ""
+    blocks, out = log_blocks(text), {}
+    for m in modules:
+        rel = m.replace(".", "/") + ".lean"
+        seen = out.setdefault(m, [])
+        for x in ERROR_AT.finditer(blocks.get(m, "")):
+            if x.group(1) == rel and (int(x.group(2)), int(x.group(3))) not in {(a, c) for a, c, _ in seen}:
+                seen.append((int(x.group(2)), int(x.group(3)), x.group(4)))
+    return out
+
+
+def _offset(text: str, line: int, col: int) -> int:
+    lines = text.split("\n")
+    return sum(len(l) + 1 for l in lines[:line - 1]) + col
+
+
+def fail_forward_text(text: str, errors, olds) -> tuple[str, list[str], list[str]]:
+    """Make one failing module compile again without touching what other modules see.
+
+    errors: [(line, col, message)]; olds: [(label, text before the culprit)]. A failing proof body of a theorem/lemma
+    becomes `sorry`; a failing definition, instance or statement gets back its text from before the culprit (never
+    hollowed). Returns (new text, actions, unfixable)."""
+    decls = s2.declarations(text)
+    edits, actions, unfixable = {}, [], []
+    for line, col, msg in errors:
+        off = _offset(text, line, col)
+        d = next((d for d in decls if d["start"] <= off < d["end"]), None)
+        if d is None:
+            unfixable.append(f"{line}:{col} outside every declaration: {msg}"); continue
+        k = d["name"] or f"instance {d['statement']}"
+        if d["start"] in edits:
+            continue
+        if d["kw"] in PROOF_KW and d["sig_end"] < d["end"] and off >= d["sig_end"]:
+            body = text[d["sig_end"]:d["end"]]
+            tail = body[len(body.rstrip()):]
+            edits[d["start"]] = (d["sig_end"], d["end"], ":= by\n  sorry" + (tail if "\n" in tail else "\n\n"))
+            actions.append(f"proof of {k} replaced by sorry ({line}:{col} {msg[:120]})")
+            continue
+        for label, old in olds:
+            od = next((x for x in s2.declarations(old or "") if (x["name"] or f"instance {x['statement']}") == k), None)
+            if od is not None:
+                piece = old[od["start"]:od["end"]]
+                tail = text[d["start"]:d["end"]]
+                tail = tail[len(tail.rstrip()):]
+                edits[d["start"]] = (d["start"], d["end"], piece.rstrip() + (tail if "\n" in tail else "\n\n"))
+                actions.append(f"{d['kw']} {k} restored to its text before {label} ({line}:{col} {msg[:120]})")
+                break
+        else:
+            unfixable.append(f"{d['kw']} {k} ({line}:{col} {msg[:160]}): no proof body to replace and no earlier text")
+    out = text
+    for a, z, rep in sorted(edits.values(), reverse=True):
+        out = out[:a] + rep + out[z:]
+    return out, actions, unfixable
+
+
+def fail_forward(b, entries, per, messages, log) -> dict:
+    """The culprits' changes cannot be taken out (later edits overlap them): repair their failing modules in place
+    and give the deliveries back. Returns key -> {actions, unfixable} for the entries handled; one commit."""
+    failing = sorted({d["failure"] for e in entries for d in per[key(e)]})
+    errors = build_errors(failing)
+    prepared, done, records = {}, {}, []
+    for e in entries:
+        k = key(e)
+        acts, bad = [], []
+        for m in sorted({d["failure"] for d in per[k]}):
+            rel = "lean/" + m.replace(".", "/") + ".lean"
+            cur = prepared.get(rel)
+            cur = cur.decode() if cur is not None else ((ROOT / rel).read_text() if (ROOT / rel).is_file() else None)
+            if cur is None or not errors.get(m):
+                bad.append(f"{m}: no file or no located compiler error"); continue
+            olds = []
+            if rel in recovery.git(ROOT, "diff-tree", "--no-commit-id", "--name-only", "-r", e["commit"]).decode().split():
+                before = recovery.blob(ROOT, e["commit"] + "^", rel)
+                olds.append((f"{k} (landing {e['landing']})", before.decode() if before is not None else None))
+            new, a, u = fail_forward_text(cur, errors[m], olds)
+            if new != cur:
+                prepared[rel] = new.encode()
+            acts += [f"{m}: {x}" for x in a]; bad += [f"{m}: {x}" for x in u]
+        done[k] = {"actions": acts, "unfixable": bad}
+        for x in acts: log("FAIL-FORWARD", k, "|", x)
+        for x in bad: log("FAIL-FORWARD cannot fix", k, "|", x)
+        if not acts:
+            continue        # nothing changed for this delivery: it stays landed, no record is touched
+        why = (messages.get(k, "") + "\n\nThe delivery could not be taken out (" + e.get("conflict", "a later edit overlaps it")
+               + "), so the failing declarations were repaired in place instead:\n" + "\n".join("- " + x for x in acts or ["(nothing)"])
+               + "\nRedo the work against the current library and deliver again.")
+        rid = e["landing"]
+        r = ld.read_json(ld.REQUESTS / f"{rid}.json") or ld.read_json(ld.DONE / f"{rid}.json")
+        if r:
+            r = dict(r)
+            r.update(result="reverted", reason=why[:6000], closed=ld.now(), fail_forward=acts)
+            r["sorry_allowed"] = {}
+            for f in r.get("files", []):
+                path = "lean/" + f["path"]
+                data = prepared.get(path)
+                if data is None:
+                    q = ROOT / path; data = q.read_bytes() if q.is_file() else None
+                r["sorry_allowed"][f["module"]] = sorted(x for x, d in s3.decl_table((data or b"").decode()).items() if d["sorry"])
+                f["sha"] = __import__("hashlib").sha256(data).hexdigest() if data is not None else None
+            records.append(r)
+        claim = "coord/claims/" + e["item"].replace("/", "__") + ".lock"
+        if e.get("claim") and not (ROOT / claim).exists():
+            prepared[claim] = e["claim"].encode()
+        rp, before, _ = md.return_entries(e["group"], e["item"])
+        rrel = rp.relative_to(ROOT).as_posix()
+        text = (prepared.get(rrel) or (before or "").encode()).decode()
+        kept = "".join(x for x in re.split(r"(?=^## )", text, flags=re.M) if not x.startswith(f"## {e['item']} ("))
+        prepared[rrel] = (kept.rstrip() + f"\n\n## {e['item']} ({ld.now()}, branch head {e['head'][:9]})\n\n{why}\n").encode()
+        name = f"coord/changes/failforward-{b['id']}-{e['group']}-{e['item'].replace('/', '__')}.md"
+        prepared[name] = (f"Fail-forward of a red batch build (batch {b['id']}, landing {rid})\n\n## Reason\n\n"
+                          f"The global build failed in {', '.join(sorted({d['failure'] for d in per[k]}))}; the triage named {k}. "
+                          f"Taking the delivery out conflicts with later edits ({e.get('conflict', '?')}).\n\n## Old\n\n"
+                          f"landing commit {e['commit']}\n\n## New\n\n" + "\n".join("- " + x for x in acts or ["(nothing)"])
+                          + ("\n\nNot fixable here:\n" + "\n".join("- " + x for x in bad) if bad else "")
+                          + f"\n\n## Users\n\n{', '.join(sorted({d['failure'] for d in per[k]}))}\n\n## Status\n\n"
+                          f"reverted {ld.now()} (fail-forward by tools/batch_land.py; the delivery is back with {e['group']})\n").encode()
+    if not any(p.startswith("lean/") for p in prepared):
+        return done
+    tip = md.git("rev-parse", "HEAD")
+    ledger = (ROOT / "coord/ledger.md").read_bytes() if (ROOT / "coord/ledger.md").exists() else b""
+    prepared["coord/ledger.md"] = ledger + f"\n- {time.strftime('%H:%M')} L: batch {b['id']} fail-forward of {', '.join(done)}\n".encode()
+    with md.merge_lock():
+        with ld.tree_lock():
+            recovery.commit_inverse(ROOT, prepared, tip, f"Fail forward in the red build of batch {b['id']}: "
+                                    + ", ".join(done) + " repaired in place and returned")
+            for r in records:
+                ld.write_json(ld.DONE / f"{r['id']}.json", r)
+                (ld.REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
+                ld.drop_mirror(r["group"], [f["path"] for f in r.get("files", [])])
+    refresh_recovery_queue()
+    return done
+
+
+def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, conflict, log, imports) -> None:
+    """undo_entries raised Conflict. (a) Later import-only edits never conflict (batch_recovery.import_delta).
+    (b) Take out what can be taken out; the suspects whose own take-out conflicts are fixed forward in their failing
+    modules and returned; a dependent whose take-out conflicts stays. Every decision is one log line; nothing loops:
+    the next build verifies."""
+    t0 = time.time()
+    log(f"batch {b['id']}: take-out conflict ({conflict}); falling back")
+    bad = conflicting_entries(chosen)
+    for k, why in bad.items():
+        log(f"batch {b['id']}: CONFLICT {k} cannot be taken out: {why[:200]}")
+    stuck = [e for e in suspects if key(e) in bad]
+    movable = [e for e in suspects if key(e) not in bad]
+    # the dependents and deferred closures chosen for the take-out go too, unless their own take-out conflicts
+    deps = [e for e in chosen if e not in suspects and key(e) not in bad] if movable else []
+    taken = []
+    if movable:
+        jobs = {key(e): repair_jobs[key(e)] for e in movable if key(e) in repair_jobs}
+        try:
+            undo_entries(movable + deps, f"batch {b['id']} dependency take-out", returned={key(e): messages[key(e)] for e in movable},
+                         repair_jobs=jobs)
+            taken = movable
+            for e in movable:
+                e['state'] = 'returned'; e['why'] = messages[key(e)]
+                job = jobs.get(key(e))
+                if job is None:
+                    log('TAKEN OUT; HELD BY ANOTHER GROUP, NO REPAIR JOB', key(e))
+                else:
+                    e['repair'] = job['id']; log('TAKEN OUT; REPAIR QUEUED', key(e), job['group'])
+            defer_entries(deps)
+            for e in deps: log(f"batch {b['id']}: deferred (imports a removed delivery)", key(e))
+        except recovery.Conflict as x:
+            log(f"batch {b['id']}: take-out of the non-conflicting suspects conflicts too ({x}); all suspects fail forward")
+            stuck, deps = suspects, []
+    # a staged repair job of a delivery that stays in the library would tell a worker it was taken out (2026-10-19)
+    for e in suspects:
+        job = repair_jobs.get(key(e))
+        if job and e not in taken:
+            jp = repairs.JOBS / (job['id'] + '.json')
+            if (repairs.read(jp) or {}).get('state') == 'pending':
+                jp.unlink(missing_ok=True)
+    for e in active:
+        if key(e) in bad and e not in suspects:
+            log(f"batch {b['id']}: dependent {key(e)} stays in the library (its take-out conflicts); the build verifies it")
+    if stuck:
+        for e in stuck:
+            e['conflict'] = bad.get(key(e), str(conflict))
+        try:
+            res = fail_forward(b, stuck, per, messages, log)
+        except recovery.Conflict as x:   # the tip moved on these paths; the next red build tries again
+            res = {}
+            log(f"batch {b['id']}: fail-forward could not be written ({x}); next step retries")
+            b['handled'] = [h for h in b['handled'] if h != (ld.read_json(ld.B / 'last.json') or {}).get('time')]
+        for e in stuck:
+            r = res.get(key(e))
+            if r is None or not r['actions']:
+                alert(b['id'], key(e), 'take-out conflicts and fail-forward changed nothing: ' + '; '.join((r or {}).get('unfixable', []))[:300],
+                      'maintainer fix of the failing module')
+                log(f"batch {b['id']}: ALERT {key(e)} stays landed: nothing could be repaired in place")
+                continue
+            e['state'] = 'returned'; e['why'] = 'fail-forward: ' + '; '.join(r['actions'])[:2000]
+            e['fail_forward'] = r
+            log(f"batch {b['id']}: RETURNED (fail-forward) {key(e)}: {len(r['actions'])} declaration(s) repaired in place"
+                + (f", {len(r['unfixable'])} not fixable here" if r['unfixable'] else ""))
+            if r['unfixable']:
+                alert(b['id'], key(e), 'fail-forward left errors: ' + '; '.join(r['unfixable'])[:300], 'maintainer fix of the failing module')
+    b['round'] += 1
+    b['await_recovery'] = True
+    b.pop('triage', None)
+    write_json(OPEN, b)
+    log(f"batch {b['id']}: conflict fallback done in {time.time() - t0:.1f} s; the next build verifies")
 
 
 def closure_fallback(b, last, log, imports=None):
