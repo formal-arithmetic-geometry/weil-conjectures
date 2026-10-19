@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-higher-direct-image-affine-etale-bound",
+ "kind": "statement",
+ "title": "Higher direct image bound from affine etale inverse images",
+ "statement": "Let $g:X\\to Y$ be any scheme morphism and $c\\in\\mathbf N$. Suppose that for every affine scheme $W$ and etale morphism $w:W\\to Y$, the fibre product $W\\times_YX$ has all-torsion etale cohomological dimension at most $c$ [def-sc-etale-torsion-cd, def-pc-fibre-product]. Then for every locally torsion abelian sheaf $F$ on $X_{\\mathrm{et}}$ and every integer $q>c$, the higher direct image $R^qg_*F$ is zero [def-weil-pbc-direct-image]. No quasi-compactness or finite-type condition on $g$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.md",
+  "place": "step 10: affine etale basis and sheafification"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact equivalence between abelian sheaves and sheaves of ULift Z-modules. The source isZero_higherDirectImage_of_forall_isAffine criterion reduces vanishing to cohomology over each affine etale target object. For the base-changed etale source object V, transfer the assumed derived-section bound to Sheaf.H using nonempty_sheafH_extDerivedIso. The underlying abelian inverse image is torsion by upperStarForget2 and preservation of torsion. The source subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic applies because injective integer-module sheaves have acyclic underlying abelian sheaves. The Ext/free-sheaf and shifted single-functor equivalences give the required presheaf vanishing. Finally transport through the exact equivalence and its compatibility with derived direct image, single-degree embeddings and homology. The source affine-object criterion is the sheafification/local-generation argument of the original step 10.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-inverse-image-torsion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-inverse-image-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-bounds.proof.md",
+  "place": "Step 10, implemented using DirectImageVanishingTorsion.isZero_higherDirectImage_of_forall_isAffine and the ULift Z-module equivalence; U5, 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite field torsion etale cohomology vanishes above one and affine etale local cohomology detects higher direct image vanishing",
+   "results": "8 hits on ring etaleness and scheme morphism definitions; no match",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero.*higherDirectImage|HasTorsionEtaleCohomologicalDimensionLE",
+   "results": "0 hits from msearch Mathlib grep; direct library rg found the general finite-type and limit bounds, comparison for abelian sheaves, and sheafified higher direct image, but no exact statement for either obligation",
+   "verdict": "no match",
+   "date": "2026-10-19"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClassicalBounds",
+  "date": "2026-10-19",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-unbounded-classical-bounds",
+   "place": "step 10: affine etale basis and sheafification"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-pe-unbounded-classical",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.HigherDirectImageAffineEtaleBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/HigherDirectImageAffineEtaleBound.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_affineEtale_cd",
+  "statement": "theorem isZero_higherDirectImage_of_affineEtale_cd {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (c : ℕ)\n    (hc : ∀ {W : Scheme.{u}} (w : W ⟶ Y) [Etale w] [IsAffine W],\n      Scheme.HasTorsionEtaleCohomologicalDimensionLE (pullback w g) c)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)\n    (q : ℤ) (hq : (c : ℤ) < q) :\n    IsZero ((DerivedCategory.Plus.homologyFunctor\n        (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} g).rightDerivedFunctorPlus.obj\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034310-L-418805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034310-L-418805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
