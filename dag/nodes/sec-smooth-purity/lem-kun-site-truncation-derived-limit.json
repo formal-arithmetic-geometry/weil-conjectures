@@ -53,10 +53,9 @@
    }
   },
   {
-   "text": "Compute the successive lower-truncation triangle rather than invoking the upper-truncation triangle. Choose a representative $F$ of $E$, put $a=-n-1$, and take the degreewise surjection $\\tau_{\\ge a}F\\to\\tau_{\\ge a+1}F$ of [def-kun-truncations]. Its kernel $J$ has only two possibly nonzero terms: $J^a=\\operatorname{coker}d_F^{a-1}$ and $J^{a+1}=\\operatorname{im}d_F^a$, with the induced surjective differential. Its kernel in degree $a$ is $\\mathcal H^a(E)$; hence the inclusion $\\mathcal H^a(E)[-a]\\to J$ is a quasi-isomorphism. Applying [lem-weil-pbc-complex-ses-triangle] to $0\\to J\\to\\tau_{\\ge a}F\\to\\tau_{\\ge a+1}F\\to0$ gives the distinguished triangle\n$$\\mathcal H^{-n-1}(E)[n+1]\\longrightarrow E_{n+1}\\xrightarrow{f_n}E_n\\longrightarrow\\mathcal H^{-n-1}(E)[n+2].$$\nThe middle arrow is the specified truncation transition, since it is the same quotient map on the representative.",
+   "text": "Apply the existing successive lower-truncation triangle [lem-pc-derived-lower-truncation-step-triangle] to E with integer n+1. It supplies the distinguished triangle H^(-n-1)(E)[n+1] -> E_(n+1) -> E_n -> H^(-n-1)(E)[n+2], with the specified canonical transition as middle arrow. The equality -((n+1):Z)+1=-n identifies its upper truncation index. This replaces a repeated complex-level kernel calculation and use of the short-exact-sequence triangle.",
    "uses": [
-    "def-kun-truncations",
-    "lem-weil-pbc-complex-ses-triangle"
+    "lem-pc-derived-lower-truncation-step-triangle"
    ],
    "elementary": false,
    "source": {
@@ -149,7 +148,7 @@
   "lem-weil-derived-limit-existence",
   "def-kun-truncations",
   "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-derived-lower-truncation-step-triangle",
   "def-weil-sheaf-of-modules-category",
   "lem-pc-right-derived-functor-triangulated",
   "lem-sf-derived-homology-long-exact",
@@ -166,7 +165,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent-written expansion of the online proofs of Tags 0D6P, 0D6N, 0D6M and 0D6L; no local TeX copy is installed. Uses uniform d directly to obtain transition stabilization and local bijectivity."
+  "place": "B3 Lean proof of Tag 0D6P via the uniform stabilization argument of Tags 0D6M and 0D6L, using the existing successive lower-truncation triangle rather than repeating its complex-level construction. The section-cohomology/sheafification comparison is constructed naturally on K-injective chain-map representatives."
  },
  "mathlib_searches": [
   {
@@ -386,7 +385,6 @@
   "lem-pc-ringed-space-product-kinjective",
   "lem-weil-derived-limit-existence",
   "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-complex-ses-triangle",
   "lem-pc-right-derived-functor-triangulated",
   "lem-sf-derived-homology-long-exact",
   "lem-pc-derived-limit-milnor-sequence",
@@ -420,5 +418,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Statement, dependencies, source correspondence, edge cases, docstrings, report sections, and compiler evidence all checked; no substantive or mechanical errors found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T093251-L-2287138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
