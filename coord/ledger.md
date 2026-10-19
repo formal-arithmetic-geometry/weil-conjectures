@@ -17650,3 +17650,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:10 L: merged deliver/A9/Sheaf.SixFunctors.CoefIntegralFiniteExtension (stage 3; reviewer PASS; first push; landing 20261019T231036-L-541806 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/B2/Sheaf.Paper.VaryingRingGraphSummand (stage 3; reviewer PASS; first push; landing 20261019T231037-L-541990 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:10 L: merged deliver/B3/Sheaf.AlgebraicGeometry.SchemeUniverseEnlargement (stage 3; reviewer PASS; first push; landing 20261019T231038-L-542251 (proof); batch 20261019T231019; modules 1; new nodes 0)
+- 23:10 L: merged deliver/B4/Sheaf.RingTheory.LocalGeneratingTuples (stage 3; reviewer PASS; first push; landing 20261019T231040-L-542686 (interface); batch 20261019T231019; modules 1; new nodes 0; change records: coord/changes/B4-local-generating-tuples-private-helper-scopes.md)
