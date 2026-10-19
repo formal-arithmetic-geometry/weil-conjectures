@@ -2,7 +2,7 @@
  "id": "lem-per-henselian-krasner-neighbourhood",
  "kind": "statement",
  "title": "Krasner neighbourhoods over henselian fields of arbitrary valuation rank",
- "statement": "Let $F$ be a field with a nontrivial valuation and henselian valuation ring [def-trf-valuation-ring, def-weil-pbc-henselian-terminology]. Let $N/F$ be a finite Galois extension: finite, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal, meaning that every minimal polynomial of an element of $N$ over $F$ splits in $N[T]$. Fix a valuation $w$ of $N$ prolonging that of $F$, with values in a totally ordered abelian group, written additively. For $\\alpha,\\beta\\in N$, suppose that $w(\\alpha-\\beta)>w(\\alpha-\\sigma(\\alpha))$ for every $\\sigma\\in\\operatorname{Aut}_F(N)$ with $\\sigma(\\alpha)\\ne\\alpha$. Then $\\alpha\\in F(\\beta)$, where $F(\\beta)$ is the smallest subfield containing $F$ and $\\beta$ [def-pc-field-extension]. Thus there is an open neighbourhood $U$ of $\\alpha$ in $N$ such that every $\\beta\\in U$ satisfies $\\alpha\\in F(\\beta)$. When $\\alpha\\in F$ the condition is empty and one may take $U=N$. No completeness or rank restriction is imposed.",
+ "statement": "Let $F$ be a field with a nontrivial valuation and henselian valuation ring [def-trf-valuation-ring, def-weil-pbc-henselian-terminology]. Let $N/F$ be a finite Galois extension: finite, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal, meaning that every minimal polynomial of an element of $N$ over $F$ splits in $N[T]$. Fix a valuation $w$ of $N$ prolonging that of $F$, with values in a totally ordered abelian group, written additively. For $\\alpha,\\beta\\in N$, suppose that $w(\\alpha-\\beta)>w(\\alpha-\\sigma(\\alpha))$ for every $\\sigma\\in\\operatorname{Aut}_F(N)$ with $\\sigma(\\alpha)\\ne\\alpha$. Then $\\alpha\\in F(\\beta)$, where $F(\\beta)$ is the smallest subfield containing $F$ and $\\beta$ [def-pc-field-extension]. Thus there is an open neighbourhood $U$ of $\\alpha$ in $N$ such that every $\\beta\\in U$ satisfies $\\alpha\\in F(\\beta)$. When $\\alpha\\in F$ the condition is empty and one may take $U=N$. No completeness or rank restriction is imposed. Here an additive valuation has $w(0)=\\infty$, $w(x)\\in\\Gamma$ for $x\\ne0$, $w(xy)=w(x)+w(y)$ and $w(x+y)\\geq\\min\\{w(x),w(y)\\}$; its topology has the balls $\\{x:w(x-a)>\\gamma\\}$, $a\\in N$, $\\gamma\\in\\Gamma$, as a basis. Its valuation ring is $\\mathcal O_w=\\{x:w(x)\\geq0\\}$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "XX 4.4, printed p.374, forms of Krasner lemma, reference to Bourbaki, Algebre commutative VI section 8 exercises 12 and 14(a). Stacks Tag 09EI only treats a complete one-dimensional local domain, and is not a source for the unrestricted-rank statement."
@@ -13,9 +13,71 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\operatorname{Aut}_F(N)$ and $\\mathcal O=\\{x\\in N:w(x)\\geq0\\}$. For $\\sigma\\in G$, $w\\circ\\sigma$ is another prolongation of the valuation on $F$, since $\\sigma$ fixes $F$. By [lem-per-henselian-finite-extension-topology], applied to the finite algebraic extension $N/F$, the two prolongations have the same valuation subring. Consequently $\\sigma^{-1}(\\mathcal O)=\\mathcal O$. Only uniqueness of the prolongation up to equality of valuation subrings is used; none of the topology-comparison clauses is used.",
+   "uses": [
+    "lem-per-henselian-finite-extension-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-galois-fixed-field], $G$ is finite. Thus each $\\sigma\\in G$ has finite order: two powers agree in the finite list of powers, and cancellation gives $\\sigma^n=1$ for some $n>0$. For nonzero $a,b\\in N$, $w(a)\\geq w(b)$ is equivalent to $a/b\\in\\mathcal O$. Step 1 and $\\sigma(a/b)=\\sigma(a)/\\sigma(b)$ therefore give $w(\\sigma a)\\geq w(\\sigma b)$ if and only if $w(a)\\geq w(b)$, and likewise preserve strict comparisons. If $w(\\sigma x)>w(x)$ for nonzero $x$, iterating this comparison gives $w(x)<w(\\sigma x)<\\cdots<w(\\sigma^n x)=w(x)$, a contradiction; the reversed strict inequality gives the reversed contradiction. Totality now gives $w(\\sigma x)=w(x)$. This holds for $x=0$ as well, since $\\sigma0=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+   }
+  },
+  {
+   "text": "Let $\\beta$ satisfy the stated inequalities. Take any $\\sigma\\in G$ fixing $\\beta$. If $\\sigma\\alpha\\ne\\alpha$, put $d=\\alpha-\\beta$. Step 2 gives $w(\\sigma\\alpha-\\beta)=w(\\sigma d)=w(d)$. The valuation inequality applied to $\\alpha-\\sigma\\alpha=d-\\sigma d$ yields $w(\\alpha-\\sigma\\alpha)\\geq\\min\\{w(d),w(\\sigma d)\\}=w(\\alpha-\\beta)$, contradicting the strict hypothesis for this $\\sigma$. Hence every automorphism in $G$ fixing $\\beta$ fixes $\\alpha$. This also covers $d=0$, when the same inequality has right side $\\infty$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+   }
+  },
+  {
+   "text": "Let $L=F(\\beta)\\subseteq N$. An $F$-automorphism of $N$ fixes $\\beta$ if and only if it fixes $L$ pointwise: the elements it fixes form a subfield containing $F$ and $\\beta$, and $L$ is the smallest such subfield. The extension $N/F$ is Galois by hypothesis, so [lem-exc-etale-galois-fixed-field-subgroup] identifies the fixed field of this fixing subgroup with $L$. Step 3 says that $\\alpha$ belongs to that fixed field. Thus $\\alpha\\in F(\\beta)$.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/FieldTheory/Galois/Infinite.lean",
+    "place": "InfiniteGalois.fixedField_fixingSubgroup, line 85; elementary description of the subgroup fixing a generated field"
+   }
+  },
+  {
+   "text": "For the neighbourhood clause, let $S=\\{\\sigma\\in G:\\sigma\\alpha\\ne\\alpha\\}$. It is finite by [lem-weil-pbc-finite-galois-fixed-field]. If $S$ is nonempty, the finite nonempty subset $\\{w(\\alpha-\\sigma\\alpha):\\sigma\\in S\\}$ of the totally ordered value group has a largest element $r$ (take successive larger values). Set $U=\\{\\beta\\in N:w(\\alpha-\\beta)>r\\}$. This is a basic open ball and contains $\\alpha$, since $w(0)=\\infty>r$. Each $\\beta\\in U$ satisfies every required strict inequality, so Step 4 applies. If $S$ is empty, $\\alpha$ is fixed by all of $G$, hence $\\alpha\\in F$ by the fixed-field clause of [lem-weil-pbc-finite-galois-fixed-field]; take $U=N$, since $F\\subseteq F(\\beta)$ for all $\\beta$. In particular this is the specified choice when $\\alpha\\in F$. Only a finite maximum is taken; there is no completeness or rank assumption.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, printed p.374: forms of Krasner lemma; explicit agent-written finite-Galois argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-henselian-finite-extension-topology",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-exc-etale-galois-fixed-field-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed p.374 motivates the Krasner input but omits its proof; explicit finite-Galois proof from uniqueness of valuation prolongations and Galois fixed fields. Bourbaki AC VI section 8 exercises 12 and 14(a) unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +106,59 @@
    "results": "{\"t\": \"2026-10-18T22:42:32Z\", \"tool\": \"grep\", \"query\": \"Krasner|hensel.*root|root.*hensel|valuation.*[Uu]nique\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"Mathlib/NumberTheory/Padics/Hensel.lean\", \"Mathlib/Algebra/Polynomial/AlgebraMap.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Augmented/Basic.lean\", \"Mathlib/RingTheory/Binomial.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\"], \"digest\": \"2365a3b855f54ae5\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; complete normed-field Krasner, p-adic Hensel, valuation-extension definitions and topology infrastructure do not state the arbitrary-rank henselian assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner lemma for a henselian valued field with arbitrary ordered value group and finite Galois extension",
+   "results": "{\"t\": \"2026-10-18T23:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner lemma for a henselian valued field with arbitrary ordered value group and finite Galois extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"hensels_lemma\", \"HenselianLocalRing.TFAE\", \"krullTopology_mem_nhds_one_iff\", \"HenselianLocalRing.is_henselian\", \"krullTopology_t2\", \"Tilt.instField\", \"HenselianLocalRing\"], \"digest\": \"364cf25a44e1e719\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]rasner|henselian.*valuation|valuation.*henselian",
+   "results": "{\"t\": \"2026-10-18T23:50:02Z\", \"tool\": \"grep\", \"query\": \"[Kk]rasner|henselian.*valuation|valuation.*henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\"], \"digest\": \"c377415666d1d560\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsKrasner",
+   "results": "{\"t\": \"2026-10-18T23:50:02Z\", \"tool\": \"loogle\", \"query\": \"IsKrasner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"IsKrasner\", \"IsKrasner.of_completeSpace_of_normal\", \"IsKrasner.of_completeSpace\", \"IsKrasner.krasner'\", \"IsKrasner.mk\", \"IsKrasner.krasner\"], \"digest\": \"f6ae8d1e20030b23\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Close elements in a finite Galois extension of a henselian valued field generate a field containing the original element Krasner",
+   "results": "{\"t\": \"2026-10-18T23:50:02Z\", \"tool\": \"leansearch\", \"query\": \"Close elements in a finite Galois extension of a henselian valued field generate a field containing the original element Krasner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteGaloisIntermediateField.adjoin_simple_le_iff\", \"FiniteGaloisIntermediateField.subset_adjoin\", \"FiniteGaloisIntermediateField.adjoin_val\", \"GaloisField.instIsGaloisOfFinite\", \"FiniteGaloisIntermediateField.instIsGaloisSubtypeMemIntermediateField\", \"Subfield.closure\", \"FiniteGaloisIntermediateField.isGalois\", \"Subfield.mem_closure\"], \"digest\": \"4154e04741674ce8\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Valuation, HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-18T23:52:15Z\", \"tool\": \"loogle\", \"query\": \"Valuation, HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|Henselian|IsKrasner|krasner",
+   "results": "{\"t\": \"2026-10-18T23:52:15Z\", \"tool\": \"grep\", \"query\": \"henselian|Henselian|IsKrasner|krasner\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner lemma automorphisms fixing beta fix alpha in arbitrary henselian valued fields without completeness",
+   "results": "{\"t\": \"2026-10-18T23:52:16Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner lemma automorphisms fixing beta fix alpha in arbitrary henselian valued fields without completeness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"ValuationSubring.decompositionSubgroup\", \"ValuationSubring.inertiaSubgroup\", \"hensels_lemma\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"HenselianLocalRing.is_henselian\", \"HenselianRing.is_henselian\"], \"digest\": \"c5636b6f09f363a1\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures. IsKrasner.krasner requires a normed field and an IsKrasner instance; available completeSpace instances add completeness and a real-valued norm. HenselianLocalRing and decompositionSubgroup definitions do not prove arbitrary-rank Krasner; finite Galois and subfield-closure results do not supply the valuation assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-dense-henselian-field-etale-comparison",
@@ -75,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-krasner-neighbourhood",
+  "worker": "stage1",
+  "summary": "Explicit five-step finite-Galois proof, reusing the existing henselian prolongation theorem and two existing Mathlib Galois leaves. Equality of valuation subrings is converted into equality of values using finite order, with the argument written out. The ultrametric contradiction proves the stabilizer inclusion; fixed fields give membership and a finite maximum gives the open neighbourhood. No new nodes. Corrected twice-escaped TeX and made the valuation/topology conventions explicit without changing the hypotheses or conclusion.",
+  "blueprint": "Realizes the Krasner-neighbourhood input to the dense henselian valued-field comparison used by the completion-rigidity branch of lem-per-artin-gabber-affine-curve, proof Step 3. Keeps the inherited ancestor and via route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-d74dd7598",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-d74dd7598 (reviewer sub-agent of L); spot-checked: I read the mathematics in full and made no fixes. The delivery is one commit with the item and its report, and it adds no new nodes. The statement's hypotheses and conclusion are unchanged from the NQ snapshot that created the node; the delivery only adds a sentence spelling out the valuation, topology and valuation-ring conventions, and stmt_deps are unchanged. The citer lem-per-dense-henselian-field-etale-comparison (Steps 1, 3 and 4) gets exactly the open neighbourhood it uses. Source: ILO XX 4.4, printed p.374 (PDF p.380) only invokes forms of Krasner's lemma and refers to Bourbaki AC VI §8 exercises 12 and 14a, which is not available locally, so proof_origin agent is correct. No SGA is cited. Step 1 uses only the uniqueness clause of lem-per-henselian-finite-extension-topology (same unit, unsplit, no proof_deps, so no cycle). w∘σ is a prolongation, so σ⁻¹(O)=O. Henselianity is needed exactly here: for Q(i) over Q with p≡1 mod 4, σ swaps the two prolongations. Step 2: G is finite by the finite-Galois Mathlib leaf; ratio membership in O preserves weak and strict comparisons, and finite order gives w∘σ=w, with no rank-one assumption. Step 3: with d=α−β, the inequality w(d−σd) ≥ w(α−β) contradicts the hypothesis; the direction is correct and d=0 is covered. Step 4: InfiniteGalois.fixedField_fixingSubgroup (Infinite.lean:85, read) applies to any intermediate field, and the stabilizer of β equals the pointwise stabilizer of F(β). Step 5: a finite maximum r is taken in the value group and the ball around α is a basic open set. If S is empty, IsGalois.mem_range_algebraMap_iff_fixed (Basic.lean:340, read) gives α∈F and U=N. Small cases tested: Q_p(√p) with p odd, a rank-two valued field, and α∈F or β=α. Searches for Krasner and for valuation prolongation with automorphisms or isometries found no duplicate. The off-unit citations are Mathlib leaves only, so no tool_uses are needed."
  }
 }
