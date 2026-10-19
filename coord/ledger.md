@@ -16784,3 +16784,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/M4/Sheaf.Paper.ConstantCompletionEquivalence (stage 3; reviewer PASS; first push; landing 20261019T005343-L-2756283 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/M5/Sheaf.CategoryTheory.RingedSiteDualityMaps (stage 3; reviewer PASS; first push; landing 20261019T005344-L-2756428 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/M5/Sheaf.Paper.IntrinsicCompletionCompleted (stage 3; reviewer PASS; first push; landing 20261019T005344-L-2756547 (proof); batch 20261019T005255; modules 1; new nodes 0)
+- 00:53 L: merged deliver/M7/Sheaf.CategoryTheory.SiteTorIntervalRestriction (stage 3; reviewer PASS; first push; landing 20261019T005345-L-2756728 (proof); batch 20261019T005255; modules 1; new nodes 0)

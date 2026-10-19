@@ -31,116 +31,48 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$. The smallness hypothesis and [lem-pur-ringed-site-grothendieck-abelian] make $\\mathcal A$ Grothendieck abelian. By [lem-pc-sheaf-modules-tensor-closed] its tensor is additive, symmetric monoidal and closed, hence also braided. To check functorial flat resolutions rather than assume them, apply the functorial bounded-above replacements of [lem-pc-kflat-bounded-flat-replacement] with upper bound $0$ to the complexes $F[0]$, functorially in $F$. If $T(F)\\to F[0]$ is this replacement, then $L(F)=T(F)^0$ is flat and the degree-zero map $L(F)\\twoheadrightarrow F$ is an epimorphism, natural in $F$. Thus $L$ factors through the full subcategory of flat objects and supplies a functorial flat epimorphism onto every object; equivalently one obtains functorial flat resolutions by iterating this construction on the successive kernels. This verifies all categorical hypotheses of the bounded-flat-model theorem used next.",
+   "text": "Apply the forward implication of [lem-sp-ringed-site-tor-flat-model] to the given universal Tor interval. Obtain a complex P of site-flat module sheaves, zero outside [a,b], and E ≅ Q(P). This is the same Stacks 08G1 bounded-flat-model step as the original route, using its existing ringed-site specialization instead of rebuilding the categorical tensor identification.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-pc-kflat-bounded-flat-replacement"
+    "lem-sp-ringed-site-tor-flat-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1 (lemma-tor-amplitude), bounded-flat-model input; Tag 06YS (lemma-K-flat-resolution), bounded-above flat replacements; structural sheaf-module hypotheses as in Modules on Sites Tags 03DA, 03DB, 03EW, 03EO"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the given derived category of $\\mathcal A$ with its K-flat tensor. The representative comparisons and uniqueness of descent in [lem-weil-pbc-site-derived-tensor-descent] identify this tensor with the site tensor in the statement: on every pair of K-flat flat-term representatives both give $Q\\operatorname{Tot}(P\\otimes Q)$, and these comparisons descend uniquely. Hence the assumed vanishing is exactly the Tor-amplitude hypothesis of [lem-sc-source-tor-amplitude-flat-model], applied to $\\mathcal A$ with the hypotheses checked in Step 1. It gives a cochain complex $P$ with flat terms, $P^q=0$ for $q<a$ or $b<q$, and an isomorphism $Q(P)\\cong E$. The flatness here is the exactness of the module-sheaf tensor functor, the same notion used in the slice-flatness theorem below.",
+   "text": "Let F be restriction to C/U, exact by [lem-pur-site-restriction-module-adjunction-exact], and let B be its termwise application to P. The natural comparison siteSheafTensorRightIso of [lem-weil-pbc-independent-sheaf-tensor-colimits] identifies explicit site tensor with the monoidal tensor. Transfer flatness along this isomorphism, use [lem-weil-pbc-slice-restriction-flat] termwise, and transfer back on the slice. Hence B has site-flat terms. Exact restriction preserves zero objects, so B is zero outside [a,b].",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sc-source-tor-amplitude-flat-model"
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-slice-restriction-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1 (lemma-tor-amplitude), implication (1) to (2), as supplied by the existing generic categorical flat-model theorem; Tag 06YU (definition-derived-tor)"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix any $U\\in\\mathcal C$ and put $B=P|_U$, restricting terms and differentials to $\\mathcal C/U$. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact]. In particular it preserves kernels and cokernels, so it preserves the quotient $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ and every quasi-isomorphism. It therefore induces a functor on the localization at quasi-isomorphisms and sends the isomorphism $Q(P)\\cong E$ to $Q_U(B)\\cong E|_U$. This is the representative-independent derived restriction defined in [def-weil-pbc-ringed-site-derived-restriction]; a chain map from $P$ to a chosen representative of $E$ is not needed.",
+   "text": "Mathlib Functor.mapDerivedCategory for the exact functor F and Functor.mapDerivedCategoryFactors give the representative comparison. Apply the induced functor to Q(Q.objPreimage E) ≅ E ≅ Q(P). Compose with the inverse comparison at Q.objPreimage E and the comparison at P. This yields E|U ≅ Q_U(B) for the canonical representative definition [def-weil-pbc-ringed-site-derived-restriction]. The construction permits distinct derived Hom universes w and w'.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "def-weil-pbc-ringed-site-derived-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08H5 (lemma-tor-amplitude-pullback), identifying localization pullback with exact restriction; Modules on Sites Tag 03DJ (lemma-extension-by-zero-exact)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-slice-restriction-flat] to every term $P^q$. It gives flatness of every $B^q$ over $\\mathcal O_U$. Restriction sends the zero module to zero, so $B^q=0$ outside $[a,b]$. In particular $B$ is bounded above by $b$, and [lem-pc-bounded-above-flat-kflat-site] makes $B$ K-flat on $(\\mathcal C/U,\\mathcal O_U)$. The slice is small in the same universe: its objects and arrows form subsets of the sets of objects and arrows with specified targets in the original small category.",
+   "text": "The reverse implication of [lem-sp-ringed-site-tor-flat-model] on C/U applies to B, its site-flat terms, the same zero bounds, and E|U ≅ Q_U(B). It gives the required vanishing against every module sheaf G on C/U; no extension of G from the original site is assumed.",
    "uses": [
-    "lem-weil-pbc-slice-restriction-flat",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-sp-ringed-site-tor-flat-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08H5 (lemma-tor-amplitude-pullback), flat pulled-back terms; Modules on Sites Tag 0E8J (lemma-restriction-flat); Tag 06YQ (lemma-bounded-flat-K-flat)"
-   }
-  },
-  {
-   "text": "Let $G$ be any $\\mathcal O_U$-module sheaf, with no assumption that it is the restriction of a global sheaf. By [lem-pc-kflat-resolution] choose a K-flat flat-term resolution $t:T\\to G[0]$ on the slice. Its cone $C(t)$ is acyclic by [lem-pur-quasi-iso-cone-acyclic]. By the definition [def-pc-kflat-complex], $\\operatorname{Tot}(C(t)\\otimes B)$ is acyclic. The symmetry of module-sheaf tensor in [lem-pc-sheaf-modules-tensor-closed] and the total differential in [def-pc-tensor-complex-sheaves] give the signed flip $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on bidegree $(p,q)$. It is its own inverse, and commutes with the differentials because $(-1)^{(p+1)q+q}=(-1)^{pq}$ and $(-1)^{p(q+1)}=(-1)^{pq+p}$. Thus $\\operatorname{Tot}(B\\otimes C(t))$ is acyclic as well. The complex isomorphism [lem-pc-tensor-mapping-cone-iso] identifies it with the cone of $\\operatorname{Tot}(1_B\\otimes t)$. Applying the quasi-isomorphism/cone criterion again shows that $\\operatorname{Tot}(B\\otimes T)\\to\\operatorname{Tot}(B\\otimes G[0])$ is a quasi-isomorphism.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-tensor-mapping-cone-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YN (definition-K-flat), 06YM (lemma-derived-tor-exact), 06YU (definition-derived-tor); Derived Categories Tag 05RT (lemma-acyclic); explicit signed symmetry calculation"
-   }
-  },
-  {
-   "text": "Both $B$ and $T$ are K-flat with flat terms. The representative comparison in [lem-weil-pbc-site-derived-tensor-descent], together with $Q_U(B)\\cong E|_U$, $Q_U(T)\\cong G[0]$, and the quasi-isomorphism from Step 5, gives $E|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}G\\cong Q_U\\operatorname{Tot}(B\\otimes_{\\mathcal O_U}G[0])$. Here only pairs satisfying the stated K-flat flat-term hypotheses are used in that descent theorem; the comparison with the arbitrary degree-zero $G$ was proved in Step 5.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), K-flat representative computation; Tag 08H5 (lemma-tor-amplitude-pullback), final application of the flat-model criterion"
-   }
-  },
-  {
-   "text": "By [def-pc-tensor-complex-sheaves], the ordinary tensor complex in Step 6 has degree-$r$ term $B^r\\otimes_{\\mathcal O_U}G$, since $G[0]$ has only degree zero. For $r\\notin[a,b]$ this term is zero: tensor with a fixed sheaf is additive, hence takes zero to zero, by [lem-pc-sheaf-modules-tensor-closed]. Its kernel and the image entering it are therefore zero, so its $r$-th cohomology sheaf $\\ker(d^r)/\\operatorname{im}(d^{r-1})$ is zero by [def-weil-derived-cohomology-sheaves]. Cohomology carries the isomorphism of Step 6 to an isomorphism, proving the requested vanishing for this arbitrary $G$ and $r$. Since $U$ was arbitrary, this proves the item.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-weil-derived-cohomology-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1 (lemma-tor-amplitude), implication (2) to (1); Tag 08H5 (lemma-tor-amplitude-pullback), conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-ringed-site-derived-restriction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-kflat-resolution",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-source-tor-amplitude-flat-model",
-  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-slice-restriction-flat"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08H5 (lemma-tor-amplitude-pullback), specialized to slice restriction, using Tag 08G1 (lemma-tor-amplitude). Expanded the categorical hypotheses of the existing bounded-flat-model theorem and the one-K-flat-factor tensor calculation."
+  "place": "Tag 08H5 (lemma-tor-amplitude-pullback), using the existing ringed-site equivalence of Tag 08G1 twice; exact restriction and representative comparison written in Lean by M7."
  },
  "mathlib_searches": [
   {
@@ -388,17 +320,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-sc-source-tor-amplitude-flat-model",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-slice-restriction-flat",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-pc-tensor-mapping-cone-iso"
+  "lem-weil-pbc-slice-restriction-flat"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -425,5 +348,15 @@
   "group": "Q40",
   "result": "pass",
   "note": "Immutable theorem signature matches the node verbatim; dependencies, source alignment, universes, edge cases, report sections, and canonical declarations checked. scompile.py sandbox and library checks passed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261019T005345-L-2756728",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

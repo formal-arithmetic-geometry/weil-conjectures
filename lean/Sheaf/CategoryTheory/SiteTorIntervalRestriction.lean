@@ -8,27 +8,11 @@ module
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Sheaf.Paper.WeilTensorProduct
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Paper.SfCommonStageWeilCohomology
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Tor intervals survive slice restriction
@@ -55,31 +39,17 @@ Source: Stacks Project, Cohomology on Sites, Tags 08H5 and 08G1
 (blueprint: lem-sf-site-tor-interval-restriction).
 
 Proof:
-1. The module category is Grothendieck abelian
-   (`lem-pur-ringed-site-grothendieck-abelian`), with additive symmetric closed tensor
-   (`lem-pc-sheaf-modules-tensor-closed`). Apply functorial bounded-above flat replacement
-   (`lem-pc-kflat-bounded-flat-replacement`) to degree-zero complexes. Evaluation in degree
-   zero gives natural flat epimorphisms; iterating on kernels gives functorial flat resolutions.
-2. The comparisons and uniqueness in `lem-weil-pbc-site-derived-tensor-descent` identify
-   this tensor with the categorical K-flat tensor. Apply
-   `lem-sc-source-tor-amplitude-flat-model` to obtain a flat complex P supported in [a,b]
-   and an isomorphism Q(P) ≅ E.
-3. Exact slice restriction (`lem-pur-site-restriction-module-adjunction-exact`) preserves
-   quasi-isomorphisms and the representing isomorphism, giving Q(P|U) ≅ E|U for the recorded
-   `def-weil-pbc-ringed-site-derived-restriction`.
-4. Each restricted term is flat (`lem-weil-pbc-slice-restriction-flat`); zero terms remain
-   zero, so P|U is supported in [a,b]. It is K-flat by
-   `lem-pc-bounded-above-flat-kflat-site`. The slice remains small in the same universe.
-5. For an arbitrary slice module G, choose a flat-term K-flat resolution T → G[0]
-   (`lem-pc-kflat-resolution`). Its cone is acyclic (`lem-pur-quasi-iso-cone-acyclic`).
-   K-flatness of P|U and the signed tensor symmetry make tensor with this cone acyclic.
-   The tensor-cone comparison (`lem-pc-tensor-mapping-cone-iso`) and the cone criterion show
-   Tot(P|U ⊗ T) → Tot(P|U ⊗ G[0]) is a quasi-isomorphism.
-6. The representative comparison of `lem-weil-pbc-site-derived-tensor-descent` now identifies
-   E|U ⊗ᴸ G with Q(Tot(P|U ⊗ G[0])). This uses no extension of G to a global sheaf.
-7. The last ordinary tensor has degree-r term (P|U)^r ⊗ G, zero outside [a,b]. Its cohomology
-   therefore vanishes there (`def-pc-tensor-complex-sheaves`, additive tensor, and
-   `def-weil-derived-cohomology-sheaves`). Transport vanishing through the isomorphism.
+1. Apply the ringed-site bounded flat model equivalence (Stacks 08G1) to E. It supplies
+   a complex P with flat terms, zero outside [a,b], and E ≅ Q(P).
+2. Let F be exact slice restriction and B its termwise application to P. The explicit
+   site tensor is naturally isomorphic to monoidal tensor. Transport flatness along
+   this comparison, apply `SheafOfModules.isFlat_over`, and transport back on the slice.
+   Thus B has flat terms. Since F preserves zero objects, B is zero outside [a,b].
+3. Exactness gives F.mapDerivedCategory and its comparison with termwise restriction.
+   Apply it to E ≅ Q(P). Its comparison at Q.objPreimage E identifies the recorded
+   derived restriction with Q(B), independently of the chosen representative.
+4. Apply the reverse implication of the same bounded flat model equivalence on the
+   slice. It tests against every slice module sheaf, as required.
 -/
 theorem siteTorIntervalRestriction
     {C : Type u} [SmallCategory C]
@@ -106,6 +76,37 @@ theorem siteTorIntervalRestriction
             ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O) U
             _ _ _ _ hD hDU E,
             (DerivedCategory.singleFunctor _ 0).obj G))) := by
-  sorry
+  classical
+  let R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O
+  let : HasDerivedCategory.{w'} (SheafOfModules.{u} (R.over U)) := hDU
+  let F := SheafOfModules.overFunctor.{u} R U
+  have : F.Additive :=
+    (SheafOfModules.localizedSystemExact.{u, u, u} O U).2.2.2.1
+  have : PreservesFiniteLimits F :=
+    (SheafOfModules.localizedSystemExact.{u, u, u} O U).2.2.2.2.1
+  have : PreservesFiniteColimits F :=
+    (SheafOfModules.localizedSystemExact.{u, u, u} O U).2.2.2.2.2
+  obtain ⟨P, hflat, hbound, ⟨e⟩⟩ :=
+    (SheafOfModules.torAmplitude_iff_exists_bounded_flat_model J O E a b _hab).1 _hE
+  let B := (F.mapHomologicalComplex (.up ℤ)).obj P
+  apply (SheafOfModules.torAmplitude_iff_exists_bounded_flat_model
+    (J.over U) (O.over U) _ a b _hab).2
+  refine ⟨B, ?_, ?_, ?_⟩
+  · intro i
+    have hf : SheafOfModules.IsFlat (R := O) (P.X i) :=
+      (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso O (P.X i)) (hflat i)
+    have hg := SheafOfModules.isFlat_over (P.X i) U hf
+    exact (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (O.over U) ((P.X i).over U)).symm hg
+  · intro i hi
+    exact F.map_isZero (hbound i hi)
+  · change Nonempty (DerivedCategory.Q.{w'}.obj
+      ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.{w}.objPreimage E)) ≅
+        DerivedCategory.Q.{w'}.obj B)
+    let Q := DerivedCategory.Q.{w} (C := SheafOfModules.{u} R)
+    let e₀ := F.mapDerivedCategory.{w, w'}.mapIso (Q.objObjPreimageIso E) ≪≫
+      F.mapDerivedCategory.{w, w'}.mapIso e ≪≫ F.mapDerivedCategoryFactors.{w, w'}.app P
+    exact ⟨(F.mapDerivedCategoryFactors.{w, w'}.app (Q.objPreimage E)).symm ≪≫ e₀⟩
 
 end CategoryTheory
