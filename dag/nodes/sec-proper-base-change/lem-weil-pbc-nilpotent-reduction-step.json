@@ -39,67 +39,73 @@
  ],
  "proof": [
   {
-   "text": "For every Noetherian coefficient ring D, [lem-weil-pbc-constant-coefficient-lisse-triangle] proves that finite locally constant cohomology in the commutative constant-ring convention is closed under the middle term of distinguished triangles. Its proof explicitly compares the two constant-ring constructions before applying the existing Serre theorem.",
+   "text": "Choose a bounded-above flat K-flat complex P representing K using good truncation, the functorial bounded-above flat replacement, and the bounded-above flat K-flat criterion. The canonical counit of derivedChangeOfRings identifies the localization of each termwise quotient extension with constantCoefficientScalarExtension applied to K. The ordinary additive extension preserves the termwise bound; its object and map equations give an isomorphism to changeOfRingsComplex.",
    "uses": [
-    "lem-weil-pbc-constant-coefficient-lisse-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, paragraph beginning 'Recall that the locally constant sheaves'"
-   }
-  },
-  {
-   "text": "Put D=B/J^(n+1) and Q=J^n/J^(n+1). Regard 0 to Q to D to B/J^n to 0 as an exact sequence of D-modules. Constant sheafification is exact by [lem-weil-pbc-site-module-presheaf-sheafification-exact]. Choose a flat K-flat representative P of K by [lem-pc-kflat-resolution]. Tensoring this sequence over B with P preserves exactness degreewise by [def-pc-flat-sheaf-modules]. Forgetting D-module structure is exact and reflects exactness, so this gives a distinguished triangle of derived D-module sheaves. The middle term computes the reduction modulo J^(n+1), and the last term is the restriction of the reduction modulo J^n, by [lem-pur-derived-change-of-rings]. Balancing identifies the first term with restriction from B/J of (P tensor_B B/J) tensor_(B/J) Q. The quotient-coefficient complex P tensor_B B/J is K-flat, since its tensor with an acyclic quotient-module complex identifies with P tensor_B that complex, which is acyclic by [def-pc-kflat-complex]. The balancing maps send (p tensor b) tensor q to p tensor bq, with inverse p tensor q to (p tensor 1) tensor q; these commute with differentials and restrictions.",
-   "uses": [
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-kflat-complex",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
     "lem-pur-derived-change-of-rings",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, displayed distinguished triangles and isomorphisms"
-   }
+   "elementary": false
   },
   {
-   "text": "The ring B/J is Noetherian, and Q is finite over B/J: finite generators of J^n project to generators, and J annihilates Q. Good truncation followed by [lem-pc-kflat-bounded-flat-replacement] and [lem-pc-bounded-above-flat-kflat-site] gives a bounded-above flat K-flat representative of K. Thus its reduction modulo J is bounded above. Apply [lem-weil-pbc-locally-constant-tensor] to this reduction and Q to obtain finite locally constant cohomology over B/J for the first triangle term. The quotient maps D to B/J and D to B/J^n are surjective because n is positive. By [lem-weil-pbc-constant-coefficient-lisse-restriction], restricting along these maps preserves finite constant local models. Hence the first term and, by the previous-reduction hypothesis, the last term have finite locally constant cohomology over D. The quotient D is Noetherian. Apply [lem-weil-pbc-constant-coefficient-lisse-triangle] over D to conclude the successor reduction, without induction over all powers. Working in D-module sheaves throughout removes the need to recover quotient-linear local models from B-module local models.",
+   "text": "Put D=B/J^(n+1), A=B/J and E=B/J^n. Construct Q=(J^n)/(J times J^n), a finite A-module, using the Mathlib linear equivalence with the image of J^n in D. This gives the short exact sequence of D-modules Res(Q) to D to Res(E). Constant module presheaves preserve finite limits and colimits (the public constant_preservesFiniteLimits/Colimits helpers in the finite-free truncation module), and Mathlib module sheafification is exact. Tensor their sheafified sequence termwise with the flat complex P_D. Degreewise short exactness gives a short exact sequence of complexes and the Mathlib distinguished triangle of that sequence. Change of rings preserves flat terms and K-flatness.",
    "uses": [
-    "lem-weil-pbc-locally-constant-tensor",
-    "def-weil-pbc-noetherian-ring",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-constant-coefficient-lisse-restriction",
-    "lem-weil-pbc-constant-coefficient-lisse-triangle"
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-site-finite-free-truncation-models",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-kflat-change-of-rings",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, final paragraph ('Combined with Lemma ... we obtain the result')"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Compare sheafification with restriction of constant coefficients using restrictSheafificationComparison_isIso. Restriction along a locally surjective ring-sheaf map is fully faithful; the tensor cancellation isomorphisms and the composition comparison for restriction therefore identify the first triangle complex with Res_DA(Q_A tensor P_A), and the last with Res_DE(P_E). The middle is P_D by the constant regular-module/unit isomorphism. All comparisons are chain isomorphisms. Restriction is exact because its underlying abelian-sheaf functor is unchanged, so it commutes with homology.",
+   "uses": [
+    "lem-weil-pbc-constant-coefficient-local-models-comparison",
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the first outer term, resolve the degree-zero constant finite A-module Q by a K-flat complex. Apply the locally constant derived-tensor theorem to this resolution and P_A. Tensoring its quasi-isomorphism with the K-flat P_A is a quasi-isomorphism: its cone is the total tensor of an acyclic cone and P_A. The single-complex total-tensor comparison gives finite locally constant cohomology of Q_A tensor P_A. The hypothesis supplies it for P_E. Since D to A and D to E are surjective, restriction preserves finite constant local models. Both outer terms thus have finite locally constant D-cohomology. D is Noetherian, so distinguished-triangle closure gives the middle term, identified above with the required successor reduction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-constant-coefficient-lisse-restriction",
+    "lem-weil-pbc-constant-coefficient-lisse-triangle",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-coefficient-lisse-triangle",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-pc-kflat-resolution",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-locally-constant-tensor",
-  "def-weil-pbc-noetherian-ring",
   "lem-pc-kflat-bounded-flat-replacement",
   "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-constant-coefficient-lisse-restriction"
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-site-finite-free-truncation-models",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-constant-coefficient-local-models-comparison",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-locally-constant-tensor",
+  "lem-weil-pbc-constant-coefficient-lisse-restriction",
+  "lem-weil-pbc-constant-coefficient-lisse-triangle",
+  "def-weil-pbc-noetherian-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "G6",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094I, lemma-locally-constant-bounded; Tag 094H, lemma-locally-constant-tensor-product"
+  "place": "Tag 094I filtration triangle and Tag 094H tensor theorem; explicit coefficient sequence and chain comparisons, with Mathlib short-exact triangle and mapping-cone APIs"
  },
  "mathlib_searches": [
   {
@@ -152,12 +158,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "G6",
   "result": "pass",
-  "landing": "20261018T091408-L-3257205",
+  "landing": "20261019T192742-L-1862821",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
