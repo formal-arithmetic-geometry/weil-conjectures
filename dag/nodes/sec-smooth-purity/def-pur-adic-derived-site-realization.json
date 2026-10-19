@@ -11,9 +11,39 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
   "place": "node thm-pur-adic-reconstruction, order 2023"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For inverse image, compose the specified inverseFactors with exact pro-etale realization to obtain a factorization of the left composite through Q. Similarly factor the etale realization followed by comparisonUpperStar. Apply Localization.liftNatIso to the ordinary site inverse comparison between the two complex functors. Its component formula is precisely the required full factorization square. Localization.natTrans_ext and cancellation of the factorization isomorphisms prove uniqueness.",
+   "uses": [
+    "def-pur-adic-site-realization",
+    "def-pur-adic-proetale-realization",
+    "def-pur-adic-etale-realization",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For direct image, form cochain units for the two composites from the recorded directUnit and from comparisonLowerStar.rightDerivedFunctorUnit, transporting along the exact realization factorization isomorphisms. An additive functor carries quasi-isomorphisms between K-injectives to quasi-isomorphisms because these maps are homotopy equivalences. Thus the K-injective derivability structure applies. The first composite unit is invertible on K-injectives by the recorded computes property; the second is invertible because the pro-etale realization is an additive equivalence and preserves K-injectives. Both composites are consequently right derived functors. Apply Functor.rightDerivedNatIso to the ordinary site right comparison. Cancel the realization factorization isomorphisms to identify the universal-unit equation with the stated normalization on every complex. Functor.rightDerived_ext proves uniqueness.",
+   "uses": [
+    "def-pur-adic-site-realization",
+    "def-pur-adic-proetale-realization",
+    "def-pur-adic-etale-realization",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-site-realization",
+  "def-pur-adic-proetale-realization",
+  "def-pur-adic-etale-realization",
+  "lem-pur-coefficient-system-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
+  "place": "Canonical derived realization comparisons in the adic reconstruction: the existing declaration docstrings, exact localization, and universal K-injective right derivation. Formal proof by Z5 using Localization.liftNatIso, the library K-injective derivability structure, and Functor.rightDerivedNatIso. The concrete normalization predicates specialize the same equations stated for general functors, avoiding expensive expansion of concrete sheaf functors."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -87,7 +117,9 @@
    "WeilConjectures.integralExceptionalSiteFixedRightUnit",
    "WeilConjectures.IsIntegralExceptionalSiteDerivedRight",
    "WeilConjectures.integralExceptionalSiteDerivedRight_existsUnique",
-   "WeilConjectures.integralExceptionalSiteDerivedRight"
+   "WeilConjectures.integralExceptionalSiteDerivedRight",
+   "CategoryTheory.Functor.IsDerivedInverseComparison",
+   "CategoryTheory.Functor.IsDerivedRightComparison"
   ],
   "file": "lean/Sheaf/Paper/ExceptionalDerivedSiteRealization.lean",
   "statement": "def integralExceptionalSiteDerivedInverse (n : ℕ) : (B.derived.level n).inverse ⋙ (integralExceptionalProRealization l E W n).mapDerivedCategory ≅ (integralExceptionalEtaleRealization l E W n).mapDerivedCategory ⋙ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) W).mapDerivedCategory",
@@ -111,5 +143,15 @@
   "group": "N0",
   "result": "fix",
   "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T192856-L-1879286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
