@@ -6,11 +6,6 @@ Authors: SHEAF group Q73
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Mathlib.AlgebraicGeometry.Over
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.Topology.Sets.OpenCover
 
 /-!
 # Affine-local geometric irreducibility
