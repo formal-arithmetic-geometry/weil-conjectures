@@ -11,17 +11,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.AlgebraicGeometry.FiniteCoefficientOpenKInjective
+import Sheaf.AlgebraicGeometry.FiniteCoefficientOpenRestriction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 /-!
 # Open direct image and its unit on K-injective pro-etale complexes
@@ -74,6 +68,118 @@ noncomputable def finiteCoefficientOpenUnitSection {U T : Scheme.{u}}
     (finiteCoefficientModelRingUnit j A)).unit.app
       ((Scheme.proEtaleModuleToModel (finiteCoefficientRingSheaf T A)).obj N)).val.app
         (AsSmall.up.op.obj (op V))) m
+
+private theorem isLeftKanExtension_of_full_whiskering
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (L : C ⥤ D) (G : D ⥤ E)
+    [((Functor.whiskeringLeft C D E).obj L).Full]
+    [((Functor.whiskeringLeft C D E).obj L).Faithful]
+    {F : C ⥤ E} (e : F ≅ L ⋙ G) : G.IsLeftKanExtension e.hom := by
+  let W := (Functor.whiskeringLeft C D E).obj L
+  refine ⟨⟨IsInitial.ofUniqueHom
+    (fun Y ↦ StructuredArrow.homMk (W.preimage (e.inv ≫ Y.hom)) ?_) ?_⟩⟩
+  · change e.hom ≫ W.map (W.preimage (e.inv ≫ Y.hom)) = Y.hom
+    rw [W.map_preimage]
+    simp
+  · intro Y m
+    apply StructuredArrow.hom_ext
+    apply W.map_injective
+    change W.map m.right = W.map (W.preimage (e.inv ≫ Y.hom))
+    rw [W.map_preimage]
+    have h := m.w
+    change e.hom ≫ W.map m.right = Y.hom at h
+    rw [← h]
+    simp
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem exists_openDerivedAdjunction.{u₁, u₂, v₁, v₂, w₁, w₂}
+    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+    [Abelian C] [Abelian D] [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ C) [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ G) :
+    ∃ (R : DerivedCategory D ⥤ DerivedCategory C)
+    (beta : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
+      DerivedCategory.Q ⋙ R),
+    R.IsRightDerivedFunctor beta (HomologicalComplex.quasiIso D (.up ℤ)) ∧
+    ∃ d : F.mapDerivedCategory ⊣ R,
+      (∀ (J : CochainComplex D ℤ) [J.IsKInjective], IsIso (beta.app J)) ∧
+      ∀ I : CochainComplex C ℤ,
+        d.unit.app (DerivedCategory.Q.obj I) ≫ R.map (F.mapDerivedCategoryFactors.hom.app I) =
+          DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app I) ≫
+            beta.app ((F.mapHomologicalComplex (.up ℤ)).obj I) := by
+  let q := HomotopyCategory.quotient D (.up ℤ)
+  let H := G.mapHomotopyCategory (.up ℤ) ⋙ (DerivedCategory.Qh (C := C))
+  let e : q ⋙ H ≅ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (G.mapHomotopyCategoryFactors (.up ℤ)) DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso C)
+  let beta := e.inv ≫ Functor.whiskerLeft q G.rightDerivedFunctorUnit ≫
+    (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (DerivedCategory.quotientCompQhIso D).hom G.rightDerivedFunctor
+  have : H.IsLeftKanExtension e.inv :=
+    isLeftKanExtension_of_full_whiskering q H e.symm
+  have : G.rightDerivedFunctor.IsLeftKanExtension G.rightDerivedFunctorUnit :=
+    Functor.IsRightDerivedFunctor.isLeftKanExtension _ _
+      (HomotopyCategory.quasiIso D (.up ℤ))
+  refine ⟨G.rightDerivedFunctor, beta, ?_, adj.mapDerivedCategoryRightDerivedAdjunction,
+    ?_, ?_⟩
+  · constructor
+    exact (Functor.isLeftKanExtension_iff_postcompose e.inv
+      DerivedCategory.Q (DerivedCategory.quotientCompQhIso D)
+      G.rightDerivedFunctorUnit beta (by rfl)).mp inferInstance
+  · intro J hJ
+    dsimp only [beta, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Functor.whiskerRight_app]
+    infer_instance
+  · intro I
+    have h := (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso C (.up ℤ)) F.mapDerivedCategoryFactorsh.hom
+      G.rightDerivedFunctorUnit ((HomotopyCategory.quotient C (.up ℤ)).obj I)
+    rw [F.mapDerivedCategoryFactorsh_hom_app,
+      Adjunction.mapHomotopyCategory_unit_app_quotient] at h
+    have hf (K : CochainComplex C ℤ) :
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).inv.app K) =
+          𝟙 (DerivedCategory.Qh.obj ((HomotopyCategory.quotient D (.up ℤ)).obj
+            ((F.mapHomologicalComplex (.up ℤ)).obj K))) := by
+      change DerivedCategory.Qh.map (𝟙 _) = 𝟙 _
+      exact DerivedCategory.Qh.map_id _
+    have hg (K : CochainComplex D ℤ) :
+        DerivedCategory.Qh.map ((G.mapHomotopyCategoryFactors (.up ℤ)).inv.app K) =
+          𝟙 (DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj
+            ((G.mapHomologicalComplex (.up ℤ)).obj K))) := by
+      change DerivedCategory.Qh.map (𝟙 _) = 𝟙 _
+      exact DerivedCategory.Qh.map_id _
+    rw [hf] at h
+    erw [Category.comp_id] at h
+    let eta := (adj.mapHomotopyCategory (.up ℤ)).derivedη
+      (HomotopyCategory.quasiIso C (.up ℤ)) F.mapDerivedCategoryFactorsh.hom
+      G.rightDerivedFunctorUnit
+    change eta.app (DerivedCategory.Q.obj I) ≫ _ = _
+    rw [← cancel_epi ((DerivedCategory.quotientCompQhIso C).hom.app I)]
+    rw [← cancel_mono (G.rightDerivedFunctor.map
+      ((DerivedCategory.quotientCompQhIso D).inv.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj I)))]
+    have hn := eta.naturality ((DerivedCategory.quotientCompQhIso C).hom.app I)
+    change (DerivedCategory.quotientCompQhIso C).hom.app I ≫
+      eta.app (DerivedCategory.Q.obj I) = _ at hn
+    rw [← Category.assoc, hn]
+    simp only [Functor.comp_map, Category.assoc]
+    dsimp only [beta, e, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.associator_inv_app, Iso.trans_inv,
+      Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+      Iso.symm_inv, Functor.associator_hom_app]
+    rw [hg]
+    simp only [Category.comp_id, Category.id_comp, Category.assoc,
+      ← Functor.map_comp, Iso.hom_inv_id_app, Category.comp_id]
+    rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+    conv_rhs =>
+      erw [Iso.hom_inv_id_app_assoc, Category.id_comp,
+        CategoryTheory.Functor.map_id, Category.comp_id]
+    exact h
+
 
 /-- Restriction identifies the actual open module inverse image, its action and its
 specified adjunction unit; it preserves K-injectives and computes the derived open unit.
@@ -174,6 +280,26 @@ theorem finiteCoefficientOpenDerivedImage {U T : Scheme.{u}} (j : U ⟶ T)
                     beta.app
                       (((finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ)).obj
                         I) := by
-  sorry
+  obtain ⟨d, hd, rho, hlinear, hsite, hmodule, hadd, adj, hunit, hrestriction⟩ :=
+    finiteCoefficientOpenRestriction j A
+  let : (finiteCoefficientOpenDirectImage j A).Additive := hadd
+  let : PreservesFiniteLimits (finiteCoefficientModulePullback j A) :=
+    (finiteCoefficientModulePullback_exact j A).1
+  let : PreservesFiniteColimits (finiteCoefficientModulePullback j A) :=
+    (finiteCoefficientModulePullback_exact j A).2.1
+  let : IsGrothendieckAbelian.{u + 1} (FiniteCoefficientModules U A) :=
+    SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0}
+      (Scheme.ProEt.topology U) (finiteCoefficientRingSheaf U A)
+  obtain ⟨R, beta, hR, derivedAdj, hbeta, hderived⟩ :=
+    exists_openDerivedAdjunction (finiteCoefficientModulePullback j A)
+      (finiteCoefficientOpenDirectImage j A) adj
+  refine ⟨d, hd, rho, hlinear, hsite, hmodule, hadd, adj, hunit, hrestriction,
+    (finiteCoefficientModulePullback j A).mapDerivedCategory,
+    (finiteCoefficientModulePullback j A).mapDerivedCategoryFactors,
+    R, beta, hR, derivedAdj, ?_⟩
+  intro I hI
+  have hKI := finiteCoefficientOpenPullback_isKInjective j A I
+  let := hKI
+  exact ⟨hKI, hbeta _, hderived I⟩
 
 end AlgebraicGeometry.ProEtale

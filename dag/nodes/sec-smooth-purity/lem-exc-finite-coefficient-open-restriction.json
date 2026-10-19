@@ -1,0 +1,132 @@
+{
+ "id": "lem-exc-finite-coefficient-open-restriction",
+ "kind": "statement",
+ "title": "Finite coefficient open restriction and normalized ordinary unit",
+ "statement": "Let $j:U\\hookrightarrow T$ be an open immersion of schemes and $A$ a finite, possibly noncommutative ring. The published continuous-function coefficient sheaves and transported module pullback [def-weil-pbc-proetale-modules, prop-weil-pbc-proetale-constant-exact] admit the natural coefficient-linear identification with evaluation over $T$, preserving constant scalars, restrictions, and module maps. The specified sectionwise pushforward is additive and right adjoint to this pullback. The unit is the actual small-model Kan unit and, under the evaluation identification, equals restriction along $V\\times_T U\\to V$ [def-weil-proetale-inverse-image, lem-pur-proetale-open-unit-evaluation].",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-open-unit-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Let G be composition with the open immersion and F be base change. The continuous and cocontinuous G commutes with ring-valued sheafification. Apply Mathlib pushforwardContinuousSheafificationCompatibility to the continuous-function ring presheaf [def-weil-pbc-proetale-modules]. Its unit compatibility gives the coefficient isomorphism d and the equality on constant scalars. Continuity and cocontinuity are the concrete overMap results underlying [lem-weil-proetale-weakly-etale-localization].",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct-image ring map of [prop-weil-pbc-proetale-constant-ring-map] is defined by sheafifying the continuous-function pullback. Precompose with the sheafification unit and apply its naturality to show that the site counit equals this ring map followed by d. Naturality of d and the site triangle identity give the other ringed-site adjunction equation. Mathlib pushforwardPushforwardAdj then constructs restriction as a left adjoint to the specified module pushforward. This is a direct ring-valued calculation, without commuting factors.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing finiteModuleAdjunction and finiteModuleAdjunction_existsUnique in Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction, the normalized finite-ring module interface for [def-weil-proetale-inverse-image]. Uniqueness of left adjoints identifies the actual transported pullback of [prop-weil-pbc-proetale-constant-exact] with the restriction functor. Take additive equivalences from its components; linearity and its two naturalities give all rho equations. The normalized-transpose theorem at the identity gives the model-unit equality. Mathlib unit_leftAdjointUniq_hom_app followed by pushforwardPushforwardAdj_unit_app_val_app gives restriction along the site counit, which is the specified first projection. Additivity is finiteModulePushforward_additive. Every step is proved in Lean.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "prop-weil-pbc-proetale-constant-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-proetale-inverse-image",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE, lemma-localize-given-products; module-action transport in sites-modules.tex, Tag 04IX"
+ },
+ "proof_origin": "K5 Lean proof: Mathlib cocontinuous sheafification comparison and ringed-site pushforward adjunction, then uniqueness against the existing normalized finite-ring module adjunction. No new unproved theorem.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to an open slice site preserves K injective complexes and computes the pullback adjunction unit",
+   "results": "Zariski Scheme.Modules.restrictAdjunction and generic pullback adjunction only.",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the published arbitrary finite-ring pro-etale pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint has a right derived adjoint and the derived adjunction unit agrees with the original unit on complexes",
+   "results": "Generic derived-adjunction infrastructure; no geometric finite coefficient open comparison.",
+   "date": "2026-10-19",
+   "verdict": "Use the upstream derived-adjunction construction for the homological portion."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*KInjective|KInjective.*restrict|finiteCoefficient.*Adjunction",
+   "results": "KInjectiveRestrictLocalized handles slice restriction; ProEtaleOpenUnitEvaluation uses commutative coefficients in a different universe.",
+   "date": "2026-10-19",
+   "verdict": "A comparison with actual arbitrary-ring module pullback remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage",
+  "date": "2026-10-19",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-proetale-support-triangle",
+   "place": "Proof: exact open restriction makes j^*I K-injective and computes Rj_*j^*K.",
+   "via": [
+    "lem-exc-proetale-open-derived-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientOpenRestriction",
+  "statement": "theorem finiteCoefficientOpenRestriction {U T : Scheme.{u}} (j : U ⟶ T)\n    [IsOpenImmersion j] (A : Type (u + 1))\n    [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :\n    ∃ d : (finiteCoefficientRingSheaf U A).obj ≅\n        (Scheme.proEtaleOpenComposition j).op ⋙ (finiteCoefficientRingSheaf T A).obj,\n      (∀ (W : U.ProEt) (a : A),\n        (d.hom.app (op W)) ((finiteCoefficientScalarMap U A).app (op W) a) =\n          (finiteCoefficientScalarMap T A).app\n            (op ((Scheme.proEtaleOpenComposition j).obj W)) a) ∧\n      ∃ rho : ∀ (N : FiniteCoefficientModules T A) (W : U.ProEt),\n          ((finiteCoefficientModulePullback j A).obj N).val.obj (op W) ≃+\n            N.val.obj (op ((Scheme.proEtaleOpenComposition j).obj W)),\n        (∀ (N : FiniteCoefficientModules T A) (W : U.ProEt)\n          (r : (finiteCoefficientRingSheaf U A).obj.obj (op W))\n          (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)),\n          rho N W (r • m) = (d.hom.app (op W) r) • rho N W m) ∧\n        (∀ (N : FiniteCoefficientModules T A) (W W' : U.ProEt) (b : W' ⟶ W)\n          (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)),\n          rho N W' (((finiteCoefficientModulePullback j A).obj N).val.map b.op m) =\n            N.val.map ((Scheme.proEtaleOpenComposition j).map b).op (rho N W m)) ∧\n        (∀ (N N' : FiniteCoefficientModules T A) (h : N ⟶ N') (W : U.ProEt)\n          (m : ((finiteCoefficientModulePullback j A).obj N).val.obj (op W)),\n          rho N' W (((finiteCoefficientModulePullback j A).map h).val.app (op W) m) =\n            h.val.app (op ((Scheme.proEtaleOpenComposition j).obj W)) (rho N W m)) ∧\n        ∃ (_ : (SheafOfModules.pushforward.{u + 1} (F := Scheme.proEtaleBaseChange j)\n            (J := Scheme.ProEt.topology T) (K := Scheme.ProEt.topology U)\n            (finiteCoefficientDirectImageMap j A)).Additive)\n          (adj : finiteCoefficientModulePullback j A ⊣ SheafOfModules.pushforward.{u + 1}\n            (F := Scheme.proEtaleBaseChange j) (J := Scheme.ProEt.topology T)\n            (K := Scheme.ProEt.topology U) (finiteCoefficientDirectImageMap j A)),\n          (∀ (N : FiniteCoefficientModules T A) (V : T.ProEt) (m : N.val.obj (op V)),\n            (adj.unit.app N).val.app (op V) m =\n              (((SheafOfModules.pullbackPushforwardAdjunction.{u + 1}\n                (finiteCoefficientModelRingUnit j A)).unit.app\n                  ((Scheme.proEtaleModuleToModel (finiteCoefficientRingSheaf T A)).obj N)).val.app\n                    (AsSmall.up.op.obj (op V))) m) ∧\n          (∀ (N : FiniteCoefficientModules T A) (V : T.ProEt) (m : N.val.obj (op V)),\n            rho N ((Scheme.proEtaleBaseChange j).obj V)\n                ((adj.unit.app N).val.app (op V) m) =\n              N.val.map (Scheme.proEtaleOpenSectionProjection j V).op m)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T005314-L-2750908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T005314-L-2750908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

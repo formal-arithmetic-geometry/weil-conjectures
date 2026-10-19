@@ -1,0 +1,115 @@
+{
+ "id": "lem-exc-finite-coefficient-open-kinjective",
+ "kind": "statement",
+ "title": "Finite coefficient open pullback preserves K-injectivity",
+ "statement": "For an open immersion $j:U\\hookrightarrow T$, a finite ring $A$, and a K-injective cochain complex $I$ of left modules over the continuous-function coefficient sheaf on $T$ [def-weil-pbc-proetale-modules], the actual transported pullback $j^*I$ [prop-weil-pbc-proetale-constant-exact] is K-injective. Here K-injectivity is null-homotopy of maps from acyclic complexes [lem-weil-pbc-kinjective-hom-derived].",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-modules",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-exc-finite-coefficient-open-restriction] and use its ring isomorphism to form the pushforward equivalence from the slice site, whose continuity is given by [lem-weil-proetale-weakly-etale-localization]. Construct its inverse coefficient map using the unit isomorphism and the inverse ring comparison; naturality and the two inverse identities verify the ringed-site equivalence equations. Build the natural module isomorphism from the stated additive section equivalences, semilinearity, and both naturalities. Apply [lem-pur-kinjective-restrict-localized] on the slice and transport K-injectivity along the additive equivalence and the resulting isomorphism of complexes. This proof is complete in Lean.",
+   "uses": [
+    "lem-exc-finite-coefficient-open-restriction",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-finite-coefficient-open-restriction",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FI, lemma-restrict-K-injective-to-open"
+ },
+ "proof_origin": "Lean proof by K5: slice restriction followed by the explicit ringed-site equivalence and sectionwise natural module comparison.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to an open slice site preserves K injective complexes and computes the pullback adjunction unit",
+   "results": "Zariski Scheme.Modules.restrictAdjunction and generic pullback adjunction only.",
+   "date": "2026-10-19",
+   "verdict": "No theorem for the published arbitrary finite-ring pro-etale pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint has a right derived adjoint and the derived adjunction unit agrees with the original unit on complexes",
+   "results": "Generic derived-adjunction infrastructure; no geometric finite coefficient open comparison.",
+   "date": "2026-10-19",
+   "verdict": "Use the upstream derived-adjunction construction for the homological portion."
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*KInjective|KInjective.*restrict|finiteCoefficient.*Adjunction",
+   "results": "KInjectiveRestrictLocalized handles slice restriction; ProEtaleOpenUnitEvaluation uses commutative coefficients in a different universe.",
+   "date": "2026-10-19",
+   "verdict": "A comparison with actual arbitrary-ring module pullback remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage",
+  "date": "2026-10-19",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-proetale-support-triangle",
+   "place": "Proof: exact open restriction makes j^*I K-injective and computes Rj_*j^*K.",
+   "via": [
+    "lem-exc-proetale-open-derived-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientOpenKInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientOpenKInjective.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientOpenPullback_isKInjective",
+  "statement": "theorem finiteCoefficientOpenPullback_isKInjective {U T : Scheme.{u}} (j : U ⟶ T)\n    [IsOpenImmersion j] (A : Type (u + 1))\n    [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]\n    (I : CochainComplex (FiniteCoefficientModules T A) ℤ) [I.IsKInjective] :\n    CochainComplex.IsKInjective\n      (((finiteCoefficientModulePullback j A).mapHomologicalComplex (.up ℤ)).obj I)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T005314-L-2750908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T005314-L-2750908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
