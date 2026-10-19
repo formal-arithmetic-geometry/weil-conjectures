@@ -17077,3 +17077,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: merged deliver/Q09/lem-zl-framework-pbc-open-exchange-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 04:09 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 07e0057e6cf3: H3: sfRationalLisseProperty ignores its chart U, so it requires a gl)
 - 04:13 L: returned deliver/O4/lem-trf-hilbert-samuel-local-presentations (reviewer RETURN: I read the item (statement and 9 steps), all 5 new nodes, the parent resolution-invariant-calculus (Steps 2/3/5/6/7 cite)
+- 04:14 L: merged deliver/NC/lem-pur-compact-support-condensed-realization (stage 2; reviewer PASS; parallel immutable checks)

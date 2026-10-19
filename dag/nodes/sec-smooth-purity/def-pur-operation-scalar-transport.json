@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-operation-scalar-transport",
+ "kind": "definition",
+ "title": "Pure-tensor and derived-counit normalized operation scalar transport",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $E,L$ be finite extensions of $\\mathbf Q_\\ell$ with a $\\mathbf Q_\\ell$-embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. Let $W$ be a scheme, and write $R_E,R_L$ for its completed coefficient sheaves [def-weil-completed-integral-coefficients], $\\phi:R_E\\to R_L$ for the canonical coefficient map [lem-weil-finite-free-completed-scalar-comparison], and $\\operatorname{Mod}(R_E)$ for the completed-coefficient module category [def-weil-integral-reduction-tower]. Let $F=\\mathrm{integralOrdinaryScalar}_{\\iota,W}$ and $D(F)$ be its exact termwise derived functor [def-weil-integral-scalar-extension]. Let $G=\\mathrm{pbcExtend}_{\\phi}$ and $LG=\\mathrm{pbcDerivedExtend}_{\\phi}$ be the ordinary sheafified tensor and its universal left-derived functor, with universal complex counit $\\epsilon_P:LG(QP)\\to Q(GP)$ [def-weil-pbc-bounded-constructible-tower]. An operation scalar transport is the datum of natural isomorphisms $o:F\\xrightarrow{\\sim}G$ and $d:D(F)\\xrightarrow{\\sim}LG$ with the following two normalizations. On every pro-etale test object $U$, every $M\\in\\operatorname{Mod}(R_E)$ and all sections $s\\in R_L(U)$, $x\\in M(U)$, $o_M$ sends the sheafified pure tensor $s\\otimes x$ in $F(M)$ to that same sheafified pure tensor in $G(M)$. For every cochain complex $P$ of $R_E$-modules, $\\epsilon_P\\circ d_{QP}=Q(o_P)\\circ\\eta^F_P$, where $\\eta^F_P:D(F)(QP)\\xrightarrow{\\sim}Q(FP)$ is the canonical factorization for the exact termwise functor. This defines a type of normalized comparison data and asserts no existence or uniqueness theorem.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-reduction-tower",
+  "def-weil-integral-scalar-extension",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.md",
+  "place": "Scalar coefficient comparisons and their unit/counit normalizations; published BasicOperationsCoefficientReduction.lean, OperationScalarTransport, source proof step 8 (Stacks 03EK, 06YY). The datum is used in lem-pur-compact-support-condensed-realization proof Steps 7 and 11."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical pure tensor normalized comparison between ordinary and completed coefficient scalar extension and its universal derived counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CoalgCat.MonoidalCategoryAux.counit_tensorObj\", \"module\": \"Mathlib.Algebra.Category.CoalgCat.ComonEquivalence\", \"type\": \": Coalgebra.counit (R := R) (A := (CoalgCat.of R M ⊗ CoalgCat.of R N : CoalgCat R)) = Coalgebra.counit (A := M ⊗[R] N)\", \"doc\": \"For any commutative ring $ R $ and modules $ M, N $ over $ R $, the counit of the coalgebra tensor product $ \\\\text{CoalgCat.of}(R, M) \\\\otimes \\\\text{CoalgCat.of}(R, N) $ in the category of coalgebras o\"}\n  {\"name\": \"TensorProduct.counit_def\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \": Coalgebra.counit (R := S) (A := A ⊗[R] B) = AlgebraTensorModule.rid R S S ∘ₗ AlgebraTensorModule.map counit counit\", \"doc\": \"The counit of the coalgebra $ A \\\\otimes_R B $ over $ S $ is given by the composition of the right identity map on $ S $ with the tensor product of the counits of $ A $ and $ B $, i.e., $ \\\\varepsilon_{\"}\n  {\"name\": \"TensorProduct.instCoalgebraStruct\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \": CoalgebraStruct S (A ⊗[R] B)\", \"doc\": \"Let $R$ and $S$ be commutative semirings, where $S$ is an $R$-algebra. Let $A$ and $B$ be $R$-coalgebras. If $A$ and $B$ are also endowed with compatible $S$-module structures (forming a scalar tower \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"TensorProduct.counit_tmul\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \"(x : A) (y : B) : counit (R := S) (x ⊗ₜ[R] y) = counit (R := R) y • counit (R := S) x\", \"doc\": \"For any elements $ x \\\\in A $ and $ y \\\\in B $, the counit of their tensor product $ x \\\\otimes y $ is equal to the product of the counit of $ y $ and the counit of $ x $, i.e., $ \\\\varepsilon(x \\\\otimes y\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \":\\n  Coalgebra.counit (R := S) (A := A ⊗[R] B) =\\n    ((Algebra.TensorProduct.rid _ _ _).toAlgHom.comp\\n        (Algebra.TensorProduct.map (Bialgebra.counitAlgHom S A) (Bialgebra.counitAlgHom R B))).toLinearMap\", \"doc\": \"The counit of the tensor product bialgebra $ A \\\\otimes_R B $ is equal to the composition of the algebra homomorphisms from $ A $ and $ B $ to $ R $, tensored together, followed by the isomorphism $ A \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib declaration; reuse the existing project structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "OperationScalarTransport",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'OperationScalarTransport'\n",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib declaration; reuse the existing project structure."
+  },
+  {
+   "tool": "grep",
+   "query": "OperationScalarTransport|integralOrdinaryScalar|pbcComplexCounit",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "No exact Mathlib declaration; reuse the existing project structure."
+  },
+  {
+   "tool": "rg",
+   "query": "OperationScalarTransport|operationScalarTransport in dag/nodes, Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search scalar transport",
+   "results": "Only lem-fix-operation-reduction lists the structure among auxiliary declarations; no definition node owns the datum. No Mathlib or WeilConjectures source hit. lean/Sheaf/Paper/BasicOperationsCoefficientReduction.lean:228 defines WeilConjectures.OperationScalarTransport; its only other uses there are consumers. blueprint_refs.py search returned sk-thm-sf-package, not a definition of the transport. Current server source confirms the same structure and all four fields.",
+   "date": "2026-10-19",
+   "verdict": "Create a definition node with existing:true for the published structure; write no second definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-condensed-realization",
+  "date": "2026-10-19",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof Steps 7 and 11: normalize the ordinary and universal-derived scalar model comparison before the compact-support scalar square.",
+   "via": [
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.BasicOperationsCoefficientReduction",
+  "declaration": "WeilConjectures.OperationScalarTransport",
+  "statement": "structure OperationScalarTransport (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Field L]\n    [Algebra (Padic l) E] [Algebra (Padic l) L]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]\n    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-19",
+  "existing": true,
+  "note": "Existing structure at line 228 of the unchanged published module; owns only the normalized comparison datum, not the existence/uniqueness or basic-operations theorem of lem-fix-operation-reduction."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95a563016",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95a563016",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of 695e0022 (RETURN: theorem stmt_dep lem-fix-operation-reduction used only for the plain structure OperationScalarTransport). The fix adds def node def-pur-operation-scalar-transport with existing:true on the unchanged live BasicOperationsCoefficientReduction; the recorded statement is verbatim (one occurrence) and the node statement matches the ordinary/tensor/derived/counit fields with no existence claim. The item stmt_deps replace the theorem with that node. The three Lean modules are byte-identical to the returned head; the CondensedERealization dependency replacement is dropped and the live module is used; dependency records equal live side. Independent re-read found no extra hypotheses; P_R, alpha and a are actual constructions; the finite scalar comparison is pinned by whole-system and rationalized squares; every theorem is sorry; nothing is dropped by the route pivot; no duplicate notion. nt_compile --json on all three modules is clean: 20.0/13.0/33.8 s. Advisories: integralOrdinaryTensorSection is owned by a lemma node outside the def node's deps (inherited); projection-iso and refinement clauses are separate sorry theorems; the source path uses main-20261015."
+ }
+}
