@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-derived-injective-boundary",
+ "kind": "statement",
+ "title": "Normalized derived connecting maps from sequences exact on injectives",
+ "statement": "Let C and A be abelian categories admitting chosen derived categories, with enough injectives in C. Let S,F,G : C → A be additive functors and let ι : S → F and π : F → G be natural transformations with ιπ=0. Suppose the row 0 → S(I) → F(I) → G(I) → 0 is short exact for every injective object I of C. There exist natural transformations δ^q : H^q(RG) → H^{q+1}(RS), for all integers q, such that for every bounded-below complex I of injectives, every K in D⁺(C), and every isomorphism QI ≅ K, conjugating δ^q_K by the canonical right-derived-unit homology comparisons equals the snake connecting morphism of 0 → S(I) → F(I) → G(I) → 0. The comparisons and normalization are the explicit injectiveHomologyModelIso and InjectiveBoundaryNormalized defined in the Lean module. This is the coefficient-functoriality construction in Milne Section 9 Theorem 9.4 and Stacks Tags 0117, 070I, 05TI and 05TH.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0117, functoriality of the cochain homology sequence; derived.tex Tags 070I, 05TI and 05TH. Milne, Lectures on Etale Cohomology, Section 9 Theorem 9.4, naturality in coefficients."
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-enough-injectives",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Represent every bounded-below derived object by a bounded-below complex of injective objects, using the equivalence from the homotopy category of such complexes to the bounded-below derived category. Each termwise row is short exact by hypothesis, so applying the complex homology sequence supplies its connecting morphism. Transport it through the canonical right-derived-unit homology model isomorphisms to define the candidate boundary at each object.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a derived morphism and two injective representatives, K-injectivity of the target gives a chain map representing the morphism. Natural transformations of additive functors make its three images a morphism of short exact rows. Naturality of the snake boundary and of the derived units proves naturality of the transported candidate, hence it is a natural transformation in each degree.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same naturality identity to the identity of a derived object, comparing any supplied injective representative with the chosen one. Cancel the model isomorphisms to obtain the stated normalization for every representative and every specified identification. Thus the natural transformation has the snake boundary as its model on all representatives.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0117 plus the bounded-below injective computation and K-injective Hom bijection; derived.tex Tags 070I, 05TI and 05TH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural connecting homomorphism in the long exact sequence of homology for a short exact sequence of complexes",
+   "results": "{\"t\": \"2026-10-19T03:59:28Z\", \"tool\": \"leanfinder\", \"query\": \"natural connecting homomorphism in the long exact sequence of homology for a short exact sequence of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.δ\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"HomologicalComplex.HomologySequence.δ_naturality_assoc\", \"CategoryTheory.ShortComplex.ShortExact.δ_eq'\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"HomologicalComplex.HomologySequence.δ_naturality\", \"HomologicalComplex.HomologySequence.composableArrows₅\", \"HomologicalComplex.HomologySequence.snakeInput\"], \"digest\": \"800253b2863dc2ae\"}",
+   "date": "2026-10-19",
+   "verdict": "The homology boundary and its naturality exist; normalized descent to arbitrary derived objects is assembled here from these results and the right-derived-unit API."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.HomologySequence.δ_naturality",
+   "results": "{\"t\": \"2026-10-19T04:01:49Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.HomologySequence.δ_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.HomologySequence.δ_naturality\"], \"digest\": \"cbf12446ff9d2d20\"}",
+   "date": "2026-10-19",
+   "verdict": "The homology boundary and its naturality exist; normalized descent to arbitrary derived objects is assembled here from these results and the right-derived-unit API."
+  },
+  {
+   "tool": "grep",
+   "query": "ShortExact.*rightDerived|rightDerived.*ShortExact|rightDerived.*δ",
+   "results": "{\"t\": \"2026-10-19T04:01:49Z\", \"tool\": \"grep\", \"query\": \"ShortExact.*rightDerived|rightDerived.*ShortExact|rightDerived.*δ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "The homology boundary and its naturality exist; normalized descent to arbitrary derived objects is assembled here from these results and the right-derived-unit API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequence of additive functors exact on injective objects induces natural connecting maps on bounded below derived functors normalized by the homology boundary on every injective representative",
+   "results": "{\"t\": \"2026-10-19T05:25:07Z\", \"tool\": \"leansearch\", \"query\": \"A sequence of additive functors exact on injective objects induces natural connecting maps on bounded below derived functors normalized by the homology boundary on every injective representative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapExtAddHom\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapExtAddHom_coe\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\"], \"digest\": \"86407ce9c373706d\"}",
+   "date": "2026-10-19",
+   "verdict": "No direct match: the hits concern right derived degree zero, Ext, and natural-number injective resolutions. The integer-indexed normalized boundary on D-plus is constructed here from the homology boundary and K-injective representatives."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportLongExact",
+  "date": "2026-10-19",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-with-support-exactness",
+   "place": "Proof Step 3, functoriality of the connecting morphism in coefficients; Step 4, bounded-below complexes.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedInjectiveBoundary",
+  "file": "lean/Sheaf/CategoryTheory/DerivedInjectiveBoundary.lean",
+  "declaration": "CategoryTheory.Functor.exists_injectiveBoundary",
+  "declarations": [
+   "CategoryTheory.Functor.injectiveHomologyModelIso",
+   "CategoryTheory.Functor.injectiveHomologyModelIso_natTrans",
+   "CategoryTheory.Functor.injectiveBoundaryRow",
+   "CategoryTheory.Functor.injectiveBoundaryRow_shortExact",
+   "CategoryTheory.Functor.InjectiveBoundaryNormalized",
+   "CategoryTheory.Functor.exact_transport",
+   "CategoryTheory.Functor.injectiveBoundary_exact",
+   "CategoryTheory.Functor.exists_injectiveBoundary"
+  ],
+  "statement": "theorem exists_injectiveBoundary\n    (h : ∀ (I : C) [Injective I], (ShortComplex.mk (ι.app I) (π.app I)\n      (NatTrans.congr_app w I)).ShortExact) :\n    ∃ δ : ∀ q : ℤ, G.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor A q ⟶\n      S.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor A (q + 1),\n      InjectiveBoundaryNormalized S F G ι π w h δ",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T154002-L-3023490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261019T154002-L-3023490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

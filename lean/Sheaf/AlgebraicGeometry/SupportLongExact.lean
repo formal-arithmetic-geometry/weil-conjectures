@@ -18,35 +18,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
-import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.SiteRestrictionInjectives
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.InjectiveComplexSliceSectionModel
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
-import Sheaf.CategoryTheory.ModuleRestrictionKernelComparison
+import Sheaf.CategoryTheory.DerivedInjectiveBoundary
 import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
-import Sheaf.Paper.SupportPairChainCoherence
-import Sheaf.Paper.SupportPairComposition
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
 
 /-!
@@ -61,7 +37,7 @@ Stacks Project, Tags 093X, 03F3, 0117, 070I
 
 set_option autoImplicit false
 
-universe c v a w u
+universe c v a w u d e
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -253,6 +229,209 @@ def SupportSequencePairNatural
 
 end CategoryTheory.Sheaf
 
+namespace CategoryTheory.Sheaf
+
+variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+variable (A : Type a) [Category.{w} A] [Abelian A] [HasSheafify J A]
+variable [EnoughInjectives (Sheaf J A)] [HasDerivedCategory.{d} (Sheaf J A)]
+variable [HasDerivedCategory.{e} A] {V W : C} (j : W ⟶ V)
+
+omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
+  [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
+private theorem supportRow_zero :
+    supportedSectionsInclusion J A j ≫ (sheafSections J A).map j.op = 0 := by
+  ext I
+  exact kernel.condition _
+
+omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
+  [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
+private theorem supportRow_shortExact
+    (h : ∀ (I : Sheaf J A) [Injective I], Epi (I.obj.map j.op))
+    (I : Sheaf J A) [Injective I] :
+    (ShortComplex.mk ((supportedSectionsInclusion J A j).app I)
+      (((sheafSections J A).map j.op).app I)
+      (NatTrans.congr_app (supportRow_zero J A j) I)).ShortExact where
+  exact := ShortComplex.kernelSequence_exact _
+  mono_f := by change Mono (kernel.ι _); infer_instance
+  epi_g := h I
+
+private theorem supportBoundary_exists
+    (h : ∀ (I : Sheaf J A) [Injective I], Epi (I.obj.map j.op)) :
+    ∃ δ : ∀ q : ℤ, sectionHypercohomologyFunctor J A W q ⟶
+        supportHypercohomologyFunctor J A j (q + 1),
+      Functor.InjectiveBoundaryNormalized (supportedSectionsFunctor J A j)
+        (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V))
+        (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op W))
+        (supportedSectionsInclusion J A j) ((sheafSections J A).map j.op)
+        (supportRow_zero J A j) (supportRow_shortExact J A j h) δ :=
+  Functor.exists_injectiveBoundary _ _ _ _ _ _ _
+
+private theorem supportBoundary_exact
+    (h : ∀ (I : Sheaf J A) [Injective I], Epi (I.obj.map j.op))
+    (δ : ∀ q : ℤ, sectionHypercohomologyFunctor J A W q ⟶
+      supportHypercohomologyFunctor J A j (q + 1))
+    (hδ : Functor.InjectiveBoundaryNormalized (supportedSectionsFunctor J A j)
+      (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V))
+      (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op W))
+      (supportedSectionsInclusion J A j) ((sheafSections J A).map j.op)
+      (supportRow_zero J A j) (supportRow_shortExact J A j h) δ)
+    (P : ObjectProperty (DerivedCategory.Plus (Sheaf J A))) :
+    SupportSequenceExact J A j P (fun q => Functor.whiskerLeft P.ι (δ q)) := by
+  intro K q
+  let Q := (InjectiveObject.ι (Sheaf J A)).mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh
+  let M := Q.objPreimage K.obj
+  obtain ⟨L, hL⟩ := HomotopyCategory.Plus.quotient_obj_surjective M
+  let I := (InjectiveObject.ι (Sheaf J A)).mapCochainComplexPlus.obj L
+  have (n : ℤ) : Injective (I.obj.X n) := inferInstanceAs (Injective (L.obj.X n).obj)
+  let e : DerivedCategory.Plus.Q.obj I ≅ K.obj :=
+    (Q.mapIso (eqToIso hL)) ≪≫ Q.objObjPreimageIso K.obj
+  exact Functor.injectiveBoundary_exact _ _ _ _ _ _ _ δ hδ I K.obj e q
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem supportBoundary_pair
+    {D : Type c} [Category.{v} D] (J' : GrothendieckTopology D)
+    [HasSheafify J' A] [EnoughInjectives (Sheaf J' A)]
+    [HasDerivedCategory.{d} (Sheaf J' A)]
+    (B : C ⥤ D) [hB : B.IsContinuous J J'] {V' W' : D} (j' : W' ⟶ V')
+    (h : ∀ (I : Sheaf J A) [Injective I], Epi (I.obj.map j.op))
+    (h' : ∀ (I : Sheaf J' A) [Injective I], Epi (I.obj.map j'.op))
+    (δ : ∀ q : ℤ, sectionHypercohomologyFunctor J A W q ⟶
+      supportHypercohomologyFunctor J A j (q + 1))
+    (δ' : ∀ q : ℤ, sectionHypercohomologyFunctor J' A W' q ⟶
+      supportHypercohomologyFunctor J' A j' (q + 1))
+    (hδ : Functor.InjectiveBoundaryNormalized (supportedSectionsFunctor J A j)
+      (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V))
+      (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op W))
+      (supportedSectionsInclusion J A j) ((sheafSections J A).map j.op)
+      (supportRow_zero J A j) (supportRow_shortExact J A j h) δ)
+    (hδ' : Functor.InjectiveBoundaryNormalized (supportedSectionsFunctor J' A j')
+      (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op V'))
+      (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op W'))
+      (supportedSectionsInclusion J' A j') ((sheafSections J' A).map j'.op)
+      (supportRow_zero J' A j') (supportRow_shortExact J' A j' h') δ')
+    (P : ObjectProperty (DerivedCategory.Plus (Sheaf J A)))
+    (P' : ObjectProperty (DerivedCategory.Plus (Sheaf J' A)))
+    (t : V' ⟶ B.obj V) (s : W' ⟶ B.obj W)
+    (square : s ≫ B.map j = j' ≫ t) :
+    SupportSequencePairNatural J J' A B j j' P P'
+      (fun q => Functor.whiskerLeft P.ι (δ q))
+      (fun q => Functor.whiskerLeft P'.ι (δ' q)) t s := by
+  intro I L _ _ K K' e e' b
+  let row := Functor.injectiveBoundaryRow (supportedSectionsFunctor J A j)
+    (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V))
+    (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op W))
+    (supportedSectionsInclusion J A j) ((sheafSections J A).map j.op)
+    (supportRow_zero J A j) I
+  let row' := Functor.injectiveBoundaryRow (supportedSectionsFunctor J' A j')
+    (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op V'))
+    (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op W'))
+    (supportedSectionsInclusion J' A j') ((sheafSections J' A).map j'.op)
+    (supportRow_zero J' A j') L
+  have R : row.ShortExact := Functor.injectiveBoundaryRow_shortExact
+    (supportedSectionsFunctor J A j)
+    (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V))
+    (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op W))
+    (supportedSectionsInclusion J A j) ((sheafSections J A).map j.op)
+    (supportRow_zero J A j) (supportRow_shortExact J A j h) I
+  have R' : row'.ShortExact := Functor.injectiveBoundaryRow_shortExact
+    (supportedSectionsFunctor J' A j')
+    (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op V'))
+    (sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op W'))
+    (supportedSectionsInclusion J' A j') ((sheafSections J' A).map j'.op)
+    (supportRow_zero J' A j') (supportRow_shortExact J' A j' h') L
+  have : Mono row'.f := R'.mono_f
+  let f := supportPairComplexSectionMap J J' A B I L b t
+  let g := supportPairComplexSectionMap J J' A B I L b s
+  have hg : row.g ≫ g = f ≫ row'.g := by
+    ext n
+    dsimp [row, row', f, g, supportPairComplexSectionMap, Functor.injectiveBoundaryRow,
+      supportedSectionsInclusion]
+    have hn := (b.f n).hom.naturality j.op
+    change (I.obj.X n).obj.map j.op ≫ (b.f n).hom.app (op W) =
+      (b.f n).hom.app (op V) ≫ (L.obj.X n).obj.map (B.map j).op at hn
+    change (I.obj.X n).obj.map j.op ≫
+        ((b.f n).hom.app (op W) ≫ (L.obj.X n).obj.map s.op) =
+      ((b.f n).hom.app (op V) ≫ (L.obj.X n).obj.map t.op) ≫
+        (L.obj.X n).obj.map j'.op
+    rw [← Category.assoc, hn, Category.assoc, Category.assoc]
+    rw [← (L.obj.X n).obj.map_comp, ← (L.obj.X n).obj.map_comp]
+    rw [← op_comp, ← op_comp, square]
+  have hz : row.f ≫ f ≫ row'.g = 0 := by
+    rw [← hg, ← Category.assoc, row.zero, zero_comp]
+  let z := R'.exact.fIsKernel.lift
+    (KernelFork.ofι (row.f ≫ f) (by simpa only [Category.assoc] using hz))
+  have hzι : z ≫ row'.f = row.f ≫ f := R'.exact.fIsKernel.fac _ WalkingParallelPair.zero
+  refine ⟨z, ⟨hzι, ?_⟩, ?_⟩
+  · intro q
+    have hb : supportSequenceModelBoundary J A j P
+        (fun q ↦ Functor.whiskerLeft P.ι (δ q)) I K e q = R.δ q (q + 1) rfl := by
+      simpa only [supportSequenceModelBoundary, supportSequenceModelIso,
+        Functor.injectiveHomologyModelIso, Functor.whiskerLeft_app, ObjectProperty.ι_obj]
+        using hδ I K.obj e q
+    have hb' : supportSequenceModelBoundary J' A j' P'
+        (fun q ↦ Functor.whiskerLeft P'.ι (δ' q)) L K' e' q = R'.δ q (q + 1) rfl := by
+      simpa only [supportSequenceModelBoundary, supportSequenceModelIso,
+        Functor.injectiveHomologyModelIso, Functor.whiskerLeft_app, ObjectProperty.ι_obj]
+        using hδ' L K'.obj e' q
+    rw [hb, hb']
+    let φ : row ⟶ row' :=
+      { τ₁ := z, τ₂ := f, τ₃ := g, comm₁₂ := hzι, comm₂₃ := hg.symm }
+    exact HomologicalComplex.HomologySequence.δ_naturality φ R R' q (q + 1) rfl
+  · intro z' hz'
+    apply (cancel_mono row'.f).1
+    exact hz'.1.trans hzι.symm
+
+end CategoryTheory.Sheaf
+
+namespace CategoryTheory
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem supportModule_restriction_epi
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    (R : Type (max u v)) [Ring R] [HasSheafify J (ModuleCat.{max u v} R)]
+    (I : Sheaf J (ModuleCat.{max u v} R)) [Injective I]
+    {W V : C} (j : W ⟶ V) [Mono j] : Epi (I.obj.map j.op) := by
+  have : Injective I.obj := Injective.injective_of_adjoint (sheafificationAdjunction J _) I
+  let a : (uliftYoneda.{u}.obj W ⋙ ModuleCat.free R) ⟶
+      (uliftYoneda.{u}.obj V ⋙ ModuleCat.free R) :=
+    Functor.whiskerRight (uliftYoneda.{u}.map j) (ModuleCat.free R)
+  have : Mono a := by
+    have (T : Cᵒᵖ) : Mono (a.app T) := by
+      rw [ModuleCat.mono_iff_injective]
+      apply Finsupp.mapDomain_injective
+      intro x y h
+      apply ULift.ext
+      exact (cancel_mono j).1 (congrArg ULift.down h)
+    exact NatTrans.mono_of_mono_app a
+  rw [ModuleCat.epi_iff_surjective]
+  intro s
+  let b : (uliftYoneda.{u}.obj W ⋙ ModuleCat.free R) ⟶ I.obj :=
+    { app := fun T ↦ ModuleCat.freeDesc (↾fun g ↦ I.obj.map g.down.op s)
+      naturality := by
+        intro T T' g
+        apply ModuleCat.free_hom_ext
+        intro x
+        simp only [Functor.comp_map, ConcreteCategory.comp_apply]
+        erw [ModuleCat.free_map_apply, ModuleCat.freeDesc_apply, ModuleCat.freeDesc_apply]
+        change I.obj.map ((g.unop ≫ x.down).op) s = _
+        rw [op_comp, I.obj.map_comp]
+        rfl }
+  obtain ⟨g, hg⟩ := Injective.factors b a
+  refine ⟨g.app (op V) (ModuleCat.freeMk (ULift.up (𝟙 V))), ?_⟩
+  have he := congrArg (fun f ↦ f.app (op W) (ModuleCat.freeMk (ULift.up (𝟙 W)))) hg
+  have hn := ConcreteCategory.congr_hom (g.naturality j.op)
+    (ModuleCat.freeMk (ULift.up (𝟙 V)))
+  have he' : g.app (op W) (ModuleCat.freeMk (ULift.up j)) = s := by
+    simpa [a, b, ModuleCat.free_map_apply, ModuleCat.freeDesc_apply] using he
+  have hn' : I.obj.map j.op (g.app (op V) (ModuleCat.freeMk (ULift.up (𝟙 V)))) =
+      g.app (op W) (ModuleCat.freeMk (ULift.up j)) := by
+    simpa [ModuleCat.free_map_apply] using hn.symm
+  exact hn'.trans he'
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.Etale
 
 /-- The existing torsion-cohomology predicate restricted along the inclusion of `D⁺`.
@@ -372,6 +551,74 @@ theorem exists_support_longExact :
             (hB := Scheme.ProEt.isContinuous_overPullback f)
             (ProEtale.supportRestrictionArrow i) (ProEtale.supportRestrictionArrow i')
             ⊤ ⊤ (δ i) (δ i') t s)) := by
-  sorry
+  classical
+  let : HasDerivedCategory.{u + 1} AddCommGrpCat.{u + 1} :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  have hEt {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+      (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective I] :
+      Epi (I.obj.map (Etale.supportRestrictionArrow i).op) := by
+    have : Mono (Etale.supportRestrictionArrow i) :=
+      (MorphismProperty.Over.forget @Etale ⊤ X ⋙ Over.forget X).mono_of_mono_map
+        (inferInstanceAs (Mono i.openComplement.ι))
+    rw [AddCommGrpCat.epi_iff_surjective]
+    exact injective_sheaf_mono_restriction.{u + 1, u, u + 1} _ I _
+  let dEt {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
+      ∀ q : ℤ, Sheaf.sectionHypercohomologyFunctor.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+        X.smallEtaleTopology AddCommGrpCat.{u + 1} (Scheme.Etale.mk i.openComplement.ι) q ⟶
+        Sheaf.supportHypercohomologyFunctor X.smallEtaleTopology AddCommGrpCat.{u + 1}
+          (Etale.supportRestrictionArrow i) (q + 1) :=
+    Classical.choose (Sheaf.supportBoundary_exists.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+      X.smallEtaleTopology
+      AddCommGrpCat.{u + 1} (Etale.supportRestrictionArrow i) (hEt i))
+  have hdEt {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :=
+    Classical.choose_spec (Sheaf.supportBoundary_exists.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+      X.smallEtaleTopology
+      AddCommGrpCat.{u + 1} (Etale.supportRestrictionArrow i) (hEt i))
+  constructor
+  · refine ⟨fun {Z X} i _ q ↦ Functor.whiskerLeft
+        (Etale.supportSequenceCoefficients X).ι (dEt i q), ?_, ?_⟩
+    · intro Z X i hi
+      exact Sheaf.supportBoundary_exact _ _ _ (hEt i) (dEt i) (hdEt i) _
+    · intro Z X Z' X' i hi i' hi' f t s hs
+      exact Sheaf.supportBoundary_pair X.smallEtaleTopology AddCommGrpCat.{u + 1}
+        (Etale.supportRestrictionArrow i) X'.smallEtaleTopology
+        (MorphismProperty.Over.pullback @Etale ⊤ f)
+        (hB := Etale.isContinuous_overPullback f) (Etale.supportRestrictionArrow i')
+        (hEt i) (hEt i')
+        (dEt i) (dEt i') (hdEt i) (hdEt i') _ _ t s hs
+  · intro l hl E hE hAl hFin n hn
+    let A := ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))
+    let : HasDerivedCategory.{u + 1} A := HasDerivedCategory.ofIsGrothendieckAbelian _
+    have hPro {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+        (I : Sheaf (Scheme.ProEt.topology X) A) [Injective I] :
+        Epi (I.obj.map (ProEtale.supportRestrictionArrow i).op) := by
+      have : Mono (ProEtale.supportRestrictionArrow i) :=
+        (MorphismProperty.Over.forget @WeaklyEtale ⊤ X ⋙ Over.forget X).mono_of_mono_map
+          (inferInstanceAs (Mono i.openComplement.ι))
+      exact supportModule_restriction_epi.{u + 1, u, u + 1} _ _ I _
+    let dPro {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
+        ∀ q : ℤ, Sheaf.sectionHypercohomologyFunctor.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+          (Scheme.ProEt.topology X) A (Scheme.ProEt.mk i.openComplement.ι) q ⟶
+          Sheaf.supportHypercohomologyFunctor (Scheme.ProEt.topology X) A
+            (ProEtale.supportRestrictionArrow i) (q + 1) :=
+      Classical.choose (Sheaf.supportBoundary_exists.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+        (Scheme.ProEt.topology X)
+        A (ProEtale.supportRestrictionArrow i) (hPro i))
+    have hdPro {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :=
+      Classical.choose_spec (Sheaf.supportBoundary_exists.{u + 1, u, u + 2, u + 1, u + 1, u + 1}
+        (Scheme.ProEt.topology X)
+        A (ProEtale.supportRestrictionArrow i) (hPro i))
+    refine ⟨fun {Z X} i _ q ↦ Functor.whiskerLeft
+        (⊤ : ObjectProperty (DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) A))).ι
+        (dPro i q), ?_, ?_⟩
+    · intro Z X i hi
+      exact Sheaf.supportBoundary_exact _ _ _ (hPro i) (dPro i) (hdPro i) _
+    · intro Z X Z' X' i hi i' hi' f t s hs
+      exact Sheaf.supportBoundary_pair (Scheme.ProEt.topology X) A
+        (ProEtale.supportRestrictionArrow i) (Scheme.ProEt.topology X')
+        (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f)
+        (hB := Scheme.ProEt.isContinuous_overPullback f) (ProEtale.supportRestrictionArrow i')
+        (hPro i) (hPro i')
+        (dPro i) (dPro i') (hdPro i) (hdPro i') _ _ t s hs
 
 end AlgebraicGeometry

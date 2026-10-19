@@ -17458,3 +17458,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:25 L: merged deliver/Q56/lem-sf-constant-semilinear-generator-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 15:39 L: returned deliver/E7/Sheaf.TraceFormula.IntegralConeCounitRealization (reviewer RETURN: (the landing tools, head 636ec9019) the delivery did not land: lean/Sheaf/TraceFormula/IntegralConeCounitRealization.lea)
 - 15:40 L: merged deliver/A3/Sheaf.FieldTheory.GeometricIrreducibilityTranscendental (stage 3; reviewer PASS; first push; landing 20261019T154001-L-3023253 (proof); batch 20261019T153958; modules 1; new nodes 0)
+- 15:40 L: merged deliver/A4/Sheaf.AlgebraicGeometry.SupportLongExact (stage 3; reviewer PASS; first push; landing 20261019T154002-L-3023490 (interface); batch 20261019T153958; modules 2; new nodes 1; change records: coord/changes/A4-support-long-exact-proof-context.md)
