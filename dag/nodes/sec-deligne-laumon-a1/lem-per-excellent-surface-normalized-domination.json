@@ -11,7 +11,6 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-affine-spectrum",
   "def-pc-integral-scheme",
   "def-weil-proper-morphism",
   "def-sc-function-field",
@@ -19,9 +18,138 @@
   "def-nagata-global-blowup",
   "def-sc-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-normal-surface-exceptional-curves] to $f:Y\\to S$. It supplies a finite proper normalization $q:Y_0\\to Y$ and a proper function-field isomorphism $f_0:Y_0\\to S$ with $Y_0$ normal integral excellent Noetherian of dimension $2$. A tower mapping to $Y_0$ maps to the original $Y$ by composition with $q$. The normalization of the normal integral $S$ is $S$ itself: its local rings are already integrally closed in $k(S)$, so the integral-closure construction in [def-sc-normalization] leaves them unchanged. Thus the initial normalization in the source introduces no extra arrow in the required tower.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof first paragraph: normalize the source and identify the normal target with its normalization"
+   }
+  },
+  {
+   "text": "We prove the assertion for every proper function-field isomorphism $h:Z\\to X$ between normal integral excellent Noetherian surfaces by strong induction on the finite integer $r=|B(h)|$, with $B(h)$ as in [lem-per-normal-surface-exceptional-curves]. If $r=0$, that node says $h$ is an isomorphism; use the tower of length zero and its inverse $X\\to Z$. For $r>0$, assume the assertion proved for every such morphism with fewer than $r$ contracted curves. The construction in the following steps will reach a new such morphism with fewer than $r$ curves after finitely many normalized point blowups of $X$.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof second paragraph: induction on the number of contracted curves and the empty base case"
+   }
+  },
+  {
+   "text": "Choose $C\\in B(h)$, let $x=h(C)$, and put $R=\\mathcal O_{Z,\\eta_C}$ and $A=\\mathcal O_{X,x}$. The exceptional-curve node makes $x$ closed, $R$ a DVR, $A\\to R$ an injective local map of domains with common fraction field $K$, and $\\kappa(\\eta_C)/\\kappa(x)$ of transcendence degree one. Choose an element of that residue field transcendental over $\\kappa(x)$ and lift it to $u\\in R$. Write $u=a/b$ in $K=\\operatorname{Frac}(A)$, with $a,b\\in A$ nonzero. This uses only the definition of a fraction field after the cited identifications.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof fourth paragraph: choose u in the local ring at the generic point of the exceptional curve (correcting the printed X,C subscript)"
+   }
+  },
+  {
+   "text": "Write $v:K^\\times\\to\\mathbf Z$ for the order valuation of the DVR $R$ [def-sc-discrete-valuation-ring]. The nonzero residue of $u$ gives $v(u)=0$, so $v(a)=v(b)\\geq0$. If $b$ were a unit of $A$, reduction of $a/b$ would belong to $\\kappa(x)$, contradicting its transcendence. Thus $b\\in\\mathfrak m_A$; locality gives $v(b)>0$, hence $v(a)>0$ and $a\\in\\mathfrak m_A$ too. Set $N=\\min(v(a),v(b))>0$. These are just the unit and maximal-ideal tests for a local map to a valuation ring.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof fourth paragraph: positivity of the valuation induction parameter"
+   }
+  },
+  {
+   "text": "Blow up the reduced closed point $x$ and normalize to obtain $g:X_1\\to X$. Apply [lem-per-excellent-normalized-blowup-tower] to the length-one tower over the normal $X$ (its initial normalization is $X$). It says that $X_1$ is a normal integral excellent Noetherian surface and that $g$ is projective in the projective-bundle sense and induces an isomorphism of function fields. Hence $g$ is proper by [lem-trf-projective-bundle-proper]. Apply [lem-per-normalized-surface-graph-exceptional-injection] to $(h,g)$, obtaining proper birational $h_1:Z_1\\to X_1$, $p_1:Z_1\\to Z$ and an injection $B(h_1)\\hookrightarrow B(h)$, with $Z_1$ again a normal integral excellent Noetherian surface. If $|B(h_1)|<r$, stop this construction. Otherwise the injection between finite sets of size $r$ is a bijection, so $C$ has exactly one preimage $C_1$.",
+   "uses": [
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-trf-projective-bundle-proper",
+    "lem-per-normalized-surface-graph-exceptional-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof third paragraph: normalized dominating graph, injection, and reduction to eliminating a selected curve"
+   }
+  },
+  {
+   "text": "In the persistence case put $x_1=h_1(C_1)$ and $A_1=\\mathcal O_{X_1,x_1}$. The graph-injection node says that $x_1$ is closed, lies over $x$, that $\\kappa(x_1)/\\kappa(x)$ is finite, and that $\\mathcal O_{Z_1,\\eta_{C_1}}=R$ inside $K$. The local maps $A\\to A_1\\to R$ commute. Consequently the same residue of $u$ remains transcendental over $\\kappa(x_1)$: if it were algebraic over that field, the tower of two algebraic extensions would make it algebraic over $\\kappa(x)$.",
+   "uses": [
+    "lem-per-normalized-surface-graph-exceptional-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof last paragraph: persistence of the generic DVR and of the transcendental residue"
+   }
+  },
+  {
+   "text": "The ideal sheaf of the reduced closed point is finite type: on each Noetherian affine it is an ideal in a Noetherian ring, hence finitely generated. The principalization theorem [thm-nagata-blowup-principalizes-center] says that on the ordinary blowup the extended ideal of $x$ is generated locally by a non-zero-divisor. At the image of $x_1$ choose such a generator and call its image in $A_1$ $d$. The ideal of $x$ is nonzero because the integral $X$ has dimension $2$, so the ordinary blowup $\\operatorname{Bl}_x X$ is integral [lem-per-integral-blowup-projective-geometry] with function field $K$, and $d$, a non-zero-divisor of its local ring, is nonzero there. Normalization is dominant between integral schemes with the same function field, so this nonzero element remains nonzero. Extension of the ideal gives $\\mathfrak m_A A_1=dA_1$, and $d\\in\\mathfrak m_{A_1}$ since $x_1$ lies over $x$. Thus $a=a_1d$ and $b=b_1d$ for some nonzero $a_1,b_1\\in A_1$, with $u=a_1/b_1$. No assertion that an arbitrary pullback of a Cartier ideal stays Cartier is needed; here all local rings embed into $K$.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lem-per-integral-blowup-projective-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof last paragraph: local equation d for the exceptional ideal and division of a,b"
+   }
+  },
+  {
+   "text": "The map $A_1\\to R$ is local, so $v(d)>0$. The DVR multiplication rule yields\n$$N_1=\\min(v(a_1),v(b_1))=N-v(d)<N.$$\nThe argument of Step 4, now over $A_1$ and using the transcendental residue over $\\kappa(x_1)$, shows $a_1,b_1\\in\\mathfrak m_{A_1}$ and $N_1>0$. Explicitly, a unit denominator would give a residue in $\\kappa(x_1)$; equality of the two valuations and locality then force both valuations positive. This is elementary arithmetic in the same DVR, whose valuation has not changed.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof final displayed order equality: strict decrease if the curve persists"
+   }
+  },
+  {
+   "text": "Repeat Steps 5--8 with $(X_i,Z_i,h_i,C_i,a_i,b_i)$ in place of $(X,Z,h,C,a,b)$ as long as $|B(h_i)|=r$. Inductively, both schemes remain normal integral excellent Noetherian surfaces, the maps to the previous $Z_i$ compose to $Z$, the injections identify the unique continuing curve with $C$, and its generic DVR is always $R$. The contraction points have successive finite residue extensions, and $N_i>0$ decreases by at least one at every persistence step. Thus persistence for $N$ steps would give $0<N_N\\leq0$, a contradiction. At some finite stage $j\\geq1$ we therefore have $|B(h_j)|<r$. The only maps appended to the base tower were normalized blowups at reduced closed points; the graph maps were used solely for the auxiliary sources.",
+   "uses": [
+    "lem-per-normalized-surface-graph-exceptional-injection",
+    "lem-per-excellent-normalized-blowup-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof fourth and last paragraphs: descending induction on the positive integer order, with the tower invariant explicit"
+   }
+  },
+  {
+   "text": "Apply the outer strong induction hypothesis to $h_j:Z_j\\to X_j$. It gives a finite normalized point-blowup tower $T\\to\\cdots\\to X_j$ and an $X_j$-map $T\\to Z_j$. Concatenate it with $X_j\\to\\cdots\\to X$ and compose $T\\to Z_j\\to Z$. This proves the induction step on $r$. Applying the result to $f_0:Y_0\\to S$ of Step 1 and composing with $Y_0\\to Y$ gives the requested $S$-map. All base-tower schemes are integral and normal, and all base arrows are proper and preserve function fields by Step 5 at each stage. The case where $f_0$ is already an isomorphism uses $n=0$. The argument never asserts that an endpoint is regular.",
+   "uses": [
+    "lem-per-normal-surface-exceptional-curves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBT (resolve-lemma-dominate-by-normalized-blowing-up), proof completion: outer induction, concatenation, and composition back to the original Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sc-normalization",
+  "lem-per-excellent-normalized-blowup-tower",
+  "lem-per-integral-blowup-projective-geometry",
+  "lem-per-normal-surface-exceptional-curves",
+  "lem-per-normalized-surface-graph-exceptional-injection",
+  "lem-trf-projective-bundle-proper",
+  "thm-nagata-blowup-principalizes-center"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BBT, resolve-lemma-dominate-by-normalized-blowing-up, with its normalization reduction, exceptional-curve induction and Zariski order descent; the dominating-component clarification is documented in report.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +185,38 @@
    "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField; ; logged digest 3f281a2da34d23d7",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these concern relative normalization, ordinary adic completion, rational maps, smooth/cotangent charts or Weierstrass nonsingularity, and do not assert this surface theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-excellent-surface-normalized-domination: dominate a proper birational morphism of normal excellent surfaces by a finite sequence of normalized point blowups",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization; ; logged digest 5452b7572826107c",
+   "date": "2026-10-19",
+   "verdict": "no match: relative normalization and representatives of rational maps do not provide a finite normalized point-blowup domination theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blow\", \"normal\"",
+   "results": "0 hits: none; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: relative normalization and representatives of rational maps do not provide a finite normalized point-blowup domination theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*blow|blow.*normali",
+   "results": "0 hits: none; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: relative normalization and representatives of rational maps do not provide a finite normalized point-blowup domination theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Resolve a rational map from a normal excellent surface by normalized blowups of closed points",
+   "results": "8 hits: AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.RationalMap.IsOver.mk, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.PartialMap.noConfusionType, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain, AlgebraicGeometry.Scheme.RationalMap.compHom_toRationalMap; ; logged digest b8657eee4ecd1996",
+   "date": "2026-10-19",
+   "verdict": "no match: relative normalization and representatives of rational maps do not provide a finite normalized point-blowup domination theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-normalized-refinement",
@@ -87,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-excellent-surface-normalized-domination",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BBT into the outer finite-exceptional-curve induction and the inner strictly decreasing DVR order argument. Added two statement-only geometric inputs, reused the normalized-blowup tower and principalization nodes, and corrected the source proof construction to the normalization of the dominating component of the fibre product. The item statement is unchanged; no regularity assertion or extra target hypothesis is introduced.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BGM, resolve-lemma-existence-implies-existence-by-normalized-blowing-ups; normalized blowups are resolve-definition-normalized-blowup (Tag 0BBS). Supporting Tag 0BGM proof, complete case: the first normalized tower dominating the given regular model. Steps 1--10 realize the normalized domination input in the proof of 0BGM used by the surface-resolution branch.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic projective-bundle projectivity implies properness, applied to each normalized point-blowup arrow supplied by the existing tower theorem. It replaces no perverse-sheaf argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-dd875ab81",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-dd875ab81 (reviewer sub-agent of L); spot-checked: FIX: the split is correct, with one missing citation that I added. I read Stacks 0BBT (resolve.tex lines 1060-1140) and 0BFP. The item statement is 0BBT specialized to a normal excellent S and is unchanged; removing def-weil-affine-spectrum is correct because the statement never uses it. I agree with the report's source error: the full Y×_X X' can have vertical components (E×E for Bl_0 A²), so normalizing the dominating component W is the right reading. New node lem-per-normal-surface-exceptional-curves is true. Finite normalization comes from Nagata. dim 2 and trdeg 1 come from the dimension formula over the universally catenary base, so R_C has dimension 1, and normal of dimension 1 makes it a DVR (00PD). B(h) is finite and contraction points are closed by 0BFP and properness. An empty B(h) gives a finite birational map to a normal base, hence an isomorphism. New node lem-per-normalized-surface-graph-exceptional-injection is true. p(C') cannot be a point because the fibre κ(y)⊗κ(x') is finite. The injection and the equal generic DVR come from 0BFP at codimension-1 points of the normal Y. Neither new node duplicates an existing one (rg for BadCurves, contracted and 0BBT; the trf contracted-component nodes and the 0BFP node differ), and neither restates a clause of the item. Steps 1-10 check: Zariski order descent with explicit invariants and a strong outer induction. Fault fixed (C1): Step 7 used integrality of Bl_x X without a citation. It now cites lem-per-integral-blowup-projective-geometry (same unit, no cycle), and the node is added to proof_deps. Batch-5 flag: lem-trf-projective-bundle-proper (Stacks 01WC) is accepted as generic scheme theory. For lem-per-excellent-normalized-blowup-tower I checked its own closure, not a ±item diff. Its trf members are only the projective-bundle definition and properties, dimension-formula lemmas and affine-cover descent of excellence, G-ring, J-2 and catenarity; no trace or duality theorem and no sk-thm-trace-transport. Accepted. No SGA source is cited. The worker wrote tool_uses itself (C8); I accept it as harmless.; 1 file(s) fixed by the reviewer"
  }
 }
