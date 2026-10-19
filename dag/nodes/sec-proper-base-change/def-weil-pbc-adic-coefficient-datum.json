@@ -41,9 +41,73 @@
   "lem-pur-left-derived-from-kflat-class",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "step": 1,
+   "text": "Retain the completed coefficient limit, strict module tower and universal derived pair. Construct the transition on modules using the unit of scalar extension, composition of scalar restrictions and the ordinary balancing isomorphism. The limit relation makes this the quotient tensor formula. The sheafification universal property and sectionwise tensor generation prove uniqueness and naturality, including zero coefficients and the empty site object. The additive tower functor induces an exact homotopy functor. K-flat resolutions and preservation of quasi-isomorphisms at every level give the universal tower pair by the resolving-class theorem, since tower cohomology and quasi-isomorphisms are detected by evaluation.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Prove ordinary balancing naturality and the three-ring cocycle by applying the scalar-extension adjunction repeatedly. This reduces each equality to generators with scalar coefficient one. The recorded balancing formula and scalar-extension map formula identify both sides.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 3,
+   "text": "The full subcategory of K-flat complexes in the homotopy category localizes to the derived category. To verify this, use right fractions: resolve the vertex of each fraction by a K-flat complex; resolve the vertex witnessing equality of two fractions similarly. This proves fullness and faithfulness of the induced localization, and resolutions give essential surjectivity. Therefore a natural isomorphism on K-flat computations, given by two invertible counits into the same ordinary complex functor, descends uniquely to the derived category.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 4,
+   "text": "Apply changeOfRings_isKFlat_of_flat_terms to a K-flat resolution with flat terms. Ordinary tensor presentation transfers that K-flatness to the fixed scalar-extension functor. On this resolution the two successive derived scalar-extension counits and balancing are invertible. For any K-flat complex, naturality along its resolution, together with preservation of quasi-isomorphisms between K-flat complexes, makes the same composite invertible. Step 3 then gives the unique derived normalization with its formula on every K-flat representative.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 5,
+   "text": "Evaluation and scalar restriction are exact, so their derived-factorization isomorphisms identify the evaluated ordinary tower complex with the ordinary scalar-extension complex after restriction. On K-flat complexes the tower counit and scalar-extension counit are invertible. Their naturality gives two natural comparisons into that same ordinary complex functor; apply step 3 to descend their ratio and prove the required unique evaluation isomorphism.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-adic-coefficient-datum.md",
+  "place": "Transition, normalization, balancing coherence and derived evaluation paragraphs; flat-term resolution refinement of the K-flat computation, A2, 2026-10-19."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -260,40 +324,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261019T005309-L-2749899",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.AdicCoefficients.finiteRingComparison_exists",
-   "AlgebraicGeometry.Scheme.completedReductionDerivedNormalization_exists",
-   "AlgebraicGeometry.Scheme.completedReductionDerivedNormalization_isIso",
-   "AlgebraicGeometry.Scheme.completedReductionEvaluation_exists",
-   "AlgebraicGeometry.Scheme.completedReductionEvaluation_isIso",
-   "AlgebraicGeometry.Scheme.completedReductionModuleTowerFunctor_additive",
-   "AlgebraicGeometry.Scheme.completedReductionProjection_comp",
-   "AlgebraicGeometry.Scheme.completedReductionTowerMap_naturality",
-   "AlgebraicGeometry.Scheme.completedReductionTower_exists",
-   "AlgebraicGeometry.Scheme.completedReductionTower_properties",
-   "AlgebraicGeometry.Scheme.completedReductionTransition_exists",
-   "AlgebraicGeometry.Scheme.completedTowerEvaluationStep_naturality",
-   "AlgebraicGeometry.Scheme.reductionBalance_cocycle",
-   "AlgebraicGeometry.Scheme.reductionBalance_exists",
-   "AlgebraicGeometry.Scheme.reductionBalance_naturality",
-   "AlgebraicGeometry.Scheme.reductionCoefficientMap_comp",
-   "AlgebraicGeometry.Scheme.reductionCoefficientMap_id",
-   "AlgebraicGeometry.Scheme.reductionRestrict_preservesFiniteColimits",
-   "AlgebraicGeometry.Scheme.reductionRestrict_preservesFiniteLimits",
-   "AlgebraicGeometry.Scheme.reductionTower_isGrothendieckAbelian"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.completedReductionDerivedNormalization_exists",
-   "AlgebraicGeometry.Scheme.completedReductionEvaluation_exists",
-   "AlgebraicGeometry.Scheme.completedReductionTransition_exists",
-   "AlgebraicGeometry.Scheme.reductionBalance_cocycle",
-   "AlgebraicGeometry.Scheme.reductionBalance_naturality"
-  ]
+  "landing": "20261019T231024-L-539912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

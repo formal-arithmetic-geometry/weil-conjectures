@@ -19,8 +19,6 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.CategoryTheory.Sites.PreservesSheafification
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
@@ -45,6 +43,8 @@ universe t u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct ChangeOfRings
+
+attribute [local irreducible] AlgebraicGeometry.Scheme.completedAdicChangeData
 
 namespace AlgebraicGeometry.Scheme.AdicCoefficients
 
@@ -426,7 +426,12 @@ noncomputable def reductionDerivedExistence (T : Scheme.{t})
         ∀ P : CochainComplex (reductionModules T R) ℤ,
           CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
-  (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+  by
+    simpa +instances only [reductionDerivedCategory, reductionChange, completedAdicChange,
+      reductionChangeExistence, reductionModules, reductionModuleRing, ringedSiteModules,
+      SheafOfModules.derivedChangeRingIndependentCoefficients,
+      reductionModulesHasDerivedCategory, reductionRingModulesHasDerivedCategory] using
+      (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived scalar extension is chosen with its universal comparison, hence is determined
 up to unique compatible isomorphism, rather than by a mere existence of a functor.
@@ -467,6 +472,427 @@ noncomputable def reductionRestrict (T : Scheme.{t})
   SheafOfModules.restrictScalars.{t + 1}
     ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ)
 
+private theorem reductionChange_eq_witness (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    reductionChange T φ = (reductionChangeExistence T φ).choose := rfl
+
+private theorem reductionChange_map (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {M N : reductionModules T R} (f : M ⟶ N) :
+    (reductionChange T φ).map f =
+      eqToHom ((reductionChangeExistence T φ).choose_spec.choose M) ≫
+        SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} φ M f ≫
+          eqToHom ((reductionChangeExistence T φ).choose_spec.choose N).symm :=
+  by
+    simpa only [reductionChange_eq_witness] using
+      (reductionChangeExistence T φ).choose_spec.choose_spec.choose f
+
+private theorem reductionChange_quasiIso (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {P Q : CochainComplex (reductionModules T R) ℤ} (f : P ⟶ Q)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)
+    (hf : QuasiIso f) :
+    QuasiIso (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map f) :=
+  by
+    simpa only [reductionChange_eq_witness] using
+      (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.1
+        f hP hQ hf
+
+private theorem reductionDerivedCounit_kflat (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (reductionModules T R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    IsIso ((reductionDerivedCounit T φ).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
+  (reductionDerivedExistence T φ).choose_spec.choose_spec.2.2 P hP
+
+attribute [local irreducible] completedAdicDerivedChange reductionDerivedCounit
+  reductionDerivedExistence
+
+
+private noncomputable def reductionTensorPresentation (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) :
+    (reductionChange T φ).obj M ≅ SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M :=
+  eqToIso ((reductionChangeExistence T φ).choose_spec.choose M)
+
+private noncomputable def reductionRawTensor (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    (SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M).val.obj U :=
+  ((PresheafOfModules.sheafificationAdjunction.{t + 1}
+    (𝟙 (reductionModuleRing T S).obj)).unit.app
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M)).app U
+        (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+
+private theorem reductionTensorPresentation_tensor (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    (reductionTensorPresentation T φ M).hom.val.app U
+        (reductionTensorSection T φ M U s x) = reductionRawTensor T φ M U s x := by
+  change ((reductionTensorPresentation T φ M).inv ≫
+    (reductionTensorPresentation T φ M).hom).val.app U _ = _
+  rw [Iso.inv_hom_id]
+  rfl
+
+private theorem reductionRawTensor_map (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) {U V : T.ProEtᵒᵖ} (i : U ⟶ V)
+    (s : S.obj.obj U) (x : M.val.obj U) :
+    (SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M).val.map i
+      (reductionRawTensor T φ M U s x) =
+      reductionRawTensor T φ M V (S.obj.map i s) (M.val.map i x) := by
+  have hn := PresheafOfModules.naturality_apply
+    ((PresheafOfModules.sheafificationAdjunction.{t + 1}
+      (𝟙 (reductionModuleRing T S).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M)) i
+    (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+  change _ = (SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M).val.map i
+    (reductionRawTensor T φ M U s x) at hn
+  have ht := Classical.choose_spec
+    (SheafOfModules.exists_changeOfRingsMap.{t, t + 1, t + 1} φ M i) s x
+  change SheafOfModules.changeOfRingsMap.{t, t + 1, t + 1} φ M i _ = _ at ht
+  change ((PresheafOfModules.sheafificationAdjunction.{t + 1}
+    (𝟙 (reductionModuleRing T S).obj)).unit.app
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M)).app V
+        (SheafOfModules.changeOfRingsMap.{t, t + 1, t + 1} φ M i _) = _ at hn
+  rw [ht] at hn
+  exact hn.symm
+
+private noncomputable def reductionRawTranspose (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S)
+    (f : SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M ⟶ N) :
+    M ⟶ (reductionRestrict T φ).obj N where
+  val.app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars.{t + 1, t + 1, t + 1}
+    (φ.hom.app U).hom
+      ((PresheafOfModules.sheafificationHomEquiv.{t + 1}
+        (𝟙 (reductionModuleRing T S).obj) f).app U)
+  val.naturality {U V} i := by
+    ext x
+    change f.val.app V (reductionRawTensor T φ M V 1 (M.val.map i x)) =
+      N.val.map i (f.val.app U (reductionRawTensor T φ M U 1 x))
+    have hn := PresheafOfModules.naturality_apply f.val i
+      (reductionRawTensor T φ M U 1 x)
+    rw [reductionRawTensor_map, map_one] at hn
+    exact hn
+
+private theorem reductionRawTranspose_injective (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S) :
+    Function.Injective (reductionRawTranspose T φ M N) := by
+  intro f g h
+  apply (PresheafOfModules.sheafificationHomEquiv.{t + 1}
+    (𝟙 (reductionModuleRing T S).obj)).injective
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro x
+  exact ConcreteCategory.congr_hom (congrArg (fun q ↦ q.val.app U) h) x
+
+private noncomputable def reductionTranspose (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S)
+    (f : (reductionChange T φ).obj M ⟶ N) :
+    M ⟶ (reductionRestrict T φ).obj N :=
+  reductionRawTranspose T φ M N ((reductionTensorPresentation T φ M).inv ≫ f)
+
+private theorem reductionTranspose_injective (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S) :
+    Function.Injective (reductionTranspose T φ M N) := by
+  intro f g h
+  exact (cancel_epi (reductionTensorPresentation T φ M).inv).1
+    (reductionRawTranspose_injective T φ M N h)
+
+private theorem reductionTranspose_apply (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S)
+    (f : (reductionChange T φ).obj M ⟶ N) (U : T.ProEtᵒᵖ) (x : M.val.obj U) :
+    (reductionTranspose T φ M N f).val.app U x =
+      f.val.app U (reductionTensorSection T φ M U 1 x) := rfl
+
+private theorem reductionTensorHom_ext (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : reductionModules T S)
+    (f g : (reductionChange T φ).obj M ⟶ N)
+    (h : ∀ (U : T.ProEtᵒᵖ) (x : M.val.obj U),
+      f.val.app U (reductionTensorSection T φ M U 1 x) =
+        g.val.app U (reductionTensorSection T φ M U 1 x)) : f = g := by
+  apply reductionTranspose_injective T φ M N
+  ext U x
+  exact h U x
+
+private theorem reductionDoubleTensorHom_ext (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (M : reductionModules T R) (N : reductionModules T U)
+    (f g : (reductionChange T ψ).obj ((reductionChange T φ).obj M) ⟶ N)
+    (h : ∀ (V : T.ProEtᵒᵖ) (x : M.val.obj V),
+      f.val.app V (reductionTensorSection T ψ _ V 1
+        (reductionTensorSection T φ M V 1 x)) =
+      g.val.app V (reductionTensorSection T ψ _ V 1
+        (reductionTensorSection T φ M V 1 x))) : f = g := by
+  apply reductionTranspose_injective T ψ _ _
+  apply reductionTensorHom_ext T φ
+  intro V x
+  exact (reductionTranspose_apply T ψ _ _ f V _).trans
+    ((h V x).trans (reductionTranspose_apply T ψ _ _ g V _).symm)
+
+private theorem reductionTripleTensorHom_ext (T : Scheme.{t})
+    {R S U V : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (θ : U ⟶ V)
+    (M : reductionModules T R) (N : reductionModules T V)
+    (f g : (reductionChange T θ).obj
+      ((reductionChange T ψ).obj ((reductionChange T φ).obj M)) ⟶ N)
+    (h : ∀ (W : T.ProEtᵒᵖ) (x : M.val.obj W),
+      f.val.app W (reductionTensorSection T θ _ W 1
+        (reductionTensorSection T ψ _ W 1 (reductionTensorSection T φ M W 1 x))) =
+      g.val.app W (reductionTensorSection T θ _ W 1
+        (reductionTensorSection T ψ _ W 1 (reductionTensorSection T φ M W 1 x)))) : f = g := by
+  apply reductionTranspose_injective T θ _ _
+  apply reductionDoubleTensorHom_ext T φ ψ
+  intro W x
+  exact (reductionTranspose_apply T θ _ _ f W _).trans
+    ((h W x).trans (reductionTranspose_apply T θ _ _ g W _).symm)
+
+private theorem reductionRawChange_tensor (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {M N : reductionModules T R} (f : M ⟶ N)
+    (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    (SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} φ M f).val.app U
+        (reductionRawTensor T φ M U s x) =
+      reductionRawTensor T φ N U s (f.val.app U x) := by
+  let p : SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ N :=
+    { app := fun V ↦ (ModuleCat.extendScalars (φ.hom.app V).hom).map (f.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality φ M f }
+  have hn := (PresheafOfModules.sheafificationAdjunction.{t + 1}
+    (𝟙 (reductionModuleRing T S).obj)).unit.naturality p
+  have hv := congrArg (fun q ↦ q.app U) hn
+  have hx := ConcreteCategory.congr_hom hv
+    (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+  change reductionRawTensor T φ N U s (f.val.app U x) = _ at hx
+  exact hx.symm
+
+private theorem reductionTensorPresentation_naturality (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {M N : reductionModules T R} (f : M ⟶ N) :
+    (reductionChange T φ).map f ≫ (reductionTensorPresentation T φ N).hom =
+      (reductionTensorPresentation T φ M).hom ≫
+        SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} φ M f := by
+  rw [reductionChange_map]
+  simp only [reductionTensorPresentation, eqToIso.hom, Category.assoc,
+    eqToHom_trans, eqToHom_refl, Category.comp_id]
+
+private theorem reductionChange_tensor (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    {M N : reductionModules T R} (f : M ⟶ N)
+    (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
+    ((reductionChange T φ).map f).val.app U (reductionTensorSection T φ M U s x) =
+      reductionTensorSection T φ N U s (f.val.app U x) := by
+  have hf := reductionChange_map T φ f
+  change (reductionChange T φ).map f =
+    (reductionTensorPresentation T φ M).hom ≫
+      SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} φ M f ≫
+        (reductionTensorPresentation T φ N).inv at hf
+  rw [hf]
+  change (reductionTensorPresentation T φ N).inv.val.app U
+    ((SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} φ M f).val.app U
+      ((reductionTensorPresentation T φ M).hom.val.app U
+        (reductionTensorSection T φ M U s x))) = _
+  rw [reductionTensorPresentation_tensor, reductionRawChange_tensor]
+  rfl
+
+private theorem reductionRawTensorAddHom_ext (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (N : Sheaf (ProEt.topology T) AddCommGrpCat.{t + 1})
+    (f g : (SheafOfModules.toSheaf (reductionModuleRing T S)).obj
+      (SheafOfModules.changeOfRings.{t, t + 1, t + 1} φ M) ⟶ N)
+    (h : ∀ (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U),
+      f.hom.app U (reductionRawTensor T φ M U s x) =
+        g.hom.app U (reductionRawTensor T φ M U s x)) : f = g := by
+  apply ((CategoryTheory.sheafificationAdjunction (ProEt.topology T)
+    AddCommGrpCat.{t + 1}).homEquiv
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ M).presheaf N).injective
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro z
+  let : Module (R.obj.obj U) (S.obj.obj U) := Module.compHom _ (φ.hom.app U).hom
+  induction z using TensorProduct.induction_on with
+  | zero => exact (map_zero _).trans (map_zero _).symm
+  | tmul s x => exact h U s x
+  | add x y hx hy => simp only [map_add, hx, hy]
+
+private theorem reductionRestrictedTensorHom_ext (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M N : reductionModules T R)
+    (f g : (reductionRestrict T φ).obj ((reductionChange T φ).obj M) ⟶ N)
+    (h : ∀ (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U),
+      f.val.app U (reductionTensorSection T φ M U s x) =
+        g.val.app U (reductionTensorSection T φ M U s x)) : f = g := by
+  let V := SheafOfModules.toSheaf (reductionModuleRing T R)
+  let W := SheafOfModules.toSheaf (reductionModuleRing T S)
+  apply V.map_injective
+  apply (cancel_epi (W.map (reductionTensorPresentation T φ M).inv)).1
+  apply reductionRawTensorAddHom_ext T φ M
+  intro U s x
+  exact h U s x
+
+attribute [local irreducible] reductionTensorPresentation completedAdicChange
+  reductionRawTensor reductionRawTranspose reductionTranspose
+
+private noncomputable def reductionRestrictCompIso (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (N : reductionModules T U) :
+    (reductionRestrict T χ).obj N ≅
+      (reductionRestrict T φ).obj ((reductionRestrict T ψ).obj N) where
+  hom.val.app V := (ModuleCat.restrictScalarsComp'App _ _ _
+    (congrArg CommRingCat.Hom.hom (congrArg (fun q ↦ q.hom.app V) h).symm)
+      (N.val.obj V)).hom
+  hom.val.naturality i := by ext x; rfl
+  inv.val.app V := (ModuleCat.restrictScalarsComp'App _ _ _
+    (congrArg CommRingCat.Hom.hom (congrArg (fun q ↦ q.hom.app V) h).symm)
+      (N.val.obj V)).inv
+  inv.val.naturality i := by ext x; rfl
+
+private noncomputable def reductionUnit (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) :
+    M ⟶ (reductionRestrict T φ).obj ((reductionChange T φ).obj M) :=
+  reductionTranspose T φ M _ (𝟙 _)
+
+/-- The ordinary coefficient-change complex, with its actual scalar-extension differential.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable def reductionChangeComplex (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    CochainComplex (reductionModules T R) ℤ ⥤ CochainComplex (reductionModules T S) ℤ :=
+  (reductionChange T φ).mapHomologicalComplex (ComplexShape.up ℤ)
+
+/-- The canonical balancing chain map is uniquely determined on local tensor generators.
+Source: blueprint order 1239, normalization paragraph; Stacks Tag 03EK
+(blueprint: def-weil-pbc-adic-coefficient-datum).
+Proof: send s tensor (r tensor x) to (s*ψ(r)) tensor x. The relation ψφ=χ makes
+this balanced over both rings. Sheafification extends it uniquely; restrictions and
+differentials commute with the formula. The inverse sends s tensor x to s tensor
+(1 tensor x). Balancing verifies both inverse identities. Local tensor generation
+proves uniqueness, including on the empty site object. -/
+theorem reductionBalance_exists (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (_h : φ ≫ ψ = χ)
+    (P : CochainComplex (reductionModules T R) ℤ) :
+    ∃! f : (reductionChangeComplex T ψ).obj ((reductionChangeComplex T φ).obj P) ⟶
+        (reductionChangeComplex T χ).obj P,
+      IsIso f ∧ ∀ (p : ℤ) (V : T.ProEtᵒᵖ) (s : U.obj.obj V) (r : S.obj.obj V)
+        (x : (P.X p).val.obj V),
+        (f.f p).val.app V
+          (reductionTensorSection T ψ ((reductionChange T φ).obj (P.X p)) V s
+            (reductionTensorSection T φ (P.X p) V r x)) =
+          reductionTensorSection T χ (P.X p) V (s * ψ.hom.app V r) x := by
+  obtain ⟨f, ⟨hi, hf⟩, hu⟩ := completedAdicBalance_exists T φ ψ χ _h P
+  refine ⟨f, ⟨hi, ?_⟩, ?_⟩
+  · intro p V s r x
+    exact hf p V s r x
+  · intro g hg
+    apply hu g
+    refine ⟨hg.1, ?_⟩
+    intro p V s r x
+    exact hg.2 p V s r x
+
+/-- The canonical balancing map, selected from its unique local tensor formula.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable def reductionBalance (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (P : CochainComplex (reductionModules T R) ℤ) :
+    (reductionChangeComplex T ψ).obj ((reductionChangeComplex T φ).obj P) ⟶
+      (reductionChangeComplex T χ).obj P :=
+  (reductionBalance_exists T φ ψ χ h P).exists.choose
+
+/-- The balancing map is invertible, by its defining characterization.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+noncomputable instance reductionBalance_isIso (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (P : CochainComplex (reductionModules T R) ℤ) : IsIso (reductionBalance T φ ψ χ h P) :=
+  (reductionBalance_exists T φ ψ χ h P).exists.choose_spec.1
+
+private theorem reductionBalance_tensor (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (P : CochainComplex (reductionModules T R) ℤ)
+    (p : ℤ) (V : T.ProEtᵒᵖ) (s : U.obj.obj V) (r : S.obj.obj V)
+    (x : (P.X p).val.obj V) :
+    ((reductionBalance T φ ψ χ h P).f p).val.app V
+      (reductionTensorSection T ψ ((reductionChange T φ).obj (P.X p)) V s
+        (reductionTensorSection T φ (P.X p) V r x)) =
+      reductionTensorSection T χ (P.X p) V (s * ψ.hom.app V r) x :=
+  (reductionBalance_exists T φ ψ χ h P).exists.choose_spec.2 p V s r x
+
+attribute [local irreducible] reductionBalance
+
+private theorem reductionUnit_apply (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (M : reductionModules T R) (V : T.ProEtᵒᵖ) (x : M.val.obj V) :
+    (reductionUnit T φ M).val.app V x = reductionTensorSection T φ M V 1 x :=
+  reductionTranspose_apply T φ M _ (𝟙 _) V x
+
+private noncomputable def reductionZeroComplex (T : Scheme.{t})
+    {R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (M : reductionModules T R) :
+    CochainComplex (reductionModules T R) ℤ where
+  X _ := M
+  d _ _ := 0
+
+private noncomputable def reductionModuleTransition (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (M : reductionModules T R) :
+    (reductionRestrict T φ).obj ((reductionChange T φ).obj M) ⟶
+      (reductionRestrict T χ).obj ((reductionChange T χ).obj M) :=
+  (reductionRestrict T φ).map (reductionUnit T ψ ((reductionChange T φ).obj M)) ≫
+    (reductionRestrictCompIso T φ ψ χ h _).inv ≫
+      (reductionRestrict T χ).map ((reductionBalance T φ ψ χ h
+        (reductionZeroComplex T M)).f 0)
+
+attribute [local irreducible] reductionModuleTransition
+
+private theorem reductionModuleTransition_tensor (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    (M : reductionModules T R) (V : T.ProEtᵒᵖ) (s : S.obj.obj V) (x : M.val.obj V) :
+    (reductionModuleTransition T φ ψ χ h M).val.app V
+      (reductionTensorSection T φ M V s x) =
+        reductionTensorSection T χ M V (ψ.hom.app V s) x := by
+  unfold reductionModuleTransition
+  change ((reductionBalance T φ ψ χ h (reductionZeroComplex T M)).f 0).val.app V
+    ((reductionUnit T ψ ((reductionChange T φ).obj M)).val.app V
+      (reductionTensorSection T φ M V s x)) = _
+  rw [reductionUnit_apply]
+  exact (reductionBalance_tensor T φ ψ χ h (reductionZeroComplex T M)
+    0 V 1 s x).trans (by rw [one_mul]; rfl)
+
+private theorem reductionModuleTransition_naturality (T : Scheme.{t})
+    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
+    {M N : reductionModules T R} (f : M ⟶ N) :
+    (reductionChange T φ ⋙ reductionRestrict T φ).map f ≫
+        reductionModuleTransition T φ ψ χ h N =
+      reductionModuleTransition T φ ψ χ h M ≫
+        (reductionChange T χ ⋙ reductionRestrict T χ).map f := by
+  apply reductionRestrictedTensorHom_ext T φ M
+  intro V s x
+  change (reductionModuleTransition T φ ψ χ h N).val.app V
+    (((reductionChange T φ).map f).val.app V
+      (reductionTensorSection T φ M V s x)) =
+    ((reductionChange T χ).map f).val.app V
+      ((reductionModuleTransition T φ ψ χ h M).val.app V
+        (reductionTensorSection T φ M V s x))
+  rw [reductionChange_tensor, reductionModuleTransition_tensor,
+    reductionModuleTransition_tensor, reductionChange_tensor]
+
 /-- Ordinary reduction, with the completion's action restored by restriction of scalars.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
 noncomputable def completedReductionLevel (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
@@ -490,7 +916,30 @@ theorem completedReductionTransition_exists (T : Scheme.{t}) {A : Type (t + 1)} 
           (completedReductionProjection T d b) M U s x) =
           reductionTensorSection T (completedReductionProjection T d a) M U
             ((reductionCoefficientMap T d b a h).hom.app U s) x := by
-  sorry
+  have hc : completedReductionProjection T d b ≫ reductionCoefficientMap T d b a h =
+      completedReductionProjection T d a :=
+    limit.w (reductionCoefficientSystem T d) (homOfLE h).op
+  let τ : completedReductionLevel T d b ⟶ completedReductionLevel T d a :=
+    { app := reductionModuleTransition T (completedReductionProjection T d b)
+        (reductionCoefficientMap T d b a h) (completedReductionProjection T d a) hc
+      naturality := fun _ _ f ↦ reductionModuleTransition_naturality T
+        (completedReductionProjection T d b) (reductionCoefficientMap T d b a h)
+        (completedReductionProjection T d a) hc f }
+  have hτ : ∀ (M : reductionModules T (completedReductionCoefficient T d))
+      (U : T.ProEtᵒᵖ) (s : (reductionCoefficient T d b).obj.obj U) (x : M.val.obj U),
+      (τ.app M).val.app U (reductionTensorSection T
+        (completedReductionProjection T d b) M U s x) =
+        reductionTensorSection T (completedReductionProjection T d a) M U
+          ((reductionCoefficientMap T d b a h).hom.app U s) x :=
+    reductionModuleTransition_tensor T (completedReductionProjection T d b)
+      (reductionCoefficientMap T d b a h) (completedReductionProjection T d a) hc
+  refine ⟨τ, hτ, ?_⟩
+  intro σ hσ
+  apply NatTrans.ext
+  funext M
+  apply reductionRestrictedTensorHom_ext T (completedReductionProjection T d b) M
+  intro U s x
+  exact (hσ M U s x).trans (hτ M U s x).symm
 
 /-- The canonical transition, specified uniquely on tensor generators.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -498,6 +947,8 @@ noncomputable def completedReductionTransition (T : Scheme.{t}) {A : Type (t + 1
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     completedReductionLevel T d b ⟶ completedReductionLevel T d a :=
   (completedReductionTransition_exists T d b a h).exists.choose
+
+attribute [local irreducible] completedReductionTransition
 
 /-- The ordinary strict tower of a module sheaf, at all positive powers.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -641,8 +1092,7 @@ theorem completedReductionTower_exists (T : Scheme.{t}) {A : Type (t + 1)} [Comm
       have : PreservesFiniteColimits (reductionRestrict T φ) :=
         preservesFiniteColimits_of_reflects_of_preserves _ V
       have : QuasiIso (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a) :=
-        (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.1
-          a hP hQ ha
+        reductionChange_quasiIso T φ a hP hQ ha
       exact inferInstanceAs (QuasiIso
         (((reductionRestrict T φ).mapHomologicalComplex (.up ℤ)).map
           (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map a)))
@@ -671,53 +1121,6 @@ noncomputable def completedReductionObject (T : Scheme.{t}) {A : Type (t + 1)} [
     (d : AdicCoefficientDatum A) (n : ℕ)
     (K : reductionDerivedCategory T (completedReductionCoefficient T d)) :=
   (reductionDerivedChange T (completedReductionProjection T d n)).obj K
-
-/-- The ordinary coefficient-change complex, with its actual scalar-extension differential.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
-noncomputable def reductionChangeComplex (T : Scheme.{t})
-    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
-    CochainComplex (reductionModules T R) ℤ ⥤ CochainComplex (reductionModules T S) ℤ :=
-  (reductionChange T φ).mapHomologicalComplex (ComplexShape.up ℤ)
-
-/-- The canonical balancing chain map is uniquely determined on local tensor generators.
-Source: blueprint order 1239, normalization paragraph; Stacks Tag 03EK
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: send s tensor (r tensor x) to (s*ψ(r)) tensor x. The relation ψφ=χ makes
-this balanced over both rings. Sheafification extends it uniquely; restrictions and
-differentials commute with the formula. The inverse sends s tensor x to s tensor
-(1 tensor x). Balancing verifies both inverse identities. Local tensor generation
-proves uniqueness, including on the empty site object. -/
-theorem reductionBalance_exists (T : Scheme.{t})
-    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
-    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (_h : φ ≫ ψ = χ)
-    (P : CochainComplex (reductionModules T R) ℤ) :
-    ∃! f : (reductionChangeComplex T ψ).obj ((reductionChangeComplex T φ).obj P) ⟶
-        (reductionChangeComplex T χ).obj P,
-      IsIso f ∧ ∀ (p : ℤ) (V : T.ProEtᵒᵖ) (s : U.obj.obj V) (r : S.obj.obj V)
-        (x : (P.X p).val.obj V),
-        (f.f p).val.app V
-          (reductionTensorSection T ψ ((reductionChange T φ).obj (P.X p)) V s
-            (reductionTensorSection T φ (P.X p) V r x)) =
-          reductionTensorSection T χ (P.X p) V (s * ψ.hom.app V r) x := by
-  exact completedAdicBalance_exists T φ ψ χ _h P
-
-/-- The canonical balancing map, selected from its unique local tensor formula.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
-noncomputable def reductionBalance (T : Scheme.{t})
-    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
-    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
-    (P : CochainComplex (reductionModules T R) ℤ) :
-    (reductionChangeComplex T ψ).obj ((reductionChangeComplex T φ).obj P) ⟶
-      (reductionChangeComplex T χ).obj P :=
-  (reductionBalance_exists T φ ψ χ h P).exists.choose
-
-/-- The balancing map is invertible, by its defining characterization.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
-noncomputable instance reductionBalance_isIso (T : Scheme.{t})
-    {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
-    (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
-    (P : CochainComplex (reductionModules T R) ℤ) : IsIso (reductionBalance T φ ψ χ h P) :=
-  (reductionBalance_exists T φ ψ χ h P).exists.choose_spec.1
 
 /-- The completion projection followed by a quotient transition is the earlier projection.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
@@ -755,7 +1158,27 @@ theorem reductionBalance_naturality (T : Scheme.{t})
     (reductionChangeComplex T ψ).map ((reductionChangeComplex T φ).map f) ≫
         reductionBalance T φ ψ χ h Q =
       reductionBalance T φ ψ χ h P ≫ (reductionChangeComplex T χ).map f := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro p
+  apply reductionDoubleTensorHom_ext T φ ψ
+  intro V x
+  change ((reductionBalance T φ ψ χ h Q).f p).val.app V
+      (((reductionChange T ψ).map ((reductionChange T φ).map (f.f p))).val.app V
+        (reductionTensorSection T ψ _ V 1 (reductionTensorSection T φ _ V 1 x))) =
+    ((reductionChange T χ).map (f.f p)).val.app V
+      (((reductionBalance T φ ψ χ h P).f p).val.app V
+        (reductionTensorSection T ψ _ V 1 (reductionTensorSection T φ _ V 1 x)))
+  have h₁ := reductionChange_tensor T ψ ((reductionChange T φ).map (f.f p)) V 1
+    (reductionTensorSection T φ _ V 1 x)
+  have h₂ := reductionChange_tensor T φ (f.f p) V 1 x
+  have h₃ := reductionBalance_tensor T φ ψ χ h Q p V 1 1 ((f.f p).val.app V x)
+  have h₄ := reductionBalance_tensor T φ ψ χ h P p V 1 1 x
+  have h₅ := reductionChange_tensor T χ (f.f p) V (1 * ψ.hom.app V 1) x
+  exact (congrArg (fun z ↦ ((reductionBalance T φ ψ χ h Q).f p).val.app V z) h₁).trans
+    ((congrArg (fun z ↦ ((reductionBalance T φ ψ χ h Q).f p).val.app V
+      (reductionTensorSection T ψ _ V 1 z)) h₂).trans
+        (h₃.trans (h₅.symm.trans
+          (congrArg (fun z ↦ ((reductionChange T χ).map (f.f p)).val.app V z) h₄.symm))))
 
 /-- The quotient normalization cocycle, with the actual associativity balancing map.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
@@ -770,7 +1193,44 @@ theorem reductionBalance_cocycle (T : Scheme.{t})
         reductionBalance T (φ ≫ ψ) θ ((φ ≫ ψ) ≫ θ) rfl P =
       reductionBalance T ψ θ (ψ ≫ θ) rfl ((reductionChangeComplex T φ).obj P) ≫
         reductionBalance T φ (ψ ≫ θ) ((φ ≫ ψ) ≫ θ) (Category.assoc φ ψ θ).symm P := by
-  sorry
+  apply HomologicalComplex.hom_ext
+  intro p
+  apply reductionTripleTensorHom_ext T φ ψ θ
+  intro W x
+  change ((reductionBalance T (φ ≫ ψ) θ ((φ ≫ ψ) ≫ θ) rfl P).f p).val.app W
+      (((reductionChange T θ).map
+        ((reductionBalance T φ ψ (φ ≫ ψ) rfl P).f p)).val.app W
+          (reductionTensorSection T θ _ W 1
+            (reductionTensorSection T ψ _ W 1 (reductionTensorSection T φ _ W 1 x)))) =
+    ((reductionBalance T φ (ψ ≫ θ) ((φ ≫ ψ) ≫ θ)
+      (Category.assoc φ ψ θ).symm P).f p).val.app W
+        (((reductionBalance T ψ θ (ψ ≫ θ) rfl
+          ((reductionChangeComplex T φ).obj P)).f p).val.app W
+            (reductionTensorSection T θ _ W 1
+              (reductionTensorSection T ψ _ W 1 (reductionTensorSection T φ _ W 1 x))))
+  have h₁ := reductionChange_tensor T θ
+    ((reductionBalance T φ ψ (φ ≫ ψ) rfl P).f p) W 1
+      (reductionTensorSection T ψ _ W 1 (reductionTensorSection T φ _ W 1 x))
+  have h₂ := reductionBalance_tensor T φ ψ (φ ≫ ψ) rfl P p W 1 1 x
+  have h₃ := reductionBalance_tensor T (φ ≫ ψ) θ ((φ ≫ ψ) ≫ θ) rfl P p W
+    1 (1 * ψ.hom.app W 1) x
+  have h₄ := reductionBalance_tensor T ψ θ (ψ ≫ θ) rfl
+    ((reductionChangeComplex T φ).obj P) p W 1 1
+      (reductionTensorSection T φ _ W 1 x)
+  have h₅ := reductionBalance_tensor T φ (ψ ≫ θ) ((φ ≫ ψ) ≫ θ)
+    (Category.assoc φ ψ θ).symm P p W (1 * θ.hom.app W 1) 1 x
+  have hcoeff : (1 : V.obj.obj W) * θ.hom.app W (1 * ψ.hom.app W 1) =
+      (1 * θ.hom.app W 1) * (ψ ≫ θ).hom.app W 1 := by
+    simp only [map_one, one_mul]
+  exact (congrArg (fun z ↦
+      ((reductionBalance T (φ ≫ ψ) θ ((φ ≫ ψ) ≫ θ) rfl P).f p).val.app W z) h₁).trans
+    ((congrArg (fun z ↦
+      ((reductionBalance T (φ ≫ ψ) θ ((φ ≫ ψ) ≫ θ) rfl P).f p).val.app W
+        (reductionTensorSection T θ _ W 1 z)) h₂).trans
+      (h₃.trans ((congrArg (fun z ↦ reductionTensorSection T ((φ ≫ ψ) ≫ θ)
+        (P.X p) W z x) hcoeff).trans (h₅.symm.trans
+          (congrArg (fun z ↦ ((reductionBalance T φ (ψ ≫ θ) ((φ ≫ ψ) ≫ θ)
+            (Category.assoc φ ψ θ).symm P).f p).val.app W z) h₄.symm)))))
 
 /-- The consecutive transition is natural in strict towers.
 Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum).
@@ -816,12 +1276,7 @@ noncomputable def completedTowerDerivedStep (T : Scheme.{t})
       (reductionModuleRing T (completedReductionCoefficient T d)) n) (ComplexShape.up ℤ))
         DerivedCategory.Q)).app M
 
-end AlgebraicGeometry.Scheme
-
-@[expose] public noncomputable section
-set_option autoImplicit false
 universe u₁ v₁ w₁ u₂ v₂ w₂
-namespace AlgebraicGeometry.Scheme
 
 /-- Read a universal homotopy counit on a complex using the canonical factorization maps.
 Source: Stacks Tags 06XN and 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -899,6 +1354,272 @@ noncomputable abbrev reductionDerivedRestrict (T : Scheme.{t})
 
 
 
+universe e w z
+
+set_option synthInstance.maxSize 2048 in
+set_option maxRecDepth 2048 in
+set_option backward.isDefEq.respectTransparency false in
+private theorem restrictionLocalization
+    {A : Type u} [Category.{e} A] {D : Type w} [Category.{z} D]
+    (W : MorphismProperty A) [W.HasRightCalculusOfFractions]
+    (L : A ⥤ D) [L.IsLocalization W] (P : ObjectProperty A)
+    (res : ∀ X : A, ∃ (Y : P.FullSubcategory) (s : Y.obj ⟶ X), W s) :
+    (P.ι ⋙ L).IsLocalization (W.inverseImage P.ι) := by
+  let V := W.inverseImage P.ι
+  have : V.HasRightCalculusOfFractions :=
+    { exists_rightFraction := by
+        intro X Y φ
+        obtain ⟨ψ, hψ⟩ := (MorphismProperty.LeftFraction.mk φ.f.hom φ.s.hom φ.hs
+          : W.LeftFraction X.obj Y.obj).exists_rightFraction
+        obtain ⟨Z, r, hr⟩ := res ψ.X'
+        refine ⟨MorphismProperty.RightFraction.mk
+          (ObjectProperty.homMk (r ≫ ψ.s)) (W.comp_mem _ _ hr ψ.hs)
+          (ObjectProperty.homMk (r ≫ ψ.f)), ?_⟩
+        apply ObjectProperty.hom_ext
+        exact (Category.assoc _ _ _).trans ((congrArg (r ≫ ·) hψ).trans
+          (Category.assoc _ _ _).symm)
+      ext := by
+        intro X Y Y' f g s hs h
+        obtain ⟨Z, t, ht, heq⟩ := MorphismProperty.HasRightCalculusOfFractions.ext
+          f.hom g.hom s.hom hs (congrArg (fun k ↦ k.hom) h)
+        obtain ⟨T, r, hr⟩ := res Z
+        refine ⟨T, ObjectProperty.homMk (r ≫ t), W.comp_mem _ _ hr ht, ?_⟩
+        apply ObjectProperty.hom_ext
+        exact (Category.assoc _ _ _).trans ((congrArg (r ≫ ·) heq).trans
+          (Category.assoc _ _ _).symm) }
+  let h : V.IsInvertedBy (P.ι ⋙ L) := fun _ _ s hs ↦ Localization.inverts L W s.hom hs
+  let F := Localization.Construction.lift (P.ι ⋙ L) h
+  have fac : V.Q ⋙ F = P.ι ⋙ L := Localization.Construction.fac _ _
+  have fmap {X Y : P.FullSubcategory} (f : X ⟶ Y) :
+      F.map (V.Q.map f) = L.map f.hom := by
+    simpa using (eqToIso fac).hom.naturality f
+  have hf : F.Full := by
+    refine ⟨?_⟩
+    intro X Y f
+    let X₀ : P.FullSubcategory := X.as.obj
+    let Y₀ : P.FullSubcategory := Y.as.obj
+    obtain ⟨φ, hφ⟩ := Localization.exists_rightFraction L W
+      (show L.obj X₀.obj ⟶ L.obj Y₀.obj from f)
+    obtain ⟨Z, r, hr⟩ := res φ.X'
+    let ψ : V.RightFraction X₀ Y₀ := MorphismProperty.RightFraction.mk
+      (ObjectProperty.homMk (r ≫ φ.s)) (W.comp_mem _ _ hr φ.hs)
+      (ObjectProperty.homMk (r ≫ φ.f))
+    refine ⟨ψ.map V.Q (Localization.inverts _ _), ?_⟩
+    have : IsIso (L.map r) := Localization.inverts L W r hr
+    have : IsIso (L.map φ.s) := Localization.inverts L W φ.s φ.hs
+    have : IsIso (L.map (r ≫ φ.s)) :=
+      Localization.inverts L W _ (W.comp_mem _ _ hr φ.hs)
+    simp only [MorphismProperty.RightFraction.map, Functor.map_comp, Functor.map_inv, fmap]
+    change inv (L.map (r ≫ φ.s)) ≫ L.map (r ≫ φ.f) = f
+    rw [hφ]
+    simp [MorphismProperty.RightFraction.map]
+  have hfaith : F.Faithful := by
+    refine ⟨?_⟩
+    intro X Y f g heq
+    let X₀ : P.FullSubcategory := X.as.obj
+    let Y₀ : P.FullSubcategory := Y.as.obj
+    obtain ⟨φ, rfl⟩ := Localization.exists_rightFraction V.Q V
+      (show V.Q.obj X₀ ⟶ V.Q.obj Y₀ from f)
+    obtain ⟨ψ, rfl⟩ := Localization.exists_rightFraction V.Q V
+      (show V.Q.obj X₀ ⟶ V.Q.obj Y₀ from g)
+    let φ' : W.RightFraction X₀.obj Y₀.obj :=
+      MorphismProperty.RightFraction.mk φ.s.hom φ.hs φ.f.hom
+    let ψ' : W.RightFraction X₀.obj Y₀.obj :=
+      MorphismProperty.RightFraction.mk ψ.s.hom ψ.hs ψ.f.hom
+    have heq' : φ'.map L (Localization.inverts _ _) =
+        ψ'.map L (Localization.inverts _ _) := by
+      simpa only [MorphismProperty.RightFraction.map, Functor.map_comp, Functor.map_inv,
+        fmap] using heq
+    obtain ⟨Z, a, b, hs, hf, hw⟩ :=
+      (MorphismProperty.RightFraction.map_eq_iff L W φ' ψ').1 heq'
+    obtain ⟨T, r, hr⟩ := res Z
+    apply (MorphismProperty.RightFraction.map_eq_iff V.Q V φ ψ).2
+    refine ⟨T, ObjectProperty.homMk (r ≫ a), ObjectProperty.homMk (r ≫ b), ?_, ?_, ?_⟩
+    · apply ObjectProperty.hom_ext
+      exact (Category.assoc _ _ _).trans ((congrArg (r ≫ ·) hs).trans
+        (Category.assoc _ _ _).symm)
+    · apply ObjectProperty.hom_ext
+      exact (Category.assoc _ _ _).trans ((congrArg (r ≫ ·) hf).trans
+        (Category.assoc _ _ _).symm)
+    · change W ((r ≫ a) ≫ φ.s.hom)
+      rw [Category.assoc]
+      exact W.comp_mem _ _ hr hw
+  have hess : F.EssSurj := by
+    refine ⟨?_⟩
+    intro X
+    have := Localization.essSurj L W
+    let Y := L.objPreimage X
+    let e := L.objObjPreimageIso X
+    obtain ⟨Z, r, hr⟩ := res Y
+    exact ⟨V.Q.obj Z, ⟨Localization.isoOfHom L W r hr ≪≫ e⟩⟩
+  have : F.IsEquivalence := { }
+  have : (V.Q ⋙ F).IsLocalization V := inferInstance
+  exact Functor.IsLocalization.of_iso V (eqToIso fac)
+
+
+private theorem compareOnComplexes
+    {C H : Type*} [Category C] [Abelian C] [HasDerivedCategory C] [Category H]
+    (P : CochainComplex C ℤ → Prop)
+    (hres : ∀ K : CochainComplex C ℤ,
+      ∃ (K' : CochainComplex C ℤ) (s : K' ⟶ K), P K' ∧ QuasiIso s)
+    (F G : DerivedCategory C ⥤ H) (B : CochainComplex C ℤ ⥤ H)
+    (α : DerivedCategory.Q ⋙ F ⟶ B) (β : DerivedCategory.Q ⋙ G ⟶ B)
+    (hα : ∀ K, P K → IsIso (α.app K)) (hβ : ∀ K, P K → IsIso (β.app K)) :
+    ∃! τ : F ⟶ G, IsIso τ ∧
+      ∀ K, P K → τ.app (DerivedCategory.Q.obj K) ≫ β.app K = α.app K := by
+  let S : ObjectProperty (HomotopyCategory C (.up ℤ)) := fun X ↦ P X.as
+  let W := HomotopyCategory.quasiIso C (.up ℤ)
+  let L := S.ι ⋙ (DerivedCategory.Qh : HomotopyCategory C (.up ℤ) ⥤ _)
+  have : L.IsLocalization (W.inverseImage S.ι) := by
+    apply restrictionLocalization W DerivedCategory.Qh S
+    intro X
+    obtain ⟨K, s, hK, hs⟩ := hres X.as
+    exact ⟨⟨(HomotopyCategory.quotient C (.up ℤ)).obj K, hK⟩,
+      (HomotopyCategory.quotient C (.up ℤ)).map s,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  let i := DerivedCategory.quotientCompQhIso C
+  let e (K : CochainComplex C ℤ) (hK : P K) :
+      F.obj (DerivedCategory.Q.obj K) ≅ G.obj (DerivedCategory.Q.obj K) :=
+    let := hα K hK
+    let := hβ K hK
+    asIso (α.app K) ≪≫ (asIso (β.app K)).symm
+  have he {K K' : CochainComplex C ℤ} (hK : P K) (hK' : P K') (f : K ⟶ K') :
+      F.map (DerivedCategory.Q.map f) ≫ (e K' hK').hom =
+        (e K hK).hom ≫ G.map (DerivedCategory.Q.map f) := by
+    let := hβ K hK
+    let := hβ K' hK'
+    apply (cancel_mono (β.app K')).1
+    dsimp only [e, Iso.trans_hom, asIso_hom, Iso.symm_hom, asIso_inv]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    have hb := β.naturality f
+    dsimp only [Functor.comp_map] at hb
+    rw [hb]
+    simp only [IsIso.inv_hom_id_assoc]
+    exact α.naturality f
+  let c : L ⋙ F ≅ L ⋙ G := NatIso.ofComponents
+    (fun X ↦ F.mapIso (i.app X.obj.as) ≪≫ e X.obj.as X.property ≪≫
+      G.mapIso (i.app X.obj.as).symm) (by
+        intro X Y f
+        obtain ⟨K, hK⟩ := X
+        obtain ⟨K', hK'⟩ := Y
+        obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+        obtain ⟨K', rfl⟩ := HomotopyCategory.quotient_obj_surjective K'
+        change P K at hK
+        change P K' at hK'
+        obtain ⟨f₀, hf⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective f.hom
+        dsimp only [L, Functor.comp_map, ObjectProperty.ι_map, Iso.trans_hom,
+          Functor.mapIso_hom, Iso.symm_hom, Functor.mapIso_inv]
+        change F.map (DerivedCategory.Qh.map f.hom) ≫
+          (F.map (i.hom.app K') ≫ (e K' hK').hom ≫ G.map (i.inv.app K')) =
+          (F.map (i.hom.app K) ≫ (e K hK).hom ≫ G.map (i.inv.app K)) ≫
+            G.map (DerivedCategory.Qh.map f.hom)
+        rw [← hf]
+        have hn := i.hom.naturality f₀
+        have hn' := i.inv.naturality f₀
+        dsimp only [Functor.comp_map] at hn hn'
+        rw [← F.map_comp_assoc, hn, F.map_comp, Category.assoc,
+          ← Category.assoc (F.map (DerivedCategory.Q.map f₀)), he hK hK' f₀,
+          Category.assoc, ← G.map_comp, hn', G.map_comp]
+        simp only [Category.assoc])
+  let E := Localization.fullyFaithfulWhiskeringLeft L (W.inverseImage S.ι) H
+  let τ := E.preimageIso c
+  have hτ (K : CochainComplex C ℤ) (hK : P K) :
+      τ.hom.app (DerivedCategory.Q.obj K) ≫ β.app K = α.app K := by
+    let X : S.FullSubcategory := ⟨(HomotopyCategory.quotient C (.up ℤ)).obj K, hK⟩
+    have hc := congrArg (fun k ↦ k.app X) (E.map_preimage c.hom)
+    have hn := τ.hom.naturality (i.hom.app K)
+    change τ.hom.app (DerivedCategory.Qh.obj X.obj) =
+      F.map (i.hom.app K) ≫ (e K hK).hom ≫ G.map (i.inv.app K) at hc
+    change τ.hom.app ((HomotopyCategory.quotient C (.up ℤ) ⋙
+      DerivedCategory.Qh).obj K) = _ at hc
+    have hh : τ.hom.app (DerivedCategory.Q.obj K) = (e K hK).hom := by
+      apply (cancel_epi (F.map (i.hom.app K))).1
+      rw [hn, hc]
+      simp only [Category.assoc, ← G.map_comp, i.inv_hom_id_app, G.map_id,
+        Category.comp_id]
+    rw [hh]
+    let := hβ K hK
+    simp [e]
+  refine ⟨τ.hom, ⟨inferInstance, hτ⟩, ?_⟩
+  intro σ hσ
+  apply E.map_injective
+  ext X
+  let K := X.obj.as
+  let := hβ K X.property
+  have h := (cancel_mono (β.app K)).1 ((hσ.2 K X.property).trans (hτ K X.property).symm)
+  have hn := σ.naturality (i.hom.app K)
+  have hn' := τ.hom.naturality (i.hom.app K)
+  apply (cancel_mono (G.map (i.hom.app K))).1
+  exact hn.symm.trans ((congrArg (fun k ↦ F.map (i.hom.app K) ≫ k) h).trans hn')
+
+
+private noncomputable def complexCounitNat
+    {B : Type u} [Category.{e} B] [Abelian B] [HasDerivedCategory.{w} B]
+    {D : Type z} [Category D] [Abelian D] [HasDerivedCategory D]
+    (E : B ⥤ D) [E.Additive] (L : DerivedCategory B ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) :
+    DerivedCategory.Q ⋙ L ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
+  app P := reductionComplexCounit E L ε P
+  naturality P Q f := by
+    unfold reductionComplexCounit
+    have h := ε.naturality ((HomotopyCategory.quotient B (.up ℤ)).map f)
+    have h₀ := (DerivedCategory.quotientCompQhIso B).inv.naturality f
+    have h₁ := (E.mapHomotopyCategoryFactors (.up ℤ)).hom.naturality f
+    have h₂ := (DerivedCategory.quotientCompQhIso D).hom.naturality
+      ((E.mapHomologicalComplex (.up ℤ)).map f)
+    dsimp only [Functor.comp_map] at h h₀ h₁ h₂ ⊢
+    rw [← L.map_comp_assoc, h₀, L.map_comp]
+    simp only [Category.assoc]
+    rw [reassoc_of% h]
+    rw [← DerivedCategory.Qh.map_comp_assoc, h₁, DerivedCategory.Qh.map_comp,
+      Category.assoc, h₂]
+
+private theorem complexCounitIso
+    {B : Type u} [Category.{e} B] [Abelian B] [HasDerivedCategory.{w} B]
+    {D : Type z} [Category D] [Abelian D] [HasDerivedCategory D]
+    (E : B ⥤ D) [E.Additive] (L : DerivedCategory B ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶
+      E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex B ℤ)
+    (h : IsIso (ε.app ((HomotopyCategory.quotient B (.up ℤ)).obj P))) :
+    IsIso ((complexCounitNat E L ε).app P) := by
+  let := h
+  change IsIso (reductionComplexCounit E L ε P)
+  unfold reductionComplexCounit
+  infer_instance
+
+
+attribute [local irreducible] reductionComplexCounit
+
+set_option synthInstance.maxSize 2048 in
+open CategoryTheory.Limits MonoidalCategory in
+private theorem reductionChange_kflat (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (reductionModules T R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hflat : ∀ p : ℤ, exactFunctor _ _
+      (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (P.X p))) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := S)
+      ((reductionChangeComplex T φ).obj P) := by
+  let e : (reductionChangeComplex T φ).obj P ≅ SheafOfModules.changeOfRingsComplex.{t + 1, t} φ P :=
+    HomologicalComplex.Hom.isoOfComponents
+      (V := reductionModules T S)
+      (C₁ := (reductionChangeComplex T φ).obj P)
+      (C₂ := SheafOfModules.changeOfRingsComplex.{t + 1, t} φ P)
+      (fun i ↦ reductionTensorPresentation T φ (P.X i)) (by
+        intro i j hij
+        exact (reductionTensorPresentation_naturality T φ (P.d i j)).symm)
+  have hP' := (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).1 hP
+  have hraw :=
+    (SheafOfModules.changeOfRings_isKFlat_of_flat_terms.{t + 1, t} φ P hP' hflat).1
+  apply (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).2
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  intro F hF i
+  exact (hraw F hF i).of_iso
+    (((curriedTensor _).map₂CochainComplex.obj F).mapIso e.symm)
+
 /-- The quotient normalization is uniquely specified on every K-flat computation by
 ordinary balancing and the universal scalar-extension counits.
 Source: blueprint order 1239, normalization paragraph; Stacks Tag 06YY
@@ -929,7 +1650,81 @@ theorem completedReductionDerivedNormalization_exists (T : Scheme.{t})
               (reductionBalance T (completedReductionProjection T d b)
                 (reductionCoefficientMap T d b a h) (completedReductionProjection T d a)
                 (completedReductionProjection_comp T d b a h) P) := by
-  sorry
+  let φ := completedReductionProjection T d b
+  let ψ := reductionCoefficientMap T d b a h
+  let χ := completedReductionProjection T d a
+  let hc := completedReductionProjection_comp T d b a h
+  let E := reductionChangeComplex T φ
+  let F := reductionChangeComplex T ψ
+  let G := reductionChangeComplex T χ
+  let LF := reductionDerivedChange T ψ
+  let cφ := complexCounitNat (reductionChange T φ) (reductionDerivedChange T φ)
+    (reductionDerivedCounit T φ)
+  let cψ := complexCounitNat (reductionChange T ψ) LF (reductionDerivedCounit T ψ)
+  let cχ := complexCounitNat (reductionChange T χ) (reductionDerivedChange T χ)
+    (reductionDerivedCounit T χ)
+  let α : DerivedCategory.Q ⋙ (reductionDerivedChange T φ ⋙ LF) ⟶
+      G ⋙ DerivedCategory.Q :=
+    { app := fun P ↦ LF.map (cφ.app P) ≫ cψ.app (E.obj P) ≫
+        DerivedCategory.Q.map (reductionBalance T φ ψ χ hc P)
+      naturality := by
+        intro P Q f
+        have hφ := cφ.naturality f
+        have hψ := cψ.naturality (E.map f)
+        have hb := congrArg DerivedCategory.Q.map (reductionBalance_naturality T φ ψ χ hc f)
+        change (reductionDerivedChange T φ).map (DerivedCategory.Q.map f) ≫ cφ.app Q =
+          cφ.app P ≫ DerivedCategory.Q.map (E.map f) at hφ
+        change LF.map (DerivedCategory.Q.map (E.map f)) ≫ cψ.app (E.obj Q) =
+          cψ.app (E.obj P) ≫ DerivedCategory.Q.map (F.map (E.map f)) at hψ
+        simp only [Functor.map_comp] at hb
+        change DerivedCategory.Q.map (F.map (E.map f)) ≫
+            DerivedCategory.Q.map (reductionBalance T φ ψ χ hc Q) =
+          DerivedCategory.Q.map (reductionBalance T φ ψ χ hc P) ≫
+            DerivedCategory.Q.map (G.map f) at hb
+        dsimp only [Functor.comp_map]
+        rw [← LF.map_comp_assoc, hφ, LF.map_comp]
+        simp only [Category.assoc]
+        rw [reassoc_of% hψ, hb] }
+  refine compareOnComplexes
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedReductionCoefficient T d) P) ?_ _ _ _ α cχ ?_ ?_
+  · intro P
+    obtain ⟨Q, s, hQ, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedReductionCoefficient T d) P
+    exact ⟨Q, s, hQ, hs⟩
+  · intro P hP
+    obtain ⟨Q, s, hQ, hflat, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedReductionCoefficient T d) P
+    have hQφ := reductionChange_kflat T φ Q hQ hflat
+    have : IsIso (cφ.app Q) := complexCounitIso _ _ _ Q
+      (reductionDerivedCounit_kflat T φ Q hQ)
+    have : IsIso (cψ.app (E.obj Q)) := complexCounitIso _ _ _ (E.obj Q)
+      (reductionDerivedCounit_kflat T ψ (E.obj Q) hQφ)
+    have : IsIso (α.app Q) := by
+      change IsIso (_ ≫ _ ≫ _)
+      infer_instance
+    have : QuasiIso s := hs
+    have : QuasiIso (G.map s) :=
+      reductionChange_quasiIso T χ s hQ hP hs
+    have : IsIso (DerivedCategory.Q.map s) := by infer_instance
+    have : IsIso ((G ⋙ DerivedCategory.Q).map s) := by
+      change IsIso (DerivedCategory.Q.map (G.map s))
+      infer_instance
+    have hn := α.naturality s
+    have : IsIso ((DerivedCategory.Q ⋙ (reductionDerivedChange T φ ⋙ LF)).map s) := by
+      dsimp only [Functor.comp_map]
+      infer_instance
+    have : IsIso ((DerivedCategory.Q ⋙ (reductionDerivedChange T φ ⋙ LF)).map s ≫
+        α.app P) := by
+      rw [hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_left
+      ((DerivedCategory.Q ⋙ (reductionDerivedChange T φ ⋙ LF)).map s) (α.app P)
+  · intro P hP
+    exact complexCounitIso _ _ _ P
+      (reductionDerivedCounit_kflat T χ P hP)
 
 /-- The canonical normalization natural transformation, fixed by its K-flat formula.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -991,6 +1786,8 @@ noncomputable def completedReductionTowerComplexCounit (T : Scheme.{t})
   reductionComplexCounit (completedReductionModuleTowerFunctor T d)
     (completedReductionTower T d) (coherenceReductionTowerCounit T d) P
 
+attribute [local irreducible] completedReductionTower
+
 /-- Derived tower evaluation is canonically restriction of the quotient object K_n.
 The equation fixes this comparison on every K-flat representative by the actual tower
 and scalar-extension counits; no arbitrary identification is chosen.
@@ -1026,7 +1823,73 @@ theorem completedReductionEvaluation_exists (T : Scheme.{t})
               (reductionModuleRing T
                 (completedReductionCoefficient T d)) n).mapDerivedCategoryFactors.hom.app
                   ((completedReductionComplexTowerFunctor T d).obj P) := by
-  sorry
+  let φ := completedReductionProjection T d n
+  let E := completedReductionModuleTowerFunctor T d
+  let V := reductionTowerEvaluation T
+    (reductionModuleRing T (completedReductionCoefficient T d)) n
+  let R := reductionRestrict T φ
+  let α : DerivedCategory.Q ⋙ (completedReductionTower T d ⋙ V.mapDerivedCategory) ⟶
+      (E.mapHomologicalComplex (.up ℤ) ⋙ V.mapHomologicalComplex (.up ℤ)) ⋙
+        DerivedCategory.Q :=
+    { app := fun P ↦ V.mapDerivedCategory.map (completedReductionTowerComplexCounit T d P) ≫
+        V.mapDerivedCategoryFactors.hom.app ((completedReductionComplexTowerFunctor T d).obj P)
+      naturality := by
+        intro P Q f
+        have h := (complexCounitNat E (completedReductionTower T d)
+          (coherenceReductionTowerCounit T d)).naturality f
+        change (completedReductionTower T d).map (DerivedCategory.Q.map f) ≫
+          completedReductionTowerComplexCounit T d Q =
+          completedReductionTowerComplexCounit T d P ≫
+            DerivedCategory.Q.map ((completedReductionComplexTowerFunctor T d).map f) at h
+        dsimp only [Functor.comp_map]
+        rw [← Category.assoc, ← V.mapDerivedCategory.map_comp, h,
+          V.mapDerivedCategory.map_comp, Category.assoc,
+          V.mapDerivedCategoryFactors_hom_naturality
+            ((completedReductionComplexTowerFunctor T d).map f)]
+        simp only [Category.assoc]
+        rfl }
+  let β : DerivedCategory.Q ⋙ (reductionDerivedChange T φ ⋙ R.mapDerivedCategory) ⟶
+      (E.mapHomologicalComplex (.up ℤ) ⋙ V.mapHomologicalComplex (.up ℤ)) ⋙
+        DerivedCategory.Q :=
+    { app := fun P ↦ R.mapDerivedCategory.map (reductionScalarComplexCounit T φ P) ≫
+        R.mapDerivedCategoryFactors.hom.app ((reductionChangeComplex T φ).obj P)
+      naturality := by
+        intro P Q f
+        have h := (complexCounitNat (reductionChange T φ) (reductionDerivedChange T φ)
+          (reductionDerivedCounit T φ)).naturality f
+        change (reductionDerivedChange T φ).map (DerivedCategory.Q.map f) ≫
+          reductionScalarComplexCounit T φ Q =
+          reductionScalarComplexCounit T φ P ≫
+            DerivedCategory.Q.map ((reductionChangeComplex T φ).map f) at h
+        dsimp only [Functor.comp_map]
+        rw [← Category.assoc, ← R.mapDerivedCategory.map_comp, h,
+          R.mapDerivedCategory.map_comp, Category.assoc,
+          R.mapDerivedCategoryFactors_hom_naturality ((reductionChangeComplex T φ).map f)]
+        simp only [Category.assoc]
+        rfl }
+  refine compareOnComplexes
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedReductionCoefficient T d) P) ?_
+    _ _ _ α β ?_ ?_
+  · intro P
+    obtain ⟨Q, s, hQ, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedReductionCoefficient T d) P
+    exact ⟨Q, s, hQ, hs⟩
+  · intro P hP
+    have hc := (completedReductionTower_properties T d).2.2 P hP
+    have : IsIso (completedReductionTowerComplexCounit T d P) :=
+      complexCounitIso E (completedReductionTower T d) (coherenceReductionTowerCounit T d) P hc
+    change IsIso (_ ≫ _)
+    infer_instance
+  · intro P hP
+    have hc := reductionDerivedCounit_kflat T φ P hP
+    have : IsIso (reductionScalarComplexCounit T φ P) :=
+      complexCounitIso (reductionChange T φ) (reductionDerivedChange T φ)
+        (reductionDerivedCounit T φ) P hc
+    change IsIso (_ ≫ _)
+    infer_instance
+
 
 /-- The canonical evaluation comparison, fixed by its formula on K-flat representatives.
 Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
