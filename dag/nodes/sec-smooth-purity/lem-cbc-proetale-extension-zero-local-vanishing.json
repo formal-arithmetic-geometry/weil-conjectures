@@ -1,0 +1,109 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+  "place": "node lem-cbc-proetale-extension-zero, proof paragraphs 2 and 3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleExtensionZero",
+  "date": "2026-10-19",
+  "group": "U5"
+ },
+ "id": "lem-cbc-proetale-extension-zero-local-vanishing",
+ "title": "Sections of pro-etale extension by zero vanish locally near the complement",
+ "statement": "For any ring R, open immersion j: U -> X, module sheaf F on U_proet, weakly etale neighbourhood V over X, section s of j_!F over V, and point x of V outside the image of U, there is a pro-etale-site morphism f: Vprime -> V whose image contains x and on which s restricts to zero.",
+ "stmt_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Use local surjectivity of the sheafification unit for the presheaf left Kan extension along the open localization. Choose a covering family on which s lifts, and a member with a point y over x. The comma category computing the Kan extension at this member is empty: any object would factor its structure map through U, contradicting that y maps outside U. Its colimit is therefore zero, and the lifted section is zero. Naturality of the sheafification unit shows the restriction of s is zero. This is the existing complete proof of AlgebraicGeometry.ProEtale.exists_map_eq_zero_openImmersionLowerShriek in the source library.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, extension by zero; formalized source-library proof in LowerShriek/Open/LocalVanishing.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE; reuse proved source-library Open.LocalVanishing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of extension by zero vanish locally near a point outside an open immersion",
+   "results": "Mathlib returned 8 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]yZero|extension_by_zero|lowerShriek|LowerShriek",
+   "results": "Mathlib returned 0 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of extension by zero vanish locally near a point outside an open immersion",
+   "results": "Mathlib returned 8 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  }
+ ],
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-extension-zero",
+   "place": "Outside-open geometric stalk computation",
+   "via": [
+    "lem-cbc-proetale-extension-zero-outside-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.LocalVanishing",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_map_eq_zero_openImmersionLowerShriek",
+  "statement": "lemma exists_map_eq_zero_openImmersionLowerShriek\n    (F : Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R)) {V : X.ProEt}\n    (s : ToType (((j)_!open[ModuleCat.{u + 1} R].obj F).obj.obj (op V))) (x : V.left)\n    (hx : V.hom.base x ∉ Set.range j.base) :\n    ∃ (V' : X.ProEt) (f : V' ⟶ V), x ∈ Set.range f.left.base ∧\n      ((j)_!open[ModuleCat.{u + 1} R].obj F).obj.map f.op s = 0",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034311-L-418922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034311-L-418922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

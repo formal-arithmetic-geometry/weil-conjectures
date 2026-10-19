@@ -1,0 +1,136 @@
+{
+ "id": "lem-cbc-proetale-extension-zero-outside-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-extension-zero",
+   "place": "Stalk-description paragraph, outside-open case",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric stalk of pro-etale extension by zero outside the open",
+ "statement": "Let A be a commutative ring, j: U -> X an open immersion of schemes, Omega an algebraically closed field, and y: Spec Omega -> X a geometric point which does not factor through j. For every sheaf F of A-modules on the small pro-etale site of U, the pointed-neighbourhood geometric stalk at y of j_! F is a zero A-module.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+  "place": "node lem-cbc-proetale-extension-zero, proof paragraphs 2 and 3"
+ },
+ "stmt_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Nonfactorization of the geometric point through the open immersion means its underlying point is outside the image, by IsOpenImmersion.lift and lift_fac. For each pointed neighbourhood N and section s, apply the existing proved source-library theorem AlgebraicGeometry.ProEtale.exists_map_eq_zero_openImmersionLowerShriek (Open.LocalVanishing) to obtain a weakly etale refinement f: V -> N containing a point over the chosen point of N and killing s. This theorem proves local vanishing directly from the sheafified Kan-extension definition by local surjectivity of sheafification and an empty comma category. The fibre product V x_N Spec Omega is nonempty by Scheme.Pullback.exists_preimage_pullback. Its structural map is weakly etale; lem-fix-weakly-etale-algclosed-section supplies a section, producing a compatible geometric lift to V. This is a pointed refinement M -> N, and colimit.w identifies the class of s with the zero restriction. Colimit.hom_ext and ModuleCat.hom_ext show the colimit identity is zero, hence it is a zero object.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-proetale-geometric-stalk",
+    "lem-fix-weakly-etale-algclosed-section",
+    "lem-cbc-proetale-extension-zero-local-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "node lem-cbc-proetale-extension-zero, proof paragraphs 2 and 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-proetale-geometric-stalk",
+  "lem-fix-weakly-etale-algclosed-section",
+  "lem-cbc-proetale-extension-zero-local-vanishing"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+  "place": "Outside-open stalk case; agent proof via the existing source-library local-vanishing theorem and weakly etale algebraically closed sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of extension by zero vanish locally near a point outside an open immersion",
+   "results": "Mathlib returned 8 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]yZero|extension_by_zero|lowerShriek|LowerShriek",
+   "results": "Mathlib returned 0 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of extension by zero vanish locally near a point outside an open immersion",
+   "results": "Mathlib returned 8 matches; no pro-etale local-vanishing theorem. Existing source-library Open.LocalVanishing supplies the exact result.",
+   "date": "2026-10-19",
+   "verdict": "no Mathlib match; source match used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1582,
+ "blueprint_uses": [
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleExtensionZero",
+  "date": "2026-10-19",
+  "group": "U5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroOutsideStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleExtensionZeroOutsideStalk.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.openExtension_outside_stalk",
+  "statement": "theorem openExtension_outside_stalk (A : Type (u + 1)) [CommRing A]\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ X)\n    (hy : ¬ ∃ z : Spec (.of Ω) ⟶ U, z ≫ j = y)\n    (F : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A)) :\n    IsZero (Scheme.proEtaleGeometricFixedModuleStalk y A\n      ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj F))",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034311-L-418922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034311-L-418922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

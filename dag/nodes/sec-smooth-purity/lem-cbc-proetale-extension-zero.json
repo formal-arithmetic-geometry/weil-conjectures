@@ -21,63 +21,74 @@
  ],
  "proof": [
   {
-   "text": "The localization and coefficient identifications in [lem-weil-proetale-weakly-etale-localization], for the open immersion $j$, identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$ and $A_U$ with $A_X|_U$. Apply [lem-pur-site-restriction-module-adjunction-exact] with $\\mathcal C=X_{\\mathrm{proet}}$ and $\\mathcal O=A_X$: its sheafified extension-by-zero presheaf is exactly [def-weil-extension-by-zero]. It gives exactness of both restriction and $j_!$, and the module-sheaf adjunction $j_!\\dashv j^{-1}$.",
+   "text": "Use the recorded openImmersionLowerShriekAdjunction and existing finite-limit and finite-colimit preservation instances for fixed A-module sheaves. Map the adjunction to cochain complexes using Adjunction.mapHomologicalComplex.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
     "def-weil-extension-by-zero"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemmas Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), with proetale.tex Definition Tag 09AE (definition-extension-zero); specialization to the open-immersion localization."
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "node lem-cbc-proetale-extension-zero, order 1582"
    }
   },
   {
-   "text": "For a sheaf $M$ on $U_{\\mathrm{proet}}$, [lem-cbc-proetale-sheafification-geometric-stalk] identifies the stalk of $j_!M=P_M^\\#$ with the colimit of $P_M(V)$ over the pointed neighbourhoods of [def-weil-proetale-geometric-stalk]. When $\\bar x$ lies in $U$, the refinement $V\\times_X U$ is a pointed neighbourhood factoring through $U$ by [lem-weil-proetale-weakly-etale-localization]. Every representative restricts to this refinement. If two representatives become equal in the full colimit, filteredness gives a pointed neighbourhood on which they agree; refining that neighbourhood by its fibre product with $U$ gives the same equality among neighbourhoods factoring through $U$. Thus the map from the restricted colimit to the full colimit is both surjective and injective; there $P_M=M$ by [def-weil-extension-by-zero], and the index is precisely the pointed neighbourhood index in $U$. When $\\bar x$ lies outside $U$, every pointed neighbourhood fails to factor through $U$, so every $P_M(V)$ is zero and its colimit is zero. These identifications commute with maps of $M$ because each colimit map comes from the component maps of $P_M$.",
+   "text": "For y in U, use StructuredArrow.map2 to include its pointed neighbourhoods into those of y composed with j. This functor is fully faithful; refining any target neighbourhood by fibre product with U supplies an arrow from its image. Hence it is initial. The opposite functor is final and Final.colimIso identifies the restriction stalk with the ambient stalk naturally in every sheaf. The invertible unit of the open-immersion adjunction then gives the stalk isomorphism for extension by zero.",
    "uses": [
-    "lem-cbc-proetale-sheafification-geometric-stalk",
     "def-weil-proetale-geometric-stalk",
-    "lem-weil-proetale-weakly-etale-localization",
     "def-weil-extension-by-zero"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
-    "place": "Proof, stalk-description sentence; agent representative-class cofinality argument using lem-cbc-proetale-sheafification-geometric-stalk, sourced at proetale.tex Section 0991 (section-points), Tags 0F6B (lemma-cofinal-etale), 0F6C (lemma-geometric-lift-to-cover), and sites.tex Tag 00Y8 (lemma-point-pushforward-sheaf), clause (3)."
+    "place": "node lem-cbc-proetale-extension-zero, order 1582"
    }
   },
   {
-   "text": "For $A\\to B$, restriction of scalars [def-pc-sheaf-restrict-scalars] keeps every section group and restriction map, changing the action to $a\\cdot m=\\varphi(a)m$. Hence $P_{\\operatorname{Res}M}$ and $\\operatorname{Res}P_M$ have identical underlying abelian presheaves and identical $A_X$-actions. Module sheafification in [def-weil-presheaf-modules-sheafification] is underlying abelian sheafification with the unique extended action; therefore the identity induces the claimed natural scalar comparison. The component maps on morphisms in [def-weil-extension-by-zero] agree as well. Apply $j_!$ and this identity in each degree, with differential $j_!(d^q)$. Exactness from Step 1 implies $\\mathcal H^q(j_!K)=j_!\\mathcal H^q(K)$, so quasi-isomorphisms are preserved and the termwise functor descends to the localization of cochain complexes at quasi-isomorphisms in [def-weil-abstract-derived-category], applied to the pro-etale module-sheaf category of [def-weil-pbc-proetale-site]. The same kernel-and-image argument for the exact restriction functor of Step 1 shows that it too preserves quasi-isomorphisms. The degreewise unit and counit are chain maps by naturality with respect to each differential. Their naturality for a quasi-isomorphism also gives naturality for its inverse after localization: multiply the naturality equation by the two inverted images. Thus they define natural transformations on the localization, where their degreewise triangle identities remain equalities. These are the unit and counit of the derived adjunction. Step 2 in each degree is the displayed stalk formula for complexes.",
+   "text": "The outside-open module-sheaf stalk vanishes by lem-cbc-proetale-extension-zero-outside-stalk. Apply this statement to every term of a complex; the identity map of the stalk complex is degreewise zero, so the complex is a zero object.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-outside-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "node lem-cbc-proetale-extension-zero, order 1582"
+   }
+  },
+  {
+   "text": "Lift ModuleCat.restrictCoextendScalarsAdj to sheaf categories with sheafComposeAdjunction. The mate of the identity square for coextension and restriction along j is the identity square for scalar restriction, by the coefficient adjunction triangle identity on every section. Iterating mates identifies openExtensionScalarMap with the conjugate of the identity on the composite right adjoints. Conjugation preserves isomorphisms, so this precise canonical map is invertible. Apply NatIso.mapHomologicalComplex to obtain the complex comparison.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-extension-by-zero",
-    "def-weil-pbc-proetale-site",
-    "def-weil-abstract-derived-category"
+    "def-weil-extension-by-zero"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma Tag 03CY (lemma-sheafification-presheaf-modules), unique extended action; agent argument from exactness, the cohomology formula, and the universal property of localization for termwise extension of the functor and its adjunction; abstract derived-category definition Tag 05RU in derived.tex (definition-unbounded-derived-category)."
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "node lem-cbc-proetale-extension-zero, order 1582"
+   }
+  },
+  {
+   "text": "Use Functor.mapHomologicalComplexCompIso to extend the inside-open natural isomorphism to cochain complexes and combine all conjuncts.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
+    "place": "node lem-cbc-proetale-extension-zero, order 1582"
    }
   }
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-abstract-derived-category",
   "def-weil-extension-by-zero",
-  "def-weil-pbc-proetale-site",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-geometric-stalk",
-  "lem-cbc-proetale-sheafification-geometric-stalk",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-cbc-proetale-extension-zero-outside-stalk"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero.md",
-  "place": "## Proof"
+  "place": "Proof formalized using initial neighbourhood inclusion and iterated mates; outside-open stalk vanishing proved via pointed refinements in a separate helper module."
  },
  "mathlib_searches": [
   {
@@ -177,10 +188,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-proetale-weakly-etale-localization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -214,5 +222,15 @@
   "date": "2026-10-15",
   "existing": true,
   "note": "The declaration is already published and reviewed on newtargets-dag in Sheaf.AlgebraicGeometry.ProEtaleExtensionZero; current server source confirmed with scompile.py --source. Reuse it without creating or replacing a module. Its exactness, adjunction, degreewise complex action, two geometric-stalk cases and canonical scalar-restriction mate give the full node statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261019T034311-L-418922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

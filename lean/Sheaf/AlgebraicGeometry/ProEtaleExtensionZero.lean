@@ -10,20 +10,12 @@ public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.Algebra.Homology.Additive
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Mathlib.Algebra.Category.Ring.Limits
-import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroOutsideStalk
+import Mathlib.CategoryTheory.Filtered.Final
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Extension by zero on the small pro-etale site
@@ -103,6 +95,106 @@ def openExtensionScalarMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)).symm
       (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans
 
+private theorem scalarMap_isIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (openExtensionScalarMap φ j) := by
+  have : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).isRightAdjoint
+  let aU := sheafComposeAdjunction (Scheme.ProEt.topology U)
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
+  let aX := sheafComposeAdjunction (Scheme.ProEt.topology X)
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
+  let aB := openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} B) j
+  let aA := openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j
+  let γ := TwoSquare.mk
+    (sheafCompose (Scheme.ProEt.topology X)
+      (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ))
+    (openImmersionRestriction (ModuleCat.{u + 1} A) j)
+    (openImmersionRestriction (ModuleCat.{u + 1} B) j)
+    (sheafCompose (Scheme.ProEt.topology U)
+      (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ)) (eqToHom (by rfl))
+  have hβ : (mateEquiv aX aU).symm γ =
+      TwoSquare.mk (openImmersionRestriction (ModuleCat.{u + 1} B) j)
+        (sheafCompose (Scheme.ProEt.topology X) (ModuleCat.restrictScalars φ))
+        (sheafCompose (Scheme.ProEt.topology U) (ModuleCat.restrictScalars φ))
+        (openImmersionRestriction (ModuleCat.{u + 1} A) j) (eqToHom (by rfl)) := by
+    ext F : 1
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change (ModuleCat.restrictScalars φ).map
+        ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).unit.app
+          (F.obj.obj _)) ≫
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).counit.app _ = 𝟙 _
+    exact (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).left_triangle_components _
+  have h := iterated_mateEquiv_conjugateEquiv_symm aB aA aU aX γ
+  rw [hβ] at h
+  have hi : IsIso ((conjugateEquiv (aB.comp aX) (aU.comp aA)).symm γ.natTrans) := by
+    exact inferInstance
+  change IsIso (((mateEquiv aB aA).symm
+    (TwoSquare.mk _ _ _ _ (eqToHom (by rfl)))).natTrans)
+  rw [h]
+  exact hi
+
+private abbrev neighbourhoodInclusion {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ U) :
+    Scheme.ProEtaleGeometricNeighbourhood y ⥤
+      Scheme.ProEtaleGeometricNeighbourhood (y ≫ j) :=
+  StructuredArrow.map₂ (F := MorphismProperty.Over.map ⊤
+    (inferInstance : WeaklyEtale j)) (G := Over.map j)
+    (𝟙 _) (eqToHom (by rfl))
+
+private instance neighbourhoodInclusion_initial {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ U) : (neighbourhoodInclusion j y).Initial := by
+  have : (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).Faithful :=
+    MorphismProperty.Over.faithful_map _
+  have : (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).Full :=
+    MorphismProperty.Over.full_map _
+  have : (Over.map j).Faithful := by
+    constructor
+    intro P Q f g h
+    apply Over.OverMorphism.ext
+    exact congrArg (fun k : (Over.map j).obj P ⟶ (Over.map j).obj Q ↦ k.left) h
+  have hf : (neighbourhoodInclusion j y).Faithful :=
+    StructuredArrow.faithful_map₂ _ _
+  have hfull : (neighbourhoodInclusion j y).Full :=
+    StructuredArrow.full_map₂ _ _
+  apply Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful
+  intro N
+  let V : U.ProEt := (MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).obj N.right
+  let a : Spec (.of Ω) ⟶ V.left :=
+    pullback.lift N.hom.left y (by exact Over.w N.hom)
+  let M : Scheme.ProEtaleGeometricNeighbourhood y :=
+    StructuredArrow.mk (Y := V) (Over.homMk a (by
+      change a ≫ pullback.snd N.right.hom j = y
+      exact pullback.lift_snd _ _ _))
+  refine ⟨M, ⟨StructuredArrow.homMk
+    (MorphismProperty.Over.homMk (pullback.fst N.right.hom j) (by
+      change pullback.fst N.right.hom j ≫ N.right.hom =
+        pullback.snd N.right.hom j ≫ j
+      exact pullback.condition)) ?_⟩⟩
+  apply Over.OverMorphism.ext
+  simp [neighbourhoodInclusion, M, a]
+
+private def insideStalkIso (A : Type (u + 1)) [CommRing A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ U) :
+    openImmersionLowerShriek (ModuleCat.{u + 1} A) j ⋙
+      geometricModuleStalkFunctor A (y ≫ j) ≅ geometricModuleStalkFunctor A y := by
+  let e : openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
+      geometricModuleStalkFunctor A y ≅ geometricModuleStalkFunctor A (y ≫ j) :=
+    Functor.isoWhiskerLeft
+      (sheafToPresheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⋙
+        (Functor.whiskeringLeft _ _ _).obj
+          (Scheme.proEtaleGeometricNeighbourhoodForget (y ≫ j)).op)
+      (Functor.Final.colimIso (neighbourhoodInclusion j y).op)
+  exact Functor.isoWhiskerLeft _ e.symm ≪≫ (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (asIso (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).unit).symm _ ≪≫
+    Functor.leftUnitor _
+
 /-- Extension by zero is the exact left adjoint of restriction, acts termwise on
 complexes, has the usual two geometric-stalk cases, and commutes canonically with
 restriction along every map of finite commutative rings.
@@ -156,6 +248,20 @@ theorem proEtale_extension_by_zero (A : Type (u + 1)) [CommRing A] [Finite A]
     (∀ (B : Type (u + 1)) [CommRing B] [Finite B] (φ : A →+* B),
       IsIso (openExtensionScalarMap φ j) ∧
       IsIso ((openExtensionScalarMap φ j).mapHomologicalComplex (.up ℤ))) := by
-  sorry
+  refine ⟨inferInstance, inferInstance,
+    ⟨openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j⟩,
+    ⟨(openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j).mapHomologicalComplex
+      (.up ℤ)⟩, ?_, ?_, ?_⟩
+  · intro Ω _ _ y
+    exact ⟨Functor.mapHomologicalComplexCompIso (insideStalkIso A j y) (.up ℤ)⟩
+  · intro Ω _ _ y hy K
+    apply (IsZero.iff_id_eq_zero _).mpr
+    ext n : 1
+    exact (openExtension_outside_stalk A j y hy (K.X n)).eq_of_src _ _
+  · intro B _ _ φ
+    have := scalarMap_isIso φ j
+    refine ⟨inferInstance, ?_⟩
+    exact inferInstanceAs (IsIso
+      (NatIso.mapHomologicalComplex (asIso (openExtensionScalarMap φ j)) (.up ℤ)).hom)
 
 end AlgebraicGeometry.ProEtale
