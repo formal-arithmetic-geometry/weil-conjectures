@@ -119,8 +119,55 @@ def snapshot(allowed=None):
     return commit, included, changed
 
 
+def record_unrecorded() -> dict | None:
+    """Merge queue: every change of a Lean file since the verified main that no open landing accounts for becomes one
+    landing of the writer `U`, so that a red build can drop it like any landing. Called under the merge and tree
+    locks. Cost: one `git diff --name-only` against main and a hash of each changed file."""
+    repo = li.ROOT
+    v = run(["git", "rev-parse", "-q", "--verify", ld.VERIFIED_REF], cwd=repo).stdout.strip()
+    if not v:
+        return None
+    lean_rel = li.LEAN.resolve().relative_to(repo.resolve()).as_posix()
+    names = set(run(["git", "diff", "--name-only", v, "--", lean_rel], cwd=repo).stdout.split())
+    names |= set(run(["git", "ls-files", "--others", "--exclude-standard", "--", lean_rel], cwd=repo).stdout.split())
+    names = {n[len(lean_rel) + 1:] for n in names if n.endswith(".lean") and "/.sandbox/" not in n and "/." not in "/" + n}
+    if not names:
+        return None
+    last, busy = {}, set()
+    for r in sorted(ld.records(ld.REQUESTS), key=ld.order_key):
+        for f in r["files"]:
+            last[f["path"]] = (r, f)
+    for r in ld.records(ld.INFLIGHT):
+        busy |= {f["path"] for f in r["files"]}
+    files = {}
+    for rel in sorted(names - busy):
+        cur = ld.sha(li.LEAN / rel)
+        if rel in last:
+            r, f = last[rel]
+            if f.get("sha") == cur:
+                continue
+            st = ld.STAGED / r["id"] / rel
+            if not st.is_file() and not f.get("deleted"):
+                continue            # a landing from before the merge queue: its own version is not kept
+            before = st.read_bytes() if st.is_file() else None
+        else:
+            b = subprocess.run(["git", "show", f"{v}:{lean_rel}/{rel}"], cwd=repo, capture_output=True)
+            before = b.stdout if b.returncode == 0 else None
+            if (hashlib.sha256(before).hexdigest() if before is not None else None) == cur:
+                continue
+        files[rel] = before
+    if not files:
+        return None
+    who = run(["git", "log", "-1", "--format=%h %s", "--", *[f"{lean_rel}/{r}" for r in list(files)[:20]]], cwd=repo).stdout.strip()
+    rec = ld.new_record("U", files, "unrecorded change of the tree since the verified main; last commit: " + who)
+    print(f"{ld.now()} merge queue: recorded {len(files)} unrecorded file change(s) as landing {rec['id']} ({who[:80]})", flush=True)
+    return rec
+
+
 def _snapshot(allowed):
     with ld.tree_lock():
+        if ld.merge_queue():
+            record_unrecorded()
         waiting = ld.records(ld.REQUESTS)
         held = [] if allowed is None else [r for r in waiting if r["id"] not in allowed]
         inflight = sorted(ld.records(ld.INFLIGHT) + held, key=lambda r: r["id"], reverse=True)
@@ -313,6 +360,7 @@ def close_verified(included: list[dict], commit):
         ld.write_json(ld.DONE / f"{r['id']}.json", r)
         (ld.REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
         shutil.rmtree(ld.BACKUP / r["id"], ignore_errors=True)
+        shutil.rmtree(ld.STAGED / r["id"], ignore_errors=True)
     old = time.time() - 7 * 86400
     for p in ld.DONE.glob("*.json"):
         if p.stat().st_mtime < old:
@@ -435,6 +483,10 @@ def finish_result(included, commit, text, elapsed, preempted, source_id, red_tre
     if built:
         publish()
         close_verified(included, commit)
+        if commit and ld.merge_queue():
+            # the verified main advances to exactly the commit this green build built (merge queue)
+            run(["git", "update-ref", ld.VERIFIED_REF, commit], cwd=li.ROOT)
+            result["verified_main"] = commit
         result.update(result="green", verified=sorted(ids))
         ld.write_json(ld.B / "last.json", result)
         ld.write_json(ld.B / "published.json", result)

@@ -35,11 +35,24 @@ WORK = li.ROOT / "coord"
 LOCAL = li.ROOT / "local"
 B = LOCAL / "builds"
 INFLIGHT, REQUESTS, DONE, BACKUP = B / "inflight", B / "requests", B / "done", B / "backup"
+STAGED = B / "staged"             # merge queue: the content each open landing wrote, kept until it is verified/dropped
+VERIFIED_REF = "refs/heads/sheaf-verified"   # merge queue: the last commit a green global build verified (main)
 
 
 def dirs():
-    for d in (INFLIGHT, REQUESTS, DONE, BACKUP):
+    for d in (INFLIGHT, REQUESTS, DONE, BACKUP, STAGED):
         d.mkdir(parents=True, exist_ok=True)
+
+
+def merge_queue() -> bool:
+    """The merge queue (the human, 2026-10-19; SHEAF_MERGE_QUEUE=1 in coord/sheaf.env). The verified main is the ref
+    VERIFIED_REF: build.py advances it to a build commit only when that build is green. The working tree is the
+    candidate: main plus the open landings (local/builds/requests, in id order), every one of them a record with the
+    previous version (backup/) and its own version (staged/) of each file; build.py records any other change of a
+    Lean file since main as a landing of the writer `U` before it snapshots. Taking a landing out of the candidate
+    (drop_plan) is a hard restore of its files to their previous version, and every later open landing that changed
+    one of those files goes with it: no merge, no conflict."""
+    return li.config().get("SHEAF_MERGE_QUEUE") == "1"
 
 
 @contextlib.contextmanager
@@ -149,12 +162,115 @@ def finish(rid: str, is_set: bool) -> int:
                 changed.append(f"{f['module']} (deleted)")
             elif f["existed"]:
                 changed += li.interface_changes(bk.read_text(errors="ignore"), dst.read_text(errors="ignore"))
-        r.update(kind="interface" if (is_set or changed) else "proof", set=is_set, changed=changed[:40], landed=now())
+        r.update(kind="interface" if (is_set or changed) else "proof", set=is_set, changed=changed[:40], landed=now(),
+                 seq=time.time_ns())
+        stage_copy(r)
         write_json(REQUESTS / f"{rid}.json", r)
         (INFLIGHT / f"{rid}.json").unlink()
     log(f"{r['group']} landed {' '.join(f['module'] for f in r['files'])} ({r['kind']}, landing {rid})")
     print(r["kind"])
     return 0
+
+
+def stage_copy(r: dict):
+    """Keep the landing's own version of its files (merge queue): the expected content of a file after it."""
+    for f in r["files"]:
+        src = li.LEAN / f["path"]
+        if src.is_file():
+            dst = STAGED / r["id"] / f["path"]
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+
+
+def new_record(group: str, files: dict, note: str, kind: str | None = None) -> dict:
+    """A landing record for a change already written to the tree by a writer other than the landing scripts
+    (proof-imports cycle, import pruning, maintenance, upstream sync, or `U` from build.py). files: {rel: previous
+    bytes or None}. Caller holds local/tree.lock. Returns the record (in requests/)."""
+    dirs()
+    rid = f"{time.strftime('%Y%m%dT%H%M%S', time.gmtime())}-{group}-{os.getpid()}-{len(records(REQUESTS))}"
+    out, changed = [], []
+    for rel, before in sorted(files.items()):
+        if before is not None:
+            bk = BACKUP / rid / rel
+            bk.parent.mkdir(parents=True, exist_ok=True)
+            bk.write_bytes(before)
+        dst = li.LEAN / rel
+        f = {"path": rel, "module": module(rel), "existed": before is not None, "sha": sha(dst)}
+        f["deleted"] = before is not None and not dst.is_file()
+        if f["deleted"]:
+            changed.append(f"{f['module']} (deleted)")
+        elif before is not None:
+            changed += li.interface_changes(before.decode(errors="ignore"), dst.read_text(errors="ignore"))
+        else:
+            changed.append(f"{f['module']} (new)")
+        out.append(f)
+    r = {"id": rid, "group": group, "time": now(), "files": out, "note": note[:500], "seq": time.time_ns(),
+         "kind": kind or ("interface" if changed else "proof"), "set": len(out) > 1, "changed": changed[:40], "landed": now()}
+    stage_copy(r)
+    write_json(REQUESTS / f"{rid}.json", r)
+    log(f"{group} recorded {' '.join(f['module'] for f in out[:6])} ({r['kind']}, landing {rid}): {note[:120]}")
+    return r
+
+
+class Busy(RuntimeError):
+    pass
+
+
+def order_key(r: dict):
+    """Landing order: the time a landing was completed (ns, `seq`), else the second in its id."""
+    if r.get("seq"):
+        return (r["seq"], r["id"])
+    try:
+        import calendar
+        return (calendar.timegm(time.strptime(r["id"][:15], "%Y%m%dT%H%M%S")) * 10**9, r["id"])
+    except ValueError:
+        return (0, r["id"])
+
+
+def drop_plan(ids, open_records=None) -> tuple[list[dict], dict, list[str]]:
+    """Take landings out of the candidate (merge queue). Returns (dropped records in id order, {rel: bytes or None}
+    to write, notes). A later open landing that changed a file of a dropped one is dropped with it (its version was
+    made on top of the dropped change); each file goes back to the version before the earliest dropped landing that
+    changed it. Reads only the open records; writes nothing. Busy when a landing still being checked touches a file."""
+    recs = sorted(open_records if open_records is not None else records(REQUESTS), key=order_key)
+    want, first, dropped, notes = set(ids), {}, [], []
+    for r in recs:
+        paths = [f["path"] for f in r["files"]]
+        if r["id"] in want or any(p in first for p in paths):
+            if r["id"] not in want:
+                by = sorted({first[p]["id"] for p in paths if p in first})
+                r = dict(r, chained=by)
+                notes.append(f"{r['id']} ({r['group']}) goes with {', '.join(by)}: it changed the same file(s) after it")
+            dropped.append(r)
+            for f in r["files"]:
+                first.setdefault(f["path"], r)
+    busy = [x["id"] for x in records(INFLIGHT) if any(f["path"] in first for f in x["files"])]
+    if busy:
+        raise Busy("landings still being checked touch the files: " + ", ".join(busy))
+    restore_to = {}
+    for rel, r in first.items():
+        f = next(f for f in r["files"] if f["path"] == rel)
+        restore_to[rel] = (BACKUP / r["id"] / rel).read_bytes() if f["existed"] else None
+        last = [x for x in dropped if any(g["path"] == rel for g in x["files"])][-1]
+        cur = sha(li.LEAN / rel)
+        exp = next(g.get("sha") for g in last["files"] if g["path"] == rel)
+        if cur != exp:
+            notes.append(f"{rel}: an unrecorded edit after {last['id']} is discarded with it")
+    return dropped, restore_to, notes
+
+
+def drop_close(dropped: list[dict], reason: str, reasons: dict | None = None):
+    """Close the dropped records (merge queue): done/<id>.json with result reverted; their backups go."""
+    for r in dropped:
+        r = dict(r)
+        why = (reasons or {}).get(r["id"]) or (reason if not r.get("chained") else
+              f"{reason}; taken out with {', '.join(r['chained'])}: it changed the same file(s) after it")
+        r.update(result="reverted", reason=why, closed=now())
+        write_json(DONE / f"{r['id']}.json", r)
+        (REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
+        shutil.rmtree(BACKUP / r["id"], ignore_errors=True)
+        shutil.rmtree(STAGED / r["id"], ignore_errors=True)
+        drop_mirror(r["group"], [f["path"] for f in r["files"]])
 
 
 def abort(rid: str) -> int:
@@ -183,6 +299,8 @@ def revert(rid: str, reason: str) -> int:
                 bl.withdraw(b, 'take-out conflict: ' + str(exc), lambda *x: print(*x))
             return 0
     dirs()
+    if merge_queue():
+        return revert_mq(rid, reason)
     with tree_lock():
         r = read_json(REQUESTS / f"{rid}.json")
         if not r:
@@ -198,6 +316,34 @@ def revert(rid: str, reason: str) -> int:
         (REQUESTS / f"{rid}.json").unlink()
     log(f"M reverted landing {rid} of {r['group']}: {reason}")
     print(f"Reverted landing {rid} ({len(r['files'])} file(s)) of {r['group']}.")
+    return 0
+
+
+def revert_mq(rid: str, reason: str) -> int:
+    """Merge queue: hard restore of the landing's files and of every later landing of the same files; one commit."""
+    import mergelock, subprocess
+    with mergelock.merge_lock():
+        with tree_lock():
+            if not read_json(REQUESTS / f"{rid}.json"):
+                print(f"no landing waiting for a build with id {rid}", file=sys.stderr); return 2
+            dropped, restore_to, notes = drop_plan([rid])
+            lean_rel = li.LEAN.resolve().relative_to(li.ROOT.resolve()).as_posix()
+            for rel, data in restore_to.items():
+                dst = li.LEAN / rel
+                if data is None:
+                    dst.unlink(missing_ok=True)
+                else:
+                    dst.parent.mkdir(parents=True, exist_ok=True); dst.write_bytes(data)
+            paths = [f"{lean_rel}/{rel}" for rel in restore_to]
+            subprocess.run(["git", "add", "-A", "--", *paths], cwd=li.ROOT, capture_output=True)
+            subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
+                            f"Take out landing {rid}: {reason[:200]}\n\n" + "\n".join(notes) +
+                            "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths], cwd=li.ROOT, capture_output=True)
+            drop_close(dropped, reason)
+    for x in notes:
+        print(x)
+    log(f"M took out landing {rid} ({len(dropped)} landing(s), {len(restore_to)} file(s)): {reason}")
+    print(f"Took out landing {rid}: {len(restore_to)} file(s) restored, {len(dropped) - 1} later landing(s) with it.")
     return 0
 
 

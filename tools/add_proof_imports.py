@@ -208,9 +208,12 @@ def write(added, public: bool) -> int:
     by = collections.defaultdict(list)
     for m, dm, _, _ in added:
         by[m].append(dm)
+    import landing as ld
+    before = {}
     for m, ds in sorted(by.items()):
         p = li.file_of(m)
         text = p.read_text()
+        before[p.resolve().relative_to(li.LEAN).as_posix()] = p.read_bytes()
         comment = [(a, b) for k, a, b in li.lex(text) if k in li.COMMENT_KINDS]
         lines, pos, last, mod_line = text.split("\n"), 0, None, None
         for n, line in enumerate(lines):
@@ -236,6 +239,10 @@ def write(added, public: bool) -> int:
         tmp = p.with_name(p.name + ".imports-new")
         tmp.write_text("\n".join(lines))
         tmp.replace(p)
+    if before and ld.merge_queue():
+        # merge queue: the change is a landing of its own (writer PI), dropped like any landing if the build is red
+        with ld.tree_lock():
+            ld.new_record("PI", before, f"imports of the proof dependencies in {len(before)} module(s) (tools/add_proof_imports.py)", kind="proof")
     return len(by)
 
 

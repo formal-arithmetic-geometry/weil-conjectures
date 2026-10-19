@@ -74,19 +74,22 @@ def prune(m, imports, memo):
     # #min_imports misses uses through dot notation and instances, so each candidate is tried on its own: it is
     # dropped only if the file still compiles without it (and without those dropped before it).
     dropped, text = [], old
+    # 2026-10-19: the trials compile a copy in the sandbox; the live file is never written before the commit (a build
+    # snapshot taken meanwhile used to pick up a trial text)
+    trial_file = SB / f"{m.replace('.', '_')}__prunetrial.lean"   # a WeilConjectures_* name keeps the source library's options
     try:
         for i in cand:
             trial = "\n".join(l for l in text.split("\n") if not (IMP.match(l) and IMP.match(l).group(4) == i))
-            p.write_text(trial)
-            rc, out = lean_file(p, 60)
+            trial_file.write_text(trial)
+            rc, out = lean_file(trial_file, 60)
             if rc == 0: dropped.append(i); text = trial
         if not dropped: return None, "no candidate could be dropped (" + ", ".join(cand) + ")"
-        o = SB / f"PruneOld_{m.replace('.', '_')}.lean"; o.write_text(old); p.write_text(text)
-        c = subprocess.run([sys.executable, "tools/import_prune_check.py", m, str(o), str(p)], cwd=R, capture_output=True, text=True, timeout=600)
+        o = SB / f"PruneOld_{m.replace('.', '_')}.lean"; o.write_text(old); trial_file.write_text(text)
+        c = subprocess.run([sys.executable, "tools/import_prune_check.py", m, str(o), str(trial_file)], cwd=R, capture_output=True, text=True, timeout=600)
         o.unlink(missing_ok=True)
         if c.returncode: return None, "downstream relies on a removed import: " + c.stdout.strip().replace("\n", " ")[:200]
     finally:
-        p.write_text(old)
+        trial_file.unlink(missing_ok=True)
     return text, "drop " + ", ".join(dropped)
 
 
@@ -101,11 +104,17 @@ def commit(done):
         for m, v in done.items():   # only if the file is still the one that was pruned (a landing may have changed it since)
             if m in frozen:
                 log(m, "| frozen: a landing of it is not verified yet; not written"); continue
-            if path(m).is_file() and hashlib.sha1(path(m).read_text().encode()).hexdigest() == v["old"]: path(m).write_text(v["new"]); ok[m] = v
+            if path(m).is_file() and hashlib.sha1(path(m).read_text().encode()).hexdigest() == v["old"]:
+                v = dict(v, old_text=path(m).read_text()); path(m).write_text(v["new"]); ok[m] = v
         done = ok
         if not done: return
         files = [str(path(m).relative_to(R)) for m in done]
         msg = f"Prune unused imports of {len(done)} finished module(s) (tools/prune_imports.py)\n\n" + "\n".join(f"- {m}" for m in done) + "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+        import landing as ld
+        if ld.merge_queue():   # merge queue: the prune is a landing of its own (writer PR)
+            with ld.tree_lock():
+                ld.new_record("PR", {str(path(m).resolve().relative_to(LEAN.resolve())): done[m]["old_text"].encode() for m in done},
+                              f"unused imports of {len(done)} finished module(s) (tools/prune_imports.py)")
         r = subprocess.run(["git", "-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m", msg, "--", *files],
                            cwd=R, env=dict(os.environ, SHEAF_LEAD="L-only"), capture_output=True, text=True)
     log("commit", "ok" if r.returncode == 0 else "FAILED " + r.stderr[-200:], len(done))

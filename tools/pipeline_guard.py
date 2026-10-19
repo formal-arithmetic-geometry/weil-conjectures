@@ -39,10 +39,13 @@ def source_fingerprint(root):
 def proof_imports_guard(root, modules=()):
     """Fail closed before writes: open batch or any affected pending/inflight landing."""
     root = pathlib.Path(root)
-    if (root / 'local/batch/open.json').exists() or (root / 'local/batch/landing.json').exists():
+    import landing as ld
+    mq = ld.merge_queue()   # merge queue: the import change is a landing of its own and never blocks; only files a
+                            # group is still checking (inflight) are refused
+    if not mq and ((root / 'local/batch/open.json').exists() or (root / 'local/batch/landing.json').exists()):
         raise RuntimeError('proof imports refused: a batch is open')
     modules = set(modules)
-    for directory in ('requests', 'inflight'):
+    for directory in (('inflight',) if mq else ('requests', 'inflight')):
         for p in (root / 'local/builds' / directory).glob('*.json'):
             try:
                 rec = json.loads(p.read_text())

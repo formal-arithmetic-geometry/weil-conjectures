@@ -42,7 +42,7 @@ Usage (maintainer; SHEAF_LEAD=L-only):
   tools/batch_land.py take-out <G> <module> REASON   take a landed delivery of the open batch out and return it
 """
 from __future__ import annotations
-import calendar, json, os, pathlib, pickle, re, subprocess, sys, tempfile, time
+import calendar, json, os, pathlib, pickle, re, shutil, subprocess, sys, tempfile, time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import merge_delivery as md  # noqa: E402
@@ -62,6 +62,15 @@ BD = ROOT / "local" / "batch"
 PASSED, OPEN, CLOSED, TRIAGE = BD / "passed", BD / "open.json", BD / "closed", BD / "triage"
 CLONE = ld.LOCAL / "buildtree"
 STOP_REQUESTED = lambda: False
+
+
+def MQ_LOG(line: str) -> None:
+    """One line per merge-queue decision, in the lander's log (~/cc1/autoland.log when it runs)."""
+    try:
+        with open(os.environ.get("AUTOLAND_LOG") or pathlib.Path.home() / "cc1" / "autoland.log", "a") as f:
+            f.write(time.strftime("%F %T ") + "merge queue: " + line + "\n")
+    except OSError:
+        pass
 
 
 def stop_checkpoint():
@@ -858,7 +867,25 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
     """
     if not entries: return
     tip = md.git("rev-parse", "HEAD")
-    prepared = recovery.inverse(ROOT, [e["commit"] for e in entries], imports_only=bool(returned))
+    chained = []
+    if ld.merge_queue():
+        # merge queue: the Lean files go back hard to their version before the landing (and later landings of the
+        # same files go too); the bookkeeping is inverted leniently, so nothing can conflict
+        t0 = time.time()
+        dropped, restore_to, notes = ld.drop_plan([e["landing"] for e in entries])
+        kept = []
+        prepared = recovery.inverse(ROOT, [e["commit"] for e in entries], skip_lean=True, lenient=kept)
+        lean_rel = li.LEAN.resolve().relative_to(ROOT.resolve()).as_posix()
+        for rel, data in restore_to.items():
+            prepared[f"{lean_rel}/{rel}"] = data
+        ids = {e["landing"] for e in entries}
+        chained = [r for r in dropped if r["id"] not in ids]
+        for x in notes + kept:
+            MQ_LOG(f"take-out: {x}")
+        MQ_LOG(f"take-out of {len(entries)} delivery(ies): {len(restore_to)} file(s) restored, {len(chained)} later "
+               f"landing(s) with them, prepared in {time.time() - t0:.1f} s")
+    else:
+        prepared = recovery.inverse(ROOT, [e["commit"] for e in entries], imports_only=bool(returned))
     # Audits/proved flags computed after landing describe the removed source.
     # Restore those fields from the pre-landing node; keep independent metadata.
     for e in entries:
@@ -929,7 +956,12 @@ def _undo_entries(entries, message, *, returned=False, repair_jobs=None):
             for r in recs:
                 ld.write_json(ld.DONE / f"{r['id']}.json", r)
                 (ld.REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
+                shutil.rmtree(ld.BACKUP / r['id'], ignore_errors=True); shutil.rmtree(ld.STAGED / r['id'], ignore_errors=True)
                 ld.drop_mirror(r['group'], [f['path'] for f in r['files']])
+            if chained:
+                ld.drop_close(chained, message)
+                for r in chained:
+                    MQ_LOG(f"take-out: landing {r['id']} of {r['group']} went with them (same files changed after)")
     # Queue calculation is source-only and deliberately outside both write locks.
     refresh_recovery_queue()
 
@@ -1159,6 +1191,17 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
         b.pop('triage', None)
         write_json(OPEN, b)
         return
+    extra = []
+    if ld.merge_queue():
+        # deliveries of this batch that changed a culprit's file after it go out with it (hard restore), returned
+        by_landing = {e['landing']: e for e in active}
+        for r in ld.drop_plan([e['landing'] for e in chosen])[0]:
+            e = by_landing.get(r['id'])
+            if e is not None and e not in chosen:
+                extra.append(e); chosen.append(e)
+                messages[key(e)] = ("(the batch landing) taken out again: a delivery of the same batch that broke the global build "
+                                    "changed the same file(s) before it, so it goes out with it. Deliver again on the current library.")
+                log(f"batch {b['id']}: {key(e)} goes out with the culprit (same files changed after it)")
     tip = (ld.read_json(ld.B / 'last.json') or {}).get('commit') or md.git('rev-parse', 'HEAD')
     repair_jobs = {key(e): repairs.stage(e, tip, per[key(e)], messages[key(e)]) for e in suspects}
     try:
@@ -1168,6 +1211,9 @@ def execute(b: dict, decisions: list[dict], log, deferred=(), imports=None) -> N
         # nothing was recorded, and the lander retried every two minutes for hours while live stayed red.
         conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, x, log, imports)
         return
+    for e in extra:
+        e['state'] = 'returned'; e['why'] = messages[key(e)]
+        log('TAKEN OUT WITH THE CULPRIT; RETURNED', key(e))
     for e in suspects:
         e['state'] = 'returned'; e['why'] = messages[key(e)]
         job = repair_jobs.get(key(e))

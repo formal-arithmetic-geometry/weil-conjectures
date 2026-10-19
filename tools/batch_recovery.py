@@ -125,61 +125,81 @@ def merge_text(before, landed, current):
     return b''.join(out)
 
 
-def inverse(root, commits, *, imports_only=False):
-    """Prepare the inverse in memory, latest commit first; no live files or index changed."""
+def inverse(root, commits, *, imports_only=False, skip_lean=False, lenient=None):
+    """Prepare the inverse in memory, latest commit first; no live files or index changed.
+    Merge queue: skip_lean leaves the Lean files to landing.drop_plan (a hard restore); lenient (a list) keeps the
+    current content of a bookkeeping file whose later edit overlaps, noting it there, instead of raising Conflict."""
     root = pathlib.Path(root); result = {}
     for sha in reversed(commits):
         paths = git(root, 'diff-tree', '--no-commit-id', '--name-only', '-r', sha).decode().splitlines()
         for path in paths:
-            before, landed = blob(root, sha + '^', path), blob(root, sha, path)
-            p = root / path
-            current = result[path] if path in result else (p.read_bytes() if p.is_file() else None)
-            if path.startswith('lean/') and path.endswith('.lean'):
-                delta = import_delta(landed, current)
-                additions, dropped = delta if delta is not None else (None, [])
-                if current != landed and current != before and additions is None and imports_only:
-                    raise Conflict(f'{path}: later substantive change; withdraw the batch')
-                if additions is not None:
-                    # Created delivery modules are removed conservatively, with their nodes.
-                    value = before
-                    if value is not None:
-                        lines = value.decode().splitlines(keepends=True)
-                        # later import removals (prune) are kept removed
-                        lines = [x for x in lines if x.strip() not in dropped]
-                        idx = [i + 1 for i, l in enumerate(lines) if IMPORT.fullmatch(l.strip()) or l.strip() == 'module']
-                        at = idx[-1] if idx else 0
-                        lines[at:at] = [x for x in additions if x not in lines and
-                            ((root / ('lean/' + IMPORT.fullmatch(x.strip())[1].replace('.', '/') + '.lean')).exists() or
-                             IMPORT.fullmatch(x.strip())[1].startswith(('Mathlib.', 'Lean.', 'Init.')))]
-                        value = ''.join(lines).encode()
-                else:
-                    value = merge_text(before, landed, current)
-            elif path.startswith('coord/returns/'):
-                # bookkeeping of returns: keep it as it is now (2026-10-14: undoing a delivery's edit of
-                # coord/returns/P3.md conflicted with later entries and blocked a batch for 15 minutes; the
-                # take-out writes its own return entries afterwards)
-                value = current
-            elif path.startswith('coord/claims/'):
-                # A renewed/reclaimed item belongs to its current holder. Restore
-                # the old claim only when landing removed it and it is still absent.
-                value = current if current is not None else before
-            elif path.endswith('.json'):
+            if skip_lean and path.startswith('lean/'):
+                continue
+            if lenient is not None and not path.startswith('lean/'):
                 try:
-                    value = merge_json(before, landed, current)
+                    result[path] = _inverse_path(root, sha, path, result, imports_only)
                 except Conflict as e:
-                    raise Conflict(f'{path}: {e}') from e
-            elif path in ('coord/ledger.md', 'coord/deliveries.log'):
-                a, b, c = [(x or b'').decode().splitlines(keepends=True) for x in (before, landed, current)]
-                # 2026-10-19 (launcher): sets, not lists: ledger.md has hundreds of thousands of lines and the list
-                # membership tests made every take-out quadratic (lander at 100% CPU for 25+ min, live red meanwhile)
-                aset = set(a); added = {x for x in b if x not in aset}
-                value = ''.join(x for x in c if x not in added).encode()
-            else:
-                try:
-                    value = merge_text(before, landed, current)
-                except Conflict as e:
-                    raise Conflict(f'{path}: {e}') from e
-            result[path] = value
+                    p = root / path
+                    result[path] = result[path] if path in result else (p.read_bytes() if p.is_file() else None)
+                    lenient.append(f'{path}: kept as it is now ({e})')
+                continue
+            result[path] = _inverse_path(root, sha, path, result, imports_only)
+    return _finish_inverse(root, result)
+
+
+def _inverse_path(root, sha, path, result, imports_only):
+    before, landed = blob(root, sha + '^', path), blob(root, sha, path)
+    p = root / path
+    current = result[path] if path in result else (p.read_bytes() if p.is_file() else None)
+    if path.startswith('lean/') and path.endswith('.lean'):
+        delta = import_delta(landed, current)
+        additions, dropped = delta if delta is not None else (None, [])
+        if current != landed and current != before and additions is None and imports_only:
+            raise Conflict(f'{path}: later substantive change; withdraw the batch')
+        if additions is not None:
+            # Created delivery modules are removed conservatively, with their nodes.
+            value = before
+            if value is not None:
+                lines = value.decode().splitlines(keepends=True)
+                # later import removals (prune) are kept removed
+                lines = [x for x in lines if x.strip() not in dropped]
+                idx = [i + 1 for i, l in enumerate(lines) if IMPORT.fullmatch(l.strip()) or l.strip() == 'module']
+                at = idx[-1] if idx else 0
+                lines[at:at] = [x for x in additions if x not in lines and
+                    ((root / ('lean/' + IMPORT.fullmatch(x.strip())[1].replace('.', '/') + '.lean')).exists() or
+                     IMPORT.fullmatch(x.strip())[1].startswith(('Mathlib.', 'Lean.', 'Init.')))]
+                value = ''.join(lines).encode()
+        else:
+            value = merge_text(before, landed, current)
+    elif path.startswith('coord/returns/'):
+        # bookkeeping of returns: keep it as it is now (2026-10-14: undoing a delivery's edit of
+        # coord/returns/P3.md conflicted with later entries and blocked a batch for 15 minutes; the
+        # take-out writes its own return entries afterwards)
+        value = current
+    elif path.startswith('coord/claims/'):
+        # A renewed/reclaimed item belongs to its current holder. Restore
+        # the old claim only when landing removed it and it is still absent.
+        value = current if current is not None else before
+    elif path.endswith('.json'):
+        try:
+            value = merge_json(before, landed, current)
+        except Conflict as e:
+            raise Conflict(f'{path}: {e}') from e
+    elif path in ('coord/ledger.md', 'coord/deliveries.log'):
+        a, b, c = [(x or b'').decode().splitlines(keepends=True) for x in (before, landed, current)]
+        # 2026-10-19 (launcher): sets, not lists: ledger.md has hundreds of thousands of lines and the list
+        # membership tests made every take-out quadratic (lander at 100% CPU for 25+ min, live red meanwhile)
+        aset = set(a); added = {x for x in b if x not in aset}
+        value = ''.join(x for x in c if x not in added).encode()
+    else:
+        try:
+            value = merge_text(before, landed, current)
+        except Conflict as e:
+            raise Conflict(f'{path}: {e}') from e
+    return value
+
+
+def _finish_inverse(root, result):
     # Filter replayed proof imports of deleted modules, including in maintainer files.
     removed = {p[5:-5].replace('/', '.') for p, v in result.items() if p.startswith('lean/') and p.endswith('.lean') and v is None}
     for path, data in list(result.items()):
@@ -188,7 +208,7 @@ def inverse(root, commits, *, imports_only=False):
             result[path] = ''.join(l for l in lines if not (IMPORT.fullmatch(l.strip()) and IMPORT.fullmatch(l.strip())[1] in removed)).encode()
     # A later import-only edit in an outside module can be dropped safely; a real
     # reference to a removed new module needs withdrawal/maintainer investigation.
-    for p in (root / 'lean').rglob('*.lean'):
+    for p in ((root / 'lean').rglob('*.lean') if removed else ()):
         path = p.relative_to(root).as_posix()
         if path in result: continue
         data = p.read_bytes()

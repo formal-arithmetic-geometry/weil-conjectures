@@ -165,7 +165,7 @@ class ImportCycleTests(unittest.TestCase):
         self.assertEqual(ic.log_cycles(x), [['Sheaf.B','Sheaf.A']])
 
 class SelectiveRecovery(Repo):
-    def run_batch(self, bad=(0,), own=False, deps=(), no_suspect=False, staged=False, later=None):
+    def run_batch(self, bad=(0,), own=False, deps=(), no_suspect=False, staged=False, later=None, mq=False):
         import contextlib, landing as ld
         self.put('lean/Sheaf/Old.lean', 'module\nimport Sheaf.D0\npublic theorem old : True := by exact value0\n')
         for i in range(30):
@@ -183,11 +183,22 @@ class SelectiveRecovery(Repo):
         for d in ('requests','done','backup'): (builds/d).mkdir(parents=True)
         if later: later()
         for e in entries:
-            ld.write_json(builds/'requests'/f"{e['landing']}.json", dict(id=e['landing'],group='G',files=[
-                          dict(path=e['item'].replace('.', '/')+'.lean',module=e['item'])]))
+            rel = e['item'].replace('.', '/')+'.lean'
+            f = dict(path=rel, module=e['item'])
+            if mq:
+                landed_text = self.g('show', f"{e['commit']}:lean/{rel}") + '\n'
+                before = self.g('show', f"{e['commit']}^:lean/{rel}") + '\n'
+                f.update(existed=True, sha=__import__('hashlib').sha256(landed_text.encode()).hexdigest())
+                for d, t in (('backup', before), ('staged', landed_text)):
+                    q = builds/d/e['landing']/rel; q.parent.mkdir(parents=True, exist_ok=True); q.write_text(t)
+            ld.write_json(builds/'requests'/f"{e['landing']}.json", dict(id=e['landing'],group='G',files=[f]))
         b=dict(id='batch',time=ld.now(),round=0,handled=[],entries=entries)
         logs=[]; calls=[]
-        with patch.object(bl,'ROOT',self.root), patch.object(bl.repairs,'ROOT',self.root), patch.object(bl.repairs,'JOBS',self.root/'local/batch/repair'), patch.object(bl.md,'ROOT',self.root), \
+        mqp = [patch.object(ld,'merge_queue',lambda: mq), patch.object(ld,'BACKUP',builds/'backup'), patch.object(ld,'STAGED',builds/'staged'),
+               patch.object(ld,'INFLIGHT',builds/'inflight'), patch.object(bl,'MQ_LOG',lambda x: logs.append(('MQ',x)))]
+        with contextlib.ExitStack() as stack:
+          for x in mqp: stack.enter_context(x)
+          with patch.object(bl,'ROOT',self.root), patch.object(bl.repairs,'ROOT',self.root), patch.object(bl.repairs,'JOBS',self.root/'local/batch/repair'), patch.object(bl.md,'ROOT',self.root), \
              patch.object(bl,'BD',local/'batch'),patch.object(bl,'OPEN',local/'batch/open.json'), \
              patch.object(bl,'CLOSED',local/'batch/closed'),patch.object(bl,'PASSED',local/'batch/passed'), \
              patch.object(ld.li,'LEAN',self.root/'lean'),patch.object(ld,'LOCAL',local),patch.object(ld,'B',builds), \
@@ -317,6 +328,65 @@ class FailForwardBatch(SelectiveRecovery):
         self.assertTrue(any('FAIL-FORWARD' in str(x) for x in logs))
         self.assertFalse(any('withdrawn' in str(x) for x in logs))
         self.assertEqual(sum(x['state'] == 'verified' for x in b['entries']), 29)
+
+
+class MergeQueue(SelectiveRecovery):
+    """The merge queue (2026-10-19): take-out is a hard restore of the landing's files, later landings of the same
+    files go with it, unrecorded changes become landings of `U` before a snapshot."""
+    def test_overlapping_later_edit_is_restored_hard(self):
+        def later():
+            self.put('lean/Sheaf/D0.lean', 'module\npublic theorem value0 : False := by trivial -- maintainer\n')
+            self.commit('unrecorded maintainer edit')
+            self.put('local/build.log', '\u2716 [1/2] Building Sheaf.D0 (1s)\nerror: Sheaf/D0.lean:2:36: type mismatch\n')
+        b, calls, logs = self.run_batch(own=True, later=later, mq=True)
+        self.assertEqual(calls, ['red', 'green'])
+        self.assertEqual(b['entries'][0]['state'], 'returned')
+        self.assertEqual((self.root / 'lean/Sheaf/D0.lean').read_text(), 'module\npublic theorem value0 : True := by sorry\n')
+        self.assertTrue(any('unrecorded edit' in str(x) for x in logs))
+        self.assertFalse(any('FAIL-FORWARD' in str(x) or 'CONFLICT' in str(x) for x in logs))
+        self.assertEqual(json.loads((self.root / 'local/builds/done/L0.json').read_text())['result'], 'reverted')
+
+    def test_drop_plan_chain(self):
+        import landing as ld
+        lean = self.root / 'lean'; builds = self.root / 'local/builds'
+        with patch.object(ld.li, 'LEAN', lean), patch.object(ld, 'B', builds), patch.object(ld, 'REQUESTS', builds / 'requests'), \
+             patch.object(ld, 'DONE', builds / 'done'), patch.object(ld, 'BACKUP', builds / 'backup'), patch.object(ld, 'STAGED', builds / 'staged'), \
+             patch.object(ld, 'INFLIGHT', builds / 'inflight'), patch.object(ld, 'LOCAL', self.root / 'local'), patch.object(ld, 'WORK', self.root / 'coord'):
+            ld.dirs()
+            a0 = (lean / 'Sheaf/A.lean').read_bytes()
+            (lean / 'Sheaf/A.lean').write_text('module\n-- r1\n'); r1 = ld.new_record('G', {'Sheaf/A.lean': a0}, 'r1')
+            (lean / 'Sheaf/A.lean').write_text('module\n-- r1 r2\n'); r2 = ld.new_record('PR', {'Sheaf/A.lean': b'module\n-- r1\n'}, 'r2')
+            b0 = (lean / 'Sheaf/B.lean').read_bytes()
+            (lean / 'Sheaf/B.lean').write_text('module\n-- r3\n'); r3 = ld.new_record('H', {'Sheaf/B.lean': b0}, 'r3')
+            dropped, restore, notes = ld.drop_plan([r1['id']])
+            self.assertEqual([r['id'] for r in dropped], [r1['id'], r2['id']])
+            self.assertEqual(restore, {'Sheaf/A.lean': a0})
+            self.assertEqual(len(notes), 1)
+            ld.drop_close(dropped, 'red build')
+            self.assertEqual([r['id'] for r in ld.records(ld.REQUESTS)], [r3['id']])
+            self.assertIn('taken out with', json.loads((builds / 'done' / f"{r2['id']}.json").read_text())['reason'])
+
+    def test_unrecorded_changes_become_a_landing(self):
+        import landing as ld, importlib.util
+        spec = importlib.util.spec_from_file_location('sheaf_build', pathlib.Path(__file__).parent / 'build.py')
+        build = importlib.util.module_from_spec(spec); spec.loader.exec_module(build)
+        lean = self.root / 'lean'; builds = self.root / 'local/builds'
+        self.g('update-ref', ld.VERIFIED_REF, self.base)
+        with patch.object(ld.li, 'LEAN', lean), patch.object(ld.li, 'ROOT', self.root), patch.object(ld, 'B', builds), \
+             patch.object(ld, 'REQUESTS', builds / 'requests'), patch.object(ld, 'DONE', builds / 'done'), patch.object(ld, 'BACKUP', builds / 'backup'), \
+             patch.object(ld, 'STAGED', builds / 'staged'), patch.object(ld, 'INFLIGHT', builds / 'inflight'), \
+             patch.object(ld, 'LOCAL', self.root / 'local'), patch.object(ld, 'WORK', self.root / 'coord'):
+            ld.dirs()
+            # A changed by the commit 'land delivery' after main, with no record; C new and uncommitted
+            self.put('lean/Sheaf/C.lean', 'module\n')
+            r = build.record_unrecorded()
+            self.assertEqual(r['group'], 'U')
+            self.assertEqual(sorted(f['path'] for f in r['files']), ['Sheaf/A.lean', 'Sheaf/C.lean'])
+            self.assertEqual((builds / 'backup' / r['id'] / 'Sheaf/A.lean').read_text(), 'module\n\npublic theorem A : True := by sorry\n')
+            self.assertIsNone(build.record_unrecorded())          # nothing new since
+            self.put('lean/Sheaf/C.lean', 'module\n-- later\n')   # a later unrecorded edit on top of that landing
+            r2 = build.record_unrecorded()
+            self.assertEqual((builds / 'backup' / r2['id'] / 'Sheaf/C.lean').read_text(), 'module\n')
 
 
 class IncrementalGraph(Repo):
