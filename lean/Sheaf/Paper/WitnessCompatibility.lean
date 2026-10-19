@@ -11,7 +11,10 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 
 /-!
 # Compatibility of normalized towers with retained étale origins
@@ -88,7 +91,62 @@ flatness of the coefficient map nor boundedness is required. -/
 @[instance] theorem pbcRestriction_isRightAdjoint {R S : Type (u + 1)}
     [CommRing R] [CommRing S] (φ : R →+* S) :
     (Sheaf.derivedRestrictScalars J φ).IsRightAdjoint := by
-  sorry
+  classical
+  let E : Sheaf J (ModuleCat.{u + 1} R) ⥤ Sheaf J (ModuleCat.{u + 1} S) :=
+    Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
+  let U := Sheaf.restrictScalars J φ
+  let adj : E ⊣ U :=
+    Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
+  have : E.Additive := adj.left_adjoint_additive
+  let B := (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ).obj (ModuleCat.of S S)
+  let X := (Functor.const Cᵒᵖ).obj B
+  let a := presheafToSheaf J (ModuleCat.{u + 1} R)
+  let a' := presheafToSheaf J (ModuleCat.{u + 1} S)
+  let F := sheafToPresheaf J (ModuleCat.{u + 1} R)
+  let W := (Functor.whiskeringRight Cᵒᵖ _ _).obj
+    (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)
+  have : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ) :=
+    Sheaf.preservesSheafification_of_adjunction J
+      (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
+  let e : E ⋙ U ≅ MonoidalCategory.tensorRight (a.obj X) :=
+    Functor.associator F (W ⋙ a') U ≪≫
+      Functor.isoWhiskerLeft F (Functor.associator W a' U) ≪≫
+      Functor.isoWhiskerLeft F (Functor.isoWhiskerLeft W
+        (sheafComposeNatIso J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} φ)
+          (sheafificationAdjunction J (ModuleCat.{u + 1} S))
+          (sheafificationAdjunction J (ModuleCat.{u + 1} R))).symm) ≪≫
+      Functor.isoWhiskerLeft F (Functor.associator W _ a).symm ≪≫
+      Functor.isoWhiskerLeft F (Functor.isoWhiskerRight
+        (Functor.whiskeringRightObjCompIso _ _ ≪≫
+          (Functor.whiskeringRight _ _ _).mapIso
+            (ModuleCat.extendScalarsCompRestrictScalarsIso.{u + 1} φ) ≪≫
+          whiskeringRightTensorRightIso _) a) ≪≫
+      Functor.isoWhiskerLeft F (Sheaf.presheafToSheafCompTensorRightIso X).symm ≪≫
+      (Functor.associator F a (MonoidalCategory.tensorRight (a.obj X))).symm ≪≫
+      Functor.isoWhiskerRight
+        (asIso (sheafificationAdjunction J (ModuleCat.{u + 1} R)).counit)
+        (MonoidalCategory.tensorRight (a.obj X)) ≪≫ Functor.leftUnitor _
+  have hU : U.Faithful := inferInstance
+  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} R)) :=
+    IsGrothendieckAbelian.hasColimits _
+  have : HasColimitsOfSize.{0, 0} (Sheaf J (ModuleCat.{u + 1} R)) :=
+    hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
+  have : HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} R)) :=
+    ⟨fun K _ ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete K)⟩
+  have : E.PreservesKFlatQuasiIso := by
+    apply CategoryTheory.Functor.PreservesKFlatQuasiIso.mk'
+    intro K hK hKa
+    have ht := CochainComplex.acyclic_tensorRight_of_kFlat K hK hKa (a.obj X)
+    have hEU := ht.of_iso
+      ((NatIso.mapHomologicalComplex e (.up ℤ)).app K).symm
+    have hUK : ((U.mapHomologicalComplex (.up ℤ)).obj
+        ((E.mapHomologicalComplex (.up ℤ)).obj K)).Acyclic :=
+      hEU.of_iso ((CategoryTheory.Functor.mapHomologicalComplexCompIso
+        (Iso.refl (E ⋙ U)) (.up ℤ)).app K)
+    intro n
+    exact (ShortComplex.exact_map_iff_of_faithful _ U).1 (hUK n)
+  exact (adj.derivedAdjunction.ofNatIsoRight
+    U.rightDerivedFunctorIsoMapDerivedCategory).isRightAdjoint
 
 /-- Derived scalar extension, fixed by the adjunction to actual restriction of scalars.
 Source: Stacks 06YY (blueprint: def-weil-pbc-witness-compatibility). -/
@@ -316,7 +374,14 @@ theorem pbcWitnessedTower_id_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficientDa
     (∀ n : ℕ, (P.alpha n).hom ≫ 𝟙 (P.K n) =
       (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
         (𝟙 (P.origin n).L.obj) ≫ (P.alpha n).hom) := by
-  sorry
+  constructor
+  · intro n
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  constructor
+  · intro n
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  · intro n
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
 /-- The identity has the actual identity map at both kinds of levels.
 Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
@@ -343,7 +408,17 @@ theorem pbcWitnessedTower_comp_laws {T : Scheme.{u}} {d : Scheme.AdicCoefficient
     (∀ n : ℕ, (P.alpha n).hom ≫ (f.u n ≫ g.u n) =
       (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
         (f.v n ≫ g.v n) ≫ (V.alpha n).hom) := by
-  sorry
+  constructor
+  · intro n
+    rw [Functor.map_comp, Category.assoc, g.theta_naturality,
+      ← Category.assoc, f.theta_naturality, Category.assoc]
+  constructor
+  · intro n
+    rw [Functor.map_comp, Category.assoc, g.beta_naturality,
+      ← Category.assoc, f.beta_naturality, Category.assoc]
+  · intro n
+    rw [← Category.assoc, f.origin_naturality, Category.assoc,
+      g.origin_naturality, ← Category.assoc, ← Functor.map_comp]
 
 /-- Composition has the actual levelwise composites of both maps.
 Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
@@ -370,7 +445,14 @@ theorem pbcWitnessedTower_category_laws (T : Scheme.{u}) (d : Scheme.AdicCoeffic
       (g : PbcWitnessedTowerHom Q V) (h : PbcWitnessedTowerHom V W),
       pbcWitnessedTowerComp (pbcWitnessedTowerComp f g) h =
         pbcWitnessedTowerComp f (pbcWitnessedTowerComp g h)) := by
-  sorry
+  constructor
+  · intro P Q f
+    ext n <;> simp [pbcWitnessedTowerComp, pbcWitnessedTowerId]
+  constructor
+  · intro P Q f
+    ext n <;> simp [pbcWitnessedTowerComp, pbcWitnessedTowerId]
+  · intro P Q V W f g h
+    ext n <;> simp [pbcWitnessedTowerComp, Category.assoc]
 
 /-- The category of witnessed normalized towers, with levelwise composition of pairs.
 Source: blueprint order 1352 (blueprint: def-weil-pbc-witness-compatibility). -/
@@ -406,7 +488,11 @@ closed under isomorphisms. Thus its reduction also belongs to the test category.
 theorem pbcWitnessedInput_memReductionDomain (T : Scheme.{u}) (d : Scheme.AdicCoefficientDatum A)
     (P : PbcWitnessedInputTowers T d) (n : ℕ) :
     pbcWitnessReductionDomain T d n (P.obj.K (n + 1)) := by
-  sorry
+  refine ⟨P.property (n + 1), ?_⟩
+  obtain ⟨L, hL, ⟨e⟩⟩ := P.property n
+  exact ⟨L, hL, ⟨e ≪≫
+    (finiteCoefficientRealization T (PbcQuotient d n)).mapDerivedCategory.mapIso
+      (P.obj.theta n).symm⟩⟩
 
 /-- One family carries compatible retained witnesses functorially, with precisely the
 normalization prescribed by rho. The family is tested only on the stated full input
