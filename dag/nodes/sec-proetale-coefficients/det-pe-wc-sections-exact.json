@@ -20,76 +20,47 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=X_{\\mathrm{proét}}$ and evaluate at the given object $U$. By [lem-weil-pbc-sheafification-exact], clause 1, a kernel of abelian sheaves is the sectionwise kernel. By [lem-weil-pbc-module-sheaves-limits-sectionwise], the same holds for kernels of $\\mathcal R$-modules, as kernels are finite limits. Consequently, in either category, if $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$ is short exact, then $i_U$ identifies $A(U)$ with $\\ker(p_U)$. Evaluation is additive: for morphisms $f,g$, $(f+g)_U=f_U+g_U$ by sectionwise addition. For modules these maps are $\\mathcal R(U)$-linear, by the definition of morphism in [def-weil-sheaf-of-modules-category]. Thus evaluation is left exact in both cases.",
+   "text": "Transport abelian sheafification and its locally-bijective equivalence criterion from a small model of the pro-etale site in the section universe max v (t+1). The site itself has object universe t+1 and hom universe t, so essentiallySmallSelf supplies this smallness. Evaluation on abelian sheaves preserves finite limits because sheafToPresheaf and presheaf evaluation do. Evaluation on module sheaves preserves finite limits by the existing sectionwise-limits instance. Both evaluation functors are additive by sectionwise addition.",
    "uses": [
     "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CO, lemma-limits-colimits-abelian-sheaves (2); Tag 03DB, lemma-limits-colimits (limits); Tag 03DA, lemma-abelian; blueprint proof opening sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $p:F\\to G$ be an epimorphism in either of the stated categories. In the module case apply [lem-weil-pbc-module-sheaves-colimits-forgetful], clause 1: forgetting the $\\mathcal R$-action preserves cokernels, so $\\operatorname{coker}(p)=0$ implies that the underlying abelian-sheaf map has zero cokernel and is an epimorphism. Its sheafification hypothesis is satisfied on the small site: the abelian sheafification functor is that of [lem-weil-pbc-sheafification-exact]. The abelian case needs no forgetting. No assertion about objectwise surjectivity has yet been used.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA, lemma-abelian, exactness of the forgetful functor; Tag 03CN, lemma-abelian-abelian (4), cokernels"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] to the abelian-sheaf epimorphism of step 2. For every object $V$ and $y\\in G(V)$ it gives a covering $\\{V_j\\to V\\}$ and lifts $x_j\\in F(V_j)$ of $y|_{V_j}$. Forgetting the additions and scalar actions leaves exactly these sections, restrictions and equalities. Hence the underlying map of sheaves of sets is locally surjective. The reverse implication in [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] makes it an epimorphism of sheaves of sets.",
+   "text": "For an epimorphism g of abelian sheaves, the general-site abelian epi/local-surjectivity criterion gives local surjectivity. Forgetting addition gives a locally surjective morphism of set sheaves. Apply the already proved source isWeaklyContractible_of_iso at the identity isomorphism Spec D = Spec D, in the same arbitrary section universe. Its surjectivity conclusion makes the evaluated group homomorphism epic. This uses the projectivity argument directly and avoids passing through set-sheaf epimorphisms.",
    "uses": [
     "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CN, lemma-abelian-abelian (5), with sites.tex Tags 00WM, definition-sheaves-injective-surjective (2), and 00WN, lemma-mono-epi-sheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply clause 2 of [det-pe-wcb-projective] to the epimorphism of sheaves of sets obtained in step 3. Its hypotheses are exactly the given $U=\\operatorname{Spec}D\\in X_{\\mathrm{proét}}$ and w-contractibility of $D$. It yields surjectivity of $F(U)\\to G(U)$ on underlying sets, hence surjectivity of the corresponding abelian-group or $\\mathcal R(U)$-linear map. Thus evaluation carries every epimorphism in either source category to a surjective homomorphism.",
+   "text": "The declared moduleSheaves_colimits_forgetful theorem supplies preservation of finite colimits by SheafOfModules.toSheaf R. Hence an epimorphism of module sheaves is an epimorphism on underlying abelian sheaves. Step 2 gives surjectivity on sections; the same underlying map is the evaluated module homomorphism, so the latter is epic as well.",
    "uses": [
-    "det-pe-wcb-projective"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
-    "place": "sentence beginning By [det-pe-wcb-projective]; det-pe-wcb-projective, statement clause 2"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply steps 1 and 4 to an arbitrary short exact sequence $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to0$. Step 1 gives injectivity of $i_U$ and $\\operatorname{im}(i_U)=\\ker(p_U)$, while step 4 gives surjectivity of $p_U$. Thus $0\\to A(U)\\to B(U)\\to C(U)\\to0$ is short exact. This is exactness of the additive evaluation functor, with values in abelian groups or $\\mathcal R(U)$-modules respectively.",
+   "text": "For each evaluation functor apply Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels to the finite-limit preservation of step 1 and epimorphism preservation of steps 2 and 3. Additivity and preservation of homology imply preservation of finite colimits by Functor.preservesFiniteColimits_of_preservesHomology. Combine these two colimit assertions with the two finite-limit assertions to obtain the unchanged four-part conclusion.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
-    "place": "last sentence: a left exact functor preserving epimorphisms is exact, written out on an arbitrary short exact sequence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "det-pe-wcb-projective"
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-wc-sections/det-pe-wc-sections-exact.proof.md",
-  "place": "entire proof, expanded using Stacks Tags 03CO, 03DB, 03DA, 03CN, 00WM and 00WN"
+  "place": "Entire proof, using the already proved source isWeaklyContractible_of_iso for its projectivity step at arbitrary section universe; Mathlib Abelian.Exact and ShortComplex.ExactFunctor for the final categorical inference. Formalized by H6, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -231,5 +202,15 @@
   "group": "Q86",
   "result": "pass",
   "note": "Read node, blueprint statement+proof, the 4 stmt-dep records/declarations (Mathlib ProEt/topology/mk, IsWContractibleRing hierarchy via #print, ringedSiteModules=SheafOfModules, sheafSections) and SheafOfModules.evaluation universe order. Lean: X:Scheme.{t}, D:Type t w-contractible, f:Spec D ⟶ X weakly etale, R:Sheaf RingCat.{u}; conclusion PreservesFiniteLimits∧PreservesFiniteColimits for abelian sheafSections and module evaluation at ProEt.mk f, universe max v (t+1) (generalizes project u+1 convention, no silent restriction). Edge cases (zero ring/empty U, empty X, zero sheaves) covered. No duplicate (existing evaluation theorems assume weak contractibility/section-surjectivity). No defs, sorry only, source+blueprint docstrings with 5 proof steps, only lean field changed, statement verbatim. nt_compile.py: clean, 1.9 s, no warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261019T002618-L-2160538",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

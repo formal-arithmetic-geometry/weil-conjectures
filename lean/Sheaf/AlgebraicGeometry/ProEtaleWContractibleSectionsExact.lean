@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q86
+Authors: SHEAF groups Q86 and H6
 -/
 module
 
@@ -9,11 +9,17 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import Mathlib.CategoryTheory.Abelian.Exact
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.Algebra.Category.Grp.EpiMono
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.LocallySurjective
-import Sheaf.AlgebraicGeometry.ProEtale.Projective
 
 /-!
 # Exact sections over a w-contractible affine pro-etale object
@@ -51,10 +57,11 @@ Proof:
    Abelian sheafification exists on the small site. The abelian case needs no forgetting.
 3. By lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective, such epimorphisms
    locally lift every section. Forgetting operations gives local surjectivity of
-   the underlying set sheaves. By lem-weil-pbc-site-sheaf-sets-epi-locally-surjective
-   their morphism is an epimorphism of sheaves of sets.
-4. Clause 2 of det-pe-wcb-projective applies to `Spec D` because `D` is w-contractible.
-   It makes the map on sections surjective, also as a group or module homomorphism.
+   the underlying set sheaves.
+4. The proved source theorem `isWeaklyContractible_of_iso` applies to `Spec D` in
+   any section universe. It makes each locally surjective set-sheaf map surjective
+   on sections, also as a group or module homomorphism. This is the projectivity
+   argument of det-pe-wcb-projective, with no restriction on the section universe.
 5. Apply steps 1 and 4 to any short exact sequence. Evaluation preserves the kernel
    and the surjection, hence the full short exact sequence. Equivalently, both additive
    functors preserve finite limits and finite colimits. -/
@@ -72,6 +79,55 @@ theorem wContractible_sections_exact
       (SheafOfModules.evaluation.{max v (t + 1)} R (op (ProEt.mk f))) ∧
     PreservesFiniteColimits
       (SheafOfModules.evaluation.{max v (t + 1)} R (op (ProEt.mk f))) := by
-  sorry
+  have : EssentiallySmall.{max v (t + 1)} X.ProEt := essentiallySmallSelf _
+  have : HasSheafify
+      ((equivSmallModel.{max v (t + 1)} X.ProEt).inverse.inducedTopology (topology X))
+      AddCommGrpCat.{max v (t + 1)} :=
+    instHasSheafifyOfPreservesLimitsForgetOfHasFiniteLimitsOfSmallOppositeCover
+      ((equivSmallModel.{max v (t + 1)} X.ProEt).inverse.inducedTopology (topology X))
+      AddCommGrpCat.{max v (t + 1)}
+  have : HasSheafify (topology X) AddCommGrpCat.{max v (t + 1)} :=
+    hasSheafifyEssentiallySmallSite.{t, max v (t + 1), t + 1,
+      (max v (t + 1)) + 1, max v (t + 1)} (topology X) _
+  have : (topology X).WEqualsLocallyBijective AddCommGrpCat.{max v (t + 1)} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, max v (t + 1),
+      t + 1, (max v (t + 1)) + 1, max v (t + 1), max v (t + 1), max v (t + 1)}
+      (topology X)
+  let W := ProEt.mk f
+  let evAb := (sheafSections (topology X) AddCommGrpCat.{max v (t + 1)}).obj (op W)
+  let evMod := SheafOfModules.evaluation.{max v (t + 1)} R (op W)
+  have hW : (topology X).IsWeaklyContractible.{max v (t + 1)} W :=
+    isWeaklyContractible_of_iso (R := CommRingCat.of D) (Iso.refl _)
+  have : evAb.Additive := ⟨by intros; rfl⟩
+  have : evMod.Additive := ⟨by intros; rfl⟩
+  have : PreservesFiniteLimits evAb := by
+    change PreservesFiniteLimits
+      (sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj (op W))
+    infer_instance
+  have : evAb.PreservesEpimorphisms := by
+    constructor
+    intro M N g hg
+    have : Sheaf.IsLocallySurjective g :=
+      (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{max v (t + 1)} g).mpr hg
+    let g' := (sheafCompose (topology X)
+      (CategoryTheory.forget AddCommGrpCat.{max v (t + 1)})).map g
+    exact (AddCommGrpCat.epi_iff_surjective (evAb.map g)).mpr (hW g' inferInstance)
+  have : evAb.PreservesHomology :=
+    Functor.preservesHomology_of_preservesEpis_and_kernels evAb
+  have : PreservesFiniteColimits evAb :=
+    Functor.preservesFiniteColimits_of_preservesHomology evAb
+  have : PreservesFiniteColimits (SheafOfModules.toSheaf.{max v (t + 1)} R) :=
+    (moduleSheaves_colimits_forgetful R).2.2.1
+  have : evMod.PreservesEpimorphisms := by
+    constructor
+    intro M N g hg
+    let gAb := (SheafOfModules.toSheaf R).map g
+    have : Epi gAb := inferInstance
+    exact (ModuleCat.epi_iff_surjective (evMod.map g)).mpr
+      ((AddCommGrpCat.epi_iff_surjective (evAb.map gAb)).mp inferInstance)
+  have : evMod.PreservesHomology :=
+    Functor.preservesHomology_of_preservesEpis_and_kernels evMod
+  exact ⟨inferInstance, inferInstance, inferInstance,
+    Functor.preservesFiniteColimits_of_preservesHomology evMod⟩
 
 end AlgebraicGeometry.Scheme.ProEt
