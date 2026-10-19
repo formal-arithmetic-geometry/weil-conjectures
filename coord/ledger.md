@@ -17014,3 +17014,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:57 L: returned deliver/Q43/lem-per-rig-etale-principal-tower-conormal-transfer (reviewer RETURN: Route-pivot drop (class F, 2026-10-19 artin-gabber section of side coord/route-pivot-dropped.txt). The item itself is dr)
 - 03:57 L: returned deliver/Q71/lem-per-rdp-nonsquare-conic-transition (reviewer RETURN: Route pivot (F/B9, coord/repair-notes/lem-per-artin-gabber-affine-curve.json, 2026-10-19). The item itself is in the 202)
 - 03:57 L: returned deliver/Q79/lem-per-normal-surface-canonical-module (reviewer RETURN: Route-pivot rule F: the item lem-per-normal-surface-canonical-module is itself in the 2026-10-19 artin-gabber drop secti)
+- 03:57 L: returned deliver/Q142/lem-per-etale-supported-cotangent-completion (reviewer RETURN: Route-pivot fault: the item is on the drop list and cannot be repaired. Mechanical finding confirmed. In side coord/rout)
