@@ -16580,3 +16580,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:25 L: returned deliver/U4/Sheaf.Paper.RationalLocalizingProjectionFormula (reviewer RETURN: (reviewer C-d9ca5, head d9ca5425f) H2 (point 6): (a) dag/nodes/sec-six-functors-basics/def-sfb-proetale-rational-localiz)
 - 22:30 L: returned deliver/R7/Sheaf.CategoryTheory.StrictTowerArithmeticRestriction (reviewer RETURN: (reviewer C-c470a, head c470a2b99) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Stric)
 - 00:12 L: returned deliver/X6/Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom (reviewer RETURN: (reviewer C-01d82, head 01d82ebe5) S3 point 5 (import only the proof needs written public; H9 by analogy): lean/Sheaf/Ca)
+- 00:20 L: returned deliver/R8/Sheaf.Paper.IntegralOpenImageProperFormulas (reviewer RETURN: (reviewer C-cd209, head cd209bdb0) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralOpenIm)
