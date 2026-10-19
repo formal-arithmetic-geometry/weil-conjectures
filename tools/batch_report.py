@@ -34,8 +34,10 @@ contains it (not only the earliest, which is what the dispatch tag coord/queue-b
                        left out and not reported.
             Unreachable and pruned nodes (below a finished node, behind an unsplit node) are not counted. Nodes that
             future splits will create cannot be counted, so `total` is a lower bound.
-  total     per batch: open + waiting over the three stages, in units of nodes (stages 1/2), sorries (stage-3 modules)
-            and nodes (stage-3 (b)).
+            2026-10-20 (the human): stage 3 is shown in modules/sorries only: a (b) node whose Lean module exists adds
+            that module (with its sorries) to stage 3's waiting; one without a Lean module (no statement yet) is
+            stage-2 work and joins stage 2's waiting set (counted once; one in the stage-2 queue is open there).
+  total     per batch: open + waiting over the three stages, in units of nodes (stages 1/2) and sorries (stage 3).
   running   items held by a worker (dispatcher queue-all.tsv state `held by`)
   review    items delivered and waiting for review/landing (state `delivered by`)
 Stages 1/2: this project's coord/queue.tsv, closures computed from the DAG as tools/tag_batches.py does (full dependency
@@ -81,6 +83,16 @@ items = []   # (stage, item, project, batches, weight)
 for r in rows(R / "coord/queue.tsv"):
     if r[1] in ("1", "2"): items.append((r[1], r[0], str(R), {b for b in B if r[0] in reach[b]}, 1))
 lb = {r[0]: set(r[1].split(",")) & set(B) for r in rows(LIVE / "coord/queue-batches-all.tsv")}
+try:   # 2026-10-20 (b69): say so when the stage-3 route is stale (a failing walk keeps the last complete route)
+    import time as _time
+    _age = _time.time() - json.loads((LIVE / "local/sorry-route.json").read_text()).get("t", 0)
+    if _age > 3600:
+        _f = LIVE / "local/sorry-route-failed.json"
+        print(f"WARNING: the sorry route (local/sorry-route.json) is {_age / 3600:.1f} h old; stage-3 tags and counts may be "
+              "wrong" + (f" (the last walk failed {(_time.time() - _f.stat().st_mtime) / 60:.0f} min ago: "
+                         "local/sorry-route-failed.json, ~/cc1/sorry-route.log)" if _f.exists() and _f.stat().st_mtime > _time.time() - _age else ""))
+except (OSError, ValueError):
+    print("WARNING: no sorry route (local/sorry-route.json)")
 try:   # own routes (2026-10-18): {batchN: set(modules)}; a batch missing here falls back to queue-batches-all.tsv
     _sr = json.loads((LIVE / "local/sorry-route.json").read_text())
     own, own_t = {k: set(v) for k, v in (_sr.get("own") or {}).items() if k in B}, _sr.get("t", 0)
@@ -139,11 +151,7 @@ for n, t in TG.items():
     s2w = {i for i in w1 if g.needs_statement(i)}
     s2 = (s2w | (g.stmt_needed(s2w) - other - A)) - q12["2"]
     rmods = own.get(n, set(_route.get(n) or ()))
-    held = sorted(m for m in rmods - q3 if live_file(m).is_file())
-    hs = 0
-    for m in held:
-        try: hs += max(dq.li.sorry_count(live_file(m).read_text(errors="ignore")), 1)
-        except OSError: pass
+    held = {m for m in rmods - q3 if live_file(m).is_file()}
     counted = rmods | {it for stg, it, proj, bs, w in items if stg == "3" and n in bs}
     # (b) the human, 2026-10-18 (stage-3 rule: prove from the targets downward and prune; lower nodes are a plan, not a
     # to-do list): a node without proved Lean counts only below a route sorry: the live project's tools/below_route.py
@@ -160,29 +168,40 @@ for n, t in TG.items():
         try: return dq.li.sorry_count(live_file(m).read_text(errors="ignore")) == 0
         except OSError: return False
     below = set(below_route.below(g, dq, n, _sr, TG, A)[0]) if _sr else set()
-    s3 = set()
+    # 2026-10-20 (the human): stage 3 is reported in modules/sorries only. A node below a route sorry whose Lean module
+    # does not exist yet (no statement) is stage-2 work: added to stage 2's waiting set (a set of nodes, so a node stage 2
+    # already counts is not counted twice; one in the stage-2 queue is open there). A node with a module that is not an
+    # item yet (statement dependencies unstated, gate-held) adds its module to stage 3's waiting modules.
+    s2more = set()
     for i in w1 & below:
         d = g.live[i]
         if dq.is_leaf(d) or proved(i): continue
         m = dq.module_of(d)
         if m and m in counted: continue
-        if dq.is_def(d) and not dq.has_decl(d): continue
-        s3.add(i)
-    W[n] = (len(s1), len(s2), len(held), hs, len(s3))
+        if m and live_file(m).is_file() and not (dq.is_def(d) and not dq.has_decl(d)): held.add(m)
+        else: s2more.add(i)
+    s2 |= s2more - q12["2"]
+    hs = 0
+    for m in held:
+        try: hs += max(dq.li.sorry_count(live_file(m).read_text(errors="ignore")), 1)
+        except OSError: pass
+    W[n] = (len(s1), len(s2), len(held), hs)
 print(f"{'batch':7} {'stage':5} {'open':>15} {'waiting':>26} {'exclusive':>10} {'running':>8} {'review':>7}")
 for b in B:
     for stg in "123":
         c = C[(b, stg)]
         o = f"{c[0]} mod/{c[1]} sorry" if stg == "3" else str(c[0])
         wv = W[b]
-        wt = f"{wv[2]} mod/{wv[3]} sorry + {wv[4]} nodes" if stg == "3" else str(wv[int(stg) - 1])
+        wt = f"{wv[2]} mod/{wv[3]} sorry" if stg == "3" else str(wv[int(stg) - 1])
         print(f"{b:7} {stg:5} {o:>15} {wt:>26} {c[2]:>10} {(c[3] if have else '-'):>8} {(c[4] if have else '-'):>7}")
     wv = W[b]; o1, o2, o3 = C[(b, "1")][0], C[(b, "2")][0], C[(b, "3")][1]
-    tot = o1 + wv[0] + o2 + wv[1] + o3 + wv[3] + wv[4]
-    print(f"{b:7} total {tot:>15}   = stage 1 {o1 + wv[0]} + stage 2 {o2 + wv[1]} + stage 3 {o3 + wv[3]} sorries + {wv[4]} nodes")
-print("legend: open = claimable queue items now; waiting = certain own work of that stage not in the queue yet (stage 1 not "
-      "split, stage 2 no Lean statement, stage 3 gate-held route modules + nodes without proved Lean below a route sorry); total = open + "
-      "waiting; own work only, assumed nodes done")
+    tot = o1 + wv[0] + o2 + wv[1] + o3 + wv[3]
+    print(f"{b:7} total {tot:>15}   = stage 1 {o1 + wv[0]} + stage 2 {o2 + wv[1]} + stage 3 {o3 + wv[3]} sorries")
+print("legend: open = claimable queue items now; waiting = certain own work of that stage not in the queue yet (stage 1: "
+      "nodes not split; stage 2: nodes without a Lean statement, including nodes below a route sorry that have no Lean "
+      "module yet, each counted once; stage 3, in modules/sorries only: route modules and modules of unproved nodes below "
+      "a route sorry that are not claimable yet, e.g. statement dependencies unstated); total = open + waiting; own work "
+      "only, assumed nodes done")
 print("future splits cannot be counted, so each total is a lower bound")
 print("open items in no batch closure:", dict(untagged) or 0, "| dispatcher state:", qa if have else "not available",
       "| stage 3 own routes:", ",".join(sorted(own)) or "none (queue-batches-all.tsv)")
