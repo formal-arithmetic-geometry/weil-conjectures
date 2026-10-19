@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-constant-inverse-image-section",
+ "kind": "statement",
+ "title": "Transported global sections and constant quotient kernels",
+ "statement": "Let $\\mathcal C,\\mathcal E$ be small sites and let $L:\\operatorname{Sh}(\\mathcal C,\\mathrm{Set})\\to\\operatorname{Sh}(\\mathcal E,\\mathrm{Set})$ preserve finite limits. Let $F$ be the algebraic inverse-image datum of [lem-weil-pbc-constant-completion-equivalence]. For a ring sheaf $R$ and global section $s$, define $\\widetilde s$ by applying $L$ to the map $1\\to R$ determined by $s$, precomposing with the unique map $1\\to L(1)$ and composing with the underlying-ring comparison. For every test sheaf $T$, the image of its constant-valued map $s_T:T\\to R$ equals the constant-valued map $\\widetilde s_{L(T)}$. If a ring map $q:R\\to S$ kills $s$, then $F(q)$ kills $\\widetilde s$. In particular, for a commutative ring $A$, ideal $I$ and $a\\in I$, let $\\beta_a$ be the image of the transported sheafification section of $a$ under $\\mathrm{constantMap}(F,A)$. Then $\\beta_a$ belongs to the sectionwise kernel of $\\underline A\\to\\underline{A/I}$ on every object of $\\mathcal E$, with constants as in [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; sites.tex Tag 00YV; sites-cohomology.tex Tag 093M"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Factor a global section map through the terminal sheaf. Its inverse image is terminal because L preserves finite limits. Uniqueness of maps to L(1) proves the test-sheaf formula. For a ring map killing the section, ring_naturality and the ringZero graph identity prove that its transported section is killed as well.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification unit is natural for the quotient A to A/I, so a in I maps to zero on the source site. Apply the preceding vanishing result. Naturality of F.constants for that quotient identifies the result with vanishing of beta_a under the target quotient.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00YV, Modules on Sites 03D2, cohomology 093M: transport through the terminal sheaf and naturality for constant coefficient quotients; no polynomial rigidity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving terminal objects transports global sections and preserves sections killed by a morphism of ring sheaves",
+   "results": "8 hits including hasGlobalSectionsFunctor_of_hasTerminal and pushforwardSections; no exact match for arbitrary finite-limit-preserving L with AlgebraicInverseImage graph identities.",
+   "date": "2026-10-19",
+   "verdict": "Use terminal sheaves and the graph identities directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsTerminal.isTerminalObj",
+   "results": "5 hits, including CategoryTheory.Limits.IsTerminal.isTerminalObj in Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal.",
+   "date": "2026-10-19",
+   "verdict": "Used to transport the terminal test sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "isTerminalObj|sectionsEquivHom|ringZero",
+   "results": "25 hits including Functor.sectionsEquivHom, IsTerminal.isTerminalObj, and their naturality APIs.",
+   "date": "2026-10-19",
+   "verdict": "Use sectionsEquivHom to construct the transported section; the ringZero graph identity belongs to the project AlgebraicInverseImage interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite-limit preserving inverse image transports global ring sections through terminal sheaf",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Sheaf.ΓNatIsoSheafSections; AlgebraicGeometry.PresheafedSpace.Γ; AlgebraicGeometry.LocallyRingedSpace.Γ; AlgebraicGeometry.SheafedSpace.Γ; CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape; CategoryTheory.hasGlobalSectionsFunctor_of_hasTerminal; AlgebraicGeometry.LocallyRingedSpace.Γ_def",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this project-specific transported-section or normalized derived-completeness interface; retain the explicit proof using the listed Mathlib and library APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackAdjunction",
+  "date": "2026-10-19",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 2 and 3: adjunction-mate naturality and pasting at integral coefficients; the completed adjunction is supplied by lem-sp-completed-pullback-adjunction. Subargument: Constant-coefficient normalization needed for the scalar part of original Steps 3-4.",
+   "via": [
+    "lem-sp-completed-pullback-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantInverseImageSection",
+  "file": "lean/Sheaf/Paper/ConstantInverseImageSection.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.transportedConstantSection_quotient",
+  "statement": "theorem transportedConstantSection_quotient\n    {C E : Type u} [SmallCategory C] [SmallCategory E]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}\n    {L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)} [PreservesFiniteLimits L]\n    (F : InverseImageData L) (A : Type u) [CommRing A] (I : Ideal A)\n    (a : A) (ha : a ∈ I) (U : Eᵒᵖ) :\n    (quotient JD A I 0).hom.app U ((transportedConstantSection F A a).val U) = 0",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-19",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.sectionMap",
+   "CategoryTheory.ConstantCompletion.constantSectionMap",
+   "CategoryTheory.ConstantCompletion.inverseImageSection",
+   "CategoryTheory.ConstantCompletion.inverseImageSection_map",
+   "CategoryTheory.ConstantCompletion.inverseImageSection_zero",
+   "CategoryTheory.ConstantCompletion.transportedConstantSection",
+   "CategoryTheory.ConstantCompletion.transportedConstantSection_quotient"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T093526-L-2322644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T093526-L-2322644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

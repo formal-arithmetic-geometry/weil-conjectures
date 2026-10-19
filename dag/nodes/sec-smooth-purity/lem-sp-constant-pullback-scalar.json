@@ -1,0 +1,124 @@
+{
+ "id": "lem-sp-constant-pullback-scalar",
+ "kind": "statement",
+ "title": "Module pullback transports scalar multiplication",
+ "statement": "Let $\\mathcal C,\\mathcal E$ be small sites, $L$ a finite-limit-preserving functor of their topoi and $F$ its algebraic inverse-image datum [lem-weil-pbc-constant-completion-equivalence]. Let $A$ be a commutative ring, $a\\in A$ and $M$ a sheaf of $\\underline A$-modules on $\\mathcal C$ [def-weil-sheaf-of-modules-category], with constants as in [def-weil-pbc-constant-sheaf]. Let $\\beta_a$ be the transported global section of [lem-sp-constant-inverse-image-section], including the structural map to the target constant coefficient sheaf. The prescribed ordinary module pullback $P=\\mathrm{pull}(F,\\mathrm{constantMap}(F,A))$ satisfies $P(a\\cdot\\mathrm{id}_M)=\\beta_a\\cdot\\mathrm{id}_{P(M)}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7; sites.tex Tag 00YV; sites-cohomology.tex Tag 093M"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sp-constant-inverse-image-section"
+ ],
+ "proof": [
+  {
+   "text": "Use inverseImageSection_map from [lem-sp-constant-inverse-image-section] to identify the transported scalar on any test sheaf. Apply moduleSMul on the underlying sheaf of M to the scalar map, identity and multiplication map. Naturality of moduleUnderlying proves that algebraic module inverse image carries multiplication by a to multiplication by its transported global section.",
+   "uses": [
+    "lem-sp-constant-inverse-image-section",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the injective Hom equivalence of the scalar-extension adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction] to the two endomorphisms. Unit naturality and linearity identify extension of the transported scalar with multiplication by its structural image beta_a.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-constant-inverse-image-section",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Transport of module operations, Tags 03D2/03D7; canonical inverse image of constants, Sites Tag 00YV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules over constant commutative ring preserves multiplication by constant scalar via the canonical constant ring comparison",
+   "results": "8 hits: PresheafOfModules.Sheafify.one_smul, mul_smul, map_smul_eq, map_smul; Scheme.Modules.map_smul and Hom.app_smul; ModuleCat.Tilde.smul_section_apply; SheafOfModules.restrictScalars.",
+   "date": "2026-10-19",
+   "verdict": "No exact match: sheafification scalar laws and site-specific module maps do not identify an arbitrary geometric inverse image with the given natural constant-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val.",
+   "date": "2026-10-19",
+   "verdict": "No constant inverse-image normalization theorem; use the ordinary restriction interface and scalar-extension adjunction for the module part."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*scalar|scalar.*constant|map.*sectionsSMul",
+   "results": "22 Mathlib hits, concerning function fields, differential fields and continuous maps. Local rg finds sectionsSMul and its naturality, but no theorem that geometric pullback preserves constant scalars.",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The module inverse-image graph equations supply the action calculation; the constant-section normalization is the remaining statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaf modules preserves scalar multiplication by transported constant section",
+   "results": "8 hits: PresheafOfModules.Sheafify.map_smul; PresheafOfModules.Sheafify.smul_zero; PresheafOfModules.Sheafify.SMulCandidate.h; PresheafOfModules.Sheafify.smul; ModuleCat.Tilde.smul_section_apply; PresheafOfModules.Sheafify.smul.congr_simp; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.map_smul",
+   "date": "2026-10-19",
+   "verdict": "No exact match for this project-specific transported-section or normalized derived-completeness interface; retain the explicit proof using the listed Mathlib and library APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackAdjunction",
+  "date": "2026-10-19",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 2 and 3: adjunction-mate naturality and pasting at integral coefficients; the completed adjunction is supplied by lem-sp-completed-pullback-adjunction. Subargument: Underived module scalar compatibility used to prove preservation in original Steps 3-4.",
+   "via": [
+    "lem-sp-completed-pullback-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantPullbackScalar",
+  "file": "lean/Sheaf/Paper/ConstantPullbackScalar.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.constantPullback_scalar",
+  "statement": "theorem constantPullback_scalar\n    {C E : Type u} [SmallCategory C] [SmallCategory E]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}\n    (A : Type u) [CommRing A]\n    {L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)}\n    [PreservesFiniteLimits L] (F : InverseImageData L)\n    (a : A) (M : Mod (constant JC A)) :\n    (pull F (constantMap F A)).map\n        ⟨PresheafOfModules.sectionsSMul M.val (constantSection (J := JC) a)⟩ =\n      ⟨PresheafOfModules.sectionsSMul\n        ((pull F (constantMap F A)).obj M).val (transportedConstantSection F A a)⟩",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T093526-L-2322644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261019T093526-L-2322644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
