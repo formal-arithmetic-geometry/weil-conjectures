@@ -36,6 +36,68 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem frobenius_natural {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0)
+    (hY : (p : Γ(Y, ⊤)) = 0) (n : ℕ) :
+    X.iterateFrobenius hp hX n ≫ f = f ≫ Y.iterateFrobenius hp hY n := by
+  apply Scheme.Hom.ext (by ext x; rfl)
+  intro U
+  simp only [Scheme.Hom.comp_app]
+  change f.app U ≫ (X.iterateFrobenius hp hX n).app (f ⁻¹ᵁ U) ≫
+    X.presheaf.map (𝟙 _) =
+      (Y.iterateFrobenius hp hY n).app U ≫ f.app U
+  rw [X.presheaf.map_id, Category.comp_id]
+  ext s
+  exact (map_pow (f.app U).hom s _).symm
+
+private theorem frobenius_affine (A : Type u) [CommRing A] {p : ℕ} (hp : p.Prime)
+    (hA : (p : A) = 0) (n : ℕ) :
+    ∃ hSpec : (p : Γ(Spec (CommRingCat.of A), ⊤)) = 0,
+      (Spec (CommRingCat.of A)).iterateFrobenius hp hSpec n =
+        Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime A hp hA n)) := by
+  have hSpec : (p : Γ(Spec (CommRingCat.of A), ⊤)) = 0 := by
+    simpa using congrArg (Scheme.ΓSpecIso (CommRingCat.of A)).inv hA
+  refine ⟨hSpec, ?_⟩
+  apply ext_to_Spec
+  change (Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
+      ((Spec (CommRingCat.of A)).iterateFrobenius hp hSpec n).appTop =
+    (Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
+      (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime A hp hA n))).appTop
+  rw [← Scheme.ΓSpecIso_inv_naturality]
+  ext a
+  exact (map_pow (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom a (p ^ n)).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem frobenius_pow (X : Scheme.{u}) {p : ℕ} (hp : p.Prime)
+    (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) :
+    HPow.hPow (α := End X) (X.iterateFrobenius hp hX 1) n =
+      X.iterateFrobenius hp hX n := by
+  induction n with
+  | zero =>
+    rw [pow_zero, End.one_def]
+    apply Scheme.Hom.ext (by ext x; rfl)
+    intro U
+    simp only [Scheme.Hom.id_app]
+    change 𝟙 _ ≫ X.presheaf.map (𝟙 _) =
+      (X.iterateFrobenius hp hX 0).app U
+    rw [X.presheaf.map_id, Category.id_comp]
+    ext s
+    change s = s ^ p ^ 0
+    simp
+  | succ n ih =>
+    rw [pow_succ, ih, End.mul_def]
+    apply Scheme.Hom.ext (by ext x; rfl)
+    intro U
+    simp only [Scheme.Hom.comp_app]
+    change (X.iterateFrobenius hp hX n).app U ≫
+        (X.iterateFrobenius hp hX 1).app U ≫ X.presheaf.map (𝟙 _) =
+      (X.iterateFrobenius hp hX (n + 1)).app U
+    rw [X.presheaf.map_id, Category.comp_id]
+    ext s
+    change (s ^ p ^ n) ^ p ^ 1 = s ^ p ^ (n + 1)
+    simp [pow_mul, pow_succ]
+
 /-- Absolute Frobenius is well-defined on schemes and has the expected prime-ideal,
 local-ring, section, stalk, restriction and affine descriptions, also for all iterates.
 The scheme construction is already a morphism of locally ringed spaces: its `c` field is
@@ -103,6 +165,56 @@ theorem absoluteFrobenius_well_defined (p : ℕ) (hp : p.Prime) :
         ∃ hA : (p : A) = 0,
           (X.iterateFrobenius hp (hX.2 ⊤) n).resLE U U le_rfl ≫ e.hom =
             e.hom ≫ Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime A hp hA n)))) := by
-  sorry
+  constructor
+  · intro A _ hA n
+    refine ⟨?_, ?_, ?_, ?_, frobenius_affine A hp hA n⟩
+    · intro P hP
+      ext a
+      exact hP.pow_mem_iff_mem (p ^ n) (pow_pos hp.pos n)
+    · ext x
+      apply PrimeSpectrum.ext
+      ext a
+      exact x.isPrime.pow_mem_iff_mem (p ^ n) (pow_pos hp.pos n)
+    · intro _
+      exact ⟨fun a ha ↦ (isUnit_pow_iff (pow_ne_zero n hp.ne_zero)).mp ha⟩
+    · intro a
+      induction n with
+      | zero => simp
+      | succ n ih =>
+        rw [Function.iterate_succ_apply', ih]
+        change (a ^ p ^ n) ^ p ^ 1 = a ^ p ^ (n + 1)
+        simp [pow_mul, pow_succ]
+  · intro X hX n
+    refine ⟨frobenius_pow X hp (hX.2 ⊤) n, rfl,
+      X.iterateFrobenius_app_apply hp (hX.2 ⊤) n, ?_, ?_, ?_⟩
+    · intro x s
+      obtain ⟨U, hxU, t, rfl⟩ := X.presheaf.exists_germ_eq s
+      exact (Scheme.Hom.germ_stalkMap_apply
+        (X.iterateFrobenius hp (hX.2 ⊤) n) U x hxU t).trans
+          (map_pow (X.presheaf.germ U x hxU).hom t (p ^ n))
+    · intro U
+      have hU : (p : Γ(U.toScheme, ⊤)) = 0 := by
+        simpa using congrArg U.topIso.inv (hX.2 U)
+      refine ⟨hU, ?_⟩
+      apply (cancel_mono U.ι).mp
+      rw [Scheme.Hom.resLE_comp_ι]
+      exact (frobenius_natural U.ι hp hU (hX.2 ⊤) n).symm
+    · intro U A _ e
+      have hU : (p : Γ(U.toScheme, ⊤)) = 0 := by
+        simpa using congrArg U.topIso.inv (hX.2 U)
+      have hS : (p : Γ(Spec (CommRingCat.of A), ⊤)) = 0 := by
+        simpa using congrArg e.inv.appTop hU
+      have hA : (p : A) = 0 := by
+        simpa using congrArg (Scheme.ΓSpecIso (CommRingCat.of A)).hom hS
+      refine ⟨hA, ?_⟩
+      obtain ⟨hSpec, hSpec_eq⟩ := frobenius_affine A hp hA n
+      rw [← hSpec_eq]
+      have hres : (X.iterateFrobenius hp (hX.2 ⊤) n).resLE U U le_rfl =
+          U.toScheme.iterateFrobenius hp hU n := by
+        apply (cancel_mono U.ι).mp
+        rw [Scheme.Hom.resLE_comp_ι]
+        exact (frobenius_natural U.ι hp hU (hX.2 ⊤) n).symm
+      rw [hres]
+      exact frobenius_natural e.hom hp hU hSpec n
 
 end AlgebraicGeometry
