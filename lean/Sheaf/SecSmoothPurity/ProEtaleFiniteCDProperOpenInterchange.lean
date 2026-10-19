@@ -7,13 +7,12 @@ module
 public import Sheaf.AlgebraicGeometry.ProperExceptionalOpenBaseChange
 public import Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction
 public import Sheaf.AlgebraicGeometry.ExceptionalBaseChangeCartesianOpenInjectiveAcyclic
-public import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
-import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
+import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-!
 # Finite-CD proper/open interchange on the small pro-etale site
@@ -42,6 +41,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+open SheafOfModules in
 /-- Under an all-sheaf finite cohomological-dimension bound, proper direct image
 commutes with extension by zero on an arbitrary open in the ordinary unbounded
 small pro-etale derived categories.  The displayed comparison is the canonical map
@@ -115,6 +115,106 @@ theorem proEtaleFiniteCDProperOpenInterchange
             (exceptionalOpenAdjunction i A).counit.app
               ((sfIntrinsicDerivedOpen A (pullback.fst p i) ⋙
                 proEtaleConstantDerivedDirectImage p A).obj M) := by
-  sorry
+  have hLambda := (proEtaleDerivedOpenRestriction p i A).2.2
+  refine ⟨?_, hLambda, ?_⟩
+  · classical
+    let C := proEtaleRingModules (pullback p i)
+      (proEtaleConstantRing (pullback p i) A)
+    let B := proEtaleRingModules V (proEtaleConstantRing V A)
+    let D := proEtaleRingModules T (proEtaleConstantRing T A)
+    let F := proEtaleConstantModuleDirectImage p A
+    have : PreservesFiniteLimits F :=
+      (proEtaleConstantModuleDirectImage_additive_leftExact p A).2
+    let k := sfIntrinsicExtensionByZero (pullback.fst p i) A
+    let r := proEtaleConstantModuleDirectImage (pullback.snd p i) A
+    let j := sfIntrinsicExtensionByZero i A
+    let t := sfIntrinsicPullback A i
+    have hjFull : j.Full := by
+      dsimp [j, sfIntrinsicExtensionByZero]
+      infer_instance
+    have hjFaithful : j.Faithful := by
+      dsimp [j, sfIntrinsicExtensionByZero]
+      infer_instance
+    have hunit : IsIso (sfIntrinsicOpenAdjunction A i).unit := inferInstance
+    -- Transport the invertible sheaf open unit to the derived adjunction.
+    let eunit : j.mapDerivedCategory ⋙ t.mapDerivedCategory ≅ 𝟭 _ :=
+      (Functor.mapDerivedCategoryCompIso j t).symm ≪≫
+        Functor.mapDerivedCategoryNatIso (asIso (sfIntrinsicOpenAdjunction A i).unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso _
+    let ff := (exceptionalOpenAdjunction i A).fullyFaithfulLOfCompIsoId eunit
+    have := ff.full
+    have := ff.faithful
+    have hGroth (X : Scheme.{u}) : IsGrothendieckAbelian.{u + 1}
+        (proEtaleRingModules X (proEtaleConstantRing X A)) :=
+      (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, 0}
+        (ProEt.topology X) (proEtaleConstantRing X A)).1
+    have := hGroth V
+    have := hGroth (pullback p i)
+    have hd (N : B) (q : ℕ) (hq : d < q) : IsZero ((F.rightDerived q).obj N) :=
+      F.isZero_rightDerived_of_isZero_homology N q (hcd N q hq)
+    apply (NatTrans.isIso_iff_isIso_app _).mpr
+    intro M
+    let K : CochainComplex C ℤ := DerivedCategory.Q.objPreimage M
+    let J := (CochainComplex.kInjectiveResolutionFunctor.{u + 1} C).obj K
+    have : IsIso (DerivedCategory.Q.map
+        ((CochainComplex.toKInjectiveResolution.{u + 1} C).app K)) :=
+      Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso C _) _
+        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u + 1} C K).2
+    have eM : M ≅ DerivedCategory.Q.obj J :=
+      (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+        asIso (DerivedCategory.Q.map
+          ((CochainComplex.toKInjectiveResolution.{u + 1} C).app K))
+    have hkJ (n : ℤ) : F.rightAcyclic ((k.mapHomologicalComplex (.up ℤ)).obj J |>.X n) := by
+      intro q
+      apply F.isZero_rightDerived_of_isZero_homology
+      exact isZero_higherDirectImage_cartesianOpen_injective A p i ⟨d, hcd⟩
+        (J.X n) (q + 1) (Nat.zero_lt_succ q)
+    -- Acyclic terms make the derived comparison invertible on k!J.
+    have hcomp := F.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic d hd
+      ((k.mapHomologicalComplex (.up ℤ)).obj J) hkJ
+    have hγ := sfProperOpenSheafComparison_isIso A p i
+    let γ := asIso (sfProperOpenSheafComparison A (pullback.snd p i)
+      (pullback.fst p i) i p (IsPullback.of_hasPullback p i).flip)
+    let LJ := (k.mapHomologicalComplex (.up ℤ)).obj J
+    let RJ := (r.mapHomologicalComplex (.up ℤ)).obj J
+    let eF : F.rightDerivedFunctor.obj (DerivedCategory.Q.obj LJ) ≅
+        DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj LJ) :=
+      F.rightDerivedFunctor.mapIso ((DerivedCategory.quotientCompQhIso B).app LJ).symm ≪≫
+        (asIso (F.rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient B (.up ℤ)).obj LJ))).symm ≪≫
+        (DerivedCategory.quotientCompQhIso D).app _
+    let esheaf : DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj LJ) ≅
+        (sfIntrinsicDerivedOpen A i).obj (DerivedCategory.Q.obj RJ) :=
+      DerivedCategory.Q.mapIso
+          ((Functor.mapHomologicalComplexCompIso (Iso.refl (k ⋙ F)) (.up ℤ)).app J ≪≫
+            (NatIso.mapHomologicalComplex γ (.up ℤ)).symm.app J ≪≫
+            (Functor.mapHomologicalComplexCompIso (Iso.refl (r ⋙ j)) (.up ℤ)).symm.app J) ≪≫
+        (j.mapDerivedCategoryFactors.app RJ).symm
+    let eY : (proEtaleConstantDerivedDirectImage p A).obj
+        ((sfIntrinsicDerivedOpen A (pullback.fst p i)).obj M) ≅
+        (sfIntrinsicDerivedOpen A i).obj (DerivedCategory.Q.obj RJ) :=
+      F.rightDerivedFunctor.mapIso
+          (k.mapDerivedCategory.mapIso eM ≪≫ k.mapDerivedCategoryFactors.app J) ≪≫
+        eF ≪≫ esheaf
+    -- On the essential image of the fully faithful open extension, the counit is invertible.
+    have hc := (exceptionalOpenAdjunction i A).isIso_counit_app_of_iso eY
+    have hLambdaM : IsIso ((proEtaleOpenRestrictionLambdaInverse p i A).app M) := by
+      have := hLambda
+      infer_instance
+    change IsIso ((sfIntrinsicDerivedOpen A i).map
+      ((proEtaleOpenRestrictionLambdaInverse p i A).app M) ≫
+        (exceptionalOpenAdjunction i A).counit.app _)
+    infer_instance
+  · intro M
+    have hΓ :
+        (sfProperOpenDerivedComparison A (pullback.snd p i) (pullback.fst p i)
+          i p (IsPullback.of_hasPullback p i).flip).app M =
+        ((exceptionalOpenAdjunction i A).homEquiv _ _).symm
+          ((proEtaleOpenRestrictionLambdaInverse p i A).app M) := by
+      rfl
+    constructor
+    · rw [hΓ]
+      exact ((exceptionalOpenAdjunction i A).homEquiv _ _).apply_symm_apply _
+    · rfl
 
 end AlgebraicGeometry.Scheme
