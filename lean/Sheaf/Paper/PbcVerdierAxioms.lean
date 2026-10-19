@@ -9,16 +9,9 @@ public import Sheaf.Paper.PbcCommonStageCones
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Sheaf.CategoryTheory.StageSystemVerdier
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CommonStageCalculus
-import Sheaf.Paper.FiniteStagePairCategory
-import Sheaf.Paper.PbcConeIndependence
-import Sheaf.Paper.PbcDistinguishedDiagramLifting
-import Sheaf.Paper.PbcRationalCategory
-import Sheaf.Paper.PbcScalarExtension
-import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import Mathlib.CategoryTheory.Localization.Triangulated
+import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 
 /-! # Verdier axioms for the specified common-stage triangles
 
@@ -32,6 +25,73 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe w u v
 open CategoryTheory CategoryTheory.Pretriangulated CategoryTheory.Limits
+-- Compare the concrete tensor-Hom model with the existing Verdier localization.
+private noncomputable def stageRationalComparison
+    (R : Type*) [CommRing R] (C : Type u) [Category.{v} C]
+    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    ScalarLocalization R C p ⥤ Rationalization (Submonoid.powers p) C where
+  obj X := (Rationalization.Q (Submonoid.powers p) C).obj X.obj
+  map {X Y} f := Rationalization.tensorHomEquiv (Submonoid.powers p)
+    (Localization.Away p) X.obj Y.obj f
+  map_id X := by
+    change Rationalization.tensorHomEquiv _ _ _ _ (1 ⊗ₜ[R] 𝟙 X.obj) = _
+    simp
+  map_comp {X Y Z} f g := by
+    induction f using TensorProduct.induction_on with
+    | zero => simp only [Limits.zero_comp, map_zero, Limits.zero_comp]
+    | tmul a f =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp only [Limits.comp_zero, map_zero, Limits.comp_zero]
+      | tmul b g =>
+        change Rationalization.tensorHomEquiv _ _ _ _
+          (ScalarLocalization.composition R C p _ _ _ (b ⊗ₜ[R] g) (a ⊗ₜ[R] f)) = _
+        rw [ScalarLocalization.composition_tmul]
+        simp only [Rationalization.tensorHomEquiv_tmul, Functor.map_comp,
+          Linear.smul_comp, Linear.comp_smul, smul_smul, mul_comm]
+      | add g h hg hh =>
+        rw [Preadditive.comp_add X Y Z (a ⊗ₜ[R] f) g h]
+        simp only [_root_.map_add]
+        rw [hg, hh]
+        exact (Preadditive.comp_add _ _ _ _ _ _).symm
+    | add f h hf hh =>
+      rw [Preadditive.add_comp X Y Z f h g]
+      simp only [_root_.map_add]
+      rw [hf, hh]
+      exact (Preadditive.add_comp _ _ _ _ _ _).symm
+
+private theorem stageLocalization
+    (R : Type*) [CommRing R] (C : Type u) [Category.{v} C]
+    [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
+    (ScalarLocalization.localization R C p).IsLocalization
+      (Rationalization.W (Submonoid.powers p) C) := by
+  classical
+  let M := Submonoid.powers p
+  let F := stageRationalComparison R C p
+  have : F.Full := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).surjective⟩
+  have : F.Faithful := ⟨fun {X Y} ↦
+    (Rationalization.tensorHomEquiv M (Localization.Away p) X.obj Y.obj).injective⟩
+  have : F.EssSurj := ⟨fun X ↦ by
+    obtain ⟨Y, ⟨e⟩⟩ := Rationalization.exists_iso_obj X
+    exact ⟨⟨Y⟩, ⟨e⟩⟩⟩
+  have : F.IsEquivalence := {}
+  let Q := ScalarLocalization.localization R C p
+  have fac : Q ⋙ F ≅ Rationalization.Q M C :=
+    NatIso.ofComponents (fun X ↦ Iso.refl _) (by
+      intro X Y f
+      dsimp [Q, F, ScalarLocalization.localization, stageRationalComparison]
+      simp only [Category.comp_id, Category.id_comp,
+        Rationalization.tensorHomEquiv_tmul, one_smul]
+      rfl)
+  exact Functor.IsLocalization.of_equivalence_target (Rationalization.Q M C)
+      (Rationalization.W M C) Q F.asEquivalence.symm
+      (Functor.isoWhiskerRight fac.symm F.inv ≪≫ Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft Q F.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
+
 namespace CategoryTheory.StageSystem
 
 variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
@@ -121,7 +181,35 @@ its image-triangle characterization is qbarStagePretriangulated_exists, which
 specifies the same distinguished set. Transport TR4 along these identifications. -/
 @[instance] theorem qbarStageTriangulated (E : Padic.FiniteCoefficientFields l Qbar) :
     IsTriangulated (pbcStageCategory l Qbar T E) := by
-  sorry
+  let C := pbcIntegralStage l Qbar T E
+  let R := PbcIntegralRing l (pbcFiniteField.{u} l Qbar E)
+  let p : R := pbcStageUniformizer.{u} l Qbar E
+  let Q := pbcStageLocalization l Qbar T E
+  have : Q.IsLocalization (Rationalization.W (Submonoid.powers p) C) :=
+    stageLocalization R C p
+  let t := Triangulated.Localization.pretriangulated Q
+    (Rationalization.W (Submonoid.powers p) C)
+  have ht : (fun [pInst : Pretriangulated (pbcStageCategory l Qbar T E)] ↦
+      ∀ D : Triangle (pbcStageCategory l Qbar T E),
+        D ∈ distTriang (pbcStageCategory l Qbar T E) ↔
+          ∃ D' : Triangle C, D' ∈ distTriang C ∧
+            Nonempty (D ≅ Q.mapTriangle.obj D')) (pInst := t) := by
+    intro D
+    change (∃ D', ∃ _ : D ≅ Q.mapTriangle.obj D', D' ∈ distTriang C) ↔ _
+    constructor
+    · rintro ⟨D', e, hD'⟩
+      exact ⟨D', hD', ⟨e⟩⟩
+    · rintro ⟨D', hD', ⟨e⟩⟩
+      exact ⟨D', e, hD'⟩
+  have heq : t = qbarStagePretriangulated l Qbar T E :=
+    (qbarStagePretriangulated_exists l Qbar T E).unique ht
+      (qbarStagePretriangulated_exists l Qbar T E).exists.choose_spec
+  let := t
+  have ht4 : IsTriangulated (pbcStageCategory l Qbar T E) :=
+    Triangulated.Localization.isTriangulated Q (Rationalization.W (Submonoid.powers p) C)
+  change @IsTriangulated _ _ _ _ _ _ t at ht4
+  rw [heq] at ht4
+  exact ht4
 
 /-- The prescribed coefficient tensor preserves the integral-image triangles.
 Source: blueprint order 1540, exact finite-stage input
@@ -133,7 +221,43 @@ triangle, with the actual tensor shift comparison. Isomorphism closure gives
 exactness on every distinguished rational triangle, including identity fields. -/
 @[instance] theorem qbarScalarExtensionExact {E F : Padic.FiniteCoefficientFields l Qbar}
     (h : E ≤ F) : (pbcScalarExtension l Qbar T hDim.out hInv.out h).IsTriangulated := by
-  sorry
+  let A := pbcAmbientScalarExtension l Qbar T h
+  let B := pbcIntegralScalarExtension l Qbar T hDim.out hInv.out h
+  let Q := pbcStageLocalization l Qbar T E
+  let Q' := pbcStageLocalization l Qbar T F
+  let G := pbcScalarExtension l Qbar T hDim.out hInv.out h
+  have : (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Qbar T h)).CommShift ℤ :=
+    Adjunction.commShift_of_rightAdjoint _ ℤ
+  have : (pbcDerivedRestrict (pbcCompletedScalarMap l Qbar T h)).IsTriangulated :=
+    inferInstanceAs (((pbcRestrict (pbcCompletedScalarMap l Qbar T h)).mapDerivedCategory
+      ).IsTriangulated)
+  have : A.IsTriangulated :=
+    (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Qbar T h)).isTriangulated_leftAdjoint
+  let eB : B ⋙ pbcStageInclusion l Qbar T F ≅ pbcStageInclusion l Qbar T E ⋙ A :=
+    Iso.refl _
+  have : NatTrans.CommShift eB.hom ℤ :=
+    Functor.CommShift.ofComp_compatibility (F := B)
+      (G := pbcStageInclusion l Qbar T F) eB ℤ
+  have : B.IsTriangulated :=
+    (Functor.isTriangulated_iff_comp_right eB).2 inferInstance
+  have hQ (D : Triangle (pbcIntegralStage l Qbar T F)) (hD : D ∈ distTriang _) :
+      Q'.mapTriangle.obj D ∈ distTriang _ :=
+    ((qbarStagePretriangulated_exists l Qbar T F).exists.choose_spec _).2
+      ⟨D, hD, ⟨Iso.refl _⟩⟩
+  have : NatTrans.CommShift
+      (pbcScalarIntegralComparison l Qbar T hDim.out hInv.out h).hom ℤ :=
+    (pbcScalarShift_exists l Qbar T hDim.out hInv.out h).exists.choose_spec
+  constructor
+  intro D hD
+  obtain ⟨D', hD', ⟨e⟩⟩ :=
+    ((qbarStagePretriangulated_exists l Qbar T E).exists.choose_spec D).1 hD
+  have hBD := hQ (B.mapTriangle.obj D') (B.map_distinguished D' hD')
+  let c := (Functor.mapTriangleCompIso Q G).symm.app D' ≪≫
+    (Functor.mapTriangleIso
+      (pbcScalarIntegralComparison l Qbar T hDim.out hInv.out h)).app D' ≪≫
+    (Functor.mapTriangleCompIso B Q').app D'
+  exact isomorphic_distinguished _ hBD _
+    ((G.mapTriangle.mapIso e) ≪≫ c)
 
 /-- The actual common-stage triangulation satisfies all four Verdier axioms.
 Source: blueprint order 1540 (blueprint: thm-weil-pbc-verdier-axioms).

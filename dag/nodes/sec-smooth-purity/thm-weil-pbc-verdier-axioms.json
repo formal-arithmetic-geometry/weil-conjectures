@@ -46,155 +46,77 @@
  ],
  "proof": [
   {
-   "text": "Use the coefficient and scheme hypotheses of [def-weil-pbc-finite-stage-pair-category]. For a finite extension $E$, set $A=\\mathcal O_E$. Its constant sections in each $(A/\\varpi^n)_T$ form a compatible family, hence define $A\\to\\Gamma(T_{\\mathrm{proet}},A_T)$ for the actual limit sheaf of [def-weil-pbc-adic-coefficient-datum]. On the abelian category of $A_T$-modules [def-weil-sheaf-of-modules-category], define $(a f)_U(x)=a_U f_U(x)$. Commutativity of $A_T(U)$ makes this an $A_T(U)$-linear map; compatibility of constant sections with restrictions makes it a sheaf map. The module laws and bilinear composition hold sectionwise. Apply [lem-weil-linear-abelian-derived-category] with the ordinary ring $A$ to obtain $A$-linear Hom groups and $A$-linear shifts on $D(\\operatorname{Mod}(A_T))$. The full integral compatible uniform tower subcategory inherits these Hom groups and actions.",
+   "text": "Use the actual integral stages, their constant-section linear Hom groups and linear shifts from [def-weil-pbc-rational-category] and [prop-weil-pbc-common-stage-calculus]. Their inherited triangulation is supplied by [lem-weil-pbc-uniform-complete-triangulated], through the published integral full-subcategory instance. No new coefficient category or shift is chosen.",
    "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-linear-abelian-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Implicit finite-stage input: linearity of the completed-coefficient derived category."
-   }
-  },
-  {
-   "text": "For each finite $E$, [lem-weil-pbc-uniform-complete-triangulated] makes the integral compatible uniform tower category triangulated under the stated noetherian, finite-dimensional and $\\ell$-invertible hypotheses. Step 1 supplies its $\\mathcal O_E$-linear structure and linear shift. Apply [lem-weil-linear-scalar-localization-triangulated] with $R=\\mathcal O_E$ and its uniformizer $\\varpi$. By [def-weil-pbc-rational-category], this raw scalar localization is exactly $\\mathcal C_E(T)$. Thus the four finite-stage axioms of [def-weil-triangulated-category] apply. The transition functors are exact with the coherent associators and shift comparisons specified in [prop-weil-pbc-scalar-extension].",
-   "uses": [
-    "lem-weil-pbc-uniform-complete-triangulated",
-    "lem-weil-linear-scalar-localization-triangulated",
     "def-weil-pbc-rational-category",
-    "def-weil-triangulated-category",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Implicit finite-stage TR1--TR4 inputs for all four axiom sentences."
-   }
-  },
-  {
-   "text": "The category and shift are additive by [prop-weil-pbc-common-stage-calculus]. The inclusion $j_E$ sends a map $v$ to $[E,v]$, so it is additive by the common-stage addition formula. For $E\\subseteq M$ define $\\rho_{M/E,K}:(E,K)\\to(M,T_{M/E}K)$ and its inverse by the identity representative over $M$. Both composites are identity representatives by [def-weil-pbc-finite-stage-pair-category]. For $v:K\\to L$, the two sides of $\\rho_L j_E(v)=j_M(T_{M/E}v)\\rho_K$ have representative $T_{M/E}v$. The shifted-map formula in the calculus gives\n$$\\rho_K[1]=j_M(\\sigma_{M/E,K})\\rho_{K[1]}.$$\nIndeed the left side has representative $\\sigma_{M/E,K}$, as does the right side, using the normalized identity transition of [prop-weil-pbc-scalar-extension]. This gives natural vertex comparisons compatible with the specified shifts.",
-   "uses": [
     "prop-weil-pbc-common-stage-calculus",
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-scalar-extension"
+    "lem-weil-pbc-uniform-complete-triangulated"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Transport isomorphisms used in TR2--TR4 and final exact identifications."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-distinguished-diagram-lifting] to any finite configuration of distinguished rows used below, together with the additional arrows and equations under consideration. Its hypotheses are the finite-stage structures of step 2. The lifted vertices are $X_M=T_{M/E_X}K_X$; a third map with representative $p_M:Z_M\\to T_{M/E_X}(K_X[1])$ becomes $\\sigma_{M/E_X,K_X}p_M:Z_M\\to X_M[1]$. All repeated vertices have the same lift, all selected rows are distinguished, and the stated equations hold at that stage. On mapping a stage row back, the third map is multiplied by $\\sigma^{-1}$ as in [def-weil-pbc-common-stage-cones], cancelling this correction; step 3 restores the original vertices. Common-stage composition and the shifted-map formula of [prop-weil-pbc-common-stage-calculus] therefore recover exactly the original equations.",
+   "text": "For each stage, compare its raw scalar localization with the existing rationalization at powers of the uniformizer. The tensorHomEquiv gives a fully faithful comparison and every rationalized object has an integral lattice, so this comparison is an equivalence. Its composite with the raw localization is naturally isomorphic to the rationalization functor, proving that the raw functor is a localization at the same morphism property. Apply Mathlib Triangulated.Localization.pretriangulated and isTriangulated directly for the already published shift. Its distinguished triangles are precisely the isomorphic integral images. The uniqueness assertion qbarStagePretriangulated_exists of [def-weil-pbc-common-stage-cones] identifies this pretriangulation with the published one. Transport the IsTriangulated proof along that equality; this proves qbarStageTriangulated without choosing a second shift.",
    "uses": [
-    "lem-weil-pbc-distinguished-diagram-lifting",
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-finite-stage-pair-category",
     "def-weil-pbc-common-stage-cones",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite field inclusion, the ambient derived tensor functor in [def-weil-pbc-finite-stage-pair-category] is left adjoint to exact derived scalar restriction, with the mate shift comparison recorded in [prop-weil-pbc-common-stage-calculus]. Mathlib Adjunction.isTriangulated_leftAdjoint makes that tensor functor exact. Its integral restriction composes with the fully faithful target inclusion to give ambient tensor after source inclusion, and the integral shift was defined by this factorization. Functor.CommShift.ofComp_compatibility and Functor.isTriangulated_iff_comp_right therefore prove exactness of integral scalar extension. The preservation of the integral subcategory is precisely the existing pbcAmbientScalarExtension_preserves theorem, rather than a new hypothesis.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A distinguished rational source triangle is isomorphic to a localized integral distinguished triangle by [def-weil-pbc-common-stage-cones]. Apply exact integral tensor and then target localization. The latter preserves distinguishedness by the same integral-image characterization. The comparison pbcScalarIntegralComparison between localization followed by rational tensor and integral tensor followed by localization commutes with the published shifts by pbcScalarShift_exists in [prop-weil-pbc-common-stage-calculus]. Its mapTriangleIso, together with the two mapTriangleCompIso comparisons and the source triangle isomorphism, identifies the desired rational image triangle with the distinguished target image. Isomorphism closure proves qbarScalarExtensionExact, including repeated coefficient fields.",
+   "uses": [
+    "def-weil-pbc-common-stage-cones",
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain the already proved generic inclusion and transition-identification checks. Additivity follows from pairPreadditive_exists and additivity of the identity transition. For shift compatibility of transIso, expand its identity representatives and the pair shift; pbcStageShift_coherence with the identity-stage inclusion cancels the final inverse shift comparison. These are qbarStageInclusionAdditive and qbarTransIsoCommShift.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
     "prop-weil-pbc-common-stage-calculus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "TR2--TR4 common-stage representation; auxiliary lifting assertion separated from the axiom checks."
-   }
+   "elementary": true
   },
   {
-   "text": "For TR1, represent a given f=[M,u] at M and use finite-stage TR1 of [def-weil-triangulated-category] to choose a cone triangle of u. The second and third maps, and the object comparisons of step 3, are precisely the common-stage cone triangle in [def-weil-pbc-common-stage-cones], whose first map is the original f. For (E,K), the finite-stage identity triangle K to K to 0 to K[1] supplies its identity triangle. The object (E,0) is zero in P_T: every common-stage Hom to or from it is zero, since additive scalar extension preserves zero objects, so the class of every such map is zero. Distinguishedness is closed under isomorphism because composing the witness triangle isomorphisms again gives a witness.",
+   "text": "Specialize the already stated commonStage_verdier_existsUnique theorem, attached to this node, to the actual pbcScalarSystem using the exact finite stages and transitions above. That generic theorem carries TR1--TR4 for exactly the CommonStageDistinguished predicate of [def-weil-pbc-common-stage-cones]: finite configurations are moved to a common stage, finite-stage cone, rotation, completion and octahedron axioms are applied, and the diagrams are mapped back with the coherent comparisons of [prop-weil-pbc-common-stage-calculus]. The unique witness is exactly the one defining qbarPairPretriangulated. Project its IsTriangulated and exact-inclusion conjuncts, and use qbarTransIsoCommShift for the final conjunct of pbcVerdierAxioms. Thus the existing generic theorem supplies the blueprint axiom argument without a second invocation of the concrete distinguished-diagram-lifting or cone-independence theorems.",
    "uses": [
-    "def-weil-triangulated-category",
     "def-weil-pbc-common-stage-cones",
     "prop-weil-pbc-common-stage-calculus",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Proof, TR1 sentence, including the zero object and identity triangle."
-   }
-  },
-  {
-   "text": "For TR2, a distinguished triangle Delta lifts by step 4 to a distinguished triangle at M. Its signed rotation is distinguished by finite-stage TR2 in [def-weil-triangulated-category], and maps to the signed rotation of Delta: addition preserves the minus sign and sigma identifies the shifted first arrow with the formula in [prop-weil-pbc-common-stage-calculus]. Therefore the signed rotation is distinguished by [def-weil-pbc-common-stage-cones]. Conversely, write Delta=(X,Y,Z,f,i,p) and suppose its rotation (Y,Z,X[1],i,p,-f[1]) is distinguished. In step 4 include Delta itself as additional vertices and arrows, and include the equations identifying the rotated arrows with i,p,-f[1]. At M identify the lifted X[1] with X_M[1] using sigma. The shifted-map formula in the calculus and naturality of sigma in [prop-weil-pbc-scalar-extension] then make the lifted distinguished row exactly (Y_M,Z_M,X_M[1],i_M,p_M,-f_M[1]), where p_M now denotes the corrected last arrow of Delta as in step 4. The reverse implication of finite-stage TR2 makes (X_M,Y_M,Z_M,f_M,i_M,p_M) distinguished. Its common-stage image is isomorphic to Delta by the vertex comparisons of step 3, so Delta is distinguished by [def-weil-pbc-common-stage-cones]. This proves both implications without assuming that a stage inclusion reflects distinguishedness.",
-   "uses": [
-    "lem-weil-pbc-distinguished-diagram-lifting",
     "def-weil-triangulated-category",
-    "prop-weil-pbc-common-stage-calculus",
-    "def-weil-pbc-common-stage-cones",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Proof, TR2 sentence; reverse implication via inverse signed rotation."
-   }
-  },
-  {
-   "text": "For TR3, write the rows as X to Y to C to X[1] and X' to Y' to C' to X'[1], with first maps f,f', and let a:X to X', b:Y to Y' satisfy bf=f'a. Apply step 4 including these two maps and this equality. At the resulting stage M both rows are distinguished and b_M f_M=f'_M a_M holds, not merely its image in P_T. Finite-stage TR3 of [def-weil-triangulated-category] supplies c_M with c_M i_M=i'_M b_M and a_M[1] p_M=p'_M c_M. Its image, restored through the vertex comparisons, supplies c:C to C'. Since [prop-weil-pbc-common-stage-calculus] computes composition at a common stage and [prop-weil-pbc-scalar-extension] respects the shifts, the two displayed equations become c i=i' b and a[1]p=p'c in P_T. These are precisely the other two equations in [def-weil-pbc-triangles-with-shift], so the given square extends with its original a,b.",
-   "uses": [
-    "lem-weil-pbc-distinguished-diagram-lifting",
-    "def-weil-triangulated-category",
-    "prop-weil-pbc-common-stage-calculus",
-    "prop-weil-pbc-scalar-extension",
     "def-weil-pbc-triangles-with-shift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Proof, TR3 sentence; all square and triangle equations at one stage."
-   }
-  },
-  {
-   "text": "For TR4 let f:X to Y and g:Y to Z be composable and take any distinguished cone triangles (X,Y,C_f,f,i_f,p_f), (X,Z,C_{gf},gf,i_{gf},p_{gf}) and (Y,Z,C_g,g,i_g,p_g). Apply step 4 to all three triangles, f,g and their composite equation. They become distinguished cone triangles at the same stage with exactly the same first and second vertices wherever those are shared. Finite-stage TR4 of [def-weil-triangulated-category] gives maps alpha_M:C_f to C_{gf}, beta_M:C_{gf} to C_g and the distinguished triangle with last map i_f[1] p_g. At M the face equations are alpha_M i_f=i_{gf}g, p_{gf}alpha_M=p_f, beta_M i_{gf}=i_g, and p_g beta_M=f[1]p_{gf}. Map the entire finite diagram back to P_T. The calculus preserves its four equations, and the shift comparison in [prop-weil-pbc-scalar-extension] identifies the last map with the actual composite i_f[1]p_g. The remaining cone triangle is distinguished by [def-weil-pbc-common-stage-cones]. Thus the octahedron is obtained for the given cones, not just for newly chosen ones; the representative and cone choices used for the witnesses are interchangeable by [prop-weil-pbc-cone-independence], while the lifting lemma retains the prescribed original rows. The four verified axioms with the additive shift of step 3 now give an ordinary triangulated category by [def-weil-triangulated-category].",
-   "uses": [
-    "lem-weil-pbc-distinguished-diagram-lifting",
-    "def-weil-triangulated-category",
-    "prop-weil-pbc-common-stage-calculus",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-common-stage-cones",
-    "prop-weil-pbc-cone-independence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Proof, TR4 sentence and the triangulated-category consequence; arbitrary prescribed cone triangles."
-   }
-  },
-  {
-   "text": "For exactness of j_E, take any distinguished triangle at E. Its image with the shift comparison is a common-stage cone triangle (choose M=E and its first arrow), hence is distinguished by [def-weil-pbc-common-stage-cones]. Additivity and the natural shift comparison are supplied by [prop-weil-pbc-common-stage-calculus], so this is exactness in the sense of [def-weil-triangulated-category]. For E contained in F, the natural isomorphism rho_{F/E}:j_E to j_F T_{F/E} from step 3 is compatible with the shift structures: at K the equation is rho_K[1]=j_F(sigma_{F/E,K}) rho_{K[1]}. Both sides were explicitly represented over F in step 3. Inverting rho gives the orientation j_F T_{F/E} isomorphic to j_E requested in the statement. The inverse equation remains shift compatible, and [prop-weil-pbc-scalar-extension] makes T_{F/E} exact. Hence these are natural isomorphisms of exact functors, with the specified comparisons, rather than mere natural isomorphisms of their underlying functors.",
-   "uses": [
-    "def-weil-pbc-common-stage-cones",
-    "prop-weil-pbc-common-stage-calculus",
-    "def-weil-triangulated-category",
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-    "place": "Proof, final sentence: exact stage inclusions and exact natural isomorphisms."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-linear-abelian-derived-category",
-  "lem-weil-pbc-uniform-complete-triangulated",
-  "lem-weil-linear-scalar-localization-triangulated",
   "def-weil-pbc-rational-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-common-stage-cones",
   "def-weil-triangulated-category",
   "prop-weil-pbc-scalar-extension",
-  "prop-weil-pbc-common-stage-calculus",
-  "lem-weil-pbc-distinguished-diagram-lifting",
-  "def-weil-pbc-common-stage-cones",
-  "def-weil-pbc-triangles-with-shift",
-  "prop-weil-pbc-cone-independence"
+  "def-weil-pbc-triangles-with-shift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-weil-pbc-verdier-axioms.proof.md",
-  "place": "TR1--TR4 paragraph and final exactness sentence, expanded with finite-stage triangulation and an explicit separate simultaneous-lifting lemma; axiom and exactness conventions checked in Stacks derived.tex, Tags 0144, 0145 and 014V."
+  "place": "Finite-stage inputs and final Verdier specialization; B2 completes the published finite-stage instances using Mathlib localization and triangulated adjunction, retaining the existing commonStage_verdier_existsUnique assembly and its TR1--TR4 route."
  },
  "mathlib_searches": [
   {
@@ -350,7 +272,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-uniform-complete-triangulated",
-  "lem-weil-linear-scalar-localization-triangulated",
   "prop-weil-pbc-scalar-extension",
   "prop-weil-pbc-common-stage-calculus"
  ],
@@ -409,22 +330,11 @@
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261019T005412-L-2764625",
+  "landing": "20261019T093249-L-2286708",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.pbcVerdierAxioms",
-   "AlgebraicGeometry.Scheme.qbarScalarExtensionExact",
-   "AlgebraicGeometry.Scheme.qbarStageTriangulated",
-   "CategoryTheory.StageSystem.qbarStageInclusionAdditive",
-   "CategoryTheory.StageSystem.qbarTransIsoCommShift"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.qbarScalarExtensionExact",
-   "AlgebraicGeometry.Scheme.qbarStageTriangulated"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
