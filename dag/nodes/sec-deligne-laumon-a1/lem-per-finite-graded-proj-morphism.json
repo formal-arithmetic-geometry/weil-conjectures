@@ -12,11 +12,120 @@
   "def-weil-finitely-generated-module",
   "def-pc-proj",
   "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many $C$-module generators of $A$ and replace them by all their homogeneous components; they still generate, since their span contains the original generators. Include $1$, and write the resulting homogeneous generators as $a_j\\in A_{e_j}$, with $N=\\max_j e_j$ [def-weil-finitely-generated-module]. For homogeneous $a\\in A_n$ with $n>N$, express $a$ in these generators and project to degree $n$: $a=\\sum_j\\iota(c_j)a_j$ with $c_j\\in C_{n-e_j}\\subseteq C_+$. Now let $\\mathfrak q$ be a point of $\\operatorname{Proj}(A)$ [def-pc-proj]. Choose homogeneous $a\\in A_t\\setminus\\mathfrak q$, $t>0$, and $k$ with $kt>N$. If every positive-degree homogeneous element of $C$ had image in $\\mathfrak q$, the displayed expression for $a^k$ would put $a^k$ in $\\mathfrak q$, contradicting primality. Thus $\\mathfrak q\\in D_+(\\iota(f))$ for some homogeneous $f\\in C_d$, $d>0$. These opens cover all of $\\operatorname{Proj}(A)$; no equality of degree-zero rings was used.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Homogeneous-component argument as in the proof of Tag 00K0 (lemma-graded-module-fg); applied to the domain U(psi) in Constructions Tag 01MY"
+   }
+  },
+  {
+   "text": "For each homogeneous $f\\in C_d$, $d>0$, define $\\alpha_f:C_{(f),0}\\to A_{(\\iota(f)),0}$ by $c/f^m\\mapsto\\iota(c)/\\iota(f)^m$ [def-nagata-homogeneous-localization-degree-zero]. It respects degrees because $\\iota$ is graded. A relation $f^k(f^n c-f^m b)=0$ is sent to the corresponding relation in $A$, so the formula is well defined and preserves sums, products and one. It is injective: if the image of $c/f^m$ is zero, then $\\iota(f)^k\\iota(c)=0$ for some $k$, and injectivity of $\\iota$ gives $f^kc=0$. Thus $c/f^m=0$. By [def-pc-proj] and [def-weil-affine-spectrum], $\\operatorname{Spec}(\\alpha_f)$ gives a morphism $r_f:D_+(\\iota(f))\\to D_+(f)$, which we also regard as a morphism to $\\operatorname{Proj}(C)$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-pc-proj",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), condition (2) and fraction construction; injectivity is checked directly from the localization relation"
+   }
+  },
+  {
+   "text": "Check agreement on overlaps, rather than assuming it. If $f\\in C_d$ and $g\\in C_e$ have positive degrees, [lem-weil-pbc-proj-basic-open-intersection] identifies the intersection of the two source charts with the principal open of $\\iota(g)^d/\\iota(f)^e$ in the $\\iota(f)$ chart, and the intersection of the target charts with the principal open of $g^d/f^e$. The map $\\alpha_f$ sends the latter element to the former. Thus $r_f$ on the source intersection factors through $D_+(f)\\cap D_+(g)=D_+(fg)$; the same holds for $r_g$. Under the restriction maps, which are graded localization maps by [def-pc-proj], both induced homomorphisms from $C_{(fg),0}$ to $A_{(\\iota(fg)),0}$ send $c/(fg)^m$ to $\\iota(c)/(\\iota(f)\\iota(g))^m$. This follows by applying $\\iota$ to numerator and denominator before or after further localization, using the fraction relation of [def-nagata-homogeneous-localization-degree-zero]. All elements have these fraction representatives, so the homomorphisms, and hence their spectrum maps [def-weil-affine-spectrum], agree.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-pc-proj",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), last paragraph of its proof; chart overlaps are Tag 01M4 (lemma-standard-open), (1)(e),(f)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-scheme-morphism-gluing] to the open cover of Step 1 and the morphisms $r_f$ of Steps 2--3, with common target $\\operatorname{Proj}(C)$. It produces a unique scheme morphism $r:\\operatorname{Proj}(A)\\to\\operatorname{Proj}(C)$ restricting to those chart maps. The fraction formulas specify the canonical Proj map of Tag 01MY on its natural domain, and Step 1 proves that domain is the entire source.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), existence by gluing the standard-open morphisms"
+   }
+  },
+  {
+   "text": "Fix homogeneous $f\\in C_d$ of positive degree. On any source chart $D_+(\\iota(g))$, with $g\\in C_e$ and $e>0$, [lem-weil-pbc-proj-basic-open-intersection] describes the inverse image of the target open $D_+(f)$ by the nonvanishing of $f^e/g^d$ in the target $g$ chart. Its pullback by the fraction formula is $\\iota(f)^e/\\iota(g)^d$, whose principal open in the source chart is exactly $D_+(\\iota(f))\\cap D_+(\\iota(g))$, by the same cited intersection formula. Here the inverse image of an affine principal open under a spectrum morphism is the principal open of the image element: a contracted prime contains an element exactly when the original prime contains its image [def-weil-affine-spectrum]. Since the source charts cover, $r^{-1}(D_+(f))=D_+(\\iota(f))$. Step 2 therefore gives the asserted ring map on the whole inverse image of each standard affine open [def-pc-proj].",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-weil-affine-spectrum",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY (lemma-morphism-proj), condition (2), using Tag 01M4 (lemma-standard-open) on each source chart"
+   }
+  },
+  {
+   "text": "View $A=\\bigoplus_n A_n$ as the graded $C$-module $M$, with action $c\\cdot a=\\iota(c)a$. This action is graded and $M$ is finite by hypothesis; $C$ is finite type over $C_0$, so all hypotheses of [lem-per-finite-graded-module-dehomogenization] hold. Its degree-zero module fractions $a/f^m$ identify with $a/\\iota(f)^m$ in $A_{(\\iota(f)),0}$: both have $a\\in A_{md}$, and both impose equality after multiplication by a power of $\\iota(f)$. The scalar action is precisely $\\alpha_f$. Hence the chart ring map is module-finite. The target standard opens cover by the point description in [def-pc-proj], and Step 5 identifies their inverse images as affine. Condition (2) of [lem-weil-pbc-finite-local-on-target] now proves that $r$ is finite.",
+   "uses": [
+    "lem-per-finite-graded-module-dehomogenization",
+    "def-pc-proj",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07Z2 (lemma-dehomogenize-finite-type), (2); global criterion: Morphisms Tag 01WI (lemma-finite-local), (2) implies (1)"
+   }
+  },
+  {
+   "text": "Each $\\alpha_f$ is injective by Step 2 and module-finite by Step 6. By [lem-weil-pbc-finite-algebra-is-integral] it is integral. Apply [lem-weil-pbc-integral-injective-lying-over] to this actual chart ring map: every prime of $C_{(f),0}$ is the contraction of a prime of $A_{(\\iota(f)),0}$. Thus $\\operatorname{Spec}(\\alpha_f)$ is surjective. The affine chart identifications [def-pc-proj] and spectrum functoriality [def-weil-affine-spectrum] identify this with the restriction of $r$ over $D_+(f)$. Every target point lies in a standard chart, so it has a preimage in that chart inverse image. This is surjectivity of $r$ in [def-weil-surjective-morphism]. The proof includes nilpotent $f$ (the charts are empty) and empty Proj; it never assumes $C_0=A_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "def-pc-proj",
+    "def-weil-affine-spectrum",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral), 00GQ (lemma-integral-overring-surjective), applied to the chart maps from Constructions Tag 01MY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-per-finite-graded-module-dehomogenization",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-lying-over",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Agent synthesis of Tag 01MY chart construction with Algebra 07Z2(2), 00GK, 00GQ and Morphisms 01WI; the cover and injectivity arguments are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +161,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.LocallyOfFiniteType (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If a graded ring $\\\\mathcal{A}$ is finitely generated as an algebra over its zero-graded component $\\\\mathcal{A}_0$, then the canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              AlgebraicGeometry.Proj 𝒜 ⟶\\n                AlgebraicGeometry.Spec { carrier := ↥(𝒜 0), comm\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the hits give Proj constructions, properness, or projectivizations of vector spaces, not this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite graded ring extension Proj morphism finite surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \"[Algebra.FiniteType (𝒜 0) A] : LocallyOfFiniteType (Proj.toSpecZero 𝒜)\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finitely generated algebra over a base ring $A$, the canonical morphism from the projective spectrum $\\\\operatorname{P\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme\", \"type\": \"{f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) : Function.Surjective (toSpec 𝒜 f)\", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous map from the projective spectrum $ \\\\operatorname{Proj}(A) $ to the prime spectrum $ \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toSpecZero\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": Proj 𝒜 ⟶ Spec (.of <| 𝒜 0)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, constructed by composing the inverse of the top isomor\"}\n  {\"name\": \"GradedRing.projZeroRingHom'_surjective\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Basic\", \"type\": \": Function.Surjective (GradedRing.projZeroRingHom' 𝒜)\", \"doc\": \"The canonical ring homomorphism from a graded ring $\\\\mathcal{A}$ to its zero-graded subsemiring $\\\\mathcal{A}(0)$ is surjective, meaning every element of $\\\\mathcal{A}(0)$ is the image of some element i\"}\n  {\"name\": \"RingHom.FiniteType.of_surjective\", \"module\": \"Mathlib.RingTheory.FiniteType\", \"type\": \"(f : A →+* B) (hf : Surjective f) : f.FiniteType\", \"doc\": \"If $ f : A \\\\to B $ is a surjective ring homomorphism, then $ B $ is a finitely generated $ A $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": X ⟶ Proj 𝒜\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: Proj chart constructions and properness are not finiteness of an arbitrary finite graded extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite injective map of nonnegatively graded rings induces a finite surjective morphism of projective spectra Proj",
+   "results": "Actual search log: {\"t\": \"2026-10-18T23:27:53Z\", \"tool\": \"leanfinder\", \"query\": \"A finite injective map of nonnegatively graded rings induces a finite surjective morphism of projective spectra Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective\", \"AlgebraicGeometry.Proj.toSpecZero\"], \"digest\": \"05f249c0d0be4785\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: properness of the structural map and Proj chart bijections do not prove the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"finite\"",
+   "results": "Actual search log: {\"t\": \"2026-10-18T23:27:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"dualTensorHom_bijective_of_finite_left_projective_right\", \"dualTensorHom_bijective_of_finite_projective_right\", \"Module.finitePresentation_of_projective\", \"Module.finitePresentation_of_projective_of_exact\", \"LinearMap.FiniteRangeSetoid.projection_equiv_id\", \"LinearMap.FiniteRangeSetoid.projection_equiv_id_iff_isNoetherian\"], \"digest\": \"4e4d3f456ce14e85\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the recorded hits concern projective modules and linear projections, not this Proj extension"
+  },
+  {
+   "tool": "grep",
+   "query": "finite|integral|map",
+   "results": "Actual search log: {\"t\": \"2026-10-18T23:28:01Z\", \"tool\": \"grep\", \"query\": \"finite|integral|map\", \"sub\": \"AlgebraicGeometry/ProjectiveSpectrum\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\"], \"digest\": \"4e3ed017b3c63df9\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: AlgebraicGeometry/ProjectiveSpectrum search gives the stronger-ideal-hypothesis functoriality API, not the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-projective-finite-group-quotient",
@@ -81,5 +218,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-graded-proj-morphism",
+  "worker": "stage1",
+  "summary": "Reused saved Q75 searches, checked Stacks 01MY, 01M4, 07Z2, 01WI, 00GK and 00GQ, and wrote the homogeneous-generator cover, chart fraction maps and injectivity, overlap agreement, gluing, inverse-image formula, chart finiteness and chartwise surjectivity. Created just the algebraic finite-module dehomogenization lemma; reused existing locality, gluing, overlap and lying-over nodes. The statement is unchanged, with no degree-zero equality or Noetherian hypothesis added.",
+  "blueprint": "The recorded ancestor lem-per-artin-gabber-affine-curve, through the regular-pair-purity and alteration chain, calls for a projective finite-group quotient. This split supplies only the finite surjective map from a graded ring to its finite invariant subring Proj in that construction. It preserves the unit and chapter route; Steps 1--5 realize the supporting Proj chart construction and Steps 6--7 its finite surjective property."
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-18fa1ebea",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-18fa1ebea (reviewer sub-agent of L); spot-checked: I read the item, the new node, the statements of all 13 cited nodes, Stacks 01MY (constructions.tex l.2053-2135) and 07Z2 (algebra.tex l.13686-13727), and the parent's Steps 2 and 4. The item statement is unchanged, true, and gives the parent what it uses; no C_0=A_0 or Noetherian hypothesis is assumed. Step 1 proves U(iota)=Proj A by degree-projecting homogeneous generators, so every coefficient lands in C_+. Step 2: injectivity of the chart maps comes from injectivity of iota through the annihilator relation. Step 3: the g^d/f^e degree indexing matches lem-weil-pbc-proj-basic-open-intersection. Step 5 gives the inverse-image formula, which is 01MY(2). Step 6: the module fractions M_(f),0 equal A_(iota f),0 with scalar action alpha_f, which feeds 01WI(2). Step 7: 00GK and 00GQ on the injective finite chart maps give surjectivity. The new node lem-per-finite-graded-module-dehomogenization is exactly 07Z2(2) with R=C_0, restricted to nonnegatively graded M. It is statement-only and self-contained, with all three kinds of search recorded; the only Mathlib near-hit, Away.finiteType, is clause (1). I tested it on small cases (M=k[x]/(x), nilpotent f, non-standard degrees). No duplicate: only the delivery cites 07Z2 in the DAG, the blueprint has no 07Z2 node, and the Proj nodes nearby state other things. The new node does not restate a clause of the item. All non-definition citations are Mathlib leaves, so the route is fine and no tool_uses is needed. No SGA, no cycle, proof_deps equals the union of uses, and every step is under 2000 characters. Minor, not a fault: 'canonical Proj map [def-pc-proj]' cites a node that does not define induced maps, but the statement pins r by its chart formulas on a cover. No fixes."
  }
 }
