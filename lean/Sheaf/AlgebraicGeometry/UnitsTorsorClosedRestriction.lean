@@ -6,11 +6,11 @@ Authors: SHEAF group A3
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
+public import WeilConjectures.AlgebraicGeometry.ZariskiUnitsRestriction
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 import Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward
 import Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
-import Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestrictionBoundary
+import WeilConjectures.AlgebraicGeometry.UnitsTorsorClosedRestrictionBoundary
 
 /-!
 # Closed restriction of classes of units torsors

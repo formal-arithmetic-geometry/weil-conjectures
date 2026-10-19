@@ -9,9 +9,9 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Sheaf.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.LocalCompleteIntersectionPresentation
+import WeilConjectures.RingTheory.LocalCompleteIntersectionPresentation
 import Sheaf.RingTheory.RegularSequenceDimensionAtPoint
-import Sheaf.RingTheory.PrincipalNeighborhoodDimension
+import WeilConjectures.RingTheory.PrincipalNeighborhoodDimension
 
 /-!
 # Local regular sequences give global complete intersections

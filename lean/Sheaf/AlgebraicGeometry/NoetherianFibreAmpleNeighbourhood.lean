@@ -18,14 +18,14 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
-import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
+import WeilConjectures.AlgebraicGeometry.AmplePositiveTensorPower
 import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 import Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.ProperBasic
+import WeilConjectures.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 /-! # Fibre ampleness near a point of a Noetherian base

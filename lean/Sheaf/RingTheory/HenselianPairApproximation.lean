@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
 import Sheaf.Paper.SmoothSectionEtaleLift
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots
+import WeilConjectures.RingTheory.EtaleSectionLiftingOfGabberRoots
 import Sheaf.RingTheory.GRingCompletionRegular
 import Sheaf.RingTheory.SmoothPolynomialFactorization
 import Mathlib.RingTheory.AdicCompletion.Completeness

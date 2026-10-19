@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
-import Sheaf.AlgebraicGeometry.InvertibleSectionLocalization
+import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
 import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions
 import Sheaf.Paper.NonvanishingSectionTrivializes
 

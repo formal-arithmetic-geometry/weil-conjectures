@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Sheaf.AlgebraicGeometry.FppfAffineRefinement
 import Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction
-import Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent
+import WeilConjectures.AlgebraicGeometry.InvariantOpenEffectiveDescent
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent

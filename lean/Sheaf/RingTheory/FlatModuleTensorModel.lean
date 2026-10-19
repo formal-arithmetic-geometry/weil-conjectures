@@ -13,8 +13,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.RingTheory.IsTensorProduct
 import Mathlib.RingTheory.FiniteStability
 import Sheaf.RingTheory.FiniteTypeApproximationFlatLoci
-import Sheaf.RingTheory.FiniteTypeApproximationFlatStage
-import Sheaf.RingTheory.LimitModuleFinitePresentation
+import WeilConjectures.RingTheory.FiniteTypeApproximationFlatStage
+import WeilConjectures.RingTheory.LimitModuleFinitePresentation
 
 /-! # A flat model of a scalar extension of a finitely presented module
 

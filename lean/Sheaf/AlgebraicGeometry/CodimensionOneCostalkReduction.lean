@@ -28,7 +28,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
-import Sheaf.RingTheory.QuotientHenselianPair
+import WeilConjectures.RingTheory.QuotientHenselianPair
 import Sheaf.RingTheory.QuasiExcellentNagata
 import Sheaf.RingTheory.NagataDomainN2
 import Sheaf.RingTheory.JapaneseDomain

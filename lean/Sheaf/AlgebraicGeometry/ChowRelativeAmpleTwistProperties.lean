@@ -5,7 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
-import Sheaf.AlgebraicGeometry.AmpleIso
+import WeilConjectures.AlgebraicGeometry.AmpleIso
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 

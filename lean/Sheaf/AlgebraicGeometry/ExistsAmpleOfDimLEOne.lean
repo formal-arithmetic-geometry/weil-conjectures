@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian
-import Sheaf.AlgebraicGeometry.AmpleIso
+import WeilConjectures.AlgebraicGeometry.AmpleIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne
 import Sheaf.AlgebraicGeometry.PicardLift

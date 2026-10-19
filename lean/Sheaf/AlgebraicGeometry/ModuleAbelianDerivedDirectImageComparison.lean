@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 import Mathlib.CategoryTheory.Sites.Adjunction
-import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import Sheaf.CategoryTheory.InjectiveModulePresheaf
 import Mathlib.Algebra.Homology.ShortComplex.Ab

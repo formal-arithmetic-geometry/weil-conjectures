@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel
 import Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation
-import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
+import WeilConjectures.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 

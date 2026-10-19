@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
-import Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting
+import WeilConjectures.CategoryTheory.Abelian.ExtResolutionDerivedConnecting
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-!

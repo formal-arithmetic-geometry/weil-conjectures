@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Transition compatibility for adjoints of a module system
 

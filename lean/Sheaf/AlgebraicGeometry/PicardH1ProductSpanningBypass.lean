@@ -2,7 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
-public import Sheaf.AlgebraicGeometry.ProperBasic
+public import WeilConjectures.AlgebraicGeometry.ProperBasic
 public import Sheaf.Algebra.Homology.TensorKunnethNat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.AlgebraicGeometry.Morphisms.Proper

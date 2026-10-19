@@ -109,13 +109,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.FinitePresentationModuleDiagram",
-  "file": "lean/Sheaf/RingTheory/FinitePresentationModuleDiagram.lean",
+  "module": "WeilConjectures.RingTheory.FinitePresentationModuleDiagram",
+  "file": "lean/WeilConjectures/RingTheory/FinitePresentationModuleDiagram.lean",
   "declaration": "Module.exists_finitePresentation_module_diagram",
   "statement": "theorem exists_finitePresentation_module_diagram\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S]\n    (κ : B ⟶ (Functor.const I).obj (CommRingCat.of S))\n    (hκ : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ)))\n    (hfinite : ∀ i, Algebra.FiniteType ℤ (B.obj i))\n    (M : Type v) [AddCommGroup M] [Module S M] [Module.FinitePresentation S M] :\n    ∃ (J : Type u) (_ : Preorder J) (_ : Nonempty J) (_ : IsDirected J (· ≤ ·))\n      (F : J ⥤ I) (_ : F.Final)\n      (D : J ⥤ AddCommGrpCat.{v})\n      (ν : D ⟶ (Functor.const J).obj (AddCommGrpCat.of M))\n      (_ : ∀ j, Module (B.obj (F.obj j)) (D.obj j)),\n      Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)) ∧\n      (∀ (i j : J) (h : i ≤ j) (y : B.obj (F.obj i)) (x : D.obj i),\n        (D.map (homOfLE h)).hom (y • x) =\n          (B.map (F.map (homOfLE h))).hom y • (D.map (homOfLE h)).hom x) ∧\n      (∀ j (y : B.obj (F.obj j)) (x : D.obj j),\n        (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) (y • x) =\n          (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))) y •\n            (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x) ∧\n      (∀ j, Module.Finite (B.obj (F.obj j)) (D.obj j)) ∧\n      (∀ (i j : J) (h : i ≤ j),\n        letI := (B.map (F.map (homOfLE h))).hom.toAlgebra\n        ∃ e : B.obj (F.obj j) ⊗[B.obj (F.obj i)] D.obj i ≃ₗ[B.obj (F.obj j)] D.obj j,\n          ∀ (y : B.obj (F.obj j)) (x : D.obj i),\n            e (y ⊗ₜ[B.obj (F.obj i)] x) = y • (D.map (homOfLE h)).hom x) ∧\n      (∀ j,\n        letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))).toAlgebra\n        ∃ e : S ⊗[B.obj (F.obj j)] D.obj j ≃ₗ[S] M,\n          ∀ (y : S) (x : D.obj j),\n            e (y ⊗ₜ[B.obj (F.obj j)] x) =\n              y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x)",
   "branch": "sheaf-dag",
   "by": "P3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.RingTheory.FinitePresentationModuleDiagram; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

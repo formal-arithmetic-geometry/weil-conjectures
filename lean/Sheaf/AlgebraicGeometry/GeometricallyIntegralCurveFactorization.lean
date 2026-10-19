@@ -19,7 +19,7 @@ public import Mathlib.Topology.Sober
 
 import Sheaf.AlgebraicGeometry.ProperStability
 import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import Sheaf.AlgebraicGeometry.FieldFractionRingGeometricIntegrality
+import WeilConjectures.AlgebraicGeometry.FieldFractionRingGeometricIntegrality
 import WeilConjectures.FieldTheory.GeometricallyReducedExtensionSeparable
 import WeilConjectures.FieldTheory.SeparableExtension
 import Mathlib.RingTheory.AlgebraicIndependent.Basic

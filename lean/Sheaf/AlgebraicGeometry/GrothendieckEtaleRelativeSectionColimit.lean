@@ -8,9 +8,8 @@ public import Sheaf.AlgebraicGeometry.GrothendieckEtaleSectionSystemLaws
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 import Sheaf.AlgebraicGeometry.GrothendieckAffineGlobalSectionColimit
-import all Sheaf.AlgebraicGeometry.EtaleObjectSections
+import all WeilConjectures.AlgebraicGeometry.EtaleObjectSections
 import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent
 /-! # Degree-zero continuity on the qcqs étale basis -/
 @[expose] public section

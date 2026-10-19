@@ -7,7 +7,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplexProjections
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
-import Sheaf.Algebra.Homology.InternalHomOverNaturality
+import WeilConjectures.Algebra.Homology.InternalHomOverNaturality
 
 /-!
 # Differential compatibility for the product comparison under open restriction

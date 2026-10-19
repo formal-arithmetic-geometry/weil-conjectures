@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Properties
 
-import Sheaf.AlgebraicGeometry.GenericFlatness
-import Sheaf.AlgebraicGeometry.GenericLocallyOfFinitePresentation
+import WeilConjectures.AlgebraicGeometry.GenericFlatness
+import WeilConjectures.AlgebraicGeometry.GenericLocallyOfFinitePresentation
 
 /-! # Generic flatness with finite presentation
 

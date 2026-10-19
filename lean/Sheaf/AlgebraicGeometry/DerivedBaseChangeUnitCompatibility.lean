@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import Sheaf.AlgebraicGeometry.HomotopyBaseChangeCounit
 
 /-! # Derived and ordinary exchange on the right-derived unit

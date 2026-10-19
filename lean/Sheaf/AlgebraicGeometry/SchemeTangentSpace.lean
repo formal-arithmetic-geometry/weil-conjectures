@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.TangentMapLinear
+public import WeilConjectures.AlgebraicGeometry.TangentMapLinear
 
 /-!
 # Tangent spaces at arbitrary points of schemes over a field

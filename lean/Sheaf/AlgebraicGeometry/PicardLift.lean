@@ -11,8 +11,8 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitsEpi
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitsCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsEpi
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsCohomologyComparison
 import Sheaf.Topology.NoetherianCohomologyDimOne
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageCompariso
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.CanonicalSingleBaseChangeComparison
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 
 /-! # Canonical structure maps and derived exchange
 

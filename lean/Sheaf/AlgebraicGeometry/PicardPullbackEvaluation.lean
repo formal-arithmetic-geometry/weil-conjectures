@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
 import Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
 import Sheaf.AlgebraicGeometry.PicardPullbackBaseChange
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree

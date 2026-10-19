@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison
-import Sheaf.AlgebraicGeometry.ConstantModulePullbackSectionComparison
+import WeilConjectures.AlgebraicGeometry.ConstantModulePullbackSectionComparison
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 

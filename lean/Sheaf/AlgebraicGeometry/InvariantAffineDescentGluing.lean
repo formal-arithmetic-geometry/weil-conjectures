@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
-import Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent
+import WeilConjectures.AlgebraicGeometry.InvariantOpenEffectiveDescent
 
 /-!
 # Gluing effective affine descents

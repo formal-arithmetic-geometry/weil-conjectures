@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare
+import WeilConjectures.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare
 import Sheaf.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquare
 
 /-! # Underived affine coordinates for the Koszul coefficient square

@@ -105,13 +105,14 @@
  "title": "Affine closed immersion coefficient square",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedImmersionCoefficientSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineClosedImmersionCoefficientSquare.lean",
   "declaration": "AlgebraicGeometry.affine_closedImmersion_coefficient_square",
   "statement": "theorem affine_closedImmersion_coefficient_square\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (U : Y.affineOpens)\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let A := (Γ(Y, U.1) : Type u)\n    let I := i.ker.ideal U\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom\n    let R := Scheme.Modules.restrictFunctor U.1.ι\n    ∃ (eO : R.obj (SheafOfModules.unit Y.ringCatSheaf) ≅ T.obj (ModuleCat.of A A))\n      (eB : R.obj ((Scheme.Modules.pushforward i).obj\n        (SheafOfModules.unit Z.ringCatSheaf)) ≅ T.obj (ModuleCat.of A (A ⧸ I))),\n      R.map a ≫ eB.hom = eO.hom ≫ T.map (ModuleCat.ofHom I.mkQ)",
   "branch": "sheaf-dag",
   "by": "D2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.AffineClosedImmersionCoefficientSquare; points at its upstream twin."
  },
  "statement": "Let i:Z → Y be a closed immersion, U an affine open of Y, A=Γ(Y,U), I=ker(i)(U), R restriction to U, and T associated sheafification followed by the affine chart transport. For the actual pullback-pushforward adjunction unit coefficient map a:O_Y → i_*O_Z there exist eO:R(O_Y) ≅ T(A) and eB:R(i_*O_Z) ≅ T(A/I) such that R(a) followed by eB equals eO followed by T of the quotient map. These are coefficient-object identifications; no Koszul complex or homology is involved. Schemes and closed immersions are those of [def-pc-scheme] and [def-weil-closed-immersion]; I is evaluated from [def-sbc-closed-immersion-ideal-sheaf], and associated module sheaves use [lem-weil-pbc-spec-module-tilde-sections].",
  "reviewed": {

@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.Data.Set.PowersetCard
-import Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso
+import WeilConjectures.AlgebraicGeometry.AffineQuotientRestrictedIso
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Category.ModuleCat.Colimits
 import Mathlib.LinearAlgebra.Finsupp.Pi

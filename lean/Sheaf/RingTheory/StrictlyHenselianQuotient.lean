@@ -8,8 +8,8 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
-import Sheaf.RingTheory.QuotientHenselianPair
-import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
+import WeilConjectures.RingTheory.QuotientHenselianPair
+import WeilConjectures.RingTheory.HenselianIntegralIdempotentLifting
 
 /-!
 # Quotients of strictly henselian local rings
