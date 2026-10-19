@@ -42,14 +42,9 @@
    }
   },
   {
-   "text": "Use the canonical comparisons $\\chi_A:\\nu_Z^{-1}i_{\\mathrm{et},*}A_D\\to i_{\\mathrm{proet},*}A_D$ for $A=\\mathbf Z,R,\\Lambda$. Here $i$ is quasi-compact and quasi-separated, so the discrete-ring direct-image comparison applies. The etale finite direct-image theorem makes $Ri_{\\mathrm{et},*}=i_{\\mathrm{et},*}$, also for constant-ring modules, whose exactness is tested on their underlying abelian sheaves. On a small skeleton the pro-etale module category is Grothendieck, hence has enough injectives. Its direct image is left exact, so a nonnegative injective resolution gives $\\mathcal H^0(Ri_*A_D)=i_*A_D$. Taking degree zero of the comparison gives exactly $\\chi_A$. Naturality for $\\mathbf Z_D\\to R_D$ and compatibility with units show that the quotient in step 1 becomes $F/nF=i_*R_D$, and that the reduced restriction $R_Z\\to F/nF$ is the adjunction unit. All inputs to direct-image comparison are degree-zero sheaves, so its bounded-below hypothesis holds.",
+   "text": "Use the canonical ordinary adjunction-mate comparisons chi_A: nu_Z^* i_et,* A_D -> i_proet,* A_D for A = Z, R, Lambda. A closed immersion is quasi-compact and quasi-separated. The already proved source-library theorem AlgebraicGeometry.ProEtale.isIso_lowerStarComparisonUpperStarBaseChange applies directly to sheaves valued in any Grothendieck abelian coefficient category; in particular it applies to AddCommGrpCat and ModuleCat A. Compose its invertible component with the canonical constant-sheaf identification, also invertible because inverse image and the constant-sheaf functor are left adjoints to the same section functor. This proves invertibility of the actual supported mate without deriving direct image or choosing an injective resolution. The mate equation and naturality for Z_D -> R_D retain the supported restriction and quotient normalization used in step 1.",
    "uses": [
-    "sk-thm-pe-direct-image-comparison",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-proetale-module-direct-image-left-exact",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+    "sk-thm-pe-direct-image-comparison"
    ],
    "elementary": false,
    "source": {
@@ -158,11 +153,6 @@
   "prop-weil-pbc-geometric-stalks-exact",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "sk-thm-pe-direct-image-comparison",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-proetale-module-direct-image-left-exact",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
   "lem-amb-kummer-any-base",
   "def-weil-pbc-proetale-site",
   "def-pur-roots-of-unity-sheaf",
@@ -183,7 +173,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "(G1), normalized derived reduction and opening comparison paragraph; expanded using exact inverse-image and morphism-of-extension naturality, Stacks Tags 0152, 03PL, 0GLZ and 06YY."
+  "place": "(G1), normalized derived reduction and opening comparison paragraph; expanded using exact inverse-image and morphism-of-extension naturality, Stacks Tags 0152, 03PL, 0GLZ and 06YY. Y6: step 2 uses the existing ordinary qcqs direct-image mate theorem directly, avoiding the intermediate derived-degree-zero argument. The six helper proofs use Mathlib adjunction/finite-limit APIs, the existing etale Kummer cover, and ZMod arithmetic; the four remaining holes retain their stated plans."
  },
  "mathlib_searches": [
   {
@@ -696,5 +686,15 @@
    "AlgebraicGeometry.ProEtale.cartierResidueReducedPro",
    "AlgebraicGeometry.ProEtale.cartier_reduction_site_comparison"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261019T034357-L-426833",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

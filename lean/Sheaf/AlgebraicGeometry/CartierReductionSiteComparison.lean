@@ -17,12 +17,9 @@ import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.AlgebraicGeometry.ProEtaleModuleDirectImageLeftExact
+import Mathlib.CategoryTheory.Sites.Adjunction
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
 import Sheaf.Paper.RingedTopoiDerivedTensorPullback
@@ -100,7 +97,27 @@ abelian presheaf cokernels. The scalar action descends uniquely to these cokerne
 theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteLimits (cartierForget A Z) ∧
       PreservesFiniteColimits (cartierForget A Z) := by
-  sorry
+  constructor
+  · have : PreservesFiniteLimits (cartierForget A Z ⋙ sheafToPresheaf _ _) :=
+      inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf _ _ ⋙
+        (Functor.whiskeringRight _ _ _).obj
+          (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})))
+    exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
+  · let U := ModuleCat.restrictScalars.{u + 1} (Int.castRingHom A)
+    let V := forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
+    have : U.IsLeftAdjoint :=
+      (ModuleCat.restrictCoextendScalarsAdj.{0, 0, u + 1} (Int.castRingHom A)).isLeftAdjoint
+    have : (U ⋙ V).IsLeftAdjoint := inferInstance
+    let G := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
+    have : G.IsLeftAdjoint := inferInstanceAs (U ⋙ V).IsLeftAdjoint
+    let J := Scheme.ProEt.topology Z
+    let e : Sheaf.composeAndSheafify J G ≅ sheafCompose J G :=
+      Functor.isoWhiskerLeft (sheafCompose J G)
+        (sheafificationNatIso J AddCommGrpCat.{u + 1}).symm ≪≫
+          Functor.rightUnitor (sheafCompose J G)
+    have : (Sheaf.composeAndSheafify J G).IsLeftAdjoint := inferInstance
+    have : (sheafCompose J G).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
+    exact inferInstanceAs (PreservesFiniteColimits (sheafCompose J G))
 
 /-- Exactness on finite limits. Source: Stacks 03D7
 (blueprint: lem-sp-cartier-reduction-site-comparison). -/
@@ -168,7 +185,9 @@ direct image by a nonnegative injective resolution. The unit equation identifies
 the resulting isomorphism with this mate, including supported restriction. -/
 theorem cartierIntegralSourceComparison_isIso {D Z : Scheme.{u}} (i : D ⟶ Z)
     [IsClosedImmersion i] : IsIso (cartierIntegralSourceComparison i) := by
-  sorry
+  have := isIso_lowerStarComparisonUpperStarBaseChange i AddCommGrpCat.{u + 1}
+  dsimp only [cartierIntegralSourceComparison]
+  infer_instance
 
 /-- The supported mate as an isomorphism, with its actual underlying map.
 Source: blueprint Cartier comparison paragraph
@@ -195,7 +214,14 @@ theorem cartierRootsComparison_condition (Z : Scheme.{u}) (n : ℕ) :
     ((comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
         (kernel.ι (n • 𝟙 Z.gmSheaf)) ≫ cartierUnitsComparison Z) ≫
       Scheme.proEtaleUnitsPower Z n = 0 := by
-  sorry
+  have h := congrArg (comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
+    (kernel.condition (n • 𝟙 Z.gmSheaf))
+  have hk : n • (comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
+      (kernel.ι (n • 𝟙 Z.gmSheaf)) = 0 := by
+    simpa only [Functor.map_comp, Functor.map_nsmul, Functor.map_id,
+      Functor.map_zero, Preadditive.comp_nsmul, Category.comp_id] using h
+  simp only [Scheme.proEtaleUnitsPower, Preadditive.comp_nsmul, Category.comp_id,
+    ← Preadditive.nsmul_comp, hk, zero_comp]
 
 /-- The roots-induced target map, fixed by its inclusion in full pro-etale units.
 Source: blueprint Cartier comparison paragraph, Stacks 0GLZ and 03PL
@@ -270,7 +296,43 @@ Kummer on U produces an etale covering on which it has an n-th root. These are
 pro-etale coverings of U, proving epimorphy of the power map. -/
 theorem cartierProKummer_exact (Z : Scheme.{u}) (n : ℕ) (hn : 0 < n)
     (hZ : IsUnit (n : Γ(Z, ⊤))) : (cartierProKummerComplex Z n).ShortExact := by
-  sorry
+  have hsurj : Sheaf.IsLocallySurjective (Scheme.proEtaleUnitsPower Z n) := by
+    constructor
+    intro U t
+    have hnU : IsUnit (n : Γ(U.left, ⊤)) := by
+      simpa only [map_natCast] using hZ.map U.hom.appTop.hom
+    obtain ⟨V, f, hf, hsurj, ω, hω⟩ :=
+      Scheme.exists_etale_surjective_pow_eq_appTop (ne_of_gt hn) hnU
+        (Units.isUnit (Additive.toMul t.down))
+    have : Etale f := hf
+    have : WeaklyEtale (f ≫ U.hom) := by have := U.prop; infer_instance
+    let W : Z.ProEt := Scheme.ProEt.mk (f ≫ U.hom)
+    let g : W ⟶ U := MorphismProperty.Over.homMk f rfl
+    have hcover : Sieve.ofArrows (fun _ : Unit ↦ W) (fun _ ↦ g) ∈
+        Scheme.ProEt.topology Z U := by
+      apply Precoverage.generate_mem_toGrothendieck
+      rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows]
+      apply Scheme.etalePrecoverage_le_proetalePrecoverage
+      rw [Scheme.etalePrecoverage, Scheme.ofArrows_mem_precoverage_iff]
+      exact ⟨fun x ↦ ⟨(), hsurj.surj x⟩, fun _ ↦ hf⟩
+    refine GrothendieckTopology.superset_covering _ ?_ hcover
+    rw [Sieve.ofArrows, Sieve.generate_le_iff]
+    rintro _ _ ⟨⟩
+    have hωu : IsUnit ω :=
+      (isUnit_pow_iff (ne_of_gt hn)).mp (hω ▸ (Units.isUnit _).map _)
+    refine ⟨ULift.up (Additive.ofMul hωu.unit), ?_⟩
+    change n • (ULift.up (Additive.ofMul hωu.unit)) = _
+    apply ULift.ext
+    apply Additive.toMul.injective
+    apply Units.ext
+    change (hωu.unit : Γ(V, ⊤)) ^ n = f.appTop t.down.toMul.val
+    rw [hωu.unit_spec, hω]
+    rfl
+  exact
+    { exact := ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _)
+      mono_f := by dsimp [cartierProKummerComplex, Scheme.proEtaleRootsOfUnityInclusion]
+                   infer_instance
+      epi_g := Sheaf.epi_of_isLocallySurjective (Scheme.proEtaleUnitsPower Z n) }
 
 /-- The normalized Kummer scalar unit on etale units, expressed in abelian Ext.
 Source: blueprint Cartier reduction paragraph, Stacks 0152 and 03PL
@@ -382,7 +444,8 @@ Source: blueprint Cartier reduction paragraph
 (blueprint: lem-sp-cartier-reduction-site-comparison).
 Proof: the integer ℓ^r maps to zero in Z/(ℓ^r); the ring equivalence ULift preserves casts. -/
 theorem cartierResidue_cast (ℓ r : ℕ) : ((ℓ ^ r : ℕ) : cartierResidueRing.{u} ℓ r) = 0 := by
-  sorry
+  apply ULift.ringEquiv.injective
+  simpa only [map_natCast, map_zero] using ZMod.natCast_self (ℓ ^ r)
 
 /-- The specified R-algebra structure on A, uniquely determined by its integer action.
 Source: blueprint Cartier finite coefficient extension paragraph
@@ -398,7 +461,8 @@ Proof: a prime is positive, so its power is nonzero; ZMod of a nonzero natural
 number is finite, and lifting a finite type preserves finiteness. -/
 theorem cartierResidue_finite (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) :
     Finite (cartierResidueRing.{u} ℓ r) := by
-  sorry
+  have : NeZero (ℓ ^ r) := ⟨ne_of_gt (pow_pos hℓ.pos r)⟩
+  exact Finite.of_equiv (ZMod (ℓ ^ r)) Equiv.ulift.symm
 
 /-- The normalized residue-coefficient arrow, with finiteness supplied explicitly.
 Source: blueprint Cartier reduction paragraph
