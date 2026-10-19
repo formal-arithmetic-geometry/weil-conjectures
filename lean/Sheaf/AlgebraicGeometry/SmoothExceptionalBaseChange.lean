@@ -21,60 +21,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import Sheaf.AlgebraicGeometry.ProperOpenSection
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.CompactificationCategory
-import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
-import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
-import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 
 /-! # Arbitrary base change for smooth ambient duality
 
@@ -86,14 +36,21 @@ followed by the pulled-back counit. The coefficient-unit and tensor comparisons 
 are the canonical ones; no orientation or arbitrary comparison is chosen.
 -/
 
+
+
 @[expose] public section
 
-universe u
+universe u u' w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+-- Fix the canonical universe model before elaborating the derived functors.
+attribute [local instance] Scheme.Etale.essentiallySmall
+
+attribute [local instance high] CategoryTheory.SymmetricCategory.toBraidedCategory
 
 /-- The canonical exceptional base-change morphism, obtained by transposing the pulled-back
 counit through the inverse compact-support exchange. Source: blueprint
@@ -172,6 +129,195 @@ noncomputable def smoothDualityTensorBaseChangeIso
       (smoothSquarePullbackIso A f g K)).app
         ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj
           (dualizingComplex (ModuleCat.{u + 1} A) f))
+
+private lemma braided_tensor_mate
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (P W : C) (K Q : D)
+    (π : F.obj (W ⊗ P) ⟶ Q ⊗ K) (ε : Q ⟶ 𝟙_ D) :
+    adj.homEquiv _ _ (F.map (β_ P W).hom ≫ π ≫
+        (β_ Q K).hom ≫ (K ◁ ε) ≫ (ρ_ K).hom) =
+      (β_ P W).hom ≫ (adj.homEquiv _ _ (π ≫ (ε ▷ K)) ≫ G.map (λ_ K).hom) := by
+  rw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_left]
+  apply congrArg (adj.homEquiv _ _)
+  simp only [Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+
+private lemma smooth_tensor_map_eq
+    (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+    {FC : A → A → Type w} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ T : Scheme.{u}, T.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    [(rightDerivedLowerShriek A f).IsLeftAdjoint]
+    [hPF : IsIso (projectionMap A f)]
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)) :
+    let := derivedBraidedCategory A X
+    smoothTensorDualityMap A f hPF K =
+      (β_ ((upperStar A f).leftDerivedFunctor.obj K) (dualizingComplex A f)).hom ≫
+        dualizingComplexTensorMapOfIsIso f K := by
+  let := derivedBraidedCategory A X
+  let := derivedBraidedCategory A S
+  exact braided_tensor_mate (rightDerivedUpperShriekAdjunction A f)
+    _ _ K _ (inv (((projectionMap A f).app _).app K))
+    ((rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _))
+
+private lemma mate_app_eq
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ C'} {H : D ⥤ D'}
+    (ξ : TwoSquare G L L' H) (M : D) :
+    (mateEquiv adj adj' ξ).natTrans.app M =
+      (adj'.homEquiv _ _) (ξ.natTrans.app (R.obj M) ≫ H.map (adj.counit.app M)) := by
+  apply (adj'.homEquiv _ _).symm.injective
+  dsimp only [Functor.comp_obj, Functor.id_obj]
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+  exact mateEquiv_counit adj adj' ξ M
+
+private lemma braided_tensor_square
+    {C C' : Type*} [Category* C] [Category* C']
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory C'] [BraidedCategory C']
+    (G : C ⥤ C') (P W Z : C) (P' W' Z' : C')
+    (a : W ⊗ P ⟶ Z) (a' : W' ⊗ P' ⟶ Z') (b : G.obj W ⟶ W')
+    (κ : G.obj P ⟶ P') (β : G.obj Z ⟶ Z')
+    (δ : ∀ M N : C, G.obj (M ⊗ N) ⟶ G.obj M ⊗ G.obj N)
+    (ha : G.map a ≫ β = δ W P ≫ b ▷ G.obj P ≫ W' ◁ κ ≫ a')
+    (hδ : G.map (β_ P W).hom ≫ δ W P =
+      δ P W ≫ (β_ (G.obj P) (G.obj W)).hom) :
+    G.map ((β_ P W).hom ≫ a) ≫ β =
+      δ P W ≫ κ ▷ G.obj W ≫ P' ◁ b ≫ (β_ P' W').hom ≫ a' := by
+  rw [G.map_comp, Category.assoc, ha]
+  rw [reassoc_of% hδ]
+  simp only [← MonoidalCategory.tensorHom_def_assoc]
+  rw [← BraidedCategory.braiding_naturality_assoc]
+
+private lemma unit_tensor_base_change
+    {Cx Cy Cx' Cy' : Type*} [Category* Cx] [Category* Cy]
+    [Category* Cx'] [Category* Cy']
+    [MonoidalCategory Cx] [MonoidalCategory Cy]
+    [MonoidalCategory Cx'] [MonoidalCategory Cy']
+    (F R : Cy ⥤ Cx) (F' R' : Cy' ⥤ Cx') (Ga : Cx ⥤ Cx') (Gb : Cy ⥤ Cy')
+    (τ : ∀ M N : Cy, R.obj M ⊗ F.obj N ⟶ R.obj (M ⊗ N))
+    (τ' : ∀ M N : Cy', R'.obj M ⊗ F'.obj N ⟶ R'.obj (M ⊗ N))
+    (β : R ⋙ Ga ⟶ Gb ⋙ R')
+    (δa : ∀ M N : Cx, Ga.obj (M ⊗ N) ⟶ Ga.obj M ⊗ Ga.obj N)
+    (δb : ∀ M N : Cy, Gb.obj (M ⊗ N) ⟶ Gb.obj M ⊗ Gb.obj N)
+    (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N))
+    (e : Gb.obj (𝟙_ Cy) ⟶ 𝟙_ Cy')
+    (hτ : ∀ M N : Cy,
+      Ga.map (τ M N) ≫ β.app (M ⊗ N) ≫ R'.map (δb M N) =
+        δa (R.obj M) (F.obj N) ≫ β.app M ▷ Ga.obj (F.obj N) ≫
+          R'.obj (Gb.obj M) ◁ κ N ≫ τ' (Gb.obj M) (Gb.obj N))
+    (hτ' : ∀ {M M' : Cy'} (φ : M ⟶ M') (N : Cy'),
+      R'.map φ ▷ F'.obj N ≫ τ' M' N = τ' M N ≫ R'.map (φ ▷ N))
+    (he : ∀ N : Cy, δb (𝟙_ Cy) N ≫ e ▷ Gb.obj N ≫ (λ_ (Gb.obj N)).hom =
+      Gb.map (λ_ N).hom) (N : Cy) :
+    Ga.map (τ (𝟙_ Cy) N ≫ R.map (λ_ N).hom) ≫ β.app N =
+      δa (R.obj (𝟙_ Cy)) (F.obj N) ≫
+        (β.app (𝟙_ Cy) ≫ R'.map e) ▷ Ga.obj (F.obj N) ≫
+        R'.obj (𝟙_ Cy') ◁ κ N ≫ τ' (𝟙_ Cy') (Gb.obj N) ≫
+        R'.map (λ_ (Gb.obj N)).hom := by
+  rw [Ga.map_comp, Category.assoc]
+  erw [β.naturality]
+  change Ga.map (τ (𝟙_ Cy) N) ≫ β.app (𝟙_ Cy ⊗ N) ≫
+    R'.map (Gb.map (λ_ N).hom) = _
+  rw [← he, R'.map_comp, R'.map_comp]
+  rw [reassoc_of% (hτ (𝟙_ Cy) N)]
+  rw [← reassoc_of% (hτ' e (Gb.obj N))]
+  rw [← whisker_exchange_assoc, ← comp_whiskerRight_assoc, whisker_exchange_assoc]
+
+private lemma exceptional_tensor_base_change
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
+    (g : S' ⟶ S) (M N : DerivedCategoryModule A S) :
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map
+        (rightDerivedUpperShriekTensorMap f M N) ≫
+      (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app
+        (M ⊗ N) ≫
+      (rightDerivedUpperShriek (ModuleCat.{u + 1} A) (pullback.snd f g)).map
+        (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g M N).hom =
+    (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) (pullback.fst f g)
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) f).obj M)
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj N)).hom ≫
+      (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app M ▷
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj N)) ≫
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) (pullback.snd f g)).obj
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj M)) ◁
+          (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+            (IsPullback.of_hasPullback f g).toCommSq N) ≫
+      rightDerivedUpperShriekTensorMap (pullback.snd f g)
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj M)
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj N) := by
+  have := isIso_rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g)
+  have hlib := projectionMap_rightDerivedLowerShriekBaseChangeMap A
+    (IsPullback.of_hasPullback f g)
+  simp only [← leftDerivedUpperStarTensorIso_hom] at hlib
+  exact Adjunction.projectionTensorMap_mateEquiv
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) (pullback.snd f g))
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) f).app M).app N)
+    (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f g)).app M).app N)
+    (fun φ N ↦ NatTrans.congr_app
+      ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f g)).naturality φ) N)
+    (fun M M' ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
+      (pullback.fst f g) M M').hom)
+    (fun N N' ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g N N').hom)
+    (fun φ N'' ↦ leftDerivedUpperStarTensorIso_hom_naturality_left g φ N'')
+    (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+      (IsPullback.of_hasPullback f g).toCommSq N)
+    (rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g))
+    (inv (rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g)))
+    (fun M ↦ by simp [NatIso.isIso_inv_app]) hlib M N
+
+private lemma dualizing_tensor_base_change
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]
+    (g : S' ⟶ S) (K : DerivedCategoryModule A S) :
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map
+        (dualizingComplexTensorMap A f K) ≫
+      (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K =
+    (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) (pullback.fst f g)
+      (dualizingComplex (ModuleCat.{u + 1} A) f)
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)).hom ≫
+      (dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f g)) ▷
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj
+          ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)) ≫
+      (dualizingComplex (ModuleCat.{u + 1} A) (pullback.snd f g)) ◁
+        (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+          (IsPullback.of_hasPullback f g).toCommSq K) ≫
+      dualizingComplexTensorMap A (pullback.snd f g)
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) := by
+  exact unit_tensor_base_change
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) f)
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) (pullback.snd f g))
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor
+    (upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor
+    (rightDerivedUpperShriekTensorMap f)
+    (rightDerivedUpperShriekTensorMap (pullback.snd f g))
+    (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g))
+    (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
+      (pullback.fst f g) M N).hom)
+    (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g M N).hom)
+    (fun N ↦ derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+      (IsPullback.of_hasPullback f g).toCommSq N)
+    (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom
+    (exceptional_tensor_base_change A f g)
+    (Adjunction.projectionTensorMap_naturality_left
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) (pullback.snd f g))
+      (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f g)).app M).app N)
+      (fun φ N ↦ NatTrans.congr_app
+      ((projectionMap (ModuleCat.{u + 1} A) (pullback.snd f g)).naturality φ) N))
+    (leftDerivedUpperStarTensorComparison_leftUnitor_hom (ModuleCat.{u + 1} A) g) K
 
 /-- Arbitrary base change for smooth ambient duality on ordinary unbounded etale
 module derived categories, including the dualizing-complex and tensor compatibilities.
@@ -501,6 +647,68 @@ theorem smooth_exceptional_base_change
         smoothTensorDualityMap (ModuleCat.{u + 1} A) (pullback.snd f g)
           (isIso_projectionMap_of_finite A (pullback.snd f g))
           ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K) := by
-  sorry
+  have hNS : IsUnit (N : Γ(S, ⊤)) := by
+    apply S.toRingedSpace.isUnit_of_isUnit_germ
+    intro s hs
+    simpa only [map_natCast] using hInvertible s
+  have : HasInvertibleExponent A S := ⟨N, hN, hA, hNS⟩
+  have : HasInvertibleExponent A X := HasInvertibleExponent.of_hom f
+  have hBC := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension
+    A f d (IsPullback.of_hasPullback f g)
+  have := isIso_rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g)
+  have hMap (K : DerivedCategoryModule A S) :
+      smoothExceptionalBaseChangeMap A f g K =
+        (rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K := by
+    symm
+    simpa only [smoothExceptionalBaseChangeMap, rightDerivedUpperShriekBaseChangeMap,
+      NatIso.isIso_inv_app, Functor.id_obj, Functor.comp_obj, TwoSquare.natTrans] using
+      mate_app_eq
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) (pullback.snd f g))
+      (inv (rightDerivedLowerShriekBaseChangeMap A (IsPullback.of_hasPullback f g))) K
+  refine ⟨?_, ?_, ?_⟩
+  · intro K
+    rw [hMap]
+    infer_instance
+  · unfold smoothDualizingBaseChangeMap
+    rw [hMap]
+    infer_instance
+  · intro K
+    let := derivedBraidedCategory (ModuleCat.{u + 1} A) X
+    let := derivedBraidedCategory (ModuleCat.{u + 1} A) (pullback f g)
+    have hδ := leftDerivedUpperStar_map_braiding_hom_δ (ModuleCat.{u + 1} A)
+      (pullback.fst f g)
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)
+      (dualizingComplex (ModuleCat.{u + 1} A) f)
+    have ht := braided_tensor_square
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor
+      ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj K)
+      (dualizingComplex (ModuleCat.{u + 1} A) f)
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) f).obj K)
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
+      (dualizingComplex (ModuleCat.{u + 1} A) (pullback.snd f g))
+      ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) (pullback.snd f g)).obj
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
+      (dualizingComplexTensorMap A f K)
+      (dualizingComplexTensorMap A (pullback.snd f g)
+        ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K))
+      (dualizingComplexBaseChangeMap A (IsPullback.of_hasPullback f g))
+      (derivedSquareUpperStarIsoInvApp (ModuleCat.{u + 1} A)
+        (IsPullback.of_hasPullback f g).toCommSq K)
+      ((rightDerivedUpperShriekBaseChangeMap A (IsPullback.of_hasPullback f g)).app K)
+      (fun M N ↦ (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A)
+        (pullback.fst f g) M N).hom)
+      (dualizing_tensor_base_change A f g K) hδ
+    have hφ := smooth_tensor_map_eq (ModuleCat.{u + 1} A) f K
+    have hφ' := smooth_tensor_map_eq (ModuleCat.{u + 1} A) (pullback.snd f g)
+      ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.obj K)
+    simpa only [hφ, hφ', dualizingComplexTensorMap,
+      smoothDualityTensorBaseChangeIso, smoothSquarePullbackIso,
+      smoothDualizingBaseChangeMap, hMap, dualizingComplexBaseChangeMap,
+      derivedSquareUpperStarIsoInvApp, derivedSquareUpperStarIso,
+      Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.trans_inv, NatTrans.comp_app, Iso.app_hom,
+      derivedTensor, curriedTensor,
+      Functor.mapIso_hom, Category.assoc] using ht
 
 end AlgebraicGeometry.Etale

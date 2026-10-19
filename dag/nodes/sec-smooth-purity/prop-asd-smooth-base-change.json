@@ -25,194 +25,44 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-amb-unbounded-compact-support-comparisons] for the given finite ring $A$. It supplies compactification-independent $Rf_!$, associative composition, and the canonical exchange $C_{f,g}:g^*Rf_!\\xrightarrow{\\sim}Rf'_!g'^*$ on the entire ordinary small-etale derived categories. Its normalization on a chosen compactification $f=rj$ is proper exchange for $r$ followed by the inverse open-extension comparison for $j$. This is precisely the comparison used in the blueprint's first paragraph, now on arbitrary unbounded inputs. All compactification schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since the proper factor is finite type over its Noetherian base. The lemma also gives equality of the comparisons under refinement, composition of morphisms and successive changes of base. Thus no bounded-below truncation argument is needed.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Paragraph 1 and coherence (i); Stacks 0F7H, 0F7I, 0F7J, 0F7K, 0F7L (more-etale.tex, section-derived-lower-shriek-compactification and its lemmas)"
-   }
-  },
-  {
-   "text": "By [thm-amb-etale-exceptional-adjoint], define $\\beta_{f,g,K}$ as the adjunct under $Rf'_!\\dashv f'^\\times$ of $g^*\\epsilon_{f,K}\\circ C_{f,g,f^\\times K}^{-1}$. Its defining equation is\n$$\\epsilon_{f',g^*K}\\circ Rf'_!(\\beta_{f,g,K})=g^*\\epsilon_{f,K}\\circ C_{f,g,f^\\times K}^{-1}.$$\nApply [lem-weil-pbc-mate-pasting] to the inverse exchanges of Step 1. Clause (2) says that the mate for a composite of morphisms is the composite of their mates, using the composite adjunction; clause (1) gives the analogous equality for successive changes of base. Clause (3) transports these equations through the counit-preserving comparisons between chosen right adjoints. These are equations of the specified maps and will identify the model and chart maps below.",
+   "text": "Identify smoothExceptionalBaseChangeMap with the component of the existing upstream rightDerivedUpperShriekBaseChangeMap. The elementary mate_app_eq follows by injectivity of the adjunction hom equivalence and mateEquiv_counit. Build HasInvertibleExponent from the given stalkwise units and pull it back along f. Apply the already stated isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension (WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality), which realizes the isomorphism clause of this same blueprint node. This is a reuse of an existing declaration, with no new assumption or hole. The dualizing comparison is its component at the coefficient unit followed by the inverse-image unit isomorphism.",
    "uses": [
     "thm-amb-etale-exceptional-adjoint",
     "lem-weil-pbc-mate-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Paragraph 1: transposition of the counit; coherences (i)–(iii)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a fixed compactification $f=rj$ and arbitrary $M\\in D(X_{\\mathrm{et}},A)$, $Q\\in D(S_{\\mathrm{et}},A)$, [lem-amb-proper-coproducts-projection] gives the ordered isomorphism\n$$Q\\otimes^LRr_*j_!M\\longrightarrow Rr_*(r^*Q\\otimes^Lj_!M).$$\nHere $r$ is proper of finite type between Noetherian schemes and $A$ is finite; that lemma requires neither boundedness nor Tor amplitude. Apply [lem-pur-etale-open-derived-tensor] to $j$, $M$ and $r^*Q$, and conjugate by tensor symmetry, to identify its target with $Rf_!(f^*Q\\otimes^LM)$. Denote the resulting compact-support projection isomorphism by $P_{f,Q,M}$. It has the order $Q\\otimes^LRf_!M\\to Rf_!(f^*Q\\otimes^LM)$ required by the canonical tensor morphism in [thm-asd-smooth-tensor]. The same construction applies to the pulled-back compactification.",
+   "text": "Apply the existing projectionMap_rightDerivedLowerShriekBaseChangeMap and the generic Adjunction.projectionTensorMap_mateEquiv to obtain exceptional_tensor_base_change. Specialize its first tensor factor to the coefficient unit. Naturality of the tensor mate and leftDerivedUpperStarTensorComparison_leftUnitor_hom give dualizing_tensor_base_change. The helper unit_tensor_base_change proves this specialization directly by naturality, functoriality and the interchange laws.",
    "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-kun-tensor-sym",
-    "thm-asd-smooth-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Final paragraph: the compact-support projection map; Stacks 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor)"
-   }
-  },
-  {
-   "text": "The open tensor comparison in Step 3 commutes with arbitrary base change. Indeed identify $g_{\\overline X}^*j_!$ with $j'_!g'^*$ using [lem-weil-pbc-etale-shriek-base-change-modules]. Transpose the two maps in the proposed square under $j'_!\\dashv j'^*$ of [lem-amb-etale-adjoint-locality]. The open tensor map is induced by the sheaf tensor identity on restriction [lem-pur-etale-open-derived-tensor]; the extension comparison is the adjoint comparison of [def-weil-pbc-etale-shriek-base-change-map]. After restriction both transposes are the identity on $g'^*M\\otimes^Lf'^*g^*Q$, with the pullback/tensor identifications of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Hence the adjunction bijection makes the maps equal. This uses equality after an adjunction bijection, not faithfulness of geometric stalks on derived morphisms.",
-   "uses": [
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-amb-etale-adjoint-locality",
-    "lem-pur-etale-open-derived-tensor",
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Final paragraph: open part of the projection/exchange square; Stacks 03S6, 0GL1, 07A4"
-   }
-  },
-  {
-   "text": "For the proper factor $r$, [lem-weil-pbc-ringed-exchange-tensor-coherence] gives the commuting square between its counit-defined projection map and proper exchange on arbitrary unbounded complexes. Its tensor order is $(j_!M,Q)$; conjugate the square by the two tensor symmetries to obtain the order in [lem-amb-proper-coproducts-projection]. This conjugation respects pullback: on total tensor complexes the swap in bidegree $(a,b)$ multiplies by $(-1)^{ab}$, and inverse image preserves degrees and this scalar. Naturality of symmetry gives the corresponding equality at the direct-image end. Pasting with the open square of Step 4 gives the equality\n$$C_{f,g,f^*Q\\otimes^LM}\\,g^*P_{f,Q,M}=P_{f',g^*Q,g'^*M}\\,(1\\otimes C_{f,g,M}),$$\nwith canonical pullback/tensor identifications inserted. Inverting the projection maps gives the corresponding equation for $P^{-1}$; no boundedness restriction occurs.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Final paragraph: proper part and pasting of the projection/exchange square; Stacks 0E48 (sites-cohomology.tex, remark-compatible-with-diagram), 07A4"
-   }
-  },
-  {
-   "text": "For $q:\\mathbf P^1_S\\to S$, use [lem-asd-ordinary-finite-p1-adjunction] with the given $A,N$. Its ordinary finite-etale twist is $L_T(1)=\\mu_{N,T}\\otimes_{\\mathbf Z/N}A_T$, its right adjoint is $G_qK=q^*K\\otimes^LL_P(1)[2]$, and its counit is $(1\\otimes t_q)P_q^{-1}$, where $t_q=\\operatorname{pr}_2b_q^{-1}$. Its decomposition and trace commute with canonical proper exchange. Explicitly, with $\\rho:g_P^*L_P(1)\\cong L_{P'}(1)$ from [lem-asd-etale-finite-twist-pullback] and $B=Rq'_*(\\rho[2])\\operatorname{Ex}_{q,L_P(1)[2]}$, this says $B\\,g^*b_q=b_{q'}(\\rho_S[2]\\oplus1)$. Consequently $t_{q'}B=g^*t_q$, by multiplying by the inverse decomposition and projecting to the second summand. Let $a:g_P^*G_qK\\xrightarrow{\\sim}G_{q'}g^*K$ be pullback/tensor/twist comparison. Step 5 and this trace equation give\n$$\\epsilon_{q',g^*K}Rq'_!(a)=g^*\\epsilon_{q,K}C_{q,g,G_qK}^{-1}.$$\nUnder the counit-preserving identification of $G_q$ with $q^\\times$ (and the primed identification), this is exactly Step 2's defining equation. The adjunction bijection gives $a=\\beta_{q,g,K}$; hence the canonical mate is invertible.",
-   "uses": [
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-compact-projection-exchange",
+    "lem-kun-inverse-image-monoidal",
     "thm-amb-etale-exceptional-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Paragraph 2 and coherence (ii): ordinary finite-coefficient projective-line model and specified trace/counit"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the exact etale compact-support and exchange normalization of [lem-asd-etale-compact-support-normalization]. Let $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$. Compose $j_!\\dashv j^*$ with the projective-line adjunction. The open comparison is the comparison of left adjoints specified in [def-weil-pbc-etale-shriek-base-change-map]; its mate is ordinary restriction comparison. Thus its counit commutes with the pullback square. The pasting identity along adjunctions [lem-weil-pbc-mate-pasting] identifies the mate for $p_1=qj$ with the composite of this restriction comparison and the isomorphism in Step 6. The resulting right adjoint is $p_1^*(1)[2]$. For $d=0$ use the identity adjunction. For $d+1$ factor $p_{d+1}$ as an affine-line projection followed by $p_d$; Step 1 identifies the composite left adjoint, and the same mate-pasting identity identifies its exchange with the composite of the already invertible exchanges. The twist/pullback and tensor identifications of [lem-asd-etale-finite-twist-pullback] give $p_{d+1}^*(d+1)[2d+2]$. This induction uses the explicit composite adjunction, and compares its right adjoint directly with the ambient right adjoint of [thm-amb-etale-exceptional-adjoint] by the unique counit-preserving comparison. The imported affine-space adjunction with its pro-etale twist dependency is not used.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-mate-pasting",
-    "lem-asd-etale-finite-twist-pullback",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Paragraph 2: open restriction from the projective line, then induction on affine-space dimension"
-   }
-  },
-  {
-   "text": "For every separated finite-type etale $u:U\\to X$, [lem-asd-etale-compact-support-normalization] identifies compactification-defined $Ru_!$ with the exact sum-extension functor, preserving its evaluation counit. It also states the exchange equation $(c_{u'}h^*)C_{u,g}=C^\\Sigma_{u,g}(g^*c_u)$, with the same proper/open normalization as Step 1. The sum-extension comparison of [def-weil-pbc-etale-shriek-base-change-map] and [lem-weil-pbc-etale-shriek-base-change-modules] has as mate the inverse-image composition isomorphism: substitute its defining adjoint comparison into the counit equation of Step 2; the two triangles cancel the unit and counit. Thus its mate is invertible. Use [lem-amb-etale-adjoint-locality] and clause (2) of [lem-weil-pbc-mate-pasting] for $fu$. Under $u^*f^\\times\\cong(fu)^\\times$ and the primed comparison, $\\beta_{fu,g,K}$ is the composite of $u'^*\\beta_{f,g,K}$ with this invertible etale mate. In particular either of these two maps is invertible exactly when the other is. This identifies the actual canonical maps on source charts.",
-   "uses": [
-    "lem-asd-etale-compact-support-normalization",
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-amb-etale-adjoint-locality",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Coherence (iii): counit-preserving etale normalization and source-chart locality; Stacks 03S6 and 0GL9"
-   }
-  },
-  {
-   "text": "For base restriction write $a:S_0\\hookrightarrow S$, $a_X:X_0\\hookrightarrow X$, and $f_0:X_0\\to S_0$, so $fa_X=af_0$. Compact-support composition from [lem-amb-unbounded-compact-support-comparisons] identifies $Rf_!a_{X!}$ with $a_!Rf_{0!}$. Taking their right adjoints using [lem-amb-etale-adjoint-locality] identifies $a_X^*f^\\times$ with $f_0^\\times a^*$, preserving the composite counits. The same holds for $a':S'_0\\hookrightarrow S'$. These comparisons are the mates of the open base-restriction exchanges: the left-adjoint comparison is the proper/open exchange of Step 1 and the exact open comparison normalized in [lem-asd-etale-compact-support-normalization]. If $g_0:S'_0\\to S_0$ is induced by $g$, then $ga'=ag_0$. The two pasting equations for $C$ give the same exchange for this common composite. Take their mates using clauses (1) and (3) of [lem-weil-pbc-mate-pasting]. One is the primed restriction comparison composed with $a'_X{}^*\\beta_{f,g,K}$; the other is $\\beta_{f_0,g_0,a^*K}$ composed with the unprimed restriction comparison. Their equality identifies the restricted canonical map with the base-chart map.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-etale-adjoint-locality",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Coherences (i) and (iii): compatibility of the canonical mate with an open restriction in the base"
-   }
-  },
-  {
-   "text": "Apply [sbc-thm-etale-local-normal-form] at each point of $X$. After an affine open restriction in the base, choose an affine open $U\\subseteq X$ and an etale $e:U\\to\\mathbf A^d_{S_0}$ with $fu=p_de$. The relative dimension is $d$, since the etale factor has relative dimension zero and $f$ has pure relative dimension $d$. The chart inclusion $u$ is separated and of finite type: it is an open immersion, and it is quasi-compact because $X$ is Noetherian. The map $e$ is separated since $U$ and $\\mathbf A^d_{S_0}$ are affine: on rings its diagonal is given by the surjection $B\\otimes_R B\\to B$, $b\\otimes b'\\mapsto bb'$. It is locally of finite presentation since it is etale, and quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), since $U$ is affine and $\\mathbf A^d_{S_0}$ is quasi-separated. Hence $e$ is of finite type. They are compactifiable, as are their composites, by [thm-nagata-compactification]. The charts, their affine-space targets, and their base changes are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian] and [lem-weil-pbc-finite-type-over-noetherian]. After arbitrary base change the corresponding open charts still cover $X'$. Steps 7–9 identify the restriction of $\\beta_{f,g,K}$ on each chart with etale inverse image of the affine-space isomorphism. Thus it is an isomorphism on every chart. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] commutes with cohomology; the kernel and cokernel of each cohomology map vanish on that etale covering, so their sections vanish by the sheaf axiom. Equivalently this is [lem-weil-pbc-etale-cover-detects-iso] applied to the underlying abelian cohomology sheaves. Hence every cohomology map is invertible globally, and [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $\\beta_{f,g,K}$ is invertible in the unbounded derived category.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form",
-    "thm-nagata-compactification",
-    "lem-amb-etale-adjoint-locality",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-etale-cover-detects-iso",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Coherence (iii): etale normal forms and descent on cohomology; Stacks 054L"
-   }
-  },
-  {
-   "text": "At $K=A_S$, exact inverse image preserves the constant coefficient unit, so Step 10 gives $b:g'^*\\omega_f\\cong\\omega_{f'}$. To check the tensor square, recall the meaning of the canonical tensor morphism: it is the transpose of $Rf_!(f^*K\\otimes^L\\omega_f)\\xrightarrow{\\mathrm{PF}^{-1}}K\\otimes^LRf_!\\omega_f\\xrightarrow{1\\otimes\\epsilon_{f,A}}K$. Transpose both proposed paths under $Rf'_!\\dashv f'^\\times$. The transpose of the upper path is the pullback of this displayed composite preceded by $C^{-1}$. The transpose of the lower path is the primed projection inverse followed by $1\\otimes Rf'_!b$ and $1\\otimes\\epsilon_{f',A}$. Step 5 identifies their projection-formula factors; the defining equation of $b$ from Step 2 identifies their final factors, since $\\epsilon_{f',A}Rf'_!b=g^*\\epsilon_{f,A}C^{-1}$. Naturality of $C$ and tensor lets these substitutions be made in the composite. The transposes are equal, so the adjunction bijection proves the displayed tensor compatibility. [thm-asd-smooth-tensor] ensures these canonical tensor maps are the claimed isomorphisms.",
+   "text": "Express smoothTensorDualityMap as the braiding followed by dualizingComplexTensorMap, using braided_tensor_mate. Apply braided_tensor_square to dualizing_tensor_base_change and leftDerivedUpperStar_map_braiding_hom_δ. Expand only the canonical tensor functor, pullback-square isomorphism, unit comparison and their composites. The resulting equality is exactly the tensor clause of smooth_exceptional_base_change. All helpers are proved; no split theorem is introduced.",
    "uses": [
     "thm-asd-smooth-tensor",
-    "thm-amb-etale-exceptional-adjoint",
     "lem-kun-inverse-image-monoidal",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-kun-tensor-sym"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "Final paragraph: the two transposes of the tensor-compatibility rectangle"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-amb-etale-adjoint-locality",
-  "lem-amb-proper-coproducts-projection",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-etale-compact-support-normalization",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-compact-projection-exchange",
   "lem-kun-inverse-image-monoidal",
   "lem-kun-tensor-sym",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-weil-pbc-etale-cover-detects-iso",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "sbc-thm-etale-local-normal-form",
   "thm-amb-etale-exceptional-adjoint",
-  "thm-asd-smooth-tensor",
-  "thm-nagata-compactification"
+  "thm-asd-smooth-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-  "place": "Paragraphs 1–3 and coherences (i)–(iii); unbounded refinement/composition supplied by the existing Stacks 0F7H–0F7L interface, open tensor by 0GL1, tensor/exchange coherence by 0E48 and 07A4"
+  "place": "Canonical mate and final tensor square; existing upstream SmoothDuality supplies the isomorphism clause; projection exchange and monoidal unit/braiding coherence supply the tensor clause."
  },
  "mathlib_searches": [
   {
@@ -427,34 +277,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-proper-open-section",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
   "lem-weil-pbc-mate-pasting",
-  "prop-nagata-compactification-category",
-  "def-kun-unbounded-exchange",
-  "thm-nagata-compactification",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-pc-kflat-resolution",
-  "lem-pod-etale-stalk-tensor-scalar",
   "lem-kun-inverse-image-monoidal",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sbc-thm-etale-local-normal-form",
-  "lem-weil-pbc-etale-cover-detects-iso",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-kun-tensor-sym",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+  "lem-kun-tensor-sym"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -524,5 +349,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261019T034358-L-427047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
