@@ -8,9 +8,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.KrullDimension.Regular
-import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Regularity lifts from a regular-sequence quotient
@@ -56,7 +54,43 @@ theorem isRegularLocalRing_of_regularSequence_quotient
     (hseq : RingTheory.Sequence.IsRegular R xs)
     [IsRegularLocalRing (R ⧸ Ideal.ofList xs)] :
     IsRegularLocalRing R := by
-  sorry
+  classical
+  -- Lift the final quotient generators together, rather than one element at a time.
+  let I := Ideal.ofList xs
+  let q := Ideal.Quotient.mk I
+  have hq : Function.Surjective q := Ideal.Quotient.mk_surjective
+  let g := Function.surjInv hq
+  have hg : Function.RightInverse g q := Function.rightInverse_surjInv hq
+  obtain ⟨s, hcard, hs⟩ :=
+    Submodule.FG.exists_span_finset_card_eq_spanFinrank
+      (maximalIdeal (R ⧸ I)).fg_of_isNoetherianRing
+  change Ideal.span (s : Set (R ⧸ I)) = maximalIdeal (R ⧸ I) at hs
+  let t := s.image g
+  have himage : q '' (t : Set R) = (s : Set (R ⧸ I)) := by
+    simp only [t, Finset.coe_image, ← Set.image_comp]
+    have hcomp : (q ∘ g) = id := funext hg
+    rw [hcomp, Set.image_id]
+  have hmap : Ideal.map q (Ideal.span (t : Set R)) = Ideal.map q (maximalIdeal R) := by
+    rw [Ideal.map_span, himage, hs, map_maximalIdeal_of_surjective q hq]
+  have hI : I ≤ maximalIdeal R := Ideal.span_le.mpr hmem
+  have hgen : Ideal.span ((t ∪ xs.toFinset : Finset R) : Set R) = maximalIdeal R := by
+    have h := (Ideal.map_eq_iff_sup_ker_eq_of_surjective q hq).mp hmap
+    simpa only [q, Ideal.mk_ker, sup_eq_left.mpr hI, Finset.coe_union,
+      Ideal.span_union, List.coe_toFinset, Ideal.ofList, I] using h
+  have hbound : (maximalIdeal R).spanFinrank ≤
+      (maximalIdeal (R ⧸ I)).spanFinrank + xs.length := by
+    rw [← hgen]
+    apply (Submodule.spanFinrank_span_le_ncard_of_finite (Finset.finite_toSet _)).trans
+    rw [Set.ncard_coe_finset]
+    exact (Finset.card_union_le t xs.toFinset).trans
+      (Nat.add_le_add ((Finset.card_image_le).trans_eq hcard) xs.toFinset_card_le)
+  apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
+  calc
+    ((maximalIdeal R).spanFinrank : WithBot ℕ∞) ≤
+        ((maximalIdeal (R ⧸ I)).spanFinrank + xs.length : ℕ) := by exact_mod_cast hbound
+    _ = ringKrullDim (R ⧸ I) + xs.length := by
+      rw [Nat.cast_add, IsRegularLocalRing.spanFinrank_maximalIdeal]
+    _ = ringKrullDim R := ringKrullDim_add_length_eq_ringKrullDim_of_isRegular xs hseq
 
 end RingTheory
 

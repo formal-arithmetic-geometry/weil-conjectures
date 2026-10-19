@@ -17209,3 +17209,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/G8/Sheaf.AlgebraicGeometry.SupportTriangleConstruction (stage 3; reviewer PASS; first push; landing 20261019T093427-L-2310092 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/H1/Sheaf.AlgebraicGeometry.WeaklyEtaleUniversalHomeomorphism (stage 3; reviewer PASS; first push; landing 20261019T093428-L-2310301 (proof); batch 20261019T093237; modules 1; new nodes 0)
 - 09:34 L: merged deliver/H1/Sheaf.Paper.SfConstructibleHeart (stage 3; reviewer PASS; first push; landing 20261019T093430-L-2310512 (interface); batch 20261019T093237; modules 2; new nodes 1)
+- 09:34 L: merged deliver/H1/Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient (stage 3; reviewer PASS; first push; landing 20261019T093431-L-2310700 (proof); batch 20261019T093237; modules 1; new nodes 0)
