@@ -6,7 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectGluingEndpointProperties
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 

@@ -102,13 +102,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RestrictionResolutionLiftSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/RestrictionResolutionLiftSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RestrictionResolutionLiftSections.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.restrictionResolutionLift_sections",
   "statement": "theorem restrictionResolutionLift_sections {X Y : Scheme.{uBC}}\n    (p : Y ⟶ X) {M : X.Modules} {N : Y.Modules}\n    (I : InjectiveResolution M) (J : InjectiveResolution N)\n    (t : I.cocomplex ⟶ ((pushforward p).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (U : X.Opens) (A : RestrictedResolutionSections I U)\n    (B : RestrictedResolutionSections J (p ⁻¹ᵁ U)) :\n  let W := p ⁻¹ᵁ U\n  letI : (restrictFunctor U.ι).Additive :=\n    (restrictAdjunction U.ι).left_adjoint_additive\n  let h := p.resLE U W le_rfl\n  let C := B.resolution.cocomplex\n  let P := (pushforward U.ι).mapHomologicalComplex (ComplexShape.up ℕ)\n  let H := (pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)\n  let G := (pushforward p).mapHomologicalComplex (ComplexShape.up ℕ)\n  let e₁ := NatIso.mapHomologicalComplex (pushforwardComp W.ι p)\n    (ComplexShape.up ℕ)\n  let e₂ := NatIso.mapHomologicalComplex\n    (pushforwardCongr (p.resLE_comp_ι (U := U) (V := W) le_rfl))\n    (ComplexShape.up ℕ)\n  let e₃ := NatIso.mapHomologicalComplex (pushforwardComp h U.ι) (ComplexShape.up ℕ)\n  let w := ((restrictAdjunction W.ι).unit.mapHomologicalComplex\n    (ComplexShape.up ℕ)).app J.cocomplex\n  let b : I.cocomplex ⟶ P.obj (H.obj C) :=\n    t ≫ G.map w ≫ e₁.hom.app (((restrictFunctor W.ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      e₂.inv.app (((restrictFunctor W.ι).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      e₃.inv.app (((restrictFunctor W.ι).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      P.map (H.map B.comparison.inv)\n  let k := A.comparison.hom ≫\n    (((restrictAdjunction U.ι).mapHomologicalComplex (ComplexShape.up ℕ)).homEquiv\n      I.cocomplex (H.obj C)).symm b\n  let ΓS := (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙\n    forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)\n  let ΓT := (RingedSpace.globalSectionsFunctor (p ⁻¹ᵁ U).toScheme.toRingedSpace ⋙\n    forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)\n  ∀ (a : ΓT.obj B.resolution.cocomplex ≅ ΓS.obj (H.obj B.resolution.cocomplex)),\n    (∀ n : ℕ, a.inv.f n = (B.resolution.cocomplex.X n).presheaf.map\n      (eqToHom (by simp) : (⊤ : (p ⁻¹ᵁ U).toScheme.Opens) ⟶\n        h ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op) →\n    ΓS.map k ≫ a.inv ≫ B.sections.hom =\n      A.sections.hom ≫\n        ((RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex\n          (ComplexShape.up ℕ)).map t",
   "branch": "sheaf-dag",
   "by": "W2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.RestrictionResolutionLiftSections retired; now WeilConjectures.AlgebraicGeometry.RestrictionResolutionLiftSections."
  },
  "reviewed": {
   "date": "2026-10-13",

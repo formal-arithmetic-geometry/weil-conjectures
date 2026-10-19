@@ -6,9 +6,10 @@ Authors: SHEAF group M4
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractMapEquality
 import Mathlib.Data.Int.Interval
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Shrinking stalk equality of complex maps
 

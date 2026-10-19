@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
 import Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude
 import Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology
 import Sheaf.Algebra.Homology.KFlatResolution

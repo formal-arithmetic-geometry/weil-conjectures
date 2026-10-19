@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison
-import Sheaf.AlgebraicGeometry.FlatOverAffineOpenRestriction
+import WeilConjectures.AlgebraicGeometry.FlatOverAffineOpenRestriction
 
 /-! # Affine locality for relatively flat canonical module base change
 

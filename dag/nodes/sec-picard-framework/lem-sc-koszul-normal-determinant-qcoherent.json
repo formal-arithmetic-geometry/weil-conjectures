@@ -83,13 +83,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty",
-  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionDualizingProperty.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/KoszulRegularImmersionDualizingProperty.lean",
   "declaration": "AlgebraicGeometry.koszulRegularImmersion_dualizing_property",
   "statement": "theorem koszulRegularImmersion_dualizing_property {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsNoetherian Y] [IsClosedImmersion i]\n    [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f)\n    (r : LocallyConstant Z ℕ)\n    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)\n      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) :\n    schemeDerivedQCohProperty Z ((DerivedCategory.Q (C :=\n      SheafOfModules.{u} (moduleRings Z.toRingedSpace))).obj\n        (Scheme.Modules.locallyRankedExteriorComplex\n          (SheafOfModules.homObj (R := Z.sheaf)\n            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)\n            (SheafOfModules.unit Z.ringCatSheaf)) r))",
   "branch": "sheaf-dag",
   "by": "G2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty retired; now WeilConjectures.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty."
  },
  "reviewed": {
   "date": "2026-10-12",

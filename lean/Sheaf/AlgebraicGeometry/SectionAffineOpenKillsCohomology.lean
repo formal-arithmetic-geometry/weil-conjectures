@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import WeilConjectures.AlgebraicGeometry.InvertSCOhomology
 import WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 
 /-!

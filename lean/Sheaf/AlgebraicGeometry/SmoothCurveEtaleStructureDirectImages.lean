@@ -32,14 +32,13 @@ import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import Sheaf.AlgebraicGeometry.PerfectDegreeZeroFibreCriterion
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback
 import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.LeraySpectralSequence
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 
 /-! # Structure-sheaf direct images for smooth proper curves

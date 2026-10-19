@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
-import Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence
+import WeilConjectures.AlgebraicGeometry.LocalizedOpenTensorEquivalence
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

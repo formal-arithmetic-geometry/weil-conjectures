@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.Paper.GradedModuleRelativeSpecRealization
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
-import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 

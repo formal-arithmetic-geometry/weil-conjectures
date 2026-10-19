@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.LocalizedHomologyStalkComparison
+public import WeilConjectures.AlgebraicGeometry.LocalizedHomologyStalkComparison
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree

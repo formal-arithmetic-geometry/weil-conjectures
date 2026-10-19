@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Paper.ShiftedKoszulAugmentation
-import Sheaf.AlgebraicGeometry.KoszulOpenConeComparison
+import WeilConjectures.AlgebraicGeometry.KoszulOpenConeComparison
 import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZeroBase
 
 @[expose] public section

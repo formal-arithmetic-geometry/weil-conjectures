@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.LocalImmersionLocus
+import WeilConjectures.AlgebraicGeometry.LocalImmersionLocus
 import Sheaf.AlgebraicGeometry.PicardSingleRankPerfectChart
 import Sheaf.AlgebraicGeometry.PicardSingleRankSourceLocal
 import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus

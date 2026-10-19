@@ -12,7 +12,8 @@ import Mathlib.Topology.Sheaves.Abelian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentExtension
+import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Triangulated closure of supported quasi-coherent complexes
 

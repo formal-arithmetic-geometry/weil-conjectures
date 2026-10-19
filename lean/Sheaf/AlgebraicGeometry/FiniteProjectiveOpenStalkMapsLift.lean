@@ -5,8 +5,9 @@ Authors: SHEAF group U3
 -/
 module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.OpenStalkFreeMapLocalLift
+public import Sheaf.Paper.DerivedHomMayerVietoris
 /-! # Finite-interval lifting for finite-projective open-site terms
 
 Source: Stacks Project, Tags 09RE and 01CP.

@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.CompactFlatGeneratorRelativeExtension
 
 /-! # Split towers resolved by compact flat generators

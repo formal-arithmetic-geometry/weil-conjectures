@@ -98,13 +98,14 @@
  },
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FlatUnitRawSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatUnitRawSections.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.FlatUnitRawSections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatUnitRawSections.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.flatUnit_raw_sections",
   "statement": "theorem flatUnit_raw_sections {S S' : Scheme.{uBC}} (g : S' ⟶ S) [Flat g]\n    (K : CochainComplex S.Modules ℕ) (p : ℕ) (V : S.Opens) :\n    let A := (tensorPullback g).mapHomologicalComplex (ComplexShape.up ℕ)\n    let U := SheafOfModules.forget S.ringCatSheaf\n    let U' := SheafOfModules.forget S'.ringCatSheaf\n    let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op V)\n    let E' := PresheafOfModules.toPresheaf S'.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation S'.Opensᵒᵖ AddCommGrpCat.{uBC}).obj (op (g ⁻¹ᵁ V))\n    let adj := Classical.choose (exists_tensorPullbackAdjunction g)\n    ((((U.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso E).hom ≫\n        E.map (sectionCohomologyTheta K p) ≫\n        Hom.app (adj.homEquiv _ _ ((K.sc p).mapHomologyIso (tensorPullback g)).inv) V =\n      HomologicalComplex.homologyMap\n        (((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex\n          (ComplexShape.up ℕ)).map ((adj.mapHomologicalComplex\n            (ComplexShape.up ℕ)).unit.app K)) p ≫\n        ((((U'.mapHomologicalComplex (ComplexShape.up ℕ)).obj (A.obj K)).sc p)\n          |>.mapHomologyIso E').hom ≫ E'.map (sectionCohomologyTheta (A.obj K) p)",
   "branch": "sheaf-dag",
   "by": "N2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.FlatUnitRawSections retired; now WeilConjectures.AlgebraicGeometry.FlatUnitRawSections."
  },
  "reviewed": {
   "date": "2026-10-13",

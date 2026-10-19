@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
-import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionDegreeZero
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
+import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionDegreeZero
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso

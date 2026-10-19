@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
@@ -16,6 +16,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.AlgebraicGeometry.RelativeTensorStalkGlobalHomology
 import Sheaf.AlgebraicGeometry.RelativeTensorGlobalLocalStalkDerivedIso
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Relative tensor homology compared with a local stalk model
 

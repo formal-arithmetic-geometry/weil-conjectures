@@ -6,8 +6,9 @@ Authors: SHEAF group D4
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import all WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapEquality
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Local equality of morphisms from finite free retracts
 

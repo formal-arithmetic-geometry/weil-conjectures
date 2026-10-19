@@ -5,7 +5,8 @@ Authors: SHEAF group D4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
+public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Comparing open module stalks under restriction
 

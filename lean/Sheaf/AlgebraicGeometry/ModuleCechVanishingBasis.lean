@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence

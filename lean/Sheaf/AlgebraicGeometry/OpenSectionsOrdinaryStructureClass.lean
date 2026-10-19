@@ -6,7 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
-public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # The ordinary degree-zero structure class

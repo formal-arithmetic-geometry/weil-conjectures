@@ -6,7 +6,7 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.RingTheory.PopescuLiftPresentation
-import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import WeilConjectures.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
 import WeilConjectures.RingTheory.PopescuLiftChartFibres
 import WeilConjectures.RingTheory.PopescuLiftChartFlat
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
-import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAcyclicCohomologyComparison
 
 /-! # Cohomology comparison from prime-module injective acyclicity
 

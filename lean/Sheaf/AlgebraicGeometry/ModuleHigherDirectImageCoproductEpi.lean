@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Surjectivity of ordinary higher direct image on coproducts

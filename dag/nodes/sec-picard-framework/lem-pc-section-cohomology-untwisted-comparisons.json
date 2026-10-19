@@ -137,13 +137,14 @@
  "unit": "sk-thm-picard-coherence",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SectionCohomologyUntwistedComparisons",
-  "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyUntwistedComparisons.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.SectionCohomologyUntwistedComparisons",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SectionCohomologyUntwistedComparisons.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.sectionCohomology_untwisted_comparisons",
   "statement": "theorem sectionCohomology_untwisted_comparisons {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules) (I : InjectiveResolution F)\n    (q : ℕ) (W V : T.Opens) (hV : V ≤ W) :\n    let Y := (f ⁻¹ᵁ W).toScheme\n    let G := (restrictFunctor (f ⁻¹ᵁ W).ι).obj F\n    let L := 𝟙_ Y.Modules\n    let K := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n    let P := sectionCohomologyPresheaf K q\n    let : Module Γ(T, W) (P.obj (op V)) :=\n      Module.compHom _ (T.presheaf.map (homOfLE hV).op).hom\n    ∀ (U : Y.Opens), (f ⁻¹ᵁ W).ι ''ᵁ U = f ⁻¹ᵁ V →\n      ∃ e : (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G ≃+\n          P.obj (op V),\n      ∃ t : (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj G ≃+\n          P.obj (op W),\n      (∀ (r : Γ(T, W)) (z : (RingedSpace.openModuleCohomology Y.toRingedSpace q U).obj G),\n        e ((RingedSpace.openModuleCohomology Y.toRingedSpace q U).map\n          ((ρ_ G).inv ≫ G ◁ homOfGlobalSection L\n            (unitSectionsEquiv ⊤ (((f.app W) ≫ (f ⁻¹ᵁ W).topIso.inv).hom r)) ≫\n              (ρ_ G).hom) z) = r • e z) ∧\n      (∀ ξ : (RingedSpace.openModuleCohomology Y.toRingedSpace q ⊤).obj G,\n        e ((RingedSpace.openModuleCohomologyRestriction Y.toRingedSpace q\n          (homOfLE (le_top : U ≤ ⊤))).app G ξ) =\n            (P.map (homOfLE hV).op).hom (t ξ))",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.SectionCohomologyUntwistedComparisons retired; now WeilConjectures.AlgebraicGeometry.SectionCohomologyUntwistedComparisons."
  },
  "reviewed": {
   "date": "2026-10-14",

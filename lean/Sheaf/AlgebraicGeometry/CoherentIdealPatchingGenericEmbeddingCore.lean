@@ -6,7 +6,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.CoherentGenericMonoIdealFactor
-import Sheaf.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
+import WeilConjectures.AlgebraicGeometry.IntegralIdealsCommonGenericLattice
 import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful

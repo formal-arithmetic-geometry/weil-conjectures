@@ -133,17 +133,18 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read all five steps: beta defined from resolutions and the lifted unit (B7 repaired), f_*g'_* = g_*f'_* computed on opens, restricted resolutions via module-open-restriction-injectives, the pullback computed as H^p(q_V) via the pushforward-injectives quasi-iso, sheafification uniqueness; new unsplit 02N4/02N5 tool node."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
+  "module": "WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSections",
   "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeMap_sections",
   "declarations": [
    "AlgebraicGeometry.Scheme.Modules.flatBaseChangeMap_sections"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeMapSections.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FlatBaseChangeMapSections.lean",
   "statement": "theorem flatBaseChangeMap_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g] [Flat (pullback.snd g f)] (F : X.Modules) (p : ℕ) : ∃ beta : (tensorPullback g).obj (((pushforward f).rightDerived p).obj F) ⟶ ((pushforward (pullback.fst g f)).rightDerived p).obj ((tensorPullback (pullback.snd g f)).obj F), (∀ (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex), I.ι.f 0 ≫ t.f 0 = (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫ (pushforward (pullback.snd g f)).map (J.ι.f 0) → flatBaseChangeResolutionBeta f g I J t p = beta) ∧ (∀ (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens), Nonempty (FlatBaseChangeOpenChoices f g F I J V)) ∧ (∀ (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens) (D : FlatBaseChangeOpenChoices f g F I J V) (xi : (forget₂ _ AddCommGrpCat.{uBC}).obj ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F))), Hom.app ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv _ _ beta) V (D.sourceClass p xi) = D.targetClass p (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi))",
   "branch": "sheaf-dag",
   "by": "R1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections retired; now WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSections."
  },
  "reviewed_lean": {
   "date": "2026-10-11",

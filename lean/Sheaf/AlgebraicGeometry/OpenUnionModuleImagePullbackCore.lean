@@ -4,7 +4,7 @@ public import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Mathlib.CategoryTheory.Limits.Types.Pullbacks
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits
 import Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections
-import Sheaf.AlgebraicGeometry.OpenModuleImageSectionRestriction
+import WeilConjectures.AlgebraicGeometry.OpenModuleImageSectionRestriction
 
 /-! Sectionwise gluing and its assembly for an arbitrary open union. -/
 @[expose] public section

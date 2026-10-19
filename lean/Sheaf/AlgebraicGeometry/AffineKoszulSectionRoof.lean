@@ -12,7 +12,7 @@ import Sheaf.AlgebraicGeometry.AffineKoszulSectionColimit
 import Sheaf.Algebra.Homology.KFlatResolution
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
 
 /-! # Koszul representatives of sections on an affine open
 

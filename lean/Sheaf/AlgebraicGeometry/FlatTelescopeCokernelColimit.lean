@@ -5,7 +5,7 @@ Authors: SHEAF group P2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
+public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
 public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # The canonical sequential colimit as a telescope cokernel
