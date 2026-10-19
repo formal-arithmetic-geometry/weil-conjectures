@@ -123,6 +123,26 @@ noncomputable def supportConeQuotient
     (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ) :=
   CochainComplex.mappingCone.descShortComplex (supportModelSequence Λ s j hPair I)
 
+section GenericTriangle
+
+universe v w
+variable {C : Type v} [Category.{w} C] [Abelian C] [HasDerivedCategory C]
+
+/-- The explicit quotient triangle of a short complex, with the cone quotient inverted.
+This generic constructor keeps its three objects as parameters during triangle transport.
+Source: blueprint def-pur-support-triangle, cone quotient and signed projection
+(blueprint: def-pur-support-triangle). -/
+noncomputable def supportSequenceTriangle (S : ShortComplex (CochainComplex C ℤ))
+    (hq : IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex S))) :
+    Triangle (DerivedCategory C) :=
+  letI := hq
+  Triangle.mk (DerivedCategory.Q.map S.f) (DerivedCategory.Q.map S.g)
+    (inv (DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex S)) ≫
+      DerivedCategory.Q.map (CochainComplex.mappingCone.triangle S.f).mor₃ ≫
+      (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app S.X₁)
+
+end GenericTriangle
+
 /-- The specified triangle: its boundary is `q⁻¹` followed by the negative shifted
 projection, including the canonical shift comparison for localization. No choice of
 boundary occurs. Source: blueprint `def-pur-support-triangle`
@@ -131,13 +151,6 @@ noncomputable def supportModelTriangle
     (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
     (hq : IsIso (DerivedCategory.Q.map (supportConeQuotient Λ s j hPair I))) :
     Triangle (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :=
-  letI := hq
-  Triangle.mk (DerivedCategory.Q.map (supportModelSequence Λ s j hPair I).f)
-    (DerivedCategory.Q.map (supportModelSequence Λ s j hPair I).g)
-    (inv (DerivedCategory.Q.map (supportConeQuotient Λ s j hPair I)) ≫
-      DerivedCategory.Q.map
-        (CochainComplex.mappingCone.triangle (supportModelSequence Λ s j hPair I).f).mor₃ ≫
-      (DerivedCategory.Q.commShiftIso (1 : ℤ)).hom.app
-        (supportModelSequence Λ s j hPair I).X₁)
+  supportSequenceTriangle (supportModelSequence Λ s j hPair I) hq
 
 end AlgebraicGeometry.ProEtale
