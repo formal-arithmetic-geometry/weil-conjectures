@@ -51,16 +51,36 @@
    "text": "Apply Adjunction.mkOfHomEquiv to the natural Hom equivalences. The intermediate map g is the transported tensor transpose, so its section formula is exactly the required tensor-unit normalization. For uniqueness, take h to be the identity on the pullback of M. Any other normalized adjunction gives a map g equal to this explicit map by sectionwise extensionality. Its Hom transpose therefore agrees with the constructed transpose. By Adjunction.homEquiv_id these transposes are the units. NatTrans.ext and Adjunction.ext give equality of adjunctions. The existing module and derived adjunction definitions are retained verbatim; deriving uses Adjunction.mapDerivedCategoryRightDerivedAdjunction.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For the arbitrary constant-ring specialization, let T be the identity object of the pro-etale site of Y. It is terminal, and proEtaleBaseChange f preserves its terminality by its published finite-limit preservation [def-weil-proetale-inverse-image]. Direct image followed by evaluation at T is definitionally evaluation at its base change. Compose constantSheafAdj on Y with proEtaleSheafAdjunction and transport the right adjoint by this identity natural isomorphism. The resulting left adjoint is constant sheaf on Y followed by inverse image. Compare it with constantSheafAdj on X at the base-changed terminal object using Adjunction.leftAdjointUniq. These are the constant-sheaf and sheafification adjunctions of [def-weil-pbc-constant-sheaf] and [def-weil-pbc-sheafification].",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the component of that uniqueness isomorphism with proEtaleCoefficientInverseImageMap by injectivity of the composite Hom equivalence. Adjunction.homEquiv_leftAdjointUniq_hom_app identifies the comparison transpose with the constant-sheaf unit on X. Unfolding the specified coefficient map and cancelling the inverse-image Hom equivalence gives proEtaleConstantDirectImageMap. Unfolding this map and cancelling the sheafification Hom equivalence gives the constant presheaf section at the base-changed T. The explicit units of constantPresheafAdj and sheafificationAdjunction give exactly the same unit on X. Thus the specified map equals the isomorphism component and is invertible. No finiteness, nonemptiness, or topology on the coefficient ring is used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "lemma-adjointness-tensor-restrict and lemma-adjoint-push-pull-modules (Stacks Tag 03D3); canonical tensor-unit normalization specialized to the existing small-model definitions. The steps here discharge proEtaleRingModuleAdjunction_existsUnique; the operations in ProEtaleOperations and the existing derived definitions are unchanged."
+  "place": "lemma-adjointness-tensor-restrict and lemma-adjoint-push-pull-modules (Stacks Tag 03D3); canonical tensor-unit normalization specialized to the existing small-model definitions. The steps here discharge proEtaleRingModuleAdjunction_existsUnique; the operations in ProEtaleOperations and the existing derived definitions are unchanged. Arbitrary constant-ring comparison: literature/stacks-project/sites.tex, example-constant-sheaf and the preceding sheafification adjunction; Mathlib CategoryTheory.constantSheafAdj and Adjunction.leftAdjointUniq. The direct proof identifies the actual constant-section map by its composite transpose and discharges proEtaleConstantRingComparison_isIso."
  },
  "mathlib_searches": [
   {
@@ -171,13 +191,13 @@
   "note": "§1(B): The recorded sfIntrinsicDerivedPullback requires [Finite A], while this node states ordinary identified-coefficient operations and the consuming Frobenius statement allows arbitrary commutative A. Reexport that published finite interface and the full arbitrary-ring-sheaf operations, then specialize the latter using the actual constant-section coefficient comparison. Its invertibility is a named construction theorem, and the comparison is asIso of that exact map. Module pullback, direct image, the tensor-unit-normalized adjunction and exact termwise derived pullback are the published constructions, with no replacement module category, arbitrary coefficient identification, completion, torsion, or finiteness assumption."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-19",
   "by": "L",
-  "reviewer": "X-4b989",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261015T161929-L-300828",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered module, DAG node, change record, report, compilation, and seven direct importer checks all match the stage-3 review requirements"
+  "landing": "20261019T002606-L-2157298",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

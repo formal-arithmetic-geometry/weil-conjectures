@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Ordinary pro-etale operations with arbitrary constant coefficients
@@ -30,6 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified constant-section comparison is invertible for arbitrary rings.
 Source: Stacks, Tag 0H7J (blueprint: def-weil-pbc-proetale-operations).
 Proof: on sheaves of sets, inverse image preserves colimits and finite limits.
@@ -40,7 +39,47 @@ section to itself, so sheafification uniqueness identifies it with the specified
 This is the canonical coefficient identification for the ordinary module operations. -/
 theorem proEtaleConstantRingComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) := by
-  sorry
+  -- Compare the two left adjoints to sections at the base-changed terminal object.
+  let D := CommRingCat.{u + 1}
+  let T : Y.ProEt := ProEt.mk (𝟙 Y)
+  let hT : IsTerminal T := MorphismProperty.Over.mkIdTerminal _ Y
+  let hGT : IsTerminal ((proEtaleBaseChange f).obj T) :=
+    hT.isTerminalObj (proEtaleBaseChange f)
+  let eR : proEtaleSheafDirectImage f D ⋙
+      (sheafSections (ProEt.topology Y) D).obj (Opposite.op T) ≅
+        (sheafSections (ProEt.topology X) D).obj (Opposite.op ((proEtaleBaseChange f).obj T)) :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _)
+  let adj₁ := ((constantSheafAdj (ProEt.topology Y) D hT).comp
+    (proEtaleSheafAdjunction f D)).ofNatIsoRight eR
+  let adj₂ := constantSheafAdj (ProEt.topology X) D hGT
+  let e := adj₁.leftAdjointUniq adj₂
+  -- Identify the specified map by its transpose, including its constant-section normalization.
+  have he : proEtaleCoefficientInverseImageMap f A =
+      e.hom.app (CommRingCat.of (ULift.{u + 1, u} A)) := by
+    apply (adj₁.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    simp only [adj₁, Adjunction.homEquiv_ofNatIsoRight_apply,
+      Adjunction.comp_homEquiv]
+    unfold proEtaleCoefficientInverseImageMap proEtaleConstantInverseImageMap
+    rw [← Adjunction.homEquiv_symm_apply]
+    dsimp only [D, proEtaleSheafDirectImage, ProEtale.lowerStar,
+      proEtaleConstantRing, Functor.comp_obj] at *
+    simp only [Equiv.trans_apply, Equiv.apply_symm_apply, eR,
+      NatIso.ofComponents_hom_app, Iso.refl_hom]
+    change (constantSheafAdj (ProEt.topology Y) D hT).homEquiv _ _
+      (proEtaleConstantDirectImageMap f D (CommRingCat.of (ULift.{u + 1, u} A))) =
+        adj₂.unit.app _
+    unfold proEtaleConstantDirectImageMap
+    rw [constantSheafAdj, Adjunction.comp_homEquiv]
+    change (constantPresheafAdj D hT).homEquiv _ _
+      ((sheafificationAdjunction (ProEt.topology Y) D).homEquiv _ _
+        (((sheafificationAdjunction (ProEt.topology Y) D).homEquiv _ _).symm _)) = _
+    rw [Equiv.apply_symm_apply]
+    simp only [adj₂, constantSheafAdj, Adjunction.comp_unit_app,
+      constantPresheafAdj_unit_app, Category.id_comp, sheafificationAdjunction_unit_app]
+    rfl
+  rw [he]
+  infer_instance
 
 attribute [instance] proEtaleConstantRingComparison_isIso
 
