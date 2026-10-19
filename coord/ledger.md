@@ -17095,3 +17095,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:54 L: merged deliver/NA/lem-per-finite-compact-support-fibre-support-bound (stage 2; reviewer PASS; parallel immutable checks)
 - 05:57 L: merged deliver/Q107/lem-coef-finite-free-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 05:57 L: merged deliver/Q14/lem-a1-qbar-curve-duality (stage 2; reviewer PASS; parallel immutable checks)
+- 05:58 L: returned deliver/Q09/lem-coef-tower-natural-currying (reviewer RETURN: L: independent stage-2 immutable head deb24dad4ac9: H3: the main theorem concludes a fresh ∃ M : CoefCurryingModels whos)
