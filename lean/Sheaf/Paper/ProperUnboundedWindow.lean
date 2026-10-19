@@ -139,7 +139,7 @@ theorem properUnboundedWindow
   · exact hK'.2.2.2
   · exact hK'.2.2.1
   · intro q
-    exact (proper_unbounded_window_iso ℓ E p d hd K hK q).2.2
+    exact (proper_unbounded_window_iso ℓ E k p₀ hp₀ hpℓ X Y p d hd K hK q).2.2
 
 /-- The same unbounded proper-window theorem for the condensed algebraic closure.
 Its sections take values in a finite subextension, as in sk-def-sfb-qlbar-condensed.
@@ -180,6 +180,6 @@ theorem properUnboundedWindow_padicAlgCl
   · exact hK'.2.2.2
   · exact hK'.2.2.1
   · intro q
-    exact (proper_unbounded_window_iso_padicAlgCl ℓ p d hd K hK q).2.2
+    exact (proper_unbounded_window_iso_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p d hd K hK q).2.2
 
 end AlgebraicGeometry.ProEtale

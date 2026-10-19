@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "The window isomorphism for proper direct image",
- "statement": "Let $X,Y$ be schemes [def-pc-scheme], let $\\ell$ be a prime, fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a finite subextension $E/\\mathbf Q_\\ell$, and let $\\Lambda=E$ or $\\Qlb$ with the condensed coefficient rings of [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed]. For $T=X,Y$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and write $D(T_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_T})$ for the unbounded derived category of module sheaves. Let $\\IndCons(T,\\Lambda)$ be the full subcategory of filtered colimits of constructible $\\Lambda_T$-module sheaves [sk-def-sfb-constructible], computed in $\\Mod_{\\Lambda_T}$, and let $\\Dic(T,\\Lambda)$ be the full subcategory whose cohomology sheaves [def-weil-derived-cohomology-sheaves] lie in $\\IndCons(T,\\Lambda)$ in every degree. Let $p:X\\to Y$ be proper [def-weil-proper-morphism] with geometric fibres [def-weil-geometric-fibre] of Krull dimension [def-kun-topological-krull-dimension] at most an integer $d$, and use its total derived module pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull]. For $K\\in\\Dic(X,\\Lambda)$ and $q\\in\\mathbf Z$, the canonical truncation maps [def-kun-truncations]\n$$\nK\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\n$$\ninduce isomorphisms in $\\IndCons(Y,\\Lambda)$\n$$\n\\mathcal H^q(Rp_*K)\\xleftarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\xrightarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K).\n$$",
+ "statement": "Use the standing setting of [sk-def-sfb-dc-setting]: a field $k$ of characteristic $p_0>0$ with $p_0\\ne\\ell$, separated finite-type $k$-schemes $X,Y$, and a $k$-morphism $p:X\\to Y$. Let $X,Y$ be schemes [def-pc-scheme], let $\\ell$ be a prime, fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a finite subextension $E/\\mathbf Q_\\ell$, and let $\\Lambda=E$ or $\\Qlb$ with the condensed coefficient rings of [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed]. For $T=X,Y$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and write $D(T_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_T})$ for the unbounded derived category of module sheaves. Let $\\IndCons(T,\\Lambda)$ be the full subcategory of filtered colimits of constructible $\\Lambda_T$-module sheaves [sk-def-sfb-constructible], computed in $\\Mod_{\\Lambda_T}$, and let $\\Dic(T,\\Lambda)$ be the full subcategory whose cohomology sheaves [def-weil-derived-cohomology-sheaves] lie in $\\IndCons(T,\\Lambda)$ in every degree. Let $p:X\\to Y$ be proper [def-weil-proper-morphism] with geometric fibres [def-weil-geometric-fibre] of Krull dimension [def-kun-topological-krull-dimension] at most an integer $d$, and use its total derived module pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull]. For $K\\in\\Dic(X,\\Lambda)$ and $q\\in\\mathbf Z$, the canonical truncation maps [def-kun-truncations]\n$$\nK\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\n$$\ninduce isomorphisms in $\\IndCons(Y,\\Lambda)$\n$$\n\\mathcal H^q(Rp_*K)\\xleftarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\xrightarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K).\n$$",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-iso.md",
   "place": "node det-proper-unbounded-window-iso, order None"
@@ -24,14 +24,13 @@
   "def-pc-scheme",
   "def-weil-proper-morphism",
   "def-weil-geometric-fibre",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
-   "text": "The pro-étale sites are taken on small skeletons in the larger universe specified by [def-weil-pbc-proetale-site]. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to each of these sites and its actual coefficient sheaf $\\Lambda_T$ (no constant-coefficient identification is made). Thus both module categories are Grothendieck abelian, and [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions for both. The module pushforward is additive by [def-sfb-module-lower-star], and $Rp_*$ is precisely its K-injective total right derived functor by [sk-def-sfb-module-derived-pushpull]. Therefore [lem-pc-right-derived-functor-triangulated] says that applying $Rp_*$ to a distinguished triangle again gives a distinguished triangle, with the canonical commutation with shifts.",
+   "text": "The existing pro-etale module-object framework supplies the abelian, Grothendieck and derived-category instances for the actual coefficient rings. [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions. The additive module pushforward [def-sfb-module-lower-star] has the total right derived functor [sk-def-sfb-module-derived-pushpull], which preserves distinguished triangles by [lem-pc-right-derived-functor-triangulated]. No separate ringed-site universe theorem or equivalence is needed in this application.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-sfb-grothendieck-k-injective",
     "def-sfb-module-lower-star",
     "sk-def-sfb-module-derived-pushpull",
@@ -44,12 +43,13 @@
    }
   },
   {
-   "text": "Put $A=\\tau_{\\leq q}K$ and $B=\\tau_{\\geq q+1}K$. By the canonical truncation formulas of [def-kun-truncations], their cohomology sheaves are those of $K$ in the retained ranges and zero otherwise. Thus $A,B\\in\\Dic(X,\\Lambda)$ and $B$ has no cohomology below $q+1$. The canonical distinguished triangle at $b=q+1$ in [lem-sf-derived-truncation-triangle] is $A\\to K\\to B\\to A[1]$. By step 1 its image under $Rp_*$ is distinguished. The lower amplitude bound of [det-proper-unbounded-window-arbitrary] gives $H^{q-1}(Rp_*B)=H^q(Rp_*B)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] consequently contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*K)\\to0$. Exactness makes the displayed middle map both monic and epic, hence an isomorphism in the abelian module category. This is the map induced by $A\\to K$, not merely an abstract isomorphism.",
+   "text": "Put $A=\\tau_{\\leq q}K$ and $B=\\tau_{\\geq q+1}K$. By [det-ambient-ind-derived-sums](truncation clause) and the canonical formulas of [def-kun-truncations], their cohomology sheaves are those of $K$ in the retained ranges and zero otherwise. Thus $A,B\\in\\Dic(X,\\Lambda)$ and $B$ has no cohomology below $q+1$. The canonical distinguished triangle at $b=q+1$ in [lem-sf-derived-truncation-triangle] is $A\\to K\\to B\\to A[1]$. By step 1 its image under $Rp_*$ is distinguished. The lower amplitude bound of [det-proper-unbounded-window-arbitrary] gives $H^{q-1}(Rp_*B)=H^q(Rp_*B)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] consequently contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*K)\\to0$. Exactness makes the displayed middle map both monic and epic, hence an isomorphism in the abelian module category. This is the map induced by $A\\to K$, not merely an abstract isomorphism.",
    "uses": [
     "def-kun-truncations",
     "lem-sf-derived-truncation-triangle",
     "det-proper-unbounded-window-arbitrary",
-    "lem-sf-derived-homology-long-exact"
+    "lem-sf-derived-homology-long-exact",
+    "det-ambient-ind-derived-sums"
    ],
    "elementary": false,
    "source": {
@@ -58,12 +58,13 @@
    }
   },
   {
-   "text": "Put $r=q-2d-2$, $L=\\tau_{\\leq r}A$, and $W=\\tau_{\\geq r+1}A$, with $A$ as in step 2. The formulas of [def-kun-truncations] give $L,W\\in\\Dic(X,\\Lambda)$ and $L\\in\\Dic^{\\leq r}(X,\\Lambda)$. Apply [lem-sf-derived-truncation-triangle] to $A$ at $b=r+1$ to obtain $L\\to A\\to W\\to L[1]$, and then apply step 1. The upper amplitude bound in [det-proper-unbounded-window-arbitrary] gives $Rp_*L\\in\\Dic^{\\leq r+2d+1}=\\Dic^{\\leq q-1}(Y,\\Lambda)$. Thus $H^q(Rp_*L)=H^{q+1}(Rp_*L)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] now contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*W)\\to0$, so the map induced by $A\\to W$ is an isomorphism. Here $W=\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ by substitution, exactly the stated second map. Finally [det-proper-unbounded-window-arbitrary] puts the direct images of $K,A,W$ in $\\Dic(Y,\\Lambda)$, so all three degree-$q$ sheaves belong to $\\IndCons(Y,\\Lambda)$. This is a full subcategory, so the ambient inverse maps also belong to it. Together with step 2 this proves both asserted isomorphisms in that category.",
+   "text": "Put $r=q-2d-2$, $L=\\tau_{\\leq r}A$, and $W=\\tau_{\\geq r+1}A$, with $A$ as in step 2. [det-ambient-ind-derived-sums](truncation clause) and [def-kun-truncations] give $L,W\\in\\Dic(X,\\Lambda)$ and $L\\in\\Dic^{\\leq r}(X,\\Lambda)$. Apply [lem-sf-derived-truncation-triangle] to $A$ at $b=r+1$ to obtain $L\\to A\\to W\\to L[1]$, and then apply step 1. The upper amplitude bound in [det-proper-unbounded-window-arbitrary] gives $Rp_*L\\in\\Dic^{\\leq r+2d+1}=\\Dic^{\\leq q-1}(Y,\\Lambda)$. Thus $H^q(Rp_*L)=H^{q+1}(Rp_*L)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] now contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*W)\\to0$, so the map induced by $A\\to W$ is an isomorphism. Here $W=\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ by substitution, exactly the stated second map. Finally [det-proper-unbounded-window-arbitrary] puts the direct images of $K,A,W$ in $\\Dic(Y,\\Lambda)$, so all three degree-$q$ sheaves belong to $\\IndCons(Y,\\Lambda)$. This is a full subcategory, so the ambient inverse maps also belong to it. Together with step 2 this proves both asserted isomorphisms in that category.",
    "uses": [
     "def-kun-truncations",
     "lem-sf-derived-truncation-triangle",
     "det-proper-unbounded-window-arbitrary",
-    "lem-sf-derived-homology-long-exact"
+    "lem-sf-derived-homology-long-exact",
+    "det-ambient-ind-derived-sums"
    ],
    "elementary": false,
    "source": {
@@ -73,8 +74,6 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sfb-grothendieck-k-injective",
   "def-sfb-module-lower-star",
   "sk-def-sfb-module-derived-pushpull",
@@ -82,12 +81,13 @@
   "def-kun-truncations",
   "lem-sf-derived-truncation-triangle",
   "det-proper-unbounded-window-arbitrary",
-  "lem-sf-derived-homology-long-exact"
+  "lem-sf-derived-homology-long-exact",
+  "det-ambient-ind-derived-sums"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-iso.proof.md",
-  "place": "First map and Second map, with explicit exactness input and lower truncation applied directly to A"
+  "place": "F8 Lean proof of both canonical arrows from the stated amplitude bounds and the two canonical truncation triangles; truncation closure uses the existing ambient-ind-derived-sums declarations, and the standing field setting is restored."
  },
  "mathlib_searches": [
   {
@@ -188,7 +188,6 @@
  "tool_uses": [
   "sk-def-sfb-module-derived-pushpull",
   "def-sfb-module-lower-star",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sfb-grothendieck-k-injective",
   "lem-pc-right-derived-functor-triangulated",
   "lem-sf-derived-truncation-triangle",
@@ -222,12 +221,12 @@
    "AlgebraicGeometry.ProEtale.proper_unbounded_window_iso_padicAlgCl"
   ],
   "file": "lean/Sheaf/Paper/ProperUnboundedWindowIso.lean",
-  "statement": "theorem proper_unbounded_window_iso (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] (d : ℤ) (hd : ∀ (y : Y) (n : ℕ), (n : WithBot ℕ∞) ≤ topologicalKrullDim ↥(pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y)) → (n : ℤ) ≤ d) (K : DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X)) (hK : ∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj K)) (q : ℤ) : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj K)) ∧ ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj ((DerivedCategory.TStructure.t.truncLE q).obj K))) ∧ ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ q).obj ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj ((DerivedCategory.TStructure.t.truncGE (q - 2 * d - 1)).obj ((DerivedCategory.TStructure.t.truncLE q).obj K)))) ∧ IsIso ((DerivedCategory.homologyFunctor _ q).map ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map ((DerivedCategory.TStructure.t.truncLEι q).app K))) ∧ IsIso ((DerivedCategory.homologyFunctor _ q).map ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map ((DerivedCategory.TStructure.t.truncGEπ (q - 2 * d - 1)).app ((DerivedCategory.TStructure.t.truncLE q).obj K))))",
+  "statement": "theorem proper_unbounded_window_iso\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℤ)\n    (hd : ∀ (y : Y) (n : ℕ),\n      (n : WithBot ℕ∞) ≤ topologicalKrullDim\n        ↥(pullback p (Spec.map (CommRingCat.ofHom\n          (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫\n            Y.fromSpecResidueField y)) → (n : ℤ) ≤ d)\n    (K : DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X))\n    (hK : ∀ n : ℤ, ObjectProperty.ind.{u + 1}\n      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X)\n      ((DerivedCategory.homologyFunctor _ n).obj K)) (q : ℤ) :\n    ObjectProperty.ind.{u + 1}\n      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y)\n      ((DerivedCategory.homologyFunctor _ q).obj\n        ((CondensedRing.lowerStar\n          (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj K)) ∧\n    ObjectProperty.ind.{u + 1}\n      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y)\n      ((DerivedCategory.homologyFunctor _ q).obj\n        ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj\n          ((DerivedCategory.TStructure.t.truncLE q).obj K))) ∧\n    ObjectProperty.ind.{u + 1}\n      (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y)\n      ((DerivedCategory.homologyFunctor _ q).obj\n        ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.obj\n          ((DerivedCategory.TStructure.t.truncGE (q - 2 * d - 1)).obj\n            ((DerivedCategory.TStructure.t.truncLE q).obj K)))) ∧\n    IsIso ((DerivedCategory.homologyFunctor _ q).map\n      ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map\n        ((DerivedCategory.TStructure.t.truncLEι q).app K))) ∧\n    IsIso ((DerivedCategory.homologyFunctor _ q).map\n      ((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map\n        ((DerivedCategory.TStructure.t.truncGEπ (q - 2 * d - 1)).app\n          ((DerivedCategory.TStructure.t.truncLE q).obj K))))",
   "branch": "newtargets-dag",
-  "by": "Q93",
+  "by": "F8",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The two declarations state the finite-subextension and condensed-algebraic-closure cases respectively. Ambient IsIso for the specified canonical maps, together with all three explicit IndCons membership assertions, is equivalent to isomorphism in that full subcategory. The integer dimension bound includes negative bounds and empty geometric fibres."
+  "note": "Both coefficient cases have complete proofs from the named amplitude and truncation-closure declarations. The omitted standing separated finite-type positive-characteristic field setting is restored with a change record. All three IndCons assertions and both specified canonical IsIso conclusions are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -236,5 +235,109 @@
   "group": "Q93",
   "result": "pass",
   "note": "3-file delivery (module, node lean record, report with Worker report and the standard Second reading stub). The statement matches the node clause by clause: two theorems (Λ=E via Profinite.continuousMapRingObj E, Type-0 E, the upstream and landed-sibling convention; Λ=Q̄ via padicAlgClRingObj), Dic via ind.{u+1} IsConstantModelConstructible on homologyFunctor in every degree, Rp_* = (CondensedRing.lowerStar Λ p).rightDerivedFunctor, canonical truncLEι/truncGEπ at q and q-2d-1, conclusion = 3 IndCons memberships + 2 IsIso (exact for a full subcategory). The integer bound hd is exactly dim ≤ d, including d<0 (empty fibres) and dim=⊤ excluded. The geometric fibre is the recorded pullback along the residue-field algebraic closure. No extra hypotheses; no unbound universes. Gates: no definitions, sorry-only proofs (print axioms), source/blueprint docstrings with proof steps, statement verbatim. nt_compile.py: clean, about 29 s; #check confirmed the elaborated types. Minor: an unused public import."
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "F8 stage 2",
+  "old_statement": "Let $X,Y$ be schemes [def-pc-scheme], let $\\ell$ be a prime, fix an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$ and a finite subextension $E/\\mathbf Q_\\ell$, and let $\\Lambda=E$ or $\\Qlb$ with the condensed coefficient rings of [sk-def-sfb-condensed-ring; sk-def-sfb-qlbar-condensed]. For $T=X,Y$, put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and write $D(T_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_T})$ for the unbounded derived category of module sheaves. Let $\\IndCons(T,\\Lambda)$ be the full subcategory of filtered colimits of constructible $\\Lambda_T$-module sheaves [sk-def-sfb-constructible], computed in $\\Mod_{\\Lambda_T}$, and let $\\Dic(T,\\Lambda)$ be the full subcategory whose cohomology sheaves [def-weil-derived-cohomology-sheaves] lie in $\\IndCons(T,\\Lambda)$ in every degree. Let $p:X\\to Y$ be proper [def-weil-proper-morphism] with geometric fibres [def-weil-geometric-fibre] of Krull dimension [def-kun-topological-krull-dimension] at most an integer $d$, and use its total derived module pushforward $Rp_*$ [sk-def-sfb-module-derived-pushpull]. For $K\\in\\Dic(X,\\Lambda)$ and $q\\in\\mathbf Z$, the canonical truncation maps [def-kun-truncations]\n$$\nK\\leftarrow\\tau_{\\leq q}K\\to\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K\n$$\ninduce isomorphisms in $\\IndCons(Y,\\Lambda)$\n$$\n\\mathcal H^q(Rp_*K)\\xleftarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\leq q}K)\\xrightarrow{\\sim}\\mathcal H^q(Rp_*\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K).\n$$",
+  "what": "The expanded statement and both Lean declarations dropped the standing field setting inherited by the unit and its amplitude theorem. The actual amplitude declaration requires separated finite-type schemes over a field of characteristic p0>0 different from ell, and a morphism over that field. Restore those hypotheses; no claim for arbitrary schemes is made.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+   "place": "Standing scheme setting; inherited by the proper heart bound and proper unbounded window unit, as recorded in the existing parent theorem."
+  },
+  "citers": [
+   {
+    "id": "det-proper-unbounded-window-ii-general",
+    "holds": true,
+    "note": "The expanded detail node omitted the inherited setting too and is repaired in this delivery to match its already-corrected owning unit. It has no Lean attachment, so no Lean adaptation is required. Its use now holds."
+   },
+   {
+    "id": "sk-lem-proper-unbounded-window",
+    "holds": true,
+    "note": "Its Lean theorem and node already include exactly the standing field setting; the use holds."
+   }
+  ],
+  "old_stmt_deps": [
+   "sk-def-sfb-condensed-ring",
+   "sk-def-sfb-qlbar-condensed",
+   "sk-def-sfb-pulled-back-coefficients",
+   "sk-def-sfb-module-objects",
+   "sk-def-sfb-constructible",
+   "def-weil-derived-cohomology-sheaves",
+   "sk-def-sfb-module-derived-pushpull",
+   "def-kun-truncations",
+   "def-pc-scheme",
+   "def-weil-proper-morphism",
+   "def-weil-geometric-fibre",
+   "def-kun-topological-krull-dimension"
+  ],
+  "old_proof": [
+   {
+    "text": "The pro-étale sites are taken on small skeletons in the larger universe specified by [def-weil-pbc-proetale-site]. Apply [lem-weil-pbc-ring-sheaves-grothendieck] to each of these sites and its actual coefficient sheaf $\\Lambda_T$ (no constant-coefficient identification is made). Thus both module categories are Grothendieck abelian, and [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions for both. The module pushforward is additive by [def-sfb-module-lower-star], and $Rp_*$ is precisely its K-injective total right derived functor by [sk-def-sfb-module-derived-pushpull]. Therefore [lem-pc-right-derived-functor-triangulated] says that applying $Rp_*$ to a distinguished triangle again gives a distinguished triangle, with the canonical commutation with shifts.",
+    "uses": [
+     "def-weil-pbc-proetale-site",
+     "lem-weil-pbc-ring-sheaves-grothendieck",
+     "lem-sfb-grothendieck-k-injective",
+     "def-sfb-module-lower-star",
+     "sk-def-sfb-module-derived-pushpull",
+     "lem-pc-right-derived-functor-triangulated"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/_section.md",
+     "place": "total derived module pushforward; exactness input is the existing K-injective triangulated-functor theorem (Stacks Tag 079Q, remark-existence-D, for ringed-site Grothendieck categories)"
+    }
+   },
+   {
+    "text": "Put $A=\\tau_{\\leq q}K$ and $B=\\tau_{\\geq q+1}K$. By the canonical truncation formulas of [def-kun-truncations], their cohomology sheaves are those of $K$ in the retained ranges and zero otherwise. Thus $A,B\\in\\Dic(X,\\Lambda)$ and $B$ has no cohomology below $q+1$. The canonical distinguished triangle at $b=q+1$ in [lem-sf-derived-truncation-triangle] is $A\\to K\\to B\\to A[1]$. By step 1 its image under $Rp_*$ is distinguished. The lower amplitude bound of [det-proper-unbounded-window-arbitrary] gives $H^{q-1}(Rp_*B)=H^q(Rp_*B)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] consequently contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*K)\\to0$. Exactness makes the displayed middle map both monic and epic, hence an isomorphism in the abelian module category. This is the map induced by $A\\to K$, not merely an abstract isomorphism.",
+    "uses": [
+     "def-kun-truncations",
+     "lem-sf-derived-truncation-triangle",
+     "det-proper-unbounded-window-arbitrary",
+     "lem-sf-derived-homology-long-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-iso.proof.md",
+     "place": "First map; canonical triangle: Stacks Tag 08J5 (remark-truncation-distinguished-triangle); cohomology exactness: Tag 05RS (lemma-cohomology-homological)"
+    }
+   },
+   {
+    "text": "Put $r=q-2d-2$, $L=\\tau_{\\leq r}A$, and $W=\\tau_{\\geq r+1}A$, with $A$ as in step 2. The formulas of [def-kun-truncations] give $L,W\\in\\Dic(X,\\Lambda)$ and $L\\in\\Dic^{\\leq r}(X,\\Lambda)$. Apply [lem-sf-derived-truncation-triangle] to $A$ at $b=r+1$ to obtain $L\\to A\\to W\\to L[1]$, and then apply step 1. The upper amplitude bound in [det-proper-unbounded-window-arbitrary] gives $Rp_*L\\in\\Dic^{\\leq r+2d+1}=\\Dic^{\\leq q-1}(Y,\\Lambda)$. Thus $H^q(Rp_*L)=H^{q+1}(Rp_*L)=0$. The exact sequence of [lem-sf-derived-homology-long-exact] now contains $0\\to H^q(Rp_*A)\\to H^q(Rp_*W)\\to0$, so the map induced by $A\\to W$ is an isomorphism. Here $W=\\tau_{\\geq q-2d-1}\\tau_{\\leq q}K$ by substitution, exactly the stated second map. Finally [det-proper-unbounded-window-arbitrary] puts the direct images of $K,A,W$ in $\\Dic(Y,\\Lambda)$, so all three degree-$q$ sheaves belong to $\\IndCons(Y,\\Lambda)$. This is a full subcategory, so the ambient inverse maps also belong to it. Together with step 2 this proves both asserted isomorphisms in that category.",
+    "uses": [
+     "def-kun-truncations",
+     "lem-sf-derived-truncation-triangle",
+     "det-proper-unbounded-window-arbitrary",
+     "lem-sf-derived-homology-long-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-iso.proof.md",
+     "place": "Second map; use the canonical triangle of A directly (Tag 08J5), the same amplitude bound, and the cohomology sequence (Tag 05RS)"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-proetale-site",
+   "lem-weil-pbc-ring-sheaves-grothendieck",
+   "lem-sfb-grothendieck-k-injective",
+   "def-sfb-module-lower-star",
+   "sk-def-sfb-module-derived-pushpull",
+   "lem-pc-right-derived-functor-triangulated",
+   "def-kun-truncations",
+   "lem-sf-derived-truncation-triangle",
+   "det-proper-unbounded-window-arbitrary",
+   "lem-sf-derived-homology-long-exact"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-cf857",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261019T002605-L-2157050",
+  "kind": "interface",
+  "note": "independent cc review: Restored dc-setting hypotheses in both item theorems matched against the parent unit sk-lem-proper-unbounded-window, the parent Lean theorem and the dependencies proper_indConstructible_unbounded* / indConstructibleDerived_sums_and_truncations* (identical binders); conclusions unchanged; forced 2-line adaptation in unclaimed ProperUnboundedWindow compiled; axioms show sorryAx only via sorried deps"
  }
 }
