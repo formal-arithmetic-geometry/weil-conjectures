@@ -16,9 +16,125 @@
   "def-nagata-global-blowup",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the permanence facts needed for the construction. On any Noetherian stage the reduced structure on a closed point has a quasi-coherent ideal by [lem-weil-pbc-reduced-induced-closed-subscheme]; that ideal is of finite type since every ideal in an affine Noetherian coordinate ring is finitely generated [def-weil-pbc-noetherian-ring]. Hence each point blowup is proper by [lemma-nagata-blowup-proper], in particular of finite type by [def-weil-proper-morphism], and its source is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Each stage is integral by [lem-per-integral-blowup-projective-geometry]: the center ideal is nonzero because a center of local dimension $2$ is not the generic point. Finally, choose a finite affine cover by excellent rings on the preceding stage. The definition of finite type gives a finite affine cover upstairs by finite-type algebras over those rings [def-weil-finite-type-morphism]. They are excellent by [lem-exc-finite-type-localization-excellent]. Thus all the given $T_i$, and all stages constructed below, have finite affine covers by excellent rings. These arguments apply anew at each blowup and require no ample line bundle.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-noetherian-ring",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-integral-blowup-projective-geometry",
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND (lemma-blow-up-integral-scheme), 02NS (lemma-blowing-up-projective); more-algebra.tex Tag 07QU (lemma-finite-type-over-excellent)"
+   }
+  },
+  {
+   "text": "For every stage considered, its regular locus is open: on each excellent affine chart the J-2 clause of [def-exc-excellent-ring], applied to the coordinate ring as an algebra over itself, says precisely that its regular-local-ring locus is open. These loci agree on overlaps because the local rings are the same, and their union is the regular locus [def-weil-regular-scheme]. Write $\\operatorname{Sing}(X)$ for the complementary closed subset. An isomorphism between open subschemes identifies their local rings, hence identifies the singular points lying in those opens. No assertion about finiteness of the singular locus or the global dimension of later stages is needed here.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "definition-excellent and the following paragraph (closed singular set); agent expansion of Tag 0BBV"
+   }
+  },
+  {
+   "text": "Induct on the number $i$ of processed arrows of the given tower. Keep a tower $Z_{m(i)}\\to\\cdots\\to Z_0=S$ with $m(i)\\leq i$, only singular reduced closed centers of local dimension $2$, normal stages, and opens $V_i\\subseteq Z_{m(i)}$, $W_i\\subseteq T_i$ containing their entire singular loci, with an $S$-isomorphism $\\phi_i:V_i\\xrightarrow{\\sim}W_i$. Also keep the record that each retained center has the same image in $S$ as one of the first $i$ given centers. For $i=0$, take $m(0)=0$, $V_0=W_0=S$, and $\\phi_0=\\mathrm{id}_S$. This establishes every invariant, including the assertion for the empty tower.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV (lemma-rational-to-gorenstein), singular-closed-point requirement; agent-written induction"
+   }
+  },
+  {
+   "text": "Let $b:T_{i+1}\\to T_i$ have center $p$. Suppose first that $p$ is regular. The open $R=(T_i)_{\\rm reg}$ contains $p$, is integral by restriction of the integral-scheme definition [def-pc-integral-scheme], and is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Its local ring at $p$ still has dimension $2$. Apply [lem-per-regular-point-blowup-acyclic] to $R$ and $p$: its blowup is regular. The flat-base-change isomorphism [thm-nagata-blowup-flat-base-change], with the comparison specified by [def-nagata-blowup-flat-base-change-map], identifies this blowup with $b^{-1}(R)$; an open inclusion is flat since its local homomorphisms are isomorphisms [def-weil-flat-morphism]. Thus every point above $p$ is regular. Away from $p$, [thm-nagata-global-blowup-complement] identifies local rings. Consequently every singular point of $T_{i+1}$ lies above $\\operatorname{Sing}(T_i)\\subseteq W_i\\setminus\\{p\\}$. Discard this arrow: set $m(i+1)=m(i)$, replace $V_i$ by $\\phi_i^{-1}(W_i\\setminus\\{p\\})$, and set $W_{i+1}=b^{-1}(W_i\\setminus\\{p\\})$. The restricted $\\phi_i$ and the inverse of $b$ give the required $S$-isomorphism. The removed points in $V_i$ were regular, so the new open still contains all singular points of the unchanged $Z_{m(i)}$. All other invariants are unchanged.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-per-regular-point-blowup-acyclic",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "def-weil-flat-morphism",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR (lemma-blowup-regular), as used in Tag 0BBV; divisors.tex Tags 0805 (lemma-flat-base-change-blowing-up), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), clause (1)"
+   }
+  },
+  {
+   "text": "Suppose instead that $p$ is singular. Then $p\\in W_i$; put $q=\\phi_i^{-1}(p)$. Its local ring is isomorphic to $\\mathcal O_{T_i,p}$, so $q$ is singular and has local dimension $2$ [def-weil-regular-scheme]. Crucially $q$ is closed in the whole scheme $Z_{m(i)}$, not just in $V_i$: its closure lies in the closed singular locus from Step 2, hence in $V_i$; but $q$ is closed in $V_i$ since $p$ is closed in $W_i$. Thus that closure equals $\\{q\\}$. Give $q$ its reduced induced closed structure. By the uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme], $\\phi_i$ identifies this center on $V_i$ with the given reduced center $p$ on $W_i$. Retain a step by forming $c:Z_{m(i)+1}=\\operatorname{Bl}_q Z_{m(i)}\\to Z_{m(i)}$. Step 1 applies, so this stage is integral and Noetherian and has excellent affine charts. Set $m(i+1)=m(i)+1$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV (lemma-rational-to-gorenstein), singular-closed-point requirement; agent-written closedness argument using the closed singular locus"
+   }
+  },
+  {
+   "text": "In this retained case, set $V_{i+1}=c^{-1}(V_i)$ and $W_{i+1}=b^{-1}(W_i)$. Apply [thm-nagata-blowup-flat-base-change] and [def-nagata-blowup-flat-base-change-map] to the two open inclusions (flat on the identical local rings [def-weil-flat-morphism]) and to the isomorphism $\\phi_i$. Since their reduced center ideals correspond, these comparisons give an isomorphism $V_{i+1}\\cong W_{i+1}$ over $\\phi_i$, hence over $S$. Each point outside $W_{i+1}$ maps outside $W_i$ and is away from $p$; the complement isomorphism [thm-nagata-global-blowup-complement] identifies its local ring with a regular local ring of $T_i$. The identical argument for $c$ shows that every point outside $V_{i+1}$ is regular. Thus the new opens contain the entire singular loci. Finally $Z_{m(i)+1}$ is normal: on $V_{i+1}$ its local rings are those of the normal $T_{i+1}$, and outside it $c$ is an isomorphism onto points of the normal $Z_{m(i)}$. This is normality directly from [def-weil-pbc-normal-ring], without assuming that blowups of arbitrary normal surfaces stay normal.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "def-weil-flat-morphism",
+    "thm-nagata-global-blowup-complement",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 (lemma-flat-base-change-blowing-up), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), clause (1); resolve.tex Tag 0BBV, agent-written pruning argument"
+   }
+  },
+  {
+   "text": "For a retained arrow, $\\phi_i$ is an $S$-isomorphism and sends $q$ to the given center $p$, so these centers have the same image in $S$. This extends the image record and completes the inductive step in both cases. At $i=N$ put $M=m(N)$, $V=V_N$, $W=W_N$. Each processed arrow increased $m$ by zero or one, so $M\\leq N$; the invariant gives normality, singular reduced closed centers of local dimension $2$, and the desired $S$-isomorphism of opens containing both singular loci. If every arrow was discarded then $M=0$, and if $N=0$ the base case applies. The construction only uses isomorphisms on these opens and does not assert a morphism $Z_M\\to T_N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BBV (lemma-rational-to-gorenstein), singular-closed-point requirement; conclusion of the agent-written induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-pbc-noetherian-ring",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-per-integral-blowup-projective-geometry",
+  "def-weil-finite-type-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-per-regular-point-blowup-acyclic",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-weil-flat-morphism",
+  "thm-nagata-global-blowup-complement",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Expansion of the singular-closed-point clause of Tag 0BBV (lemma-rational-to-gorenstein), using Tag 0AGR and divisors.tex Tags 0805, 02OS. The general pruning induction is not stated as a lemma in Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +170,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LocalSubring.instIsScalarTowerSubtypeMemSubringToSubringOfPrime\", \"module\": \"Mathlib.RingTheory.LocalRing.LocalSubring\", \"type\": \": IsScalarTower A (ofPrime A P).toSubring K\", \"doc\": \"For a subring $A$ of a field $K$ and a prime ideal $P$ of $A$, the tower of rings given by the inclusions $A \\\\subseteq A_P \\\\subseteq K$, where $A_P$ is the localization of $A$ at $P$, forms a scalar t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ (self : AlgebraicGeometry.LocallyRingedSpace) (x : ↑↑self.toPresheafedSpace), IsLocalRing ↑(self.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$, the stalk of its structure sheaf $\\\\mathcal{O}_X$ at every point $x \\\\in X$ is a local ring, i.e., a commutative ring with a unique maximal ideal.\"}\n  {\"name\": \"isReduced_localizationPreserves\", \"module\": \"Mathlib.RingTheory.LocalProperties.Reduced\", \"type\": \": LocalizationPreserves fun R _ => IsReduced R\", \"doc\": \"If $ R $ is a reduced ring, then the localization of $ R $ is also a reduced ring. In other words, the property of being reduced is preserved under localization.\"}\n  {\"name\": \"HomogeneousLocalization.isLocalRing\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \": IsLocalRing (HomogeneousLocalization.AtPrime 𝒜 𝔭)\", \"doc\": \"The homogeneous localization of a graded algebra at the complement of a prime ideal is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib.RingTheory.KrullDimension.Regular\", \"type\": \"{x : R} (reg : IsSMulRegular R x) (hx : x ∈ maximalIdeal R) : ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n  {\"name\": \"Localization.AtPrime.isLocalRing\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": IsLocalRing (Localization P.primeCompl)\", \"doc\": \"For a semiring $ R $ and a prime ideal $ P $, the localization of $ R $ at the complement of $ P $ forms a local ring. This means the localized ring has a unique maximal ideal, which corresponds to th\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the displayed signatures concern ordinary dual modules, localization, smoothness, normalization or basic module operations; none asserts this geometric or algebraic dualizing statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discard regular centers in a finite tower of point blowups of a normal excellent surface retaining isomorphic open neighborhoods of the singular loci",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern smooth charts, normalization, restriction of proper or flat morphisms, topological normality, or nonsingularity of Weierstrass curves; none states pruning of surface point-blowup towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"Regular\"",
+   "results": "0 hits: none",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern smooth charts, normalization, restriction of proper or flat morphisms, topological normality, or nonsingularity of Weierstrass curves; none states pruning of surface point-blowup towers."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.{0,40}(prun|discard|regular)|regular.{0,30}center",
+   "results": "0 hits: none",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern smooth charts, normalization, restriction of proper or flat morphisms, topological normality, or nonsingularity of Weierstrass curves; none states pruning of surface point-blowup towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequence of blowups of a normal surface can omit regular centers and preserve open neighborhoods of all singular points",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, NormalSpace.recOn, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, NormalSpace.rec, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern smooth charts, normalization, restriction of proper or flat morphisms, topological normality, or nonsingularity of Weierstrass curves; none states pruning of surface point-blowup towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Remove blowups at nonsingular points from a surface blowup sequence without changing a neighborhood of the nonregular points",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, WeierstrassCurve.Jacobian.nonsingularLift_iff, WeierstrassCurve.Affine.nonsingular_iff_variableChange, WeierstrassCurve.Projective.nonsingularLift_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.Projective.comp_equiv_comp",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned signatures concern smooth charts, normalization, restriction of proper or flat morphisms, topological normality, or nonsingularity of Weierstrass curves; none states pruning of surface point-blowup towers."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-rational-surface-gorenstein-blowups",
@@ -85,5 +236,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-surface-tower-discard-regular-centers",
+  "worker": "stage1",
+  "summary": "Proved the pruning statement by an explicit induction on the input arrows. At a regular center use regularity of the blowup of the regular open; at a singular center transport the center across the maintained open isomorphism, prove its global closedness, and compare the two blowups. Normality is checked locally, never inferred from a general normal-blowup assertion. Reused all required facts from existing nodes; created no new nodes. Statement unchanged.",
+  "blueprint": "Technical surface-resolution input to lem-per-artin-gabber-affine-curve Step 1 through the recorded potential-dualizing chain; realizes the auxiliary Tag 0BBV singular-closed-point requirement in lem-per-rational-surface-gorenstein-blowups. The elementary closedness and pruning induction are written explicitly rather than attributed to the blueprint.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Finite-type affine charts of successive blowups are excellent; this generic permanence tool supplies open regular loci and does not replace the surface-pruning induction."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Existence and uniqueness of the reduced center ideal, needed to identify centers under an open isomorphism; the unit has no replacement for this generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "The regular open of an intermediate scheme is Noetherian so the regular-point blowup theorem applies; this is a generic restriction tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-afc3f0b8e",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-afc3f0b8e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps, the 18 cited statements, and Stacks 0BBV, 0AGR, divisors 02OS(1) and 0805, plus 07QU. There are no new nodes and the statement is unchanged. Parent steps 10-11 (lem-per-rational-surface-gorenstein-blowups) use exactly the clauses the item gives. Induction checks: Step 3's invariant is complete. In Step 4 every hypothesis of lem-per-regular-point-blowup-acyclic holds on the regular open R: integral open, Noetherian, p closed with dim 2. Flat base change along the open immersion then makes b^{-1}(R) regular, and the complement isomorphism handles the rest, so singular points stay inside the shrunken opens. Step 5's closedness argument is right: cl{q} lies in Sing(Z_m), which lies in V_i, and q is closed in V_i. The reduced centers correspond by the uniqueness clause of lem-weil-pbc-reduced-induced-closed-subscheme. Step 6 applies flat base change along the flat composite V_i -> W_i ⊆ T_i to get the isomorphism over S. Normality is checked one local ring at a time; no general blowup-normality claim is used. Edge cases tested: N=0, all centers regular, regular centers after singular ones, empty singular loci. All cited units are in the route of sk-p-dl-a1-perverse, and the three declared generic tool_uses are accepted. Batch-5 flag: lem-per-integral-blowup-projective-geometry reaches sec-trace-formula only through the definitions def-trf-projective-bundle-morphism and def-trf-canonical-symmetric-graded-algebra, in the projectivity clause of its statement. These are general definitions, not steps of the trace-formula or Poincare-duality proofs, and the item uses only the integrality clause, so I accepted it. FIX (B5): the item's source.place named 'divisors.tex Tag 01OF, lemma-blowing-up', but 01OF is the section label and no such lemma label exists. I replaced it with Tag 02OS lemma-blowing-up-gives-effective-Cartier-divisor (1) and Tag 0805 lemma-flat-base-change-blowing-up. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-surface-tower-discard-regular-centers.json.; 1 file(s) fixed by the reviewer"
  }
 }
