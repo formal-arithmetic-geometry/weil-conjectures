@@ -23,45 +23,29 @@
  ],
  "proof": [
   {
-   "text": "View $\\mathcal A$ as sheaves of modules over the commutative ring sheaf $\\Lambda_X$: the tensor-action definition [sk-def-sfb-module-objects] is the same compatible module structure on sections. The site is small in the chosen universe, so [lem-pur-ringed-site-grothendieck-abelian] supplies the abelian category and its small coproducts and colimits. For a finite subset $T\\subseteq S$, put $B_T=\\bigoplus_{s\\in T}B_s$. Its inclusions $\\iota_{s,T}$ and projections $\\pi_{s,T}$ satisfy $\\pi_{t,T}\\iota_{s,T}=\\delta_{s,t}$ and $\\sum_{s\\in T}\\iota_{s,T}\\pi_{s,T}=1$. These identities hold termwise for degree-zero complexes and persist under the additive localization to $D(\\mathcal A)$ of [def-weil-abstract-derived-category]. The shift is an additive automorphism by [def-weil-triangulated-category], so the identities also hold after shifting by $q$. Thus the map $\\Phi_T:(f_s)\\mapsto\\sum_{s\\in T}\\iota_{s,T}[q]\\circ f_s$ from $\\bigoplus_{s\\in T}\\Ext^q_\\Lambda(C,B_s)$ to $\\Ext^q_\\Lambda(C,B_T)$ has inverse $h\\mapsto(\\pi_{s,T}[q]\\circ h)_s$, by the two displayed identities. For $T=\\varnothing$ both groups are zero. For $T\\subseteq U$ the map $j_{T,U}:B_T\\to B_U$ satisfies $j_{T,U}\\iota_{s,T}=\\iota_{s,U}$, so $\\Phi_U$ composed with zero-extension of tuples equals $\\Ext^q_\\Lambda(C,j_{T,U})\\Phi_T$. Hence the $\\Phi_T$ form an isomorphism of diagrams, for every integer $q$.",
+   "text": "Let F be the additive functor singleFunctor 0 followed by shift q and additive Hom from C. Additivity preserves every finite coproduct, including the empty one. The module category already has the required finite coproducts and small colimits via its existing instances.",
    "uses": [
     "sk-def-sfb-module-objects",
-    "lem-pur-ringed-site-grothendieck-abelian",
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.proof.md",
-    "place": "Proof, first sentence; ambient module category from Stacks Tags 03DA (sites-modules-lemma-abelian) and 03DB (sites-modules-lemma-limits-colimits)"
-   }
+   "elementary": true
   },
   {
-   "text": "The poset $\\operatorname{Fin}(S)$ of finite subsets is nonempty (it contains $\\varnothing$), and $T\\cup U$ is an upper bound for $T,U$, so it is filtered. Since $S$ is a set in the chosen universe, this poset is small. In any category with the coproducts under consideration, a compatible family of maps $\\bigoplus_{s\\in T}A_s\\to Z$ is uniquely determined by its maps $A_s\\to Z$ at $T=\\{s\\}$: compatibility forces each map at $T$ to be the coproduct of those maps. Conversely any family $A_s\\to Z$ supplies these compatible maps. This is exactly the universal property of $\\bigoplus_{s\\in S}A_s$, and proves $\\varinjlim_T\\bigoplus_{s\\in T}A_s\\cong\\bigoplus_{s\\in S}A_s$. The required colimits and coproducts of $\\mathcal A$ exist by [lem-pur-ringed-site-grothendieck-abelian]; in abelian groups they are the usual direct limits and direct sums. Apply this argument in $\\mathcal A$ to $A_s=B_s$ and in abelian groups to $A_s=\\Ext^q_\\Lambda(C,B_s)$. For empty $S$ the diagram has the single object $T=\\varnothing$ and the conclusion is still valid. This argument uses categorical coproducts and does not identify sheaf coproducts with sectionwise direct sums.",
-   "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.proof.md",
-    "place": "Proof, second paragraph: finite-subset colimit identifications"
-   }
+   "text": "Use Mathlib CoproductsFromFiniteFiltered.liftToFinsetObj. Its standard finiteSubcoproductsCocone is colimiting. Given a cocone on F(B_s), descend on every preserved finite coproduct. Its naturality follows by checking every finite coprojection. Preservation of the filtered colimit then supplies a universal descent from F(coproduct B_s); singleton subsets give its coprojection equations, and finite coprojection extensionality proves uniqueness.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Place each $B_T$ in degree zero; these complexes all vanish below the common degree $0$. The constructible-sheaf clause of [sk-lem-constructible-ext-continuity] applies on the given Noetherian scheme $X$ to the filtered diagram indexed by $\\operatorname{Fin}(S)$, to the given constructible $C$, and to $\\Lambda=E$ or $\\Qlb$. It gives the isomorphism $\\gamma:\\varinjlim_T\\Ext^q_\\Lambda(C,B_T)\\to\\Ext^q_\\Lambda(C,\\varinjlim_T B_T)$ for every $q\\in\\mathbf Z$. Use Step 2 to identify its target with $\\Ext^q_\\Lambda(C,\\bigoplus_SB_s)$. Step 1 gives an isomorphism on colimits, since its compatible inverse maps also induce inverse maps on colimits; Step 2 identifies its source with $\\bigoplus_S\\Ext^q_\\Lambda(C,B_s)$. For $f\\in\\Ext^q_\\Lambda(C,B_s)$, the resulting composite is represented at $T=\\{s\\}$ and maps to $\\iota_s[q]\\circ f$, where $\\iota_s:B_s\\to\\bigoplus_SB_s$. The composite therefore agrees on each summand with the stated natural map, and is an isomorphism.",
+   "text": "Apply constructible_sheaf_ext_continuity to the finite-subcoproduct diagram and its colimit cocone to obtain that the canonical filtered comparison is invertible. Thus F preserves that colimit, and Step 2 shows it preserves the given coproduct. Construct the additive-group coproduct on DirectSum explicitly with toAddMonoid. The unique isomorphism from this colimit to the mapped given cofan has underlying map precisely the displayed postcomposition homomorphism, hence that map is bijective.",
    "uses": [
     "sk-lem-constructible-ext-continuity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.proof.md",
-    "place": "Proof, second paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "sk-def-sfb-module-objects",
-  "lem-pur-ringed-site-grothendieck-abelian",
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
   "sk-lem-constructible-ext-continuity"
@@ -69,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.proof.md",
-  "place": "Proof"
+  "place": "Finite additivity, finite-subset colimit, and continuity argument; Lean universal-property implementation 2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -242,9 +226,7 @@
    ]
   }
  },
- "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -269,10 +251,10 @@
   "module": "Sheaf.Paper.DetIndHeartIISums",
   "declaration": "AlgebraicGeometry.ProEtale.det_ind_heart_ii_sums",
   "file": "lean/Sheaf/Paper/DetIndHeartIISums.lean",
-  "statement": "theorem det_ind_heart_ii_sums (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : Λ = Profinite.continuousMapRingObj E ∨ Λ = Profinite.padicAlgClRingObj ℓ) (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hC : IsConstantModelConstructible Λ X C) (q : ℤ) (S : Type (u + 1)) (B : S → CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hB : ∀ s : S, ObjectProperty.ind (IsConstantModelConstructible Λ X) (B s)) (c : Cofan B) (hc : IsColimit c) : Function.Bijective (@DirectSum.toAddMonoid S _ _ (Classical.decEq S) _ _ (fun s : S ↦ Preadditive.rightComp ((DerivedCategory.singleFunctor _ 0).obj C) ((shiftFunctor _ q).map ((DerivedCategory.singleFunctor _ 0).map (c.inj s)))) : (⨁ s : S, ((DerivedCategory.singleFunctor _ 0).obj C ⟶ (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj (B s)))) →+ ((DerivedCategory.singleFunctor _ 0).obj C ⟶ (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj c.pt)))",
-  "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-18",
+  "statement": "theorem det_ind_heart_ii_sums\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]\n    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})\n    [IsCommMonObj (coefficientHeartRingObj R)]\n    (hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨\n      R = Profinite.padicAlgClCondensedRing ℓ)\n    (C : CategoryTheory.Mod\n      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (coefficientHeartRingObj R) X))\n    (hC : IsConstantModelConstructible (coefficientHeartRingObj R) X C)\n    (q : ℤ) (S : Type (u + 1))\n    (B : S → CategoryTheory.Mod\n      (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (coefficientHeartRingObj R) X))\n    (hB : ∀ s : S, ObjectProperty.ind\n      (IsConstantModelConstructible (coefficientHeartRingObj R) X) (B s))\n    (c : Cofan B) (hc : IsColimit c) :\n    Function.Bijective\n      (@DirectSum.toAddMonoid S _ _ (Classical.decEq S) _ _ (fun s : S ↦\n        Preadditive.rightComp ((DerivedCategory.singleFunctor _ 0).obj C)\n          ((shiftFunctor _ q).map ((DerivedCategory.singleFunctor _ 0).map (c.inj s)))) :\n        (⨁ s : S,\n          ((DerivedCategory.singleFunctor _ 0).obj C ⟶\n            (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj (B s)))) →+\n          ((DerivedCategory.singleFunctor _ 0).obj C ⟶\n            (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj c.pt)))",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-19",
   "existing": false
  },
  "reviewed_lean": {
@@ -282,5 +264,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation verified."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6f4f4",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261019T002515-L-2143960",
+  "kind": "interface",
+  "note": "independent cc review: det_ind_heart_ii_sums (corrected canonical-ring signature, change record) against node det-ind-heart-ii-sums and against constructible_sheaf_ext_continuity's interface; proof via CoproductsFromFiniteFiltered + continuity; item and the direct importer ConstructibleCompactnessBounded compile; axioms only sorryAx from the open continuity lemma"
  }
 }
