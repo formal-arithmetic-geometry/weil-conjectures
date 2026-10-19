@@ -16632,3 +16632,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/C5/Sheaf.Paper.SbcCompletedOperations (stage 3; reviewer PASS; first push; landing 20261019T002516-L-2144137 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/C5/Sheaf.SixFunctors.GeometricInverseImageConstantModule (stage 3; reviewer PASS; first push; landing 20261019T002516-L-2144300 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/C6/Sheaf.AlgebraicGeometry.DerivedMorphismSheafComparison (stage 3; reviewer PASS; first push; landing 20261019T002517-L-2144486 (proof); batch 20261019T002449; modules 1; new nodes 0)
+- 00:25 L: merged deliver/C6/Sheaf.AlgebraicGeometry.GeometricStalkToposPoint (stage 3; reviewer PASS; first push; landing 20261019T002517-L-2144805 (proof); batch 20261019T002449; modules 1; new nodes 0)
