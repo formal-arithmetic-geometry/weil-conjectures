@@ -16641,3 +16641,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:25 L: merged deliver/C9/Sheaf.AlgebraicGeometry.ProEtale.HypercoverExistence (stage 3; reviewer PASS; first push; landing 20261019T002520-L-2146027 (interface); batch 20261019T002449; modules 8; new nodes 7)
 - 00:25 L: merged deliver/C9/Sheaf.Paper.SfScalarExtensionComposition (stage 3; reviewer PASS; first push; landing 20261019T002521-L-2146211 (proof); batch 20261019T002449; modules 1; new nodes 0)
 - 00:25 L: merged deliver/D2/Sheaf.NumberTheory.Padics.IntegersProfiniteTower (stage 3; reviewer PASS; first push; landing 20261019T002521-L-2146390 (interface); batch 20261019T002449; modules 2; new nodes 1)
+- 00:25 L: merged deliver/D2/Sheaf.Paper.LocalizedTStructure (stage 3; reviewer PASS; first push; landing 20261019T002522-L-2146558 (proof); batch 20261019T002449; modules 1; new nodes 0)

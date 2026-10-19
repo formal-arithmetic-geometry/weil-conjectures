@@ -9,9 +9,7 @@ public import Sheaf.Paper.IntegralTStructure
 public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
-import Sheaf.Paper.IntegralCanonicalTruncations
-import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.PbcRationalCategory
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 
 /-! # The bounded rational t-structure
 
@@ -183,6 +181,145 @@ theorem pbc_localized_tstructure :
           Nonempty ((tE.truncGE m).obj
               ((pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K) ≅
             (pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).obj U) := by
-  sorry
+  obtain ⟨tE, hImage, hExact⟩ :
+    ∃ tE : Triangulated.TStructure
+        (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)),
+      (∀ X : PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E),
+        (tE.le 0 X ↔
+          ∃ L : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E),
+            (pbcIntegralTStructure T l E).le 0 L ∧
+              Nonempty (X ≅ (pbcRationalization T (pbcIntegralDatum l E)
+                (pbcUniformizer l E)).obj L)) ∧
+        (tE.ge 0 X ↔
+          ∃ L : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E),
+            (pbcIntegralTStructure T l E).ge 0 L ∧
+              Nonempty (X ≅ (pbcRationalization T (pbcIntegralDatum l E)
+                (pbcUniformizer l E)).obj L))) ∧
+      (∀ (K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)) (m : ℤ),
+        ((pbcIntegralTStructure T l E).le m K →
+          tE.le m ((pbcRationalization T (pbcIntegralDatum l E)
+            (pbcUniformizer l E)).obj K)) ∧
+        ((pbcIntegralTStructure T l E).ge m K →
+          tE.ge m ((pbcRationalization T (pbcIntegralDatum l E)
+            (pbcUniformizer l E)).obj K))) := by
+    classical
+    let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+    let tA := pbcIntegralTStructure T l E
+    let leP : ℤ → ObjectProperty
+        (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) :=
+      fun n ↦ (tA.le n).map Q
+    let geP : ℤ → ObjectProperty
+        (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) :=
+      fun n ↦ (tA.ge n).map Q
+    let tE : Triangulated.TStructure
+        (PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)) := {
+      le := leP
+      ge := geP
+      le_shift := by
+        rintro n a n' h X ⟨L, hL, ⟨e⟩⟩
+        exact ⟨L⟦a⟧, tA.le_shift n a n' h L hL,
+          ⟨(Q.commShiftIso a).app L ≪≫ (shiftFunctor _ a).mapIso e⟩⟩
+      ge_shift := by
+        rintro n a n' h X ⟨L, hL, ⟨e⟩⟩
+        exact ⟨L⟦a⟧, tA.ge_shift n a n' h L hL,
+          ⟨(Q.commShiftIso a).app L ≪≫ (shiftFunctor _ a).mapIso e⟩⟩
+      zero' := by
+        rintro X Y f ⟨K, hK, ⟨e⟩⟩ ⟨L, hL, ⟨d⟩⟩
+        have hf : e.hom ≫ f ≫ d.inv = 0 := by
+          dsimp only [Q, pbcRationalization, ScalarLocalization.localization,
+            ScalarLocalization.category] at *
+          generalize e.hom ≫ f ≫ d.inv = g
+          induction g using TensorProduct.induction_on with
+          | zero => rfl
+          | tmul a g => rw [tA.zero' g hK hL, TensorProduct.tmul_zero]
+          | add g g' hg hg' => rw [hg, hg', add_zero]
+        calc
+          f = e.inv ≫ (e.hom ≫ f ≫ d.inv) ≫ d.hom := by simp
+          _ = 0 := by rw [hf]; simp
+      le_zero_le := ObjectProperty.map_monotone tA.le_zero_le Q
+      ge_one_le := ObjectProperty.map_monotone tA.ge_one_le Q
+      exists_triangle_zero_one := by
+        intro A
+        obtain ⟨X, Y, hX, hY, f, g, h, hT⟩ := tA.exists_triangle_zero_one A.obj
+        exact ⟨Q.obj X, Q.obj Y, (tA.le 0).prop_map_obj Q hX,
+          (tA.ge 1).prop_map_obj Q hY, Q.map f, Q.map g,
+          Q.map h ≫ ((Q.commShiftIso (1 : ℤ)).hom.app X),
+          Q.map_distinguished _ hT⟩ }
+    refine ⟨tE, ?_, ?_⟩
+    · intro X
+      constructor
+      all_goals
+        constructor
+        · rintro ⟨L, hL, ⟨e⟩⟩
+          exact ⟨L, hL, ⟨e.symm⟩⟩
+        · rintro ⟨L, hL, ⟨e⟩⟩
+          exact ⟨L, hL, ⟨e.symm⟩⟩
+    · intro K m
+      exact ⟨fun h ↦ (tA.le m).prop_map_obj Q h,
+        fun h ↦ (tA.ge m).prop_map_obj Q h⟩
+  let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let tA := pbcIntegralTStructure T l E
+  have : Q.IsTExact tA tE := by
+    constructor
+    · intro K m hK
+      exact ⟨(hExact K m).1 hK.le⟩
+    · intro K m hK
+      exact ⟨(hExact K m).2 hK.ge⟩
+  have hTrunc : ∀ m : ℤ,
+      Nonempty (Q ⋙ tE.truncLE m ≅ tA.truncLE m ⋙ Q) ∧
+      Nonempty (Q ⋙ tE.truncGE m ≅ tA.truncGE m ⋙ Q) := by
+    intro m
+    constructor
+    · exact ⟨(Q.eTruncLTIso tA tE (m + 1 : ℤ)).symm⟩
+    · exact ⟨(Q.eTruncGEIso tA tE (m : ℤ)).symm⟩
+  have hBounded : tE.bounded = ⊤ := by
+    apply top_unique
+    intro X _
+    let K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) := X.obj
+    have hK : (pbcIntegralTStructure T l E).bounded K := by
+      rw [(pbc_integral_tstructure T l E).1]
+      trivial
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK
+    exact ⟨⟨a, ⟨(hExact K a).2 ha.ge⟩⟩, ⟨b, ⟨(hExact K b).1 hb.le⟩⟩⟩
+  have hHeart : ∀ X : PbcRationalCategory T (pbcIntegralDatum l E)
+      (pbcUniformizer l E), tE.heart X ↔
+        ∃ H : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E),
+          (pbcIntegralTStructure T l E).heart H ∧
+            Nonempty (X ≅ (pbcRationalization T (pbcIntegralDatum l E)
+              (pbcUniformizer l E)).obj H) := by
+    intro X
+    let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+    let tA := pbcIntegralTStructure T l E
+    constructor
+    · intro hX
+      have : tE.IsLE X 0 := ⟨hX.1⟩
+      have : tE.IsGE X 0 := ⟨hX.2⟩
+      let K : PbcBoundedConstructibleComplete T (pbcIntegralDatum l E) := X.obj
+      let H := (tA.homology₀.obj K).obj
+      have hH : tA.heart H := (tA.homology₀.obj K).property
+      let e₁ : X ≅ (tE.truncGE 0).obj ((tE.truncLE 0).obj X) :=
+        (asIso ((tE.truncLEι 0).app X)).symm ≪≫
+          asIso ((tE.truncGEπ 0).app ((tE.truncLE 0).obj X))
+      let e₂ := (tE.truncGE 0).mapIso ((hTrunc 0).1.some.app K)
+      let e₃ := (hTrunc 0).2.some.app ((tA.truncLE 0).obj K)
+      exact ⟨H, hH, ⟨e₁ ≪≫ e₂ ≪≫ e₃⟩⟩
+    · rintro ⟨H, hH, ⟨e⟩⟩
+      exact ⟨(tE.le 0).prop_of_iso e.symm ((hExact H 0).1 hH.1),
+        (tE.ge 0).prop_of_iso e.symm ((hExact H 0).2 hH.2)⟩
+  refine ⟨tE, hImage, hBounded, hExact, hTrunc, hHeart, ?_⟩
+  intro K hTor m
+  let L := (pbcIntegralTruncLE T l E m).obj K
+  let U := (pbcIntegralTruncGE T l E m).obj K
+  let Q := pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)
+  let ι := ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
+  let eL : ((pbcIntegralTStructure T l E).truncLE m).obj K ≅ L :=
+    ι.preimageIso (((pbc_integral_tstructure T l E).2.2.1 m).1.some.app K)
+  let eU : ((pbcIntegralTStructure T l E).truncGE m).obj K ≅ U :=
+    ι.preimageIso (((pbc_integral_tstructure T l E).2.2.1 m).2.some.app K)
+  refine ⟨L, U, (pbc_integral_truncations T l E K hTor m).1, ?_, ?_, ?_⟩
+  · obtain ⟨a, rfl⟩ : ∃ a : ℤ, m = a + 1 := ⟨m - 1, by omega⟩
+    exact (pbc_integral_truncations T l E K hTor a).2.1
+  · exact ⟨((hTrunc m).1).some.app K ≪≫ Q.mapIso eL⟩
+  · exact ⟨((hTrunc m).2).some.app K ≪≫ Q.mapIso eU⟩
 
 end AlgebraicGeometry.Scheme
