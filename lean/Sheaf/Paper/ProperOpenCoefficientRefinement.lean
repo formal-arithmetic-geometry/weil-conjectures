@@ -108,7 +108,30 @@ theorem properOpenCoefficientOpenInverse_isIso
     (φ : A →+* B) {W T : Scheme.{u}} (j : W ⟶ T) [IsOpenImmersion j]
     (M : DerivedCategoryModule A W) :
     IsIso (properOpenCoefficientOpenInverse φ j M) := by
-  sorry
+  let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j
+  have hu : IsIso adj.unit :=
+    isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit _ _
+  have : (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.Full :=
+    adj.fullyFaithfulLOfIsIsoUnit.full
+  have : (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.Faithful :=
+    adj.fullyFaithfulLOfIsIsoUnit.faithful
+  -- Composite left adjoints give an isomorphism of objects; no normalization is needed.
+  let e := (conjugateIsoEquiv
+    (((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) j).symm).comp
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)))
+    ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ)).comp
+      (adj.ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) j).symm))).symm
+    (scalarRestrictionPullbackIso φ j) |>.symm
+  have : IsIso (adj.counit.app
+      ((scalarExtension φ T).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M))) :=
+    adj.isIso_counit_app_of_iso (e.app M)
+  -- The target lies in the essential image of the fully faithful open extension.
+  unfold properOpenCoefficientOpenInverse
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
 
 /-- The open tensor isomorphism with the inverse fixed by the open-unit transpose.
 Source: Stacks 0GL6 (blueprint: lem-sf-proper-open-coefficient-refinement). -/

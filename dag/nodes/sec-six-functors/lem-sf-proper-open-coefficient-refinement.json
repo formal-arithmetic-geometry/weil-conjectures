@@ -56,15 +56,17 @@
    }
   },
   {
-   "text": "For every open $a:W\\hookrightarrow T$, the normalized scalar/open comparison can be computed on K-flat complexes with flat terms. Choose $P\\to M$ by [lem-pc-kflat-resolution]. Since $a_!$ is a left adjoint it preserves the direct sums in total tensor [lem-weil-pbc-left-adjoint-preserves-colimits]. The ordinary identity of [lem-weil-pbc-ringed-slice-extension-tensor] says $a_!P\\otimes_A N\\cong a_!(P\\otimes_A a^{-1}N)$. If $N$ is acyclic, $a^{-1}N$ is acyclic and the right side is acyclic, since $P$ is K-flat and $a_!$ is exact. This proves $a_!P$ is K-flat; the same identity in degree zero proves its terms flat. Hence [lem-pur-derived-change-of-rings] computes $Q_Ta_!M$ and $a_!Q_WM$ by $a_!P\\otimes_A B$ and $a_!(P\\otimes_A B)$. Their canonical $B$-linear identification sends $[m]\\otimes b_0$ to $[m\\otimes b_0]$ on open presheaf summands and then sheafifies. On $W$ it is the tensor/restriction identification. Its inverse therefore has open-adjunction transpose $\\lambda_{a,I_{a,A}M}^{-1}Q_W(\\eta_{a,A,M})$, exactly the stipulated normalization of $\\beta_a$. This also applies to $a=b,s$; it does not require $B$ flat over $A$.",
+   "text": "For invertibility alone, use the shorter categorical argument now implemented in properOpenCoefficientOpenInverse_isIso. The canonical scalar-restriction/pullback isomorphism [lem-sbc-canonical-restrict-scalars-functor-comparisons], transported to left-derived inverse image, conjugates under the composite scalar and open adjunctions to an isomorphism between scalar extension after open extension and open extension after scalar extension. Thus the target of the specified inverse open coefficient map lies in the essential image of open extension. The open unit is invertible [lem-amb-etale-adjoint-locality], so open extension is fully faithful and its counit is invertible on this target. The prescribed open transpose is a composite of the open extension of an isomorphism (scalar extension of the A-open unit followed by inverse lambda) and that counit, hence is invertible. This argument proves only invertibility and needs no identification of the auxiliary conjugate with beta. For the representative calculation needed in Steps 4 and 6, retain the following K-flat computation: For every open $a:W\\hookrightarrow T$, the normalized scalar/open comparison can be computed on K-flat complexes with flat terms. Choose $P\\to M$ by [lem-pc-kflat-resolution]. Since $a_!$ is a left adjoint it preserves the direct sums in total tensor [lem-weil-pbc-left-adjoint-preserves-colimits]. The ordinary identity of [lem-weil-pbc-ringed-slice-extension-tensor] says $a_!P\\otimes_A N\\cong a_!(P\\otimes_A a^{-1}N)$. If $N$ is acyclic, $a^{-1}N$ is acyclic and the right side is acyclic, since $P$ is K-flat and $a_!$ is exact. This proves $a_!P$ is K-flat; the same identity in degree zero proves its terms flat. Hence [lem-pur-derived-change-of-rings] computes $Q_Ta_!M$ and $a_!Q_WM$ by $a_!P\\otimes_A B$ and $a_!(P\\otimes_A B)$. Their canonical $B$-linear identification sends $[m]\\otimes b_0$ to $[m\\otimes b_0]$ on open presheaf summands and then sheafifies. On $W$ it is the tensor/restriction identification. Its inverse therefore has open-adjunction transpose $\\lambda_{a,I_{a,A}M}^{-1}Q_W(\\eta_{a,A,M})$, exactly the stipulated normalization of $\\beta_a$. This also applies to $a=b,s$; it does not require $B$ flat over $A$.",
    "uses": [
+    "lem-amb-etale-adjoint-locality",
     "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-weil-pbc-ringed-slice-extension-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
    "elementary": false,
    "source": {
@@ -147,11 +149,13 @@
   "def-kun-projection-formula-map",
   "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-proper-open-comparison",
+  "lem-amb-etale-adjoint-locality",
   "lem-cbc-extension-zero-composition",
   "lem-cbc-proper-open-interchange-coherence",
   "lem-cbc-proper-support-sheaf-composition",
   "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-weil-pbc-etale-sheaf-clopen-product",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
@@ -168,7 +172,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7I and 0GL6; explicit clopen-section and adjunction proof of coefficient naturality, not a verbatim claim of these tags."
+  "place": "Tags 0F7B, 0F7I and 0GL6; explicit clopen-section and adjunction proof of coefficient naturality, not a verbatim claim of these tags. S5: the auxiliary open-inverse invertibility is proved by composite-adjunction conjugacy and essential-image counit invertibility; the refinement equality and its representative calculations remain open."
  },
  "mathlib_searches": [
   {
@@ -430,5 +434,15 @@
   "group": "Q53",
   "result": "pass",
   "note": "Reviewed node, dependencies, source, Lean declarations, report, edge cases, and pro-etale exclusion. scompile.py compiled the delivery successfully; no findings or fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261019T005423-L-2767350",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
