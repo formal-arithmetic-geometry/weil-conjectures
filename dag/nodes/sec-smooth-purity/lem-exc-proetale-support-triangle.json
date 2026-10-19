@@ -28,137 +28,90 @@
  ],
  "proof": [
   {
-   "text": "Work on the small skeletons and in the common sheaf universe of [def-weil-pbc-proetale-site]. For the finite ring $A$, use the sheaf of rings $A_S$ and left module sheaves of [def-weil-pbc-proetale-modules], for $S=T,U,Z$; no commutativity of $A$ is needed. By [lem-weil-pbc-ring-sheaves-grothendieck] these abelian categories are Grothendieck. Apply [lem-pur-kinjective-degreewise-existence] to a complex representing $K$ to choose a quasi-isomorphism $K\\to I$ with $I$ K-injective and every $I^q$ injective. Use the exact inverse images with transported coefficient actions of [prop-weil-pbc-proetale-constant-exact]. Define an additive sheaf functor $H$ on left $A_T$-modules by $H(N)=i^*\\ker(N\\to j_*j^*N)$, using the open adjunction unit, and on morphisms by the induced kernel map followed by $i^*$. Kernels here are the sectionwise kernels of [def-weil-sheaf-of-modules-category]. Applying $H$ termwise preserves shifts and mapping-cone matrices, so its composite with derived localization is exact on homotopy categories. By [lem-weil-pbc-kinjective-total-derived], its total right derived functor $RH$ exists and $RH(K)$ is represented by $H(I)$. Step 7 proves that $RH$ is the right adjoint $Ri^!$ in the statement and identifies its counit. No adjunction for $H$ has been assumed here.",
+   "text": "Use finiteCoefficientRealization_isEquivalence_ring in the recorded finite-module module, which applies to arbitrary finite rings. Construct its explicit inverse by restriction along finiteCoefficientScalarMap. The module-sheafification Hom equivalence gives its adjunction. Under this inverse, finiteModulePushforward is naturally the existing fixed-scalar lowerStar: the direct-image ring map preserves constant scalars by the sheafification adjunction, and the component comparison is the identity on sections. Conjugate the two adjunctions to obtain the corresponding pullback comparison. All four comparison functors and their naturality and linearity proofs are constructed in Lean; no comparison theorem is assumed.",
    "uses": [
-    "def-weil-pbc-proetale-site",
     "def-weil-pbc-proetale-modules",
+    "def-weil-proetale-inverse-image",
+    "def-weil-presheaf-modules-sheafification",
+    "prop-weil-pbc-proetale-constant-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+    "place": "Formal closed/open adjunction triangle; alternative source-library recollement proof, with coefficient-presentation comparisons proved explicitly"
+   }
+  },
+  {
+   "text": "Noetherianity of T and the open embedding give a Noetherian underlying space of U, so j is quasi-compact by Mathlib. Transfer exactness and full faithfulness of the closed direct image from the fixed-scalar source API through the explicit equivalence of step 1. In that same source API, isZero_upperStar_lowerStar_of_disjoint gives open restriction of closed direct image zero, and isZero_of_isZero_upperStar_of_isCompl gives joint detection of zero. Transfer both through the constructed comparisons and reflect zero objects along the fully faithful restriction functor. Open direct image is fully faithful because its ordinary counit is invertible.",
+   "uses": [
+    "lem-exc-proetale-closed-exact",
+    "lem-exc-proetale-closed-fully-faithful",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+    "place": "Formal closed/open adjunction triangle; alternative source-library recollement proof, with coefficient-presentation comparisons proved explicitly"
+   }
+  },
+  {
+   "text": "The recorded Grothendieck module-sheaf theorem supplies K-injective resolutions in the required universe. Use the source library exact-left-adjoint derived-adjunction API on the actual finiteModuleAdjunction for j. Direct images preserve K-injectives as right adjoints of exact pullbacks. Their full faithfulness therefore descends to the unbounded right-derived functors; exact closed direct image is identified with its termwise mapDerivedCategory. Hence the derived open counit is invertible. This uses the existing implementations in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction and FullyFaithful, rather than constructing new derived functors.",
+   "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-pur-kinjective-degreewise-existence",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "## Proof, choosing a K-injective resolution with injective terms and computing the closed right adjoint"
-   }
-  },
-  {
-   "text": "Apply [lem-exc-proetale-open-derived-image] to the resolution $I$ of Step 1. It identifies $j^*$ with exact restriction, including coefficients and units, and makes $j^*I$ K-injective. Thus $Rj_*j^*K$ is represented by $j_*j^*I$, and the derived open unit is represented by the termwise restriction $I\\to j_*j^*I$.",
-   "uses": [
-    "lem-exc-proetale-open-derived-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "Proof: exact open restriction, K-injectivity, and computation of the derived open unit"
-   }
-  },
-  {
-   "text": "For an object $V$ of $T_{\\mathrm{proet}}$, put $V_U=V\\times_TU$ and let $a:V_U\\to V$ be the open inclusion. It is a monomorphism by clause (4) of [lem-weil-proetale-weakly-etale-localization], again using auxiliary ring $\\mathbf Z$ for the geometric assertion. Let $P_V=A_T[h_V]$ be the free module presheaf of [lem-weil-pbc-free-yoneda-presheaf-module] and $L_V=P_V^\\#$ its module sheafification [def-weil-presheaf-modules-sheafification]. The map $P_{V_U}\\to P_V$ sends $e_b$ to $e_{ab}$ at an object $W$. It commutes with restriction because both composites send $r e_b$ to $r|_c e_{abc}$. Since $a$ is monic, the basis map $\\operatorname{Hom}(W,V_U)\\to\\operatorname{Hom}(W,V)$ is injective. A free-module element in its kernel has every coefficient zero, so the presheaf map is componentwise injective, hence monic. Exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] gives a monomorphism $L_{V_U}\\to L_V$.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "## Proof, the monomorphism of free module sheaves for the open part"
-   }
-  },
-  {
-   "text": "The free-presheaf bijection [lem-weil-pbc-free-yoneda-presheaf-module] and the sheafification adjunction [def-weil-presheaf-modules-sheafification] give $\\operatorname{Hom}(L_V,N)=N(V)$. Precomposing with $L_{V_U}\\to L_V$ corresponds to restriction: the map associated to $x\\in N(V)$ sends $e_b$ to $x|_b$, so on the identity generator of $V_U$ its precomposition has value $x|_a$. For $y\\in I^q(V_U)$ extend the corresponding $L_{V_U}\\to I^q$ across the monomorphism of Step 3, using injectivity in the precise sense of [def-sp-injective-resolutions]. The extension corresponds to $x\\in I^q(V)$ with $x|_a=y$. Hence $I^q\\to j_*j^*I^q$ is sectionwise surjective for every site object $V$. It is epic: two sheaf maps out of its target agreeing after it agree on every section by such lifts, and hence are equal by [def-weil-sheaf-of-modules-category].",
-   "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification",
-    "def-sp-injective-resolutions",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "prop-weil-pbc-proetale-constant-exact"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "## Proof, injectivity extends sections and proves the termwise surjectivity"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+    "place": "Formal closed/open adjunction triangle; alternative source-library recollement proof, with coefficient-presentation comparisons proved explicitly"
    }
   },
   {
-   "text": "The complement $j$ is quasi-compact. For an open cover of any open subset $O\\subseteq T$, apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to the nonempty family of complements in $T$ of finite unions of cover members. A minimal complement gives a maximal finite union; adjoining any cover member cannot enlarge it, so it equals $O$. Hence every open of $T$ is quasi-compact, including $U\\cap V$ for every affine open $V\\subseteq T$. This is the quasi-compactness condition for $j$.",
+   "text": "On homology, exact pullbacks and pushforwards commute with cohomology. Thus the vanishing and joint-zero detection in step 2 hold in the derived categories. If J(K)=0, complete the closed inverse-image adjunction unit K to i_*i^*K to a distinguished triangle. Closed inverse image inverts this unit by full faithfulness of closed direct image; open inverse image inverts it because both its endpoints are zero. The cone is zero by joint detection, so the unit is invertible and K lies in the essential image of i_*. This is a complete private Lean argument, not a new assumed essential-image statement.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    "lem-exc-proetale-closed-fully-faithful",
+    "prop-weil-pbc-proetale-constant-exact"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "Proof: Noetherianity supplies the quasi-compact-complement hypothesis"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+    "place": "Formal closed/open adjunction triangle; alternative source-library recollement proof, with coefficient-presentation comparisons proved explicitly"
    }
   },
   {
-   "text": "Set $F^q=\\ker(I^q\\to j_*j^*I^q)$. By Step 2 the unit restricts to the identity over $U$, so $j^*F^q=0$. Apply [lem-exc-proetale-closed-essential-image] with the commutative coefficient sheaves for $B=\\mathbf Z/n\\mathbf Z$, where $n$ is the additive order of $1_A$; their canonical inverse-image identifications are supplied by [prop-weil-pbc-proetale-constant-ring-map]. Step 5 supplies quasi-compactness. These verify the commutative essential-image hypothesis of [lem-exc-proetale-supported-kernel-complex]. That lemma transfers supported units to the given $A$-modules and gives $j^*i_*M=0$. Since Step 4 makes each open unit epic, its complex clause identifies $F\\cong i_*H(I)$ and gives $0\\to i_*H(I)\\to I\\to j_*j^*I\\to0$, naturally, with the kernel-inclusion first arrow.",
+   "text": "Apply the proved source-library Recollement.isLeftAdjoint theorem to the fully faithful termwise closed pushforward, the derived open adjunction with invertible counit, and the vanishing and essential-image facts of step 4. It supplies a right adjoint of i_*. Apply Recollement.exists_distTriang_counit_unit to this adjunction: its proof completes the open unit to a triangle, identifies its fibre in the closed essential image and uses Hom orthogonality to identify the first map with the closed counit. Finally Functor.mapDerivedCategoryFactors supplies both requested natural localization isomorphisms. The unit record has no realized statement or proof-step nodes, so this replaces only the below-unit auxiliary proof route.",
    "uses": [
-    "lem-exc-proetale-closed-essential-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-exc-proetale-supported-kernel-complex"
+    "def-weil-triangulated-category",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "Proof: supported kernel identification and assembly of the short exact complex sequence"
-   }
-  },
-  {
-   "text": "Step 5 shows that every open subset of $T$ is quasi-compact; in particular intersections of affine opens are quasi-compact, so $T$ is quasi-compact and quasi-separated and $j$ is quasi-compact. Apply clause (2) of [det-sf-open-closed-sequence-ring-sheaf] with $X=T$ and $B=A_T$; that statement allows a noncommutative ring sheaf. Its closed coefficient ring is $i^{-1}A_T$. Restriction of scalars along the ring-sheaf isomorphism $c_i:i^{-1}A_T\\xrightarrow{\\sim}A_Z$ of [prop-weil-pbc-proetale-constant-ring-map] is an isomorphism of the module categories. Under it the transported inverse image $i^*$ of [prop-weil-pbc-proetale-constant-exact] is the clause's $i^*$, both being $i^{-1}$ on underlying sheaves. The direct images agree too: on $(i_*G)(W)=G(Z\\times_TW)$ both act through $A_T\\to i_*i^{-1}A_T\\xrightarrow{i_*c_i}i_*A_Z$, which is the map $\\rho$ adjoint to $c_i$. Hence $i_*$ is exact and fully faithful on left $A_Z$-module sheaves, for every finite ring $A$. The supported-unit and vanishing assertions from Step 6 and the restriction identification from Step 2 verify the remaining hypotheses of [lem-exc-proetale-derived-adjunction-triangle]. It identifies $H$ as the sheaf right adjoint, $RH$ as the right adjoint $Ri^!$ on the unbounded derived categories, and $i_*H(I)\\to I$ as its derived counit after localization. In particular $i_*H(I)$ represents $i_*Ri^!K$.",
-   "uses": [
-    "det-sf-open-closed-sequence-ring-sheaf",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-exc-proetale-derived-adjunction-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "Proof: identification of the exceptional right adjoint and its counit"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the short exact sequence of Step 6. Its vertices represent $i_*Ri^!K$, $K$, and $Rj_*j^*K$ by Steps 1, 2, and 7. Its first two arrows are the closed counit and open unit by Steps 7 and 2. Thus it yields exactly $i_*Ri^!K\\to K\\to Rj_*j^*K\\to i_*Ri^!K[1]$. No constructibility or boundedness of $K$ or $Ri^!K$ was used.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-    "place": "Proof: the associated distinguished triangle with its adjunction maps"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+    "place": "Formal closed/open adjunction triangle; alternative source-library recollement proof, with coefficient-presentation comparisons proved explicitly"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-proetale-site",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "det-sf-open-closed-sequence-ring-sheaf",
-  "lem-exc-proetale-closed-essential-image",
-  "lem-exc-proetale-derived-adjunction-triangle",
-  "lem-exc-proetale-open-derived-image",
-  "lem-exc-proetale-supported-kernel-complex",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-weil-proetale-inverse-image",
+  "def-weil-triangulated-category",
+  "lem-exc-proetale-closed-exact",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-proetale-weakly-etale-localization",
   "prop-weil-pbc-proetale-constant-exact",
   "prop-weil-pbc-proetale-constant-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
-  "place": "## Proof"
+  "group": "T9",
+  "date": "2026-10-19",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-exc-proetale-support-triangle.md",
+  "place": "Shorter formal recollement argument using the existing source-library Recollement API and explicit noncommutative coefficient comparisons; no new assumptions"
  },
  "mathlib_searches": [
   {
@@ -374,19 +327,9 @@
  },
  "tool_uses": [
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-free-yoneda-presheaf-module",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "lem-weil-pbc-cochain-complexes-degreewise-exact",
-  "lem-weil-pbc-complex-ses-triangle",
   "prop-weil-pbc-proetale-constant-ring-map",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -418,5 +361,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, report sections and verbatim signature. Immutable module passed scompile.py sandbox and library checks without diagnostics. No fixes or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261019T005432-L-2771059",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

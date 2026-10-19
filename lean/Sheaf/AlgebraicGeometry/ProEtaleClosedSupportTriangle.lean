@@ -10,23 +10,12 @@ public import Sheaf.Paper.RefinementCoefficientRealization
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedSupportAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleOpenDerivedImage
-import Sheaf.AlgebraicGeometry.ProEtaleSupportedKernelComplex
-import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+import WeilConjectures.CategoryTheory.Triangulated.Recollement
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The ambient pro-etale closed-support triangle for a finite ring
@@ -63,6 +52,344 @@ instance closedSupportPushforward_preservesZeroMorphisms
       (J := Scheme.ProEt.topology T) (K := Scheme.ProEt.topology S)
       (finiteCoefficientDirectImageMap f A)).PreservesZeroMorphisms where
   map_zero _ _ := rfl
+
+
+section
+
+open Opposite
+
+universe uC vC
+
+private noncomputable def constantModuleDiagram {C : Type uC} [Category.{vC} C]
+    (A : Type (u + 1)) [Ring A] :
+    PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of A)) ⥤
+      (Cᵒᵖ ⥤ ModuleCat.{u + 1} A) where
+  obj M :=
+    { obj W := M.obj W
+      map f := ModuleCat.ofHom (M.map f).hom
+      map_id W := by ext x; exact ConcreteCategory.congr_hom (M.map_id W) x
+      map_comp f g := by ext x; exact ConcreteCategory.congr_hom (M.map_comp f g) x }
+  map f :=
+    { app W := f.app W
+      naturality W W' a := by
+        ext x
+        exact ConcreteCategory.congr_hom (f.naturality a) x }
+  map_id M := by ext W x; rfl
+  map_comp f g := by ext W x; rfl
+
+private noncomputable def finiteCoefficientRestriction (T : Scheme.{u}) (A : Type (u + 1))
+    [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    FiniteCoefficientModules T A ⥤ Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A) where
+  obj M :=
+    ⟨(constantModuleDiagram A).obj
+        ((PresheafOfModules.restrictScalars (finiteCoefficientScalarMap T A)).obj M.val),
+      Presheaf.isSheaf_of_isSheaf_comp _ _
+        (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}) M.isSheaf⟩
+  map f := ⟨(constantModuleDiagram A).map
+    ((PresheafOfModules.restrictScalars (finiteCoefficientScalarMap T A)).map f.val)⟩
+  map_id M := by ext W x; rfl
+  map_comp f g := by ext W x; rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def finiteCoefficientRealizationAdjunction (T : Scheme.{u})
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    finiteCoefficientRealization T A ⊣ finiteCoefficientRestriction T A :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv M N :=
+        (PresheafOfModules.sheafificationHomEquiv.{u + 1} (finiteCoefficientScalarMap T A)).trans
+          { toFun f := ⟨(constantModuleDiagram A).map f⟩
+            invFun f :=
+              { app W := f.hom.app W
+                naturality a := f.hom.naturality a }
+            left_inv f := rfl
+            right_inv f := rfl }
+      homEquiv_naturality_left_symm := by
+        intro M M' N f g
+        change (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+          (finiteCoefficientScalarMap T A)).symm _ = _
+        apply ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+          (finiteCoefficientScalarMap T A)).homEquiv _ _).injective
+        rw [PresheafOfModules.sheafificationAdjunction_homEquiv_apply,
+          Equiv.apply_symm_apply]
+        change _ = (PresheafOfModules.sheafificationAdjunction.{u + 1}
+          (finiteCoefficientScalarMap T A)).homEquiv _ _
+            ((PresheafOfModules.sheafification.{u + 1} (finiteCoefficientScalarMap T A)).map
+              ((finiteCoefficientModulePresheaf T.ProEt A).map f.hom) ≫ _)
+        rw [Adjunction.homEquiv_naturality_left,
+          PresheafOfModules.sheafificationAdjunction_homEquiv_apply]
+        simp only [Equiv.symm_trans_apply]
+        erw [Equiv.apply_symm_apply]
+        rfl
+      homEquiv_naturality_right := by
+        intro M N N' f g
+        apply Sheaf.hom_ext
+        change (constantModuleDiagram A).map
+          ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+            (finiteCoefficientScalarMap T A)).homEquiv _ _ (f ≫ g)) = _
+        rw [Adjunction.homEquiv_naturality_right]
+        rfl }
+
+private theorem finiteCoefficientRestriction_isEquivalence (T : Scheme.{u}) (A : Type (u + 1))
+    [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    (finiteCoefficientRestriction T A).IsEquivalence :=
+  Functor.isEquivalence_of_iso
+    (Adjunction.rightAdjointUniq (finiteCoefficientRealization T A).asEquivalence.toAdjunction
+      (finiteCoefficientRealizationAdjunction T A))
+
+attribute [local instance] finiteCoefficientRestriction_isEquivalence
+
+private theorem finiteCoefficientRestriction_additive (T : Scheme.{u}) (A : Type (u + 1))
+    [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    (finiteCoefficientRestriction T A).Additive :=
+  (finiteCoefficientRealizationAdjunction T A).right_adjoint_additive
+
+attribute [local instance] finiteCoefficientRestriction_additive
+
+private lemma finiteCoefficientDirectImageMap_scalar {S T : Scheme.{u}} (f : S ⟶ T)
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    finiteCoefficientScalarMap T A ≫ (finiteCoefficientDirectImageMap f A).hom =
+      Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op (finiteCoefficientScalarMap S A) := by
+  have h := (sheafificationAdjunction (Scheme.ProEt.topology T) RingCat.{u + 1}).homEquiv
+    (finiteCoefficientPresheaf T A)
+    ((Scheme.proEtaleSheafDirectImage f RingCat.{u + 1}).obj (finiteCoefficientRingSheaf S A))
+    |>.apply_symm_apply (finiteCoefficientDirectImagePresheafMap f A)
+  change toSheafify _ _ ≫ (finiteCoefficientDirectImageMap f A).hom = _ at h
+  rw [finiteCoefficientScalarMap, Category.assoc, h]
+  ext W a
+  rfl
+
+private noncomputable def finiteCoefficientRestriction_pushforward {S T : Scheme.{u}} (f : S ⟶ T)
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    finiteModulePushforward f A ⋙ finiteCoefficientRestriction T A ≅
+      finiteCoefficientRestriction S A ⋙ lowerStar (ModuleCat.{u + 1} A) f := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · refine ObjectProperty.isoMk _ (NatIso.ofComponents (fun W ↦ ?_) ?_)
+    · let e :
+          ((finiteModulePushforward f A ⋙ finiteCoefficientRestriction T A).obj M).obj.obj W ≅
+          ((finiteCoefficientRestriction S A ⋙
+            lowerStar (ModuleCat.{u + 1} A) f).obj M).obj.obj W :=
+        { hom := ModuleCat.ofHom
+            (X := ((finiteModulePushforward f A ⋙
+              finiteCoefficientRestriction T A).obj M).obj.obj W)
+            (Y := ((finiteCoefficientRestriction S A ⋙
+              lowerStar (ModuleCat.{u + 1} A) f).obj M).obj.obj W)
+            { toFun := id
+              map_add' := fun _ _ ↦ rfl
+              map_smul' := fun a m ↦ by
+                change (show (finiteCoefficientRingSheaf S A).obj.obj
+                  ((Scheme.proEtaleBaseChange f).op.obj W) from
+                  (finiteCoefficientDirectImageMap f A).hom.app W
+                  ((finiteCoefficientScalarMap T A).app W a)) • (show M.val.obj
+                    ((Scheme.proEtaleBaseChange f).op.obj W) from m) =
+                  ((finiteCoefficientScalarMap S A).app
+                    ((Scheme.proEtaleBaseChange f).op.obj W) a) • (show M.val.obj
+                    ((Scheme.proEtaleBaseChange f).op.obj W) from m)
+                rw [← NatTrans.comp_app_apply,
+                  finiteCoefficientDirectImageMap_scalar]
+                rfl }
+          inv := ModuleCat.ofHom
+            (X := ((finiteCoefficientRestriction S A ⋙
+              lowerStar (ModuleCat.{u + 1} A) f).obj M).obj.obj W)
+            (Y := ((finiteModulePushforward f A ⋙
+              finiteCoefficientRestriction T A).obj M).obj.obj W)
+            { toFun := id
+              map_add' := fun _ _ ↦ rfl
+              map_smul' := fun a m ↦ by
+                change ((finiteCoefficientScalarMap S A).app
+                  ((Scheme.proEtaleBaseChange f).op.obj W) a) • (show M.val.obj
+                    ((Scheme.proEtaleBaseChange f).op.obj W) from m) =
+                  ((finiteCoefficientDirectImageMap f A).hom.app W
+                    ((finiteCoefficientScalarMap T A).app W a)) • (show M.val.obj
+                    ((Scheme.proEtaleBaseChange f).op.obj W) from m)
+                rw [← NatTrans.comp_app_apply,
+                  finiteCoefficientDirectImageMap_scalar]
+                rfl } }
+      exact e
+    · intro W W' g
+      ext m
+      rfl
+  · intro M M' g
+    ext W m
+    rfl
+
+private noncomputable def coefficientTransportAdjunction {S T : Scheme.{u}} (f : S ⟶ T)
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    (finiteCoefficientRestriction T A ⋙ upperStar (ModuleCat.{u + 1} A) f) ⋙
+        finiteCoefficientRealization S A ⊣
+      finiteCoefficientRestriction S A ⋙
+        (lowerStar (ModuleCat.{u + 1} A) f ⋙ finiteCoefficientRealization T A) :=
+  (((finiteCoefficientRealizationAdjunction T A).toEquivalence.symm.toAdjunction).comp
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)).comp
+      (finiteCoefficientRealizationAdjunction S A)
+
+private noncomputable def coefficientTransportPushforward {S T : Scheme.{u}} (f : S ⟶ T)
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    finiteModulePushforward f A ≅ finiteCoefficientRestriction S A ⋙
+        (lowerStar (ModuleCat.{u + 1} A) f ⋙ finiteCoefficientRealization T A) :=
+  (Functor.rightUnitor _).symm ≪≫
+    Functor.isoWhiskerLeft _ (asIso (finiteCoefficientRealizationAdjunction T A).counit).symm ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (finiteCoefficientRestriction_pushforward f A)
+      (finiteCoefficientRealization T A) ≪≫ Functor.associator _ _ _
+
+private noncomputable def finiteCoefficientRestriction_pullback {S T : Scheme.{u}} (f : S ⟶ T)
+    (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
+    finiteCoefficientModulePullback f A ⋙ finiteCoefficientRestriction S A ≅
+      finiteCoefficientRestriction T A ⋙ upperStar (ModuleCat.{u + 1} A) f :=
+  Functor.isoWhiskerRight
+    (Adjunction.leftAdjointUniq (finiteModuleAdjunction f A)
+      ((coefficientTransportAdjunction f A).ofNatIsoRight
+        (coefficientTransportPushforward f A).symm)) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (asIso (finiteCoefficientRealizationAdjunction S A).unit).symm ≪≫
+    Functor.rightUnitor _
+
+
+
+
+variable {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
+  (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
+  (hij : IsCompl (Set.range i.base) (Set.range j.base))
+  (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
+
+include hij in
+private lemma finiteClosed_exact : PreservesFiniteColimits (finiteModulePushforward i A) := by
+  have := preservesFiniteColimits_lowerStar_of_isCompl (R := A) i j hij
+  have : PreservesFiniteColimits
+      (finiteModulePushforward i A ⋙ finiteCoefficientRestriction T A) :=
+    preservesFiniteColimits_of_natIso (finiteCoefficientRestriction_pushforward i A).symm
+  exact preservesFiniteColimits_of_reflects_of_preserves _ (finiteCoefficientRestriction T A)
+
+private lemma finitePush_full {S : Scheme.{u}} (f : S ⟶ T)
+    [(lowerStar (ModuleCat.{u + 1} A) f).Full] : (finiteModulePushforward f A).Full :=
+  Functor.Full.of_comp_faithful_iso (finiteCoefficientRestriction_pushforward f A)
+
+private lemma finitePush_faithful {S : Scheme.{u}} (f : S ⟶ T)
+    [(lowerStar (ModuleCat.{u + 1} A) f).Faithful] : (finiteModulePushforward f A).Faithful :=
+  Functor.Faithful.of_comp_iso (finiteCoefficientRestriction_pushforward f A)
+
+include hij in
+omit [IsClosedImmersion i] [QuasiCompact j] in
+private lemma finite_zero (M : FiniteCoefficientModules Z A) :
+    IsZero ((finiteCoefficientModulePullback j A).obj ((finiteModulePushforward i A).obj M)) := by
+  apply IsZero.of_full_of_faithful_of_isZero (finiteCoefficientRestriction U A)
+  exact (isZero_upperStar_lowerStar_of_disjoint (ModuleCat.{u + 1} A) i j hij.disjoint
+    ((finiteCoefficientRestriction Z A).obj M)).of_iso
+      ((finiteCoefficientRestriction_pullback j A).app _ ≪≫
+        (upperStar (ModuleCat.{u + 1} A) j).mapIso
+          ((finiteCoefficientRestriction_pushforward i A).app M))
+
+include hij in
+omit [IsOpenImmersion j] in
+private lemma finite_joint_zero (M : FiniteCoefficientModules T A)
+    (hi : IsZero ((finiteCoefficientModulePullback i A).obj M))
+    (hj : IsZero ((finiteCoefficientModulePullback j A).obj M)) : IsZero M := by
+  apply IsZero.of_full_of_faithful_of_isZero (finiteCoefficientRestriction T A)
+  exact isZero_of_isZero_upperStar_of_isCompl i j hij _
+    (((finiteCoefficientRestriction Z A).map_isZero hi).of_iso
+      ((finiteCoefficientRestriction_pullback i A).app M).symm)
+    (((finiteCoefficientRestriction U A).map_isZero hj).of_iso
+      ((finiteCoefficientRestriction_pullback j A).app M).symm)
+
+
+
+private theorem finiteModulesGroth (S : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (FiniteCoefficientModules S A) :=
+  SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, u + 1}
+    (Scheme.ProEt.topology S)
+    (finiteCoefficientRingSheaf S A)
+
+attribute [local instance] finiteModulesGroth
+
+private theorem finitePull_limits {S V : Scheme.{u}} (f : S ⟶ V) :
+    PreservesFiniteLimits (finiteCoefficientModulePullback f A) :=
+  (finiteCoefficientModulePullback_exact f A).1
+
+attribute [local instance] finitePull_limits
+
+private theorem finitePull_colimits {S V : Scheme.{u}} (f : S ⟶ V) :
+    PreservesFiniteColimits (finiteCoefficientModulePullback f A) :=
+  (finiteCoefficientModulePullback_exact f A).2.1
+
+attribute [local instance] finitePull_colimits
+
+private theorem finitePush_limits {S V : Scheme.{u}} (f : S ⟶ V) :
+    PreservesFiniteLimits (finiteModulePushforward f A) := by
+  have := (finiteModuleAdjunction f A).isRightAdjoint
+  infer_instance
+
+attribute [local instance] finitePush_limits
+
+include hij in
+private lemma finite_derived_triangle
+    [PreservesFiniteColimits (finiteModulePushforward i A)] :
+    ∃ (H : FiniteCoefficientDerivedCategory T A ⥤ FiniteCoefficientDerivedCategory Z A)
+      (G : FiniteCoefficientDerivedCategory U A ⥤ FiniteCoefficientDerivedCategory T A)
+      (ai : (finiteModulePushforward i A).mapDerivedCategory ⊣ H)
+      (aj : (finiteCoefficientModulePullback j A).mapDerivedCategory ⊣ G),
+      ∀ K, ∃ w, Triangle.mk (ai.counit.app K) (aj.unit.app K) w ∈
+        distTriang (FiniteCoefficientDerivedCategory T A) := by
+  have := finiteClosed_exact i j hij A
+  have := finitePush_full A i
+  have := finitePush_faithful A i
+  have : (lowerStar (ModuleCat.{u + 1} A) j).Full :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).fullyFaithfulROfIsIsoCounit.full
+  have : (lowerStar (ModuleCat.{u + 1} A) j).Faithful :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).fullyFaithfulROfIsIsoCounit.faithful
+  have := finitePush_full A j
+  have := finitePush_faithful A j
+  have : (finiteModulePushforward i A).PreservesKInjectiveComplexes :=
+    (finiteModuleAdjunction i A).preservesKInjectiveComplexes
+  have : (finiteModulePushforward j A).PreservesKInjectiveComplexes :=
+    (finiteModuleAdjunction j A).preservesKInjectiveComplexes
+  let L := (finiteModulePushforward i A).mapDerivedCategory
+  let J := (finiteCoefficientModulePullback j A).mapDerivedCategory
+  let aj := (finiteModuleAdjunction j A).mapDerivedCategoryRightDerivedAdjunction
+  have : IsIso aj.counit := aj.counit_isIso_of_R_fully_faithful
+  have : L.Full := Functor.Full.of_iso
+    (finiteModulePushforward i A).rightDerivedFunctorIsoMapDerivedCategory
+  have : L.Faithful := Functor.Faithful.of_iso
+    (finiteModulePushforward i A).rightDerivedFunctorIsoMapDerivedCategory
+  have hzero (M : FiniteCoefficientDerivedCategory Z A) : IsZero (J.obj (L.obj M)) := by
+    exact (Functor.isZero_mapDerivedCategory_obj (finiteModulePushforward i A ⋙
+      finiteCoefficientModulePullback j A) M (fun _ ↦ finite_zero i j hij A _)).of_iso
+        (((finiteModulePushforward i A).mapDerivedCategoryCompIso _).symm.app M)
+  have hjoint (M : FiniteCoefficientDerivedCategory T A)
+      (hi : IsZero ((finiteCoefficientModulePullback i A).mapDerivedCategory.obj M))
+      (hj : IsZero (J.obj M)) : IsZero M := by
+    rw [DerivedCategory.isZero_iff]
+    intro n
+    exact finite_joint_zero i j hij A _
+      (((DerivedCategory.homologyFunctor _ n).map_isZero hi).of_iso
+        (((finiteCoefficientModulePullback i A).mapDerivedCategoryHomologyFunctorIso n).app M))
+      (((DerivedCategory.homologyFunctor _ n).map_isZero hj).of_iso
+        (((finiteCoefficientModulePullback j A).mapDerivedCategoryHomologyFunctorIso n).app M))
+  have hess (M : FiniteCoefficientDerivedCategory T A) (hM : IsZero (J.obj M)) :
+      L.essImage M := by
+    let ai := ((finiteModuleAdjunction i A).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
+      (finiteModulePushforward i A).rightDerivedFunctorIsoMapDerivedCategory
+    have : IsIso (finiteModuleAdjunction i A).counit :=
+      (finiteModuleAdjunction i A).counit_isIso_of_R_fully_faithful
+    have : IsIso ai.counit := ai.counit_isIso_of_R_fully_faithful
+    obtain ⟨W, v, w, hW⟩ := distinguished_cocone_triangle (ai.unit.app M)
+    have hiu : IsIso ((finiteCoefficientModulePullback i A).mapDerivedCategory.map
+        (ai.unit.app M)) :=
+      have := IsIso.id ((finiteCoefficientModulePullback i A).mapDerivedCategory.obj M)
+      IsIso.of_isIso_fac_right (ai.left_triangle_components M)
+    have hju : IsIso (J.map (ai.unit.app M)) :=
+      isIso_of_source_target_iso_zero _ hM.isoZero (hzero _).isoZero
+    have hz : IsZero W := hjoint W
+      ((Triangle.isZero₃_iff_isIso₁ _
+        ((finiteCoefficientModulePullback i A).mapDerivedCategory.map_distinguished _ hW)).2 hiu)
+      ((Triangle.isZero₃_iff_isIso₁ _ (J.map_distinguished _ hW)).2 hju)
+    have : IsIso (ai.unit.app M) := (Triangle.isZero₃_iff_isIso₁ _ hW).1 hz
+    exact ⟨_, ⟨(asIso (ai.unit.app M)).symm⟩⟩
+  have : L.IsLeftAdjoint := Recollement.isLeftAdjoint aj
+    (Functor.FullyFaithful.ofFullyFaithful L) hzero hess
+  let ai := Adjunction.ofIsLeftAdjoint L
+  refine ⟨L.rightAdjoint, _, ai, aj, fun K ↦ ?_⟩
+  exact Recollement.exists_distTriang_counit_unit aj ai
+    (Functor.FullyFaithful.ofFullyFaithful L) hzero hess K
 
 
 /-- The closed-support triangle, with its actual adjunction arrows, in the entire
@@ -234,6 +561,21 @@ theorem exists_proEtale_closedSupportTriangle
           ∃ δ : jPush.obj (jPull.obj K) ⟶ (iPush.obj (iShriek.obj K))⟦(1 : ℤ)⟧,
             Triangle.mk (closedAdj.counit.app K) (openAdj.unit.app K) δ ∈
               distTriang (FiniteCoefficientDerivedCategory T A) := by
-  sorry
+  have : IsNoetherian T := {}
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact j := inferInstance
+  have hij : IsCompl (Set.range i.base) (Set.range j.base) := by
+    rw [hU]
+    exact isCompl_compl
+  have := finiteClosed_exact i j hij A
+  let iPush := (finiteModulePushforward i A).mapDerivedCategory
+  let jPull := (finiteCoefficientModulePullback j A).mapDerivedCategory
+  refine ⟨iPush, jPull, ?_, ?_, ?_⟩
+  · exact ⟨(Functor.mapDerivedCategoryFactors (finiteModulePushforward i A)).symm⟩
+  · exact ⟨(Functor.mapDerivedCategoryFactors
+      (finiteCoefficientModulePullback j A)).symm⟩
+  · exact finite_derived_triangle i j hij A
+
+end
 
 end AlgebraicGeometry.ProEtale
