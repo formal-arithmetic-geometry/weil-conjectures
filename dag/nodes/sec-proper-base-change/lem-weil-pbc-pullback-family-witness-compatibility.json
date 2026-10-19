@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-pullback-family-witness-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "step (b), pullbacks; repaired node proof step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Witness compatibility for an inverse-image family",
+ "statement": "Let X and Y be schemes and g : Y -> X any morphism. Let (A,I) be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. The actual finite-coefficient derived pullback family along g satisfies PbcFamilyWitnessCompatibility of [def-weil-pbc-witness-compatibility], including its natural quotient reductions, functorial transport of the retained etale origins, and the prescribed adjacent normalization equation. No properness or finiteness assumption on g is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-amplification-proper.proof.md",
+  "place": "step (b), pullbacks; repaired node proof step 4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the two canonical coefficient-realization equivalences in the actual finite pullback, giving a natural isomorphism with exact termwise fixed-ring inverse image. The reverse scalar-adjunction mate scalarPullbackProEtaleIso, a constant-coefficient specialization of the tensor-pullback theorem, then gives the adjacent rho; restrict it to the stated full reduction domain.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual etale inverse image of each retained origin. Exact termwise descent preserves its lower bound. The derived comparison-pullback isomorphism, inverse image of the input alpha, and the coefficient coordinate isomorphism give its output comparison isomorphism. Applying realization yields the explicit retained pair.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic witness-compatibility assembly theorem to these rho and actual bounded-below etale origins. Its full-faithful lifting proves the etale normalization, all three morphism equations, and the functor laws, with exactly the given finite-level functors.",
+   "uses": [
+    "lem-weil-pbc-family-witness-compatibility-from-origins"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-family-witness-compatibility-from-origins",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-amplification-proper.proof.md",
+  "place": "Step (b), pullback normalization and retained origins; functorial lifting through bounded-below full faithfulness written and compiled by P6 on 2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact inverse image commutes with derived scalar extension and normalized towers",
+   "results": "LinearEquiv.extendScalarsOfSurjective_symm; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; localization scalar-extension equivalences",
+   "date": "2026-10-19",
+   "verdict": "No normalized pro-etale witness or completed-tower preservation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized finite coefficient derived towers retained etale origin compatible with proper direct image and inverse image",
+   "results": "StandardEtalePresentation; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; StandardEtalePair.HasMap.map; Algebra.Etale.comp; Algebra.Etale.finitePresentation; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-19",
+   "verdict": "No match: algebraic etale presentations and morphism properties, no normalized derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor; DerivedCategory.singleFunctors",
+   "date": "2026-10-19",
+   "verdict": "No match: ambient derived category interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "PbcFamilyWitnessCompatibility|HasTowerPreservation|amplification_of_isProper",
+   "results": "Definitions in WitnessCompatibility and TowerPreservation and the single original assembly hole. No independent proof or smaller existing statement for these conclusions.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate statement found in either library root."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmplificationProper",
+  "date": "2026-10-19",
+  "group": "P6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullbackFamilyWitnessCompatibility",
+  "file": "lean/Sheaf/Paper/PullbackFamilyWitnessCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pbcFamilyWitnessCompatibility_pullback",
+  "statement": "theorem pbcFamilyWitnessCompatibility_pullback\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : Scheme.AdicCoefficientDatum A) :\n    PbcFamilyWitnessCompatibility X Y d (pbcWitnessPullback g d)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T231301-L-569415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T231301-L-569415",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

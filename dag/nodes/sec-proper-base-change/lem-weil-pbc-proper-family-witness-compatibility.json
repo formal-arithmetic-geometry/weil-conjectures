@@ -1,0 +1,181 @@
+{
+ "id": "lem-weil-pbc-proper-family-witness-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "step (b), direct images; repaired node proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Witness compatibility for a proper direct-image family",
+ "statement": "Let X and Y be Noetherian schemes [def-weil-pbc-scheme-conventions], f : X -> Y a proper morphism [def-weil-proper-morphism], and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Then the actual finite-coefficient derived direct-image family along f satisfies PbcFamilyWitnessCompatibility [def-weil-pbc-witness-compatibility]: natural quotient reduction isomorphisms on its full reduction domain, a functor on witnessed bounded constructible input towers retaining bounded-below etale origins, and the prescribed equations for its level maps and normalizations. No finite dimension or coefficient-invertibility hypothesis on X or Y is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-amplification-proper.proof.md",
+  "place": "step (b), direct images; repaired node proof step 3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the published finite-coefficient realization/direct-image comparison. Conjugating its total right-derived isomorphism by the realization equivalence gives the natural coordinate comparison between the actual finite-coefficient direct image and fixed-ring derived direct image. Exact realization and its inverse allow the derived composition comparisons.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-realization-direct-image",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bounded-constructible essential-image definition gives bounded-below etale origins for every object of the reduction domain. Full faithfulness lifts the entire inclusion functor to these origins, with its natural comparison isomorphism. Its reduction is bounded below because the exact faithful comparison image is the bounded constructible input reduction. Thus the canonical direct-image comparison can be used on both the lift and its reduction.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility",
+    "thm-weil-pbc-site-comparison",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proper finite-coefficient extension to the consecutive finite quotient rings on the Noetherian source and target. Whisker this natural isomorphism with the lifted origin functor and conjugate by the two direct-image site comparisons and the canonical comparison-reduction isomorphisms. This constructs rho on the whole reduction-domain category. No perfectness of one quotient over another and no boundedness of scalar extension of the direct image is used.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each witnessed input level use the actual bounded-below etale right-derived direct image of its retained origin. The canonical direct-image site comparison, direct image of input alpha, and the inverse coordinate comparison give the required output origin. Apply the generic family assembly to these origins and rho. It supplies the etale normalizations, the three morphism equations, and all functor laws.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-family-witness-compatibility-from-origins"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-witness-compatibility",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-family-witness-compatibility-from-origins",
+  "lem-weil-pbc-finite-coefficient-realization-direct-image",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-amplification-proper.proof.md",
+  "place": "Amplification step (b): published coefficient realization, fully faithful origin functor, proper finite coefficient extension, and generic witnessed-tower assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact inverse image commutes with derived scalar extension and normalized towers",
+   "results": "LinearEquiv.extendScalarsOfSurjective_symm; ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply; localization scalar-extension equivalences",
+   "date": "2026-10-19",
+   "verdict": "No normalized pro-etale witness or completed-tower preservation assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized finite coefficient derived towers retained etale origin compatible with proper direct image and inverse image",
+   "results": "StandardEtalePresentation; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; StandardEtalePair.HasMap.map; Algebra.Etale.comp; Algebra.Etale.finitePresentation; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-19",
+   "verdict": "No match: algebraic etale presentations and morphism properties, no normalized derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\"",
+   "results": "HasDerivedCategory; HasDerivedCategory.standard; DerivedCategory; instCategoryDerivedCategory; DerivedCategory.instHasZeroObject; DerivedCategory.instPreadditive; DerivedCategory.instHasShiftInt; DerivedCategory.singleFunctor; DerivedCategory.singleFunctors",
+   "date": "2026-10-19",
+   "verdict": "No match: ambient derived category interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "PbcFamilyWitnessCompatibility|HasTowerPreservation|amplification_of_isProper",
+   "results": "Definitions in WitnessCompatibility and TowerPreservation and the single original assembly hole. No independent proof or smaller existing statement for these conclusions.",
+   "date": "2026-10-19",
+   "verdict": "No duplicate statement found in either library root."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of finite coefficient sheaves commutes with arbitrary derived extension of scalars on bounded constructible complexes",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforward_map_val; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-19",
+   "verdict": "No exact match: these are ordinary module-sheaf pushforward composition and adjunction interfaces, with no proper derived coefficient-change isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmplificationProper",
+  "date": "2026-10-19",
+  "group": "P6"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperFamilyWitnessCompatibility",
+  "file": "lean/Sheaf/Paper/ProperFamilyWitnessCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pbcFamilyWitnessCompatibility_directImage_of_isProper",
+  "statement": "theorem pbcFamilyWitnessCompatibility_directImage_of_isProper\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    [IsNoetherian X] [IsNoetherian Y]\n    {A : Type (u + 1)} [CommRing A] (d : Scheme.AdicCoefficientDatum A) :\n    PbcFamilyWitnessCompatibility X Y d (pbcWitnessDirectImage f d)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "item": "Sheaf.Paper.AmplificationProper",
+  "date": "2026-10-19",
+  "worker": "P6",
+  "summary": "Proved from proper finite-coefficient extension and site comparison; no intermediate perfectness assumption.",
+  "blueprint": "Step (b), the direct-image normalization and retained origins.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-proper-finite-coefficient-extension",
+    "why": "Generic proper finite coefficient-change theorem. It gives the natural quotient reduction isomorphism without assuming perfectness of intermediate quotients."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T231301-L-569415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261019T231301-L-569415",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
