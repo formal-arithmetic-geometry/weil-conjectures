@@ -1,0 +1,118 @@
+{
+ "id": "lem-cbc-exact-product-functor-roos-compatibility",
+ "kind": "statement",
+ "title": "Triangle and augmentation compatibility of a prescribed Roos square",
+ "statement": "Let C and D be small sites with commutative sheaves of rings R and S, and let A=Mod(R), B=Mod(S) be their abelian module-sheaf categories, with exact countable products. Use unbounded derived categories of A, B, and their strict natural-number tower categories, with localization functors QA and QB. Let F:A to B be additive and exact and preserve countable products via the canonical comparison. Write Fc for termwise F on complexes, Ft for termwise F on tower complexes, FD for its derived functor, and TD for its derived functor on strict towers. Let LA and LB be total right derived ordinary inverse limit with units etaA and etaB. For a tower complex X let P_X be its termwise product and s its shift induced by transitions. Fix functors HA and HB whose objects are Cone(1-s)[-1], with signed coordinates H(X)^(p+1)=P_X^(p+1) direct-sum P_X^p, obtained from the canonical shift and cone isomorphisms by (id,-id). Fix natural isomorphisms thetaA:QA LA\\cong HA QA and thetaB:QB LB\\cong HB QB, product isomorphisms psi with canonical projections, and chain isomorphisms kappa whose two signed-coordinate projections are the canonical F-images. Suppose lambda:LA F_D\\cong F_D^Tow LB is a natural isomorphism satisfying the conjugation square for these same thetaA,thetaB,kappa. Then the coordinate-specified Roos triangle maps p (first projection) and delta (minus the second inclusion into the shift), and their counterparts p',delta', satisfy both derived triangle identities: the first map commutes with lambda and psi, and the connecting map commutes with lambda[1], psi, and the canonical F_D shift comparison. For every compatible strict augmentation gamma from a complex Q to a tower X there are chain maps b=(gamma,0) and b'=(F gamma,0), and lambda carries the derived map represented by b and thetaA inverse to that represented by b' and thetaB inverse. All conjugation, shift and localization factors are specified in the Lean statement. Notions: [def-weil-sheaf-of-modules-category], [def-weil-inverse-system], [def-weil-abstract-derived-category], [lem-weil-strict-roos-comparison].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "In the signed shifted-cone coordinates construct p as first projection and delta as minus the second inclusion followed by the canonical shift. These are chain maps: the differential matrix is (dx,(1-s)x-dy). The two diagonal entries of kappa give kappa p' = F(p) psi and the corresponding shifted identity for delta, with F's canonical shift comparison. Apply Q and the commutative-shift identity for the exact-functor localization comparison; substitute the given Roos square and cancel the theta isomorphisms. This gives both derived triangle identities. For a compatible family gamma, the equality (1-s)gamma=0 constructs the chain map b=(gamma,0); construct b' in the same way from F gamma. The coordinate identities give F(b) kappa=b'. Applying Q, the same square, and naturality of the localization comparison proves the augmentation equation. This calculation needs no choice of resolutions or normalization of theta.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement.",
+  "note": "J1: refinement of the cited original steps, with signed normalization and ordinary-limit preservation proved in Lean."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExactProductFunctorStrictLimit",
+  "date": "2026-10-19",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Final paragraph, exact functor and defining derived limits; refinement steps 5 and 9, the two triangle identities and strict augmentations",
+   "via": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactProductFunctorRoosCompatibility",
+  "file": "lean/Sheaf/Paper/ExactProductFunctorRoosCompatibility.lean",
+  "declaration": "CategoryTheory.exactProductFunctorRoosCompatibility",
+  "statement": "theorem exactProductFunctorRoosCompatibility\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (R : Sheaf J RingCat.{max uC vC r})\n    {D : Type uD} [Category.{vD} D] (K : GrothendieckTopology D)\n    [HasSheafify K AddCommGrpCat.{max uD vD s}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max uD vD s}]\n    (S : Sheaf K RingCat.{max uD vD s})\n    (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)\n    (_hS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uD vD s} S)]\n    [HasDerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{wB} (ringedSiteModules.{max uD vD s} S)]\n    [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S)]\n    (F : ringedSiteModules.{max uC vC r} R ⥤ ringedSiteModules.{max uD vD s} S)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (_hphi : ∀ (M : ℕ → ringedSiteModules.{max uC vC r} R), IsIso (piComparison F M))\n    (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤ DerivedCategory.{wA}\n      (ringedSiteModules.{max uC vC r} R))\n    (LB : DerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ⥤ DerivedCategory.{wB}\n      (ringedSiteModules.{max uD vD s} S))\n    (etaA : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙\n      (lim : (ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ) ⥤ CochainComplex\n        (ringedSiteModules.{max uC vC r} R) ℤ) ⋙ DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙\n        LA)\n    (_hLA : LA.IsRightDerivedFunctor etaA\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) (ComplexShape.up ℤ)))\n    (etaB : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙\n      (lim : (ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max uD vD s} S) ℤ) ⥤ CochainComplex\n        (ringedSiteModules.{max uD vD s} S) ℤ) ⋙ DerivedCategory.Q.{wB} ⟶ DerivedCategory.Q.{wB} ⋙\n        LB)\n    (_hLB : LB.IsRightDerivedFunctor etaB\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) (ComplexShape.up ℤ)))\n    (HA : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ ⥤ CochainComplex\n      (ringedSiteModules.{max uC vC r} R) ℤ) (HB : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD\n      vD s} S) ℤ ⥤ CochainComplex (ringedSiteModules.{max uD vD s} S) ℤ)\n      (hAobj : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ, HA.obj X =\n        (CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦ (X).asFunctor.obj\n        (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op)))⟦(-1 : ℤ)⟧)\n      (hBobj : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ, HB.obj X =\n        (CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦ (X).asFunctor.obj\n        (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op)))⟦(-1 : ℤ)⟧)\n      (chiA : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (HA.obj\n        X).X (p + 1) ≅ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))).X (p + 1) ⊞ (∏ᶜ (fun n : ℕ ↦\n        (X).asFunctor.obj (op n))).X p)\n      (chiB : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ) (p : ℤ), (HB.obj\n        X).X (p + 1) ≅ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))).X (p + 1) ⊞ (∏ᶜ (fun n : ℕ ↦\n        (X).asFunctor.obj (op n))).X p)\n      (thetaA : DerivedCategory.Q.{wA} ⋙ LA ≅ HA ⋙ DerivedCategory.Q.{wA})\n      (thetaB : DerivedCategory.Q.{wB} ⋙ LB ≅ HB ⋙ DerivedCategory.Q.{wB})\n      (psi : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op\n        n))) ≅ (∏ᶜ (fun n : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj X).asFunctor.obj (op n))))\n      (kappa : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (HA.obj X) ≅ HB.obj\n        ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        X))\n      (lambda : LA ⋙ F.mapDerivedCategory ≅ (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _\n        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F) inferInstance (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun\n        _ _ _ ↦ inferInstance⟩)) ⋙ LB)\n    (hcoord :\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (chiA X p).hom =\n        (eqToIso (congrArg (fun V : CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ ↦ V.X (p +\n          1)) (hAobj X))).hom ≫\n        ((CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦\n          (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ\n          n)).op))).shiftFunctorObjXIso (-1) (p + 1) p (add_neg_cancel_right p 1).symm).hom ≫\n        (HomologicalComplex.homotopyCofiber.XIsoBiprod (towerTransitionEndomorphism (K := fun n : ℕ\n          ↦ (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op))\n          p (p + 1) rfl).hom ≫\n        biprod.map (𝟙 _) (-𝟙 _)) ∧\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ) (p : ℤ), (chiB X p).hom =\n        (eqToIso (congrArg (fun V : CochainComplex (ringedSiteModules.{max uD vD s} S) ℤ ↦ V.X (p +\n          1)) (hBobj X))).hom ≫\n        ((CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦\n          (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ\n          n)).op))).shiftFunctorObjXIso (-1) (p + 1) p (add_neg_cancel_right p 1).symm).hom ≫\n        (HomologicalComplex.homotopyCofiber.XIsoBiprod (towerTransitionEndomorphism (K := fun n : ℕ\n          ↦ (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op))\n          p (p + 1) rfl).hom ≫\n        biprod.map (𝟙 _) (-𝟙 _)))\n    (hpsi :\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (n : ℕ), (psi X).hom ≫\n        Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n =\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k))\n          n)))\n    (hkappa :\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ) (n : ℕ),\n        (kappa X).hom.f (p + 1) ≫ (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n          F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) p).hom ≫ biprod.fst ≫\n            (Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n).f (p + 1) =\n          F.map ((chiA X p).hom ≫ biprod.fst ≫\n            (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (p + 1)) ∧\n        (kappa X).hom.f (p + 1) ≫ (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n          F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) p).hom ≫ biprod.snd ≫\n            (Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n).f p =\n          F.map ((chiA X p).hom ≫ biprod.snd ≫\n            (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f p)))\n    (hsquare :\n      (∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        (F.mapDerivedCategory).map (thetaA.hom.app X) ≫ F.mapDerivedCategoryFactors.hom.app (HA.obj\n          X) ≫\n            DerivedCategory.Q.{wB}.map (kappa X).hom =\n          lambda.hom.app (DerivedCategory.Q.{wA}.obj X) ≫\n            LB.map ((@Functor.mapDerivedCategoryFactors _ _ _ _ _ _ _ _ ((Functor.whiskeringRight\n              ℕᵒᵖ _ _).obj F) inferInstance (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦\n              inferInstance⟩)).hom.app X) ≫\n            thetaB.hom.app ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj X))) :\n      (∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        ∃ (p : HA.obj X ⟶ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n)))) (p' : HB.obj\n          ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n          X) ⟶ (∏ᶜ (fun n : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj X).asFunctor.obj (op n))))\n          (delta : (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))) ⟶ (HA.obj X)⟦(1 : ℤ)⟧)\n          (delta' : (∏ᶜ (fun n : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n            F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X).asFunctor.obj (op n))) ⟶ (HB.obj\n            ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up\n            ℤ)).obj X))⟦(1 : ℤ)⟧),\n          (∀ i : ℤ, p.f (i + 1) = (chiA X i).hom ≫ biprod.fst) ∧\n          (∀ i : ℤ, p'.f (i + 1) = (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n            F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) i).hom ≫ biprod.fst) ∧\n          (∀ i : ℤ, delta.f i ≫ ((HA.obj X).shiftFunctorObjXIso 1 i (i + 1) rfl).hom ≫\n            (chiA X i).hom = -biprod.inr) ∧\n          (∀ i : ℤ, delta'.f i ≫ ((HB.obj ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n            F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X)).shiftFunctorObjXIso 1 i (i + 1)\n            rfl).hom ≫\n            (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up\n              ℤ)).obj X) i).hom = -biprod.inr) ∧\n          lambda.hom.app (DerivedCategory.Q.{wA}.obj X) ≫\n              LB.map ((@Functor.mapDerivedCategoryFactors _ _ _ _ _ _ _ _ ((Functor.whiskeringRight\n                ℕᵒᵖ _ _).obj F) inferInstance (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦\n                inferInstance⟩)).hom.app X) ≫\n              thetaB.hom.app ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n                (ComplexShape.up ℤ)).obj X) ≫ DerivedCategory.Q.{wB}.map p' =\n            (F.mapDerivedCategory).map (thetaA.hom.app X ≫ DerivedCategory.Q.{wA}.map p) ≫\n              F.mapDerivedCategoryFactors.hom.app (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))) ≫\n                DerivedCategory.Q.{wB}.map (psi X).hom ∧\n          (F.mapDerivedCategory).map (DerivedCategory.Q.{wA}.map delta ≫\n            (DerivedCategory.Q.{wA}.commShiftIso (1 : ℤ)).hom.app (HA.obj X) ≫\n              (thetaA.inv.app X)⟦(1 : ℤ)⟧') ≫\n              (F.mapDerivedCategory.commShiftIso (1 : ℤ)).hom.app (LA.obj\n                (DerivedCategory.Q.{wA}.obj X)) ≫\n              (lambda.hom.app (DerivedCategory.Q.{wA}.obj X))⟦(1 : ℤ)⟧' ≫\n              (LB.map ((@Functor.mapDerivedCategoryFactors _ _ _ _ _ _ _ _ ((Functor.whiskeringRight\n                ℕᵒᵖ _ _).obj F) inferInstance (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦\n                inferInstance⟩)).hom.app X))⟦(1 : ℤ)⟧' =\n            F.mapDerivedCategoryFactors.hom.app (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))) ≫\n              DerivedCategory.Q.{wB}.map (psi X).hom ≫\n              DerivedCategory.Q.{wB}.map delta' ≫ (DerivedCategory.Q.{wB}.commShiftIso (1 :\n                ℤ)).hom.app (HB.obj ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n                F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X)) ≫\n              (thetaB.inv.app ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n                (ComplexShape.up ℤ)).obj X))⟦(1 : ℤ)⟧') ∧\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (Q : CochainComplex\n        (ringedSiteModules.{max uC vC r} R) ℤ) (gamma : ∀ n : ℕ, Q ⟶ X.asFunctor.obj (op n))\n        (_hgamma : ∀ n : ℕ, gamma (n + 1) ≫ X.asFunctor.map (homOfLE (Nat.le_succ n)).op = gamma n),\n        ∃ (b : Q ⟶ HA.obj X) (b' : (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj Q ⟶ HB.obj\n          ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n          X)),\n          (∀ i : ℤ, b.f (i + 1) ≫ (chiA X i).hom = biprod.lift ((Pi.lift gamma).f (i + 1)) 0) ∧\n          (∀ i : ℤ, b'.f (i + 1) ≫ (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n            F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) i).hom =\n            biprod.lift ((Pi.lift (fun n : ℕ ↦ (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n              (gamma n))).f (i + 1)) 0) ∧\n          (F.mapDerivedCategory).map (DerivedCategory.Q.{wA}.map b ≫ thetaA.inv.app X) ≫\n              lambda.hom.app (DerivedCategory.Q.{wA}.obj X) ≫\n              LB.map ((@Functor.mapDerivedCategoryFactors _ _ _ _ _ _ _ _ ((Functor.whiskeringRight\n                ℕᵒᵖ _ _).obj F) inferInstance (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦\n                inferInstance⟩)).hom.app X) =\n            F.mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.{wB}.map b' ≫ thetaB.inv.app\n              ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up\n              ℤ)).obj X))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves mapping cones of cochain complexes",
+   "results": "8 hits including CochainComplex.mappingCone.mapHomologicalComplexIso, map_δ and map_inr.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "12 hits including PreservesProduct.of_iso_comparison.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*[Ii]so|preserves.*countable",
+   "results": "MappingCone mapHomologicalComplexIso and countable limit infrastructure; no complete match.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor preserving countable products commutes with the Roos mapping fiber of a strict tower",
+   "results": "8 hits: preservesFiniteProductsOfAdditive, leftExactFunctor_le_additiveFunctor, exactFunctor, exactFunctor_le_additiveFunctor, rightExactFunctor_le_additiveFunctor, mapExtAddHom, exact_tfae, preservesFiniteBiproductsOfAdditive. Exactness and finite biproduct infrastructure only.",
+   "date": "2026-10-19",
+   "verdict": "No complete match located by the combined searches."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T112451-L-3942830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T112451-L-3942830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

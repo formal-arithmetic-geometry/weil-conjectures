@@ -10,10 +10,12 @@ public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+
+import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
+import Mathlib.Logic.Denumerable
+import Sheaf.Paper.ExactProductFunctorRoosChainMaps
+import Sheaf.Paper.ExactProductFunctorRoosDescent
+import Sheaf.Paper.ExactProductFunctorRoosCompatibility
 
 /-!
 # Canonical strict derived-limit comparison for exact product-preserving functors
@@ -32,6 +34,8 @@ shifted-cone coordinates `(u,v)`, giving `d(x,y)=(dx,(1-s)x-dy)`.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 
 universe uC vC r uD vD s wA wB
 
@@ -39,6 +43,157 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
+section
+variable {A : Type*} {B : Type*} [Category* A] [Category* B]
+  [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]
+
+omit [Abelian A] [Abelian B] in
+private theorem natProducts (F : A ⥤ B) (h : ∀ M : ℕ → A, IsIso (piComparison F M)) :
+    PreservesLimitsOfShape (Discrete ℕ) F where
+  preservesLimit {K} := by
+    have := h (fun n ↦ K.obj ⟨n⟩)
+    have : PreservesLimit (Discrete.functor (K.obj ∘ Discrete.mk)) F :=
+      PreservesProduct.of_iso_comparison F (K.obj ∘ Discrete.mk)
+    exact preservesLimit_of_iso_diagram F Discrete.natIsoFunctor.symm
+
+omit [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B] in
+private theorem infiniteProducts (F : A ⥤ B) [PreservesLimitsOfShape (Discrete ℕ) F]
+    (T : Type) [Countable T] [Infinite T] : PreservesLimitsOfShape (Discrete T) F := by
+  let := Classical.choice (nonempty_denumerable T)
+  exact preservesLimitsOfShape_of_equiv (Discrete.equivalence (Denumerable.eqv T).symm) F
+
+omit [Abelian B] [HasCountableProducts B] in
+private theorem natProducts_preservesTowers (F : A ⥤ B) [PreservesFiniteLimits F]
+    [PreservesLimitsOfShape (Discrete ℕ) F] : PreservesLimitsOfShape ℕᵒᵖ F := by
+  let T := Σ p : ℕᵒᵖ × ℕᵒᵖ, p.1 ⟶ p.2
+  have : Infinite T := Infinite.of_injective
+    (fun n : ℕ ↦ (⟨(op n, op n), 𝟙 _⟩ : T)) (by
+      intro i j h
+      exact congrArg (fun t : T ↦ t.1.1.unop) h)
+  have : Infinite ℕᵒᵖ := Infinite.of_injective op op_injective
+  have : PreservesLimitsOfShape (Discrete ℕᵒᵖ) F := infiniteProducts F _
+  have : PreservesLimitsOfShape (Discrete T) F := infiniteProducts F _
+  exact preservesLimit_of_preservesEqualizers_and_product F
+
+end
+
+private theorem normalizedIso_identity {A : Type*} [Category* A]
+    {X Y Z : A} (e : X ≅ Y) (t : Z ≅ Y) (f : X ⟶ Z)
+    (h : t.inv = e.inv ≫ f) : f ≫ t.hom = e.hom := by
+  apply (cancel_mono t.inv).mp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [h, Iso.hom_inv_id_assoc]
+
+private theorem signedSwap_naturality {A : Type*} [Category* A] [Preadditive A]
+    [HasBinaryBiproducts A] {X Y X' Y' V V' : A}
+    (a : X ⟶ X') (b : Y ⟶ Y') (v : V ⟶ V')
+    (c : V ⟶ X ⊞ Y) (c' : V' ⟶ X' ⊞ Y')
+    (h : v ≫ c' = c ≫ biprod.map a b) :
+    v ≫ c' ≫ (biprod.braiding _ _).hom ≫ biprod.map (𝟙 _) (-𝟙 _) =
+      c ≫ (biprod.braiding _ _).hom ≫ biprod.map (𝟙 _) (-𝟙 _) ≫ biprod.map b a := by
+  rw [← Category.assoc, h]
+  simp only [Category.assoc]
+  congr 1
+  apply biprod.hom_ext <;> simp [Category.assoc]
+
+private theorem signedSwap_lift {A : Type*} [Category* A] [Preadditive A]
+    [HasBinaryBiproducts A] {X Y V : A} (f : V ⟶ Y) :
+    biprod.lift (0 : V ⟶ X) f ≫ (biprod.braiding _ _).hom ≫
+      biprod.map (𝟙 _) (-𝟙 _) = biprod.lift f 0 := by
+  apply biprod.hom_ext <;> simp [Category.assoc]
+
+set_option maxHeartbeats 800000 in
+-- The interface contains several universe-polymorphic product and cone choices.
+private theorem signedRoosComparison
+    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{max uC vC r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]
+    (R : Sheaf J RingCat.{max uC vC r})
+    (hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)
+    [HasDerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)]
+    [HasDerivedCategory.{wA}
+      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)]
+    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)]
+    (LA : DerivedCategory.{wA}
+      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ⥤
+        DerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R))
+    (etaA : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
+      (lim : (ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ) ⥤ CochainComplex
+        (ringedSiteModules.{max uC vC r} R) ℤ) ⋙
+        DerivedCategory.Q.{wA} ⟶ DerivedCategory.Q.{wA} ⋙ LA)
+    (_hLA : LA.IsRightDerivedFunctor etaA
+      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) (ComplexShape.up ℤ))) :
+    ∃ (HA : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ ⥤ CochainComplex
+      (ringedSiteModules.{max uC vC r} R) ℤ)
+      (hAobj : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ, HA.obj X =
+        (CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦ (X).asFunctor.obj
+        (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op)))⟦(-1 : ℤ)⟧)
+      (chiA : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (HA.obj
+        X).X (p + 1) ≅ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))).X (p + 1) ⊞ (∏ᶜ (fun n : ℕ ↦
+        (X).asFunctor.obj (op n))).X p)
+      (thetaA : DerivedCategory.Q.{wA} ⋙ LA ≅ HA ⋙ DerivedCategory.Q.{wA})
+      ,
+      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (chiA X p).hom =
+        (eqToIso (congrArg (fun V : CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ ↦ V.X (p +
+          1)) (hAobj X))).hom ≫
+        ((CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦
+          (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ
+          n)).op))).shiftFunctorObjXIso (-1) (p + 1) p (add_neg_cancel_right p 1).symm).hom ≫
+        (HomologicalComplex.homotopyCofiber.XIsoBiprod (towerTransitionEndomorphism (K := fun n : ℕ
+          ↦ (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op))
+          p (p + 1) rfl).hom ≫
+        biprod.map (𝟙 _) (-𝟙 _)) ∧
+      (∀ {X Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ} (f : X ⟶ Y) (p : ℤ),
+        (HA.map f).f (p + 1) ≫ (chiA Y p).hom = (chiA X p).hom ≫
+        biprod.map
+          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+            f).app (op n))).f (p + 1))
+          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+            f).app (op n))).f p)) ∧
+      (∀ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) [I.IsKInjective] (_hIinj :
+        ∀ p : ℤ, Injective (I.X p)),
+        ∃ iota : limit I.asFunctor ⟶ HA.obj I,
+          QuasiIso iota ∧
+          (∀ p : ℤ, iota.f (p + 1) ≫ (chiA I p).hom =
+            biprod.lift ((Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))).f (p + 1)) 0) ∧
+          etaA.app I ≫ thetaA.hom.app I = DerivedCategory.Q.{wA}.map iota) := by
+  obtain ⟨HA, hAobj, chiA0, CA, eA, rhoA, aA, evA, hAc, hAm, _, _, _, hAn⟩ :=
+    strictRoosComparison.{uC, vC, r, wA} J R hcomm LA etaA _hLA
+  let thetaA : DerivedCategory.Q.{wA} ⋙ LA ≅ HA ⋙ DerivedCategory.Q.{wA} :=
+    (eA ≪≫ Functor.isoWhiskerLeft _ rhoA).symm
+  let chiA := fun X p ↦ chiA0 X p ≪≫ biprod.braiding _ _ ≪≫
+    (biprod.mapIso (Iso.refl _) {
+      hom := -𝟙 _
+      inv := -𝟙 _
+      hom_inv_id := by simp
+      inv_hom_id := by simp })
+  refine ⟨HA, hAobj, chiA, thetaA, ?_, ?_, ?_⟩
+  · intro X p
+    dsimp only [chiA, Iso.trans_hom, biprod.mapIso_hom, Iso.refl_hom]
+    rw [hAc]
+    simp
+  · intro X Y f p
+    dsimp only [chiA, Iso.trans_hom, biprod.mapIso_hom, Iso.refl_hom]
+    convert! signedSwap_naturality _ _ _ _ _ (hAm f p) using 1
+  · intro I _ hIinj
+    obtain ⟨iota, eps, dI, hiota, _, hqi, heps, hdI, hf, _⟩ :=
+      hAn I I (𝟙 I) hIinj
+    refine ⟨iota, hqi, ?_, ?_⟩
+    · intro p
+      dsimp only [chiA, Iso.trans_hom, biprod.mapIso_hom, Iso.refl_hom]
+      rw [← Category.assoc, ← Category.assoc, hiota]
+      simpa only [biprod.mapIso_hom, Iso.refl_hom, Category.assoc] using
+        signedSwap_lift ((Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))).f (p + 1))
+    · have hdI' : dI.hom = etaA.app I := by simpa using hdI
+      have hf' : thetaA.inv.app I = eps.inv ≫ etaA.app I := by
+        simpa [thetaA, hdI'] using hf
+      calc
+        etaA.app I ≫ thetaA.hom.app I = eps.hom :=
+          normalizedIso_identity eps (thetaA.app I) (etaA.app I) hf'
+        _ = DerivedCategory.Q.map iota := heps
+
+set_option maxHeartbeats 800000 in
+-- The interface combines two cone comparisons and their derived normalizations.
 /-- The canonical comparison for exact additive countable-product-preserving module functors.
 
 Source: the final paragraph of the blueprint proof of
@@ -327,6 +482,35 @@ theorem exactProductFunctorStrictLimit
             F.mapDerivedCategoryFactors.hom.app Q ≫ DerivedCategory.Q.{wB}.map b' ≫ thetaB.inv.app
               ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up
               ℤ)).obj X)) := by
-  sorry
+  obtain ⟨HA, hAobj, chiA, thetaA, hAc, hAm, hAn⟩ :=
+    signedRoosComparison.{uC, vC, r, wA} J R _hR LA etaA _hLA
+  obtain ⟨HB, hBobj, chiB, thetaB, hBc, hBm, hBn⟩ :=
+    signedRoosComparison.{uD, vD, s, wB} K S _hS LB etaB _hLB
+  obtain ⟨psi, kappa, hpsi, hkappa, hknat⟩ :=
+    exactProductFunctorRoosChainMaps.{uC, vC, r, uD, vD, s, wA, wB} J R K S _hR _hS F _hphi
+      HA HB hAobj hBobj chiA chiB ⟨hAc, hBc⟩ ⟨hAm, hBm⟩
+  have : PreservesLimitsOfShape (Discrete ℕ) F := natProducts F _hphi
+  have : PreservesLimitsOfShape ℕᵒᵖ F := natProducts_preservesTowers F
+  let Fc := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let beta := fun I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ ↦
+    preservesLimitIso Fc I.asFunctor
+  have hbeta :
+      (∀ (I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (n : ℕ), (beta I).hom ≫
+        limit.π ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up
+        ℤ)).obj I).asFunctor (op n) =
+        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (limit.π I.asFunctor (op n))) := by
+    intro I n
+    exact preservesLimitIso_hom_π Fc I.asFunctor (op n)
+  obtain ⟨lambda, hsquare, hres⟩ :=
+    exactProductFunctorRoosDescent.{uC, vC, r, uD, vD, s, wA, wB} J R K S _hR _hS F _hphi
+      LA LB etaA _hLA etaB _hLB HA HB hAobj hBobj chiA chiB thetaA thetaB
+      psi kappa beta ⟨hAc, hBc⟩ ⟨hAm, hBm⟩ ⟨hAn, hBn⟩ hkappa hknat hbeta
+  obtain ⟨htri, haug⟩ :=
+    exactProductFunctorRoosCompatibility.{uC, vC, r, uD, vD, s, wA, wB} J R K S _hR _hS F _hphi
+      LA LB etaA _hLA etaB _hLB HA HB hAobj hBobj chiA chiB thetaA thetaB
+      psi kappa lambda ⟨hAc, hBc⟩ hpsi hkappa hsquare
+  exact ⟨HA, HB, hAobj, hBobj, chiA, chiB, thetaA, thetaB, psi, kappa, beta,
+    lambda, hAc, hBc, hAm, hBm, hAn, hBn, hpsi, hkappa, hsquare, hbeta, hres,
+    htri, haug⟩
 
 end CategoryTheory

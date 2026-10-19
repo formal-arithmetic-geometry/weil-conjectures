@@ -1,0 +1,112 @@
+{
+ "id": "lem-cbc-exact-product-functor-roos-chain-maps",
+ "kind": "statement",
+ "title": "Strict chain-level Roos comparison for an exact product-preserving functor",
+ "statement": "Let C,D be small sites with commutative sheaves of rings R,S and module categories A,B, with exact countable products. Let F:A\\to B be exact and additive with invertible canonical countable-product comparisons. Fix functors HA from complexes of strict A-towers to complexes of A and HB similarly for B. Assume their objects are Cone(1-s)[-1], with exactly the signed coordinates H(X)^(p+1)=P_X^(p+1)\\oplus P_X^p specified by the shift/cone isomorphisms followed by (id,-id), and assume their maps are the diagonal product maps in those coordinates. Then there are isomorphisms psi_X:F(P_X)\\cong P_FX and kappa_X:F(HA(X))\\cong HB(FX). The projections of psi_X are F(pr_n). Each of the two signed-coordinate projections of kappa_X, followed by pr_n, is F of the corresponding projection of HA(X). For every strict tower chain map f:X\\to Y, F(HA(f)) kappa_Y=kappa_X HB(F(f)). Notions: [def-weil-sheaf-of-modules-category], [def-weil-inverse-system], [def-weil-abstract-derived-category], [lem-weil-strict-roos-comparison].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical product comparison degreewise. Its projection identities imply that it commutes with differentials and with the tower shift, hence with 1-s. The cone comparison for an additive functor, followed by this commuting square, and the shift comparison give kappa. Transport by the two object equalities. In the signed coordinates its two components are the product comparison, which proves the displayed equations. Apply product projections to the two components for a strict tower map to obtain naturality. The inverse uses the inverse product comparison on both coordinates, so kappa is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final proof paragraph applying lem-cbc-exact-functor-rlim to defining derived limits; extracted canonical comparison and augmentation argument of returned Step 5. Supporting source: Stacks Tag 0940, sites-cohomology.tex section-derived-limits, especially lemma-derived-limit-is-ok; functorial comparison is an agent-written refinement.",
+  "note": "J1: refinement of the cited original steps, with signed normalization and ordinary-limit preservation proved in Lean."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExactProductFunctorStrictLimit",
+  "date": "2026-10-19",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Final paragraph, exact functor and defining derived limits; refinement steps 1 and 3, product projections and diagonal strict cone map",
+   "via": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactProductFunctorRoosChainMaps",
+  "file": "lean/Sheaf/Paper/ExactProductFunctorRoosChainMaps.lean",
+  "declaration": "CategoryTheory.exactProductFunctorRoosChainMaps",
+  "statement": "theorem exactProductFunctorRoosChainMaps\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (R : Sheaf J RingCat.{max uC vC r})\n    {D : Type uD} [Category.{vD} D] (K : GrothendieckTopology D)\n    [HasSheafify K AddCommGrpCat.{max uD vD s}]\n    [K.WEqualsLocallyBijective AddCommGrpCat.{max uD vD s}]\n    (S : Sheaf K RingCat.{max uD vD s})\n    (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a)\n    (_hS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a)\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)]\n    [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uD vD s} S)]\n    [HasDerivedCategory.{wA} (ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R)]\n    [HasDerivedCategory.{wB} (ringedSiteModules.{max uD vD s} S)]\n    [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S)]\n    (F : ringedSiteModules.{max uC vC r} R ⥤ ringedSiteModules.{max uD vD s} S)\n    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (_hphi : ∀ (M : ℕ → ringedSiteModules.{max uC vC r} R), IsIso (piComparison F M))\n    (HA : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ ⥤ CochainComplex\n      (ringedSiteModules.{max uC vC r} R) ℤ) (HB : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD\n      vD s} S) ℤ ⥤ CochainComplex (ringedSiteModules.{max uD vD s} S) ℤ)\n      (hAobj : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ, HA.obj X =\n        (CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦ (X).asFunctor.obj\n        (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op)))⟦(-1 : ℤ)⟧)\n      (hBobj : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ, HB.obj X =\n        (CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦ (X).asFunctor.obj\n        (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op)))⟦(-1 : ℤ)⟧)\n      (chiA : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (HA.obj\n        X).X (p + 1) ≅ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))).X (p + 1) ⊞ (∏ᶜ (fun n : ℕ ↦\n        (X).asFunctor.obj (op n))).X p)\n      (chiB : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ) (p : ℤ), (HB.obj\n        X).X (p + 1) ≅ (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op n))).X (p + 1) ⊞ (∏ᶜ (fun n : ℕ ↦\n        (X).asFunctor.obj (op n))).X p)\n    (hcoord :\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ), (chiA X p).hom =\n        (eqToIso (congrArg (fun V : CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ ↦ V.X (p +\n          1)) (hAobj X))).hom ≫\n        ((CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦\n          (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ\n          n)).op))).shiftFunctorObjXIso (-1) (p + 1) p (add_neg_cancel_right p 1).symm).hom ≫\n        (HomologicalComplex.homotopyCofiber.XIsoBiprod (towerTransitionEndomorphism (K := fun n : ℕ\n          ↦ (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op))\n          p (p + 1) rfl).hom ≫\n        biprod.map (𝟙 _) (-𝟙 _)) ∧\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ) (p : ℤ), (chiB X p).hom =\n        (eqToIso (congrArg (fun V : CochainComplex (ringedSiteModules.{max uD vD s} S) ℤ ↦ V.X (p +\n          1)) (hBobj X))).hom ≫\n        ((CochainComplex.mappingCone (towerTransitionEndomorphism (K := fun n : ℕ ↦\n          (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ\n          n)).op))).shiftFunctorObjXIso (-1) (p + 1) p (add_neg_cancel_right p 1).symm).hom ≫\n        (HomologicalComplex.homotopyCofiber.XIsoBiprod (towerTransitionEndomorphism (K := fun n : ℕ\n          ↦ (X).asFunctor.obj (op n)) (fun n : ℕ ↦ (X).asFunctor.map (homOfLE (Nat.le_succ n)).op))\n          p (p + 1) rfl).hom ≫\n        biprod.map (𝟙 _) (-𝟙 _)))\n    (hmaps :\n      (∀ {X Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ} (f : X ⟶ Y) (p : ℤ),\n        (HA.map f).f (p + 1) ≫ (chiA Y p).hom = (chiA X p).hom ≫\n        biprod.map\n          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            f).app (op n))).f (p + 1))\n          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            f).app (op n))).f p)) ∧\n      (∀ {X Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uD vD s} S) ℤ} (f : X ⟶ Y) (p : ℤ),\n        (HB.map f).f (p + 1) ≫ (chiB Y p).hom = (chiB X p).hom ≫\n        biprod.map\n          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            f).app (op n))).f (p + 1))\n          ((Limits.Pi.map (fun n : ℕ ↦ (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n            f).app (op n))).f p))) :\n    ∃ (psi : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (∏ᶜ (fun n : ℕ ↦ (X).asFunctor.obj (op\n        n))) ≅ (∏ᶜ (fun n : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj X).asFunctor.obj (op n))))\n      (kappa : ∀ X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (HA.obj X) ≅ HB.obj\n        ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        X)),\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (n : ℕ), (psi X).hom ≫\n        Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n =\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k))\n          n)) ∧\n      (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (p : ℤ) (n : ℕ),\n        (kappa X).hom.f (p + 1) ≫ (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n          F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) p).hom ≫ biprod.fst ≫\n            (Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n).f (p + 1) =\n          F.map ((chiA X p).hom ≫ biprod.fst ≫\n            (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f (p + 1)) ∧\n        (kappa X).hom.f (p + 1) ≫ (chiB ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj\n          F).mapHomologicalComplex (ComplexShape.up ℤ)).obj X) p).hom ≫ biprod.snd ≫\n            (Pi.π (fun k : ℕ ↦ ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).obj X).asFunctor.obj (op k)) n).f p =\n          F.map ((chiA X p).hom ≫ biprod.snd ≫\n            (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f p)) ∧\n      (∀ {X Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ}\n        (f : X ⟶ Y),\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (HA.map f) ≫ (kappa Y).hom =\n          (kappa X).hom ≫ HB.map\n            ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapHomologicalComplex\n              (ComplexShape.up ℤ)).map f))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserves mapping cones of cochain complexes",
+   "results": "8 hits including CochainComplex.mappingCone.mapHomologicalComplexIso, map_δ and map_inr.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "results": "12 hits including PreservesProduct.of_iso_comparison.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*[Ii]so|preserves.*countable",
+   "results": "MappingCone mapHomologicalComplexIso and countable limit infrastructure; no complete match.",
+   "date": "2026-10-19",
+   "verdict": "Infrastructure only; no match for this full specified comparison step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive functor preserving countable products commutes with the Roos mapping fiber of a strict tower",
+   "results": "8 hits: preservesFiniteProductsOfAdditive, leftExactFunctor_le_additiveFunctor, exactFunctor, exactFunctor_le_additiveFunctor, rightExactFunctor_le_additiveFunctor, mapExtAddHom, exact_tfae, preservesFiniteBiproductsOfAdditive. Exactness and finite biproduct infrastructure only.",
+   "date": "2026-10-19",
+   "verdict": "No complete match located by the combined searches."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T112451-L-3942830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261019T112451-L-3942830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
