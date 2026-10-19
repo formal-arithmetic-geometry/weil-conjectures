@@ -8,12 +8,6 @@ module
 public import Sheaf.Paper.PuritySectionInvariantIntrinsic
 public import Sheaf.Paper.PurityDncFamily
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
-import Sheaf.AlgebraicGeometry.DncAffineBlowupComplement
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Sheaf.AlgebraicGeometry.EtaleReesChart
-import Sheaf.Paper.PurityFiniteSetting
-import WeilConjectures.Blowup.Gluing
-import WeilConjectures.Compactification.StrictTransform
 
 /-! # The deformation family and its finite section invariant
 
@@ -60,7 +54,10 @@ theorem purityDncIntrinsicSection_over (P : PurityFiniteSetting.{u}) {V B : Sche
     (hs : s ≫ g = 𝟙 B) :
     s.deformationSpaceSection ≫ (purityDncIntrinsicSource P g aB s).hom =
       (purityDncIntrinsicBase P aB).hom := by
-  sorry
+  change s.deformationSpaceSection ≫
+      (Scheme.Hom.deformationSpaceProj g s ≫ (purityDncIntrinsicBase P aB).hom) = _
+  rw [← Category.assoc, Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs,
+    Category.id_comp]
 
 /-- The actual Rees augmentation section, with its k-structure.
 Source: blueprint deformation family (blueprint: def-pur-dnc-section-family). -/
@@ -77,7 +74,8 @@ theorem purityDncIntrinsicSection_comp_map (P : PurityFiniteSetting.{u}) {V B : 
     (g : V ⟶ B) (aB : B ⟶ Spec (.of P.field.k)) (s : B ⟶ V)
     (hs : s ≫ g = 𝟙 B) :
     purityDncIntrinsicSection P g aB s hs ≫ purityDncIntrinsicMap P g aB s = 𝟙 _ := by
-  sorry
+  apply Over.OverMorphism.ext
+  exact Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs
 
 /-- All required domains and geometric properties of the DNC of a smooth section.
 Source: blueprint sk-lem-geometry and the finite-type domain check in sk-thm-dnc
@@ -99,7 +97,7 @@ theorem purityDncIntrinsicDomain (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}
     QuasiCompact (purityDncIntrinsicSource P g aB s).hom ∧
     Smooth (purityDncIntrinsicMap P g aB s).left ∧
     IsClosedImmersion (purityDncIntrinsicSection P g aB s hs).left := by
-  sorry
+  exact purityDncDomain P g aB s hs
 
 /-- The finite family F = Ls~* Rg~! A. The total space, projection and section
 are the actual extended-Rees construction, equivalently the specified blowup open.
@@ -143,6 +141,15 @@ theorem purityDncIntrinsicFamily_pic (P : PurityFiniteSetting.{u}) {V B : Scheme
         Nonempty ((P.intrinsicCoefficientTensor (purityDncIntrinsicBase P aB).left).obj
           (Q, purityDncIntrinsicFamily P g aB s hs) ≅
             P.intrinsicCoefficientUnit (purityDncIntrinsicBase P aB).left) := by
-  sorry
+  have hdomain := purityDncIntrinsicDomain P g aB s hs
+  let := hdomain.1
+  let := hdomain.2.1
+  let : HasCompactification (Scheme.Hom.deformationSpaceProj g s) :=
+    purityDncCompactifiable P g aB s hs
+  let : Smooth (Scheme.Hom.deformationSpaceProj g s) := hdomain.2.2.2.2.1
+  let : IsClosedImmersion s.deformationSpaceSection := hdomain.2.2.2.2.2
+  exact P.sectionInvariantIntrinsic_invertible (Scheme.Hom.deformationSpaceProj g s)
+    (purityDncIntrinsicBase P aB).hom s.deformationSpaceSection
+    (Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs)
 
 end WeilConjectures
