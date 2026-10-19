@@ -17043,3 +17043,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: returned deliver/Q147/lem-per-algebraic-dualizing-localization (reviewer RETURN: Error F: the item has been dropped from the route. The mechanical finding is upheld and goes further. In the side coord/)
 - 03:59 L: returned deliver/Q150/lem-per-algebraic-dualizing-polynomial (reviewer RETURN: Mechanical finding confirmed, and no step of the delivery justifies it. The stmt_dep def-per-algebraic-normalized-dualiz)
 - 03:59 L: returned deliver/Q47/lem-per-close-model-local-invariants (reviewer RETURN: Route pivot of 2026-10-19 (coord/repair-notes/lem-per-artin-gabber-affine-curve.json: no Gabber uniformization machinery)
+- 03:59 L: returned deliver/Q15/lem-per-derived-completion-pseudocoherent (reviewer RETURN: Route-pivot fault F1 (the error letter for route-pivot drops): the item is itself dropped. The mechanical finding is con)
