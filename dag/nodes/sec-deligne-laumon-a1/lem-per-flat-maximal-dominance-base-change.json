@@ -2,7 +2,7 @@
  "id": "lem-per-flat-maximal-dominance-base-change",
  "kind": "statement",
  "title": "Flat morphisms and flat base change preserve maximal dominance",
- "statement": "Let $f:X\\to Y$ and $h:Y\\prime\\to Y$ be morphisms of schemes [def-pc-scheme], with $h$ flat [def-weil-flat-morphism]. A morphism is called maximally dominant if every generic point of an irreducible component of its source maps to a generic point of an irreducible component of its target [def-weil-irreducible-components]. Then $h$ is maximally dominant. If $f$ is maximally dominant, the projection $X\\times_Y Y\\prime\\to Y\\prime$ [def-pc-fibre-product] is maximally dominant. No finite-type, surjectivity, reducedness or Noetherian hypothesis is imposed.",
+ "statement": "Let $f:X\\to Y$ and $h:Y\\prime\\to Y$ be morphisms of schemes [def-pc-scheme], with $h$ flat [def-weil-flat-morphism]. A morphism is called maximally dominant if every generic point [def-sc-generic-point] of an irreducible component of its source maps to a generic point of an irreducible component of its target [def-weil-irreducible-components]. Then $h$ is maximally dominant. If $f$ is maximally dominant, the projection $X\\times_Y Y\\prime\\to Y\\prime$ [def-pc-fibre-product] is maximally dominant. No finite-type, surjectivity, reducedness or Noetherian hypothesis is imposed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose II Example 1.1.3 and Proposition 1.1.5, printed p.23 (flat morphisms are generalizing and maximal dominance survives flat base change)."
@@ -11,11 +11,91 @@
   "def-pc-scheme",
   "def-weil-flat-morphism",
   "def-weil-irreducible-components",
+  "def-sc-generic-point",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Say that $a$ generalizes $b$ if $b\\in\\overline{\\{a\\}}$. A point $b$ of a scheme is the generic point of a component if and only if it has no proper generalization. Indeed choose a component $C$ containing $b$, using the component-cover statement, and its unique generic point $a$, using scheme sobriety. Then $a$ generalizes $b$, so absence of proper generalizations gives $a=b$. Conversely, if $\\overline{\\{b\\}}$ is a component and $a$ generalizes $b$, the irreducible closed set $\\overline{\\{a\\}}$ contains that component. Maximality forces the closures to coincide and uniqueness of the generic point forces $a=b$.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-sc-generic-point",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS, lemma-scheme-sober; with topology.tex Tag 004W, lemma-irreducible (3),(4); ILO II 1.1.1"
+   }
+  },
+  {
+   "text": "Let $u:A\\to B$ be a flat scheme morphism and $a$ a component-generic point of $A$. If $b_1$ generalizes $u(a)$, then $b_1$ specializes to $u(a)$. The flat generalization-lifting lemma gives a point $a_1$ specializing to $a$ with $u(a_1)=b_1$. Thus $a_1$ generalizes $a$. By step 1, $a_1=a$, and consequently $b_1=u(a)$. The image $u(a)$ has no proper generalization and is component-generic by step 1. Hence every flat morphism is maximally dominant; applying this to $h$ proves the first assertion.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HV, lemma-generalizations-lift-flat; ILO II Example 1.1.3"
+   }
+  },
+  {
+   "text": "Assume now that $f$ is maximally dominant. Put $Z=X\\times_Y Y\\prime$, with projections $p:Z\\to X$ and $q:Z\\to Y\\prime$. Since $p$ is the base change of the flat map $h$, it is flat. For a component-generic point $z\\in Z$, step 2 gives that $x=p(z)$ is component-generic in $X$. The hypothesis on $f$ gives that $y=f(x)=h(q(z))$ is component-generic in $Y$. Write $y\\prime=q(z)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U9, lemma-base-change-flat; ILO II Proposition 1.1.5"
+   }
+  },
+  {
+   "text": "Let $T=Y\\prime_y=Y\\prime\\times_Y\\operatorname{Spec}\\kappa(y)$ and $W=Z_x=Z\\times_X\\operatorname{Spec}\\kappa(x)$. The fibre homeomorphisms give unique points $t\\in T$ over $y\\prime$ and $w\\in W$ over $z$. The local map induced by $f$ gives a field extension $\\kappa(y)\\to\\kappa(x)$. There is a canonical isomorphism $W\\simeq T\\times_{\\operatorname{Spec}\\kappa(y)}\\operatorname{Spec}\\kappa(x)$: a morphism into either side amounts to maps into $Y\\prime$ and $\\operatorname{Spec}\\kappa(x)$ whose composites into $Y$ agree. The maps into $\\operatorname{Spec}\\kappa(y)$ are obtained by composition, and the inverse maps are the unique maps supplied by these fibre-product universal properties. These maps preserve the projections, so $w$ maps to $t$. The map $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}\\kappa(y)$ is flat by field-extension flatness. Thus $W\\to T$ is flat by base change. Since $W\\to Z$ is a homeomorphism onto $p^{-1}(x)$, any generalization of $w$ maps to a generalization of $z$ and hence equals $w$: $z$ has no proper generalization, and this fibre map is injective. Step 1 makes $w$ component-generic in $W$, and step 2 makes $t$ component-generic in $T$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-residue-field",
+    "def-pc-fibre-product",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K0, definition-fibre; Tag 01K1, lemma-fibre-topological; morphisms.tex Tag 01U9, lemma-base-change-flat; ILO II Proposition 1.1.5 (explicit fibre argument)"
+   }
+  },
+  {
+   "text": "Let $v\\in Y\\prime$ be any generalization of $y\\prime$. Continuity of $h$ implies that $h(v)$ generalizes $y$. By step 3 and step 1, $h(v)=y$, so both $v$ and $y\\prime$ belong to the subspace $h^{-1}(y)$. A specialization between two points of a subspace is the same as their specialization in the ambient space: the closure of a singleton in the subspace is its ambient closure intersected with the subspace. The homeomorphism $T\\simeq h^{-1}(y)$ thus makes the point corresponding to $v$ a generalization of $t$. Step 4 and step 1 force it to equal $t$, hence $v=y\\prime$. Therefore $y\\prime$ has no proper generalization in $Y\\prime$ and is component-generic by step 1. This holds for every component-generic $z\\in Z$, proving that $q$ is maximally dominant.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K1, lemma-fibre-topological; ILO II 1.1.1 and Proposition 1.1.5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "lem-pc-field-extension-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO II Example 1.1.3 and Proposition 1.1.5, printed p.23; explicit generic-point and two-fibre argument supplied here using Stacks 004W, 01IS, 03HV, 01U9, 01K1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +131,45 @@
    "results": "{\"t\": \"2026-10-18T22:55:49Z\", \"tool\": \"grep\", \"query\": \"Flat.generalizingMap\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"ae61db6233d16f15\"}",
    "date": "2026-10-19",
    "verdict": "no match for both clauses: Flat.generalizingMap (UniversallyOpen.lean:134) proves the first clause after unpacking generic points, but flat base change of an arbitrary maximally dominant morphism is not its statement; inspected the other going-down and flatness hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, GeneralizingMap",
+   "results": "{\"t\": \"2026-10-18T23:49:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, GeneralizingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\"], \"digest\": \"0cff4acc9b5241f9\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the complete item: inspected Flat.generalizingMap (UniversallyOpen.lean:134), flat base-change instances (Flat.lean:81-90) and the returned types; these give component tools, but no returned declaration states maximal-dominance stability under flat base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change preserves morphisms sending generic points of irreducible components to generic points",
+   "results": "{\"t\": \"2026-10-18T23:49:08Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change preserves morphisms sending generic points of irreducible components to generic points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.generalizingMap_comap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.stalkMap\"], \"digest\": \"cf006707c5791147\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the complete item: inspected Flat.generalizingMap (UniversallyOpen.lean:134), flat base-change instances (Flat.lean:81-90) and the returned types; these give component tools, but no returned declaration states maximal-dominance stability under flat base change."
+  },
+  {
+   "tool": "grep",
+   "query": "maximally.?dominant|generalizingMap|genericPoint",
+   "results": "{\"t\": \"2026-10-18T23:49:10Z\", \"tool\": \"grep\", \"query\": \"maximally.?dominant|generalizingMap|genericPoint\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean\"], \"digest\": \"26ad1fea9ffc6dfe\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the complete item: inspected Flat.generalizingMap (UniversallyOpen.lean:134), flat base-change instances (Flat.lean:81-90) and the returned types; these give component tools, but no returned declaration states maximal-dominance stability under flat base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism preserving minimal points still preserves minimal points after flat base change",
+   "results": "{\"t\": \"2026-10-18T23:49:15Z\", \"tool\": \"leansearch\", \"query\": \"A morphism preserving minimal points still preserves minimal points after flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CategoryTheory.Precoverage.instIsStableUnderBaseChangeMin\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\"], \"digest\": \"70c967617614edea\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the complete item: inspected Flat.generalizingMap (UniversallyOpen.lean:134), flat base-change instances (Flat.lean:81-90) and the returned types; these give component tools, but no returned declaration states maximal-dominance stability under flat base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal primes of a scheme fibre product map to generic points on the second factor when the first map is maximally dominant and the other is flat",
+   "results": "{\"t\": \"2026-10-18T23:51:02Z\", \"tool\": \"leanfinder\", \"query\": \"Minimal primes of a scheme fibre product map to generic points on the second factor when the first map is maximally dominant and the other is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"RingHom.Flat.generalizingMap_comap\", \"Algebra.HasGoingDown.of_flat\", \"AlgebraicGeometry.genericPoint_eq_bot_of_affine\", \"AlgebraicGeometry.ext_of_isDominant\"], \"digest\": \"66f63c26699dc8ab\"}",
+   "date": "2026-10-19",
+   "verdict": "no match for the complete item: inspected Flat.generalizingMap (UniversallyOpen.lean:134), flat base-change instances (Flat.lean:81-90) and the returned types; these give component tools, but no returned declaration states maximal-dominance stability under flat base change."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-generators-reduced-base-change",
@@ -82,5 +197,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-flat-maximal-dominance-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the statement and existing metadata. Five steps prove the generic-point criterion, apply the existing flat generalization-lifting leaf, and prove the flat base-change assertion via the two scheme fibres and a field extension. No new nodes. Specialization directions are checked explicitly against the lifting node and source.",
+  "blueprint": "Ancestor finiteness/duality input through ILO IX 1.3, printed p.132: “Le changement de base par g préserve régularité, diviseurs à croisements normaux, et familles couvrantes pour la topologie des ℓ′-altérations.” The generator and categorical-product inputs to II 2.3.4, before passing to the generated topology. Supporting Expose II Example 1.1.3 and Proposition 1.1.5, printed p.23 (flat morphisms are generalizing and maximal dominance survives flat base change).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic topological component containment supplies a component through a point, with no Noetherian hypothesis. No node of the alteration unit supplies this underlying fact."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic scheme sobriety supplies the unique generic point of an irreducible component, with no finiteness hypothesis. No node of the alteration unit supplies this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-generalizations-lift",
+    "why": "Generic flat generalization lifting shows that a generic source point has generic image. No node of the alteration unit supplies this underlying fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic flat base-change tool applies both to Z to X and to the field-extension pullback W to T. No node of the alteration unit supplies this underlying fact."
+   },
+   {
+    "node": "lem-pc-field-extension-flat",
+    "why": "Generic flatness of Spec of a field extension supplies flatness in the explicit two-fibre argument. No node of the alteration unit supplies this underlying fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-field-extension-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-a1ab19e9d",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-a1ab19e9d (reviewer sub-agent of L); spot-checked: FIX for one missing definition citation; the mathematics is correct. Source: I read ILO Exposé II 1.1.1–1.1.5 (printed p.23). The item matches Example 1.1.3 (flat ⇒ maximally dominant) and Prop 1.1.5 (maximal dominance survives flat base change) and adds no hypotheses. Since ILO only refers to EGA IV₂ 2.3.7(ii), proof_origin by=agent is correct, and no SGA source is used. Steps: Step 1 proves 'generic point of a component ⇔ no proper generalization' from the component-cover lemma, maximality and sober uniqueness, and is genuinely elementary. Step 2 applies lem-weil-pbc-flat-generalizations-lift (Flat.generalizingMap) with the specialization direction correct. Step 3 makes p flat by base change; the order swap of the fibre product is harmless. Step 4: the fibres T=Y'_y and W=Z_x are related by W ≅ T×_{κ(y)} Spec κ(x), and the compatibility Spec κ(x)→X→Y = Spec κ(x)→Spec κ(y)→Y follows from the definitions. Spec κ(x)→Spec κ(y) is flat (lem-pc-field-extension-flat), so W→T is flat. Injectivity of W→Z shows w has no proper generalization, so t is generic. Step 5 uses the subspace-specialization argument through T ≅ h^{-1}(y). All 9 cited nodes are unmerged Mathlib leaves whose statements say what the steps take, and there is no cycle. Edge cases checked: empty Z, h = id, non-Noetherian X, non-reduced points, transcendental residue extensions, and a non-flat closed point showing the flatness hypothesis is needed. A grep for maximal dominance across dag/nodes found no duplicate. The tool_uses the worker wrote all point to Mathlib leaves and are accepted as harmless. Fix (B3): the statement used 'generic point' without its definition node. I added [def-sc-generic-point] to the statement, stmt_deps, step 1 uses and proof_deps in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-flat-maximal-dominance-base-change.json; the meaning is unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
