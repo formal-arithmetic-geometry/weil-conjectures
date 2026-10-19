@@ -17358,3 +17358,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:25 L: merged deliver/S9/Sheaf.Paper.FullCDClassRestriction (stage 3; reviewer PASS; first push; landing 20261019T112531-L-3951370 (interface); batch 20261019T112432; modules 1; new nodes 0; change records: coord/changes/S9-fullcd-class-restriction-imports.md)
 - 11:25 L: merged deliver/S9/Sheaf.Paper.PbcFiniteStageKaroubian (stage 3; reviewer PASS; first push; landing 20261019T112532-L-3951651 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:25 L: merged deliver/S9/Sheaf.RingTheory.DvrLatticeDistanceDeterminant (stage 3; reviewer PASS; first push; landing 20261019T112533-L-3951991 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:25 L: merged deliver/T3/Sheaf.CategoryTheory.EquivalenceDerivedSections (stage 3; reviewer PASS; first push; landing 20261019T112534-L-3952285 (proof); batch 20261019T112432; modules 1; new nodes 0)
