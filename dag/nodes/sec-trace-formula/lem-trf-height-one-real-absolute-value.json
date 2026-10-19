@@ -235,5 +235,23 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-f54ffb294 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and the new Mathlib leaf in full; the statement is unchanged and there are no fixes. Step 1: the value group F^x/V^x carries the same order convention as lem-trf-valuation-prime-convex-correspondence, and totality comes from the x-or-x^-1 clause of def-trf-valuation-ring. Step 2: the correspondence node's hypotheses all hold; since V is not a field, m is nonzero, so the anti-isomorphism gives exactly two convex subgroups. Step 3: the subgroup of elements bounded by multiples of delta is a convex subgroup containing delta, so it is all of Gamma; this is the Archimedean condition, which is genuinely elementary, so folding the undelivered helper into this step is correct (D1). Step 4: the new leaf matches Archimedean.exists_orderAddMonoidHom_real_injective (Mathlib/Data/Real/Embedding.lean:232-243, with the group/order variables at line 29 and the One instance omitted at line 232); Mathlib's Archimedean is the node's inline definition, and the zero group is covered. Order reflection is written out. Steps 5-6: exp(-e(v)) gives positivity, |1|=1, multiplicativity and the ultrametric inequality, with zero cases handled. Step 7: P = {v>0} plus 0 is a proper ideal whose complement in V consists of units, so m = P by maximality. Step 8: z outside V exists because V is not a field, so pi = 1/z has 0<|pi|<1. Tested cases: a DVR, a value group Q, a rank-2 lexicographic group (where the two-prime hypothesis correctly fails), and the excluded field case. My rg searches of the snapshot DAG and the blueprint found no duplicate of the item or the leaf. The leaf's blueprint ancestor matches the item's, and the citer lem-trf-valuation-rank-one-formal-comparison uses only clauses that are present. The Temkin PDF is absent locally (the report records it as wanted); its content enters only through the existing correspondence node, whose statement I checked. No SGA source, no other unit's tools, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HeightOneRealAbsoluteValue",
+  "declaration": "ValuationRing.exists_real_valuation_of_height_one",
+  "file": "lean/Sheaf/RingTheory/HeightOneRealAbsoluteValue.lean",
+  "statement": "theorem exists_real_valuation_of_height_one (F : Type u) [Field F] (V : Subring F) [ValuationRing V] [IsFractionRing V F] (hnotfield : ¬ IsField V) (hheight : ∀ p : Ideal V, p.IsPrime → p = ⊥ ∨ p = IsLocalRing.maximalIdeal V) : ∃ v : Valuation F ℝ≥0, (∀ x : F, x ∈ V ↔ v x ≤ 1) ∧ (∀ x : V, x ∈ IsLocalRing.maximalIdeal V ↔ v (x : F) < 1) ∧ ∃ x : F, x ≠ 0 ∧ v x ≠ 1",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c465c34ac",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Field F (universe u), Subring V with ValuationRing (the dependency def-trf-valuation-ring's Mathlib match), IsFractionRing V F (needed), ¬IsField V, primes ⊥ or maximal; ∃ v : Valuation F ℝ≥0 (zero/one/mul/ultrametric, zero fiber {0} via Valuation.zero_iff), closed unit ball = V, open ball = m on V (gives the ambient equality with the closed-ball clause), nonzero witness with v x ≠ 1. No extra hypotheses or universe restriction. Node record differs from live only in lean; lean.statement is verbatim. No Mathlib/side duplicate (rank-one lemmas assume MulArchimedean). Citer rank-one-formal-comparison uses only proof_deps with the same hheight form. Docstrings carry source and blueprint tag; proof is sorry. nt_compile --json clean (2.7 s, exit 0). Advisory: Worker report wrongly says node status unsplit with an empty proof."
  }
 }

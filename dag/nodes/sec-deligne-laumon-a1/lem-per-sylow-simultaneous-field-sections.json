@@ -289,5 +289,23 @@
   "group": "Q87",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-820e44412 (reviewer sub-agent of L); spot-checked: I read all ten steps in full against ILO Exposé II, Prop 2.2.6 (pp. 27–28) and Thm 3.2.1 (pp. 29–30): quasi-Galois closure, Sylow fixed field, [L^P:K] = (G:P)·p^c, then descent by coprime degrees. All 17 cited statements say what their steps use. Step 3: Artin's theorem gives [L:K'] = |P|. Step 4: lem-exc-normal-field-degree-factors gives [K':K] = d·p^c, prime to ell since ell differs from p. Step 5 (char 0): the fixed field of all automorphisms equals K. Steps 6 and 9: each image lies in L because minimal polynomials split in the normal L, and the factor's actual K_i-map is kept. Steps 7–8: B = M ⊗_{K_i} F_i has dimension n_i over M; a simple filtration gives residue fields whose degrees sum to n_i, so one has degree prime to ell. This works even when B has nilpotents, and the step is truly elementary. Step 10: [N:M] divides ell^a and is prime to ell, so it is 1, which gives the K_i-section. I tested I empty, char p with a purely inseparable F, and Q(cube root of 2) with ell = 2. The statement is unchanged and matches the one citer's use (step 3 of lem-per-alteration-cover-proper-normal-form). Accepted tool_uses: lem-weil-pbc-normal-extension-fixed-field-purely-inseparable and lem-weil-pbc-finite-length-module-simple-filtration, both generic and Lean-closed. There are no new nodes, no duplicate in the DAG (searched Sylow, fixed field and 2.2.6), and no cycle (checked the 38-node dependency closure). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SylowSimultaneousFieldSections",
+  "declaration": "FieldTheory.exists_primeTo_extension_simultaneous_field_sections",
+  "file": "lean/Sheaf/FieldTheory/SylowSimultaneousFieldSections.lean",
+  "statement": "theorem exists_primeTo_extension_simultaneous_field_sections (K : Type u) [Field K] (ell : ℕ) (hell : ell.Prime) (hchar : ell ≠ ringChar K) (I : Type t) [Finite I] (Ki : I → Type v) [∀ i : I, Field (Ki i)] [∀ i : I, Algebra K (Ki i)] [∀ i : I, FiniteDimensional K (Ki i)] [∀ i : I, Algebra.IsSeparable K (Ki i)] (Fi : I → Type w) [∀ i : I, Field (Fi i)] [∀ i : I, Algebra (Ki i) (Fi i)] [∀ i : I, FiniteDimensional (Ki i) (Fi i)] (hdegree : ∀ i : I, Nat.Coprime (Module.finrank (Ki i) (Fi i)) ell) : ∃ (K' : Type (max u v w)) (_ : Field K') (_ : Algebra K K'), FiniteDimensional K K' ∧ Nat.Coprime (Module.finrank K K') ell ∧ ∀ (i : I) (m : Ideal (Ki i ⊗[K] K')), m.IsMaximal → Nonempty (Fi i →ₐ[Ki i] ((Ki i ⊗[K] K') ⧸ m))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31fc961c1",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: char condition via ringChar, finite I that may be empty, finite separable K_i/K, finite F_i/K_i of degree prime to ell with no separability required, a single finite K' of degree prime to ell chosen before all i and all maximal ideals, codomain (K_i ⊗[K] K')/m with the standard K_i-map a -> [a⊗1] (confirmed by a compiled rfl probe). No extra hypotheses. Independent universes; the witness in Type (max u v w) is equivalent to the node and usable by the one citer (alteration-cover step 3). Only the lean record changed; the recorded statement is verbatim in the file. Docstrings give source and blueprint and carry all ten steps; a single sorry; no new definitions or duplicates. nt_compile --json: 3.0 s, exit 0, clean. No findings."
  }
 }
