@@ -10,13 +10,10 @@ public import Sheaf.Paper.CoefficientHeartCommonStratification
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.Paper.CoefficientFiniteDescentSections
-import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import all Sheaf.AlgebraicGeometry.SplitCoefficientDerivedFaithful
+import Sheaf.Paper.LisseFiniteCoefficientModel
+import Sheaf.Paper.LisseFiniteHomLift
 
 /-!
 # Finite coefficient descent of lisse modules and morphisms
@@ -37,8 +34,104 @@ set_option autoImplicit false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
+
+namespace CategoryTheory
+section
+variable {C D : Type*} [Category C] [Category D]
+  {F F' : C ⥤ D} {G G' : D ⥤ C}
+private lemma faithful_conjugation_injective (F : C ⥤ D) [F.Faithful]
+    {A B : C} {P Q : D} (a : P ≅ F.obj A) (b : Q ≅ F.obj B) :
+    Function.Injective (fun f : A ⟶ B ↦ a.hom ≫ F.map f ≫ b.inv) := by
+  intro f g h
+  apply F.map_injective
+  apply (cancel_epi a.hom).mp
+  apply (cancel_mono b.inv).mp
+  simpa only [Category.assoc] using h
+
+private lemma lisseUniq_eq_conjugate (a : F ⊣ G) (b : F' ⊣ G') (e : G' ≅ G) :
+    a.leftAdjointUniq (b.ofNatIsoRight e) =
+      (conjugateIsoEquiv b a).symm e := by
+  ext X
+  simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app]
+end
+end CategoryTheory
+
+namespace CategoryTheory
+section Scalar
+variable {C : Type*} [Category C] [MonoidalCategory C]
+  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
+  {R S U : C} [MonObj R] [MonObj S] [MonObj U]
+  [IsCommMonObj R] [IsCommMonObj S]
+  (φ : R ⟶ S) [IsMonHom φ] (ψ : S ⟶ U) [IsMonHom ψ]
+  (χ : R ⟶ U) [IsMonHom χ] (h : φ ≫ ψ = χ)
+private noncomputable abbrev lisseScalarComp :=
+  (Mod.extendScalarsComp φ ψ).symm ≪≫ Mod.extendScalarsIsoOfEq h
+
+private lemma lisseScalarComp_eq :
+    (Mod.extendScalarsComp φ ψ).symm ≪≫ Mod.extendScalarsIsoOfEq h =
+      Adjunction.leftAdjointCompIso (Mod.extendRestrictAdjunction φ)
+        (Mod.extendRestrictAdjunction ψ) (Mod.extendRestrictAdjunction χ)
+        ((Mod.comapComp φ ψ).symm ≪≫ Mod.comapCongr h) := by
+  rw [Mod.extendScalarsComp, Mod.extendScalarsIsoOfEq, lisseUniq_eq_conjugate,
+    lisseUniq_eq_conjugate]
+  apply Iso.ext
+  apply NatTrans.ext
+  funext X
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    conjugateIsoEquiv_symm_apply_hom, conjugateIsoEquiv_symm_apply_inv,
+    Adjunction.leftAdjointCompIso, Iso.trans_inv]
+  exact congr_app (conjugateEquiv_symm_comp
+    (Mod.extendRestrictAdjunction χ) (Mod.extendRestrictAdjunction (φ ≫ ψ))
+    ((Mod.extendRestrictAdjunction φ).comp (Mod.extendRestrictAdjunction ψ))
+    (Mod.comapCongr h).inv (Mod.comapComp φ ψ).hom) X
+end Scalar
+end CategoryTheory
+
+namespace CategoryTheory
+section ScalarCoherence
+variable {C : Type*} [Category C] [MonoidalCategory C]
+  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
+  {R S U V : C} [MonObj R] [MonObj S] [MonObj U] [MonObj V]
+  [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj U]
+  (f : R ⟶ S) [IsMonHom f] (g : S ⟶ U) [IsMonHom g] (j : U ⟶ V) [IsMonHom j]
+  (fg : R ⟶ U) [IsMonHom fg] (gj : S ⟶ V) [IsMonHom gj]
+  (fgj : R ⟶ V) [IsMonHom fgj]
+  (hfg : f ≫ g = fg) (hgj : g ≫ j = gj) (hfgj : f ≫ gj = fgj) (hfgj' : fg ≫ j = fgj)
+private lemma lisseScalarComp_assoc :
+    Functor.isoWhiskerRight (lisseScalarComp f g fg hfg) (Mod.extendScalars j) ≪≫
+        lisseScalarComp fg j fgj hfgj' =
+      Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (Mod.extendScalars f) (lisseScalarComp g j gj hgj) ≪≫
+          lisseScalarComp f gj fgj hfgj := by
+  simp only [lisseScalarComp, lisseScalarComp_eq]
+  have he : Functor.isoWhiskerLeft (Mod.comap j)
+      ((Mod.comapComp f g).symm ≪≫ Mod.comapCongr hfg) ≪≫
+        ((Mod.comapComp fg j).symm ≪≫ Mod.comapCongr hfgj') =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight ((Mod.comapComp g j).symm ≪≫ Mod.comapCongr hgj)
+          (Mod.comap f) ≪≫
+        ((Mod.comapComp f gj).symm ≪≫ Mod.comapCongr hfgj) := by
+    ext M
+    simp only [Functor.comp_obj, Functor.isoWhiskerLeft_trans, Iso.trans_assoc, Iso.trans_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Mod.comp_hom', Mod.comapComp_inv_app_hom, Mod.comapCongr_hom_app_hom,
+      Functor.isoWhiskerRight_trans, Functor.isoWhiskerRight_hom,
+      Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp, Mod.comap_map_hom]
+    change (𝟙 M.X ≫ 𝟙 M.X ≫ 𝟙 M.X ≫ 𝟙 M.X) =
+      (𝟙 M.X ≫ 𝟙 M.X ≫ 𝟙 M.X ≫ 𝟙 M.X)
+    simp
+  rw [Adjunction.leftAdjointCompIso_assoc
+    (Mod.extendRestrictAdjunction f) (Mod.extendRestrictAdjunction g)
+    (Mod.extendRestrictAdjunction j) (Mod.extendRestrictAdjunction fg)
+    (Mod.extendRestrictAdjunction gj) (Mod.extendRestrictAdjunction fgj) _ _ _ _ he]
+  simp
+end ScalarCoherence
+end CategoryTheory
+
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -122,6 +215,186 @@ def LisseFiniteHomRelation (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl �
   ∃ h : a.1.val ≤ b.1.val,
     lisseFiniteHomTransition X ℓ a.1.property h a.2 = b.2
 
+attribute [local irreducible] Mod.extendScalars
+
+private lemma extensionEq_symm
+    {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
+    [HasCoequalizers C] [∀ Z : C, PreservesColimitsOfSize.{0, 0} (tensorLeft Z)]
+    [∀ Z : C, PreservesColimitsOfSize.{0, 0} (tensorRight Z)]
+    {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R]
+    {f g : R ⟶ S} [IsMonHom f] [IsMonHom g] (h : f = g) :
+    (Mod.extendScalarsIsoOfEq h).symm = Mod.extendScalarsIsoOfEq h.symm := by
+  apply Iso.ext
+  rw [Mod.extendScalarsIsoOfEq, Mod.extendScalarsIsoOfEq,
+    CategoryTheory.lisseUniq_eq_conjugate, CategoryTheory.lisseUniq_eq_conjugate]
+  simp only [conjugateIsoEquiv_symm_apply_inv, conjugateIsoEquiv_symm_apply_hom,
+    Iso.symm_hom, Iso.symm_inv]
+  apply congrArg (conjugateEquiv (Mod.extendRestrictAdjunction f)
+    (Mod.extendRestrictAdjunction g)).symm
+  apply NatTrans.ext
+  funext M
+  apply Mod.hom_ext
+  rfl
+
+private lemma algClComp_eq
+    {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F) :
+    (lisseAlgClExtensionCompIso X ℓ h).symm =
+      CategoryTheory.lisseScalarComp (padicSubfieldRingObjMap X ℓ h)
+        (padicSubfieldRingObjToPadicAlgCl X ℓ F)
+        (padicSubfieldRingObjToPadicAlgCl X ℓ E)
+        (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h) := by
+  simp only [lisseAlgClExtensionCompIso, Iso.trans_symm, extensionEq_symm,
+    CategoryTheory.lisseScalarComp]
+
+private lemma finiteComp_eq
+    {E F H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)}
+    (h : E ≤ F) (k : F ≤ H) :
+    (lisseFiniteExtensionCompIso X ℓ h k).symm =
+      CategoryTheory.lisseScalarComp (padicSubfieldRingObjMap X ℓ h)
+        (padicSubfieldRingObjMap X ℓ k)
+        (padicSubfieldRingObjMap X ℓ (h.trans k)) (by
+          rw [← coefficientMap_comp, ← Profinite.padicSubfieldRingObjMap_comp]) := by
+  simp only [lisseFiniteExtensionCompIso, Iso.trans_symm, extensionEq_symm,
+    CategoryTheory.lisseScalarComp]
+
+private lemma lisse_comparison_coherence
+    {E F H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)}
+    (h : E ≤ F) (k : F ≤ H) :
+    Functor.isoWhiskerRight (lisseFiniteExtensionCompIso X ℓ h k).symm
+        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ H)) ≪≫
+      (lisseAlgClExtensionCompIso X ℓ (h.trans k)).symm =
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h))
+        (lisseAlgClExtensionCompIso X ℓ k).symm ≪≫
+      (lisseAlgClExtensionCompIso X ℓ h).symm := by
+  rw [finiteComp_eq, algClComp_eq, algClComp_eq, algClComp_eq]
+  exact CategoryTheory.lisseScalarComp_assoc _ _ _ _ _ _ _ _ _ _
+
+private lemma lisseFiniteHomToAlgCl_transition
+    {E F H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)}
+    (h : E ≤ F) (k : F ≤ H)
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)}
+    (φ : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj M ⟶
+      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj N) :
+    lisseFiniteHomToAlgCl X ℓ (h.trans k) (lisseFiniteHomTransition X ℓ h k φ) =
+      lisseFiniteHomToAlgCl X ℓ h φ := by
+  have hc := lisse_comparison_coherence X ℓ h k
+  have hh (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (padicSubfieldRingObj X ℓ E)) :
+      (lisseAlgClExtensionCompIso X ℓ (h.trans k)).hom.app P ≫
+        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ H)).map
+          ((lisseFiniteExtensionCompIso X ℓ h k).hom.app P) =
+      (lisseAlgClExtensionCompIso X ℓ h).hom.app P ≫
+        (lisseAlgClExtensionCompIso X ℓ k).hom.app
+          ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj P) := by
+    simpa only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_inv_app, Category.comp_id] using
+      congrArg (fun e ↦ e.inv.app P) hc
+  have hi (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (padicSubfieldRingObj X ℓ E)) :
+      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ H)).map
+          ((lisseFiniteExtensionCompIso X ℓ h k).inv.app P) ≫
+        (lisseAlgClExtensionCompIso X ℓ (h.trans k)).inv.app P =
+      (lisseAlgClExtensionCompIso X ℓ k).inv.app
+          ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj P) ≫
+        (lisseAlgClExtensionCompIso X ℓ h).inv.app P := by
+    simpa only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Category.id_comp] using
+      congrArg (fun e ↦ e.hom.app P) hc
+  simp only [lisseFiniteHomToAlgCl, lisseFiniteHomTransition, Functor.map_comp,
+    Category.assoc]
+  rw [← Category.assoc, hh]
+  simp only [Category.assoc]
+  rw [hi]
+  rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
+  simp
+
+attribute [local irreducible] retractNat Mod.extendRestrictAdjunction
+
+private theorem coefficient_extension_faithful
+    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :
+    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).Faithful := by
+  let F := upperStarFromPoint X
+  let r := F.map (Profinite.condensedProjection ℓ E)
+  have hlin := CategoryTheory.mapLinear F _ _ (Profinite.condensedProjection_linear ℓ E)
+  have hret : padicSubfieldRingObjToPadicAlgCl X ℓ E ≫ r = 𝟙 _ := by
+    change F.map _ ≫ F.map _ = 𝟙 _
+    rw [← F.map_comp, Profinite.condensedProjection_retract, F.map_id]
+  let ρ := retractNat _ _ _ r hlin
+  have hs := unit_retract _ _ _ r hlin hret
+  constructor
+  intro M N f g hfg
+  have hf := (Mod.extendRestrictAdjunction
+    (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.naturality f
+  have hg := (Mod.extendRestrictAdjunction
+    (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.naturality g
+  simp only [Functor.id_map, Functor.comp_map] at hf hg
+  have h : f ≫ (Mod.extendRestrictAdjunction
+      (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.app N =
+      g ≫ (Mod.extendRestrictAdjunction
+        (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.app N := by
+    rw [hf, hg]
+    exact congrArg (fun k ↦ (Mod.extendRestrictAdjunction
+      (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.app M ≫ (Mod.comap
+        (padicSubfieldRingObjToPadicAlgCl X ℓ E)).map k) hfg
+  have h' := congrArg (· ≫ ρ.app N) h
+  have hsN : (Mod.extendRestrictAdjunction
+      (padicSubfieldRingObjToPadicAlgCl X ℓ E)).unit.app N ≫ ρ.app N = 𝟙 N :=
+    congr_app hs N
+  simpa only [Category.assoc, hsN, Category.comp_id] using h'
+
+attribute [local irreducible] lisseAlgClExtensionCompIso lisseFiniteExtensionCompIso
+
+private lemma lisseFiniteHomToAlgCl_injective
+    {E F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)} (h : E ≤ F)
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (padicSubfieldRingObj X ℓ E)) :
+    Function.Injective (lisseFiniteHomToAlgCl X ℓ h (M := M) (N := N)) := by
+  let : (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).Faithful :=
+    coefficient_extension_faithful X ℓ F
+  exact CategoryTheory.faithful_conjugation_injective
+    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F))
+    ((lisseAlgClExtensionCompIso X ℓ h).app M)
+    ((lisseAlgClExtensionCompIso X ℓ h).app N)
+
+private lemma lisseFiniteHomToAlgCl_eq_iff
+    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (padicSubfieldRingObj X ℓ E))
+    (a b : LisseFiniteHomRepresentative X ℓ E M N) :
+    lisseFiniteHomToAlgCl X ℓ a.1.property a.2 =
+      lisseFiniteHomToAlgCl X ℓ b.1.property b.2 ↔
+      Relation.EqvGen (LisseFiniteHomRelation X ℓ E M N) a b := by
+  constructor
+  · intro hab
+    let H := Padic.finiteCoefficientCompositum ℓ (PadicAlgCl ℓ) a.1.val b.1.val
+    have ha : a.1.val ≤ H :=
+      ((Padic.finiteCoefficientFields_properties ℓ (PadicAlgCl ℓ)).1 a.1.val b.1.val).1
+    have hb : b.1.val ≤ H :=
+      ((Padic.finiteCoefficientFields_properties ℓ (PadicAlgCl ℓ)).1 a.1.val b.1.val).2
+    let c : LisseFiniteHomRepresentative X ℓ E M N :=
+      ⟨⟨H, a.1.property.trans ha⟩, lisseFiniteHomTransition X ℓ a.1.property ha a.2⟩
+    have hc : lisseFiniteHomTransition X ℓ b.1.property hb b.2 = c.2 := by
+      apply lisseFiniteHomToAlgCl_injective X ℓ (a.1.property.trans ha) M N
+      exact (lisseFiniteHomToAlgCl_transition X ℓ b.1.property hb b.2).trans
+        (hab.symm.trans (lisseFiniteHomToAlgCl_transition X ℓ a.1.property ha a.2).symm)
+    exact Relation.EqvGen.trans a c b
+      (Relation.EqvGen.rel a c ⟨ha, rfl⟩)
+      (Relation.EqvGen.symm b c (Relation.EqvGen.rel b c ⟨hb, hc⟩))
+  · intro hab
+    induction hab with
+    | rel a b h =>
+      obtain ⟨h, he⟩ := h
+      exact (lisseFiniteHomToAlgCl_transition X ℓ a.1.property h a.2).symm.trans
+        (congrArg (lisseFiniteHomToAlgCl X ℓ b.1.property) he)
+    | refl => rfl
+    | symm a b _ ih => exact ih.symm
+    | trans a b c _ _ ih₁ ih₂ => exact ih₁.trans ih₂
+
 /-- Lisse objects descend to a finite coefficient field, and the canonical Hom-colimit
 comparison is bijective, expressed on representatives: every target morphism is represented,
 and two representatives have equal images if and only if the scalar-extension equivalence
@@ -173,6 +446,12 @@ theorem coefficient_finite_descent_lisse [CompactSpace X] [QuasiSeparatedSpace X
         lisseFiniteHomToAlgCl X ℓ a.1.property a.2 =
           lisseFiniteHomToAlgCl X ℓ b.1.property b.2 ↔
         Relation.EqvGen (LisseFiniteHomRelation X ℓ E M N) a b)) := by
-  sorry
+  refine ⟨fun L hL ↦ exists_lisse_finiteCoefficient_model X ℓ L hL, ?_⟩
+  intro E M N hM hN
+  refine ⟨?_, lisseFiniteHomToAlgCl_eq_iff X ℓ E M N⟩
+  intro ψ
+  obtain ⟨F, h, φ, hφ⟩ := exists_lisse_finite_hom_lift X ℓ E M N hM hN ψ
+  refine ⟨⟨⟨F, h⟩, φ⟩, ?_⟩
+  simpa only [lisseFiniteHomToAlgCl, lisseAlgClExtensionCompIso] using hφ
 
 end AlgebraicGeometry.ProEtale

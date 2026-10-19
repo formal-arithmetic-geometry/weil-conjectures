@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-lisse-finite-hom-lift",
+ "kind": "statement",
+ "title": "Finite-stage lifting of a lisse coefficient morphism",
+ "statement": "Fix a prime $\\ell$, a quasi-compact quasi-separated scheme $X$ with its pro-etale site [def-weil-pbc-proetale-site], and the finite coefficient fields $E\\subseteq\\overline{\\mathbf Q}_\\ell$ of [def-weil-finite-subextension-directed-set]. Write $E_X$ for the pulled-back condensed field ring [def-sfb-subfield-coefficient-ring] and $\\Omega_X$ for the pulled-back finite-subextension-valued algebraic-closure coefficient ring [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-qlbar-condensed]. Modules are the internal module objects of [sk-def-sfb-module-objects], lisse means pro-etale locally finite free with possibly varying or zero ranks [def-sfb-lisse-coefficient-module], and scalar extensions are the ordinary relative tensor functors [sk-def-sfb-change-of-scalars]. Fix $E$ and lisse $E_X$-modules $M,N$. For every morphism $\\psi:\\Omega_X\\otimes_{E_X}M\\to\\Omega_X\\otimes_{E_X}N$, there exist a finite coefficient field $F\\supseteq E$ and a morphism $\\phi:F_X\\otimes_{E_X}M\\to F_X\\otimes_{E_X}N$ whose extension to $\\Omega_X$, conjugated by the canonical direct-versus-iterated scalar-extension comparisons, equals $\\psi$. The coefficient maps are [def-sfb-subfield-coefficient-map, def-sfb-subfield-to-qlbar-coefficient-map]. This asserts existence only, with no assertion about equality of representatives.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.md",
+  "place": "Proof (2), finite-stage morphism lifting"
+ },
+ "stmt_deps": [
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-subfield-coefficient-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-subfield-coefficient-map",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "sk-def-sfb-module-objects",
+  "def-pur-localized-ringed-site",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-lisse-coefficient-module",
+  "det-lem-coefficient-heart-common-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Remove the invertible coefficient pullback from the lisse trivializations using the existing free transport lemmas, obtaining a raw free cover. Internal Hom out of this locally finite free module preserves small colimits by the existing internal-Hom theorem.",
+   "uses": [
+    "lem-weil-pbc-condensed-constructible-serre",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the filtered final category of finite coefficient fields above E. Evaluate the existing coefficient complex colimit on the complex concentrated in degree zero with value N. Adjunction takes the given morphism to a map out of M into its restricted algebraic-closure extension. Internal-Hom adjunction converts this to a map from the regular module; the qcqs unit-Hom stage lemma factors it through a finite stage of the internal-Hom diagram. Transpose back to obtain a finite-stage map.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set",
+    "lem-weil-pbc-condensed-coefficient-complex-colimit",
+    "lem-weil-pbc-condensed-local-presentation-matrices",
+    "lem-weil-pbc-condensed-finite-free-internal-hom-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the finite-stage map by extension/restriction adjunction. The unit identities for the canonical left-adjoint uniqueness comparisons show that its conjugated algebraic-closure extension is the original morphism. Prove the mixed scalar map formula using both adjunctions, then cancel with the Hom equivalences. Empty schemes and zero ranks are included.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-constructible-serre",
+  "lem-weil-pbc-condensed-finite-free-internal-hom-colimits",
+  "def-weil-finite-subextension-directed-set",
+  "lem-weil-pbc-condensed-coefficient-complex-colimit",
+  "lem-weil-pbc-condensed-local-presentation-matrices",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md",
+  "place": "Proof (2), surjectivity",
+  "note": "Internal Hom continuity and the existing coefficient colimit prove the finite-stage factorization. The canonical scalar-unit calculation proves the required comparison equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally free finite rank sheaf over a filtered union of coefficient fields and its morphisms descend to one finite coefficient field",
+   "results": "8 hits; SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.IsFiniteType.mk, Module.finrank_of_isLocalizedModule_of_free, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-18",
+   "verdict": "no exact match: these declarations do not give finite coefficient descent for lisse internal pro-etale module objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"IsFree\"",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact match: these declarations do not give finite coefficient descent for lisse internal pro-etale module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(field|coefficient|matrix)|glue.*coefficient|matrix.*descen",
+   "results": "1 hits; Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no exact match: these declarations do not give finite coefficient descent for lisse internal pro-etale module objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientFiniteDescentLisse",
+  "date": "2026-10-18",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-finite-descent-lisse",
+   "place": "Proof (2), surjectivity, step 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteHomLift",
+  "file": "lean/Sheaf/Paper/LisseFiniteHomLift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_finite_hom_lift",
+  "statement": "theorem exists_lisse_finite_hom_lift [CompactSpace X] [QuasiSeparatedSpace X]\n    (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))\n    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))\n    (hM : IsLisseCoefficientModule (Profinite.continuousMapRingObj E) M)\n    (hN : IsLisseCoefficientModule (Profinite.continuousMapRingObj E) N)\n    (ψ : (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M ⟶\n      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj N) :\n    ∃ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F)\n      (φ : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj M ⟶\n        (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj N),\n      let c := Mod.extendScalarsIsoOfEq\n          (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h).symm ≪≫\n        Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)\n          (padicSubfieldRingObjToPadicAlgCl X ℓ F)\n      c.hom.app M ≫\n        (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).map φ ≫\n          c.inv.app N = ψ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002540-L-2151552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002540-L-2151552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

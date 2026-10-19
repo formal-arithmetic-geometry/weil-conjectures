@@ -29,116 +29,47 @@
  ],
  "proof": [
   {
-   "text": "Finite trivializing covers and quasi-compact overlaps. For any finite collection of lisse modules over the same coefficient ring, take a common trivializing cover: pull back the separate covers and compose coverings, using the covering axioms of [def-weil-pbc-sites-and-cohomology]. By [sk-def-pe-site], Zariski open covers are pro-etale coverings. Consequently their affine members are objects of the site, and cover composition shows that refining a trivializing member by its affine open cover still gives a trivializing covering. Choose a finite affine open cover of $X$. The affine-refinement clause of [def-weil-pbc-proetale-covering], applied over each of these opens, gives finitely many affine opens $V_i$ in members of the trivializing cover whose images cover that open. The resulting finite family $\\{V_i\\to X\\}_{i=1}^s$ is jointly surjective and still trivializes every chosen module. Since $X$ is quasi-separated and $V_i$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence] (1) makes each $V_i\\to X$ quasi-compact. For any affine open $W\\subseteq X$, each inverse image in $V_i$ is therefore quasi-compact and has a finite affine open cover. The images of all these finitely many affine opens cover $W$, so the family itself satisfies the affine-refinement condition of [def-weil-pbc-proetale-covering] and is a covering. By (3) its base change to $V_j$ is quasi-compact, and (2) shows $V_i\\times_XV_j$ is quasi-compact. Base-changing once more and applying (2) shows every $V_i\\times_XV_j\\times_XV_k$ is quasi-compact. We use this construction first for $L$, and later for $M,N$.",
+   "text": "Apply the finite lisse object model theorem, which carries steps 1--5 of the original proof and their geometric descent argument.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "sk-def-pe-site"
+    "lem-sfb-lisse-finite-coefficient-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0989, definition-fpqc-covering; schemes.tex Tags 03GI, 01K5, 01K6, as collected in lem-weil-pbc-qcqs-morphism-permanence; sk-def-pe-site, Zariski-cover clause (Tag 098B)"
-   }
+   "elementary": false
   },
   {
-   "text": "Local algebra used below. On the slice over $W$, an $A$-linear map $A^a\\to A^b$ is uniquely determined by the images of its $a$ standard basis sections over $W/W$. These images are $a$ columns in $A(W)^b$; naturality and linearity force its value over any $T\\to W$ to be the matrix with entries restricted to $T$. Conversely this formula defines a linear sheaf map. Composition is matrix multiplication. This also treats rectangular matrices and zero ranks. The internal-module convention [sk-def-sfb-module-objects] gives the same description: an action $A\\otimes_{\\mathbf Z}P\\to P$ is precisely a sectionwise bilinear action, by the sheafified tensor definition [sk-def-sfb-sheaf-tensor]; its axioms and morphism equations are the usual module axioms and linearity equations. The relative tensor of [sk-def-sfb-change-of-scalars] is the sheafification of the sectionwise balanced tensor described in [def-pur-sheaf-tensor-product]: for any $B$-module sheaf $H$, maps out of the coequalizer are precisely natural $B$-linear-in-the-first-variable bilinear maps $B(T)\\times P(T)\\to H(T)$ satisfying $\\beta(ba,x)=\\beta(b,ax)$. The sectionwise tensor represents exactly these balanced maps, and sheafification preserves their maps to the sheaf $H$, so the two constructions have the identical universal property. Restriction to a slice [def-pur-localized-ringed-site] commutes with this construction: over $T/W$ the presheaf tensor is the same tensor over $A(T)$, and the coverings and all their refinement arrows are exactly the coverings and refinement arrows of $T$ in the original site. Thus the local sheafification and its identifications are the same. In particular, locally $B\\otimes_A A^a\\cong B^a$ via $b\\otimes(x_t)_t\\mapsto(bx_t)_t$, with inverse $(y_t)_t\\mapsto\\sum_t y_t\\otimes e_t$. Scalar extension of a matrix applies $A(W)\\to B(W)$ entry by entry. For $A\\to B\\to C$ and an $A$-module $P$, the canonical transitivity identification $C\\otimes_B(B\\otimes_A P)\\cong C\\otimes_A P$ sends $c\\otimes(b\\otimes x)\\mapsto cb\\otimes x$, with inverse $c\\otimes x\\mapsto c\\otimes(1\\otimes x)$. The balanced tensor relations make both formulas well-defined and their composites the identity, so these matrix descriptions agree under successive extensions.",
+   "text": "Apply finite-stage lifting of lisse morphisms and package the field, inclusion and morphism as a sigma-type representative. This proves surjectivity.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-change-of-scalars",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-lisse-finite-hom-lift"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; elementary basis and pure-tensor calculations"
-   }
+   "elementary": false
   },
   {
-   "text": "Descend the transition data of $L$. Choose the finite cover from step 1 and isomorphisms $t_i:L|_{V_i}\\xrightarrow{\\sim}\\QbarX^{r_i}|_{V_i}$. On $V_{ij}=V_i\\times_XV_j$, write $g_{ij}=t_jt_i^{-1}$ for the matrix of the change from the $i$ coordinates to the $j$ coordinates. Include every pair, also $i=j$, and include the matrix $h_{ij}$ of the inverse. There are finitely many entries altogether. By [det-lem-coefficient-finite-descent-sections] (2), applied separately to the quasi-compact $V_{ij}$, each pair's entries lie in a finite coefficient field; [def-weil-finite-subextension-directed-set] supplies a common finite field $E$ for all pairs. The coefficient changes used here are exactly the maps $E_X\\to F_X$ induced by inclusions of finite extensions $E\\le F$, as specified by [def-sfb-subfield-coefficient-map]; if there are no entries to descend, choose $E=\\mathbf Q_\\ell$. Injectivity on sections from the sections lemma implies $h_{ij}g_{ij}=I_{r_i}$ and $g_{ij}h_{ij}=I_{r_j}$ already over $E_X(V_{ij})$. On the quasi-compact triple products it likewise implies $g_{jk}g_{ij}=g_{ik}$ over $E_X$. Do not impose $g_{ii}=1$ on the whole self fibre product; only its pullback along the diagonal $V_i\\to V_i\\times_XV_i$ is the identity. All these equalities hold originally because the $g_{ij}$ were formed from the chosen trivializations.",
+   "text": "The coefficient-linear projection constructed in SplitCoefficientDerivedFaithful splits the extension-restriction adjunction unit. Naturality of this unit and its splitting proves faithfulness on ordinary module objects, without lisse or qcqs hypotheses. Conjugation by the canonical comparisons therefore makes each representative comparison injective.",
    "uses": [
-    "det-lem-coefficient-finite-descent-sections",
-    "def-weil-finite-subextension-directed-set",
-    "def-sfb-subfield-coefficient-map"
+    "lem-weil-pbc-condensed-coefficient-derived-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md",
-    "place": "Proof (1), descent of transition matrices and their inverses; corrected repeated-index convention"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct the finite-field model. On the slice over $V_i$ put $P_i=(E_X|_{V_i})^{r_i}$. The matrices $g_{ij}$ from step 3 define isomorphisms $P_i|_{V_{ij}}\\to P_j|_{V_{ij}}$, and the triple equation is exactly the cocycle hypothesis in [lem-weil-pbc-site-module-sheaf-gluing]. Apply that theorem to $\\mathcal C=X_{\\mathrm{proet}}$, $U=X$, $A=E_X$, and the finite covering of step 1. It produces an $E_X$-module $L_E$ and local isomorphisms $e_i:L_E|_{V_i}\\xrightarrow{\\sim}P_i$ satisfying $g_{ij}e_i=e_j$ on overlaps. It is lisse by its displayed finite free local models; no global constant-rank decomposition is needed.",
-   "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, lemma-glue-sheaves, module version carried by the cited node"
-   }
-  },
-  {
-   "text": "Identify the extension with $L$. By the tensor calculations of step 2, $\\QbarX\\otimes_{E_X}L_E$ has local free identifications $(e_i)_{\\Qlb}$ and transition matrices equal to the original $g_{ij}$. Define on $V_i$ the $\\QbarX$-linear isomorphism $b_i=t_i^{-1}(e_i)_{\\Qlb}$ to $L|_{V_i}$. On $V_{ij}$, $t_j^{-1}g_{ij}=t_i^{-1}$ and $(e_j)_{\\Qlb}=g_{ij}(e_i)_{\\Qlb}$, hence $b_j=b_i$. The morphism gluing theorem [lem-pur-sheaf-hom-cover-gluing], with ring sheaf $\\QbarX$, gives a global map $b:\\QbarX\\otimes_{E_X}L_E\\to L$. On each overlap the equality $b_i=b_j$ implies $b_i^{-1}=b_j^{-1}$, by composing on the left by $b_j^{-1}$ and on the right by $b_i^{-1}$. Thus [lem-pur-sheaf-hom-cover-gluing] also glues the local inverses to a global inverse: each composite restricts to the identity on every $V_i$, and the uniqueness clause makes that composite the global identity. Thus $b$ is an isomorphism and proves (1).",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; sites-modules.tex Tag 03EM, lemma-internal-hom"
-   }
-  },
-  {
-   "text": "Surjectivity in (2). Take the common finite trivializing cover of $M,N$ from step 1, writing $M|_{V_i}\\cong E_X^{a_i}|_{V_i}$ and $N|_{V_i}\\cong E_X^{b_i}|_{V_i}$. Let $u^M_{ij},u^N_{ij}$ be their transition matrices over $E_X(V_{ij})$. A given $\\QbarX$-linear map $\\psi:M_{\\Qlb}\\to N_{\\Qlb}$ is, by step 2, represented on $V_i$ by a rectangular matrix $A_i$ over $\\QbarX(V_i)$. Its overlap equation is $u^N_{ij}A_i=A_j u^M_{ij}$. By [det-lem-coefficient-finite-descent-sections] (2), all entries of each $A_i$ descend to a finite field; using [def-weil-finite-subextension-directed-set], choose a common finite $F$ containing these fields and $E$. The injectivity $F_X(V_{ij})\\to\\QbarX(V_{ij})$ from the sections lemma implies the displayed overlap equation over $F_X$. Hence the matrices define compatible $F_X$-linear maps $M_F|_{V_i}\\to N_F|_{V_i}$, which glue to $\\psi_F:M_F\\to N_F$ by [lem-pur-sheaf-hom-cover-gluing]. Step 2 shows its scalar extension has the matrices $A_i$, so uniqueness in the same gluing theorem gives $(\\psi_F)_{\\Qlb}=\\psi$.",
-   "uses": [
-    "det-lem-coefficient-finite-descent-sections",
-    "def-weil-finite-subextension-directed-set",
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md",
-    "place": "Proof (2), surjectivity, with the precise matrix overlap equation"
-   }
-  },
-  {
-   "text": "Injectivity in (2). Suppose representatives $\\phi_F$ and $\\phi_{F'}$ have the same image over $\\Qlb$. Use [def-weil-finite-subextension-directed-set] to choose a finite $H$ containing $F,F'$. Step 2 identifies their extensions as two maps $M_H\\to N_H$ with the same $\\Qlb$-extension. On the finite common cover their difference is a matrix over $H_X(V_i)$ which becomes the zero matrix over $\\QbarX(V_i)$. The injectivity in [det-lem-coefficient-finite-descent-sections] (2), since $V_i$ is quasi-compact, makes every entry zero already over $H_X(V_i)$. Uniqueness in [lem-pur-sheaf-hom-cover-gluing] then shows $(\\phi_F)_H=(\\phi_{F'})_H$. These representatives therefore define the same class in the colimit specified in the statement. Conversely changing representatives by scalar extension preserves the image, because the pure-tensor transitivity formula of step 2 applies entry by entry. The canonical map is thus well-defined and injective; together with step 6 it is bijective.",
+   "text": "Derive associativity of the canonical extension comparisons from uniqueness of left adjoints and the strictly compatible restriction comparisons. This gives invariance of the algebraic-closure image under every Hom transition. For two representatives with equal images choose the finite compositum of their fields. Their transitions there have equal images; faithfulness makes them equal. The two generating relations give an EqvGen zigzag. Conversely induct on EqvGen, using transition invariance, reflexivity, symmetry and transitivity of equality.",
    "uses": [
     "def-weil-finite-subextension-directed-set",
-    "det-lem-coefficient-finite-descent-sections",
-    "lem-pur-sheaf-hom-cover-gluing"
+    "sk-def-sfb-change-of-scalars"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md",
-    "place": "Proof (2), injectivity for representatives at different finite fields"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "sk-def-pe-site",
-  "def-pur-localized-ringed-site",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-change-of-scalars",
-  "def-pur-sheaf-tensor-product",
-  "det-lem-coefficient-finite-descent-sections",
+  "lem-sfb-lisse-finite-coefficient-model",
+  "lem-sfb-lisse-finite-hom-lift",
+  "lem-weil-pbc-condensed-coefficient-derived-faithful",
   "def-weil-finite-subextension-directed-set",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "def-sfb-subfield-coefficient-map"
+  "sk-def-sfb-change-of-scalars"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.proof.md",
-  "place": "Proof (1) and (2), completed with Stacks Tags 0989, 03GI, 01K5, 01K6, 04TR, 04TQ, 03EM, 03EK"
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-lisse.md",
+  "place": "Proof (1)--(2), with ordinary coefficient faithfulness from the existing split-unit construction",
+  "note": "F1: both object descent and finite-stage Hom lifting are proved from existing interfaces. Canonical comparison coherence, ordinary scalar faithfulness and the representative equivalence relation are fully proved; no new sorry remains."
  },
  "mathlib_searches": [
   {
@@ -285,12 +216,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sites-and-cohomology"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -338,5 +264,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Uses the already landed IsLisseCoefficientModule, adding its owning node to stmt_deps. Clause (2) is stated exactly by representatives for the specified set colimit: the canonical representative map is surjective and its kernel equivalence is Relation.EqvGen of scalar extension. The backward implication includes well-definedness and the forward implication includes injectivity of the induced quotient map. The six helper declarations supply only these representatives and their canonical ordinary tensor comparisons; no arbitrary comparison or derived scalar extension is used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261019T002540-L-2151552",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
