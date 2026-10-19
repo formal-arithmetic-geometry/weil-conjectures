@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-!
 # Finite locally finitely presented morphisms are of finite presentation
@@ -39,6 +38,6 @@ This also retains the separatedness asserted in the source paragraph of Tag 057T
 theorem finitePresentation_of_finite_of_locallyOfFinitePresentation
     {T U : Scheme.{u}} (p : T ⟶ U) [IsFinite p] [LocallyOfFinitePresentation p] :
     LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p ∧ IsSeparated p := by
-  sorry
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry
