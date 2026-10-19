@@ -8,10 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
 public import Sheaf.AlgebraicGeometry.ProEtaleGeometricStalk
-import Sheaf.Paper.ProEtaleConstantModulePullbackHomology
-import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import Sheaf.Paper.ProEtaleConstantModulePullbackEncoding
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Finite local constancy under inverse image
@@ -28,117 +27,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A constant module presheaf is left adjoint to evaluation at a terminal object.
-Source: the constant-sheaf universal property, Stacks Tag 0H7J. -/
-private noncomputable def constantPresheafHomEquiv (Y : Scheme.{u}) (A : Type u) [CommRing A]
-    (T : Y.ProEt) (hT : IsTerminal T)
-    (M : ModuleCat.{u + 1} (ULift.{u + 1} A))
-    (F : PresheafOfModules.{u + 1}
-      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)) ⋙
-        forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) :
-    (proEtaleConstantModulePresheaf Y.ProEt A M ⟶ F) ≃ (M ⟶ F.obj (op T)) where
-  toFun f := f.app (op T)
-  invFun q :=
-    { app U := q ≫ F.map (hT.from U.unop).op
-      naturality := by
-        intro U V a
-        ext x
-        symm
-        change F.map a (F.map (hT.from U.unop).op (q x)) =
-          F.map (hT.from V.unop).op (q x)
-        rw [← F.map_comp_apply]
-        have h : (hT.from U.unop).op ≫ a = (hT.from V.unop).op := by
-          change (a.unop ≫ hT.from U.unop).op = _
-          exact congrArg Quiver.Hom.op (hT.hom_ext _ _)
-        rw [h] }
-  left_inv f := by
-    apply PresheafOfModules.hom_ext
-    intro U
-    ext x
-    exact (PresheafOfModules.naturality_apply f (hT.from U.unop).op x).symm
-  right_inv q := by
-    have h : hT.from T = 𝟙 T := hT.hom_ext _ _
-    ext x
-    change F.map (hT.from T).op (q x) = q x
-    rw [h]
-    simp
-    rfl
-/-- The same universal property after simultaneous ring and module sheafification.
-Source: Stacks Tag 0H7J and the module sheafification adjunction. -/
-private noncomputable def constantModuleHomEquiv (Y : Scheme.{u}) (A : Type u) [CommRing A]
-    (T : Y.ProEt) (hT : IsTerminal T)
-    (M : ModuleCat.{u + 1} (ULift.{u + 1} A))
-    (F : SheafOfModules.{u + 1}
-      ((sheafCompose (ProEt.topology Y)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-          ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).obj
-            (CommRingCat.of (ULift.{u + 1} A))))) :
-    (proEtaleConstantModuleSheaf Y A M ⟶ F) ≃
-      (M ⟶ ((PresheafOfModules.restrictScalars
-        (Functor.whiskerRight (toSheafify (ProEt.topology Y)
-          ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A))))
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))).obj F.val).obj (op T)) := by
-  haveI := (proEtaleConstantRingUnit_locallyBijective Y A).1
-  haveI := (proEtaleConstantRingUnit_locallyBijective Y A).2
-  exact (PresheafOfModules.sheafificationHomEquiv (F := F)
-    (P := proEtaleConstantModulePresheaf Y.ProEt A M)
-    (Functor.whiskerRight (toSheafify (ProEt.topology Y)
-      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A))))
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))).trans (constantPresheafHomEquiv Y A T hT M _)
-
-
-private noncomputable def constantPF (Y : Scheme.{u}) (A : Type u) [CommRing A] :
-    ModuleCat.{u + 1} (ULift.{u + 1} A) ⥤ PresheafOfModules.{u + 1}
-      ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)) ⋙
-        forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) where
-  obj M := proEtaleConstantModulePresheaf Y.ProEt A M
-  map f := { app _ := f, naturality := by intros; ext x; rfl }
-  map_id _ := by apply PresheafOfModules.hom_ext; intro U; rfl
-  map_comp _ _ := by apply PresheafOfModules.hom_ext; intro U; rfl
-
-private noncomputable def constantPFAdj (Y : Scheme.{u}) (A : Type u) [CommRing A]
-    (T : Y.ProEt) (hT : IsTerminal T) :
-    constantPF Y A ⊣ PresheafOfModules.evaluation _ (op T) :=
-  Adjunction.mkOfHomEquiv
-    { homEquiv := constantPresheafHomEquiv Y A T hT
-      homEquiv_naturality_left_symm := by
-        intros
-        apply PresheafOfModules.hom_ext
-        intro U
-        rfl
-      homEquiv_naturality_right := by intros; rfl }
-
-private noncomputable def ringUnit (Y : Scheme.{u}) (A : Type u) [CommRing A] :=
-  Functor.whiskerRight (toSheafify (ProEt.topology Y)
-    ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A))))
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-
-private noncomputable def constantMF (Y : Scheme.{u}) (A : Type u) [CommRing A] :
-    ModuleCat.{u + 1} (ULift.{u + 1} A) ⥤
-      proEtaleRingModules Y (proEtaleConstantRing Y A) :=
-  haveI : Presheaf.IsLocallyInjective (ProEt.topology Y) (ringUnit Y A) :=
-    (proEtaleConstantRingUnit_locallyBijective Y A).1
-  haveI : Presheaf.IsLocallySurjective (ProEt.topology Y) (ringUnit Y A) :=
-    (proEtaleConstantRingUnit_locallyBijective Y A).2
-  constantPF Y A ⋙ PresheafOfModules.sheafification.{u + 1} (ringUnit Y A)
-
-private noncomputable def constantGlobal (Y : Scheme.{u}) (A : Type u) [CommRing A]
-    (T : Y.ProEt) :
-    proEtaleRingModules Y (proEtaleConstantRing Y A) ⥤
-      ModuleCat.{u + 1} (ULift.{u + 1} A) :=
-  SheafOfModules.forget _ ⋙ PresheafOfModules.restrictScalars (ringUnit Y A) ⋙
-    PresheafOfModules.evaluation _ (op T)
-
-private noncomputable def constantMFAdj (Y : Scheme.{u}) (A : Type u) [CommRing A]
-    (T : Y.ProEt) (hT : IsTerminal T) : constantMF Y A ⊣ constantGlobal Y A T := by
-  haveI : Presheaf.IsLocallyInjective (ProEt.topology Y) (ringUnit Y A) :=
-    (proEtaleConstantRingUnit_locallyBijective Y A).1
-  haveI : Presheaf.IsLocallySurjective (ProEt.topology Y) (ringUnit Y A) :=
-    (proEtaleConstantRingUnit_locallyBijective Y A).2
-  exact (constantPFAdj Y A T hT).comp (PresheafOfModules.sheafificationAdjunction.{u + 1}
-    (R := (sheafCompose (ProEt.topology Y)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A))
-    (ringUnit Y A))
+/-- The coefficient direct-image map extends the constant-section unit.
+Source: Stacks Project, Tag 0H7J, the constant-sheaf universal property.
+(blueprint: lem-pur-proetale-finite-local-constancy-pullback). -/
 theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u)
     [CommRing A] (W : Y.ProEtᵒᵖ) :
     (toSheafify (ProEt.topology Y)
@@ -155,6 +46,9 @@ theorem proEtaleConstantModulePullback_rho_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))))
   exact congrArg (fun t ↦ t.app W) h
 
+/-- The ring direct-image map is the adjunct of the canonical coefficient comparison.
+Source: Stacks Project, Tag 03D2, inverse-image/direct-image adjunction.
+(blueprint: lem-pur-proetale-finite-local-constancy-pullback). -/
 theorem proEtaleConstantModulePullback_ring_direct
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A]
     [IsIso (proEtaleCoefficientInverseImageMap f A)] :
@@ -164,81 +58,23 @@ theorem proEtaleConstantModulePullback_ring_direct
   exact (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
     |>.apply_symm_apply (proEtaleCoefficientDirectImageMap f A)
 
-private noncomputable def constAdj {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u)
-    [CommRing A] : proEtaleConstantModulePullbackFunctor f A ⊣
-      proEtaleConstantModuleDirectImage f A := by
-  have := constantComparison_isIso f A
-  let adj := proEtaleRingModuleAdjunction f (proEtaleConstantRing Y A)
-    (proEtaleConstantRing X A) (asIso (proEtaleCoefficientInverseImageMap f A))
-  change proEtaleConstantModulePullbackFunctor f A ⊣ _ at adj
-  dsimp only [proEtaleRingModuleDirectImage] at adj
-  rw [proEtaleConstantModulePullback_ring_direct] at adj
-  exact adj
-private noncomputable def globalDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] (T : Y.ProEt) :
-    proEtaleConstantModuleDirectImage f A ⋙ constantGlobal Y A T ≅
-      constantGlobal X A ((proEtaleBaseChange f).obj T) :=
-  NatIso.ofComponents (fun N ↦ by
-    let e : (constantGlobal Y A T).obj
-        ((proEtaleConstantModuleDirectImage f A).obj N) ≃ₗ[ULift.{u + 1} A]
-          (constantGlobal X A ((proEtaleBaseChange f).obj T)).obj N :=
-      { toFun := id
-        invFun := id
-        left_inv := fun _ ↦ rfl
-        right_inv := fun _ ↦ rfl
-        map_add' := fun _ _ ↦ rfl
-        map_smul' := by
-          intro a n
-          let B := (proEtaleConstantRing X A).obj.obj
-            (op ((proEtaleBaseChange f).obj T))
-          let z : N.val.obj (op ((proEtaleBaseChange f).obj T)) := n
-          let s : B := (proEtaleCoefficientDirectImageMap f A).hom.app (op T)
-            ((toSheafify (ProEt.topology Y)
-              ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app
-                (op T) a)
-          let t : B := (toSheafify (ProEt.topology X)
-            ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app
-              (op ((proEtaleBaseChange f).obj T)) a
-          change s • z = t • z
-          have h : s = t := congrArg (fun h ↦ h a)
-            (proEtaleConstantModulePullback_rho_unit f A (op T))
-          exact congrArg (fun c : B ↦ c • z) h }
-    exact e.toModuleIso)
-    (by intros; ext x; rfl)
-
-/-- Pullback preserves the actual constant module construction and scalar action.
-Source: Stacks Tags 0H7J and 03D2, via the canonical module adjunction. -/
-private noncomputable def constantModulePullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (A : Type u) [CommRing A] (T : Y.ProEt) (hT : IsTerminal T)
-    (M : ModuleCat.{u + 1} (ULift.{u + 1} A)) :
-    proEtaleConstantModulePullback f A (proEtaleConstantModuleSheaf Y A M) ≅
-      proEtaleConstantModuleSheaf X A M := by
-  let ac := ((constantMFAdj Y A T hT).comp (constAdj f A)).ofNatIsoRight
-    (globalDirectIso f A T)
-  let ax := constantMFAdj X A ((proEtaleBaseChange f).obj T)
-    (hT.isTerminalObj (proEtaleBaseChange f) T)
-  exact (ac.leftAdjointUniq ax).app M
-
 /-- Inverse image preserves finite local constancy of a module sheaf.
 
 Source: Stacks Project, Modules on Sites, Tag 093R,
 lemma-pullback-locally-constant, applied to pro-etale module inverse image.
 (blueprint: lem-pur-proetale-finite-local-constancy-pullback).
 
-Proof: pull a trivializing cover on Y back along b. Base change preserves its
-covering property. The helper constantModuleHomEquiv proves the constant-module
-universal property from constant presheaf evaluation and module sheafification.
-The helper constantModulePullbackIso proves preservation of these constant models:
-compose their actual adjunction with the inverse-image adjunction. The proved
-coefficient-unit formula identifies terminal sections with their scalar actions,
-and uniqueness of left adjoints supplies the module isomorphism. Equivalently, the inverse image
-of a constant module sheaf is the constant
-module sheaf with the same value: inverse image preserves coproducts and the
-terminal sheaf, hence constant set sheaves, and preserves their addition and scalar
-action. For a geometric point of X, compose with b;
-the stalk inverse-image formula identifies the new stalk with the stalk on Y
-at the composite geometric point. Hence it is finite. Empty schemes and empty
-cover members require no geometric points. -/
+Proof: use the coefficient-encoding equivalence to express F by finite constant
+models on a pro-etale cover. Pull this cover back along b; precoverage stability
+under base change preserves its covering property. The pullback composition
+isomorphisms and the cartesian-square equation identify each new restriction with
+the pullback of its old constant model. A terminal-object-preserving site inverse
+image commutes with constant sheaves, so each new model has the same finite value.
+Finally restriction to constant scalars commutes with the specified intrinsic
+module pullback. Transport the finite-model condition through this comparison and
+back through the coefficient-encoding equivalence. That equivalence supplies both
+local constancy on localized ringed sites and finiteness of every geometric stalk.
+The argument also covers empty schemes, empty covering members and the zero ring. -/
 theorem proEtale_finiteLocalConstancy_pullback
     {Y X : Scheme.{u}} (b : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A]
@@ -250,6 +86,35 @@ theorem proEtale_finiteLocalConstancy_pullback
       ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
         Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing X A)
           (proEtaleConstantModulePullback b A F)) := by
-  sorry
+  let Λ := ULift.{u + 1, u} A
+  let G := (proEtaleModuleRestriction Y A).obj F
+  have hG : ProEtale.IsFiniteLocallyConstant Λ G := (finiteLocal_iff Y A F).mpr hF
+  obtain ⟨I, W, g, hg, hm⟩ := hG
+  have hp : ProEtale.IsFiniteLocallyConstant Λ
+      ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) b).obj G) := by
+    refine ⟨I, fun i ↦ pullback (g i) b, fun i ↦ pullback.snd (g i) b, ?_, ?_⟩
+    · exact Precoverage.mem_coverings_of_isPullback g hg b _ _
+        (fun i ↦ (IsPullback.of_hasPullback (g i) b).flip)
+    · intro i
+      obtain ⟨M, hM, ⟨e⟩⟩ := hm i
+      let p := pullback.fst (g i) b
+      let q := pullback.snd (g i) b
+      let E := ModuleCat.{u + 1} Λ
+      have heq : q ≫ b = p ≫ g i := pullback.condition.symm
+      exact ⟨M, hM, ⟨
+        ((ProEtale.upperStarComp E q b).app G).symm ≪≫
+        (eqToIso (congrArg (fun f ↦ (ProEtale.upperStar E f).obj G) heq)) ≪≫
+        (ProEtale.upperStarComp E p (g i)).app G ≪≫
+        (ProEtale.upperStar E p).mapIso e ≪≫
+        (Functor.isoWhiskerLeft (constantSheaf (ProEt.topology (W i)) E)
+          (Functor.sheafPullbackConstruction.sheafPullbackIso (proEtaleBaseChange p) E
+            (ProEt.topology (W i)) (ProEt.topology (pullback (g i) b))).symm).app M ≪≫
+        ((proEtaleBaseChange p).constantSheafsheafPullbackIso E
+          (ProEt.topology (W i)) (ProEt.topology (pullback (g i) b))
+          (ProEt.isTerminalMkId (W i))
+          ((ProEt.isTerminalMkId (W i)).isTerminalObj (proEtaleBaseChange p) _)).app M⟩⟩
+  obtain ⟨e⟩ := proEtaleModuleRestriction_pullback b A F
+  exact (finiteLocal_iff X A _).mp
+    (ProEtale.isFiniteLocallyConstant_of_iso e.symm hp)
 
 end AlgebraicGeometry.Scheme

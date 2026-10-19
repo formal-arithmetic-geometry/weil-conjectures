@@ -16938,3 +16938,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/W3/Sheaf.AlgebraicGeometry.BoundedComplexDirectImagePresheaf (stage 3; reviewer PASS; first push; landing 20261019T034335-L-423037 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:43 L: merged deliver/W3/Sheaf.RingTheory.RegularSequenceGradedPolynomial (stage 3; reviewer PASS; first push; landing 20261019T034335-L-423197 (interface); batch 20261019T034248; modules 2; new nodes 1)
 - 03:43 L: merged deliver/W4/Sheaf.Paper.FourCorners (stage 3; reviewer PASS; first push; landing 20261019T034336-L-423394 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:43 L: merged deliver/W4/Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback (stage 3; reviewer PASS; first push; landing 20261019T034337-L-423574 (proof); batch 20261019T034248; modules 1; new nodes 0)

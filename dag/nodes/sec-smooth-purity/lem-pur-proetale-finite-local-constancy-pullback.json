@@ -26,45 +26,39 @@
  ],
  "proof": [
   {
-   "text": "Choose a covering of the terminal object of Y on which F is a constant module sheaf, using [def-weil-proetale-locally-constant-sheaf]. Base change by b gives a covering of the terminal object of X, by [def-weil-proetale-inverse-image]. Restriction to each localized site commutes with this inverse image: both direct images are the corresponding precomposition functors on sections, and their left adjoints agree by uniqueness. The proved private helpers constantPresheafHomEquiv and constantModuleHomEquiv express the universal property of the actual constant module construction: module maps out of it correspond to linear maps to terminal sections with scalars restricted along the constant-ring unit. The private helper constantModulePullbackIso then proves that the actual module inverse image preserves these constant models: compose the constant-model and canonical module adjunctions of [def-weil-pbc-proetale-operations], identify terminal sections as modules using the normalized coefficient-unit formula, and apply uniqueness of left adjoints. It uses the actual restriction functor of [lem-pur-proetale-constant-module-pullback-homology]. The localized-site compatibility remains to be assembled. Equivalently, inverse image of a constant set sheaf is constant with the same value, since it preserves coproducts and terminal objects. Applying this to the addition and scalar-action diagrams gives the same assertion for constant module sheaves, with the canonical constant coefficient identification. Thus b_A^*F is locally constant. The canonical coefficient comparison is invertible by [lem-pur-proetale-constant-coefficient-comparison], identifying the resulting constant scalar action with the specified A_X-action.",
+   "text": "Apply the proved finiteLocal_iff helper in Sheaf.Paper.ProEtaleConstantModuleConstructibility (imported with import all). It identifies the intrinsic local constancy and finite geometric stalk conditions with fixed-coefficient finite constant models. This is precisely the local equivalence proved in steps 1--3 of [lem-weil-pbc-proetale-constant-module-constructibility], without choosing a stratification. Write the resulting pro-etale covering as g_i:W_i→Y, with finite model M_i and g_i^*G≅constant(M_i), where G is restriction to constant scalars.",
    "uses": [
-    "def-weil-proetale-locally-constant-sheaf",
-    "def-weil-proetale-inverse-image",
-    "lem-pur-proetale-constant-coefficient-comparison",
-    "def-weil-pbc-proetale-operations",
-    "lem-pur-proetale-constant-module-pullback-homology"
+    "lem-weil-pbc-proetale-constant-module-constructibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093R, lemma-pullback-locally-constant; omitted proof expanded with covering and constant-sheaf constructions"
-   }
+   "elementary": false
   },
   {
-   "text": "At x:Spec Ω→X, inverse image identifies the stalk of b_A^*F with that of F at x≫b. The identification is obtained by the pointed-neighbourhood pullback and the germ formula: local representatives map to the same representative over the cartesian neighbourhood, and sheafification does not change the germ. It respects the constant scalar action. Finiteness follows from the hypothesis at x≫b and invariance of finiteness under a bijection. Empty schemes and empty cover members impose no new stalk condition.",
+   "text": "Replace each W_i by P_i=W_i×_Y X. The projections q_i:P_i→X form a pro-etale covering by Precoverage.mem_coverings_of_isPullback. Writing p_i:P_i→W_i, the equation q_i≫b=p_i≫g_i and the pullback compositors [def-sfb-finite-upper-star-comp] identify q_i^*b^*G with p_i^*g_i^*G. Apply p_i^* to the model isomorphism. Base change preserves the terminal site object, so Functor.constantSheafsheafPullbackIso identifies p_i^*constant(M_i) with constant(M_i); sheafPullbackConstruction.sheafPullbackIso compares the selected and constructed inverse images. Thus b^*G has finite constant models with the same finite M_i.",
    "uses": [
-    "def-weil-proetale-geometric-stalk",
-    "def-weil-proetale-inverse-image"
+    "def-weil-proetale-inverse-image",
+    "def-sfb-finite-upper-star-comp"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093R; pointed-neighbourhood computation of inverse image"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-proetale-constant-module-pullback-encoding] to identify restriction to constant scalars of the actual intrinsic module pullback with b^*G. Finite local constancy of fixed-module sheaves is invariant under isomorphism. Apply finiteLocal_iff in the reverse direction to recover both intrinsic local constancy and finiteness of all specified geometric module stalks. The equivalence uses finite models and so avoids a new general inverse-image stalk formula. Empty schemes, empty covers and zero coefficients are already covered by that equivalence.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-proetale-locally-constant-sheaf",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
   "def-weil-proetale-inverse-image",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "def-weil-pbc-proetale-operations",
-  "lem-pur-proetale-constant-module-pullback-homology",
-  "def-weil-proetale-geometric-stalk"
+  "def-sfb-finite-upper-star-comp",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093R, lemma-pullback-locally-constant, plus the pointed-neighbourhood stalk computation"
+  "place": "Tag 093R, lemma-pullback-locally-constant, expanded by W4 using the existing finite-model coefficient-encoding equivalence and base-changed trivializing covers."
  },
  "mathlib_searches": [
   {
@@ -129,13 +123,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261018T092905-L-3441258",
-  "kind": "interface",
+  "landing": "20261019T034337-L-423574",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
