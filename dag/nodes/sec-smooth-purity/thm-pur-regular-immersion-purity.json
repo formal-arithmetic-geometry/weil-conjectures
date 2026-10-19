@@ -18,7 +18,12 @@
   "def-pur-conventions",
   "sk-def-purity-conv",
   "def-pur-frame-class",
-  "lem-pur-frame-independence"
+  "lem-pur-frame-independence",
+  "def-pur-supported-class-operations",
+  "def-pur-regular-immersion-class-data",
+  "def-pur-regular-immersion-exterior-class",
+  "def-pur-regular-immersion-signed-evaluation",
+  "def-pur-regular-immersion-cancellation"
  ],
  "proof": [
   {
@@ -240,5 +245,32 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-d092ee331 (reviewer sub-agent of L); spot-checked: Read the item, report, unit/chapter route, cited DAG statements, and current/master blueprint sources. The item exactly duplicates sk-thm-regular; all hypotheses, coefficient conventions, Kummer normalization, twist-cancelled morphism direction, and étale/product compatibilities check out. Edge cases and Mathlib searches were reviewed; no new nodes, route violations, cycles, or repairable faults. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RegularImmersionPurity",
+  "declaration": "WeilConjectures.PurityFiniteSetting.regularImmersionPurity",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.regularImmersionPurity",
+   "WeilConjectures.PurityFiniteSetting.regularPurityIso",
+   "WeilConjectures.PurityFiniteSetting.regularFundamentalClass_etale",
+   "WeilConjectures.PurityFiniteSetting.regularFundamentalClass_product",
+   "WeilConjectures.PurityFiniteSetting.regularCancelledPurityIso",
+   "WeilConjectures.PurityFiniteSetting.regularPurityIsoType_eq",
+   "WeilConjectures.PurityFiniteSetting.regularCancellationClass"
+  ],
+  "file": "lean/Sheaf/Paper/RegularImmersionPurity.lean",
+  "statement": "theorem regularImmersionPurity (P : PurityFiniteSetting.{u}) {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (aX : X ⟶ Spec (.of P.field.k)) [IsSeparated aX] [QuasiCompact aX] [Smooth aX] (c : ℕ) (hi : PurityConventions.IsRegularOfPureCodimension i c) (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) : P.RegularFrameNormalization i aX c (P.regularFundamentalClass i aX c hi hZ) ∧ (∀ (r : ℤ), r ≠ 0 → IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj ((P.regularExceptional i aX).obj (P.regularTate X c)))) ∧ Nonempty ((_root_.DerivedCategory.homologyFunctor _ 0).obj ((P.regularExceptional i aX).obj (P.regularTate X c)) ≅ P.constant Z) ∧ IsIso (P.regularFundamentalClassMap i aX c hi hZ)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-19",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ea6ce8c4",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery of 964596d17a6f (returned H2/H13); the prescribed repair is done exactly. The SupportedCupFunctoriality module and the lem-pur-supported-cup-functoriality record are dropped from the delivery, so live stays unchanged. The item and the 4 new def nodes now cite def-pur-supported-class-operations instead of the theorem; every functorialCup* identifier used is in its declarations, and no reference to the theorem remains. The 34 regular* adapters moved byte-identically (only the blueprint tag differs) into RegularImmersionClassData lines 53-552, are listed in the class-data record, and clash with no live name. The item module and the other 3 modules are byte-identical to the previous delivery, whose statement substance (H3, edge cases, universes) was accepted; every lean.statement is verbatim and all proofs are sorry. No same-notion sibling def node has landed (lem-pur-twist-cancellation is a different theorem). nt_compile --json of all 5 files is clean: 19.0/12.8/4.3/4.8/4.8 s at load ~80. Advisory: class-data cites lem-pur-frame-independence, a base stmt_dep of the item; regularExceptional has a phantom _aX binder; cast carriers rest on sorry'd type equalities."
  }
 }

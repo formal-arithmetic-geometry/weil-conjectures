@@ -17102,3 +17102,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head bfa07d933312: Byte-identical re-delivery: LisseRationalRealization.lean sha256 787)
 - 06:37 L: returned deliver/Q26/def-fix-six-functor-datum (reviewer RETURN: L: independent stage-2 immutable head 4dafee059b81: 4dafee059b81 is a byte-identical re-push of RETURNed b87e0dbee541 (a)
 - 06:57 L: merged deliver/NH/lem-per-finite-coefficient-dual-constructible (stage 2; reviewer PASS; parallel immutable checks)
+- 07:01 L: merged deliver/NU/thm-pur-regular-immersion-purity (stage 2; reviewer PASS; parallel immutable checks)
