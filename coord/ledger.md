@@ -17437,3 +17437,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:49 L: returned deliver/N7/lem-tw-lisse-rational-realization (reviewer RETURN: L: independent stage-2 immutable head 7db237a40a4b: H3/H5 RETURN. (1) sfRationalLisseProperty ignores its chart U, so li)
 - 13:51 L: merged deliver/NU/lem-sfb-constructible-cocone-obj (reviewer FIX; first push; new nodes: 0)
 - 13:54 L: merged deliver/NL/lem-coef-rational-scalar-transpose-compatibility (stage 2; reviewer PASS; parallel immutable checks)
+- 13:58 L: returned deliver/NQ/cor-coef-verdier-weil-equivariance (reviewer RETURN: L: independent stage-2 immutable head 22a032a16659: H3: (F1) Duality.omegaStructure is a free field under ∃ WX; rescalin)
