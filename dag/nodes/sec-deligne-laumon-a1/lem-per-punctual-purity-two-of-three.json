@@ -15,7 +15,10 @@
   "def-weil-residue-field",
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-per-stalk-regular-closed-immersion",
+  "def-per-closed-support-plus-adjunction",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -312,5 +315,27 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-1db8838d1 (reviewer sub-agent of L); spot-checked: I read the item, its parent's Step 5 (lem-per-gabber-regular-pair-purity), and every cited statement against ILO Exposé XVI, Definitions 3.1.4 and 3.2.1–3.2.2 and Proposition 3.2.3 with proof (printed pp. 243–244). The statement matches the source. It is restricted to F_ell coefficients and Noetherian schemes, which is what the parent needs; this is not a target. Small cases check out: a DVR with its closed point gives (a)<=>(c) because (b) is trivial; Z empty, codimension 0, and d=0 (U empty) all hold. No node duplicates the two-of-three statement: the punctual-purity siblings state etale locality, the trait test and degree descent. Steps 1, 2, 4, 5, 6, 7 and 8 follow the source route correctly: localization, the Gysin composition eta_b = a^!(eta)(d)[2d] o eta_a, cancellation, strong induction on dim S over all regular local pairs, recollement, and stalk conservativity. One C4 gap: Step 3 claimed the underived lem-pur-etale-supported-kernel-adjunction identifies the class-calculus a^! (the right adjoint of compact-support Ra_!) with the derived supported-kernel functor, which no cited statement says. Steps 1 and 7 rely on the same identification. Fixed by citing def-per-closed-support-plus-adjunction (same unit, reviewed) and def-amb-etale-compact-support: for the compactification (id,a), Ra_! is a_*, so by uniqueness of right adjoints on D^+ the two functors agree. Step 6 now applies conservativity to the underlying abelian complexes. proof_deps is the union of the uses; every step is under 2000 characters; neither new citation creates a cycle. Batch-5 flag on lem-per-ind-etale-closed-support-base-change -> lem-trf-bounded-below-derived-adjunction: accepted. That node is the general D^+ derived-adjunction lemma, not a step of the trace formula or of Poincare duality. It also adds nothing to the batch-5 closure, because lem-per-regular-immersion-class-calculus is already a stmt_dep and proof_dep of the item and already has the ind-etale node in its proof_deps; the computed closures agree. The two definitions added by the fix add no new trace-formula or Poincare-duality nodes. The 9 declared tool_uses are accepted as generic etale formalism (twists, recollement, closed adjoint, triangulated derived functor, stalks, localization colimit, enough injectives).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PunctualPurityTwoOfThree",
+  "declaration": "AlgebraicGeometry.Etale.punctual_purity_two_of_three",
+  "declarations": [
+   "AlgebraicGeometry.Etale.punctual_purity_two_of_three"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PunctualPurityTwoOfThree.lean",
+  "statement": "theorem punctual_purity_two_of_three (ℓ : ℕ) (hℓ : ℓ.Prime) {Z X : Scheme.{u}} [IsNoetherian Z] [IsNoetherian X] (hZ : IsRegularScheme Z) (hX : IsRegularScheme X) (i : Z ⟶ X) [IsClosedImmersion i] (c : ℕ) (hi : IsStalkRegularClosedImmersion i c) (hℓX : IsUnit ((ℓ ^ 1 : ℕ) : Γ(X, ⊤))) : (IsIso (punctualPurityClassMap ℓ hℓ i c hi hℓX) → IsPunctuallyPure ℓ hℓ Z → ∀ z : Z, IsPunctuallyPureAt ℓ hℓ X (i z)) ∧ (IsIso (punctualPurityClassMap ℓ hℓ i c hi hℓX) → (∀ z : Z, IsPunctuallyPureAt ℓ hℓ X (i z)) → IsPunctuallyPure ℓ hℓ Z) ∧ (IsPunctuallyPure ℓ hℓ Z → (∀ z : Z, IsPunctuallyPureAt ℓ hℓ X (i z)) → IsIso (punctualPurityClassMap ℓ hℓ i c hi hℓX))",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Uses the published punctualPurityClassMap, IsPunctuallyPureAt and IsPunctuallyPure of def-per-punctual-purity. No duplicated helper definitions. Added statement dependencies are landed definitions used directly by the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40293f7d8",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and ILO XVI 3.2.3: prime ℓ/F_ℓ, regular Noetherian Z and X, closed immersion with stalkwise regular sequences of constant length c, ℓ a unit on X, (a) IsIso of the published canonical punctualPurityClassMap, (b) IsPunctuallyPure Z, (c) ∀ z, IsPunctuallyPureAt X (i z), and all three implications. Reuses the def-per-punctual-purity declarations with no duplicate helpers. Node diff vs live is only lean plus three landed def-node stmt_deps; statement is verbatim. Edge cases (empty Z, c=0, d=0, trait, universes) ok. Gates ok: no new definitions, docstrings carry the source place and 8 steps. Compile: two runs timed out at load ~100 in base dependency RegularImmersionClassCalculus before reaching the file; the third run at load ~51 was clean (3.9 s, rc 0). Advisory: fixed constant c covers the locally-constant case piece by piece (node Step 1)."
  }
 }

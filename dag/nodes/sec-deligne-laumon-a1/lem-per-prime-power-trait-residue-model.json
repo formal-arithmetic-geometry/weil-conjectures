@@ -292,5 +292,47 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-c0c2425a7 (reviewer sub-agent of L); spot-checked: Read in full against ILO Travaux de Gabber XVII §1.2 (printed pp. 259-262): Prop. 1.2.1.2, Prop. 1.2.2.1 with its proof, Def. 1.2.3.1 and Lemma 1.2.3.2. Compared with the live base node: statement, stmt_deps, source and blueprint are byte-identical, so the target is not weakened; the inherited searches are kept and three were appended. One commit, two files, no new nodes, no SGA, no cycle, proof_deps equal the union of the uses. lem-per-trait-tame-algebra and lem-per-trait-sheaf-gluing are in the item's unit; lem-asd-etale-finite-twist-pullback and the module-sheaf Grothendieck theorem are in the unit's uses closure. Accepted tool use: lem-weil-pbc-module-sheaves-grothendieck-abelian (Step 7, generic, same as the reviewed F_ell sibling). The prime-power changes are correct and needed: N_{qd} projects to q*N_d=0 in Z/ell^n (with level ell*d this is 2≠0 in Z/4 when ell=2, n=2); v_b has period q*d; G/qG≅mu_q because ell is prime to p; the p-power averaging denominators are units; L=mu_q is free of rank one, so plain tensor is the derived tensor (K-flat) and Hom(L,-) is exact. Rechecked: the explicit preimage in Step 2, H^1=0 via (0,Λ,0)→(Λ,Λ,id), H^2=0 via extension from (1-z)B_e in discrete G-modules (fills the source's H^1/H^2 slip), the two adjunctions giving injectivity of V^S, the finite-width totalization, End(forget)=A, g=ᾱu^{-1} and ε(u)=ᾱ. Small cases: constant sheaf (cohomology Λ in degree 2 only), closed-supported sheaf, j_!V, d=1, p=1, ell=2 with n=2. Overlap with the F_ell sibling lem-per-trait-residue-model (the n=1 case) is a family overlap that the sibling's review already notes; the sibling cannot be cited for n≥2. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrimePowerTraitResidueModel",
+  "declaration": "AlgebraicGeometry.Etale.exists_primePowerTraitResidueModel",
+  "declarations": [
+   "AlgebraicGeometry.Etale.TraitResidueTameCharacter",
+   "AlgebraicGeometry.Etale.traitResidueGenericPoint",
+   "AlgebraicGeometry.Etale.traitResidueUnderlying",
+   "AlgebraicGeometry.Etale.TraitPrimePowerStalkData",
+   "AlgebraicGeometry.Etale.traitResidueWild",
+   "AlgebraicGeometry.Etale.traitResidueHom",
+   "AlgebraicGeometry.Etale.traitResidueNegative",
+   "AlgebraicGeometry.Etale.TraitResidueTotal",
+   "AlgebraicGeometry.Etale.TraitContinuousCharacters",
+   "AlgebraicGeometry.Etale.TraitPrimePowerWildData",
+   "AlgebraicGeometry.Etale.TraitResidueRow",
+   "AlgebraicGeometry.Etale.TraitResidueAverage",
+   "AlgebraicGeometry.Etale.TraitResidueTate",
+   "AlgebraicGeometry.Etale.TraitResidueCochain",
+   "AlgebraicGeometry.Etale.traitResidueSupportUnit",
+   "AlgebraicGeometry.Etale.TraitResidueDerived",
+   "AlgebraicGeometry.Etale.traitResidueGenericFactors",
+   "AlgebraicGeometry.Etale.TraitPrimePowerCoefficients",
+   "AlgebraicGeometry.Etale.traitPrimePowerCoefficients_annihilated",
+   "AlgebraicGeometry.Etale.traitResidueUniformizer",
+   "AlgebraicGeometry.Etale.exists_primePowerTraitResidueModel"
+  ],
+  "file": "lean/Sheaf/Paper/PrimePowerTraitResidueModel.lean",
+  "statement": "theorem exists_primePowerTraitResidueModel (ell n : ℕ) [Fact ell.Prime] (hn : 1 ≤ n) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] (hell : IsUnit (ell : R)) (K Ks Ω : Type u) [Field K] [Algebra R K] [IsFractionRing R K] [Field Ks] [Algebra K Ks] [IsSepClosure K Ks] [Field Ω] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] (Ωs : Type u) [Field Ωs] [IsAlgClosed Ωs] (s : Spec (.of Ωs) ⟶ Spec (.of R)) (hs : s default = IsLocalRing.closedPoint R) : ∃ (hqp : 0 < ell ^ n ∧ (ell ^ n).Coprime (ringExpChar (IsLocalRing.ResidueField R))) (t : TraitResidueTameCharacter R K Ks Ω) (D : TraitPrimePowerStalkData R K Ks Ω Ωs s (TraitPrimePowerCoefficients.{u} ell n)) (N : TraitPrimePowerWildData D t.character) (F : TraitResidueRow D N) (av : TraitResidueAverage D t.character) (T : TraitResidueTate R K Ω (TraitPrimePowerCoefficients.{u} ell n) (ell ^ n) (ringExpChar (IsLocalRing.ResidueField R)) (traitPrimePowerCoefficients_annihilated ell n) hqp) (c : TraitResidueCochain D T N F av) (E : TraitResidueDerived D T F c (traitResidueUniformizer R)), ∃ sp : DerivedCategory.Plus.ι ⋙ (traitResidueUnderlying (TraitPrimePowerCoefficients.{u} ell n) (Gal(Ks/K)) D.generic).mapDerivedCategory ⟶ derivedSupportedEtaleSections (TraitPrimePowerCoefficients.{u} ell n) (Spec (.of R)) (PrimeSpectrum.basicOpen (traitResidueUniformizer R)) ⋙ (tensorRight T.line).leftDerivedFunctor ⋙ shiftFunctor _ (2 : ℤ), ∀ (σ : {σ : TameRoots.limitSubgroup Ω (ringExpChar (IsLocalRing.ResidueField R)) // traitIsGenerator σ}) (L : CochainComplex.Plus (TraitSheaves (TraitPrimePowerCoefficients.{u} ell n) R)), (traitResidueGenericFactors D L).hom ≫ sp.app (DerivedCategory.Plus.Q.obj L) = DerivedCategory.Q.map ((c.positiveResidue σ).app L.obj) ≫ ((DerivedCategory.Q (C := ModuleCat.{u + 1} (TraitPrimePowerCoefficients.{u} ell n))).commShiftIso (2 : ℤ)).hom.app _ ≫ (shiftFunctor _ (2 : ℤ)).map ((tensorRight T.line).mapDerivedCategoryFactors.inv.app _ ≫ (tensorRight T.line).mapDerivedCategory.map (E.factors.hom.app L ≫ E.comparison.hom.app (DerivedCategory.Plus.Q.obj L)) ≫ (tensorRight T.line).leftDerivedFunctorIsoMapDerivedCategory.inv.app _)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-19",
+  "existing": false,
+  "note": "Repair of return 29501644879f: uses the landed Rep.CompletedAugmentation.Algebra, Ideal, groupElement and action, Mathlib ringExpChar, and the sibling traitIsGenerator and TraitSheaves; removes the existential completed-algebra model, and renames the prime-power stalk data to avoid the sibling declaration collision."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f5ef97ee",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Repair of return 29501644879f checked against the diff, the landed CompletedAugmentationAlgebra, TraitResidueModel and TameRootsProduct. H4 fixed: Rep.CompletedAugmentation.Algebra/Ideal/groupElement/action replace TraitCompletedAlgebra/B/traitResidueIdeal; ringExpChar replaces traitCharacteristicExponent; sibling traitIsGenerator, TraitSheaves and topology instance reused. TraitPrimePowerWildData pins the tame action via descent and the A-module structure via the landed canonical action, so nothing is arbitrary. Its instance fields (compact, T2, totally disconnected topological group; Finite Λ) are true conclusions for the profinite TameRoots.limitSubgroup and ZMod(ell^n), n>=1. H9 fixed: stalk data renamed, other names dropped, public import of the sibling compiles; none of the 21 names occurs in side, live or slopmaster2 trees. H10 fixed: nt_compile --json clean, 33.2 s at load 59-77. Report F4 corrected. Statement verbatim, all 21 declarations present, 2 sorries, docstrings with source and blueprint, node changed only in lean, no dependency modules. Substance unchanged from the prior clause-by-clause check (correct): edge cases p=1, ell=2/n=2, generator change."
  }
 }
