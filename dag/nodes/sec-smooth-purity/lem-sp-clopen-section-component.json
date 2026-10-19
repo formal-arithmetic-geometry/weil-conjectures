@@ -16,123 +16,68 @@
  ],
  "proof": [
   {
-   "text": "For an object $W\\to V$ put $W_X=W\\times_V X$ and $W_Z=W\\times_V Z$. The open-immersion base-change lemma identifies these with the inverse images in $W$ of the two complementary opens of $V$. Hence they are complementary open subschemes and $W=W_X\\amalg W_Z$. Applying weakly-etale base change to $W\\to V$ shows that $W_X\\to X$ and $W_Z\\to Z$ are objects of the respective small pro-etale sites. Open immersions are objects of the pro-etale site, as specified in the localization lemma. The family $\\{W_X,W_Z\\}\\to W$ is a Zariski covering, hence a pro-etale covering by the explicit covering clause of [sk-def-pe-site]. The localization lemma identifies restriction along $s,t$ with evaluation on these component sites and identifies their coefficient sheaves with the restrictions of $A_V$.",
+   "text": "Use the existing fixed-scalar open restriction and extension adjunctions, transported through sfIntrinsicModuleEquivalence. For the two complementary opens, cross restrictions of extension by zero are zero by ProEtale.isInitial_openImmersionRestriction_openImmersionLowerShriek. The two-open Zariski cover is a pro-etale cover; ProEtale.isIso_of_isIso_localizationRestriction makes its restrictions jointly conservative. Construct a quasi-inverse by the biproduct of the two extensions. The adjunction counits and units give the two isomorphisms, checked after restriction. The resulting equivalence preserves finite limits and colimits. This is pair_equivalence and clopenSectionComponentCore in the Lean proof.",
    "uses": [
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction",
     "def-weil-pbc-proetale-site",
     "sk-def-pe-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Definition 098K (small pro-etale site), and the localization used in Definition 09AE (definition-extension-zero)"
-   }
+   "elementary": false
   },
   {
-   "text": "For every module sheaf $F$ on $V$ its restriction map $F(W)\\to F(W_X)\\times F(W_Z)$ is bijective: the sheaf equalizer for the cover of step 1 has no cross-component compatibility conditions, because $W_X\\times_W W_Z=\\varnothing$ and $F(\\varnothing)=0$ by the empty-cover sheaf condition; the same-component conditions are identities. This bijection is additive and $A_V(W)$-linear through the two coefficient restriction maps. It is natural in $W$ and $F$, since both maps are restrictions of sections.",
+   "text": "Full faithfulness of extension by zero makes the open unit invertible. Cross restriction is zero, so extension maps to (M,0). Lift maps and differentials of a pair of complexes through the full faithful restriction pair. Faithfulness proves the complex equations; essential surjectivity chooses degreewise preimages and transports the differentials through the component isomorphisms. Exact restrictions commute with homology, so acyclicity is detected by the pair. Lift a pair of homotopies through the same Hom bijection; additivity and faithfulness prove their zero and homotopy equations. These are pair_complex_equivalence, pair_homotopy and clopenSectionComponentComplex.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-    "place": "First sentence: disjoint open cover and sheaf gluing axiom; explicit equalizer argument"
-   }
-  },
-  {
-   "text": "For module sheaves $M$ on $X$ and $N$ on $Z$ define $G(M,N)(W)=M(W_X)\\times N(W_Z)$, with componentwise restrictions and $A_V(W)$-action through restriction of coefficients. For a covering $\\{W_i\\to W\\}$, its pullbacks to $W_X,W_Z$ are coverings of the component sites. A matching family for $G$ is exactly a pair of matching families for $M,N$, and each has one unique amalgamation. Thus $G$ is a module sheaf. On an object lying entirely over $X$ the second factor is $N(\\varnothing)=0$, so $s^*G(M,N)=M$, and similarly $t^*G(M,N)=N$. The maps in step 2 give $F\\cong G(s^*F,t^*F)$. Products of maps give the inverse on morphisms; restriction of these two natural isomorphisms is the identity on both components. This constructs the asserted additive equivalence, not just a bijection on isomorphism classes.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-    "place": "First sentence: explicit quasi-inverse for the disjoint-open-cover description"
-   }
-  },
-  {
-   "text": "The functor $\\Phi:F\\mapsto(s^*F,t^*F)$ of step 3 is an additive equivalence with explicit quasi-inverse $G$. The product of the two abelian module-sheaf categories is abelian, with kernels and cokernels computed coordinatewise: a map into or out of the pair of kernels (resp. cokernels) has the required universal factorization exactly in each coordinate. An equivalence of categories carries a kernel (resp. cokernel) diagram to a kernel (resp. cokernel) diagram, since the universal property is a statement about Hom sets, which $\\Phi$ and $G$ biject. Hence $\\Phi$ and $G$ preserve kernels and cokernels, i.e. are exact, and so are $s^*=\\mathrm{pr}_1\\Phi$ and $t^*=\\mathrm{pr}_2\\Phi$, because the coordinate projections preserve the coordinatewise kernels and cokernels. No comparison of restriction with the inverse image of a morphism of sites is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-    "place": "First sentence: exactness of the product description"
-   }
-  },
-  {
-   "text": "In the product category, maps $(M,0)\\to(F_X,F_Z)$ are exactly maps $M\\to F_X$, since there is a unique map $0\\to F_Z$. Consequently $G(M,0)$ is left adjoint to restriction to $X$. The stated extension-by-zero adjunction says that the specific $s_!$ of the item is another left adjoint to the same restriction. The unique adjunction-compatible isomorphism therefore identifies $s_!M$ with $G(M,0)$: explicitly it is the map corresponding to $1_M$ under the two Hom bijections, and its inverse is obtained the same way; the composites correspond to $1_M$ and hence are identities. In particular its restriction to $X$ is the canonical identification with $M$. This specifies the identification, including the restriction map used below.",
-   "uses": [
+    "def-weil-extension-by-zero",
     "lem-weil-extension-by-zero-adjunction",
-    "def-weil-extension-by-zero"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-    "place": "Second sentence: extension by zero is insertion into the first component"
-   }
-  },
-  {
-   "text": "Apply the additive equivalence and $G$ in every degree to complexes and their differentials. The identities $d^{n+1}d^n=0$ and $d_F^n a^n=a^{n+1}d_E^n$ hold exactly when they hold in each component, so this gives inverse equivalences on all integer-indexed cochain complexes. By exactness from step 4 and the kernel/image definition of cohomology, $H^n(E)$ goes to $(H^n(s^*E),H^n(t^*E))$. Acyclicity is therefore componentwise. Finally, the homotopy equation $a^n-b^n=d^{n-1}h^n+h^{n+1}d^n$ is componentwise because the equivalence preserves addition and composition. No degree bound or infinite totalization is involved.",
-   "uses": [
     "def-pc-cochain-complex-modules",
-    "def-pc-acyclic-complex-modules",
-    "def-pur-kinjective-complex"
+    "def-pc-acyclic-complex-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section 010V (homology-section-complexes), cochain and cohomology definitions; derived.tex Definition 070H (definition-K-injective) for homotopies"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $E$ be an acyclic complex on $V$ and $a:E\\to s_!I$ a chain map. By steps 5 and 6 it is the pair $(a_X:s^*E\\to I,0:t^*E\\to0)$, with $s^*E$ acyclic. Since $I$ is K-injective there is $h_X$ satisfying $a_X=dh_X+h_Xd$. The pair $(h_X,0)$ satisfies $a=d(h_X,0)+(h_X,0)d$ componentwise. Applying $G$ and the natural component identifications gives a null homotopy of the original map. This is precisely the definition of K-injectivity of $s_!I$, for arbitrary unbounded $E$ and $I$.",
+   "text": "The already proved ProEtale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range identifies extension by zero with open direct image. Restriction is exact, hence its right adjoint preserves K-injectives. Transport this property through that isomorphism and the canonical coefficient equivalences. No degree bound is introduced.",
    "uses": [
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction",
     "def-pur-kinjective-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 070H (definition-K-injective); the null-homotopy argument of Lemma 08BJ (lemma-adjoint-preserve-K-injectives), written explicitly for the product"
-   }
+   "elementary": false
   },
   {
-   "text": "For an object $W\\to X$, the direct-image definition gives $(q_*s_!M)(W)=(s_!M)(V\\times_X W)$. The two components of $V\\times_X W$ are $s(X)\\times_X W\\cong W$ (because $q\\circ s=1_X$) and $Z\\times_X W$. Steps 2 and 5 identify its sections with $M(W)\\times0$, and restriction to the first component is the first projection, an isomorphism to $M(W)$. The isomorphism $s(X)\\times_X W\\cong W$ is over $X$, so the composite coefficient map $A_X(W)\\to A_V(V\\times_X W)\\to A_X(W)$ is the identity: on constant presheaf sections both arrows send $a$ to $a$, and their composite after the sheafification unit is the identity constant-section map. The universal property defining the extension to the constant ring sheaf makes the composite the identity. Thus the projection is $A_X(W)$-linear. For $W^\\prime\\to W$ both routes in the naturality square are restriction to $W^\\prime$; for $M\\to M^\\prime$ both are its component map on $W$. This gives the stated natural sheaf isomorphism. In each degree it commutes with the differential and every component of a chain map or degree-minus-one homotopy by this naturality. Hence the same formula gives the asserted isomorphism of complexes and its compatibility with homotopies.",
+   "text": "Construct fixedSectionRestriction on each test object by restriction along clopenSectionComponentArrow. Pullback projection equations prove its naturality. Its composite with the open direct-image counit equals lowerStarComp followed by the section equality and lowerStarId; prove the equality by sheaf extensionality and the pullback universal properties. The clopen lowerShriek-to-lowerStar isomorphism makes this restriction invertible on extension-by-zero objects. Conjugate it through sfIntrinsicDirectImageComparison to obtain intrinsicSectionRestriction. Naturality of the realization unit and the uniquely normalized comparison prove the displayed scalar-unit section equation. Compose with the inverse open unit to construct the required natural isomorphism. This is clopenSectionComparison.",
    "uses": [
     "def-weil-proetale-module-direct-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-extension-by-zero",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply mapHomologicalComplexCompIso and mapHomologicalComplexIdIso to this same natural isomorphism. Its degree components are definitionally the underived ones. Naturality proves the displayed chain-map and homotopy compatibilities. Assemble these results and the preceding component properties by conjunction introduction, with the original statement unchanged.",
+   "uses": [
     "def-pc-cochain-complex-modules",
     "def-pur-kinjective-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-    "place": "Section formula displayed after the third sentence; degreewise naturality argument"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
   "def-weil-pbc-proetale-site",
   "sk-def-pe-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-extension-by-zero-adjunction",
-  "def-weil-extension-by-zero",
   "def-pc-cochain-complex-modules",
   "def-pc-acyclic-complex-modules",
   "def-pur-kinjective-complex",
-  "def-weil-proetale-module-direct-image"
+  "def-weil-proetale-module-direct-image",
+  "def-weil-proetale-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/lem-weil-pbc-clopen-section-direct-image.proof.md",
-  "place": "First paragraph and displayed section formula, extended to the small pro-etale site and unbounded complexes by explicit component gluing and null homotopies; Stacks derived.tex Definition 070H and proof of Lemma 08BJ."
+  "place": "Formalized A6 proof of the original component argument using the proved fixed-scalar clopen comparison, disjoint-open vanishing, and local conservativity in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper and its imports. The final section equation is proved by pullback projection identities and the existing normalized realization comparison. Stacks derived.tex Lemma 08BJ supplies the adjoint K-injective argument."
  },
  "mathlib_match": null,
  "created": {
@@ -313,9 +258,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-weil-extension-by-zero-adjunction"
  ],
  "reviewed": {
@@ -350,5 +292,15 @@
   "existing": false,
   "note": "Repair of returned immutable head 588c3a8bdcf5 (H3): the natural direct-image isomorphism is now constrained by ClopenSectionComparisonOnSections, whose equation uses the explicit fibre-product inclusion clopenSectionComponentArrow and the recorded open adjunction unit. The complex comparison is constrained in every degree to this same isomorphism and includes chain-map and homotopy-component compatibility. The unrestricted existing proEtaleConstantModuleDirectImage replaces the finite-only sfConstantModuleDirectImage. The natural statement is unchanged.",
   "file": "lean/Sheaf/AlgebraicGeometry/ClopenSectionComponent.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261019T112435-L-3939625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
