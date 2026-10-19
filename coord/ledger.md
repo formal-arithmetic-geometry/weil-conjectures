@@ -16772,3 +16772,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:53 L: merged deliver/K7/Sheaf.Paper.PurTwistSheafLocallyFree (stage 3; reviewer PASS; first push; landing 20261019T005337-L-2754631 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/K8/Sheaf.AlgebraicGeometry.VectorBundleZeroSection (stage 3; reviewer PASS; first push; landing 20261019T005337-L-2754745 (proof); batch 20261019T005255; modules 1; new nodes 0)
 - 00:53 L: merged deliver/K8/Sheaf.Paper.RationalExceptionalRestriction (stage 3; reviewer PASS; after a return; landing 20261019T005338-L-2754886 (interface); batch 20261019T005255; modules 2; new nodes 1)
+- 00:53 L: merged deliver/K9/Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting (stage 3; reviewer PASS; first push; landing 20261019T005338-L-2754986 (proof); batch 20261019T005255; modules 1; new nodes 0)

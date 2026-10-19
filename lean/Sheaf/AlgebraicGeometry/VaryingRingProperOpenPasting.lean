@@ -6,15 +6,7 @@ Authors: SHEAF group Q47
 module
 
 public import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.SemilinearDerivedSections
 
 /-!
 # Proper/open projection and pasting for varying coefficient rings
@@ -45,6 +37,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
+
+private theorem mate_whisker
+    {A : Type*} {B : Type*} {C : Type*} {D : Type*}
+    [Category* A] [Category* B] [Category* C] [Category* D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    {G G' : A ⥤ C} {H H' : B ⥤ D}
+    (a : G ⋙ L₂ ⟶ L₁ ⋙ H) (t : G' ⟶ G) (b : H ⟶ H') :
+    mateEquiv adj₁ adj₂
+        (Functor.whiskerRight t L₂ ≫ a ≫ Functor.whiskerLeft L₁ b) =
+      Functor.whiskerLeft R₁ t ≫ mateEquiv adj₁ adj₂ a ≫
+        Functor.whiskerRight b R₂ := by
+  apply TwoSquare.ext
+  intro X
+  dsimp [mateEquiv, TwoSquare.natTrans]
+  simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
+  have ht := adj₂.unit.naturality (t.app (R₁.obj X))
+  dsimp at ht
+  rw [← reassoc_of% ht]
+  slice_lhs 4 5 => rw [← R₂.map_comp, ← b.naturality, R₂.map_comp]
 
 /-- The system clopen projection is identity on its image and zero on the complement.
 Source: Stacks 09AE; node proof Step 4
@@ -210,7 +222,62 @@ theorem properOpenPasting :
           (P R φ q).map ((jComp R φ k l).inv.app M) =
         (J R φ j).map ((gamma R φ k r p i h₁).app M) ≫
           (gamma R φ l p q j h₂).app ((J R φ k).obj M)) := by
-  sorry
+  constructor
+  · intro A C E B₀ D F k i j r₁ r₂ p₁ p₂ _ _ _ _ _ _ _ _ _ _ h₁ h₂ h M
+    let a₁ := TwoSquare.mk _ _ _ _ (alpha R φ k r₁ p₁ i h₁)
+    let a₂ := TwoSquare.mk _ _ _ _ (alpha R φ i r₂ p₂ j h₂)
+    let a := TwoSquare.mk _ _ _ _ (alpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
+    have ha : TwoSquare.vComp a₂ a₁ =
+        (a.whiskerLeft (gComp R φ r₁ r₂).hom).whiskerRight
+          (gComp R φ p₁ p₂).inv := by
+      apply TwoSquare.ext
+      intro N
+      dsimp [a₁, a₂, a, TwoSquare.vComp, TwoSquare.whiskerLeft,
+        TwoSquare.whiskerRight]
+      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using
+        (congrArg (fun f ↦ (gComp R φ p₁ p₂).inv.app ((J R φ j).obj N) ≫ f)
+          (alpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h N))
+    have hm := congrArg
+      (mateEquiv ((adj R φ r₂).comp (adj R φ r₁))
+        ((adj R φ p₂).comp (adj R φ p₁))) ha
+    rw [mateEquiv_hcomp,
+      mateEquiv_conjugateEquiv_vcomp _ (adj R φ (p₁ ≫ p₂)),
+      conjugateEquiv_mateEquiv_vcomp _ (adj R φ (r₁ ≫ r₂))] at hm
+    have hmM := congrArg (fun s ↦ s.app M) hm
+    simpa only [a₁, a₂, a, gamma, pComp, conjugateIsoEquiv_apply_hom,
+      conjugateIsoEquiv_apply_inv, TwoSquare.hComp, TwoSquare.whiskerTop,
+      TwoSquare.whiskerBottom, TwoSquare.mk, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.id_comp, Category.comp_id, Category.assoc] using hmM.symm
+  · intro A C E B₀ D F k l i j r p q _ _ _ _ _ _ _ _ _ _ _ h₁ h₂ h M
+    let a₁ := TwoSquare.mk _ _ _ _ (alpha R φ k r p i h₁)
+    let a₂ := TwoSquare.mk _ _ _ _ (alpha R φ l p q j h₂)
+    let a := TwoSquare.mk _ _ _ _ (alpha R φ (k ≫ l) r q (i ≫ j) h)
+    have ha : TwoSquare.hComp a₁ a₂ =
+        (a.whiskerTop (jComp R φ i j).hom).whiskerBottom
+          (jComp R φ k l).inv := by
+      apply TwoSquare.ext
+      intro N
+      dsimp [a₁, a₂, a, TwoSquare.hComp, TwoSquare.whiskerTop,
+        TwoSquare.whiskerBottom]
+      have hh := alpha_horizontal R φ k l i j r p q h₁ h₂ h N
+      have hh' := congrArg
+        (fun f ↦ f ≫ (jComp R φ k l).inv.app ((G R φ r).obj N)) hh
+      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hh'.symm
+    have hm := congrArg (mateEquiv (adj R φ r) (adj R φ q)) ha
+    rw [mateEquiv_vcomp (adj R φ r) (adj R φ p) (adj R φ q)] at hm
+    have hmM := congrArg (fun s ↦ s.app M) hm
+    rw [show (a.whiskerTop (jComp R φ i j).hom).whiskerBottom
+        (jComp R φ k l).inv =
+        Functor.whiskerRight (jComp R φ i j).hom (G R φ q) ≫ a ≫
+          Functor.whiskerLeft (G R φ r) (jComp R φ k l).inv from by
+          simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, Category.assoc],
+      mate_whisker] at hmM
+    simpa only [a₁, a₂, a, gamma, TwoSquare.vComp, TwoSquare.mk,
+      NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.id_comp, Category.comp_id, Category.assoc] using hmM.symm
 
 /-- Identity normalizations of the intrinsic inverse-image/open-extension arrow.
 Source: Stacks 07A7, 0F7B; node proof Steps 5 and 11
@@ -248,7 +315,54 @@ theorem gamma_identities :
       (gamma R φ (𝟙 U) p p (𝟙 X) h).app M ≫
           (P R φ p).map ((jId R φ U).hom.app M) =
         (jId R φ X).hom.app ((P R φ p).obj M)) := by
-  sorry
+  constructor
+  · intro U X j _ _ h M
+    let a := TwoSquare.mk _ _ _ _ (alpha R φ j (𝟙 U) (𝟙 X) j h)
+    have ha : (a.whiskerLeft (gId R φ U).hom).whiskerRight
+        (gId R φ X).inv = TwoSquare.vId (J R φ j) := by
+      apply TwoSquare.ext
+      intro N
+      dsimp [a, TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vId]
+      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using
+        (congrArg (fun f ↦ (gId R φ X).inv.app ((J R φ j).obj N) ≫ f)
+          ((alpha_identities R φ).1 j h N))
+    have hm := congrArg (mateEquiv Adjunction.id Adjunction.id) ha
+    rw [mateEquiv_conjugateEquiv_vcomp _ (adj R φ (𝟙 X)),
+      conjugateEquiv_mateEquiv_vcomp _ (adj R φ (𝟙 U))] at hm
+    have hmM := congrArg (fun s ↦ s.app M) hm
+    have hh : (J R φ j).map ((pId R φ U).inv.app M) ≫
+        (gamma R φ j (𝟙 U) (𝟙 X) j h).app M ≫
+        (pId R φ X).hom.app ((J R φ j).obj M) = 𝟙 _ := by
+      simpa [a, gamma, pId, conjugateIsoEquiv, TwoSquare.whiskerTop,
+        TwoSquare.whiskerBottom, TwoSquare.vId, mateEquiv, Adjunction.id] using hmM
+    have hh' := congrArg (fun f ↦ (J R φ j).map ((pId R φ U).hom.app M) ≫ f) hh
+    simpa [← Category.assoc, ← Functor.map_comp] using hh'
+  · intro U X p _ h M
+    let a := TwoSquare.mk _ _ _ _ (alpha R φ (𝟙 U) p p (𝟙 X) h)
+    have ha : (a.whiskerTop (jId R φ X).inv).whiskerBottom
+        (jId R φ U).hom = TwoSquare.hId (G R φ p) := by
+      apply TwoSquare.ext
+      intro N
+      dsimp [a, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hId]
+      have hh := (alpha_identities R φ).2 p h N
+      have hh' := congrArg
+        (fun f ↦ (G R φ p).map ((jId R φ X).inv.app N) ≫ f) hh
+      simpa [TwoSquare.mk, TwoSquare.natTrans, ← Functor.map_comp,
+        Category.assoc] using hh'
+    have hm := congrArg (mateEquiv (adj R φ p) (adj R φ p)) ha
+    simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
+      TwoSquare.natTrans, TwoSquare.mk, Category.assoc] at hm
+    rw [mate_whisker] at hm
+    have hmM := congrArg (fun s ↦ s.app M) hm
+    have hh : (jId R φ X).inv.app ((P R φ p).obj M) ≫
+        (gamma R φ (𝟙 U) p p (𝟙 X) h).app M ≫
+        (P R φ p).map ((jId R φ U).hom.app M) = 𝟙 _ := by
+      simpa [a, gamma, TwoSquare.hId, mateEquiv] using hmM
+    have hh' := congrArg
+      (fun f ↦ (jId R φ X).hom.app ((P R φ p).obj M) ≫ f) hh
+    simpa only [← Category.assoc, Iso.hom_inv_id_app,
+      Category.id_comp, Category.comp_id] using hh'
+
 
 /-- Evaluation gives exactly the arbitrary constant-R_n clopen-projection mate.
 Source: node proof Step 11, Stacks 0F7B
