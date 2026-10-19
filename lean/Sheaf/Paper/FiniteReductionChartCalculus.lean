@@ -6,12 +6,6 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.PurityCompositionCoherence
-public import Sheaf.Paper.SmoothTrace
-public import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
-public import Sheaf.Paper.FourCorners
-public import Sheaf.Paper.StratumScalarExtension
-public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
-public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 
 /-! # Reduction of the canonical finite-coefficient purity maps
 
@@ -35,12 +29,28 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 -- native derived-unit normalizations also elaborate in importing modules.
 attribute [instance] Sheaf.monoidalCategory
 namespace WeilConjectures.PurityFiniteSetting
+
+-- Establish the tensor presentations before substituting a concrete coefficient ring.
+private theorem etaleTensorPresentation (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) : Etale.derivedTensor C X =
+      curriedTensor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) := by
+  dsimp only [Etale.derivedTensor]
+
+private theorem proEtaleTensorPresentation (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) : ProEtale.derivedTensor C X =
+      curriedTensor (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C)) := by
+  dsimp only [ProEtale.derivedTensor]
+
 /-- The integer equality for the even shifts of ordered Tate powers.
 Source: cohomological shift convention (blueprint: def-pur-finite-reduction-chart-calculus).
 Proof: expand the natural-number successor cast and distribute multiplication by two. -/
 theorem finiteReductionPowerShift (d : ℕ) :
     (2 * (d : ℤ) + 2) = 2 * ((d + 1 : ℕ) : ℤ) := by
-  sorry
+  simp only [Nat.cast_add, Nat.cast_one, mul_add, mul_one]
 
 
 /-- Recursion for the ordered tensor powers with their specified even shifts.
@@ -65,12 +75,20 @@ def finiteReductionUnitStepGeneric (C : Type v) [Category.{w} C] [Abelian C]
     [Abelian.HasFunctorialFlatResolution C]
     [_root_.DerivedCategory.Qh.HasDerivedMonoidalCategory
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
-    (U : _root_.DerivedCategory C) (z : U ≅ 𝟙_ (_root_.DerivedCategory C)) (n : ℕ) :=
+    (U : _root_.DerivedCategory C) (z : U ≅ 𝟙_ (_root_.DerivedCategory C)) (n : ℕ) :
+    ((curriedTensor (_root_.DerivedCategory C)).obj (U⟦2 * (n : ℤ)⟧)).obj (U⟦(2 : ℤ)⟧) ≅
+      U⟦2 * ((n + 1 : ℕ) : ℤ)⟧ :=
   _root_.DerivedCategory.shiftTensorShiftIso C U U (2 * (n : ℤ)) 2 ≪≫
     (shiftFunctor _ (2 * (n : ℤ) + 2)).mapIso
       (((curriedTensor (_root_.DerivedCategory C)).obj U).mapIso z ≪≫ ρ_ U) ≪≫
     (eqToIso (congrArg (fun a : ℤ ↦ shiftFunctor (_root_.DerivedCategory C) a)
       (finiteReductionPowerShift n))).app U
+
+-- Transport only the endpoint type; comparing the full specialized maps is expensive.
+private theorem existsUnique_heq_of_type_eq {α β : Sort v} (h : α = β) (b : β) :
+    ∃! a : α, HEq a b := by
+  subst β
+  exact ⟨b, HEq.rfl, fun _ h ↦ eq_of_heq h⟩
 
 /-- The published etale tensor's unit-step comparison is the native K-flat one.
 Source: blueprint Step 1 (blueprint: def-pur-finite-reduction-chart-calculus).
@@ -86,7 +104,18 @@ theorem existsUnique_finiteReductionEtaleUnitStep (A : Type (u + 1)) [CommRing A
       HEq a (finiteReductionUnitStepGeneric
         (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
           (Etale.ordinaryFiniteUnit A X) (smoothPurityUnitIso A X) n) := by
-  sorry
+  refine existsUnique_heq_of_type_eq ?_
+    (finiteReductionUnitStepGeneric
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (Etale.ordinaryFiniteUnit A X) (smoothPurityUnitIso A X) n)
+  exact congrArg (fun Z : Etale.DerivedCategoryModule A X ↦
+      Z ≅ (Etale.ordinaryFiniteUnit A X)⟦2 * ((n + 1 : ℕ) : ℤ)⟧)
+    (congrArg (fun T : Etale.DerivedCategoryModule A X ⥤
+        Etale.DerivedCategoryModule A X ⥤ Etale.DerivedCategoryModule A X ↦
+      (T.obj ((Etale.ordinaryFiniteUnit A X)⟦2 * (n : ℤ)⟧)).obj
+        ((Etale.ordinaryFiniteUnit A X)⟦(2 : ℤ)⟧))
+      (etaleTensorPresentation (ModuleCat.{u + 1} A) X))
+
 
 /-- Assemble root charts in the published tensor presentation.
 Source: blueprint Step 1 (blueprint: def-pur-finite-reduction-chart-calculus). -/
@@ -167,11 +196,27 @@ def finiteReductionTensorUnitGeneric (C : Type v) [Category.{w} C] [Abelian C]
     [Abelian.HasFunctorialFlatResolution C]
     [_root_.DerivedCategory.Qh.HasDerivedMonoidalCategory
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
-    (M : _root_.DerivedCategory C) (r : ℤ) :=
+    (M : _root_.DerivedCategory C) (r : ℤ) :
+    ((curriedTensor (_root_.DerivedCategory C)).obj M).obj
+      ((𝟙_ (_root_.DerivedCategory C))⟦r⟧) ≅ M⟦r⟧ :=
   letI := _root_.DerivedCategory.commShiftTensorLeft C M
   (((curriedTensor (_root_.DerivedCategory C)).obj M).commShiftIso r).app
       (𝟙_ (_root_.DerivedCategory C)) ≪≫
     (shiftFunctor _ r).mapIso (ρ_ M)
+
+private theorem existsUnique_tensorUnitGeneric (C : Type v) [Category.{w} C] [Abelian C]
+    [IsGrothendieckAbelian.{w} C] [HasDerivedCategory.{w} C]
+    [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [_root_.DerivedCategory.Qh.HasDerivedMonoidalCategory
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
+    (T : _root_.DerivedCategory C ⥤ _root_.DerivedCategory C ⥤ _root_.DerivedCategory C)
+    (h : T = curriedTensor (_root_.DerivedCategory C))
+    (M : _root_.DerivedCategory C) (r : ℤ) :
+    ∃! a : (T.obj M).obj ((𝟙_ (_root_.DerivedCategory C))⟦r⟧) ≅ M⟦r⟧,
+      HEq a (finiteReductionTensorUnitGeneric C M r) := by
+  subst T
+  exact ⟨finiteReductionTensorUnitGeneric C M r, HEq.rfl, fun _ h ↦ eq_of_heq h⟩
 
 /-- The native K-flat tensor-unit equation, in the published tensor presentation.
 Source: blueprint reduction Step 1
@@ -188,7 +233,7 @@ def FiniteReductionTensorUnitNormalized
 
 /-- The published tensor-unit comparison is specified by its native K-flat map.
 Source: blueprint Step 1 (blueprint: def-pur-finite-reduction-chart-calculus).
-Proof: rewrite the published tensor with smoothPurityTensorPresentation. The
+Proof: unfold the published tensor once in a generic coefficient category. The
 native tensor-shift comparison followed by the shifted right unitor then has
 the required endpoints. Its exact heterogeneous equality gives uniqueness. -/
 theorem existsUnique_finiteReductionTensorUnit
@@ -200,7 +245,8 @@ theorem existsUnique_finiteReductionTensorUnit
     ∃! a : ((ProEtale.derivedTensor C X).obj M).obj
         ((𝟙_ (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C)))⟦r⟧) ≅ M⟦r⟧,
       FiniteReductionTensorUnitNormalized C X M r a := by
-  sorry
+  exact existsUnique_tensorUnitGeneric (Sheaf (Scheme.ProEt.topology X) C)
+    (ProEtale.derivedTensor C X) (proEtaleTensorPresentation C X) M r
 
 /-- The published tensor-unit chart, chosen from its unique native normalization.
 The coefficient category is abstract here, so the normalization is not expanded

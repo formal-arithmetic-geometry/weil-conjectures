@@ -12,9 +12,20 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.md",
   "place": "Operation, root-line, twist and shift comparisons; finite-reduction proof"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Prove the shift equality by natural-number cast normalization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the published étale and pro-étale derived tensor functors with curriedTensor by unfolding their definitions, then use the native K-flat unit-step and tensor-unit maps. Uniqueness follows from HEq.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "worker S7: unfold the published derived tensors and transport endpoint types to the native generic maps.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -110,5 +121,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Read item, source (master + main-20261015), all 6 delivered modules, the cited declarations (SmoothPurityMap, PurityCompositionCoherence, SmoothTrace, FixedFinitePositiveCoefficientTwist, ordinary_supported_kummer, affineLine_orientation) and both replaced upstream records (map_smoothPurityIso_hom_comp takes the constituent compatibilities as hypotheses; Etale.smoothPullbackExchange takes arbitrary supplied θ/φ on the étale site; neither states its node). Lean matches every clause: main square with node directions; affine orientation; trace for general K and the unit; composition = exact RHS of smoothPurityCompositionCoherence; base change (b_□ and exchange; v arbitrary). No added hypotheses, no e|n or flatness, universes as the deps, autoImplicit off. Every ∃! spec checked true: root-chart source/base-change comparisons (roots exist since k alg closed and ℓ≠p; independent of the root choice), counit-normalised exceptional maps via a genuine adjunction, unique Kummer class. Chart HEq factor types confirmed by test compiles; tests for the two pieces resting on upstream smoothPurityTensorPresentation timed out at 60 s (project's propositional-equality pattern). No hollow defs; theorems sorry. Records verbatim; stmt_deps additions allowed; report sections present; docstrings present. nt_compile of all 6 modules clean (6.5–24.3 s). Notes: finiteReductionPurityIsIso duplicates landed isIso_smoothPurityMap (not citable: dependency stmt_deps fixed in S2); new nodes use plain defs from PurityCompositionCoherence without citing thm-pur-composition-coherence (item already cites it); new orientation should be identified with affineLine_orientation (e|n only) in stage 3; proof-only imports; global Sheaf.monoidalCategory has precedent."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-6e9c4",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261019T231342-L-577135",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteReductionChartCalculus (compiled, axioms clean) and its importer FiniteReductionRootCharts (compiled) against the live module, the change record, the node diff (proof/proof_origin only) and the old inferred types of the two annotated defs (definitionally equal, bodies unchanged)"
  }
 }
