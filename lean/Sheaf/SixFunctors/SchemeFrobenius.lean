@@ -90,7 +90,7 @@ theorem schemeFrobenius_isFinite_isRadicial
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     IsFinite (D.schemeFrobenius X₀) ∧
       UniversallyInjective (D.schemeFrobenius X₀) := by
-  sorry
+  exact D.relativeFrobenius_isFinite_isRadicial X₀
 
 /-- Derived pullback along the m-th scheme Frobenius on the small pro-etale site.
 Source: blueprint main-20261015, order 2415
