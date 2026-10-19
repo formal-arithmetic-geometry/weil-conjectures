@@ -25,190 +25,60 @@
  ],
  "proof": [
   {
-   "text": "The coefficient convention in [def-weil-pbc-proetale-modules] is the constant discrete $A$-ring used here. Indeed a continuous map $\\pi_0(|U|)\\to A$ is exactly a locally constant map $|U|\\to A$: descent to the set of components follows from discreteness, and continuity on the quotient follows from the definition of its topology. Its fibres are open and give a covering on which it is constant. Thus the map from the constant presheaf to this function presheaf induces an isomorphism on sheafification: every function is locally constant, and equality of two constant sections is checked on the same covers. These maps respect addition and multiplication. The inverse image of the constant sheaf is constant as well: the underlying constant object is a coproduct of terminal objects, the geometric inverse image of [def-weil-pbc-site-comparison-morphism] preserves terminal objects, and it preserves coproducts by its adjunction and [lem-weil-pbc-left-adjoint-preserves-colimits]. The scalar-action maps therefore give the same constant-$A$ module category on both sides. Work throughout in a common larger universe in which the two sites and all indexing categories used below are small.",
+   "text": "Use the existing exact finite coefficient comparison and its canonical coefficient realization equivalence. The induced derived comparison is triangulated by the exact-functor instance.",
    "uses": [
     "def-weil-pbc-proetale-modules",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical unbounded derived adjunction of comparisonUpperStar and right-derived comparisonLowerStar using mapDerivedCategoryRightDerivedAdjunction. Replace the nilpotence exponent n by n+1 to meet the positive-exponent hypothesis of finiteClassicalUnboundedComparison. That existing theorem supplies classicality of the entire derived image and invertibility of the actual derived counit there; it retains the geometric finite-CD truncation argument.",
+   "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "lem-sfb-finite-classical-unbounded-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Coefficient conventions before the unbounded-unit argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $L=\\nu_X^*$ and $R=\\nu_{X,*}$ on module sheaves. The exactness of $L$ and the fact that its image consists precisely of classical sheaves are [det-pe-classical-sheaves-modules]. Thus termwise $L$ induces a triangulated functor on the unbounded derived categories by [lem-sf-exact-functor-derived-triangulated]. The kernel/image computation in [lem-weil-pbc-exact-functor-complex-cohomology] gives $H^q(LK)=L H^q(K)$, so $LK$ has classical cohomology; it also identifies $L\\tau_{\\ge N}K$ with $\\tau_{\\ge N}LK$ naturally, by applying $L$ to the kernels and cokernels in the canonical truncation complexes.",
+   "text": "The underived comparison is fully faithful, so reflects isomorphisms. For a derived morphism whose inverse image is invertible, use mapDerivedCategoryHomologyFunctorIso in each integer degree to see that inverse image of its cohomology map is invertible. Reflect this to the original cohomology map; DerivedCategory.isIso_iff proves that the derived morphism is invertible.",
    "uses": [
-    "det-pe-classical-sheaves-modules",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Fixed-degree truncation: exactness and classical cohomology; Stacks 015F and 010N"
-   }
-  },
-  {
-   "text": "The small-site module categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Termwise $R$ is additive, preserves chain homotopies, and commutes with shifts and the cone differential because it preserves finite biproducts; followed by localization it is therefore an exact functor from the homotopy category to the etale derived category. Applying [lem-weil-pbc-kinjective-total-derived] to this functor gives $\\mathbf R R$, computed on a K-injective representative $J$. Since $R$ is right adjoint to the exact $L$, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $RJ$ K-injective. For a complex $P$ representing $K$ and $J$ representing $M$, [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-termwise-adjunction-homotopy] give the natural chain of bijections\n$\\operatorname{Hom}_{D}(LP,M)=\\operatorname{Hom}_{K}(LP,J)=\\operatorname{Hom}_{K}(P,RJ)=\\operatorname{Hom}_{D}(K,\\mathbf R R M)$.\nThis constructs the unbounded adjunction $L\\dashv\\mathbf R R$. Its unit at $K$ is represented by $P\\to RL P\\to RJ$, where $LP\\to J$ is the K-injective resolution and the first arrow is the sheaf-adjunction unit. The exactness of $\\mathbf R R$ as a triangulated functor, and that of the total derived evaluation functors used below, are [lem-pc-right-derived-functor-triangulated], applied to the additive functors $R$ and evaluation respectively.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-pc-right-derived-functor-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Setup of the unbounded unit; Stacks 079P, 070K, 070I and 08BJ"
-   }
-  },
-  {
-   "text": "Choose a K-injective $I$ representing $K$ and a K-injective resolution $LI\\to J$; write $f:I\\to RJ$ for its adjoint, representing the unit from the K-injective construction. For an affine étale $W\\to X$, restriction preserves K-injectives by [lem-pur-kinjective-restrict-localized]. Identify the étale restriction with scheme inverse image by [lem-weil-pbc-etale-inverse-image-restriction], and the pro-étale slice with $W_{\\mathrm{proét}}$ by [lem-weil-proetale-weakly-etale-localization]. These identifications apply to module actions and complexes termwise. Slice restriction is exact: kernels are sectionwise, and local lifts through an epimorphism over an object $V\\to W$ are taken on covering arrows $V_i\\to V$, which remain arrows to $W$. By [lem-weil-pbc-comparison-pullback], $(LI)|_W=\\nu_W^*(I|_W)$. Thus $I(W)$ computes $R\\Gamma(W_{\\mathrm{ét}},K|_W)$ and $J(W)$ computes $R\\Gamma(W_{\\mathrm{proét}},(LK)|_W)$, by the K-injective computation in the K-injective construction. The defining formula $(RG)(W)=G(W)$ from [def-weil-pbc-site-comparison-morphism] says that $f(W):I(W)\\to J(W)$ is precisely the derived-section comparison: it is the unit followed by the resolution map. This construction is natural in $K$ and $W$, since the resolutions can be chosen functorially.",
-   "uses": [
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Cohomology sheaves as sheafified sections; Stacks 08FI and 04IX"
-   }
-  },
-  {
-   "text": "Put $e=e_X=2d_X+1$ with $d_X=0$ for $X=\\varnothing$. Fix an affine étale $w:W\\to X$. Apply [lem-sfb-etale-module-affine-bound] to the given $k,\\ell,A,X,W$: it gives $H^q_A(W_{\\mathrm{ét}},w_{\\mathrm{ét}}^{-1}G)=0$ for every étale $A$-module sheaf $G$ and every $q>e$. Its coefficient, field and finite-type hypotheses are exactly those of this item. The restriction identification from the local-unit step writes its coefficient as $G|_W$.",
-   "uses": [
-    "lem-sfb-etale-module-affine-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Fixed-degree truncation: bounds clause (1), abelian comparison 099W and module cohomology agreement 03FD"
-   }
-  },
-  {
-   "text": "Let $F_W:G\\mapsto G(W)$ on étale $A$-module sheaves; sectionwise kernels make it additive and left exact. These categories are Grothendieck by [prop-pur-kinjective-resolutions-exist] and have enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose an injective resolution $G\\to E^\\bullet$ in degrees $\\geq0$. Apply [lem-pe-injective-complex-slice-section-model] to this bounded-below injective complex on the small site $X_{\\mathrm{ét}}$. It identifies $E^\\bullet(W)$ canonically with derived global sections on the slice over $W$. Identifying that slice restriction with $W_{\\mathrm{ét}}$ by [lem-weil-pbc-etale-inverse-image-restriction], this gives $R^qF_W(G)=H^q_A(W_{\\mathrm{ét}},G|_W)$. The preceding step makes it zero for $q>e$.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-pe-injective-complex-slice-section-model",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Fixed-degree truncation: identifying the derived evaluation bound by restriction of injective resolutions"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-classical-module-affine-evaluation-bound] to the same $k,\\ell,A,X,W$. It gives $R^qE_W(H)=0$ for $q>e$ for every classical $A$-module sheaf $H$ on $X_{\\mathrm{proét}}$. Forgetting the resulting zero $A$-module gives the underlying-group evaluation bound used in [det-pe-unbounded-classical-truncation]. Thus its hypothesis holds on this $W$ with this nonnegative integer $e$, including when $X$ or $W$ is empty.",
-   "uses": [
-    "lem-sfb-classical-module-affine-evaluation-bound",
-    "det-pe-unbounded-classical-truncation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Fixed-degree truncation: transferring the sheaf bound to classical module sheaves"
-   }
-  },
-  {
-   "text": "Fix $m\\in\\mathbf Z$ and choose $N<m-e-1$. The truncation triangle $\\tau_{<N}K\\to K\\to\\tau_{\\ge N}K\\to$ is the canonical one of [def-sbc-standard-tstructure-derived-category]. Apply [lem-sf-finite-cd-derived-upper-bound] (Stacks Tag 07K7) to $F_W$, using the evaluation-bound steps and enough injectives from [lem-sp-grothendieck-enough-injectives]. Since $\\tau_{<N}K$ has cohomology in degrees $\\le N-1$, its derived sections vanish in degrees $>N-1+e$. In particular they vanish in degrees $m$ and $m+1$. The total derived evaluation is triangulated by [lem-pc-right-derived-functor-triangulated]. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] of the derived-section truncation triangle therefore makes\n$H^mR\\Gamma(W_{\\mathrm{ét}},K)\\to H^mR\\Gamma(W_{\\mathrm{ét}},\\tau_{\\ge N}K)$ an isomorphism. On the pro-étale side, the exactness step gives classical cohomology of $LK$, and the evaluation-bound steps supply the uniform classical bound. Clause (2) of [det-pe-unbounded-classical-truncation] makes\n$H^mR\\Gamma(W_{\\mathrm{proét}},LK)\\to H^mR\\Gamma(W_{\\mathrm{proét}},\\tau_{\\ge N}LK)$ an isomorphism. Identify the latter truncation with $L\\tau_{\\ge N}K$ by the exactness step.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-sf-finite-cd-derived-upper-bound",
-    "lem-sf-derived-homology-long-exact",
-    "det-pe-unbounded-classical-truncation",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sp-grothendieck-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Fixed-degree truncation; Stacks 07K7 (lemma-unbounded-right-derived), 08J5 and 05RS"
-   }
-  },
-  {
-   "text": "Use the square whose horizontal arrows are the degree-$m$ comparisons of the local-unit construction for $K$ and for $\\tau_{\\ge N}K$, and whose vertical arrows are induced by $K\\to\\tau_{\\ge N}K$. It commutes by naturality of the unit and the resolution comparisons. Both vertical arrows are isomorphisms by the preceding truncation step. The bottom horizontal arrow is an isomorphism by [lem-weil-pbc-comparison-global-cohomology], applied on $W$ to the bounded-below complex $(\\tau_{\\ge N}K)|_W$. This bounded-below hypothesis is unchanged by the exact restriction. Hence the top arrow is the composite of the inverse right vertical arrow, the bottom arrow and the left vertical arrow, and is an isomorphism. Equivalently $H^m(f(W))$ is an isomorphism for every $m$ and every affine étale $W$.",
-   "uses": [
-    "lem-weil-pbc-comparison-global-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Conclusion: the natural truncation square"
-   }
-  },
-  {
-   "text": "For the complexes of sheaves $I$ and $RJ$, form the presheaves $W\\mapsto H^m(I(W))$ and $W\\mapsto H^m((RJ)(W))=H^m(J(W))$. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], their sheafifications are $H^m(I)$ and $H^m(RJ)$: sections compute presheaf kernels and images, and exact sheafification carries their quotient to the sheaf kernel/image quotient. This is the elementary computation of Stacks Tag 0BKV, written here rather than attributed to the sheaf-only injective-acyclicity lemma. The affine étale objects are cover-dense by [lem-weil-pbc-affine-etale-essentially-small-cover]. The preceding comparison square therefore makes the sheafified map $H^m(f)$ an isomorphism: local surjectivity follows on an affine cover, and any section in its kernel restricts to zero on that cover. By [lem-weil-pbc-unbounded-derived-iso-cohomology], the unit $K\\to\\mathbf R R LK$ is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
+    "lem-weil-pbc-comparison-grothendieck-unit",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-unbounded-derived-iso-cohomology"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Cohomology sheaves as sheafified sections and Conclusion; Stacks 03EI, 0BKV, 04HR and 05RT"
-   }
+   "elementary": true
   },
   {
-   "text": "For $K,K'$ the adjunction of the K-injective construction sends $L(u)$ to $\\eta_{K'}\\circ u$. The preceding unit-isomorphism step makes composition with $\\eta_{K'}$ bijective, with inverse composition with $\\eta_{K'}^{-1}$, so $L$ is fully faithful. Both module-sheaf categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and [lem-kun-grothendieck-derived-coproducts] supplies arbitrary small coproducts in their unbounded derived categories, including the empty coproduct. Applying [lem-weil-pbc-left-adjoint-preserves-colimits] to the derived adjunction of the K-injective construction and a small discrete diagram shows that $L$ preserves those coproducts. Together with the exactness step this proves all three assertions.",
+   "text": "At any K the left triangle identity says L(eta_K) followed by epsilon_(LK) is the identity. The second factor is invertible by the classical counit theorem and classicality of LK. Cancel it to prove L(eta_K) invertible, and reflect through derived L to prove eta_K invertible. Assemble the natural unit isomorphism and apply fullyFaithfulLOfIsIsoUnit.",
    "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-kun-grothendieck-derived-coproducts",
+    "lem-sfb-finite-classical-unbounded-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the fully faithful derived inverse image with the derived coefficient realization equivalence, transporting along mapDerivedCategoryCompIso. The derived inverse image preserves each requested Discrete I colimit by its left adjunction; coefficient realization also preserves these colimits by equivalence. Transport preservation along the same canonical composition isomorphism.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
     "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-    "place": "Conclusion: full faithfulness and arbitrary direct sums; Stacks 079Q, 07D9 and 0038"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "det-pe-classical-sheaves-modules",
   "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sfb-finite-classical-unbounded-comparison",
+  "lem-weil-pbc-comparison-grothendieck-unit",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sfb-etale-module-affine-bound",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-pe-injective-complex-slice-section-model",
-  "lem-sfb-classical-module-affine-evaluation-bound",
-  "det-pe-unbounded-classical-truncation",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-sf-finite-cd-derived-upper-bound",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts"
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.proof.md",
-  "place": "Expansion of Cohomology sheaves as sheafified sections, Fixed-degree truncation, and Conclusion, with the cited Stacks lemmas"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-pe-unbounded-classical/sk-prop-pe-unbounded-classical-unit.md",
+  "place": "Canonical derived adjunction and triangle-identity argument from the existing classical unbounded counit theorem; finite-CD geometric work remains in lem-sfb-finite-classical-unbounded-comparison."
  },
  "mathlib_match": null,
  "status": "split",
@@ -697,31 +567,10 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
-  "lem-weil-pbc-etale-module-cohomology-forget",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-sf-finite-cd-derived-upper-bound",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-kun-grothendieck-derived-coproducts",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pe-injective-complex-slice-section-model"
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -764,5 +613,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-bc46a",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261019T005336-L-2754480",
+  "kind": "interface",
+  "note": "independent cc review: unboundedSiteComparison proof (unit by triangle identity, counit from existing finiteClassicalUnboundedComparison) and the two unclaimed dependency proofs vs node lem-sfb-unbounded-site-comparison and live signatures; 4 delivered modules + 27 direct importers compiled, axioms checked"
  }
 }

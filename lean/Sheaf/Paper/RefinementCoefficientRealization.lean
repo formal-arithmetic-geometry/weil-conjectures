@@ -48,7 +48,8 @@ theorem finiteCoefficientRealization_full_faithful_essSurj (T : Scheme.{u})
     (finiteCoefficientRealization T Λ).Full ∧
       (finiteCoefficientRealization T Λ).Faithful ∧
         (finiteCoefficientRealization T Λ).EssSurj := by
-  sorry
+  let := finiteCoefficientRealizationIsEquivalenceRing T Λ
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Realization gives the coefficient equivalence used for canonical transport.
 Source: blueprint finite coefficient modules, order 1233

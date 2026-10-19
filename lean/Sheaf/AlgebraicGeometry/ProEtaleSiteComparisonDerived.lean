@@ -11,10 +11,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import
+  WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 
 set_option autoImplicit false
 
@@ -110,7 +108,26 @@ theorem siteComparison_boundedBelow (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     Nonempty (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.FullyFaithful ∧
       IsIso (finiteCoefficientDerivedComparisonAdjunction T Λ).unit := by
-  sorry
+  let L := comparisonUpperStar (ModuleCat.{u + 1} Λ) T
+  let E := finiteCoefficientRealization T Λ
+  let adj := comparisonAdjunction (ModuleCat.{u + 1} Λ) T
+  obtain ⟨_, _, hunit, hacyclic⟩ := siteComparison_finiteLevel T Λ
+  have hu : IsIso adj.derivedPlus.unit := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    exact adj.isIso_derivedPlus_unit_app_of_rightAcyclic
+      (fun I _ ↦ hunit I)
+      (fun I _ n ↦ hacyclic I inferInstance (n + 1) (Nat.succ_pos n)) K
+  let fL := adj.derivedPlus.fullyFaithfulLOfIsIsoUnit
+  let fE := (Functor.FullyFaithful.ofFullyFaithful
+    (DerivedCategory.Plus.ι ⋙ E.mapDerivedCategory)).ofIso
+      E.mapDerivedCategoryPlusCompatibility.symm
+  let e := Functor.mapDerivedCategoryPlusCompIso L E
+  let ff := fL.comp (Functor.FullyFaithful.ofCompFaithful fE)
+  let f := ff.ofIso e.symm
+  have : (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.Full := f.full
+  have : (finiteCoefficientComparison T Λ).mapDerivedCategoryPlus.Faithful := f.faithful
+  exact ⟨⟨f⟩, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale
 
