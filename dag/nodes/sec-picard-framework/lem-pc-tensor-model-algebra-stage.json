@@ -106,13 +106,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.RingTheory.TensorModelAlgebraStage",
-  "file": "lean/Sheaf/RingTheory/TensorModelAlgebraStage.lean",
+  "module": "WeilConjectures.RingTheory.TensorModelAlgebraStage",
+  "file": "lean/WeilConjectures/RingTheory/TensorModelAlgebraStage.lean",
   "declaration": "AlgebraicGeometry.exists_tensor_model_algebra_stage",
   "statement": "theorem exists_tensor_model_algebra_stage\n    {I : Type v} [Preorder I] [IsDirectedOrder I]\n    (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)\n    {i : I} {A B : Type w} [CommRing A] [CommRing B]\n    [Algebra (F.obj i : Type v) A] [Algebra (F.obj i : Type v) B]\n    [Algebra.FinitePresentation (F.obj i : Type v) A]\n    [Algebra.FinitePresentation (F.obj i : Type v) B] (f : A →ₐ[F.obj i] B)\n    (P Q : Type x) [CommRing P] [CommRing Q] [Algebra P Q]\n    [Algebra.FinitePresentation ℤ P] [Algebra.FinitePresentation P Q]\n    (aP : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      Algebra P ((c.pt : Type v) ⊗[F.obj i] A))\n    (e : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      ((c.pt : Type v) ⊗[F.obj i] A) ⊗[P] Q ≃+* (c.pt : Type v) ⊗[F.obj i] B)\n    (he : letI : Algebra (F.obj i : Type v) (c.pt : Type v) := (c.ι.app i).hom.toAlgebra\n      letI := aP\n      e.toRingHom.comp Algebra.TensorProduct.includeLeftRingHom =\n        (Algebra.TensorProduct.map (Algebra.ofId (c.pt : Type v) (c.pt : Type v))\n          f).toRingHom) :\n    ∃ (k : I) (hik : i ≤ k),\n      letI := (F.map (homOfLE hik)).hom.toAlgebra\n      ∃ qk : Q →+* (F.obj k : Type v) ⊗[F.obj i] B,\n        (letI : Algebra (F.obj i : Type v) (c.pt : Type v) :=\n          (c.ι.app i).hom.toAlgebra\n         let t : F.obj k →ₐ[F.obj i] c.pt :=\n           { (c.ι.app k).hom with\n             commutes' := fun s ↦ ConcreteCategory.congr_hom (c.w (homOfLE hik)) s }\n         (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp qk =\n           e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom) ∧\n        (let D := (F.obj k : Type v) ⊗[F.obj i] A\n         let E := (F.obj k : Type v) ⊗[F.obj i] B\n         let d : D →+* E :=\n           (Algebra.TensorProduct.map (AlgHom.id (F.obj k) (F.obj k)) f).toRingHom\n         letI : Algebra D E := d.toAlgebra\n         letI : Algebra Q E := qk.toAlgebra\n         ∃ aPk : Algebra P D,\n           letI := aPk\n           letI : Algebra P E := (d.comp (algebraMap P D)).toAlgebra\n           letI : IsScalarTower P D E := .of_algebraMap_eq fun _ ↦ rfl\n           ∃ hPQ : IsScalarTower P Q E,\n             letI := hPQ\n             Algebra.IsPushout P D Q E)",
   "branch": "sheaf-dag",
   "by": "S2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): Sheaf twin Sheaf.RingTheory.TensorModelAlgebraStage retired; now WeilConjectures.RingTheory.TensorModelAlgebraStage."
  },
  "reviewed": {
   "date": "2026-10-13",

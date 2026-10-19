@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
 
-import Sheaf.RingTheory.TensorModelAlgebraDescent
+import Sheaf.RingTheory.TensorModelAlgebraDescentCompat
 import WeilConjectures.RingTheory.CompatibleModuleModelDescent
 
 /-! # Comparing a finite-presentation module model with prescribed stages
@@ -102,7 +102,7 @@ theorem exists_eventually_tensor_model_equiv
           (F.obj j : Type v) ⊗[F.obj i] A] ((F.obj j : Type v) ⊗[F.obj i] A) ⊗[A] M) := by
   classical
   obtain ⟨k, hik, q, hqC, hq, hmodel⟩ :=
-    exists_tensor_model_algebra_tail F c hc f P Q aP e he
+    exists_tensor_model_algebra_tail_compat F c hc f P Q aP e he
   obtain ⟨j₀, hkj₀, hmodules⟩ :=
     exists_eventually_compatible_module_equiv F c hc Q L
       (e.toRingHom.comp Algebra.TensorProduct.includeRight.toRingHom)
