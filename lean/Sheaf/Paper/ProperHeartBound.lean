@@ -13,25 +13,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.SheafTensor
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.AlgebraicGeometry.ProperHeartContinuityDirectImage
-import Sheaf.Paper.IndConstructibleFilteredColimits
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import Sheaf.AlgebraicGeometry.ProperHeartBoundRational
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.ProperBaseChangeRational
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Sheaf.Paper.ProperHeartConstructibleCohomology
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!
 # A uniform bound for proper direct image on the ind-constructible heart
@@ -97,42 +84,127 @@ def ProperHeartBoundAssertions
     ∀ c : Cofan M, IsColimit c →
       Nonempty (IsColimit ((properHeartHigherDirectImage Λ p q).mapCocone c)))
 
+/-- Convert the finite-lower-bound convention without losing empty fibres. -/
+private theorem dimension_bound_of_finite_lower_bounds (D : WithBot ℕ∞) (d : ℤ)
+    (h : ∀ n : ℕ, (n : WithBot ℕ∞) ≤ D → (n : ℤ) ≤ d) :
+    D ≤ if d < 0 then ⊥ else (d.toNat : WithBot ℕ∞) := by
+  induction D using WithBot.recBotCoe with
+  | bot => exact bot_le
+  | coe D =>
+    induction D using ENat.recTopCoe with
+    | top =>
+      have ht := h (d.toNat + 1) (by simp)
+      omega
+    | coe n =>
+      have hn := h n le_rfl
+      have hd : ¬ d < 0 := by omega
+      rw [if_neg hd]
+      exact_mod_cast (show n ≤ d.toNat by omega)
+
+set_option synthInstance.maxHeartbeats 100000 in
+-- Colimit inference in the internal module category needs a larger search budget.
+set_option synthInstance.maxSize 4096 in
+private theorem properHeartHigherDirectImage_preservesFilteredColimits
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p] (q : ℤ) :
+    PreservesFilteredColimitsOfSize.{u + 1, u + 1}
+      (properHeartHigherDirectImage Λ p q) := by
+  let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  let S := CochainComplex.singleFunctor A 0
+  let T := DerivedCategory.Q ⋙ (CondensedRing.lowerStar Λ p).rightDerivedFunctor ⋙
+    DerivedCategory.homologyFunctor _ q
+  constructor
+  intro I _ _
+  constructor
+  intro M
+  have : PreservesColimit M S := by
+    change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
+    infer_instance
+  let D := M ⋙ S
+  let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
+  have hπ (i : I) : IsIso (π.app i) := by
+    change IsIso (((S.obj (M.obj i))).πTruncGE 0)
+    infer_instance
+  have : IsIso π := NatIso.isIso_of_isIso_app π
+  have hc : IsColimit (condensedContinuityCocone D 0) :=
+    (IsColimit.precomposeHomEquiv (asIso π) _).symm (colimit.isColimit _)
+  have ht : IsIso (condensedContinuityComparison D 0 T) :=
+    condensed_qcqs_pushforward_continuity Λ p D 0
+      (fun i n hn ↦ (S.obj (M.obj i)).isZero_of_isGE 0 n hn) q
+  have hcT : IsColimit (T.mapCocone (condensedContinuityCocone D 0)) :=
+    IsColimit.ofPointIso (colimit.isColimit (D ⋙ T)) (i := ht)
+  have : PreservesColimit D T := preservesColimit_of_preserves_colimit_cocone hc hcT
+  change PreservesColimit M (S ⋙ T)
+  infer_instance
+
+set_option synthInstance.maxHeartbeats 100000 in
+-- Coproduct inference for internal modules needs the same search budget as filtered colimits.
+set_option synthInstance.maxSize 4096 in
+private theorem properHeartHigherDirectImage_preservesSums
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (p : X ⟶ Y) [QuasiCompact p] [QuasiSeparated p]
+    (q : ℤ) (S : Type (u + 1)) :
+    PreservesColimitsOfShape (Discrete S) (properHeartHigherDirectImage Λ p q) := by
+  have : HasColimitsOfSize.{u + 1, u + 1}
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    inferInstance
+  have : HasColimitsOfSize.{0, u + 1}
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    hasColimitsOfSizeShrink.{0, u + 1, u + 1, u + 1} _
+  have : HasColimitsOfShape (Discrete S)
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+    HasColimitsOfShape.of_small.{u + 1, u + 1} _ _
+  have := properHeartHigherDirectImage_preservesFilteredColimits Λ p q
+  have : (properHeartHigherDirectImage Λ p q).Additive := by
+    dsimp [properHeartHigherDirectImage]
+    infer_instance
+  exact preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset S _
+
+private theorem properHeartBound_of_continuity
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (p : X ⟶ Y) (d : ℤ)
+    (hv : ∀ M, IsConstantModelConstructible Λ X M →
+      ∀ q : ℤ, 2 * d + 1 < q → IsZero ((properHeartHigherDirectImage Λ p q).obj M))
+    (hc : ∀ M, IsConstantModelConstructible Λ X M →
+      ∀ q : ℤ, 0 ≤ q → IsConstantModelConstructible Λ Y
+        ((properHeartHigherDirectImage Λ p q).obj M))
+    (hf : ∀ q : ℤ, PreservesFilteredColimitsOfSize.{u + 1, u + 1}
+      (properHeartHigherDirectImage Λ p q))
+    (hs : ∀ (q : ℤ) (S : Type (u + 1)),
+      PreservesColimitsOfShape (Discrete S) (properHeartHigherDirectImage Λ p q)) :
+    ProperHeartBoundAssertions Λ p d := by
+  constructor
+  · intro M hM
+    obtain ⟨I, hI, hIf, pres, hpres⟩ := hM
+    constructor
+    · intro q hq
+      let := hf q
+      exact (pres.map (properHeartHigherDirectImage Λ p q)).isColimit.isZero_pt
+        (Functor.isZero _ fun i ↦ hv _ (hpres i) q hq)
+    · intro q hq
+      let := hf q
+      exact ⟨I, hI, hIf, pres.map (properHeartHigherDirectImage Λ p q),
+        fun i ↦ hc _ (hpres i) q hq⟩
+  · intro q _ S M _ c hcol
+    let := hs q S
+    exact ⟨isColimitOfPreserves (properHeartHigherDirectImage Λ p q) hcol⟩
+
 /-- For a proper morphism in the standing separated finite-type positive-characteristic
 setting, higher direct image of ind-constructible E-modules vanishes above 2d+1, stays
 ind-constructible in nonnegative degrees, and preserves arbitrary direct sums.
 Source: blueprint main-20261015, sk-lem-proper-heart-bound, statement and proof
 (blueprint: sk-lem-proper-heart-bound).
 
-Proof for stage 3 (the seven DAG steps):
-1. Properness gives finite type and separatedness, hence qcqs, using
-   def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-closed-immersion,
-   def-weil-quasi-separated-morphism and lem-weil-pbc-affine-scheme-qcqs.
-   The field is Noetherian (def-weil-pbc-noetherian-ring); finite type over its spectrum
-   makes X and Y locally Noetherian and quasi-compact by pqf-def-locnoeth and
-   lem-weil-pbc-finite-type-over-noetherian, as det-ind-heart-full-faithfulness requires.
-2. det-proper-heart-bound-rational gives the uniform constructible bound 2d+1, via
-   integral lattices, the torsion bound 2d, the Milnor bound and rationalization.
-3. A constructible C in degree zero is bounded constructible by sk-def-sfb-constructible.
-   det-thm-sfb-proper-base-change-rational preserves that category under proper pushforward;
-   thus every R^q p_* C is constructible.
-4. def-weil-pbc-internal-abelian-sheaf-module-equivalence and sk-def-sfb-sheaf-tensor
-   identify internal modules with sectionwise modules without changing underlying sheaves.
-   lem-weil-pbc-equivalence-injective-resolutions transports injective resolutions;
-   lem-weil-pbc-module-sheaves-colimits-forgetful gives exactness and small colimits.
-   Restriction from p_*Λ_X to Λ_Y preserves both, as underlying abelian sheaves agree.
-5. Use lem-sc-bounded-below-injective-resolution and
-   lem-weil-pbc-dplus-injective-representative to compute the full module derived
-   direct image on the transported injective resolution. sk-def-sfb-module-derived-pushpull
-   and sk-def-sfb-module-pushforward-pullback identify the underlying direct-image complexes.
-   Naturality identifies the continuity comparisons with the canonical module maps in
-   det-proper-heart-continuity-direct-image.
-6. Present M as a small filtered colimit of constructibles by clause (2) of
-   det-ind-heart-full-faithfulness. Continuity identifies its R^q p_* with the colimit
-   of their R^q p_*; step 3 gives membership in IndCons and step 2 gives vanishing.
-7. det-ind-heart-filtered-colimits gives closure under arbitrary sums on X and Y.
-   det-proper-heart-continuity-direct-image makes the image of a coproduct cofan a
-   colimit. Fullness and repleteness from det-ind-heart-full-faithfulness give the
-   coproduct universal property in IndCons, including the empty family. -/
+Proof: convert the finite-lower-bound convention for geometric fibre dimension,
+including empty fibres and negative d, and apply the constructible rational vanishing
+bound. Proper higher images of constructibles are constructible by
+properHeart_constructible_cohomology. The internal-module qcqs continuity comparison
+shows that the higher direct-image functor preserves filtered colimits of degree-zero
+complexes. Map the filtered constructible presentation supplied by ObjectProperty.ind:
+its terms vanish above the bound, and in nonnegative degrees they are constructible.
+This proves vanishing and ind-constructibility of the colimit. Finally additivity and
+filtered finite subsums give preservation of every small coproduct, with the actual
+mapped cofan legs and including the empty family. -/
 theorem properHeartBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -148,28 +220,33 @@ theorem properHeartBound
           (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
             Y.fromSpecResidueField y) : Scheme.{u}) → (n : ℤ) ≤ d) :
     ProperHeartBoundAssertions (Profinite.continuousMapRingObj.{u} E) p d := by
-  sorry
+  have hdim : ∀ y : Y, topologicalKrullDim
+      (pullback p (Spec.map (CommRingCat.ofHom
+        (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+          Y.fromSpecResidueField y) : Scheme.{u}) ≤
+      if d < 0 then ⊥ else (d.toNat : WithBot ℕ∞) := by
+    intro y
+    exact dimension_bound_of_finite_lower_bounds _ d (fun n h ↦ hd y n h)
+  apply properHeartBound_of_continuity _ p d
+  · intro M hM q hq
+    exact isZero_higherDirectImage_rational_of_isProper ℓ E k
+      (by rw [ringChar.eq k p₀]; exact hp₀.ne')
+      (by rw [ringChar.eq k p₀]; exact hpℓ) p d hdim M hM q hq
+  · exact properHeart_constructible_cohomology ℓ (Profinite.continuousMapRingObj E)
+      (Or.inl ⟨E, rfl⟩) k p₀ hp₀ hpℓ X Y p
+  · exact properHeartHigherDirectImage_preservesFilteredColimits _ p
+  · exact properHeartHigherDirectImage_preservesSums _ p
 
 /-- The uniform proper heart bound for the condensed algebraic closure, whose sections
 are continuous maps valued in some finite subextension, rather than all continuous maps
 into the algebraic closure. Source: blueprint main-20261015, sk-lem-proper-heart-bound,
 statement and proof (blueprint: sk-lem-proper-heart-bound).
 
-Proof for stage 3: follow the same seven DAG steps as properHeartBound. Properness gives
-qcqs and finite type over k gives Noetherian X and Y (the properness, finite-type,
-closed-immersion, quasi-separated, affine-qcqs, Noetherian-ring, locally-Noetherian and
-finite-type-over-Noetherian nodes). det-proper-heart-bound-rational gives the constructible
-vanishing bound, and det-thm-sfb-proper-base-change-rational with sk-def-sfb-constructible
-makes the constructible direct images constructible. The internal/sectionwise equivalence,
-sk-def-sfb-sheaf-tensor, lem-weil-pbc-equivalence-injective-resolutions and
-lem-weil-pbc-module-sheaves-colimits-forgetful transport cohomology and colimits.
-lem-sc-bounded-below-injective-resolution and lem-weil-pbc-dplus-injective-representative
-identify the two derived direct images naturally, using sk-def-sfb-module-derived-pushpull
-and sk-def-sfb-module-pushforward-pullback. Apply det-proper-heart-continuity-direct-image
-to the filtered constructible presentation from det-ind-heart-full-faithfulness.
-Vanishing and IndCons membership follow term by term; det-ind-heart-filtered-colimits
-and direct-sum continuity give preservation of every coproduct cofan, including the empty
-one, in the full replete ind-constructible subcategories. -/
+Proof: use the algebraic-closure coefficient cases of the same constructible
+vanishing and constructibility inputs as properHeartBound. Internal-module qcqs
+continuity transports the filtered constructible presentation, yielding vanishing and
+ind-constructibility. Additivity and filtered finite subsums give preservation of all
+small coproduct cofans, including the empty family. -/
 theorem properHeartBound_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
@@ -185,6 +262,21 @@ theorem properHeartBound_padicAlgCl
           (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
             Y.fromSpecResidueField y) : Scheme.{u}) → (n : ℤ) ≤ d) :
     ProperHeartBoundAssertions (Profinite.padicAlgClRingObj.{u} ℓ) p d := by
-  sorry
+  have hdim : ∀ y : Y, topologicalKrullDim
+      (pullback p (Spec.map (CommRingCat.ofHom
+        (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫
+          Y.fromSpecResidueField y) : Scheme.{u}) ≤
+      if d < 0 then ⊥ else (d.toNat : WithBot ℕ∞) := by
+    intro y
+    exact dimension_bound_of_finite_lower_bounds _ d (fun n h ↦ hd y n h)
+  apply properHeartBound_of_continuity _ p d
+  · intro M hM q hq
+    exact isZero_higherDirectImage_padicAlgCl_of_isProper ℓ k
+      (by rw [ringChar.eq k p₀]; exact hp₀.ne')
+      (by rw [ringChar.eq k p₀]; exact hpℓ) p d hdim M hM q hq
+  · exact properHeart_constructible_cohomology ℓ (Profinite.padicAlgClRingObj ℓ)
+      (Or.inr rfl) k p₀ hp₀ hpℓ X Y p
+  · exact properHeartHigherDirectImage_preservesFilteredColimits _ p
+  · exact properHeartHigherDirectImage_preservesSums _ p
 
 end AlgebraicGeometry.ProEtale

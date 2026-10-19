@@ -1,0 +1,152 @@
+{
+ "id": "lem-proper-heart-constructible-cohomology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-proper-heart-bound",
+   "place": "Final paragraph, first sentence: constructibility before passage to IndCons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper higher direct images retain finite constant scalar models",
+ "statement": "Fix a prime ell, a field k of characteristic p0>0 different from ell, and separated finite-type k-schemes X,Y. Let p:X -> Y be a proper k-morphism. Let Lambda be a commutative condensed ring object equal as a bundled ring to the continuous-map condensed ring of a finite subextension E of Qbar_ell/Q_ell, or to the finite-subextension-valued condensed algebraic closure. Pull Lambda back to each scheme. For each finite constant-model constructible Lambda_X-module M and integer q>=0, H^q(Rp_*(M[0])) is finite constant-model constructible over Lambda_Y. Constructibility and derived pushforward are those of [sk-def-sfb-constructible] and [sk-def-sfb-module-derived-pushpull].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+  "place": "Final paragraph: passage to IndCons"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Place M in degree zero. Its degree-zero cohomology is canonically isomorphic to M, and every other cohomology module is zero. Finite constant local models transport across isomorphisms. A zero module has the rank-zero constant presentation on the identity cover and hence a one-stratum constructible presentation, even on an empty scheme. Thus M[0] is bounded with finite-constant-model constructible cohomology.",
+   "uses": [
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+    "place": "Final paragraph: passage to IndCons"
+   }
+  },
+  {
+   "text": "Apply clause (4) of finiteCoefficientDescentTwoColimit on X and Y. In the standing positive-characteristic separated finite-type setting it explicitly identifies constantModelBoundedConstructible with boundedConstructible for E and the condensed algebraic closure. The bundled coefficient-ring equality allows transport with the ring operations fixed.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+    "place": "Final paragraph: passage to IndCons"
+   }
+  },
+  {
+   "text": "Convert CharP k p0 and p0>0 to the two ringChar facts, and regard p as a morphism over Spec k with its original structure maps. Convert the constructibility of M[0] using the equality on X; apply properPushforward_boundedConstructible_rational; convert back using the equality on Y. The resulting bounded constructibility contains finite-constant-model constructibility in each degree, so take degree q.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+    "place": "Final paragraph: passage to IndCons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "det-thm-sfb-proper-base-change-rational"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-heart-bound/sk-lem-proper-heart-bound.proof.md",
+  "place": "Final paragraph; rational identification from finite coefficient descent and proper preservation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsConstantModelConstructible",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No proper rational constructibility theorem; only generic condensed/finite-presentation constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "constantModelBoundedConstructible|IsConstantModelConstructible",
+   "results": "[]",
+   "date": "2026-10-19",
+   "verdict": "No proper rational constructibility theorem; only generic condensed/finite-presentation constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper higher direct images of constructible rational ell adic sheaves have finite constant scalar local models",
+   "results": "['LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat', 'LightCondMod.LocallyConstant.functor', 'CompHausLike.LocallyConstantModule.functor', 'SheafOfModules.isFinitePresentation', 'CondensedMod.ofSheafProfinite', 'Condensed.finFree', 'LightCondMod.ofSheafLightProfinite', 'SheafOfModules.IsFiniteType']",
+   "date": "2026-10-19",
+   "verdict": "No proper rational constructibility theorem; only generic condensed/finite-presentation constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper higher direct image of constructible ell adic sheaves is constructible",
+   "results": "['AlgebraicGeometry.Scheme.Hom.isConstructible_preimage', 'AlgebraicGeometry.Scheme.Hom.isConstructible_image', 'AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image', 'Topology.IsConstructible.image_of_isOpenEmbedding', 'SheafOfModules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.instFullPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'CategoryTheory.Sheaf.isConstant_iff_mem_essImage']",
+   "date": "2026-10-19",
+   "verdict": "Only scheme constructible-subset and generic constant-sheaf results; no rational proper constructibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperHeartBound",
+  "date": "2026-10-19",
+  "group": "K5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-proper-heart-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperHeartConstructibleCohomology",
+  "file": "lean/Sheaf/Paper/ProperHeartConstructibleCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.properHeart_constructible_cohomology",
+  "statement": "theorem properHeart_constructible_cohomology\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n      Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨\n      Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))\n    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] :\n    ∀ M, IsConstantModelConstructible Λ X M → ∀ q : ℤ, 0 ≤ q →\n      IsConstantModelConstructible Λ Y ((DerivedCategory.homologyFunctor _ q).obj\n        ((CondensedRing.lowerStar Λ p).rightDerivedFunctor.obj\n          ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-19"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T034302-L-417394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261019T034302-L-417394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
