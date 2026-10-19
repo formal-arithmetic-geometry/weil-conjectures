@@ -8,9 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
 
-import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-import Mathlib.CategoryTheory.Preadditive.LeftExact
-
 /-!
 # Exactness of lifts to module objects
 
@@ -69,6 +66,18 @@ theorem lift_additive_exact
     (G : Mod C R ⥤ Mod D S)
     (h : G ⋙ Mod.forget S = Mod.forget R ⋙ F) :
     G.Additive ∧ PreservesFiniteLimits G ∧ PreservesFiniteColimits G := by
-  sorry
+  have : (G ⋙ Mod.forget S).Additive := by
+    rw [h]
+    infer_instance
+  have : PreservesFiniteLimits (G ⋙ Mod.forget S) := by
+    rw [h]
+    infer_instance
+  have : PreservesFiniteColimits (G ⋙ Mod.forget S) := by
+    rw [h]
+    infer_instance
+  exact ⟨Functor.additive_of_comp_faithful G (Mod.forget S),
+    preservesFiniteLimits_of_reflects_of_preserves G (Mod.forget S),
+    preservesFiniteColimits_of_reflects_of_preserves G (Mod.forget S)⟩
 
 end CategoryTheory.Mod
+

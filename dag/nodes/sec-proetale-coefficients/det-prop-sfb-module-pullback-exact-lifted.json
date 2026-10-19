@@ -22,93 +22,52 @@
  ],
  "proof": [
   {
-   "text": "By [def-galois-exact-functor], right exactness of $T_{\\mathcal R}=\\mathcal R\\otimes-$ and $T_{\\mathcal S}=\\mathcal S\\otimes-$ means preservation of finite colimits. Thus [lem-sfb-modobj-abelian] applies to both monoids: both module categories are abelian. Use the composition convention $ba=b\\circ a$. The module-morphism equation of [sk-def-sfb-module-objects] is $a\\gamma_M=\\gamma_N T(a)$. Its solutions are closed under addition, zero and negatives, by bilinearity of composition and additivity of $T$: for instance $(a+b)\\gamma_M=\\gamma_N(Ta+Tb)=\\gamma_NT(a+b)$. Hence the Hom groups and the additive forgetful functors are inherited from the base categories. For parallel module maps $a,b$, the assumed commutation gives $U_{\\mathcal S}G(a+b)=F(U_{\\mathcal R}a+U_{\\mathcal R}b)=U_{\\mathcal S}Ga+U_{\\mathcal S}Gb=U_{\\mathcal S}(Ga+Gb)$. Faithfulness [lem-sfb-modobj-forget-faithful] gives $G(a+b)=Ga+Gb$, which is additivity [def-weil-pbc-additive-functor]; setting $a=b=0$ and subtracting also gives $G(0)=0$.",
+   "text": "Use the already proved module-object API in WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian (the module realizing [lem-sfb-modobj-abelian]) and its public dependency Monoidal.Mod.Limits. Both forgetful functors are additive; the source forgetful functor preserves finite limits and finite colimits, and the target forgetful functor reflects finite limits and finite colimits. These are existing proved instances, not new assumptions. Their module categories and forgetful functors are those of [sk-def-sfb-module-objects].",
    "uses": [
-    "def-galois-exact-functor",
     "lem-sfb-modobj-abelian",
-    "sk-def-sfb-module-objects",
-    "lem-sfb-modobj-forget-faithful",
-    "def-weil-pbc-additive-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Additivity paragraph, with the abelian-category hypotheses checked first"
-   }
-  },
-  {
-   "text": "The source forgetful functor $U_{\\mathcal R}$ preserves all kernels and cokernels. Indeed, for a module morphism $\\varphi$, choose an underlying kernel $k_0:K_0\\to U_{\\mathcal R}M$. The statement of [lem-sfb-modobj-kernels] equips $K_0$ with an action and makes $k_0$ a module kernel. For any other module kernel $k:K\\to M$, the two universal properties give module maps $v:K\\to K_0$ and $w:K_0\\to K$ with $k_0v=k$, $kw=k_0$; uniqueness gives $wv=1$ and $vw=1$. Their underlying maps are inverse, so $U_{\\mathcal R}k=(U_{\\mathcal R}k_0)(U_{\\mathcal R}v)$ is an underlying kernel. For cokernels, [lem-sfb-modobj-cokernels] supplies an action on a chosen underlying cokernel $q_0:U_{\\mathcal R}N\\to Q_0$, making $q_0$ a module cokernel; its finite-colimit hypothesis holds by step 1. Comparing any module cokernel $q:N\\to Q$ with $q_0$ gives inverse module maps $v:Q_0\\to Q$, $w:Q\\to Q_0$ satisfying $vq_0=q$, $wq=q_0$. Thus $U_{\\mathcal R}q=(U_{\\mathcal R}v)(U_{\\mathcal R}q_0)$ is an underlying cokernel. These comparisons use only the kernel property (unique factorization of maps killed by $\\varphi$), respectively the dual cokernel property.",
-   "uses": [
-    "lem-sfb-modobj-kernels",
-    "lem-sfb-modobj-cokernels"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Exactness paragraph, first and fourth sentences: spell out comparison with the constructed (co)kernels"
-   }
-  },
-  {
-   "text": "The target forgetful functor reflects kernels. Suppose $\\varphi:M\\to N$ and $k:K\\to M$ are module maps with $\\varphi k=0$ and underlying $k$ a kernel. Given a module map $\\psi:P\\to M$ with $\\varphi\\psi=0$, let $u:UP\\to UK$ be its unique underlying factorization, $ku=\\psi$. Using the module-morphism equations of [sk-def-sfb-module-objects], compute $ku\\gamma_P=\\psi\\gamma_P=\\gamma_M T_{\\mathcal S}\\psi=\\gamma_M T_{\\mathcal S}k\\,T_{\\mathcal S}u=k\\gamma_K T_{\\mathcal S}u$. A kernel arrow is monic: two maps with equal composites with it are factorizations of the same map through that kernel, so are equal by uniqueness. Cancelling $k$ therefore gives $u\\gamma_P=\\gamma_K T_{\\mathcal S}u$, making $u$ a module map. Uniqueness is the underlying uniqueness, since module morphisms are underlying morphisms satisfying an equation. This is the module kernel universal property.",
-   "uses": [
     "sk-def-sfb-module-objects"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Paragraph U_S reflects kernels"
-   }
-  },
-  {
-   "text": "The target forgetful functor reflects cokernels. Suppose $q:N\\to Q$ is a module map with $q\\varphi=0$ and underlying $q$ a cokernel of $U\\varphi$. For any module map $\\psi:N\\to P$ killed by $\\varphi$, the underlying property supplies a unique $u:UQ\\to UP$ with $uq=\\psi$. Put $T=T_{\\mathcal S}$. By [sk-def-sfb-module-objects], $u\\gamma_Q Tq=uq\\gamma_N=\\psi\\gamma_N=\\gamma_P T\\psi=\\gamma_P Tu\\,Tq$. Right exactness in [def-galois-exact-functor] preserves this finite coequalizer of $U\\varphi$ and $0$; additivity gives $T0=0$, so $Tq$ is a cokernel of $T(U\\varphi)$. A cokernel arrow $e$ is epic directly from uniqueness: if $ae=be$, both $a,b$ factor the same map through $e$, so $a=b$. Cancel $Tq$ to obtain $u\\gamma_Q=\\gamma_P Tu$. Thus $u$ is a module map, and its uniqueness is underlying uniqueness. This proves the module cokernel universal property without an uncited assertion about preservation of arbitrary epimorphisms.",
-   "uses": [
-    "sk-def-sfb-module-objects",
-    "def-galois-exact-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Paragraph U_S reflects cokernels, replacing the general epimorphism claim by preservation of this cokernel"
-   }
-  },
-  {
-   "text": "Let $k$ be any module kernel of $\\varphi$ in the source category. Step 2 makes $U_{\\mathcal R}k$ an underlying kernel. A kernel is the equalizer of $U_{\\mathcal R}\\varphi$ and $0$, a finite diagram. Exactness of $F$ in [def-galois-exact-functor] therefore makes $F(U_{\\mathcal R}k)$ a kernel of $F(U_{\\mathcal R}\\varphi)$, since additivity makes $F(0)=0$. The assumed equality of composite functors identifies these maps with $U_{\\mathcal S}Gk$ and $U_{\\mathcal S}G\\varphi$. Also $G\\varphi\\,Gk=G(0)=0$ by step 1, so step 3 proves $Gk$ is a module kernel. For a source module cokernel $q$, step 2 and finite-colimit preservation by $F$ make $U_{\\mathcal S}Gq=F(U_{\\mathcal R}q)$ an underlying cokernel of $U_{\\mathcal S}G\\varphi$ (the coequalizer of that map and zero). Step 4 and $Gq\\,G\\varphi=0$ then show $Gq$ is a module cokernel. Consequently $G$ preserves every kernel and every cokernel.",
-   "uses": [
-    "def-galois-exact-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Exactness paragraph: apply exactness of F, then the two reflection calculations"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-kernel-cokernel-finite-exactness] to $G$ between the abelian module categories from step 1. Its additivity is step 1 and its preservation of all kernels and cokernels is step 5, so both clauses apply: $G$ preserves finite limits and finite colimits. By [def-galois-exact-functor], this is exactly exactness. The additivity already proved gives every clause of the assertion.",
-   "uses": [
-    "lem-sfb-kernel-cokernel-finite-exactness",
-    "def-galois-exact-functor"
-   ],
    "elementary": false,
    "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Abelian.lean",
+    "place": "Preadditive and Abelian sections: additive forgetful functor, finite-(co)limit preservation and reflection instances"
+   }
+  },
+  {
+   "text": "Rewrite the composite G followed by the target forgetful functor using the assumed equality h. It becomes the source forgetful functor followed by F, which is additive and preserves finite limits and finite colimits by composition. These are exactly the notions in [def-weil-pbc-additive-functor] and [def-galois-exact-functor].",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-    "place": "Exactness paragraph, final sentence: the general finite-(co)limit criteria"
+    "place": "Additivity and Exactness of G paragraphs: identify the composites"
+   }
+  },
+  {
+   "text": "The target forgetful functor is faithful by [lem-sfb-modobj-forget-faithful]. Apply Mathlib Functor.additive_of_comp_faithful to obtain additivity of G. Apply Mathlib preservesFiniteLimits_of_reflects_of_preserves and preservesFiniteColimits_of_reflects_of_preserves to G and the target forgetful functor, using the three composite instances from the preceding step. This gives finite-limit and finite-colimit preservation of G directly, and assembling the three proofs gives the assertion.",
+   "uses": [
+    "lem-sfb-modobj-forget-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
+    "place": "Additivity and Exactness of G paragraphs: cancellation through the forgetful functor, using the stronger existing finite-(co)limit reflection API"
    }
   }
  ],
  "proof_deps": [
-  "def-galois-exact-functor",
   "lem-sfb-modobj-abelian",
   "sk-def-sfb-module-objects",
-  "lem-sfb-modobj-forget-faithful",
   "def-weil-pbc-additive-functor",
-  "lem-sfb-modobj-kernels",
-  "lem-sfb-modobj-cokernels",
-  "lem-sfb-kernel-cokernel-finite-exactness"
+  "def-galois-exact-functor",
+  "lem-sfb-modobj-forget-faithful"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "T9 stage 3",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-module-pullback-exact/det-prop-sfb-module-pullback-exact-lifted.proof.md",
-  "place": "All four proof paragraphs, with the universal-property comparisons and the final Mathlib criteria made explicit"
+  "place": "Same forgetful-functor argument, using the already proved finite-(co)limit preservation/reflection instances and Mathlib cancellation lemmas instead of reconstructing kernels and cokernels"
  },
  "mathlib_searches": [
   {
@@ -252,5 +211,15 @@
   "by": "NE",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261019T112540-L-3954302",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
