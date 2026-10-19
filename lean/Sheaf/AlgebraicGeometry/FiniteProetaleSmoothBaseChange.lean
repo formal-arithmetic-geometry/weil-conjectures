@@ -44,11 +44,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Sheaf.AlgebraicGeometry.BoundedDerivedSmoothBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.Paper.CondensedAmbientExchange
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Finite pro-etale smooth base change
@@ -184,6 +180,64 @@ theorem isIso_finite_proetale_smooth_base_change
             ((upperStar (ModuleCat.{u + 1} Λ) e).leftDerivedFunctor ⋙
               (lowerStar (ModuleCat.{u + 1} Λ) h).rightDerivedFunctor).map
                 (finiteSmoothModelCoordinates Λ T K L α).hom) := by
-  sorry
+  have hp := (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback
+    sq.hom_fst sq.hom_snd).flip
+  have : QuasiCompact h := MorphismProperty.of_isPullback (P := @QuasiCompact) hp inferInstance
+  have : QuasiSeparated h :=
+    MorphismProperty.of_isPullback (P := @QuasiSeparated) hp inferInstance
+  let F := (lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctor ⋙
+    (upperStar (ModuleCat.{u + 1} Λ) p).leftDerivedFunctor
+  let G := (upperStar (ModuleCat.{u + 1} Λ) e).leftDerivedFunctor ⋙
+    (lowerStar (ModuleCat.{u + 1} Λ) h).rightDerivedFunctor
+  let B := derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq.flip
+  have formula (L : DerivedCategory.Plus
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (α : (finiteCoefficientDerivedComparison T Λ).obj
+        (DerivedCategory.Plus.ι.obj L) ≅ K) :
+      B.app ((finiteCoefficientRealization T Λ).mapDerivedCategory.asEquivalence.inverse.obj K) =
+        F.map (finiteSmoothModelCoordinates Λ T K L α).inv ≫
+          (baseChangeSourceComparisonIso g p Λ).inv.app L ≫
+          (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+            (DerivedCategory.Plus.ι.map
+              ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app L)) ≫
+          (finiteSmoothTargetComparison Λ sq).hom.app L ≫
+          G.map (finiteSmoothModelCoordinates Λ T K L α).hom := by
+    have hm := comparison_derivedBaseChangeMap Λ hp L
+    have hm' : B.app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj
+        (DerivedCategory.Plus.ι.obj L)) =
+        (baseChangeSourceComparisonIso g p Λ).inv.app L ≫
+          (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+            (DerivedCategory.Plus.ι.map
+              ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app L)) ≫
+          (finiteSmoothTargetComparison Λ sq).hom.app L := by
+      apply (cancel_epi ((baseChangeSourceComparisonIso g p Λ).hom.app L)).1
+      simpa only [B, finiteSmoothTargetComparison, Category.assoc, Iso.hom_inv_id_app_assoc]
+        using hm.symm
+    have hn := B.naturality (finiteSmoothModelCoordinates Λ T K L α).hom
+    calc
+      _ = F.map (finiteSmoothModelCoordinates Λ T K L α).inv ≫
+          B.app _ ≫ G.map (finiteSmoothModelCoordinates Λ T K L α).hom := by
+        rw [← hn, ← F.map_comp_assoc, Iso.inv_hom_id]
+        simp only [F.map_id, Category.id_comp]
+      _ = _ := by rw [hm']; simp only [Category.assoc]
+  constructor
+  · obtain ⟨L, ⟨hc, a, b, _, hab⟩, ⟨α⟩⟩ := hK
+    have hL : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T L := by
+      refine ⟨⟨⟨a, (_root_.DerivedCategory.isGE_iff L a).2
+        (fun i hi ↦ hab i (.inl hi))⟩,
+        ⟨b, (_root_.DerivedCategory.isLE_iff L b).2
+          (fun i hi ↦ hab i (.inr hi))⟩⟩, ?_⟩
+      intro i
+      obtain ⟨S, _, hS⟩ := hc i
+      exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 ⟨S, hS⟩
+    let L' : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+      ⟨L, hL.1.1⟩
+    have : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq.flip).app L') :=
+      Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth Λ p hp N
+        (Nat.ne_of_gt hcoeff.1) hcoeff.2.2.1 hcoeff.2.2.2 L hL
+    rw [formula L' α]
+    infer_instance
+  · intro L _ α
+    exact congrArg ((finiteCoefficientRealization X Λ).mapDerivedCategory.map) (formula L α)
 
 end AlgebraicGeometry.ProEtale

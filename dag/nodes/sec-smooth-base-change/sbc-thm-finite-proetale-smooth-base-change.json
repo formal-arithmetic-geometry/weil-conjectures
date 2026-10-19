@@ -26,45 +26,21 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-proetale-modules], membership of $K$ in $\\Dbc(T_{\\Proet},\\Lambda)$ supplies an etale bounded constructible complex $L$ and an isomorphism $\\alpha:\\nu_T^*L\\xrightarrow{\\sim}K$. Its cohomology vanishes outside some finite interval $[a,b]$, so in particular $L\\in\\Dplus(T_{\\Et},\\Lambda)$. Fix this model for the remainder of the proof. No inference from a system of coefficient reductions, and no essential-surjectivity assertion for arbitrary pro-etale complexes, is needed.",
+   "text": "Extract an etale model L and alpha from isBoundedConstructibleFiniteCoefficient. The explicit cohomological bounds give the canonical t-structure lower and upper bounds via DerivedCategory.isGE_iff and isLE_iff. For each cohomology sheaf, use Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf (the existing source-library realization of the constructibility comparison) with the same stratification. This gives Etale.DerivedCategory.boundedConstructible and hence a bounded-below object L′.",
    "uses": [
-    "def-weil-pbc-proetale-modules"
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-proetale-modules.md",
     "place": "Definition of Dbc as the essential image of bounded constructible etale complexes; finite-coefficient clarification in the reviewed DAG statement"
    }
   },
   {
-   "text": "Apply [sbc-thm-bounded-derived-smooth-base-change] to $L$ on this square. All its hypotheses are present: $\\Lambda$ is finite commutative, the positive annihilator $N$ is invertible on $S$, $f$ is smooth, $g$ is quasi-compact and quasi-separated, and $L$ is bounded constructible. Thus the specified etale module exchange $E_L: f_{\\Et}^{-1}Rg_{\\Et,*}L\\to Rh_{\\Et,*}e_{\\Et}^{-1}L$ is an isomorphism in the ambient derived category. Here [sbc-def-base-change-map] identifies exact constant-coefficient pullback with inverse image and explicitly specifies that the bounded-below restriction uses the same module unit--square--counit mate formula. Consequently $E_L$ is the etale module exchange appearing in the transport lemma below, under the canonical bounded-below/ambient identifications; it is not an arbitrary isomorphism of its endpoints.",
-   "uses": [
-    "sbc-thm-bounded-derived-smooth-base-change",
-    "sbc-def-base-change-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0EYU (theorem-smooth-base-change) and 0F09 (lemma-smooth-base-change-general); module ambient version and specified mate in the two cited DAG statements"
-   }
-  },
-  {
-   "text": "Since $h$ is the base change of $g$, clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] makes $h$ quasi-compact and quasi-separated. We may therefore use [prop-weil-pbc-comparison-direct-image] on both $g$ and $h$, and [lem-weil-pbc-comparison-pullback] on $f$ and $e$. Use their canonical derived module versions with precisely the counit-mate normalization stated in [lem-weil-pbc-transport-identifies-exchange]. In the notation of that lemma, $A_W=\\nu_W^*$, $a_u:A_Uu_{\\Et}^{-1}\\cong Lu_{\\Proet}^*A_V$ and $b_u:A_VRu_{\\Et,*}\\cong Ru_{\\Proet,*}A_U$. It supplies the following isomorphisms with their specified components:\n$$\n\\begin{split}\nS_L&=Lf_{\\Proet}^*(b_{g,L})\\circ a_{f,Rg_{\\Et,*}L}:\n A_X(f_{\\Et}^{-1}Rg_{\\Et,*}L)\\xrightarrow{\\sim}Lf_{\\Proet}^*Rg_{\\Proet,*}A_TL,\\\\\nT_L&=Rh_{\\Proet,*}(a_{e,L})\\circ b_{h,e_{\\Et}^{-1}L}:\n A_X(Rh_{\\Et,*}e_{\\Et}^{-1}L)\\xrightarrow{\\sim}Rh_{\\Proet,*}Le_{\\Proet}^*A_TL.\n\\end{split}\n$$\nOnly the input $L$ is required to be bounded below. We do not require the two exchange endpoints to be bounded constructible.",
+   "text": "The chosen square gives IsPullback e h g p. Base-change stability makes h quasi-compact and quasi-separated. Apply comparison_derivedBaseChangeMap to any bounded-below etale model. Cancel the source comparison isomorphism to express the pro-etale exchange at the comparison image as source comparison inverse, image of the etale exchange, then target comparison. These are precisely baseChangeSourceComparisonIso and finiteSmoothTargetComparison; no further comparison-coherence result is required.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-transport-identifies-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-transport-identifies-exchange.md",
-    "place": "Canonical comparisons S_L,T_L, read with (X,Y,Xprime,Yprime)=(T,S,Y,X), and edges (f,fprime,g,gprime)=(g,h,f,e); qcqs permanence uses Stacks 01K5 and 01KU(4)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-transport-identifies-exchange] with its corners $(X,Y,X',Y')$ renamed $(T,S,Y,X)$ and its edges $(f,f',g,g')$ renamed $(g,h,f,e)$. The coefficient ring is finite discrete commutative, the two vertical edges $g,h$ are quasi-compact and quasi-separated by step 3, and $L\\in D^+$ by step 1. Its equality is exactly\n$$\n T_L\\circ\\nu_X^*(E_L)=F_{\\nu_T^*L}\\circ S_L.\n$$\nIn particular the pro-etale map on the right is the canonical ambient ringed exchange, with the stated constant-ring structure maps. Multiplying on the right by $S_L^{-1}$ gives\n$$F_{\\nu_T^*L}=T_L\\circ\\nu_X^*(E_L)\\circ S_L^{-1}.$$\nA functor sends the inverse of an isomorphism to the inverse of its image. Step 2 therefore makes the middle factor invertible, and all three factors in this displayed formula are isomorphisms. This proves the claim at the chosen etale model with the required conjugation identity.",
-   "uses": [
     "lem-weil-pbc-transport-identifies-exchange"
    ],
    "elementary": false,
@@ -74,31 +50,40 @@
    }
   },
   {
-   "text": "The exchange of [def-weil-pbc-ambient-ringed-exchange] is a natural transformation on the ambient pro-etale derived category. Its naturality at $\\alpha:\\nu_T^*L\\cong K$ states\n$$\n Rh_{\\Proet,*}Le_{\\Proet}^*(\\alpha)\\circ F_{\\nu_T^*L}\n =F_K\\circ Lf_{\\Proet}^*Rg_{\\Proet,*}(\\alpha).\n$$\nBoth functor images of $\\alpha$ are isomorphisms: their inverses are the images of $\\alpha^{-1}$. Thus\n$$\nF_K=Rh_{\\Proet,*}Le_{\\Proet}^*(\\alpha)\\circ T_L\\circ\\nu_X^*(E_L)\\circ S_L^{-1}\\circ\n \\bigl(Lf_{\\Proet}^*Rg_{\\Proet,*}(\\alpha)\\bigr)^{-1}.\n$$\nEvery factor is invertible by step 4 and the preceding inverse calculation. This proves both the asserted isomorphism and the stated description for every choice of the etale model.",
+   "text": "Naturality of derivedBaseChangeMap at finiteSmoothModelCoordinates alpha expresses the exchange at the inverse realization of K as the source functor applied to the inverse coordinates, the exchange at the comparison image, then the target functor applied to the coordinates. Functoriality and the inverse-hom identity prove this by cancellation. Substituting the preceding identity gives the displayed conjugation formula for every L and alpha; applying realization.map gives exactly the second conjunct.",
    "uses": [
-    "def-weil-pbc-ambient-ringed-exchange"
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-transport-identifies-exchange"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-ambient-ringed-exchange.md",
     "place": "Definition as a natural transformation; explicit naturality square and conjugation along an isomorphism"
    }
+  },
+  {
+   "text": "For the model extracted in step 1, use the already proved source-library theorem Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth, the bounded-below version of sbc-thm-bounded-derived-smooth-base-change. Positivity of N implies N is nonzero; the annihilator and unit conditions are the specified fields of IsSmoothBaseChangeCoefficients. Rewrite the pro-etale exchange using the conjugation formula. Every factor is an isomorphism, as are its images under bounded-below inclusion, site comparison, and realization. Typeclass inference supplies the first conjunct.",
+   "uses": [
+    "sbc-thm-bounded-derived-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EYU (theorem-smooth-base-change) and 0F09 (lemma-smooth-base-change-general); module ambient version and specified mate in the two cited DAG statements"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proetale-modules",
-  "sbc-thm-bounded-derived-smooth-base-change",
-  "sbc-def-base-change-map",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-transport-identifies-exchange",
-  "def-weil-pbc-ambient-ringed-exchange"
+  "sbc-thm-bounded-derived-smooth-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-finite-proetale-smooth-base-change.md",
-  "place": "Proof paragraph: comparison and transport of the bounded etale exchange; finite coefficient scope made explicit from sbc-def-coefficient-conventions; model chosen using the reviewed definition of Dbc."
+  "place": "F3 stage-3 proof, 2026-10-19: existing bounded-below etale smooth-base-change theorem plus the canonical comparison identity and naturality; explicit constructibility and t-structure conversion."
  },
  "mathlib_searches": [
   {
@@ -208,8 +193,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-transport-identifies-exchange"
  ],
  "reviewed": {
@@ -243,5 +226,15 @@
   "group": "N2",
   "result": "pass",
   "note": "Reviewed the immutable node, source, dependencies, Lean module, report, edge cases, canonical mate construction, and pro-etale framework. scompile.py passed sandbox and library compilation; no substantive or mechanical findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261019T093353-L-2302154",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
