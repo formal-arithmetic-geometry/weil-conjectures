@@ -17409,3 +17409,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:13 L: merged deliver/NW/def-sfb-derived-restrict-levelwise (stage 2; reviewer PASS; parallel immutable checks)
 - 13:22 L: merged deliver/A7/Sheaf.AlgebraicGeometry.OpenDegreeZeroConstructible (stage 3; reviewer PASS; first push; landing 20261019T132220-L-1201749 (proof); batch 20261019T132218; modules 1; new nodes 0)
 - 13:22 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FullCdAmbientAdjoint (stage 3; reviewer PASS; first push; landing 20261019T132222-L-1202078 (proof); batch 20261019T132218; modules 1; new nodes 0)
+- 13:22 L: merged deliver/B3/Sheaf.Paper.NonrationalLocalizingLowerShriekComposition (stage 3; reviewer PASS; first push; landing 20261019T132223-L-1202502 (interface); batch 20261019T132218; modules 3; new nodes 2)

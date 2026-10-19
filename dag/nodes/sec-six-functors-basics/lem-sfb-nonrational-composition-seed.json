@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-nonrational-composition-seed",
+ "kind": "statement",
+ "title": "One compactification triple for finite and integral compact-support composition",
+ "statement": "Let ℓ be prime, k a field of positive prime characteristic different from ℓ, and Λ a commutative condensed coefficient ring isomorphic to a finite discrete ℓ-primary ring, Z_ℓ, or the valuation ring of a finite subextension of Q_ℓ. Let X → Y → Z be separated finite-type morphisms of separated finite-type k-schemes. Use the ordinary unbounded categories of module objects over Λ_T and the full localizing closures of constant-model bounded constructible finite-Tor objects [sk-def-sfb-constructible; sk-def-localizing-closure]. For any proofs that each compactification functor Rp_* D(j_!) preserves those closures [det-sf-comp-coherence-single], there exist compactifications cf, cg and cgf [sk-def-nagata-sketch-data] such that their restricted functors satisfy F_cf ⋙ F_cg ≅ F_cgf. This asserts existence for just one triple and contains no compatibility assertion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "The composition isomorphism; Canonicity and associativity, compactification independence."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-prop-sf-existence",
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "det-sf-comp-coherence-cocycle"
+ ],
+ "proof": [
+  {
+   "text": "Choose dense compactifications cf of f and cg of g, and a dense compactification cr of cf.g followed by cg.i, using Nagata. The composite open cf.i followed by cr.i and composite proper map cr.g followed by cg.g define a boundary compactification of f followed by g. The scheme and morphism instances follow from the finite-type over k structures and stability of proper and open morphisms under composition.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "lem-weil-pbc-proper-fp-permanence",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport finite discrete coefficients to the universe-u ULift coefficient model by the explicit mutually inverse continuous-function ring maps. The torsion condition follows by evaluating the given nsmul identity at one. The other two coefficient alternatives embed directly in the proper/open interchange coefficient alternatives. Open preservation gives j!K in the localizing hull for every K in the source hull. Proper/open interchange then gives invertible normalized objectwise maps i!Rp*j!K to Rr*u!j!K.",
+   "uses": [
+    "det-proper-image-localizing-open",
+    "det-sf-comp-composition-interchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The interchange restriction is the natural mate of the pullback composition isomorphism. Form that natural transformation explicitly. Under the open adjunction, whose unit is invertible, normalization identifies its composite with each objectwise interchange map with the canonical natural open-unit isomorphism. Thus the restriction transformation has invertible components. For any morphism K to L, apply the adjunction homEquiv and cancel that restriction component. Its naturality and normalization identify the two sides. The resulting objectwise maps therefore form a natural isomorphism.",
+   "uses": [
+    "det-sf-comp-composition-interchange",
+    "def-sf-comp-refinement-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker this natural isomorphism with the outer proper derived direct image. Compose with refinementDerivedLowerStarComp for the proper factors, and with the open extension compositor obtained by Adjunction.leftAdjointCompIso from upperStarComp and the exact derived open adjunctions. These have exactly the ambient composite-compactification endpoints. Lift the components through the full inclusion of the localizing hull, using the supplied preservation witnesses. Faithfulness reduces the naturality equation to the ambient one.",
+   "uses": [
+    "def-sf-comp-refinement-data",
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-nagata-compactification",
+  "lem-weil-pbc-proper-fp-permanence",
+  "sk-def-nagata-sketch-data",
+  "det-proper-image-localizing-open",
+  "det-sf-comp-composition-interchange",
+  "def-sf-comp-refinement-data",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/sk-thm-sf-comp-composition.proof.md",
+  "place": "The composition isomorphism; Canonicity and associativity, compactification-independence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity compactification refinement maps on derived sheaves and composition via proper open interchange",
+   "results": "8 hits, including Scheme.Modules.pushforwardComp_hom_app_app and IsProper.instCompScheme; no theorem for module-object derived compactification refinement or localizing composition.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits for underived sheaf-of-modules pushforward composition and associativity; none for the localizing compactification functors or their derived identity refinement component.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriekComp|lowerShriekComp",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NonrationalLocalizingLowerShriekComposition",
+  "date": "2026-10-19",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-mate-open-restriction",
+   "place": "Proof (2), composition of lower shriek used for the exceptional-inverse-image Hom calculation; sk-thm-sf-comp-composition, The composition isomorphism and compactification independence.",
+   "via": [
+    "lem-sfb-nonrational-localizing-lower-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NonrationalCompositionSeed",
+  "file": "lean/Sheaf/Paper/NonrationalCompositionSeed.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_nonrationalLocalizingLowerShriekCompositionSeed",
+  "statement": "theorem exists_nonrationalLocalizingLowerShriekCompositionSeed\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (_hΛ :\n      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)\n          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),\n        Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨\n      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))))\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X Y Z : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))]\n    [QuasiCompact (Z ↘ Spec (.of k))]\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    (hf : ∀ (c : Compactification.BoundaryCompactification f)\n          (K : DerivedCategory (CategoryTheory.Mod\n            (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),\n          localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y\n            ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))\n      (hg : ∀ (c : Compactification.BoundaryCompactification g)\n          (K : DerivedCategory (CategoryTheory.Mod\n            (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))),\n          localizingClosureProEtale Λ Y K → localizingClosureProEtale Λ Z\n            ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))\n      (hgf : ∀ (c : Compactification.BoundaryCompactification (f ≫ g))\n          (K : DerivedCategory (CategoryTheory.Mod\n            (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),\n          localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Z\n            ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) :\n    ∃ (cf : Compactification.BoundaryCompactification f)\n      (cg : Compactification.BoundaryCompactification g)\n      (cgf : Compactification.BoundaryCompactification (f ≫ g)),\n      Nonempty (localizingLowerShriek Λ cf.obj.obj (hf cf) ⋙\n          localizingLowerShriek Λ cg.obj.obj (hg cg) ≅\n        localizingLowerShriek Λ cgf.obj.obj (hgf cgf))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b0293",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T132223-L-1202502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "C-b0293",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261019T132223-L-1202502",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/seed/identity modules (compiled, axioms, no sorry) and both direct importers (compiled) against clone signatures, unit sk-lem-sf-mate realized list (empty) and the item/new node records"
+ }
+}

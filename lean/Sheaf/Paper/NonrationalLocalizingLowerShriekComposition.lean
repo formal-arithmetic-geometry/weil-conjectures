@@ -11,28 +11,8 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-import WeilConjectures.Compactification.Dense
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import Sheaf.Paper.CartesianCoefficients
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.OpenImmersionLocalizing
-import Sheaf.Paper.ProEtaleProperOpenInterchange
-import Sheaf.Paper.CompactificationLocalizing
-import Sheaf.Paper.CompactificationRefinementLocalizing
-import Sheaf.Compactification.CommonDenseRefinement
-import Sheaf.Compactification.DenseRefinementMorphisms
-import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import Sheaf.Paper.NonrationalCompositionSeed
+import Sheaf.Paper.CompactificationRefinementIdentity
 
 /-!
 # Composition of finite and integral lower shriek on localizing constructible categories
@@ -62,6 +42,33 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+private theorem transportComposition
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {I J L : Type*} (F : I → C ⥤ D) (G : J → D ⥤ E) (H : L → C ⥤ E)
+    (pf : ∀ c d, F c ≅ F d) (pg : ∀ c d, G c ≅ G d) (ph : ∀ c d, H c ≅ H d)
+    (cpf : ∀ c d e X, (pf c d).hom.app X ≫ (pf d e).hom.app X = (pf c e).hom.app X)
+    (cpg : ∀ c d e X, (pg c d).hom.app X ≫ (pg d e).hom.app X = (pg c e).hom.app X)
+    (cph : ∀ c d e X, (ph c d).hom.app X ≫ (ph d e).hom.app X = (ph c e).hom.app X)
+    (i₀ : I) (j₀ : J) (l₀ : L) (β : F i₀ ⋙ G j₀ ≅ H l₀) :
+    ∃ α : ∀ i j l, F i ⋙ G j ≅ H l,
+      ∀ i j l i' j' l' X,
+        (G j).map ((pf i i').hom.app X) ≫
+            (pg j j').hom.app ((F i').obj X) ≫ (α i' j' l').hom.app X =
+          (α i j l).hom.app X ≫ (ph l l').hom.app X := by
+  let α := fun i j l ↦
+    Functor.isoWhiskerRight (pf i i₀) (G j) ≪≫
+      Functor.isoWhiskerLeft (F i₀) (pg j j₀) ≪≫ β ≪≫ ph l₀ l
+  refine ⟨α, ?_⟩
+  intro i j l i' j' l' X
+  dsimp only [α, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight, Functor.whiskerLeft]
+  simp only [Category.assoc]
+  rw [← NatTrans.naturality_assoc, ← Functor.map_comp_assoc, cpf]
+  rw [← Category.assoc ((pg j j').hom.app _), cpg]
+  rw [cph]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- There is a natural composition isomorphism on the ordinary localizing closures for
 finite and integral condensed coefficients, compatible with change of
 compactification. The witnesses
@@ -74,66 +81,24 @@ maps are exactly those used to normalize the comparisons in
 Source: blueprint sk-thm-sf-comp-composition, clause (1), finite and integral cases, and its proof
 (blueprint: lem-sfb-nonrational-localizing-lower-shriek-composition).
 
-Proof, following the nine steps of the DAG:
-1. Finite type and separatedness give qcqs. Choose dense compactifications f = pj,
-   g = qi by sk-thm-nagata-compactification; ip is separated of finite type by
-   lem-weil-pbc-proper-fp-permanence, so Nagata gives a dense ip = ru. Then (uj, qr)
-   compactifies gf: qr is proper, uj is a quasi-compact open, and uj is scheme-theoretically
-   dense because the injections O_W → u_* O and O → j_* O compose to an injection
-   (sk-def-nagata-sketch-data, sk-def-sfb-dc-setting).
-2. Open composition. The exact module adjunction a_! ⊣ a^* (sk-def-sfb-module-lower-shriek,
-   sk-prop-sfb-cartesian-coefficients) passes to complexes
-   (lem-weil-pbc-exact-functor-derived-factorization,
-   lem-weil-pbc-termwise-adjunction-homotopy) and descends to D(a_!) ⊣ D(a^*) on the
-   unbounded categories (lem-weil-pbc-localization-universal-property (2),
-   sk-def-sfb-derived-categories). As a^* b^* ≅ (ba)^* (sk-def-sfb-module-pushforward-pullback),
-   b_! a_! ≅ (ba)_! by transposing units; it restricts to the identity on the source open.
-3. Direct-image composition. Use lem-weil-pbc-ringed-topoi-derived-pushforward-composition
-   for the morphisms of ringed sites of def-weil-proetale-inverse-image with module direct
-   image def-sfb-module-lower-star. Exact inverse images (sk-prop-sfb-cartesian-coefficients)
-   make direct images preserve K-injectives (lem-weil-pbc-right-adjoint-preserves-kinjective),
-   so one K-injective I computes all iterates and the comparison is the underived
-   def-sfb-module-lower-star-comp; the reassociations agree sectionwise, hence as natural
-   transformations (lem-weil-pbc-localization-universal-property (3)).
-4. Open restriction. Restriction to an open V is localization
-   (lem-weil-proetale-weakly-etale-localization (1),
-   def-sfb-finite-extension-by-zero-adjunction); lem-weil-pbc-localize-ringed-site-morphism
-   gives the sectionwise identity of def-sfb-finite-lower-star with the action of
-   def-sfb-module-lower-star. With lem-pur-kinjective-restrict-localized and
-   lem-weil-pbc-right-adjoint-preserves-kinjective this gives D(V^*) Ra_* ≅ R(a_V)_* D(U^*)
-   on the unbounded categories, compatibly with Step 3 and further restriction.
-5. For K in T_X, det-proper-image-localizing-open gives j_! K in T_{X̄}. Apply
-   det-sf-comp-composition-interchange to p, i, (u, r): r⁻¹(Y) = X̄, r restricts to p, and
-   there is a unique I_A : i_! Rp_* A → Rr_* u_! A restricting to the identity on Y, an
-   isomorphism for A in T_{X̄}, natural by uniqueness. Put α(K) = Rq_*(I_{j_! K}) followed
-   by the comparisons of Steps 2--4, Rq_* Rr_* u_! j_! ≅ R(qr)_* (uj)_!. Its endpoints lie in
-   T_Z by det-sf-comp-coherence-single, and fullness types α on the localizing closures.
-6. Auxiliary choice. For a dense refinement s of (u, r) (proper by
-   det-nagata-refinement-morphisms), Rr_*(e_s) ∘ I_A and the interchange map for (u', rs) both
-   restrict to the identity on Y, where e_s is the normalized map of
-   det-sf-comp-coherence-refinement; uniqueness in det-sf-comp-composition-interchange equates
-   them. At A = j_! K, e_s is the refinement map of uj by its identity normalization. Common
-   dense refinements (det-nagata-refinement-common-dense) and the cocycle of
-   det-sf-comp-coherence-cocycle make α independent of the auxiliary choice.
-7. Refinement of f. For a dense refinement h of (j, p), compactify uh densely as (v, s)
-   (lem-weil-pbc-proper-fp-permanence, sk-thm-nagata-compactification). Interchange for h, u
-   gives J_A : u_! Rh_* A ≅ Rs_* v_! A with s restricting to h. Then Rr_* J_A ∘ I_{Rh_* A} = I'_A,
-   as both restrict to the identity on Y. Rh_* preserves the localizing closures
-   (det-sf-comp-coherence-single) and j'_! K lies in T_{X̄'} (det-proper-image-localizing-open);
-   naturality of I and det-sf-comp-coherence-refinement (1) identify J ∘ u_!(e_h) with e_s.
-   Pushing by Rq_* Rr_* gives the refinement square for f.
-8. Refinement of g. For a dense refinement t of (i, q), compactify i'p densely as (u', r') and
-   use (u', tr') as auxiliary model for ip; both composite compactifications of gf are
-   (u'j, qtr'). The maps Rt_*(I'_A) ∘ e_t and I_A both restrict to the identity on Y, so
-   uniqueness in det-sf-comp-composition-interchange equates them. Apply Rq_* at A = j_! K;
-   Step 6 removes the special auxiliary choice. This is the refinement square for g.
-9. For arbitrary cf, cg, cgf choose dense refinements (det-nagata-refinement-common-dense)
-   and conjugate the dense α by the comparisons φ of det-sf-comp-coherence-cocycle. Steps 6--8
-   and the cocycle law show independence of the dense choices, and changing any one
-   compactification composes only its φ. As φ_{c,d} is the refinement component for a dense
-   refinement d → c, this is the displayed simultaneous refinement square; conversely the
-   square at a common dense refinement of two triples gives compatibility with every
-   prescribed comparison, including nondense ones. -/
+Proof:
+1. Embed the coefficient alternatives into IsLocalizingAdmissibleCoefficient. Apply
+   exists_localizingExceptionalAdjoint to every compactification of f, g, and gf,
+   retaining the preservation witnesses that type localizingLowerShriek.
+2. Obtain a composition isomorphism for one triple from
+   exists_nonrationalLocalizingLowerShriekCompositionSeed. Obtain the comparison
+   isomorphisms for each of f, g, and gf from compactification_coherence_cocycle and
+   lift them through the full inclusions of the localizing closures.
+3. Define the isomorphism for any triple by comparing its f and g compactifications
+   with the seed, applying the seed isomorphism, and comparing the seed composite
+   with the requested composite. The private transportComposition calculation uses
+   naturality and the three cocycle equations to prove compatibility with comparison
+   isomorphisms in all three variables.
+4. At a dense compactification d, the normalization equation for the common refinement
+   d with its identity projection identifies the comparison c to d with the actual
+   refinement component. Here compactificationRefinementComponent_id removes the
+   identity-projection factor. Taking underlying ambient morphisms in the transport
+   equation gives exactly the displayed simultaneous refinement square. -/
 theorem exists_nonrationalLocalizingLowerShriekComposition
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -195,6 +160,94 @@ theorem exists_nonrationalLocalizingLowerShriekComposition
             ((α df.obj dg.obj dgf.obj).hom.app K).hom =
           ((α cf cg cgf).hom.app K).hom ≫
             compactificationRefinementComponent Λ rgf K.obj := by
-  sorry
+  classical
+  have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases _hΛ with h | h | ⟨E, h⟩
+    · exact Or.inl h
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩))))
+  have hf := fun c ↦ (exists_localizingExceptionalAdjoint Λ ℓ k f c hΛ).choose
+  have hg := fun c ↦ (exists_localizingExceptionalAdjoint Λ ℓ k g c hΛ).choose
+  have hgf := fun c ↦ (exists_localizingExceptionalAdjoint Λ ℓ k (f ≫ g) c hΛ).choose
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated
+    (Y ↘ Spec (.of k))
+  let : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace
+    (Z ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Z := quasiSeparatedSpace_of_quasiSeparated
+    (Z ↘ Spec (.of k))
+  obtain ⟨φf, hif, hnf, hrf, hcf⟩ := compactification_coherence_cocycle Λ ℓ hΛ f
+  obtain ⟨φg, hig, hng, hrg, hcg⟩ := compactification_coherence_cocycle Λ ℓ hΛ g
+  obtain ⟨φh, hih, hnh, hrh, hch⟩ := compactification_coherence_cocycle Λ ℓ hΛ (f ≫ g)
+  let F := fun c : Compactification.BoundaryCompactification f ↦
+    localizingLowerShriek Λ c.obj.obj (hf c)
+  let G := fun c : Compactification.BoundaryCompactification g ↦
+    localizingLowerShriek Λ c.obj.obj (hg c)
+  let H := fun c : Compactification.BoundaryCompactification (f ≫ g) ↦
+    localizingLowerShriek Λ c.obj.obj (hgf c)
+  let pf : ∀ c d, F c ≅ F d := fun c d ↦
+    NatIso.ofComponents (fun K ↦ (localizingClosureProEtale Λ Y).isoMk ((φf c d).app K))
+      (fun a ↦ (localizingClosureProEtale Λ Y).ι.map_injective ((φf c d).hom.naturality a))
+  let pg : ∀ c d, G c ≅ G d := fun c d ↦
+    NatIso.ofComponents (fun K ↦ (localizingClosureProEtale Λ Z).isoMk ((φg c d).app K))
+      (fun a ↦ (localizingClosureProEtale Λ Z).ι.map_injective ((φg c d).hom.naturality a))
+  let ph : ∀ c d, H c ≅ H d := fun c d ↦
+    NatIso.ofComponents (fun K ↦ (localizingClosureProEtale Λ Z).isoMk ((φh c d).app K))
+      (fun a ↦ (localizingClosureProEtale Λ Z).ι.map_injective ((φh c d).hom.naturality a))
+  have seed : ∃ cf cg ch, Nonempty (F cf ⋙ G cg ≅ H ch) :=
+    exists_nonrationalLocalizingLowerShriekCompositionSeed Λ ℓ _hΛ k f g hf hg hgf
+  obtain ⟨cf₀, cg₀, ch₀, ⟨β⟩⟩ := seed
+  have cpf (c d e) (L : (localizingClosureProEtale Λ X).FullSubcategory) :
+      (pf c d).hom.app L ≫ (pf d e).hom.app L = (pf c e).hom.app L := by
+    apply (localizingClosureProEtale Λ Y).ι.map_injective
+    change (φf c d).hom.app L ≫ (φf d e).hom.app L = (φf c e).hom.app L
+    exact congrArg (fun e ↦ e.hom.app L) (hcf c d e)
+  have cpg (c d e) (L : (localizingClosureProEtale Λ Y).FullSubcategory) :
+      (pg c d).hom.app L ≫ (pg d e).hom.app L = (pg c e).hom.app L := by
+    apply (localizingClosureProEtale Λ Z).ι.map_injective
+    change (φg c d).hom.app L ≫ (φg d e).hom.app L = (φg c e).hom.app L
+    exact congrArg (fun e ↦ e.hom.app L) (hcg c d e)
+  have cph (c d e) (L : (localizingClosureProEtale Λ X).FullSubcategory) :
+      (ph c d).hom.app L ≫ (ph d e).hom.app L = (ph c e).hom.app L := by
+    apply (localizingClosureProEtale Λ Z).ι.map_injective
+    change (φh c d).hom.app L ≫ (φh d e).hom.app L = (φh c e).hom.app L
+    exact congrArg (fun e ↦ e.hom.app L) (hch c d e)
+  obtain ⟨α, hα⟩ := transportComposition F G H pf pg ph cpf cpg cph cf₀ cg₀ ch₀ β
+  refine ⟨hf, hg, hgf, α, ?_⟩
+  intro cf cg ch df dg dh rf rg rh K
+  have idf := compactificationRefinementComponent_id Λ ℓ k hΛ f df K.obj
+  have idg : ∀ L : (localizingClosureProEtale Λ Y).FullSubcategory,
+      compactificationRefinementComponent Λ (𝟙 dg.obj) L.obj = 𝟙 _ :=
+    fun L ↦ compactificationRefinementComponent_id Λ ℓ k hΛ g dg L.obj
+  have idh := compactificationRefinementComponent_id Λ ℓ k hΛ (f ≫ g) dh K.obj
+  have ef : ((pf cf df.obj).hom.app K).hom =
+      compactificationRefinementComponent Λ rf K.obj := by
+    change (φf cf df.obj).hom.app K = _
+    have hn := hnf cf df.obj df rf (𝟙 df.obj) K
+    rw [idf] at hn
+    exact (Category.comp_id _).symm.trans hn
+  have eg : ∀ L : (localizingClosureProEtale Λ Y).FullSubcategory,
+      ((pg cg dg.obj).hom.app L).hom =
+        compactificationRefinementComponent Λ rg L.obj := by
+    intro L
+    change (φg cg dg.obj).hom.app L = _
+    have hn := hng cg dg.obj dg rg (𝟙 dg.obj) L
+    rw [idg L] at hn
+    exact (Category.comp_id _).symm.trans hn
+  have eh : ((ph ch dh.obj).hom.app K).hom =
+      compactificationRefinementComponent Λ rh K.obj := by
+    change (φh ch dh.obj).hom.app K = _
+    have hn := hnh ch dh.obj dh rh (𝟙 dh.obj) K
+    rw [idh] at hn
+    exact (Category.comp_id _).symm.trans hn
+  have e := congrArg (fun q ↦ q.hom) (hα cf cg ch df.obj dg.obj dh.obj K)
+  change (rightDerivedLowerShriekOfCompactification Λ cg.obj.obj).map
+      ((pf cf df.obj).hom.app K).hom ≫
+        ((pg cg dg.obj).hom.app ((F df.obj).obj K)).hom ≫
+          ((α df.obj dg.obj dh.obj).hom.app K).hom =
+      ((α cf cg ch).hom.app K).hom ≫ ((ph ch dh.obj).hom.app K).hom at e
+  rw [ef, eg, eh] at e
+  exact e
 
 end AlgebraicGeometry.ProEtale.CondensedRing
