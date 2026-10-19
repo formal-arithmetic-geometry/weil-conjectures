@@ -17767,3 +17767,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:14 L: merged deliver/V9/Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath (stage 3; reviewer PASS; first push; landing 20261019T231407-L-582074 (proof); batch 20261019T231019; modules 1; new nodes 0)
 - 23:21 L: returned deliver/V7/Sheaf.Paper.FiniteComparisonLocalizing (reviewer RETURN: (reviewer C-fe2b9, head fe2b9e71d) Point 5 (import form): lean/Sheaf/Paper/FiniteComparisonLocalizing.lean line 8: repla)
 - 23:22 L: merged deliver/O3/thm-sf-dual-base-change (stage 2; reviewer PASS; parallel immutable checks)
+- 23:25 L: returned deliver/G9/Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange (reviewer RETURN: (reviewer C-8a933, head 8a9330643) H10 (does not compile): lean/Sheaf/AlgebraicGeometry/ClassicalProEtaleEncoding.lean:2)
