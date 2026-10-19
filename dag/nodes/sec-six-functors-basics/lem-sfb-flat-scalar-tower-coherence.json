@@ -15,9 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal H=\\Sh(\\mathcal S,\\Ab)$. By [lem-weil-pbc-sheaf-tensor-closed], $\\mathcal H$ is Grothendieck abelian, has the sheafified tensor of the statement, and tensoring on either side preserves colimits. Thus its coequalizers exist and the extension construction of [sk-def-sfb-change-of-scalars] applies to every map and composite in the tower. Write $U_{A,B}:\\Mod_B\\to\\Mod_A$ for restriction. All calculations below are in these internal module categories, rather than in modules over the rings of global sections.",
+   "text": "Put $\\mathcal H=\\Sh(\\mathcal S,\\Ab)$ with the fixed tensor structure of the statement. The colimit preservation clauses of [sk-def-sfb-sheaf-tensor], specialized to finite diagrams, give preservation by tensoring on both sides. The sheafification adjunction supplied by that node constructs coequalizers by sheafifying objectwise presheaf coequalizers. Thus the extension construction of [sk-def-sfb-change-of-scalars] applies to every map and composite in the tower. Write $U_{A,B}:\\Mod_B\\to\\Mod_A$ for restriction. All subsequent calculations take place in internal module categories, without passing to global sections. This argument needs only coequalizers of the ambient sheaf category, not a separately chosen Grothendieck abelian structure on it.",
    "uses": [
-    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-sheaf-tensor",
     "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these two adjunctions and the canonical identity-on-underlying-objects comparison of their right adjoints. It gives a unique natural isomorphism $a_{A,B,C}:T_{B,C}T_{A,B}\\to T_{A,C}$ satisfying\n$$a_{A,B,C,M}\\circ w_{A,B,C,M}=u_{A,C,M}.$$\nInverting this equality gives $a_{A,B,C,M}^{-1}\\circ u_{A,C,M}=w_{A,B,C,M}$. This specifies the comparisons independently of choices of presentations. The same construction applies to every sub-tower.",
+   "text": "Apply [lem-weil-pbc-conjugate-iso-unit-equation] to these two adjunctions and the canonical identity-on-underlying-objects comparison of their right adjoints. It gives a unique natural isomorphism $a_{A,B,C}:T_{B,C}T_{A,B}\\to T_{A,C}$ satisfying\n$$a_{A,B,C,M}\\circ w_{A,B,C,M}=u_{A,C,M}.$$\nInverting this equality gives $a_{A,B,C,M}^{-1}\\circ u_{A,C,M}=w_{A,B,C,M}$. This specifies the comparisons independently of choices of presentations. The same construction applies to every sub-tower. In Lean these are the existing extendScalarsComp comparisons, and Adjunction.unit_leftAdjointUniq_hom_app proves the normalization directly from their definitions; no second comparison is chosen.",
    "uses": [
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
@@ -108,7 +108,7 @@
    }
   },
   {
-   "text": "Apply clause (2) of [lem-weil-pbc-localization-universal-property] with $L=Q_A$, target $D(\\Mod_C)$, and the natural isomorphism $Q_C C(a)$ of step 8. Step 7 supplies its two factorizations through $Q_A$. We obtain the required $\\mathbb a$. Its components at $Q_AK$ are the localized termwise maps conjugated by those factorization comparisons. For the two sides of the four-ring tower equation, precomposition with $Q_A$ identifies their components with the images under $Q_R$ of the two chain maps from step 8: functoriality cancels the intermediate factorization comparisons. These chain maps agree degreewise. Clause (3) of the same node therefore gives equality of the derived natural transformations. The identical argument with the unit maps proves both derived identity compatibilities. This explicitly uses faithfulness on natural transformations, rather than treating localization as faithful on arbitrary morphisms of complexes.",
+   "text": "Apply clause (2) of [lem-weil-pbc-localization-universal-property] with $L=Q_A$, target $D(\\Mod_C)$, and the natural isomorphism $Q_C C(a)$ of step 8. Step 7 supplies its two factorizations through $Q_A$. We obtain the required $\\mathbb a$. Its components at $Q_AK$ are the localized termwise maps conjugated by those factorization comparisons. For the two sides of the four-ring tower equation, precomposition with $Q_A$ identifies their components with the images under $Q_R$ of the two chain maps from step 8: functoriality cancels the intermediate factorization comparisons. These chain maps agree degreewise. Clause (3) of the same node therefore gives equality of the derived natural transformations. The identical argument with the unit maps proves both derived identity compatibilities. This explicitly uses faithfulness on natural transformations, rather than treating localization as faithful on arbitrary morphisms of complexes. Concretely the existing exact-derived API in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate supplies preservation of composition and inverses of natural isomorphisms, compatibility with both whiskerings, associativity of mapDerivedCategoryCompIso, and its left and right identity equations. Expanding mapDerivedCategoryTriangleIso and using these proved laws transfers the ordinary tower equation; the same calculation with mapDerivedCategoryIdIso transfers each ordinary identity equation. Equality transports for associativity and identity of ring maps are handled by first identifying the corresponding extension functors, then eliminating that equality.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -129,7 +129,7 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-sheaf-tensor",
   "sk-def-sfb-change-of-scalars",
   "def-sfb-modobj-extend-restrict-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
@@ -142,7 +142,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/sk-thm-sfb-qlbar-two-colimit.proof.md",
-  "place": "proof (4) and final cocone paragraph; explicit unit-normalized tensor coherence and exact localization argument, using Stacks 03CZ, 0B65, 015F and 04VG and the cited existing nodes"
+  "place": "proof (4) and final cocone paragraph; explicit unit-normalized tensor coherence and exact localization argument, using Stacks 03CZ, 0B65, 015F and 04VG and the cited existing nodes",
+  "note": "Z9, 2026-10-19: all ten steps realized in Lean using adjunction unit normalization and the existing exact-derived coherence API; step 1 uses the actual generic sheaf tensor properties and sheafified coequalizers."
  },
  "mathlib_searches": [
   {
@@ -269,7 +270,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-sheaf-tensor-closed",
   "def-sfb-modobj-extend-restrict-adjunction",
   "sk-def-sfb-change-of-scalars"
  ],
@@ -311,5 +311,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The main theorem specializes the fully written FlatScalarTowerCoherence predicate to the canonical sheafified tensor. Helpers package the clauses and define the specified exact-derived comparisons using existing localization functoriality. All ordinary comparisons, units, quotients and extensions are upstream declarations; no dependency is redefined."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261019T034417-L-430344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

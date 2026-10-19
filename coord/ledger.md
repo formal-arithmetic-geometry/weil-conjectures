@@ -16986,3 +16986,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Z7/Sheaf.SecSmoothPurity.LocalizedExtensionZeroLinearDerived (stage 3; reviewer PASS; first push; landing 20261019T034415-L-429898 (proof); batch 20261019T034248; modules 1; new nodes 0)
 - 03:44 L: merged deliver/Z7/Sheaf.SixFunctors.ConnectedEtalePerfectConstant (stage 3; reviewer PASS; first push; landing 20261019T034416-L-430087 (interface); batch 20261019T034248; modules 3; new nodes 2)
 - 03:44 L: merged deliver/Z8/Sheaf.Paper.IntrinsicQbarCategory (stage 3; reviewer PASS; first push; landing 20261019T034417-L-430207 (proof); batch 20261019T034248; modules 1; new nodes 0)
+- 03:44 L: merged deliver/Z9/Sheaf.CategoryTheory.FlatScalarTowerCoherence (stage 3; reviewer PASS; first push; landing 20261019T034417-L-430344 (interface); batch 20261019T034248; modules 1; new nodes 0; change records: coord/changes/flat-scalar-tower-proof-sections.md)
