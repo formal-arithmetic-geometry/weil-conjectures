@@ -23,94 +23,57 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian because its only ideals are zero and one. Hence Y is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For every affine open V of Y, the open subscheme Y'\\times_Y V is Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus g is quasi-compact by the definition of a quasi-compact morphism, and is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Composition makes Y' finite type over k. Properness of f includes finite type and separatedness; finite-type base change makes f' finite type, and proper base change makes f' proper. Open-immersion base change makes g' open. Composing f' with Y'\\to\\operatorname{Spec}k also makes X' finite type over k. Choose the identity-open compactifications (id_X,f) and (id_{X'},f'). The finite-type dimension lemma gives finite dimension bounds; choose nonnegative integer bounds, using zero for an empty source. Thus [thm-sf-ambient-adjoint-class] applies to both compactifications and supplies the ordinary etale right adjoints.",
+   "text": "The structure morphism of Y is locally of finite type over a field, hence Y is locally Noetherian. Its quasi-compact structure morphism makes Y quasi-compact. An open immersion into a locally Noetherian scheme is quasi-compact, hence Y′ is quasi-compact as well. Properness gives the identity-open compactifications of f and its pullback f′.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-kun-dimension-finite-type",
-    "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-pc-proper-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type), 01T4 (lemma-base-change-finite-type), 01W4 (lemma-base-change-proper); open-source compactness is lem-weil-pbc-noetherian-open-subscheme-noetherian (Properties 01OW, 01OZ; Topology 0052, 04ZA). Apply current thm-sf-ambient-adjoint-class to identity-open compactifications."
-   }
+   "elementary": false
   },
   {
-   "text": "The bounded-below typing clause in [def-weil-exceptional-inverse-image] gives f_e^\\times K_0\\in D^+(X_{\\mathrm{et}},A) and f'^\\times_e g^{e,*}K_0\\in D^+(X'_{\\mathrm{et}},A); the same clause applies to the proper map f' established in Step 1. Exact inverse image on etale module sheaves preserves cohomology bounds, by [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-bounded-below]. Thus g'^{e,*}f_e^\\times K_0=B_0 and f'^\\times_e g^{e,*}K_0=C_0 are bounded below, as claimed.",
+   "text": "Apply the existing ordinary etale HasBoundedBelowUpperShriek instance over a quasi-compact target to f and f′, with exactly their specified compactification instances. Exact inverse image preserves bounded-below objects via mapDerivedCategoryPlus. This proves that g′* f_e^times K0 and f′_e^times g* K0 are bounded below. The existing quasi-compact-target amplitude argument already supplies the required finite bound, so no separate dimension choice or comparison-class adjunction datum is needed.",
    "uses": [
-    "def-weil-exceptional-inverse-image",
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-etale-upper-shriek-quasicompact-bounded-below",
     "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
-    "place": "Finite-coefficient formula on D+; bounded-below justification in the retained DAG definition. Exact pullback: Stacks sites-modules.tex, lemma-flat-pullback-exact (04JC), and derived.tex, lemma-right-derived-exact-functor (015F)."
-   }
+   "elementary": false
   },
   {
-   "text": "Let u_K be the composite K_0\\xrightarrow{\\eta}R\\nu_{Y,*}\\nu_Y^*K_0\\xrightarrow{R\\nu_{Y,*}(\\alpha)}R\\nu_{Y,*}K. The comparison theorem [thm-weil-pbc-site-comparison] says that the first arrow is an isomorphism, so u_K is an isomorphism. Applying f_e^\\times and then the exact comparison pullback identifies \\nu_X^*f_e^\\times K_0 with \\nu_X^*f_e^\\times R\\nu_{Y,*}K=Rf^!K, using the defining formula for Rf^! in [def-weil-exceptional-inverse-image]. The identical argument for f' and g^{e,*}K_0 identifies \\nu_{X'}^*f'^\\times_e g^{e,*}K_0 with Rf'^!g^*K, after using the canonical comparison unit for g^*K.",
+   "text": "The ordinary derived comparison unit is invertible at K0 and at its exact etale pullback g* K0. Use isIso_derivedComparisonAdjunction_unit_app directly from the source Comparison module. Whiskering sends these unit components to isomorphisms under the specified etale exceptional adjoints and comparison functors.",
    "uses": [
     "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
     "def-sf-comparison-derived-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-site-comparison.md",
-    "place": "Statement and proof: the D+ comparison unit is an isomorphism. Apply the defining finite composite of def-weil-exceptional-inverse-image. Stacks proetale.tex, lemma-relative-comparison, clause (2), gives the underlying abelian comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "For the Cartesian open square, [lem-weil-pbc-comparison-pullback] gives the canonical natural isomorphism \\nu_{X'}^*g'^{e,*}\\cong g'^*\\nu_X^*, compatible with the fibre-product identification. Applying it to f_e^\\times K_0 and composing with Step 3 gives \\nu_{X'}^*B_0\\xrightarrow{\\sim}g'^*Rf^!K. The same comparison for g:Y'\\to Y, together with the comparison unit for g^*K\\cong\\nu_{Y'}^*g^{e,*}K_0 and the Step 3 argument for f', gives \\nu_{X'}^*C_0\\xrightarrow{\\sim}Rf'^!g^*K. These maps use only natural comparison units, pullback composition, and \\alpha, so they are natural in (K_0,\\alpha).",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "def-sf-comparison-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-comparison-pullback.md",
-    "place": "Statement and final paragraph of the proof: natural inverse-image comparison, compatible with composites and Cartesian identifications, extended to complexes by exactness. Stacks proetale.tex, lemma-describe-pullback-from-etale (0GLZ), describes the comparison inverse image."
-   }
+   "text": "Unfold only sfRelativeOpenOriginLeftMap, sfRelativeOpenOriginRightMap, sfRelativeAdjointOriginUnit and the comma projections. Every factor is now the image of a comparison-unit isomorphism, a component of sfDerivedComparisonPullbackIso or alpha.hom. Functors preserve isomorphisms and their composites are isomorphisms. This proves both requested IsIso assertions for the literally specified natural maps.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "By the definition of the witnessed full category [def-sf-etale-origin-subcategory], a bounded-below pro-etale object together with a bounded-below etale complex and an isomorphism from its comparison pullback is an object of that full category. The two isomorphisms in Step 4 therefore give the required witnesses for g'^*Rf^!K and Rf'^!g^*K. The argument constructs witnesses for each restricted value separately; it neither identifies B_0 with C_0 nor asserts a right adjoint on arbitrary pro-etale objects.",
+   "text": "The unchanged constructor sfRelativeAdjointOpenOriginObjects uses the two lower-bound proofs and asIso of these very components in sfRelativeOriginObject. It retains the specified etale objects and their canonical realized isomorphisms without choosing witnesses.",
    "uses": [
     "def-sf-etale-origin-subcategory"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-compact-support-candidate.md",
-    "place": "The witnessed etale-origin full subcategory, made explicit in def-sf-etale-origin-subcategory; its objects retain the pair (L,alpha)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sf-comparison-derived-pullback",
   "def-sf-etale-origin-subcategory",
-  "def-weil-exceptional-inverse-image",
-  "lem-kun-dimension-finite-type",
+  "lem-etale-upper-shriek-quasicompact-bounded-below",
   "lem-pc-proper-base-change",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "thm-sf-ambient-adjoint-class",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/thm-sf-ambient-adjoint-class.proof.md",
-  "place": "Agent-written witness argument using the bounded-below adjoint in the first paragraph, the comparison unit, and canonical inverse-image comparison. It discharges the retained DAG proof obligation of prop-exc-base-change-proper (the paragraph beginning Choose K), not a Step 8 in the published blueprint proof, which has only Steps 1-4."
+  "place": "Retained witness argument specialized to the existing source-library quasi-compact-target bounded-below instance, exact derived inverse images and the actual comparison unit; implemented by G2, 2026-10-19."
  },
  "mathlib_searches": [
   {
@@ -184,7 +147,6 @@
  },
  "tool_uses": [
   "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "reviewed": {
@@ -225,5 +187,15 @@
   "group": "Q72",
   "result": "pass",
   "note": "Statement matches the node clause by clause: D/l/E/n+1 (n>=1), X and Y finite type over k, f proper, g an arbitrary open immersion, X'=pullback f g; B0/C0 are the exact composites with identity-open compactifications; Rf^! is the recorded sfFiniteExceptionalFixed; nu^* is the recorded siteComparisonDerivedPullbackPlus; the witness maps paste the comparison unit, the recorded pullback comparison and alpha, natural on the comma category; IsIso is claimed only at bounded-below origins, which is true via Stacks relative comparison; objects of the recorded witnessed category keep L and the realization iso. No hollow definitions, only sorry, source/blueprint docstrings present, statement verbatim, all 11 declarations present, universes unforced. The section 1(B) import-only repair of EtaleOriginAdjointClass is needed (the original fails with a duplicate derivedComparisonAdjunctionPlus) and its only importer AmbientAdjointDischarge compiles against it. nt_compile.py rc=0 for both delivered files and for the importer."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261019T112449-L-3942434",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

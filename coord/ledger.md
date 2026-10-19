@@ -17312,3 +17312,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:24 L: merged deliver/E8/Sheaf.Paper.IntegralCtfTriangulated (stage 3; reviewer PASS; first push; landing 20261019T112446-L-3942026 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:24 L: merged deliver/F2/Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent (stage 3; reviewer PASS; first push; landing 20261019T112447-L-3942124 (proof); batch 20261019T112432; modules 1; new nodes 0)
 - 11:24 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ProperCoincidenceNormalized (stage 3; reviewer PASS; first push; landing 20261019T112448-L-3942303 (proof); batch 20261019T112432; modules 1; new nodes 0)
+- 11:24 L: merged deliver/G2/Sheaf.AlgebraicGeometry.RelativeAdjointOpenOrigin (stage 3; reviewer PASS; first push; landing 20261019T112449-L-3942434 (proof); batch 20261019T112432; modules 1; new nodes 0)

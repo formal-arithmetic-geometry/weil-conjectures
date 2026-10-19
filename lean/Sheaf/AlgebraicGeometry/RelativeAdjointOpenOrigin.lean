@@ -12,13 +12,8 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import Mathlib.CategoryTheory.Comma.Basic
-import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
-import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
@@ -240,7 +235,46 @@ theorem sfRelativeAdjointOpenOrigin
         ⟨K0.obj, K, alpha.hom⟩) ∧
       IsIso ((sfRelativeOpenOriginRightMap (Padic.coefficientExtensionRing l E (n + 1)) f g).app
         ⟨K0.obj, K, alpha.hom⟩) := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian
+    (Y ↘ Spec (.of D.k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of D.k))
+  have : QuasiCompact g := inferInstance
+  have : CompactSpace Y' := QuasiCompact.compactSpace_of_compactSpace g
+  have hK0 : DerivedCategory.TStructure.t.plus K0.obj := K0.property
+  have := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y K0.obj hK0
+  have hgK : DerivedCategory.TStructure.t.plus
+      ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).mapDerivedCategory.obj
+        K0.obj) :=
+    ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).mapDerivedCategoryPlus.obj
+      K0).property
+  have hfK : DerivedCategory.TStructure.t.plus
+      ((sfRelativeEtaleAdjoint A (Compactification.ofIsProper f)).obj K0.obj) := by
+    let := (Compactification.ofIsProper f).hasCompactification
+    exact Etale.plus_rightDerivedUpperShriek_obj _ _ K0.obj hK0
+  have := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Y'
+    ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).mapDerivedCategory.obj
+      K0.obj) hgK
+  constructor
+  · exact ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+      (pullback.fst f g)).mapDerivedCategoryPlus.obj ⟨_, hfK⟩).property
+  constructor
+  · change DerivedCategory.TStructure.t.plus
+      ((sfRelativeEtaleAdjoint A (Compactification.ofIsProper (pullback.snd f g))).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).mapDerivedCategory.obj
+          K0.obj))
+    let := (Compactification.ofIsProper (pullback.snd f g)).hasCompactification
+    exact Etale.plus_rightDerivedUpperShriek_obj _ _ _ hgK
+  constructor
+  · dsimp [sfRelativeOpenOriginLeftMap, sfRelativeAdjointOriginUnit,
+      Comma.fst, Comma.natTrans]
+    infer_instance
+  · dsimp [sfRelativeOpenOriginRightMap, sfRelativeAdjointOriginUnit,
+      Comma.fst, Comma.natTrans]
+    infer_instance
 
 
 /-- The two actual objects of the recorded witnessed full category. Their retained etale
