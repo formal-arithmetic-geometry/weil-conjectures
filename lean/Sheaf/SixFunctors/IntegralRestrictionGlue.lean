@@ -8,22 +8,11 @@ module
 public import Sheaf.SixFunctors.IntegralBrownAdjoint
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Topology.Constructible
-import Sheaf.Paper.RestrictionLocal
-import Sheaf.Paper.LocalizingClosureCtfEqualsBc
-import Sheaf.SixFunctors.IntegralTensorInverseImage
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.Paper.CondensedConstantConstructibility
-import Sheaf.Paper.MateOpenRestriction
-import Sheaf.SixFunctors.IntegralLocalizingCompactSupport
-import Sheaf.SixFunctors.IntegralRestrictionClosed
-import Sheaf.SixFunctors.IntegralRestrictionLine
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import Sheaf.SixFunctors.IntegralRestrictionBoundedDescent
+import Sheaf.SixFunctors.IntegralRestrictionCohomologyDescent
+import Sheaf.SixFunctors.IntegralRestrictionChartCover
 
 /-!
 # Finite-open gluing and restriction of the integral Brown adjunction
@@ -113,6 +102,76 @@ def integralRestrictionGlueAssertions (k : Type u) [Field k] : Prop :=
             (adj.homEquiv ((constructibleInclusion Λ X).obj A)
               ((constructibleInclusion Λ Y).obj B) (ObjectProperty.homMk m.hom)).hom)
 
+private theorem restrictAdjunction {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f)
+    (h : ∀ K, localizing Λ X K → localizing Λ Y ((image Λ c).obj K))
+    (G : (localizing Λ Y).FullSubcategory ⥤ (localizing Λ X).FullSubcategory)
+    (adj : lowerShriek Λ c h ⊣ G)
+    (hF : ∀ K, generators Λ X K → generators Λ Y ((image Λ c).obj K))
+    (hG : ∀ K : (localizing Λ Y).FullSubcategory,
+      generators Λ Y K.obj → generators Λ X (G.obj K).obj) :
+    ∃ adj' : restrictedLowerShriek Λ c hF ⊣ restrictedUpperShriek Λ G hG,
+      ∀ (A : (generators Λ X).FullSubcategory) (B : (generators Λ Y).FullSubcategory)
+        (m : (restrictedLowerShriek Λ c hF).obj A ⟶ B),
+        (adj'.homEquiv A B m).hom =
+          (adj.homEquiv ((constructibleInclusion Λ X).obj A)
+            ((constructibleInclusion Λ Y).obj B) (ObjectProperty.homMk m.hom)).hom := by
+  let iX := constructibleInclusion Λ X
+  let iY := constructibleInclusion Λ Y
+  let comm1 : iX ⋙ lowerShriek Λ c h ≅ restrictedLowerShriek Λ c hF ⋙ iY :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl)
+  let comm2 : iY ⋙ G ≅ restrictedUpperShriek Λ G hG ⋙ iX :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl)
+  let adj' := adj.restrictFullyFaithful (ObjectProperty.fullyFaithfulιOfLE _)
+    (ObjectProperty.fullyFaithfulιOfLE _) comm1 comm2
+  refine ⟨adj', ?_⟩
+  intro A B m
+  simp [adj', Adjunction.restrictFullyFaithful, comm1, comm2, iX, iY,
+    constructibleInclusion, ObjectProperty.fullyFaithfulιOfLE]
+
+private theorem image_preserves_generators (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    (c : Compactification.BoundaryCompactification f) :
+    ∀ K, generators (Profinite.padicIntegersRingObj ℓ E.val) X K →
+      generators (Profinite.padicIntegersRingObj ℓ E.val) Y
+        ((image (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj).obj K) := by
+  obtain ⟨h, φ, μ, hc⟩ := integralLocalizingCompactSupport ℓ E k
+  let X' : Spaces k := ⟨Over.mk (X ↘ Spec (.of k)),
+    (show IsSeparated (X ↘ Spec (.of k)) from inferInstance),
+    (show LocallyOfFiniteType (X ↘ Spec (.of k)) from inferInstance),
+    (show QuasiCompact (X ↘ Spec (.of k)) from inferInstance)⟩
+  let Y' : Spaces k := ⟨Over.mk (Y ↘ Spec (.of k)),
+    (show IsSeparated (Y ↘ Spec (.of k)) from inferInstance),
+    (show LocallyOfFiniteType (Y ↘ Spec (.of k)) from inferInstance),
+    (show QuasiCompact (Y ↘ Spec (.of k)) from inferInstance)⟩
+  let f' : X' ⟶ Y' := ObjectProperty.homMk (f.asOver (Spec (.of k)))
+  exact h.maps_constructible (X := X') (Y := Y') (f := f') c.obj
+
+private theorem finiteOpenGlue (X : Scheme.{u}) [IsNoetherian X]
+    (I : Type w) [Finite I] (U : I → X.Opens) (hcover : iSup U = ⊤)
+    (M : Ambient Λ X)
+    (hM : ∀ i : I, generators Λ (U i).toScheme ((pull Λ (U i).ι).obj M)) :
+    generators Λ X M := by
+  exact ⟨bounded_finiteOpenDescent Λ X I U hcover M (fun i ↦ (hM i).1),
+    cohomology_finiteOpenDescent Λ X I U hcover M hM⟩
+
+private theorem noetherian_over_field (k : Type u) [Field k]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    IsNoetherian X := by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  exact ⟨⟩
+
 /-- Bounded integral constructibility glues along finite open covers, and the Brown
 exceptional inverse image preserves Dbc and restricts its adjunction to Dbc.
 Source: blueprint main-20261015, sk-thm-int-restriction-glue.md and its proof
@@ -153,6 +212,19 @@ theorem integralRestrictionGlue (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
     integralRestrictionGlueAssertions.{u, w} (Profinite.padicIntegersRingObj ℓ E.val) k := by
-  sorry
+  constructor
+  · intro X _ _ _ _ I _ U hcover M hM
+    have : IsNoetherian X := noetherian_over_field k X
+    exact finiteOpenGlue _ X I U hcover M hM
+  · intro X Y _ _ _ _ _ _ _ _ f _ _ _ _ c h G adj
+    have : IsNoetherian X := noetherian_over_field k X
+    let hF := image_preserves_generators ℓ E k f c
+    have hG : ∀ K : (localizing (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory,
+        generators (Profinite.padicIntegersRingObj ℓ E.val) Y K.obj →
+          generators (Profinite.padicIntegersRingObj ℓ E.val) X (G.obj K).obj := by
+      intro K hK
+      obtain ⟨n, U, hcover, hU⟩ := integralRestriction_chartCover ℓ E k f c h G adj K hK
+      exact finiteOpenGlue _ X (Fin n) U hcover (G.obj K).obj hU
+    exact ⟨hF, hG, restrictAdjunction _ c.obj.obj h G adj hF hG⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction

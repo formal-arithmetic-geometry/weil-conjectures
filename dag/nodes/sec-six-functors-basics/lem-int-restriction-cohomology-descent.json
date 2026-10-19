@@ -1,0 +1,110 @@
+{
+ "id": "lem-int-restriction-cohomology-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-glue",
+   "place": "steps 1 and 3, finite-cover constructibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-open descent of constant-model cohomology",
+ "statement": "For any commutative condensed ring Lambda, any Noetherian scheme X, a finite family of opens U_i covering X, and an ambient derived module object M, suppose every derived restriction M|U_i is bounded with finite-constant-model constructible cohomology. Then for every integer q, H^q(M) is finite-constant-model constructible on X. No assertion of global boundedness is part of this conclusion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
+  "place": "paragraph (1)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "Exact Cartesian module inverse image commutes with derived cohomology via leftDerivedUpperStarIsoMapDerivedCategory and mapDerivedCategoryHomologyFunctorIso. Reindex the finite cover by Fin n, and choose its finite local stratifications. Put V_a equal to the union of the earlier opens W_b for b<a. For every stratum T_ab inside W_a, pull back its immersion into X along the reduced closed subscheme of X supported on the complement of V_a. These fibre products are locally closed constructible subschemes because X is Noetherian; they are disjoint (the first containing open index decides a point), and cover X (choose that least index). The resulting Stratification has actual projections into the original strata. Pull back their witnessing pro-etale covers and their fixed finitely presented scalar modules. upperStarComp and the point-pullback comparison, with extension/comap cancellation, identify the scalar model on each new cover member with the original scalar module pulled back from the point. This proves constructibility of every global cohomology object. Empty covers give an empty stratification automatically.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
+    "place": "paragraph (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-constructible",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
+  "place": "paragraph (1), implemented by disjoint-first-open refinement and canonical Cartesian pullback/cohomology comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes of sheaves descend along finite Zariski open covers",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top; AlgebraicGeometry.IsZariskiLocalAtSource.of_iSup_eq_top; other morphism-property descent results",
+   "date": "2026-10-18",
+   "verdict": "No match: these concern morphism properties, not module-object derived categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves is bounded if its restrictions to a finite open cover are bounded",
+   "results": "DerivedCategory.isGE_Q_obj_iff; SheafOfModules.IsFiniteType; CategoryTheory.SheafOfTypes.balanced; no constructible-sheaf chart preservation or descent theorem",
+   "date": "2026-10-18",
+   "verdict": "No whole-statement match; generic cohomological support API is usable in the boundedness proof."
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*[Oo]pen|constructible.*[Ss]heaf|exceptional.*[Cc]onstruct; source-library open restriction and constantModelBoundedConstructible searches",
+   "results": "No matching Mathlib statement. Source library Conservative.lean supplies isIso_of_isIso_localizationRestriction, used to prove bounded descent. CondensedConstantConstructibility defines the stronger scalar-model predicate; no finite-open descent theorem found.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate of these component statements; generic conservativity used for boundedness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralRestrictionGlue",
+  "date": "2026-10-18",
+  "group": "G9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralRestrictionCohomologyDescent",
+  "file": "lean/Sheaf/SixFunctors/IntegralRestrictionCohomologyDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.cohomology_finiteOpenDescent",
+  "statement": "theorem cohomology_finiteOpenDescent\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (X : Scheme.{u}) [IsNoetherian X] (I : Type w) [Finite I] (U : I → X.Opens)\n    (hcover : iSup U = ⊤) (M : Ambient Λ X)\n    (hM : ∀ i : I, generators Λ (U i).toScheme ((pull Λ (U i).ι).obj M)) :\n    ∀ n : ℤ, IsConstantModelConstructible Λ X\n      ((DerivedCategory.homologyFunctor _ n).obj M)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261019T002613-L-2159408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261019T002613-L-2159408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

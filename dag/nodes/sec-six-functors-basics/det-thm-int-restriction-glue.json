@@ -21,136 +21,52 @@
  ],
  "proof": [
   {
-   "text": "Exact open restriction. For an open $j:U\\hookrightarrow X$, [lem-weil-proetale-weakly-etale-localization] identifies $U_{\\mathrm{proét}}$ with the slice $X_{\\mathrm{proét}}/U$. The completed pulled-back coefficient ring restricts to the corresponding ring on $U$: sectionwise restriction commutes with the inverse limit in [det-prop-sfb-qlbar-colimit-x-integral-limit]. Restriction of modules over this ring is exact by [lem-pur-site-restriction-module-adjunction-exact]. Therefore applying it termwise to a representative computes derived restriction and gives $\\mathcal H^q(j^*M)=j^*\\mathcal H^q(M)$.",
+   "text": "Obtain the Noetherian scheme instances from the finite-type structure maps over Spec k. Combine bounded_finiteOpenDescent with cohomology_finiteOpenDescent using the literal conjunction defining constantModelBoundedConstructible. This proves finite-open gluing for the arbitrary index universe, including an empty cover.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(1), finite-cover gluing"
-   }
-  },
-  {
-   "text": "Global cohomological bounds. By [sk-def-sfb-bounded-constructible], each $M|_{U_\\alpha}$ has cohomology in an interval $[r_\\alpha,s_\\alpha]$. For a nonempty finite cover take $r=\\min_\\alpha r_\\alpha$ and $s=\\max_\\alpha s_\\alpha$. Step 1 gives $\\mathcal H^q(M)|_{U_\\alpha}=0$ when $q\\notin[r,s]$. For every site object $W\\to X$, the maps $W\\times_XU_\\alpha\\to W$ form a covering [def-weil-pbc-proetale-site]; every section of $\\mathcal H^q(M)$ restricts to zero there, and hence is zero by sheaf uniqueness. Thus $\\mathcal H^q(M)=0$ outside $[r,s]$. If the cover is empty, $X$ is empty; the empty covering forces every module sheaf to be zero, so the conclusion holds directly.",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(1), finite-cover gluing"
-   }
-  },
-  {
-   "text": "Global constructibility. Fix $q$. On each $U_\\alpha$, take the finite locally closed constructible stratification for $\\mathcal H^q(M)|_{U_\\alpha}$ of [sk-def-sfb-constructible]. Regard its strata as locally closed subsets of $X$ and add the closed complement $X\\setminus U_\\alpha$. Take all nonempty intersections of one piece from each resulting finite partition, realized as fibre products over $X$ of their chosen locally closed immersions. A finite intersection of subsets written as open intersect closed is again open intersect closed, so these fibre products give locally closed subschemes and form a finite disjoint partition; the standing schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to their structure morphisms over the field (whose only ideals are zero and the unit ideal), and their locally closed subsets are constructible by [def-weil-constructible-subset]. Each intersection lies in some $U_\\alpha$ because these opens cover $X$, and hence in one of its local strata. The fibre-product projections map each refined stratum to its chosen local stratum. Base change of its trivializing pro-etale cover covers the refined stratum. Write the local model as the cokernel of a finite matrix $\\mathcal O_{E,T}^{m}\\to\\mathcal O_{E,T}^{n}$ with entries in $\\mathcal O_E$. Pullback is right exact and identifies the coefficient ring with $\\mathcal O_{E,T'}$, as in [sk-def-sfb-constructible]; hence the pulled-back cokernel is presented by the identical scalar matrix over $\\mathcal O_{E,T'}$ and has the required finite constant local model. Consequently $\\mathcal H^q(M)$ is constructible by the cited definition. No assertion about finite reduction or comparison between two integral categories is used.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-constructible-subset"
+    "lem-int-restriction-bounded-descent",
+    "lem-int-restriction-cohomology-descent",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(1), finite-cover gluing"
-   }
+   "elementary": true
   },
   {
-   "text": "Conclusion of (1). Steps 2 and 3 show that $M$ is bounded and that every cohomology sheaf $\\mathcal H^q(M)$ is constructible in the sense of [sk-def-sfb-constructible] (a finite stratification by constructible locally closed subschemes on whose strata it has a finite constant local model). The category $\\Dbc(X,\\mathcal O_E)$ of the statement is, by [sk-def-sfb-constructible], the full subcategory of $D(X_{\\mathrm{proét}},\\mathcal O_E)$ on the bounded complexes whose cohomology sheaves are constructible in exactly this sense, so $M\\in\\Dbc(X,\\mathcal O_E)$. Boundedness is the bounded-object condition recorded in [sk-def-sfb-bounded-constructible], which imposes no derived completeness. This is the category used by the Brown construction; no additional derived-completion condition or equivalence with a separately defined category is required.",
+   "text": "Apply integralLocalizingCompactSupport.maps_constructible after bundling X,Y,f into Spaces k. This gives the required hF for the specified boundary compactification.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible"
+    "det-prop-int-brown-construction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(1), finite-cover gluing"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose the affine charts for (2). Apply [det-thm-restriction-local] with its allowed coefficient $\\Lambda=E$: its statement supplies finitely many affine source opens $u:U\\hookrightarrow X$, affine target opens $v:V\\hookrightarrow Y$, and closed immersions $i:U\\hookrightarrow\\mathbf A^d_V$ with projection $p:\\mathbf A^d_V\\to V$, such that the $U$ cover $X$ and $fu=vpi$. This use takes no rational-coefficient assertion about $f^!$. In the standing finite-type scheme setting [sk-def-sfb-dc-setting], the schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so these opens are quasi-compact and all these morphisms remain separated of finite type, so the integral Brown functors and the integral affine-space and closed-immersion statements apply to them.",
+   "text": "For each constructible K, integralRestriction_chartCover supplies finite opens on which G K is constructible. Apply the first step with index Fin n to obtain hG.",
    "uses": [
-    "det-thm-restriction-local",
-    "sk-def-sfb-dc-setting",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-int-restriction-chart-cover",
+    "lem-int-restriction-bounded-descent",
+    "lem-int-restriction-cohomology-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(2), first sentence: finite affine covers and closed presentations"
-   }
+   "elementary": true
   },
   {
-   "text": "Integral open adjoints and composition. All schemes in the charts are separated of finite type over a field, hence qcqs. For integral coefficients the equality $\\Dctf=\\Dbc$, including equality of their localizing closures, is [det-def-localizing-closure-ctf-equals-bc]. Apply [det-sf-mate-open-restriction, clause 1] with $\\Lambda=\\mathcal O_E$: for each chart open $w$, $w^!\\cong w^*$ on the integral localizing categories. The last sentence of [det-prop-int-brown-adjoint] identifies this integral Brown right adjoint with the general one used by the open-restriction theorem on these equal categories. For composable $a:S\\to T$ and $b:T\\to R$, [det-prop-int-brown-construction] supplies $R(ba)_!\\cong Rb_!Ra_!$, and [det-prop-int-brown-adjoint] supplies the three right adjoints. For any $A$ and $B$ in the corresponding localizing categories, composing their natural adjunction bijections gives\n$$\\operatorname{Hom}(R(ba)_!A,B)\\cong\\operatorname{Hom}(Ra_!A,b^!B)\\cong\\operatorname{Hom}(A,a^!b^!B).$$\nThus $a^!b^!$ is right adjoint to $R(ba)_!$, and the counit-compatible uniqueness in [det-prop-int-brown-adjoint] identifies $(ba)^!\\cong a^!b^!$ after transporting the adjunction along the composition isomorphism for the left functors. For the equality $fu=vpi$ of Step 5 these identifications give\n$$u^*f^!\\cong u^!f^!\\cong(fu)^!=(vpi)^!\\cong i^!p^!v^!\\cong i^!p^!v^*.$$\nEvery functor here has the integral coefficient $\\mathcal O_E$.",
+   "text": "Both constructibleInclusion functors are fully faithful. Their composites with the given functors commute with the restrictions by identity component isomorphisms. Apply Mathlib Adjunction.restrictFullyFaithful. Unfolding its Hom equivalence with these identity comparisons gives precisely the prescribed ambient Hom formula.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
-    "det-sf-mate-open-restriction",
-    "det-prop-int-brown-construction",
-    "det-prop-int-brown-adjoint"
+    "sk-def-localizing-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(2), compatibility with composition and uniqueness of right adjoints"
-   }
-  },
-  {
-   "text": "Apply the two previously separated geometric cases. For $K\\in\\Dbc(Y,\\mathcal O_E)$, the inverse image $v^*K$ belongs to $\\Dbc(V,\\mathcal O_E)$ by [sk-lem-int-tensor]. Clauses 2 and 3 of [det-thm-int-restriction-line] give\n$$p^!v^*K\\cong p^*v^*K(d)[2d]\\in\\Dbc(\\mathbf A^d_V,\\mathcal O_E).$$\nApply [det-thm-int-restriction-closed] to this integral constructible input and the closed immersion $i$ to obtain $i^!p^!v^*K\\in\\Dbc(U,\\mathcal O_E)$. The functor isomorphism of Step 6 therefore gives $u^*f^!K\\in\\Dbc(U,\\mathcal O_E)$ on each member of the finite cover. Apply part (1), proved in Steps 1–4, to the underlying ambient derived object $f^!K$; hence $f^!K\\in\\Dbc(X,\\mathcal O_E)$.",
-   "uses": [
-    "sk-lem-int-tensor",
-    "det-thm-int-restriction-line",
-    "det-thm-int-restriction-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(2), local preservation followed by part (1)"
-   }
-  },
-  {
-   "text": "Restrict the adjunction. The integral compact-support construction [det-prop-int-brown-construction] sends $A\\in\\Dbc(X,\\mathcal O_E)$ to $Rf_!A\\in\\Dbc(Y,\\mathcal O_E)$, while Step 7 proves the corresponding property of $f^!$. Both integral categories $\\Dbc(-,\\mathcal O_E)$ are full subcategories of $D((-)_{\\mathrm{proét}},\\mathcal O_E)$ by [sk-def-sfb-constructible] (compare [sk-def-sfb-bounded-constructible]), and their localizing closures are full by [sk-def-localizing-closure]. Therefore the natural adjunction bijection of [det-prop-int-brown-adjoint] on the localizing categories, evaluated at $A$ and $K$, is a bijection between exactly the two Hom sets in the statement. Naturality is the same equality of composites for the same morphisms in these full subcategories. This supplies the restricted adjunction, with its inherited unit and counit.",
-   "uses": [
-    "det-prop-int-brown-construction",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-localizing-closure",
-    "det-prop-int-brown-adjoint"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-    "place": "(2), final two sentences: restricted adjunction"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "sk-def-sfb-bounded-constructible",
-  "def-weil-pbc-proetale-site",
-  "sk-def-sfb-constructible",
-  "sk-def-sfb-dc-setting",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-constructible-subset",
-  "det-thm-restriction-local",
-  "det-def-localizing-closure-ctf-equals-bc",
-  "det-sf-mate-open-restriction",
+  "lem-int-restriction-bounded-descent",
+  "lem-int-restriction-cohomology-descent",
+  "sk-def-sfb-constructible",
   "det-prop-int-brown-construction",
-  "det-prop-int-brown-adjoint",
-  "sk-lem-int-tensor",
-  "det-thm-int-restriction-line",
-  "det-thm-int-restriction-closed",
+  "lem-int-restriction-chart-cover",
   "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-glue.proof.md",
-  "place": "Proof (1) and (2), expanded; the same route is unit proof paragraph General f."
+  "place": "Same eight-step route; finite-open boundedness and cohomology descent combined explicitly; chart-cover membership glued; Mathlib full-subcategory restriction supplies the final Hom formula."
  },
  "mathlib_searches": [
   {
@@ -265,10 +181,7 @@
    "reason": "REBASE: the authoritative current DAG statement is the concise two-clause formulation above. Its Dbc is the module-object bounded constructible category of sk-def-sfb-constructible, exactly as used by the current Brown construction and adjoint. The imported unit-name reference sk-prop-int-brown is replaced by the existing statement node det-prop-int-brown-adjoint; no hypothesis, coefficient category, or conclusion is changed."
   }
  },
- "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -314,5 +227,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "States both clauses using the recorded finite-constant-model Dbc and ordinary Loc(Dbc). The right adjoint and adjunction are universally quantified representatives of the Brown adjunction; the restricted Hom equivalence is required to equal its original ambient Hom equivalence. Helpers only construct literal full inclusions and functor restrictions with actual data."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261019T002613-L-2159408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
