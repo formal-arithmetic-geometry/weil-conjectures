@@ -20,64 +20,60 @@
  ],
  "proof": [
   {
-   "text": "Fix a closed point $x$ and $k\\geq1$. Put $V=\\mathcal G_{0,\\bar x}$ and $A=F_x$ on $V$. The tensor action in [def-real-weil-representation-operations] acts on pure tensors by $A^{\\otimes k}(v_1\\otimes\\cdots\\otimes v_k)=Av_1\\otimes\\cdots\\otimes Av_k$; write $M=A^{\\otimes k}$. Let $S=\\{\\alpha_1,\\ldots,\\alpha_s\\}$ be the eigenvalue multiset of $A$ and put $z_i=\\iota(\\alpha_i)$. By [def-wf-iota-real], $\\{z_i\\}$ is invariant under conjugation. Iterating the tensor clause of [p-linear-spectra] (base $k=1$, and tensor once more for the induction step) gives the eigenvalues of $M$, with multiplicity, as $\\alpha_{i_1}\\cdots\\alpha_{i_k}$. Consequently the local polynomial after $\\iota$ is $B(t)=\\prod_{i_1,\\ldots,i_k}(1-z_{i_1}\\cdots z_{i_k}t)$. Conjugating this product merely permutes its factors, because conjugation permutes each copy of $\\{z_i\\}$. Each coefficient is therefore fixed by conjugation and hence real. This proves (i); also $B(0)=1$.",
+   "text": "Fix x and write A for the local Frobenius of G. For every j and k >= 1, prove Tr(Frob(G tensor-power k)^j) = Tr(A^j)^k by induction on k. The base is k=1. The Frobenius-equivariant stalkTensorObjEquiv identifies the successor stalk with the tensor product of the two stalks [def-real-weil-representation-operations]. TensorProduct.map_pow and Mathlib LinearMap.trace_tensorProduct' give the induction step directly, without calculating tensor spectra.",
    "uses": [
-    "def-real-weil-representation-operations",
+    "def-real-weil-representation-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
+    "place": "trace computation for tensor powers"
+   }
+  },
+  {
+   "text": "By [def-wf-iota-real] the local polynomial of G is real. Use FrobeniusModule.isReal_iff_forall_trace_pow (Newton identities, obtained from the differentiated trace-determinant identity [lem-weil-exp-trace-determinant]) to deduce that every embedded Tr(A^j) is fixed by conjugation. Its kth power is therefore fixed as well. The same criterion and step 1 prove reality of the kth tensor stalk. For even k this power is an even power of a real number, hence nonnegative.",
+   "uses": [
     "def-wf-iota-real",
-    "p-linear-spectra"
+    "lem-weil-exp-trace-determinant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
-    "place": "proof, first four sentences: conjugation-stable tensor spectra"
+    "place": "reality and even-power inequality"
    }
   },
   {
-   "text": "Choose a basis of $V$ and apply $\\iota$ to every entry of the matrix of $A$, obtaining a complex matrix $A_{\\mathbf C}$. Applying $\\iota$ to the finite determinant formula gives $\\det(1-tA_{\\mathbf C})=\\prod_i(1-z_it)$. The entrywise image of the tensor matrix is $M_{\\mathbf C}=A_{\\mathbf C}^{\\otimes k}$, since its entries are products of entries of $A$. By [p-linear-triangular], choose invariant full flags for $A_{\\mathbf C}$ and $M_{\\mathbf C}$, and bases adapted to those flags. The resulting matrices are upper triangular. Their diagonal entries are respectively the $z_i$ and the products $z_{i_1}\\cdots z_{i_k}$ from step 1, since the determinant of an upper triangular matrix is the product of its diagonal entries. Powers of an upper triangular matrix have the corresponding powers on the diagonal. Thus, for $n\\geq1$, writing $s_n=\\sum_i z_i^n$, we have\n$$\\operatorname{Tr}(M_{\\mathbf C}^n)=\\sum_{i_1,\\ldots,i_k}z_{i_1}^n\\cdots z_{i_k}^n=s_n^k.$$\nThe last equality is finite distributivity. Conjugation permutes the summands of $s_n$, so $s_n\\in\\mathbf R$. If $k=2m$ is even, then $s_n^k=(s_n^m)^2\\geq0$.",
-   "uses": [
-    "p-linear-triangular"
-   ],
-   "elementary": false,
+   "text": "Let s be the multiset of embedded characteristic roots of the tensor-stalk Frobenius. Existing LinearMap.trace_pow_eq_sum_pow_roots_charpoly identifies its jth power sum with the embedded trace, hence with the even power from steps 1 and 2. Existing LinearMap.charpolyRev_eq_prod_roots identifies the embedded local polynomial with product (1-cT), c in s; polynomial and power-series coefficient maps preserve this finite product.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
-    "place": "proof, trace computation and even-power inequality"
+    "place": "local eigenvalue products and power sums"
    }
   },
   {
-   "text": "The endomorphism $M_{\\mathbf C}$ is on a finite-dimensional complex vector space, and $\\mathbf C$ has characteristic zero. Therefore [lem-weil-exp-trace-determinant] applies to it and yields the formal identity\n$$B(t)^{-1}=\\exp U(t),\\qquad U(t)=\\sum_{n\\geq1}\\operatorname{Tr}(M_{\\mathbf C}^n)\\frac{t^n}{n}.$$\nHere $\\det(1-tM_{\\mathbf C})=B(t)$ by the finite determinant formula and step 1, so this is exactly the inverse local factor after applying $\\iota$. More explicitly, applying $\\iota$ coefficientwise to the inverse identity before applying $\\iota$ gives an inverse of $B(t)$; the inverse is unique since $B(0)=1$. No analytic convergence or continuity of $\\iota$ is used. For even $k$, step 2 gives $U(t)=\\sum_{n\\geq1}u_nt^n$ with $u_n=s_n^k/n\\in\\mathbf R_{\\geq0}$.",
+   "text": "Apply the existing PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg to s and the nonnegative power sums. This API proves the differentiated form of [lem-weil-exp-trace-determinant]: if B=product (1-cT), then T(B inverse)'=(B inverse) sum_{j>=1} p_j T^j. Comparing coefficients gives n b_n=sum_{i+j=n,j>0} b_i p_j. Starting with b_0=1, induction proves b_n>=0, since n is a positive real. This is the same formal identity as the source exponential argument. Finally the constant coefficient of a reverse characteristic polynomial is one, coefficient maps preserve it, and the constant coefficient of its inverse is one. All formulas include the zero-dimensional stalk.",
    "uses": [
     "lem-weil-exp-trace-determinant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
-    "place": "proof, formal trace–determinant identity"
-   }
-  },
-  {
-   "text": "By the coefficient formula in [def-weil-power-series-exponential], for $N\\geq1$ the coefficient of $t^N$ in $\\exp U$ is\n$$\\sum_{r=1}^{N}\\frac1{r!}\\sum_{\\substack{n_1+\\cdots+n_r=N,\\ n_j\\geq1}}u_{n_1}\\cdots u_{n_r}.$$\nEvery inner product is nonnegative by step 3 and each $r!$ is positive. Both sums are finite, so the coefficient is a nonnegative real number. The same definition gives constant coefficient $1$. This proves (ii). If $V=0$, the product defining $B$ is empty and equals $1$, all $s_n$ vanish, and the same formulas give $U=0$ and $B^{-1}=1$.",
-   "uses": [
-    "def-weil-power-series-exponential"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
-    "place": "proof, final sentence: coefficientwise positivity and constant term"
+    "place": "formal trace-determinant identity and final coefficientwise positivity argument"
    }
   }
  ],
  "proof_deps": [
   "def-real-weil-representation-operations",
   "def-wf-iota-real",
-  "p-linear-spectra",
-  "p-linear-triangular",
-  "lem-weil-exp-trace-determinant",
-  "def-weil-power-series-exponential"
+  "lem-weil-exp-trace-determinant"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankin/lem-rp-even-tensor-positivity.proof.md",
-  "place": "complete proof; trace–determinant input also checked against Milne, Lectures on Etale Cohomology, Lemma 27.5, pp. 155–156"
+  "place": "source trace-power argument, using existing stalk tensor comparison, Newton reality criterion and differentiated trace-determinant positivity API",
+  "group": "A5",
+  "date": "2026-10-19"
  },
  "mathlib_searches": [
   {
@@ -204,5 +200,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Statement, dependencies, source proof, declarations, edge cases, docstrings, route-pivot constraints, report sections, and recorded scompile evidence checked; no findings or fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261019T093243-L-2285459",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

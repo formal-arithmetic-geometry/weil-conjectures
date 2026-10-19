@@ -9,12 +9,9 @@ public import Mathlib.Analysis.Complex.Order
 public import Mathlib.Logic.Function.Iterate
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.Tensor
-import Sheaf.Paper.PbcWeilCategory
-import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
-import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
-import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
-import WeilConjectures.ZetaLinearAlgebra.DetTrace
-import Mathlib.RingTheory.PowerSeries.Exp
+import WeilConjectures.WeilSheaf.StalkTensor
+import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Eigs
 import Sheaf.Paper.AdicLocalCharacteristicFactor
 
 /-!
@@ -81,6 +78,59 @@ theorem isReal_tensorPower_and_even_nonneg
           (((Polynomial.map ι.toRingHom
             ((Nat.iterate (fun H => G.tensorObj H hG) (k - 1) G).stalk x).localPolynomial :
               Polynomial ℂ) : PowerSeries ℂ)⁻¹) = 1) := by
-  sorry
+  classical
+  have htrace (j : ℕ) : ∀ k : ℕ, 1 ≤ k →
+      LinearMap.trace (PadicAlgCl l) _
+        (((Nat.iterate (fun H ↦ G.tensorObj H hG) (k - 1) G).stalk x).frobeniusEnd ^ j) =
+      LinearMap.trace (PadicAlgCl l) _ ((G.stalk x).frobeniusEnd ^ j) ^ k := by
+    intro k hk
+    induction k, hk using Nat.le_induction with
+    | base => simp
+    | succ k hk ih =>
+      have he := (stalkTensorObjEquiv G
+        (Nat.iterate (fun H ↦ G.tensorObj H hG) (k - 1) G) hG x).trace_frobeniusEnd_pow j
+      change LinearMap.trace (PadicAlgCl l) _
+        ((TensorProduct.map (G.stalk x).frobeniusEnd
+          ((Nat.iterate (fun H ↦ G.tensorObj H hG) (k - 1) G).stalk x).frobeniusEnd) ^ j) =
+        _ at he
+      rw [TensorProduct.map_pow, LinearMap.trace_tensorProduct'] at he
+      rw [show k + 1 - 1 = (k - 1) + 1 by omega,
+        Function.iterate_succ_apply', ← he, ih, pow_succ']
+  have htrreal (j : ℕ) :
+      starRingEnd ℂ (ι (LinearMap.trace (PadicAlgCl l) _ ((G.stalk x).frobeniusEnd ^ j))) =
+        ι (LinearMap.trace (PadicAlgCl l) _ ((G.stalk x).frobeniusEnd ^ j)) :=
+    (FrobeniusModule.isReal_iff_forall_trace_pow ι.toRingHom (G.stalk x)).1 (hreal x) j
+  let M := (Nat.iterate (fun H ↦ G.tensorObj H hG) (k - 1) G).stalk x
+  have hMreal : M.IsReal ι.toRingHom := by
+    rw [FrobeniusModule.isReal_iff_forall_trace_pow]
+    intro j
+    change starRingEnd ℂ (ι (LinearMap.trace (PadicAlgCl l) _ (M.frobeniusEnd ^ j))) =
+      ι (LinearMap.trace (PadicAlgCl l) _ (M.frobeniusEnd ^ j))
+    rw [htrace j k hk, map_pow, map_pow, htrreal]
+  refine ⟨hMreal, fun heven ↦ ⟨?_, ?_⟩⟩
+  · let s := M.frobeniusEnd.charpoly.roots.map ι.toRingHom
+    have hsum (j : ℕ) : (s.map (· ^ j)).sum =
+        ι (LinearMap.trace (PadicAlgCl l) _ ((G.stalk x).frobeniusEnd ^ j)) ^ k := by
+      rw [← map_pow, ← htrace j k hk, LinearMap.trace_pow_eq_sum_pow_roots_charpoly,
+        map_multiset_sum]
+      simp only [s, Multiset.map_map, map_pow, Function.comp_def]
+      rfl
+    have hpos (j : ℕ) : 0 ≤ (s.map (· ^ j)).sum := by
+      rw [hsum, ← Complex.conj_eq_iff_re.1 (htrreal j), ← Complex.ofReal_pow]
+      exact Complex.zero_le_real.2 (heven.pow_nonneg _)
+    have hpoly : (((Polynomial.map ι.toRingHom M.localPolynomial : Polynomial ℂ) :
+        PowerSeries ℂ)) = (s.map fun c ↦ 1 - PowerSeries.C c * PowerSeries.X).prod := by
+      rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_eq_prod_roots,
+        Polynomial.map_multiset_prod, Multiset.map_map,
+        ← Polynomial.coeToPowerSeries.ringHom_apply, map_multiset_prod, Multiset.map_map]
+      simp [s, Multiset.map_map]
+    change ∀ n, 0 ≤ PowerSeries.coeff n
+      (((Polynomial.map ι.toRingHom M.localPolynomial : Polynomial ℂ) : PowerSeries ℂ)⁻¹)
+    rw [hpoly]
+    exact PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg s (fun j _ ↦ hpos j)
+  · change PowerSeries.constantCoeff
+      (((Polynomial.map ι.toRingHom M.localPolynomial : Polynomial ℂ) : PowerSeries ℂ)⁻¹) = 1
+    rw [PowerSeries.constantCoeff_inv, Polynomial.constantCoeff_coe, Polynomial.coeff_map]
+    simp [FrobeniusModule.localPolynomial, LinearMap.coeff_zero_charpolyRev]
 
 end AlgebraicGeometry.WeilSheaf
